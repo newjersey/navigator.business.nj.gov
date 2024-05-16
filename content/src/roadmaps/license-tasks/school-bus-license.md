@@ -44,6 +44,8 @@ webflowId: 5f772935f278cc9d99b0ce1e
 - Background check and a fingerprint check
 - Applicable fees paid
 
-> **Once completed, you will have:**
->
-> - A Commercial Driver’s License (CDL) with P and S endorsements
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A Commercial Driver’s License (CDL) with P and S endorsements
+
+:::

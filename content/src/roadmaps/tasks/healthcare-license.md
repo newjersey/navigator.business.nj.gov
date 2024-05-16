@@ -26,6 +26,8 @@ summaryDescriptionMd: >-
 - [Audiologists and Speech-Language Pathologists](https://www.njconsumeraffairs.gov/aud/Pages/default.aspx)
 - [Dietitians and Nutritionists](https://www.njconsumeraffairs.gov/dan/Pages/default.aspx)
 
-> **Once complete, you will have:**
->
-> - Confirmation that your healthcare staff is licensed
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- Confirmation that your healthcare staff is licensed
+
+:::

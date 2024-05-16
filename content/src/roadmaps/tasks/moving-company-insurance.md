@@ -12,7 +12,9 @@ summaryDescriptionMd: >-
 ## Common Types of Commercial Insurance
 
 :::infoAlert
+
 Specific liability insurance may be required for business owners who have physical locations.
+
 :::
 
 - **Bodily damage liability:** Moving companies are required to carry a minimum of 25,000 in liability insurance for 1 person and 100,000 for more than 1 person
@@ -20,6 +22,8 @@ Specific liability insurance may be required for business owners who have physic
 - **Commercial general liability insurance:** Research coverage and pricing options for your industry and business size
 - **Workmen’s compensation insurance:** Find a `workers' comp insurance|workers-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation
 
-> **Once completed, you will have:**
->
-> - A Certificate of Insurance
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A Certificate of Insurance
+
+:::

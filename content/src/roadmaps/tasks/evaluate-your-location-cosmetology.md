@@ -19,6 +19,8 @@ summaryDescriptionMd: >-
 - **Zoning:** Consult with your local government's zoning office to determine if the site is suitable for your business. Find out [how zoning may impact your site](https://business.nj.gov/pages/select-a-location) selection
 - **Tenant improvements:** Identify any repairs, renovations, or construction the site may need. Make sure to consider federal requirements for `ADA compliance|ada` and other [site considerations](https://business.nj.gov/pages/leasing-tips)
 
-> **Once completed, you will have:**
->
-> - A possible shop location
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A possible shop location
+
+:::

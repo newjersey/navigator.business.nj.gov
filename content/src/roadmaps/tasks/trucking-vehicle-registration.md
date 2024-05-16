@@ -20,6 +20,8 @@ summaryDescriptionMd: >-
 - Commercial insurance policy number and insurance provider name
 - Applicable fees paid
 
-> **Once completed, you will have:**
->
-> - Commercial vehicle registration
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- Commercial vehicle registration
+
+:::

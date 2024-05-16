@@ -45,13 +45,17 @@ ${taxInputComponent}
 
 ---
 
-> **Once completed, you will have:**
->
-> - `Business Registration Certificate (BRC)|business-reg-certificate`
-> - `NJ Tax ID|tax-id`
-> - `Business Tax PIN|tax-pin`
-> - `Certificate of Authority for Sales Tax|certificate-authority-sales-tax` (if applicable)
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- `Business Registration Certificate (BRC)|business-reg-certificate`
+- `NJ Tax ID|tax-id`
+- `Business Tax PIN|tax-pin`
+- `Certificate of Authority for Sales Tax|certificate-authority-sales-tax` (if applicable)
+
+:::
 
 :::infoAlert
+
 If you registered online, you will receive an email confirmation where you can download your BRC. It may take up to 72 hours before you can download your BRC on a public site. Your PIN may take longer to receive because it is sent through the mail.
+
 :::

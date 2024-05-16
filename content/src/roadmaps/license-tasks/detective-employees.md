@@ -29,9 +29,13 @@ summaryDescriptionMd: >
 - Applicable fees paid
 
 :::infoAlert
+
 You must also complete, sign, and notarize an [Employee Statement Form](https://www.nj.gov/njsp/private-detective/pdf/pd-agency-statement.pdf) for each of your employees. The form must be kept with your business records.
+
 :::
 
-> **Once completed, you will have:**
->
-> - A registration confirmation for each of your employees
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A registration confirmation for each of your employees
+
+:::

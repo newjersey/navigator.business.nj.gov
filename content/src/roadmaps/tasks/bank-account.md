@@ -19,10 +19,14 @@ Some banks may request other documentation in addition to what is listed below. 
 
 - `Business Registration Certificate|business-reg-certificate`
 
-> **Once completed, you will have:**
->
-> - A business bank account
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
 
-> **What if I don’t complete this task?**
->
-> Mixing your personal and business expenses may result in inaccurate tax filings.
+- A business bank account
+
+:::
+
+:::callout{ showHeader="true" headerText="What if I don’t complete this task?" showIcon="false" calloutType="conditional" }
+
+Mixing your personal and business expenses may result in inaccurate tax filings.
+
+:::

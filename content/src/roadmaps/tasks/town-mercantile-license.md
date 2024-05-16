@@ -35,6 +35,8 @@ ${endLocationDependentSection}
 
 ---
 
-> **Once completed, you will have:**
->
-> - A mercantile license
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A mercantile license
+
+:::

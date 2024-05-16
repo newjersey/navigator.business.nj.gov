@@ -23,8 +23,10 @@ callToActionText: ""
 - **Certificate of Occupancy or Approval:** Speak to your local building/construction department to certify that your space is safe for occupancy. **This is required by the Division of Consumer Affairs for a shop license**
 - **`Non-Life Hazard Use|non-life-hazard-use` registration:** Contact your `Local Enforcing Agency|lea` to see if you need to register as a Non-Life Hazard Use business to operate and comply with fire safety regulations. After registration, your business will be added to the schedule for routine fire inspections
 
-> **Once completed, you will know:**
->
-> - The permits and inspections you need to get a shop license and open your commercial space
-> - The process for meeting requirements from your local government and the Division of Consumer Affairs
-> - The time it takes to receive any permits or licenses
+:::callout{ showHeader="true" headerText="Once completed, you will know:" showIcon="false" calloutType="conditional" }
+
+- The permits and inspections you need to get a shop license and open your commercial space
+- The process for meeting requirements from your local government and the Division of Consumer Affairs
+- The time it takes to receive any permits or licenses
+
+:::

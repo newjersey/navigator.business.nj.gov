@@ -30,7 +30,9 @@ You can find your local clerk's office through the [${municipality} website](${m
 
 ## ${endLocationDependentSection}
 
-> **Once completed, you will have:**
->
-> - A site and restaurant policies that meet the requirements in the [Alcoholic Beverage Control Handbook (ABC)](https://www.nj.gov/oag/abc/downloads/abchandbook02.pdf)
-> - An understanding of the availability, cost, and timeline required to obtain a liquor license
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A site and restaurant policies that meet the requirements in the [Alcoholic Beverage Control Handbook (ABC)](https://www.nj.gov/oag/abc/downloads/abchandbook02.pdf)
+- An understanding of the availability, cost, and timeline required to obtain a liquor license
+
+:::

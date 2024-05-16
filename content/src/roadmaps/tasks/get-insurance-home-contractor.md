@@ -23,6 +23,8 @@ callToActionText: ""
 
 ---
 
-> **Once completed, you will have:**
->
-> - A Certificate of Insurance
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A Certificate of Insurance
+
+:::

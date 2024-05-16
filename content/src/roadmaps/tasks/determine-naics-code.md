@@ -21,6 +21,8 @@ summaryDescriptionMd: >-
 
 ${naicsCodeLookupComponent}
 
-> **Why do I need a NAICS code?**
->
-> - To [register for NJ state taxes and employer purposes](/tasks/register-for-taxes)
+:::callout{ showHeader="true" headerText="Why do I need a NAICS code?" showIcon="false" calloutType="conditional" }
+
+- To [register for NJ state taxes and employer purposes](/tasks/register-for-taxes)
+
+:::

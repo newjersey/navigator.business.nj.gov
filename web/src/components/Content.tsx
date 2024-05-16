@@ -54,18 +54,21 @@ export const Content = (props: ContentProps): ReactElement => {
     hr: (): ReactElement => {
       return <HorizontalLine />;
     },
-    blockquote: GreenBox,
     note: (props: any): ReactElement => {
       return <Alert variant="note">{props.children}</Alert>;
     },
     callout: (props: any): ReactElement => {
       return (
-        <Callout header={props.header} icon={props.icon} calloutType={props.calloutType}>
+        <Callout
+          showHeader={props.showHeader}
+          headerText={props.headerText}
+          showIcon={props.showIcon}
+          calloutType={props.calloutType}
+        >
           {props.children}
         </Callout>
       );
     },
-
     infoAlert: (props: any): ReactElement => {
       return <Alert variant="info">{props.children}</Alert>;
     },
@@ -149,14 +152,6 @@ const Unformatted = (props: any): ReactElement => {
 const OutlineBox = (props: any): ReactElement => {
   return (
     <div className="text-normal padding-2 margin-top-2 border-base-lighter border-1px font-body-2xs">
-      {props.children}
-    </div>
-  );
-};
-
-export const GreenBox = (props: any): ReactElement => {
-  return (
-    <div className="green-box text-normal padding-2 margin-top-2 bg-primary-extra-light radius-lg">
       {props.children}
     </div>
   );

@@ -17,10 +17,14 @@ summaryDescriptionMd: >-
   [resources for writing nonprofit bylaws](https://business.nj.gov/pages/business-support#section-4).
 ---
 
-> **Once completed, you will have:**
->
-> - Bylaws to document your business operations
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
 
-> **What if I don't write bylaws?**
->
-> You don't need to file your bylaws in New Jersey, but you’ll need to include a copy of your bylaws when applying for nonprofit tax exempt status with the IRS. You may also be asked for a copy of your bylaws when opening a bank account to validate your business.
+- Bylaws to document your business operations
+
+:::
+
+:::callout{ showHeader="true" headerText="What if I don't write bylaws?" showIcon="false" calloutType="conditional" }
+
+You don't need to file your bylaws in New Jersey, but you’ll need to include a copy of your bylaws when applying for nonprofit tax exempt status with the IRS. You may also be asked for a copy of your bylaws when opening a bank account to validate your business.
+
+:::

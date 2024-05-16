@@ -50,8 +50,10 @@ sidebarCardBodyText: New Jersey Clean Energy Loans (NJ CELs) will unlock capital
 - Have a term sheet, letter of intent, draft agreement, commitment letter, or similar document from an eligible financial institution.
 - Not be enrolled in any other state State Small Business Credit Initiative (SSBCI) program
 
-> ### Benefits
->
-> - Loans at 3% below the financial institution's interest rate
-> - Minority-, Woman-, and Veteran-owned businesses receive an additional 1% interest rate reduction
-> - Businesses/projects located in [Overburdened Communities](https://dep.nj.gov/ej/communities/) also receive a 1% interest rate reduction
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+- Loans at 3% below the financial institution's interest rate
+- Minority-, Woman-, and Veteran-owned businesses receive an additional 1% interest rate reduction
+- Businesses/projects located in [Overburdened Communities](https://dep.nj.gov/ej/communities/) also receive a 1% interest rate reduction
+
+:::

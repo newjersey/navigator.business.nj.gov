@@ -76,6 +76,9 @@ module.exports = withBundleAnalyzer({
 
     return config;
   },
+  experimental: {
+    largePageDataBytes: 1.28 * 1024 * 1024,
+  },
   async redirects() {
     return [
       {

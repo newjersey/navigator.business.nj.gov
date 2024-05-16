@@ -43,6 +43,8 @@ sidebarCardBodyText: "New Jersey Clean Construction Program installs pollution c
 - Equipment cannot be planned to go out of use in the next 5 years
 - Priority is given to urban areas, high frequency of use, and older models
 
-> ### Benefits
->
-> Award of up to $100,000 per piece of equipment purchased or replaced.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Award of up to $100,000 per piece of equipment purchased or replaced.
+
+:::

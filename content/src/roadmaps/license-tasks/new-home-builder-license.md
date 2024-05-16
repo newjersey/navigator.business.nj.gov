@@ -28,7 +28,9 @@ webflowType: business-license
 ---
 
 ---
+
 ### Application Requirements
+
 - Business name
 - Business formation documents, such as a `Certificate of Formation or Certificate of Authority|certificate-formation`
 - `Employer Identification Number (EIN)|ein`
@@ -46,9 +48,15 @@ webflowType: business-license
 - History of any civil, criminal, or administrative actions, if applicable
 - History of any unsatisfied court judgments, if applicable
 - Signatures of the builder designee and officer/principal
-> **Once approved, you will have:**
->
-> A builder registration card and number, which must be shown to your local Construction Official when you apply for a construction permit to build a new house
-> **What if I don't register?**
->
-> If you don't register as a new home builder with the State, you will not be able to get a construction permit to build new homes. Also, you will not be able to apply for and get a required new home warranty for those homes. You may also be subject to fines.
+
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+A builder registration card and number, which must be shown to your local Construction Official when you apply for a construction permit to build a new house
+
+:::
+
+:::callout{ showHeader="true" headerText="What if I don't register?" showIcon="false" calloutType="conditional" }
+
+If you don't register as a new home builder with the State, you will not be able to get a construction permit to build new homes. Also, you will not be able to apply for and get a required new home warranty for those homes. You may also be subject to fines.
+
+:::

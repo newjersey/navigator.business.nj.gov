@@ -16,6 +16,8 @@ callToActionText: Renew My HIC Registration
 - Professional Liability Insurance with a minimum of 500,000 per occurrence
 - Applicable fees paid
 
-> **Once completed, you will have:**
->
-> - The same New Jersey home improvement contractor (NJHIC) number
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- The same New Jersey home improvement contractor (NJHIC) number
+
+:::

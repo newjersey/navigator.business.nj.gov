@@ -23,6 +23,8 @@ You must renew your license every year, within 30 days of the expiration date.
 - Registration account
 - Applicable fees paid
 
-> **Once completed, you will have**:
->
-> - The same license number
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- The same license number
+
+:::

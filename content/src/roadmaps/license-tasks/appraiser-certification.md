@@ -41,6 +41,8 @@ webflowId: 6414793bb48ba7e9395c9540
 - Child support information (if applicable)
 - Applicable fees paid
 
-> **Once completed you will have:**
->
-> - A 12-digit license number and your residential real property appraiser certification
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A 12-digit license number and your residential real property appraiser certification
+
+:::

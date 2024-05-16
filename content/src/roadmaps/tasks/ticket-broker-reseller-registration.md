@@ -37,6 +37,8 @@ agencyAdditionalContext: Regulated Business Section
 - `Certificate of Formation|certificate-formation`
 - `Surety bond|surety-bond`
 
-> **Once completed, you will have**:
->
-> - A certificate of registration
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A certificate of registration
+
+:::

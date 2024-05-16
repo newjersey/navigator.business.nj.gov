@@ -2182,7 +2182,6 @@ collections:
               - { label: Violation Notice CTA Text, name: violationNoticeCTA, widget: string }
               - { label: Violation Notice CTA Link, name: violationNoticeCTALink, widget: nospace }
 
-
   - name: "tasks"
     label: "Tasks - All"
     folder: "content/src/roadmaps/tasks"
@@ -2632,10 +2631,18 @@ collections:
               - { label: Impact Zone Header Text, name: impactZoneHeaderText, widget: string }
               - { label: Impact Zone Text, name: impactZoneText, widget: string }
 
-              - { label: Green Box Bolded Text, name: greenBoxBoldedText, widget: string }
-              - { label: Green Box Minority Or Women Text, name: greenBoxMinorityOrWomenText, widget: string }
-              - { label: Green Box Veteran Text, name: greenBoxVeteranText, widget: string }
-              - { label: Green Box Social Equity Text, name: greenBoxSocialEquityText, widget: string }
+              - { label: Conditional Callout Heading Text, name: greenBoxHeadingText, widget: string }
+              - {
+                  label: Conditional Callout Minority Or Women Text,
+                  name: greenBoxMinorityOrWomenText,
+                  widget: string,
+                }
+              - { label: Conditional Callout Veteran Text, name: greenBoxVeteranText, widget: string }
+              - {
+                  label: Conditional Callout Social Equity Text,
+                  name: greenBoxSocialEquityText,
+                  widget: string,
+                }
               - { label: Back Button Text, name: backButtonText, widget: string }
               - { label: Dropdown CTA Button Text, name: dropdownCTAButtonText, widget: string }
               - { label: Social Equity Button Text, name: socialEquityButtonText, widget: string }

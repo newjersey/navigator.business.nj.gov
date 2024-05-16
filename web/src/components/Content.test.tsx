@@ -52,7 +52,7 @@ describe("<Content />", () => {
   });
 
   it("renders callout content", () => {
-    const mdString = `:::callout{ header="header" icon="true" calloutType="conditional" } \n body text\n:::`;
+    const mdString = `:::callout{ showHeader="true" headerText="header" showIcon="true" calloutType="conditional" }\n\nbody text\n\n:::`;
 
     render(<Content>{mdString}</Content>);
     expect(screen.getByText("header")).toBeInTheDocument();

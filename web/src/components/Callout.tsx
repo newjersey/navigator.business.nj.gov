@@ -1,13 +1,14 @@
+import { ConfigType } from "@/contexts/configContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 
 export type CalloutTypes = "informational" | "conditional" | "warning" | "note";
 
 interface Props {
   calloutType: CalloutTypes;
-  header?: string;
-  children: string;
-  icon?: boolean;
+  showHeader?: string | boolean;
+  showIcon?: string | boolean;
+  headerText?: string;
 }
 
 interface CalloutMappingObj {
@@ -39,35 +40,52 @@ export const calloutComponentMapping: Record<string, CalloutMappingObj> = {
   },
 };
 
-export const Callout = (props: Props): ReactElement => {
+const getDefaultHeadingTextForCalloutType = (config: ConfigType, calloutType: string): string => {
+  if (calloutType === "informational") return config.calloutDefaults.informationalHeadingDefaultText;
+  if (calloutType === "note") return config.calloutDefaults.noteHeadingDefaultText;
+  if (calloutType === "conditional") return config.calloutDefaults.conditionalHeadingDefaultText;
+  if (calloutType === "warning") return config.calloutDefaults.warningHeadingDefaultText;
+  return "";
+};
+
+export const Callout = (props: PropsWithChildren<Props>): ReactNode => {
   const { Config } = useConfig();
+  const showIcon = Boolean(props.showIcon ?? false);
+  const showHeader = Boolean(props.showHeader ?? true);
   let headingText = "";
 
-  if (props.calloutType === "informational")
-    headingText = Config.calloutDefaults.informationalHeadingDefaultText;
-  if (props.calloutType === "note") headingText = Config.calloutDefaults.noteHeadingDefaultText;
-  if (props.calloutType === "conditional") headingText = Config.calloutDefaults.conditionalHeadingDefaultText;
-  if (props.calloutType === "warning") headingText = Config.calloutDefaults.warningHeadingDefaultText;
+  if (typeof props.headerText === "string" && props.headerText.length > 0) {
+    headingText = props.headerText;
+  } else {
+    headingText = getDefaultHeadingTextForCalloutType(Config, props.calloutType);
+  }
 
   return (
     <div
-      className={`padding-205 radius-md margin-bottom-2 ${
+      className={`padding-205 radius-md margin-y-2 ${
         calloutComponentMapping[props.calloutType].containerStyling
       }`}
     >
-      <div className="flex">
-        {props.icon && (
-          <div
-            data-testid={calloutComponentMapping[props.calloutType].iconStyling}
-            className={calloutComponentMapping[props.calloutType].iconStyling}
-            aria-hidden="true"
-          />
-        )}
-        <span className={`text-bold ${calloutComponentMapping[props.calloutType].headingStyling}`}>
-          {props.header ?? headingText}
-        </span>
-      </div>
-      <div className="margin-top-105 text-primary-darker">{props.children}</div>
+      {showHeader === true ? (
+        <>
+          <div className="flex">
+            {showIcon && (
+              <div
+                data-testid={calloutComponentMapping[props.calloutType].iconStyling}
+                className={calloutComponentMapping[props.calloutType].iconStyling}
+                aria-hidden="true"
+              />
+            )}
+            <span className={`text-bold ${calloutComponentMapping[props.calloutType].headingStyling}`}>
+              {headingText}
+            </span>
+          </div>
+
+          <div className="margin-top-105 text-primary-darker">{props.children}</div>
+        </>
+      ) : (
+        <div className="text-primary-darker">{props.children}</div>
+      )}
     </div>
   );
 };

@@ -40,6 +40,8 @@ ${endLocationDependentSection}
 
 ---
 
-> **Once completed, you will have:**
->
-> - A registered trade name
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A registered trade name
+
+:::

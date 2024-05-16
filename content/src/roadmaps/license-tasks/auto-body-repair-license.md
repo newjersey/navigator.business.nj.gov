@@ -36,6 +36,8 @@ licenseCertificationClassification: LICENSE
 - Color photographs of each officer at the shop
 - Color photographs of the facility displaying the advertised sign
 
-> **Once completed, you will have:**
->
-> - An auto-body repair license
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- An auto-body repair license
+
+:::

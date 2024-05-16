@@ -30,8 +30,11 @@ id: cbt-100s-final
 callToActionLink: https://www.njportal.com/taxation/CBT
 callToActionText: File and Pay
 ---
-Corporate Business Tax is imposed on the profits of a corporation. The taxes are paid on a company's taxable income, which is the revenue minus the cost of any goods sold and operating costs like general and administrative, marketing, and selling expenses, research and development, depreciation, etc.  
 
-:::infoAlert 
- This form can be used as an amendment when the “amended” box at the top of the form is marked.
+Corporate Business Tax is imposed on the profits of a corporation. The taxes are paid on a company's taxable income, which is the revenue minus the cost of any goods sold and operating costs like general and administrative, marketing, and selling expenses, research and development, depreciation, etc.
+
+:::infoAlert
+
+This form can be used as an amendment when the “amended” box at the top of the form is marked.
+
 :::

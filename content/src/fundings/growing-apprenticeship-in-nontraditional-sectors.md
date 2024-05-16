@@ -43,10 +43,12 @@ sidebarCardBodyText: The Growing Apprenticeship in Nontraditional Sectors (GAINS
 - Any employer, trade association, labor organization, and others providing apprenticeship programs for their industry
 - While all industries are encouraged to apply, preference will be given to targeted sectors including: Advanced Manufacturing Bio Pharma/Life Sciences Energy, Utilities and Infrastructure Retail, Hospitality and Tourism Financial Services/Insurance Transportation, Logistics and Distribution Information Technology/Cyber Security, Renewable Energy, Healthcare, Other Science, Technology, Engineering, and Mathematics (STEM) related sectors/occupations Construction & Building Trades Public Service.
 
-> ### Benefits
->
-> Eligible applicants can request funding up to $9,500 per registered apprentice to:
->
-> 1. Offset administrative costs incurred creating the Registered Apprenticeship Program
-> 2. Offset costs incurred for training the new apprentice
-> 3. Provide a 50% wage reimbursement for the first twelve months of newly hired apprentices’ employment for occupations paying a starting wage of at least $16.00 per hour
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Eligible applicants can request funding up to $9,500 per registered apprentice to:
+
+1. Offset administrative costs incurred creating the Registered Apprenticeship Program
+2. Offset costs incurred for training the new apprentice
+3. Provide a 50% wage reimbursement for the first twelve months of newly hired apprentices’ employment for occupations paying a starting wage of at least $16.00 per hour
+
+:::

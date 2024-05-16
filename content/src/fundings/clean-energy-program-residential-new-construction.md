@@ -44,6 +44,8 @@ summaryDescriptionMd: >-
 - Must be newly constructed single family, multi‐single low‐rise, and high‐rise multifamily buildings
 - Existing homes undergoing `substantial renovation|substantial-renovation` or remodeling that meets the criteria above
 
-> ### Benefits
->
-> The program offers builders and raters varying incentives from $500 to $6,000+ per home.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+The program offers builders and raters varying incentives from $500 to $6,000+ per home.
+
+:::

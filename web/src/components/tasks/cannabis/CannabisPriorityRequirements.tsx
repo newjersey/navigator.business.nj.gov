@@ -1,3 +1,4 @@
+import { Callout } from "@/components/Callout";
 import { Content } from "@/components/Content";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -202,8 +203,11 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         {(displayMWPriorityType || displayVeteranPriorityType || displaySocialEquityPriorityType) && (
           <>
             <hr />
-            <div className="green-box text-normal padding-2 margin-top-2 bg-primary-extra-light radius-lg">
-              <div className="text-bold">{Config.cannabisPriorityStatus.greenBoxBoldedText}</div>
+            <Callout
+              calloutType="conditional"
+              headerText={Config.cannabisPriorityStatus.greenBoxHeadingText}
+              showIcon={true}
+            >
               <ul>
                 {displayMWPriorityType && (
                   <li>{Config.cannabisPriorityStatus.greenBoxMinorityOrWomenText}</li>
@@ -213,7 +217,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                   <li>{Config.cannabisPriorityStatus.greenBoxSocialEquityText}</li>
                 )}
               </ul>
-            </div>
+            </Callout>
           </>
         )}
       </div>

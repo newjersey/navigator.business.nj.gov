@@ -31,10 +31,14 @@ agencyId: nj-motor-vehicle
 - Driver’s license number
 - Driver’s Social Security Number (SSN)
 
-> **Once completed, you will have:**
->
-> A letter of qualification or disqualification for the driver. The letter will only be mailed to the employer. The process takes about two weeks after the application is received.
->
-> **What if don’t complete this task?**
->
-> You, as the employer, can be fined up to $500 for each uncertified driver operating your vehicles
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+A letter of qualification or disqualification for the driver. The letter will only be mailed to the employer. The process takes about two weeks after the application is received.
+
+:::
+
+:::callout{ showHeader="true" headerText="What if don’t complete this task?" showIcon="false" calloutType="conditional" }
+
+You, as the employer, can be fined up to $500 for each uncertified driver operating your vehicles
+
+:::

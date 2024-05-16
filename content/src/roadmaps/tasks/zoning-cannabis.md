@@ -7,7 +7,7 @@ summaryDescriptionMd: >-
   and it's used as evidence that you obtained your local government's approval.
 
 
-  :::infoAlert 
+  :::infoAlert
    To complete this task, you must meet with your local clerk, planner, engineer, and zoning officer.
   :::
 urlSlug: zoning-cannabis
@@ -32,8 +32,10 @@ callToActionText: ""
 - The resolution or letter must indicate that your business location is approved for your cannabis business activities, and confirm that your business will not exceed the local governments' limit for licensed cannabis businesses if they have set a limit
 - The resolution or letter must be compliant with [Section VIII of the Notice of Application Acceptance](https://www.nj.gov/cannabis/documents/businesses/personal-use/Final%20Notice%20of%20Application%20Acceptance.pdf)
 
-> **Once completed, you will have:**
->
-> - Proof of local government's approval as required in your conditional license application
-> - A letter with zoning approval for your business
-> - Resolution of support from your local government
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- Proof of local government's approval as required in your conditional license application
+- A letter with zoning approval for your business
+- Resolution of support from your local government
+
+:::

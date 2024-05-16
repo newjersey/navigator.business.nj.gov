@@ -30,6 +30,8 @@ summaryDescriptionMd: "If you want to operate a cosmetology school in New Jersey
 - Letter of reference for the supervising teacher
 - Applicable fees paid
 
-> **Once completed, you will have**:
->
-> - A cosmetology school license
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A cosmetology school license
+
+:::

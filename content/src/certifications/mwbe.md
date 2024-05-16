@@ -35,6 +35,8 @@ summaryDescriptionMd: >-
 - An applicant's certificate of birth, motor vehicle driver's license, passport, or another acceptable form of identification
 - An affidavit, signed by the individual seeking certification, certifying that the applicant is a minority business or women's business
 
-> **After you complete this, you will have:**
->
-> - A Minority/Women-owned Business Enterprise certificate
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A Minority/Women-owned Business Enterprise certificate
+
+:::

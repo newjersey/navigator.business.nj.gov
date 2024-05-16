@@ -45,6 +45,8 @@ publishStageArchive: ""
 - Productions that solicit funds
 - Productions primarily for private, industrial, corporate, or institutional purposes
 
-> ### Benefits
->
-> Tax credits up to 35% of qualified film production expenses.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Tax credits up to 35% of qualified film production expenses.
+
+:::

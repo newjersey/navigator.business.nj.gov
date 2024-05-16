@@ -37,6 +37,8 @@ summaryDescriptionMd: >-
 - The names and addresses of members of the board of directors (c-corps only)
 - The number of shares of stock issued and outstanding (c-corps only)
 
-> **After you complete this, you will have:**
->
-> - A LGBTQ+ certificate
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A LGBTQ+ certificate
+
+:::

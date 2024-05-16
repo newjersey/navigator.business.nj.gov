@@ -50,6 +50,8 @@ sidebarCardBodyText: Opportunity Partnership helps employers identify an appropr
 
 - Any business can be part of the application, though funding is tied to individuals becoming future employees, not businesses
 
-> ### Benefits
->
-> Company-tailored training to ensure an appropriate pipeline of employees.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Company-tailored training to ensure an appropriate pipeline of employees.
+
+:::

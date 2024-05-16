@@ -46,8 +46,10 @@ This program offers a tax credit for historic, income-producing properties withi
 - Can meet minimum cost requirements where the cost of rehabilitation for the period cannot be less than the adjusted basis of the structure or $5,000
 - For a residential project, the structure must serve a residential rental purpose and contain at least four dwelling units
 
-> **Benefits:**
->
-> - Tax credits worth up to 40% of eligible costs and up to a project cap of $4M for qualified properties
-> - Eligible projects can receive tax credits worth up to 45% of eligible project costs up to a project cap of $8M
-> - Transformative projects can receive tax credits worth up to 45% of eligible project costs up to a project cap of $50M
+:::callout{ showHeader="true" headerText="Benefits:" showIcon="false" calloutType="conditional" }
+
+- Tax credits worth up to 40% of eligible costs and up to a project cap of $4M for qualified properties
+- Eligible projects can receive tax credits worth up to 45% of eligible project costs up to a project cap of $8M
+- Transformative projects can receive tax credits worth up to 45% of eligible project costs up to a project cap of $50M
+
+:::

@@ -41,6 +41,8 @@ summaryDescriptionMd: "If you want to teach cosmetology in New Jersey, you need 
 - Notarized affidavit
 - Applicable fees paid
 
-> **Once completed, you will have**:
->
-> - A cosmetology teacher license
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A cosmetology teacher license
+
+:::

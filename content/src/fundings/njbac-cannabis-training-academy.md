@@ -46,7 +46,9 @@ sidebarCardBodyText: New Jersey Business Action Center's (NJBAC) Cannabis Traini
 - Individuals who are considering applying for a conditional or annual license
 - Must be in the `Impact Zone|impactzonebusiness-cannabis`, `social equity business|socialequitybusiness-cannabis`, `diversely owned | diverselyownedbusiness-cannabis`, veteran, veteran-disabled, LGBTQ+ and/or microbusiness categories
 
-> ### Benefits
->
-> - Assistance filling out application to the New Jersey Cannabis Regulatory Commission, whether it is conditional, annual or conversion
-> - General training to create and run a sustainable business operation
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+- Assistance filling out application to the New Jersey Cannabis Regulatory Commission, whether it is conditional, annual or conversion
+- General training to create and run a sustainable business operation
+
+:::

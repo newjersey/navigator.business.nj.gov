@@ -19,11 +19,15 @@ callToActionText: Apply for an Employment Agency License
 webflowId: 5f77298a71c49e345d913b84
 licenseCertificationClassification: ""
 ---
-## Application Requirements
-* Statement regarding applicant's criminal convictions, if any
-* Character statements from two New Jersey citizens who have known the applicant for at least five years
-* Applicable fees paid
 
-> **Once completed, you will have:**
->
-> * A license to operate as an employment agency
+## Application Requirements
+
+- Statement regarding applicant's criminal convictions, if any
+- Character statements from two New Jersey citizens who have known the applicant for at least five years
+- Applicable fees paid
+
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A license to operate as an employment agency
+
+:::

@@ -40,6 +40,8 @@ sidebarCardBodyText: The Small Business Bonding Readiness Assistance Program pre
 
 - Small businesses, with particular emphasis on minority- and women-owned businesses
 
-> ### Benefits
->
-> A comprehensive series of classes, workshops, and strategic counseling sessions covering a variety of topics relevant to small businesses in all sectors.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+A comprehensive series of classes, workshops, and strategic counseling sessions covering a variety of topics relevant to small businesses in all sectors.
+
+:::

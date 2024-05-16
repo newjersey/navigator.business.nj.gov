@@ -12,6 +12,7 @@ callToActionLink: https://www.nj.gov/mvc/pdf/inspections/Commercial_Bus_Applicat
 issuingAgency: New Jersey Motor Vehicle Commission Bus Inspection Unit
 callToActionText: Request My Vehicle Inspection
 ---
+
 ## Application Requirements
 
 - Business name
@@ -20,11 +21,15 @@ callToActionText: Request My Vehicle Inspection
 - Copy of the vehicle title
 - Vehicle information (year, make, model, etc.)
 
-> **Once completed, you will have:**
->
-> - A safety inspection decal valid for six months
-> - CMC-9 and CMC-12 Certificates for registration and license plates
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A safety inspection decal valid for six months
+- CMC-9 and CMC-12 Certificates for registration and license plates
+
+:::
 
 :::infoAlert
+
 Inspection decals must be displayed on your vehicle to avoid fines.
+
 :::

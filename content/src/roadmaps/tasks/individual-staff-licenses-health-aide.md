@@ -18,7 +18,9 @@ summaryDescriptionMd: >-
 
 - Criminal background check
 
-> **Once completed, you will have:**
->
-> - Your individual license (if you are also acting as a caretaker)
-> - Confirmed your staff is properly licensed
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- Your individual license (if you are also acting as a caretaker)
+- Confirmed your staff is properly licensed
+
+:::

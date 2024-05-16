@@ -34,9 +34,13 @@ callToActionText: Renew My PWCR Application
 - Permit to maintain payroll records outside of New Jersey, if applicable
 
 :::infoAlert
+
 You can renew for one year or two years. Two-year renewal is an option only if you have been continuously registered for the last two years and you have not violated any regulations.
+
 :::
 
-> **Once completed, you will have**:
->
-> - A new PWCR certificate indicating compliance with PWCRA
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A new PWCR certificate indicating compliance with PWCRA
+
+:::

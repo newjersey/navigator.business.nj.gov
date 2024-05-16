@@ -12,16 +12,16 @@ const CalloutPreview = (props: PreviewProps): ReactElement => {
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <Callout calloutType="informational" icon>
+        <Callout calloutType="informational" showIcon="true">
           Body Text
         </Callout>
-        <Callout calloutType="conditional" icon>
+        <Callout calloutType="conditional" showIcon="true">
           Body Text
         </Callout>
-        <Callout calloutType="warning" icon>
+        <Callout calloutType="warning" showIcon="true">
           Body Text
         </Callout>
-        <Callout calloutType="note" icon>
+        <Callout calloutType="note" showIcon="true">
           Body Text
         </Callout>
       </div>

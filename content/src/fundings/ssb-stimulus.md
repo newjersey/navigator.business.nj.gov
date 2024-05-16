@@ -50,9 +50,11 @@ sidebarCardBodyText: The School and Small Business Energy Efficiency Stimulus Pr
 
 - Any small New Jersey business with 100 or fewer employees, a gross revenue below $12M, and with a [Minority or Women-owned Business Enterprise Certification](https://business.nj.gov/pages/mwbe)
 
-> ### Benefits
->
-> Each program provides grants to cover 75% of eligible project costs, with a cap of up to $500,000 per business, per program with two tiers of incentive caps.
->
-> - Tier 1 provides $500,000 per entity combined HVAC and Plumbing & Appliances Programs if the business is in a municipality with less than 50,000 residents
-> - Tier 2 provides $500,000 per entity per HVAC and per Plumbing & Appliance Programs if the business is in a municipality with more than 50,000 residents
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Each program provides grants to cover 75% of eligible project costs, with a cap of up to $500,000 per business, per program with two tiers of incentive caps.
+
+- Tier 1 provides $500,000 per entity combined HVAC and Plumbing & Appliances Programs if the business is in a municipality with less than 50,000 residents
+- Tier 2 provides $500,000 per entity per HVAC and per Plumbing & Appliance Programs if the business is in a municipality with more than 50,000 residents
+
+:::

@@ -38,6 +38,8 @@ publishStageArchive: ""
 
 - Venture funds that are actively investing in New Jersey’s innovative industries
 
-> ### Benefits
->
-> Businesses receive investment capital commitments up to $10M.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Businesses receive investment capital commitments up to $10M.
+
+:::

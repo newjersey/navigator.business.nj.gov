@@ -34,10 +34,14 @@ webflowId: 5f7729d28aa6e3de76f1e60c
 - A copy of the firm’s letterhead
 - Applicable fees paid
 
-> **You must:**
->
-> - Sign and date the application in the presence of a notary
+:::callout{ showHeader="true" headerText="You must:" showIcon="false" calloutType="conditional" }
 
-> **Once completed, you will have:**
->
-> - A certificate indicating your firm has been successfully registered
+- Sign and date the application in the presence of a notary
+
+:::
+
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A certificate indicating your firm has been successfully registered
+
+:::

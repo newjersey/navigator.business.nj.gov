@@ -51,6 +51,8 @@ If the business is a corporation, in addition to the above, provide the followin
 - `Certificate of Formation|certificate-of-formation`
 - `Certificate of Good Standing|certificate-of-good-standing`, if the business formed over a year ago
 
-> **Once completed, you will have**:
->
-> - An updated electrical contracting business permit
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- An updated electrical contracting business permit
+
+:::

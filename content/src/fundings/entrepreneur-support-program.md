@@ -45,6 +45,8 @@ sidebarCardBodyText: The New Jersey Entrepreneur Support Program provides a $5 m
 - A valid New Jersey tax clearance certificate from the Division of Taxation
 - Good standing with NJ Workforce Development at time of application
 
-> ### Benefits
->
-> 80% guarantee of an investment amount, not to exceed $400,000, for one year from the date of issue.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+80% guarantee of an investment amount, not to exceed $400,000, for one year from the date of issue.
+
+:::

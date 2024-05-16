@@ -30,7 +30,9 @@ webflowId: 640b852c9a5e4f6a4de2ae45
 
 * []{cannabis-labor peace-agreement} Your application can gain additional priority by providing an attestation from a labor organization indicating that you two have entered a labor peace agreement(this is not required and no additional priority is offered for micro businesses)
 
-> **Once completed, you will have**
->
-> - A license to run your Cannabis business
-> - The ability to legally run your Cannabis business
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A license to run your Cannabis business
+- The ability to legally run your Cannabis business
+
+:::

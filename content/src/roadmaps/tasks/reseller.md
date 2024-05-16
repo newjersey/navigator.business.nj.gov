@@ -16,7 +16,9 @@ summaryDescriptionMd: >-
   collecting and filing the sales tax. You will be asked about this when you register for taxes.
 ---
 
-> **Once completed, you will have:**
->
-> - A decision on if your business will resell goods or services
-> - A Resale Certificate shared with applicable businesses
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A decision on if your business will resell goods or services
+- A Resale Certificate shared with applicable businesses
+
+:::

@@ -41,6 +41,8 @@ sidebarCardBodyText: The Offshore Wind Tax Credit Program is a financial tool th
 
 - Businesses investing at least $17.5M in a qualified wind energy facility and employing at least 150 new, full-time employees
 
-> ### Benefits
->
-> Businesses receive tax credits up to 100% of qualified investments.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Businesses receive tax credits up to 100% of qualified investments.
+
+:::

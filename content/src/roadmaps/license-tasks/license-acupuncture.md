@@ -32,6 +32,8 @@ summaryDescriptionMd: >
 - Passing scores on the Board-administered Acupuncture Safety and Jurisprudence examination in English
 - Applicable fees paid
 
-> **Once completed, you will have:**
->
-> - An acupuncturist license number
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- An acupuncturist license number
+
+:::

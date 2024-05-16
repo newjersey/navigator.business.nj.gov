@@ -44,6 +44,8 @@ webflowId: 648b6ec56c893fba0f7a5663
 - Family daycare inspection by a Child Care Resource and Referral Agency
 - Applicable fees paid
 
-> **Once completed, you will have:**
->
-> - A Certificate of Registration for your family daycare
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A Certificate of Registration for your family daycare
+
+:::

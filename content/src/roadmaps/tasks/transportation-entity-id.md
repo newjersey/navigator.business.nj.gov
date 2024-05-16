@@ -19,6 +19,8 @@ formName: BA-8
 - Copy of the registration confirmation received when you registered your business for taxes with the IRS. The document must show your business name and address.
 - Copy of your `Certificate of Formation|certificate-formation`
 
-> **Once completed, you will have:**
->
-> - A letter mailed to you with your MVC-issued Entity ID
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A letter mailed to you with your MVC-issued Entity ID
+
+:::

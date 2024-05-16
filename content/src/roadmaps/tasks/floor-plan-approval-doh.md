@@ -14,6 +14,8 @@ summaryDescriptionMd: >-
 
 - Your business's floor plan
 
-> **Once completed, you will have:**
->
-> - Approval from your local department of health
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- Approval from your local department of health
+
+:::

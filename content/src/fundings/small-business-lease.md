@@ -38,6 +38,8 @@ sidebarCardBodyText: The Small Business Lease Grant supports the growth and succ
 
 - Small businesses and nonprofits entering a new market-rate lease, lease amendment, or lease extension for at least a 5-year term that includes at least 250 square feet of street-level space
 
-> ### Benefits
->
-> Two grant awards of 20% of the annual lease payment.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Two grant awards of 20% of the annual lease payment.
+
+:::

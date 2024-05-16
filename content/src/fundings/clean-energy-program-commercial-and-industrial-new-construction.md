@@ -45,6 +45,8 @@ sidebarCardBodyText: New Jersey’s Clean Energy Program (NJCEP) encourages ener
 - Participants must be electric and/or gas customers of New Jersey investor-owned utilities and pay the monthly [Societal Benefits Charge (SBC)](https://www.njcleanenergy.com/files/file/FAQs_pdf_4.pdf)
 - Incentives are offered for new construction and `substantial renovations|substantial-renovation`
 
-> ### Benefits
->
-> There is an entity cap of $4M per fiscal year.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+There is an entity cap of $4M per fiscal year.
+
+:::
