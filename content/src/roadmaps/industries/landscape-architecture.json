@@ -48,6 +48,12 @@
       "task": "",
       "licenseTask": "landscape-architect-license",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 2,
+      "licenseTask": "authorization-landscape-architect-firm_1",
+      "required": true
     }
   ],
   "name": "Landscape Architecture",
