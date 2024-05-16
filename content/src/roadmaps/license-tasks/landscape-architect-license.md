@@ -33,7 +33,7 @@ In addition, you will need to contact the Council of Landscape Architectural Reg
 - Citizenship/immigration status
 - Child support information, if applicable
 - History of drug use, if applicable
-- A criminal background check, if applicable
+- A criminal background check
 - List of licenses or certifications, past and present, if applicable
 - History of disciplinary actions, suspended licenses, if applicable
 - Name and address of the college or university where you earned - your undergraduate degree
