@@ -1,4 +1,4 @@
-import { Callout, calloutComponentMapping, CalloutTypes } from "@/components/Callout";
+import { Callout, CalloutTypes, getStylingForCalloutType } from "@/components/Callout";
 import { getMergedConfig } from "@/contexts/configContext";
 import { render, screen } from "@testing-library/react";
 
@@ -49,7 +49,7 @@ describe.each(calloutTypes)("<Callout />", (calloutType) => {
         Some Body Text
       </Callout>
     );
-    expect(screen.getByTestId(`${calloutComponentMapping[calloutType].iconStyling}`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${getStylingForCalloutType(calloutType).iconStyling}`)).toBeInTheDocument();
   });
 
   it(`does not render header icon for ${calloutType} callout`, () => {

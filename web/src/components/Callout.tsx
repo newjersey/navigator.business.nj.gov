@@ -17,27 +17,36 @@ interface CalloutMappingObj {
   iconStyling: string;
 }
 
-export const calloutComponentMapping: Record<string, CalloutMappingObj> = {
-  informational: {
-    containerStyling: "bg-accent-cool-lightest",
-    headingStyling: "text-accent-cool-more-dark",
-    iconStyling: "callout-informational-icon",
-  },
-  conditional: {
-    containerStyling: "bg-primary-extra-light",
-    headingStyling: "text-primary-darker",
-    iconStyling: "callout-conditional-icon",
-  },
-  warning: {
-    containerStyling: "bg-warning-extra-light",
-    headingStyling: "text-accent-warm-darker",
-    iconStyling: "callout-warning-icon",
-  },
-  note: {
-    containerStyling: "bg-base-lightest",
-    headingStyling: "text-base-darkest",
-    iconStyling: "callout-note-icon",
-  },
+export const getStylingForCalloutType = (calloutType: string): CalloutMappingObj => {
+  if (calloutType === "informational")
+    return {
+      containerStyling: "bg-accent-cool-lightest",
+      headingStyling: "text-accent-cool-more-dark",
+      iconStyling: "callout-informational-icon",
+    };
+  if (calloutType === "conditional")
+    return {
+      containerStyling: "bg-primary-extra-light",
+      headingStyling: "text-primary-darker",
+      iconStyling: "callout-conditional-icon",
+    };
+  if (calloutType === "warning")
+    return {
+      containerStyling: "bg-warning-extra-light",
+      headingStyling: "text-accent-warm-darker",
+      iconStyling: "callout-warning-icon",
+    };
+  if (calloutType === "note")
+    return {
+      containerStyling: "bg-base-lightest",
+      headingStyling: "text-base-darkest",
+      iconStyling: "callout-note-icon",
+    };
+  return {
+    containerStyling: "",
+    headingStyling: "",
+    iconStyling: "",
+  };
 };
 
 const getDefaultHeadingTextForCalloutType = (config: ConfigType, calloutType: string): string => {
@@ -63,7 +72,7 @@ export const Callout = (props: PropsWithChildren<Props>): ReactNode => {
   return (
     <div
       className={`padding-205 radius-md margin-y-2 ${
-        calloutComponentMapping[props.calloutType].containerStyling
+        getStylingForCalloutType(props.calloutType).containerStyling
       }`}
     >
       {showHeader === true ? (
@@ -71,12 +80,12 @@ export const Callout = (props: PropsWithChildren<Props>): ReactNode => {
           <div className="flex">
             {showIcon && (
               <div
-                data-testid={calloutComponentMapping[props.calloutType].iconStyling}
-                className={calloutComponentMapping[props.calloutType].iconStyling}
+                data-testid={getStylingForCalloutType(props.calloutType).iconStyling}
+                className={getStylingForCalloutType(props.calloutType).iconStyling}
                 aria-hidden="true"
               />
             )}
-            <span className={`text-bold ${calloutComponentMapping[props.calloutType].headingStyling}`}>
+            <span className={`text-bold ${getStylingForCalloutType(props.calloutType).headingStyling}`}>
               {headingText}
             </span>
           </div>
