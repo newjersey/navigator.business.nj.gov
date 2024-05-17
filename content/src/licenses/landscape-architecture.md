@@ -3,8 +3,9 @@ urlSlug: landscape-architecture
 previewType: renewal
 summaryDescriptionMd: N/A
 callToActionLink: https://www.njconsumeraffairs.gov/land/Pages/default.aspx
-callToActionText: Renew My Lanscape Architecture License
+callToActionText: Renew My Landscape Architecture License
 ---
+
 Your Landscape Architecture license expires every two years.
 
 ### Application Requirements
