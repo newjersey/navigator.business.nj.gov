@@ -43,12 +43,7 @@ export const SidebarCardFormationNudge = (props: Props): ReactElement => {
         close={(): void => setModalOpen(false)}
         onSave={updateFormationDateAndTaskProgress}
       />
-      <SidebarCardGeneric
-        card={props.card}
-        bodyText={props.card.contentMd}
-        headerText={props.card.header}
-        ctaOnClick={onClick}
-      />
+      <SidebarCardGeneric card={props.card} ctaOnClick={onClick} />
     </>
   );
 };
