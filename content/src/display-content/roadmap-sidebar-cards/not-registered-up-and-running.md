@@ -1,5 +1,5 @@
 ---
-id: not-registered-existing-account
+id: not-registered-up-and-running
 header: "Link Your myNewJersey Account"
 hasCloseButton: false
 ctaText: ""

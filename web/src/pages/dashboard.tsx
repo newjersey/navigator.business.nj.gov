@@ -77,13 +77,13 @@ const DashboardPage = (props: Props): ReactElement => {
       if (
         business?.profileData.operatingPhase === "GUEST_MODE_OWNING" &&
         business?.profileData.businessPersona === "OWNING" &&
-        !business.preferences.visibleSidebarCards.includes("not-registered-existing-account")
+        !business.preferences.visibleSidebarCards.includes("not-registered-up-and-running")
       ) {
         await updateQueue
           ?.queuePreferences({
             visibleSidebarCards: [
               ...business.preferences.visibleSidebarCards,
-              "not-registered-existing-account",
+              "not-registered-up-and-running",
             ],
           })
           .update();

@@ -3,5 +3,5 @@ export const SIDEBAR_CARDS = {
   fundingNudge: "funding-nudge",
   goToProfile: "go-to-profile",
   notRegistered: "not-registered",
-  notRegisteredExistingAccount: "not-registered-existing-account",
+  notRegisteredUpAndRunning: "not-registered-up-and-running",
 };
