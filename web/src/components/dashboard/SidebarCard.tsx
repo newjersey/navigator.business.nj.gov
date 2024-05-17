@@ -18,14 +18,7 @@ export const SidebarCard = (props: Props): ReactElement => {
         [SIDEBAR_CARDS.fundingNudge]: <SidebarCardFundingNudge card={props.card} />,
         [SIDEBAR_CARDS.formationNudge]: <SidebarCardFormationNudge card={props.card} />,
         [SIDEBAR_CARDS.goToProfile]: <SidebarCardGoToProfileNudge card={props.card} />,
-        default: (
-          <SidebarCardGeneric
-            card={props.card}
-            headerText={props.card.header}
-            bodyText={props.card.contentMd}
-            preBodySpanButtonText={props.card.preBodySpanButtonText}
-          />
-        ),
+        default: <SidebarCardGeneric card={props.card} />,
       })}
     </>
   );

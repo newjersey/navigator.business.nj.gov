@@ -41,12 +41,7 @@ export const SidebarCardFundingNudge = (props: Props): ReactElement => {
         handleClose={(): void => setModalOpen(false)}
         onContinue={updateToUpAndRunningAndCompleteTaxTask}
       />
-      <SidebarCardGeneric
-        card={props.card}
-        headerText={props.card.header}
-        bodyText={props.card.contentMd}
-        ctaOnClick={onClick}
-      />
+      <SidebarCardGeneric card={props.card} ctaOnClick={onClick} />
     </>
   );
 };
