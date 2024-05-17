@@ -92,7 +92,7 @@ export const TaxId = (props: Props): ReactElement => {
       : setTaxIdDisplayStatus("password-view");
   };
 
-  const taxIdToggle = (toggleFunc?: (taxId: string) => void) => async () => {
+  const taxIdToggle = (toggleFunc?: (taxId: string) => void) => async (): Promise<void> => {
     if (!state.profileData.taxId) {
       return;
     }

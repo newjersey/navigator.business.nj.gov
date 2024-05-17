@@ -39,7 +39,7 @@ export const NavBar = (props: Props): ReactElement => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-    return () => {
+    return (): void => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
