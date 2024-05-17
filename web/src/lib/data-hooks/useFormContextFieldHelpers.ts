@@ -33,7 +33,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
       debug && console.log(fieldName);
       reducer({ type: FieldStateActionKind.REGISTER, payload: { field: fieldName } });
 
-      return () => {
+      return (): void => {
         debug && console.log("unmounted");
         debug && console.log(fieldName);
         reducer({ type: FieldStateActionKind.UNREGISTER, payload: { field: fieldName } });

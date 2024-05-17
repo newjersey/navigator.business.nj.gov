@@ -42,16 +42,19 @@ export default {
   fromBlock: (
     match: RegExpMatchArray
   ): { showHeader: boolean; headerText: string; body: string; calloutType: string; showIcon: boolean } => {
+    // We can safely assume there will be a single match; else we wouldn't be inside this function.
     const [calloutBlock] = match;
-    console.log({ calloutBlock });
+
+    // Everything inside the first {} we see we consider callout parameters; everything after is the body.
     const calloutParseMatcher = /{(?<parameters>[^}]+)}[^\n]*\n(?<body>[^3:{}]*)/gms;
     const calloutMatch = calloutParseMatcher.exec(calloutBlock);
-    const calloutParameters =
-      calloutMatch?.groups?.parameters ??
-      'showHeader="false" headerText="" showIcon="false" calloutType="conditional"';
-    const calloutBody = calloutMatch?.groups?.body.trim() ?? "";
 
-    console.log({ calloutMatch });
+    // If we just have :::callout {}\n:::, then we need to return some default values instead.
+    const defaultCalloutContents =
+      'showHeader="false" headerText="" showIcon="false" calloutType="conditional"';
+
+    const calloutParameters = calloutMatch?.groups?.parameters ?? defaultCalloutContents;
+    const calloutBody = calloutMatch?.groups?.body.trim() ?? "";
 
     const showHeaderMatch = calloutParameters.match(/showHeader="(?<showHeader>[^"]+)"/);
     const showHeaderValue = Boolean(showHeaderMatch?.groups?.showHeader.trim() ?? "true");
@@ -64,14 +67,6 @@ export default {
 
     const calloutTypeMatch = calloutParameters.match(/calloutType="(?<calloutType>[^"]+)"/);
     const calloutTypeValue = calloutTypeMatch?.groups?.calloutType.trim() ?? "conditional";
-
-    console.log({
-      calloutType: calloutTypeValue,
-      showHeader: showHeaderValue,
-      showIcon: showIconValue,
-      headerText: headerTextValue,
-      body: calloutBody,
-    });
 
     return {
       calloutType: calloutTypeValue,

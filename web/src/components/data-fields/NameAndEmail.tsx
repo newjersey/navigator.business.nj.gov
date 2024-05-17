@@ -60,7 +60,7 @@ export const NameAndEmail = (props: Props): ReactElement => {
   };
 
   const handleEmail = (confirm = false) => {
-    return (value: string) => {
+    return (value: string): void => {
       if (confirm) {
         setConfirmEmail(value);
         email === value && email.length > 0 ? updateEmailState(email) : updateEmailState("");

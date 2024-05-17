@@ -1,4 +1,4 @@
-import { useRoadmap, UseRoadmapReturnValue } from "@/lib/data-hooks/useRoadmap";
+import { CurrentAndNextSection, useRoadmap, UseRoadmapReturnValue } from "@/lib/data-hooks/useRoadmap";
 import * as buildUserRoadmapModule from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
@@ -23,8 +23,11 @@ describe("useRoadmap", () => {
     const initialReturnVal = {
       roadmap: initialRoadmap,
       sectionNamesInRoadmap: [],
-      isSectionCompleted: () => false,
-      currentAndNextSection: () => ({ current: "PLAN" as SectionType, next: undefined }),
+      isSectionCompleted: (): boolean => false,
+      currentAndNextSection: (): CurrentAndNextSection => ({
+        current: "PLAN" as SectionType,
+        next: undefined,
+      }),
     };
     function TestComponent(): null {
       Object.assign(initialReturnVal, useRoadmap());
