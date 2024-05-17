@@ -13,7 +13,7 @@ export const useIntersectionOnElement = (element: RefObject<HTMLElement>, rootMa
     element.current && observer.observe(element.current);
 
     const el = element.current;
-    return () => {
+    return (): void => {
       observer.unobserve(el as HTMLElement);
     };
   }, [element, rootMargin]);

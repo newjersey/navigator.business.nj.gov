@@ -71,7 +71,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   useEffect(() => {
     router.events.on("routeChangeComplete", analytics.pageview);
-    return () => {
+    return (): void => {
       router.events.off("routeChangeComplete", analytics.pageview);
     };
   }, [router.events]);

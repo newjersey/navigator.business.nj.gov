@@ -28,7 +28,7 @@ export const FocusTrappedSidebar = ({
         return setShowDiv(false);
       }, delayTime);
     }
-    return () => {
+    return (): void => {
       return clearTimeout(timeoutId);
     };
   }, [isOpen, delayTime, showDiv]);
@@ -39,7 +39,7 @@ export const FocusTrappedSidebar = ({
     };
     window.addEventListener("keydown", handleKeydown);
 
-    return () => {
+    return (): void => {
       window.removeEventListener("keydown", handleKeydown);
     };
   });

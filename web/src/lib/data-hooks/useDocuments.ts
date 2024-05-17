@@ -31,7 +31,7 @@ export const useDocuments = (): {
     const interval = setInterval(() => {
       return checkData();
     }, 900000);
-    return () => {
+    return (): void => {
       return clearInterval(interval);
     };
   }, business);

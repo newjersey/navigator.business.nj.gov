@@ -48,7 +48,7 @@ export const LandingPageSlider = (props: Props): ReactElement => {
       setSlideBreakPoint(getNumberOfTilesToScroll());
     }
     window.addEventListener("resize", handleResize);
-    return () => {
+    return (): void => {
       window.removeEventListener("resize", handleResize);
     };
   });
