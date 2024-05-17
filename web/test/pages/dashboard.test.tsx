@@ -149,7 +149,7 @@ describe("dashboard page", () => {
     expect(currentBusiness().preferences.visibleSidebarCards).toContain(SIDEBAR_CARDS.notRegistered);
   });
 
-  it("renders not-registered-existing-account card when operatingPhase is GUEST_MODE_OWNING and businessPersona is OWNING", () => {
+  it("renders not-registered-up-and-running card when operatingPhase is GUEST_MODE_OWNING and businessPersona is OWNING", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "OWNING",
@@ -161,7 +161,7 @@ describe("dashboard page", () => {
     });
     renderStatefulDashboardComponent(business);
     expect(currentBusiness().preferences.visibleSidebarCards).toContain(
-      SIDEBAR_CARDS.notRegisteredExistingAccount
+      SIDEBAR_CARDS.notRegisteredUpAndRunning
     );
   });
 
