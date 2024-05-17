@@ -51,6 +51,12 @@
       "licenseTask": "register-accounting-firm",
       "required": false,
       "weight": 9
+    },
+    {
+      "step": 4,
+      "licenseTask": "public-accountant-license",
+      "required": false,
+      "weight": 10
     }
   ],
   "name": "Accounting, Bookkeeping, and Tax Preparation",

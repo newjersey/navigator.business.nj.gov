@@ -282,6 +282,14 @@ describe("task page", () => {
     expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
+  it("loads License task screen for public-accountant-license", () => {
+    renderPage(
+      generateTask({ id: "public-accountant-license" }),
+      generateBusiness({ licenseData: undefined })
+    );
+    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
+  });
+
   it("loads construction post-onboarding question for task in template body", async () => {
     mockFetchPostOnboarding.mockResolvedValue(
       generatePostOnboarding({ filename: "construction-renovation" })
