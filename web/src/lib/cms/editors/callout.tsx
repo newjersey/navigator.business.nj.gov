@@ -36,54 +36,49 @@ export default {
     },
   ],
 
-  pattern: /:::callout[^:]+:::/g,
+  pattern: /:::callout.*?:::/gs,
   collapsed: false,
   summary: "{{fields.title}}",
   fromBlock: (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    match: any
+    match: RegExpMatchArray
   ): { showHeader: boolean; headerText: string; body: string; calloutType: string; showIcon: boolean } => {
-    const string = match[0];
-    const closedCurlyIndex = string.indexOf("}");
+    const [calloutBlock] = match;
+    console.log({ calloutBlock });
+    const calloutParseMatcher = /{(?<parameters>[^}]+)}[^\n]*\n(?<body>[^3:{}]*)/gms;
+    const calloutMatch = calloutParseMatcher.exec(calloutBlock);
+    const calloutParameters =
+      calloutMatch?.groups?.parameters ??
+      'showHeader="false" headerText="" showIcon="false" calloutType="conditional"';
+    const calloutBody = calloutMatch?.groups?.body.trim() ?? "";
 
-    const showHeaderValue = string
-      .slice(string.indexOf("showHeader="), string.indexOf("headerText="))
-      .trim()
-      .split("=")[1]
-      .slice(1, -1)
-      .trim();
+    console.log({ calloutMatch });
 
-    const headerValue = string
-      .slice(string.indexOf("headerText="), string.indexOf("showIcon="))
-      .trim()
-      .split("=")[1]
-      .slice(1, -1)
-      .trim();
+    const showHeaderMatch = calloutParameters.match(/showHeader="(?<showHeader>[^"]+)"/);
+    const showHeaderValue = Boolean(showHeaderMatch?.groups?.showHeader.trim() ?? "true");
 
-    const iconValue = string
-      .slice(string.indexOf("showIcon="), string.indexOf("calloutType="))
-      .trim()
-      .split("=")[1]
-      .slice(1, -1)
-      .trim();
+    const headerTextMatch = calloutParameters.match(/headerText="(?<headerText>[^"]+)"/);
+    const headerTextValue = headerTextMatch?.groups?.headerText.trim() ?? "";
 
-    const calloutTypeValue = string
-      .slice(string.indexOf("calloutType="), closedCurlyIndex)
-      .trim()
-      .split("=")[1]
-      .slice(1, -1)
-      .trim();
+    const showIconMatch = calloutParameters.match(/showIcon="(?<showIcon>[^"]+)"/);
+    const showIconValue = Boolean(showIconMatch?.groups?.showIcon.trim() ?? "false");
 
-    const endLength = ":::".length;
+    const calloutTypeMatch = calloutParameters.match(/calloutType="(?<calloutType>[^"]+)"/);
+    const calloutTypeValue = calloutTypeMatch?.groups?.calloutType.trim() ?? "conditional";
 
-    const bodyValue = string.slice(closedCurlyIndex + 1, -1 * endLength).trim();
+    console.log({
+      calloutType: calloutTypeValue,
+      showHeader: showHeaderValue,
+      showIcon: showIconValue,
+      headerText: headerTextValue,
+      body: calloutBody,
+    });
 
     return {
       calloutType: calloutTypeValue,
       showHeader: showHeaderValue,
-      showIcon: iconValue,
-      headerText: headerValue,
-      body: bodyValue,
+      showIcon: showIconValue,
+      headerText: headerTextValue,
+      body: calloutBody,
     };
   },
 
@@ -95,7 +90,7 @@ export default {
     calloutType: string;
     showIcon: boolean;
   }): string => {
-    return `:::callout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" showIcon="${obj.showIcon}" calloutType="${obj.calloutType}" } \n ${obj.body}\n:::`;
+    return `:::callout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" showIcon="${obj.showIcon}" calloutType="${obj.calloutType}" }\n\n${obj.body}\n\n:::`;
   },
   toPreview: (obj: {
     showHeader: boolean;
@@ -104,6 +99,6 @@ export default {
     calloutType: string;
     showIcon: boolean;
   }): string => {
-    return `:::callout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" showIcon="${obj.showIcon}" calloutType="${obj.calloutType}" } \n ${obj.body}\n:::`;
+    return `:::callout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" showIcon="${obj.showIcon}" calloutType="${obj.calloutType}" }\n${obj.body}\n:::`;
   },
 };
