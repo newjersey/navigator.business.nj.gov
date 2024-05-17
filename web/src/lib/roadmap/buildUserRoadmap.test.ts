@@ -427,6 +427,57 @@ describe("buildUserRoadmap", () => {
       });
     });
 
+    describe("planned renovation", () => {
+      it("adds if homeBasedBusiness is false and planned renovation is true", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ homeBasedBusiness: false, plannedRenovationQuestion: true })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("planned-renovation");
+      });
+
+      it("does NOT add if homeBasedBusiness is false and planned renovation is false", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ homeBasedBusiness: false, plannedRenovationQuestion: false })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("planned-renovation");
+      });
+
+      it("does NOT add if homeBasedBusiness is true and planned renovation is true", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ homeBasedBusiness: true, plannedRenovationQuestion: true })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("planned-renovation");
+      });
+
+      it("does NOT show if homeBasedBusiness is true and planned renovation is false", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ homeBasedBusiness: true, plannedRenovationQuestion: false })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("planned-renovation");
+      });
+
+      it("does NOT add if homeBasedBusiness is undefined and planned renovation is undefined", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ homeBasedBusiness: undefined, plannedRenovationQuestion: undefined })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("planned-renovation");
+      });
+
+      it("does NOT add if homeBasedBusiness is true and planned renovation is undefined", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ homeBasedBusiness: true, plannedRenovationQuestion: undefined })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("planned-renovation");
+      });
+
+      it("does NOT add if homeBasedBusiness is false and planned renovation is undefined", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ homeBasedBusiness: false, plannedRenovationQuestion: undefined })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("planned-renovation");
+      });
+    });
+
     describe("car service", () => {
       it("adds only the standard car service tasks to the roadmap if the user selects the standard choice", async () => {
         await buildUserRoadmap(

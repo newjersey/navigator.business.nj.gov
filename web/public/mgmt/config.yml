@@ -2182,7 +2182,6 @@ collections:
               - { label: Violation Notice CTA Text, name: violationNoticeCTA, widget: string }
               - { label: Violation Notice CTA Link, name: violationNoticeCTALink, widget: nospace }
 
-
   - name: "tasks"
     label: "Tasks - All"
     folder: "content/src/roadmaps/tasks"
@@ -4949,6 +4948,25 @@ collections:
                         widget: object
                         fields:
                           - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Deferred Planned Renovation Question
+                    name: "plannedRenovationQuestion"
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                              hint: "This question appears in the business profile",
+                            }
+                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
                   - label: Home-Based Business
                     name: "homeBasedBusiness"
                     collapsed: true

@@ -1,0 +1,11 @@
+{
+  "id": "planned-renovation",
+  "displayname": "planned-renovation",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 62,
+      "task": "building-permit"
+    }
+  ]
+}

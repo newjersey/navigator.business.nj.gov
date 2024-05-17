@@ -267,6 +267,15 @@
           "altDescription": "Do you plan to be a `home-based business|home-based-business` ?"
         }
       },
+      "plannedRenovationQuestion": {
+        "default": {
+          "header": "Planned Renovations",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "altDescription": "Do you plan to do any renovations or construction on your commercial/industrial space?",
+          "description": "Do you plan to do any renovations or construction on your commercial/industrial space?"
+        }
+      },
       "legalStructureId": {
         "default": {
           "header": "Business Structure",
