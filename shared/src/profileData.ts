@@ -17,6 +17,7 @@ export interface IndustrySpecificData {
   readonly liquorLicense: boolean;
   readonly requiresCpa: boolean;
   readonly homeBasedBusiness: boolean | undefined;
+  readonly plannedRenovationQuestion: boolean | undefined;
   readonly providesStaffingService: boolean;
   readonly certifiedInteriorDesigner: boolean;
   readonly realEstateAppraisalManagement: boolean;
@@ -41,6 +42,7 @@ export const industrySpecificDataChoices: IndustrySpecificDataChoices = {
   liquorLicense: booleanChoice,
   requiresCpa: booleanChoice,
   homeBasedBusiness: booleanChoice,
+  plannedRenovationQuestion: booleanChoice,
   providesStaffingService: booleanChoice,
   certifiedInteriorDesigner: booleanChoice,
   realEstateAppraisalManagement: booleanChoice,
@@ -61,6 +63,7 @@ export const emptyIndustrySpecificData: IndustrySpecificData = {
   liquorLicense: false,
   requiresCpa: false,
   homeBasedBusiness: undefined,
+  plannedRenovationQuestion: undefined,
   cannabisLicenseType: undefined,
   cannabisMicrobusiness: undefined,
   constructionRenovationPlan: undefined,

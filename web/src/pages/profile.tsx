@@ -16,6 +16,7 @@ import { NexusDBANameField } from "@/components/data-fields/NexusDBANameField";
 import { NonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/NonEssentialQuestionsSection";
 import { Notes } from "@/components/data-fields/Notes";
 import { Ownership } from "@/components/data-fields/Ownership";
+import { RenovationQuestion } from "@/components/data-fields/RenovationQuestion";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
 import { Sectors } from "@/components/data-fields/Sectors";
 import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
@@ -77,7 +78,10 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared";
 import { hasCompletedFormation } from "@businessnjgovnavigator/shared/";
-import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import {
+  isNexusBusiness,
+  isStartingBusiness,
+} from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 import dayjs from "dayjs";
 import deepEqual from "fast-deep-equal/es6/react";
@@ -292,6 +296,13 @@ const ProfilePage = (props: Props): ReactElement => {
     return isHomeBasedBusinessApplicable(profileData.industryId);
   };
 
+  const displayPlannedRenovationQuestionQuestion = (): boolean => {
+    return (
+      profileData.homeBasedBusiness === false &&
+      (isNexusBusiness(business) || profileData.businessPersona === "STARTING")
+    );
+  };
+
   const displayElevatorQuestion = (): boolean => {
     if (!business) return false;
     return profileData.homeBasedBusiness === false;
@@ -368,6 +379,16 @@ const ProfilePage = (props: Props): ReactElement => {
           boldAltDescription={true}
         >
           <HomeBasedBusiness />
+        </ProfileField>
+
+        <ProfileField
+          fieldName="plannedRenovationQuestion"
+          isVisible={displayPlannedRenovationQuestionQuestion()}
+          hideHeader={true}
+          displayAltDescription={true}
+          boldAltDescription={true}
+        >
+          <RenovationQuestion />
         </ProfileField>
 
         <ProfileField
@@ -554,6 +575,16 @@ const ProfilePage = (props: Props): ReactElement => {
           boldAltDescription={true}
         >
           <HomeBasedBusiness />
+        </ProfileField>
+
+        <ProfileField
+          fieldName="plannedRenovationQuestion"
+          isVisible={displayPlannedRenovationQuestionQuestion()}
+          hideHeader={true}
+          displayAltDescription={true}
+          boldAltDescription={true}
+        >
+          <RenovationQuestion />
         </ProfileField>
 
         <ProfileField
