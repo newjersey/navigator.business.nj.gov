@@ -1,6 +1,7 @@
 ---
 filename: landscape-architecture-certificate-reinstatement
-name: landscape-architecture-certificate-reinstatement
+name: Apply to Reinstate Your Certificate of Authorization for Landscape
+  Architectural Services
 industryIds:
   - landscape-architecture
 sectorIds: []
