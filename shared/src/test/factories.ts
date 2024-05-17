@@ -214,6 +214,7 @@ export const generateIndustrySpecificData = (
     liquorLicense: !(randomInt() % 2),
     requiresCpa: !(randomInt() % 2),
     homeBasedBusiness: !(randomInt() % 2),
+    plannedRenovationQuestion: !(randomInt() % 2),
     cannabisLicenseType: randomElementFromArray(["CONDITIONAL", "ANNUAL"]),
     cannabisMicrobusiness: !(randomInt() % 2),
     constructionRenovationPlan: !(randomInt() % 2),

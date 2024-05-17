@@ -57,6 +57,7 @@ export const ApiFormationHealth: UserData = {
         liquorLicense: true,
         requiresCpa: false,
         homeBasedBusiness: false,
+        plannedRenovationQuestion: undefined,
         cannabisLicenseType: "CONDITIONAL",
         cannabisMicrobusiness: true,
         constructionRenovationPlan: false,

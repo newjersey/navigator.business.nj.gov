@@ -174,6 +174,89 @@ describe("profile - shared", () => {
     ).toBeInTheDocument();
   });
 
+  it("should never show the non-essential planned renovation question for owning business, with homebase question as no", () => {
+    const business = generateBusinessForProfile({
+      profileData: generateProfileData({
+        industryId: randomHomeBasedIndustry(),
+        operatingPhase: "UP_AND_RUNNING_OWNING",
+        businessPersona: "OWNING",
+        homeBasedBusiness: false,
+      }),
+    });
+
+    renderPage({ business });
+
+    expect(
+      screen.queryByText(Config.profileDefaults.fields.plannedRenovationQuestion.default.description)
+    ).not.toBeInTheDocument();
+  });
+
+  it.each(nonOwningPersonas)(
+    "should show planned renovation question when home base question is no for %s",
+    async (businessPersona) => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          industryId: randomHomeBasedIndustry(),
+          operatingPhase: "UP_AND_RUNNING",
+          businessPersona: businessPersona,
+          homeBasedBusiness: false,
+          foreignBusinessTypeIds:
+            businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
+        }),
+      });
+
+      renderPage({ business });
+
+      expect(
+        screen.getByText(Config.profileDefaults.fields.plannedRenovationQuestion.default.description)
+      ).toBeInTheDocument();
+    }
+  );
+
+  it.each(nonOwningPersonas)(
+    "should NOT show planned renovation question when home based question is yes for %s",
+    async (businessPersona) => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          industryId: randomHomeBasedIndustry(),
+          operatingPhase: "UP_AND_RUNNING",
+          businessPersona: businessPersona,
+          homeBasedBusiness: true,
+          foreignBusinessTypeIds:
+            businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
+        }),
+      });
+
+      renderPage({ business });
+
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.plannedRenovationQuestion.default.description)
+      ).not.toBeInTheDocument();
+    }
+  );
+
+  it.each(nonOwningPersonas)(
+    "should NOT show planned renovation question when home based question is undefined for %s",
+    async (businessPersona) => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          industryId: randomHomeBasedIndustry(),
+          operatingPhase: "UP_AND_RUNNING",
+          businessPersona: businessPersona,
+          homeBasedBusiness: undefined,
+          foreignBusinessTypeIds:
+            businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
+        }),
+      });
+
+      renderPage({ business });
+
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.plannedRenovationQuestion.default.description)
+      ).not.toBeInTheDocument();
+    }
+  );
+
   it("sends analytics when municipality entered for first time", async () => {
     const initialBusiness = generateBusinessForProfile({
       profileData: generateProfileData({
@@ -568,7 +651,7 @@ describe("profile - shared", () => {
   });
 
   describe("profile error alert", () => {
-    it.each(["STARTING", "FOREIGN"])(
+    it.each(nonOwningPersonas)(
       "displays alert with the header if industry field has an error when %s",
       async (businessPersona) => {
         const business = generateBusinessForProfile({
