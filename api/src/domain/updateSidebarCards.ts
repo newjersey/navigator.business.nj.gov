@@ -29,8 +29,8 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
     hideCard(SIDEBAR_CARDS.notRegistered);
   }
 
-  if (operatingPhase !== "GUEST_MODE" && cards.includes(SIDEBAR_CARDS.notRegisteredExistingAccount)) {
-    hideCard(SIDEBAR_CARDS.notRegisteredExistingAccount);
+  if (operatingPhase !== "GUEST_MODE" && cards.includes(SIDEBAR_CARDS.notRegisteredUpAndRunning)) {
+    hideCard(SIDEBAR_CARDS.notRegisteredUpAndRunning);
   }
 
   if (operatingPhase === "NEEDS_TO_FORM") {

@@ -12,8 +12,7 @@ import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { SIDEBAR_CARDS } from "@shared/domain-logic/sidebarCards";
 import { OperatingPhaseId, OperatingPhases } from "@shared/index";
 
-const { formationNudge, fundingNudge, goToProfile, notRegistered, notRegisteredExistingAccount } =
-  SIDEBAR_CARDS;
+const { formationNudge, fundingNudge, goToProfile, notRegistered, notRegisteredUpAndRunning } = SIDEBAR_CARDS;
 
 describe("updateRoadmapSidebarCards", () => {
   describe("not registered card", () => {
@@ -36,21 +35,21 @@ describe("updateRoadmapSidebarCards", () => {
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(formationNudge);
     });
 
-    it("removes not-registered-existing-account card and adds formation nudge card", async () => {
+    it("removes not-registered-up-and-running card and adds formation nudge card", async () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
             operatingPhase: "NEEDS_TO_FORM",
           }),
           preferences: generatePreferences({
-            visibleSidebarCards: [notRegisteredExistingAccount],
+            visibleSidebarCards: [notRegisteredUpAndRunning],
           }),
         })
       );
 
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        notRegisteredExistingAccount
+        notRegisteredUpAndRunning
       );
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(formationNudge);
     });
@@ -75,21 +74,21 @@ describe("updateRoadmapSidebarCards", () => {
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain("other-card");
     });
 
-    it("leaves existing cards except for not-registered-existing-account when adding formation nudge card", async () => {
+    it("leaves existing cards except for not-registered-up-and-running when adding formation nudge card", async () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
             operatingPhase: "NEEDS_TO_FORM",
           }),
           preferences: generatePreferences({
-            visibleSidebarCards: ["other-card", notRegisteredExistingAccount],
+            visibleSidebarCards: ["other-card", notRegisteredUpAndRunning],
           }),
         })
       );
 
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        notRegisteredExistingAccount
+        notRegisteredUpAndRunning
       );
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(formationNudge);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain("other-card");
