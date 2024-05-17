@@ -9,12 +9,15 @@ summaryDescriptionMd: If you want to continue operating your health spa, fitness
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
 callToActionText: Renew My Health Club Registration
 ---
+
 ### Renewal Requirements
 
-* Security information or security requirement declaration of exemption
-* Copy of written contract, if claiming security requirement exemption
-* Applicable fees paid
+- Security information or security requirement declaration of exemption
+- Copy of written contract, if claiming security requirement exemption
+- Applicable fees paid
 
-:::callout{ header="" icon="false" calloutType="conditional" } 
- An updated certificate of registration
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+An updated certificate of registration
+
 :::

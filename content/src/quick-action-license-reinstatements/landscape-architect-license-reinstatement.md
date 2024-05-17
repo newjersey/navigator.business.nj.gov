@@ -12,6 +12,7 @@ form: Application for Reinstatement for Landscape Architects
 callToActionText: Reinstate My Landscape Architect License
 callToActionLink: https://www.njconsumeraffairs.gov/land/Applications/Application-for-Reinstatement-for-Landscape-Architects.pdf
 ---
+
 ## Application Requirements
 
 - Personal information, including address and birth date
@@ -25,7 +26,8 @@ callToActionLink: https://www.njconsumeraffairs.gov/land/Applications/Applicatio
 - A list of the New Jersey projects you signed and sealed after the license lapsed or a letter certifying that you did not sign any works after the license lapsed
 - Applicable fees paid
 
-:::callout{ header="" icon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
 
 - The same license number
-  :::
+
+:::
