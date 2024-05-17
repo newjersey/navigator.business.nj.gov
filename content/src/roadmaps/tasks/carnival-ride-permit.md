@@ -2,8 +2,8 @@
 notesMd: "[Muni planning
   doc](https://docs.google.com/document/d/1yNGtzwQuNN0_mH5fguWruu_9BgJ5v25BegkQ\
   Av4xC1g/edit)"
-summaryDescriptionMd: You must get a ride permit to own and operate a `carnival
-  or amusement ride|carnival-amusement-ride` in New Jersey.
+summaryDescriptionMd: You must get a ride permit to own and/or operate a
+  `carnival or amusement ride|carnival-amusement-ride` in New Jersey.
 urlSlug: carnival-ride-permit
 filename: carnival-ride-permit
 displayname: carnival-ride-permit
