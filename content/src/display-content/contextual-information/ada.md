@@ -1,16 +1,9 @@
 ---
 slug: ada
 filename: ada
-displayname: ada
 header: The Americans with Disabilities Act (ADA)
+displayname: ada
 ---
+The [Americans with Disabilities Act (ADA)](https://www.ada.gov/) is a federal law that helps people with disabilities get equal access. New buildings must follow special rules to make sure they are accessible. Businesses must also fix any problems that make it hard for people with disabilities to move around. The law says new buildings must follow the [2010 ADA Standards](https://www.ada.gov/2010ADAstandards_index.htm).
 
-The Americans with Disabilities Act (ADA) is a Federal civil rights law designed to ensure equal access, full inclusion, and participation for people with disabilities or impairments.
-
-Under the law, people with disabilities are entitled to full and equal access to places of public accommodation, transportation carriers, lodging places, recreation and amusement facilities, and other business establishments where the general public is invited.
-
-The [Federal ADA regulations](https://www.ada.gov/) require that all new construction for public accommodations comply with the [2010 Americans with Disabilities Act Standards](https://www.ada.gov/2010ADAstandards_index.htm).
-
-The ADA also indicates that a public accommodation has a continuing obligation to remove architectural barriers (barrier removal) to make sure the business is accessible, even if the business is not otherwise contemplating construction. This includes existing barriers at entrances, aisles, bathrooms, and service counters that may have predated the ADA and your ownership of the business.
-
-**`Prepare and make sure your unit is ADA compliant.|ada-compliant`**
+If you want to make your property ADA compliant, look at your renovation plans to see if you need to make it more accessible. Talk to your landlord about ADA compliance to know who pays for costs and deals with legal issues. Having a Certified Access Specialist (CAS) check the property can help find changes needed to follow the rules.
