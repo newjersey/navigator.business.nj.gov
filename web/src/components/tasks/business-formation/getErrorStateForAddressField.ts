@@ -4,21 +4,17 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
-import {AddressFieldErrorState } from "@/lib/types/types";
+import { AddressFieldErrorState } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import {
-  AddressFields, FieldsForAddressErrorHandling,
-} from "@businessnjgovnavigator/shared";
-
+import { Address, AddressFields, FieldsForAddressErrorHandling } from "@businessnjgovnavigator/shared";
 
 export const getErrorStateForAddressField = (inputParams: {
   field: FieldsForAddressErrorHandling;
-  addressData: AddressFields;
+  addressData: Address;
 }): AddressFieldErrorState => {
   const Config = getMergedConfig();
   const { field, addressData } = inputParams;
 
-  console.log((Config.profileDefaults.fields as any)[field]);
   const errorState = {
     field: field,
     label: (Config.profileDefaults.fields as any)[field].label,
@@ -32,7 +28,7 @@ export const getErrorStateForAddressField = (inputParams: {
     if (params.required && !exists) {
       label = (Config.profileDefaults.fields as any)[field].error;
     } else if (isTooLong) {
-      label = templateEval(Config.profileDefaults.general.maximumLengthErrorText, {
+      label = templateEval(Config.profileDefaults.fields.general.maximumLengthErrorText, {
         field: (Config.profileDefaults.fields as any)[field].label,
         maxLen: params.maxLen.toString(),
       });
@@ -80,14 +76,14 @@ export const getErrorStateForAddressField = (inputParams: {
   };
 
   if (field === "addressLine1") {
-    if (isForeignUser()) {
+    if (isForeignUser() && addressData.businessLocationType !== undefined) {
       return fieldWithMaxLength({ required: true, maxLen: 35 });
     }
 
     const maxLengthError = fieldWithMaxLength({ required: false, maxLen: 35 });
     const partialAddressError = fieldWithAssociatedFields({
       associatedFields: ["addressMunicipality", "addressZipCode"],
-      label: Config.profileDefaults.general.partialAddressErrorText,
+      label: Config.profileDefaults.fields.general.partialAddressErrorText,
     });
 
     return combineErrorStates({ firstPriority: maxLengthError, secondPriority: partialAddressError });
@@ -104,7 +100,7 @@ export const getErrorStateForAddressField = (inputParams: {
   if (field === "addressMunicipality") {
     return fieldWithAssociatedFields({
       associatedFields: ["addressLine1", "addressZipCode"],
-      label: Config.profileDefaults.general.partialAddressErrorText,
+      label: Config.profileDefaults.fields.general.partialAddressErrorText,
     });
   }
 
@@ -116,7 +112,7 @@ export const getErrorStateForAddressField = (inputParams: {
     const exists = !!addressData[field];
     let inRange = false;
 
-    if (isForeignUser()) {
+    if (isForeignUser() && addressData.businessLocationType !== undefined) {
       switch (addressData.businessLocationType) {
         case "US":
           inRange = isZipCodeUs(addressData[field]);
@@ -131,7 +127,7 @@ export const getErrorStateForAddressField = (inputParams: {
 
     const partialAddressError = fieldWithAssociatedFields({
       associatedFields: ["addressMunicipality", "addressLine1"],
-      label: Config.profileDefaults.general.partialAddressErrorText,
+      label: Config.profileDefaults.fields.general.partialAddressErrorText,
     });
     inRange = isZipCodeNj(addressData[field]);
     const hasError = exists && !inRange;

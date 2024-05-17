@@ -1,13 +1,13 @@
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { StateDropdown } from "@/components/StateDropdown";
+import { ProfileMunicipality } from "@/components/tasks/business-formation/business/ProfileMunicipality";
+import { ProfileAddressTextField } from "@/components/tasks/business-formation/ProfileAddressTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { AddressContext } from "@/contexts/addressContext";
+import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { ReactElement, useContext } from "react";
-import {ProfileAddressTextField} from "@/components/tasks/business-formation/ProfileAddressTextField";
-import {useAddressErrors} from "@/lib/data-hooks/useAddressErrors";
-import { ProfileMunicipality } from "@/components/tasks/business-formation/business/ProfileMunicipality";
 
 export const ProfileAddressField = (): ReactElement => {
   const { Config } = useConfig();
@@ -41,7 +41,7 @@ export const ProfileAddressField = (): ReactElement => {
         <div id={`question-addressLine2`} className="text-field-width-default add-spacing-on-ele-scroll">
           <ProfileAddressTextField
             label={Config.profileDefaults.fields.addressLine2.label}
-            secondaryLabel={Config.profileDefaults.general.optionalLabel}
+            secondaryLabel={Config.profileDefaults.fields.general.optionalLabel}
             errorBarType="ALWAYS"
             fieldName="addressLine2"
             validationText={getFieldErrorLabel("addressLine2")}
@@ -61,7 +61,7 @@ export const ProfileAddressField = (): ReactElement => {
             </div>
             <div className="grid-col-12 tablet:grid-col-5 margin-top-2 tablet:margin-top-0">
               <WithErrorBar
-               hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
+                hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
                 type="MOBILE-ONLY"
               >
                 <div className="grid-row grid-gap-1">
@@ -92,6 +92,7 @@ export const ProfileAddressField = (): ReactElement => {
                         numericProps={{ maxLength: 5 }}
                         required={true}
                         errorBarType="NEVER"
+                        validationText={getFieldErrorLabel("addressZipCode")}
                         fieldName={"addressZipCode"}
                       />
                     </div>

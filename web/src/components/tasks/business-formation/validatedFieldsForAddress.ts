@@ -1,16 +1,18 @@
-import { Address, AddressFields, FieldsForAddressErrorHandling } from "@businessnjgovnavigator/shared/userData";
+import {
+  Address,
+  AddressFields,
+  FieldsForAddressErrorHandling,
+} from "@businessnjgovnavigator/shared/userData";
 
 export const validatedFieldsForAddress = (addressData: Address): FieldsForAddressErrorHandling[] => {
   let validatedFields: FieldsForAddressErrorHandling[] = [
     "addressLine1",
-    "addressLine2",
-   "addressZipCode",
-
+    "addressMunicipality",
+    "addressState",
+    "addressZipCode",
   ];
 
-  const foreignValidatedFields: AddressFields[] = [
-    "addressCity"
-  ];
+  const foreignValidatedFields: AddressFields[] = ["addressCity"];
 
   switch (addressData.businessLocationType) {
     case "US":

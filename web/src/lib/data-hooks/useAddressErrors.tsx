@@ -1,13 +1,10 @@
 import { getErrorStateForAddressField } from "@/components/tasks/business-formation/getErrorStateForAddressField";
 import { validatedFieldsForAddress } from "@/components/tasks/business-formation/validatedFieldsForAddress";
 import { AddressContext } from "@/contexts/addressContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { AddressFieldErrorState } from "@/lib/types/types";
-import {
-  AddressFields,
-  FieldsForAddressErrorHandling
-} from "@businessnjgovnavigator/shared/userData";
+import { AddressFields, FieldsForAddressErrorHandling } from "@businessnjgovnavigator/shared/userData";
 import { useContext, useMemo } from "react";
-
 
 type AddressErrorsResponse = {
   doesFieldHaveError: (field: FieldsForAddressErrorHandling) => boolean;
@@ -16,6 +13,7 @@ type AddressErrorsResponse = {
 };
 
 export const useAddressErrors = (): AddressErrorsResponse => {
+  const { Config } = useConfig();
   const { state } = useContext(AddressContext);
 
   const validatedFields = useMemo((): FieldsForAddressErrorHandling[] => {
@@ -32,18 +30,19 @@ export const useAddressErrors = (): AddressErrorsResponse => {
         }),
       };
     }, {} as Record<FieldsForAddressErrorHandling, AddressFieldErrorState>);
-  }, [
-    validatedFields,
-    state.addressData,
-  ]);
+  }, [validatedFields, state.addressData]);
 
   const doesFieldHaveError = (field: FieldsForAddressErrorHandling): boolean => {
-
     if (!validatedFields.includes(field)) {
       return false;
     }
 
-      return state.interactedFields.includes(field);
+    let addressFieldErrorState = getErrorStateForAddressField({
+      field,
+      addressData: state.addressData,
+    });
+
+    return addressFieldErrorState.hasError && state.interactedFields.includes(field);
   };
 
   const doSomeFieldsHaveError = (fields: AddressFields[]): boolean => {
@@ -57,13 +56,12 @@ export const useAddressErrors = (): AddressErrorsResponse => {
   };
 
   const getFieldErrorLabel = (field: AddressFields): string => {
-    return "error";
+    return (Config.profileDefaults.fields as any)[field].error;
   };
-
 
   return {
     doesFieldHaveError,
     doSomeFieldsHaveError,
-    getFieldErrorLabel
+    getFieldErrorLabel,
   };
 };

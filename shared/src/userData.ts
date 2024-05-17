@@ -42,10 +42,10 @@ export interface Address {
   readonly addressProvince?: string;
   readonly addressZipCode: string;
   readonly addressCountry: CountriesShortCodes | undefined;
-  readonly businessLocationType: string|undefined,
+  readonly businessLocationType: string | undefined;
 }
 
-export interface AddressTextFields{
+export interface AddressTextFields {
   readonly addressLine1: string;
   readonly addressLine2: string;
   readonly addressCity?: string;
@@ -53,7 +53,7 @@ export interface AddressTextFields{
   readonly addressZipCode: string;
 }
 
-export interface AddressValidFields{
+export interface AddressValidFields {
   readonly addressLine1: string;
   readonly addressLine2: string;
   readonly addressCity?: string;
@@ -105,14 +105,14 @@ export const createEmptyBusiness = (id?: string): Business => {
 
 export const createEmptyAddress = (): Address => {
   return {
-    addressLine1:"",
+    addressLine1: "",
     addressLine2: "",
     addressCity: "",
     addressMunicipality: undefined,
     addressState: undefined,
     addressZipCode: "",
     addressCountry: undefined,
-    businessLocationType: undefined
+    businessLocationType: undefined,
   };
 };
 

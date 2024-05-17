@@ -62,24 +62,21 @@ import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import {
-  createProfileFieldErrorMap,
-  OnboardingStatus,
-  profileTabs,
-  ProfileTabs,
-} from "@/lib/types/types";
+import { createProfileFieldErrorMap, OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getFlow, useMountEffectWhenDefined, useScrollToPathAnchor } from "@/lib/utils/helpers";
 import {
   Address,
   Business,
   BusinessPersona,
-  castPublicFilingLegalTypeToFormationType, createEmptyAddress,
+  castPublicFilingLegalTypeToFormationType,
+  createEmptyAddress,
   createEmptyFormationFormData,
   createEmptyProfileData,
   defaultFormationLegalType,
   determineForeignBusinessType,
-  einTaskId, FieldsForAddressErrorHandling,
+  einTaskId,
+  FieldsForAddressErrorHandling,
   ForeignBusinessType,
   foreignLegalTypePrefix,
   FormationFormData,
@@ -184,20 +181,23 @@ const ProfilePage = (props: Props): ReactElement => {
       setFormationFormData({
         ...business.formationData.formationFormData,
         businessLocationType: isForeign
-          ? addressData.businessLocationType ?? "US"
+          ? business.formationData.formationFormData.businessLocationType ?? "US"
           : "NJ",
-        addressLine1: addressData.addressLine1,
-        addressLine2: addressData.addressLine2,
-        addressCity: addressData.addressCity,
-        addressMunicipality: addressData.addressMunicipality,
-        addressState: addressData.addressState,
-        addressZipCode: addressData.addressZipCode,
-        addressCountry: addressData.addressCountry,
-        addressProvince: addressData.addressProvince
+      });
+
+      console.log(JSON.stringify(business.formationData.formationFormData));
+      setAddressData({
+        addressLine1: business.formationData.formationFormData.addressLine1,
+        addressLine2: business.formationData.formationFormData.addressLine2,
+        addressMunicipality: business.formationData.formationFormData.addressMunicipality,
+        addressState: business.formationData.formationFormData.addressState,
+        addressZipCode: business.formationData.formationFormData.addressZipCode,
+        addressCountry: business.formationData.formationFormData.addressCountry,
+        addressProvince: business.formationData.formationFormData.addressProvince,
+        businessLocationType: business.formationData.formationFormData.businessLocationType,
       });
     }
   }, business);
-
 
   const formatDate = (date: string): string => {
     if (!date) {
@@ -240,8 +240,6 @@ const ProfilePage = (props: Props): ReactElement => {
         return;
       }
 
-      console.log(JSON.stringify(formationFormData));
-
       const dateOfFormationHasBeenDeleted =
         business.profileData.dateOfFormation !== profileData.dateOfFormation &&
         profileData.dateOfFormation === undefined;
@@ -278,7 +276,23 @@ const ProfilePage = (props: Props): ReactElement => {
 
       updateQueue.queueProfileData(profileData);
 
-      updateQueue.queueFormationFormData(formationFormData);
+      if (businessPersona === "OWNING") {
+        //check for errors
+
+        console.log(JSON.stringify(addressData));
+        console.log(JSON.stringify(formationFormData));
+
+        updateQueue.queueFormationFormData({
+          ...formationFormData,
+          addressLine1: addressData.addressLine1,
+          addressLine2: addressData.addressLine2,
+          addressMunicipality: addressData.addressMunicipality,
+          addressState: addressData.addressState,
+          addressZipCode: addressData.addressZipCode,
+          addressCountry: addressData.addressCountry,
+          addressProvince: addressData.addressProvince,
+        });
+      }
 
       (async (): Promise<void> => {
         updateQueue
@@ -859,7 +873,7 @@ const ProfilePage = (props: Props): ReactElement => {
             value={{
               state: {
                 addressData: addressData,
-                interactedFields:interactedFields
+                interactedFields: interactedFields,
               },
               setAddressData,
               setFieldsInteracted,

@@ -90,6 +90,7 @@ export const useFormContextHelper = <
 
   const getInvalidFieldIds = (): string[] => {
     return Object.keys(fieldStates).filter((field) => {
+      console.log(field as keyof T, " - ", fieldStates[field as keyof T].invalid);
       return fieldStates[field as keyof T].invalid;
     });
   };
