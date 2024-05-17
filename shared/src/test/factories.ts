@@ -26,7 +26,7 @@ import { MunicipalityDetail } from "../municipality";
 import { IndustrySpecificData, ProfileData } from "../profileData";
 import { SectorType, arrayOfSectors } from "../sector";
 import { TaxFilingCalendarEvent, TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
-import {Address, Business, CURRENT_VERSION, Preferences, UserData} from "../userData";
+import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
 
 export const generateFormationSubmitResponse = (
@@ -299,21 +299,6 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
   };
 };
 
-export const generateBusinessAddress = (overrides: Partial<Address>): Address => {
-  return {
-    addressLine1: "",
-    addressLine2: "",
-    addressCity: undefined,
-    addressMunicipality: undefined,
-    addressState: undefined,
-    addressZipCode: "",
-    addressProvince: undefined,
-    addressCountry: undefined,
-    businessLocationType: undefined,
-    ...overrides,
-  };
-};
-
 export const generateBusiness = (overrides: Partial<Business>): Business => {
   const profileData = overrides.profileData ?? generateProfileData({});
   const formationData: FormationData = publicFilingLegalTypes.includes(
@@ -342,7 +327,6 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
     taxFilingData: generateTaxFilingData({}),
     profileData,
     formationData,
-    businessAddress: generateBusinessAddress({}),
     ...overrides,
   };
 };

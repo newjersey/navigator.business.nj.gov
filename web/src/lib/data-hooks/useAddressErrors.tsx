@@ -2,7 +2,6 @@ import { getErrorStateForAddressField } from "@/components/tasks/business-format
 import { validatedFieldsForAddress } from "@/components/tasks/business-formation/validatedFieldsForAddress";
 import { AddressContext } from "@/contexts/addressContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { AddressFieldErrorState } from "@/lib/types/types";
 import { AddressFields, FieldsForAddressErrorHandling } from "@businessnjgovnavigator/shared/userData";
 import { useContext, useMemo } from "react";
 
@@ -20,28 +19,34 @@ export const useAddressErrors = (): AddressErrorsResponse => {
     return validatedFieldsForAddress(state.addressData);
   }, [state.addressData]);
 
-  const errorStates: Record<FieldsForAddressErrorHandling, AddressFieldErrorState> = useMemo(() => {
-    return validatedFields.reduce((acc, field) => {
-      return {
-        ...acc,
-        [field]: getErrorStateForAddressField({
-          field,
-          addressData: state.addressData,
-        }),
-      };
-    }, {} as Record<FieldsForAddressErrorHandling, AddressFieldErrorState>);
-  }, [validatedFields, state.addressData]);
+  // const errorStates: Record<FieldsForAddressErrorHandling, AddressFieldErrorState> = useMemo(() => {
+  //   return validatedFields.reduce((acc, field) => {
+  //     return {
+  //       ...acc,
+  //       [field]: getErrorStateForAddressField({
+  //         field,
+  //         addressData: state.addressData,
+  //       }),
+  //     };
+  //   }, {} as Record<FieldsForAddressErrorHandling, AddressFieldErrorState>);
+  // }, [validatedFields, state.addressData]);
 
   const doesFieldHaveError = (field: FieldsForAddressErrorHandling): boolean => {
     if (!validatedFields.includes(field)) {
       return false;
     }
 
-    let addressFieldErrorState = getErrorStateForAddressField({
+    const addressFieldErrorState = getErrorStateForAddressField({
       field,
       addressData: state.addressData,
     });
 
+    const interactedFields = state.interactedFields.includes(field);
+    console.log(field, "-", interactedFields);
+
+    state.formContextState.fieldStates[field].invalid =
+      addressFieldErrorState.hasError && state.interactedFields.includes(field);
+    state.formContextState.fieldStates[field].updated = interactedFields;
     return addressFieldErrorState.hasError && state.interactedFields.includes(field);
   };
 
@@ -56,6 +61,7 @@ export const useAddressErrors = (): AddressErrorsResponse => {
   };
 
   const getFieldErrorLabel = (field: AddressFields): string => {
+    /* typescript-eslint/no-explicit-any */
     return (Config.profileDefaults.fields as any)[field].error;
   };
 

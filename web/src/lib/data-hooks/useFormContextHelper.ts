@@ -90,7 +90,6 @@ export const useFormContextHelper = <
 
   const getInvalidFieldIds = (): string[] => {
     return Object.keys(fieldStates).filter((field) => {
-      console.log(field as keyof T, " - ", fieldStates[field as keyof T].invalid);
       return fieldStates[field as keyof T].invalid;
     });
   };
@@ -122,7 +121,7 @@ export const useFormContextHelper = <
         onChangeFunc && onChangeFunc(valid, getErrors(), submitted || stagingTab !== undefined);
       }
 
-      if (!stillNeedsUpdates) {
+      if (!!stillNeedsUpdates) {
         if (valid) {
           if (submitted) {
             debug && console.log("runs submit");

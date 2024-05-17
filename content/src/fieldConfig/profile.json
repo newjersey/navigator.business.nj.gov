@@ -452,6 +452,10 @@
         }
       }
     },
+    "general": {
+      "partialAddressErrorText": "Address must be complete.",
+      "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer."
+    },
     "default": {
       "lockedFieldTooltipText": "This information cannot be changed because it was submitted to the NJ Department of Treasury.",
       "errorTextHeader": "Error",

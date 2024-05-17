@@ -1,8 +1,5 @@
 import { v133Business, v133UserData } from "@db/migrations/v133_change_agent_office_address_city_field";
-<<<<<<< HEAD
 import { randomInt } from "@shared/intHelpers";
-=======
->>>>>>> 8a1899c46 (feat: [#185159231] Renovation Task Conditional CTA display logic)
 
 export interface v134ProfileData extends v134IndustrySpecificData {
   businessPersona: v134BusinessPersona;

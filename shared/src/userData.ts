@@ -30,7 +30,6 @@ export interface Business {
   readonly preferences: Preferences;
   readonly taxFilingData: TaxFilingData;
   readonly formationData: FormationData;
-  readonly businessAddress: Address;
 }
 
 export interface Address {
@@ -99,7 +98,6 @@ export const createEmptyBusiness = (id?: string): Business => {
       dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     },
-    businessAddress: createEmptyAddress(),
   };
 };
 

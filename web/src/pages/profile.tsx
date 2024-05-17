@@ -49,6 +49,7 @@ import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AddressContext } from "@/contexts/addressContext";
 import { getMergedConfig } from "@/contexts/configContext";
+import { FormContextType } from "@/contexts/formContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -62,7 +63,14 @@ import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import { createProfileFieldErrorMap, OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
+import {
+  createProfileFieldErrorMap,
+  OnboardingStatus,
+  ProfileFields,
+  profileTabs,
+  ProfileTabs,
+  ReducedFieldStates,
+} from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getFlow, useMountEffectWhenDefined, useScrollToPathAnchor } from "@/lib/utils/helpers";
 import {
@@ -119,6 +127,8 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const [addressData, setAddressData] = useState<Address>(createEmptyAddress());
   const [interactedFields, setInteractedFields] = useState<FieldsForAddressErrorHandling[]>([]);
+  const [setFormContextState] =
+    useState<FormContextType<ReducedFieldStates<ProfileFields, unknown>, unknown>>();
 
   const config = getMergedConfig();
   const userDataFromHook = useUserData();
@@ -174,7 +184,6 @@ const ProfilePage = (props: Props): ReactElement => {
   const isForeign = useMemo(() => legalStructureId.includes(foreignLegalTypePrefix), [legalStructureId]);
 
   useMountEffectWhenDefined(() => {
-    //console.log("businessType", business?.formationData.formationFormData.businessLocationType);
     if (business) {
       setProfileData(business.profileData);
       setShouldLockFormationFields(hasCompletedFormation(business));
@@ -183,9 +192,16 @@ const ProfilePage = (props: Props): ReactElement => {
         businessLocationType: isForeign
           ? business.formationData.formationFormData.businessLocationType ?? "US"
           : "NJ",
+        addressLine1: addressData.addressLine1,
+        addressLine2: addressData.addressLine2,
+        addressCity: addressData.addressCity,
+        addressMunicipality: addressData.addressMunicipality,
+        addressState: addressData.addressState,
+        addressZipCode: addressData.addressZipCode,
+        addressCountry: addressData.addressCountry,
+        addressProvince: addressData.addressProvince,
       });
 
-      console.log(JSON.stringify(business.formationData.formationFormData));
       setAddressData({
         addressLine1: business.formationData.formationFormData.addressLine1,
         addressLine2: business.formationData.formationFormData.addressLine2,
@@ -240,6 +256,8 @@ const ProfilePage = (props: Props): ReactElement => {
         return;
       }
 
+      console.log("here I am in the submit");
+
       const dateOfFormationHasBeenDeleted =
         business.profileData.dateOfFormation !== profileData.dateOfFormation &&
         profileData.dateOfFormation === undefined;
@@ -278,9 +296,6 @@ const ProfilePage = (props: Props): ReactElement => {
 
       if (businessPersona === "OWNING") {
         //check for errors
-
-        console.log(JSON.stringify(addressData));
-        console.log(JSON.stringify(formationFormData));
 
         updateQueue.queueFormationFormData({
           ...formationFormData,
@@ -874,9 +889,11 @@ const ProfilePage = (props: Props): ReactElement => {
               state: {
                 addressData: addressData,
                 interactedFields: interactedFields,
+                formContextState: formContextState,
               },
               setAddressData,
               setFieldsInteracted,
+              setFormContextState,
             }}
           >
             <NextSeo title={getNextSeoTitle(config.pagesMetadata.profileTitle)} />
