@@ -5,9 +5,9 @@
     {
       "step": 4,
       "weight": 1,
-      "task": "",
+      "task": "carnival-ride-permit",
       "required": true,
-      "licenseTask": "apply-for-food-truck-license"
+      "licenseTask": ""
     },
     {
       "step": 4,
