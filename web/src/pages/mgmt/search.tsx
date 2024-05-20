@@ -13,7 +13,6 @@ import { searchFundings } from "@/lib/search/searchFundings";
 import { searchIndustries } from "@/lib/search/searchIndustries";
 import { searchLicenseEvents } from "@/lib/search/searchLicenseEvents";
 import { searchNonEssentialQuestions } from "@/lib/search/searchNonEssentialQuestions";
-import { searchPostOnboarding } from "@/lib/search/searchPostOnboarding";
 import { searchQuickActionLicenseReinstatements } from "@/lib/search/searchQuickActionLicenseReinstatement";
 import { searchQuickActionLinks } from "@/lib/search/searchQuickActionLinks";
 import { searchQuickActionTasks } from "@/lib/search/searchQuickActionTasks";
@@ -32,7 +31,6 @@ import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllLicenses } from "@/lib/static/loadLicenses";
 import { loadAllPageMetadata } from "@/lib/static/loadPageMetadata";
-import { loadAllPostOnboarding } from "@/lib/static/loadPostOnboarding";
 import { loadAllQuickActionLicenseReinstatements } from "@/lib/static/loadQuickActionLicenseReinstatements";
 import { loadAllQuickActionLinks } from "@/lib/static/loadQuickActionLinks";
 import { loadAllQuickActionTasks } from "@/lib/static/loadQuickActionTasks";
@@ -46,7 +44,6 @@ import {
   LicenseEvent,
   NonEssentialQuestion,
   PageMetadata,
-  PostOnboardingFile,
   QuickActionLicenseReinstatement,
   QuickActionLink,
   QuickActionTask,
@@ -79,7 +76,6 @@ interface Props {
   roadmapDisplayContent: RoadmapDisplayContent;
   contextualInfo: ContextualInfoFile[];
   archivedContextualInfo: ContextualInfoFile[];
-  postOnboarding: PostOnboardingFile[];
   licenseEvents: LicenseEvent[];
   quickActionTasks: QuickActionTask[];
   quickActionLinks: QuickActionLink[];
@@ -112,7 +108,6 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [sidebarCardMatches, setSidebarCardMatches] = useState<Match[]>([]);
   const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>([]);
   const [archivedContextualInfoMatches, setArchivedContextualInfoMatches] = useState<Match[]>([]);
-  const [postOnboardingMatches, setPostOnboardingMatches] = useState<Match[]>([]);
   const [licenseEventMatches, setLicenseEventMatches] = useState<Match[]>([]);
   const [groupedConfigMatches, setGroupedConfigMatches] = useState<GroupedConfigMatch[]>([]);
 
@@ -166,7 +161,6 @@ const SearchContentPage = (props: Props): ReactElement => {
     setSidebarCardMatches(searchSidebarCards(sidebarCards, lowercaseTerm));
     setContextualInfoMatches(searchContextualInfo(props.contextualInfo, lowercaseTerm));
     setArchivedContextualInfoMatches(searchContextualInfo(props.archivedContextualInfo, lowercaseTerm));
-    setPostOnboardingMatches(searchPostOnboarding(props.postOnboarding, lowercaseTerm));
     setLicenseEventMatches(searchLicenseEvents(props.licenseEvents, lowercaseTerm));
     setHasSearched(true);
   };
@@ -230,7 +224,6 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const miscCollection = {
     "Contextual Information": contextualInfoMatches,
-    "Post Onboarding Content": postOnboardingMatches,
   };
 
   const quickActionCollection = {
@@ -312,7 +305,6 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       roadmapDisplayContent: loadRoadmapSideBarDisplayContent(),
       contextualInfo: loadAllContextualInfo(),
       archivedContextualInfo: loadAllArchivedContextualInfo(),
-      postOnboarding: loadAllPostOnboarding(),
       licenseEvents: loadAllLicenses(),
       quickActionTasks: loadAllQuickActionTasks(),
       quickActionLinks: loadAllQuickActionLinks(),

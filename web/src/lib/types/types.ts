@@ -47,7 +47,6 @@ export const createEmptyTaskWithoutLinks = (): TaskWithoutLinks => {
     callToActionText: "",
     summaryDescriptionMd: "",
     contentMd: "",
-    postOnboardingQuestion: "",
     required: undefined,
     agencyId: undefined,
     agencyAdditionalContext: undefined,
@@ -333,7 +332,6 @@ export interface Task {
   callToActionText: string;
   contentMd: string;
   summaryDescriptionMd: string;
-  postOnboardingQuestion?: string;
   unlockedBy: TaskLink[];
   required?: boolean;
   agencyId?: string;
@@ -428,24 +426,6 @@ export type OperateReference = {
   urlSlug: string;
   urlPath: string;
 };
-
-export interface PostOnboarding {
-  question: string;
-  contentMd: string;
-  radioYes: string;
-  radioNo: string;
-  radioNoContent: string;
-  filename: string;
-  callToActionYesText1?: string | undefined;
-  callToActionYesLink1?: string | undefined;
-  callToActionYesText2?: string | undefined;
-  callToActionYesLink2?: string | undefined;
-  callToActionYesDropdownText?: string | undefined;
-}
-
-export interface PostOnboardingFile extends PostOnboarding {
-  filename: string;
-}
 
 export interface CallToActionHyperlink {
   text: string;
@@ -542,7 +522,6 @@ export type TaskWithoutLinks = {
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;
-  postOnboardingQuestion: string;
   summaryDescriptionMd: string;
   contentMd: string;
   required?: boolean;

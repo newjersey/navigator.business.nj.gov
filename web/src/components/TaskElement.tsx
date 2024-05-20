@@ -1,17 +1,13 @@
 import { Content } from "@/components/Content";
 import { DeferredLocationQuestion } from "@/components/DeferredLocationQuestion";
 import { HorizontalLine } from "@/components/HorizontalLine";
-import { PostOnboardingRadioQuestion } from "@/components/post-onboarding/PostOnboardingRadioQuestion";
 import { TaskCtaLinks } from "@/components/TaskCtaLinks";
 import { TaskHeader } from "@/components/TaskHeader";
-import { fetchPostOnboarding } from "@/lib/async-content-fetchers/fetchPostOnboarding";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { postOnboardingCheckboxes } from "@/lib/domain-logic/postOnboardingCheckboxes";
-import { PostOnboarding, Task } from "@/lib/types/types";
-import { rswitch } from "@/lib/utils/helpers";
+import { Task } from "@/lib/types/types";
 import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared";
 import { Business } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement, ReactNode, useEffect, useState } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface Props {
   task: Task;
@@ -21,10 +17,8 @@ interface Props {
 
 export const TaskElement = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const hasPostOnboardingQuestion = !!props.task.postOnboardingQuestion;
   const shouldShowDeferredQuestion = props.task.requiresLocation;
   let hasDeferredLocationQuestion = false;
-  const [postOnboardingQuestion, setPostOnboardingQuestion] = useState<PostOnboarding | undefined>(undefined);
 
   const deferredLocationQuestion = {
     before: "",
@@ -32,47 +26,7 @@ export const TaskElement = (props: Props): ReactElement => {
     after: "",
   };
 
-  const postOnboardingQuestionContent = {
-    before: "",
-    innerContent: "",
-    after: "",
-  };
-
-  const renderPostOnboardingQuestion = (): ReactElement => {
-    if (!postOnboardingQuestion || !props.task.postOnboardingQuestion) {
-      return <></>;
-    }
-
-    return rswitch(props.task.postOnboardingQuestion, {
-      "construction-renovation": (
-        <PostOnboardingRadioQuestion
-          postOnboardingQuestion={postOnboardingQuestion}
-          onboardingKey="constructionRenovationPlan"
-          taskId={props.task.id}
-        />
-      ),
-      default: <></>,
-    });
-  };
-
-  useEffect(() => {
-    if (
-      !props.task.postOnboardingQuestion ||
-      !Object.keys(postOnboardingCheckboxes).includes(props.task.postOnboardingQuestion)
-    ) {
-      return;
-    }
-
-    fetchPostOnboarding(props.task.postOnboardingQuestion).then((postOnboarding) => {
-      setPostOnboardingQuestion(postOnboarding);
-    });
-  }, [hasPostOnboardingQuestion, props.task.id, props.task.postOnboardingQuestion]);
-
   if (props.task.contentMd) {
-    const [beforePostOnboarding, afterPostOnboarding] =
-      props.task.contentMd.split("{postOnboardingQuestion}");
-    postOnboardingQuestionContent.before = beforePostOnboarding;
-    postOnboardingQuestionContent.after = afterPostOnboarding;
     hasDeferredLocationQuestion =
       props.task.contentMd.includes("${beginLocationDependentSection}") &&
       props.task.contentMd.includes("${endLocationDependentSection}");
@@ -122,15 +76,7 @@ export const TaskElement = (props: Props): ReactElement => {
           </>
         )}
 
-        {hasPostOnboardingQuestion && (
-          <>
-            <Content>{postOnboardingQuestionContent.before}</Content>
-            {renderPostOnboardingQuestion()}
-            {postOnboardingQuestionContent.after && <Content>{postOnboardingQuestionContent.after}</Content>}
-          </>
-        )}
-
-        {!hasPostOnboardingQuestion && !hasDeferredLocationQuestion && (
+        {!hasDeferredLocationQuestion && (
           <>
             <Content>{props.task.contentMd}</Content>
           </>
@@ -153,11 +99,7 @@ export const TaskElement = (props: Props): ReactElement => {
           </div>
         )}
       </div>
-      <TaskCtaLinks
-        postOnboardingQuestion={postOnboardingQuestion}
-        task={props.task}
-        onboardingKey="constructionRenovationPlan"
-      />
+      <TaskCtaLinks task={props.task} onboardingKey="constructionRenovationPlan" />
     </div>
   );
 };

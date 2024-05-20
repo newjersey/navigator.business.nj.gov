@@ -16,7 +16,6 @@ import {
   OperateReference,
   Opportunity,
   OutageConfig,
-  PostOnboarding,
   QuickActionLicenseReinstatement,
   QuickActionLink,
   QuickActionTask,
@@ -120,7 +119,6 @@ export const generateTask = (overrides: Partial<Task>): Task => {
     callToActionText: `some-call-to-action-${randomInt()}`,
     summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
     contentMd: `some-content-md-${randomInt()}`,
-    postOnboardingQuestion: `some-post-onboarding-${randomInt()}`,
     unlockedBy: [generateTaskLink({})],
     required: Math.random() < 0.5,
     agencyId: `some-agency-${randomInt()}`,
@@ -140,7 +138,6 @@ export const generateTaskWithoutLinks = (overrides: Partial<TaskWithoutLinks>): 
     callToActionText: `some-call-to-action-${randomInt()}`,
     summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
     contentMd: `some-content-md-${randomInt()}`,
-    postOnboardingQuestion: `some-post-onboarding-${randomInt()}`,
     required: Math.random() < 0.5,
     agencyId: `some-agency-${randomInt()}`,
     agencyAdditionalContext: `some-agency-${randomInt()}`,
@@ -373,18 +370,6 @@ export const generateLicenseEvent = (overrides: Partial<LicenseEvent>): LicenseE
     callToActionLink: `cta-link-${id}`,
     callToActionText: `cta-text-${id}`,
     contentMd: `content-${id}`,
-    ...overrides,
-  };
-};
-
-export const generatePostOnboarding = (overrides: Partial<PostOnboarding>): PostOnboarding => {
-  return {
-    question: `some-question-${randomInt()}`,
-    contentMd: `some-yes-content-${randomInt()}`,
-    filename: `some-filename-${randomInt()}`,
-    radioYes: "Yes",
-    radioNo: "No",
-    radioNoContent: `some-no-content-${randomInt()}`,
     ...overrides,
   };
 };
