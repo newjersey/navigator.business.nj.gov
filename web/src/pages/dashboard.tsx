@@ -28,7 +28,7 @@ import {
   QuickActionLicenseReinstatement,
   QuickActionLink,
   QuickActionTask,
-  RoadmapDisplayContent,
+  RoadmapDisplayContent, ViolationNotice
 } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Municipality } from "@businessnjgovnavigator/shared";
@@ -37,6 +37,7 @@ import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
+import { loadAllViolations } from "@/lib/static/loadViolations";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -47,6 +48,7 @@ interface Props {
   quickActionTasks: QuickActionTask[];
   quickActionLinks: QuickActionLink[];
   quickActionLicenseReinstatements: QuickActionLicenseReinstatement[];
+  violations: ViolationNotice[];
 }
 
 const DashboardPage = (props: Props): ReactElement => {
@@ -58,6 +60,7 @@ const DashboardPage = (props: Props): ReactElement => {
   const isLoading = !business || business?.onboardingFormProgress !== "COMPLETED" || !roadmap;
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const [hasElevatorViolations, setHasElevatorViolations] = useState(false);
+
 
   useMountEffectWhenDefined(() => {
     (async (): Promise<void> => {
@@ -152,6 +155,7 @@ const DashboardPage = (props: Props): ReactElement => {
 };
 
 export const getStaticProps = (): GetStaticPropsResult<Props> => {
+
   return {
     props: {
       displayContent: loadRoadmapSideBarDisplayContent(),
@@ -162,6 +166,7 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
       quickActionTasks: loadAllQuickActionTasks(),
       quickActionLinks: loadAllQuickActionLinks(),
       quickActionLicenseReinstatements: loadAllQuickActionLicenseReinstatements(),
+      violations: loadAllViolations()
     },
   };
 };

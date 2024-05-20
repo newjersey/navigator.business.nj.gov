@@ -70,6 +70,7 @@ describe("dashboard page", () => {
           quickActionLinks={[]}
           quickActionTasks={[]}
           quickActionLicenseReinstatements={[]}
+          violations={[]}
         />
       </ThemeProvider>
     );
@@ -90,6 +91,7 @@ describe("dashboard page", () => {
             quickActionLinks={[]}
             quickActionTasks={[]}
             quickActionLicenseReinstatements={[]}
+            violations={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>

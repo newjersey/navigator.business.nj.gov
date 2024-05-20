@@ -217,6 +217,16 @@ export interface QuickActionTask extends QuickAction {
   summaryDescriptionMd: string;
 }
 
+export interface ViolationNotice {
+  name: string;
+  urlSlug: string;
+  callToActionLink: string;
+  callToActionText: string;
+  summaryDescriptionMd: string;
+  agencyId?: string;
+  contentMd: string;
+}
+
 export interface QuickActionLink extends QuickAction {
   externalRoute: string;
 }
@@ -445,6 +455,13 @@ export interface PostOnboarding {
 
 export interface PostOnboardingFile extends PostOnboarding {
   filename: string;
+}
+
+export interface ViolationFile {
+  filename: string;
+  contentMd: string;
+  ctaLink: string;
+  ctaText: string;
 }
 
 export interface CallToActionHyperlink {
