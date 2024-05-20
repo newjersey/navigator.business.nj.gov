@@ -35,9 +35,10 @@ Now that you signed your lease, it's time to obtain permits that allow you to bu
 
 Once you have all the necessary drawings, approvals, and contractors in place, you are in a good position to get your construction or renovation started!
 
-> **Once completed, you will have:**
->
-> - Site drawings
-> - Utility approvals
-> - Construction permits
-> - Contractors for build out
+:::callout{ showHeader="true" headerText="" calloutType="conditional" }
+
+- Site drawings
+- Utility approvals
+- Construction permits
+- Contractors for build out
+  :::

@@ -15,7 +15,6 @@ import {
   LicenseEvent,
   MarkdownResult,
   PageMetadata,
-  PostOnboardingFile,
   QuickActionLicenseReinstatement,
   QuickActionLink,
   QuickActionTask,
@@ -34,24 +33,6 @@ export const convertContextualInfoMd = (contentMdContents: string): ContextualIn
     isVisible: false,
     markdown: matterResult.content,
     ...contentGrayMatter,
-  };
-};
-
-export const convertPostOnboardingMd = (contentMdContents: string, filename: string): PostOnboardingFile => {
-  const matterResult = matter(contentMdContents);
-  const grayMatter = matterResult.data as PostOnboardingGrayMatter;
-  return {
-    question: grayMatter.radioQuestion,
-    contentMd: matterResult.content,
-    radioYes: grayMatter.radioYes,
-    radioNo: grayMatter.radioNo,
-    radioNoContent: grayMatter.radioNoContent,
-    callToActionYesText1: grayMatter.callToActionYesText1,
-    callToActionYesLink1: grayMatter.callToActionYesLink1,
-    callToActionYesText2: grayMatter.callToActionYesText2,
-    callToActionYesLink2: grayMatter.callToActionYesLink2,
-    callToActionYesDropdownText: grayMatter.callToActionYesDropdownText,
-    filename,
   };
 };
 
@@ -233,7 +214,6 @@ type TaskGrayMatter = {
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;
-  postOnboardingQuestion: string;
   agencyId?: string;
   agencyAdditionalContext?: string;
   divisionPhone?: string;
@@ -297,18 +277,6 @@ type WebflowLicenseGrayMatter = {
   licenseCertificationClassification: string;
   industryId?: string;
   summaryDescriptionMd: string;
-};
-
-type PostOnboardingGrayMatter = {
-  radioQuestion: string;
-  radioYes: string;
-  radioNo: string;
-  radioNoContent: string;
-  callToActionYesText1: string;
-  callToActionYesLink1: string;
-  callToActionYesText2: string;
-  callToActionYesLink2: string;
-  callToActionYesDropdownText: string;
 };
 
 type PageMetadataGrayMatter = {
