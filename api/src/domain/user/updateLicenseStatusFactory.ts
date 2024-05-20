@@ -29,6 +29,7 @@ const update = (
       "register-consumer-affairs": args.taskStatus,
       "pharmacy-license": args.taskStatus,
       "register-accounting-firm": args.taskStatus,
+      "public-accountant-license": args.taskStatus,
       "license-massage-therapy": args.taskStatus,
       "moving-company-license": args.taskStatus,
       "architect-license": args.taskStatus,

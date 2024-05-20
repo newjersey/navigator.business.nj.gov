@@ -223,63 +223,23 @@ describe("task page", () => {
     expect(screen.getByText(expectedText)).toBeInTheDocument();
   });
 
-  it("loads License task screen for apply-for-shop-license", () => {
-    renderPage(generateTask({ id: "apply-for-shop-license" }), generateBusiness({ licenseData: undefined }));
-    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
-  });
-
-  it("loads License task screen for home-health-aide-license", () => {
-    renderPage(
-      generateTask({ id: "home-health-aide-license" }),
-      generateBusiness({ licenseData: undefined })
-    );
-    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
-  });
-
-  it("loads License task screen for register-consumer-affairs", () => {
-    renderPage(
-      generateTask({ id: "register-consumer-affairs" }),
-      generateBusiness({ licenseData: undefined })
-    );
-    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
-  });
-
-  it("loads License task screen for pharmacy-license", () => {
-    renderPage(generateTask({ id: "pharmacy-license" }), generateBusiness({ licenseData: undefined }));
-    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
-  });
-
-  it("loads License task screen for register-accounting-firm", () => {
-    renderPage(
-      generateTask({ id: "register-accounting-firm" }),
-      generateBusiness({ licenseData: undefined })
-    );
-    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
-  });
-
-  it("loads License task screen for license-massage-therapy", () => {
-    renderPage(generateTask({ id: "license-massage-therapy" }), generateBusiness({ licenseData: undefined }));
-    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
-  });
-
-  it("loads License task screen for moving-company-license", () => {
-    renderPage(generateTask({ id: "moving-company-license" }), generateBusiness({ licenseData: undefined }));
-    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
-  });
-
-  it("loads License task screen for architect-license", () => {
-    renderPage(generateTask({ id: "architect-license" }), generateBusiness({ licenseData: undefined }));
-    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
-  });
-
-  it("loads License task screen for hvac-license", () => {
-    renderPage(generateTask({ id: "hvac-license" }), generateBusiness({ licenseData: undefined }));
-    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
-  });
-
-  it("loads License task screen for appraiser-license", () => {
-    renderPage(generateTask({ id: "appraiser-license" }), generateBusiness({ licenseData: undefined }));
-    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
+  describe("License task", () => {
+    it.each([
+      "apply-for-shop-license",
+      "appraiser-license",
+      "architect-license",
+      "home-health-aide-license",
+      "hvac-license",
+      "license-massage-therapy",
+      "moving-company-license",
+      "pharmacy-license",
+      "public-accountant-license",
+      "register-accounting-firm",
+      "register-consumer-affairs",
+    ])("loads License task screen for %s", (licenseId) => {
+      renderPage(generateTask({ id: licenseId }), generateBusiness({ licenseData: undefined }));
+      expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
+    });
   });
 
   it("loads construction post-onboarding question for task in template body", async () => {
