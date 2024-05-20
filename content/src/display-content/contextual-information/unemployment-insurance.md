@@ -10,12 +10,14 @@ displayname: unemployment-insurance
 ---
 Unemployment Insurance (UI) is a program that gives financial support to employees who:
 
-* Lose their jobs through no fault of their own, or
-* Who are working less than full-time because of a lack of full-time work and who meet the eligibility requirements
+* Lost their jobs or had their full-time work hours reduced through no fault of their own, and
+* [Meet the eligibility requirements](https://www.nj.gov/labor/myunemployment/before/about/who/index.shtml)
 
 As an employer, you are required to have unemployment insurance.
 
-The UI rate is calculated by your experience rate, which is similar to an insurance credit score for your business. Your UI rate is recalculated every year and is the same for all employees. [Learn how Unemployment Insurance rates are calculated.](https://www.nj.gov/labor/ea/employer-services/rate-info/)
+Your UI contribution rate is determined by your experience rate. Your experience rate is based on the number of UI benefits paid to former employees.
+
+Your UI contribution rate is redetermined every year and is the same for all employees. [Learn how Unemployment Insurance rates are calculated.](https://www.nj.gov/labor/ea/employer-services/rate-info/)
 
 If any of your current or former employees apply for UI benefits, you will be notified. 
 
