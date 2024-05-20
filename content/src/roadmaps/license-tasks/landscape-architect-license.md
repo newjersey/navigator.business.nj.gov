@@ -36,7 +36,7 @@ In addition, you will need to contact the Council of Landscape Architectural Reg
 - A criminal background check
 - List of licenses or certifications, past and present, if applicable
 - History of disciplinary actions, suspended licenses, if applicable
-- Name and address of the college or university where you earned - your undergraduate degree
+- Name and address of the college or university where you earned your undergraduate degree
 - List of your acquired experience
 - Two reference forms (if you have a CLARB Council Record)
 - Applicable fees paid
