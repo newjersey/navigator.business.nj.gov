@@ -1,9 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import * as fetchPostOnboardingModule from "@/lib/async-content-fetchers/fetchPostOnboarding";
 import { createEmptyTaskDisplayContent, Task } from "@/lib/types/types";
 import TaskPage from "@/pages/tasks/[taskUrlSlug]";
 import {
-  generatePostOnboarding,
   generateStep,
   generateTask,
   generateTaskLink,
@@ -13,11 +11,7 @@ import {
 } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { setMockRoadmapResponse, useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
-import {
-  currentBusiness,
-  setupStatefulUserDataContext,
-  WithStatefulUserData,
-} from "@/test/mock/withStatefulUserData";
+import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
   Business,
   formationTaskId,
@@ -30,7 +24,7 @@ import {
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -45,10 +39,6 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/async-content-fetchers/fetchPostOnboarding", () => ({ fetchPostOnboarding: jest.fn() }));
-
-const mockFetchPostOnboarding = (fetchPostOnboardingModule as jest.Mocked<typeof fetchPostOnboardingModule>)
-  .fetchPostOnboarding;
 
 const setLargeScreen = (value = true): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
@@ -282,79 +272,6 @@ describe("task page", () => {
     expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
-  it("loads construction post-onboarding question for task in template body", async () => {
-    mockFetchPostOnboarding.mockResolvedValue(
-      generatePostOnboarding({ filename: "construction-renovation" })
-    );
-
-    renderPage(
-      generateTask({
-        postOnboardingQuestion: "construction-renovation",
-        contentMd: "some content\n\n${postOnboardingQuestion}\n\nmore content",
-      })
-    );
-    await waitFor(() => {
-      expect(screen.getByTestId("construction-renovation")).toBeInTheDocument();
-    });
-    expect(screen.getByTestId("post-onboarding-radio-btn")).toBeInTheDocument();
-    expect(screen.getByText("some content")).toBeInTheDocument();
-    expect(screen.getByText("more content")).toBeInTheDocument();
-    expect(screen.queryByText("${postOnboardingQuestion}")).not.toBeInTheDocument();
-  });
-
-  it("loads post-onboarding question for task at the bottom if not in template body", async () => {
-    mockFetchPostOnboarding.mockResolvedValue(
-      generatePostOnboarding({ filename: "construction-renovation" })
-    );
-
-    renderPage(
-      generateTask({
-        postOnboardingQuestion: "construction-renovation",
-        contentMd: "some content\n\nmore content",
-        requiresLocation: false,
-      })
-    );
-    await waitFor(() => {
-      expect(screen.getByTestId("construction-renovation")).toBeInTheDocument();
-    });
-    expect(screen.getByTestId("post-onboarding-radio-btn")).toBeInTheDocument();
-    expect(screen.getByText("some content")).toBeInTheDocument();
-    expect(screen.getByText("more content")).toBeInTheDocument();
-  });
-
-  it("toggles radio button for post-onboarding question", async () => {
-    mockFetchPostOnboarding.mockResolvedValue(
-      generatePostOnboarding({ filename: "construction-renovation" })
-    );
-
-    const initialBusiness = generateBusiness({
-      profileData: generateProfileData({ constructionRenovationPlan: undefined }),
-    });
-    renderPage(
-      generateTask({
-        postOnboardingQuestion: "construction-renovation",
-        requiresLocation: false,
-      }),
-      initialBusiness
-    );
-
-    await waitFor(() => {
-      expect(screen.getByTestId("construction-renovation")).toBeInTheDocument();
-    });
-    expect(screen.queryByTestId("post-onboarding-false-content")).not.toBeInTheDocument();
-    expect(screen.queryByTestId("post-onboarding-true-content")).not.toBeInTheDocument();
-
-    fireEvent.click(screen.getByTestId("post-onboarding-radio-true"));
-    expect(screen.queryByTestId("post-onboarding-false-content")).not.toBeInTheDocument();
-    expect(screen.getByTestId("post-onboarding-true-content")).toBeInTheDocument();
-    expect(currentBusiness().profileData.constructionRenovationPlan).toBe(true);
-
-    fireEvent.click(screen.getByTestId("post-onboarding-radio-false"));
-    expect(screen.getByTestId("post-onboarding-false-content")).toBeInTheDocument();
-    expect(screen.queryByTestId("post-onboarding-true-content")).not.toBeInTheDocument();
-    expect(currentBusiness().profileData.constructionRenovationPlan).toBe(false);
-  });
-
   describe("next and previous task buttons", () => {
     const taskOne = generateTask({ urlSlug: "task-1", stepNumber: 1 });
     const taskTwo = generateTask({ urlSlug: "task-2", stepNumber: 2 });
@@ -569,7 +486,6 @@ describe("task page", () => {
       const task = generateTask({
         requiresLocation: true,
         contentMd: contentWithLocationSection,
-        postOnboardingQuestion: undefined,
       });
       const businessWithoutMunicipality = generateBusiness({
         profileData: generateProfileData({
@@ -586,7 +502,6 @@ describe("task page", () => {
       const task = generateTask({
         requiresLocation: true,
         contentMd: contentWithLocationSection,
-        postOnboardingQuestion: undefined,
       });
       const businessWithMunicipality = generateBusiness({
         profileData: generateProfileData({
@@ -603,7 +518,6 @@ describe("task page", () => {
       const task = generateTask({
         requiresLocation: false,
         contentMd: contentWithLocationSection,
-        postOnboardingQuestion: undefined,
       });
       renderPage(task);
       expect(screen.queryByTestId("deferred-location-task")).not.toBeInTheDocument();
@@ -614,7 +528,6 @@ describe("task page", () => {
         generateTask({
           requiresLocation: true,
           contentMd: contentWithLocationSection,
-          postOnboardingQuestion: undefined,
         })
       );
       await screen.findByTestId("deferred-location-task");

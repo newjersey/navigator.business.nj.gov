@@ -21,7 +21,6 @@ import EinInputPreview from "@/lib/cms/previews/EinInputPreview";
 import FilingsPreview from "@/lib/cms/previews/FilingsPreview";
 import LicensesPreview from "@/lib/cms/previews/LicenseEventPreview";
 import PageMetaDataPreview from "@/lib/cms/previews/PageMetadataPreview";
-import PostOnboardingPreview from "@/lib/cms/previews/PostOnboardingPreview";
 
 import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimSuccessPreview";
 import FormationSuccessPreview from "@/lib/cms/previews/FormationSuccessPagePreview";
@@ -85,7 +84,6 @@ const CMS = dynamic(
       registerPreview(CMS, "license-tasks", TaskPreview);
       registerPreview(CMS, "webflow-licenses", TaskPreview);
       registerPreview(CMS, "funding-opportunities", FundingsPreview);
-      registerPreview(CMS, "post-onboarding-content", PostOnboardingPreview);
       registerPreview(CMS, "archived-funding-opportunities", FundingsPreview);
       registerPreview(CMS, "certification-opportunities", CertificationsPreview);
       registerPreview(CMS, "archived-certification-opportunities", CertificationsPreview);
