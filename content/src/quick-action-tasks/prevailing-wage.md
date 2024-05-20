@@ -1,5 +1,5 @@
 ---
-notesMd: ""
+notesMd: This is part of a multi-step task for the Government Contracting quick action
 filename: prevailing-wage
 name: prevailing-wage
 sectorIds: []
