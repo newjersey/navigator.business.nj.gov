@@ -407,9 +407,6 @@ commands:
   deploy-accessibility-testing:
     steps:
       - configure-and-build
-      - setup_remote_docker:
-          version: edge
-          docker_layer_caching: true
       - package-webapp-docker:
           image-name: bfs-navigator-testing
       - run:
@@ -638,6 +635,7 @@ jobs:
       - set-accessibility-testing-env-vars
       - attach_workspace:
           at: .
+      - deploy
       - deploy-accessibility-testing
     environment:
       STAGE: testing
