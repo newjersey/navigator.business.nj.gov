@@ -14,6 +14,11 @@
       "id": "hotel-register",
       "questionText": "Do you plan to own a hotel, motel, or guesthouse with 10 rooms or more? ",
       "addOn": "lodging-hotel-registration"
+    },
+    {
+      "id": "carnival-ride-permitting",
+      "questionText": "Do you plan to own and/or operate a carnival or amusement ride?",
+      "addOn": "entertainment-carnival-ride-permit"
     }
   ]
 }

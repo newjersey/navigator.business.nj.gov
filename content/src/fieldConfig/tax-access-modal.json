@@ -1,6 +1,6 @@
 {
   "taxAccess": {
-    "body": "To see your tax due dates, let's get you access to the New Jersey Department of Treasury `Gov2Go|gov2go` platform. Just enter your business name and New Jersey Tax ID.",
+    "body": "To see your tax due dates, you'll first need to select your business structure.",
     "modalResponsibleOwnerFieldErrorName": "Responsible Owner Name",
     "stepTwoNextButton": "Save",
     "modalTaxIdHeader": " `New Jersey Tax ID|tax-id`",

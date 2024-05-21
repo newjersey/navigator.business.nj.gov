@@ -43,7 +43,9 @@
     }
   ],
   "name": "Entertainment",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "carnival-ride-permitting"
+  ],
   "displayname": "independent-artist",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
