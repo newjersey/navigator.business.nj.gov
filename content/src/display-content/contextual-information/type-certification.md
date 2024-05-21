@@ -1,7 +1,5 @@
 ---
-notesMd: "[Muni planning
-  doc](https://docs.google.com/document/d/1vRnhawx76vFP5iJ68QMOCCjpb8VbcpgaHBQU\
-  ozve7Q0/edit)"
+notesMd: "[Muni planning doc](https://docs.google.com/document/d/1vRnhawx76vFP5iJ68QMOCCjpb8VbcpgaHBQUozve7Q0/edit)"
 header: Type Certification
 slug: type-certification
 displayname: type-certification
