@@ -1,3 +1,22 @@
+# [2024.16.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.15.1...v2024.16.0) (2024-05-21)
+
+
+### Bug Fixes
+
+* [[#187553558](https://github.com/newjersey/navigator.business.nj.gov/issues/187553558)] Remove elevator feature flag ([53d4352](https://github.com/newjersey/navigator.business.nj.gov/commit/53d4352550892f34d152b6e56d89f08b12dac150))
+* **deps:** update dependency dayjs to v1.11.11 ([ab56f9e](https://github.com/newjersey/navigator.business.nj.gov/commit/ab56f9e58d5982b84963329c05e2cea2263e56d9))
+* **deps:** update material-ui to v5.15.16 ([f432e65](https://github.com/newjersey/navigator.business.nj.gov/commit/f432e65a4fed1aadb9f07fc9eab14d9ea1588e2e))
+
+
+### Features
+
+* [[#186897265](https://github.com/newjersey/navigator.business.nj.gov/issues/186897265)]change registered agent office from dropdown to field text ([319bdd3](https://github.com/newjersey/navigator.business.nj.gov/commit/319bdd34425713e7b83dff2a0a55efb8433c59ae))
+* [[#187166165](https://github.com/newjersey/navigator.business.nj.gov/issues/187166165)][[#187166161](https://github.com/newjersey/navigator.business.nj.gov/issues/187166161)] Cypress Out of state remote worker desktop and mobile Tests ([b5bc20f](https://github.com/newjersey/navigator.business.nj.gov/commit/b5bc20f1ee44977282599d0f30620a7972ace2eb))
+* [[#187166172](https://github.com/newjersey/navigator.business.nj.gov/issues/187166172)] [[#187166170](https://github.com/newjersey/navigator.business.nj.gov/issues/187166170)] Desktop and Mobile onboarding Cypress tests for Nexus ([a346a83](https://github.com/newjersey/navigator.business.nj.gov/commit/a346a835a0b63e0efb7b93dba200bfc4f35b73bd))
+* [[#187414490](https://github.com/newjersey/navigator.business.nj.gov/issues/187414490)] fix spacing of step component in roadmap section of dashboard ([e643bbf](https://github.com/newjersey/navigator.business.nj.gov/commit/e643bbf30f283a1932a9eeef7b758bc2ca486930))
+* [[#187500691](https://github.com/newjersey/navigator.business.nj.gov/issues/187500691)] updated file/id, homemaker-home-health-aide/health-care-services-firm-renewal ([facf25e](https://github.com/newjersey/navigator.business.nj.gov/commit/facf25e85380eaa9b2588f601f0ee9aaf52d966b))
+* [[#187553558](https://github.com/newjersey/navigator.business.nj.gov/issues/187553558)] add elevator violations card to dashboard if needed ([d97bfb4](https://github.com/newjersey/navigator.business.nj.gov/commit/d97bfb4daa4b2b0684c4d9b57c7e0a761e0e5b2a))
+
 ## [2024.15.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.15.0...v2024.15.1) (2024-05-06)
 
 
