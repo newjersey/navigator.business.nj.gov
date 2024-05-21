@@ -19,37 +19,45 @@ type Story = StoryObj<typeof SidebarCardGeneric>;
 
 export const FormationNudge: Story = {
   args: {
-    card: generateSidebarCardContent({ id: "formation-nudge" }),
-    bodyText: "Formation Card Body Text",
-    headerText: "Formation Card",
+    card: generateSidebarCardContent({
+      id: "formation-nudge",
+      contentMd: "Formation Card Body Text",
+      header: "Formation Card",
+    }),
     ctaOnClick: () => {},
   },
 };
 
 export const FundingNudge: Story = {
   args: {
-    card: generateSidebarCardContent({ id: "funding-nudge" }),
-    bodyText: "Funding Card Body Text",
-    headerText: "Funding Card",
+    card: generateSidebarCardContent({
+      id: "funding-nudge",
+      contentMd: "Funding Card Body Text",
+      header: "Funding Card",
+    }),
     ctaOnClick: () => {},
   },
 };
 
 export const NotRegistered: Story = {
   args: {
-    card: generateSidebarCardContent({ id: "not-registered" }),
-    bodyText: "Not Registered",
-    headerText: "Not Registered",
+    card: generateSidebarCardContent({
+      id: "not-registered",
+      contentMd: "Not Registered",
+      header: "Not Registered",
+    }),
     ctaOnClick: () => {},
   },
 };
 
 export const GoToProfile: Story = {
   args: {
-    card: generateSidebarCardContent({ id: "go-to-profile" }),
-    bodyText: "Card Body Text",
-    headerText: "Go to Profile",
-    preBodySpanButtonText: "Go to Your Profile",
+    card: generateSidebarCardContent({
+      id: "go-to-profile",
+      contentMd: "Card Body Text",
+      header: "Go to Profile",
+      preBodySpanButtonText: "Go to Your Profile",
+    }),
     ctaOnClick: () => {},
   },
 };

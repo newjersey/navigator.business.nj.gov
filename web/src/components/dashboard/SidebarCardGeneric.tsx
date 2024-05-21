@@ -10,9 +10,6 @@ import { ModifiedContent } from "../ModifiedContent";
 
 type Props = {
   card: SidebarCardContent;
-  bodyText: string;
-  headerText: string | undefined;
-  preBodySpanButtonText?: string;
   preBodyButtonOnClick?: () => void;
   ctaOnClick?: () => void;
 };
@@ -50,12 +47,12 @@ export const SidebarCardGeneric = (props: Props): ReactElement => {
         className={`padding-3 radius-md margin-bottom-3 ${sideBarCardGradientBackground[props.card.id]}`}
         {...{ "data-testid": props.card.id }}
       >
-        {props.headerText && (
+        {props.card.header && (
           <div className="radius-top-md">
             <div className="flex flex-justify">
               <Heading level={3} className="margin-0-override text-white">
                 <span>
-                  <ModifiedContent>{props.headerText}</ModifiedContent>
+                  <ModifiedContent>{props.card.header}</ModifiedContent>
                 </span>
               </Heading>
               {props.card.hasCloseButton && (
@@ -71,7 +68,7 @@ export const SidebarCardGeneric = (props: Props): ReactElement => {
             !props.card.header && "radius-top-md"
           }`}
         >
-          {props.preBodySpanButtonText && (
+          {props.card.preBodySpanButtonText && (
             <div style={{ float: "left" }}>
               <UnStyledButton
                 isTextBold
@@ -79,13 +76,13 @@ export const SidebarCardGeneric = (props: Props): ReactElement => {
                 dataTestid={`${props.card.id}-preBodyButtonText`}
               >
                 <span className="text-white text-underline margin-right-05">
-                  {props.preBodySpanButtonText}
+                  {props.card.preBodySpanButtonText}
                 </span>
               </UnStyledButton>
             </div>
           )}
           <Content className="text-white display-inline anchor-element-text-white-override">
-            {props.bodyText}
+            {props.card.contentMd}
           </Content>
           {props.ctaOnClick && props.card.ctaText && (
             <div className="margin-top-205 flex flex-justify-center desktop:flex-justify-end">
