@@ -14,8 +14,6 @@ callToActionLink: https://nj.gov/labor/lwdhome/apprenticeship/apprenticeshipOnbo
 ---
 ## Submit Your Apprenticeship Program Intake Form
 
-
-
 :::infoAlert 
  You will need to have an approved apprenticeship program to register as a public works contractor.
 :::
