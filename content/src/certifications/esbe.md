@@ -31,7 +31,7 @@ isSbe: false
 * Requires submission of documents to support personal net worth (PNW) and economic disadvantaged status.
 * Applicant(s) must participate in the on-site interview proceedings.
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
 
 - An Emerging Small Business Enterprise certificate
 
