@@ -57,13 +57,13 @@ export default {
     const calloutBody = calloutMatch?.groups?.body.trim() ?? "";
 
     const showHeaderMatch = calloutParameters.match(/showHeader="(?<showHeader>[^"]+)"/);
-    const showHeaderValue = Boolean(showHeaderMatch?.groups?.showHeader.trim() ?? "true");
+    const showHeaderValue = showHeaderMatch?.groups?.showHeader.trim() === "true";
 
     const headerTextMatch = calloutParameters.match(/headerText="(?<headerText>[^"]+)"/);
     const headerTextValue = headerTextMatch?.groups?.headerText.trim() ?? "";
 
     const showIconMatch = calloutParameters.match(/showIcon="(?<showIcon>[^"]+)"/);
-    const showIconValue = Boolean(showIconMatch?.groups?.showIcon.trim() ?? "false");
+    const showIconValue = showIconMatch?.groups?.showIcon.trim() === "true";
 
     const calloutTypeMatch = calloutParameters.match(/calloutType="(?<calloutType>[^"]+)"/);
     const calloutTypeValue = calloutTypeMatch?.groups?.calloutType.trim() ?? "conditional";
