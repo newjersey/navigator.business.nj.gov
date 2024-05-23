@@ -46,6 +46,6 @@ A confirmation email.
 
 :::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
 
-On the [Vendor](https://www.nj.gov/treasury/purchase/vendor.shtml) page, click on the Vendors Quick Reference Guides tab. Next,  click on the Registration Guide for more information about registering.
+On the [Vendor](https://www.nj.gov/treasury/purchase/vendor.shtml) page, click on the Vendors Quick Reference Guides tab. Next, click on the Registration Guide for more information about registering.
 
 :::
