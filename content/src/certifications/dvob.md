@@ -29,6 +29,6 @@ A DVOB must either:
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A Disabled Veteran-Owned Business certificate
+A Disabled Veteran-Owned Business certificate.
 
 :::
