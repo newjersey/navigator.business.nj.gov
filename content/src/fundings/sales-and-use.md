@@ -38,6 +38,6 @@ publishStageArchive: ""
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-You can have the ability to purchase machinery, equipment, furniture, fixtures, and building materials without New Jersey sales tax.
+Businesses have the ability to purchase machinery, equipment, furniture, fixtures, and building materials without New Jersey sales tax.
 
 :::
