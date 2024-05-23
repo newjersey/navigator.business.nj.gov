@@ -47,7 +47,7 @@ publishStageArchive: Do Not Publish
 ---
 ## Eligibility
 
-* Any business can be part of the application, though funding is tied to individuals becoming future employees, not businesses
+Any business can be part of the application, though funding is tied to individuals becoming future employees, not businesses.
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
