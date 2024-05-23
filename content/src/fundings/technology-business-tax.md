@@ -46,6 +46,6 @@ Technology or life sciences companies may apply if they have up to 225 employees
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-Business have the ability to sell NOL and unused R&D tax credits for up to 80% of their value up to a total amount of $20M.
+Business can sell NOL and unused R&D tax credits for up to 80% of their value up to a total amount of $20M.
 
 :::
