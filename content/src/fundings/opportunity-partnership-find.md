@@ -51,6 +51,6 @@ publishStageArchive: Do Not Publish
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-Company-tailored training to ensure an appropriate pipeline of employees
+You can receive company-tailored training to ensure an appropriate pipeline of employees.
 
 :::
