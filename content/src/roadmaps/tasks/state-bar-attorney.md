@@ -29,6 +29,6 @@ callToActionText: Apply to Your State Bar Association
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- The State Bar will notify you via email with instructions on when to attend the ceremony to swear the Oath of Admission and sign the attorney’s roll.
+The State Bar will notify you via email with instructions on when to attend the ceremony to swear the Oath of Admission and sign the attorney’s roll.
 
 :::
