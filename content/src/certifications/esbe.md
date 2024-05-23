@@ -33,6 +33,6 @@ isSbe: false
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- An Emerging Small Business Enterprise certificate
+An Emerging Small Business Enterprise certificate.
 
 :::
