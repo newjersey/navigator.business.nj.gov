@@ -8,6 +8,7 @@ name: Ensure You, Your Employees, or Subcontractors are Licensed
 id: trade-license
 callToActionLink: "https://newjersey.mylicense.com/verification/Search.aspx?facility=N "
 callToActionText: "Verify My, My Employees’, or Subcontractors’ Trade Licenses "
+industryId: home-contractor
 agencyId: nj-consumer-affairs
 ---
 ## License/Permit by Role
