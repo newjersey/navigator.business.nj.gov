@@ -21,8 +21,6 @@ callToActionText: ""
 * **Certificate of Occupancy or Approval**: If you've completed site construction or renovations, obtain a Certificate of Occupancy or Approval from your local building or construction department
 * **Non-Life Hazard Use registration**: Contact your `Local Enforcing Agency|lea` to register your business as a Non-Life Hazard Use, if required by your town's fire safety regulations
 
-
-
 :::callout{ showHeader="true" headerText="What if I don't get my Certificate of Occupancy or Approval?" showIcon="false" calloutType="conditional" }
 
 You will not be able to submit an application for a cosmetology shop license.
