@@ -40,6 +40,6 @@ Businesses and nonprofits must commit to create or retain 1 new full-time job fo
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-Loan participation of up to $2 million or line of credit guarantees up to $750,000.
+Businesses can receive loan participation of up to $2 million or line of credit guarantees up to $750,000.
 
 :::
