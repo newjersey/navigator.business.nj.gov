@@ -21,8 +21,6 @@ isSbe: true
 
 ## Application Needs
 
-
-
 :::infoAlert 
  This application needs to be notarized.
 :::
@@ -32,8 +30,6 @@ isSbe: true
 * An identified `NAICS|naics` code: ${naicsCode}
 * Information on your business's gross revenue for the last 3 completed tax years
 * Business formation date (for LLC, C corps, LPs and LLPs) You can find this date on your `Certificate of Formation|certificate-formation` 
-
-
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
