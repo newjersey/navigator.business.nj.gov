@@ -49,7 +49,6 @@ import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AddressContext } from "@/contexts/addressContext";
 import { getMergedConfig } from "@/contexts/configContext";
-import { FormContextType } from "@/contexts/formContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -63,14 +62,7 @@ import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import {
-  createProfileFieldErrorMap,
-  OnboardingStatus,
-  ProfileFields,
-  profileTabs,
-  ProfileTabs,
-  ReducedFieldStates,
-} from "@/lib/types/types";
+import { createProfileFieldErrorMap, OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getFlow, useMountEffectWhenDefined, useScrollToPathAnchor } from "@/lib/utils/helpers";
 import {
@@ -127,8 +119,8 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const [addressData, setAddressData] = useState<Address>(createEmptyAddress());
   const [interactedFields, setInteractedFields] = useState<FieldsForAddressErrorHandling[]>([]);
-  const [setFormContextState] =
-    useState<FormContextType<ReducedFieldStates<ProfileFields, unknown>, unknown>>();
+  // const [whateverThisIs, setFormContextState] =
+  //   useState<FormContextType<ReducedFieldStates<ProfileFields, unknown>, unknown>>();
 
   const config = getMergedConfig();
   const userDataFromHook = useUserData();
@@ -893,7 +885,7 @@ const ProfilePage = (props: Props): ReactElement => {
               },
               setAddressData,
               setFieldsInteracted,
-              setFormContextState,
+              // setFormContextState,
             }}
           >
             <NextSeo title={getNextSeoTitle(config.pagesMetadata.profileTitle)} />

@@ -12,8 +12,6 @@ interface Props {
 export const ProfileErrorAlert = (props: Props): ReactElement | null => {
   const { Config } = useConfig();
 
-  console.log(JSON.stringify(props.fieldErrors));
-
   const displayProfileErrorAlert = (): boolean => props.fieldErrors.length > 0;
 
   const getLabel = (field: string): string => {

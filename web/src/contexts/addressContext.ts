@@ -16,9 +16,9 @@ interface AddressContextType {
     fields: FieldsForAddressErrorHandling[],
     config?: { setToUninteracted: boolean }
   ) => void;
-  setFormContextState: (
-    formContextState: FormContextType<ReducedFieldStates<ProfileFields, unknown>, unknown>
-  ) => void;
+  // setFormContextState: (
+  //   formContextState: FormContextType<ReducedFieldStates<ProfileFields, unknown>, unknown>
+  // ) => void;
 }
 
 export const AddressContext = createContext<AddressContextType>({
@@ -29,5 +29,5 @@ export const AddressContext = createContext<AddressContextType>({
   },
   setAddressData: () => {},
   setFieldsInteracted: () => {},
-  setFormContextState: () => {},
+  // setFormContextState: () => {},
 });

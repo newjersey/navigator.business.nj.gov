@@ -133,8 +133,6 @@ export const profileFields: ProfileFields[] = [
 export const createProfileFieldErrorMap = <FieldError>(): ReducedFieldStates<ProfileFields, FieldError> =>
   createReducedFieldStates<(typeof profileFields)[number], FieldError>(profileFields);
 
-console.log(JSON.stringify(createProfileFieldErrorMap));
-
 export type ProfileFieldErrorMap = ReducedFieldStates<ProfileFields>;
 
 export type RoadmapDisplayContent = {

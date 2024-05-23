@@ -61,7 +61,7 @@ export const useAddressErrors = (): AddressErrorsResponse => {
   };
 
   const getFieldErrorLabel = (field: AddressFields): string => {
-    /* typescript-eslint/no-explicit-any */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (Config.profileDefaults.fields as any)[field].error;
   };
 

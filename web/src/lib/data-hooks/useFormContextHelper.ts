@@ -121,7 +121,7 @@ export const useFormContextHelper = <
         onChangeFunc && onChangeFunc(valid, getErrors(), submitted || stagingTab !== undefined);
       }
 
-      if (!!stillNeedsUpdates) {
+      if (stillNeedsUpdates) {
         if (valid) {
           if (submitted) {
             debug && console.log("runs submit");
