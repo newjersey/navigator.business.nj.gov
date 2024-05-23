@@ -33,7 +33,9 @@ publishStageArchive: ""
 ---
 ## Eligibility
 
-* Employers with 100 or fewer employees registered with the State of NJ and who will provide substantive on-the-job training at their location or utilize approved virtual training that results in skill badges or industry-recognized credentials
+* Have 100 or fewer employees
+* Be registered with the State of NJ
+* Plan to provide substantive on-the-job training at your location or use approved virtual training that results in skill badges or industry-recognized credentials
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
