@@ -1,7 +1,15 @@
 ---
-notesMd: "[Muni planning
-  doc](https://docs.google.com/document/d/1Kb5h1xeshi-Vm_KjjHbRXo-ji-3DejgKUG4U\
-  1shk2QQ/edit)"
+notesMd: >-
+  [Muni planning
+  doc](https://docs.google.com/document/d/1Kb5h1xeshi-Vm_KjjHbRXo-ji-3DejgKUG4U1shk2QQ/edit)
+
+
+
+
+  Will be displayed with a non-essential question in the "Entertainment" industry.
+
+
+  Question: **Do you plan to own and/or operate a traveling carnival or circus?**
 id: carnival-fire-registration
 filename: carnival-fire-registration
 displayname: carnival-fire-registration
