@@ -33,8 +33,8 @@ You will then work with a representative from the United States Department of La
 * Primary contact information
 * List of occupations to be developed in the program
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- An email invite to schedule a virtual meeting for a needs assessment with the Office of Apprenticeship
+An email invite to schedule a virtual meeting for a needs assessment with the Office of Apprenticeship.
 
 :::
