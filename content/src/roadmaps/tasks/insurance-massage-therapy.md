@@ -14,7 +14,7 @@ id: insurance-massage-therapy
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A Certificate of Insurance
+A Certificate of Insurance.
 
 :::
 
