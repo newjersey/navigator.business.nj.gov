@@ -37,6 +37,6 @@ isSbe: false
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-* A Minority/Women-Owned Business Enterprise certificate
+A Minority/Women-Owned Business Enterprise certificate.
 
 :::
