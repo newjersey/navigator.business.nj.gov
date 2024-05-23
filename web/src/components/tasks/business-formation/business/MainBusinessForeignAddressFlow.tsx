@@ -1,6 +1,7 @@
 import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { MainBusinessIntl } from "@/components/tasks/business-formation/business/MainBusinessAddressIntl";
+import { MainBusinessAddressIntl } from "@/components/tasks/business-formation/business/MainBusinessAddressIntl";
+import { MainBusinessAddressUs } from "@/components/tasks/business-formation/business/MainBusinessAddressUs";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -12,7 +13,6 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { ReactElement, useContext } from "react";
-import { MainBusinessUs } from "./MainBusinessAddressUs";
 
 export const MainBusinessForeignAddressFlow = (): ReactElement => {
   type FlowBusinessLocationType = Exclude<FormationBusinessLocationType, "NJ">;
@@ -84,7 +84,11 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
           </>
         </RadioGroup>
       </FormControl>
-      {state.formationFormData.businessLocationType === "US" ? <MainBusinessUs /> : <MainBusinessIntl />}
+      {state.formationFormData.businessLocationType === "US" ? (
+        <MainBusinessAddressUs />
+      ) : (
+        <MainBusinessAddressIntl />
+      )}
     </>
   );
 };
