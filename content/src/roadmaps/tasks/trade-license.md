@@ -10,11 +10,11 @@ callToActionLink: "https://newjersey.mylicense.com/verification/Search.aspx?faci
 callToActionText: "Verify My, My Employees’, or Subcontractors’ Trade Licenses "
 agencyId: nj-consumer-affairs
 ---
+## License/Permit by Role
+
 :::infoAlert 
  Be sure to check the specific requirements for each type of work you, your employees, or subcontractors do.
 :::
-
-## License/Permit by Role
 
 * [Electrical contractor](https://www.njconsumeraffairs.gov/elec/Pages/default.aspx) 
 * [Elevator, escalator, and moving walkway mechanic](https://www.njconsumeraffairs.gov/esc/Pages/default.aspx) 
