@@ -13,9 +13,8 @@ id: board-inspection
 callToActionLink: ""
 callToActionText: ""
 ---
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
-
-- A cosmetology shop license
+A cosmetology shop license.
 
 :::
