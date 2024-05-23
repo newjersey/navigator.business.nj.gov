@@ -25,26 +25,25 @@ summaryDescriptionMd: >-
 callToActionText: Complete My PW CR Application
 callToActionLink: https://www.njportal.com/lwd/pwcr
 ---
-
 ### Registration Requirements
 
-- `EIN|ein`
-- `NAICS code|naics`
-- `Business structure|business-structure-learn-more`
-- `Workers’ compensation insurance|workers-comp`
-- Responsible owners’ information, such as Social Security number (SSN)
-- Disclosure of responsible owner’s `interest|interest` in another firm that has applied for or obtained a `prevailing wage|prevailing-wage` CR certificate or has bid on or performed work on a project requiring payment of the prevailing wage
-- List of any other business interest
-- Registered apprenticeship certification statement
-- List any notice of violations received from NJDOL, USDOL, or any other state or federal labor law within the last five years
-- List of all `prevailing wage|prevailing-wage` `craft's|craft`
-- Applicable fees paid
-- `Registered agent|registered-agent` , if applicable
-- Permit to maintain payroll records outside of New Jersey, if applicable
+*  `EIN|ein` 
+*  `NAICS code|naics` 
+*  `Business structure|business-structure-learn-more` 
+*  `Workers’ compensation insurance|workers-comp` 
+* Responsible owners’ information, such as Social Security number (SSN)
+* Disclosure of responsible owner’s `interest|interest` in another firm that has applied for or obtained a `prevailing wage|prevailing-wage` CR certificate or has bid on or performed work on a project requiring payment of the prevailing wage
+* List of any other business interest
+* Registered apprenticeship certification statement
+* List any notice of violations received from NJDOL, USDOL, or any other state or federal labor law within the last five years
+* List of all `prevailing wage|prevailing-wage` `craft's|craft` 
+* Applicable fees paid
+*  `Registered agent|registered-agent` , if applicable
+* Permit to maintain payroll records outside of New Jersey, if applicable
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A PW CR certificate indicating compliance with PW CRA
+A PW CR certificate indicating compliance with PW CRA.
 
 :::
 
