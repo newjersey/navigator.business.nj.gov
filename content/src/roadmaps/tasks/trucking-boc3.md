@@ -1,7 +1,5 @@
 ---
 summaryDescriptionMd: >-
-  
-
   :::infoAlert 
    You need a process agent in each state where you do business.
   :::
