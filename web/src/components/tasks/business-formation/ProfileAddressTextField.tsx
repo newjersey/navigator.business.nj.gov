@@ -2,8 +2,10 @@ import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTex
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { AddressContext } from "@/contexts/addressContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
-import { AddressTextField} from "@businessnjgovnavigator/shared";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { AddressTextField } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
 export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName" | "error" | "inputWidth"> {
@@ -16,6 +18,7 @@ export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"
 export const ProfileAddressTextField = ({ className, ...props }: Props): ReactElement => {
   const { state, setAddressData, setFieldsInteracted } = useContext(AddressContext);
   const { doesFieldHaveError } = useAddressErrors();
+  const { setIsValid } = useFormContextFieldHelpers(props.fieldName, ProfileFormContext);
 
   const handleChange = (value: string): void => {
     props.handleChange && props.handleChange(value);
@@ -23,6 +26,7 @@ export const ProfileAddressTextField = ({ className, ...props }: Props): ReactEl
   };
 
   const onValidation = (): void => {
+    setIsValid(!doesFieldHaveError(props.fieldName));
     setFieldsInteracted([props.fieldName]);
   };
 

@@ -19,18 +19,6 @@ export const useAddressErrors = (): AddressErrorsResponse => {
     return validatedFieldsForAddress(state.addressData);
   }, [state.addressData]);
 
-  // const errorStates: Record<FieldsForAddressErrorHandling, AddressFieldErrorState> = useMemo(() => {
-  //   return validatedFields.reduce((acc, field) => {
-  //     return {
-  //       ...acc,
-  //       [field]: getErrorStateForAddressField({
-  //         field,
-  //         addressData: state.addressData,
-  //       }),
-  //     };
-  //   }, {} as Record<FieldsForAddressErrorHandling, AddressFieldErrorState>);
-  // }, [validatedFields, state.addressData]);
-
   const doesFieldHaveError = (field: FieldsForAddressErrorHandling): boolean => {
     if (!validatedFields.includes(field)) {
       return false;
@@ -41,13 +29,11 @@ export const useAddressErrors = (): AddressErrorsResponse => {
       addressData: state.addressData,
     });
 
-    const interactedFields = state.interactedFields.includes(field);
-    console.log(field, "-", interactedFields);
-
     state.formContextState.fieldStates[field].invalid =
       addressFieldErrorState.hasError && state.interactedFields.includes(field);
-    state.formContextState.fieldStates[field].updated = interactedFields;
-    return addressFieldErrorState.hasError && state.interactedFields.includes(field);
+
+    state.formContextState.fieldStates[field].updated = true;
+    return addressFieldErrorState.hasError;
   };
 
   const doSomeFieldsHaveError = (fields: AddressFields[]): boolean => {
@@ -56,6 +42,7 @@ export const useAddressErrors = (): AddressErrorsResponse => {
         return validatedFields.includes(field);
       })
       .some((field) => {
+        if (field === "addressState") return false;
         return doesFieldHaveError(field);
       });
   };

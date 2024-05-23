@@ -55,6 +55,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
   };
 
   const setIsValid = (isValid: boolean): void => {
+    console.log({ isValid });
     debug && console.log("custom validation");
     reducer({
       type: FieldStateActionKind.VALIDATION,

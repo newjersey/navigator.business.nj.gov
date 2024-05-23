@@ -243,12 +243,11 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   FormFuncWrapper(
+    // Submit
     () => {
       if (!updateQueue || !business) {
         return;
       }
-
-      console.log("here I am in the submit");
 
       const dateOfFormationHasBeenDeleted =
         business.profileData.dateOfFormation !== profileData.dateOfFormation &&
@@ -287,8 +286,6 @@ const ProfilePage = (props: Props): ReactElement => {
       updateQueue.queueProfileData(profileData);
 
       if (businessPersona === "OWNING") {
-        //check for errors
-
         updateQueue.queueFormationFormData({
           ...formationFormData,
           addressLine1: addressData.addressLine1,
@@ -312,7 +309,9 @@ const ProfilePage = (props: Props): ReactElement => {
           });
       })();
     },
+    // On Change
     (isValid, _errors, pageChange) => {
+      console.log("in the onchange");
       !isValid && pageChange && setAlert("ERROR");
     }
   );

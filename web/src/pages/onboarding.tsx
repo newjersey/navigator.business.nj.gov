@@ -263,6 +263,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     newProfileData: ProfileData,
     updateQueue: UpdateQueue | undefined
   ): Promise<void> => {
+    console.log("completeOnboarding");
     if (!updateQueue) return;
 
     setRegistrationDimension("Onboarded Guest");
@@ -314,6 +315,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   FormFuncWrapper(
     async (): Promise<void> => {
+      console.log("FormFuncWrapper");
       scrollToTop();
       if (!updateQueue) return;
       let newProfileData = profileData;
