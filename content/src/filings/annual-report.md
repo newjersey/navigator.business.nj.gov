@@ -20,13 +20,9 @@ callToActionText: File Your Annual Report
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-
-
 * Confirmation of submission of your annual report
 
 :::
-
-
 
 :::callout{ showHeader="true" headerText="What if do not complete my report?" showIcon="false" calloutType="conditional" }
 
