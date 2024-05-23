@@ -46,7 +46,7 @@ publishStageArchive: ""
 ---
 ## Eligibility
 
-All industries are welcome to explore this resource, but it may be particularly useful for technology, life sciences, and other high-wage, high-growth innovation-focused sectors
+All industries are welcome to explore this resource, but it may be particularly useful for technology, life sciences, and other high-wage, high-growth innovation-focused sectors.
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
