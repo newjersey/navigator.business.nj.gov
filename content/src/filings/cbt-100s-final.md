@@ -2,6 +2,7 @@
 urlSlug: cbt-100s-final
 name: Corporation Business Tax
 extension: false
+summaryDescriptionMd: \
 treasuryLink: https://www.nj.gov/treasury/taxation/cbt/index.shtml
 taxRates: >
   If your `net income|tax-net-income` is:
@@ -31,10 +32,9 @@ callToActionLink: https://www.njportal.com/taxation/CBT
 callToActionText: File and Pay
 ---
 
-Corporate Business Tax is imposed on the profits of a corporation. The taxes are paid on a company's taxable income, which is the revenue minus the cost of any goods sold and operating costs like general and administrative, marketing, and selling expenses, research and development, depreciation, etc.
 
-:::infoAlert
-
-This form can be used as an amendment when the “amended” box at the top of the form is marked.
-
+:::infoAlert 
+ This form can be used as an amendment when the “amended” box at the top of the form is marked.
 :::
+
+Corporate Business Tax is imposed on the profits of a corporation. The taxes are paid on a company's taxable income, which is the revenue minus the cost of any goods sold and operating costs like general and administrative, marketing, and selling expenses, research and development, depreciation, etc.
