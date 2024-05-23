@@ -4,6 +4,10 @@ name: Work First NJ (TANF + SNAP) Employment and Training
 displayName: work-first-training
 urlSlug: work-first-nj
 id: work-first-nj-tanf-snap-employment-and-training
+sidebarCardBodyText: Work First NJ provides skills, training, and education
+  opportunities to SNAP and TANF recipients. The focus of this effort is to
+  provide skills-based programs with a job-driven approach to prepare recipients
+  of SNAP or TANF resources to fill areas of demand for a trained workforce.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: >-
@@ -32,15 +36,11 @@ county:
   - All
 sector: []
 publishStageArchive: ""
-sidebarCardBodyText: Work First NJ provides skills, training, and education
-  opportunities to SNAP and TANF recipients. The focus of this effort is to
-  provide skills-based programs with a job-driven approach to prepare recipients
-  of SNAP or TANF resources to fill areas of demand for a trained workforce.
 ---
 
 ## Eligibility
 
-- The business must be registered in New Jersey
+The business must be registered in New Jersey.
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
