@@ -4,6 +4,8 @@ name: "Upskill: Free Incumbent Worker Training Programs"
 displayName: upskill-free-incumbent
 urlSlug: upskill-free-incumbent
 id: upskill-free-incumbent-worker-training-programs
+sidebarCardBodyText: Upskill offers grants to New Jersey businesses of any size
+  grants to improve existing employees’ skills.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: Upskill offers grants to New Jersey businesses of any size
@@ -46,7 +48,7 @@ descriptionMd: Upskill offers grants to New Jersey businesses of any size grants
 
 ## Eligibility
 
-- Businesses with existing employees who can be trained in a new skill for current and future workforce demands
+Any business can apply if it has existing employees who can be trained in a new skill for current and future workforce demands.
 
 > ### Benefits
 >
