@@ -1,7 +1,5 @@
 ---
 summaryDescriptionMd: >-
-  
-
   :::infoAlert 
    If you registered online, you will receive an email confirmation where you can download your BRC. It may take up to 72 hours before you can download your BRC on a public site. Your PIN may take longer to receive because it is sent through the mail.
   :::
