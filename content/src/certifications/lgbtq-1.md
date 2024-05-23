@@ -38,6 +38,6 @@ isSbe: false
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A LGBTQ+ certificate
+A LGBTQ+ certificate.
 
 :::
