@@ -29,7 +29,7 @@ webflowId: 648b6ec542e491936c7da99e
 
 :::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
 
-You must also complete, sign, and notarize an [Employee Statement Form](https
+You must also complete, sign, and notarize an [Employee Statement Form](https://www.nj.gov/njsp/private-detective/pdf/pd-agency-statement.pdf) for each of your employees. The form must be kept with your business records.
 
 :::
 
