@@ -15,7 +15,7 @@ summaryDescriptionMd: >
   rebates, you must obtain a business assistance tax clearance certificate from
   the Division of Taxation. A tax clearance certificate shows that your business
   is in good standing with your taxes.
-callToActionText: Request my Tax Clearance Certificate
+callToActionText: Request My Tax Clearance Certificate
 callToActionLink: https://www.nj.gov/treasury/contract_compliance/documents/pdf/PBS-Introduction-Page.pdf
 ---
 You can request your tax clearance certificate through the [Premier Business Services Portal](https://www.nj.gov/treasury/contract_compliance/documents/pdf/PBS-Introduction-Page.pdf). There is no fee for requesting a certificate through the portal. You are usually only permitted to apply with a [paper application](https://www.nj.gov/treasury/taxation/pdf/busasstTaxClear.pdf) if your business is one of the following: trusts, banking institutions, insurance companies, individuals, and local governments such as school districts and counties. Most others are required to apply online.
