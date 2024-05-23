@@ -1,6 +1,7 @@
 ---
-displayname: food-safety-course
+id: food-safety-course
 filename: food-safety-course
+displayname: food-safety-course
 urlSlug: food-safety-course
 name: Complete Food Safety Course
 webflowName: "Restaurant: Food Safety Course"
@@ -13,13 +14,11 @@ summaryDescriptionMd: >
   on the State of New Jersey's website.
 industryId:
   - restaurant
-id: food-safety-course
 webflowId: 648b6ec5ff1d0d38af2f5a2d
 licenseCertificationClassification: ""
 ---
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
-
-- A food safety management certificate
+A food safety management certificate.
 
 :::
