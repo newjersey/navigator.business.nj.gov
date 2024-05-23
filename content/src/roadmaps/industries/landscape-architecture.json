@@ -63,9 +63,10 @@
     "canBeHomeBased": true,
     "canBeReseller": false
   },
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "landscape architect, engineer, consulting, landscape architectural services",
   "id": "landscape-architecture",
+  "licenseType": "Landscape Architecture",
   "description": "Plans, designs, and oversees the construction of parks, gardens, playgrounds, and residential areas",
   "webflowId": "656a13628934eb2330f44bcb"
 }
