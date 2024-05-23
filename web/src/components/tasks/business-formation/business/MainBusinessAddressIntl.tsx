@@ -9,7 +9,7 @@ import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { formatIntlPostalCode } from "@/lib/domain-logic/formatIntlPostalCode";
 import { ReactElement, useContext } from "react";
 
-export const MainBusinessIntl = (): ReactElement => {
+export const MainBusinessAddressIntl = (): ReactElement => {
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useFormationErrors();
