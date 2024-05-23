@@ -33,6 +33,6 @@ isSbe: true
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A Small Business Enterprise certificate
+A Small Business Enterprise certificate.
 
 :::
