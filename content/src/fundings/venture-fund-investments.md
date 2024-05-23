@@ -36,7 +36,7 @@ publishStageArchive: ""
 
 ## Eligibility
 
-- Venture funds that are actively investing in New Jersey’s innovative industries
+Venture funds that are actively investing in New Jersey’s innovative industries may apply.
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
