@@ -4,6 +4,13 @@ name: Child Care Facilities Improvement Program
 displayName: child-care-facilities
 urlSlug: childcare-improvement
 id: childcare-improvement
+sidebarCardBodyText: >
+  The Child Care Facilities Improvement Program provides grants to New Jersey
+  child care providers for facilities improvements that will contribute to high
+  quality early childhood learning environments.
+
+
+  The Child Care Facilities Improvement Program provides grants for facilities improvement to New Jersey child care providers that provide high quality early childhood learning environments.
 openDate: 11/15/2022
 dueDate: ""
 summaryDescriptionMd: >-
@@ -12,7 +19,7 @@ summaryDescriptionMd: >-
   childhood learning environments.
 
 
-  Applicants are limited to one application per DCF-licensed child care center location, and two applications per `Entity ID Number (EIN)|ein`.
+  Applicants are limited to one application per DCF-licensed child care center location, and two applications per `Entity ID Number (EIN)|ein` .
 callToActionLink: https://www.njeda.com/child-care-improvement-program/
 callToActionText: Learn more
 fundingType: grant
@@ -32,13 +39,6 @@ county:
 sector:
   - educational-services
 publishStageArchive: null
-sidebarCardBodyText: >
-  The Child Care Facilities Improvement Program provides grants to New Jersey
-  child care providers for facilities improvements that will contribute to high
-  quality early childhood learning environments.
-
-
-  The Child Care Facilities Improvement Program provides grants for facilities improvement to New Jersey child care providers that provide high quality early childhood learning environments.
 ---
 
 ## Eligibility
