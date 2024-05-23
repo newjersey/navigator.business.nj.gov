@@ -35,6 +35,7 @@ const update = (
       "architect-license": args.taskStatus,
       "hvac-license": args.taskStatus,
       "appraiser-license": args.taskStatus,
+      "landscape-architect-license": args.taskStatus,
     },
     licenseData: {
       nameAndAddress: args.nameAndAddress,
