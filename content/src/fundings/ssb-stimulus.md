@@ -4,6 +4,10 @@ name: School and Small Business Energy Efficiency Stimulus Program
 displayName: SSB-Stimulus
 urlSlug: SSB-Stimulus
 id: SSB-Stimulus
+sidebarCardBodyText: The School and Small Business Energy Efficiency Stimulus
+  Program provides grants (via reimbursement) to small businesses and boards of
+  education to improve air quality and energy efficiency in school districts
+  under the jurisdiction of a board of education and small businesses.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: >-
@@ -40,15 +44,14 @@ sector:
   - clean-energy
   - construction
 publishStageArchive: ""
-sidebarCardBodyText: The School and Small Business Energy Efficiency Stimulus Program
-  provides grants (via reimbursement) to small businesses and boards of
-  education to improve air quality and energy efficiency in school districts
-  under the jurisdiction of a board of education and small businesses.
 ---
 
 ## Eligibility
 
-- Any small New Jersey business with 100 or fewer employees, a gross revenue below $12M, and with a [Minority or Women-owned Business Enterprise Certification](https://business.nj.gov/pages/mwbe)
+Any small New Jersey business with the following can apply:
+* 100 or fewer employees
+* A gross revenue below $12M
+* A [Minority or Women-owned Business Enterprise Certification](https://business.nj.gov/pages/mwbe)
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
