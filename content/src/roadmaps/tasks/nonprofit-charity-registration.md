@@ -1,7 +1,5 @@
 ---
 summaryDescriptionMd: >-
-  
-
   :::infoAlert 
    You have 30 days to register as a charity once your business receives $10,000 in public funding.
   :::
