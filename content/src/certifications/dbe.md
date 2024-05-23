@@ -38,6 +38,6 @@ A DBE must meet all of the following:
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A Disadvantaged Business Enterprise certificate
+A Disadvantaged Business Enterprise certificate.
 
 :::
