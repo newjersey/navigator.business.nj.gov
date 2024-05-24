@@ -3800,6 +3800,7 @@ collections:
             fields:
               - { label: Hero - First Line, name: heroCallOutFirstLineText, widget: string }
               - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
+              - { label: Tile Title Text, name: tileTitleText, widget: string }
               - { label: Section 2 - Header, name: section2HeaderText, widget: string }
               - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: text }
               - { label: Section 2 - Call to Action, name: section2CallToActionText, widget: string }

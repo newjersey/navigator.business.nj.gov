@@ -501,6 +501,90 @@ export default {
         },
       },
     },
+    landing_page_get_my_registration_guide_tile: {
+      click: {
+        go_to_onboarding: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "landing_page_get_my_registration_guide_tile",
+            legacy_event_label: "go_to_onboarding",
+            click_text: "get_my_registration_guide_tile",
+            clicked_to: "/onboarding",
+          });
+        },
+      },
+    },
+    landing_page_file_and_pay_my_taxes_tile: {
+      click: {
+        go_to_onboarding: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "landing_page_file_and_pay_my_taxes_tile",
+            legacy_event_label: "go_to_onboarding",
+            click_text: "file_and_pay_my_taxes_tile",
+            clicked_to: "/onboarding",
+          });
+        },
+      },
+    },
+    landing_page_im_an_out_of_business_tile: {
+      click: {
+        go_to_onboarding: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "landing_page_im_an_out_of_business_tile",
+            legacy_event_label: "go_to_onboarding",
+            click_text: "im_an_out_of_business_tile",
+            clicked_to: "/onboarding",
+          });
+        },
+      },
+    },
+    landing_page_find_funding_for_my_business_tile: {
+      click: {
+        go_to_onboarding: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "landing_page_find_funding_for_my_business_tile",
+            legacy_event_label: "go_to_onboarding",
+            click_text: "find_funding_for_my_business_tile",
+            clicked_to: "/onboarding",
+          });
+        },
+      },
+    },
+    landing_page_im_starting_a_nj_business_tile: {
+      click: {
+        go_to_onboarding: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "landing_page_im_starting_a_nj_business_tile",
+            legacy_event_label: "go_to_onboarding",
+            click_text: "im_starting_a_nj_business_tile",
+            clicked_to: "/onboarding",
+          });
+        },
+      },
+    },
+    landing_page_im_running_a_nj_business_tile: {
+      click: {
+        go_to_onboarding: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "landing_page_im_running_a_nj_business_tile",
+            legacy_event_label: "go_to_onboarding",
+            click_text: "im_running_a_nj_business_tile",
+            clicked_to: "/onboarding",
+          });
+        },
+      },
+    },
     landing_page_navbar_log_in: {
       click: {
         go_to_myNJ_login: () => {
