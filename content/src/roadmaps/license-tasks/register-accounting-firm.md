@@ -33,8 +33,6 @@ webflowId: 5f7729d28aa6e3de76f1e60c
 * A copy of the firm’s letterhead
 * Applicable fees paid
 
-
-
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
 A certificate indicating your firm has been successfully registered.
