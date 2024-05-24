@@ -1,6 +1,7 @@
 import { PutObjectCommand, PutObjectCommandOutput, S3Client } from "@aws-sdk/client-s3";
 import { NodeHttpHandler } from "@smithy/node-http-handler";
 import axios, { AxiosResponse } from "axios";
+import { StatusCodes } from "http-status-codes";
 import { createHash } from "node:crypto";
 import * as https from "node:https";
 
@@ -68,7 +69,7 @@ export const saveFileFromUrl = async function (
       .then((object) => {
         uploadFile(fullName, object.data, object.headers["content-type"], bucket)
           .then((s3response) => {
-            if (s3response.$metadata.httpStatusCode === 200) {
+            if (s3response.$metadata.httpStatusCode === StatusCodes.OK) {
               resolve(escapeColons(`https://${bucket}.s3.us-east-1.amazonaws.com/${fullName}`));
             } else {
               reject(s3response.$metadata.httpStatusCode);

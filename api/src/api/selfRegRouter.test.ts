@@ -7,6 +7,7 @@ import { generateSelfRegResponse } from "@test/factories";
 import { generateHashedKey, getLastCalledWith } from "@test/helpers";
 import dayjs from "dayjs";
 import { Express } from "express";
+import { StatusCodes } from "http-status-codes";
 import request, { Response } from "supertest";
 
 describe("selfRegRouter", () => {
@@ -63,25 +64,25 @@ describe("selfRegRouter", () => {
       expect(dayjs(putCalledWith.lastUpdatedISO).isSame(dayjs(), "minute")).toBe(true);
       expect(dayjs(putCalledWith.dateCreatedISO).isSame(dayjs(), "minute")).toBe(true);
 
-      expect(response.status).toEqual(200);
+      expect(response.status).toEqual(StatusCodes.OK);
       expect(response.body).toEqual({ authRedirectURL: selfRegResponse.authRedirectURL });
     });
 
-    it("returns an error when auth resume fails", async () => {
+    it("returns an INTERNAL SERVER ERROR when auth resume fails", async () => {
       stubUserDataClient.findByEmail.mockResolvedValue(stubRecordWithMyNJKey);
       stubSelfRegClient.resume.mockRejectedValue({});
 
       const response = await sendRequest(stubRecordWithMyNJKey);
       expect(stubSelfRegClient.resume).toHaveBeenCalledWith(myNJKey);
-      expect(response.status).toEqual(500);
+      expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
     });
 
-    it("returns a 409 error when auth resume returns DUPLICATE_SIGNUP", async () => {
+    it("returns a CONFLICT error when auth resume returns DUPLICATE_SIGNUP", async () => {
       stubSelfRegClient.resume.mockRejectedValue(new Error("DUPLICATE_SIGNUP"));
 
       const response = await sendRequest(stubRecordWithMyNJKey);
       expect(stubSelfRegClient.resume).toHaveBeenCalledWith(myNJKey);
-      expect(response.status).toEqual(409);
+      expect(response.status).toEqual(StatusCodes.CONFLICT);
     });
   });
 
@@ -105,26 +106,25 @@ describe("selfRegRouter", () => {
       expect(dayjs(putCalledWith.lastUpdatedISO).isSame(dayjs(), "minute")).toBe(true);
       expect(dayjs(putCalledWith.dateCreatedISO).isSame(dayjs(), "minute")).toBe(true);
 
-      expect(response.status).toEqual(200);
+      expect(response.status).toEqual(StatusCodes.OK);
       expect(response.body).toEqual({ authRedirectURL: selfRegResponse.authRedirectURL });
     });
 
-    it("returns an error when auth grant fails", async () => {
+    it("returns an INTERNAL SERVER ERROR when auth grant fails", async () => {
       stubSelfRegClient.grant.mockRejectedValue({});
-
       const response = await sendRequest(stubRecordNoKey);
       expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);
       expect(stubUserDataClient.put).not.toHaveBeenCalled();
-      expect(response.status).toEqual(500);
+      expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
     });
 
-    it("returns a 409 error when auth grant returns DUPLICATE_SIGNUP", async () => {
+    it("returns a CONFLICT error when auth grant returns DUPLICATE_SIGNUP", async () => {
       stubSelfRegClient.grant.mockRejectedValue(new Error("DUPLICATE_SIGNUP"));
 
       const response = await sendRequest(stubRecordNoKey);
       expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);
       expect(stubUserDataClient.put).not.toHaveBeenCalled();
-      expect(response.status).toEqual(409);
+      expect(response.status).toEqual(StatusCodes.CONFLICT);
     });
   });
 });
