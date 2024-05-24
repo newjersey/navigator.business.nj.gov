@@ -34,9 +34,9 @@ ${endLocationDependentSection}
 
 - - -
 
-## Application Requirements
+## Application Requirement
 
-* Desired business name
+You need your desired business name.
 
 - - -
 
