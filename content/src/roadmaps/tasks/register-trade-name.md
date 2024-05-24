@@ -1,16 +1,10 @@
 ---
 agencyId: county-clerk
 requiresLocation: true
-urlSlug: trade-name-registration
-filename: register-trade-name
-displayname: trade-name-registration
-name: Register Your Trade Name
-id: register-trade-name
-callToActionLink: ${countyClerkWebsite}
-callToActionText: Visit My County Clerk's Website
 summaryDescriptionMd: >-
-  If you would like to use a consumer-facing business name other than your personal name, you can register a
-  trade name with the county clerk. You must register your name with every county you plan to work in.
+  If you would like to use a consumer-facing business name other than your
+  personal name, you can register a trade name with the county clerk. You must
+  register your name with every county you plan to work in.
 
 
   :::note
@@ -18,10 +12,16 @@ summaryDescriptionMd: >-
   This screen guides your next steps. It does not submit your information for registration purposes.
 
   :::
+urlSlug: trade-name-registration
+filename: register-trade-name
+displayname: trade-name-registration
+name: Register Your Trade Name
+id: register-trade-name
+callToActionLink: ${countyClerkWebsite}
+callToActionText: Visit My County Clerk's Website
 ---
-
-:::cannabisLocationAlert
-
+:::cannabisLocationAlert 
+ 
 :::
 
 ${beginLocationDependentSection}
@@ -32,16 +32,16 @@ You can find your local clerk's office through the [${municipality} website](${m
 
 ${endLocationDependentSection}
 
----
+- - -
 
 ## Application Requirements
 
-- Desired business name
+* Desired business name
 
----
+- - -
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A registered trade name
+A registered trade name.
 
 :::
