@@ -47,8 +47,6 @@ A Certificate of Registration with a 10-digit registration number, which you nee
 
 :::
 
-
-
 :::callout{ showHeader="true" headerText="What if I don't register?" showIcon="false" calloutType="conditional" }
 
 If you don’t register your retreat center or lodging facility, you may be subject to fines. Also, if the property is a new construction, you will not be able to obtain a Uniform Construction Code `Certificate of Occupancy|certificate-occupancy` .
