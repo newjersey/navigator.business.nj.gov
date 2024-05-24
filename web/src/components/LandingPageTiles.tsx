@@ -1,25 +1,16 @@
 import { LandingPageActionTile } from "@/components/LandingPageActionTile";
-import { LandingPageSlider } from "@/components/LandingPageSlider";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
-import { MediaQueries } from "@/lib/PageSizes";
 import { ActionTile } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
 export const LandingPageTiles = (): ReactElement => {
   const router = useRouter();
-  const istabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { Config } = useConfig();
 
   const landingPageConfig = Config.landingPage;
-
-  const routeToOnboarding = (): void => {
-    router.push(ROUTES.onboarding);
-    analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
-  };
 
   const setFlowAndRouteUser = (flow: "starting" | "out-of-state" | "up-and-running"): void => {
     routeWithQuery(router, {
@@ -30,75 +21,72 @@ export const LandingPageTiles = (): ReactElement => {
 
   const actionTiles: ActionTile[] = [
     {
-      imgPath: "/img/getStarted-icon.svg",
-      tileText: landingPageConfig.landingPageGetStartedTileLine1,
-      tileText2: landingPageConfig.landingPageGetStartedTileLine2,
-      dataTestId: "get-started-tile",
-      onClick: routeToOnboarding,
-      isPrimary: true,
-    },
-    {
-      imgPath: "/img/briefcase-icon.svg",
+      imgPath: "/img/breif-case-icon.svg",
       tileText: landingPageConfig.landingPageRegisterBizTile,
       dataTestId: "register-biz-tile",
-      onClick: (): void => setFlowAndRouteUser("starting"),
+      onClick: (): void => {
+        setFlowAndRouteUser("starting");
+        analytics.event.landing_page_get_my_registration_guide_tile.click.go_to_onboarding();
+      },
     },
     {
       imgPath: "/img/payTaxes-icon.svg",
       tileText: landingPageConfig.landingPageTaxesTile,
       dataTestId: "pay-taxes-tile",
-      onClick: (): void => setFlowAndRouteUser("up-and-running"),
+      onClick: (): void => {
+        setFlowAndRouteUser("up-and-running");
+        analytics.event.landing_page_file_and_pay_my_taxes_tile.click.go_to_onboarding();
+      },
     },
     {
-      imgPath: "/img/outOfState-icon.svg",
+      imgPath: "/img/airplane-icon.svg",
       dataTestId: "out-of-state-tile",
       tileText: landingPageConfig.landingPageOutOfStateTile,
-      onClick: (): void => setFlowAndRouteUser("out-of-state"),
+      onClick: (): void => {
+        setFlowAndRouteUser("out-of-state");
+        analytics.event.landing_page_im_an_out_of_business_tile.click.go_to_onboarding();
+      },
     },
     {
       imgPath: "/img/eligibleFunding-icon.svg",
       dataTestId: "eligible-funding-tile",
       tileText: landingPageConfig.landingPageFundingTile,
-      onClick: (): void => setFlowAndRouteUser("up-and-running"),
+      onClick: (): void => {
+        setFlowAndRouteUser("up-and-running");
+        analytics.event.landing_page_find_funding_for_my_business_tile.click.go_to_onboarding();
+      },
     },
     {
       imgPath: "/img/startBusiness-icon.svg",
       dataTestId: "start-biz-tile",
       tileText: landingPageConfig.landingPageStartBizTile,
-      onClick: (): void => setFlowAndRouteUser("starting"),
+      onClick: (): void => {
+        setFlowAndRouteUser("starting");
+        analytics.event.landing_page_im_starting_a_nj_business_tile.click.go_to_onboarding();
+      },
     },
     {
-      imgPath: "/img/runBusiness-icon.svg",
+      imgPath: "/img/gear-icon.svg",
       dataTestId: "run-biz-tile",
       tileText: landingPageConfig.landingPageTileRunBizTile,
-      onClick: (): void => setFlowAndRouteUser("up-and-running"),
+      onClick: (): void => {
+        setFlowAndRouteUser("up-and-running");
+        analytics.event.landing_page_im_running_a_nj_business_tile.click.go_to_onboarding();
+      },
     },
   ];
 
   return (
-    <>
-      {istabletAndUp ? (
-        <div className="desktop:grid-container-widescreen desktop:width-100">
-          <div>
-            <LandingPageSlider actionTiles={actionTiles} />
-          </div>
-        </div>
-      ) : (
-        <div
-          className={`fac desktop:padding-x-7 desktop:grid-container-widescreen ${
-            istabletAndUp ? "fdr padding-x-2" : "fdc"
-          }`}
-        >
-          {actionTiles.map((actionTile, index) => {
-            const actionTileObj = {
-              ...actionTile,
-              key: `landing-page-tiles-key-${index}`,
-              className: "landing-page-tiles",
-            };
-            return <LandingPageActionTile {...actionTileObj} key={actionTileObj.key} />;
-          })}
-        </div>
-      )}
-    </>
+    <div className="display-flex fjc fac padding-top-2 dekstop:padding-bottom-4 padding-bottom-10">
+      <div className={"landing-grid-container padding-x-6 desktop:grid-container-widescreen"}>
+        {actionTiles.map((actionTile, index) => {
+          const actionTileObj = {
+            ...actionTile,
+            key: `landing-page-tiles-key-${index}`,
+          };
+          return <LandingPageActionTile {...actionTileObj} key={actionTileObj.key} />;
+        })}
+      </div>
+    </div>
   );
 };
