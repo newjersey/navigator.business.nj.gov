@@ -21,6 +21,6 @@ formName: "2553"
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A letter confirming your business's election to file taxes as an S Corp.
+A letter confirming your business's election to file taxes as an S corporation.
 
 :::
