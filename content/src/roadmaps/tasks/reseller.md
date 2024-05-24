@@ -19,7 +19,7 @@ formName: ""
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A decision on if your business will resell goods or services
-- A Resale Certificate shared with applicable businesses
+* A decision on if your business will resell goods or services
+* A resale certificate shared with applicable businesses
 
 :::
