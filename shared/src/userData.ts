@@ -35,7 +35,7 @@ export interface Business {
 export interface Address {
   readonly addressLine1: string;
   readonly addressLine2: string;
-  readonly addressCity?: string;
+  readonly addressCity?: string | undefined;
   readonly addressState?: StateObject;
   readonly addressMunicipality?: Municipality;
   readonly addressProvince?: string;
@@ -47,7 +47,7 @@ export interface Address {
 export interface AddressTextFields {
   readonly addressLine1: string;
   readonly addressLine2: string;
-  readonly addressCity?: string;
+  readonly addressCity?: string | undefined;
   readonly addressProvince?: string;
   readonly addressZipCode: string;
 }
@@ -55,7 +55,7 @@ export interface AddressTextFields {
 export interface AddressValidFields {
   readonly addressLine1: string;
   readonly addressLine2: string;
-  readonly addressCity?: string;
+  readonly addressCity?: string | undefined;
   readonly addressZipCode: string;
 }
 

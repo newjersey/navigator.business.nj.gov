@@ -5,7 +5,7 @@ import { AddressContext } from "@/contexts/addressContext";
 import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import { AddressTextField } from "@businessnjgovnavigator/shared";
+import { AddressTextField } from "@businessnjgovnavigator/shared/index";
 import { ReactElement, useContext } from "react";
 
 export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName" | "error" | "inputWidth"> {

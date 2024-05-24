@@ -1,8 +1,8 @@
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { StateDropdown } from "@/components/StateDropdown";
-import { ProfileMunicipality } from "@/components/tasks/business-formation/business/ProfileMunicipality";
-import { ProfileAddressTextField } from "@/components/tasks/business-formation/ProfileAddressTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
+import { ProfileAddressTextField } from "@/components/profile/ProfileAddressTextField";
+import { ProfileMunicipality } from "@/components/profile/ProfileMunicipality";
 import { AddressContext } from "@/contexts/addressContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";

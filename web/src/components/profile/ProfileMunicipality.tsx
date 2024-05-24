@@ -1,9 +1,9 @@
 import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropdown";
 import { AddressContext } from "@/contexts/addressContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
-import { Municipality } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
 import {useAddressErrors} from "@/lib/data-hooks/useAddressErrors";
+import {Municipality} from "@businessnjgovnavigator/shared/municipality";
 
 export const ProfileMunicipality = (): ReactElement => {
   const { state, setAddressData, setFieldsInteracted } = useContext(AddressContext);

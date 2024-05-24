@@ -69,27 +69,20 @@ import {
   Address,
   Business,
   BusinessPersona,
-  castPublicFilingLegalTypeToFormationType,
   createEmptyAddress,
-  createEmptyFormationFormData,
   createEmptyProfileData,
-  defaultFormationLegalType,
   determineForeignBusinessType,
   einTaskId,
   FieldsForAddressErrorHandling,
   ForeignBusinessType,
-  foreignLegalTypePrefix,
-  FormationFormData,
-  FormationLegalType,
   formationTaskId,
+  hasCompletedFormation,
   LookupLegalStructureById,
   LookupOperatingPhaseById,
   Municipality,
   naicsCodeTaskId,
   ProfileData,
-  PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
-import { hasCompletedFormation } from "@businessnjgovnavigator/shared/";
 import {
   isNexusBusiness,
   isStartingBusiness,
@@ -100,7 +93,7 @@ import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
-import { ReactElement, ReactNode, useContext, useMemo, useState } from "react";
+import { ReactElement, ReactNode, useContext, useState } from "react";
 interface Props {
   municipalities: Municipality[];
   CMS_ONLY_businessPersona?: BusinessPersona; // for CMS only
@@ -119,8 +112,6 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const [addressData, setAddressData] = useState<Address>(createEmptyAddress());
   const [interactedFields, setInteractedFields] = useState<FieldsForAddressErrorHandling[]>([]);
-  // const [whateverThisIs, setFormContextState] =
-  //   useState<FormContextType<ReducedFieldStates<ProfileFields, unknown>, unknown>>();
 
   const config = getMergedConfig();
   const userDataFromHook = useUserData();
@@ -164,46 +155,31 @@ const ProfilePage = (props: Props): ReactElement => {
 
   useScrollToPathAnchor();
 
-  const [formationFormData, setFormationFormData] = useState<FormationFormData>(
-    createEmptyFormationFormData()
-  );
-  const legalStructureId: FormationLegalType = useMemo(() => {
-    return castPublicFilingLegalTypeToFormationType(
-      (business?.profileData.legalStructureId ?? defaultFormationLegalType) as PublicFilingLegalType,
-      business?.profileData.businessPersona
-    );
-  }, [business?.profileData.businessPersona, business?.profileData.legalStructureId]);
-  const isForeign = useMemo(() => legalStructureId.includes(foreignLegalTypePrefix), [legalStructureId]);
+  // const legalStructureId: FormationLegalType = useMemo(() => {
+  //   return castPublicFilingLegalTypeToFormationType(
+  //     (business?.profileData.legalStructureId ?? defaultFormationLegalType) as PublicFilingLegalType,
+  //     business?.profileData.businessPersona
+  //   );
+  // }, [business?.profileData.businessPersona, business?.profileData.legalStructureId]);
 
   useMountEffectWhenDefined(() => {
     if (business) {
       setProfileData(business.profileData);
       setShouldLockFormationFields(hasCompletedFormation(business));
-      setFormationFormData({
-        ...business.formationData.formationFormData,
-        businessLocationType: isForeign
-          ? business.formationData.formationFormData.businessLocationType ?? "US"
-          : "NJ",
-        addressLine1: addressData.addressLine1,
-        addressLine2: addressData.addressLine2,
-        addressCity: addressData.addressCity,
-        addressMunicipality: addressData.addressMunicipality,
-        addressState: addressData.addressState,
-        addressZipCode: addressData.addressZipCode,
-        addressCountry: addressData.addressCountry,
-        addressProvince: addressData.addressProvince,
-      });
 
-      setAddressData({
-        addressLine1: business.formationData.formationFormData.addressLine1,
-        addressLine2: business.formationData.formationFormData.addressLine2,
-        addressMunicipality: business.formationData.formationFormData.addressMunicipality,
-        addressState: business.formationData.formationFormData.addressState,
-        addressZipCode: business.formationData.formationFormData.addressZipCode,
-        addressCountry: business.formationData.formationFormData.addressCountry,
-        addressProvince: business.formationData.formationFormData.addressProvince,
-        businessLocationType: business.formationData.formationFormData.businessLocationType,
-      });
+      if (businessPersona === "OWNING") {
+        setAddressData({
+          addressLine1: business.formationData.formationFormData.addressLine1,
+          addressLine2: business.formationData.formationFormData.addressLine2,
+          addressCity: business.formationData.formationFormData.addressCity,
+          addressMunicipality: business.formationData.formationFormData.addressMunicipality,
+          addressState: business.formationData.formationFormData.addressState,
+          addressZipCode: business.formationData.formationFormData.addressZipCode,
+          addressCountry: business.formationData.formationFormData.addressCountry,
+          addressProvince: business.formationData.formationFormData.addressProvince,
+          businessLocationType: business.formationData.formationFormData.businessLocationType,
+        });
+      }
     }
   }, business);
 
@@ -287,7 +263,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
       if (businessPersona === "OWNING") {
         updateQueue.queueFormationFormData({
-          ...formationFormData,
+          ...business.formationData.formationFormData,
           addressLine1: addressData.addressLine1,
           addressLine2: addressData.addressLine2,
           addressMunicipality: addressData.addressMunicipality,
@@ -311,7 +287,6 @@ const ProfilePage = (props: Props): ReactElement => {
     },
     // On Change
     (isValid, _errors, pageChange) => {
-      console.log("in the onchange");
       !isValid && pageChange && setAlert("ERROR");
     }
   );
@@ -884,7 +859,6 @@ const ProfilePage = (props: Props): ReactElement => {
               },
               setAddressData,
               setFieldsInteracted,
-              // setFormContextState,
             }}
           >
             <NextSeo title={getNextSeoTitle(config.pagesMetadata.profileTitle)} />

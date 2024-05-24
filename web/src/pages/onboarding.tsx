@@ -1,4 +1,3 @@
-import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
@@ -8,11 +7,11 @@ import { DevOnlySkipOnboardingButton } from "@/components/onboarding/DevOnlySkip
 import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
 import { onboardingFlows as onboardingFlowObject } from "@/components/onboarding/OnboardingFlows";
 import { ReturnToPreviousBusinessBar } from "@/components/onboarding/ReturnToPreviousBusinessBar";
+import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AuthContext } from "@/contexts/authContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { ProfileFormContext } from "@/contexts/profileFormContext";
-import { MediaQueries } from "@/lib/PageSizes";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -23,15 +22,16 @@ import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
+import { MediaQueries } from "@/lib/PageSizes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import {
+  createProfileFieldErrorMap,
   FlowType,
   OnboardingErrors,
   OnboardingStatus,
   Page,
   ProfileError,
   UpdateQueue,
-  createProfileFieldErrorMap,
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
@@ -39,7 +39,7 @@ import {
   setAnalyticsDimensions,
   setRegistrationDimension,
 } from "@/lib/utils/analytics-helpers";
-import { OnboardingStatusLookup, getFlow, scrollToTop } from "@/lib/utils/helpers";
+import { getFlow, OnboardingStatusLookup, scrollToTop } from "@/lib/utils/helpers";
 import {
   evalHeaderStepsTemplate,
   flowQueryParamIsValid,
@@ -51,12 +51,12 @@ import {
 } from "@/lib/utils/onboardingPageHelpers";
 import { determineForeignBusinessType } from "@businessnjgovnavigator/shared";
 import {
+  createEmptyProfileData,
+  createEmptyUserData,
   Municipality,
   ProfileData,
   TaskProgress,
   UserData,
-  createEmptyProfileData,
-  createEmptyUserData,
 } from "@businessnjgovnavigator/shared/";
 import { createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
 import { isRemoteWorkerOrSellerBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
@@ -263,7 +263,6 @@ const OnboardingPage = (props: Props): ReactElement => {
     newProfileData: ProfileData,
     updateQueue: UpdateQueue | undefined
   ): Promise<void> => {
-    console.log("completeOnboarding");
     if (!updateQueue) return;
 
     setRegistrationDimension("Onboarded Guest");
@@ -315,7 +314,6 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   FormFuncWrapper(
     async (): Promise<void> => {
-      console.log("FormFuncWrapper");
       scrollToTop();
       if (!updateQueue) return;
       let newProfileData = profileData;

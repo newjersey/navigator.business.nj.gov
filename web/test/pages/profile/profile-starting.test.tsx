@@ -651,19 +651,6 @@ describe("profile - starting business", () => {
               state: undefined,
               registeredISO: undefined,
             },
-            formationData: {
-              ...businessWith12TaxId.formationData,
-              formationFormData: {
-                ...businessWith12TaxId.formationData.formationFormData,
-                addressCity: "",
-                addressCountry: "US",
-                addressState: {
-                  name: "New Jersey",
-                  shortCode: "NJ",
-                },
-                businessLocationType: "NJ",
-              },
-            },
             profileData: { ...businessWith12TaxId.profileData, taxId: "666666666666" },
           });
         });
