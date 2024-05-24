@@ -10,6 +10,7 @@ import {
   generateUserDataForBusiness,
 } from "@shared/test";
 import { Express } from "express";
+import { StatusCodes } from "http-status-codes";
 import { UserDataClient } from "src/domain/types";
 import request from "supertest";
 
@@ -62,14 +63,14 @@ describe("licenseStatusRouter", () => {
     const nameAndAddress = generateLicenseSearchNameAndAddress({});
     stubUserDataClient.get.mockResolvedValue(userData);
     const response = await request(app).post(`/license-status`).send(nameAndAddress);
-    expect(response.status).toEqual(200);
+    expect(response.status).toEqual(StatusCodes.OK);
     expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
     expect(stubUserDataClient.put).toHaveBeenCalledWith(userData);
     expect(response.body).toEqual(userData);
     expect(stubUpdateLicenseStatus).toHaveBeenCalledWith(userData, nameAndAddress);
   });
 
-  it("returns 404 if license status is unknown", async () => {
+  it("returns NOT FOUND if license status is unknown", async () => {
     const licenseData = generateLicenseData({
       items: [],
       status: "UNKNOWN",
@@ -79,13 +80,13 @@ describe("licenseStatusRouter", () => {
 
     const response = await request(app).post(`/license-status`).send(generateLicenseSearchNameAndAddress({}));
     expect(stubUserDataClient.put).toHaveBeenCalledWith(userData);
-    expect(response.status).toEqual(404);
+    expect(response.status).toEqual(StatusCodes.NOT_FOUND);
   });
 
-  it("returns 500 if license search errors", async () => {
+  it("returns INTERNAL SERVER ERROR if license search errors", async () => {
     stubUpdateLicenseStatus.mockRejectedValue({});
     const response = await request(app).post(`/license-status`).send(generateLicenseSearchNameAndAddress({}));
     expect(stubUserDataClient.put).not.toHaveBeenCalled();
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
   });
 });

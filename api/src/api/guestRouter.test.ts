@@ -18,6 +18,7 @@ import {
 import { generateAnnualFilings } from "@test/helpers";
 import dayjs from "dayjs";
 import { Express } from "express";
+import { StatusCodes } from "http-status-codes";
 import request from "supertest";
 
 describe("guestRouter", () => {
@@ -76,21 +77,21 @@ describe("guestRouter", () => {
       timeStampBusinessSearch.search.mockResolvedValue(result);
 
       const response = await request(app).get(`/business-name-availability?query=apple%20bee%27s`);
-      expect(response.status).toEqual(200);
+      expect(response.status).toEqual(StatusCodes.OK);
       expect(result.status).toEqual(result.status);
       expect(parseDate(response.body.lastUpdatedTimeStamp).isSame(getCurrentDate(), "minute")).toEqual(true);
     });
 
-    it("returns 400 if name search returns BAD_INPUT", async () => {
+    it("returns Bad Request if name search returns BAD_INPUT", async () => {
       timeStampBusinessSearch.search.mockRejectedValue("BAD_INPUT");
       const response = await request(app).get(`/business-name-availability?query=apple%20bee%27s`);
-      expect(response.status).toEqual(400);
+      expect(response.status).toEqual(StatusCodes.BAD_REQUEST);
     });
 
-    it("returns 500 if name search errors", async () => {
+    it("returns Internal Server Error if name search errors", async () => {
       timeStampBusinessSearch.search.mockRejectedValue({});
       const response = await request(app).get(`/business-name-availability?query=apple%20bee%27s`);
-      expect(response.status).toEqual(500);
+      expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
     });
   });
 });

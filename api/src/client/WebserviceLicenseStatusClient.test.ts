@@ -3,6 +3,7 @@ import { LicenseStatusClient } from "@domain/types";
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import { generateLicenseEntity } from "@test/factories";
 import axios from "axios";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 jest.mock("axios");
 jest.mock("winston");
@@ -40,13 +41,13 @@ describe("WebserviceLicenseStatusClient", () => {
   });
 
   it("returns a failing health check if unexpected data is retrieved", async () => {
-    mockAxios.post.mockRejectedValue({ response: { status: 404 }, message: "" });
+    mockAxios.post.mockRejectedValue({ response: { status: StatusCodes.NOT_FOUND }, message: "" });
     expect(await client.health()).toEqual({
       success: false,
       error: {
-        message: "Bad Gateway",
+        message: ReasonPhrases.BAD_GATEWAY,
         serverResponseBody: "",
-        serverResponseCode: 404,
+        serverResponseCode: StatusCodes.NOT_FOUND,
         timeout: false,
       },
     });
@@ -57,7 +58,7 @@ describe("WebserviceLicenseStatusClient", () => {
     expect(await client.health()).toEqual({
       success: false,
       error: {
-        message: "Gateway Timeout",
+        message: ReasonPhrases.GATEWAY_TIMEOUT,
         timeout: true,
       },
     });
