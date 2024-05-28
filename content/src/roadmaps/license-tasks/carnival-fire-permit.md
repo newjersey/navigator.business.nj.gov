@@ -1,7 +1,13 @@
 ---
-notesMd: "[Muni planning
-  doc](https://docs.google.com/document/d/1Kb5h1xeshi-Vm_KjjHbRXo-ji-3DejgKUG4U\
-  1shk2QQ/edit?usp=sharing)"
+notesMd: >-
+  [Muni planning
+  doc](https://docs.google.com/document/d/1Kb5h1xeshi-Vm_KjjHbRXo-ji-3DejgKUG4U1shk2QQ/edit?usp=sharing)
+
+
+  How this will be displayed: 
+
+
+  **Starter Kit Step 4 via a non-essential question (Do you plan to own a traveling carnival or circus?)**
 id: carnival-fire-permit
 filename: carnival-fire-permit
 displayname: carnival-fire-permit
