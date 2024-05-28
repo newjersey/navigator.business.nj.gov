@@ -8,12 +8,11 @@ displayname: carnival-fire-permit
 urlSlug: carnival-fire-permit
 name: Obtain Fire Permits for Your Traveling Carnival or Circus
 webflowName: "Entertainment: Traveling Carnival or Circus Fire Permit"
-summaryDescriptionMd: >
-  You must have a fire permit to do certain activities at your carnival or
-  circus. You need to get the fire permit for each new setup or event location
-  and pass required inspections. Contact the `Local Enforcing Agency (LEA)|lea`
-  in the town where your carnival or circus will be to see which fire permits
-  you need and how to apply.
+summaryDescriptionMd: You must have a fire permit to do certain activities at
+  your carnival or circus. You need to get the fire permit for each new setup or
+  event location and pass required inspections. Contact the `Local Enforcing
+  Agency (LEA)|lea` in the town where your carnival or circus will be to see
+  which fire permits you need and how to apply.
 industryId:
   - independent-artist
 callToActionText: Contact My Local Enforcing Agency
