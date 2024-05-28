@@ -28,6 +28,6 @@ agencyId: nj-consumer-affairs
 
 :::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
 
-* Confirmation that you, your employees, or subcontractors have the required trade licenses
+Confirmation that you, your employees, or subcontractors have the required trade licenses
 
 :::
