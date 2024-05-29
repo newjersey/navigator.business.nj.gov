@@ -8,7 +8,7 @@
 
 <!-- Link to ticket in pivotal. Append ticket_id to provided URL. -->
 
-[Replace with ticket_id](https://www.pivotaltracker.com/story/show/)
+This pull request resolves [#00000000](https://www.pivotaltracker.com/story/show/00000000).
 
 ### Approach
 
