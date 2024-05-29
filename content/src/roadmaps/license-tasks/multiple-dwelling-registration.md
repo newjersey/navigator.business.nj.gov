@@ -1,21 +1,16 @@
 ---
-notesMd: >
-  [Muni planning
-  doc](https://docs.google.com/document/d/1wqFrL2aR2ZI9MvCsp4orFJE2A6sn_oa5YOFQoW2uKYE/edit?usp=sharing)
-summaryDescriptionMd: If you own a newly built `multiple
-  dwelling|multiple-dwelling`, such as an apartment, condominium, or townhouse
-  development, you must register it with the State. If you are the new owner of
-  an existing property, you must update the current registration.
-urlSlug: multiple-dwelling-registration
-filename: multiple-dwelling-registration
-displayname: multiple-dwelling-registration
-name: Register Your Multiple Dwelling, Such as an Apartment or Condominium Complex
-id: multiple-dwelling-registration
-callToActionLink: https://njdcaportal.dynamics365portals.us/ultra-bhi-home/
-callToActionText: Register My Multiple Dwelling
-industryId: real-estate-investor
-agencyId: nj-community-affairs
-agencyAdditionalContext: Bureau of Housing Inspection
+id: "multiple-dwelling-registration"
+webflowId: "665784829bec27b3d1009df3"
+urlSlug: "multiple-dwelling-registration"
+name: "Register Your Multiple Dwelling, Such as an Apartment or Condominium Complex"
+filename: "multiple-dwelling-registration"
+callToActionLink: "https://njdcaportal.dynamics365portals.us/ultra-bhi-home/"
+callToActionText: "Register My Multiple Dwelling"
+agencyId: "nj-community-affairs"
+agencyAdditionalContext: "Bureau of Housing Inspection"
+industryId: "real-estate-investor"
+licenseCertificationClassification: "undefined"
+summaryDescriptionMd: "If you own a newly built `multiple dwelling|multiple-dwelling`, such as an apartment, condominium, or townhouse development, you must register it with the State. If you are the new owner of an existing property, you must update the current registration."
 ---
 
 ---
