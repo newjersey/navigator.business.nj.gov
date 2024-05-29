@@ -11,15 +11,14 @@ summaryDescriptionMd: Your home improvement contractor (HIC) registration has
 callToActionText: Reinstate My HIC Registration
 callToActionLink: https://www.njconsumeraffairs.gov/hic/Pages/applications.aspx
 ---
-
 ## Application Requirements
 
-- License number
-- Photocopy of a certificate of insurance with a commercial general liability insurance policy in a minimum amount of $500,000 per occurrence
-- Applicable fees paid
+* License number
+* Photocopy of a certificate of insurance with a commercial general liability insurance policy in a minimum amount of $500,000 per occurrence
+* Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- The same New Jersey home improvement contractor (NJHIC) number
+The same New Jersey home improvement contractor (NJHIC) number.
 
 :::

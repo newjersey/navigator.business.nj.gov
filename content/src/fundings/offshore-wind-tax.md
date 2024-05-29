@@ -4,6 +4,9 @@ name: Offshore Wind Tax Credit Program
 displayName: offshore-wind
 urlSlug: offshore-wind-tax
 id: offshore-wind-tax-credit-program
+sidebarCardBodyText: The Offshore Wind Tax Credit Program is a financial tool
+  that spurs private capital investment and employment growth in major,
+  land-based offshore wind industry projects.
 openDate: ""
 dueDate: 07/01/2025
 summaryDescriptionMd: The Offshore Wind Tax Credit Program is a financial tool
@@ -32,14 +35,11 @@ sector:
   - manufacturing
   - other-services
 publishStageArchive: ""
-sidebarCardBodyText: The Offshore Wind Tax Credit Program is a financial tool that
-  spurs private capital investment and employment growth in major, land-based
-  offshore wind industry projects.
 ---
 
 ## Eligibility
 
-- Businesses investing at least $17.5M in a qualified wind energy facility and employing at least 150 new, full-time employees
+Businesses must invest at least $17.5M in a qualified wind energy facility and employing at least 150 new, full-time employees.
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
