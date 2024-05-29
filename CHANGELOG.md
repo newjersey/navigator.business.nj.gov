@@ -1,3 +1,24 @@
+# [2024.17.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.16.0...v2024.17.0) (2024-05-29)
+
+
+### Bug Fixes
+
+* [[#187636181](https://github.com/newjersey/navigator.business.nj.gov/issues/187636181)] synchronize migration and userData for interstate moving and logistics ([e21e025](https://github.com/newjersey/navigator.business.nj.gov/commit/e21e0253f4a137fd2516ef45ab01251f0304cc46))
+* [[#187642582](https://github.com/newjersey/navigator.business.nj.gov/issues/187642582)] move multiple dwelling and ticket broker to license tasks ([2d641f3](https://github.com/newjersey/navigator.business.nj.gov/commit/2d641f378feefc63f41cfdb2e4a2e89f7ae027c2))
+* additional callout code fixes ([51bcd14](https://github.com/newjersey/navigator.business.nj.gov/commit/51bcd14c6c9f77e399c37a55ca5d78edff8e8a3b))
+* callout code cleanup [skip ci] ([370d972](https://github.com/newjersey/navigator.business.nj.gov/commit/370d972f7e3cfff2a84cf2196eb446be4ec20212))
+* hotfixes for callout content ([9786998](https://github.com/newjersey/navigator.business.nj.gov/commit/97869980ef036a9b145f97ad8e59681be2fc5abc))
+* hotfixes for callouts ([033e4b3](https://github.com/newjersey/navigator.business.nj.gov/commit/033e4b3f9a312e4885a01308d36b4ef19b070906))
+
+
+### Features
+
+* [[#185159231](https://github.com/newjersey/navigator.business.nj.gov/issues/185159231)] Renovation Task Conditional CTA display logic ([fdfc17b](https://github.com/newjersey/navigator.business.nj.gov/commit/fdfc17be6e58aebb8650b03fc42762a48cc4696f))
+* [[#187399321](https://github.com/newjersey/navigator.business.nj.gov/issues/187399321)] remove green box components ([78829a1](https://github.com/newjersey/navigator.business.nj.gov/commit/78829a1b00856f78649f4d2cc1486ec949a10c5a))
+* [[#187404989](https://github.com/newjersey/navigator.business.nj.gov/issues/187404989)] removed post onboarding ([1e5b65d](https://github.com/newjersey/navigator.business.nj.gov/commit/1e5b65d9cf89127759c4945770f8bdad70256466))
+* [[#187611792](https://github.com/newjersey/navigator.business.nj.gov/issues/187611792)] enable public accountant license ([4660485](https://github.com/newjersey/navigator.business.nj.gov/commit/46604856b68eb79d0bd3b24a322b07ed21fd85ff))
+* [[#187611847](https://github.com/newjersey/navigator.business.nj.gov/issues/187611847)] enable landscape architecture license ([e40d3e8](https://github.com/newjersey/navigator.business.nj.gov/commit/e40d3e8f84f7fb2eb713a4c1816e2270f7e50eef))
+
 # [2024.16.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.15.1...v2024.16.0) (2024-05-21)
 
 
