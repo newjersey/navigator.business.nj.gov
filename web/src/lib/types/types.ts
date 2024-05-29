@@ -540,7 +540,6 @@ export interface ContextualInfoFile extends ContextualInfo {
 export interface ActionTile {
   imgPath: string;
   tileText: string;
-  tileText2?: string;
   dataTestId: string;
   onClick: () => void;
   isPrimary?: boolean;
