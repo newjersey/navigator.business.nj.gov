@@ -25,13 +25,12 @@ export const ProfileAddressTextField = ({ className, ...props }: Props): ReactEl
     setAddressData((addressData) => ({ ...addressData, [props.fieldName]: value }));
   };
 
-  const onValidation = (): void => {
-    setIsValid(!doesFieldHaveError(props.fieldName));
-    setFieldsInteracted([props.fieldName]);
+ const onValidation = (): void => {
+   setIsValid(!doesFieldHaveError(props.fieldName));
+   setFieldsInteracted([props.fieldName]);
   };
 
   const hasError = doesFieldHaveError(props.fieldName);
-
   return (
     <WithErrorBar className={className ?? ""} hasError={hasError} type={props.errorBarType}>
       {props.label && (

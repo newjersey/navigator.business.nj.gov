@@ -16,6 +16,7 @@ export const ProfileMunicipality = (): ReactElement => {
     });
   };
 
+  console.log("logggggs profile munnnnnn");
   return (
     <MunicipalityDropdown
       onValidation={(): void => setFieldsInteracted(["addressMunicipality"])}

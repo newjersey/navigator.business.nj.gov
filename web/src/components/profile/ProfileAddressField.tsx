@@ -6,23 +6,33 @@ import { ProfileMunicipality } from "@/components/profile/ProfileMunicipality";
 import { AddressContext } from "@/contexts/addressContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useMountEffect } from "@/lib/utils/helpers";
+import { useMountEffectWhenDefined} from "@/lib/utils/helpers";
 import { ReactElement, useContext } from "react";
+import {isOwningBusiness} from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import {useUserData} from "@/lib/data-hooks/useUserData";
 
 export const ProfileAddressField = (): ReactElement => {
   const { Config } = useConfig();
   const { setAddressData } = useContext(AddressContext);
   const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useAddressErrors();
+  const {business} = useUserData();
 
-  useMountEffect(() => {
-    setAddressData((previousState) => {
-      return {
-        ...previousState,
-        addressState: { name: "New Jersey", shortCode: "NJ" },
-        addressCountry: "US",
-      };
-    });
-  });
+  useMountEffectWhenDefined(() => {
+      if (business && isOwningBusiness(business)) {
+        setAddressData( {
+            addressLine1: business.formationData.formationFormData.addressLine1,
+            addressLine2: business.formationData.formationFormData.addressLine2,
+            addressCity: business.formationData.formationFormData.addressCity,
+            addressMunicipality: business.formationData.formationFormData.addressMunicipality,
+            addressState: { name: "New Jersey", shortCode: "NJ" },
+            addressZipCode: business.formationData.formationFormData.addressZipCode,
+          addressCountry: "US",
+            addressProvince: business.formationData.formationFormData.addressProvince,
+            businessLocationType: business.formationData.formationFormData.businessLocationType,
+          }
+        );
+      }
+  }, business);
 
   return (
     <>
@@ -49,7 +59,7 @@ export const ProfileAddressField = (): ReactElement => {
           />
         </div>
         <WithErrorBar
-          hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressMunicipality"])}
+           hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressMunicipality"])}
           type="DESKTOP-ONLY"
         >
           <div className="grid-row grid-gap-1">
@@ -101,7 +111,7 @@ export const ProfileAddressField = (): ReactElement => {
               </WithErrorBar>
             </div>
           </div>
-        </WithErrorBar>
+         </WithErrorBar>
         <hr aria-hidden={true} />
       </>
     </>

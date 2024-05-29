@@ -69,13 +69,12 @@ import {
   Address,
   Business,
   BusinessPersona,
-  createEmptyAddress,
   createEmptyProfileData,
   determineForeignBusinessType,
   einTaskId,
   FieldsForAddressErrorHandling,
   ForeignBusinessType,
-  formationTaskId,
+  formationTaskId, generateFormationNJAddress,
   hasCompletedFormation,
   LookupLegalStructureById,
   LookupOperatingPhaseById,
@@ -110,7 +109,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const [shouldLockFormationFields, setShouldLockFormationFields] = useState<boolean>(false);
   const [isFormationDateDeletionModalOpen, setFormationDateDeletionModalOpen] = useState<boolean>(false);
 
-  const [addressData, setAddressData] = useState<Address>(createEmptyAddress());
+  const [addressData, setAddressData] = useState<Address>(generateFormationNJAddress({}));
   const [interactedFields, setInteractedFields] = useState<FieldsForAddressErrorHandling[]>([]);
 
   const config = getMergedConfig();
@@ -155,31 +154,10 @@ const ProfilePage = (props: Props): ReactElement => {
 
   useScrollToPathAnchor();
 
-  // const legalStructureId: FormationLegalType = useMemo(() => {
-  //   return castPublicFilingLegalTypeToFormationType(
-  //     (business?.profileData.legalStructureId ?? defaultFormationLegalType) as PublicFilingLegalType,
-  //     business?.profileData.businessPersona
-  //   );
-  // }, [business?.profileData.businessPersona, business?.profileData.legalStructureId]);
-
   useMountEffectWhenDefined(() => {
     if (business) {
       setProfileData(business.profileData);
       setShouldLockFormationFields(hasCompletedFormation(business));
-
-      if (businessPersona === "OWNING") {
-        setAddressData({
-          addressLine1: business.formationData.formationFormData.addressLine1,
-          addressLine2: business.formationData.formationFormData.addressLine2,
-          addressCity: business.formationData.formationFormData.addressCity,
-          addressMunicipality: business.formationData.formationFormData.addressMunicipality,
-          addressState: business.formationData.formationFormData.addressState,
-          addressZipCode: business.formationData.formationFormData.addressZipCode,
-          addressCountry: business.formationData.formationFormData.addressCountry,
-          addressProvince: business.formationData.formationFormData.addressProvince,
-          businessLocationType: business.formationData.formationFormData.businessLocationType,
-        });
-      }
     }
   }, business);
 

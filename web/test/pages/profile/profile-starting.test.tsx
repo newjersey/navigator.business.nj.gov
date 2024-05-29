@@ -195,7 +195,6 @@ describe("profile - starting business", () => {
             dateOfFormation: "2017-10-01",
           }),
         });
-
         const newark = generateMunicipality({ displayName: "Newark" });
         renderPage({ business: initialBusiness, municipalities: [newark] });
         fillText("Date of formation", "");
@@ -337,15 +336,15 @@ describe("profile - starting business", () => {
 
   it("updates tax filing data on save", async () => {
     const taxData = generateTaxFilingData({});
-    const initialBusiness = generateBusinessForProfile({ taxFilingData: taxData });
     mockApi.postGetAnnualFilings.mockImplementation((userData: UserData) => {
       const modifiedUserData = modifyCurrentBusiness(userData, (business) => ({
         ...business,
-        formationData: { ...initialBusiness.formationData },
         taxFilingData: { ...taxData, filings: [] },
       }));
       return Promise.resolve(modifiedUserData);
     });
+
+    const initialBusiness = generateBusinessForProfile({ taxFilingData: taxData });
 
     renderPage({ business: initialBusiness });
     clickSave();

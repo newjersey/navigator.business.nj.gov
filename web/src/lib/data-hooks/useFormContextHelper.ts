@@ -30,9 +30,9 @@ export const useFormContextHelper = <
 
   const fieldStatesReducer: FormContextReducer<T> = (prevState, action) => {
     const { type, payload } = action;
-    debug && console.log({ type });
-    debug && console.log({ payload });
-    debug && console.log({ prevState });
+    debug && console.log(type);
+    debug && console.log(payload);
+    debug && console.log(prevState);
 
     switch (type) {
       case FieldStateActionKind.VALIDATION:
@@ -120,6 +120,7 @@ export const useFormContextHelper = <
         debug && console.log("change func");
         onChangeFunc && onChangeFunc(valid, getErrors(), submitted || stagingTab !== undefined);
       }
+
       if (!stillNeedsUpdates) {
         if (valid) {
           if (submitted) {

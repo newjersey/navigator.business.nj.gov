@@ -28,7 +28,6 @@ export const useAddressErrors = (): AddressErrorsResponse => {
       field,
       addressData: state.addressData,
     });
-
     state.formContextState.fieldStates[field].invalid =
       addressFieldErrorState.hasError && state.interactedFields.includes(field);
 

@@ -26,7 +26,7 @@ import { MunicipalityDetail } from "../municipality";
 import { IndustrySpecificData, ProfileData } from "../profileData";
 import { SectorType, arrayOfSectors } from "../sector";
 import { TaxFilingCalendarEvent, TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
-import { Address, Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
+import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
 
 export const generateFormationSubmitResponse = (
@@ -374,20 +374,6 @@ export const generateMunicipalityDetail = (overrides: Partial<MunicipalityDetail
     countyClerkPhone: `some-phone-${randomInt()}`,
     countyClerkWebsite: `some-clerk-webpage-${randomInt()}`,
     countyWebsite: `some-county-website-${randomInt()}`,
-    ...overrides,
-  };
-};
-
-export const generateAddress = (overrides: Partial<Address>): Address => {
-  return {
-    addressLine1: "",
-    addressLine2: "",
-    addressCity: "",
-    addressMunicipality: undefined,
-    addressState: undefined,
-    addressZipCode: "",
-    addressCountry: undefined,
-    businessLocationType: undefined,
     ...overrides,
   };
 };

@@ -15,7 +15,7 @@ interface AddressContextType {
   setFieldsInteracted: (
     fields: FieldsForAddressErrorHandling[],
     config?: { setToUninteracted: boolean }
-  ) => void;
+ ) => void;
 }
 
 export const AddressContext = createContext<AddressContextType>({

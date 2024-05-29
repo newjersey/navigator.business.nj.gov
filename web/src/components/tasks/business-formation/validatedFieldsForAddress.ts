@@ -16,7 +16,7 @@ export const validatedFieldsForAddress = (addressData: Address): FieldsForAddres
 
   switch (addressData.businessLocationType) {
     case "US":
-      validatedFields = [...validatedFields, ...foreignValidatedFields, "addressState"];
+      validatedFields = [...validatedFields, ...foreignValidatedFields];
       break;
     case "INTL":
       validatedFields = [...validatedFields, ...foreignValidatedFields, "addressProvince", "addressCountry"];
