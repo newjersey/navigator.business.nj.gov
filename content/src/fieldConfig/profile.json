@@ -137,6 +137,7 @@
         "infoAlert": "**Can't find your city?** Unincorporated places are not listed here. Search for [your official jurisdiction](https://www.nj.gov/nj/gov/county/localities.html) (type in your community's name into the local name field)."
       },
       "general": {
+        "default": {},
         "optionalLabel": "(Optional)",
         "partialAddressErrorText": "Address must be complete.",
         "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer."
@@ -453,6 +454,7 @@
       }
     },
     "general": {
+      "default": {},
       "partialAddressErrorText": "Address must be complete.",
       "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer."
     },
