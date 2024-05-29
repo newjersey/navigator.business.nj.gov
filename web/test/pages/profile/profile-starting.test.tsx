@@ -195,6 +195,7 @@ describe("profile - starting business", () => {
             dateOfFormation: "2017-10-01",
           }),
         });
+
         const newark = generateMunicipality({ displayName: "Newark" });
         renderPage({ business: initialBusiness, municipalities: [newark] });
         fillText("Date of formation", "");
@@ -336,15 +337,16 @@ describe("profile - starting business", () => {
 
   it("updates tax filing data on save", async () => {
     const taxData = generateTaxFilingData({});
+    const initialBusiness = generateBusinessForProfile({ taxFilingData: taxData });
     mockApi.postGetAnnualFilings.mockImplementation((userData: UserData) => {
       const modifiedUserData = modifyCurrentBusiness(userData, (business) => ({
         ...business,
+        formationData: { ...initialBusiness.formationData },
         taxFilingData: { ...taxData, filings: [] },
       }));
       return Promise.resolve(modifiedUserData);
     });
 
-    const initialBusiness = generateBusinessForProfile({ taxFilingData: taxData });
     renderPage({ business: initialBusiness });
     clickSave();
 
@@ -534,6 +536,8 @@ describe("profile - starting business", () => {
     describe("when the tax ID is initially 9 digits in length", () => {
       const businessWith9TaxId = generateBusinessForProfile({
         profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "limited-liability-company",
           taxId: "123456789",
         }),
       });
@@ -610,6 +614,8 @@ describe("profile - starting business", () => {
     describe("when the tax ID is initially 12 digits in length", () => {
       const businessWith12TaxId = generateBusinessForProfile({
         profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "limited-liability-company",
           taxId: "123456789123",
         }),
       });
@@ -661,6 +667,8 @@ describe("profile - starting business", () => {
       const businessWithEmptyTaxId = generateBusinessForProfile({
         profileData: generateProfileData({
           taxId: "",
+          businessPersona: "STARTING",
+          legalStructureId: "limited-liability-company",
         }),
       });
 

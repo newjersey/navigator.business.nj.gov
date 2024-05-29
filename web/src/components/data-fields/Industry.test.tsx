@@ -100,8 +100,10 @@ describe("<Industry />", () => {
       businessPersonas.map((persona) => {
         const choices = industrySpecificDataChoices[el.fieldName];
         const flowConfig = Config.profileDefaults.fields;
-        const fieldName = el.fieldName as keyof typeof flowConfig;
-        const fieldContent = Config.profileDefaults.fields[fieldName].default;
+        const fieldContent = Config.profileDefaults.fields[
+          el.fieldName as keyof typeof flowConfig
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ].default as any;
 
         const chooseRadioWithContent = (div: HTMLElement, choice: string): void => {
           fireEvent.click(
