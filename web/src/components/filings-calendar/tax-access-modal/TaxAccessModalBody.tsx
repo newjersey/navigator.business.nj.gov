@@ -23,7 +23,7 @@ export const TaxAccessModalBody = (props: Props): ReactElement => {
             {getHeader()}
           </Heading>
         )}
-        <Content>{Config.taxAccess.body}</Content>
+        <Content>{props.isStepOne ? Config.taxAccess.stepOneBody : Config.taxAccess.stepTwoBody}</Content>
       </div>
       <hr className="margin-y-4" />
     </>

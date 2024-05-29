@@ -1,6 +1,8 @@
 {
   "taxAccess": {
-    "body": "To see your tax due dates, you'll first need to select your business structure.",
+    "stepOneBody": "To see your tax due dates, you'll first need to select your business structure.",
+    "stepTwoBody": "To access your tax records, we need to verify your information and get you access to New Jersey Department of Treasury's Gov2Go platform.",
+    "legalStructureDropDownHeader": "**What is your `business structure|business-structure-learn-more`?**",
     "modalResponsibleOwnerFieldErrorName": "Responsible Owner Name",
     "stepTwoNextButton": "Save",
     "modalTaxIdHeader": " `New Jersey Tax ID|tax-id`",
