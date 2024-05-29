@@ -49,7 +49,7 @@ describe("<TaxAccessModal />", () => {
       expect(screen.queryByText(Config.taxAccess.stepOneHeader)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.stepTwoHeader)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.stepTwoBackButton)).not.toBeInTheDocument();
-      expect(screen.getByText(Config.taxAccess.body)).toBeInTheDocument();
+      expect(screen.getByText(Config.taxAccess.stepTwoBody)).toBeInTheDocument();
       expect(screen.getByText(Config.taxAccess.stepTwoCancelButton)).toBeInTheDocument();
       expect(screen.getByLabelText("Tax id")).toBeInTheDocument();
     });
@@ -70,9 +70,10 @@ describe("<TaxAccessModal />", () => {
     it("shows step 1 question to choose a legal structure", () => {
       renderModal(undefinedLegalStructureBusiness);
       expect(screen.getByText(Config.taxAccess.stepOneHeader)).toBeInTheDocument();
-      expect(screen.getByText(Config.taxAccess.body)).toBeInTheDocument();
+      expect(screen.getByText(Config.taxAccess.stepOneBody)).toBeInTheDocument();
       expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.stepTwoHeader)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taxAccess.stepTwoBody)).not.toBeInTheDocument();
     });
 
     it("does not save selection when closing modal", () => {
@@ -129,8 +130,9 @@ describe("<TaxAccessModal />", () => {
         })
       );
       expect(screen.queryByText(Config.taxAccess.stepOneHeader)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taxAccess.stepOneBody)).not.toBeInTheDocument();
       expect(screen.getByText(Config.taxAccess.stepTwoHeader)).toBeInTheDocument();
-      expect(screen.getByText(Config.taxAccess.body)).toBeInTheDocument();
+      expect(screen.getByText(Config.taxAccess.stepTwoBody)).toBeInTheDocument();
       expect(screen.queryByLabelText("Business structure")).not.toBeInTheDocument();
     });
 
@@ -144,7 +146,9 @@ describe("<TaxAccessModal />", () => {
       );
       fireEvent.click(screen.getByText(Config.taxAccess.stepTwoBackButton));
       expect(screen.getByText(Config.taxAccess.stepOneHeader)).toBeInTheDocument();
+      expect(screen.getByText(Config.taxAccess.stepOneBody)).toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.stepTwoHeader)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taxAccess.stepTwoBody)).not.toBeInTheDocument();
       expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
     });
   });
