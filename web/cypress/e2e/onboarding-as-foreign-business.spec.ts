@@ -4,6 +4,7 @@ import {
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import {
   onOnboardingPageNexusBusiness,
+  onOnboardingPageRemoteSellerBusiness,
   onOnboardingPageRemoteWorkerBusiness,
 } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
 import {
@@ -191,6 +192,51 @@ describe("Onboarding for all industries when out of state nexus business [featur
       });
 
       it("Onboarding for Out of State Remote Worker", () => {
+        cy.url().should("include", "onboarding?page=1");
+        onOnboardingPageRemoteWorkerBusiness.selectBusinessPersonaRadio("FOREIGN");
+        onOnboardingPageRemoteWorkerBusiness.getBusinessPersonaRadio("FOREIGN").should("be.checked");
+        onOnboardingPageRemoteWorkerBusiness.clickNext();
+
+        cy.url().should("include", "onboarding?page=2");
+        onOnboardingPageRemoteWorkerBusiness.selectEmployeesInNJCheckBox();
+        onOnboardingPageRemoteWorkerBusiness.getEmployeesInNJCheckbox().should("be.checked");
+        onOnboardingPageRemoteWorkerBusiness.clickShowMyGuide();
+
+        cy.url().should("include", "dashboard");
+        cy.get('[data-testid="header-link-to-profile"]');
+      });
+    });
+  });
+
+  describe("Onboarding for out of state remote seller business [feature] [all] [group4]", () => {
+    describe("Desktop", () => {
+      beforeEach(() => {
+        cy.loginByCognitoApi();
+      });
+
+      it("Onboarding for Out of State Remote Seller Worker", () => {
+        cy.url().should("include", "onboarding?page=1");
+        onOnboardingPageRemoteSellerBusiness.selectBusinessPersonaRadio("FOREIGN");
+        onOnboardingPageRemoteSellerBusiness.getBusinessPersonaRadio("FOREIGN").should("be.checked");
+        onOnboardingPageRemoteSellerBusiness.clickNext();
+
+        cy.url().should("include", "onboarding?page=2");
+        onOnboardingPageRemoteSellerBusiness.selectRevenueInNJCheckBox();
+        onOnboardingPageRemoteSellerBusiness.getRevenueInNJCheckbox().should("be.checked");
+        onOnboardingPageRemoteSellerBusiness.clickShowMyGuide();
+
+        cy.url().should("include", "dashboard");
+        cy.get('[data-testid="header-link-to-profile"]');
+      });
+    });
+
+    describe("Mobile", () => {
+      beforeEach(() => {
+        setMobileViewport();
+        cy.loginByCognitoApi();
+      });
+
+      it("Onboarding for Out of State Remote Seller Worker", () => {
         cy.url().should("include", "onboarding?page=1");
         onOnboardingPageRemoteWorkerBusiness.selectBusinessPersonaRadio("FOREIGN");
         onOnboardingPageRemoteWorkerBusiness.getBusinessPersonaRadio("FOREIGN").should("be.checked");

@@ -73,7 +73,14 @@ class OnboardingSharedElementsWithIndustryQuestion extends OnboardingSharedEleme
 
 class OnboardingPageNoneOfTheAbove extends OnboardingSharedElements {}
 
-class OnboardingPageRemoteSellerBusiness extends OnboardingSharedElements {}
+class OnboardingPageRemoteSellerBusiness extends OnboardingSharedElements {
+  getRevenueInNJCheckbox() {
+    return cy.get(`input[name="foreign-business-type"][value="revenueInNJ"]`);
+  }
+  selectRevenueInNJCheckBox() {
+    this.getRevenueInNJCheckbox().check();
+  }
+}
 
 class OnboardingPageRemoteWorkerBusiness extends OnboardingSharedElements {
   getEmployeesInNJCheckbox() {
