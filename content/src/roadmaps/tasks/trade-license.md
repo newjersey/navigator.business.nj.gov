@@ -26,8 +26,8 @@ agencyId: nj-consumer-affairs
 * [Master plumber](https://www.njconsumeraffairs.gov/plu/Pages/default.aspx) 
 * [Pool and spa service contractor and pool and spa builder and installer](https://www.njconsumeraffairs.gov/pool/Pages/default.aspx)
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-Confirmation that you, your employees, or subcontractors have the required trade licenses
+Confirmation that you, your employees, or subcontractors have the required trade licenses.
 
 :::
