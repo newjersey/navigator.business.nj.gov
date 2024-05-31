@@ -1,99 +1,100 @@
-export default {
-  id: "callout",
-  label: "Callout Block",
-  fields: [
-    {
-      name: "calloutType",
-      label: "Callout Type",
-      widget: "select",
-      default: "conditional",
-      options: ["conditional", "informational", "warning", "note"],
-    },
-    {
-      name: "showIcon",
-      label: "Header Icon",
-      widget: "boolean",
-      default: false,
-    },
-    {
-      name: "showHeader",
-      label: "Show Header?",
-      widget: "boolean",
-      default: false,
-    },
-    {
-      name: "headerText",
-      label: "Header Text",
-      default: "",
-      widget: "string",
-    },
-    {
-      name: "body",
-      label: "Body Text",
-      default: "",
-      required: true,
-      widget: "markdown",
-    },
-  ],
+import { ConfigType } from "@/contexts/configContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import type { PropsWithChildren, ReactNode } from "react";
 
-  pattern: /:::callout.*?:::/gs,
-  collapsed: false,
-  summary: "{{fields.title}}",
-  fromBlock: (
-    match: RegExpMatchArray
-  ): { showHeader: boolean; headerText: string; body: string; calloutType: string; showIcon: boolean } => {
-    // We can safely assume there will be a single match; else we wouldn't be inside this function.
-    const [calloutBlock] = match;
+export type CalloutTypes = "informational" | "conditional" | "warning" | "note";
 
-    // Everything inside the first {} we see we consider callout parameters; everything after is the body.
-    const calloutParseMatcher = /{(?<parameters>[^}]+)}[^\n]*\n(?<body>[^3:{}]*)/gms;
-    const calloutMatch = calloutParseMatcher.exec(calloutBlock);
+interface Props {
+  calloutType: CalloutTypes;
+  showHeader?: string | boolean;
+  showIcon?: string | boolean;
+  headerText?: string;
+}
 
-    // If we just have :::callout {}\n:::, then we need to return some default values instead.
-    const defaultCalloutContents =
-      'showHeader="false" headerText="" showIcon="false" calloutType="conditional"';
+interface CalloutMappingObj {
+  containerStyling: string;
+  headingStyling: string;
+  iconStyling: string;
+}
 
-    const calloutParameters = calloutMatch?.groups?.parameters ?? defaultCalloutContents;
-    const calloutBody = calloutMatch?.groups?.body.trim() ?? "";
-
-    const showHeaderMatch = calloutParameters.match(/showHeader="(?<showHeader>[^"]+)"/);
-    const showHeaderValue = Boolean(showHeaderMatch?.groups?.showHeader.trim() ?? "true");
-
-    const headerTextMatch = calloutParameters.match(/headerText="(?<headerText>[^"]+)"/);
-    const headerTextValue = headerTextMatch?.groups?.headerText.trim() ?? "";
-
-    const showIconMatch = calloutParameters.match(/showIcon="(?<showIcon>[^"]+)"/);
-    const showIconValue = Boolean(showIconMatch?.groups?.showIcon.trim() ?? "false");
-
-    const calloutTypeMatch = calloutParameters.match(/calloutType="(?<calloutType>[^"]+)"/);
-    const calloutTypeValue = calloutTypeMatch?.groups?.calloutType.trim() ?? "conditional";
-
+export const getStylingForCalloutType = (calloutType: string): CalloutMappingObj => {
+  if (calloutType === "informational")
     return {
-      calloutType: calloutTypeValue,
-      showHeader: showHeaderValue,
-      showIcon: showIconValue,
-      headerText: headerTextValue,
-      body: calloutBody,
+      containerStyling: "bg-accent-cool-lightest",
+      headingStyling: "text-accent-cool-more-dark",
+      iconStyling: "callout-informational-icon",
     };
-  },
+  if (calloutType === "conditional")
+    return {
+      containerStyling: "bg-primary-extra-light",
+      headingStyling: "text-primary-darker",
+      iconStyling: "callout-conditional-icon",
+    };
+  if (calloutType === "warning")
+    return {
+      containerStyling: "bg-warning-extra-light",
+      headingStyling: "text-accent-warm-darker",
+      iconStyling: "callout-warning-icon",
+    };
+  if (calloutType === "note")
+    return {
+      containerStyling: "bg-base-lightest",
+      headingStyling: "text-base-darkest",
+      iconStyling: "callout-note-icon",
+    };
+  return {
+    containerStyling: "",
+    headingStyling: "",
+    iconStyling: "",
+  };
+};
 
-  // Function to create a text block from an instance of this component
-  toBlock: (obj: {
-    showHeader: boolean;
-    headerText: string;
-    body: string;
-    calloutType: string;
-    showIcon: boolean;
-  }): string => {
-    return `:::callout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" showIcon="${obj.showIcon}" calloutType="${obj.calloutType}" }\n\n${obj.body}\n\n:::`;
-  },
-  toPreview: (obj: {
-    showHeader: boolean;
-    headerText: string;
-    body: string;
-    calloutType: string;
-    showIcon: boolean;
-  }): string => {
-    return `:::callout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" showIcon="${obj.showIcon}" calloutType="${obj.calloutType}" }\n${obj.body}\n:::`;
-  },
+const getDefaultHeadingTextForCalloutType = (config: ConfigType, calloutType: string): string => {
+  if (calloutType === "informational") return config.calloutDefaults.informationalHeadingDefaultText;
+  if (calloutType === "note") return config.calloutDefaults.noteHeadingDefaultText;
+  if (calloutType === "conditional") return config.calloutDefaults.conditionalHeadingDefaultText;
+  if (calloutType === "warning") return config.calloutDefaults.warningHeadingDefaultText;
+  return "";
+};
+
+export const Callout = (props: PropsWithChildren<Props>): ReactNode => {
+  const { Config } = useConfig();
+  const showIcon = Boolean(props.showIcon ?? false);
+  const showHeader = Boolean(props.showHeader ?? true);
+  let headingText = "";
+
+  if (typeof props.headerText === "string" && props.headerText.length > 0) {
+    headingText = props.headerText;
+  } else {
+    headingText = getDefaultHeadingTextForCalloutType(Config, props.calloutType);
+  }
+
+  return (
+    <div
+      className={`padding-205 radius-md margin-y-2 ${
+        getStylingForCalloutType(props.calloutType).containerStyling
+      }`}
+    >
+      {showHeader === true ? (
+        <>
+          <div className="flex">
+            {showIcon && (
+              <div
+                data-testid={getStylingForCalloutType(props.calloutType).iconStyling}
+                className={getStylingForCalloutType(props.calloutType).iconStyling}
+                aria-hidden="true"
+              />
+            )}
+            <span className={`text-bold ${getStylingForCalloutType(props.calloutType).headingStyling}`}>
+              {headingText}
+            </span>
+          </div>
+
+          <div className="margin-top-105 text-primary-darker">{props.children}</div>
+        </>
+      ) : (
+        <div className="text-primary-darker">{props.children}</div>
+      )}
+    </div>
+  );
 };
