@@ -95,6 +95,16 @@
   }
 }
 
+.btn-error-dark {
+  background-color: $error-dark !important;
+  &:hover {
+    background-color: $accent-hot-darker !important;
+  }
+  &:active {
+    background-color: $error-darker !important;
+  }
+}
+
 .btn-info {
   background-color: $info !important;
   &:hover {

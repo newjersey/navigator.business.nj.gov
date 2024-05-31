@@ -145,7 +145,7 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
 
       {displayNextTabButton && (
         <CtaContainer>
-          <ActionBarLayout>
+          <ActionBarLayout reverseInMobile={false}>
             <PrimaryButton
               isColor="primary"
               isRightMarginRemoved={true}

@@ -33,7 +33,7 @@ export const OnboardingButtonGroup = (props: Props): ReactElement => {
 
   return (
     <div className="margin-bottom-2">
-      <ActionBarLayout>
+      <ActionBarLayout reverseInMobile={true}>
         {(state.page || 1) > 1 && (
           <div className="margin-top-2 mobile-lg:margin-top-0">
             <SecondaryButton isColor="primary" onClick={back} dataTestId="back">
