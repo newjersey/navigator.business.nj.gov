@@ -222,7 +222,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         )}
       </div>
       <CtaContainer>
-        <ActionBarLayout>
+        <ActionBarLayout reverseInMobile={true}>
           <div className="margin-top-2 mobile-lg:margin-top-0">
             <SecondaryButton isColor="primary" dataTestId="backButton" onClick={props.onBack}>
               {Config.cannabisPriorityStatus.backButtonText}

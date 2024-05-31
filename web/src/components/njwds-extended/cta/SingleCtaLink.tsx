@@ -20,7 +20,7 @@ export const SingleCtaLink = (props: Props): ReactElement => {
 
   return (
     <CtaContainer noBackgroundColor={props?.noBackgroundColor || false}>
-      <ActionBarLayout alignLeft={props?.alignLeft || false}>
+      <ActionBarLayout reverseInMobile={false} alignLeft={props?.alignLeft || false}>
         <PrimaryButton
           isColor={props?.buttonColor || "primary"}
           isRightMarginRemoved={true}

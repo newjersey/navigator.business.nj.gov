@@ -9,6 +9,7 @@ export type PrimaryButtonColors =
   | "info"
   | "outline"
   | "success-extra-light"
+  | "error"
   | "white";
 
 type OmitGenericButtonProps = Omit<
@@ -25,6 +26,7 @@ const colors = {
   secondary: "usa-button usa-button--secondary",
   "accent-cool-darker": "usa-button btn-accent-cool-darker",
   "accent-cooler": "usa-button btn-accent-cooler",
+  error: "usa-button btn-error-dark",
   info: "usa-button btn-info",
   "success-extra-light": "usa-button btn-success-extra-light",
   white: "usa-button text-info-darkest btn-white",
