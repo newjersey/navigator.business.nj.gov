@@ -21,6 +21,6 @@
     "cross-env": "7.0.3",
     "cspell": "8.8.3",
     "prettier": "2.8.8",
-    "rimraf": "5.0.5"
+    "rimraf": "5.0.7"
   }
 }
