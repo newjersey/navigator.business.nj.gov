@@ -4,6 +4,9 @@ name: Small Business Fund
 displayName: small-business-fund
 urlSlug: small-business-fund
 id: small-business-fund
+sidebarCardBodyText: The Sales and Use Tax Exemption Program allows qualified
+  businesses to receive a sales tax exemption certificate for purchases related
+  to the construction and renovation of a new business location.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: The Sales and Use Tax Exemption Program allows qualified
@@ -29,14 +32,11 @@ county:
   - All
 sector: []
 publishStageArchive: null
-sidebarCardBodyText: The Sales and Use Tax Exemption Program allows qualified
-  businesses to receive a sales tax exemption certificate for purchases related
-  to the construction and renovation of a new business location.
 ---
 
 ## Eligibility
 
-- Small businesses in operation for at least 1 full year and not-for-profits in operation for at least 3 full years
+- Small businesses must be in operation for at least 1 full year and nonprofits in operation for at least 3 full years
 - The business or nonprofit must not have more than $3M in total revenue
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }

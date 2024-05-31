@@ -12,15 +12,14 @@ callToActionText: Apply for My Entity ID with MVC
 agencyId: nj-motor-vehicle
 formName: BA-8
 ---
-
 ## Application Requirements
 
-- `Employer Identification Number (EIN)|ein`
-- Copy of the registration confirmation received when you registered your business for taxes with the IRS. The document must show your business name and address.
-- Copy of your `Certificate of Formation|certificate-formation`
+*  `Employer Identification Number (EIN)|ein` 
+* Copy of the registration confirmation received when you registered your business for taxes with the IRS. The document must show your business name and address.
+* Copy of your `Certificate of Formation|certificate-formation` 
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A letter mailed to you with your MVC-issued Entity ID
+A letter mailed to you with your MVC-issued Entity ID.
 
 :::

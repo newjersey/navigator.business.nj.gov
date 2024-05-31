@@ -23,6 +23,12 @@ export const Hero = (): ReactElement => {
       ...Config.landingPageExperienceB,
     };
   }
+
+  const routeToOnboarding = (): void => {
+    router.push(ROUTES.onboarding);
+    analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
+  };
+
   const section2CTAOnClick = (): void => {
     router.push(ROUTES.onboarding);
     analytics.event.landing_page_second_get_started.click.go_to_onboarding();
@@ -35,8 +41,8 @@ export const Hero = (): ReactElement => {
 
   return (
     <section aria-label="Introduction">
-      <div className="hero-gradient-bg margin-top-205 desktop:margin-top-0">
-        <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">
+      <div className="hero-gradient-bg margin-top-205 desktop:margin-top-10">
+        <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100 margin-bottom-4">
           <div className="grid-row margin-left-1">
             <div
               className={`desktop:grid-col-7 padding-top-3 padding-bottom-2 desktop:padding-bottom-1 ${
@@ -52,12 +58,29 @@ export const Hero = (): ReactElement => {
               <div className="text-base-darkest font-sans-lg margin-bottom-3 desktop:margin-bottom-3">
                 {landingPageConfig.heroSupportingText}
               </div>
+              <PrimaryButton
+                isColor={"accent-cool-darker"}
+                onClick={routeToOnboarding}
+                isNotFullWidthOnMobile={true}
+                isRightMarginRemoved={true}
+                isLargeButton={true}
+                isUnBolded={true}
+              >
+                {landingPageConfig.section2CallToActionText}
+              </PrimaryButton>
             </div>
 
-            <div className="desktop:grid-col-5 order-first desktop:order-last padding-left-10">
+            <div className="desktop:grid-col-5 order-first desktop:order-last desktop:display-block display-none">
               <img className="width-100" src="/img/Hero-img-climb.svg" alt="" role="presentation" />
             </div>
           </div>
+        </div>
+        <div className="border-top-1 border-primary width-6 margin-auto" />
+
+        <div className={"margin-y-3 margin-x-2"}>
+          <Heading level={2} styleVariant="h2" className="text-align-center">
+            {landingPageConfig.tileTitleText}
+          </Heading>
         </div>
         <LandingPageTiles />
       </div>

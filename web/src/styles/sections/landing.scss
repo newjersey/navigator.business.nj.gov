@@ -174,3 +174,19 @@
     border-width: 2px 0 0 0;
   }
 }
+
+.landing-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: 100%;
+
+  @media (max-width: $lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $md) {
+    grid-template-columns: 1fr;
+    width: auto;
+  }
+}

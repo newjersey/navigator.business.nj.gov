@@ -173,7 +173,8 @@
     "VEEVR",
     "WDPF",
     "webflow",
-    "YTTW"
+    "YTTW",
+    "LEGA"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }

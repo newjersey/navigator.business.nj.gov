@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
 import { TaxAccessModalBody } from "@/components/filings-calendar/tax-access-modal/TaxAccessModalBody";
 import { LegalStructureDropDown } from "@/components/LegalStructureDropDown";
@@ -77,6 +78,7 @@ export const TaxAccessStepOne = (props: Props): ReactElement => {
         >
           <WithErrorBar hasError={!isValid()} type="ALWAYS">
             <FieldLabelDescriptionOnly fieldName="legalStructureId" bold={true} />
+            <Content>{Config.taxAccess.legalStructureDropDownHeader}</Content>
             <LegalStructureDropDown />
           </WithErrorBar>
         </ProfileDataContext.Provider>

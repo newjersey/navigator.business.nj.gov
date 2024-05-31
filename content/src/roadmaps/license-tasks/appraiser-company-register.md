@@ -1,4 +1,5 @@
 ---
+id: appraiser-company-register
 filename: appraiser-company-register
 displayname: appraiser-company-registration
 urlSlug: appraiser-company-registration
@@ -15,38 +16,36 @@ callToActionLink: https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx
 licenseCertificationClassification: REGISTRATION
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Real Estate Appraiser Board
-id: appraiser-company-register
 webflowId: 64147a42c6eb18daf545d290
 ---
-
 ## Eligibility Criteria
 
-- Be a certified appraiser
-- Oversee an appraiser panel of more than 15 New Jersey-certified or licensed appraisers
-- Reside on a panel of 25 or more state-certified or state-licensed appraisers in two or more states
+* Be a certified appraiser
+* Oversee an appraiser panel of more than 15 New Jersey-certified or licensed appraisers
+* Reside on a panel of 25 or more state-certified or state-licensed appraisers in two or more states
 
 ## Application Requirements
 
-A completed application by the management company’s `compliance officer|compliance-officer`, to include:
+A completed application by the management company’s `compliance officer|compliance-officer` , to include:
 
-- The name, contact information, and license number of the compliance officer
-- The name and contact information for each `controlling person|controlling-person`
-- A `Surety bond|surety-bond` in the amount of $25,000
-- Signed and notarized application
-- Criminal background check
-- Federal tax ID number
-- Disciplinary action history (if applicable)
-- Registered agent information (if applicable)
-- Applicable fees paid
+* The name, contact information, and license number of the compliance officer
+* The name and contact information for each `controlling person|controlling-person` 
+* A `Surety bond|surety-bond` in the amount of $25,000
+* Signed and notarized application
+* Criminal background check
+* Federal tax ID number
+* Disciplinary action history (if applicable)
+* Registered agent information (if applicable)
+* Applicable fees paid
 
-:::infoAlert
+:::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
 
 The application must be signed and notarized.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A 12-digit appraisal management company registration number
+A 12-digit appraisal management company registration number.
 
 :::

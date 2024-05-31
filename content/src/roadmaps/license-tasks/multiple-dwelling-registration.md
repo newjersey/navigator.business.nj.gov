@@ -1,21 +1,17 @@
 ---
-notesMd: >
-  [Muni planning
-  doc](https://docs.google.com/document/d/1wqFrL2aR2ZI9MvCsp4orFJE2A6sn_oa5YOFQoW2uKYE/edit?usp=sharing)
-summaryDescriptionMd: If you own a newly built `multiple
-  dwelling|multiple-dwelling`, such as an apartment, condominium, or townhouse
-  development, you must register it with the State. If you are the new owner of
-  an existing property, you must update the current registration.
-urlSlug: multiple-dwelling-registration
-filename: multiple-dwelling-registration
-displayname: multiple-dwelling-registration
-name: Register Your Multiple Dwelling, Such as an Apartment or Condominium Complex
-id: multiple-dwelling-registration
-callToActionLink: https://njdcaportal.dynamics365portals.us/ultra-bhi-home/
-callToActionText: Register My Multiple Dwelling
-industryId: real-estate-investor
-agencyId: nj-community-affairs
-agencyAdditionalContext: Bureau of Housing Inspection
+id: "multiple-dwelling-registration"
+webflowId: "66579759c2325a1f5a0ca73c"
+urlSlug: "multiple-dwelling-registration"
+name: "Register Your Multiple Dwelling, Such as an Apartment or Condominium Complex"
+webflowName: "Real Estate Investing: Multiple Dwelling Registration"
+filename: "multiple-dwelling-registration"
+callToActionLink: "https://njdcaportal.dynamics365portals.us/ultra-bhi-home/"
+callToActionText: "Register My Multiple Dwelling"
+agencyId: "nj-community-affairs"
+agencyAdditionalContext: "Bureau of Housing Inspection"
+industryId: "real-estate-investor"
+licenseCertificationClassification: "undefined"
+summaryDescriptionMd: "If you own a newly built `multiple dwelling|multiple-dwelling`, such as an apartment, condominium, or townhouse development, you must register it with the State. If you are the new owner of an existing property, you must update the current registration."
 ---
 
 ---
@@ -47,13 +43,13 @@ If your business is a `Corporation, Limited Liability Company (LLC), Limited Par
 - Name and address of each officer or partner
 - `Certificate of Formation or Authority|certificate-formation`
 
-If your multiple dwelling was built before 1978, you also need the following:
+If your multiple dwelling was built before 1978, you also need the:
 
 - List of units certified to be free of lead-based paint or have a lead-free interior and a copy of the certification from a certified lead testing firm
 - List of seasonal rental units rented for less than six months each year
 - List of units occupied by you, the owner
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
 A Certificate of Registration with a 10-digit registration number, which you need to recertify your registration every year.
 
