@@ -22,7 +22,8 @@ import {
   TaskWithoutLinks,
   TaxAgency,
   TaxFilingMethod,
-  WebflowLicense, ViolationNotice
+  ViolationNotice,
+  WebflowLicense,
 } from "@/lib/types/types";
 import matter from "gray-matter";
 
@@ -73,7 +74,6 @@ export const convertViolationMd = (violationMdContents: string): ViolationNotice
     contentMd: matterResult.content,
     ...violationGrayMatter,
   };
-
 };
 
 export const convertLicenseMd = (taskMdContents: string, filename: string): LicenseEvent => {
@@ -264,7 +264,7 @@ type ViolationGrayMatter = {
   callToActionText: string;
   summaryDescriptionMd: string;
   agencyId?: string;
-}
+};
 
 type FundingGrayMatter = {
   id: string;

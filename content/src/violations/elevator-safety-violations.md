@@ -18,7 +18,7 @@ divisionPhone: (609) 984-7833
 
 Work with your elevator inspector and elevator maintenance company to fix the safety problems below. After repairs, your maintenance company must schedule a re-inspection by the given due date.
 
-For more information, review your Notice of Violation or contact the Elevator Safety Unit at (609) 984-7833.
+For more information, review your `Notice of Violation|notice-of-violation`  or contact the Elevator Safety Unit at (609) 984-7833.
 
 
 :::callout{ showHeader="true" headerText="What happens if I don't fix this?" showIcon="false" calloutType="conditional" }

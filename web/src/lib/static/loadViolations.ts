@@ -1,22 +1,15 @@
+import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "@/lib/static/helpers";
 import { ViolationNotice } from "@/lib/types/types";
 import { convertViolationMd } from "@/lib/utils/markdownReader";
 import fs from "fs";
 import path from "path";
-import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "@/lib/static/helpers";
 
 type PathParams<P> = { params: P; locale?: string };
 export type ViolationUrlSlugParam = {
   violationUrlSlug: string;
 };
 
-
-const violationsDir = path.join(
-  process.cwd(),
-  "..",
-  "content",
-  "src",
-  "violations"
-);
+const violationsDir = path.join(process.cwd(), "..", "content", "src", "violations");
 
 export const loadAllViolations = (): ViolationNotice[] => {
   const fileNames = fs.readdirSync(violationsDir);
@@ -36,8 +29,8 @@ export const loadAllViolationUrlSlugs = (): PathParams<ViolationUrlSlugParam>[] 
       },
     };
   });
-  console.log(a)
-  return a
+  console.log(a);
+  return a;
 };
 
 export const loadViolationByUrlSlug = (urlSlug: string): ViolationNotice => {
