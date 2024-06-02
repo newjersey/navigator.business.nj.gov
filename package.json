@@ -57,7 +57,7 @@
     "@newjersey/njwds": "0.3.0",
     "@smithy/node-http-handler": "2.4.3",
     "@storybook/addon-outline": "7.6.19",
-    "@types/mdast": "4.0.3",
+    "@types/mdast": "4.0.4",
     "airtable": "0.12.2",
     "axios": "1.6.8",
     "babel-jest": "29.7.0",
