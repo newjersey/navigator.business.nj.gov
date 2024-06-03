@@ -51,7 +51,7 @@ webflowType: business-license
 
 :::callout{ showHeader="true" headerText="Once approved, you will have:" showIcon="false" calloutType="conditional" }
 
-A carnival registration certificate, which is valid for one year and not transferable
+A carnival registration certificate, which is valid for one year and not transferable.
 
 The Division of Fire Safety will send copies of your certificate to the `Local Enforcing Agencies (LEA)|lea` in the town where you plan to set up. The LEA will schedule an inspection with you.
 
