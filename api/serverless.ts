@@ -240,8 +240,8 @@ const serverlessConfiguration: AWS = {
 serverlessConfiguration.custom = {
   ...serverlessConfiguration.custom,
   config: {
-    application: "${ssm:/config/application}",
-    infrastructure: "${ssm:/config/infrastructure}",
+    application: "${ssm:/${self:provider.stage}/config/application}",
+    infrastructure: "${ssm:/${self:provider.stage}/config/infrastructure}",
   },
 };
 
