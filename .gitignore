@@ -38,6 +38,7 @@ content/lib
 # Netlify build
 web/out_*
 
+.env
 web/.env
 api/.env
 
