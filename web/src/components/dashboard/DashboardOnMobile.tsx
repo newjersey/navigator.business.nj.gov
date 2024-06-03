@@ -22,7 +22,7 @@ import {
   QuickActionTask,
   RoadmapDisplayContent,
 } from "@/lib/types/types";
-import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
+import { ElevatorSafetyViolation, LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
@@ -34,7 +34,7 @@ interface Props {
   operateReferences: Record<string, OperateReference>;
   fundings: Funding[];
   certifications: Certification[];
-  elevatorViolations?: boolean;
+  elevatorViolations?: Record<string, ElevatorSafetyViolation[]>;
 }
 
 export const DashboardOnMobile = (props: Props): ReactElement => {

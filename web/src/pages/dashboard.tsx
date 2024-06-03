@@ -33,7 +33,7 @@ import {
   ViolationNotice,
 } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { Municipality } from "@businessnjgovnavigator/shared";
+import { ElevatorSafetyViolation, Municipality } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -60,7 +60,7 @@ const DashboardPage = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const isLoading = !business || business?.onboardingFormProgress !== "COMPLETED" || !roadmap;
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
-  const [hasElevatorViolations, setHasElevatorViolations] = useState(false);
+  const [elevatorViolations, setElevatorViolations] = useState<Record<string, ElevatorSafetyViolation[]> | undefined>(undefined);
 
   useMountEffectWhenDefined(() => {
     (async (): Promise<void> => {
@@ -107,11 +107,12 @@ const DashboardPage = (props: Props): ReactElement => {
         business?.profileData.communityAffairsAddress &&
         business?.profileData.operatingPhase === "UP_AND_RUNNING"
       ) {
-        const hasViolations = await api.checkElevatorViolations(
+        const elevatorViolations = await api.checkElevatorViolations(
           business.profileData.communityAffairsAddress.streetAddress1,
           business.profileData.communityAffairsAddress.municipality.id
         );
-        setHasElevatorViolations(hasViolations);
+        console.log(elevatorViolations)
+        setElevatorViolations(elevatorViolations);
       }
     })();
   }, [business, updateQueue]);
@@ -134,7 +135,7 @@ const DashboardPage = (props: Props): ReactElement => {
                 quickActionLicenseReinstatements={props.quickActionLicenseReinstatements}
                 quickActionLinks={props.quickActionLinks}
                 quickActionTasks={props.quickActionTasks}
-                elevatorViolations={hasElevatorViolations}
+                elevatorViolations={elevatorViolations}
               />
               <DashboardOnMobile
                 certifications={props.certifications}
@@ -144,7 +145,7 @@ const DashboardPage = (props: Props): ReactElement => {
                 quickActionLicenseReinstatements={props.quickActionLicenseReinstatements}
                 quickActionLinks={props.quickActionLinks}
                 quickActionTasks={props.quickActionTasks}
-                elevatorViolations={hasElevatorViolations}
+                elevatorViolations={elevatorViolations}
               />
             </>
           )}

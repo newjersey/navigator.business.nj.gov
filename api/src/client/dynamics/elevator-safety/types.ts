@@ -1,3 +1,5 @@
+import { ElevatorSafetyViolation } from "@shared/elevatorSafety";
+
 export interface ElevatorSafetyInspectionClient {
   getElevatorInspections: (accessToken: string, address: string) => Promise<ElevatorInspection[]>;
 }
@@ -14,7 +16,7 @@ export interface ElevatorSafetyViolationsClient {
     accessToken: string,
     address: string,
     municipalityId: string
-  ) => Promise<boolean>;
+  ) => Promise<Record<string, ElevatorSafetyViolation[]>>;
 }
 
 export type ElevatorInspection = {

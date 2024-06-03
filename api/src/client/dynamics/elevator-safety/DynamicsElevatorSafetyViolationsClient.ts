@@ -11,10 +11,10 @@ export const DynamicsElevatorSafetyViolationsClient = (
     accessToken: string,
     address: string,
     municipalityId: string
-  ): Promise<boolean> => {
+  ): Promise<Record<string, ElevatorSafetyViolation[]>> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Dynamics Elevator Violations Client - Id:${logId}`);
-    let hasViolations = false;
+    const deviceViolationMap: Record<string, ElevatorSafetyViolation[]> = {}
 
     await axios
       .get(
@@ -26,7 +26,7 @@ export const DynamicsElevatorSafetyViolationsClient = (
         }
       )
       .then(async (response) => {
-        const deviceInspectionIds: string[] = [];
+        let deviceInspections: DynamicsElevatorSafetyDeviceInspectionResponse[] = [];
         await Promise.all(
           response.data.value.map(async (element: DynamicsElevatorSafetyBuildingResponse) => {
             await axios
@@ -40,9 +40,7 @@ export const DynamicsElevatorSafetyViolationsClient = (
               )
               .then((response) => {
                 const inspections = response.data.value as DynamicsElevatorSafetyDeviceInspectionResponse[];
-                for (const inspection of inspections) {
-                  deviceInspectionIds.push(inspection.ultra_elsadeviceinspectionid);
-                }
+                deviceInspections = [...deviceInspections, ...inspections]
               })
               .catch((error: AxiosError) => {
                 throw error.response?.status;
@@ -50,12 +48,11 @@ export const DynamicsElevatorSafetyViolationsClient = (
           })
         );
 
-        const violations: ElevatorSafetyViolation[] = [];
         await Promise.all(
-          deviceInspectionIds.map(async (element) => {
+          deviceInspections.map(async (element) => {
             await axios
               .get(
-                `${orgUrl}/api/data/v9.2/ultra_elsacitations?$filter=(_ultra_deviceinspection_value eq ${element})`,
+                `${orgUrl}/api/data/v9.2/ultra_elsacitations?$filter=(_ultra_deviceinspection_value eq ${element.ultra_elsadeviceinspectionid})`,
                 {
                   headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -64,25 +61,28 @@ export const DynamicsElevatorSafetyViolationsClient = (
               )
               .then((response) => {
                 const violationsResponse = response.data.value as DynamicsElevatorSafetyViolationResponse[];
+                const violationsForDevice: ElevatorSafetyViolation[] = []
                 violationsResponse.map((violation) => {
                   const formattedViolation = processDynamicsElevatorSafetyViolationResponse(violation);
-                  violations.push(formattedViolation);
+                  violationsForDevice.push(formattedViolation);
                 });
+                if (violationsForDevice.length > 0) {
+                  deviceViolationMap[element.ultra_buildingdeviceid] = violationsForDevice
+                }
+
               })
               .catch((error: AxiosError) => {
                 throw error.response?.status;
               });
           })
         );
-
-        hasViolations = violations.length > 0;
       })
       .catch((error: AxiosError) => {
         logWriter.LogError(`Dynamics Elevator Safety Violation - Id:${logId} - Error:`, error);
         throw error.response?.status;
       });
 
-    return hasViolations;
+    return deviceViolationMap;
   };
 
   return {
@@ -96,6 +96,7 @@ function processDynamicsElevatorSafetyViolationResponse(
   return {
     isOpen: response.statusCode === 1,
     citationDate: response.ultra_citationdate,
+    inspectorRemarks: response.ultra_remarks
   };
 }
 
@@ -107,9 +108,11 @@ type DynamicsElevatorSafetyBuildingResponse = {
 type DynamicsElevatorSafetyDeviceInspectionResponse = {
   _ultra_building_value: string;
   ultra_elsadeviceinspectionid: string;
+  ultra_buildingdeviceid: string;
 };
 
 type DynamicsElevatorSafetyViolationResponse = {
   statusCode: number;
   ultra_citationdate: string;
+  ultra_remarks: string;
 };

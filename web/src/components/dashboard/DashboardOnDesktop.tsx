@@ -21,7 +21,7 @@ import {
   QuickActionTask,
   RoadmapDisplayContent,
 } from "@/lib/types/types";
-import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
+import { ElevatorSafetyViolation, LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
@@ -33,7 +33,7 @@ interface Props {
   operateReferences: Record<string, OperateReference>;
   fundings: Funding[];
   certifications: Certification[];
-  elevatorViolations?: boolean;
+  elevatorViolations?: Record<string, ElevatorSafetyViolation[]>;
 }
 
 export const DashboardOnDesktop = (props: Props): ReactElement => {
@@ -48,6 +48,8 @@ export const DashboardOnDesktop = (props: Props): ReactElement => {
     isHomeBasedBusinessApplicable(business?.profileData.industryId) &&
     business?.profileData.homeBasedBusiness === undefined &&
     operatingPhase.displayHomeBasedPrompt;
+
+  console.log(props.elevatorViolations)
 
   return (
     <div className="display-none desktop:display-block" data-testid="desktop">

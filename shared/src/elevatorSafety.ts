@@ -21,6 +21,7 @@ export type ElevatorSafetyRegistrationSummary = {
 export type ElevatorSafetyViolation = {
   citationDate: string;
   isOpen: boolean;
+  inspectorRemarks: string;
 };
 
 export type ElevatorSafetyAddress = {

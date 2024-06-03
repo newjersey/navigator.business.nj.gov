@@ -3,6 +3,7 @@ import { SelfRegResponse } from "@/lib/types/types";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared";
 import {
+  ElevatorSafetyViolation,
   InputFile,
   LicenseSearchNameAndAddress,
   NameAvailability,
@@ -38,7 +39,7 @@ export const checkElevatorRegistrationStatus = (
   return post(`/elevator-safety/registration`, { address, municipalityId });
 };
 
-export const checkElevatorViolations = (address: string, municipalityId: string): Promise<boolean> => {
+export const checkElevatorViolations = (address: string, municipalityId: string): Promise<Record<string, ElevatorSafetyViolation[]>> => {
   return post(`/elevator-safety/violations`, { address, municipalityId });
 };
 
