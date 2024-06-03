@@ -41,6 +41,6 @@ webflowType: business-license
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A fire permit for each activity that requires it
+A fire permit for each activity that requires it.
 
 :::
