@@ -10,7 +10,7 @@
     },
     {
       "step": 4,
-      "weight": 1,
+      "weight": -7,
       "licenseTask": "carnival-fire-permit"
     }
   ]
