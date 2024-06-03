@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-server-import-in-page */
-
 import { NextRequest, NextResponse } from "next/server";
 
 const BASIC_AUTH_USERNAME = process.env.BASIC_AUTH_USERNAME;

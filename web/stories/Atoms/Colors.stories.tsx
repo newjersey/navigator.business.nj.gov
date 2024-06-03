@@ -191,6 +191,7 @@ const Template = () => {
       </Heading>
       {renderColor("accent-hot-extra-light", "#fae8e0")}
       {renderColor("accent-hot", "#be4e1e")}
+      {renderColor("accent-hot-darker", "#8f3b17")}
     </div>
   );
 

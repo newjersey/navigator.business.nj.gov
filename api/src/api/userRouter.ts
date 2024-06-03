@@ -17,6 +17,7 @@ import { createEmptyFormationFormData } from "@shared/formationData";
 import { modifyCurrentBusiness } from "@shared/test";
 import { UserData, createEmptyUserData } from "@shared/userData";
 import { Request, Response, Router } from "express";
+import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
 
 const getTokenFromHeader = (req: Request): string => {
@@ -125,7 +126,7 @@ export const userRouterFactory = (
   router.get("/users/:userId", (req, res) => {
     const signedInUserId = getSignedInUserId(req);
     if (signedInUserId !== req.params.userId) {
-      res.status(403).json();
+      res.status(StatusCodes.FORBIDDEN).json();
       return;
     }
 
@@ -145,10 +146,10 @@ export const userRouterFactory = (
           if (process.env.IS_OFFLINE || process.env.STAGE === "dev") {
             saveEmptyUserData(req, res, signedInUserId);
           } else {
-            res.status(404).json({ error: error.message });
+            res.status(StatusCodes.NOT_FOUND).json({ error: error.message });
           }
         } else {
-          res.status(500).json({ error: error.message });
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
         }
       });
   });
@@ -158,7 +159,7 @@ export const userRouterFactory = (
     const postedUserBodyId = userData.user.id;
 
     if (getSignedInUserId(req) !== postedUserBodyId) {
-      res.status(403).json();
+      res.status(StatusCodes.FORBIDDEN).json();
       return;
     }
 
@@ -179,7 +180,7 @@ export const userRouterFactory = (
         res.json(result);
       })
       .catch((error: Error) => {
-        res.status(500).json({ error: error.message });
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
       });
   });
 
@@ -255,7 +256,7 @@ export const userRouterFactory = (
         res.json(result);
       })
       .catch((error) => {
-        res.status(500).json({ error });
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
       });
   };
 

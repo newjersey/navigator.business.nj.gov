@@ -2,6 +2,7 @@ import { getSignedInUserId } from "@api/userRouter";
 import { EncryptionDecryptionClient, TaxFilingInterface, UserDataClient } from "@domain/types";
 import { maskingCharacter } from "@shared/profileData";
 import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
 
 const getTaxId = async (
   encryptionDecryptionClient: EncryptionDecryptionClient,
@@ -39,7 +40,7 @@ export const taxFilingRouterFactory = (
       const updatedUserData = await userDataClient.put(userDataWithTaxFilingData);
       res.json(updatedUserData);
     } catch (error) {
-      res.status(500).json({ error });
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
     }
   });
 
@@ -57,7 +58,7 @@ export const taxFilingRouterFactory = (
       const updatedUserData = await userDataClient.put(userDataWithTaxFilingData);
       res.json(updatedUserData);
     } catch (error) {
-      res.status(500).json({ error });
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
     }
   });
 

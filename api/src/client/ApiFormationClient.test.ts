@@ -24,6 +24,7 @@ import { ApiFormationClient } from "@client/ApiFormationClient";
 import { ApiError, ApiGetFilingResponse, ApiResponse, ApiSubmission } from "@client/ApiFormationHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { UserData } from "@shared/userData";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 jest.mock("axios");
 jest.mock("winston");
@@ -1614,7 +1615,7 @@ describe("ApiFormationClient", () => {
       mockAxios.post.mockResolvedValue({ data: stubResponse });
       expect(await client.health()).toEqual({
         error: {
-          message: "Not Acceptable",
+          message: ReasonPhrases.NOT_ACCEPTABLE,
           timeout: false,
         },
         success: false,
@@ -1622,13 +1623,13 @@ describe("ApiFormationClient", () => {
     });
 
     it("returns a failing health check if an unexpected status code is received", async () => {
-      mockAxios.post.mockRejectedValue({ response: { status: 400 }, message: "" });
+      mockAxios.post.mockRejectedValue({ response: { status: StatusCodes.BAD_REQUEST }, message: "" });
       expect(await client.health()).toEqual({
         success: false,
         error: {
-          message: "Bad Gateway",
+          message: ReasonPhrases.BAD_GATEWAY,
           serverResponseBody: "",
-          serverResponseCode: 400,
+          serverResponseCode: StatusCodes.BAD_REQUEST,
           timeout: false,
         },
       });
@@ -1639,7 +1640,7 @@ describe("ApiFormationClient", () => {
       expect(await client.health()).toEqual({
         success: false,
         error: {
-          message: "Gateway Timeout",
+          message: ReasonPhrases.GATEWAY_TIMEOUT,
           timeout: true,
         },
       });
