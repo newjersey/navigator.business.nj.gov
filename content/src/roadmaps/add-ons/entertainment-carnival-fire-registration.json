@@ -1,0 +1,13 @@
+{
+  "id": "entertainment-carnival-fire-registration",
+  "displayname": "entertainment-carnival-fire-registration",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 1,
+      "task": "",
+      "licenseTask": "carnival-fire-registration",
+      "required": true
+    }
+  ]
+}
