@@ -25,6 +25,7 @@ import { UserData } from "@shared/userData";
 import { generateAnnualFilings, getLastCalledWith } from "@test/helpers";
 import dayjs from "dayjs";
 import { Express } from "express";
+import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
 import request from "supertest";
 
@@ -119,36 +120,36 @@ describe("userRouter", () => {
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
 
       expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");
-      expect(response.status).toEqual(200);
+      expect(response.status).toEqual(StatusCodes.OK);
       expect(response.body).toEqual(userData);
     });
 
-    it("returns a 404 when a user isn't registered", async () => {
+    it("returns NOT FOUND when a user isn't registered", async () => {
       stubUserDataClient.get.mockImplementation(() => {
         return Promise.reject(new Error("Not found"));
       });
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
       expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");
-      expect(response.status).toEqual(404);
+      expect(response.status).toEqual(StatusCodes.NOT_FOUND);
     });
 
-    it("returns a 403 when user JWT does not match user ID", async () => {
+    it("returns a FORBIDDEN when user JWT does not match user ID", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "other-user-id" }));
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer other-user-token");
 
       expect(mockJwt.decode).toHaveBeenCalledWith("other-user-token");
       expect(stubUserDataClient.get).not.toHaveBeenCalled();
-      expect(response.status).toEqual(403);
+      expect(response.status).toEqual(StatusCodes.FORBIDDEN);
     });
 
-    it("returns a 500 when user get fails", async () => {
+    it("returns a INTERNAL SERVER ERROR when user get fails", async () => {
       stubUserDataClient.get.mockRejectedValue(new Error("error"));
 
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
 
-      expect(response.status).toEqual(500);
+      expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
       expect(response.body).toEqual({ error: "error" });
     });
 
@@ -166,7 +167,7 @@ describe("userRouter", () => {
         const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
 
         expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");
-        expect(response.status).toEqual(200);
+        expect(response.status).toEqual(StatusCodes.OK);
         expect(response.body).toEqual(updatedUserData);
         expect(stubUpdateOperatingPhase).toHaveBeenCalledWith(userData);
         expect(stubUpdateRoadmapSidebarCards).toHaveBeenCalledWith(updatedUserData);
@@ -579,7 +580,7 @@ describe("userRouter", () => {
         .set("Authorization", "Bearer user-123-token");
 
       expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");
-      expect(response.status).toEqual(200);
+      expect(response.status).toEqual(StatusCodes.OK);
       expect(response.body).toEqual(userData);
     });
 
@@ -692,7 +693,7 @@ describe("userRouter", () => {
       expect(taskItemChecklistPut).toEqual({ "some-id": true });
     });
 
-    it("returns a 403 when user JWT does not match user ID", async () => {
+    it("returns FORBIDDEN when user JWT does not match user ID", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "other-user-id" }));
       const userData = generateUserData({ user: generateUser({ id: "123" }) });
 
@@ -703,10 +704,10 @@ describe("userRouter", () => {
 
       expect(mockJwt.decode).toHaveBeenCalledWith("other-user-token");
       expect(stubUserDataClient.put).not.toHaveBeenCalled();
-      expect(response.status).toEqual(403);
+      expect(response.status).toEqual(StatusCodes.FORBIDDEN);
     });
 
-    it("returns a 500 when user put fails", async () => {
+    it("returns INTERNAL SERVER ERROR when user put fails", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const userData = generateUserData({ user: generateUser({ id: "123" }) });
 
@@ -716,7 +717,7 @@ describe("userRouter", () => {
         .send(userData)
         .set("Authorization", "Bearer user-123-token");
 
-      expect(response.status).toEqual(500);
+      expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
       expect(response.body).toEqual({ error: "error" });
     });
 

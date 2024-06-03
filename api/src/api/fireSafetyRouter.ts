@@ -2,6 +2,7 @@ import { FireSafetyInspectionStatus } from "@domain/types";
 
 import { FireSafetyInspectionResult } from "@shared/fireSafety";
 import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
 
 export const fireSafetyRouterFactory = (fireSafetyInspection: FireSafetyInspectionStatus): Router => {
   const router = Router();
@@ -13,7 +14,7 @@ export const fireSafetyRouterFactory = (fireSafetyInspection: FireSafetyInspecti
         return res.json(inspectionData);
       })
       .catch((error) => {
-        res.status(500).json({ error });
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
       });
   });
 

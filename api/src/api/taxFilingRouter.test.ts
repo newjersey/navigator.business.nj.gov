@@ -12,6 +12,7 @@ import {
 } from "@shared/test";
 import { UserData } from "@shared/userData";
 import { Express } from "express";
+import { StatusCodes } from "http-status-codes";
 import request from "supertest";
 
 jest.mock("./userRouter", () => {
@@ -82,7 +83,7 @@ describe("taxFilingRouter", () => {
       expect(response.body).toEqual(responseUserData);
       expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
-      expect(response.status).toEqual(200);
+      expect(response.status).toEqual(StatusCodes.OK);
     });
 
     it("uses the values in taxId field if it is plaintext and encrypted field is empty", async () => {
@@ -101,7 +102,7 @@ describe("taxFilingRouter", () => {
       });
       expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
-      expect(response.status).toEqual(200);
+      expect(response.status).toEqual(StatusCodes.OK);
     });
 
     it("uses the values in taxId field if it is plaintext and encrypted field is populated", async () => {
@@ -120,10 +121,10 @@ describe("taxFilingRouter", () => {
       });
       expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
-      expect(response.status).toEqual(200);
+      expect(response.status).toEqual(StatusCodes.OK);
     });
 
-    it("returns 500 error if taxId is masked and there is no encryptedTaxId", async () => {
+    it("returns INTERNAL SERVER ERROR if taxId is masked and there is no encryptedTaxId", async () => {
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({
         businessName: "my-cool-business",
         taxId: "*****89000",
@@ -131,7 +132,7 @@ describe("taxFilingRouter", () => {
       });
       apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
       const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
-      expect(response.status).toEqual(500);
+      expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
     });
 
     it("decrypts the taxId field using the encryptedTaxId field if it is masked", async () => {
@@ -152,31 +153,31 @@ describe("taxFilingRouter", () => {
       });
       expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
-      expect(response.status).toEqual(200);
+      expect(response.status).toEqual(StatusCodes.OK);
     });
 
-    it("returns 500 on interface error", async () => {
-      apiTaxFilingClient.lookup.mockRejectedValue(new Error("500"));
+    it("returns INTERNAL SERVER ERROR on interface error", async () => {
+      apiTaxFilingClient.lookup.mockRejectedValue(new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString()));
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
       const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
-      expect(response.status).toEqual(500);
+      expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
     });
 
-    it("returns 500 on userDataClient put error", async () => {
+    it("returns INTERNAL SERVER ERROR on userDataClient put error", async () => {
       apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
-      stubUserDataClient.put.mockRejectedValue(new Error("500"));
+      stubUserDataClient.put.mockRejectedValue(new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString()));
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
       const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
-      expect(response.status).toEqual(500);
+      expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
       expect(apiTaxFilingClient.lookup).toHaveBeenCalled();
     });
 
-    it("returns 500 on userDataClient get error", async () => {
+    it("returns INTERNAL SERVER ERROR on userDataClient get error", async () => {
       apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
-      stubUserDataClient.get.mockRejectedValue(new Error("500"));
+      stubUserDataClient.get.mockRejectedValue(new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString()));
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
       const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
-      expect(response.status).toEqual(500);
+      expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
       expect(apiTaxFilingClient.lookup).not.toHaveBeenCalled();
     });
   });
@@ -188,7 +189,7 @@ describe("taxFilingRouter", () => {
       const response = await request(app).post(`/onboarding`).send(taxIdAndBusinessName);
       expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
-      expect(response.status).toEqual(200);
+      expect(response.status).toEqual(StatusCodes.OK);
     });
 
     it("uses the values in taxId field if it is plaintext and encrypted field is empty", async () => {
@@ -206,7 +207,7 @@ describe("taxFilingRouter", () => {
       });
       expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
-      expect(response.status).toEqual(200);
+      expect(response.status).toEqual(StatusCodes.OK);
     });
 
     it("decrypts the taxId field using the encryptedTaxId field if it is masked", async () => {
@@ -227,31 +228,33 @@ describe("taxFilingRouter", () => {
       expect(stubEncryptionDecryptionClient.decryptValue).toHaveBeenCalledWith("some-encrypted-value");
       expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
-      expect(response.status).toEqual(200);
+      expect(response.status).toEqual(StatusCodes.OK);
     });
 
-    it("returns 500 on client error", async () => {
-      apiTaxFilingClient.onboarding.mockRejectedValue(new Error("500"));
+    it("returns INTERNAL SERVER ERROR on client error", async () => {
+      apiTaxFilingClient.onboarding.mockRejectedValue(
+        new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString())
+      );
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
       const response = await request(app).post(`/onboarding`).send(taxIdAndBusinessName);
-      expect(response.status).toEqual(500);
+      expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
     });
 
-    it("returns 500 on userDataClient put error", async () => {
+    it("returns INTERNAL SERVER ERROR on userDataClient put error", async () => {
       apiTaxFilingClient.onboarding.mockResolvedValue(responseUserData);
-      stubUserDataClient.put.mockRejectedValue(new Error("500"));
+      stubUserDataClient.put.mockRejectedValue(new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString()));
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
       const response = await request(app).post(`/onboarding`).send(taxIdAndBusinessName);
-      expect(response.status).toEqual(500);
+      expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
       expect(apiTaxFilingClient.onboarding).toHaveBeenCalled();
     });
 
-    it("returns 500 on userDataClient get error", async () => {
+    it("returns INTERNAL SERVER ERROR on userDataClient get error", async () => {
       apiTaxFilingClient.onboarding.mockResolvedValue(responseUserData);
-      stubUserDataClient.get.mockRejectedValue(new Error("500"));
+      stubUserDataClient.get.mockRejectedValue(new Error(StatusCodes.INTERNAL_SERVER_ERROR.toString()));
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
       const response = await request(app).post(`/onboarding`).send(taxIdAndBusinessName);
-      expect(response.status).toEqual(500);
+      expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
       expect(apiTaxFilingClient.onboarding).not.toHaveBeenCalled();
     });
   });

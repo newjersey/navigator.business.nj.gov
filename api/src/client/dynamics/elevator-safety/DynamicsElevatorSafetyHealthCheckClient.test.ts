@@ -3,6 +3,7 @@ import { AccessTokenClient } from "@client/dynamics/types";
 import { HealthCheckMethod } from "@domain/types";
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 jest.mock("axios");
 jest.mock("winston");
@@ -32,13 +33,13 @@ describe("DynamicsElevatorSafetyHealthCheckClient", () => {
   });
 
   it("returns a failing health check if unexpected data is retrieved", async () => {
-    mockAxios.get.mockRejectedValue({ response: { status: 404 }, message: "" });
+    mockAxios.get.mockRejectedValue({ response: { status: StatusCodes.NOT_FOUND }, message: "" });
     expect(await client()).toEqual({
       success: false,
       error: {
-        message: "Bad Gateway",
+        message: ReasonPhrases.BAD_GATEWAY,
         serverResponseBody: "",
-        serverResponseCode: 404,
+        serverResponseCode: StatusCodes.NOT_FOUND,
         timeout: false,
       },
     });
@@ -49,7 +50,7 @@ describe("DynamicsElevatorSafetyHealthCheckClient", () => {
     expect(await client()).toEqual({
       success: false,
       error: {
-        message: "Gateway Timeout",
+        message: ReasonPhrases.GATEWAY_TIMEOUT,
         timeout: true,
       },
     });
