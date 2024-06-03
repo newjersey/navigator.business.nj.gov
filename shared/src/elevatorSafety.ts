@@ -22,6 +22,7 @@ export type ElevatorSafetyViolation = {
   citationDate: string;
   isOpen: boolean;
   inspectorRemarks: string;
+  dueDate?: string;
 };
 
 export type ElevatorSafetyAddress = {

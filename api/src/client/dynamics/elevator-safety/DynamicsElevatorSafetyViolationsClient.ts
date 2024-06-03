@@ -96,7 +96,8 @@ function processDynamicsElevatorSafetyViolationResponse(
   return {
     isOpen: response.statusCode === 1,
     citationDate: response.ultra_citationdate,
-    inspectorRemarks: response.ultra_remarks
+    inspectorRemarks: response.ultra_remarks,
+    dueDate: response.ultra_reinspcetiondate
   };
 }
 
@@ -115,4 +116,5 @@ type DynamicsElevatorSafetyViolationResponse = {
   statusCode: number;
   ultra_citationdate: string;
   ultra_remarks: string;
+  ultra_reinspcetiondate: string;
 };

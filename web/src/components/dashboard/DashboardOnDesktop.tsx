@@ -49,8 +49,6 @@ export const DashboardOnDesktop = (props: Props): ReactElement => {
     business?.profileData.homeBasedBusiness === undefined &&
     operatingPhase.displayHomeBasedPrompt;
 
-  console.log(props.elevatorViolations)
-
   return (
     <div className="display-none desktop:display-block" data-testid="desktop">
       <div className="margin-top-0 blueRightGutter" data-testid="rightSidebarPageLayout">
