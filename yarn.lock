@@ -4708,7 +4708,7 @@ __metadata:
     remove-markdown: 0.5.0
     require-from-string: 2.0.2
     rimraf: 5.0.7
-    sass: 1.77.3
+    sass: 1.77.4
     sass-loader: 14.2.1
     semantic-release: 19.0.5
     serverless: 3.38.0
@@ -4898,7 +4898,7 @@ __metadata:
     remove-markdown: 0.5.0
     require-from-string: 2.0.2
     rimraf: 5.0.7
-    sass: 1.77.3
+    sass: 1.77.4
     sass-loader: 14.2.1
     slick-carousel: ^1.8.1
     storybook: 7.6.19
@@ -31726,16 +31726,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:1.77.3":
-  version: 1.77.3
-  resolution: "sass@npm:1.77.3"
+"sass@npm:1.77.4":
+  version: 1.77.4
+  resolution: "sass@npm:1.77.4"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: 5f2169ff8c2262f21c21409909827e1c841bff47e60392905156ab2d51188d86c54c6893cad86383fe815285367f91407faec2c7b721bb4ffdf83b80bdc97673
+  checksum: 415d76960e35d78310ffc33bc61fdb2b35a54bb2823dfc4eff50eee960096dacc210d7ef7ae6695120e1a4f005f269719c34d58c77c54ff7787516bda6a89e55
   languageName: node
   linkType: hard
 
