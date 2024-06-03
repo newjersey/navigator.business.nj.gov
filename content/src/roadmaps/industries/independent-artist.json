@@ -44,8 +44,8 @@
   ],
   "name": "Entertainment",
   "nonEssentialQuestionsIds": [
-    "carnival-ride-permitting",
-    "carnival-fire-licenses"
+    "carnival-fire-licenses",
+    "carnival-ride-permitting"
   ],
   "displayname": "independent-artist",
   "industryOnboardingQuestions": {
