@@ -4,13 +4,13 @@
   "roadmapSteps": [
     {
       "step": 4,
-      "weight": 15,
+      "weight": 80,
       "licenseTask": "carnival-fire-registration",
       "required": true
     },
     {
       "step": 4,
-      "weight": 16,
+      "weight": 100,
       "licenseTask": "carnival-fire-permit"
     }
   ]
