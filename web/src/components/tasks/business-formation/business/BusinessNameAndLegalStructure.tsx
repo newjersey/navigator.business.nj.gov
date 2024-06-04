@@ -75,7 +75,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
     if (isReviewStep) {
       return <ReviewNotEntered />;
     } else {
-      return <span className="text-accent-cool-darkest">{Config.formation.general.notEntered}</span>;
+      return <span className="text-base-darkest">{Config.formation.general.notEntered}</span>;
     }
   };
 
@@ -103,7 +103,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
           <div className="flex">
             <div className="margin-right-05">
               {state.formationFormData.businessName ? (
-                <span className="text-accent-cool-darkest">{state.formationFormData.businessName}</span>
+                <span className="text-base-darkest">{state.formationFormData.businessName}</span>
               ) : (
                 notEnteredBusinessName()
               )}
