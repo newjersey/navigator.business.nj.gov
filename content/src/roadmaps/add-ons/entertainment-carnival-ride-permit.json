@@ -4,14 +4,14 @@
   "roadmapSteps": [
     {
       "step": 4,
-      "weight": 755,
+      "weight": 80,
       "task": "carnival-ride-permit",
       "required": true,
       "licenseTask": ""
     },
     {
       "step": 4,
-      "weight": 70,
+      "weight": 75,
       "task": "individual-approval-permit"
     }
   ]
