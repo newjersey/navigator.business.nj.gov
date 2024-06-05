@@ -57,60 +57,62 @@ export const ProfileAddressField = (): ReactElement => {
             className="margin-bottom-2"
           />
         </div>
-        <WithErrorBar
-          hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressMunicipality"])}
-          type="DESKTOP-ONLY"
-        >
-          <div className="grid-row grid-gap-1">
-            <div className="grid-col-12 tablet:grid-col-7">
-              <WithErrorBar hasError={doesFieldHaveError("addressMunicipality")} type="MOBILE-ONLY">
-                <span className="text-bold">{Config.profileDefaults.fields.addressMunicipality.label}</span>
-                <ProfileMunicipality />
-              </WithErrorBar>
-            </div>
-            <div className="grid-col-12 tablet:grid-col-5 margin-top-2 tablet:margin-top-0">
-              <WithErrorBar
-                hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
-                type="MOBILE-ONLY"
-              >
-                <div className="grid-row grid-gap-1">
-                  <div className="grid-col-2">
-                    <strong>
-                      <ModifiedContent>{Config.profileDefaults.fields.addressState.label}</ModifiedContent>
-                    </strong>
-                    <div
-                      id={`question-addressState`}
-                      className="text-field-width-default add-spacing-on-ele-scroll"
-                    >
-                      <StateDropdown
-                        fieldName="addressState"
-                        value={"New Jersey"}
-                        validationText={Config.profileDefaults.fields.addressState.error}
-                        disabled={true}
-                        onSelect={(): void => {}}
-                      />
+        <div className="text-field-width-default">
+          <WithErrorBar
+            hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressMunicipality"])}
+            type="DESKTOP-ONLY"
+          >
+            <div className="grid-row">
+              <div className="grid-col-12 tablet:grid-col-7">
+                <WithErrorBar hasError={doesFieldHaveError("addressMunicipality")} type="MOBILE-ONLY">
+                  <span className="text-bold">{Config.profileDefaults.fields.addressMunicipality.label}</span>
+                  <ProfileMunicipality />
+                </WithErrorBar>
+              </div>
+              <div className="grid-col-12 tablet:grid-col-5">
+                <WithErrorBar
+                  hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
+                  type="MOBILE-ONLY"
+                >
+                  <div className="grid-row">
+                    <div className="grid-col-8">
+                      <strong>
+                        <ModifiedContent>{Config.profileDefaults.fields.addressState.label}</ModifiedContent>
+                      </strong>
+                      <div
+                        id={`question-addressState`}
+                        className="text-field-width-default add-spacing-on-ele-scroll"
+                      >
+                        <StateDropdown
+                          fieldName="addressState"
+                          value={"New Jersey"}
+                          validationText={Config.profileDefaults.fields.addressState.error}
+                          disabled={true}
+                          onSelect={(): void => {}}
+                        />
+                      </div>
+                    </div>
+                    <div className="grid-col-4">
+                      <div
+                        id={`question-addressZipCode`}
+                        className="text-field-width-default add-spacing-on-ele-scroll"
+                      >
+                        <ProfileAddressTextField
+                          label={Config.profileDefaults.fields.addressZipCode.label}
+                          numericProps={{ maxLength: 5 }}
+                          required={true}
+                          errorBarType="NEVER"
+                          validationText={getFieldErrorLabel("addressZipCode")}
+                          fieldName={"addressZipCode"}
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div className="grid-col-4">
-                    <div
-                      id={`question-addressZipCode`}
-                      className="text-field-width-default add-spacing-on-ele-scroll"
-                    >
-                      <ProfileAddressTextField
-                        label={Config.profileDefaults.fields.addressZipCode.label}
-                        numericProps={{ maxLength: 5 }}
-                        required={true}
-                        errorBarType="NEVER"
-                        validationText={getFieldErrorLabel("addressZipCode")}
-                        fieldName={"addressZipCode"}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </WithErrorBar>
+                </WithErrorBar>
+              </div>
             </div>
-          </div>
-        </WithErrorBar>
+          </WithErrorBar>
+        </div>
         <hr aria-hidden={true} />
       </>
     </>
