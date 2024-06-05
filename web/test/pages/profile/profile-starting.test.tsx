@@ -345,6 +345,7 @@ describe("profile - starting business", () => {
     });
 
     const initialBusiness = generateBusinessForProfile({ taxFilingData: taxData });
+
     renderPage({ business: initialBusiness });
     clickSave();
 
@@ -534,6 +535,8 @@ describe("profile - starting business", () => {
     describe("when the tax ID is initially 9 digits in length", () => {
       const businessWith9TaxId = generateBusinessForProfile({
         profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "limited-liability-company",
           taxId: "123456789",
         }),
       });
@@ -610,6 +613,8 @@ describe("profile - starting business", () => {
     describe("when the tax ID is initially 12 digits in length", () => {
       const businessWith12TaxId = generateBusinessForProfile({
         profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "limited-liability-company",
           taxId: "123456789123",
         }),
       });
@@ -661,6 +666,8 @@ describe("profile - starting business", () => {
       const businessWithEmptyTaxId = generateBusinessForProfile({
         profileData: generateProfileData({
           taxId: "",
+          businessPersona: "STARTING",
+          legalStructureId: "limited-liability-company",
         }),
       });
 

@@ -1,6 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { ContextualInfo } from "@/contexts/contextualInfoContext";
 import {
+  Address,
   BusinessPersona,
   BusinessUser,
   emptyBusinessUser,
@@ -20,7 +21,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { LicenseEventSubtype } from "@businessnjgovnavigator/shared/taxFiling";
-import { Business } from "@businessnjgovnavigator/shared/userData";
+import { Business, FieldsForAddressErrorHandling } from "@businessnjgovnavigator/shared/userData";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types
@@ -81,6 +82,12 @@ export type FormationFieldErrorState = {
   label: string;
 };
 
+export type AddressFieldErrorState = {
+  field: FieldsForAddressErrorHandling;
+  hasError: boolean;
+  label: string;
+};
+
 export const profileFieldsFromConfig = getMergedConfig().profileDefaults.fields;
 
 export type ProfileContentField = Exclude<
@@ -88,7 +95,7 @@ export type ProfileContentField = Exclude<
   "businessPersona"
 >;
 
-export type ProfileFields = keyof ProfileData | keyof BusinessUser;
+export type ProfileFields = keyof ProfileData | keyof BusinessUser | keyof Address;
 
 export type FieldErrorType = undefined | unknown;
 
