@@ -4,7 +4,6 @@ import { AddNewsletter, AddToUserTesting, UserDataClient } from "@domain/types";
 import { shouldAddToUserTesting } from "@domain/user-testing/shouldAddToUserTesting";
 import { UserData } from "@shared/userData";
 import { Router } from "express";
-import { StatusCodes } from "http-status-codes";
 
 export const externalEndpointRouterFactory = (
   userDataClient: UserDataClient,
@@ -28,7 +27,7 @@ export const externalEndpointRouterFactory = (
         try {
           userData = await userDataClient.put(userData);
         } catch (error) {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
+          res.status(500).json({ error });
         }
       }
     }
@@ -50,7 +49,7 @@ export const externalEndpointRouterFactory = (
         try {
           userData = await userDataClient.put(userData);
         } catch (error) {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
+          res.status(500).json({ error });
         }
       }
     }

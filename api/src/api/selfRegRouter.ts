@@ -2,7 +2,6 @@ import { SelfRegClient, UserDataClient } from "@domain/types";
 import { UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { Router } from "express";
-import { StatusCodes } from "http-status-codes";
 import { createHmac } from "node:crypto";
 
 export const selfRegRouterFactory = (
@@ -23,10 +22,10 @@ export const selfRegRouterFactory = (
     } catch (error) {
       const message = (error as Error).message;
       if (message === "DUPLICATE_SIGNUP") {
-        res.status(StatusCodes.CONFLICT).send({ error: message });
+        res.status(409).send({ error: message });
         return;
       }
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ error: message });
+      res.status(500).send({ error: message });
     }
   });
 

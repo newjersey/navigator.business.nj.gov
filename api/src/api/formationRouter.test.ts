@@ -18,7 +18,6 @@ import {
 } from "@shared/test";
 import { generateInputFile } from "@test/factories";
 import { Express } from "express";
-import { StatusCodes } from "http-status-codes";
 import request from "supertest";
 
 jest.mock("./userRouter", () => {
@@ -91,7 +90,7 @@ describe("formationRouter", () => {
 
       expect(stubFormationClient.form).toHaveBeenCalledWith(userData, "some-url", foreignGoodStandingFile);
 
-      expect(response.status).toEqual(StatusCodes.OK);
+      expect(response.status).toEqual(200);
       const expectedResponse = modifyCurrentBusiness(userData, (business) => ({
         ...business,
         formationData: {
@@ -175,7 +174,7 @@ describe("formationRouter", () => {
       stubUserDataClient.get.mockResolvedValue(userData);
       const response = await request(app).get(`/completed-filing`).send();
 
-      expect(response.status).toEqual(StatusCodes.OK);
+      expect(response.status).toEqual(200);
 
       const expectedNewUserData = modifyCurrentBusiness(userData, (business) => ({
         ...business,

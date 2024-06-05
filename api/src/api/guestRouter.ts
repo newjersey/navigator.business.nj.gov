@@ -2,7 +2,6 @@ import { getAnnualFilings } from "@domain/annual-filings/getAnnualFilings";
 import { TimeStampBusinessSearch } from "@domain/types";
 import { UserData } from "@shared/userData";
 import { Router } from "express";
-import { StatusCodes } from "http-status-codes";
 
 export const guestRouterFactory = (timeStampBusinessSearch: TimeStampBusinessSearch): Router => {
   const router = Router();
@@ -15,13 +14,13 @@ export const guestRouterFactory = (timeStampBusinessSearch: TimeStampBusinessSea
     timeStampBusinessSearch
       .search(req.query.query as string)
       .then((nameAvailability) => {
-        res.status(StatusCodes.OK).json(nameAvailability);
+        res.status(200).json(nameAvailability);
       })
       .catch((error) => {
         if (error === "BAD_INPUT") {
-          res.status(StatusCodes.BAD_REQUEST).json({ error });
+          res.status(400).json({ error });
         } else {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
+          res.status(500).json({ error });
         }
       });
   });

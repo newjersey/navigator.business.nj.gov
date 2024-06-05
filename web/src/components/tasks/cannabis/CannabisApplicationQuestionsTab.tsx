@@ -50,7 +50,7 @@ export const CannabisApplicationQuestionsTab = (props: Props): ReactElement => {
         )}
       </div>
       <CtaContainer>
-        <ActionBarLayout reverseInMobile={false}>
+        <ActionBarLayout>
           <PrimaryButton isColor="primary" isRightMarginRemoved={true} onClick={props.onNextTab}>
             {Config.cannabisApplyForLicense.viewRequirementsButton}
           </PrimaryButton>

@@ -8,7 +8,6 @@ import {
   ElevatorSafetyRegistrationSummary,
 } from "@shared/elevatorSafety";
 import { Router } from "express";
-import { StatusCodes } from "http-status-codes";
 
 export const elevatorSafetyRouterFactory = (
   elevatorSafetyInspection: ElevatorSafetyInspectionStatus,
@@ -24,7 +23,7 @@ export const elevatorSafetyRouterFactory = (
         return res.json(elevatorInspections);
       })
       .catch((error) => {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
+        res.status(500).json({ error });
       });
   });
 
@@ -35,7 +34,7 @@ export const elevatorSafetyRouterFactory = (
         return res.json(violations);
       })
       .catch((error) => {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
+        res.status(500).json({ error });
       });
   });
 
@@ -46,7 +45,7 @@ export const elevatorSafetyRouterFactory = (
         return res.json(elevatorRegistrations);
       })
       .catch((error) => {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
+        res.status(500).json({ error });
       });
   });
 

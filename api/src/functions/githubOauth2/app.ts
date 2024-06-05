@@ -1,6 +1,5 @@
 import { setupExpress } from "@libs/express";
 import dedent from "dedent";
-import { StatusCodes } from "http-status-codes";
 import { randomBytes } from "node:crypto";
 import serverless from "serverless-http";
 import { AuthorizationCode, ModuleOptions } from "simple-oauth2";
@@ -38,7 +37,7 @@ app.get("/api/cms/auth", (req, res) => {
     state: randomState(),
   });
 
-  res.writeHead(StatusCodes.MOVED_PERMANENTLY, { Location: url });
+  res.writeHead(301, { Location: url });
   res.end();
 });
 
@@ -56,7 +55,7 @@ app.get("/api/cms/callback", async (req, res) => {
 
     res.setHeader("Content-Type", "text/html");
 
-    res.status(StatusCodes.OK).send(
+    res.status(200).send(
       renderResponse("success", {
         token: accessToken.token["access_token"],
         provider: "github",
@@ -64,7 +63,7 @@ app.get("/api/cms/callback", async (req, res) => {
     );
   } catch (error) {
     console.error(JSON.stringify(error));
-    res.status(StatusCodes.OK).send(renderResponse("error", error));
+    res.status(200).send(renderResponse("error", error));
   }
 });
 

@@ -48,7 +48,6 @@ import { updateOperatingPhase } from "@domain/user/updateOperatingPhase";
 import { setupExpress } from "@libs/express";
 import { LogWriter } from "@libs/logWriter";
 import bodyParser from "body-parser";
-import { StatusCodes } from "http-status-codes";
 import serverless from "serverless-http";
 import { externalEndpointRouterFactory } from "src/api/externalEndpointRouter";
 import { guestRouterFactory } from "src/api/guestRouter";
@@ -368,14 +367,14 @@ app.use(
 app.post("/api/mgmt/auth", (req, res) => {
   if (req.body.password === process.env.ADMIN_PASSWORD) {
     logger.LogInfo(`MgmtAuth - Id:${logger.GetId()} - MATCH`);
-    res.status(StatusCodes.OK).send();
+    res.status(200).send();
   } else {
     logger.LogInfo(
       `MgmtAuth - Id:${logger.GetId()} - FAILED-AUTH request: '${req.body.password}' password: '${
         process.env.ADMIN_PASSWORD
       }'`
     );
-    res.status(StatusCodes.UNAUTHORIZED).send();
+    res.status(401).send();
   }
 });
 

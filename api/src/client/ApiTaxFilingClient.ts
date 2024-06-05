@@ -8,7 +8,6 @@ import {
 } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import axios, { AxiosError } from "axios";
-import { StatusCodes } from "http-status-codes";
 
 type ApiConfig = {
   apiKey: string;
@@ -73,7 +72,7 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
       };
     } catch (error) {
       const axiosError = error as AxiosError;
-      if (axiosError.response?.status === StatusCodes.BAD_REQUEST) {
+      if (axiosError.response?.status === 400) {
         const apiResponse = axiosError.response?.data as ApiTaxFilingLookupResponse;
         logger.LogInfo(
           `TaxFiling Lookup - NICUSA - Id:${logId} - Response received: ${JSON.stringify(apiResponse)}`
@@ -151,11 +150,11 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
 
       const apiResponse = response.data as ApiTaxFilingOnboardingResponse;
 
-      return apiResponse.StatusCode === StatusCodes.OK ? { state: "SUCCESS" } : { state: "API_ERROR" };
+      return apiResponse.StatusCode === 200 ? { state: "SUCCESS" } : { state: "API_ERROR" };
     } catch (error) {
       const axiosError = error as AxiosError;
       const apiResponse = axiosError.response?.data as ApiTaxFilingOnboardingResponse;
-      if (axiosError.response?.status === StatusCodes.BAD_REQUEST) {
+      if (axiosError.response?.status === 400) {
         if (apiResponse.Errors[0]?.Field === "Business Name") {
           return { state: "FAILED", errorField: "businessName" };
         } else if (apiResponse.Errors[0]?.Field === "Taxpayer ID") {
@@ -216,5 +215,5 @@ export type ApiTaxFilingOnboardingResponse = {
   ApiKey: string | null;
   Errors: { Error: string; Field: "Business Name" | "Taxpayer ID" }[];
   Notice: string | null;
-  StatusCode: StatusCodes.INTERNAL_SERVER_ERROR | StatusCodes.BAD_REQUEST | StatusCodes.OK;
+  StatusCode: 500 | 400 | 200;
 };

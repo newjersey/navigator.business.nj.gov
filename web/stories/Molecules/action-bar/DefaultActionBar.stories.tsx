@@ -7,7 +7,7 @@ const Template = () => {
   return (
     <div className="tablet:width-tablet">
       <hr className="margin-bottom-2" />
-      <ActionBarLayout reverseInMobile={true}>
+      <ActionBarLayout>
         <div className="margin-top-2 mobile-lg:margin-top-0">
           <SecondaryButton isColor="primary" onClick={() => {}} dataTestId="back">
             SecondaryButton

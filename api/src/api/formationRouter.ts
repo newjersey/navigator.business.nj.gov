@@ -9,7 +9,6 @@ import { ProfileDocuments } from "@shared/profileData";
 import { modifyCurrentBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";
 import { Router } from "express";
-import { StatusCodes } from "http-status-codes";
 
 type FormationPostBody = {
   userData: UserData;
@@ -42,7 +41,7 @@ export const formationRouterFactory = (
       })
       .catch(async () => {
         await userDataClient.put(userData);
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json();
+        res.status(500).json();
       });
   });
 
@@ -53,7 +52,7 @@ export const formationRouterFactory = (
     const currentBusiness = getCurrentBusiness(userData);
 
     if (!currentBusiness.formationData.formationResponse?.formationId) {
-      res.status(StatusCodes.BAD_REQUEST).send("No formation ID");
+      res.status(400).send("No formation ID");
       return;
     }
 
@@ -131,7 +130,7 @@ export const formationRouterFactory = (
       })
       .catch((error) => {
         console.error(error);
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json();
+        res.status(500).json();
       });
   });
 

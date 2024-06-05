@@ -5,7 +5,6 @@ interface Props {
   children: ReactNode;
   stackOnLeft?: ReactNode;
   alignLeft?: boolean;
-  reverseInMobile: boolean;
 }
 export const ActionBarLayout = (props: Props): ReactElement => {
   return (
@@ -17,12 +16,7 @@ export const ActionBarLayout = (props: Props): ReactElement => {
       {props.stackOnLeft && (
         <div className="margin-bottom-2 mobile-lg:margin-bottom-0">{props.stackOnLeft}</div>
       )}
-
-      {props.reverseInMobile ? (
-        <ReverseOrderInMobile className="mobile-lg:flex-justify-end">{props.children}</ReverseOrderInMobile>
-      ) : (
-        <>{props.children}</>
-      )}
+      <ReverseOrderInMobile className="mobile-lg:flex-justify-end">{props.children}</ReverseOrderInMobile>
     </div>
   );
 };

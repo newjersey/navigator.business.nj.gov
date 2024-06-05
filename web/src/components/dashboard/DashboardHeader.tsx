@@ -60,7 +60,7 @@ export const DashboardHeader = (): ReactElement => {
   };
   return (
     <>
-      <div className="margin-bottom-4">
+      <div className="bg-white margin-bottom-4">
         <Heading level={1} className={`margin-top-0 break-word`}>
           {getHeader()}
         </Heading>

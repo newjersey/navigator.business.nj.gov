@@ -23,7 +23,7 @@ const mockErrorHealthCheckMethod: HealthCheckMethod = async () => {
       error: {
         message: ReasonPhrases.BAD_GATEWAY,
         serverResponseBody: "",
-        serverResponseCode: StatusCodes.NOT_FOUND,
+        serverResponseCode: 404,
         timeout: false,
       },
     });
