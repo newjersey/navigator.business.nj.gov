@@ -49,6 +49,7 @@ import {
   selectByText,
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
+import { fetchMunicipalityByName } from "@businessnjgovnavigator/api/src/domain/user/fetchMunicipalityByName";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 const date = getCurrentDate().subtract(1, "month").date(1);
@@ -89,10 +90,17 @@ describe("profile - owning existing business", () => {
   });
 
   it("user is able to save and is redirected to dashboard", async () => {
+    const municipality = await fetchMunicipalityByName("Aberdeen Township");
+    const addMunicipality = {
+      displayName: municipality.townDisplayName,
+      name: municipality.townName,
+      county: municipality.countyName,
+      id: municipality.id,
+    };
     const business = generateBusinessForProfile({
       profileData: generateProfileData({ businessPersona: "OWNING" }),
       formationData: generateFormationData({
-        formationFormData: generateFormationFormData({}),
+        formationFormData: generateFormationFormData({ addressMunicipality: addMunicipality }),
       }),
     });
     const inputFieldName = getBusinessProfileInputFieldName(business);
@@ -154,8 +162,6 @@ describe("profile - owning existing business", () => {
     });
 
     renderPage({ business, municipalities: [newark] });
-
-    screen.debug(0, 100000000);
 
     fillText("Business name", "Cool Computers");
     fillText("Address line1", business.formationData.formationFormData.addressLine1);
@@ -258,7 +264,7 @@ describe("profile - owning existing business", () => {
     expect(getAddressLine1Value()).toEqual(business.formationData.formationFormData.addressLine1);
     expect(getAddressLine2Value()).toEqual(business.formationData.formationFormData.addressLine2);
     //expect(getAddressMunicipalityValue()).toEqual(business.formationData.formationFormData.addressMunicipality);
-    expect(getAddressStateValue()).toEqual(business.formationData.formationFormData.addressState.shortCode);
+    expect(getAddressStateValue()).toEqual(business.formationData.formationFormData.addressState?.shortCode);
     expect(getAddressZipCodeValue()).toEqual(business.formationData.formationFormData.addressZipCode);
     expect(getBusinessNameValue()).toEqual("Applebees");
     expect(getMunicipalityValue()).toEqual("Newark");

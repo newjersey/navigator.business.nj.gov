@@ -62,20 +62,20 @@ export const ProfileAddressField = (): ReactElement => {
             hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressMunicipality"])}
             type="DESKTOP-ONLY"
           >
-            <div className="grid-row">
-              <div className="grid-col-12 tablet:grid-col-7">
+            <div className="grid-row tablet:grid-gap-2">
+              <div className="grid-col-12 tablet:grid-col-6">
                 <WithErrorBar hasError={doesFieldHaveError("addressMunicipality")} type="MOBILE-ONLY">
                   <span className="text-bold">{Config.profileDefaults.fields.addressMunicipality.label}</span>
                   <ProfileMunicipality />
                 </WithErrorBar>
               </div>
-              <div className="grid-col-12 tablet:grid-col-5">
+              <div className="grid-col-12 tablet:grid-col-6">
                 <WithErrorBar
                   hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
                   type="MOBILE-ONLY"
                 >
-                  <div className="grid-row">
-                    <div className="grid-col-8">
+                  <div className="grid-row grid-gap tablet:grid-gap-2">
+                    <div className="grid-col-6">
                       <strong>
                         <ModifiedContent>{Config.profileDefaults.fields.addressState.label}</ModifiedContent>
                       </strong>
@@ -92,7 +92,7 @@ export const ProfileAddressField = (): ReactElement => {
                         />
                       </div>
                     </div>
-                    <div className="grid-col-4">
+                    <div className="grid-col-6">
                       <div
                         id={`question-addressZipCode`}
                         className="text-field-width-default add-spacing-on-ele-scroll"
