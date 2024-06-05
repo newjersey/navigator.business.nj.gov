@@ -137,6 +137,10 @@ describe("profile - owning existing business", () => {
     renderPage({ business, municipalities: [newark] });
 
     fillText("Business name", "Cool Computers");
+    fillText("Address line1", business.formationData.formationFormData.addressLine1);
+    fillText("Address line2", business.formationData.formationFormData.addressLine2);
+    selectByText("Address municipality", newark.displayName);
+    fillText("Address zip code", business.formationData.formationFormData.addressZipCode);
     fillText("Date of formation", date.format("MM/YYYY"));
     selectByValue("Sector", "clean-energy");
     fillText("Existing employees", "123");
@@ -159,6 +163,18 @@ describe("profile - owning existing business", () => {
     });
     expect(currentBusiness()).toEqual({
       ...business,
+      formationData: {
+        ...business.formationData,
+        formationFormData: {
+          ...business.formationData.formationFormData,
+          addressMunicipality: {
+            name: newark.name,
+            displayName: newark.displayName,
+            county: newark.county,
+            id: newark.id,
+          },
+        },
+      },
       onboardingFormProgress: "COMPLETED",
       taxFilingData: { ...business.taxFilingData, state: undefined, filings: [], registeredISO: undefined },
       profileData: {

@@ -16,6 +16,7 @@ interface Props {
   noLabel?: boolean;
   hideHeader?: boolean;
   boldAltDescription?: boolean;
+  isHrVisible?: boolean;
 }
 
 export const ProfileField = (props: Props): ReactElement => {

@@ -282,7 +282,6 @@ export const getErrorStateForField = (inputParams: {
       associatedFields: ["addressMunicipality", "addressLine1"],
       label: Config.formation.general.partialAddressErrorText,
     });
-
     inRange = isZipCodeNj(formationFormData[field]);
     const hasError = exists && !inRange;
     const inRangeError = {
