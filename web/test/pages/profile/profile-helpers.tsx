@@ -12,7 +12,7 @@ import {
 import {
   BusinessPersona,
   einTaskId,
-  generateBusiness,
+  generateBusiness, generateFormationData, generateFormationFormData,
   generateMunicipality,
   generateProfileData,
   generateUserDataForBusiness,
@@ -30,11 +30,27 @@ const Config = getMergedConfig();
 
 export const generateBusinessForProfile = (overrides: Partial<Business>): Business => {
   const profileData = generateProfileData({ ...overrides.profileData });
+
+  let formationData
+
+    if(overrides && overrides.formationData){
+      formationData = generateFormationData({
+        ...overrides.formationData ?? overrides.formationData,
+        formationFormData: generateFormationFormData({...overrides.formationData.formationFormData ?? overrides.formationData.formationFormData})
+      });
+    }else{
+      formationData = generateFormationData({
+        formationFormData: generateFormationFormData({
+        })
+      });
+    }
+
+
   const taskProgress: Record<string, TaskProgress> =
     profileData.employerId && profileData.employerId.length > 0
       ? { [einTaskId]: "COMPLETED", ...overrides.taskProgress }
       : { ...overrides.taskProgress };
-  return generateBusiness({ ...overrides, profileData, taskProgress });
+  return generateBusiness({ ...overrides, profileData, formationData, taskProgress });
 };
 
 export const renderPage = ({
@@ -62,6 +78,7 @@ export const renderPage = ({
       }),
     });
 
+  console.log("initial business",JSON.stringify(initialBusiness));
   render(
     withNeedsAccountContext(
       <ThemeProvider theme={createTheme()}>
@@ -137,6 +154,26 @@ export const getEmployerIdValue = (): string => {
 
 export const getMunicipalityValue = (): string => {
   return (screen.queryByTestId("municipality") as HTMLInputElement)?.value;
+};
+
+export const getAddressLine1Value = (): string => {
+  return (screen.queryByLabelText("Address line1") as HTMLInputElement)?.value;
+};
+
+export const getAddressLine2Value = (): string => {
+  return (screen.getByLabelText("Address line2") as HTMLInputElement)?.value;
+};
+
+export const getAddressMunicipalityValue = (): string => {
+  return (screen.getByLabelText("Address municipality") as HTMLInputElement)?.value;
+};
+
+export const getAddressZipCodeValue = (): string => {
+  return (screen.getByLabelText("Address zip code") as HTMLInputElement)?.value;
+};
+
+export const getAddressStateValue = (): string => {
+  return (screen.queryByLabelText("Address state") as HTMLInputElement)?.value;
 };
 
 export const getBusinessProfileInputFieldName = (business: Business): string => {

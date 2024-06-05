@@ -16,6 +16,8 @@ import {
   LookupOwnershipTypeById,
   LookupSectorTypeById,
   defaultDateFormat,
+  generateFormationData,
+  generateFormationFormData,
   generateMunicipality,
   generateProfileData,
   getCurrentDate,
@@ -31,6 +33,10 @@ import {
   clickSave,
   fillText,
   generateBusinessForProfile,
+  getAddressLine1Value,
+  getAddressLine2Value,
+  getAddressStateValue,
+  getAddressZipCodeValue,
   getBusinessNameValue,
   getBusinessProfileInputFieldName,
   getDateOfFormation,
@@ -85,6 +91,9 @@ describe("profile - owning existing business", () => {
   it("user is able to save and is redirected to dashboard", async () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({ businessPersona: "OWNING" }),
+      formationData: generateFormationData({
+        formationFormData: generateFormationFormData({}),
+      }),
     });
     const inputFieldName = getBusinessProfileInputFieldName(business);
 
@@ -100,6 +109,9 @@ describe("profile - owning existing business", () => {
   it("prevents user from going back to dashboard if there are unsaved changes", () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({ businessPersona: "OWNING" }),
+      formationData: generateFormationData({
+        formationFormData: generateFormationFormData({}),
+      }),
     });
     const inputFieldName = getBusinessProfileInputFieldName(business);
 
@@ -112,6 +124,9 @@ describe("profile - owning existing business", () => {
   it("returns user to profile page from un-saved changes modal", () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({ businessPersona: "OWNING" }),
+      formationData: generateFormationData({
+        formationFormData: generateFormationFormData({}),
+      }),
     });
     const inputFieldName = getBusinessProfileInputFieldName(business);
 
@@ -123,6 +138,8 @@ describe("profile - owning existing business", () => {
   });
 
   it("updates the user data on save", async () => {
+    const newark = generateMunicipality({ displayName: "Newark" });
+
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
         taxId: randomInt(9).toString(),
@@ -130,13 +147,21 @@ describe("profile - owning existing business", () => {
         industryId: "generic",
         legalStructureId: randomPublicFilingLegalStructure(),
       }),
+      formationData: generateFormationData({
+        formationFormData: generateFormationFormData({ addressMunicipality: newark }),
+      }),
       onboardingFormProgress: "COMPLETED",
     });
-    const newark = generateMunicipality({ displayName: "Newark" });
 
     renderPage({ business, municipalities: [newark] });
 
+    screen.debug(0, 100000000);
+
     fillText("Business name", "Cool Computers");
+    fillText("Address line1", business.formationData.formationFormData.addressLine1);
+    fillText("Address line2", business.formationData.formationFormData.addressLine2);
+    selectByText("Address municipality", newark.displayName);
+    fillText("Address zip code", business.formationData.formationFormData.addressZipCode);
     fillText("Date of formation", date.format("MM/YYYY"));
     selectByValue("Sector", "clean-energy");
     fillText("Existing employees", "123");
@@ -159,6 +184,18 @@ describe("profile - owning existing business", () => {
     });
     expect(currentBusiness()).toEqual({
       ...business,
+      formationData: {
+        ...business.formationData,
+        formationFormData: {
+          ...business.formationData.formationFormData,
+          addressMunicipality: {
+            name: newark.name,
+            displayName: newark.displayName,
+            county: newark.county,
+            id: newark.id,
+          },
+        },
+      },
       onboardingFormProgress: "COMPLETED",
       taxFilingData: { ...business.taxFilingData, state: undefined, filings: [], registeredISO: undefined },
       profileData: {
@@ -200,6 +237,17 @@ describe("profile - owning existing business", () => {
         sectorId: "clean-energy",
         industryId: "generic",
       }),
+      formationData: generateFormationData({
+        formationFormData: generateFormationFormData({
+          addressMunicipality: {
+            displayName: "Newark Display Name",
+            name: "Newark",
+            county: "some-county-1",
+            id: "some-id-1",
+          },
+          addressState: { shortCode: "NJ", name: "New Jersey" },
+        }),
+      }),
     });
 
     const veteran = LookupOwnershipTypeById("veteran-owned").name;
@@ -207,6 +255,11 @@ describe("profile - owning existing business", () => {
 
     renderPage({ business });
 
+    expect(getAddressLine1Value()).toEqual(business.formationData.formationFormData.addressLine1);
+    expect(getAddressLine2Value()).toEqual(business.formationData.formationFormData.addressLine2);
+    //expect(getAddressMunicipalityValue()).toEqual(business.formationData.formationFormData.addressMunicipality);
+    expect(getAddressStateValue()).toEqual(business.formationData.formationFormData.addressState.shortCode);
+    expect(getAddressZipCodeValue()).toEqual(business.formationData.formationFormData.addressZipCode);
     expect(getBusinessNameValue()).toEqual("Applebees");
     expect(getMunicipalityValue()).toEqual("Newark");
     expect(getSectorIDValue()).toEqual(LookupSectorTypeById("clean-energy").name);
@@ -226,6 +279,9 @@ describe("profile - owning existing business", () => {
   it("shows an error when tax pin input is not empty or is less than 4 digits", async () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({ businessPersona: "OWNING" }),
+      formationData: generateFormationData({
+        formationFormData: generateFormationFormData({}),
+      }),
     });
     renderPage({ business });
     chooseTab("numbers");
@@ -256,6 +312,9 @@ describe("profile - owning existing business", () => {
   it("prevents user from saving if they partially entered Employer Id", async () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({ businessPersona: "OWNING" }),
+      formationData: generateFormationData({
+        formationFormData: generateFormationFormData({}),
+      }),
     });
     renderPage({ business });
     chooseTab("numbers");
@@ -280,6 +339,9 @@ describe("profile - owning existing business", () => {
         operatingPhase: "UP_AND_RUNNING_OWNING",
         sectorId: "",
       }),
+      formationData: generateFormationData({
+        formationFormData: generateFormationFormData({}),
+      }),
     });
     renderPage({ business });
     fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
@@ -296,6 +358,9 @@ describe("profile - owning existing business", () => {
   it("returns user back to dashboard", async () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({ businessPersona: "OWNING" }),
+      formationData: generateFormationData({
+        formationFormData: generateFormationFormData({}),
+      }),
     });
     renderPage({ business });
 
@@ -308,6 +373,9 @@ describe("profile - owning existing business", () => {
   it("returns user to dashboard from un-saved changes modal", async () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({ businessPersona: "OWNING" }),
+      formationData: generateFormationData({
+        formationFormData: generateFormationFormData({}),
+      }),
     });
 
     const newark = generateMunicipality({ displayName: "Newark" });
@@ -327,6 +395,9 @@ describe("profile - owning existing business", () => {
     renderPage({
       business: generateBusinessForProfile({
         profileData: generateProfileData({ businessPersona: "OWNING" }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({}),
+        }),
       }),
     });
     expect(screen.getByTestId("info")).toBeInTheDocument();
@@ -337,6 +408,9 @@ describe("profile - owning existing business", () => {
       profileData: generateProfileData({
         businessPersona: "OWNING",
         legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
+      }),
+      formationData: generateFormationData({
+        formationFormData: generateFormationFormData({}),
       }),
     });
     const newark = generateMunicipality({ displayName: "Newark" });
@@ -350,6 +424,9 @@ describe("profile - owning existing business", () => {
         businessPersona: "OWNING",
         legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
       }),
+      formationData: generateFormationData({
+        formationFormData: generateFormationFormData({}),
+      }),
     });
     const newark = generateMunicipality({ displayName: "Newark" });
     renderPage({ business: initialBusiness, municipalities: [newark] });
@@ -361,6 +438,9 @@ describe("profile - owning existing business", () => {
       profileData: generateProfileData({
         businessPersona: "OWNING",
         naicsCode: "123456",
+      }),
+      formationData: generateFormationData({
+        formationFormData: generateFormationFormData({}),
       }),
     });
     renderPage({ business: initialBusiness });
@@ -375,6 +455,9 @@ describe("profile - owning existing business", () => {
         businessPersona: "OWNING",
         naicsCode: "",
       }),
+      formationData: generateFormationData({
+        formationFormData: generateFormationFormData({}),
+      }),
     });
     renderPage({ business: initialBusiness });
     chooseTab("numbers");
@@ -388,6 +471,9 @@ describe("profile - owning existing business", () => {
           profileData: generateProfileData({
             businessPersona: "OWNING",
             municipality: generateMunicipality({ displayName: "Trenton" }),
+          }),
+          formationData: generateFormationData({
+            formationFormData: generateFormationFormData({}),
           }),
           taxFilingData: generateTaxFilingData({
             state: "SUCCESS",
@@ -405,6 +491,9 @@ describe("profile - owning existing business", () => {
         profileData: generateProfileData({
           businessPersona: "OWNING",
         }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({}),
+        }),
       });
       renderPage({ business });
       expect(screen.queryByTestId("documents")).not.toBeInTheDocument();
@@ -418,6 +507,9 @@ describe("profile - owning existing business", () => {
           businessPersona: "OWNING",
           legalStructureId: "sole-proprietorship",
         }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({}),
+        }),
       });
       renderPage({ business });
       expect(screen.getByTestId("tradeName")).toBeInTheDocument();
@@ -428,6 +520,9 @@ describe("profile - owning existing business", () => {
         profileData: generateProfileData({
           businessPersona: "OWNING",
           legalStructureId: "limited-liability-company",
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({}),
         }),
       });
       renderPage({ business });
@@ -442,6 +537,9 @@ describe("profile - owning existing business", () => {
           businessPersona: "OWNING",
           legalStructureId: "general-partnership",
         }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({}),
+        }),
       });
       renderPage({ business });
       expect(screen.getByTestId("responsibleOwnerName")).toBeInTheDocument();
@@ -453,6 +551,9 @@ describe("profile - owning existing business", () => {
           businessPersona: "STARTING",
           legalStructureId: "limited-liability-partnership",
         }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({}),
+        }),
       });
       renderPage({ business });
       expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
@@ -463,6 +564,9 @@ describe("profile - owning existing business", () => {
         profileData: generateProfileData({
           businessPersona: "OWNING",
           legalStructureId: "sole-proprietorship",
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({}),
         }),
         taxFilingData: generateTaxFilingData({
           state: "PENDING",
@@ -484,6 +588,9 @@ describe("profile - owning existing business", () => {
           businessPersona: "OWNING",
           sectorId: undefined,
           operatingPhase: "UP_AND_RUNNING_OWNING",
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({}),
         }),
       });
       renderPage({ business });
