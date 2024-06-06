@@ -5,7 +5,7 @@ interface Props {
   children: ReactNode;
   stackOnLeft?: ReactNode;
   alignLeft?: boolean;
-  reverseInMobile: boolean;
+  reverseInMobile: boolean; // default design pattern is to reverse ordering
 }
 export const ActionBarLayout = (props: Props): ReactElement => {
   return (
