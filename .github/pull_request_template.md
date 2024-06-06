@@ -24,6 +24,7 @@ This pull request resolves [#00000000](https://www.pivotaltracker.com/story/show
 
 ## Code author checklist
 
+- [ ] I have rebased this branch from the latest main branch
 - [ ] I have performed a self-review of my code
 - [ ] I have created and/or updated relevant documentation (EX: [Engineering Reference/FAQ](https://docs.google.com/document/d/1X4iWSGmBZdHYZ0jGqkwTR3_yyyqI_TiiJptfc8pi9Po)), if necessary
 - [ ] I have not used any relative imports
