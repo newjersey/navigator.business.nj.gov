@@ -33,6 +33,8 @@ county:
 sector: []
 publishStageArchive: ""
 ---
+## Eligibility
+
 Both Direct and Bridge Funding grants have the following requirements:
 
 * May not be a nonprofit business
