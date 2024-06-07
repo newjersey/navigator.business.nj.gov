@@ -5,20 +5,20 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ReverseOrderInMobile } from "@/components/njwds-layout/ReverseOrderInMobile";
 import {
-  getQuickActionTaskObj,
+  getAnytimeActionTaskObj,
   GovernmentContractingSteps,
   shouldDisplayContinueButton,
   shouldDisplayPreviousButton,
 } from "@/components/tasks/government-contracting/GovernmentContractingSteps";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { QuickActionTask } from "@/lib/types/types";
+import { AnytimeActionTask } from "@/lib/types/types";
 import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
 import { ReactElement, ReactNode, useEffect, useRef, useState } from "react";
 
 export const GovernmentContractorPaginator = (): ReactElement => {
   const stepperRef = useRef<HTMLDivElement>(null);
   const [stepIndex, setStepIndex] = useState(0);
-  const [quickActionTask, setQuickActionTask] = useState<QuickActionTask>();
+  const [anytimeActionTask, setAnytimeActionTask] = useState<AnytimeActionTask>();
   const { Config } = useConfig();
   const isMounted = useRef(false);
 
@@ -27,8 +27,8 @@ export const GovernmentContractorPaginator = (): ReactElement => {
   });
 
   useEffect(() => {
-    getQuickActionTaskObj(stepIndex).then((quickActionTask) => {
-      setQuickActionTask(quickActionTask);
+    getAnytimeActionTaskObj(stepIndex).then((anytimeActionTask) => {
+      setAnytimeActionTask(anytimeActionTask);
     });
 
     if (isMounted.current) {
@@ -106,12 +106,12 @@ export const GovernmentContractorPaginator = (): ReactElement => {
       </div>
       <div className="fg1 flex flex-column space-between">
         <>
-          <div className={"margin-x-4"} data-testid={quickActionTask?.name}>
-            <Content>{quickActionTask?.contentMd ?? ""}</Content>
-            {quickActionTask?.callToActionLink ? (
+          <div className={"margin-x-4"} data-testid={anytimeActionTask?.name}>
+            <Content>{anytimeActionTask?.contentMd ?? ""}</Content>
+            {anytimeActionTask?.callToActionLink ? (
               <SingleCtaLink
-                link={quickActionTask.callToActionLink}
-                text={quickActionTask?.callToActionText ?? ""}
+                link={anytimeActionTask.callToActionLink}
+                text={anytimeActionTask?.callToActionText ?? ""}
                 buttonColor={"outline"}
                 noBackgroundColor={true}
                 alignLeft={true}

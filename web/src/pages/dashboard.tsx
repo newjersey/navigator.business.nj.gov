@@ -13,21 +13,21 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import { loadAllAnytimeActionLicenseReinstatements } from "@/lib/static/loadAnytimeActionLicenseReinstatements";
+import { loadAllAnytimeActionLinks } from "@/lib/static/loadAnytimeActionLinks";
+import { loadAllAnytimeActionTasks } from "@/lib/static/loadAnytimeActionTasks";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
-import { loadAllQuickActionLicenseReinstatements } from "@/lib/static/loadQuickActionLicenseReinstatements";
-import { loadAllQuickActionLinks } from "@/lib/static/loadQuickActionLinks";
-import { loadAllQuickActionTasks } from "@/lib/static/loadQuickActionTasks";
 import {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionLink,
+  AnytimeActionTask,
   Certification,
   Funding,
   OperateReference,
-  QuickActionLicenseReinstatement,
-  QuickActionLink,
-  QuickActionTask,
   RoadmapDisplayContent,
 } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -44,9 +44,9 @@ interface Props {
   fundings: Funding[];
   certifications: Certification[];
   municipalities: Municipality[];
-  quickActionTasks: QuickActionTask[];
-  quickActionLinks: QuickActionLink[];
-  quickActionLicenseReinstatements: QuickActionLicenseReinstatement[];
+  anytimeActionTasks: AnytimeActionTask[];
+  anytimeActionLinks: AnytimeActionLink[];
+  anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
 }
 
 const DashboardPage = (props: Props): ReactElement => {
@@ -128,9 +128,9 @@ const DashboardPage = (props: Props): ReactElement => {
                 displayContent={props.displayContent}
                 fundings={props.fundings}
                 operateReferences={props.operateReferences}
-                quickActionLicenseReinstatements={props.quickActionLicenseReinstatements}
-                quickActionLinks={props.quickActionLinks}
-                quickActionTasks={props.quickActionTasks}
+                anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
+                anytimeActionLinks={props.anytimeActionLinks}
+                anytimeActionTasks={props.anytimeActionTasks}
                 elevatorViolations={hasElevatorViolations}
               />
               <DashboardOnMobile
@@ -138,9 +138,9 @@ const DashboardPage = (props: Props): ReactElement => {
                 displayContent={props.displayContent}
                 fundings={props.fundings}
                 operateReferences={props.operateReferences}
-                quickActionLicenseReinstatements={props.quickActionLicenseReinstatements}
-                quickActionLinks={props.quickActionLinks}
-                quickActionTasks={props.quickActionTasks}
+                anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
+                anytimeActionLinks={props.anytimeActionLinks}
+                anytimeActionTasks={props.anytimeActionTasks}
                 elevatorViolations={hasElevatorViolations}
               />
             </>
@@ -159,9 +159,9 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
       fundings: loadAllFundings(),
       certifications: loadAllCertifications(),
       municipalities: loadAllMunicipalities(),
-      quickActionTasks: loadAllQuickActionTasks(),
-      quickActionLinks: loadAllQuickActionLinks(),
-      quickActionLicenseReinstatements: loadAllQuickActionLicenseReinstatements(),
+      anytimeActionTasks: loadAllAnytimeActionTasks(),
+      anytimeActionLinks: loadAllAnytimeActionLinks(),
+      anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
     },
   };
 };

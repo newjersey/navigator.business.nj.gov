@@ -37,12 +37,12 @@ import TaxInputPreview from "@/lib/cms/previews/TaxInputPreview";
 import { useMountEffect } from "@/lib/utils/helpers";
 
 import AccountSetupPreview from "@/lib/cms/previews/AccountSetupPreview";
+import AnytimeActionLicenseReinstatementPreview from "@/lib/cms/previews/AnytimeActionLicenseReinstatementPreview";
+import AnytimeActionLinkPreview from "@/lib/cms/previews/AnytimeActionLinkPreview";
+import AnytimeActionTaskPreview from "@/lib/cms/previews/AnytimeActionTaskPreview";
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
 import CalloutPreview from "@/lib/cms/previews/CalloutPreview";
 import NavBarPreview from "@/lib/cms/previews/NavBarPreview";
-import QuickActionLicenseReinstatementPreview from "@/lib/cms/previews/QuickActionLicenseReinstatementPreview";
-import QuickActionLinkPreview from "@/lib/cms/previews/QuickActionLinkPreview";
-import QuickActionTaskPreview from "@/lib/cms/previews/QuickActionTaskPreview";
 import TaxAccessModalPreview from "@/lib/cms/previews/TaxAccessModalPreview";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
@@ -95,10 +95,10 @@ const CMS = dynamic(
 
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
 
-      // ----- Quick Actions -----
-      registerPreview(CMS, "quick-action-tasks", QuickActionTaskPreview);
-      registerPreview(CMS, "quick-action-links", QuickActionLinkPreview);
-      registerPreview(CMS, "quick-action-license-reinstatements", QuickActionLicenseReinstatementPreview);
+      // ----- Anytime Actions -----
+      registerPreview(CMS, "anytime-action-tasks", AnytimeActionTaskPreview);
+      registerPreview(CMS, "anytime-action-links", AnytimeActionLinkPreview);
+      registerPreview(CMS, "anytime-action-license-reinstatements", AnytimeActionLicenseReinstatementPreview);
 
       // ----- Roadmap Sidebar Card -----
       registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);

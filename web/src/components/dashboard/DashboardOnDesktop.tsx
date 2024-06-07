@@ -5,7 +5,7 @@ import { ElevatorViolationsCard } from "@/components/dashboard/ElevatorViolation
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
-import { QuickActionsContainer } from "@/components/dashboard/quick-actions/QuickActionContainer";
+import { AnytimeActionContainer } from "@/components/dashboard/anytime-actions/AnytimeActionContainer";
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -13,12 +13,12 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionLink,
+  AnytimeActionTask,
   Certification,
   Funding,
   OperateReference,
-  QuickActionLicenseReinstatement,
-  QuickActionLink,
-  QuickActionTask,
   RoadmapDisplayContent,
 } from "@/lib/types/types";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
@@ -26,9 +26,9 @@ import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
 interface Props {
-  quickActionTasks: QuickActionTask[];
-  quickActionLinks: QuickActionLink[];
-  quickActionLicenseReinstatements: QuickActionLicenseReinstatement[];
+  anytimeActionTasks: AnytimeActionTask[];
+  anytimeActionLinks: AnytimeActionLink[];
+  anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   displayContent: RoadmapDisplayContent;
   operateReferences: Record<string, OperateReference>;
   fundings: Funding[];
@@ -67,11 +67,11 @@ export const DashboardOnDesktop = (props: Props): ReactElement => {
 
                 {props.elevatorViolations && <ElevatorViolationsCard />}
 
-                {operatingPhase.displayQuickActions && (
-                  <QuickActionsContainer
-                    quickActionLinks={props.quickActionLinks}
-                    quickActionTasks={props.quickActionTasks}
-                    quickActionLicenseReinstatements={props.quickActionLicenseReinstatements}
+                {operatingPhase.displayAnytimeActions && (
+                  <AnytimeActionContainer
+                    anytimeActionLinks={props.anytimeActionLinks}
+                    anytimeActionTasks={props.anytimeActionTasks}
+                    anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
                   />
                 )}
 

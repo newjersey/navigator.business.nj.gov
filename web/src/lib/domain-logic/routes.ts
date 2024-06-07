@@ -7,7 +7,7 @@ export const ROUTES = {
   dashboard: "/dashboard",
   onboarding: "/onboarding",
   unsupported: "/unsupported",
-  quickActions: "/actions",
+  anytimeActions: "/actions",
   licenseReinstatement: "/license-reinstatement",
   welcome: "/welcome",
   accountSetup: "/account-setup",

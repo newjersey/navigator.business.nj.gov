@@ -198,7 +198,7 @@ export interface Opportunity {
   status?: string;
 }
 
-interface QuickAction {
+interface AnytimeAction {
   name: string;
   icon: string;
   filename: string;
@@ -207,7 +207,7 @@ interface QuickAction {
   applyToAllUsers: boolean;
 }
 
-export interface QuickActionTask extends QuickAction {
+export interface AnytimeActionTask extends AnytimeAction {
   urlSlug: string;
   contentMd: string;
   callToActionLink: string | undefined;
@@ -216,11 +216,11 @@ export interface QuickActionTask extends QuickAction {
   summaryDescriptionMd: string;
 }
 
-export interface QuickActionLink extends QuickAction {
+export interface AnytimeActionLink extends AnytimeAction {
   externalRoute: string;
 }
 
-export interface QuickActionLicenseReinstatement extends QuickActionTask {}
+export interface AnytimeActionLicenseReinstatement extends AnytimeActionTask {}
 
 export type FundingType =
   | "tax credit"
