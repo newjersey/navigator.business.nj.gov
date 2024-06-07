@@ -4640,7 +4640,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 8.8.3
     css-loader: 6.11.0
-    cypress: 13.9.0
+    cypress: 13.11.0
     cypress-dotenv: 2.0.0
     cypress-wait-until: 3.0.1
     dayjs: 1.11.11
@@ -4842,7 +4842,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 8.8.3
     css-loader: 6.11.0
-    cypress: 13.9.0
+    cypress: 13.11.0
     cypress-dotenv: 2.0.0
     cypress-wait-until: 3.0.1
     dayjs: 1.11.11
@@ -16351,9 +16351,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:13.9.0":
-  version: 13.9.0
-  resolution: "cypress@npm:13.9.0"
+"cypress@npm:13.11.0":
+  version: 13.11.0
+  resolution: "cypress@npm:13.11.0"
   dependencies:
     "@cypress/request": ^3.0.0
     "@cypress/xvfb": ^1.2.4
@@ -16399,7 +16399,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: ec2e0237d2a38d53d4e5c05fe1c37f7fe0bb13de798045ba091b6a5cf0edd7b3a282f4d8f4c063e3988ee048d06dcf4fef91d83d63a56cee9f9ff68685f3946d
+  checksum: 67f61152b03955a3649d1ddcfb940271614e47d02c2e9f6f08e85158199c2d22a805ab8fcbccb985f8e1ef628b099b24487e8aebde181ed82abf039890abc6fc
   languageName: node
   linkType: hard
 
