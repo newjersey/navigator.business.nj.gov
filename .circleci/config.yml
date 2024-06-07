@@ -381,20 +381,22 @@ commands:
           command: |
             echo 'export REDIRECT_URL=$REDIRECT_URL_CONTENT' >> $BASH_ENV
             echo 'export SHOW_DISABLED_INDUSTRIES=true' >> $BASH_ENV
+            echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_CONTENT' >> $BASH_ENV
+            echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_CONTENT' >> $BASH_ENV
+            echo 'export REDIRECT_URL=$REDIRECT_URL_CONTENT' >> $BASH_ENV
 
   set-accessibility-testing-env-vars:
     steps:
       - run:
           name: Set Accessibility Testing Environment Variables
           command: |
+            echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_ACCESSIBILITY_TESTING' >> $BASH_ENV
+            echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_ACCESSIBILITY_TESTING' >> $BASH_ENV
+            echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_ACCESSIBILITY_TESTING' >> $BASH_ENV
             echo 'export REDIRECT_URL=$REDIRECT_URL_ACCESSIBILITY_TESTING' >> $BASH_ENV
 
   deploy-content:
     steps:
-      - configure-and-build
-      - setup_remote_docker:
-          version: edge
-          docker_layer_caching: true
       - package-webapp-docker:
           image-name: bfs-navigator-content
       - run:
@@ -403,10 +405,6 @@ commands:
 
   deploy-accessibility-testing:
     steps:
-      - configure-and-build
-      - setup_remote_docker:
-          version: edge
-          docker_layer_caching: true
       - package-webapp-docker:
           image-name: bfs-navigator-testing
       - run:
@@ -619,6 +617,7 @@ jobs:
       - set-content-env-vars
       - attach_workspace:
           at: .
+      - deploy
       - deploy-content
     environment:
       STAGE: content
@@ -635,6 +634,7 @@ jobs:
       - set-accessibility-testing-env-vars
       - attach_workspace:
           at: .
+      - deploy
       - deploy-accessibility-testing
     environment:
       STAGE: testing
