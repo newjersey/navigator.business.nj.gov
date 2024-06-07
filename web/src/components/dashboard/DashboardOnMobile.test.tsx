@@ -1,17 +1,17 @@
 import { DashboardOnMobile } from "@/components/dashboard/DashboardOnMobile";
 import { getMergedConfig } from "@/contexts/configContext";
 import {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionLink,
+  AnytimeActionTask,
   OperateReference,
-  QuickActionLicenseReinstatement,
-  QuickActionLink,
-  QuickActionTask,
   RoadmapDisplayContent,
   SidebarCardContent,
 } from "@/lib/types/types";
 import {
+  generateAnytimeActionLink,
+  generateAnytimeActionTask,
   generateBusinessPersona,
-  generateQuickActionLink,
-  generateQuickActionTask,
   generateSidebarCardContent,
   generateStep,
   generateTask,
@@ -90,15 +90,15 @@ describe("<DashboardOnMobile />", () => {
   const renderDashboardComponent = ({
     sidebarDisplayContent,
     operateReferences,
-    quickActionLinks,
-    quickActionTask,
-    quickActionLicenseReinstatements,
+    anytimeActionLinks,
+    anytimeActionTask,
+    anytimeActionLicenseReinstatements,
   }: {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     operateReferences?: Record<string, OperateReference>;
-    quickActionLinks?: QuickActionLink[];
-    quickActionTask?: QuickActionTask[];
-    quickActionLicenseReinstatements?: QuickActionLicenseReinstatement[];
+    anytimeActionLinks?: AnytimeActionLink[];
+    anytimeActionTask?: AnytimeActionTask[];
+    anytimeActionLicenseReinstatements?: AnytimeActionLicenseReinstatement[];
   }): void => {
     render(
       <ThemeProvider theme={createTheme()}>
@@ -107,9 +107,9 @@ describe("<DashboardOnMobile />", () => {
           displayContent={createDisplayContent(sidebarDisplayContent)}
           fundings={[]}
           certifications={[]}
-          quickActionLinks={quickActionLinks ?? []}
-          quickActionTasks={quickActionTask ?? []}
-          quickActionLicenseReinstatements={quickActionLicenseReinstatements ?? []}
+          anytimeActionLinks={anytimeActionLinks ?? []}
+          anytimeActionTasks={anytimeActionTask ?? []}
+          anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatements ?? []}
         />
       </ThemeProvider>
     );
@@ -126,9 +126,9 @@ describe("<DashboardOnMobile />", () => {
             displayContent={createDisplayContent()}
             fundings={[]}
             certifications={[]}
-            quickActionLinks={[]}
-            quickActionTasks={[]}
-            quickActionLicenseReinstatements={[]}
+            anytimeActionLinks={[]}
+            anytimeActionTasks={[]}
+            anytimeActionLicenseReinstatements={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>
@@ -403,33 +403,36 @@ describe("<DashboardOnMobile />", () => {
     );
   });
 
-  describe("quick actions", () => {
-    const operatingPhasesWithQuickActions = OperatingPhases.filter((phase: OperatingPhase) => {
-      return phase.displayQuickActions;
+  describe("anytime actions", () => {
+    const operatingPhasesWithAnytimeActions = OperatingPhases.filter((phase: OperatingPhase) => {
+      return phase.displayAnytimeActions;
     }).map((phase) => phase.id);
 
-    const operatingPhasesWithoutQuickActions = OperatingPhases.filter((phase: OperatingPhase) => {
-      return !phase.displayQuickActions;
+    const operatingPhasesWithoutAnytimeActions = OperatingPhases.filter((phase: OperatingPhase) => {
+      return !phase.displayAnytimeActions;
     }).map((phase) => phase.id);
 
-    it.each(operatingPhasesWithoutQuickActions)("does not display quick action section for %s", (phase) => {
+    it.each(operatingPhasesWithoutAnytimeActions)(
+      "does not display anytime action section for %s",
+      (phase) => {
+        useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
+        renderDashboardComponent({
+          anytimeActionLinks: [generateAnytimeActionLink({})],
+          anytimeActionTask: [generateAnytimeActionTask({})],
+        });
+
+        expect(screen.queryByTestId("anytime-actions-section")).not.toBeInTheDocument();
+      }
+    );
+
+    it.each(operatingPhasesWithAnytimeActions)("displays anytime action section for %s", (phase) => {
       useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
       renderDashboardComponent({
-        quickActionLinks: [generateQuickActionLink({})],
-        quickActionTask: [generateQuickActionTask({})],
+        anytimeActionLinks: [generateAnytimeActionLink({})],
+        anytimeActionTask: [generateAnytimeActionTask({})],
       });
 
-      expect(screen.queryByTestId("quick-actions-section")).not.toBeInTheDocument();
-    });
-
-    it.each(operatingPhasesWithQuickActions)("displays quick action section for %s", (phase) => {
-      useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
-      renderDashboardComponent({
-        quickActionLinks: [generateQuickActionLink({})],
-        quickActionTask: [generateQuickActionTask({})],
-      });
-
-      expect(screen.getByTestId("quick-actions-section")).toBeInTheDocument();
+      expect(screen.getByTestId("anytime-actions-section")).toBeInTheDocument();
     });
   });
 

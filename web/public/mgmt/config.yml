@@ -3290,15 +3290,15 @@ collections:
       - { label: "Pre Body Button Text", name: "preBodySpanButtonText", widget: "string", required: false }
       - { label: "Content", name: "body", widget: "markdown" }
 
-  - name: "quick-actions-label"
-    label: "🟧 QUICK ACTIONS"
+  - name: "anytime-actions-label"
+    label: "🟧 ANYTIME ACTIONS"
     folder: "content/src"
     fields:
       - { name: "" }
 
-  - name: "quick-action-tasks"
-    label: "Quick Action Tasks"
-    folder: "content/src/quick-action-tasks"
+  - name: "anytime-action-tasks"
+    label: "Anytime Action Tasks"
+    folder: "content/src/anytime-action-tasks"
     summary: "{{filename}} - {{name}}"
     identifier_field: "{{filename}}"
     slug: "{{fields.filename}}"
@@ -3345,9 +3345,9 @@ collections:
         multiple: false
         required: true
         collection: "mappings"
-        search_fields: ["arrayOfQuickActionIcons.*.name"]
-        value_field: "arrayOfQuickActionIcons.*.filename"
-        display_fields: ["arrayOfQuickActionIcons.*.name"]
+        search_fields: ["anytimeActionIcons.*.name"]
+        value_field: "anytimeActionIcons.*.filename"
+        display_fields: ["anytimeActionIcons.*.name"]
       - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "nospace", required: true }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown", required: true }
@@ -3355,9 +3355,9 @@ collections:
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
 
-  - name: "quick-action-license-reinstatements"
-    label: "Quick Action License Reinstatements"
-    folder: "content/src/quick-action-license-reinstatements"
+  - name: "anytime-action-license-reinstatements"
+    label: "Anytime Action License Reinstatements"
+    folder: "content/src/anytime-action-license-reinstatements"
     summary: "{{filename}} - {{name}}"
     identifier_field: "{{filename}}"
     slug: "{{fields.filename}}"
@@ -3404,9 +3404,9 @@ collections:
         multiple: false
         required: true
         collection: "mappings"
-        search_fields: ["arrayOfQuickActionIcons.*.name"]
-        value_field: "arrayOfQuickActionIcons.*.filename"
-        display_fields: ["arrayOfQuickActionIcons.*.name"]
+        search_fields: ["anytimeActionIcons.*.name"]
+        value_field: "anytimeActionIcons.*.filename"
+        display_fields: ["anytimeActionIcons.*.name"]
       - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "nospace", required: true }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown", required: true }
@@ -3414,9 +3414,9 @@ collections:
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
 
-  - name: "quick-action-links"
-    label: "Quick Action Links"
-    folder: "content/src/quick-action-links"
+  - name: "anytime-action-links"
+    label: "Anytime Action Links"
+    folder: "content/src/anytime-action-links"
     summary: "{{filename}} - {{name}}"
     identifier_field: "{{filename}}"
     slug: "{{fields.filename}}"
@@ -3463,9 +3463,9 @@ collections:
         multiple: false
         required: true
         collection: "mappings"
-        search_fields: ["arrayOfQuickActionIcons.*.name"]
-        value_field: "arrayOfQuickActionIcons.*.filename"
-        display_fields: ["arrayOfQuickActionIcons.*.name"]
+        search_fields: ["anytimeActionIcons.*.name"]
+        value_field: "anytimeActionIcons.*.filename"
+        display_fields: ["anytimeActionIcons.*.name"]
       - { label: "External Link", name: "externalRoute", widget: "nospace", required: true }
 
   - name: "page-metadata"
@@ -3579,12 +3579,12 @@ collections:
       preview: false
     delete: false
     files:
-      - label: "Quick Action Icons"
-        name: "arrayOfQuickActionIcons"
-        file: "content/src/mappings/quickActionIcons.json"
+      - label: "Anytime Action Icons"
+        name: "anytimeActionIcons"
+        file: "content/src/mappings/anytimeActionIcons.json"
         fields:
-          - label: Quick Action Icons
-            name: arrayOfQuickActionIcons
+          - label: Anytime Action Icons
+            name: anytimeActionIcons
             widget: list
             allow_add: false
             summary: "{{name}}"

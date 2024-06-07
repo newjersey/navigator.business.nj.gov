@@ -47,10 +47,10 @@ export const cmsCollections = [
   {
     label: "🟧 QUICK ACTIONS",
     children: [
-      "Quick Actions",
-      "Quick Action Tasks",
-      "Quick Action License Reinstatements",
-      "Quick Action Labels",
+      "Anytime Actions",
+      "Anytime Action Tasks",
+      "Anytime Action License Reinstatements",
+      "Anytime Action Labels",
     ],
   },
   {

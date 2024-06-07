@@ -1,5 +1,5 @@
-import { fetchQuickActionByFilename } from "@/lib/async-content-fetchers/fetchQuickActionByFilename";
-import { QuickActionTask } from "@/lib/types/types";
+import { fetchAnytimeActionByFilename } from "@/lib/async-content-fetchers/fetchAnytimeActionByFilename";
+import { AnytimeActionTask } from "@/lib/types/types";
 
 type GovernmentContractingStepNames =
   | "NJSTART"
@@ -17,8 +17,8 @@ export const GovernmentContractingSteps: {
   { name: "Prevailing Wages", fileName: "prevailing-wage" },
 ];
 
-export const getQuickActionTaskObj = async (stepIndex: number): Promise<QuickActionTask> => {
-  return await fetchQuickActionByFilename(GovernmentContractingSteps[stepIndex].fileName);
+export const getAnytimeActionTaskObj = async (stepIndex: number): Promise<AnytimeActionTask> => {
+  return await fetchAnytimeActionByFilename(GovernmentContractingSteps[stepIndex].fileName);
 };
 
 export const shouldDisplayPreviousButton = (stepIndex: number): boolean => {

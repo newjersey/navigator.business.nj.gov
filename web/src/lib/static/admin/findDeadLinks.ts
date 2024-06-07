@@ -18,14 +18,14 @@ const fieldConfigDir = path.join(process.cwd(), "..", "content", "src", "fieldCo
 const fundingsDir = path.join(process.cwd(), "..", "content", "src", "fundings");
 const certificationsDir = path.join(process.cwd(), "..", "content", "src", "certifications");
 const licensesDir = path.join(process.cwd(), "..", "content", "src", "licenses");
-const quickActionLinksDir = path.join(process.cwd(), "..", "content", "src", "quick-action-links");
-const quickActionTasksDir = path.join(process.cwd(), "..", "content", "src", "quick-action-tasks");
-const quickActionLicenseReinstatementsDir = path.join(
+const anytimeActionLinksDir = path.join(process.cwd(), "..", "content", "src", "anytime-action-links");
+const anytimeActionTasksDir = path.join(process.cwd(), "..", "content", "src", "anytime-action-tasks");
+const anytimeActionLicenseReinstatementsDir = path.join(
   process.cwd(),
   "..",
   "content",
   "src",
-  "quick-action-license-reinstatements"
+  "anytime-action-license-reinstatements"
 );
 
 type Filenames = {
@@ -40,9 +40,9 @@ type Filenames = {
   certifications: string[];
   licenses: string[];
   licenseTasks: string[];
-  quickActionLinks: string[];
-  quickActionTasks: string[];
-  quickActionLicenseReinstatements: string[];
+  anytimeActionLinks: string[];
+  anytimeActionTasks: string[];
+  anytimeActionLicenseReinstatements: string[];
 };
 
 type FileContents = {
@@ -85,9 +85,9 @@ const getFilenames = (): Filenames => {
     certifications: fs.readdirSync(certificationsDir),
     licenses: fs.readdirSync(licensesDir),
     licenseTasks: fs.readdirSync(licenseTasksDir),
-    quickActionLinks: fs.readdirSync(quickActionLinksDir),
-    quickActionTasks: fs.readdirSync(quickActionTasksDir),
-    quickActionLicenseReinstatements: fs.readdirSync(quickActionLicenseReinstatementsDir),
+    anytimeActionLinks: fs.readdirSync(anytimeActionLinksDir),
+    anytimeActionTasks: fs.readdirSync(anytimeActionTasksDir),
+    anytimeActionLicenseReinstatements: fs.readdirSync(anytimeActionLicenseReinstatementsDir),
   };
 };
 
@@ -256,14 +256,14 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     ...filenames.certifications.map((it) => {
       return `/certification/${it.split(".md")[0]}`;
     }),
-    ...filenames.quickActionLinks.map((it) => {
-      return `/quick-action-links/${it.split(".md")[0]}`;
+    ...filenames.anytimeActionLinks.map((it) => {
+      return `/anytime-action-links/${it.split(".md")[0]}`;
     }),
-    ...filenames.quickActionTasks.map((it) => {
-      return `/quick-action-tasks/${it.split(".md")[0]}`;
+    ...filenames.anytimeActionTasks.map((it) => {
+      return `/anytime-action-tasks/${it.split(".md")[0]}`;
     }),
-    ...filenames.quickActionLicenseReinstatements.map((it) => {
-      return `/quick-action-license-reinstatements/${it.split(".md")[0]}`;
+    ...filenames.anytimeActionLicenseReinstatements.map((it) => {
+      return `/anytime-action-license-reinstatements/${it.split(".md")[0]}`;
     }),
   ];
 
