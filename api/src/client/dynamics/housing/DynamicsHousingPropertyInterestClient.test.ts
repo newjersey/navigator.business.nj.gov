@@ -36,6 +36,7 @@ describe("DynamicsHousingPropertyInterestClient", () => {
           statecode: 0,
           ultra_streetaddress: searchAddress,
           ultra_propertyinterestid: "12345",
+          ultra_buildingcount: 3,
         },
       ],
     };
@@ -49,9 +50,10 @@ describe("DynamicsHousingPropertyInterestClient", () => {
       BHINextInspectionDueDate: "01/01/2028",
       stateCode: 0,
       id: "12345",
+      buildingCount: 3,
     });
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `${ORG_URL}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode&$filter=(ultra_streetaddress eq '${searchAddress}' and _ultra_municipality_value eq '${searchMunicipalityID}')&$top=1`,
+      `${ORG_URL}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode,ultra_buildingcount&$filter=(ultra_streetaddress eq '${searchAddress}' and _ultra_municipality_value eq '${searchMunicipalityID}')&$top=1`,
       {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
@@ -70,7 +72,7 @@ describe("DynamicsHousingPropertyInterestClient", () => {
       undefined
     );
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `${ORG_URL}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode&$filter=(ultra_streetaddress eq '${searchAddress}' and _ultra_municipality_value eq '${searchMunicipalityID}')&$top=1`,
+      `${ORG_URL}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode,ultra_buildingcount&$filter=(ultra_streetaddress eq '${searchAddress}' and _ultra_municipality_value eq '${searchMunicipalityID}')&$top=1`,
       {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,

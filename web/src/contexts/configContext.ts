@@ -21,6 +21,7 @@ import * as ElevatorRegistration from "@businessnjgovnavigator/content/fieldConf
 import * as FormationInterimSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-interim-success-page.json";
 import * as FormationSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-success-page.json";
 import * as SiteWideErrorMessages from "@businessnjgovnavigator/content/fieldConfig/global-errors-defaults.json";
+import * as HousingRegistrationSearchTask from "@businessnjgovnavigator/content/fieldConfig/housing-registration.json";
 import * as NaicsCode from "@businessnjgovnavigator/content/fieldConfig/naics-code.json";
 import * as NavigationDefaults from "@businessnjgovnavigator/content/fieldConfig/navigation-defaults.json";
 import * as NexusDbaFormation from "@businessnjgovnavigator/content/fieldConfig/nexus-dba-formation.json";
@@ -70,7 +71,8 @@ const merged = JSON.parse(
       DashboardDefaults,
       PageMetadata,
       CalloutDefaults,
-      ElevatorRegistration
+      ElevatorRegistration,
+      HousingRegistrationSearchTask
     )
   )
 );
@@ -108,7 +110,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof ElevatorRegistration &
   typeof CalloutDefaults &
   typeof DashboardDefaults &
-  typeof PageMetadata;
+  typeof PageMetadata &
+  typeof HousingRegistrationSearchTask;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -142,7 +145,8 @@ export const getMergedConfig = (): ConfigType => {
     DashboardDefaults,
     PageMetadata,
     CalloutDefaults,
-    ElevatorRegistration
+    ElevatorRegistration,
+    HousingRegistrationSearchTask
   );
 };
 

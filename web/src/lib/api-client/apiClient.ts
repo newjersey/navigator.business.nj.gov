@@ -9,6 +9,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { ElevatorSafetyRegistrationSummary } from "@businessnjgovnavigator/shared/elevatorSafety";
+import { HousingRegistrationRequestLookupResponse } from "@businessnjgovnavigator/shared/housing";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
@@ -40,6 +41,13 @@ export const checkElevatorRegistrationStatus = (
 
 export const checkElevatorViolations = (address: string, municipalityId: string): Promise<boolean> => {
   return post(`/elevator-safety/violations`, { address, municipalityId });
+};
+
+export const checkHousingHotelMotelRegistrationStatus = (
+  address: string,
+  municipalityId: string
+): Promise<HousingRegistrationRequestLookupResponse> => {
+  return post(`/housing/registrations/hotelmotel`, { address, municipalityId });
 };
 
 export const postBusinessFormation = (

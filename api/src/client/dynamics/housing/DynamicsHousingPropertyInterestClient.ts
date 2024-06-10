@@ -20,7 +20,7 @@ export const DynamicsHousingPropertyInterestClient = (
 
     return axios
       .get(
-        `${orgUrl}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode&$filter=(ultra_streetaddress eq '${address}' and _ultra_municipality_value eq '${municipalityId}')&$top=1`,
+        `${orgUrl}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode,ultra_buildingcount&$filter=(ultra_streetaddress eq '${address}' and _ultra_municipality_value eq '${municipalityId}')&$top=1`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -61,6 +61,7 @@ function processDynamicsPropertyInterestResponse(
     BHINextInspectionDueDate: response.ultra_bhinextinspectiondue_date,
     stateCode: response.statecode,
     id: response.ultra_propertyinterestid,
+    buildingCount: response.ultra_buildingcount,
   };
 }
 
@@ -73,4 +74,5 @@ type DynamicsHousingPropertyInterestResponse = {
   ultra_bhinextinspectiondue_date: string;
   statecode: number;
   ultra_propertyinterestid: string;
+  ultra_buildingcount: number;
 };

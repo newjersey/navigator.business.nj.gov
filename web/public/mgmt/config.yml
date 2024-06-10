@@ -2188,6 +2188,87 @@ collections:
               - { label: Violation Notice Message Text, name: violationNoticeMessage, widget: string }
               - { label: Violation Notice CTA Text, name: violationNoticeCTA, widget: string }
               - { label: Violation Notice CTA Link, name: violationNoticeCTALink, widget: nospace }
+      - label: "Housing"
+        name: "housing-registration-config"
+        file: "content/src/fieldConfig/housing-registration.json"
+        editor:
+          preview: false
+        fields:
+          - label: Housing Registration
+            name: housingRegistrationSearchTask
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Registration Start Date Text, name: registrationStartDateText, widget: string }
+              - { label: Registration Status Text, name: registrationStatusText, widget: string }
+              - { label: Registration Building Count Text, name: registrationBuildingCountText, widget: string }
+              - {
+                label: Registration Application Found Header,
+                name: applicationsFoundHeader,
+                widget: string,
+              }
+              - {
+                label: Registration Found In Review Text,
+                name: registrationFoundInReviewText,
+                widget: string,
+              }
+              - {
+                label: Registration Found Incomplete/Returned Text,
+                name: registrationFoundIncompleteReturnedText,
+                widget: string,
+              }
+              - {
+                label: Registration Call to Action Primary Text,
+                name: registrationCallToActionPrimaryText,
+                widget: string,
+              }
+              - {
+                label: Registration Call to Action Secondary Text,
+                name: registrationCallToActionSecondaryText,
+                widget: string,
+              }
+              - { label: Registration Tab 1 Text, name: registrationTab1Text, widget: string }
+              - { label: Registration Tab 2 Text, name: registrationTab2Text, widget: string }
+              - {
+                label: Registration In Review Message Text,
+                name: registrationInReviewMessage,
+                widget: string,
+              }
+              - {
+                label: Registration Rejected or Returned Message,
+                name: registrationRejectedOrReturnedMessage,
+                widget: string,
+              }
+              - { label: Registration Search Prompt Text, name: registrationSearchPrompt, widget: string }
+              - { label: Address 1 Label, name: address1Label, widget: string }
+              - { label: Address 2 Label, name: address2Label, widget: string }
+              - { label: Municipality Label, name: municipalityLabel, widget: string }
+              - { label: State label, name: stateLabel, widget: string }
+              - { label: Submit Text, name: submitText, widget: string }
+              - {
+                label: Error - No Property Interest Found,
+                name: errorTextNoPropertyInterestFound,
+                widget: string,
+              }
+              - {
+                label: Error - No Hotel/Motel Registrations Found,
+                name: errorTextNoHotelMotelRegistrations,
+                widget: string,
+              }
+              - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
+              - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
+              - { label: Informational Message - In Review, name: informationalInReview, widget: string }
+              - { label: Informational Message - Returned, name: informationalReturned, widget: string }
+              - { label: Informational Message - Rejected, name: informationalRejected, widget: string }
+              - { label: Informational Message - Incomplete, name: informationalIncomplete, widget: string }
+          - label: Elevator Violations Card
+            name: elevatorViolationsCard
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Violation Notice Message Text, name: violationNoticeMessage, widget: string }
+              - { label: Violation Notice CTA Text, name: violationNoticeCTA, widget: string }
+              - { label: Violation Notice CTA Link, name: violationNoticeCTALink, widget: nospace }
 
   - name: "tasks"
     label: "Tasks - All"
