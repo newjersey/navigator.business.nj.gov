@@ -481,11 +481,13 @@ export type NaicsCodeObject = {
 
 export type LicenseSearchError = "NOT_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
 
-export type ElevatorRegistrationSearchError =
-  | "NO_PROPERTY_INTEREST_FOUND"
-  | "NO_ELEVATOR_REGISTRATIONS_FOUND"
-  | "FIELDS_REQUIRED"
-  | "SEARCH_FAILED";
+export type ElevatorRegistrationSearchError = CommunityAffairsSearchError | "NO_ELEVATOR_REGISTRATIONS_FOUND";
+
+export type HotelMotelRegistrationSearchError =
+  | CommunityAffairsSearchError
+  | "NO_HOTEL_MOTEL_REGISTRATIONS_FOUND";
+
+export type CommunityAffairsSearchError = "NO_PROPERTY_INTEREST_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
 
 export type FeedbackRequestModalNames =
   | "Select Feedback"

@@ -25,6 +25,8 @@ import { DynamicsFireSafetyHealthCheckClient } from "@client/dynamics/fire-safet
 import { DynamicsFireSafetyInspectionClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyInspectionClient";
 import { DynamicsHousingClient } from "@client/dynamics/housing/DynamicsHousingClient";
 import { DynamicsHousingHealthCheckClient } from "@client/dynamics/housing/DynamicsHousingHealthCheckClient";
+import { DynamicsHotelMotelRegistrationClient } from "@client/dynamics/housing/DynamicsHousingHotelMotelRegistrationClient";
+import { DynamicsHotelMotelRegistrationStatusClient } from "@client/dynamics/housing/DynamicsHousingHotelMotelRegistrationStatusClient";
 import { DynamicsHousingPropertyInterestClient } from "@client/dynamics/housing/DynamicsHousingPropertyInterestClient";
 import { DynamicsBusinessAddressClient } from "@client/dynamics/license-status/DynamicsBusinessAddressClient";
 import { DynamicsBusinessIdsClient } from "@client/dynamics/license-status/DynamicsBusinessIdsClient";
@@ -212,6 +214,15 @@ const dynamicsHousingHealthCheckClient = DynamicsHousingHealthCheckClient(logger
   accessTokenClient: dynamicsHousingAccessTokenClient,
   orgUrl: DYNAMICS_HOUSING_URL,
 });
+const dynamicsHousingHotelMotelRegistrationClient = DynamicsHotelMotelRegistrationClient(
+  logger,
+  DYNAMICS_HOUSING_URL
+);
+const dynamicsHousingHotelMotelRegistrationStatusClient = DynamicsHotelMotelRegistrationStatusClient(logger, {
+  accessTokenClient: dynamicsHousingAccessTokenClient,
+  housingHotelMotelRegistrationClient: dynamicsHousingHotelMotelRegistrationClient,
+  housingPropertyInterestClient: dynamicsHousingPropertyInterestClient,
+});
 
 const BUSINESS_NAME_BASE_URL =
   process.env.BUSINESS_NAME_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
@@ -342,7 +353,10 @@ app.use(
   )
 );
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
-app.use("/api", housingRouterFactory(dynamicsHousingClient));
+app.use(
+  "/api",
+  housingRouterFactory(dynamicsHousingClient, dynamicsHousingHotelMotelRegistrationStatusClient)
+);
 app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));
 app.use("/api", formationRouterFactory(apiFormationClient, userDataClient, { shouldSaveDocuments }));
 app.use(

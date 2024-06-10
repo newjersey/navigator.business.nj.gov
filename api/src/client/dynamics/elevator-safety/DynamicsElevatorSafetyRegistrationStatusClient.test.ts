@@ -63,6 +63,7 @@ describe("DynamicsElevatorSafetyRegistrationStatusClient", () => {
       BHINextInspectionDueDate: "01/01/2028",
       stateCode: 0,
       id: "12345",
+      buildingCount: 3,
     });
     stubElevatorRegistrationClient.getElevatorRegistrationsForBuilding.mockResolvedValue([]);
 
@@ -81,6 +82,7 @@ describe("DynamicsElevatorSafetyRegistrationStatusClient", () => {
       BHINextInspectionDueDate: "01/01/2028",
       stateCode: 0,
       id: "12345",
+      buildingCount: 4,
     });
     stubElevatorRegistrationClient.getElevatorRegistrationsForBuilding.mockResolvedValue([
       {
@@ -121,6 +123,7 @@ describe("DynamicsElevatorSafetyRegistrationStatusClient", () => {
       BHINextInspectionDueDate: "01/01/2028",
       stateCode: 0,
       id: "12345",
+      buildingCount: 7,
     });
     stubElevatorRegistrationClient.getElevatorRegistrationsForBuilding.mockResolvedValue([
       {
