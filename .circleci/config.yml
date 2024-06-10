@@ -423,6 +423,14 @@ commands:
       - run:
           name: Deploy WebApp
           command: aws ecs update-service --cluster bfs_container_cluster --service bfs-navigator --region ${AWS_REGION} --force-new-deployment
+      - run:
+          name: Testing Env Information
+          command: |
+            echo 'TESTING ENV VARS'
+            echo '${COGNITO_IDENTITY_POOL_ID: -4}'
+            echo '${COGNITO_USER_POOL_ID: -4}'
+            echo '${COGNITO_WEB_CLIENT_ID: -4}'
+            echo '${REDIRECT_URL: -4}'
 
   deploy-storybook:
     steps:
@@ -1051,10 +1059,11 @@ workflows:
             - build
       - deploy-dev:
           name: dev-deploy
-          filters:
-            branches:
-              only:
-                - main
+          # filters:
+          #   branches:
+          #     only:
+          #       - main
+          #       - /^development-.*/
           requires:
             - build
       - deploy-content:

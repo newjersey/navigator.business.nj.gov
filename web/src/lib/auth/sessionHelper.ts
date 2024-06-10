@@ -50,6 +50,11 @@ type CognitoRefreshAuth = {
 };
 
 export const configureAmplify = (): void => {
+  console.log(process.env.COGNITO_IDENTITY_POOL_ID?.slice(-4));
+  console.log(process.env.COGNITO_USER_POOL_ID?.slice(-4));
+  console.log(process.env.COGNITO_WEB_CLIENT_ID?.slice(-4));
+  console.log(process.env.REDIRECT_URL?.slice(-4));
+
   Auth.configure({
     identityPoolRegion: process.env.AWS_REGION,
     identityPoolId: process.env.COGNITO_IDENTITY_POOL_ID,
