@@ -2,19 +2,21 @@ import { AddressContext } from "@/contexts/addressContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { createProfileFieldErrorMap } from "@/lib/types/types";
+import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import { Address } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, ReactNode, useEffect, useState } from "react";
 
 const updateSpy = jest.fn();
 
 export const WithStatefulAddressData = ({
-  children,
-  initialData,
-}: {
+                                          children,
+                                          initialData,
+                                          initialMunicipalities,
+                                        }: {
   children: ReactNode;
   initialData: Address;
+  initialMunicipalities?: Municipality[];
 }): ReactElement => {
   const [addressData, setAddressData] = useState<Address>(initialData);
   const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
@@ -24,7 +26,24 @@ export const WithStatefulAddressData = ({
     updateSpy(addressData);
   }, [addressData]);
 
-  const municipalities = loadAllMunicipalities();
+  let municipalities = [
+    {
+      displayName: "Newark Display Name",
+      name: "Newark",
+      county: "some-county-1",
+      id: "some-id-1",
+    },
+    {
+      displayName: "Trenton Display Name",
+      name: "Trenton",
+      county: "some-county-2",
+      id: "some-id-2",
+    },
+  ];
+
+  if (initialMunicipalities && initialMunicipalities.length > 0) {
+    municipalities = initialMunicipalities;
+  }
 
   return (
     <ProfileFormContext.Provider value={formContextState}>
