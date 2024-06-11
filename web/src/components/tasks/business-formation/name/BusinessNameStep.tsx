@@ -3,7 +3,7 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { getErrorStateForField } from "@/components/tasks/business-formation/getErrorStateForField";
+import { getErrorStateForFormationField } from "@/components/tasks/business-formation/getErrorStateForFormationField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
@@ -84,7 +84,7 @@ export const BusinessNameStep = (): ReactElement => {
                   error={hasError}
                   helperText={
                     hasError
-                      ? getErrorStateForField({
+                      ? getErrorStateForFormationField({
                           field: "businessName",
                           formationFormData: state.formationFormData,
                           businessNameAvailability: state.businessNameAvailability,

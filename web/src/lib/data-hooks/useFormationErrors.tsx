@@ -1,4 +1,4 @@
-import { getErrorStateForField } from "@/components/tasks/business-formation/getErrorStateForField";
+import { getErrorStateForFormationField } from "@/components/tasks/business-formation/getErrorStateForFormationField";
 import { getApiField } from "@/components/tasks/business-formation/getFieldForApiField";
 import { getStepForField } from "@/components/tasks/business-formation/getStepForField";
 import { validatedFieldsForUser } from "@/components/tasks/business-formation/validatedFieldsForUser";
@@ -33,7 +33,7 @@ export const useFormationErrors = (): FormationErrorsResponse => {
     return validatedFields.reduce((acc, field) => {
       return {
         ...acc,
-        [field]: getErrorStateForField({
+        [field]: getErrorStateForFormationField({
           field,
           formationFormData: state.formationFormData,
           businessNameAvailability: state.businessNameAvailability,
@@ -152,7 +152,7 @@ export const useFormationErrors = (): FormationErrorsResponse => {
     return validatedFieldsForStep(step).every((field) => {
       const errorState =
         errorStates[field] ||
-        getErrorStateForField({
+        getErrorStateForFormationField({
           field,
           formationFormData: state.formationFormData,
           businessNameAvailability: state.businessNameAvailability,

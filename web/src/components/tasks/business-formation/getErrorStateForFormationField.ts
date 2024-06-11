@@ -51,7 +51,7 @@ export const onlyHasErrorIfUndefined: FormationFields[] = [
   "businessSuffix",
 ];
 
-export const getErrorStateForField = (inputParams: {
+export const getErrorStateForFormationField = (inputParams: {
   field: FieldsForErrorHandling;
   formationFormData: FormationFormData;
   businessNameAvailability?: NameAvailability | undefined;
