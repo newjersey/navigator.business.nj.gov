@@ -1,6 +1,6 @@
 {
   "taxAccess": {
-    "stepTwoBody": "To access your tax records, we need to verify your information and get you access to New Jersey Department of Treasury's Gov2Go platform.",
+    "stepTwoBody": "\n\nTo access your tax records, we must register you with the New Jersey Department of Treasury’s `Gov2Go|gov2go` service. Verify some of your business information below.",
     "modalResponsibleOwnerFieldErrorName": "Responsible Owner Name",
     "stepTwoNextButton": "Save",
     "modalTaxIdHeader": " `New Jersey Tax ID|tax-id`",
