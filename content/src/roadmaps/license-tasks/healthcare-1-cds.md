@@ -23,6 +23,7 @@ callToActionLink: "https://www.njconsumeraffairs.gov/dcu/Applications/Initial-A\
   pplication-for-Registration-for-Dispenser-Prescriber.pdf "
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: New Jersey Drug Control Unit
+divisionPhone: (973) 504-6351
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
 
