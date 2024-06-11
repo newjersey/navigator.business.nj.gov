@@ -14,10 +14,15 @@ summaryDescriptionMd: You need CDS registration if you’re a Physician Assistan
   Unit (NJ DCU) will send you an invoice to pay your fee online.
 industryId:
   - healthcare
+callToActionText: Apply for My PA, APN, or CNM CDS Registration
+callToActionLink: "https://www.njconsumeraffairs.gov/dcu/Applications/Initial-A\
+  pplication-for-Registration-for-Dispenser-Prescriber-Practitioner.pdf "
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: New Jersey Drug Control Unit
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
 
-You must [register with the U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) for your CDS registration to be valid. Email a copy of your DEA registration to [CDS@dca.njoag.gov](mailto:CDS@dca.njoag.gov) within 60 days of CDS registration.
+You must [register with the U.S. Drug Enforcement Administration (DEA)](https
 
 :::
 
@@ -29,3 +34,21 @@ You must [register with the U.S. Drug Enforcement Administration (DEA)](https://
 * Social Security number
 * Signed attestation (included in application)
 * Applicable fees paid, once the NJ DCU has sent an invoice
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
+
+If you are a prescriber, [you must register with the New Jersey Prescription Monitoring Program](https://www.njconsumeraffairs.gov/pmp/Pages/register.aspx) after you have received your CDS registration.
+
+:::
+
+:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
+
+You cannot legally dispense, prescribe, or store any schedule of CDS.
+
+:::
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+
+A Controlled Dangerous Substance (CDS) registration.
+
+:::
