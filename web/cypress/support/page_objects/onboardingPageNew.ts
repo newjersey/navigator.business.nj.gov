@@ -88,7 +88,14 @@ class OnboardingSharedElementsWithIndustryQuestion extends OnboardingSharedEleme
   }
 }
 
-class OnboardingPageNoneOfTheAbove extends OnboardingSharedElements {}
+class OnboardingPageNoneOfTheAbove extends OnboardingSharedElements {
+  getNoneOfTheAbove() {
+    return cy.get(`input[name="foreign-business-type"][value="none"]`);
+  }
+  selectNoneOfTheAbove() {
+    this.getNoneOfTheAbove().check();
+  }
+}
 
 class OnboardingPageRemoteSellerBusiness extends OnboardingSharedElements {
   getRevenueInNJCheckbox() {
