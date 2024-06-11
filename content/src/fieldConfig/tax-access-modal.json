@@ -1,8 +1,6 @@
 {
   "taxAccess": {
-    "stepOneBody": "To see your tax due dates, you'll first need to select your business structure.",
-    "stepTwoBody": "To access your tax records, we need to verify your information and get you access to New Jersey Department of Treasury's Gov2Go platform.",
-    "legalStructureDropDownHeader": "**What is your `business structure|business-structure-learn-more`?**",
+    "stepTwoBody": "\n\nTo access your tax records, we must register you with the New Jersey Department of Treasury’s `Gov2Go|gov2go` service. Verify some of your business information below.",
     "modalResponsibleOwnerFieldErrorName": "Responsible Owner Name",
     "stepTwoNextButton": "Save",
     "modalTaxIdHeader": " `New Jersey Tax ID|tax-id`",
@@ -19,10 +17,12 @@
     "modalBusinessOwnerDescription": "Enter your Last Name, First Name and Middle Initial. The name must match exactly the \"Responsible Owner Name\" listed on your tax confirmation email.",
     "failedTaxIdHelper": "Enter the 12-digit Tax ID shown in your tax confirmation email.",
     "modalTaxFieldErrorName": "New Jersey Tax ID",
+    "legalStructureDropDownHeader": "**What is your `business structure|business-structure-learn-more` ?**",
     "stepTwoBackButton": "Back",
     "modalBusinessFieldHeader": "Business Name",
     "stepOneErrorBanner": "Complete the field below.",
     "modalHeader": "See Your Tax Due Dates",
+    "stepOneBody": "To see your tax due dates, you'll first need to select your business structure.",
     "failedUnknownMarkdown": "There was a problem with your verification process, please try again later.",
     "modalBusinessFieldMarkdown": "Enter your business name exactly as it appears on your `Business Registration Certificate|business-reg-certificate` or in your tax registration confirmation email.",
     "stepOneNextButton": "Next"
