@@ -12,7 +12,7 @@ name: Apply for Your MD, DO, DDS, OD, DPM, or DVM Controlled Dangerous Substance
 webflowName: "Healthcare: Controlled Dangerous Substance Registration"
 summaryDescriptionMd: You need CDS registration if you’re a Medical Doctor (MD),
   Doctor of Osteopathy (DO), Dentist (DDS), Optometrist (OD), Podiatrist (DPM),
-  or Veterinarian (DVM) and you or your business dispense, prescribe, or store
+  or Veterinarian (DVM), and you or your business dispense, prescribe, or store
   Controlled Dangerous Substances. Email your completed CDS application to
   [CDS@dca.njoag.gov](mailto:CDS@dca.njoag.gov). The New Jersey Drug Control
   Unit (NJ DCU) will send you an invoice to pay your fee online.
