@@ -4,6 +4,7 @@ import {
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import {
   onOnboardingPageNexusBusiness,
+  onOnboardingPageNoneOfTheAbove,
   onOnboardingPageRemoteSellerBusiness,
   onOnboardingPageRemoteWorkerBusiness,
 } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
@@ -249,6 +250,49 @@ describe("Onboarding for all industries when out of state nexus business [featur
 
         cy.url().should("include", "dashboard");
         cy.get('[data-testid="header-link-to-profile"]');
+      });
+    });
+  });
+
+  describe("Onboarding for out of state - none of the above business [feature] [all] [group4]", () => {
+    describe("Desktop", () => {
+      beforeEach(() => {
+        cy.loginByCognitoApi();
+      });
+
+      it("Onboarding for Out of State - None of the Above", () => {
+        cy.url().should("include", "onboarding?page=1");
+        onOnboardingPageNoneOfTheAbove.selectBusinessPersonaRadio("FOREIGN");
+        onOnboardingPageNoneOfTheAbove.getBusinessPersonaRadio("FOREIGN").should("be.checked");
+        onOnboardingPageNoneOfTheAbove.clickNext();
+
+        cy.url().should("include", "onboarding?page=2");
+        onOnboardingPageNoneOfTheAbove.selectNoneOfTheAbove();
+        onOnboardingPageNoneOfTheAbove.getNoneOfTheAbove().should("be.checked");
+        onOnboardingPageNoneOfTheAbove.clickShowMyGuide();
+
+        cy.url().should("include", "unsupported");
+      });
+    });
+
+    describe("Mobile", () => {
+      beforeEach(() => {
+        setMobileViewport();
+        cy.loginByCognitoApi();
+      });
+
+      it("Onboarding for Out of State - None of the Above", () => {
+        cy.url().should("include", "onboarding?page=1");
+        onOnboardingPageNoneOfTheAbove.selectBusinessPersonaRadio("FOREIGN");
+        onOnboardingPageNoneOfTheAbove.getBusinessPersonaRadio("FOREIGN").should("be.checked");
+        onOnboardingPageNoneOfTheAbove.clickNext();
+
+        cy.url().should("include", "onboarding?page=2");
+        onOnboardingPageNoneOfTheAbove.selectNoneOfTheAbove();
+        onOnboardingPageNoneOfTheAbove.getNoneOfTheAbove().should("be.checked");
+        onOnboardingPageNoneOfTheAbove.clickShowMyGuide();
+
+        cy.url().should("include", "unsupported");
       });
     });
   });
