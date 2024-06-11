@@ -7,7 +7,7 @@ name: Apply for Your PA, APN, or CNM Controlled Dangerous Substance (CDS)
   Registration
 webflowName: "Healthcare: Controlled Dangerous Substance Registration - PA, APN, and CNM"
 summaryDescriptionMd: You need CDS registration if you’re a Physician Assistant
-  (PA), Advanced Practice Nurse (APN), or Certified Nurse Midwife (CNM) and you
+  (PA), Advanced Practice Nurse (APN), or Certified Nurse Midwife (CNM), and you
   or your business prescribe or dispense Controlled Dangerous Substances. Email
   your completed CDS application to
   [CDS@dca.njoag.gov](mailto:CDS@dca.njoag.gov). The New Jersey Drug Control
