@@ -15,6 +15,7 @@ export const constructionOptions = ["RESIDENTIAL", "COMMERCIAL_OR_INDUSTRIAL", "
 export const residentialConstructionOptions = ["NEW_HOME_CONSTRUCTION", "HOME_RENOVATIONS", "BOTH"] as const;
 export const employmentAgencyOptions = ["JOB SEEKERS", "EMPLOYERS"] as const;
 export const employmentPlacementOptions = ["TEMPORARY", "PERMANENT"] as const;
+
 export interface IndustrySpecificData {
   readonly liquorLicense: boolean;
   readonly requiresCpa: boolean;
