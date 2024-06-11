@@ -18,6 +18,11 @@ summaryDescriptionMd: You need CDS registration if you’re a Medical Doctor (MD
   Unit (NJ DCU) will send you an invoice to pay your fee online.
 industryId:
   - healthcare
+callToActionText: "Apply for My CDS Registration "
+callToActionLink: "https://www.njconsumeraffairs.gov/dcu/Applications/Initial-A\
+  pplication-for-Registration-for-Dispenser-Prescriber.pdf "
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: New Jersey Drug Control Unit
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
 
@@ -37,5 +42,17 @@ You must also [register with the U.S. Drug Enforcement Administration (DEA)](htt
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
 If you are a prescriber, [you must register with the New Jersey Prescription Monitoring Program](https://www.njconsumeraffairs.gov/pmp/Pages/register.aspx) after you have received your CDS registration.
+
+:::
+
+:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
+
+You cannot legally dispense, prescribe, or store any schedule of CDS.
+
+:::
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+
+A Controlled Dangerous Substance (CDS) registration.
 
 :::
