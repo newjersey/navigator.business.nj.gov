@@ -395,16 +395,26 @@ commands:
             echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_ACCESSIBILITY_TESTING' >> $BASH_ENV
             echo 'export REDIRECT_URL=$REDIRECT_URL_ACCESSIBILITY_TESTING' >> $BASH_ENV
 
-  deploy-content:
+  deploy-setup:
     steps:
+      - configure-and-build
+      - setup_remote_docker:
+          version: edge
+          docker_layer_caching: true
+      - deploy-serverless
+
+  deploy-content-env:
+    steps:
+      - deploy-setup
       - package-webapp-docker:
           image-name: bfs-navigator-content
       - run:
           name: Deploy WebApp
           command: aws ecs update-service --cluster bfs_container_cluster --service bfs-navigator-content --region ${AWS_REGION} --force-new-deployment
 
-  deploy-accessibility-testing:
+  deploy-accessibility-testing-env:
     steps:
+      - deploy-setup
       - package-webapp-docker:
           image-name: bfs-navigator-testing
       - run:
@@ -413,13 +423,9 @@ commands:
 
   deploy:
     steps:
-      - configure-and-build
-      - setup_remote_docker:
-          version: edge
-          docker_layer_caching: true
+      - deploy-setup
       - package-webapp-docker:
           image-name: bfs-navigator
-      - deploy-serverless
       - run:
           name: Deploy WebApp
           command: aws ecs update-service --cluster bfs_container_cluster --service bfs-navigator --region ${AWS_REGION} --force-new-deployment
@@ -617,8 +623,7 @@ jobs:
       - set-content-env-vars
       - attach_workspace:
           at: .
-      - deploy
-      - deploy-content
+      - deploy-content-env
     environment:
       STAGE: content
       MYNJ_PROFILE_LINK: https://myt1.nj.gov/portal/Desktop
@@ -634,8 +639,7 @@ jobs:
       - set-accessibility-testing-env-vars
       - attach_workspace:
           at: .
-      - deploy
-      - deploy-accessibility-testing
+      - deploy-accessibility-testing-env
     environment:
       STAGE: testing
       MYNJ_PROFILE_LINK: https://myt1.nj.gov/portal/Desktop
