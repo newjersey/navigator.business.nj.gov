@@ -10,7 +10,6 @@ const Template = () => {
     <div className="width-card-lg tablet:width-tablet">
       <CtaContainer>
         <ActionBarLayout
-          reverseInMobile={true}
           stackOnLeft={
             <div className="display-flex mobile-lg:display-block flex-justify-center">Float Left</div>
           }

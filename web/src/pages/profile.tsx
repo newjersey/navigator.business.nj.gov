@@ -838,7 +838,7 @@ const ProfilePage = (props: Props): ReactElement => {
                         <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
                           {getElements()}
                           <div className="margin-top-2">
-                            <ActionBarLayout reverseInMobile={true}>
+                            <ActionBarLayout>
                               <div className="margin-top-2 mobile-lg:margin-top-0">
                                 <SecondaryButton
                                   isColor="primary"

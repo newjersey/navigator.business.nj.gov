@@ -155,7 +155,7 @@ export const DbaFormationPaginator = (): ReactElement => {
     if (state.stepIndex === 0 && nameIsAvailable) {
       return (
         <CtaContainer>
-          <ActionBarLayout reverseInMobile={true}>
+          <ActionBarLayout>
             <FormationHelpButton />
             <ForwardButton />
           </ActionBarLayout>
@@ -164,7 +164,7 @@ export const DbaFormationPaginator = (): ReactElement => {
     } else if (state.stepIndex === 1) {
       return (
         <CtaContainer>
-          <ActionBarLayout reverseInMobile={true}>
+          <ActionBarLayout>
             <FormationHelpButton />
             <div className="margin-top-2 mobile-lg:margin-top-0">
               <BackButton />
@@ -176,7 +176,7 @@ export const DbaFormationPaginator = (): ReactElement => {
     } else if (state.stepIndex === 2) {
       return (
         <CtaContainer>
-          <ActionBarLayout reverseInMobile={true}>
+          <ActionBarLayout>
             <FormationHelpButton />
             <div className="margin-top-2 mobile-lg:margin-top-0">
               <BackButton />
