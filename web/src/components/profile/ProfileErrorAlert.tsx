@@ -23,10 +23,18 @@ export const ProfileErrorAlert = (props: Props): ReactElement | null => {
 
   const errorFieldsIds = (): string[] => {
     return props.fieldErrors.map((error) => {
-      if (error === "willSellPetCareItems" && !props.fieldErrors.includes("petCareHousing")) {
-        return "petCareHousing";
-      } else {
-        return error;
+      switch (error) {
+        case "willSellPetCareItems":
+          if (!props.fieldErrors.includes("petCareHousing")) {
+            return "petCareHousing";
+          }
+          return error;
+        case "employmentPlacementType":
+          return "employmentPersonnelServiceType";
+        case "residentialConstructionType":
+          return "constructionType";
+        default:
+          return error;
       }
     });
   };
