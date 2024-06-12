@@ -13,6 +13,8 @@ export const cannabisLicenseOptions = ["CONDITIONAL", "ANNUAL"] as const;
 export const carServiceOptions = ["STANDARD", "HIGH_CAPACITY", "BOTH"] as const;
 export const constructionOptions = ["RESIDENTIAL", "COMMERCIAL_OR_INDUSTRIAL", "BOTH"] as const;
 export const residentialConstructionOptions = ["NEW_HOME_CONSTRUCTION", "HOME_RENOVATIONS", "BOTH"] as const;
+export const employmentAgencyOptions = ["JOB SEEKERS", "EMPLOYERS"] as const;
+export const employmentPlacementOptions = ["TEMPORARY", "PERMANENT"] as const;
 export interface IndustrySpecificData {
   readonly liquorLicense: boolean;
   readonly requiresCpa: boolean;
@@ -32,6 +34,8 @@ export interface IndustrySpecificData {
   readonly willSellPetCareItems: boolean | undefined;
   readonly constructionType: ConstructionType;
   readonly residentialConstructionType: ResidentialConstructionType;
+  readonly employmentPersonnelServiceType: EmploymentAndPersonnelServicesType;
+  readonly employmentPlacementType: EmploymentPlacementType;
 }
 
 type IndustrySpecificDataChoices = {
@@ -57,6 +61,8 @@ export const industrySpecificDataChoices: IndustrySpecificDataChoices = {
   willSellPetCareItems: booleanChoice,
   constructionType: [...constructionOptions],
   residentialConstructionType: [...residentialConstructionOptions],
+  employmentPersonnelServiceType: [...employmentAgencyOptions],
+  employmentPlacementType: [...employmentPlacementOptions],
 };
 
 export const emptyIndustrySpecificData: IndustrySpecificData = {
@@ -78,6 +84,8 @@ export const emptyIndustrySpecificData: IndustrySpecificData = {
   willSellPetCareItems: undefined,
   constructionType: undefined,
   residentialConstructionType: undefined,
+  employmentPersonnelServiceType: undefined,
+  employmentPlacementType: undefined,
 };
 
 export interface ProfileData extends IndustrySpecificData {
@@ -149,6 +157,8 @@ export type CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 export type CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 export type ConstructionType = "RESIDENTIAL" | "COMMERCIAL_OR_INDUSTRIAL" | "BOTH" | undefined;
 export type ResidentialConstructionType = "NEW_HOME_CONSTRUCTION" | "HOME_RENOVATIONS" | "BOTH" | undefined;
+export type EmploymentAndPersonnelServicesType = "JOB SEEKERS" | "EMPLOYERS" | undefined;
+export type EmploymentPlacementType = "TEMPORARY" | "PERMANENT" | undefined;
 export const businessPersonas = ["STARTING", "OWNING", "FOREIGN"] as const;
 export type BusinessPersona = (typeof businessPersonas)[number] | undefined;
 

@@ -235,6 +235,56 @@ describe("<Industry />", () => {
         expect(currentProfileData().constructionType).toEqual(undefined);
         expect(currentProfileData().residentialConstructionType).toEqual(undefined);
       });
+
+      it("shows placement question if employmentPersonnelServiceType `employers` is selected", () => {
+        renderComponent();
+        selectIndustry("employment-agency");
+        expect(
+          screen.getByTestId("industry-specific-employment-agency-employmentPersonnelServiceType")
+        ).toBeInTheDocument();
+        expect(currentProfileData().employmentPersonnelServiceType).toBe(undefined);
+
+        fireEvent.click(screen.getByLabelText("Employers"));
+        expect(
+          screen.getByTestId("industry-specific-employment-agency-employmentPlacementType")
+        ).toBeInTheDocument();
+        expect(currentProfileData().employmentPersonnelServiceType).toEqual("EMPLOYERS");
+      });
+
+      it("does not show placement question if employmentPersonnelServiceType `job seekers` is selected", () => {
+        renderComponent();
+        selectIndustry("employment-agency");
+        expect(
+          screen.getByTestId("industry-specific-employment-agency-employmentPersonnelServiceType")
+        ).toBeInTheDocument();
+        fireEvent.click(screen.getByLabelText("Job Seekers"));
+        expect(
+          screen.queryByTestId("industry-specific-employment-agency-employmentPlacementType")
+        ).not.toBeInTheDocument();
+        expect(currentProfileData().employmentPersonnelServiceType).toEqual("JOB SEEKERS");
+      });
+
+      it("resets employmentPersonnelServiceType and employmentPlacementType if industry changes", () => {
+        renderComponent();
+        selectIndustry("employment-agency");
+        expect(
+          screen.getByTestId("industry-specific-employment-agency-employmentPersonnelServiceType")
+        ).toBeInTheDocument();
+        expect(currentProfileData().employmentPersonnelServiceType).toBe(undefined);
+
+        fireEvent.click(screen.getByLabelText("Employers"));
+        expect(currentProfileData().employmentPersonnelServiceType).toEqual("EMPLOYERS");
+        expect(currentProfileData().employmentPlacementType).toBe(undefined);
+        expect(
+          screen.getByTestId("industry-specific-employment-agency-employmentPlacementType")
+        ).toBeInTheDocument();
+        fireEvent.click(screen.getByLabelText("Temporary"));
+        expect(currentProfileData().employmentPlacementType).toEqual("TEMPORARY");
+
+        selectIndustry("petcare");
+        expect(currentProfileData().employmentPersonnelServiceType).toEqual(undefined);
+        expect(currentProfileData().employmentPlacementType).toEqual(undefined);
+      });
     });
   });
 

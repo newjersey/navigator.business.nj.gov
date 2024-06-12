@@ -5225,6 +5225,51 @@ collections:
                             }
                           - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Employment and Personnel Service Type
+                    name: employmentPersonnelServiceType
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Radio Button Job Seekers Text",
+                              name: "radioButtonJobSeekersText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button Employers Text",
+                              name: "radioButtonEmployersText",
+                              widget: "string",
+                            }
+                          - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Employment Placement Type
+                    name: employmentPlacementType
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Radio Button Temporary Text",
+                              name: "radioButtonTemporaryText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button Permanent Text",
+                              name: "radioButtonPermanentText",
+                              widget: "string",
+                            }
+                          - { label: "Description", name: "description", widget: "markdown" }
+
               - label: Profile / Onboarding Defaults
                 name: default
                 collapsed: false

@@ -89,7 +89,8 @@
   "displayname": "employment-agency",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": true,
+    "isEmploymentTypeApplicable": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "employment office,employment services,temporary agency,employment recruiter,employment center",
