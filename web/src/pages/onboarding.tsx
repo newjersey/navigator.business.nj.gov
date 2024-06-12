@@ -51,6 +51,7 @@ import {
 } from "@/lib/utils/onboardingPageHelpers";
 import { determineForeignBusinessType } from "@businessnjgovnavigator/shared";
 import {
+  LookupMunicipalityByName,
   Municipality,
   ProfileData,
   TaskProgress,
@@ -209,7 +210,29 @@ const OnboardingPage = (props: Props): ReactElement => {
       } else {
         const queryPage = Number(router.query[QUERIES.page]);
         const queryIndustryId = router.query[QUERIES.industry] as string | undefined;
+        const businessMunicipality = router.query[QUERIES.businessMunicipality] as string | undefined;
         const queryFlow = router.query[QUERIES.flow] as string;
+        const utmSource = router.query[QUERIES.utmSource] as string | undefined;
+
+        if (businessMunicipality) {
+          const municipalityResult = LookupMunicipalityByName(businessMunicipality);
+          if (municipalityResult.name) {
+            const newProfileData: ProfileData = {
+              ...currentBusiness.profileData,
+              municipality: municipalityResult,
+            };
+            setProfileData(newProfileData);
+            localUpdateQueue?.queueProfileData(newProfileData);
+          }
+        }
+
+        if (utmSource) {
+          localUpdateQueue
+            ?.queueUser({
+              accountCreationSource: utmSource,
+            })
+            .update({ local: true });
+        }
 
         if (industryQueryParamIsValid(queryIndustryId)) {
           const newProfileData: ProfileData = {
