@@ -1,3 +1,26 @@
+# [2024.18.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.17.0...v2024.18.0) (2024-06-12)
+
+
+### Bug Fixes
+
+* [[#187652148](https://github.com/newjersey/navigator.business.nj.gov/issues/187652148)] resolved issues with see your tax due dates modals ([0bb5f2f](https://github.com/newjersey/navigator.business.nj.gov/commit/0bb5f2fab2c625622245acac3567c168e853f1dc))
+* **deps:** update dependency @types/mdast to v4.0.4 ([125f08d](https://github.com/newjersey/navigator.business.nj.gov/commit/125f08d39f0db44f2e23123c68bf2854f2bffb11))
+* **deps:** update material-ui to v5.15.19 ([e83c063](https://github.com/newjersey/navigator.business.nj.gov/commit/e83c063f25b3efae4ed728bb123280014f46b299))
+* update lower env deploys to target correct ECS clusters ([d22126c](https://github.com/newjersey/navigator.business.nj.gov/commit/d22126c5f2871526438466862c0c40010cc19dd6))
+
+
+### Features
+
+* [[#186344213](https://github.com/newjersey/navigator.business.nj.gov/issues/186344213)] removed landing carousel ([f556bce](https://github.com/newjersey/navigator.business.nj.gov/commit/f556bce3856263a5f1b73f2d526e4d4356a988b7))
+* [[#187166158](https://github.com/newjersey/navigator.business.nj.gov/issues/187166158)][[#187166156](https://github.com/newjersey/navigator.business.nj.gov/issues/187166156)] Cypress Out of state remote seller desktop and mobile Tests ([fef7566](https://github.com/newjersey/navigator.business.nj.gov/commit/fef7566f0b1a3c1f8d652b00f562da27c36279ff))
+* [[#187414334](https://github.com/newjersey/navigator.business.nj.gov/issues/187414334)] remove white fill from for you column header ([e942d23](https://github.com/newjersey/navigator.business.nj.gov/commit/e942d23609b8f7ee23ea9ec2c8376ae640306657))
+* [[#187420711](https://github.com/newjersey/navigator.business.nj.gov/issues/187420711)]: Set up both testing and content apis ([36b8ced](https://github.com/newjersey/navigator.business.nj.gov/commit/36b8ced80dae99e4184a3c84abf62fa7ef45b7a6))
+* [[#187651449](https://github.com/newjersey/navigator.business.nj.gov/issues/187651449)] remove ada-compliant from CMS and consolidate to ada ([9d30e1d](https://github.com/newjersey/navigator.business.nj.gov/commit/9d30e1d1f092ee3fc42ab850860b7f35d3de7c3f))
+* [[#187652840](https://github.com/newjersey/navigator.business.nj.gov/issues/187652840)] add hover and active states to violation button ([e0ec65c](https://github.com/newjersey/navigator.business.nj.gov/commit/e0ec65cad1f506195674b3aba142256c522b59b9))
+* [[#187662060](https://github.com/newjersey/navigator.business.nj.gov/issues/187662060)] updated locked color info for business step formation ([4cee7f0](https://github.com/newjersey/navigator.business.nj.gov/commit/4cee7f0cc0c1daeab844cb04cd5e35dc1561cd8a))
+* [[#187662060](https://github.com/newjersey/navigator.business.nj.gov/issues/187662060)] updated locked color info for business step formation to black ([0f1df8a](https://github.com/newjersey/navigator.business.nj.gov/commit/0f1df8af4185fd58f348f2a19d3ccff20d2c081a))
+* [[#187708348](https://github.com/newjersey/navigator.business.nj.gov/issues/187708348)] script to find and print contextual info links ([da2919c](https://github.com/newjersey/navigator.business.nj.gov/commit/da2919c854a5ebccfab44f843e170088c6c14f48))
+
 # [2024.17.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.16.0...v2024.17.0) (2024-05-29)
 
 
