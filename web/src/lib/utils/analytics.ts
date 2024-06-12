@@ -2261,13 +2261,13 @@ export default {
         },
       },
     },
-    quick_action_button: {
+    anytime_action_button: {
       click: {
-        go_to_quick_action_screen: (fileName: string) => {
+        go_to_anytime_action_screen: (fileName: string) => {
           eventRunner.track({
-            legacy_event_category: "quick_action_button",
+            legacy_event_category: "quick_action_button", // Leaving as "quick_action_button" for historical tracking purposes
             legacy_event_action: "click",
-            legacy_event_label: "go_to_quick_action_screen",
+            legacy_event_label: "go_to_quick_action_screen", // Leaving as "go_to_quick_action_screen" for historical tracking purposes
             event: "link_clicks",
             clicked_to: fileName,
           });

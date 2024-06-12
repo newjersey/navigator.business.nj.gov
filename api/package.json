@@ -24,7 +24,7 @@
     "typecheck": "tsc --noemit"
   },
   "engines": {
-    "node": ">=20.13.1"
+    "node": ">=20.14.0"
   },
   "prettier": {
     "printWidth": 110,

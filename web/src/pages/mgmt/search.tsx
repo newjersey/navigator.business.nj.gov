@@ -6,6 +6,9 @@ import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer"
 import { MatchCollection } from "@/components/search/MatchCollection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
+import { searchAnytimeActionLicenseReinstatements } from "@/lib/search/searchAnytimeActionLicenseReinstatement";
+import { searchAnytimeActionLinks } from "@/lib/search/searchAnytimeActionLinks";
+import { searchAnytimeActionTasks } from "@/lib/search/searchAnytimeActionTasks";
 import { searchCertifications } from "@/lib/search/searchCertifications";
 import { searchConfig } from "@/lib/search/searchConfig";
 import { searchContextualInfo } from "@/lib/search/searchContextualInfo";
@@ -13,9 +16,6 @@ import { searchFundings } from "@/lib/search/searchFundings";
 import { searchIndustries } from "@/lib/search/searchIndustries";
 import { searchLicenseEvents } from "@/lib/search/searchLicenseEvents";
 import { searchNonEssentialQuestions } from "@/lib/search/searchNonEssentialQuestions";
-import { searchQuickActionLicenseReinstatements } from "@/lib/search/searchQuickActionLicenseReinstatement";
-import { searchQuickActionLinks } from "@/lib/search/searchQuickActionLinks";
-import { searchQuickActionTasks } from "@/lib/search/searchQuickActionTasks";
 import { searchSidebarCards } from "@/lib/search/searchSidebarCards";
 import { searchSteps } from "@/lib/search/searchSteps";
 import { searchTasks } from "@/lib/search/searchTasks";
@@ -23,6 +23,9 @@ import { searchTaxFilings } from "@/lib/search/searchTaxFilings";
 import { searchWebflowLicenses } from "@/lib/search/searchWebflowLicenses";
 import { GroupedConfigMatch, Match } from "@/lib/search/typesForSearch";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
+import { loadAllAnytimeActionLicenseReinstatements } from "@/lib/static/loadAnytimeActionLicenseReinstatements";
+import { loadAllAnytimeActionLinks } from "@/lib/static/loadAnytimeActionLinks";
+import { loadAllAnytimeActionTasks } from "@/lib/static/loadAnytimeActionTasks";
 import { loadAllArchivedCertifications, loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadCmsConfig } from "@/lib/static/loadCmsConfig";
 import { loadAllArchivedContextualInfo, loadAllContextualInfo } from "@/lib/static/loadContextualInfo";
@@ -31,12 +34,12 @@ import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllLicenses } from "@/lib/static/loadLicenses";
 import { loadAllPageMetadata } from "@/lib/static/loadPageMetadata";
-import { loadAllQuickActionLicenseReinstatements } from "@/lib/static/loadQuickActionLicenseReinstatements";
-import { loadAllQuickActionLinks } from "@/lib/static/loadQuickActionLinks";
-import { loadAllQuickActionTasks } from "@/lib/static/loadQuickActionTasks";
 import { loadAllLicenseTasks, loadAllMunicipalTasks, loadAllTasksOnly } from "@/lib/static/loadTasks";
 import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
 import {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionLink,
+  AnytimeActionTask,
   Certification,
   ContextualInfoFile,
   Filing,
@@ -44,9 +47,6 @@ import {
   LicenseEvent,
   NonEssentialQuestion,
   PageMetadata,
-  QuickActionLicenseReinstatement,
-  QuickActionLink,
-  QuickActionTask,
   RoadmapDisplayContent,
   SidebarCardContent,
   Step,
@@ -77,9 +77,9 @@ interface Props {
   contextualInfo: ContextualInfoFile[];
   archivedContextualInfo: ContextualInfoFile[];
   licenseEvents: LicenseEvent[];
-  quickActionTasks: QuickActionTask[];
-  quickActionLinks: QuickActionLink[];
-  quickActionLicenseReinstatements: QuickActionLicenseReinstatement[];
+  anytimeActionTasks: AnytimeActionTask[];
+  anytimeActionLinks: AnytimeActionLink[];
+  anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   pageMetaData: PageMetadata[];
   cmsConfig: any;
 }
@@ -100,11 +100,11 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [nonEssentialQuestionsMatches, setNonEssentialQuestionsMatches] = useState<Match[]>([]);
   const [webflowLicenseMatches, setWebflowLicenseMatches] = useState<Match[]>([]);
   const [filingMatches, setFilingMatches] = useState<Match[]>([]);
-  const [quickActionTaskMatches, setQuickActionTaskMatches] = useState<Match[]>([]);
-  const [quickActionLicenseReinstatementMatches, setQuickActionLicenseReinstatementMatches] = useState<
+  const [anytimeActionTaskMatches, setAnytimeActionTaskMatches] = useState<Match[]>([]);
+  const [anytimeActionLicenseReinstatementMatches, setAnytimeActionLicenseReinstatementMatches] = useState<
     Match[]
   >([]);
-  const [quickActionLinkMatches, setQuickActionLinkMatches] = useState<Match[]>([]);
+  const [anytimeActionLinkMatches, setAnytimeActionLinkMatches] = useState<Match[]>([]);
   const [sidebarCardMatches, setSidebarCardMatches] = useState<Match[]>([]);
   const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>([]);
   const [archivedContextualInfoMatches, setArchivedContextualInfoMatches] = useState<Match[]>([]);
@@ -137,10 +137,10 @@ const SearchContentPage = (props: Props): ReactElement => {
     setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
     setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
     setIndustryMatches(searchIndustries(Industries, lowercaseTerm));
-    setQuickActionLinkMatches(searchQuickActionLinks(props.quickActionLinks, lowercaseTerm));
-    setQuickActionTaskMatches(searchQuickActionTasks(props.quickActionTasks, lowercaseTerm));
-    setQuickActionLicenseReinstatementMatches(
-      searchQuickActionLicenseReinstatements(props.quickActionLicenseReinstatements, lowercaseTerm)
+    setAnytimeActionLinkMatches(searchAnytimeActionLinks(props.anytimeActionLinks, lowercaseTerm));
+    setAnytimeActionTaskMatches(searchAnytimeActionTasks(props.anytimeActionTasks, lowercaseTerm));
+    setAnytimeActionLicenseReinstatementMatches(
+      searchAnytimeActionLicenseReinstatements(props.anytimeActionLicenseReinstatements, lowercaseTerm)
     );
 
     const defaultStepsMatches = searchSteps(Steps.steps as Step[], lowercaseTerm, { filename: "Steps" });
@@ -185,9 +185,9 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...archivedContextualInfoMatches,
         ...contextualInfoMatches,
         ...groupedConfigMatches,
-        ...quickActionTaskMatches,
-        ...quickActionLinkMatches,
-        ...quickActionLicenseReinstatementMatches,
+        ...anytimeActionTaskMatches,
+        ...anytimeActionLinkMatches,
+        ...anytimeActionLicenseReinstatementMatches,
       ].length === 0
     );
   };
@@ -226,10 +226,10 @@ const SearchContentPage = (props: Props): ReactElement => {
     "Contextual Information": contextualInfoMatches,
   };
 
-  const quickActionCollection = {
-    "Quick Action Tasks": quickActionTaskMatches,
-    "Quick Action Links": quickActionLinkMatches,
-    "Quick Action License Reinstatements": quickActionLicenseReinstatementMatches,
+  const anytimeActionCollection = {
+    "Anytime Action Tasks": anytimeActionTaskMatches,
+    "Anytime Action Links": anytimeActionLinkMatches,
+    "Anytime Action License Reinstatements": anytimeActionLicenseReinstatementMatches,
   };
 
   const authedView = (
@@ -261,7 +261,7 @@ const SearchContentPage = (props: Props): ReactElement => {
       <MatchCollection matchedCollections={dashboardCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={miscCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection
-        matchedCollections={quickActionCollection}
+        matchedCollections={anytimeActionCollection}
         groupedConfigMatches={groupedConfigMatches}
       />
       <MatchCollection
@@ -306,9 +306,9 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       contextualInfo: loadAllContextualInfo(),
       archivedContextualInfo: loadAllArchivedContextualInfo(),
       licenseEvents: loadAllLicenses(),
-      quickActionTasks: loadAllQuickActionTasks(),
-      quickActionLinks: loadAllQuickActionLinks(),
-      quickActionLicenseReinstatements: loadAllQuickActionLicenseReinstatements(),
+      anytimeActionTasks: loadAllAnytimeActionTasks(),
+      anytimeActionLinks: loadAllAnytimeActionLinks(),
+      anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
       pageMetaData: loadAllPageMetadata(),
       cmsConfig: loadCmsConfig(),
     },

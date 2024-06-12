@@ -41,11 +41,11 @@ describe("findDeadLinks", () => {
       // @ts-ignore
       .mockReturnValueOnce(["licenseTasks.md"])
       // @ts-ignore
-      .mockReturnValueOnce(["quickActionLinks.md"])
+      .mockReturnValueOnce(["anytimeActionLinks.md"])
       // @ts-ignore
-      .mockReturnValueOnce(["quickActionTasks.md"])
+      .mockReturnValueOnce(["anytimeActionTasks.md"])
       // @ts-ignore
-      .mockReturnValueOnce(["quickActionLicenseReinstatements.md"]);
+      .mockReturnValueOnce(["anytimeActionLicenseReinstatements.md"]);
 
     const task1 = "Task 1 contents";
     const task2 = "Task 2 contents with `contextual info|info1` in it";
@@ -66,9 +66,9 @@ describe("findDeadLinks", () => {
     const certifications = "Certification Content";
     const licenses = "License Content";
     const licenseTasks = "LicenseTask Content";
-    const quickActionTasks = "QuickActionTask Content";
-    const quickActionLinks = "QuickActionLink Content";
-    const quickActionLicenseReinstatements = "QuickActionLicenseReinstatement Content";
+    const anytimeActionTasks = "AnytimeActionTask Content";
+    const anytimeActionLinks = "AnytimeActionLink Content";
+    const anytimeActionLicenseReinstatements = "AnytimeActionLicenseReinstatement Content";
 
     mockedFs.readFileSync
       .mockReturnValueOnce(industry1)
@@ -89,9 +89,9 @@ describe("findDeadLinks", () => {
       .mockReturnValueOnce(certifications)
       .mockReturnValueOnce(licenses)
       .mockReturnValueOnce(licenseTasks)
-      .mockReturnValueOnce(quickActionTasks)
-      .mockReturnValueOnce(quickActionLinks)
-      .mockReturnValueOnce(quickActionLicenseReinstatements);
+      .mockReturnValueOnce(anytimeActionTasks)
+      .mockReturnValueOnce(anytimeActionLinks)
+      .mockReturnValueOnce(anytimeActionLicenseReinstatements);
   });
 
   describe("findDeadTasks", () => {
@@ -125,9 +125,9 @@ describe("findDeadLinks", () => {
         "/licenses/licenses-expiration": [],
         "/funding/fundings": [],
         "/certification/certifications": [],
-        "/quick-action-links/quickActionLinks": [],
-        "/quick-action-tasks/quickActionTasks": [],
-        "/quick-action-license-reinstatements/quickActionLicenseReinstatements": [],
+        "/anytime-action-links/anytimeActionLinks": [],
+        "/anytime-action-tasks/anytimeActionTasks": [],
+        "/anytime-action-license-reinstatements/anytimeActionLicenseReinstatements": [],
       });
     });
   });

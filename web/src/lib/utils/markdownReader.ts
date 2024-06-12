@@ -1,5 +1,8 @@
 import { ContextualInfo } from "@/contexts/contextualInfoContext";
 import {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionLink,
+  AnytimeActionTask,
   Certification,
   County,
   Filing,
@@ -15,9 +18,6 @@ import {
   LicenseEvent,
   MarkdownResult,
   PageMetadata,
-  QuickActionLicenseReinstatement,
-  QuickActionLink,
-  QuickActionTask,
   TaskWithoutLinks,
   TaxAgency,
   TaxFilingMethod,
@@ -56,41 +56,41 @@ export const convertLicenseMd = (taskMdContents: string, filename: string): Lice
   };
 };
 
-export const convertQuickActionTaskMd = (
-  quickActionTaskMdContents: string,
+export const convertAnytimeActionTaskMd = (
+  anytimeActionTaskMdContents: string,
   filename: string
-): QuickActionTask => {
-  const matterResult = matter(quickActionTaskMdContents);
-  const quickActionGrayMatter = matterResult.data as QuickActionTaskGrayMatter;
+): AnytimeActionTask => {
+  const matterResult = matter(anytimeActionTaskMdContents);
+  const anytimeActionGrayMatter = matterResult.data as AnytimeActionTaskGrayMatter;
   return {
     contentMd: matterResult.content,
     filename,
-    ...quickActionGrayMatter,
+    ...anytimeActionGrayMatter,
   };
 };
 
-export const convertQuickActionLicenseReinstatementMd = (
-  quickActionLicenseReinstatementMdContents: string,
+export const convertAnytimeActionLicenseReinstatementMd = (
+  anytimeActionLicenseReinstatementMdContents: string,
   filename: string
-): QuickActionLicenseReinstatement => {
-  const matterResult = matter(quickActionLicenseReinstatementMdContents);
-  const quickActionGrayMatter = matterResult.data as QuickActionTaskGrayMatter;
+): AnytimeActionLicenseReinstatement => {
+  const matterResult = matter(anytimeActionLicenseReinstatementMdContents);
+  const anytimeActionGrayMatter = matterResult.data as AnytimeActionTaskGrayMatter;
   return {
     contentMd: matterResult.content,
     filename,
-    ...quickActionGrayMatter,
+    ...anytimeActionGrayMatter,
   };
 };
 
-export const convertQuickActionLinkMd = (
-  quickActionLinkMdContents: string,
+export const convertAnytimeActionLinkMd = (
+  anytimeActionLinkMdContents: string,
   filename: string
-): QuickActionLink => {
-  const matterResult = matter(quickActionLinkMdContents);
-  const quickActionGrayMatter = matterResult.data as QuickActionLinkGrayMatter;
+): AnytimeActionLink => {
+  const matterResult = matter(anytimeActionLinkMdContents);
+  const anytimeActionGrayMatter = matterResult.data as AnytimeActionLinkGrayMatter;
   return {
     filename,
-    ...quickActionGrayMatter,
+    ...anytimeActionGrayMatter,
   };
 };
 
@@ -185,7 +185,7 @@ type LicenseGrayMatter = {
   callToActionText: string;
 };
 
-type QuickActionLinkGrayMatter = {
+type AnytimeActionLinkGrayMatter = {
   name: string;
   icon: string;
   externalRoute: string;
@@ -194,7 +194,7 @@ type QuickActionLinkGrayMatter = {
   applyToAllUsers: boolean;
 };
 
-type QuickActionTaskGrayMatter = {
+type AnytimeActionTaskGrayMatter = {
   name: string;
   urlSlug: string;
   callToActionLink: string;

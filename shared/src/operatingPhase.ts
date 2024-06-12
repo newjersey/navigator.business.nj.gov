@@ -16,7 +16,7 @@ export interface OperatingPhase {
   readonly displayBusinessStructurePrompt: boolean;
   readonly displayHomeBasedPrompt: boolean;
   readonly displayGoToProfileNudge: boolean;
-  readonly displayQuickActions: boolean;
+  readonly displayAnytimeActions: boolean;
   readonly displaySidebarCardNotRegistered: boolean;
 }
 
@@ -54,7 +54,7 @@ export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): Oper
       displayBusinessStructurePrompt: false,
       displayHomeBasedPrompt: false,
       displayGoToProfileNudge: false,
-      displayQuickActions: false,
+      displayAnytimeActions: false,
       displaySidebarCardNotRegistered: false,
     }
   );
@@ -79,7 +79,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayHomeBasedPrompt: false,
     sectorRequired: false,
     displayGoToProfileNudge: false,
-    displayQuickActions: false,
+    displayAnytimeActions: false,
     displaySidebarCardNotRegistered: true,
   },
   {
@@ -100,7 +100,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayHomeBasedPrompt: true,
     sectorRequired: false,
     displayGoToProfileNudge: false,
-    displayQuickActions: false,
+    displayAnytimeActions: false,
     displaySidebarCardNotRegistered: true,
   },
   {
@@ -121,7 +121,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: false,
     displayGoToProfileNudge: true,
-    displayQuickActions: true,
+    displayAnytimeActions: true,
     displaySidebarCardNotRegistered: true,
   },
   {
@@ -142,7 +142,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayHomeBasedPrompt: true,
     sectorRequired: false,
     displayGoToProfileNudge: false,
-    displayQuickActions: false,
+    displayAnytimeActions: false,
     displaySidebarCardNotRegistered: false,
   },
   {
@@ -163,7 +163,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: true,
     displayGoToProfileNudge: false,
-    displayQuickActions: false,
+    displayAnytimeActions: false,
     displaySidebarCardNotRegistered: false,
   },
   {
@@ -184,7 +184,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayHomeBasedPrompt: false,
     sectorRequired: false,
     displayGoToProfileNudge: false,
-    displayQuickActions: false,
+    displayAnytimeActions: false,
     displaySidebarCardNotRegistered: false,
   },
   {
@@ -205,7 +205,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayHomeBasedPrompt: false,
     sectorRequired: true,
     displayGoToProfileNudge: true,
-    displayQuickActions: true,
+    displayAnytimeActions: true,
     displaySidebarCardNotRegistered: false,
   },
   {
@@ -226,7 +226,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: false,
     displayGoToProfileNudge: true,
-    displayQuickActions: true,
+    displayAnytimeActions: true,
     displaySidebarCardNotRegistered: false,
   },
   {
@@ -247,7 +247,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: false,
     displayGoToProfileNudge: false,
-    displayQuickActions: false,
+    displayAnytimeActions: false,
     displaySidebarCardNotRegistered: false,
   },
 ];

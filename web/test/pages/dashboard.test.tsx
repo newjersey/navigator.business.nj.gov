@@ -67,9 +67,9 @@ describe("dashboard page", () => {
           fundings={[]}
           certifications={[]}
           municipalities={[]}
-          quickActionLinks={[]}
-          quickActionTasks={[]}
-          quickActionLicenseReinstatements={[]}
+          anytimeActionLinks={[]}
+          anytimeActionTasks={[]}
+          anytimeActionLicenseReinstatements={[]}
         />
       </ThemeProvider>
     );
@@ -87,9 +87,9 @@ describe("dashboard page", () => {
             fundings={[]}
             certifications={[]}
             municipalities={[]}
-            quickActionLinks={[]}
-            quickActionTasks={[]}
-            quickActionLicenseReinstatements={[]}
+            anytimeActionLinks={[]}
+            anytimeActionTasks={[]}
+            anytimeActionLicenseReinstatements={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>

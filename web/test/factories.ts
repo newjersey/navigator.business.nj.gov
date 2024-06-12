@@ -1,6 +1,9 @@
 import { ActiveUser } from "@/lib/auth/AuthContext";
 import {
   AllCounties,
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionLink,
+  AnytimeActionTask,
   Certification,
   County,
   FormationDbaContent,
@@ -16,9 +19,6 @@ import {
   OperateReference,
   Opportunity,
   OutageConfig,
-  QuickActionLicenseReinstatement,
-  QuickActionLink,
-  QuickActionTask,
   Roadmap,
   SidebarCardContent,
   Step,
@@ -273,7 +273,7 @@ export const generateFunding = (overrides: Partial<Funding>): Funding => {
   };
 };
 
-export const generateQuickActionTask = (overrides: Partial<QuickActionTask>): QuickActionTask => {
+export const generateAnytimeActionTask = (overrides: Partial<AnytimeActionTask>): AnytimeActionTask => {
   return {
     filename: `some-filename-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -291,9 +291,9 @@ export const generateQuickActionTask = (overrides: Partial<QuickActionTask>): Qu
   };
 };
 
-export const generateQuickActionLicenseReinstatement = (
-  overrides: Partial<QuickActionLicenseReinstatement>
-): QuickActionLicenseReinstatement => {
+export const generateAnytimeActionLicenseReinstatement = (
+  overrides: Partial<AnytimeActionLicenseReinstatement>
+): AnytimeActionLicenseReinstatement => {
   return {
     filename: `some-filename-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -311,7 +311,7 @@ export const generateQuickActionLicenseReinstatement = (
   };
 };
 
-export const generateQuickActionLink = (overrides: Partial<QuickActionLink>): QuickActionLink => {
+export const generateAnytimeActionLink = (overrides: Partial<AnytimeActionLink>): AnytimeActionLink => {
   return {
     filename: `some-filename-${randomInt()}`,
     name: `some-name-${randomInt()}`,

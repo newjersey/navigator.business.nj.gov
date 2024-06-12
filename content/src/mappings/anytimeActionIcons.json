@@ -1,0 +1,36 @@
+{
+  "anytimeActionIcons": [
+    {
+      "name": "Update",
+      "filename": "update-purple.svg"
+    },
+    {
+      "name": "Government",
+      "filename": "govt-purple.svg"
+    },
+    {
+      "name": "Add",
+      "filename": "add-purple.svg"
+    },
+    {
+      "name": "Change",
+      "filename": "change-purple.svg"
+    },
+    {
+      "name": "Sell",
+      "filename": "sell-purple.svg"
+    },
+    {
+      "name": "Close",
+      "filename": "close-purple.svg"
+    },
+    {
+      "name": "Edit",
+      "filename": "edit-purple.svg"
+    },
+    {
+      "name": "File",
+      "filename": "file-purple.svg"
+    }
+  ]
+}
