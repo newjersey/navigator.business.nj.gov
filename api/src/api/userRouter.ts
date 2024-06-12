@@ -248,6 +248,8 @@ export const userRouterFactory = (
       receiveNewsletter: true,
       userTesting: true,
       abExperience: decideABExperience(),
+      accountCreationSource: "Test Source",
+      contactSharingWithAccountCreationPartner: true,
     });
 
     userDataClient
