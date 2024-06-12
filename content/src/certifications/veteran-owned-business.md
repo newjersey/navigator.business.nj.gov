@@ -1,5 +1,5 @@
 ---
-notesMd: Language needs to be reviewed - the first sentence should state a benefit
+notesMd: ""
 sidebarCardBodyText: A Veteran-Owned Business (VOB) certification may not
   provide an advantage for New Jersey State contracts.
 summaryDescriptionMd: By obtaining a `Veteran|veteran` \-Owned Business (VOB)
