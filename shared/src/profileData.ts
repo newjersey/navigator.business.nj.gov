@@ -14,7 +14,7 @@ export const carServiceOptions = ["STANDARD", "HIGH_CAPACITY", "BOTH"] as const;
 export const constructionOptions = ["RESIDENTIAL", "COMMERCIAL_OR_INDUSTRIAL", "BOTH"] as const;
 export const residentialConstructionOptions = ["NEW_HOME_CONSTRUCTION", "HOME_RENOVATIONS", "BOTH"] as const;
 export const employmentAgencyOptions = ["JOB SEEKERS", "EMPLOYERS"] as const;
-export const employmentPlacementOptions = ["TEMPORARY", "PERMANENT"] as const;
+export const employmentPlacementOptions = ["TEMPORARY", "PERMANENT", "BOTH"] as const;
 
 export interface IndustrySpecificData {
   readonly liquorLicense: boolean;
@@ -159,7 +159,7 @@ export type CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 export type ConstructionType = "RESIDENTIAL" | "COMMERCIAL_OR_INDUSTRIAL" | "BOTH" | undefined;
 export type ResidentialConstructionType = "NEW_HOME_CONSTRUCTION" | "HOME_RENOVATIONS" | "BOTH" | undefined;
 export type EmploymentAndPersonnelServicesType = "JOB SEEKERS" | "EMPLOYERS" | undefined;
-export type EmploymentPlacementType = "TEMPORARY" | "PERMANENT" | undefined;
+export type EmploymentPlacementType = "TEMPORARY" | "PERMANENT" | "BOTH" | undefined;
 export const businessPersonas = ["STARTING", "OWNING", "FOREIGN"] as const;
 export type BusinessPersona = (typeof businessPersonas)[number] | undefined;
 

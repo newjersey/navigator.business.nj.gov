@@ -5268,6 +5268,7 @@ collections:
                               name: "radioButtonPermanentText",
                               widget: "string",
                             }
+                          - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
 
               - label: Profile / Onboarding Defaults

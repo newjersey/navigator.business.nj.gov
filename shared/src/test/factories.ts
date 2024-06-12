@@ -234,7 +234,7 @@ export const generateIndustrySpecificData = (
       "BOTH",
     ]),
     employmentPersonnelServiceType: randomElementFromArray(["JOB SEEKERS", "EMPLOYERS"]),
-    employmentPlacementType: randomElementFromArray(["TEMPORARY", "PERMANENT"]),
+    employmentPlacementType: randomElementFromArray(["TEMPORARY", "PERMANENT", "BOTH"]),
     ...overrides,
   };
 };

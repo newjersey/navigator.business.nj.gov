@@ -232,6 +232,7 @@
           "header": "",
           "radioButtonTemporaryText": "Temporary",
           "radioButtonPermanentText": "Permanent",
+          "radioButtonBothText": "Both",
           "description": "Is the placement temporary or permanent?"
         }
       },
