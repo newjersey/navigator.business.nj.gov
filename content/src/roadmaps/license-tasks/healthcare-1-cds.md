@@ -3,6 +3,9 @@ notesMd: >-
   Work in progress, 6.11. \
 
   There are 2 healthcare CDS registrations, healthcare-1-cds and healthcare-2-cds.
+
+
+  The links go funky each time I come back (e.g. links in Be advised and Keep in mind)
 id: "healthcare-1-cds "
 filename: "healthcare-1-cds "
 displayname: healthcare-1-cds
