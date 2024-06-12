@@ -17,7 +17,7 @@ export const ElevatorViolationsCard = (): ReactElement => {
 
   return (
     <div className="radius-md padding-2 border-2px border-error padding-2">
-      <ActionBarLayout reverseInMobile={false} stackOnLeft={violationMessage}>
+      <ActionBarLayout disableReverseOrderInMobile stackOnLeft={violationMessage}>
         <div className="flex-shrink-0">
           <PrimaryButton
             isColor="error"

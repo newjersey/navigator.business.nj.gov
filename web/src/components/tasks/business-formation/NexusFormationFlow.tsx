@@ -99,7 +99,7 @@ export const NexusFormationFlow = (): ReactElement => {
             <Content>{addNaicsCodeData(state.dbaContent.Formation.contentMd ?? "")}</Content>
 
             <CtaContainer>
-              <ActionBarLayout reverseInMobile={true}>
+              <ActionBarLayout>
                 <div className="margin-top-2 mobile-lg:margin-top-0">
                   <SecondaryButton isColor="primary" onClick={onPreviousButtonClick}>
                     {Config.formation.general.previousButtonText}

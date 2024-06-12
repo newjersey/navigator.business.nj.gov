@@ -355,7 +355,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
 
     return (
       <CtaContainer>
-        <ActionBarLayout reverseInMobile={true} stackOnLeft={stackOnLeft}>
+        <ActionBarLayout stackOnLeft={stackOnLeft}>
           <FormationHelpButton />
           {shouldDisplayPreviousButton() && (
             <div className="margin-top-2 mobile-lg:margin-top-0">
