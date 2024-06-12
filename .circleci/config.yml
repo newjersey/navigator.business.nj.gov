@@ -379,8 +379,8 @@ commands:
       - run:
           name: Set Content Environment Variables
           command: |
-            echo 'export REDIRECT_URL=$REDIRECT_URL_CONTENT' >> $BASH_ENV
             echo 'export SHOW_DISABLED_INDUSTRIES=true' >> $BASH_ENV
+            echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_CONTENT' >> $BASH_ENV
             echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_CONTENT' >> $BASH_ENV
             echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_CONTENT' >> $BASH_ENV
             echo 'export REDIRECT_URL=$REDIRECT_URL_CONTENT' >> $BASH_ENV
