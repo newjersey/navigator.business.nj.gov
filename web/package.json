@@ -114,7 +114,7 @@
     "@storybook/react": "7.6.19",
     "@storybook/storybook-deployer": "2.8.16",
     "@storybook/theming": "7.6.19",
-    "@swc/core": "1.5.24",
+    "@swc/core": "1.5.25",
     "@swc/jest": "0.2.36",
     "@testing-library/dom": "10.1.0",
     "@testing-library/jest-dom": "6.4.5",
