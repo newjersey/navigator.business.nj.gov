@@ -19,6 +19,8 @@ summaryDescriptionMd: If you're a Medical Doctor (MD), Doctor of Osteopathy
   [CDS@dca.njoag.gov](mailto:CDS@dca.njoag.gov). Do not include your payment.
   The NJ Drug Control Unit (DCU) will send you an invoice to pay the fee online.
 callToActionText: "Reinstate My CDS Registration "
+callToActionLink: "https://www.njconsumeraffairs.gov/dcu/Applications/Reinstate\
+  ment-Application-for-Registration-for-Dispenser-Prescriber-Practitioner.pdf "
 ---
 ## Application Requirements
 
