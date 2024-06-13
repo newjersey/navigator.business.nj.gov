@@ -1,18 +1,17 @@
 ---
-id: "ticket-broker-reseller-registration"
-webflowId: "6657975ac4acabfabc97d176"
-urlSlug: "ticket-broker-reseller-registration"
-name: "Register Your Business as a Ticket Broker (Ticket Reseller)"
-webflowName: "Ticket Broker (Ticket Reseller)"
-filename: "ticket-broker-reseller-registration"
-callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx"
-callToActionText: "Register Your Business as a Ticket Broker/Ticket Reseller"
-agencyId: "nj-consumer-affairs"
-agencyAdditionalContext: "Regulated Business Section"
-industryId: "retail"
-licenseCertificationClassification: "undefined"
-summaryDescriptionMd: "You need to register as a ticket broker if you resell admission tickets to places of entertainment and charge a premium, in addition to the price plus the taxes printed on the tickets.
-"
+id: ticket-broker-reseller-registration
+webflowId: 6657975ac4acabfabc97d176
+urlSlug: ticket-broker-reseller-registration
+name: Register Your Business as a Ticket Broker (Ticket Reseller)
+webflowName: Ticket Broker (Ticket Reseller)
+filename: ticket-broker-reseller-registration
+callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
+callToActionText: Register Your Business as a Ticket Broker/Ticket Reseller
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Regulated Business Section
+industryId: retail
+licenseCertificationClassification: undefined
+summaryDescriptionMd: You need to register as a ticket broker if you resell admission tickets to places of entertainment and charge a premium, in addition to the price plus the taxes printed on the tickets.
 ---
 
 ---
