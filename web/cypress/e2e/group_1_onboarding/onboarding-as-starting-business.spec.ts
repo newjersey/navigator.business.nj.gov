@@ -1,22 +1,19 @@
 import {
-  randomElementFromArray,
-  setMobileViewport,
-} from "@businessnjgovnavigator/cypress/support/helpers/helpers";
-import { onOnboardingPageStartingBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
-import {
+  carServiceOptions,
   CarServiceType,
   Industries,
   Industry,
-  ResidentialConstructionType,
-  carServiceOptions,
   randomInt,
-} from "@businessnjgovnavigator/shared/";
+  ResidentialConstructionType,
+} from "@businessnjgovnavigator/shared";
+import { randomElementFromArray, setMobileViewport } from "../../support/helpers/helpers";
+import { onOnboardingPageStartingBusiness } from "../../support/page_objects/onboardingPageNew";
 
 const enabledIndustries = Industries.filter((element: Industry) => {
   return element.isEnabled;
 });
 
-describe("Onboarding for all industries when starting a business [feature] [all] [group4]", () => {
+describe("Onboarding for all industries when starting a business [feature] [all] [group1]", () => {
   describe("Desktop", () => {
     beforeEach(() => {
       cy.loginByCognitoApi();

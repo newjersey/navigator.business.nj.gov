@@ -20,7 +20,7 @@ import {
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
 import { Industry, arrayOfSectors, randomElementFromArray, randomInt } from "@businessnjgovnavigator/shared/";
 
-describe("Profile [feature] [all] [group1]", () => {
+describe("Profile [feature] [all] [group4]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
   });

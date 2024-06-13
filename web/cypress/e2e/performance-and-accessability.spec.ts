@@ -35,7 +35,7 @@ describe("Performance and Accessability - Landing Page [all] [group2]", () => {
   });
 });
 
-describe("Performance and Accessability - Onboarding [all] [group1]", () => {
+describe("Performance and Accessability - Onboarding [all] [group4]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
   });
