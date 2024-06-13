@@ -1,7 +1,8 @@
 ---
 filename: massage-license-reinstatement
 name: Apply to Reinstate Your Massage and Bodywork Business License
-industryIds: []
+industryIds:
+  - massage-therapy
 sectorIds:
   - health-care-and-social-assistance
 icon: update-purple.svg
@@ -14,6 +15,7 @@ summaryDescriptionMd: You need to reinstate your massage and bodywork business
 callToActionText: Apply to Reinstate My Massage and Bodywork Business License
 callToActionLink: https://www.njconsumeraffairs.gov/mbt/Pages/applications.aspx
 ---
+
 ## Application Requirements
 
 - Expired registration number
@@ -22,6 +24,6 @@ callToActionLink: https://www.njconsumeraffairs.gov/mbt/Pages/applications.aspx
 - Criminal background check
 - Applicable fees paid once the Board has sent an invoice
 
->**Once completed, you will have**:
+> **Once completed, you will have**:
 >
 > The same massage and bodywork business license
