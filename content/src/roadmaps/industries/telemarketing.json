@@ -2,6 +2,7 @@
   "naicsCodes": "561422 ",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
+  "roadmapSteps": [],
   "name": "Telemarketing",
   "nonEssentialQuestionsIds": [],
   "displayname": "telemarketing",
