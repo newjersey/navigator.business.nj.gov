@@ -1,4 +1,5 @@
 ---
+notesMd: "6.13: updated with SME edits"
 id: landscape-architect-license
 filename: landscape-architect-license
 displayname: landscape-architect-license
