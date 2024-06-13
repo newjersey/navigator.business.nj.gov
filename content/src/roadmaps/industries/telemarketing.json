@@ -1,0 +1,10 @@
+{
+  "isEnabled": true,
+  "canHavePermanentLocation": true,
+  "nonEssentialQuestionsIds": [],
+  "name": "Telemarketing",
+  "defaultSectorId": "other-services",
+  "id": "telemarketing",
+  "displayname": "telemarketing",
+  "naicsCodes": "561422 "
+}
