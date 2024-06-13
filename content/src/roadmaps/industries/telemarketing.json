@@ -1,10 +1,13 @@
 {
-  "isEnabled": true,
-  "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": [],
-  "name": "Telemarketing",
+  "naicsCodes": "561422 ",
   "defaultSectorId": "other-services",
-  "id": "telemarketing",
+  "canHavePermanentLocation": true,
+  "name": "Telemarketing",
+  "nonEssentialQuestionsIds": [],
   "displayname": "telemarketing",
-  "naicsCodes": "561422 "
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true
+  },
+  "isEnabled": true,
+  "id": "telemarketing"
 }
