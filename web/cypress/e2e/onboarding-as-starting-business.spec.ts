@@ -5,6 +5,7 @@ import {
 import { onOnboardingPageStartingBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
 import {
   CarServiceType,
+  EmploymentPlacementType,
   Industries,
   Industry,
   ResidentialConstructionType,
@@ -122,6 +123,46 @@ describe("Onboarding for all industries when starting a business [feature] [all]
               .should("be.checked");
           } else {
             onOnboardingPageStartingBusiness.getResidentialConstructionTypeRadio().should("not.exist");
+          }
+        }
+
+        const employmentPlacementTypeApplicable = industry.industryOnboardingQuestions
+          .isEmploymentTypeApplicable
+          ? Boolean(randomInt() % 2)
+          : undefined;
+
+        if (employmentPlacementTypeApplicable === undefined) {
+          onOnboardingPageStartingBusiness
+            .getEmploymentAndPersonnelServicesTypeItemsRadio()
+            .should("not.exist");
+        } else {
+          const employmentAndPersonnelServicesType = employmentPlacementTypeApplicable
+            ? "JOB SEEKERS"
+            : "EMPLOYERS";
+          onOnboardingPageStartingBusiness.selectEmploymentAndPersonnelServicesType(
+            employmentAndPersonnelServicesType
+          );
+          onOnboardingPageStartingBusiness
+            .getEmploymentAndPersonnelServicesTypeItemsRadio(employmentAndPersonnelServicesType)
+            .should("be.checked");
+          if (employmentPlacementTypeApplicable) {
+            onOnboardingPageStartingBusiness.getEmploymentPlacementTypeRadio().should("exist");
+            const employmentPlacementChoices = [
+              "TEMPORARY",
+              "PERMANENT",
+              "BOTH",
+            ] as EmploymentPlacementType[];
+            const randomAnswerIndex = Math.floor(Math.random() * 3);
+            const employmentPlacementTypeOption = employmentPlacementChoices[randomAnswerIndex];
+
+            onOnboardingPageStartingBusiness.selectEmploymentPlacementTypeRadio(
+              employmentPlacementTypeOption
+            );
+            onOnboardingPageStartingBusiness
+              .getEmploymentPlacementTypeItemsRadio(employmentPlacementTypeOption)
+              .should("be.checked");
+          } else {
+            onOnboardingPageStartingBusiness.getEmploymentPlacementTypeRadio().should("not.exist");
           }
         }
 

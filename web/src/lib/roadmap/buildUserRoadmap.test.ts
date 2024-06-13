@@ -792,4 +792,52 @@ describe("buildUserRoadmap", () => {
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("will-sell-pet-care-items");
     });
   });
+
+  describe("if industry is employment agency", () => {
+    it("adds employment license task if employment agency and `job seekers` is selected for employmentPersonnelServiceType", () => {
+      buildUserRoadmap(
+        generateStartingProfile({
+          employmentPersonnelServiceType: "JOB SEEKERS",
+          industryId: "employment-agency",
+        })
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+        "administrative-and-employment-services"
+      );
+    });
+
+    it("adds consulting firm headhunter reg if employment agency and `employers` is selected for employmentPersonnelServiceType and `Permanent` is selected for employmentPlacementType", () => {
+      buildUserRoadmap(
+        generateStartingProfile({
+          employmentPersonnelServiceType: "EMPLOYERS",
+          employmentPlacementType: "PERMANENT",
+          industryId: "employment-agency",
+        })
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("consulting-firm-headhunter-reg");
+    });
+
+    it("adds temporary help service firm reg if employment agency and `employers` is selected for employmentPersonnelServiceType and `Temporary` is selected for employmentPlacementType", () => {
+      buildUserRoadmap(
+        generateStartingProfile({
+          employmentPersonnelServiceType: "EMPLOYERS",
+          employmentPlacementType: "TEMPORARY",
+          industryId: "employment-agency",
+        })
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("temporary-help-service-firm-reg");
+    });
+
+    it("adds temporary help service firm reg and consulting firm headhunter reg if employment agency and `employers` is selected for employmentPersonnelServiceType and `Both` is selected for employmentPlacementType", () => {
+      buildUserRoadmap(
+        generateStartingProfile({
+          employmentPersonnelServiceType: "EMPLOYERS",
+          employmentPlacementType: "BOTH",
+          industryId: "employment-agency",
+        })
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("consulting-firm-headhunter-reg");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("temporary-help-service-firm-reg");
+    });
+  });
 });

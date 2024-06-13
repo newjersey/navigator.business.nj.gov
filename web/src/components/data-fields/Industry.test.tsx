@@ -91,7 +91,7 @@ describe("<Industry />", () => {
 
     const businessPersonas = ["STARTING", "FOREIGN"];
     const nonConditionalEssentialQuestions = EssentialQuestions.filter((eq) => {
-      return eq.fieldName !== "residentialConstructionType";
+      return eq.fieldName !== "residentialConstructionType" && eq.fieldName !== "employmentPlacementType";
     });
     nonConditionalEssentialQuestions.map((el) => {
       const validIndustryId = randomFilteredIndustry(el.isQuestionApplicableToIndustry, { isEnabled: true });
@@ -236,19 +236,23 @@ describe("<Industry />", () => {
         expect(currentProfileData().residentialConstructionType).toEqual(undefined);
       });
 
-      it("shows placement question if employmentPersonnelServiceType `employers` is selected", () => {
+      it("shows placement question if employmentPersonnelServiceType `employers` is selected and selects `temporary` for employmentPlacementType value", () => {
         renderComponent();
         selectIndustry("employment-agency");
         expect(
           screen.getByTestId("industry-specific-employment-agency-employmentPersonnelServiceType")
         ).toBeInTheDocument();
         expect(currentProfileData().employmentPersonnelServiceType).toBe(undefined);
+        expect(currentProfileData().employmentPlacementType).toBe(undefined);
 
         fireEvent.click(screen.getByLabelText("Employers"));
         expect(
           screen.getByTestId("industry-specific-employment-agency-employmentPlacementType")
         ).toBeInTheDocument();
         expect(currentProfileData().employmentPersonnelServiceType).toEqual("EMPLOYERS");
+
+        fireEvent.click(screen.getByLabelText("Temporary"));
+        expect(currentProfileData().employmentPlacementType).toEqual("TEMPORARY");
       });
 
       it("does not show placement question if employmentPersonnelServiceType `job seekers` is selected", () => {
@@ -257,11 +261,15 @@ describe("<Industry />", () => {
         expect(
           screen.getByTestId("industry-specific-employment-agency-employmentPersonnelServiceType")
         ).toBeInTheDocument();
+        expect(currentProfileData().employmentPersonnelServiceType).toEqual(undefined);
+        expect(currentProfileData().employmentPlacementType).toEqual(undefined);
+
         fireEvent.click(screen.getByLabelText("Job Seekers"));
         expect(
           screen.queryByTestId("industry-specific-employment-agency-employmentPlacementType")
         ).not.toBeInTheDocument();
         expect(currentProfileData().employmentPersonnelServiceType).toEqual("JOB SEEKERS");
+        expect(currentProfileData().employmentPlacementType).toEqual(undefined);
       });
 
       it("resets employmentPersonnelServiceType and employmentPlacementType if industry changes", () => {
@@ -270,7 +278,8 @@ describe("<Industry />", () => {
         expect(
           screen.getByTestId("industry-specific-employment-agency-employmentPersonnelServiceType")
         ).toBeInTheDocument();
-        expect(currentProfileData().employmentPersonnelServiceType).toBe(undefined);
+        expect(currentProfileData().employmentPersonnelServiceType).toEqual(undefined);
+        expect(currentProfileData().employmentPlacementType).toEqual(undefined);
 
         fireEvent.click(screen.getByLabelText("Employers"));
         expect(currentProfileData().employmentPersonnelServiceType).toEqual("EMPLOYERS");

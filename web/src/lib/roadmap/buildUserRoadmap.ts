@@ -126,6 +126,30 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     }
   }
 
+  if (profileData.industryId === "employment-agency") {
+    if (profileData.employmentPersonnelServiceType === "JOB SEEKERS") {
+      addOns.push("administrative-and-employment-services");
+    }
+
+    if (profileData.employmentPersonnelServiceType === "EMPLOYERS") {
+      switch (profileData.employmentPlacementType) {
+        case "TEMPORARY": {
+          addOns.push("temporary-help-service-firm-reg");
+          break;
+        }
+        case "PERMANENT": {
+          addOns.push("consulting-firm-headhunter-reg");
+          break;
+        }
+        case "BOTH": {
+          addOns.push("temporary-help-service-firm-reg");
+          addOns.push("consulting-firm-headhunter-reg");
+          break;
+        }
+      }
+    }
+  }
+
   if (getIsApplicableToFunctionByFieldName("carService")(industryId)) {
     switch (profileData.carService) {
       case "STANDARD": {

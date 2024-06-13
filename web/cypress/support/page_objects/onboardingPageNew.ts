@@ -1,6 +1,8 @@
 import {
   CarServiceType,
   ConstructionType,
+  EmploymentAndPersonnelServicesType,
+  EmploymentPlacementType,
   LookupIndustryById,
   LookupSectorTypeById,
   ResidentialConstructionType,
@@ -68,6 +70,21 @@ class OnboardingSharedElementsWithIndustryQuestion extends OnboardingSharedEleme
   }
   getResidentialConstructionTypeItemsRadio(value?: ResidentialConstructionType) {
     return cy.get(`input[name="residential-construction-type"]${`[value="${value}"]`}`);
+  }
+  getEmploymentAndPersonnelServicesTypeItemsRadio(value?: EmploymentAndPersonnelServicesType) {
+    return cy.get(`input[name="employment-personnel-service-type"]${`[value="${value}"]`}`);
+  }
+  selectEmploymentAndPersonnelServicesType(value: EmploymentAndPersonnelServicesType) {
+    this.getEmploymentAndPersonnelServicesTypeItemsRadio(value).check();
+  }
+  getEmploymentPlacementTypeRadio() {
+    return cy.get(`input[name="employment-placement-type"]`);
+  }
+  selectEmploymentPlacementTypeRadio(value: EmploymentPlacementType) {
+    this.getEmploymentPlacementTypeItemsRadio(value).check();
+  }
+  getEmploymentPlacementTypeItemsRadio(value?: EmploymentPlacementType) {
+    return cy.get(`input[name="employment-placement-type"]${`[value="${value}"]`}`);
   }
 }
 
