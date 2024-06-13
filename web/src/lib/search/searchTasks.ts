@@ -12,16 +12,16 @@ export const searchTasks = (tasks: Task[], term: string): Match[] => {
       snippets: [],
     };
 
-    const content = task.contentMd.toLowerCase();
-    const name = task.name.toLowerCase();
+    const content = task.contentMd?.toLowerCase();
+    const name = task.name?.toLowerCase();
     const cta = task.callToActionText?.toLowerCase();
     const ctaLink = task.callToActionLink?.toLowerCase();
-    const agency = task.agencyId ? LookupTaskAgencyById(task.agencyId).name.toLowerCase() : "";
+    const agency = task.agencyId ? LookupTaskAgencyById(task.agencyId).name?.toLowerCase() : "";
     const agencyContext = task.agencyAdditionalContext?.toLowerCase();
     const formName = task.formName?.toLowerCase();
-    const summary = task.summaryDescriptionMd.toLowerCase();
-    const filename = task.filename.toLowerCase();
-    const urlSlug = task.urlSlug.toLowerCase();
+    const summary = task.summaryDescriptionMd?.toLowerCase();
+    const filename = task.filename?.toLowerCase();
+    const urlSlug = task.urlSlug?.toLowerCase();
 
     const blockTexts = [content, summary];
     const labelledTexts = [
