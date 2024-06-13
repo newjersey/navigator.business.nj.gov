@@ -9,5 +9,6 @@
     "canBeHomeBased": true
   },
   "isEnabled": true,
-  "id": "telemarketing"
+  "id": "telemarketing",
+  "description": "A business that contacts potential customers to sell or promote products or services "
 }
