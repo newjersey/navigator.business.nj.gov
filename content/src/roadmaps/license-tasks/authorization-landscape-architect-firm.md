@@ -1,12 +1,14 @@
 ---
+notesMd: "6.13: updated with SME edits. Did not change title per SME edit."
 id: authorization-landscape-architect-firm
 filename: authorization-landscape-architect-firm
 displayname: authorization-landscape-architect-firm
 urlSlug: authorization-landscape-architect-firm
 name: Obtain a Certificate of Authorization to Offer Landscape Architectural Services
 webflowName: "Landscape Architecture: Certificate of Authorization"
-summaryDescriptionMd: You need a certificate of authorization to open a business
-  that offers landscape architecture services.
+summaryDescriptionMd: You need a certificate of authorization to provide
+  landscape architecture services to LLCs or corporations (except professional
+  service corporations) in New Jersey.
 formName: Application for a Certificate of Authorization to Provide or Offer to
   Provide Landscape Architectural Services
 industryId:
@@ -21,17 +23,18 @@ webflowType: business-license
 ---
 ## Eligibility Criteria
 
-* `Business Registration Certificate|business-reg-certificate` 
-* Certified copy of the `Certificate of Formation|certificate-formation`
-* `Certificate of Authority|certificate-authority-sales-tax` to do business in the state (for out-of-state corporations)
-* Copy of your current `annual report|tax-annual-report`
+* Certified copy of the `Certificate of Formation|certificate-formation` 
+*  `Certificate of Authority|certificate-authority-sales-tax` to do business in the state (for out-of-state corporations)
+* Copy of your current `annual report|tax-annual-report` 
 * A landscape architect licensed in NJ who serves as the `responsible-in-charge|responsible-charge` licensee
-
 
 ## Application Requirements
 
 * Business name and address
 * License number and information of the responsible-in-charge licensee
+* Copy of contract with licensed landscape architect
+* Names, addresses, license numbers, and signatures of all officers, board members, directors, principals, and any responsible licensee(s) 
+* Names, addresses, license numbers, and percentages of LLC or corporation ownership interest of licensees or anyone closely allied professionals
 * A notary signature and seal on the form
 * Applicable fees paid
 
