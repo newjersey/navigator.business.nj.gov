@@ -2,7 +2,19 @@
   "naicsCodes": "561422 ",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
-  "roadmapSteps": [],
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": -2,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 5,
+      "task": "determine-naics-code",
+      "required": true
+    }
+  ],
   "name": "Telemarketing",
   "nonEssentialQuestionsIds": [],
   "displayname": "telemarketing",
@@ -10,6 +22,7 @@
     "canBeHomeBased": true
   },
   "isEnabled": true,
+  "additionalSearchTerms": "Telemarketer ",
   "id": "telemarketing",
   "description": "A business that contacts potential customers to sell or promote products or services "
 }
