@@ -4,7 +4,7 @@ import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/s
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 
-describe("check license status [feature] [all] [group1]", () => {
+describe("check license status [feature] [all] [group4]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
   });

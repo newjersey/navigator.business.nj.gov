@@ -1,8 +1,8 @@
-import { setMobileViewport } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
-import { onOnboardingPageExistingBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
-import { arrayOfSectors } from "@businessnjgovnavigator/shared/";
+import { arrayOfSectors } from "@businessnjgovnavigator/shared";
+import { setMobileViewport } from "../../support/helpers/helpers";
+import { onOnboardingPageExistingBusiness } from "../../support/page_objects/onboardingPageNew";
 
-describe("Onboarding for all sectors as an existing business [feature] [all] [group4]", () => {
+describe("Onboarding for all sectors as an existing business [feature] [all] [group1]", () => {
   describe("Desktop", () => {
     beforeEach(() => {
       cy.loginByCognitoApi();
