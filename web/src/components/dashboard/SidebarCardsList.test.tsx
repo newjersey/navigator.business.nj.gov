@@ -6,7 +6,7 @@ import * as helpers from "@/lib/utils/helpers";
 import { removeMarkdownFormatting } from "@/lib/utils/helpers";
 import { generateCertification, generateFunding, generateSidebarCardContent } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { OperatingPhases } from "@businessnjgovnavigator/shared/";
+import { OperatingPhaseId, OperatingPhases } from "@businessnjgovnavigator/shared/";
 import { ForeignBusinessTypeId } from "@businessnjgovnavigator/shared/profileData";
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
@@ -48,29 +48,50 @@ function setupMockAnalytics(): typeof analytics {
 
 const Config = getMergedConfig();
 
-const operatingPhaseWithDisplayFundingAndDisplayCertificationAreTrue = OperatingPhases.find((op): boolean => {
-  return op.displayFundings && op.displayCertifications;
-});
-
-const operatingPhaseWithDisplayCertificationIsTrue = OperatingPhases.find((op): boolean => {
-  return op.displayCertifications;
-});
-
-const operatingPhaseWithDisplayFundingIsTrue = OperatingPhases.find((op): boolean => {
-  return op.displayFundings;
-});
-
-const operatingPhaseWithDisplayCertificationAsTrueAndDisplayFundingAreFalse = OperatingPhases.find(
-  (op): boolean => {
+const getOnlyDisplayCertificationOperatingPhase = (): OperatingPhaseId => {
+  const phase = OperatingPhases.find((op): boolean => {
     return !op.displayFundings && op.displayCertifications;
-  }
-);
+  });
+  if (!phase)
+    throw new Error(
+      "Can't find operating phase with Display Certification as true and Display Funding as false"
+    );
+  return phase.id;
+};
 
-const operatingPhaseWithDisplayFundingAndDisplayCertificationAreFalse = OperatingPhases.find(
-  (op): boolean => {
-    return !op.displayFundings && !op.displayCertifications;
-  }
-);
+const getDisplayCertificationAndFundingOperatingPhase = (): OperatingPhaseId => {
+  const phase = OperatingPhases.find((op): boolean => {
+    return op.displayFundings && op.displayCertifications;
+  });
+  if (!phase)
+    throw new Error("Can't find operating phase with Display Certification and Display Funding as true");
+  return phase.id;
+};
+
+const getDisplayCertificationOperatingPhase = (): OperatingPhaseId => {
+  const phase = OperatingPhases.find((op): boolean => {
+    return op.displayCertifications;
+  });
+  if (!phase) throw new Error("Can't find operating phase with Display Certification as true");
+  return phase.id;
+};
+
+const getDisplayFundingOperatingPhase = (): OperatingPhaseId => {
+  const phase = OperatingPhases.find((op): boolean => {
+    return op.displayFundings;
+  });
+  if (!phase) throw new Error("Can't find operating phase with Display Funding as true");
+  return phase.id;
+};
+
+const getDontDisplayCertificationAndFundingOperatingPhase = (): OperatingPhaseId => {
+  const phase = OperatingPhases.find((op): boolean => {
+    return !op.displayFundings && op.displayCertifications;
+  });
+  if (!phase)
+    throw new Error("Can't find operating phase with Display Certification and Display Funding as false");
+  return phase.id;
+};
 
 describe("<SidebarCardsList />", () => {
   beforeEach(() => {
@@ -99,7 +120,7 @@ describe("<SidebarCardsList />", () => {
     useMockBusiness({
       profileData: {
         ...generateProfileData({
-          operatingPhase: operatingPhaseWithDisplayFundingIsTrue?.id || "",
+          operatingPhase: getDisplayFundingOperatingPhase(),
         }),
       },
     });
@@ -114,7 +135,7 @@ describe("<SidebarCardsList />", () => {
     useMockBusiness({
       profileData: {
         ...generateProfileData({
-          operatingPhase: operatingPhaseWithDisplayCertificationIsTrue?.id || "",
+          operatingPhase: getDisplayCertificationOperatingPhase(),
         }),
       },
     });
@@ -176,7 +197,7 @@ describe("<SidebarCardsList />", () => {
         useMockBusiness({
           profileData: {
             ...generateProfileData({
-              operatingPhase: operatingPhaseWithDisplayFundingAndDisplayCertificationAreTrue?.id || "",
+              operatingPhase: getDisplayCertificationAndFundingOperatingPhase(),
             }),
           },
         });
@@ -198,7 +219,7 @@ describe("<SidebarCardsList />", () => {
         useMockBusiness({
           profileData: {
             ...generateProfileData({
-              operatingPhase: operatingPhaseWithDisplayCertificationAsTrueAndDisplayFundingAreFalse?.id || "",
+              operatingPhase: getOnlyDisplayCertificationOperatingPhase(),
             }),
           },
         });
@@ -218,7 +239,7 @@ describe("<SidebarCardsList />", () => {
         useMockBusiness({
           profileData: {
             ...generateProfileData({
-              operatingPhase: operatingPhaseWithDisplayFundingAndDisplayCertificationAreFalse?.id || "",
+              operatingPhase: getDontDisplayCertificationAndFundingOperatingPhase(),
             }),
           },
         });
@@ -233,7 +254,7 @@ describe("<SidebarCardsList />", () => {
         useMockBusiness({
           profileData: {
             ...generateProfileData({
-              operatingPhase: operatingPhaseWithDisplayFundingIsTrue?.id || "",
+              operatingPhase: getDisplayFundingOperatingPhase(),
             }),
           },
         });
@@ -245,7 +266,7 @@ describe("<SidebarCardsList />", () => {
         useMockBusiness({
           profileData: {
             ...generateProfileData({
-              operatingPhase: operatingPhaseWithDisplayCertificationIsTrue?.id || "",
+              operatingPhase: getDisplayCertificationOperatingPhase(),
             }),
           },
         });
@@ -275,7 +296,7 @@ describe("<SidebarCardsList />", () => {
 
     const mockBusiness = generateBusiness({
       profileData: generateProfileData({
-        operatingPhase: operatingPhaseWithDisplayFundingAndDisplayCertificationAreTrue?.id || "",
+        operatingPhase: getDisplayCertificationAndFundingOperatingPhase(),
         municipality: undefined,
         sectorId: undefined,
         existingEmployees: "50",
@@ -355,7 +376,7 @@ describe("<SidebarCardsList />", () => {
       useMockBusiness({
         profileData: {
           ...generateProfileData({
-            operatingPhase: operatingPhaseWithDisplayFundingIsTrue?.id || "",
+            operatingPhase: getDisplayFundingOperatingPhase(),
           }),
         },
       });
@@ -369,7 +390,7 @@ describe("<SidebarCardsList />", () => {
       useMockBusiness({
         profileData: {
           ...generateProfileData({
-            operatingPhase: operatingPhaseWithDisplayCertificationIsTrue?.id || "",
+            operatingPhase: getDisplayCertificationOperatingPhase(),
           }),
         },
       });

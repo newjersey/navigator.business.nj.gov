@@ -20,19 +20,27 @@ export interface OperatingPhase {
   readonly displaySidebarCardNotRegistered: boolean;
 }
 
-export type OperatingPhaseId =
-  | "GUEST_MODE"
-  | "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
-  | "GUEST_MODE_OWNING"
-  | "NEEDS_BUSINESS_STRUCTURE"
-  | "NEEDS_TO_FORM"
-  | "FORMED"
-  | "UP_AND_RUNNING"
-  | "UP_AND_RUNNING_OWNING"
-  | "REMOTE_SELLER_WORKER"
-  | "";
+export interface UnknownOperatingPhase extends Omit<OperatingPhase, "id"> {
+  readonly id: "";
+}
 
-export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): OperatingPhase => {
+const OperatingPhaseIds = {
+  GUEST_MODE: "GUEST_MODE",
+  GUEST_MODE_WITH_BUSINESS_STRUCTURE: "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
+  GUEST_MODE_OWNING: "GUEST_MODE_OWNING",
+  NEEDS_BUSINESS_STRUCTURE: "NEEDS_BUSINESS_STRUCTURE",
+  NEEDS_TO_FORM: "NEEDS_TO_FORM",
+  FORMED: "FORMED",
+  UP_AND_RUNNING: "UP_AND_RUNNING",
+  UP_AND_RUNNING_OWNING: "UP_AND_RUNNING_OWNING",
+  REMOTE_SELLER_WORKER: "REMOTE_SELLER_WORKER",
+} as const;
+
+export type OperatingPhaseId = (typeof OperatingPhaseIds)[keyof typeof OperatingPhaseIds];
+
+export const LookupOperatingPhaseById = (
+  id: OperatingPhaseId | undefined
+): OperatingPhase | UnknownOperatingPhase => {
   return (
     OperatingPhases.find((x) => {
       return x.id === id;
