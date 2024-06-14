@@ -8,6 +8,7 @@ import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextField
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { FormContextFieldProps } from "@/lib/types/types";
 import { BusinessPersona } from "@businessnjgovnavigator/shared";
+import { GUEST_MODE } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
@@ -26,8 +27,7 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
     setIsValid(true);
     setProfileData({
       ...state.profileData,
-      operatingPhase:
-        (event.target.value as BusinessPersona) === "OWNING" ? "GUEST_MODE_OWNING" : "GUEST_MODE",
+      operatingPhase: (event.target.value as BusinessPersona) === "OWNING" ? "GUEST_MODE_OWNING" : GUEST_MODE,
       businessPersona: event.target.value as BusinessPersona,
     });
   };

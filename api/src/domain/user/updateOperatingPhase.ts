@@ -3,7 +3,7 @@ import { isRemoteWorkerOrSellerBusiness } from "@shared/domain-logic/businessPer
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { businessStructureTaskId, formationTaskId } from "@shared/domain-logic/taskIds";
 import { LookupLegalStructureById } from "@shared/legalStructure";
-import { OperatingPhaseId } from "@shared/operatingPhase";
+import { GUEST_MODE, OperatingPhaseId } from "@shared/operatingPhase";
 import { BusinessPersona } from "@shared/profileData";
 import { modifyCurrentBusiness } from "@shared/test";
 import { TaskProgress, UserData } from "@shared/userData";
@@ -72,7 +72,7 @@ const getNewPhase = ({
     return "REMOTE_SELLER_WORKER";
   }
 
-  if (currentPhase === "GUEST_MODE") {
+  if (currentPhase === GUEST_MODE) {
     return "NEEDS_BUSINESS_STRUCTURE";
   }
 

@@ -1,6 +1,6 @@
 import { CommunityAffairsAddress } from "./housing";
 import { Municipality } from "./municipality";
-import { OperatingPhaseId } from "./operatingPhase";
+import { GUEST_MODE, OperatingPhaseId } from "./operatingPhase";
 
 export interface ProfileDocuments {
   readonly formationDoc: string;
@@ -133,7 +133,7 @@ export const emptyProfileData: ProfileData = {
   foreignBusinessTypeIds: [],
   nexusDbaName: "",
   needsNexusDbaName: false,
-  operatingPhase: "GUEST_MODE",
+  operatingPhase: GUEST_MODE,
   isNonprofitOnboardingRadio: false,
   nonEssentialRadioAnswers: {},
   elevatorOwningBusiness: undefined,

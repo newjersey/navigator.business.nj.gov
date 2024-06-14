@@ -14,6 +14,7 @@ import {
   determineForeignBusinessType,
   getCurrentBusiness,
 } from "@businessnjgovnavigator/shared";
+import { GUEST_MODE } from "@businessnjgovnavigator/shared/";
 
 type RegistrationProgress = "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";
 
@@ -92,7 +93,7 @@ export const setAnalyticsDimensions = (profileData: ProfileData, queue = false):
 
 const getPhaseDimension = (phase: OperatingPhaseId): string => {
   switch (phase) {
-    case "GUEST_MODE":
+    case GUEST_MODE:
       return "Guest Mode Needs to Form";
     case "GUEST_MODE_OWNING":
       return "Guest Mode Up and Running";

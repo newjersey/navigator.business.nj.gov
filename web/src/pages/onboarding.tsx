@@ -51,6 +51,7 @@ import {
 } from "@/lib/utils/onboardingPageHelpers";
 import { determineForeignBusinessType } from "@businessnjgovnavigator/shared";
 import {
+  GUEST_MODE,
   Municipality,
   ProfileData,
   TaskProgress,
@@ -334,7 +335,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           providesStaffingService: profileData.providesStaffingService,
           certifiedInteriorDesigner: profileData.certifiedInteriorDesigner,
           realEstateAppraisalManagement: profileData.realEstateAppraisalManagement,
-          operatingPhase: profileData.businessPersona === "OWNING" ? "GUEST_MODE_OWNING" : "GUEST_MODE",
+          operatingPhase: profileData.businessPersona === "OWNING" ? "GUEST_MODE_OWNING" : GUEST_MODE,
           interstateLogistics: profileData.interstateLogistics,
           interstateMoving: profileData.interstateMoving,
           sectorId: profileData.sectorId,

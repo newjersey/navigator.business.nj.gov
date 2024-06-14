@@ -32,6 +32,7 @@ import {
 } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Municipality } from "@businessnjgovnavigator/shared";
+import { GUEST_MODE } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -62,7 +63,7 @@ const DashboardPage = (props: Props): ReactElement => {
   useMountEffectWhenDefined(() => {
     (async (): Promise<void> => {
       if (
-        business?.profileData.operatingPhase === "GUEST_MODE" &&
+        business?.profileData.operatingPhase === GUEST_MODE &&
         (business?.profileData.businessPersona === "STARTING" ||
           business?.profileData.businessPersona === "FOREIGN") &&
         !business.preferences.visibleSidebarCards.includes("not-registered")

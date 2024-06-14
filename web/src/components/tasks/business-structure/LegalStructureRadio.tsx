@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { WithErrorBar } from "@/components/WithErrorBar";
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { ProfileFormContext } from "@/contexts/profileFormContext";
@@ -10,6 +10,7 @@ import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextField
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
+import { GUEST_MODE } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { orderBy } from "lodash";
 import React, { ReactElement, useContext } from "react";
@@ -52,7 +53,7 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
       ...state.profileData,
       legalStructureId: event.target.value as string,
       operatingPhase:
-        state.profileData.operatingPhase === "GUEST_MODE"
+        state.profileData.operatingPhase === GUEST_MODE
           ? "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
           : state.profileData.operatingPhase,
     });

@@ -19,6 +19,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { createProfileFieldErrorMap, Task } from "@/lib/types/types";
 import { getFlow, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Business, hasCompletedFormation } from "@businessnjgovnavigator/shared";
+import { GUEST_MODE } from "@businessnjgovnavigator/shared/";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";
@@ -85,7 +86,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
         legalStructureId: undefined,
         operatingPhase:
           profileData.operatingPhase === "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
-            ? "GUEST_MODE"
+            ? GUEST_MODE
             : profileData.operatingPhase,
       })
       .queueTaskProgress({ [props.task.id]: "NOT_STARTED" });
@@ -98,7 +99,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       legalStructureId: undefined,
       operatingPhase:
         profileData.operatingPhase === "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
-          ? "GUEST_MODE"
+          ? GUEST_MODE
           : profileData.operatingPhase,
     };
     setProfileData(updatedProfileState);

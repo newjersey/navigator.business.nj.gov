@@ -2,7 +2,7 @@ import { UpdateSidebarCards } from "@domain/types";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { getFieldsForProfile, isFieldAnswered } from "@shared/domain-logic/opportunityFields";
 import { SIDEBAR_CARDS } from "@shared/domain-logic/sidebarCards";
-import { LookupOperatingPhaseById } from "@shared/operatingPhase";
+import { GUEST_MODE, LookupOperatingPhaseById } from "@shared/operatingPhase";
 import { modifyCurrentBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";
 
@@ -25,11 +25,11 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
     cards = [...allCardsExceptIdToHide];
   };
 
-  if (operatingPhase !== "GUEST_MODE" && cards.includes(SIDEBAR_CARDS.notRegistered)) {
+  if (operatingPhase !== GUEST_MODE && cards.includes(SIDEBAR_CARDS.notRegistered)) {
     hideCard(SIDEBAR_CARDS.notRegistered);
   }
 
-  if (operatingPhase !== "GUEST_MODE" && cards.includes(SIDEBAR_CARDS.notRegisteredUpAndRunning)) {
+  if (operatingPhase !== GUEST_MODE && cards.includes(SIDEBAR_CARDS.notRegisteredUpAndRunning)) {
     hideCard(SIDEBAR_CARDS.notRegisteredUpAndRunning);
   }
 
