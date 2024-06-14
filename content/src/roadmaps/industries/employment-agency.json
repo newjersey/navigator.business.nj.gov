@@ -46,22 +46,6 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
-    },
-    {
-      "step": 4,
-      "weight": 10,
-      "licenseTask": "search-licenses-employment-agency",
-      "required": true
-    },
-    {
-      "step": 4,
-      "licenseTask": "consulting-firm-headhunter-reg",
-      "weight": 8
-    },
-    {
-      "step": 4,
-      "weight": 11,
-      "licenseTask": "temporary-help-service-firm-reg"
     }
   ],
   "name": "Employment Agency",

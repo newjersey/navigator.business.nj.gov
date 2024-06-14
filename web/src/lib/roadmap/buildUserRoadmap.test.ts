@@ -794,16 +794,16 @@ describe("buildUserRoadmap", () => {
   });
 
   describe("if industry is employment agency", () => {
-    it("adds employment license task if employment agency and `job seekers` is selected for employmentPersonnelServiceType", () => {
+
+    it("adds consulting firm headhunter reg if employment agency and `job seekers` is selected for employmentPersonnelServiceType and `Permanent` is selected for employmentPlacementType", () => {
       buildUserRoadmap(
         generateStartingProfile({
           employmentPersonnelServiceType: "JOB SEEKERS",
+          employmentPlacementType: undefined,
           industryId: "employment-agency",
         })
       );
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
-        "administrative-and-employment-services"
-      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("employment-agency-job-seekers");
     });
 
     it("adds consulting firm headhunter reg if employment agency and `employers` is selected for employmentPersonnelServiceType and `Permanent` is selected for employmentPlacementType", () => {
@@ -814,7 +814,7 @@ describe("buildUserRoadmap", () => {
           industryId: "employment-agency",
         })
       );
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("consulting-firm-headhunter-reg");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("employment-agency-employers-permanent");
     });
 
     it("adds temporary help service firm reg if employment agency and `employers` is selected for employmentPersonnelServiceType and `Temporary` is selected for employmentPlacementType", () => {
@@ -825,7 +825,7 @@ describe("buildUserRoadmap", () => {
           industryId: "employment-agency",
         })
       );
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("temporary-help-service-firm-reg");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("employment-agency-employers-temporary");
     });
 
     it("adds temporary help service firm reg and consulting firm headhunter reg if employment agency and `employers` is selected for employmentPersonnelServiceType and `Both` is selected for employmentPlacementType", () => {
@@ -836,8 +836,9 @@ describe("buildUserRoadmap", () => {
           industryId: "employment-agency",
         })
       );
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("consulting-firm-headhunter-reg");
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("temporary-help-service-firm-reg");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("employment-agency-employers-permanent");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("employment-agency-employers-temporary");
+
     });
   });
 });

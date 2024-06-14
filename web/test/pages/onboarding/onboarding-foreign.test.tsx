@@ -390,7 +390,7 @@ describe("onboarding - foreign business", () => {
         page.clickNext();
         expect(screen.getByTestId("step-3")).toBeInTheDocument();
         expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
-        page.chooseEssentialQuestionRadio(industryId, 0);
+        page.chooseEssentialQuestionRadio(industryId, industryId==="employment-agency" ? 1 : 0);
         expect(screen.queryByText(Config.siteWideErrorMessages.errorRadioButton)).not.toBeInTheDocument();
       }
     );

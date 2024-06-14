@@ -126,30 +126,6 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     }
   }
 
-  if (profileData.industryId === "employment-agency") {
-    if (profileData.employmentPersonnelServiceType === "JOB SEEKERS") {
-      addOns.push("administrative-and-employment-services");
-    }
-
-    if (profileData.employmentPersonnelServiceType === "EMPLOYERS") {
-      switch (profileData.employmentPlacementType) {
-        case "TEMPORARY": {
-          addOns.push("temporary-help-service-firm-reg");
-          break;
-        }
-        case "PERMANENT": {
-          addOns.push("consulting-firm-headhunter-reg");
-          break;
-        }
-        case "BOTH": {
-          addOns.push("temporary-help-service-firm-reg");
-          addOns.push("consulting-firm-headhunter-reg");
-          break;
-        }
-      }
-    }
-  }
-
   if (getIsApplicableToFunctionByFieldName("carService")(industryId)) {
     switch (profileData.carService) {
       case "STANDARD": {
@@ -182,6 +158,31 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
         addOns.push("construction-new-home-construction");
         addOns.push("construction-home-renovation");
         break;
+      }
+    }
+  }
+
+
+  if (profileData.industryId==="employment-agency") {
+    if(profileData.employmentPersonnelServiceType==="JOB SEEKERS"){
+      addOns.push("employment-agency-job-seekers");
+    }
+    
+    if(profileData.employmentPersonnelServiceType==="EMPLOYERS") {
+      switch (profileData.employmentPlacementType) {
+        case "TEMPORARY": {
+          addOns.push("employment-agency-employers-temporary")
+          break;
+        }
+        case "PERMANENT": {
+          addOns.push("employment-agency-employers-permanent")
+          break;
+        }
+        case "BOTH": {
+          addOns.push("employment-agency-employers-permanent")
+          addOns.push("employment-agency-employers-temporary")
+          break;
+        }
       }
     }
   }

@@ -108,7 +108,9 @@ describe("onboarding - starting a business", () => {
         useMockRouter({ isReady: true, query: { page: "2" } });
         const { page } = renderPage({ userData });
 
-        page.chooseEssentialQuestionRadio(industryId, 0);
+
+
+        page.chooseEssentialQuestionRadio(industryId, industryId==="employment-agency" ? 1 : 0);
         page.clickNext();
         await waitFor(() => {
           expect(mockPush).toHaveBeenCalledWith({
@@ -132,7 +134,7 @@ describe("onboarding - starting a business", () => {
         page.clickNext();
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
         expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
-        page.chooseEssentialQuestionRadio(industryId, 0);
+        page.chooseEssentialQuestionRadio(industryId, industryId==="employment-agency" ? 1 : 0);
         expect(screen.queryByText(Config.siteWideErrorMessages.errorRadioButton)).not.toBeInTheDocument();
       }
     );

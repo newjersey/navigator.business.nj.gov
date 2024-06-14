@@ -137,8 +137,8 @@ describe("Onboarding for all industries when starting a business [feature] [all]
             .should("not.exist");
         } else {
           const employmentAndPersonnelServicesType = employmentPlacementTypeApplicable
-            ? "JOB SEEKERS"
-            : "EMPLOYERS";
+            ? "EMPLOYERS"
+            : "JOB SEEKERS";
           onOnboardingPageStartingBusiness.selectEmploymentAndPersonnelServicesType(
             employmentAndPersonnelServicesType
           );
