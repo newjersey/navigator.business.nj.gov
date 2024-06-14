@@ -51,7 +51,7 @@
     "canBeReseller": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "Telemarketer ",
+  "additionalSearchTerms": "telemarketer",
   "id": "telemarketing",
   "description": "A business that contacts potential customers to sell or promote products or services "
 }
