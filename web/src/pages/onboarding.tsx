@@ -53,6 +53,7 @@ import { determineForeignBusinessType } from "@businessnjgovnavigator/shared";
 import {
   LookupMunicipalityByName,
   Municipality,
+  OperatingPhaseId,
   ProfileData,
   TaskProgress,
   UserData,
@@ -309,7 +310,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           profileData: {
             ...newProfileData,
             operatingPhase: isRemoteSellerWorker
-              ? "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
+              ? OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE
               : newProfileData.operatingPhase,
           },
           onboardingFormProgress: "COMPLETED",
@@ -357,7 +358,10 @@ const OnboardingPage = (props: Props): ReactElement => {
           providesStaffingService: profileData.providesStaffingService,
           certifiedInteriorDesigner: profileData.certifiedInteriorDesigner,
           realEstateAppraisalManagement: profileData.realEstateAppraisalManagement,
-          operatingPhase: profileData.businessPersona === "OWNING" ? "GUEST_MODE_OWNING" : "GUEST_MODE",
+          operatingPhase:
+            profileData.businessPersona === "OWNING"
+              ? OperatingPhaseId.GUEST_MODE_OWNING
+              : OperatingPhaseId.GUEST_MODE,
           interstateLogistics: profileData.interstateLogistics,
           interstateMoving: profileData.interstateMoving,
           sectorId: profileData.sectorId,

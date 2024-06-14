@@ -27,7 +27,7 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): 
   });
 
   const phaseHasChanged = newPhase !== originalPhase;
-  if (originalPhase === "UP_AND_RUNNING" && phaseHasChanged) {
+  if (originalPhase === OperatingPhaseId.UP_AND_RUNNING && phaseHasChanged) {
     updatedIsHideableRoadmapOpen = false;
   }
 
@@ -65,24 +65,24 @@ const getNewPhase = ({
   const hasCompletedFormation = taskProgress[formationTaskId] === "COMPLETED";
 
   if (businessPersona === "OWNING") {
-    return "UP_AND_RUNNING_OWNING";
+    return OperatingPhaseId.UP_AND_RUNNING_OWNING;
   }
 
   if (businessPersona === "FOREIGN" && isRemoteSellerOrWorker) {
-    return "REMOTE_SELLER_WORKER";
+    return OperatingPhaseId.REMOTE_SELLER_WORKER;
   }
 
-  if (currentPhase === "GUEST_MODE") {
-    return "NEEDS_BUSINESS_STRUCTURE";
+  if (currentPhase === OperatingPhaseId.GUEST_MODE) {
+    return OperatingPhaseId.NEEDS_BUSINESS_STRUCTURE;
   }
 
   if (hasCompletedBusinessStructure) {
-    if (isPublicFiling && !hasCompletedFormation) return "NEEDS_TO_FORM";
+    if (isPublicFiling && !hasCompletedFormation) return OperatingPhaseId.NEEDS_TO_FORM;
 
-    if (currentPhase !== "UP_AND_RUNNING") return "FORMED";
+    if (currentPhase !== OperatingPhaseId.UP_AND_RUNNING) return OperatingPhaseId.FORMED;
 
-    return "UP_AND_RUNNING";
+    return OperatingPhaseId.UP_AND_RUNNING;
   } else {
-    return "NEEDS_BUSINESS_STRUCTURE";
+    return OperatingPhaseId.NEEDS_BUSINESS_STRUCTURE;
   }
 };

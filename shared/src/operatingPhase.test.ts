@@ -1,4 +1,4 @@
-import { LookupOperatingPhaseById, OperatingPhases } from "./operatingPhase";
+import { LookupOperatingPhaseById, OperatingPhaseId, OperatingPhases } from "./operatingPhase";
 
 describe("Operating Phase Tests", () => {
   it("has operating phase records", () => {
@@ -12,12 +12,14 @@ describe("Operating Phase Tests", () => {
   }
 
   describe("Lookup By Id", () => {
-    it("returns empty object when empty id is supplied", () => {
-      expect(LookupOperatingPhaseById("")?.id).toBe("");
+    it("returns empty object when undefined is supplied", () => {
+      expect(LookupOperatingPhaseById().id).toBe("");
     });
 
     it("returns oeprating phase record when a valid id is supplied", () => {
-      expect(LookupOperatingPhaseById("NEEDS_TO_FORM")?.id).toEqual("NEEDS_TO_FORM");
+      expect(LookupOperatingPhaseById(OperatingPhaseId.NEEDS_TO_FORM)?.id).toEqual(
+        OperatingPhaseId.NEEDS_TO_FORM
+      );
     });
   });
 });

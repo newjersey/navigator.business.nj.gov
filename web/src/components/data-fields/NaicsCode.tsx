@@ -9,6 +9,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { lookupNaicsCode } from "@/lib/domain-logic/lookupNaicsCode";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext, useMemo } from "react";
 
 export const NaicsCode = (): ReactElement => {
@@ -35,7 +36,10 @@ export const NaicsCode = (): ReactElement => {
   };
 
   const shouldLockFieldForOwning = (): boolean => {
-    return state.profileData.naicsCode !== "" && state.profileData.operatingPhase === "UP_AND_RUNNING_OWNING";
+    return (
+      state.profileData.naicsCode !== "" &&
+      state.profileData.operatingPhase === OperatingPhaseId.UP_AND_RUNNING_OWNING
+    );
   };
 
   const shouldLockField = (): boolean => {

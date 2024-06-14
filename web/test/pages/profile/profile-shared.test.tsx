@@ -52,6 +52,7 @@ import {
   selectByText,
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
@@ -187,7 +188,7 @@ describe("profile - shared", () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
         industryId: randomHomeBasedIndustry(),
-        operatingPhase: "UP_AND_RUNNING_OWNING",
+        operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
         businessPersona: "OWNING",
         homeBasedBusiness: false,
       }),
@@ -207,7 +208,7 @@ describe("profile - shared", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           industryId: randomHomeBasedIndustry(),
-          operatingPhase: "UP_AND_RUNNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
           businessPersona: businessPersona,
           homeBasedBusiness: false,
           foreignBusinessTypeIds:
@@ -230,7 +231,7 @@ describe("profile - shared", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           industryId: randomHomeBasedIndustry(),
-          operatingPhase: "UP_AND_RUNNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
           businessPersona: businessPersona,
           homeBasedBusiness: true,
           foreignBusinessTypeIds:
@@ -252,7 +253,7 @@ describe("profile - shared", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           industryId: randomHomeBasedIndustry(),
-          operatingPhase: "UP_AND_RUNNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
           businessPersona: businessPersona,
           homeBasedBusiness: undefined,
           foreignBusinessTypeIds:
@@ -408,7 +409,7 @@ describe("profile - shared", () => {
       const business = generateBusinessForProfile({
         profileData: {
           ...emptyProfileData,
-          operatingPhase: "UP_AND_RUNNING_OWNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           businessPersona: "OWNING",
         },
       });
@@ -429,7 +430,7 @@ describe("profile - shared", () => {
       const business = generateBusinessForProfile({
         profileData: {
           ...emptyProfileData,
-          operatingPhase: "UP_AND_RUNNING_OWNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           businessPersona: "OWNING",
           legalStructureId: randomTradeNameLegalStructure(),
         },
@@ -445,7 +446,7 @@ describe("profile - shared", () => {
       const business = generateBusinessForProfile({
         profileData: {
           ...emptyProfileData,
-          operatingPhase: "UP_AND_RUNNING_OWNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           businessPersona: "OWNING",
           legalStructureId: randomPublicFilingLegalStructure(),
         },
@@ -467,7 +468,7 @@ describe("profile - shared", () => {
     it("removes question from alert when it gets answered", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
-          operatingPhase: "UP_AND_RUNNING_OWNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           dateOfFormation: undefined,
           existingEmployees: undefined,
           legalStructureId: randomPublicFilingLegalStructure(),

@@ -26,6 +26,7 @@ import {
   generateUserDataForBusiness,
   randomInt,
 } from "@businessnjgovnavigator/shared";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import * as getCurrentDateModule from "@businessnjgovnavigator/shared/dateHelpers";
 import {
   generateLicenseData,
@@ -38,6 +39,7 @@ import * as materialUi from "@mui/material";
 import { ThemeProvider, createTheme, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import dayjs, { Dayjs } from "dayjs";
+
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
@@ -661,7 +663,7 @@ describe("<FilingsCalendar />", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
-          operatingPhase: "GUEST_MODE_OWNING",
+          operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
         }),
       });
       renderFilingsCalendar({}, business);
@@ -672,7 +674,7 @@ describe("<FilingsCalendar />", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
-          operatingPhase: "GUEST_MODE_OWNING",
+          operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
         }),
         taxFilingData: generateTaxFilingData({ filings: [generateTaxFilingCalendarEvent({})] }),
       });
