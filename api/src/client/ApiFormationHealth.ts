@@ -1,4 +1,5 @@
-import { getCurrentDateISOString, getCurrentDateInNewJerseyISOString } from "@shared/dateHelpers";
+import { getCurrentDateInNewJerseyISOString, getCurrentDateISOString } from "@shared/dateHelpers";
+import { OperatingPhaseId } from "@shared/operatingPhase";
 import { CURRENT_VERSION, UserData } from "@shared/userData";
 
 export const ApiFormationHealth: UserData = {
@@ -104,7 +105,7 @@ export const ApiFormationHealth: UserData = {
         foreignBusinessTypeIds: ["officeInNJ"],
         nexusDbaName: "",
         needsNexusDbaName: false,
-        operatingPhase: "NEEDS_TO_FORM",
+        operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
         isNonprofitOnboardingRadio: false,
         nonEssentialRadioAnswers: {},
         encryptedTaxId: undefined,

@@ -413,7 +413,10 @@ describe("profile - starting business", () => {
             return it.id;
           }
         );
-        const operatingPhases: OperatingPhaseId[] = ["GUEST_MODE", "NEEDS_TO_FORM"];
+        const operatingPhases: OperatingPhaseId[] = [
+          OperatingPhaseId.GUEST_MODE,
+          OperatingPhaseId.NEEDS_TO_FORM,
+        ];
 
         for (const legalStructure of allPublicFilingLegalStructures) {
           for (const operatingPhase of operatingPhases) {
@@ -438,7 +441,7 @@ describe("profile - starting business", () => {
           it(`allows saving with empty location for ${legalStructure} in GUEST_MODE`, async () => {
             renderWithLegalStructureAndPhase({
               legalStructureId: legalStructure,
-              operatingPhase: "GUEST_MODE",
+              operatingPhase: OperatingPhaseId.GUEST_MODE,
             });
             removeLocationAndSave();
             await expectLocationSavedAsUndefined();
@@ -458,7 +461,7 @@ describe("profile - starting business", () => {
           it(`prevents saving with empty location for ${legalStructure} in FORMED`, async () => {
             renderWithLegalStructureAndPhase({
               legalStructureId: legalStructure,
-              operatingPhase: "FORMED",
+              operatingPhase: OperatingPhaseId.FORMED,
             });
             removeLocationAndSave();
             expectLocationNotSavedAndError();
@@ -474,7 +477,7 @@ describe("profile - starting business", () => {
           it(`prevents saving with empty location for ${legalStructure}`, async () => {
             renderWithLegalStructureAndPhase({
               legalStructureId: legalStructure,
-              operatingPhase: "FORMED",
+              operatingPhase: OperatingPhaseId.FORMED,
             });
             removeLocationAndSave();
             expectLocationNotSavedAndError();
@@ -765,10 +768,10 @@ describe("profile - starting business", () => {
 
   describe("existing employees field and ownership field", () => {
     const operatingPhaseIdsExcludingFormedAndUpAndRunning: OperatingPhaseId[] = [
-      "GUEST_MODE",
-      "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
-      "NEEDS_BUSINESS_STRUCTURE",
-      "NEEDS_TO_FORM",
+      OperatingPhaseId.GUEST_MODE,
+      OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE,
+      OperatingPhaseId.NEEDS_BUSINESS_STRUCTURE,
+      OperatingPhaseId.NEEDS_TO_FORM,
     ];
 
     it.each(operatingPhaseIdsExcludingFormedAndUpAndRunning)(
@@ -791,7 +794,7 @@ describe("profile - starting business", () => {
       const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          operatingPhase: "FORMED",
+          operatingPhase: OperatingPhaseId.FORMED,
         }),
       });
       renderPage({ business: initialBusiness });
@@ -804,7 +807,7 @@ describe("profile - starting business", () => {
       const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          operatingPhase: "UP_AND_RUNNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
         }),
       });
       renderPage({ business: initialBusiness });
@@ -817,7 +820,7 @@ describe("profile - starting business", () => {
       const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          operatingPhase: "UP_AND_RUNNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
           existingEmployees: "1",
         }),
       });
@@ -908,7 +911,7 @@ describe("profile - starting business", () => {
           businessPersona: "STARTING",
           industryId: "generic",
           sectorId: undefined,
-          operatingPhase: "UP_AND_RUNNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
           legalStructureId: "limited-liability-company",
           ...emptyIndustrySpecificData,
         }),
@@ -956,7 +959,7 @@ describe("profile - starting business", () => {
       profileData: generateProfileData({
         businessPersona: "STARTING",
         industryId: "generic",
-        operatingPhase: "UP_AND_RUNNING",
+        operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
         sectorId: undefined,
       }),
     });

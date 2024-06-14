@@ -63,7 +63,7 @@ export const generateSectionType = (): SectionType => {
 
 export const getProfileDataForUnfilteredOpportunities = (): ProfileData => {
   return generateProfileData({
-    operatingPhase: "UP_AND_RUNNING",
+    operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
     homeBasedBusiness: false,
     municipality: undefined,
     existingEmployees: "1",

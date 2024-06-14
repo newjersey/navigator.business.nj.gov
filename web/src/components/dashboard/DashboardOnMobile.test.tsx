@@ -42,7 +42,7 @@ import {
   generateUserDataForBusiness,
   getCurrentDate,
 } from "@businessnjgovnavigator/shared";
-import { OperatingPhase } from "@businessnjgovnavigator/shared/";
+import { OperatingPhase, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -446,7 +446,7 @@ describe("<DashboardOnMobile />", () => {
 
     useMockBusiness({
       profileData: generateProfileData({
-        operatingPhase: "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
+        operatingPhase: OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE,
       }),
       onboardingFormProgress: "COMPLETED",
     });
@@ -513,7 +513,7 @@ describe("<DashboardOnMobile />", () => {
       dueDate: dueDate.format(defaultDateFormat),
     });
     useMockBusiness({
-      profileData: generateProfileData({ operatingPhase: "FORMED" }),
+      profileData: generateProfileData({ operatingPhase: OperatingPhaseId.FORMED }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
       onboardingFormProgress: "COMPLETED",
     });

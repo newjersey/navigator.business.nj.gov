@@ -20,19 +20,23 @@ export interface OperatingPhase {
   readonly displaySidebarCardNotRegistered: boolean;
 }
 
-export type OperatingPhaseId =
-  | "GUEST_MODE"
-  | "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
-  | "GUEST_MODE_OWNING"
-  | "NEEDS_BUSINESS_STRUCTURE"
-  | "NEEDS_TO_FORM"
-  | "FORMED"
-  | "UP_AND_RUNNING"
-  | "UP_AND_RUNNING_OWNING"
-  | "REMOTE_SELLER_WORKER"
-  | "";
+export interface UnknownOperatingPhase extends Omit<OperatingPhase, "id"> {
+  readonly id: "";
+}
 
-export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): OperatingPhase => {
+export enum OperatingPhaseId {
+  GUEST_MODE = "GUEST_MODE",
+  GUEST_MODE_WITH_BUSINESS_STRUCTURE = "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
+  GUEST_MODE_OWNING = "GUEST_MODE_OWNING",
+  NEEDS_BUSINESS_STRUCTURE = "NEEDS_BUSINESS_STRUCTURE",
+  NEEDS_TO_FORM = "NEEDS_TO_FORM",
+  FORMED = "FORMED",
+  UP_AND_RUNNING = "UP_AND_RUNNING",
+  UP_AND_RUNNING_OWNING = "UP_AND_RUNNING_OWNING",
+  REMOTE_SELLER_WORKER = "REMOTE_SELLER_WORKER",
+}
+
+export const LookupOperatingPhaseById = (id?: OperatingPhaseId): OperatingPhase | UnknownOperatingPhase => {
   return (
     OperatingPhases.find((x) => {
       return x.id === id;
@@ -62,7 +66,7 @@ export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): Oper
 
 export const OperatingPhases: OperatingPhase[] = [
   {
-    id: "GUEST_MODE",
+    id: OperatingPhaseId.GUEST_MODE,
     displayCompanyDemographicProfileFields: false,
     displayCertifications: false,
     displayFundings: false,
@@ -83,7 +87,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displaySidebarCardNotRegistered: true,
   },
   {
-    id: "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
+    id: OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE,
     displayCompanyDemographicProfileFields: false,
     displayCertifications: false,
     displayFundings: false,
@@ -104,7 +108,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displaySidebarCardNotRegistered: true,
   },
   {
-    id: "GUEST_MODE_OWNING",
+    id: OperatingPhaseId.GUEST_MODE_OWNING,
     displayCompanyDemographicProfileFields: true,
     displayCertifications: true,
     displayFundings: true,
@@ -125,7 +129,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displaySidebarCardNotRegistered: true,
   },
   {
-    id: "FORMED",
+    id: OperatingPhaseId.FORMED,
     displayCompanyDemographicProfileFields: true,
     displayCertifications: true,
     displayFundings: false,
@@ -146,7 +150,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displaySidebarCardNotRegistered: false,
   },
   {
-    id: "NEEDS_TO_FORM",
+    id: OperatingPhaseId.NEEDS_TO_FORM,
     displayCompanyDemographicProfileFields: false,
     displayCertifications: false,
     displayFundings: false,
@@ -167,7 +171,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displaySidebarCardNotRegistered: false,
   },
   {
-    id: "NEEDS_BUSINESS_STRUCTURE",
+    id: OperatingPhaseId.NEEDS_BUSINESS_STRUCTURE,
     displayCompanyDemographicProfileFields: false,
     displayCertifications: false,
     displayFundings: false,
@@ -188,7 +192,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displaySidebarCardNotRegistered: false,
   },
   {
-    id: "UP_AND_RUNNING",
+    id: OperatingPhaseId.UP_AND_RUNNING,
     displayCompanyDemographicProfileFields: true,
     displayCertifications: true,
     displayFundings: true,
@@ -209,7 +213,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displaySidebarCardNotRegistered: false,
   },
   {
-    id: "UP_AND_RUNNING_OWNING",
+    id: OperatingPhaseId.UP_AND_RUNNING_OWNING,
     displayCompanyDemographicProfileFields: true,
     displayCertifications: true,
     displayFundings: true,
@@ -230,7 +234,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displaySidebarCardNotRegistered: false,
   },
   {
-    id: "REMOTE_SELLER_WORKER",
+    id: OperatingPhaseId.REMOTE_SELLER_WORKER,
     displayCompanyDemographicProfileFields: false,
     displayCertifications: false,
     displayFundings: false,

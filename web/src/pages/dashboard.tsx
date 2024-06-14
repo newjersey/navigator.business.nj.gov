@@ -32,6 +32,7 @@ import {
 } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Municipality } from "@businessnjgovnavigator/shared";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -62,7 +63,7 @@ const DashboardPage = (props: Props): ReactElement => {
   useMountEffectWhenDefined(() => {
     (async (): Promise<void> => {
       if (
-        business?.profileData.operatingPhase === "GUEST_MODE" &&
+        business?.profileData.operatingPhase === OperatingPhaseId.GUEST_MODE &&
         (business?.profileData.businessPersona === "STARTING" ||
           business?.profileData.businessPersona === "FOREIGN") &&
         !business.preferences.visibleSidebarCards.includes("not-registered")
@@ -75,7 +76,7 @@ const DashboardPage = (props: Props): ReactElement => {
       }
 
       if (
-        business?.profileData.operatingPhase === "GUEST_MODE_OWNING" &&
+        business?.profileData.operatingPhase === OperatingPhaseId.GUEST_MODE_OWNING &&
         business?.profileData.businessPersona === "OWNING" &&
         !business.preferences.visibleSidebarCards.includes("not-registered-up-and-running")
       ) {
@@ -102,7 +103,7 @@ const DashboardPage = (props: Props): ReactElement => {
 
       if (
         business?.profileData.communityAffairsAddress &&
-        business?.profileData.operatingPhase === "UP_AND_RUNNING"
+        business?.profileData.operatingPhase === OperatingPhaseId.UP_AND_RUNNING
       ) {
         const hasViolations = await api.checkElevatorViolations(
           business.profileData.communityAffairsAddress.streetAddress1,

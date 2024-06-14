@@ -304,7 +304,10 @@ describe("profile-foreign", () => {
               return it.id;
             }
           );
-          const operatingPhases: OperatingPhaseId[] = ["GUEST_MODE", "NEEDS_TO_FORM"];
+          const operatingPhases: OperatingPhaseId[] = [
+            OperatingPhaseId.GUEST_MODE,
+            OperatingPhaseId.NEEDS_TO_FORM,
+          ];
 
           for (const legalStructure of allPublicFilingLegalStructures) {
             for (const operatingPhase of operatingPhases) {
@@ -329,7 +332,7 @@ describe("profile-foreign", () => {
             it(`allows saving with empty location for ${legalStructure} in GUEST_MODE`, async () => {
               renderWithLegalStructureAndPhase({
                 legalStructureId: legalStructure,
-                operatingPhase: "GUEST_MODE",
+                operatingPhase: OperatingPhaseId.GUEST_MODE,
               });
               removeLocationAndSave();
               await expectLocationSavedAsUndefined();
@@ -350,7 +353,7 @@ describe("profile-foreign", () => {
             it(`prevents saving with empty location for ${legalStructure} in FORMED`, async () => {
               renderWithLegalStructureAndPhase({
                 legalStructureId: legalStructure,
-                operatingPhase: "FORMED",
+                operatingPhase: OperatingPhaseId.FORMED,
               });
               removeLocationAndSave();
               expectLocationNotSavedAndError();
@@ -366,7 +369,7 @@ describe("profile-foreign", () => {
             it(`prevents saving with empty location for ${legalStructure}`, async () => {
               renderWithLegalStructureAndPhase({
                 legalStructureId: legalStructure,
-                operatingPhase: "FORMED",
+                operatingPhase: OperatingPhaseId.FORMED,
               });
               removeLocationAndSave();
               expectLocationNotSavedAndError();

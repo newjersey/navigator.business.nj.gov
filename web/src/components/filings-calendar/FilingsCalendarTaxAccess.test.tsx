@@ -24,6 +24,7 @@ import {
   generateUserDataForBusiness,
   getCurrentDateISOString,
 } from "@businessnjgovnavigator/shared";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import {
   generateFormationData,
   generateGetFilingResponse,
@@ -152,7 +153,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
     it("opens the Needs Account modal when button is clicked in up and running guest mode", async () => {
       const business = generateBusiness({
         profileData: generateProfileData({
-          operatingPhase: "GUEST_MODE_OWNING",
+          operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
         }),
       });
 
@@ -167,7 +168,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
     it("updates userData with return link when the button is clicked in up and running guest mode", async () => {
       const business = generateBusiness({
         profileData: generateProfileData({
-          operatingPhase: "GUEST_MODE_OWNING",
+          operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
         }),
       });
       renderUnauthenticatedFilingsCalendarTaxAccess(business);
@@ -183,7 +184,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "GUEST_MODE_OWNING",
+            operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
           }),
         })
       );

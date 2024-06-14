@@ -133,7 +133,7 @@ export const emptyProfileData: ProfileData = {
   foreignBusinessTypeIds: [],
   nexusDbaName: "",
   needsNexusDbaName: false,
-  operatingPhase: "GUEST_MODE",
+  operatingPhase: OperatingPhaseId.GUEST_MODE,
   isNonprofitOnboardingRadio: false,
   nonEssentialRadioAnswers: {},
   elevatorOwningBusiness: undefined,

@@ -10,6 +10,7 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import {
   generateBusiness,
@@ -56,7 +57,7 @@ describe("<SidebarCardFundingNudge />", () => {
       });
 
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));
-      expect(currentBusiness().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
+      expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.UP_AND_RUNNING);
     });
   });
 
@@ -75,7 +76,7 @@ describe("<SidebarCardFundingNudge />", () => {
       expect(screen.getByText(Config.dashboardDefaults.sectorModalTitle)).toBeInTheDocument();
       selectDropdownByValue("Sector", "clean-energy");
       fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalSaveButton));
-      expect(currentBusiness().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
+      expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.UP_AND_RUNNING);
       expect(currentBusiness().profileData.sectorId).toEqual("clean-energy");
     });
 

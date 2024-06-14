@@ -12,6 +12,7 @@ import {
   generateTaxFilingData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { render, screen } from "@testing-library/react";
 
@@ -115,7 +116,7 @@ describe("<NaicsCode />", () => {
     renderComponent({
       profileData: generateProfileData({
         naicsCode: "624410",
-        operatingPhase: "UP_AND_RUNNING_OWNING",
+        operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
         businessPersona: "OWNING",
       }),
     });

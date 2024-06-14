@@ -51,6 +51,7 @@ import {
   selectByText,
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 const date = getCurrentDate().subtract(1, "month").date(1);
@@ -283,7 +284,7 @@ describe("profile - owning existing business", () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
         businessPersona: "OWNING",
-        operatingPhase: "UP_AND_RUNNING_OWNING",
+        operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
         sectorId: "",
       }),
       formationData: formationWithUndefinedMunicipality,
@@ -480,7 +481,7 @@ describe("profile - owning existing business", () => {
           industryId: "generic",
           businessPersona: "OWNING",
           sectorId: undefined,
-          operatingPhase: "UP_AND_RUNNING_OWNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
         }),
         formationData: formationWithUndefinedMunicipality,
       });
@@ -501,7 +502,7 @@ describe("profile - owning existing business", () => {
           profileData: generateProfileData({
             industryId: "generic",
             businessPersona: "OWNING",
-            operatingPhase: "UP_AND_RUNNING_OWNING",
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
@@ -534,7 +535,7 @@ describe("profile - owning existing business", () => {
           profileData: generateProfileData({
             industryId: "generic",
             businessPersona: "OWNING",
-            operatingPhase: "UP_AND_RUNNING_OWNING",
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
@@ -570,7 +571,7 @@ describe("profile - owning existing business", () => {
           profileData: generateProfileData({
             industryId: "generic",
             businessPersona: "OWNING",
-            operatingPhase: "UP_AND_RUNNING_OWNING",
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
@@ -606,7 +607,7 @@ describe("profile - owning existing business", () => {
           profileData: generateProfileData({
             industryId: "generic",
             businessPersona: "OWNING",
-            operatingPhase: "UP_AND_RUNNING_OWNING",
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
@@ -645,7 +646,7 @@ describe("profile - owning existing business", () => {
           profileData: generateProfileData({
             industryId: "generic",
             businessPersona: "OWNING",
-            operatingPhase: "UP_AND_RUNNING_OWNING",
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
@@ -679,7 +680,7 @@ describe("profile - owning existing business", () => {
           profileData: generateProfileData({
             industryId: "generic",
             businessPersona: "OWNING",
-            operatingPhase: "UP_AND_RUNNING_OWNING",
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
@@ -715,7 +716,7 @@ describe("profile - owning existing business", () => {
           profileData: generateProfileData({
             industryId: "generic",
             businessPersona: "OWNING",
-            operatingPhase: "UP_AND_RUNNING_OWNING",
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
