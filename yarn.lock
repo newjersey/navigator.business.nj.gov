@@ -4510,7 +4510,7 @@ __metadata:
     serverless-offline: 13.5.0
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.13.0
-    simple-oauth2: 5.0.0
+    simple-oauth2: 5.0.1
     supertest: 6.3.4
     ts-jest: 29.1.4
     ts-loader: 9.5.1
@@ -4717,7 +4717,7 @@ __metadata:
     serverless-offline: 13.5.0
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.13.0
-    simple-oauth2: 5.0.0
+    simple-oauth2: 5.0.1
     slick-carousel: ^1.8.1
     storybook: 7.6.19
     style-loader: 3.3.4
@@ -6465,14 +6465,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hapi/hoek@npm:^10.0.1":
-  version: 10.0.1
-  resolution: "@hapi/hoek@npm:10.0.1"
-  checksum: 6dbcd7ae138fc751b2d81169516668bc6e4b878bb2bfdfab5eb3d51fdfd361544cc791ff12375587bf71dbeb801810cd62105f5d744dfa457140fb1709bbea6f
-  languageName: node
-  linkType: hard
-
-"@hapi/hoek@npm:^11.0.2":
+"@hapi/hoek@npm:^11.0.2, @hapi/hoek@npm:^11.0.4":
   version: 11.0.4
   resolution: "@hapi/hoek@npm:11.0.4"
   checksum: 67dc9782a8235e066e3885352e40faa3c239621d7de29bfc88a72aba60eeb8df76b5c05d77962c734c8b0ef3fc7f818cc692689003d270a1b73ea98ba1508c5b
@@ -32357,15 +32350,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simple-oauth2@npm:5.0.0":
-  version: 5.0.0
-  resolution: "simple-oauth2@npm:5.0.0"
+"simple-oauth2@npm:5.0.1":
+  version: 5.0.1
+  resolution: "simple-oauth2@npm:5.0.1"
   dependencies:
-    "@hapi/hoek": ^10.0.1
+    "@hapi/hoek": ^11.0.4
     "@hapi/wreck": ^18.0.0
     debug: ^4.3.4
     joi: ^17.6.4
-  checksum: 1cdf7fba0c8e7d1f5d4eb39507ad9cbafc0347813b4bdf067e853514cbd12f2770c278719ec508f2f055e5b60dd10ef153f75a477c2fd59345e5b8d2d82e8248
+  checksum: 64a48f0387860a2850b6bb564b0bc50ef242721c6cb718043f9c99cc5b9007fc808037d6d2a0a660f3258c2c6cae499c0ca001c39bbf6bf78dc7ea122c2adf5e
   languageName: node
   linkType: hard
 
