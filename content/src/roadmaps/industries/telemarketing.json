@@ -47,7 +47,8 @@
   "nonEssentialQuestionsIds": [],
   "displayname": "telemarketing",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true
+    "canBeHomeBased": true,
+    "canBeReseller": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "Telemarketer ",
