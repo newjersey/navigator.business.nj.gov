@@ -4912,7 +4912,7 @@ __metadata:
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 29.6.3
     "@serverless/typescript": 3.38.0
-    "@smithy/node-http-handler": 2.4.3
+    "@smithy/node-http-handler": 2.5.0
     "@types/cors": 2.8.17
     "@types/dedent": 0.7.2
     "@types/express": 4.17.21
@@ -5029,7 +5029,7 @@ __metadata:
     "@semantic-release/changelog": 6.0.3
     "@semantic-release/git": 10.0.1
     "@serverless/typescript": 3.38.0
-    "@smithy/node-http-handler": 2.4.3
+    "@smithy/node-http-handler": 2.5.0
     "@storybook/addon-a11y": 7.6.19
     "@storybook/addon-actions": 7.6.19
     "@storybook/addon-designs": 7.0.9
@@ -9481,7 +9481,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/abort-controller@npm:^2.1.4, @smithy/abort-controller@npm:^2.2.0":
+"@smithy/abort-controller@npm:^2.2.0":
   version: 2.2.0
   resolution: "@smithy/abort-controller@npm:2.2.0"
   dependencies:
@@ -10039,20 +10039,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/node-http-handler@npm:2.4.3":
-  version: 2.4.3
-  resolution: "@smithy/node-http-handler@npm:2.4.3"
-  dependencies:
-    "@smithy/abort-controller": ^2.1.4
-    "@smithy/protocol-http": ^3.2.2
-    "@smithy/querystring-builder": ^2.1.4
-    "@smithy/types": ^2.11.0
-    tslib: ^2.5.0
-  checksum: 07e30c23fe696c9dc6060f826821810322a15adfd0e850ca4036eca9d8055bae222652bec9452c01247cb6e32522abd88a5909cba76cd287b9340c281cf27e58
-  languageName: node
-  linkType: hard
-
-"@smithy/node-http-handler@npm:^2.1.3, @smithy/node-http-handler@npm:^2.4.1, @smithy/node-http-handler@npm:^2.5.0":
+"@smithy/node-http-handler@npm:2.5.0, @smithy/node-http-handler@npm:^2.1.3, @smithy/node-http-handler@npm:^2.4.1, @smithy/node-http-handler@npm:^2.5.0":
   version: 2.5.0
   resolution: "@smithy/node-http-handler@npm:2.5.0"
   dependencies:
@@ -10098,7 +10085,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/protocol-http@npm:^3.0.3, @smithy/protocol-http@npm:^3.2.1, @smithy/protocol-http@npm:^3.2.2, @smithy/protocol-http@npm:^3.3.0":
+"@smithy/protocol-http@npm:^3.0.3, @smithy/protocol-http@npm:^3.2.1, @smithy/protocol-http@npm:^3.3.0":
   version: 3.3.0
   resolution: "@smithy/protocol-http@npm:3.3.0"
   dependencies:
@@ -10118,7 +10105,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/querystring-builder@npm:^2.0.7, @smithy/querystring-builder@npm:^2.1.4, @smithy/querystring-builder@npm:^2.2.0":
+"@smithy/querystring-builder@npm:^2.0.7, @smithy/querystring-builder@npm:^2.2.0":
   version: 2.2.0
   resolution: "@smithy/querystring-builder@npm:2.2.0"
   dependencies:
