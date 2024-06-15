@@ -44,7 +44,7 @@
     "@serverless/typescript": "3.38.0",
     "@smithy/node-http-handler": "2.5.0",
     "airtable": "0.12.2",
-    "axios": "1.6.8",
+    "axios": "1.7.2",
     "body-parser": "1.20.2",
     "cors": "2.8.5",
     "dayjs": "1.11.11",
