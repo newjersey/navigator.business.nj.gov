@@ -5023,7 +5023,7 @@ __metadata:
     "@mui/styles": 5.15.19
     "@mui/system": 5.15.15
     "@mui/x-date-pickers": 5.0.20
-    "@newjersey/njwds": 0.3.0
+    "@newjersey/njwds": 1.0.0
     "@next/bundle-analyzer": 12.3.4
     "@next/eslint-plugin-next": 12.3.4
     "@semantic-release/changelog": 6.0.3
@@ -5244,7 +5244,7 @@ __metadata:
     "@mui/styles": 5.15.19
     "@mui/system": 5.15.15
     "@mui/x-date-pickers": 5.0.20
-    "@newjersey/njwds": 0.3.0
+    "@newjersey/njwds": 1.0.0
     "@next/bundle-analyzer": 12.3.4
     "@next/eslint-plugin-next": 12.3.4
     "@storybook/addon-actions": 7.6.19
@@ -7882,12 +7882,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@newjersey/njwds@npm:0.3.0":
-  version: 0.3.0
-  resolution: "@newjersey/njwds@npm:0.3.0"
+"@newjersey/njwds@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@newjersey/njwds@npm:1.0.0"
   dependencies:
-    "@uswds/uswds": 3.0.1
-  checksum: 027c573306109524ee71e9f99fad2f117be392da6fbdb5b4859c0e3a771e67d23e32c7cf9be8e41fd1b849b55150d9f193adc60d39da17953777dc5f01d1a11c
+    "@uswds/uswds": 3.5.0
+  checksum: a35a359b3ef5a6396b18a5d9c3427ae674520e77cc4e4f5f1779c5359a3329a9d822abe9be86d2a801de0dc098dd0eb87d167c54a6bee55a664f556cb4994b26
   languageName: node
   linkType: hard
 
@@ -13111,16 +13111,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uswds/uswds@npm:3.0.1":
-  version: 3.0.1
-  resolution: "@uswds/uswds@npm:3.0.1"
+"@uswds/uswds@npm:3.5.0":
+  version: 3.5.0
+  resolution: "@uswds/uswds@npm:3.5.0"
   dependencies:
     classlist-polyfill: 1.0.3
-    domready: 1.0.8
     object-assign: 4.1.1
     receptor: 1.0.0
     resolve-id-refs: 0.1.0
-  checksum: d13437cfd4af2ae9208dd88b3af969a52a46f5b9f23940b692759cbcf49a1f5c9e8fcaf55b5ebc008c8a0ee744313092aeab70e168771f921699575ec6d0f95a
+  checksum: 51bb955aaf7d5c3fdaa63b04d6722b963e781cfdb2c061c2b8a3f0d8ea663e7f731c33097344912cdcbf73781c7f9829173f3fa4eb30b14ee2f598b3dda2a412
   languageName: node
   linkType: hard
 
@@ -18284,13 +18283,6 @@ __metadata:
   version: 2.4.7
   resolution: "dompurify@npm:2.4.7"
   checksum: 13c047e772a1998348191554dda403950d45ef2ec75fa0b9915cc179ccea0a39ef780d283109bd72cf83a2a085af6c77664281d4d0106a737bc5f39906364efe
-  languageName: node
-  linkType: hard
-
-"domready@npm:1.0.8":
-  version: 1.0.8
-  resolution: "domready@npm:1.0.8"
-  checksum: 5b0ee86650226e09f65c89b61d15fcfcda5925931dfffab5e9b82bf8ba96637286605fde1ac4addee19717bf7e486d4b49683e6f99038927560412113d96fde0
   languageName: node
   linkType: hard
 

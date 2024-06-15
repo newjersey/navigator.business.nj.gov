@@ -57,7 +57,7 @@
     "@mui/material": "5.15.19",
     "@mui/styles": "5.15.19",
     "@mui/x-date-pickers": "5.0.20",
-    "@newjersey/njwds": "0.3.0",
+    "@newjersey/njwds": "1.0.0",
     "@types/mdast": "4.0.4",
     "axios": "1.6.8",
     "broken-link-checker": "0.7.8",
