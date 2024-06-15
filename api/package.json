@@ -91,11 +91,11 @@
     "prettier": "2.8.8",
     "prettier-plugin-organize-imports": "3.2.4",
     "rimraf": "5.0.7",
-    "serverless": "3.38.0",
+    "serverless": "3.39.0",
     "serverless-dynamodb": "0.2.53",
-    "serverless-offline": "13.5.0",
+    "serverless-offline": "13.6.0",
     "serverless-offline-ssm": "6.2.0",
-    "serverless-webpack": "5.13.0",
+    "serverless-webpack": "5.14.0",
     "supertest": "6.3.4",
     "ts-jest": "29.1.4",
     "ts-loader": "9.5.1",
@@ -103,7 +103,7 @@
     "tsconfig-paths": "4.2.0",
     "tsconfig-paths-webpack-plugin": "4.1.0",
     "typescript": "5.4.5",
-    "webpack": "5.91.0",
+    "webpack": "5.92.0",
     "webpack-node-externals": "3.0.0",
     "wiremock": "3.6.0"
   }
