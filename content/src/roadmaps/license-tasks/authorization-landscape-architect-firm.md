@@ -53,4 +53,4 @@ webflowType: business-license
 
 > **Once approved, you will have:**
 >
-> * A certificate of authorization with a number
+> A certificate of authorization with a number.
