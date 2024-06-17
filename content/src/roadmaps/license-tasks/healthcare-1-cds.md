@@ -30,7 +30,7 @@ divisionPhone: (973) 504-6351
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
 
-You must also [register with the U.S. Drug Enforcement Administration (DEA)](https
+You must also register with the [U.S. Drug Enforcement Administration (DEA).](https://www.deadiversion.usdoj.gov/online_forms_apps.html)
 
 :::
 
