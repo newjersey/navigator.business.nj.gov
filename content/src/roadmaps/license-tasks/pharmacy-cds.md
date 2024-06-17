@@ -3,7 +3,7 @@ notesMd: >-
   * The links in the callouts (be advised and keep in mind) break each time I
   save
 
-  * Aside from those, this is ready
+  * Aside from those, the content has been reviewed (in the google doc format) and is ready
 id: pharmacy-cds
 filename: pharmacy-cds
 displayname: pharmacy-cds
