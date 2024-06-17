@@ -1,9 +1,9 @@
 ---
 notesMd: >-
-  * The links in the callouts (be advised and keep in mind) break each time I
-  save
+  * **The links in the callouts (be advised and keep in mind) break each time I
+  save the draft**
 
-  * Aside from those, the content has been reviewed (in the google doc format) and is ready
+  * Aside from the broken links, the content has been reviewed (in the Google Doc format) and is ready for another CMS review and/or publishing
 id: pharmacy-cds
 filename: pharmacy-cds
 displayname: pharmacy-cds
