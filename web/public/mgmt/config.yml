@@ -3977,6 +3977,7 @@ collections:
               - { label: Error - Generic, name: errorTextGeneric, widget: string }
               - { label: Newsletter Label, name: newsletterCheckboxLabel, widget: string }
               - { label: User Testing Label, name: userTestingCheckboxLabel, widget: string }
+              - { label: Contact Sharing Consent - InvestNewark, name: investNewarkContactSharingCheckboxLabel, widget: string }
 
               - { label: Account Success Snackbar Title, name: accountSuccessSnackbarTitle, widget: string }
               - { label: Account Success Snackbar Body, name: accountSuccessSnackbarBody, widget: string }

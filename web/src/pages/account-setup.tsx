@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { NameAndEmail } from "@/components/data-fields/NameAndEmail";
+import { AccountSetupForm } from "@/components/data-fields/AccountSetupForm";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
@@ -120,7 +120,7 @@ const AccountSetupPage = (): ReactElement => {
           {showAlert && <Alert variant="error">{Config.accountSetup.errorAlert}</Alert>}
           <Content>{getContent().body}</Content>
           <ProfileFormContext.Provider value={formContextState}>
-            <NameAndEmail user={user} setUser={setUser} />
+            <AccountSetupForm user={user} setUser={setUser} />
 
             <hr className="margin-top-4 margin-bottom-2" />
             <div className="float-right fdr margin-bottom-8">

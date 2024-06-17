@@ -29,7 +29,7 @@ export interface Business {
   readonly formationData: FormationData;
 }
 
-export const CURRENT_VERSION = 135;
+export const CURRENT_VERSION = 136;
 
 export const createEmptyBusiness = (id?: string): Business => {
   return {

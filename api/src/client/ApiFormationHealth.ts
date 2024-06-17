@@ -14,6 +14,8 @@ export const ApiFormationHealth: UserData = {
     receiveNewsletter: true,
     userTesting: true,
     abExperience: "ExperienceA",
+    accountCreationSource: "test-source",
+    contactSharingWithAccountCreationPartner: true,
   },
   currentBusinessId: "3145f251-6baa-4350-8b3d-a23761a15860",
   businesses: {

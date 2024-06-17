@@ -54,6 +54,8 @@ export enum QUERIES {
   openTaxFilingsModal = "openTaxFilingsModal",
   flow = "flow",
   source = "source",
+  businessMunicipality = "businessMunicipality",
+  utmSource = "utm_source",
 }
 
 export const routeShallowWithQuery = <K extends keyof QUERY_PARAMS_VALUES>(

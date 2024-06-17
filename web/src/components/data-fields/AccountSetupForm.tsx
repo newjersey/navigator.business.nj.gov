@@ -20,7 +20,7 @@ interface Props extends FormContextFieldProps {
   setUser: (user: BusinessUser) => void;
 }
 
-export const NameAndEmail = (props: Props): ReactElement => {
+export const AccountSetupForm = (props: Props): ReactElement => {
   const [email, setEmail] = useState<string>(props.user.email || "");
   const [confirmEmail, setConfirmEmail] = useState<string | undefined>(props.user.email || undefined);
   const { Config } = useConfig();
@@ -53,6 +53,10 @@ export const NameAndEmail = (props: Props): ReactElement => {
 
   const handleNewsletter = (value: boolean): void => {
     props.setUser({ ...props.user, receiveNewsletter: value });
+  };
+
+  const handleContactSharingWithAccountCreationPartner = (value: boolean): void => {
+    props.setUser({ ...props.user, contactSharingWithAccountCreationPartner: value });
   };
 
   const handleName = (value: string): void => {
@@ -128,7 +132,7 @@ export const NameAndEmail = (props: Props): ReactElement => {
               validationText={getEmailValidationText({ isConfirmEmail: false })}
               required={true}
               additionalValidationIsValid={(value): boolean => {
-                return confirmEmail ? value === confirmEmail : true && validateEmail(value);
+                return confirmEmail ? value === confirmEmail : validateEmail(value);
               }}
               inputWidth="default"
               onFocus={resetRegistrationErrorOnFocus}
@@ -177,6 +181,21 @@ export const NameAndEmail = (props: Props): ReactElement => {
             />
           }
         />
+
+        {props.user.accountCreationSource === "investNewark" && (
+          <FormControlLabel
+            label={Config.selfRegistration.investNewarkContactSharingCheckboxLabel}
+            control={
+              <Checkbox
+                checked={props.user.contactSharingWithAccountCreationPartner}
+                onChange={(event): void =>
+                  handleContactSharingWithAccountCreationPartner(event.target.checked)
+                }
+                id="investNewarkCheckbox"
+              />
+            }
+          />
+        )}
       </FormGroup>
     </div>
   );
