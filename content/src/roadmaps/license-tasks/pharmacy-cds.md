@@ -1,4 +1,9 @@
 ---
+notesMd: >-
+  * The links in the callouts (be advised and keep in mind) break each time I
+  save
+
+  * Aside from those, this is ready
 id: pharmacy-cds
 filename: pharmacy-cds
 displayname: pharmacy-cds
@@ -23,7 +28,7 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
 
-* You must also register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) for your CDS registration to be valid. Email a copy of your DEA registration to [CDS@dca.njoag.gov](mailto:CDS@dca.njoag.gov) within 60 days of CDS registration
+* You must also register with the [U.S. Drug Enforcement Administration (DEA)](https
 
 :::
 
@@ -34,15 +39,13 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 * Schedule(s) of CDS
 * Pharmacy permit number
 * Name, address, and telephone number of the person who has administrative or managerial responsibility for the registered location
-*   Name, address, and telephone number of the `registered agent|registered-agent` (if a corporation) or the name and address of the New Jersey resident responsible for receiving and handling legal paperwork
-
-
+* Name, address, and telephone number of the `registered agent|registered-agent` (if a corporation) or the name and address of the New Jersey resident responsible for receiving and handling legal paperwork
 * Signed attestation (included in application)
 * Applicable fees paid, once the NJ DCU has sent an invoice
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
-As a pharmacy, you must register with the [New Jersey Prescription Monitoring Program](https://www.njconsumeraffairs.gov/pmp/Pages/register.aspx) after receiving your CDS registration number.
+As a pharmacy, you must register with the [New Jersey Prescription Monitoring Program](https
 
 :::
 
