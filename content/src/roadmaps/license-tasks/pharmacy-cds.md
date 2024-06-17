@@ -34,11 +34,9 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 * Schedule(s) of CDS
 * Pharmacy permit number
 * Name, address, and telephone number of the person who has administrative or managerial responsibility for the registered location
-* Name, address, and telephone number of the 
+*   Name, address, and telephone number of the `registered agent|registered-agent` (if a corporation) or the name and address of the New Jersey resident responsible for receiving and handling legal paperwork
 
-   `registered agent|registered-agent` 
 
-  (if a corporation) or the name and address of the New Jersey resident responsible for receiving and handling legal paperwork
 * Signed attestation (included in application)
 * Applicable fees paid, once the NJ DCU has sent an invoice
 
