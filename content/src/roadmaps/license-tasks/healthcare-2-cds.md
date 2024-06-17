@@ -28,7 +28,7 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
 
-You must [register with the U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) for your CDS registration to be valid. Email a copy of your DEA registration to [CDS@dca.njoag.gov](mailto:CDS@dca.njoag.gov) within 60 days of CDS registration.
+You must register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) for your CDS registration to be valid. Email a copy of your DEA registration to CDS@dca.njoag.gov within 60 days of CDS registration.
 
 :::
 
@@ -43,7 +43,7 @@ You must [register with the U.S. Drug Enforcement Administration (DEA)](https://
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
-If you are a prescriber, [you must register with the New Jersey Prescription Monitoring Program](https://www.njconsumeraffairs.gov/pmp/Pages/register.aspx) after you have received your CDS registration.
+If you are a prescriber, [you must register with the New Jersey Prescription Monitoring Program](https
 
 :::
 
