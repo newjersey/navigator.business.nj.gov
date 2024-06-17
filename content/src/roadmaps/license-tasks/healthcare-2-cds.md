@@ -1,4 +1,10 @@
 ---
+notesMd: >-
+  
+
+  * Note: there are 2 healthcare CDS registrations: healthcare-1-cds and healthcare-2-cds
+
+  * The content has been reviewed in the google doc and is ready for another review and/or publishing
 id: "healthcare-2-cds "
 filename: healthcare-2-cds
 displayname: healthcare-2-cds
