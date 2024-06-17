@@ -1,11 +1,11 @@
 ---
 notesMd: >-
-  Work in progress, 6.11. \
+  * Note: there are 2 healthcare CDS registrations: healthcare-1-cds and
+  healthcare-2-cds
 
-  There are 2 healthcare CDS registrations, healthcare-1-cds and healthcare-2-cds.
+  * **Links (Be advised and Keep in mind) break each time I save the draft** 
 
-
-  The links go funky each time I come back (e.g. links in Be advised and Keep in mind)
+  * Aside from fixing the links, the content has been reviewed in the google doc and is ready
 id: "healthcare-1-cds "
 filename: "healthcare-1-cds "
 displayname: healthcare-1-cds
