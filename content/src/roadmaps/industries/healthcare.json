@@ -56,7 +56,7 @@
     "canBeReseller": false
   },
   "isEnabled": true,
-  "additionalSearchTerms": "doctors office, physician, medical examiners, nurses, nursing, midwives, midwifery, occupational therapy, physical therapy, therapist, optometrists, psychologist, psychoanalyst, family therapy, counseling, marriage counselor, speech therapy, audiologists, dietitian, nutritionist, mental health services, mental health care, mental healthcare, addiction services, behavioral health ",
+  "additionalSearchTerms": "doctors office, physician, medical examiners, nurses, nursing, midwives, midwifery, occupational therapy, physical therapy, therapist, optometrists, psychologist, psychoanalyst, family therapy, counseling, marriage counselor, speech therapy, audiologists, dietitian, nutritionist, mental health services, mental health care, mental healthcare, addiction services, behavioral health, physician assistant, dentist, osteopathy, optometrist, podiatrist, veterinarian",
   "id": "healthcare",
   "description": "Provides licensed health-related services",
   "webflowId": "656a13622828697d87e05e99"
