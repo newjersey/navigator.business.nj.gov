@@ -51,6 +51,8 @@ webflowType: business-license
 * A notary signature and seal on the form
 * Applicable fees paid
 
-> **Once approved, you will have:**
->
-> A certificate of authorization with a number.
+:::callout{ showHeader="true" headerText="Once approved, you will have:" showIcon="false" calloutType="conditional" }
+
+A certificate of authorization with a number.
+
+:::
