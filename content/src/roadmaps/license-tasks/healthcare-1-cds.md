@@ -5,7 +5,7 @@ notesMd: >-
 
   * **Links (Be advised and Keep in mind) break each time I save the draft** 
 
-  * Aside from fixing the links, the content has been reviewed in the google doc and is ready
+  * Aside from fixing the links, the content has been reviewed in the google doc and is ready for another CMS review and/or publishing
 id: "healthcare-1-cds "
 filename: "healthcare-1-cds "
 displayname: healthcare-1-cds
