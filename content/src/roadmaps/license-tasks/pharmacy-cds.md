@@ -28,7 +28,9 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
 
-* You must also register with the [U.S. Drug Enforcement Administration (DEA)](https
+* You must also register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) for your CDS registration to be valid. Email a copy of your DEA registration to CDS@dca.njoag.gov within 60 days of CDS registration
+* If you are applying for CDS Automated Medication System (AMS) registration, you must first contact the BOP at NJBOPOffice@dca.njoag.gov. You can only submit a CDS AMS application upon approval from the BOP
+
 
 :::
 
@@ -45,7 +47,9 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
-As a pharmacy, you must register with the [New Jersey Prescription Monitoring Program](https
+
+As a pharmacy, you must register with the New Jersey Prescription Monitoring Program after receiving your CDS registration number.
+
 
 :::
 
