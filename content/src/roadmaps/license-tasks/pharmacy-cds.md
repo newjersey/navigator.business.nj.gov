@@ -55,7 +55,8 @@ As a pharmacy, you must register with the [New Jersey Prescription Monitoring Pr
 
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
 
-You cannot legally dispense any schedule of CDS.
+You cannot legally dispense CDS and may be subject to severe legal consequences and fines.
+
 
 :::
 
