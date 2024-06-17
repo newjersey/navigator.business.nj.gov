@@ -43,7 +43,9 @@ You must register with the [U.S. Drug Enforcement Administration (DEA)](https://
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
-If you are a prescriber, [you must register with the New Jersey Prescription Monitoring Program](https
+If you are a prescriber, you must register with the [New Jersey Prescription Monitoring Program](https://www.njconsumeraffairs.gov/pmp/Pages/register.aspx)
+after you have received your CDS registration. 
+
 
 :::
 
