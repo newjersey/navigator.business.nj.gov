@@ -28,8 +28,7 @@ divisionPhone: (973) 504-6351
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
 
-You must also register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) for your CDS registration to be valid. Email a copy of your DEA registration to CDS@dca.njoag.gov within 60 days of CDS registration.
-
+You must also register with the [U.S. Drug Enforcement Administration (DEA)](https
 
 :::
 
@@ -44,14 +43,13 @@ You must also register with the [U.S. Drug Enforcement Administration (DEA)](htt
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
-If you are a prescriber, you must register with the [New Jersey Prescription Monitoring Program](https://www.njconsumeraffairs.gov/pmp/Pages/register.aspx) after you have received your CDS registration. 
-
+If you are a prescriber, you must register with the [New Jersey Prescription Monitoring Program](https
 
 :::
 
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
 
-You cannot legally dispense, prescribe, or store any CDS.
+You cannot legally dispense, prescribe, or store CDS and may be subject to severe legal consequences and fines.
 
 :::
 
