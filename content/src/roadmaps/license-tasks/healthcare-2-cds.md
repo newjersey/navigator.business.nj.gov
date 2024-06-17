@@ -51,7 +51,7 @@ after you have received your CDS registration.
 
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
 
-You cannot legally dispense, prescribe, or store any schedule of CDS.
+You cannot legally dispense, prescribe, or store CDS and may be subject to severe legal consequences and fines.
 
 :::
 
