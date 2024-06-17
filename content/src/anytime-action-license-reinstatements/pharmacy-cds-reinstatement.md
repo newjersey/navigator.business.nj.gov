@@ -1,4 +1,8 @@
 ---
+notesMd: >-
+  * 6.17: work in progress
+
+  * pdf application is not available on the consumer affairs site. It's located in our google drive, but unsure how to/where to upload it so users can link it (probably requires dev?)
 filename: pharmacy-cds-reinstatement
 name: Reinstate Your Pharmacy’s Controlled Dangerous Substance (CDS) Registration
 industryIds:
@@ -6,9 +10,9 @@ industryIds:
 sectorIds: []
 icon: update-purple.svg
 urlSlug: pharmacy-cds-reinstatement
-summaryDescriptionMd:  If your CDS registration has been expired for more than
-  30 days or is inactive, you need to reinstate it. If it expired less than 30
-  days ago, [you can renew online](https://newjersey.mylicense.com/). You must
+summaryDescriptionMd: If your CDS registration has been expired for more than 30
+  days or is inactive, you need to reinstate it. If it expired less than 30 days
+  ago, [you can renew online](https://newjersey.mylicense.com/). You must
   already be registered with the [U.S. Drug Enforcement Administration
   (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) before
   applying for your CDS reinstatement. Email your application to
