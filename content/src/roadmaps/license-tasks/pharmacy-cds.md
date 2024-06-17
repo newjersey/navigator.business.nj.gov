@@ -48,7 +48,7 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
 
-As a pharmacy, you must register with the New Jersey Prescription Monitoring Program after receiving your CDS registration number.
+As a pharmacy, you must register with the [New Jersey Prescription Monitoring Program](https://www.njconsumeraffairs.gov/pmp/Pages/register.aspx) after you have received your CDS registration. 
 
 
 :::
