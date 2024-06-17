@@ -1,5 +1,18 @@
 ---
-notesMd: "6.13: updated with SME edits. Did not change title per SME edit."
+notesMd: >-
+  * 6.13: updated with SME edits. Did not change title per SME edit as it was
+  quite long (*"Get Your Certificate of Authorization to Provide or Offer to
+  Provide Landscape Architectural Services")*
+
+  * Edited summary description per SME suggestion
+
+  * Removed Business Registration Certificate under Eligibility Criteria (SME crossed this out)
+
+  * Edited "*A landscape architect licensed in NJ who serves as the responsible-in-charge licensee"* to include "*(must be one of the LLC or corporation's officers or full-time employees)"* per SME edit
+
+  * Added "*Copy of contract with licensed landscape architecture*" to application reqs per SME 
+
+  * Added "*Names, addresses, license numbers, and signatures of all officers, board members, directors, principals, and any responsible licensee*" and "*Names, addresses, license numbers, and ownership percentages of licensee or related professionals in LLC or corporation*" to application reqs per SME
 id: authorization-landscape-architect-firm
 filename: authorization-landscape-architect-firm
 displayname: authorization-landscape-architect-firm
