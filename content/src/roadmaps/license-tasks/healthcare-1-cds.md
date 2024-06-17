@@ -3,9 +3,7 @@ notesMd: >-
   * Note: there are 2 healthcare CDS registrations: healthcare-1-cds and
   healthcare-2-cds
 
-  * **Links (Be advised and Keep in mind) break each time I save the draft** 
-
-  * Aside from fixing the links, the content has been reviewed in the google doc and is ready for another CMS review and/or publishing
+  * The content has been reviewed in the Google doc and is ready for another CMS review and/or publishing
 id: "healthcare-1-cds "
 filename: "healthcare-1-cds "
 displayname: healthcare-1-cds
