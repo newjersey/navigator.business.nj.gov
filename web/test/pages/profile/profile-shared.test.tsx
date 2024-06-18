@@ -28,6 +28,7 @@ import {
   businessPersonas,
   emptyProfileData,
   generateBusiness,
+  generateFormationFormData,
   generateMunicipality,
   generateProfileData,
   randomInt,
@@ -51,7 +52,7 @@ import {
   selectByText,
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
 const mockApi = api as jest.Mocked<typeof api>;
@@ -109,6 +110,12 @@ const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 const nonOwningPersonas: BusinessPersona[] = ["STARTING", "FOREIGN"];
 
 describe("profile - shared", () => {
+  const formationWithUndefinedMunicipality = generateFormationData({
+    formationFormData: generateFormationFormData({
+      addressMunicipality: undefined,
+    }),
+  });
+
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
@@ -141,6 +148,7 @@ describe("profile - shared", () => {
         industryId: randomHomeBasedIndustry(),
         operatingPhase: randomElementFromArray(defaultDescOperatingPhases as OperatingPhase[]).id,
       }),
+      formationData: formationWithUndefinedMunicipality,
     });
 
     renderPage({ business });
@@ -162,6 +170,7 @@ describe("profile - shared", () => {
         industryId: randomHomeBasedIndustry(),
         operatingPhase: randomElementFromArray(altDescOperatingPhases as OperatingPhase[]).id,
       }),
+      formationData: formationWithUndefinedMunicipality,
     });
 
     renderPage({ business });
@@ -182,6 +191,7 @@ describe("profile - shared", () => {
         businessPersona: "OWNING",
         homeBasedBusiness: false,
       }),
+      formationData: formationWithUndefinedMunicipality,
     });
 
     renderPage({ business });
@@ -203,6 +213,7 @@ describe("profile - shared", () => {
           foreignBusinessTypeIds:
             businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
         }),
+        formationData: formationWithUndefinedMunicipality,
       });
 
       renderPage({ business });
@@ -262,11 +273,14 @@ describe("profile - shared", () => {
       profileData: generateProfileData({
         municipality: undefined,
       }),
+      formationData: formationWithUndefinedMunicipality,
     });
 
     const newark = generateMunicipality({ displayName: "Newark" });
     renderPage({ business: initialBusiness, municipalities: [newark] });
     selectByText("Location", newark.displayName);
+    expect(screen.getByLabelText("Location")).toHaveValue(newark.displayName);
+    fireEvent.blur(screen.getByLabelText("Location"));
     clickSave();
     await waitFor(() => {
       return expect(currentBusiness().profileData.municipality).toEqual(newark);
@@ -283,6 +297,7 @@ describe("profile - shared", () => {
       profileData: generateProfileData({
         municipality: generateMunicipality({ displayName: "Jersey City" }),
       }),
+      formationData: formationWithUndefinedMunicipality,
     });
 
     renderPage({ business: initialBusiness, municipalities: [newark] });
@@ -309,6 +324,7 @@ describe("profile - shared", () => {
                 foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["none"] : [],
               }),
               taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
+              formationData: formationWithUndefinedMunicipality,
             });
 
             renderPage({ business });
@@ -350,6 +366,7 @@ describe("profile - shared", () => {
             profileData: generateProfileData({
               legalStructureId: randomPublicFilingLegalStructure(),
             }),
+            formationData: formationWithUndefinedMunicipality,
           });
           renderPage({ business });
           chooseTab("numbers");
@@ -367,6 +384,7 @@ describe("profile - shared", () => {
           operatingPhase,
           dateOfFormation: undefined,
         }),
+        formationData: formationWithUndefinedMunicipality,
       });
       renderPage({ business });
 
@@ -379,6 +397,7 @@ describe("profile - shared", () => {
           operatingPhase,
           dateOfFormation: undefined,
         }),
+        formationData: formationWithUndefinedMunicipality,
       });
       renderPage({ business });
 
@@ -430,6 +449,7 @@ describe("profile - shared", () => {
           businessPersona: "OWNING",
           legalStructureId: randomPublicFilingLegalStructure(),
         },
+        formationData: formationWithUndefinedMunicipality,
       });
       renderPage({ business });
       expect(
@@ -452,6 +472,7 @@ describe("profile - shared", () => {
           existingEmployees: undefined,
           legalStructureId: randomPublicFilingLegalStructure(),
         }),
+        formationData: formationWithUndefinedMunicipality,
       });
       renderPage({ business });
 
@@ -478,6 +499,9 @@ describe("profile - shared", () => {
       const business = generateBusinessForProfile({
         formationData: generateFormationData({
           completedFilingPayment: false,
+          formationFormData: generateFormationFormData({
+            addressMunicipality: undefined,
+          }),
         }),
         profileData: generateProfileData({
           dateOfFormation: undefined,
@@ -494,6 +518,9 @@ describe("profile - shared", () => {
       const business = generateBusinessForProfile({
         formationData: generateFormationData({
           completedFilingPayment: true,
+          formationFormData: generateFormationFormData({
+            addressMunicipality: undefined,
+          }),
         }),
         profileData: generateProfileData({
           dateOfFormation: undefined,
@@ -550,6 +577,9 @@ describe("profile - shared", () => {
         const business = generateBusinessForProfile({
           formationData: generateFormationData({
             completedFilingPayment: false,
+            formationFormData: generateFormationFormData({
+              addressMunicipality: undefined,
+            }),
           }),
           profileData: generateProfileData({
             dateOfFormation: "2020-8-8",
@@ -572,6 +602,7 @@ describe("profile - shared", () => {
           foreignBusinessTypeIds:
             profileData.businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : [],
         }),
+        formationData: formationWithUndefinedMunicipality,
       });
     };
 
@@ -642,6 +673,7 @@ describe("profile - shared", () => {
           profileData: generateProfileData({
             businessPersona: "OWNING",
           }),
+          formationData: formationWithUndefinedMunicipality,
         }),
       });
       expect(
@@ -661,6 +693,7 @@ describe("profile - shared", () => {
             foreignBusinessTypeIds:
               businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
           }),
+          formationData: formationWithUndefinedMunicipality,
         });
         renderPage({ business });
         clickSave();
