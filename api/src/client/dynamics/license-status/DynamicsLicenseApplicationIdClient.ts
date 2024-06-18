@@ -67,6 +67,7 @@ const licenseTypeToLicenseId: Record<string, string> = {
   "Public Movers and Warehousemen": "19391a3f-53df-eb11-bacb-001dd8028561",
   "Home Improvement Contractor": "7a391a3f-53df-eb11-bacb-001dd8028561",
   "Health Care Services": "3ac8456a-53df-eb11-bacb-001dd8028561",
+  "Health Club Services": "af8e3564-53df-eb11-bacb-001dd8028561",
 };
 
 const statusCodeToLicenseStatus: Record<number, LicenseStatus> = {

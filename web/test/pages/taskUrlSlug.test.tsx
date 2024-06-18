@@ -227,6 +227,7 @@ describe("task page", () => {
       "register-accounting-firm",
       "register-consumer-affairs",
       "landscape-architect-license",
+      "health-club-registration",
     ])("loads License task screen for %s", (licenseId) => {
       renderPage(generateTask({ id: licenseId }), generateBusiness({ licenseData: undefined }));
       expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
