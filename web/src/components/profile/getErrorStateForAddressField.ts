@@ -32,7 +32,7 @@ export const getErrorStateForAddressField = ({
       label = (Config.formation.fields as any)[field].error;
     } else if (isTooLong) {
       label = templateEval(Config.formation.general.maximumLengthErrorText, {
-        field: (Config.formation.fields as any)[field].error,
+        field: (Config.formation.fields as any)[field].label,
         maxLen: params.maxLen.toString(),
       });
     }

@@ -3,7 +3,6 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
-import { randomPublicFilingLegalStructure } from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -139,7 +138,8 @@ describe("profile - owning existing business", () => {
         taxId: randomInt(9).toString(),
         businessPersona: "OWNING",
         industryId: "generic",
-        legalStructureId: randomPublicFilingLegalStructure(),
+        legalStructureId: "limited-liability-company",
+        municipality: undefined,
       }),
       onboardingFormProgress: "COMPLETED",
       formationData: formationWithUndefinedMunicipality,
@@ -201,6 +201,10 @@ describe("profile - owning existing business", () => {
           addressLine2: "apt 1",
           addressMunicipality: newark,
           addressZipCode: "08123",
+          addressState: {
+            name: "New Jersey",
+            shortCode: "NJ",
+          },
         },
       },
     });
