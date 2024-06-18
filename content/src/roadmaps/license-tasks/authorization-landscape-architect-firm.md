@@ -17,7 +17,7 @@ id: authorization-landscape-architect-firm
 filename: authorization-landscape-architect-firm
 displayname: authorization-landscape-architect-firm
 urlSlug: authorization-landscape-architect-firm
-name: Obtain a Certificate of Authorization to Offer Landscape Architectural Services
+name: Obtain a Certificate of Authorization to Offer Landscape Architecture Services
 webflowName: "Landscape Architecture: Certificate of Authorization"
 summaryDescriptionMd: You need a certificate of authorization to provide
   landscape architecture services to LLCs or corporations (except professional
