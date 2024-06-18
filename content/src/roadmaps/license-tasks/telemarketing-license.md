@@ -1,5 +1,8 @@
 ---
-notesMd: https://docs.google.com/document/d/104QFACWa4lyrqTY56ET-o6ZZ-dfNdssxZ0tdEF8c52E/edit
+notesMd: >-
+  Draft:\
+
+  https://docs.google.com/document/d/104QFACWa4lyrqTY56ET-o6ZZ-dfNdssxZ0tdEF8c52E/edit
 id: telemarketing-license
 filename: telemarketing-license
 displayname: telemarketing-license
@@ -12,8 +15,26 @@ industryId:
   - telemarketing
 agencyId: nj-consumer-affairs
 ---
-
-
 - - -
 
 ## Application Requirements
+
+* Business name, address, phone number, and email
+*  `Business structure|business-structure-learn-more` 
+*  `Employer Identification Number (EIN)|ein` 
+*  `Certificate of Formation|certificate-formation` 
+*  `Registered agent|registered-agent` information, including address and phone number
+* Addresses and phone numbers for the location from which you will be making calls
+* Local and long-distance phone service provider information
+* Names and addresses of any other sellers who, on your behalf, will make sales calls 
+* Name, address, and business phone number of each officer, director, principal, or representative with an ownership interest of 10% or more
+* Number of outgoing simultaneous calls (the number of calls that can be made at one time)
+* Criminal history of each officer, director, principal, or owner, if applicable
+* Explanation of license suspension, denial, or revocation, if applicable
+* Applicable fees paid
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
+
+As a Telemarketer, you must register with the [Federal Trade Commission's National Do Not Call Registry](https://telemarketing.donotcall.gov/).
+
+:::
