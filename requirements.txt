@@ -14,4 +14,4 @@ pycparser==2.22
 python-dotenv==1.0.1
 PyYAML==6.0.1
 requests==2.32.3
-urllib3==2.2.1
+urllib3==2.2.2
