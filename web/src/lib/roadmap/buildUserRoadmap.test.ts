@@ -792,4 +792,74 @@ describe("buildUserRoadmap", () => {
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("will-sell-pet-care-items");
     });
   });
+
+  describe("if industry is employment agency", () => {
+    it("adds only job seekers add on if `job seekers` is selected for employmentPersonnelServiceType and `Permanent` is selected for employmentPlacementType", () => {
+      buildUserRoadmap(
+        generateStartingProfile({
+          employmentPersonnelServiceType: "JOB_SEEKERS",
+          employmentPlacementType: undefined,
+          industryId: "employment-agency",
+        })
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("employment-agency-job-seekers");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
+        "employment-agency-employers-permanent"
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
+        "employment-agency-employers-temporary"
+      );
+    });
+
+    it("adds only employers permanent add on if `employers` is selected for employmentPersonnelServiceType and `Permanent` is selected for employmentPlacementType", () => {
+      buildUserRoadmap(
+        generateStartingProfile({
+          employmentPersonnelServiceType: "EMPLOYERS",
+          employmentPlacementType: "PERMANENT",
+          industryId: "employment-agency",
+        })
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+        "employment-agency-employers-permanent"
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("employment-agency-job-seekers");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
+        "employment-agency-employers-temporary"
+      );
+    });
+
+    it("adds only temporary add on if `employers` is selected for employmentPersonnelServiceType and `Temporary` is selected for employmentPlacementType", () => {
+      buildUserRoadmap(
+        generateStartingProfile({
+          employmentPersonnelServiceType: "EMPLOYERS",
+          employmentPlacementType: "TEMPORARY",
+          industryId: "employment-agency",
+        })
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+        "employment-agency-employers-temporary"
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("employment-agency-job-seekers");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
+        "employment-agency-employers-permanent"
+      );
+    });
+
+    it("adds temporary and permanent add ons but not employment job seekers if `employers` is selected for employmentPersonnelServiceType and `Both` is selected for employmentPlacementType", () => {
+      buildUserRoadmap(
+        generateStartingProfile({
+          employmentPersonnelServiceType: "EMPLOYERS",
+          employmentPlacementType: "BOTH",
+          industryId: "employment-agency",
+        })
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+        "employment-agency-employers-permanent"
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+        "employment-agency-employers-temporary"
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("employment-agency-job-seekers");
+    });
+  });
 });

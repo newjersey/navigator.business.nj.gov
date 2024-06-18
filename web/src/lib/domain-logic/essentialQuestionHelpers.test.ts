@@ -40,6 +40,7 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
         willSellPetCareItems: true,
         isChildcareForSixOrMore: true,
         isPetCareHousingApplicable: true,
+        isEmploymentAndPersonnelTypeApplicable: true,
       },
       isEnabled: true,
       additionalSearchTerms: "",
@@ -338,6 +339,42 @@ describe("hasEssentialQuestion", () => {
 
       it("returns true when industry has a pet care option", () => {
         expect(getIsApplicableToFunctionByFieldName("petCareHousing")("fake-industry-with-eq")).toEqual(true);
+      });
+    });
+
+    describe("Employment Agency", () => {
+      it("returns false when no industry is supplied", () => {
+        expect(getIsApplicableToFunctionByFieldName("employmentPersonnelServiceType")(undefined)).toEqual(
+          false
+        );
+        expect(getIsApplicableToFunctionByFieldName("employmentPlacementType")(undefined)).toEqual(false);
+      });
+
+      it("returns false when industry does not exist", () => {
+        expect(
+          getIsApplicableToFunctionByFieldName("employmentPersonnelServiceType")("fake-industry")
+        ).toEqual(false);
+        expect(getIsApplicableToFunctionByFieldName("employmentPlacementType")("fake-industry")).toEqual(
+          false
+        );
+      });
+
+      it("returns false when industry does not have an employment agency option", () => {
+        expect(
+          getIsApplicableToFunctionByFieldName("employmentPersonnelServiceType")("fake-industry-with-no-eq")
+        ).toEqual(false);
+        expect(
+          getIsApplicableToFunctionByFieldName("employmentPlacementType")("fake-industry-with-no-eq")
+        ).toEqual(false);
+      });
+
+      it("returns true when industry has an employment agency option", () => {
+        expect(
+          getIsApplicableToFunctionByFieldName("employmentPersonnelServiceType")("fake-industry-with-eq")
+        ).toEqual(true);
+        expect(
+          getIsApplicableToFunctionByFieldName("employmentPlacementType")("fake-industry-with-eq")
+        ).toEqual(true);
       });
     });
   });

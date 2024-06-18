@@ -328,8 +328,8 @@ export const mockSuccessfulApiSignups = (): void => {
   });
 };
 
-export const industriesWithEssentialQuestion = Industries.filter((industry) => {
-  return hasEssentialQuestion(industry.id) && industry.isEnabled;
+export const industriesWithSingleEssentialQuestion = Industries.filter((industry) => {
+  return hasEssentialQuestion(industry.id) && industry.isEnabled && industry.name !== "employment-agency";
 });
 
 export const industriesWithOutEssentialQuestion = Industries.filter((industry) => {
@@ -340,14 +340,14 @@ export const industryIdsWithOutEssentialQuestion = industriesWithOutEssentialQue
   (industry) => industry.id
 );
 
-export const industryIdsWithEssentialQuestion = industriesWithEssentialQuestion.map(
+export const industryIdsWithSingleEssentialQuestion = industriesWithSingleEssentialQuestion.map(
   (industry) => industry.id
 );
 
-export const industryIdsWithRequiredEssentialQuestion = industryIdsWithEssentialQuestion.filter(
+export const industryIdsWithSingleRequiredEssentialQuestion = industryIdsWithSingleEssentialQuestion.filter(
   (industry) => {
-    const applicableQuestions = EssentialQuestions.filter((question) =>
-      question.isQuestionApplicableToIndustryId(industry)
+    const applicableQuestions = EssentialQuestions.filter(
+      (question) => question.isQuestionApplicableToIndustryId(industry) && industry !== "employment-agency"
     );
     const someQuestionsStartAsUndefined = applicableQuestions.some((question) => {
       return emptyIndustrySpecificData[question.fieldName] === undefined;

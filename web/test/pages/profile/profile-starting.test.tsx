@@ -22,7 +22,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   industryIdsWithOutEssentialQuestion,
-  industryIdsWithRequiredEssentialQuestion,
+  industryIdsWithSingleRequiredEssentialQuestion,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   Business,
@@ -1096,7 +1096,7 @@ describe("profile - starting business", () => {
     });
   });
 
-  it.each(industryIdsWithRequiredEssentialQuestion)(
+  it.each(industryIdsWithSingleRequiredEssentialQuestion)(
     "prevents user from saving when %s is selected as industry, but essential question is not answered",
     async (industryId) => {
       const business = generateBusinessForProfile({
@@ -1114,6 +1114,22 @@ describe("profile - starting business", () => {
       });
     }
   );
+
+  it("prevents user from saving when employment agency is selected as industry, but essential question is not answered", async () => {
+    const business = generateBusinessForProfile({
+      onboardingFormProgress: "UNSTARTED",
+      profileData: generateProfileData({
+        businessPersona: "STARTING",
+        industryId: "employment-agency",
+        ...emptyIndustrySpecificData,
+      }),
+    });
+    renderPage({ business });
+    clickSave();
+    await waitFor(() => {
+      expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
+    });
+  });
 
   describe("Document Section", () => {
     it("shows document section if user's legal structure requires public filing", () => {

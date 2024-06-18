@@ -8,7 +8,7 @@ import {
   setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
 import {
-  industryIdsWithRequiredEssentialQuestion,
+  industryIdsWithSingleRequiredEssentialQuestion,
   mockSuccessfulApiSignups,
   renderPage,
   runNonprofitOnboardingTests,
@@ -81,7 +81,7 @@ describe("onboarding - starting a business", () => {
       });
     });
 
-    it.each(industryIdsWithRequiredEssentialQuestion)(
+    it.each(industryIdsWithSingleRequiredEssentialQuestion)(
       "prevents user from moving to Step 3 when %s is selected as industry, but essential question is not answered",
       async (industryId) => {
         const userData = generateTestUserData({
@@ -98,7 +98,7 @@ describe("onboarding - starting a business", () => {
       }
     );
 
-    it.each(industryIdsWithRequiredEssentialQuestion)(
+    it.each(industryIdsWithSingleRequiredEssentialQuestion)(
       "allows user to move past Step 2 when you have selected an industry %s and answered the essential question",
       async (industryId) => {
         const userData = generateTestUserData({
@@ -119,7 +119,7 @@ describe("onboarding - starting a business", () => {
       }
     );
 
-    it.each(industryIdsWithRequiredEssentialQuestion)(
+    it.each(industryIdsWithSingleRequiredEssentialQuestion)(
       "removes essential question inline error when essential question radio is selected for %s industry",
       async (industryId) => {
         const userData = generateTestUserData({
@@ -136,6 +136,55 @@ describe("onboarding - starting a business", () => {
         expect(screen.queryByText(Config.siteWideErrorMessages.errorRadioButton)).not.toBeInTheDocument();
       }
     );
+
+    const employmentAgencyIndustryId = "employment-agency";
+
+    it("prevents user from moving to Step 3 when employment agency is selected as industry, but essential question is not answered", async () => {
+      const userData = generateTestUserData({
+        industryId: employmentAgencyIndustryId,
+        ...emptyIndustrySpecificData,
+      });
+      useMockRouter({ isReady: true, query: { page: "2" } });
+      const { page } = renderPage({ userData });
+
+      page.clickNext();
+      expect(screen.getByTestId("step-2")).toBeInTheDocument();
+      expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
+      expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
+    });
+
+    it("allows user to move past Step 2 when you have selected an industry employment agency and answered the essential question", async () => {
+      const userData = generateTestUserData({
+        industryId: employmentAgencyIndustryId,
+        ...emptyIndustrySpecificData,
+      });
+      useMockRouter({ isReady: true, query: { page: "2" } });
+      const { page } = renderPage({ userData });
+
+      page.chooseEssentialQuestionRadio(employmentAgencyIndustryId, 1);
+      page.clickNext();
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalledWith({
+          pathname: ROUTES.dashboard,
+          query: { [QUERIES.fromOnboarding]: "true" },
+        });
+      });
+    });
+
+    it("removes essential question inline error when essential question radio is selected for employment agency industry", async () => {
+      const userData = generateTestUserData({
+        industryId: employmentAgencyIndustryId,
+        ...emptyIndustrySpecificData,
+      });
+      useMockRouter({ isReady: true, query: { page: "2" } });
+      const { page } = renderPage({ userData });
+
+      page.clickNext();
+      expect(screen.getByTestId("step-2")).toBeInTheDocument();
+      expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
+      page.chooseEssentialQuestionRadio(employmentAgencyIndustryId, 1);
+      expect(screen.queryByText(Config.siteWideErrorMessages.errorRadioButton)).not.toBeInTheDocument();
+    });
   });
 
   it("changes url pathname every time a user goes to a different page", async () => {

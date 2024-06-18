@@ -1,0 +1,12 @@
+{
+  "displayname": "employment-agency-permanent",
+  "filename": "employment-agency-permanent",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 8,
+      "licenseTask": "consulting-firm-headhunter-reg",
+      "required": true
+    }
+  ]
+}

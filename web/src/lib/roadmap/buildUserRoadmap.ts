@@ -162,6 +162,30 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     }
   }
 
+  if (profileData.industryId === "employment-agency") {
+    if (profileData.employmentPersonnelServiceType === "JOB_SEEKERS") {
+      addOns.push("employment-agency-job-seekers");
+    }
+
+    if (profileData.employmentPersonnelServiceType === "EMPLOYERS") {
+      switch (profileData.employmentPlacementType) {
+        case "TEMPORARY": {
+          addOns.push("employment-agency-employers-temporary");
+          break;
+        }
+        case "PERMANENT": {
+          addOns.push("employment-agency-employers-permanent");
+          break;
+        }
+        case "BOTH": {
+          addOns.push("employment-agency-employers-permanent");
+          addOns.push("employment-agency-employers-temporary");
+          break;
+        }
+      }
+    }
+  }
+
   if (isInterstateLogisticsApplicable(industryId) && profileData.interstateLogistics) {
     addOns.push("interstate-logistics");
   }

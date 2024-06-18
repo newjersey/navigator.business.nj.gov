@@ -6,7 +6,11 @@ import {
   randomInt,
   ResidentialConstructionType,
 } from "@businessnjgovnavigator/shared";
-import { randomElementFromArray, setMobileViewport } from "../../support/helpers/helpers";
+import {
+  completeEmploymentAgencyOnboarding,
+  randomElementFromArray,
+  setMobileViewport,
+} from "../../support/helpers/helpers";
 import { onOnboardingPageStartingBusiness } from "../../support/page_objects/onboardingPageNew";
 
 const enabledIndustries = Industries.filter((element: Industry) => {
@@ -121,6 +125,8 @@ describe("Onboarding for all industries when starting a business [feature] [all]
             onOnboardingPageStartingBusiness.getResidentialConstructionTypeRadio().should("not.exist");
           }
         }
+
+        completeEmploymentAgencyOnboarding(industry);
 
         onOnboardingPageStartingBusiness.clickShowMyGuide();
         cy.url().should("include", "dashboard");

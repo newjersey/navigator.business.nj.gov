@@ -26,7 +26,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { industryIdsWithRequiredEssentialQuestion } from "@/test/pages/onboarding/helpers-onboarding";
+import { industryIdsWithSingleRequiredEssentialQuestion } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   clickBack,
   clickSave,
@@ -89,7 +89,7 @@ describe("profile-foreign", () => {
     expect(screen.queryByText("Home-based business")).not.toBeInTheDocument();
   });
 
-  it.each(industryIdsWithRequiredEssentialQuestion)(
+  it.each(industryIdsWithSingleRequiredEssentialQuestion)(
     "prevents Foreign Nexus user from saving when %s is selected as industry, but essential question is not answered",
     async (industryId) => {
       const business = generateBusinessForProfile({
@@ -108,6 +108,23 @@ describe("profile-foreign", () => {
       });
     }
   );
+
+  it("prevents Foreign Nexus user from saving when employment agency is selected as industry, but essential question is not answered", async () => {
+    const business = generateBusinessForProfile({
+      onboardingFormProgress: "UNSTARTED",
+      profileData: generateProfileData({
+        businessPersona: "FOREIGN",
+        industryId: "employment-agency",
+        foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+        ...emptyIndustrySpecificData,
+      }),
+    });
+    renderPage({ business });
+    clickSave();
+    await waitFor(() => {
+      expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
+    });
+  });
 
   describe("Nexus Foreign Business", () => {
     const nexusForeignBusinessProfile = ({

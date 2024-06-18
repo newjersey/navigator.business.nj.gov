@@ -9,7 +9,7 @@ import {
   userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
 import {
-  industryIdsWithRequiredEssentialQuestion,
+  industryIdsWithSingleRequiredEssentialQuestion,
   mockEmptyApiSignups,
   renderPage,
   runNonprofitOnboardingTests,
@@ -345,7 +345,7 @@ describe("onboarding - foreign business", () => {
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
 
-    it.each(industryIdsWithRequiredEssentialQuestion)(
+    it.each(industryIdsWithSingleRequiredEssentialQuestion)(
       "prevents user from moving to Step 4 when %s is selected as industry, but essential question is not answered",
       async (industryId) => {
         const userData = generateTestUserData({
@@ -364,7 +364,7 @@ describe("onboarding - foreign business", () => {
       }
     );
 
-    it.each([industryIdsWithRequiredEssentialQuestion])(
+    it.each([industryIdsWithSingleRequiredEssentialQuestion])(
       "allows user to move past Step 3 when you have selected an industry %s and answered the essential question",
       async (industryId) => {
         const userData = generateTestUserData({
@@ -385,7 +385,7 @@ describe("onboarding - foreign business", () => {
       }
     );
 
-    it.each(industryIdsWithRequiredEssentialQuestion)(
+    it.each(industryIdsWithSingleRequiredEssentialQuestion)(
       "removes essential question inline error when essential question radio is selected for %s industry",
       async (industryId) => {
         const userData = generateTestUserData({
@@ -403,6 +403,58 @@ describe("onboarding - foreign business", () => {
         expect(screen.queryByText(Config.siteWideErrorMessages.errorRadioButton)).not.toBeInTheDocument();
       }
     );
+
+    const employmentAgencyIndustryId = "employment-agency";
+
+    it("prevents user from moving to Step 4 when employment agency is selected as industry, but essential question is not answered", async () => {
+      const userData = generateTestUserData({
+        businessPersona: "FOREIGN",
+        foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+        industryId: employmentAgencyIndustryId,
+        ...emptyIndustrySpecificData,
+      });
+      useMockRouter({ isReady: true, query: { page: "3" } });
+      const { page } = renderPage({ userData });
+      page.clickNext();
+      expect(screen.getByTestId("step-3")).toBeInTheDocument();
+      expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
+      expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
+      expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
+    });
+
+    it("allows user to move past Step 3 when you have selected an industry employment agency and answered the essential question", async () => {
+      const userData = generateTestUserData({
+        businessPersona: "FOREIGN",
+        foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+        industryId: employmentAgencyIndustryId,
+        ...emptyIndustrySpecificData,
+      });
+      useMockRouter({ isReady: true, query: { page: "3" } });
+      const { page } = renderPage({ userData });
+
+      page.chooseEssentialQuestionRadio(employmentAgencyIndustryId, 1);
+      page.clickNext();
+
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalledTimes(0);
+      });
+    });
+
+    it("removes essential question inline error when essential question radio is selected for employment agency industry", async () => {
+      const userData = generateTestUserData({
+        businessPersona: "FOREIGN",
+        foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+        industryId: employmentAgencyIndustryId,
+        ...emptyIndustrySpecificData,
+      });
+      useMockRouter({ isReady: true, query: { page: "3" } });
+      const { page } = renderPage({ userData });
+      page.clickNext();
+      expect(screen.getByTestId("step-3")).toBeInTheDocument();
+      expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
+      page.chooseEssentialQuestionRadio(employmentAgencyIndustryId, 1);
+      expect(screen.queryByText(Config.siteWideErrorMessages.errorRadioButton)).not.toBeInTheDocument();
+    });
   });
 
   describe("Nexus - final step", () => {
