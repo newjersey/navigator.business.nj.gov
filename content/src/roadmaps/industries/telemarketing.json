@@ -1,5 +1,5 @@
 {
-  "naicsCodes": "721110, 721191, 721199",
+  "naicsCodes": "561422 ",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -39,23 +39,19 @@
     },
     {
       "step": 3,
-      "weight": 14,
+      "weight": 15,
       "task": "get-insurance"
     }
   ],
-  "name": "Lodging",
-  "nonEssentialQuestionsIds": [
-    "hotel-register",
-    "hotel-food",
-    "hotel-liquor"
-  ],
-  "displayname": "lodging",
+  "name": "Telemarketing",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "telemarketing",
   "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
     "canBeReseller": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "bed and breakfast, hotel, motel, guesthouse, lodge, inn, airbnb host",
-  "id": "lodging",
-  "description": "Provides overnight accommodations to guests and travelers",
-  "webflowId": "662a86cad07b4acada82449d"
+  "additionalSearchTerms": "telemarketer, phone banking, call center",
+  "id": "telemarketing",
+  "description": "A business that contacts potential customers to sell or promote products or services "
 }
