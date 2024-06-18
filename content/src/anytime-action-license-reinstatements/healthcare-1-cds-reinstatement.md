@@ -35,7 +35,7 @@ callToActionLink: "https://www.njconsumeraffairs.gov/dcu/Applications/Reinstate\
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
 
-Your reinstatement application must be signed in front of and by a Notary Public.
+Your reinstatement application must be signed in front of and by a notary public.
 
 :::
 
