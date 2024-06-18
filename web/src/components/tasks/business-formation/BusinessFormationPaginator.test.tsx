@@ -1962,7 +1962,9 @@ describe("<BusinessFormationPaginator />", () => {
             expect(screen.getByRole("alert")).toBeInTheDocument();
 
             page.fillText(fieldLabel as string as string, newTextInput as string);
-            expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+            await waitFor(() => {
+              expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+            });
             expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
             expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
               "COMPLETE-ACTIVE"
