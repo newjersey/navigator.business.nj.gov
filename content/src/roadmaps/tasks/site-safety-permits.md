@@ -17,7 +17,7 @@ callToActionText: ""
 ## Safety Permits
 
 * **Fire protection permits**: Obtain any fire protection or burglar alarm permits from your local fire department
-* ** `Certificate of Occupancy or Approval|certificate-occupancy` **: If you've completed site renovations, it's time to obtain a Certificate of Occupancy or Approval from your local building/construction department
+* **`Certificate of Occupancy or Approval|certificate-occupancy`**: If you've completed site renovations, it's time to obtain a Certificate of Occupancy or Approval from your local building/construction department
 * **`Life Hazard Use|life-hazard-use` or `Non-Life Hazard Use|non-life-hazard-use` registration**: If your business is considered a Life Hazard Use, [register with the state Division of Fire Safety](https://firesolutions.dca.nj.gov/). For Non-Life Hazard Use, register with your `Local Enforcing Agency|lea` , if required to operate. Your Use Type depends on whether your business poses a significant fire hazard
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
