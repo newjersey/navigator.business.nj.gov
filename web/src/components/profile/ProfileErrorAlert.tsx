@@ -15,10 +15,17 @@ export const ProfileErrorAlert = (props: Props): ReactElement | null => {
   const displayProfileErrorAlert = (): boolean => props.fieldErrors.length > 0;
 
   const getLabel = (field: string): string => {
-    return getProfileConfig({
-      config: Config,
-      fieldName: field as ProfileContentField,
-    }).header;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    const formationLabel = Config.formation.fields[field]?.label;
+
+    return (
+      formationLabel ||
+      getProfileConfig({
+        config: Config,
+        fieldName: field as ProfileContentField,
+      }).header
+    );
   };
 
   const errorFieldsIds = (): string[] => {

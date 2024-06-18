@@ -81,17 +81,28 @@ export interface FormationData {
 }
 
 export type FormationBusinessLocationType = "US" | "INTL" | "NJ";
-export interface FormationAddress {
-  readonly addressLine1: string;
-  readonly addressLine2: string;
+export interface FormationAddress extends Address {
   readonly addressCity?: string;
-  readonly addressState?: StateObject;
-  readonly addressMunicipality?: Municipality;
   readonly addressProvince?: string;
-  readonly addressZipCode: string;
   readonly addressCountry: CountriesShortCodes | undefined;
   readonly businessLocationType: FormationBusinessLocationType | undefined;
 }
+
+export interface Address {
+  addressLine1: string;
+  addressLine2: string;
+  addressMunicipality?: Municipality;
+  addressState?: StateObject;
+  addressZipCode: string;
+}
+
+export const emptyAddressData: Address = {
+  addressLine1: "",
+  addressLine2: "",
+  addressMunicipality: undefined,
+  addressState: undefined,
+  addressZipCode: "",
+};
 
 export interface FormationSigner {
   readonly name: string;

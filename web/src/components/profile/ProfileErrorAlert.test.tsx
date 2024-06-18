@@ -37,4 +37,11 @@ describe("<ProfileErrorAlert/>", () => {
       within(profileAlert).getByText(Config.profileDefaults.fields.petCareHousing.default.header)
     ).toBeInTheDocument();
   });
+
+  it("displays formation field label instead of profile field header from config", () => {
+    render(<ProfileErrorAlert fieldErrors={["addressLine1"]} />);
+    const profileAlert = screen.getByTestId("profile-error-alert");
+    expect(profileAlert).toBeInTheDocument();
+    expect(within(profileAlert).getByText(Config.formation.fields.addressLine1.label)).toBeInTheDocument();
+  });
 });

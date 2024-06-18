@@ -9,6 +9,10 @@ import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
 import { FormationFieldErrorState } from "@/lib/types/types";
+import {
+  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
+} from "@/lib/utils/formation-helpers";
 import { templateEval, validateEmail } from "@/lib/utils/helpers";
 import {
   FieldsForErrorHandling,
@@ -51,7 +55,7 @@ export const onlyHasErrorIfUndefined: FormationFields[] = [
   "businessSuffix",
 ];
 
-export const getErrorStateForField = (inputParams: {
+export const getErrorStateForFormationField = (inputParams: {
   field: FieldsForErrorHandling;
   formationFormData: FormationFormData;
   businessNameAvailability?: NameAvailability | undefined;
@@ -295,10 +299,10 @@ export const getErrorStateForField = (inputParams: {
 
   if (field === "addressLine1") {
     if (isForeignUser()) {
-      return fieldWithMaxLength({ required: true, maxLen: 35 });
+      return fieldWithMaxLength({ required: true, maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR });
     }
 
-    const maxLengthError = fieldWithMaxLength({ required: false, maxLen: 35 });
+    const maxLengthError = fieldWithMaxLength({ required: false, maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR });
     const partialAddressError = fieldWithAssociatedFields({
       associatedFields: ["addressMunicipality", "addressZipCode"],
       label: Config.formation.general.partialAddressErrorText,
@@ -339,7 +343,7 @@ export const getErrorStateForField = (inputParams: {
   }
 
   if (field === "addressLine2") {
-    return fieldWithMaxLength({ required: false, maxLen: 35 });
+    return fieldWithMaxLength({ required: false, maxLen: BUSINESS_ADDRESS_LINE_2_MAX_CHAR });
   }
 
   if (field === "agentOfficeAddressLine2") {

@@ -29,3 +29,5 @@ export const shouldDisplayAddressSection = (formationFormData: FormationFormData
     !!getAddressCountry(formationFormData)
   );
 };
+export const BUSINESS_ADDRESS_LINE_1_MAX_CHAR = 35;
+export const BUSINESS_ADDRESS_LINE_2_MAX_CHAR = 35;

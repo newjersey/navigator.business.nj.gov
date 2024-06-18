@@ -51,7 +51,7 @@ import {
   randomInt,
   arrayOfStateObjects as states,
 } from "@businessnjgovnavigator/shared";
-import { OperatingPhase } from "@businessnjgovnavigator/shared/";
+import { Address, OperatingPhase, randomIntFromInterval } from "@businessnjgovnavigator/shared/";
 import { FormationData } from "@businessnjgovnavigator/shared/formationData";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import { randomFilteredIndustry, randomIndustry, randomSector } from "@businessnjgovnavigator/shared/test";
@@ -388,6 +388,17 @@ export const generateActiveUser = (overrides: Partial<ActiveUser>): ActiveUser =
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
     encounteredMyNjLinkingError: false,
+    ...overrides,
+  };
+};
+
+export const generateAddress = (overrides: Partial<Address>): Address => {
+  return {
+    addressLine1: `some-address-1-${randomInt()}`,
+    addressLine2: `some-address-2-${randomInt()}`,
+    addressMunicipality: undefined,
+    addressState: undefined,
+    addressZipCode: `0${randomIntFromInterval("7001", "8999")}`,
     ...overrides,
   };
 };

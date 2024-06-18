@@ -1,8 +1,10 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { ContextualInfo } from "@/contexts/contextualInfoContext";
 import {
+  Address,
   BusinessPersona,
   BusinessUser,
+  emptyAddressData,
   emptyBusinessUser,
   emptyProfileData,
   FieldsForErrorHandling,
@@ -11,7 +13,6 @@ import {
   FormationMember,
   FormationSigner,
   IndustrySpecificData,
-  PaymentType,
   Preferences,
   ProfileData,
   SectionType,
@@ -68,8 +69,6 @@ export const createEmptyTaskDisplayContent = (): TasksDisplayContent => {
   };
 };
 
-export type AllPaymentTypes = { type: PaymentType; displayText: string }[];
-
 export type OnboardingStatus = "SUCCESS" | "ERROR";
 
 export type FormationStepNames = "Name" | "Business" | "Contacts" | "Billing" | "Review";
@@ -88,7 +87,7 @@ export type ProfileContentField = Exclude<
   "businessPersona"
 >;
 
-export type ProfileFields = keyof ProfileData | keyof BusinessUser;
+export type ProfileFields = keyof ProfileData | keyof BusinessUser | keyof Address;
 
 export type FieldErrorType = undefined | unknown;
 
@@ -118,9 +117,15 @@ const allProfileFields = Object.keys(profileFieldsFromConfig) as ProfileFields[]
 
 const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof BusinessUser)[];
 const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
+const formationAddressFields = Object.keys(emptyAddressData) as (keyof Address)[];
 
-export const profileFields: ProfileFields[] = [
-  ...new Set([...allProfileFields, ...onboardingDataFields, ...businessUserDisplayFields]),
+const profileFields: ProfileFields[] = [
+  ...new Set([
+    ...allProfileFields,
+    ...onboardingDataFields,
+    ...businessUserDisplayFields,
+    ...formationAddressFields,
+  ]),
 ] as ProfileFields[];
 
 export const createProfileFieldErrorMap = <FieldError>(): ReducedFieldStates<ProfileFields, FieldError> =>
@@ -570,3 +575,13 @@ export interface PageMetadata {
   deadUrlsTitle: string;
   featureFlagsTitle: string;
 }
+
+export type FieldsForAddressErrorHandling = keyof Address;
+export type AddressFields = keyof Address;
+export type AddressTextField = Exclude<keyof Address, "addressCity" | "addressState">;
+
+export type AddressFieldErrorState = {
+  field: FieldsForAddressErrorHandling;
+  hasError: boolean;
+  label: string;
+};
