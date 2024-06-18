@@ -1,3 +1,16 @@
+# [2024.19.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.18.0...v2024.19.0) (2024-06-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @smithy/node-http-handler to v2.5.0 ([75c5725](https://github.com/newjersey/navigator.business.nj.gov/commit/75c572570561d9e02f4416f469d005ae03928002))
+* **deps:** update dependency simple-oauth2 to v5.0.1 ([ca3100d](https://github.com/newjersey/navigator.business.nj.gov/commit/ca3100d3fd54dea6cdae42a64949719123dcadbe))
+
+
+### Features
+
+* [[#187166154](https://github.com/newjersey/navigator.business.nj.gov/issues/187166154)][[#187166152](https://github.com/newjersey/navigator.business.nj.gov/issues/187166152)] Cypress Out of state None of the Above desktop and mobile Tests ([082aedf](https://github.com/newjersey/navigator.business.nj.gov/commit/082aedfcf93a561e48ec73ba9bb982e593d458f5))
+
 # [2024.18.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.17.0...v2024.18.0) (2024-06-12)
 
 
