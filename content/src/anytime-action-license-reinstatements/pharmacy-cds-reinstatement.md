@@ -32,7 +32,7 @@ summaryDescriptionMd: If your CDS registration has been expired for more than 30
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
 
-Your reinstatement application must be signed in front of and by a Notary Public.
+Your reinstatement application must be signed in front of and by a notary public.
 
 :::
 
