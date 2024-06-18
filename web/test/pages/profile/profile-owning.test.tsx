@@ -149,6 +149,11 @@ describe("profile - owning existing business", () => {
 
     fillText("Business name", "Cool Computers");
     fillText("Date of formation", date.format("MM/YYYY"));
+    fillText("Address line1", "123 main st");
+    fillText("Address line2", "apt 1");
+    selectByText("Address municipality", "Newark");
+    fillText("Address zip code", "08123");
+
     selectByValue("Sector", "clean-energy");
     fillText("Existing employees", "123");
     selectByText("Location", newark.displayName);
@@ -186,6 +191,16 @@ describe("profile - owning existing business", () => {
         notes: "whats appppppp",
         taxPin: "6666",
         sectorId: "clean-energy",
+      },
+      formationData: {
+        ...business.formationData,
+        formationFormData: {
+          ...business.formationData.formationFormData,
+          addressLine1: "123 main st",
+          addressLine2: "apt 1",
+          addressMunicipality: newark,
+          addressZipCode: "08123",
+        },
       },
     });
   });
