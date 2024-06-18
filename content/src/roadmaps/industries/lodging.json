@@ -46,8 +46,7 @@
   "name": "Lodging",
   "nonEssentialQuestionsIds": [
     "hotel-register",
-    "hotel-food",
-    "hotel-liquor"
+    "hotel-food"
   ],
   "displayname": "lodging",
   "industryOnboardingQuestions": {
