@@ -13,9 +13,13 @@ import {
   setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
   LookupOwnershipTypeById,
   LookupSectorTypeById,
   defaultDateFormat,
+  emptyAddressData,
+  generateFormationData,
+  generateFormationFormData,
   generateMunicipality,
   generateProfileData,
   getCurrentDate,
@@ -24,6 +28,10 @@ import {
 import { generateTaxFilingData, randomLegalStructure } from "@businessnjgovnavigator/shared/test";
 
 import analytics from "@/lib/utils/analytics";
+import {
+  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
+} from "@/lib/utils/formation-helpers";
 import {
   chooseRadio,
   chooseTab,
@@ -72,6 +80,13 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 describe("profile - owning existing business", () => {
+  let business: Business;
+  const formationWithUndefinedMunicipality = generateFormationData({
+    formationFormData: generateFormationFormData({
+      addressMunicipality: undefined,
+    }),
+  });
+
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
@@ -80,12 +95,13 @@ describe("profile - owning existing business", () => {
     mockApi.postGetAnnualFilings.mockImplementation((userData) => {
       return Promise.resolve(userData);
     });
+    business = generateBusinessForProfile({
+      profileData: generateProfileData({ businessPersona: "OWNING" }),
+      formationData: formationWithUndefinedMunicipality,
+    });
   });
 
   it("user is able to save and is redirected to dashboard", async () => {
-    const business = generateBusinessForProfile({
-      profileData: generateProfileData({ businessPersona: "OWNING" }),
-    });
     const inputFieldName = getBusinessProfileInputFieldName(business);
 
     renderPage({ business });
@@ -98,9 +114,6 @@ describe("profile - owning existing business", () => {
   });
 
   it("prevents user from going back to dashboard if there are unsaved changes", () => {
-    const business = generateBusinessForProfile({
-      profileData: generateProfileData({ businessPersona: "OWNING" }),
-    });
     const inputFieldName = getBusinessProfileInputFieldName(business);
 
     renderPage({ business });
@@ -110,9 +123,6 @@ describe("profile - owning existing business", () => {
   });
 
   it("returns user to profile page from un-saved changes modal", () => {
-    const business = generateBusinessForProfile({
-      profileData: generateProfileData({ businessPersona: "OWNING" }),
-    });
     const inputFieldName = getBusinessProfileInputFieldName(business);
 
     renderPage({ business });
@@ -131,6 +141,7 @@ describe("profile - owning existing business", () => {
         legalStructureId: randomPublicFilingLegalStructure(),
       }),
       onboardingFormProgress: "COMPLETED",
+      formationData: formationWithUndefinedMunicipality,
     });
     const newark = generateMunicipality({ displayName: "Newark" });
 
@@ -200,6 +211,7 @@ describe("profile - owning existing business", () => {
         sectorId: "clean-energy",
         industryId: "generic",
       }),
+      formationData: formationWithUndefinedMunicipality,
     });
 
     const veteran = LookupOwnershipTypeById("veteran-owned").name;
@@ -224,9 +236,6 @@ describe("profile - owning existing business", () => {
   });
 
   it("shows an error when tax pin input is not empty or is less than 4 digits", async () => {
-    const business = generateBusinessForProfile({
-      profileData: generateProfileData({ businessPersona: "OWNING" }),
-    });
     renderPage({ business });
     chooseTab("numbers");
 
@@ -254,9 +263,6 @@ describe("profile - owning existing business", () => {
   });
 
   it("prevents user from saving if they partially entered Employer Id", async () => {
-    const business = generateBusinessForProfile({
-      profileData: generateProfileData({ businessPersona: "OWNING" }),
-    });
     renderPage({ business });
     chooseTab("numbers");
 
@@ -280,6 +286,7 @@ describe("profile - owning existing business", () => {
         operatingPhase: "UP_AND_RUNNING_OWNING",
         sectorId: "",
       }),
+      formationData: formationWithUndefinedMunicipality,
     });
     renderPage({ business });
     fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
@@ -294,9 +301,6 @@ describe("profile - owning existing business", () => {
   });
 
   it("returns user back to dashboard", async () => {
-    const business = generateBusinessForProfile({
-      profileData: generateProfileData({ businessPersona: "OWNING" }),
-    });
     renderPage({ business });
 
     clickBack();
@@ -306,10 +310,6 @@ describe("profile - owning existing business", () => {
   });
 
   it("returns user to dashboard from un-saved changes modal", async () => {
-    const business = generateBusinessForProfile({
-      profileData: generateProfileData({ businessPersona: "OWNING" }),
-    });
-
     const newark = generateMunicipality({ displayName: "Newark" });
     renderPage({ business, municipalities: [newark] });
     selectByText("Location", newark.displayName);
@@ -324,11 +324,7 @@ describe("profile - owning existing business", () => {
   });
 
   it("displays business info tab", () => {
-    renderPage({
-      business: generateBusinessForProfile({
-        profileData: generateProfileData({ businessPersona: "OWNING" }),
-      }),
-    });
+    renderPage({ business });
     expect(screen.getByTestId("info")).toBeInTheDocument();
   });
 
@@ -338,6 +334,7 @@ describe("profile - owning existing business", () => {
         businessPersona: "OWNING",
         legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
       }),
+      formationData: formationWithUndefinedMunicipality,
     });
     const newark = generateMunicipality({ displayName: "Newark" });
     renderPage({ business: initialBusiness, municipalities: [newark] });
@@ -350,6 +347,7 @@ describe("profile - owning existing business", () => {
         businessPersona: "OWNING",
         legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
       }),
+      formationData: formationWithUndefinedMunicipality,
     });
     const newark = generateMunicipality({ displayName: "Newark" });
     renderPage({ business: initialBusiness, municipalities: [newark] });
@@ -362,6 +360,7 @@ describe("profile - owning existing business", () => {
         businessPersona: "OWNING",
         naicsCode: "123456",
       }),
+      formationData: formationWithUndefinedMunicipality,
     });
     renderPage({ business: initialBusiness });
     chooseTab("numbers");
@@ -375,6 +374,7 @@ describe("profile - owning existing business", () => {
         businessPersona: "OWNING",
         naicsCode: "",
       }),
+      formationData: formationWithUndefinedMunicipality,
     });
     renderPage({ business: initialBusiness });
     chooseTab("numbers");
@@ -392,6 +392,7 @@ describe("profile - owning existing business", () => {
           taxFilingData: generateTaxFilingData({
             state: "SUCCESS",
           }),
+          formationData: formationWithUndefinedMunicipality,
         }),
       });
       expect(screen.getByText("Trenton")).toBeInTheDocument();
@@ -401,11 +402,6 @@ describe("profile - owning existing business", () => {
 
   describe("Document Section", () => {
     it("has no document section", () => {
-      const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          businessPersona: "OWNING",
-        }),
-      });
       renderPage({ business });
       expect(screen.queryByTestId("documents")).not.toBeInTheDocument();
     });
@@ -429,6 +425,7 @@ describe("profile - owning existing business", () => {
           businessPersona: "OWNING",
           legalStructureId: "limited-liability-company",
         }),
+        formationData: formationWithUndefinedMunicipality,
       });
       renderPage({ business });
       expect(screen.queryByTestId("tradeName")).not.toBeInTheDocument();
@@ -485,6 +482,7 @@ describe("profile - owning existing business", () => {
           sectorId: undefined,
           operatingPhase: "UP_AND_RUNNING_OWNING",
         }),
+        formationData: formationWithUndefinedMunicipality,
       });
       renderPage({ business });
       clickSave();
@@ -495,6 +493,258 @@ describe("profile - owning existing business", () => {
       expect(
         within(profileAlert).getByText(Config.profileDefaults.fields.sectorId.default.header)
       ).toBeInTheDocument();
+    });
+
+    describe("address data is initially empty", () => {
+      it("displays alert when address line 1 is filled then blurred", async () => {
+        const business = generateBusinessForProfile({
+          profileData: generateProfileData({
+            industryId: "generic",
+            businessPersona: "OWNING",
+            operatingPhase: "UP_AND_RUNNING_OWNING",
+          }),
+          formationData: generateFormationData({
+            formationFormData: generateFormationFormData({
+              ...emptyAddressData,
+            }),
+          }),
+        });
+        renderPage({ business });
+        fillText("Address line1", "Cool Computers");
+
+        clickSave();
+        const profileAlert = screen.getByTestId("profile-error-alert");
+        await waitFor(() => {
+          expect(profileAlert).toBeInTheDocument();
+        });
+        expect(
+          within(profileAlert).queryByText(Config.formation.fields.addressLine1.label)
+        ).not.toBeInTheDocument();
+        expect(
+          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+        ).not.toBeInTheDocument();
+        expect(within(profileAlert).getByText(Config.formation.fields.addressCity.label)).toBeInTheDocument();
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+        ).toBeInTheDocument();
+      });
+
+      it("displays alert when zip code is filled with valid zip and then blurred", async () => {
+        const business = generateBusinessForProfile({
+          profileData: generateProfileData({
+            industryId: "generic",
+            businessPersona: "OWNING",
+            operatingPhase: "UP_AND_RUNNING_OWNING",
+          }),
+          formationData: generateFormationData({
+            formationFormData: generateFormationFormData({
+              ...emptyAddressData,
+            }),
+          }),
+        });
+        renderPage({ business });
+        fillText("Address zip code", "08123");
+
+        clickSave();
+        const profileAlert = screen.getByTestId("profile-error-alert");
+        await waitFor(() => {
+          expect(profileAlert).toBeInTheDocument();
+        });
+
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+        ).toBeInTheDocument();
+        expect(
+          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+        ).not.toBeInTheDocument();
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+        ).toBeInTheDocument();
+        expect(
+          within(profileAlert).queryByText(Config.formation.fields.addressZipCode.label)
+        ).not.toBeInTheDocument();
+      });
+
+      it("displays alert when zip code is filled with invalid zip and then blurred", async () => {
+        const business = generateBusinessForProfile({
+          profileData: generateProfileData({
+            industryId: "generic",
+            businessPersona: "OWNING",
+            operatingPhase: "UP_AND_RUNNING_OWNING",
+          }),
+          formationData: generateFormationData({
+            formationFormData: generateFormationFormData({
+              ...emptyAddressData,
+            }),
+          }),
+        });
+        renderPage({ business });
+        fillText("Address zip code", "123");
+
+        clickSave();
+        const profileAlert = screen.getByTestId("profile-error-alert");
+        await waitFor(() => {
+          expect(profileAlert).toBeInTheDocument();
+        });
+
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+        ).toBeInTheDocument();
+        expect(
+          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+        ).not.toBeInTheDocument();
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+        ).toBeInTheDocument();
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+        ).toBeInTheDocument();
+      });
+
+      it("displays alert when address city is selected then blurred", async () => {
+        const business = generateBusinessForProfile({
+          profileData: generateProfileData({
+            industryId: "generic",
+            businessPersona: "OWNING",
+            operatingPhase: "UP_AND_RUNNING_OWNING",
+          }),
+          formationData: generateFormationData({
+            formationFormData: generateFormationFormData({
+              ...emptyAddressData,
+            }),
+          }),
+        });
+        renderPage({ business, municipalities: [generateMunicipality({ displayName: "display name" })] });
+
+        selectByText("Address municipality", "display name");
+        expect(screen.getByLabelText("Address municipality")).toHaveValue("display name");
+        fireEvent.blur(screen.getByLabelText("Address municipality"));
+
+        clickSave();
+        const profileAlert = screen.getByTestId("profile-error-alert");
+
+        await waitFor(() => {
+          expect(profileAlert).toBeInTheDocument();
+        });
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+        ).toBeInTheDocument();
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+        ).toBeInTheDocument();
+        expect(
+          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+        ).not.toBeInTheDocument();
+        expect(
+          within(profileAlert).queryByText(Config.formation.fields.addressMunicipality.label)
+        ).not.toBeInTheDocument();
+      });
+
+      it("displays alert when max character limit for business line 1 is reached", async () => {
+        const business = generateBusinessForProfile({
+          profileData: generateProfileData({
+            industryId: "generic",
+            businessPersona: "OWNING",
+            operatingPhase: "UP_AND_RUNNING_OWNING",
+          }),
+          formationData: generateFormationData({
+            formationFormData: generateFormationFormData({
+              ...emptyAddressData,
+            }),
+          }),
+        });
+        renderPage({ business, municipalities: [generateMunicipality({ displayName: "display name" })] });
+        fillText("Address line1", "a".repeat(BUSINESS_ADDRESS_LINE_1_MAX_CHAR + 1));
+
+        clickSave();
+        const profileAlert = screen.getByTestId("profile-error-alert");
+
+        await waitFor(() => {
+          expect(profileAlert).toBeInTheDocument();
+        });
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+        ).toBeInTheDocument();
+        expect(
+          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+        ).not.toBeInTheDocument();
+        expect(within(profileAlert).getByText(Config.formation.fields.addressCity.label)).toBeInTheDocument();
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+        ).toBeInTheDocument();
+      });
+
+      it("displays alert business line 2 is filled then blurred", async () => {
+        const business = generateBusinessForProfile({
+          profileData: generateProfileData({
+            industryId: "generic",
+            businessPersona: "OWNING",
+            operatingPhase: "UP_AND_RUNNING_OWNING",
+          }),
+          formationData: generateFormationData({
+            formationFormData: generateFormationFormData({
+              ...emptyAddressData,
+            }),
+          }),
+        });
+        renderPage({ business, municipalities: [generateMunicipality({ displayName: "display name" })] });
+        fillText("Address line2", "a");
+
+        clickSave();
+        const profileAlert = screen.getByTestId("profile-error-alert");
+
+        await waitFor(() => {
+          expect(profileAlert).toBeInTheDocument();
+        });
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+        ).toBeInTheDocument();
+        expect(
+          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+        ).not.toBeInTheDocument();
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+        ).toBeInTheDocument();
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+        ).toBeInTheDocument();
+      });
+
+      it("displays alert when max character limit for business line 2 is reached", async () => {
+        const business = generateBusinessForProfile({
+          profileData: generateProfileData({
+            industryId: "generic",
+            businessPersona: "OWNING",
+            operatingPhase: "UP_AND_RUNNING_OWNING",
+          }),
+          formationData: generateFormationData({
+            formationFormData: generateFormationFormData({
+              ...emptyAddressData,
+            }),
+          }),
+        });
+        renderPage({ business, municipalities: [generateMunicipality({ displayName: "display name" })] });
+        fillText("Address line2", "a".repeat(BUSINESS_ADDRESS_LINE_2_MAX_CHAR + 1));
+
+        clickSave();
+        const profileAlert = screen.getByTestId("profile-error-alert");
+
+        await waitFor(() => {
+          expect(profileAlert).toBeInTheDocument();
+        });
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+        ).toBeInTheDocument();
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressLine2.label)
+        ).toBeInTheDocument();
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+        ).toBeInTheDocument();
+        expect(
+          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+        ).toBeInTheDocument();
+      });
     });
   });
 

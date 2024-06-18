@@ -3,7 +3,15 @@ import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
-import { Business, generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared";
+import {
+  Business,
+  generateBusiness,
+  generateFormationData,
+  generateFormationFormData,
+  generateMunicipality,
+  generateProfileData,
+  Municipality,
+} from "@businessnjgovnavigator/shared";
 
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
@@ -33,6 +41,7 @@ describe("profile - guest mode", () => {
   });
 
   let initialBusiness: Business;
+  const muni: Municipality = generateMunicipality({});
 
   describe("when prospective business owner", () => {
     beforeEach(() => {
@@ -50,7 +59,12 @@ describe("profile - guest mode", () => {
   describe("when owning a business", () => {
     beforeEach(() => {
       initialBusiness = generateBusiness({
-        profileData: generateProfileData({ businessPersona: "OWNING" }),
+        profileData: generateProfileData({ businessPersona: "OWNING", municipality: muni }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            addressMunicipality: muni,
+          }),
+        }),
       });
     });
 
