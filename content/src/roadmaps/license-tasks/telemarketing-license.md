@@ -1,4 +1,5 @@
 ---
+notesMd: https://docs.google.com/document/d/104QFACWa4lyrqTY56ET-o6ZZ-dfNdssxZ0tdEF8c52E/edit
 id: telemarketing-license
 filename: telemarketing-license
 displayname: telemarketing-license
@@ -11,4 +12,8 @@ industryId:
   - telemarketing
 agencyId: nj-consumer-affairs
 ---
-Application Requirements 
+
+
+- - -
+
+## Application Requirements
