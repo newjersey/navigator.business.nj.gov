@@ -1,0 +1,17 @@
+{
+  "id": "lodging-liquor",
+  "displayname": "lodging-liquor",
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 15,
+      "licenseTask": "",
+      "task": "liquor-license-availability"
+    },
+    {
+      "step": 4,
+      "weight": 20,
+      "task": "town-mercantile-license-liquor"
+    }
+  ]
+}
