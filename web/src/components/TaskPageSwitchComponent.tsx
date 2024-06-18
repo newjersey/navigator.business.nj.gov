@@ -55,6 +55,9 @@ export const TaskPageSwitchComponent = ({
     "landscape-architect-license": (
       <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),
+    "health-club-registration": (
+      <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
+    ),
     "elevator-registration": (
       <ElevatorRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),
