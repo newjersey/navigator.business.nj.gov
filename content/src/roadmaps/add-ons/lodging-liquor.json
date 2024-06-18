@@ -7,11 +7,12 @@
       "weight": 15,
       "licenseTask": "",
       "task": "liquor-license-availability"
-    },
+    }
+  ],
+  "modifications": [
     {
-      "step": 4,
-      "weight": 10,
-      "task": "town-mercantile-license-liquor"
+      "taskToReplaceFilename": "town-mercantile-license",
+      "replaceWithFilename": "town-mercantile-license-liquor"
     }
   ]
 }
