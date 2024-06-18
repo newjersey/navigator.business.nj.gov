@@ -5,6 +5,7 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentBusiness, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import { mockEmptyApiSignups, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
 import {
+  OperatingPhaseId,
   ProfileData,
   createEmptyUserData,
   generateMunicipality,
@@ -36,7 +37,7 @@ const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
     generateBusiness({
       profileData: generateProfileData({
         businessPersona: "OWNING",
-        operatingPhase: "GUEST_MODE_OWNING",
+        operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
         ...overrides,
       }),
       onboardingFormProgress: "UNSTARTED",
@@ -85,7 +86,7 @@ describe("onboarding - owning a business", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          operatingPhase: "GUEST_MODE",
+          operatingPhase: OperatingPhaseId.GUEST_MODE,
         }),
       });
 
@@ -94,7 +95,7 @@ describe("onboarding - owning a business", () => {
       page.chooseRadio("business-persona-starting");
       page.clickNext();
       await waitFor(() => {
-        expect(currentBusiness().profileData.operatingPhase).toBe("GUEST_MODE");
+        expect(currentBusiness().profileData.operatingPhase).toBe(OperatingPhaseId.GUEST_MODE);
       });
     });
 
@@ -147,7 +148,7 @@ describe("onboarding - owning a business", () => {
         legalStructureId: undefined,
         sectorId: "clean-energy",
         industryId: "generic",
-        operatingPhase: "GUEST_MODE_OWNING",
+        operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
       },
       preferences: {
         ...initialBusiness.preferences,

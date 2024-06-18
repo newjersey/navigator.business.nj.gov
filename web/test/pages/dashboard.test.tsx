@@ -11,6 +11,7 @@ import {
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import {
   generateBusiness,
@@ -124,7 +125,7 @@ describe("dashboard page", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "STARTING",
-        operatingPhase: "GUEST_MODE",
+        operatingPhase: OperatingPhaseId.GUEST_MODE,
       }),
       preferences: generatePreferences({
         visibleSidebarCards: [],
@@ -138,7 +139,7 @@ describe("dashboard page", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "FOREIGN",
-        operatingPhase: "GUEST_MODE",
+        operatingPhase: OperatingPhaseId.GUEST_MODE,
       }),
       preferences: generatePreferences({
         visibleSidebarCards: [],
@@ -153,7 +154,7 @@ describe("dashboard page", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "OWNING",
-        operatingPhase: "GUEST_MODE_OWNING",
+        operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
       }),
       preferences: generatePreferences({
         visibleSidebarCards: [],

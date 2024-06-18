@@ -14,7 +14,12 @@ import {
   renderPage,
   runNonprofitOnboardingTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import { ProfileData, emptyIndustrySpecificData, generateProfileData } from "@businessnjgovnavigator/shared/";
+import {
+  OperatingPhaseId,
+  ProfileData,
+  emptyIndustrySpecificData,
+  generateProfileData,
+} from "@businessnjgovnavigator/shared/";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
@@ -234,7 +239,7 @@ describe("onboarding - foreign business", () => {
 
     it("sets operating phase to GUEST_MODE_WITH_BUSINESS_STRUCTURE to prevent prompt", async () => {
       const userData = generateTestUserData({
-        operatingPhase: "GUEST_MODE",
+        operatingPhase: OperatingPhaseId.GUEST_MODE,
         businessPersona: "FOREIGN",
         foreignBusinessTypeIds: ["revenueInNJ"],
       });
@@ -245,7 +250,9 @@ describe("onboarding - foreign business", () => {
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalled();
       });
-      expect(currentBusiness().profileData.operatingPhase).toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
+      expect(currentBusiness().profileData.operatingPhase).toEqual(
+        OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE
+      );
     });
   });
 
@@ -267,7 +274,7 @@ describe("onboarding - foreign business", () => {
 
     it("sets operating phase to GUEST_MODE_WITH_BUSINESS_STRUCTURE to prevent prompt", async () => {
       const userData = generateTestUserData({
-        operatingPhase: "GUEST_MODE",
+        operatingPhase: OperatingPhaseId.GUEST_MODE,
         businessPersona: "FOREIGN",
         foreignBusinessTypeIds: ["employeesInNJ"],
       });
@@ -278,7 +285,9 @@ describe("onboarding - foreign business", () => {
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalled();
       });
-      expect(currentBusiness().profileData.operatingPhase).toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
+      expect(currentBusiness().profileData.operatingPhase).toEqual(
+        OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE
+      );
     });
   });
 
@@ -399,7 +408,7 @@ describe("onboarding - foreign business", () => {
   describe("Nexus - final step", () => {
     it("keeps operating phase set to GUEST_MODE", async () => {
       const userData = generateTestUserData({
-        operatingPhase: "GUEST_MODE",
+        operatingPhase: OperatingPhaseId.GUEST_MODE,
         businessPersona: "FOREIGN",
         foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
       });
@@ -410,7 +419,7 @@ describe("onboarding - foreign business", () => {
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalled();
       });
-      expect(currentBusiness().profileData.operatingPhase).toEqual("GUEST_MODE");
+      expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.GUEST_MODE);
     });
   });
 

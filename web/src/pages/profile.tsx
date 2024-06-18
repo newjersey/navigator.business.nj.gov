@@ -75,6 +75,7 @@ import {
   ForeignBusinessType,
   formationTaskId,
   hasCompletedFormation,
+  isOwningBusiness,
   LookupLegalStructureById,
   LookupOperatingPhaseById,
   Municipality,
@@ -219,6 +220,9 @@ const ProfilePage = (props: Props): ReactElement => {
       }
 
       updateQueue.queueProfileData(profileData);
+      if (isOwningBusiness(business)) {
+        updateQueue.queueFormationFormData(addressData);
+      }
 
       (async (): Promise<void> => {
         updateQueue

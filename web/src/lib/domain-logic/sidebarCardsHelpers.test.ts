@@ -19,7 +19,7 @@ import {
   randomFundingCertification,
 } from "@/test/factories";
 import { Business } from "@businessnjgovnavigator/shared";
-import { ProfileData } from "@businessnjgovnavigator/shared/";
+import { OperatingPhaseId, ProfileData } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,
   generateMunicipality,
@@ -203,7 +203,7 @@ describe("sidebarCard Helpers", () => {
   describe("getForYouCardCount", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
-        operatingPhase: "GUEST_MODE_OWNING",
+        operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
         municipality: undefined,
         sectorId: undefined,
         existingEmployees: "50",

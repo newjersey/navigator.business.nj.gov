@@ -38,7 +38,7 @@ import {
   generateTaxFilingData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
-import { OperatingPhase } from "@businessnjgovnavigator/shared/";
+import { OperatingPhase, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
@@ -433,7 +433,7 @@ describe("<DashboardOnDesktop />", () => {
 
     useMockBusiness({
       profileData: generateProfileData({
-        operatingPhase: "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
+        operatingPhase: OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE,
       }),
       onboardingFormProgress: "COMPLETED",
     });

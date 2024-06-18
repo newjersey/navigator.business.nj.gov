@@ -2,7 +2,7 @@ import { UpdateSidebarCards } from "@domain/types";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { getFieldsForProfile, isFieldAnswered } from "@shared/domain-logic/opportunityFields";
 import { SIDEBAR_CARDS } from "@shared/domain-logic/sidebarCards";
-import { LookupOperatingPhaseById } from "@shared/operatingPhase";
+import { LookupOperatingPhaseById, OperatingPhaseId } from "@shared/operatingPhase";
 import { modifyCurrentBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";
 
@@ -25,21 +25,24 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
     cards = [...allCardsExceptIdToHide];
   };
 
-  if (operatingPhase !== "GUEST_MODE" && cards.includes(SIDEBAR_CARDS.notRegistered)) {
+  if (operatingPhase !== OperatingPhaseId.GUEST_MODE && cards.includes(SIDEBAR_CARDS.notRegistered)) {
     hideCard(SIDEBAR_CARDS.notRegistered);
   }
 
-  if (operatingPhase !== "GUEST_MODE" && cards.includes(SIDEBAR_CARDS.notRegisteredUpAndRunning)) {
+  if (
+    operatingPhase !== OperatingPhaseId.GUEST_MODE &&
+    cards.includes(SIDEBAR_CARDS.notRegisteredUpAndRunning)
+  ) {
     hideCard(SIDEBAR_CARDS.notRegisteredUpAndRunning);
   }
 
-  if (operatingPhase === "NEEDS_TO_FORM") {
+  if (operatingPhase === OperatingPhaseId.NEEDS_TO_FORM) {
     showCard(SIDEBAR_CARDS.formationNudge);
   } else {
     hideCard(SIDEBAR_CARDS.formationNudge);
   }
 
-  if (operatingPhase === "FORMED") {
+  if (operatingPhase === OperatingPhaseId.FORMED) {
     showCard(SIDEBAR_CARDS.fundingNudge);
   } else {
     hideCard(SIDEBAR_CARDS.fundingNudge);

@@ -16,7 +16,11 @@ import {
   mockSuccessfulApiSignups,
   renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import { createEmptyProfileData, generateProfileData } from "@businessnjgovnavigator/shared/";
+import {
+  OperatingPhaseId,
+  createEmptyProfileData,
+  generateProfileData,
+} from "@businessnjgovnavigator/shared/";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
@@ -197,7 +201,7 @@ describe("onboarding - shared", () => {
       employerId: undefined,
       taxId: undefined,
       notes: "",
-      operatingPhase: "GUEST_MODE_OWNING",
+      operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
     });
   });
 

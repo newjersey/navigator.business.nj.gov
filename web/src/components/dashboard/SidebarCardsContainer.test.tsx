@@ -17,6 +17,7 @@ import {
   setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
 import { Business, generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { generatePreferences, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -127,7 +128,7 @@ describe("<SidebarCardsContainer />", () => {
     it("shows the certification cards if the business is formed", () => {
       useMockBusiness({
         profileData: generateProfileData({
-          operatingPhase: "FORMED",
+          operatingPhase: OperatingPhaseId.FORMED,
           ownershipTypeIds: ["disabled-veteran", "minority-owned"],
         }),
       });
@@ -152,7 +153,7 @@ describe("<SidebarCardsContainer />", () => {
     it("doesn't show the certification cards if the business is not formed", () => {
       useMockBusiness({
         profileData: generateProfileData({
-          operatingPhase: "NEEDS_TO_FORM",
+          operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
           ownershipTypeIds: ["disabled-veteran", "minority-owned"],
         }),
       });
@@ -177,7 +178,7 @@ describe("<SidebarCardsContainer />", () => {
     it("displays certifications filtered from user data", () => {
       useMockBusiness({
         profileData: generateProfileData({
-          operatingPhase: "FORMED",
+          operatingPhase: OperatingPhaseId.FORMED,
           ownershipTypeIds: ["disabled-veteran"],
         }),
       });
@@ -212,7 +213,7 @@ describe("<SidebarCardsContainer />", () => {
           municipality: undefined,
           existingEmployees: "1",
           sectorId: "construction",
-          operatingPhase: "UP_AND_RUNNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
         }),
       });
 
@@ -245,7 +246,7 @@ describe("<SidebarCardsContainer />", () => {
           municipality: undefined,
           existingEmployees: "1",
           sectorId: "construction",
-          operatingPhase: "FORMED",
+          operatingPhase: OperatingPhaseId.FORMED,
         }),
       });
 
@@ -271,7 +272,7 @@ describe("<SidebarCardsContainer />", () => {
     it("displays link to learn more about fundings when user is UP_AND_RUNNING", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
-          operatingPhase: "UP_AND_RUNNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
         }),
       });
       renderWithBusiness(business, { fundings: [] });
@@ -283,7 +284,7 @@ describe("<SidebarCardsContainer />", () => {
     it("does not display link to learn more about fundings when user is not UP_AND_RUNNING", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
-          operatingPhase: "FORMED",
+          operatingPhase: OperatingPhaseId.FORMED,
         }),
       });
       renderWithBusiness(business, { fundings: [] });
@@ -367,7 +368,7 @@ describe("<SidebarCardsContainer />", () => {
     it("only counts hidden certifications before fundings are unlocked", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
-          operatingPhase: "FORMED",
+          operatingPhase: OperatingPhaseId.FORMED,
         }),
         preferences: generatePreferences({
           hiddenCertificationIds: ["cert1-id"],
@@ -384,7 +385,7 @@ describe("<SidebarCardsContainer />", () => {
     it("counts both hidden fundings and certifications after fundings are unlocked", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
-          operatingPhase: "UP_AND_RUNNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
         }),
         preferences: generatePreferences({
           hiddenCertificationIds: ["cert1-id"],

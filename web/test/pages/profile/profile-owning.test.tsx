@@ -51,6 +51,7 @@ import {
   selectByText,
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 const date = getCurrentDate().subtract(1, "month").date(1);
@@ -149,6 +150,11 @@ describe("profile - owning existing business", () => {
 
     fillText("Business name", "Cool Computers");
     fillText("Date of formation", date.format("MM/YYYY"));
+    fillText("Address line1", "123 main st");
+    fillText("Address line2", "apt 1");
+    selectByText("Address municipality", "Newark");
+    fillText("Address zip code", "08123");
+
     selectByValue("Sector", "clean-energy");
     fillText("Existing employees", "123");
     selectByText("Location", newark.displayName);
@@ -186,6 +192,16 @@ describe("profile - owning existing business", () => {
         notes: "whats appppppp",
         taxPin: "6666",
         sectorId: "clean-energy",
+      },
+      formationData: {
+        ...business.formationData,
+        formationFormData: {
+          ...business.formationData.formationFormData,
+          addressLine1: "123 main st",
+          addressLine2: "apt 1",
+          addressMunicipality: newark,
+          addressZipCode: "08123",
+        },
       },
     });
   });
@@ -283,7 +299,7 @@ describe("profile - owning existing business", () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
         businessPersona: "OWNING",
-        operatingPhase: "UP_AND_RUNNING_OWNING",
+        operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
         sectorId: "",
       }),
       formationData: formationWithUndefinedMunicipality,
@@ -480,7 +496,7 @@ describe("profile - owning existing business", () => {
           industryId: "generic",
           businessPersona: "OWNING",
           sectorId: undefined,
-          operatingPhase: "UP_AND_RUNNING_OWNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
         }),
         formationData: formationWithUndefinedMunicipality,
       });
@@ -501,7 +517,7 @@ describe("profile - owning existing business", () => {
           profileData: generateProfileData({
             industryId: "generic",
             businessPersona: "OWNING",
-            operatingPhase: "UP_AND_RUNNING_OWNING",
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
@@ -534,7 +550,7 @@ describe("profile - owning existing business", () => {
           profileData: generateProfileData({
             industryId: "generic",
             businessPersona: "OWNING",
-            operatingPhase: "UP_AND_RUNNING_OWNING",
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
@@ -570,7 +586,7 @@ describe("profile - owning existing business", () => {
           profileData: generateProfileData({
             industryId: "generic",
             businessPersona: "OWNING",
-            operatingPhase: "UP_AND_RUNNING_OWNING",
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
@@ -606,7 +622,7 @@ describe("profile - owning existing business", () => {
           profileData: generateProfileData({
             industryId: "generic",
             businessPersona: "OWNING",
-            operatingPhase: "UP_AND_RUNNING_OWNING",
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
@@ -645,7 +661,7 @@ describe("profile - owning existing business", () => {
           profileData: generateProfileData({
             industryId: "generic",
             businessPersona: "OWNING",
-            operatingPhase: "UP_AND_RUNNING_OWNING",
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
@@ -679,7 +695,7 @@ describe("profile - owning existing business", () => {
           profileData: generateProfileData({
             industryId: "generic",
             businessPersona: "OWNING",
-            operatingPhase: "UP_AND_RUNNING_OWNING",
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
@@ -715,7 +731,7 @@ describe("profile - owning existing business", () => {
           profileData: generateProfileData({
             industryId: "generic",
             businessPersona: "OWNING",
-            operatingPhase: "UP_AND_RUNNING_OWNING",
+            operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({

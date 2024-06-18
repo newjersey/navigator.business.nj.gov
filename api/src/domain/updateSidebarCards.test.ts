@@ -20,7 +20,7 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_FORM",
+            operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
           }),
           preferences: generatePreferences({
             visibleSidebarCards: [notRegistered],
@@ -39,7 +39,7 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_FORM",
+            operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
           }),
           preferences: generatePreferences({
             visibleSidebarCards: [notRegisteredUpAndRunning],
@@ -58,7 +58,7 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_FORM",
+            operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
           }),
           preferences: generatePreferences({
             visibleSidebarCards: ["other-card", notRegistered],
@@ -78,7 +78,7 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_FORM",
+            operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
           }),
           preferences: generatePreferences({
             visibleSidebarCards: ["other-card", notRegisteredUpAndRunning],
@@ -103,7 +103,7 @@ describe("updateRoadmapSidebarCards", () => {
           taskProgress: { [taskId]: "NOT_STARTED" },
 
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_FORM",
+            operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
           }),
           preferences: generatePreferences({ visibleSidebarCards: [] }),
         })
@@ -114,14 +114,14 @@ describe("updateRoadmapSidebarCards", () => {
     });
 
     const operatingPhasesWithNoFormationNudge = [
-      "GUEST_MODE",
-      "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
-      "GUEST_MODE_OWNING",
-      "NEEDS_BUSINESS_STRUCTURE",
-      "FORMED",
-      "UP_AND_RUNNING",
-      "UP_AND_RUNNING_OWNING",
-      "REMOTE_SELLER_WORKER",
+      OperatingPhaseId.GUEST_MODE,
+      OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE,
+      OperatingPhaseId.GUEST_MODE_OWNING,
+      OperatingPhaseId.NEEDS_BUSINESS_STRUCTURE,
+      OperatingPhaseId.FORMED,
+      OperatingPhaseId.UP_AND_RUNNING,
+      OperatingPhaseId.UP_AND_RUNNING_OWNING,
+      OperatingPhaseId.REMOTE_SELLER_WORKER,
     ];
 
     it.each(operatingPhasesWithNoFormationNudge)(
@@ -149,7 +149,7 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "FORMED",
+            operatingPhase: OperatingPhaseId.FORMED,
           }),
           preferences: generatePreferences({ visibleSidebarCards: [] }),
         })
@@ -165,7 +165,7 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_FORM",
+            operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
           }),
           preferences: generatePreferences({ visibleSidebarCards: [fundingNudge] }),
         })

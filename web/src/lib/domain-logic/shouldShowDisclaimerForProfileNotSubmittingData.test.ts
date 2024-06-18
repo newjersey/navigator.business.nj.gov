@@ -7,6 +7,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 
 const nonOwningPersonas: BusinessPersona[] = ["STARTING", "FOREIGN"];
 
@@ -93,7 +94,7 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
         profileData: generateProfileData({
           dateOfFormation: "2020-8-8",
           businessPersona: persona as BusinessPersona,
-          operatingPhase: "UP_AND_RUNNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
         }),
       });
       expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(false);
@@ -108,7 +109,7 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
       profileData: generateProfileData({
         dateOfFormation: undefined,
         businessPersona: persona as BusinessPersona,
-        operatingPhase: "FORMED",
+        operatingPhase: OperatingPhaseId.FORMED,
       }),
     });
     expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(false);

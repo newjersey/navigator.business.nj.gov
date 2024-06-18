@@ -23,6 +23,7 @@ import {
   LicenseStatusResult,
 } from "../license";
 import { MunicipalityDetail } from "../municipality";
+import { OperatingPhaseId } from "../operatingPhase";
 import { IndustrySpecificData, ProfileData } from "../profileData";
 import { SectorType, arrayOfSectors } from "../sector";
 import { TaxFilingCalendarEvent, TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
@@ -276,7 +277,7 @@ export const generateProfileData = (
     foreignBusinessTypeIds: [],
     nexusDbaName: "",
     needsNexusDbaName: false,
-    operatingPhase: "NEEDS_TO_FORM",
+    operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
     isNonprofitOnboardingRadio: legalStructure === "nonprofit",
     nonEssentialRadioAnswers: {},
     elevatorOwningBusiness: undefined,

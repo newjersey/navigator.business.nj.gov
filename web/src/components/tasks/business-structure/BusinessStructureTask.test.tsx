@@ -11,6 +11,7 @@ import {
   triggerQueueUpdate,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import {
   generateBusiness,
@@ -196,13 +197,18 @@ describe("<BusinessStructureTask />", () => {
 
   it("updates operating phase from GUEST_MODE to GUEST_MODE_WITH_BUSINESS_STRUCTURE when business structure is saved", async () => {
     const business = generateBusiness({
-      profileData: generateProfileData({ legalStructureId: undefined, operatingPhase: "GUEST_MODE" }),
+      profileData: generateProfileData({
+        legalStructureId: undefined,
+        operatingPhase: OperatingPhaseId.GUEST_MODE,
+      }),
     });
     renderTask(business);
     fireEvent.click(screen.getByLabelText("limited-liability-company"));
     fireEvent.click(screen.getByText(Config.businessStructureTask.saveButton));
     await waitFor(() => {
-      expect(currentBusiness().profileData.operatingPhase).toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
+      expect(currentBusiness().profileData.operatingPhase).toEqual(
+        OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE
+      );
     });
   });
 
@@ -210,7 +216,7 @@ describe("<BusinessStructureTask />", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         legalStructureId: undefined,
-        operatingPhase: "NEEDS_BUSINESS_STRUCTURE",
+        operatingPhase: OperatingPhaseId.NEEDS_BUSINESS_STRUCTURE,
       }),
     });
     renderTask(business);
@@ -219,7 +225,9 @@ describe("<BusinessStructureTask />", () => {
     await waitFor(() => {
       expect(currentBusiness().profileData.operatingPhase).toBeDefined();
     });
-    expect(currentBusiness().profileData.operatingPhase).not.toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
+    expect(currentBusiness().profileData.operatingPhase).not.toEqual(
+      OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE
+    );
   });
 
   it("updates task progress to in-progress when business structure radio is selected", async () => {
@@ -284,7 +292,7 @@ describe("<BusinessStructureTask />", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         legalStructureId: legalStructure.id,
-        operatingPhase: "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
+        operatingPhase: OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE,
       }),
       taskProgress: { [taskId]: "COMPLETED" },
     });
