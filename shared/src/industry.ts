@@ -33,6 +33,7 @@ interface IndustryOnboardingQuestions {
   readonly isPetCareHousingApplicable?: boolean;
   readonly isCannabisLicenseTypeApplicable?: boolean;
   readonly isConstructionTypeApplicable?: boolean;
+  readonly isEmploymentAndPersonnelTypeApplicable?: boolean;
 }
 
 export interface AddOn {

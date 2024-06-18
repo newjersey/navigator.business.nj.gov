@@ -11,8 +11,8 @@ import {
   setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
 import {
-  industriesWithEssentialQuestion,
   industriesWithOutEssentialQuestion,
+  industriesWithSingleEssentialQuestion,
   mockSuccessfulApiSignups,
   renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
@@ -114,7 +114,7 @@ describe("onboarding - shared", () => {
   });
 
   it("routes to the onboarding industry page when industry WITH essential question is set by using industry query string", async () => {
-    const industry = randomElementFromArray(industriesWithEssentialQuestion).id;
+    const industry = randomElementFromArray(industriesWithSingleEssentialQuestion).id;
     useMockRouter({ isReady: true, query: { industry } });
     const { page } = renderPage({});
     expect(screen.getByTestId("step-2")).toBeInTheDocument();

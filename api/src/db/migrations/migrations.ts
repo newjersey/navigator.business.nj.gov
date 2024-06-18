@@ -40,6 +40,7 @@ import { migrate_v132_to_v133 } from "@db/migrations/v133_change_agent_office_ad
 import { migrate_v133_to_v134 } from "@db/migrations/v134_added_planned_renovation_question_field";
 import { migrate_v134_to_v135 } from "@db/migrations/v135_use_interstate_logistics_and_transport_fields";
 import { migrate_v135_to_v136 } from "@db/migrations/v136_add_user_account_creation_source";
+import { migrate_v136_to_v137 } from "@db/migrations/v137_add_employment_placement_personal_types";
 import { migrate_v12_to_v13 } from "@db/migrations/v13_add_construction_renovation_plan";
 import { migrate_v13_to_v14 } from "@db/migrations/v14_add_cleaning_aid_industry";
 import { migrate_v14_to_v15 } from "@db/migrations/v15_add_retail_industry";
@@ -276,4 +277,5 @@ export const Migrations: MigrationFunction[] = [
   migrate_v133_to_v134,
   migrate_v134_to_v135,
   migrate_v135_to_v136,
+  migrate_v136_to_v137,
 ];

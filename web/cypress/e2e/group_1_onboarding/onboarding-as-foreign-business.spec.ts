@@ -1,18 +1,22 @@
 import {
-  carServiceOptions,
-  CarServiceType,
-  Industries,
-  Industry,
-  randomInt,
-  ResidentialConstructionType,
-} from "@businessnjgovnavigator/shared";
-import { randomElementFromArray, setMobileViewport } from "../../support/helpers/helpers";
-import {
   onOnboardingPageNexusBusiness,
   onOnboardingPageNoneOfTheAbove,
   onOnboardingPageRemoteSellerBusiness,
   onOnboardingPageRemoteWorkerBusiness,
-} from "../../support/page_objects/onboardingPageNew";
+} from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
+import {
+  CarServiceType,
+  Industries,
+  Industry,
+  ResidentialConstructionType,
+  carServiceOptions,
+  randomInt,
+} from "@businessnjgovnavigator/shared";
+import {
+  completeEmploymentAgencyOnboarding,
+  randomElementFromArray,
+  setMobileViewport,
+} from "../../support/helpers/helpers";
 
 const enabledIndustries = Industries.filter((element: Industry) => {
   return element.isEnabled;
@@ -127,6 +131,8 @@ describe("Onboarding for all industries when out of state nexus business [featur
             onOnboardingPageNexusBusiness.getResidentialConstructionTypeRadio().should("not.exist");
           }
         }
+
+        completeEmploymentAgencyOnboarding(industry);
 
         onOnboardingPageNexusBusiness.clickShowMyGuide();
         cy.url().should("include", "dashboard");

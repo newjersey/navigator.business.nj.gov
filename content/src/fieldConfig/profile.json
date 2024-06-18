@@ -215,8 +215,25 @@
       },
       "employmentAgency": {
         "default": {
-          "header": "",
+          "header": "Employment and Personnel Services Type",
           "description": "Learn about other `employment and personnel industries|employment-agency-types` ."
+        }
+      },
+      "employmentPersonnelServiceType": {
+        "default": {
+          "header": "Employment and Personnel Services Type",
+          "radioButtonJobSeekersText": "Job Seekers",
+          "radioButtonEmployersText": "Employers",
+          "description": "Who will you charge for your services?"
+        }
+      },
+      "employmentPlacementType": {
+        "default": {
+          "header": "",
+          "radioButtonTemporaryText": "Temporary",
+          "radioButtonPermanentText": "Permanent",
+          "radioButtonBothText": "Both",
+          "description": "Is the placement temporary or permanent?"
         }
       },
       "cannabisLicenseType": {

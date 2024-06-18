@@ -1,0 +1,12 @@
+{
+  "displayname": "employment-agency-temporary",
+  "filename": "employment-agency-temporary",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 11,
+      "licenseTask": "temporary-help-service-firm-reg",
+      "required": true
+    }
+  ]
+}

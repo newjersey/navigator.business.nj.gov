@@ -46,42 +46,6 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
-    },
-    {
-      "step": 4,
-      "weight": 10,
-      "licenseTask": "search-licenses-employment-agency",
-      "required": true
-    },
-    {
-      "licenseTask": "career-consultant-agency-reg",
-      "step": 4,
-      "weight": 9
-    },
-    {
-      "step": 4,
-      "licenseTask": "career-counseling-firm-reg",
-      "weight": 9
-    },
-    {
-      "step": 4,
-      "licenseTask": "consulting-firm-headhunter-reg",
-      "weight": 8
-    },
-    {
-      "step": 4,
-      "licenseTask": "entertainment-agency-reg",
-      "weight": 11
-    },
-    {
-      "step": 4,
-      "weight": 10,
-      "licenseTask": "job-listing-service-reg"
-    },
-    {
-      "step": 4,
-      "weight": 11,
-      "licenseTask": "temporary-help-service-firm-reg"
     }
   ],
   "name": "Employment Agency",
@@ -89,7 +53,8 @@
   "displayname": "employment-agency",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": true,
+    "isEmploymentAndPersonnelTypeApplicable": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "employment office,employment services,temporary agency,employment recruiter,employment center",

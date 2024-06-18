@@ -75,6 +75,8 @@ export const ApiFormationHealth: UserData = {
         willSellPetCareItems: false,
         constructionType: undefined,
         residentialConstructionType: undefined,
+        employmentPersonnelServiceType: "JOB_SEEKERS",
+        employmentPlacementType: undefined,
         businessPersona: "FOREIGN",
         businessName: "some-business-name-17681628",
         responsibleOwnerName: "some-responsible-owner-name-69779144",

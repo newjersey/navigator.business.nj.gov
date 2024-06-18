@@ -165,4 +165,18 @@ export const EssentialQuestions: EssentialQuestion[] = [
     },
     fieldName: "residentialConstructionType",
   }),
+  new EssentialQuestion({
+    shouldBeResetWhenIndustryChanges: true,
+    isQuestionApplicableToIndustry: (industry): boolean => {
+      return !!industry.industryOnboardingQuestions.isEmploymentAndPersonnelTypeApplicable;
+    },
+    fieldName: "employmentPersonnelServiceType",
+  }),
+  new EssentialQuestion({
+    shouldBeResetWhenIndustryChanges: true,
+    isQuestionApplicableToIndustry: (industry): boolean => {
+      return !!industry.industryOnboardingQuestions.isEmploymentAndPersonnelTypeApplicable;
+    },
+    fieldName: "employmentPlacementType",
+  }),
 ];

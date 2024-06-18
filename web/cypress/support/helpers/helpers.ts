@@ -1,5 +1,13 @@
 import { onBusinessStructurePage } from "@businessnjgovnavigator/cypress/support/page_objects/businessStructurePage";
-import { allFormationLegalTypes, FormationLegalType, LegalStructures } from "@businessnjgovnavigator/shared";
+import { onOnboardingPageStartingBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
+import {
+  allFormationLegalTypes,
+  EmploymentPlacementType,
+  FormationLegalType,
+  Industry,
+  LegalStructures,
+  randomInt,
+} from "@businessnjgovnavigator/shared";
 import { LighthouseConfig, Pa11yThresholds } from "../types";
 
 /* eslint-disable cypress/no-unnecessary-waiting */
@@ -64,4 +72,28 @@ export const clickDeferredSaveButton = () => {
 //Cypress Mobile Viewport
 export const setMobileViewport = () => {
   cy.viewport(375, 667);
+};
+
+export const completeEmploymentAgencyOnboarding = (industry: Industry) => {
+  if (industry.industryOnboardingQuestions.isEmploymentAndPersonnelTypeApplicable === undefined) {
+    onOnboardingPageStartingBusiness.getEmploymentAndPersonnelServicesTypeItemsRadio().should("not.exist");
+  } else {
+    const employmentAndPersonnelServicesType = randomInt() % 2 ? "EMPLOYERS" : "JOB_SEEKERS";
+    onOnboardingPageStartingBusiness.selectEmploymentAndPersonnelServicesType(
+      employmentAndPersonnelServicesType
+    );
+    onOnboardingPageStartingBusiness
+      .getEmploymentAndPersonnelServicesTypeItemsRadio(employmentAndPersonnelServicesType)
+      .should("be.checked");
+    if (employmentAndPersonnelServicesType === "EMPLOYERS") {
+      const employmentPlacementChoices = ["TEMPORARY", "PERMANENT", "BOTH"] as EmploymentPlacementType[];
+      const randomAnswerIndex = Math.floor(Math.random() * 3);
+      const employmentPlacementTypeOption = employmentPlacementChoices[randomAnswerIndex];
+
+      onOnboardingPageStartingBusiness.selectEmploymentPlacementTypeRadio(employmentPlacementTypeOption);
+      onOnboardingPageStartingBusiness
+        .getEmploymentPlacementTypeItemsRadio(employmentPlacementTypeOption)
+        .should("be.checked");
+    }
+  }
 };

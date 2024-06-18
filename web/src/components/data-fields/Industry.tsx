@@ -46,6 +46,8 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
           state.profileData.constructionType === "BOTH" ||
           state.profileData.constructionType === "RESIDENTIAL"
         );
+      case "employmentPlacementType":
+        return state.profileData.employmentPersonnelServiceType === "EMPLOYERS";
       default:
         return true;
     }

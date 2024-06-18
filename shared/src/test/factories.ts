@@ -236,6 +236,8 @@ export const generateIndustrySpecificData = (
       "HOME_RENOVATIONS",
       "BOTH",
     ]),
+    employmentPersonnelServiceType: randomElementFromArray(["JOB_SEEKERS", "EMPLOYERS"]),
+    employmentPlacementType: randomElementFromArray(["TEMPORARY", "PERMANENT", "BOTH"]),
     ...overrides,
   };
 };

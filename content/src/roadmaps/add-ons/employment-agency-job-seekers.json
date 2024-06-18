@@ -1,0 +1,12 @@
+{
+  "displayname": "employment-agency-job-seekers",
+  "filename": "employment-agency-job-seekers",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 1,
+      "licenseTask": "search-licenses-employment-agency",
+      "required": true
+    }
+  ]
+}

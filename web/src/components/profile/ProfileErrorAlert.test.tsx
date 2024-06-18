@@ -38,6 +38,26 @@ describe("<ProfileErrorAlert/>", () => {
     ).toBeInTheDocument();
   });
 
+  it("displays the constructionType header when residentialConstructionType has an error", () => {
+    render(<ProfileErrorAlert fieldErrors={["residentialConstructionType"]} />);
+    const profileAlert = screen.getByTestId("profile-error-alert");
+    expect(profileAlert).toBeInTheDocument();
+    expect(
+      within(profileAlert).getByText(Config.profileDefaults.fields.constructionType.default.header)
+    ).toBeInTheDocument();
+  });
+
+  it("displays the employmentPersonnelServiceType header when employmentPlacementType has an error", () => {
+    render(<ProfileErrorAlert fieldErrors={["employmentPlacementType"]} />);
+    const profileAlert = screen.getByTestId("profile-error-alert");
+    expect(profileAlert).toBeInTheDocument();
+    expect(
+      within(profileAlert).getByText(
+        Config.profileDefaults.fields.employmentPersonnelServiceType.default.header
+      )
+    ).toBeInTheDocument();
+  });
+
   it("displays formation field label instead of profile field header from config", () => {
     render(<ProfileErrorAlert fieldErrors={["addressLine1"]} />);
     const profileAlert = screen.getByTestId("profile-error-alert");
