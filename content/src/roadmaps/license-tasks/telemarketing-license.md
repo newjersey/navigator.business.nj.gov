@@ -1,6 +1,6 @@
 ---
 notesMd: >-
-  Draft:\
+  Draft:
 
   https://docs.google.com/document/d/104QFACWa4lyrqTY56ET-o6ZZ-dfNdssxZ0tdEF8c52E/edit
 id: telemarketing-license
