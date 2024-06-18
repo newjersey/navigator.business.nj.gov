@@ -24,6 +24,11 @@
       "id": "carnival-fire-licenses",
       "questionText": "Do you plan to own and/or operate a traveling carnival or circus?",
       "addOn": "entertainment-carnival-fire-licenses"
+    },
+    {
+      "id": "hotel-food",
+      "questionText": "Do you plan to serve food?",
+      "addOn": "lodging-food"
     }
   ]
 }
