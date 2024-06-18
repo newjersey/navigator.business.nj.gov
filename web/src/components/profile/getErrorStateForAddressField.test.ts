@@ -30,7 +30,7 @@ describe("getErrorStateForAddressField", () => {
         }).label
       ).toEqual(
         templateEval(Config.formation.general.maximumLengthErrorText, {
-          field: Config.formation.fields.addressLine1.error,
+          field: Config.formation.fields.addressLine1.label,
           maxLen: String(BUSINESS_ADDRESS_LINE_1_MAX_CHAR),
         })
       );
@@ -67,7 +67,7 @@ describe("getErrorStateForAddressField", () => {
         }).label
       ).toEqual(
         templateEval(Config.formation.general.maximumLengthErrorText, {
-          field: Config.formation.fields.addressLine2.error,
+          field: Config.formation.fields.addressLine2.label,
           maxLen: String(BUSINESS_ADDRESS_LINE_1_MAX_CHAR),
         })
       );
