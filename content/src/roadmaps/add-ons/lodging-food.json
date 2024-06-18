@@ -1,0 +1,17 @@
+{
+  "id": "lodging-food",
+  "displayname": "lodging-food",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 1,
+      "licenseTask": "food-safety-course"
+    },
+    {
+      "step": 4,
+      "weight": 2,
+      "task": "floor-plan-approval-doh",
+      "licenseTask": ""
+    }
+  ]
+}
