@@ -1,3 +1,5 @@
+import { inputManipulator } from "@domain/inputManipulator";
+import { LicenseStatusClient, NO_MATCH_ERROR, SearchLicenseStatus } from "@domain/types";
 import { getLicenseDate, parseDateWithFormat } from "@shared/dateHelpers";
 import {
   LicenseSearchNameAndAddress,
@@ -5,8 +7,6 @@ import {
   LicenseStatusItem,
   LicenseStatusResult,
 } from "@shared/license";
-import { inputManipulator } from "../domain/inputManipulator";
-import { LicenseStatusClient, NO_MATCH_ERROR, SearchLicenseStatus } from "../domain/types";
 
 export const WebserviceLicenseStatusProcessorClient = (
   licenseStatusClient: LicenseStatusClient

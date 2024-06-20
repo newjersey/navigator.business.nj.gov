@@ -1,7 +1,7 @@
+import { ChecklistItemsClient } from "@client/dynamics/license-status/types";
 import { LogWriterType } from "@libs/logWriter";
 import { CheckoffStatus, LicenseStatusItem } from "@shared/license";
 import axios, { AxiosError } from "axios";
-import { ChecklistItemsClient } from "./types";
 
 export const DynamicsChecklistItemsClient = (
   logWriter: LogWriterType,

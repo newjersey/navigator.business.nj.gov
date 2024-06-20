@@ -1,13 +1,13 @@
-import { NO_MAIN_APPS_ERROR } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
-import { LicenseStatus } from "@shared/license";
-import axios, { AxiosError } from "axios";
 import {
   ACTIVE_STATECODE,
   LicenseApplicationIdClient,
   LicenseApplicationIdResponse,
   MAIN_APP_END_DIGITS,
-} from "./types";
+} from "@client/dynamics/license-status/types";
+import { NO_MAIN_APPS_ERROR } from "@domain/types";
+import { LogWriterType } from "@libs/logWriter";
+import { LicenseStatus } from "@shared/license";
+import axios, { AxiosError } from "axios";
 
 export const DynamicsLicenseApplicationIdClient = (
   logWriter: LogWriterType,
