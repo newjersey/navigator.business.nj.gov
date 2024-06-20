@@ -28,22 +28,17 @@ export const NavBarLogoOnly = (props: Props): ReactElement => {
               <NavBarVerticalLine />
             </div>
             <NavBarDashboardLink linkText={Config.navigationDefaults.navBarMyAccountText} />
+            {props.logoType === "NAVIGATOR_MYNJ_LOGO" && (
+              <div
+                className={`display-flex flex-col flex-align-center margin-left-2 ${
+                  !useSmall &&
+                  "border-base-lighter border-left-2px border-left-solid margin-left-2 padding-left-2"
+                }`}
+              >
+                <img className="height-4" src="/img/mynj-logo.png" alt="myNewJersey" />
+              </div>
+            )}
           </div>
-          {props.logoType === "NAVIGATOR_MYNJ_LOGO" && (
-            <div
-              className={`display-flex flex-row flex-align-center ${
-                useSmall
-                  ? "padding-top-1"
-                  : "border-base-lighter border-left-2px border-left-solid margin-left-2 padding-left-2"
-              }`}
-            >
-              <img
-                className={isMobile ? "height-3" : "height-4"}
-                src="/img/mynj-logo.png"
-                alt="myNewJersey"
-              />
-            </div>
-          )}
         </div>
       </nav>
       <hr className="margin-0" />
