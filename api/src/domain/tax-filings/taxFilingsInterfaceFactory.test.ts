@@ -16,7 +16,7 @@ import {
 } from "@shared/test";
 import { Business, UserData } from "@shared/userData";
 
-jest.mock("../user/fetchMunicipalityByName", () => ({
+jest.mock("@domain/user/fetchMunicipalityByName", () => ({
   fetchMunicipalityByName: jest.fn(),
 }));
 

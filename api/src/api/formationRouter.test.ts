@@ -21,14 +21,14 @@ import { Express } from "express";
 import { StatusCodes } from "http-status-codes";
 import request from "supertest";
 
-jest.mock("./userRouter", () => {
+jest.mock("@api/userRouter", () => {
   return {
     getSignedInUserId: jest.fn(),
     getSignedInUser: jest.fn(),
   };
 });
 
-jest.mock("../domain/s3Writer.ts", () => {
+jest.mock("@domain/s3Writer.ts", () => {
   return {
     saveFileFromUrl: jest.fn(),
   };
