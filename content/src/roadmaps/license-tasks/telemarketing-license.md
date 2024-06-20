@@ -38,13 +38,13 @@ divisionPhone: " (973) 504-6370"
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
 
-As a Telemarketer, you must register with the [Federal Trade Commission's National Do Not Call Registry](https://telemarketing.donotcall.gov/).
+As a Telemarketer, you must register with the [Federal Trade Commission's National Do Not Call Registry.](https://telemarketing.donotcall.gov/)
 
 :::
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
 
-You can't make telemarketing calls to residents of New Jersey, and you may be subject to significant fines and legal penalties. 
+You can't make telemarketing calls to residents of New Jersey, and you may be subject to significant fines and legal penalties.
 
 :::
 
