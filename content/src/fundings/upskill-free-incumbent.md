@@ -5,7 +5,7 @@ displayName: upskill-free-incumbent
 urlSlug: upskill-free-incumbent
 id: upskill-free-incumbent-worker-training-programs
 sidebarCardBodyText: Upskill offers grants to New Jersey businesses of any size
-  grants to improve existing employees’ skills.
+  to improve existing employees’ skills.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: Upskill offers grants to New Jersey businesses of any size
