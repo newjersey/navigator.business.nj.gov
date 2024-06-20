@@ -9,9 +9,9 @@ sidebarCardBodyText: Upskill offers grants to New Jersey businesses of any size
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: Upskill offers grants to New Jersey businesses of any size
-  grants to improve existing employees’ skills. Training may be provided by
-  employers at their business or by an eligible training provider. These should
-  be group-based trainings, not unique to one employee.
+  to improve existing employees’ skills. Training may be provided by employers
+  at their business or by an eligible training provider. These should be
+  group-based trainings, not unique to one employee.
 callToActionLink: https://www.nj.gov/labor/employer-services/business/businessprograms.shtml?open=specialty
 callToActionText: Learn more
 fundingType: grant
