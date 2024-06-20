@@ -19,6 +19,7 @@ export const DynamicsLicenseApplicationIdClient = (
     licenseType: string
   ): Promise<LicenseApplicationIdResponse> => {
     const logId = logWriter.GetId();
+
     logWriter.LogInfo(`Dynamics License Application Id Client - Id:${logId}`);
 
     return axios
@@ -41,10 +42,10 @@ export const DynamicsLicenseApplicationIdClient = (
               applicationDetails.statecode === ACTIVE_STATECODE
           )
           .filter((applicationDetails: LicenseApplicationIdApiResponse) => {
-            if (licenseType === "Health Club") return true;
-            return (
-              applicationDetails.rgb_number && applicationDetails.rgb_number.slice(-2) === MAIN_APP_END_DIGITS
-            );
+            return licenseType === "Public Movers and Warehousemen"
+              ? applicationDetails.rgb_number &&
+                  applicationDetails.rgb_number.slice(-2) === MAIN_APP_END_DIGITS
+              : true;
           });
 
         if (mainActiveApplications.length === 0) {
@@ -70,6 +71,7 @@ const licenseTypeToLicenseId: Record<string, string> = {
   "Home Improvement Contractor": "7a391a3f-53df-eb11-bacb-001dd8028561",
   "Health Care Services": "3ac8456a-53df-eb11-bacb-001dd8028561",
   "Health Club": "af8e3564-53df-eb11-bacb-001dd8028561",
+  Telemarketing: "7e957057-53df-eb11-bacb-001dd8028561",
 };
 
 const statusCodeToLicenseStatus: Record<number, LicenseStatus> = {
