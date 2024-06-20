@@ -18,7 +18,7 @@ function setupMockSharedUserData(): typeof sharedUserData {
 }
 
 jest.mock("@shared/userData", () => setupMockSharedUserData());
-jest.mock("./migrations/migrations", () => {
+jest.mock("@db/migrations/migrations", () => {
   return {
     Migrations: [migrate_v0_to_v1, migrate_v1_to_v2],
   };

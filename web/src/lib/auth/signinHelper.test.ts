@@ -1,5 +1,6 @@
 import * as api from "@/lib/api-client/apiClient";
 import { AuthAction } from "@/lib/auth/AuthContext";
+import * as session from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSelfRegister, onSignIn, onSignOut, SelfRegRouter } from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import * as AccountLinkingErrorStorage from "@/lib/storage/AccountLinkingErrorStorage";
@@ -16,7 +17,6 @@ import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { waitFor } from "@testing-library/react";
 import { UpdateQueue } from "../types/types";
 import { UpdateQueueFactory } from "../UpdateQueue";
-import * as session from "./sessionHelper";
 
 const mockGetCurrentUserData = jest.fn();
 const mockDelete = jest.fn();
@@ -28,7 +28,7 @@ const mockAccountLinkingErrorStorage = AccountLinkingErrorStorage as jest.Mocked
 >;
 const originalModule = jest.requireActual("@/lib/storage/UserDataStorage");
 
-jest.mock("./sessionHelper", () => ({
+jest.mock("@/lib/auth/sessionHelper", () => ({
   getActiveUser: jest.fn(),
   triggerSignOut: jest.fn().mockResolvedValue({}),
 }));

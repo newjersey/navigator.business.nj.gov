@@ -2,7 +2,7 @@ import { MunicipalityDetail } from "@shared/municipality";
 export const fetchMunicipalityByName = async (name: string): Promise<MunicipalityDetail | undefined> => {
   let file;
   try {
-    file = await import(`../../../../shared/src/static/municipalities.json`);
+    file = await import("@shared/static/municipalities.json");
   } catch {
     return undefined;
   }
