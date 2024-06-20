@@ -1,7 +1,11 @@
+import {
+  ACTIVE_STATECODE,
+  BusinessAddressClient,
+  BusinessIdAndLicenseSearchAddresses,
+} from "@client/dynamics/license-status/types";
 import { LogWriterType } from "@libs/logWriter";
 import { LicenseSearchAddress } from "@shared/license";
 import axios, { AxiosError } from "axios";
-import { ACTIVE_STATECODE, BusinessAddressClient, BusinessIdAndLicenseSearchAddresses } from "./types";
 
 export const DynamicsBusinessAddressClient = (
   logWriter: LogWriterType,

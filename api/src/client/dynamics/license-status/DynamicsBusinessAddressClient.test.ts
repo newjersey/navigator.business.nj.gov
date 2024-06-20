@@ -1,9 +1,9 @@
 /* eslint-disable unicorn/no-null */
+import { DynamicsBusinessAddressClient } from "@client/dynamics/license-status/DynamicsBusinessAddressClient";
+import { BusinessAddressClient } from "@client/dynamics/license-status/types";
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import { generateLicenseSearchAddress } from "@shared/test";
 import axios from "axios";
-import { DynamicsBusinessAddressClient } from "./DynamicsBusinessAddressClient";
-import { BusinessAddressClient } from "./types";
 
 jest.mock("axios");
 jest.mock("winston");

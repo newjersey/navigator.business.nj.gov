@@ -1,14 +1,14 @@
-import { AccessTokenClient } from "@client/dynamics/types";
-import { SearchLicenseStatus } from "@domain/types";
-import { LogWriterType } from "@libs/logWriter";
-import { LicenseSearchNameAndAddress, LicenseStatusResult } from "@shared/license";
-import { searchBusinessAddressesForMatch } from "./searchBusinessAddressesForMatch";
+import { searchBusinessAddressesForMatch } from "@client/dynamics/license-status/searchBusinessAddressesForMatch";
 import {
   BusinessAddressClient,
   BusinessIdClient,
   ChecklistItemsClient,
   LicenseApplicationIdClient,
-} from "./types";
+} from "@client/dynamics/license-status/types";
+import { AccessTokenClient } from "@client/dynamics/types";
+import { SearchLicenseStatus } from "@domain/types";
+import { LogWriterType } from "@libs/logWriter";
+import { LicenseSearchNameAndAddress, LicenseStatusResult } from "@shared/license";
 
 type Config = {
   accessTokenClient: AccessTokenClient;

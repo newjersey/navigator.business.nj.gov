@@ -1,12 +1,12 @@
+import dynamoDbSchema from "@businessnjgovnavigator/api/dynamodb-schema.json";
+import encryptTaxId from "@functions/encryptTaxId";
+import express from "@functions/express";
+import githubOauth2 from "@functions/githubOauth2";
+import healthCheck from "@functions/healthCheck";
+import updateExternalStatus from "@functions/updateExternalStatus";
 import type { AWS, AwsLambdaEnvironment } from "@serverless/typescript";
 import "dotenv/config";
 import { env } from "node:process";
-import dynamoDbSchema from "./dynamodb-schema.json";
-import encryptTaxId from "./src/functions/encryptTaxId";
-import express from "./src/functions/express";
-import githubOauth2 from "./src/functions/githubOauth2";
-import healthCheck from "./src/functions/healthCheck";
-import updateExternalStatus from "./src/functions/updateExternalStatus";
 
 const isDocker = process.env.IS_DOCKER === "true" || false; // set in docker-compose
 const stage = process.env.STAGE || "local";

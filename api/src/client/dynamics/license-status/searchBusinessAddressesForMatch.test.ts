@@ -1,6 +1,6 @@
+import { searchBusinessAddressesForMatch } from "@client/dynamics/license-status/searchBusinessAddressesForMatch";
 import { NO_MATCH_ERROR } from "@domain/types";
 import { generateLicenseSearchAddress } from "@shared/test";
-import { searchBusinessAddressesForMatch } from "./searchBusinessAddressesForMatch";
 
 describe("searchBusinessAddressesForMatch", () => {
   const userInputtedAddress = generateLicenseSearchAddress({

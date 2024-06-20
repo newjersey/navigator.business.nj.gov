@@ -1,8 +1,8 @@
 /* eslint-disable unicorn/no-null */
+import { DynamicsChecklistItemsClient } from "@client/dynamics/license-status/DynamicsChecklistItemsClient";
+import { ChecklistItemsClient } from "@client/dynamics/license-status/types";
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";
-import { DynamicsChecklistItemsClient } from "./DynamicsChecklistItemsClient";
-import { ChecklistItemsClient } from "./types";
 
 jest.mock("axios");
 jest.mock("winston");

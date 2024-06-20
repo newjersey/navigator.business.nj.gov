@@ -1,9 +1,9 @@
 /* eslint-disable unicorn/no-null */
+import { DynamicsLicenseApplicationIdClient } from "@client/dynamics/license-status/DynamicsLicenseApplicationIdClient";
+import { LicenseApplicationIdClient } from "@client/dynamics/license-status/types";
 import { NO_MAIN_APPS_ERROR } from "@domain/types";
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";
-import { DynamicsLicenseApplicationIdClient } from "./DynamicsLicenseApplicationIdClient";
-import { LicenseApplicationIdClient } from "./types";
 
 jest.mock("axios");
 jest.mock("winston");

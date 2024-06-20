@@ -1,13 +1,13 @@
-import { AccessTokenClient } from "@client/dynamics/types";
-import { NO_MAIN_APPS_ERROR, NO_MATCH_ERROR, SearchLicenseStatus } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
-import { DynamicsLicenseStatusClient } from "./DynamicsLicenseStatusClient";
+import { DynamicsLicenseStatusClient } from "@client/dynamics/license-status/DynamicsLicenseStatusClient";
 import {
   BusinessAddressClient,
   BusinessIdClient,
   ChecklistItemsClient,
   LicenseApplicationIdClient,
-} from "./types";
+} from "@client/dynamics/license-status/types";
+import { AccessTokenClient } from "@client/dynamics/types";
+import { NO_MAIN_APPS_ERROR, NO_MATCH_ERROR, SearchLicenseStatus } from "@domain/types";
+import { LogWriter, LogWriterType } from "@libs/logWriter";
 
 describe("DynamicsLicenseStatusClient", () => {
   let client: SearchLicenseStatus;
