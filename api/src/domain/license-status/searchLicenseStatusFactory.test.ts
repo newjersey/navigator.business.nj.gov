@@ -57,6 +57,14 @@ describe("searchLicenseStatusFactory", () => {
       expect(stubDynamicsSearchLicenseStatus).toHaveBeenCalled();
       expect(stubWebServiceSearchLicenseStatus).not.toHaveBeenCalled();
     });
+
+    it("returns dynamics status client when license type is telemarketing", () => {
+      const licenseType = "Telemarketing";
+      const licenseStatus = searchLicenseStatus(licenseType);
+      licenseStatus(generateLicenseSearchNameAndAddress({}), licenseType);
+      expect(stubDynamicsSearchLicenseStatus).toHaveBeenCalled();
+      expect(stubWebServiceSearchLicenseStatus).not.toHaveBeenCalled();
+    });
   });
 
   describe("when license type is not included in dynamics", () => {

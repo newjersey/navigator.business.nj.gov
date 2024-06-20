@@ -13,6 +13,7 @@ export const searchLicenseStatusFactory = (
       "Public Movers and Warehousemen": featureFlags.publicMovers,
       "Health Care Services": true,
       "Health Club": true,
+      Telemarketing: true,
     };
 
     const shouldUseDynamicsSearch = licenseTypesUsingDynamicsSearch[licenseType] || false;

@@ -115,6 +115,7 @@ describe("updateLicenseStatus", () => {
       expect(resultCurrentBusiness.taskProgress["public-accountant-license"]).toEqual("NOT_STARTED");
       expect(resultCurrentBusiness.taskProgress["landscape-architect-license"]).toEqual("NOT_STARTED");
       expect(resultCurrentBusiness.taskProgress["health-club-registration"]).toEqual("NOT_STARTED");
+      expect(resultCurrentBusiness.taskProgress["telemarketing-license"]).toEqual("NOT_STARTED");
     }
   );
 
@@ -144,6 +145,7 @@ describe("updateLicenseStatus", () => {
     expect(resultCurrentBusiness.taskProgress["public-accountant-license"]).toEqual("IN_PROGRESS");
     expect(resultCurrentBusiness.taskProgress["landscape-architect-license"]).toEqual("IN_PROGRESS");
     expect(resultCurrentBusiness.taskProgress["health-club-registration"]).toEqual("IN_PROGRESS");
+    expect(resultCurrentBusiness.taskProgress["telemarketing-license"]).toEqual("IN_PROGRESS");
   });
 
   it("updates the license task status to COMPLETED when license is active", async () => {
@@ -167,5 +169,6 @@ describe("updateLicenseStatus", () => {
     expect(resultCurrentBusiness.taskProgress["public-accountant-license"]).toEqual("COMPLETED");
     expect(resultCurrentBusiness.taskProgress["landscape-architect-license"]).toEqual("COMPLETED");
     expect(resultCurrentBusiness.taskProgress["health-club-registration"]).toEqual("COMPLETED");
+    expect(resultCurrentBusiness.taskProgress["telemarketing-license"]).toEqual("COMPLETED");
   });
 });

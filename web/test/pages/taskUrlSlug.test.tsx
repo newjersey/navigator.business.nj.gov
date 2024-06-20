@@ -226,6 +226,7 @@ describe("task page", () => {
       "public-accountant-license",
       "register-accounting-firm",
       "register-consumer-affairs",
+      "telemarketing-license",
       "landscape-architect-license",
       "health-club-registration",
     ])("loads License task screen for %s", (licenseId) => {
