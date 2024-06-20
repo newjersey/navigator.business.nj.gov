@@ -44,16 +44,16 @@ county:
 sector: []
 publishStageArchive: null
 ---
-
 ## Eligibility
 
-- Entities who are developing new, or building upon existing Registered Apprenticeship programs
-- Any employer, trade associations, labor organization, or others with programs supporting the industries in which they work
+* Entities who are developing new, or building upon existing Registered Apprenticeship programs
+* Any employer, trade associations, labor organization, or others with programs supporting the industries in which they work
 
-:::callout{ showHeader="true" headerText="Benefit" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="Benefit" showIcon="false" calloutType="conditional" }
 
 Eligible applicants can apply for funding up to $8,000 per participant for:
 
 1. Costs associated with personnel expenses, instructor costs, non-personnel costs, pre-apprentice training, supplies and materials, and other direct costs as outlined in the program details
 2. Stipends for participants of the program based on participants reaching program milestones
-   :::
+
+:::
