@@ -14,7 +14,7 @@ import { StatusCodes } from "http-status-codes";
 import { UserDataClient } from "src/domain/types";
 import request from "supertest";
 
-jest.mock("./userRouter", () => {
+jest.mock("@api/userRouter", () => {
   return {
     getSignedInUserId: jest.fn(),
   };
