@@ -15,6 +15,7 @@ type OmitGenericButtonProps = Omit<
 
 interface Props extends OmitGenericButtonProps {
   isColor: "primary" | "border-base-light";
+  className?: string;
   size?: "small" | "regular";
 }
 
@@ -25,11 +26,8 @@ const colors = {
 };
 
 export const SecondaryButton = (props: Props): ReactElement => {
+  const classNames = `${colors[props.isColor]} ${props.className}`;
   return (
-    <GenericButton
-      {...props}
-      isVerticalPaddingRemoved={props.size === "small"}
-      className={colors[props.isColor]}
-    />
+    <GenericButton {...props} isVerticalPaddingRemoved={props.size === "small"} className={classNames} />
   );
 };
