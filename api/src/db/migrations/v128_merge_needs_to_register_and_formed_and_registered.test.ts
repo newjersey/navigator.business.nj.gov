@@ -1,11 +1,11 @@
-import { migrate_v127_to_v128 } from "@db/migrations/v128_merge_needs_to_register_and_formed_and_registered";
 import {
   generateV127Business,
   generateV127Preferences,
   generateV127ProfileData,
   generateV127UserData,
   v127OperatingPhase,
-} from "./v127_create_remote_worker_seller_phase";
+} from "@db/migrations/v127_create_remote_worker_seller_phase";
+import { migrate_v127_to_v128 } from "@db/migrations/v128_merge_needs_to_register_and_formed_and_registered";
 
 describe("migrate_v127_to_v128", () => {
   it("updates operatingPhase from NEEDS_TO_REGISTER_FOR_TAXES to FORMED and removes tax registration nudge", () => {

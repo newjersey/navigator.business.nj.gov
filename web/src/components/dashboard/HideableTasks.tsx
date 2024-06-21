@@ -14,7 +14,7 @@ export const HideableTasks = (): ReactElement => {
   const { updateQueue, business } = useUserData();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
-  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
+  const isXSMobile = useMediaQuery(MediaQueries.isXSMobile);
 
   const handleToggleClick = (): void => {
     if (!business || !updateQueue) {
@@ -37,12 +37,17 @@ export const HideableTasks = (): ReactElement => {
 
   return (
     <div className="margin-top-7" data-testid="hideableTasks">
-      <div className={`${isTabletAndUp ? "flex flex-align-center" : ""} margin-bottom-205`}>
+      <div className={`flex flex-align-center margin-bottom-205`}>
         <Heading level={2} className="margin-bottom-0 text-medium">
           {Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText}
         </Heading>
-        <div className={`mla ${isTabletAndUp ? "" : "margin-top-2"}`}>
-          <SecondaryButton size={"small"} isColor={"border-base-light"} onClick={handleToggleClick}>
+        <div className={`mla`}>
+          <SecondaryButton
+            className={`${isXSMobile ? "padding-x-0 margin-bottom-2" : ""}`}
+            size={"small"}
+            isColor={"border-base-light"}
+            onClick={handleToggleClick}
+          >
             <div className="fdr fac">
               <Icon>{business?.preferences.isHideableRoadmapOpen ? "visibility_off" : "visibility"}</Icon>
               <span className="margin-left-05 line-height-sans-2">

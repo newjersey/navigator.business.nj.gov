@@ -1,8 +1,8 @@
+import { DynamicsBusinessIdsClient } from "@client/dynamics/license-status/DynamicsBusinessIdsClient";
+import { BusinessIdClient } from "@client/dynamics/license-status/types";
 import { NO_MATCH_ERROR } from "@domain/types";
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";
-import { DynamicsBusinessIdsClient } from "./DynamicsBusinessIdsClient";
-import { BusinessIdClient } from "./types";
 
 jest.mock("axios");
 jest.mock("winston");

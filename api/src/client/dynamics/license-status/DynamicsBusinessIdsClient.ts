@@ -1,7 +1,7 @@
+import { BusinessIdClient } from "@client/dynamics/license-status/types";
 import { NO_MATCH_ERROR } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import axios, { AxiosError } from "axios";
-import { BusinessIdClient } from "./types";
 
 export const DynamicsBusinessIdsClient = (logWriter: LogWriterType, orgUrl: string): BusinessIdClient => {
   const getMatchedBusinessIds = async (accessToken: string, nameToSearch: string): Promise<string[]> => {

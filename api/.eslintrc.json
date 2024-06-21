@@ -35,7 +35,13 @@
     "unicorn/no-array-reduce": "off",
     "unicorn/switch-case-braces": "off",
     "unicorn/new-for-builtins": "off",
-    "unicorn/prefer-at": "off"
+    "unicorn/prefer-at": "off",
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [".*"]
+      }
+    ]
   },
   "overrides": [
     {

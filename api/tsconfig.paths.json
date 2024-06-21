@@ -10,7 +10,8 @@
       "@client/*": ["src/client/*"],
       "@api/*": ["src/api/*"],
       "@test/*": ["test/*"],
-      "@wiremock/*": ["wiremock/*"]
+      "@wiremock/*": ["wiremock/*"],
+      "@businessnjgovnavigator/api/*": ["./*"]
     }
   }
 }
