@@ -4011,16 +4011,6 @@ collections:
                   widget: string,
                 }
               - { label: Generic - To Profile Button Text, name: genericToProfileButtonText, widget: string }
-          - label: Site Wide Error Messages
-            name: siteWideErrorMessages
-            collapsed: true
-            widget: object
-            summary: "{{siteWideErrorMessages}}"
-            fields:
-              - { label: Error - No Data, name: errorTextNoData, widget: string }
-              - { label: Error - Cached Only, name: errorTextCachedOnly, widget: string }
-              - { label: Error - Update Failed, name: errorTextUpdateFailed, widget: string }
-              - { label: Error - Radio Button, name: errorRadioButton, widget: string }
           - label: Task Defaults
             name: taskDefaults
             collapsed: true
@@ -5365,6 +5355,33 @@ collections:
               - { label: "Error Description 1", name: "errorDescriptionPt1", widget: "markdown" }
               - { label: "Error Description 2", name: "errorDescriptionPt2", widget: "markdown" }
               - { label: "Chat with Expert", name: "errorChatWithExpert", widget: "markdown" }
+
+  - name: "global-error-messages"
+    label: "Global Error Messages"
+    delete: false
+    create: false
+    files:
+      - label: "Global Errors Defaults"
+        name: "global-errors-defaults"
+        file: "content/src/fieldConfig/global-errors-defaults.json"
+        editor:
+          preview: false
+        fields:
+          - label: Site Wide Error Messages
+            name: siteWideErrorMessages
+            collapsed: false
+            widget: object
+            summary: "{{siteWideErrorMessages}}"
+            fields:
+              - { label: Error - No Data, name: errorTextNoData, widget: string }
+              - { label: Error - Cached Only, name: errorTextCachedOnly, widget: string }
+              - { label: Error - Update Failed, name: errorTextUpdateFailed, widget: string }
+              - { label: Error - Radio Button, name: errorRadioButton, widget: string }
+              - {
+                  label: Error - Screen Reader Inline Error Prefix,
+                  name: errorScreenReaderInlinePrefix,
+                  widget: string,
+                }
 
   - name: "navigation-config"
     label: "Navigation Config"
