@@ -284,7 +284,6 @@ describe("profile-foreign", () => {
         legalStructureId: string;
         operatingPhase: OperatingPhaseId;
       }): void => {
-        const newark = generateMunicipality({ displayName: "Newark" });
         const business = generateBusinessForProfile({
           profileData: generateProfileData({
             legalStructureId: params.legalStructureId,
@@ -293,7 +292,7 @@ describe("profile-foreign", () => {
             foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
           }),
         });
-        renderPage({ municipalities: [newark], business });
+        renderPage({ business });
       };
 
       it("locks when it is populated and tax filing state is SUCCESS", () => {

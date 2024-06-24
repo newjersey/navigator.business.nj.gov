@@ -114,9 +114,6 @@ describe("profile - starting business", () => {
 
   describe("locks fields when formation getFiling success", () => {
     const legalStructure = "limited-liability-company";
-    const municipality = generateMunicipality({
-      displayName: "some-cool-town",
-    });
     const startingBusiness = generateBusinessForProfile({
       formationData: generateFormationData({
         completedFilingPayment: true,
@@ -127,7 +124,6 @@ describe("profile - starting business", () => {
         legalStructureId: legalStructure,
         entityId: "some-id",
         businessName: "some-name",
-        municipality: municipality,
       }),
     });
 
@@ -172,8 +168,7 @@ describe("profile - starting business", () => {
           dateOfFormation: "",
         }),
       });
-      const newark = generateMunicipality({ displayName: "Newark" });
-      renderPage({ business: initialBusiness, municipalities: [newark] });
+      renderPage({ business: initialBusiness });
       chooseTab("numbers");
       expect(getDateOfFormation()).toBeUndefined();
     });
@@ -182,8 +177,7 @@ describe("profile - starting business", () => {
       const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "2020-01-01" }),
       });
-      const newark = generateMunicipality({ displayName: "Newark" });
-      renderPage({ business: initialBusiness, municipalities: [newark] });
+      renderPage({ business: initialBusiness });
       expect(getDateOfFormation()).toBe("01/2020");
     });
 
@@ -195,8 +189,7 @@ describe("profile - starting business", () => {
             dateOfFormation: "2017-10-01",
           }),
         });
-        const newark = generateMunicipality({ displayName: "Newark" });
-        renderPage({ business: initialBusiness, municipalities: [newark] });
+        renderPage({ business: initialBusiness });
         fillText("Date of formation", "");
         clickSave();
         expect(getDateOfFormation()).toBe("");
@@ -209,9 +202,8 @@ describe("profile - starting business", () => {
             dateOfFormation: "2017-10-01",
           }),
         });
-        const newark = generateMunicipality({ displayName: "Newark" });
 
-        renderPage({ business: initialBusiness, municipalities: [newark] });
+        renderPage({ business: initialBusiness });
         fillText("Date of formation", "");
 
         clickSave();
@@ -230,9 +222,8 @@ describe("profile - starting business", () => {
             dateOfFormation: "2017-10-01",
           }),
         });
-        const newark = generateMunicipality({ displayName: "Newark" });
 
-        renderPage({ business: initialBusiness, municipalities: [newark] });
+        renderPage({ business: initialBusiness });
         fillText("Date of formation", "");
 
         clickSave();
@@ -292,10 +283,10 @@ describe("profile - starting business", () => {
       },
     };
     const inputFieldName = getBusinessProfileInputFieldName(initialBusiness);
-    const newark = generateMunicipality({ displayName: "Newark" });
-    renderPage({ business: initialBusiness, municipalities: [newark] });
+    const randomMunicipality = generateMunicipality({ displayName: "Newark" });
+    renderPage({ business: initialBusiness, municipalities: [randomMunicipality] });
     fillText(inputFieldName, "Cool Computers");
-    selectByText("Location", newark.displayName);
+    selectByText("Location", randomMunicipality.displayName);
     selectByValue("Industry", "e-commerce");
     chooseRadio("home-based-business-radio-true");
 
@@ -321,7 +312,7 @@ describe("profile - starting business", () => {
         industryId: "e-commerce",
         sectorId: "retail-trade-and-ecommerce",
         homeBasedBusiness: true,
-        municipality: newark,
+        municipality: randomMunicipality,
         taxId: "023456790123",
         employerId: "023456780",
         notes: "whats appppppp",
@@ -380,7 +371,6 @@ describe("profile - starting business", () => {
       legalStructureId: string;
       operatingPhase: OperatingPhaseId;
     }): void => {
-      const newark = generateMunicipality({ displayName: "Newark" });
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           legalStructureId: params.legalStructureId,
@@ -388,21 +378,22 @@ describe("profile - starting business", () => {
           businessPersona: "STARTING",
         }),
       });
-      renderPage({ municipalities: [newark], business });
+      renderPage({ business });
     };
 
     it("locks the location field when it is populated and tax filing state is SUCCESS", () => {
+      const randomMunicipality = generateMunicipality({});
       renderPage({
         business: generateBusinessForProfile({
           profileData: generateProfileData({
-            municipality: generateMunicipality({ displayName: "Trenton" }),
+            municipality: randomMunicipality,
           }),
           taxFilingData: generateTaxFilingData({
             state: "SUCCESS",
           }),
         }),
       });
-      expect(screen.getByText("Trenton")).toBeInTheDocument();
+      expect(screen.getByText(randomMunicipality.displayName)).toBeInTheDocument();
       expect(screen.getByTestId("locked-municipality")).toBeInTheDocument();
     });
 
@@ -718,6 +709,7 @@ describe("profile - starting business", () => {
   });
 
   it("prefills form from existing user data", () => {
+    const randomMunicipality = generateMunicipality({});
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
         businessPersona: "STARTING",
@@ -728,9 +720,7 @@ describe("profile - starting business", () => {
         employerId: "123456789",
         taxId: "123456790",
         notes: "whats appppppp",
-        municipality: generateMunicipality({
-          displayName: "Newark",
-        }),
+        municipality: randomMunicipality,
       }),
     });
 
@@ -738,7 +728,7 @@ describe("profile - starting business", () => {
     expect(getBusinessNameValue()).toEqual("Applebees");
 
     expect(getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);
-    expect(getMunicipalityValue()).toEqual("Newark");
+    expect(getMunicipalityValue()).toEqual(randomMunicipality.displayName);
     chooseTab("numbers");
     expect(getEmployerIdValue()).toEqual("12-3456789");
     expect(getEntityIdValue()).toEqual("1234567890");
@@ -751,9 +741,9 @@ describe("profile - starting business", () => {
     const initialBusiness = generateBusinessForProfile({
       profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
-    const newark = generateMunicipality({ displayName: "Newark" });
-    renderPage({ business: initialBusiness, municipalities: [newark] });
-    selectByText("Location", newark.displayName);
+    const randomMunicipality = generateMunicipality({});
+    renderPage({ business: initialBusiness, municipalities: [randomMunicipality] });
+    selectByText("Location", randomMunicipality.displayName);
     clickBack();
     fireEvent.click(screen.getByText(Config.profileDefaults.default.escapeModalReturn));
     await waitFor(() => {
