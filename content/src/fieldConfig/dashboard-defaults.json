@@ -10,5 +10,10 @@
   },
   "dashboardRoadmapHeaderDefaults": {
     "RoadmapTasksHeaderText": "Business Tasks"
+  },
+  "dashboardAnytimeActionDefaults": {
+    "defaultHeaderText": "Manage My Business",
+    "defaultAutocompleteHeaderText": "Complete these common tasks for your business at anytime.",
+    "anytimeActionPageButtonText": "Start Now"
   }
 }

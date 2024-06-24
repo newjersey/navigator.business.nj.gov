@@ -421,7 +421,7 @@ describe("<DashboardOnMobile />", () => {
           anytimeActionTask: [generateAnytimeActionTask({})],
         });
 
-        expect(screen.queryByTestId("anytime-actions-section")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("anytimeActionDropdown")).not.toBeInTheDocument();
       }
     );
 
@@ -432,7 +432,7 @@ describe("<DashboardOnMobile />", () => {
         anytimeActionTask: [generateAnytimeActionTask({})],
       });
 
-      expect(screen.getByTestId("anytime-actions-section")).toBeInTheDocument();
+      expect(screen.getByTestId("anytimeActionDropdown")).toBeInTheDocument();
     });
   });
 
