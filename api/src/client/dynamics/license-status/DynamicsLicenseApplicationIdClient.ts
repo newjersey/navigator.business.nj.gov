@@ -32,7 +32,7 @@ export const DynamicsLicenseApplicationIdClient = (
       )
       .then((response) => {
         logWriter.LogInfo(
-          `Dynamics License Application Id Client - Id:${logId} - Response: ${JSON.stringify(response.data)}`
+          `Dynamics License Application Id Client - Id:${logId} - Response: ${JSON.stringify(response?.data)}`
         );
 
         const mainActiveApplications = response.data.value
@@ -40,10 +40,12 @@ export const DynamicsLicenseApplicationIdClient = (
             (applicationDetails: LicenseApplicationIdApiResponse) =>
               applicationDetails.statecode === ACTIVE_STATECODE
           )
-          .filter(
-            (applicationDetails: LicenseApplicationIdApiResponse) =>
+          .filter((applicationDetails: LicenseApplicationIdApiResponse) => {
+            if (licenseType === "Health Club") return true;
+            return (
               applicationDetails.rgb_number && applicationDetails.rgb_number.slice(-2) === MAIN_APP_END_DIGITS
-          );
+            );
+          });
 
         if (mainActiveApplications.length === 0) {
           throw new Error(NO_MAIN_APPS_ERROR);
@@ -67,7 +69,7 @@ const licenseTypeToLicenseId: Record<string, string> = {
   "Public Movers and Warehousemen": "19391a3f-53df-eb11-bacb-001dd8028561",
   "Home Improvement Contractor": "7a391a3f-53df-eb11-bacb-001dd8028561",
   "Health Care Services": "3ac8456a-53df-eb11-bacb-001dd8028561",
-  "Health Club Services": "af8e3564-53df-eb11-bacb-001dd8028561",
+  "Health Club": "af8e3564-53df-eb11-bacb-001dd8028561",
 };
 
 const statusCodeToLicenseStatus: Record<number, LicenseStatus> = {
