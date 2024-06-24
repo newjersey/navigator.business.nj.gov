@@ -49,10 +49,14 @@ export const renderPage = ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setShowNeedsAccountModal?: jest.Mock<any, any, any>;
 }): void => {
-  const genericTown =
-    business && business.profileData.municipality
-      ? business.profileData.municipality
-      : generateMunicipality({ displayName: "GenericTown" });
+  const genericTown = generateMunicipality({ displayName: "GenericTown" });
+  const profileDataMunicipality = business && business.profileData.municipality;
+  const formationNJAddress = business && business.formationData.formationFormData.addressMunicipality;
+
+  const municipalitiesList = [genericTown];
+  if (profileDataMunicipality) municipalitiesList.push(profileDataMunicipality);
+  if (formationNJAddress) municipalitiesList.push(formationNJAddress);
+  if (municipalities) municipalitiesList.push(...municipalities);
 
   const initialBusiness =
     business ??
@@ -67,7 +71,7 @@ export const renderPage = ({
       <ThemeProvider theme={createTheme()}>
         <WithStatefulProfileFormContext>
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
-            <Profile municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]} />
+            <Profile municipalities={municipalitiesList} />
           </WithStatefulUserData>
         </WithStatefulProfileFormContext>
       </ThemeProvider>,

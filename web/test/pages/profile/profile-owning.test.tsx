@@ -81,11 +81,6 @@ jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 describe("profile - owning existing business", () => {
   let business: Business;
-  const formationWithUndefinedMunicipality = generateFormationData({
-    formationFormData: generateFormationFormData({
-      addressMunicipality: undefined,
-    }),
-  });
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -97,7 +92,6 @@ describe("profile - owning existing business", () => {
     });
     business = generateBusinessForProfile({
       profileData: generateProfileData({ businessPersona: "OWNING" }),
-      formationData: formationWithUndefinedMunicipality,
     });
   });
 
@@ -139,25 +133,23 @@ describe("profile - owning existing business", () => {
         businessPersona: "OWNING",
         industryId: "generic",
         legalStructureId: "limited-liability-company",
-        municipality: undefined,
       }),
       onboardingFormProgress: "COMPLETED",
-      formationData: formationWithUndefinedMunicipality,
     });
-    const newark = generateMunicipality({ displayName: "Newark" });
+    const randomMunicipality = generateMunicipality({ displayName: "Newark" });
 
-    renderPage({ business, municipalities: [newark] });
+    renderPage({ business, municipalities: [randomMunicipality] });
 
     fillText("Business name", "Cool Computers");
     fillText("Date of formation", date.format("MM/YYYY"));
     fillText("Address line1", "123 main st");
     fillText("Address line2", "apt 1");
-    selectByText("Address municipality", "Newark");
+    selectByText("Address municipality", randomMunicipality.displayName);
     fillText("Address zip code", "08123");
 
     selectByValue("Sector", "clean-energy");
     fillText("Existing employees", "123");
-    selectByText("Location", newark.displayName);
+    selectByText("Location", randomMunicipality.displayName);
     selectByValue("Ownership", "veteran-owned");
     selectByValue("Ownership", "woman-owned");
     chooseRadio("home-based-business-radio-true");
@@ -184,7 +176,7 @@ describe("profile - owning existing business", () => {
         homeBasedBusiness: true,
         existingEmployees: "123",
         ownershipTypeIds: ["veteran-owned", "woman-owned"],
-        municipality: newark,
+        municipality: randomMunicipality,
         dateOfFormation,
         taxId: "023456790123",
         entityId: "0234567890",
@@ -199,7 +191,7 @@ describe("profile - owning existing business", () => {
           ...business.formationData.formationFormData,
           addressLine1: "123 main st",
           addressLine2: "apt 1",
-          addressMunicipality: newark,
+          addressMunicipality: randomMunicipality,
           addressZipCode: "08123",
           addressState: {
             name: "New Jersey",
@@ -211,6 +203,7 @@ describe("profile - owning existing business", () => {
   });
 
   it("prefills form from existing user data", () => {
+    const randomMunicipality = generateMunicipality({});
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
         businessPersona: "OWNING",
@@ -221,9 +214,7 @@ describe("profile - owning existing business", () => {
         dateOfFormation,
         taxId: "123456790",
         notes: "whats appppppp",
-        municipality: generateMunicipality({
-          displayName: "Newark",
-        }),
+        municipality: randomMunicipality,
         ownershipTypeIds: ["veteran-owned", "woman-owned"],
         homeBasedBusiness: false,
         existingEmployees: "123",
@@ -231,7 +222,6 @@ describe("profile - owning existing business", () => {
         sectorId: "clean-energy",
         industryId: "generic",
       }),
-      formationData: formationWithUndefinedMunicipality,
     });
 
     const veteran = LookupOwnershipTypeById("veteran-owned").name;
@@ -240,7 +230,7 @@ describe("profile - owning existing business", () => {
     renderPage({ business });
 
     expect(getBusinessNameValue()).toEqual("Applebees");
-    expect(getMunicipalityValue()).toEqual("Newark");
+    expect(getMunicipalityValue()).toEqual(randomMunicipality.displayName);
     expect(getSectorIDValue()).toEqual(LookupSectorTypeById("clean-energy").name);
     expect(screen.queryByLabelText("Ownership")).toHaveTextContent(`${veteran}, ${woman}`);
     expect(getRadioButtonFromFormControlLabel("home-based-business-radio-false")).toBeChecked();
@@ -306,7 +296,6 @@ describe("profile - owning existing business", () => {
         operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
         sectorId: "",
       }),
-      formationData: formationWithUndefinedMunicipality,
     });
     renderPage({ business });
     fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
@@ -330,9 +319,9 @@ describe("profile - owning existing business", () => {
   });
 
   it("returns user to dashboard from un-saved changes modal", async () => {
-    const newark = generateMunicipality({ displayName: "Newark" });
-    renderPage({ business, municipalities: [newark] });
-    selectByText("Location", newark.displayName);
+    const randomMunicipality = generateMunicipality({});
+    renderPage({ business, municipalities: [randomMunicipality] });
+    selectByText("Location", randomMunicipality.displayName);
     clickBack();
     fireEvent.click(screen.getByText(Config.profileDefaults.default.escapeModalReturn));
     await waitFor(() => {
@@ -354,10 +343,8 @@ describe("profile - owning existing business", () => {
         businessPersona: "OWNING",
         legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
       }),
-      formationData: formationWithUndefinedMunicipality,
     });
-    const newark = generateMunicipality({ displayName: "Newark" });
-    renderPage({ business: initialBusiness, municipalities: [newark] });
+    renderPage({ business: initialBusiness });
     expect(screen.getByLabelText("Date of formation")).toBeInTheDocument();
   });
 
@@ -367,10 +354,8 @@ describe("profile - owning existing business", () => {
         businessPersona: "OWNING",
         legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
       }),
-      formationData: formationWithUndefinedMunicipality,
     });
-    const newark = generateMunicipality({ displayName: "Newark" });
-    renderPage({ business: initialBusiness, municipalities: [newark] });
+    renderPage({ business: initialBusiness });
     expect(screen.queryByLabelText("Date of formation")).not.toBeInTheDocument();
   });
 
@@ -380,7 +365,6 @@ describe("profile - owning existing business", () => {
         businessPersona: "OWNING",
         naicsCode: "123456",
       }),
-      formationData: formationWithUndefinedMunicipality,
     });
     renderPage({ business: initialBusiness });
     chooseTab("numbers");
@@ -394,7 +378,6 @@ describe("profile - owning existing business", () => {
         businessPersona: "OWNING",
         naicsCode: "",
       }),
-      formationData: formationWithUndefinedMunicipality,
     });
     renderPage({ business: initialBusiness });
     chooseTab("numbers");
@@ -403,19 +386,19 @@ describe("profile - owning existing business", () => {
 
   describe("Location Section", () => {
     it("locks the location field if it is populated and tax filing state is SUCCESS", () => {
+      const randomMunicipality = generateMunicipality({});
       renderPage({
         business: generateBusinessForProfile({
           profileData: generateProfileData({
             businessPersona: "OWNING",
-            municipality: generateMunicipality({ displayName: "Trenton" }),
+            municipality: randomMunicipality,
           }),
           taxFilingData: generateTaxFilingData({
             state: "SUCCESS",
           }),
-          formationData: formationWithUndefinedMunicipality,
         }),
       });
-      expect(screen.getByText("Trenton")).toBeInTheDocument();
+      expect(screen.getByText(randomMunicipality.displayName)).toBeInTheDocument();
       expect(screen.getByTestId("locked-municipality")).toBeInTheDocument();
     });
   });
@@ -445,7 +428,6 @@ describe("profile - owning existing business", () => {
           businessPersona: "OWNING",
           legalStructureId: "limited-liability-company",
         }),
-        formationData: formationWithUndefinedMunicipality,
       });
       renderPage({ business });
       expect(screen.queryByTestId("tradeName")).not.toBeInTheDocument();
@@ -502,7 +484,6 @@ describe("profile - owning existing business", () => {
           sectorId: undefined,
           operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
         }),
-        formationData: formationWithUndefinedMunicipality,
       });
       renderPage({ business });
       clickSave();
@@ -622,6 +603,7 @@ describe("profile - owning existing business", () => {
       });
 
       it("displays alert when address city is selected then blurred", async () => {
+        const randomMunicipality = generateMunicipality({});
         const business = generateBusinessForProfile({
           profileData: generateProfileData({
             industryId: "generic",
@@ -634,10 +616,10 @@ describe("profile - owning existing business", () => {
             }),
           }),
         });
-        renderPage({ business, municipalities: [generateMunicipality({ displayName: "display name" })] });
+        renderPage({ business, municipalities: [randomMunicipality] });
 
-        selectByText("Address municipality", "display name");
-        expect(screen.getByLabelText("Address municipality")).toHaveValue("display name");
+        selectByText("Address municipality", randomMunicipality.displayName);
+        expect(screen.getByLabelText("Address municipality")).toHaveValue(randomMunicipality.displayName);
         fireEvent.blur(screen.getByLabelText("Address municipality"));
 
         clickSave();
@@ -673,7 +655,7 @@ describe("profile - owning existing business", () => {
             }),
           }),
         });
-        renderPage({ business, municipalities: [generateMunicipality({ displayName: "display name" })] });
+        renderPage({ business });
         fillText("Address line1", "a".repeat(BUSINESS_ADDRESS_LINE_1_MAX_CHAR + 1));
 
         clickSave();
@@ -707,7 +689,7 @@ describe("profile - owning existing business", () => {
             }),
           }),
         });
-        renderPage({ business, municipalities: [generateMunicipality({ displayName: "display name" })] });
+        renderPage({ business });
         fillText("Address line2", "a");
 
         clickSave();
@@ -743,7 +725,7 @@ describe("profile - owning existing business", () => {
             }),
           }),
         });
-        renderPage({ business, municipalities: [generateMunicipality({ displayName: "display name" })] });
+        renderPage({ business });
         fillText("Address line2", "a".repeat(BUSINESS_ADDRESS_LINE_2_MAX_CHAR + 1));
 
         clickSave();
