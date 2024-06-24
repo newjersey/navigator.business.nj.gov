@@ -12,7 +12,7 @@ export const searchLicenseStatusFactory = (
     const licenseTypesUsingDynamicsSearch: Record<string, boolean> = {
       "Public Movers and Warehousemen": featureFlags.publicMovers,
       "Health Care Services": true,
-      "Health Club Services": true,
+      "Health Club": true,
     };
 
     const shouldUseDynamicsSearch = licenseTypesUsingDynamicsSearch[licenseType] || false;

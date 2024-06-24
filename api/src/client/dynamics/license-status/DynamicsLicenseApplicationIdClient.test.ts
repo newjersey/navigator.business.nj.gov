@@ -234,6 +234,34 @@ describe("DynamicsLicenseApplicationIdClient", () => {
     ).rejects.toEqual(new Error(NO_MAIN_APPS_ERROR));
   });
 
+  it("does not throw NO_MAIN_APPS error when querying a Health Club license with an rgb_number that does not end with 00", async () => {
+    const mockHealthClubLicenseApplicationIdResponse = {
+      value: [
+        {
+          rgb_appnumber: "DEaseHC01830",
+          rgb_number: "HC01830",
+          rgb_startdate: "2022-02-10T05:00:00Z",
+          rgb_versioncode: 100000001,
+          rgb_expirationdate: "2024-02-09T05:00:00Z",
+          statecode: 0,
+          statuscode: 100000018,
+          rgb_applicationid: "cadc7d25-b598-ed11-aad1-001dd804fc2b",
+          _rgb_businessid_value: "02903371-5798-ed11-aad0-001dd8098598",
+        },
+      ],
+    };
+
+    const expected = {
+      applicationId: "cadc7d25-b598-ed11-aad1-001dd804fc2b",
+      expirationDate: "2024-02-09T05:00:00Z",
+      licenseStatus: "EXPIRED",
+    };
+    mockAxios.get.mockResolvedValue({ data: mockHealthClubLicenseApplicationIdResponse });
+    expect(await client.getLicenseApplicationId(mockAccessToken, mockBusinessId, "Health Club")).toEqual(
+      expected
+    );
+  });
+
   it("returns the first application when there are multiple matching apps whose rgb_number ends with 00", async () => {
     const mockResponseWithMultipleMainApplications = {
       value: [
