@@ -6,7 +6,7 @@ import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
 import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
-import { AnytimeActionContainer } from "@/components/dashboard/anytime-actions/AnytimeActionContainer";
+import { AnytimeActionDropdown } from "@/components/dashboard/anytime-actions/AnytimeActionDropdown";
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -66,9 +66,9 @@ export const DashboardOnMobile = (props: Props): ReactElement => {
               )}
 
               {operatingPhase.displayAnytimeActions && (
-                <AnytimeActionContainer
-                  anytimeActionLinks={props.anytimeActionLinks}
+                <AnytimeActionDropdown
                   anytimeActionTasks={props.anytimeActionTasks}
+                  anytimeActionLinks={props.anytimeActionLinks}
                   anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
                 />
               )}
