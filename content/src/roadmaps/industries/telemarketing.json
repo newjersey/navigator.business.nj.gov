@@ -41,6 +41,13 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 8,
+      "task": "",
+      "licenseTask": "telemarketing-license",
+      "required": true
     }
   ],
   "name": "Telemarketing",

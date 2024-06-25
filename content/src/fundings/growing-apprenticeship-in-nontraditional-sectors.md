@@ -7,8 +7,8 @@ id: gains
 sidebarCardBodyText: The Growing Apprenticeship in Nontraditional Sectors
   (GAINS) program aims to promote the expansion and development of
   USDOL-approved Registered Apprenticeship programs.
-openDate: 09/19/2022
-dueDate: 10/28/2022
+openDate: ""
+dueDate: ""
 summaryDescriptionMd: >-
   The Growing Apprenticeship in Nontraditional Sectors (GAINS) program aims to
   promote the expansion and development of [USDOL-approved Registered
