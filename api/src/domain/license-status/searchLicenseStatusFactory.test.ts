@@ -51,7 +51,7 @@ describe("searchLicenseStatusFactory", () => {
     });
 
     it("returns dynamics status client when license type is health club services", () => {
-      const licenseType = "Health Club Services";
+      const licenseType = "Health Club";
       const licenseStatus = searchLicenseStatus(licenseType);
       licenseStatus(generateLicenseSearchNameAndAddress({}), licenseType);
       expect(stubDynamicsSearchLicenseStatus).toHaveBeenCalled();
