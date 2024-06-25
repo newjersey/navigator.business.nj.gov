@@ -8,7 +8,8 @@ sectorIds: []
 icon: update-purple.svg
 urlSlug: landscape-architecture-certificate-reinstatement
 summaryDescriptionMd: You must reinstate your Certificate of Authorization to
-  Offer Landscape Architectural Services if it is expired or inactive.
+  Provide or Offer Landscape Architectural Services if it is expired or
+  inactive.
 callToActionText: Reinstate My Certificate of Authorization
 callToActionLink: https://www.njconsumeraffairs.gov/land/Pages/default.aspx
 ---
