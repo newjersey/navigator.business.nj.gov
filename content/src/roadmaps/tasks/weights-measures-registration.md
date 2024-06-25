@@ -4,6 +4,9 @@ notesMd: >-
   https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/4264
 
 
+  Planning Doc: https://docs.google.com/document/d/1GkCGZJ6AtidUTOGJ7LzETIvcEpwWz2PhN5nAt2x0Gb8/edit#heading=h.xs6kxikm21e9
+
+
   25 June 2024: Revisions made to address SME comments from Jason Flint:
 
 
