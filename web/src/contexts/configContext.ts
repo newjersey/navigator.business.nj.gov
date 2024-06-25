@@ -21,6 +21,7 @@ import * as ElevatorRegistration from "@businessnjgovnavigator/content/fieldConf
 import * as ExportPdf from "@businessnjgovnavigator/content/fieldConfig/export-pdf.json";
 import * as FormationInterimSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-interim-success-page.json";
 import * as FormationSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-success-page.json";
+import * as SiteWideErrorMessages from "@businessnjgovnavigator/content/fieldConfig/global-errors-defaults.json";
 import * as NaicsCode from "@businessnjgovnavigator/content/fieldConfig/naics-code.json";
 import * as NavigationDefaults from "@businessnjgovnavigator/content/fieldConfig/navigation-defaults.json";
 import * as NexusDbaFormation from "@businessnjgovnavigator/content/fieldConfig/nexus-dba-formation.json";
@@ -53,6 +54,7 @@ const merged = JSON.parse(
       FormationInterimSuccessPage,
       FormationSuccessPage,
       PageNotFoundError,
+      SiteWideErrorMessages,
       DeferredLocation,
       DashboardSnackbars,
       DashboardCalendar,
@@ -91,6 +93,7 @@ export type ConfigType = typeof ConfigOriginal &
   typeof FormationInterimSuccessPage &
   typeof FormationSuccessPage &
   typeof PageNotFoundError &
+  typeof SiteWideErrorMessages &
   typeof DeferredLocation &
   typeof DashboardCalendar &
   typeof DashboardModals &

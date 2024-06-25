@@ -258,12 +258,6 @@
     "errorTextSearchFailed": "Sorry, something went wrong. Please try again later.",
     "unavailableText": "Sorry, \"${name}\" isn't available. Try another name."
   },
-  "siteWideErrorMessages": {
-    "errorTextNoData": "Something went wrong and we can't access your data. Please try again later.",
-    "errorTextCachedOnly": "We're having trouble connecting. The data you're viewing is cached and it may be out-of-date.",
-    "errorTextUpdateFailed": "Something went wrong with your request. Please try again later.",
-    "errorRadioButton": "Make a selection."
-  },
   "footer": {
     "creditLinkText": "Open Source",
     "facebookLink": "https://www.facebook.com/BusinessNJgov",

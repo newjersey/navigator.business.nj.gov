@@ -68,6 +68,7 @@ export const cmsCollections = [
       "Post Onboarding Content",
       "Contextual Information",
       "404 Page",
+      "Global Error Messages",
       "Navigation Config",
     ],
   },

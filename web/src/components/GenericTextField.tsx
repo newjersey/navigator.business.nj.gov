@@ -1,4 +1,5 @@
 import { FormContextType } from "@/contexts/formContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { FieldErrorType, FormContextFieldProps } from "@/lib/types/types";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
@@ -58,6 +59,8 @@ export const GenericTextField = forwardRef(
         : props.inputWidth === "full"
         ? "width-100"
         : "text-field-width-default";
+
+    const { Config } = useConfig();
 
     let visualFilter = props.visualFilter;
     let valueFilter = props.valueFilter;
@@ -167,6 +170,14 @@ export const GenericTextField = forwardRef(
           type={props.type}
           onFocus={props.onFocus}
         />
+
+        <div aria-live="polite" className="screen-reader-only">
+          {error && (
+            <div>{`${Config.siteWideErrorMessages.errorScreenReaderInlinePrefix} ${camelCaseToSentence(
+              props.fieldName
+            )}, ${props.validationText}`}</div>
+          )}
+        </div>
       </div>
     );
   }

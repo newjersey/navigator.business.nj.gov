@@ -189,7 +189,7 @@ describe("Formation - Signatures", () => {
               field: Config.formation.fields.signers.label,
               maxLen: "50",
             }),
-            { exact: false }
+            { exact: true }
           );
         };
         expect(signerErrorText()).toBeInTheDocument();
@@ -249,7 +249,7 @@ describe("Formation - Signatures", () => {
               field: Config.formation.fields.signers.label,
               maxLen: "50",
             }),
-            { exact: false }
+            { exact: true }
           );
         };
         expect(signerErrorText()).toBeInTheDocument();
