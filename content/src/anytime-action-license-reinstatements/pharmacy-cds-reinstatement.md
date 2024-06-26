@@ -1,8 +1,8 @@
 ---
-notesMd: >-
-  * 6.17: work in progress
+notesMd: >
+  * 6.26: draft approved by Regina, edits reflected here.
 
-  * pdf application is not available on the consumer affairs site. It's located in our google drive, but unsure how to/where to upload it so users can link it (probably requires dev?)
+  * Working draft: https://docs.google.com/document/d/1Z-DF2hB6N4wyVUQqH_-G0A2DPt4Rcb5uqWdJ35q3EeQ/edit
 filename: pharmacy-cds-reinstatement
 name: Reinstate Your Pharmacy’s Controlled Dangerous Substance (CDS) Registration
 industryIds:
@@ -10,14 +10,17 @@ industryIds:
 sectorIds: []
 icon: update-purple.svg
 urlSlug: pharmacy-cds-reinstatement
-summaryDescriptionMd: If your CDS registration has been expired for more than 30
-  days or is inactive, you need to reinstate it. If it expired less than 30 days
-  ago, [you can renew online](https://newjersey.mylicense.com/). You must
-  already be registered with the [U.S. Drug Enforcement Administration
-  (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) before
-  applying for your CDS reinstatement. Email your application to
-  [CDS@dca.njoag.gov](mailto:CDS@dca.njoag.gov). Do not include your payment.
-  The NJ Drug Control Unit (DCU) will send you an invoice to pay the fee online.
+summaryDescriptionMd: >
+  If your CDS registration expired less than 30 days ago, [you can renew
+  online](https://newjersey.mylicense.com/). If it has been expired for more
+  than 30 days or is inactive, you need to reinstate it by following these
+  steps:
+
+  1. Ensure you are registered with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) before applying for your CDS reinstatement. 
+
+  2. Email The NJ Drug Control Unit (DCU) [CDS@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the Facilities Reinstatement application.
+
+  3. After your completed application has been emailed back to the DCU, they will send you an invoice to pay the fee online.
 ---
 ## Application Requirements
 
