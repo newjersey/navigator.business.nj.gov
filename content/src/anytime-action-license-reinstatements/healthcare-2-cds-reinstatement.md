@@ -7,16 +7,14 @@ industryIds: []
 sectorIds: []
 icon: update-purple.svg
 urlSlug: healthcare-2-cds-reinstatement
-summaryDescriptionMd: If you’re a Physician Assistant (PA), Advanced Practice
-  Nurse (APN), or Certified Nurse Midwife (CNM), and your CDS registration has
-  been expired for more than 30 days or is inactive, you need to reinstate it.
-  If it expired less than 30 days ago, [you can renew
-  online](https://newjersey.mylicense.com/). You must already be registered with
-  the [U.S. Drug Enforcement Administration
-  (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) before
-  applying for your CDS reinstatement. Email your application to
-  [CDS@dca.njoag.gov](mailto:CDS@dca.njoag.gov). Do not include your payment.
-  The NJ Drug Control Unit (DCU) will send you an invoice to pay the fee online.
+summaryDescriptionMd: >-
+  If you’re a Physician Assistant (PA), Advanced Practice Nurse (APN), or
+  Certified Nurse Midwife (CNM), and your CDS registration expired less than 30
+  days ago, [you can renew online](https://newjersey.mylicense.com/). If it has
+  been expired for more than 30 days or is inactive, you need to reinstate it. 
+
+
+  You must be registered with the U.S. Drug Enforcement Administration (DEA) before applying for your CDS reinstatement. Email your application to CDS@dca.njoag.gov. Do not include your payment. The NJ Drug Control Unit (DCU) will send you an invoice to pay the fee online.
 callToActionText: "Reinstate My PA, APN, or CNM CDS Registration "
 callToActionLink: "https://www.njconsumeraffairs.gov/dcu/Applications/Reinstate\
   ment-Application-for-Registration-for-Dispenser-Prescriber-Mid-Level-Practiti\
