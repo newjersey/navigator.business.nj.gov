@@ -1,13 +1,14 @@
 ---
-notesMd: "[Muni Team content
-  updates](https://docs.google.com/document/d/1wiy_6W3rh6n-7-kMDxFWZsXuY1y-0ib4\
-  Z4dDOptVlQg/edit)"
-header: Non-Life Hazard Use (NLHU)
+notesMd: "Muni Team - updated document:
+  https://docs.google.com/document/d/1d_r82t8bcIoeQQomFOhH0tTAWgCC6YLnw7tDSewdX\
+  Js/edit?usp=sharing"
+header: Non-Life Hazard Use (NLHU) Business
 slug: non-life-hazard-use
 displayname: non-life-hazard-use
 ---
-Non-Life Hazard Use is a label assigned to businesses that do not present a high risk to human life during fires and other emergencies. [Find your Local Enforcing Agency (LEA)](https://www.nj.gov/dca/divisions/dfs/pdf/fire_code_enforcement_director.pdf) to learn if your business is an NLHU and needs to be registered with your LEA.
+Non-Life Hazard Use (NLHU) is a label given to businesses with a commercial or manufacturing space that does not pose a high risk to human life in a fire or other emergency. [Contact your Local Enforcing Agency (LEA)](https://www.nj.gov/dca/divisions/dfs/pdf/fire_code_enforcement_director.pdf) to see if your business is an NLHU.
 
-If you need to register your business as an NLHU, your business will be added to the schedule for routine fire inspections after registration. When and how often inspections occur depends on your town, so check with your LEA so you can prepare accordingly.
+NLHU businesses:
 
-NLHU businesses may also need to renew registration and pay any associated fees.
+* May need to register with their LEA each year to operate
+* Get inspected by a state or local inspector on a schedule based on the type of business and how the space is used
