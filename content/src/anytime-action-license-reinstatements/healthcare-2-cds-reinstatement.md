@@ -14,7 +14,7 @@ summaryDescriptionMd: >-
   been expired for more than 30 days or is inactive, you need to reinstate it. 
 
 
-  You must be registered with the U.S. Drug Enforcement Administration (DEA) before applying for your CDS reinstatement. Email your application to CDS@dca.njoag.gov. Do not include your payment. The NJ Drug Control Unit (DCU) will send you an invoice to pay the fee online.
+  You must be registered with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) before applying for your CDS reinstatement. Email your application to CDS@dca.njoag.gov. Do not include your payment. The NJ Drug Control Unit (DCU) will send you an invoice to pay the fee online.
 callToActionText: "Reinstate My PA, APN, or CNM CDS Registration "
 callToActionLink: "https://www.njconsumeraffairs.gov/dcu/Applications/Reinstate\
   ment-Application-for-Registration-for-Dispenser-Prescriber-Mid-Level-Practiti\
