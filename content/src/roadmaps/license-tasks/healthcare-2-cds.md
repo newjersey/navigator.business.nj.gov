@@ -1,8 +1,7 @@
 ---
 notesMd: >-
-  
-
-  * Drafting doc: https://docs.google.com/document/d/1v2FUVjAAl_2hQEPCtcPS4U-g-6u51LBl4xQQZ-x1ofs/edit#heading=h.1x1l4kebenfj
+  * Drafting doc:
+  https://docs.google.com/document/d/1v2FUVjAAl_2hQEPCtcPS4U-g-6u51LBl4xQQZ-x1ofs/edit#heading=h.1x1l4kebenfj
 
   * Note: there are 2 healthcare CDS registrations: healthcare-1-cds and healthcare-2-cds
 
