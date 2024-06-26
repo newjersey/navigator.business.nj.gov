@@ -1,6 +1,6 @@
 ---
 notesMd: >
-  * 6.26: draft approved by Regina, edits reflected here.
+  * 6.26: draft approved by Regina, edits reflected here. 
 
   * Working draft: https://docs.google.com/document/d/1Z-DF2hB6N4wyVUQqH_-G0A2DPt4Rcb5uqWdJ35q3EeQ/edit
 filename: pharmacy-cds-reinstatement
