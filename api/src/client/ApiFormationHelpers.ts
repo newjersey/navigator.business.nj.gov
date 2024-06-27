@@ -308,6 +308,7 @@ export const makePostBody = (
       ContactFirstName: formationFormData.contactFirstName,
       ContactLastName: formationFormData.contactLastName,
       ContactPhoneNumber: formationFormData.contactPhoneNumber,
+      ContactEmail: userData.user.email,
     },
   };
 };
@@ -398,6 +399,7 @@ export interface Formation extends Provisions {
   ContactFirstName: string; //Contact person for filing
   ContactLastName: string;
   ContactPhoneNumber: string;
+  ContactEmail: string;
 }
 
 export interface ApiSubmission {
