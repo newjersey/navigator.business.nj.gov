@@ -1,3 +1,10 @@
+## [2024.19.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.19.0...v2024.19.1) (2024-06-27)
+
+
+### Bug Fixes
+
+* redeploy for formation API content-type changes ([32409e3](https://github.com/newjersey/navigator.business.nj.gov/commit/32409e336b1b274bf43c4fb315fd072bd14ca6b8))
+
 # [2024.19.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.18.0...v2024.19.0) (2024-06-18)
 
 
