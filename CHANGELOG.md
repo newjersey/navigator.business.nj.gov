@@ -1,3 +1,10 @@
+## [2024.19.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.19.1...v2024.19.2) (2024-06-27)
+
+
+### Bug Fixes
+
+* add ContactEmail to PrepareFiling POST body ([db04b8f](https://github.com/newjersey/navigator.business.nj.gov/commit/db04b8fc5ea55438a1176dcb3b63a493a753de21))
+
 ## [2024.19.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.19.0...v2024.19.1) (2024-06-27)
 
 
