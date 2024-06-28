@@ -38,6 +38,7 @@ const update = (
       "telemarketing-license": args.taskStatus,
       "landscape-architect-license": args.taskStatus,
       "health-club-registration": args.taskStatus,
+      "ticket-broker-reseller-registration": args.taskStatus,
     },
     licenseData: {
       nameAndAddress: args.nameAndAddress,
