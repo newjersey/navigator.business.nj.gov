@@ -14,6 +14,7 @@ export const searchLicenseStatusFactory = (
       "Health Care Services": true,
       "Health Club": true,
       Telemarketing: true,
+      "Ticket Brokers": true,
     };
 
     const shouldUseDynamicsSearch = licenseTypesUsingDynamicsSearch[licenseType] || false;

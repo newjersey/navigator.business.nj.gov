@@ -59,6 +59,9 @@ export const TaskPageSwitchComponent = ({
     "health-club-registration": (
       <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),
+    "ticket-broker-reseller-registration": (
+      <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
+    ),
     "elevator-registration": (
       <ElevatorRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),

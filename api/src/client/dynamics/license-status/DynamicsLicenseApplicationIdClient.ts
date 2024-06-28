@@ -72,6 +72,7 @@ const licenseTypeToLicenseId: Record<string, string> = {
   "Health Care Services": "3ac8456a-53df-eb11-bacb-001dd8028561",
   "Health Club": "af8e3564-53df-eb11-bacb-001dd8028561",
   Telemarketing: "7e957057-53df-eb11-bacb-001dd8028561",
+  "Ticket Brokers": "538e3564-53df-eb11-bacb-001dd8028561",
 };
 
 const statusCodeToLicenseStatus: Record<number, LicenseStatus> = {
