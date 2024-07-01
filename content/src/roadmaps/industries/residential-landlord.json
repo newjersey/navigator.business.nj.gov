@@ -55,7 +55,7 @@
     "canBeHomeBased": false,
     "canBeReseller": false
   },
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "residential rentals, apartment, leasing, house rental",
   "id": "residential-landlord",
   "description": "Owns and rents out property for people to live in",
