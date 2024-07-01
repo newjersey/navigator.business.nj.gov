@@ -1,10 +1,6 @@
 ---
 summaryDescriptionMd: >+
-  :::infoAlert 
-   \[DRAFT] You must complete page 11 of the NJ REG form.
-  :::
-
-
+  
   It's time to register for State taxes. Doing so will tell the State more about you as an employer and determine the taxes and employer contributions you're responsible for.
 
 urlSlug: domestic-employer-tax-registration
@@ -33,12 +29,9 @@ formName: NJ-Reg
 
 - - -
 
-## Next Steps
+## Register for State Taxes
 
-1. [Register for State Taxes](https://www.njportal.com/DOR/BusinessRegistration)
-2. Save your New Jersey Tax ID (xxx-xxx-xxx/xxx)
-
-${taxInputComponent}
+[Complete page 17 of this form and choose "Domestic (Household Employer)" under step "I."](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf)
 
 - - -
 
