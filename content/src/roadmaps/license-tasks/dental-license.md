@@ -4,7 +4,7 @@ notesMd: >-
   https://docs.google.com/document/d/1e2LcLWIgCXRK_Urszn7-ejkxqMcoURv2qoP1Ceu_1oY/edit
 
 
-  7.1: In progress
+  7.1: In progress. In "be advised", the branch registration will be linked (once it exists) 
 id: "dental-license "
 filename: "dental-license "
 displayname: dental-license
@@ -22,7 +22,7 @@ agencyId: nj-consumer-affairs
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
 
 * You need a separate branch registration for each location where you practice dentistry
-* As a dentist, you must register with the [New Jersey Prescription Monitoring Program](https
+* As a dentist, you must register with the [New Jersey Prescription Monitoring Program](https://www.njconsumeraffairs.gov/pmp/Pages/register.aspx)
 
 :::
 
