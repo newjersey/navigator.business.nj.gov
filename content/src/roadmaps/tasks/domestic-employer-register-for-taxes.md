@@ -32,7 +32,13 @@ formName: NJ-Reg
 
 ## Register for State Taxes
 
-[Complete page 17 of this form and choose "Domestic (Household Employer)" under step "I."](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf)
+Complete page 17 of the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) and choose "Domestic (Household Employer)" under step I.
+
+:::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
+
+As a domestic employer, you may only apply for taxes using the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) (page 17). You may not apply online.
+
+:::
 
 - - -
 
