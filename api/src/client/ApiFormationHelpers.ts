@@ -1,6 +1,7 @@
 import { CountriesShortCodes } from "@shared/countries";
 import { parseDateWithFormat } from "@shared/dateHelpers";
 import { defaultDateFormat } from "@shared/defaultConstants";
+import { isStartingBusiness } from "@shared/domain-logic/businessPersonaHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import {
   BusinessSuffix,
@@ -40,6 +41,26 @@ export const makePostBody = (
       return "veteran-nonprofit";
     }
     return currentBusiness.profileData.legalStructureId as FormationLegalType;
+  };
+
+  const getMainBusinessAddress = (): ApiLocation | undefined => {
+    const isStartingBusinessPartiallyEmpty =
+      isStartingBusiness(currentBusiness) &&
+      formationFormData.addressLine1 === "" &&
+      formationFormData.addressMunicipality === undefined &&
+      formationFormData.addressZipCode === "";
+
+    if (isStartingBusinessPartiallyEmpty) return undefined;
+
+    return {
+      Address1: formationFormData.addressLine1,
+      Address2: formationFormData.addressLine2,
+      City: formationFormData.addressMunicipality?.name ?? formationFormData.addressCity ?? "",
+      State: formationFormData.addressState?.name,
+      Province: formationFormData.addressProvince,
+      Zipcode: formationFormData.addressZipCode,
+      Country: formationFormData.addressCountry,
+    };
   };
 
   const naicsCode =
@@ -212,15 +233,7 @@ export const makePostBody = (
           formationFormData.businessStartDate,
           defaultDateFormat
         ).format(formationApiDateFormat),
-        MainAddress: {
-          Address1: formationFormData.addressLine1,
-          Address2: formationFormData.addressLine2,
-          City: formationFormData.addressMunicipality?.name ?? formationFormData.addressCity ?? "",
-          State: formationFormData.addressState?.name,
-          Province: formationFormData.addressProvince,
-          Zipcode: formationFormData.addressZipCode,
-          Country: formationFormData.addressCountry,
-        },
+        MainAddress: getMainBusinessAddress(),
         TotalShares:
           formationFormData.businessTotalStock.length > 0
             ? Number.parseInt(formationFormData.businessTotalStock)
@@ -375,7 +388,7 @@ export interface Formation extends Provisions {
     Naic: string; // If supplied must be 6 digits
     BusinessPurpose: string | undefined; // Max 300 chars
     EffectiveFilingDate: string; // date mm/dd/yyyy
-    MainAddress: ApiLocation;
+    MainAddress?: ApiLocation;
     TotalShares: number | undefined;
     ForeignStateOfFormation: StateNames | undefined;
     ForeignDateOfFormation: string | undefined; // date mm/dd/yyyy

@@ -14,6 +14,7 @@ import {
   generateFormationNJAddress,
   generateFormationSigner,
   generateFormationUSAddress,
+  generateMunicipality,
   generateProfileData,
   generateUserDataForBusiness,
 } from "@shared/test";
@@ -31,8 +32,6 @@ jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
 const DEBUG = Boolean(process.env.DEBUG ?? false);
-
-process.env.FEATURE_FORMATION_CONTENT_TYPE_PLAIN_ONLY = "true";
 
 const generateApiResponse = (overrides: Partial<ApiResponse>): ApiResponse => {
   return {
@@ -1466,6 +1465,89 @@ describe("ApiFormationClient", () => {
 
         expect(lastSubmittedData.Formation.BusinessInformation.Business).toEqual(
           "DomesticNonProfitVeteranCorporation"
+        );
+      });
+    });
+
+    describe("Main Business Address when starting a new business", () => {
+      it("updates post body with undefined value when address is empty", async () => {
+        const stubResponse = generateApiResponse({});
+        mockAxios.post.mockResolvedValue({ data: stubResponse });
+
+        const userData = generateFormationUserData(
+          { businessPersona: "STARTING" },
+          {},
+          { addressLine1: "", addressMunicipality: undefined, addressZipCode: "" }
+        );
+
+        await client.form(userData, "some-url");
+        const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+        expect(postBody.Formation.BusinessInformation.MainAddress).toBeUndefined();
+      });
+
+      it("updates post body with address when address is provided", async () => {
+        const stubResponse = generateApiResponse({});
+        mockAxios.post.mockResolvedValue({ data: stubResponse });
+
+        const userData = generateFormationUserData(
+          { businessPersona: "STARTING" },
+          {},
+          {
+            addressLine1: "11 Main Street",
+            addressMunicipality: generateMunicipality({}),
+            addressZipCode: "08363",
+          }
+        );
+        const currentBusiness = getCurrentBusiness(userData);
+
+        await client.form(userData, "some-url");
+        const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+
+        expect(postBody.Formation.BusinessInformation.MainAddress?.Address1).toEqual(
+          currentBusiness.formationData.formationFormData.addressLine1
+        );
+        expect(postBody.Formation.BusinessInformation.MainAddress?.City).toEqual(
+          currentBusiness.formationData.formationFormData.addressMunicipality?.name
+        );
+        expect(postBody.Formation.BusinessInformation.MainAddress?.State).toEqual(
+          currentBusiness.formationData.formationFormData.addressState?.name
+        );
+        expect(postBody.Formation.BusinessInformation.MainAddress?.Zipcode).toEqual(
+          currentBusiness.formationData.formationFormData.addressZipCode
+        );
+      });
+    });
+
+    describe("Main Business Address when business is foreign", () => {
+      it("updates post body with values when address is partially empty", async () => {
+        const stubResponse = generateApiResponse({});
+        mockAxios.post.mockResolvedValue({ data: stubResponse });
+
+        const userData = generateFormationUserData(
+          { businessPersona: "FOREIGN" },
+          {},
+          {
+            addressLine1: "",
+            addressMunicipality: generateMunicipality({}),
+            addressZipCode: "",
+          }
+        );
+        const currentBusiness = getCurrentBusiness(userData);
+
+        await client.form(userData, "some-url");
+        const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+
+        expect(postBody.Formation.BusinessInformation.MainAddress?.Address1).toEqual(
+          currentBusiness.formationData.formationFormData.addressLine1
+        );
+        expect(postBody.Formation.BusinessInformation.MainAddress?.City).toEqual(
+          currentBusiness.formationData.formationFormData.addressMunicipality?.name
+        );
+        expect(postBody.Formation.BusinessInformation.MainAddress?.State).toEqual(
+          currentBusiness.formationData.formationFormData.addressState?.name
+        );
+        expect(postBody.Formation.BusinessInformation.MainAddress?.Zipcode).toEqual(
+          currentBusiness.formationData.formationFormData.addressZipCode
         );
       });
     });

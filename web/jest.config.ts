@@ -4,7 +4,6 @@ const esModules = ["rehype-react", "remark-gfm", "remark-parse", "remark-rehype"
 
 process.env = Object.assign(process.env, {
   FEATURE_BUSINESS_FLP: "true",
-  FEATURE_FORMATION_CONTENT_TYPE_PLAIN_ONLY: "true",
   FEATURE_EXPORT_PDF: "true",
   WEBFLOW_API_TOKEN: 12345678910,
 });
