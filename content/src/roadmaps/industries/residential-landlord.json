@@ -52,7 +52,7 @@
   "nonEssentialQuestionsIds": [],
   "displayname": "residential-landlord",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
+    "canBeHomeBased": false,
     "canBeReseller": false
   },
   "isEnabled": false,
