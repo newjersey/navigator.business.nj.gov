@@ -40,6 +40,11 @@
     {
       "step": 3,
       "weight": 21
+    },
+    {
+      "step": 1,
+      "weight": -2,
+      "required": true
     }
   ],
   "name": "Acupuncture",
