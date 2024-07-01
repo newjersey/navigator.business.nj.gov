@@ -14,6 +14,12 @@
       "weight": 6,
       "task": "register-for-ein",
       "required": true
+    },
+    {
+      "step": 2,
+      "weight": 13,
+      "task": "domestic-employer-register-for-taxes",
+      "required": true
     }
   ],
   "name": "Domestic Employer",
