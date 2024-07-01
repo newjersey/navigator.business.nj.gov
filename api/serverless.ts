@@ -77,8 +77,6 @@ const dynamicsElevatorSafetyClientId = process.env.DYNAMICS_ELEVATOR_SAFETY_CLIE
 const dynamicsElevatorSafetySecret = process.env.DYNAMICS_ELEVATOR_SAFETY_SECRET || "";
 const dynamicsElevatorSafetyTenantId = process.env.DYNAMICS_ELEVATOR_SAFETY_TENANT_ID || "";
 
-const featureFormationContentTypePlainOnly = process.env.FEATURE_FORMATION_CONTENT_TYPE_PLAIN_ONLY || "";
-
 const serverlessConfiguration: AWS = {
   useDotenv: true,
   service: "businessnjgov-api",
@@ -211,7 +209,6 @@ const serverlessConfiguration: AWS = {
       DYNAMICS_LICENSE_STATUS_URL: dynamicsLicenseStatusURL,
       DYNAMO_PORT: dynamoOfflinePort,
       FEATURE_DYNAMICS_PUBLIC_MOVERS: featureDynamicsPublicMovers,
-      FEATURE_FORMATION_CONTENT_TYPE_PLAIN_ONLY: featureFormationContentTypePlainOnly,
       FORMATION_API_ACCOUNT: formationApiAccount,
       FORMATION_API_BASE_URL: formationApiBaseUrl,
       FORMATION_API_KEY: formationApiKey,

@@ -29,11 +29,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
     foreignGoodStandingFile: InputFile | undefined
   ): Promise<FormationSubmitResponse> => {
     const postBody = makePostBody(userData, returnUrl, config, foreignGoodStandingFile);
-    const postContentTypePlainOnly =
-      process.env.FEATURE_FORMATION_CONTENT_TYPE_PLAIN_ONLY?.toLowerCase() === "true" ||
-      foreignGoodStandingFile;
-
-    const postContentType = postContentTypePlainOnly ? "text/plain" : "application/json";
+    const postContentType = "text/plain";
 
     logger.LogInfo(
       `Formation - NICUSA - Id:${logId} - ${postContentType} Request Sent to ${
