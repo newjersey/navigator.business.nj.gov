@@ -26,7 +26,7 @@
   "nonEssentialQuestionsIds": [],
   "displayname": "domestic-employer",
   "isEnabled": true,
-  "additionalSearchTerms": "employs a nanny, employs an au pair, employs a housekeeper, private household",
+  "additionalSearchTerms": "employs a nanny, employs an au pair, employs a housekeeper, private household, household employer",
   "id": "domestic-employer",
   "description": "A private household that employs a nanny, housekeeper, au pair, or similar who provides services for the household"
 }
