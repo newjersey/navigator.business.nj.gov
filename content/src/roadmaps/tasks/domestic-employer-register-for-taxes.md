@@ -36,7 +36,7 @@ Complete page 17 of the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/20
 
 :::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
 
-As an employer of one or more `domestic workers|domestic-worker`, you may only apply for taxes using the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) (page 17). You may not apply online.
+As an employer of one or more `domestic workers|domestic-worker` , you may only apply for taxes using the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) (page 17). You may not apply online.
 
 :::
 
