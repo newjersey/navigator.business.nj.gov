@@ -6,7 +6,7 @@ displayname: domestic-worker
 ---
 Domestic workers provide in-home services to private households, including child care, house cleaning, care for elderly or disabled people, and cooking.
 
-Domestic workers can be the following:
+These are examples of domestic workers:
 
 * nannies
 * child care providers
