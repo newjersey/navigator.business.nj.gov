@@ -29,7 +29,6 @@ agencyId: nj-consumer-affairs
 ## Eligibility Criteria 
 
 * Be at least 18 years old
-* Have or will have completed a Doctor of Dental Surgery (DDS) or Doctor of Dental Medicine (DMS) degree from a Commission of Dental Accreditation (CODA) accredited school
 * Have or will have completed a Doctorate in Dentistry from a school accredited by the Commission on Dental Accreditation (CODA)
 * Have a National Board dental personal identification number (DENTPIN)
 * Pass the American Board of Dental Examiners (ADEX) examination 
@@ -58,7 +57,7 @@ agencyId: nj-consumer-affairs
 * Criminal history background check (fingerprinting information will be emailed to you after submitting your application)
 * Applicable fees paid
 
-If you’re applying through reciprocity, in addition to the application requirements, you must mail a [Verification of State License form](https://www.njconsumeraffairs.gov/den/Applications/Dentistry-Verification-of-State-License.pdf)to each state you hold (or have held) a dental license. The dentistry board of each state must complete the form, stamp it with their official seal, and mail it to: New Jersey State Board of Dentistry, P.O. Box 45005, 124 Halsey Street, 6th Floor, Newark, New Jersey 07101.
+If you’re applying through reciprocity, in addition to the application requirements, you must mail a [Verification of State License form](https://www.njconsumeraffairs.gov/den/Applications/Dentistry-Verification-of-State-License.pdf) to each state you hold (or have held) a dental license. The dentistry board of each state must complete the form, stamp it with their official seal, and mail it to: New Jersey State Board of Dentistry, P.O. Box 45005, 124 Halsey Street, 6th Floor, Newark, New Jersey 07101.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
