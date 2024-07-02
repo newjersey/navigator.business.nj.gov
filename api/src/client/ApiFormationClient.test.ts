@@ -1519,7 +1519,7 @@ describe("ApiFormationClient", () => {
     });
 
     describe("Main Business Address when business is foreign", () => {
-      it("updates post body with values when address is partially empty", async () => {
+      it("does not return undefined for business address that is not starting", async () => {
         const stubResponse = generateApiResponse({});
         mockAxios.post.mockResolvedValue({ data: stubResponse });
 
