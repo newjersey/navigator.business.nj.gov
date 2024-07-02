@@ -9,14 +9,11 @@ displayname: pharmacy-cds
 urlSlug: pharmacy-cds
 name: Apply for Your Pharmacy’s Controlled Dangerous Substance (CDS) Registration
 webflowName: "Pharmacy: Controlled Dangerous Substance Registration"
-summaryDescriptionMd: You need CDS registration if you or your business dispense
-  Controlled Dangerous Substances. You must already have a [New Jersey Board of
-  Pharmacy (BOP)
-  permit](https://www.njconsumeraffairs.gov/phar/Applications/Pharmacy-Permit-Application.pdf)
-  before applying for CDS registration. Email your completed CDS application to
-  [CDS@dca.njoag.gov](mailto:CDS@dca.njoag.gov). The New Jersey Drug Control
-  Unit (NJ DCU) will send you an invoice to pay your fee online. Federal
-  facilities do not require registration.
+summaryDescriptionMd: "You need CDS registration if you or your business
+  dispense Controlled Dangerous Substances. You must already have a [New Jersey
+  Board of Pharmacy (BOP)
+  permit](https://www.njconsumeraffairs.gov/phar/Applications/Pharmacy-Permit-A\
+  pplication.pdf) before applying for CDS registration. "
 industryId:
   - pharmacy
 callToActionText: "Apply for My Pharmacy’s CDS Registration "
@@ -43,6 +40,8 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 * Name, address, and telephone number of the `registered agent|registered-agent` (if a corporation) or the name and address of the New Jersey resident responsible for receiving and handling legal paperwork
 * Signed attestation (included in application)
 * Applicable fees paid, once the NJ DCU has sent an invoice
+
+Email your completed CDS application to [CDS@dca.njoag.gov](mailto:CDS@dca.njoag.gov). The New Jersey Drug Control Unit (NJ DCU) will send you an invoice to pay your fee online. Federal facilities do not require registration.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
