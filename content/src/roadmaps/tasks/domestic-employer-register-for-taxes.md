@@ -1,9 +1,18 @@
 ---
 notesMd: Need to add link to Rights for Domestic Workers page when live
-summaryDescriptionMd: It's time to register for State taxes. Doing so will tell
-  the State more about you as an employer of one or more `domestic
-  workers|domestic-worker` and determine the taxes and employer contributions
-  you're responsible for.
+summaryDescriptionMd: >-
+  It's time to register for State taxes. Doing so will tell the State more about
+  you as an employer of one or more `domestic workers|domestic-worker` and
+  determine the taxes and employer contributions you're responsible for.
+
+
+  :::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
+
+
+  For more information on your required responsibilities as an employer, visit [Domestic Workers' Bill of Rights: What employers need to know](https://www.nj.gov/labor/myworkrights/worker-protections/domestic_workers/domesticworkerrights_employers.shtml).
+
+
+  :::
 urlSlug: domestic-employer-tax-registration
 filename: domestic-employer-register-for-taxes
 displayname: domestic-employer-tax-registration
