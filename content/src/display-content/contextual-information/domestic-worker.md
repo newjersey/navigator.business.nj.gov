@@ -20,3 +20,9 @@ Domestic workers can be hired directly by a household or by an agency. Some work
 Even if an employer is not registered with the State, and pays cash "off the books," a domestic worker is entitled to their rights, including a written contract and other protections.
 
 Some domestic workers live in their employer's home. Live-in workers have additional rights and protections.
+
+:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
+
+For more information on your required responsibilities as an employer, visit [Domestic Workers' Bill of Rights: What employers need to know](https://www.nj.gov/labor/myworkrights/worker-protections/domestic_workers/domesticworkerrights_employers.shtml).
+
+:::
