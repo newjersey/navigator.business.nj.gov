@@ -29,7 +29,7 @@ agencyId: nj-consumer-affairs
 ## Eligibility Criteria 
 
 * Be at least 18 years old
-* Have or will have completed a Doctorate in Dentistry from a school accredited by the Commission on Dental Accreditation (CODA)
+* Have or will have completed a doctorate in dentistry from a school accredited by the Commission on Dental Accreditation (CODA)
 * Have a National Board dental personal identification number (DENTPIN)
 * Pass the American Board of Dental Examiners (ADEX) examination 
 * Complete the online New Jersey Law and Jurisprudence Orientation Program (instructions will be emailed to you after submitting your dental license application)
@@ -37,9 +37,9 @@ agencyId: nj-consumer-affairs
 ## Application Requirements
 
 * Business name and address 
+* Mailing address
 * National Board dental personal identification number (DENTPIN)
 * Social Security number (SSN), or Individual Taxpayer Identification number (ITIN)
-* Mailing address 
 * License address (the address printed on your license)
 * Child support information, if applicable
 * Explanation of medical conditions, if applicable 
