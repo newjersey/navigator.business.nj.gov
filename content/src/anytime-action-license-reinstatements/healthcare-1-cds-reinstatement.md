@@ -16,7 +16,7 @@ summaryDescriptionMd: >-
   than 30 days or is inactive, you need to reinstate it. 
 
 
-  You must be registered with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) before applying for your CDS reinstatement. Email your application to CDS@dca.njoag.gov. Do not include your payment. The NJ Drug Control Unit (DCU) will send you an invoice to pay the fee online.
+  You must be registered with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) before applying for your CDS reinstatement. 
 callToActionText: "Reinstate My CDS Registration "
 callToActionLink: "https://www.njconsumeraffairs.gov/dcu/Applications/Reinstate\
   ment-Application-for-Registration-for-Dispenser-Prescriber-Practitioner.pdf "
@@ -31,6 +31,8 @@ callToActionLink: "https://www.njconsumeraffairs.gov/dcu/Applications/Reinstate\
 * DEA registration number
 * Signed attestation (included in application)
 * Applicable fees paid, once the NJ DCU has sent an invoice
+
+Email your application to CDS@dca.njoag.gov. Do not include your payment. The NJ Drug Control Unit (DCU) will send you an invoice to pay the fee online.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
 
