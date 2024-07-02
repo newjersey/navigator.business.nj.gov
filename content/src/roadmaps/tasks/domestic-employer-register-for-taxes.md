@@ -7,11 +7,11 @@ summaryDescriptionMd: It's time to register for State taxes. Doing so will tell
 urlSlug: domestic-employer-tax-registration
 filename: domestic-employer-register-for-taxes
 displayname: domestic-employer-tax-registration
-name: Register as a Domestic Employer for State Taxes and Employer Purposes
+name: Register for State Taxes and Employer Purposes
 id: domestic-employer-register-for-taxes
 callToActionLink: ""
 callToActionText: ""
-agencyId: nj-revenue-enterprise-services
+agencyId: nj-taxation
 formName: NJ-Reg
 ---
 ## Application Requirements
@@ -21,9 +21,8 @@ formName: NJ-Reg
 *  `EIN|ein` 
 * Estimated start date
 * Description of your business activity
-* Estimated number of employees (if applicable)
-* Anticipated first payroll withholding date for employees (if applicable)
-* Information on if and when you expect to report and collect sales tax
+* Estimated number of employees
+* Anticipated first payroll withholding date for employees
 * Owner information
 * Mail to address and business location(s)
 * Other taxes you may collect (e.g., motor fuels and cigarette/tobacco taxes), a list will be provided
