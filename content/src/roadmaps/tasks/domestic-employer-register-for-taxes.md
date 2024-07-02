@@ -16,16 +16,12 @@ formName: NJ-Reg
 ---
 ## Application Requirements
 
-*  `Entity ID|entity-id` (not required for general partnership or sole proprietorship)
-* [NAICS code](/tasks/naics-code-determination): ${naicsCode}
-*  `EIN|ein` 
+* [NAICS code](/tasks/naics-code-determination): Use NAICS code 814110 for "Private households employing domestic personnel"
+* Social Security number 
 * Estimated start date
 * Description of your business activity
 * Estimated number of employees
 * Anticipated first payroll withholding date for employees
-* Owner information
-* Mail to address and business location(s)
-* Other taxes you may collect (e.g., motor fuels and cigarette/tobacco taxes), a list will be provided
 
 - - -
 
