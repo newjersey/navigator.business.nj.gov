@@ -1,11 +1,13 @@
 ---
-notesMd: >-
+notesMd: >
   * Drafting doc:
   https://docs.google.com/document/d/1v2FUVjAAl_2hQEPCtcPS4U-g-6u51LBl4xQQZ-x1ofs/edit#heading=h.1x1l4kebenfj
 
   * Note: there are 2 healthcare CDS registrations: healthcare-1-cds and healthcare-2-cds
 
   * The content has been reviewed in the google doc and is ready for another review and/or publishing
+
+  * Regina reviewed on 7.1 and this is ready to publish after making the following change: move these sentences below all the application requirements bullets in its own paragraph: "Email your completed CDS application to CDS@dca.njoag.gov. The New Jersey Drug Control Unit (NJ DCU) will send you an invoice to pay your fee online."
 id: "healthcare-2-cds "
 filename: healthcare-2-cds
 displayname: healthcare-2-cds
@@ -15,10 +17,7 @@ name: Apply for Your PA, APN, or CNM Controlled Dangerous Substance (CDS)
 webflowName: "Healthcare: Controlled Dangerous Substance Registration - PA, APN, and CNM"
 summaryDescriptionMd: You need CDS registration if you’re a Physician Assistant
   (PA), Advanced Practice Nurse (APN), or Certified Nurse Midwife (CNM), and you
-  or your business prescribe or dispense Controlled Dangerous Substances. Email
-  your completed CDS application to
-  [CDS@dca.njoag.gov](mailto:CDS@dca.njoag.gov). The New Jersey Drug Control
-  Unit (NJ DCU) will send you an invoice to pay your fee online.
+  or your business prescribe or dispense Controlled Dangerous Substances.
 industryId:
   - healthcare
 callToActionText: Apply for My PA, APN, or CNM CDS Registration
@@ -41,6 +40,8 @@ You must register with the [U.S. Drug Enforcement Administration (DEA)](https://
 * Social Security number
 * Signed attestation (included in application)
 * Applicable fees paid, once the NJ DCU has sent an invoice
+
+Email your completed CDS application to [CDS@dca.njoag.gov](mailto:CDS@dca.njoag.gov). The New Jersey Drug Control Unit (NJ DCU) will send you an invoice to pay your fee online.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
