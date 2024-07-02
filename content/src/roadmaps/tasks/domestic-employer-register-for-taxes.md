@@ -7,32 +7,27 @@ summaryDescriptionMd: It's time to register for State taxes. Doing so will tell
 urlSlug: domestic-employer-tax-registration
 filename: domestic-employer-register-for-taxes
 displayname: domestic-employer-tax-registration
-name: Register as a Domestic Employer for State Taxes and Employer Purposes
+name: Register for State Taxes and Employer Purposes
 id: domestic-employer-register-for-taxes
 callToActionLink: ""
 callToActionText: ""
-agencyId: nj-revenue-enterprise-services
+agencyId: nj-taxation
 formName: NJ-Reg
 ---
 ## Application Requirements
 
-*  `Entity ID|entity-id` (not required for general partnership or sole proprietorship)
-* [NAICS code](/tasks/naics-code-determination): ${naicsCode}
-*  `EIN|ein` 
+* [NAICS code](/tasks/naics-code-determination): Use NAICS code 814110 for "Private households employing domestic personnel"
+* Social Security number 
 * Estimated start date
 * Description of your business activity
-* Estimated number of employees (if applicable)
-* Anticipated first payroll withholding date for employees (if applicable)
-* Information on if and when you expect to report and collect sales tax
-* Owner information
-* Mail to address and business location(s)
-* Other taxes you may collect (e.g., motor fuels and cigarette/tobacco taxes), a list will be provided
+* Estimated number of employees
+* Anticipated first payroll withholding date for employees
 
 - - -
 
 ## Register for State Taxes
 
-Complete page 17 of the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) and choose "Domestic (Household Employer)" under step I.
+Complete page 17 of the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) and choose "Employer of Domestic Household Employee(s)" under step A and "Domestic (Household Employer)" under step H.
 
 :::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
 
