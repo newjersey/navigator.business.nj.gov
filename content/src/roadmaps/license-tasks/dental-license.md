@@ -22,7 +22,7 @@ agencyId: nj-consumer-affairs
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
 
 * You need a separate branch registration for each location where you practice dentistry
-* As a dentist, you must register with the [New Jersey Prescription Monitoring Program](https://www.njconsumeraffairs.gov/pmp/Pages/register.aspx)
+* Once your application has been approved, you will receive an Initial Registration Form. You must verify the information and return the form with the appropriate fee to receive your dental license
 
 :::
 
@@ -58,12 +58,6 @@ agencyId: nj-consumer-affairs
 * Applicable fees paid
 
 If you’re applying through reciprocity, in addition to the application requirements, you must mail a [Verification of State License form](https://www.njconsumeraffairs.gov/den/Applications/Dentistry-Verification-of-State-License.pdf) to each state you hold (or have held) a dental license. The dentistry board of each state must complete the form, stamp it with their official seal, and mail it to: New Jersey State Board of Dentistry, P.O. Box 45005, 124 Halsey Street, 6th Floor, Newark, New Jersey 07101.
-
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
-
-Once your application has been approved, you will receive an Initial Registration Form. You must verify the information and return the form with the appropriate fee to receive your dental license.
-
-:::
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
 
