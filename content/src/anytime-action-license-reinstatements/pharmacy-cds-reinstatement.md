@@ -32,18 +32,7 @@ summaryDescriptionMd: >
 * Names, titles, and residential addresses of each officer 
 * Signed attestation (included in application)
 * Applicable fees paid, once the NJ DCU has sent an invoice
-
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
-
-Your reinstatement application must be signed in front of and by a notary public.
-
-:::
-
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
-
-If your CDS registration is inactive, you need to sign up again for the [New Jersey Prescription Monitoring Program](https://www.njconsumeraffairs.gov/pmp/Pages/register.aspx).
-
-:::
+* Your reinstatement application must be signed in front of and by a notary public
 
 :::callout{ showHeader="true" headerText="What if I don't reinstate my registration?" showIcon="false" calloutType="conditional" }
 
