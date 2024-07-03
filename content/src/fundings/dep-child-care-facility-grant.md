@@ -28,7 +28,8 @@ homeBased: unknown
 certifications: []
 county:
   - All
-sector: []
+sector:
+  - other-services
 publishStageArchive: ""
 ---
 ## Eligibility
