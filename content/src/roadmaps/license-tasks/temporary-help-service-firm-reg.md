@@ -7,8 +7,7 @@ name: "Register Your Temporary Help Service Firm "
 webflowName: "Employment and Personnel Service: Temporary Help Service Firm "
 summaryDescriptionMd: You must register as a temporary help service firm to
   place job seekers who are on your payroll with clients for temporary help
-  services in New Jersey. Submit your application through the Regulated Business
-  (RGB) Online Registration Portal.
+  services in New Jersey.
 industryId: employment-agency
 callToActionText: Register My Temporary Help Service
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
@@ -30,6 +29,8 @@ licenseCertificationClassification: undefined
 * Trade name, if applicable
 * Criminal history of any officers, directors, or principals with at least 10% ownership interest, if applicable
 * Explanation of license suspension, denial, or revocation, if applicable
+
+Submit your application through the [Regulated Business (RGB) Online Registration Portal](https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx). Select "Consulting Firm/Temporary Help Service" to apply.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
