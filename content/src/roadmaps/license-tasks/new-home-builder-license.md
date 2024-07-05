@@ -1,19 +1,18 @@
 ---
 notesMd: "[Muni planning
-  doc/draft](https://docs.google.com/document/d/1GKtYlOLZQNeCHWQ4SvyIzEqNmYDECEUSLahp8_yC4T4/edit)"
+  doc/draft](https://docs.google.com/document/d/1GKtYlOLZQNeCHWQ4SvyIzEqNmYDECE\
+  USLahp8_yC4T4/edit)"
 id: new-home-builder-license
 filename: new-home-builder-license
 displayname: new-home-builder-license
 urlSlug: new-home-builder-license
 name: Register Your Business as a New Home Builder
 webflowName: "Construction: New Home Builder License"
-summaryDescriptionMd: >-
-  :::infoAlert
-   Your `builder designee|builder-designee` must complete Schedule A of the application. All officers or principals with at least 10% interest in the business must complete Schedule B and C of the application.
-  :::
-
-
-  You must register as a new home builder with the State if you will build and/or sell new homes, such as single-family houses, duplexes, or condominiums. If you plan to sell the new home to initial buyers, you or your business must be the title holder of the home. You must also renew your new home builder registration every two years.
+summaryDescriptionMd: You must register as a new home builder with the State if
+  you will build and/or sell new homes, such as single-family houses, duplexes,
+  or condominiums. If you plan to sell the new home to initial buyers, you or
+  your business must be the title holder of the home. You must also renew your
+  new home builder registration every two years.
 industryId:
   - commercial-construction
 callToActionText: Register My Business as a New Home Builder
@@ -39,13 +38,18 @@ webflowId: 66199db280f3348a209cfe30
 - Documentation of bankruptcy, business reorganization, financial reorganization, or liquidation, if applicable
 - `Private warranty plan name|new-home-warranty-plan` , member enrollment number, and current letter of acceptance, if applicable
 - Applicable fees paid
-  **Builder designee and officer/principal information (Schedule A, B, and C of the application)**:
+
+**Builder designee and officer/principal information (Schedule A, B, and C of the application)**:
 - List of current and inactive new home building businesses in New Jersey, if applicable
 - List of court judgments, if applicable
 - History of being suspended, revoked, or barred from building new homes in the U.S., if applicable
 - History of any civil, criminal, or administrative actions, if applicable
 - History of any unsatisfied court judgments, if applicable
 - Signatures of the builder designee and officer/principal
+
+:::note
+ Your `builder designee|builder-designee` must complete Schedule A of the application. All officers or principals with at least 10% interest in the business must complete Schedule B and C of the application.
+:::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
