@@ -30,7 +30,7 @@ licenseCertificationClassification: undefined
 * Criminal history of any officers, directors, or principals with at least 10% ownership interest, if applicable
 * Explanation of license suspension, denial, or revocation, if applicable
 
-Submit your application through the [Regulated Business (RGB) Online Registration Portal](https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx). Select "Consulting Firm/Temporary Help Service" to apply.
+Click on the button below to register; select "Consulting Firm/Temporary Help Service."
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
