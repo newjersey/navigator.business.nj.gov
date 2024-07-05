@@ -1,4 +1,5 @@
 ---
+id: career-counseling-firm-reg
 filename: career-counseling-firm-reg
 displayname: career-counseling-firm-reg
 urlSlug: career-counseling-firm-reg
@@ -14,36 +15,34 @@ summaryDescriptionMd: >-
    You must submit applications for both the agency and the agent.
   :::
 industryId: employment-agency
+callToActionText: Register My Career Counseling Firm
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
+licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Employment and Personnel Services
 divisionPhone: (973) 504-6370
-id: career-counseling-firm-reg
-callToActionText: Register My Career Counseling Firm
 webflowId: 65bd67f3ba805962d4de11b5
-licenseCertificationClassification: undefined
 ---
-
----
+- - -
 
 ## Application Requirements
 
-- `Employer Identification Number (EIN)|ein`
-- `Business structure|business-structure-learn-more`
-- Business address
-- `Registered agent|registered-agent` information, including address and phone number
-- Name, address, and business telephone number of each officer, director, principal, or representative with an ownership interest
-- `Certificate of Formation|certificate-formation`
-- `Surety bond|surety-bond`
-- Name and address of two references and their letter of reference
-- Fee schedule
-- Applicable fees paid
-- Trade name, if applicable
-- Criminal history of any officers, directors, or principals with at least 10% ownership interest, if applicable
-- Explanation of license suspension, denial, or revocation, if applicable
+*  `Employer Identification Number (EIN)|ein` 
+*  `Business structure|business-structure-learn-more` 
+* Business address
+*  `Registered agent|registered-agent` information, including address and phone number
+* Name, address, and business telephone number of each officer, director, principal, or representative with an ownership interest
+*  `Certificate of Formation|certificate-formation` 
+*  `Surety bond|surety-bond` 
+* Name and address of two references and their letter of reference
+* Fee schedule
+* Applicable fees paid
+* Trade name, if applicable
+* Criminal history of any officers, directors, or principals with at least 10% ownership interest, if applicable
+* Explanation of license suspension, denial, or revocation, if applicable
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A career counseling firm registration
+A career counseling firm registration.
 
 :::
