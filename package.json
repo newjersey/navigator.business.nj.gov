@@ -238,7 +238,7 @@
     ]
   },
   "engines": {
-    "node": ">=20.15.1"
+    "node": ">=20.15.0"
   },
   "repository": {
     "type": "git",
