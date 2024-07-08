@@ -1,14 +1,7 @@
 {
-  "displayname": "cleaning-janitorial-services",
   "naicsCodes": "561720",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "other-services",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": [],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -51,8 +44,15 @@
     }
   ],
   "name": "Cleaning and Janitorial Services",
-  "additionalSearchTerms": "cleaning lady, housekeeping, house cleaner, maid service, maid, cleaning company, cleaning crew, commercial cleaning service, cleaning and maintenance, turnover service,  ",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "cleaning-janitorial-services",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
+  "isEnabled": true,
+  "additionalSearchTerms": "cleaning lady, house cleaner, maid service, maid, cleaning company, cleaning crew, commercial cleaning service, cleaning and maintenance, turnover service,  ",
   "id": "cleaning-janitorial-services",
-  "description": "Providing commercial or residential cleaning services",
+  "description": "Providing commercial or residential cleaning services (not a live-in housekeeper)",
   "webflowId": "656a136212e59f3e1bcf4cc3"
 }
