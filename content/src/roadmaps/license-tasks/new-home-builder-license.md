@@ -1,7 +1,5 @@
 ---
-notesMd: "[Muni planning
-  doc/draft](https://docs.google.com/document/d/1GKtYlOLZQNeCHWQ4SvyIzEqNmYDECE\
-  USLahp8_yC4T4/edit)"
+notesMd: "[Muni planning doc/draft](https://docs.google.com/document/d/1GKtYlOLZQNeCHWQ4SvyIzEqNmYDECEUSLahp8_yC4T4/edit)"
 id: new-home-builder-license
 filename: new-home-builder-license
 displayname: new-home-builder-license
@@ -40,6 +38,7 @@ webflowId: 66199db280f3348a209cfe30
 - Applicable fees paid
 
 **Builder designee and officer/principal information (Schedule A, B, and C of the application)**:
+
 - List of current and inactive new home building businesses in New Jersey, if applicable
 - List of court judgments, if applicable
 - History of being suspended, revoked, or barred from building new homes in the U.S., if applicable
@@ -48,7 +47,7 @@ webflowId: 66199db280f3348a209cfe30
 - Signatures of the builder designee and officer/principal
 
 :::note
- Your `builder designee|builder-designee` must complete Schedule A of the application. All officers or principals with at least 10% interest in the business must complete Schedule B and C of the application.
+Your `builder designee|builder-designee` must complete Schedule A of the application. All officers or principals with at least 10% interest in the business must complete Schedule B and C of the application.
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
