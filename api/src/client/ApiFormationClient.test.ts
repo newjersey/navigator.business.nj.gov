@@ -1675,11 +1675,15 @@ describe("ApiFormationClient", () => {
 
       const response = await client.getCompletedFiling("formation-id-123");
 
-      expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/GetCompletedFiling", {
-        Account: "12345",
-        Key: "abcdef",
-        FormationId: "formation-id-123",
-      });
+      expect(mockAxios.post).toHaveBeenCalledWith(
+        "example.com/formation/GetCompletedFiling",
+        {
+          Account: "12345",
+          Key: "abcdef",
+          FormationId: "formation-id-123",
+        },
+        { headers: { "Content-Type": "text/plain" } }
+      );
 
       expect(response).toEqual({
         success: stubResponse.Success,

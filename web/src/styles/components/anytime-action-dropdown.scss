@@ -1,0 +1,24 @@
+.anytime-action-dropdown-container {
+  background-color: $cool-extra-light;
+  border: 1px solid $base-lighter;
+  padding: 2rem;
+  margin: 1.5rem 0;
+  border-radius: 0.5rem;
+}
+
+.anytime-action-dropdown {
+  background-color: white;
+
+  .MuiInputBase-root.MuiOutlinedInput-root {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+.anytime-action-primary-button {
+  margin-left: 1rem;
+}
+
+.anytime-action-primary-button-mobile {
+  padding-top: 3rem;
+  width: 100%;
+}
