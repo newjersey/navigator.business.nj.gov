@@ -24,6 +24,7 @@
   ],
   "name": "Domestic Employer",
   "nonEssentialQuestionsIds": [],
+  "industryOnboardingQuestions": {},
   "displayname": "domestic-employer",
   "isEnabled": true,
   "additionalSearchTerms": "employs a nanny, employs an au pair, employs a housekeeper, private household, household employer",
