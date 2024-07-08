@@ -1,0 +1,12 @@
+{
+  "displayname": "employment-agency-employers-both",
+  "filename": "employment-agency-employers-both",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 8,
+      "licenseTask": "temp-help-consulting-firm-combined-reg",
+      "required": true
+    }
+  ]
+}

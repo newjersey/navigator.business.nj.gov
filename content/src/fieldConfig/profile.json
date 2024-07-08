@@ -216,7 +216,7 @@
       "employmentAgency": {
         "default": {
           "header": "Employment and Personnel Services Type",
-          "description": "Learn about other `employment and personnel industries|employment-agency-types` ."
+          "description": "Learn about other `employment and personnel service types|employment-agency-types`."
         }
       },
       "employmentPersonnelServiceType": {

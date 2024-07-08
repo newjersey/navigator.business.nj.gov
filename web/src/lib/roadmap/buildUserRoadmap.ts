@@ -178,8 +178,7 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
           break;
         }
         case "BOTH": {
-          addOns.push("employment-agency-employers-permanent");
-          addOns.push("employment-agency-employers-temporary");
+          addOns.push("employment-agency-employers-both");
           break;
         }
       }
