@@ -111,7 +111,11 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       }/GetCompletedFiling data: ${JSON.stringify(postBody)}`
     );
     return axios
-      .post(`${config.baseUrl}/GetCompletedFiling`, postBody)
+      .post(`${config.baseUrl}/GetCompletedFiling`, postBody, {
+        headers: {
+          "Content-Type": "text/plain",
+        },
+      })
       .then((response) => {
         logger.LogInfo(
           `GetFiling - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`
