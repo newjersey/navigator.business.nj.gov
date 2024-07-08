@@ -8,12 +8,12 @@ Domestic workers provide in-home services to private households, including child
 
 These are examples of domestic workers:
 
-* nannies
-* child care providers
-* au pairs
-* babysitters
-* caretakers or companions for elderly, disabled or convalescing individuals
-* house cleaners, cooks, and gardeners
+* Nannies
+* Child care providers
+* Au pairs
+* Babysitters
+* Caretakers or companions for elderly, disabled or convalescing individuals
+* House cleaners, cooks, and gardeners
 
 Domestic workers can be hired directly by a household or by an agency. Some work for multiple clients. They can be full-time, part-time, or temporary workers. They can be paid a salary or hourly, and by cash, check, or direct deposit.
 
@@ -23,6 +23,6 @@ Some domestic workers live in their employer's home. Live-in workers have additi
 
 :::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
 
-For more information on your required responsibilities as an employer, visit [Domestic Workers' Bill of Rights: What employers need to know](https://www.nj.gov/labor/myworkrights/worker-protections/domestic_workers/domesticworkerrights_employers.shtml).
+For more information on your required responsibilities as an employer, visit [Domestic Workers' Bill of Rights
 
 :::
