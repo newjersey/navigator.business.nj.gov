@@ -19,10 +19,9 @@ callToActionText: Apply for My Dental License
 callToActionLink: "https://newjersey.mylicense.com/eGov/Login.aspx "
 agencyId: nj-consumer-affairs
 ---
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="note" }
 
-* You need a separate branch registration for each location where you practice dentistry
-* Once your application has been approved, you will receive an Initial Registration Form. You must verify the information and return the form with the appropriate fee to receive your dental license
+Once your application has been approved, you will receive an Initial Registration Form. You must verify the information and return the form with the appropriate fee to receive your dental license.
 
 :::
 
