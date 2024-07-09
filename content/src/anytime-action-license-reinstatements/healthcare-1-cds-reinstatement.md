@@ -33,7 +33,7 @@ callToActionLink: "https://www.njconsumeraffairs.gov/dcu/Applications/Reinstate\
 * Applicable fees paid, once the NJ DCU has sent an invoice
 * Your reinstatement application must be signed in front of and by a notary public
 
-Email your application to CDS@dca.njoag.gov. Do not include your payment. The NJ Drug Control Unit (DCU) will send you an invoice to pay the fee online.
+Email your application to cds@dca.njoag.gov. Do not include your payment. The NJ Drug Control Unit (DCU) will send you an invoice to pay the fee online.
 
 :::callout{ showHeader="true" headerText="What if I don't reinstate my registration?" showIcon="false" calloutType="conditional" }
 
