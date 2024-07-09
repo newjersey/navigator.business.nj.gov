@@ -36,14 +36,10 @@ Once your application has been approved, you will receive an Initial Registratio
 ## Application Requirements
 
 * Business name and address 
-* Mailing address
+* The address you want printed on your license
 * National Board dental personal identification number (DENTPIN)
 * Social Security number (SSN), or Individual Taxpayer Identification number (ITIN)
-* License address (the address printed on your license)
-* Child support information, if applicable
-* Explanation of medical conditions, if applicable 
-* Name change information, if applicable
-* History of drug use, if applicable 
+* Name change documentation, if applicable
 * Criminal history, if applicable
 * List of past professional license applications including dates, if applicable
 * Explanation of license suspension, denial, revocation, or surrender, if applicable
