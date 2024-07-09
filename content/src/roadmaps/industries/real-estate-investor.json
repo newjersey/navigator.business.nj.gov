@@ -53,7 +53,7 @@
     "canBeReseller": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "investor, property investor, landlord, rental property, apartment, residential ",
+  "additionalSearchTerms": "investor, property investor, rental property, apartment, residential ",
   "id": "real-estate-investor",
   "description": "Buys properties to rent or re-sell",
   "webflowId": "656a1362a0fc64e8e4c8e30d"

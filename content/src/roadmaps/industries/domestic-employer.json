@@ -1,0 +1,33 @@
+{
+  "naicsCodes": "814110",
+  "defaultSectorId": "other-services",
+  "canHavePermanentLocation": true,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "task": "determine-naics-code",
+      "weight": 1,
+      "required": true
+    },
+    {
+      "step": 1,
+      "weight": 6,
+      "task": "register-for-ein",
+      "required": true
+    },
+    {
+      "step": 1,
+      "weight": 13,
+      "task": "domestic-employer-register-for-taxes",
+      "required": true
+    }
+  ],
+  "name": "Domestic Employer",
+  "nonEssentialQuestionsIds": [],
+  "industryOnboardingQuestions": {},
+  "displayname": "domestic-employer",
+  "isEnabled": true,
+  "additionalSearchTerms": "employs a nanny, employs an au pair, employs a housekeeper, private household, household employer",
+  "id": "domestic-employer",
+  "description": "A private household that employs a nanny, housekeeper, au pair, or similar who provides services for the household for five or more hours a month"
+}

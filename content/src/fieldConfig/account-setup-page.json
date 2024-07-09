@@ -1,14 +1,14 @@
 {
   "accountSetup": {
     "default": {
-      "header": "Access Business.NJ.Gov Navigator with a myNewJersey Account",
+      "header": "Create an account with myNewJersey",
       "body": ":::infoAlert \nStep 1: Start by entering your name and email address below.\n\nStep 2: On the next page, you'll create an account or login through myNewJersey.\n\nStep 3: You’ll be brought right back here when you’re finished.\n:::",
-      "submitButton": "Finish Setup on myNewJersey"
+      "submitButton": "Create and Link myNewJersey Account"
     },
     "existingAccount": {
-      "header": "Link Your myNewJersey Account with Business.NJ.Gov",
+      "header": "Create an account with myNewJersey",
       "body": ":::infoAlert \nStep 1: Enter your name and email address below.\n\nStep 2: On the next page, enter your myNewJersey account email and password.\n\nStep 3: You’ll be brought right back here when you’re finished.\n\n:::",
-      "submitButton": "Link Your myNewJersey Account"
+      "submitButton": "Create and Link myNewJersey Account"
     },
     "errorAlert": "Correct the fields below."
   }

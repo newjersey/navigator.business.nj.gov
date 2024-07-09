@@ -1,10 +1,14 @@
 ---
-header: Life Hazard Use (LHU)
+notesMd: "Muni Team - updated document:
+  https://docs.google.com/document/d/1d_r82t8bcIoeQQomFOhH0tTAWgCC6YLnw7tDSewdX\
+  Js/edit?usp=sharing"
+header: Life Hazard Use (LHU) Business
 slug: life-hazard-use
 displayname: life-hazard-use
 ---
-Life Hazard Use is a label assigned to businesses with a commercial or manufacturing space that present a higher risk to human life during fires and other emergencies. [Find your Local Enforcing Agency (LEA)](https://www.nj.gov/dca/divisions/dfs/pdf/fire_code_enforcement_director.pdf) to learn if your business is an LHU. 
+Life Hazard Use (LHU) is a label given to businesses with a commercial or manufacturing space that poses a high risk to human life in a fire or other emergency. [Contact your Local Enforcing Agency (LEA)](https://www.nj.gov/dca/divisions/dfs/pdf/fire_code_enforcement_director.pdf) to learn if your business is an LHU.
 
-If your business is an LHU, you must [register with the state Division of Fire Safety](https://firesolutions.dca.nj.gov/) and pay the associated fee to operate your business. After registration, your business will be added to the schedule for routine fire inspections. When and how often these inspections happen depends on your industry and building use, so check with your LEA so you can prepare accordingly.
+LHU businesses:
 
-LHU businesses must also renew registration and pay the associated fee annually.
+* Need to [register with the state Division of Fire Safety](https://firesolutions.dca.nj.gov/) to operate
+* Get inspected by a state inspector on a schedule based on the type of business and how the space is used
