@@ -4,7 +4,7 @@ notesMd: >-
   https://docs.google.com/document/d/1e2LcLWIgCXRK_Urszn7-ejkxqMcoURv2qoP1Ceu_1oY/edit
 
 
-  * Initial review completed 6.28, submitting CMS review 7.9
+  * Initial review completed 7.1, submitting CMS review 7.9
 id: "dental-license "
 filename: "dental-license "
 displayname: dental-license
