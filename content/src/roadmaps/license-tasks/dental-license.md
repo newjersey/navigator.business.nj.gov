@@ -39,18 +39,18 @@ Once your application has been approved, you will receive an Initial Registratio
 * The address you want printed on your license
 * National Board dental personal identification number (DENTPIN)
 * Social Security number (SSN), or Individual Taxpayer Identification number (ITIN)
-* Name change documentation, if applicable
-* Criminal history, if applicable
-* List of past professional license applications including dates, if applicable
-* Explanation of license suspension, denial, revocation, or surrender, if applicable
 * Dental school information, including dates of attendance and date your degree was issued
 * Official dental school transcripts emailed to the New Jersey Board of Dentistry at [dentistry@dca.njoag.gov](mailto:Dentistry@dca.njoag.gov) 
 * Names and addresses of all jobs, residencies, or training programs since graduating from dental school
-* Any other clinical exams you have taken, including the dates you passed the exams, if applying through reciprocity
 * Uploaded photo ID
 * A 2x2 inch photo of your head and shoulders taken in the last six months
 * Criminal history background check (fingerprinting information will be emailed to you after submitting your application)
 * Applicable fees paid
+* Name change documentation, if applicable
+* Criminal history, if applicable
+* List of past professional license applications including dates, if applicable
+* Explanation of license suspension, denial, revocation, or surrender, if applicable
+* Any other clinical exams you have taken, including the dates you passed the exams, if applying through reciprocity
 
 If you’re applying through reciprocity, in addition to the application requirements, you must mail a [Verification of State License form](https://www.njconsumeraffairs.gov/den/Applications/Dentistry-Verification-of-State-License.pdf) to each state you hold (or have held) a dental license. The dentistry board of each state must complete the form, stamp it with their official seal, and mail it to: New Jersey State Board of Dentistry, P.O. Box 45005, 124 Halsey Street, 6th Floor, Newark, New Jersey 07101.
 
