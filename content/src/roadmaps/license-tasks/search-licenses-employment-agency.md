@@ -27,7 +27,7 @@ licenseCertificationClassification: ""
 
 :::callout{ showHeader="true" headerText="" showIcon="true" calloutType="informational" }
 
-You must already have a licensed agent to be able to apply for an employment agency license.
+You must already have a licensed agent to be able to apply for an employment agency license. Select "Agent" on the dropdown in the form, if necessary.
 
 :::
 
