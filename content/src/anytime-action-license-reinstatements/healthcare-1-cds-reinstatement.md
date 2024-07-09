@@ -24,7 +24,7 @@ callToActionLink: "https://www.njconsumeraffairs.gov/dcu/Applications/Reinstate\
 ## Application Requirements
 
 * New Jersey business address where substances will be stored, prescribed, or dispensed (must match your DEA registration address)
-* Schedule(s) of the controlled dangerous substances
+* Schedule(s) of the CDS
 * Current and active professional license number 
 * Social Security number
 * CDS registration number
