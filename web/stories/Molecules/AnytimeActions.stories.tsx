@@ -1,14 +1,10 @@
-import {
-  generateAnytimeActionLicenseReinstatement,
-  generateAnytimeActionLink,
-  generateAnytimeActionTask
-} from "@/test/factories";
+import { AnytimeActionTile } from "@/components/dashboard/anytime-actions/AnytimeActionTile";
+import { generateAnytimeActionTask } from "@/test/factories";
 import { Meta, StoryObj } from "@storybook/react";
-import { AnytimeActionDropdown } from "@/components/dashboard/anytime-actions/AnytimeActionDropdown";
 
-const meta: Meta<typeof AnytimeActionDropdown> = {
+const meta: Meta<typeof AnytimeActionTile> = {
   title: "Molecules/AnytimeAction",
-  component: AnytimeActionDropdown,
+  component: AnytimeActionTile,
   decorators: [(Story) => <div className="width-mobile">{Story()}</div>],
   parameters: {
     design: {
@@ -18,12 +14,11 @@ const meta: Meta<typeof AnytimeActionDropdown> = {
   },
 };
 export default meta;
-type Story = StoryObj<typeof AnytimeActionDropdown>;
+type Story = StoryObj<typeof AnytimeActionTile>;
 
 export const AnytimeAction: Story = {
   args: {
-    anytimeActionTasks: [generateAnytimeActionTask({ icon: "loop.svg", name: "Some Anytime Action Text - Task" })],
-    anytimeActionLinks: [generateAnytimeActionLink({ icon: "loop.svg", name: "Some Anytime Action Text - Link"})],
-    anytimeActionLicenseReinstatements: [generateAnytimeActionLicenseReinstatement({icon: "loop.svg", name: "Some Anytime Action Text - License"})]
+    type: "task",
+    anytimeAction: generateAnytimeActionTask({ icon: "loop.svg", name: "Some Anytime Action Text" }),
   },
 };

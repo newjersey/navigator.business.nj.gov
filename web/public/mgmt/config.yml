@@ -3084,18 +3084,6 @@ collections:
             widget: object
             fields:
               - { label: Roadmap Tasks Header Text, name: RoadmapTasksHeaderText, widget: string }
-          - label: Dashboard Anytime Action Defaults
-            name: dashboardAnytimeActionDefaults
-            collapsed: false
-            widget: object
-            fields:
-              - { label: Default Header Text, name: defaultHeaderText, widget: string }
-              - {
-                  label: Default Autocomplete Header Text,
-                  name: defaultAutocompleteHeaderText,
-                  widget: string,
-                }
-              - { label: Anytime Action Page Button Text, name: anytimeActionPageButtonText, widget: string }
       - label: "Snackbars"
         name: "dashboard-config-snackbars"
         file: "content/src/fieldConfig/dashboard-snackbars.json"
@@ -3436,7 +3424,7 @@ collections:
     sortable_fields: ["name", "filename"]
     create: true
     editor:
-      preview: false
+      preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Filename (disabled after file creation)", name: "filename", widget: "write-once-read-only" }

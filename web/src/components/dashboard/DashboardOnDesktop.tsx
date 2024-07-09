@@ -5,7 +5,7 @@ import { ElevatorViolationsCard } from "@/components/dashboard/ElevatorViolation
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
-import { AnytimeActionDropdown } from "@/components/dashboard/anytime-actions/AnytimeActionDropdown";
+import { AnytimeActionContainer } from "@/components/dashboard/anytime-actions/AnytimeActionContainer";
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -68,9 +68,9 @@ export const DashboardOnDesktop = (props: Props): ReactElement => {
                 {props.elevatorViolations && <ElevatorViolationsCard />}
 
                 {operatingPhase.displayAnytimeActions && (
-                  <AnytimeActionDropdown
-                    anytimeActionTasks={props.anytimeActionTasks}
+                  <AnytimeActionContainer
                     anytimeActionLinks={props.anytimeActionLinks}
+                    anytimeActionTasks={props.anytimeActionTasks}
                     anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
                   />
                 )}

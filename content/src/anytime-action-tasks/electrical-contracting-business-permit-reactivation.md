@@ -8,7 +8,7 @@ urlSlug: electrical-contracting-business-permit-reactivation
 summaryDescriptionMd: You need to reactivate your electrical contracting
   business permit if it has been expired for less than three years with no
   changes.
-callToActionText: "Reactivate My Electrical Contracting Business Permit"
+callToActionText: " Reactivate My Electrical Contracting Business Permit"
 callToActionLink: https://www.njconsumeraffairs.gov/elec/Pages/applications.aspx
 ---
 

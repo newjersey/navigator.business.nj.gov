@@ -38,6 +38,7 @@ import { useMountEffect } from "@/lib/utils/helpers";
 
 import AccountSetupPreview from "@/lib/cms/previews/AccountSetupPreview";
 import AnytimeActionLicenseReinstatementPreview from "@/lib/cms/previews/AnytimeActionLicenseReinstatementPreview";
+import AnytimeActionLinkPreview from "@/lib/cms/previews/AnytimeActionLinkPreview";
 import AnytimeActionTaskPreview from "@/lib/cms/previews/AnytimeActionTaskPreview";
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
 import CalloutPreview from "@/lib/cms/previews/CalloutPreview";
@@ -96,6 +97,7 @@ const CMS = dynamic(
 
       // ----- Anytime Actions -----
       registerPreview(CMS, "anytime-action-tasks", AnytimeActionTaskPreview);
+      registerPreview(CMS, "anytime-action-links", AnytimeActionLinkPreview);
       registerPreview(CMS, "anytime-action-license-reinstatements", AnytimeActionLicenseReinstatementPreview);
 
       // ----- Roadmap Sidebar Card -----
