@@ -48,7 +48,7 @@ Once your application has been approved, you will receive an Initial Registratio
 * List of past professional license applications including dates, if applicable
 * Explanation of license suspension, denial, revocation, or surrender, if applicable
 * Dental school information, including dates of attendance and date your degree was issued
-* Official dental school transcripts emailed to the Board of Dentistry at [Dentistry@dca.njoag.gov](mailto:Dentistry@dca.njoag.gov) 
+* Official dental school transcripts emailed to the New Jersey Board of Dentistry at [dentistry@dca.njoag.gov](mailto:Dentistry@dca.njoag.gov) 
 * Names and addresses of all jobs, residencies, or training programs since graduating from dental school
 * Any other clinical exams you have taken, including the dates you passed the exams, if applying through reciprocity
 * Uploaded photo ID
