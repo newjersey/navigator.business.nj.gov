@@ -18,7 +18,7 @@ summaryDescriptionMd: >
 
   1. Ensure you are registered with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) before applying for your CDS reinstatement. 
 
-  2. Email The NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the Facilities Reinstatement application.
+  2. Email The New Jersey Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the Facilities Reinstatement application.
 
   3. After your completed application has been emailed back to the DCU, they will send you an invoice to pay the fee online.
 ---
