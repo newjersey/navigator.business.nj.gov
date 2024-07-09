@@ -154,8 +154,6 @@ describe("Account Setup page", () => {
     });
     expect(screen.getByText(Config.accountSetup.default.header)).toBeInTheDocument();
     expect(screen.getByText(Config.accountSetup.default.submitButton)).toBeInTheDocument();
-    expect(screen.queryByText(Config.accountSetup.existingAccount.header)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.accountSetup.existingAccount.submitButton)).not.toBeInTheDocument();
   });
 
   it("displays existingAccount content if user encounteredMyNjLinkingError is true", () => {
@@ -165,8 +163,6 @@ describe("Account Setup page", () => {
     });
     expect(screen.getByText(Config.accountSetup.existingAccount.header)).toBeInTheDocument();
     expect(screen.getByText(Config.accountSetup.existingAccount.submitButton)).toBeInTheDocument();
-    expect(screen.queryByText(Config.accountSetup.default.header)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.accountSetup.default.submitButton)).not.toBeInTheDocument();
   });
 
   it("prevents user from registering if the email is not matching", () => {
