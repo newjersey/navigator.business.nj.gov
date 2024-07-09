@@ -1,3 +1,36 @@
+# [2024.20.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.19.2...v2024.20.0) (2024-07-09)
+
+
+### Bug Fixes
+
+* [[#187780715](https://github.com/newjersey/navigator.business.nj.gov/issues/187780715)] inline errors now announce to screen reader ([8b75ba9](https://github.com/newjersey/navigator.business.nj.gov/commit/8b75ba910f6dd61c54ef8c916a818eb8848bbb62))
+* [[#187790624](https://github.com/newjersey/navigator.business.nj.gov/issues/187790624)] update Health Club dynamics licenseType and add test for non-00 rgb number ([15fad34](https://github.com/newjersey/navigator.business.nj.gov/commit/15fad3484c6485bc87842af351010808fcbf7ee9))
+* [[#187870088](https://github.com/newjersey/navigator.business.nj.gov/issues/187870088)] poppy formation business address optional ([dca9449](https://github.com/newjersey/navigator.business.nj.gov/commit/dca9449bcf607cab60fdfd6c3e88d6e9d9578163))
+* [[#187920482](https://github.com/newjersey/navigator.business.nj.gov/issues/187920482)] requests to GetFiling should be text/plain ([ba8a841](https://github.com/newjersey/navigator.business.nj.gov/commit/ba8a8416191ec314bb98f05f99496982cd1a4ba1))
+* add ContactEmail to formation API POST body ([0ce6f37](https://github.com/newjersey/navigator.business.nj.gov/commit/0ce6f377e38bf4db5ba65066901e3b7cf8e6af8a))
+* add ContactEmail to formation API POST body ([6c6808c](https://github.com/newjersey/navigator.business.nj.gov/commit/6c6808ce843e099949aa1b3dde34d47cd119f1b5))
+* design QA for myNJ logo ([0d52008](https://github.com/newjersey/navigator.business.nj.gov/commit/0d5200849c8247dd36a72779cd7163ea0c8afd2b))
+* update logic in account-setup tests to reflect content changes ([9251d1d](https://github.com/newjersey/navigator.business.nj.gov/commit/9251d1dfab218ebf203ff71bc786aeaa3617a525))
+
+
+### Features
+
+* [[#186948523](https://github.com/newjersey/navigator.business.nj.gov/issues/186948523)] Employment and Personnel Services License Status Check ([94e3143](https://github.com/newjersey/navigator.business.nj.gov/commit/94e31436bb0a8abcfc85cec2bc99bbfdb57c0a91))
+* [[#187194184](https://github.com/newjersey/navigator.business.nj.gov/issues/187194184)] add business address to existing business in profile ([c49f025](https://github.com/newjersey/navigator.business.nj.gov/commit/c49f0252deb8d521dbf422ccbd80efeedeb5d31b))
+* [[#187415906](https://github.com/newjersey/navigator.business.nj.gov/issues/187415906)] keep hide/show button inline on mobile ([73ebaf0](https://github.com/newjersey/navigator.business.nj.gov/commit/73ebaf055c1f4899fbb51c3152d2fff2bbb755b4))
+* [[#187637099](https://github.com/newjersey/navigator.business.nj.gov/issues/187637099)] update myNJ logo ([4379197](https://github.com/newjersey/navigator.business.nj.gov/commit/4379197e2e2997ec18bddd1de58e48d4b526e271))
+* [[#187708192](https://github.com/newjersey/navigator.business.nj.gov/issues/187708192)] Telemarketing license check ([5c38ad6](https://github.com/newjersey/navigator.business.nj.gov/commit/5c38ad6d23205eefd103116e20b940ff90b9244c))
+* [[#187765182](https://github.com/newjersey/navigator.business.nj.gov/issues/187765182)] add ability to prefill business location and user source from query params ([7e3c1ea](https://github.com/newjersey/navigator.business.nj.gov/commit/7e3c1eaa73853e01a7cb0fc7b782fda643cdd05a))
+* [[#187790535](https://github.com/newjersey/navigator.business.nj.gov/issues/187790535)]  enable ticket brokers and resellers license status check ([b19a163](https://github.com/newjersey/navigator.business.nj.gov/commit/b19a163449d829a9bac7d7deb982985b1d5fcead))
+* [[#187790624](https://github.com/newjersey/navigator.business.nj.gov/issues/187790624)] enable health club license status check ([36946c3](https://github.com/newjersey/navigator.business.nj.gov/commit/36946c3effd3f4fb87e5938451d4d1542901ab09))
+
+
+### Reverts
+
+* Revert "feat: [#187754524] move anytime actions from tiles to dropdown" ([c50f814](https://github.com/newjersey/navigator.business.nj.gov/commit/c50f814b4fe7f140faafb6d1fd6109ead39069d6)), closes [#187754524](https://github.com/newjersey/navigator.business.nj.gov/issues/187754524)
+* Revert "fix(deps): update aws-sdk" ([400e627](https://github.com/newjersey/navigator.business.nj.gov/commit/400e6275f02654be2e0943851ac9cddd10fe775e))
+* Revert "feat: [#187637099] update myNJ logo" ([110d307](https://github.com/newjersey/navigator.business.nj.gov/commit/110d3075f65561352cc0a070a12eeaf5d580440a)), closes [#187637099](https://github.com/newjersey/navigator.business.nj.gov/issues/187637099)
+
 ## [2024.19.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.19.1...v2024.19.2) (2024-06-27)
 
 

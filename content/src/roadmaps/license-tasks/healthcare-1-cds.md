@@ -1,31 +1,18 @@
 ---
-notesMd: >
-  * Drafting doc:
-  https://docs.google.com/document/d/1v2FUVjAAl_2hQEPCtcPS4U-g-6u51LBl4xQQZ-x1ofs/edit
-
-  * Note: there are 2 healthcare CDS registrations: healthcare-1-cds and healthcare-2-cds
-
-  * The content has been reviewed in the Google doc and is ready for another CMS review and/or publishing
-
-  * Reviewed by Regina 7.1, ready to publish after making the following change: move these sentences below all the application requirements bullets in its own paragraph: "Email your completed CDS application to CDS@dca.njoag.gov. The New Jersey Drug Control Unit (NJ DCU) will send you an invoice to pay your fee online."
 id: "healthcare-1-cds "
-filename: "healthcare-1-cds "
-displayname: healthcare-1-cds
-urlSlug: healthcare-1-cds
-name: Apply for Your MD, DO, DDS, OD, DPM, or DVM Controlled Dangerous Substance
-  (CDS) Registration
+webflowId: "668d72e6096a17ca97b553f9"
+urlSlug: "healthcare-1-cds"
+name: "Apply for Your MD, DO, DDS, OD, DPM, or DVM Controlled Dangerous Substance (CDS) Registration"
 webflowName: "Healthcare: Controlled Dangerous Substance Registration"
-summaryDescriptionMd: "You need CDS registration if you’re a Medical Doctor
-  (MD), Doctor of Osteopathy (DO), Dentist (DDS), Optometrist (OD), Podiatrist
-  (DPM), or Veterinarian (DVM), and you or your business dispense, prescribe, or
-  store Controlled Dangerous Substances. "
-industryId:
-  - healthcare
-callToActionText: "Apply for My CDS Registration"
+filename: "healthcare-1-cds"
 callToActionLink: "https://www.njconsumeraffairs.gov/dcu/Applications/Initial-Application-for-Registration-for-Dispenser-Prescriber.pdf"
-agencyId: nj-consumer-affairs
-agencyAdditionalContext: New Jersey Drug Control Unit
-divisionPhone: (973) 504-6351
+callToActionText: "Apply for My CDS Registration"
+agencyId: "nj-consumer-affairs"
+agencyAdditionalContext: "New Jersey Drug Control Unit"
+divisionPhone: "(973) 504-6351"
+industryId: "healthcare"
+licenseCertificationClassification: "undefined"
+summaryDescriptionMd: "You need CDS registration if you’re a Medical Doctor (MD), Doctor of Osteopathy (DO), Dentist (DDS), Optometrist (OD), Podiatrist (DPM), or Veterinarian (DVM), and you or your business dispense, prescribe, or store Controlled Dangerous Substances. "
 ---
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
