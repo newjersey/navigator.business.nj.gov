@@ -30,7 +30,7 @@ licenseCertificationClassification: undefined
 * Criminal history of any officers, directors, or principals with at least 10% ownership interest, if applicable
 * Explanation of license suspension, denial, or revocation, if applicable
 
-Click on the button below to register; select "Consulting Firm/Temporary Help Service."
+Click the "Register My Temporary Help Service" button below and select "Consulting Firm/Temporary Help Service."
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 

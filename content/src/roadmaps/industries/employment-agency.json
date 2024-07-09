@@ -59,6 +59,6 @@
   "isEnabled": true,
   "additionalSearchTerms": "employment office,employment services,temporary agency,employment recruiter,employment center",
   "id": "employment-agency",
-  "description": "A business that finds employment for a job seeker and employees for employers",
+  "description": "A business that finds employment for job seekers and employees for employers",
   "webflowId": "656a13625bf066c2e6d815e7"
 }
