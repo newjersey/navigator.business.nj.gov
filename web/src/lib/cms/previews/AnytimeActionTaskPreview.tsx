@@ -1,5 +1,4 @@
 import { AnytimeActionElement } from "@/components/dashboard/anytime-actions/AnytimeActionPage";
-import { AnytimeActionTile } from "@/components/dashboard/anytime-actions/AnytimeActionTile";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
@@ -12,9 +11,6 @@ const AnytimeActionTaskPreview = (props: PreviewProps): ReactElement => {
 
   return (
     <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-      <div className="margin-y-10">
-        <AnytimeActionTile type="task" anytimeAction={anytimeAction} />
-      </div>
       <AnytimeActionElement anytimeAction={anytimeAction} />
     </div>
   );
