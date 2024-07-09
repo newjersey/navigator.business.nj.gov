@@ -9,15 +9,12 @@ displayname: pharmacy-cds
 urlSlug: pharmacy-cds
 name: Apply for Your Pharmacy’s Controlled Dangerous Substance (CDS) Registration
 webflowName: "Pharmacy: Controlled Dangerous Substance Registration"
-summaryDescriptionMd: >-
+summaryDescriptionMd: >
   You need CDS registration if you or your business dispense Controlled
   Dangerous Substances. You must already have a [New Jersey Board of Pharmacy
   (BOP)
   permit](https://www.njconsumeraffairs.gov/phar/Applications/Pharmacy-Permit-Application.pdf)
-  before applying for CDS registration.  
-
-
-  If you are applying for CDS Automated Medication System (AMS) registration, you must first contact the BOP at njbpoffice@dca.njoag.gov. You can only submit a CDS AMS application upon approval from the BOP.
+  before applying for CDS registration.
 industryId:
   - pharmacy
 callToActionText: "Apply for My Pharmacy’s CDS Registration "
@@ -28,7 +25,8 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="note" }
 
-You must register with the U.S. Drug Enforcement Administration (DEA) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to cds@dca.njoag.gov within 60 days of completing your CDS registration.
+* If you are applying for CDS Automated Medication System (AMS) registration, you must first contact the BOP at njbpoffice@dca.njoag.gov. You can only submit a CDS AMS application upon approval from the BOP
+* You must register with the U.S. Drug Enforcement Administration (DEA) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to cds@dca.njoag.gov within 60 days of completing your CDS registration
 
 :::
 
@@ -47,7 +45,7 @@ Email your completed CDS application to [cds@dca.njoag.gov](mailto:CDS@dca.njoag
 
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
 
-You cannot legally dispense CDS and may be subject to severe legal consequences and fines.
+You cannot legally dispense CDS and may be subject to legal consequences and fines if you do so.
 
 :::
 
