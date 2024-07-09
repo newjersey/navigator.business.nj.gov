@@ -1,29 +1,17 @@
 ---
-notesMd: >
-  * Drafting doc:
-  https://docs.google.com/document/d/1v2FUVjAAl_2hQEPCtcPS4U-g-6u51LBl4xQQZ-x1ofs/edit
-
-  * Note: there are 2 healthcare CDS registrations: healthcare-1-cds and healthcare-2-cds
-
-  * The content has been reviewed in the google doc and is ready for another review and/or publishing
-
-  * Regina reviewed on 7.1 and this is ready to publish after making the following change: move these sentences below all the application requirements bullets in its own paragraph: "Email your completed CDS application to CDS@dca.njoag.gov. The New Jersey Drug Control Unit (NJ DCU) will send you an invoice to pay your fee online."
 id: "healthcare-2-cds "
-filename: healthcare-2-cds
-displayname: healthcare-2-cds
-urlSlug: healthcare-2-cds
-name: Apply for Your PA, APN, or CNM Controlled Dangerous Substance (CDS)
-  Registration
+webflowId: "668d72e7096a17ca97b55564"
+urlSlug: "healthcare-2-cds"
+name: "Apply for Your PA, APN, or CNM Controlled Dangerous Substance (CDS) Registration"
 webflowName: "Healthcare: Controlled Dangerous Substance Registration - PA, APN, and CNM"
-summaryDescriptionMd: You need CDS registration if you’re a Physician Assistant
-  (PA), Advanced Practice Nurse (APN), or Certified Nurse Midwife (CNM), and you
-  or your business prescribe or dispense Controlled Dangerous Substances.
-industryId:
-  - healthcare
-callToActionText: Apply for My PA, APN, or CNM CDS Registration
+filename: "healthcare-2-cds"
 callToActionLink: "https://www.njconsumeraffairs.gov/dcu/Applications/Initial-Application-for-Registration-for-Dispenser-Prescriber-Practitioner.pdf"
-agencyId: nj-consumer-affairs
-agencyAdditionalContext: New Jersey Drug Control Unit
+callToActionText: "Apply for My PA, APN, or CNM CDS Registration"
+agencyId: "nj-consumer-affairs"
+agencyAdditionalContext: "New Jersey Drug Control Unit"
+industryId: "healthcare"
+licenseCertificationClassification: "undefined"
+summaryDescriptionMd: "You need CDS registration if you’re a Physician Assistant (PA), Advanced Practice Nurse (APN), or Certified Nurse Midwife (CNM), and you or your business prescribe or dispense Controlled Dangerous Substances."
 ---
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
