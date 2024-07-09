@@ -845,7 +845,7 @@ describe("buildUserRoadmap", () => {
       );
     });
 
-    it("adds temporary and permanent add ons but not employment job seekers if `employers` is selected for employmentPersonnelServiceType and `Both` is selected for employmentPlacementType", () => {
+    it("adds temp help and consulting firm combination add on but not employment job seekers if `employers` is selected for employmentPersonnelServiceType and `Both` is selected for employmentPlacementType", () => {
       buildUserRoadmap(
         generateStartingProfile({
           employmentPersonnelServiceType: "EMPLOYERS",
@@ -853,12 +853,7 @@ describe("buildUserRoadmap", () => {
           industryId: "employment-agency",
         })
       );
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
-        "employment-agency-employers-permanent"
-      );
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
-        "employment-agency-employers-temporary"
-      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("employment-agency-employers-both");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("employment-agency-job-seekers");
     });
   });
