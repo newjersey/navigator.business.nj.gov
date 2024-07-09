@@ -23,17 +23,17 @@ callToActionLink: "https://www.njconsumeraffairs.gov/dcu/Applications/Reinstate\
 ---
 ## Application Requirements
 
-* New Jersey business address where substances will be stored, prescribed, or dispensed (must match your DEA registration address)
+* New Jersey business address where the CDS will be stored, prescribed, or dispensed (must match your DEA registration address)
 * Schedule(s) of the CDS
 * Current and active professional license number 
 * Social Security number
 * CDS registration number
 * DEA registration number
 * Signed attestation (included in application)
-* Applicable fees paid, once the NJ DCU has sent an invoice
+* Applicable fees paid, once the New Jersey Drug Control Unit (DCU) has sent an invoice
 * Your reinstatement application must be signed in front of and by a notary public
 
-Email your application to cds@dca.njoag.gov. Do not include your payment. The NJ Drug Control Unit (DCU) will send you an invoice to pay the fee online.
+Email your application to cds@dca.njoag.gov. Do not include your payment. The DCU will send you an invoice to pay the fee online.
 
 :::callout{ showHeader="true" headerText="What if I don't reinstate my registration?" showIcon="false" calloutType="conditional" }
 
