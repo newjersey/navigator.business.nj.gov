@@ -4,15 +4,16 @@ notesMd: >-
   https://docs.google.com/document/d/1e2LcLWIgCXRK_Urszn7-ejkxqMcoURv2qoP1Ceu_1oY/edit
 
 
-  7.1: In progress. In "be advised", the branch registration will be linked (once it exists) 
+  * Initial review completed 6.28, submitting CMS review 7.9
 id: "dental-license "
 filename: "dental-license "
 displayname: dental-license
 urlSlug: dental-license
 name: Apply for Your Dental License, if Applicable
 webflowName: "Healthcare: Dental License"
-summaryDescriptionMd: |
-  You need a dental license if you own a dental practice or perform dentistry. 
+summaryDescriptionMd: >
+  You need a dental license if you own a dental practice or perform dentistry in
+  New Jersey. 
 industryId:
   - healthcare
 callToActionText: Apply for My Dental License
@@ -52,7 +53,8 @@ Once your application has been approved, you will receive an Initial Registratio
 * Explanation of license suspension, denial, revocation, or surrender, if applicable
 * Any other clinical exams you have taken, including the dates you passed the exams, if applying through reciprocity
 
-If you’re applying through reciprocity, in addition to the application requirements, you must mail a [Verification of State License form](https://www.njconsumeraffairs.gov/den/Applications/Dentistry-Verification-of-State-License.pdf) to each state you hold (or have held) a dental license. The dentistry board of each state must complete the form, stamp it with their official seal, and mail it to: New Jersey State Board of Dentistry, P.O. Box 45005, 124 Halsey Street, 6th Floor, Newark, New Jersey 07101.
+If you’re applying through reciprocity, in addition to the application requirements, you must mail a [Verification of State License form](https://www.njconsumeraffairs.gov/den/Applications/Dentistry-Verification-of-State-License.pdf) to each state you hold (or have held) a dental license. The dentistry board of each state must complete the form, stamp it with their official seal, and mail it to: 
+New Jersey State Board of Dentistry, P.O. Box 45005, 124 Halsey Street, 6th Floor, Newark, New Jersey 07101.
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
 
