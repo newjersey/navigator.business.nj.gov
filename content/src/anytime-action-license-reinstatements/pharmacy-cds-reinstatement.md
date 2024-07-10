@@ -20,7 +20,7 @@ summaryDescriptionMd: >
 
   2. Email The New Jersey Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the Facilities Reinstatement application.
 
-  3. After your completed application has been emailed back to the DCU, they will send you an invoice to pay the fee online.
+  3. After your completed application has been emailed back to the DCU, they will send you an invoice via email to pay the fee online.
 ---
 ## Application Requirements
 
@@ -37,7 +37,7 @@ summaryDescriptionMd: >
 :::callout{ showHeader="true" headerText="What if I don't reinstate my registration?" showIcon="false" calloutType="conditional" }
 
 * You cannot dispense or store any CDS
-* You may be subject to severe legal consequences and fines if you continue to prescribe or dispense controlled substances
+* You may be subject to legal consequences and fines if you continue to prescribe or dispense controlled substances
 
 :::
 
