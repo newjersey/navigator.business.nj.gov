@@ -42,6 +42,7 @@ Complete page 17 of the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/20
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A `NJ Tax ID|tax-id`.
+* A `NJ Tax ID|tax-id` 
+* A `Business Tax PIN|tax-pin`
 
 :::
