@@ -33,12 +33,12 @@ callToActionLink: "https://www.njconsumeraffairs.gov/dcu/Applications/Reinstate\
 * Applicable fees paid, once the New Jersey Drug Control Unit (DCU) has sent an invoice
 * Your reinstatement application must be signed in front of and by a notary public
 
-Email your application to cds@dca.njoag.gov. Do not include your payment. The DCU will send you an invoice to pay the fee online.
+Email your application to cds@dca.njoag.gov. Do not include your payment. The DCU will send you an invoice via email to pay the fee online.
 
 :::callout{ showHeader="true" headerText="What if I don't reinstate my registration?" showIcon="false" calloutType="conditional" }
 
 * You cannot legally prescribe, dispense, or store any CDS
-* You may be subject to severe legal consequences and fines if you continue to prescribe or dispense controlled substances
+* You may be subject to legal consequences and fines if you continue to prescribe or dispense controlled substances
 
 :::
 
