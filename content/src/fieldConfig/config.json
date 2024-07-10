@@ -30,7 +30,7 @@
     "errorTextEmailsNotMatching": "Email addresses must match and be valid.",
     "nameFieldLabel": "Full name",
     "userTestingCheckboxLabel": "I am willing to be contacted to provide feedback on Business.NJ.gov.",
-    "investNewarkContactSharingCheckboxLabel": "I am willing to share my full name and email with Invest Newark",
+    "investNewarkContactSharingCheckboxLabel": "I am willing to share my full name and email with Invest Newark for access to the Newark Navigator Service (free Newark business support and resource referrals).",
     "signUpTitleText": "Create account",
     "errorTextRequiredFields": "Please fill in all fields.",
     "errorTextDuplicateSignUp": "This email is already registered. Please log in instead.",
