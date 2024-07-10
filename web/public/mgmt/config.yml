@@ -3992,7 +3992,7 @@ collections:
               - {
                   label: Contact Sharing Consent - InvestNewark,
                   name: investNewarkContactSharingCheckboxLabel,
-                  widget: string,
+                  widget: markdown,
                 }
 
               - { label: Account Success Snackbar Title, name: accountSuccessSnackbarTitle, widget: string }

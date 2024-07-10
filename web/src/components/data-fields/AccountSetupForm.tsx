@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
@@ -184,7 +185,7 @@ export const AccountSetupForm = (props: Props): ReactElement => {
 
         {props.user.accountCreationSource === "investNewark" && (
           <FormControlLabel
-            label={Config.selfRegistration.investNewarkContactSharingCheckboxLabel}
+            label={<Content>{Config.selfRegistration.investNewarkContactSharingCheckboxLabel}</Content>}
             control={
               <Checkbox
                 checked={props.user.contactSharingWithAccountCreationPartner}
