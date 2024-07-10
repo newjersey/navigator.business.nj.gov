@@ -42,8 +42,6 @@ Complete page 17 of the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/20
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-*  `Business Registration Certificate (BRC)|business-reg-certificate` 
-*  `NJ Tax ID|tax-id` 
-*  `Business Tax PIN|tax-pin`
+A `NJ Tax ID|tax-id`.
 
 :::
