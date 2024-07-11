@@ -1,7 +1,10 @@
 ---
 urlSlug: pharmacy
 previewType: renewal
-summaryDescriptionMd: "\n"
+summaryDescriptionMd: You can renew your license 60 days before it expires and
+  up to 30 days after expiration. If you fail to renew your license at this
+  point, your license will be suspended and you won't be able to provide your
+  licensed services.
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 callToActionText: Renew My Pharmacy’s CDS Registration
 ---
