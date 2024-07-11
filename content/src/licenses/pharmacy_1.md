@@ -1,4 +1,7 @@
 ---
+notesMd: "Note: A potential issue with naming. There already exists a Pharmacy
+  renewal, and the naming seems based on the Industry ID. This is for a CDS
+  renewal for a pharmacy, but I'm not sure how or if I can differentiate this."
 urlSlug: pharmacy
 previewType: renewal
 summaryDescriptionMd: You can renew your license 60 days before it expires and
