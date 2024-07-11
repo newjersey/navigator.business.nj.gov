@@ -36,21 +36,13 @@ formName: NJ-Reg
 
 ## Register for State Taxes
 
-Complete page 17 of the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) and choose "Employer of Domestic Household Employee(s)" under step A and "Domestic (Household Employer)" under step H.
-
-:::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
-
-As an employer of one or more `domestic workers|domestic-worker` , you may only apply for taxes using the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) (page 17). You may not apply online.
-
-:::
+Complete page 17 of the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) and choose "Employer of Domestic Household Employee(s)" under step A and "Domestic (Household Employer)" under step H. You may not apply online.
 
 - - -
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-*  `Business Registration Certificate (BRC)|business-reg-certificate` 
-*  `NJ Tax ID|tax-id` 
-*  `Business Tax PIN|tax-pin` 
-*  `Certificate of Authority for Sales Tax|certificate-authority-sales-tax` (if applicable)
+* A `NJ Tax ID|tax-id` 
+* A `Business Tax PIN|tax-pin`
 
 :::
