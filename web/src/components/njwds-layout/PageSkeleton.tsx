@@ -1,7 +1,6 @@
 import { BetaBar } from "@/components/BetaBar";
 import { LegalMessage } from "@/components/LegalMessage";
 import { Banner } from "@/components/njwds/Banner";
-import { OutageAlertBar } from "@/components/OutageAlertBar";
 import { PageFooter } from "@/components/PageFooter";
 import { SkipToMainContent } from "@/components/SkipToMainContent";
 import React, { ReactElement } from "react";
@@ -17,7 +16,6 @@ export const PageSkeleton = (props: Props): ReactElement => {
       <section aria-label="Official government website">
         {!props.landingPage && <SkipToMainContent />}
         <Banner />
-        <OutageAlertBar />
       </section>
       <div className="fit-screen-content">{props.children}</div>
       <footer>
