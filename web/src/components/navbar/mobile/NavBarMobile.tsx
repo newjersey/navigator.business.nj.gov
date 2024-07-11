@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import { NavBarLogoOnly } from "@/components/navbar/NavBarLogoOnly";
+import { NavBarLogoOnlyMobile } from "@/components/navbar/mobile/NavBarLogoOnlyMobile";
 import { NavBarMobileAccountSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileAccountSlideOutMenu";
 import { NavBarMobileHomeLogo } from "@/components/navbar/mobile/NavBarMobileHomeLogo";
 import { NavBarMobileQuickLinksSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileQuickLinksSlideOutMenu";
@@ -60,7 +60,9 @@ export const NavBarMobile = (props: Props): ReactElement => {
 
   // logo only / loading/redirect
   if (props.logoOnlyType) {
-    return <NavBarLogoOnly logoType={props.logoOnlyType} />;
+    return (
+      <NavBarLogoOnlyMobile scrolled={scrolled} showMyNjLogo={props.logoOnlyType === "NAVIGATOR_MYNJ_LOGO"} />
+    );
   } else if (props.isLanding) {
     // landing
     return (
