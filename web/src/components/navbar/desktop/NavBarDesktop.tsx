@@ -1,11 +1,11 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
-import { NavBarLogoOnly } from "@/components/navbar/NavBarLogoOnly";
 import { DesktopLoginButton } from "@/components/navbar/desktop/DesktopLoginButton";
 import { NavBarDesktopDropDown } from "@/components/navbar/desktop/NavBarDesktopDropDown";
 import { NavBarDesktopHomeLogo } from "@/components/navbar/desktop/NavBarDesktopHomeLogo";
 import { NavBarDesktopQuickLinks } from "@/components/navbar/desktop/NavBarDesktopQuickLinks";
 import { NavBarVerticalLineDivider } from "@/components/navbar/desktop/NavBarDesktopVerticalLineDivider";
 import { NavBarDesktopWrapper } from "@/components/navbar/desktop/NavBarDesktopWrapper";
+import { NavBarLogoOnlyDesktop } from "@/components/navbar/desktop/NavBarLogoOnlyDesktop";
 import {
   AddBusinessItem,
   GetStartedMenuItem,
@@ -66,7 +66,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
 
   if (props.logoOnlyType) {
     // loading/redirect/ethan onboarding
-    return <NavBarLogoOnly logoType={props.logoOnlyType} />;
+    return <NavBarLogoOnlyDesktop logoType={props.logoOnlyType} />;
   } else if (props.isLanding) {
     // landing
     return (
