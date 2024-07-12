@@ -5117,7 +5117,6 @@ __metadata:
     focus-trap-react: 10.2.3
     gray-matter: 4.0.3
     helmet: 7.1.0
-    html2canvas: 1.4.1
     http-status-codes: ^2.3.0
     husky: 9.0.11
     identity-obj-proxy: 3.0.0
@@ -5127,7 +5126,6 @@ __metadata:
     jest-junit: 16.0.0
     js-yaml: 4.1.0
     jsonwebtoken: 9.0.2
-    jspdf: 2.5.1
     kill-port: 1.6.1
     lint-staged: 15.2.6
     lodash: 4.17.21

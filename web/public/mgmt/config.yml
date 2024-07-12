@@ -3567,24 +3567,6 @@ collections:
                   required: true,
                 }
 
-  - name: "export-pdf-config"
-    label: "Export Pdf Config"
-    delete: false
-    create: false
-    files:
-      - label: "Export Pdf Config"
-        name: "export-pdf"
-        file: "content/src/fieldConfig/export-pdf.json"
-        editor:
-          preview: false
-        fields:
-          - label: "Export PDF"
-            name: exportPdf
-            collapsed: false
-            widget: object
-            fields:
-              - { label: Download Button Text, name: downloadButtonText, widget: string }
-
   - name: "mappings"
     label: "Dropdown Mappings"
     editor:
