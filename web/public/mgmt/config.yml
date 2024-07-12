@@ -2280,6 +2280,7 @@ collections:
           label: "Display Name",
           name: "displayname",
           widget: "nospace",
+          required: true,
           hint: "This the name displayed internally in CMS list.",
         }
       - {

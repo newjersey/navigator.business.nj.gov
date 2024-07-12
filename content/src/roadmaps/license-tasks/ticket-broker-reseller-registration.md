@@ -1,5 +1,6 @@
 ---
 id: ticket-broker-reseller-registration
+displayname: ticket-broker-reseller-registration
 webflowId: 6657975ac4acabfabc97d176
 urlSlug: ticket-broker-reseller-registration
 name: Register Your Business as a Ticket Broker (Ticket Reseller)

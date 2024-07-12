@@ -1,5 +1,6 @@
 ---
 id: "general-appraiser-certification"
+displayname: "general-appraiser-certification"
 webflowId: "655e13bf1de266e4be155eb0"
 urlSlug: "general-appraiser-certification"
 name: "Apply for Your General Real Property Appraiser Certification"

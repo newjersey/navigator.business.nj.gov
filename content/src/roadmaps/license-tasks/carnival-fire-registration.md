@@ -1,5 +1,6 @@
 ---
 id: "carnival-fire-registration"
+displayname: "carnival-fire-registration"
 webflowId: "668d72e41a44191176e52336"
 urlSlug: "carnival-fire-registration"
 name: "Register Your Traveling Carnival or Circus"
@@ -13,8 +14,7 @@ divisionPhone: "(609) 633-6132"
 industryId: "independent-artist"
 webflowType: "business-license"
 licenseCertificationClassification: "undefined"
-summaryDescriptionMd: "You must register with the State Division of Fire Safety to own and/or operate a traveling carnival or circus in New Jersey. You must register at least 30 days before your opening day.
-"
+summaryDescriptionMd: You must register with the State Division of Fire Safety to own and/or operate a traveling carnival or circus in New Jersey. You must register at least 30 days before your opening day.
 ---
 
 ---

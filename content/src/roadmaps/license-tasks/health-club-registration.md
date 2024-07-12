@@ -1,5 +1,6 @@
 ---
 id: "health-club-registration"
+displayname: "health-club-registration"
 webflowId: "660d6c3c02bbcb79ea0cc60a"
 urlSlug: "health-club-registration"
 name: "Register Your Business as a Health Club, Spa, Fitness Club, or Gym"

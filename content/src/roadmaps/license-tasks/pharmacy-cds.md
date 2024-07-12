@@ -1,5 +1,6 @@
 ---
 id: pharmacy-cds
+displayname: pharmacy-cds
 webflowId: 668d72eeb67e0989ab73ef3a
 urlSlug: pharmacy-cds
 name: Apply for Your Pharmacy’s Controlled Dangerous Substance (CDS) Registration
