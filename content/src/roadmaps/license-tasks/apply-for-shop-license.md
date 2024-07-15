@@ -1,4 +1,5 @@
 ---
+notesMd: "7.15.24: updating body copy per content team's approval"
 id: apply-for-shop-license
 filename: apply-for-shop-license
 displayname: cosmetology-shop-license
@@ -6,10 +7,9 @@ urlSlug: cosmetology-shop-license
 name: Apply for Your Cosmetology Shop License
 webflowName: "Cosmetology: License to Operate a New Shop, Relocate, or to
   Transfer Ownership"
-summaryDescriptionMd: >
-  New shops, relocated shops, or shops that have transferred ownership are
-  required to obtain a license. After your application is submitted and
-  reviewed, your shop will be inspected.
+summaryDescriptionMd: Shops that are new, relocated, or under new ownership must
+  get a license. Once the Board of Cosmetology and Hairstyling reviews your
+  application, they will inspect your shop.
 industryId:
   - cosmetology
 callToActionText: Apply for My Cosmetology Shop License
