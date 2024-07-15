@@ -20,7 +20,7 @@ webflowId: 668d72eeb67e0989ab73ef3a
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="note" }
 
-You must register with the U.S. Drug Enforcement Administration (DEA) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to cds@dca.njoag.gov within 60 days of completing your CDS registration
+You must register with the U.S. Drug Enforcement Administration (DEA) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to cds@dca.njoag.gov within 60 days of completing your CDS registration.
 
 :::
 
