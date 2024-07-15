@@ -3,13 +3,13 @@ id: "healthcare-1-cds "
 filename: healthcare-1-cds
 displayname: healthcare-1-cds
 urlSlug: healthcare-1-cds
-name: Apply for Your MD, DO, DDS, OD, DPM, or DVM Controlled Dangerous Substance
-  (CDS) Registration
+name: Apply for Your MD, DO, DDS, OD, DPM, or DVM Controlled Dangerous
+  Substances Registration
 webflowName: "Healthcare: Controlled Dangerous Substance Registration"
-summaryDescriptionMd: "You need CDS registration if you’re a Medical Doctor
-  (MD), Doctor of Osteopathy (DO), Dentist (DDS), Optometrist (OD), Podiatrist
-  (DPM), or Veterinarian (DVM), and you or your business dispense, prescribe, or
-  store Controlled Dangerous Substances. "
+summaryDescriptionMd: You need a Controlled Dangerous Substances (CDS)
+  registration if you’re a Medical Doctor (MD), Doctor of Osteopathy (DO),
+  Dentist (DDS), Optometrist (OD), Podiatrist (DPM), or Veterinarian (DVM), and
+  you or your business dispense, prescribe, or store any CDS.
 industryId: healthcare
 callToActionText: Apply for My CDS Registration
 callToActionLink: https://www.njconsumeraffairs.gov/dcu/Applications/Initial-Application-for-Registration-for-Dispenser-Prescriber.pdf
@@ -38,12 +38,12 @@ Email your completed CDS application to [cds@dca.njoag.gov](mailto:CDS@dca.njoag
 
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
 
-You cannot legally dispense, prescribe, or store CDS and may be subject to legal consequences and fines.
+You cannot legally dispense, prescribe, or store any CDS and may be subject to legal consequences and fines.
 
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A Controlled Dangerous Substance (CDS) registration certificate.
+A Controlled Dangerous Substances (CDS) registration certificate.
 
 :::
