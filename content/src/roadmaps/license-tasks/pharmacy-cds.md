@@ -39,12 +39,12 @@ Email your completed CDS application to [cds@dca.njoag.gov](mailto:CDS@dca.njoag
 
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
 
-You cannot legally dispense CDS and may be subject to legal consequences and fines if you do so.
+You cannot legally dispense any CDS and may be subject to legal consequences and fines if you do so.
 
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A Controlled Dangerous Substance (CDS) registration certificate.
+A Controlled Dangerous Substances (CDS) registration certificate.
 
 :::
