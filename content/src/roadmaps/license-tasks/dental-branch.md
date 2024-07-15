@@ -20,11 +20,11 @@ agencyId: nj-consumer-affairs
 * Business name and address of the office branch you are registering 
 * Applicable fees paid, once the Board of Dentistry sends an invoice 
 
-Email your completed application to dentistry@dca.njoag.gov. The New Jersey Dental Board will email you an invoice to pay your fee online.
+Email your completed application to dentistry@dca.njoag.gov. The New Jersey Dental Board will email you an invoice via email to pay your fee online.
 
 Keep in mind that your branch office registrations are linked to your dental license and must be renewed every two years.
 
-:::callout{ showHeader="true" headerText="What if I don't get this registration? " showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="What if I don't get this registration?" showIcon="false" calloutType="conditional" }
 
 You cannot practice dentistry in any branch office where you are not registered and may face fines and disciplinary actions if you do so.
 
