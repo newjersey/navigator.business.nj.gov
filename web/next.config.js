@@ -12,7 +12,6 @@ module.exports = withBundleAnalyzer({
     REDIRECT_URL: process.env.REDIRECT_URL,
     GOOGLE_TAG_MANAGER_ID: process.env.GOOGLE_TAG_MANAGER_ID,
     FEATURE_BUSINESS_FLP: process.env.FEATURE_BUSINESS_FLP ?? "false",
-    FEATURE_EXPORT_PDF: process.env.FEATURE_EXPORT_PDF ?? "false",
     FEATURE_LANDING_PAGE_REDIRECT: process.env.FEATURE_LANDING_PAGE_REDIRECT ?? "false",
     ALTERNATE_LANDING_PAGE_URL: process.env.ALTERNATE_LANDING_PAGE_URL ?? "",
     COGNITO_WEB_CLIENT_ID: process.env.COGNITO_WEB_CLIENT_ID,

@@ -1,9 +1,12 @@
 import { ReactElement } from "react";
 
-export const HorizontalLine = (): ReactElement => {
+interface Props {
+  ariaHidden?: boolean;
+}
+export const HorizontalLine = (props: Props): ReactElement => {
   return (
     <div>
-      <hr className="margin-y-2" />
+      <hr className="margin-y-2" aria-hidden={props?.ariaHidden} />
     </div>
   );
 };
