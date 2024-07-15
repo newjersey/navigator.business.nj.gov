@@ -39,7 +39,7 @@ export const OutageAlertBar = (): ReactElement => {
 
   return (
     <div
-      className="display-flex flex-justify-center flex-align-center bg-red text-white font-sans-xs minh-3 margin-auto width-full padding-y-1 padding-x-1"
+      className="display-flex flex-justify-center flex-align-center bg-error-dark text-white font-sans-xs minh-3 margin-auto width-full padding-y-1 padding-x-1"
       data-testid="outage-alert-bar"
       role="alert"
     >
