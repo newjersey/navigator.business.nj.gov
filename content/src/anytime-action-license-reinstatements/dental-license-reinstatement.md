@@ -23,7 +23,7 @@ callToActionLink: "https://www.njconsumeraffairs.gov/den/Applications/Applicati\
 * A list of every job held while your license was expired, including employer names, addresses, and phone numbers
 * List of continuing education courses you have completed since your license expired, including hours
 * A completed Verification of State License form from every state you hold or have held a license, completed by the board of dentistry of each state (included in application)
-* A completed Certification and Authorization form for a criminal history background check with the appropriate fee (included in application)
+* A completed Certification and Authorization form for a criminal history background check with the appropriate fee (form included in application)
 * Child support documentation, if applicable
 * Criminal history and supporting documentation, if applicable
 * Explanation of license suspension, denial, revocation, or surrender, if applicable
@@ -33,7 +33,7 @@ callToActionLink: "https://www.njconsumeraffairs.gov/den/Applications/Applicati\
 
 Mail your completed reinstatement application and any fees to: Attn Reinstatements, New Jersey State Board of Dentistry, P.O. Box 45005, Newark, NJ 07101
 
-:::callout{ showHeader="true" headerText="What if I don't reinstate my registration? " showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="What if I don't reinstate my registration?" showIcon="false" calloutType="conditional" }
 
 Your dental license may be suspended or revoked.
 
