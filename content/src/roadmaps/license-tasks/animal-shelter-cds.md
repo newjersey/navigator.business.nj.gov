@@ -6,12 +6,12 @@ id: animal-shelter-cds
 filename: animal-shelter-cds
 displayname: animal-shelter-cds
 urlSlug: animal-shelter-cds
-name: Apply for Your Animal Shelter’s Controlled Dangerous Substance (CDS)
-  Registration
+name: Apply for Your Animal Shelter’s Controlled Dangerous Substances Registration
 webflowName: "Pet Care: Controlled Dangerous Substance Registration"
 summaryDescriptionMd: >-
-  You need a New Jersey CDS registration if you or your business use sodium
-  pentobarbital for animal euthanasia. Follow these steps to apply:
+  You need a Controlled Dangerous Substances (CDS) registration if you or your
+  business use sodium pentobarbital for animal euthanasia. Follow these steps to
+  apply:
 
 
   1. Email The NJ Drug Control Unit (DCU) at cds@dca.njoag.gov to request the Animal Shelter CDS Registration application.
@@ -47,3 +47,15 @@ agencyId: nj-consumer-affairs
 * A certificate (included in the application) completed by a licensed New Jersey veterinarian, stating that shelter personnel who handle the CDS have been proficiently trained in the use of sodium pentobarbital in animal euthanasia
 * The name and title of everyone who will have access to the CDS
 * Security measures in place to prevent diversion of the CDS
+
+:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
+
+You cannot legally dispense or store sodium pentobarbital and may be subject to legal consequences and fines if you do so.
+
+:::
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+
+A Controlled Dangerous Substances (CDS) registration certificate.
+
+:::
