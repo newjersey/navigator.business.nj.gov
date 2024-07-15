@@ -4,17 +4,18 @@ notesMd: >
 
   * Working draft: https://docs.google.com/document/d/1Z-DF2hB6N4wyVUQqH_-G0A2DPt4Rcb5uqWdJ35q3EeQ/edit
 filename: pharmacy-cds-reinstatement
-name: Reinstate Your Pharmacy’s Controlled Dangerous Substance (CDS) Registration
+name: Reinstate Your Pharmacy’s Controlled Dangerous Substances Registration
 industryIds:
   - pharmacy
 sectorIds: []
 icon: update-purple.svg
 urlSlug: pharmacy-cds-reinstatement
-summaryDescriptionMd: >
-  If your CDS registration expired less than 30 days ago, [you can renew
-  online](https://newjersey.mylicense.com/). If it has been expired for more
-  than 30 days or is inactive, you need to reinstate it by following these
-  steps:
+summaryDescriptionMd: >-
+  If your Controlled Dangerous Substances (CDS) registration expired less than
+  30 days ago, [you can renew online](https://newjersey.mylicense.com/). If it
+  has been expired for more than 30 days or is inactive, you need to reinstate
+  it by following these steps:
+
 
   1. Ensure you are registered with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) before applying for your CDS reinstatement. 
 
@@ -36,13 +37,12 @@ summaryDescriptionMd: >
 
 :::callout{ showHeader="true" headerText="What if I don't reinstate my registration?" showIcon="false" calloutType="conditional" }
 
-* You cannot dispense or store any CDS
-* You may be subject to legal consequences and fines if you continue to prescribe or dispense controlled substances
+You cannot dispense or store any CDS and may be subject to legal consequences and fines if you do so.
 
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-The same Controlled Dangerous Substance registration number.
+The same Controlled Dangerous Substances registration number.
 
 :::
