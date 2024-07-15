@@ -22,8 +22,6 @@ callToActionText: Renew My Pharmacy’s CDS Registration
 
 You must be registered with the [New Jersey Prescription Monitoring Program](https://www.njconsumeraffairs.gov/pmp/Pages/register.aspx) (NJPMP).
 
-
-
 :::callout{ showHeader="true" headerText="What if I don’t renew my registration?" showIcon="false" calloutType="conditional" }
 
 Your CDS registration will be suspended.
@@ -32,6 +30,6 @@ Your CDS registration will be suspended.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-The same Controlled Dangerous Substance registration number, valid for one year.
+The same Controlled Dangerous Substances registration number, valid for one year.
 
 :::
