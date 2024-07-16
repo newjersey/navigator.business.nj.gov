@@ -122,7 +122,7 @@ const getCurrentFundings = async () => {
 
 const contentMdToObject = (content) => {
   const lines = contentToStrings(content);
-  const benefitRegExp = new RegExp(`>Benefit[s:]*?</`);
+  const benefitRegExp = new RegExp(`"Benefit[s:]*?"`);
   const eligibilityIndex = lines.findIndex((line) => {
     return line.includes(">Eligibility</");
   });

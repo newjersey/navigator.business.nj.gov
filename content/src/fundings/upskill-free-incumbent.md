@@ -50,6 +50,8 @@ descriptionMd: Upskill offers grants to New Jersey businesses of any size grants
 
 Any business can apply if it has existing employees who can be trained in a new skill for current and future workforce demands.
 
-> ### Benefits
->
-> Employers can receive grants of up to $100,000.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Employers can receive grants of up to $100,000.
+
+:::
