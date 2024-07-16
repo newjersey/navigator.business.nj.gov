@@ -6,6 +6,7 @@ import {
   getEssentialQuestion,
   hasEssentialQuestion,
 } from "@/lib/domain-logic/essentialQuestions";
+import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
 import Onboarding from "@/pages/onboarding";
 import { withAuth } from "@/test/helpers/helpers-renderers";
@@ -355,3 +356,21 @@ export const industryIdsWithSingleRequiredEssentialQuestion = industryIdsWithSin
     return someQuestionsStartAsUndefined;
   }
 );
+
+export const composeOnBoardingTitle = (step: string, pageTitle?: string): string => {
+  const Config = getMergedConfig();
+  if (pageTitle === undefined) {
+    const pageTitleDefault = modifyContent({
+      content: Config.onboardingDefaults.pageTitle,
+      condition: () => false,
+      modificationMap: {
+        Additional: "Additional",
+        additional: "additional",
+      },
+    });
+    // return `${pageTitleDefault} ${step}`;
+    return `${[pageTitleDefault, step].join(" ")}`;
+  }
+  // return `${pageTitle} ${step}`;
+  return `${[pageTitle, step].join(" ")}`;
+};

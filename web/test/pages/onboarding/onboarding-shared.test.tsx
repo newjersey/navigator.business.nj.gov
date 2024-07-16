@@ -11,6 +11,7 @@ import {
   setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
 import {
+  composeOnBoardingTitle,
   industriesWithOutEssentialQuestion,
   industriesWithSingleEssentialQuestion,
   mockSuccessfulApiSignups,
@@ -178,11 +179,11 @@ describe("onboarding - shared", () => {
     page.selectByValue("Industry", "e-commerce");
     page.clickBack();
 
+    const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" });
+
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
     expect(screen.getByTestId("business-persona-owning")).toBeInTheDocument();
-    expect(
-      screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" }))
-    ).toBeInTheDocument();
+    expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
     page.chooseRadio("business-persona-owning");
     page.clickNext();
     await waitFor(() => {

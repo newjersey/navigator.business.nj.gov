@@ -4,13 +4,18 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
+import { evalHeaderStepsTemplate } from "@/lib/utils/onboardingPageHelpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentBusiness,
   currentUserData,
   setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
-import { mockSuccessfulApiSignups, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
+import {
+  composeOnBoardingTitle,
+  mockSuccessfulApiSignups,
+  renderPage,
+} from "@/test/pages/onboarding/helpers-onboarding";
 import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { UserData, createEmptyBusiness } from "@businessnjgovnavigator/shared/userData";
@@ -47,7 +52,9 @@ describe("onboarding - additional business", () => {
     });
 
     const expectedTitle = templateEval(Config.onboardingDefaults.pageTitle, { Additional: "Additional" });
-    expect(screen.getByText(expectedTitle)).toBeInTheDocument();
+    const step = evalHeaderStepsTemplate({ current: 1, previous: 1 });
+
+    expect(screen.getByText(composeOnBoardingTitle(step, expectedTitle))).toBeInTheDocument();
   });
 
   it("returns user to previous business without saving", async () => {
