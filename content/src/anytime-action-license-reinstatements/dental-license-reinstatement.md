@@ -31,7 +31,16 @@ callToActionLink: "https://www.njconsumeraffairs.gov/den/Applications/Applicati\
 * Month and year of fingerprinting, if applicable 
 * Applicable fees paid
 
-Mail your completed reinstatement application and any fees to: Attn Reinstatements, New Jersey State Board of Dentistry, P.O. Box 45005, Newark, NJ 07101
+Mail your completed reinstatement application and any fees to:
+
+Attn: Reinstatements
+
+New Jersey State Board of Dentistry
+ 
+P.O. Box 45005
+
+Newark, NJ 07101
+
 
 :::callout{ showHeader="true" headerText="What if I don't reinstate my registration?" showIcon="false" calloutType="conditional" }
 
