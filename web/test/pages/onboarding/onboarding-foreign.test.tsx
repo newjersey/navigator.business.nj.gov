@@ -9,6 +9,7 @@ import {
   userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
 import {
+  composeOnBoardingTitle,
   industryIdsWithSingleRequiredEssentialQuestion,
   mockEmptyApiSignups,
   renderPage,
@@ -59,18 +60,16 @@ describe("onboarding - foreign business", () => {
   describe("page headers", () => {
     it("uses special template eval for step 1 label", () => {
       renderPage({});
-      expect(
-        screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" }))
-      ).toBeInTheDocument();
+      const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" });
+      expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
     });
 
     it("uses special template eval for step 2 label", () => {
       const userData = generateTestUserData({ businessPersona: "FOREIGN" });
       useMockRouter({ isReady: true, query: { page: "2" } });
       renderPage({ userData });
-      expect(
-        screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "2" }))
-      ).toBeInTheDocument();
+      const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "2" });
+      expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
     });
   });
 
@@ -305,9 +304,8 @@ describe("onboarding - foreign business", () => {
 
     it("displays step 3", () => {
       renderPage({ userData });
-      expect(
-        screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "3" }))
-      ).toBeInTheDocument();
+      const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "3" });
+      expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
     });
 
     it("displays industry question", async () => {

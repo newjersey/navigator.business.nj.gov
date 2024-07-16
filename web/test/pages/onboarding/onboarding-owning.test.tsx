@@ -3,7 +3,11 @@ import * as api from "@/lib/api-client/apiClient";
 import { templateEval } from "@/lib/utils/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentBusiness, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
-import { mockEmptyApiSignups, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
+import {
+  composeOnBoardingTitle,
+  mockEmptyApiSignups,
+  renderPage,
+} from "@/test/pages/onboarding/helpers-onboarding";
 import {
   OperatingPhaseId,
   ProfileData,
@@ -57,9 +61,9 @@ describe("onboarding - owning a business", () => {
   describe("page 1", () => {
     it("uses standard template eval for step label", () => {
       renderPage({});
-      expect(
-        screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" }))
-      ).toBeInTheDocument();
+      const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" });
+
+      expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
     });
 
     it("displays the sector dropdown after radio selected", () => {
