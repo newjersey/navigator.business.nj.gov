@@ -1,11 +1,7 @@
 {
-  "displayname": "pharmacy",
   "naicsCodes": "456110",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "health-care-and-social-assistance",
-  "industryOnboardingQuestions": {},
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": [],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -56,9 +52,19 @@
       "weight": 8,
       "licenseTask": "pharmacy-license",
       "required": true
+    },
+    {
+      "step": 4,
+      "licenseTask": "pharmacy-cds",
+      "weight": 10,
+      "required": true
     }
   ],
   "name": "Pharmacy",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "pharmacy",
+  "industryOnboardingQuestions": {},
+  "isEnabled": true,
   "additionalSearchTerms": "pharmaceutics, drugstore, apothecary, chemist medicine",
   "id": "pharmacy",
   "licenseType": "Pharmacy",

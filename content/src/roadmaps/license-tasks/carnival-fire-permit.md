@@ -1,5 +1,6 @@
 ---
 id: "carnival-fire-permit"
+displayname: "carnival-fire-permit"
 webflowId: "668d72e3b7480d756067a13d"
 urlSlug: "carnival-fire-permit"
 name: "Obtain Fire Permits for Your Traveling Carnival or Circus"
