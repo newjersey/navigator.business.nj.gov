@@ -1,3 +1,24 @@
+# [2024.21.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.20.0...v2024.21.0) (2024-07-16)
+
+
+### Bug Fixes
+
+* [[#187754524](https://github.com/newjersey/navigator.business.nj.gov/issues/187754524)] update anytime action horizontal line to be aria hidden ([4e50df8](https://github.com/newjersey/navigator.business.nj.gov/commit/4e50df83c054f9a4e8e3b3ffe74624305f6deaf8))
+* [[#187934580](https://github.com/newjersey/navigator.business.nj.gov/issues/187934580)] update investNewark consent copy ([803377c](https://github.com/newjersey/navigator.business.nj.gov/commit/803377c0094539497e9f02752218e14f612aa50c))
+* update alertText copy to eliminate typo ([3935998](https://github.com/newjersey/navigator.business.nj.gov/commit/3935998833b7bcf03ae7127d10b779f84999f6c1))
+
+
+### Features
+
+* [[#186084933](https://github.com/newjersey/navigator.business.nj.gov/issues/186084933)] onboarding step header shoudl be read a single header on IOS mobile ([a6e7b5c](https://github.com/newjersey/navigator.business.nj.gov/commit/a6e7b5cc6cf39a32a0db767c1cd32258648cbc77))
+* [[#187871332](https://github.com/newjersey/navigator.business.nj.gov/issues/187871332)] update outage bar to be sticky; refactor logo only nav bar 🗺️ ([c626eb9](https://github.com/newjersey/navigator.business.nj.gov/commit/c626eb9b0b0d5d12fbb2f51ddab3b887cd55af08))
+* [[#187871332](https://github.com/newjersey/navigator.business.nj.gov/issues/187871332)] use error dark for outage alert background 💅 ([2b91976](https://github.com/newjersey/navigator.business.nj.gov/commit/2b919766d79bd6626e4dbb8effffc6494e22ea3f))
+
+
+### Reverts
+
+* Revert "Reapply "chore: temporary builder fix"" ([58b0a14](https://github.com/newjersey/navigator.business.nj.gov/commit/58b0a14ef202bbccb10457d4bbf7743d6da94221))
+
 # [2024.20.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.19.2...v2024.20.0) (2024-07-09)
 
 
