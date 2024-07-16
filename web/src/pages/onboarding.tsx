@@ -442,13 +442,11 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const header = (): ReactElement => {
     return (
-      <div className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-1">
-        <h1 ref={headerRef}>
-          {pageTitle}{" "}
-          <span className="text-light" data-testid={`step-${page.current.toString()}`}>
-            {evalHeaderStepsTemplate(page)}
-          </span>
-        </h1>
+      <div
+        className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-1"
+        data-testid={`step-${page.current.toString()}`}
+      >
+        <h1 ref={headerRef}>{`${[pageTitle, evalHeaderStepsTemplate(page)].join(" ")}`}</h1>
       </div>
     );
   };
