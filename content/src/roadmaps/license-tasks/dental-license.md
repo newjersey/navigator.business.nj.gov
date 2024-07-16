@@ -5,6 +5,14 @@ notesMd: >-
 
 
   * Initial review completed 7.1, submitting CMS review 7.9
+
+
+  * Reciprocity info: under Application Reqs, "[bullet point] Any other clinical exams you have taken, including the dates you passed the exams, if applying through reciprocity
+
+
+  [separate line] If you’re applying through reciprocity, in addition to the application requirements, you must mail a [Verification of State License form](https://www.njconsumeraffairs.gov/den/Applications/Dentistry-Verification-of-State-License.pdf) to each state you hold (or have held) a dental license. The dentistry board of each state must complete the form, stamp it with their official seal, and mail it to: 
+
+  New Jersey State Board of Dentistry, P.O. Box 45005, 124 Halsey Street, 6th Floor, Newark, New Jersey 07101.
 id: "dental-license "
 filename: "dental-license "
 displayname: dental-license
@@ -51,10 +59,6 @@ Once your application has been approved, you will receive an Initial Registratio
 * Criminal history, if applicable
 * List of past professional license applications including dates, if applicable
 * Explanation of license suspension, denial, revocation, or surrender, if applicable
-* Any other clinical exams you have taken, including the dates you passed the exams, if applying through reciprocity
-
-If you’re applying through reciprocity, in addition to the application requirements, you must mail a [Verification of State License form](https://www.njconsumeraffairs.gov/den/Applications/Dentistry-Verification-of-State-License.pdf) to each state you hold (or have held) a dental license. The dentistry board of each state must complete the form, stamp it with their official seal, and mail it to: 
-New Jersey State Board of Dentistry, P.O. Box 45005, 124 Halsey Street, 6th Floor, Newark, New Jersey 07101.
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
 
