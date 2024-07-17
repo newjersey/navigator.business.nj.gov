@@ -40,7 +40,7 @@ Complete page 17 of the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/20
 
 -or-
 
-File online by clicking on the "Register for State Taxes" button.
+File online by clicking on the "Register for State Taxes" button. Answer in the negative or disregard any questions that apply to businesses.
 
 
 - - -
