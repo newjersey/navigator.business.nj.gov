@@ -18,8 +18,8 @@ filename: domestic-employer-register-for-taxes
 displayname: domestic-employer-tax-registration
 name: Register for State Taxes and Employer Purposes
 id: domestic-employer-register-for-taxes
-callToActionLink: ""
-callToActionText: ""
+callToActionLink: https://www.njportal.com/DOR/BusinessRegistration
+callToActionText: Register for State Taxes
 agencyId: nj-taxation
 formName: NJ-Reg
 ---
@@ -36,7 +36,12 @@ formName: NJ-Reg
 
 ## Register for State Taxes
 
-Complete page 17 of the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) and choose "Employer of Domestic Household Employee(s)" under step A and "Domestic (Household Employer)" under step H. You may not apply online.
+Complete page 17 of the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) and choose "Employer of Domestic Household Employee(s)" under step A and "Domestic (Household Employer)" under step H.
+
+-or-
+
+File online by clicking on the "Register for State Taxes" button.
+
 
 - - -
 
