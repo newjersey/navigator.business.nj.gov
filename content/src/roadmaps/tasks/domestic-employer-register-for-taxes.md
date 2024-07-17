@@ -40,7 +40,7 @@ Complete page 17 of the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/20
 
 \-or-
 
-[File online](https://www.njportal.com/DOR/BusinessRegistration).
+[Register online](https://www.njportal.com/DOR/BusinessRegistration).
 
 - - -
 
