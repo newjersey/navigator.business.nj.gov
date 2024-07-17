@@ -48,7 +48,7 @@
       "task": "healthcare-license"
     }
   ],
-  "name": "Healthcare ",
+  "name": "Healthcare",
   "nonEssentialQuestionsIds": [],
   "displayname": "healthcare",
   "industryOnboardingQuestions": {
