@@ -47,9 +47,11 @@ const fundingMd = [
       "- Must be a New Jersey-based clean energy and clean technology company\n" +
       "- Company must have 50 or fewer full-time employees\n" +
       "\n" +
-      "> **Benefits**\n" +
-      ">\n" +
-      "> Vouchers totaling up to $15,000 per year\n",
+      ':::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }\n' +
+      "\n" +
+      "Vouchers totaling up to $15,000 per year\n" +
+      "\n" +
+      ":::\n",
     filename: "clean-tech-research",
     urlSlug: "clean-tech-research",
     name: "Clean Tech Research & Development (R&D) Voucher Program",
@@ -93,9 +95,11 @@ const fundingMd = [
       "- Equipment cannot be planned to go out of use in the next 5 years\n" +
       "- Priority is given to urban areas, high frequency of use, and older models\n" +
       "\n" +
-      "> **Benefits**\n" +
-      ">\n" +
-      "> Award of up to $100,000 per piece of equipment purchased or replaced\n",
+      ':::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }\n' +
+      "\n" +
+      "Award of up to $100,000 per piece of equipment purchased or replaced\n" +
+      "\n" +
+      ":::\n",
     filename: "dep-clean-construction",
     urlSlug: "clean-construction",
     name: "NJ Clean Construction Program",
@@ -130,10 +134,11 @@ const fundingMd = [
       "\n" +
       "- Businesses in accelerator programs and graduates of approved accelerators\n" +
       "\n" +
-      "> **Benefits**\n" +
-      ">\n" +
+      ':::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }\n' +
+      "\n" +
       "> - 1:1 matching event sponsorship up to $100,000 for accelerator programs\n" +
-      "> - 1:1 matching loan funding up to $250,000 and rent support for up to 6 months for graduate companies\n",
+      "> - 1:1 matching loan funding up to $250,000 and rent support for up to 6 months for graduate companies\n" +
+      ":::\n",
     filename: "nj-accelerate",
     urlSlug: "nj-accelerate",
     name: "NJ Accelerate",
@@ -197,7 +202,7 @@ const fundings = [
       eligibility:
         "<ul> <li>Businesses in accelerator programs and graduates of approved accelerators</li> </ul>",
       benefit:
-        "<ul> <li>1:1 matching event sponsorship up to $100,000 for accelerator programs</li> <li>1:1 matching loan funding up to $250,000 and rent support for up to 6 months for graduate companies</li> </ul>",
+        "<ul> <li>1:1 matching event sponsorship up to $100,000 for accelerator programs</li> <li> 1:1 matching loan funding up to $250,000 and rent support for up to 6 months for graduate companies  </li> </ul>",
       name: "NJ Accelerate",
       slug: "nj-accelerate",
       "industry-reference": ["61c48e1b3257cc374781ee12"],
@@ -480,15 +485,9 @@ describe("webflow syncing", () => {
         }).toThrow("Benefits section missing");
         expect(() => {
           return contentMdToObject("## Eligibility\n ### Benefits\n");
-        }).not.toThrow("Benefits section missing");
+        }).toThrow("Benefits section missing");
         expect(() => {
-          return contentMdToObject("## Eligibility\n **Benefit**\n");
-        }).not.toThrow("Benefits section missing");
-        expect(() => {
-          return contentMdToObject("## Eligibility\n **Benefits**\n");
-        }).not.toThrow("Benefits section missing");
-        expect(() => {
-          return contentMdToObject("## Eligibility\n **Benefits:**\n");
+          return contentMdToObject('## Eligibility\n:::callout{ headerText="Benefits" }\n');
         }).not.toThrow("Benefits section missing");
 
         const sampleMd =
@@ -501,12 +500,13 @@ describe("webflow syncing", () => {
           "eligibility stuff\n" +
           "- bullet\n" +
           "\n" +
-          "> **Benefits**\n" +
+          ':::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }\n' +
           ">\n" +
-          "> benefit section\n";
+          "> benefit section\n" +
+          ":::";
 
         expect(contentMdToObject(sampleMd)).toEqual({
-          benefit: "<p>benefit section</p>",
+          benefit: "<p> benefit section  </p>",
           eligibility: "<p>eligibility stuff</p> <ul> <li>bullet</li> </ul>",
           "program-overview": "<p>Summary</p>",
         });
@@ -523,9 +523,10 @@ describe("webflow syncing", () => {
           "eligibility stuff\n" +
           "- bullet\n" +
           "\n" +
-          "> **Benefits**\n" +
+          ':::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }\n' +
           ">\n" +
-          "> benefit section\n";
+          "> benefit section\n" +
+          ":::";
         expect(contentMdToObject(sampleMd)["program-overview"]).toEqual(
           "<p>Qualified Incentive Track Summary</p>"
         );
@@ -542,9 +543,10 @@ describe("webflow syncing", () => {
           "eligibility stuff\n" +
           "- bullet\n" +
           "\n" +
-          "> **Benefits**\n" +
+          ':::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }\n' +
           ">\n" +
-          "> benefit section\n";
+          "> benefit section\n" +
+          ":::";
         expect(contentMdToObject(sampleMd)["program-overview"]).not.toContain("<hr>");
       });
     });
