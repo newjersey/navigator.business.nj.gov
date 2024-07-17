@@ -9,7 +9,7 @@ summaryDescriptionMd: >-
   :::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
 
 
-  For more information on your required responsibilities as an employer, visit [Domestic Workers' Bill of Rights
+  For more information on your required responsibilities as an employer, visit [Domestic Workers' Bill of Rights: What employers need to know](https://www.nj.gov/labor/myworkrights/worker-protections/domestic_workers/domesticworkerrights_employers.shtml).
 
 
   :::
