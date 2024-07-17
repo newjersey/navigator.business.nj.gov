@@ -18,6 +18,7 @@ import {
   defaultDateFormat,
   generateBusiness,
   generateMunicipality,
+  generateUserDataForBusiness,
   getCurrentBusiness,
   getCurrentDate,
   getCurrentDateInNewJerseyFormatted,
@@ -150,20 +151,47 @@ describe("<BusinessFormation />", () => {
       task = generateTask({});
     });
 
-    it("directs user back to Review Step in form, without setting completedFilingPayment to true", async () => {
+    it("refetches getCompletedFiling when getFilingResponse is initially unsuccessful", async () => {
       formationData = generateFormationData({
         formationResponse: generateFormationSubmitResponse({ success: true }),
-        getFilingResponse: undefined,
+        getFilingResponse: generateGetFilingResponse({
+          certifiedDoc: "",
+          confirmationNumber: "",
+          entityId: "",
+          formationDoc: "",
+          standingDoc: "",
+          success: false,
+          transactionDate: "",
+        }),
       });
+
+      const validGetFilingResponse = generateGetFilingResponse({ success: true });
+
+      const userDataReturnFromApi = generateUserDataForBusiness(
+        generateBusiness({
+          formationData: generateFormationData({
+            formationResponse: generateFormationSubmitResponse({ success: true }),
+            getFilingResponse: validGetFilingResponse,
+          }),
+        })
+      );
+
+      mockApi.getCompletedFiling.mockResolvedValue(userDataReturnFromApi);
 
       await act(async () => {
         preparePage({ business: { formationData }, displayContent, task });
       });
 
-      expect(screen.getByTestId("review-step")).toBeInTheDocument();
-      expect(currentBusiness().formationData.completedFilingPayment).toEqual(false);
-      expect(mockPush).toHaveBeenCalledWith({ pathname: `/tasks/${task.urlSlug}` }, undefined, {
-        shallow: true,
+      expect(mockApi.getCompletedFiling).toHaveBeenCalled();
+      await waitFor(() => {
+        expect(currentBusiness().formationData?.getFilingResponse).toEqual(validGetFilingResponse);
+      });
+      expect(currentBusiness().formationData?.completedFilingPayment).toBeTruthy();
+
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalledWith({ pathname: `/tasks/${task.urlSlug}` }, undefined, {
+          shallow: true,
+        });
       });
     });
 

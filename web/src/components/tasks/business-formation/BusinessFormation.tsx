@@ -138,7 +138,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         return false;
       }
       const completeFilingQueryParamExists = checkQueryValue(router, QUERIES.completeFiling, "true");
-      const completedPayment = business.formationData.completedFilingPayment;
+      const completedPayment = business.formationData.formationResponse?.success === true;
       const noCompletedFilingExists = !business.formationData.getFilingResponse?.success;
       return completeFilingQueryParamExists || (completedPayment && noCompletedFilingExists);
     };
