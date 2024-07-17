@@ -25,7 +25,7 @@ formName: NJ-Reg
 ---
 ## Application Requirements
 
-* [NAICS code](/tasks/naics-code-determination): Use NAICS code 814110 for "Private households employing domestic personnel"
+* [NAICS code](/tasks/naics-code-determination): ${naicsCode}
 * Social Security number 
 * Estimated start date
 * Description of your business activity
@@ -38,10 +38,9 @@ formName: NJ-Reg
 
 Complete page 17 of the [NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) and choose "Employer of Domestic Household Employee(s)" under step A and "Domestic (Household Employer)" under step H.
 
--or-
+\-or-
 
-File online by clicking on the "Register for State Taxes" button. Answer in the negative or disregard any questions that apply to businesses.
-
+[File online](https://www.njportal.com/DOR/BusinessRegistration).
 
 - - -
 
