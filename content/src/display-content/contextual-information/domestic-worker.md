@@ -1,5 +1,11 @@
 ---
-notesMd: https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/5923
+notesMd: >-
+  https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/5923
+
+
+
+
+  This was cut off a few times, so pasting here: [Domestic Workers' Bill of Rights: What employers need to know](https://www.nj.gov/labor/myworkrights/worker-protections/domestic_workers/domesticworkerrights_employers.shtml)
 header: Domestic Worker
 slug: domestic-worker
 displayname: domestic-worker
