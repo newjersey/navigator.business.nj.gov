@@ -1,3 +1,10 @@
+## [2024.21.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.21.0...v2024.21.1) (2024-07-18)
+
+
+### Bug Fixes
+
+* [[#186334874](https://github.com/newjersey/navigator.business.nj.gov/issues/186334874)] api responses inconsistently received ([2b9308d](https://github.com/newjersey/navigator.business.nj.gov/commit/2b9308d96c25ccc9022cff1657aab15245072dbb))
+
 # [2024.21.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.20.0...v2024.21.0) (2024-07-16)
 
 
