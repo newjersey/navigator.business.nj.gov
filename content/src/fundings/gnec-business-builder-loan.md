@@ -13,7 +13,8 @@ openDate: ""
 dueDate: ""
 summaryDescriptionMd: >
   The GNEC Business Builder Loan Program is a small business loan program
-  offered to New Jersey businesses seeking $30,001 to $100,000 in funding. 
+  offered to qualifying New Jersey businesses seeking $30,001 to $100,000 in
+  funding. 
 
 
   GNEC is a non-profit Community Development Financial Institution (CDFI) founded in 2005. CDFIs provide affordable lending services to underserved communities nationwide.
@@ -48,6 +49,7 @@ publishStageArchive: ""
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
+* $30,001 to $100,000 in funding
 * No pre-payment penalties for this loan
 * Loan terms are typically amortized over five to seven years
 * Fixed interest rate of 5.99% applies for businesses that qualify as minority and/or woman-owned (M/WBE), LGBTQ+-owned, located in a designated Opportunity Zone or operating in a designated trade (electricians, plumbers, carpenters, welders, brick masons, HVAC technicians, diesel mechanics, and elevator specialists)
