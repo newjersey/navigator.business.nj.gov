@@ -13,7 +13,7 @@ openDate: ""
 dueDate: ""
 summaryDescriptionMd: >
   The GNEC DreamMaker Loan Program is a small business loan program offered to
-  New Jersey businesses seeking up to $30,000 in funding.
+  qualifying New Jersey businesses seeking up to $30,000 in funding.
 
 
   GNEC is a non-profit Community Development Financial Institution (CDFI) founded in 2005. CDFIs provide affordable lending services to underserved communities nationwide.
@@ -47,6 +47,7 @@ publishStageArchive: ""
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
+* Up to $30,000 in funding
 * No pre-payment penalties for this loan
 * Loan terms are typically amortized over four years
 * Fixed interest rate of 5.99% applies for businesses that qualify as minority and/or woman-owned (M/WBE), LGBTQ+-owned, located in a designated Opportunity Zone or operating in a designated trade (electricians, plumbers, carpenters, welders, brick masons, HVAC technicians, diesel mechanics, and elevator specialists)
