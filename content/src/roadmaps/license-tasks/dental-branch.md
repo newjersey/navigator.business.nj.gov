@@ -1,4 +1,7 @@
 ---
+notesMd: "* Dental Branches do not renew separately. They are included with the
+  dental license during the online renewal. No renewal task will be written for
+  the dental branch."
 id: dental-branch
 filename: dental-branch
 displayname: dental-branch
@@ -22,7 +25,8 @@ agencyId: nj-consumer-affairs
 
 Email your completed application to dentistry@dca.njoag.gov. The New Jersey Dental Board will email you an invoice via email to pay your fee online.
 
-Keep in mind that your branch office registrations are linked to your dental license and must be renewed every two years.
+\
+Your branch office registration is linked to your dental license and should be renewed at the same time.
 
 :::callout{ showHeader="true" headerText="What if I don't get this registration?" showIcon="false" calloutType="conditional" }
 
