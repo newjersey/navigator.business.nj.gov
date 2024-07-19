@@ -62,6 +62,7 @@ export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): Reac
           name={camelCaseToKebabCase(props.fieldName)}
           value={state.profileData[props.fieldName]?.toString() ?? ""}
           onChange={handleChange}
+          data-testid={`${props.fieldName}-radio-group`}
           row
         >
           <>

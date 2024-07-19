@@ -14,7 +14,9 @@ import {
   ProfileData,
   TaxFilingData,
   defaultDateFormat,
+  emptyAddressData,
   emptyIndustrySpecificData,
+  generateFormationFormData,
   generateMunicipality,
   generateProfileData,
   getCurrentDateFormatted,
@@ -518,6 +520,27 @@ describe("profile-foreign", () => {
     it("renders the business name field for remote seller", () => {
       renderPage({ business: foreignRemoteSellerProfile });
       expect(screen.getByTestId("businessName")).toBeInTheDocument();
+    });
+  });
+
+  describe("non essential questions", () => {
+    it("does not show elevator questions for foreign businesses", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          industryId: "generic",
+          businessPersona: "OWNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
+          homeBasedBusiness: false,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.queryByTestId("elevatorOwningBusiness-radio-group")).not.toBeInTheDocument();
     });
   });
 });
