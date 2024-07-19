@@ -25,7 +25,6 @@ import { TaxPin } from "@/components/data-fields/TaxPin";
 import { TradeName } from "@/components/data-fields/TradeName";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { FormationDateDeletionModal } from "@/components/FormationDateDeletionModal";
-import { NavBar } from "@/components/navbar/NavBar";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
@@ -808,8 +807,7 @@ const ProfilePage = (props: Props): ReactElement => {
             }}
           >
             <NextSeo title={getNextSeoTitle(config.pagesMetadata.profileTitle)} />
-            <PageSkeleton>
-              <NavBar showSidebar={true} hideMiniRoadmap={true} />
+            <PageSkeleton showNavBar showSidebar hideMiniRoadmap>
               <main id="main" data-testid={"main"}>
                 <div className="padding-top-0 desktop:padding-top-3">
                   <ProfileEscapeModal

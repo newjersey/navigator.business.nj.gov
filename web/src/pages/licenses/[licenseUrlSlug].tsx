@@ -1,7 +1,6 @@
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
-import { NavBar } from "@/components/navbar/NavBar";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -88,8 +87,7 @@ const LicensePage = (props: Props): ReactElement => {
   return (
     <>
       <NextSeo title={getNextSeoTitle(licenseName)} />
-      <PageSkeleton>
-        <NavBar showSidebar={true} hideMiniRoadmap={true} />
+      <PageSkeleton showNavBar showSidebar hideMiniRoadmap>
         <TaskSidebarPageLayout>
           <LicenseElement
             license={props.license}

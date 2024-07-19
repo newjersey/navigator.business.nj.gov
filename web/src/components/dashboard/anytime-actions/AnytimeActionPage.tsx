@@ -1,7 +1,6 @@
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
-import { NavBar } from "@/components/navbar/NavBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
@@ -79,8 +78,7 @@ export const AnytimeActionPage = (props: Props): ReactElement => {
   return (
     <>
       <NextSeo title={getNextSeoTitle(props.anytimeAction.name)} />
-      <PageSkeleton>
-        <NavBar showSidebar={true} hideMiniRoadmap={true} />
+      <PageSkeleton showNavBar showSidebar hideMiniRoadmap>
         <TaskSidebarPageLayout hideMiniRoadmap={true}>
           {rswitch(props.anytimeAction.filename, {
             "government-contracting": (

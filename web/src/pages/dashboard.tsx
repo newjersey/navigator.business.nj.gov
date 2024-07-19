@@ -2,7 +2,6 @@ import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { DashboardAlerts } from "@/components/dashboard/DashboardAlerts";
 import { DashboardOnDesktop } from "@/components/dashboard/DashboardOnDesktop";
 import { DashboardOnMobile } from "@/components/dashboard/DashboardOnMobile";
-import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -117,8 +116,7 @@ const DashboardPage = (props: Props): ReactElement => {
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
       <NextSeo title={getNextSeoTitle(Config.pagesMetadata.dashboardTitle)} />
-      <PageSkeleton>
-        <NavBar />
+      <PageSkeleton showNavBar>
         <main id="main">
           <DashboardAlerts />
           {isLoading && <PageCircularIndicator />}

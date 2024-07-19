@@ -1,7 +1,6 @@
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
-import { NavBar } from "@/components/navbar/NavBar";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -87,8 +86,7 @@ const FundingPage = (props: Props): ReactElement => {
   return (
     <>
       <NextSeo title={getNextSeoTitle(props.funding.name)} />
-      <PageSkeleton>
-        <NavBar showSidebar={true} hideMiniRoadmap={true} />
+      <PageSkeleton showNavBar showSidebar hideMiniRoadmap>
         <TaskSidebarPageLayout hideMiniRoadmap={true}>
           <FundingElement funding={props.funding} />
         </TaskSidebarPageLayout>

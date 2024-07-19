@@ -1,7 +1,6 @@
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
-import { NavBar } from "@/components/navbar/NavBar";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
@@ -60,8 +59,7 @@ const CertificationPage = (props: Props): ReactElement => {
   return (
     <>
       {props.certification.name && <NextSeo title={getNextSeoTitle(props.certification.name)} />}
-      <PageSkeleton>
-        <NavBar showSidebar={true} hideMiniRoadmap={true} />
+      <PageSkeleton showNavBar showSidebar hideMiniRoadmap>
         <TaskSidebarPageLayout hideMiniRoadmap={true}>
           <CertificationElement certification={props.certification} />
         </TaskSidebarPageLayout>

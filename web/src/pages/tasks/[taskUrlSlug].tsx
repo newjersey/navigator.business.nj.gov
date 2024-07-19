@@ -1,4 +1,3 @@
-import { NavBar } from "@/components/navbar/NavBar";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Icon } from "@/components/njwds/Icon";
@@ -98,8 +97,7 @@ const TaskPage = (props: Props): ReactElement => {
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
       <HousingMunicipalitiesContext.Provider value={{ municipalities: props.housingMunicipalities }}>
         <NextSeo title={getNextSeoTitle(props.task.name)} />
-        <PageSkeleton>
-          <NavBar task={props.task} showSidebar={true} />
+        <PageSkeleton showNavBar showSidebar task={props.task}>
           <TaskSidebarPageLayout task={props.task} belowBoxComponent={renderNextAndPreviousButtons()}>
             {renderLoadingState && <PageCircularIndicator />}
             {!renderLoadingState && (

@@ -3,7 +3,6 @@ import { Callout } from "@/components/Callout";
 import { Content, ExternalLink } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
-import { NavBar } from "@/components/navbar/NavBar";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
@@ -200,8 +199,7 @@ const FilingPage = (props: Props): ReactElement => {
   return (
     <>
       <NextSeo title={getNextSeoTitle(props.filing.name)} />
-      <PageSkeleton>
-        <NavBar showSidebar={true} hideMiniRoadmap={true} />
+      <PageSkeleton showNavBar showSidebar hideMiniRoadmap>
         <TaskSidebarPageLayout hideMiniRoadmap={true}>
           <FilingElement filing={props.filing} dueDate={matchingFiling?.dueDate ?? ""} />
         </TaskSidebarPageLayout>
