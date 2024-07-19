@@ -90,7 +90,7 @@ export const DashboardOnDesktop = (props: Props): ReactElement => {
                 {operatingPhase.displayHideableRoadmapTasks && <HideableTasks />}
               </div>
             </div>
-            <div className="grid-col-5 border-cool-lighter bg-cool-extra-light border-left-2px padding-top-6 padding-bottom-15 padding-left-5">
+            <div className="grid-col-5 border-cool-lighter bg-cool-extra-light border-left-1px padding-top-6 padding-bottom-15 padding-left-5">
               <SidebarCardsContainer
                 sidebarDisplayContent={props.displayContent.sidebarDisplayContent}
                 certifications={props.certifications}
