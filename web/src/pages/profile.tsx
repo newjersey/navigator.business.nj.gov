@@ -312,7 +312,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const displayElevatorQuestion = (): boolean => {
     if (!business) return false;
-    return profileData.homeBasedBusiness === false;
+    return profileData.homeBasedBusiness === false && profileData.businessPersona === "STARTING";
   };
 
   const hasSubmittedTaxData =
@@ -396,16 +396,6 @@ const ProfilePage = (props: Props): ReactElement => {
           boldAltDescription={true}
         >
           <RenovationQuestion />
-        </ProfileField>
-
-        <ProfileField
-          fieldName="elevatorOwningBusiness"
-          displayAltDescription={displayAltHomeBasedBusinessDescription}
-          isVisible={displayElevatorQuestion()}
-          hideHeader={true}
-          boldAltDescription={true}
-        >
-          <ElevatorOwningBusiness />
         </ProfileField>
       </>
     ),
@@ -728,16 +718,6 @@ const ProfilePage = (props: Props): ReactElement => {
           boldAltDescription={true}
         >
           <HomeBasedBusiness />
-        </ProfileField>
-
-        <ProfileField
-          fieldName="elevatorOwningBusiness"
-          displayAltDescription={displayAltHomeBasedBusinessDescription}
-          isVisible={displayElevatorQuestion()}
-          hideHeader={true}
-          boldAltDescription={true}
-        >
-          <ElevatorOwningBusiness />
         </ProfileField>
 
         <ProfileField fieldName="ownershipTypeIds">

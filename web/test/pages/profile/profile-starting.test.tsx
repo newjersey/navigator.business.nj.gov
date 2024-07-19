@@ -33,8 +33,10 @@ import {
   UserData,
   createEmptyBusiness,
   einTaskId,
+  emptyAddressData,
   emptyIndustrySpecificData,
   formationTaskId,
+  generateFormationFormData,
   generateGetFilingResponse,
   generateMunicipality,
   generateProfileData,
@@ -1301,6 +1303,27 @@ describe("profile - starting business", () => {
         screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.header)
       ).toBeInTheDocument();
       expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("non essential questions", () => {
+    it("shows elevator questions for starting businesses", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          industryId: "generic",
+          businessPersona: "STARTING",
+          operatingPhase: OperatingPhaseId.GUEST_MODE,
+          homeBasedBusiness: false,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.getByTestId("elevatorOwningBusiness-radio-group")).toBeInTheDocument();
     });
   });
 
