@@ -4952,11 +4952,11 @@ __metadata:
     prettier-plugin-organize-imports: 3.2.4
     rimraf: 5.0.9
     serverless: 3.39.0
-    serverless-dynamodb: 0.2.53
+    serverless-dynamodb: 0.2.54
     serverless-http: 3.2.0
     serverless-offline: 13.6.0
     serverless-offline-ssm: 6.2.0
-    serverless-webpack: 5.14.0
+    serverless-webpack: 5.14.1
     simple-oauth2: 5.0.1
     supertest: 6.3.4
     ts-jest: 29.1.4
@@ -4966,7 +4966,7 @@ __metadata:
     tsconfig-paths-webpack-plugin: 4.1.0
     typescript: 5.4.5
     uuid: 9.0.1
-    webpack: 5.92.0
+    webpack: 5.93.0
     webpack-node-externals: 3.0.0
     winston: 3.12.0
     winston-cloudwatch: 6.2.0
@@ -5157,11 +5157,11 @@ __metadata:
     sass-loader: 14.2.1
     semantic-release: 19.0.5
     serverless: 3.39.0
-    serverless-dynamodb: 0.2.53
+    serverless-dynamodb: 0.2.54
     serverless-http: 3.2.0
     serverless-offline: 13.6.0
     serverless-offline-ssm: 6.2.0
-    serverless-webpack: 5.14.0
+    serverless-webpack: 5.14.1
     simple-oauth2: 5.0.1
     slick-carousel: ^1.8.1
     storybook: 7.6.20
@@ -5177,7 +5177,7 @@ __metadata:
     unified: 10.1.2
     unist-util-visit: 5.0.0
     uuid: 9.0.1
-    webpack: 5.92.0
+    webpack: 5.93.0
     webpack-node-externals: 3.0.0
     winston: 3.12.0
     winston-cloudwatch: 6.2.0
@@ -5353,7 +5353,7 @@ __metadata:
     typescript: 5.4.5
     unified: 10.1.2
     unist-util-visit: 5.0.0
-    webpack: 5.92.0
+    webpack: 5.93.0
   languageName: unknown
   linkType: soft
 
@@ -33000,14 +33000,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-dynamodb@npm:0.2.53":
-  version: 0.2.53
-  resolution: "serverless-dynamodb@npm:0.2.53"
+"serverless-dynamodb@npm:0.2.54":
+  version: 0.2.54
+  resolution: "serverless-dynamodb@npm:0.2.54"
   dependencies:
     "@aws-sdk/client-dynamodb": ^3.428.0
     "@aws-sdk/lib-dynamodb": ^3.428.0
     aws-dynamodb-local: ^0.0.11
-  checksum: caf7c8bdbdbcac2c0ffc9195429f39aef03e862953fd04a8d99b15081a79e0912095d268afc88a1662f18e294bf9a12f89a3de49a2afd24dd3e9e7e99080663e
+  checksum: 7236c2fca31d6c7dec8e0b6f8df6ece036e2428f1ed95f4224f55ff6f364c411ea925d248d6df58c3857e23f76d7e1fe30668c86dc2fd3d2bffe11698bb07f5a
   languageName: node
   linkType: hard
 
@@ -33057,9 +33057,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-webpack@npm:5.14.0":
-  version: 5.14.0
-  resolution: "serverless-webpack@npm:5.14.0"
+"serverless-webpack@npm:5.14.1":
+  version: 5.14.1
+  resolution: "serverless-webpack@npm:5.14.1"
   dependencies:
     archiver: ^7.0.1
     bluebird: ^3.7.2
@@ -33069,21 +33069,14 @@ __metadata:
     is-builtin-module: ^3.2.1
     lodash: ^4.17.21
     semver: ^7.6.2
-    ts-node: ">= 8.3.0"
   peerDependencies:
-    "@types/node": "*"
     serverless: 1 || 2 || 3
-    typescript: ">=2.0"
+    ts-node: ">= 8.3.0"
     webpack: ">= 3.0.0 < 6"
-  dependenciesMeta:
+  peerDependenciesMeta:
     ts-node:
       optional: true
-  peerDependenciesMeta:
-    "@types/node":
-      optional: true
-    typescript:
-      optional: true
-  checksum: f01e142167d026f4b78a6bc95ddbc050f973f39989a0c972b882c12788118b4d4b9157fd5d11e3958b5ad068238fbce705346f2f69ccd729e39fcb189d36c5a4
+  checksum: 24a12feef22a00b226aef41008e58acb2715dc1d66224ede1c43073bf780fe65538fd18219df45c4c806017dacc31532bc643c345632c40bb035a896036209ae
   languageName: node
   linkType: hard
 
@@ -35263,7 +35256,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:10.9.2, ts-node@npm:>= 8.3.0":
+"ts-node@npm:10.9.2":
   version: 10.9.2
   resolution: "ts-node@npm:10.9.2"
   dependencies:
@@ -36765,9 +36758,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:5, webpack@npm:5.92.0, webpack@npm:^5":
-  version: 5.92.0
-  resolution: "webpack@npm:5.92.0"
+"webpack@npm:5, webpack@npm:5.93.0, webpack@npm:^5":
+  version: 5.93.0
+  resolution: "webpack@npm:5.93.0"
   dependencies:
     "@types/eslint-scope": ^3.7.3
     "@types/estree": ^1.0.5
@@ -36798,7 +36791,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: b020102549d2bdbc59902003140808601a4f85800c3efcb8292d4239a71a44786d0b4e2412cfa840a75c2e60276e7e55ea3b77b4e1850a915024cab2a57e90ef
+  checksum: c93bd73d9e1ab49b07e139582187f1c3760ee2cf0163b6288fab2ae210e39e59240a26284e7e5d29bec851255ef4b43c51642c882fa5a94e16ce7cb906deeb47
   languageName: node
   linkType: hard
 
