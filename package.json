@@ -213,7 +213,7 @@
     "serverless-dynamodb": "0.2.53",
     "serverless-offline-ssm": "6.2.0",
     "serverless-webpack": "5.14.0",
-    "storybook": "7.6.19",
+    "storybook": "7.6.20",
     "style-loader": "3.3.4",
     "supertest": "6.3.4",
     "ts-jest": "29.1.4",
