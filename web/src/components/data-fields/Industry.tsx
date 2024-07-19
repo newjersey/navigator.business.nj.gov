@@ -79,7 +79,7 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
       />
       {state.profileData.industryId === "home-contractor" && (
         <div
-          className="margin-top-2"
+          className="margin-top-05"
           data-testid={`industry-specific-${state.profileData.industryId}`}
           key={state.profileData.industryId}
         >
@@ -88,7 +88,7 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
       )}
       {state.profileData.industryId === "employment-agency" && (
         <div
-          className="margin-top-2"
+          className="margin-top-05"
           data-testid={`industry-specific-${state.profileData.industryId}`}
           key={state.profileData.industryId}
         >

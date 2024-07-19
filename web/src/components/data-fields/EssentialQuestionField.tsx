@@ -31,7 +31,7 @@ export const EssentialQuestionField = <T,>(props: Props<T>): ReactElement => {
     <div
       data-testid={`industry-specific-${state.profileData.industryId}-${props.essentialQuestion.fieldName}`}
     >
-      <WithErrorBar hasError={isFormFieldInvalid} type="ALWAYS" className="margin-top-2">
+      <WithErrorBar hasError={isFormFieldInvalid} type="ALWAYS" className="margin-top-4">
         {props.onboardingFieldLabel ? (
           <div data-testid={"FieldLabelOnboarding"}>
             <FieldLabelOnboarding fieldName={props.essentialQuestion.fieldName as ProfileContentField} />
