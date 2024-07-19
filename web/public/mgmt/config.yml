@@ -1458,6 +1458,13 @@ collections:
         default: ""
         required: false
 
+      - label: "Municipality"
+        name: "municipality"
+        widget: "select"
+        multiple: false
+        required: false
+        options: ["All", "Newark"]
+
   - name: "archived-funding-opportunities"
     label: "Fund Opps - Archived"
     folder: "content/src/archived-fundings"
