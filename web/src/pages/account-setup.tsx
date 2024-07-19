@@ -1,6 +1,5 @@
 import { Content } from "@/components/Content";
 import { AccountSetupForm } from "@/components/data-fields/AccountSetupForm";
-import { NavBar } from "@/components/navbar/NavBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
@@ -112,8 +111,7 @@ const AccountSetupPage = (): ReactElement => {
   };
 
   return (
-    <PageSkeleton>
-      <NavBar logoOnly="NAVIGATOR_MYNJ_LOGO" />
+    <PageSkeleton showNavBar logoOnly="NAVIGATOR_MYNJ_LOGO">
       <main id="main" className="padding-top-0 desktop:padding-top-8">
         <SingleColumnContainer isSmallerWidth>
           <h1>{getContent().header}</h1>

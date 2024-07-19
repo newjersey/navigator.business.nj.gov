@@ -1,5 +1,4 @@
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { NavBar } from "@/components/navbar/NavBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
@@ -465,11 +464,11 @@ const OnboardingPage = (props: Props): ReactElement => {
           }}
         >
           <NextSeo title={getNextSeoTitle(`${pageTitle} ${evalHeaderStepsTemplate(page)}`)} />
-          <PageSkeleton>
-            <NavBar
-              previousBusinessId={previousBusiness?.id}
-              logoOnly={previousBusiness ? "NAVIGATOR_LOGO" : undefined}
-            />
+          <PageSkeleton
+            showNavBar
+            previousBusinessId={previousBusiness?.id}
+            logoOnly={previousBusiness ? "NAVIGATOR_LOGO" : undefined}
+          >
             <ReturnToPreviousBusinessBar previousBusiness={previousBusiness} />
             <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
               <SingleColumnContainer isSmallerWidth>

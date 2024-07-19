@@ -1,5 +1,4 @@
 import { LegalMessage } from "@/components/LegalMessage";
-import { NavBar } from "@/components/navbar/NavBar";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Hero } from "@/components/njwds/Hero";
@@ -152,8 +151,7 @@ const Home = (): ReactElement => {
   return (
     <>
       <NextSeo title={getNextSeoTitle(config.pagesMetadata.homeTitle)} />
-      <PageSkeleton landingPage={true}>
-        <NavBar landingPage={true} />
+      <PageSkeleton showNavBar landingPage>
         <main data-testid="main">
           <Hero />
           <section ref={sectionHowItWorks} aria-label={landingPageConfig.section4HeaderText}>

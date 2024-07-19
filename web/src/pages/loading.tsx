@@ -1,5 +1,4 @@
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
-import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { AuthContext } from "@/contexts/authContext";
@@ -63,8 +62,7 @@ const LoadingPage = (): ReactElement => {
   }, userData);
 
   return (
-    <PageSkeleton>
-      <NavBar logoOnly="NAVIGATOR_LOGO" />
+    <PageSkeleton showNavBar logoOnly="NAVIGATOR_LOGO">
       <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
         <SingleColumnContainer>
           <PageCircularIndicator />
