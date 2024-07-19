@@ -1,6 +1,6 @@
 ---
 notesMd: ""
-filename: "healthcare-2-cds-reinstatement "
+filename: "healthcare-2-cds-reinstatement"
 name: Reinstate Your PA, APN, or CNM Controlled Dangerous Substances Registration
 industryIds: []
 sectorIds: []
@@ -15,20 +15,21 @@ summaryDescriptionMd: >-
 
 
   You must be registered with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) before applying for your CDS reinstatement.
-callToActionText: "Reinstate My PA, APN, or CNM CDS Registration "
+callToActionText: "Reinstate My PA, APN, or CNM CDS Registration"
 callToActionLink: https://www.njconsumeraffairs.gov/dcu/Applications/Reinstatement-Application-for-Registration-for-Dispenser-Prescriber-Mid-Level-Practitioner.pdf
 ---
+
 ## Application Requirements
 
-* New Jersey business address where the CDS will be stored, prescribed, or dispensed (must match your DEA registration address)
-* Schedule(s) of the CDS
-* Current and active professional license number (Certified Nurse Midwives must include their prescriptive authority suffix)
-* Social Security number
-* CDS registration number
-* DEA registration number
-* Signed attestation (included in application)
-* Applicable fees paid, once the New Jersey Drug Control Unit (DCU) has sent an invoice
-* Your reinstatement application must be signed in front of and by a notary public
+- New Jersey business address where the CDS will be stored, prescribed, or dispensed (must match your DEA registration address)
+- Schedule(s) of the CDS
+- Current and active professional license number (Certified Nurse Midwives must include their prescriptive authority suffix)
+- Social Security number
+- CDS registration number
+- DEA registration number
+- Signed attestation (included in application)
+- Applicable fees paid, once the New Jersey Drug Control Unit (DCU) has sent an invoice
+- Your reinstatement application must be signed in front of and by a notary public
 
 Email your application to cds@dca.njoag.gov. Do not include your payment. The DCU will send you an invoice via email to pay the fee online.
 

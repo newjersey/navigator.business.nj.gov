@@ -1,32 +1,17 @@
 ---
-notesMd: >-
-  Draft:
-  https://docs.google.com/document/d/1e2LcLWIgCXRK_Urszn7-ejkxqMcoURv2qoP1Ceu_1oY/edit
-
-
-  * Initial review completed 7.1, submitting CMS review 7.9
-
-
-  * Reciprocity info: under Application Reqs, "[bullet point] Any other clinical exams you have taken, including the dates you passed the exams, if applying through reciprocity
-
-
-  [separate line] If you’re applying through reciprocity, in addition to the application requirements, you must mail a [Verification of State License form](https://www.njconsumeraffairs.gov/den/Applications/Dentistry-Verification-of-State-License.pdf) to each state you hold (or have held) a dental license. The dentistry board of each state must complete the form, stamp it with their official seal, and mail it to:
-
-  New Jersey State Board of Dentistry, P.O. Box 45005, 124 Halsey Street, 6th Floor, Newark, New Jersey 07101.
 id: "dental-license"
-filename: "dental-license"
-displayname: dental-license
-urlSlug: dental-license
-name: Apply for Your Dental License, if Applicable
+webflowId: "669ac515985e99ee52d48390"
+urlSlug: "dental-license"
+name: "Apply for Your Dental License, if Applicable"
 webflowName: "Healthcare: Dental License"
-summaryDescriptionMd: >
-  You need a dental license if you own a dental practice or perform dentistry in
-  New Jersey.
-industryId:
-  - healthcare
-callToActionText: Apply for My Dental License
+filename: "dental-license"
 callToActionLink: "https://newjersey.mylicense.com/eGov/Login.aspx"
-agencyId: nj-consumer-affairs
+callToActionText: "Apply for My Dental License"
+agencyId: "nj-consumer-affairs"
+industryId: "healthcare"
+licenseCertificationClassification: "undefined"
+summaryDescriptionMd: "You need a dental license if you own a dental practice or perform dentistry in New Jersey.
+"
 ---
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="note" }

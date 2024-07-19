@@ -2,9 +2,10 @@
 urlSlug: landscape-architecture
 previewType: renewal
 summaryDescriptionMd: N/A
-callToActionLink: "https://www.njconsumeraffairs.gov/land/Pages/default.aspx "
+callToActionLink: "https://www.njconsumeraffairs.gov/land/Pages/default.aspx"
 callToActionText: Renew My Certificate of Authorization
 ---
+
 Your certificate of authorization to provide or offer landscape architectural services expires every two years.
 
 ### Application Requirements

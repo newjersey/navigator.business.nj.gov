@@ -10,12 +10,13 @@ summaryDescriptionMd: >-
 urlSlug: nonprofit-business-bylaws
 filename: nonprofit-business-bylaws
 displayname: nonprofit-business-bylaws
-name: "Write Your Bylaws "
+name: "Write Your Bylaws"
 id: nonprofit-business-bylaws
 callToActionLink: ""
 callToActionText: ""
 formName: ""
 ---
+
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
 Bylaws to document your business operations.

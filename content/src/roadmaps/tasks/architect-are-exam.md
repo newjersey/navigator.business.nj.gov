@@ -5,20 +5,21 @@ summaryDescriptionMd: You can only practice as an architect once you pass the
 urlSlug: architect-are-exam
 filename: architect-are-exam
 displayname: architect-are-exam
-name: "Take Your Architect’s Registration Exam "
+name: "Take Your Architect’s Registration Exam"
 id: architect-are-exam
 callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
 callToActionText: Apply for My ARE
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Architects
 ---
+
 ## Eligibility Criteria
 
-* An approved architect license application
+- An approved architect license application
 
 ## Application Requirements
 
-* Applicable fees paid
+- Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 

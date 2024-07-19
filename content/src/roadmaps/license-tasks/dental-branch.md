@@ -1,27 +1,23 @@
 ---
-notesMd: "* Dental Branches do not renew separately. They are included with the
-  dental license during the online renewal. No renewal task will be written for
-  the dental branch."
-id: dental-branch
-filename: dental-branch
-displayname: dental-branch
-urlSlug: dental-branch
-name: Apply for Your Dental Branch Office Registration, if Applicable
+id: "dental-branch"
+webflowId: "669ac515f93c28d7e8d25ada"
+urlSlug: "dental-branch"
+name: "Apply for Your Dental Branch Office Registration, if Applicable"
 webflowName: "Healthcare: Dental Branch Office Registration"
-summaryDescriptionMd: If you are a licensed dentist who owns your practice and
-  you have more than one office, you must register each location.
-industryId:
-  - healthcare
-callToActionText: Apply for My Dental Branch Office Registration
-callToActionLink: "https://www.njconsumeraffairs.gov/den/Applications/Request-f\
-  or-Branch-Office-Registration.pdf "
-agencyId: nj-consumer-affairs
+filename: "dental-branch"
+callToActionLink: "https://www.njconsumeraffairs.gov/den/Applications/Request-for-Branch-Office-Registration.pdf"
+callToActionText: "Apply for My Dental Branch Office Registration"
+agencyId: "nj-consumer-affairs"
+industryId: "healthcare"
+licenseCertificationClassification: "undefined"
+summaryDescriptionMd: "If you are a licensed dentist who owns your practice and you have more than one office, you must register each location."
 ---
+
 ## Application Requirements
 
-* Dental license number 
-* Business name and address of the office branch you are registering 
-* Applicable fees paid, once the Board of Dentistry sends an invoice 
+- Dental license number
+- Business name and address of the office branch you are registering
+- Applicable fees paid, once the Board of Dentistry sends an invoice
 
 Email your completed application to dentistry@dca.njoag.gov. The New Jersey Dental Board will email you an invoice via email to pay your fee online.
 

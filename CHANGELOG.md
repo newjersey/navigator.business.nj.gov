@@ -1,3 +1,17 @@
+# [2024.22.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.21.1...v2024.22.0) (2024-07-19)
+
+
+### Bug Fixes
+
+* [[#186334874](https://github.com/newjersey/navigator.business.nj.gov/issues/186334874)] Formation API responses inconsistently being received/saved ([2393dc7](https://github.com/newjersey/navigator.business.nj.gov/commit/2393dc76e68bd62bc8549516436a6cb9d1176af6))
+* **deps:** update dependency axios to v1.7.2 ([6cc174c](https://github.com/newjersey/navigator.business.nj.gov/commit/6cc174ce06d1a992c85a2d5384dbd0771f372163))
+* fixes for webflow sync tests ([4115e98](https://github.com/newjersey/navigator.business.nj.gov/commit/4115e980c878ce92c437f8525d9bf286b7f3730d))
+
+
+### Features
+
+* [[#187977335](https://github.com/newjersey/navigator.business.nj.gov/issues/187977335)] add municipality field to fundings and investNewark as agency source ([c66831a](https://github.com/newjersey/navigator.business.nj.gov/commit/c66831adf98dbf177869cd6c22ef023e17707468))
+
 ## [2024.21.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.21.0...v2024.21.1) (2024-07-18)
 
 
