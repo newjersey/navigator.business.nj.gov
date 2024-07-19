@@ -20,7 +20,7 @@ summaryDescriptionMd: >
   * Fire extinguishers
 
 
-  Contact your Local Enforcing Agency (LEA) to schedule an inspection. Your LEA can be the local fire department or the state Division of Fire Safety.
+  Contact your `Local Enforcing Agency (LEA)|lea` to schedule an inspection. Your LEA can be the local fire department or the state Division of Fire Safety.
 industryId:
   - residential-landlord
 callToActionText: Contact My Local Enforcing Agency (LEA)
