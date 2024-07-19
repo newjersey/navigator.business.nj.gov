@@ -1,5 +1,5 @@
 ---
-id: "healthcare-1-cds "
+id: "healthcare-1-cds"
 filename: healthcare-1-cds
 displayname: healthcare-1-cds
 urlSlug: healthcare-1-cds
@@ -19,6 +19,7 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 divisionPhone: (973) 504-6351
 webflowId: 668d72e6096a17ca97b553f9
 ---
+
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="note" }
 
 Be sure to register with the U.S. Drug Enforcement Administration (DEA) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to cds@dca.njoag.gov within 60 days of completing your CDS registration.
@@ -27,12 +28,12 @@ Be sure to register with the U.S. Drug Enforcement Administration (DEA) to valid
 
 ## Application Requirements
 
-* New Jersey business address where substances will be stored, prescribed, or dispensed (must match your DEA registration address)
-* Schedule(s) of the CDS
-* Current and active professional license number
-* Social Security number
-* Signed attestation (included in application)
-* Applicable fees paid, once the New Jersey Drug Control Unit (DCU) has sent an invoice
+- New Jersey business address where substances will be stored, prescribed, or dispensed (must match your DEA registration address)
+- Schedule(s) of the CDS
+- Current and active professional license number
+- Social Security number
+- Signed attestation (included in application)
+- Applicable fees paid, once the New Jersey Drug Control Unit (DCU) has sent an invoice
 
 Email your completed CDS application to [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov). The DCU will send you an invoice via email to pay your fee online.
 

@@ -20,7 +20,7 @@ summaryDescriptionMd: >
 
 
   To enroll in an approved private warranty plan, contact the plan representative.
-callToActionText: "Enroll My Homes in the State Warranty Plan "
+callToActionText: "Enroll My Homes in the State Warranty Plan"
 callToActionLink: https://www.nj.gov/dca/divisions/codes/forms/pdf_nhw/COP_App.pdf
 ---
 

@@ -1,5 +1,5 @@
 ---
-filename: "stem-loan-redemption "
+filename: "stem-loan-redemption"
 name: New Jersey STEM Loan Redemption Program
 displayName: stem-loan-redemption
 urlSlug: stem-loan-redemption

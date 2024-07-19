@@ -8,15 +8,15 @@ filename: telemarketing-license
 displayname: telemarketing-license
 urlSlug: telemarketing-license
 name: Apply for a Telemarketing License
-webflowName: "Telemarketing: Telemarketing License "
+webflowName: "Telemarketing: Telemarketing License"
 summaryDescriptionMd: "If you or your company makes telemarketing sales calls to
-  customers in New Jersey, you need a telemarketing license. "
+  customers in New Jersey, you need a telemarketing license."
 industryId:
   - telemarketing
 callToActionText: Apply for My Telemarketing License
 callToActionLink: "https://rgbportal.dca.njoag.gov/"
 agencyId: nj-consumer-affairs
-divisionPhone: " (973) 504-6370"
+divisionPhone: "(973) 504-6370"
 ---
 
 ---

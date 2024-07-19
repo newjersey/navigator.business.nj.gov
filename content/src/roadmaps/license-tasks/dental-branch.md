@@ -14,14 +14,15 @@ industryId:
   - healthcare
 callToActionText: Apply for My Dental Branch Office Registration
 callToActionLink: "https://www.njconsumeraffairs.gov/den/Applications/Request-f\
-  or-Branch-Office-Registration.pdf "
+  or-Branch-Office-Registration.pdf"
 agencyId: nj-consumer-affairs
 ---
+
 ## Application Requirements
 
-* Dental license number 
-* Business name and address of the office branch you are registering 
-* Applicable fees paid, once the Board of Dentistry sends an invoice 
+- Dental license number
+- Business name and address of the office branch you are registering
+- Applicable fees paid, once the Board of Dentistry sends an invoice
 
 Email your completed application to dentistry@dca.njoag.gov. The New Jersey Dental Board will email you an invoice via email to pay your fee online.
 

@@ -8,7 +8,7 @@ icon: update-purple.svg
 urlSlug: hvacr-license-reinstatement
 summaryDescriptionMd: If your Heating, Ventilating, Air Conditioning, and
   Refrigeration (HVACR) license has expired, you can apply for reinstatement.
-callToActionText: " Reinstate My  HVACR License "
+callToActionText: "Reinstate My HVACR License"
 callToActionLink: https://www.njconsumeraffairs.gov/hvacr/Pages/applications.aspx
 ---
 
