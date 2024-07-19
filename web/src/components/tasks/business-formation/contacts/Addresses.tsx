@@ -241,7 +241,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                           )}
                         </span>
                         <span>
-                          <span className="vl border-base-light padding-y-05 padding-right-2 margin-right-2">
+                          <span className="vertical-line border-base-light padding-y-05 padding-right-2 margin-right-2">
                             <IconButton
                               aria-label="edit"
                               onClick={(): void => {

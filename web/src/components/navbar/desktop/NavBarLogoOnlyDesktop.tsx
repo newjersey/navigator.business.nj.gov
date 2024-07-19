@@ -22,7 +22,7 @@ export const NavBarLogoOnlyDesktop = (props: Props): ReactElement => {
         {props.logoType === "NAVIGATOR_MYNJ_LOGO" && (
           <div
             className={
-              "display-flex flex-col flex-align-center margin-left-2 border-base-lighter border-left-2px border-left-solid margin-left-2 padding-left-2"
+              "display-flex flex-col flex-align-center margin-left-2 border-base-lighter border-left-1px border-left-solid margin-left-2 padding-left-2"
             }
           >
             <img className="height-4" src="/img/mynj-logo.png" alt="myNewJersey" />

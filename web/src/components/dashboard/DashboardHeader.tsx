@@ -73,7 +73,7 @@ export const DashboardHeader = (): ReactElement => {
         >
           {getButtonText()}
         </UnStyledButton>
-        <span className="vl margin-x-105 border-right-base" />
+        <span className="vertical-line margin-x-105 border-right-base" />
         <span className="text-base">{getCurrentDateInNewJersey().format("MMMM DD, YYYY")}</span>{" "}
         <span className="text-base">{Config.dashboardHeaderDefaults.newJerseyDateBodyText}</span>
       </div>
