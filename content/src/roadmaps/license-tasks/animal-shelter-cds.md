@@ -43,7 +43,7 @@ agencyId: nj-consumer-affairs
 * Criminal History Record Information (CHRI) for each person with access to the CDS and applicable fees paid (to be completed online and concurrently with the CDS registration application, link in application) 
 * Criminal History Record Information Part 2, including employee names, dates of birth, email addresses, and the CHRI confirmation number that was emailed to you upon submission of the CHRI application 
 * A detailed document outlining the purpose, method, and use of the CDS, accompanied by an approved protocol from a licensed New Jersey veterinarian
-* A certificate (included in the application) completed by a licensed New Jersey veterinarian, stating that shelter personnel who handle the CDS have been proficiently trained in the use of sodium pentobarbital in animal euthanasia
+* A certificate completed by a licensed New Jersey veterinarian, stating that shelter personnel who handle the CDS have been proficiently trained in the use of sodium pentobarbital in animal euthanasia
 * The name and title of everyone who will have access to the CDS
 * Security measures in place to prevent diversion of the CDS
 
