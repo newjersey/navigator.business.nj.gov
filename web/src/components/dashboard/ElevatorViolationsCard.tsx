@@ -18,7 +18,7 @@ export const ElevatorViolationsCard = (): ReactElement => {
   return (
     <div className="radius-md padding-2 border-2px border-error padding-2">
       <ActionBarLayout disableReverseOrderInMobile stackOnLeft={violationMessage}>
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 flex-align-self-center">
           <PrimaryButton
             isColor="error"
             isRightMarginRemoved
