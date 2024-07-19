@@ -1,7 +1,6 @@
 ---
-notesMd: |-
-  * 7.11, work in progress
-  * h2 and h3 look the same? look into this
+notesMd: "* h2 and h3 look the same, Kim is addressing this. Can use h4 for the
+  h3 until it is fixed."
 id: animal-shelter-cds
 filename: animal-shelter-cds
 displayname: animal-shelter-cds
@@ -25,9 +24,9 @@ agencyId: nj-consumer-affairs
 ---
 ## Application Requirements
 
-### Business Information
+#### Business Information
 
-* New Jersey business address where the CDS will be stored and dispensed (must match your DEA registration address)https://dev.navigator.business.nj.gov/mgmt/cms#/workflow
+* New Jersey business address where the CDS will be stored and dispensed (must match your DEA registration address)
 * DEA registration number(s), if applicable
 *  `Business structure|business-structure-learn-more` 
 * Name, address, and telephone number of the person who has administrative or managerial responsibility for the registered location
@@ -38,7 +37,7 @@ agencyId: nj-consumer-affairs
 * Completed Zoning Certification (included in application)
 * Applicable fees paid, once the DCU has sent an invoice
 
-### Safety and Security
+#### Safety and Security
 
 * Schedule of the CDS 
 * Criminal History Record Information (CHRI) for each person with access to the CDS and applicable fees paid (to be completed online and concurrently with the CDS registration application, link in application) 
