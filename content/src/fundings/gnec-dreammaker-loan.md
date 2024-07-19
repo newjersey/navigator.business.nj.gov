@@ -23,7 +23,8 @@ fundingType: loan
 programFrequency: ongoing
 status: rolling application
 programPurpose: In State
-agency: []
+agency:
+  - invest-newark
 agencyContact: ovillares@gnec.org
 businessStage: early-stage
 employeesRequired: yes
@@ -36,6 +37,7 @@ county:
   - Essex
 sector: []
 publishStageArchive: ""
+municipality: Newark
 ---
 ## Eligibility
 
