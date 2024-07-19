@@ -175,7 +175,7 @@
     "cypress": "13.11.0",
     "cypress-dotenv": "2.0.0",
     "cypress-wait-until": "3.0.1",
-    "dependency-cruiser": "16.3.3",
+    "dependency-cruiser": "16.3.7",
     "dotenv": "16.4.5",
     "dynamodb-admin": "^4.6.1",
     "eslint": "8.57.0",
@@ -290,7 +290,7 @@
   "packageManager": "yarn@3.8.2",
   "resolutions": {
     "trim@0.0.1": "1.0.1",
-    "postcss": "8.4.38",
+    "postcss": "8.4.39",
     "glob-parent": "6.0.2",
     "tar": "6.2.1",
     "ansi-regex": "5.0.1",
