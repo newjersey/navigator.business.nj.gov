@@ -167,7 +167,7 @@
     "raw-loader": "4.0.2",
     "require-from-string": "2.0.2",
     "rimraf": "5.0.7",
-    "sass": "1.77.6",
+    "sass": "1.77.8",
     "sass-loader": "14.2.1",
     "storybook": "7.6.19",
     "style-loader": "3.3.4",
