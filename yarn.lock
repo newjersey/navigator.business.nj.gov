@@ -5091,9 +5091,9 @@ __metadata:
     cross-env: 7.0.3
     cspell: 8.8.4
     css-loader: 6.11.0
-    cypress: 13.11.0
+    cypress: 13.13.1
     cypress-dotenv: 2.0.0
-    cypress-wait-until: 3.0.1
+    cypress-wait-until: 3.0.2
     dayjs: 1.11.12
     dedent: 1.5.3
     dependency-cruiser: 16.3.7
@@ -5291,9 +5291,9 @@ __metadata:
     cross-env: 7.0.3
     cspell: 8.8.4
     css-loader: 6.11.0
-    cypress: 13.11.0
+    cypress: 13.13.1
     cypress-dotenv: 2.0.0
-    cypress-wait-until: 3.0.1
+    cypress-wait-until: 3.0.2
     dayjs: 1.11.12
     dependency-cruiser: 16.3.7
     dotenv: 16.4.5
@@ -17318,16 +17318,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress-wait-until@npm:3.0.1":
-  version: 3.0.1
-  resolution: "cypress-wait-until@npm:3.0.1"
-  checksum: 487626011bf260b2e6cda68f1ced6cb4bb09013e479cd12681eeb577f788d5fd46c95040add9849d4ee1109c8e553330aadb42f2a252e8656bb8c3dbf776a087
+"cypress-wait-until@npm:3.0.2":
+  version: 3.0.2
+  resolution: "cypress-wait-until@npm:3.0.2"
+  checksum: 39bb994b9fefae8d607973c86ddefe34a72ec9ebb404749e0edb0a5e6d174f85671d83d5af58067c6fc55d40abf2b40cfccd7d31f51d226479d8c681abc9e876
   languageName: node
   linkType: hard
 
-"cypress@npm:13.11.0":
-  version: 13.11.0
-  resolution: "cypress@npm:13.11.0"
+"cypress@npm:13.13.1":
+  version: 13.13.1
+  resolution: "cypress@npm:13.13.1"
   dependencies:
     "@cypress/request": ^3.0.0
     "@cypress/xvfb": ^1.2.4
@@ -17368,12 +17368,12 @@ __metadata:
     request-progress: ^3.0.0
     semver: ^7.5.3
     supports-color: ^8.1.1
-    tmp: ~0.2.1
+    tmp: ~0.2.3
     untildify: ^4.0.0
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 67f61152b03955a3649d1ddcfb940271614e47d02c2e9f6f08e85158199c2d22a805ab8fcbccb985f8e1ef628b099b24487e8aebde181ed82abf039890abc6fc
+  checksum: ed6ae3ccb534563671f7a010b64e8f48871a0250eff95b30e9b8fe73d58ae8a9da261fd781a920b104b6930cde95a1eb43198bf0503432ab638d73c11dfe259b
   languageName: node
   linkType: hard
 
@@ -34843,7 +34843,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tmp@npm:~0.2.1":
+"tmp@npm:~0.2.3":
   version: 0.2.3
   resolution: "tmp@npm:0.2.3"
   checksum: 73b5c96b6e52da7e104d9d44afb5d106bb1e16d9fa7d00dbeb9e6522e61b571fbdb165c756c62164be9a3bbe192b9b268c236d370a2a0955c7689cd2ae377b95
