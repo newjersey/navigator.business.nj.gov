@@ -97,7 +97,7 @@
     "serverless-offline-ssm": "6.2.0",
     "serverless-webpack": "5.14.1",
     "supertest": "6.3.4",
-    "ts-jest": "29.1.4",
+    "ts-jest": "29.2.3",
     "ts-loader": "9.5.1",
     "ts-node": "10.9.2",
     "tsconfig-paths": "4.2.0",
