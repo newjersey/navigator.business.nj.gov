@@ -1,0 +1,15 @@
+.row-desktop-column-mobile {
+  display: flex;
+  flex-direction: column;
+  @media (min-width: $xs) {
+    flex-direction: row;
+  }
+}
+
+.flex-align-center-desktop-start-mobile {
+  display: flex;
+  align-items: flex-start;
+  @media (min-width: $xs) {
+    align-items: center;
+  }
+}
