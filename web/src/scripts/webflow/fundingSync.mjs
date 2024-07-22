@@ -13,6 +13,10 @@ import { createItem, deleteItem, getAllItems, getCollection, modifyItem } from "
 import { allIndustryId, getCurrentSectors, syncSectors } from "./sectorSync.mjs";
 import { certificationCollectionId, fundingCollectionId } from "./webflowIds.mjs";
 
+const isNotTestEnv = process.env.NODE_ENV !== "test";
+console.log(process.env.NODE_ENV);
+console.log(isNotTestEnv);
+
 const getFundingTypeOptions = async () => {
   const itemResponse = await getCollection(fundingCollectionId);
   return itemResponse.data.fields.find((i) => {
@@ -142,7 +146,7 @@ const contentMdToObject = (content) => {
       throw new Error(`Benefits section missing `);
     }
   } catch (error) {
-    console.info(content);
+    isNotTestEnv && console.info(content);
     throw error;
   }
 
@@ -268,7 +272,7 @@ const getUnUsedFundings = async () => {
 const deleteFundings = async () => {
   const fundings = await getUnUsedFundings();
   const deleteFunding = async (funding) => {
-    console.info(`Attempting to delete ${funding.slug}`);
+    isNotTestEnv && console.info(`Attempting to delete ${funding.slug}`);
     try {
       return await deleteItem(funding.id, fundingCollectionId);
     } catch (error) {
@@ -294,7 +298,7 @@ const updateFundings = async () => {
       }),
       sectors
     );
-    console.info(`Attempting to modify ${funding.slug}`);
+    isNotTestEnv && console.info(`Attempting to modify ${funding.slug}`);
     try {
       return await modifyItem(item.id, fundingCollectionId, funding);
     } catch (error) {
@@ -311,7 +315,7 @@ const updateFundings = async () => {
 const createNewFundings = async () => {
   const newFundings = await getNewFundings();
   const create = async (funding) => {
-    console.info(`Attempting to create ${funding.slug}`);
+    isNotTestEnv && console.info(`Attempting to create ${funding.slug}`);
     try {
       return await createItem(funding, fundingCollectionId, false);
     } catch (error) {
