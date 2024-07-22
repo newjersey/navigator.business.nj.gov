@@ -12,9 +12,16 @@ sidebarCardBodyText: The Hazardous Discharge Site Remediation Fund (HDSRF) Child
   for a license with the Department of Children and Families (DCF).
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The Hazardous Discharge Site Remediation Fund (HDSRF)
-  Child Care Facility Grant is for owners or operators who are licensed or
-  applying for a license with the Department of Children and Families (DCF).
+summaryDescriptionMd: >-
+  The Hazardous Discharge Site Remediation Fund (HDSRF) Child Care Facility
+  Grant is for owners or operators who are licensed or applying for a license
+  with the Department of Children and Families (DCF). The grant helps to pay for
+  the cleanup of contaminated sites.
+
+
+  :::infoAlert 
+   You need to hire an environmental consultant or Licensed Site Remediation Professional to complete a Preliminary Assessment Report. See the [instructions](https://dep.nj.gov/wp-content/uploads/srp/preliminary_assessment_report_ins_online.pdf?version_1_3) for more information.
+  :::
 callToActionLink: https://dep.nj.gov/grantandloanprograms/child-care/
 callToActionText: Learn More
 fundingType: grant
@@ -37,5 +44,5 @@ publishStageArchive: ""
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-A grant reimbursement of up to a maximum amount of $1500 is available to those child care facilities that have completed site remediation requirements.
+A grant reimbursement of up to $1500 is available 
 :::
