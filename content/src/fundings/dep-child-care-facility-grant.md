@@ -8,15 +8,13 @@ displayName: child-care-facility-grant
 urlSlug: child-care-facility-grant
 id: child-care-facility-grant
 sidebarCardBodyText: The Hazardous Discharge Site Remediation Fund (HDSRF) Child
-  Care Facility Grant is for owners or operators who are licensed or applying
-  for a license with the Department of Children and Families (DCF).
+  Care Facility Grant helps child care centers to pay for the cleanup of
+  contaminated sites.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: >-
   The Hazardous Discharge Site Remediation Fund (HDSRF) Child Care Facility
-  Grant is for owners or operators who are licensed or applying for a license
-  with the Department of Children and Families (DCF). The grant helps to pay for
-  the cleanup of contaminated sites.
+  Grant helps child care centers pay for the cleanup of contaminated sites.
 
 
   :::infoAlert 
@@ -40,7 +38,7 @@ sector:
 publishStageArchive: ""
 ---
 ## Eligibility
-- Licensed Child Care Centers or Child Care Centers trying to obtain a license through DCF
+- Owners or operators of licensed child care centers or child care centers trying to obtain a license through the Department of Children and Families (DCF)
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
