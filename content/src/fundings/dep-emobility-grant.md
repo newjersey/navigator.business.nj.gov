@@ -11,9 +11,8 @@ sidebarCardBodyText: "The eMobility rolling grant program provides grants to
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: The eMobility rolling grant program provides grants to
-  help fund projects that benefit one or more [underserved
-  communities](https://dep.nj.gov/ej/communities/) in New Jersey through shared,
-  zero-emission transportation options.
+  help fund projects that benefit one or more underserved communities in New
+  Jersey through shared, zero-emission transportation options.
 callToActionLink: https://dep.nj.gov/grantandloanprograms/emobility-rolling-grant-program/
 callToActionText: Learn More
 fundingType: grant
