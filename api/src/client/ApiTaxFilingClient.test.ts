@@ -4,7 +4,7 @@ import { TaxFilingLookUpRequest } from "@shared/taxFiling";
 import axios from "axios";
 
 import { TaxFilingClient } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import { generateTaxIdAndBusinessName } from "@shared/test";
 import { generateTaxFilingDates, generateTaxFilingResult } from "@test/factories";
 
@@ -21,6 +21,8 @@ import { StatusCodes } from "http-status-codes";
 jest.mock("axios");
 jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
+
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 interface TaxFilingOnboardingRequest extends TaxFilingLookUpRequest {
   email: string;
@@ -126,7 +128,7 @@ describe("ApiTaxFilingClient", () => {
     jest.resetAllMocks();
     taxIdAndBusinessNameAndEmail = generateTaxIdAndBusinessNameAndEmail({});
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
-    client = ApiTaxFilingClient(config, logger);
+    client = ApiTaxFilingClient(config, DEBUG ? logger : DummyLogWriter);
   });
 
   describe("lookup", () => {

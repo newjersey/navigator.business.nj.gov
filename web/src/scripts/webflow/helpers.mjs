@@ -10,6 +10,8 @@ import { wait } from "./helpers2.mjs";
 
 const RATE_LIMIT_WAIT_SECONDS = 20;
 
+const isNotTestEnv = process.env.NODE_ENV !== "test";
+
 export const argsInclude = (query) => {
   return process.argv.some((i) => {
     return i.includes(query);
@@ -36,19 +38,19 @@ export const resolveApiPromises = async (promiseArray) => {
 };
 
 export const catchRateLimitErrorAndRetry = async (error, retryFunc, ...params) => {
-  console.debug("in Catch Rate and retry");
+  isNotTestEnv ?? console.debug("in Catch Rate and retry");
   if (error.response.status === 429) {
-    console.debug("Catching rate limit error hit");
+    isNotTestEnv ?? console.debug("Catching rate limit error hit");
     await wait(65000);
     // eslint-disable-next-line no-useless-catch
     try {
       return await retryFunc(...params);
     } catch (error) {
-      console.error(error);
+      isNotTestEnv ?? console.error(error);
       throw error;
     }
   } else {
-    console.error(error);
+    isNotTestEnv ?? console.error(error);
     throw error;
   }
 };

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { UserTestingClient } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import { getCurrentDateFormatted } from "@shared/dateHelpers";
 import { determineForeignBusinessType } from "@shared/domain-logic/businessPersonaHelpers";
 import { generateProfileData, generateUser } from "@shared/test";
@@ -17,6 +17,7 @@ type MockAirtableType = {
 
 jest.mock("winston");
 const mockAirtable = Airtable as unknown as jest.Mocked<MockAirtableType>;
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("AirtableUserTestingClient", () => {
   let client: UserTestingClient;
@@ -32,7 +33,7 @@ describe("AirtableUserTestingClient", () => {
         baseUrl: "some-base-url",
         usersTableName: "some-users-table",
       },
-      logger
+      DEBUG ? logger : DummyLogWriter
     );
   });
 

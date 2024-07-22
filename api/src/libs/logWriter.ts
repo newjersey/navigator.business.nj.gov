@@ -10,6 +10,8 @@ export interface LogWriterType {
   GetId(): string;
 }
 
+const isNotTestEnv = process.env.NODE_ENV !== "test";
+
 const GetId = (): string => {
   return randomUUID();
 };
@@ -39,25 +41,21 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
 
   const LogError = async (message: string, details?: AxiosError): Promise<void> => {
     try {
-      console.error(`${message} - ${JSON.stringify(details?.toJSON())}`);
+      isNotTestEnv ?? console.error(`${message} - ${JSON.stringify(details?.toJSON())}`);
       winston.error(message, details);
       await FlushLog();
     } catch (error) {
-      if (process.env.NODE_ENV !== "test") {
-        console.error(`Error with LogInfo:${error}`);
-      }
+      isNotTestEnv ?? console.error(`Error with LogInfo:${error}`);
     }
   };
 
   const LogInfo = async (message: string): Promise<void> => {
     try {
-      console.info(message);
+      isNotTestEnv ?? console.info(message);
       winston.info(message);
       await FlushLog();
     } catch (error) {
-      if (process.env.NODE_ENV !== "test") {
-        console.error(`Error with LogInfo:${error}`);
-      }
+      isNotTestEnv ?? console.error(`Error with LogInfo:${error}`);
     }
   };
 

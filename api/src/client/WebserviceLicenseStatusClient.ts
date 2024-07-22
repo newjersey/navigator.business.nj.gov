@@ -56,7 +56,6 @@ export const WebserviceLicenseStatusClient = (
         } as HealthCheckMetadata;
       })
       .catch((error: AxiosError) => {
-        console.dir({ error });
         logWriter.LogError(`License Status Search - Id:${logId} - Error:`, error);
         if (error.response) {
           return {
