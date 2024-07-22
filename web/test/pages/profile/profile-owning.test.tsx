@@ -750,6 +750,27 @@ describe("profile - owning existing business", () => {
     });
   });
 
+  describe("non essential questions", () => {
+    it("does not show elevator questions for owning businesses", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          industryId: "generic",
+          businessPersona: "OWNING",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
+          homeBasedBusiness: false,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.queryByTestId("elevatorOwningBusiness-radio-group")).not.toBeInTheDocument();
+    });
+  });
+
   const getSectorIDValue = (): string => {
     return (screen.queryByLabelText("Sector") as HTMLInputElement)?.value;
   };
