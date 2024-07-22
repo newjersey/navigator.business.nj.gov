@@ -36,7 +36,8 @@ export default {
     },
   ],
 
-  pattern: /:::callout.*?:::/gs,
+  // eslint-disable-next-line unicorn/better-regex
+  pattern: /:::callout[^:::]*?:::/gs,
   collapsed: false,
   summary: "{{fields.title}}",
   fromBlock: (
@@ -46,7 +47,8 @@ export default {
     const [calloutBlock] = match;
 
     // Everything inside the first {} we see we consider callout parameters; everything after is the body.
-    const calloutParseMatcher = /{(?<parameters>[^}]+)}[^\n]*\n(?<body>[^3:{}]*)/gms;
+    // eslint-disable-next-line unicorn/better-regex
+    const calloutParseMatcher = /{(?<parameters>[^}]+)}[^\n]*\n(?<body>[^:::{}]*)/gms;
     const calloutMatch = calloutParseMatcher.exec(calloutBlock);
 
     // If we just have :::callout {}\n:::, then we need to return some default values instead.
