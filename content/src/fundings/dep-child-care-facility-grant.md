@@ -38,7 +38,7 @@ sector:
 publishStageArchive: ""
 ---
 ## Eligibility
-- Owners or operators of licensed child care centers or child care centers trying to obtain a license through the Department of Children and Families (DCF)
+- Owners or operators of licensed child care centers or child care centers applying for a license through the Department of Children and Families (DCF)
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
