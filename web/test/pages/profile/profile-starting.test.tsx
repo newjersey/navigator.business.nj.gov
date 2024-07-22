@@ -335,7 +335,10 @@ describe("profile - starting business", () => {
       return Promise.resolve(modifiedUserData);
     });
 
-    const initialBusiness = generateBusinessForProfile({ taxFilingData: taxData });
+    const initialBusiness = generateBusinessForProfile({
+      taxFilingData: taxData,
+      profileData: generateProfileData({ businessPersona: "STARTING" }),
+    });
     renderPage({ business: initialBusiness });
     clickSave();
 
