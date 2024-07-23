@@ -14,10 +14,10 @@ callToActionText: Renew Shop Registration
 - Registration code from your renewal notice
 - Current mailing address
 - Current business address
-- Pay the associated fees for the registration renewal
+- Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A renewed cosmetology shop registration valid for two years. It will be mailed to your business mailing address on file.
+A renewed cosmetology shop registration valid for two years. It will be mailed to your business mailing address on file.
 
 :::
