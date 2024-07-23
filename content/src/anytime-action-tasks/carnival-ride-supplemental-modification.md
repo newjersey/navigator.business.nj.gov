@@ -3,7 +3,7 @@ notesMd: "[Muni planning
   doc](https://docs.google.com/document/d/1yNGtzwQuNN0_mH5fguWruu_9BgJ5v25BegkQ\
   Av4xC1g/edit)"
 filename: carnival-ride-supplemental-modification
-name: Apply for a Supplemental Modification Certification
+name: Modify Your Carnival or Amusement Ride
 industryIds:
   - independent-artist
 sectorIds:
@@ -28,7 +28,7 @@ callToActionLink: https://www.nj.gov/dca/codes/forms/pdf_rides/Appl_SuplCert.pdf
 * Individual Approval number
 * `New Jersey serial number|nj-serial-number`
 * [Specific engineering requirements](https://www.nj.gov/dca/codes/forms/pdf_rides/IA_application.pdf), as applicable
-* All supplemental safety bulletins, safety alerts, or notifications issued after the original Individual Approval was issued
+* All safety bulletins or notices released after the original Individual Approval
 * A set of design calculations to show how the change affects the original design (must comply with N.J.A.C. 5:14A-7 and sealed by a licensed professional engineer)
 * A set of drawings for the change (must comply with N.J.A.C. 5-14A-2.12(b) and signed by a licensed professional engineer)
 * Documentation that shows the difference between the information submitted in the original Individual Approval and what’s in this application
