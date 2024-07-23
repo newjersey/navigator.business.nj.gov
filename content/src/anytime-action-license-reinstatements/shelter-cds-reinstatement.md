@@ -41,6 +41,6 @@ You cannot dispense or store any CDS and may be subject to legal consequences an
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-The same Controlled Dangerous Substances registration number.
+The same CDS registration number.
 
 :::
