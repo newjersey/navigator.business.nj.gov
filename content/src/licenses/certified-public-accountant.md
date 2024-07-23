@@ -21,7 +21,7 @@ Your accounting firm registration will expire every three years.
 - Current mailing address
 - Current business address
 - Current information for the Resident Manager-in-Charge, this must be the Certified Public Accountant that holds a license in the state
-- Pay the associated fees
+- Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
