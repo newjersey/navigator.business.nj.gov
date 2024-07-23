@@ -1,4 +1,6 @@
 ---
+notesMd: "* System wouldn't allow me to save without something in the Summary
+  Description"
 urlSlug: petcare
 previewType: renewal
 summaryDescriptionMd: You can renew your license 60 days before it expires and
