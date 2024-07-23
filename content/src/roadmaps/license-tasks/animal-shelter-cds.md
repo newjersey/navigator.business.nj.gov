@@ -55,6 +55,6 @@ You cannot legally dispense or store sodium pentobarbital and may be subject to 
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A Controlled Dangerous Substances (CDS) registration certificate.
+A CDS registration certificate.
 
 :::
