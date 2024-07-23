@@ -2,15 +2,16 @@
 urlSlug: generic
 previewType: renewal
 summaryDescriptionMd: >-
-  If you are interested in continuing to work on `public works contracts|public-works`, you must renew your registration with the Division of Wage and Hour Compliance within the NJ Department of Labor and Workforce Development (NJDOL).
+  If you are interested in continuing to work on `public works
+  contracts|public-works`, you must renew your registration with the Division of
+  Wage and Hour Compliance within the NJ Department of Labor and Workforce
+  Development (NJDOL).
 
 
   You can apply online or by mail. However, the agency strongly recommends online applications. Effective August 15, 2024, applications can only be accepted online. If you cannot complete the online application, email pwcr@dol.nj.gov to notify the Public Works Contractor Registration (PWCR) section.
 
 
-  :::infoAlert
-  If you are new to maintaining your payroll records outside of New Jersey, then you must submit the [MW-42 (R-6-13)](https://www.nj.gov/labor/wageandhour/assets/PDFs/mw-42-payroll.pdf) form. This form will be e-mailed to you after you register.
-  :::
+  :::infoAlert If you are new to maintaining your payroll records outside of New Jersey, then you must submit the [MW-42 (R-6-13)](https://www.nj.gov/labor/wageandhour/assets/PDFs/mw-42-payroll.pdf) form. This form will be e-mailed to you after you register. :::
 callToActionLink: https://www.njportal.com/lwd/pwcr
 callToActionText: Renew My PWCR Application
 ---
@@ -39,8 +40,8 @@ You can renew for one year or two years. Two-year renewal is an option only if y
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A new PWCR certificate indicating compliance with PWCRA
+A new PWCR certificate indicating compliance with PWCRA.
 
 :::
