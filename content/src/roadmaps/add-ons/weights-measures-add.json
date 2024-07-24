@@ -1,0 +1,12 @@
+{
+  "id": "weights-measures-add",
+  "displayname": "weights-measures-add",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 1,
+      "task": "weights-measures-registration",
+      "required": true
+    }
+  ]
+}
