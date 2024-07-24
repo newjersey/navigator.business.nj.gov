@@ -133,7 +133,19 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
     };
 
+    const removeNonProfitForDomesticEmployer = (): void => {
+      const isDomesticEmployer =
+        profileData.businessPersona === "STARTING" && profileData.industryId === "domestic-employer";
+      if (profileData.businessPersona !== "STARTING") return;
+      if (isDomesticEmployer) {
+        removePageFromFlow("industry-page", "STARTING");
+      } else {
+        removePageFromFlow("industry-page-without-nonprofit", "STARTING");
+      }
+    };
+
     removeNexusSpecificPages();
+    removeNonProfitForDomesticEmployer();
 
     return onboardingFlows;
   }, [profileData]);

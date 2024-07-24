@@ -1,5 +1,7 @@
 import { IndustryDropdown } from "@/components/data-fields/IndustryDropdown";
+import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
+import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 
 describe("Industry Dropdown", () => {
@@ -36,5 +38,38 @@ describe("Industry Dropdown", () => {
 
     fireEvent.change(inputElement, { target: { value: "plan" } });
     expect(screen.getByTestId("search-affirmation")).toBeInTheDocument();
+  });
+
+  describe("domestic employer industry", () => {
+    it("filters out domestic employer industry when businessPersona is 'FOREIGN'", () => {
+      render(
+        <WithStatefulProfileData
+          initialData={generateProfileData({
+            businessPersona: "FOREIGN",
+          })}
+        >
+          <IndustryDropdown />
+        </WithStatefulProfileData>
+      );
+
+      fireEvent.mouseDown(screen.getByLabelText("Industry"));
+      expect(screen.queryByTestId("domestic-employer")).not.toBeInTheDocument();
+    });
+
+    it("displays domestic employer as an industry when businessPersona is 'STARTING'", () => {
+      render(
+        <WithStatefulProfileData
+          initialData={generateProfileData({
+            businessPersona: "STARTING",
+            legalStructureId: undefined,
+          })}
+        >
+          <IndustryDropdown />
+        </WithStatefulProfileData>
+      );
+
+      fireEvent.mouseDown(screen.getByLabelText("Industry"));
+      expect(screen.getByTestId("domestic-employer")).toBeInTheDocument();
+    });
   });
 });

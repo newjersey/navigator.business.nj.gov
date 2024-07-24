@@ -65,6 +65,21 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
           </>
         ),
       },
+      {
+        name: "industry-page-without-nonprofit",
+        component: (
+          <>
+            <div className="padding-top-3">
+              <FieldLabelOnboarding fieldName="industryId" />
+              <Industry<OnboardingErrors>
+                essentialQuestionErrorTypes={["REQUIRED_ESSENTIAL_QUESTION"]}
+                errorTypes={["ALERT_BAR"]}
+                onboardingFieldLabel
+              />
+            </div>
+          </>
+        ),
+      },
     ],
   },
   FOREIGN: {

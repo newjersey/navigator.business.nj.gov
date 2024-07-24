@@ -25,11 +25,17 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     industryId = "generic";
   }
 
-  const addOns: string[] = [
+  let addOns: string[] = [
     ...getForeignAddOns(profileData),
     ...getIndustryBasedAddOns(profileData, industryId),
     ...getLegalStructureAddOns(profileData),
   ];
+
+  const isDomesticEmployer =
+    profileData.businessPersona === "STARTING" && profileData.industryId === "domestic-employer";
+  if (isDomesticEmployer) {
+    addOns = [];
+  }
 
   let roadmap = await buildRoadmap({ industryId: industryId, addOns });
 
