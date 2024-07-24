@@ -1,3 +1,4 @@
+import { onboardingFlows } from "@/components/onboarding/OnboardingFlows";
 import { getMergedConfig } from "@/contexts/configContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import * as mockRouter from "@/test/mock/mockRouter";
@@ -295,5 +296,22 @@ describe("onboarding - starting a business", () => {
 
   describe("nonprofit onboarding tests", () => {
     runNonprofitOnboardingTests({ businessPersona: "STARTING", industryPage: 2, lastPage: 2 });
+  });
+
+  describe("domestic employer", () => {
+    it("resets industry-page to industry-page-without-nonprofit for STARTING businessPersona if industry is domestic-employer", () => {
+      generateUserDataForBusiness(
+        generateBusiness({
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            industryId: "domestic-employer",
+          }),
+        })
+      );
+      const industryPageWithoutNonprofitQuestion = onboardingFlows.STARTING.pages.find(
+        (page) => page.name === "industry-page-without-nonprofit"
+      );
+      expect(industryPageWithoutNonprofitQuestion).toBeDefined();
+    });
   });
 });

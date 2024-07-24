@@ -34,6 +34,7 @@ export enum OperatingPhaseId {
   UP_AND_RUNNING = "UP_AND_RUNNING",
   UP_AND_RUNNING_OWNING = "UP_AND_RUNNING_OWNING",
   REMOTE_SELLER_WORKER = "REMOTE_SELLER_WORKER",
+  DOMESTIC_EMPLOYER = "DOMESTIC_EMPLOYER",
 }
 
 export const LookupOperatingPhaseById = (id?: OperatingPhaseId): OperatingPhase | UnknownOperatingPhase => {
@@ -235,6 +236,27 @@ export const OperatingPhases: OperatingPhase[] = [
   },
   {
     id: OperatingPhaseId.REMOTE_SELLER_WORKER,
+    displayCompanyDemographicProfileFields: false,
+    displayCertifications: false,
+    displayFundings: false,
+    displayCalendarType: "NONE",
+    displayRoadmapTasks: true,
+    displayTaxAccessButton: false,
+    displayCalendarToggleButton: false,
+    displayHideableRoadmapTasks: false,
+    displayAltHomeBasedBusinessDescription: false,
+    municipalityRequiredForTradeName: false,
+    municipalityRequiredForPublicFiling: false,
+    displayProfileOpportunityAlert: false,
+    sectorRequired: false,
+    displayBusinessStructurePrompt: false,
+    displayHomeBasedPrompt: false,
+    displayGoToProfileNudge: false,
+    displayAnytimeActions: false,
+    displaySidebarCardNotRegistered: false,
+  },
+  {
+    id: OperatingPhaseId.DOMESTIC_EMPLOYER,
     displayCompanyDemographicProfileFields: false,
     displayCertifications: false,
     displayFundings: false,

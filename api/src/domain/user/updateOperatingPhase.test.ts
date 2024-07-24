@@ -109,6 +109,22 @@ describe("updateOperatingPhase", () => {
         OperatingPhaseId.REMOTE_SELLER_WORKER
       );
     });
+
+    it("updates to DOMESTIC_EMPLOYER from GUEST_MODE when industry is domestic-employer", () => {
+      const userData = generateUserDataForBusiness(
+        generateBusiness({
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            industryId: "domestic-employer",
+            operatingPhase: OperatingPhaseId.GUEST_MODE,
+          }),
+        })
+      );
+      const updatedOpPhase = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(updatedOpPhase).profileData.operatingPhase).toBe(
+        OperatingPhaseId.DOMESTIC_EMPLOYER
+      );
+    });
   });
 
   describe("NEEDS_BUSINESS_STRUCTURE", () => {
