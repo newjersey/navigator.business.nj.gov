@@ -5,8 +5,8 @@ import analytics from "@/lib/utils/analytics";
 import * as helpers from "@/lib/utils/helpers";
 import { removeMarkdownFormatting } from "@/lib/utils/helpers";
 import { generateCertification, generateFunding, generateSidebarCardContent } from "@/test/factories";
-import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { OperatingPhaseId, OperatingPhases } from "@businessnjgovnavigator/shared/";
+import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
+import { OperatingPhaseId, OperatingPhases, generateUser } from "@businessnjgovnavigator/shared/";
 import { ForeignBusinessTypeId } from "@businessnjgovnavigator/shared/profileData";
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
@@ -399,6 +399,94 @@ describe("<SidebarCardsList />", () => {
       fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
       fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
       expect(mockHelpers.scrollToTopOfElement).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe("Funding and Certification Sorting", () => {
+    it("displays certifications above fundings for most users", async () => {
+      useMockUserData({
+        businesses: {
+          "biz-1": generateBusiness({
+            profileData: {
+              ...generateProfileData({
+                operatingPhase: getDisplayFundingOperatingPhase(),
+              }),
+            },
+          }),
+        },
+        user: generateUser({
+          accountCreationSource: "test-source",
+        }),
+      });
+
+      const genericFunding = generateFunding({
+        isNonprofitOnly: false,
+        county: [],
+        sector: [],
+        employeesRequired: undefined,
+        id: "funding-id",
+      });
+      const genericCertification = generateCertification({
+        applicableOwnershipTypes: [],
+        isSbe: false,
+        id: "certification-id",
+      });
+      renderComponent({
+        fundings: [genericFunding],
+        certifications: [genericCertification],
+        displayFundingCards: true,
+        displayCertificationsCards: true,
+      });
+
+      const fundingElement = screen.getByTestId("funding-id");
+      const certificationElement = screen.getByTestId("certification-id");
+
+      expect(fundingElement.compareDocumentPosition(certificationElement)).toBe(
+        Node.DOCUMENT_POSITION_PRECEDING
+      );
+    });
+
+    it("displays fundings above certifications for investNewark users", async () => {
+      useMockUserData({
+        businesses: {
+          "biz-1": generateBusiness({
+            profileData: {
+              ...generateProfileData({
+                operatingPhase: getDisplayFundingOperatingPhase(),
+              }),
+            },
+          }),
+        },
+        user: generateUser({
+          accountCreationSource: "investNewark",
+        }),
+      });
+
+      const genericFunding = generateFunding({
+        isNonprofitOnly: false,
+        county: [],
+        sector: [],
+        employeesRequired: undefined,
+        id: "funding-id",
+      });
+      const genericCertification = generateCertification({
+        applicableOwnershipTypes: [],
+        isSbe: false,
+        id: "certification-id",
+      });
+      renderComponent({
+        fundings: [genericFunding],
+        certifications: [genericCertification],
+        displayFundingCards: true,
+        displayCertificationsCards: true,
+      });
+
+      const fundingElement = screen.getByTestId("funding-id");
+      const certificationElement = screen.getByTestId("certification-id");
+
+      expect(fundingElement.compareDocumentPosition(certificationElement)).toBe(
+        Node.DOCUMENT_POSITION_FOLLOWING
+      );
     });
   });
 });

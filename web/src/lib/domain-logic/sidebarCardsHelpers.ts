@@ -10,7 +10,7 @@ import {
 import { getCurrentDate, parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
 import { arrayOfOwnershipTypes } from "@businessnjgovnavigator/shared/ownership";
-import { Business } from "@businessnjgovnavigator/shared/userData";
+import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 
 export const getHiddenCertifications = (
   business: Business | undefined,
@@ -44,8 +44,8 @@ export const getVisibleCertifications = (
     return !business?.preferences.hiddenCertificationIds.includes(it.id);
   });
 };
-export const sortFundings = (fundings: Funding[]): Funding[] => {
-  return fundings.sort((a, b) => {
+export const sortFundings = (fundings: Funding[], userData?: UserData): Funding[] => {
+  const initialSorting = fundings.sort((a, b) => {
     const nameA = a.name.toUpperCase(); // ignore upper and lowercase
     const nameB = b.name.toUpperCase();
     if (FundingStatusOrder[a.status] < FundingStatusOrder[b.status]) {
@@ -59,6 +59,36 @@ export const sortFundings = (fundings: Funding[]): Funding[] => {
     }
     return 0;
   });
+  if (userData?.user.accountCreationSource) {
+    const agencySource = mapAccountCreationSourceToAgencySource(userData.user.accountCreationSource);
+    return prioritizeFundingByAgencySource(initialSorting, agencySource);
+  }
+  return initialSorting;
+};
+
+const mapAccountCreationSourceToAgencySource = (accountCreationSource: string): string => {
+  switch (accountCreationSource) {
+    case "investNewark":
+      return "invest-newark";
+    default:
+      return "";
+  }
+};
+
+const prioritizeFundingByAgencySource = (fundings: Funding[], agencyName: string): Funding[] => {
+  if (agencyName === "") {
+    return fundings;
+  }
+  const agencyFundings: Funding[] = [];
+  const nonAgencyFundings: Funding[] = [];
+
+  for (const funding of fundings) {
+    if (funding.agency?.includes(agencyName)) {
+      agencyFundings.push(funding);
+    } else nonAgencyFundings.push(funding);
+  }
+  agencyFundings.push(...nonAgencyFundings);
+  return agencyFundings;
 };
 export const getVisibleSideBarCards = (
   business: Business | undefined,
