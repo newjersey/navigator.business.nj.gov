@@ -1,6 +1,6 @@
 ---
 urlSlug: certified-public-accountant
-previewType: expiration
+previewType: renewal
 summaryDescriptionMd: Your accounting firm registration will expire every three years.
 callToActionLink: https://newjersey.mylicense.com/eGov/Login
 callToActionText: Renew My Registration
