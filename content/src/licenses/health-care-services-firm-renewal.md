@@ -19,9 +19,9 @@ If you are interested in continuing to employ, place, arrange for the placement 
 - Certificate of Accreditation
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A certificate of registration and registration number, beginning with “HP” and followed by seven digits
+A certificate of registration and registration number, beginning with “HP” and followed by seven digits.
 
 :::
 

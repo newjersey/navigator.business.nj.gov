@@ -10,8 +10,7 @@ callToActionText: "Apply for My Dental License"
 agencyId: "nj-consumer-affairs"
 industryId: "healthcare"
 licenseCertificationClassification: "undefined"
-summaryDescriptionMd: "You need a dental license if you own a dental practice or perform dentistry in New Jersey.
-"
+summaryDescriptionMd: "You need a dental license if you own a dental practice or perform dentistry in New Jersey."
 ---
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="note" }

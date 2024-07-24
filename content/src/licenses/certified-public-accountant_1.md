@@ -1,6 +1,6 @@
 ---
 urlSlug: certified-public-accountant
-previewType: expiration
+previewType: renewal
 summaryDescriptionMd: xxx
 callToActionLink: https://newjersey.mylicense.com/eGov/Login
 callToActionText: Renew My Accountant License
@@ -22,8 +22,8 @@ Your accountant license will expire every two years.
 - Current mailing address
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- An updated copy of the renewed accountant license, valid for three years, which will be mailed to your mailing address on file
+An updated copy of the renewed accountant license, valid for three years, which will be mailed to your mailing address on file.
 
 :::

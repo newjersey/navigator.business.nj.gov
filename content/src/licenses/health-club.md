@@ -16,8 +16,8 @@ callToActionText: Renew My Health Club Registration
 - Copy of written contract, if claiming security requirement exemption
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-An updated certificate of registration
+An updated certificate of registration.
 
 :::

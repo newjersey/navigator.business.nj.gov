@@ -34,6 +34,11 @@
       "id": "hotel-liquor",
       "questionText": "Do you plan to serve liquor, including beer or wine?",
       "addOn": "lodging-liquor"
+    },
+    {
+      "addOn": "weights-measures-add",
+      "id": "weights-measures",
+      "questionText": "Will you be using a weighing or measuring device, such as a scale or meter, for your business? "
     }
   ]
 }
