@@ -5,6 +5,7 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab, scrollToTopOfElement, templateEval } from "@/lib/utils/helpers";
@@ -26,7 +27,12 @@ export interface SidebarCardsListProps {
 export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => {
   const [hiddenAccordionIsOpen, setHiddenAccordionIsOpen] = useState<boolean>(false);
   const { Config } = useConfig();
+  const { userData } = useUserData();
   const accordionRef = useRef(null);
+
+  const shouldPrioritizeFundingsOverCertifications =
+    userData?.user.accountCreationSource === "investNewark" ||
+    userData?.user.accountCreationSource === "NJEDA";
 
   const hiddenOpportunitiesCount = (): number => {
     if (props.displayCertificationsCards && props.displayFundingCards) {
@@ -109,12 +115,18 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
         </div>
       )}
       <div data-testid="visible-opportunities">
+        {shouldPrioritizeFundingsOverCertifications &&
+          props.fundings.map((funding) => {
+            return <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />;
+          })}
+
         {renderCertificationsCards &&
           props.certifications.map((cert) => {
             return <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />;
           })}
 
         {renderFundingCards &&
+          !shouldPrioritizeFundingsOverCertifications &&
           props.fundings.map((funding) => {
             return <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />;
           })}

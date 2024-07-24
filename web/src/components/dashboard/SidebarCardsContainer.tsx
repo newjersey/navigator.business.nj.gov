@@ -24,14 +24,14 @@ interface Props {
 }
 
 export const SidebarCardsContainer = (props: Props): ReactElement => {
-  const { business } = useUserData();
+  const { business, userData } = useUserData();
 
   const visibleSidebarCards = getVisibleSideBarCards(business, props.sidebarDisplayContent);
   const visibleSortedFundings = getVisibleFundings(
-    sortFundings(filterFundings({ fundings: props.fundings, business: business })),
+    sortFundings(filterFundings({ fundings: props.fundings, business: business }), userData),
     business
   );
-  const hiddenSortedFundings = sortFundings(getHiddenFundings(business, props.fundings));
+  const hiddenSortedFundings = sortFundings(getHiddenFundings(business, props.fundings), userData);
   const visibleSortedCertifications = getVisibleCertifications(
     sortCertifications(filterCertifications({ certifications: props.certifications, business: business })),
     business
