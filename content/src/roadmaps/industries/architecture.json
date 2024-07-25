@@ -62,7 +62,7 @@
     }
   ],
   "name": "Architecture",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "architecture",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true

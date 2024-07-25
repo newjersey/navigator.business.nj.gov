@@ -3,7 +3,7 @@
   "naicsCodes": "238990,238390,238910,238350,238340,238330,238320,238310,238290,238220,238210,238190,238170,238160,238150,238140,238130,238120,238110,236118",
   "defaultSectorId": "construction",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,

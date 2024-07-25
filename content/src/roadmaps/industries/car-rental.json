@@ -56,7 +56,7 @@
     }
   ],
   "name": "Car Rental",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "car-rental",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,

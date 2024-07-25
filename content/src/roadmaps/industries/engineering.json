@@ -6,7 +6,7 @@
   "industryOnboardingQuestions": {
     "canBeHomeBased": true
   },
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,

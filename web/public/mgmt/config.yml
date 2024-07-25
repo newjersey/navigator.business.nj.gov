@@ -1798,7 +1798,7 @@ collections:
         widget: relation
         multiple: true
         required: false
-        default: []
+        default: ["weights-measures"]
         collection: "nonEssentialQuestionsCollection"
         search_fields: ["nonEssentialQuestionsArray.*.id"]
         value_field: "nonEssentialQuestionsArray.*.id"

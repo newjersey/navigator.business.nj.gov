@@ -49,7 +49,7 @@
     }
   ],
   "name": "Residential Landlord",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "residential-landlord",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,

@@ -3,7 +3,7 @@
   "naicsCodes": "484210",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,

@@ -57,7 +57,7 @@
     }
   ],
   "name": "Landscape Architecture",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "landscape architecture",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

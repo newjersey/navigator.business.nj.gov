@@ -8,7 +8,7 @@
     "canBeReseller": true
   },
   "isEnabled": true,
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,

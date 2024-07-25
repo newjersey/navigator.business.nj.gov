@@ -51,7 +51,7 @@
     }
   ],
   "name": "Electrical Contractor",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "electrical-contractor",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

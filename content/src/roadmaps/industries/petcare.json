@@ -44,7 +44,7 @@
     }
   ],
   "name": "Pet Care",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "petcare",
   "industryOnboardingQuestions": {
     "isPetCareHousingApplicable": true,

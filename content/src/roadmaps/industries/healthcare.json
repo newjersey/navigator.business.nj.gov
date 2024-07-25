@@ -49,7 +49,7 @@
     }
   ],
   "name": "Healthcare",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "healthcare",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

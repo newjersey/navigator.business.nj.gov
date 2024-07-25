@@ -23,7 +23,7 @@
     }
   ],
   "name": "Domestic Employer",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "industryOnboardingQuestions": {},
   "displayname": "domestic-employer",
   "isEnabled": true,

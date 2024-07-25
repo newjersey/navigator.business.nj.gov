@@ -49,7 +49,7 @@
     }
   ],
   "name": "Health Club",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "health-club",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,

@@ -44,7 +44,7 @@
     }
   ],
   "name": "Cleaning and Janitorial Services",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "cleaning-janitorial-services",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

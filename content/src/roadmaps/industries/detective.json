@@ -3,7 +3,7 @@
   "naicsCodes": "561611",
   "defaultSectorId": "professional-scientific-and-technical-services",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,

@@ -56,7 +56,7 @@
     }
   ],
   "name": "Cosmetology",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "cosmetology",
   "industryOnboardingQuestions": {
     "canBeReseller": true
