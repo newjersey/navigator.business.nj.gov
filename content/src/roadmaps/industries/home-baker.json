@@ -50,7 +50,7 @@
     }
   ],
   "name": "Home Baker",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "home-baker",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,

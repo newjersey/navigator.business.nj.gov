@@ -53,7 +53,7 @@
     }
   ],
   "name": "Real Estate Appraisals",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "real-estate-appraisals",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

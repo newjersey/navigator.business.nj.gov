@@ -44,11 +44,7 @@
     }
   ],
   "name": "Lodging",
-  "nonEssentialQuestionsIds": [
-    "hotel-register",
-    "hotel-food",
-    "hotel-liquor"
-  ],
+  "nonEssentialQuestionsIds": ["hotel-register", "hotel-food", "hotel-liquor", "weights-measures"],
   "displayname": "lodging",
   "industryOnboardingQuestions": {
     "canBeReseller": true

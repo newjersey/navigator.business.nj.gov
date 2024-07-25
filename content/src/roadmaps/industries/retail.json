@@ -49,7 +49,7 @@
     }
   ],
   "name": "Retail",
-  "nonEssentialQuestionsIds": ["ticket-broker-resell"],
+  "nonEssentialQuestionsIds": ["ticket-broker-resell", "weights-measures"],
   "displayname": "retail",
   "industryOnboardingQuestions": {
     "canBeReseller": true

@@ -81,7 +81,7 @@
     }
   ],
   "name": "Cannabis",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "cannabis",
   "industryOnboardingQuestions": {
     "isCannabisLicenseTypeApplicable": true

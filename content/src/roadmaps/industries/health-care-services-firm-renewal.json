@@ -55,7 +55,7 @@
     }
   ],
   "name": "Home Health Aide",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "health-care-services-firm-renewal",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
