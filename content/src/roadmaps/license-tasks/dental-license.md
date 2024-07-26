@@ -1,16 +1,19 @@
 ---
-id: "dental-license"
-webflowId: "669ac515985e99ee52d48390"
-urlSlug: "dental-license"
-name: "Apply for Your Dental License, if Applicable"
+id: dental-license
+filename: dental-license
+displayname: dental-license
+urlSlug: dental-license
+name: Apply for Your Dental License, if Applicable
 webflowName: "Healthcare: Dental License"
-filename: "dental-license"
-callToActionLink: "https://newjersey.mylicense.com/eGov/Login.aspx"
-callToActionText: "Apply for My Dental License"
-agencyId: "nj-consumer-affairs"
-industryId: "healthcare"
-licenseCertificationClassification: "undefined"
-summaryDescriptionMd: "You need a dental license if you own a dental practice or perform dentistry in New Jersey."
+summaryDescriptionMd: You need a dental license if you own a dental practice or
+  perform dentistry in New Jersey.
+industryId:
+  - healthcare
+callToActionText: Apply for My Dental License
+callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
+agencyId: nj-consumer-affairs
+webflowId: 669ac515985e99ee52d48390
+licenseCertificationClassification: undefined
 ---
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="note" }
