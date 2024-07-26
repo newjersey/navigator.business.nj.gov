@@ -39,6 +39,11 @@
       "addOn": "weights-measures-add",
       "id": "weights-measures",
       "questionText": "Will you be using a weighing or measuring device, such as a scale or meter, for your business? "
+    },
+    {
+      "questionText": "Are you a dentist?",
+      "addOn": "healthcare-dentist",
+      "id": "dentist"
     }
   ]
 }
