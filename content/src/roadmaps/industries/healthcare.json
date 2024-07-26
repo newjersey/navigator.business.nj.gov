@@ -49,7 +49,10 @@
     }
   ],
   "name": "Healthcare",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "dentist"
+  ],
   "displayname": "healthcare",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
