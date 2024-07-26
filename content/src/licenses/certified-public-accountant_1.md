@@ -1,6 +1,8 @@
 ---
 urlSlug: certified-public-accountant
 previewType: renewal
+calendarEventDisplayName: tbd
+licenseName: tbd2
 summaryDescriptionMd: xxx
 callToActionLink: https://newjersey.mylicense.com/eGov/Login
 callToActionText: Renew My Accountant License

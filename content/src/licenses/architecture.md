@@ -3,6 +3,8 @@ notesMd: "Draft:
   https://docs.google.com/document/d/1iYheqxgwQKOocjMybAszFBFF2py2HgnRktPGa1Zpl\
   yY/edit"
 urlSlug: architecture
+calendarEventDisplayName: tbd1
+licenseName: tbd2
 previewType: renewal
 summaryDescriptionMd: You can renew your architecture license online.
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx

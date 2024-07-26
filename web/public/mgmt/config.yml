@@ -3066,23 +3066,13 @@ collections:
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - {
-          label: "Industry Id",
-          name: "urlSlug",
-          widget: "relation",
-          collection: "roadmaps",
-          search_fields: ["{{name}}"],
-          options_length: 500,
-          required: true,
-          value_field: "{{id}}",
-          display_fields: ["{{name}}"],
-        }
-      - {
           label: "Preview Type (CMS Only)",
           name: "previewType",
           widget: "select",
           default: "expiration",
           options: ["expiration", "renewal"],
         }
+      - { label: "calendar event label", name: "calendarEventDisplayName", widget: "string" }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown", required: true }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -3471,34 +3461,6 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Filename (disabled after file creation)", name: "filename", widget: "write-once-read-only" }
       - { label: "Name/Title", name: "name", widget: "string" }
-      - {
-          label: "Apply to all - overrides industry and sector dropdown",
-          name: "applyToAllUsers",
-          widget: "boolean",
-          required: false,
-        }
-      - label: Apply to industries
-        name: industryIds
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "roadmaps"
-        search_fields: ["name"]
-        value_field: "{{id}}"
-        display_fields: ["{{name}}"]
-        options_length: 500
-      - label: Apply to sectors
-        name: sectorIds
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "mappings"
-        search_fields: ["arrayOfSectors.*.name"]
-        value_field: "arrayOfSectors.*.id"
-        display_fields: ["arrayOfSectors.*.name"]
-        options_length: 500
       - label: "Icon"
         name: icon
         widget: "relation"

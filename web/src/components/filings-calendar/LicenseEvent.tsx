@@ -1,12 +1,12 @@
 import { CalendarEventItem } from "@/components/filings-calendar/CalendarEventItem";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
+import { LicenseEventType } from "@/lib/types/types";
 import { LicenseCalendarEvent, LicenseEventSubtype } from "@businessnjgovnavigator/shared/taxFiling";
 import { ReactElement } from "react";
 
 interface Props {
-  licenseEvent: LicenseCalendarEvent | undefined;
-  industryId: string | undefined;
+  LicenseCalendarEvent: LicenseCalendarEvent;
+  licenseEvents: LicenseEventType[];
   index?: number;
 }
 
@@ -18,19 +18,23 @@ export const LicenseEvent = (props: Props): ReactElement | null => {
     renewal: Config.licenseEventDefaults.renewalTitleLabel,
   };
 
-  const licenseName = LookupIndustryById(props.industryId).licenseType;
+  const licenseEvent = props.licenseEvents.find((event) => {
+    return event.licenseName === props.LicenseCalendarEvent.licenseName;
+  });
 
-  if (!props.licenseEvent || !props.industryId || !licenseName) {
+  if (!licenseEvent) {
     return null;
   }
 
-  const urlSlug = `licenses/${props.industryId}-${props.licenseEvent.licenseEventSubtype}`;
-  const displayTitle = `${licenseName} ${titles[props.licenseEvent.licenseEventSubtype]}`;
+  const urlSlug = `licenses/${licenseEvent.urlSlug}-${props.LicenseCalendarEvent.licenseEventSubtype}`;
+  const displayTitle = `${licenseEvent.calendarEventDisplayName} ${
+    titles[props.LicenseCalendarEvent.licenseEventSubtype]
+  }`;
 
   return (
     <CalendarEventItem
       title={displayTitle}
-      dueDate={props.licenseEvent.dueDate}
+      dueDate={props.LicenseCalendarEvent.dueDate}
       urlSlug={urlSlug}
       index={props.index}
     />

@@ -1,9 +1,7 @@
 ---
 filename: accountant-license-reinstatement
 name: Apply to Reinstate Your Accountant License
-industryIds:
-  - certified-public-accountant
-sectorIds: []
+licenseName: tbd
 icon: update-purple.svg
 urlSlug: accountant-license-reinstatement
 summaryDescriptionMd: Your accountant license needs to be reinstated because it

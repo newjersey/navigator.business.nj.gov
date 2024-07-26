@@ -7,7 +7,7 @@ import {
   sortFilterCalendarEventsWithinAYear,
 } from "@/lib/domain-logic/filterCalendarEvents";
 import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
-import { OperateReference } from "@/lib/types/types";
+import { LicenseEventType, OperateReference } from "@/lib/types/types";
 import {
   Business,
   LicenseCalendarEvent,
@@ -25,6 +25,7 @@ interface Props {
   num: number;
   activeYear: string;
   operateReferences: Record<string, OperateReference>;
+  licenseEvents: LicenseEventType[];
 }
 
 const NUM_OF_FILINGS_ALWAYS_VIEWABLE = 2;
@@ -60,8 +61,9 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
 
   const renderCalendarEventItems = (events: (TaxFilingCalendarEvent | LicenseCalendarEvent)[]): ReactNode => {
     return events.map((event) => {
+      if (event.calendarEventType === "TAX-FILING" && !props.operateReferences[event.identifier]) return null;
+
       if (event.calendarEventType === "TAX-FILING") {
-        if (!props.operateReferences[event.identifier]) return null;
         return (
           <CalendarEventItem
             key={event.identifier}
@@ -70,12 +72,14 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
             urlSlug={`filings/${props.operateReferences[event.identifier].urlSlug}`}
           />
         );
-      } else if (event.calendarEventType === "LICENSE") {
+      }
+
+      if (event.calendarEventType === "LICENSE") {
         return (
           <LicenseEvent
-            key={event.licenseEventSubtype}
-            licenseEvent={event}
-            industryId={props.business.profileData.industryId}
+            key={event.licenseName + event.licenseEventSubtype}
+            LicenseCalendarEvent={event}
+            licenseEvents={props.licenseEvents}
           />
         );
       }

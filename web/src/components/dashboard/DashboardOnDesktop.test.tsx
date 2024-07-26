@@ -4,6 +4,7 @@ import {
   AnytimeActionLicenseReinstatement,
   AnytimeActionLink,
   AnytimeActionTask,
+  LicenseEventType,
   OperateReference,
   RoadmapDisplayContent,
   SidebarCardContent,
@@ -80,12 +81,14 @@ describe("<DashboardOnDesktop />", () => {
     anytimeActionLinks,
     anytimeActionTask,
     anytimeActionLicenseReinstatements,
+    licenseEvents,
   }: {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     operateReferences?: Record<string, OperateReference>;
     anytimeActionLinks?: AnytimeActionLink[];
     anytimeActionTask?: AnytimeActionTask[];
     anytimeActionLicenseReinstatements?: AnytimeActionLicenseReinstatement[];
+    licenseEvents?: LicenseEventType[];
   }): void => {
     render(
       <ThemeProvider theme={createTheme()}>
@@ -97,6 +100,7 @@ describe("<DashboardOnDesktop />", () => {
           anytimeActionLinks={anytimeActionLinks ?? []}
           anytimeActionTasks={anytimeActionTask ?? []}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatements ?? []}
+          licenseEvents={licenseEvents ?? []}
         />
       </ThemeProvider>
     );
@@ -116,6 +120,7 @@ describe("<DashboardOnDesktop />", () => {
             anytimeActionLinks={[]}
             anytimeActionTasks={[]}
             anytimeActionLicenseReinstatements={[]}
+            licenseEvents={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>

@@ -5,7 +5,7 @@ import {
   isCalendarMonthLessThanCurrentMonth,
   sortFilterCalendarEventsWithinAYear,
 } from "@/lib/domain-logic/filterCalendarEvents";
-import { OperateReference } from "@/lib/types/types";
+import { LicenseEventType, OperateReference } from "@/lib/types/types";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
@@ -14,6 +14,7 @@ interface Props {
   operateReferences: Record<string, OperateReference>;
   business: Business;
   activeYear: string;
+  licenseEvents: LicenseEventType[];
 }
 
 export const FilingsCalendarGrid = (props: Props): ReactElement => {
@@ -55,6 +56,7 @@ export const FilingsCalendarGrid = (props: Props): ReactElement => {
                         operateReferences={props.operateReferences}
                         business={props.business}
                         activeYear={props.activeYear}
+                        licenseEvents={props.licenseEvents}
                       />
                     </td>
                   );
