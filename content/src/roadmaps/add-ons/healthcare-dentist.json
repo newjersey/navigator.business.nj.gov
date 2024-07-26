@@ -1,0 +1,11 @@
+{
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 1,
+      "licenseTask": "dental-license"
+    }
+  ],
+  "id": "healthcare-dentist",
+  "displayname": "healthcare-dentist"
+}
