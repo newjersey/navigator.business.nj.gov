@@ -1,5 +1,7 @@
 ---
 urlSlug: certified-public-accountant
+calendarEventDisplayName: tbd
+licenseName: tbd2
 previewType: renewal
 summaryDescriptionMd: Your accounting firm registration will expire every three years.
 callToActionLink: https://newjersey.mylicense.com/eGov/Login

@@ -9,10 +9,7 @@ type Config = {
   orgUrl: string;
 };
 
-export const DynamicsLicenseHealthCheckClient = (
-  logWriter: LogWriterType,
-  config: Config
-): HealthCheckMethod => {
+export const RgbLicenseHealthCheckClient = (logWriter: LogWriterType, config: Config): HealthCheckMethod => {
   return async (): Promise<HealthCheckMetadata> => {
     const logId = logWriter.GetId();
     const accessToken = await config.accessTokenClient.getAccessToken();
