@@ -1,4 +1,4 @@
-FROM cimg/node:20.15.1-browsers
+FROM cimg/node:20.16.0-browsers
 
 USER root
 

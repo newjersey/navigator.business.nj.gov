@@ -63,5 +63,8 @@
     "TODO-APP"
   ],
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "typescript.surveys.enabled": false
+  "typescript.surveys.enabled": false,
+  "[xml]": {
+    "editor.defaultFormatter": "DotJoshJohnson.xml"
+  }
 }
