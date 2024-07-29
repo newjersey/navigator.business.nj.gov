@@ -59,7 +59,7 @@ You also need to schedule a preliminary meeting and site survey with the Bureau 
 
 :::
 
-:::callout{ showHeader="true" headerText="Once aprpoved, you will have:" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="Once approved, you will have:" showIcon="false" calloutType="conditional" }
 
 A free-standing residential health care facility license, which you must renew every year
 
