@@ -3,7 +3,7 @@ id: dental-license
 filename: dental-license
 displayname: dental-license
 urlSlug: dental-license
-name: Apply for Your Dental License, if Applicable
+name: Apply for Your Dental License
 webflowName: "Healthcare: Dental License"
 summaryDescriptionMd: You need a dental license if you own a dental practice or
   perform dentistry in New Jersey.
