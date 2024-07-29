@@ -2,12 +2,13 @@
   "roadmapSteps": [
     {
       "step": 3,
-      "weight": 2,
-      "licenseTask": "dental-license"
+      "weight": 20,
+      "licenseTask": "dental-license",
+      "required": true
     },
     {
       "step": 3,
-      "weight": 1,
+      "weight": 25,
       "licenseTask": "dental-branch"
     }
   ],
