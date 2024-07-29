@@ -4,6 +4,8 @@ notesMd: >-
   all other businesses otherwise I can't save the draft)
 
   * h2 and h3 still look the same, using h4 until h3 is fixed
+
+  * double check with Regina on info in parentheses for date of incorporation app req
 id: cemetery-certificate
 filename: cemetery-certificate
 displayname: cemetery-certificate
