@@ -9,7 +9,8 @@ urlSlug: residential-health-care-facility-license
 name: Apply for Your Free-standing Residential Health Care Facility License
 webflowName: "Healthcare: Free-standing Residential Health Care Facility"
 summaryDescriptionMd: You need a license to own and/or operate a new or existing
-  free-standing residential health care facility, such as an [EXAMPLE?].
+  `free-standing residential health care
+  facility|residential-health-care-facility`, such as an [EXAMPLE?].
 industryId:
   - healthcare
 callToActionText: Apply for My License
