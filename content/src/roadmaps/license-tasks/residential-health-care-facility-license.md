@@ -23,25 +23,25 @@ divisionPhone: (609) 984-1704
 ## Application Requirements for New Facilities
 
 * Business name
-* Trade name, if applicable
-* Business structure
-* Employee Identification Number (EIN)
-* Name and address of your registered agent
+*  `Trade name|alt-name-trade-name` , if applicable
+*  `Business structure|business-structure-learn-more` 
+*  `Employee Identification Number (EIN)|ein` 
+* Name and address of your `registered agent|registered-agent` 
 * Name, address, and contact information of your facility
 * Number of beds at your facility
 * Name, license number, and contact information of your facility administrator
 * Business name, address, and email of your management company, if applicable
 * Name and address of your parent corporation, if applicable
 * Name of your building owner and a copy of a signed lease, if you are renting the facility
-* Name, title, address, Social Security Number (SSN) or Tax ID, and percent of ownership for each owner, officer, partner, or stockholder
+* Name, title, address, Social Security Number (SSN) or `Tax ID|tax-id` , and percent of ownership for each owner, officer, partner, or stockholder
 * List of board members, if your business is a nonprofit
 * List of any prior health care application denials or revocations, if applicable
 * List of other licensed health care facilities each principal owns, manages, or operates, if applicable
 * List of any family ties to current or former health care facility operators, if applicable
 * Criminal history of any principals, owners, operators, or managers of the facility, if applicable
 * Proof that you own the property or a copy of a signed lease
-* List of approvals from your local health, fire, building, and zoning departments
-* A completed background check authorization form
+* [List of approvals](https://www.nj.gov/dca/codes/forms/pdf_rooming/RHCF_app_attach.pdf) from your local health, fire, building, and zoning departments
+* A completed [background check authorization form](https://www.nj.gov/dca/codes/forms/pdf_rooming/Notice_Auth.pdf)
 * Applicable fees paid
 
 ## Application Requirements for Facility Transfers
@@ -50,8 +50,8 @@ divisionPhone: (609) 984-1704
 * $750 transfer of ownership fee
 * A cover letter stating your intent to purchase the facility and the facility’s name, address, county, and number and type of licensed beds
 * A notarized letter stating the date on which the transaction occurred
-* A completed background check authorization form
-* A copy of Certificate of Continuing Occupancy (CCO) from your local township, if applicable
+* A completed [background check authorization form](https://www.nj.gov/dca/codes/forms/pdf_rooming/Notice_Auth.pdf)
+* A copy of `Certificate of Continuing Occupancy (CCO)|certificate-continuing-occupancy` from your local township, if applicable
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
