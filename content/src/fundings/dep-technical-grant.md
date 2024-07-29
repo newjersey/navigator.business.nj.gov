@@ -14,13 +14,17 @@ sidebarCardBodyText: Technical Assistance Grants (TAGs) give money to nonprofit
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: >-
-  Technical Assistance Grants (TAGs) give money to nonprofit community groups to
-  hire independent experts called Licensed Site Remediation Professionals
-  (LSRPs). These experts help non-profits understand the site's existing
-  conditions, such as polluted areas.
+  
+
+  Technical Assistance Grants (TAGs) give money to nonprofit `community groups|community-groups` to hire independent experts called Licensed Site Remediation Professionals (LSRPs). These experts help non-profits understand the site's existing conditions, such as polluted areas.
 
 
-  TAG money is given to community groups to hire an LSRP to explain and give feedback on documents about the site. Community groups can get TAG funds during two phases of cleaning polluted sites: the Remedial Investigation (RI) phase and the Remedial Action (RA) phase.
+  TAG money is given to community groups to hire an LSRP to explain and give feedback on documents about the site. 
+
+
+  Community groups can get TAG funds during two phases of cleaning polluted sites: `- the Remedial Investigation (RI) phase|remedial-investigation` 
+
+   `-  the Remedial Action (RA) phase|remedial-action`
 callToActionLink: https://dep.nj.gov/grantandloanprograms/technical-assistance-grants/
 callToActionText: Learn More
 fundingType: grant
