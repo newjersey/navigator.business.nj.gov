@@ -15,7 +15,7 @@ import {
 } from "@/components/navbar/shared-submenu-components";
 import { getMergedConfig } from "@/contexts/configContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
-import { onSelfRegister, onSignOut } from "@/lib/auth/signinHelper";
+import { onSignOut } from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { randomPublicFilingLegalStructure } from "@/test/factories";
@@ -31,7 +31,6 @@ jest.mock("@/lib/auth/signinHelper", () => {
   const originalSigninHelper = jest.requireActual("@/lib/auth/signinHelper");
   return {
     ...originalSigninHelper,
-    onSelfRegister: jest.fn(),
     onSignOut: jest.fn(),
   };
 });
@@ -145,7 +144,7 @@ describe("shared-submenu-components", () => {
     render(<RegisterMenuItem />);
     expect(screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText)).toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText));
-    expect(onSelfRegister).toHaveBeenCalled();
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.accountSetup);
   });
 
   it("renders GetStartedMenuItem and navigates correclty onClick", () => {
