@@ -22,7 +22,7 @@ licenseCertificationClassification: undefined
 - Business name and address of the office branch you are registering
 - Applicable fees paid, once the Board of Dentistry sends an invoice
 
-Email your completed application to dentistry@dca.njoag.gov. The New Jersey Dental Board will email you an invoice via email to pay your fee online.
+Email your completed application to dentistry@dca.njoag.gov. The New Jersey Dental Board will email you an invoice to pay your fee online.
 
 \
 Your branch office registration is linked to your dental license and should be renewed at the same time.
