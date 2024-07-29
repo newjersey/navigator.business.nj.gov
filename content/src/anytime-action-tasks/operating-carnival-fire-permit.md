@@ -9,13 +9,9 @@ sectorIds:
   - arts-entertainment-and-recreation
 icon: govt-purple.svg
 urlSlug: operating-carnival-fire-permit
-summaryDescriptionMd: >
-  You must have a fire permit to do certain activities at your traveling
-  carnival or circus. You need to get the fire permit for each new setup or
-  event location and pass required inspections. 
-
-
-  Contact the `Local Enforcing Agency (LEA)|local-enforcing-agency` in the town where your carnival or circus will be to see which fire permits you need and how to apply.
+summaryDescriptionMd: "You must have a fire permit to do certain activities at
+  your traveling carnival or circus. You need to get the fire permit for each
+  new setup or event location and pass required inspections. "
 callToActionText: Contact My Local Enforcing Agency
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 ---
@@ -27,6 +23,9 @@ callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summa
 * Using an open flame or flame-producing device
 * Storing and handling certain types of flammable or combustible liquids
 * Storing and discharging fireworks
+
+Contact the `Local Enforcing Agency (LEA)|local-enforcing-agency` in the town where your carnival or circus will be to see which fire permits you need and how to apply.
+
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
