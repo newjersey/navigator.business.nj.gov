@@ -3,7 +3,8 @@
     {
       "step": 3,
       "weight": 2,
-      "licenseTask": "dental-license"
+      "licenseTask": "dental-license",
+      "required": true
     },
     {
       "step": 3,
