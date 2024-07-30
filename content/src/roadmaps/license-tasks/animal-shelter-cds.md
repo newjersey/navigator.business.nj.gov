@@ -6,7 +6,7 @@ notesMd: >-
   * 7.30: updated after regina's review 
 
     * Security measures in place to diversion of the CDS became Security measures in place to prevent loss or theft of the CDS
-    * The name and title of all officers and a copy of the corporate or business papers; corporate or business papers became
+    * The name and title of all officers and a copy of the corporate or business papers; corporate or business papers became legal and operational documents
 id: animal-shelter-cds
 filename: animal-shelter-cds
 displayname: animal-shelter-cds
@@ -37,7 +37,7 @@ agencyId: nj-consumer-affairs
 *  `Business structure|business-structure-learn-more` 
 * Name, address, and telephone number of the person who has administrative or managerial responsibility for the registered location
 *  `Registered agent information,|registered-agent` including address and phone number, or the name and address of the New Jersey resident responsible for receiving and handling legal paperwork
-* The name and title of all officers and a copy of the corporate or business papers
+* The name and title of all officers and a copy of all legal and operational documents
 * Proof of liability insurance for your facility 
 * Notarized Memorandum of Agreement (included in application)
 * Completed Zoning Certification (included in application)
