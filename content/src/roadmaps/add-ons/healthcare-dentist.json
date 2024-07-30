@@ -1,0 +1,17 @@
+{
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 20,
+      "licenseTask": "dental-license",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 25,
+      "licenseTask": "dental-branch"
+    }
+  ],
+  "id": "healthcare-dentist",
+  "displayname": "healthcare-dentist"
+}

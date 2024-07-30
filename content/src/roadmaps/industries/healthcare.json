@@ -44,12 +44,15 @@
     },
     {
       "step": 3,
-      "weight": 20,
+      "weight": 30,
       "task": "healthcare-license"
     }
   ],
   "name": "Healthcare",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "dentist"
+  ],
   "displayname": "healthcare",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
