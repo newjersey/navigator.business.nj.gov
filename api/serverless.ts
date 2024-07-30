@@ -106,12 +106,17 @@ const serverlessConfiguration: AWS = {
       noTimeout: true,
     },
     ssmLocation: ssmLocation,
+    prune: {
+      automatic: true,
+      number: 5,
+    },
   },
   plugins: [
     "serverless-webpack",
     ...(isDocker ? [] : ["serverless-dynamodb"]),
     "serverless-offline-ssm",
     "serverless-offline",
+    "serverless-prune-plugin",
   ],
   provider: {
     name: "aws",
