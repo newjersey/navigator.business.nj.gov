@@ -38,6 +38,7 @@ describe("DynamicsHousingClient", () => {
       BHINextInspectionDueDate: "01-01-2028",
       stateCode: 0,
       id: "12345",
+      buildingCount: 2,
     });
 
     const result = await client("address-1", "12345");
@@ -50,6 +51,7 @@ describe("DynamicsHousingClient", () => {
       BHINextInspectionDueDate: "01-01-2028",
       stateCode: 0,
       id: "12345",
+      buildingCount: 2,
     });
   });
 

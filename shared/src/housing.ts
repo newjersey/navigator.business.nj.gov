@@ -20,3 +20,23 @@ export type CommunityAffairsAddress = {
   streetAddress2?: string;
   municipality: Municipality;
 };
+
+export type HousingAddress = {
+  address1: string;
+  address2?: string;
+  municipalityExternalId?: string;
+  municipalityName?: string;
+};
+
+export type HousingRegistrationRequest = {
+  date: string;
+  propertyInterestType: number;
+  id: string;
+  status: string;
+  buildingCount: number;
+};
+
+export type HousingRegistrationRequestLookupResponse = {
+  registrations: HousingRegistrationRequest[];
+  lookupStatus: string;
+};
