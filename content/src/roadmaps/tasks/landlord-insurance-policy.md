@@ -21,8 +21,7 @@ callToActionText: ""
 * **Commercial general liability insurance:** Research coverage and prices for your industry and business size
 * **Landlord insurance:** Covers property damage, liability, and loss of rental income 
 * **Short-term rental insurance:** Designed for properties rented out for days or weeks
-* **Flood insurance:** Covers damage to rental properties caused by flooding
-* **Earthquake insurance:** Covers damage to rental properties caused by earthquakes
+* **Flood insurance:** Covers damage to properties caused by flooding, if your property is in a flood zone
 * **`Workers' compensation insurance|workers-comp`:** New Jersey requires this insurance if you have employees or stockholders in a corporation
 
 
