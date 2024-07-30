@@ -1,6 +1,8 @@
 ---
 notesMd: >-
-  * Can't publish because the Healthcare industry already has a renewal 
+  * Unsure if I should publish; the Healthcare industry has no existing renewals
+  so I could publish this, but there will be other healthcare renewals (for CDS)
+  I won't be able to publish -- ask Regina
 
   * Can't save this draft without adding summary info, so added what is already there
 urlSlug: healthcare
