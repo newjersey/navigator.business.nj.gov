@@ -150,7 +150,9 @@
     "PWCR",
     "PWCRA",
     "recertify",
+    "recordkeeping",
     "reoccuring",
+    "reqs",
     "researchwithnj",
     "roadmap",
     "roadmaps",
@@ -184,8 +186,7 @@
     "VEEVR",
     "WDPF",
     "webflow",
-    "YTTW",
-    "reqs"
+    "YTTW"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
