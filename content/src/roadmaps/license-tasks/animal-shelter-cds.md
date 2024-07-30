@@ -1,6 +1,12 @@
 ---
-notesMd: "* h2 and h3 look the same, Kim is addressing this. Can use h4 for the
-  h3 until it is fixed."
+notesMd: >-
+  * h2 and h3 look the same, Kim is addressing this. Can use h4 for the h3 until
+  it is fixed
+
+  * 7.30: updated after regina's review 
+
+    * Security measures in place to diversion of the CDS became Security measures in place to prevent loss or theft of the CDS
+    * The name and title of all officers and a copy of the corporate or business papers; corporate or business papers became
 id: animal-shelter-cds
 filename: animal-shelter-cds
 displayname: animal-shelter-cds
@@ -45,7 +51,7 @@ agencyId: nj-consumer-affairs
 * A detailed document outlining the purpose, method, and use of the CDS, accompanied by an approved protocol from a licensed New Jersey veterinarian
 * A certificate completed by a licensed New Jersey veterinarian, stating that shelter personnel who handle the CDS have been proficiently trained in the use of sodium pentobarbital in animal euthanasia
 * The name and title of everyone who will have access to the CDS
-* Security measures in place to prevent diversion of the CDS
+* Security measures in place to prevent loss or theft of the CDS
 
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
 
