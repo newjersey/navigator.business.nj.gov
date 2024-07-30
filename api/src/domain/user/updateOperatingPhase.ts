@@ -14,7 +14,9 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): 
   const isPublicFiling = LookupLegalStructureById(
     currentBusiness.profileData.legalStructureId
   ).requiresPublicFiling;
+
   const isRemoteSellerOrWorker = isRemoteWorkerOrSellerBusiness(currentBusiness);
+
   let updatedIsHideableRoadmapOpen: boolean = currentBusiness.preferences.isHideableRoadmapOpen;
 
   const newPhase = getNewPhase({
@@ -24,6 +26,7 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): 
     isPublicFiling: isPublicFiling,
     currentPhase: originalPhase,
     legalStructureId: currentBusiness.profileData.legalStructureId,
+    industryId: currentBusiness.profileData.industryId,
   });
 
   const phaseHasChanged = newPhase !== originalPhase;
@@ -52,6 +55,7 @@ const getNewPhase = ({
   taskProgress,
   legalStructureId,
   isRemoteSellerOrWorker,
+  industryId,
 }: {
   businessPersona: BusinessPersona;
   currentPhase: OperatingPhaseId;
@@ -59,6 +63,7 @@ const getNewPhase = ({
   taskProgress: Record<string, TaskProgress>;
   legalStructureId: string | undefined;
   isRemoteSellerOrWorker: boolean;
+  industryId: string | undefined;
 }): OperatingPhaseId => {
   const hasCompletedBusinessStructure =
     taskProgress[businessStructureTaskId] === "COMPLETED" || !!legalStructureId;
@@ -70,6 +75,10 @@ const getNewPhase = ({
 
   if (businessPersona === "FOREIGN" && isRemoteSellerOrWorker) {
     return OperatingPhaseId.REMOTE_SELLER_WORKER;
+  }
+
+  if (businessPersona === "STARTING" && industryId === "domestic-employer") {
+    return OperatingPhaseId.DOMESTIC_EMPLOYER;
   }
 
   if (currentPhase === OperatingPhaseId.GUEST_MODE) {

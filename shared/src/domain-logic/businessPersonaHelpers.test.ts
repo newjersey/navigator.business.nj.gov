@@ -10,6 +10,7 @@ import {
   generateProfileData,
 } from "@businessnjgovnavigator/shared/";
 import {
+  isDomesticEmployerBusiness,
   isNexusBusiness,
   isOwningBusiness,
   isRemoteWorkerOrSellerBusiness,
@@ -20,6 +21,17 @@ const generateBusinessWithBusinessPersona = (businessPersona: BusinessPersona): 
   generateBusiness({
     profileData: generateProfileData({
       businessPersona: businessPersona,
+    }),
+  });
+
+const generateBusinessWithBusinessPersonaAndIndustry = (
+  businessPersona: BusinessPersona,
+  industryId: string
+): Business =>
+  generateBusiness({
+    profileData: generateProfileData({
+      businessPersona: businessPersona,
+      industryId: industryId,
     }),
   });
 
@@ -247,6 +259,28 @@ describe("businessPersonaHelpers", () => {
 
     it("returns none when none and other values are selected", () => {
       expect(determineForeignBusinessType(["none", "revenueInNJ"])).toEqual("NONE");
+    });
+  });
+
+  describe("isDomesticEmployerBusiness", () => {
+    it("returns false when business is undefined", () => {
+      expect(isDomesticEmployerBusiness()).toBe(false);
+    });
+
+    it("returns false when business persona is OWNING", () => {
+      expect(isDomesticEmployerBusiness(generateBusinessWithBusinessPersona("OWNING"))).toBe(false);
+    });
+
+    it("returns false when business persona is FOREIGN", () => {
+      expect(isDomesticEmployerBusiness(generateBusinessWithBusinessPersona("FOREIGN"))).toBe(false);
+    });
+
+    it("returns true when business persona is STARTING and industry is domestic employer", () => {
+      expect(
+        isDomesticEmployerBusiness(
+          generateBusinessWithBusinessPersonaAndIndustry("STARTING", "domestic-employer")
+        )
+      ).toBe(true);
     });
   });
 });

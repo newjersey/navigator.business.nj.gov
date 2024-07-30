@@ -857,4 +857,13 @@ describe("buildUserRoadmap", () => {
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("employment-agency-job-seekers");
     });
   });
+
+  describe("if industry is domestic employer", () => {
+    it("will NOT contain add-ons", async () => {
+      buildUserRoadmap(
+        generateStartingProfile({ plannedRenovationQuestion: true, industryId: "domestic-employer" })
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toEqual([]);
+    });
+  });
 });

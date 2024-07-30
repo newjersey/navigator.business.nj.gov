@@ -36,14 +36,17 @@ import {
   emptyAddressData,
   emptyIndustrySpecificData,
   formationTaskId,
-  generateFormationFormData,
   generateGetFilingResponse,
   generateMunicipality,
   generateProfileData,
   modifyCurrentBusiness,
   naicsCodeTaskId,
 } from "@businessnjgovnavigator/shared";
-import { generateFormationData, generateTaxFilingData } from "@businessnjgovnavigator/shared/test";
+import {
+  generateFormationData,
+  generateFormationFormData,
+  generateTaxFilingData,
+} from "@businessnjgovnavigator/shared/test";
 
 import analytics from "@/lib/utils/analytics";
 import {
@@ -1327,6 +1330,27 @@ describe("profile - starting business", () => {
       renderPage({ business });
 
       expect(screen.getByTestId("elevatorOwningBusiness-radio-group")).toBeInTheDocument();
+    });
+  });
+
+  describe("Domestic Employer", () => {
+    const fieldOrQuestionNames = [
+      "business-structure",
+      "municipality",
+      "plannedRenovationQuestion",
+      "elevatorOwningBusiness",
+    ];
+
+    it.each(fieldOrQuestionNames)("hides %s field", (dataTestId) => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          industryId: "domestic-employer",
+          legalStructureId: undefined,
+        }),
+      });
+      renderPage({ business });
+      expect(screen.queryByTestId(dataTestId)).not.toBeInTheDocument();
     });
   });
 

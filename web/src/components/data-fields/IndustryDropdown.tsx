@@ -83,6 +83,8 @@ export const IndustryDropdown = (props: Props): ReactElement => {
     });
   };
 
+  const isForeignBusiness = state.profileData.businessPersona === "FOREIGN";
+
   const handleSearchBoxChange = (event: ChangeEvent<HTMLInputElement>): void => {
     props.handleChange && props.handleChange();
     setSearchText(event.target.value.trimEnd());
@@ -106,6 +108,11 @@ export const IndustryDropdown = (props: Props): ReactElement => {
     if (industriesList.length === 0) {
       return [LookupIndustryById("generic")];
     }
+
+    if (isForeignBusiness) {
+      return industriesList.filter((industry) => industry.id !== "domestic-employer");
+    }
+
     return industriesList;
   };
 

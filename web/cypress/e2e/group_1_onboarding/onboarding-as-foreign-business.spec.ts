@@ -1,4 +1,9 @@
 import {
+  completeEmploymentAgencyOnboarding,
+  randomElementFromArray,
+  setMobileViewport,
+} from "@businessnjgovnavigator/cypress/support/helpers/helpers";
+import {
   onOnboardingPageNexusBusiness,
   onOnboardingPageNoneOfTheAbove,
   onOnboardingPageRemoteSellerBusiness,
@@ -12,14 +17,9 @@ import {
   carServiceOptions,
   randomInt,
 } from "@businessnjgovnavigator/shared";
-import {
-  completeEmploymentAgencyOnboarding,
-  randomElementFromArray,
-  setMobileViewport,
-} from "../../support/helpers/helpers";
 
 const enabledIndustries = Industries.filter((element: Industry) => {
-  return element.isEnabled;
+  return element.isEnabled && element.id !== "domestic-employer";
 });
 
 describe("Onboarding for all industries when out of state nexus business [feature] [all] [group1]", () => {

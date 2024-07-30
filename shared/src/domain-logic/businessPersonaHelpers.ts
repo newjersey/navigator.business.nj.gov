@@ -28,6 +28,14 @@ export const isOwningBusiness = (business?: Business | undefined): boolean => {
   return business.profileData.businessPersona === "OWNING";
 };
 
+export const isDomesticEmployerBusiness = (business?: Business | undefined): boolean => {
+  if (!business) return false;
+  return (
+    business.profileData.businessPersona === "STARTING" &&
+    business.profileData.industryId === "domestic-employer"
+  );
+};
+
 export type ForeignBusinessType = "REMOTE_WORKER" | "REMOTE_SELLER" | "NEXUS" | "NONE" | undefined;
 
 export const NexusBusinessTypeIds: ForeignBusinessTypeId[] = [

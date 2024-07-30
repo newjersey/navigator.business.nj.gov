@@ -253,6 +253,9 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   const getElements = (): ReactNode => {
+    if (isDomesticEmployer) {
+      return domesticEmployerBusinessElements[profileTab];
+    }
     switch (businessPersona) {
       case "STARTING": {
         return startingNewBusinessElements[profileTab];
@@ -483,6 +486,9 @@ const ProfilePage = (props: Props): ReactElement => {
       </>
     ),
   };
+
+  const isDomesticEmployer =
+    profileData.businessPersona === "STARTING" && profileData.industryId === "domestic-employer";
 
   const startingNewBusinessElements: Record<ProfileTabs, ReactNode> = {
     notes: (
@@ -761,6 +767,63 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField fieldName="taxPin">
           <TaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
+        </ProfileField>
+      </>
+    ),
+  };
+
+  const domesticEmployerBusinessElements: Record<ProfileTabs, ReactNode> = {
+    notes: (
+      <>
+        <ProfileTabHeader tab="notes" />
+
+        <ProfileField fieldName="notes">
+          <Notes handleChangeOverride={showNeedsAccountModalForGuest()} />
+        </ProfileField>
+      </>
+    ),
+    documents: <></>,
+    info: (
+      <>
+        <ProfileTabHeader tab="info" />
+
+        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
+        <ProfileNoteDisclaimerForSubmittingData business={business} isAuthenticated={isAuthenticated} />
+        <ProfileField
+          fieldName="businessName"
+          locked={shouldLockFormationFields}
+          isVisible={!shouldShowTradeNameElements()}
+        >
+          <BusinessName />
+        </ProfileField>
+
+        <ProfileField fieldName="industryId">
+          <Industry />
+        </ProfileField>
+      </>
+    ),
+    numbers: (
+      <>
+        <ProfileTabHeader tab="numbers" />
+
+        <ProfileField fieldName="naicsCode" noLabel={true}>
+          <NaicsCode />
+        </ProfileField>
+        <ProfileField fieldName="employerId">
+          <EmployerId handleChangeOverride={showNeedsAccountModalForGuest()} />
+        </ProfileField>
+        <ProfileField fieldName="taxId" noLabel={true}>
+          <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
+          {!hasSubmittedTaxData && (
+            <TaxDisclaimer legalStructureId={business?.profileData.legalStructureId} />
+          )}
+          <div className="max-width-38rem">
+            {hasSubmittedTaxData ? (
+              <DisabledTaxId />
+            ) : (
+              <TaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
+            )}
+          </div>
         </ProfileField>
       </>
     ),
