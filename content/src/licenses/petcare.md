@@ -17,7 +17,7 @@ callToActionText: Renew My Animal Shelter’s CDS Registration
 * Controlled Dangerous Substances (CDS) or DEA registration suspension, surrender, denial, or revocation since last renewal, if applicable 
 * CDS registration restrictions since last renewal, if applicable
 * Details of any professional license revocation or surrender since last renewal, if applicable
-* New corporate personnel information since last renewal, including name, address, email, and phone number, if applicable
+* New employee information since last renewal, including name, address, email, and phone number, if applicable
 * Applicable fees paid
 
 You must be registered with the [New Jersey Prescription Monitoring Program (NJPMP)](https://www.njconsumeraffairs.gov/pmp/Pages/register.aspx) to renew your CDS registration. 
