@@ -380,6 +380,8 @@ commands:
             echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_CONTENT' >> $BASH_ENV
             echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_CONTENT' >> $BASH_ENV
             echo 'export REDIRECT_URL=$REDIRECT_URL_CONTENT' >> $BASH_ENV
+            echo 'export API_BASE_URL=$API_BASE_URL_AWS_CONTENT' >> $BASH_ENV
+            echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_CONTENT' >> $BASH_ENV
 
   set-accessibility-testing-env-vars:
     steps:
@@ -388,7 +390,7 @@ commands:
           command: |
 
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_TESTING' >> $BASH_ENV
-            echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_DEV' >> $BASH_ENV
+            echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_TESTING' >> $BASH_ENV
             echo 'export BUSINESS_NAME_BASE_URL=$BUSINESS_NAME_BASE_URL_DEV' >> $BASH_ENV
             echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_DEV' >> $BASH_ENV
             echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_DEV' >> $BASH_ENV
