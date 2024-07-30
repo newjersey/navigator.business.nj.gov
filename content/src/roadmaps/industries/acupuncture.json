@@ -48,7 +48,7 @@
     }
   ],
   "name": "Acupuncture",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [],
   "displayname": "acupuncture",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
