@@ -1,18 +1,20 @@
 ---
 id: ticket-broker-reseller-registration
+filename: ticket-broker-reseller-registration
 displayname: ticket-broker-reseller-registration
-webflowId: 6657975ac4acabfabc97d176
 urlSlug: ticket-broker-reseller-registration
 name: Register Your Business as a Ticket Broker (Ticket Reseller)
 webflowName: Ticket Broker (Ticket Reseller)
-filename: ticket-broker-reseller-registration
-callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
+summaryDescriptionMd: You need to register as a ticket broker if you resell
+  admission tickets to places of entertainment and charge a premium, in addition
+  to the price plus the taxes printed on the tickets.
+industryId: retail
 callToActionText: Register Your Business as a Ticket Broker/Ticket Reseller
+callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
+licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Regulated Business Section
-industryId: retail
-licenseCertificationClassification: undefined
-summaryDescriptionMd: You need to register as a ticket broker if you resell admission tickets to places of entertainment and charge a premium, in addition to the price plus the taxes printed on the tickets.
+webflowId: 6657975ac4acabfabc97d176
 ---
 
 ---
@@ -33,8 +35,8 @@ summaryDescriptionMd: You need to register as a ticket broker if you resell admi
 - `Certificate of Formation|certificate-formation`
 - `Surety bond|surety-bond`
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A certificate of registration
+A certificate of registration.
 
 :::
