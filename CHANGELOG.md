@@ -1,3 +1,10 @@
+## [2024.22.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.22.0...v2024.22.1) (2024-07-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency dayjs to v1.11.12 ([6bfce22](https://github.com/newjersey/navigator.business.nj.gov/commit/6bfce22d48b0ea0dc9ed07424f3b2941d2c8ee59))
+
 # [2024.22.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.21.1...v2024.22.0) (2024-07-19)
 
 
