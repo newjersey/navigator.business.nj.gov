@@ -27,17 +27,17 @@ isSbe: false
 *  `12-digit NJ Tax ID|tax-id` 
 * Business name
 *  `Trade name|alt-name-trade-name`, if applicable
-* Business address, including `block and lot numbers|block-lot-number` (find this on your tax bill or your landlord’s property tax bill)
+* Business address, including `block and lot numbers|block-lot-number`. Find this on your tax bill or your landlord’s property tax bill
 *  `6-digit NAICS code|naics` 
 *  `4-digit Standard Industrial Classification (SIC) code|sic-code` 
 *  `Business structure|business-structure-learn-more` 
 * Business formation documents, such as a `Certificate of Formation or Certificate of Authority|certificate-formation` 
 * Number of current employees 
 * An estimate of the number of employees you will have after three years in the UEZ program
-* Estimated total amount of projected capital investment (calculate this using the [capital investment workbook](https://www.nj.gov/dca/uez/forms/pdf/5-CapitalInvestWkbk-Cert.xls))
+* Estimated total amount of projected capital investment. Calculate this using the [capital investment workbook](https://www.nj.gov/dca/uez/forms/pdf/5-CapitalInvestWkbk-Cert.xls) (Excel file download)
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-An Urban Enterprise Zone (UEZ) certification
+An Urban Enterprise Zone (UEZ) certification.
 
 :::
