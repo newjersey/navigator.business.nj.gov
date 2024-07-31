@@ -5,8 +5,9 @@ notesMd: >-
 
   * 7.30: updated after regina's review 
 
-    * Security measures in place to diversion of the CDS became Security measures in place to prevent loss or theft of the CDS
-    * The name and title of all officers and a copy of the corporate or business papers; corporate or business papers became legal and operational documents
+    * "Security measures in place to prevent diversion of the CDS" became "Security measures in place to prevent loss or theft of the CDS"
+    * **Still working on this one**. Asked SME. "The name and title of all officers and a copy of the corporate or business papers" became ...
+    * Added additional info to Criminal History Record Information Part 2 -- "CHRI Part 2, including employee names, dates of birth, and email addresses (to be completed right after Part 1 and submitted with your CDS application; form included in application)"
 id: animal-shelter-cds
 filename: animal-shelter-cds
 displayname: animal-shelter-cds
@@ -46,10 +47,10 @@ agencyId: nj-consumer-affairs
 #### Safety and Security
 
 * Schedule of the CDS 
-* Criminal History Record Information (CHRI) for each person with access to the CDS and applicable fees paid (to be completed online and concurrently with the CDS registration application, link in application) 
-* Criminal History Record Information Part 2, including employee names, dates of birth, email addresses, and the CHRI confirmation number that was emailed to you upon submission of the CHRI application 
+* Criminal History Record Information (CHRI) Part 1 for each person with access to the CDS and applicable fees paid (to be completed online and at the same time as the CDS registration; link in application) 
+* CHRI Part 2, including employee names, dates of birth, and email addresses (to be completed right after Part 1 and submitted with your CDS application; form included in application)
 * A detailed document outlining the purpose, method, and use of the CDS, accompanied by an approved protocol from a licensed New Jersey veterinarian
-* A certificate completed by a licensed New Jersey veterinarian, stating that shelter personnel who handle the CDS have been proficiently trained in the use of sodium pentobarbital in animal euthanasia
+* A certificate completed by a licensed New Jersey veterinarian, stating that shelter staff who handle the CDS have been proficiently trained in the use of sodium pentobarbital in animal euthanasia
 * The name and title of everyone who will have access to the CDS
 * Security measures in place to prevent loss or theft of the CDS
 
