@@ -1,30 +1,24 @@
 import { NeedsAccountModalWrapper } from "@/components/auth/NeedsAccountModalWrapper";
 import { Content } from "@/components/Content";
 import { TaskHeader } from "@/components/TaskHeader";
-import { CheckLicenseStatus } from "@/components/tasks/CheckLicenseStatus";
-import { LicenseDetailReceipt } from "@/components/tasks/LicenseDetailReceipt";
+import { CheckStatus } from "@/components/tasks/CheckStatus";
+import { LicenseStatusReceipt } from "@/components/tasks/LicenseStatusReceipt";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { LicenseSearchError, TaskWithLicenseTaskId } from "@/lib/types/types";
+import { LicenseSearchError, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
-import {
-  LicenseDetails,
-  LicenseSearchNameAndAddress,
-  LicenseTaskID,
-  taskIdToLicenseName,
-  UserData,
-} from "@businessnjgovnavigator/shared/";
+import { LicenseSearchNameAndAddress, LicenseStatusResult, UserData } from "@businessnjgovnavigator/shared/";
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
 import { Box, Tab } from "@mui/material";
 import React, { ReactElement, useState } from "react";
 
 interface Props {
-  task: TaskWithLicenseTaskId;
+  task: Task;
   CMS_ONLY_disable_overlay?: boolean;
 }
 
@@ -36,14 +30,10 @@ export const LicenseTask = (props: Props): ReactElement => {
   const callToActionLink = getModifiedTaskContent(roadmap, props.task, "callToActionLink");
   const [tabIndex, setTabIndex] = useState(APPLICATION_TAB_INDEX);
   const [error, setError] = useState<LicenseSearchError | undefined>(undefined);
-  const [licenseDetails, setLicenseDetails] = useState<LicenseDetails | undefined>(undefined);
+  const [licenseStatusResult, setLicenseStatusResult] = useState<LicenseStatusResult | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { business, refresh } = useUserData();
   const { Config } = useConfig();
-
-  const licenseNameForTask = taskIdToLicenseName[props.task.id];
-  const hasCompletedSearch = !!licenseDetails?.lastUpdatedISO;
-  const searchHasError = !!licenseDetails?.hasError;
 
   const allFieldsHaveValues = (nameAndAddress: LicenseSearchNameAndAddress): boolean => {
     return !!(nameAndAddress.name && nameAndAddress.addressLine1 && nameAndAddress.zipCode);
@@ -51,11 +41,14 @@ export const LicenseTask = (props: Props): ReactElement => {
 
   useMountEffectWhenDefined(() => {
     if (!business) return;
-    const licenseDetailsReceived = business.licenseData?.licenses?.[licenseNameForTask]?.lastUpdatedISO;
-
-    if (licenseDetailsReceived) {
+    if (business.licenseData) {
       setTabIndex(STATUS_TAB_INDEX);
-      setLicenseDetails(business.licenseData?.licenses?.[licenseNameForTask]);
+    }
+    if (business.licenseData?.completedSearch) {
+      setLicenseStatusResult({
+        status: business.licenseData.status,
+        checklistItems: business.licenseData.items,
+      });
     }
   }, business);
 
@@ -71,7 +64,7 @@ export const LicenseTask = (props: Props): ReactElement => {
   };
 
   const onEdit = (): void => {
-    setLicenseDetails(undefined);
+    setLicenseStatusResult(undefined);
   };
 
   const onSubmit = (nameAndAddress: LicenseSearchNameAndAddress): void => {
@@ -84,22 +77,24 @@ export const LicenseTask = (props: Props): ReactElement => {
 
     setIsLoading(true);
     api
-      .checkLicenseStatus(nameAndAddress, props.task.id as LicenseTaskID)
+      .checkLicenseStatus(nameAndAddress)
       .then((result: UserData) => {
         analytics.event.task_address_form.response.success_application_found();
-        const resultLicenseData =
-          result.businesses[result.currentBusinessId]?.licenseData?.licenses?.[licenseNameForTask];
-
+        const resultLicenseData = result.businesses[result.currentBusinessId].licenseData;
         if (!resultLicenseData) return;
-
-        setLicenseDetails(resultLicenseData);
-        if (resultLicenseData.licenseStatus === "UNKNOWN") {
+        setLicenseStatusResult({
+          status: resultLicenseData.status,
+          checklistItems: resultLicenseData.items,
+        });
+        setError(undefined);
+      })
+      .catch((error_) => {
+        if (error_ === 404) {
           analytics.event.task_address_form.response.fail_application_not_found();
           setError("NOT_FOUND");
+        } else {
+          setError("SEARCH_FAILED");
         }
-      })
-      .catch(() => {
-        setError("SEARCH_FAILED");
       })
       .finally(async () => {
         refresh();
@@ -121,7 +116,9 @@ export const LicenseTask = (props: Props): ReactElement => {
       <div className="flex flex-column">
         <TaskHeader
           task={props.task}
-          tooltipText={hasCompletedSearch ? Config.licenseSearchTask.tooltipText : undefined}
+          tooltipText={
+            business?.licenseData?.completedSearch ? Config.licenseSearchTask.tooltipText : undefined
+          }
         />
         <Box sx={{ width: "100%" }}>
           <TabContext value={tabIndex.toString()}>
@@ -183,19 +180,14 @@ export const LicenseTask = (props: Props): ReactElement => {
               </div>
             </TabPanel>
             <TabPanel value="1" sx={{ paddingX: 0 }}>
-              {hasCompletedSearch && licenseDetails && !searchHasError ? (
-                <LicenseDetailReceipt
-                  licenseTaskId={props.task.id}
-                  licenseDetails={licenseDetails}
+              {licenseStatusResult ? (
+                <LicenseStatusReceipt
+                  status={licenseStatusResult.status}
+                  items={licenseStatusResult.checklistItems}
                   onEdit={onEdit}
                 />
               ) : (
-                <CheckLicenseStatus
-                  onSubmit={onSubmit}
-                  error={error}
-                  isLoading={isLoading}
-                  licenseTaskId={props.task.id}
-                />
+                <CheckStatus onSubmit={onSubmit} error={error} isLoading={isLoading} />
               )}
             </TabPanel>
           </TabContext>

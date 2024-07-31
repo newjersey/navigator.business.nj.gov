@@ -21,7 +21,6 @@ agencyAdditionalContext: Board of Cosmetology and Hairstyling
 divisionPhone: (973) 504-6400
 webflowType: business-license
 webflowId: 5f77298fd2749a78af9cf7df
-licenseName: Cosmetology and Hairstyling-Shop
 ---
 ## Application Requirements
 

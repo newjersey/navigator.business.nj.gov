@@ -3,8 +3,6 @@ notesMd: "[Task
   4809](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/e\
   dit/4809)"
 urlSlug: health-club
-calendarEventDisplayName: tbd
-licenseName: tbd2
 previewType: renewal
 summaryDescriptionMd: If you want to continue operating your health spa, fitness
   club, or gym business, you must renew your health club registration.

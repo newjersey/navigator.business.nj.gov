@@ -4,8 +4,6 @@ notesMd: >-
 
   https://docs.google.com/document/d/104QFACWa4lyrqTY56ET-o6ZZ-dfNdssxZ0tdEF8c52E/edit
 urlSlug: telemarketing
-calendarEventDisplayName: tbd
-licenseName: tbd2
 previewType: renewal
 summaryDescriptionMd: You can renew your license 60 days before it expires and
   up to 30 days after expiration. If you fail to renew your license at this

@@ -12,7 +12,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import { LicenseEventType, OperateReference } from "@/lib/types/types";
+import { OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   Business,
@@ -26,7 +26,6 @@ import { ReactElement, useState } from "react";
 interface Props {
   operateReferences: Record<string, OperateReference>;
   CMS_ONLY_fakeBusiness?: Business; // for CMS only
-  licenseEvents: LicenseEventType[];
 }
 
 export const FilingsCalendar = (props: Props): ReactElement => {
@@ -62,7 +61,6 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           operateReferences={props.operateReferences}
           business={business as Business}
           activeYear={activeYear}
-          licenseEvents={props.licenseEvents}
         />
       );
     if (type === "FULL") {
@@ -72,7 +70,6 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             operateReferences={props.operateReferences}
             business={business}
             activeYear={activeYear}
-            licenseEvents={props.licenseEvents}
           />
         );
       return (
@@ -80,7 +77,6 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           operateReferences={props.operateReferences}
           business={business as Business}
           activeYear={activeYear}
-          licenseEvents={props.licenseEvents}
         />
       );
     }

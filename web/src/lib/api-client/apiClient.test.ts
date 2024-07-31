@@ -1,7 +1,4 @@
 import { generateInputFile } from "@/test/factories";
-import { taskIdToLicenseName } from "@businessnjgovnavigator/shared/";
-import { randomElementFromArray } from "@businessnjgovnavigator/shared/arrayHelpers";
-import { LicenseTaskID } from "@businessnjgovnavigator/shared/license";
 import {
   generateLicenseSearchNameAndAddress,
   generateTaxIdAndBusinessName,
@@ -58,31 +55,13 @@ describe("apiClient", () => {
     });
   });
 
-  it("posts license status without licenseTaskId specified", async () => {
+  it("posts license status", async () => {
     mockAxios.post.mockResolvedValue({ data: {} });
     const nameAndAddress = generateLicenseSearchNameAndAddress({});
     await checkLicenseStatus(nameAndAddress);
-    expect(mockAxios.post).toHaveBeenCalledWith(
-      "/api/license-status",
-      { nameAndAddress, licenseTaskId: undefined },
-      {
-        headers: { Authorization: "Bearer some-token" },
-      }
-    );
-  });
-
-  it("posts license status with licenseTaskId specified", async () => {
-    mockAxios.post.mockResolvedValue({ data: {} });
-    const nameAndAddress = generateLicenseSearchNameAndAddress({});
-    const licenseTaskId = randomElementFromArray(Object.keys(taskIdToLicenseName));
-    await checkLicenseStatus(nameAndAddress, licenseTaskId as LicenseTaskID);
-    expect(mockAxios.post).toHaveBeenCalledWith(
-      "/api/license-status",
-      { nameAndAddress, licenseTaskId },
-      {
-        headers: { Authorization: "Bearer some-token" },
-      }
-    );
+    expect(mockAxios.post).toHaveBeenCalledWith("/api/license-status", nameAndAddress, {
+      headers: { Authorization: "Bearer some-token" },
+    });
   });
 
   it("posts taxFilings onboarding request", async () => {

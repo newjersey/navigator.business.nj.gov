@@ -71,7 +71,6 @@ describe("dashboard page", () => {
           anytimeActionLinks={[]}
           anytimeActionTasks={[]}
           anytimeActionLicenseReinstatements={[]}
-          licenseEvents={[]}
         />
       </ThemeProvider>
     );
@@ -92,7 +91,6 @@ describe("dashboard page", () => {
             anytimeActionLinks={[]}
             anytimeActionTasks={[]}
             anytimeActionLicenseReinstatements={[]}
-            licenseEvents={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>

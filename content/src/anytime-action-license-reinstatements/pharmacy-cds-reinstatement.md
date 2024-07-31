@@ -1,6 +1,6 @@
 ---
 notesMd: >
-  * 6.26: draft approved by Regina, edits reflected here.
+  * 6.26: draft approved by Regina, edits reflected here. 
 
   * Working draft: https://docs.google.com/document/d/1Z-DF2hB6N4wyVUQqH_-G0A2DPt4Rcb5uqWdJ35q3EeQ/edit
 filename: pharmacy-cds-reinstatement
@@ -8,7 +8,6 @@ name: Reinstate Your Pharmacy’s Controlled Dangerous Substances Registration
 industryIds:
   - pharmacy
 sectorIds: []
-licenseName: Pharmacy-Pharmacy
 icon: update-purple.svg
 urlSlug: pharmacy-cds-reinstatement
 summaryDescriptionMd: >-
@@ -18,7 +17,7 @@ summaryDescriptionMd: >-
   it by following these steps:
 
 
-  1. Ensure you are registered with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) before applying for your CDS reinstatement.
+  1. Ensure you are registered with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) before applying for your CDS reinstatement. 
 
   2. Email The New Jersey Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the Facilities Reinstatement application.
 

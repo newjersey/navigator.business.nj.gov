@@ -1,7 +1,5 @@
 ---
 urlSlug: massage-therapy
-calendarEventDisplayName: tbd
-licenseName: tbd2
 previewType: expiration
 summaryDescriptionMd: "\n"
 callToActionLink: https://newjersey.mylicense.com/eGov/PersonSearchResults.aspx

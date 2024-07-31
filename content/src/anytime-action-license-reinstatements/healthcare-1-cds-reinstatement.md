@@ -6,7 +6,6 @@ name: Reinstate Your MD, DO, DDS, OD, DPM, or DVM Controlled Dangerous
 industryIds:
   - healthcare
 sectorIds: []
-licenseName: tbd
 icon: update-purple.svg
 urlSlug: healthcare-1-cds-reinstatement
 summaryDescriptionMd: >-

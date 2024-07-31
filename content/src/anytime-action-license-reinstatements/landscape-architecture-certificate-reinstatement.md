@@ -5,7 +5,6 @@ name: Apply to Reinstate Your Certificate of Authorization for Landscape
 industryIds:
   - landscape-architecture
 sectorIds: []
-licenseName: tbd
 icon: update-purple.svg
 urlSlug: landscape-architecture-certificate-reinstatement
 summaryDescriptionMd: You must reinstate your Certificate of Authorization to

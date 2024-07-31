@@ -24,7 +24,7 @@ export const CalendarEventItem = (props: Props): ReactElement => {
     return (
       <div className={`margin-bottom-05 ${props.index === 0 ? "margin-top-05" : ""}`}>
         <Link href={props.urlSlug} passHref>
-          <a href={props.urlSlug} onClick={onClick} data-testid="calendar-event-anchor">
+          <a href={props.urlSlug} onClick={onClick}>
             {props.title}
           </a>
         </Link>
@@ -37,7 +37,6 @@ export const CalendarEventItem = (props: Props): ReactElement => {
       <Tag backgroundColor="accent-warm-extra-light" isHover isRadiusMd isWrappingText>
         <Link href={props.urlSlug}>
           <a
-            data-testid="calendar-event-anchor"
             href={props.urlSlug}
             onClick={onClick}
             className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline"

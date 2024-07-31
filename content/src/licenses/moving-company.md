@@ -3,8 +3,6 @@ notesMd: "Drafted here:
   https://docs.google.com/document/d/1qycUgskcIPRt-SfnpSaJ8d4T_Zt1Y126yJ1mQMhcJ\
   OA/edit"
 urlSlug: moving-company
-calendarEventDisplayName: tbd
-licenseName: tbd2
 previewType: renewal
 summaryDescriptionMd: x
 callToActionLink: https://www.njconsumeraffairs.gov/Pages/licensingboards.aspx

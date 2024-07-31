@@ -5,7 +5,7 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { sortFilterCalendarEventsWithinAYear } from "@/lib/domain-logic/filterCalendarEvents";
 import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
-import { LicenseEventType, OperateReference } from "@/lib/types/types";
+import { OperateReference } from "@/lib/types/types";
 import { groupBy } from "@/lib/utils/helpers";
 import { LicenseCalendarEvent, TaxFilingCalendarEvent } from "@businessnjgovnavigator/shared";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
@@ -19,7 +19,6 @@ interface Props {
   business: Business;
   activeYear: string;
   operateReferences: Record<string, OperateReference>;
-  licenseEvents: LicenseEventType[];
 }
 
 export const FilingsCalendarAsList = (props: Props): ReactElement => {
@@ -97,9 +96,10 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
                 } else if (event.calendarEventType === "LICENSE") {
                   return (
                     <LicenseEvent
-                      key={event.licenseName + event.licenseEventSubtype}
-                      LicenseCalendarEvent={event}
-                      licenseEvents={props.licenseEvents}
+                      key={`${event.licenseEventSubtype}-${event.dueDate}`}
+                      licenseEvent={event}
+                      index={index}
+                      industryId={props.business.profileData.industryId}
                     />
                   );
                 }

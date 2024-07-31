@@ -17,12 +17,10 @@ import { randomInt } from "../intHelpers";
 import { LegalStructure, LegalStructures } from "../legalStructure";
 import {
   LicenseData,
-  LicenseDetails,
   LicenseSearchAddress,
   LicenseSearchNameAndAddress,
   LicenseStatusItem,
-  Licenses,
-  taskIdToLicenseName,
+  LicenseStatusResult,
 } from "../license";
 import { MunicipalityDetail } from "../municipality";
 import { OperatingPhaseId } from "../operatingPhase";
@@ -127,6 +125,14 @@ export const generateTaxIdAndBusinessName = (
   };
 };
 
+export const generateLicenseStatusResult = (overrides: Partial<LicenseStatusResult>): LicenseStatusResult => {
+  return {
+    status: "PENDING",
+    checklistItems: [generateLicenseStatusItem({})],
+    ...overrides,
+  };
+};
+
 export const generateLicenseStatusItem = (overrides: Partial<LicenseStatusItem>): LicenseStatusItem => {
   return {
     title: `some-title-${randomInt()}`,
@@ -157,29 +163,14 @@ export const randomLegalStructure = (publicFiling?: {
   return LegalPublicFilings[randomIndex];
 };
 
-export const generateLicenseDetails = (overrides: Partial<LicenseDetails>): LicenseDetails => {
+export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseData => {
   return {
     nameAndAddress: generateLicenseSearchNameAndAddress({}),
-    licenseStatus: randomElementFromArray(["PENDING", "ACTIVE", "EXPIRED"]),
-    checklistItems: [generateLicenseStatusItem({})],
-    expirationDateISO: getCurrentDate().add(1, "year").toISOString(),
+    completedSearch: false,
+    items: [generateLicenseStatusItem({})],
+    status: "PENDING",
     lastUpdatedISO: getCurrentDateISOString(),
-    ...overrides,
-  };
-};
-
-export const generateLicenseData = (
-  overrides: Partial<LicenseData>,
-  licensesOverrides?: Licenses
-): LicenseData => {
-  return {
-    licenses: {
-      [randomElementFromArray(Object.values(taskIdToLicenseName))]: {
-        ...generateLicenseDetails({}),
-      },
-      ...licensesOverrides,
-    },
-    lastUpdatedISO: getCurrentDateISOString(),
+    expirationISO: getCurrentDate().add(1, "year").toISOString(),
     ...overrides,
   };
 };

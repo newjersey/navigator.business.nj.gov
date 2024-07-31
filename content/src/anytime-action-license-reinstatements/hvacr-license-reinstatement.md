@@ -5,7 +5,6 @@ industryIds:
   - hvac-contractor
 sectorIds: []
 icon: update-purple.svg
-licenseName: tbd
 urlSlug: hvacr-license-reinstatement
 summaryDescriptionMd: If your Heating, Ventilating, Air Conditioning, and
   Refrigeration (HVACR) license has expired, you can apply for reinstatement.
