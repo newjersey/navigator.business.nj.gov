@@ -27,7 +27,19 @@ export const ApiFormationHealth: UserData = {
       onboardingFormProgress: "UNSTARTED",
       taskProgress: {},
       taskItemChecklist: {},
-      licenseData: undefined,
+      licenseData: {
+        nameAndAddress: {
+          name: "some-name-42502490",
+          addressLine1: "some-address-1-78700337",
+          addressLine2: "some-address-2-98736596",
+          zipCode: "some-zipcode-21305029",
+        },
+        completedSearch: false,
+        items: [{ title: "some-title-23661305", status: "ACTIVE" }],
+        status: "PENDING",
+        lastUpdatedISO: getCurrentDateISOString(),
+        expirationISO: getCurrentDateISOString(),
+      },
       preferences: {
         roadmapOpenSections: ["PLAN", "START"],
         roadmapOpenSteps: [18013808],

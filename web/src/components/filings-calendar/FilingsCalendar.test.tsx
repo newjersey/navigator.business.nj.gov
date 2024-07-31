@@ -1,9 +1,8 @@
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { getMergedConfig } from "@/contexts/configContext";
-import { LicenseEventType, OperateReference } from "@/lib/types/types";
+import { OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
-  generateLicenseEvent,
   generateOperateReference,
   publicFilingLegalStructures,
   tradeNameLegalStructures,
@@ -18,16 +17,16 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
+  LookupIndustryById,
   OperatingPhases,
   TaxFilingCalendarEvent,
   defaultDateFormat,
   generateBusiness,
-  generateLicenseDetails,
   generateTaxFilingCalendarEvent,
   generateUserDataForBusiness,
   randomInt,
 } from "@businessnjgovnavigator/shared";
-import { OperatingPhaseId, taskIdToLicenseName } from "@businessnjgovnavigator/shared/";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import * as getCurrentDateModule from "@businessnjgovnavigator/shared/dateHelpers";
 import {
   generateLicenseData,
@@ -83,13 +82,12 @@ const Config = getMergedConfig();
 
 const renderFilingsCalendar = (
   operateReferences: Record<string, OperateReference>,
-  business: Business,
-  licenseEvents?: LicenseEventType[]
+  business: Business
 ): void => {
   render(
     <ThemeProvider theme={createTheme()}>
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
-        <FilingsCalendar operateReferences={operateReferences} licenseEvents={licenseEvents ?? []} />
+        <FilingsCalendar operateReferences={operateReferences} />
       </WithStatefulUserData>
     </ThemeProvider>
   );
@@ -495,23 +493,16 @@ describe("<FilingsCalendar />", () => {
   it("displays filings calendar as list with license events", () => {
     const expirationDate = getAprilDateOfThisYear().add(2, "months");
 
-    const licenseName = randomElementFromArray(Object.values(taskIdToLicenseName));
-    const licenseEvents = [generateLicenseEvent({ licenseName })];
     const business = generateBusiness({
       profileData: generateProfileData({
+        industryId: "home-contractor",
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
             return obj.displayCalendarType === "LIST";
           })
         ).id,
       }),
-      licenseData: generateLicenseData({
-        licenses: {
-          [licenseName]: generateLicenseDetails({
-            expirationDateISO: expirationDate.toISOString(),
-          }),
-        },
-      }),
+      licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString() }),
       taxFilingData: generateTaxFilingData({
         filings: [
           generateTaxFilingCalendarEvent({
@@ -531,13 +522,14 @@ describe("<FilingsCalendar />", () => {
       },
     };
 
-    renderFilingsCalendar(operateReferences, business, licenseEvents);
+    renderFilingsCalendar(operateReferences, business);
 
     expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
     expect(screen.getByText(expirationDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
-    const expirationTitle = `${licenseEvents[0].calendarEventDisplayName} ${Config.licenseEventDefaults.expirationTitleLabel}`;
-
-    expect(screen.getByText(expirationTitle)).toBeInTheDocument();
+    const expectedName = `${LookupIndustryById("home-contractor").licenseType} ${
+      Config.licenseEventDefaults.expirationTitleLabel
+    }`;
+    expect(screen.getByText(expectedName)).toBeInTheDocument();
   });
 
   it("sends analytics when feedback modal link is clicked", () => {

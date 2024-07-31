@@ -1,27 +1,26 @@
 import {
   ACTIVE_STATECODE,
-  BusinessAddressesClient,
-  BusinessIdAndLicenseSearchNameAndAddresses,
-  BusinessIdAndName,
-} from "@client/dynamics/license-status/rgbLicenseStatusTypes";
+  BusinessAddressClient,
+  BusinessIdAndLicenseSearchAddresses,
+} from "@client/dynamics/license-status/types";
 import { LogWriterType } from "@libs/logWriter";
 import { LicenseSearchAddress } from "@shared/license";
 import axios, { AxiosError } from "axios";
 
-export const RgbBusinessAddressesClient = (
+export const DynamicsBusinessAddressClient = (
   logWriter: LogWriterType,
   orgUrl: string
-): BusinessAddressesClient => {
+): BusinessAddressClient => {
   const getBusinessAddresses = async (
     accessToken: string,
-    businessIdAndName: BusinessIdAndName
+    businessId: string
   ): Promise<LicenseSearchAddress[]> => {
     const logId = logWriter.GetId();
-    logWriter.LogInfo(`Rgb Business Addresses Client - Id:${logId}`);
+    logWriter.LogInfo(`Dynamics Business Address Client - Id:${logId}`);
 
     return axios
       .get(
-        `${orgUrl}/api/data/v9.2/rgb_addresses?$select=createdon,rgb_city,rgb_county,rgb_name,rgb_state,rgb_street1,rgb_street2,rgb_typecode,rgb_zip,statecode&$filter=(_rgb_businessid_value eq ${businessIdAndName.businessId})`,
+        `${orgUrl}/api/data/v9.2/rgb_addresses?$select=createdon,rgb_city,rgb_county,rgb_name,rgb_state,rgb_street1,rgb_street2,rgb_typecode,rgb_zip,statecode&$filter=(_rgb_businessid_value eq ${businessId})&$top=50`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -30,7 +29,7 @@ export const RgbBusinessAddressesClient = (
       )
       .then((response) => {
         logWriter.LogInfo(
-          `Dynamics Business Addresses Client - Id:${logId} - Response: ${JSON.stringify(response.data)}`
+          `Dynamics Business Address Client - Id:${logId} - Response: ${JSON.stringify(response.data)}`
         );
         const activeAddresses = response.data.value.filter(
           (address: DynamicsApiAddressResponse) => address.statecode === ACTIVE_STATECODE
@@ -38,32 +37,27 @@ export const RgbBusinessAddressesClient = (
         return activeAddresses.map((address: DynamicsApiAddressResponse) => processAddress(address));
       })
       .catch((error: AxiosError) => {
-        logWriter.LogError(`Dynamics Business Addresses Client - Id:${logId} - Error:`, error);
+        logWriter.LogError(`Dynamics Business Address Client - Id:${logId} - Error:`, error);
         throw error.response?.status;
       });
   };
 
-  const getBusinessAddressesForAllBusinessIds = async (
+  const getBusinessIdsAndLicenseSearchAddresses = async (
     accessToken: string,
-    businessIdsAndNames: BusinessIdAndName[]
-  ): Promise<BusinessIdAndLicenseSearchNameAndAddresses[]> => {
-    const getBusinessAddressesById = async (
-      businessIdAndName: BusinessIdAndName
-    ): Promise<BusinessIdAndLicenseSearchNameAndAddresses> => {
+    businessIds: string[]
+  ): Promise<BusinessIdAndLicenseSearchAddresses[]> => {
+    const getBusinessAddressesById = async (id: string): Promise<BusinessIdAndLicenseSearchAddresses> => {
       return {
-        businessId: businessIdAndName.businessId,
-        name: businessIdAndName.name,
-        addresses: await getBusinessAddresses(accessToken, businessIdAndName),
+        businessId: id,
+        addresses: await getBusinessAddresses(accessToken, id),
       };
     };
 
-    return await Promise.all(
-      businessIdsAndNames.map((businessIdAndName) => getBusinessAddressesById(businessIdAndName))
-    );
+    return await Promise.all(businessIds.map((id) => getBusinessAddressesById(id)));
   };
 
   return {
-    getBusinessAddressesForAllBusinessIds,
+    getBusinessIdsAndLicenseSearchAddresses,
   };
 };
 

@@ -1,15 +1,14 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import { LicenseEventType } from "@/lib/types/types";
+import { LicenseEvent } from "@/lib/types/types";
 import LicensePage from "@/pages/licenses/[licenseUrlSlug]";
 import { generateLicenseEvent } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
-  generateLicenseDetails,
+  generateProfileData,
   getCurrentDate,
   LicenseEventSubtype,
-  randomElementFromArray,
+  LookupIndustryById,
 } from "@businessnjgovnavigator/shared";
-import { taskIdToLicenseName } from "@businessnjgovnavigator/shared/";
 import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
@@ -24,7 +23,7 @@ describe("license page", () => {
     jest.resetAllMocks();
   });
 
-  const renderLicensePage = (license: LicenseEventType, licenseEventType: LicenseEventSubtype): void => {
+  const renderLicensePage = (license: LicenseEvent, licenseEventType: LicenseEventSubtype): void => {
     render(
       <ThemeProvider theme={createTheme()}>
         <LicensePage license={license} licenseEventType={licenseEventType} />
@@ -34,9 +33,13 @@ describe("license page", () => {
 
   it("shows the basic expiration details and expiration date", () => {
     const expirationDate = currentDate.add(4, "days");
-    const licenseName = randomElementFromArray(Object.values(taskIdToLicenseName));
+
+    useMockBusiness({
+      licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString() }),
+      profileData: generateProfileData({ industryId: "home-contractor" }),
+    });
+
     const license = generateLicenseEvent({
-      licenseName,
       urlSlug: "license-url-slug-1",
       filename: "filename-1",
       callToActionLink: "cta-link-1",
@@ -44,15 +47,7 @@ describe("license page", () => {
       contentMd: "content-1",
     });
 
-    useMockBusiness({
-      licenseData: generateLicenseData({
-        licenses: {
-          [licenseName]: generateLicenseDetails({
-            expirationDateISO: expirationDate.toISOString(),
-          }),
-        },
-      }),
-    });
+    const licenseName = LookupIndustryById("home-contractor").licenseType;
 
     renderLicensePage(license, "expiration");
 
@@ -71,25 +66,19 @@ describe("license page", () => {
   it("shows the basic renewal details and renewal date", () => {
     const expirationDate = currentDate.add(4, "days");
 
-    const licenseName = randomElementFromArray(Object.values(taskIdToLicenseName));
+    useMockBusiness({
+      licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString() }),
+      profileData: generateProfileData({ industryId: "home-contractor" }),
+    });
+
     const license = generateLicenseEvent({
-      licenseName,
       urlSlug: "license-url-slug-1",
       filename: "filename-1",
       callToActionLink: "cta-link-1",
       callToActionText: "cta-text-1",
       contentMd: "content-1",
     });
-
-    useMockBusiness({
-      licenseData: generateLicenseData({
-        licenses: {
-          [licenseName]: generateLicenseDetails({
-            expirationDateISO: expirationDate.toISOString(),
-          }),
-        },
-      }),
-    });
+    const licenseName = LookupIndustryById("home-contractor").licenseType;
 
     renderLicensePage(license, "renewal");
 

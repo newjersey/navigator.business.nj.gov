@@ -18,7 +18,6 @@ import {
   AnytimeActionTask,
   Certification,
   Funding,
-  LicenseEventType,
   OperateReference,
   RoadmapDisplayContent,
 } from "@/lib/types/types";
@@ -35,7 +34,6 @@ interface Props {
   fundings: Funding[];
   certifications: Certification[];
   elevatorViolations?: boolean;
-  licenseEvents: LicenseEventType[];
 }
 
 export const DashboardOnDesktop = (props: Props): ReactElement => {
@@ -87,10 +85,7 @@ export const DashboardOnDesktop = (props: Props): ReactElement => {
                   </>
                 )}
                 {operatingPhase.displayCalendarType !== "NONE" && (
-                  <FilingsCalendar
-                    operateReferences={props.operateReferences}
-                    licenseEvents={props.licenseEvents}
-                  />
+                  <FilingsCalendar operateReferences={props.operateReferences} />
                 )}
                 {operatingPhase.displayHideableRoadmapTasks && <HideableTasks />}
               </div>

@@ -44,7 +44,7 @@ import {
   ContextualInfoFile,
   Filing,
   Funding,
-  LicenseEventType,
+  LicenseEvent,
   NonEssentialQuestion,
   PageMetadata,
   RoadmapDisplayContent,
@@ -76,7 +76,7 @@ interface Props {
   roadmapDisplayContent: RoadmapDisplayContent;
   contextualInfo: ContextualInfoFile[];
   archivedContextualInfo: ContextualInfoFile[];
-  licenseEvents: LicenseEventType[];
+  licenseEvents: LicenseEvent[];
   anytimeActionTasks: AnytimeActionTask[];
   anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];

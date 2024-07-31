@@ -20,7 +20,6 @@ agencyAdditionalContext: Board of Pharmacy
 divisionPhone: (973) 504-6450
 webflowType: business-license
 webflowId: 640b8467a1b0444c01a311c3
-licenseName: Pharmacy-Pharmacy
 ---
 ## Application Requirements
 

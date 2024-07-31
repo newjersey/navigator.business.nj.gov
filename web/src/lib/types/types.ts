@@ -13,8 +13,6 @@ import {
   FormationMember,
   FormationSigner,
   IndustrySpecificData,
-  LicenseName,
-  LicenseTaskID,
   Preferences,
   ProfileData,
   SectionType,
@@ -209,6 +207,9 @@ interface AnytimeAction {
   name: string;
   icon: string;
   filename: string;
+  industryIds: string[];
+  sectorIds: string[];
+  applyToAllUsers: boolean;
 }
 
 export interface AnytimeActionTask extends AnytimeAction {
@@ -218,27 +219,13 @@ export interface AnytimeActionTask extends AnytimeAction {
   callToActionText: string | undefined;
   form: string | undefined;
   summaryDescriptionMd: string;
-  industryIds: string[];
-  sectorIds: string[];
-  applyToAllUsers: boolean;
 }
 
 export interface AnytimeActionLink extends AnytimeAction {
   externalRoute: string;
-  industryIds: string[];
-  sectorIds: string[];
-  applyToAllUsers: boolean;
 }
 
-export interface AnytimeActionLicenseReinstatement extends AnytimeAction {
-  licenseName: LicenseName;
-  urlSlug: string;
-  contentMd: string;
-  callToActionLink: string | undefined;
-  callToActionText: string | undefined;
-  form: string | undefined;
-  summaryDescriptionMd: string;
-}
+export interface AnytimeActionLicenseReinstatement extends AnytimeActionTask {}
 
 export type FundingType =
   | "tax credit"
@@ -360,8 +347,10 @@ export interface Task {
   industryId?: string;
 }
 
-export interface TaskWithLicenseTaskId extends Task {
-  id: LicenseTaskID;
+export interface LicenseTask extends Task {
+  licenseCertificationClassification: string;
+  divisionPhone: string;
+  webflowId: string;
 }
 
 export interface WebflowLicense {
@@ -428,16 +417,13 @@ export interface Filing {
   agency?: TaxAgency | null;
 }
 
-export interface LicenseEventType {
-  calendarEventDisplayName: string;
+export interface LicenseEvent {
   filename: string;
   urlSlug: string;
   callToActionLink?: string;
   callToActionText?: string;
   contentMd: string;
   previewType?: LicenseEventSubtype;
-  summaryDescriptionMd?: string;
-  licenseName: LicenseName;
 }
 
 export type OperateReference = {

@@ -1,7 +1,5 @@
 ---
 urlSlug: pharmacy
-calendarEventDisplayName: Pharmacy TBD
-licenseName: Pharmacy-Pharmacy
 previewType: renewal
 summaryDescriptionMd: Your pharmacy permit will expire every year.
 callToActionLink: https://www.njconsumeraffairs.gov/renewals/Pages/default.aspx
