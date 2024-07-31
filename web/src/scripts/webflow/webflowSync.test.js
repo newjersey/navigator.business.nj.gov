@@ -596,7 +596,7 @@ describe("webflow syncing", () => {
       ]);
 
       await expect(getNewFundings()).rejects.toThrow(
-        "Agency Types are mis-matched, please check with webflow"
+        "Agency Types for agency lol are mis-matched in nj-accelerate. Please check with Webflow."
       );
     });
 
@@ -625,7 +625,7 @@ describe("webflow syncing", () => {
       ]);
 
       await expect(getNewFundings()).rejects.toThrow(
-        "Funding Types are mis-matched, please check with webflow"
+        "Funding Types for funding type lol are mis-matched in nj-accelerate. Please check with Webflow."
       );
     });
 
