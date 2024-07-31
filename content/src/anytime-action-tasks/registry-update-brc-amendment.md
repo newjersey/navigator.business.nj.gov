@@ -8,7 +8,10 @@ applyToAllUsers: true
 icon: update-purple.svg
 urlSlug: registry-update-brc-amendment
 summaryDescriptionMd: >-
-  If your business registration information has changed since you last updated your `New Jersey Tax/Employer ID|tax-id` or your public business registry account, you must report those changes to the New Jersey Division of Revenue and Enterprise Services (DORES).
+  If your business registration information has changed since you last updated
+  your `New Jersey Tax/Employer ID|tax-id` or your public business registry
+  account, you must report those changes to the New Jersey Division of Revenue
+  and Enterprise Services (DORES).
 
 
   Depending on the type of changes, this may include updating your business charter or obtaining a new `Business Registration Certificate (BRC)|business-reg-certificate`.
@@ -47,8 +50,9 @@ Use the amended [Business Registration Application](https://www.nj.gov/treasury/
 - NJ business code
 - Town code
 - `NAICS code|naics`
+- `Standard Industrial Classification (SIC) code|sic-code`
+
 - Date of incorporation
-- Standard industrial code
 
 ## Update Your Business Charter
 
