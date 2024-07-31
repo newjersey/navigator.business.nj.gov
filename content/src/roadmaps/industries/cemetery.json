@@ -2,6 +2,25 @@
   "naicsCodes": "812220",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 5,
+      "task": "determine-naics-code",
+      "required": true
+    },
+    {
+      "step": 1,
+      "weight": 100,
+      "task": "business-structure",
+      "required": true
+    }
+  ],
   "name": "Cemetery ",
   "nonEssentialQuestionsIds": [
     "weights-measures"
