@@ -91,6 +91,11 @@ const agencyMap = {
     slug: "New Jersey Business Action Center",
     id: "529992b90dbeaba3826e4afa761c1c8e",
   },
+  "invest-newark": {
+    name: "Invest Newark",
+    slug: "Invest Newark",
+    id: "e6e7d41a5377718d251859ceea418ed6",
+  },
 };
 
 const getFundingOptions = async () => {
@@ -178,17 +183,26 @@ const getFundingFromMd = (i, sectors) => {
     return v.slug === i.fundingType;
   })?.id;
   if (fundingType === undefined) {
-    throw new Error("Funding Types are mis-matched, please check with webflow");
+    throw new Error(
+      `Funding Types for funding type ${i.fundingType} are mis-matched in ${i.filename}. Please check with Webflow.`
+    );
   }
   const agency = agencyMap[i.agency[0]]?.id;
   if (agency === undefined) {
-    throw new Error("Agency Types are mis-matched, please check with webflow");
+    /*  If the following error is thrown, it may be because the agency doesn't exist in Webflow.
+        You will have to create the agency in Webflow, then call the collection details endpoint
+        with the fundingCollectionId to get the ID of the option, then adding it to agencyMap. */
+    throw new Error(
+      `Agency Types for agency ${i.agency[0]} are mis-matched in ${i.filename}. Please check with Webflow.`
+    );
   }
   const status = fundingStatusMap.find((v) => {
     return v.slug === i.status;
   })?.id;
   if (status === undefined) {
-    throw new Error("Funding Status Types are mis-matched, please check with webflow");
+    throw new Error(
+      `Funding Status Types for funding status type ${i.status} are mis-matched in ${i.filename}. Please check with Webflow.`
+    );
   }
 
   const certifications =
