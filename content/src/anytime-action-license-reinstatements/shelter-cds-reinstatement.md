@@ -27,13 +27,12 @@ summaryDescriptionMd: >-
 * Names, titles, and residential addresses of each owner, partner, officer, or principal shareholder
 * Name and address of the person who has administrative or managerial responsibility for the registered location
 * Criminal history since last renewal, if applicable
-* CDS registration restrictions since last renewal, if applicable
-* CDS registration suspension, surrender, denial, or revocation since last renewal, if applicable 
+* CDS registration suspension, surrender, denial, revocation, or restrictions since last renewal, if applicable 
 * Applicable fees paid, once the DCU has sent an invoice
 
 Your reinstatement application must be signed in front of and by a notary public.
 
-:::callout{ showHeader="true" headerText="What if I don't reinstate my registration? " showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="What if I don't reinstate my registration?" showIcon="false" calloutType="conditional" }
 
 You cannot dispense or store any CDS and may be subject to legal consequences and fines if you do so.
 
