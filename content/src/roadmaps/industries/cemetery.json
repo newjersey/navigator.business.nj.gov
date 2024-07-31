@@ -31,6 +31,16 @@
       "weight": 22,
       "task": "register-for-taxes",
       "required": true
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "get-insurance"
     }
   ],
   "name": "Cemetery ",
