@@ -14,8 +14,7 @@ callToActionText: Renew My Animal Shelter’s CDS Registration
 
 * U.S. Drug Enforcement Administration (DEA) registration number
 * Criminal history since last renewal, if applicable
-* Controlled Dangerous Substances (CDS) or DEA registration suspension, surrender, denial, or revocation since last renewal, if applicable 
-* CDS registration restrictions since last renewal, if applicable
+* Controlled Dangerous Substances (CDS) or DEA registration suspension, surrender, denial, revocation, or restrictions since last renewal, if applicable 
 * Details of any professional license revocation or surrender since last renewal, if applicable
 * New employee information since last renewal, including name, address, email, and phone number, if applicable
 * Applicable fees paid
