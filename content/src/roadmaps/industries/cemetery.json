@@ -19,6 +19,18 @@
       "weight": 100,
       "task": "business-structure",
       "required": true
+    },
+    {
+      "step": 2,
+      "weight": 16,
+      "task": "register-for-ein",
+      "required": true
+    },
+    {
+      "step": 2,
+      "weight": 22,
+      "task": "register-for-taxes",
+      "required": true
     }
   ],
   "name": "Cemetery ",
