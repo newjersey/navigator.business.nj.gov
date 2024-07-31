@@ -1,6 +1,6 @@
-import { DynamicsBusinessIdsClient } from "@client/dynamics/license-status/DynamicsBusinessIdsClient";
-import { BusinessIdClient } from "@client/dynamics/license-status/types";
-import { NO_MATCH_ERROR } from "@domain/types";
+import { RgbBusinessIdsAndNamesClient } from "@client/dynamics/license-status/RgbBusinessIdsAndNamesClient";
+import { BusinessIdsAndNamesClient } from "@client/dynamics/license-status/rgbLicenseStatusTypes";
+import { NO_ADDRESS_MATCH_ERROR } from "@domain/types";
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 
@@ -8,8 +8,8 @@ jest.mock("axios");
 jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
-describe("DynamicsBusinessIdsClient", () => {
-  let client: BusinessIdClient;
+describe("RgbBusinessIdsClient", () => {
+  let client: BusinessIdsAndNamesClient;
   let logger: LogWriterType;
 
   const ORG_URL = "www.test-org-url.com";
@@ -18,7 +18,7 @@ describe("DynamicsBusinessIdsClient", () => {
     jest.resetAllMocks();
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
 
-    client = DynamicsBusinessIdsClient(logger, ORG_URL);
+    client = RgbBusinessIdsAndNamesClient(logger, ORG_URL);
   });
 
   const mockAccessToken = "access-granted";
@@ -45,12 +45,18 @@ describe("DynamicsBusinessIdsClient", () => {
     };
 
     mockAxios.get.mockResolvedValue({ data: businessIdMockResponse });
-    expect(await client.getMatchedBusinessIds(mockAccessToken, mockNametoSearch)).toEqual([
-      mockBusinessId1,
-      mockBusinessId2,
+    expect(await client.getMatchedBusinessIdsAndNames(mockAccessToken, mockNametoSearch)).toEqual([
+      {
+        name: mockBusinessName1,
+        businessId: mockBusinessId1,
+      },
+      {
+        name: mockBusinessName2,
+        businessId: mockBusinessId2,
+      },
     ]);
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `${ORG_URL}/api/data/v9.2/accounts?$select=name,accountid&$filter=(contains(name, '${mockNametoSearch}'))&$top=50`,
+      `${ORG_URL}/api/data/v9.2/accounts?$select=name,accountid&$filter=(contains(name, '${mockNametoSearch}'))`,
       {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
@@ -61,7 +67,17 @@ describe("DynamicsBusinessIdsClient", () => {
 
   it("rejects with NO_MATCH error when received data value is an empty array", async () => {
     mockAxios.get.mockResolvedValue({ data: { value: [] } });
-    const expectedThrownError = client.getMatchedBusinessIds(mockAccessToken, mockNametoSearch);
-    await expect(expectedThrownError).rejects.toEqual(new Error(NO_MATCH_ERROR));
+    const expectedThrownError = client.getMatchedBusinessIdsAndNames(mockAccessToken, mockNametoSearch);
+    await expect(expectedThrownError).rejects.toEqual(new Error(NO_ADDRESS_MATCH_ERROR));
+  });
+
+  it("throws status error when api call fails", async () => {
+    mockAxios.get.mockRejectedValue({
+      response: { status: 500 },
+    });
+
+    await expect(client.getMatchedBusinessIdsAndNames(mockAccessToken, mockNametoSearch)).rejects.toEqual(
+      500
+    );
   });
 });

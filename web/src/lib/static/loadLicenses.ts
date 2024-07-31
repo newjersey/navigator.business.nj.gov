@@ -1,4 +1,4 @@
-import { LicenseEvent } from "@/lib/types/types";
+import { LicenseEventType } from "@/lib/types/types";
 import fs from "fs";
 import path from "path";
 import { convertLicenseMd } from "../utils/markdownReader";
@@ -11,7 +11,7 @@ export type LicenseUrlSlugParam = {
 
 const licensesDir = path.join(process.cwd(), "..", "content", "src", "licenses");
 
-export const loadAllLicenses = (): LicenseEvent[] => {
+export const loadAllLicenses = (): LicenseEventType[] => {
   const fileNames = fs.readdirSync(licensesDir);
   return fileNames.map((fileName) => {
     return loadLicensesByFileName(fileName);
@@ -30,12 +30,12 @@ export const loadAllLicenseUrlSlugs = (): PathParams<LicenseUrlSlugParam>[] => {
   });
 };
 
-export const loadLicenseByUrlSlug = (urlSlug: string): LicenseEvent => {
+export const loadLicenseByUrlSlug = (urlSlug: string): LicenseEventType => {
   const matchingFileName = getFileNameByUrlSlug(licensesDir, urlSlug.split("-").slice(0, -1).join("-"));
   return loadLicensesByFileName(matchingFileName);
 };
 
-export const loadLicensesByFileName = (fileName: string): LicenseEvent => {
+export const loadLicensesByFileName = (fileName: string): LicenseEventType => {
   const fullPath = path.join(licensesDir, `${fileName}`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const fileNameWithoutMd = fileName.split(".md")[0];

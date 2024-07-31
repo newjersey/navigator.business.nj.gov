@@ -1,15 +1,17 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { OperateReference } from "@/lib/types/types";
+import { generateLicenseEvent } from "@/test/factories";
 import * as shared from "@businessnjgovnavigator/shared";
 import {
   defaultDateFormat,
   generateBusiness,
-  generateProfileData,
+  generateLicenseDetails,
   generateTaxFilingCalendarEvent,
   generateTaxFilingData,
-  LookupIndustryById,
   parseDateWithFormat,
+  randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
+import { taskIdToLicenseName } from "@businessnjgovnavigator/shared/";
 import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Dayjs } from "dayjs";
@@ -74,6 +76,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
+        licenseEvents={[generateLicenseEvent({})]}
       />
     );
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
@@ -102,6 +105,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         }}
         num={month - 1}
         activeYear={year}
+        licenseEvents={[generateLicenseEvent({})]}
       />
     );
     expect(screen.queryByText("Tax Filing Old")).not.toBeInTheDocument();
@@ -121,6 +125,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
     render(
       <FilingsCalendarSingleGrid
         business={business}
+        licenseEvents={[generateLicenseEvent({})]}
         operateReferences={{
           "tax-filing-old": {
             name: "Tax Filing Old",
@@ -142,6 +147,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
     });
     render(
       <FilingsCalendarSingleGrid
+        licenseEvents={[generateLicenseEvent({})]}
         business={business}
         operateReferences={operateReferences}
         num={month}
@@ -153,13 +159,21 @@ describe("<FilingsCalendarSingleGrid />", () => {
   });
 
   it("renders a licenseEvent expiration task", () => {
-    const licenseData = generateLicenseData({ expirationISO: currentDate.add(4, "days").toISOString() });
+    const licenseName = randomElementFromArray(Object.values(taskIdToLicenseName));
+    const licenseEvent = generateLicenseEvent({ licenseName });
     const business = generateBusiness({
-      licenseData,
-      profileData: generateProfileData({ industryId: "cosmetology" }),
+      licenseData: generateLicenseData({
+        licenses: {
+          [licenseName]: generateLicenseDetails({
+            expirationDateISO: currentDate.add(4, "days").toISOString(),
+          }),
+        },
+      }),
     });
+
     render(
       <FilingsCalendarSingleGrid
+        licenseEvents={[licenseEvent]}
         business={business}
         operateReferences={operateReferences}
         num={month}
@@ -167,59 +181,80 @@ describe("<FilingsCalendarSingleGrid />", () => {
       />
     );
 
-    const expectedTitle = `${LookupIndustryById(business.profileData.industryId).licenseType} ${
-      Config.licenseEventDefaults.expirationTitleLabel
-    }`;
+    const expectedTitle = `${licenseEvent.calendarEventDisplayName} ${Config.licenseEventDefaults.expirationTitleLabel}`;
     expect(screen.getByText(expectedTitle)).toBeInTheDocument();
+    expect(screen.getByTestId("calendar-event-anchor")).toHaveAttribute(
+      "href",
+      `licenses/${licenseEvent.urlSlug}-expiration`
+    );
   });
 
   it("renders a licenseEvent renewal task", () => {
-    const licenseData = generateLicenseData({
-      expirationISO: currentDate.add(4, "days").toISOString(),
-    });
+    const licenseName = randomElementFromArray(Object.values(taskIdToLicenseName));
+    const licenseEvent = generateLicenseEvent({ licenseName });
     const business = generateBusiness({
-      licenseData,
-      profileData: generateProfileData({ industryId: "cosmetology" }),
+      licenseData: generateLicenseData({
+        licenses: {
+          [licenseName]: generateLicenseDetails({
+            expirationDateISO: currentDate.add(4, "days").toISOString(),
+          }),
+        },
+      }),
     });
+
     render(
       <FilingsCalendarSingleGrid
+        licenseEvents={[licenseEvent]}
         business={business}
         operateReferences={operateReferences}
         num={currentDate.add(1, "month").month()}
         activeYear={currentDate.year().toString()}
       />
     );
-    const expectedTitle = `${LookupIndustryById(business.profileData.industryId).licenseType} ${
-      Config.licenseEventDefaults.renewalTitleLabel
-    }`;
+    const expectedTitle = `${licenseEvent.calendarEventDisplayName} ${Config.licenseEventDefaults.renewalTitleLabel}`;
     expect(screen.getByText(expectedTitle)).toBeInTheDocument();
+    expect(screen.getByTestId("calendar-event-anchor")).toHaveAttribute(
+      "href",
+      `licenses/${licenseEvent.urlSlug}-renewal`
+    );
   });
 
   it("renders expiration event and renewal event in the same month when expiration is on the 1st of a 31-day month", () => {
-    const licenseData = generateLicenseData({
-      expirationISO: currentDate.add(1, "year").month(0).date(1).toISOString(),
-    });
+    const licenseName = randomElementFromArray(Object.values(taskIdToLicenseName));
+    const licenseEvent = generateLicenseEvent({ licenseName });
     const business = generateBusiness({
-      licenseData,
-      profileData: generateProfileData({ industryId: "cosmetology" }),
+      licenseData: generateLicenseData({
+        licenses: {
+          [licenseName]: generateLicenseDetails({
+            expirationDateISO: currentDate.add(1, "year").month(0).date(1).toISOString(),
+          }),
+        },
+      }),
     });
+
     render(
       <FilingsCalendarSingleGrid
+        licenseEvents={[licenseEvent]}
         business={business}
         operateReferences={operateReferences}
         num={0}
         activeYear={currentDate.add(1, "year").year().toString()}
       />
     );
-    const expectedExpirationTitle = `${LookupIndustryById(business.profileData.industryId).licenseType} ${
-      Config.licenseEventDefaults.expirationTitleLabel
-    }`;
 
-    const expectedRenewalTitle = `${LookupIndustryById(business.profileData.industryId).licenseType} ${
-      Config.licenseEventDefaults.renewalTitleLabel
-    }`;
-    expect(screen.getByText(expectedExpirationTitle)).toBeInTheDocument();
-    expect(screen.getByText(expectedRenewalTitle)).toBeInTheDocument();
+    const expirationTitle = `${licenseEvent.calendarEventDisplayName} ${Config.licenseEventDefaults.expirationTitleLabel}`;
+    expect(screen.getByText(expirationTitle)).toBeInTheDocument();
+    expect(screen.getAllByTestId("calendar-event-anchor")[0]).toHaveAttribute(
+      "href",
+      `licenses/${licenseEvent.urlSlug}-expiration`
+    );
+
+    const renewalTitle = `${licenseEvent.calendarEventDisplayName} ${Config.licenseEventDefaults.renewalTitleLabel}`;
+    expect(screen.getByText(renewalTitle)).toBeInTheDocument();
+    expect(screen.getAllByTestId("calendar-event-anchor")[1]).toHaveAttribute(
+      "href",
+      `licenses/${licenseEvent.urlSlug}-renewal`
+    );
   });
 
   it("does not render expand collapse button when there are only two tax filings", () => {
@@ -228,6 +263,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
     });
     render(
       <FilingsCalendarSingleGrid
+        licenseEvents={[]}
         business={business}
         operateReferences={operateReferences}
         num={month}
@@ -250,33 +286,39 @@ describe("<FilingsCalendarSingleGrid />", () => {
       ...taxFilingTwo,
       dueDate: currentDate.add(2, "days").toISOString(),
     };
+
+    const licenseName = randomElementFromArray(Object.values(taskIdToLicenseName));
+    const licenseEvent = generateLicenseEvent({ licenseName });
     const business = generateBusiness({
-      licenseData: generateLicenseData({
-        expirationISO: currentDate.add(1, "days").toISOString(),
-        status: "ACTIVE",
-      }),
       taxFilingData: generateTaxFilingData({ filings: [last, first] }),
-      profileData: generateProfileData({ industryId: "home-contractor" }),
+      licenseData: generateLicenseData({
+        licenses: {
+          [licenseName]: generateLicenseDetails({
+            expirationDateISO: currentDate.add(1, "days").toISOString(),
+            licenseStatus: "ACTIVE",
+          }),
+        },
+      }),
     });
+
     render(
       <FilingsCalendarSingleGrid
         business={business}
+        licenseEvents={[licenseEvent]}
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
       />
     );
 
-    const expectedLicenseTitle = `${LookupIndustryById(business.profileData.industryId).licenseType} ${
-      Config.licenseEventDefaults.expirationTitleLabel
-    }`;
+    const expirationTitle = `${licenseEvent.calendarEventDisplayName} ${Config.licenseEventDefaults.expirationTitleLabel}`;
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
-    expect(screen.getByText(expectedLicenseTitle)).toBeInTheDocument();
+    expect(screen.getByText(expirationTitle)).toBeInTheDocument();
     expect(screen.queryByText("Tax Filing Two")).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByText(Config.dashboardDefaults.viewMoreFilingsButton));
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
-    expect(screen.getByText(expectedLicenseTitle)).toBeInTheDocument();
+    expect(screen.getByText(expirationTitle)).toBeInTheDocument();
     expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();
   });
 
@@ -293,35 +335,41 @@ describe("<FilingsCalendarSingleGrid />", () => {
       ...taxFilingThree,
       dueDate: currentDate.add(3, "days").toISOString(),
     };
+
+    const licenseName = randomElementFromArray(Object.values(taskIdToLicenseName));
+    const licenseEvent = generateLicenseEvent({ licenseName });
     const business = generateBusiness({
-      licenseData: generateLicenseData({
-        expirationISO: currentDate.add(2, "days").toISOString(),
-        status: "ACTIVE",
-      }),
       taxFilingData: generateTaxFilingData({ filings: [first, last, second] }),
-      profileData: generateProfileData({ industryId: "home-contractor" }),
+      licenseData: generateLicenseData({
+        licenses: {
+          [licenseName]: generateLicenseDetails({
+            expirationDateISO: currentDate.add(2, "days").toISOString(),
+            licenseStatus: "ACTIVE",
+          }),
+        },
+      }),
     });
+
     render(
       <FilingsCalendarSingleGrid
+        licenseEvents={[licenseEvent]}
         business={business}
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
       />
     );
+    const expirationTitle = `${licenseEvent.calendarEventDisplayName} ${Config.licenseEventDefaults.expirationTitleLabel}`;
 
-    const expectedLicenseTitle = `${LookupIndustryById(business.profileData.industryId).licenseType} ${
-      Config.licenseEventDefaults.expirationTitleLabel
-    }`;
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
     expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();
-    expect(screen.queryByText(expectedLicenseTitle)).not.toBeInTheDocument();
+    expect(screen.queryByText(expirationTitle)).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByText(Config.dashboardDefaults.viewMoreFilingsButton));
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
     expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();
     expect(screen.getByText("Tax Filing Three")).toBeInTheDocument();
-    expect(screen.getByText(expectedLicenseTitle)).toBeInTheDocument();
+    expect(screen.getByText(expirationTitle)).toBeInTheDocument();
   });
 
   it("shows and hides the additional tax filings when the view more / view less button is clicked", () => {
@@ -330,6 +378,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
     });
     render(
       <FilingsCalendarSingleGrid
+        licenseEvents={[]}
         business={business}
         operateReferences={operateReferences}
         num={month}

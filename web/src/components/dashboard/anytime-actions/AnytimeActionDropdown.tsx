@@ -40,12 +40,10 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
   };
 
   const licenseReinstatementMatch = (action: AnytimeActionLicenseReinstatement): boolean => {
-    return !!(
-      action.industryIds &&
-      industryId &&
-      action.industryIds.includes(industryId) &&
-      business.licenseData?.status === "EXPIRED"
-    );
+    const licenseNameFromAnytimeAction = action.licenseName;
+    const licenseStatus = business?.licenseData?.licenses?.[licenseNameFromAnytimeAction]?.licenseStatus;
+
+    return licenseStatus === "EXPIRED";
   };
 
   const anytimeActionLinkWithType = props.anytimeActionLinks

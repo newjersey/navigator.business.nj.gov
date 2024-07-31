@@ -28,19 +28,18 @@ import { DynamicsHousingHealthCheckClient } from "@client/dynamics/housing/Dynam
 import { DynamicsHotelMotelRegistrationClient } from "@client/dynamics/housing/DynamicsHousingHotelMotelRegistrationClient";
 import { DynamicsHotelMotelRegistrationStatusClient } from "@client/dynamics/housing/DynamicsHousingHotelMotelRegistrationStatusClient";
 import { DynamicsHousingPropertyInterestClient } from "@client/dynamics/housing/DynamicsHousingPropertyInterestClient";
-import { DynamicsBusinessAddressClient } from "@client/dynamics/license-status/DynamicsBusinessAddressClient";
-import { DynamicsBusinessIdsClient } from "@client/dynamics/license-status/DynamicsBusinessIdsClient";
-import { DynamicsChecklistItemsClient } from "@client/dynamics/license-status/DynamicsChecklistItemsClient";
-import { DynamicsLicenseApplicationIdClient } from "@client/dynamics/license-status/DynamicsLicenseApplicationIdClient";
-import { DynamicsLicenseHealthCheckClient } from "@client/dynamics/license-status/DynamicsLicenseHealthCheckClient";
-import { DynamicsLicenseStatusClient } from "@client/dynamics/license-status/DynamicsLicenseStatusClient";
+import { RgbBusinessAddressesClient } from "@client/dynamics/license-status/RgbBusinessAddressesClient";
+import { RgbBusinessIdsAndNamesClient } from "@client/dynamics/license-status/RgbBusinessIdsAndNamesClient";
+import { RgbChecklistItemsClient } from "@client/dynamics/license-status/RgbChecklistItemsClient";
+import { RgbLicenseApplicationIdsClient } from "@client/dynamics/license-status/RgbLicenseApplicationIdsClient";
+import { RgbLicenseHealthCheckClient } from "@client/dynamics/license-status/RgbLicenseHealthCheckClient";
+import { RgbLicenseStatusClient } from "@client/dynamics/license-status/RgbLicenseStatusClient";
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
 import { WebserviceLicenseStatusClient } from "@client/WebserviceLicenseStatusClient";
 import { WebserviceLicenseStatusProcessorClient } from "@client/WebserviceLicenseStatusProcessorClient";
 import { dynamoDbTranslateConfig, DynamoUserDataClient } from "@db/DynamoUserDataClient";
-import { searchLicenseStatusFactory } from "@domain/license-status/searchLicenseStatusFactory";
 import { HealthCheckMethod } from "@domain/types";
 import { updateSidebarCards } from "@domain/updateSidebarCards";
 import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFactory";
@@ -108,20 +107,20 @@ const dynamicsLicenseStatusAccessTokenClient = DynamicsAccessTokenClient(logger,
   clientSecret: process.env.DYNAMICS_LICENSE_STATUS_SECRET || "",
 });
 
-const dynamicsBusinessIdClient = DynamicsBusinessIdsClient(logger, DYNAMICS_LICENSE_STATUS_URL);
-const dynamicsAddressClient = DynamicsBusinessAddressClient(logger, DYNAMICS_LICENSE_STATUS_URL);
-const dynamicsApplicationIdClient = DynamicsLicenseApplicationIdClient(logger, DYNAMICS_LICENSE_STATUS_URL);
-const dynamicsCheckListItemsClient = DynamicsChecklistItemsClient(logger, DYNAMICS_LICENSE_STATUS_URL);
+const rgbBusinessIdClient = RgbBusinessIdsAndNamesClient(logger, DYNAMICS_LICENSE_STATUS_URL);
+const rgbAddressClient = RgbBusinessAddressesClient(logger, DYNAMICS_LICENSE_STATUS_URL);
+const rgbApplicationIdClient = RgbLicenseApplicationIdsClient(logger, DYNAMICS_LICENSE_STATUS_URL);
+const rgbCheckListItemsClient = RgbChecklistItemsClient(logger, DYNAMICS_LICENSE_STATUS_URL);
 
-const dynamicsLicenseStatusClient = DynamicsLicenseStatusClient(logger, {
-  accessTokenClient: dynamicsLicenseStatusAccessTokenClient,
-  businessIdClient: dynamicsBusinessIdClient,
-  businessAddressClient: dynamicsAddressClient,
-  licenseApplicationIdClient: dynamicsApplicationIdClient,
-  checklistItemsClient: dynamicsCheckListItemsClient,
+const rgbLicenseStatusClient = RgbLicenseStatusClient({
+  dynamicsAccessTokenClient: dynamicsLicenseStatusAccessTokenClient,
+  rgbBusinessIdsAndNamesClient: rgbBusinessIdClient,
+  rgbBusinessAddressesClient: rgbAddressClient,
+  rgbLicenseApplicationIdsClient: rgbApplicationIdClient,
+  rgbChecklistItemsClient: rgbCheckListItemsClient,
 });
 
-const dynamicsLicenseHealthCheckClient = DynamicsLicenseHealthCheckClient(logger, {
+const dynamicsLicenseHealthCheckClient = RgbLicenseHealthCheckClient(logger, {
   accessTokenClient: dynamicsLicenseStatusAccessTokenClient,
   orgUrl: DYNAMICS_LICENSE_STATUS_URL,
 });
@@ -293,11 +292,11 @@ const taxFilingInterface = taxFilingsInterfaceFactory(taxFilingClient);
 
 const addGovDeliveryNewsletter = addNewsletterFactory(govDeliveryNewsletterClient);
 const addToAirtableUserTesting = addToUserTestingFactory(airtableUserTestingClient);
-const searchLicenseStatus = searchLicenseStatusFactory(
+
+const updateLicenseStatus = updateLicenseStatusFactory(
   webserviceLicenseStatusProcessorClient,
-  dynamicsLicenseStatusClient
+  rgbLicenseStatusClient
 );
-const updateLicenseStatus = updateLicenseStatusFactory(searchLicenseStatus);
 const timeStampToBusinessSearch = timeStampBusinessSearch(businessNameClient);
 
 const myNJSelfRegClient = MyNJSelfRegClientFactory(

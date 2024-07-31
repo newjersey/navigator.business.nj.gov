@@ -18,6 +18,7 @@ import { loadAllAnytimeActionTasks } from "@/lib/static/loadAnytimeActionTasks";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFundings } from "@/lib/static/loadFundings";
+import { loadAllLicenses } from "@/lib/static/loadLicenses";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import {
@@ -26,6 +27,7 @@ import {
   AnytimeActionTask,
   Certification,
   Funding,
+  LicenseEventType,
   OperateReference,
   RoadmapDisplayContent,
 } from "@/lib/types/types";
@@ -47,6 +49,7 @@ interface Props {
   anytimeActionTasks: AnytimeActionTask[];
   anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
+  licenseEvents: LicenseEventType[];
 }
 
 const DashboardPage = (props: Props): ReactElement => {
@@ -58,6 +61,10 @@ const DashboardPage = (props: Props): ReactElement => {
   const isLoading = !business || business?.onboardingFormProgress !== "COMPLETED" || !roadmap;
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const [hasElevatorViolations, setHasElevatorViolations] = useState(false);
+
+  // TODO delete console.log
+  console.log("license data:", business?.licenseData);
+  console.log("task progress:", business?.taskProgress);
 
   useMountEffectWhenDefined(() => {
     (async (): Promise<void> => {
@@ -131,6 +138,7 @@ const DashboardPage = (props: Props): ReactElement => {
                 anytimeActionLinks={props.anytimeActionLinks}
                 anytimeActionTasks={props.anytimeActionTasks}
                 elevatorViolations={hasElevatorViolations}
+                licenseEvents={props.licenseEvents}
               />
               <DashboardOnMobile
                 certifications={props.certifications}
@@ -141,6 +149,7 @@ const DashboardPage = (props: Props): ReactElement => {
                 anytimeActionLinks={props.anytimeActionLinks}
                 anytimeActionTasks={props.anytimeActionTasks}
                 elevatorViolations={hasElevatorViolations}
+                licenseEvents={props.licenseEvents}
               />
             </>
           )}
@@ -161,6 +170,7 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
       anytimeActionTasks: loadAllAnytimeActionTasks(),
       anytimeActionLinks: loadAllAnytimeActionLinks(),
       anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
+      licenseEvents: loadAllLicenses(),
     },
   };
 };

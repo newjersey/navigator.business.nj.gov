@@ -1,6 +1,7 @@
 ---
 filename: accounting-firm-registration-reinstatement
 name: Apply to Reinstate Your Accounting Firm Registration
+licenseName: tbd
 industryIds:
   - certified-public-accountant
 sectorIds: []

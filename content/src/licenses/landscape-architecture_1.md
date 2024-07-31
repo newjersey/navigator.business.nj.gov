@@ -1,5 +1,7 @@
 ---
 urlSlug: landscape-architecture
+calendarEventDisplayName: tbd
+licenseName: tbd2
 previewType: renewal
 summaryDescriptionMd: N/A
 callToActionLink: https://www.njconsumeraffairs.gov/land/Pages/default.aspx

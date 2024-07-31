@@ -1,5 +1,7 @@
 ---
 urlSlug: generic
+calendarEventDisplayName: tbd
+licenseName: tbd2
 previewType: renewal
 summaryDescriptionMd: >-
   If you are interested in continuing to work on `public works

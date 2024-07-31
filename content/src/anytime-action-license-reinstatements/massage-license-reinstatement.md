@@ -6,6 +6,7 @@ industryIds:
 sectorIds:
   - health-care-and-social-assistance
 icon: update-purple.svg
+licenseName: tbd
 urlSlug: massage-license-reinstatement
 summaryDescriptionMd: You need to reinstate your massage and bodywork business
   license if it has expired. Email your application to
