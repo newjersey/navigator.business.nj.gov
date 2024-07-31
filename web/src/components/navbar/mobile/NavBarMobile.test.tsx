@@ -105,6 +105,27 @@ describe("<NavBarMobile />", () => {
     });
   });
 
+  describe("seo starter kit configuration", () => {
+    it("shows my account text and login button", () => {
+      render(
+        <NavBarMobile
+          currentlyOnboarding={false}
+          isAuthenticated={false}
+          isLanding={false}
+          isSeoStarterKit={true}
+          scrolled={false}
+          task={undefined}
+          hideMiniRoadmap={true}
+          showSidebar={false}
+          previousBusinessId={undefined}
+        />
+      );
+
+      expect(screen.getByText(Config.navigationDefaults.navBarMyAccountText)).toBeInTheDocument();
+      expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
+    });
+  });
+
   describe("onboarding configuration", () => {
     it("shows account icon and not quick link icon", () => {
       render(

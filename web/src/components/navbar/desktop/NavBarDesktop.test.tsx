@@ -70,6 +70,23 @@ describe("<NavBarDesktop />", () => {
     });
   });
 
+  describe("seo starter kits configuration", () => {
+    it("shows logo and login", () => {
+      render(
+        <NavBarDesktop
+          isLanding={false}
+          currentlyOnboarding={false}
+          isAuthenticated={false}
+          isSeoStarterKit={true}
+        />
+      );
+
+      quickLinksDoNotExist();
+      expect(screen.getByText(Config.navigationDefaults.navBarMyAccountText)).toBeInTheDocument();
+      expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
+    });
+  });
+
   describe("onboarding configuration", () => {
     it("shows login and dropdown", () => {
       render(<NavBarDesktop isLanding={false} currentlyOnboarding={true} isAuthenticated={false} />);

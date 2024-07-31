@@ -10,7 +10,8 @@ export type PrimaryButtonColors =
   | "outline"
   | "success-extra-light"
   | "error"
-  | "white";
+  | "white"
+  | "secondary-vivid-dark";
 
 type OmitGenericButtonProps = Omit<
   GenericButtonProps,
@@ -31,6 +32,7 @@ const colors = {
   "success-extra-light": "usa-button btn-success-extra-light",
   white: "usa-button text-info-darkest btn-white",
   outline: "usa-button usa-button--outline",
+  "secondary-vivid-dark": "usa-button bg-secondary-vivid-dark",
 };
 
 export const PrimaryButton = forwardRef(function PrimaryButton(

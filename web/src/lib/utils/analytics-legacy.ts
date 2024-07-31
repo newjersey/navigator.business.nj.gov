@@ -137,7 +137,10 @@ export type LegacyEventCategory =
   | "check_my_elevator_application_status_tab_click"
   | "elevator_registration_form_submission"
   | "elevator_registration_form_submission_failed"
-  | "view_my_violation_note_button_click";
+  | "view_my_violation_note_button_click"
+  | "starter_kit_landing_start_now_button"
+  | "starter_kit_landing_get_my_starter_kit_button"
+  | "starter_kit_landing_get_my_starter_kit_button_footer";
 
 export type LegacyEventAction =
   | "click"
