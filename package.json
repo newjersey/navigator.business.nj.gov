@@ -25,7 +25,6 @@
     "test:ci": "jest --colors --runInBand --ci",
     "test:coverage": "jest --config jest.coverage.ts",
     "test:python": "python -m unittest discover -b -s content/scripts -p \"test_*.py\" && python -m unittest discover -b -s scripts -p \"test_*.py\"",
-    "test:watch": "yarn test --watch",
     "typecheck": "yarn workspaces foreach -v run typecheck",
     "verify:node": "check-node-version --node $(cat .nvmrc) --npm 10.8.1",
     "wipit": "git add -A && git commit -m 'wip [skip ci]' --no-verify"

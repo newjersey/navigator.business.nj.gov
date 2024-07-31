@@ -5,14 +5,13 @@ import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { generateLicenseEvent, generateOperateReference } from "@/test/factories";
+import { generateOperateReference } from "@/test/factories";
 import {
   defaultDateFormat,
   generateBusiness,
   generateTaxFilingCalendarEvent,
-  randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
-import { OperatingPhaseId, taskIdToLicenseName } from "@businessnjgovnavigator/shared/";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import {
   generatePreferences,
   generateProfileData,
@@ -75,23 +74,12 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
     "4": generateOperateReference({ name: "Tax 4" }),
   };
 
-  const licenseName = randomElementFromArray(Object.values(taskIdToLicenseName));
-
-  const licenseEvents = [
-    generateLicenseEvent({ licenseName }),
-    generateLicenseEvent({ licenseName }),
-    generateLicenseEvent({ licenseName }),
-  ];
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <ThemeProvider theme={createTheme()}>
           <Heading level={2}>Empty calendar</Heading>
-          <FilingsCalendar
-            operateReferences={{}}
-            CMS_ONLY_fakeBusiness={emptyFilingsUserData}
-            licenseEvents={licenseEvents}
-          />
+          <FilingsCalendar operateReferences={{}} CMS_ONLY_fakeBusiness={emptyFilingsUserData} />
 
           <hr className="margin-top-6" />
 
@@ -99,7 +87,6 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
           <FilingsCalendar
             operateReferences={operateReferences}
             CMS_ONLY_fakeBusiness={filingsBusinessList}
-            licenseEvents={licenseEvents}
           />
 
           <hr className="margin-top-6" />
@@ -108,7 +95,6 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
           <FilingsCalendar
             operateReferences={operateReferences}
             CMS_ONLY_fakeBusiness={filingsBusinessGrid}
-            licenseEvents={licenseEvents}
           />
 
           <HideableTasks />

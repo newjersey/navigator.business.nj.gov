@@ -2,7 +2,6 @@
 filename: authorization-certificate-reinstatement
 name: Apply to Reinstate Your Application for a Certificate of Authorization
 industryIds: []
-licenseName: tbd
 sectorIds: []
 icon: update-purple.svg
 urlSlug: authorization-certificate-reinstatement

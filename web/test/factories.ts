@@ -14,7 +14,7 @@ import {
   FundingProgramFrequency,
   FundingStatus,
   FundingType,
-  LicenseEventType,
+  LicenseEvent,
   NaicsCodeObject,
   OperateReference,
   Opportunity,
@@ -24,7 +24,6 @@ import {
   Step,
   Task,
   TaskLink,
-  TaskWithLicenseTaskId,
   TaskWithoutLinks,
 } from "@/lib/types/types";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
@@ -35,7 +34,6 @@ import {
   InputFile,
   LegalStructure,
   LegalStructures,
-  LicenseTaskID,
   NameAvailability,
   OperatingPhaseId,
   OperatingPhases,
@@ -53,12 +51,7 @@ import {
   randomInt,
   arrayOfStateObjects as states,
 } from "@businessnjgovnavigator/shared";
-import {
-  Address,
-  OperatingPhase,
-  randomIntFromInterval,
-  taskIdToLicenseName,
-} from "@businessnjgovnavigator/shared/";
+import { Address, OperatingPhase, randomIntFromInterval } from "@businessnjgovnavigator/shared/";
 import { FormationData } from "@businessnjgovnavigator/shared/formationData";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import { randomFilteredIndustry, randomIndustry, randomSector } from "@businessnjgovnavigator/shared/test";
@@ -132,15 +125,6 @@ export const generateTask = (overrides: Partial<Task>): Task => {
     agencyAdditionalContext: `some-agency-${randomInt()}`,
     formName: `some-form-${randomInt()}`,
     requiresLocation: Math.random() < 0.5,
-    ...overrides,
-  };
-};
-
-export const generateLicenseTask = (overrides: Partial<TaskWithLicenseTaskId>): TaskWithLicenseTaskId => {
-  const licenseTaskId = randomElementFromArray(Object.keys(taskIdToLicenseName)) as LicenseTaskID;
-  return {
-    ...generateTask({}),
-    id: licenseTaskId,
     ...overrides,
   };
 };
@@ -319,8 +303,10 @@ export const generateAnytimeActionLicenseReinstatement = (
     callToActionText: `some-cta-text-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
     form: `some-form-${randomInt()}`,
+    industryIds: [`some-industry-id-${randomInt()}`],
+    sectorIds: [`some-sector-id-${randomInt()}`],
     summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
-    licenseName: randomElementFromArray(Object.values(taskIdToLicenseName)),
+    applyToAllUsers: false,
     ...overrides,
   };
 };
@@ -376,18 +362,14 @@ export const generateOperateReference = (overrides: Partial<OperateReference>): 
   };
 };
 
-export const generateLicenseEvent = (overrides: Partial<LicenseEventType>): LicenseEventType => {
+export const generateLicenseEvent = (overrides: Partial<LicenseEvent>): LicenseEvent => {
   const id = randomInt(4);
   return {
-    calendarEventDisplayName: `some-calendar-event-${id}`,
-    previewType: id % 2 ? "renewal" : "expiration",
-    summaryDescriptionMd: `some-summary-${id}`,
-    filename: `some-filename-${id}`,
-    urlSlug: `some-url-slug-${id}`,
-    callToActionLink: `some-cta-link-${id}`,
-    callToActionText: `some-cta-text-${id}`,
-    contentMd: `some-content-${id}`,
-    licenseName: randomElementFromArray(Object.values(taskIdToLicenseName)),
+    filename: `filename-${id}`,
+    urlSlug: `url-slug-${id}`,
+    callToActionLink: `cta-link-${id}`,
+    callToActionText: `cta-text-${id}`,
+    contentMd: `content-${id}`,
     ...overrides,
   };
 };

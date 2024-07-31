@@ -7,9 +7,10 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { LicenseUrlSlugParam, loadAllLicenseUrlSlugs, loadLicenseByUrlSlug } from "@/lib/static/loadLicenses";
-import { LicenseEventType } from "@/lib/types/types";
+import { LicenseEvent } from "@/lib/types/types";
 import {
   LicenseEventSubtype,
+  LookupIndustryById,
   defaultDateFormat,
   parseDate,
   parseDateWithFormat,
@@ -19,9 +20,10 @@ import { NextSeo } from "next-seo";
 import { ReactElement } from "react";
 
 interface LicenseElementProps {
-  license: LicenseEventType;
+  license: LicenseEvent;
   licenseEventType: LicenseEventSubtype;
   dueDate: string;
+  preview?: boolean;
   licenseName: string;
 }
 
@@ -47,7 +49,7 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
                 <h1>{`${props.licenseName} ${titles[props.licenseEventType]}`}</h1>
               </div>
               <div className="display-inline-flex ">
-                <span className="text-bold">{dateText[props.licenseEventType].toUpperCase()}</span> &nbsp;
+                <span className="text-bold">{dateText[props.licenseEventType].toUpperCase()}</span> &nbsp;{" "}
                 <span data-testid="due-date">
                   {parseDateWithFormat(props.dueDate, defaultDateFormat).format("MMMM D, YYYY").toUpperCase()}
                 </span>
@@ -69,33 +71,27 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
 };
 
 interface Props {
-  license: LicenseEventType;
+  license: LicenseEvent;
   licenseEventType: LicenseEventSubtype;
 }
 
-const LicensePage = (
-  props: Props
-): // props: Props
-ReactElement => {
+const LicensePage = (props: Props): ReactElement => {
   const { business } = useUserData();
-  const licenseName = props.license.licenseName;
-
-  const expirationDateISO = business?.licenseData?.licenses?.[licenseName]?.expirationDateISO;
-
-  let date = parseDate(expirationDateISO);
+  let date = parseDate(business?.licenseData?.expirationISO);
   if (props.licenseEventType === "renewal") {
     date = date.add(30, "days");
   }
+
+  const licenseName = LookupIndustryById(business?.profileData.industryId).licenseType!;
 
   return (
     <>
       <NextSeo title={getNextSeoTitle(licenseName)} />
       <PageSkeleton showNavBar showSidebar hideMiniRoadmap>
         <TaskSidebarPageLayout>
-          <></>
           <LicenseElement
             license={props.license}
-            licenseName={licenseName}
+            licenseName={licenseName || ""}
             licenseEventType={props.licenseEventType}
             dueDate={date.format(defaultDateFormat)}
           />

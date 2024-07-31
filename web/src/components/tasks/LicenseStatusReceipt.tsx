@@ -5,22 +5,16 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import {
-  LicenseDetails,
-  LicenseStatus,
-  LicenseStatusItem,
-  LicenseTaskID,
-  taskIdToLicenseName,
-} from "@businessnjgovnavigator/shared/";
+import { LicenseStatus, LicenseStatusItem } from "@businessnjgovnavigator/shared/";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DangerousIcon from "@mui/icons-material/Dangerous";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import type { ReactElement } from "react";
 
 interface Props {
-  licenseDetails: LicenseDetails;
+  items: LicenseStatusItem[];
+  status: LicenseStatus;
   onEdit: () => void;
-  licenseTaskId: LicenseTaskID;
 }
 
 type PermitColorScheme = {
@@ -106,13 +100,13 @@ const isPending = (licenseStatus: LicenseStatus): boolean => {
   return pendingStatuses.has(licenseStatus);
 };
 
-export const LicenseDetailReceipt = (props: Props): ReactElement => {
+export const LicenseStatusReceipt = (props: Props): ReactElement => {
   const { business } = useUserData();
 
   const getPermitColorScheme = (): PermitColorScheme => {
-    if (props.licenseDetails.licenseStatus === "ACTIVE") {
+    if (props.status === "ACTIVE") {
       return permitColorScheme["activePermit"];
-    } else if (isPending(props.licenseDetails.licenseStatus)) {
+    } else if (isPending(props.status)) {
       return permitColorScheme["pendingPermit"];
     } else {
       return permitColorScheme["inactivePermit"];
@@ -120,15 +114,14 @@ export const LicenseDetailReceipt = (props: Props): ReactElement => {
   };
 
   const getText = (): string => {
-    return LicenseStatusLookup[props.licenseDetails.licenseStatus];
+    return LicenseStatusLookup[props.status];
   };
 
   const getOneLineAddress = (): string => {
-    const nameAndAddress =
-      business?.licenseData?.licenses?.[taskIdToLicenseName[props.licenseTaskId]]?.nameAndAddress;
-    if (!nameAndAddress) {
+    if (!business || !business.licenseData) {
       return "";
     }
+    const { nameAndAddress } = business.licenseData;
     const secondLineAddress = nameAndAddress.addressLine2 ? ` ${nameAndAddress.addressLine2}` : "";
     return `${nameAndAddress.addressLine1}${secondLineAddress}, ${nameAndAddress.zipCode} NJ`;
   };
@@ -153,17 +146,13 @@ export const LicenseDetailReceipt = (props: Props): ReactElement => {
   };
 
   return (
-    <div data-testid="licenseDetailReceipt" className="fdc fg1 overflow-y-hidden margin-top-3">
+    <div className="fdc fg1 overflow-y-hidden margin-top-3">
       <p className="margin-x-3 margin-bottom-3">{Config.licenseSearchTask.foundText}</p>
 
       <div className="border-2px border-base-lightest radius-lg bg-base-extra-light text-base-darkest padding-x-2 padding-y-205 width-full tablet:padding-x-5 tablet:padding-y-4">
         <div className="flex flex-column tablet-flex-row tablet-flex-alignItems-end">
           <div>
-            <div className="text-bold">
-              {business?.licenseData?.licenses?.[
-                taskIdToLicenseName[props.licenseTaskId]
-              ]?.nameAndAddress.name.toUpperCase()}
-            </div>
+            <div className="text-bold">{business?.licenseData?.nameAndAddress.name.toUpperCase()}</div>
             {getOneLineAddress()}
           </div>
           <div>
@@ -184,7 +173,7 @@ export const LicenseDetailReceipt = (props: Props): ReactElement => {
         <div className="border-2px border-white radius-lg bg-white padding-y-2 padding-x-105 margin-bottom-2 margin-top-205 shadow-3">
           <div
             className={`margin-1 text-bold fdc fac radius-lg ${getPermitColorScheme().bgSubHdrColor}`}
-            data-testid={`permit-${props.licenseDetails.licenseStatus}`}
+            data-testid={`permit-${props.status}`}
           >
             <div
               className={`${
@@ -214,7 +203,7 @@ export const LicenseDetailReceipt = (props: Props): ReactElement => {
             >
               {Config.licenseSearchTask.applicationChecklistItemsText}
             </Heading>
-            {props.licenseDetails.checklistItems.map(receiptItem)}
+            {props.items.map(receiptItem)}
           </div>
         </div>
         <HorizontalLine />

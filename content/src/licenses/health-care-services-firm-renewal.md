@@ -1,8 +1,6 @@
 ---
 notesMd: ""
 urlSlug: health-care-services-firm-renewal
-calendarEventDisplayName: Health Care Service Firm
-licenseName: Health Care Services
 previewType: renewal
 summaryDescriptionMd: If you are interested in continuing to employ individuals
   to provide health care, personal care, or companion services (either in-home

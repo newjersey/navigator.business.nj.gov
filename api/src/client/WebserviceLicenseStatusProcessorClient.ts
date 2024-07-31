@@ -1,78 +1,63 @@
 import { inputManipulator } from "@domain/inputManipulator";
-import { LicenseStatusClient, NO_ADDRESS_MATCH_ERROR, SearchLicenseStatus } from "@domain/types";
-import { parseDateWithFormat } from "@shared/dateHelpers";
+import { LicenseStatusClient, NO_MATCH_ERROR, SearchLicenseStatus } from "@domain/types";
+import { getLicenseDate, parseDateWithFormat } from "@shared/dateHelpers";
 import {
-  LicenseEntity,
-  LicenseName,
   LicenseSearchNameAndAddress,
   LicenseStatus,
   LicenseStatusItem,
+  LicenseStatusResult,
 } from "@shared/license";
-
-import { LicenseStatusResults } from "@api/types";
 
 export const WebserviceLicenseStatusProcessorClient = (
   licenseStatusClient: LicenseStatusClient
 ): SearchLicenseStatus => {
-  return async (nameAndAddress: LicenseSearchNameAndAddress): Promise<LicenseStatusResults> => {
+  return async (
+    nameAndAddress: LicenseSearchNameAndAddress,
+    licenseType: string
+  ): Promise<LicenseStatusResult> => {
     const searchName = inputManipulator(nameAndAddress.name)
       .makeLowerCase()
       .removeBusinessDesignators()
       .trimPunctuation().value;
 
-    const licenseStatusClientResults = await licenseStatusClient.search(searchName, nameAndAddress.zipCode);
+    const entities = await licenseStatusClient.search(searchName, nameAndAddress.zipCode, licenseType);
 
-    const allMatchingAddressesArray = licenseStatusClientResults.filter((it) => {
+    const allMatchingAddressesArray = entities.filter((it) => {
       return cleanAddress(it.addressLine1).startsWith(cleanAddress(nameAndAddress.addressLine1));
     });
 
     if (allMatchingAddressesArray.length === 0) {
-      throw new Error(NO_ADDRESS_MATCH_ERROR);
+      throw new Error(NO_MATCH_ERROR);
     }
 
-    // ASSUMPTION: There will only ever be 1 application of any given combination of professionName and licenseType
-    const results: LicenseStatusResults = {};
-
-    for (const checklistItem of allMatchingAddressesArray) {
-      const licenseName = `${checklistItem.professionName}-${checklistItem.licenseType}` as LicenseName;
-      if (licenseName in results) {
-        results[licenseName]!.checklistItems = updateChecklist(
-          checklistItem,
-          results[licenseName]!.checklistItems
-        );
-      } else {
-        results[licenseName] = {
-          licenseStatus: determineLicenseStatus(checklistItem.licenseStatus),
-          expirationDateISO: getExpirationDate(checklistItem),
-          checklistItems: updateChecklist(checklistItem, []),
-        };
-      }
-    }
-
-    return results;
-  };
-};
-
-const getExpirationDate = (checklistItem: LicenseEntity): string | undefined => {
-  const expirationDate =
-    checklistItem.expirationDate === undefined || checklistItem.expirationDate.length < 8
-      ? undefined
-      : parseDateWithFormat(checklistItem.expirationDate, "YYYYMMDD X").toISOString();
-
-  return expirationDate;
-};
-
-const updateChecklist = (
-  newChecklistItem: LicenseEntity,
-  checklist: LicenseStatusItem[]
-): LicenseStatusItem[] => {
-  if (newChecklistItem.checkoffStatus === "Unchecked" || newChecklistItem.checkoffStatus === "Completed") {
-    checklist.push({
-      title: newChecklistItem.checklistItem,
-      status: newChecklistItem.checkoffStatus === "Completed" ? "ACTIVE" : "PENDING",
+    const match = allMatchingAddressesArray.reduce((a, b) => {
+      return getLicenseDate(a) > getLicenseDate(b) ? a : b;
     });
-  }
-  return checklist;
+
+    const items: LicenseStatusItem[] = entities
+      .filter((it) => {
+        return it.applicationNumber === match.applicationNumber;
+      })
+      .filter((it) => {
+        return it.checkoffStatus === "Unchecked" || it.checkoffStatus === "Completed";
+      })
+      .map((it) => {
+        return {
+          title: it.checklistItem,
+          status: it.checkoffStatus === "Completed" ? "ACTIVE" : "PENDING",
+        };
+      });
+
+    const expirationDate =
+      match.expirationDate === undefined || match.expirationDate.length < 8
+        ? undefined
+        : parseDateWithFormat(match.expirationDate, "YYYYMMDD X");
+    return {
+      status: determineLicenseStatus(match.licenseStatus),
+      expirationISO: expirationDate?.toISOString(),
+      checklistItems: items,
+    };
+  };
 };
 
 export const determineLicenseStatus = (value: string): LicenseStatus => {

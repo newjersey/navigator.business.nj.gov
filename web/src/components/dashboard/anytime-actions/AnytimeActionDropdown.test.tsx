@@ -9,15 +9,8 @@ import {
 } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { randomElementFromArray } from "@businessnjgovnavigator/shared/arrayHelpers";
-import {
-  generateLicenseData,
-  generateLicenseDetails,
-  generateProfileData,
-} from "@businessnjgovnavigator/shared/test";
+import { generateLicenseData, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
-
-import { taskIdToLicenseName } from "@businessnjgovnavigator/shared/";
 
 function setupMockAnalytics(): typeof analytics {
   return {
@@ -33,6 +26,33 @@ function setupMockAnalytics(): typeof analytics {
   };
 }
 
+let anytimeActionLinks: AnytimeActionLink[] = [
+  generateAnytimeActionLink({
+    name: "some-link-name",
+    externalRoute: "some-url",
+    filename: "some-filename-link",
+    applyToAllUsers: true,
+  }),
+];
+
+let anytimeActionTasks: AnytimeActionTask[] = [
+  generateAnytimeActionTask({
+    name: "some-task-name",
+    urlSlug: "some-url",
+    filename: "some-filename-task",
+    applyToAllUsers: true,
+  }),
+];
+
+let anytimeActionLicense: AnytimeActionLicenseReinstatement[] = [
+  generateAnytimeActionLicenseReinstatement({
+    name: "some-license-name",
+    urlSlug: "some-url",
+    filename: "some-filename-license",
+    applyToAllUsers: true,
+  }),
+];
+
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -40,40 +60,11 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 describe("<AnytimeActionDropdown />", () => {
-  let anytimeActionLinks: AnytimeActionLink[] = [];
-
-  let anytimeActionTasks: AnytimeActionTask[] = [];
-
-  let anytimeActionLicense: AnytimeActionLicenseReinstatement[] = [];
-
   describe("routing and analytics", () => {
     beforeEach(() => {
       jest.resetAllMocks();
       useMockRouter({});
       useMockBusiness({});
-      anytimeActionLinks = [
-        generateAnytimeActionLink({
-          name: "some-link-name",
-          externalRoute: "some-url",
-          filename: "some-filename-link",
-          applyToAllUsers: true,
-        }),
-      ];
-      anytimeActionTasks = [
-        generateAnytimeActionTask({
-          name: "some-task-name",
-          urlSlug: "some-url",
-          filename: "some-filename-task",
-          applyToAllUsers: true,
-        }),
-      ];
-      anytimeActionLicense = [
-        generateAnytimeActionLicenseReinstatement({
-          name: "some-license-name",
-          urlSlug: "some-url",
-          filename: "some-filename-license",
-        }),
-      ];
     });
 
     const renderAnytimeActionDropdown = (): void => {
@@ -109,20 +100,18 @@ describe("<AnytimeActionDropdown />", () => {
     });
 
     it("routes to actions/url and triggers analytics when internal license reinstatement clicked", () => {
-      const licenseName = randomElementFromArray(Object.values(taskIdToLicenseName));
-
       useMockBusiness({
+        profileData: generateProfileData({
+          industryId: "hvac-contractor",
+        }),
         licenseData: generateLicenseData({
-          licenses: {
-            [licenseName]: generateLicenseDetails({
-              licenseStatus: "EXPIRED",
-            }),
-          },
+          status: "EXPIRED",
         }),
       });
       anytimeActionLicense = [
         generateAnytimeActionLicenseReinstatement({
-          licenseName,
+          industryIds: ["hvac-contractor"],
+          applyToAllUsers: false,
           name: "some-license-name",
           urlSlug: "some-url",
           filename: "some-filename-license",
@@ -145,29 +134,6 @@ describe("<AnytimeActionDropdown />", () => {
       jest.resetAllMocks();
       useMockRouter({});
       useMockBusiness({});
-      anytimeActionLinks = [
-        generateAnytimeActionLink({
-          name: "some-link-name",
-          externalRoute: "some-url",
-          filename: "some-filename-link",
-          applyToAllUsers: true,
-        }),
-      ];
-      anytimeActionTasks = [
-        generateAnytimeActionTask({
-          name: "some-task-name",
-          urlSlug: "some-url",
-          filename: "some-filename-task",
-          applyToAllUsers: true,
-        }),
-      ];
-      anytimeActionLicense = [
-        generateAnytimeActionLicenseReinstatement({
-          name: "some-license-name",
-          urlSlug: "some-url",
-          filename: "some-filename-license",
-        }),
-      ];
     });
 
     const renderAnytimeActionDropdown = (): void => {
@@ -181,30 +147,28 @@ describe("<AnytimeActionDropdown />", () => {
     };
 
     it("sorts all actions by name", () => {
-      const licenseName = randomElementFromArray(Object.values(taskIdToLicenseName));
-
       useMockBusiness({
+        profileData: generateProfileData({
+          industryId: "hvac-contractor",
+        }),
         licenseData: generateLicenseData({
-          licenses: {
-            [licenseName]: generateLicenseDetails({
-              licenseStatus: "EXPIRED",
-            }),
-          },
+          status: "EXPIRED",
         }),
       });
-
       anytimeActionLicense = [
         generateAnytimeActionLicenseReinstatement({
+          industryIds: ["hvac-contractor"],
+          applyToAllUsers: false,
           name: "some-license-name",
           urlSlug: "some-url",
           filename: "some-filename-license",
-          licenseName,
         }),
         generateAnytimeActionLicenseReinstatement({
+          industryIds: ["hvac-contractor"],
+          applyToAllUsers: false,
           name: "zzz-some-license-name",
           urlSlug: "some-url",
           filename: "some-filename-license-zzz",
-          licenseName,
         }),
       ];
 
@@ -221,26 +185,25 @@ describe("<AnytimeActionDropdown />", () => {
     });
 
     it("filters out licenses unrelated to user industry", () => {
-      const licenseName = randomElementFromArray(Object.values(taskIdToLicenseName));
-
       useMockBusiness({
+        profileData: generateProfileData({
+          industryId: "hvac-contractor",
+        }),
         licenseData: generateLicenseData({
-          licenses: {
-            [licenseName]: generateLicenseDetails({
-              licenseStatus: "EXPIRED",
-            }),
-          },
+          status: "EXPIRED",
         }),
       });
-
       anytimeActionLicense = [
         generateAnytimeActionLicenseReinstatement({
-          licenseName,
+          industryIds: ["hvac-contractor"],
+          applyToAllUsers: false,
           name: "hvac-contractor-reinstatement",
           urlSlug: "some-url",
           filename: "some-filename-license",
         }),
         generateAnytimeActionLicenseReinstatement({
+          industryIds: ["cannabis"],
+          applyToAllUsers: false,
           name: "cannabis-license-reinstatement",
           urlSlug: "some-url",
           filename: "some-filename-license-zzz",
@@ -296,22 +259,42 @@ describe("<AnytimeActionDropdown />", () => {
       expect(screen.queryByText("link - no match")).not.toBeInTheDocument();
     });
 
-    it("does NOT renders license reinstatement anytime action when license is NOT expired", () => {
-      const licenseName = randomElementFromArray(Object.values(taskIdToLicenseName));
-
+    it("does NOT renders license reinstatement anytime action when industry matches, and license is NOT expired", () => {
       useMockBusiness({
+        profileData: generateProfileData({
+          industryId: "hvac-contractor",
+        }),
         licenseData: generateLicenseData({
-          licenses: {
-            [licenseName]: generateLicenseDetails({
-              licenseStatus: "PENDING_RENEWAL",
-            }),
-          },
+          status: "PENDING_RENEWAL",
         }),
       });
-
       anytimeActionLicense = [
         generateAnytimeActionLicenseReinstatement({
-          licenseName,
+          industryIds: ["hvac-contractor"],
+          applyToAllUsers: false,
+          name: "license - hvac-reinstatement",
+        }),
+      ];
+      renderAnytimeActionDropdown();
+
+      fireEvent.click(screen.getByLabelText("Open"));
+
+      expect(screen.queryByText("license - hvac-reinstatement")).not.toBeInTheDocument();
+    });
+
+    it("does NOT renders license reinstatement anytime action when industry does NOT matches, and license is expired", () => {
+      useMockBusiness({
+        profileData: generateProfileData({
+          industryId: "accounting",
+        }),
+        licenseData: generateLicenseData({
+          status: "EXPIRED",
+        }),
+      });
+      anytimeActionLicense = [
+        generateAnytimeActionLicenseReinstatement({
+          industryIds: ["hvac-contractor"],
+          applyToAllUsers: false,
           name: "license - hvac-reinstatement",
         }),
       ];
