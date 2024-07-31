@@ -1,5 +1,5 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
-import { DesktopLoginButton } from "@/components/navbar/desktop/DesktopLoginButton";
+import { NavBarLoginButton } from "@/components/navbar/NavBarLoginButton";
 import { NavBarDesktopDropDown } from "@/components/navbar/desktop/NavBarDesktopDropDown";
 import { NavBarDesktopHomeLogo } from "@/components/navbar/desktop/NavBarDesktopHomeLogo";
 import { NavBarDesktopQuickLinks } from "@/components/navbar/desktop/NavBarDesktopQuickLinks";
@@ -26,6 +26,7 @@ import React, { ReactElement, useEffect, useRef, useState } from "react";
 interface Props {
   previousBusinessId?: string | undefined;
   isLanding: boolean | undefined;
+  isSeoStarterKit?: boolean;
   logoOnlyType?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
   currentlyOnboarding: boolean | undefined;
   isAuthenticated: boolean;
@@ -67,6 +68,16 @@ export const NavBarDesktop = (props: Props): ReactElement => {
   if (props.logoOnlyType) {
     // loading/redirect/ethan onboarding
     return <NavBarLogoOnlyDesktop logoType={props.logoOnlyType} />;
+  } else if (props.isSeoStarterKit) {
+    // starter kits page for SEO
+    return (
+      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
+        <NavBarDesktopHomeLogo previousBusinessId={undefined} />
+        <div className={"display-flex flex-row flex-align-center"}>
+          <NavBarLoginButton />
+        </div>
+      </NavBarDesktopWrapper>
+    );
   } else if (props.isLanding) {
     // landing
     return (
@@ -75,7 +86,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
         <div className={"display-flex flex-row flex-align-center"}>
           <NavBarDesktopQuickLinks />
           <NavBarVerticalLineDivider />
-          <DesktopLoginButton />
+          <NavBarLoginButton />
           <NavBarDesktopDropDown
             anchorRef={anchorRef}
             open={open}
@@ -96,7 +107,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
       <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
         <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
         <div className={"display-flex flex-row flex-align-center"}>
-          <DesktopLoginButton />
+          <NavBarLoginButton />
           <NavBarDesktopDropDown
             disabled={true}
             anchorRef={anchorRef}
@@ -160,7 +171,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
         <div className={"display-flex flex-row flex-align-center"}>
           <NavBarDesktopQuickLinks />
           <NavBarVerticalLineDivider />
-          <DesktopLoginButton />
+          <NavBarLoginButton />
           <NavBarDesktopDropDown
             anchorRef={anchorRef}
             open={open}

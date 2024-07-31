@@ -60,6 +60,7 @@ export const cmsCollections = [
   {
     label: "🟩 MISC",
     children: [
+      "Starter Kits",
       "Callout Defaults",
       "Export Pdf Config",
       "Dropdown Mappings",

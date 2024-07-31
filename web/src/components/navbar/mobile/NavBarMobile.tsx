@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-key */
+import { NavBarLoginButton } from "@/components/navbar/NavBarLoginButton";
 import { NavBarLogoOnlyMobile } from "@/components/navbar/mobile/NavBarLogoOnlyMobile";
 import { NavBarMobileAccountSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileAccountSlideOutMenu";
 import { NavBarMobileHomeLogo } from "@/components/navbar/mobile/NavBarMobileHomeLogo";
@@ -26,6 +27,7 @@ interface Props {
   task?: Task;
   hideMiniRoadmap?: boolean;
   showSidebar?: boolean;
+  isSeoStarterKit?: boolean;
   isLanding?: boolean;
   previousBusinessId?: string | undefined;
   logoOnlyType?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
@@ -62,6 +64,18 @@ export const NavBarMobile = (props: Props): ReactElement => {
   if (props.logoOnlyType) {
     return (
       <NavBarLogoOnlyMobile scrolled={scrolled} showMyNjLogo={props.logoOnlyType === "NAVIGATOR_MYNJ_LOGO"} />
+    );
+  } else if (props.isSeoStarterKit) {
+    return (
+      <NavBarMobileWrapper scrolled={scrolled}>
+        <NavBarMobileHomeLogo
+          scrolled={props.scrolled}
+          showSidebar={props.showSidebar}
+          previousBusinessId={props.previousBusinessId}
+          businessNavBarTitle={navBarBusinessTitle}
+        />
+        <NavBarLoginButton />
+      </NavBarMobileWrapper>
     );
   } else if (props.isLanding) {
     // landing

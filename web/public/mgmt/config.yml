@@ -3614,6 +3614,98 @@ collections:
     fields:
       - { name: "" }
 
+  - name: "starter-kits"
+    label: "Starter Kits"
+    files:
+      - label: "Starter Kits"
+        file: "content/src/fieldConfig/starter-kits.json"
+        name: "starterKits"
+        fields:
+          - label: "Starter Kits"
+            name: "starterKits"
+            collapsed: true
+            widget: object
+            summary: "{{fields.title}}"
+            fields:
+              - label: "Hero"
+                name: "hero"
+                widget: object
+                fields:
+                  - label: "Title"
+                    name: "title"
+                    widget: string
+                    required: true
+                  - label: "Subtitle"
+                    name: "subtitle"
+                    widget: string
+                    required: true
+                  - label: "CTA Button"
+                    name: "ctaButton"
+                    widget: string
+                    required: true
+              - label: "Solutions"
+                name: "solutions"
+                widget: object
+                fields:
+                  - label: "Title"
+                    name: "title"
+                    widget: string
+                    required: true
+                  - label: "Subtitle"
+                    name: "subtitle"
+                    widget: string
+                    required: true
+                  - label: "CTA Button"
+                    name: "ctaButton"
+                    widget: string
+                  - label: "Card 1"
+                    name: "card1"
+                    widget: object
+                    fields:
+                      - label: "Title"
+                        name: "title"
+                        widget: string
+                        required: true
+                      - label: "Body"
+                        name: "body"
+                        widget: string
+                        required: true
+                  - label: "Card 2"
+                    name: "card2"
+                    widget: object
+                    fields:
+                      - label: "Title"
+                        name: "title"
+                        widget: string
+                        required: true
+                      - label: "Body"
+                        name: "body"
+                        widget: string
+                        required: true
+                  - label: "Card 3"
+                    name: "card3"
+                    widget: object
+                    fields:
+                      - label: "Title"
+                        name: "title"
+                        widget: string
+                        required: true
+                      - label: "Body"
+                        name: "body"
+                        widget: string
+                        required: true
+              - label: "Steps"
+                name: "steps"
+                widget: object
+                fields:
+                  - label: "Title"
+                    name: "title"
+                    widget: string
+                    required: true
+                  - label: "CTA Button"
+                    name: "ctaButton"
+                    widget: string
+                    required: true
   - name: "callout-defaults"
     label: "Callout Defaults"
     files:

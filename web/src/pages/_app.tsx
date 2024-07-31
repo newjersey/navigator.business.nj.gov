@@ -120,6 +120,8 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     }
   });
 
+  const isSeoPage = router.pathname.includes("/starter-kits/");
+
   return (
     <>
       <Head>
@@ -157,38 +159,42 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <IntercomContext.Provider
         value={{ setOperatingPhaseId, setLegalStructureId, setIndustryId, setBusinessPersona }}
       >
-        <SWRConfig value={{ provider: UserDataStorageFactory }}>
-          <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={MuiTheme}>
-              <AuthContext.Provider value={{ state, dispatch }}>
-                <UpdateQueueContext.Provider value={{ updateQueue, setUpdateQueue }}>
-                  <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
-                    <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
-                      <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
-                        <NeedsAccountContext.Provider
-                          value={{
-                            isAuthenticated: state.isAuthenticated,
-                            showNeedsAccountSnackbar,
-                            showNeedsAccountModal,
-                            registrationStatus: registrationStatus,
-                            setRegistrationStatus: setRegistrationStatusInStateAndStorage,
-                            setShowNeedsAccountSnackbar,
-                            setShowNeedsAccountModal,
-                          }}
-                        >
-                          <ContextualInfoPanel />
-                          <Component {...pageProps} />
-                          <NeedsAccountModal />
-                          <RegistrationStatusSnackbar />
-                        </NeedsAccountContext.Provider>
-                      </RoadmapContext.Provider>
-                    </ContextualInfoContext.Provider>
-                  </UserDataErrorContext.Provider>
-                </UpdateQueueContext.Provider>
-              </AuthContext.Provider>
-            </ThemeProvider>
-          </StyledEngineProvider>
-        </SWRConfig>
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={MuiTheme}>
+            {isSeoPage ? (
+              <Component {...pageProps} />
+            ) : (
+              <SWRConfig value={{ provider: UserDataStorageFactory }}>
+                <AuthContext.Provider value={{ state, dispatch }}>
+                  <UpdateQueueContext.Provider value={{ updateQueue, setUpdateQueue }}>
+                    <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
+                      <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
+                        <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
+                          <NeedsAccountContext.Provider
+                            value={{
+                              isAuthenticated: state.isAuthenticated,
+                              showNeedsAccountSnackbar,
+                              showNeedsAccountModal,
+                              registrationStatus: registrationStatus,
+                              setRegistrationStatus: setRegistrationStatusInStateAndStorage,
+                              setShowNeedsAccountSnackbar,
+                              setShowNeedsAccountModal,
+                            }}
+                          >
+                            <ContextualInfoPanel />
+                            <Component {...pageProps} />
+                            <NeedsAccountModal />
+                            <RegistrationStatusSnackbar />
+                          </NeedsAccountContext.Provider>
+                        </RoadmapContext.Provider>
+                      </ContextualInfoContext.Provider>
+                    </UserDataErrorContext.Provider>
+                  </UpdateQueueContext.Provider>
+                </AuthContext.Provider>
+              </SWRConfig>
+            )}
+          </ThemeProvider>
+        </StyledEngineProvider>
       </IntercomContext.Provider>
     </>
   );

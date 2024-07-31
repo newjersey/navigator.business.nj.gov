@@ -80,6 +80,18 @@ ol {
   }
 }
 
+.display-only-desktop {
+  @media screen and (max-width: $lg) {
+    display: none;
+  }
+}
+
+.display-none-desktop {
+  @media screen and (min-width: $lg) {
+    display: none;
+  }
+}
+
 .inline-icon {
   margin-bottom: -4px;
   font-size: 1.25rem;
