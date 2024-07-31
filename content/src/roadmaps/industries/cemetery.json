@@ -1,0 +1,13 @@
+{
+  "naicsCodes": "812220",
+  "defaultSectorId": "other-services",
+  "canHavePermanentLocation": true,
+  "name": "Cemetery ",
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
+  "displayname": "Cemetery",
+  "isEnabled": false,
+  "id": "Cemetery",
+  "description": "Offers burial plots, mausoleum spaces, and other services for the dead"
+}
