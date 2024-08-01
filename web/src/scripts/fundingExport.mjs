@@ -12,7 +12,7 @@ const convertFundingMd = (oppMdContents, filename) => {
   const oppGrayMatter = matterResult.data;
 
   return {
-    contentMd: matterResult.content,
+    contentMd: matterResult.content.replaceAll('"', '""'),
     filename,
     ...oppGrayMatter,
   };
