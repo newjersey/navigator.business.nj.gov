@@ -1,7 +1,10 @@
 ---
-notesMd: "[Muni
-  draft](https://docs.google.com/document/d/1zy0RfBLqAlPTLERt6-Fe6EybOQcOjedf04\
-  DYiWcAyWs/edit?usp=sharing)"
+notesMd: >-
+  [Muni
+  draft](https://docs.google.com/document/d/1zy0RfBLqAlPTLERt6-Fe6EybOQcOjedf04DYiWcAyWs/edit?usp=sharing)
+
+
+  Note: This used to say "independent residential health care" and had an example, like a nursing home. But our SME wants us to use the official term because this is a very specific requirement, not to be confused with a similar-sounding requirement from the Department of Health. He said from his experience, people in the industry would be familiar with this term. 
 id: residential-health-care-facility-license
 filename: residential-health-care-facility-license
 displayname: residential-health-care-facility-license
