@@ -2,7 +2,7 @@
 notesMd: "[Muni
   draft](https://docs.google.com/document/d/1zy0RfBLqAlPTLERt6-Fe6EybOQcOjedf04\
   DYiWcAyWs/edit?usp=sharing)"
-header: Free-standing Residential Health Care Facility
+header: Free-Standing Residential Health Care Facility
 slug: residential-health-care-facility
 displayname: residential-health-care-facility
 ---
