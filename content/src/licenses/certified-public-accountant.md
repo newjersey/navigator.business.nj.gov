@@ -25,6 +25,6 @@ Your accounting firm registration will expire every three years.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A renewed accounting firm registration valid for three years. It will be mailed to your business mailing address on file.
+A renewed accounting firm registration valid for three years. It will be sent to your business mailing address on file.
 
 :::
