@@ -109,7 +109,7 @@ const addTasksFromAddOn = (builder: RoadmapBuilder, addOns: AddOn[]): RoadmapBui
     if (!task) continue;
     builder.tasks = [
       ...builder.tasks,
-      { filename: task, weight: addOn.weight, stepNumber: addOn.step, required: addOn.required },
+      { filename: task, weight: addOn.weight, stepNumber: addOn.step, required: !!addOn.required },
     ];
   }
 
@@ -223,7 +223,7 @@ export interface AddOn {
   weight: number;
   task?: string | undefined | null;
   licenseTask?: string | undefined | null;
-  required: boolean;
+  required?: boolean;
 }
 
 export interface TaskModification {

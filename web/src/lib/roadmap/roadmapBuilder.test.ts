@@ -240,6 +240,7 @@ const expectedGenericRoadmap: Roadmap = {
       summaryDescriptionMd: "Generic Task 1 Summary",
       contentMd: `${EOL}Generic Task 1 Contents${EOL}`,
       unlockedBy: [],
+      required: false,
     },
     {
       id: "generic-task-2-id",
@@ -253,6 +254,7 @@ const expectedGenericRoadmap: Roadmap = {
       summaryDescriptionMd: "Generic Task 2 Summary",
       contentMd: `${EOL}Generic Task 2 Contents${EOL}`,
       unlockedBy: [],
+      required: false,
     },
     {
       id: "generic-task-3-id",
@@ -266,6 +268,7 @@ const expectedGenericRoadmap: Roadmap = {
       summaryDescriptionMd: "Generic Task 3 Summary",
       contentMd: `${EOL}Generic Task 3 Contents${EOL}`,
       unlockedBy: [],
+      required: false,
     },
     {
       id: "generic-task-4-id",
@@ -279,6 +282,7 @@ const expectedGenericRoadmap: Roadmap = {
       summaryDescriptionMd: "Generic Task 4 Summary",
       contentMd: `${EOL}Generic Task 4 Contents${EOL}`,
       unlockedBy: [],
+      required: false,
     },
   ],
 };

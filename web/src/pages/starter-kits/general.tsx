@@ -148,9 +148,7 @@ export const getStaticProps = async (): Promise<{
     businessPersona: "STARTING",
     industryId: "generic",
   };
-
-  // Next does not accept explicitly undefined values and roadmap has some by default
-  const roadmap = JSON.parse(JSON.stringify(await buildUserRoadmap(newProfileData))) as Roadmap;
+  const roadmap = await buildUserRoadmap(newProfileData);
 
   return {
     props: { noAuth: true, roadmap },
