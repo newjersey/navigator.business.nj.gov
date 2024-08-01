@@ -18,6 +18,6 @@ callToActionText: Renew Shop Registration
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A renewed cosmetology shop registration valid for two years. It will be mailed to your business mailing address on file.
+A renewed cosmetology shop registration valid for two years. It will be sent to your business mailing address on file.
 
 :::
