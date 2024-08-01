@@ -330,7 +330,7 @@ export const mockSuccessfulApiSignups = (): void => {
 };
 
 export const industriesWithSingleEssentialQuestion = Industries.filter((industry) => {
-  return hasEssentialQuestion(industry.id) && industry.isEnabled && industry.name !== "employment-agency";
+  return hasEssentialQuestion(industry.id) && industry.isEnabled && industry.id !== "employment-agency";
 });
 
 export const industriesWithOutEssentialQuestion = Industries.filter((industry) => {
