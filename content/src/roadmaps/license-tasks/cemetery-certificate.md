@@ -3,7 +3,7 @@ notesMd: >-
   * work in progress, need to create cemetery industry (currently saved under
   all other businesses otherwise I can't save the draft)
 
-  * h2 and h3 still look the same, using h4 until h3 is fixed
+  * h2 and h3 still look the same, using h3 per Spencer 
 
   * double check with Regina on info in parentheses for date of incorporation app req
 id: cemetery-certificate
@@ -24,7 +24,7 @@ agencyAdditionalContext: New Jersey Cemetery Board
 ---
 ## Application Requirements
 
-#### Cemetery Information 
+### Cemetery Information 
 
 
 
@@ -41,7 +41,7 @@ agencyAdditionalContext: New Jersey Cemetery Board
 * The cemetery’s price list for interment space and services
 * A map of the cemetery
 
-#### Financial and Legal Information
+### Financial and Legal Information
 
 * The legal framework or specific legislation the cemetery is organized under
 * Fiscal year end date
