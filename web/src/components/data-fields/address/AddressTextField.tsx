@@ -11,6 +11,7 @@ export interface Props extends Omit<GenericTextFieldProps, "value" | "error" | "
   label?: string;
   secondaryLabel?: string;
   errorBarType: "ALWAYS" | "MOBILE-ONLY" | "DESKTOP-ONLY" | "NEVER";
+  disabled?: boolean;
 }
 
 export const AddressTextField = ({ className, ...props }: Props): ReactElement => {
@@ -39,6 +40,7 @@ export const AddressTextField = ({ className, ...props }: Props): ReactElement =
         {...props}
         handleChange={handleChange}
         error={hasError}
+        disabled={props.disabled}
       />
     </WithErrorBar>
   );

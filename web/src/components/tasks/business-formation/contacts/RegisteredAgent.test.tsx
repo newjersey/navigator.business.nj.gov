@@ -146,7 +146,7 @@ describe("Formation - Registered Agent Field", () => {
 
   it("auto-fills and disables agent address from Address when box checked", async () => {
     const page = await getPageHelper(
-      { municipality: generateMunicipality({ name: "New Test City", displayName: "New Test City" }) },
+      {},
       {
         agentNumberOrManual: "MANUAL_ENTRY",
         agentOfficeAddressLine1: "Old Add 123",
@@ -156,6 +156,7 @@ describe("Formation - Registered Agent Field", () => {
         agentOfficeAddressZipCode: "07001",
         addressLine1: "New Add 123",
         addressLine2: "New Add 456",
+        addressMunicipality: generateMunicipality({ name: "New Test City", displayName: "New Test City" }),
         addressZipCode: "07002",
         addressState: { shortCode: "NJ", name: "New Jersey" },
         addressCountry: "US",
@@ -251,11 +252,12 @@ describe("Formation - Registered Agent Field", () => {
 
   it("un-disables fields but leaves values when user unchecks same Address box", async () => {
     const page = await getPageHelper(
-      { municipality: generateMunicipality({ name: "New Test City", displayName: "New Test City" }) },
+      {},
       {
         agentNumberOrManual: "MANUAL_ENTRY",
         addressLine1: "New Add 123",
         addressLine2: "New Add 456",
+        addressMunicipality: generateMunicipality({ name: "New Test City", displayName: "New Test City" }),
         addressZipCode: "07002",
         addressState: { shortCode: "NJ", name: "New Jersey" },
         addressCountry: "US",

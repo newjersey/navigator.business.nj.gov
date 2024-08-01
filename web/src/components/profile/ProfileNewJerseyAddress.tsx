@@ -10,7 +10,10 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { isOwningBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import {
+  isOwningBusiness,
+  isStartingBusiness,
+} from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { ReactElement, useContext } from "react";
 
 export const ProfileNewJerseyAddress = (): ReactElement => {
@@ -34,7 +37,7 @@ export const ProfileNewJerseyAddress = (): ReactElement => {
   const { setIsValid: setIsValidZipCode } = useFormContextFieldHelpers("addressZipCode", ProfileFormContext);
 
   useMountEffectWhenDefined(() => {
-    if (business && isOwningBusiness(business)) {
+    if (business && (isStartingBusiness(business) || isOwningBusiness(business))) {
       setAddressData({
         addressLine1: business.formationData.formationFormData.addressLine1,
         addressLine2: business.formationData.formationFormData.addressLine2,
@@ -52,6 +55,12 @@ export const ProfileNewJerseyAddress = (): ReactElement => {
     setIsValidZipCode(!doesFieldHaveError("addressZipCode"));
   };
 
+  const areAddressFieldsDisabled = (): boolean => {
+    return business && isStartingBusiness(business) && business.formationData.completedFilingPayment
+      ? true
+      : false;
+  };
+
   return (
     <>
       <div className="margin-y-4">
@@ -63,6 +72,7 @@ export const ProfileNewJerseyAddress = (): ReactElement => {
             className={"margin-bottom-2"}
             errorBarType="ALWAYS"
             onValidation={onValidation}
+            disabled={areAddressFieldsDisabled()}
           />
         </div>
         <div id={`question-addressLine2`} className="text-field-width-default add-spacing-on-ele-scroll">
@@ -74,6 +84,7 @@ export const ProfileNewJerseyAddress = (): ReactElement => {
             validationText={getFieldErrorLabel("addressLine2")}
             className="margin-bottom-2"
             onValidation={onValidation}
+            disabled={areAddressFieldsDisabled()}
           />
         </div>
         <div className="text-field-width-default">
@@ -85,7 +96,10 @@ export const ProfileNewJerseyAddress = (): ReactElement => {
               <div className="grid-col-12 tablet:grid-col-6">
                 <WithErrorBar hasError={doesFieldHaveError("addressMunicipality")} type="MOBILE-ONLY">
                   <span className="text-bold">{Config.formation.fields.addressCity.label}</span>
-                  <AddressMunicipalityDropdown onValidation={onValidation} />
+                  <AddressMunicipalityDropdown
+                    onValidation={onValidation}
+                    disabled={areAddressFieldsDisabled()}
+                  />
                 </WithErrorBar>
               </div>
               <div className="grid-col-12 tablet:grid-col-6">
@@ -123,6 +137,7 @@ export const ProfileNewJerseyAddress = (): ReactElement => {
                           validationText={getFieldErrorLabel("addressZipCode")}
                           fieldName={"addressZipCode"}
                           onValidation={onValidation}
+                          disabled={areAddressFieldsDisabled()}
                         />
                       </div>
                     </div>

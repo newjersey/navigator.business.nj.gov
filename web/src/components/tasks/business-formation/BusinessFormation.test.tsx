@@ -310,10 +310,13 @@ describe("<BusinessFormation />", () => {
       legalStructureId,
     });
     const formationData = generateEmptyFormationData();
+    formationData.formationFormData.addressMunicipality = generateMunicipality({
+      displayName: "Newark",
+      name: "Newark",
+    });
     const page = preparePage({
       business: { profileData, formationData },
       displayContent,
-      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
     });
 
     await page.fillAndSubmitBusinessNameStep("Pizza Joint");
@@ -535,10 +538,13 @@ describe("<BusinessFormation />", () => {
     const legalStructureId = "limited-liability-partnership";
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
+    formationData.formationFormData.addressMunicipality = generateMunicipality({
+      displayName: "Newark",
+      name: "Newark",
+    });
     const page = preparePage({
       business: { profileData, formationData },
       displayContent,
-      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
     });
 
     await page.fillAndSubmitBusinessNameStep("Pizza Joint");
@@ -754,10 +760,13 @@ describe("<BusinessFormation />", () => {
     const legalStructureId = "limited-partnership";
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
+    formationData.formationFormData.addressMunicipality = generateMunicipality({
+      displayName: "Newark",
+      name: "Newark",
+    });
     const page = preparePage({
       business: { profileData, formationData },
       displayContent,
-      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
     });
 
     await page.fillAndSubmitBusinessNameStep("Pizza Joint");
@@ -877,10 +886,13 @@ describe("<BusinessFormation />", () => {
     const legalStructureId = "c-corporation";
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
+    formationData.formationFormData.addressMunicipality = generateMunicipality({
+      displayName: "Newark",
+      name: "Newark",
+    });
     const page = preparePage({
       business: { profileData, formationData },
       displayContent,
-      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
     });
 
     const member: FormationMember = {
@@ -988,10 +1000,13 @@ describe("<BusinessFormation />", () => {
     const legalStructureId = "nonprofit";
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
+    formationData.formationFormData.addressMunicipality = generateMunicipality({
+      displayName: "Newark",
+      name: "Newark",
+    });
     const page = preparePage({
       business: { profileData, formationData },
       displayContent,
-      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
     });
 
     const trustee: FormationMember = {

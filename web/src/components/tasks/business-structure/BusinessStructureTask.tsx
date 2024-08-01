@@ -68,6 +68,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
 
     queueUpdateTaskProgress(props.task.id, "COMPLETED");
     await updateQueue.queueProfileData(profileData).update();
+    await updateQueue.queueFormationFormData(business.formationData.formationFormData).update();
     setShowRadioQuestion(false);
     setSuccessSnackbarIsOpen(true);
   });
@@ -90,6 +91,10 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
             : profileData.operatingPhase,
       })
       .queueTaskProgress({ [props.task.id]: "NOT_STARTED" });
+
+    if (business) {
+      updateQueue.queueFormationFormData(business?.formationData.formationFormData).update();
+    }
 
     setShowRadioQuestion(true);
     await updateQueue.update();

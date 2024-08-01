@@ -206,10 +206,8 @@ export const userRouterFactory = (
 
     if (legalStructureHasChanged(oldUserData, userData)) {
       // prevent legal structure from changing if business has been formed
-
       if (businessHasFormed(oldUserData)) {
         const oldBusiness = getCurrentBusiness(oldUserData);
-
         return modifyCurrentBusiness(userData, (business) => ({
           ...business,
           profileData: {
@@ -232,7 +230,6 @@ export const userRouterFactory = (
         },
       }));
     }
-
     return userData;
   };
 

@@ -7,6 +7,7 @@ import { ReactElement, useContext } from "react";
 
 interface Props {
   onValidation: () => void;
+  disabled?: boolean;
 }
 
 export const AddressMunicipalityDropdown = (props: Props): ReactElement => {
@@ -29,6 +30,7 @@ export const AddressMunicipalityDropdown = (props: Props): ReactElement => {
       value={state.addressData.addressMunicipality}
       onSelect={onSelect}
       helperText={getFieldErrorLabel("addressMunicipality")}
+      disabled={props.disabled}
     />
   );
 };
