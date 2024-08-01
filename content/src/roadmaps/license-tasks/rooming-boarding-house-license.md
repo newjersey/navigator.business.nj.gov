@@ -6,17 +6,22 @@ id: rooming-boarding-house-license
 filename: rooming-boarding-house-license
 displayname: rooming-boarding-house-license
 urlSlug: rooming-boarding-house-license
-name: Apply for a Rooming and/or Boarding House License
-webflowName: "Lodging: Rooming and/or Boarding House License"
+name: Apply for a Rooming or Boarding House License
+webflowName: "Lodging: Rooming or Boarding House License"
 summaryDescriptionMd: You need a license to own and/or operate a new or existing
   `rooming or boarding house|rooming-boarding-house` .
 industryId:
   - lodging
+callToActionText: Apply for My Rooming or Boarding House License
+callToActionLink: https://www.nj.gov/dca/codes/forms/pdf_rooming/App_Form_I.pdf
+agencyId: nj-community-affairs
+agencyAdditionalContext: Bureau of Rooming and Boarding House Standards
+divisionPhone: (609) 984-1704
 ---
 - - -
 
 :::note 
- Each owner and operator must submit an application and background check authorization form.
+ Each owner or operator must submit an application and background check authorization form.
 :::
 
 ## Application Requirements
@@ -37,6 +42,12 @@ industryId:
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
-Your rooming or boarding house must pass a site evaluation by the Bureau of Rooming and Boarding House Standards before you can get your license.
+The Bureau of Rooming and Boarding House Standards will evaluate your rooming or boarding house after reviewing your application. You must pass the site evaluation to get your license.
+
+:::
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+
+A rooming or boarding house license, which you must renew every year.
 
 :::
