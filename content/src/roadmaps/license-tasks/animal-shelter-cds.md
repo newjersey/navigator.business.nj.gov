@@ -44,7 +44,7 @@ agencyId: nj-consumer-affairs
 * Completed Zoning Certification (included in application)
 * Applicable fees paid, once the DCU has sent an invoice
 
-#### Safety and Security
+### Safety and Security
 
 * Schedule of the CDS 
 * Criminal History Record Information (CHRI) Part 1 for each person with access to the CDS and applicable fees paid (to be completed online and at the same time as the CDS registration; link in application) 
