@@ -31,7 +31,7 @@ agencyId: nj-consumer-affairs
 ---
 ## Application Requirements
 
-#### Business Information
+### Business Information
 
 * New Jersey business address where the CDS will be stored and dispensed (must match your DEA registration address)
 * DEA registration number(s), if applicable
