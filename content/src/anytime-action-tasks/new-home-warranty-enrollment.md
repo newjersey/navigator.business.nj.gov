@@ -1,5 +1,7 @@
 ---
-notesMd: "[Muni draft](https://docs.google.com/document/d/1pZBqY3yS9y8Y3MMSHqwvTFtdlYvuxhWKK70fUqsXRSY/edit)"
+notesMd: "[Muni
+  draft](https://docs.google.com/document/d/1pZBqY3yS9y8Y3MMSHqwvTFtdlYvuxhWKK7\
+  0fUqsXRSY/edit)"
 filename: new-home-warranty-enrollment
 name: Enroll New Homes You Build and Sell in a Warranty Plan
 industryIds:
@@ -45,24 +47,24 @@ callToActionLink: https://www.nj.gov/dca/divisions/codes/forms/pdf_nhw/COP_App.p
 
 ## Additional Requirements
 
-#### If you are selling the home and the first resident will be the home buyer:
+### If you are selling the home and the first resident will be the home buyer:
 
 - Home buyer’s name
 - Home buyer’s `FHA or VA mortgage case number|fha-case-number`
 - Copy of the entire purchase contract
 - Warranty premium payment
 
-#### If the first resident of the home will be a renter or if there is no home buyer at the time of enrollment:
+### If the first resident of the home will be a renter or if there is no home buyer at the time of enrollment:
 
 - Copy of lease, if a rental
 - Letter from the principal of the business or a realtor that states the fair market value of the house
 
-#### If the home is in a condominium development:
+### If the home is in a condominium development:
 
 - Building and unit layout
 - `Planned Real Estate Development (PRED)|planned-real-estate-development` registration or exemption number
 
-#### If you built the home for a homeowner on land they own for their personal use and it will not be listed for sale:
+### If you built the home for a homeowner on land they own for their personal use and it will not be listed for sale:
 
 - Copy of the construction contract between you and the homeowner, showing the total construction cost for the home. The total cost will be used to calculate the warranty premium payment
 - Notarized letter from the homeowner stating that home was built for their personal use and will not be listed for sale
