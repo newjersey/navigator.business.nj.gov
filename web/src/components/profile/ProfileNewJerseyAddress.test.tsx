@@ -1,14 +1,29 @@
 import { ProfileNewJerseyAddress } from "@/components/profile/ProfileNewJerseyAddress";
 import { getMergedConfig } from "@/contexts/configContext";
 import { generateAddress } from "@/test/factories";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { WithStatefulAddressData } from "@/test/mock/withStatefulAddressData";
-import { Address, emptyAddressData, Municipality } from "@businessnjgovnavigator/shared/";
+import {
+  Address,
+  emptyAddressData,
+  generateBusiness,
+  generateFormationData,
+  generateFormationFormData,
+  generateProfileData,
+  Municipality,
+} from "@businessnjgovnavigator/shared/";
 import { generateMunicipality } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+
 describe("<ProfileNewJerseyAddress  />", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
   const renderComponent = ({
     address,
     municipalities,
@@ -30,6 +45,14 @@ describe("<ProfileNewJerseyAddress  />", () => {
     const address = generateAddress({
       addressLine1: "1111 Home Alone",
     });
+    useMockBusiness(
+      generateBusiness({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({ ...address }),
+        }),
+      })
+    );
     renderComponent({ address });
     expect(screen.getByLabelText("Address line1")).toHaveValue("1111 Home Alone");
   });
@@ -38,6 +61,14 @@ describe("<ProfileNewJerseyAddress  />", () => {
     const address = generateAddress({
       addressLine1: "",
     });
+    useMockBusiness(
+      generateBusiness({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({ ...address }),
+        }),
+      })
+    );
     renderComponent({ address });
     expect(screen.getByLabelText("Address line1")).toHaveValue("");
     fillText("Address line1", "1111 Home Alone");
@@ -48,6 +79,14 @@ describe("<ProfileNewJerseyAddress  />", () => {
     const address = generateAddress({
       addressLine1: "",
     });
+    useMockBusiness(
+      generateBusiness({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({ ...address }),
+        }),
+      })
+    );
     renderComponent({ address });
     blurInput("Address line1");
     expect(screen.getByText(Config.formation.fields.addressLine1.error)).toBeInTheDocument();
@@ -57,6 +96,14 @@ describe("<ProfileNewJerseyAddress  />", () => {
     const address = generateAddress({
       addressLine2: "1111 Home Alone",
     });
+    useMockBusiness(
+      generateBusiness({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({ ...address }),
+        }),
+      })
+    );
     renderComponent({ address });
     expect(screen.getByLabelText("Address line2")).toHaveValue("1111 Home Alone");
   });
@@ -65,6 +112,14 @@ describe("<ProfileNewJerseyAddress  />", () => {
     const address = generateAddress({
       addressLine2: "",
     });
+    useMockBusiness(
+      generateBusiness({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({ ...address }),
+        }),
+      })
+    );
     renderComponent({ address });
     expect(screen.getByLabelText("Address line2")).toHaveValue("");
     fillText("Address line2", "1111 Home Alone");
@@ -76,6 +131,14 @@ describe("<ProfileNewJerseyAddress  />", () => {
       ...emptyAddressData,
       addressLine2: "123",
     });
+    useMockBusiness(
+      generateBusiness({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({ ...address }),
+        }),
+      })
+    );
     renderComponent({ address });
     blurInput("Address line2");
     expect(screen.getByText(Config.formation.fields.addressLine1.error)).toBeInTheDocument();
@@ -87,6 +150,14 @@ describe("<ProfileNewJerseyAddress  />", () => {
     const address = generateAddress({
       addressZipCode: "08437",
     });
+    useMockBusiness(
+      generateBusiness({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({ ...address }),
+        }),
+      })
+    );
     renderComponent({ address });
     expect(screen.getByLabelText("Address zip code")).toHaveValue("08437");
   });
@@ -95,6 +166,14 @@ describe("<ProfileNewJerseyAddress  />", () => {
     const address = generateAddress({
       addressZipCode: "",
     });
+    useMockBusiness(
+      generateBusiness({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({ ...address }),
+        }),
+      })
+    );
     renderComponent({ address });
     expect(screen.getByLabelText("Address zip code")).toHaveValue("");
     fillText("Address zip code", "08437");
@@ -105,6 +184,14 @@ describe("<ProfileNewJerseyAddress  />", () => {
     const address = generateAddress({
       addressState: undefined,
     });
+    useMockBusiness(
+      generateBusiness({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({ ...address }),
+        }),
+      })
+    );
     renderComponent({
       address,
     });
@@ -116,12 +203,31 @@ describe("<ProfileNewJerseyAddress  />", () => {
     const address = generateAddress({
       addressZipCode: "",
     });
+    useMockBusiness(
+      generateBusiness({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({ ...address }),
+        }),
+      })
+    );
     renderComponent({ address });
     blurInput("Address zip code");
     expect(screen.getByText(Config.formation.fields.addressZipCode.error)).toBeInTheDocument();
   });
 
   it("renders disabled profile address state field", () => {
+    const address = generateAddress({
+      addressZipCode: "",
+    });
+    useMockBusiness(
+      generateBusiness({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({ ...address }),
+        }),
+      })
+    );
     renderComponent({});
     expect(screen.getByLabelText("Address state")).toBeDisabled();
   });
@@ -131,6 +237,14 @@ describe("<ProfileNewJerseyAddress  />", () => {
     const address = generateAddress({
       addressMunicipality: municipality,
     });
+    useMockBusiness(
+      generateBusiness({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({ ...address }),
+        }),
+      })
+    );
     renderComponent({
       address,
       municipalities: [municipality],
@@ -143,6 +257,14 @@ describe("<ProfileNewJerseyAddress  />", () => {
     const address = generateAddress({
       addressMunicipality: undefined,
     });
+    useMockBusiness(
+      generateBusiness({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({ ...address }),
+        }),
+      })
+    );
     renderComponent({
       address,
       municipalities: [municipality],
@@ -156,12 +278,77 @@ describe("<ProfileNewJerseyAddress  />", () => {
     const address = generateAddress({
       addressMunicipality: undefined,
     });
+    useMockBusiness(
+      generateBusiness({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({ ...address }),
+        }),
+      })
+    );
     renderComponent({
       address,
       municipalities: [municipality],
     });
     blurInput("Address municipality");
     expect(screen.getByText(Config.formation.fields.addressMunicipality.error)).toBeInTheDocument();
+  });
+
+  it("renders profile locked fields when completed filing payment is true", async () => {
+    const municipality = generateMunicipality({ displayName: "Allendale", name: "Allendale" });
+    const address = generateAddress({
+      addressLine1: "1111 Home Alone",
+      addressLine2: "Suite 10",
+      addressMunicipality: municipality,
+      addressState: { shortCode: "NJ", name: "New Jersey" },
+      addressZipCode: "00893",
+    });
+    useMockBusiness(
+      generateBusiness({
+        profileData: generateProfileData({ businessPersona: "STARTING" }),
+        formationData: generateFormationData({
+          completedFilingPayment: true,
+          formationFormData: generateFormationFormData({ ...address }),
+        }),
+      })
+    );
+    renderComponent({
+      address,
+      municipalities: [municipality],
+    });
+    const addressLine1 = screen.getByTestId("locked-profileAddressLine1");
+    expect(within(addressLine1).getByText("1111 Home Alone")).toBeInTheDocument();
+    const addressLine2 = screen.getByTestId("locked-profileAddressLine2");
+    expect(within(addressLine2).getByText("Suite 10")).toBeInTheDocument();
+    const addressMuniStateZip = screen.getByTestId("locked-profileAddressMuniStateZip");
+    expect(within(addressMuniStateZip).getByText("Allendale, NJ 00893")).toBeInTheDocument();
+  });
+
+  it("does not render profile locked fields when address fields are not entered and completed filing payment is true", async () => {
+    const municipality = generateMunicipality({ displayName: "Allendale", name: "Allendale" });
+    const address = generateAddress({
+      addressLine1: "",
+      addressLine2: "",
+      addressMunicipality: undefined,
+      addressState: undefined,
+      addressZipCode: "",
+    });
+    useMockBusiness(
+      generateBusiness({
+        profileData: generateProfileData({ businessPersona: "STARTING" }),
+        formationData: generateFormationData({
+          completedFilingPayment: true,
+          formationFormData: generateFormationFormData({ ...address }),
+        }),
+      })
+    );
+    renderComponent({
+      address,
+      municipalities: [municipality],
+    });
+    expect(screen.queryByTestId("locked-profileAddressLine1")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("locked-profileAddressLine2")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("locked-profileAddressMuniStateZip")).not.toBeInTheDocument();
   });
 });
 

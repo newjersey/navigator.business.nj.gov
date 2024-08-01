@@ -50,6 +50,10 @@ import {
 
 import analytics from "@/lib/utils/analytics";
 import {
+  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
+} from "@/lib/utils/formation-helpers";
+import {
   chooseRadio,
   chooseTab,
   clickBack,
@@ -322,6 +326,16 @@ describe("profile - starting business", () => {
         employerId: "023456780",
         notes: "whats appppppp",
       },
+      formationData: {
+        ...initialBusiness.formationData,
+        formationFormData: {
+          ...initialBusiness.formationData.formationFormData,
+          addressState: {
+            name: "New Jersey",
+            shortCode: "NJ",
+          },
+        },
+      },
       taskProgress: {
         [einTaskId]: "COMPLETED",
         [naicsCodeTaskId]: "NOT_STARTED",
@@ -353,6 +367,16 @@ describe("profile - starting business", () => {
 
     expect(currentBusiness()).toEqual({
       ...initialBusiness,
+      formationData: {
+        ...initialBusiness.formationData,
+        formationFormData: {
+          ...initialBusiness.formationData.formationFormData,
+          addressState: {
+            name: "New Jersey",
+            shortCode: "NJ",
+          },
+        },
+      },
       taxFilingData: { ...taxData, filings: [] },
     });
   });
@@ -1351,6 +1375,295 @@ describe("profile - starting business", () => {
       });
       renderPage({ business });
       expect(screen.queryByTestId(dataTestId)).not.toBeInTheDocument();
+    });
+  });
+
+  describe("address data", () => {
+    it("displays alert when address line 1 is filled then blurred", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          industryId: "acupuncture",
+          businessPersona: "STARTING",
+          operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business });
+      fillText("Address line1", "123 Apple Pie Lane");
+
+      clickSave();
+      const profileAlert = screen.getByTestId("profile-error-alert");
+      await waitFor(() => {
+        expect(profileAlert).toBeInTheDocument();
+      });
+      expect(
+        within(profileAlert).queryByText(Config.formation.fields.addressLine1.label)
+      ).not.toBeInTheDocument();
+      expect(
+        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+      ).not.toBeInTheDocument();
+      expect(within(profileAlert).getByText(Config.formation.fields.addressCity.label)).toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+      ).toBeInTheDocument();
+    });
+
+    it("displays alert when zip code is filled with valid zip and then blurred", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          industryId: "acupuncture",
+          businessPersona: "STARTING",
+          operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business });
+      fillText("Address zip code", "07711");
+
+      clickSave();
+      const profileAlert = screen.getByTestId("profile-error-alert");
+      await waitFor(() => {
+        expect(profileAlert).toBeInTheDocument();
+      });
+
+      expect(within(profileAlert).getByText(Config.formation.fields.addressLine1.label)).toBeInTheDocument();
+      expect(
+        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+      ).not.toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+      ).toBeInTheDocument();
+      expect(
+        within(profileAlert).queryByText(Config.formation.fields.addressZipCode.label)
+      ).not.toBeInTheDocument();
+    });
+
+    it("displays alert when zip code is filled with invalid zip and then blurred", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          industryId: "acupuncture",
+          businessPersona: "STARTING",
+          operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business });
+      fillText("Address zip code", "1234");
+
+      clickSave();
+      const profileAlert = screen.getByTestId("profile-error-alert");
+      await waitFor(() => {
+        expect(profileAlert).toBeInTheDocument();
+      });
+
+      expect(within(profileAlert).getByText(Config.formation.fields.addressLine1.label)).toBeInTheDocument();
+      expect(
+        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+      ).not.toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+      ).toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+      ).toBeInTheDocument();
+    });
+
+    it("displays alert when address city is selected then blurred", async () => {
+      const randomMunicipality = generateMunicipality({});
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          industryId: "acupuncture",
+          businessPersona: "STARTING",
+          operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business, municipalities: [randomMunicipality] });
+
+      selectByText("Address municipality", randomMunicipality.displayName);
+      expect(screen.getByLabelText("Address municipality")).toHaveValue(randomMunicipality.displayName);
+      fireEvent.blur(screen.getByLabelText("Address municipality"));
+
+      clickSave();
+      const profileAlert = screen.getByTestId("profile-error-alert");
+
+      await waitFor(() => {
+        expect(profileAlert).toBeInTheDocument();
+      });
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+      ).toBeInTheDocument();
+      expect(within(profileAlert).getByText(Config.formation.fields.addressLine1.label)).toBeInTheDocument();
+      expect(
+        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+      ).not.toBeInTheDocument();
+      expect(
+        within(profileAlert).queryByText(Config.formation.fields.addressMunicipality.label)
+      ).not.toBeInTheDocument();
+    });
+
+    it("displays alert when max character limit for business line 1 is reached", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          industryId: "acupuncture",
+          businessPersona: "STARTING",
+          operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business });
+      fillText("Address line1", "a".repeat(BUSINESS_ADDRESS_LINE_1_MAX_CHAR + 1));
+
+      clickSave();
+      const profileAlert = screen.getByTestId("profile-error-alert");
+
+      await waitFor(() => {
+        expect(profileAlert).toBeInTheDocument();
+      });
+      expect(within(profileAlert).getByText(Config.formation.fields.addressLine1.label)).toBeInTheDocument();
+      expect(
+        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+      ).not.toBeInTheDocument();
+      expect(within(profileAlert).getByText(Config.formation.fields.addressCity.label)).toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+      ).toBeInTheDocument();
+    });
+
+    it("displays alert business line 2 is filled then blurred", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          industryId: "acupuncture",
+          businessPersona: "STARTING",
+          operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business });
+      fillText("Address line2", "Apt");
+
+      clickSave();
+      const profileAlert = screen.getByTestId("profile-error-alert");
+
+      await waitFor(() => {
+        expect(profileAlert).toBeInTheDocument();
+      });
+      expect(within(profileAlert).getByText(Config.formation.fields.addressLine1.label)).toBeInTheDocument();
+      expect(
+        within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+      ).not.toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+      ).toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+      ).toBeInTheDocument();
+    });
+
+    it("displays alert when max character limit for business line 2 is reached", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          industryId: "acupuncture",
+          businessPersona: "STARTING",
+          operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business });
+      fillText("Address line2", "a".repeat(BUSINESS_ADDRESS_LINE_2_MAX_CHAR + 1));
+
+      clickSave();
+      const profileAlert = screen.getByTestId("profile-error-alert");
+
+      await waitFor(() => {
+        expect(profileAlert).toBeInTheDocument();
+      });
+      expect(within(profileAlert).getByText(Config.formation.fields.addressLine1.label)).toBeInTheDocument();
+      expect(within(profileAlert).getByText(Config.formation.fields.addressLine2.label)).toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+      ).toBeInTheDocument();
+      expect(
+        within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+      ).toBeInTheDocument();
+    });
+
+    it("renders locked profile address fields when business has formed", () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+        }),
+        formationData: generateFormationData({
+          completedFilingPayment: true,
+          formationFormData: generateFormationFormData({
+            addressLine1: "123 Testing Road",
+            addressLine2: "",
+            addressMunicipality: generateMunicipality({ displayName: "Allendale" }),
+            addressState: {
+              name: "New Jersey",
+              shortCode: "NJ",
+            },
+            addressZipCode: "07781",
+          }),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.getByTestId("locked-profileAddressLine1")).toBeInTheDocument();
+      expect(screen.getByTestId("locked-profileAddressMuniStateZip")).toBeInTheDocument();
+    });
+
+    it("does not render locked profile address fields when business has not been formed", () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+        }),
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({
+            addressLine1: "123 Testing Road",
+            addressLine2: "",
+            addressMunicipality: generateMunicipality({ displayName: "Allendale" }),
+            addressState: {
+              name: "New Jersey",
+              shortCode: "NJ",
+            },
+            addressZipCode: "07781",
+          }),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.queryByTestId("locked-profileAddressLine1")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("locked-profileAddressMuniStateZip")).not.toBeInTheDocument();
     });
   });
 

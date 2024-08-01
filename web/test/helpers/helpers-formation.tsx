@@ -83,7 +83,6 @@ type PreparePageParams = {
 export const preparePage = ({
   business,
   displayContent,
-  municipalities,
   task,
   isAuthenticated,
   setShowNeedsAccountModal,
@@ -107,9 +106,9 @@ export const preparePage = ({
           formationFormData: createEmptyFormationFormData(),
         }),
   });
+
   const internalMunicipalities = [
-    profileData?.municipality ?? generateMunicipality({ displayName: "GenericTown" }),
-    ...(municipalities ?? []),
+    profileData?.municipality ?? generateMunicipality({ displayName: "New Town" }),
   ];
   initialBusiness.formationData.formationFormData.addressMunicipality &&
     internalMunicipalities.push(initialBusiness.formationData.formationFormData.addressMunicipality);

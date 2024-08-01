@@ -345,19 +345,20 @@ describe("<BusinessFormationPaginator />", () => {
         it("saves municipality to profile", async () => {
           const businessWithMunicipality = {
             ...business,
-            profileData: {
-              ...business.profileData,
-              municipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
+            formationData: {
+              ...business.formationData,
+              formationFormData: {
+                ...business.formationData.formationFormData,
+                addressMunicipality: generateMunicipality({ displayName: "New Town", name: "New Town" }),
+              },
             },
           };
           const page = preparePage({
             business: businessWithMunicipality,
             displayContent,
-            municipalities: [generateMunicipality({ displayName: "New Town", name: "New Town" })],
           });
           await page.stepperClickToBusinessStep();
 
-          expect((screen.getByLabelText("Address municipality") as HTMLInputElement).value).toEqual("Newark");
           page.selectByText("Address municipality", "New Town");
           expect((screen.getByLabelText("Address municipality") as HTMLInputElement).value).toEqual(
             "New Town"
@@ -404,23 +405,27 @@ describe("<BusinessFormationPaginator />", () => {
         it("does not send analytics when municipality was already entered", async () => {
           const businessWithMunicipality = {
             ...business,
-            profileData: {
-              ...business.profileData,
-              municipality: generateMunicipality({ displayName: "Newark" }),
+            formationData: {
+              ...business.formationData,
+              formationFormData: {
+                ...business.formationData.formationFormData,
+                addressMunicipality: generateMunicipality({ displayName: "New Town" }),
+              },
             },
           };
 
           const page = preparePage({
             business: businessWithMunicipality,
             displayContent,
-            municipalities: [generateMunicipality({ displayName: "New Town" })],
           });
           await page.stepperClickToBusinessStep();
           page.selectByText("Address municipality", "New Town");
 
           switchStepFunction();
           await waitFor(() => {
-            expect(currentBusiness().profileData.municipality?.displayName).toEqual("New Town");
+            expect(
+              currentBusiness().formationData.formationFormData.addressMunicipality?.displayName
+            ).toEqual("New Town");
           });
 
           expect(
@@ -472,11 +477,21 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("shows existing inline errors when visiting an INCOMPLETE step with inline errors", async () => {
-        const page = preparePage({ business, displayContent });
+        const businessWithMunicipality = {
+          ...business,
+          formationData: {
+            ...business.formationData,
+            formationFormData: {
+              ...business.formationData.formationFormData,
+              addressMunicipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
+            },
+          },
+        };
+
+        const page = preparePage({ business: businessWithMunicipality, displayContent });
         await page.stepperClickToBusinessStep();
         page.fillText("Address zip code", "22222");
         expect(screen.getByText(Config.formation.fields.addressZipCode.error)).toBeInTheDocument();
-
         switchStepFunction();
         expect(page.getStepStateInStepper(LookupStepIndexByName("Business"))).toEqual("INCOMPLETE");
 
