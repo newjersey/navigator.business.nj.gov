@@ -252,11 +252,6 @@ describe("Formation - Members Field", () => {
         const page = await getPageHelper(
           {
             legalStructureId,
-            municipality: generateMunicipality({
-              displayName: "Hampton Borough",
-              name: "Hampton",
-              ...generateFormationUSAddress({}),
-            }),
           },
           {
             members: [],
@@ -264,6 +259,12 @@ describe("Formation - Members Field", () => {
             contactLastName: "Smith",
             addressLine1: "123 Address",
             addressLine2: "business suite 201",
+            addressMunicipality: generateMunicipality({
+              displayName: "Hampton Borough",
+              name: "Hampton",
+              ...generateFormationUSAddress({}),
+            }),
+
             addressCountry: "US",
             addressState: { shortCode: "NJ", name: "New Jersey" },
             addressZipCode: "07601",
@@ -284,7 +285,6 @@ describe("Formation - Members Field", () => {
         const page = await getPageHelper(
           {
             legalStructureId,
-            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
           },
           {
             members: [generateFormationMember({})],
@@ -292,6 +292,7 @@ describe("Formation - Members Field", () => {
             contactLastName: "Smith",
             addressLine1: "123 Address",
             addressLine2: "business suite 201",
+            addressMunicipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
             addressCountry: "US",
             addressState: { shortCode: "NJ", name: "New Jersey" },
             addressZipCode: "07601",
@@ -312,11 +313,6 @@ describe("Formation - Members Field", () => {
         const page = await getPageHelper(
           {
             legalStructureId,
-            municipality: generateMunicipality({
-              displayName: "Hampton Borough",
-              name: "Hampton",
-              ...generateFormationUSAddress({}),
-            }),
           },
           {
             members: [],
@@ -324,6 +320,12 @@ describe("Formation - Members Field", () => {
             contactLastName: "Smith",
             addressLine1: "123 Address",
             addressLine2: "business suite 201",
+            addressMunicipality: generateMunicipality({
+              displayName: "Hampton Borough",
+              name: "Hampton",
+              ...generateFormationUSAddress({}),
+            }),
+
             addressCountry: "US",
             addressState: { shortCode: "NJ", name: "New Jersey" },
             addressZipCode: "07601",

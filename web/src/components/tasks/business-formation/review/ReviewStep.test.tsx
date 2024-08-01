@@ -462,11 +462,11 @@ describe("Formation - ReviewStep", () => {
       await renderStep(
         {
           businessPersona: "STARTING",
-          municipality: generateMunicipality({
-            displayName: "Some city",
-          }),
         },
         {
+          addressMunicipality: generateMunicipality({
+            displayName: "Some city",
+          }),
           businessLocationType: "NJ",
         }
       );

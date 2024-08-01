@@ -209,7 +209,6 @@ export const userRouterFactory = (
 
     if (legalStructureHasChanged(oldUserData, userData)) {
       // prevent legal structure from changing if business has been formed
-
       if (businessHasFormed(oldUserData)) {
         const oldBusiness = getCurrentBusiness(oldUserData);
 
@@ -222,13 +221,25 @@ export const userRouterFactory = (
         }));
       }
 
+      const formationFormData =
+        userData.businesses[userData.currentBusinessId].formationData.formationFormData;
+      const address = {
+        addressLine1: formationFormData.addressLine1,
+        addressLine2: formationFormData.addressLine2,
+        addressCity: formationFormData.addressCity,
+        addressMunicipality: formationFormData.addressMunicipality,
+        addressZipCode: formationFormData.addressZipCode,
+      };
       return modifyCurrentBusiness(userData, (business) => ({
         ...business,
         formationData: {
           formationResponse: undefined,
           getFilingResponse: undefined,
           completedFilingPayment: false,
-          formationFormData: createEmptyFormationFormData(),
+          formationFormData: {
+            ...createEmptyFormationFormData(),
+            ...address,
+          },
           businessNameAvailability: undefined,
           dbaBusinessNameAvailability: undefined,
           lastVisitedPageIndex: 0,

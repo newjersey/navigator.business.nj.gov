@@ -321,6 +321,7 @@ describe("<BusinessFormation />", () => {
     page.selectByText("Business suffix", "LLC");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
     page.selectDate(threeDaysFromNow, "Business start date");
+    fireEvent.click(screen.getByText(Config.formation.sections.addressAddButtonText));
     page.fillText("Address line1", "1234 main street");
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
@@ -546,6 +547,8 @@ describe("<BusinessFormation />", () => {
     page.selectByText("Business suffix", "LLP");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
     page.selectDate(threeDaysFromNow, "Business start date");
+    fireEvent.click(screen.getByText(Config.formation.sections.addressAddButtonText));
+
     page.fillText("Address line1", "1234 main street");
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
@@ -765,6 +768,7 @@ describe("<BusinessFormation />", () => {
     page.selectByText("Business suffix", "LP");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
     page.selectDate(threeDaysFromNow, "Business start date");
+    fireEvent.click(screen.getByText(Config.formation.sections.addressAddButtonText));
     page.fillText("Address line1", "1234 main street");
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
@@ -900,6 +904,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Business total stock", "123");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
     page.selectDate(threeDaysFromNow, "Business start date");
+    fireEvent.click(screen.getByText(Config.formation.sections.addressAddButtonText));
     page.fillText("Address line1", "1234 main street");
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
@@ -1012,6 +1017,7 @@ describe("<BusinessFormation />", () => {
     page.selectDate(threeDaysFromNow, "Business start date");
     page.chooseRadio("isVeteranNonprofit-true");
 
+    fireEvent.click(screen.getByText(Config.formation.sections.addressAddButtonText));
     page.fillText("Address line1", "1234 main street");
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");

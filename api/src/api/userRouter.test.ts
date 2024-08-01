@@ -770,7 +770,7 @@ describe("userRouter", () => {
         expect(formationDataPut).toEqual(completedFormationData);
       });
 
-      it("allows changing the legal structure (and clears formationData) if formation is not completed", async () => {
+      it("allows changing the legal structure (and clears formationData while preserving address) if formation is not completed", async () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
 
         const existingUserData = generateUserDataForBusiness(
@@ -779,6 +779,18 @@ describe("userRouter", () => {
             formationData: generateFormationData({
               formationResponse: generateFormationSubmitResponse({}),
               getFilingResponse: generateGetFilingResponse({ success: false }),
+              formationFormData: {
+                ...createEmptyFormationFormData(),
+                addressLine1: "123 Testing Way",
+                addressLine2: "Test Suite",
+                addressMunicipality: {
+                  displayName: "Newark Display Name",
+                  name: "Newark",
+                  county: "",
+                  id: "",
+                },
+                addressZipCode: "07781",
+              },
             }),
           }),
           { user: generateUser({ id: "123" }) }
@@ -809,7 +821,18 @@ describe("userRouter", () => {
           .legalStructureId;
         expect(legalStructurePut).toEqual("c-corporation");
         expect(formationDataPut).toEqual({
-          formationFormData: createEmptyFormationFormData(),
+          formationFormData: {
+            ...createEmptyFormationFormData(),
+            addressLine1: "123 Testing Way",
+            addressLine2: "Test Suite",
+            addressMunicipality: {
+              displayName: "Newark Display Name",
+              name: "Newark",
+              county: "",
+              id: "",
+            },
+            addressZipCode: "07781",
+          },
           formationResponse: undefined,
           getFilingResponse: undefined,
           completedFilingPayment: false,

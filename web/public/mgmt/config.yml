@@ -4393,6 +4393,17 @@ collections:
                               widget: "string",
                             }
                           - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Business Address
+                    name: "businessAddress"
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
                   - label: Business Name
                     name: "businessName"
                     collapsed: true
