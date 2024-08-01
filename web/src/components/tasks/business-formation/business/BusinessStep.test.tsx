@@ -13,7 +13,6 @@ import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   FormationFormData,
-  Municipality,
   ProfileData,
   PublicFilingLegalType,
   businessStructureTaskId,
@@ -65,8 +64,7 @@ describe("Formation - BusinessStep", () => {
 
   const getPageHelper = async (
     initialProfileData: Partial<ProfileData>,
-    formationFormData: Partial<FormationFormData>,
-    municipalities?: Municipality[]
+    formationFormData: Partial<FormationFormData>
   ): Promise<FormationPageHelpers> => {
     const profileData = generateFormationProfileData(initialProfileData);
     const isForeign = initialProfileData.businessPersona === "FOREIGN";
@@ -87,7 +85,6 @@ describe("Formation - BusinessStep", () => {
     const page = preparePage({
       business: generateBusiness({ profileData, formationData }),
       displayContent,
-      municipalities,
     });
     if (isForeign) {
       await page.submitNexusBusinessNameStep();
@@ -130,13 +127,13 @@ describe("Formation - BusinessStep", () => {
     const page = await getPageHelper(
       {
         legalStructureId: "limited-liability-company",
-        municipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
       },
       {
         businessSuffix: "LTD LIABILITY CO",
         businessStartDate: getCurrentDateFormatted(defaultDateFormat),
         addressLine1: "123 main street",
         addressLine2: "suite 102",
+        addressMunicipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
         addressState: { name: "New Jersey", shortCode: "NJ" },
         addressZipCode: "07601",
         businessPurpose: "some cool purpose",
@@ -939,10 +936,9 @@ describe("Formation - BusinessStep", () => {
     it("displays City (Main Address) from profile data", async () => {
       await getPageHelper(
         {
-          municipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
           businessPersona: "STARTING",
         },
-        {}
+        { addressMunicipality: generateMunicipality({ displayName: "Newark", name: "Newark" }) }
       );
       expect((screen.getByLabelText("Address municipality") as HTMLInputElement).value).toEqual("Newark");
     });

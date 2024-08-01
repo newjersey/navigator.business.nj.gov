@@ -107,6 +107,7 @@ export const preparePage = ({
           formationFormData: createEmptyFormationFormData(),
         }),
   });
+
   const internalMunicipalities = [
     profileData?.municipality ?? generateMunicipality({ displayName: "GenericTown" }),
     ...(municipalities ?? []),
