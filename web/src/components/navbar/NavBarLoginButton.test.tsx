@@ -1,4 +1,4 @@
-import { DesktopLoginButton } from "@/components/navbar/desktop/DesktopLoginButton";
+import { NavBarLoginButton } from "@/components/navbar/NavBarLoginButton";
 import { getMergedConfig } from "@/contexts/configContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import analytics from "@/lib/utils/analytics";
@@ -24,11 +24,11 @@ function setupMockAnalytics(): typeof analytics {
 }
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
-describe("DesktopLoginButton", () => {
+describe("NavBarLoginButton", () => {
   const Config = getMergedConfig();
 
-  it("triggers analyticst on click", async () => {
-    render(<DesktopLoginButton />);
+  it("triggers analytics on click", async () => {
+    render(<NavBarLoginButton />);
     fireEvent.click(screen.getByText(Config.navigationDefaults.logInButton));
     await waitFor(() => {
       expect(mockAnalytics.event.landing_page_navbar_log_in.click.go_to_myNJ_login).toHaveBeenCalled();
@@ -36,7 +36,7 @@ describe("DesktopLoginButton", () => {
   });
 
   it("triggers signin action on click", () => {
-    render(<DesktopLoginButton />);
+    render(<NavBarLoginButton />);
     fireEvent.click(screen.getByText(Config.navigationDefaults.logInButton));
     expect(triggerSignIn).toHaveBeenCalled();
   });

@@ -9,6 +9,7 @@ import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
 type Props = {
   landingPage?: boolean;
+  isSeoStarterKit?: boolean;
   task?: Task;
   showSidebar?: boolean;
   hideMiniRoadmap?: boolean;
@@ -52,6 +53,7 @@ export const NavBar = (props: Props): ReactElement => {
     <>
       <div className="display-none desktop:display-inline">
         <NavBarDesktop
+          isSeoStarterKit={props.isSeoStarterKit}
           isLanding={props.landingPage}
           logoOnlyType={props.logoOnly}
           previousBusinessId={props.previousBusinessId}
@@ -62,6 +64,7 @@ export const NavBar = (props: Props): ReactElement => {
       </div>
       <div className="display-inline desktop:display-none">
         <NavBarMobile
+          isSeoStarterKit={props.isSeoStarterKit}
           scrolled={scrolled}
           task={props.task}
           showSidebar={props.showSidebar}

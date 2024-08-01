@@ -139,3 +139,25 @@
     flex-direction: row !important;
   }
 }
+
+.desktop\:flex-align-self-center {
+  @media (min-width: $lg) {
+    align-self: center;
+  }
+}
+
+.tablet\:flex-align-self-center {
+  @media (min-width: $xs) and (max-width: $lg) {
+    align-self: center;
+  }
+}
+
+.desktop\:flex-row {
+  @media (min-width: $lg) {
+    flex-direction: row;
+  }
+}
+
+.flex-basis-100 {
+  flex-basis: 100%;
+}

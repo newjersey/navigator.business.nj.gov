@@ -28,6 +28,7 @@ import * as NexusDbaFormation from "@businessnjgovnavigator/content/fieldConfig/
 import * as NexusNameSearch from "@businessnjgovnavigator/content/fieldConfig/nexus-name-search.json";
 import * as PageNotFoundError from "@businessnjgovnavigator/content/fieldConfig/page-not-found-error.json";
 import * as Profile from "@businessnjgovnavigator/content/fieldConfig/profile.json";
+import * as StarterKits from "@businessnjgovnavigator/content/fieldConfig/starter-kits.json";
 import * as TaxAccess from "@businessnjgovnavigator/content/fieldConfig/tax-access-modal.json";
 import * as Tax from "@businessnjgovnavigator/content/fieldConfig/tax.json";
 import * as PageMetadata from "@businessnjgovnavigator/content/page-metadata/page-metadata.json";
@@ -72,6 +73,7 @@ const merged = JSON.parse(
       PageMetadata,
       CalloutDefaults,
       ElevatorRegistration,
+      StarterKits,
       HousingRegistrationSearchTask
     )
   )
@@ -111,6 +113,7 @@ export type ConfigType = typeof ConfigOriginal &
   typeof CalloutDefaults &
   typeof DashboardDefaults &
   typeof PageMetadata &
+  typeof StarterKits &
   typeof HousingRegistrationSearchTask;
 
 export const getMergedConfig = (): ConfigType => {
@@ -146,6 +149,7 @@ export const getMergedConfig = (): ConfigType => {
     PageMetadata,
     CalloutDefaults,
     ElevatorRegistration,
+    StarterKits,
     HousingRegistrationSearchTask
   );
 };

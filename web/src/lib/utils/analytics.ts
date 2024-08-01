@@ -2316,5 +2316,36 @@ export default {
         },
       },
     },
+    starter_kit_landing: {
+      click: {
+        start_now_button: () => {
+          eventRunner.track({
+            legacy_event_category: "starter_kit_landing_start_now_button",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_onboarding",
+            event: "call_to_action_clicks",
+            clicked_to: "onboarding",
+          });
+        },
+        get_my_starter_kit_button: () => {
+          eventRunner.track({
+            legacy_event_category: "starter_kit_landing_get_my_starter_kit_button",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_onboarding",
+            event: "call_to_action_clicks",
+            clicked_to: "/onboarding",
+          });
+        },
+        get_my_starter_kit_button_footer: () => {
+          eventRunner.track({
+            legacy_event_category: "starter_kit_landing_get_my_starter_kit_button_footer",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_onboarding",
+            event: "call_to_action_clicks",
+            clicked_to: "/onboarding",
+          });
+        },
+      },
+    },
   },
 };
