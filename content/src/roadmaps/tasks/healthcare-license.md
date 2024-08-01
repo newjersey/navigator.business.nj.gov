@@ -24,6 +24,7 @@ agencyId: nj-consumer-affairs
 * [Respiratory Care Therapists](https://www.njconsumeraffairs.gov/resp/Pages/default.aspx)
 * [Audiologists and Speech-Language Pathologists](https://www.njconsumeraffairs.gov/aud/Pages/default.aspx)
 * [Dietitians and Nutritionists](https://www.njconsumeraffairs.gov/dan/Pages/default.aspx)
+* [Dental Hygienists and Dental Assistants](https://www.njconsumeraffairs.gov/den/Pages/default.aspx)
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
