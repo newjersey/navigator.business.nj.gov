@@ -168,7 +168,7 @@ const updateLicenseWithWebflowId = (webflowId, filename) => {
     webflowId: webflowId,
   };
   const stringifiedFile = writeMarkdownString(updatedMdObject);
-  fs.writeFileSync(`${filepath}/${filename}.md`, stringifiedFile, (err) => {
+  fs.writeFileSync(`${filepath}`, stringifiedFile, (err) => {
     if (err) {
       throw err;
     }
@@ -212,7 +212,6 @@ const getUnusedLicenseIds = async () => {
 
   const webflowLicenseArray = await getAllLicensesFromWebflow();
 
-
   return webflowLicenseArray.filter((item) => {
     const hasValueInLocalCmsAndWebflowRemote = localLicensesIds.has(item.id);
     return !hasValueInLocalCmsAndWebflowRemote;
@@ -237,7 +236,6 @@ const deleteLicenses = async () => {
 };
 
 const syncLicenses = async (params) => {
-
   console.log("deleting licenses");
   await deleteLicenses();
   await wait();
@@ -274,7 +272,6 @@ if (process.env.NODE_ENV === "test") {
   })();
 } else if (argsInclude("--preview")) {
   await (async () => {
-
     console.info("---- To be deleted: -----");
     console.info((await getUnusedLicenseIds()).map((it) => `${it.fieldData.name}: ${it.id}`));
     console.info("---- To be created: -----");

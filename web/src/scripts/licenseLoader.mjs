@@ -65,19 +65,27 @@ const loadLicenseByPath = (fileName, fullPath) => {
   return convertLicenseMd(fileContents, fileNameWithoutMd);
 };
 
+const getMarkDownFromNavigatorDir = (fileName, filePath) => {
+  const fileContents = fs.readFileSync(filePath, "utf8");
+  const fileNameWithoutMd = fileName.split(".md")[0];
+  const markdown = convertLicenseMd(fileContents, fileNameWithoutMd);
+  return [markdown, filePath];
+};
+
 export const loadNavigatorLicense = (fileName) => {
-  try {
-    const fullPath = path.join(navigatorLicenseDir, `${fileName}`);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const fileNameWithoutMd = fileName.split(".md")[0];
-    const markdown = convertLicenseMd(fileContents, fileNameWithoutMd);
-    return [markdown, navigatorLicenseDir];
-  } catch {
-    const fullPath = path.join(municipalDir, `${fileName}`);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const fileNameWithoutMd = fileName.split(".md")[0];
-    const markdown = convertLicenseMd(fileContents, fileNameWithoutMd);
-    return [markdown, municipalDir];
+  const navigatorLicenseFile = path.join(navigatorLicenseDir, `${fileName}`);
+  const municipalLicenseFile = path.join(municipalDir, `${fileName}`);
+  const webflowLicenseFile = path.join(webflowLicenseDir, `${fileName}`);
+
+  if (fs.existsSync(navigatorLicenseFile)) {
+    return getMarkDownFromNavigatorDir(fileName, navigatorLicenseFile);
+  } else if (fs.existsSync(municipalLicenseFile)) {
+    return getMarkDownFromNavigatorDir(fileName, municipalLicenseFile);
+  } else if (fs.existsSync(webflowLicenseFile)) {
+    return getMarkDownFromNavigatorDir(fileName, webflowLicenseFile);
+  } else {
+    console.error("couldn't find file when trying to load from MD");
+    throw new Error("couldn't find file when trying to load from MD");
   }
 };
 
