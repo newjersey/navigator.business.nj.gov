@@ -1,7 +1,10 @@
 ---
-notesMd: "[Muni
-  draft](https://docs.google.com/document/d/12SNShJI_dQAFAS5yJ5nCL6kOfAknWOvjn4\
-  -W7B_TqP8/edit?usp=sharing)"
+notesMd: >-
+  [Muni
+  draft](https://docs.google.com/document/d/12SNShJI_dQAFAS5yJ5nCL6kOfAknWOvjn4-W7B_TqP8/edit?usp=sharing)
+
+
+  Note: this is a version of the "Evaluate Your Location" screen, tailored to residential landlords. Updated to a Grade 10 reading level and more relevant language.
 summaryDescriptionMd: >
   Obtaining real estate in New Jersey involves careful planning, research, and
   professional help.
