@@ -18,7 +18,7 @@ import {
   generateSidebarCardContent,
   randomFundingCertification,
 } from "@/test/factories";
-import { Business } from "@businessnjgovnavigator/shared";
+import { Business, generateUser, generateUserData } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId, ProfileData } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,
@@ -97,6 +97,8 @@ describe("sidebarCard Helpers", () => {
 
   describe("sortFundings", () => {
     it("sorts fundings by status first then alphabetically", () => {
+      const userData = generateUserData({});
+
       const funding1 = generateFunding({ name: "Bca", status: "deadline" });
       const funding2 = generateFunding({ name: "Abc", status: "deadline" });
       const funding3 = generateFunding({ name: "cba", status: "deadline" });
@@ -104,7 +106,7 @@ describe("sidebarCard Helpers", () => {
       const funding5 = generateFunding({ name: "bca", status: "rolling application" });
       const fundings = [funding5, funding2, funding3, funding1, funding4];
 
-      const result = sortFundings(fundings);
+      const result = sortFundings(fundings, userData);
       expect(result.length).toEqual(5);
       expect(result).toEqual([funding2, funding1, funding3, funding4, funding5]);
     });
@@ -125,6 +127,100 @@ describe("sidebarCard Helpers", () => {
       const result = sortFundings(fundings);
       expect(result.length).toEqual(2);
       expect(result).toEqual([funding1, funding2]);
+    });
+
+    describe("agencyFundingSorting", () => {
+      it("maintains previous sorting but bubbles fundings from agencySource to top", () => {
+        const userData = generateUserData({
+          user: generateUser({
+            accountCreationSource: "investNewark",
+          }),
+        });
+        const funding1 = generateFunding({ name: "Bca", status: "deadline" });
+        const funding2 = generateFunding({ name: "Abc", status: "deadline", agency: ["fakeAgency"] });
+        const funding3 = generateFunding({ name: "cba", status: "deadline", agency: ["invest-newark"] });
+        const funding4 = generateFunding({ name: "abc", status: "first come, first serve" });
+        const funding5 = generateFunding({
+          name: "bca",
+          status: "rolling application",
+          agency: ["invest-newark"],
+        });
+        const fundings = [funding5, funding2, funding3, funding1, funding4];
+
+        const result = sortFundings(fundings, userData);
+        expect(result.length).toEqual(5);
+        expect(result).toEqual([funding3, funding5, funding2, funding1, funding4]);
+      });
+
+      it("does not change the sorting if no matching agencies found", () => {
+        const userData = generateUserData({
+          user: generateUser({
+            accountCreationSource: "InvestNewark",
+          }),
+        });
+        const funding1 = generateFunding({ name: "Bca", status: "deadline" });
+        const funding2 = generateFunding({ name: "Abc", status: "deadline", agency: ["fakeAgency"] });
+        const funding3 = generateFunding({ name: "cba", status: "deadline", agency: ["testAgency"] });
+        const funding4 = generateFunding({ name: "abc", status: "first come, first serve" });
+        const funding5 = generateFunding({
+          name: "bca",
+          status: "rolling application",
+          agency: ["testAgency"],
+        });
+        const fundings = [funding5, funding2, funding3, funding1, funding4];
+
+        const result = sortFundings(fundings, userData);
+        expect(result.length).toEqual(5);
+        expect(result).toEqual([funding2, funding1, funding3, funding4, funding5]);
+      });
+
+      it("does not change the sorting if empty string passed for agencyName, even if that is matched", () => {
+        const userData = generateUserData({
+          user: generateUser({
+            accountCreationSource: "fake-source",
+          }),
+        });
+        const funding1 = generateFunding({ name: "Bca", status: "deadline" });
+        const funding2 = generateFunding({ name: "Abc", status: "deadline", agency: ["fakeAgency"] });
+        const funding3 = generateFunding({ name: "cba", status: "deadline", agency: ["testAgency", ""] });
+        const funding4 = generateFunding({ name: "abc", status: "first come, first serve" });
+        const funding5 = generateFunding({
+          name: "bca",
+          status: "rolling application",
+          agency: [""],
+        });
+        const fundings = [funding5, funding2, funding3, funding1, funding4];
+
+        const result = sortFundings(fundings, userData);
+        expect(result.length).toEqual(5);
+        expect(result).toEqual([funding2, funding1, funding3, funding4, funding5]);
+      });
+
+      it("does not change the sorting if all fundings from same agency", () => {
+        const userData = generateUserData({
+          user: generateUser({
+            accountCreationSource: "investNewark",
+          }),
+        });
+        const funding1 = generateFunding({ name: "Bca", status: "deadline", agency: ["invest-newark"] });
+        const funding2 = generateFunding({ name: "Abc", status: "deadline", agency: ["invest-newark"] });
+        const funding3 = generateFunding({ name: "cba", status: "deadline", agency: ["invest-newark"] });
+        const funding4 = generateFunding({
+          name: "abc",
+          status: "first come, first serve",
+          agency: ["invest-newark"],
+        });
+        const funding5 = generateFunding({
+          name: "bca",
+          status: "rolling application",
+          agency: ["invest-newark"],
+        });
+        const fundings = [funding5, funding2, funding3, funding1, funding4];
+
+        const result = sortFundings(fundings, userData);
+        expect(result.length).toEqual(5);
+        expect(result).toEqual([funding2, funding1, funding3, funding4, funding5]);
+      });
     });
   });
 
