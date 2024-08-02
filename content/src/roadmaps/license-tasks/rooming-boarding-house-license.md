@@ -9,7 +9,7 @@ urlSlug: rooming-boarding-house-license
 name: Apply for a Rooming or Boarding House License
 webflowName: "Lodging: Rooming or Boarding House License"
 summaryDescriptionMd: You need a license to own and/or operate a new or existing
-  `rooming or boarding house|rooming-boarding-house` .
+  `rooming or boarding house|rooming-boarding-house`.
 industryId:
   - lodging
 callToActionText: Apply for My Rooming or Boarding House License
