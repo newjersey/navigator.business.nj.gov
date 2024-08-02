@@ -15,9 +15,9 @@ Your temporary help service firm registration expires every year.
 - `Surety bond|surety-bond` number and premium paid receipt 
 - Current registration number
 - `Registered agent|registered-agent` number
--Criminal history of the applicant, company officers, directors, or principals, if applicable
+- Criminal history of the applicant, company officers, directors, or principals, if applicable
 - Applicable fees paid
 
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
-- A renewed temporary help service firm registration is valid for one year. It will be sent to your mailing address on file.
+- A renewed temporary help service firm registration valid for one year. It will be sent to your mailing address on file.
