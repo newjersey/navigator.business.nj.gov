@@ -16,7 +16,7 @@ summaryDescriptionMd: You need a license to own and/or operate a new or existing
   facility|residential-health-care-facility`.
 industryId:
   - healthcare
-callToActionText: Apply for My License
+callToActionText: Apply for My Free-Standing Residential Health Care Facility License
 callToActionLink: https://www.nj.gov/dca/codes/forms/pdf_rooming/RHCF_app.pdf
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of Rooming and Boarding House Standards
