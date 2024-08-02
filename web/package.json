@@ -35,7 +35,8 @@
     "webflow:industries-sync": "node ./src/scripts/webflow/industrySync.mjs --sync",
     "webflow:industries-ci-sync": "node ./src/scripts/webflow/industrySync.mjs --ci-sync",
     "webflow:licenses-sync": "node ./src/scripts/webflow/licenseSync.mjs --sync",
-    "webflow:licenses-ci-sync": "node ./src/scripts/webflow/licenseSync.mjs --ci-sync"
+    "webflow:licenses-ci-sync": "node ./src/scripts/webflow/licenseSync.mjs --ci-sync",
+    "webflow:licenses-preview-sync": "node ./src/scripts/webflow/licenseSync.mjs --preview"
   },
   "prettier": {
     "printWidth": 110,
