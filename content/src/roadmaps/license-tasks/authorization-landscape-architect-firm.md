@@ -1,7 +1,6 @@
 ---
 id: "authorization-landscape-architect-firm"
-displayname: "authorization-landscape-architect-firm"
-webflowId: "6657975835ef8d84f05d8123"
+webflowId: "66aceed5b3aedbec5e3d51bf"
 urlSlug: "authorization-landscape-architect-firm"
 name: "Get Your Certificate of Authorization to Offer Landscape Architectural Services"
 webflowName: "Landscape Architecture: Certificate of Authorization for Your Landscape Architecture Firm"

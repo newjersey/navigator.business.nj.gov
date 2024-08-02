@@ -1,24 +1,19 @@
 ---
-id: appraiser-certification
-filename: appraiser-certification
-displayname: real-estate-appraiser-certification
-urlSlug: real-estate-appraiser-certification
-name: Apply for Your Residential Real Property Appraiser Certification
+id: "appraiser-certification"
+webflowId: "66aceed5a35295b74def2d2d"
+urlSlug: "real-estate-appraiser-certification"
+name: "Apply for Your Residential Real Property Appraiser Certification"
 webflowName: "Real Estate Appraisal: Residential Real Property Appraiser Certification"
-summaryDescriptionMd: You need a certification to appraise real estate with one
-  to four residential units—regardless of value or complexity. If you are
-  opening an `Appraisal Management Company|appraisal-management-company` you
-  must have a certified appraiser.
-industryId:
-  - real-estate-appraisals
+filename: "appraiser-certification"
+callToActionLink: "https://newjersey.mylicense.com/eGov/Login.aspx"
 callToActionText: "Apply for My Appraiser Certification"
-callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
-licenseCertificationClassification: CERTIFICATION
-agencyId: nj-consumer-affairs
-agencyAdditionalContext: Real Estate Appraiser Board
-divisionPhone: (973) 504-6480
-webflowType: individual-license
-webflowId: 6414793bb48ba7e9395c9540
+agencyId: "nj-consumer-affairs"
+agencyAdditionalContext: "Real Estate Appraiser Board"
+divisionPhone: "(973) 504-6480"
+industryId: "real-estate-appraisals"
+webflowType: "individual-license"
+licenseCertificationClassification: "CERTIFICATION"
+summaryDescriptionMd: "You need a certification to appraise real estate with one to four residential units—regardless of value or complexity. If you are opening an `Appraisal Management Company|appraisal-management-company` you must have a certified appraiser."
 ---
 
 ## Eligibility Criteria
