@@ -19,4 +19,4 @@ Your combined consulting firm (headhunter) and temporary help service firm regis
 - Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
-- A renewed combined temporary help service and consulting firm (headhunter) registration is valid for one year. It will be sent to your mailing address on file.
+- A renewed combined temporary help service and consulting firm (headhunter) registration valid for one year. It will be sent to your mailing address on file.
