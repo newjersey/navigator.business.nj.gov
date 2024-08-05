@@ -100,22 +100,22 @@ describe("<MainBusinessAddressNj />", () => {
     expect(screen.getByLabelText("Address zip code")).toBeInTheDocument();
   });
 
-  it("does NOT show inline errors when missing address1 as NJ", async () => {
+  it("shows inline errors when missing address1 as NJ", async () => {
     await getPageHelper({ addressLine1: "" });
     fireEvent.blur(screen.getByLabelText("Address line1"));
-    expect(screen.queryByText(Config.formation.fields.addressLine1.error)).not.toBeInTheDocument();
+    expect(screen.getByText(Config.formation.fields.addressLine1.error)).toBeInTheDocument();
   });
 
-  it("does NOT show inline errors when missing city as NJ", async () => {
+  it("does show inline errors when missing city as NJ", async () => {
     await getPageHelper({ addressMunicipality: undefined });
     fireEvent.blur(screen.getByTestId("addressMunicipality"));
-    expect(screen.queryByText(Config.formation.fields.addressMunicipality.error)).not.toBeInTheDocument();
+    expect(screen.getByText(Config.formation.fields.addressMunicipality.error)).toBeInTheDocument();
   });
 
-  it("does NOT show inline errors when missing zipcode as NJ", async () => {
+  it("does show inline errors when missing zipcode as NJ", async () => {
     await getPageHelper({ addressZipCode: "" });
     fireEvent.blur(screen.getByLabelText("Address zip code"));
-    expect(screen.queryByText(Config.formation.fields.addressZipCode.error)).not.toBeInTheDocument();
+    expect(screen.getByText(Config.formation.fields.addressZipCode.error)).toBeInTheDocument();
   });
 
   it("should NOT require Address fields for state business for API submission", async () => {
@@ -140,7 +140,6 @@ describe("<MainBusinessAddressNj />", () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (Config.formation.fields as any)[field].label
       );
-      expect(screen.getByText(Config.formation.general.partialAddressErrorText)).toBeInTheDocument();
     });
   });
 

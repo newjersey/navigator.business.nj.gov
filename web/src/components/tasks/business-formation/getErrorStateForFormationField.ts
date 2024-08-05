@@ -283,8 +283,8 @@ export const getErrorStateForFormationField = (inputParams: {
     }
 
     const partialAddressError = fieldWithAssociatedFields({
-      associatedFields: ["addressMunicipality", "addressLine1"],
-      label: Config.formation.general.partialAddressErrorText,
+      associatedFields: ["addressMunicipality", "addressLine1", "addressLine2"],
+      label: (Config.formation.fields as any)[field].error,
     });
 
     inRange = isZipCodeNj(formationFormData[field]);
@@ -304,8 +304,8 @@ export const getErrorStateForFormationField = (inputParams: {
 
     const maxLengthError = fieldWithMaxLength({ required: false, maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR });
     const partialAddressError = fieldWithAssociatedFields({
-      associatedFields: ["addressMunicipality", "addressZipCode"],
-      label: Config.formation.general.partialAddressErrorText,
+      associatedFields: ["addressMunicipality", "addressZipCode", "addressLine2"],
+      label: (Config.formation.fields as any)[field].error,
     });
 
     return combineErrorStates({ firstPriority: maxLengthError, secondPriority: partialAddressError });
@@ -313,8 +313,8 @@ export const getErrorStateForFormationField = (inputParams: {
 
   if (field === "addressMunicipality") {
     return fieldWithAssociatedFields({
-      associatedFields: ["addressLine1", "addressZipCode"],
-      label: Config.formation.general.partialAddressErrorText,
+      associatedFields: ["addressLine1", "addressZipCode", "addressLine2"],
+      label: (Config.formation.fields as any)[field].error,
     });
   }
 
