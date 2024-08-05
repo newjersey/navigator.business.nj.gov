@@ -18,7 +18,7 @@ summaryDescriptionMd: >-
 
 
   :::infoAlert 
-   You need to hire an environmental consultant or Licensed Site Remediation Professional to complete a Preliminary Assessment Report. See the [instructions](https://dep.nj.gov/wp-content/uploads/srp/preliminary_assessment_report_ins_online.pdf?version_1_3) for more information.
+   You need to hire an environmental consultant or Licensed Site Remediation Professional to complete a [Preliminary Assessment Report](https://dep.nj.gov/wp-content/uploads/srp/preliminary_assessment_report_ins_online.pdf?version_1_3). 
   :::
 callToActionLink: https://dep.nj.gov/grantandloanprograms/child-care/
 callToActionText: Learn More
@@ -38,9 +38,11 @@ sector:
 publishStageArchive: ""
 ---
 ## Eligibility
-- Owners or operators of licensed child care centers or child care centers applying for a license through the Department of Children and Families (DCF)
+
+* Owners or operators of licensed child care centers or child care centers applying for a license through the Department of Children and Families (DCF)
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-A grant reimbursement of up to $1500 is available 
+Offers a grant reimbursement of up to $1500.
+
 :::
