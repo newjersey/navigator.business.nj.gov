@@ -44,6 +44,11 @@
       "questionText": "Are you a dentist?",
       "addOn": "healthcare-dentist",
       "id": "dentist"
+    },
+    {
+      "id": "freestanding-residential-health-care-license",
+      "questionText": "Do you plan to own and/or operate a free-standing residential health care facility?",
+      "addOn": "healthcare-freestanding-facility-license"
     }
   ]
 }
