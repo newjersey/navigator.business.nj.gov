@@ -44,12 +44,10 @@
     }
   ],
   "name": "Cemetery ",
-  "nonEssentialQuestionsIds": [
-    "weights-measures"
-  ],
+  "nonEssentialQuestionsIds": [],
   "displayname": "Cemetery",
   "isEnabled": false,
-  "additionalSearchTerms": "cemetary, memorial, burial, graveyard, crematory",
+  "additionalSearchTerms": "cemetary, memorial, burial, graveyard, crematory, mausoleum",
   "id": "Cemetery",
   "description": "Offers burial plots, mausoleum spaces, and other services for the dead"
 }
