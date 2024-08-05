@@ -18,7 +18,7 @@ id: residential-lease-agreement
 * **Legal advice**: An attorney can help draft or review your lease agreement
 * **Simple language**: Make sure the lease is clear and easy to understand
 * **Lease details**: Specify information such as the lease period, rent, property use, and renewal and termination terms
-* **Security deposit requirements**: Make sure to comply with New Jersey’s Security Deposit Law
+* **Security deposit requirements**: Make sure to comply with [New Jersey’s Security Deposit Law](https://www.nj.gov/dca/divisions/codes/publications/pdf_lti/secty_deposit_bulletin.pdf)
 * **Maintenance**: Clearly define the responsibilities of the landlord and tenant
 * **Addendums**: Include addendums for specific situations or agreements not covered in the main lease
 * **Legal disclosures**: Include required disclosures, such as lead paint information 
