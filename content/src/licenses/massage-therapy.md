@@ -1,5 +1,8 @@
 ---
 urlSlug: massage-therapy
+renewalEventDisplayName: Massage Therapy Business License Renewal Deadline
+expirationEventDisplayName: Massage Therapy Business License Expiration
+licenseName: Massage and Bodywork Therapy-Massage and Bodywork Employer
 previewType: expiration
 summaryDescriptionMd: "\n"
 callToActionLink: https://newjersey.mylicense.com/eGov/PersonSearchResults.aspx

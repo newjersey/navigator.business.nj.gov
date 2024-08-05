@@ -1,6 +1,9 @@
 ---
 urlSlug: certified-public-accountant
 previewType: renewal
+renewalEventDisplayName: Accountant License Renewal Deadline
+expirationEventDisplayName: Accountant License Expiration
+licenseName:
 summaryDescriptionMd: xxx
 callToActionLink: https://newjersey.mylicense.com/eGov/Login
 callToActionText: Renew My Accountant License

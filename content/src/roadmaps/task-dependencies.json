@@ -11,9 +11,7 @@
     },
     {
       "task": "form-business-entity",
-      "taskDependencies": [
-        "register-for-ein"
-      ]
+      "taskDependencies": ["register-for-ein"]
     },
     {
       "task": "register-for-taxes",
@@ -29,189 +27,124 @@
     },
     {
       "task": "floor-plan-approval-doh",
-      "taskDependencies": [
-        "sign-lease"
-      ]
+      "taskDependencies": ["sign-lease"]
     },
     {
       "task": "individual-staff-licenses-health-aide",
-      "licenseTaskDependencies": [
-        "home-health-aide-license"
-      ]
+      "licenseTaskDependencies": ["home-health-aide-license"]
     },
     {
       "task": "site-safety-permits-cosmetology",
-      "taskDependencies": [
-        "sign-lease",
-        "building-permit"
-      ]
+      "taskDependencies": ["sign-lease", "building-permit"]
     },
     {
       "task": "town-mercantile-license-liquor",
-      "taskDependencies": [
-        "sign-lease",
-        "liquor-license-availability"
-      ]
+      "taskDependencies": ["sign-lease", "liquor-license-availability"]
     },
     {
       "task": "zoning",
-      "taskDependencies": [
-        "sign-lease"
-      ]
+      "taskDependencies": ["sign-lease"]
     },
     {
       "task": "logisticare",
-      "licenseTaskDependencies": [
-        "register-vehicle"
-      ]
+      "licenseTaskDependencies": ["register-vehicle"]
     },
     {
       "task": "apply-scorp-federal",
-      "taskDependencies": [
-        "register-for-taxes"
-      ]
+      "taskDependencies": ["register-for-taxes"]
     },
     {
       "task": "apply-scorp-state",
-      "taskDependencies": [
-        "apply-scorp-federal"
-      ]
+      "taskDependencies": ["apply-scorp-federal"]
     },
     {
       "licenseTask": "apply-for-shop-license",
-      "taskDependencies": [
-        "site-safety-permits-cosmetology"
-      ]
+      "taskDependencies": ["site-safety-permits-cosmetology"]
     },
     {
       "licenseTask": "Haul-Waste",
-      "licenseTaskDependencies": [
-        "register-consumer-affairs"
-      ]
+      "licenseTaskDependencies": ["register-home-contractor"]
     },
     {
       "licenseTask": "pharmacy-license",
-      "taskDependencies": [
-        "site-safety-permits"
-      ]
+      "taskDependencies": ["site-safety-permits"]
     },
     {
       "licenseTask": "conversion-license-cannabis",
-      "taskDependencies": [
-        "zoning-cannabis"
-      ],
-      "licenseTaskDependencies": [
-        "conditional-permit-cannabis"
-      ]
+      "taskDependencies": ["zoning-cannabis"],
+      "licenseTaskDependencies": ["conditional-permit-cannabis"]
     },
     {
       "licenseTask": "annual-license-cannabis",
-      "taskDependencies": [
-        "zoning-cannabis",
-        "priority-status-cannabis"
-      ]
+      "taskDependencies": ["zoning-cannabis", "priority-status-cannabis"]
     },
     {
       "licenseTask": "conditional-permit-cannabis",
-      "taskDependencies": [
-        "priority-status-cannabis"
-      ]
+      "taskDependencies": ["priority-status-cannabis"]
     },
     {
       "task": "trucking-irp",
-      "taskDependencies": [
-        "trucking-usdot"
-      ]
+      "taskDependencies": ["trucking-usdot"]
     },
     {
       "task": "trucking-vehicle-registration",
-      "taskDependencies": [
-        "trucking-insurance"
-      ]
+      "taskDependencies": ["trucking-insurance"]
     },
     {
       "task": "register-for-taxes-foreign",
-      "taskDependencies": [
-        "form-business-entity-foreign"
-      ]
+      "taskDependencies": ["form-business-entity-foreign"]
     },
     {
       "task": "apply-scorp-federal",
-      "taskDependencies": [
-        "register-for-taxes-foreign"
-      ]
+      "taskDependencies": ["register-for-taxes-foreign"]
     },
     {
       "task": "form-business-entity-foreign",
-      "taskDependencies": [
-        "certificate-good-standing-foreign"
-      ]
+      "taskDependencies": ["certificate-good-standing-foreign"]
     },
     {
       "licenseTask": "bus-inspection",
-      "taskDependencies": [
-        "school-bus-insurance"
-      ]
+      "taskDependencies": ["school-bus-insurance"]
     },
     {
       "task": "transportation-inspection",
-      "taskDependencies": [
-        "transport-insurance"
-      ]
+      "taskDependencies": ["transport-insurance"]
     },
     {
       "task": "transportation-cpcn",
-      "taskDependencies": [
-        "transportation-entity-id"
-      ]
+      "taskDependencies": ["transportation-entity-id"]
     },
     {
       "licenseTask": "daycare-license",
-      "taskDependencies": [
-        "daycare-site-requirements"
-      ]
+      "taskDependencies": ["daycare-site-requirements"]
     },
     {
       "task": "architect-are-exam",
-      "licenseTaskDependencies": [
-        "architect-license"
-      ]
+      "licenseTaskDependencies": ["architect-license"]
     },
     {
       "licenseTask": "authorization-architect-firm",
-      "licenseTaskDependencies": [
-        "architect-license"
-      ]
+      "licenseTaskDependencies": ["architect-license"]
     },
     {
       "licenseTask": "auto-body-repair-license",
-      "taskDependencies": [
-        "register-for-taxes"
-      ]
+      "taskDependencies": ["register-for-taxes"]
     },
     {
       "licenseTask": "detective-employees",
-      "licenseTaskDependencies": [
-        "detective-agency-license"
-      ]
+      "licenseTaskDependencies": ["detective-agency-license"]
     },
     {
       "licenseTask": "hvac-license",
-      "taskDependencies": [
-        "hvac-insurance-surety-bond"
-      ]
+      "taskDependencies": ["hvac-insurance-surety-bond"]
     },
     {
       "licenseTask": "moving-company-license",
-      "taskDependencies": [
-        "moving-company-insurance"
-      ]
+      "taskDependencies": ["moving-company-insurance"]
     },
     {
       "licenseTask": "electrical-business-license",
-      "taskDependencies": [
-        "get-insurance"
-      ]
+      "taskDependencies": ["get-insurance"]
     }
   ]
 }

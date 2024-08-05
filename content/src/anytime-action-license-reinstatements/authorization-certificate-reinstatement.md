@@ -1,8 +1,7 @@
 ---
 filename: authorization-certificate-reinstatement
 name: Apply to Reinstate Your Application for a Certificate of Authorization
-industryIds: []
-sectorIds: []
+licenseName: Architecture-Certificate of Authorization
 icon: update-purple.svg
 urlSlug: authorization-certificate-reinstatement
 summaryDescriptionMd: Your certificate of authorization is either expired with

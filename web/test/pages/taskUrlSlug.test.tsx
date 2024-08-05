@@ -215,21 +215,18 @@ describe("task page", () => {
 
   describe("License task", () => {
     it.each([
-      "apply-for-shop-license",
-      "appraiser-license",
-      "architect-license",
       "home-health-aide-license",
-      "hvac-license",
-      "license-massage-therapy",
-      "moving-company-license",
+      "apply-for-shop-license",
+      "register-home-contractor",
       "pharmacy-license",
-      "public-accountant-license",
       "register-accounting-firm",
-      "register-consumer-affairs",
+      "license-massage-therapy",
+      "appraiser-company-register",
       "telemarketing-license",
-      "landscape-architect-license",
       "health-club-registration",
       "ticket-broker-reseller-registration",
+      "authorization-landscape-architect-firm",
+      "authorization-architect-firm",
     ])("loads License task screen for %s", (licenseId) => {
       renderPage(generateTask({ id: licenseId }), generateBusiness({ licenseData: undefined }));
       expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();

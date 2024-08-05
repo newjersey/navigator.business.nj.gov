@@ -1,3 +1,4 @@
+import { LicenseStatusResults } from "@api/types";
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import {
@@ -7,7 +8,12 @@ import {
 import { FireSafetyInspectionResult } from "@shared/fireSafety";
 import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
 import { HousingPropertyInterestDetails, HousingRegistrationRequestLookupResponse } from "@shared/housing";
-import { LicenseEntity, LicenseSearchNameAndAddress, LicenseStatusResult } from "@shared/license";
+import {
+  LicenseEntity,
+  LicenseSearchNameAndAddress,
+  LicenseTaskID,
+  enabledLicensesSources,
+} from "@shared/license";
 import { ProfileData } from "@shared/profileData";
 import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
 import { UserData } from "@shared/userData";
@@ -70,7 +76,7 @@ export type AddNewsletter = (userData: UserData) => Promise<UserData>;
 export type AddToUserTesting = (userData: UserData) => Promise<UserData>;
 
 export interface LicenseStatusClient {
-  search: (name: string, zipCode: string, licenseType: string) => Promise<LicenseEntity[]>;
+  search: (name: string, zipCode: string) => Promise<LicenseEntity[]>;
   health: HealthCheckMethod;
 }
 
@@ -104,16 +110,18 @@ export type SelfRegResponse = {
 
 export type SearchBusinessName = (name: string) => Promise<NameAvailability>;
 
-export type SearchLicenseStatusFactory = (licenseType: string) => SearchLicenseStatus;
+export type LicenseType = keyof typeof enabledLicensesSources;
+
+export type SearchLicenseStatusFactory = (licenseType: LicenseType) => SearchLicenseStatus;
 
 export type SearchLicenseStatus = (
-  nameAndAddress: LicenseSearchNameAndAddress,
-  licenseType: string
-) => Promise<LicenseStatusResult>;
+  nameAndAddress: LicenseSearchNameAndAddress
+) => Promise<LicenseStatusResults>;
 
 export type UpdateLicenseStatus = (
   userData: UserData,
-  nameAndAddress: LicenseSearchNameAndAddress
+  nameAndAddress: LicenseSearchNameAndAddress,
+  taskId?: LicenseTaskID
 ) => Promise<UserData>;
 
 export type FireSafetyInspectionStatus = (address: string) => Promise<FireSafetyInspectionResult[]>;
@@ -176,4 +184,5 @@ export type UpdateSidebarCards = (userData: UserData) => UserData;
 export type GetCertHttpsAgent = () => Promise<https.Agent>;
 
 export const NO_MATCH_ERROR = "NO_MATCH";
+export const NO_ADDRESS_MATCH_ERROR = "NO_ADDRESS_MATCH";
 export const NO_MAIN_APPS_ERROR = "NO_MAIN_APPS";

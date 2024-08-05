@@ -2201,44 +2201,48 @@ collections:
             fields:
               - { label: Registration Start Date Text, name: registrationStartDateText, widget: string }
               - { label: Registration Status Text, name: registrationStatusText, widget: string }
-              - { label: Registration Building Count Text, name: registrationBuildingCountText, widget: string }
               - {
-                label: Registration Application Found Header,
-                name: applicationsFoundHeader,
-                widget: string,
-              }
+                  label: Registration Building Count Text,
+                  name: registrationBuildingCountText,
+                  widget: string,
+                }
               - {
-                label: Registration Found In Review Text,
-                name: registrationFoundInReviewText,
-                widget: string,
-              }
+                  label: Registration Application Found Header,
+                  name: applicationsFoundHeader,
+                  widget: string,
+                }
               - {
-                label: Registration Found Incomplete/Returned Text,
-                name: registrationFoundIncompleteReturnedText,
-                widget: string,
-              }
+                  label: Registration Found In Review Text,
+                  name: registrationFoundInReviewText,
+                  widget: string,
+                }
               - {
-                label: Registration Call to Action Primary Text,
-                name: registrationCallToActionPrimaryText,
-                widget: string,
-              }
+                  label: Registration Found Incomplete/Returned Text,
+                  name: registrationFoundIncompleteReturnedText,
+                  widget: string,
+                }
               - {
-                label: Registration Call to Action Secondary Text,
-                name: registrationCallToActionSecondaryText,
-                widget: string,
-              }
+                  label: Registration Call to Action Primary Text,
+                  name: registrationCallToActionPrimaryText,
+                  widget: string,
+                }
+              - {
+                  label: Registration Call to Action Secondary Text,
+                  name: registrationCallToActionSecondaryText,
+                  widget: string,
+                }
               - { label: Registration Tab 1 Text, name: registrationTab1Text, widget: string }
               - { label: Registration Tab 2 Text, name: registrationTab2Text, widget: string }
               - {
-                label: Registration In Review Message Text,
-                name: registrationInReviewMessage,
-                widget: string,
-              }
+                  label: Registration In Review Message Text,
+                  name: registrationInReviewMessage,
+                  widget: string,
+                }
               - {
-                label: Registration Rejected or Returned Message,
-                name: registrationRejectedOrReturnedMessage,
-                widget: string,
-              }
+                  label: Registration Rejected or Returned Message,
+                  name: registrationRejectedOrReturnedMessage,
+                  widget: string,
+                }
               - { label: Registration Search Prompt Text, name: registrationSearchPrompt, widget: string }
               - { label: Address 1 Label, name: address1Label, widget: string }
               - { label: Address 2 Label, name: address2Label, widget: string }
@@ -2246,15 +2250,15 @@ collections:
               - { label: State label, name: stateLabel, widget: string }
               - { label: Submit Text, name: submitText, widget: string }
               - {
-                label: Error - No Property Interest Found,
-                name: errorTextNoPropertyInterestFound,
-                widget: string,
-              }
+                  label: Error - No Property Interest Found,
+                  name: errorTextNoPropertyInterestFound,
+                  widget: string,
+                }
               - {
-                label: Error - No Hotel/Motel Registrations Found,
-                name: errorTextNoHotelMotelRegistrations,
-                widget: string,
-              }
+                  label: Error - No Hotel/Motel Registrations Found,
+                  name: errorTextNoHotelMotelRegistrations,
+                  widget: string,
+                }
               - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
               - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
               - { label: Informational Message - In Review, name: informationalInReview, widget: string }
@@ -3054,7 +3058,7 @@ collections:
               - { label: Unknown Failure Alert Text, name: failedUnknownMarkdown, widget: markdown }
 
   - name: "license-calendar-events"
-    label: "License Expiration / Renewal Events"
+    label: "Consumer Affairs License Expiration / Renewal Events"
     folder: "content/src/licenses"
     summary: "{{urlSlug}}"
     identifier_field: "{{urlSlug}}"
@@ -3066,22 +3070,19 @@ collections:
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - {
-          label: "Industry Id",
-          name: "urlSlug",
-          widget: "relation",
-          collection: "roadmaps",
-          search_fields: ["{{name}}"],
-          options_length: 500,
-          required: true,
-          value_field: "{{id}}",
-          display_fields: ["{{name}}"],
-        }
-      - {
           label: "Preview Type (CMS Only)",
           name: "previewType",
           widget: "select",
           default: "expiration",
           options: ["expiration", "renewal"],
+        }
+      - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
+      - { label: "Renewal Event Label", name: "renewalEventDisplayName", widget: "string", required: true }
+      - {
+          label: "Expiration Event Label",
+          name: "expirationEventDisplayName",
+          widget: "string",
+          required: true,
         }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown", required: true }
@@ -3457,7 +3458,7 @@ collections:
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
 
   - name: "anytime-action-license-reinstatements"
-    label: "Anytime Action License Reinstatements"
+    label: "Anytime Action Consumer Affairs License Reinstatements"
     folder: "content/src/anytime-action-license-reinstatements"
     summary: "{{filename}} - {{name}}"
     identifier_field: "{{filename}}"
@@ -3470,35 +3471,8 @@ collections:
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Filename (disabled after file creation)", name: "filename", widget: "write-once-read-only" }
+      - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
       - { label: "Name/Title", name: "name", widget: "string" }
-      - {
-          label: "Apply to all - overrides industry and sector dropdown",
-          name: "applyToAllUsers",
-          widget: "boolean",
-          required: false,
-        }
-      - label: Apply to industries
-        name: industryIds
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "roadmaps"
-        search_fields: ["name"]
-        value_field: "{{id}}"
-        display_fields: ["{{name}}"]
-        options_length: 500
-      - label: Apply to sectors
-        name: sectorIds
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "mappings"
-        search_fields: ["arrayOfSectors.*.name"]
-        value_field: "arrayOfSectors.*.id"
-        display_fields: ["arrayOfSectors.*.name"]
-        options_length: 500
       - label: "Icon"
         name: icon
         widget: "relation"
@@ -3877,8 +3851,6 @@ collections:
             widget: object
             summary: "{{licenseEventDefaults}}"
             fields:
-              - { label: Expiration Title Label, name: expirationTitleLabel, widget: string }
-              - { label: Renewal Title Label, name: renewalTitleLabel, widget: string }
               - { label: Before Expiration Date Text, name: beforeExpirationDateText, widget: string }
               - { label: Before Renewal Date Text, name: beforeRenewalDateText, widget: string }
               - { label: Disclaimer Markdown, name: disclaimerMarkdown, widget: markdown }

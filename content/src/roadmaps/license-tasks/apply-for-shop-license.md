@@ -14,6 +14,7 @@ industryId: "cosmetology"
 webflowType: "business-license"
 licenseCertificationClassification: "LICENSE"
 summaryDescriptionMd: "Shops that are new, relocated, or under new ownership must get a license. Once the Board of Cosmetology and Hairstyling reviews your application, they will inspect your shop."
+licenseName: "Cosmetology and Hairstyling-Shop"
 ---
 
 ## Application Requirements
