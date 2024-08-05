@@ -49,6 +49,7 @@
   ],
   "displayname": "Cemetery",
   "isEnabled": false,
+  "additionalSearchTerms": "cemetary, memorial, burial, grave, graveyard ",
   "id": "Cemetery",
   "description": "Offers burial plots, mausoleum spaces, and other services for the dead"
 }
