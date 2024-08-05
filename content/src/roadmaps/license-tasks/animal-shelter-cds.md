@@ -1,7 +1,7 @@
 ---
 notesMd: >-
-  * h2 and h3 look the same, Kim is addressing this. Can use h4 for the h3 until
-  it is fixed
+  * h2 and h3 look the same. Spencer would like us to still use h3. Ideally we
+  want h2 and h3 to be visually differentiated
 
   * 7.30: updated after regina's review 
 
