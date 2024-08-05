@@ -31,7 +31,7 @@ It’s best to hire a real estate or land use attorney to handle the legal paper
 * A copy of the land deed or similar document that proves you own the land where the development is
 * A copy of a title search report or certificate
 * A legal description and survey of the land
-* Copies of your `business formation documents|certificate-formation` , such as articles of incorporation
+* Copies of your `business formation documents|certificate-formation`, such as articles of incorporation
 * Audited financial statements for your company and related entities
 * Copies of property contracts or purchase agreements
 * A statement about any litigation, orders, or judgments that might affect the properties you will market and sell
