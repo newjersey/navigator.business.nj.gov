@@ -1,11 +1,7 @@
 ---
-notesMd: >-
-  * work in progress, need to create cemetery industry (currently saved under
-  all other businesses otherwise I can't save the draft)
-
-  * h2 and h3 still look the same, using h3 per Spencer 
-
-  * double check with Regina on info in parentheses for date of incorporation app req
+notesMd: >
+  * h2 and h3 still look the same, using h3 per Spencer but ideally we want the
+  h3's to be visually differentiated from the h2 
 id: cemetery-certificate
 filename: cemetery-certificate
 displayname: cemetery-certificate
@@ -65,7 +61,7 @@ Newark, New Jersey 07101 
 
 :::callout{ showHeader="true" headerText="What if I don't get this certificate?" showIcon="false" calloutType="conditional" }
 
-You cannot legally own or operate a cemetery and may be subject to fines and legal penalties.
+You cannot legally own or operate a cemetery.
 
 :::
 
