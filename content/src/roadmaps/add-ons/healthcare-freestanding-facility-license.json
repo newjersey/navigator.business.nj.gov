@@ -1,0 +1,13 @@
+{
+  "id": "healthcare-freestanding-facility-license",
+  "displayname": "healthcare-freestanding-facility-license",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 200,
+      "task": "",
+      "licenseTask": "residential-health-care-facility-license",
+      "required": true
+    }
+  ]
+}
