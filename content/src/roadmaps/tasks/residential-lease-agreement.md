@@ -1,0 +1,36 @@
+---
+notesMd: "[Muni
+  draft](https://docs.google.com/document/d/1-TjsH3NktlCioWWVz6JIG8IlPOGqYi5DCS\
+  0gdGPPrWQ/edit?usp=sharing)"
+summaryDescriptionMd: >
+  It's best practice to have a written residential lease. Also called a lease
+  agreement, this legally binding contract states the terms and conditions
+  between you and your tenant. A written lease helps protect you and your
+  tenant's interests.
+urlSlug: residential-lease-agreement
+filename: residential-lease-agreement
+displayname: residential-lease-agreement
+name: Write Your Residential Lease Agreement
+id: residential-lease-agreement
+---
+## Lease Considerations
+
+* **Legal advice**: An attorney can help draft or review your lease agreement
+* **Simple language**: Make sure the lease is clear and easy to understand
+* **Lease details**: Specify information such as the lease period, rent, property use, and renewal and termination terms
+* **Security deposit requirements**: Make sure to comply with New Jersey’s Security Deposit Law
+* **Maintenance**: Clearly define the responsibilities of the landlord and tenant
+* **Addendums**: Include addendums for specific situations or agreements not covered in the main lease
+* **Legal disclosures**: Include required disclosures, such as lead paint information 
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
+
+There are certain landlord-tenant laws you must comply with. For more information, see the [Truth-in-Renting Guide](https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf) (en español: [Veracidad en Los Alquileres](https://www.nj.gov/dca/divisions/codes/publications/pdf_lti/t_i_r_spanish.pdf)).
+
+:::
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+
+A written lease agreement.
+
+:::
