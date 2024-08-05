@@ -147,6 +147,7 @@ export const getStaticProps = async (): Promise<{
     ...emptyProfileData,
     businessPersona: "STARTING",
     industryId: "generic",
+    legalStructureId: "limited-liability-company",
   };
   const roadmap = await buildUserRoadmap(newProfileData);
 
