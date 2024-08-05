@@ -1,8 +1,15 @@
 ---
-notesMd: "[Muni planning doc](https://docs.google.com/document/d/1pZBqY3yS9y8Y3MMSHqwvTFtdlYvuxhWKK70fUqsXRSY/edit)"
-header: Planned Real Estate Development (PRED)
+notesMd: "[Muni
+  draft](https://docs.google.com/document/d/18G3_Ou18B8dLRTqYU9j3XJoxKdLvM4Mmd_\
+  Ekab0N68M/edit?usp=sharing)"
+header: Common-Interest Community
 slug: planned-real-estate-development
 displayname: planned-real-estate-development
 ---
+In a common-interest community (or planned real estate development), residents own their own unit or lot and share ownership of certain spaces, such as a park or pool. These communities are managed by a homeowners' or condominium association.
 
-A Planned Real Estate Development (PRED) refers to land developed for common-interest communities. In these communities, people own their own unit or lot, but share ownership of common areas, such as a pool or tennis court. Examples include condominiums, homeowner associations (HOA), cooperative (Co-Op) housing, and retirement communities.
+Examples of common-interest communities:
+* Condominiums
+* Cooperative housing
+* Retirement communities
+* Subdivisions with a homeowners' association
