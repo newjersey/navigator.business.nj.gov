@@ -1,5 +1,5 @@
 {
-  "naicsCodes": "721110, 721191, 721199",
+  "naicsCodes": "721110, 721191, 721199, 721310",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -44,13 +44,19 @@
     }
   ],
   "name": "Lodging",
-  "nonEssentialQuestionsIds": ["hotel-register", "hotel-food", "hotel-liquor", "weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "hotel-register",
+    "hotel-food",
+    "hotel-liquor",
+    "weights-measures",
+    "rooming-boarding-house-owner"
+  ],
   "displayname": "lodging",
   "industryOnboardingQuestions": {
     "canBeReseller": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "bed and breakfast, hotel, motel, guesthouse, lodge, inn, airbnb host",
+  "additionalSearchTerms": "bed and breakfast, hotel, motel, guesthouse, lodge, inn, airbnb host, rooming house, boarding house",
   "id": "lodging",
   "description": "Provides overnight accommodations to guests and travelers",
   "webflowId": "662a86cad07b4acada82449d"
