@@ -2,6 +2,8 @@
 notesMd: >
   * h2 and h3 still look the same, using h3 per Spencer but ideally we want the
   h3's to be visually differentiated from the h2 
+
+  * draft is ready; waiting for guidance on callout boxes 
 id: cemetery-certificate
 filename: cemetery-certificate
 displayname: cemetery-certificate
