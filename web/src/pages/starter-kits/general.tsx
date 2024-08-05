@@ -86,7 +86,7 @@ const General = (props: InferGetStaticPropsType<typeof getStaticProps>): ReactEl
               description={Config.starterKits.solutions.card3.body}
             />
           </div>
-          <div className="cta-button">
+          <div className="flex-align-self-stretch">
             <PrimaryButton
               isColor="primary"
               onClick={() => {
