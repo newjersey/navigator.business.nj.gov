@@ -20,7 +20,7 @@ import {
 } from "./helpers.mjs";
 import { wait } from "./helpers2.mjs";
 import { LicenseClassificationLookup } from "./licenseClassifications.mjs";
-import { createItem, getAllItems, modifyItem } from "./methods.mjs";
+import { createItem, deleteItem, getAllItems, modifyItem } from "./methods.mjs";
 import { licenseCollectionId } from "./webflowIds.mjs";
 
 export const LookupTaskAgencyById = (id) => {
@@ -168,7 +168,7 @@ const updateLicenseWithWebflowId = (webflowId, filename) => {
     webflowId: webflowId,
   };
   const stringifiedFile = writeMarkdownString(updatedMdObject);
-  fs.writeFileSync(`${filepath}/${filename}.md`, stringifiedFile, (err) => {
+  fs.writeFileSync(`${filepath}`, stringifiedFile, (err) => {
     if (err) {
       throw err;
     }
@@ -205,9 +205,41 @@ const createNewLicenses = async () => {
   console.info(`Created a total of ${newLicenses.length} licenses`);
 };
 
+const getUnusedLicenseIds = async () => {
+  const localLicensesRaw = loadAllLicenses();
+  const localLicensesWithWebflowIds = localLicensesRaw.filter((it) => it.webflowId !== undefined);
+  const localLicensesIds = new Set(localLicensesWithWebflowIds.map((it) => it.webflowId));
+
+  const webflowLicenseArray = await getAllLicensesFromWebflow();
+
+  return webflowLicenseArray.filter((item) => {
+    const hasValueInLocalCmsAndWebflowRemote = localLicensesIds.has(item.id);
+    return !hasValueInLocalCmsAndWebflowRemote;
+  });
+};
+
+const deleteLicenses = async () => {
+  const licenses = await getUnusedLicenseIds();
+  const deleteLicense = async (license) => {
+    console.info(`Attempting to delete unused license: ${license.fieldData.slug}`);
+    try {
+      return await deleteItem(license.id, licenseCollectionId);
+    } catch (error) {
+      await catchRateLimitErrorAndRetry(error, deleteItem, license.id, licenseCollectionId);
+    }
+  };
+
+  const licensePromises = licenses.map((item) => {
+    return () => deleteLicense(item);
+  });
+  await resolveApiPromises(licensePromises);
+};
+
 const syncLicenses = async (params) => {
-  console.log("updating licenses");
+  console.log("deleting licenses");
+  await deleteLicenses();
   await wait();
+  console.log("updating licenses");
   const licensesAlreadyInWebflow = await getLicensesAlreadyInWebflow();
   await updateLicenses(licensesAlreadyInWebflow);
   console.log("creating new licenses");
@@ -240,10 +272,12 @@ if (process.env.NODE_ENV === "test") {
   })();
 } else if (argsInclude("--preview")) {
   await (async () => {
+    console.info("---- To be deleted: -----");
+    console.info((await getUnusedLicenseIds()).map((it) => `${it.fieldData.name}: ${it.id}`));
     console.info("---- To be created: -----");
-    console.info((await getNewLicenses()).map((it) => it.filename));
+    console.info((await getNewLicenses()).map((it) => it.name));
     console.info("---- To be updated: -----");
-    console.info((await getLicensesAlreadyInWebflow()).map((it) => it.filename));
+    console.info((await getLicensesAlreadyInWebflow()).map((it) => it.name));
     process.exit(0);
   })();
 } else if (argsInclude("--legacy-preview")) {

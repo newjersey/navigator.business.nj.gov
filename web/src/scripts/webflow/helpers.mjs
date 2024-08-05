@@ -29,6 +29,9 @@ export const checkRateLimitAndWait = async (response) => {
 };
 
 export const resolveApiPromises = async (promiseArray) => {
+  if (promiseArray.length === 0) {
+    console.info("0 things to be acted on");
+  }
   for (const promise of promiseArray) {
     const response = await promise();
     await checkRateLimitAndWait(response);
