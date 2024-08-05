@@ -49,6 +49,11 @@
       "id": "freestanding-residential-health-care-license",
       "questionText": "Do you plan to own and/or operate a free-standing residential health care facility?",
       "addOn": "healthcare-freestanding-facility-license"
+    },
+    {
+      "id": "rooming-boarding-house-owner",
+      "questionText": "Do you plan to own and/or operate a rooming or boarding house?",
+      "addOn": "lodging-rooming-boarding-house"
     }
   ]
 }
