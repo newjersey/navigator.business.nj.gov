@@ -11,7 +11,6 @@
     "general": {
       "helpButtonText": "Help",
       "paymentDisclaimer": "You will be brought to a secure payment platform operated by New Jersey's partner NICUSA Inc. to process your payment.",
-      "partialAddressErrorText": "Address must be complete.",
       "notEntered": "Not Entered",
       "ariaContextWillNeedToProvideBusinessDate": "Provide your business effective date to update the task status",
       "backButtonText": "Cancel",
