@@ -2,6 +2,7 @@
 id: "apply-for-food-truck-license"
 webflowId: "66aceed312f526cd0330fb48"
 urlSlug: "food-truck-license"
+displayname: "food-truck-license"
 name: "Apply for Your Food Truck License"
 webflowName: "Food Truck: Food Truck License"
 filename: "apply-for-food-truck-license"
