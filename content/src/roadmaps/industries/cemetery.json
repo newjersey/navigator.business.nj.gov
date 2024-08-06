@@ -45,6 +45,9 @@
   ],
   "name": "Cemetery ",
   "nonEssentialQuestionsIds": [],
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": false
+  },
   "displayname": "Cemetery",
   "isEnabled": false,
   "additionalSearchTerms": "cemetary, memorial, burial, graveyard, crematory, mausoleum",

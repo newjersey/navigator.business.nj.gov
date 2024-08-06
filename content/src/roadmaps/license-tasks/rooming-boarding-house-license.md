@@ -1,7 +1,5 @@
 ---
-notesMd: "[Muni
-  draft](https://docs.google.com/document/d/1HGY1zqsfYYEV7bdimK5vBmXX9o9TpdkP8Y\
-  vh5TazgNI/edit?usp=sharing)"
+notesMd: "[Muni draft](https://docs.google.com/document/d/1HGY1zqsfYYEV7bdimK5vBmXX9o9TpdkP8Yvh5TazgNI/edit?usp=sharing)"
 id: rooming-boarding-house-license
 filename: rooming-boarding-house-license
 displayname: rooming-boarding-house-license
@@ -18,27 +16,26 @@ agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of Rooming and Boarding House Standards
 divisionPhone: (609) 984-1704
 ---
-- - -
 
-:::note 
- Each owner or operator must submit an application and background check authorization form.
+:::note
+Each owner or operator must submit an application and background check authorization form.
 :::
 
 ## Application Requirements
 
-* Business name if the `form of property ownership|property-ownership` is a corporation, partnership, or association
-*  `Employee Identification Number (EIN)|EIN` 
-* Name, address, and phone number for each officer, director, stockholder, member, and partner
-* Name, address, phone number, and email address of the primary owner designated to act on behalf of the corporation, partnership, or association
-* Criminal history of anyone listed in the application, if applicable
-* Proof of property ownership
-* Address for each rooming or boarding house you own, including the `block and lot number|block-lot-number` (you can find this on your tax bill or your landlord’s property tax bill)
-* Previous licenses from the Department of Community Affairs, Department of Health, or Department of Human Services, if applicable
-* A completed [Form II](https://www.nj.gov/dca/codes/forms/pdf_rooming/App_Form_II.pdf) for each rooming or boarding house you are applying a license for, including information about your property, employees, and services offered
-* A completed [background check authorization form](https://www.nj.gov/dca/codes/forms/pdf_rooming/Notice_Auth.pdf)
-* A copy of a Certificate of Inspection and Registration from your `Local Enforcing Agency|lea` 
-* A copy of a `Certificate of Occupancy or Approval|certificate-occupancy` 
-* Applicable fees paid
+- Business name if the `form of property ownership|property-ownership` is a corporation, partnership, or association
+- `Employee Identification Number (EIN)|EIN`
+- Name, address, and phone number for each officer, director, stockholder, member, and partner
+- Name, address, phone number, and email address of the primary owner designated to act on behalf of the corporation, partnership, or association
+- Criminal history of anyone listed in the application, if applicable
+- Proof of property ownership
+- Address for each rooming or boarding house you own, including the `block and lot number|block-lot-number` (you can find this on your tax bill or your landlord’s property tax bill)
+- Previous licenses from the Department of Community Affairs, Department of Health, or Department of Human Services, if applicable
+- A completed [Form II](https://www.nj.gov/dca/codes/forms/pdf_rooming/App_Form_II.pdf) for each rooming or boarding house you are applying a license for, including information about your property, employees, and services offered
+- A completed [background check authorization form](https://www.nj.gov/dca/codes/forms/pdf_rooming/Notice_Auth.pdf)
+- A copy of a Certificate of Inspection and Registration from your `Local Enforcing Agency|lea`
+- A copy of a `Certificate of Occupancy or Approval|certificate-occupancy`
+- Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
