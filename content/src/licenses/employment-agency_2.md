@@ -13,8 +13,6 @@ Your temporary help service firm registration expires every year.
 
 ## Application Requirements
 - `Surety bond|surety-bond` number and premium paid receipt 
-- Current registration number
-- `Registered agent|registered-agent` number
 - Criminal history of the applicant, company officers, directors, or principals, if applicable
 - Applicable fees paid
 
