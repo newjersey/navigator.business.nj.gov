@@ -1736,63 +1736,63 @@ collections:
           - label: Home Based
             name: canBeHomeBased
             widget: boolean
-            required: false
+            default: false
           - label: Liquor License
             name: isLiquorLicenseApplicable
             widget: boolean
-            required: false
+            default: false
           - label: CPA Required
             name: isCpaRequiredApplicable
             widget: boolean
-            required: false
+            default: false
           - label: Staffing Service
             name: isProvidesStaffingServicesApplicable
             widget: boolean
-            required: false
+            default: false
           - label: Certified Interior Designer
             name: isCertifiedInteriorDesignerApplicable
             widget: boolean
-            required: false
+            default: false
           - label: Real Estate Appraisal Management
             name: isRealEstateAppraisalManagementApplicable
             widget: boolean
-            required: false
+            default: false
           - label: Reseller
             name: canBeReseller
             widget: boolean
-            required: false
+            default: false
           - label: Transportation
             name: isTransportation
             widget: boolean
-            required: false
+            default: false
           - label: Car Service
             widget: boolean
             name: isCarServiceApplicable
-            required: false
+            default: false
           - label: Logistics
             name: isInterstateLogisticsApplicable
             widget: boolean
-            required: false
+            default: false
           - label: Moving Company
             name: isInterstateMovingApplicable
             widget: boolean
-            required: false
+            default: false
           - label: Childcare Services
             name: isChildcareForSixOrMore
             widget: boolean
-            required: false
+            default: false
           - label: Will Sell Petcare Items
             name: willSellPetCareItems
             widget: boolean
-            required: false
+            default: false
           - label: Pet Care Housing
             name: petCareHousing
             widget: boolean
-            required: false
+            default: false
           - label: Cannabis License
             name: isCannabisLicenseTypeApplicable
             widget: boolean
-            required: false
+            default: false
       - label: Non Essential Questions
         name: nonEssentialQuestionsIds
         widget: relation
@@ -2201,44 +2201,48 @@ collections:
             fields:
               - { label: Registration Start Date Text, name: registrationStartDateText, widget: string }
               - { label: Registration Status Text, name: registrationStatusText, widget: string }
-              - { label: Registration Building Count Text, name: registrationBuildingCountText, widget: string }
               - {
-                label: Registration Application Found Header,
-                name: applicationsFoundHeader,
-                widget: string,
-              }
+                  label: Registration Building Count Text,
+                  name: registrationBuildingCountText,
+                  widget: string,
+                }
               - {
-                label: Registration Found In Review Text,
-                name: registrationFoundInReviewText,
-                widget: string,
-              }
+                  label: Registration Application Found Header,
+                  name: applicationsFoundHeader,
+                  widget: string,
+                }
               - {
-                label: Registration Found Incomplete/Returned Text,
-                name: registrationFoundIncompleteReturnedText,
-                widget: string,
-              }
+                  label: Registration Found In Review Text,
+                  name: registrationFoundInReviewText,
+                  widget: string,
+                }
               - {
-                label: Registration Call to Action Primary Text,
-                name: registrationCallToActionPrimaryText,
-                widget: string,
-              }
+                  label: Registration Found Incomplete/Returned Text,
+                  name: registrationFoundIncompleteReturnedText,
+                  widget: string,
+                }
               - {
-                label: Registration Call to Action Secondary Text,
-                name: registrationCallToActionSecondaryText,
-                widget: string,
-              }
+                  label: Registration Call to Action Primary Text,
+                  name: registrationCallToActionPrimaryText,
+                  widget: string,
+                }
+              - {
+                  label: Registration Call to Action Secondary Text,
+                  name: registrationCallToActionSecondaryText,
+                  widget: string,
+                }
               - { label: Registration Tab 1 Text, name: registrationTab1Text, widget: string }
               - { label: Registration Tab 2 Text, name: registrationTab2Text, widget: string }
               - {
-                label: Registration In Review Message Text,
-                name: registrationInReviewMessage,
-                widget: string,
-              }
+                  label: Registration In Review Message Text,
+                  name: registrationInReviewMessage,
+                  widget: string,
+                }
               - {
-                label: Registration Rejected or Returned Message,
-                name: registrationRejectedOrReturnedMessage,
-                widget: string,
-              }
+                  label: Registration Rejected or Returned Message,
+                  name: registrationRejectedOrReturnedMessage,
+                  widget: string,
+                }
               - { label: Registration Search Prompt Text, name: registrationSearchPrompt, widget: string }
               - { label: Address 1 Label, name: address1Label, widget: string }
               - { label: Address 2 Label, name: address2Label, widget: string }
@@ -2246,15 +2250,15 @@ collections:
               - { label: State label, name: stateLabel, widget: string }
               - { label: Submit Text, name: submitText, widget: string }
               - {
-                label: Error - No Property Interest Found,
-                name: errorTextNoPropertyInterestFound,
-                widget: string,
-              }
+                  label: Error - No Property Interest Found,
+                  name: errorTextNoPropertyInterestFound,
+                  widget: string,
+                }
               - {
-                label: Error - No Hotel/Motel Registrations Found,
-                name: errorTextNoHotelMotelRegistrations,
-                widget: string,
-              }
+                  label: Error - No Hotel/Motel Registrations Found,
+                  name: errorTextNoHotelMotelRegistrations,
+                  widget: string,
+                }
               - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
               - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
               - { label: Informational Message - In Review, name: informationalInReview, widget: string }
