@@ -4,7 +4,8 @@ webflowId: "66aceed2f2985d567ecd3031"
 urlSlug: "haul-waste"
 name: "Obtain Your Waste Hauling Decal, if Applicable"
 webflowName: "Home Improvement Contractor: Waste Hauling Decal"
-filename: "Haul-Waste"
+filename: "haul-waste"
+displayname: "haul-waste-hic"
 callToActionLink: "https://www.wastedecals.nj.gov/sg2.html"
 callToActionText: "Apply for My Waste Hauling Decal"
 agencyId: "njdep"
@@ -13,8 +14,7 @@ divisionPhone: "(609) 633-1418"
 industryId: "home-contractor"
 webflowType: "business-license"
 licenseCertificationClassification: "LICENSE"
-summaryDescriptionMd: "Waste facilities will **only** allow registered vehicles with a decal to discard waste. If you collect or haul waste for other companies, you need to be a [commercial waste hauler](https://www.wastedecals.nj.gov/swt2.html), which is a more time-intensive process.
-"
+summaryDescriptionMd: "Waste facilities will **only** allow registered vehicles with a decal to discard waste. If you collect or haul waste for other companies, you need to be a [commercial waste hauler](https://www.wastedecals.nj.gov/swt2.html), which is a more time-intensive process."
 ---
 
 ## Registration Requirements

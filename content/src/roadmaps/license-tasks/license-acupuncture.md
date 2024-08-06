@@ -4,6 +4,7 @@ webflowId: "66aceed9453b76e2c7e41869"
 urlSlug: "acupuncture-license"
 name: "Apply for an Acupuncturist License, if Applicable"
 webflowName: "Acupuncture: Acupuncturist License"
+displayname: "license-acupuncture"
 filename: "license-acupuncture"
 callToActionLink: "https://www.njconsumeraffairs.gov/acu/Pages/applications.aspx"
 callToActionText: "Apply for My License"
@@ -13,8 +14,7 @@ divisionPhone: "(973) 273-8092"
 industryId: "acupuncture"
 webflowType: "individual-license"
 licenseCertificationClassification: ""
-summaryDescriptionMd: "You need an acupuncturist license to offer services as an acupuncturist.
-"
+summaryDescriptionMd: "You need an acupuncturist license to offer services as an acupuncturist."
 ---
 
 ## Eligibility Criteria

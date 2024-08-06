@@ -4,6 +4,7 @@ webflowId: "66aceedbaae39d8674b278ad"
 urlSlug: "broker-license"
 name: "Obtain Your Real Estate Broker License"
 webflowName: "Real Estate Broker: Real Estate Broker License"
+displayname: "license-broker"
 filename: "license-broker"
 callToActionLink: "https://www.state.nj.us/dobi/division_rec/brokeroriginalapplication.htm"
 callToActionText: "Submit a Real Estate Broker License Application"
@@ -12,8 +13,7 @@ agencyAdditionalContext: "Real Estate Commission"
 divisionPhone: "(609) 292-7272"
 industryId: "real-estate-broker"
 licenseCertificationClassification: ""
-summaryDescriptionMd: "If you own or plan to own a real estate agency, you need a real estate broker license.
-"
+summaryDescriptionMd: "If you own or plan to own a real estate agency, you need a real estate broker license."
 ---
 
 ## Eligibility Criteria

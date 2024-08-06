@@ -16,6 +16,6 @@ Your Landscape Architecture license expires every two years.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-An updated copy of the renewed landscape architect license, valid for two years, will be mailed to your mailing address on file.
+An updated copy of the renewed landscape architect license, valid for two years. It will be sent to your mailing address on file.
 
 :::

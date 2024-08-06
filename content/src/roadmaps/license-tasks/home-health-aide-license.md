@@ -4,6 +4,7 @@ webflowId: "66aceed816add4cacea7d7ff"
 urlSlug: "health-care-services-firm-license"
 name: "Register Your Health Care Service Firm, if Applicable"
 webflowName: "Register Your Health Care Service Firm, if Applicable"
+displayname: "home-health-aide-license"
 filename: "home-health-aide-license"
 callToActionLink: "https://www.njconsumeraffairs.gov/hcservice"
 callToActionText: "Register My Health Care Service Firm"
@@ -12,8 +13,7 @@ agencyAdditionalContext: "Employment and Personnel Services"
 divisionPhone: "(973) 504-6370"
 industryId: "health-care-services-firm-renewal"
 licenseCertificationClassification: ""
-summaryDescriptionMd: "You need to register as a health care service firm if you are employing individuals to provide health care, personal care, or companion services in the personal residence of a person with a disability or is age 60 or older.
-"
+summaryDescriptionMd: "You need to register as a health care service firm if you are employing individuals to provide health care, personal care, or companion services in the personal residence of a person with a disability or is age 60 or older."
 ---
 
 ## Application Requirements

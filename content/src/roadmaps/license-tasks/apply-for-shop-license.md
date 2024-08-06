@@ -2,6 +2,7 @@
 id: "apply-for-shop-license"
 webflowId: "66aceed3311ff4a8c030d2d3"
 urlSlug: "cosmetology-shop-license"
+displayname: "apply-for-shop-license"
 name: "Apply for Your Cosmetology Shop License"
 webflowName: "Cosmetology: License to Operate a New Shop, Relocate, or to Transfer Ownership"
 filename: "apply-for-shop-license"

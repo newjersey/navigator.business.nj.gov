@@ -4,6 +4,7 @@ webflowId: "66aceee1309520f9133e79bb"
 urlSlug: "ticket-broker-reseller-registration"
 name: "Register Your Business as a Ticket Broker (Ticket Reseller)"
 webflowName: "Ticket Broker (Ticket Reseller)"
+displayname: "ticket-broker-reseller-registration"
 filename: "ticket-broker-reseller-registration"
 callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx"
 callToActionText: "Register Your Business as a Ticket Broker/Ticket Reseller"
@@ -32,8 +33,8 @@ summaryDescriptionMd: "You need to register as a ticket broker if you resell adm
 - `Certificate of Formation|certificate-formation`
 - `Surety bond|surety-bond`
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A certificate of registration
+A certificate of registration.
 
 :::

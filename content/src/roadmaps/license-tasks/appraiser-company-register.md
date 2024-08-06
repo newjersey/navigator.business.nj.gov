@@ -4,6 +4,7 @@ webflowId: "66aceed5a35295b74def2d5e"
 urlSlug: "appraiser-company-registration"
 name: "Register Your Appraisal Management Company"
 webflowName: "Real Estate Appraisal: Management Company Registration"
+displayname: "appraiser-company-registration"
 filename: "appraiser-company-register"
 callToActionLink: "https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx"
 callToActionText: "Register My Company"
@@ -11,8 +12,7 @@ agencyId: "nj-consumer-affairs"
 agencyAdditionalContext: "Real Estate Appraiser Board"
 industryId: "real-estate-appraisals"
 licenseCertificationClassification: "REGISTRATION"
-summaryDescriptionMd: "Your appraisal management company must be registered with the State before offering professional services. The application to be an appraisal management company must be sent via postal mail.
-"
+summaryDescriptionMd: "Your appraisal management company must be registered with the State before offering professional services. The application to be an appraisal management company must be sent via postal mail."
 ---
 
 ## Eligibility Criteria

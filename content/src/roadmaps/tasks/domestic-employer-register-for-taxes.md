@@ -36,7 +36,7 @@ formName: NJ-Reg
 
 ## Register for State Taxes
 
-[Paper NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf): complete page 17 and choose "Employer of Domestic Household Employee(s)" under step A and "Domestic (Household Employer)" under step H.
+[Paper NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) --  complete page 17 and choose "Employer of Domestic Household Employee(s)" under step A and "Domestic (Household Employer)" under step H.
 
 \-or-
 

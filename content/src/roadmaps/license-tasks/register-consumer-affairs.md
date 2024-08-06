@@ -4,6 +4,7 @@ webflowId: "66aceedf6ba3dffa8ac9d4f0"
 urlSlug: "hic-license"
 name: "Obtain Your Home Improvement Contractor Registration"
 webflowName: "Home Contractor: Home Improvement Contractor Registration"
+displayname: "register-consumer-affairs"
 filename: "register-consumer-affairs"
 callToActionLink: "https://www.njconsumeraffairs.gov/hic/Pages/applications.aspx"
 callToActionText: "Complete My Home Improvement Contractor Registration"
@@ -13,13 +14,18 @@ divisionPhone: "(973) 424-8150"
 industryId: "home-contractor"
 webflowType: "business-license"
 licenseCertificationClassification: ""
-summaryDescriptionMd: ":::infoAlert
- The [Home Improvement Contractor application](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf) includes a FAQ section.
-:::
+summaryDescriptionMd: >-
 
-Home improvement contractors are individuals and companies involved in repairing, renovating, modernizing, installing, replacing, improving, restoring, painting, constructing, remodeling, moving, or demolishing **residential** or **noncommercial** properties.
 
-According to the [Contractor’s Registration Act](https://www.njconsumeraffairs.gov/Statutes/Contractors-Registration-Act.pdf), if you or your business is involved in any of the activities mentioned above, you must register as a home improvement contractor."
+  :::infoAlert
+  The [Home Improvement Contractor application](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf) includes a FAQ section.
+  :::
+
+
+  Home improvement contractors are individuals and companies involved in repairing, renovating, modernizing, installing, replacing, improving, restoring, painting, constructing, remodeling, moving, or demolishing **residential** or **noncommercial** properties.
+
+
+  According to the [Contractor’s Registration Act](https://www.njconsumeraffairs.gov/Statutes/Contractors-Registration-Act.pdf), if you or your business is involved in any of the activities mentioned above, you must register as a home improvement contractor.
 ---
 
 ## Application Requirements

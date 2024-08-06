@@ -4,6 +4,7 @@ webflowId: "66aceed7a35295b74def2eb8"
 urlSlug: "family-daycare-registration"
 name: "Register Your Family Child Care Business"
 webflowName: "Childcare Center: Family Child Care Registration"
+displayname: "family-daycare-register"
 filename: "family-daycare-register"
 callToActionLink: "https://www.childcarenj.gov/Parents/CCRR"
 callToActionText: "Register with My Referral Agency"
@@ -12,8 +13,7 @@ agencyAdditionalContext: "Division of Family Development"
 divisionPhone: "(877) 667-9845"
 industryId: "daycare"
 licenseCertificationClassification: ""
-summaryDescriptionMd: "Register your family daycare business with your local Child Care Resource and Referral Agency to ensure you’re in compliance with state rules and regulations and gain more credibility for your business.
-"
+summaryDescriptionMd: "Register your family daycare business with your local Child Care Resource and Referral Agency to ensure you’re in compliance with state rules and regulations and gain more credibility for your business."
 ---
 
 ## Eligibility Criteria

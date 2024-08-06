@@ -4,6 +4,7 @@ webflowId: "66aceedb6e5be2c8405c21ed"
 urlSlug: "engineer-license"
 name: "Apply for an Engineer License, if Applicable"
 webflowName: "Engineering: Engineer License"
+displayname: "license-engineer"
 filename: "license-engineer"
 callToActionLink: "https://www.njconsumeraffairs.gov/pels/Pages/applications.aspx"
 callToActionText: "Apply for My Engineer License"
@@ -13,8 +14,7 @@ divisionPhone: "(973) 504-6460"
 industryId: "engineering"
 webflowType: "individual-license"
 licenseCertificationClassification: ""
-summaryDescriptionMd: "You or any staff providing engineering services will need an engineer license.
-"
+summaryDescriptionMd: "You or any staff providing engineering services will need an engineer license."
 ---
 
 ## Eligibility Criteria

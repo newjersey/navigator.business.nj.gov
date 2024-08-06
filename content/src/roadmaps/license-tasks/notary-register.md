@@ -4,6 +4,7 @@ webflowId: "66aceedf6ba3dffa8ac9d488"
 urlSlug: "notary-certificate"
 name: "Register as a Notary Public"
 webflowName: "Notary Public: Notary Public Certificate"
+displayname: "notary-register"
 filename: "notary-register"
 callToActionLink: "https://www.njportal.com/DOR/Notary"
 callToActionText: "Apply for My Notary Public Certificate"
@@ -13,13 +14,15 @@ divisionPhone: "(609) 292-9292"
 industryId: "notary-public"
 webflowType: "individual-license"
 licenseCertificationClassification: ""
-summaryDescriptionMd: "
+summaryDescriptionMd: >-
 
-:::infoAlert
- A notary public who is not licensed as an attorney-at-law must provide a statement in any advertisements stating that they're not an attorney licensed to practice law and cannot offer legal advice.
-:::
 
-You or any staff providing notary services must be registered as a notary public."
+  :::infoAlert
+  A notary public who is not licensed as an attorney-at-law must provide a statement in any advertisements stating that they're not an attorney licensed to practice law and cannot offer legal advice.
+  :::
+
+
+  You or any staff providing notary services must be registered as a notary public.
 ---
 
 ## Eligibility Criteria

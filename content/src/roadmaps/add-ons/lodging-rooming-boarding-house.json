@@ -1,0 +1,13 @@
+{
+  "id": "lodging-rooming-boarding-house",
+  "displayname": "lodging-rooming-boarding-house",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 200,
+      "task": "",
+      "licenseTask": "rooming-boarding-house-license",
+      "required": true
+    }
+  ]
+}

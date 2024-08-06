@@ -7,6 +7,8 @@ callToActionLink: https://www.njconsumeraffairs.gov/renewals/Pages/default.aspx
 callToActionText: Renew Shop Registration
 ---
 
+Your cosmetology shop license will expire every two years on the even-numbered year. 
+
 ## Application Requirements
 
 - Business name
@@ -18,6 +20,6 @@ callToActionText: Renew Shop Registration
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A renewed cosmetology shop registration valid for two years. It will be mailed to your business mailing address on file.
+A renewed cosmetology shop registration valid for two years. It will be sent to your business mailing address on file.
 
 :::

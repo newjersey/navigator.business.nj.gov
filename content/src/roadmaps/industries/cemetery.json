@@ -1,5 +1,5 @@
 {
-  "naicsCodes": "721110, 721191, 721199, 721310",
+  "naicsCodes": "812220",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -22,13 +22,13 @@
     },
     {
       "step": 2,
-      "weight": 20,
+      "weight": 16,
       "task": "register-for-ein",
       "required": true
     },
     {
       "step": 2,
-      "weight": 25,
+      "weight": 22,
       "task": "register-for-taxes",
       "required": true
     },
@@ -39,25 +39,18 @@
     },
     {
       "step": 3,
-      "weight": 14,
+      "weight": 15,
       "task": "get-insurance"
     }
   ],
-  "name": "Lodging",
-  "nonEssentialQuestionsIds": [
-    "hotel-register",
-    "hotel-food",
-    "hotel-liquor",
-    "weights-measures",
-    "rooming-boarding-house-owner"
-  ],
-  "displayname": "lodging",
+  "name": "Cemetery",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "cemetery",
   "industryOnboardingQuestions": {
     "canBeReseller": true
   },
-  "isEnabled": true,
-  "additionalSearchTerms": "bed and breakfast, hotel, motel, guesthouse, lodge, inn, airbnb host, rooming house, boarding house",
-  "id": "lodging",
-  "description": "Provides overnight accommodations to guests and travelers",
-  "webflowId": "662a86cad07b4acada82449d"
+  "isEnabled": false,
+  "additionalSearchTerms": "cemetary, memorial, burial, graveyard, crematory, mausoleum",
+  "id": "cemetery",
+  "description": "Offers burial plots, mausoleum spaces, and other services for the dead"
 }
