@@ -21,13 +21,9 @@ callToActionText: Renew My Pharmacy’s CDS Registration
 * New employee information, including name, address, phone number, and email, if applicable
 * Applicable fees paid
 
-You must be registered with the [New Jersey Prescription Monitoring Program](https://www.njconsumeraffairs.gov/pmp/Pages/register.aspx) (NJPMP)  to renew your CDS registration. 
-
-
-
 :::callout{ showHeader="true" headerText="What if I don’t renew my registration?" showIcon="false" calloutType="conditional" }
 
-Your CDS registration will be suspended.
+Your CDS registration will expire.
 
 :::
 
