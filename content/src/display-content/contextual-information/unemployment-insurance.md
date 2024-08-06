@@ -10,7 +10,7 @@ displayname: unemployment-insurance
 ---
 Unemployment Insurance (UI) is a program that gives financial support to employees who:
 
-* Lost their jobs or had their full-time work hours reduced through no fault of their own, and
+* Lost their jobs or had their full-time work hours reduced through no fault of their own
 * [Meet the eligibility requirements](https://www.nj.gov/labor/myunemployment/before/about/who/index.shtml)
 
 As an employer, you are required to have unemployment insurance.
