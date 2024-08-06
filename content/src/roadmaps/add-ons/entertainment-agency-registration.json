@@ -1,0 +1,12 @@
+{
+  "id": "entertainment-agency-registration",
+  "displayname": "entertainment-agency-registration",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 1,
+      "required": true,
+      "licenseTask": "entertainment-agency-reg"
+    }
+  ]
+}
