@@ -54,6 +54,11 @@
       "id": "rooming-boarding-house-owner",
       "questionText": "Do you plan to own and/or operate a rooming or boarding house?",
       "addOn": "lodging-rooming-boarding-house"
+    },
+    {
+      "addOn": "entertainment-agency-registration",
+      "id": "entertainment-agency",
+      "questionText": "Will you provide entertainment booking services in New Jersey?"
     }
   ]
 }
