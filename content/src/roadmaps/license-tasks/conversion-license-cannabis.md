@@ -10,8 +10,7 @@ callToActionText: "Apply for My Conversion License"
 agencyId: "nj-cannabis-commission"
 industryId: "cannabis"
 licenseCertificationClassification: "LICENSE"
-summaryDescriptionMd: "If you have a Conditional License, you need to obtain a Conversion License. A Conditional License limits the activities your business can do. It may take ~90 days for your application to be reviewed.
-"
+summaryDescriptionMd: "If you have a Conditional License, you need to obtain a Conversion License. A Conditional License limits the activities your business can do. It may take ~90 days for your application to be reviewed."
 ---
 
 ## Application Requirements

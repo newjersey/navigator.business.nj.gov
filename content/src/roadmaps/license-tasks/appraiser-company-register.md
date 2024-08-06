@@ -11,8 +11,7 @@ agencyId: "nj-consumer-affairs"
 agencyAdditionalContext: "Real Estate Appraiser Board"
 industryId: "real-estate-appraisals"
 licenseCertificationClassification: "REGISTRATION"
-summaryDescriptionMd: "Your appraisal management company must be registered with the State before offering professional services. The application to be an appraisal management company must be sent via postal mail.
-"
+summaryDescriptionMd: "Your appraisal management company must be registered with the State before offering professional services. The application to be an appraisal management company must be sent via postal mail."
 ---
 
 ## Eligibility Criteria

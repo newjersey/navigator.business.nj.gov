@@ -12,8 +12,7 @@ agencyAdditionalContext: "Real Estate Commission"
 divisionPhone: "(609) 292-7272"
 industryId: "real-estate-broker"
 licenseCertificationClassification: ""
-summaryDescriptionMd: "If you own or plan to own a real estate agency, you need a real estate broker license.
-"
+summaryDescriptionMd: "If you own or plan to own a real estate agency, you need a real estate broker license."
 ---
 
 ## Eligibility Criteria

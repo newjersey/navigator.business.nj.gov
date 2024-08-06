@@ -13,8 +13,7 @@ divisionPhone: "(973) 273-8092"
 industryId: "acupuncture"
 webflowType: "individual-license"
 licenseCertificationClassification: ""
-summaryDescriptionMd: "You need an acupuncturist license to offer services as an acupuncturist.
-"
+summaryDescriptionMd: "You need an acupuncturist license to offer services as an acupuncturist."
 ---
 
 ## Eligibility Criteria

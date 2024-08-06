@@ -11,15 +11,18 @@ agencyId: "nj-consumer-affairs"
 divisionPhone: "(973) 504-6512"
 industryId: "moving-company"
 licenseCertificationClassification: ""
-summaryDescriptionMd: "
+summaryDescriptionMd: >-
 
-:::infoAlert
- Your license must always be displayed at your business location.
-:::
 
-If you transport or warehouse household goods, special commodities, or commercial goods for compensation within New Jersey, you need a public movers license and/or a warehousemen license.
+  :::infoAlert
+  Your license must always be displayed at your business location.
+  :::
 
-Indicate the type of license you require in the application: moving (PM), moving and warehousing (PC), or warehousing only (PW). *Please note that a self-storage or delivery company does not require a state license*."
+
+  If you transport or warehouse household goods, special commodities, or commercial goods for compensation within New Jersey, you need a public movers license and/or a warehousemen license.
+
+
+  Indicate the type of license you require in the application: moving (PM), moving and warehousing (PC), or warehousing only (PW). *Please note that a self-storage or delivery company does not require a state license*.
 ---
 
 ## Eligibility Criteria
