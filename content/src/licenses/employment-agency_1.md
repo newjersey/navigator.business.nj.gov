@@ -13,7 +13,6 @@ Your combined consulting firm (headhunter) and temporary help service firm regis
 
 ## Application Requirements
 
-- Current license or registration number
 - Criminal history of the applicant, company officers, directors, or principals, if applicable
 - `Surety bond|surety-bond` number and premium paid receipt
 - Applicable fees paid
