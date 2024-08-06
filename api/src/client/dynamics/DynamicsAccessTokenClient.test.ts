@@ -53,4 +53,12 @@ describe("DynamicsAccessTokenClient", () => {
     mockAxios.postForm.mockResolvedValue({ data: {} });
     expect(await client.getAccessToken()).toEqual("");
   });
+
+  it("throws status error when api call fails", async () => {
+    mockAxios.postForm.mockRejectedValue({
+      response: { status: 500 },
+    });
+
+    await expect(client.getAccessToken()).rejects.toEqual(500);
+  });
 });

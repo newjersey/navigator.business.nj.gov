@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-null */
-import { DynamicsBusinessAddressClient } from "@client/dynamics/license-status/DynamicsBusinessAddressClient";
-import { BusinessAddressClient } from "@client/dynamics/license-status/types";
+import { RgbDynamicsBusinessAddressesClient } from "@client/dynamics/license-status/RgbDynamicsBusinessAddressesClient";
+import { BusinessAddressesClient } from "@client/dynamics/license-status/rgbDynamicsLicenseStatusTypes";
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import { generateLicenseSearchAddress } from "@shared/test";
 import axios from "axios";
@@ -9,8 +9,8 @@ jest.mock("axios");
 jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
-describe("DynamicsBusinessAddressClient", () => {
-  let client: BusinessAddressClient;
+describe("RgbDynamicsBusinessAddressClient", () => {
+  let client: BusinessAddressesClient;
   let logger: LogWriterType;
 
   const ORG_URL = "www.test-org-url.com";
@@ -19,11 +19,20 @@ describe("DynamicsBusinessAddressClient", () => {
     jest.resetAllMocks();
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
 
-    client = DynamicsBusinessAddressClient(logger, ORG_URL);
+    client = RgbDynamicsBusinessAddressesClient(logger, ORG_URL);
   });
 
   const mockAccessToken = "access-granted";
-  const mockBusinessIds = ["id2", "id3"];
+  const mockBusinessIds = [
+    {
+      businessId: "id2",
+      name: "Business 1",
+    },
+    {
+      businessId: "id3",
+      name: "Business 2",
+    },
+  ];
 
   it("makes a get request to dynamics api with business address query and auth token in header", async () => {
     const businessAddressMockResponse = {
@@ -32,7 +41,7 @@ describe("DynamicsBusinessAddressClient", () => {
           createdon: "2023-05-31T10:31:51Z",
           rgb_city: "Washington",
           rgb_county: null,
-          rgb_name: "Apt GFG 3900A Watson Pl NW",
+          rgb_name: "Business 1",
           rgb_state: "DC",
           rgb_street1: "3900A Watson Pl NW",
           rgb_street2: "Apt GFG",
@@ -45,7 +54,7 @@ describe("DynamicsBusinessAddressClient", () => {
           createdon: "2023-05-31T10:32:04Z",
           rgb_city: "Chesapeake",
           rgb_county: null,
-          rgb_name: "Trlr T 322 Ballahack Rd",
+          rgb_name: "Business 2",
           rgb_state: "VA",
           rgb_street1: "Trlr T 322 Ballahack Rd",
           rgb_street2: null,
@@ -58,9 +67,10 @@ describe("DynamicsBusinessAddressClient", () => {
     };
 
     mockAxios.get.mockResolvedValue({ data: businessAddressMockResponse });
-    expect(await client.getBusinessIdsAndLicenseSearchAddresses(mockAccessToken, mockBusinessIds)).toEqual([
+    expect(await client.getBusinessAddressesForAllBusinessIds(mockAccessToken, mockBusinessIds)).toEqual([
       {
         businessId: "id2",
+        name: "Business 1",
         addresses: [
           generateLicenseSearchAddress({
             addressLine1: "3900A Watson Pl NW",
@@ -76,6 +86,7 @@ describe("DynamicsBusinessAddressClient", () => {
       },
       {
         businessId: "id3",
+        name: "Business 2",
         addresses: [
           generateLicenseSearchAddress({
             addressLine1: "3900A Watson Pl NW",
@@ -92,7 +103,7 @@ describe("DynamicsBusinessAddressClient", () => {
     ]);
     expect(mockAxios.get).toHaveBeenNthCalledWith(
       1,
-      `${ORG_URL}/api/data/v9.2/rgb_addresses?$select=createdon,rgb_city,rgb_county,rgb_name,rgb_state,rgb_street1,rgb_street2,rgb_typecode,rgb_zip,statecode&$filter=(_rgb_businessid_value eq ${mockBusinessIds[0]})&$top=50`,
+      `${ORG_URL}/api/data/v9.2/rgb_addresses?$select=createdon,rgb_city,rgb_county,rgb_name,rgb_state,rgb_street1,rgb_street2,rgb_typecode,rgb_zip,statecode&$filter=(_rgb_businessid_value eq ${mockBusinessIds[0].businessId})`,
       {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
@@ -102,7 +113,7 @@ describe("DynamicsBusinessAddressClient", () => {
 
     expect(mockAxios.get).toHaveBeenNthCalledWith(
       2,
-      `${ORG_URL}/api/data/v9.2/rgb_addresses?$select=createdon,rgb_city,rgb_county,rgb_name,rgb_state,rgb_street1,rgb_street2,rgb_typecode,rgb_zip,statecode&$filter=(_rgb_businessid_value eq ${mockBusinessIds[1]})&$top=50`,
+      `${ORG_URL}/api/data/v9.2/rgb_addresses?$select=createdon,rgb_city,rgb_county,rgb_name,rgb_state,rgb_street1,rgb_street2,rgb_typecode,rgb_zip,statecode&$filter=(_rgb_businessid_value eq ${mockBusinessIds[1].businessId})`,
       {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
@@ -118,7 +129,7 @@ describe("DynamicsBusinessAddressClient", () => {
           createdon: "2023-05-31T10:31:51Z",
           rgb_city: "Washington",
           rgb_county: null,
-          rgb_name: "Apt GFG 3900A Watson Pl NW",
+          rgb_name: "Business 1",
           rgb_state: "DC",
           rgb_street1: "Apt GFG 3900A Watson Pl NW",
           rgb_street2: null,
@@ -131,7 +142,7 @@ describe("DynamicsBusinessAddressClient", () => {
           createdon: "2023-05-31T10:32:04Z",
           rgb_city: "Chesapeake",
           rgb_county: null,
-          rgb_name: "Trlr T 322 Ballahack Rd",
+          rgb_name: "Business 2",
           rgb_state: "VA",
           rgb_street1: "Trlr T 322 Ballahack Rd",
           rgb_street2: null,
@@ -144,9 +155,10 @@ describe("DynamicsBusinessAddressClient", () => {
     };
 
     mockAxios.get.mockResolvedValue({ data: businessAddressMockResponse });
-    expect(await client.getBusinessIdsAndLicenseSearchAddresses(mockAccessToken, mockBusinessIds)).toEqual([
+    expect(await client.getBusinessAddressesForAllBusinessIds(mockAccessToken, mockBusinessIds)).toEqual([
       {
         businessId: "id2",
+        name: "Business 1",
         addresses: [
           generateLicenseSearchAddress({
             addressLine1: "Apt GFG 3900A Watson Pl NW",
@@ -157,6 +169,7 @@ describe("DynamicsBusinessAddressClient", () => {
       },
       {
         businessId: "id3",
+        name: "Business 2",
         addresses: [
           generateLicenseSearchAddress({
             addressLine1: "Apt GFG 3900A Watson Pl NW",
@@ -170,15 +183,27 @@ describe("DynamicsBusinessAddressClient", () => {
 
   it("returns empty array if received data value is empty", async () => {
     mockAxios.get.mockResolvedValue({ data: { value: [] } });
-    expect(await client.getBusinessIdsAndLicenseSearchAddresses(mockAccessToken, mockBusinessIds)).toEqual([
+    expect(await client.getBusinessAddressesForAllBusinessIds(mockAccessToken, mockBusinessIds)).toEqual([
       {
         businessId: "id2",
         addresses: [],
+        name: "Business 1",
       },
       {
         businessId: "id3",
         addresses: [],
+        name: "Business 2",
       },
     ]);
+  });
+
+  it("throws status error when api call fails", async () => {
+    mockAxios.get.mockRejectedValue({
+      response: { status: 500 },
+    });
+
+    await expect(
+      client.getBusinessAddressesForAllBusinessIds(mockAccessToken, mockBusinessIds)
+    ).rejects.toEqual(500);
   });
 });

@@ -5,7 +5,7 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { sortFilterCalendarEventsWithinAYear } from "@/lib/domain-logic/filterCalendarEvents";
 import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
-import { OperateReference } from "@/lib/types/types";
+import { LicenseEventType, OperateReference } from "@/lib/types/types";
 import { groupBy } from "@/lib/utils/helpers";
 import { LicenseCalendarEvent, TaxFilingCalendarEvent } from "@businessnjgovnavigator/shared";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
@@ -19,6 +19,7 @@ interface Props {
   business: Business;
   activeYear: string;
   operateReferences: Record<string, OperateReference>;
+  licenseEvents: LicenseEventType[];
 }
 
 export const FilingsCalendarAsList = (props: Props): ReactElement => {
@@ -35,26 +36,10 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
     Number.parseInt(props.activeYear)
   );
 
-  const sortedFilteredEventsWithinAYear: Array<TaxFilingCalendarEvent | LicenseCalendarEvent> = props.business
-    ?.taxFilingData.filings
-    ? sortFilterCalendarEventsWithinAYear(
-        [...licenseCalendarEvents, ...props.business.taxFilingData.filings],
-        props.activeYear
-      )
-    : [];
+  const taxFilings = props.business.taxFilingData.filings ?? [];
 
-  if (sortedFilteredEventsWithinAYear.length === 0) {
-    return (
-      <>
-        <Content className="text-base margin-bottom-3">
-          {Config.dashboardDefaults.calendarEmptyDescriptionMarkdown}
-        </Content>
-        <div className="flex flex-column space-between fac text-align-center flex-desktop:grid-col usa-prose padding-x-3">
-          <img className="padding-y-2" src={`/img/empty-trophy-illustration.png`} alt="empty calendar" />
-        </div>
-      </>
-    );
-  }
+  const sortedFilteredEventsWithinAYear: Array<TaxFilingCalendarEvent | LicenseCalendarEvent> =
+    sortFilterCalendarEventsWithinAYear([...licenseCalendarEvents, ...taxFilings], props.activeYear);
 
   const eventsGroupedByDate = groupBy(
     sortedFilteredEventsWithinAYear.filter((event) => {
@@ -68,6 +53,18 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
 
   const visibleEvents = eventsGroupedByDate.slice(0, numberOfVisibleCalendarEntries);
 
+  if (sortedFilteredEventsWithinAYear.length === 0) {
+    return (
+      <>
+        <Content className="text-base margin-bottom-3">
+          {Config.dashboardDefaults.calendarEmptyDescriptionMarkdown}
+        </Content>
+        <div className="flex flex-column space-between fac text-align-center flex-desktop:grid-col usa-prose padding-x-3">
+          <img className="padding-y-2" src={`/img/empty-trophy-illustration.png`} alt="empty calendar" />
+        </div>
+      </>
+    );
+  }
   return (
     <div data-testid="filings-calendar-as-list">
       {visibleEvents.map((events) => {
@@ -93,13 +90,14 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
                       index={index}
                     />
                   );
-                } else if (event.calendarEventType === "LICENSE") {
+                }
+                if (event.calendarEventType === "LICENSE") {
                   return (
                     <LicenseEvent
-                      key={`${event.licenseEventSubtype}-${event.dueDate}`}
-                      licenseEvent={event}
+                      key={event.licenseName + event.licenseEventSubtype}
+                      LicenseCalendarEvent={event}
+                      licenseEvents={props.licenseEvents}
                       index={index}
-                      industryId={props.business.profileData.industryId}
                     />
                   );
                 }

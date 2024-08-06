@@ -1,11 +1,8 @@
 ---
 filename: massage-license-reinstatement
 name: Apply to Reinstate Your Massage and Bodywork Business License
-industryIds:
-  - massage-therapy
-sectorIds:
-  - health-care-and-social-assistance
 icon: update-purple.svg
+licenseName: Massage and Bodywork Therapy-Massage and Bodywork Employer
 urlSlug: massage-license-reinstatement
 summaryDescriptionMd: You need to reinstate your massage and bodywork business
   license if it has expired. Email your application to

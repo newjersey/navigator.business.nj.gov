@@ -1,11 +1,11 @@
 {
   "request": {
     "method": "POST",
-    "url": "/ws/simple/queryLicenseStatus"
+    "url": "/ws/simple/queryLicenseStatuses"
   },
   "response": {
     "status": 200,
-    "bodyFileName": "license-status-response.json",
+    "bodyFileName": "webservice-license-status-response.json",
     "headers": {
       "Content-Type": "text/json"
     }

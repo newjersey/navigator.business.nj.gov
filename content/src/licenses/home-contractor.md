@@ -3,6 +3,9 @@ notesMd: "Draft:
   https://docs.google.com/document/d/1zaZpaifJyX8bE7S-y-iEt8Zn_ssZHw4zIi_4QgjU5\
   RE/edit"
 urlSlug: home-contractor
+renewalEventDisplayName: Home Improvement Contractor Renewal Deadline
+expirationEventDisplayName: Home Improvement Contractor Expiration
+licenseName: Home Improvement Contractors-Home Improvement Contractor
 previewType: renewal
 summaryDescriptionMd: You can renew your Home Improvement Contractor License online.
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx

@@ -17,10 +17,12 @@ import { randomInt } from "../intHelpers";
 import { LegalStructure, LegalStructures } from "../legalStructure";
 import {
   LicenseData,
+  LicenseDetails,
   LicenseSearchAddress,
   LicenseSearchNameAndAddress,
   LicenseStatusItem,
-  LicenseStatusResult,
+  Licenses,
+  taskIdLicenseNameMapping,
 } from "../license";
 import { MunicipalityDetail } from "../municipality";
 import { OperatingPhaseId } from "../operatingPhase";
@@ -125,14 +127,6 @@ export const generateTaxIdAndBusinessName = (
   };
 };
 
-export const generateLicenseStatusResult = (overrides: Partial<LicenseStatusResult>): LicenseStatusResult => {
-  return {
-    status: "PENDING",
-    checklistItems: [generateLicenseStatusItem({})],
-    ...overrides,
-  };
-};
-
 export const generateLicenseStatusItem = (overrides: Partial<LicenseStatusItem>): LicenseStatusItem => {
   return {
     title: `some-title-${randomInt()}`,
@@ -163,14 +157,29 @@ export const randomLegalStructure = (publicFiling?: {
   return LegalPublicFilings[randomIndex];
 };
 
-export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseData => {
+export const generateLicenseDetails = (overrides: Partial<LicenseDetails>): LicenseDetails => {
   return {
     nameAndAddress: generateLicenseSearchNameAndAddress({}),
-    completedSearch: false,
-    items: [generateLicenseStatusItem({})],
-    status: "PENDING",
+    licenseStatus: randomElementFromArray(["PENDING", "ACTIVE", "EXPIRED"]),
+    checklistItems: [generateLicenseStatusItem({})],
+    expirationDateISO: getCurrentDate().add(1, "year").toISOString(),
     lastUpdatedISO: getCurrentDateISOString(),
-    expirationISO: getCurrentDate().add(1, "year").toISOString(),
+    ...overrides,
+  };
+};
+
+export const generateLicenseData = (
+  overrides: Partial<LicenseData>,
+  licensesOverrides?: Licenses
+): LicenseData => {
+  return {
+    licenses: {
+      [randomElementFromArray(Object.values(taskIdLicenseNameMapping))]: {
+        ...generateLicenseDetails({}),
+      },
+      ...licensesOverrides,
+    },
+    lastUpdatedISO: getCurrentDateISOString(),
     ...overrides,
   };
 };

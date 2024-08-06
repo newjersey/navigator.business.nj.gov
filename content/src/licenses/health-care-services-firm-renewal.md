@@ -1,6 +1,9 @@
 ---
 notesMd: ""
 urlSlug: health-care-services-firm-renewal
+renewalEventDisplayName: Health Care Service Firm Renewal Deadline
+expirationEventDisplayName: Health Care Service Firm Expiration
+licenseName: Health Care Services
 previewType: renewal
 summaryDescriptionMd: If you are interested in continuing to employ individuals
   to provide health care, personal care, or companion services (either in-home

@@ -19,6 +19,7 @@ import {
   AnytimeActionTask,
   Certification,
   Funding,
+  LicenseEventType,
   OperateReference,
   RoadmapDisplayContent,
 } from "@/lib/types/types";
@@ -35,6 +36,7 @@ interface Props {
   fundings: Funding[];
   certifications: Certification[];
   elevatorViolations?: boolean;
+  licenseEvents: LicenseEventType[];
 }
 
 export const DashboardOnMobile = (props: Props): ReactElement => {
@@ -81,7 +83,10 @@ export const DashboardOnMobile = (props: Props): ReactElement => {
                 </>
               )}
               {operatingPhase.displayCalendarType !== "NONE" && (
-                <FilingsCalendar operateReferences={props.operateReferences} />
+                <FilingsCalendar
+                  operateReferences={props.operateReferences}
+                  licenseEvents={props.licenseEvents}
+                />
               )}
               {operatingPhase.displayHideableRoadmapTasks && <HideableTasks />}
             </div>

@@ -178,6 +178,25 @@ module.exports = {
       from: {},
       to: { path: "test" },
     },
+
+    {
+      from: { path: "test" },
+      to: {},
+    },
+
+    {
+      from: { path: "src/client" },
+      to: { path: "src/api" },
+    },
+
+    {
+      from: { path: "src/domain" },
+      to: { path: "src/api" },
+    },
+    {
+      from: { path: "src/domain" },
+      to: { path: "src/client" },
+    },
   ],
   forbidden: [
     /* rules from the 'recommended' preset: */

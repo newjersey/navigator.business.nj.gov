@@ -1,5 +1,8 @@
 ---
 urlSlug: cosmetology
+renewalEventDisplayName: Cosmetology Shop Renewal Deadline
+expirationEventDisplayName: Cosmetology Shop Expiration
+licenseName: Cosmetology and Hairstyling-Shop
 previewType: renewal
 summaryDescriptionMd: Your cosmetology shop license will expire every two years
   on the even-numbered year.

@@ -10,12 +10,12 @@ import {
   FundingBusinessStage,
   FundingCertifications,
   FundingHomeBased,
+  FundingpreferenceForOpportunityZone,
   FundingProgramFrequency,
   FundingPublishStatus,
   FundingStatus,
   FundingType,
-  FundingpreferenceForOpportunityZone,
-  LicenseEvent,
+  LicenseEventType,
   MarkdownResult,
   PageMetadata,
   TaskWithoutLinks,
@@ -23,6 +23,8 @@ import {
   TaxFilingMethod,
   WebflowLicense,
 } from "@/lib/types/types";
+import { LicenseName } from "@businessnjgovnavigator/shared/license";
+import { LicenseEventSubtype } from "@businessnjgovnavigator/shared/taxFiling";
 import matter from "gray-matter";
 
 export const convertContextualInfoMd = (contentMdContents: string): ContextualInfo => {
@@ -46,13 +48,18 @@ export const convertTaskMd = (taskMdContents: string): TaskWithoutLinks => {
   };
 };
 
-export const convertLicenseMd = (taskMdContents: string, filename: string): LicenseEvent => {
-  const matterResult = matter(taskMdContents);
-  const taskGrayMatter = matterResult.data as LicenseGrayMatter;
+export const convertLicenseMd = (licenseMdContents: string, filename: string): LicenseEventType => {
+  const matterResult = matter(licenseMdContents);
+
+  const licenseGrayMatter = matterResult.data as LicenseGrayMatter;
+  delete licenseGrayMatter.notesMd;
+
+  const licenseName = licenseGrayMatter.licenseName as LicenseName;
   return {
     contentMd: matterResult.content,
     filename,
-    ...taskGrayMatter,
+    ...licenseGrayMatter,
+    licenseName,
   };
 };
 
@@ -74,7 +81,7 @@ export const convertAnytimeActionLicenseReinstatementMd = (
   filename: string
 ): AnytimeActionLicenseReinstatement => {
   const matterResult = matter(anytimeActionLicenseReinstatementMdContents);
-  const anytimeActionGrayMatter = matterResult.data as AnytimeActionTaskGrayMatter;
+  const anytimeActionGrayMatter = matterResult.data as AnytimeActionLicenseReinsatementGrayMatter;
   return {
     contentMd: matterResult.content,
     filename,
@@ -179,10 +186,15 @@ type FilingGrayMatter = {
 };
 
 type LicenseGrayMatter = {
-  id: string;
+  renewalEventDisplayName: string;
+  expirationEventDisplayName: string;
   urlSlug: string;
-  callToActionLink: string;
-  callToActionText: string;
+  callToActionLink?: string;
+  callToActionText?: string;
+  previewType?: LicenseEventSubtype;
+  summaryDescriptionMd: string;
+  notesMd?: string;
+  licenseName: string;
 };
 
 type AnytimeActionLinkGrayMatter = {
@@ -204,6 +216,17 @@ type AnytimeActionTaskGrayMatter = {
   industryIds: string[];
   sectorIds: string[];
   applyToAllUsers: boolean;
+  summaryDescriptionMd: string;
+};
+
+type AnytimeActionLicenseReinsatementGrayMatter = {
+  name: string;
+  urlSlug: string;
+  callToActionLink: string;
+  callToActionText: string;
+  form: string;
+  icon: string;
+  licenseName: LicenseName;
   summaryDescriptionMd: string;
 };
 

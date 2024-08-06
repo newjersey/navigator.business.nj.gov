@@ -57,7 +57,6 @@
   "isEnabled": true,
   "additionalSearchTerms": "clothing, clothing accessories, store, reseller, outlet, shop, thrift store, candle store, crafts/hobby store, clothing store, consignment, boutique, sales, grocery store, food retail, flower shop, florist, custom frames, deli, convenience store, candy store, jewelry store, apparel retail, thrift store, gift shop, bike shop, bookstore, yarn shop, goods retail, accessories retail, ",
   "id": "retail",
-  "licenseType": "Ticket Brokers",
   "description": "Selling or reselling goods in a brick and mortar location outside of your home",
   "webflowId": "656a13629d57077e647ddf9f"
 }

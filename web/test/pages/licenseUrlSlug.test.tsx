@@ -1,14 +1,15 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import { LicenseEvent } from "@/lib/types/types";
+import { LicenseEventType } from "@/lib/types/types";
 import LicensePage from "@/pages/licenses/[licenseUrlSlug]";
 import { generateLicenseEvent } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
-  generateProfileData,
+  generateLicenseDetails,
   getCurrentDate,
   LicenseEventSubtype,
-  LookupIndustryById,
+  randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
+import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
 import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
@@ -23,7 +24,7 @@ describe("license page", () => {
     jest.resetAllMocks();
   });
 
-  const renderLicensePage = (license: LicenseEvent, licenseEventType: LicenseEventSubtype): void => {
+  const renderLicensePage = (license: LicenseEventType, licenseEventType: LicenseEventSubtype): void => {
     render(
       <ThemeProvider theme={createTheme()}>
         <LicensePage license={license} licenseEventType={licenseEventType} />
@@ -33,27 +34,30 @@ describe("license page", () => {
 
   it("shows the basic expiration details and expiration date", () => {
     const expirationDate = currentDate.add(4, "days");
-
-    useMockBusiness({
-      licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString() }),
-      profileData: generateProfileData({ industryId: "home-contractor" }),
-    });
-
+    const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
     const license = generateLicenseEvent({
+      licenseName,
       urlSlug: "license-url-slug-1",
       filename: "filename-1",
       callToActionLink: "cta-link-1",
       callToActionText: "cta-text-1",
       contentMd: "content-1",
+      expirationEventDisplayName: "expiration",
     });
 
-    const licenseName = LookupIndustryById("home-contractor").licenseType;
+    useMockBusiness({
+      licenseData: generateLicenseData({
+        licenses: {
+          [licenseName]: generateLicenseDetails({
+            expirationDateISO: expirationDate.toISOString(),
+          }),
+        },
+      }),
+    });
 
     renderLicensePage(license, "expiration");
 
-    expect(
-      screen.getByText(`${licenseName} ${Config.licenseEventDefaults.expirationTitleLabel}`)
-    ).toBeInTheDocument();
+    expect(screen.getByText(license.expirationEventDisplayName)).toBeInTheDocument();
     expect(
       screen.getByText(Config.licenseEventDefaults.beforeExpirationDateText.toUpperCase())
     ).toBeInTheDocument();
@@ -66,25 +70,30 @@ describe("license page", () => {
   it("shows the basic renewal details and renewal date", () => {
     const expirationDate = currentDate.add(4, "days");
 
-    useMockBusiness({
-      licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString() }),
-      profileData: generateProfileData({ industryId: "home-contractor" }),
-    });
-
+    const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
     const license = generateLicenseEvent({
+      licenseName,
       urlSlug: "license-url-slug-1",
       filename: "filename-1",
       callToActionLink: "cta-link-1",
       callToActionText: "cta-text-1",
       contentMd: "content-1",
+      renewalEventDisplayName: "some renewal",
     });
-    const licenseName = LookupIndustryById("home-contractor").licenseType;
+
+    useMockBusiness({
+      licenseData: generateLicenseData({
+        licenses: {
+          [licenseName]: generateLicenseDetails({
+            expirationDateISO: expirationDate.toISOString(),
+          }),
+        },
+      }),
+    });
 
     renderLicensePage(license, "renewal");
 
-    expect(
-      screen.getByText(`${licenseName} ${Config.licenseEventDefaults.renewalTitleLabel}`)
-    ).toBeInTheDocument();
+    expect(screen.getByText(license.renewalEventDisplayName)).toBeInTheDocument();
     expect(
       screen.getByText(Config.licenseEventDefaults.beforeRenewalDateText.toUpperCase())
     ).toBeInTheDocument();

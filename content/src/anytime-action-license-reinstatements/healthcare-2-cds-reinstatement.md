@@ -2,9 +2,8 @@
 notesMd: ""
 filename: "healthcare-2-cds-reinstatement"
 name: Reinstate Your PA, APN, or CNM Controlled Dangerous Substances Registration
-industryIds: []
-sectorIds: []
 icon: update-purple.svg
+licenseName:
 urlSlug: healthcare-2-cds-reinstatement
 summaryDescriptionMd: >-
   If you’re a Physician Assistant (PA), Advanced Practice Nurse (APN), or

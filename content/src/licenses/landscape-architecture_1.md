@@ -1,5 +1,8 @@
 ---
 urlSlug: landscape-architecture
+renewalEventDisplayName: Certificate of Authorization Renewal Deadline
+expirationEventDisplayName: Certificate of Authorization Expiration
+licenseName: Landscape Architecture-Certificate of Authorization
 previewType: renewal
 summaryDescriptionMd: N/A
 callToActionLink: https://www.njconsumeraffairs.gov/land/Pages/default.aspx

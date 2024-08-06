@@ -1,9 +1,7 @@
 ---
 filename: accounting-firm-registration-reinstatement
 name: Apply to Reinstate Your Accounting Firm Registration
-industryIds:
-  - certified-public-accountant
-sectorIds: []
+licenseName: Accountancy-Firm Registration
 icon: update-purple.svg
 urlSlug: accounting-firm-registration-reinstatement
 summaryDescriptionMd: Your accounting firm registration needs to be reinstated

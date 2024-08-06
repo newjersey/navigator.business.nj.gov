@@ -13,6 +13,7 @@ divisionPhone: "(973) 424-8150"
 industryId: "home-contractor"
 webflowType: "business-license"
 licenseCertificationClassification: ""
+licenseName: "Home Improvement Contractors-Home Improvement Contractor"
 summaryDescriptionMd: ":::infoAlert
  The [Home Improvement Contractor application](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf) includes a FAQ section.
 :::

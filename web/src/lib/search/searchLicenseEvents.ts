@@ -1,8 +1,8 @@
 import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
-import { LicenseEvent } from "@/lib/types/types";
+import { LicenseEventType } from "@/lib/types/types";
 
-export const searchLicenseEvents = (licenseEvents: LicenseEvent[], term: string): Match[] => {
+export const searchLicenseEvents = (licenseEvents: LicenseEventType[], term: string): Match[] => {
   const matches: Match[] = [];
 
   for (const item of licenseEvents) {

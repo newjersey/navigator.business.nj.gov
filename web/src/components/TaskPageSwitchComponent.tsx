@@ -9,7 +9,7 @@ import { BusinessFormation } from "@/components/tasks/business-formation/Busines
 import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
-import { Roadmap, Task, TasksDisplayContent } from "@/lib/types/types";
+import { Roadmap, Task, TaskWithLicenseTaskId, TasksDisplayContent } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
 import { formationTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
@@ -17,7 +17,7 @@ import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
 
 interface Props {
-  task: Task;
+  task: Task | TaskWithLicenseTaskId;
   displayContent: TasksDisplayContent;
   business: Business;
   roadmap: Roadmap;
@@ -31,38 +31,28 @@ export const TaskPageSwitchComponent = ({
   roadmap,
   CMS_ONLY_disable_overlay,
 }: Props): ReactElement => {
+  const taskIdsWithLicenseSearchEnabled = [
+    "home-health-aide-license",
+    "apply-for-shop-license",
+    "register-home-contractor",
+    "pharmacy-license",
+    "register-accounting-firm",
+    "license-massage-therapy",
+    "appraiser-company-register",
+    "telemarketing-license",
+    "health-club-registration",
+    "ticket-broker-reseller-registration",
+    "authorization-landscape-architect-firm",
+    "authorization-architect-firm",
+  ];
+
+  if (taskIdsWithLicenseSearchEnabled.includes(task.id)) {
+    return (
+      <LicenseTask task={task as TaskWithLicenseTaskId} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
+    );
+  }
+
   return rswitch(task.id, {
-    "home-health-aide-license": (
-      <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
-    ),
-    "apply-for-shop-license": <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />,
-    "register-consumer-affairs": (
-      <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
-    ),
-    "pharmacy-license": <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />,
-    "register-accounting-firm": (
-      <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
-    ),
-    "public-accountant-license": (
-      <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
-    ),
-    "license-massage-therapy": (
-      <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
-    ),
-    "moving-company-license": <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />,
-    "architect-license": <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />,
-    "hvac-license": <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />,
-    "appraiser-license": <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />,
-    "telemarketing-license": <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />,
-    "landscape-architect-license": (
-      <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
-    ),
-    "health-club-registration": (
-      <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
-    ),
-    "ticket-broker-reseller-registration": (
-      <LicenseTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
-    ),
     "elevator-registration": (
       <ElevatorRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),
