@@ -43,14 +43,14 @@
       "task": "get-insurance"
     }
   ],
-  "name": "Cemetery ",
+  "name": "Cemetery",
   "nonEssentialQuestionsIds": [],
+  "displayname": "cemetery",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": false
+    "canBeReseller": true
   },
-  "displayname": "Cemetery",
   "isEnabled": false,
   "additionalSearchTerms": "cemetary, memorial, burial, graveyard, crematory, mausoleum",
-  "id": "Cemetery",
+  "id": "cemetery",
   "description": "Offers burial plots, mausoleum spaces, and other services for the dead"
 }
