@@ -1,4 +1,7 @@
 ---
+notesMd: "* Hold off on publishing for now -- SME came back with Pharm. CDS
+  edits regarding the DEA registration, and I want to ensure I have this right
+  before publishing"
 filename: shelter-cds-reinstatement
 name: Reinstate Your Animal Shelter’s Controlled Dangerous Substances Registration
 industryIds:
@@ -13,11 +16,11 @@ summaryDescriptionMd: >-
   it by following these steps:
 
 
-  1. Ensure you are registered with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) before applying for your CDS reinstatement.
+  1. Email the New Jersey Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the Facilities Reinstatement application.
 
-  2. Email the New Jersey Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the Facilities Reinstatement application.
+  2. After your completed application has been emailed back to the DCU, they will email you an invoice to pay the fee online.
 
-  3. After your completed application has been emailed back to the DCU, they will email you an invoice to pay the fee online.
+  3. If your [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) registration is also expired, be sure to reinstate it.
 ---
 ## Application Requirements
 
