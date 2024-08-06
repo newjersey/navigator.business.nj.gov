@@ -13,8 +13,6 @@ callToActionText: Renew My Consulting Firm (Headhunter) Registration
 Your consulting firm (headhunter) registration expires every year. 
 
 ## Application Requirements
-- Current registration number
-- `Registered agent|registered-agent` number
 - Criminal history of the applicant, company officers, directors, or principals, if applicable
 - Applicable fees paid
 
