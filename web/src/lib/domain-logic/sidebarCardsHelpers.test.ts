@@ -136,10 +136,26 @@ describe("sidebarCard Helpers", () => {
             accountCreationSource: "investNewark",
           }),
         });
-        const funding1 = generateFunding({ name: "Bca", status: "deadline" });
-        const funding2 = generateFunding({ name: "Abc", status: "deadline", agency: ["fakeAgency"] });
-        const funding3 = generateFunding({ name: "cba", status: "deadline", agency: ["invest-newark"] });
-        const funding4 = generateFunding({ name: "abc", status: "first come, first serve" });
+        const funding1 = generateFunding({
+          name: "Bca",
+          status: "deadline",
+          agency: ["fakeAgency"],
+        });
+        const funding2 = generateFunding({
+          name: "Abc",
+          status: "deadline",
+          agency: ["fakeAgency"],
+        });
+        const funding3 = generateFunding({
+          name: "cba",
+          status: "deadline",
+          agency: ["invest-newark"],
+        });
+        const funding4 = generateFunding({
+          name: "abc",
+          status: "first come, first serve",
+          agency: ["fakeAgency"],
+        });
         const funding5 = generateFunding({
           name: "bca",
           status: "rolling application",
