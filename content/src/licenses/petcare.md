@@ -23,7 +23,7 @@ You must be registered with the [New Jersey Prescription Monitoring Program (NJP
 
 :::callout{ showHeader="true" headerText="What if I don’t renew my registration?" showIcon="false" calloutType="conditional" }
 
-Your CDS registration will be suspended.
+Your CDS registration will expire.
 
 :::
 
