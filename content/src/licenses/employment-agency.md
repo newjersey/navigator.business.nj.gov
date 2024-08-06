@@ -11,8 +11,6 @@ Your employment agency license and agent license expires every year.
 
 ### Renewal Requirements
 - `Surety bond|surety-bond` number and premium paid receipt 
-- Current license number
-- `Registered agent|registered-agent` number
 - Criminal history of the applicant, company officers, directors, or principals, if applicable
 - Applicable fees paid
 
