@@ -41,7 +41,6 @@ agencyId: nj-consumer-affairs
 * A copy of your business papers, such as your `Business Registration Certificate|business-reg-certificate` 
 * Proof of liability insurance for your facility 
 * Notarized Memorandum of Agreement (included in application)
-* Completed Zoning Certification (included in application)
 * Applicable fees paid, once the DCU has sent an invoice
 
 ### Safety and Security
