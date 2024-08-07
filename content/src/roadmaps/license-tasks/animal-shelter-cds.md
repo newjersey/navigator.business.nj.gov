@@ -4,11 +4,9 @@ notesMd: >-
   want h2 and h3 to be visually differentiated. **Will need to update this once
   the issue is resolved**
 
-  * 7.30: updated after Regina's review 
+  * 7.30: updated after Regina's review
 
-    * "Security measures in place to prevent diversion of the CDS" became "Security measures in place to prevent loss or theft of the CDS"
-    * **Still working on this one**. Asked SME. "The name and title of all officers and a copy of the corporate or business papers" became 2 lines, and corporate or business papers became "A copy of your business papers, such as your Business Registration Certificate"
-    * Added additional info to Criminal History Record Information Part 2 -- "CHRI Part 2, including employee names, dates of birth, and email addresses (to be completed right after Part 1 and submitted with your CDS application; form included in application)"
+  * 8.7: ready to be published; will need an onboarding (essential) question added: "will you use sodium pentobarbital for animal euthanasia?"
 id: animal-shelter-cds
 filename: animal-shelter-cds
 displayname: animal-shelter-cds
