@@ -1,12 +1,13 @@
 ---
 notesMd: >-
   * h2 and h3 look the same. Spencer would like us to still use h3. Ideally we
-  want h2 and h3 to be visually differentiated
+  want h2 and h3 to be visually differentiated. **Will need to update this once
+  the issue is resolved**
 
-  * 7.30: updated after regina's review 
+  * 7.30: updated after Regina's review 
 
     * "Security measures in place to prevent diversion of the CDS" became "Security measures in place to prevent loss or theft of the CDS"
-    * **Still working on this one**. Asked SME. "The name and title of all officers and a copy of the corporate or business papers" became ...
+    * **Still working on this one**. Asked SME. "The name and title of all officers and a copy of the corporate or business papers" became 2 lines, and corporate or business papers became "A copy of your business papers, such as your Business Registration Certificate"
     * Added additional info to Criminal History Record Information Part 2 -- "CHRI Part 2, including employee names, dates of birth, and email addresses (to be completed right after Part 1 and submitted with your CDS application; form included in application)"
 id: animal-shelter-cds
 filename: animal-shelter-cds
@@ -57,12 +58,12 @@ agencyId: nj-consumer-affairs
 
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
 
-You cannot legally dispense or store sodium pentobarbital and may be subject to legal consequences and fines if you do so.
+You cannot legally dispense or store sodium pentobarbital and may be subject to legal consequences if you do so.
 
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A CDS registration certificate.
+A CDS registration certificate, valid for one year.
 
 :::
