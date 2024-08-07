@@ -9,20 +9,46 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { ProfileData, createEmptyProfileData } from "@businessnjgovnavigator/shared/index";
-import type { InferGetStaticPropsType } from "next";
+import { Industries, Industry } from "@businessnjgovnavigator/shared";
+import {
+  LookupIndustryById,
+  ProfileData,
+  createEmptyProfileData,
+} from "@businessnjgovnavigator/shared/index";
+import type { GetStaticPathsResult, } from "next";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
-// DELETE THIS FILE BEFORE THEN END
 
-const General = (props: InferGetStaticPropsType<typeof getStaticProps>): ReactElement => {
+interface Props {
+    noAuth: boolean;
+    roadmap: Roadmap;
+    industry: Industry;
+}
+
+const StarterKitsPage = (props: Props): ReactElement => {
   const router = useRouter();
   const Config = getMergedConfig();
 
   const getTaskNamesForStep = (tasks: Task[], step: number): string[] => {
     return tasks.filter((task) => task.stepNumber === step).map((task) => task.name);
   };
+
+  console.log(props);
+
+  // something like this from useContentModifiedByUserData.ts
+  // NExt step, uses the ${OoS} tag replacement thing that we'd want to work into the content side
+  // modifyContent({
+  //   content,
+  //   condition: () => business?.profileData.businessPersona === "FOREIGN",
+  //   modificationMap: {
+  //     oos: "out-of-state",
+  //     OoS: "Out-of-State",
+  //   },
+  // });
+
+
+  // ALso on top of this I imagine we'll need to add a content field as like a starterkits name override thing to make sure that we can override for business names that we want to appear differnetly, general at a minimum
 
   return (
     <PageSkeleton landingPage={true}>
@@ -108,7 +134,7 @@ const General = (props: InferGetStaticPropsType<typeof getStaticProps>): ReactEl
         >
           <div className="padding-x-2 display-flex flex-column flex-justify gap-5 flex-align-center">
             <div className="border-top-1 border-secondary-vivid-dark width-8" />
-            <Heading level={2}>Get Your Business Started in 4 Easy Steps</Heading>
+            <Heading level={2}>{`Get Your Business Started in ${props.roadmap.steps.length} Easy Steps`}</Heading>
           </div>
           <div className="display-flex flex-column desktop:flex-row gap-4 padding-x-2 desktop:padding-x-0">
             {props.roadmap.steps.map((step) => (
@@ -138,24 +164,49 @@ const General = (props: InferGetStaticPropsType<typeof getStaticProps>): ReactEl
   );
 };
 
-export const getStaticProps = async (): Promise<{
-  props: {
-    noAuth: boolean;
-    roadmap: Roadmap;
+type PathParams<P> = { params: P; locale?: string };
+export type StarterKitsUrl = {
+  starterKitsUrl: string;
+};
+
+const getAllStarterKitUrls = (): PathParams<StarterKitsUrl>[] => {
+  Industries;
+  return Industries.map((industry) => {
+    return {
+      params: {
+        starterKitsUrl: industry.id, // Should we maybe have a slug-field? Is there any reason?
+      },
+    };
+  });
+};
+
+export const getStaticPaths = (): GetStaticPathsResult<StarterKitsUrl> => {
+  const paths = getAllStarterKitUrls();
+  return {
+    paths,
+    fallback: false,
   };
-}> => {
+};
+
+export const getStaticProps = async ({
+  params,
+}: {
+  params: StarterKitsUrl;
+}): Promise<{props: Props}> => {
+  const industry = LookupIndustryById(params.starterKitsUrl);
+
   const emptyProfileData = createEmptyProfileData();
   const newProfileData: ProfileData = {
     ...emptyProfileData,
     businessPersona: "STARTING",
-    industryId: "generic",
+    industryId: industry.id,
     legalStructureId: "limited-liability-company",
   };
   const roadmap = await buildUserRoadmap(newProfileData);
 
   return {
-    props: { noAuth: true, roadmap },
+    props: { noAuth: true, roadmap, industry },
   };
 };
 
-export default General;
+export default StarterKitsPage;
