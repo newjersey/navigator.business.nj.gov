@@ -1,3 +1,32 @@
+# [2024.23.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.22.1...v2024.23.0) (2024-08-07)
+
+
+### Bug Fixes
+
+* [[#187809299](https://github.com/newjersey/navigator.business.nj.gov/issues/187809299)] license and sync certification delete issues ([9f9a428](https://github.com/newjersey/navigator.business.nj.gov/commit/9f9a4287fe1e1954065c8158fd506dcb730e75e3))
+* [[#187973765](https://github.com/newjersey/navigator.business.nj.gov/issues/187973765)] potential CMS bug with callouts ([debd562](https://github.com/newjersey/navigator.business.nj.gov/commit/debd562271d859f257634f7f88b7efe04221210b))
+* [[#187978546](https://github.com/newjersey/navigator.business.nj.gov/issues/187978546)] update styling for add'l onboarding questions ([0f6e67c](https://github.com/newjersey/navigator.business.nj.gov/commit/0f6e67c80a51b54074e39764f519b55daefe066d))
+* [[#187983571](https://github.com/newjersey/navigator.business.nj.gov/issues/187983571)] remove elevator owning non-essential questions for nexus and owning users ([cbc7b56](https://github.com/newjersey/navigator.business.nj.gov/commit/cbc7b563698c71911b15402c9d87ff6055d12700))
+* [[#188073076](https://github.com/newjersey/navigator.business.nj.gov/issues/188073076)] fix flakey agencyFundingSorting tests ([ed7c818](https://github.com/newjersey/navigator.business.nj.gov/commit/ed7c818cd3470f72dfcf5421d4261f9f9aa7ba29))
+* [[#188073424](https://github.com/newjersey/navigator.business.nj.gov/issues/188073424)] industryOnboardingQuestions widget ([7d5c030](https://github.com/newjersey/navigator.business.nj.gov/commit/7d5c03023e8108a2972829e9111bdc37e78d6c8e))
+* [#[#188051113](https://github.com/newjersey/navigator.business.nj.gov/issues/188051113)] Fix flaky onboarding test ([c95a234](https://github.com/newjersey/navigator.business.nj.gov/commit/c95a234b6ad1b232815941568594b46c4ca5f153))
+* update flakey failing profile test ([5dce53b](https://github.com/newjersey/navigator.business.nj.gov/commit/5dce53b3a11fd48e494b4b5e4e123ee55edb4dd3))
+* webflow sync tests updates ([1fcfe27](https://github.com/newjersey/navigator.business.nj.gov/commit/1fcfe27360af9264b39140d982c27f41d8cf9ba1))
+
+
+### Features
+
+* [[#186092881](https://github.com/newjersey/navigator.business.nj.gov/issues/186092881)] header banner, text lost during reflow ([35d6e00](https://github.com/newjersey/navigator.business.nj.gov/commit/35d6e0074d5c3815fd11aa26a3b15839ab150174))
+* [[#187738760](https://github.com/newjersey/navigator.business.nj.gov/issues/187738760)] button width increased on mobile ([6d12680](https://github.com/newjersey/navigator.business.nj.gov/commit/6d12680f193437fcc24edacf179267268d212838))
+* [[#187738760](https://github.com/newjersey/navigator.business.nj.gov/issues/187738760)] included LLC as legal structure for general starter kit ([969ee7f](https://github.com/newjersey/navigator.business.nj.gov/commit/969ee7f67890b7ae99d4dc6fb3b49a404150149b))
+* [[#187901632](https://github.com/newjersey/navigator.business.nj.gov/issues/187901632)] update domestic employer experience ([2ee762b](https://github.com/newjersey/navigator.business.nj.gov/commit/2ee762b2503981779551d36f45f60e6cebd1e0d2))
+* [[#188006371](https://github.com/newjersey/navigator.business.nj.gov/issues/188006371)] add housing hotel motel license status check ([e96e1ab](https://github.com/newjersey/navigator.business.nj.gov/commit/e96e1abb42991f2d7e434c8fdc38d5e7d636162b))
+* [[#188008160](https://github.com/newjersey/navigator.business.nj.gov/issues/188008160)] add weights and measures non-essential question to all industries ([368eb66](https://github.com/newjersey/navigator.business.nj.gov/commit/368eb6600e68b3c4cbaba3a79e3ceb4ad1c5c91e))
+* [[#188008303](https://github.com/newjersey/navigator.business.nj.gov/issues/188008303)] add script for analyzing email index ([6e4e79c](https://github.com/newjersey/navigator.business.nj.gov/commit/6e4e79c29d3550d026f39f6453b1f5e469ed7053))
+* [[#188029270](https://github.com/newjersey/navigator.business.nj.gov/issues/188029270)] script to update Node.js version ([c4c4817](https://github.com/newjersey/navigator.business.nj.gov/commit/c4c48173ec2d119cda5a35ebdff16687f9fda730))
+* [[#188049417](https://github.com/newjersey/navigator.business.nj.gov/issues/188049417)] Bubble investNewark fundings to top of For You column ([d323d18](https://github.com/newjersey/navigator.business.nj.gov/commit/d323d18a35c941abdd10ad22f14f1d2d994df830))
+* implement general starter kit seo landing page ([29e0e85](https://github.com/newjersey/navigator.business.nj.gov/commit/29e0e850bbe0fcf515a53c9d36c7bc42ad46054e))
+
 ## [2024.22.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.22.0...v2024.22.1) (2024-07-30)
 
 
