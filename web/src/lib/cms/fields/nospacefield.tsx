@@ -53,7 +53,7 @@ class NoSpaceControl extends Component<NoSpaceProps, NoSpaceState> {
 
   handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     this.setState({ _sel: e.target.selectionStart });
-    this.props.onChange(e.target.value);
+    this.props.onChange(e.target.value.trim());
   };
 
   render(): ReactElement {

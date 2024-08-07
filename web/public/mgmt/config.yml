@@ -42,10 +42,10 @@ collections:
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
-      - { label: "Filename", name: "filename", widget: "write-once-read-only" }
+      - { label: "Filename", name: "filename", widget: "write-once-read-only-no-space" }
       - { label: "Display Name", name: "displayname", widget: "nospace" }
       - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "write-once-read-only" }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - label: Agency
@@ -1171,7 +1171,7 @@ collections:
         }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only" }
+      - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only-no-space" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -1217,7 +1217,7 @@ collections:
           hint: "This appears only in My Account, in the For You column, max char is 150 including spaces, plain text only",
         }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only" }
+      - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only-no-space" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -1266,7 +1266,7 @@ collections:
       - {
           label: "File Name",
           name: "filename",
-          widget: "write-once-read-only",
+          widget: "write-once-read-only-no-space",
           hint: "This is the name of the file in the code only. Lowercase, no spaces, add hyphens between words",
         }
       - {
@@ -1290,7 +1290,7 @@ collections:
       - {
           label: "Id",
           name: "id",
-          widget: "write-once-read-only",
+          widget: "write-once-read-only-no-space",
           hint: "Lowercase, no spaces, add hyphens between words",
         }
       - {
@@ -1480,7 +1480,7 @@ collections:
       - {
           label: "File Name",
           name: "filename",
-          widget: "write-once-read-only",
+          widget: "write-once-read-only-no-space",
           hint: "This is the name of the file in the code only. Lowercase, no spaces, add hyphens between words",
         }
       - {
@@ -1504,7 +1504,7 @@ collections:
       - {
           label: "Id",
           name: "id",
-          widget: "write-once-read-only",
+          widget: "write-once-read-only-no-space",
           hint: "Lowercase, no spaces, add hyphens between words",
         }
       - {
@@ -1725,7 +1725,7 @@ collections:
         required: false
       - label: Id / Filename
         name: id
-        widget: write-once-read-only
+        widget: write-once-read-only-no-space
       - label: "Display Name"
         name: "displayname"
         widget: "string"
@@ -1876,7 +1876,7 @@ collections:
     fields:
       - label: Filename
         name: id
-        widget: write-once-read-only
+        widget: write-once-read-only-no-space
       - label: Displayname
         name: displayname
         widget: string
@@ -2290,13 +2290,13 @@ collections:
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
-      - { label: "Filename", name: "filename", widget: "write-once-read-only" }
+      - { label: "Filename", name: "filename", widget: "write-once-read-only-no-space" }
       - { label: "Display Name", name: "displayname", widget: "nospace" }
       - { label: "Name", name: "name", widget: "string" }
       - {
           label: "Id",
           name: "id",
-          widget: "write-once-read-only",
+          widget: "write-once-read-only-no-space",
           required: true,
           hint: "This is should be the same as the filename.",
         }
@@ -2358,14 +2358,14 @@ collections:
       - {
           label: "Id",
           name: "id",
-          widget: "write-once-read-only",
+          widget: "write-once-read-only-no-space",
           required: true,
           hint: "This is should be the same as the filename.",
         }
       - {
           label: "Filename",
           name: "filename",
-          widget: "write-once-read-only",
+          widget: "write-once-read-only-no-space",
           hint: "This is the name of the file in the code only.",
         }
       - {
@@ -2456,7 +2456,7 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Filename", name: "filename", widget: "write-once-read-only" }
+      - { label: "Filename", name: "filename", widget: "write-once-read-only-no-space" }
       - { label: "Display Name", name: "displayname", widget: "nospace" }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
       - { label: "Title (Navigator)", name: "name", widget: "string", required: false }
@@ -2825,9 +2825,9 @@ collections:
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Name", name: "name", widget: "string", required: false }
-      - { label: "ID", name: "id", widget: "write-once-read-only" }
+      - { label: "ID", name: "id", widget: "write-once-read-only-no-space" }
       - { label: "Webflow Name", name: "webflowName", widget: "string", required: false }
-      - { label: "File name", name: "filename", widget: "write-once-read-only" }
+      - { label: "File name", name: "filename", widget: "write-once-read-only-no-space" }
       - { label: "Call to Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call to Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Agency ID", name: "agencyId", widget: "string", required: false }
@@ -3104,7 +3104,7 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only" }
+      - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only-no-space" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Extension", name: "extension", widget: "boolean", required: false }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
@@ -3414,7 +3414,11 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Filename (disabled after file creation)", name: "filename", widget: "write-once-read-only" }
+      - {
+          label: "Filename (disabled after file creation)",
+          name: "filename",
+          widget: "write-once-read-only-no-space",
+        }
       - { label: "Name/Title", name: "name", widget: "string" }
       - {
           label: "Apply to all - overrides industry and sector dropdown",
@@ -3473,7 +3477,11 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Filename (disabled after file creation)", name: "filename", widget: "write-once-read-only" }
+      - {
+          label: "Filename (disabled after file creation)",
+          name: "filename",
+          widget: "write-once-read-only-no-space",
+        }
       - { label: "Name/Title", name: "name", widget: "string" }
       - {
           label: "Apply to all - overrides industry and sector dropdown",
@@ -3532,7 +3540,11 @@ collections:
       preview: false
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Filename (disabled after file creation)", name: "filename", widget: "write-once-read-only" }
+      - {
+          label: "Filename (disabled after file creation)",
+          name: "filename",
+          widget: "write-once-read-only-no-space",
+        }
       - { label: "Name/Title", name: "name", widget: "string" }
       - {
           label: "Apply to all - overrides industry and sector dropdown",
@@ -5511,7 +5523,7 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Header", name: "header", widget: "string" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "write-once-read-only" }
+      - { label: "Filename", name: "slug", widget: "write-once-read-only-no-space" }
       - { label: "Display Name", name: "displayname", widget: "nospace" }
 
   - name: "page-not-found-error"
