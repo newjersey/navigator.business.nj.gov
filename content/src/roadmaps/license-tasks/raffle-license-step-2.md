@@ -43,6 +43,27 @@ agencyId: nj-consumer-affairs
 
 You may be subject to fines up to $7,500 for a first offense and up to $15,000 for every offense after the first, among other penalties.
 
+:::callout{ showHeader="false" headerText="Additional Requirements" showIcon="true" calloutType="informational" }
+
+## Report of Operations
+
+Within 15 calendar days of a raffle or bingo game, you must file a Report of Operations \[## need link] with the Legalized Games of Chance Control Commission with the following:
+
+* Gross receipts from each game
+* A list of expenses incurred and who they were paid to
+* The net profit from each game and how it was or will be applied
+* A list of the prizes offered or given and the value of each
+
+## Designated Representative
+
+You must assign a specific representative who will be responsible for ensuring that all gaming is conducted legally. Only members of the organization may operate the game, and no person can be paid for conducting or assisting in conducting the game. Proceeds derived from gaming operations may be used only to further the organization’s authorized purpose. Supplies for gaming operation may be purchased or leased only from vendors approved by the Commission.
+
+## Prize Limits
+
+You must adhere to the prize limits described on page 3 of the [Legalized Games of Chance Control Commission Bingo and Raffle License Process Instructions](https://www.njconsumeraffairs.gov/lgccc/Applications/Bingo-and-Raffle-License-Process-Instructions.pdf).
+
+:::
+
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
 A certificate of registration.
