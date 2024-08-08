@@ -1,6 +1,6 @@
 import React, { Component, createRef, ReactElement } from "react";
 
-type WriteOnceReadOnlyProps = {
+type WriteOnceReadOnlyNoSpaceProps = {
   onChange: (e: string) => void;
   entry?: object;
   forID?: string;
@@ -10,16 +10,19 @@ type WriteOnceReadOnlyProps = {
   setActiveStyle: () => void;
   setInactiveStyle: () => void;
 };
-type WriteOnceReadOnlyState = {
+type WriteOnceReadOnlyNoSpaceState = {
   entry_object: object;
   value: string;
   _sel: number | null;
 };
 
-class WriteOnceReadOnlyControl extends Component<WriteOnceReadOnlyProps, WriteOnceReadOnlyState> {
+class WriteOnceReadOnlyNoSpaceControl extends Component<
+  WriteOnceReadOnlyNoSpaceProps,
+  WriteOnceReadOnlyNoSpaceState
+> {
   private el = createRef<HTMLInputElement>();
 
-  constructor(props: WriteOnceReadOnlyProps) {
+  constructor(props: WriteOnceReadOnlyNoSpaceProps) {
     super(props);
     const entry_object = JSON.parse(JSON.stringify(this.props.entry));
     this.state = {
@@ -49,7 +52,7 @@ class WriteOnceReadOnlyControl extends Component<WriteOnceReadOnlyProps, WriteOn
 
   handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     this.setState({ _sel: e.target.selectionStart });
-    this.props.onChange(e.target.value);
+    this.props.onChange(e.target.value.trim());
   };
 
   render(): ReactElement {
@@ -70,4 +73,4 @@ class WriteOnceReadOnlyControl extends Component<WriteOnceReadOnlyProps, WriteOn
   }
 }
 
-export { WriteOnceReadOnlyControl };
+export { WriteOnceReadOnlyNoSpaceControl };
