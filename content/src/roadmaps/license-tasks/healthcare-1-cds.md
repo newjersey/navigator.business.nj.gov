@@ -1,5 +1,12 @@
 ---
-id: "healthcare-1-cds"
+notesMd: >-
+  * Still needs an onboarding question and then connected to the Healthcare
+  Industry
+
+  * Onboarding Q = Are you a Physician Assistant (PA), Advanced Practice Nurse (APN), or Certified Nurse Midwife (CNM)?
+
+    * If yes, they get Healthcare-2, otherwise give them Healthcare-1, not required
+id: healthcare-1-cds
 filename: healthcare-1-cds
 displayname: healthcare-1-cds
 urlSlug: healthcare-1-cds
