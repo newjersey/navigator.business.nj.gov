@@ -4,7 +4,7 @@ notesMd: >-
 
   * Can't save without something in the Summary Description so just copied/pasted the static content
 urlSlug: healthcare
-previewType: expiration
+previewType: renewal
 summaryDescriptionMd: You can renew your license 60 days before it expires and
   up to 30 days after expiration. If you fail to renew your license at this
   point, your license will be suspended and you won't be able to provide your
