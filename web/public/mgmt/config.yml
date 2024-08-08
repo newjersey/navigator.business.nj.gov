@@ -1732,62 +1732,77 @@ collections:
             name: canBeHomeBased
             widget: boolean
             default: false
+            required: false
           - label: Liquor License
             name: isLiquorLicenseApplicable
             widget: boolean
             default: false
+            required: false
           - label: CPA Required
             name: isCpaRequiredApplicable
             widget: boolean
             default: false
+            required: false
           - label: Staffing Service
             name: isProvidesStaffingServicesApplicable
             widget: boolean
             default: false
+            required: false
           - label: Certified Interior Designer
             name: isCertifiedInteriorDesignerApplicable
             widget: boolean
             default: false
+            required: false
           - label: Real Estate Appraisal Management
             name: isRealEstateAppraisalManagementApplicable
             widget: boolean
             default: false
+            required: false
           - label: Reseller
             name: canBeReseller
             widget: boolean
             default: false
+            required: false
           - label: Transportation
             name: isTransportation
             widget: boolean
             default: false
+            required: false
           - label: Car Service
             widget: boolean
             name: isCarServiceApplicable
             default: false
+            required: false
           - label: Logistics
             name: isInterstateLogisticsApplicable
             widget: boolean
             default: false
+            required: false
           - label: Moving Company
             name: isInterstateMovingApplicable
             widget: boolean
             default: false
+            required: false
           - label: Childcare Services
             name: isChildcareForSixOrMore
             widget: boolean
             default: false
+            required: false
           - label: Will Sell Petcare Items
             name: willSellPetCareItems
             widget: boolean
             default: false
+            required: false
           - label: Pet Care Housing
             name: petCareHousing
             widget: boolean
             default: false
+            required: false
           - label: Cannabis License
             name: isCannabisLicenseTypeApplicable
             widget: boolean
             default: false
+            required: false
       - label: Non Essential Questions
         name: nonEssentialQuestionsIds
         widget: relation
