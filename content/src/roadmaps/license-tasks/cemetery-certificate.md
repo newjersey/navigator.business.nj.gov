@@ -13,7 +13,7 @@ webflowName: "Cemetery: Certificate of Authority"
 summaryDescriptionMd: You need a certificate of authority to own and operate a
   cemetery business in New Jersey.
 industryId:
-  - generic
+  - cemetery
 callToActionText: Apply for My Certificate of Authority
 callToActionLink: "https://www.njconsumeraffairs.gov/cem/Applications/Cemetery-\
   Application-and-Information-Sheet-for-Certificate-of-Authority.pdf "
