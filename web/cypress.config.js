@@ -17,7 +17,7 @@ export default defineConfig({
       pwa: 0,
     },
   },
-  reporter: "junit",
+  reporter: "junit", //"cypress-mochawesome-reporter",
   reporterOptions: {
     mochaFile: "cypress/results/web-tests-[hash].xml",
     toConsole: true,
@@ -27,6 +27,7 @@ export default defineConfig({
     // You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
       // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-unused-vars
+      require("cypress-mochawesome-reporter/plugin")(on);
       on("before:browser:launch", (browser = {}, launchOptions) => {
         prepareAudit(launchOptions);
       });
