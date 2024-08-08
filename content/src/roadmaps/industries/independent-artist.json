@@ -1,0 +1,75 @@
+{
+  "defaultSectorId": "arts-entertainment-and-recreation",
+  "canHavePermanentLocation": true,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 5,
+      "task": "determine-naics-code",
+      "required": true
+    },
+    {
+      "step": 1,
+      "weight": 100,
+      "task": "business-structure",
+      "required": true
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein",
+      "required": true
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "get-insurance"
+    }
+  ],
+  "name": "Entertainment",
+  "nonEssentialQuestionsIds": [
+    "carnival-fire-licenses",
+    "carnival-ride-permitting",
+    "weights-measures",
+    "entertainment-agency"
+  ],
+  "displayname": "independent-artist",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true,
+    "isCannabisLicenseTypeApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isCarServiceApplicable": false,
+    "isInterstateMovingApplicable": false,
+    "petCareHousing": false,
+    "isLiquorLicenseApplicable": false,
+    "isInterstateLogisticsApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isChildcareForSixOrMore": false,
+    "willSellPetCareItems": false,
+    "isTransportation": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isProvidesStaffingServicesApplicable": false
+  },
+  "isEnabled": true,
+  "additionalSearchTerms": "independent artist, writer, performer, content creators, multi media, media streaming, social networks, band, singer, carnival, amusement park, circus, family entertainment",
+  "id": "independent-artist",
+  "description": "Independent artists, such as musicians and other creators, and family entertainment venues",
+  "webflowId": "656a1363b58e709cb5828632"
+}
