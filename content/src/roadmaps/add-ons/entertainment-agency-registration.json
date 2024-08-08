@@ -5,8 +5,8 @@
     {
       "step": 4,
       "weight": 1,
-      "required": false,
-      "licenseTask": ""
+      "required": true,
+      "licenseTask": "entertainment-agency-reg"
     }
   ]
 }
