@@ -1,7 +1,5 @@
 ---
-notesMd: "* Hold off on publishing for now -- SME came back with Pharm. CDS
-  edits regarding the DEA registration, and I want to ensure I have this right
-  before publishing"
+notesMd: ""
 filename: shelter-cds-reinstatement
 name: Reinstate Your Animal Shelter’s Controlled Dangerous Substances Registration
 industryIds:
