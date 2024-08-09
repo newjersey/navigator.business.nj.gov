@@ -79,7 +79,7 @@
     "@typescript-eslint/parser": "7.16.1",
     "copy-webpack-plugin": "12.0.2",
     "cross-env": "7.0.3",
-    "dependency-cruiser": "16.3.9",
+    "dependency-cruiser": "16.3.10",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-jest": "27.9.0",
@@ -103,7 +103,7 @@
     "ts-node": "10.9.2",
     "tsconfig-paths": "4.2.0",
     "tsconfig-paths-webpack-plugin": "4.1.0",
-    "typescript": "5.4.5",
+    "typescript": "5.5.4",
     "webpack": "5.93.0",
     "webpack-node-externals": "3.0.0",
     "wiremock": "3.9.0"
