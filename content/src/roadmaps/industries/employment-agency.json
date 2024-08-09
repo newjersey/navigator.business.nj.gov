@@ -49,7 +49,7 @@
     }
   ],
   "name": "Employment Agency",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [],
   "displayname": "employment-agency",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
