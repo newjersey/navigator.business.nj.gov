@@ -17,7 +17,6 @@ agencyId: nj-consumer-affairs
 agencyAdditionalContext: New Jersey Drug Control Unit
 webflowId: 668d72e7096a17ca97b55564
 ---
-
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="note" }
 
 Be sure to register with the U.S. Drug Enforcement Administration (DEA) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to cds@dca.njoag.gov within 60 days of completing your CDS registration.
@@ -26,23 +25,23 @@ Be sure to register with the U.S. Drug Enforcement Administration (DEA) to valid
 
 ## Application Requirements
 
-- New Jersey business address where substances will be stored, prescribed, or dispensed (must match your DEA registration address)
-- Current and active professional license number (Certified Nurse Midwives must include their prescriptive authority suffix)
-- Schedule(s) of the CDS
-- Social Security number
-- Signed attestation (included in application)
-- Applicable fees paid, once the New Jersey Drug Control Unit (DCU) has sent an invoice
+* New Jersey business address where substances will be stored, prescribed, or dispensed (must match your DEA registration address)
+* Current and active professional license number (Certified Nurse Midwives must include their prescriptive authority suffix)
+* Schedule(s) of the CDS
+* Social Security number
+* Signed attestation (included in application)
+* Applicable fees paid, once the New Jersey Drug Control Unit (DCU) has sent an invoice
 
-Email your completed CDS application to [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov). The DCU will send you an invoice via email to pay your fee online.
+Email your completed CDS application to [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov). The DCU will email you an invoice to pay your fee online.
 
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
 
-You cannot legally dispense, prescribe, or store any CDS and may be subject to legal consequences and fines.
+You cannot dispense, prescribe, or store any CDS and may be subject to legal consequences and fines if you do so.
 
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A Controlled Dangerous Substances (CDS) registration certificate.
+A CDS registration certificate.
 
 :::
