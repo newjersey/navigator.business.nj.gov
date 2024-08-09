@@ -1,14 +1,7 @@
 {
-  "displayname": "event-planning",
   "naicsCodes": "561920, 561990, 711320, 532289",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "other-services",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -51,6 +44,13 @@
     }
   ],
   "name": "Event Planning",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "event-planning",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
+  "isEnabled": true,
   "additionalSearchTerms": "planner, organizer, coordinator, party planner",
   "id": "event-planning",
   "description": "Offers coordination services for different types of events",
