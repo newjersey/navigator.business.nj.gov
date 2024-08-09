@@ -8,6 +8,6 @@ filename: "cemetery-salesman"
 callToActionLink: "https://www.njconsumeraffairs.gov/cem/Pages/applications.aspx"
 agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6553"
-webflowIndustry: "Cemetary Sales"
+webflowIndustry: "Cemetery Sales"
 licenseCertificationClassification: "LICENSE/REGISTRATION"
 ---
