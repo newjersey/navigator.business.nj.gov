@@ -54,7 +54,7 @@
     }
   ],
   "name": "Accounting, Bookkeeping, and Tax Preparation",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [],
   "displayname": "certified-public-accountant",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
