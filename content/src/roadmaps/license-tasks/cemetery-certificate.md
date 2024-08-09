@@ -8,8 +8,8 @@ displayname: cemetery-certificate
 urlSlug: cemetery-certificate
 name: Apply for Your Certificate of Authority
 webflowName: "Cemetery: Certificate of Authority"
-summaryDescriptionMd: To own and operate a cemetery company in New Jersey, you
-  need a Certificate of Authority. Your cemetery company must be a nonprofit.
+summaryDescriptionMd: To own and operate a cemetery business in New Jersey, you
+  need a Certificate of Authority. Your cemetery business must be a nonprofit.
 industryId:
   - cemetery
 callToActionText: Apply for My Certificate of Authority
