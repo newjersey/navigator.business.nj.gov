@@ -21,6 +21,8 @@ agencyId: nj-consumer-affairs
 ---
 ## Application Requirements
 
+### General
+
 * Name of New Jersey municipality
 * Business name
 * Business address (headquarters and mailing address, if different)
@@ -28,14 +30,30 @@ agencyId: nj-consumer-affairs
 * Dates and hours for each raffle or bingo game
 * Address where the games will be played
 * Name and address, along with [Form 10, Statement of Landlord](https://www.njconsumeraffairs.gov/lgccc/Applications/Form-10A-Bingo-Statement-of-Landnord.pdf) if the applicant does not own the place where the games will by played
+
+### Expenses
+
 * A detailed list of expenses that will be incurred or paid in connection with the games, the names and addresses of the persons to whom each item is to be paid, and the purpose for which each item is to be paid
+
+### Purpose
 * Details of the purpose(s) for which all the proceeds from the listed games will be used, along with how they will be used for these purposes
 * The signature of the president or other executive officer of any organization receiving part of the net proceeds, if applicable
+
+### Prizes
+
 * A detailed list of all prizes and retail value, or cash amount, if applicable, and whether they are to be donated
+
+### Officers
 * Name, address, and age of each officer, director, principal, or representative with an ownership interest
+
+### Members and Organizations
+
 * Name, address, age, and business telephone number of members who will be in charge of the games
 * Name, address, and age of members who will assist in conducting the games
 * Name, address, relationship, and identification number of other organizations whose members will assist in conducting the games
+
+### Statements and Attachments
+
 * Signatures in the presence of a notary public
 * An attached sample raffle ticket, if applicable (Examples: [off Premises 50 / 50 raffle awarding cash as a prize](https://www.njconsumeraffairs.gov/lgccc/Applications/Off-Premises-50-50-Raffle-Awarding-Cash-as-a-Prize.pdf), [off premises draw raffle awarding merchandise as a prize](https://www.njconsumeraffairs.gov/lgccc/Applications/Off-Premises-Draw-Raffle-Awarding-Merchandise-as-a-Prize.pdf))
 
