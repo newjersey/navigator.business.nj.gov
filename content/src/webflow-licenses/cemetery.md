@@ -10,6 +10,6 @@ callToActionText: ""
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: "Cemetery Board"
 divisionPhone: "(973) 504-6553"
-webflowIndustry: "Cemetary"
+webflowIndustry: "Cemetery"
 licenseCertificationClassification: "REGULATIONS"
 ---
