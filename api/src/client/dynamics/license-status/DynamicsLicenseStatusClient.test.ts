@@ -7,7 +7,9 @@ import {
 } from "@client/dynamics/license-status/types";
 import { AccessTokenClient } from "@client/dynamics/types";
 import { NO_MAIN_APPS_ERROR, NO_MATCH_ERROR, SearchLicenseStatus } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
+
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("DynamicsLicenseStatusClient", () => {
   let client: SearchLicenseStatus;
@@ -40,7 +42,7 @@ describe("DynamicsLicenseStatusClient", () => {
       getLicenseApplicationId: jest.fn(),
     };
 
-    client = DynamicsLicenseStatusClient(logger, {
+    client = DynamicsLicenseStatusClient(DEBUG ? logger : DummyLogWriter, {
       accessTokenClient: stubAccessTokenClient,
       businessIdClient: stubBusinessIdClient,
       businessAddressClient: stubBusinessAddressClient,

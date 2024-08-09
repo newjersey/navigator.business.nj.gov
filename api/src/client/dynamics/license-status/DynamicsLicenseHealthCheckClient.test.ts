@@ -1,13 +1,14 @@
 import { DynamicsLicenseHealthCheckClient } from "@client/dynamics/license-status/DynamicsLicenseHealthCheckClient";
 import { AccessTokenClient } from "@client/dynamics/types";
 import { HealthCheckMethod } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 jest.mock("axios");
 jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("DynamicsLicenseHealthCheckClient", () => {
   let client: HealthCheckMethod;
@@ -21,7 +22,7 @@ describe("DynamicsLicenseHealthCheckClient", () => {
     stubAccessTokenClient = {
       getAccessToken: jest.fn(),
     };
-    client = DynamicsLicenseHealthCheckClient(logger, {
+    client = DynamicsLicenseHealthCheckClient(DEBUG ? logger : DummyLogWriter, {
       accessTokenClient: stubAccessTokenClient,
       orgUrl: ORG_URL,
     });
