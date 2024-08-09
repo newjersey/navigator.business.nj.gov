@@ -49,18 +49,27 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
         ":email": { S: email },
       },
     };
-    return db
-      .send(new QueryCommand(params))
-      .then(async (result) => {
-        if (!result.Items || result.Items.length !== 1) {
-          return;
-        }
-        return await doMigration(unmarshall(result.Items[0], unmarshallOptions).data);
-      })
-      .catch((error) => {
-        console.log(error);
-        throw new Error("Not found");
-      });
+    try {
+      const queryCommand = new QueryCommand(params);
+      return db
+        .send(queryCommand)
+        .then(async (result) => {
+          if (!result.Items || result.Items.length !== 1) {
+            return;
+          }
+          const unmarshalledItem = unmarshall(result.Items[0], unmarshallOptions);
+          console.log({ unmarshalledItem: JSON.stringify(unmarshalledItem, undefined, 2) });
+          const migratedData = await doMigration(unmarshalledItem.data);
+          console.log({ migratedData: JSON.stringify(migratedData, undefined, 2) });
+          return migratedData;
+        })
+        .catch((error) => {
+          console.log(error);
+          throw new Error(`Not found: ${error}`);
+        });
+    } catch (error) {
+      throw new Error(`problem with queryCommand: ${error}`);
+    }
   };
 
   const get = (userId: string): Promise<UserData> => {
@@ -70,22 +79,30 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
         userId: userId,
       },
     };
-    return db
-      .send(new GetCommand(params))
 
-      .then(async (result) => {
-        if (!result.Item) {
-          throw new Error("Not found");
-        }
-        return await doMigration(result.Item.data);
-      })
-      .catch((error) => {
-        throw error;
-      });
+    try {
+      const getCommand = new GetCommand(params);
+
+      return db
+        .send(getCommand)
+
+        .then(async (result) => {
+          if (!result.Item) {
+            throw new Error("Not found");
+          }
+          return await doMigration(result.Item.data);
+        })
+        .catch((error) => {
+          throw new Error(`problem with db.send: ${error}`);
+        });
+    } catch (error) {
+      throw new Error(`problem with getcommand: ${error}`);
+    }
   };
 
   const put = (userData: UserData): Promise<UserData> => {
     const migratedData = migrateUserData(userData);
+    console.log(JSON.stringify(migratedData, undefined, 2));
     const params = {
       TableName: tableName,
       Item: {
@@ -95,14 +112,20 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
       },
     };
 
-    return db
-      .send(new PutCommand(params))
-      .then(() => {
-        return migratedData;
-      })
-      .catch((error) => {
-        throw error;
-      });
+    try {
+      const putCommand = new PutCommand(params);
+
+      return db
+        .send(putCommand)
+        .then(() => {
+          return migratedData;
+        })
+        .catch((error) => {
+          throw new Error(`problem with db.send: ${error}`);
+        });
+    } catch (error) {
+      throw new Error(`problem with PutCommand: ${error}`);
+    }
   };
 
   const getNeedNewsletterUsers = (): Promise<UserData[]> => {
