@@ -4965,7 +4965,7 @@ __metadata:
     ts-node: 10.9.2
     tsconfig-paths: 4.2.0
     tsconfig-paths-webpack-plugin: 4.1.0
-    typescript: 5.4.5
+    typescript: 5.5.4
     uuid: 9.0.1
     webpack: 5.93.0
     webpack-node-externals: 3.0.0
@@ -5175,7 +5175,7 @@ __metadata:
     ts-node: 10.9.2
     tsconfig-paths: 4.2.0
     tsconfig-paths-webpack-plugin: 4.1.0
-    typescript: 5.4.5
+    typescript: 5.5.4
     unified: 10.1.2
     unist-util-visit: 5.0.0
     uuid: 9.0.1
@@ -5215,7 +5215,7 @@ __metadata:
     ts-jest: 29.2.3
     ts-node: 10.9.2
     tsconfig-paths: 4.2.0
-    typescript: 5.4.5
+    typescript: 5.5.4
     uuid: 9.0.1
   languageName: unknown
   linkType: soft
@@ -5352,7 +5352,7 @@ __metadata:
     ts-jest: 29.2.3
     ts-loader: 9.5.1
     ts-node: 10.9.2
-    typescript: 5.4.5
+    typescript: 5.5.4
     unified: 10.1.2
     unist-util-visit: 5.0.0
     webpack: 5.93.0
@@ -35505,23 +35505,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.4.5":
-  version: 5.4.5
-  resolution: "typescript@npm:5.4.5"
+"typescript@npm:5.5.4":
+  version: 5.5.4
+  resolution: "typescript@npm:5.5.4"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 53c879c6fa1e3bcb194b274d4501ba1985894b2c2692fa079db03c5a5a7140587a1e04e1ba03184605d35f439b40192d9e138eb3279ca8eee313c081c8bcd9b0
+  checksum: b309040f3a1cd91c68a5a58af6b9fdd4e849b8c42d837b2c2e73f9a4f96a98c4f1ed398a9aab576ee0a4748f5690cf594e6b99dbe61de7839da748c41e6d6ca8
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@5.4.5#~builtin<compat/typescript>":
-  version: 5.4.5
-  resolution: "typescript@patch:typescript@npm%3A5.4.5#~builtin<compat/typescript>::version=5.4.5&hash=5adc0c"
+"typescript@patch:typescript@5.5.4#~builtin<compat/typescript>":
+  version: 5.5.4
+  resolution: "typescript@patch:typescript@npm%3A5.5.4#~builtin<compat/typescript>::version=5.5.4&hash=379a07"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: d59e26e74f6b444517d0ba16e0ee16e75c652c2b49a59f2ebdbeb16647a855fd50c7fc786a58987e45f03bce0677092e2dd3333649fd53b11d0b0d271455837c
+  checksum: e14c87e8bd51f9ac741051a2c3bde75b2a3ab17dee2c50239f7e1a0868673f3b7d4d87684df41a59a8f57c6ddc5d06d65d120764d992441af5de07b98cf9c67b
   languageName: node
   linkType: hard
 
