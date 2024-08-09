@@ -296,6 +296,7 @@ describe("<BusinessStructureTask />", () => {
       }),
       taskProgress: { [taskId]: "COMPLETED" },
     });
+
     renderTask(business);
     fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
 

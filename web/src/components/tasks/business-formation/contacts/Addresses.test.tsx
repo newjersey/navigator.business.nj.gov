@@ -209,13 +209,13 @@ describe("Formation - Addresses", () => {
         const page = await getPageHelper(
           {
             legalStructureId: "limited-partnership",
-            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
           },
           {
             contactFirstName: "John",
             contactLastName: "Smith",
             addressLine1: "123 Address",
             addressLine2: "business suite 201",
+            addressMunicipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
             addressState: { shortCode: "NJ", name: "New Jersey" },
             addressZipCode: "07601",
           }

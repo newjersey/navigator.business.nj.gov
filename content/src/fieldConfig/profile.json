@@ -133,6 +133,11 @@
           "description": ""
         }
       },
+      "businessAddress": {
+        "default": {
+          "header": "Business Address"
+        }
+      },
       "dateOfFormation": {
         "default": {
           "header": "Business Effective Date",

@@ -543,4 +543,31 @@ describe("profile-foreign", () => {
       expect(screen.queryByTestId("elevatorOwningBusiness-radio-group")).not.toBeInTheDocument();
     });
   });
+
+  it("does not render profile address fields when business persona is FOREIGN", () => {
+    const business = generateBusinessForProfile({
+      profileData: generateProfileData({
+        businessPersona: "FOREIGN",
+      }),
+      formationData: generateFormationData({
+        completedFilingPayment: false,
+        formationFormData: generateFormationFormData({
+          addressLine1: "123 Testing Road",
+          addressLine2: "",
+          addressMunicipality: generateMunicipality({ displayName: "Allendale" }),
+          addressState: {
+            name: "New Jersey",
+            shortCode: "NJ",
+          },
+          addressZipCode: "07781",
+        }),
+      }),
+    });
+    renderPage({ business });
+
+    expect(screen.queryByLabelText("Address line1")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("Address line2")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("Address municipality")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("Address zip code")).not.toBeInTheDocument();
+  });
 });

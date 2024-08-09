@@ -74,7 +74,6 @@ import {
   ForeignBusinessType,
   formationTaskId,
   hasCompletedFormation,
-  isOwningBusiness,
   LookupLegalStructureById,
   LookupOperatingPhaseById,
   Municipality,
@@ -83,6 +82,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import {
   isNexusBusiness,
+  isOwningBusiness,
   isStartingBusiness,
 } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
@@ -219,7 +219,8 @@ const ProfilePage = (props: Props): ReactElement => {
       }
 
       updateQueue.queueProfileData(profileData);
-      if (isOwningBusiness(business)) {
+
+      if (isStartingBusiness(business) || isOwningBusiness(business)) {
         updateQueue.queueFormationFormData(addressData);
       }
 
@@ -529,6 +530,9 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <BusinessName />
         </ProfileField>
+
+        <ProfileNewJerseyAddress />
+
         <ProfileField
           fieldName="responsibleOwnerName"
           isVisible={shouldShowTradeNameElements()}
