@@ -190,5 +190,12 @@
     "webflow",
     "YTTW"
   ],
-  "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
+  "ignorePaths": [
+    "node_modules/**",
+    "out/**",
+    "web/out/**",
+    "package.json",
+    "content/lib/industry.json",
+    "content/src/roadmaps/industries/cemetery.json"
+  ]
 }
