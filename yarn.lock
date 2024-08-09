@@ -4934,7 +4934,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.12
     dedent: 1.5.3
-    dependency-cruiser: 16.3.9
+    dependency-cruiser: 16.3.10
     eslint: 8.57.0
     eslint-config-prettier: 9.1.0
     eslint-plugin-jest: 27.9.0
@@ -5097,7 +5097,7 @@ __metadata:
     cypress-wait-until: 3.0.2
     dayjs: 1.11.12
     dedent: 1.5.3
-    dependency-cruiser: 16.3.9
+    dependency-cruiser: 16.3.10
     dotenv: 16.4.5
     dynamodb-admin: ^4.6.1
     eslint: 8.57.0
@@ -5297,7 +5297,7 @@ __metadata:
     cypress-dotenv: 2.0.0
     cypress-wait-until: 3.0.2
     dayjs: 1.11.12
-    dependency-cruiser: 16.3.9
+    dependency-cruiser: 16.3.10
     dotenv: 16.4.5
     eslint: 8.57.0
     eslint-config-next: 14.2.5
@@ -17870,9 +17870,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:16.3.9":
-  version: 16.3.9
-  resolution: "dependency-cruiser@npm:16.3.9"
+"dependency-cruiser@npm:16.3.10":
+  version: 16.3.10
+  resolution: "dependency-cruiser@npm:16.3.10"
   dependencies:
     acorn: 8.12.1
     acorn-jsx: 5.3.2
@@ -17881,12 +17881,11 @@ __metadata:
     acorn-walk: 8.3.3
     ajv: 8.17.1
     commander: 12.1.0
-    enhanced-resolve: 5.17.0
+    enhanced-resolve: 5.17.1
     ignore: 5.3.1
     interpret: ^3.1.1
     is-installed-globally: 1.0.0
     json5: 2.2.3
-    lodash: 4.17.21
     memoize: 10.0.0
     picocolors: 1.0.1
     picomatch: 4.0.2
@@ -17904,7 +17903,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: 393c5ad701bd1d9c3efcdbab58172624d54ab359347f9aa411550bb294aff6ed7ebd4cfd5c5b436a9b7355cc3bb6f40b8dfbfc1e6f85ee553b02276c67ac51da
+  checksum: 3ce83256cc956d1584179c215797711cc6a84eb7276367771725eb478fe7a2510712211b66537c470d220e6a1e5eb571d884e6209ae200da91ca3154bfd0c7ae
   languageName: node
   linkType: hard
 
@@ -18571,13 +18570,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"enhanced-resolve@npm:5.17.0, enhanced-resolve@npm:^5.0.0, enhanced-resolve@npm:^5.12.0, enhanced-resolve@npm:^5.17.0, enhanced-resolve@npm:^5.7.0":
-  version: 5.17.0
-  resolution: "enhanced-resolve@npm:5.17.0"
+"enhanced-resolve@npm:5.17.1, enhanced-resolve@npm:^5.0.0, enhanced-resolve@npm:^5.12.0, enhanced-resolve@npm:^5.17.0, enhanced-resolve@npm:^5.7.0":
+  version: 5.17.1
+  resolution: "enhanced-resolve@npm:5.17.1"
   dependencies:
     graceful-fs: ^4.2.4
     tapable: ^2.2.0
-  checksum: 1066000454da6a7aeabdbe1f433d912d1e39e6892142a78a37b6577aab27e0436091fa1399d857ad87085b1c3b73a0f811c8874da3dbdc40fbd5ebe89a5568e6
+  checksum: 4bc38cf1cea96456f97503db7280394177d1bc46f8f87c267297d04f795ac5efa81e48115a2f5b6273c781027b5b6bfc5f62b54df629e4d25fa7001a86624f59
   languageName: node
   linkType: hard
 
