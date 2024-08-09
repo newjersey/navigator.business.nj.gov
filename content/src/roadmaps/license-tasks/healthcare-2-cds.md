@@ -1,5 +1,5 @@
 ---
-id: "healthcare-2-cds"
+id: healthcare-2-cds
 filename: healthcare-2-cds
 displayname: healthcare-2-cds
 urlSlug: healthcare-2-cds
@@ -10,7 +10,7 @@ summaryDescriptionMd: You need a Controlled Dangerous Substances (CDS)
   (APN), or Certified Nurse Midwife (CNM), and you or your business prescribe or
   dispense any CDS.
 industryId: healthcare
-callToActionText: Apply for My PA, APN, or CNM CDS Registration
+callToActionText: Apply for My CDS Registration
 callToActionLink: https://www.njconsumeraffairs.gov/dcu/Applications/Initial-Application-for-Registration-for-Dispenser-Prescriber-Practitioner.pdf
 licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs
