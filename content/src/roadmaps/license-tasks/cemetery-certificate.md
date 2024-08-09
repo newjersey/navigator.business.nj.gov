@@ -8,8 +8,8 @@ displayname: cemetery-certificate
 urlSlug: cemetery-certificate
 name: Apply for Your Certificate of Authority
 webflowName: "Cemetery: Certificate of Authority"
-summaryDescriptionMd: You need a certificate of authority to own and operate a
-  cemetery business in New Jersey.
+summaryDescriptionMd: To own and operate a cemetery company in New Jersey, you
+  need a Certificate of Authority. Your cemetery company must be a nonprofit.
 industryId:
   - cemetery
 callToActionText: Apply for My Certificate of Authority
@@ -21,8 +21,6 @@ agencyAdditionalContext: New Jersey Cemetery Board
 ## Application Requirements
 
 ### Cemetery Information 
-
-
 
 * Date organized (when the cemetery was legally established)
 * Date of incorporation (when the cemetery was legally registered as a business)
@@ -61,7 +59,7 @@ Newark, New Jersey 07101 
 
 :::callout{ showHeader="true" headerText="What if I don't get this certificate?" showIcon="false" calloutType="conditional" }
 
-You cannot legally own or operate a cemetery.
+You cannot legally own or operate a cemetery company.
 
 :::
 
