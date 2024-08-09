@@ -1,14 +1,7 @@
 {
-  "displayname": "it-consultant",
   "naicsCodes": "541690",
   "defaultSectorId": "technology",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true,
-    "isProvidesStaffingServicesApplicable": true
-  },
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -17,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 50,
+      "weight": 5,
       "task": "determine-naics-code",
       "required": true
     },
@@ -51,6 +44,13 @@
     }
   ],
   "name": "IT Consulting",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "it-consultant",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true,
+    "isProvidesStaffingServicesApplicable": true
+  },
   "isEnabled": true,
   "additionalSearchTerms": "tech support, information technology, tech services, technical services, consulting, software developer, IT professional services, IT support, computer repair",
   "id": "it-consultant",
