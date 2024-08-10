@@ -92,7 +92,7 @@
     "unist-util-visit": "5.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.24.9",
+    "@babel/core": "7.25.2",
     "@cypress-audit/lighthouse": "1.4.2",
     "@cypress-audit/pa11y": "1.4.2",
     "@jest/types": "29.6.3",
