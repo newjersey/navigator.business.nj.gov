@@ -5151,7 +5151,7 @@ __metadata:
     remark-gfm: 3.0.1
     remark-parse: 10.0.2
     remark-rehype: 10.1.0
-    remove-markdown: 0.5.0
+    remove-markdown: 0.5.2
     require-from-string: 2.0.2
     rimraf: 5.0.10
     sass: 1.77.8
@@ -5340,7 +5340,7 @@ __metadata:
     remark-gfm: 3.0.1
     remark-parse: 10.0.2
     remark-rehype: 10.1.0
-    remove-markdown: 0.5.0
+    remove-markdown: 0.5.2
     require-from-string: 2.0.2
     rimraf: 5.0.10
     sass: 1.77.8
@@ -32118,10 +32118,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remove-markdown@npm:0.5.0":
-  version: 0.5.0
-  resolution: "remove-markdown@npm:0.5.0"
-  checksum: c3c9051e7e7d7c5560e7d70a5093704d868fa57d244eb89533fe7bf960bce68e7901197616c6b296cb22f47af6c15a6bce693467f35709fe399379ea1125e536
+"remove-markdown@npm:0.5.2":
+  version: 0.5.2
+  resolution: "remove-markdown@npm:0.5.2"
+  checksum: f3a92a4b1d71f1d0e2594c1b05b2483c1b67af393fdb1b352a90681a04932725cc745448903995b29f9450901ba72acf45d1d725cb329f62f5ac748dbabe99db
   languageName: node
   linkType: hard
 
