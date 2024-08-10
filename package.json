@@ -106,7 +106,7 @@
   },
   "devDependencies": {
     "@aws-sdk/types": "3.413.0",
-    "@babel/core": "7.24.9",
+    "@babel/core": "7.25.2",
     "@businessnjgovnavigator/shared": "*",
     "@commitlint/cli": "19.3.0",
     "@commitlint/config-conventional": "19.2.2",
