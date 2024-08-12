@@ -8,7 +8,7 @@ import {
   getVisibleFundings,
   getVisibleSideBarCards,
   sortCertifications,
-  sortFundings,
+  sortFundingsForUser,
 } from "@/lib/domain-logic/sidebarCardsHelpers";
 import { SMALL_BUSINESS_MAX_EMPLOYEE_COUNT } from "@/lib/domain-logic/smallBusinessEnterprise";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
@@ -106,7 +106,7 @@ describe("sidebarCard Helpers", () => {
       const funding5 = generateFunding({ name: "bca", status: "rolling application" });
       const fundings = [funding5, funding2, funding3, funding1, funding4];
 
-      const result = sortFundings(fundings, userData);
+      const result = sortFundingsForUser(fundings, userData);
       expect(result.length).toEqual(5);
       expect(result).toEqual([funding2, funding1, funding3, funding4, funding5]);
     });
@@ -124,7 +124,7 @@ describe("sidebarCard Helpers", () => {
       });
       const fundings = [funding1, funding2];
 
-      const result = sortFundings(fundings);
+      const result = sortFundingsForUser(fundings);
       expect(result.length).toEqual(2);
       expect(result).toEqual([funding1, funding2]);
     });
@@ -163,7 +163,7 @@ describe("sidebarCard Helpers", () => {
         });
         const fundings = [funding5, funding2, funding3, funding1, funding4];
 
-        const result = sortFundings(fundings, userData);
+        const result = sortFundingsForUser(fundings, userData);
         expect(result.length).toEqual(5);
         expect(result).toEqual([funding3, funding5, funding2, funding1, funding4]);
       });
@@ -185,7 +185,7 @@ describe("sidebarCard Helpers", () => {
         });
         const fundings = [funding5, funding2, funding3, funding1, funding4];
 
-        const result = sortFundings(fundings, userData);
+        const result = sortFundingsForUser(fundings, userData);
         expect(result.length).toEqual(5);
         expect(result).toEqual([funding2, funding1, funding3, funding4, funding5]);
       });
@@ -207,7 +207,7 @@ describe("sidebarCard Helpers", () => {
         });
         const fundings = [funding5, funding2, funding3, funding1, funding4];
 
-        const result = sortFundings(fundings, userData);
+        const result = sortFundingsForUser(fundings, userData);
         expect(result.length).toEqual(5);
         expect(result).toEqual([funding2, funding1, funding3, funding4, funding5]);
       });
@@ -233,7 +233,7 @@ describe("sidebarCard Helpers", () => {
         });
         const fundings = [funding5, funding2, funding3, funding1, funding4];
 
-        const result = sortFundings(fundings, userData);
+        const result = sortFundingsForUser(fundings, userData);
         expect(result.length).toEqual(5);
         expect(result).toEqual([funding2, funding1, funding3, funding4, funding5]);
       });
