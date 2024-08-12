@@ -8,13 +8,14 @@ displayName: child-care-facility-grant
 urlSlug: child-care-facility-grant
 id: child-care-facility-grant
 sidebarCardBodyText: The Hazardous Discharge Site Remediation Fund (HDSRF) Child
-  Care Facility Grant helps child care centers to pay for the cleanup of
+  Care Facility Grant can help your child care center to pay for the cleanup of
   contaminated sites.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: >-
   The Hazardous Discharge Site Remediation Fund (HDSRF) Child Care Facility
-  Grant helps child care centers pay for the cleanup of contaminated sites.
+  Grant can help your child care center pay for the cleanup of contaminated
+  sites.
 
 
   :::infoAlert 
