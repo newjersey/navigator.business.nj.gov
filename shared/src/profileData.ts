@@ -37,6 +37,7 @@ export interface IndustrySpecificData {
   readonly residentialConstructionType: ResidentialConstructionType;
   readonly employmentPersonnelServiceType: EmploymentAndPersonnelServicesType;
   readonly employmentPlacementType: EmploymentPlacementType;
+  readonly carnivalRideOwningBusiness: boolean | undefined;
 }
 
 type IndustrySpecificDataChoices = {
@@ -64,6 +65,7 @@ export const industrySpecificDataChoices: IndustrySpecificDataChoices = {
   residentialConstructionType: [...residentialConstructionOptions],
   employmentPersonnelServiceType: [...employmentPersonnelServiceOptions],
   employmentPlacementType: [...employmentPlacementOptions],
+  carnivalRideOwningBusiness: booleanChoice,
 };
 
 export const emptyIndustrySpecificData: IndustrySpecificData = {
@@ -87,6 +89,7 @@ export const emptyIndustrySpecificData: IndustrySpecificData = {
   residentialConstructionType: undefined,
   employmentPersonnelServiceType: undefined,
   employmentPlacementType: undefined,
+  carnivalRideOwningBusiness: undefined,
 };
 
 export interface ProfileData extends IndustrySpecificData {
