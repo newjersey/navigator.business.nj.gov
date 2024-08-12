@@ -19,8 +19,6 @@ callToActionText: Renew My Animal Shelter’s CDS Registration
 * New employee information since last renewal, including name, address, email, and phone number, if applicable
 * Applicable fees paid
 
-You must be registered with the [New Jersey Prescription Monitoring Program (NJPMP)](https://www.njconsumeraffairs.gov/pmp/Pages/register.aspx) to renew your CDS registration. 
-
 :::callout{ showHeader="true" headerText="What if I don’t renew my registration?" showIcon="false" calloutType="conditional" }
 
 Your CDS registration will expire.
