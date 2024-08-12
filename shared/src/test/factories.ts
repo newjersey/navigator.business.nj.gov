@@ -248,6 +248,7 @@ export const generateIndustrySpecificData = (
     ]),
     employmentPersonnelServiceType: randomElementFromArray(["JOB_SEEKERS", "EMPLOYERS"]),
     employmentPlacementType: randomElementFromArray(["TEMPORARY", "PERMANENT", "BOTH"]),
+    carnivalRideOwningBusiness: !(randomInt() % 2),
     ...overrides,
   };
 };
@@ -293,6 +294,7 @@ export const generateProfileData = (
     isNonprofitOnboardingRadio: legalStructure === "nonprofit",
     nonEssentialRadioAnswers: {},
     elevatorOwningBusiness: undefined,
+    carnivalRideOwningBusiness: undefined,
     ...overrides,
   };
 };

@@ -100,6 +100,7 @@ export const ApiFormationHealth: UserData = {
         nonEssentialRadioAnswers: {},
         encryptedTaxId: undefined,
         elevatorOwningBusiness: undefined,
+        carnivalRideOwningBusiness: undefined,
       },
       formationData: {
         formationResponse: undefined,

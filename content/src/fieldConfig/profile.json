@@ -126,6 +126,13 @@
           "altDescription": "Do you plan to own a space now or in the future with a new or existing `elevator device|elevator-device` , such as an elevator, escalator, or lift?"
         }
       },
+      "carnivalRideOwningBusiness": {
+        "default": {
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Do you own and/or operate a `carnival or amusement ride|carnival-amusement-ride`?"
+        }
+      },
       "businessName": {
         "default": {
           "header": "Business Name",

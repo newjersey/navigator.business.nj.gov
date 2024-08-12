@@ -11,7 +11,7 @@ import { AnytimeActionLicenseReinstatement, AnytimeActionLink, AnytimeActionTask
 import analytics from "@/lib/utils/analytics";
 import { Autocomplete, TextField, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
-import { ChangeEvent, ReactElement, useState } from "react";
+import { ChangeEvent, type ReactElement, useState } from "react";
 
 interface Props {
   anytimeActionTasks: AnytimeActionTask[];
@@ -33,10 +33,50 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
   const industryId = business?.profileData.industryId;
   const sectorId = business?.profileData.sectorId;
 
+  const getApplicableAnytimeActions = (): AnytimeActionWithType[] => {
+    const anytimeActionLinkWithType = props.anytimeActionLinks
+      .filter((action) => findMatch(action))
+      .map((action) => {
+        return { ...action, type: "link" };
+      });
+    const anytimeActionTaskWithType = props.anytimeActionTasks
+      .filter((action) => findMatch(action))
+      .map((action) => {
+        return { ...action, type: "task" };
+      });
+    const anytimeActionLicenseReinstatementsWithType = props.anytimeActionLicenseReinstatements
+      .filter((action) => licenseReinstatementMatch(action))
+      .map((action) => {
+        return { ...action, type: "license" };
+      });
+
+    const applicableAnytimeActions: AnytimeActionWithType[] = [];
+    applicableAnytimeActions.push(...anytimeActionLinkWithType);
+    applicableAnytimeActions.push(...anytimeActionTaskWithType);
+    applicableAnytimeActions.push(...anytimeActionLicenseReinstatementsWithType);
+    applicableAnytimeActions.sort((a, b) => {
+      return a.name.localeCompare(b.name);
+    });
+    return applicableAnytimeActions;
+  };
+
   const findMatch = (action: AnytimeActionTask | AnytimeActionLink): boolean => {
     if (action.applyToAllUsers) return true;
     if (action.industryIds && industryId && action.industryIds.includes(industryId)) return true;
+    if (isAnytimeActionFromNonEssentialQuestions(action)) return true;
+
     return !!(action.sectorIds && sectorId && action.sectorIds.includes(sectorId));
+  };
+
+  const isAnytimeActionFromNonEssentialQuestions = (
+    action: AnytimeActionTask | AnytimeActionLink
+  ): boolean => {
+    switch (action.filename) {
+      case "carnival-ride-supplemental-modification":
+        return !!business?.profileData.carnivalRideOwningBusiness;
+      default:
+        return false;
+    }
   };
 
   const licenseReinstatementMatch = (action: AnytimeActionLicenseReinstatement): boolean => {
@@ -45,32 +85,6 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
 
     return licenseStatus === "EXPIRED";
   };
-
-  const anytimeActionLinkWithType = props.anytimeActionLinks
-    .filter((action) => findMatch(action))
-    .map((action) => {
-      return { ...action, type: "link" };
-    });
-  const anytimeActionTaskWithType = props.anytimeActionTasks
-    .filter((action) => findMatch(action))
-    .map((action) => {
-      return { ...action, type: "task" };
-    });
-  const anytimeActionLicenseReinstatementsWithType = props.anytimeActionLicenseReinstatements
-    .filter((action) => licenseReinstatementMatch(action))
-    .map((action) => {
-      return { ...action, type: "license" };
-    });
-
-  const allAnytimeActions: AnytimeActionWithType[] = [];
-  allAnytimeActions.push(...anytimeActionLinkWithType);
-  allAnytimeActions.push(...anytimeActionTaskWithType);
-  allAnytimeActions.push(...anytimeActionLicenseReinstatementsWithType);
-  allAnytimeActions.sort((a, b) => {
-    if (a.name > b.name) {
-      return 1;
-    } else return -1;
-  });
 
   const handleChange = (event: ChangeEvent<unknown>, value: AnytimeActionWithType | null): void => {
     if (value === null) {
@@ -91,7 +105,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
       </span>
       <span className={isDesktopAndUp ? "flex" : "flex-column"}>
         <Autocomplete
-          renderInput={(params): JSX.Element => {
+          renderInput={(params): ReactElement => {
             return (
               <TextField
                 {...params}
@@ -111,8 +125,8 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
           isOptionEqualToValue={(option, value) => {
             return option.name === value.name && option.filename === value.filename;
           }}
-          options={allAnytimeActions}
-          renderOption={(_props, option: AnytimeActionWithType, { selected }): JSX.Element => {
+          options={getApplicableAnytimeActions()}
+          renderOption={(_props, option: AnytimeActionWithType, { selected }): ReactElement => {
             return (
               <li {..._props} key={option.filename}>
                 {selected ? (
