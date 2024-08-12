@@ -10,7 +10,7 @@ import {
   getVisibleFundings,
   getVisibleSideBarCards,
   sortCertifications,
-  sortFundings,
+  sortFundingsForUser,
 } from "@/lib/domain-logic/sidebarCardsHelpers";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
@@ -28,10 +28,10 @@ export const SidebarCardsContainer = (props: Props): ReactElement => {
 
   const visibleSidebarCards = getVisibleSideBarCards(business, props.sidebarDisplayContent);
   const visibleSortedFundings = getVisibleFundings(
-    sortFundings(filterFundings({ fundings: props.fundings, business: business }), userData),
+    sortFundingsForUser(filterFundings({ fundings: props.fundings, business: business }), userData),
     business
   );
-  const hiddenSortedFundings = sortFundings(getHiddenFundings(business, props.fundings), userData);
+  const hiddenSortedFundings = sortFundingsForUser(getHiddenFundings(business, props.fundings), userData);
   const visibleSortedCertifications = getVisibleCertifications(
     sortCertifications(filterCertifications({ certifications: props.certifications, business: business })),
     business
