@@ -44,7 +44,7 @@ export const getVisibleCertifications = (
     return !business?.preferences.hiddenCertificationIds.includes(it.id);
   });
 };
-export const sortFundings = (fundings: Funding[], userData?: UserData): Funding[] => {
+export const sortFundingsForUser = (fundings: Funding[], userData?: UserData): Funding[] => {
   const initialSorting = fundings.sort((a, b) => {
     const nameA = a.name.toUpperCase(); // ignore upper and lowercase
     const nameB = b.name.toUpperCase();
@@ -52,12 +52,9 @@ export const sortFundings = (fundings: Funding[], userData?: UserData): Funding[
       return -1;
     } else if (FundingStatusOrder[a.status] > FundingStatusOrder[b.status]) {
       return 1;
-    } else if (nameA < nameB) {
-      return -1;
-    } else if (nameA > nameB) {
-      return 1;
     }
-    return 0;
+
+    return nameA.localeCompare(nameB);
   });
   if (userData?.user.accountCreationSource) {
     const agencySource = mapAccountCreationSourceToAgencySource(userData.user.accountCreationSource);
@@ -70,6 +67,8 @@ const mapAccountCreationSourceToAgencySource = (accountCreationSource: string): 
   switch (accountCreationSource) {
     case "investNewark":
       return "invest-newark";
+    case "NJEDA":
+      return "njeda";
     default:
       return "";
   }
