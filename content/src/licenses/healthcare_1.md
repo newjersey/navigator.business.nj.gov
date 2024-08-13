@@ -22,7 +22,7 @@ If you’re a Medical Doctor (MD), Doctor of Osteopathy (DO), Dentist (DDS), Opt
 * Any new educational degrees or certificates, if applicable 
 * Any new employment, including start and end dates, if applicable 
 * Criminal history since last renewal, if applicable
-* CDS or U.S. Drug Enforcement Administration (DEA) registration suspension, surrender, denial, or revocation since last renewal, if applicable 
+* CDS or U.S. Drug Enforcement Administration (DEA) registration suspension, surrender, denial, revocation, or restrictions since last renewal, if applicable 
 * Professional license revocation or surrender since last renewal, if applicable
 * Applicable fees paid
 
@@ -34,10 +34,8 @@ Your CDS registration will be suspended.
 
 :::
 
-
-
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-The same CDS registration number, valid for one year.
+The same CDS registration number, valid for 1 year.
 
 :::
