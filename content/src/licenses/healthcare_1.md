@@ -14,6 +14,8 @@ callToActionText: "Renew My CDS Registration "
 ---
 If you’re a Medical Doctor (MD), Doctor of Osteopathy (DO), Dentist (DDS), Optometrist (OD), Podiatrist (DPM), or Veterinarian (DVM), you need to renew your Controlled Dangerous Substances (CDS) registration every year. 
 
+The New Jersey Drug Control Unit (DCU) will send a renewal notice to your mailing address about 75 days before your CDS registration expires.
+
 ## Application Requirements
 
 * DEA registration number 
