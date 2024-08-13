@@ -29,6 +29,6 @@ Your CDS registration will expire.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-The same CDS registration number, valid for one year.
+The same CDS registration number, valid for 1 year.
 
 :::
