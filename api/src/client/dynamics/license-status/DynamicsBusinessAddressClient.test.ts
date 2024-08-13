@@ -1,13 +1,14 @@
 /* eslint-disable unicorn/no-null */
 import { DynamicsBusinessAddressClient } from "@client/dynamics/license-status/DynamicsBusinessAddressClient";
 import { BusinessAddressClient } from "@client/dynamics/license-status/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import { generateLicenseSearchAddress } from "@shared/test";
 import axios from "axios";
 
 jest.mock("axios");
 jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("DynamicsBusinessAddressClient", () => {
   let client: BusinessAddressClient;
@@ -19,7 +20,7 @@ describe("DynamicsBusinessAddressClient", () => {
     jest.resetAllMocks();
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
 
-    client = DynamicsBusinessAddressClient(logger, ORG_URL);
+    client = DynamicsBusinessAddressClient(DEBUG ? logger : DummyLogWriter, ORG_URL);
   });
 
   const mockAccessToken = "access-granted";

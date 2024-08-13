@@ -1,12 +1,13 @@
 /* eslint-disable unicorn/no-null */
 import { DynamicsChecklistItemsClient } from "@client/dynamics/license-status/DynamicsChecklistItemsClient";
 import { ChecklistItemsClient } from "@client/dynamics/license-status/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 
 jest.mock("axios");
 jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("DynamicsChecklistItemsClient", () => {
   let client: ChecklistItemsClient;
@@ -18,7 +19,7 @@ describe("DynamicsChecklistItemsClient", () => {
     jest.resetAllMocks();
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
 
-    client = DynamicsChecklistItemsClient(logger, ORG_URL);
+    client = DynamicsChecklistItemsClient(DEBUG ? logger : DummyLogWriter, ORG_URL);
   });
 
   const mocklicenseApplicationId = "123456";

@@ -1,12 +1,13 @@
 import { DynamicsBusinessIdsClient } from "@client/dynamics/license-status/DynamicsBusinessIdsClient";
 import { BusinessIdClient } from "@client/dynamics/license-status/types";
 import { NO_MATCH_ERROR } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 
 jest.mock("axios");
 jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("DynamicsBusinessIdsClient", () => {
   let client: BusinessIdClient;
@@ -18,7 +19,7 @@ describe("DynamicsBusinessIdsClient", () => {
     jest.resetAllMocks();
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
 
-    client = DynamicsBusinessIdsClient(logger, ORG_URL);
+    client = DynamicsBusinessIdsClient(DEBUG ? logger : DummyLogWriter, ORG_URL);
   });
 
   const mockAccessToken = "access-granted";
