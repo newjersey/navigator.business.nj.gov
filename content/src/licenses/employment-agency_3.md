@@ -18,4 +18,4 @@ Your consulting firm (headhunter) registration expires every year.
 
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
-- A renewed consulting firm (headhunter) registration valid for one year. It will be sent to your mailing address on file.
+A renewed consulting firm (headhunter) registration valid for one year. It will be sent to your mailing address on file.
