@@ -105,8 +105,6 @@
     "pendingCopyMarkdown": "**Your Tax Calendar is pending.** \n\n Your tax due dates are being added, check back in **7 days**."
   },
   "licenseEventDefaults": {
-    "expirationTitleLabel": "License Expires",
-    "renewalTitleLabel": "License Renewal Deadline",
     "beforeExpirationDateText": "Expiration Date:",
     "beforeRenewalDateText": "Expiration Date:",
     "disclaimerMarkdown": "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services."

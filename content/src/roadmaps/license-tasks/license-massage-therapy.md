@@ -15,6 +15,7 @@ industryId: "massage-therapy"
 webflowType: "business-license"
 licenseCertificationClassification: ""
 summaryDescriptionMd: "If you will employ others to offer massage therapy services, you need to register your business as a massage therapy employer."
+licenseName: "Massage and Bodywork Therapy-Massage and Bodywork Employer"
 ---
 
 ## Application Requirements

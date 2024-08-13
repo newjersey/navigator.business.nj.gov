@@ -7,11 +7,10 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { LicenseUrlSlugParam, loadAllLicenseUrlSlugs, loadLicenseByUrlSlug } from "@/lib/static/loadLicenses";
-import { LicenseEvent } from "@/lib/types/types";
+import { LicenseEventType } from "@/lib/types/types";
 import {
-  LicenseEventSubtype,
-  LookupIndustryById,
   defaultDateFormat,
+  LicenseEventSubtype,
   parseDate,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
@@ -20,20 +19,15 @@ import { NextSeo } from "next-seo";
 import { ReactElement } from "react";
 
 interface LicenseElementProps {
-  license: LicenseEvent;
+  license: LicenseEventType;
   licenseEventType: LicenseEventSubtype;
   dueDate: string;
-  preview?: boolean;
   licenseName: string;
 }
 
 export const LicenseElement = (props: LicenseElementProps): ReactElement => {
   const { Config } = useConfig();
 
-  const titles: Record<LicenseEventSubtype, string> = {
-    expiration: Config.licenseEventDefaults.expirationTitleLabel,
-    renewal: Config.licenseEventDefaults.renewalTitleLabel,
-  };
   const dateText: Record<LicenseEventSubtype, string> = {
     expiration: Config.licenseEventDefaults.beforeExpirationDateText,
     renewal: Config.licenseEventDefaults.beforeRenewalDateText,
@@ -46,10 +40,14 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
           <div>
             <div className="padding-y-4 margin-x-4 margin-bottom-2">
               <div className="margin-bottom-2 ">
-                <h1>{`${props.licenseName} ${titles[props.licenseEventType]}`}</h1>
+                <h1>
+                  {props.licenseEventType === "renewal"
+                    ? props.license.renewalEventDisplayName
+                    : props.license.expirationEventDisplayName}
+                </h1>
               </div>
               <div className="display-inline-flex ">
-                <span className="text-bold">{dateText[props.licenseEventType].toUpperCase()}</span> &nbsp;{" "}
+                <span className="text-bold">{dateText[props.licenseEventType].toUpperCase()}</span> &nbsp;
                 <span data-testid="due-date">
                   {parseDateWithFormat(props.dueDate, defaultDateFormat).format("MMMM D, YYYY").toUpperCase()}
                 </span>
@@ -71,18 +69,20 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
 };
 
 interface Props {
-  license: LicenseEvent;
+  license: LicenseEventType;
   licenseEventType: LicenseEventSubtype;
 }
 
 const LicensePage = (props: Props): ReactElement => {
   const { business } = useUserData();
-  let date = parseDate(business?.licenseData?.expirationISO);
+  const licenseName = props.license.licenseName;
+
+  const expirationDateISO = business?.licenseData?.licenses?.[licenseName]?.expirationDateISO;
+
+  let date = parseDate(expirationDateISO);
   if (props.licenseEventType === "renewal") {
     date = date.add(30, "days");
   }
-
-  const licenseName = LookupIndustryById(business?.profileData.industryId).licenseType!;
 
   return (
     <>
@@ -91,7 +91,7 @@ const LicensePage = (props: Props): ReactElement => {
         <TaskSidebarPageLayout>
           <LicenseElement
             license={props.license}
-            licenseName={licenseName || ""}
+            licenseName={licenseName}
             licenseEventType={props.licenseEventType}
             dueDate={date.format(defaultDateFormat)}
           />

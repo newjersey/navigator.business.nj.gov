@@ -28,19 +28,18 @@ import { DynamicsHousingHealthCheckClient } from "@client/dynamics/housing/Dynam
 import { DynamicsHotelMotelRegistrationClient } from "@client/dynamics/housing/DynamicsHousingHotelMotelRegistrationClient";
 import { DynamicsHotelMotelRegistrationStatusClient } from "@client/dynamics/housing/DynamicsHousingHotelMotelRegistrationStatusClient";
 import { DynamicsHousingPropertyInterestClient } from "@client/dynamics/housing/DynamicsHousingPropertyInterestClient";
-import { DynamicsBusinessAddressClient } from "@client/dynamics/license-status/DynamicsBusinessAddressClient";
-import { DynamicsBusinessIdsClient } from "@client/dynamics/license-status/DynamicsBusinessIdsClient";
-import { DynamicsChecklistItemsClient } from "@client/dynamics/license-status/DynamicsChecklistItemsClient";
-import { DynamicsLicenseApplicationIdClient } from "@client/dynamics/license-status/DynamicsLicenseApplicationIdClient";
-import { DynamicsLicenseHealthCheckClient } from "@client/dynamics/license-status/DynamicsLicenseHealthCheckClient";
-import { DynamicsLicenseStatusClient } from "@client/dynamics/license-status/DynamicsLicenseStatusClient";
+import { RegulatedBusinessDynamicsBusinessAddressesClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsBusinessAddressesClient";
+import { RegulatedBusinessDynamicsBusinessIdsAndNamesClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsBusinessIdsAndNamesClient";
+import { RegulatedBusinessDynamicsChecklistItemsClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsChecklistItemsClient";
+import { RegulatedBusinessDynamicsLicenseApplicationIdsClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsLicenseApplicationIdsClient";
+import { RegulatedBusinessDynamicsLicenseHealthCheckClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsLicenseHealthCheckClient";
+import { RegulatedBusinessDynamicsLicenseStatusClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsLicenseStatusClient";
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
 import { WebserviceLicenseStatusClient } from "@client/WebserviceLicenseStatusClient";
 import { WebserviceLicenseStatusProcessorClient } from "@client/WebserviceLicenseStatusProcessorClient";
 import { dynamoDbTranslateConfig, DynamoUserDataClient } from "@db/DynamoUserDataClient";
-import { searchLicenseStatusFactory } from "@domain/license-status/searchLicenseStatusFactory";
 import { HealthCheckMethod } from "@domain/types";
 import { updateSidebarCards } from "@domain/updateSidebarCards";
 import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFactory";
@@ -108,20 +107,32 @@ const dynamicsLicenseStatusAccessTokenClient = DynamicsAccessTokenClient(logger,
   clientSecret: process.env.DYNAMICS_LICENSE_STATUS_SECRET || "",
 });
 
-const dynamicsBusinessIdClient = DynamicsBusinessIdsClient(logger, DYNAMICS_LICENSE_STATUS_URL);
-const dynamicsAddressClient = DynamicsBusinessAddressClient(logger, DYNAMICS_LICENSE_STATUS_URL);
-const dynamicsApplicationIdClient = DynamicsLicenseApplicationIdClient(logger, DYNAMICS_LICENSE_STATUS_URL);
-const dynamicsCheckListItemsClient = DynamicsChecklistItemsClient(logger, DYNAMICS_LICENSE_STATUS_URL);
+const rgbBusinessIdClient = RegulatedBusinessDynamicsBusinessIdsAndNamesClient(
+  logger,
+  DYNAMICS_LICENSE_STATUS_URL
+);
+const rgbAddressClient = RegulatedBusinessDynamicsBusinessAddressesClient(
+  logger,
+  DYNAMICS_LICENSE_STATUS_URL
+);
+const rgbApplicationIdClient = RegulatedBusinessDynamicsLicenseApplicationIdsClient(
+  logger,
+  DYNAMICS_LICENSE_STATUS_URL
+);
+const rgbCheckListItemsClient = RegulatedBusinessDynamicsChecklistItemsClient(
+  logger,
+  DYNAMICS_LICENSE_STATUS_URL
+);
 
-const dynamicsLicenseStatusClient = DynamicsLicenseStatusClient(logger, {
-  accessTokenClient: dynamicsLicenseStatusAccessTokenClient,
-  businessIdClient: dynamicsBusinessIdClient,
-  businessAddressClient: dynamicsAddressClient,
-  licenseApplicationIdClient: dynamicsApplicationIdClient,
-  checklistItemsClient: dynamicsCheckListItemsClient,
+const rgbLicenseStatusClient = RegulatedBusinessDynamicsLicenseStatusClient({
+  dynamicsAccessTokenClient: dynamicsLicenseStatusAccessTokenClient,
+  rgbBusinessIdsAndNamesClient: rgbBusinessIdClient,
+  rgbBusinessAddressesClient: rgbAddressClient,
+  rgbLicenseApplicationIdsClient: rgbApplicationIdClient,
+  rgbChecklistItemsClient: rgbCheckListItemsClient,
 });
 
-const dynamicsLicenseHealthCheckClient = DynamicsLicenseHealthCheckClient(logger, {
+const rgbDynamicsLicenseHealthCheckClient = RegulatedBusinessDynamicsLicenseHealthCheckClient(logger, {
   accessTokenClient: dynamicsLicenseStatusAccessTokenClient,
   orgUrl: DYNAMICS_LICENSE_STATUS_URL,
 });
@@ -293,11 +304,11 @@ const taxFilingInterface = taxFilingsInterfaceFactory(taxFilingClient);
 
 const addGovDeliveryNewsletter = addNewsletterFactory(govDeliveryNewsletterClient);
 const addToAirtableUserTesting = addToUserTestingFactory(airtableUserTestingClient);
-const searchLicenseStatus = searchLicenseStatusFactory(
+
+const updateLicenseStatus = updateLicenseStatusFactory(
   webserviceLicenseStatusProcessorClient,
-  dynamicsLicenseStatusClient
+  rgbLicenseStatusClient
 );
-const updateLicenseStatus = updateLicenseStatusFactory(searchLicenseStatus);
 const timeStampToBusinessSearch = timeStampBusinessSearch(businessNameClient);
 
 const myNJSelfRegClient = MyNJSelfRegClientFactory(
@@ -372,7 +383,7 @@ app.use(
       ["dynamics/elevator", dynamicsElevatorSafetyHealthCheckClient],
       ["dynamics/fire-safety", dynamicsFireSafetyHealthCheckClient],
       ["dynamics/housing", dynamicsHousingHealthCheckClient],
-      ["dynamics/license-status", dynamicsLicenseHealthCheckClient],
+      ["rgbDynamics/license-status", rgbDynamicsLicenseHealthCheckClient],
       ["webservice/license-status", webServiceLicenseStatusHealthCheckClient],
       ["webservice/formation", formationHealthCheckClient],
     ])

@@ -15,7 +15,7 @@ describe("healthCheck", () => {
       elevator: "PASS",
       fireSafety: "PASS",
       housing: "PASS",
-      dynamicsLicenseStatus: "PASS",
+      rgbDynamicsLicenseStatus: "PASS",
       webserviceLicenseStatus: "PASS",
       webserviceFormation: "PASS",
     });
@@ -28,7 +28,7 @@ describe("healthCheck", () => {
       elevator: "FAIL",
       fireSafety: "FAIL",
       housing: "FAIL",
-      dynamicsLicenseStatus: "FAIL",
+      rgbDynamicsLicenseStatus: "FAIL",
       webserviceLicenseStatus: "FAIL",
       webserviceFormation: "FAIL",
     });
@@ -41,7 +41,7 @@ describe("healthCheck", () => {
       elevator: "ERROR",
       fireSafety: "ERROR",
       housing: "ERROR",
-      dynamicsLicenseStatus: "ERROR",
+      rgbDynamicsLicenseStatus: "ERROR",
       webserviceLicenseStatus: "ERROR",
       webserviceFormation: "ERROR",
     });

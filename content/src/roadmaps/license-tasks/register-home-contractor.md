@@ -14,6 +14,7 @@ divisionPhone: "(973) 424-8150"
 industryId: "home-contractor"
 webflowType: "business-license"
 licenseCertificationClassification: ""
+licenseName: "Home Improvement Contractors-Home Improvement Contractor"
 summaryDescriptionMd: >-
 
 

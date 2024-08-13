@@ -1,5 +1,8 @@
 ---
 urlSlug: generic
+renewalEventDisplayName: tbd
+expirationEventDisplayName: tbd
+licenseName:
 previewType: renewal
 summaryDescriptionMd: >-
   If you are interested in continuing to work on `public works

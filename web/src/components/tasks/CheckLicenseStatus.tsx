@@ -8,6 +8,8 @@ import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   createEmptyLicenseSearchNameAndAddress,
   LicenseSearchNameAndAddress,
+  LicenseTaskID,
+  taskIdLicenseNameMapping,
 } from "@businessnjgovnavigator/shared/";
 import { TextField } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
@@ -29,6 +31,7 @@ interface Props {
   onSubmit: (nameAndAddress: LicenseSearchNameAndAddress) => void;
   error: LicenseSearchError | undefined;
   isLoading: boolean;
+  licenseTaskId: LicenseTaskID;
 }
 
 const Config = getMergedConfig();
@@ -38,7 +41,7 @@ const LicenseSearchErrorLookup: Record<LicenseSearchError, string> = {
   SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
 };
 
-export const CheckStatus = (props: Props): ReactElement => {
+export const CheckLicenseStatus = (props: Props): ReactElement => {
   const classes = useStyles();
   const [formValues, setFormValues] = useState<LicenseSearchNameAndAddress>(
     createEmptyLicenseSearchNameAndAddress()
@@ -48,8 +51,14 @@ export const CheckStatus = (props: Props): ReactElement => {
   useMountEffectWhenDefined(() => {
     if (!business) return;
 
-    if (business.licenseData) {
-      setFormValues(business.licenseData.nameAndAddress);
+    const licenseNameForTask = taskIdLicenseNameMapping[props.licenseTaskId];
+    const licenseDetails = business.licenseData?.licenses?.[licenseNameForTask];
+    const nameAndAddress = licenseDetails?.nameAndAddress;
+
+    const hasNameAndAddress = nameAndAddress?.name && nameAndAddress?.addressLine1 && nameAndAddress?.zipCode;
+
+    if (nameAndAddress && hasNameAndAddress) {
+      setFormValues(licenseDetails.nameAndAddress);
     } else if (business.formationData.formationResponse?.success) {
       setFormValues((prevValues) => {
         return {

@@ -1,8 +1,10 @@
 import { GovDeliveryNewsletterClient, GovDeliveryResponse } from "@client/GovDeliveryNewsletterClient";
 import { NewsletterClient } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import { randomInt } from "@shared/intHelpers";
 import axios from "axios";
+
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 const generateGovDeliveryResponse = (
   overrides: Partial<GovDeliveryResponse>,
@@ -30,7 +32,7 @@ describe("GovDeliveryNewsletterClient", () => {
       baseUrl: "www.example.com",
       topic: "123",
       apiKey: "key1234",
-      logWriter: logger,
+      logWriter: DEBUG ? logger : DummyLogWriter,
       siteUrl: "navigator.com",
       urlQuestion: "q_1234",
     });

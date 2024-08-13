@@ -5,9 +5,7 @@ notesMd: |-
 filename: healthcare-1-cds-reinstatement
 name: Reinstate Your MD, DO, DDS, OD, DPM, or DVM Controlled Dangerous
   Substances Registration
-industryIds:
-  - healthcare
-sectorIds: []
+licenseName:
 icon: update-purple.svg
 urlSlug: healthcare-1-cds-reinstatement
 summaryDescriptionMd: >-

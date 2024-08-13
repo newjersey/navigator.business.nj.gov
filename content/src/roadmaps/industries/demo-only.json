@@ -1,0 +1,47 @@
+{
+  "naicsCodes": "",
+  "defaultSectorId": "other-services",
+  "canHavePermanentLocation": true,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "licenseTask": "health-club-registration"
+    },
+    {
+      "step": 1,
+      "weight": 2,
+      "licenseTask": "home-health-aide-license"
+    },
+    {
+      "step": 1,
+      "weight": 100,
+      "task": "business-structure",
+      "required": true
+    }
+  ],
+  "name": "Demo Only",
+  "nonEssentialQuestionsIds": ["weights-measures"],
+  "displayname": "Demo Only",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": false,
+    "canBeReseller": false,
+    "isCannabisLicenseTypeApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isCarServiceApplicable": false,
+    "isInterstateMovingApplicable": false,
+    "petCareHousing": false,
+    "isLiquorLicenseApplicable": false,
+    "isInterstateLogisticsApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isChildcareForSixOrMore": false,
+    "willSellPetCareItems": false,
+    "isTransportation": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isProvidesStaffingServicesApplicable": false
+  },
+  "isEnabled": false,
+  "additionalSearchTerms": "dev, qa, test",
+  "id": "demo-only",
+  "description": "This is a demo industry used for the purpose of QAing edge cases throughout the application."
+}

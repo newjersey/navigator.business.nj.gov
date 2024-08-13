@@ -216,19 +216,16 @@ describe("task page", () => {
   describe("License task", () => {
     it.each([
       "apply-for-shop-license",
-      "appraiser-license",
-      "architect-license",
-      "home-health-aide-license",
-      "hvac-license",
-      "license-massage-therapy",
-      "moving-company-license",
-      "pharmacy-license",
-      "public-accountant-license",
-      "register-accounting-firm",
-      "register-consumer-affairs",
-      "telemarketing-license",
-      "landscape-architect-license",
+      "appraiser-company-register",
+      "authorization-architect-firm",
+      "authorization-landscape-architect-firm",
       "health-club-registration",
+      "home-health-aide-license",
+      "license-massage-therapy",
+      "pharmacy-license",
+      "register-accounting-firm",
+      "register-home-contractor",
+      "telemarketing-license",
       "ticket-broker-reseller-registration",
     ])("loads License task screen for %s", (licenseId) => {
       renderPage(generateTask({ id: licenseId }), generateBusiness({ licenseData: undefined }));

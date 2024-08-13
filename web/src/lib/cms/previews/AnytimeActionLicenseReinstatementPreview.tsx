@@ -11,6 +11,8 @@ const AnytimeActionLicenseReinstatementPreview = (props: PreviewProps): ReactEle
 
   return (
     <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+      <div>This file is mapped to the following license (not enabled if blank):</div>
+      <div className="margin-bottom-10 text-bold">{anytimeAction.licenseName}</div>
       <AnytimeActionElement anytimeAction={anytimeAction} />
     </div>
   );

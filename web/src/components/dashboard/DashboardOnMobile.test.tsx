@@ -4,6 +4,7 @@ import {
   AnytimeActionLicenseReinstatement,
   AnytimeActionLink,
   AnytimeActionTask,
+  LicenseEventType,
   OperateReference,
   RoadmapDisplayContent,
   SidebarCardContent,
@@ -25,14 +26,13 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
-  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  OperatingPhases,
   defaultDateFormat,
   generateBusiness,
   generatePreferences,
@@ -41,10 +41,11 @@ import {
   generateTaxFilingData,
   generateUserDataForBusiness,
   getCurrentDate,
+  OperatingPhases,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhase, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
@@ -93,12 +94,14 @@ describe("<DashboardOnMobile />", () => {
     anytimeActionLinks,
     anytimeActionTask,
     anytimeActionLicenseReinstatements,
+    licenseEvents,
   }: {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     operateReferences?: Record<string, OperateReference>;
     anytimeActionLinks?: AnytimeActionLink[];
     anytimeActionTask?: AnytimeActionTask[];
     anytimeActionLicenseReinstatements?: AnytimeActionLicenseReinstatement[];
+    licenseEvents?: LicenseEventType[];
   }): void => {
     render(
       <ThemeProvider theme={createTheme()}>
@@ -110,6 +113,7 @@ describe("<DashboardOnMobile />", () => {
           anytimeActionLinks={anytimeActionLinks ?? []}
           anytimeActionTasks={anytimeActionTask ?? []}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatements ?? []}
+          licenseEvents={licenseEvents ?? []}
         />
       </ThemeProvider>
     );
@@ -129,6 +133,7 @@ describe("<DashboardOnMobile />", () => {
             anytimeActionLinks={[]}
             anytimeActionTasks={[]}
             anytimeActionLicenseReinstatements={[]}
+            licenseEvents={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>

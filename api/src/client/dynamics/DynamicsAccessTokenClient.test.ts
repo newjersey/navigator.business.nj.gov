@@ -1,11 +1,13 @@
 import { DynamicsAccessTokenClient } from "@client/dynamics/DynamicsAccessTokenClient";
 import { AccessTokenClient } from "@client/dynamics/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 
 jest.mock("winston");
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
+
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("DynamicsAccessTokenClient", () => {
   let client: AccessTokenClient;
@@ -20,7 +22,7 @@ describe("DynamicsAccessTokenClient", () => {
     jest.resetAllMocks();
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
 
-    client = DynamicsAccessTokenClient(logger, {
+    client = DynamicsAccessTokenClient(DEBUG ? logger : DummyLogWriter, {
       tenantId: TENANT_ID,
       orgUrl: ORG_URL,
       clientId: CLIENT_ID,
@@ -52,5 +54,13 @@ describe("DynamicsAccessTokenClient", () => {
   it("returns empty string if received data is empty", async () => {
     mockAxios.postForm.mockResolvedValue({ data: {} });
     expect(await client.getAccessToken()).toEqual("");
+  });
+
+  it("throws status error when api call fails", async () => {
+    mockAxios.postForm.mockRejectedValue({
+      response: { status: 500 },
+    });
+
+    await expect(client.getAccessToken()).rejects.toEqual(500);
   });
 });
