@@ -60,7 +60,7 @@
     "@mui/x-date-pickers": "5.0.20",
     "@newjersey/njwds": "0.3.0",
     "@types/mdast": "4.0.4",
-    "axios": "1.7.3",
+    "axios": "1.7.4",
     "broken-link-checker": "0.7.8",
     "dayjs": "1.11.12",
     "fast-deep-equal": "3.1.3",
