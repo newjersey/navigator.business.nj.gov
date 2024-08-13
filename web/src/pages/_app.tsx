@@ -120,7 +120,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     }
   });
 
-  const isSeoPage = router.pathname.includes("/starter-kits/");
+  const isSeoPage = router.pathname.includes("/starter-kits");
 
   return (
     <>
