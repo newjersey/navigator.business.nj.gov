@@ -1,3 +1,18 @@
+# [2024.24.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.23.0...v2024.24.0) (2024-08-13)
+
+
+### Bug Fixes
+
+* [[#188073424](https://github.com/newjersey/navigator.business.nj.gov/issues/188073424)] industryOnboardingQuestions widget ([2d763a6](https://github.com/newjersey/navigator.business.nj.gov/commit/2d763a68f75601e1944744bebab8adf91d72afc6))
+* **deps:** update dependency axios to v1.7.3 ([f5181ae](https://github.com/newjersey/navigator.business.nj.gov/commit/f5181ae6cf7f30a34ec49aca830acc274030eb34))
+
+
+### Features
+
+* [[#187432804](https://github.com/newjersey/navigator.business.nj.gov/issues/187432804)] add sitemap.xml ([65be529](https://github.com/newjersey/navigator.business.nj.gov/commit/65be52937fcad4c8f64f32bee3ea2d4ab4cd99f5))
+* [[#187861895](https://github.com/newjersey/navigator.business.nj.gov/issues/187861895)] unify address error states ([83f9970](https://github.com/newjersey/navigator.business.nj.gov/commit/83f99705ed987f81d1cfde52e4579b26d1e69b49))
+* [[#188108319](https://github.com/newjersey/navigator.business.nj.gov/issues/188108319)] Bubble NJEDA fundings to top of For You column ([7a8f430](https://github.com/newjersey/navigator.business.nj.gov/commit/7a8f430649f7da9f8afccc8163cccb63d1b833f2))
+
 # [2024.23.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.22.1...v2024.23.0) (2024-08-07)
 
 
