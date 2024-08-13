@@ -87,6 +87,7 @@
     "LEGA",
     "LEUP",
     "LGBTQ",
+    "LGCCC",
     "lgea",
     "LIHTC",
     "logisticare",
@@ -187,7 +188,8 @@
     "VEEVR",
     "WDPF",
     "webflow",
-    "YTTW"
+    "YTTW",
+    "SME"
   ],
   "ignorePaths": [
     "node_modules/**",

@@ -15,4 +15,4 @@ Your employment agency license and agent license expires every year.
 - Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
-- A renewed employment agency license and agent license are valid for one year. It will be sent to your mailing address on file.
+A renewed employment agency license and agent license are valid for one year. It will be sent to your mailing address on file.

@@ -43,17 +43,26 @@
     }
   ],
   "name": "Entertainment",
-  "nonEssentialQuestionsIds": ["carnival-fire-licenses", "carnival-ride-permitting", "weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "carnival-fire-licenses",
+    "carnival-ride-permitting",
+    "weights-measures",
+    "entertainment-agency"
+  ],
   "displayname": "independent-artist",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true,
+    "isCannabisLicenseTypeApplicable": false,
     "isCpaRequiredApplicable": false,
     "isCarServiceApplicable": false,
     "isInterstateMovingApplicable": false,
+    "petCareHousing": false,
     "isLiquorLicenseApplicable": false,
     "isInterstateLogisticsApplicable": false,
     "isRealEstateAppraisalManagementApplicable": false,
+    "isChildcareForSixOrMore": false,
+    "willSellPetCareItems": false,
     "isTransportation": false,
     "isCertifiedInteriorDesignerApplicable": false,
     "isProvidesStaffingServicesApplicable": false

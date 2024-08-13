@@ -41,6 +41,17 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 3,
+      "weight": 20,
+      "licenseTask": "cemetery-certificate",
+      "required": true
+    },
+    {
+      "weight": 25,
+      "step": 3,
+      "licenseTask": "cemetery-branch"
     }
   ],
   "name": "Cemetery",

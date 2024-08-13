@@ -4,7 +4,7 @@
   "roadmapSteps": [
     {
       "step": 4,
-      "weight": 1,
+      "weight": 90,
       "required": true,
       "licenseTask": "entertainment-agency-reg"
     }

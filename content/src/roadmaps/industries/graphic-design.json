@@ -1,14 +1,7 @@
 {
-  "displayname": "graphic-design",
   "naicsCodes": "541430",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "digital-and-print-media",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -51,6 +44,13 @@
     }
   ],
   "name": "Graphic Design",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "graphic-design",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
+  "isEnabled": true,
   "additionalSearchTerms": "media services, freelancer, freelance art, visual design, illustrator",
   "id": "graphic-design",
   "description": "Creates visual content for print and media",
