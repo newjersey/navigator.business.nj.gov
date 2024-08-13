@@ -28,6 +28,7 @@ import { Auth } from "@aws-amplify/auth";
 import "@cypress-audit/lighthouse/commands";
 import "@cypress-audit/pa11y/commands";
 import "cypress-axe";
+import "cypress-mochawesome-reporter/register";
 import "cypress-wait-until";
 import { getCurrentBusiness } from "../../../shared/src/domain-logic/getCurrentBusiness";
 import { createEmptyUserData } from "../../../shared/src/userData";

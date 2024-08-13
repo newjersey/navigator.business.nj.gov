@@ -17,11 +17,14 @@ export default defineConfig({
       pwa: 0,
     },
   },
-  reporter: "junit", //"cypress-mochawesome-reporter",
-  reporterOptions: {
-    mochaFile: "cypress/results/web-tests-[hash].xml",
-    toConsole: true,
-  },
+  reporter: "cypress-mochawesome-reporter", //"junit", ,
+  // reporterOptions: {
+  //   reportsDir: "cypress/results/accessibility-reports",
+  //   reportsFilename: "accessibility-report",
+  //   overwrite: false,
+  //   mochaFile: "cypress/results/web-tests-[hash].xml",
+  //   toConsole: true,
+  // },
   e2e: {
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.

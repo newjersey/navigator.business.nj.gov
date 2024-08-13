@@ -1,5 +1,5 @@
 import "cypress-axe";
-import "cypress-mochawesome-reporter";
+//import "cypress-mochawesome-reporter/register";
 //import { setMobileViewport } from "../../support/helpers/helpers";
 import { onOnboardingPageStartingBusiness } from "../../support/page_objects/onboardingPageNew";
 
