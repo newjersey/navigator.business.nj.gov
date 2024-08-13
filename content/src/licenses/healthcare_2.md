@@ -3,6 +3,11 @@ notesMd: >-
   * This is for Healthcare-2 CDS (for PA, APN, or CNM)
 
   * Cannot save without something in the Summary Description so just copied/pasted the static content that already goes there
+
+  * Updates from CDS SME review: 
+
+    * remove following 3 app reqs: name change, new education, new employment 
+    * change suspended to expired in warning callout
 urlSlug: healthcare
 previewType: renewal
 summaryDescriptionMd: You can renew your license 60 days before it expires and
@@ -20,9 +25,6 @@ The New Jersey Drug Control Unit (DCU) will send a renewal notice to your mailin
 
 * DEA registration number 
 * Social Security number 
-* Name change documentation, if applicable
-* Any new educational degrees or certificates, if applicable 
-* Any new employment, including start and end dates, if applicable 
 * Criminal history since last renewal, if applicable
 * CDS or U.S. Drug Enforcement Administration (DEA) registration suspension, surrender, denial, revocation, or restrictions since last renewal, if applicable 
 * Professional license revocation or surrender since last renewal, if applicable
@@ -32,7 +34,7 @@ You must be registered with the [New Jersey Prescription Monitoring Program](htt
 
 :::callout{ showHeader="true" headerText="What if I don't renew this registration?" showIcon="false" calloutType="warning" }
 
-Your CDS registration will be suspended.
+Your CDS registration will expire.
 
 :::
 
