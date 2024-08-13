@@ -5,22 +5,49 @@ import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Card } from "@/components/starter-kits/Card";
 import { StepInfo } from "@/components/starter-kits/StepInfo";
 import { getMergedConfig } from "@/contexts/configContext";
-import { ROUTES } from "@/lib/domain-logic/routes";
+import { ROUTES, STARTER_KITS_GENERIC_SLUG } from "@/lib/domain-logic/routes";
+import { insertIndustryContent, insertRoadmapSteps } from "@/lib/domain-logic/starterKitsContentModifiers";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { ProfileData, createEmptyProfileData } from "@businessnjgovnavigator/shared/index";
-import type { InferGetStaticPropsType } from "next";
+import { Industries, Industry } from "@businessnjgovnavigator/shared";
+import {
+  LookupIndustryById,
+  ProfileData,
+  createEmptyProfileData,
+} from "@businessnjgovnavigator/shared/index";
+import type { GetStaticPathsResult } from "next";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
-const General = (props: InferGetStaticPropsType<typeof getStaticProps>): ReactElement => {
+interface Props {
+  noAuth: boolean;
+  roadmap: Roadmap;
+  industry: Industry;
+}
+
+const StarterKitsPage = (props: Props): ReactElement => {
   const router = useRouter();
   const Config = getMergedConfig();
 
   const getTaskNamesForStep = (tasks: Task[], step: number): string[] => {
     return tasks.filter((task) => task.stepNumber === step).map((task) => task.name);
   };
+
+  const heroTitle = insertIndustryContent(
+    Config.starterKits.hero.title,
+    props.industry.id,
+    props.industry.name
+  );
+  const solutionsTitle = insertIndustryContent(
+    Config.starterKits.solutions.title,
+    props.industry.id,
+    props.industry.name
+  );
+  const stepsTitle = insertRoadmapSteps(
+    insertIndustryContent(Config.starterKits.steps.title, props.industry.id, props.industry.name),
+    String(props.roadmap.steps.length)
+  );
 
   return (
     <PageSkeleton landingPage={true}>
@@ -32,11 +59,11 @@ const General = (props: InferGetStaticPropsType<typeof getStaticProps>): ReactEl
         >
           <div className={"text-center desktop:text-left desktop:grid-col-5"}>
             <Heading level={1} styleVariant="h1Large" className="display-only-desktop">
-              {Config.starterKits.hero.title}
+              {heroTitle}
               <br />
             </Heading>
             <Heading level={1} className="display-none-desktop">
-              {Config.starterKits.hero.title}
+              {heroTitle}
               <br />
             </Heading>
             <div className="text-base-darkest font-sans-md margin-bottom-3">
@@ -66,7 +93,7 @@ const General = (props: InferGetStaticPropsType<typeof getStaticProps>): ReactEl
           }
         >
           <div className="title-section">
-            <Heading level={2}>{Config.starterKits.solutions.title}</Heading>
+            <Heading level={2}>{solutionsTitle}</Heading>
             <p className="font-sans-md">{Config.starterKits.solutions.subtitle}</p>
           </div>
           <div className="display-flex flex-column gap-2 cards-section">
@@ -106,7 +133,7 @@ const General = (props: InferGetStaticPropsType<typeof getStaticProps>): ReactEl
         >
           <div className="padding-x-2 display-flex flex-column flex-justify gap-5 flex-align-center">
             <div className="border-top-1 border-secondary-vivid-dark width-8" />
-            <Heading level={2}>Get Your Business Started in 4 Easy Steps</Heading>
+            <Heading level={2}>{stepsTitle}</Heading>
           </div>
           <div className="display-flex flex-column desktop:flex-row gap-4 padding-x-2 desktop:padding-x-0">
             {props.roadmap.steps.map((step) => (
@@ -136,24 +163,58 @@ const General = (props: InferGetStaticPropsType<typeof getStaticProps>): ReactEl
   );
 };
 
-export const getStaticProps = async (): Promise<{
-  props: {
-    noAuth: boolean;
-    roadmap: Roadmap;
+type PathParams<P> = { params: P; locale?: string };
+export type StarterKitsUrl = {
+  starterKitsUrl: string;
+};
+
+const getAllStarterKitUrls = (): PathParams<StarterKitsUrl>[] => {
+  return Industries.filter((industry) => industry.isEnabled).map((industry) => {
+    if (industry.id === "generic") {
+      return {
+        params: {
+          starterKitsUrl: STARTER_KITS_GENERIC_SLUG,
+        },
+      };
+    }
+
+    return {
+      params: {
+        starterKitsUrl: industry.id,
+      },
+    };
+  });
+};
+
+export const getStaticPaths = (): GetStaticPathsResult<StarterKitsUrl> => {
+  const paths = getAllStarterKitUrls();
+
+  return {
+    paths,
+    fallback: false,
   };
-}> => {
+};
+
+export const getStaticProps = async ({ params }: { params: StarterKitsUrl }): Promise<{ props: Props }> => {
+  let industry;
+  if (params.starterKitsUrl === STARTER_KITS_GENERIC_SLUG) {
+    industry = LookupIndustryById("generic");
+  } else {
+    industry = LookupIndustryById(params.starterKitsUrl);
+  }
+
   const emptyProfileData = createEmptyProfileData();
   const newProfileData: ProfileData = {
     ...emptyProfileData,
     businessPersona: "STARTING",
-    industryId: "generic",
+    industryId: industry.id,
     legalStructureId: "limited-liability-company",
   };
   const roadmap = await buildUserRoadmap(newProfileData);
 
   return {
-    props: { noAuth: true, roadmap },
+    props: { noAuth: true, roadmap, industry },
   };
 };
 
-export default General;
+export default StarterKitsPage;

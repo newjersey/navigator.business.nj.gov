@@ -1,12 +1,12 @@
 {
   "starterKits": {
     "hero": {
-      "title": "Your Step-by-Step Business Starter Kit",
+      "title": "Your Step-by-Step ${industry} Business Starter Kit",
       "subtitle": "Our free, step-by-step guide will help you start your business today.",
       "ctaButton": "Start Now"
     },
     "solutions": {
-      "title": "Knowing exactly what your business needs to get started can be difficult.",
+      "title": "Knowing exactly what your ${industry} business needs to get started can be difficult.",
       "subtitle": "Business.NJ.gov provides a free, personalized Starter Kit unique to you and your business needs.",
       "ctaButton": "Get My Starter Kit",
       "card1": {
@@ -23,7 +23,7 @@
       }
     },
     "steps": {
-      "title": "Get Your Business Started in 4 Easy Steps ",
+      "title": "Get Your ${industry} Business Started in ${numberRoadMapSteps} Easy Steps ",
       "ctaButton": "Get My Starter Kit"
     }
   }
