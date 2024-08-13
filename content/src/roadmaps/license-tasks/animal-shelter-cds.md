@@ -34,7 +34,6 @@ agencyId: nj-consumer-affairs
 
 * New Jersey business address where the CDS will be stored and dispensed (must match your DEA registration address)
 * DEA registration number(s), if applicable
-*  `Business structure|business-structure-learn-more` 
 * Name, address, and telephone number of the person who has administrative or managerial responsibility for the registered location
 *  `Registered agent information,|registered-agent` including address and phone number, or the name and address of the New Jersey resident responsible for receiving and handling legal paperwork
 * The name and title of all officers 
@@ -61,6 +60,6 @@ You cannot legally dispense or store sodium pentobarbital and may be subject to 
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A CDS registration certificate, valid for one year.
+A CDS registration certificate sent to your mailing address, valid for 1 year.
 
 :::
