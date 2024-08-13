@@ -18,4 +18,4 @@ Your temporary help service firm registration expires every year.
 
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
-- A renewed temporary help service firm registration valid for one year. It will be sent to your mailing address on file.
+A renewed temporary help service firm registration valid for one year. It will be sent to your mailing address on file.
