@@ -188,7 +188,8 @@
     "VEEVR",
     "WDPF",
     "webflow",
-    "YTTW"
+    "YTTW",
+    "SME"
   ],
   "ignorePaths": [
     "node_modules/**",
