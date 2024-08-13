@@ -14,6 +14,7 @@ divisionPhone: "(973) 504-6370"
 industryId: "home-health-aide"
 licenseCertificationClassification: ""
 summaryDescriptionMd: "You need to register as a health care service firm if you are employing individuals to provide health care, personal care, or companion services in the personal residence of a person with a disability or is age 60 or older."
+licenseName: "Health Care Services"
 ---
 
 ## Application Requirements

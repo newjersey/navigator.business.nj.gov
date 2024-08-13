@@ -25,7 +25,7 @@ const migrate_v136Business_to_v137Business = (business: v136Business): v137Busin
 };
 
 // ---------------- v137 types ----------------
-type v137TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+export type v137TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 type v137OnboardingFormProgress = "UNSTARTED" | "COMPLETED";
 type v137ABExperience = "ExperienceA" | "ExperienceB";
 
@@ -200,12 +200,13 @@ type v137NameAndAddress = {
   zipCode: string;
 };
 
-type v137LicenseData = {
+export type v137LicenseData = {
   nameAndAddress: v137NameAndAddress;
   completedSearch: boolean;
   lastUpdatedISO: string;
   status: v137LicenseStatus;
   items: v137LicenseStatusItem[];
+  expirationISO: string;
 };
 
 type v137Preferences = {
@@ -226,6 +227,16 @@ type v137LicenseStatusItem = {
 };
 
 type v137CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
+
+interface v137LicenseSearchNameAndAddress extends v137LicenseSearchAddress {
+  name: string;
+}
+
+type v137LicenseSearchAddress = {
+  addressLine1: string;
+  addressLine2: string;
+  zipCode: string;
+};
 
 type v137LicenseStatus =
   | "ACTIVE"
@@ -751,6 +762,49 @@ export const generatev137TaxFilingData = (overrides: Partial<v137TaxFilingData>)
     lastUpdatedISO: undefined,
     registeredISO: undefined,
     filings: [],
+    ...overrides,
+  };
+};
+
+export const generatev137LicenseSearchNameAndAddress = (
+  overrides: Partial<v137LicenseSearchNameAndAddress>
+): v137LicenseSearchNameAndAddress => {
+  return {
+    name: `some-name-${randomInt()}`,
+    ...generatev137LicenseSearchAddress({}),
+    ...overrides,
+  };
+};
+
+export const generatev137LicenseSearchAddress = (
+  overrides: Partial<v137LicenseSearchAddress>
+): v137LicenseSearchAddress => {
+  return {
+    addressLine1: `some-address-1-${randomInt()}`,
+    addressLine2: `some-address-2-${randomInt()}`,
+    zipCode: `some-zipcode-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generatev137LicenseStatusItem = (
+  overrides: Partial<v137LicenseStatusItem>
+): v137LicenseStatusItem => {
+  return {
+    title: `some-title-${randomInt()}`,
+    status: "ACTIVE",
+    ...overrides,
+  };
+};
+
+export const generatev137LicenseData = (overrides: Partial<v137LicenseData>): v137LicenseData => {
+  return {
+    nameAndAddress: generatev137LicenseSearchNameAndAddress({}),
+    completedSearch: false,
+    items: [generatev137LicenseStatusItem({})],
+    status: "PENDING",
+    lastUpdatedISO: "some-last-updated-date",
+    expirationISO: "some-expiration-date",
     ...overrides,
   };
 };

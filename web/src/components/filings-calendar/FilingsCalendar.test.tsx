@@ -1,8 +1,9 @@
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { getMergedConfig } from "@/contexts/configContext";
-import { OperateReference } from "@/lib/types/types";
+import { LicenseEventType, OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
+  generateLicenseEvent,
   generateOperateReference,
   publicFilingLegalStructures,
   tradeNameLegalStructures,
@@ -11,22 +12,22 @@ import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-u
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockProfileData } from "@/test/mock/mockUseUserData";
 import {
-  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  LookupIndustryById,
-  OperatingPhases,
-  TaxFilingCalendarEvent,
   defaultDateFormat,
   generateBusiness,
+  generateLicenseDetails,
   generateTaxFilingCalendarEvent,
   generateUserDataForBusiness,
+  OperatingPhases,
   randomInt,
+  TaxFilingCalendarEvent,
 } from "@businessnjgovnavigator/shared";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { OperatingPhaseId, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
 import * as getCurrentDateModule from "@businessnjgovnavigator/shared/dateHelpers";
 import {
   generateLicenseData,
@@ -36,7 +37,7 @@ import {
   randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
-import { ThemeProvider, createTheme, useMediaQuery } from "@mui/material";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import dayjs, { Dayjs } from "dayjs";
 
@@ -82,12 +83,13 @@ const Config = getMergedConfig();
 
 const renderFilingsCalendar = (
   operateReferences: Record<string, OperateReference>,
-  business: Business
+  business: Business,
+  licenseEvents?: LicenseEventType[]
 ): void => {
   render(
     <ThemeProvider theme={createTheme()}>
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
-        <FilingsCalendar operateReferences={operateReferences} />
+        <FilingsCalendar operateReferences={operateReferences} licenseEvents={licenseEvents ?? []} />
       </WithStatefulUserData>
     </ThemeProvider>
   );
@@ -493,16 +495,23 @@ describe("<FilingsCalendar />", () => {
   it("displays filings calendar as list with license events", () => {
     const expirationDate = getAprilDateOfThisYear().add(2, "months");
 
+    const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
+    const licenseEvents = [generateLicenseEvent({ licenseName })];
     const business = generateBusiness({
       profileData: generateProfileData({
-        industryId: "home-contractor",
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
             return obj.displayCalendarType === "LIST";
           })
         ).id,
       }),
-      licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString() }),
+      licenseData: generateLicenseData({
+        licenses: {
+          [licenseName]: generateLicenseDetails({
+            expirationDateISO: expirationDate.toISOString(),
+          }),
+        },
+      }),
       taxFilingData: generateTaxFilingData({
         filings: [
           generateTaxFilingCalendarEvent({
@@ -522,14 +531,11 @@ describe("<FilingsCalendar />", () => {
       },
     };
 
-    renderFilingsCalendar(operateReferences, business);
+    renderFilingsCalendar(operateReferences, business, licenseEvents);
 
     expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
     expect(screen.getByText(expirationDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
-    const expectedName = `${LookupIndustryById("home-contractor").licenseType} ${
-      Config.licenseEventDefaults.expirationTitleLabel
-    }`;
-    expect(screen.getByText(expectedName)).toBeInTheDocument();
+    expect(screen.getByText(licenseEvents[0].expirationEventDisplayName)).toBeInTheDocument();
   });
 
   it("sends analytics when feedback modal link is clicked", () => {

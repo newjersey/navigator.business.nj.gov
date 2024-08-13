@@ -64,7 +64,6 @@
   "isEnabled": true,
   "additionalSearchTerms": "caregiver, care services, health care service firm, health care service",
   "id": "home-health-aide",
-  "licenseType": "Health Care Services",
   "description": "A business staffing licensed personnel to provide home health care services",
   "webflowId": "656a13624020a38de9cbd8eb"
 }

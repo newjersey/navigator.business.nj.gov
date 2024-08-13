@@ -9,7 +9,7 @@ const healthCheckEndPoints: Record<string, string> = {
   elevator: "dynamics/elevator",
   fireSafety: "dynamics/fire-safety",
   housing: "dynamics/housing",
-  dynamicsLicenseStatus: "dynamics/license-status",
+  rgbDynamicsLicenseStatus: "rgbDynamics/license-status",
   webserviceLicenseStatus: "webservice/license-status",
   webserviceFormation: "webservice/formation",
 };

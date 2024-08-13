@@ -1,5 +1,4 @@
 import { getAnnualFilings } from "@domain/annual-filings/getAnnualFilings";
-import { industryHasALicenseType } from "@domain/license-status/convertIndustryToLicenseType";
 import {
   EncryptionDecryptionClient,
   TimeStampBusinessSearch,
@@ -15,7 +14,7 @@ import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/date
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { createEmptyFormationFormData } from "@shared/formationData";
 import { modifyCurrentBusiness } from "@shared/test";
-import { UserData, createEmptyUserData } from "@shared/userData";
+import { createEmptyUserData, UserData } from "@shared/userData";
 import { Request, Response, Router } from "express";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
@@ -55,13 +54,17 @@ const clearTaskItemChecklists = (userData: UserData): UserData => {
   }));
 };
 
-const shouldCheckLicense = (userData: UserData): boolean => {
-  const currentBusiness = getCurrentBusiness(userData);
-  return (
-    currentBusiness.licenseData !== undefined &&
-    industryHasALicenseType(currentBusiness.profileData.industryId) &&
-    hasBeenMoreThanOneHour(currentBusiness.licenseData.lastUpdatedISO)
-  );
+// TODO: This will be addressed as a part of [#186879778]
+// const shouldCheckLicense = (userData: UserData): boolean => {
+//   const currentBusiness = getCurrentBusiness(userData);
+//   return (
+//     currentBusiness.licenseData !== undefined &&
+//     hasBeenMoreThanOneHour(currentBusiness.licenseData.lastUpdatedISO)
+//   );
+// };
+
+const shouldCheckLicense = (): boolean => {
+  return false;
 };
 
 const shouldUpdateBusinessNameSearch = (userData: UserData): boolean => {
@@ -306,17 +309,21 @@ export const userRouterFactory = (
     }
   };
 
+  // eslint-disable-next-line unicorn/consistent-function-scoping
   const asyncUpdateAndSaveLicenseStatusIfNeeded = async (userData: UserData): Promise<void> => {
     const currentBusinessLicenseData = getCurrentBusiness(userData).licenseData;
-    if (!currentBusinessLicenseData || !shouldCheckLicense(userData)) {
+    if (!currentBusinessLicenseData || !shouldCheckLicense()) {
       return;
     }
-    try {
-      const updatedUserData = await updateLicenseStatus(userData, currentBusinessLicenseData.nameAndAddress);
-      await userDataClient.put(updatedUserData);
-    } catch {
-      return;
-    }
+
+    // TODO: This will be addressed as a part of [#186879778] - remove eslint-disable-next-line
+    // try {
+    //
+    //   const updatedUserData = await updateLicenseStatus(userData, currentBusinessLicenseData.nameAndAddress);
+    //   await userDataClient.put(updatedUserData);
+    // } catch {
+    //   return;
+    // }
   };
 
   return router;

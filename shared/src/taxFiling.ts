@@ -1,3 +1,5 @@
+import { LicenseName } from "./license";
+
 export type TaxFilingLookupState = "SUCCESS" | "FAILED" | "API_ERROR" | "PENDING" | "UNREGISTERED";
 export type TaxFilingOnboardingState = "SUCCESS" | "FAILED" | "API_ERROR";
 export type TaxFilingState = TaxFilingLookupState | TaxFilingOnboardingState;
@@ -32,4 +34,5 @@ export type LicenseEventSubtype = "expiration" | "renewal";
 export interface LicenseCalendarEvent extends CalendarEvent {
   readonly licenseEventSubtype: LicenseEventSubtype;
   readonly calendarEventType: "LICENSE";
+  licenseName: LicenseName;
 }

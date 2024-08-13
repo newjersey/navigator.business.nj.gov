@@ -6,10 +6,10 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setMockUserDataResponse, useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
-  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
@@ -21,7 +21,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
-import { ThemeProvider, createTheme, useMediaQuery } from "@mui/material";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { render, screen, waitFor } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
@@ -71,6 +71,7 @@ describe("dashboard page", () => {
           anytimeActionLinks={[]}
           anytimeActionTasks={[]}
           anytimeActionLicenseReinstatements={[]}
+          licenseEvents={[]}
         />
       </ThemeProvider>
     );
@@ -91,6 +92,7 @@ describe("dashboard page", () => {
             anytimeActionLinks={[]}
             anytimeActionTasks={[]}
             anytimeActionLicenseReinstatements={[]}
+            licenseEvents={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>

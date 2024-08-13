@@ -4,6 +4,7 @@ import {
   AnytimeActionLicenseReinstatement,
   AnytimeActionLink,
   AnytimeActionTask,
+  LicenseEventType,
   OperateReference,
   RoadmapDisplayContent,
   SidebarCardContent,
@@ -25,21 +26,21 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
-  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  OperatingPhases,
   generateBusiness,
   generatePreferences,
   generateProfileData,
   generateTaxFilingData,
   generateUserDataForBusiness,
+  OperatingPhases,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhase, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -80,12 +81,14 @@ describe("<DashboardOnDesktop />", () => {
     anytimeActionLinks,
     anytimeActionTask,
     anytimeActionLicenseReinstatements,
+    licenseEvents,
   }: {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     operateReferences?: Record<string, OperateReference>;
     anytimeActionLinks?: AnytimeActionLink[];
     anytimeActionTask?: AnytimeActionTask[];
     anytimeActionLicenseReinstatements?: AnytimeActionLicenseReinstatement[];
+    licenseEvents?: LicenseEventType[];
   }): void => {
     render(
       <ThemeProvider theme={createTheme()}>
@@ -97,6 +100,7 @@ describe("<DashboardOnDesktop />", () => {
           anytimeActionLinks={anytimeActionLinks ?? []}
           anytimeActionTasks={anytimeActionTask ?? []}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatements ?? []}
+          licenseEvents={licenseEvents ?? []}
         />
       </ThemeProvider>
     );
@@ -116,6 +120,7 @@ describe("<DashboardOnDesktop />", () => {
             anytimeActionLinks={[]}
             anytimeActionTasks={[]}
             anytimeActionLicenseReinstatements={[]}
+            licenseEvents={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>

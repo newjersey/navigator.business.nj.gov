@@ -1,34 +1,38 @@
 import { LicenseTask } from "@/components/tasks/LicenseTask";
+import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
-import { generateTask } from "@/test/factories";
+import { generateLicenseTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
   Business,
+  createEmptyLicenseSearchNameAndAddress,
   generateBusiness,
   generateLicenseData,
   generateLicenseSearchNameAndAddress,
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
+import { generateLicenseDetails, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
 import {
   generateFormationData,
   generateFormationFormData,
   generateFormationSubmitResponse,
   generateLicenseStatusItem,
-  generateUserData,
 } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({ checkLicenseStatus: jest.fn(), getUserData: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
 
+const Config = getMergedConfig();
+
 describe("<LicenseTask />", () => {
-  const task = generateTask({});
+  const task = generateLicenseTask({});
 
   const renderTask = (): void => {
     render(
@@ -55,44 +59,58 @@ describe("<LicenseTask />", () => {
     jest.useFakeTimers();
   });
 
-  it("displays status as an editable tag if user has not completed search", () => {
-    setupStatefulUserDataContext();
-    const business = generateBusiness({
-      taskProgress: { [task.id]: "IN_PROGRESS" },
-      licenseData: generateLicenseData({
-        completedSearch: false,
-      }),
+  describe("task status checkbox", () => {
+    it("task status checkbox is editable when lastUpdatedISO is empty", async () => {
+      setupStatefulUserDataContext();
+      const business = generateBusiness({
+        taskProgress: { [task.id]: "IN_PROGRESS" },
+        licenseData: generateLicenseData(
+          {},
+          { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({ lastUpdatedISO: "" }) }
+        ),
+      });
+      renderTaskWithStatefulData(business);
+      fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
+      await waitFor(() => {
+        expect(screen.getByTestId("COMPLETED")).toBeInTheDocument();
+      });
+      expect(screen.queryByTestId("NOT_STARTED")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("IN_PROGRESS")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("status-info-tooltip")).not.toBeInTheDocument();
     });
-    renderTaskWithStatefulData(business);
 
-    fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
-
-    expect(screen.getByTestId("COMPLETED")).toBeInTheDocument();
-    expect(screen.queryByTestId("NOT_STARTED")).not.toBeInTheDocument();
-    expect(screen.queryByTestId("IN_PROGRESS")).not.toBeInTheDocument();
-    expect(screen.queryByTestId("status-info-tooltip")).not.toBeInTheDocument();
+    it("task status checkbox is not editable when lastUpdatedISO has a value", () => {
+      setupStatefulUserDataContext();
+      const business = generateBusiness({
+        taskProgress: { [task.id]: "IN_PROGRESS" },
+        licenseData: generateLicenseData(
+          {},
+          { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({}) }
+        ),
+      });
+      renderTaskWithStatefulData(business);
+      expect(screen.getByTestId("IN_PROGRESS")).toBeInTheDocument();
+      fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
+      expect(screen.getByTestId("IN_PROGRESS")).toBeInTheDocument();
+      expect(screen.getByTestId("status-info-tooltip")).toBeInTheDocument();
+      expect(screen.queryByTestId("COMPLETED")).not.toBeInTheDocument();
+    });
   });
 
-  it("displays status as not editable if user has completed search", () => {
-    setupStatefulUserDataContext();
-    const business = generateBusiness({
-      taskProgress: { [task.id]: "IN_PROGRESS" },
-      licenseData: generateLicenseData({
-        completedSearch: true,
-      }),
-    });
-    renderTaskWithStatefulData(business);
-    expect(screen.getByTestId("IN_PROGRESS")).toBeInTheDocument();
-    fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
-
-    expect(screen.getByTestId("IN_PROGRESS")).toBeInTheDocument();
-    expect(screen.getByTestId("status-info-tooltip")).toBeInTheDocument();
-    expect(screen.queryByTestId("COMPLETED")).not.toBeInTheDocument();
-  });
-
-  describe("start application tab", () => {
-    it("shows content on first tab", () => {
+  describe("on first tab (content tab)", () => {
+    it("shows content on first tab when license data is undefined", () => {
       useMockBusiness({ licenseData: undefined });
+      renderTask();
+      expect(screen.getByText(task.contentMd)).toBeInTheDocument();
+    });
+
+    it("shows content on first tab when lastUpdatedISO is empty", () => {
+      useMockBusiness({
+        licenseData: generateLicenseData(
+          {},
+          { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({ lastUpdatedISO: "" }) }
+        ),
+      });
       renderTask();
       expect(screen.getByText(task.contentMd)).toBeInTheDocument();
     });
@@ -101,371 +119,546 @@ describe("<LicenseTask />", () => {
       useMockBusiness({ licenseData: undefined });
       renderTask();
       expect(screen.queryByTestId("business-name")).not.toBeInTheDocument();
-
       fireEvent.click(screen.getByTestId("cta-secondary"));
       expect(screen.getByTestId("business-name")).toBeInTheDocument();
     });
 
-    it("starts on check status form tab when it has form data but incomplete search", () => {
+    it("starts on application tab when lastUpdatedISO is empty and visits status tab by clicking secondary button", () => {
       useMockBusiness({
-        licenseData: generateLicenseData({
-          completedSearch: false,
-          nameAndAddress: generateLicenseSearchNameAndAddress({
-            name: "My Cool Nail Salon",
-          }),
-        }),
+        licenseData: generateLicenseData(
+          {},
+          {
+            [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+              nameAndAddress: generateLicenseSearchNameAndAddress({
+                name: "My Cool Nail Salon",
+              }),
+              lastUpdatedISO: "",
+            }),
+          }
+        ),
       });
-
       renderTask();
+      fireEvent.click(screen.getByTestId("cta-secondary"));
       expect(getValue("business-name")).toEqual("My Cool Nail Salon");
     });
 
-    it("goes directly to receipt screen and shows data from licenseData when completed search is true", () => {
-      useMockBusiness({
-        licenseData: generateLicenseData({
-          completedSearch: true,
-          nameAndAddress: generateLicenseSearchNameAndAddress({
-            name: "My Cool Nail Salon",
-          }),
-          status: "ACTIVE",
-        }),
-      });
-
+    it("starts on application tab when no licenseData and visits status tab by clicking second tab button", () => {
+      useMockBusiness({ licenseData: undefined });
       renderTask();
+      expect(screen.queryByTestId("business-name")).not.toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+      expect(screen.getByTestId("business-name")).toBeInTheDocument();
+    });
 
-      expect(screen.getByTestId("permit-ACTIVE")).toBeInTheDocument();
-      expect(mockApi.checkLicenseStatus).not.toHaveBeenCalled();
+    it("starts on application tab when lastUpdatedISO is empty and visits status tab by second tab button", () => {
+      useMockBusiness({
+        licenseData: generateLicenseData(
+          {},
+          {
+            [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+              nameAndAddress: generateLicenseSearchNameAndAddress({
+                name: "My Cool Nail Salon",
+              }),
+              lastUpdatedISO: "",
+            }),
+          }
+        ),
+      });
+      renderTask();
+      fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+      expect(getValue("business-name")).toEqual("My Cool Nail Salon");
     });
   });
 
-  describe("check status tab", () => {
-    it("fills form values from user data if applicable", async () => {
-      useMockBusiness({
-        licenseData: generateLicenseData({
-          nameAndAddress: generateLicenseSearchNameAndAddress({
-            name: "Applebees",
-            addressLine1: "123 Main St",
-            addressLine2: "Apt 1",
-            zipCode: "12345",
+  describe("on second tab (search tab)", () => {
+    describe("auto fill address values", () => {
+      it("auto fills name and address values from license details in user data", async () => {
+        useMockBusiness({
+          licenseData: generateLicenseData(
+            {},
+            {
+              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                nameAndAddress: generateLicenseSearchNameAndAddress({
+                  name: "Applebees",
+                  addressLine1: "123 Main St",
+                  addressLine2: "Apt 1",
+                  zipCode: "12345",
+                }),
+                lastUpdatedISO: "",
+              }),
+            }
+          ),
+        });
+        renderTask();
+        fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+
+        await waitFor(() => {
+          expect(getValue("business-name")).toEqual("Applebees");
+        });
+        expect(getValue("address-1")).toEqual("123 Main St");
+        expect(getValue("address-2")).toEqual("Apt 1");
+        expect(getValue("zipcode")).toEqual("12345");
+      });
+
+      it("pre-populates form values from formation data when no licenseData and formation is successful", async () => {
+        useMockBusiness({
+          licenseData: undefined,
+          formationData: generateFormationData({
+            formationResponse: generateFormationSubmitResponse({
+              success: true,
+            }),
+            formationFormData: generateFormationFormData({
+              businessName: "Apple Pies Rock",
+              addressLine1: "327 Bakery Lane",
+              addressLine2: "Suite E",
+              addressZipCode: "12345",
+            }),
           }),
-          completedSearch: false,
-        }),
+        });
+        renderTask();
+        fireEvent.click(screen.getByTestId("cta-secondary"));
+
+        await waitFor(() => {
+          expect(getValue("business-name")).toEqual("Apple Pies Rock");
+        });
+        expect(getValue("address-1")).toEqual("327 Bakery Lane");
+        expect(getValue("address-2")).toEqual("Suite E");
+        expect(getValue("zipcode")).toEqual("12345");
       });
-      renderTask();
-      await waitFor(() => {
-        expect(getValue("business-name")).toEqual("Applebees");
+
+      it("pre-populates form values from formation data when lastUpdatedISO in licenseData is empty and name and address fields are empty and formation is successful", async () => {
+        useMockBusiness({
+          licenseData: generateLicenseData(
+            {},
+            {
+              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                lastUpdatedISO: "",
+                nameAndAddress: createEmptyLicenseSearchNameAndAddress(),
+              }),
+            }
+          ),
+          formationData: generateFormationData({
+            formationResponse: generateFormationSubmitResponse({
+              success: true,
+            }),
+            formationFormData: generateFormationFormData({
+              businessName: "Apple Pies Rock",
+              addressLine1: "327 Bakery Lane",
+              addressLine2: "Suite E",
+              addressZipCode: "12345",
+            }),
+          }),
+        });
+        renderTask();
+        fireEvent.click(screen.getByTestId("cta-secondary"));
+
+        await waitFor(() => {
+          expect(getValue("business-name")).toEqual("Apple Pies Rock");
+        });
+        expect(getValue("address-1")).toEqual("327 Bakery Lane");
+        expect(getValue("address-2")).toEqual("Suite E");
+        expect(getValue("zipcode")).toEqual("12345");
       });
-      expect(getValue("address-1")).toEqual("123 Main St");
-      expect(getValue("address-2")).toEqual("Apt 1");
-      expect(getValue("zipcode")).toEqual("12345");
+
+      it("auto fills business name from profile data when no licenseData and formation response is not successful", async () => {
+        useMockBusiness({
+          profileData: generateProfileData({
+            businessName: "Applebees",
+          }),
+          licenseData: undefined,
+          formationData: generateFormationData({
+            formationResponse: generateFormationSubmitResponse({
+              success: false,
+            }),
+          }),
+        });
+
+        renderTask();
+        fireEvent.click(screen.getByTestId("cta-secondary"));
+        await waitFor(() => {
+          expect(getValue("business-name")).toEqual("Applebees");
+        });
+        expect(getValue("address-1")).toEqual("");
+        expect(getValue("address-2")).toEqual("");
+        expect(getValue("zipcode")).toEqual("");
+      });
+
+      it("auto fills business name from profile data when lastUpdatedISO in licenseData is empty and name and address fields are empty and formation response is not successful", async () => {
+        useMockBusiness({
+          profileData: generateProfileData({
+            businessName: "Applebees",
+          }),
+          licenseData: generateLicenseData(
+            {},
+            {
+              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                lastUpdatedISO: "",
+                nameAndAddress: createEmptyLicenseSearchNameAndAddress(),
+              }),
+            }
+          ),
+          formationData: generateFormationData({
+            formationResponse: generateFormationSubmitResponse({
+              success: false,
+            }),
+          }),
+        });
+
+        renderTask();
+        fireEvent.click(screen.getByTestId("cta-secondary"));
+        await waitFor(() => {
+          expect(getValue("business-name")).toEqual("Applebees");
+        });
+        expect(getValue("address-1")).toEqual("");
+        expect(getValue("address-2")).toEqual("");
+        expect(getValue("zipcode")).toEqual("");
+      });
     });
 
-    it("fills name from user data when no licenseData", async () => {
-      useMockBusiness({
-        profileData: generateProfileData({
-          businessName: "Applebees",
-        }),
-        licenseData: undefined,
+    describe("license search", () => {
+      it("goes directly to license detail receipt screen and shows data from licenseData when lastUpdatedISO is a non empty string", () => {
+        useMockBusiness({
+          taskProgress: { [task.id]: "COMPLETED" },
+          licenseData: generateLicenseData(
+            {},
+            {
+              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                licenseStatus: "ACTIVE",
+                lastUpdatedISO: "not empty string",
+              }),
+            }
+          ),
+        });
+        renderTask();
+
+        expect(screen.getByTestId("permit-ACTIVE")).toBeInTheDocument();
+        expect(mockApi.checkLicenseStatus).not.toHaveBeenCalled();
       });
 
-      renderTask();
-      fireEvent.click(screen.getByTestId("cta-secondary"));
-      await waitFor(() => {
-        expect(getValue("business-name")).toEqual("Applebees");
-      });
-      expect(getValue("address-1")).toEqual("");
-      expect(getValue("address-2")).toEqual("");
-      expect(getValue("zipcode")).toEqual("");
-    });
-
-    it("fills and saves form values and submits license status search with industry", async () => {
-      act(() => {
+      it("submits license status search with name, address and task id", async () => {
         mockApi.checkLicenseStatus.mockResolvedValue(
           generateUserDataForBusiness(
             generateBusiness({
-              licenseData: generateLicenseData({
-                status: "DRAFT",
-              }),
+              licenseData: generateLicenseData(
+                {},
+                {
+                  [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                    licenseStatus: "DRAFT",
+                  }),
+                }
+              ),
             })
           )
         );
-      });
-      renderTask();
 
-      fillText("business-name", "My Cool Nail Salon");
-      fillText("address-1", "123 Main St");
-      fillText("address-2", "Suite 1");
-      fillText("zipcode", "12345");
+        setupStatefulUserDataContext();
+        const business = generateBusiness({
+          taskProgress: { [task.id]: "IN_PROGRESS" },
+          licenseData: generateLicenseData(
+            {},
+            { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({ lastUpdatedISO: "" }) }
+          ),
+        });
+        renderTaskWithStatefulData(business);
 
-      fireEvent.submit(screen.getByTestId("check-status-submit"));
-      await waitFor(() => {
-        expect(screen.getByText("Draft")).toBeInTheDocument();
-      });
-      expect(mockApi.checkLicenseStatus).toHaveBeenCalledWith({
-        name: "My Cool Nail Salon",
-        addressLine1: "123 Main St",
-        addressLine2: "Suite 1",
-        zipCode: "12345",
-      });
-    });
-
-    it("displays error alert when license status cannot be found", async () => {
-      renderTask();
-      expect(screen.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
-      mockApi.checkLicenseStatus.mockRejectedValue(404);
-      fireEvent.submit(screen.getByTestId("check-status-submit"));
-      await waitFor(() => {
-        expect(screen.getByTestId("error-alert-NOT_FOUND")).toBeInTheDocument();
-      });
-    });
-
-    it("does not display error alert when license status is found", async () => {
-      renderTask();
-      mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
-      fireEvent.submit(screen.getByTestId("check-status-submit"));
-
-      await waitFor(() => {
-        expect(screen.getByText("Pending")).toBeInTheDocument();
-      });
-      expect(screen.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
-    });
-
-    it("pre-populates form values from formation data when no licenseData and formation is successful", async () => {
-      useMockBusiness({
-        licenseData: undefined,
-        formationData: generateFormationData({
-          formationResponse: generateFormationSubmitResponse({
-            success: true,
-          }),
-          formationFormData: generateFormationFormData({
-            businessName: "Apple Pies Rock",
-            addressLine1: "327 Bakery Lane",
-            addressLine2: "Suite E",
-            addressZipCode: "12345",
-          }),
-        }),
-      });
-      renderTask();
-      fireEvent.click(screen.getByTestId("cta-secondary"));
-
-      await waitFor(() => {
-        expect(getValue("business-name")).toEqual("Apple Pies Rock");
-      });
-      expect(getValue("address-1")).toEqual("327 Bakery Lane");
-      expect(getValue("address-2")).toEqual("Suite E");
-      expect(getValue("zipcode")).toEqual("12345");
-    });
-  });
-
-  it("displays error alert when license status search fails", async () => {
-    renderTask();
-    expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
-
-    mockApi.checkLicenseStatus.mockRejectedValue(500);
-    fireEvent.submit(screen.getByTestId("check-status-submit"));
-    await waitFor(() => {
-      expect(screen.getByTestId("error-alert-SEARCH_FAILED")).toBeInTheDocument();
-    });
-  });
-
-  it("does not display an error alert when license status search passes", async () => {
-    renderTask();
-
-    mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
-    fireEvent.submit(screen.getByTestId("check-status-submit"));
-    await waitFor(() => {
-      expect(screen.getByText("Pending")).toBeInTheDocument();
-    });
-    expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
-  });
-
-  it("displays error alert when some information is missing", async () => {
-    renderTask();
-    expect(screen.queryByTestId("error-alert-FIELDS_REQUIRED")).not.toBeInTheDocument();
-
-    fillText("business-name", "");
-    fireEvent.submit(screen.getByTestId("check-status-submit"));
-    await waitFor(() => {
-      expect(screen.getByTestId("error-alert-FIELDS_REQUIRED")).toBeInTheDocument();
-    });
-    expect(mockApi.checkLicenseStatus).not.toHaveBeenCalled();
-  });
-
-  it("does not display an error alert when information is complete", async () => {
-    renderTask();
-    fillText("business-name", "something");
-    mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
-    fireEvent.submit(screen.getByTestId("check-status-submit"));
-    await waitFor(() => {
-      expect(screen.getByText("Pending")).toBeInTheDocument();
-    });
-    expect(mockApi.checkLicenseStatus).toHaveBeenCalled();
-  });
-
-  it("displays the loading spinner while request is being made", async () => {
-    const returnedPromise = Promise.resolve(generateUserData({}));
-    mockApi.checkLicenseStatus.mockReturnValue(returnedPromise);
-    renderTask();
-
-    fillText("business-name", "My Cool Nail Salon");
-    fillText("address-1", "123 Main St");
-    fillText("zipcode", "12345");
-
-    expect(screen.queryByTestId("loading-spinner")).not.toBeInTheDocument();
-
-    fireEvent.submit(screen.getByTestId("check-status-submit"));
-    expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
-
-    await waitFor(() => {
-      expect(screen.queryByTestId("loading-spinner")).not.toBeInTheDocument();
-    });
-  });
-
-  it("displays the loading spinner while failed request is being made", async () => {
-    const returnedPromise = Promise.reject(404);
-    mockApi.checkLicenseStatus.mockReturnValue(returnedPromise);
-    renderTask();
-
-    fillText("business-name", "My Cool Nail Salon");
-    fillText("address-1", "123 Main St");
-    fillText("zipcode", "12345");
-
-    expect(screen.queryByTestId("loading-spinner")).not.toBeInTheDocument();
-
-    fireEvent.submit(screen.getByTestId("check-status-submit"));
-    expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
-    await act(() => {
-      return returnedPromise.catch(() => {});
-    });
-    expect(screen.queryByTestId("loading-spinner")).not.toBeInTheDocument();
-  });
-
-  describe("receipt screen", () => {
-    it("displays license status results when it is found", async () => {
-      renderTask();
-
-      mockApi.checkLicenseStatus.mockResolvedValue(
-        generateUserDataForBusiness(
-          generateBusiness({
-            licenseData: generateLicenseData({
-              items: [
-                generateLicenseStatusItem({ title: "application fee", status: "PENDING" }),
-                generateLicenseStatusItem({ title: "board approval", status: "ACTIVE" }),
-              ],
-            }),
-          })
-        )
-      );
-
-      fireEvent.submit(screen.getByTestId("check-status-submit"));
-      await waitFor(() => {
-        expect(screen.getByText("application fee")).toBeInTheDocument();
-      });
-      expect(screen.getByText("board approval")).toBeInTheDocument();
-      expect(screen.getByTestId("permit-PENDING")).toBeInTheDocument();
-      expect(screen.getByTestId("item-PENDING")).toBeInTheDocument();
-      expect(screen.getByTestId("item-ACTIVE")).toBeInTheDocument();
-    });
-
-    it("displays name and address on receipt screen", () => {
-      useMockBusiness({
-        licenseData: generateLicenseData({
-          completedSearch: true,
-          nameAndAddress: generateLicenseSearchNameAndAddress({
+        fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+        fillText("business-name", "My Cool Nail Salon");
+        fillText("address-1", "123 Main St");
+        fillText("address-2", "Suite 1");
+        fillText("zipcode", "12345");
+        fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await waitFor(() => {
+          expect(screen.getByText("Draft")).toBeInTheDocument();
+        });
+        expect(mockApi.checkLicenseStatus).toHaveBeenCalledWith(
+          {
             name: "My Cool Nail Salon",
             addressLine1: "123 Main St",
             addressLine2: "Suite 1",
             zipCode: "12345",
+          },
+          task.id
+        );
+      });
+    });
+
+    describe("error alert", () => {
+      it("does not display error alerts (NOT_FOUND, FIELDS_REQUIRED, and SEARCH_FAILED) when license status is found", async () => {
+        useMockBusiness({
+          profileData: generateProfileData({ businessName: "" }),
+          licenseData: generateLicenseData(
+            {},
+            {
+              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                lastUpdatedISO: "",
+                nameAndAddress: createEmptyLicenseSearchNameAndAddress(),
+              }),
+            }
+          ),
+          formationData: generateFormationData({
+            formationResponse: generateFormationSubmitResponse({
+              success: false,
+            }),
           }),
-        }),
+        });
+
+        mockApi.checkLicenseStatus.mockResolvedValue(
+          generateUserDataForBusiness(
+            generateBusiness({
+              licenseData: generateLicenseData(
+                {},
+                {
+                  [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                    licenseStatus: "PENDING",
+                    nameAndAddress: generateLicenseSearchNameAndAddress({
+                      name: "Applebees",
+                      addressLine1: "123 Main St",
+                      addressLine2: "Apt 1",
+                      zipCode: "12345",
+                    }),
+                  }),
+                }
+              ),
+            })
+          )
+        );
+        renderTask();
+        fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+        fillText("business-name", "My Cool Nail Salon");
+        fillText("address-1", "123 Main St");
+        fillText("address-2", "Suite 1");
+        fillText("zipcode", "12345");
+        fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await waitFor(() => {
+          expect(screen.getByTestId("licenseDetailReceipt")).toBeInTheDocument();
+        });
+        expect(screen.getByText("Pending")).toBeInTheDocument();
+        expect(screen.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("error-alert-FIELDS_REQUIRED")).not.toBeInTheDocument();
       });
 
-      renderTask();
-
-      expect(screen.getByText("My Cool Nail Salon".toUpperCase())).toBeInTheDocument();
-      expect(screen.getByText("123 Main St Suite 1, 12345 NJ")).toBeInTheDocument();
-    });
-
-    it("edits info on receipt screen", async () => {
-      renderTask();
-
-      fillText("business-name", "Some business");
-      mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
-
-      fireEvent.submit(screen.getByTestId("check-status-submit"));
-      await waitFor(() => {
-        expect(screen.getByTestId("edit-button")).toBeInTheDocument();
+      it("displays NOT_FOUND error alert when license status cannot be found", async () => {
+        useMockBusiness({
+          licenseData: generateLicenseData(
+            {},
+            {
+              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                lastUpdatedISO: "",
+              }),
+            }
+          ),
+        });
+        renderTask();
+        fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+        expect(screen.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
+        mockApi.checkLicenseStatus.mockResolvedValue(
+          generateUserDataForBusiness(
+            generateBusiness({
+              licenseData: generateLicenseData(
+                {},
+                {
+                  [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                    licenseStatus: "UNKNOWN",
+                    hasError: true,
+                  }),
+                }
+              ),
+            })
+          )
+        );
+        fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await waitFor(() => {
+          expect(screen.getByTestId("error-alert-NOT_FOUND")).toBeInTheDocument();
+        });
       });
-      fireEvent.click(screen.getByTestId("edit-button"));
-      fillText("business-name", "Some Other Business");
+
+      it("displays SEARCH_FAILED error alert when license status search fails", async () => {
+        useMockBusiness({
+          licenseData: generateLicenseData(
+            {},
+            {
+              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                lastUpdatedISO: "",
+              }),
+            }
+          ),
+        });
+        renderTask();
+        fireEvent.click(screen.getByTestId("cta-secondary"));
+        mockApi.checkLicenseStatus.mockRejectedValue(500);
+        expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
+        fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await waitFor(() => {
+          expect(screen.getByTestId("error-alert-SEARCH_FAILED")).toBeInTheDocument();
+        });
+      });
+
+      it("displays FIELDS_REQUIRED error alert when some information is missing", async () => {
+        useMockBusiness({
+          licenseData: generateLicenseData(
+            {},
+            {
+              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                lastUpdatedISO: "",
+                nameAndAddress: createEmptyLicenseSearchNameAndAddress(),
+              }),
+            }
+          ),
+        });
+        renderTask();
+        fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+        expect(screen.queryByTestId("error-alert-FIELDS_REQUIRED")).not.toBeInTheDocument();
+        fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await waitFor(() => {
+          expect(screen.getByTestId("error-alert-FIELDS_REQUIRED")).toBeInTheDocument();
+        });
+        expect(mockApi.checkLicenseStatus).not.toHaveBeenCalled();
+      });
     });
 
-    it("displays Active when permit status is ACTIVE", async () => {
-      renderTask();
+    describe("receipt screen", () => {
+      it("displays license status results when it is found", async () => {
+        useMockBusiness({
+          licenseData: generateLicenseData(
+            {},
+            {
+              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                lastUpdatedISO: "",
+              }),
+            }
+          ),
+        });
+        mockApi.checkLicenseStatus.mockResolvedValue(
+          generateUserDataForBusiness(
+            generateBusiness({
+              licenseData: generateLicenseData(
+                {},
+                {
+                  [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                    licenseStatus: "PENDING",
+                    checklistItems: [
+                      generateLicenseStatusItem({ title: "application fee", status: "PENDING" }),
+                      generateLicenseStatusItem({ title: "board approval", status: "ACTIVE" }),
+                    ],
+                  }),
+                }
+              ),
+            })
+          )
+        );
+        renderTask();
+        fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+        await waitFor(() => {
+          expect(screen.getByTestId("check-status-submit")).toBeInTheDocument();
+        });
+        fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await waitFor(() => {
+          expect(screen.getByText("application fee")).toBeInTheDocument();
+        });
+        expect(screen.getByText("board approval")).toBeInTheDocument();
+        expect(screen.getByTestId("permit-PENDING")).toBeInTheDocument();
+        expect(screen.getByTestId("item-PENDING")).toBeInTheDocument();
+        expect(screen.getByTestId("item-ACTIVE")).toBeInTheDocument();
+      });
 
-      mockApi.checkLicenseStatus.mockResolvedValue(
-        generateUserDataForBusiness(
-          generateBusiness({
-            licenseData: generateLicenseData({
-              status: "ACTIVE",
-              items: [generateLicenseStatusItem({ title: "application fee", status: "ACTIVE" })],
-            }),
-          })
-        )
-      );
+      it("displays name and address on receipt screen", () => {
+        useMockBusiness({
+          licenseData: generateLicenseData(
+            {},
+            {
+              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                nameAndAddress: generateLicenseSearchNameAndAddress({
+                  name: "My Cool Nail Salon",
+                  addressLine1: "123 Main St",
+                  addressLine2: "Suite 1",
+                  zipCode: "12345",
+                }),
+              }),
+            }
+          ),
+        });
+        renderTask();
+        fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
+        expect(screen.getByText("My Cool Nail Salon".toUpperCase())).toBeInTheDocument();
+        expect(screen.getByText("123 Main St Suite 1, 12345 NJ")).toBeInTheDocument();
+      });
+    });
 
-      fireEvent.submit(screen.getByTestId("check-status-submit"));
-      await waitFor(() => {
+    describe("edit button", () => {
+      it("displays check license status screen when edit button is clicked on receipt screen", () => {
+        useMockBusiness({
+          licenseData: generateLicenseData(
+            {},
+            {
+              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({}),
+            }
+          ),
+        });
+
+        renderTask();
+        fireEvent.click(screen.getByTestId("edit-button"));
+        expect(screen.getByTestId("business-name")).toBeInTheDocument();
+      });
+    });
+
+    describe("permit status", () => {
+      it("displays Active when permit status is ACTIVE", async () => {
+        useMockBusiness({
+          licenseData: generateLicenseData(
+            {},
+            {
+              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                licenseStatus: "ACTIVE",
+                checklistItems: [generateLicenseStatusItem({ title: "application fee", status: "ACTIVE" })],
+              }),
+            }
+          ),
+        });
+        renderTask();
         expect(screen.getByText("application fee")).toBeInTheDocument();
+        expect(screen.getByTestId("item-ACTIVE")).toBeInTheDocument();
+        expect(screen.getByText("Active")).toBeInTheDocument();
       });
-      expect(screen.getByTestId("item-ACTIVE")).toBeInTheDocument();
-      expect(screen.getByText("Active")).toBeInTheDocument();
-    });
 
-    it("displays Pending when permit status is PENDING", async () => {
-      renderTask();
+      it("displays Active when permit status is PENDING", async () => {
+        useMockBusiness({
+          licenseData: generateLicenseData(
+            {},
+            {
+              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                licenseStatus: "PENDING",
+                checklistItems: [generateLicenseStatusItem({ title: "Application", status: "PENDING" })],
+              }),
+            }
+          ),
+        });
+        renderTask();
 
-      mockApi.checkLicenseStatus.mockResolvedValue(
-        generateUserDataForBusiness(
-          generateBusiness({
-            licenseData: generateLicenseData({
-              status: "PENDING",
-              items: [generateLicenseStatusItem({ title: "Application", status: "PENDING" })],
-            }),
-          })
-        )
-      );
-
-      fireEvent.submit(screen.getByTestId("check-status-submit"));
-      await waitFor(() => {
         expect(screen.getByText("Application")).toBeInTheDocument();
+        expect(screen.getByTestId("item-PENDING")).toBeInTheDocument();
+
+        const permitStatusElement = screen.getAllByText("Pending")[0] as HTMLElement;
+        expect(permitStatusElement).toHaveTextContent("Pending");
       });
-      expect(screen.getByTestId("item-PENDING")).toBeInTheDocument();
 
-      const permitStatusElement = screen.getAllByText("Pending")[0] as HTMLElement;
-      expect(permitStatusElement).toHaveTextContent("Pending");
-    });
-
-    it("displays Expired when permit status is EXPIRED", async () => {
-      renderTask();
-
-      mockApi.checkLicenseStatus.mockResolvedValue(
-        generateUserDataForBusiness(
-          generateBusiness({
-            licenseData: generateLicenseData({
-              status: "EXPIRED",
-              items: [generateLicenseStatusItem({ title: "application", status: "ACTIVE" })],
-            }),
-          })
-        )
-      );
-
-      fireEvent.submit(screen.getByTestId("check-status-submit"));
-      await waitFor(() => {
-        expect(screen.getByText("application")).toBeInTheDocument();
+      it("displays Active when permit status is EXPIRED", async () => {
+        useMockBusiness({
+          licenseData: generateLicenseData(
+            {},
+            {
+              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                licenseStatus: "EXPIRED",
+                checklistItems: [generateLicenseStatusItem({ title: "application fee", status: "ACTIVE" })],
+              }),
+            }
+          ),
+        });
+        renderTask();
+        expect(screen.getByText("application fee")).toBeInTheDocument();
+        expect(screen.getByTestId("item-ACTIVE")).toBeInTheDocument();
+        expect(screen.getByText("Expired")).toBeInTheDocument();
       });
-      expect(screen.getByTestId("item-ACTIVE")).toBeInTheDocument();
-      expect(screen.getByText("Expired")).toBeInTheDocument();
     });
   });
 

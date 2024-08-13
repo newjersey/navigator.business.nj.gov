@@ -38,4 +38,10 @@ describe("Industry Tests", () => {
       expect(isIndustryIdGeneric(LookupIndustryById("restaurant"))).toBe(false);
     });
   });
+
+  describe("dev industry", () => {
+    it("should always be disabled", () => {
+      expect(LookupIndustryById("demo-only").isEnabled).toBe(false);
+    });
+  });
 });
