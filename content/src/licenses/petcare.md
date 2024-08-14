@@ -10,6 +10,8 @@ summaryDescriptionMd: You can renew your license 60 days before it expires and
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 callToActionText: Renew My Animal Shelter’s CDS Registration
 ---
+The New Jersey Drug Control Unit (DCU) will send a renewal notice to your mailing address about 75 days before your CDS registration expires.
+
 ## Application Requirements
 
 * U.S. Drug Enforcement Administration (DEA) registration number
