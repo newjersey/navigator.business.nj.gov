@@ -46,10 +46,10 @@
   "name": "Lodging",
   "nonEssentialQuestionsIds": [
     "hotel-register",
+    "rooming-boarding-house-owner",
     "hotel-food",
     "hotel-liquor",
-    "weights-measures",
-    "rooming-boarding-house-owner"
+    "weights-measures"
   ],
   "displayname": "lodging",
   "industryOnboardingQuestions": {
