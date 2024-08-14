@@ -200,13 +200,13 @@ describe("<LicenseTask />", () => {
         expect(getValue("zipcode")).toEqual("12345");
       });
 
-      it("pre-populates form values from formation data when no licenseData and formation is successful", async () => {
+      it("auto fills form values using information provided in the Business Profile when no licenseData", async () => {
         useMockBusiness({
+          profileData: generateProfileData({
+            businessName: "I don't like Apple Pie",
+          }),
           licenseData: undefined,
           formationData: generateFormationData({
-            formationResponse: generateFormationSubmitResponse({
-              success: true,
-            }),
             formationFormData: generateFormationFormData({
               businessName: "Apple Pies Rock",
               addressLine1: "327 Bakery Lane",
@@ -219,14 +219,14 @@ describe("<LicenseTask />", () => {
         fireEvent.click(screen.getByTestId("cta-secondary"));
 
         await waitFor(() => {
-          expect(getValue("business-name")).toEqual("Apple Pies Rock");
+          expect(getValue("business-name")).toEqual("I don't like Apple Pie");
         });
         expect(getValue("address-1")).toEqual("327 Bakery Lane");
         expect(getValue("address-2")).toEqual("Suite E");
         expect(getValue("zipcode")).toEqual("12345");
       });
 
-      it("pre-populates form values from formation data when lastUpdatedISO in licenseData is empty and name and address fields are empty and formation is successful", async () => {
+      it("pre-populates form values from formation data when lastUpdatedISO in licenseData is empty and name and address fields are empty", async () => {
         useMockBusiness({
           licenseData: generateLicenseData(
             {},
@@ -237,12 +237,11 @@ describe("<LicenseTask />", () => {
               }),
             }
           ),
+          profileData: generateProfileData({
+            businessName: "Apple Pies Rock",
+          }),
           formationData: generateFormationData({
-            formationResponse: generateFormationSubmitResponse({
-              success: true,
-            }),
             formationFormData: generateFormationFormData({
-              businessName: "Apple Pies Rock",
               addressLine1: "327 Bakery Lane",
               addressLine2: "Suite E",
               addressZipCode: "12345",
@@ -260,15 +259,15 @@ describe("<LicenseTask />", () => {
         expect(getValue("zipcode")).toEqual("12345");
       });
 
-      it("auto fills business name from profile data when no licenseData and formation response is not successful", async () => {
+      it("auto fills business name from profile data when no licenseData and incomplete formation address", async () => {
         useMockBusiness({
           profileData: generateProfileData({
             businessName: "Applebees",
           }),
           licenseData: undefined,
           formationData: generateFormationData({
-            formationResponse: generateFormationSubmitResponse({
-              success: false,
+            formationFormData: generateFormationFormData({
+              addressLine1: "",
             }),
           }),
         });
@@ -283,7 +282,7 @@ describe("<LicenseTask />", () => {
         expect(getValue("zipcode")).toEqual("");
       });
 
-      it("auto fills business name from profile data when lastUpdatedISO in licenseData is empty and name and address fields are empty and formation response is not successful", async () => {
+      it("auto fills business name from profile data when lastUpdatedISO in licenseData is empty and name and address fields are empty", async () => {
         useMockBusiness({
           profileData: generateProfileData({
             businessName: "Applebees",
@@ -298,8 +297,10 @@ describe("<LicenseTask />", () => {
             }
           ),
           formationData: generateFormationData({
-            formationResponse: generateFormationSubmitResponse({
-              success: false,
+            formationFormData: generateFormationFormData({
+              addressLine1: "",
+              addressLine2: "",
+              addressZipCode: "",
             }),
           }),
         });
