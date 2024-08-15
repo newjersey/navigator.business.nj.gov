@@ -81,7 +81,7 @@
     }
   ],
   "isEnabled": true,
-  "additionalSearchTerms": "residential rentals, apartment, leasing, house rental",
+  "additionalSearchTerms": "residential rentals, apartment, leasing, house rental, condo rental, airbnb, vrbo, short-term rental",
   "id": "residential-landlord",
   "description": "Owns and rents out property for people to live in",
   "webflowId": "656a13628934eb2330f44bcb"
