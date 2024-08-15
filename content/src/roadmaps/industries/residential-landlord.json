@@ -43,7 +43,7 @@
       "task": "get-insurance"
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 200,
       "task": "residential-lease-agreement"
     },
