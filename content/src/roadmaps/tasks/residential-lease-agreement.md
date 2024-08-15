@@ -22,10 +22,12 @@ id: residential-lease-agreement
 * **Maintenance**: Clearly define the responsibilities of the landlord and tenant
 * **Addendums**: Include addendums for specific situations or agreements not covered in the main lease
 * **Legal disclosures**: Include required disclosures, such as lead paint information 
+* **`Lead-safe certificate|lead-safe-certificate`**: Attach a copy of your lead-safe certificate, if you are required to get one
+
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
-There are certain landlord-tenant laws you must comply with. For more information, see the [Truth-in-Renting Guide](https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf) (en español: [Veracidad en Los Alquileres](https://www.nj.gov/dca/divisions/codes/publications/pdf_lti/t_i_r_spanish.pdf)).
+There are certain landlord-tenant laws you must comply with, such as the Anti-Eviction Act. For more information, see the [Truth-in-Renting Guide](https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf) (en español: [Veracidad en Los Alquileres](https://www.nj.gov/dca/divisions/codes/publications/pdf_lti/t_i_r_spanish.pdf)).
 
 :::
 
