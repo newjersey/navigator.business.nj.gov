@@ -83,7 +83,15 @@ export const contentToStrings = (content) => {
     .use(rehypeStringify, { allowDangerousHtml: true })
     .processSync(content).value;
 
-  const itemsToRemove = ["<blockquote>", "</blockquote>", "<hr>", ":::infoAlert", ":::", /(\[]{.*})/g];
+  const itemsToRemove = [
+    "<blockquote>",
+    "</blockquote>",
+    "<hr>",
+    ":::infoAlert",
+    ":::callout",
+    ":::",
+    /(\[]{.*})/g,
+  ];
   itemsToRemove.map((i) => {
     return (result = result.replaceAll(i, ""));
   });
