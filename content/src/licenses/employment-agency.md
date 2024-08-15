@@ -9,6 +9,7 @@ summaryDescriptionMd: |
 callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-\
   Business-Online-Registration.aspx "
 callToActionText: Renew My Employment Agency and Agent
+aboveLicenseStatusContent: ""
 ---
 
 Your employment agency license and agent license expires every year.

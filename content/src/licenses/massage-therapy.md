@@ -7,6 +7,7 @@ previewType: expiration
 summaryDescriptionMd: "\n"
 callToActionLink: https://newjersey.mylicense.com/eGov/PersonSearchResults.aspx
 callToActionText: Renew My Massage Therapy License
+aboveLicenseStatusContent: ""
 ---
 
 Your massage business license will expire every two years.

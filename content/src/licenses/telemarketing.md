@@ -14,6 +14,7 @@ summaryDescriptionMd: You can renew your license 60 days before it expires and
   licensed services.
 callToActionLink: "https://rgbportal.dca.njoag.gov/"
 callToActionText: Renew My Telemarketing License
+aboveLicenseStatusContent: ""
 ---
 
 ## Application Requirements

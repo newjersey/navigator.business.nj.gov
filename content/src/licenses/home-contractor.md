@@ -10,6 +10,7 @@ previewType: renewal
 summaryDescriptionMd: You can renew your Home Improvement Contractor License online.
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 callToActionText: Renew My HIC Registration
+aboveLicenseStatusContent: ""
 ---
 
 ### Renewal Requirements

@@ -11,6 +11,7 @@ summaryDescriptionMd: If you want to continue operating your health spa, fitness
   club, or gym business, you must renew your health club registration.
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
 callToActionText: Renew My Health Club Registration
+aboveLicenseStatusContent: ""
 ---
 
 ### Renewal Requirements

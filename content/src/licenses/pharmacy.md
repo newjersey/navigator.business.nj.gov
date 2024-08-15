@@ -7,6 +7,7 @@ previewType: renewal
 summaryDescriptionMd: Your pharmacy permit will expire every year.
 callToActionLink: https://www.njconsumeraffairs.gov/renewals/Pages/default.aspx
 callToActionText: Renew My Permit
+aboveLicenseStatusContent: ""
 ---
 
 Your pharmacy permit will expire every year.

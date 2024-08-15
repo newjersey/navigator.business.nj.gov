@@ -238,6 +238,7 @@ export interface AnytimeActionLicenseReinstatement extends AnytimeAction {
   callToActionText: string | undefined;
   form: string | undefined;
   summaryDescriptionMd: string;
+  aboveLicenseStatusContent: string;
 }
 
 export type FundingType =
@@ -430,6 +431,7 @@ export interface Filing {
 }
 
 export interface LicenseEventType {
+  aboveLicenseStatusContent: string;
   renewalEventDisplayName: string;
   expirationEventDisplayName: string;
   filename: string;

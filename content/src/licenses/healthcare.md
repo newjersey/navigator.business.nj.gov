@@ -16,6 +16,7 @@ summaryDescriptionMd: You can renew your license 60 days before it expires and
   licensed services.
 callToActionLink: "https://newjersey.mylicense.com/eGov/Login.aspx "
 callToActionText: "Renew My Dental License "
+aboveLicenseStatusContent: ""
 ---
 
 ## Application Requirements

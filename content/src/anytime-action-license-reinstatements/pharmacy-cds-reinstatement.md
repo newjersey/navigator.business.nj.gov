@@ -10,6 +10,7 @@ name: Reinstate Your Pharmacy’s Controlled Dangerous Substances Registration
 licenseName:
 icon: update-purple.svg
 urlSlug: pharmacy-cds-reinstatement
+aboveLicenseStatusContent: ""
 summaryDescriptionMd: >-
   If your Controlled Dangerous Substances (CDS) registration expired less than
   30 days ago, [you can renew online](https://newjersey.mylicense.com/). If it
@@ -23,16 +24,17 @@ summaryDescriptionMd: >-
 
   3. If your [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) registration is also expired, be sure to reinstate it.
 ---
+
 ## Application Requirements
 
-* Pharmacy permit trade name
-* New Jersey program address where the CDS will be stored, prescribed, compounded, or dispensed (must match your DEA registration address)
-* CDS registration number
-* DEA registration number
-* Name and address of the person who has administrative or managerial responsibility for the registered location
-* Names, titles, and residential addresses of each officer 
-* Signed attestation (included in application)
-* Applicable fees paid, once the DCU has sent an invoice
+- Pharmacy permit trade name
+- New Jersey program address where the CDS will be stored, prescribed, compounded, or dispensed (must match your DEA registration address)
+- CDS registration number
+- DEA registration number
+- Name and address of the person who has administrative or managerial responsibility for the registered location
+- Names, titles, and residential addresses of each officer
+- Signed attestation (included in application)
+- Applicable fees paid, once the DCU has sent an invoice
 
 Your reinstatement application must be signed in front of and by a notary public.
 

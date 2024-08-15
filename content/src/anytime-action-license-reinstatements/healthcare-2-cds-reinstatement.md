@@ -1,6 +1,6 @@
 ---
 notesMd: |-
-  
+
 
   * Updating DEA reinstatement info based on CDS SME's pharmacy cds review
   * Updating copy to match other CDS tasks
@@ -20,17 +20,19 @@ summaryDescriptionMd: >-
   If your [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) is also expired, be sure to reinstate it.
 callToActionText: Reinstate My PA, APN, or CNM CDS Registration
 callToActionLink: https://www.njconsumeraffairs.gov/dcu/Applications/Reinstatement-Application-for-Registration-for-Dispenser-Prescriber-Mid-Level-Practitioner.pdf
+aboveLicenseStatusContent: ""
 ---
+
 ## Application Requirements
 
-* New Jersey business address where the CDS will be stored, prescribed, or dispensed (must match your DEA registration address)
-* Schedule(s) of the CDS
-* Current and active professional license number (Certified Nurse Midwives must include their prescriptive authority suffix)
-* Social Security number
-* CDS registration number
-* DEA registration number
-* Signed attestation (included in application)
-* Applicable fees paid, once the New Jersey Drug Control Unit (DCU) has sent an invoice
+- New Jersey business address where the CDS will be stored, prescribed, or dispensed (must match your DEA registration address)
+- Schedule(s) of the CDS
+- Current and active professional license number (Certified Nurse Midwives must include their prescriptive authority suffix)
+- Social Security number
+- CDS registration number
+- DEA registration number
+- Signed attestation (included in application)
+- Applicable fees paid, once the New Jersey Drug Control Unit (DCU) has sent an invoice
 
 Your reinstatement application must be signed in front of and by a notary public.
 

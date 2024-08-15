@@ -11,6 +11,7 @@ summaryDescriptionMd: You can renew your license 60 days before it expires and
 callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-\
   Business-Online-Registration.aspx "
 callToActionText: " Renew My Consulting Firm/Temporary Help Service Firm"
+aboveLicenseStatusContent: ""
 ---
 
 Your combined consulting firm (headhunter) and temporary help service firm registrations expire annually.

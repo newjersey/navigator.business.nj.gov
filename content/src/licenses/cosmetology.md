@@ -8,6 +8,7 @@ summaryDescriptionMd: Your cosmetology shop license will expire every two years
   on the even-numbered year.
 callToActionLink: https://www.njconsumeraffairs.gov/renewals/Pages/default.aspx
 callToActionText: Renew Shop Registration
+aboveLicenseStatusContent: ""
 ---
 
 Your cosmetology shop license will expire every two years on the even-numbered year.

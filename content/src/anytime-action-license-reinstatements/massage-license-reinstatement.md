@@ -11,6 +11,7 @@ summaryDescriptionMd: You need to reinstate your massage and bodywork business
   online.
 callToActionText: Apply to Reinstate My Massage and Bodywork Business License
 callToActionLink: https://www.njconsumeraffairs.gov/mbt/Pages/applications.aspx
+aboveLicenseStatusContent: ""
 ---
 
 ## Application Requirements

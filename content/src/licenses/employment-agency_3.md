@@ -12,6 +12,7 @@ summaryDescriptionMd: >+
 callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-\
   Business-Online-Registration.aspx "
 callToActionText: Renew My Consulting Firm (Headhunter) Registration
+aboveLicenseStatusContent: ""
 ---
 
 Your consulting firm (headhunter) registration expires every year.

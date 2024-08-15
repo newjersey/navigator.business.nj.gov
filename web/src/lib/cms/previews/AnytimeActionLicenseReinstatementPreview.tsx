@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { AnytimeActionElement } from "@/components/dashboard/anytime-actions/AnytimeActionPage";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
@@ -12,7 +13,11 @@ const AnytimeActionLicenseReinstatementPreview = (props: PreviewProps): ReactEle
   return (
     <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
       <div>This file is mapped to the following license (not enabled if blank):</div>
-      <div className="margin-bottom-10 text-bold">{anytimeAction.licenseName}</div>
+      <div className="margin-top-5">
+        <div>Above License Status Copy - Include Any Horizontal Lines</div>
+        <Content>{anytimeAction.aboveLicenseStatusContent}</Content>
+      </div>
+      <div className="margin-top-10 text-bold">{anytimeAction.licenseName}</div>
       <AnytimeActionElement anytimeAction={anytimeAction} />
     </div>
   );
