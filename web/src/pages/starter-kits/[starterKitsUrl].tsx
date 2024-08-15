@@ -5,7 +5,7 @@ import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Card } from "@/components/starter-kits/Card";
 import { StepInfo } from "@/components/starter-kits/StepInfo";
 import { getMergedConfig } from "@/contexts/configContext";
-import { ROUTES, STARTER_KITS_GENERIC_SLUG } from "@/lib/domain-logic/routes";
+import { STARTER_KITS_GENERIC_SLUG } from "@/lib/domain-logic/routes";
 import { insertIndustryContent, insertRoadmapSteps } from "@/lib/domain-logic/starterKitsContentModifiers";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap, Task } from "@/lib/types/types";
@@ -17,8 +17,7 @@ import {
   createEmptyProfileData,
 } from "@businessnjgovnavigator/shared/index";
 import type { GetStaticPathsResult } from "next";
-import { useRouter } from "next/router";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 
 interface Props {
   noAuth: boolean;
@@ -26,8 +25,14 @@ interface Props {
   industry: Industry;
 }
 
+const industrySpecificStarterKitsLink = (industryId: string): void => {
+  const url = new URL(window.location.toString());
+  url.pathname = "onboarding";
+  url.searchParams.set("industry", industryId);
+  window.location.href = url.toString();
+};
+
 const StarterKitsPage = (props: Props): ReactElement => {
-  const router = useRouter();
   const Config = getMergedConfig();
 
   const getTaskNamesForStep = (tasks: Task[], step: number): string[] => {
@@ -39,11 +44,13 @@ const StarterKitsPage = (props: Props): ReactElement => {
     props.industry.id,
     props.industry.name
   );
+
   const solutionsTitle = insertIndustryContent(
     Config.starterKits.solutions.title,
     props.industry.id,
     props.industry.name
   );
+
   const stepsTitle = insertRoadmapSteps(
     insertIndustryContent(Config.starterKits.steps.title, props.industry.id, props.industry.name),
     String(props.roadmap.steps.length)
@@ -73,7 +80,7 @@ const StarterKitsPage = (props: Props): ReactElement => {
               isColor={"secondary-vivid-dark"}
               onClick={() => {
                 analytics.event.starter_kit_landing.click.start_now_button();
-                router.push(ROUTES.onboarding);
+                industrySpecificStarterKitsLink(props.industry.id);
               }}
               isRightMarginRemoved={true}
               isLargeButton={true}
@@ -118,7 +125,7 @@ const StarterKitsPage = (props: Props): ReactElement => {
               isColor="primary"
               onClick={() => {
                 analytics.event.starter_kit_landing.click.get_my_starter_kit_button();
-                router.push(ROUTES.onboarding);
+                industrySpecificStarterKitsLink(props.industry.id);
               }}
               isRightMarginRemoved={true}
               isLargeButton={true}
@@ -149,7 +156,7 @@ const StarterKitsPage = (props: Props): ReactElement => {
               isColor={"secondary-vivid-dark"}
               onClick={() => {
                 analytics.event.starter_kit_landing.click.get_my_starter_kit_button_footer();
-                router.push(ROUTES.onboarding);
+                industrySpecificStarterKitsLink(props.industry.id);
               }}
               isRightMarginRemoved={true}
               isLargeButton={true}
