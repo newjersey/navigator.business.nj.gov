@@ -43,20 +43,45 @@
       "task": "get-insurance"
     },
     {
+      "step": 3,
+      "weight": 200,
+      "task": "residential-lease-agreement"
+    },
+    {
       "step": 4,
       "weight": 1,
       "task": "search-licenses"
     }
   ],
   "name": "Residential Landlord",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
   "displayname": "residential-landlord",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
     "canBeReseller": false
   },
+  "modifications": [
+    {
+      "taskToReplaceFilename": "evaluate-your-location",
+      "replaceWithFilename": "landlord-location-eval"
+    },
+    {
+      "taskToReplaceFilename": "get-insurance",
+      "replaceWithFilename": "landlord-insurance-policy"
+    },
+    {
+      "taskToReplaceFilename": "check-site-requirements",
+      "replaceWithFilename": "landlord-site-requirements"
+    },
+    {
+      "taskToReplaceFilename": "site-safety-permits",
+      "replaceWithFilename": "landlord-site-safety-permits"
+    }
+  ],
   "isEnabled": true,
-  "additionalSearchTerms": "residential rentals, apartment, leasing, house rental",
+  "additionalSearchTerms": "residential rentals, apartment, leasing, house rental, condo rental, airbnb, vrbo, short-term rental",
   "id": "residential-landlord",
   "description": "Owns and rents out property for people to live in",
   "webflowId": "656a13628934eb2330f44bcb"
