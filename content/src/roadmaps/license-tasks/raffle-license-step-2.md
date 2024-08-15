@@ -1,61 +1,58 @@
 ---
-notesMd: "[2526: Add non-essential question tasks: raffle task
-  screen](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems\
-  /edit/2526)"
-id: raffle-license-step-2
-filename: raffle-license-step-2
-displayname: raffle-license-step-2
-urlSlug: raffle-license-step-2
-name: Apply for a Raffle or Bingo License in the NJ Municipality
-webflowName: Raffle or Bingo NJ Municipal License
-summaryDescriptionMd: After you receive the identification number from the
-  Legalized Games of Chance Control Commission, you must apply for a license in
-  the New Jersey municipality in which the raffle or bingo game is to be held,
-  operated, or conducted. You must submit four copies of this application to the
-  Municipal Clerk’s office in this municipality.
-industryId:
-  - generic
-callToActionText: Get an LGCCC ID Number
-callToActionLink: https://www.njconsumeraffairs.gov/lgccc/Applications/Initial-Affidavit-and-Application-for-Biennial-Registration.pdf
-agencyId: nj-consumer-affairs
+notesMd: "[2526: Add non-essential question tasks: raffle task screen](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/2526)"
+id: "raffle-license-step-2"
+webflowId: "66be3c53bf7d2a8c2bedda6a"
+urlSlug: "raffle-license-step-2"
+name: "Apply for a Raffle or Bingo License in the NJ Municipality"
+webflowName: "Raffle or Bingo NJ Municipal License"
+filename: "raffle-license-step-2"
+callToActionLink: "https://www.njconsumeraffairs.gov/lgccc/Applications/Initial-Affidavit-and-Application-for-Biennial-Registration.pdf"
+callToActionText: "Get an LGCCC ID Number"
+agencyId: "nj-consumer-affairs"
+industryId: "generic"
+licenseCertificationClassification: "undefined"
+summaryDescriptionMd: "After you receive the identification number from the Legalized Games of Chance Control Commission, you must apply for a license in the New Jersey municipality in which the raffle or bingo game is to be held, operated, or conducted. You must submit four copies of this application to the Municipal Clerk’s office in this municipality."
 ---
+
 ## Application Requirements
 
 ### General
 
-* Name of New Jersey municipality
-* Business name
-* Business address (headquarters and mailing address, if different)
-* For raffles, a separate application must be submitted for each type of raffle 
-* Dates and hours for each raffle or bingo game
-* Address where the games will be played
-* Name and address, along with [Form 10, Statement of Landlord](https://www.njconsumeraffairs.gov/lgccc/Applications/Form-10A-Bingo-Statement-of-Landnord.pdf) if the applicant does not own the place where the games will by played
+- Name of New Jersey municipality
+- Business name
+- Business address (headquarters and mailing address, if different)
+- For raffles, a separate application must be submitted for each type of raffle
+- Dates and hours for each raffle or bingo game
+- Address where the games will be played
+- Name and address, along with [Form 10, Statement of Landlord](https://www.njconsumeraffairs.gov/lgccc/Applications/Form-10A-Bingo-Statement-of-Landnord.pdf) if the applicant does not own the place where the games will by played
 
 ### Expenses
 
-* A detailed list of expenses that will be incurred or paid in connection with the games, the names and addresses of the persons to whom each item is to be paid, and the purpose for which each item is to be paid
+- A detailed list of expenses that will be incurred or paid in connection with the games, the names and addresses of the persons to whom each item is to be paid, and the purpose for which each item is to be paid
 
 ### Purpose
-* Details of the purpose(s) for which all the proceeds from the listed games will be used, along with how they will be used for these purposes
-* The signature of the president or other executive officer of any organization receiving part of the net proceeds, if applicable
+
+- Details of the purpose(s) for which all the proceeds from the listed games will be used, along with how they will be used for these purposes
+- The signature of the president or other executive officer of any organization receiving part of the net proceeds, if applicable
 
 ### Prizes
 
-* A detailed list of all prizes and retail value, or cash amount, if applicable, and whether they are to be donated
+- A detailed list of all prizes and retail value, or cash amount, if applicable, and whether they are to be donated
 
 ### Officers
-* Name, address, and age of each officer, director, principal, or representative with an ownership interest
+
+- Name, address, and age of each officer, director, principal, or representative with an ownership interest
 
 ### Members and Organizations
 
-* Name, address, age, and business telephone number of members who will be in charge of the games
-* Name, address, and age of members who will assist in conducting the games
-* Name, address, relationship, and identification number of other organizations whose members will assist in conducting the games
+- Name, address, age, and business telephone number of members who will be in charge of the games
+- Name, address, and age of members who will assist in conducting the games
+- Name, address, relationship, and identification number of other organizations whose members will assist in conducting the games
 
 ### Statements and Attachments
 
-* Signatures in the presence of a notary public
-* An attached sample raffle ticket, if applicable (Examples: [off Premises 50 / 50 raffle awarding cash as a prize](https://www.njconsumeraffairs.gov/lgccc/Applications/Off-Premises-50-50-Raffle-Awarding-Cash-as-a-Prize.pdf), [off premises draw raffle awarding merchandise as a prize](https://www.njconsumeraffairs.gov/lgccc/Applications/Off-Premises-Draw-Raffle-Awarding-Merchandise-as-a-Prize.pdf))
+- Signatures in the presence of a notary public
+- An attached sample raffle ticket, if applicable (Examples: [off Premises 50 / 50 raffle awarding cash as a prize](https://www.njconsumeraffairs.gov/lgccc/Applications/Off-Premises-50-50-Raffle-Awarding-Cash-as-a-Prize.pdf), [off premises draw raffle awarding merchandise as a prize](https://www.njconsumeraffairs.gov/lgccc/Applications/Off-Premises-Draw-Raffle-Awarding-Merchandise-as-a-Prize.pdf))
 
 ## What if I don't get this license?
 
@@ -69,10 +66,10 @@ You may be subject to fines up to $7,500 for a first offense and up to $15,000 f
 
 Within 15 calendar days of a raffle or bingo game, you must file a Report of Operations \[## need link] with the Legalized Games of Chance Control Commission with the following:
 
-* Gross receipts from each game
-* A list of expenses incurred and who they were paid to
-* The net profit from each game and how it was or will be applied
-* A list of the prizes offered or given and the value of each
+- Gross receipts from each game
+- A list of expenses incurred and who they were paid to
+- The net profit from each game and how it was or will be applied
+- A list of the prizes offered or given and the value of each
 
 ### Designated Representative
 

@@ -76,7 +76,7 @@ const getLicenseFromMd = (licenseMd) => {
     if (!value || value.includes("$")) {
       return "";
     }
-    return value;
+    return value.trim();
   };
 
   return [
@@ -94,7 +94,7 @@ const getLicenseFromMd = (licenseMd) => {
       "primary-industry": licenseMd.industryId
         ? LookupIndustryById(licenseMd.industryId).name
         : licenseMd.webflowIndustry,
-      content: getHtml(contentToStrings(licenseMd.contentMd)),
+      content: "",
       "last-updated": new Date(Date.now()).toISOString(),
       "license-classification": licenseMd.webflowType
         ? LicenseClassificationLookup[licenseMd.webflowType]
