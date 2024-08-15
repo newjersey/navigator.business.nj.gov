@@ -5,16 +5,16 @@ import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Card } from "@/components/starter-kits/Card";
 import { StepInfo } from "@/components/starter-kits/StepInfo";
 import { getMergedConfig } from "@/contexts/configContext";
-import { STARTER_KITS_GENERIC_SLUG } from "@/lib/domain-logic/routes";
 import { insertIndustryContent, insertRoadmapSteps } from "@/lib/domain-logic/starterKitsContentModifiers";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { Industries, Industry } from "@businessnjgovnavigator/shared";
+import { getAllStarterKitUrls, STARTER_KITS_GENERIC_SLUG, StarterKitsUrl } from "@/lib/utils/starterKits";
+import type { Industry } from "@businessnjgovnavigator/shared";
 import {
+  createEmptyProfileData,
   LookupIndustryById,
   ProfileData,
-  createEmptyProfileData,
 } from "@businessnjgovnavigator/shared/index";
 import type { GetStaticPathsResult } from "next";
 import type { ReactElement } from "react";
@@ -168,29 +168,6 @@ const StarterKitsPage = (props: Props): ReactElement => {
       </main>
     </PageSkeleton>
   );
-};
-
-type PathParams<P> = { params: P; locale?: string };
-export type StarterKitsUrl = {
-  starterKitsUrl: string;
-};
-
-const getAllStarterKitUrls = (): PathParams<StarterKitsUrl>[] => {
-  return Industries.filter((industry) => industry.isEnabled).map((industry) => {
-    if (industry.id === "generic") {
-      return {
-        params: {
-          starterKitsUrl: STARTER_KITS_GENERIC_SLUG,
-        },
-      };
-    }
-
-    return {
-      params: {
-        starterKitsUrl: industry.id,
-      },
-    };
-  });
 };
 
 export const getStaticPaths = (): GetStaticPathsResult<StarterKitsUrl> => {

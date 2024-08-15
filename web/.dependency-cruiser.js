@@ -340,6 +340,10 @@ module.exports = {
     },
     {
       from: { path: "src/scripts" },
+      to: { path: "src/lib/utils" },
+    },
+    {
+      from: { path: "src/scripts" },
       to: { path: "../shared" },
     },
     {

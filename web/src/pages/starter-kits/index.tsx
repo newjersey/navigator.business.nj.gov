@@ -2,7 +2,8 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
-import { ROUTES, STARTER_KITS_GENERIC_SLUG } from "@/lib/domain-logic/routes";
+import { ROUTES } from "@/lib/domain-logic/routes";
+import { STARTER_KITS_GENERIC_SLUG } from "@/lib/utils/starterKits";
 import { GetServerSideProps } from "next";
 import { ReactElement } from "react";
 
