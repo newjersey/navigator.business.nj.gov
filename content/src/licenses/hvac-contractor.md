@@ -9,6 +9,7 @@ previewType: expiration
 summaryDescriptionMd: " "
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 callToActionText: Renew My HVACR License
+aboveLicenseStatusContent: ""
 ---
 
 ### Renewal Requirements

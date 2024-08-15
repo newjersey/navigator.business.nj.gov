@@ -10,6 +10,7 @@ previewType: renewal
 summaryDescriptionMd: x
 callToActionLink: https://www.njconsumeraffairs.gov/Pages/licensingboards.aspx
 callToActionText: Renew My Public Movers and/or Warehousemen License
+aboveLicenseStatusContent: ""
 ---
 
 You must renew your license every year, within 30 days of the expiration date.

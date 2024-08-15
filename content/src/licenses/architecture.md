@@ -10,6 +10,7 @@ previewType: renewal
 summaryDescriptionMd: You can renew your architecture license online.
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 callToActionText: Renew My Architect License
+aboveLicenseStatusContent: ""
 ---
 
 ### Renewal Requirements

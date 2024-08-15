@@ -9,6 +9,7 @@ summaryDescriptionMd: If you are interested in continuing to employ individuals
   to provide health care, personal care, or companion services (either in-home
   or facility care), you must renew your registration with the Employment and
   Personnel Services within the Division of Consumer Affairs online.
+aboveLicenseStatusContent: ""
 ---
 
 If you are interested in continuing to employ, place, arrange for the placement of, or in any way refer, an individual to provide companion care services, health care services, or personal care services in the personal residence of a person with a disability or who is age 60 or older. You must renew your registration with the Division of Consumer Affairs online.

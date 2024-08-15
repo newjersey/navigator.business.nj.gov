@@ -7,6 +7,7 @@ previewType: renewal
 summaryDescriptionMd: N/A
 callToActionLink: https://www.njconsumeraffairs.gov/land/Pages/default.aspx
 callToActionText: Renew My Landscape Architecture License
+aboveLicenseStatusContent: ""
 ---
 
 Your Landscape Architecture license expires every two years.
