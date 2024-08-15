@@ -14,8 +14,6 @@ export const ROUTES = {
   starterKits: "/starter-kits",
 };
 
-export const STARTER_KITS_GENERIC_SLUG = "nj-business";
-
 export interface QUERY_PARAMS_VALUES {
   page: number;
   deferredQuestionAnswered: "true" | "false";
