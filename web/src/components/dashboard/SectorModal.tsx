@@ -68,7 +68,6 @@ export const SectorModal = (props: Props): ReactElement => {
           primaryButtonText={Config.dashboardDefaults.sectorModalSaveButton}
           primaryButtonOnClick={onSubmit}
           secondaryButtonText={Config.dashboardDefaults.sectorModalCancelButton}
-          maxWidth="md"
         >
           <div data-testid="sector-modal">
             <div className="margin-y-3">
