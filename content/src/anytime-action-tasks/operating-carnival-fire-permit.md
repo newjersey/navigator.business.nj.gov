@@ -5,7 +5,8 @@ notesMd: "[Muni
 filename: operating-carnival-fire-permit
 name: Get a Fire Permit for Your Carnival or Circus
 industryIds: []
-sectorIds: []
+sectorIds:
+  - arts-entertainment-and-recreation
 icon: govt-purple.svg
 urlSlug: operating-carnival-fire-permit
 summaryDescriptionMd: "You must have a fire permit to do certain activities at
