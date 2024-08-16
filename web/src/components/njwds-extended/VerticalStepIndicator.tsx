@@ -1,4 +1,5 @@
 import { SectionAccordionContext } from "@/contexts/sectionAccordionContext";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useOnWindowResize } from "@/lib/utils/helpers";
 import { useMediaQuery } from "@mui/material";
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export const VerticalStepIndicator = (props: Props): ReactElement => {
+  const { business } = useUserData();
   const { isOpen: sectionIsOpen } = useContext(SectionAccordionContext);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const verticalHeight = document.getElementById(`vertical-content-${props.stepNumber}`)?.offsetHeight;
@@ -38,7 +40,13 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
     }
   };
 
-  useEffect(resizeVerticalBarToContent, [props.last, props.stepNumber, verticalHeight, sectionIsOpen]);
+  useEffect(resizeVerticalBarToContent, [
+    props.last,
+    props.stepNumber,
+    verticalHeight,
+    sectionIsOpen,
+    business,
+  ]);
   useOnWindowResize(resizeVerticalBarToContent);
   return (
     <div className={`vertical-step-indicator`}>
