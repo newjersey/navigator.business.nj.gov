@@ -8,13 +8,13 @@ displayname: fire-permit-food-truck
 urlSlug: fire-permit-food-truck
 name: Get a Fire Permit for Your Food Truck
 webflowName: "Food Truck: Food Truck Fire Permit"
-summaryDescriptionMd: >
+summaryDescriptionMd: >-
   You need a fire permit to cook in a mobile canteen or cooking trailer, such as
   a food truck. You must apply for a permit and pass the required inspection
   each time you set up at an event or specific location.
 
 
-  To apply for the permit or to get more information, contact your town's `Local Enforcing Agency (LEA)|lea`. The LEA can be the local fire department or the state Division of Fire Safety.
+  To apply for the permit or to get more information, contact your town's `Local Enforcing Agency (LEA)|lea` . The LEA can be the local fire department or the state Division of Fire Safety.
 industryId:
   - food-truck
 callToActionText: Contact My Local Enforcing Agency
