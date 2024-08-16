@@ -1,5 +1,6 @@
 ---
-notesMd: "* 8.16 updated per nj business ux content slack thread initiated by cary"
+notesMd: "* 8.16 updated per NJ business ux content slack thread initiated by
+  Cary and signed off by Jess"
 id: not-registered-up-and-running
 header: Create an Account
 hasCloseButton: false
