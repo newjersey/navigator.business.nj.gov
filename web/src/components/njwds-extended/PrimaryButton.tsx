@@ -1,12 +1,12 @@
 import { GenericButton, GenericButtonProps } from "@/components/njwds-extended/GenericButton";
-import { ReactElement, Ref, forwardRef } from "react";
+import { forwardRef, ReactElement, Ref } from "react";
 
 export type PrimaryButtonColors =
   | "primary"
   | "secondary"
   | "accent-cool-darker"
   | "accent-cooler"
-  | "info"
+  | "accent-semi-cool"
   | "outline"
   | "success-extra-light"
   | "error"
@@ -28,7 +28,7 @@ const colors = {
   "accent-cool-darker": "usa-button btn-accent-cool-darker",
   "accent-cooler": "usa-button btn-accent-cooler",
   error: "usa-button btn-error-dark",
-  info: "usa-button btn-info",
+  "accent-semi-cool": "usa-button btn-accent-semi-cool",
   "success-extra-light": "usa-button btn-success-extra-light",
   white: "usa-button text-info-darkest btn-white",
   outline: "usa-button usa-button--outline",
