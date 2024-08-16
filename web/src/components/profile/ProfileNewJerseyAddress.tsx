@@ -93,7 +93,7 @@ export const ProfileNewJerseyAddress = (): ReactElement => {
                     <AddressMunicipalityDropdown onValidation={onValidation} />
                   </WithErrorBar>
                 </div>
-                <div className="grid-col-12 tablet:grid-col-6">
+                <div className="grid-col-12 tablet:grid-col-6 margin-top-2 tablet:margin-top-0">
                   <WithErrorBar
                     hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
                     type="MOBILE-ONLY"
