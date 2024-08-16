@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
+import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
@@ -20,6 +21,7 @@ export const NeedsAccountModal = (): ReactElement => {
   const { isAuthenticated, showNeedsAccountModal, setShowNeedsAccountModal } =
     useContext(NeedsAccountContext);
   const { Config } = useConfig();
+  const { contextualInfo } = useContext(ContextualInfoContext);
 
   useMountEffectWhenDefined(() => {
     if (isAuthenticated === IsAuthenticated.TRUE) {
@@ -43,41 +45,43 @@ export const NeedsAccountModal = (): ReactElement => {
 
   return (
     <Dialog
+      fullWidth={false}
       open={showNeedsAccountModal}
-      maxWidth="xs"
+      maxWidth="sm"
       onClose={(): void => setShowNeedsAccountModal(false)}
       data-testid={"self-reg-modal"}
+      aria-labelledby="modal"
+      disableEnforceFocus={contextualInfo.isVisible}
     >
-      <DialogTitle sx={{ p: 5, paddingRight: 10 }}>
-        <Heading level={0} styleVariant="h3">
+      <DialogTitle id="modal" className="display-flex flex-row flex-align-center margin-top-1 break-word">
+        <Heading level={0} styleVariant="h2" className="padding-x-1 margin-0-override">
           {Config.selfRegistration.needsAccountModalTitle}
         </Heading>
         <IconButton
           aria-label="close"
+          className="margin-left-auto"
           onClick={(): void => setShowNeedsAccountModal(false)}
           sx={{
-            position: "absolute",
-            right: 10,
-            top: 12,
             color: "#757575",
           }}
         >
           <Icon className="usa-icon--size-4">close</Icon>
         </IconButton>
       </DialogTitle>
-
-      <DialogContent dividers={false} sx={{ paddingX: 5, paddingBottom: 3 }}>
-        <Content>{Config.selfRegistration.needsAccountModalBody}</Content>
+      <DialogContent sx={{ padding: 0 }} dividers>
+        <div className="padding-x-4 margin-bottom-4 margin-top-2" data-testid="modal-body">
+          <Content>{Config.selfRegistration.needsAccountModalBody}</Content>
+          <Box>
+            <div className="margin-top-3">
+              <PrimaryButton isColor="primary" isFullWidthOnDesktop onClick={linkToAccountSetup}>
+                {Config.selfRegistration.needsAccountModalButtonText}
+              </PrimaryButton>
+            </div>
+          </Box>
+        </div>
       </DialogContent>
-      <DialogContent dividers={false} sx={{ paddingX: 5 }}>
-        <Box>
-          <PrimaryButton isColor="primary" isFullWidthOnDesktop onClick={linkToAccountSetup}>
-            {Config.selfRegistration.needsAccountModalButtonText}
-          </PrimaryButton>
-        </Box>
-      </DialogContent>
 
-      <DialogContent dividers={true} sx={{ paddingX: 5 }}>
+      <DialogContent>
         <Box
           sx={{
             display: "flex",
@@ -85,6 +89,7 @@ export const NeedsAccountModal = (): ReactElement => {
             marginX: "auto",
             width: "fit-content",
             marginY: 1,
+            paddingX: 5,
           }}
         >
           <Content
