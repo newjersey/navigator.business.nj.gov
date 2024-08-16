@@ -64,20 +64,8 @@
   },
   "modifications": [
     {
-      "taskToReplaceFilename": "evaluate-your-location",
-      "replaceWithFilename": "landlord-location-eval"
-    },
-    {
       "taskToReplaceFilename": "get-insurance",
       "replaceWithFilename": "landlord-insurance-policy"
-    },
-    {
-      "taskToReplaceFilename": "check-site-requirements",
-      "replaceWithFilename": "landlord-site-requirements"
-    },
-    {
-      "taskToReplaceFilename": "site-safety-permits",
-      "replaceWithFilename": "landlord-site-safety-permits"
     }
   ],
   "isEnabled": true,
