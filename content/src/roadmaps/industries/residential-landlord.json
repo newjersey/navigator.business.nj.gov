@@ -1,7 +1,7 @@
 {
   "naicsCodes": "531110",
   "defaultSectorId": "other-services",
-  "canHavePermanentLocation": true,
+  "canHavePermanentLocation": false,
   "roadmapSteps": [
     {
       "step": 1,
