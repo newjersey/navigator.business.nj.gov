@@ -14,7 +14,7 @@ summaryDescriptionMd: >-
   each time you set up at an event or specific location.
 
 
-  To apply for the permit or to get more information, contact your town's `Local Enforcing Agency (LEA)|lea` . The LEA can be the local fire department or the state Division of Fire Safety.
+  To apply for the permit or to get more information, contact your town's `Local Enforcing Agency (LEA)|lea`. The LEA can be the local fire department or the state Division of Fire Safety.
 industryId:
   - food-truck
 callToActionText: Contact My Local Enforcing Agency
