@@ -105,13 +105,13 @@
   }
 }
 
-.btn-info {
-  background-color: $info !important;
+.btn-accent-semi-cool {
+  background-color: $accent-semi-cool-700 !important;
   &:hover {
-    background-color: $info-dark !important;
+    background-color: $accent-semi-cool-800 !important;
   }
   &:active {
-    background-color: $info-darker !important;
+    background-color: $accent-semi-cool-900 !important;
   }
 }
 

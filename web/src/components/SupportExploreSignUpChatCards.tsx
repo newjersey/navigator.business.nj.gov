@@ -28,12 +28,12 @@ export const SupportExploreSignUpChatCards = (): ReactElement => {
         primaryButtonColor="accent-cooler"
       />
       <UserSupportActionCard
-        borderColor={"info-dark"}
+        borderColor={"accent-semi-cool-700"}
         header={`${cardConfig.card3Header}`}
         supportingText={cardConfig.card3SupportingText}
         buttonLink=""
         buttonText={cardConfig.card3Button}
-        primaryButtonColor="info"
+        primaryButtonColor="accent-semi-cool"
         isIntercomEnabled={true}
         isLast
       />
