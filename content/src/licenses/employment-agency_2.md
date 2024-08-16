@@ -11,6 +11,7 @@ summaryDescriptionMd: You can renew your license 60 days before it expires and
 callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-\
   Business-Online-Registration.aspx "
 callToActionText: Renew My Temporary Help Service Firm Registration
+aboveLicenseStatusContent: ""
 ---
 
 Your temporary help service firm registration expires every year.

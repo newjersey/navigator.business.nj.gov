@@ -9,6 +9,7 @@ summaryDescriptionMd: If your dental license expired less than 30 days ago, [you
   for more than 30 days or is inactive, you need to reinstate it.
 callToActionText: Reinstate My Dental License
 callToActionLink: "https://www.njconsumeraffairs.gov/den/Applications/Application-To-Reinstate-Reactivate-a-License-or-Registration.pdf"
+aboveLicenseStatusContent: ""
 ---
 
 ## Application Requirements

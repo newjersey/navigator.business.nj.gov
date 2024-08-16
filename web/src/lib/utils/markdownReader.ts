@@ -186,6 +186,7 @@ type FilingGrayMatter = {
 };
 
 type LicenseGrayMatter = {
+  aboveLicenseStatusContent: string;
   renewalEventDisplayName: string;
   expirationEventDisplayName: string;
   urlSlug: string;
@@ -228,6 +229,7 @@ type AnytimeActionLicenseReinsatementGrayMatter = {
   icon: string;
   licenseName: LicenseName;
   summaryDescriptionMd: string;
+  aboveLicenseStatusContent: string;
 };
 
 type TaskGrayMatter = {

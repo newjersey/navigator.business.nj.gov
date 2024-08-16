@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { LicenseEvent } from "@/components/filings-calendar/LicenseEvent";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
@@ -24,6 +25,10 @@ const LicenseEventPreview = (props: PreviewProps): ReactElement => {
       <div className="margin-bottom-5 text-bold">{license.licenseName}</div>
       Preview of {license.previewType ?? "expiration"} calendar event
       <LicenseEvent LicenseCalendarEvent={LicenseCalendarEvent} licenseEvents={[license]} />
+      <div className="margin-top-5">
+        <div>Above License Status Copy - Include Any Horizontal Lines</div>
+        <Content>{license.aboveLicenseStatusContent}</Content>
+      </div>
       <div className="margin-top-10" />
       <LicenseElement
         licenseName="IndustryName"

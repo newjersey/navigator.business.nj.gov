@@ -3090,7 +3090,6 @@ collections:
           options: ["expiration", "renewal"],
         }
       - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
-      - { label: "Renewal Event Label", name: "renewalEventDisplayName", widget: "string", required: true }
       - { label: "URL Slug", name: "urlSlug", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Expiration Event Label",
@@ -3098,8 +3097,15 @@ collections:
           widget: "string",
           required: true,
         }
+      - { label: "Renewal Event Label", name: "renewalEventDisplayName", widget: "string", required: true }
+      - {
+          label: "Above License Status Content",
+          name: "aboveLicenseStatusContent",
+          widget: "markdown",
+          required: true,
+        }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
-      - { label: "Content", name: "body", widget: "markdown", required: true }
+      - { label: "Below License Status Content", name: "body", widget: "markdown", required: true }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
 
@@ -3505,8 +3511,14 @@ collections:
         value_field: "anytimeActionIcons.*.filename"
         display_fields: ["anytimeActionIcons.*.name"]
       - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "nospace", required: true }
+      - {
+          label: "Above License Status Content",
+          name: "aboveLicenseStatusContent",
+          widget: "markdown",
+          required: true,
+        }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
-      - { label: "Content", name: "body", widget: "markdown", required: true }
+      - { label: "Below License Status Content", name: "body", widget: "markdown", required: true }
       - { label: "Form", name: "form", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }

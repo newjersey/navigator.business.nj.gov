@@ -7,6 +7,7 @@ licenseName: ""
 summaryDescriptionMd: xxx
 callToActionLink: https://newjersey.mylicense.com/eGov/Login
 callToActionText: Renew My Accountant License
+aboveLicenseStatusContent: ""
 ---
 
 :::infoAlert

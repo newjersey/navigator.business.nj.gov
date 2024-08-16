@@ -17,6 +17,7 @@ summaryDescriptionMd: >-
   :::infoAlert If you are new to maintaining your payroll records outside of New Jersey, then you must submit the [MW-42 (R-6-13)](https://www.nj.gov/labor/wageandhour/assets/PDFs/mw-42-payroll.pdf) form. This form will be e-mailed to you after you register. :::
 callToActionLink: https://www.njportal.com/lwd/pwcr
 callToActionText: Renew My PWCR Application
+aboveLicenseStatusContent: ""
 ---
 
 ## Application Requirements
