@@ -44,7 +44,7 @@ Want to register without a lawyer or have questions about the process? Contact t
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
 * A registered development
-* An official `Public Offering Statement|public-offering-statement` that you must share with all potential buyers
+* An official `public offering statement|public-offering-statement` that you must share with all potential buyers
 :::
 
 :::callout{ showHeader="true" headerText="What happens if I don't register?" showIcon="false" calloutType="conditional" }
