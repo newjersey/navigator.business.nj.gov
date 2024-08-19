@@ -3419,7 +3419,7 @@ collections:
       - { name: "" }
 
   - name: "anytime-action-tasks"
-    label: "Anytime Action Tasks"
+    label: "Anytime Action With Details Page"
     folder: "content/src/anytime-action-tasks"
     summary: "{{filename}} - {{name}}"
     identifier_field: "{{filename}}"
@@ -3482,7 +3482,7 @@ collections:
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
 
   - name: "anytime-action-license-reinstatements"
-    label: "Anytime Action Consumer Affairs License Reinstatements"
+    label: "Anytime Action With Consumer Affairs License Integrations (Reinstatements)"
     folder: "content/src/anytime-action-license-reinstatements"
     summary: "{{filename}} - {{name}}"
     identifier_field: "{{filename}}"
@@ -3524,7 +3524,7 @@ collections:
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
 
   - name: "anytime-action-links"
-    label: "Anytime Action Links"
+    label: "Anytime Action External Link Only"
     folder: "content/src/anytime-action-links"
     summary: "{{filename}} - {{name}}"
     identifier_field: "{{filename}}"
