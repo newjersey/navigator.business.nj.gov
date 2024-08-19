@@ -1,7 +1,7 @@
 import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
 import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
-import { Breakpoint, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
+import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
@@ -9,7 +9,6 @@ interface Props {
   close: () => void;
   title: string;
   children: ReactNode;
-  maxWidth?: Breakpoint;
   unpaddedChildren?: ReactNode;
   uncloseable?: boolean;
 }
@@ -19,7 +18,7 @@ export const ModalZeroButton = (props: Props): ReactElement => {
   return (
     <Dialog
       fullWidth={false}
-      maxWidth={props.maxWidth || "sm"}
+      maxWidth="sm"
       open={props.isOpen}
       onClose={props.close}
       aria-labelledby="modal"

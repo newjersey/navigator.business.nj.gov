@@ -1,10 +1,9 @@
 ---
 name: Bug Report
 about: Report a bug with an existing feature
-title: ''
-labels: '(:beetle: )'
-assignees: ''
-
+title: ""
+labels: "(:beetle: )"
+assignees: ""
 ---
 
 **Current Behavior:**
@@ -16,6 +15,7 @@ assignees: ''
 [what should happen instead]
 
 **Steps to Reproduce:**
-1. 
-2. 
-3. 
+
+1.
+2.
+3.

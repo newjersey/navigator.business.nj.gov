@@ -1,6 +1,5 @@
 import { ModalZeroButton } from "@/components/ModalZeroButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
-import { Breakpoint } from "@mui/material";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {
@@ -10,7 +9,6 @@ interface Props {
   children: ReactNode;
   primaryButtonText: string;
   primaryButtonOnClick: () => void;
-  maxWidth?: Breakpoint;
   isLoading?: boolean;
   uncloseable?: boolean;
 }
@@ -37,7 +35,6 @@ export const ModalOneButton = (props: Props): ReactElement => {
       isOpen={props.isOpen}
       close={props.close}
       title={props.title}
-      maxWidth={props.maxWidth}
       unpaddedChildren={buttonNode}
       uncloseable={props.uncloseable}
     >

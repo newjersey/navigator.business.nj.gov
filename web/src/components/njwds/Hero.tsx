@@ -61,7 +61,6 @@ export const Hero = (): ReactElement => {
               <PrimaryButton
                 isColor={"accent-cool-darker"}
                 onClick={routeToOnboarding}
-                isNotFullWidthOnMobile={true}
                 isRightMarginRemoved={true}
                 isLargeButton={true}
                 isUnBolded={true}
@@ -112,7 +111,6 @@ export const Hero = (): ReactElement => {
                 <PrimaryButton
                   isColor="primary"
                   onClick={section2CTAOnClick}
-                  isNotFullWidthOnMobile={true}
                   isRightMarginRemoved={true}
                   isLargeButton={true}
                 >
@@ -148,7 +146,6 @@ export const Hero = (): ReactElement => {
               <PrimaryButton
                 isColor="accent-cool-darker"
                 onClick={section3CTAOnClick}
-                isNotFullWidthOnMobile={true}
                 isRightMarginRemoved={true}
                 isLargeButton={true}
               >

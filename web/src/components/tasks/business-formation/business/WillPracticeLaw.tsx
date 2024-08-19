@@ -34,7 +34,7 @@ export const WillPracticeLaw = (): ReactElement => {
         errorMessage={Config.formation.fields.willPracticeLaw.error}
       />
       {alert && (
-        <SnackbarAlert variant={"info"} close={(): void => setAlert(false)} isOpen={alert} closeIcon={true}>
+        <SnackbarAlert variant={"info"} close={(): void => setAlert(false)} isOpen={alert}>
           {Config.formation.fields.businessSuffix.optionsUpdatedSnackbarAlert}
         </SnackbarAlert>
       )}

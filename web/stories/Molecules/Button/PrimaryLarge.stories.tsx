@@ -42,6 +42,6 @@ export const AccentCoolerColor: Story = {
   args: { isColor: "accent-cooler", children: "button", isLargeButton: true },
 };
 
-export const InfoColor: Story = {
-  args: { isColor: "info", children: "button", isLargeButton: true },
+export const AccentSemiCoolColor: Story = {
+  args: { isColor: "accent-semi-cool", children: "button", isLargeButton: true },
 };

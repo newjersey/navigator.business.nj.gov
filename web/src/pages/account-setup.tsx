@@ -15,7 +15,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import { OnboardingErrors, createProfileFieldErrorMap } from "@/lib/types/types";
+import { createProfileFieldErrorMap, OnboardingErrors } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { BusinessUser, createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
@@ -112,7 +112,7 @@ const AccountSetupPage = (): ReactElement => {
 
   return (
     <PageSkeleton showNavBar logoOnly="NAVIGATOR_MYNJ_LOGO">
-      <main id="main" className="padding-top-0 desktop:padding-top-8">
+      <main id="main" className="padding-top-4 desktop:padding-top-8">
         <SingleColumnContainer isSmallerWidth>
           <h1>{getContent().header}</h1>
           {showAlert && <Alert variant="error">{Config.accountSetup.errorAlert}</Alert>}

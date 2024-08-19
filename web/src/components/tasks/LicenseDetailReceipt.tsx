@@ -138,15 +138,11 @@ export const LicenseDetailReceipt = (props: Props): ReactElement => {
       <div key={index} data-testid={`item-${item.status}`}>
         <div
           className={`flex flex-column fac tablet-flex-row width-full ${
-            index === 0
-              ? ""
-              : "border-top-1px margin-top-1 tablet:margin-top-0 padding-top-2 tablet:padding-top-05"
-          }  border-base-lightest padding-bottom-05`}
+            index === 0 ? "" : "border-top-1px padding-top-2 tablet:padding-top-05"
+          }  border-base-lightest padding-bottom-2 tablet:padding-bottom-05`}
         >
           <ChecklistTag status={item.status} />
-          <span className="tablet:margin-left-2 text-left width-full margin-top-1 tablet:margin-top-0">
-            {item.title}
-          </span>
+          <span className="tablet:margin-left-2 text-left width-full margin-top-05">{item.title}</span>
         </div>
       </div>
     );

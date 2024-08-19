@@ -206,6 +206,9 @@ const Template = () => {
       {renderColor("accent-semi-cool-vivid", "#00BF91")}
       {renderColor("accent-semi-cool", "#009f7f")}
       {renderColor("accent-semi-cool-500", "#00D6AB")}
+      {renderColor("accent-semi-cool-700", "#007e65")}
+      {renderColor("accent-semi-cool-800", "#00634f")}
+      {renderColor("accent-semi-cool-900", "#00493a")}
     </div>
   );
 
