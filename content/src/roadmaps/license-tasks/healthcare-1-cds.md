@@ -6,6 +6,8 @@ notesMd: >-
   * Onboarding Q = Are you a Physician Assistant (PA), Advanced Practice Nurse (APN), or Certified Nurse Midwife (CNM)?
 
     * If yes, they get Healthcare-2, otherwise give them Healthcare-1, not required
+
+  * Updated after SME review
 id: healthcare-1-cds
 filename: healthcare-1-cds
 displayname: healthcare-1-cds
