@@ -1,10 +1,9 @@
 ---
 name: Chore
 about: Set up a new engineering chore
-title: ''
-labels: '(:gear: )'
-assignees: ''
-
+title: ""
+labels: "(:gear: )"
+assignees: ""
 ---
 
 We should <TASK>
