@@ -13,11 +13,13 @@ sectorIds:
   - construction
 icon: file-purple.svg
 urlSlug: pred-registration
-summaryDescriptionMd: You must register a `planned real estate
+summaryDescriptionMd: >-
+  You must register a `planned real estate
   development|planned-real-estate-development` to market and sell properties in
-  it. You can [request an exemption to
-  register](https://www.nj.gov/dca/codes/forms/pdf_pred/exemption_pkt.pdf) under
-  certain circumstances.
+  it. 
+
+
+  In certain cases, you may not need to register, and in others, you may need to request an exemption. [Learn more about the exemption.](https://www.nj.gov/dca/codes/forms/pdf_pred/exemption_pkt.pdf)
 ---
 ## Eligibility Criteria
 
