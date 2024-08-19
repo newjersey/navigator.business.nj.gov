@@ -13,10 +13,14 @@ urlSlug: healthcare-1-cds
 name: Apply for Your MD, DO, DDS, OD, DPM, or DVM Controlled Dangerous
   Substances Registration
 webflowName: "Healthcare: Controlled Dangerous Substance Registration"
-summaryDescriptionMd: You need a Controlled Dangerous Substances (CDS)
-  registration if you’re a Medical Doctor (MD), Doctor of Osteopathy (DO),
-  Dentist (DDS), Optometrist (OD), Podiatrist (DPM), or Veterinarian (DVM), and
-  you or your business dispense, prescribe, or store any CDS.
+summaryDescriptionMd: >
+  You need a Controlled Dangerous Substances (CDS) registration if you’re a
+  Medical Doctor (MD), Doctor of Osteopathy (DO), Dentist (DDS), Optometrist
+  (OD), Podiatrist (DPM), or Veterinarian (DVM), and you or your business
+  dispense, prescribe, or store any CDS. 
+
+
+  You also need to register each location where you store CDS. Use the same form as your initial registration. Write "branch" at the top of the application before submitting it to the New Jersey Drug Control Unit (DCU).
 industryId: healthcare
 callToActionText: Apply for My CDS Registration
 callToActionLink: https://www.njconsumeraffairs.gov/dcu/Applications/Initial-Application-for-Registration-for-Dispenser-Prescriber.pdf
@@ -26,11 +30,14 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 divisionPhone: (973) 504-6351
 webflowId: 668d72e6096a17ca97b553f9
 ---
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="note" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
-Be sure to register with the U.S. Drug Enforcement Administration (DEA) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to cds@dca.njoag.gov within 60 days of completing your CDS registration.
+Be sure to register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) within 60 days of completing your CDS registration.
+
+
 
 :::
+
 
 ## Application Requirements
 
@@ -39,18 +46,19 @@ Be sure to register with the U.S. Drug Enforcement Administration (DEA) to valid
 * Current and active professional license number
 * Social Security number
 * Signed attestation (included in application)
-* Applicable fees paid, once the New Jersey Drug Control Unit (DCU) has sent an invoice
+* Applicable fees paid, once the DCU has sent an invoice
+
 
 Email your completed CDS application to [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov). The DCU will email you an invoice to pay your fee online.
 
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
 
-You cannot dispense, prescribe, or store any CDS and may be subject to legal consequences and fines if you do so.
+You cannot dispense, prescribe, or store any CDS and may be subject to legal consequences if you do so.
 
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A CDS registration certificate.
+A CDS registration certificate sent to your mailing address, valid for 1 year.
 
 :::
