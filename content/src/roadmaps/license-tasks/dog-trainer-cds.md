@@ -15,7 +15,7 @@ summaryDescriptionMd: >-
 
   2. After your completed application has been emailed to the DCU, they will email you an invoice to pay the fee online.
 
-  3. Be sure to register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to cds[@dca.njoag.gov](mailto:CDS@dca.njoag.gov) within 60 days of completing your CDS registration.
+  3. Be sure to register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) within 60 days of completing your CDS registration.
 industryId:
   - petcare
 agencyId: nj-consumer-affairs
@@ -29,8 +29,6 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 * DEA registration number(s), if applicable
 * Name, address, and telephone number of the person who has administrative or managerial responsibility for the registered location
 *  `Registered agent|registered-agent` information, including address and phone number, or the name and address of the New Jersey resident responsible for receiving and handling legal paperwork
-
-
 * The name and title of all officers
 * A copy of your business papers, such as your `Business Registration Certificate|business-reg-certificate` 
 * Proof of liability insurance for your facility 
