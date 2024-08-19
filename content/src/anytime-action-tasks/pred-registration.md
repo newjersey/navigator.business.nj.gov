@@ -39,7 +39,7 @@ It’s best to hire a real estate or land use attorney to handle the legal paper
 * A statement about any litigation, orders, or judgments that might affect the properties you will market and sell
 * A copy of your new home builder registration card, if applicable
 
-Want to register without a lawyer or have questions about the process? Contact the Bureau of Homeowner Protection at (609) 984-7905.
+Want to register without a lawyer or have questions about the process? Contact the NJ Department of Community Affairs, Bureau of Homeowner Protection at (609) 984-7905.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
