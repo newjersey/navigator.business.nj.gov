@@ -1,4 +1,9 @@
 ---
+notesMd: >-
+  * As of 8.20, no final decisions have yet been made on the callouts. Per
+  Regina, I am leaving as is for now.
+
+  * The 2 subheadings in h3 (business info, safety and security) look the same as the h2 heading (app reqs). This will hopefully be addressed in Sept.
 licenseName: ""
 id: dog-trainer-cds
 filename: dog-trainer-cds
@@ -49,7 +54,7 @@ A CDS registration certificate sent to your mailing address, valid for 1 year.
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
 
 You cannot store or use any CDS for training purposes and may be subject to legal consequences if you do so.
 
