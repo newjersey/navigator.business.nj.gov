@@ -23,34 +23,34 @@ RUN corepack enable
 
 # Install Browsers.
 #Chrome
-ARG CHROME_VERSION="120.0.6099.129"
-RUN wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_$CHROME_VERSION-1_amd64.deb && \
-    dpkg -i google-chrome-stable_$CHROME_VERSION-1_amd64.deb || apt-get -f install -y
+RUN wget -qO- https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O google-chrome-stable_current_amd64.deb && \
+    dpkg -i google-chrome-stable_current_amd64.deb || apt-get -f install -y
 
-
-#Edge
+# Install Browsers.
+# Edge
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && \
     install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/ && \
-    sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list' && \
+    sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge.list' && \
     rm microsoft.gpg && \
     apt-get update -y && \
     apt-get install -y microsoft-edge-stable
 
-
-#Firefox
-ARG FIREFOX_VERSION="121.0"
-RUN apt-get -qqy --no-install-recommends install firefox \
+# Install Browsers.
+# Firefox
+RUN apt-get install -qqy --no-install-recommends wget gnupg ca-certificates \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
-  && wget --no-verbose -O /tmp/firefox.tar.bz2 https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2 \
+  && FIREFOX_URL=$(wget -qO- "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US" | grep -Eo 'https://download-installer.cdn.mozilla.net/pub/firefox/releases/[0-9.]*/linux-x86_64/en-US/firefox-[0-9.]*.tar.bz2') \
+  && FIREFOX_VERSION=$(echo $FIREFOX_URL | grep -Eo '[0-9.]+' | head -1) \
+  && wget --no-verbose -O /tmp/firefox.tar.bz2 $FIREFOX_URL \
   && wget --no-verbose -O /tmp/firefox.tar.bz2.asc https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2.asc \
-  && curl  https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/KEY | gpg --import >/dev/null 2>&1 \
-  && gpg --verify  /tmp/firefox.tar.bz2.asc /tmp/firefox.tar.bz2 \
+  && wget --no-verbose -O /tmp/KEY https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/KEY \
+  && gpg --import /tmp/KEY >/dev/null 2>&1 \
+  && gpg --verify /tmp/firefox.tar.bz2.asc /tmp/firefox.tar.bz2 \
   && apt-get -y purge firefox \
   && rm -rf /opt/firefox \
   && tar -C /opt -xjf /tmp/firefox.tar.bz2 \
-  && rm /tmp/firefox.tar.bz2 \
+  && rm /tmp/firefox.tar.bz2 /tmp/firefox.tar.bz2.asc /tmp/KEY \
   && chmod +x /opt/firefox \
   && mv /opt/firefox /opt/firefox-$FIREFOX_VERSION \
   && ln -fs /opt/firefox-$FIREFOX_VERSION/firefox /usr/bin/firefox
-
 USER circleci
