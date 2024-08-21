@@ -13,14 +13,12 @@ sidebarCardBodyText: The Hazardous Discharge Site Remediation Fund (HDSRF) Child
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: >-
-  The Hazardous Discharge Site Remediation Fund (HDSRF) Child Care Facility
-  Grant can help your child care center pay for the cleanup of contaminated
-  sites.
-
-
   :::infoAlert 
    You need to hire an environmental consultant or Licensed Site Remediation Professional to complete a [Preliminary Assessment Report](https://dep.nj.gov/wp-content/uploads/srp/preliminary_assessment_report_ins_online.pdf?version_1_3). 
   :::
+
+
+  The Hazardous Discharge Site Remediation Fund (HDSRF) Child Care Facility Grant can help your child care center pay for the cleanup of contaminated sites.
 callToActionLink: https://dep.nj.gov/grantandloanprograms/child-care/
 callToActionText: Learn More
 fundingType: grant
