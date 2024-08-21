@@ -441,7 +441,8 @@
       "profileErrorAlert": "Complete ${fieldText} to access your dashboard:",
       "cannabisLocationAlert": "Check if your local government allows a cannabis license.",
       "certificationDocFileTitle": "Certified Copy of Formation",
-      "profileTabInfoTitle": "Business Information"
+      "profileTabInfoTitle": "Business Information",
+      "profileAddressNotProvided" : "Address not provided"
     }
   }
 }

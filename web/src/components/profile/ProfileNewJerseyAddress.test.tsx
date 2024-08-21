@@ -12,11 +12,21 @@ import {
   Municipality,
 } from "@businessnjgovnavigator/shared/";
 import { generateMunicipality } from "@businessnjgovnavigator/shared/test";
+import * as materialUi from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@mui/material", () => mockMaterialUI());
+
+function mockMaterialUI(): typeof materialUi {
+  return {
+    ...jest.requireActual("@mui/material"),
+    useMediaQuery: jest.fn(),
+  };
+}
 
 describe("<ProfileNewJerseyAddress  />", () => {
   beforeEach(() => {
@@ -25,12 +35,14 @@ describe("<ProfileNewJerseyAddress  />", () => {
 
   const renderComponent = ({ municipalities }: { municipalities?: Municipality[] }): void => {
     render(
-      <WithStatefulAddressData
-        initialData={emptyAddressData}
-        municipalities={municipalities || [generateMunicipality({})]}
-      >
-        <ProfileNewJerseyAddress />
-      </WithStatefulAddressData>
+      <ThemeProvider theme={createTheme()}>
+        <WithStatefulAddressData
+          initialData={emptyAddressData}
+          municipalities={municipalities || [generateMunicipality({})]}
+        >
+          <ProfileNewJerseyAddress />
+        </WithStatefulAddressData>
+      </ThemeProvider>
     );
   };
 
