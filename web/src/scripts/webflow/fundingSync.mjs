@@ -129,7 +129,7 @@ const contentMdToObject = (content) => {
   const lines = contentToStrings(content);
   const benefitRegExp = new RegExp(`"Benefit[s:]*?"`);
   const eligibilityIndex = lines.findIndex((line) => {
-    return line.includes(">Eligibility</");
+    return line.includes(">Eligibility</") || line.includes(">Eligible Expenses<");
   });
   const benefitIndex = lines.findIndex((line) => {
     return benefitRegExp.test(line);
