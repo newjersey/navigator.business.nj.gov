@@ -25,7 +25,7 @@ industryId:
 
 ## How to Apply
 
-Each town may have its own application form and process, so check with your municipal clerk. 
+Each town has its own application form and process, so check with your municipal clerk. 
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
