@@ -16,8 +16,10 @@ industryId:
   - residential-landlord
 agencyAdditionalContext: Your Municipality
 ---
+- - -
 
 ## How to Apply
+
 Check with your municipal clerk to see if you need to register and how to do so. Each town will have its own application process.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
