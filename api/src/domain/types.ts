@@ -7,7 +7,11 @@ import {
 } from "@shared/elevatorSafety";
 import { FireSafetyInspectionResult } from "@shared/fireSafety";
 import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
-import { HousingPropertyInterestDetails, HousingRegistrationRequestLookupResponse } from "@shared/housing";
+import {
+  HousingPropertyInterestDetails,
+  HousingRegistrationRequestLookupResponse,
+  PropertyInterestType,
+} from "@shared/housing";
 import {
   enabledLicensesSources,
   LicenseEntity,
@@ -131,9 +135,10 @@ export type HousingPropertyInterestStatus = (
   municipalityId: string
 ) => Promise<HousingPropertyInterestDetails | undefined>;
 
-export type HousingHotelMotelRegistrationStatus = (
+export type HousingRegistrationStatus = (
   address: string,
-  municipalityId: string
+  municipalityId: string,
+  propertyInterestType: PropertyInterestType
 ) => Promise<HousingRegistrationRequestLookupResponse>;
 
 export type ElevatorSafetyInspectionStatus = (

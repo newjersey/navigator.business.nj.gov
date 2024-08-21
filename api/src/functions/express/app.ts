@@ -25,9 +25,9 @@ import { DynamicsFireSafetyHealthCheckClient } from "@client/dynamics/fire-safet
 import { DynamicsFireSafetyInspectionClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyInspectionClient";
 import { DynamicsHousingClient } from "@client/dynamics/housing/DynamicsHousingClient";
 import { DynamicsHousingHealthCheckClient } from "@client/dynamics/housing/DynamicsHousingHealthCheckClient";
-import { DynamicsHotelMotelRegistrationClient } from "@client/dynamics/housing/DynamicsHousingHotelMotelRegistrationClient";
-import { DynamicsHotelMotelRegistrationStatusClient } from "@client/dynamics/housing/DynamicsHousingHotelMotelRegistrationStatusClient";
 import { DynamicsHousingPropertyInterestClient } from "@client/dynamics/housing/DynamicsHousingPropertyInterestClient";
+import { DynamicsHousingRegistrationClient } from "@client/dynamics/housing/DynamicsHousingRegistrationClient";
+import { DynamicsHousingRegistrationStatusClient } from "@client/dynamics/housing/DynamicsHousingRegistrationStatusClient";
 import { RegulatedBusinessDynamicsBusinessAddressesClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsBusinessAddressesClient";
 import { RegulatedBusinessDynamicsBusinessIdsAndNamesClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsBusinessIdsAndNamesClient";
 import { RegulatedBusinessDynamicsChecklistItemsClient } from "@client/dynamics/license-status/RegulatedBusinessDynamicsChecklistItemsClient";
@@ -225,13 +225,10 @@ const dynamicsHousingHealthCheckClient = DynamicsHousingHealthCheckClient(logger
   accessTokenClient: dynamicsHousingAccessTokenClient,
   orgUrl: DYNAMICS_HOUSING_URL,
 });
-const dynamicsHousingHotelMotelRegistrationClient = DynamicsHotelMotelRegistrationClient(
-  logger,
-  DYNAMICS_HOUSING_URL
-);
-const dynamicsHousingHotelMotelRegistrationStatusClient = DynamicsHotelMotelRegistrationStatusClient(logger, {
+const dynamicsHousingRegistrationClient = DynamicsHousingRegistrationClient(logger, DYNAMICS_HOUSING_URL);
+const dynamicsHousingRegistrationStatusClient = DynamicsHousingRegistrationStatusClient({
   accessTokenClient: dynamicsHousingAccessTokenClient,
-  housingHotelMotelRegistrationClient: dynamicsHousingHotelMotelRegistrationClient,
+  housingHousingRegistrationClient: dynamicsHousingRegistrationClient,
   housingPropertyInterestClient: dynamicsHousingPropertyInterestClient,
 });
 
@@ -364,10 +361,7 @@ app.use(
   )
 );
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
-app.use(
-  "/api",
-  housingRouterFactory(dynamicsHousingClient, dynamicsHousingHotelMotelRegistrationStatusClient)
-);
+app.use("/api", housingRouterFactory(dynamicsHousingClient, dynamicsHousingRegistrationStatusClient));
 app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));
 app.use("/api", formationRouterFactory(apiFormationClient, userDataClient, { shouldSaveDocuments }));
 app.use(

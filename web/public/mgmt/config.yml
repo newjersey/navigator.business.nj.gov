@@ -2275,6 +2275,22 @@ collections:
               - { label: Informational Message - Returned, name: informationalReturned, widget: string }
               - { label: Informational Message - Rejected, name: informationalRejected, widget: string }
               - { label: Informational Message - Incomplete, name: informationalIncomplete, widget: string }
+              - {
+                  label: Error - No Multiple Dwelling Registrations Found,
+                  name: errorTextNoMultipleDwellingRegistrations,
+                  widget: string,
+                }
+              - {
+                  label: Review My Application Call to Action,
+                  name: reviewMyApplicationCallToAction,
+                  widget: string,
+                }
+              - {
+                  label: Review My Application Call to Action Link,
+                  name: reviewApplicationCallToActionLink,
+                  widget: string,
+                }
+              - { label: Renew Registration Message, name: renewRegistrationMessage, widget: string }
           - label: Elevator Violations Card
             name: elevatorViolationsCard
             collapsed: false

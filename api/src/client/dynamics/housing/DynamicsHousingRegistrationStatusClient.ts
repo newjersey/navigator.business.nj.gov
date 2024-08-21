@@ -1,24 +1,28 @@
 import {
-  HotelMotelRegistrationClient,
   HousingPropertyInterestClient,
+  HousingRegistrationClient,
   HousingRegistrationRequestLookupResponse,
 } from "@client/dynamics/housing/types";
 import { AccessTokenClient } from "@client/dynamics/types";
-import { LogWriterType } from "@libs/logWriter";
+import { PropertyInterestType } from "@shared/housing";
 
 type Config = {
   accessTokenClient: AccessTokenClient;
-  housingHotelMotelRegistrationClient: HotelMotelRegistrationClient;
+  housingHousingRegistrationClient: HousingRegistrationClient;
   housingPropertyInterestClient: HousingPropertyInterestClient;
 };
 
-export const DynamicsHotelMotelRegistrationStatusClient = (
-  logWriter: LogWriterType,
+export const DynamicsHousingRegistrationStatusClient = (
   config: Config
-): ((address: string, municipalityId: string) => Promise<HousingRegistrationRequestLookupResponse>) => {
+): ((
+  address: string,
+  municipalityId: string,
+  propertyInterestType: PropertyInterestType
+) => Promise<HousingRegistrationRequestLookupResponse>) => {
   return async (
     address: string,
-    municipalityId: string
+    municipalityId: string,
+    propertyInterestType: PropertyInterestType
   ): Promise<HousingRegistrationRequestLookupResponse> => {
     const accessToken = await config.accessTokenClient.getAccessToken();
     const propertyInterest = await config.housingPropertyInterestClient.getPropertyInterest(
@@ -34,10 +38,11 @@ export const DynamicsHotelMotelRegistrationStatusClient = (
       };
     }
 
-    const registrations = await config.housingHotelMotelRegistrationClient.getHotelMotelRegistration(
+    const registrations = await config.housingHousingRegistrationClient.getHousingRegistration(
       accessToken,
       propertyInterest.id,
-      propertyInterest.buildingCount
+      propertyInterest.buildingCount,
+      propertyInterestType
     );
 
     if (!registrations || registrations.length === 0) {
@@ -49,6 +54,7 @@ export const DynamicsHotelMotelRegistrationStatusClient = (
     return {
       registrations: registrations,
       lookupStatus: "SUCCESSFUL",
+      renewalDate: propertyInterest.BHINextInspectionDueDate || "",
     };
   };
 };
