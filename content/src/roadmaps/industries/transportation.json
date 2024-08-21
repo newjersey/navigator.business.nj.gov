@@ -54,6 +54,5 @@
   "isEnabled": false,
   "additionalSearchTerms": "taxi, limo, bus, shuttle, transport van, car service",
   "id": "transportation",
-  "description": "Offers transportation services in vehicles with a passenger capacity of more than 10 people",
-  "webflowId": "656a1362fdbea9f17a6a7046"
+  "description": "Offers transportation services in vehicles with a passenger capacity of more than 10 people"
 }

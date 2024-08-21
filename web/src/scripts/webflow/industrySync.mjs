@@ -56,7 +56,8 @@ const getNewIndustries = async () => {
   );
 
   return industriesObject.filter(
-    (it) => it.webflowId === undefined || !currentIndustryNamesInWebflowIds.has(it.webflowId)
+    (it) =>
+      (it.webflowId === undefined || !currentIndustryNamesInWebflowIds.has(it.webflowId)) && it.isEnabled
   );
 };
 

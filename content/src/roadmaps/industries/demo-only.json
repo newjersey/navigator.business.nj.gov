@@ -21,9 +21,7 @@
     }
   ],
   "name": "Demo Only",
-  "nonEssentialQuestionsIds": [
-    "weights-measures"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "Demo Only",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
@@ -45,6 +43,5 @@
   "isEnabled": false,
   "additionalSearchTerms": "dev, qa, test",
   "id": "demo-only",
-  "description": "This is a demo industry used for the purpose of QAing edge cases throughout the application.",
-  "webflowId": "66c6221438d63f5620e0cb15"
+  "description": "This is a demo industry used for the purpose of QAing edge cases throughout the application."
 }
