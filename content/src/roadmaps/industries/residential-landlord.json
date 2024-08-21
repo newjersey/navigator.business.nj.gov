@@ -1,7 +1,7 @@
 {
   "naicsCodes": "531110",
   "defaultSectorId": "other-services",
-  "canHavePermanentLocation": true,
+  "canHavePermanentLocation": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -46,17 +46,30 @@
       "step": 4,
       "weight": 1,
       "task": "search-licenses"
+    },
+    {
+      "step": 4,
+      "weight": 200,
+      "task": "residential-lease-agreement"
     }
   ],
   "name": "Residential Landlord",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
   "displayname": "residential-landlord",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
     "canBeReseller": false
   },
+  "modifications": [
+    {
+      "taskToReplaceFilename": "get-insurance",
+      "replaceWithFilename": "landlord-insurance-policy"
+    }
+  ],
   "isEnabled": true,
-  "additionalSearchTerms": "residential rentals, apartment, leasing, house rental",
+  "additionalSearchTerms": "residential rentals, apartment, leasing, house rental, condo rental, airbnb, vrbo, short-term rental",
   "id": "residential-landlord",
   "description": "Owns and rents out property for people to live in",
   "webflowId": "656a13628934eb2330f44bcb"

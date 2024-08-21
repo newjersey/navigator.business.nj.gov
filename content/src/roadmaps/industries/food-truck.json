@@ -1,13 +1,7 @@
 {
-  "displayname": "food-truck",
   "naicsCodes": "722330",
-  "canHavePermanentLocation": false,
   "defaultSectorId": "accommodation-and-food-services",
-  "industryOnboardingQuestions": {
-    "canBeReseller": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "canHavePermanentLocation": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -76,11 +70,25 @@
     },
     {
       "step": 4,
+      "weight": 1,
+      "licenseTask": "fire-permit-food-truck",
+      "required": true
+    },
+    {
+      "step": 4,
       "weight": 2,
       "licenseTask": "town-mercantile-license"
     }
   ],
   "name": "Food Truck",
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
+  "displayname": "food-truck",
+  "industryOnboardingQuestions": {
+    "canBeReseller": true
+  },
+  "isEnabled": true,
   "additionalSearchTerms": "lunch wagon,food service truck,street food,food cart,fast food cart, food vendor",
   "id": "food-truck",
   "description": "A vehicle where food or beverages are transported, stored, or prepared for sale at temporary locations",

@@ -14,7 +14,7 @@ A **Certificate of Formation** confirms the `formation of your business|business
 
 It provides a unique 10-digit Entity ID number to keep track of your corporate (non-tax) records.
 
-A **Certificate of Incorporation** is the same as a Certificate of Formation. Out-of-state businesses will sometimes have this certificate because that's the term used in their state
+**Certificate of Incorporation** or **Articles of Formation** are the same as a Certificate of Formation. Out-of-state businesses will sometimes have this certificate because that's the term used in their state.
 
 
 A **Certificate of Authority** permits out-of-state or foreign businesses to operate in the State of New Jersey.

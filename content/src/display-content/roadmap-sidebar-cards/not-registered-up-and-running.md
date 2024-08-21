@@ -1,9 +1,10 @@
 ---
+notesMd: "* 8.16 updated per NJ business ux content slack thread initiated by
+  Cary and signed off by Jess"
 id: not-registered-up-and-running
-header: "Link Your myNewJersey Account"
+header: Create an Account
 hasCloseButton: false
 ctaText: ""
 preBodySpanButtonText: ""
 ---
-
-To save your progress on your Business.NJ.gov account, [link your existing myNewJersey account](/account-setup).
+To save your progress, [create or link your myNewJersey account](/account-setup).
