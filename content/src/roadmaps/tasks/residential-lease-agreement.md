@@ -20,7 +20,7 @@ id: residential-lease-agreement
 * **Lease details**: Specify information such as the lease period, rent, property use, and renewal and termination terms
 * **Security deposit requirements**: Make sure to comply with [New Jersey’s Security Deposit Law](https://www.nj.gov/dca/divisions/codes/publications/pdf_lti/secty_deposit_bulletin.pdf)
 * **Maintenance**: Clearly define the responsibilities of the landlord and tenant
-* **Addendums**: Include addendums for specific situations or agreements not covered in the main lease
+* **Addenda**: Include additional items, called an addendum or addenda, for specific agreements not covered in the main lease, such as owning pets
 * **Legal disclosures**: Include required disclosures, such as lead paint information 
 * **`Lead-safe certificate|lead-safe-certification`**: Attach a copy of your lead-safe certificate, if you are required to get one
 
