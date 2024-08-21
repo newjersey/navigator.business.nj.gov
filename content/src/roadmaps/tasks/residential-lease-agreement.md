@@ -27,7 +27,7 @@ id: residential-lease-agreement
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
-There are certain landlord-tenant laws you must comply with, such as the Anti-Eviction Act. For more information, see the [Truth-in-Renting Guide](https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf) (en español: [Veracidad en Los Alquileres](https://www.nj.gov/dca/divisions/codes/publications/pdf_lti/t_i_r_spanish.pdf)).
+There are certain landlord-tenant laws you must comply with, such as the Anti-Eviction Act. For more information, see the [Truth-in-Renting Guide](https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf).
 
 :::
 
