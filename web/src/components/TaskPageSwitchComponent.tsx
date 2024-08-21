@@ -3,6 +3,7 @@ import { EinTask } from "@/components/tasks/EinTask";
 import { ElevatorRegistrationTask } from "@/components/tasks/ElevatorRegistrationTask";
 import { HotelMotelRegistrationTask } from "@/components/tasks/HotelMotelRegistrationTask";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
+import { MultipleDwellingRegistrationTask } from "@/components/tasks/MultipleDwellingRegistrationTask";
 import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
 import { TaxTask } from "@/components/tasks/TaxTask";
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
@@ -58,6 +59,9 @@ export const TaskPageSwitchComponent = ({
     ),
     "hotel-motel-registration": (
       <HotelMotelRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
+    ),
+    "multiple-dwelling-registration": (
+      <MultipleDwellingRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),
     "determine-naics-code": <NaicsCodeTask task={task} />,
     "priority-status-cannabis": <CannabisPriorityStatusTask task={task} />,

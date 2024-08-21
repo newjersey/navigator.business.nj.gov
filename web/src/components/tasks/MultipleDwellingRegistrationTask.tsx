@@ -10,7 +10,7 @@ import { HousingMunicipalitiesContext } from "@/contexts/housingMunicipalitiesCo
 import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { HotelMotelRegistrationSearchError, Task } from "@/lib/types/types";
+import { MultipleDwellingSearchError, Task } from "@/lib/types/types";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 import {
@@ -29,11 +29,11 @@ interface Props {
 const APPLICATION_TAB_INDEX = 0;
 const STATUS_TAB_INDEX = 1;
 
-export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
+export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const callToActionLink = getModifiedTaskContent(roadmap, props.task, "callToActionLink");
   const [tabIndex, setTabIndex] = useState(APPLICATION_TAB_INDEX);
-  const [error, setError] = useState<HotelMotelRegistrationSearchError | undefined>(undefined);
+  const [error, setError] = useState<MultipleDwellingSearchError | undefined>(undefined);
   const [housingAddress, setHousingAddress] = useState<HousingAddress | undefined>(undefined);
   const [housingRegistrationLookupSummary, setHousingRegistrationLookupSummary] = useState<
     HousingRegistrationRequestLookupResponse | undefined
@@ -57,31 +57,30 @@ export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
   }
 
   const onSubmit = (address: HousingAddress): void => {
-    if (address?.address1 && address?.municipalityExternalId) {
-      setIsLoading(true);
-      api
-        .checkHousingRegistrationStatus(address.address1, address.municipalityExternalId, "hotelMotel")
-        .then((result) => {
-          if (result.lookupStatus === "NO PROPERTY INTERESTS FOUND") {
-            setError("NO_PROPERTY_INTEREST_FOUND");
-          } else if (result.lookupStatus === "NO REGISTRATIONS FOUND") {
-            setError("NO_HOTEL_MOTEL_REGISTRATIONS_FOUND");
-          } else {
-            setError(undefined);
-            setHousingAddress(address);
-            setHousingRegistrationLookupSummary(result);
-          }
-        })
-        .catch(() => {
-          setError("SEARCH_FAILED");
-        })
-        .finally(async () => {
-          setIsLoading(false);
-        });
-    } else {
+    if (!(address?.address1 && address?.municipalityExternalId)) {
       setError("FIELDS_REQUIRED");
       return;
     }
+    setIsLoading(true);
+    api
+      .checkHousingRegistrationStatus(address.address1, address.municipalityExternalId, "multipleDwelling")
+      .then((result) => {
+        if (result.lookupStatus === "NO PROPERTY INTERESTS FOUND") {
+          setError("NO_PROPERTY_INTEREST_FOUND");
+        } else if (result.lookupStatus === "NO REGISTRATIONS FOUND") {
+          setError("NO_MULTIPLE_DWELLINGS_REGISTRATIONS_FOUND");
+        } else {
+          setError(undefined);
+          setHousingAddress(address);
+          setHousingRegistrationLookupSummary(result);
+        }
+      })
+      .catch(() => {
+        setError("SEARCH_FAILED");
+      })
+      .finally(async () => {
+        setIsLoading(false);
+      });
   };
 
   const tabStyle = {
@@ -102,7 +101,7 @@ export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
             <Box>
               <TabList
                 onChange={onSelectTab}
-                aria-label="Hotel, Motel, and Guest House Registration task"
+                aria-label="Multiple Dwelling Registration task"
                 sx={{ borderBottom: 1, borderColor: "divider", marginTop: ".25rem", marginLeft: ".5rem" }}
               >
                 <Tab
@@ -153,6 +152,7 @@ export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
                   summary={housingRegistrationLookupSummary}
                   task={props.task}
                   address={housingAddress}
+                  dueDate={housingRegistrationLookupSummary.renewalDate}
                 />
               ) : (
                 <CheckHousingRegistrationStatus

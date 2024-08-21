@@ -1,11 +1,11 @@
-import { HousingHotelMotelRegistrationStatus, HousingPropertyInterestStatus } from "@domain/types";
+import { HousingPropertyInterestStatus, HousingRegistrationStatus } from "@domain/types";
 import { HousingPropertyInterestDetails, HousingRegistrationRequestLookupResponse } from "@shared/housing";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
 export const housingRouterFactory = (
   housingPropertyInterest: HousingPropertyInterestStatus,
-  housingHotelMotelRegistrationStatus: HousingHotelMotelRegistrationStatus
+  housingRegistrationStatus: HousingRegistrationStatus
 ): Router => {
   const router = Router();
 
@@ -20,9 +20,9 @@ export const housingRouterFactory = (
       });
   });
 
-  router.post("/housing/registrations/hotelmotel", async (req, res) => {
-    const { address, municipalityId } = req.body;
-    housingHotelMotelRegistrationStatus(address, municipalityId)
+  router.post("/housing/registrations/", async (req, res) => {
+    const { address, municipalityId, propertyInterestType } = req.body;
+    housingRegistrationStatus(address, municipalityId, propertyInterestType)
       .then(async (registrations?: HousingRegistrationRequestLookupResponse) => {
         return res.json(registrations);
       })

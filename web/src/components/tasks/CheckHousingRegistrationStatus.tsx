@@ -3,7 +3,7 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { HotelMotelRegistrationSearchError } from "@/lib/types/types";
+import { HotelMotelRegistrationSearchError, MultipleDwellingSearchError } from "@/lib/types/types";
 import { toProperCase } from "@businessnjgovnavigator/shared";
 import { HousingAddress, HousingMunicipality } from "@businessnjgovnavigator/shared/housing";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
@@ -12,17 +12,22 @@ import { ChangeEvent, FormEvent, ReactElement, useEffect, useState } from "react
 
 interface Props {
   onSubmit: (address: HousingAddress) => void;
-  error: HotelMotelRegistrationSearchError | undefined;
+  error: HotelMotelRegistrationSearchError | MultipleDwellingSearchError | undefined;
   isLoading: boolean;
   municipalities: HousingMunicipality[];
 }
 
 const Config = getMergedConfig();
-const HotelMotelSearchErrorLookup: Record<HotelMotelRegistrationSearchError, string> = {
+const HousingRegistrationSearchErrorLookup: Record<
+  HotelMotelRegistrationSearchError | MultipleDwellingSearchError,
+  string
+> = {
   NO_PROPERTY_INTEREST_FOUND: Config.housingRegistrationSearchTask.errorTextNoPropertyInterestFound,
   NO_HOTEL_MOTEL_REGISTRATIONS_FOUND: Config.housingRegistrationSearchTask.errorTextNoHotelMotelRegistrations,
   FIELDS_REQUIRED: Config.housingRegistrationSearchTask.errorTextFieldsRequired,
   SEARCH_FAILED: Config.housingRegistrationSearchTask.errorTextSearchFailed,
+  NO_MULTIPLE_DWELLINGS_REGISTRATIONS_FOUND:
+    Config.housingRegistrationSearchTask.errorTextNoMultipleDwellingRegistrations,
 };
 
 export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
@@ -42,26 +47,16 @@ export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
   useEffect(() => {
     const communityAffairsAddress = business?.profileData.communityAffairsAddress;
 
-    if (communityAffairsAddress) {
-      if (communityAffairsAddress.streetAddress1) {
-        setFormValues((prevValues) => {
-          return {
-            ...prevValues,
-            address1: communityAffairsAddress.streetAddress1,
-          };
-        });
-      }
-      if (communityAffairsAddress.streetAddress2) {
-        setFormValues((prevValues) => {
-          return {
-            ...prevValues,
-            address2: communityAffairsAddress.streetAddress2,
-          };
-        });
-      }
-      if (communityAffairsAddress.municipality) {
-        setSelectedMunicipality(communityAffairsAddress.municipality);
-      }
+    setFormValues((prevValues) => {
+      return {
+        ...prevValues,
+        address1: communityAffairsAddress?.streetAddress1 || prevValues.address1,
+        address2: communityAffairsAddress?.streetAddress2,
+      };
+    });
+
+    if (communityAffairsAddress?.municipality) {
+      setSelectedMunicipality(communityAffairsAddress.municipality);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -113,7 +108,7 @@ export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
 
     return (
       <Alert dataTestid={`error-alert-${props.error}`} variant="error">
-        {HotelMotelSearchErrorLookup[props.error]}
+        {HousingRegistrationSearchErrorLookup[props.error]}
       </Alert>
     );
   };

@@ -39,4 +39,7 @@ export type HousingRegistrationRequest = {
 export type HousingRegistrationRequestLookupResponse = {
   registrations: HousingRegistrationRequest[];
   lookupStatus: string;
+  renewalDate?: string;
 };
+
+export type PropertyInterestType = "hotelMotel" | "multipleDwelling";
