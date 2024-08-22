@@ -3,7 +3,18 @@ import { generateAddress } from "@/test/factories";
 import { WithStatefulAddressData } from "@/test/mock/withStatefulAddressData";
 import { Address, emptyAddressData, Municipality } from "@businessnjgovnavigator/shared/";
 import { generateMunicipality } from "@businessnjgovnavigator/shared/test";
+import * as materialUi from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen, within } from "@testing-library/react";
+
+jest.mock("@mui/material", () => mockMaterialUI());
+
+function mockMaterialUI(): typeof materialUi {
+  return {
+    ...jest.requireActual("@mui/material"),
+    useMediaQuery: jest.fn(),
+  };
+}
 
 describe("ProfileAddressLockedFields", () => {
   const renderComponent = ({
@@ -14,12 +25,14 @@ describe("ProfileAddressLockedFields", () => {
     municipalities?: Municipality[];
   }): void => {
     render(
-      <WithStatefulAddressData
-        initialData={address || emptyAddressData}
-        municipalities={municipalities || [generateMunicipality({})]}
-      >
-        <ProfileAddressLockedFields />
-      </WithStatefulAddressData>
+      <ThemeProvider theme={createTheme()}>
+        <WithStatefulAddressData
+          initialData={address || emptyAddressData}
+          municipalities={municipalities || [generateMunicipality({})]}
+        >
+          <ProfileAddressLockedFields />
+        </WithStatefulAddressData>
+      </ThemeProvider>
     );
   };
 
@@ -33,6 +46,7 @@ describe("ProfileAddressLockedFields", () => {
     });
     renderComponent({ address });
 
+    expect(screen.getByTestId("locked-profileBusinessAddressTooltip")).toBeInTheDocument();
     const addressLine1 = screen.getByTestId("locked-profileAddressLine1");
     expect(within(addressLine1).getByText("1111 Home Alone")).toBeInTheDocument();
     const addressMuniStateZip = screen.getByTestId("locked-profileAddressMuniStateZip");
@@ -50,6 +64,7 @@ describe("ProfileAddressLockedFields", () => {
     });
     renderComponent({ address });
 
+    expect(screen.getByTestId("locked-profileBusinessAddressTooltip")).toBeInTheDocument();
     const addressLine1 = screen.getByTestId("locked-profileAddressLine1");
     expect(within(addressLine1).getByText("1111 Home Alone")).toBeInTheDocument();
     const addressLine2 = screen.getByTestId("locked-profileAddressLine2");
@@ -68,6 +83,8 @@ describe("ProfileAddressLockedFields", () => {
     });
     renderComponent({ address });
 
+    expect(screen.getByTestId("locked-profileBusinessAddressTooltip")).toBeInTheDocument();
+    expect(screen.getByTestId("locked-profileAddressNotProvided")).toBeInTheDocument();
     expect(screen.queryByTestId("locked-profileAddressLine1")).not.toBeInTheDocument();
     expect(screen.queryByTestId("locked-profileAddressLine2")).not.toBeInTheDocument();
     expect(screen.queryByTestId("locked-profileAddressMuniStateZip")).not.toBeInTheDocument();

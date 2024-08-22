@@ -5483,6 +5483,7 @@ collections:
                   - { label: Save Button Text, name: saveButtonText, widget: string }
                   - { label: Back Button Text, name: backButtonText, widget: string }
                   - { label: Info Tab Title, name: profileTabInfoTitle, widget: string }
+                  - { label: Address Not Provided Text, name: profileAddressNotProvided, widget: string }
                   - {
                       label: Note for Businesses Formed Outside Navigator,
                       name: noteForBusinessesFormedOutsideNavigator,
