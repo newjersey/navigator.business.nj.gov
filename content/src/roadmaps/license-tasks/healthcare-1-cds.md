@@ -30,8 +30,8 @@ webflowId: 668d72e6096a17ca97b553f9
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
-* Register each CDS storage location using the same initial registration form. Note 'branch' at the top and email it to the New Jersey Drug Control Unit (DCU)
-* To validate your CDS registration, register with the [U.S. Drug Enforcement Administration (DEA).](https://www.deadiversion.usdoj.gov/online_forms_apps.html) Email your DEA registration to [cds@dca.njoag.gov](mailto:cds@dca.njoag.gov) within 60 days
+* Register each CDS storage location using the same initial registration form, noting 'branch' at the top
+* You also need to register with the [U.S. Drug Enforcement Administration (DEA).](https://www.deadiversion.usdoj.gov/online_forms_apps.html) Email your DEA registration to [cds@dca.njoag.gov](mailto:cds@dca.njoag.gov) within 60 days
 
 
 :::
