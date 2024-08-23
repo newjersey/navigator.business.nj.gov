@@ -6,13 +6,10 @@ displayname: healthcare-2-cds
 urlSlug: healthcare-2-cds
 name: Apply for Your PA, APN, or CNM Controlled Dangerous Substances Registration
 webflowName: "Healthcare: Controlled Dangerous Substance Registration - PA, APN, and CNM"
-summaryDescriptionMd: >-
+summaryDescriptionMd: >
   You need a Controlled Dangerous Substances (CDS) registration if you’re a
   Physician Assistant (PA), Advanced Practice Nurse (APN), or Certified Nurse
   Midwife (CNM), and you or your business prescribe or dispense any CDS.
-
-
-  You also need to register each location where you store CDS. Use the same form as your initial registration. Write "branch" at the top of the application before submitting it to the New Jersey Drug Control Unit (DCU).
 industryId: healthcare
 callToActionText: Apply for My CDS Registration
 callToActionLink: https://www.njconsumeraffairs.gov/dcu/Applications/Initial-Application-for-Registration-for-Dispenser-Prescriber-Practitioner.pdf
@@ -23,7 +20,9 @@ webflowId: 668d72e7096a17ca97b55564
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
-Be sure to register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) within 60 days of completing your CDS registration.
+* Register each CDS storage location using the same initial registration form, noting 'branch' at the top
+* You also need to register with the [U.S. Drug Enforcement Administration (DEA).](https://www.deadiversion.usdoj.gov/online_forms_apps.html) Email your DEA registration to [cds@dca.njoag.gov](mailto:cds@dca.njoag.gov) within 60 days
+
 
 :::
 
