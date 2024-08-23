@@ -56,7 +56,7 @@ import {
 import NonEssentialQuestions from "@businessnjgovnavigator/content/roadmaps/nonEssentialQuestions.json";
 import ForeignSteps from "@businessnjgovnavigator/content/roadmaps/steps-foreign.json";
 import Steps from "@businessnjgovnavigator/content/roadmaps/steps.json";
-import { Industries } from "@businessnjgovnavigator/shared";
+import { getIndustries } from "@businessnjgovnavigator/shared/industry";
 import { TextField } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -136,7 +136,9 @@ const SearchContentPage = (props: Props): ReactElement => {
     setCertMatches(searchCertifications(props.certifications, lowercaseTerm));
     setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
     setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
-    setIndustryMatches(searchIndustries(Industries, lowercaseTerm));
+    setIndustryMatches(
+      searchIndustries(getIndustries({ overrideShowDisabledIndustries: true }), lowercaseTerm)
+    );
     setAnytimeActionLinkMatches(searchAnytimeActionLinks(props.anytimeActionLinks, lowercaseTerm));
     setAnytimeActionTaskMatches(searchAnytimeActionTasks(props.anytimeActionTasks, lowercaseTerm));
     setAnytimeActionLicenseReinstatementMatches(

@@ -3,10 +3,10 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { Industry } from "@businessnjgovnavigator/shared/industry";
 import {
+  filterRandomIndustry,
   generateBusiness,
   generateProfileData,
   generateUserDataForBusiness,
-  randomFilteredIndustry,
 } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
 
@@ -35,7 +35,7 @@ describe("<CannabisLocationAlert />", () => {
 
   it("is NOT displayed for non-cannabis businesses", () => {
     const filter = (industry: Industry): boolean => industry.id !== "cannabis";
-    const industry = randomFilteredIndustry(filter, { isEnabled: true });
+    const industry = filterRandomIndustry(filter);
 
     renderWithBusiness(industry.id);
     expect(screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)).not.toBeInTheDocument();
