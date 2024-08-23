@@ -48,6 +48,9 @@ web/cypress/screenshots/
 web/.storybook/build
 web/public/vendor
 
+# sitemap
+web/public/sitemap.xml
+
 #amplify
 amplify/\#current-cloud-backend
 amplify/.config/local-*
