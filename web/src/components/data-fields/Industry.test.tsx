@@ -10,7 +10,7 @@ import {
 } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { WithStatefulProfileData, currentProfileData } from "@/test/mock/withStatefulProfileData";
-import { generateProfileData, randomFilteredIndustry, randomIndustry } from "@businessnjgovnavigator/shared";
+import { filterRandomIndustry, generateProfileData, randomIndustry } from "@businessnjgovnavigator/shared";
 import {
   ProfileData,
   createEmptyProfileData,
@@ -94,7 +94,7 @@ describe("<Industry />", () => {
       return eq.fieldName !== "residentialConstructionType" && eq.fieldName !== "employmentPlacementType";
     });
     nonConditionalEssentialQuestions.map((el) => {
-      const validIndustryId = randomFilteredIndustry(el.isQuestionApplicableToIndustry, { isEnabled: true });
+      const validIndustryId = filterRandomIndustry(el.isQuestionApplicableToIndustry);
       const nonValidIndustryId = randomNegativeFilteredIndustry(el.isQuestionApplicableToIndustry);
 
       businessPersonas.map((persona) => {

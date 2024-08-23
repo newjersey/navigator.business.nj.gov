@@ -1,4 +1,4 @@
-import { Industries } from "@businessnjgovnavigator/shared/industry";
+import { getIndustries } from "@businessnjgovnavigator/shared/industry";
 
 export const STARTER_KITS_GENERIC_SLUG = "nj-business";
 
@@ -9,7 +9,7 @@ export type StarterKitsUrl = {
 };
 
 export const getAllStarterKitUrls = (): PathParameters<StarterKitsUrl>[] => {
-  return Industries.filter((industry) => industry.isEnabled).map((industry) => {
+  return getIndustries().map((industry) => {
     if (industry.id === "generic") {
       return {
         params: {

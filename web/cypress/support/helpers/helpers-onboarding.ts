@@ -6,10 +6,10 @@ import {
   Registration,
   StartingOnboardingData,
 } from "@businessnjgovnavigator/cypress/support/types";
-import { Industries, Industry } from "@businessnjgovnavigator/shared/lib/shared/src/industry";
+import { getIndustries, Industry } from "@businessnjgovnavigator/shared/lib/shared/src/industry";
 import { randomInt } from "@businessnjgovnavigator/shared/lib/shared/src/intHelpers";
 import { carServiceOptions } from "@businessnjgovnavigator/shared/lib/shared/src/profileData";
-import { LookupSectorTypeById, arrayOfSectors } from "@businessnjgovnavigator/shared/lib/shared/src/sector";
+import { arrayOfSectors, LookupSectorTypeById } from "@businessnjgovnavigator/shared/lib/shared/src/sector";
 
 export const completeNewBusinessOnboarding = ({
   industry = undefined,
@@ -26,7 +26,7 @@ export const completeNewBusinessOnboarding = ({
   petCareHousing = undefined,
 }: Partial<StartingOnboardingData> & Partial<Registration>): void => {
   if (industry === undefined) {
-    industry = randomElementFromArray(Industries.filter((x) => x.isEnabled) as Industry[]) as Industry;
+    industry = randomElementFromArray(getIndustries()) as Industry;
   }
 
   if (carService === undefined) {
@@ -279,7 +279,7 @@ export const completeForeignNexusBusinessOnboarding = ({
   cy.url().should("include", `onboarding?page=3`);
 
   if (industry === undefined) {
-    industry = randomElementFromArray(Industries.filter((x) => x.isEnabled) as Industry[]) as Industry;
+    industry = randomElementFromArray(getIndustries()) as Industry;
   }
 
   onOnboardingPage.selectIndustry((industry as Industry).id);

@@ -5,10 +5,10 @@ import * as roadmapBuilderModule from "@/lib/roadmap/roadmapBuilder";
 import { generateRoadmap, generateTask } from "@/test/factories";
 import { getLastCalledWith } from "@/test/helpers/helpers-utilities";
 import {
-  Industries,
   generateMunicipality,
   generateMunicipalityDetail,
   generateProfileData,
+  getIndustries,
 } from "@businessnjgovnavigator/shared";
 import * as fetchMunicipalityById from "@businessnjgovnavigator/shared/domain-logic/fetchMunicipalityById";
 import {
@@ -263,7 +263,7 @@ describe("buildUserRoadmap", () => {
   });
 
   describe("industry", () => {
-    for (const industry of Industries.filter((x) => {
+    for (const industry of getIndustries().filter((x) => {
       return x.id !== "generic";
     })) {
       it(`adds ${industry.name} industry and modifications`, async () => {
@@ -271,7 +271,7 @@ describe("buildUserRoadmap", () => {
           generateStartingProfile({ industryId: industry.id, certifiedInteriorDesigner: true })
         );
         const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
-        const shouldNotContainIndustries = Industries.filter((it) => {
+        const shouldNotContainIndustries = getIndustries().filter((it) => {
           return it.id !== industry.id;
         });
         expect(lastCalledWith.industryId).toBe(industry.id);
@@ -283,7 +283,7 @@ describe("buildUserRoadmap", () => {
 
     describe("on-boarding modifications", () => {
       describe("staffing service", () => {
-        for (const industry of Industries.filter((x) => {
+        for (const industry of getIndustries().filter((x) => {
           return x.industryOnboardingQuestions.isProvidesStaffingServicesApplicable;
         })) {
           it(`set industry to employment-agency if ${industry.name} with staffing service`, async () => {
