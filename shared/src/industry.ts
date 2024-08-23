@@ -1,3 +1,4 @@
+import { orderBy } from "lodash";
 import industryJson from "../../content/lib/industry.json";
 
 export interface Industry {
@@ -50,7 +51,7 @@ export interface TaskModification {
 
 export const LookupIndustryById = (id: string | undefined): Industry => {
   return (
-    Industries.find((x) => {
+    getIndustries().find((x) => {
       return x.id === id;
     }) ?? {
       id: "",
@@ -81,8 +82,18 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
   );
 };
 
-export const Industries: Industry[] = industryJson.industries;
-
 export const isIndustryIdGeneric = (industry: Industry): boolean => {
   return industry.id === "generic";
 };
+
+// eslint-disable-next-line unicorn/prevent-abbreviations
+export const getIndustries = (props?: { overrideShowDisabledIndustries?: boolean }): Industry[] =>
+  orderBy(industryJson.industries as Industry[], [isIndustryIdGeneric, "name"], ["desc", "asc"]).filter(
+    (x) => {
+      return (
+        x.isEnabled ||
+        props?.overrideShowDisabledIndustries ||
+        process.env.SHOW_DISABLED_INDUSTRIES === "true"
+      );
+    }
+  );

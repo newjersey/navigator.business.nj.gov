@@ -15,7 +15,6 @@ import { WithStatefulUserData, currentBusiness } from "@/test/mock/withStatefulU
 import {
   BusinessPersona,
   DateObject,
-  Industries,
   Municipality,
   UserData,
   businessStructureTaskId,
@@ -26,6 +25,7 @@ import {
   generateProfileData,
   generateUser,
   generateUserDataForBusiness,
+  getIndustries,
   industrySpecificDataChoices,
 } from "@businessnjgovnavigator/shared/";
 import { ThemeProvider, createTheme } from "@mui/material";
@@ -329,11 +329,11 @@ export const mockSuccessfulApiSignups = (): void => {
   });
 };
 
-export const industriesWithSingleEssentialQuestion = Industries.filter((industry) => {
+export const industriesWithSingleEssentialQuestion = getIndustries().filter((industry) => {
   return hasEssentialQuestion(industry.id) && industry.isEnabled && industry.id !== "employment-agency";
 });
 
-export const industriesWithOutEssentialQuestion = Industries.filter((industry) => {
+export const industriesWithOutEssentialQuestion = getIndustries().filter((industry) => {
   return !hasEssentialQuestion(industry.id) && industry.isEnabled;
 });
 

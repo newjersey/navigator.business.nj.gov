@@ -1,13 +1,13 @@
 import analytics from "@/lib/utils/analytics";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
-import { generateProfileData, Industries } from "@businessnjgovnavigator/shared/";
+import { generateProfileData, getIndustries } from "@businessnjgovnavigator/shared/";
 import { sendOnboardingOnSubmitEvents } from "./analytics-helpers";
 
 jest.mock("@/lib/utils/analytics");
 
 const mockAnalytic = analytics as jest.Mocked<typeof analytics>;
 
-const liquorLicenseApplicableIndustries = Industries.filter((industry) => {
+const liquorLicenseApplicableIndustries = getIndustries().filter((industry) => {
   return industry.industryOnboardingQuestions.isLiquorLicenseApplicable === true;
 });
 

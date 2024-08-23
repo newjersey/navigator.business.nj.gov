@@ -14,14 +14,12 @@ import { templateEval } from "@/lib/utils/helpers";
 import { splitAndBoldSearchText } from "@/lib/utils/splitAndBoldSearchText";
 import {
   CannabisLicenseType,
-  Industries,
   Industry,
   LookupIndustryById,
-  isIndustryIdGeneric,
+  getIndustries,
 } from "@businessnjgovnavigator/shared";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 import { Autocomplete, FilterOptionsState, TextField, createFilterOptions } from "@mui/material";
-import { orderBy } from "lodash";
 import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
 
 interface Props {
@@ -44,13 +42,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       fieldName: "industryId",
     });
 
-  const IndustriesOrdered: Industry[] = orderBy(
-    Industries,
-    [isIndustryIdGeneric, "name"],
-    ["desc", "asc"]
-  ).filter((x) => {
-    return x.isEnabled || process.env.SHOW_DISABLED_INDUSTRIES === "true";
-  });
+  const Industries = getIndustries();
 
   const onIndustryIdChange = (industryId: string | undefined): void => {
     let cannabisLicenseType = undefined;
@@ -118,7 +110,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
 
   return (
     <Autocomplete
-      options={IndustriesOrdered}
+      options={Industries}
       filterOptions={getFilterOptions}
       groupBy={(): string => {
         return "DEFAULT-GROUP";

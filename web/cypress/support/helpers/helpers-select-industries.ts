@@ -1,13 +1,13 @@
 import { randomElementFromArray } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
-import { Industries, Industry } from "@businessnjgovnavigator/shared/lib/shared/src/industry";
+import { getIndustries, Industry } from "@businessnjgovnavigator/shared/lib/shared/src/industry";
 
-export const homeBasedIndustries = Industries.filter((industry) => {
+export const homeBasedIndustries = getIndustries().filter((industry) => {
   return industry.industryOnboardingQuestions.canBeHomeBased && industry.canHavePermanentLocation;
 });
-export const liquorLicenseIndustries = Industries.filter((industry) => {
+export const liquorLicenseIndustries = getIndustries().filter((industry) => {
   return industry.industryOnboardingQuestions.isLiquorLicenseApplicable;
 });
-export const industriesNotHomeBasedOrLiquorLicense = Industries.filter((industry) => {
+export const industriesNotHomeBasedOrLiquorLicense = getIndustries().filter((industry) => {
   return (
     !industry.industryOnboardingQuestions.canBeHomeBased &&
     industry.canHavePermanentLocation &&

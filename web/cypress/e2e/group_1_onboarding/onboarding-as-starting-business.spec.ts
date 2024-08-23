@@ -1,8 +1,7 @@
 import {
   carServiceOptions,
   CarServiceType,
-  Industries,
-  Industry,
+  getIndustries,
   randomInt,
   ResidentialConstructionType,
 } from "@businessnjgovnavigator/shared";
@@ -13,9 +12,7 @@ import {
 } from "../../support/helpers/helpers";
 import { onOnboardingPageStartingBusiness } from "../../support/page_objects/onboardingPageNew";
 
-const enabledIndustries = Industries.filter((element: Industry) => {
-  return element.isEnabled;
-});
+const industries = getIndustries();
 
 describe("Onboarding for all industries when starting a business [feature] [all] [group1]", () => {
   describe("Desktop", () => {
@@ -23,7 +20,7 @@ describe("Onboarding for all industries when starting a business [feature] [all]
       cy.loginByCognitoApi();
     });
 
-    for (const industry of enabledIndustries) {
+    for (const industry of industries) {
       it(`Onboarding for ${industry.name}`, () => {
         cy.url().should("include", "onboarding?page=1");
         onOnboardingPageStartingBusiness.selectBusinessPersonaRadio("STARTING");
