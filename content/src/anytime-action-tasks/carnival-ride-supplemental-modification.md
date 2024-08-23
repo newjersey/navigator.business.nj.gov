@@ -4,10 +4,6 @@ notesMd: "[Muni planning
   Av4xC1g/edit)"
 filename: carnival-ride-supplemental-modification
 name: Modify Your Carnival or Amusement Ride
-industryIds:
-  - independent-artist
-sectorIds:
-  - arts-entertainment-and-recreation
 icon: file-purple.svg
 urlSlug: carnival-ride-supplemental-modification
 summaryDescriptionMd: If you want to make major changes to your `carnival or
@@ -24,7 +20,7 @@ callToActionLink: https://www.nj.gov/dca/codes/forms/pdf_rides/Appl_SuplCert.pdf
 * Ride name
 * Ride model
 * Manufacturer name
-*  `Ride serial number|ride-serial-number` 
+*  `Ride serial number|ride-serial-number`
 * Individual Approval number
 * `New Jersey serial number|nj-serial-number`
 * [Specific engineering requirements](https://www.nj.gov/dca/codes/forms/pdf_rides/IA_application.pdf), as applicable
