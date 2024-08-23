@@ -581,12 +581,12 @@ commands:
           docker_layer_caching: true
       - checkout
       - build-and-push-custom-node-image:
-          image-name: bfs_navigator_builder-20_16_0
+          image-name: bfs_navigator_builder-20_17_0
 
 jobs:
   merge-content:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_17_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -605,7 +605,7 @@ jobs:
 
   build:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_17_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -620,7 +620,7 @@ jobs:
 
   lint:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_17_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -633,7 +633,7 @@ jobs:
 
   test:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_17_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -655,7 +655,7 @@ jobs:
 
   prepare-release:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_17_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -667,7 +667,7 @@ jobs:
 
   deploy-content:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_17_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -683,7 +683,7 @@ jobs:
 
   deploy-accessibility-testing:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_17_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -699,7 +699,7 @@ jobs:
 
   deploy-dev:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_17_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -716,7 +716,7 @@ jobs:
 
   deploy-staging:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_17_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -729,7 +729,7 @@ jobs:
 
   deploy-production:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_17_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -751,7 +751,7 @@ jobs:
         type: string
         default: "chrome"
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_17_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -797,7 +797,7 @@ jobs:
 
   sync-fundings:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_17_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -811,7 +811,7 @@ jobs:
 
   sync-licenses:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_17_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
@@ -826,7 +826,7 @@ jobs:
 
   sync-industries:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_16_0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_17_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
