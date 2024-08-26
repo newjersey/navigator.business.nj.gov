@@ -142,7 +142,7 @@ export const LicenseDetailReceipt = (props: Props): ReactElement => {
           }  border-base-lightest padding-bottom-2 tablet:padding-bottom-05`}
         >
           <ChecklistTag status={item.status} />
-          <span className="tablet:margin-left-2 text-left width-full margin-top-05">{item.title}</span>
+          <span className="tablet:margin-left-2 text-left width-full">{item.title}</span>
         </div>
       </div>
     );
