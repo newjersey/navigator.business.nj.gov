@@ -20,7 +20,7 @@ summaryDescriptionMd: >-
 
   2. After your completed application has been emailed to the DCU, they will email you an invoice to pay the fee online.
 
-  3. Be sure to register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) within 60 days of completing your CDS registration.
+  3. Be sure to register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) to validate your CDS registration. Email a copy of your DEA registration to [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) within 60 days.
 industryId:
   - petcare
 agencyId: nj-consumer-affairs
