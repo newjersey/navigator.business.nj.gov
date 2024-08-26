@@ -10,7 +10,6 @@ summaryDescriptionMd: You must reinstate your Certificate of Authorization to
   inactive.
 callToActionText: Reinstate My Certificate of Authorization
 callToActionLink: https://www.njconsumeraffairs.gov/land/Pages/default.aspx
-aboveLicenseStatusContent: ""
 ---
 
 ## Application Requirements

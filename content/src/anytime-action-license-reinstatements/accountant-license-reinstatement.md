@@ -9,7 +9,6 @@ form: Application for Reinstatement/Reactivation of Licensure as an Accountant
 callToActionText: Reinstate My Accountant License
 licenseName: ""
 callToActionLink: https://www.njconsumeraffairs.gov/accold/Applications/Application-for-Reinstatement-Reactivation-of-Licensure.pdf
-aboveLicenseStatusContent: ""
 ---
 
 ## Application Requirements

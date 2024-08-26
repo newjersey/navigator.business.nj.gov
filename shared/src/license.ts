@@ -150,3 +150,5 @@ export type LicenseSearchAddress = {
   addressLine2: string;
   zipCode: string;
 };
+
+export const licenseSearchDateFormat = "MMMM D, YYYY";

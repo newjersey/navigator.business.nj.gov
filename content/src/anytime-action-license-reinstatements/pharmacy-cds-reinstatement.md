@@ -9,7 +9,6 @@ filename: pharmacy-cds-reinstatement
 name: Reinstate Your Pharmacy’s Controlled Dangerous Substances Registration
 icon: update-purple.svg
 urlSlug: pharmacy-cds-reinstatement
-aboveLicenseStatusContent: ""
 licenseName: ""
 summaryDescriptionMd: >-
   If your Controlled Dangerous Substances (CDS) registration expired less than

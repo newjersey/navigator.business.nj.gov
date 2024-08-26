@@ -1,4 +1,4 @@
-import { AnytimeActionDropdown } from "@/components/dashboard/anytime-actions/AnytimeActionDropdown";
+import { AnytimeActionDropdown } from "@/components/dashboard/AnytimeActionDropdown";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { AnytimeActionLicenseReinstatement, AnytimeActionLink, AnytimeActionTask } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
@@ -17,7 +17,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
+import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/index";
 
 function setupMockAnalytics(): typeof analytics {
   return {

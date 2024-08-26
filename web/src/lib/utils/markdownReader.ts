@@ -229,7 +229,6 @@ type AnytimeActionLicenseReinsatementGrayMatter = {
   icon: string;
   licenseName: LicenseName;
   summaryDescriptionMd: string;
-  aboveLicenseStatusContent: string;
 };
 
 type TaskGrayMatter = {
