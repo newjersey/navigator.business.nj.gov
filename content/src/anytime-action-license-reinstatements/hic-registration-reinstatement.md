@@ -11,7 +11,6 @@ summaryDescriptionMd: Your home improvement contractor (HIC) registration has
   expired and you can apply to reinstate it.
 callToActionText: Reinstate My HIC Registration
 callToActionLink: https://www.njconsumeraffairs.gov/hic/Pages/applications.aspx
-aboveLicenseStatusContent: ""
 ---
 
 ## Application Requirements

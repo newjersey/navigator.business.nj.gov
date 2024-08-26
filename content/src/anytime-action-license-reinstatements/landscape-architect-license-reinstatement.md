@@ -9,7 +9,6 @@ summaryDescriptionMd: You need to reinstate your license as a landscape
 form: Application for Reinstatement for Landscape Architects
 callToActionText: Reinstate My Landscape Architect License
 callToActionLink: https://www.njconsumeraffairs.gov/land/Applications/Application-for-Reinstatement-for-Landscape-Architects.pdf
-aboveLicenseStatusContent: ""
 ---
 
 ## Application Requirements

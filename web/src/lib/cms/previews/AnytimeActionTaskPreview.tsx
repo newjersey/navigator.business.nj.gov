@@ -1,4 +1,4 @@
-import { AnytimeActionElement } from "@/components/dashboard/anytime-actions/AnytimeActionPage";
+import { AnytimeActionSwitchComponent } from "@/components/tasks/anytime-action/AnytimeActionSwitchComponent";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
@@ -11,7 +11,7 @@ const AnytimeActionTaskPreview = (props: PreviewProps): ReactElement => {
 
   return (
     <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-      <AnytimeActionElement anytimeAction={anytimeAction} />
+      <AnytimeActionSwitchComponent anytimeActionTask={anytimeAction} />
     </div>
   );
 };

@@ -50,6 +50,7 @@ export const cmsCollections = [
       "Anytime Actions",
       "Anytime Action Tasks",
       "Anytime Action License Reinstatements",
+      "Anytime Action Reinstatement Defaults",
       "Anytime Action Labels",
     ],
   },

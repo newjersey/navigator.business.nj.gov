@@ -1,4 +1,7 @@
-import { AnytimeActionPage } from "@/components/dashboard/anytime-actions/AnytimeActionPage";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
+import { AnytimeActionSwitchComponent } from "@/components/tasks/anytime-action/AnytimeActionSwitchComponent";
+import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import {
   AnytimeActionTaskUrlSlugParam,
   loadAllAnytimeActionTaskUrlSlugs,
@@ -6,6 +9,7 @@ import {
 } from "@/lib/static/loadAnytimeActionTasks";
 import { AnytimeActionTask } from "@/lib/types/types";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
+import { NextSeo } from "next-seo";
 import { ReactElement } from "react";
 
 interface Props {
@@ -13,7 +17,16 @@ interface Props {
 }
 
 const AnytimeActionTaskPage = (props: Props): ReactElement => {
-  return <AnytimeActionPage anytimeAction={props.anytimeActionTask} />;
+  return (
+    <>
+      <NextSeo title={getNextSeoTitle(props.anytimeActionTask.name)} />
+      <PageSkeleton showNavBar showSidebar hideMiniRoadmap>
+        <TaskSidebarPageLayout hideMiniRoadmap={true}>
+          <AnytimeActionSwitchComponent anytimeActionTask={props.anytimeActionTask} />
+        </TaskSidebarPageLayout>
+      </PageSkeleton>
+    </>
+  );
 };
 
 export const getStaticPaths = (): GetStaticPathsResult<AnytimeActionTaskUrlSlugParam> => {
