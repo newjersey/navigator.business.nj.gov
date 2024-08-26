@@ -17,6 +17,7 @@ callToActionLink: https://njdcaportal.dynamics365portals.us/ultra-bhi-home/
 licenseCertificationClassification: undefined
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of Housing Inspection
+divisionPhone: (609) 633-6229
 webflowId: 66aceede59cc2b46f7a6158c
 ---
 
