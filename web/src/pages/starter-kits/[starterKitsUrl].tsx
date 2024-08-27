@@ -5,17 +5,17 @@ import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Card } from "@/components/starter-kits/Card";
 import { StepInfo } from "@/components/starter-kits/StepInfo";
 import { getMergedConfig } from "@/contexts/configContext";
-import { insertIndustryContent, insertRoadmapSteps } from "@/lib/domain-logic/starterKitsContentModifiers";
+import {
+  createStarterKitProfileData,
+  insertIndustryContent,
+  insertRoadmapSteps,
+} from "@/lib/domain-logic/starterKits";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getAllStarterKitUrls, STARTER_KITS_GENERIC_SLUG, StarterKitsUrl } from "@/lib/utils/starterKits";
 import type { Industry } from "@businessnjgovnavigator/shared";
-import {
-  createEmptyProfileData,
-  LookupIndustryById,
-  ProfileData,
-} from "@businessnjgovnavigator/shared/index";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared/index";
 import type { GetStaticPathsResult } from "next";
 import type { ReactElement } from "react";
 
@@ -53,7 +53,7 @@ const StarterKitsPage = (props: Props): ReactElement => {
 
   const stepsTitle = insertRoadmapSteps(
     insertIndustryContent(Config.starterKits.steps.title, props.industry.id, props.industry.name),
-    String(props.roadmap.steps.length)
+    props.roadmap.steps.length
   );
 
   return (
@@ -187,13 +187,8 @@ export const getStaticProps = async ({ params }: { params: StarterKitsUrl }): Pr
     industry = LookupIndustryById(params.starterKitsUrl);
   }
 
-  const emptyProfileData = createEmptyProfileData();
-  const newProfileData: ProfileData = {
-    ...emptyProfileData,
-    businessPersona: "STARTING",
-    industryId: industry.id,
-    legalStructureId: "limited-liability-company",
-  };
+  const newProfileData = createStarterKitProfileData(industry);
+
   const roadmap = await buildUserRoadmap(newProfileData);
 
   return {
