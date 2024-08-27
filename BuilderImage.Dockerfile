@@ -1,4 +1,4 @@
-FROM cimg/node:20.16.0-browsers
+FROM cimg/node:20.17-browsers
 
 USER root
 
@@ -44,7 +44,7 @@ RUN apt-get install -qqy --no-install-recommends wget gnupg ca-certificates \
   && wget --no-verbose -O /tmp/firefox.tar.bz2 $FIREFOX_URL \
   && wget --no-verbose -O /tmp/firefox.tar.bz2.asc https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2.asc \
   && wget --no-verbose -O /tmp/KEY https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/KEY \
-  && gpg --import /tmp/KEY >/dev/null 2>&1 \
+ && gpg --import /tmp/KEY \
   && gpg --verify /tmp/firefox.tar.bz2.asc /tmp/firefox.tar.bz2 \
   && apt-get -y purge firefox \
   && rm -rf /opt/firefox \
