@@ -1,32 +1,37 @@
 ---
-id: "register-consumer-affairs"
-webflowId: "66aceedf6ba3dffa8ac9d4f0"
-urlSlug: "hic-license"
-name: "Obtain Your Home Improvement Contractor Registration"
+licenseName: Home Improvement Contractors-Home Improvement Contractor
+id: register-home-contractor
+filename: register-home-contractor
+displayname: register-home-contractor
+urlSlug: hic-license
+name: Obtain Your Home Improvement Contractor Registration
 webflowName: "Home Contractor: Home Improvement Contractor Registration"
-displayname: "register-consumer-affairs"
-filename: "register-consumer-affairs"
-callToActionLink: "https://www.njconsumeraffairs.gov/hic/Pages/applications.aspx"
-callToActionText: "Complete My Home Improvement Contractor Registration"
-agencyId: "nj-consumer-affairs"
-agencyAdditionalContext: "Home Improvement Contractor"
-divisionPhone: "(973) 424-8150"
-industryId: "home-contractor"
-webflowType: "business-license"
-licenseCertificationClassification: ""
-licenseName: "Home Improvement Contractors-Home Improvement Contractor"
 summaryDescriptionMd: >-
+  :::callout{ showHeader="false" headerText="" showIcon="false"
+  calloutType="informational" }
 
 
-  :::infoAlert
-  The [Home Improvement Contractor application](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf) includes a FAQ section.
+  The [Home Improvement Contractor application](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf) includes an FAQ section.
+
+
   :::
+
+
 
 
   Home improvement contractors are individuals and companies involved in repairing, renovating, modernizing, installing, replacing, improving, restoring, painting, constructing, remodeling, moving, or demolishing **residential** or **noncommercial** properties.
 
 
   According to the [Contractor’s Registration Act](https://www.njconsumeraffairs.gov/Statutes/Contractors-Registration-Act.pdf), if you or your business is involved in any of the activities mentioned above, you must register as a home improvement contractor.
+industryId: home-contractor
+callToActionText: Complete My Home Improvement Contractor Registration
+callToActionLink: https://www.njconsumeraffairs.gov/hic/Pages/applications.aspx
+licenseCertificationClassification: ""
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Home Improvement Contractor
+divisionPhone: (973) 424-8150
+webflowType: business-license
+webflowId: 66aceedf6ba3dffa8ac9d4f0
 ---
 
 ## Application Requirements
