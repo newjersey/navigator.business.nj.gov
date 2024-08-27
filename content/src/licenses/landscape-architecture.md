@@ -2,7 +2,7 @@
 urlSlug: landscape-architecture
 renewalEventDisplayName: Landscape Architecture License Renewal Deadline
 expirationEventDisplayName: Landscape Architecture License Expiration
-licenseName:
+licenseName: ""
 previewType: renewal
 summaryDescriptionMd: N/A
 callToActionLink: https://www.njconsumeraffairs.gov/land/Pages/default.aspx

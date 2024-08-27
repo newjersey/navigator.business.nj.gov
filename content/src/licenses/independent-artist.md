@@ -3,7 +3,7 @@ urlSlug: independent-artist
 previewType: renewal
 renewalEventDisplayName: tbd
 expirationEventDisplayName: tbd
-licenseName:
+licenseName: ""
 summaryDescriptionMd: You can renew your license 60 days before it expires and
   up to 30 days after expiration. If you fail to renew your license at this
   point, your license will be suspended and you won't be able to provide your

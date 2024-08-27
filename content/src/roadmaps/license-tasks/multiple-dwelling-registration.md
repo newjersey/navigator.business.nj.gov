@@ -1,18 +1,24 @@
 ---
-id: "multiple-dwelling-registration"
-webflowId: "66aceede59cc2b46f7a6158c"
-urlSlug: "multiple-dwelling-registration"
-name: "Register Your Multiple Dwelling, Such as an Apartment or Condominium Complex"
+id: multiple-dwelling-registration
+filename: multiple-dwelling-registration
+displayname: multiple-dwelling-registration
+urlSlug: multiple-dwelling-registration
+name: Register Your Multiple Dwelling, Such as an Apartment or Condominium Complex
 webflowName: "Real Estate Investing: Multiple Dwelling Registration"
-displayname: "multiple-dwelling-registration"
-filename: "multiple-dwelling-registration"
-callToActionLink: "https://njdcaportal.dynamics365portals.us/ultra-bhi-home/"
-callToActionText: "Register My Multiple Dwelling"
-agencyId: "nj-community-affairs"
-agencyAdditionalContext: "Bureau of Housing Inspection"
-industryId: "real-estate-investor"
-licenseCertificationClassification: "undefined"
-summaryDescriptionMd: "If you own a newly built `multiple dwelling|multiple-dwelling`, such as an apartment, condominium, or townhouse development, you must register it with the State. If you are the new owner of an existing property, you must update the current registration."
+summaryDescriptionMd: If you own a newly built `multiple
+  dwelling|multiple-dwelling`, such as an apartment, condominium, or townhouse
+  development, you must register it with the State. If you are the new owner of
+  an existing property, you must update the current registration.
+industryId:
+  - residential-landlord
+  - real-estate-investor
+callToActionText: Register My Multiple Dwelling
+callToActionLink: https://njdcaportal.dynamics365portals.us/ultra-bhi-home/
+licenseCertificationClassification: undefined
+agencyId: nj-community-affairs
+agencyAdditionalContext: Bureau of Housing Inspection
+divisionPhone: (609) 633-6229
+webflowId: 66aceede59cc2b46f7a6158c
 ---
 
 ---

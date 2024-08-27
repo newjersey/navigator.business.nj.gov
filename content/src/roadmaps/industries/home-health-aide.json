@@ -54,8 +54,10 @@
       "licenseTask": "home-health-aide-license"
     }
   ],
-  "name": "Home Health Aide",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "name": "Home Health Aide Placement",
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
   "displayname": "home-health-aide",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
