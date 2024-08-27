@@ -23,7 +23,7 @@
       }
     },
     "steps": {
-      "title": "Get Your ${industry} Business Started in ${numberRoadMapSteps} Easy Steps ",
+      "title": "Get Your ${industry} Business Started in ${numberRoadMapEasySteps}",
       "ctaButton": "Get My Starter Kit"
     }
   }
