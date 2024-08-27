@@ -1,3 +1,28 @@
+# [2024.25.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.24.0...v2024.25.0) (2024-08-27)
+
+
+### Bug Fixes
+
+* [[#187003755](https://github.com/newjersey/navigator.business.nj.gov/issues/187003755)] spacing between state and muni for tablet ([b0866c5](https://github.com/newjersey/navigator.business.nj.gov/commit/b0866c5e5bee8b3a530c4cee7fa1637e4639a049))
+* [[#187809299](https://github.com/newjersey/navigator.business.nj.gov/issues/187809299)] deleted now unused webflow licenses ([3740035](https://github.com/newjersey/navigator.business.nj.gov/commit/374003525c512c2177e9c085a9b3d96975388ed8))
+* [[#188117562](https://github.com/newjersey/navigator.business.nj.gov/issues/188117562)] fix license sync serialization issue ([f73cfaa](https://github.com/newjersey/navigator.business.nj.gov/commit/f73cfaa70864f8c66f5f644cdc82aa7fc8e814a8))
+* [[#188129133](https://github.com/newjersey/navigator.business.nj.gov/issues/188129133)] update env variables in testing ([7a1d221](https://github.com/newjersey/navigator.business.nj.gov/commit/7a1d2215771dda1548c18664bce7e514d677f218))
+* **deps:** update dependency axios to v1.7.4 [security] ([89c5de7](https://github.com/newjersey/navigator.business.nj.gov/commit/89c5de7b86b81922332c6d4518794e8798c56e59))
+* **deps:** update dependency remove-markdown to v0.5.2 ([13d53bd](https://github.com/newjersey/navigator.business.nj.gov/commit/13d53bdc717d54fcc78a18df9315fb05de792ac1))
+
+
+### Features
+
+* [[#187003755](https://github.com/newjersey/navigator.business.nj.gov/issues/187003755)] add full address to poppy profile ([5d6b251](https://github.com/newjersey/navigator.business.nj.gov/commit/5d6b25146a4c0dbcfd7740b1ee69349a2f45b1a1))
+* [[#187345742](https://github.com/newjersey/navigator.business.nj.gov/issues/187345742)] enable multiple licenses ([8761842](https://github.com/newjersey/navigator.business.nj.gov/commit/8761842332b62269668bea038e9aa31c1daf696f))
+* [[#187476515](https://github.com/newjersey/navigator.business.nj.gov/issues/187476515)] Implement auto update of browser in builderImage ([600f110](https://github.com/newjersey/navigator.business.nj.gov/commit/600f110ce3b9e2aea3a6277d7e08961540fdc996))
+* [[#187792208](https://github.com/newjersey/navigator.business.nj.gov/issues/187792208)] added starterkitsite map and starterkits links that skip onboarding ([fc34baf](https://github.com/newjersey/navigator.business.nj.gov/commit/fc34baf50f5dc2f6e156439a169fbb92f31cee93))
+* [[#187792208](https://github.com/newjersey/navigator.business.nj.gov/issues/187792208)] create industry specific starter kits landing pages ([f984b02](https://github.com/newjersey/navigator.business.nj.gov/commit/f984b02a1d48cbabfd5f315764d009b7595d0926))
+* [[#188117010](https://github.com/newjersey/navigator.business.nj.gov/issues/188117010)] add above linense status field in cms for calendar events and reinstatements ([2b86274](https://github.com/newjersey/navigator.business.nj.gov/commit/2b86274bb2be8cd97eb1040a70db7e68afb0bd3d))
+* [[#188121854](https://github.com/newjersey/navigator.business.nj.gov/issues/188121854)] generate dynamic site map, includes starter kits ([d42c627](https://github.com/newjersey/navigator.business.nj.gov/commit/d42c627dbc054976a723c28e5a450130d443164d))
+* adapt fundings sync to unique "expenses" circumstance ([46bd7f4](https://github.com/newjersey/navigator.business.nj.gov/commit/46bd7f4b1a38bdda2e18da675493699791daefb6))
+* prevent disabled industries from syncing to webflow ([0c60302](https://github.com/newjersey/navigator.business.nj.gov/commit/0c6030237757e5178ce2d486614611cb45a6dd2c))
+
 # [2024.24.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.23.0...v2024.24.0) (2024-08-13)
 
 
