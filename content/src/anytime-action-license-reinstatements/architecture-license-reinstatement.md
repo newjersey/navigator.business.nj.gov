@@ -2,10 +2,11 @@
 notesMd: Need to check with engineering team what the system is returning -- is
   it definitely showing licenses that have been expired for five years or less?
 filename: architecture-license-reinstatement
-licenseName:
-name: Apply to Reinstate Your Architecture License
+licenseName: null
+name: Apply to Reinstate Your Architecture License HAHA
 icon: update-purple.svg
 urlSlug: architecture-license-reinstatement
+aboveLicenseStatusContent: rstrst
 summaryDescriptionMd: >-
   You need to submit a reinstatement application if:
 
@@ -20,7 +21,6 @@ summaryDescriptionMd: >-
   :::
 callToActionText: Reinstate My Architecture License
 callToActionLink: https://www.njconsumeraffairs.gov/arch/applications/Application-for-Reinstatement-with-Instructions.pdf
-aboveLicenseStatusContent: ""
 ---
 
 ## Application Requirements
