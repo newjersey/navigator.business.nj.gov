@@ -14,6 +14,7 @@ divisionPhone: "(973) 504-6460"
 industryId: "engineering"
 webflowType: "individual-license"
 licenseCertificationClassification: ""
+licenseName: ""
 summaryDescriptionMd: "You or any staff providing engineering services will need an engineer license."
 ---
 

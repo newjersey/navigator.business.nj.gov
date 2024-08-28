@@ -11,6 +11,7 @@ callToActionText: "Get an LGCCC ID Number"
 agencyId: "nj-consumer-affairs"
 industryId: "generic"
 licenseCertificationClassification: "undefined"
+licenseName: ""
 summaryDescriptionMd: "You need to apply for a raffle or bingo game license in your New Jersey municipality if you will be holding, operating, or conducting raffles or bingo games."
 ---
 

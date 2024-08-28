@@ -14,6 +14,7 @@ summaryDescriptionMd: >-
 
   If your business is an LHU, you must register with the State and pay the associated fee to operate your business.
 industryId: generic
+licenseName: ""
 callToActionText: Register Life Hazard Use Business
 callToActionLink: https://firesolutions.dca.nj.gov/ultra-fire-home/
 licenseCertificationClassification: undefined

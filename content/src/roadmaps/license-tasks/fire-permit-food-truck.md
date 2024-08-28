@@ -7,6 +7,7 @@ filename: fire-permit-food-truck
 displayname: fire-permit-food-truck
 urlSlug: fire-permit-food-truck
 name: Get a Fire Permit for Your Food Truck
+licenseName: ""
 webflowName: "Food Truck: Food Truck Fire Permit"
 summaryDescriptionMd: >-
   You need a fire permit to cook in a mobile canteen or cooking trailer, such as
@@ -25,6 +26,7 @@ agencyAdditionalContext: Division of Fire Safety, or Your Local Fire Department
 webflowType: object-vehicle
 webflowId: 66aceed312f526cd0330fb48
 ---
+
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
 A fire permit for your food truck.

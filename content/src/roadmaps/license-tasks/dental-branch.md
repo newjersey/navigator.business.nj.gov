@@ -13,6 +13,7 @@ callToActionText: Apply for My Dental Branch Office Registration
 callToActionLink: https://www.njconsumeraffairs.gov/den/Applications/Request-for-Branch-Office-Registration.pdf
 agencyId: nj-consumer-affairs
 webflowId: 669ac515f93c28d7e8d25ada
+licenseName: ""
 licenseCertificationClassification: undefined
 ---
 

@@ -11,6 +11,7 @@ summaryDescriptionMd: >
 industryId: non-medical-transport
 callToActionText: Obtain My Vehicle Registration
 callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm
+licenseName: ""
 licenseCertificationClassification: ""
 agencyId: nj-motor-vehicle
 divisionPhone: (609) 292-6500

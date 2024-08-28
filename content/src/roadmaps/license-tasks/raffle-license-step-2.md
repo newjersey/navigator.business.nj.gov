@@ -11,6 +11,7 @@ callToActionText: "Get an LGCCC ID Number"
 agencyId: "nj-consumer-affairs"
 industryId: "generic"
 licenseCertificationClassification: "undefined"
+licenseName: ""
 summaryDescriptionMd: "After you receive the identification number from the Legalized Games of Chance Control Commission, you must apply for a license in the New Jersey municipality in which the raffle or bingo game is to be held, operated, or conducted. You must submit four copies of this application to the Municipal Clerk’s office in this municipality."
 ---
 

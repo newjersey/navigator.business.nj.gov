@@ -12,5 +12,6 @@ agencyId: "nj-cannabis-commission"
 industryId: "cannabis"
 webflowType: "business-license"
 licenseCertificationClassification: "LICENSE"
+licenseName: ""
 summaryDescriptionMd: "An annual license applicant is ready to manufacture, cultivate or sell cannabis. Your application will need to include information on your business location, local zoning approval, and a summary of your operations."
 ---

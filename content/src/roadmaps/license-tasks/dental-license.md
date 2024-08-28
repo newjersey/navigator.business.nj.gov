@@ -13,6 +13,7 @@ callToActionText: Apply for My Dental License
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 agencyId: nj-consumer-affairs
 webflowId: 669ac515985e99ee52d48390
+licenseName: ""
 licenseCertificationClassification: undefined
 ---
 

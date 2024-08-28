@@ -12,6 +12,7 @@ agencyId: "nj-consumer-affairs"
 agencyAdditionalContext: "Regulated Business Section"
 industryId: "retail"
 licenseCertificationClassification: "undefined"
+licenseName: ""
 summaryDescriptionMd: "You need to register as a ticket broker if you resell admission tickets to places of entertainment and charge a premium, in addition to the price plus the taxes printed on the tickets."
 ---
 

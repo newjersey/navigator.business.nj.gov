@@ -13,6 +13,7 @@ industryId:
   - residential-landlord
   - real-estate-investor
 callToActionText: Register My Multiple Dwelling
+licenseName: ""
 callToActionLink: https://njdcaportal.dynamics365portals.us/ultra-bhi-home/
 licenseCertificationClassification: undefined
 agencyId: nj-community-affairs

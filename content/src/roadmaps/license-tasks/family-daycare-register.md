@@ -13,6 +13,7 @@ agencyAdditionalContext: "Division of Family Development"
 divisionPhone: "(877) 667-9845"
 industryId: "daycare"
 licenseCertificationClassification: ""
+licenseName: ""
 summaryDescriptionMd: "Register your family daycare business with your local Child Care Resource and Referral Agency to ensure you’re in compliance with state rules and regulations and gain more credibility for your business."
 ---
 

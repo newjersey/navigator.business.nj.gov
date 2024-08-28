@@ -12,6 +12,7 @@ agencyId: "nj-consumer-affairs"
 divisionPhone: "(973) 504-6512"
 industryId: "moving-company"
 licenseCertificationClassification: ""
+licenseName: ""
 summaryDescriptionMd: >-
 
 

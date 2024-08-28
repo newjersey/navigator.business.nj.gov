@@ -12,6 +12,7 @@ agencyId: "nj-consumer-affairs"
 divisionPhone: "(973) 504-6370"
 industryId: "telemarketing"
 licenseCertificationClassification: "undefined"
+licenseName: ""
 summaryDescriptionMd: "If you or your company makes telemarketing sales calls to customers in New Jersey, you need a telemarketing license."
 ---
 
