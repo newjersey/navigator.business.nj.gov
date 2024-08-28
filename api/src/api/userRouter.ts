@@ -13,8 +13,9 @@ import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { createEmptyFormationFormData } from "@shared/formationData";
+import { LicenseName, LicenseSearchNameAndAddress } from "@shared/license";
 import { modifyCurrentBusiness } from "@shared/test";
-import { createEmptyUserData, UserData } from "@shared/userData";
+import { Business, createEmptyUserData, UserData } from "@shared/userData";
 import { Request, Response, Router } from "express";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
@@ -54,17 +55,19 @@ const clearTaskItemChecklists = (userData: UserData): UserData => {
   }));
 };
 
-// TODO: This will be addressed as a part of [#186879778]
-// const shouldCheckLicense = (userData: UserData): boolean => {
-//   const currentBusiness = getCurrentBusiness(userData);
-//   return (
-//     currentBusiness.licenseData !== undefined &&
-//     hasBeenMoreThanOneHour(currentBusiness.licenseData.lastUpdatedISO)
-//   );
-// };
+const shouldCheckLicense = (currentBusiness: Business): boolean => {
+  const formationFormData = currentBusiness.formationData.formationFormData;
+  const hasFormationAddress =
+    formationFormData.addressLine1.length > 0 && formationFormData.addressZipCode.length > 0;
 
-const shouldCheckLicense = (): boolean => {
-  return false;
+  const hasLicenseDataOrFormationAddress =
+    currentBusiness.licenseData?.licenses !== undefined || hasFormationAddress;
+  const licenseDataOlderThanOneHour =
+    currentBusiness.licenseData === undefined
+      ? true
+      : hasBeenMoreThanOneHour(currentBusiness.licenseData.lastUpdatedISO);
+
+  return hasLicenseDataOrFormationAddress && licenseDataOlderThanOneHour;
 };
 
 const shouldUpdateBusinessNameSearch = (userData: UserData): boolean => {
@@ -137,11 +140,12 @@ export const userRouterFactory = (
       .get(req.params.userId)
       .then(async (userData: UserData) => {
         let updatedUserData = userData;
-        updatedUserData = await updateBusinessNameSearchIfNeeded(updatedUserData);
-        updatedUserData = updateOperatingPhase(updatedUserData);
-        updatedUserData = updateRoadmapSidebarCards(updatedUserData);
+        updatedUserData = await updateBusinessNameSearchIfNeeded(updatedUserData)
+          .then((userData) => updateOperatingPhase(userData))
+          .then((userData) => updateRoadmapSidebarCards(userData))
+          .then((userData) => asyncUpdateLicenseStatus(userData));
+
         await userDataClient.put(updatedUserData);
-        asyncUpdateAndSaveLicenseStatusIfNeeded(updatedUserData);
         res.json(updatedUserData);
       })
       .catch((error: Error) => {
@@ -321,20 +325,48 @@ export const userRouterFactory = (
   };
 
   // eslint-disable-next-line unicorn/consistent-function-scoping
-  const asyncUpdateAndSaveLicenseStatusIfNeeded = async (userData: UserData): Promise<void> => {
-    const currentBusinessLicenseData = getCurrentBusiness(userData).licenseData;
-    if (!currentBusinessLicenseData || !shouldCheckLicense()) {
-      return;
-    }
+  const asyncUpdateLicenseStatus = async (userData: UserData): Promise<UserData> => {
+    const currentBusiness = getCurrentBusiness(userData);
 
-    // TODO: This will be addressed as a part of [#186879778] - remove eslint-disable-next-line
-    // try {
-    //
-    //   const updatedUserData = await updateLicenseStatus(userData, currentBusinessLicenseData.nameAndAddress);
-    //   await userDataClient.put(updatedUserData);
-    // } catch {
-    //   return;
-    // }
+    if (!shouldCheckLicense(currentBusiness)) return userData;
+
+    try {
+      let nameAndAddress: LicenseSearchNameAndAddress;
+      const licenses = currentBusiness.licenseData?.licenses;
+      if (licenses) {
+        const [firstLicenseName] = Object.keys(licenses) as LicenseName[];
+        const licenseNameAndAddress = licenses[firstLicenseName]?.nameAndAddress;
+        nameAndAddress = licenseNameAndAddress!;
+      } else {
+        nameAndAddress = {
+          name: currentBusiness.profileData.businessName,
+          addressLine1: currentBusiness.formationData.formationFormData.addressLine1,
+          addressLine2: currentBusiness.formationData.formationFormData.addressLine2,
+          zipCode: currentBusiness.formationData.formationFormData.addressZipCode,
+        };
+      }
+
+      return await updateLicenseStatus(userData, nameAndAddress);
+    } catch {
+      const updatedBusiness: Business = {
+        ...currentBusiness,
+        licenseData: {
+          lastUpdatedISO: getCurrentDateISOString(),
+          licenses: currentBusiness.licenseData?.licenses,
+        },
+      };
+
+      const updatedUserData: UserData = {
+        ...userData,
+        businesses: {
+          ...userData.businesses,
+          [currentBusiness.id]: {
+            ...updatedBusiness,
+          },
+        },
+      };
+      return updatedUserData;
+    }
   };
 
   return router;
