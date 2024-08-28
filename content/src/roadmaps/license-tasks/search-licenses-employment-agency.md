@@ -11,6 +11,7 @@ callToActionText: "Apply for an Employment Agency License"
 divisionPhone: "(973) 504-6370"
 industryId: "employment-agency"
 licenseCertificationClassification: ""
+licenseName: ""
 summaryDescriptionMd: "You need to obtain an employment agency license before offering staffing services. Call or email Employment and Personnel Services to find out how to register."
 ---
 

@@ -12,6 +12,7 @@ agencyId: "local-health"
 industryId: "food-truck"
 webflowType: "business-license"
 licenseCertificationClassification: "LICENSE"
+licenseName: ""
 summaryDescriptionMd: >-
 
 

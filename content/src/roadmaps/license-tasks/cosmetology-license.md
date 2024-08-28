@@ -12,6 +12,7 @@ summaryDescriptionMd: If the business owner of a cosmetology shop does not have
   is the shop owner's responsibility to ensure their staff is licensed.
 industryId: cosmetology
 callToActionText: Apply for My Cosmetology License
+licenseName: ""
 callToActionLink: https://www.njconsumeraffairs.gov/cos/Applications/Application-for-Authorization-to-Sit-for-the-Examination-and-for-Licensure.pdf
 licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs

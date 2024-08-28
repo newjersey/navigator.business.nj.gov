@@ -1,7 +1,7 @@
 ---
 filename: dental-license-reinstatement
 name: Reinstate Your Dental License
-licenseName:
+licenseName: ""
 icon: update-purple.svg
 urlSlug: dental-license-reinstatement
 summaryDescriptionMd: If your dental license expired less than 30 days ago, [you

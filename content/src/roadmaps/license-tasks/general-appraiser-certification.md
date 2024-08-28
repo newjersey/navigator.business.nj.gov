@@ -14,6 +14,7 @@ divisionPhone: "(973) 504-6480"
 industryId: "real-estate-appraisals"
 webflowType: "individual-license"
 licenseCertificationClassification: "CERTIFICATION"
+licenseName: ""
 summaryDescriptionMd: "You need a certification to be a general real property appraiser and appraise all types of property. If you are opening an `Appraisal Management Company|appraisal-management-company` you must have a certified appraiser."
 ---
 

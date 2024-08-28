@@ -13,6 +13,7 @@ agencyAdditionalContext: "Real Estate Appraiser Board"
 divisionPhone: "(973) 504-6480"
 industryId: "real-estate-appraisals"
 webflowType: "individual-license"
+licenseName: ""
 licenseCertificationClassification: "CERTIFICATION"
 summaryDescriptionMd: "You need a certification to appraise real estate with one to four residential units—regardless of value or complexity. If you are opening an `Appraisal Management Company|appraisal-management-company` you must have a certified appraiser."
 ---

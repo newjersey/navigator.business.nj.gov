@@ -5,6 +5,7 @@ industryIds:
   - healthcare
 sectorIds: []
 icon: update-purple.svg
+licenseName: ""
 urlSlug: dental-branch-reinstatement
 summaryDescriptionMd: If your branch office registration expired less than 30
   days ago, [you can renew online](https://newjersey.mylicense.com/). If it has

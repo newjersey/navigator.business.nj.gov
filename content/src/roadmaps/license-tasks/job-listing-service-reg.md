@@ -16,6 +16,7 @@ summaryDescriptionMd: >-
   You must register as a job listing service to provide job listing services in New Jersey. Submit your application through the Regulated Business (RGB) Online Registration Portal.
 industryId: employment-agency
 callToActionText: "Register My Job Listing Service"
+licenseName: ""
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
 webflowId: 65bd67f346bc858dff436a1a
 licenseCertificationClassification: undefined

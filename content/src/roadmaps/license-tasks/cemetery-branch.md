@@ -12,6 +12,7 @@ agencyId: "nj-consumer-affairs"
 agencyAdditionalContext: "New Jersey Cemetery Board"
 industryId: "cemetery"
 licenseCertificationClassification: "undefined"
+licenseName: ""
 summaryDescriptionMd: "You need a Cemetery Salesperson Branch license to sell at more than one location. You must already have a Cemetery Salesperson license for your main cemetery."
 ---
 
