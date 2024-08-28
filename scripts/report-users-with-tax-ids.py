@@ -1,6 +1,7 @@
 import os
 import json
 import csv
+import re
 
 # Define the directory containing source files and the output CSV filename
 input_directory = ""
@@ -12,6 +13,15 @@ def extract_info(user_data):
         email = user_data["email"]["S"]
     else:
         email = user_data["data"]["M"]["user"]["M"]["email"]["S"]
+
+    pattern = re.compile(r".+@.\..+")  # single character domain match, ex: myname@a.com
+
+    # Filter users
+    if any(
+        domain in email for domain in ["@fearless", "@innovation", "@example", "@test"]
+    ) or pattern.match(email):
+        return []
+
     extracted_data = []
 
     # Any business post-Ethan
