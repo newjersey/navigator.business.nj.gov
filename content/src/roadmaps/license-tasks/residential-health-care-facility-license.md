@@ -12,6 +12,7 @@ agencyAdditionalContext: "Bureau of Rooming and Boarding House Standards"
 divisionPhone: "(609) 984-1704"
 industryId: "healthcare"
 licenseCertificationClassification: "undefined"
+licenseName: ""
 summaryDescriptionMd: "You need a license to own and/or operate a new or existing `free-standing residential health care facility|residential-health-care-facility`."
 ---
 

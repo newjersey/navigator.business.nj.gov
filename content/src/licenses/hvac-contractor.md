@@ -4,7 +4,7 @@ notesMd: Drafted in
 urlSlug: hvac-contractor
 renewalEventDisplayName: tbd
 expirationEventDisplayName: tbd
-licenseName:
+licenseName: ""
 previewType: expiration
 summaryDescriptionMd: " "
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx

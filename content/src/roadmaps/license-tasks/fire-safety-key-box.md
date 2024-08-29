@@ -15,6 +15,7 @@ callToActionText: Contact My Local Enforcing Agency
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 licenseCertificationClassification: undefined
 agencyId: nj-community-affairs
+licenseName: ""
 agencyAdditionalContext: Division of Fire Safety or Local Enforcing Agency
 divisionPhone: (609) 633-6132 or your Local Enforcing Agency
 id: fire-safety-key-box

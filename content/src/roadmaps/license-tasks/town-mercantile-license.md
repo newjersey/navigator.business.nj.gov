@@ -9,6 +9,7 @@ filename: "town-mercantile-license"
 agencyId: "municipal-clerk"
 industryId: "restaurant"
 licenseCertificationClassification: ""
+licenseName: ""
 summaryDescriptionMd: >-
 
   Prior to opening your physical location, you may need to get a mercantile license.

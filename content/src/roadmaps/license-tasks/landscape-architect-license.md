@@ -14,6 +14,7 @@ divisionPhone: "(973) 504-6385"
 industryId: "landscape-architecture"
 webflowType: "individual-license"
 licenseCertificationClassification: "undefined"
+licenseName: ""
 summaryDescriptionMd: "You need a landscape architect license to practice landscape architecture and hold the title of “Landscape Architect” in the state."
 ---
 

@@ -5,7 +5,7 @@ notesMd: "Drafted here:
 urlSlug: moving-company
 renewalEventDisplayName: tbd
 expirationEventDisplayName: tbd
-licenseName:
+licenseName: ""
 previewType: renewal
 summaryDescriptionMd: x
 callToActionLink: https://www.njconsumeraffairs.gov/Pages/licensingboards.aspx

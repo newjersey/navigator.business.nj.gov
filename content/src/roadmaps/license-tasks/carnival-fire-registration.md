@@ -10,6 +10,7 @@ callToActionLink: "https://firesolutions.dca.nj.gov/ultra-fire-home/fire-carniva
 callToActionText: "Register My Traveling Carnival or Circus"
 agencyId: "nj-community-affairs"
 agencyAdditionalContext: "Division of Fire Safety"
+licenseName: ""
 divisionPhone: "(609) 633-6132"
 industryId: "independent-artist"
 webflowType: "business-license"

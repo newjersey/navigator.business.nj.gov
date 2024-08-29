@@ -505,6 +505,10 @@ export type HotelMotelRegistrationSearchError =
   | CommunityAffairsSearchError
   | "NO_HOTEL_MOTEL_REGISTRATIONS_FOUND";
 
+export type MultipleDwellingSearchError =
+  | CommunityAffairsSearchError
+  | "NO_MULTIPLE_DWELLINGS_REGISTRATIONS_FOUND";
+
 export type CommunityAffairsSearchError = "NO_PROPERTY_INTEREST_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
 
 export type FeedbackRequestModalNames =

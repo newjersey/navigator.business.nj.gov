@@ -14,6 +14,7 @@ divisionPhone: "(609) 633-1418"
 industryId: "home-contractor"
 webflowType: "business-license"
 licenseCertificationClassification: "LICENSE"
+licenseName: ""
 summaryDescriptionMd: "Waste facilities will **only** allow registered vehicles with a decal to discard waste. If you collect or haul waste for other companies, you need to be a [commercial waste hauler](https://www.wastedecals.nj.gov/swt2.html), which is a more time-intensive process."
 ---
 

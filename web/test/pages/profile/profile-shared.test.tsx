@@ -33,9 +33,9 @@ import {
   randomInt,
 } from "@businessnjgovnavigator/shared";
 import {
+  filterRandomIndustry,
   generateFormationData,
   generateTaxFilingData,
-  randomFilteredIndustry,
 } from "@businessnjgovnavigator/shared/test";
 
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -621,7 +621,7 @@ describe("profile - shared", () => {
       "should NOT display a warning alert for non-cannabis businesses when %s",
       async (businessPersona: BusinessPersona) => {
         const filter = (industry: Industry): boolean => industry.id !== "cannabis";
-        const industry = randomFilteredIndustry(filter, { isEnabled: true });
+        const industry = filterRandomIndustry(filter);
 
         renderPage({
           business: generateBusinessForProfile({

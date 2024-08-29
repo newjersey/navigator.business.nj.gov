@@ -16,7 +16,9 @@ industryId:
   - restaurant
 webflowId: 648b6ec5ff1d0d38af2f5a2d
 licenseCertificationClassification: ""
+licenseName: ""
 ---
+
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
 A food safety management certificate.

@@ -12,7 +12,7 @@ import {
   PublicFilingLegalType,
   publicFilingLegalTypes,
 } from "../formationData";
-import { Industries, Industry } from "../industry";
+import { getIndustries, Industry } from "../industry";
 import { randomInt } from "../intHelpers";
 import { LegalStructure, LegalStructures } from "../legalStructure";
 import {
@@ -200,12 +200,9 @@ export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => 
   };
 };
 
-export const randomFilteredIndustry = (
-  function_: (industry: Industry) => boolean,
-  { isEnabled = true }
-): Industry => {
-  const filteredIndustries = Industries.filter((x: Industry) => {
-    return function_(x) && x.isEnabled === isEnabled;
+export const filterRandomIndustry = (function_: (industry: Industry) => boolean): Industry => {
+  const filteredIndustries = getIndustries().filter((x: Industry) => {
+    return function_(x);
   });
   const randomIndex = Math.floor(Math.random() * filteredIndustries.length);
   return filteredIndustries[randomIndex];
@@ -215,7 +212,7 @@ export const randomIndustry = (canHavePermanentLocation = false): Industry => {
   const filter = (x: Industry): boolean => {
     return x.canHavePermanentLocation === canHavePermanentLocation;
   };
-  return randomFilteredIndustry(filter, { isEnabled: true });
+  return filterRandomIndustry(filter);
 };
 
 export const generateIndustrySpecificData = (
@@ -248,6 +245,7 @@ export const generateIndustrySpecificData = (
     ]),
     employmentPersonnelServiceType: randomElementFromArray(["JOB_SEEKERS", "EMPLOYERS"]),
     employmentPlacementType: randomElementFromArray(["TEMPORARY", "PERMANENT", "BOTH"]),
+    carnivalRideOwningBusiness: !(randomInt() % 2),
     ...overrides,
   };
 };
@@ -293,6 +291,7 @@ export const generateProfileData = (
     isNonprofitOnboardingRadio: legalStructure === "nonprofit",
     nonEssentialRadioAnswers: {},
     elevatorOwningBusiness: undefined,
+    carnivalRideOwningBusiness: undefined,
     ...overrides,
   };
 };

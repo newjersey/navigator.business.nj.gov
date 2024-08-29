@@ -1,31 +1,45 @@
 import {
   getPropertyInterestTypeIntegerFromTitle,
-  HotelMotelRegistrationClient,
+  HousingRegistrationClient,
   HousingRegistrationRequest,
   HousingRegistrationRequestResponse,
   HousingRegistrationStatus,
 } from "@client/dynamics/housing/types";
 import { LogWriterType } from "@libs/logWriter";
 import { parseDate } from "@shared/dateHelpers";
+import { PropertyInterestType } from "@shared/housing";
 import axios, { AxiosError } from "axios";
 
-export const DynamicsHotelMotelRegistrationClient = (
+export const DynamicsHousingRegistrationClient = (
   logWriter: LogWriterType,
   orgUrl: string
-): HotelMotelRegistrationClient => {
-  const getHotelMotelRegistration = async (
+): HousingRegistrationClient => {
+  const getHousingRegistration = async (
     accessToken: string,
     propertyInterestId: string,
-    buildingCount: number
+    buildingCount: number,
+    propertyInterestType: PropertyInterestType
   ): Promise<HousingRegistrationRequestResponse> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Dynamics Hotel Motel Registration Client - Id:${logId}`);
-    const hotelPropertyInterestType = getPropertyInterestTypeIntegerFromTitle("Hotel");
-    const motelPropertyInterestType = getPropertyInterestTypeIntegerFromTitle("Motel");
+    let propertyInterestTypeFilter = "";
+
+    switch (propertyInterestType) {
+      case "hotelMotel":
+        propertyInterestTypeFilter = ` and (ultra_propertyinteresttype eq ${getPropertyInterestTypeIntegerFromTitle(
+          "Hotel"
+        )} or ultra_propertyinteresttype eq ${getPropertyInterestTypeIntegerFromTitle("Motel")})`;
+        break;
+      case "multipleDwelling":
+        propertyInterestTypeFilter = ` and (ultra_propertyinteresttype eq ${getPropertyInterestTypeIntegerFromTitle(
+          "Multiple Dwelling"
+        )})`;
+        break;
+    }
 
     return axios
       .get(
-        `${orgUrl}/api/data/v9.2/ultra_bhiregistrationrequests?$select=ultra_bhiregistrationrequestid,ultra_requestdate,statuscode,ultra_propertyinteresttype&$filter=(_ultra_linktoexistingpropertyinterest_value eq '${propertyInterestId}' and (ultra_propertyinteresttype eq ${hotelPropertyInterestType} or ultra_propertyinteresttype eq ${motelPropertyInterestType}))`,
+        `${orgUrl}/api/data/v9.2/ultra_bhiregistrationrequests?$select=ultra_bhiregistrationrequestid,ultra_requestdate,statuscode,ultra_propertyinteresttype&$filter=(_ultra_linktoexistingpropertyinterest_value eq '${propertyInterestId}'${propertyInterestTypeFilter})`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -38,7 +52,7 @@ export const DynamicsHotelMotelRegistrationClient = (
             response.data
           )}`
         );
-        const value = response.data.value as Array<DynamicsHotelMotelRegistrationResponse>;
+        const value = response.data.value as Array<DynamicsHousingRegistrationResponse>;
         if (value.length === 0) {
           return [];
         }
@@ -53,23 +67,21 @@ export const DynamicsHotelMotelRegistrationClient = (
           }
           return 1;
         });
-        return sortedRegistrations;
+        return sortedRegistrations.slice(0, 1);
       })
       .catch((error: AxiosError) => {
         logWriter.LogError(`Dynamics Hotel Motel Registration Client - Id:${logId} - Error:`, error);
         throw error.response?.status;
       });
-
-    return [];
   };
 
   return {
-    getHotelMotelRegistration: getHotelMotelRegistration,
+    getHousingRegistration: getHousingRegistration,
   };
 };
 
 function processDynamicsHotelMotelRegistrationResponse(
-  response: DynamicsHotelMotelRegistrationResponse,
+  response: DynamicsHousingRegistrationResponse,
   buildingCount: number
 ): HousingRegistrationRequest {
   return {
@@ -81,7 +93,7 @@ function processDynamicsHotelMotelRegistrationResponse(
   };
 }
 
-type DynamicsHotelMotelRegistrationResponse = {
+type DynamicsHousingRegistrationResponse = {
   ultra_bhiregistrationrequestid: string;
   ultra_requestdate: string;
   statuscode: string;

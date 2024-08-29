@@ -12,6 +12,7 @@ agencyId: "nj-consumer-affairs"
 agencyAdditionalContext: "New Jersey Cemetery Board"
 industryId: "cemetery"
 licenseCertificationClassification: "undefined"
+licenseName: ""
 summaryDescriptionMd: "To own and operate a cemetery business in New Jersey, you need a Certificate of Authority. Your cemetery business must be a nonprofit."
 ---
 

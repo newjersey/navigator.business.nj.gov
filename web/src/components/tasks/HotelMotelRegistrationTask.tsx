@@ -60,7 +60,7 @@ export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
     if (address?.address1 && address?.municipalityExternalId) {
       setIsLoading(true);
       api
-        .checkHousingHotelMotelRegistrationStatus(address.address1, address.municipalityExternalId)
+        .checkHousingRegistrationStatus(address.address1, address.municipalityExternalId, "hotelMotel")
         .then((result) => {
           if (result.lookupStatus === "NO PROPERTY INTERESTS FOUND") {
             setError("NO_PROPERTY_INTEREST_FOUND");

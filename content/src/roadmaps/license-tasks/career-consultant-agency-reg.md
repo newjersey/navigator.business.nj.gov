@@ -5,6 +5,7 @@ displayname: career-consultant-agency-reg
 urlSlug: career-consultant-agency-reg
 name: Register Your Career Consultant Agency
 webflowName: "Employment and Personnel Services: Career Consultant"
+licenseName: ""
 summaryDescriptionMd: >-
   You must register as a career consultant agency to provide career consulting
   services in New Jersey. Submit your application through the Regulated Business

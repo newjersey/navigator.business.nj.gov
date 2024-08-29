@@ -14,6 +14,7 @@ divisionPhone: "(609) 292-9292"
 industryId: "notary-public"
 webflowType: "individual-license"
 licenseCertificationClassification: ""
+licenseName: ""
 summaryDescriptionMd: >-
 
 

@@ -14,6 +14,7 @@ summaryDescriptionMd: "You need a real estate appraiser license if you open an
 industryId:
   - real-estate-appraisals
 callToActionText: "Apply for My Appraiser License"
+licenseName: ""
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 webflowIndustry: Real Estate Appraiser
 licenseCertificationClassification: LICENSE

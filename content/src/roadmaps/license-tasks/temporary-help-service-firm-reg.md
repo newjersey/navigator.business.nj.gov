@@ -13,6 +13,7 @@ callToActionText: Register My Temporary Help Service
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
 webflowId: 65bd67f3b2eede76015e40e3
 licenseCertificationClassification: undefined
+licenseName: ""
 ---
 
 ---

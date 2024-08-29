@@ -11,14 +11,14 @@ import {
 } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
 import {
   CarServiceType,
-  Industries,
   Industry,
   ResidentialConstructionType,
   carServiceOptions,
+  getIndustries,
   randomInt,
 } from "@businessnjgovnavigator/shared";
 
-const enabledIndustries = Industries.filter((element: Industry) => {
+const enabledIndustries = getIndustries().filter((element: Industry) => {
   return element.isEnabled && element.id !== "domestic-employer";
 });
 

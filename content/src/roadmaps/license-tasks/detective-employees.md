@@ -18,14 +18,16 @@ licenseCertificationClassification: ""
 agencyId: nj-state-police
 agencyAdditionalContext: Private Detective Unit
 divisionPhone: (609) 341-3426
+licenseName: ""
 webflowType: individual-license
 webflowId: 648b6ec542e491936c7da99e
 ---
+
 ## Application Requirements
 
-* Notification letter on the company’s letterhead indicating the agency license number, the employee’s full name, date of birth, social security number, position, and date of hire
-* Original fingerprint receipt from `IdentoGo|identogo` 
-* Applicable fees paid
+- Notification letter on the company’s letterhead indicating the agency license number, the employee’s full name, date of birth, social security number, position, and date of hire
+- Original fingerprint receipt from `IdentoGo|identogo`
+- Applicable fees paid
 
 :::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
 

@@ -61,7 +61,7 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { FormationData } from "@businessnjgovnavigator/shared/formationData";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
-import { randomFilteredIndustry, randomIndustry, randomSector } from "@businessnjgovnavigator/shared/test";
+import { filterRandomIndustry, randomIndustry, randomSector } from "@businessnjgovnavigator/shared/test";
 
 export const generateSectionType = (): SectionType => {
   const num = randomInt();
@@ -501,26 +501,23 @@ export const randomOwnershipType = (): OwnershipType => {
 };
 
 export const randomNegativeFilteredIndustry = (func: (industry: Industry) => boolean): Industry => {
-  return randomFilteredIndustry(
-    (industry: Industry) => {
-      return !func(industry);
-    },
-    { isEnabled: true }
-  );
+  return filterRandomIndustry((industry: Industry) => {
+    return !func(industry);
+  });
 };
 
 export const randomHomeBasedIndustry = (): string => {
   const filter = (it: Industry): boolean => {
     return !!it.industryOnboardingQuestions.canBeHomeBased;
   };
-  return randomFilteredIndustry(filter, { isEnabled: true }).id;
+  return filterRandomIndustry(filter).id;
 };
 
 export const randomNonHomeBasedIndustry = (): string => {
   const filter = (it: Industry): boolean => {
     return !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation;
   };
-  return randomFilteredIndustry(filter, { isEnabled: true }).id;
+  return filterRandomIndustry(filter).id;
 };
 
 export const generateBusinessPersona = (): Exclude<BusinessPersona, undefined> => {

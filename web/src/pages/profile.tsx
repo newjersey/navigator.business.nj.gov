@@ -16,6 +16,7 @@ import { NexusDBANameField } from "@/components/data-fields/NexusDBANameField";
 import { NonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/NonEssentialQuestionsSection";
 import { Notes } from "@/components/data-fields/Notes";
 import { Ownership } from "@/components/data-fields/Ownership";
+import { RadioQuestion } from "@/components/data-fields/RadioQuestion";
 import { RenovationQuestion } from "@/components/data-fields/RenovationQuestion";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
 import { Sectors } from "@/components/data-fields/Sectors";
@@ -314,6 +315,13 @@ const ProfilePage = (props: Props): ReactElement => {
   const displayElevatorQuestion = (): boolean => {
     if (!business) return false;
     return profileData.homeBasedBusiness === false && profileData.businessPersona === "STARTING";
+  };
+
+  const displayCarnivalRidesQuestion = (): boolean => {
+    if (!business) return false;
+    return (
+      profileData.sectorId === "arts-entertainment-and-recreation" && profileData.businessPersona === "OWNING"
+    );
   };
 
   const hasSubmittedTaxData =
@@ -698,6 +706,15 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField fieldName="sectorId">
           <Sectors />
+        </ProfileField>
+
+        <ProfileField
+          fieldName="carnivalRideOwningBusiness"
+          isVisible={displayCarnivalRidesQuestion()}
+          hideHeader={true}
+          boldAltDescription={true}
+        >
+          <RadioQuestion<boolean> fieldName={"carnivalRideOwningBusiness"} choices={[true, false]} />
         </ProfileField>
 
         <ProfileField

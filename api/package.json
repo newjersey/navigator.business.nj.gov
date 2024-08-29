@@ -24,7 +24,7 @@
     "typecheck": "tsc --noemit"
   },
   "engines": {
-    "node": ">=20.16.0"
+    "node": ">=20.17.0"
   },
   "prettier": {
     "printWidth": 110,
@@ -70,7 +70,7 @@
     "@types/jest": "29.5.12",
     "@types/jsonwebtoken": "9.0.6",
     "@types/lodash": "4.17.7",
-    "@types/node": "20.14.15",
+    "@types/node": "20.16.1",
     "@types/simple-oauth2": "5.0.7",
     "@types/supertest": "6.0.2",
     "@types/webpack-node-externals": "3.0.4",
@@ -104,7 +104,7 @@
     "tsconfig-paths": "4.2.0",
     "tsconfig-paths-webpack-plugin": "4.1.0",
     "typescript": "5.5.4",
-    "webpack": "5.93.0",
+    "webpack": "5.94.0",
     "webpack-node-externals": "3.0.0",
     "wiremock": "3.9.0"
   }

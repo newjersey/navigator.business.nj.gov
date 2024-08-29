@@ -12,6 +12,7 @@ agencyAdditionalContext: "Bureau of Rooming and Boarding House Standards"
 divisionPhone: "(609) 984-1704"
 industryId: "lodging"
 licenseCertificationClassification: "undefined"
+licenseName: ""
 summaryDescriptionMd: "You need a license to own and/or operate a new or existing `rooming or boarding house|rooming-boarding-house`."
 ---
 

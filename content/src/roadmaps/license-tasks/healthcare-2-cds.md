@@ -14,9 +14,11 @@ callToActionText: Apply for My CDS Registration
 callToActionLink: https://www.njconsumeraffairs.gov/dcu/Applications/Initial-Application-for-Registration-for-Dispenser-Prescriber-Practitioner.pdf
 licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs
+licenseName: ""
 agencyAdditionalContext: New Jersey Drug Control Unit
 webflowId: 668d72e7096a17ca97b55564
 ---
+
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="note" }
 
 Be sure to register with the U.S. Drug Enforcement Administration (DEA) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to cds@dca.njoag.gov within 60 days of completing your CDS registration.
@@ -25,12 +27,12 @@ Be sure to register with the U.S. Drug Enforcement Administration (DEA) to valid
 
 ## Application Requirements
 
-* New Jersey business address where substances will be stored, prescribed, or dispensed (must match your DEA registration address)
-* Current and active professional license number (Certified Nurse Midwives must include their prescriptive authority suffix)
-* Schedule(s) of the CDS
-* Social Security number
-* Signed attestation (included in application)
-* Applicable fees paid, once the New Jersey Drug Control Unit (DCU) has sent an invoice
+- New Jersey business address where substances will be stored, prescribed, or dispensed (must match your DEA registration address)
+- Current and active professional license number (Certified Nurse Midwives must include their prescriptive authority suffix)
+- Schedule(s) of the CDS
+- Social Security number
+- Signed attestation (included in application)
+- Applicable fees paid, once the New Jersey Drug Control Unit (DCU) has sent an invoice
 
 Email your completed CDS application to [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov). The DCU will email you an invoice to pay your fee online.
 
