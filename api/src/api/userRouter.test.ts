@@ -5,11 +5,13 @@ import { EncryptionDecryptionClient, TimeStampBusinessSearch, UserDataClient } f
 import { setupExpress } from "@libs/express";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
-import { createEmptyFormationFormData } from "@shared/formationData";
+import { createEmptyFormationFormData, emptyAddressData } from "@shared/formationData";
+import { LicenseName } from "@shared/license";
 import {
   generateBusiness,
   generateBusinessNameAvailability,
   generateFormationData,
+  generateFormationFormData,
   generateFormationSubmitResponse,
   generateGetFilingResponse,
   generateLicenseData,
@@ -182,12 +184,130 @@ describe("userRouter", () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       });
 
-      it("does not update license if licenseData is undefined", async () => {
-        const userData = generateUserDataForBusiness(generateBusiness({ licenseData: undefined }));
+      it("does not update license if licenseData is undefined and formationFormData address does not exist", async () => {
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            licenseData: undefined,
+            formationData: {
+              ...generateFormationData({
+                formationFormData: createEmptyFormationFormData(),
+              }),
+            },
+          })
+        );
+
         stubUserDataClient.get.mockResolvedValue(userData);
 
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).not.toHaveBeenCalled();
+      });
+
+      it("does not update license if licenses is undefined and formationFormData address does not exist", async () => {
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            licenseData: {
+              licenses: undefined,
+              lastUpdatedISO: sixtyOneMinutesAgo,
+            },
+            formationData: {
+              ...generateFormationData({
+                formationFormData: createEmptyFormationFormData(),
+              }),
+            },
+          })
+        );
+
+        stubUserDataClient.get.mockResolvedValue(userData);
+
+        await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubUpdateLicenseStatus).not.toHaveBeenCalled();
+      });
+
+      it("updates license if licenseData is undefined and if an address exists in formationFormData", async () => {
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            licenseData: undefined,
+            formationData: generateFormationData({}),
+          })
+        );
+
+        stubUserDataClient.get.mockResolvedValue(userData);
+
+        await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubUpdateLicenseStatus).toHaveBeenCalled();
+      });
+
+      it("updates license if licenseData is present and if no address exists in formationFormData", async () => {
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            licenseData: generateLicenseData({
+              lastUpdatedISO: sixtyOneMinutesAgo,
+            }),
+            formationData: generateFormationData({
+              formationFormData: generateFormationFormData({
+                ...emptyAddressData,
+              }),
+            }),
+          })
+        );
+
+        stubUserDataClient.get.mockResolvedValue(userData);
+
+        await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubUpdateLicenseStatus).toHaveBeenCalled();
+      });
+
+      it("queries for license data using name and address from licenseData if present", async () => {
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            licenseData: generateLicenseData({
+              lastUpdatedISO: sixtyOneMinutesAgo,
+            }),
+            formationData: generateFormationData({
+              formationFormData: generateFormationFormData({
+                addressLine1: "123 Main Street",
+                addressLine2: "Suite 100",
+                addressZipCode: "07123",
+              }),
+            }),
+          })
+        );
+
+        const currentBusiness = getCurrentBusiness(userData);
+        const licenses = currentBusiness.licenseData!.licenses;
+        const licenseName = Object.keys(licenses!)[0] as LicenseName;
+        const licenseNameAndAddress = licenses![licenseName]?.nameAndAddress;
+
+        stubUserDataClient.get.mockResolvedValue(userData);
+
+        await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubUpdateLicenseStatus).toHaveBeenLastCalledWith(userData, licenseNameAndAddress);
+      });
+
+      it("queries for license data using formation address if no licenseData is present", async () => {
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            licenseData: undefined,
+            formationData: generateFormationData({
+              formationFormData: generateFormationFormData({
+                addressLine1: "123 Main Street",
+                addressLine2: "Suite 100",
+                addressZipCode: "07123",
+              }),
+            }),
+          })
+        );
+
+        const currentBusiness = getCurrentBusiness(userData);
+        stubUserDataClient.get.mockResolvedValue(userData);
+
+        await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubUpdateLicenseStatus).toHaveBeenLastCalledWith(userData, {
+          name: currentBusiness.profileData.businessName,
+          addressLine1: "123 Main Street",
+          addressLine2: "Suite 100",
+          zipCode: "07123",
+        });
       });
 
       it("does not update license if licenseData lastCheckedDate is within the last hour", async () => {
@@ -204,28 +324,31 @@ describe("userRouter", () => {
         expect(stubUpdateLicenseStatus).not.toHaveBeenCalled();
       });
 
-      // TODO: This will be addressed as a part of [#186879778]
-      // it("updates user in the background if licenseData lastCheckedDate is older than last hour", async () => {
-      //   const userData = generateUserDataForBusiness(
-      //     generateBusiness({
-      //       profileData: generateProfileData({
-      //         industryId: "home-contractor",
-      //       }),
-      //       licenseData: generateLicenseData({
-      //         lastUpdatedISO: sixtyOneMinutesAgo,
-      //       }),
-      //     })
-      //   );
-      //   stubUserDataClient.get.mockResolvedValue(userData);
-      //   const updatedUserData = generateUserData({});
-      //   stubUpdateLicenseStatus.mockResolvedValue(updatedUserData);
+      it("updates userData with license information if license query returns data", async () => {
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            profileData: generateProfileData({
+              industryId: "home-contractor",
+            }),
+            licenseData: generateLicenseData({
+              lastUpdatedISO: sixtyOneMinutesAgo,
+            }),
+          })
+        );
+        stubUserDataClient.get.mockResolvedValue(userData);
+        const updatedUserData = generateUserData({});
+        stubUpdateLicenseStatus.mockResolvedValue(updatedUserData);
 
-      //   const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
-      //   expect(stubUpdateLicenseStatus).toHaveBeenCalled();
-      //   expect(result.body).toEqual(userData);
-      // });
+        const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        const expectedCurrentBusiness = getCurrentBusiness(updatedUserData);
+        const resultUserData = result.body as UserData;
+        const resultCurrentBuseinss = getCurrentBusiness(resultUserData);
 
-      it("moves on in the flow if license check fails", async () => {
+        expect(stubUpdateLicenseStatus).toHaveBeenCalled();
+        expect(resultCurrentBuseinss.licenseData).toEqual(expectedCurrentBusiness.licenseData);
+      });
+
+      it("sets licenseData lastUpdatedISO if license check fails", async () => {
         const userData = generateUserDataForBusiness(
           generateBusiness({
             profileData: generateProfileData({
@@ -241,7 +364,14 @@ describe("userRouter", () => {
 
         const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateOperatingPhase).toHaveBeenCalledWith(userData);
-        expect(result.body).toEqual(userData);
+
+        const initialCurrentBusiness = getCurrentBusiness(userData);
+        const updatedUserData = result.body as UserData;
+        const currentBusiness = getCurrentBusiness(updatedUserData);
+        expect(
+          parseDate(currentBusiness.licenseData?.lastUpdatedISO).isSame(getCurrentDate(), "minute")
+        ).toEqual(true);
+        expect(currentBusiness.licenseData?.licenses).toEqual(initialCurrentBusiness.licenseData?.licenses);
       });
     });
 
