@@ -1,3 +1,10 @@
+## [2024.25.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.25.0...v2024.25.1) (2024-08-29)
+
+
+### Bug Fixes
+
+* [[#188193473](https://github.com/newjersey/navigator.business.nj.gov/issues/188193473)] updating register-home-contractor.md copy and metadata ([f0db0ad](https://github.com/newjersey/navigator.business.nj.gov/commit/f0db0ad51b4f8bc67602213a1b6711a6ec6abe51))
+
 # [2024.25.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.24.0...v2024.25.0) (2024-08-27)
 
 
