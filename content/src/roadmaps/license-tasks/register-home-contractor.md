@@ -1,8 +1,8 @@
 ---
 licenseName: Home Improvement Contractors-Home Improvement Contractor
-id: register-consumer-affairs
-filename: register-consumer-affairs
-displayname: register-consumer-affairs
+id: register-home-contractor
+filename: register-home-contractor
+displayname: register-home-contractor
 urlSlug: hic-license
 name: Obtain Your Home Improvement Contractor Registration
 webflowName: "Home Contractor: Home Improvement Contractor Registration"

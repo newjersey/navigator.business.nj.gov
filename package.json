@@ -1,6 +1,6 @@
 {
   "name": "@businessnjgovnavigator/root",
-  "version": "2024.25.0",
+  "version": "2024.25.1",
   "description": "This is the development repository for the work-in-progress business navigator from the New Jersey Office of Innovation. For info on the existing [Business.NJ.gov](https://business.nj.gov) site, please see the [bottom of this document](https://github.com/newjersey/navigator.business.nj.gov#businessnjgov)",
   "main": "index.js",
   "private": true,
@@ -27,7 +27,7 @@
     "test:python": "python -m unittest discover -b -s content/scripts -p \"test_*.py\" && python -m unittest discover -b -s scripts -p \"test_*.py\"",
     "test:watch": "yarn test --watch",
     "typecheck": "yarn workspaces foreach -v run typecheck",
-    "verify:node": "check-node-version --node $(cat .nvmrc) --npm 10.8.1",
+    "verify:node": "check-node-version --node $(cat .nvmrc) --npm 10.8.2",
     "wipit": "git add -A && git commit -m 'wip [skip ci]' --no-verify"
   },
   "dependencies": {
@@ -238,7 +238,7 @@
     ]
   },
   "engines": {
-    "node": ">=20.16.0"
+    "node": ">=20.17.0"
   },
   "repository": {
     "type": "git",

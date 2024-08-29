@@ -1,4 +1,4 @@
-FROM cimg/node:20.16.0-browsers
+FROM cimg/node:20.17.0-browsers
 
 USER root
 
@@ -37,20 +37,10 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
 
 # Install Browsers.
 # Firefox
-RUN apt-get install -qqy --no-install-recommends wget gnupg ca-certificates \
-  && rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
-  && FIREFOX_URL=$(wget -qO- "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US" | grep -Eo 'https://download-installer.cdn.mozilla.net/pub/firefox/releases/[0-9.]*/linux-x86_64/en-US/firefox-[0-9.]*.tar.bz2') \
-  && FIREFOX_VERSION=$(echo $FIREFOX_URL | grep -Eo '[0-9.]+' | head -1) \
-  && wget --no-verbose -O /tmp/firefox.tar.bz2 $FIREFOX_URL \
-  && wget --no-verbose -O /tmp/firefox.tar.bz2.asc https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2.asc \
-  && wget --no-verbose -O /tmp/KEY https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/KEY \
-  && gpg --import /tmp/KEY >/dev/null 2>&1 \
-  && gpg --verify /tmp/firefox.tar.bz2.asc /tmp/firefox.tar.bz2 \
-  && apt-get -y purge firefox \
-  && rm -rf /opt/firefox \
-  && tar -C /opt -xjf /tmp/firefox.tar.bz2 \
-  && rm /tmp/firefox.tar.bz2 /tmp/firefox.tar.bz2.asc /tmp/KEY \
-  && chmod +x /opt/firefox \
-  && mv /opt/firefox /opt/firefox-$FIREFOX_VERSION \
-  && ln -fs /opt/firefox-$FIREFOX_VERSION/firefox /usr/bin/firefox
+  RUN wget --no-verbose -O /tmp/firefox.tar.bz2 'https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US' \
+      && tar -C /opt -xjf /tmp/firefox.tar.bz2 \
+      && rm /tmp/firefox.tar.bz2 \
+      && chmod +x /opt/firefox \
+      && mv /opt/firefox /opt/firefox-latest \
+      && ln -fs /opt/firefox-latest/firefox /usr/bin/firefox
 USER circleci
