@@ -3,6 +3,7 @@
     "errorTextFieldsRequired": "Please fill in all non-optional fields.",
     "errorTextNoPropertyInterestFound": "We cannot find your registration. Make sure the building address you entered matches what is in your application.",
     "errorTextNoHotelMotelRegistrations": "We cannot find your registration. Make sure you submit a registration application for your hotel, motel or guesthouse.",
+    "errorTextNoMultipleDwellingRegistrations": "We cannot find your registration. Make sure you submit a registration application for your property.",
     "errorTextSearchFailed": "Sorry, something went wrong. Please try again later.",
     "registrationStartDateText": "Application Started on ",
     "registrationStatusText": "Application Status: ",
@@ -25,6 +26,9 @@
     "informationalReturned": "Your application has missing or incorrect information. Review and resubmit it using the same application link in the DCA Service Portal.",
     "informationalRejected": "Your application has missing or incorrect information. Review and resubmit it using the same application link in the DCA Service Portal.",
     "informationalIncomplete": "Review your incomplete application. Make sure you complete all sections and submit it.",
-    "applicationsFoundHeader": "REGISTRATION APPLICATION(S) FOR THIS PROPERTY:"
+    "applicationsFoundHeader": "REGISTRATION APPLICATION(S) FOR THIS PROPERTY:",
+    "reviewMyApplicationCallToAction": "Review My Application",
+    "reviewApplicationCallToActionLink": "https://njdcaportal.dynamics365portals.us/ultra-bhi-home/ultra-bhi-myregistrationrequests",
+    "renewRegistrationMessage": "Renew Registration by "
   }
 }

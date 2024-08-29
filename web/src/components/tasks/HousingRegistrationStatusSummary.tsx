@@ -1,10 +1,12 @@
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
+import { openInNewTab } from "@/lib/utils/helpers";
 import { toProperCase } from "@businessnjgovnavigator/shared";
 import { parseDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import {
@@ -18,6 +20,7 @@ interface Props {
   task: Task;
   summary: HousingRegistrationRequestLookupResponse;
   address: HousingAddress | undefined;
+  dueDate?: string;
   onEdit: () => void;
 }
 
@@ -30,6 +33,9 @@ type CardDisplayDetails = {
 
 export const HousingRegistrationStatusSummary = (props: Props): ReactElement => {
   const { Config } = useConfig();
+  const rejectedOrIncompleteApplication =
+    props.summary.registrations[0].status === "Returned" ||
+    props.summary.registrations[0].status === "Incomplete";
 
   const { business } = useUserData();
 
@@ -77,10 +83,17 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
     }
   };
 
-  const housingRegistrationStatusCard = (date: string, status: string, index: number): ReactElement => {
+  const housingRegistrationStatusCard = (
+    date: string,
+    status: string,
+    index: number,
+    renewalDate?: string
+  ): ReactElement => {
     const details = getDetailsForRegistrationCard(status);
     const formattedDate = parseDate(date).format("MMMM d, YYYY");
+    const formattedRenewalDate = parseDate(renewalDate).format("MMMM d, YYYY");
     const informationalMessage = getInformationalMessageText(status);
+    const renewalMessage = `${Config.housingRegistrationSearchTask.renewRegistrationMessage} ${formattedRenewalDate}`;
 
     const getIconForRegistrationCard = (): ReactElement => {
       switch (status) {
@@ -122,47 +135,69 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
             )}
           </Box>
         </Box>
+        {renewalMessage && <div className={"padding-top-1"}>{renewalMessage}</div>}
       </div>
     );
   };
 
   return (
     <>
-      <Box className="bg-base-extra-light  fdc fg1 padding-y-2 radius-lg drop-shadow-xs">
-        <div className={"margin-x-4"}>
-          {business?.profileData?.businessName && (
-            <span className={"text-bold"}>{business?.profileData?.businessName}</span>
-          )}
-          <br />
-          {props.address && (
-            <span>
-              <div className={"padding-bottom-1 text-bold"}>
-                {Config.housingRegistrationSearchTask.applicationsFoundHeader}
-              </div>
-              {props.address.address1}, {toProperCase(props.address.municipalityName)} NJ
-              <UnStyledButton
-                dataTestid={"address-edit"}
-                isUnderline
-                className={"padding-x-5"}
-                onClick={props.onEdit}
-              >
-                Edit
-              </UnStyledButton>
-            </span>
-          )}
+      <div className={`${rejectedOrIncompleteApplication ? "padding-bottom-4" : ""}`}>
+        <Box className="bg-base-extra-light  fdc fg1 padding-y-2 radius-lg drop-shadow-xs">
+          <div className={"margin-x-4"}>
+            {business?.profileData?.businessName && (
+              <span className={"text-bold"}>{business?.profileData?.businessName}</span>
+            )}
+            <br />
+            {props.address && (
+              <span>
+                <div className={"padding-bottom-1 text-bold"}>
+                  {Config.housingRegistrationSearchTask.applicationsFoundHeader}
+                </div>
+                {props.address.address1}, {toProperCase(props.address.municipalityName)} NJ
+                <UnStyledButton
+                  dataTestid={"address-edit"}
+                  isUnderline
+                  className={"padding-x-5"}
+                  onClick={props.onEdit}
+                >
+                  Edit
+                </UnStyledButton>
+              </span>
+            )}
 
-          <div>
-            {props.summary.registrations.map((registration, index) => {
-              return housingRegistrationStatusCard(registration.date, registration.status, index);
-            })}
-          </div>
+            <div>
+              {props.summary.registrations.map((registration, index) => {
+                return housingRegistrationStatusCard(registration.date, registration.status, index);
+              })}
+            </div>
 
-          <HorizontalLine />
-          <div className={"padding-bottom-1"}>
-            <span className={"text-bold"}>Issuing Agency:</span> Department of Community Affairs
+            <HorizontalLine />
+            <div className={"padding-bottom-1"}>
+              <span className={"text-bold"}>Issuing Agency:</span> Department of Community Affairs
+            </div>
           </div>
+        </Box>
+      </div>
+
+      {rejectedOrIncompleteApplication && (
+        <div
+          className={
+            "text-align-right bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 padding-right-4 margin-bottom-neg-7 radius-bottom-lg"
+          }
+        >
+          <Box>
+            <PrimaryButton
+              isColor={"primary"}
+              onClick={() => {
+                openInNewTab(Config.housingRegistrationSearchTask.reviewApplicationCallToActionLink);
+              }}
+            >
+              {Config.housingRegistrationSearchTask.reviewMyApplicationCallToAction}
+            </PrimaryButton>
+          </Box>
         </div>
-      </Box>
+      )}
 
       <UserDataErrorAlert />
     </>

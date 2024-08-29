@@ -1,3 +1,5 @@
+import { PropertyInterestType } from "@shared/housing";
+
 export interface HousingPropertyInterestClient {
   getPropertyInterest: (
     accessToken: string,
@@ -24,11 +26,12 @@ export type HousingPropertyInterestInfo = (
   municipalityId: string
 ) => Promise<HousingPropertyInterestResponse>;
 
-export interface HotelMotelRegistrationClient {
-  getHotelMotelRegistration: (
+export interface HousingRegistrationClient {
+  getHousingRegistration: (
     accessToken: string,
     propertyInterestId: string,
-    buildingCount: number
+    buildingCount: number,
+    propertyInterestType: PropertyInterestType
   ) => Promise<HousingRegistrationRequestResponse>;
 }
 
@@ -45,6 +48,7 @@ export type HousingRegistrationRequestResponse = HousingRegistrationRequest[];
 export type HousingRegistrationRequestLookupResponse = {
   registrations: HousingRegistrationRequest[];
   lookupStatus: HousingRegistrationLookupStatus;
+  renewalDate?: string;
 };
 
 export type HousingRegistrationLookupStatus =
