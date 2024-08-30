@@ -4,10 +4,8 @@ name: New Jersey Water Bank Program
 displayName: water-bank
 urlSlug: water-bank
 id: dep-water-bank
-sidebarCardBodyText: If your business designs, constructs, or implements
-  projects that protect and improve water quality and help to ensure safe and
-  adequate drinking water, this program can help with the cost by providing
-  low-cost financing.
+sidebarCardBodyText: NJ Water Bank Program can help with the cost of projects
+  that protect and improve water quality by providing low-cost financing.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: If your business designs, constructs, or implements
