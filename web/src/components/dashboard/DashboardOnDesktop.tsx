@@ -6,9 +6,9 @@ import { ElevatorViolationsCard } from "@/components/dashboard/ElevatorViolation
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
+import { getRoadmapHeadingText } from "@/components/dashboard/helpers";
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
@@ -42,7 +42,6 @@ export const DashboardOnDesktop = (props: Props): ReactElement => {
   const { business } = useUserData();
   const router = useRouter();
   const operatingPhase = LookupOperatingPhaseById(business?.profileData.operatingPhase);
-  const { Config } = useConfig();
   const deferredHomeBasedOnSaveButtonClick = (): void =>
     routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true");
 
@@ -80,9 +79,7 @@ export const DashboardOnDesktop = (props: Props): ReactElement => {
                 {operatingPhase.displayRoadmapTasks && (
                   <>
                     <hr className="margin-bottom-3" />
-                    <Heading level={2}>
-                      {Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText}
-                    </Heading>
+                    <Heading level={2}>{getRoadmapHeadingText(operatingPhase)}</Heading>
                     <Roadmap />
                   </>
                 )}

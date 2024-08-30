@@ -63,6 +63,7 @@ const operatingPhasesThatDontDisplayHideableRoadmapTasks = OperatingPhases.filte
 }).map((obj) => obj.id);
 
 const operatingPhasesThatDisplayHideableRoadmapTasks = OperatingPhases.filter((obj) => {
+  if (obj.id === OperatingPhaseId.DOMESTIC_EMPLOYER) return false;
   return obj.displayHideableRoadmapTasks;
 }).map((obj) => obj.id);
 
@@ -253,8 +254,26 @@ describe("<DashboardOnDesktop />", () => {
       expect(
         screen.getByText(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText)
       ).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText)
+      ).not.toBeInTheDocument();
     }
   );
+
+  it("renders HideableTasks for DOMESTIC_EMPLOYER OperatingPhase with alternate heading", () => {
+    useMockBusiness({
+      profileData: generateProfileData({ operatingPhase: OperatingPhaseId.DOMESTIC_EMPLOYER }),
+      onboardingFormProgress: "COMPLETED",
+    });
+    renderDashboardComponent({});
+
+    expect(
+      screen.queryByText(Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByText(Config.dashboardRoadmapHeaderDefaults.DomesticEmployerRoadmapTasksHeaderText)
+    ).toBeInTheDocument();
+  });
 
   describe("deferred onboarding question", () => {
     describe.each(operatingPhasesNotDisplayingHomeBasedPrompt)(

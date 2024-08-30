@@ -29,7 +29,7 @@ export interface Business {
   readonly formationData: FormationData;
 }
 
-export const CURRENT_VERSION = 141;
+export const CURRENT_VERSION = 142;
 
 export const createEmptyBusiness = (id?: string): Business => {
   return {
@@ -42,7 +42,7 @@ export const createEmptyBusiness = (id?: string): Business => {
     taskItemChecklist: {},
     licenseData: undefined,
     preferences: {
-      roadmapOpenSections: ["PLAN", "START"],
+      roadmapOpenSections: ["PLAN", "START", "DOMESTIC_EMPLOYER_SECTION"],
       roadmapOpenSteps: [],
       hiddenCertificationIds: [],
       hiddenFundingIds: [],
@@ -86,7 +86,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
   };
 };
 
-export const sectionNames = ["PLAN", "START"] as const;
+export const sectionNames = ["PLAN", "START", "DOMESTIC_EMPLOYER_SECTION"] as const;
 export type SectionType = (typeof sectionNames)[number];
 
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
