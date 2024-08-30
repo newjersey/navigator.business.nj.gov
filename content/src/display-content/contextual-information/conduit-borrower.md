@@ -1,6 +1,6 @@
 ---
 header: Conduit Borrower
 slug: conduit-borrower
-displayname: Conduit
+displayname: conduit-borrower
 ---
 A conduit borrower is a government entity that issues bonds or other types of debt.
