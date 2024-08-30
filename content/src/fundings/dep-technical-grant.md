@@ -1,31 +1,17 @@
 ---
-notesMd: "Drafted here:
-  https://docs.google.com/document/d/1XzmtCU0qJ_DtH5K-j_dLONQsJPeYz6iCyJumQLKDu\
-  FY/edit"
+notesMd: ""
 filename: dep-technical-grant
 name: Technical Assistance Grants
 displayName: dep-technical-grant
 urlSlug: dep-technical-grant
 id: dep-technical-grant
-sidebarCardBodyText: Technical Assistance Grants (TAGs) give money to nonprofit
-  community groups to hire independent experts called Licensed Site Remediation
-  Professionals (LSRPs). These experts help non-profits understand the site's
-  existing conditions, such as polluted areas.
+sidebarCardBodyText: "These funds allow "
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: >-
   
 
-  Technical Assistance Grants (TAGs) give money to nonprofit `community groups|community-groups` to hire independent experts called Licensed Site Remediation Professionals (LSRPs). These experts help non-profits understand the site's existing conditions, such as polluted areas.
-
-
-  TAG money is given to community groups to hire an LSRP to explain and give feedback on documents about the site. Community groups can get TAG funds during two phases of cleaning polluted sites:
-
-
-  * `Remedial Investigation (RI) phase|remedial-investigation` 
-
-
-  * `Remedial Action (RA) phase|remedial-action`
+  Your nonprofit `community group|community-groups` could receive funds from Technical Assistance Grants (TAGs) to hire independent experts called Licensed Site Remediation Professionals (LSRPs). These experts help nonprofits understand the site's existing conditions, such as polluted areas.
 callToActionLink: https://dep.nj.gov/grantandloanprograms/technical-assistance-grants/
 callToActionText: Learn More
 fundingType: grant
@@ -44,14 +30,16 @@ publishStageArchive: ""
 ---
 ## Eligibility
 
-- Non-profit community groups
-- At least one member of the community group must live in the neighborhood in which the site is located
-- Be incorporated or in the process of incorporating
-
+* Be a nonprofit community group
+* At least one member of the community group must live in the neighborhood in which the site is located
+* Be incorporated or in the process of incorporating
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-- Maximum of $10,000 for a single RI 
-- Maximum of $10,000 for a single RA
+* Maximum of $10,000 for a single `Remedial Investigation (RI)|remedial-investigation`
+* Maximum of $10,000 for a single `Remedial Action (RA)|remedial-action`
 
 :::
+
+
+
