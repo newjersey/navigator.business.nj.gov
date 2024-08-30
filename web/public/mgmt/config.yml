@@ -1998,7 +1998,7 @@ collections:
               - label: Section
                 name: section
                 widget: select
-                options: ["PLAN", "START"]
+                options: ["PLAN", "START", "DOMESTIC_EMPLOYER_SECTION"]
               - label: Time Estimate
                 name: timeEstimate
                 widget: string
@@ -2025,7 +2025,7 @@ collections:
               - label: Section
                 name: section
                 widget: select
-                options: ["PLAN", "START"]
+                options: ["PLAN", "START", "DOMESTIC_EMPLOYER_SECTION"]
               - label: Time Estimate
                 name: timeEstimate
                 widget: string
@@ -3210,6 +3210,11 @@ collections:
             widget: object
             fields:
               - { label: Roadmap Tasks Header Text, name: RoadmapTasksHeaderText, widget: string }
+              - {
+                  label: Roadmap Tasks Header Text (Domestic Employer only),
+                  name: DomesticEmployerRoadmapTasksHeaderText,
+                  widget: string,
+                }
           - label: Dashboard Anytime Action Defaults
             name: dashboardAnytimeActionDefaults
             collapsed: false
@@ -4161,6 +4166,7 @@ collections:
             fields:
               - { label: Plan Label, name: PLAN, widget: string }
               - { label: Start Label, name: START, widget: string }
+              - { label: Domestic Employer Roadmap Section, name: DOMESTIC_EMPLOYER_SECTION, widget: string }
           - label: Self Registration
             name: selfRegistration
             collapsed: true

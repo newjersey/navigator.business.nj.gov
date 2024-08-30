@@ -3,6 +3,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap, Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
 import { SectionType, TaskProgress, sectionNames } from "@businessnjgovnavigator/shared/userData";
 import { useContext, useMemo } from "react";
 
@@ -19,17 +20,26 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
   const { roadmap, setRoadmap } = useContext(RoadmapContext);
   const { business } = useUserData();
 
+  const isDomesticEmployer = business?.profileData.operatingPhase === OperatingPhaseId.DOMESTIC_EMPLOYER;
+
   const sectionNamesInRoadmap = useMemo(() => {
     if (!roadmap) {
       return [];
     }
     const { steps } = roadmap;
-    const sections: SectionType[] = [];
-    for (const step of steps) {
-      sections.push(step.section);
-    }
+    const sections: SectionType[] = steps
+      .filter((step) => {
+        if (step.section === "DOMESTIC_EMPLOYER_SECTION") {
+          return isDomesticEmployer;
+        }
+        if (step.section === "PLAN") {
+          return !isDomesticEmployer;
+        }
+        return true;
+      })
+      .map((step) => step.section);
     return [...new Set(sections)];
-  }, [roadmap]);
+  }, [roadmap, isDomesticEmployer]);
 
   const rebuildRoadmap = !roadmap || roadmap?.steps.length === 0 || roadmap?.tasks.length === 0;
 

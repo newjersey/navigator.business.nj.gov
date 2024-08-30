@@ -13,7 +13,8 @@
   },
   "sectionHeaders": {
     "PLAN": "Plan",
-    "START": "Start"
+    "START": "Start",
+    "DOMESTIC_EMPLOYER_SECTION": "Register"
   },
   "taskProgressCard": {
     "optionalTasksSingular": "${numTasks} optional task",
