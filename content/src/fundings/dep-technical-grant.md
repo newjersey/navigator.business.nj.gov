@@ -5,7 +5,9 @@ name: Technical Assistance Grants
 displayName: dep-technical-grant
 urlSlug: dep-technical-grant
 id: dep-technical-grant
-sidebarCardBodyText: "These funds allow "
+sidebarCardBodyText: Your nonprofit community group could receive funds from
+  Technical Assistance Grants (TAGs) to hire Licensed Site Remediation
+  Professionals (LSRPs).
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: >-
