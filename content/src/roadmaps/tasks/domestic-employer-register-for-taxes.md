@@ -18,7 +18,7 @@ filename: domestic-employer-register-for-taxes
 displayname: domestic-employer-tax-registration
 name: Register for State Taxes and Employer Purposes
 id: domestic-employer-register-for-taxes
-callToActionLink: https://www.njportal.com/DOR/BusinessRegistration
+callToActionLink: https://www.njportal.com/DOR/BusinessRegistration/Home/FirstStep
 callToActionText: Register for State Taxes
 agencyId: nj-taxation
 formName: NJ-Reg
@@ -28,7 +28,7 @@ formName: NJ-Reg
 * [NAICS code](/tasks/naics-code-determination): ${naicsCode}
 * Social Security number 
 * Estimated start date
-* Description of your business activity
+* Description of the type of work
 * Estimated number of employees
 * Anticipated first payroll withholding date for employees
 
@@ -40,7 +40,7 @@ formName: NJ-Reg
 
 \-or-
 
-[Register online](https://www.njportal.com/DOR/BusinessRegistration).
+[Register online](https://www.njportal.com/DOR/BusinessRegistration/Home/FirstStep)
 
 - - -
 
