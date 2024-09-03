@@ -47,7 +47,8 @@
     "carnival-fire-licenses",
     "carnival-ride-permitting",
     "weights-measures",
-    "entertainment-agency"
+    "entertainment-agency",
+    "ticket-broker-resell"
   ],
   "displayname": "independent-artist",
   "industryOnboardingQuestions": {
