@@ -55,7 +55,7 @@ def get_commit_history():
 
 def find_commit_id_to_return(commit_history, non_done_ticket_ids):
     blocking_commits = []
-    for line in commit_history:
+    for line in reversed(commit_history):
         commit_id, commit_message = line.split(" ", 1)
         ticket_id_match = re.search(r"#(\d+)", commit_message)
         if ticket_id_match:
