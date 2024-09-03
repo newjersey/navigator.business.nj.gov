@@ -1,3 +1,20 @@
+# [2024.26.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.25.1...v2024.26.0) (2024-09-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency axios to v1.7.5 ([291f8ec](https://github.com/newjersey/navigator.business.nj.gov/commit/291f8ec5dd4a3d2d4d4d139042562537b2b8f9c4))
+* **deps:** update dependency dayjs to v1.11.13 ([37a1fb9](https://github.com/newjersey/navigator.business.nj.gov/commit/37a1fb96c1d101b8ca578c7d332a23b7d4ae9e46))
+
+
+### Features
+
+* [[#186879778](https://github.com/newjersey/navigator.business.nj.gov/issues/186879778)] autocheck for license data ([af39fb1](https://github.com/newjersey/navigator.business.nj.gov/commit/af39fb167a251691726cc903797798ded50e8baf))
+* [[#187792208](https://github.com/newjersey/navigator.business.nj.gov/issues/187792208)] test for new unaccounted-for essential question, and step vs steps ([94ee389](https://github.com/newjersey/navigator.business.nj.gov/commit/94ee38970d29ab03ac1ef42fd028153de16a4b7b))
+* [[#188064481](https://github.com/newjersey/navigator.business.nj.gov/issues/188064481)] Add anytime action from carnival non-essential question ([c2938aa](https://github.com/newjersey/navigator.business.nj.gov/commit/c2938aafe4090daab22747f6a7f25fcf41953a49))
+* [[#188135142](https://github.com/newjersey/navigator.business.nj.gov/issues/188135142)] Add multiple dwelling registration status check ([135902d](https://github.com/newjersey/navigator.business.nj.gov/commit/135902dd733f385e6501ebf0d2a3dd3341d172a9))
+* [[#188150760](https://github.com/newjersey/navigator.business.nj.gov/issues/188150760)] Post-formation Business Address Profile Locked & Empty State ([277748b](https://github.com/newjersey/navigator.business.nj.gov/commit/277748b810e98a9c9ec2ca4aebedd54c05e5256b))
+
 ## [2024.25.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.25.0...v2024.25.1) (2024-08-29)
 
 
