@@ -3527,17 +3527,35 @@ collections:
         value_field: "anytimeActionIcons.*.filename"
         display_fields: ["anytimeActionIcons.*.name"]
       - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "nospace", required: true }
-      - {
-          label: "Above License Status Content",
-          name: "aboveLicenseStatusContent",
-          widget: "markdown",
-          required: true,
-        }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Below License Status Content", name: "body", widget: "markdown", required: true }
       - { label: "Form", name: "form", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+
+  - name: "anytime-action-reinstatement-defaults"
+    label: "Anytime Action Reinstatement Defaults"
+    delete: false
+    create: false
+    files:
+      - label: "Anytime Action Reinstatement Defaults"
+        name: "anytime-action-reinstatement-defaults"
+        file: "content/src/fieldConfig/anytime-action-reinstatement-defaults.json"
+        editor:
+          preview: true
+        fields:
+          - label: "Anytime Action Reinstatement Defaults"
+            name: anytimeActionReinstatementDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - {
+                  label: "License Expiration Header Text",
+                  name: "licenseExpirationHeaderText",
+                  widget: "string",
+                }
+              - { label: "License Status Header Text", name: "licenseStatusHeaderText", widget: "string" }
+              - { label: "License Last Updated Text", name: "licenseLastUpdatedText", widget: "string" }
 
   - name: "anytime-action-links"
     label: "Anytime Action External Link Only"

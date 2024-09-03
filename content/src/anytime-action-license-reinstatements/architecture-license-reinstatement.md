@@ -20,7 +20,6 @@ summaryDescriptionMd: >-
   :::
 callToActionText: Reinstate My Architecture License
 callToActionLink: https://www.njconsumeraffairs.gov/arch/applications/Application-for-Reinstatement-with-Instructions.pdf
-aboveLicenseStatusContent: ""
 ---
 
 ## Application Requirements

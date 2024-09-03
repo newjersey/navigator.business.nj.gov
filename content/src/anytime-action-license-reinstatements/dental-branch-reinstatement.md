@@ -12,7 +12,6 @@ summaryDescriptionMd: If your branch office registration expired less than 30
   been expired for more than 30 days or is inactive, you need to reinstate it.
 callToActionText: "Reinstate My Dental Branch Office Registration "
 callToActionLink: https://www.njconsumeraffairs.gov/den/Applications/Request-for-Branch-Office-Registration.pdf
-aboveLicenseStatusContent: ""
 ---
 
 ## Application Requirements

@@ -9,7 +9,6 @@ summaryDescriptionMd: Your accounting firm registration needs to be reinstated
 form: Lapsed Certified Public Accountant’s Firm Registration
 callToActionText: Reinstate My Accountant Firm Registration
 callToActionLink: https://www.njconsumeraffairs.gov/accold/Applications/Reinstatement-of-a-Lapsed-Certified-Public-Accountants-Firm-Registration.pdf
-aboveLicenseStatusContent: ""
 ---
 
 ## Application Requirements

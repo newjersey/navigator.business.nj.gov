@@ -321,7 +321,6 @@ export const generateAnytimeActionLicenseReinstatement = (
     form: `some-form-${randomInt()}`,
     summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
     licenseName: randomElementFromArray(Object.values(taskIdLicenseNameMapping)),
-    aboveLicenseStatusContent: `some-above-license-status-content-${randomInt()}`,
     ...overrides,
   };
 };

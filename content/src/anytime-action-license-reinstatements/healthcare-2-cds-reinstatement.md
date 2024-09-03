@@ -20,7 +20,6 @@ summaryDescriptionMd: >-
   If your [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) is also expired, be sure to reinstate it.
 callToActionText: Reinstate My PA, APN, or CNM CDS Registration
 callToActionLink: https://www.njconsumeraffairs.gov/dcu/Applications/Reinstatement-Application-for-Registration-for-Dispenser-Prescriber-Mid-Level-Practitioner.pdf
-aboveLicenseStatusContent: ""
 ---
 
 ## Application Requirements

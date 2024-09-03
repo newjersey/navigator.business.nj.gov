@@ -19,7 +19,6 @@ summaryDescriptionMd: >-
   If your [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) registration is also expired, be sure to reinstate it.
 callToActionText: Reinstate My CDS Registration
 callToActionLink: https://www.njconsumeraffairs.gov/dcu/Applications/Reinstatement-Application-for-Registration-for-Dispenser-Prescriber-Practitioner.pdf
-aboveLicenseStatusContent: ""
 ---
 
 ## Application Requirements

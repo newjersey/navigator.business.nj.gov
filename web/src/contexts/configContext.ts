@@ -1,4 +1,5 @@
 import * as AccountSetup from "@businessnjgovnavigator/content/fieldConfig/account-setup-page.json";
+import * as AnytimeActionReinstatementDefaults from "@businessnjgovnavigator/content/fieldConfig/anytime-action-reinstatement-defaults.json";
 import * as BusinessFormation from "@businessnjgovnavigator/content/fieldConfig/business-formation.json";
 import * as BusinessStructurePrompt from "@businessnjgovnavigator/content/fieldConfig/business-structure-prompt.json";
 import * as BusinessStructureTask from "@businessnjgovnavigator/content/fieldConfig/business-structure-task.json";
@@ -74,7 +75,8 @@ const merged = JSON.parse(
       CalloutDefaults,
       ElevatorRegistration,
       StarterKits,
-      HousingRegistrationSearchTask
+      HousingRegistrationSearchTask,
+      AnytimeActionReinstatementDefaults
     )
   )
 );
@@ -114,7 +116,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof DashboardDefaults &
   typeof PageMetadata &
   typeof StarterKits &
-  typeof HousingRegistrationSearchTask;
+  typeof HousingRegistrationSearchTask &
+  typeof AnytimeActionReinstatementDefaults;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -150,7 +153,8 @@ export const getMergedConfig = (): ConfigType => {
     CalloutDefaults,
     ElevatorRegistration,
     StarterKits,
-    HousingRegistrationSearchTask
+    HousingRegistrationSearchTask,
+    AnytimeActionReinstatementDefaults
   );
 };
 
