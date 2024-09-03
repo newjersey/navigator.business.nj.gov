@@ -44,6 +44,7 @@ import { migrate_v136_to_v137 } from "@db/migrations/v137_add_employment_placeme
 import { migrate_v137_to_v138 } from "@db/migrations/v138_multi_license_support";
 import { migrate_v138_to_v139 } from "@db/migrations/v139_own_carnival_rides";
 import { migrate_v12_to_v13 } from "@db/migrations/v13_add_construction_renovation_plan";
+import { migrate_v139_to_v140 } from "@db/migrations/v140_modify_home_health_industry";
 import { migrate_v13_to_v14 } from "@db/migrations/v14_add_cleaning_aid_industry";
 import { migrate_v14_to_v15 } from "@db/migrations/v15_add_retail_industry";
 import { migrate_v15_to_v16 } from "@db/migrations/v16_add_user_preferences";
@@ -282,4 +283,5 @@ export const Migrations: MigrationFunction[] = [
   migrate_v136_to_v137,
   migrate_v137_to_v138,
   migrate_v138_to_v139,
+  migrate_v139_to_v140,
 ];
