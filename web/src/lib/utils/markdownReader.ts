@@ -89,6 +89,19 @@ export const convertAnytimeActionLicenseReinstatementMd = (
   };
 };
 
+export const convertAnytimeActionLicenseRenewalsMd = (
+  anytimeActionLicenseRenewalsMdContents: string,
+  filename: string
+): AnytimeActionLicenseReinstatement => {
+  const matterResult = matter(anytimeActionLicenseRenewalsMdContents);
+  const anytimeActionGrayMatter = matterResult.data as AnytimeActionLicenseRenewalGrayMatter;
+  return {
+    contentMd: matterResult.content,
+    filename,
+    ...anytimeActionGrayMatter,
+  };
+};
+
 export const convertAnytimeActionLinkMd = (
   anytimeActionLinkMdContents: string,
   filename: string
@@ -221,6 +234,17 @@ type AnytimeActionTaskGrayMatter = {
 };
 
 type AnytimeActionLicenseReinsatementGrayMatter = {
+  name: string;
+  urlSlug: string;
+  callToActionLink: string;
+  callToActionText: string;
+  form: string;
+  icon: string;
+  licenseName: LicenseName;
+  summaryDescriptionMd: string;
+};
+
+type AnytimeActionLicenseRenewalGrayMatter = {
   name: string;
   urlSlug: string;
   callToActionLink: string;

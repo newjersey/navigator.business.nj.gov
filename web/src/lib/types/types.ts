@@ -240,6 +240,16 @@ export interface AnytimeActionLicenseReinstatement extends AnytimeAction {
   summaryDescriptionMd: string;
 }
 
+export interface AnytimeActionLicenseRenewal extends AnytimeAction {
+  licenseName: LicenseName;
+  urlSlug: string;
+  contentMd: string;
+  callToActionLink: string | undefined;
+  callToActionText: string | undefined;
+  form: string | undefined;
+  summaryDescriptionMd: string;
+}
+
 export type FundingType =
   | "tax credit"
   | "loan"

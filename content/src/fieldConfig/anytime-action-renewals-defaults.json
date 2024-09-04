@@ -1,0 +1,9 @@
+{
+  "anytimeActionRenewalsDefaults": {
+    "LicenseDefaultText": "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services",
+    "licenseExpirationHeaderText": "EXPIRATION DATE:",
+    "licenseStatusHeaderText": "Current Status",
+    "licenseLastUpdatedText": "Last Updated:",
+    "licenseDefaultText": "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services"
+  }
+}
