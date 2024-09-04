@@ -19,6 +19,10 @@ export const getLicenseCalendarEvents = (
 
   const isMonthDefined = month !== undefined;
 
+  if (licenseData.licenses === undefined) {
+    return events;
+  }
+
   for (const [licenseName, licenseDetail] of Object.entries(licenseData.licenses as Licenses)) {
     if (licenseDetail.expirationDateISO === undefined) {
       continue;
