@@ -116,3 +116,12 @@ export const generateV0User = (overrides: Partial<v0BusinessUser>): v0BusinessUs
     ...overrides,
   };
 };
+
+export const generateV0UserData = (overrides: Partial<v0UserData>): v0UserData => {
+  return {
+    user: generateV0User({}),
+    formData: generateV0FormData({}),
+    formProgress: "UNSTARTED",
+    ...overrides,
+  };
+};
