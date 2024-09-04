@@ -45,6 +45,7 @@ import { migrate_v137_to_v138 } from "@db/migrations/v138_multi_license_support"
 import { migrate_v138_to_v139 } from "@db/migrations/v139_own_carnival_rides";
 import { migrate_v12_to_v13 } from "@db/migrations/v13_add_construction_renovation_plan";
 import { migrate_v139_to_v140 } from "@db/migrations/v140_modify_home_health_industry";
+import { migrate_v140_to_v141 } from "@db/migrations/v141_sync_migrated_and_newly_created_users";
 import { migrate_v13_to_v14 } from "@db/migrations/v14_add_cleaning_aid_industry";
 import { migrate_v14_to_v15 } from "@db/migrations/v15_add_retail_industry";
 import { migrate_v15_to_v16 } from "@db/migrations/v16_add_user_preferences";
@@ -284,4 +285,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v137_to_v138,
   migrate_v138_to_v139,
   migrate_v139_to_v140,
+  migrate_v140_to_v141,
 ];
+
+export { generatev141UserData as CURRENT_GENERATOR } from "@db/migrations/v141_sync_migrated_and_newly_created_users";
