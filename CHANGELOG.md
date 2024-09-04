@@ -1,3 +1,10 @@
+## [2024.26.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.26.0...v2024.26.1) (2024-09-04)
+
+
+### Bug Fixes
+
+* [[#188214352](https://github.com/newjersey/navigator.business.nj.gov/issues/188214352)] add migration to solve relative import issue ([9d9483d](https://github.com/newjersey/navigator.business.nj.gov/commit/9d9483db5608ee2659477ea751131a0e99929d5f))
+
 # [2024.26.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.25.1...v2024.26.0) (2024-09-03)
 
 
