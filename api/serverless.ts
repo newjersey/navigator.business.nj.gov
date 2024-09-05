@@ -37,6 +37,10 @@ const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
 const ssmLocation = stage === "local" ? "dev" : stage;
 
+const contentEnv = "content";
+const testEnv = "testing";
+const devEnv = "dev";
+
 const adminPassword = process.env.ADMIN_PASSWORD ?? "";
 
 const myNJServiceToken = process.env.MYNJ_SERVICE_TOKEN || "";
@@ -293,20 +297,25 @@ serverlessConfiguration.functions = {
         }
       : undefined
   ),
-  healthCheck: healthCheck(
-    env.CI
-      ? {
-          securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
-          subnetIds: [
-            "${self:custom.config.infrastructure.SUBNET_01}",
-            "${self:custom.config.infrastructure.SUBNET_02}",
-          ],
-        }
-      : undefined
-  ),
 };
 
-if (stage === "dev") {
+if (stage !== contentEnv && stage !== testEnv) {
+  serverlessConfiguration.functions = {
+    ...serverlessConfiguration.functions,
+    healthCheck: healthCheck(
+      env.CI
+        ? {
+            securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
+            subnetIds: [
+              "${self:custom.config.infrastructure.SUBNET_01}",
+              "${self:custom.config.infrastructure.SUBNET_02}",
+            ],
+          }
+        : undefined
+    ),
+  };
+}
+if (stage === devEnv) {
   serverlessConfiguration.functions = {
     ...serverlessConfiguration.functions,
     githubOauth2: githubOauth2(
