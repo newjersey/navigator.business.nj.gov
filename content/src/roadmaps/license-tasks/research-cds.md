@@ -22,11 +22,10 @@ summaryDescriptionMd: >-
   :::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
 
 
-  If you are applying for Schedule I CDS as a researcher, you must get your [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) registration before applying for CDS registration. In this case, you can skip to step 3.
+  If you are applying for Schedule I CDS as a researcher, you must get your [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) registration before applying for CDS registration. In this case, you can skip step 3.
 
 
   :::
-
 
 
   1. Email the NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the Researcher/Facility CDS Registration application.
