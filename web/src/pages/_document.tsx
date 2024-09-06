@@ -4,10 +4,18 @@ import Script from "next/script";
 import { ReactElement } from "react";
 
 function getFaviconPath(): string {
-  if (process.env.NODE_ENV === "development") {
-    return "/favicon_development";
-  } else if (process.env.NODE_ENV === "test") {
-    return "/favicon_test";
+  const baseURL = new URL(process.env.NEXT_PUBLIC_WEB_BASE_URL ?? "http://localhost:3000");
+
+  if (baseURL.hostname.includes("dev")) {
+    return "/favicon-dev";
+  } else if (baseURL.hostname.includes("testing")) {
+    return "/favicon-testing";
+  } else if (baseURL.hostname.includes("content")) {
+    return "/favicon-content";
+  } else if (baseURL.hostname.includes("staging")) {
+    return "/favicon-staging";
+  } else if (baseURL.hostname.includes("local")) {
+    return "/favicon-local";
   } else {
     return "/favicon";
   }
