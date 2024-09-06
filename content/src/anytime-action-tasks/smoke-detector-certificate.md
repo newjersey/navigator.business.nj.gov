@@ -4,7 +4,7 @@ notesMd: >-
   draft](https://docs.google.com/document/d/1VUircxpV5ZJuqq1_c5M5yl7aJZ8CkafDsm2Teuz_zGk/edit)
 
 
-  Note: this is also on the Landlord starter kit
+  Note: this is also on the Landlord starter kit. This Anytime Action only appears to Oscars.
 filename: smoke-detector-certificate
 name: Get a New Smoke Detector, Carbon Monoxide Detector, and Fire Extinguisher
   Certificate
