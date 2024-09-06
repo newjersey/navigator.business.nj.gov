@@ -37,7 +37,9 @@ import {
   generateProfileData,
   generateTaxFilingData,
   generateUserDataForBusiness,
+  getIndustries,
   OperatingPhases,
+  randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhase, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -63,7 +65,6 @@ const operatingPhasesThatDontDisplayHideableRoadmapTasks = OperatingPhases.filte
 }).map((obj) => obj.id);
 
 const operatingPhasesThatDisplayHideableRoadmapTasks = OperatingPhases.filter((obj) => {
-  if (obj.id === OperatingPhaseId.DOMESTIC_EMPLOYER) return false;
   return obj.displayHideableRoadmapTasks;
 }).map((obj) => obj.id);
 
@@ -245,8 +246,12 @@ describe("<DashboardOnDesktop />", () => {
   it.each(operatingPhasesThatDisplayHideableRoadmapTasks)(
     "renders HideableTasks for %s that display HideableRoadmapTasks",
     (OperatingPhase) => {
+      const filteredIndustries = getIndustries().filter((industry) => industry.id !== "domestic-employer");
       useMockBusiness({
-        profileData: generateProfileData({ operatingPhase: OperatingPhase }),
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhase,
+          industryId: randomElementFromArray(filteredIndustries).id,
+        }),
         onboardingFormProgress: "COMPLETED",
       });
       renderDashboardComponent({});
@@ -260,9 +265,9 @@ describe("<DashboardOnDesktop />", () => {
     }
   );
 
-  it("renders HideableTasks for DOMESTIC_EMPLOYER OperatingPhase with alternate heading", () => {
+  it("renders HideableTasks for domestic-employer industry with alternate heading", () => {
     useMockBusiness({
-      profileData: generateProfileData({ operatingPhase: OperatingPhaseId.DOMESTIC_EMPLOYER }),
+      profileData: generateProfileData({ industryId: "domestic-employer" }),
       onboardingFormProgress: "COMPLETED",
     });
     renderDashboardComponent({});

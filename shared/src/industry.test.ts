@@ -123,9 +123,17 @@ describe("Industry Tests", () => {
     });
   });
 
-  describe("dev industry", () => {
-    it("should always be disabled", () => {
+  describe("special case industry rules", () => {
+    it("demo-only should always be disabled", () => {
       expect(LookupIndustryById("demo-only").isEnabled).toBe(false);
+    });
+
+    it("industry with the name 'Domestic Employer' should always have the id domestic-employer", () => {
+      // Domestic Employer was created for a specific use case and has unique dashboard rendering logic dependent on the industry id
+      const domesticEmployerIndustry = getIndustries().find(
+        (industry) => industry.name === "Domestic Employer"
+      );
+      expect(domesticEmployerIndustry?.id).toBe("domestic-employer");
     });
   });
 });

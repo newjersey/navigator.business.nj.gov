@@ -3,7 +3,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap, Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
 import { SectionType, TaskProgress, sectionNames } from "@businessnjgovnavigator/shared/userData";
 import { useContext, useMemo } from "react";
 
@@ -20,7 +19,7 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
   const { roadmap, setRoadmap } = useContext(RoadmapContext);
   const { business } = useUserData();
 
-  const isDomesticEmployer = business?.profileData.operatingPhase === OperatingPhaseId.DOMESTIC_EMPLOYER;
+  const isDomesticEmployer = business?.profileData.industryId === "domestic-employer";
 
   const sectionNamesInRoadmap = useMemo(() => {
     if (!roadmap) {

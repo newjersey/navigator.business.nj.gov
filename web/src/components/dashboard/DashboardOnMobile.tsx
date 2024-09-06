@@ -7,7 +7,7 @@ import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
 import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
-import { getRoadmapHeadingText } from "@/components/dashboard/helpers";
+import { getRoadmapHeadingText } from "@/components/dashboard/dashboardHelpers";
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -77,7 +77,7 @@ export const DashboardOnMobile = (props: Props): ReactElement => {
               {operatingPhase.displayRoadmapTasks && (
                 <>
                   <hr className="margin-bottom-3" />
-                  <Heading level={2}>{getRoadmapHeadingText(operatingPhase)}</Heading>
+                  <Heading level={2}>{getRoadmapHeadingText(business?.profileData.industryId)}</Heading>
                   <Roadmap />
                 </>
               )}
