@@ -8,9 +8,11 @@ sidebarCardBodyText: The Film Tax Credit Program provides a transferable tax
   credit to incentivize production companies to film content in New Jersey.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The Film Tax Credit Program provides a transferable credit
-  against the corporation business tax and the gross income tax to incentivize
-  production companies to film content in New Jersey.
+summaryDescriptionMd: >+
+  The Film Tax Credit Program provides you a transferable credit against the
+  corporation business tax and the gross income tax to incentivize your
+  production company to film content in New Jersey.
+
 callToActionLink: https://www.njeda.com/film
 callToActionText: Learn more
 fundingType: tax credit
