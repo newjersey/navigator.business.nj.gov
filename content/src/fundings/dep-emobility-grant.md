@@ -9,9 +9,11 @@ sidebarCardBodyText: The eMobility rolling grant program provides grants to
   underserved communities.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The eMobility rolling grant program provides grants to
-  businesses that offer zero-emission transportation options and services in
-  [underserved communities.](https://dep.nj.gov/ej/communities/)
+summaryDescriptionMd: >+
+  The eMobility rolling grant program offers you grants if your business
+  provides zero-emission transportation options and services in [underserved
+  communities.](https://dep.nj.gov/ej/communities/)
+
 callToActionLink: https://dep.nj.gov/grantandloanprograms/emobility-rolling-grant-program/
 callToActionText: Learn More
 fundingType: grant
