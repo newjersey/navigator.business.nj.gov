@@ -4,11 +4,16 @@ name: Drinking Water State Revolving Fund Program
 displayName: drinking-water-revolving
 urlSlug: drinking-water-fund
 id: dep-drinking-water
-openDate: ""
-dueDate: ""
-summaryDescriptionMd: This program provides low-interest loans to finance the
+sidebarCardBodyText: This program provides low-interest loans to finance the
   costs of infrastructure needed to achieve or maintain compliance with Safe
   Drinking Water Act (SDWA) requirements and to protect public health.
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: >+
+  This program provides you with low-interest loans to finance the costs of
+  infrastructure needed to achieve or maintain compliance with Safe Drinking
+  Water Act (SDWA) requirements and to protect public health.
+
 callToActionLink: https://www.nj.gov/dep/grantandloanprograms/lu_dwsrf.htm
 callToActionText: Learn More
 fundingType: loan
@@ -29,9 +34,6 @@ sector:
   - construction
   - utilities
 publishStageArchive: ""
-sidebarCardBodyText: This program provides low-interest loans to finance the costs of
-  infrastructure needed to achieve or maintain compliance with Safe Drinking
-  Water Act (SDWA) requirements and to protect public health.
 ---
 
 ## Eligibility
