@@ -10,10 +10,12 @@ sidebarCardBodyText: "New Jersey Clean Construction Program installs pollution
   Retrofit Grant and Off-Road Diesel Replacement Grant."
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: "New Jersey Clean Construction Program installs pollution
-  control devices or replaces qualifying non-road construction equipment that
-  reduces pollution. Businesses can apply to two grants: Off-Road Diesel
-  Retrofit Grant and Off-Road Diesel Replacement Grant."
+summaryDescriptionMd: >+
+  New Jersey Clean Construction Program helps your business install pollution
+  control devices or replace qualifying non-road construction equipment to
+  reduce pollution. You can apply for either the Off-Road Diesel Retrofit Grant
+  or the Off-Road Diesel Replacement Grant.
+
 callToActionLink: https://www.nj.gov/dep/grantandloanprograms/aqes-njccp.htm
 callToActionText: Learn More
 fundingType: grant
