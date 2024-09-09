@@ -8,13 +8,14 @@ sidebarCardBodyText: NJEDA’s Emerging Developers Grant Program provides emergi
   developers with financial assistance for pre-development soft costs.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: >-
+summaryDescriptionMd: >+
   :::infoAlert 
    Payment is due at the time of application. A non-refundable fee of $1,000 is required per application.
   :::
 
 
-  NJEDA’s Emerging Developers Grant Program provides emerging developers with financial assistance for pre-development soft costs. NJEDA recognizes the significance of fostering an inclusive and equitable economy, and this program aims to help developers enhance networks, access capital, and expand existing portfolios.
+  New Jersey Economic Development Authority's (NJEDA) Emerging Developers Grant Program provides you with financial assistance for pre-development soft costs. This program aims to help you enhance networks, access capital, and expand your existing portfolio.
+
 callToActionLink: https://www.njeda.gov/emerging-developers/
 callToActionText: Learn more
 fundingType: grant
