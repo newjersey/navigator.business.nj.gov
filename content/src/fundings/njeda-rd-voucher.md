@@ -4,12 +4,18 @@ name: Catalyst R&D Voucher Program
 displayName: catalyst-rd
 urlSlug: njeda-rd-voucher
 id: njeda-rd-voucher
-openDate: ""
-dueDate: ""
-summaryDescriptionMd: The Catalyst Research and Development (R&D) Voucher Pilot
+sidebarCardBodyText: The Catalyst Research and Development (R&D) Voucher Pilot
   Program supports New Jersey-based early-stage company efforts to accelerate
   the development and innovation of technologies from the research stage into
   commercially viable technologies, leading to industry and investor interest.
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: >+
+  The Catalyst Research and Development (R&D) Voucher Pilot Program supports
+  your efforts as a New Jersey-based early-stage company to accelerate the
+  development and innovation of technologies from the research stage into
+  commercially viable technologies, attracting industry and investor interest.
+
 callToActionLink: https://www.njeda.com/catalyst-voucher/
 callToActionText: Learn More
 fundingType: grant
@@ -41,10 +47,6 @@ sector:
   - professional-scientific-and-technical-services
   - technology
 publishStageArchive: ""
-sidebarCardBodyText: The Catalyst Research and Development (R&D) Voucher Pilot Program
-  supports New Jersey-based early-stage company efforts to accelerate the
-  development and innovation of technologies from the research stage into
-  commercially viable technologies, leading to industry and investor interest.
 ---
 
 ## Eligibility
