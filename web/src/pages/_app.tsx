@@ -33,6 +33,8 @@ import { useRouter } from "next/router";
 import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
+
+import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
 import "../styles/main.scss";
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
@@ -122,10 +124,49 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   const isSeoPage = router.pathname.includes("/starter-kits");
 
+  const heroTitle = insertIndustryContent(
+    config.starterKits.hero.title,
+    pageProps.industry?.id,
+    pageProps.industry?.name
+  );
+
+  const description = insertIndustryContent(
+    config.starterKits.seo.description,
+    pageProps.industry?.id,
+    pageProps.industry?.name
+  );
+
+  const imageAlt = insertIndustryContent(
+    config.starterKits.seo.imageAltText,
+    pageProps.industry?.id,
+    pageProps.industry?.name
+  );
+
+  const baseUrl = process.env.NEXT_PUBLIC_WEB_BASE_URL;
+  const imageUrl = new URL("/img/team-success.jpg", baseUrl).href;
+
   return (
     <>
       <Head>
         <meta name="viewport" content="width=360, initial-scale=1" />
+        {isSeoPage && (
+          <>
+            <meta property="og:title" content={heroTitle} />
+            <meta property="og:description" content={description} />
+            <meta property="og:image" content={imageUrl} />
+            <meta property="og:image:secure_url" content={imageUrl} />
+            <meta property="og:image:type" content="image/jpg" />
+            <meta property="og:image:width" content="1920" />
+            <meta property="og:image:height" content="1080" />
+            <meta property="og:image:alt" content={imageAlt} />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:site" content="@businessnjgov" />
+            <meta name="twitter:title" content={heroTitle} />
+            <meta name="twitter:description" content={description} />
+            <meta name="twitter:image" content={imageUrl} />
+            <meta name="twitter:image:alt" content={imageAlt} />
+          </>
+        )}
       </Head>
       {showGtm && (
         <Script id="google-tag-manager">

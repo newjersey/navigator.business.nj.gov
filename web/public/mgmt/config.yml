@@ -3757,6 +3757,18 @@ collections:
                     name: "ctaButton"
                     widget: string
                     required: true
+              - label: "Seo"
+                name: "seo"
+                widget: object
+                fields:
+                  - label: "Description"
+                    name: "description"
+                    widget: string
+                    required: true
+                  - label: "Image Alt Text"
+                    name: "imageAltText"
+                    widget: string
+                    required: true
   - name: "callout-defaults"
     label: "Callout Defaults"
     files:
