@@ -4,14 +4,21 @@ name: NJ Industry Partnerships
 displayName: industry-partnerships
 urlSlug: nj-industry-partnerships
 id: nj-industry-partnerships
-openDate: ""
-dueDate: ""
-summaryDescriptionMd: NJ Industry Partnerships can provide you with access to
+sidebarCardBodyText: NJ Industry Partnerships can provide you with access to
   government resources, professional connections, and potential funding
   opportunities to help your business achieve its goals. The New Jersey
   Department of Labor, acting as a hub, will connect you with other local voices
   in your industry to address the economic and logistical needs of your
   operation.
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: >+
+  NJ Industry Partnerships can connect you with government resources,
+  professional connections, and potential funding opportunities to help your
+  business achieve its goals. The New Jersey Department of Labor (NJDOL) acts as
+  a hub, connecting you with other local voices in your industry to address the
+  economic and logistical needs of your operation.
+
 callToActionLink: https://www.nj.gov/labor/employer-services/industry-partnerships/
 callToActionText: Learn more
 fundingType: hiring and employee training support
@@ -30,12 +37,6 @@ county:
   - All
 sector: []
 publishStageArchive: ""
-sidebarCardBodyText: NJ Industry Partnerships can provide you with access to
-  government resources, professional connections, and potential funding
-  opportunities to help your business achieve its goals. The New Jersey
-  Department of Labor, acting as a hub, will connect you with other local voices
-  in your industry to address the economic and logistical needs of your
-  operation.
 ---
 
 ## Eligibility
