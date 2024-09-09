@@ -9,9 +9,11 @@ sidebarCardBodyText: The Bond Financing program provides bond financing to
   exempt facilities in New Jersey.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The Bond Financing program provides bond financing to
-  qualified manufacturing companies, 501(c)(3) nonprofit organizations, and
-  exempt facilities in New Jersey.
+summaryDescriptionMd: >+
+  The Bond Financing program offers you bond financing if you are a qualified
+  manufacturing company, 501(c)(3) nonprofit organization, or exempt facility in
+  New Jersey.
+
 callToActionLink: https://www.njeda.com/bondfinancing/
 callToActionText: Learn more
 fundingType: loan
