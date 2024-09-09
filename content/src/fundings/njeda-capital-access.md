@@ -5,16 +5,18 @@ name: New Jersey Capital Access Fund
 displayName: New Jersey Capital Access Fund
 urlSlug: capital-access-fund
 id: capital-access-fund
-sidebarCardBodyText: "The NJ Capital Access Fund leverages local and regional
+sidebarCardBodyText: The NJ Capital Access Fund leverages local and regional
   Community Development Financial Institutions (CDFIs) and Minority Depository
   Institutions (MDIs) to offer working capital loans to New Jersey small
-  businesses."
+  businesses.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: "The NJ Capital Access Fund leverages local and regional
-  Community Development Financial Institutions (CDFIs) and Minority Depository
-  Institutions (MDIs) to offer working capital loans to New Jersey small
-  businesses."
+summaryDescriptionMd: >+
+  The NJ Capital Access Fund partners with local and regional Community
+  Development Financial Institutions (CDFIs) and Minority Depository
+  Institutions (MDIs) to offer you working capital loans if you're a New Jersey
+  small business owner.
+
 callToActionLink: https://njcapitalaccessfund.com/
 callToActionText: Lean More
 fundingType: loan
@@ -23,7 +25,7 @@ status: rolling application
 programPurpose: In State
 agency:
   - njeda
-agencyContact: "BusinessBanking@njeda.gov"
+agencyContact: BusinessBanking@njeda.gov
 businessStage: both
 employeesRequired: n/a
 homeBased: yes
