@@ -135,7 +135,7 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
             )}
           </Box>
         </Box>
-        {renewalMessage && <div className={"padding-top-1"}>{renewalMessage}</div>}
+        {status === "Approved" && renewalMessage && <div className={"padding-top-4"}>{renewalMessage}</div>}
       </div>
     );
   };
