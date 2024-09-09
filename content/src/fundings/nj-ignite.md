@@ -8,8 +8,10 @@ sidebarCardBodyText: NJ Ignite provides rent support for technology and life
   sciences startups that are moving to an approved collaborative workspace.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: NJ Ignite provides rent support for technology and life
-  sciences startups that are moving to an approved collaborative workspace.
+summaryDescriptionMd: >+
+  NJ Ignite offers you rent support if you're a technology or life sciences
+  startup moving to an approved collaborative workspace.
+
 callToActionLink: https://www.njeda.com/njignite
 callToActionText: Learn more
 fundingType: grant
