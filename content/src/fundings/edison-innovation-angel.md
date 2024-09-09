@@ -4,11 +4,16 @@ name: Edison Innovation Angel Growth Fund
 displayName: edison-innovation-angel
 urlSlug: edison-innovation-angel
 id: edison-innovation-angel-growth-fund
-openDate: ""
-dueDate: ""
-summaryDescriptionMd: Edison Innovation Angel Growth Fund provides funding to
+sidebarCardBodyText: Edison Innovation Angel Growth Fund provides funding to
   early-stage, emerging technology businesses matched with an outside equity
   investor within the last 90 days.
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: >+
+  Edison Innovation Angel Growth Fund provides funding if you are an
+  early-stage, emerging technology business matched with an outside equity
+  investor within the last 90 days.
+
 callToActionLink: https://www.njeda.com/edisoninnovation/
 callToActionText: Learn more
 fundingType: loan
@@ -31,9 +36,6 @@ sector:
   - technology
   - life-sciences
 publishStageArchive: ""
-sidebarCardBodyText: Edison Innovation Angel Growth Fund provides funding to
-  early-stage, emerging technology businesses matched with an outside equity
-  investor within the last 90 days.
 ---
 
 ## Eligibility
