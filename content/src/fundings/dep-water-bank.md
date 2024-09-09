@@ -8,10 +8,10 @@ sidebarCardBodyText: NJ Water Bank Program can help with the cost of projects
   that protect and improve water quality by providing low-cost financing.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: If your business designs, constructs, or implements
-  projects that protect and improve water quality and help to ensure safe and
-  adequate drinking water, this program can help with the cost by providing
-  low-cost financing.
+summaryDescriptionMd: >
+  The New Jersey Water Bank program provides your business with low-cost
+  financing to design, construct, or implement projects that protect and improve
+  water quality, ensuring safe and adequate drinking water.
 callToActionLink: https://nj.gov/dep/wiip/water-bank.html
 callToActionText: Learn More
 fundingType: loan
