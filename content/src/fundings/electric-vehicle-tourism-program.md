@@ -4,12 +4,17 @@ name: Electric Vehicle Tourism Program
 displayName: electric-vehicle-tourism
 urlSlug: evtp
 id: evtp
+sidebarCardBodyText: The Electric Vehicle (EV) Tourism Program is offering
+  incentives to promote electric vehicle adoption and tourism through investment
+  in EV chargers at key New Jersey tourism sites, landmarks, and other Tourism
+  Areas.
 openDate: 07/25/2022
 dueDate: 10/31/2022
-summaryDescriptionMd: The Electric Vehicle (EV) Tourism Program is offering
-  incentives to promote electric vehicle adoption and tourism through investment
-  in EV chargers at key New Jersey tourism sites, landmarks, and other `Tourism
-  Areas|tourism-areas`.
+summaryDescriptionMd: >+
+  The Electric Vehicle (EV) Tourism Program offers you incentives to promote
+  electric vehicle adoption and tourism through investment in EV chargers at key
+  New Jersey tourism sites, landmarks, and other tourism areas.
+
 callToActionLink: https://njcleanenergy.com/files/file/EV/FY23/EVs%20-%20EV%20Tourism%20Program%20-%20Application%20for%20FY23%20-%20Round%201%20-%20FINAL%207_22_22.pdf
 callToActionText: Learn more
 fundingType: grant
@@ -32,9 +37,6 @@ sector:
   - arts-entertainment-and-recreation
   - other-services
 publishStageArchive: ""
-sidebarCardBodyText: The Electric Vehicle (EV) Tourism Program is offering incentives
-  to promote electric vehicle adoption and tourism through investment in EV
-  chargers at key New Jersey tourism sites, landmarks, and other Tourism Areas.
 ---
 
 ## Eligibility
