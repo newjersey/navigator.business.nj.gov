@@ -4,6 +4,9 @@ name: Main Street Micro Business Loan
 displayName: main-street-micro
 urlSlug: main-st-micro
 id: main-st-micro
+sidebarCardBodyText: Main Street Micro Business Loan will provide financing of
+  up to $50,000 to eligible micro businesses in New Jersey with ten or fewer
+  full-time employees and no greater than $1M in annual revenues.
 openDate: 10/06/2022
 dueDate: ""
 summaryDescriptionMd: >-
@@ -19,7 +22,7 @@ summaryDescriptionMd: >-
   after that date and time._**
 
 
-  Main Street Micro Business Loan will provide financing of up to $50,000 to eligible micro businesses in New Jersey with ten or fewer full-time employees and no greater than $1M in annual revenues.
+  Main Street Micro Business Loan will provide financing of up to $50,000 to your eligible micro business in New Jersey with ten or fewer full-time employees and no greater than $1M in annual revenues.
 
 
   The program is the successor to the Micro Business Loan Program established by the NJEDA in 2019.
@@ -41,9 +44,6 @@ county:
   - All
 sector: []
 publishStageArchive: ""
-sidebarCardBodyText: Main Street Micro Business Loan will provide financing of up to
-  $50,000 to eligible micro businesses in New Jersey with ten or fewer full-time
-  employees and no greater than $1M in annual revenues.
 ---
 
 ## Eligibility
