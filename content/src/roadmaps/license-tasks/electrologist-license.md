@@ -4,7 +4,7 @@ id: electrologist-license
 filename: electrologist-license
 displayname: electrologist-license
 urlSlug: electrologist-license
-name: Apply for an Electrologist License
+name: Apply for an Electrologist Office Premises License
 webflowName: Electrologist
 summaryDescriptionMd: You must have a license to work as an electrologist in New Jersey.
 industryId:
