@@ -5,16 +5,20 @@ name: Food Desert Relief Supermarket Tax Credit Program
 displayName: food-desert-relief
 urlSlug: food-desert-relief
 id: food-desert-relief
-descriptionMd: The Food Desert Relief Supermarket Tax Credit Program provides
-  tax credits for new grocery stores in designated NJ Food Desert Communities.
+sidebarCardBodyText: The Food Desert Relief Supermarket Tax Credit Program
+  addresses food security in New Jersey by providing you with up to $40 million
+  per year in tax credits to develop and sustain new supermarkets and grocery
+  stores in food deserts.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The Food Desert Relief Supermarket Tax Credit Program
-  addresses food security in New Jersey by providing up to $40 million per year
-  in tax credits to develop and sustain new supermarkets and grocery stores in
-  food deserts. Tax credits are available up to two eligible supermarkets or
-  grocery stores in each of [NJ's 50 designated Food Desert
-  Communities](https://urldefense.com/v3/__https://njdca.maps.arcgis.com/apps/webappviewer/index.html?id=cd59d206f39c40a691d6ba38598134fb__;!!J30X0ZrnC1oQtbA!PP_gVIEwwhs4LPbmfAKdAkW6BZrMbp_fkucgIHsnoXctu3j1cN5ZMDk134qY_mNWXEfoRRgrJNyfd0ifPpoZw4ueNLOpbQ$).
+summaryDescriptionMd: >+
+  The Food Desert Relief Supermarket Tax Credit Program addresses food security
+  in New Jersey by providing you with up to $40 million per year in tax credits
+  to develop and sustain new supermarkets and grocery stores in food deserts.
+  Tax credits are available up to two eligible supermarkets or grocery stores in
+  each of [New Jersey's 50 designated Food Desert
+  Communities](https://njdca.maps.arcgis.com/apps/webappviewer/index.html?id=cd59d206f39c40a691d6ba38598134fb).
+
 callToActionLink: https://urldefense.com/v3/__https://www.njeda.gov/food-desert-relief-tax-credit-program/__;!!J30X0ZrnC1oQtbA!PP_gVIEwwhs4LPbmfAKdAkW6BZrMbp_fkucgIHsnoXctu3j1cN5ZMDk134qY_mNWXEfoRRgrJNyfd0ifPpoZw4uB4SoF5A$
 callToActionText: Learn More
 fundingType: tax credit
@@ -35,6 +39,8 @@ sector:
   - retail-trade-and-ecommerce
   - real-estate
 publishStageArchive: ""
+descriptionMd: The Food Desert Relief Supermarket Tax Credit Program provides
+  tax credits for new grocery stores in designated NJ Food Desert Communities.
 ---
 
 ## Eligibility
