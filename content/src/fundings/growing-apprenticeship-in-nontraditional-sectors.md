@@ -9,14 +9,11 @@ sidebarCardBodyText: The Growing Apprenticeship in Nontraditional Sectors
   USDOL-approved Registered Apprenticeship programs.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: >-
-  The Growing Apprenticeship in Nontraditional Sectors (GAINS) program aims to
-  promote the expansion and development of [USDOL-approved Registered
-  Apprenticeship](https://www.apprenticeship.gov/employers/registered-apprenticeship-program)
-  programs.
-
-
-  The GAINS program provides New Jersey businesses or current registered apprenticeship sponsors looking to create or expand Registered Apprenticeship programs in new [USDOL-approved occupations](https://www.apprenticeship.gov/apprenticeship-occupations).
+summaryDescriptionMd: The Growing Apprenticeship in Nontraditional Sectors
+  (GAINS) program offers you, as a New Jersey business or current registered
+  apprenticeship sponsor, the opportunity to create or expand [Registered
+  Apprenticeship programs in new USDOL-approved occupations]
+  (https://www.apprenticeship.gov/employers/registered-apprenticeship-program).
 callToActionLink: https://www.nj.gov/labor/research-info/grants.shtml
 callToActionText: Learn more
 fundingType: grant
