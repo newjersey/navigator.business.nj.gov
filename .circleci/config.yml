@@ -930,6 +930,7 @@ workflows:
           filters:
             branches:
               ignore:
+                - content-repo
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
@@ -946,6 +947,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - content-repo
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
@@ -962,6 +964,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - content-repo
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
@@ -978,6 +981,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - content-repo
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
@@ -994,6 +998,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - content-repo
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
@@ -1010,6 +1015,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - content-repo
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
@@ -1207,3 +1213,55 @@ workflows:
                 - accessibility-testing-repo
     jobs:
       - deploy-accessibility-testing
+  scheduled-daily-tests-content-repo:
+    triggers:
+      - schedule:
+          cron: "30 8 * * 1-5"
+          filters:
+            branches:
+              only:
+                - content-repo
+    jobs:
+      - docker-build-builder-image
+      - build:
+          name: build-with-image
+          requires:
+            - docker-build-builder-image
+      - build:
+          filters:
+            tags:
+              ignore:
+                - /^env-update.*/
+      - lint:
+          name: Lint
+          requires:
+            - build
+      - test:
+          name: Unit Tests
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Group 1
+          suite: group1
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Group 2
+          suite: group2
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Group 3
+          suite: group3
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Group 4
+          suite: group4
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Group 5
+          suite: group5
+          requires:
+            - build
