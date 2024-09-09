@@ -9,12 +9,14 @@ sidebarCardBodyText: NJ Cool is a pilot program provide assistance to commercial
   greenhouse gas.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: NJ Cool is a New Jersey Economic Development Authority
-  (NJEDA) pilot program to provide financial assistance to commercial building
-  owners and tenants working on retrofit construction projects that reduce
-  operating greenhouse gas emissions from existing commercial buildings in
-  Newark, Edison, and Atlantic City.
-callToActionLink: "https://www.njeda.gov/njcool/"
+summaryDescriptionMd: >+
+  NJ Cool is a New Jersey Economic Development Authority (NJEDA) pilot program
+  providing you with financial assistance if you own or lease a commercial
+  building and are working on retrofit construction projects to reduce operating
+  greenhouse gas emissions from existing commercial buildings in Newark, Edison,
+  and Atlantic City.
+
+callToActionLink: https://www.njeda.gov/njcool/
 callToActionText: Learn more
 fundingType: grant
 programFrequency: annual
