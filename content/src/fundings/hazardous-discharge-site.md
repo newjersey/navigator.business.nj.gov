@@ -4,11 +4,16 @@ name: Hazardous Discharge Site Remediation Fund
 displayName: hazardous-discharge-site
 urlSlug: hazardous-discharge-site
 id: hazardous-discharge-site-remediation-fund
-openDate: ""
-dueDate: ""
-summaryDescriptionMd: The Hazardous Discharge Site Remediation Fund (HDSRF)
+sidebarCardBodyText: The Hazardous Discharge Site Remediation Fund (HDSRF)
   provides funding for the investigation, remediation, and cleanup of
   contaminated and underutilized sites.
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: >+
+  The Hazardous Discharge Site Remediation Fund (HDSRF) offers you funding for
+  the investigation, remediation, and cleanup of contaminated and underutilized
+  sites.
+
 callToActionLink: https://www.nj.gov/dep/srp/finance/hdsrf/
 callToActionText: Learn more
 fundingType: loan
@@ -32,9 +37,6 @@ sector:
   - other-services
   - waste-management-and-Remediation
 publishStageArchive: ""
-sidebarCardBodyText: The Hazardous Discharge Site Remediation Fund (HDSRF) provides
-  funding for the investigation, remediation, and cleanup of contaminated and
-  underutilized sites.
 ---
 
 ## Eligibility
