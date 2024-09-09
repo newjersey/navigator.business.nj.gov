@@ -9,9 +9,11 @@ sidebarCardBodyText: Aspire is a gap financing tool to support commercial,
   replaces the Economic Redevelopment and Growth Grant (ERG).
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: Aspire is a gap financing tool to support commercial,
-  mixed-use, and residential real estate development projects. This tool
-  replaces the Economic Redevelopment and Growth Grant (ERG).
+summaryDescriptionMd: >+
+  Aspire is a gap financing tool that you can use to support commercial,
+  mixed-use, and residential real estate development projects, replacing the
+  Economic Redevelopment and Growth Grant (ERG).
+
 callToActionLink: https://www.njeda.com/aspire/
 callToActionText: Learn More
 fundingType: tax credit
