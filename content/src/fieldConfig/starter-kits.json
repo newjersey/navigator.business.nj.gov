@@ -25,6 +25,10 @@
     "steps": {
       "title": "Get Your ${industry} Business Started in ${numberRoadMapEasySteps}",
       "ctaButton": "Get My Starter Kit"
+    },
+    "seo": {
+      "description": "Our free, step-by-step guide will help you start your ${industry} business today.",
+      "imageAltText": "Three ${industry} business owners smiling."
     }
   }
 }
