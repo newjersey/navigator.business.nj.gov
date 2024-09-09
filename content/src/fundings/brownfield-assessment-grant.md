@@ -8,8 +8,10 @@ sidebarCardBodyText: The Brownfield Assessment Grant Program provides grant
   money to support site assessment at any eligible brownfield site in NJ.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The Brownfield Assessment Grant Program provides grant
-  money to support site assessment at any eligible brownfield site in NJ.
+summaryDescriptionMd: >+
+  The Brownfield Assessment Grant Program provides you with grant money to
+  support site assessment at any eligible brownfield site in New Jersey.
+
 callToActionLink: https://www.njeda.com/community%20revitalization/
 callToActionText: Learn more
 fundingType: grant
