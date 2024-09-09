@@ -4,15 +4,20 @@ name: New Jersey Founders & Funders
 displayName: new-jersey-founders
 urlSlug: new-jersey-founders
 id: new-jersey-founders-funders
+sidebarCardBodyText: Founders & Funders enables early-stage New Jersey
+  technology and life sciences companies to meet potential investors in
+  10-minute, one-on-one “speed dating” sessions to discuss strategy, business
+  models, and funding opportunities.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: >-
-  Founders & Funders enables early-stage New Jersey technology and life sciences
-  companies to meet potential investors in 10-minute, one-on-one “speed dating”
-  sessions to discuss strategy, business models, and funding opportunities.
+summaryDescriptionMd: >
+  Founders & Funders enables you, as an early-stage New Jersey technology or
+  life sciences company, to meet potential investors in 10-minute, one-on-one
+  “speed dating” sessions where you can discuss strategy, business models, and
+  funding opportunities.
 
 
-  To register for this opportunity, contact: [NJFoundersFunders@njeda.com](mailto:NJFoundersFunders@njeda.com).
+  To register for this opportunity, contact [NJFoundersFunders@njeda.com](mailto:NJFoundersFunders@njeda.com).
 callToActionLink: ""
 callToActionText: ""
 fundingType: technical assistance
@@ -34,10 +39,6 @@ sector:
   - life-sciences
   - other-services
 publishStageArchive: Do Not Publish
-sidebarCardBodyText: Founders & Funders enables early-stage New Jersey technology and
-  life sciences companies to meet potential investors in 10-minute, one-on-one
-  “speed dating” sessions to discuss strategy, business models, and funding
-  opportunities.
 ---
 
 ## Eligibility
