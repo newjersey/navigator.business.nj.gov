@@ -4,11 +4,16 @@ name: NJ Accelerate
 displayName: accelerate
 urlSlug: nj-accelerate
 id: nj-accelerate
-openDate: ""
-dueDate: ""
-summaryDescriptionMd: NJ Accelerate supports accelerator programs and their
+sidebarCardBodyText: NJ Accelerate supports accelerator programs and their
   graduate companies. Incentivizes graduate companies to locate and grow in New
   Jersey.
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: >+
+  NJ Accelerate supports your accelerator program and the companies that
+  graduate from it, incentivizing you to locate and grow your business in New
+  Jersey.
+
 callToActionLink: https://www.njeda.com/njaccelerate/
 callToActionText: Learn more
 fundingType: loan
@@ -29,8 +34,6 @@ sector:
   - technology
   - life-sciences
 publishStageArchive: ""
-sidebarCardBodyText: NJ Accelerate supports accelerator programs and their graduate
-  companies. Incentivizes graduate companies to locate and grow in New Jersey.
 ---
 
 ## Eligibility
