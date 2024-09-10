@@ -8,14 +8,16 @@ sidebarCardBodyText: The Direct Assistance Program provides financial support to
   NJ small businesses seeking to or participating in the federal SBIR and STTR.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The Direct Assistance Program provides financial support
-  to NJ small businesses seeking to or participating in the federal Small
-  Business Innovation Research (SBIR) and Small Business Technology Transfer
-  (STTR).  The program reduces financial burdens for small businesses with
-  SBIR/STTR awards (direct funding), and aids their transition from Phase I to
-  Phase II (bridge funding). Applicants can apply for one type of funding per
-  round, with grants valid for 12 months from the agreement date.
-callToActionLink: "https://www.njeda.gov/sbir-sttr-direct-financial-assistance-program-phase-5/"
+summaryDescriptionMd: >+
+  The Direct Assistance Program provides you, as New Jersey small business
+  owner, with financial support if you're seeking to or are participating in the
+  federal Small Business Innovation Research (SBIR) and Small Business
+  Technology Transfer (STTR). The program reduces financial burdens for small
+  businesses with SBIR/STTR awards (direct funding) and aids your transition
+  from Phase I to Phase II (bridge funding). You can apply for one type of
+  funding per round, with grants valid for 12 months from the agreement date.
+
+callToActionLink: https://www.njeda.gov/sbir-sttr-direct-financial-assistance-program-phase-5/
 callToActionText: Learn more
 fundingType: technical assistance
 programFrequency: one-time
