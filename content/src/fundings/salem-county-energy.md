@@ -9,9 +9,11 @@ sidebarCardBodyText: The Salem County Energy Sales Tax Exemption program
   natural gas and their transport to manufacturing businesses in Salem County.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The Salem County Energy Sales Tax Exemption program
-  provides an energy sales tax exemption for the retail sales of electricity and
-  natural gas and their transport to manufacturing businesses in Salem County.
+summaryDescriptionMd: >+
+  The Salem County Energy Sales Tax Exemption program provides you with an
+  energy sales tax exemption for the retail sales of electricity and natural gas
+  and their transport to manufacturing businesses in Salem County.
+
 callToActionLink: https://www.njeda.com/salem-county-energy-sales-tax-exemption/
 callToActionText: Learn more
 fundingType: tax exemption
