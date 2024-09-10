@@ -1,17 +1,18 @@
 ---
+aboveLicenseStatusContent: You need to reinstate your license as a landscape
+  architect if it is expired or inactive.
 filename: landscape-architect-license-reinstatement
 licenseName: ""
 name: Apply to Reinstate Your Landscape Architect License
 icon: update-purple.svg
 urlSlug: landscape-architect-license-reinstatement
-aboveLicenseStatusContent: You need to reinstate your license as a landscape
-  architect if it is expired or inactive.
 summaryDescriptionMd: You need to reinstate your license as a landscape
   architect if it is expired or inactive.
 form: Application for Reinstatement for Landscape Architects
 callToActionText: Reinstate My Landscape Architect License
 callToActionLink: https://www.njconsumeraffairs.gov/land/Applications/Application-for-Reinstatement-for-Landscape-Architects.pdf
 ---
+You need to reinstate your license as a landscape architect if it is expired or inactive. 
 ## Application Requirements
 
 * Personal information, including address and birth date
