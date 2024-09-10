@@ -4,6 +4,7 @@ name: Reinstate Your HVACR License
 icon: update-purple.svg
 licenseName: ""
 urlSlug: hvacr-license-reinstatement
+issuingAgency: "Division of Consumer Affairs"
 summaryDescriptionMd: If your Heating, Ventilating, Air Conditioning, and
   Refrigeration (HVACR) license has expired, you can apply for reinstatement.
 callToActionText: "Reinstate My HVACR License"

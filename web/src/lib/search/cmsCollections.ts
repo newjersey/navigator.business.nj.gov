@@ -38,7 +38,11 @@ export const cmsCollections = [
   },
   {
     label: "🟪 CALENDAR",
-    children: ["License Expiration / Renewal Events", "Taxes Filings - All", "Tax Access Modal Config"],
+    children: [
+      "Consumer Affairs License Expiration / Renewal Events",
+      "Taxes Filings - All",
+      "Tax Access Modal Config",
+    ],
   },
   {
     label: "🟥 DASHBOARD",
@@ -62,6 +66,7 @@ export const cmsCollections = [
     label: "🟩 MISC",
     children: [
       "Starter Kits",
+      "Anytime Action Reinstatement and License Calendar Event Status Defaults",
       "Callout Defaults",
       "Export Pdf Config",
       "Dropdown Mappings",

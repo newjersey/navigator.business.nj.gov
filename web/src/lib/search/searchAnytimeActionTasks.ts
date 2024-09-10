@@ -18,7 +18,7 @@ export const searchAnytimeActionTasks = (anytimeActionTasks: AnytimeActionTask[]
     const ctaLink = anytimeAction.callToActionLink?.toLowerCase();
     const filename = anytimeAction.filename.toLowerCase();
     const urlSlug = anytimeAction.urlSlug.toLowerCase();
-    const form = anytimeAction.form?.toLowerCase();
+    const issuingAgency = anytimeAction.issuingAgency?.toLowerCase();
 
     const blockTexts = [summary, content];
     const labelledTexts = [
@@ -27,7 +27,7 @@ export const searchAnytimeActionTasks = (anytimeActionTasks: AnytimeActionTask[]
       { content: name, label: "Name/Title" },
       { content: filename, label: "Filename" },
       { content: urlSlug, label: "Url Slug" },
-      { content: form, label: "Form" },
+      { content: issuingAgency, label: "Issuing Agency" },
     ];
 
     match = findMatchInBlock(blockTexts, term, match);

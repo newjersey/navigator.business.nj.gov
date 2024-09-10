@@ -7,6 +7,7 @@ name: Apply to Reinstate Your Home Improvement Contractor Registration
 icon: update-purple.svg
 licenseName: Home Improvement Contractors-Home Improvement Contractor
 urlSlug: hic-registration-reinstatement
+issuingAgency: "Division of Consumer Affairs"
 summaryDescriptionMd: Your home improvement contractor (HIC) registration has
   expired and you can apply to reinstate it.
 callToActionText: Reinstate My HIC Registration

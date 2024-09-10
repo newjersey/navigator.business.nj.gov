@@ -212,15 +212,18 @@ interface AnytimeAction {
 }
 
 export interface AnytimeActionTask extends AnytimeAction {
+  name: string;
   urlSlug: string;
-  contentMd: string;
-  callToActionLink: string | undefined;
-  callToActionText: string | undefined;
-  form: string | undefined;
-  summaryDescriptionMd: string;
+  callToActionLink?: string;
+  callToActionText?: string;
+  issuingAgency?: string;
+  icon: string;
   industryIds: string[];
   sectorIds: string[];
   applyToAllUsers: boolean;
+  summaryDescriptionMd: string;
+  contentMd: string;
+  filename: string;
 }
 
 export interface AnytimeActionLink extends AnytimeAction {
@@ -236,7 +239,7 @@ export interface AnytimeActionLicenseReinstatement extends AnytimeAction {
   contentMd: string;
   callToActionLink: string | undefined;
   callToActionText: string | undefined;
-  form: string | undefined;
+  issuingAgency: string;
   summaryDescriptionMd: string;
 }
 
@@ -430,7 +433,8 @@ export interface Filing {
 }
 
 export interface LicenseEventType {
-  aboveLicenseStatusContent: string;
+  issuingAgency: string;
+  disclaimerText: string;
   renewalEventDisplayName: string;
   expirationEventDisplayName: string;
   filename: string;

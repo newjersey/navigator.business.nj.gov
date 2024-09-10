@@ -8,6 +8,7 @@ summaryDescriptionMd: Your certificate of authorization is either expired with
   no renewal or inactive, so you need to reinstate it.
 callToActionText: "Reinstate My Application for a Certificate of Authorization"
 callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
+issuingAgency: "Division of Consumer Affairs"
 ---
 
 ## Application Requirements

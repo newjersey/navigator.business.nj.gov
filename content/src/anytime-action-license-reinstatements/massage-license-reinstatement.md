@@ -4,6 +4,7 @@ name: Apply to Reinstate Your Massage and Bodywork Business License
 icon: update-purple.svg
 licenseName: Massage and Bodywork Therapy-Massage and Bodywork Employer
 urlSlug: massage-license-reinstatement
+issuingAgency: "Division of Consumer Affairs"
 summaryDescriptionMd: You need to reinstate your massage and bodywork business
   license if it has expired. Email your application to
   massagetherapy@dca.lps.state.nj.us. Do not include your payment. The NJ Board

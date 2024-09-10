@@ -1,7 +1,0 @@
-{
-  "anytimeActionReinstatementDefaults": {
-    "licenseExpirationHeaderText": "EXPIRATION DATE:",
-    "licenseStatusHeaderText": "Current Status",
-    "licenseLastUpdatedText": "Last Updated:"
-  }
-}

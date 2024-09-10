@@ -8,8 +8,8 @@ describe("anytime action page", () => {
       name: "Some Anytime Action Name",
       callToActionText: "Click here",
       contentMd: "Some content description",
-      form: "FORM-123",
       filename: "registry-update-brc-amendment",
+      issuingAgency: "some agency",
     });
 
     render(<AnytimeActionTaskPage anytimeActionTask={anytimeAction} />);
@@ -17,7 +17,7 @@ describe("anytime action page", () => {
     expect(screen.getByText("Some Anytime Action Name")).toBeInTheDocument();
     expect(screen.getByText("Click here")).toBeInTheDocument();
     expect(screen.getByText("Some content description")).toBeInTheDocument();
-    expect(screen.getByText("FORM-123")).toBeInTheDocument();
+    expect(screen.getByText("some agency")).toBeInTheDocument();
   });
 
   it("shows the anytime action details for state contracting", () => {
@@ -25,7 +25,6 @@ describe("anytime action page", () => {
       name: "State contracting task",
       callToActionText: "Click here",
       contentMd: "Some content description",
-      form: "FORM-123",
       filename: "state-contracting-task",
     });
 
