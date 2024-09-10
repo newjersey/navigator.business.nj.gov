@@ -10,10 +10,12 @@ sidebarCardBodyText: The Technology Business Tax Certificate Program supports
   businesses.
 openDate: 05/01/2024
 dueDate: 06/30/2024
-summaryDescriptionMd: The Technology Business Tax Certificate Program enables
-  qualified, unprofitable New Jersey-based technology or biotechnology
-  businesses to sell a percentage of their net operating losses (NOL) and unused
-  research and development (R&D) tax credits to unrelated profitable businesses.
+summaryDescriptionMd: >+
+  The Technology Business Tax Certificate Program enables you, as a qualified,
+  unprofitable New Jersey-based technology or biotechnology business, to sell a
+  percentage of your net operating losses (NOL) and unused research and
+  development (R&D) tax credits to unrelated profitable businesses. 
+
 callToActionLink: https://www.njeda.com/nol/
 callToActionText: Learn more
 fundingType: tax credit
