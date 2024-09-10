@@ -8,11 +8,13 @@ sidebarCardBodyText: NJEDA invests in NJ-based venture capital funds to support
   innovative companies and create jobs in tech and life sciences.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The New Jersey Economic Development Authority (NJEDA)
-  invests in venture capital funds active in New Jersey's technology and life
-  sciences community. Venture partners leverage NJEDA investment to increase
-  funds available for emerging innovative companies to grow and create jobs in
-  the State.
+summaryDescriptionMd: >+
+  The New Jersey Economic Development Authority (NJEDA) invests in venture
+  capital funds active in New Jersey's technology and life sciences community.
+  As a venture partner, you can leverage NJEDA investment to increase funds
+  available for emerging innovative companies to grow and create jobs in the
+  state.
+
 callToActionLink: https://www.njeda.com/venturefunds/
 callToActionText: Learn more
 fundingType: loan
