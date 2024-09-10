@@ -3113,7 +3113,7 @@ collections:
 
   - name: "license-calendar-events"
     label: "Consumer Affairs License Expiration / Renewal Events"
-    folder: "content/src/licenses"
+    folder: "content/src/license-calendar-events"
     summary: "{{renewalEventDisplayName}} - {{urlSlug}}"
     identifier_field: "{{urlSlug}}"
     slug: "{{urlSlug}}"
@@ -3142,16 +3142,23 @@ collections:
         }
       - { label: "Renewal Event Label", name: "renewalEventDisplayName", widget: "string", required: true }
       - {
-          label: "Above License Status Content",
-          name: "aboveLicenseStatusContent",
+          label: "Disclaimer Text",
+          name: "disclaimerText",
           widget: "markdown",
           required: true,
+          default: "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services.",
         }
-      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+      - { label: "Summary Description (Optional)", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Below License Status Content", name: "body", widget: "markdown", required: true }
+      - {
+          label: "Issuing Agency",
+          name: "issuingAgency",
+          widget: "string",
+          required: true,
+          default: "Division of Consumer Affairs",
+        }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-
   - name: "filings"
     label: "Taxes Filings - All"
     folder: "content/src/filings"
@@ -3525,7 +3532,7 @@ collections:
       - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "nospace", required: true }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown", required: true }
-      - { label: "Form", name: "form", widget: "string", required: false }
+      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
 
@@ -3561,33 +3568,15 @@ collections:
       - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "nospace", required: true }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Below License Status Content", name: "body", widget: "markdown", required: true }
-      - { label: "Form", name: "form", widget: "string", required: false }
+      - {
+          label: "Issuing Agency",
+          name: "issuingAgency",
+          widget: "string",
+          required: true,
+          default: "Division of Consumer Affairs",
+        }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-
-  - name: "anytime-action-reinstatement-defaults"
-    label: "Anytime Action Reinstatement Defaults"
-    delete: false
-    create: false
-    files:
-      - label: "Anytime Action Reinstatement Defaults"
-        name: "anytime-action-reinstatement-defaults"
-        file: "content/src/fieldConfig/anytime-action-reinstatement-defaults.json"
-        editor:
-          preview: true
-        fields:
-          - label: "Anytime Action Reinstatement Defaults"
-            name: anytimeActionReinstatementDefaults
-            collapsed: false
-            widget: object
-            fields:
-              - {
-                  label: "License Expiration Header Text",
-                  name: "licenseExpirationHeaderText",
-                  widget: "string",
-                }
-              - { label: "License Status Header Text", name: "licenseStatusHeaderText", widget: "string" }
-              - { label: "License Last Updated Text", name: "licenseLastUpdatedText", widget: "string" }
 
   - name: "anytime-action-links"
     label: "Anytime Action External Link Only"
@@ -3691,6 +3680,40 @@ collections:
     folder: "content/src"
     fields:
       - { name: "" }
+  - name: "anytime-action-reinstatement-and-license-calendar-event-status-defaults"
+    label: "Anytime Action Reinstatement and License Calendar Event Status Defaults"
+    delete: false
+    create: false
+    files:
+      - label: "Anytime Action Reinstatement and License Calendar Event Status Defaults"
+        name: "anytime-action-reinstatement-and-license-calendar-event-status-defaults"
+        file: "content/src/fieldConfig/anytime-action-reinstatement-and-license-calendar-event-status-defaults.json"
+        editor:
+          preview: true
+        fields:
+          - label: "Anytime Action Reinstatement and License Calendar Event Status Defaults"
+            name: anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - {
+                  label: "License Expiration Date Header Text",
+                  name: "licenseExpirationHeaderText",
+                  widget: "string",
+                  hint: "This appears in the license calendar events and anytime action reinstatement",
+                }
+              - {
+                  label: "License Status Header Text",
+                  name: "licenseStatusHeaderText",
+                  widget: "string",
+                  hint: "This appears in the license calendar events and anytime action reinstatement",
+                }
+              - {
+                  label: "License Last Updated Text",
+                  name: "licenseLastUpdatedText",
+                  widget: "string",
+                  hint: "This appears in the license calendar events and anytime action reinstatement",
+                }
 
   - name: "starter-kits"
     label: "Starter Kits"
@@ -3961,15 +3984,6 @@ collections:
               - { label: Success Alert Header, name: snackbarSuccessHeader, widget: text }
               - { label: Success Alert Body, name: snackbarSuccessBody, widget: text }
               - { label: Access Open Modal Button, name: accessButton, widget: text }
-          - label: LicenseEvent Defaults
-            name: licenseEventDefaults
-            collapsed: true
-            widget: object
-            summary: "{{licenseEventDefaults}}"
-            fields:
-              - { label: Before Expiration Date Text, name: beforeExpirationDateText, widget: string }
-              - { label: Before Renewal Date Text, name: beforeRenewalDateText, widget: string }
-              - { label: Disclaimer Markdown, name: disclaimerMarkdown, widget: markdown }
 
           - label: Filing Defaults
             name: filingDefaults

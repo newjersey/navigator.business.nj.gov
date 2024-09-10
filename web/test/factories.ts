@@ -298,7 +298,7 @@ export const generateAnytimeActionTask = (overrides: Partial<AnytimeActionTask>)
     callToActionLink: `some-cta-link-${randomInt()}`,
     callToActionText: `some-cta-text-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
-    form: `some-form-${randomInt()}`,
+    issuingAgency: `some-issuing-agency-${randomInt()}`,
     industryIds: [`some-industry-id-${randomInt()}`],
     sectorIds: [`some-sector-id-${randomInt()}`],
     summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
@@ -318,7 +318,7 @@ export const generateAnytimeActionLicenseReinstatement = (
     callToActionLink: `some-cta-link-${randomInt()}`,
     callToActionText: `some-cta-text-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
-    form: `some-form-${randomInt()}`,
+    issuingAgency: `some-issusing-agency-${randomInt()}`,
     summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
     licenseName: randomElementFromArray(Object.values(taskIdLicenseNameMapping)),
     ...overrides,
@@ -379,7 +379,8 @@ export const generateOperateReference = (overrides: Partial<OperateReference>): 
 export const generateLicenseEvent = (overrides: Partial<LicenseEventType>): LicenseEventType => {
   const id = randomInt(4);
   return {
-    aboveLicenseStatusContent: `some-above-license-status-${randomInt()}`,
+    issuingAgency: `some-issusing-agency-${randomInt()}`,
+    disclaimerText: `some-disclaimer-text-${randomInt()}`,
     renewalEventDisplayName: `some-renewal-event-${id}`,
     expirationEventDisplayName: `some-expiration-event-${id}`,
     previewType: id % 2 ? "renewal" : "expiration",

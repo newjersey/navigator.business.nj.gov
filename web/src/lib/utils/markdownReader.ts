@@ -48,7 +48,10 @@ export const convertTaskMd = (taskMdContents: string): TaskWithoutLinks => {
   };
 };
 
-export const convertLicenseMd = (licenseMdContents: string, filename: string): LicenseEventType => {
+export const convertLicenseCalendarEventMd = (
+  licenseMdContents: string,
+  filename: string
+): LicenseEventType => {
   const matterResult = matter(licenseMdContents);
 
   const licenseGrayMatter = matterResult.data as LicenseGrayMatter;
@@ -186,7 +189,8 @@ type FilingGrayMatter = {
 };
 
 type LicenseGrayMatter = {
-  aboveLicenseStatusContent: string;
+  issuingAgency: string;
+  disclaimerText: string;
   renewalEventDisplayName: string;
   expirationEventDisplayName: string;
   urlSlug: string;
@@ -212,7 +216,7 @@ type AnytimeActionTaskGrayMatter = {
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;
-  form: string;
+  issuingAgency?: string;
   icon: string;
   industryIds: string[];
   sectorIds: string[];
@@ -225,7 +229,7 @@ type AnytimeActionLicenseReinsatementGrayMatter = {
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;
-  form: string;
+  issuingAgency: string;
   icon: string;
   licenseName: LicenseName;
   summaryDescriptionMd: string;

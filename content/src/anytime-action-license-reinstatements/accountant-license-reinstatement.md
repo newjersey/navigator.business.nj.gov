@@ -5,7 +5,7 @@ icon: update-purple.svg
 urlSlug: accountant-license-reinstatement
 summaryDescriptionMd: Your accountant license needs to be reinstated because it
   is expired or inactive.
-form: Application for Reinstatement/Reactivation of Licensure as an Accountant
+issuingAgency: "Division of Consumer Affairs"
 callToActionText: Reinstate My Accountant License
 licenseName: ""
 callToActionLink: https://www.njconsumeraffairs.gov/accold/Applications/Application-for-Reinstatement-Reactivation-of-Licensure.pdf

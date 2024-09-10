@@ -19,7 +19,7 @@ import DashboardTabsPreview from "@/lib/cms/previews/DashboardTabsPreview";
 import DeferredLocationPreview from "@/lib/cms/previews/DeferredLocationPreview";
 import EinInputPreview from "@/lib/cms/previews/EinInputPreview";
 import FilingsPreview from "@/lib/cms/previews/FilingsPreview";
-import LicensesPreview from "@/lib/cms/previews/LicenseEventPreview";
+import LicenseCalendarEventPreview from "@/lib/cms/previews/LicenseCalendarEventPreview";
 import PageMetaDataPreview from "@/lib/cms/previews/PageMetadataPreview";
 
 import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimSuccessPreview";
@@ -89,7 +89,7 @@ const CMS = dynamic(
       registerPreview(CMS, "certification-checklist", CertificationsPreview);
       registerPreview(CMS, "contextual-information", ContextInfoPreview);
       registerPreview(CMS, "filings", FilingsPreview);
-      registerPreview(CMS, "license-calendar-events", LicensesPreview);
+      registerPreview(CMS, "license-calendar-events", LicenseCalendarEventPreview);
       registerPreview(CMS, "municipal-tasks", TaskPreview);
 
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);

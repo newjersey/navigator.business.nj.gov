@@ -18,7 +18,7 @@ export const LicenseEvent = (props: Props): ReactElement | null => {
     return null;
   }
 
-  const urlSlug = `licenses/${licenseEvent.urlSlug}-${props.LicenseCalendarEvent.licenseEventSubtype}`;
+  const urlSlug = `license-calendar-event/${licenseEvent.urlSlug}-${props.LicenseCalendarEvent.licenseEventSubtype}`;
   const displayTitle =
     props.LicenseCalendarEvent.licenseEventSubtype === "renewal"
       ? licenseEvent.renewalEventDisplayName

@@ -8,6 +8,7 @@ name: Reinstate Your MD, DO, DDS, OD, DPM, or DVM Controlled Dangerous
 licenseName: ""
 icon: update-purple.svg
 urlSlug: healthcare-1-cds-reinstatement
+issuingAgency: "Division of Consumer Affairs"
 summaryDescriptionMd: >-
   If you’re a Medical Doctor (MD), Doctor of Osteopathy (DO), Dentist (DDS),
   Optometrist (OD), Podiatrist (DPM), or Veterinarian (DVM), and your Controlled

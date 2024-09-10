@@ -17,7 +17,7 @@ const contextualInfoDir = path.join(displayContentDir, "contextual-information")
 const fieldConfigDir = path.join(process.cwd(), "..", "content", "src", "fieldConfig");
 const fundingsDir = path.join(process.cwd(), "..", "content", "src", "fundings");
 const certificationsDir = path.join(process.cwd(), "..", "content", "src", "certifications");
-const licensesDir = path.join(process.cwd(), "..", "content", "src", "licenses");
+const licensesDir = path.join(process.cwd(), "..", "content", "src", "license-calendar-events");
 const anytimeActionLinksDir = path.join(process.cwd(), "..", "content", "src", "anytime-action-links");
 const anytimeActionTasksDir = path.join(process.cwd(), "..", "content", "src", "anytime-action-tasks");
 const anytimeActionLicenseReinstatementsDir = path.join(
@@ -245,10 +245,10 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     }),
 
     ...filenames.licenses.map((it) => {
-      return `/licenses/${it.split(".md")[0]}-renewal`;
+      return `/license-calendar-event/${it.split(".md")[0]}-renewal`;
     }),
     ...filenames.licenses.map((it) => {
-      return `/licenses/${it.split(".md")[0]}-expiration`;
+      return `/license-calendar-event/${it.split(".md")[0]}-expiration`;
     }),
     ...filenames.fundings.map((it) => {
       return `/funding/${it.split(".md")[0]}`;
