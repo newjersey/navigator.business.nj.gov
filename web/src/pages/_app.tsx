@@ -142,7 +142,8 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     pageProps.industry?.name
   );
 
-  const baseUrl = process.env.NEXT_PUBLIC_WEB_BASE_URL;
+  const DEFAULT_BASE_URL = "https://navigator.business.nj.gov/dashboard";
+  const baseUrl = process.env.NEXT_PUBLIC_WEB_BASE_URL ?? DEFAULT_BASE_URL;
   const imageUrl = new URL("/img/team-success.jpg", baseUrl).href;
 
   return (
