@@ -9,6 +9,7 @@ name: Reinstate Your PA, APN, or CNM Controlled Dangerous Substances Registratio
 icon: update-purple.svg
 licenseName: ""
 urlSlug: healthcare-2-cds-reinstatement
+issuingAgency: "Division of Consumer Affairs"
 summaryDescriptionMd: >-
   If you’re a Physician Assistant (PA), Advanced Practice Nurse (APN), or
   Certified Nurse Midwife (CNM), and your Controlled Dangerous Substances (CDS)

@@ -6,7 +6,7 @@ icon: update-purple.svg
 urlSlug: accounting-firm-registration-reinstatement
 summaryDescriptionMd: Your accounting firm registration needs to be reinstated
   because it is expired or inactive.
-form: Lapsed Certified Public Accountant’s Firm Registration
+issuingAgency: "Division of Consumer Affairs"
 callToActionText: Reinstate My Accountant Firm Registration
 callToActionLink: https://www.njconsumeraffairs.gov/accold/Applications/Reinstatement-of-a-Lapsed-Certified-Public-Accountants-Firm-Registration.pdf
 ---

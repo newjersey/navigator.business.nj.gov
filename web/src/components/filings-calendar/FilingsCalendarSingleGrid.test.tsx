@@ -184,7 +184,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
     expect(screen.getByText(licenseEvent.expirationEventDisplayName)).toBeInTheDocument();
     expect(screen.getByTestId("calendar-event-anchor")).toHaveAttribute(
       "href",
-      `licenses/${licenseEvent.urlSlug}-expiration`
+      `license-calendar-event/${licenseEvent.urlSlug}-expiration`
     );
   });
 
@@ -213,7 +213,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
     expect(screen.getByText(licenseEvent.renewalEventDisplayName)).toBeInTheDocument();
     expect(screen.getByTestId("calendar-event-anchor")).toHaveAttribute(
       "href",
-      `licenses/${licenseEvent.urlSlug}-renewal`
+      `license-calendar-event/${licenseEvent.urlSlug}-renewal`
     );
   });
 
@@ -243,13 +243,13 @@ describe("<FilingsCalendarSingleGrid />", () => {
     expect(screen.getByText(licenseEvent.expirationEventDisplayName)).toBeInTheDocument();
     expect(screen.getAllByTestId("calendar-event-anchor")[0]).toHaveAttribute(
       "href",
-      `licenses/${licenseEvent.urlSlug}-expiration`
+      `license-calendar-event/${licenseEvent.urlSlug}-expiration`
     );
 
     expect(screen.getByText(licenseEvent.renewalEventDisplayName)).toBeInTheDocument();
     expect(screen.getAllByTestId("calendar-event-anchor")[1]).toHaveAttribute(
       "href",
-      `licenses/${licenseEvent.urlSlug}-renewal`
+      `license-calendar-event/${licenseEvent.urlSlug}-renewal`
     );
   });
 

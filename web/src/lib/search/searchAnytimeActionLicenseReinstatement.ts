@@ -21,7 +21,7 @@ export const searchAnytimeActionLicenseReinstatements = (
     const ctaLink = anytimeActionLicenseReinstatement.callToActionLink?.toLowerCase();
     const filename = anytimeActionLicenseReinstatement.filename.toLowerCase();
     const urlSlug = anytimeActionLicenseReinstatement.urlSlug.toLowerCase();
-    const form = anytimeActionLicenseReinstatement.form?.toLowerCase();
+    const issuingAgency = anytimeActionLicenseReinstatement.issuingAgency?.toLowerCase();
 
     const blockTexts = [summary, content];
     const labelledTexts = [
@@ -30,7 +30,7 @@ export const searchAnytimeActionLicenseReinstatements = (
       { content: name, label: "Name/Title" },
       { content: filename, label: "Filename" },
       { content: urlSlug, label: "Url Slug" },
-      { content: form, label: "Form" },
+      { content: issuingAgency, label: "Issuing Agency" },
     ];
 
     match = findMatchInBlock(blockTexts, term, match);

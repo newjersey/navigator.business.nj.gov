@@ -32,7 +32,7 @@ import { loadAllArchivedContextualInfo, loadAllContextualInfo } from "@/lib/stat
 import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
-import { loadAllLicenses } from "@/lib/static/loadLicenses";
+import { loadAllLicenseCalendarEvents } from "@/lib/static/loadLicenseCalendarEvents";
 import { loadAllPageMetadata } from "@/lib/static/loadPageMetadata";
 import { loadAllLicenseTasks, loadAllMunicipalTasks, loadAllTasksOnly } from "@/lib/static/loadTasks";
 import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
@@ -77,7 +77,7 @@ interface Props {
   roadmapDisplayContent: RoadmapDisplayContent;
   contextualInfo: ContextualInfoFile[];
   archivedContextualInfo: ContextualInfoFile[];
-  licenseEvents: LicenseEventType[];
+  licenseCalendarEvents: LicenseEventType[];
   anytimeActionTasks: AnytimeActionTask[];
   anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
@@ -109,7 +109,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [sidebarCardMatches, setSidebarCardMatches] = useState<Match[]>([]);
   const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>([]);
   const [archivedContextualInfoMatches, setArchivedContextualInfoMatches] = useState<Match[]>([]);
-  const [licenseEventMatches, setLicenseEventMatches] = useState<Match[]>([]);
+  const [licenseCalendarEventMatches, setLicenseCalendarEventMatches] = useState<Match[]>([]);
   const [groupedConfigMatches, setGroupedConfigMatches] = useState<GroupedConfigMatch[]>([]);
 
   const { Config } = useConfig();
@@ -167,7 +167,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     setSidebarCardMatches(searchSidebarCards(sidebarCards, lowercaseTerm));
     setContextualInfoMatches(searchContextualInfo(props.contextualInfo, lowercaseTerm));
     setArchivedContextualInfoMatches(searchContextualInfo(props.archivedContextualInfo, lowercaseTerm));
-    setLicenseEventMatches(searchLicenseEvents(props.licenseEvents, lowercaseTerm));
+    setLicenseCalendarEventMatches(searchLicenseEvents(props.licenseCalendarEvents, lowercaseTerm));
     setHasSearched(true);
   };
 
@@ -185,7 +185,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...stepsMatches,
         ...nonEssentialQuestionsMatches,
         ...filingMatches,
-        ...licenseEventMatches,
+        ...licenseCalendarEventMatches,
         ...sidebarCardMatches,
         ...webflowLicenseMatches,
         ...archivedContextualInfoMatches,
@@ -221,7 +221,7 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const calendarCollection = {
     "Taxes Filings - All": filingMatches,
-    "License Expiration / Renewal Events": licenseEventMatches,
+    "Consumer Affairs License Expiration / Renewal Events": licenseCalendarEventMatches,
   };
 
   const dashboardCollection = {
@@ -311,7 +311,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       roadmapDisplayContent: loadRoadmapSideBarDisplayContent(),
       contextualInfo: loadAllContextualInfo(),
       archivedContextualInfo: loadAllArchivedContextualInfo(),
-      licenseEvents: loadAllLicenses(),
+      licenseCalendarEvents: loadAllLicenseCalendarEvents(),
       anytimeActionTasks: loadAllAnytimeActionTasks(),
       anytimeActionLinks: loadAllAnytimeActionLinks(),
       anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),

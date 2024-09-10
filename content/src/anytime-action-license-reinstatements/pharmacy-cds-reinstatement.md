@@ -10,6 +10,7 @@ name: Reinstate Your Pharmacy’s Controlled Dangerous Substances Registration
 icon: update-purple.svg
 urlSlug: pharmacy-cds-reinstatement
 licenseName: ""
+issuingAgency: "Division of Consumer Affairs"
 summaryDescriptionMd: >-
   If your Controlled Dangerous Substances (CDS) registration expired less than
   30 days ago, [you can renew online](https://newjersey.mylicense.com/). If it

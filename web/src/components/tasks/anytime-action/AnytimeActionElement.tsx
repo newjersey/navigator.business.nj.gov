@@ -26,13 +26,13 @@ export const AnytimeActionElement = (props: Props): ReactElement => {
         </>
       )}
       <Content>{props.anytimeAction.contentMd}</Content>
-      {props.anytimeAction.form && (
+      {props.anytimeAction?.issuingAgency && (
         <>
           <HorizontalLine />
           <span className="h5-styling" data-testid="form-id-header">
             {Config.filingDefaults.formText} &nbsp;
           </span>
-          <span className="h6-styling">{props.anytimeAction.form}</span>
+          <span className="h6-styling">{props.anytimeAction.issuingAgency}</span>
         </>
       )}
       {props.anytimeAction.callToActionLink && props.anytimeAction.callToActionText && (
