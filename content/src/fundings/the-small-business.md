@@ -11,8 +11,8 @@ sidebarCardBodyText: The Small Business Bonding Readiness Assistance Program
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: The Small Business Bonding Readiness Assistance Program
-  prepares small, minority-, and women-owned businesses to obtain surety bonds,
-  which will make them more competitive when applying for state and federal
+  prepares you, as a small, minority-, or woman-owned business owner, to obtain
+  surety bonds, making you more competitive when applying for state and federal
   government contracts.
 callToActionLink: https://www.aaccnj.com/bonding-program---sbbrap
 callToActionText: Learn more
