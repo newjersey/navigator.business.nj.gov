@@ -10,10 +10,11 @@ sidebarCardBodyText: The Premier Lender Program provides New Jersey-based
   business.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The Premier Lender Program provides New Jersey-based
-  businesses and not-for-profit organizations loan participation and guarantees
-  that can help them overcome the financial obstacles to grow and expand their
-  business.
+summaryDescriptionMd: >+
+  The Premier Lender Program provides you, as a New Jersey-based business or
+  not-for-profit organization, with loan participation and guarantees to help
+  you overcome financial obstacles to grow and expand your business.
+
 callToActionLink: https://www.njeda.com/premierlender/
 callToActionText: Learn more
 fundingType: loan

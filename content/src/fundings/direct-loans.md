@@ -4,11 +4,14 @@ name: Direct Loans
 displayName: direct-loans
 urlSlug: direct-loans
 id: direct-loans
-openDate: ""
-dueDate: ""
-summaryDescriptionMd: New Jersey businesses committed to job creation or
+sidebarCardBodyText: New Jersey businesses committed to job creation or
   retention may be eligible for direct loans through the New Jersey Economic
   Development Authority (NJEDA) when conventional financing is not available.
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: The New Jersey Economic Development Authority (NJEDA)
+  provides direct loans when conventional financing is not available if your
+  business commits to job creation or retention.
 callToActionLink: https://www.njeda.com/directloans/
 callToActionText: Learn more
 fundingType: loan
@@ -27,9 +30,6 @@ county:
   - All
 sector: []
 publishStageArchive: ""
-sidebarCardBodyText: New Jersey businesses committed to job creation or retention may
-  be eligible for direct loans through the New Jersey Economic Development
-  Authority (NJEDA) when conventional financing is not available.
 ---
 
 ## Eligibility

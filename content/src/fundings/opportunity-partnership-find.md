@@ -11,11 +11,13 @@ sidebarCardBodyText: Opportunity Partnership helps employers identify an
   positions in your company.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: Opportunity Partnership helps employers identify an
-  appropriate educational institution or training provider to train employees.
-  The business and the school develop training programs to teach necessary
-  skills. Upon completing the program, trainees must qualify for entry-level
-  positions in your company.
+summaryDescriptionMd: >+
+  Opportunity Partnership helps you as an employer identify an appropriate
+  educational institution or training provider to train your employees. You and
+  the school develop training programs to teach necessary skills, with trainees
+  qualifying for entry-level positions in your company upon completing the
+  program.
+
 callToActionLink: https://www.nj.gov/labor/employer-services/business/businessprograms.shtml?open=specialty
 callToActionText: Learn more
 fundingType: grant

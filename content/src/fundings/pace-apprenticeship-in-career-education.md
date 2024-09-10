@@ -14,10 +14,10 @@ summaryDescriptionMd: >-
   The Pre-Apprenticeship in Career Education (PACE) program aims to better align
   secondary, post-secondary, adult education, and occupational training to meet
   labor demands unique to New Jersey and develop career pathways leading to
-  economically sustainable wages.
+  economically sustainable wages. 
 
 
-  Programs funded through PACE provide education and training leading to one of the following outcomes:
+  As a participant, you or your organization could be part of a program that provides education and training leading to one of the following outcomes:
 
 
   1. Admission into a [USDOL Registered Apprenticeship](https://www.nj.gov/labor/career-services/apprenticeship/findaprogram.shtml) program

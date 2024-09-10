@@ -9,14 +9,14 @@ sidebarCardBodyText: The LEGA program provides an energy audit for free for
   government entities.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The Local Government Energy Audit (LGEA) program provides
-  an energy audit at no cost for eligible facilities owned by municipalities,
-  school districts, 501(c)(3) non-profits, and other local and state government
-  entities (applicants). The goal of the energy audit is to provide applicants
-  with information on how their facilities use energy, identify energy
-  conservation measures that can reduce energy, put applicants in a position to
-  implement these measures, and guide applicants towards financial incentives
-  offered by utilities and state.
+summaryDescriptionMd: >+
+  The Local Government Energy Audit (LGEA) program offers you a free energy
+  audit if you are an eligible municipality, school district, 501(c)(3)
+  non-profit, or other local or state government entity. The energy audit will
+  provide information on how your facilities use energy, identify energy
+  conservation measures that can reduce energy use, and guide you toward
+  financial incentives offered by utilities and the state.
+
 callToActionLink: https://www.NJCleanEnergy.com/LGEA
 callToActionText: Learn more
 fundingType: technical assistance

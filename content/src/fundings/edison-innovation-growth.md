@@ -1,14 +1,18 @@
 ---
 filename: edison-innovation-growth
 name: Edison Innovation Growth Stars Fund
-urlSlug: edison-innovation-growth
 displayName: Edison Innovation Growth Stars Fund
+urlSlug: edison-innovation-growth
 id: edison-innovation-growth-stars-fund
-openDate: ""
-dueDate: ""
-summaryDescriptionMd: Edison Innovation VC Growth Fund provides funding to
+sidebarCardBodyText: Edison Innovation VC Growth Fund provides funding to
   early-stage, emerging technology businesses matched with an outside equity
   investor within the last 90 days.
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: The Edison Innovation Growth Stars Fund will support your
+  business if you are an angel supported and/or venture capital (VC) supported
+  New Jersey-based technology company that has previously received assistance
+  under the Edison Innovation Fund.
 callToActionLink: https://www.njeda.com/edisoninnovation/
 callToActionText: Learn more
 fundingType: loan
@@ -31,9 +35,6 @@ sector:
   - technology
   - life-sciences
 publishStageArchive: ""
-sidebarCardBodyText: Edison Innovation VC Growth Fund provides funding to early-stage,
-  emerging technology businesses matched with an outside equity investor within
-  the last 90 days.
 ---
 
 ## Eligibility

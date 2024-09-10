@@ -8,9 +8,11 @@ sidebarCardBodyText: NJ ZIP offers vouchers for zero-emission vehicles to
   commercial, industrial, and institutional businesses.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: NJ ZIP is a pilot program that provides vouchers to
-  commercial, industrial, and institutional businesses and institutions to
-  support purchases of new, medium and heavy duty zero-emission vehicles.
+summaryDescriptionMd: >+
+  NJ ZIP is a pilot program that provides you with vouchers if you own or manage
+  a commercial, industrial, or institutional business or institution, supporting
+  your purchases of new, medium- and heavy-duty zero-emission vehicles.
+
 callToActionLink: https://www.njeda.com/njzip.
 callToActionText: Learn more
 fundingType: grant

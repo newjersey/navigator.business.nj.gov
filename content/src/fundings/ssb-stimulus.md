@@ -11,14 +11,19 @@ sidebarCardBodyText: The School and Small Business Energy Efficiency Stimulus
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: >-
-  The School and Small Business Energy Efficiency Stimulus Program provides
-  grants (via reimbursement) to small businesses and boards of education to
-  improve air quality and energy efficiency in school districts under the
-  jurisdiction of a board of education and small businesses. There are two
-  distinct grant programs:
+  The School and Small Business Energy Efficiency Stimulus Program provides you
+  with grants (via reimbursement) if you're part of a small business or a board
+  of education. The grants aim to improve air quality and energy efficiency in
+  school districts under the jurisdiction of a board of education and small
+  businesses. 
 
 
-  1. [School and Small Business Ventilation and Energy Efficiency Verification and Repair](https://njcleanenergy.com/files/file/Stimulus/SSB-VEEVR%20Program%20Guide.pdf) (SSB-VEEVR) for the installation of certain HVAC systems. 2. [School and Small Business Noncompliant Plumbing Fixture and Appliance](https://njcleanenergy.com/files/file/HVAC/SSB-NPFA%20Guide%20-%20v1_2%20clean.pdf) (SSB-NPFA) for improving energy-efficient and water-conserving plumbing fixtures and appliances.
+  There are two distinct grant programs: 
+
+
+  1. [School and Small Business Ventilation and Energy Efficiency Verification and Repair](https://njcleanenergy.com/files/file/Stimulus/SSB-VEEVR%20Program%20Guide.pdf) (SSB-VEEVR) for the installation of certain HVAC systems.
+
+  2. [School and Small Business Noncompliant Plumbing Fixture and Appliance](https://njcleanenergy.com/files/file/HVAC/SSB-NPFA%20Guide%20-%20v1_2%20clean.pdf) (SSB-NPFA) for improving energy-efficient and water-conserving plumbing fixtures and appliances.
 callToActionLink: https://njcleanenergy.com/school-and-small-business-energy-efficiency-stimulus-program
 callToActionText: Learn more
 fundingType: grant

@@ -10,11 +10,14 @@ sidebarCardBodyText: The Emerge Program provides per-job tax credits to projects
   Murphy’s priority sectors versus an out-of-state alternative location.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The Emerge Program provides per-job tax credits to
-  projects in targeted communities that invest private capital into New Jersey
-  and create new full-time jobs or retain a significant number of jobs in
-  Governor Phil Murphy’s priority sectors versus an out-of-state alternative
-  location.
+summaryDescriptionMd: >+
+  The Emerge Program provides you with per-job tax credits if you're involved in
+  projects in targeted communities that invest private capital into New Jersey,
+  creating new full-time jobs or retaining a significant number of jobs in
+  priority sectors (life sciences, advanced manufacturing, information and
+  communication technologies, energy, agri-food technologies, financial
+  services, and sports and tourism) versus an out-of-state alternative location.
+
 callToActionLink: https://www.njeda.com/emerge/
 callToActionText: Learn more
 fundingType: tax credit

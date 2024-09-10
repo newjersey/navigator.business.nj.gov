@@ -9,9 +9,11 @@ sidebarCardBodyText: The Return and Earn program is a grant for employers who
   skill required for the job.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The Return and Earn program is a grant for employers who
-  hire unemployed workers, train them, and provide those workers with a new
-  skill required for the job.
+summaryDescriptionMd: >+
+  The Return and Earn program offers you a grant if you're an employer who hires
+  unemployed workers, trains them, and provides them with a new skill required
+  for the job.
+
 callToActionLink: https://www.nj.gov/labor/employer-services/business/returnandearn.shtml
 callToActionText: Learn more
 fundingType: grant

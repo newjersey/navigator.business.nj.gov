@@ -1,5 +1,5 @@
 ---
-filename: "stem-loan-redemption"
+filename: stem-loan-redemption
 name: New Jersey STEM Loan Redemption Program
 displayName: stem-loan-redemption
 urlSlug: stem-loan-redemption
@@ -9,10 +9,11 @@ sidebarCardBodyText: The New Jersey STEM Loan Redemption Program helps employees
   student loans.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The New Jersey STEM Loan Redemption Program helps
-  qualifying New Jersey employees in high-growth occupations within science,
-  technology, engineering, and mathematics (STEM) fields pay off their student
-  loans.
+summaryDescriptionMd: >+
+  The New Jersey STEM Loan Redemption Program helps you, as a qualifying New
+  Jersey employee in high-growth occupations within science, technology,
+  engineering, and mathematics (STEM) fields, pay off your student loans.
+
 callToActionLink: https://www.hesaa.org/Pages/NJSTEMLRP.aspx
 callToActionText: Learn More
 fundingType: hiring and employee training support

@@ -1,14 +1,19 @@
 ---
 filename: edison-innovation-vc
 name: Edison Innovation VC Growth
-urlSlug: edison-innovation-vc
 displayName: Edison Innovation VC Growth
+urlSlug: edison-innovation-vc
 id: edison-innovation-vc-growth
-openDate: ""
-dueDate: ""
-summaryDescriptionMd: Edison Innovation VC Growth Fund provides funding to
+sidebarCardBodyText: Edison Innovation VC Growth Fund provides funding to
   early-stage, emerging technology businesses matched with an outside equity
   investor within the last 90 days.
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: The Edison Innovation VC Growth Fund leverages
+  institutional venture backed investments to support your early-stage, emerging
+  technology business in a less dilutive manner than equity, and the financing
+  can be used for key hires, product rollout, product enhancement, and
+  marketing/sales.
 callToActionLink: https://www.njeda.com/edisoninnovation/
 callToActionText: Learn more
 fundingType: loan
@@ -31,9 +36,6 @@ sector:
   - technology
   - life-sciences
 publishStageArchive: ""
-sidebarCardBodyText: Edison Innovation VC Growth Fund provides funding to early-stage,
-  emerging technology businesses matched with an outside equity investor within
-  the last 90 days.
 ---
 
 ## Eligibility

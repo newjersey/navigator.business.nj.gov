@@ -190,7 +190,11 @@
     "WDPF",
     "webflow",
     "YTTW",
-    "SME"
+    "SME",
+    "agri",
+    "electrology",
+    "IBEC",
+    "incentivizing"
   ],
   "ignorePaths": [
     "node_modules/**",

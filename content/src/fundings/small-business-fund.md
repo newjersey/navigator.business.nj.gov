@@ -4,15 +4,15 @@ name: Small Business Fund
 displayName: small-business-fund
 urlSlug: small-business-fund
 id: small-business-fund
-sidebarCardBodyText: The Sales and Use Tax Exemption Program allows qualified
-  businesses to receive a sales tax exemption certificate for purchases related
-  to the construction and renovation of a new business location.
+sidebarCardBodyText: The Small Business Fund can provide financing to your
+  small, New Jersey business for working capital or fixed assets.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The Sales and Use Tax Exemption Program allows qualified
-  businesses to receive a sales tax exemption certificate for purchases related
-  to the construction and renovation of a new business location.
-callToActionLink: "https://www.njeda.com/smallbusinessfund/"
+summaryDescriptionMd: The Small Business Fund can provide financing to your
+  small, New Jersey business for working capital or fixed assets. Minority-owned
+  or women-owned businesses may qualify under criteria that support unique
+  circumstances.
+callToActionLink: https://www.njeda.com/smallbusinessfund/
 callToActionText: Learn more
 fundingType: loan
 programFrequency: ongoing

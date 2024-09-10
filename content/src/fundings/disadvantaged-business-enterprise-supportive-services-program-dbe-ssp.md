@@ -4,13 +4,20 @@ name: Disadvantaged Business Enterprise Supportive Services Program (DBE/SSP)
 displayName: dbe-ssp
 urlSlug: dbe-ssp
 id: disadvantaged-business-enterprise-support-services
-openDate: ""
-dueDate: ""
-summaryDescriptionMd: The DBE/SS Program provides training and technical
+sidebarCardBodyText: The DBE/SS Program provides training and technical
   assistance to minority, disadvantaged, and women-owned businesses. This
   program aims to increase opportunities with the New Jersey Department of
   Transportation's (NJDOT) contracting program and assist them in competing for
   and performing work on highway and highway-related projects.
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: >+
+  The DBE/SS Program provides you with training and technical assistance if you
+  are a minority, disadvantaged, or women-owned business. This program aims to
+  increase your opportunities with the New Jersey Department of Transportation's
+  (NJDOT) contracting program and assist you in competing for and performing
+  work on highway and highway-related projects.
+
 callToActionLink: https://www.state.nj.us/transportation/business/civilrights/ssp.shtm
 callToActionText: Learn more
 fundingType: hiring and employee training support
@@ -40,11 +47,6 @@ sector:
   - utilities
   - other-services
 publishStageArchive: ""
-sidebarCardBodyText: The DBE/SS Program provides training and technical assistance to
-  minority, disadvantaged, and women-owned businesses. This program aims to
-  increase opportunities with the New Jersey Department of Transportation's
-  (NJDOT) contracting program and assist them in competing for and performing
-  work on highway and highway-related projects.
 ---
 
 ## Eligibility

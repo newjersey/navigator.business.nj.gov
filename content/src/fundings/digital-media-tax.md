@@ -9,9 +9,9 @@ sidebarCardBodyText: The Digital Media Tax Credit Program provides a
   Jersey.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The Digital Media Tax Credit Program provides a
-  transferable credit against the corporate business tax and the gross income
-  tax to incentivize companies to produce content in New Jersey.
+summaryDescriptionMd: The Digital Media Tax Credit Program provides your
+  business a transferable credit against the corporate business tax and the
+  gross income tax as an incentive to produce content in New Jersey.
 callToActionLink: https://www.njeda.com/film
 callToActionText: Learn more
 fundingType: tax credit

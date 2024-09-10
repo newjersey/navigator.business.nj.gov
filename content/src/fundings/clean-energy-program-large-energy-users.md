@@ -4,15 +4,22 @@ name: New Jersey’s Clean Energy Program - Large Energy Users
 displayName: leu-clean-energy
 urlSlug: njcep-leu
 id: njcep-leu
-openDate: ""
-dueDate: ""
-summaryDescriptionMd: The Large Energy Users Program (LEUP) encourages large
+sidebarCardBodyText: The Large Energy Users Program (LEUP) encourages large
   commercial and industrial utility customers that have facilities in New Jersey
   to to upgrade or install energy conserving measures in existing buildings and
   to help offset these capital costs. These efficiency upgrades are customized
   to meet the requirements of the customers’ existing facilities, while
   advancing the State’s energy efficiency, conservation, and greenhouse gas
   reduction goals.
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: >+
+  The Large Energy Users Program (LEUP) is designed to encourage you, as a large
+  commercial or industrial utility customer with facilities in New Jersey, to
+  upgrade or install energy-conserving measures in existing buildings. This
+  program will help you offset capital costs and advance the State’s energy
+  efficiency, conservation, and greenhouse gas reduction goals.
+
 callToActionLink: https://www.NJCleanEnergy.com/LEUP
 callToActionText: Learn more
 fundingType: grant
@@ -36,13 +43,6 @@ sector:
   - real-estate
   - manufacturing
 publishStageArchive: ""
-sidebarCardBodyText: The Large Energy Users Program (LEUP) encourages large commercial
-  and industrial utility customers that have facilities in New Jersey to to
-  upgrade or install energy conserving measures in existing buildings and to
-  help offset these capital costs. These efficiency upgrades are customized to
-  meet the requirements of the customers’ existing facilities, while advancing
-  the State’s energy efficiency, conservation, and greenhouse gas reduction
-  goals.
 ---
 
 ## Eligibility

@@ -1,15 +1,21 @@
 ---
 filename: Angel Match Program
 name: Angel Match Program
-displayName: "angel-match"
+displayName: angel-match
 urlSlug: angel-match
 id: angel-match
-openDate: ""
-dueDate: ""
-summaryDescriptionMd: The Angel Match Program provides funding from the State
+sidebarCardBodyText: The Angel Match Program provides funding from the State
   Small Business Credit Initiative (SSBCI) by matching angel investors’ direct
   investment in early-stage, product-based technology companies within targeted
   industries.
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: >+
+  The Angel Match Program provides you with funding from the State Small
+  Business Credit Initiative (SSBCI) by matching your direct investment as an
+  angel investor in early-stage, product-based technology companies within
+  targeted industries.
+
 callToActionLink: https://www.njeda.gov/AngelMatch/
 callToActionText: Learn more
 fundingType: loan
@@ -32,10 +38,6 @@ sector:
   - other-services
   - technology
 publishStageArchive: ""
-sidebarCardBodyText: The Angel Match Program provides funding from the State Small
-  Business Credit Initiative (SSBCI) by matching angel investors’ direct
-  investment in early-stage, product-based technology companies within targeted
-  industries.
 ---
 
 ## Eligibility
