@@ -9,9 +9,11 @@ sidebarCardBodyText: The Sales and Use Tax Exemption Program allows qualified
   to the construction and renovation of a new business location.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The Sales and Use Tax Exemption Program allows qualified
-  businesses to receive a sales tax exemption certificate for purchases related
-  to the construction and renovation of a new business location.
+summaryDescriptionMd: >+
+  The Sales and Use Tax Exemption Program allows your qualified business to
+  receive a sales tax exemption certificate for purchases related to the
+  construction and renovation of a new business location.
+
 callToActionLink: https://www.njeda.com/stx/
 callToActionText: Learn more
 fundingType: tax exemption
