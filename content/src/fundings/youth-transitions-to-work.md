@@ -17,7 +17,7 @@ summaryDescriptionMd: >+
   employment in labor-demand occupations. 
 
 
-  Funded programs are expected to increase the number of high school graduates entering USDOL Registered Apprenticeship](https://www.nj.gov/labor/career-services/apprenticeship/findaprogram.shtml) programs in New Jersey by establishing YTTW programs in new apprenticeship occupations or industries, linking secondary education and higher educational institutions to [existing USDOL apprenticeship programs](https://www.dol.gov/agencies/eta/apprenticeship), and reactivating registered programs not currently in use.
+  Funded programs are expected to increase the number of high school graduates entering [USDOL Registered Apprenticeship](https://www.nj.gov/labor/career-services/apprenticeship/findaprogram.shtml) programs in New Jersey by establishing YTTW programs in new apprenticeship occupations or industries, linking secondary education and higher educational institutions to [existing USDOL apprenticeship programs](https://www.dol.gov/agencies/eta/apprenticeship), and reactivating registered programs not currently in use.
 
 callToActionLink: https://www.nj.gov/labor/research-info/grants.shtml
 callToActionText: Learn more
