@@ -8,9 +8,11 @@ sidebarCardBodyText: The Small Business Improvement Grant offers reimbursement
   for costs associated with certain building improvements.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The Small Business Improvement Grant offers reimbursement
-  for costs associated with completed building improvements or purchased new
-  furniture, fixtures and equipment made since March 9th, 2020.
+summaryDescriptionMd: >+
+  The Small Business Improvement Grant offers your business reimbursement for
+  costs associated with completed building improvements or purchased new
+  furniture, fixtures, and equipment made since March 9th, 2020.
+
 callToActionLink: https://www.njeda.com/small-business-improvement-grant/
 callToActionText: Learn more
 fundingType: grant
