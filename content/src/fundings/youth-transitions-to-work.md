@@ -4,16 +4,21 @@ name: Youth Transitions to Work
 displayName: youth-transitions-work
 urlSlug: YTTW
 id: YTTW
+sidebarCardBodyText: The mission of the Youth Transitions to Work (YTTW) program
+  is to recruit, screen, and facilitate effective transitions of high school
+  juniors, seniors, and Out of School Youth (ages 16-24) to high-skill,
+  high-wage employment in labor demand occupations.
 openDate: 10/07/2022
 dueDate: 11/10/2022
-summaryDescriptionMd: >-
+summaryDescriptionMd: >+
   The mission of the Youth Transitions to Work (YTTW) program is to recruit,
-  screen, and facilitate effective transitions of high school juniors, seniors,
-  and Out of School Youth (ages 16-24) to high-skill, high-wage employment in
-  labor demand occupations.
+  screen, and facilitate your effective transition as a high school junior,
+  senior, or Out of School Youth (ages 16-24) to high-skill, high-wage
+  employment in labor-demand occupations. 
 
 
-  Funded programs are expected to increase the number of high school graduates entering [USDOL Registered Apprenticeship](https://www.nj.gov/labor/career-services/apprenticeship/findaprogram.shtml) programs in New Jersey by establishing YTTW programs in new apprenticeship occupations or industries, link secondary education and higher educational institutions to [existing USDOL apprenticeship programs](https://www.dol.gov/agencies/eta/apprenticeship), and reactivate registered programs not currently in use.
+  Funded programs are expected to increase the number of high school graduates entering USDOL Registered Apprenticeship](https://www.nj.gov/labor/career-services/apprenticeship/findaprogram.shtml) programs in New Jersey by establishing YTTW programs in new apprenticeship occupations or industries, linking secondary education and higher educational institutions to [existing USDOL apprenticeship programs](https://www.dol.gov/agencies/eta/apprenticeship), and reactivating registered programs not currently in use.
+
 callToActionLink: https://www.nj.gov/labor/research-info/grants.shtml
 callToActionText: Learn more
 fundingType: grant
@@ -31,10 +36,6 @@ county:
   - All
 sector: []
 publishStageArchive: null
-sidebarCardBodyText: The mission of the Youth Transitions to Work (YTTW) program is to
-  recruit, screen, and facilitate effective transitions of high school juniors,
-  seniors, and Out of School Youth (ages 16-24) to high-skill, high-wage
-  employment in labor demand occupations.
 ---
 
 ## Eligibility
