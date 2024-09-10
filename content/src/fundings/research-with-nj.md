@@ -12,12 +12,13 @@ sidebarCardBodyText: Research with NJ is a free online portal that showcases New
   universities.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: Research with NJ is a free online portal that showcases
-  New Jersey’s experts in science, technology, engineering, and mathematics
-  (STEM). It provides local, national, and international commercial enterprises,
-  ranging from entrepreneurs and start-ups to global businesses, with insight
-  into groundbreaking research taking place within the state’s network of
-  research universities.
+summaryDescriptionMd: >+
+  Research with NJ is a free online portal that provides you with access to New
+  Jersey’s experts in science, technology, engineering, and mathematics (STEM).
+  Whether you're an entrepreneur, a start-up, or part of a global business, you
+  can gain insight into groundbreaking research taking place within the state’s
+  network of research universities.
+
 callToActionLink: https://www.researchwithnj.com
 callToActionText: Learn More
 fundingType: technical assistance
