@@ -1,3 +1,13 @@
+# [2024.27.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.26.1...v2024.27.0) (2024-09-10)
+
+
+### Features
+
+* [[#185575919](https://github.com/newjersey/navigator.business.nj.gov/issues/185575919)] add WEB_BASE_URL env var, change favicon based on env ([40ba59d](https://github.com/newjersey/navigator.business.nj.gov/commit/40ba59d940c3ebebbf23c5bf538ac05878f01d97))
+* [[#188079164](https://github.com/newjersey/navigator.business.nj.gov/issues/188079164)] Show the License Status Check in Reinstatement Anytime Action ([f3794b8](https://github.com/newjersey/navigator.business.nj.gov/commit/f3794b89a80eaee51917015c5f54547555250b3f))
+* [[#188193453](https://github.com/newjersey/navigator.business.nj.gov/issues/188193453)] preserve domestic employer experience in guest mode ([9dfd102](https://github.com/newjersey/navigator.business.nj.gov/commit/9dfd102cb4838c7e381e4b75ef262b5aaecce203))
+* [[#188193453](https://github.com/newjersey/navigator.business.nj.gov/issues/188193453)] updates to Domestic Employer experience ([16093fd](https://github.com/newjersey/navigator.business.nj.gov/commit/16093fdfd2cb7745c25f14f0fa43f812e9e11a17))
+
 ## [2024.26.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.26.0...v2024.26.1) (2024-09-04)
 
 
