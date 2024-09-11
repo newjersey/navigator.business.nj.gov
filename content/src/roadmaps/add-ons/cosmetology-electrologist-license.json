@@ -1,0 +1,16 @@
+{
+  "id": "cosmetology-electrologist-license",
+  "displayname": "cosmetology-electrologist-license",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 1,
+      "licenseTask": "electrologist-license"
+    },
+    {
+      "step": 4,
+      "weight": 1,
+      "licenseTask": "electrologist-office-license"
+    }
+  ]
+}
