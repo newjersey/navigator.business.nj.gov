@@ -49,7 +49,10 @@
     }
   ],
   "name": "Health Club",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "electrologist"
+  ],
   "displayname": "health-club",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
