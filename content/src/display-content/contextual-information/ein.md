@@ -1,14 +1,22 @@
 ---
 slug: ein
 filename: ein
-displayname: ein
 header: Employer Identification Number
+displayname: ein
 ---
+An Employer Identification Number (EIN, also known as a Federal Employer Identification Number or Federal Tax Identification Number) is a 9-digit number given to businesses and organizations by the U.S. Internal Revenue Service (IRS).
 
-An Employer Identification Number (EIN, also known as a Federal Employer Identification Number or Federal Tax Identification Number) is issued by the US Internal Revenue Service (IRS). Your EIN is a unique identifier for your business—it does not expire and once a number has been assigned to a business, it is never issued again.
+Your EIN is a unique identifier, like a Social Security number (SSN), but for your business. This number never expires.
 
-**New Businesses**: Every business, regardless of business structure can benefit from having an EIN. An EIN is required for multi-member LLCs, LP, LLP, Corporations, General Partners, and anyone with employees.
+An EIN is required for:
 
-While Sole Proprietors and single-member LLCs are not required to have an EIN if they don't have employees, they can instead use their SSN. However, the New Jersey Department of Treasury recommends getting an EIN. Having an EIN can improve privacy and in some cases makes it easier to do taxes.
+* Multi-member LLCs
+* LPs
+* LLPs
+* Corporations
+* General Partners
+* Anyone with employees
 
-**Out-of-State Businesses:** Can use the same EIN they registered with in their home state.
+Sole Proprietors and single-member LLCs are not required to have an EIN if they don't have employees; they can instead use their SSN. However, the New Jersey Department of Treasury strongly recommends getting an EIN. Having an EIN can improve privacy and in some cases makes it easier to do taxes.
+
+Out-of-State Businesses can use the same EIN they registered with in their home state.
