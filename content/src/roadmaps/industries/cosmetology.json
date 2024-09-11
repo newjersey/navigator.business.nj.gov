@@ -57,7 +57,8 @@
   ],
   "name": "Cosmetology",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "electrologist"
   ],
   "displayname": "cosmetology",
   "industryOnboardingQuestions": {
