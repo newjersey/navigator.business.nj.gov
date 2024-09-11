@@ -10,7 +10,7 @@
     },
     {
       "step": 4,
-      "weight": 1,
+      "weight": 4,
       "licenseTask": "electrologist-office-license",
       "required": true
     }
