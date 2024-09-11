@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 50,
+      "weight": 5,
       "task": "determine-naics-code",
       "required": true
     },
@@ -49,14 +49,17 @@
     }
   ],
   "name": "Health Club",
-  "nonEssentialQuestionsIds": ["weights-measures", "electrologist"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "electrologist"
+  ],
   "displayname": "health-club",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
     "canBeReseller": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "health spa, strength training and conditioning, athletic club, boxing club, fitness center, gym, swim club, sports club, exercise",
+  "additionalSearchTerms": "health spa, strength training and conditioning, athletic club, boxing club, fitness center, gym, swim club, sports club, exercise, electrolysis, electrologist",
   "id": "health-club",
   "description": "A gym, spa, or similar business providing services or facilities for physical fitness or physical well-being",
   "webflowId": "660d922207f6969e35490f1a"
