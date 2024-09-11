@@ -53,10 +53,17 @@
       "licenseTask": "cosmetology-license",
       "weight": 12,
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 1,
+      "licenseTask": "electrologist-license"
     }
   ],
   "name": "Cosmetology",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
   "displayname": "cosmetology",
   "industryOnboardingQuestions": {
     "canBeReseller": true
