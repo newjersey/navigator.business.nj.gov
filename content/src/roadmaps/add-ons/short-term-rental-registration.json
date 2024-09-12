@@ -1,0 +1,12 @@
+{
+  "id": "short-term-rental-registration",
+  "displayname": "short-term-rental-registration",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 2,
+      "task": "short-term-rental-registration",
+      "required": false
+    }
+  ]
+}

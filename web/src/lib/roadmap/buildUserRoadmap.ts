@@ -223,6 +223,18 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("reseller");
   }
 
+  if (profileData.propertyLeaseType === "LONG_TERM_RENTAL" || profileData.propertyLeaseType === "BOTH") {
+    if (profileData.hasThreeOrMoreRentalUnits) {
+      addOns.push("residential-landlord-long-term-many-units");
+    } else {
+      addOns.push("residential-landlord-long-term-few-units");
+    }
+  }
+
+  if (profileData.propertyLeaseType === "SHORT_TERM_RENTAL" || profileData.propertyLeaseType === "BOTH") {
+    addOns.push("short-term-rental-registration");
+  }
+
   if (industry.nonEssentialQuestionsIds) {
     for (const questionId in profileData.nonEssentialRadioAnswers) {
       const addOnToAdd = getNonEssentialQuestionAddOn(questionId);
