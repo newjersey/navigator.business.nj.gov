@@ -1,0 +1,12 @@
+{
+  "id": "residential-landlord-long-term-many-units",
+  "displayname": "residential-landlord-long-term-many-units",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 1,
+      "task": "multiple-dwelling-registration",
+      "required": true
+    }
+  ]
+}

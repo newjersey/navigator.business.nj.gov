@@ -246,6 +246,8 @@ export const generateIndustrySpecificData = (
     employmentPersonnelServiceType: randomElementFromArray(["JOB_SEEKERS", "EMPLOYERS"]),
     employmentPlacementType: randomElementFromArray(["TEMPORARY", "PERMANENT", "BOTH"]),
     carnivalRideOwningBusiness: !(randomInt() % 2),
+    propertyLeaseType: randomElementFromArray(["SHORT_TERM_RENTAL", "LONG_TERM_RENTAL", "BOTH"]),
+    hasThreeOrMoreRentalUnits: !(randomInt() % 2),
     ...overrides,
   };
 };
