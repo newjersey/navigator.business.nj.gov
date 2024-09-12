@@ -91,7 +91,11 @@ describe("<Industry />", () => {
 
     const businessPersonas = ["STARTING", "FOREIGN"];
     const nonConditionalEssentialQuestions = EssentialQuestions.filter((eq) => {
-      return eq.fieldName !== "residentialConstructionType" && eq.fieldName !== "employmentPlacementType";
+      return (
+        eq.fieldName !== "residentialConstructionType" &&
+        eq.fieldName !== "employmentPlacementType" &&
+        eq.fieldName !== "hasThreeOrMoreRentalUnits"
+      );
     });
     nonConditionalEssentialQuestions.map((el) => {
       const validIndustryId = filterRandomIndustry(el.isQuestionApplicableToIndustry);
@@ -293,6 +297,65 @@ describe("<Industry />", () => {
         selectIndustry("petcare");
         expect(currentProfileData().employmentPersonnelServiceType).toEqual(undefined);
         expect(currentProfileData().employmentPlacementType).toEqual(undefined);
+      });
+
+      it("shows hasThreeOrMoreRentalUnits question if 'long term' or 'BOTH' was selected", () => {
+        renderComponent();
+        selectIndustry("residential-landlord");
+        expect(currentProfileData().propertyLeaseType).toEqual(undefined);
+        expect(
+          screen.getByTestId("industry-specific-residential-landlord-propertyLeaseType")
+        ).toBeInTheDocument();
+        expect(
+          screen.queryByTestId("industry-specific-residential-landlord-hasThreeOrMoreRentalUnits")
+        ).not.toBeInTheDocument();
+
+        fireEvent.click(screen.getByLabelText("Long Term"));
+        expect(
+          screen.getByTestId("industry-specific-residential-landlord-propertyLeaseType")
+        ).toBeInTheDocument();
+        expect(
+          screen.getByTestId("industry-specific-residential-landlord-hasThreeOrMoreRentalUnits")
+        ).toBeInTheDocument();
+
+        fireEvent.click(screen.getByLabelText("Both"));
+        expect(
+          screen.getByTestId("industry-specific-residential-landlord-propertyLeaseType")
+        ).toBeInTheDocument();
+        expect(
+          screen.getByTestId("industry-specific-residential-landlord-hasThreeOrMoreRentalUnits")
+        ).toBeInTheDocument();
+
+        fireEvent.click(screen.getByLabelText("Short Term"));
+        expect(
+          screen.getByTestId("industry-specific-residential-landlord-propertyLeaseType")
+        ).toBeInTheDocument();
+        expect(
+          screen.queryByTestId("industry-specific-residential-landlord-hasThreeOrMoreRentalUnits")
+        ).not.toBeInTheDocument();
+      });
+
+      it("resets propertyLeaseType and hasThreeOrMoreRentalUnits if industry changes", () => {
+        renderComponent();
+        selectIndustry("residential-landlord");
+        expect(
+          screen.getByTestId("industry-specific-residential-landlord-propertyLeaseType")
+        ).toBeInTheDocument();
+        expect(currentProfileData().propertyLeaseType).toEqual(undefined);
+        expect(currentProfileData().hasThreeOrMoreRentalUnits).toEqual(undefined);
+
+        fireEvent.click(screen.getByLabelText("Long Term"));
+        expect(currentProfileData().propertyLeaseType).toEqual("LONG_TERM_RENTAL");
+        expect(currentProfileData().hasThreeOrMoreRentalUnits).toBe(undefined);
+        expect(
+          screen.getByTestId("industry-specific-residential-landlord-hasThreeOrMoreRentalUnits")
+        ).toBeInTheDocument();
+        fireEvent.click(screen.getByLabelText("Yes"));
+        expect(currentProfileData().hasThreeOrMoreRentalUnits).toEqual(true);
+
+        selectIndustry("petcare");
+        expect(currentProfileData().propertyLeaseType).toEqual(undefined);
+        expect(currentProfileData().hasThreeOrMoreRentalUnits).toEqual(undefined);
       });
     });
   });
