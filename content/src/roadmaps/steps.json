@@ -1,13 +1,6 @@
 {
   "steps": [
     {
-      "section": "DOMESTIC_EMPLOYER_SECTION",
-      "stepNumber": 1,
-      "name": "Register as an Employer",
-      "timeEstimate": "",
-      "description": ""
-    },
-    {
       "section": "PLAN",
       "stepNumber": 1,
       "name": "Plan Your ${OoS} Business",
