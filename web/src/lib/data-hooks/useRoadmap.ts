@@ -19,26 +19,15 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
   const { roadmap, setRoadmap } = useContext(RoadmapContext);
   const { business } = useUserData();
 
-  const isDomesticEmployer = business?.profileData.industryId === "domestic-employer";
-
   const sectionNamesInRoadmap = useMemo(() => {
     if (!roadmap) {
       return [];
     }
     const { steps } = roadmap;
-    const sections: SectionType[] = steps
-      .filter((step) => {
-        if (step.section === "DOMESTIC_EMPLOYER_SECTION") {
-          return isDomesticEmployer;
-        }
-        if (step.section === "PLAN") {
-          return !isDomesticEmployer;
-        }
-        return true;
-      })
-      .map((step) => step.section);
+    const sections: SectionType[] = steps.map((step) => step.section);
+
     return [...new Set(sections)];
-  }, [roadmap, isDomesticEmployer]);
+  }, [roadmap]);
 
   const rebuildRoadmap = !roadmap || roadmap?.steps.length === 0 || roadmap?.tasks.length === 0;
 

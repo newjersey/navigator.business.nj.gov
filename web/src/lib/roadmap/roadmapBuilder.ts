@@ -9,7 +9,13 @@ export const buildRoadmap = async ({
   industryId: string | undefined;
   addOns: string[];
 }): Promise<Roadmap> => {
-  const stepImporter: () => Promise<GenericStep[]> = industryId ? importGenericSteps : importForeignSteps;
+  let stepImporter: () => Promise<GenericStep[]>;
+
+  if (industryId) {
+    stepImporter = industryId === "domestic-employer" ? importDomesticEmployerSteps : importGenericSteps;
+  } else {
+    stepImporter = importForeignSteps;
+  }
 
   const results = await stepImporter();
 
@@ -61,6 +67,16 @@ const importRoadmap = async (industryId: string): Promise<IndustryRoadmap> => {
   }
   const industries = await import(`@businessnjgovnavigator/content/roadmaps/industries/${industryId}.json`);
   return industries.default as IndustryRoadmap;
+};
+
+const importDomesticEmployerSteps = async (): Promise<GenericStep[]> => {
+  if (process.env.NODE_ENV === "test") {
+    const steps = await import(`@/lib/roadmap/fixtures/steps-domestic-employer.json`);
+    return steps.steps as GenericStep[];
+  }
+
+  const steps = await import(`@businessnjgovnavigator/content/roadmaps/steps-domestic-employer.json`);
+  return steps.steps as GenericStep[];
 };
 
 const importGenericSteps = async (): Promise<GenericStep[]> => {

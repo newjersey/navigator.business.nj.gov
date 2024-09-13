@@ -4,12 +4,7 @@ import { Roadmap } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { withRoadmap } from "@/test/helpers/helpers-renderers";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import {
-  generateProfileData,
-  getIndustries,
-  OperatingPhases,
-  randomElementFromArray,
-} from "@businessnjgovnavigator/shared";
+import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { render } from "@testing-library/react";
 
@@ -77,83 +72,6 @@ describe("useRoadmap", () => {
     mockBuildUserRoadmap.mockResolvedValue(generateRoadmap({}));
     setupHook();
     expect(mockBuildUserRoadmap).not.toHaveBeenCalled();
-  });
-
-  it("removes 'PLAN' section when business is a Domestic Employer", () => {
-    const roadmap = generateRoadmap({
-      steps: [
-        generateStep({ section: "PLAN", stepNumber: 1 }),
-        generateStep({ section: "PLAN", stepNumber: 2 }),
-        generateStep({ section: "DOMESTIC_EMPLOYER_SECTION", stepNumber: 1 }),
-        generateStep({ section: "DOMESTIC_EMPLOYER_SECTION", stepNumber: 2 }),
-      ],
-      tasks: [
-        generateTask({ stepNumber: 1, id: "task1" }),
-        generateTask({ stepNumber: 1, id: "task2" }),
-        generateTask({ stepNumber: 2, id: "task3" }),
-        generateTask({ stepNumber: 3, id: "task4" }),
-      ],
-    });
-
-    const profileData = generateProfileData({ industryId: "domestic-employer" });
-    useMockBusiness({ profileData, onboardingFormProgress: "COMPLETED" });
-    mockBuildUserRoadmap.mockResolvedValue(generateRoadmap({}));
-    const { sectionNamesInRoadmap } = setupHook(roadmap);
-    expect(sectionNamesInRoadmap).toContain("DOMESTIC_EMPLOYER_SECTION");
-    expect(sectionNamesInRoadmap).not.toContain("PLAN");
-  });
-
-  it("removes 'PLAN' section when business is a Domestic Employer in Guest Mode", () => {
-    const roadmap = generateRoadmap({
-      steps: [
-        generateStep({ section: "PLAN", stepNumber: 1 }),
-        generateStep({ section: "PLAN", stepNumber: 2 }),
-        generateStep({ section: "DOMESTIC_EMPLOYER_SECTION", stepNumber: 1 }),
-        generateStep({ section: "DOMESTIC_EMPLOYER_SECTION", stepNumber: 2 }),
-      ],
-      tasks: [
-        generateTask({ stepNumber: 1, id: "task1" }),
-        generateTask({ stepNumber: 1, id: "task2" }),
-        generateTask({ stepNumber: 2, id: "task3" }),
-        generateTask({ stepNumber: 3, id: "task4" }),
-      ],
-    });
-
-    const guestModePhases = OperatingPhases.filter((operatingPhase) => operatingPhase.id.includes("GUEST"));
-    const profileData = generateProfileData({
-      industryId: "domestic-employer",
-      operatingPhase: randomElementFromArray(guestModePhases).id,
-    });
-    useMockBusiness({ profileData, onboardingFormProgress: "COMPLETED" });
-    mockBuildUserRoadmap.mockResolvedValue(generateRoadmap({}));
-    const { sectionNamesInRoadmap } = setupHook(roadmap);
-    expect(sectionNamesInRoadmap).toContain("DOMESTIC_EMPLOYER_SECTION");
-    expect(sectionNamesInRoadmap).not.toContain("PLAN");
-  });
-
-  it("removes 'DOMESTIC_EMPLOYER_SECTION' section when business is not a Domestic Employer", () => {
-    const roadmap = generateRoadmap({
-      steps: [
-        generateStep({ section: "PLAN", stepNumber: 1 }),
-        generateStep({ section: "PLAN", stepNumber: 2 }),
-        generateStep({ section: "DOMESTIC_EMPLOYER_SECTION", stepNumber: 1 }),
-        generateStep({ section: "DOMESTIC_EMPLOYER_SECTION", stepNumber: 2 }),
-      ],
-      tasks: [
-        generateTask({ stepNumber: 1, id: "task1" }),
-        generateTask({ stepNumber: 1, id: "task2" }),
-        generateTask({ stepNumber: 2, id: "task3" }),
-        generateTask({ stepNumber: 3, id: "task4" }),
-      ],
-    });
-
-    const filteredIndustries = getIndustries().filter((industry) => industry.id !== "domestic-employer");
-    const profileData = generateProfileData({ industryId: randomElementFromArray(filteredIndustries).id });
-    useMockBusiness({ profileData, onboardingFormProgress: "COMPLETED" });
-    mockBuildUserRoadmap.mockResolvedValue(generateRoadmap({}));
-    const { sectionNamesInRoadmap } = setupHook(roadmap);
-    expect(sectionNamesInRoadmap).not.toContain("DOMESTIC_EMPLOYER_SECTION");
-    expect(sectionNamesInRoadmap).toContain("PLAN");
   });
 
   describe("isSectionCompleted", () => {
