@@ -14,7 +14,7 @@ export const StepInfo = (props: { step: Step; taskNames: string[] }): ReactEleme
         {props.step.name.replace("${OoS}", "")}
       </Heading>
       <p>{props.step.description}</p>
-      <strong className="text-base-dark">{`(${props.step.timeEstimate})`}</strong>
+      <strong className="text-base-dark">{props.step.timeEstimate && `(${props.step.timeEstimate})`}</strong>
       <ul className="padding-left-205">
         {props.taskNames.map((taskName) => (
           <li key={taskName}>{taskName}</li>

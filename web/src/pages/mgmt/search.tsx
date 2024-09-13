@@ -54,6 +54,7 @@ import {
   WebflowLicense,
 } from "@/lib/types/types";
 import NonEssentialQuestions from "@businessnjgovnavigator/content/roadmaps/nonEssentialQuestions.json";
+import DomesticEmployerSteps from "@businessnjgovnavigator/content/roadmaps/steps-domestic-employer.json";
 import ForeignSteps from "@businessnjgovnavigator/content/roadmaps/steps-foreign.json";
 import Steps from "@businessnjgovnavigator/content/roadmaps/steps.json";
 import { getIndustries } from "@businessnjgovnavigator/shared/industry";
@@ -146,10 +147,13 @@ const SearchContentPage = (props: Props): ReactElement => {
     );
 
     const defaultStepsMatches = searchSteps(Steps.steps as Step[], lowercaseTerm, { filename: "Steps" });
+    const domesticEmployerStepsMatches = searchSteps(DomesticEmployerSteps.steps as Step[], lowercaseTerm, {
+      filename: "Steps - Domestic Employer",
+    });
     const foreignStepsMatches = searchSteps(ForeignSteps.steps as Step[], lowercaseTerm, {
       filename: "Steps - Dakota",
     });
-    setStepsMatches([...defaultStepsMatches, ...foreignStepsMatches]);
+    setStepsMatches([...defaultStepsMatches, ...domesticEmployerStepsMatches, ...foreignStepsMatches]);
 
     setNonEssentialQuestionsMatches(
       searchNonEssentialQuestions(

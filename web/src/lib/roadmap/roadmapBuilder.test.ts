@@ -12,6 +12,15 @@ describe("roadmapBuilder", () => {
     expect(roadmap.steps[0].name).toEqual("Foreign Step 1 Name");
   });
 
+  it("uses domestic employer steps when industry is domestic-employer", async () => {
+    const roadmap = await buildRoadmap({
+      industryId: "domestic-employer",
+      addOns: [],
+    });
+
+    expect(roadmap.steps[0].name).toEqual("Register as an Employer");
+  });
+
   it("does not break with empty roadmap", async () => {
     const roadmap = await buildRoadmap({
       industryId: undefined,

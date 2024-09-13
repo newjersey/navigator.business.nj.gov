@@ -40,6 +40,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "@businessnjgovnavigator/content/roadmaps/steps-domestic-employer.json" },
+    },
+    {
+      from: {},
       to: { path: "@businessnjgovnavigator/content/roadmaps/task-dependencies.json" },
     },
     {
