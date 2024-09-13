@@ -5,7 +5,7 @@ import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
-import { unified, type Plugin } from "unified";
+import { type Plugin, unified } from "unified";
 import { visit } from "unist-util-visit";
 
 interface Props {
@@ -15,11 +15,11 @@ interface Props {
 
 export const PureMarkdownContent = (props: Props): ReactElement => {
   const markdown = unified()
-    .use(remarkParse)
-    .use(remarkGfm)
-    .use(remarkDirective)
-    .use(customRemarkPlugin)
-    .use(remarkRehype)
+    .use(remarkParse) // remark plugin to add support for parsing markdown input
+    .use(remarkGfm) // plugin to support GFM (autolink literals, footnotes, strikethrough, tables, tasklists)
+    .use(remarkDirective) // remark plugin to support directives i.e. :::infoAlert
+    .use(customRemarkPlugin) // custom - used to modify custom directives
+    .use(remarkRehype) // remark plugin that turns markdown into HTML to support rehype
     .use(rehypeReact, {
       createElement: React.createElement,
       Fragment: React.Fragment,
