@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNonEssentialQuestionText } from "@/lib/domain-logic/getNonEssentialQuestionText";
@@ -28,7 +29,9 @@ export const NonEssentialQuestion = (props: Props): ReactElement => {
       {nonEssentialQuestionText && (
         <>
           <div className={"margin-top-2"}>
-            <span className={"text-bold"}>{nonEssentialQuestionText}</span>
+            <div className={"text-bold"}>
+              <Content>{nonEssentialQuestionText}</Content>
+            </div>
             <span className={"margin-left-05"}>
               {Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText}
             </span>
