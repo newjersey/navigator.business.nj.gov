@@ -27,6 +27,13 @@ const anytimeActionLicenseReinstatementsDir = path.join(
   "src",
   "anytime-action-license-reinstatements"
 );
+const anytimeActionLicenseRenewalsDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "anytime-action-license-renewals"
+);
 
 type Filenames = {
   tasks: string[];
@@ -43,6 +50,7 @@ type Filenames = {
   anytimeActionLinks: string[];
   anytimeActionTasks: string[];
   anytimeActionLicenseReinstatements: string[];
+  anytimeActionLicenseRenewals: string[];
 };
 
 type FileContents = {
@@ -88,6 +96,7 @@ const getFilenames = (): Filenames => {
     anytimeActionLinks: fs.readdirSync(anytimeActionLinksDir),
     anytimeActionTasks: fs.readdirSync(anytimeActionTasksDir),
     anytimeActionLicenseReinstatements: fs.readdirSync(anytimeActionLicenseReinstatementsDir),
+    anytimeActionLicenseRenewals: fs.readdirSync(anytimeActionLicenseRenewalsDir),
   };
 };
 
@@ -264,6 +273,9 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     }),
     ...filenames.anytimeActionLicenseReinstatements.map((it) => {
       return `/anytime-action-license-reinstatements/${it.split(".md")[0]}`;
+    }),
+    ...filenames.anytimeActionLicenseRenewals.map((it) => {
+      return `/anytime-action-license-renewals/${it.split(".md")[0]}`;
     }),
   ];
 

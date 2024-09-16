@@ -45,7 +45,9 @@ describe("findDeadLinks", () => {
       // @ts-ignore
       .mockReturnValueOnce(["anytimeActionTasks.md"])
       // @ts-ignore
-      .mockReturnValueOnce(["anytimeActionLicenseReinstatements.md"]);
+      .mockReturnValueOnce(["anytimeActionLicenseReinstatements.md"])
+      // @ts-ignore
+      .mockReturnValueOnce(["anytimeActionLicenseRenewals.md"]);
 
     const task1 = "Task 1 contents";
     const task2 = "Task 2 contents with `contextual info|info1` in it";
@@ -69,6 +71,7 @@ describe("findDeadLinks", () => {
     const anytimeActionTasks = "AnytimeActionTask Content";
     const anytimeActionLinks = "AnytimeActionLink Content";
     const anytimeActionLicenseReinstatements = "AnytimeActionLicenseReinstatement Content";
+    const anytimeActionLicenseRenewals = "AnytimeActionLicenseRenewal Content";
 
     mockedFs.readFileSync
       .mockReturnValueOnce(industry1)
@@ -91,7 +94,8 @@ describe("findDeadLinks", () => {
       .mockReturnValueOnce(licenseTasks)
       .mockReturnValueOnce(anytimeActionTasks)
       .mockReturnValueOnce(anytimeActionLinks)
-      .mockReturnValueOnce(anytimeActionLicenseReinstatements);
+      .mockReturnValueOnce(anytimeActionLicenseReinstatements)
+      .mockReturnValueOnce(anytimeActionLicenseRenewals);
   });
 
   describe("findDeadTasks", () => {
@@ -128,6 +132,7 @@ describe("findDeadLinks", () => {
         "/anytime-action-links/anytimeActionLinks": [],
         "/anytime-action-tasks/anytimeActionTasks": [],
         "/anytime-action-license-reinstatements/anytimeActionLicenseReinstatements": [],
+        "/anytime-action-license-renewals/anytimeActionLicenseRenewals": [],
       });
     });
   });

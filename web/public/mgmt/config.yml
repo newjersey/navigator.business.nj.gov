@@ -3562,6 +3562,67 @@ collections:
               - { label: "License Status Header Text", name: "licenseStatusHeaderText", widget: "string" }
               - { label: "License Last Updated Text", name: "licenseLastUpdatedText", widget: "string" }
 
+  - name: "anytime-action-license-renewals"
+    label: "Anytime Action With Consumer Affairs License Integrations (Renewals)"
+    folder: "content/src/anytime-action-license-renewals"
+    summary: "{{filename}} - {{name}}"
+    identifier_field: "{{filename}}"
+    slug: "{{fields.filename}}"
+    delete: true
+    sortable_fields: ["name", "filename"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "Filename (disabled after file creation)",
+          name: "filename",
+          widget: "write-once-read-only-no-space",
+        }
+      - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
+      - { label: "Name/Title", name: "name", widget: "string" }
+      - label: "Icon"
+        name: icon
+        widget: "relation"
+        multiple: false
+        required: true
+        collection: "mappings"
+        search_fields: ["anytimeActionIcons.*.name"]
+        value_field: "anytimeActionIcons.*.filename"
+        display_fields: ["anytimeActionIcons.*.name"]
+      - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "nospace", required: true }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+      - { label: "Below License Status Content", name: "body", widget: "markdown", required: true }
+      - { label: "Form", name: "form", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+
+  - name: "anytime-action-renewals-defaults"
+    label: "Anytime Action Renewals Defaults"
+    delete: false
+    create: false
+    files:
+      - label: "Anytime Action Renewals Defaults"
+        name: "anytime-action-renewals-defaults"
+        file: "content/src/fieldConfig/anytime-action-renewals-defaults.json"
+        editor:
+          preview: true
+        fields:
+          - label: "Anytime Action renewals Defaults"
+            name: anytimeActionRenewalsDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "LicenseDefaultText", name: "licenseDefaultText", widget: "string" }
+              - {
+                  label: "License Expiration Header Text",
+                  name: "licenseExpirationHeaderText",
+                  widget: "string",
+                }
+              - { label: "License Status Header Text", name: "licenseStatusHeaderText", widget: "string" }
+              - { label: "License Last Updated Text", name: "licenseLastUpdatedText", widget: "string" }
+
   - name: "anytime-action-links"
     label: "Anytime Action External Link Only"
     folder: "content/src/anytime-action-links"

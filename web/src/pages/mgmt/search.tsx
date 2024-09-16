@@ -7,6 +7,7 @@ import { MatchCollection } from "@/components/search/MatchCollection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { searchAnytimeActionLicenseReinstatements } from "@/lib/search/searchAnytimeActionLicenseReinstatement";
+import { searchAnytimeActionLicenseRenewals } from "@/lib/search/searchAnytimeActionLicenseRenewal";
 import { searchAnytimeActionLinks } from "@/lib/search/searchAnytimeActionLinks";
 import { searchAnytimeActionTasks } from "@/lib/search/searchAnytimeActionTasks";
 import { searchCertifications } from "@/lib/search/searchCertifications";
@@ -24,6 +25,7 @@ import { searchWebflowLicenses } from "@/lib/search/searchWebflowLicenses";
 import { GroupedConfigMatch, Match } from "@/lib/search/typesForSearch";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
 import { loadAllAnytimeActionLicenseReinstatements } from "@/lib/static/loadAnytimeActionLicenseReinstatements";
+import { loadAllAnytimeActionLicenseRenewals } from "@/lib/static/loadAnytimeActionLicenseRenewals";
 import { loadAllAnytimeActionLinks } from "@/lib/static/loadAnytimeActionLinks";
 import { loadAllAnytimeActionTasks } from "@/lib/static/loadAnytimeActionTasks";
 import { loadAllArchivedCertifications, loadAllCertifications } from "@/lib/static/loadCertifications";
@@ -38,6 +40,7 @@ import { loadAllLicenseTasks, loadAllMunicipalTasks, loadAllTasksOnly } from "@/
 import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
 import {
   AnytimeActionLicenseReinstatement,
+  AnytimeActionLicenseRenewal,
   AnytimeActionLink,
   AnytimeActionTask,
   Certification,
@@ -80,6 +83,7 @@ interface Props {
   anytimeActionTasks: AnytimeActionTask[];
   anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
+  anytimeActionLicenseRenewals: AnytimeActionLicenseRenewal[];
   pageMetaData: PageMetadata[];
   cmsConfig: any;
 }
@@ -104,6 +108,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [anytimeActionLicenseReinstatementMatches, setAnytimeActionLicenseReinstatementMatches] = useState<
     Match[]
   >([]);
+  const [anytimeActionLicenseRenewalMatches, setAnytimeActionLicenseRenewalMatches] = useState<Match[]>([]);
   const [anytimeActionLinkMatches, setAnytimeActionLinkMatches] = useState<Match[]>([]);
   const [sidebarCardMatches, setSidebarCardMatches] = useState<Match[]>([]);
   const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>([]);
@@ -143,6 +148,9 @@ const SearchContentPage = (props: Props): ReactElement => {
     setAnytimeActionTaskMatches(searchAnytimeActionTasks(props.anytimeActionTasks, lowercaseTerm));
     setAnytimeActionLicenseReinstatementMatches(
       searchAnytimeActionLicenseReinstatements(props.anytimeActionLicenseReinstatements, lowercaseTerm)
+    );
+    setAnytimeActionLicenseRenewalMatches(
+      searchAnytimeActionLicenseRenewals(props.anytimeActionLicenseRenewals, lowercaseTerm)
     );
 
     const defaultStepsMatches = searchSteps(Steps.steps as Step[], lowercaseTerm, { filename: "Steps" });
@@ -190,6 +198,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...anytimeActionTaskMatches,
         ...anytimeActionLinkMatches,
         ...anytimeActionLicenseReinstatementMatches,
+        ...anytimeActionLicenseRenewalMatches,
       ].length === 0
     );
   };
@@ -232,6 +241,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     "Anytime Action Tasks": anytimeActionTaskMatches,
     "Anytime Action Links": anytimeActionLinkMatches,
     "Anytime Action License Reinstatements": anytimeActionLicenseReinstatementMatches,
+    "Anytime Action License Renewals": anytimeActionLicenseRenewalMatches,
   };
 
   const authedView = (
@@ -311,6 +321,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       anytimeActionTasks: loadAllAnytimeActionTasks(),
       anytimeActionLinks: loadAllAnytimeActionLinks(),
       anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
+      anytimeActionLicenseRenewals: loadAllAnytimeActionLicenseRenewals(),
       pageMetaData: loadAllPageMetadata(),
       cmsConfig: loadCmsConfig(),
     },
