@@ -221,12 +221,13 @@ describe("<AnytimeActionDropdown />", () => {
     });
 
     it("filters out licenses unrelated to user industry", () => {
-      const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
+      const validLicenseName = Object.values(taskIdLicenseNameMapping)[0];
+      const invalidLicenseName = Object.values(taskIdLicenseNameMapping)[1];
 
       useMockBusiness({
         licenseData: generateLicenseData({
           licenses: {
-            [licenseName]: generateLicenseDetails({
+            [validLicenseName]: generateLicenseDetails({
               licenseStatus: "EXPIRED",
             }),
           },
@@ -235,12 +236,13 @@ describe("<AnytimeActionDropdown />", () => {
 
       anytimeActionLicense = [
         generateAnytimeActionLicenseReinstatement({
-          licenseName,
+          licenseName: validLicenseName,
           name: "hvac-contractor-reinstatement",
           urlSlug: "some-url",
           filename: "some-filename-license",
         }),
         generateAnytimeActionLicenseReinstatement({
+          licenseName: invalidLicenseName,
           name: "cannabis-license-reinstatement",
           urlSlug: "some-url",
           filename: "some-filename-license-zzz",
