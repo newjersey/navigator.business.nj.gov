@@ -47,7 +47,7 @@
     },
     {
       "id": "freestanding-residential-health-care-license",
-      "questionText": "Do you plan to own and/or operate a free-standing residential health care facility?",
+      "questionText": "Do you plan to own and/or operate a `free-standing residential health care facility?|residential-health-care-facility`",
       "addOn": "healthcare-freestanding-facility-license"
     },
     {

@@ -1988,7 +1988,7 @@ collections:
                 widget: string
               - label: Question
                 name: questionText
-                widget: string
+                widget: markdown
               - label: Add On
                 name: addOn
                 widget: "relation"
