@@ -21,7 +21,7 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     industryId = "employment-agency";
   }
 
-  if (profileData.industryId === "interior-designer" && !profileData.certifiedInteriorDesigner) {
+  if (industryId === "interior-designer" && !profileData.certifiedInteriorDesigner) {
     industryId = "generic";
   }
 
@@ -31,8 +31,7 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     ...getLegalStructureAddOns(profileData),
   ];
 
-  const isDomesticEmployer =
-    profileData.businessPersona === "STARTING" && profileData.industryId === "domestic-employer";
+  const isDomesticEmployer = profileData.businessPersona === "STARTING" && industryId === "domestic-employer";
   if (isDomesticEmployer) {
     addOns = [];
   }
@@ -53,10 +52,7 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     roadmap = removeTask(roadmap, "register-for-ein");
   }
 
-  if (
-    getIsApplicableToFunctionByFieldName("carService")(profileData.industryId) &&
-    profileData.carService === "BOTH"
-  ) {
+  if (getIsApplicableToFunctionByFieldName("carService")(industryId) && profileData.carService === "BOTH") {
     roadmap = removeTask(roadmap, "taxi-insurance");
   }
 
@@ -112,7 +108,7 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("home-based-transportation");
   }
 
-  if (profileData.homeBasedBusiness === false && profileData.plannedRenovationQuestion === true) {
+  if (!profileData.homeBasedBusiness && profileData.plannedRenovationQuestion === true) {
     addOns.push("planned-renovation");
   }
 
@@ -168,7 +164,7 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     }
   }
 
-  if (profileData.industryId === "employment-agency") {
+  if (industryId === "employment-agency") {
     if (profileData.employmentPersonnelServiceType === "JOB_SEEKERS") {
       addOns.push("employment-agency-job-seekers");
     }
@@ -199,8 +195,12 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("interstate-moving");
   }
 
-  if (profileData.industryId === "logistics") {
+  if (industryId === "logistics") {
     addOns.push("logistics-modification");
+  }
+
+  if (industryId === "residential-landlord") {
+    addOns.push("permanent-location-business-landlord");
   }
 
   if (profileData.elevatorOwningBusiness) {
