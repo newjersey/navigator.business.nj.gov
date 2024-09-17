@@ -193,7 +193,7 @@
     "eslint-plugin-testing-library": "6.3.0",
     "eslint-plugin-unicorn": "51.0.1",
     "http-status-codes": "^2.3.0",
-    "husky": "9.1.5",
+    "husky": "9.1.6",
     "identity-obj-proxy": "3.0.0",
     "jest": "29.7.0",
     "jest-dynalite": "3.6.1",
