@@ -10,4 +10,4 @@ A Notice to Quit is a written notice to end a tenancy. You must give this notice
 
 The notice lets your tenant know they need to move out by a certain date. It should also have specific details about why they are being evicted. 
 
-In some cases, you may need a Notice to Cease before you can give a Notice to Quit.
+In some cases, you may need a `Notice to Cease|notice-to-cease` before you can give a Notice to Quit.
