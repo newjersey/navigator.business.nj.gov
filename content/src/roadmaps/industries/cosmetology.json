@@ -56,7 +56,10 @@
     }
   ],
   "name": "Cosmetology",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "electrologist"
+  ],
   "displayname": "cosmetology",
   "industryOnboardingQuestions": {
     "canBeReseller": true
@@ -76,7 +79,7 @@
     }
   ],
   "isEnabled": true,
-  "additionalSearchTerms": "cosmetics, beautician, aesthetician, hair salon, barber shop, hair stylist, nail salon, skin care, hair braiding, makeup, studio",
+  "additionalSearchTerms": "cosmetics, beautician, aesthetician, hair salon, barber shop, hair stylist, nail salon, skin care, hair braiding, makeup, studio, electrolysis, electrologist",
   "id": "cosmetology",
   "description": "Offering hair, nail, or skin related services",
   "webflowId": "656a13627f0131f68c389665"

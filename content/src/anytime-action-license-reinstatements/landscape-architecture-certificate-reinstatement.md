@@ -1,14 +1,14 @@
 ---
 filename: landscape-architecture-certificate-reinstatement
+licenseName: Landscape Architecture-Certificate of Authorization
 name: Apply to Reinstate Your Certificate of Authorization for Landscape
   Architectural Services
-licenseName: Landscape Architecture-Certificate of Authorization
 icon: update-purple.svg
 urlSlug: landscape-architecture-certificate-reinstatement
-issuingAgency: "Division of Consumer Affairs"
 summaryDescriptionMd: You must reinstate your Certificate of Authorization to
   Provide or Offer Landscape Architectural Services if it is expired or
   inactive.
+issuingAgency: Division of Consumer Affairs
 callToActionText: Reinstate My Certificate of Authorization
 callToActionLink: https://www.njconsumeraffairs.gov/land/Pages/default.aspx
 ---

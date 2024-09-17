@@ -1,5 +1,5 @@
 {
-  "naicsCodes": "621330, 621112, 621420, 812990, 622210, 621111, 621112, 621330, 621391, 621310, 621210, 621399, 621320, 621330, 621111, 621112,  621340, 623110, 623312",
+  "naicsCodes": "621330, 621112, 621420, 812990, 622210, 621111, 621112, 621330, 621391, 621310, 621210, 621399, 621320, 812199621330, 621111, 621112,  621340, 623110, 623312, ",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -52,7 +52,8 @@
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "dentist",
-    "freestanding-residential-health-care-license"
+    "freestanding-residential-health-care-license",
+    "electrologist"
   ],
   "displayname": "healthcare",
   "industryOnboardingQuestions": {
@@ -60,7 +61,7 @@
     "canBeReseller": false
   },
   "isEnabled": true,
-  "additionalSearchTerms": "doctors office, physician, medical examiners, nurses, nursing, midwives, midwifery, occupational therapy, physical therapy, therapist, optometrists, psychologist, psychoanalyst, family therapy, counseling, marriage counselor, speech therapy, audiologists, dietitian, nutritionist, mental health services, mental health care, mental healthcare, addiction services, behavioral health, physician assistant, dentist, osteopathy, optometrist, podiatrist, veterinarian, healthcare facility, healthcare center, nursing home, assisted living",
+  "additionalSearchTerms": "doctors office, physician, medical examiners, nurses, nursing, midwives, midwifery, occupational therapy, physical therapy, therapist, optometrists, psychologist, psychoanalyst, family therapy, counseling, marriage counselor, speech therapy, audiologists, dietitian, nutritionist, mental health services, mental health care, mental healthcare, addiction services, behavioral health, physician assistant, dentist, osteopathy, optometrist, podiatrist, veterinarian, healthcare facility, healthcare center, nursing home, assisted living, electrolysis, electrologist",
   "id": "healthcare",
   "description": "Provides licensed health-related services",
   "webflowId": "656a13622828697d87e05e99"

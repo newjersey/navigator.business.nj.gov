@@ -57,8 +57,13 @@
     },
     {
       "addOn": "entertainment-agency-registration",
-      "id": "entertainment-agency",
+      "id": "entertainment-agency-register",
       "questionText": "Will you provide entertainment booking services in New Jersey?"
+    },
+    {
+      "questionText": "Will you be offering electrologist/electrolysis services?",
+      "addOn": "cosmetology-electrologist-license",
+      "id": "electrologist"
     }
   ]
 }
