@@ -4914,7 +4914,7 @@ __metadata:
     "@types/cors": 2.8.17
     "@types/dedent": 0.7.2
     "@types/express": 4.17.21
-    "@types/jest": 29.5.12
+    "@types/jest": 29.5.13
     "@types/jsonwebtoken": 9.0.6
     "@types/lodash": 4.17.7
     "@types/node": 20.16.5
@@ -5056,7 +5056,7 @@ __metadata:
     "@types/cypress-dotenv": 2.0.3
     "@types/dedent": 0.7.2
     "@types/express": 4.17.21
-    "@types/jest": 29.5.12
+    "@types/jest": 29.5.13
     "@types/js-yaml": 4.0.9
     "@types/jsonwebtoken": 9.0.6
     "@types/lodash": 4.17.7
@@ -5193,7 +5193,7 @@ __metadata:
   dependencies:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 29.6.3
-    "@types/jest": 29.5.12
+    "@types/jest": 29.5.13
     "@types/node": 20.16.5
     "@types/uuid": 9.0.8
     "@typescript-eslint/eslint-plugin": 7.18.0
@@ -5267,7 +5267,7 @@ __metadata:
     "@testing-library/user-event": 14.5.2
     "@types/broken-link-checker": 0.7.3
     "@types/cypress-dotenv": 2.0.3
-    "@types/jest": 29.5.12
+    "@types/jest": 29.5.13
     "@types/js-yaml": 4.0.9
     "@types/lodash": 4.17.7
     "@types/mdast": 4.0.4
@@ -12290,13 +12290,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:*, @types/jest@npm:29.5.12":
-  version: 29.5.12
-  resolution: "@types/jest@npm:29.5.12"
+"@types/jest@npm:*, @types/jest@npm:29.5.13":
+  version: 29.5.13
+  resolution: "@types/jest@npm:29.5.13"
   dependencies:
     expect: ^29.0.0
     pretty-format: ^29.0.0
-  checksum: 19b1efdeed9d9a60a81edc8226cdeae5af7479e493eaed273e01243891c9651f7b8b4c08fc633a7d0d1d379b091c4179bbaa0807af62542325fd72f2dd17ce1c
+  checksum: 875ac23c2398cdcf22aa56c6ba24560f11d2afda226d4fa23936322dde6202f9fdbd2b91602af51c27ecba223d9fc3c1e33c9df7e47b3bf0e2aefc6baf13ce53
   languageName: node
   linkType: hard
 
