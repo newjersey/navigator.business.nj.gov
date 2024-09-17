@@ -38,7 +38,7 @@ Eviction is a complicated process. The information below is a general descriptio
 
 ## Write a Notice to Quit
 
-Start by writing your tenant a Notice to Quit. You must give this notice before filing for eviction, unless your tenant hasn’t paid rent and doesn’t live in federally subsidized housing.
+Start by writing your tenant a `Notice to Quit|notice-to-quit`. You must give this notice before filing for eviction, unless your tenant hasn’t paid rent and doesn’t live in federally subsidized housing.
 
 The notice should include:
 
@@ -46,7 +46,7 @@ The notice should include:
 * How your tenant can resolve the issue
 * The risk of eviction if your tenant doesn’t comply
 
-In some cases, you may also need to give a Notice to Cease. For more information about the notices, review the [Truth in Renting Guide](https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf).
+In some cases, you may also need to give a `Notice to Cease|notice-to-cease`. For more information about the notices, review the [Truth in Renting Guide](https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf).
 
 
 
