@@ -594,6 +594,15 @@ describe("buildUserRoadmap", () => {
         );
       });
     });
+
+    describe("residential landlord industry", () => {
+      it("adds permanent location business landlord add on for residential landlord industry", () => {
+        buildUserRoadmap(generateStartingProfile({ industryId: "residential-landlord" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "permanent-location-business-landlord"
+        );
+      });
+    });
   });
 
   describe("municipality", () => {
