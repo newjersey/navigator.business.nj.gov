@@ -21,10 +21,17 @@ services:
     volumes:
       - ~/.aws/credentials:/root/.aws/credentials:ro
       - type: bind
-        source: ./api/dynamodb-schema.json
-        target: /dynamodb-schema.json
+        source: ./api/users-dynamodb-schema.json
+        target: /users-dynamodb-schema.json
+      - type: bind
+        source: ./api/businesses-dynamodb-schema.json
+        target: /businesses-dynamodb-schema.json
     image: amazon/aws-cli
-    command: dynamodb create-table --cli-input-json file:///dynamodb-schema.json --endpoint-url http://dynamodb-local:8000 --region us-east-1
+    command: >
+      /bin/sh -c "
+        dynamodb create-table --cli-input-json file:///users-dynamodb-schema.json --endpoint-url http://dynamodb-local:8000 --region us-east-1
+        dynamodb create-table --cli-input-json file:///businesses-dynamodb-schema.json --endpoint-url http://dynamodb-local:8000 --region us-east-1
+      "
   dynamodb-admin:
     image: aaronshaf/dynamodb-admin
     links:

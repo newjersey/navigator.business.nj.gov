@@ -4,38 +4,14 @@
 import { ExecuteStatementCommand, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
-import { MigrationFunction, Migrations } from "@db/migrations/migrations";
 import { UserDataClient } from "@domain/types";
-import { CURRENT_VERSION, UserData } from "@shared/userData";
-
-const marshallOptions = {
-  // Whether to automatically convert empty strings, blobs, and sets to `null`.
-  convertEmptyValues: false, // false, by default.
-  // Whether to remove undefined values while marshalling.
-  removeUndefinedValues: true, // false, by default.
-  // Whether to convert typeof object to map attribute.
-  convertClassInstanceToMap: false, // false, by default.
-};
-
-const unmarshallOptions = {
-  // Whether to return numbers as a string instead of converting them to native JavaScript numbers.
-  wrapNumbers: false, // false, by default.
-};
-
-export const dynamoDbTranslateConfig = { marshallOptions, unmarshallOptions };
-
-const migrateUserData = (data: any): any => {
-  const dataVersion = data.version ?? CURRENT_VERSION;
-  const migrationsToRun = Migrations.slice(dataVersion);
-  const migratedData = migrationsToRun.reduce((prevData: any, migration: MigrationFunction) => {
-    return migration(prevData);
-  }, data);
-  return { ...migratedData, version: CURRENT_VERSION };
-};
+import { UserData } from "@shared/userData";
+// eslint-disable-next-line no-restricted-imports
+import { migrateData, unmarshallOptions } from "./config/dynamoDbConfig";
 
 export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: string): UserDataClient => {
   const doMigration = async (data: any): Promise<UserData> => {
-    const migratedData = migrateUserData(data);
+    const migratedData = migrateData(data);
     await put(migratedData);
     return migratedData;
   };
@@ -51,11 +27,11 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
     };
     return db
       .send(new QueryCommand(params))
-      .then(async (result) => {
+      .then((result) => {
         if (!result.Items || result.Items.length !== 1) {
           return;
         }
-        return await doMigration(unmarshall(result.Items[0], unmarshallOptions).data);
+        return doMigration(unmarshall(result.Items[0], unmarshallOptions).data);
       })
       .catch((error) => {
         console.log(error);
@@ -85,7 +61,7 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
   };
 
   const put = (userData: UserData): Promise<UserData> => {
-    const migratedData = migrateUserData(userData);
+    const migratedData = migrateData(userData);
     const params = {
       TableName: tableName,
       Item: {

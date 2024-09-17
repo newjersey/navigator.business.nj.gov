@@ -1,7 +1,8 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
 import { AWSEncryptionDecryptionFactory } from "src/client/AwsEncryptionDecryptionFactory";
-import { dynamoDbTranslateConfig, DynamoUserDataClient } from "src/db/DynamoUserDataClient";
+import { DynamoUserDataClient } from "src/db/DynamoUserDataClient";
 import { encryptTaxIdBatch } from "src/domain/user/encryptTaxIdBatch";
 import { encryptTaxIdFactory } from "src/domain/user/encryptTaxIdFactory";
 
