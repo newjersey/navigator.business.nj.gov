@@ -1,4 +1,5 @@
-import dynamoDbSchema from "@businessnjgovnavigator/api/dynamodb-schema.json";
+import businessesDynamoDbSchema from "@businessnjgovnavigator/api/businesses-dynamodb-schema.json";
+import usersDynamoDbSchema from "@businessnjgovnavigator/api/users-dynamodb-schema.json";
 import encryptTaxId from "@functions/encryptTaxId";
 import express from "@functions/express";
 import githubOauth2 from "@functions/githubOauth2";
@@ -35,6 +36,7 @@ const airtableUsersTable = process.env.AIRTABLE_USERS_TABLE || "";
 
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
+const businessesTable = `businesses-table-${stage}`;
 const ssmLocation = stage === "local" ? "dev" : stage;
 
 const contentEnv = "content";
@@ -155,7 +157,9 @@ const serverlessConfiguration: AWS = {
             ],
             Resource: [
               `arn:aws:dynamodb:${region}:*:table/${usersTable}`,
+              `arn:aws:dynamodb:${region}:*:table/${businessesTable}`,
               `arn:aws:dynamodb:${region}:*:table/${usersTable}/index/*`,
+              `arn:aws:dynamodb:${region}:*:table/${businessesTable}/index/*`,
             ],
           },
           {
@@ -236,6 +240,7 @@ const serverlessConfiguration: AWS = {
       STAGE: stage,
       USE_FAKE_SELF_REG: useFakeSelfReg,
       USERS_TABLE: usersTable,
+      BUSINESSES_TABLE: businessesTable,
     } as AwsLambdaEnvironment,
     logRetentionInDays: 180,
   },
@@ -339,8 +344,16 @@ if (!env.CI || stage === "local") {
         Type: "AWS::DynamoDB::Table",
         DeletionPolicy: "Retain",
         Properties: {
-          ...dynamoDbSchema,
+          ...usersDynamoDbSchema,
           TableName: usersTable,
+        },
+      },
+      BusinessesDynamoDBTable: {
+        Type: "AWS::DynamoDB::Table",
+        DeletionPolicy: "Retain",
+        Properties: {
+          ...businessesDynamoDbSchema,
+          TableName: businessesTable,
         },
       },
       GatewayResponseDefault4XX: {

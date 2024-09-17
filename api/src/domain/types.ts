@@ -20,7 +20,7 @@ import {
 } from "@shared/license";
 import { ProfileData } from "@shared/profileData";
 import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
-import { UserData } from "@shared/userData";
+import { Business, UserData } from "@shared/userData";
 import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
 
@@ -31,6 +31,16 @@ export interface UserDataClient {
   getNeedNewsletterUsers: () => Promise<UserData[]>;
   getNeedToAddToUserTestingUsers: () => Promise<UserData[]>;
   getNeedTaxIdEncryptionUsers: () => Promise<UserData[]>;
+}
+
+export interface BusinessesDataClient {
+  get: (businessId: string) => Promise<Business>;
+  put: (businessData: Business) => Promise<Business>;
+  deleteBusinessById: (businessId: string) => Promise<void>;
+  findByBusinessName: (businessName: string) => Promise<Business | undefined>;
+  findAllByNAICSCode: (naicsCode: string) => Promise<Business[]>;
+  findAllByIndustry: (industry: string) => Promise<Business[]>;
+  findByEncryptedTaxId: (encryptedTaxId: string) => Promise<Business | undefined>;
 }
 
 export interface BusinessNameClient {
