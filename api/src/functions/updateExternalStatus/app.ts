@@ -1,11 +1,12 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
+import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
 import { addToUserTestingBatch } from "@domain/user-testing/addToUserTestingBatch";
 import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFactory";
 import { LogWriter } from "@libs/logWriter";
 import { GovDeliveryNewsletterClient } from "src/client/GovDeliveryNewsletterClient";
-import { dynamoDbTranslateConfig, DynamoUserDataClient } from "src/db/DynamoUserDataClient";
+import { DynamoUserDataClient } from "src/db/DynamoUserDataClient";
 import { addNewsletterBatch } from "src/domain/newsletter/addNewsletterBatch";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 
