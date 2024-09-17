@@ -13,4 +13,4 @@ A Notice to Cease is a written warning you must give to a tenant when they:
 * Break the covenants or agreements on the lease
 * Repeatedly do not pay rent or pay late
 
-The notice tells your tenant to stop the behavior that breaks the lease within a reasonable time frame. If your tenant doesn’t comply, then you can give them a Notice to Quit and proceed with the eviction process.
+The notice tells your tenant to stop the behavior that breaks the lease within a reasonable time frame. If your tenant doesn’t comply, then you can give them a `Notice to Quit|notice-to-quit` and proceed with the eviction process.
