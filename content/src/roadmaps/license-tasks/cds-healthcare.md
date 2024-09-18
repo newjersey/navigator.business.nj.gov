@@ -13,7 +13,7 @@ summaryDescriptionMd: >-
   Midwife, and you or your business dispense, prescribe, or store any CDS. 
 
 
-  Each CDS storage location must be registered by itself. Use the same initial application, noting 'branch' at the top.
+  Each CDS storage location must be registered separately. Use the same form and write 'branch' at the top.
 industryId:
   - healthcare
 callToActionText: Apply for My CDS Registration
