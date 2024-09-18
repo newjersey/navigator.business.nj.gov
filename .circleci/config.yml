@@ -1222,11 +1222,6 @@ workflows:
               only:
                 - content-repo
     jobs:
-      - docker-build-builder-image
-      - build:
-          name: build-with-image
-          requires:
-            - docker-build-builder-image
       - build:
           filters:
             tags:
