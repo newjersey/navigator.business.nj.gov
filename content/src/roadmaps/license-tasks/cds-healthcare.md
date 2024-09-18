@@ -24,11 +24,11 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 ## Application Requirements
 
 * New Jersey business address where substances will be stored, prescribed, or dispensed (must match your DEA registration address)
-* Schedule(s) of the controlled dangerous substances
+* Schedule(s) of the CDS
 * Current and active professional license number (Certified Nurse Midwives must include their prescriptive authority suffix)
 * Social Security number
 * Signed attestation (included in application)
-* Applicable fees paid, once the NJ DCU has sent an invoice
+* Applicable fees paid, once the DCU has sent an invoice
 
 Email your completed CDS application to the New Jersey Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov). The DCU will email you an invoice to pay your fee online.
 
