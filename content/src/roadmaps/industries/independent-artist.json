@@ -48,7 +48,8 @@
     "carnival-ride-permitting",
     "weights-measures",
     "entertainment-agency",
-    "ticket-broker-resell"
+    "ticket-broker-resell",
+    "entertainment-agency-register"
   ],
   "displayname": "independent-artist",
   "industryOnboardingQuestions": {
