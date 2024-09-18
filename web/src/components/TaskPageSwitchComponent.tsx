@@ -25,6 +25,22 @@ interface Props {
   CMS_ONLY_disable_overlay?: boolean;
 }
 
+export const taskIdsWithLicenseSearchEnabled = [
+  "home-health-aide-license",
+  "apply-for-shop-license",
+  "register-home-contractor",
+  "pharmacy-license",
+  "register-accounting-firm",
+  "license-massage-therapy",
+  "appraiser-company-register",
+  "telemarketing-license",
+  "health-club-registration",
+  "ticket-broker-reseller-registration",
+  "authorization-landscape-architect-firm",
+  "authorization-architect-firm",
+  "entertainment-agency-reg",
+];
+
 export const TaskPageSwitchComponent = ({
   task,
   displayContent,
@@ -32,21 +48,6 @@ export const TaskPageSwitchComponent = ({
   roadmap,
   CMS_ONLY_disable_overlay,
 }: Props): ReactElement => {
-  const taskIdsWithLicenseSearchEnabled = [
-    "home-health-aide-license",
-    "apply-for-shop-license",
-    "register-home-contractor",
-    "pharmacy-license",
-    "register-accounting-firm",
-    "license-massage-therapy",
-    "appraiser-company-register",
-    "telemarketing-license",
-    "health-club-registration",
-    "ticket-broker-reseller-registration",
-    "authorization-landscape-architect-firm",
-    "authorization-architect-firm",
-  ];
-
   if (taskIdsWithLicenseSearchEnabled.includes(task.id)) {
     return (
       <LicenseTask task={task as TaskWithLicenseTaskId} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
