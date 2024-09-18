@@ -1,3 +1,4 @@
+import { taskIdsWithLicenseSearchEnabled } from "@/components/TaskPageSwitchComponent";
 import { getMergedConfig } from "@/contexts/configContext";
 import { createEmptyTaskDisplayContent, Task } from "@/lib/types/types";
 import TaskPage from "@/pages/tasks/[taskUrlSlug]";
@@ -214,20 +215,29 @@ describe("task page", () => {
   });
 
   describe("License task", () => {
-    it.each([
-      "apply-for-shop-license",
-      "appraiser-company-register",
-      "authorization-architect-firm",
-      "authorization-landscape-architect-firm",
-      "health-club-registration",
+    const mockTaskIdsWithLicenseSearch = [
       "home-health-aide-license",
-      "license-massage-therapy",
+      "apply-for-shop-license",
+      "register-home-contractor",
       "pharmacy-license",
       "register-accounting-firm",
-      "register-home-contractor",
+      "license-massage-therapy",
+      "appraiser-company-register",
       "telemarketing-license",
+      "health-club-registration",
       "ticket-broker-reseller-registration",
-    ])("loads License task screen for %s", (licenseId) => {
+      "authorization-landscape-architect-firm",
+      "authorization-architect-firm",
+      "entertainment-agency-reg",
+    ];
+
+    it("mockTaskIdsWithLicenseSearch matches taskIdsWithLicenseSearchEnabled", () => {
+      expect(mockTaskIdsWithLicenseSearch.length).toEqual(taskIdsWithLicenseSearchEnabled.length);
+
+      expect(mockTaskIdsWithLicenseSearch).toEqual(taskIdsWithLicenseSearchEnabled);
+    });
+
+    it.each(mockTaskIdsWithLicenseSearch)("loads License task screen for %s", (licenseId) => {
       renderPage(generateTask({ id: licenseId }), generateBusiness({ licenseData: undefined }));
       expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
     });

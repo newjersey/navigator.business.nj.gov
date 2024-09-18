@@ -1,6 +1,6 @@
 ---
 previewType: renewal
-licenseName: ""
+licenseName: "Employment & Personnel Service-Entertainment/Booking Agency"
 urlSlug: independent-artist
 expirationEventDisplayName: Entertainment Agency Registration Expiration
 renewalEventDisplayName: Entertainment Agency Registration Renewal Deadline

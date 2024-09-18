@@ -100,6 +100,7 @@ export const taskIdLicenseNameMapping = {
   "register-home-contractor": "Home Improvement Contractors-Home Improvement Contractor",
   "ticket-broker-reseller-registration": "Ticket Brokers",
   "telemarketing-license": "Telemarketers",
+  "entertainment-agency-reg": "Employment & Personnel Service-Entertainment/Booking Agency",
 } as const;
 
 export type LicenseTaskID = keyof typeof taskIdLicenseNameMapping;

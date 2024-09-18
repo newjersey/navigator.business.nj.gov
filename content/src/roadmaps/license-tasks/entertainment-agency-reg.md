@@ -18,7 +18,7 @@ industryId: employment-agency
 callToActionText: "Register My Entertainment Agency"
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
 webflowId: 65bd67f34896b6febf1aace9
-licenseName: ""
+licenseName: "Employment & Personnel Service-Entertainment/Booking Agency"
 licenseCertificationClassification: undefined
 ---
 
