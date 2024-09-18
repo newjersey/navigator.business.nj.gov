@@ -1,3 +1,19 @@
+# [2024.28.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.27.0...v2024.28.0) (2024-09-18)
+
+
+### Bug Fixes
+
+* [[#188122924](https://github.com/newjersey/navigator.business.nj.gov/issues/188122924)] Update CircleCI with EncryptTaxID Env Vars ([8d38944](https://github.com/newjersey/navigator.business.nj.gov/commit/8d38944e1cf561acf0e3b4a7f25d3ec53eb4e21d))
+* [[#188163509](https://github.com/newjersey/navigator.business.nj.gov/issues/188163509)] add fallback default to baseURL ([33109ba](https://github.com/newjersey/navigator.business.nj.gov/commit/33109ba4f148d0d3f3ca7f9356fb300d3a0847cb))
+* [[#188247287](https://github.com/newjersey/navigator.business.nj.gov/issues/188247287)] separate domestic-employer roadmap steps; resolve issues on starter kits ([db5409b](https://github.com/newjersey/navigator.business.nj.gov/commit/db5409b8b09194e1c00ebbe0ebbeb7f4089bd2e0))
+* **deps:** update dependency body-parser to v1.20.3 [security] ([1a15150](https://github.com/newjersey/navigator.business.nj.gov/commit/1a15150a4f2ca3d8edf1a9951c7860e769d22d73))
+* **deps:** update dependency express to v4.20.0 [security] ([eeaf669](https://github.com/newjersey/navigator.business.nj.gov/commit/eeaf6696f9bcf92ec10649373b0cc1ac2abd2405))
+
+
+### Features
+
+* [[#188163509](https://github.com/newjersey/navigator.business.nj.gov/issues/188163509)] added social media preview and SEO content ([41d7ecb](https://github.com/newjersey/navigator.business.nj.gov/commit/41d7ecb2c5473d686623c7fc10b321cc89b7c633))
+
 # [2024.27.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.26.1...v2024.27.0) (2024-09-10)
 
 
