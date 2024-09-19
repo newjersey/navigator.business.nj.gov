@@ -294,6 +294,7 @@ export const generateProfileData = (
     nonEssentialRadioAnswers: {},
     elevatorOwningBusiness: undefined,
     carnivalRideOwningBusiness: undefined,
+    raffleBingoGames: undefined,
     ...overrides,
   };
 };

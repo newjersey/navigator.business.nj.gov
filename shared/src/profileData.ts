@@ -127,6 +127,7 @@ export interface ProfileData extends IndustrySpecificData {
   readonly nonEssentialRadioAnswers: Record<string, boolean | undefined>;
   readonly elevatorOwningBusiness: boolean | undefined;
   readonly communityAffairsAddress?: CommunityAffairsAddress;
+  readonly raffleBingoGames: boolean | undefined;
 }
 
 export const emptyProfileData: ProfileData = {
@@ -157,6 +158,7 @@ export const emptyProfileData: ProfileData = {
   nonEssentialRadioAnswers: {},
   elevatorOwningBusiness: undefined,
   communityAffairsAddress: undefined,
+  raffleBingoGames: undefined,
   ...emptyIndustrySpecificData,
 };
 
