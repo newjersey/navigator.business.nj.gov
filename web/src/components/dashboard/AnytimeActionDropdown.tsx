@@ -100,9 +100,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
         {Config.dashboardAnytimeActionDefaults.defaultHeaderText}
       </Heading>
       <HorizontalLine ariaHidden={true} />
-      <span className={"text-bold"}>
-        {Config.dashboardAnytimeActionDefaults.defaultAutocompleteHeaderText}
-      </span>
+      <div className="text-bold">{Config.dashboardAnytimeActionDefaults.defaultAutocompleteHeaderText}</div>
       <span className={isDesktopAndUp ? "flex" : "flex-column"}>
         <Autocomplete
           renderInput={(params): ReactElement => {

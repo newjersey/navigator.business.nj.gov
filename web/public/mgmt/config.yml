@@ -1013,6 +1013,26 @@ collections:
                       name: "ariaContextWillLooseCalendarAndCertificationAccess",
                       widget: "string",
                     }
+                  - {
+                      label: "Aria Context - Stepper Labels",
+                      name: "ariaContextStepperLabels",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Aria Context - Stepper State - Complete",
+                      name: "ariaContextStepperStateComplete",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Aria Context - Stepper State - Error",
+                      name: "ariaContextStepperStateError",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Aria Context - Stepper State - Incomplete",
+                      name: "ariaContextStepperStateIncomplete",
+                      widget: "string",
+                    }
               - label: Nonprofit Provisions
                 name: nonprofitProvisions
                 collapsed: true
