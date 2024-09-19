@@ -1,18 +1,15 @@
 ---
 notesMd: "[2526: Add non-essential question tasks: raffle task screen](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/2526)"
 id: "raffle-license-step-2"
-webflowId: "66be3c53bf7d2a8c2bedda6a"
 urlSlug: "raffle-license-step-2"
 name: "Apply for a Raffle or Bingo License in the NJ Municipality"
-webflowName: "Raffle or Bingo NJ Municipal License"
 filename: "raffle-license-step-2"
-callToActionLink: "https://www.njconsumeraffairs.gov/lgccc/Applications/Initial-Affidavit-and-Application-for-Biennial-Registration.pdf"
-callToActionText: "Get an LGCCC ID Number"
-agencyId: "nj-consumer-affairs"
-industryId: "generic"
-licenseCertificationClassification: "undefined"
-licenseName: ""
+displayname: "raffle-license-step-2"
+callToActionLink: "https://www.njconsumeraffairs.gov/lgccc/Pages/applications.aspx"
+callToActionText: "Apply for a Raffle or Bingo License"
 summaryDescriptionMd: "After you receive the identification number from the Legalized Games of Chance Control Commission, you must apply for a license in the New Jersey municipality in which the raffle or bingo game is to be held, operated, or conducted. You must submit four copies of this application to the Municipal Clerk’s office in this municipality."
+stepLabel: "From Your NJ Municipality"
+agencyId: "nj-municipality"
 ---
 
 ## Application Requirements
@@ -55,15 +52,18 @@ summaryDescriptionMd: "After you receive the identification number from the Lega
 - Signatures in the presence of a notary public
 - An attached sample raffle ticket, if applicable (Examples: [off Premises 50 / 50 raffle awarding cash as a prize](https://www.njconsumeraffairs.gov/lgccc/Applications/Off-Premises-50-50-Raffle-Awarding-Cash-as-a-Prize.pdf), [off premises draw raffle awarding merchandise as a prize](https://www.njconsumeraffairs.gov/lgccc/Applications/Off-Premises-Draw-Raffle-Awarding-Merchandise-as-a-Prize.pdf))
 
-## What if I don't get this license?
+:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
 
 You may be subject to fines up to $7,500 for a first offense and up to $15,000 for every offense after the first, among other penalties.
+:::
 
-:::callout{ showHeader="false" headerText="Additional Requirements" showIcon="true" calloutType="informational" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-## Additional Requirements
+A certificate of registration.
 
-### Report of Operations
+:::
+
+:::callout{ showHeader="true" headerText="Report of Operations" showIcon="true" calloutType="informational" }
 
 Within 15 calendar days of a raffle or bingo game, you must file a Report of Operations \[## need link] with the Legalized Games of Chance Control Commission with the following:
 
@@ -71,19 +71,14 @@ Within 15 calendar days of a raffle or bingo game, you must file a Report of Ope
 - A list of expenses incurred and who they were paid to
 - The net profit from each game and how it was or will be applied
 - A list of the prizes offered or given and the value of each
+  :::
 
-### Designated Representative
+:::callout{ showHeader="true" headerText="Designated Representative" showIcon="true" calloutType="informational" }
 
 You must assign a specific representative who will be responsible for ensuring that all gaming is conducted legally. Only members of the organization may operate the game, and no person can be paid for conducting or assisting in conducting the game. Proceeds derived from gaming operations may be used only to further the organization’s authorized purpose. Supplies for gaming operation may be purchased or leased only from vendors approved by the Commission.
-
-### Prize Limits
-
-You must adhere to the prize limits described on page 3 of the [Legalized Games of Chance Control Commission Bingo and Raffle License Process Instructions](https://www.njconsumeraffairs.gov/lgccc/Applications/Bingo-and-Raffle-License-Process-Instructions.pdf).
-
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="Prize Limits" showIcon="true" calloutType="informational" }
 
-A certificate of registration.
-
+You must adhere to the prize limits described on page 3 of the [Legalized Games of Chance Control Commission Bingo and Raffle License Process Instructions](https://www.njconsumeraffairs.gov/lgccc/Applications/Bingo-and-Raffle-License-Process-Instructions.pdf).
 :::

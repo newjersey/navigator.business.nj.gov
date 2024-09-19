@@ -17,6 +17,7 @@ import { NonEssentialQuestionsSection } from "@/components/data-fields/non-essen
 import { Notes } from "@/components/data-fields/Notes";
 import { Ownership } from "@/components/data-fields/Ownership";
 import { RadioQuestion } from "@/components/data-fields/RadioQuestion";
+import { RaffleBingoGamesQuestion } from "@/components/data-fields/RaffleBingoGamesQuestion";
 import { RenovationQuestion } from "@/components/data-fields/RenovationQuestion";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
 import { Sectors } from "@/components/data-fields/Sectors";
@@ -324,6 +325,11 @@ const ProfilePage = (props: Props): ReactElement => {
     );
   };
 
+  const displayRaffleBingoGameQuestion = (): boolean => {
+    if (!business) return false;
+    return profileData.legalStructureId === "nonprofit";
+  };
+
   const hasSubmittedTaxData =
     business?.taxFilingData.state === "SUCCESS" || business?.taxFilingData.state === "PENDING";
 
@@ -575,6 +581,15 @@ const ProfilePage = (props: Props): ReactElement => {
           <BusinessStructure />
         </ProfileField>
 
+        <ProfileField
+          fieldName="raffleBingoGames"
+          isVisible={displayRaffleBingoGameQuestion()}
+          hideHeader={true}
+          displayAltDescription={true}
+          boldAltDescription={true}
+        >
+          <RaffleBingoGamesQuestion />
+        </ProfileField>
         <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
           <CannabisLocationAlert industryId={business?.profileData.industryId} />
           <MunicipalityField />
