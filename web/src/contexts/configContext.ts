@@ -29,6 +29,8 @@ import * as NexusDbaFormation from "@businessnjgovnavigator/content/fieldConfig/
 import * as NexusNameSearch from "@businessnjgovnavigator/content/fieldConfig/nexus-name-search.json";
 import * as PageNotFoundError from "@businessnjgovnavigator/content/fieldConfig/page-not-found-error.json";
 import * as Profile from "@businessnjgovnavigator/content/fieldConfig/profile.json";
+import * as RaffleBingoStep1 from "@businessnjgovnavigator/content/fieldConfig/raffle-bingo-step1.json";
+import * as RaffleBingoStep2 from "@businessnjgovnavigator/content/fieldConfig/raffle-bingo-step2.json";
 import * as StarterKits from "@businessnjgovnavigator/content/fieldConfig/starter-kits.json";
 import * as TaxAccess from "@businessnjgovnavigator/content/fieldConfig/tax-access-modal.json";
 import * as Tax from "@businessnjgovnavigator/content/fieldConfig/tax.json";
@@ -40,40 +42,42 @@ import { createContext } from "react";
 const merged = JSON.parse(
   JSON.stringify(
     merge(
-      ConfigOriginal,
-      Profile,
-      CannabisPriorityStatusTab1,
-      CannabisPriorityStatusTab2,
-      CannabisLicenseTab1,
+      AccountSetup,
+      anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
+      BusinessFormation,
+      BusinessStructurePrompt,
+      BusinessStructureTask,
+      CalloutDefaults,
       CannabisLicenseAnnualTab2,
       CannabisLicenseConditionalTab2,
-      NexusNameSearch,
-      NexusDbaFormation,
-      NaicsCode,
-      Ein,
-      Tax,
       CannabisLicenseEligibilityModal,
+      CannabisLicenseTab1,
+      CannabisPriorityStatusTab1,
+      CannabisPriorityStatusTab2,
+      ConfigOriginal,
+      DashboardCalendar,
+      DashboardDefaults,
+      DashboardModals,
+      DashboardSnackbars,
+      DashboardTabs,
+      DeferredLocation,
+      Ein,
+      ElevatorRegistration,
       FormationInterimSuccessPage,
       FormationSuccessPage,
+      HousingRegistrationSearchTask,
+      NaicsCode,
+      NavigationDefaults,
+      NavigationDefaults,
+      NexusDbaFormation,
+      NexusNameSearch,
+      PageMetadata,
+      PageMetadata,
       PageNotFoundError,
+      Profile,
+      RaffleBingoStep1,
+      RaffleBingoStep2,
       SiteWideErrorMessages,
-      DeferredLocation,
-      DashboardSnackbars,
-      DashboardCalendar,
-      DashboardTabs,
-      DashboardModals,
-      BusinessFormation,
-      TaxAccess,
-      BusinessStructureTask,
-      BusinessStructurePrompt,
-      AccountSetup,
-      NavigationDefaults,
-      PageMetadata,
-      NavigationDefaults,
-      DashboardDefaults,
-      PageMetadata,
-      CalloutDefaults,
-      ElevatorRegistration,
       StarterKits,
       HousingRegistrationSearchTask,
       anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults
@@ -82,76 +86,82 @@ const merged = JSON.parse(
 );
 
 export type ConfigType = typeof ConfigOriginal &
-  typeof Profile &
-  typeof CannabisPriorityStatusTab1 &
-  typeof CannabisPriorityStatusTab2 &
-  typeof CannabisLicenseTab1 &
+  typeof AccountSetup &
+  typeof anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults &
+  typeof BusinessFormation &
+  typeof BusinessStructurePrompt &
+  typeof BusinessStructureTask &
+  typeof CalloutDefaults &
+  typeof CalloutDefaults &
   typeof CannabisLicenseAnnualTab2 &
   typeof CannabisLicenseConditionalTab2 &
-  typeof NexusNameSearch &
-  typeof NexusDbaFormation &
-  typeof NaicsCode &
-  typeof Ein &
-  typeof Tax &
   typeof CannabisLicenseEligibilityModal &
+  typeof CannabisLicenseTab1 &
+  typeof CannabisPriorityStatusTab1 &
+  typeof CannabisPriorityStatusTab2 &
+  typeof DashboardCalendar &
+  typeof DashboardDefaults &
+  typeof DashboardModals &
+  typeof DashboardSnackbars &
+  typeof DashboardTabs &
+  typeof DeferredLocation &
+  typeof Ein &
+  typeof ElevatorRegistration &
   typeof FormationInterimSuccessPage &
   typeof FormationSuccessPage &
-  typeof PageNotFoundError &
-  typeof SiteWideErrorMessages &
-  typeof DeferredLocation &
-  typeof DashboardCalendar &
-  typeof DashboardModals &
-  typeof DashboardTabs &
-  typeof BusinessFormation &
-  typeof BusinessStructureTask &
-  typeof TaxAccess &
-  typeof DashboardSnackbars &
-  typeof BusinessStructurePrompt &
-  typeof AccountSetup &
+  typeof HousingRegistrationSearchTask &
+  typeof NaicsCode &
   typeof NavigationDefaults &
+  typeof NexusDbaFormation &
+  typeof NexusNameSearch &
   typeof PageMetadata &
-  typeof CalloutDefaults &
-  typeof ElevatorRegistration &
-  typeof CalloutDefaults &
-  typeof DashboardDefaults &
   typeof PageMetadata &
+  typeof PageNotFoundError &
+  typeof Profile &
+  typeof RaffleBingoStep1 &
+  typeof RaffleBingoStep2 &
+  typeof SiteWideErrorMessages &
   typeof StarterKits &
+  typeof Tax &
+  typeof TaxAccess &
   typeof HousingRegistrationSearchTask &
   typeof anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
-    ConfigOriginal,
-    Profile,
-    CannabisPriorityStatusTab1,
-    CannabisPriorityStatusTab2,
-    CannabisLicenseTab1,
+    AccountSetup,
+    anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
+    BusinessFormation,
+    BusinessStructureTask,
+    CalloutDefaults,
     CannabisLicenseAnnualTab2,
     CannabisLicenseConditionalTab2,
-    NexusNameSearch,
-    NexusDbaFormation,
-    NaicsCode,
-    Ein,
-    Tax,
     CannabisLicenseEligibilityModal,
+    CannabisLicenseTab1,
+    CannabisPriorityStatusTab1,
+    CannabisPriorityStatusTab2,
+    ConfigOriginal,
+    DashboardCalendar,
+    DashboardDefaults,
+    DashboardModals,
+    DashboardSnackbars,
+    DashboardTabs,
+    DeferredLocation,
+    Ein,
+    ElevatorRegistration,
     FormationInterimSuccessPage,
     FormationSuccessPage,
-    PageNotFoundError,
-    DeferredLocation,
-    DashboardSnackbars,
-    DashboardModals,
-    DashboardTabs,
-    DashboardCalendar,
-    BusinessFormation,
-    TaxAccess,
-    AccountSetup,
-    BusinessStructureTask,
+    HousingRegistrationSearchTask,
+    NaicsCode,
     NavigationDefaults,
+    NexusDbaFormation,
+    NexusNameSearch,
     PageMetadata,
-    DashboardDefaults,
     PageMetadata,
-    CalloutDefaults,
-    ElevatorRegistration,
+    PageNotFoundError,
+    Profile,
+    RaffleBingoStep1,
+    RaffleBingoStep2,
     StarterKits,
     HousingRegistrationSearchTask,
     anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults

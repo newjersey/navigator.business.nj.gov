@@ -1,17 +1,12 @@
 ---
 notesMd: "[2526: Add non-essential question tasks: raffle task screen](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/2526)"
 id: "raffle-license-step-1"
-webflowId: "66be3c5382fc36dffc2ce314"
 urlSlug: "raffle-license-step-1"
-name: "Apply for a Raffle or Bingo Game License for Your Nonprofit"
-webflowName: "Raffle or Bingo Game License"
+name: "Apply for a Raffle or Bingo Game License"
 filename: "raffle-license-step-1"
+displayname: "raffle-license-step-1"
 callToActionLink: "https://www.njconsumeraffairs.gov/lgccc/Applications/Initial-Affidavit-and-Application-for-Biennial-Registration.pdf"
 callToActionText: "Get an LGCCC ID Number"
-agencyId: "nj-consumer-affairs"
-industryId: "generic"
-licenseCertificationClassification: "undefined"
-licenseName: ""
 summaryDescriptionMd: "You need to apply for a raffle or bingo game license in your New Jersey municipality if you will be holding, operating, or conducting raffles or bingo games."
 ---
 
@@ -28,7 +23,9 @@ Your organization must be one of the following types of nonprofits:
 - Senior citizen association or club
 - Officially recognized volunteer fire company, officially recognized volunteer first aid, or rescue squad
 
-## Get a Legalized Games of Chance Control Commission Identification Number
+---
+
+## Apply for a Legalized Games of Chance Control Commission Identification Number
 
 In order for you to apply for a municipal raffle or bingo license for your organization, you must first register with and obtain an Identification Number for your organization from the New Jersey Legalized Games of Chance Control Commission (LGCCC). This application must be completed by an elected officer of your organization, per your bylaws.
 

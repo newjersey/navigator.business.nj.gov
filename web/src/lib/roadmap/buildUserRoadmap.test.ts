@@ -875,4 +875,38 @@ describe("buildUserRoadmap", () => {
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toEqual([]);
     });
   });
+
+  describe("raffle-bingo games", () => {
+    it("adds raffle-bingo-games task if non-profit business conducts raffle or bingo games", () => {
+      const profileData = generateStartingProfile({
+        raffleBingoGames: true,
+        legalStructureId: "nonprofit",
+      });
+
+      buildUserRoadmap(profileData);
+
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("raffle-bingo-games");
+    });
+
+    it("does not add raffle-bingo-games task if non-profit business does not conduct raffle or bingo games", () => {
+      const profileData = generateStartingProfile({
+        raffleBingoGames: false,
+        legalStructureId: "nonprofit",
+      });
+
+      buildUserRoadmap(profileData);
+
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("raffle-bingo-games");
+    });
+
+    it("does not add raffle-bingo-games task if business is not a non-profit", () => {
+      buildUserRoadmap(
+        generateStartingProfile({
+          raffleBingoGames: false,
+          legalStructureId: "limited-liability-company",
+        })
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("raffle-bingo-games");
+    });
+  });
 });

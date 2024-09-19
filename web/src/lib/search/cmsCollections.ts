@@ -18,6 +18,7 @@ export const cmsCollections = [
       "Roadmaps - Add-ons",
       "Roadmaps - Non Essential Questions",
       "Roadmaps - Settings",
+      "Roadmaps - Raffle Bingo Steps",
     ],
   },
   {

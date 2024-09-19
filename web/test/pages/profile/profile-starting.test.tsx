@@ -1355,6 +1355,18 @@ describe("profile - starting business", () => {
 
       expect(screen.getByTestId("elevatorOwningBusiness-radio-group")).toBeInTheDocument();
     });
+
+    it("displays raffle bingo question for non-profit starting businesses", () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "nonprofit",
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.getByTestId("raffleBingoGames-radio-group")).toBeInTheDocument();
+    });
   });
 
   describe("Domestic Employer", () => {
