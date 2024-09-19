@@ -51,7 +51,7 @@
         "billingContactHeader": "Billing Contact Information"
       },
       "contactInfoHeader": "Billing Contact Information",
-      "servicesDescription": "Use the table below to select all the services you’d like to purchase as well as the payment type. The total amount will change based on the payment type selected."
+      "servicesDescription": "Use the table below to select all the services you’d like to purchase as well as the payment type."
     },
     "nonprofitProvisions": {
       "label": "Provisions",
