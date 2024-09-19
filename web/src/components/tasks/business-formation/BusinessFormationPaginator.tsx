@@ -48,32 +48,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
 
   type ConfigFormationFields = keyof typeof Config.formation.fields;
 
-  useEffect(() => {
-    if (isMounted.current) {
-      const element = state.hasBeenSubmitted ? errorAlertRef.current : stepperRef.current;
-      scrollToTopOfElement(element, {});
-    }
-  }, [state.stepIndex, state.hasBeenSubmitted]);
-
-  useMountEffect(() => {
-    if (!business) return;
-    if (
-      business.formationData.lastVisitedPageIndex > BusinessFormationStepsConfiguration.length - 1 ||
-      business.formationData.lastVisitedPageIndex < 0
-    ) {
-      setStepIndex(0);
-    } else {
-      setStepIndex(business.formationData.lastVisitedPageIndex);
-    }
-  });
-
-  useMountEffect(() => {
-    isMounted.current = true;
-    scrollToTopOfElement(stepperRef.current, {});
-    analytics.event.business_formation_name_step.arrive.arrive_on_business_formation_name_step();
-  });
-
-  const determineStepsWithErrors = (overrides?: {
+  const determineStepsStates = (overrides?: {
     hasSubmitted: boolean;
   }): { stepsWithErrors: StepperStep[]; stepStates: StepperStep[] } => {
     const stepStates = BusinessFormationStepsConfiguration.map((value) => {
@@ -90,7 +65,33 @@ export const BusinessFormationPaginator = (): ReactElement => {
     return { stepsWithErrors, stepStates };
   };
 
-  const { stepsWithErrors, stepStates } = determineStepsWithErrors();
+  const { stepsWithErrors, stepStates } = determineStepsStates();
+
+  const selectedStepHasErrors =
+    (state.hasBeenSubmitted && stepStates[state.stepIndex].hasError && state.stepIndex !== 0) ?? false;
+
+  useEffect(() => {
+    if (isMounted.current && selectedStepHasErrors) {
+      scrollToTopOfElement(errorAlertRef.current, { focusElement: true });
+    }
+  }, [state.stepIndex, selectedStepHasErrors]);
+
+  useMountEffect(() => {
+    if (!business) return;
+    if (
+      business.formationData.lastVisitedPageIndex > BusinessFormationStepsConfiguration.length - 1 ||
+      business.formationData.lastVisitedPageIndex < 0
+    ) {
+      setStepIndex(0);
+    } else {
+      setStepIndex(business.formationData.lastVisitedPageIndex);
+    }
+  });
+
+  useMountEffect(() => {
+    isMounted.current = true;
+    analytics.event.business_formation_name_step.arrive.arrive_on_business_formation_name_step();
+  });
 
   const moveToStep = (stepIndex: number): void => {
     setStepIndex(stepIndex);
@@ -117,9 +118,9 @@ export const BusinessFormationPaginator = (): ReactElement => {
 
     if (isSubmittingFromFinalStep) {
       setHasBeenSubmitted(true);
-      const { stepsWithErrors } = determineStepsWithErrors({ hasSubmitted: true });
+      const { stepsWithErrors } = determineStepsStates({ hasSubmitted: true });
       if (stepsWithErrors.length > 0) {
-        scrollToTopOfElement(errorAlertRef.current, {});
+        scrollToTopOfElement(errorAlertRef.current, { focusElement: true });
         return;
       }
       submitToApi();
@@ -486,7 +487,9 @@ export const BusinessFormationPaginator = (): ReactElement => {
 
   return (
     <>
-      <div ref={errorAlertRef}>{getErrorComponent()}</div>
+      <div ref={errorAlertRef} tabIndex={-1} data-testid={`error-alert-focus-container`}>
+        {getErrorComponent()}
+      </div>
       <div className="margin-top-3" ref={stepperRef}>
         <HorizontalStepper
           steps={stepStates}
@@ -494,9 +497,10 @@ export const BusinessFormationPaginator = (): ReactElement => {
           onStepClicked={(step: number): void => {
             onMoveToStep(step, { moveType: "STEPPER" });
           }}
+          suppressRefocusBehavior={selectedStepHasErrors}
         />
       </div>
-      <div className="fg1 flex flex-column space-between">
+      <div className="fg1 flex flex-column space-between" role={"tabpanel"}>
         {BusinessFormationSteps[state.stepIndex].component}
         {displayButtons()}
       </div>

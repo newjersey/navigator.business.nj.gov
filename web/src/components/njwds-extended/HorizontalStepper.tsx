@@ -1,12 +1,14 @@
-import { MediaQueries } from "@/lib/PageSizes";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { StepperStep } from "@/lib/types/types";
-import { useMediaQuery } from "@mui/material";
-import { ReactElement } from "react";
+import { scrollToTopOfElement } from "@/lib/utils/helpers";
+import { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
   steps: StepperStep[];
   currentStep: number;
   onStepClicked: (step: number) => void;
+  suppressRefocusBehavior?: boolean;
 }
 
 type StepperState =
@@ -18,7 +20,19 @@ type StepperState =
   | "INCOMPLETE";
 
 export const HorizontalStepper = (props: Props): ReactElement => {
-  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
+  const [focusStep, setFocusStep] = useState(props.currentStep);
+
+  const { Config } = useConfig();
+
+  useEffect(() => {
+    setFocusStep(props.currentStep);
+  }, [props.currentStep]);
+
+  useEffect(() => {
+    if (divRefs.current[props.currentStep] && !props.suppressRefocusBehavior) {
+      scrollToTopOfElement(divRefs.current[props.currentStep], { focusElement: true });
+    }
+  }, [props.currentStep, props.suppressRefocusBehavior]);
 
   const determineState = (index: number): StepperState => {
     if (index === props.currentStep) {
@@ -37,6 +51,25 @@ export const HorizontalStepper = (props: Props): ReactElement => {
       } else {
         return "INCOMPLETE";
       }
+    }
+  };
+
+  const determineAriaState = (stepperState: StepperState): string => {
+    switch (stepperState) {
+      case "ERROR":
+        return Config.formation.general.ariaContextStepperStateError;
+      case "ERROR-ACTIVE":
+        return Config.formation.general.ariaContextStepperStateError;
+      case "COMPLETE":
+        return Config.formation.general.ariaContextStepperStateComplete;
+      case "COMPLETE-ACTIVE":
+        return Config.formation.general.ariaContextStepperStateComplete;
+      case "INCOMPLETE-ACTIVE":
+        return Config.formation.general.ariaContextStepperStateIncomplete;
+      case "INCOMPLETE":
+        return Config.formation.general.ariaContextStepperStateIncomplete;
+      default:
+        return "";
     }
   };
 
@@ -96,39 +129,102 @@ export const HorizontalStepper = (props: Props): ReactElement => {
     }
   };
 
-  const getBottomMargin = (): string => {
-    return isTabletAndUp ? "margin-bottom-4" : "";
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>, index: number): void => {
+    if (event.key === "Enter" || event.key === " ") {
+      setFocusStep(props.currentStep);
+      divRefs.current[props.currentStep]?.focus();
+      props.onStepClicked(index);
+    }
+
+    if (event.key === "ArrowRight") {
+      if (focusStep === props.steps.length - 1) {
+        divRefs.current[0]?.focus();
+        setFocusStep(0);
+      } else {
+        divRefs.current[focusStep + 1]?.focus();
+        setFocusStep((prevFocusStep) => prevFocusStep + 1);
+      }
+    }
+
+    if (event.key === "ArrowLeft") {
+      if (focusStep === 0) {
+        divRefs.current[props.steps.length - 1]?.focus();
+        setFocusStep(props.steps.length - 1);
+      } else {
+        divRefs.current[focusStep - 1]?.focus();
+        setFocusStep((prevFocusStep) => prevFocusStep - 1);
+      }
+    }
+
+    if (event.key === "Tab") {
+      setFocusStep(props.currentStep);
+    }
   };
+
+  const insertStepName = (content: string, stepName: string): string => {
+    return modifyContent({
+      content,
+      condition: () => true,
+      modificationMap: {
+        stepName: stepName,
+      },
+    });
+  };
+
+  const insertStepState = (content: string, stepState: string): string => {
+    return modifyContent({
+      content,
+      condition: () => true,
+      modificationMap: {
+        stepState: stepState,
+      },
+    });
+  };
+
+  const composeFormationTabAriaLabel = (content: string, stepName: string, stepState: string): string => {
+    return insertStepState(insertStepName(content, stepName), stepState);
+  };
+
+  const divRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   return (
     <>
       <div className="horizontal-step-indicator display-block">
         <div className="usa-step-indicator usa-step-indicator--counters-sm">
-          <ol className={`usa-step-indicator__segments ${getBottomMargin()}`}>
+          <div className={`usa-step-indicator__segments stepper-wrapper`} role={"tablist"}>
             {props.steps.map((step: StepperStep, index: number) => {
               return (
-                <li
+                <div
                   key={`${step.name}-${index}`}
                   className={
                     `border-bottom-2px ${getBorderColor(index)} cursor-pointer ` +
                     `usa-step-indicator__segment usa-step-indicator__segment${getCSSClassColor(index)}`
                   }
-                  aria-hidden
                   data-num={getIcon(index)}
                   data-state={determineState(index)}
-                  onClick={(): void => props.onStepClicked(index)}
                   data-testid={`stepper-${index}`}
+                  onClick={(): void => props.onStepClicked(index)}
+                  onKeyDown={(e) => handleKeyDown(e, index)}
+                  role="tab"
+                  tabIndex={index === props.currentStep ? 0 : -1}
+                  aria-label={composeFormationTabAriaLabel(
+                    Config.formation.general.ariaContextStepperLabels,
+                    step.name,
+                    determineAriaState(determineState(index))
+                  )}
+                  aria-selected={index === props.currentStep}
+                  ref={(el) => (divRefs.current[index] = el)}
                 >
-                  <span className={`usa-step-indicator__segment-label ${getBoldClass(index)}`} aria-hidden>
-                    {step.name}
-                  </span>
-                </li>
+                  <div className={`usa-step-indicator__segment-label ${getBoldClass(index)}`}>
+                    <span>{step.name}</span>
+                  </div>
+                </div>
               );
             })}
-          </ol>
+          </div>
         </div>
       </div>
-      <div className={isTabletAndUp ? "visually-hidden-centered" : "margin-top-05 margin-bottom-2"}>
+      <div className={"display-only-mobile-and-tablet margin-top-1 margin-bottom-2"}>
         <strong>{`Step ${props.currentStep + 1} of ${props.steps.length}:`}</strong>
         {` ${props.steps[props.currentStep].name}`}
       </div>

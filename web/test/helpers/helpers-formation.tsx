@@ -44,6 +44,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 const Config = getMergedConfig();
 
@@ -167,6 +168,10 @@ export const setDesktopScreen = (value: boolean): void => {
   });
 };
 
+interface OptionUserEvent {
+  useUserEvent: boolean;
+}
+
 export type FormationPageHelpers = {
   fillText: (label: string, value: string) => void;
   fillAndSubmitBusinessNameStep: (businessName?: string) => Promise<void>;
@@ -179,12 +184,12 @@ export type FormationPageHelpers = {
   submitBillingStep: () => Promise<void>;
   submitReviewStep: () => Promise<void>;
   clickSubmitAndGetError: (business: Business) => Promise<void>;
-  stepperClickToBusinessNameStep: () => Promise<void>;
-  stepperClickToNexusBusinessNameStep: () => Promise<void>;
-  stepperClickToBusinessStep: () => Promise<void>;
-  stepperClickToContactsStep: () => Promise<void>;
-  stepperClickToBillingStep: () => Promise<void>;
-  stepperClickToReviewStep: () => Promise<void>;
+  stepperClickToBusinessNameStep: (eventConfig?: OptionUserEvent) => Promise<void>;
+  stepperClickToNexusBusinessNameStep: (eventConfig?: OptionUserEvent) => Promise<void>;
+  stepperClickToBusinessStep: (eventConfig?: OptionUserEvent) => Promise<void>;
+  stepperClickToContactsStep: (eventConfig?: OptionUserEvent) => Promise<void>;
+  stepperClickToBillingStep: (eventConfig?: OptionUserEvent) => Promise<void>;
+  stepperClickToReviewStep: (eventConfig?: OptionUserEvent) => Promise<void>;
   getStepStateInStepper: (index: number | undefined) => string;
   searchBusinessName: (nameAvailability: Partial<NameAvailability>) => Promise<void>;
   fillAndBlurBusinessName: (businessName?: string) => Promise<void>;
@@ -257,36 +262,46 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     });
   };
 
-  const stepperClickToBusinessNameStep = async (): Promise<void> => {
-    fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`));
+  const stepperClickToBusinessNameStep = async (eventConfig?: OptionUserEvent): Promise<void> => {
+    eventConfig?.useUserEvent
+      ? userEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`))
+      : fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`));
     await waitFor(() => {
       expect(screen.queryByTestId("business-name-step")).toBeInTheDocument();
     });
   };
 
-  const stepperClickToBusinessStep = async (): Promise<void> => {
-    fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`));
+  const stepperClickToBusinessStep = async (eventConfig?: OptionUserEvent): Promise<void> => {
+    eventConfig?.useUserEvent
+      ? userEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`))
+      : fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`));
     await waitFor(() => {
       expect(screen.queryByTestId("business-step")).toBeInTheDocument();
     });
   };
 
-  const stepperClickToContactsStep = async (): Promise<void> => {
-    fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Contacts")}`));
+  const stepperClickToContactsStep = async (eventConfig?: OptionUserEvent): Promise<void> => {
+    eventConfig?.useUserEvent
+      ? userEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Contacts")}`))
+      : fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Contacts")}`));
     await waitFor(() => {
       expect(screen.queryByTestId("contacts-step")).toBeInTheDocument();
     });
   };
 
-  const stepperClickToBillingStep = async (): Promise<void> => {
-    fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Billing")}`));
+  const stepperClickToBillingStep = async (eventConfig?: OptionUserEvent): Promise<void> => {
+    eventConfig?.useUserEvent
+      ? userEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Billing")}`))
+      : fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Billing")}`));
     await waitFor(() => {
       expect(screen.queryByTestId("billing-step")).toBeInTheDocument();
     });
   };
 
-  const stepperClickToReviewStep = async (): Promise<void> => {
-    fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`));
+  const stepperClickToReviewStep = async (eventConfig?: OptionUserEvent): Promise<void> => {
+    eventConfig?.useUserEvent
+      ? userEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`))
+      : fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`));
     await waitFor(() => {
       expect(screen.queryByTestId("review-step")).toBeInTheDocument();
     });

@@ -11,6 +11,8 @@
     "general": {
       "helpButtonText": "Help",
       "paymentDisclaimer": "You will be brought to a secure payment platform operated by New Jersey's partner NICUSA Inc. to process your payment.",
+      "ariaContextStepperStateError": "Error",
+      "ariaContextStepperStateIncomplete": "Incomplete",
       "notEntered": "Not Entered",
       "ariaContextWillNeedToProvideBusinessDate": "Provide your business effective date to update the task status",
       "backButtonText": "Cancel",
@@ -18,6 +20,7 @@
       "editButtonText": "Edit",
       "radioNoText": "No",
       "charactersLabel": "characters",
+      "ariaContextStepperLabels": "Formation Stepper Navigation: ${stepName} Step, State: ${stepState}",
       "ariaContextWillLooseCalendarAndCertificationAccess": "You need to confirm your information to update your task status",
       "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer.",
       "nextButtonText": "Save & Continue",
@@ -28,6 +31,7 @@
       "radioYesText": "Yes",
       "viewMoreButtonText": "Read more",
       "amendmentInfo": "#### Review your information before submitting to the New Jersey Division of Revenue and Enterprise Services.\n If you need to make a change after submitting, you must file an [amendment online.](https://www.njportal.com/dor/businessamendments)",
+      "ariaContextStepperStateComplete": "Complete",
       "viewLessButtonText": "Read less",
       "genericErrorText": "This field requires information."
     },
@@ -247,10 +251,6 @@
         "label": "Registered Agent ID Number",
         "error": "Enter the 4 to 7 digit Registered Agent ID number."
       },
-      "agentOfficeAddressCity": {
-        "label": "Office City",
-        "error": "Enter the agent's city."
-      },
       "corpWatchNotification": {
         "checkboxText": "I want to sign up for CorpWatch Alerts to notify me when any charter document filing is performed for my business."
       },
@@ -438,6 +438,10 @@
       "withdrawals": {
         "label": "Withdrawals",
         "body": "If a general partner withdraws from the partnership, what are the remaining partners rights to contribute to the business? "
+      },
+      "agentOfficeAddressCity": {
+        "label": "Office City",
+        "error": "Enter the agent's city."
       },
       "addressCity": {
         "label": "City",
