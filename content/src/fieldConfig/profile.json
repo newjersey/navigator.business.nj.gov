@@ -436,6 +436,15 @@
           "radioButtonFalseText": "No",
           "description": "Are you looking to start an appraisal management company?"
         }
+      },
+      "raffleBingoGames": {
+        "default": {
+          "header": "Raffle or Bingo Game",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Will you be holding, operating, or conducting raffles or bingo games?",
+          "altDescription": "Will you be holding, operating, or conducting raffles or bingo games?"
+        }
       }
     },
     "default": {
