@@ -172,7 +172,7 @@ class BusinessFormationPage {
     this.getSigner(number).clear().type(name).blur();
   }
   typeContactFirstName(name: string) {
-    this.getContactFirstName().clear().type(name).blur();
+    this.getContactFirstName().focus().clear().type(name).blur();
   }
   typeContactLastName(name: string) {
     this.getContactLastName().clear().type(name).blur();

@@ -132,23 +132,46 @@ const getNavBarHeight = (): number | undefined => {
 
 export const scrollToTopOfElement = (
   element: HTMLDivElement | null,
-  { waitTime = 100 }: { waitTime?: number }
+  { waitTime = 100, focusElement = false }: { waitTime?: number; focusElement?: boolean }
 ): void => {
+  if (element === null) {
+    return;
+  }
   let y = 0;
 
   if (element) {
     y = window.scrollY + element.getBoundingClientRect().top;
     const navBarHeight = getNavBarHeight();
     if (navBarHeight) {
-      y -= navBarHeight;
+      y -= navBarHeight + 5;
     } else {
       return;
     }
   }
 
   setTimeout(() => {
-    return window.scrollTo({ top: y, behavior: "smooth" });
+    window.scrollTo({ top: y, behavior: "smooth" });
   }, waitTime);
+
+  if (focusElement) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && entry.intersectionRatio === 1) {
+            setTimeout(() => {
+              element.focus();
+            }, waitTime);
+            observer.disconnect();
+          }
+        }
+      },
+      {
+        threshold: 1,
+      }
+    );
+
+    observer.observe(element);
+  }
 };
 
 interface AlertProps {

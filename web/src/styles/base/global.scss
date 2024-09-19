@@ -30,6 +30,7 @@ ol {
 }
 
 .visually-hidden-centered {
+  // This is a terrrrrrrrible idea for screen reader purposes
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   height: 1px;
@@ -82,6 +83,12 @@ ol {
 
 .display-only-desktop {
   @media screen and (max-width: $lg) {
+    display: none;
+  }
+}
+
+.display-only-mobile-and-tablet {
+  @media screen and (min-width: $sm) {
     display: none;
   }
 }

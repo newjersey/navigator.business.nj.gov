@@ -52,6 +52,7 @@ import {
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 interface MockApiErrorTestData {
   formationFormData: FormationFormData;
@@ -216,11 +217,17 @@ describe("<BusinessFormationPaginator />", () => {
 
     it("switches steps when clicking the stepper", async () => {
       const page = preparePage({ business, displayContent });
-      await page.stepperClickToContactsStep();
-      await page.stepperClickToBusinessStep();
-      await page.stepperClickToReviewStep();
-      await page.stepperClickToBusinessNameStep();
-      await page.stepperClickToBillingStep();
+      await page.stepperClickToContactsStep({ useUserEvent: true });
+      expect(screen.getByTestId("stepper-2")).toHaveFocus();
+      await page.stepperClickToBusinessStep({ useUserEvent: true });
+      expect(screen.getByTestId("stepper-1")).toHaveFocus();
+      await page.stepperClickToReviewStep({ useUserEvent: true });
+
+      expect(screen.getByTestId("stepper-4")).toHaveFocus();
+      await page.stepperClickToBusinessNameStep({ useUserEvent: true });
+      expect(screen.getByTestId("stepper-0")).toHaveFocus();
+      await page.stepperClickToBillingStep({ useUserEvent: true });
+      expect(screen.getByTestId("stepper-3")).toHaveFocus();
       expect(screen.getByTestId("billing-step")).toBeInTheDocument();
     });
 
@@ -2025,7 +2032,6 @@ describe("<BusinessFormationPaginator />", () => {
           expect(screen.getByText("very bad input")).toBeInTheDocument();
           expect(screen.getByText("some field 2")).toBeInTheDocument();
           expect(screen.getByText("must be nj zipcode")).toBeInTheDocument();
-
           await page.stepperClickToBillingStep();
 
           expect(screen.getByText("some field 1")).toBeInTheDocument();
@@ -2278,6 +2284,70 @@ describe("<BusinessFormationPaginator />", () => {
       business = generateBusiness({ profileData, formationData });
       preparePage({ business, displayContent });
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
+    });
+  });
+
+  describe("Accessibility Related", () => {
+    it("Moves focus when using arrow keys in Stepper", async () => {
+      const page = preparePage({ business, displayContent });
+      await page.stepperClickToContactsStep({ useUserEvent: true });
+      expect(screen.getByTestId("stepper-2")).toHaveFocus();
+      await userEvent.keyboard("{ArrowRight}");
+      expect(screen.getByTestId("stepper-3")).toHaveFocus();
+    });
+
+    it("Selects a step on keyboard enter press", async () => {
+      const page = preparePage({ business, displayContent });
+      await page.stepperClickToContactsStep({ useUserEvent: true });
+      expect(screen.getByTestId("stepper-2")).toHaveFocus();
+      await userEvent.keyboard("{ArrowRight}");
+      expect(screen.getByTestId("stepper-3")).toHaveFocus();
+      await userEvent.keyboard("{Enter}");
+      expect(screen.getByTestId("billing-step")).toBeInTheDocument();
+    });
+
+    it("has correctly composed aria labels", () => {
+      preparePage({ business, displayContent });
+      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`)).toHaveAttribute(
+        "aria-label",
+        expect.stringContaining("Name")
+      );
+      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`)).toHaveAttribute(
+        "aria-label",
+        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete)
+      );
+      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`)).toHaveAttribute(
+        "aria-label",
+        expect.stringContaining("Business")
+      );
+      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`)).toHaveAttribute(
+        "aria-label",
+        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete)
+      );
+      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Contacts")}`)).toHaveAttribute(
+        "aria-label",
+        expect.stringContaining("Contacts")
+      );
+      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Contacts")}`)).toHaveAttribute(
+        "aria-label",
+        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete)
+      );
+      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Billing")}`)).toHaveAttribute(
+        "aria-label",
+        expect.stringContaining("Billing")
+      );
+      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Billing")}`)).toHaveAttribute(
+        "aria-label",
+        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete)
+      );
+      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`)).toHaveAttribute(
+        "aria-label",
+        expect.stringContaining("Review")
+      );
+      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`)).toHaveAttribute(
+        "aria-label",
+        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete)
+      );
     });
   });
 });
