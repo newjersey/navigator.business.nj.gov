@@ -87,6 +87,14 @@
     {
       "id": "public-utilities",
       "name": "Board of Public Utilities"
+    },
+    {
+      "id": "games-of-chance-control-commission",
+      "name": "New Jersey Legalized Games of Chance Control Commission"
+    },
+    {
+      "id": "nj-municipality",
+      "name": "NJ Municipality"
     }
   ]
 }

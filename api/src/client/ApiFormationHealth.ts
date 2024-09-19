@@ -101,6 +101,7 @@ export const ApiFormationHealth: UserData = {
         encryptedTaxId: undefined,
         elevatorOwningBusiness: undefined,
         carnivalRideOwningBusiness: undefined,
+        raffleBingoGames: undefined,
         propertyLeaseType: undefined,
         hasThreeOrMoreRentalUnits: undefined,
       },
