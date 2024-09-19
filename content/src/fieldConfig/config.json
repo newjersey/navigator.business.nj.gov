@@ -239,7 +239,8 @@
     "previousTaskButtonText": "Previous Task",
     "formNameText": "Form",
     "defaultCallToActionText": "Start Application",
-    "unlockedByPlural": "Before starting this task, we recommend you take a look at:"
+    "unlockedByPlural": "Before starting this task, we recommend you take a look at:",
+    "markAsCompleteButtonText": "Mark As Completed"
   },
   "searchBusinessNameTask": {
     "designatorText": "It appears you have included a business designator in your name, such as LLC, LP or CORP. Please remove it at try searching again. Once you have found an available name you then can officially form your business.",

@@ -48,6 +48,7 @@ import { migrate_v139_to_v140 } from "@db/migrations/v140_modify_home_health_ind
 import { migrate_v140_to_v141 } from "@db/migrations/v141_sync_migrated_and_newly_created_users";
 import { migrate_v141_to_v142 } from "@db/migrations/v142_add_domestic_employer_roadmap_section";
 import { migrate_v142_to_v143 } from "@db/migrations/v143_add_property_type_and_rental_unit_count";
+import { migrate_v143_to_v144 } from "@db/migrations/v144_add_raffle_bingo_games";
 import { migrate_v13_to_v14 } from "@db/migrations/v14_add_cleaning_aid_industry";
 import { migrate_v14_to_v15 } from "@db/migrations/v15_add_retail_industry";
 import { migrate_v15_to_v16 } from "@db/migrations/v16_add_user_preferences";
@@ -290,6 +291,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v140_to_v141,
   migrate_v141_to_v142,
   migrate_v142_to_v143,
+  migrate_v143_to_v144,
 ];
 
-export { generatev143UserData as CURRENT_GENERATOR } from "@db/migrations/v143_add_property_type_and_rental_unit_count";
+export { generatev144UserData as CURRENT_GENERATOR } from "@db/migrations/v144_add_raffle_bingo_games";

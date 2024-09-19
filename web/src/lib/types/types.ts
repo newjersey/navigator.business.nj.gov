@@ -361,6 +361,8 @@ export interface Task {
   hidden?: true;
   requiresLocation?: boolean;
   industryId?: string;
+  stepLabel?: string;
+  agencyName?: string;
 }
 
 export interface TaskWithLicenseTaskId extends Task {
