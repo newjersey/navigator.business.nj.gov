@@ -1,3 +1,10 @@
+## [2024.28.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.28.0...v2024.28.1) (2024-09-20)
+
+
+### Bug Fixes
+
+* redeploy as account instead of navigator ([8af3600](https://github.com/newjersey/navigator.business.nj.gov/commit/8af3600386b5db647dca8abf06ac620200eff4a1))
+
 # [2024.28.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.27.0...v2024.28.0) (2024-09-18)
 
 
