@@ -39,12 +39,14 @@ export const OutageAlertBar = (): ReactElement => {
 
   return (
     <div
-      className="display-flex flex-justify-center flex-align-center bg-error-dark text-white font-sans-xs minh-3 margin-auto width-full padding-y-1 padding-x-1"
+      className="bg-error-dark text-white font-sans-xs padding-y-1 "
       data-testid="outage-alert-bar"
       role="alert"
     >
-      <strong>Alert:</strong>
-      <span className="margin-left-05">{message}</span>
+      <div className="grid-container-widescreen desktop:padding-x-7 display-flex">
+        <strong>Alert:</strong>
+        <span className="margin-left-05">{message}</span>
+      </div>
     </div>
   );
 };
