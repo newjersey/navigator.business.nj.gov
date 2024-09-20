@@ -19,6 +19,8 @@ import {
 import { modifyCurrentBusiness } from "@shared/test";
 import { Business, TaskProgress, UserData } from "@shared/userData";
 
+const DEBUG_RegulatedBusinessDynamicsLicenseSearch = false;
+
 const getLicenseTasksProgress = (licenseStatusResult: LicenseStatusResults): Record<string, TaskProgress> => {
   const licenseTasksProgress: Record<string, TaskProgress> = {};
   for (const licenseName of Object.keys(licenseStatusResult) as LicenseName[]) {
@@ -122,6 +124,14 @@ export const updateLicenseStatusFactory = (
           [NO_ADDRESS_MATCH_ERROR, NO_MATCH_ERROR, NO_MAIN_APPS_ERROR].includes(
             rgbLicenseStatusResults.reason
           );
+
+        if (DEBUG_RegulatedBusinessDynamicsLicenseSearch) {
+          console.log({
+            functionName: "updateLicenseStatusFactory",
+            webserviceLicenseStatusResults,
+            rgbLicenseStatusResults,
+          });
+        }
 
         if (webserviceHasError && rgbHasError) {
           if (webserviceHasInvalidMatch || rgbHasInvalidMatch) {
