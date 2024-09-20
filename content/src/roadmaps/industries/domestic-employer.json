@@ -12,7 +12,7 @@
     {
       "step": 1,
       "weight": 6,
-      "task": "register-for-ein",
+      "task": "register-for-ein-domestic-employer",
       "required": true
     },
     {
@@ -23,9 +23,9 @@
     }
   ],
   "name": "Domestic Employer",
-  "nonEssentialQuestionsIds": ["weights-measures"],
-  "industryOnboardingQuestions": {},
+  "nonEssentialQuestionsIds": [],
   "displayname": "domestic-employer",
+  "industryOnboardingQuestions": {},
   "isEnabled": true,
   "additionalSearchTerms": "employs a nanny, employs an au pair, employs a housekeeper, private household, household employer",
   "id": "domestic-employer",
