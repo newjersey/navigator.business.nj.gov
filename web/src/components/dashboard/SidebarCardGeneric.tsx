@@ -69,19 +69,17 @@ export const SidebarCardGeneric = (props: Props): ReactElement => {
           }`}
         >
           {props.card.preBodySpanButtonText && (
-            <div style={{ float: "left" }}>
-              <UnStyledButton
-                isTextBold
-                onClick={props.preBodyButtonOnClick}
-                dataTestid={`${props.card.id}-preBodyButtonText`}
-              >
-                <span className="text-white text-underline margin-right-05">
-                  {props.card.preBodySpanButtonText}
-                </span>
-              </UnStyledButton>
-            </div>
+            <UnStyledButton
+              isTextBold
+              onClick={props.preBodyButtonOnClick}
+              dataTestid={`${props.card.id}-preBodyButtonText`}
+            >
+              <span className="text-white text-underline margin-right-05">
+                {props.card.preBodySpanButtonText}
+              </span>
+            </UnStyledButton>
           )}
-          <Content className="text-white display-inline anchor-element-text-white-override">
+          <Content className="text-white display-inline anchor-element-text-white-override go-to-profile-display-inline-children-p">
             {props.card.contentMd}
           </Content>
           {props.ctaOnClick && props.card.ctaText && (
