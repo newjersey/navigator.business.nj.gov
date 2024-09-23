@@ -23,7 +23,7 @@
     "stepOneErrorBanner": "Complete the field below.",
     "modalHeader": "See Your Tax Due Dates",
     "stepOneBody": "To see your tax due dates, you'll first need to select your business structure.",
-    "failedUnknownMarkdown": "There was a problem with your verification process.Please try again later.",
+    "failedUnknownMarkdown": "There was a problem with your verification process. Please try again later.",
     "modalBusinessFieldMarkdown": "Enter your business name exactly as it appears on your `Business Registration Certificate|business-reg-certificate` or in your tax registration confirmation email.",
     "stepOneNextButton": "Next"
   }
