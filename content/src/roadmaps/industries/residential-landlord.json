@@ -44,11 +44,6 @@
     },
     {
       "step": 4,
-      "weight": 1,
-      "task": "search-licenses"
-    },
-    {
-      "step": 4,
       "weight": 200,
       "task": "residential-lease-agreement"
     }
