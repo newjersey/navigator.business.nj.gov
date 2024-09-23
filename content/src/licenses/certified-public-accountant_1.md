@@ -1,7 +1,7 @@
 ---
 previewType: renewal
 urlSlug: certified-public-accountant
-expirationEventDisplayName: Accountant License Renewal
+expirationEventDisplayName: Accountant License Expiration
 renewalEventDisplayName: Accountant License Renewal Deadline
 disclaimerText: You can renew your license 60 days before it expires and up to
   30 days after expiration. If you fail to renew your license at this point,
