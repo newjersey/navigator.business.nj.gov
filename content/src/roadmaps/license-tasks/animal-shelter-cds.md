@@ -1,12 +1,6 @@
 ---
-notesMd: >-
-  * h2 and h3 look the same. Spencer would like us to still use h3. Ideally we
-  want h2 and h3 to be visually differentiated. **Will need to update this once
-  the issue is resolved**
-
-  * 7.30: updated after Regina's review
-
-  * 8.7: ready to be published; will need an onboarding (essential) question added: "will you use sodium pentobarbital for animal euthanasia?"
+notesMd: 'will need an onboarding (essential) question added: "will you use
+  sodium pentobarbital for animal euthanasia?"'
 id: animal-shelter-cds
 filename: animal-shelter-cds
 displayname: animal-shelter-cds
