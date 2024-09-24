@@ -2,16 +2,19 @@
 notesMd: "Draft:
   https://docs.google.com/document/d/1iYheqxgwQKOocjMybAszFBFF2py2HgnRktPGa1Zpl\
   yY/edit"
-urlSlug: architecture
-renewalEventDisplayName: tbd
-expirationEventDisplayName: tbd
-licenseName: ""
 previewType: renewal
-issuingAgency: "Division of Consumer Affairs"
+licenseName: ""
+urlSlug: architecture
+expirationEventDisplayName: Arquitect License Expiration
+renewalEventDisplayName: Arquitect License Expiration Deadline
+disclaimerText: You can renew your license 60 days before it expires and up to
+  30 days after expiration. If you fail to renew your license at this point,
+  your license will expire, and you won't be able to provide your licensed
+  services.
 summaryDescriptionMd: You can renew your architecture license online.
+issuingAgency: Division of Consumer Affairs
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 callToActionText: Renew My Architect License
-disclaimerText: "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services."
 ---
 
 ### Renewal Requirements
