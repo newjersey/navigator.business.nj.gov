@@ -3,7 +3,7 @@ previewType: renewal
 licenseName: Accountancy-Firm Registration
 urlSlug: certified-public-accountant
 expirationEventDisplayName: Accounting Firm Registration Expiration
-renewalEventDisplayName: Accounting Firm Registration Expiration Deadline
+renewalEventDisplayName: Accounting Firm Registration Renewal Deadline
 disclaimerText: You can renew your license 60 days before it expires and up to
   30 days after expiration. If you fail to renew your license at this point,
   your license will expire, and you won't be able to provide your licensed
