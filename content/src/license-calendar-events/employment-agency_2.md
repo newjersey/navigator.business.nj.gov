@@ -1,19 +1,19 @@
 ---
-urlSlug: employment-agency
 previewType: renewal
-renewalEventDisplayName: tbd
-expirationEventDisplayName: tbd
 licenseName: ""
-summaryDescriptionMd: ""
+urlSlug: employment-agency
+expirationEventDisplayName: Temporary Help Service Firm Registration Expiration
+renewalEventDisplayName: Temporary Help Service Firm Registration Renewal Deadline
+disclaimerText: You can renew your license 60 days before it expires and up to
+  30 days after expiration. If you fail to renew your license at this point,
+  your license will expire, and you won't be able to provide your licensed
+  services.
+summaryDescriptionMd: Your temporary help service firm registration expires every year.
+issuingAgency: Division of Consumer Affairs
 callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-\
   Business-Online-Registration.aspx "
 callToActionText: Renew My Temporary Help Service Firm Registration
-issuingAgency: "Division of Consumer Affairs"
-disclaimerText: "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services."
 ---
-
-Your temporary help service firm registration expires every year.
-
 ## Application Requirements
 
 - `Surety bond|surety-bond` number and premium paid receipt
