@@ -1,3 +1,21 @@
+# [2024.29.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.28.0...v2024.29.0) (2024-09-24)
+
+
+### Bug Fixes
+
+* [[#187578669](https://github.com/newjersey/navigator.business.nj.gov/issues/187578669)] remove docker and build with image jobs ([dc02bab](https://github.com/newjersey/navigator.business.nj.gov/commit/dc02baba3d5f8f608eb7300e2597b1b284ea22f1))
+* **deps:** update dependency axios to v1.7.7 ([be036c5](https://github.com/newjersey/navigator.business.nj.gov/commit/be036c5d0871b27d430fac454faa03bc47a26dfe))
+* fix meta data in electrologist-office-license ([d990705](https://github.com/newjersey/navigator.business.nj.gov/commit/d990705b843ff97f289ae69fa86ff875c9363ff5))
+* redeploy as account instead of navigator ([810f70b](https://github.com/newjersey/navigator.business.nj.gov/commit/810f70b67be8ea9dd120842175275d0b77cf8273))
+
+
+### Features
+
+* [[#186316380](https://github.com/newjersey/navigator.business.nj.gov/issues/186316380)] correct refocus behavior for formation stepper and errors ([c778661](https://github.com/newjersey/navigator.business.nj.gov/commit/c778661251a043ec7125d6feeb58ed4003213b36))
+* [[#188079116](https://github.com/newjersey/navigator.business.nj.gov/issues/188079116)] add license status to license calendar events ([f13ae69](https://github.com/newjersey/navigator.business.nj.gov/commit/f13ae696cd637c1e96aeb9bf82d1afa66a8bc140))
+* [[#188283234](https://github.com/newjersey/navigator.business.nj.gov/issues/188283234)] Enable contextual info in non essential questions ([1e7d8b9](https://github.com/newjersey/navigator.business.nj.gov/commit/1e7d8b9d1ef648266947b8395de5a57c5b49e58c))
+* [[#188285486](https://github.com/newjersey/navigator.business.nj.gov/issues/188285486)] Add permanent-location-business-landlord add-on to residential-landlord industry ([24a550c](https://github.com/newjersey/navigator.business.nj.gov/commit/24a550c8ab3f8fadd61d9b0e1d8ba161bba39797))
+
 ## [2024.28.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.28.0...v2024.28.1) (2024-09-20)
 
 
