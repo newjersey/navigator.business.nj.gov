@@ -5,7 +5,7 @@ expirationEventDisplayName: Accountant License Expiration
 renewalEventDisplayName: Accountant License Renewal Deadline
 disclaimerText: You can renew your license 60 days before it expires and up to
   30 days after expiration. If you fail to renew your license at this point,
-  your license will be suspended and you won't be able to provide your licensed
+  your license will expire, and you won't be able to provide your licensed
   services.
 summaryDescriptionMd: xxx
 issuingAgency: Division of Consumer Affairs
