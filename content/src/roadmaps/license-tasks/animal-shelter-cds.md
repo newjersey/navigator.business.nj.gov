@@ -52,9 +52,9 @@ agencyId: nj-consumer-affairs
 * The name and title of everyone who will have access to the CDS
 * Security measures in place to prevent loss or theft of the CDS
 
-:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" }
 
-You cannot legally dispense or store sodium pentobarbital and may be subject to legal consequences if you do so.
+You cannot legally dispense or store sodium pentobarbital and may be subject to legal consequences if you do.
 
 :::
 
