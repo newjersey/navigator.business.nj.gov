@@ -1,15 +1,19 @@
 ---
-urlSlug: independent-artist
 previewType: renewal
-summaryDescriptionMd: You can renew your license 60 days before it expires and
-  up to 30 days after expiration. If you fail to renew your license at this
-  point, your license will be suspended and you won't be able to provide your
-  licensed services.
+urlSlug: independent-artist
+expirationEventDisplayName: Entertainment Agency Registration Expiration
+renewalEventDisplayName: Entertainment Agency Registration Renewal Deadline
+disclaimerText: You can renew your license 60 days before it expires and up to
+  30 days after expiration. If you fail to renew your license at this point,
+  your license will expire, and you won't be able to provide your licensed
+  services.
+summaryDescriptionMd: Your entertainment agency registration expires every year.
+issuingAgency: Division of Consumer Affairs
 callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-\
   Business-Online-Registration.aspx "
 callToActionText: Renew My Entertainment Agency Registration
 ---
-Your entertainment agency registration expires every year.
+
 
 ### Renewal Requirements
 
