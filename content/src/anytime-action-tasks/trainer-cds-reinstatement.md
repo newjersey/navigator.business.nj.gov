@@ -38,7 +38,7 @@ Your reinstatement application must be signed in front of and by a notary public
 
 :::callout{ showHeader="true" headerText="What if I don't reinstate my registration?" showIcon="false" calloutType="warning" }
 
-You cannot store or use any CDS for training purposes and may be subject to legal consequences if you do so.
+You cannot store or use any CDS for training purposes and may be subject to legal consequences if you do.
 
 :::
 
