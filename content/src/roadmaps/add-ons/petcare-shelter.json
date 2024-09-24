@@ -1,0 +1,11 @@
+{
+  "id": "petcare-shelter",
+  "displayname": "petcare-shelter",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 20,
+      "licenseTask": "animal-shelter-cds"
+    }
+  ]
+}
