@@ -2,13 +2,16 @@
 previewType: renewal
 licenseName: ""
 urlSlug: electrologist-office
-expirationEventDisplayName: Electrologist Office Premises License Renewal
+expirationEventDisplayName: Electrologist Office Premises License Expiration
 renewalEventDisplayName: Electrologist Office Premises License Renewal Deadline
-disclaimerText: "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services."
+disclaimerText: You can renew your license 60 days before it expires and up to
+  30 days after expiration. If you fail to renew your license at this point,
+  your license will expire, and you won't be able to provide your licensed
+  services.
 summaryDescriptionMd: "Your electrologist office premises license will expire every 2 years. "
+issuingAgency: Division of Consumer Affairs
 callToActionLink: https://www.njconsumeraffairs.gov/eac/Pages/default.aspx
 callToActionText: Renew My Electrologist Office Premises License
-issuingAgency: "Division of Consumer Affairs"
 ---
 
 Your electrologist office premises license will expire every 2 years.
