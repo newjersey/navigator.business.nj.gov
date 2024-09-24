@@ -1,4 +1,5 @@
 ---
+notesMd: "* Made edits from SME review, 9.24"
 licenseName: ""
 id: cemetery-sales
 filename: cemetery-sales
@@ -6,12 +7,12 @@ displayname: cemetery-sales
 urlSlug: cemetery-sales
 name: Apply for Your Cemetery Salesperson License
 webflowName: "Cemetery: Cemetery Salesperson License"
-summaryDescriptionMd: >
-  You need a cemetery salesperson license if your main job is selling burial
-  sites, mausoleum spaces, headstones, or any cemetery-related services. 
+summaryDescriptionMd: >-
+  You need a cemetery salesperson license if your main job is selling graves,
+  crypts, or niches.
 
 
-  If you manage the cemetery or staff, you don't need this license. You can sell burial sites and related services without it.
+  If you manage the cemetery, staff, or are on the Board of Trustees, you don't need this license. You can sell graves, crypts, or niches without it.
 industryId:
   - cemetery
 callToActionText: Apply for My Cemetery Salesperson License
@@ -44,17 +45,14 @@ webflowType: individual-license
 * Details of any current work managing funeral homes, if applicable
 * Details of any current work in mortuary science, if applicable
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
 
-You cannot sell burial sites or any cemetery-related services.
+You cannot sell graves, crypts, or niches.
 
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-
-
-* A temporary cemetery salesperson license, valid for 60 days, sent to the cemetery 
-* A permanent cemetery salesperson license, valid for 2 years, sent to the cemetery if you are eligible
+A cemetery salesperson license, sent to the cemetery.
 
 :::
