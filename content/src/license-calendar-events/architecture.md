@@ -6,7 +6,7 @@ previewType: renewal
 licenseName: ""
 urlSlug: architecture
 expirationEventDisplayName: Arquitect License Expiration
-renewalEventDisplayName: Arquitect License Expiration Deadline
+renewalEventDisplayName: Arquitect License Renewal Deadline
 disclaimerText: You can renew your license 60 days before it expires and up to
   30 days after expiration. If you fail to renew your license at this point,
   your license will expire, and you won't be able to provide your licensed
