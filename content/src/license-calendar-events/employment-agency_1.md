@@ -1,19 +1,20 @@
 ---
-urlSlug: employment-agency
 previewType: renewal
-renewalEventDisplayName: tbd
-expirationEventDisplayName: tbd
 licenseName: ""
-summaryDescriptionMd: ""
+urlSlug: employment-agency
+expirationEventDisplayName: Consulting Firm/Temporary Help Service Firm Expiration
+renewalEventDisplayName: Consulting Firm/Temporary Help Service Firm Renewal Deadline
+disclaimerText: You can renew your license 60 days before it expires and up to
+  30 days after expiration. If you fail to renew your license at this point,
+  your license will expire, and you won't be able to provide your licensed
+  services.
+summaryDescriptionMd: Your combined consulting firm (headhunter) and temporary
+  help service firm registrations expire annually.
+issuingAgency: Division of Consumer Affairs
 callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-\
   Business-Online-Registration.aspx "
 callToActionText: " Renew My Consulting Firm/Temporary Help Service Firm"
-issuingAgency: "Division of Consumer Affairs"
-disclaimerText: "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services."
 ---
-
-Your combined consulting firm (headhunter) and temporary help service firm registrations expire annually.
-
 ## Application Requirements
 
 - Criminal history of the applicant, company officers, directors, or principals, if applicable

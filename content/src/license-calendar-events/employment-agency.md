@@ -1,15 +1,18 @@
 ---
-urlSlug: employment-agency
 previewType: renewal
-renewalEventDisplayName: tbd
-expirationEventDisplayName: tbd
 licenseName: ""
-summaryDescriptionMd: "Your employment agency license and agent license expires every year."
+urlSlug: employment-agency
+expirationEventDisplayName: " Employment Agency License Expiration"
+renewalEventDisplayName: Employment Agency License Renewal Deadline
+disclaimerText: You can renew your license 60 days before it expires and up to
+  30 days after expiration. If you fail to renew your license at this point,
+  your license will expire, and you won't be able to provide your licensed
+  services.
+summaryDescriptionMd: Your employment agency license and agent license expires every year.
+issuingAgency: Division of Consumer Affairs
 callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-\
   Business-Online-Registration.aspx "
 callToActionText: Renew My Employment Agency and Agent
-issuingAgency: "Division of Consumer Affairs"
-disclaimerText: "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services."
 ---
 
 Your employment agency license and agent license expires every year.

@@ -1,6 +1,5 @@
 ---
 previewType: renewal
-licenseName: ""
 urlSlug: certified-public-accountant
 expirationEventDisplayName: Accountant License Expiration
 renewalEventDisplayName: Accountant License Renewal Deadline
@@ -8,7 +7,7 @@ disclaimerText: You can renew your license 60 days before it expires and up to
   30 days after expiration. If you fail to renew your license at this point,
   your license will expire, and you won't be able to provide your licensed
   services.
-summaryDescriptionMd: " "
+summaryDescriptionMd: xxx
 issuingAgency: Division of Consumer Affairs
 callToActionLink: https://newjersey.mylicense.com/eGov/Login
 callToActionText: Renew My Accountant License
@@ -32,6 +31,6 @@ Your accountant license will expire every two years.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-An updated copy of the renewed accountant license, valid for three years, which will be mailed to your mailing address on file.
+An updated copy of the renewed accountant license, valid for three years, which will be sent to your mailing address on file.
 
 :::

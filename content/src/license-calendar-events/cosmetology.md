@@ -1,15 +1,18 @@
 ---
-urlSlug: cosmetology
-renewalEventDisplayName: Cosmetology Shop Renewal Deadline
-expirationEventDisplayName: Cosmetology Shop Expiration
-licenseName: Cosmetology and Hairstyling-Shop
 previewType: renewal
+licenseName: Cosmetology and Hairstyling-Shop
+urlSlug: cosmetology
+expirationEventDisplayName: Cosmetology Shop License Expiration
+renewalEventDisplayName: Cosmetology Shop License Renewal Deadline
+disclaimerText: You can renew your license 60 days before it expires and up to
+  30 days after expiration. If you fail to renew your license at this point,
+  your license will expire, and you won't be able to provide your licensed
+  services.
 summaryDescriptionMd: Your cosmetology shop license will expire every two years
   on the even-numbered year.
+issuingAgency: Division of Consumer Affairs
 callToActionLink: https://www.njconsumeraffairs.gov/renewals/Pages/default.aspx
-callToActionText: Renew Shop Registration
-issuingAgency: "Division of Consumer Affairs"
-disclaimerText: "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services."
+callToActionText: Renew My Cosmetology Shop License
 ---
 
 Your cosmetology shop license will expire every two years on the even-numbered year.
