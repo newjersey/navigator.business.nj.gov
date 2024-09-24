@@ -16,11 +16,11 @@ summaryDescriptionMd: >-
   to train dogs in narcotics detection. Follow these steps to apply:
 
 
-  1. Email the NJ Drug Control Unit (DCU) at cds@dca.njoag.gov to request the Dog Trainer CDS Registration application.
+  1. Email the NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the Dog Trainer CDS Registration application.
 
   2. After your completed application has been emailed to the DCU, they will email you an invoice to pay the fee online.
 
-  3. Be sure to register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) to validate your CDS registration. Email a copy of your DEA registration to [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) within 60 days.
+  3. Be sure to register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) to validate your CDS registration. Email a copy of your DEA registration to the DCU within 60 days.
 industryId:
   - petcare
 agencyId: nj-consumer-affairs
@@ -48,14 +48,14 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 * The name and title of everyone who will have access to the CDS
 * Security measures in place to prevent loss or theft of the CDS
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
-
-A CDS registration certificate sent to your mailing address, valid for 1 year.
-
-:::
-
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" }
 
 You cannot store or use any CDS for training purposes and may be subject to legal consequences if you do.
+
+:::
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+
+A CDS registration certificate sent to your mailing address, valid for 1 year.
 
 :::
