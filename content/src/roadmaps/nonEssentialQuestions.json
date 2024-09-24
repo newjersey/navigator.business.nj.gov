@@ -64,6 +64,11 @@
       "questionText": "Will you be offering electrologist/electrolysis services?",
       "addOn": "cosmetology-electrologist-license",
       "id": "electrologist"
+    },
+    {
+      "id": "petcare-cds-shelter",
+      "questionText": "Will you store sodium pentobarbital for animal euthanasia?",
+      "addOn": "petcare-shelter"
     }
   ]
 }
