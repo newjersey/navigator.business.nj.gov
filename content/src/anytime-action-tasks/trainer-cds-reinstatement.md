@@ -1,6 +1,5 @@
 ---
-notesMd: "* As od 8.20, no decisions have yet been made on the callout boxes.
-  Per Regina, I will leave them as is for now."
+notesMd: ""
 filename: trainer-cds-reinstatement
 name: Reinstate Your Dog Trainer Controlled Dangerous Substances Registration
 industryIds:
