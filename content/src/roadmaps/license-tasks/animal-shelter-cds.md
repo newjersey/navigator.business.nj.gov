@@ -19,7 +19,7 @@ summaryDescriptionMd: >-
   apply:
 
 
-  1. Email the NJ Drug Control Unit (DCU) at cds@dca.njoag.gov to request the Animal Shelter CDS Registration application.
+  1. Email the NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the Animal Shelter CDS Registration application.
 
   2. After your completed application has been emailed to the DCU, they will email you an invoice to pay the fee online.
 
