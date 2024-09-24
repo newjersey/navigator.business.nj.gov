@@ -54,8 +54,8 @@ A CDS registration certificate sent to your mailing address, valid for 1 year.
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" }
 
-You cannot store or use any CDS for training purposes and may be subject to legal consequences if you do so.
+You cannot store or use any CDS for training purposes and may be subject to legal consequences if you do.
 
 :::
