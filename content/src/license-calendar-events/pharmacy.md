@@ -11,7 +11,7 @@ disclaimerText: You can renew your license 60 days before it expires and up to
 summaryDescriptionMd: Your pharmacy permit will expire every year.
 issuingAgency: Division of Consumer Affairs
 callToActionLink: https://www.njconsumeraffairs.gov/renewals/Pages/default.aspx
-callToActionText: Renew My Permit
+callToActionText: Renew My Pharmacy Permit
 ---
 ## Application Requirements
 
