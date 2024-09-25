@@ -1,20 +1,24 @@
 ---
-id: "cemetery-sales"
-webflowId: "66f3197f52d588875cacb919"
-urlSlug: "cemetery-sales"
-name: "Apply for Your Cemetery Salesperson License"
+id: cemetery-sales
+filename: cemetery-sales
+displayname: cemetery-sales
+urlSlug: cemetery-sales
+name: Apply for Your Cemetery Salesperson License
 webflowName: "Cemetery: Cemetery Salesperson License"
-filename: "cemetery-sales"
-callToActionLink: "https://newjersey.mylicense.com/eGov/Login.aspx"
-callToActionText: "Apply for My Cemetery Salesperson License"
-agencyId: "nj-consumer-affairs"
-agencyAdditionalContext: "New Jersey Cemetery Board"
-industryId: "cemetery"
-webflowType: "individual-license"
-licenseCertificationClassification: "undefined"
-summaryDescriptionMd: "You need a cemetery salesperson license if your main job is selling graves, crypts, or niches.
+summaryDescriptionMd: >-
+  You need a cemetery salesperson license if your main job is selling graves,
+  crypts, or niches.
 
-If you manage the cemetery, staff, or are on the Board of Trustees, you don't need this license. You can sell graves, crypts, or niches without it."
+
+  If you manage the cemetery, staff, or are on the Board of Trustees, you don't need this license. You can sell graves, crypts, or niches without it.
+industryId: cemetery
+callToActionText: Apply for My Cemetery Salesperson License
+callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: New Jersey Cemetery Board
+webflowType: individual-license
+webflowId: 66f3197f52d588875cacb919
+licenseCertificationClassification: undefined
 ---
 
 ## Application Requirements
