@@ -52,7 +52,7 @@ describe("Formation - BillingStep", () => {
   });
 
   const subtotalLabel = Config.formation.fields.paymentType.costSubtotalLabel;
-  const totalLabel = Config.formation.fields.paymentType.costTotalLabel;
+  const totalLabel = "Total";
 
   const getPageHelper = async (
     initialProfileData: Partial<ProfileData>,

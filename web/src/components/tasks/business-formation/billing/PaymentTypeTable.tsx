@@ -161,12 +161,11 @@ export const PaymentTypeTable = (): ReactElement => {
           </tbody>
           <tfoot>
             <tr>
-              <td colSpan={1}>
+              <td colSpan={2}>
                 <div className="text-align-left">
-                  <span className="text-bold r">{Config.formation.fields.paymentType.costTotalLabel}</span>{" "}
+                  <span className="text-bold r">{Config.formation.fields.paymentType.costTotalLabel}</span>
                 </div>
               </td>
-              <td colSpan={1}></td>
               <td colSpan={1}>
                 <div className="text-align-right text-bold" aria-label={"Total"}>
                   {getDollarValue(totalCost)}
