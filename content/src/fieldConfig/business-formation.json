@@ -79,9 +79,10 @@
         "creditCardLabel": "Pay with Credit Card",
         "achLabel": "Pay with E-Check",
         "reviewStepServicesHeader": "Services and Payment",
+        "costTotalPaymentDisclaimer": "* Fees are subject to change. Your total amount may vary.",
         "costColumnLabel": "Cost",
         "label": "Payment Type",
-        "costTotalLabel": "Total"
+        "costTotalLabel": "* Total"
       },
       "officialFormationDocument": {
         "label": "Official Formation Document",
