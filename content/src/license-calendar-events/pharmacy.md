@@ -1,20 +1,18 @@
 ---
-urlSlug: pharmacy
-renewalEventDisplayName: Pharmacy Renewal Deadline
-expirationEventDisplayName: Pharmacy License Expiration
-licenseName: Pharmacy-Pharmacy
 previewType: renewal
+licenseName: Pharmacy-Pharmacy
+urlSlug: pharmacy
+expirationEventDisplayName: Pharmacy License Expiration
+renewalEventDisplayName: Pharmacy License Renewal Deadline
+disclaimerText: You can renew your license 60 days before it expires and up to
+  30 days after expiration. If you fail to renew your license at this point,
+  your license will expire, and you won't be able to provide your licensed
+  services.
 summaryDescriptionMd: Your pharmacy permit will expire every year.
+issuingAgency: Division of Consumer Affairs
 callToActionLink: https://www.njconsumeraffairs.gov/renewals/Pages/default.aspx
-callToActionText: Renew My Permit
-issuingAgency: "Division of Consumer Affairs"
-disclaimerText: "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services."
+callToActionText: Renew My Pharmacy Permit
 ---
-
-Your pharmacy permit will expire every year.
-
----
-
 ## Application Requirements
 
 - Business name
