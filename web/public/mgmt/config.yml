@@ -658,6 +658,11 @@ collections:
                       - { label: "Column - service", name: "serviceColumnLabel", widget: "string" }
                       - { label: "Cost subtotal label", name: "costSubtotalLabel", widget: "string" }
                       - { label: "Cost total label", name: "costTotalLabel", widget: "string" }
+                      - {
+                          label: "Cost total payment disclaimer",
+                          name: "costTotalPaymentDisclaimer",
+                          widget: "string",
+                        }
                       - label: Payment Costs
                         name: paymentCosts
                         collapsed: false

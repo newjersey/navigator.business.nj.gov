@@ -72,6 +72,9 @@ export const BillingStep = (): ReactElement => {
       <Content>{Config.formation.sections.servicesDescription}</Content>
       <FormationChooseDocuments />
       <PaymentTypeTable />
+      <div className="padding-top-2">
+        <em className="padding-left-2">{Config.formation.fields.paymentType.costTotalPaymentDisclaimer}</em>
+      </div>
       <hr className="margin-y-3" />
       <FormationChooseNotifications />
       <div className="margin-y-1">
