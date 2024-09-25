@@ -21,17 +21,22 @@ export const ModalZeroButton = (props: Props): ReactElement => {
       maxWidth="sm"
       open={props.isOpen}
       onClose={props.close}
-      aria-labelledby="modal"
+      aria-labelledby="dialog-modal"
       disableEnforceFocus={contextualInfo.isVisible}
     >
-      <DialogTitle id="modal" className="display-flex flex-row flex-align-center margin-top-1 break-word">
-        <Heading level={0} styleVariant="h2" className="padding-x-1 margin-0-override">
-          {props.title}
-        </Heading>
+      <div className="display-flex margin-top-1">
+        <DialogTitle
+          id="dialog-modal"
+          className="display-flex flex-row flex-align-center break-word flex-fill"
+        >
+          <Heading level={0} styleVariant="h2" className="padding-x-1 margin-0-override">
+            {props.title}
+          </Heading>
+        </DialogTitle>
         {!props.uncloseable && (
           <IconButton
             aria-label="close"
-            className="margin-left-auto"
+            className="margin-left-auto margin-3"
             onClick={props.close}
             sx={{
               color: "#757575",
@@ -40,7 +45,7 @@ export const ModalZeroButton = (props: Props): ReactElement => {
             <Icon className="usa-icon--size-4">close</Icon>
           </IconButton>
         )}
-      </DialogTitle>
+      </div>
       <DialogContent sx={{ padding: 0 }} dividers>
         <div className="padding-x-4 margin-bottom-4 margin-top-2" data-testid="modal-body">
           {props.children}
