@@ -1,18 +1,20 @@
 ---
-urlSlug: massage-therapy
-renewalEventDisplayName: Massage Therapy Business License Renewal Deadline
-expirationEventDisplayName: Massage Therapy Business License Expiration
-licenseName: Massage and Bodywork Therapy-Massage and Bodywork Employer
 previewType: expiration
-summaryDescriptionMd: ""
+licenseName: Massage and Bodywork Therapy-Massage and Bodywork Employer
+urlSlug: massage-therapy
+expirationEventDisplayName: Massage Therapy Business License Expiration
+renewalEventDisplayName: Massage Therapy Business License Renewal Deadline
+disclaimerText: You can renew your license 60 days before it expires and up to
+  30 days after expiration. If you fail to renew your license at this point,
+  your license will expire, and you won't be able to provide your licensed
+  services.
+summaryDescriptionMd: |-
+  
+  Your massage business license will expire every two years.
+issuingAgency: Division of Consumer Affairs
 callToActionLink: https://newjersey.mylicense.com/eGov/PersonSearchResults.aspx
 callToActionText: Renew My Massage Therapy License
-issuingAgency: "Division of Consumer Affairs"
-disclaimerText: "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services."
 ---
-
-Your massage business license will expire every two years.
-
 :::infoAlert
 
 You will only see the option to renew online 60 days prior to your expiration date.
