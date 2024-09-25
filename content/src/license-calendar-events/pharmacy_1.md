@@ -4,13 +4,17 @@ notesMd: >-
 
   * I can't save without a summary description but I think that content is technically static so I copied/pasted
 previewType: renewal
-urlSlug: pharmacy
 licenseName: ""
-expirationEventDisplayName: Your Pharmacy's Controlled Dangerous Substances Registration is Expired
-renewalEventDisplayName: Renew Your Pharmacy’s Controlled Dangerous Substances Registration
-issuingAgency: "Division of Consumer Affairs"
-disclaimerText: "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services."
-summaryDescriptionMd: The New Jersey Drug Control Unit (DCU) will send a renewal notice to your mailing address 75 days before your registration expires.
+urlSlug: pharmacy
+expirationEventDisplayName: Pharmacy's Controlled Dangerous Substances Registration Expiration
+renewalEventDisplayName: Pharmacy's Controlled Dangerous Substances Registration Renewal Deadline
+disclaimerText: You can renew your license 60 days before it expires and up to
+  30 days after expiration. If you fail to renew your license at this point,
+  your license will expire, and you won't be able to provide your licensed
+  services.
+summaryDescriptionMd: The New Jersey Drug Control Unit (DCU) will send a renewal
+  notice to your mailing address 75 days before your registration expires.
+issuingAgency: Division of Consumer Affairs
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 callToActionText: Renew My Pharmacy’s CDS Registration
 ---
