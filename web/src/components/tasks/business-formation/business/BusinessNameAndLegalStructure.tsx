@@ -83,7 +83,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
     <>
       <div className="flex space-between margin-bottom-2 flex-align-center">
         <div className="maxw-mobile-lg ">
-          <Heading level={2} styleVariant="h3">
+          <Heading level={isReviewStep ? 3 : 2} styleVariant={"h3"}>
             {Config.formation.sections.businessNameAndStructureHeader}
           </Heading>
         </div>

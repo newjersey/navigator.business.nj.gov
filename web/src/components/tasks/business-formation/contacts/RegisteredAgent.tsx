@@ -129,7 +129,9 @@ export const RegisteredAgent = (): ReactElement => {
 
   return (
     <>
-      <Heading level={3}>{Config.formation.registeredAgent.label}</Heading>
+      <Heading level={2} styleVariant={"h3"}>
+        {Config.formation.registeredAgent.label}
+      </Heading>
       <Content>{Config.formation.registeredAgent.sectionDescription}</Content>
       <div id="registeredAgent">
         <FormControl fullWidth>
