@@ -44,4 +44,3 @@ export type LicenseApplicationIdResponse = {
 
 export const ACTIVE_STATECODE = 0;
 export const MAIN_APP_END_DIGITS = "00";
-export const DUPLICATE_LICENSE_TYPE_ERROR = "DUPLICATE_LICENSE_TYPE_ERROR";
