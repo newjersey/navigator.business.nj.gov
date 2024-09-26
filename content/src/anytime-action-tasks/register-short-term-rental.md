@@ -19,4 +19,11 @@ summaryDescriptionMd: >
 issuingAgency: ""
 ---
 ## How to Apply
+
 Contact your municipal or town clerk to see if you need to register and how to do so. Each town has its own application process.
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+
+A registered short-term rental.
+
+:::
