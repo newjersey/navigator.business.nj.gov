@@ -194,7 +194,8 @@
     "agri",
     "electrology",
     "IBEC",
-    "incentivizing"
+    "incentivizing",
+    "CHRI"
   ],
   "ignorePaths": [
     "node_modules/**",
