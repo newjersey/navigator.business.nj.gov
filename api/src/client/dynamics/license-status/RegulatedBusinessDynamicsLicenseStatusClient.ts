@@ -19,7 +19,7 @@ interface RgbApiConfiguration {
   rgbChecklistItemsClient: ChecklistItemsForAllApplicationsClient;
 }
 
-const DEBUG_RegulatedBusinessDynamicsLicenseSearch = false;
+const DEBUG_RegulatedBusinessDynamicsLicenseSearch = false; // this variable exists in updateLicenseStatusFactory; enable both for debugging
 
 export const RegulatedBusinessDynamicsLicenseStatusClient = (
   rgbApiConfiguration: RgbApiConfiguration

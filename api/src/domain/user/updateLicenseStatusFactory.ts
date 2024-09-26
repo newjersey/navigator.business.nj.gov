@@ -19,7 +19,7 @@ import {
 import { modifyCurrentBusiness } from "@shared/test";
 import { Business, TaskProgress, UserData } from "@shared/userData";
 
-const DEBUG_RegulatedBusinessDynamicsLicenseSearch = false;
+const DEBUG_RegulatedBusinessDynamicsLicenseSearch = false; // this variable exists in RegulatedBusinessDynamicsLicenseStatusClient; enable both for debugging
 
 const getLicenseTasksProgress = (licenseStatusResult: LicenseStatusResults): Record<string, TaskProgress> => {
   const licenseTasksProgress: Record<string, TaskProgress> = {};
