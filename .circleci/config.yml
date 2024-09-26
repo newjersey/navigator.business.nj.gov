@@ -1215,7 +1215,7 @@ workflows:
   scheduled-daily-tests-content-repo:
     triggers:
       - schedule:
-          cron: "00 13 * * 1-5"
+          cron: "40 17 * * 1-5"
           filters:
             branches:
               only:
