@@ -559,7 +559,7 @@ jobs:
           command: |
             export GIT_MERGE_AUTOEDIT=no
             gh auth setup-git
-            git config --global user.email "innovation-admin@nj.gov"
+            git config --global user.email "business-engineering@innovation.nj.gov"
             git config --global user.name  "NJ Innovation CI"
             git checkout content-repo
             git merge origin/main
