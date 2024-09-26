@@ -312,7 +312,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
         </SnackbarAlert>
       )}
       <div className="margin-bottom-3 members-table" data-testid={`addresses-${props.fieldName}`}>
-        <Heading level={3} style={{ display: "inline" }}>
+        <Heading level={2} styleVariant={"h3"} style={{ display: "inline" }}>
           {props.displayContent.header}
         </Heading>
         {props.displayContent.subheader && (

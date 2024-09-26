@@ -63,7 +63,9 @@ export const BusinessNameStep = (): ReactElement => {
   return (
     <div data-testid="business-name-step">
       <form onSubmit={doSearch} className="usa-prose grid-container padding-0">
-        <Heading level={3}>{Config.formation.fields.businessName.header}</Heading>
+        <Heading level={2} styleVariant={"h3"}>
+          {Config.formation.fields.businessName.header}
+        </Heading>
         <Content>{Config.formation.fields.businessName.description}</Content>
         <WithErrorBar hasError={hasError} type="DESKTOP-ONLY">
           <div className="text-bold margin-top-1">{Config.formation.fields.businessName.label}</div>
