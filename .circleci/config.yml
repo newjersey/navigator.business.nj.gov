@@ -81,7 +81,6 @@ commands:
       - run:
           name: Run Dependency Check
           command: yarn dependency-check
-
   perform-integration-tests:
     parameters:
       enable-dashboard:
@@ -1216,7 +1215,7 @@ workflows:
   scheduled-daily-tests-content-repo:
     triggers:
       - schedule:
-          cron: "30 8 * * 1-5"
+          cron: "00 13 * * 1-5"
           filters:
             branches:
               only:
@@ -1237,26 +1236,51 @@ workflows:
             - build
       - integration-tests:
           name: Integration Tests - Group 1
+          enable-dashboard: true
           suite: group1
+          filters:
+            branches:
+              only:
+                - content-repo
           requires:
             - build
       - integration-tests:
           name: Integration Tests - Group 2
+          enable-dashboard: true
           suite: group2
+          filters:
+            branches:
+              only:
+                - content-repo
           requires:
             - build
       - integration-tests:
           name: Integration Tests - Group 3
+          enable-dashboard: true
           suite: group3
+          filters:
+            branches:
+              only:
+                - content-repo
           requires:
             - build
       - integration-tests:
           name: Integration Tests - Group 4
+          enable-dashboard: true
           suite: group4
+          filters:
+            branches:
+              only:
+                - content-repo
           requires:
             - build
       - integration-tests:
           name: Integration Tests - Group 5
+          enable-dashboard: true
           suite: group5
+          filters:
+            branches:
+              only:
+                - content-repo
           requires:
             - build
