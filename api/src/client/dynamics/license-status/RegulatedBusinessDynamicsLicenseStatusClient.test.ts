@@ -4,7 +4,6 @@ import {
   BusinessAddressesClient,
   BusinessIdsAndNamesClient,
   ChecklistItemsForAllApplicationsClient,
-  DUPLICATE_LICENSE_TYPE_ERROR,
   LicenseApplicationIdsForAllBusinessIdsClient,
 } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
 import { AccessTokenClient } from "@client/dynamics/types";
@@ -312,59 +311,6 @@ describe("RegulatedBusinessDynamicsLicenseStatusClient", () => {
         rgbChecklistItemsClient: stubChecklistItemsClient,
       });
       await expect(client(nameAndAddress)).rejects.toEqual(500);
-    });
-
-    it("throws error when formatDynamicsApplications throws DUPLICATE_LICENSE_TYPE_ERROR error", async () => {
-      const address = generateLicenseSearchAddress({
-        addressLine1: nameAndAddress.addressLine1,
-        zipCode: nameAndAddress.zipCode,
-      });
-
-      const businessIdAndLicenseSearchNameAndAddresses = [
-        {
-          businessId: "businessId1",
-          name: "Business1",
-          addresses: [address],
-        },
-        {
-          businessId: "businessId2",
-          name: "Business2",
-          addresses: [generateLicenseSearchAddress({})],
-        },
-      ];
-
-      const professionNameAndLicenseType1 = "some profession name1";
-      const expirationdate = getCurrentDateISOString();
-
-      const licenseStatusChecklistResult = [
-        generateLicenseStatusChecklistResult({
-          professionNameAndLicenseType: professionNameAndLicenseType1,
-          licenseStatus: "ACTIVE",
-          expirationDateISO: expirationdate,
-        }),
-        generateLicenseStatusChecklistResult({
-          professionNameAndLicenseType: professionNameAndLicenseType1,
-          licenseStatus: "ACTIVE",
-          expirationDateISO: expirationdate,
-        }),
-      ];
-
-      stubBusinessAddressesClient.getBusinessAddressesForAllBusinessIds.mockResolvedValue(
-        businessIdAndLicenseSearchNameAndAddresses
-      );
-      stubChecklistItemsClient.getChecklistItemsForAllApplications.mockResolvedValue(
-        licenseStatusChecklistResult
-      );
-
-      client = RegulatedBusinessDynamicsLicenseStatusClient({
-        dynamicsAccessTokenClient: stubAccessTokenClient,
-        rgbBusinessIdsAndNamesClient: stubBusinessIdsAndNamesClient,
-        rgbBusinessAddressesClient: stubBusinessAddressesClient,
-        rgbLicenseApplicationIdsClient: stubLicenseApplicationIdsClient,
-        rgbChecklistItemsClient: stubChecklistItemsClient,
-      });
-
-      await expect(client(nameAndAddress)).rejects.toThrow(DUPLICATE_LICENSE_TYPE_ERROR);
     });
   });
 });

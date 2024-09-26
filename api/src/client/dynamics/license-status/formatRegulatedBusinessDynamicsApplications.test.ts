@@ -1,5 +1,4 @@
 import { formatRegulatedBusinessDynamicsApplications } from "@client/dynamics/license-status/formatRegulatedBusinessDynamicsApplications";
-import { DUPLICATE_LICENSE_TYPE_ERROR } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
 import { generateLicenseStatusChecklistResult } from "@test/factories";
 
 describe("formatRegulatedBusinessDynamicsApplications", () => {
@@ -21,16 +20,15 @@ describe("formatRegulatedBusinessDynamicsApplications", () => {
     });
   });
 
-  it("throws DUPLICATE_LICENSE_TYPE_ERROR error when there is a duplicate professionNameAndLicenseType", () => {
-    const checklistResult1 = generateLicenseStatusChecklistResult({
-      professionNameAndLicenseType: "duplicate profession name and license type",
-    });
-    const checklistResult2 = generateLicenseStatusChecklistResult({
-      professionNameAndLicenseType: "duplicate profession name and license type",
-    });
+  it("returns one license when duplicate checklist results are provided to the fn", () => {
+    const checklistResult1 = generateLicenseStatusChecklistResult({});
 
-    expect(() => formatRegulatedBusinessDynamicsApplications([checklistResult1, checklistResult2])).toThrow(
-      DUPLICATE_LICENSE_TYPE_ERROR
-    );
+    expect(formatRegulatedBusinessDynamicsApplications([checklistResult1, checklistResult1])).toEqual({
+      [checklistResult1.professionNameAndLicenseType]: {
+        licenseStatus: checklistResult1.licenseStatus,
+        expirationDateISO: checklistResult1.expirationDateISO,
+        checklistItems: checklistResult1.checklistItems,
+      },
+    });
   });
 });
