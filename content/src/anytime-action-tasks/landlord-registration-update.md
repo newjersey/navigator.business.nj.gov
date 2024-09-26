@@ -34,3 +34,9 @@ summaryDescriptionMd: >-
 Contact your municipal or town clerk. Each town has its own application form and process. 
 
 Also, some towns require you to submit a new landlord registration each year, so it’s best to check with the clerk.
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+
+An updated Certificate of Registration.
+
+:::
