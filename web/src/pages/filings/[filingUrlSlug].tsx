@@ -15,9 +15,9 @@ import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { FilingUrlSlugParam, loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "@/lib/static/loadFilings";
 import { Filing, TaxFilingMethod } from "@/lib/types/types";
 import {
-  TaxFilingCalendarEvent,
   defaultDateFormat,
   parseDateWithFormat,
+  TaxFilingCalendarEvent,
 } from "@businessnjgovnavigator/shared";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
@@ -43,7 +43,7 @@ export const FilingElement = (props: {
 }): ReactElement => {
   return (
     <>
-      <div className="minh-38">
+      <div className="min-height-38rem">
         <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 radius-top-lg">
           <div>
             <div className="padding-y-4 margin-x-4 margin-bottom-2">

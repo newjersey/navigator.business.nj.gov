@@ -35,7 +35,7 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
   }
 
   return (
-    <div className="minh-38">
+    <div className="min-height-38rem">
       <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 radius-top-lg">
         <div className="padding-top-4 padding-bottom-4 margin-x-4">
           <h1>
