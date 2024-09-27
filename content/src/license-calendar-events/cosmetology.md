@@ -14,9 +14,6 @@ issuingAgency: Division of Consumer Affairs
 callToActionLink: https://www.njconsumeraffairs.gov/renewals/Pages/default.aspx
 callToActionText: Renew My Cosmetology Shop License
 ---
-
-Your cosmetology shop license will expire every two years on the even-numbered year.
-
 ## Application Requirements
 
 - Business name
