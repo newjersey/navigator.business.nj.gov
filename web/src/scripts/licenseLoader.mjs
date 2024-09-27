@@ -92,24 +92,25 @@ export const loadNavigatorLicense = (fileName) => {
 export const writeMarkdownString = (license) => {
   return (
     `---\n` +
-    `id: "${license.id}"\n` +
-    `webflowId: "${license.webflowId}"\n` +
-    `urlSlug: "${license.urlSlug}"\n` +
-    `name: "${license.name}"\n` +
-    (license.webflowName ? `webflowName: "${license.webflowName}"\n` : "") +
-    (license.filename ? `filename: "${license.filename}"\n` : "") +
-    (license.callToActionLink ? `callToActionLink: "${license.callToActionLink}"\n` : "") +
-    (license.callToActionText ? `callToActionText: "${license.callToActionText}"\n` : "") +
-    (license.agencyId ? `agencyId: "${license.agencyId}"\n` : "") +
-    (license.agencyAdditionalContext
-      ? `agencyAdditionalContext: "${license.agencyAdditionalContext}"\n`
-      : "") +
-    (license.divisionPhone ? `divisionPhone: "${license.divisionPhone}"\n` : "") +
-    (license.industryId ? `industryId: "${license.industryId}"\n` : "") +
-    (license.webflowType ? `webflowType: "${license.webflowType}"\n` : "") +
-    `licenseCertificationClassification: "${license.licenseCertificationClassification}"\n` +
-    (license.summaryDescriptionMd ? `summaryDescriptionMd: "${license.summaryDescriptionMd}"\n` : "") +
-    `---\n` +
+    `id: ${license.id}\n` +
+    `webflowId: ${license.webflowId}\n` +
+    `urlSlug: ${license.urlSlug}\n` +
+    `name: ${license.name}\n` +
+    `displayname: ${license.displayname}\n${
+      license.webflowName ? `webflowName: ${license.webflowName}\n` : ""
+    }${license.filename ? `filename: ${license.filename}\n` : ""}${
+      license.callToActionLink ? `callToActionLink: ${license.callToActionLink}\n` : ""
+    }${license.callToActionText ? `callToActionText: ${license.callToActionText}\n` : ""}${
+      license.agencyId ? `agencyId: ${license.agencyId}\n` : ""
+    }${
+      license.agencyAdditionalContext ? `agencyAdditionalContext: ${license.agencyAdditionalContext}\n` : ""
+    }${license.divisionPhone ? `divisionPhone: ${license.divisionPhone}\n` : ""}${
+      license.industryId ? `industryId: ${license.industryId}\n` : ""
+    }${
+      license.webflowType ? `webflowType: ${license.webflowType}\n` : ""
+    }licenseCertificationClassification: ${license.licenseCertificationClassification}\n${
+      license.summaryDescriptionMd ? `summaryDescriptionMd: "${license.summaryDescriptionMd}"\n` : ""
+    }---\n` +
     `${license.contentMd}`
   );
 };
