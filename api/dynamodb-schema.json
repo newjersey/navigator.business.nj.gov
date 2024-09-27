@@ -1,41 +1,142 @@
 {
-  "AttributeDefinitions": [
+  "Tables": [
     {
-      "AttributeName": "userId",
-      "AttributeType": "S"
-    },
-    {
-      "AttributeName": "email",
-      "AttributeType": "S"
-    }
-  ],
-  "KeySchema": [
-    {
-      "AttributeName": "userId",
-      "KeyType": "HASH"
-    }
-  ],
-  "GlobalSecondaryIndexes": [
-    {
-      "IndexName": "EmailIndex",
-      "KeySchema": [
+      "TableName": "users-table-dev",
+      "AttributeDefinitions": [
+        {
+          "AttributeName": "userId",
+          "AttributeType": "S"
+        },
         {
           "AttributeName": "email",
+          "AttributeType": "S"
+        }
+      ],
+      "KeySchema": [
+        {
+          "AttributeName": "userId",
           "KeyType": "HASH"
         }
       ],
-      "Projection": {
-        "ProjectionType": "ALL"
-      },
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "EmailIndex",
+          "KeySchema": [
+            {
+              "AttributeName": "email",
+              "KeyType": "HASH"
+            }
+          ],
+          "Projection": {
+            "ProjectionType": "ALL"
+          },
+          "ProvisionedThroughput": {
+            "ReadCapacityUnits": 1,
+            "WriteCapacityUnits": 1
+          }
+        }
+      ],
       "ProvisionedThroughput": {
         "ReadCapacityUnits": 1,
         "WriteCapacityUnits": 1
       }
+    },
+    {
+      "TableName": "businesses-table-dev",
+      "AttributeDefinitions": [
+        {
+          "AttributeName": "businessId",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "businessName",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "naicsCode",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "industry",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "encryptedTaxID",
+          "AttributeType": "S"
+        }
+      ],
+      "KeySchema": [
+        {
+          "AttributeName": "businessId",
+          "KeyType": "HASH"
+        }
+      ],
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "BusinessName",
+          "KeySchema": [
+            {
+              "AttributeName": "businessName",
+              "KeyType": "HASH"
+            }
+          ],
+          "Projection": {
+            "ProjectionType": "ALL"
+          },
+          "ProvisionedThroughput": {
+            "ReadCapacityUnits": 25,
+            "WriteCapacityUnits": 25
+          }
+        },
+        {
+          "IndexName": "NaicsCode",
+          "KeySchema": [
+            {
+              "AttributeName": "naicsCode",
+              "KeyType": "HASH"
+            }
+          ],
+          "Projection": {
+            "ProjectionType": "ALL"
+          },
+          "ProvisionedThroughput": {
+            "ReadCapacityUnits": 25,
+            "WriteCapacityUnits": 25
+          }
+        },
+        {
+          "IndexName": "Industry",
+          "KeySchema": [
+            {
+              "AttributeName": "industry",
+              "KeyType": "HASH"
+            }
+          ],
+          "Projection": {
+            "ProjectionType": "ALL"
+          },
+          "ProvisionedThroughput": {
+            "ReadCapacityUnits": 25,
+            "WriteCapacityUnits": 25
+          }
+        },
+        {
+          "IndexName": "EncryptedTaxId",
+          "KeySchema": [
+            {
+              "AttributeName": "encryptedTaxId",
+              "KeyType": "HASH"
+            }
+          ],
+          "Projection": {
+            "ProjectionType": "ALL"
+          },
+          "ProvisionedThroughput": {
+            "ReadCapacityUnits": 25,
+            "WriteCapacityUnits": 25
+          }
+        }
+      ]
     }
-  ],
-  "ProvisionedThroughput": {
-    "ReadCapacityUnits": 1,
-    "WriteCapacityUnits": 1
-  },
-  "TableName": "users-table-dev"
+  ]
 }
