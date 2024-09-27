@@ -120,7 +120,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
   };
 
   return (
-    <>
+    <div className="flex flex-column space-between minh-2606">
       <div className="margin-bottom-3">
         {!displayNoPriorityType && (
           <>
@@ -221,6 +221,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
           </>
         )}
       </div>
+
       <CtaContainer>
         <ActionBarLayout>
           <div className="margin-top-2 mobile-lg:margin-top-0">
@@ -231,6 +232,6 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
           {renderCTAButtons()}
         </ActionBarLayout>
       </CtaContainer>
-    </>
+    </div>
   );
 };
