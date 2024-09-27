@@ -189,7 +189,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   if (!isValidLegalStructure && business?.profileData.businessPersona !== "FOREIGN") {
     return (
-      <div className="flex flex-column space-between minh-38">
+      <div className="flex flex-column space-between min-height-38rem">
         <div>
           <TaskHeader task={props.task} />
           <UnlockedBy task={props.task} />
@@ -214,7 +214,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   if (errorFetchingFilings) {
     return (
-      <div className="flex flex-column minh-38">
+      <div className="flex flex-column min-height-38rem">
         <TaskHeader task={props.task} />
         <FormationInterimSuccessPage taskUrlSlug={props.task.urlSlug} setStepIndex={setStepIndex} />
       </div>
@@ -223,7 +223,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   if (isLoadingGetFiling) {
     return (
-      <div className="flex flex-column minh-38">
+      <div className="flex flex-column min-height-38rem">
         <TaskHeader task={props.task} />
         <PageCircularIndicator />
       </div>
@@ -232,7 +232,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   if (business?.formationData.getFilingResponse?.success) {
     return (
-      <div className="flex flex-column space-between minh-38">
+      <div className="flex flex-column space-between min-height-38rem">
         <TaskHeader task={props.task} />
         <FormationSuccessPage business={business} />
       </div>
@@ -271,7 +271,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         setForeignGoodStandingFile,
       }}
     >
-      <div className="flex flex-column minh-38" data-testid="formation-form">
+      <div className="flex flex-column min-height-38rem" data-testid="formation-form">
         <>
           <div>
             <TaskHeader task={props.task} />

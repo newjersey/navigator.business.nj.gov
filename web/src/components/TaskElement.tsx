@@ -57,7 +57,7 @@ export const TaskElement = (props: Props): ReactElement => {
   };
 
   return (
-    <div id="taskElement" className="flex flex-column space-between minh-38">
+    <div id="taskElement" className="flex flex-column space-between min-height-38rem">
       <div>
         <TaskHeader task={props.task} />
         {props.children}

@@ -34,7 +34,7 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
 
   return (
     <>
-      <div className="minh-38">
+      <div className="min-height-38rem">
         <div className="margin-bottom-2">
           <h1>{props.funding.name}</h1>
           <div>

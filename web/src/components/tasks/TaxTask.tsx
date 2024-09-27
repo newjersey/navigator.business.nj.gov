@@ -21,7 +21,7 @@ export const TaxTask = (props: Props): ReactElement => {
   const postInputContent = props.task.contentMd.split("${taxInputComponent}")[1];
 
   return (
-    <div className="minh-38">
+    <div className="min-height-38rem">
       <TaskHeader task={props.task} />
       <UnlockedBy task={props.task} />
       <Content>{preInputContent}</Content>

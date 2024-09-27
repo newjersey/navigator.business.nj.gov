@@ -30,7 +30,7 @@ export const Authorization = (): ReactElement => {
   };
 
   return (
-    <div data-testid={"authorization-step"} className="flex flex-column space-between minh-38">
+    <div data-testid={"authorization-step"} className="flex flex-column space-between min-height-38rem">
       <div>
         <>
           {getFormattedBody()}

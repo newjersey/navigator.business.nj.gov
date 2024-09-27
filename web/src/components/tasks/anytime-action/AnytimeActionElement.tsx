@@ -13,7 +13,7 @@ export const AnytimeActionElement = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   return (
-    <div className="minh-38">
+    <div className="min-height-38rem">
       <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 radius-top-lg">
         <div className="padding-y-4 margin-x-4 margin-bottom-2">
           <h1>{props.anytimeAction.name}</h1>

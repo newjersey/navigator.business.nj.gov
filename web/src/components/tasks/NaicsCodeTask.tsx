@@ -62,7 +62,7 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
   const postLookupContent = props.task.contentMd.split("${naicsCodeLookupComponent}")[1];
 
   return (
-    <div className="minh-38">
+    <div className="min-height-38rem">
       <TaskHeader task={props.task} />
       <UnlockedBy task={props.task} />
       <Content>{preLookupContent}</Content>
