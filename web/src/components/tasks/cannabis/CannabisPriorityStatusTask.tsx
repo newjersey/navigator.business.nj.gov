@@ -56,7 +56,7 @@ export const CannabisPriorityStatusTask = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="flex flex-column minh-38">
+    <div className="flex flex-column min-height-38rem">
       <TaskStatusChangeSnackbar
         isOpen={successSnackbarIsOpen}
         close={(): void => setSuccessSnackbarIsOpen(false)}
