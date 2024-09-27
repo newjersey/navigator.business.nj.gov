@@ -13,8 +13,8 @@ sectorIds:
 icon: update-purple.svg
 urlSlug: landlord-registration-update
 summaryDescriptionMd: >-
-  You must update your landlord registration if you own a one- or two-unit
-  residential rental and:
+  If you own a one- or two-unit residential rental, you must update your
+  landlord registration when you:
 
 
   * Have a new tenant moving in, and/or
@@ -23,17 +23,16 @@ summaryDescriptionMd: >-
 
 
   You also need to give your tenant(s) a copy of the completed application form.
-
-
-  :::note 
-   If you are renting out a residential property with 3 or more units, you need to renew your registration with the Department of Community Affairs, Bureau of Housing Inspection.
-  :::
 ---
 ## How to Update Your Registration
 
 Contact your municipal or town clerk. Each town has its own application form and process. 
 
-Also, some towns require you to submit a new landlord registration each year, so it’s best to check with the clerk.
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
+
+If you are renting out a residential property with 3 or more units, you need to renew your registration with the Department of Community Affairs, Bureau of Housing Inspection.
+
+:::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
