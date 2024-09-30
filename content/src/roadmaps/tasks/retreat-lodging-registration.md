@@ -29,7 +29,7 @@ agencyAdditionalContext: Bureau of Housing Inspection
 *  `Certificate of Formation or Authority|certificate-formation` 
 * Property name and address
 * Date when you acquired the property, if you are the new owner of an existing property
-* Building names and addresses if there is more than one building on the property
+* Building names and addresses if there is more than 1 building on the property
 * The year, or approximate year, the building(s) was built
 * Number of rooms or units in each building
 * Number of stories in each building
