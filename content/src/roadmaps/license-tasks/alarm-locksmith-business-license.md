@@ -24,7 +24,7 @@ divisionPhone: (973) 504-6245
 - `Employer Identification Number (EIN)|ein`
 - If you are not submitting for a corporation, please add the name and address of each individual who will own the business
 - List of the licensee(s) who will serve as your business's business qualifier(s)
--Copy of your liability insurance certificate with adequate coverage (check application for details)
+- Copy of your liability insurance certificate with adequate coverage (check application for details)
 - Applicable fees paid (the Advisory Committee will send you a license fee letter once your application is approved)
 
 The affidavit on the application executed before a notary public
