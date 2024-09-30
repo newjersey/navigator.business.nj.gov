@@ -120,7 +120,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="flex flex-column space-between min-height-2606rem">
+    <div className="flex flex-column space-between min-height-29rem">
       <div className="margin-bottom-3">
         {!displayNoPriorityType && (
           <>
