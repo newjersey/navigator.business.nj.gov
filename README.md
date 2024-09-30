@@ -105,6 +105,12 @@ with:
 ./scripts/local-feature-tests.sh
 ```
 
+To run all tests with code coverage (locally):
+
+```shell
+yarn test:coverage
+```
+
 Some of the Cypress tests only run in the CI environment. When using the
 `local-feature-tests` script, make sure to have a locally running instance of
 the application.
