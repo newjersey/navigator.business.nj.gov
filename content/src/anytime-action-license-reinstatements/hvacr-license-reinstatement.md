@@ -1,13 +1,13 @@
 ---
 filename: hvacr-license-reinstatement
+licenseName: ""
 name: Reinstate Your HVACR License
 icon: update-purple.svg
-licenseName: ""
 urlSlug: hvacr-license-reinstatement
-issuingAgency: "Division of Consumer Affairs"
 summaryDescriptionMd: If your Heating, Ventilating, Air Conditioning, and
   Refrigeration (HVACR) license has expired, you can apply for reinstatement.
-callToActionText: "Reinstate My HVACR License"
+issuingAgency: Division of Consumer Affairs
+callToActionText: Reinstate My HVACR License
 callToActionLink: https://www.njconsumeraffairs.gov/hvacr/Pages/applications.aspx
 ---
 
@@ -25,7 +25,7 @@ callToActionLink: https://www.njconsumeraffairs.gov/hvacr/Pages/applications.asp
 - Applicable fees paid
 
 :::infoAlert
-You need to pay the reinstatement fee and the renewal fee for one renewal period.
+You need to pay the reinstatement fee and the renewal fee for 1 renewal period.
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
