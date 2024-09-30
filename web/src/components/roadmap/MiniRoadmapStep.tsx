@@ -59,7 +59,7 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
           <div className="fdr fjc fac">
             <div
               role="heading"
-              aria-level={3}
+              aria-level={4}
               className={`margin-left-5 padding-left-2px margin-bottom-0 text-base-darkest ${
                 isActive ? "text-primary-dark" : "weight-unset"
               }`}

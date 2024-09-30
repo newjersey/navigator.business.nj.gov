@@ -33,7 +33,7 @@ export const CertificationElement = (props: { certification: Certification }): R
 
   return (
     <>
-      <div className="minh-38">
+      <div className="min-height-38rem">
         <div className="margin-bottom-2">
           {props.certification.name && <Heading level={1}>{props.certification.name}</Heading>}
         </div>

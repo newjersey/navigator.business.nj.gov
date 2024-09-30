@@ -10,12 +10,12 @@ interface Props {
 
 export const AnytimeActionGovernmentContractingElement = (props: Props): ReactElement => {
   return (
-    <div className="minh-38">
+    <div className="min-height-38rem">
       <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 radius-top-lg">
         <div className="padding-top-4 padding-bottom-4 margin-x-4">
           <h1>{props.anytimeAction.name}</h1>
         </div>
-        <div className="flex flex-column minh-38 bg-white">
+        <div className="flex flex-column min-height-38rem bg-white">
           <Alert className="margin-x-4" variant={"warning"}>
             {"To contract with the government, you need to have your "}
             <Link href={"https://www.njconsumeraffairs.gov/ocp/Pages/hic.aspx"}>
