@@ -11,7 +11,7 @@ disclaimerText: You can renew your license 60 days before it expires and up to
 summaryDescriptionMd: Your fire alarm, burglar alarm, and locksmith business
   license will expire every 3 years.
 issuingAgency: Division of Consumer Affairs
-callToActionLink: https://www.njconsumeraffairs.gov/fbl/Pages/default.aspx
+callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 callToActionText: Renew My Business License
 ---
 ## Application Requirements
