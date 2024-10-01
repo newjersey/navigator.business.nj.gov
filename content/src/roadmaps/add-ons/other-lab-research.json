@@ -1,0 +1,11 @@
+{
+  "id": "other-lab-research",
+  "displayname": "other-lab-research",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 20,
+      "licenseTask": "lab-research-cds"
+    }
+  ]
+}
