@@ -27,7 +27,7 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 ---
 ## Application Requirements
 
-###  Business and Facility Information
+### Business and Facility Information
 
 * New Jersey business address where the CDS will be handled, stored, or manufactured (must match your DEA registration address)
 * Copies of current DEA or New Jersey CDS registrations, if applicable
