@@ -14,8 +14,7 @@ summaryDescriptionMd: >-
   Follow these steps to apply:
 
 
-
-  1. Email the NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the CDS registration application for Wholesale Distributors.
+  1. Email the NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the CDS registration application for Manufacturers. 
 
   2. After your completed application has been emailed to the DCU, they will email you an invoice to pay your fees online.
 
