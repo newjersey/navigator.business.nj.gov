@@ -37,7 +37,7 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 *  `Zoning Certification,|zoning` completed by your local zoning officer (included in application)
 * Notarized Memorandum of Agreement (included in application)
 * Notarized CDS Statement (included in application)
-* Applicable fees paid
+* Applicable fees paid, once the NJ DCU has sent an invoice
 
 ### Employee and Operational Information
 
@@ -66,7 +66,6 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" }
 
 You cannot handle, store, or distribute any CDS.
-
 
 :::
 
