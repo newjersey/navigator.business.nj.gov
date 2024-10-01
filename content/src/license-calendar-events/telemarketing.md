@@ -3,16 +3,19 @@ notesMd: >-
   Draft:
 
   https://docs.google.com/document/d/104QFACWa4lyrqTY56ET-o6ZZ-dfNdssxZ0tdEF8c52E/edit
-urlSlug: telemarketing
-renewalEventDisplayName: Telemarketing License Renewal Deadline
-expirationEventDisplayName: Telemarketing License Expiration
-licenseName: Telemarketers
 previewType: renewal
-summaryDescriptionMd: ""
-callToActionLink: "https://rgbportal.dca.njoag.gov/"
+licenseName: Telemarketers
+urlSlug: telemarketing
+expirationEventDisplayName: Telemarketing License Expiration
+renewalEventDisplayName: Telemarketing License Renewal Deadline
+disclaimerText: You can renew your license 60 days before it expires and up to
+  30 days after expiration. If you fail to renew your license at this point,
+  your license will expire, and you won't be able to provide your licensed
+  services.
+summaryDescriptionMd: Your telemarketing license will expire every year.
+issuingAgency: Division of Consumer Affairs
+callToActionLink: https://rgbportal.dca.njoag.gov/
 callToActionText: Renew My Telemarketing License
-issuingAgency: "Division of Consumer Affairs"
-disclaimerText: "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services."
 ---
 
 ## Application Requirements

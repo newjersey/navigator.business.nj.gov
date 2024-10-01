@@ -32,7 +32,7 @@ agencyId: nj-motor-vehicle
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A letter of qualification or disqualification for the driver. The letter will only be mailed to the employer. The process takes about two weeks after the application is received.
+A letter of qualification or disqualification for the driver. The letter will only be mailed to the employer. The process takes about 2 weeks after the application is received.
 
 :::
 

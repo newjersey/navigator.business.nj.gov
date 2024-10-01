@@ -57,6 +57,13 @@
           "description": "Do you plan to move goods across state lines?"
         }
       },
+      "carnivalRideOwningBusiness": {
+        "default": {
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Do you own and/or operate a `carnival or amusement ride|carnival-amusement-ride` ?"
+        }
+      },
       "taxId": {
         "default": {
           "header": "New Jersey Tax ID",
@@ -126,13 +133,6 @@
           "altDescription": "Do you plan to own a space now or in the future with a new or existing `elevator device|elevator-device` , such as an elevator, escalator, or lift?"
         }
       },
-      "carnivalRideOwningBusiness": {
-        "default": {
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Do you own and/or operate a `carnival or amusement ride|carnival-amusement-ride`?"
-        }
-      },
       "businessName": {
         "default": {
           "header": "Business Name",
@@ -140,9 +140,13 @@
           "description": ""
         }
       },
-      "businessAddress": {
+      "constructionType": {
         "default": {
-          "header": "Business Address"
+          "header": "Construction Type",
+          "radioButtonResidentialText": "Residential",
+          "radioButtonCommercialOrIndustrialText": "Commercial or Industrial",
+          "radioButtonBothText": "Both",
+          "description": "Which type of construction do you plan to do?"
         }
       },
       "dateOfFormation": {
@@ -156,7 +160,7 @@
       },
       "nonEssentialQuestions": {
         "default": {
-          "header": "Based, on your industry, answer additional questions to personalize your experience.",
+          "header": "Based on your industry, answer additional questions to personalize your experience.",
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
           "optionalText": "(Optional)"
@@ -180,24 +184,6 @@
           "description": "Will you house animals?"
         }
       },
-      "constructionType": {
-        "default": {
-          "header": "Construction Type",
-          "radioButtonResidentialText": "Residential",
-          "radioButtonCommercialOrIndustrialText": "Commercial or Industrial",
-          "radioButtonBothText": "Both",
-          "description": "Which type of construction do you plan to do?"
-        }
-      },
-      "residentialConstructionType": {
-        "default": {
-          "header": "",
-          "radioButtonNewHomeConstructionText": "New home construction",
-          "radioButtonHomeRenovationsText": "Home renovations",
-          "radioButtonBothText": "Both",
-          "description": "Which type of residential construction do you plan to do?"
-        }
-      },
       "tradeName": {
         "default": {
           "header": "Trade Name",
@@ -217,6 +203,15 @@
           }
         }
       },
+      "residentialConstructionType": {
+        "default": {
+          "header": "",
+          "radioButtonNewHomeConstructionText": "New home construction",
+          "radioButtonHomeRenovationsText": "Home renovations",
+          "radioButtonBothText": "Both",
+          "description": "Which type of residential construction do you plan to do?"
+        }
+      },
       "nexusDbaName": {
         "default": {
           "header": "Doing Business As (DBA) New Jersey Business Name",
@@ -228,24 +223,7 @@
       "employmentAgency": {
         "default": {
           "header": "Employment and Personnel Services Type",
-          "description": "Learn about other `employment and personnel service types|employment-agency-types`."
-        }
-      },
-      "employmentPersonnelServiceType": {
-        "default": {
-          "header": "Employment and Personnel Services Type",
-          "radioButtonJobSeekersText": "Job Seekers",
-          "radioButtonEmployersText": "Employers",
-          "description": "Who will you charge for your services?"
-        }
-      },
-      "employmentPlacementType": {
-        "default": {
-          "header": "",
-          "radioButtonTemporaryText": "Temporary",
-          "radioButtonPermanentText": "Permanent",
-          "radioButtonBothText": "Both",
-          "description": "Is the placement temporary or permanent?"
+          "description": "Learn about other `employment and personnel service types|employment-agency-types` ."
         }
       },
       "cannabisLicenseType": {
@@ -264,6 +242,20 @@
           "addText": "Add",
           "notEnteredText": "Not entered",
           "altDescription": "Save your 6-digit NAICS code here so you can reference it later:"
+        }
+      },
+      "employmentPlacementType": {
+        "default": {
+          "header": "",
+          "radioButtonTemporaryText": "Temporary",
+          "radioButtonPermanentText": "Permanent",
+          "radioButtonBothText": "Both",
+          "description": "Is the placement temporary or permanent?"
+        }
+      },
+      "businessAddress": {
+        "default": {
+          "header": "Business Address"
         }
       },
       "isChildcareForSixOrMore": {
@@ -294,15 +286,6 @@
           "radioButtonFalseText": "No",
           "description": "Are you a `home-based business|home-based-business` ?",
           "altDescription": "Do you plan to be a `home-based business|home-based-business` ?"
-        }
-      },
-      "plannedRenovationQuestion": {
-        "default": {
-          "header": "Planned Renovations",
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "altDescription": "Do you plan to do any renovations or construction on your commercial/industrial space?",
-          "description": "Do you plan to do any renovations or construction on your commercial/industrial space?"
         }
       },
       "legalStructureId": {
@@ -374,6 +357,14 @@
           }
         }
       },
+      "employmentPersonnelServiceType": {
+        "default": {
+          "header": "Employment and Personnel Services Type",
+          "radioButtonJobSeekersText": "Job Seekers",
+          "radioButtonEmployersText": "Employers",
+          "description": "Who will you charge for your services?"
+        }
+      },
       "municipality": {
         "default": {
           "header": "Location",
@@ -395,6 +386,15 @@
           "radioButtonFalseText": "No",
           "header": "Liquor",
           "description": "Do you plan to serve liquor, including beer or wine?"
+        }
+      },
+      "plannedRenovationQuestion": {
+        "default": {
+          "header": "Planned Renovations",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "altDescription": "Do you plan to do any renovations or construction on your commercial/industrial space?",
+          "description": "Do you plan to do any renovations or construction on your commercial/industrial space?"
         }
       },
       "entityId": {
@@ -424,15 +424,16 @@
     "default": {
       "lockedFieldTooltipText": "This information cannot be changed because it was submitted to the NJ Department of Treasury.",
       "errorTextHeader": "Error",
+      "secondaryNavigationAriaLabel": "",
       "profileErrorAlertMultipleFields": "these fields",
       "backButtonText": "Cancel",
+      "profileAddressNotProvided": "Address not provided",
       "escapeModalEscape": "Go back",
-      "secondaryNavigationAriaLabel": "",
       "escapeModalBody": "You have unsaved changes that will be lost.",
       "standingDocFileTitle": "Certificate of Good Standing",
       "profileErrorAlertOneField": "the field",
-      "profilePageTitlePrefix": "Profile For",
       "profileTabDocsTitle": "Reference Documents",
+      "profilePageTitlePrefix": "Profile For",
       "successTextBody": "Based on your answers, you may see updates to your Business.NJ.gov account experience.",
       "essentialQuestionAlertText": "Complete all required fields.",
       "formationDocFileTitle": "Official Formation Document",
@@ -448,8 +449,7 @@
       "profileErrorAlert": "Complete ${fieldText} to access your dashboard:",
       "cannabisLocationAlert": "Check if your local government allows a cannabis license.",
       "certificationDocFileTitle": "Certified Copy of Formation",
-      "profileTabInfoTitle": "Business Information",
-      "profileAddressNotProvided" : "Address not provided"
+      "profileTabInfoTitle": "Business Information"
     }
   }
 }

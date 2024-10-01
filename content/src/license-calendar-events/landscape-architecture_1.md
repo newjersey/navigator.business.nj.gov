@@ -1,18 +1,19 @@
 ---
-urlSlug: landscape-architecture
-renewalEventDisplayName: Certificate of Authorization Renewal Deadline
-expirationEventDisplayName: Certificate of Authorization Expiration
-licenseName: Landscape Architecture-Certificate of Authorization
 previewType: renewal
-summaryDescriptionMd: ""
+licenseName: Landscape Architecture-Certificate of Authorization
+urlSlug: landscape-architecture
+expirationEventDisplayName: Certificate of Authorization Expiration
+renewalEventDisplayName: Certificate of Authorization Renewal Deadline
+disclaimerText: You can renew your license 60 days before it expires and up to
+  30 days after expiration. If you fail to renew your license at this point,
+  your license will expire, and you won't be able to provide your licensed
+  services.
+summaryDescriptionMd: Your certificate of authorization to provide or offer
+  landscape architectural services expires every two years.
+issuingAgency: Division of Consumer Affairs
 callToActionLink: https://www.njconsumeraffairs.gov/land/Pages/default.aspx
 callToActionText: Renew My Certificate of Authorization
-issuingAgency: "Division of Consumer Affairs"
-disclaimerText: "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services."
 ---
-
-Your certificate of authorization to provide or offer landscape architectural services expires every two years.
-
 ### Application Requirements
 
 - Current license number

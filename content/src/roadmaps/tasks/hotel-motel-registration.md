@@ -25,7 +25,7 @@ agencyAdditionalContext: Bureau of Housing Inspection
 *  `Form of property ownership|property-ownership` 
 *  `Property name and address|property-address` 
 * Date when you acquired the property and building(s) on it, if you are the new owner
-* Building names and addresses, if there is more than one building on the property
+* Building names and addresses, if there is more than 1 building on the property
 * The year, or approximate year, the building(s) was built
 * Number of rooms or units in each building
 * Number of stories in each building

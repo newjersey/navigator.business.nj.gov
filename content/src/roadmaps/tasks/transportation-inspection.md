@@ -27,7 +27,7 @@ callToActionText: Request My Vehicle Inspection
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-* A safety inspection decal valid for six months
+* A safety inspection decal valid for 6 months
 * CMC-9 and CMC-12 Certificates for registration and license plates
 
 :::

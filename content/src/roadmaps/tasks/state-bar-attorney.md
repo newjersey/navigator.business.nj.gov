@@ -22,7 +22,7 @@ callToActionText: Apply to Your State Bar Association
 * Passing grade on the New Jersey Bar Examination OR passing grades on the Uniform Bar Examination (UBE) Score and the Multistate Professional Responsibility Examination (MPRE)
 * Supplemental documentation (like police records or school transcripts) if you answered “Yes” to any questions related to moral character, criminal background, or education
 * Criminal background check
-* Driving records from each state in which you’ve been licensed to drive in the last seven years
+* Driving records from each state in which you’ve been licensed to drive in the last 7 years
 * Signed and notarized Authorization of Release form (included in the application)
 * Certificate of Good Standing from any states where you’ve been admitted to practice law, if applicable
 * Applicable fees paid

@@ -1,0 +1,11 @@
+{
+  "id": "petcare-trainer",
+  "displayname": "petcare-trainer",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 20,
+      "licenseTask": "dog-trainer-cds"
+    }
+  ]
+}

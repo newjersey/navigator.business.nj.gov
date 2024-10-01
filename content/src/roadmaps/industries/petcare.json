@@ -44,7 +44,11 @@
     }
   ],
   "name": "Pet Care",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "petcare-cds-shelter",
+    "petcare-cds-trainer"
+  ],
   "displayname": "petcare",
   "industryOnboardingQuestions": {
     "isPetCareHousingApplicable": true,
@@ -53,7 +57,7 @@
     "willSellPetCareItems": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "dog walker, dog groomer, pet groomer, doggy daycare, kennel, boarding, shelter, pound",
+  "additionalSearchTerms": "dog walker, dog groomer, pet groomer, doggy daycare, kennel, boarding, shelter, pound, training",
   "id": "petcare",
   "description": "Provides care, training, grooming, or boarding services to domestic animals",
   "webflowId": "656a1362f58a7269b112bdc6"

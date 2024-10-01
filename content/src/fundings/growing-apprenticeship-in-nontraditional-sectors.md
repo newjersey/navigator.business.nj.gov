@@ -1,6 +1,6 @@
 ---
 filename: Growing Apprenticeship in Nontraditional Sectors
-name: Growing Apprenticeship in Nontraditional Sectors
+name: Growing Apprenticeship in Nontraditional Sectors (GAINS)
 displayName: gains
 urlSlug: gains
 id: gains
@@ -16,7 +16,7 @@ summaryDescriptionMd: The Growing Apprenticeship in Nontraditional Sectors
   (https://www.apprenticeship.gov/employers/registered-apprenticeship-program).
 callToActionLink: https://www.nj.gov/labor/research-info/grants.shtml
 callToActionText: Learn more
-fundingType: grant
+fundingType: hiring and employee training support
 programFrequency: reoccuring
 status: deadline
 programPurpose: Both
