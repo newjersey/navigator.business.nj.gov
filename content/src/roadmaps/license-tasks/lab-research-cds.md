@@ -4,7 +4,8 @@ webflowId: 670eb582da634d87be974991
 urlSlug: lab-research-cds
 name: Apply for Your Analytical Lab or Researcher’s Controlled Dangerous Substances Registration
 displayname: lab-research-cds
-webflowName: All Other Businesses: Analytical Lab or Researcher Controlled Dangerous Substances Registration
+webflowName: "All Other Businesses: Analytical Lab or Researcher Controlled
+  Dangerous Substances Registration"
 filename: lab-research-cds
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: New Jersey Drug Control Unit
