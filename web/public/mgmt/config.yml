@@ -5534,7 +5534,6 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
                           - {
                               label: "Radio Button New Home Construction Text",
                               name: "radioButtonNewHomeConstructionText",
@@ -5579,7 +5578,6 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
                           - {
                               label: "Radio Button Temporary Text",
                               name: "radioButtonTemporaryText",
