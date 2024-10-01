@@ -28,7 +28,7 @@ webflowId: 66aceedbaae39d8674b278ad
 
 ## Application Requirements
 
-* A written statement from the supervising broker verifying full-time employment for the applicant for the past three years
+* A written statement from the supervising broker verifying full-time employment for the applicant for the past 3 years
 * An applicant ID (found in the licensure exam results form)
 * A criminal background check, and pass
 * Applicable fees paid
