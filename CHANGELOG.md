@@ -1,3 +1,10 @@
+# [2024.30.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.29.0...v2024.30.0) (2024-10-01)
+
+
+### Features
+
+* [[#186702387](https://github.com/newjersey/navigator.business.nj.gov/issues/186702387)] dialog close button isn't part of heading ([0864e3f](https://github.com/newjersey/navigator.business.nj.gov/commit/0864e3fdcf2e6afa6b0684c68049dd389e0a9210))
+
 # [2024.29.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.28.0...v2024.29.0) (2024-09-24)
 
 
