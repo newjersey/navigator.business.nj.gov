@@ -62,7 +62,7 @@ If you are applying from your base state, in addition to the above, you need to 
 
 * Letter of certification, stating how your license was obtained, sent directly to the board
 * College transcripts sent directly from the college(s) to the board
-* Names and addresses of three architects who are personally acquainted with your professional abilities
+* Names and addresses of 3 architects who are personally acquainted with your professional abilities
 
 ### NCARB Applicants
 
