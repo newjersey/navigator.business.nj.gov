@@ -26,7 +26,7 @@ agencyAdditionalContext: New Jersey Drug Control Unit
 
 ### Business and Facility Information
 
-* New Jersey business address where the CDS will be handled, stored, or manufactured (must match your DEA registration address)
+* New Jersey business address where the CDS will be handled or stored (must match your DEA registration address)
 * Copies of current DEA or New Jersey CDS registrations, if applicable
 * Copy of the `Certificate of Formation|certificate-formation` or similar documentation
 * Copy of the `Certificate of Trade Name,|alt-name-trade-name` if a sole proprietorship or partnership (not a corporation)
