@@ -1,13 +1,6 @@
 {
-  "displayname": "generic",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "other-services",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -55,6 +48,16 @@
     }
   ],
   "name": "All Other Businesses",
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "cds-lab-research "
+  ],
+  "displayname": "generic",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
+  "isEnabled": true,
   "id": "generic",
   "description": "Select this if you don't see your specific industry",
   "webflowId": "656a13628934eb2330f44bcb"
