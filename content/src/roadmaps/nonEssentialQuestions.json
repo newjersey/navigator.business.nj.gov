@@ -74,6 +74,11 @@
       "id": "petcare-cds-trainer",
       "questionText": "Will you train dogs to detect illegal substances?",
       "addOn": "petcare-trainer"
+    },
+    {
+      "id": "cds-lab-research ",
+      "questionText": "Do you plan to test or research controlled dangerous substances (CDS)? ",
+      "addOn": "other-lab-research"
     }
   ]
 }
