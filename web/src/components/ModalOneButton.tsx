@@ -36,7 +36,6 @@ export const ModalOneButton = (props: Props): ReactElement => {
       close={props.close}
       title={props.title}
       unpaddedChildren={buttonNode}
-      uncloseable={props.uncloseable}
     >
       {props.children}
     </ModalZeroButton>
