@@ -19,6 +19,7 @@
   "rules": {
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/explicit-function-return-type": "warn",
+    "@typescript-eslint/consistent-type-assertions": ["warn", { "assertionStyle": "never" }],
     "eqeqeq": "warn",
     "prefer-template": "error",
     "unicorn/filename-case": [
