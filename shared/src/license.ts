@@ -95,7 +95,6 @@ export const taskIdLicenseNameMapping = {
   "license-massage-therapy": "Massage and Bodywork Therapy-Massage and Bodywork Employer",
   "moving-company-license": "Public Movers and Warehousemen-Public Mover and Warehouseman",
   "pharmacy-license": "Pharmacy-Pharmacy",
-  "public-accountant-license": "Accountancy-Firm Registration",
   "register-accounting-firm": "Accountancy-Firm Registration",
   "register-home-contractor": "Home Improvement Contractors-Home Improvement Contractor",
   "ticket-broker-reseller-registration": "Ticket Brokers",
