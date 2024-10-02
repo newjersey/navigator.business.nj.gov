@@ -1,7 +1,8 @@
 ---
 notesMd: '10.2.24: editing copy from "If you are a licensed dentist who owns
   your practice and you have more than one office, you must register each
-  location" to "" per SME review'
+  location" to "As a licensed dentist, you must register every location where
+  you practice." per SME review'
 licenseName: ""
 id: dental-branch
 filename: dental-branch
