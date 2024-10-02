@@ -1,5 +1,6 @@
 import { CURRENT_GENERATOR, Migrations } from "@db/migrations/migrations";
 import { generateV0UserData } from "@db/migrations/v0_user_data";
+import { ConsoleLogWriter } from "@libs/logWriter";
 import { CURRENT_VERSION } from "@shared/userData";
 import fs from "node:fs";
 import path from "node:path";
@@ -50,6 +51,7 @@ const areUserDatasEqual = (userData1: object, userData2: object): boolean => {
   }
   return true;
 };
+const logger = ConsoleLogWriter;
 
 describe("migrations", () => {
   it("has CURRENT_VERSION number of migrations in the migrations list", () => {
@@ -137,8 +139,12 @@ describe("migrations", () => {
 
     it("runs all migrations and gets user to current version", () => {
       let user: unknown = generateV0UserData({});
-      for (const func of Migrations) {
-        user = func(user);
+      try {
+        for (const func of Migrations) {
+          user = func(user);
+        }
+      } catch (error) {
+        logger.LogError(`Dynamo User Migration Test Error - Error: ${error} - Data: ${user}`);
       }
       // @ts-expect-error getting user version from unknown
       expect(user.version).toEqual(CURRENT_VERSION);
@@ -148,8 +154,13 @@ describe("migrations", () => {
     it("ensures that a user who has been fully migrated has the same fields as a newly generated user on the current version", () => {
       const currentUser = CURRENT_GENERATOR({});
       let migratedUser: unknown = generateV0UserData({});
-      for (const func of Migrations) {
-        migratedUser = func(migratedUser);
+
+      try {
+        for (const func of Migrations) {
+          migratedUser = func(migratedUser);
+        }
+      } catch (error) {
+        logger.LogError(`Dynamo User Migration Test Error - Error: ${error} - Data: ${migratedUser}`);
       }
 
       const userDataEqual = areUserDatasEqual(currentUser, migratedUser as object);

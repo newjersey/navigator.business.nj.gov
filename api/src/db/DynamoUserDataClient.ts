@@ -4,19 +4,60 @@
 import { ExecuteStatementCommand, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
+import { MigrationFunction, Migrations } from "@db/migrations/migrations";
 import { UserDataClient } from "@domain/types";
-import { UserData } from "@shared/userData";
-// eslint-disable-next-line no-restricted-imports
-import { migrateData, unmarshallOptions } from "./config/dynamoDbConfig";
+import { LogWriterType } from "@libs/logWriter";
+import { CURRENT_VERSION, UserData } from "@shared/userData";
 
-export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: string): UserDataClient => {
+const marshallOptions = {
+  // Whether to automatically convert empty strings, blobs, and sets to `null`.
+  convertEmptyValues: false, // false, by default.
+  // Whether to remove undefined values while marshalling.
+  removeUndefinedValues: true, // false, by default.
+  // Whether to convert typeof object to map attribute.
+  convertClassInstanceToMap: false, // false, by default.
+};
+
+const unmarshallOptions = {
+  // Whether to return numbers as a string instead of converting them to native JavaScript numbers.
+  wrapNumbers: false, // false, by default.
+};
+
+export const dynamoDbTranslateConfig = { marshallOptions, unmarshallOptions };
+
+export const migrateUserData = (data: any, logger: LogWriterType): any => {
+  const logId = logger.GetId();
+  const dataVersion = data.version ?? CURRENT_VERSION;
+  const migrationsToRun = Migrations.slice(dataVersion);
+  const migratedData = migrationsToRun.reduce((prevData: any, migration: MigrationFunction) => {
+    try {
+      logger.LogInfo(
+        `Dynamo User Migration - Id:${logId} - Upgrading ${data.user.id} from ${prevData.version} to ${
+          Number(prevData.version) + 1
+        }`
+      );
+      return migration(prevData);
+    } catch (error) {
+      logger.LogError(
+        `Dynamo User Migration Error - Id:${logId} - Error: ${error} - Data: ${JSON.stringify(prevData)}`
+      );
+    }
+  }, data);
+  return { ...migratedData, version: CURRENT_VERSION };
+};
+
+export const DynamoUserDataClient = (
+  db: DynamoDBDocumentClient,
+  tableName: string,
+  logger: LogWriterType
+): UserDataClient => {
   const doMigration = async (data: any): Promise<UserData> => {
-    const migratedData = migrateData(data);
+    const migratedData = migrateUserData(data, logger);
     await put(migratedData);
     return migratedData;
   };
 
-  const findByEmail = (email: string): Promise<UserData | undefined> => {
+  const findByEmail = async (email: string): Promise<UserData | undefined> => {
     const params: QueryCommandInput = {
       TableName: tableName,
       IndexName: "EmailIndex",
@@ -39,7 +80,7 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
       });
   };
 
-  const get = (userId: string): Promise<UserData> => {
+  const get = async (userId: string): Promise<UserData> => {
     const params = {
       TableName: tableName,
       Key: {
@@ -60,8 +101,8 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
       });
   };
 
-  const put = (userData: UserData): Promise<UserData> => {
-    const migratedData = migrateData(userData);
+  const put = async (userData: UserData): Promise<UserData> => {
+    const migratedData = migrateUserData(userData, logger);
     const params = {
       TableName: tableName,
       Item: {
@@ -70,7 +111,6 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
         data: migratedData,
       },
     };
-
     return db
       .send(new PutCommand(params))
       .then(() => {
