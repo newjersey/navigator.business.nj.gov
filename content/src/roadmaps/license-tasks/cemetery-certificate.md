@@ -1,19 +1,23 @@
 ---
-notesMd: "* h2 and h3 still look the same, using h3 per Spencer but ideally we want the h3's to be visually differentiated from the h2. Will need to update this task once this is remedied."
-id: "cemetery-certificate"
-webflowId: "66be3c52407e8f104a12114a"
-urlSlug: "cemetery-certificate"
-name: "Apply for Your Certificate of Authority"
-webflowName: "Cemetery: Certificate of Authority"
-filename: "cemetery-certificate"
-callToActionLink: "https://www.njconsumeraffairs.gov/cem/Applications/Cemetery-Application-and-Information-Sheet-for-Certificate-of-Authority.pdf"
-callToActionText: "Apply for My Certificate of Authority"
-agencyId: "nj-consumer-affairs"
-agencyAdditionalContext: "New Jersey Cemetery Board"
-industryId: "cemetery"
-licenseCertificationClassification: "undefined"
+notesMd: "* h2 and h3 still look the same, using h3 per Spencer but ideally we
+  want the h3's to be visually differentiated from the h2. Will need to update
+  this task once this is remedied."
 licenseName: ""
-summaryDescriptionMd: "To own and operate a cemetery business in New Jersey, you need a Certificate of Authority. Your cemetery business must be a nonprofit."
+id: cemetery-certificate
+filename: cemetery-certificate
+displayname: cemetery-certificate
+urlSlug: cemetery-certificate
+name: Apply for Your Certificate of Authority
+webflowName: "Cemetery: Certificate of Authority"
+summaryDescriptionMd: To own and operate a cemetery business in New Jersey, you
+  need a Certificate of Authority. Your cemetery business must be a nonprofit.
+industryId: cemetery
+callToActionText: Apply for My Certificate of Authority
+callToActionLink: https://www.njconsumeraffairs.gov/cem/Applications/Cemetery-Application-and-Information-Sheet-for-Certificate-of-Authority.pdf
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: New Jersey Cemetery Board
+webflowId: 66be3c52407e8f104a12114a
+licenseCertificationClassification: undefined
 ---
 
 ## Application Requirements

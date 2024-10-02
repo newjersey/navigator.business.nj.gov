@@ -1,19 +1,22 @@
 ---
-id: "residential-health-care-facility-license"
-webflowId: "66b375f70b51a2d44273c4df"
-urlSlug: "residential-health-care-facility-license"
-name: "Apply for Your Free-Standing Residential Health Care Facility License"
-webflowName: "Healthcare: Free-Standing Residential Health Care Facility"
-filename: "residential-health-care-facility-license"
-callToActionLink: "https://www.nj.gov/dca/codes/forms/pdf_rooming/RHCF_app.pdf"
-callToActionText: "Apply for My Free-Standing Residential Health Care Facility License"
-agencyId: "nj-community-affairs"
-agencyAdditionalContext: "Bureau of Rooming and Boarding House Standards"
-divisionPhone: "(609) 984-1704"
-industryId: "healthcare"
-licenseCertificationClassification: "undefined"
 licenseName: ""
-summaryDescriptionMd: "You need a license to own and/or operate a new or existing `free-standing residential health care facility|residential-health-care-facility`."
+id: residential-health-care-facility-license
+filename: residential-health-care-facility-license
+displayname: residential-health-care-facility-license
+urlSlug: residential-health-care-facility-license
+name: Apply for Your Free-Standing Residential Health Care Facility License
+webflowName: "Healthcare: Free-Standing Residential Health Care Facility"
+summaryDescriptionMd: You need a license to own and/or operate a new or existing
+  `free-standing residential health care
+  facility|residential-health-care-facility`.
+industryId: healthcare
+callToActionText: Apply for My Free-Standing Residential Health Care Facility License
+callToActionLink: https://www.nj.gov/dca/codes/forms/pdf_rooming/RHCF_app.pdf
+agencyId: nj-community-affairs
+agencyAdditionalContext: Bureau of Rooming and Boarding House Standards
+divisionPhone: (609) 984-1704
+webflowId: 66b375f70b51a2d44273c4df
+licenseCertificationClassification: undefined
 ---
 
 ---
@@ -21,7 +24,7 @@ summaryDescriptionMd: "You need a license to own and/or operate a new or existin
 ## Application Requirements for New Facilities
 
 - Business name
-- `Trade name|alt-name-trade-name`, if applicable
+- `Trade name|alt-name-trade-name` , if applicable
 - `Business structure|business-structure-learn-more`
 - `Employee Identification Number (EIN)|ein`
 - Name and address of your `registered agent|registered-agent`
@@ -31,7 +34,7 @@ summaryDescriptionMd: "You need a license to own and/or operate a new or existin
 - Business name, address, and email of your management company, if applicable
 - Name and address of your parent corporation, if applicable
 - Name of your building owner and a copy of a signed lease, if you are renting the facility
-- Name, title, address, Social Security Number (SSN) or `Tax ID|tax-id`, and percent of ownership for each owner, officer, partner, or stockholder
+- Name, title, address, Social Security Number (SSN) or `Tax ID|tax-id` , and percent of ownership for each owner, officer, partner, or stockholder
 - List of board members, if your business is a nonprofit
 - List of any prior health care application denials or revocations, if applicable
 - List of other licensed health care facilities each principal owns, manages, or operates, if applicable

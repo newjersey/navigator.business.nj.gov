@@ -1,19 +1,23 @@
 ---
-notesMd: "* Uncertain on the What if I don't get this license callout. It may be changed to a warning (yellow) instead of conditional (green)"
-id: "cemetery-branch"
-webflowId: "66be3be5b744538ece672248"
-urlSlug: "cemetery-branch"
-name: "Apply for Your Cemetery Salesperson Branch License, if applicable"
-webflowName: "Cemetery: Cemetery Salesperson Branch License "
-filename: "cemetery-branch"
-callToActionLink: "https://www.njconsumeraffairs.gov/cem/Applications/Cemetery-Application-for-Cemetery-Salespersons-Branch-License.pdf"
-callToActionText: "Get My Cemetery Salesperson Branch License"
-agencyId: "nj-consumer-affairs"
-agencyAdditionalContext: "New Jersey Cemetery Board"
-industryId: "cemetery"
-licenseCertificationClassification: "undefined"
+notesMd: "* Uncertain on the What if I don't get this license callout. It may be
+  changed to a warning (yellow) instead of conditional (green)"
 licenseName: ""
-summaryDescriptionMd: "You need a Cemetery Salesperson Branch license to sell at more than one location. You must already have a Cemetery Salesperson license for your main cemetery."
+id: cemetery-branch
+filename: cemetery-branch
+displayname: cemetery-branch
+urlSlug: cemetery-branch
+name: Apply for Your Cemetery Salesperson Branch License, if applicable
+webflowName: "Cemetery: Cemetery Salesperson Branch License "
+summaryDescriptionMd: You need a Cemetery Salesperson Branch license to sell at
+  more than one location. You must already have a Cemetery Salesperson license
+  for your main cemetery.
+industryId: cemetery
+callToActionText: Get My Cemetery Salesperson Branch License
+callToActionLink: https://www.njconsumeraffairs.gov/cem/Applications/Cemetery-Application-for-Cemetery-Salespersons-Branch-License.pdf
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: New Jersey Cemetery Board
+webflowId: 66be3be5b744538ece672248
+licenseCertificationClassification: undefined
 ---
 
 ## Application Requirements
