@@ -1,19 +1,21 @@
 ---
-id: "rooming-boarding-house-license"
-webflowId: "66b375f801e19e1717d32c2d"
-urlSlug: "rooming-boarding-house-license"
-name: "Apply for a Rooming or Boarding House License"
-webflowName: "Lodging: Rooming or Boarding House License"
-filename: "rooming-boarding-house-license"
-callToActionLink: "https://www.nj.gov/dca/codes/forms/pdf_rooming/App_Form_I.pdf"
-callToActionText: "Apply for My Rooming or Boarding House License"
-agencyId: "nj-community-affairs"
-agencyAdditionalContext: "Bureau of Rooming and Boarding House Standards"
-divisionPhone: "(609) 984-1704"
-industryId: "lodging"
-licenseCertificationClassification: "undefined"
 licenseName: ""
-summaryDescriptionMd: "You need a license to own and/or operate a new or existing `rooming or boarding house|rooming-boarding-house`."
+id: rooming-boarding-house-license
+filename: rooming-boarding-house-license
+displayname: rooming-boarding-house-license
+urlSlug: rooming-boarding-house-license
+name: Apply for a Rooming or Boarding House License
+webflowName: "Lodging: Rooming or Boarding House License"
+summaryDescriptionMd: You need a license to own and/or operate a new or existing
+  `rooming or boarding house|rooming-boarding-house`.
+industryId: lodging
+callToActionText: Apply for My Rooming or Boarding House License
+callToActionLink: https://www.nj.gov/dca/codes/forms/pdf_rooming/App_Form_I.pdf
+agencyId: nj-community-affairs
+agencyAdditionalContext: Bureau of Rooming and Boarding House Standards
+divisionPhone: (609) 984-1704
+webflowId: 66b375f801e19e1717d32c2d
+licenseCertificationClassification: undefined
 ---
 
 :::note
