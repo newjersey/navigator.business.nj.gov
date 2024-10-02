@@ -1,13 +1,17 @@
 ---
-id: "landlord-registration"
-webflowId: "66f3198052d588875cacb94c"
-urlSlug: "landlord-registration"
-name: "Register as a Landlord"
+id: landlord-registration
+filename: landlord-registration
+displayname: landlord-registration
+urlSlug: landlord-registration
+name: Register as a Landlord
 webflowName: "Residential Landlord: Landlord Registration"
-filename: "landlord-registration"
-industryId: "residential-landlord"
-licenseCertificationClassification: "undefined"
-summaryDescriptionMd: "Before renting out a **one- or two-unit residential property**, you must register as a landlord with your municipal clerk. You need to register each time you rent out a new property. You also need to give your tenant(s) a copy of the completed application form."
+summaryDescriptionMd: Before renting out a **one- or two-unit residential
+  property**, you must register as a landlord with your municipal clerk. You
+  need to register each time you rent out a new property. You also need to give
+  your tenant(s) a copy of the completed application form.
+industryId: residential-landlord
+webflowId: 66f3198052d588875cacb94c
+licenseCertificationClassification: undefined
 ---
 
 :::note
