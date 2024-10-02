@@ -26,6 +26,26 @@ export const DummyLogWriter: LogWriterType = {
   },
 };
 
+export const ConsoleLogWriter: LogWriterType = {
+  LogError: async (message: string, details?: AxiosError): Promise<void> => {
+    try {
+      console.error(`${message} - ${JSON.stringify(details?.toJSON())}`);
+    } catch (error) {
+      console.error(`Error with LogInfo:${error}`);
+    }
+  },
+  LogInfo: async (message: string): Promise<void> => {
+    try {
+      console.info(message);
+    } catch (error) {
+      console.error(`Error with LogInfo:${error}`);
+    }
+  },
+  GetId: () => {
+    return "";
+  },
+};
+
 export const LogWriter = (groupName: string, logStream: string, region?: string): LogWriterType => {
   const logger = winston.add(
     new WinstonCloudWatch({

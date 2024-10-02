@@ -1,6 +1,7 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
+import { LogWriter } from "@libs/logWriter";
 import { AWSEncryptionDecryptionFactory } from "src/client/AwsEncryptionDecryptionFactory";
 import { DynamoUserDataClient } from "src/db/DynamoUserDataClient";
 import { encryptTaxIdBatch } from "src/domain/user/encryptTaxIdBatch";
@@ -11,6 +12,8 @@ export default async function handler(): Promise<void> {
   const IS_DOCKER = process.env.IS_DOCKER === "true" || false; // set in docker-compose
   const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
   const DYNAMO_OFFLINE_PORT = process.env.DYNAMO_PORT || 8000;
+  const STAGE = process.env.STAGE || "local";
+  const logger = LogWriter(`NavigatorWebService/${STAGE}`, "DataMigrationLogs");
 
   let dynamoDb: DynamoDBDocumentClient;
   if (IS_OFFLINE) {
@@ -34,7 +37,7 @@ export default async function handler(): Promise<void> {
     );
   }
 
-  const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE);
+  const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, logger);
 
   const AWS_CRYPTO_KEY = process.env.AWS_CRYPTO_KEY || "";
   const AWS_CRYPTO_CONTEXT_STAGE = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";

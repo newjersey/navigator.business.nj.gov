@@ -90,6 +90,7 @@ if (IS_OFFLINE) {
 
 const STAGE = process.env.STAGE || "local";
 const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
+const dataLogger = LogWriter(`NavigatorWebService/${STAGE}`, "DataMigrationLogs");
 
 const LICENSE_STATUS_BASE_URL =
   process.env.LICENSE_STATUS_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
@@ -296,7 +297,7 @@ const airtableUserTestingClient = AirtableUserTestingClient(
 );
 
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
-const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE);
+const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, dataLogger);
 
 const taxFilingInterface = taxFilingsInterfaceFactory(taxFilingClient);
 
