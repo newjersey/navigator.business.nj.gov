@@ -9,8 +9,7 @@ displayname: dental-branch
 urlSlug: dental-branch
 name: Apply for Your Dental Branch Office Registration, if Applicable
 webflowName: "Healthcare: Dental Branch Office Registration"
-summaryDescriptionMd: If you are a licensed dentist, you must register every
-  location where you practice.
+summaryDescriptionMd: As a licensed dentist, you must register every location where you practice.
 industryId:
   - healthcare
 callToActionText: Apply for My Dental Branch Office Registration
