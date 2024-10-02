@@ -53,17 +53,21 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
 
     const licenseNameForTask = taskIdLicenseNameMapping[props.licenseTaskId];
     const licenseDetails = business.licenseData?.licenses?.[licenseNameForTask];
-    const nameAndAddress = licenseDetails?.nameAndAddress;
+    const licenseNameAndAddress = licenseDetails?.nameAndAddress;
 
-    const hasNameAndAddress = nameAndAddress?.name && nameAndAddress?.addressLine1 && nameAndAddress?.zipCode;
+    const hasLicenseNameAndAddress =
+      licenseNameAndAddress?.name && licenseNameAndAddress?.addressLine1 && licenseNameAndAddress?.zipCode;
 
-    if (nameAndAddress && hasNameAndAddress) {
+    const formationFormData = business.formationData.formationFormData;
+    const hasFormationAddress = formationFormData.addressLine1 && formationFormData.addressZipCode;
+
+    if (licenseNameAndAddress && hasLicenseNameAndAddress) {
       setFormValues(licenseDetails.nameAndAddress);
-    } else if (business.formationData.formationResponse?.success) {
+    } else if (hasFormationAddress) {
       setFormValues((prevValues) => {
         return {
           ...prevValues,
-          name: business.formationData.formationFormData.businessName,
+          name: business.profileData.businessName,
           addressLine1: business.formationData.formationFormData.addressLine1,
           addressLine2: business.formationData.formationFormData.addressLine2 || "",
           zipCode: business.formationData.formationFormData.addressZipCode,
