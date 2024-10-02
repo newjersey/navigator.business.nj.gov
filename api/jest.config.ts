@@ -17,6 +17,7 @@ export default {
     "@libs/(.*)": "<rootDir>/src/libs/$1",
     "@test/(.*)": "<rootDir>/test/$1",
     "@wiremock/(.*)": "<rootDir>/wiremock/$1",
+    "@scripts/(.*)": "<rootDir>/../scripts/$1",
   },
   globalSetup: "<rootDir>/src/setupTests.ts",
   globalTeardown: "<rootDir>/src/teardownTests.ts",

@@ -197,6 +197,10 @@ module.exports = {
       from: { path: "src/domain" },
       to: { path: "src/client" },
     },
+    {
+      from: { path: "src/db" },
+      to: { path: "src/libs" },
+    },
   ],
   forbidden: [
     /* rules from the 'recommended' preset: */

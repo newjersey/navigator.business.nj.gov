@@ -4,6 +4,7 @@ import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
 import { UserDataClient } from "@domain/types";
+import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
 import { generateUser, generateUserData } from "@shared/test";
 
 // references jest-dynalite-config values
@@ -20,11 +21,13 @@ describe("DynamoUserDataClient", () => {
 
   let client: DynamoDBDocumentClient;
   let dynamoUserDataClient: UserDataClient;
+  let logger: LogWriterType;
 
   beforeEach(() => {
+    jest.resetAllMocks();
     client = DynamoDBDocumentClient.from(new DynamoDBClient(config), dynamoDbTranslateConfig);
-
-    dynamoUserDataClient = DynamoUserDataClient(client, dbConfig.tableName);
+    logger = DummyLogWriter;
+    dynamoUserDataClient = DynamoUserDataClient(client, dbConfig.tableName, logger);
   });
 
   it("gets inserted items", async () => {
