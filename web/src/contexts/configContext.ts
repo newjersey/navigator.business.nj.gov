@@ -40,40 +40,40 @@ import { createContext } from "react";
 const merged = JSON.parse(
   JSON.stringify(
     merge(
-      AccountSetup,
-      anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
-      BusinessFormation,
-      BusinessStructurePrompt,
-      BusinessStructureTask,
-      CalloutDefaults,
-      CannabisLicenseAnnualTab2,
-      CannabisLicenseConditionalTab2,
-      CannabisLicenseEligibilityModal,
-      CannabisLicenseTab1,
+      ConfigOriginal,
+      Profile,
       CannabisPriorityStatusTab1,
       CannabisPriorityStatusTab2,
-      ConfigOriginal,
-      DashboardCalendar,
-      DashboardDefaults,
-      DashboardModals,
-      DashboardSnackbars,
-      DashboardTabs,
-      DeferredLocation,
+      CannabisLicenseTab1,
+      CannabisLicenseAnnualTab2,
+      CannabisLicenseConditionalTab2,
+      NexusNameSearch,
+      NexusDbaFormation,
+      NaicsCode,
       Ein,
-      ElevatorRegistration,
+      Tax,
+      CannabisLicenseEligibilityModal,
       FormationInterimSuccessPage,
       FormationSuccessPage,
-      HousingRegistrationSearchTask,
-      NaicsCode,
-      NavigationDefaults,
-      NavigationDefaults,
-      NexusDbaFormation,
-      NexusNameSearch,
-      PageMetadata,
-      PageMetadata,
       PageNotFoundError,
-      Profile,
       SiteWideErrorMessages,
+      DeferredLocation,
+      DashboardSnackbars,
+      DashboardCalendar,
+      DashboardTabs,
+      DashboardModals,
+      BusinessFormation,
+      TaxAccess,
+      BusinessStructureTask,
+      BusinessStructurePrompt,
+      AccountSetup,
+      NavigationDefaults,
+      PageMetadata,
+      NavigationDefaults,
+      DashboardDefaults,
+      PageMetadata,
+      CalloutDefaults,
+      ElevatorRegistration,
       StarterKits,
       HousingRegistrationSearchTask,
       anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults
@@ -82,78 +82,76 @@ const merged = JSON.parse(
 );
 
 export type ConfigType = typeof ConfigOriginal &
-  typeof AccountSetup &
-  typeof anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults &
-  typeof BusinessFormation &
-  typeof BusinessStructurePrompt &
-  typeof BusinessStructureTask &
-  typeof CalloutDefaults &
-  typeof CalloutDefaults &
-  typeof CannabisLicenseAnnualTab2 &
-  typeof CannabisLicenseConditionalTab2 &
-  typeof CannabisLicenseEligibilityModal &
-  typeof CannabisLicenseTab1 &
+  typeof Profile &
   typeof CannabisPriorityStatusTab1 &
   typeof CannabisPriorityStatusTab2 &
-  typeof DashboardCalendar &
-  typeof DashboardDefaults &
-  typeof DashboardModals &
-  typeof DashboardSnackbars &
-  typeof DashboardTabs &
-  typeof DeferredLocation &
+  typeof CannabisLicenseTab1 &
+  typeof CannabisLicenseAnnualTab2 &
+  typeof CannabisLicenseConditionalTab2 &
+  typeof NexusNameSearch &
+  typeof NexusDbaFormation &
+  typeof NaicsCode &
   typeof Ein &
-  typeof ElevatorRegistration &
+  typeof Tax &
+  typeof CannabisLicenseEligibilityModal &
   typeof FormationInterimSuccessPage &
   typeof FormationSuccessPage &
-  typeof HousingRegistrationSearchTask &
-  typeof NaicsCode &
-  typeof NavigationDefaults &
-  typeof NexusDbaFormation &
-  typeof NexusNameSearch &
-  typeof PageMetadata &
-  typeof PageMetadata &
   typeof PageNotFoundError &
-  typeof Profile &
   typeof SiteWideErrorMessages &
-  typeof StarterKits &
-  typeof Tax &
+  typeof DeferredLocation &
+  typeof DashboardCalendar &
+  typeof DashboardModals &
+  typeof DashboardTabs &
+  typeof BusinessFormation &
+  typeof BusinessStructureTask &
   typeof TaxAccess &
+  typeof DashboardSnackbars &
+  typeof BusinessStructurePrompt &
+  typeof AccountSetup &
+  typeof NavigationDefaults &
+  typeof PageMetadata &
+  typeof CalloutDefaults &
+  typeof ElevatorRegistration &
+  typeof CalloutDefaults &
+  typeof DashboardDefaults &
+  typeof PageMetadata &
+  typeof StarterKits &
   typeof HousingRegistrationSearchTask &
   typeof anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
-    AccountSetup,
-    anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
-    BusinessFormation,
-    BusinessStructureTask,
-    CalloutDefaults,
-    CannabisLicenseAnnualTab2,
-    CannabisLicenseConditionalTab2,
-    CannabisLicenseEligibilityModal,
-    CannabisLicenseTab1,
+    ConfigOriginal,
+    Profile,
     CannabisPriorityStatusTab1,
     CannabisPriorityStatusTab2,
-    ConfigOriginal,
-    DashboardCalendar,
-    DashboardDefaults,
-    DashboardModals,
-    DashboardSnackbars,
-    DashboardTabs,
-    DeferredLocation,
+    CannabisLicenseTab1,
+    CannabisLicenseAnnualTab2,
+    CannabisLicenseConditionalTab2,
+    NexusNameSearch,
+    NexusDbaFormation,
+    NaicsCode,
     Ein,
-    ElevatorRegistration,
+    Tax,
+    CannabisLicenseEligibilityModal,
     FormationInterimSuccessPage,
     FormationSuccessPage,
-    HousingRegistrationSearchTask,
-    NaicsCode,
-    NavigationDefaults,
-    NexusDbaFormation,
-    NexusNameSearch,
-    PageMetadata,
-    PageMetadata,
     PageNotFoundError,
-    Profile,
+    DeferredLocation,
+    DashboardSnackbars,
+    DashboardModals,
+    DashboardTabs,
+    DashboardCalendar,
+    BusinessFormation,
+    TaxAccess,
+    AccountSetup,
+    BusinessStructureTask,
+    NavigationDefaults,
+    PageMetadata,
+    DashboardDefaults,
+    PageMetadata,
+    CalloutDefaults,
+    ElevatorRegistration,
     StarterKits,
     HousingRegistrationSearchTask,
     anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults
