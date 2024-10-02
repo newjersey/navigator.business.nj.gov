@@ -29,8 +29,6 @@ import * as NexusDbaFormation from "@businessnjgovnavigator/content/fieldConfig/
 import * as NexusNameSearch from "@businessnjgovnavigator/content/fieldConfig/nexus-name-search.json";
 import * as PageNotFoundError from "@businessnjgovnavigator/content/fieldConfig/page-not-found-error.json";
 import * as Profile from "@businessnjgovnavigator/content/fieldConfig/profile.json";
-import * as RaffleBingoStep1 from "@businessnjgovnavigator/content/fieldConfig/raffle-bingo-step1.json";
-import * as RaffleBingoStep2 from "@businessnjgovnavigator/content/fieldConfig/raffle-bingo-step2.json";
 import * as StarterKits from "@businessnjgovnavigator/content/fieldConfig/starter-kits.json";
 import * as TaxAccess from "@businessnjgovnavigator/content/fieldConfig/tax-access-modal.json";
 import * as Tax from "@businessnjgovnavigator/content/fieldConfig/tax.json";
@@ -75,8 +73,6 @@ const merged = JSON.parse(
       PageMetadata,
       PageNotFoundError,
       Profile,
-      RaffleBingoStep1,
-      RaffleBingoStep2,
       SiteWideErrorMessages,
       StarterKits,
       HousingRegistrationSearchTask,
@@ -118,8 +114,6 @@ export type ConfigType = typeof ConfigOriginal &
   typeof PageMetadata &
   typeof PageNotFoundError &
   typeof Profile &
-  typeof RaffleBingoStep1 &
-  typeof RaffleBingoStep2 &
   typeof SiteWideErrorMessages &
   typeof StarterKits &
   typeof Tax &
@@ -160,8 +154,6 @@ export const getMergedConfig = (): ConfigType => {
     PageMetadata,
     PageNotFoundError,
     Profile,
-    RaffleBingoStep1,
-    RaffleBingoStep2,
     StarterKits,
     HousingRegistrationSearchTask,
     anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults
