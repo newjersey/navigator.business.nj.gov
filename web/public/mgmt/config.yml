@@ -45,7 +45,13 @@ collections:
       - { label: "Filename", name: "filename", widget: "write-once-read-only-no-space" }
       - { label: "Display Name", name: "displayname", widget: "nospace" }
       - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "write-once-read-only-no-space" }
+      - {
+          label: "Id",
+          name: "id",
+          required: true,
+          widget: "write-once-read-only-no-space",
+          hint: "This is should be the same as the filename.",
+        }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - label: Agency
@@ -1193,7 +1199,7 @@ collections:
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only-no-space" }
       - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - label: Agency
@@ -1239,7 +1245,7 @@ collections:
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only-no-space" }
       - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - label: Agency
@@ -1283,12 +1289,7 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - {
-          label: "File Name",
-          name: "filename",
-          widget: "write-once-read-only-no-space",
-          hint: "This is the name of the file in the code only. Lowercase, no spaces, add hyphens between words",
-        }
+      - { label: "File Name", name: "filename", widget: "write-once-read-only-no-space" }
       - {
           label: "Name",
           name: "name",
@@ -1311,7 +1312,8 @@ collections:
           label: "Id",
           name: "id",
           widget: "write-once-read-only-no-space",
-          hint: "Lowercase, no spaces, add hyphens between words",
+          hint: "This is should be the same as the filename.",
+          required: true,
         }
       - {
           label: "Description for card in For You",
@@ -1497,12 +1499,7 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - {
-          label: "File Name",
-          name: "filename",
-          widget: "write-once-read-only-no-space",
-          hint: "This is the name of the file in the code only. Lowercase, no spaces, add hyphens between words",
-        }
+      - { label: "File Name", name: "filename", widget: "write-once-read-only-no-space" }
       - {
           label: "Name",
           name: "name",
@@ -1525,7 +1522,8 @@ collections:
           label: "Id",
           name: "id",
           widget: "write-once-read-only-no-space",
-          hint: "Lowercase, no spaces, add hyphens between words",
+          hint: "This is should be the same as the filename.",
+          required: true,
         }
       - {
           label: "Description for card in For You",
@@ -2375,8 +2373,8 @@ collections:
           label: "Id",
           name: "id",
           widget: "write-once-read-only-no-space",
-          required: true,
           hint: "This is should be the same as the filename.",
+          required: true,
         }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
@@ -2904,7 +2902,7 @@ collections:
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Name", name: "name", widget: "string", required: false }
-      - { label: "ID", name: "id", widget: "write-once-read-only-no-space" }
+      - { label: "ID", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Webflow Name", name: "webflowName", widget: "string", required: false }
       - { label: "File name", name: "filename", widget: "write-once-read-only-no-space" }
       - { label: "Call to Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -3226,7 +3224,13 @@ collections:
             ],
           required: false,
         }
-      - { label: "Form Id", name: "id", widget: "string" }
+      - {
+          label: "Form Id",
+          name: "id",
+          widget: "write-once-read-only-no-space",
+          hint: "This is should be the same as the filename. Content will appear on the filings page.",
+          required: true,
+        }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
 
@@ -3483,7 +3487,7 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Header", name: "header", widget: "string", required: false }
       - { label: "Not Started Header", name: "notStartedHeader", widget: "string", required: false }
       - { label: "Completed Header", name: "completedHeader", widget: "string", required: false }
