@@ -18,7 +18,6 @@ export interface QUERY_PARAMS_VALUES {
   page: number;
   deferredQuestionAnswered: "true" | "false";
   fromFormBusinessEntity: "true" | "false";
-  fromTaxRegistration: "true" | "false";
   fromForming: "true";
   fromAdditionalBusiness: "true";
   fromFunding: "true";
@@ -39,7 +38,6 @@ export enum QUERIES {
   page = "page",
   deferredQuestionAnswered = "deferredQuestionAnswered",
   fromFormBusinessEntity = "fromFormBusinessEntity",
-  fromTaxRegistration = "fromTaxRegistration",
   fromForming = "fromForming",
   fromFunding = "fromFunding",
   fromOnboarding = "fromOnboarding",
