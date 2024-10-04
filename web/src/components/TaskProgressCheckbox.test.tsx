@@ -9,23 +9,23 @@ import { selectDate } from "@/test/helpers/helpers-testing-library-selectors";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
-  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  TaskProgress,
   defaultDateFormat,
   formationTaskId,
   generateBusiness,
   generateProfileData,
   generateUserDataForBusiness,
   getCurrentDate,
+  TaskProgress,
   taxTaskId,
 } from "@businessnjgovnavigator/shared";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -244,49 +244,7 @@ describe("<TaskProgressCheckbox />", () => {
       expect(currentBusiness().taskProgress[id]).toEqual("COMPLETED");
       expect(mockPush).toHaveBeenCalledWith({
         pathname: ROUTES.dashboard,
-        query: { fromFormBusinessEntity: "true", fromTaxRegistration: "false" },
-      });
-    });
-
-    it("redirects with fromTaxRegistration as false when checking TaskProgressCheckbox as Foreign Remote Seller", async () => {
-      const foreignRemoteSeller = generateProfileData({
-        businessPersona: "FOREIGN",
-        foreignBusinessTypeIds: ["revenueInNJ", "transactionsInNJ"],
-      });
-      renderTaskCheckbox(taxTaskId, generateBusiness({ profileData: foreignRemoteSeller }));
-      await selectCompleted();
-      expect(currentBusiness().taskProgress[taxTaskId]).toEqual("COMPLETED");
-      expect(mockPush).toHaveBeenCalledWith({
-        pathname: ROUTES.dashboard,
-        query: { fromFormBusinessEntity: "false", fromTaxRegistration: "false" },
-      });
-    });
-
-    it("redirects with fromTaxRegistration as false when checking TaskProgressCheckbox as Foreign Remote Worker", async () => {
-      const foreignRemoteWorker = generateProfileData({
-        businessPersona: "FOREIGN",
-        foreignBusinessTypeIds: ["employeesInNJ"],
-      });
-      renderTaskCheckbox(taxTaskId, generateBusiness({ profileData: foreignRemoteWorker }));
-      await selectCompleted();
-      expect(currentBusiness().taskProgress[taxTaskId]).toEqual("COMPLETED");
-      expect(mockPush).toHaveBeenCalledWith({
-        pathname: ROUTES.dashboard,
-        query: { fromFormBusinessEntity: "false", fromTaxRegistration: "false" },
-      });
-    });
-
-    it("redirects with fromTaxRegistration as true when checking TaskProgressCheckbox as dakota nexus", async () => {
-      const foreignNexus = generateProfileData({
-        businessPersona: "FOREIGN",
-        foreignBusinessTypeIds: ["companyOperatedVehiclesInNJ"],
-      });
-      renderTaskCheckbox(taxTaskId, generateBusiness({ profileData: foreignNexus }));
-      await selectCompleted();
-      expect(currentBusiness().taskProgress[taxTaskId]).toEqual("COMPLETED");
-      expect(mockPush).toHaveBeenCalledWith({
-        pathname: ROUTES.dashboard,
-        query: { fromFormBusinessEntity: "false", fromTaxRegistration: "true" },
+        query: { fromFormBusinessEntity: "true" },
       });
     });
 
