@@ -39,7 +39,8 @@ import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
 import { WebserviceLicenseStatusClient } from "@client/WebserviceLicenseStatusClient";
 import { WebserviceLicenseStatusProcessorClient } from "@client/WebserviceLicenseStatusProcessorClient";
-import { dynamoDbTranslateConfig, DynamoUserDataClient } from "@db/DynamoUserDataClient";
+import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
+import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import { HealthCheckMethod } from "@domain/types";
 import { updateSidebarCards } from "@domain/updateSidebarCards";
 import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFactory";

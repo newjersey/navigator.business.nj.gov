@@ -5140,7 +5140,7 @@ __metadata:
     react-dom: 18.2.0
     react-slick: ^0.30.0
     react-transition-group: 4.4.5
-    rehype-format: 5.0.0
+    rehype-format: 5.0.1
     rehype-raw: 7.0.0
     rehype-react: 7.2.0
     rehype-rewrite: 4.0.2
@@ -5329,7 +5329,7 @@ __metadata:
     react-dom: 18.2.0
     react-slick: ^0.30.0
     react-transition-group: 4.4.5
-    rehype-format: 5.0.0
+    rehype-format: 5.0.1
     rehype-raw: 7.0.0
     rehype-react: 7.2.0
     rehype-rewrite: 4.0.2
@@ -21520,6 +21520,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hast-util-format@npm:^1.0.0":
+  version: 1.1.0
+  resolution: "hast-util-format@npm:1.1.0"
+  dependencies:
+    "@types/hast": ^3.0.0
+    hast-util-embedded: ^3.0.0
+    hast-util-minify-whitespace: ^1.0.0
+    hast-util-phrasing: ^3.0.0
+    hast-util-whitespace: ^3.0.0
+    html-whitespace-sensitive-tag-names: ^3.0.0
+    unist-util-visit-parents: ^6.0.0
+  checksum: 0924b479b9a93ee7ab9cbbba638fd0de533f117b8fd85f30694615bb7022c4dfe63245acc962adc7fba43ecdaf7faae7b7991e7819db127c663128e4a8ca144b
+  languageName: node
+  linkType: hard
+
 "hast-util-from-parse5@npm:^5.0.0":
   version: 5.0.3
   resolution: "hast-util-from-parse5@npm:5.0.3"
@@ -21602,6 +21617,19 @@ __metadata:
   dependencies:
     "@types/hast": ^3.0.0
   checksum: 82569a420eda5877c52fdbbdbe26675f012c02d70813dfd19acffdee328e42e4bd0b7ae34454cfcbcb932b2bedbd7ddc119f943a0cfb234120f9456d6c0c4331
+  languageName: node
+  linkType: hard
+
+"hast-util-minify-whitespace@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "hast-util-minify-whitespace@npm:1.0.1"
+  dependencies:
+    "@types/hast": ^3.0.0
+    hast-util-embedded: ^3.0.0
+    hast-util-is-element: ^3.0.0
+    hast-util-whitespace: ^3.0.0
+    unist-util-is: ^6.0.0
+  checksum: e74f883a52591798ef99a864a34905163f7754d9fafa2eba96956b5fde798b28e65990cefe056349285b96c3fd9ae50e5c9a2c3429f2af40799831b2a769ddfb
   languageName: node
   linkType: hard
 
@@ -31867,19 +31895,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rehype-format@npm:5.0.0":
-  version: 5.0.0
-  resolution: "rehype-format@npm:5.0.0"
+"rehype-format@npm:5.0.1":
+  version: 5.0.1
+  resolution: "rehype-format@npm:5.0.1"
   dependencies:
     "@types/hast": ^3.0.0
-    hast-util-embedded: ^3.0.0
-    hast-util-is-element: ^3.0.0
-    hast-util-phrasing: ^3.0.0
-    hast-util-whitespace: ^3.0.0
-    html-whitespace-sensitive-tag-names: ^3.0.0
-    rehype-minify-whitespace: ^6.0.0
-    unist-util-visit-parents: ^6.0.0
-  checksum: 6d81d5f7fb6d6a249b13464122b2c61a48fa9a8b605bcd9989e03c270ead3e14a4c81d0a9b35424794e55a9eff1bdd294c9183810879c25b615790e0fc4b4d19
+    hast-util-format: ^1.0.0
+  checksum: fd520a1278c258f99e8f3df486164813733cf571c371d97a61d64b28b14808f209bb39ed2cbba0340fcce6c941433419a131f0a72d00a907f3b99a20705be448
   languageName: node
   linkType: hard
 
@@ -31892,19 +31914,6 @@ __metadata:
     hast-util-whitespace: ^1.0.4
     unist-util-is: ^4.0.0
   checksum: cffb573df1d114b4055e424344dad3a8fd25ff8a9ba37663d35595effae88d64d9c40f965a4f3df1c477284ff885c9817f9edfd72039f814adb59e3457e61cd8
-  languageName: node
-  linkType: hard
-
-"rehype-minify-whitespace@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "rehype-minify-whitespace@npm:6.0.0"
-  dependencies:
-    "@types/hast": ^3.0.0
-    hast-util-embedded: ^3.0.0
-    hast-util-is-element: ^3.0.0
-    hast-util-whitespace: ^3.0.0
-    unist-util-is: ^6.0.0
-  checksum: f335f56fb669c91e51f6f35c93b750ff00b2caf3c5d08224d77ea7c43f85c0304952caaedd8d3d7986cfc58f8c253203092520626e683a17ee6ac87674d2a5ac
   languageName: node
   linkType: hard
 
