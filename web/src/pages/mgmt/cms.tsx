@@ -65,7 +65,7 @@ const CMS = dynamic(
       // @ts-expect-error: No type definition available
       CMS.registerWidget("write-once-read-only-no-space", WriteOnceReadOnlyNoSpaceControl);
       // @ts-expect-error: No type definition available
-      CMS.registerWidget("nospace", NoSpaceControl);
+      CMS.registerWidget("no-space", NoSpaceControl);
       // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(ContextEditor);
       // @ts-expect-error: No type definition available
