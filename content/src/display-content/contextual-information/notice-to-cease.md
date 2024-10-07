@@ -6,11 +6,11 @@ header: Notice to Cease
 slug: notice-to-cease
 displayname: notice-to-cease
 ---
-A Notice to Cease is a written warning you must give to a tenant when they:
+A Notice to Cease is a written warning you give to a tenant when they:
 
-* Exhibit disorderly conduct and disturb other tenants or neighbors
-* Break the rules and regulations on the lease
-* Break the covenants or agreements on the lease
-* Repeatedly do not pay rent or pay late
+* Break the rules and regulations of the lease
+* Break the covenants or agreements of the lease
+* Show disruptive behavior and disturb other tenants or neighbors
+* Do not pay rent or pay late repeatedly
 
-The notice tells your tenant to stop the behavior that breaks the lease within a reasonable time frame. If your tenant doesn’t comply, then you can give them a `Notice to Quit|notice-to-quit` and proceed with the eviction process.
+The notice tells your tenant to stop the behavior that breaks the lease within a reasonable time frame that you set. If your tenant doesn’t comply, then you can give them a `Notice to Quit|notice-to-quit` and move forward with the eviction process.
