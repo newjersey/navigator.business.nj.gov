@@ -39,7 +39,9 @@ export default async function handler(): Promise<void> {
     );
   }
 
-  const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE);
+  const dataLogger = LogWriter(`NavigatorWebService/${STAGE}`, "DataMigrationLogs");
+
+  const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, dataLogger);
   const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
 
   const GOV_DELIVERY_BASE_URL =

@@ -5,10 +5,9 @@
 
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
+import { dynamoDbTranslateConfig, DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import { UserDataClient } from "@domain/types";
-
-import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
-import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
+import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
 import * as sharedUserData from "@shared/userData";
 
 function setupMockSharedUserData(): typeof sharedUserData {
@@ -49,10 +48,12 @@ describe("DynamoUserDataClient Migrations", () => {
 
   let client: DynamoDBDocumentClient;
   let dynamoUserDataClient: UserDataClient;
+  let logger: LogWriterType;
 
   beforeEach(async () => {
     client = DynamoDBDocumentClient.from(new DynamoDBClient(config), dynamoDbTranslateConfig);
-    dynamoUserDataClient = DynamoUserDataClient(client, dbConfig.tableName);
+    logger = DummyLogWriter;
+    dynamoUserDataClient = DynamoUserDataClient(client, dbConfig.tableName, logger);
     await insertOldData();
   });
 
