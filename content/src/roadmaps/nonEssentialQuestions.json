@@ -77,7 +77,7 @@
     },
     {
       "id": "cds-lab-research ",
-      "questionText": "Do you plan to test or research controlled dangerous substances (CDS)? ",
+      "questionText": "Do you plan to test or research Controlled Dangerous Substances (CDS)?",
       "addOn": "other-lab-research"
     }
   ]
