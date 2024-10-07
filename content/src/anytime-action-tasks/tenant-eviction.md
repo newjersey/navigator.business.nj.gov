@@ -58,7 +58,9 @@ You can file a lawsuit with the Office of the Clerk of the Special Civil Part in
 
 You and your tenant have a chance to settle the case before going to court. For example, if your tenant pays the full rent owed, they can avoid eviction. 
 
-If the case goes to court and you win or your tenant does not show up, you can request a warrant for removal. The warrant allows a court officer to evict the tenant. For more details about the court process, review the [Landlord/Tenant Procedures](https://www.njcourts.gov/sites/default/files/forms/12822_lt_proc_notice.pdf).
+If the case goes to court and you win or your tenant does not show up, you can request a warrant for removal. The warrant allows a court officer to evict the tenant. 
+
+For more details about the court process, review the [Landlord/Tenant Procedures](https://www.njcourts.gov/sites/default/files/forms/12822_lt_proc_notice.pdf).
 
 :::callout{ showHeader="true" headerText="Once completed, you will know:" showIcon="false" calloutType="conditional" }
 
