@@ -16,7 +16,7 @@ summaryDescriptionMd: >-
   such as:
 
 
-  * Failure to pay rent by the due date specified in the lease
+  * Failure to pay rent by the due date and grace period specified in the lease
 
   * Intentional property damage
 
@@ -36,33 +36,29 @@ Eviction is a complicated process. The information below is a general descriptio
 
 :::
 
-## Write a Notice to Quit
+## 1. Write a Notice to Quit
 
-Start by writing your tenant a `Notice to Quit|notice-to-quit`. You must give this notice before filing for eviction, unless your tenant hasn’t paid rent and doesn’t live in federally subsidized housing.
+Start by writing your tenant a `Notice to Quit|notice-to-quit` . You must give this notice before filing for eviction, unless your tenant hasn’t paid rent and doesn’t live in federally subsidized housing.
 
 The notice should include:
 
 * Why you are ending the tenancy
 * How your tenant can resolve the issue
-* The risk of eviction if your tenant doesn’t comply
+* When they need to resolve the issue by to avoid eviction
 
-In some cases, you may also need to give a `Notice to Cease|notice-to-cease`. For more information about the notices, review the [Truth in Renting Guide](https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf).
+In some cases, you may also need to give your tenant a `Notice to Cease|notice-to-cease`. For more information about the notices, review the [Truth in Renting Guide](https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf).
 
+## 2. File for Eviction
 
+If your tenant does not comply with the Notice to Quit, you can file a lawsuit for eviction. The timing and requirements will vary depending on the reason for eviction.
 
-## File for Eviction
+You can file a lawsuit with the Office of the Clerk of the Special Civil Part in the county where your rental is.
 
-If your tenant doesn’t comply with the Notice to Quit, you can file a suit for eviction. The timing and requirements may vary depending on the reason for eviction.
-
-You can file a suit with the Office of the Clerk of the Special Civil Part in the county where your rental is.
-
-
-
-## Go to Court
+## 3. Go to Court
 
 You and your tenant have a chance to settle the case before going to court. For example, if your tenant pays the full rent owed, they can avoid eviction. 
 
-If the case goes to court and you win or your tenant doesn’t show up, you can request a warrant for removal. The warrant allows a court officer to evict the tenant. For more details about the court process, review the [Landlord/Tenant Procedures](https://www.njcourts.gov/sites/default/files/forms/12822_lt_proc_notice.pdf).
+If the case goes to court and you win or your tenant does not show up, you can request a warrant for removal. The warrant allows a court officer to evict the tenant. For more details about the court process, review the [Landlord/Tenant Procedures](https://www.njcourts.gov/sites/default/files/forms/12822_lt_proc_notice.pdf).
 
 :::callout{ showHeader="true" headerText="Once completed, you will know:" showIcon="false" calloutType="conditional" }
 
