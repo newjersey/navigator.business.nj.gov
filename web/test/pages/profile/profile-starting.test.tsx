@@ -26,11 +26,13 @@ import {
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   Business,
+  LegalStructures,
   LookupIndustryById,
   LookupLegalStructureById,
   OperatingPhaseId,
   OperatingPhases,
   UserData,
+  businessPersonas,
   createEmptyBusiness,
   einTaskId,
   emptyAddressData,
@@ -41,6 +43,7 @@ import {
   generateProfileData,
   modifyCurrentBusiness,
   naicsCodeTaskId,
+  randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
@@ -1366,6 +1369,35 @@ describe("profile - starting business", () => {
       renderPage({ business });
 
       expect(screen.getByTestId("raffleBingoGames-radio-group")).toBeInTheDocument();
+    });
+
+    it("does not display raffle bingo question for starting businesses that are not non-profit", () => {
+      const filterNonprofitOut = LegalStructures.filter((x) => x.id !== "nonprofit");
+      const randomLegalStructure = randomElementFromArray(filterNonprofitOut);
+      console.log("filterNonprofitOut", filterNonprofitOut);
+      console.log(randomLegalStructure);
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: randomLegalStructure.id,
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.queryByTestId("raffleBingoGames-radio-group")).not.toBeInTheDocument();
+    });
+
+    it("does not display raffle bingo question for businesses that are not starting", () => {
+      const filterStartingPersonaOut = businessPersonas.filter((persona) => persona !== "STARTING");
+      const randomBusinessPersona = randomElementFromArray(filterStartingPersonaOut);
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: randomBusinessPersona,
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.queryByTestId("raffleBingoGames-radio-group")).not.toBeInTheDocument();
     });
   });
 

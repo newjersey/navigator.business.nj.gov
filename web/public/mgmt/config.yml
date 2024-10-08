@@ -2524,13 +2524,13 @@ collections:
 
   - name: "raffle-bingo-steps"
     label: "Raffle Bingo Steps"
+    delete: false
+    create: false
     folder: "content/src/roadmaps/raffle-bingo-steps"
     summary: "{{displayname}} - {{name}}"
     identifier_field: "{{filename}}"
     slug: "{{fields.filename}}"
-    delete: true
     sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
-    create: true
     editor:
       preview: true
     fields:
@@ -2562,23 +2562,10 @@ collections:
           hint: "Lowercase, no spaces, add hyphens between words.",
         }
       - { label: "Title (Navigator)", name: "name", widget: "string" }
-      - {
-          label: "Summary Description (Webflow and Navigator)",
-          name: "summaryDescriptionMd",
-          widget: "markdown",
-        }
-      - {
-          label: "Call To Action Text (Webflow & Navigator)",
-          name: "callToActionText",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "Call To Action Link (Webflow & Navigator)",
-          name: "callToActionLink",
-          widget: "string",
-          required: false,
-        }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Content", name: "body", widget: "markdown" }
 
   - name: "webflow-licenses"
     label: "Webflow Licenses"
@@ -2658,6 +2645,45 @@ collections:
           - { label: "individual license", value: "individual-license" }
           - { label: "school/course", value: "school-course" }
           - { label: "object or vehicle", value: "object-vehicle" }
+  -name: "raffle-bingo-steps-json"
+   label: "Raffle Bingo Steps (JSON)"
+   delete: false
+   create: false
+   files:
+     - label: Step 1
+       name: raffleBingoStep1
+       collapsed: false
+       file: content/src/fieldConfig/raffle-bingo-step1.json
+       editor:
+         preview: true # may decide to remove
+       fields:
+         - label: Step 1 Content
+           name: raffleBingoStep1
+           widget: object
+           summary: "{{raffleBingoStep1}}"
+           fields:
+             - { label: Step Name, name: stepName, widget: string }
+             - { label: Summary Description, name: summaryDescriptionMd, widget: markdown }
+             - { label: Body, name: body, widget: markdown }
+             - { label: Call to Action Text, name: callToActionText, widget: string }
+             - { label: Call to Action Link, name: callToActionLink, widget: nospace }
+     - label: Step 2
+       name: raffleBingoStep2
+       collapsed: false
+       file: content/src/fieldConfig/raffle-bingo-step2.json
+       editor:
+         preview: true # may decide to remove
+       fields:
+         - label: Step 2 Content
+           name: raffleBingoStep2
+           widget: object
+           summary: "{{raffleBingoStep2}}"
+           fields:
+             - { label: Step Name, name: stepName, widget: string }
+             - { label: Summary Description, name: summaryDescriptionMd, widget: markdown }
+             - { label: Body, name: body, widget: markdown }
+             - { label: Call to Action Text, name: callToActionText, widget: string }
+             - { label: Call to Action Link, name: callToActionLink, widget: nospace }
 
   - name: "cannabis-license"
     label: "Tasks - Cannabis License"

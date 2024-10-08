@@ -1,43 +1,29 @@
 import { fetchTaskByFilename } from "@/lib/async-content-fetchers/fetchTaskByFilename";
 import { Task } from "@/lib/types/types";
-import { arrayOfTaskAgencies } from "@businessnjgovnavigator/shared/taskAgency";
 
-type RaffleBingoStepLabels = "Get an ID Number" | "From Your NJ Municipality";
+export const raffleBingoStepFiles = ["raffle-license-step-1", "raffle-license-step-2"];
 
-export const RaffleBingoSteps: {
-  stepLabel: RaffleBingoStepLabels;
-  fileName: string;
-  agencyId: string;
-}[] = [
-  {
-    stepLabel: "Get an ID Number",
-    fileName: "raffle-license-step-1",
-    agencyId: "games-of-chance-control-commission",
-  },
-  { stepLabel: "From Your NJ Municipality", fileName: "raffle-license-step-2", agencyId: "nj-municipality" },
-];
+export const getRaffleBingoStep = async (stepIndex: number): Promise<Task> => {
+  console.log("raffleBingoStepFiles", raffleBingoStepFiles);
+  console.log("raffleBingoStepFiles length:", raffleBingoStepFiles.length);
 
-export const getRaffleBingoTask = async (stepIndex: number): Promise<Task> => {
-  return await fetchTaskByFilename(RaffleBingoSteps[stepIndex].fileName);
+  const fileName = raffleBingoStepFiles[stepIndex];
+  console.log("fileName:", fileName);
+  console.log("stepIndex:", stepIndex);
+  const step = await fetchTaskByFilename(fileName);
+  return step;
+};
+console.log("step 1:", getRaffleBingoStep(0));
+console.log("step 2:", getRaffleBingoStep(1));
+
+export const isNotLastStep = (stepIndex: number): boolean => {
+  return stepIndex !== raffleBingoStepFiles.length - 1;
 };
 
-export const getAgencyName = (agencyId: string): string => {
-  const issuingAgency = arrayOfTaskAgencies.find((agency) => agency.id === agencyId);
-  return issuingAgency!.name;
-};
-
-export const shouldDisplayContinueButton = (stepIndex: number): boolean => {
-  return stepIndex !== RaffleBingoSteps.length - 1;
-};
-
-export const shouldDisplayBackButton = (stepIndex: number): boolean => {
+export const isNotFirstStep = (stepIndex: number): boolean => {
   return stepIndex !== 0;
 };
 
-export const shouldDisplayMarkAsCompleteButton = (stepIndex: number): boolean => {
-  return stepIndex === RaffleBingoSteps.length - 1;
-};
-
-export const shouldDisplayCTAButton = (): boolean => {
-  return true;
+export const isLastStep = (stepIndex: number): boolean => {
+  return stepIndex === raffleBingoStepFiles.length - 1;
 };

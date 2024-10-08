@@ -8,6 +8,8 @@ displayname: "raffle-license-step-1"
 callToActionLink: "https://www.njconsumeraffairs.gov/lgccc/Applications/Initial-Affidavit-and-Application-for-Biennial-Registration.pdf"
 callToActionText: "Get an LGCCC ID Number"
 summaryDescriptionMd: "You need to apply for a raffle or bingo game license in your New Jersey municipality if you will be holding, operating, or conducting raffles or bingo games."
+stepLabel: "Get an ID Number"
+agencyName: "New Jersey Legalized Games of Chance Control Commission"
 ---
 
 ## Eligibility Criteria

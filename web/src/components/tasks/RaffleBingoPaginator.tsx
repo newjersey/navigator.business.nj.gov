@@ -7,17 +7,17 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import {
-  getAgencyName,
-  getRaffleBingoTask,
-  RaffleBingoSteps,
-  shouldDisplayBackButton,
-  shouldDisplayContinueButton,
-  shouldDisplayMarkAsCompleteButton,
+  getRaffleBingoStep,
+  isLastStep,
+  isNotFirstStep,
+  isNotLastStep,
+  raffleBingoStepFiles,
 } from "@/components/tasks/RaffleBingoSteps";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
+import { fetchTaskByFilename } from "@/lib/async-content-fetchers/fetchTaskByFilename";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@/lib/types/types";
+import { StepperStep, Task } from "@/lib/types/types";
 import { TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, ReactNode, useEffect, useState } from "react";
 
@@ -27,6 +27,7 @@ interface Props {
 
 export const RaffleBingoPaginator = (props: Props): ReactElement => {
   const [stepIndex, setStepIndex] = useState(0);
+  const [stepLabels, setStepLabels] = useState<StepperStep[]>([]);
   const [task, setTask] = useState<Task>();
   const { business, updateQueue } = useUserData();
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState<boolean>(false);
@@ -34,17 +35,31 @@ export const RaffleBingoPaginator = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   useEffect(() => {
-    getRaffleBingoTask(stepIndex).then((task) => {
-      setTask(task);
+    getRaffleBingoStep(stepIndex).then((step) => {
+      console.log("step", step);
+      setTask(step);
     });
   }, [stepIndex]);
+
+  useEffect(() => {
+    const getStepLabels = async (): Promise<void> => {
+      const labels: StepperStep[] = await Promise.all(
+        raffleBingoStepFiles.map(async (fileName) => {
+          const step = await fetchTaskByFilename(fileName);
+          return { name: step.stepLabel ?? "" };
+        })
+      );
+      setStepLabels(labels);
+    };
+    getStepLabels();
+  }, []);
 
   const onMoveToStep = (stepIndex: number): void => {
     setStepIndex(stepIndex);
   };
 
   const getContinueButtonText = (stepIndex: number): string => {
-    if (stepIndex === RaffleBingoSteps.length - 1) {
+    if (stepIndex === raffleBingoStepFiles.length - 1) {
       return Config.taskDefaults.backButtonText;
     } else {
       return Config.taskDefaults.continueButtonText;
@@ -54,7 +69,7 @@ export const RaffleBingoPaginator = (props: Props): ReactElement => {
   const markTaskAsComplete = (): void => {
     if (!business || !updateQueue) return;
     const completed: TaskProgress = "COMPLETED";
-    updateQueue.queueTaskProgress({ ["raffle-bingo-games-license"]: completed });
+    updateQueue.queueTaskProgress({ [props.task.id]: completed });
     updateQueue.update();
     setSuccessSnackbarIsOpen(true);
   };
@@ -71,28 +86,26 @@ export const RaffleBingoPaginator = (props: Props): ReactElement => {
     );
   };
 
-  const stepItems = RaffleBingoSteps.map((item) => {
-    return { name: item.stepLabel };
+  const stepItems: StepperStep[] = stepLabels.map((item) => {
+    return { name: item.name ?? "" };
   });
-
-  const getIssuingAgencyName = (): string => {
-    const currentStep = RaffleBingoSteps[stepIndex];
-    return getAgencyName(currentStep.agencyId);
-  };
 
   return (
     <>
       <div className="margin-bottom-3">
         <Content>{task?.summaryDescriptionMd ?? ""}</Content>
       </div>
-      <HorizontalStepper
-        steps={stepItems}
-        currentStep={stepIndex}
-        onStepClicked={(step: number): void => {
-          onMoveToStep(step);
-        }}
-      />
-
+      {stepItems.length > 0 ? (
+        <HorizontalStepper
+          steps={stepItems}
+          currentStep={stepIndex}
+          onStepClicked={(step: number): void => {
+            onMoveToStep(step);
+          }}
+        />
+      ) : (
+        <div>Loading...</div>
+      )}
       <div data-testid={task?.filename}>
         <Content>{task?.contentMd ?? ""}</Content>
         <div className="margin-bottom-4 margin-left-2">
@@ -109,13 +122,13 @@ export const RaffleBingoPaginator = (props: Props): ReactElement => {
       <HorizontalLine />
       <div>
         <span className="text-bold">Issuing Agency: </span>
-        {getIssuingAgencyName()}
+        {task?.agencyName}
       </div>
 
       <div>
         <CtaContainer noBackgroundColor={false}>
           <ActionBarLayout>
-            {shouldDisplayContinueButton(stepIndex) && (
+            {isNotLastStep(stepIndex) && (
               <PrimaryButton
                 isColor="primary"
                 onClick={(): void => {
@@ -127,7 +140,7 @@ export const RaffleBingoPaginator = (props: Props): ReactElement => {
                 {getContinueButtonText(stepIndex)}
               </PrimaryButton>
             )}
-            {shouldDisplayBackButton(stepIndex) && (
+            {isNotFirstStep(stepIndex) && (
               <div className="margin-top-2 mobile-lg:margin-top-0">
                 <SecondaryButton
                   isColor="primary"
@@ -141,7 +154,7 @@ export const RaffleBingoPaginator = (props: Props): ReactElement => {
                 </SecondaryButton>
               </div>
             )}
-            {shouldDisplayMarkAsCompleteButton(stepIndex) && (
+            {isLastStep(stepIndex) && (
               <PrimaryButton
                 isColor="primary"
                 onClick={(): void => {

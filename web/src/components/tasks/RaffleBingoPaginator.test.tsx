@@ -45,6 +45,8 @@ describe("<RaffleBingoPaginator />", () => {
     step2 = await fetchRaffleBingoTab("raffle-license-step-2");
   });
 
+  const task = generateTask({});
+
   const renderPaginator = (task: Task): void => {
     render(
       <WithStatefulUserData initialUserData={generateUserData({})}>
@@ -54,11 +56,13 @@ describe("<RaffleBingoPaginator />", () => {
   };
 
   it("renders first tab content when the task is opened", async () => {
-    const task = generateTask({});
+    // const task = generateTask({});
     renderPaginator(task);
+
     await waitFor(() => {
       expect(screen.getByText("Eligibility Criteria")).toBeInTheDocument();
     });
+
     expect(screen.getByRole("button", { name: step1.callToActionText })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: Config.taskDefaults.continueButtonText })).toBeInTheDocument();
     expect(
@@ -70,14 +74,21 @@ describe("<RaffleBingoPaginator />", () => {
   });
 
   it("displays second step task content when on second step", async () => {
-    const task = generateTask({});
+    // const task = generateTask({});
     renderPaginator(task);
 
+    await screen.findByTestId("stepper-1");
+
     fireEvent.click(screen.getByTestId("stepper-1"));
+
     await waitFor(() => {
       expect(screen.getByText("Application Requirements")).toBeInTheDocument();
     });
-    expect(screen.getByRole("button", { name: step2.callToActionText })).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: step2.callToActionText })).toBeInTheDocument();
+    });
+
     expect(screen.getByRole("button", { name: Config.taskDefaults.backButtonText })).toBeInTheDocument();
     expect(
       screen.queryByRole("button", { name: Config.taskDefaults.continueButtonText })
@@ -85,9 +96,12 @@ describe("<RaffleBingoPaginator />", () => {
   });
 
   it("marks task as complete when 'Mark As Complete' button is clicked", async () => {
-    const task = generateTask({});
+    // const task = generateTask({});
 
     renderPaginator(task);
+
+    await screen.findByTestId("stepper-1");
+
     fireEvent.click(screen.getByTestId("stepper-1"));
 
     await waitFor(() => {
@@ -101,7 +115,7 @@ describe("<RaffleBingoPaginator />", () => {
   });
 
   it("navigates from step one to step two when the continue button is clicked", async () => {
-    const task = generateTask({});
+    // const task = generateTask({});
 
     renderPaginator(task);
 
@@ -117,7 +131,7 @@ describe("<RaffleBingoPaginator />", () => {
   });
 
   it("navigates from step two to step one when the back button is clicked", async () => {
-    const task = generateTask({});
+    // const task = generateTask({});
 
     renderPaginator(task);
 

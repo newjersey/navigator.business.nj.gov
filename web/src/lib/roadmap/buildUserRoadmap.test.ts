@@ -9,12 +9,14 @@ import {
   generateMunicipalityDetail,
   generateProfileData,
   getIndustries,
+  LegalStructures,
+  randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
 import * as fetchMunicipalityById from "@businessnjgovnavigator/shared/domain-logic/fetchMunicipalityById";
 import {
-  ProfileData,
   createEmptyProfileData,
   emptyIndustrySpecificData,
+  ProfileData,
 } from "@businessnjgovnavigator/shared/profileData";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionAddOn", () => ({
@@ -900,10 +902,12 @@ describe("buildUserRoadmap", () => {
     });
 
     it("does not add raffle-bingo-games task if business is not a non-profit", () => {
+      const filterNonprofitOut = LegalStructures.filter((x) => x.id !== "nonprofit");
+      const randomLegalStructure = randomElementFromArray(filterNonprofitOut);
       buildUserRoadmap(
         generateStartingProfile({
           raffleBingoGames: false,
-          legalStructureId: "limited-liability-company",
+          legalStructureId: randomLegalStructure.id,
         })
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("raffle-bingo-games");
