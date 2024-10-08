@@ -255,19 +255,17 @@
   "footer": {
     "creditLinkText": "Open Source",
     "facebookLink": "https://www.facebook.com/BusinessNJgov",
-    "linkThree": "https://business.nj.gov/newsletter-signup",
+    "linkTwo": "https://business.nj.gov/newsletter-signup",
     "madeWithLoveByTheOfficeOfInnovationAriaLabel": "Made with love by the Office of Innovation",
     "creditText": " Powered by ",
     "madeWithText": "Made with",
-    "linkOne": "https://forms.business.nj.gov/feedback/",
-    "linkThreeText": "Sign Up For Our Newsletter",
-    "linkTwo": "https://business.nj.gov/privacy-policy",
+    "linkTwoText": "Sign Up For Our Newsletter",
+    "linkOne": "https://business.nj.gov/privacy-policy",
     "creditLink": "https://business.nj.gov/license-and-copyright-notice",
     "officeExternalText": "Follow us on:",
     "officeLink": "https://innovation.nj.gov/",
-    "linkOneText": "Give Us Feedback",
     "gitHubLink": "https://github.com/newjersey",
-    "linkTwoText": "Terms & Privacy Policy",
+    "linkOneText": "Terms & Privacy Policy",
     "byTheOfficeOfInnovationText": "by the Office of Innovation"
   },
   "registeredForTaxesModal": {
