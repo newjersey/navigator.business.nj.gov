@@ -34,7 +34,12 @@ import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllLicenseCalendarEvents } from "@/lib/static/loadLicenseCalendarEvents";
 import { loadAllPageMetadata } from "@/lib/static/loadPageMetadata";
-import { loadAllLicenseTasks, loadAllMunicipalTasks, loadAllTasksOnly } from "@/lib/static/loadTasks";
+import {
+  loadAllLicenseTasks,
+  loadAllMunicipalTasks,
+  loadAllRaffleBingoSteps,
+  loadAllTasksOnly,
+} from "@/lib/static/loadTasks";
 import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
 import {
   AnytimeActionLicenseReinstatement,
@@ -69,6 +74,7 @@ interface Props {
   tasks: Task[];
   licenseTasks: Task[];
   municipalTasks: Task[];
+  raffleBingoSteps: Task[];
   certifications: Certification[];
   archivedCertifications: Certification[];
   fundings: Funding[];
@@ -93,6 +99,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [taskMatches, setTaskMatches] = useState<Match[]>([]);
   const [licenseTaskMatches, setLicenseTaskMatches] = useState<Match[]>([]);
   const [municipalTaskMatches, setMunicipalTaskMatches] = useState<Match[]>([]);
+  const [raffleBingoStepMatches, setRaffleBingoStepMatches] = useState<Match[]>([]);
   const [certMatches, setCertMatches] = useState<Match[]>([]);
   const [certArchiveMatches, setCertArchiveMatches] = useState<Match[]>([]);
   const [fundingMatches, setFundingMatches] = useState<Match[]>([]);
@@ -134,6 +141,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     setTaskMatches(searchTasks(props.tasks, lowercaseTerm));
     setLicenseTaskMatches(searchTasks(props.licenseTasks, lowercaseTerm));
     setMunicipalTaskMatches(searchTasks(props.municipalTasks, lowercaseTerm));
+    setRaffleBingoStepMatches(searchTasks(props.raffleBingoSteps, lowercaseTerm));
     setCertMatches(searchCertifications(props.certifications, lowercaseTerm));
     setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
     setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
@@ -178,6 +186,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...taskMatches,
         ...licenseTaskMatches,
         ...municipalTaskMatches,
+        ...raffleBingoStepMatches,
         ...certMatches,
         ...certArchiveMatches,
         ...fundingMatches,
@@ -302,6 +311,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       noAuth: true,
       tasks: loadAllTasksOnly(),
       licenseTasks: loadAllLicenseTasks(),
+      raffleBingoSteps: loadAllRaffleBingoSteps(),
       municipalTasks: loadAllMunicipalTasks(),
       certifications: loadAllCertifications(),
       archivedCertifications: loadAllArchivedCertifications(),

@@ -542,5 +542,17 @@ describe("profile-foreign", () => {
 
       expect(screen.queryByTestId("elevatorOwningBusiness-radio-group")).not.toBeInTheDocument();
     });
+
+    it("does not display raffle bingo question for non-profit foreign businesses", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          legalStructureId: "nonprofit",
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.queryByTestId("raffleBingoGames-radio-group")).not.toBeInTheDocument();
+    });
   });
 });

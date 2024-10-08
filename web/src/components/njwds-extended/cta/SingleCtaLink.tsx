@@ -2,6 +2,7 @@
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { PrimaryButton, PrimaryButtonColors } from "@/components/njwds-extended/PrimaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
+import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
@@ -13,6 +14,7 @@ interface Props {
   buttonColor?: PrimaryButtonColors;
   noBackgroundColor?: boolean;
   alignLeft?: boolean;
+  iconName?: string;
 }
 
 export const SingleCtaLink = (props: Props): ReactElement => {
@@ -33,6 +35,11 @@ export const SingleCtaLink = (props: Props): ReactElement => {
           }}
         >
           {props?.text || Config.taskDefaults.defaultCallToActionText}
+          {props.iconName && (
+            <Icon className="text-green usa-icon--size-3 margin-left-1 padding-bottom-05">
+              {props.iconName}
+            </Icon>
+          )}
         </PrimaryButton>
       </ActionBarLayout>
     </CtaContainer>

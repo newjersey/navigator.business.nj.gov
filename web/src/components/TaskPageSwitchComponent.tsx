@@ -5,6 +5,7 @@ import { HotelMotelRegistrationTask } from "@/components/tasks/HotelMotelRegistr
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { MultipleDwellingRegistrationTask } from "@/components/tasks/MultipleDwellingRegistrationTask";
 import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
+import { RaffleBingoTask } from "@/components/tasks/RaffleBingoTask";
 import { TaxTask } from "@/components/tasks/TaxTask";
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
@@ -63,6 +64,7 @@ export const TaskPageSwitchComponent = ({
     "multiple-dwelling-registration": (
       <MultipleDwellingRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),
+    "raffle-bingo-games-license": <RaffleBingoTask task={task} />,
     "determine-naics-code": <NaicsCodeTask task={task} />,
     "priority-status-cannabis": <CannabisPriorityStatusTask task={task} />,
     "conditional-permit-cannabis": <CannabisApplyForLicenseTask task={task} />,

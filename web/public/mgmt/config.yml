@@ -2516,6 +2516,51 @@ collections:
           - { label: "school/course", value: "school-course" }
           - { label: "object or vehicle", value: "object-vehicle" }
 
+  - name: "raffle-bingo-steps"
+    label: "Raffle Bingo Steps"
+    delete: false
+    create: false
+    folder: "content/src/roadmaps/raffle-bingo-steps"
+    summary: "{{displayname}} - {{name}}"
+    identifier_field: "{{filename}}"
+    slug: "{{fields.filename}}"
+    sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "Id",
+          name: "id",
+          widget: "write-once-read-only-no-space",
+          required: true,
+          hint: "This is should be the same as the filename.",
+        }
+      - {
+          label: "Filename",
+          name: "filename",
+          widget: "write-once-read-only-no-space",
+          hint: "This is the name of the file in the code only.",
+        }
+      - {
+          label: "Display Name",
+          name: "displayname",
+          widget: "nospace",
+          required: true,
+          hint: "This the name displayed internally in CMS list.",
+        }
+      - {
+          label: "Url Slug",
+          name: "urlSlug",
+          widget: "nospace",
+          hint: "Lowercase, no spaces, add hyphens between words.",
+        }
+      - { label: "Title (Navigator)", name: "name", widget: "string" }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Content", name: "body", widget: "markdown" }
+
   - name: "webflow-licenses"
     label: "Webflow Licenses"
     folder: "content/src/webflow-licenses"
@@ -2594,6 +2639,45 @@ collections:
           - { label: "individual license", value: "individual-license" }
           - { label: "school/course", value: "school-course" }
           - { label: "object or vehicle", value: "object-vehicle" }
+  -name: "raffle-bingo-steps-json"
+   label: "Raffle Bingo Steps (JSON)"
+   delete: false
+   create: false
+   files:
+     - label: Step 1
+       name: raffleBingoStep1
+       collapsed: false
+       file: content/src/fieldConfig/raffle-bingo-step1.json
+       editor:
+         preview: true # may decide to remove
+       fields:
+         - label: Step 1 Content
+           name: raffleBingoStep1
+           widget: object
+           summary: "{{raffleBingoStep1}}"
+           fields:
+             - { label: Step Name, name: stepName, widget: string }
+             - { label: Summary Description, name: summaryDescriptionMd, widget: markdown }
+             - { label: Body, name: body, widget: markdown }
+             - { label: Call to Action Text, name: callToActionText, widget: string }
+             - { label: Call to Action Link, name: callToActionLink, widget: nospace }
+     - label: Step 2
+       name: raffleBingoStep2
+       collapsed: false
+       file: content/src/fieldConfig/raffle-bingo-step2.json
+       editor:
+         preview: true # may decide to remove
+       fields:
+         - label: Step 2 Content
+           name: raffleBingoStep2
+           widget: object
+           summary: "{{raffleBingoStep2}}"
+           fields:
+             - { label: Step Name, name: stepName, widget: string }
+             - { label: Summary Description, name: summaryDescriptionMd, widget: markdown }
+             - { label: Body, name: body, widget: markdown }
+             - { label: Call to Action Text, name: callToActionText, widget: string }
+             - { label: Call to Action Link, name: callToActionLink, widget: nospace }
 
   - name: "cannabis-license"
     label: "Tasks - Cannabis License"
@@ -4346,6 +4430,7 @@ collections:
               - { label: Remove Text, name: removeText, widget: string }
               - { label: Back, name: backButtonText, widget: string }
               - { label: Continue Text, name: continueButtonText, widget: string }
+              - { label: Mark As Complete, name: "markAsCompleteButtonText", widget: string }
           - label: Task - Business Name Search
             name: searchBusinessNameTask
             collapsed: true
@@ -5364,6 +5449,21 @@ collections:
                           - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
                           - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
+                  - label: Raffle & Bingo Games
+                    name: raffleBingoGames
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - { label: "Alt Description", name: "altDescription", widget: "markdown" }
                   - label: Home Contractor
                     name: homeContractor
                     collapsed: true

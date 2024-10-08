@@ -116,6 +116,9 @@ const DashboardPage = (props: Props): ReactElement => {
     })();
   }, [business, updateQueue]);
 
+  const operatingPhase = business?.profileData.operatingPhase;
+  console.log({ operatingPhase });
+
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
       <NextSeo title={getNextSeoTitle(Config.pagesMetadata.dashboardTitle)} />
