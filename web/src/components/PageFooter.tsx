@@ -25,22 +25,14 @@ export const PageFooter = (): ReactElement => {
             >
               {Config.footer.linkOneText}
             </a>
-            <a
-              href={Config.footer.linkTwo}
-              className="margin-x-1 text-white"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {Config.footer.linkTwoText}
-            </a>
 
             <a
-              href={Config.footer.linkThree}
+              href={Config.footer.linkTwo}
               className="margin-left-1 text-white"
               target="_blank"
               rel="noreferrer"
             >
-              {Config.footer.linkThreeText}
+              {Config.footer.linkTwoText}
             </a>
           </div>
           <hr className="margin-y-2" />
