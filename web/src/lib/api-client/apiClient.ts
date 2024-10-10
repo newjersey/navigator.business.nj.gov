@@ -18,6 +18,7 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 const apiBaseUrl = process.env.API_BASE_URL || "";
 
 export const getUserData = (id: string): Promise<UserData> => {
+  console.log({ id });
   return get<UserData>(`/users/${id}`).then((userData) => {
     setPhaseDimension(getCurrentBusiness(userData).profileData.operatingPhase);
     return userData;

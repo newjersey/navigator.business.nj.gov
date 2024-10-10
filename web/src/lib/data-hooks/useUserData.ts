@@ -23,6 +23,7 @@ export const useUserData = (): UseUserDataResponse => {
   const { userDataError, setUserDataError } = useContext(UserDataErrorContext);
   const { setRoadmap } = useContext(RoadmapContext);
   const fetchedUserId = useRef<string | undefined>(NOT_YET_FETCHED);
+  console.log("useUserData");
   const { data, error, mutate } = useSWR<UserData | undefined>(
     state.activeUser?.id || null,
     api.getUserData,

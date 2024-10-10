@@ -19,13 +19,22 @@ import { Dispatch } from "react";
 import * as session from "./sessionHelper";
 import { triggerSignOut } from "./sessionHelper";
 
-export const onSignIn = async (dispatch: Dispatch<AuthAction>): Promise<void> => {
+export const onSignIn = async (
+  push: (url: string) => Promise<boolean>,
+  dispatch: Dispatch<AuthAction>
+): Promise<void> => {
   const user = await session.getActiveUser();
   dispatch({
     type: "LOGIN",
     activeUser: user,
   });
 
+  console.log("onSignIn");
+
+  if (user.id.includes("@")) {
+    console.log("user.id:", user.id);
+    onSignOut(push, dispatch);
+  }
   const userData = await api.getUserData(user.id);
   setRegistrationDimension("Fully Registered");
   setOnLoadDimensions(userData);

@@ -345,6 +345,7 @@ app.use(
     updateOperatingPhase,
     AWSEncryptionDecryptionClient,
     timeStampToBusinessSearch
+    // logger
   )
 );
 

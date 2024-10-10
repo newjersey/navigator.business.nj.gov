@@ -125,8 +125,10 @@ export const userRouterFactory = (
   updateOperatingPhase: UpdateOperatingPhase,
   encryptionDecryptionClient: EncryptionDecryptionClient,
   timeStampBusinessSearch: TimeStampBusinessSearch
+  // logWriter: LogWriterType
 ): Router => {
   const router = Router();
+  // const logId = logWriter.GetId();
   const encryptTaxId = encryptTaxIdFactory(encryptionDecryptionClient);
 
   router.get("/users/:userId", (req, res) => {
@@ -135,6 +137,31 @@ export const userRouterFactory = (
       res.status(StatusCodes.FORBIDDEN).json();
       return;
     }
+
+    /* NOTES:
+    We have a number of users who are attempting to log into the application who have not previously visited and
+    therefore do not have any user data. This is causing an infinite loop in the frontend where the user is getting
+    bounced between the onboarding and loading pages. It appears that a tell-tale indicator of such a user is a userId
+    that is an email address.
+
+    TODO: Possible solution - check if the userID is a uuid - if not, log the user out, direct them to onboarding step 1
+    It is likely that this user will enter into a behavior loop where they will then attempt to login again. This is
+    significantly better than the loop behavior that they would otherwise experience. Hopefully, these people will reach
+    out via a support request, at which point we can coach them through the onboarding process.
+    */
+    // Check if user is an email address
+    // if (signedInUserId.includes("@")) {
+    //   // log a login request under an email
+    //   logWriter.LogError(
+    //     `userRouterFactory - Id:${logId} -User authenticated without userData. signedInUserId:${signedInUserId} - Request: ${req}`
+    //   );
+    //   // force them to log out and onboard
+    //   res.status(StatusCodes.UNAUTHORIZED);
+    // } else {
+    //   // log a login request under a UUID
+    //   logWriter.LogInfo(
+    //     `userRouterFactory - ID:${logId} -User authenticated. Request: ${JSON.stringify(req.params)}`
+    //   );
 
     userDataClient
       .get(req.params.userId)
@@ -150,15 +177,19 @@ export const userRouterFactory = (
       })
       .catch((error: Error) => {
         if (error.message === "Not found") {
+          // TODO: COME BACK HERE TO TEST THIS LOCALLY
           if (process.env.IS_OFFLINE || process.env.STAGE === "dev") {
             saveEmptyUserData(req, res, signedInUserId);
           } else {
+            // here - log the signedInUserId - req.params.userId
             res.status(StatusCodes.NOT_FOUND).json({ error: error.message });
           }
         } else {
+          // here - log signedInUserId - req.params.userId and more substantial user data
           res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
         }
       });
+    // }
   });
 
   router.post("/users", async (req, res) => {
@@ -320,6 +351,7 @@ export const userRouterFactory = (
         },
       }));
     } catch {
+      // TODO: add log
       return userData;
     }
   };

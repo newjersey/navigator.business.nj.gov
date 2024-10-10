@@ -81,7 +81,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const listener = (data: HubCapsule): void => {
     switch (data.payload.event) {
       case "signIn":
-        onSignIn(dispatch);
+        onSignIn(router.push, dispatch);
         break;
       case "signUp":
         break;
