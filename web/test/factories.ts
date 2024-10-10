@@ -503,14 +503,14 @@ export const randomNegativeFilteredIndustry = (func: (industry: Industry) => boo
 
 export const randomHomeBasedIndustry = (): string => {
   const filter = (it: Industry): boolean => {
-    return !!it.industryOnboardingQuestions.canBeHomeBased;
+    return !!it.industryOnboardingQuestions.canBeHomeBased && it.isEnabled;
   };
   return filterRandomIndustry(filter).id;
 };
 
 export const randomNonHomeBasedIndustry = (): string => {
   const filter = (it: Industry): boolean => {
-    return !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation;
+    return !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation && it.isEnabled;
   };
   return filterRandomIndustry(filter).id;
 };
