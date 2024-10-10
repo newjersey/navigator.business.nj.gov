@@ -95,13 +95,16 @@ export const taskIdLicenseNameMapping = {
   "license-massage-therapy": "Massage and Bodywork Therapy-Massage and Bodywork Employer",
   "moving-company-license": "Public Movers and Warehousemen-Public Mover and Warehouseman",
   "pharmacy-license": "Pharmacy-Pharmacy",
-  "public-accountant-license": "Accountancy-Firm Registration",
   "register-accounting-firm": "Accountancy-Firm Registration",
   "register-home-contractor": "Home Improvement Contractors-Home Improvement Contractor",
   "ticket-broker-reseller-registration": "Ticket Brokers",
   "telemarketing-license": "Telemarketers",
   "entertainment-agency-reg": "Employment & Personnel Service-Entertainment/Booking Agency",
 } as const;
+
+export const LicenseNameTaskIdMapping = Object.fromEntries(
+  Object.entries(taskIdLicenseNameMapping).map(([key, value]) => [value, key])
+);
 
 export type LicenseTaskID = keyof typeof taskIdLicenseNameMapping;
 

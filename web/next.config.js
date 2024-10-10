@@ -20,6 +20,7 @@ module.exports = withBundleAnalyzer({
     AWS_REGION: process.env.AWS_REGION,
     MYNJ_PROFILE_LINK: process.env.MYNJ_PROFILE_LINK,
     CHECK_DEAD_LINKS: process.env.CHECK_DEAD_LINKS,
+    FEATURE_MODIFY_BUSINESS_PAGE: process.env.FEATURE_MODIFY_BUSINESS_PAGE ?? "false",
     USE_BASIC_AUTH: process.env.USE_BASIC_AUTH,
     BASIC_AUTH_USERNAME: process.env.BASIC_AUTH_USERNAME,
     BASIC_AUTH_PASSWORD: process.env.BASIC_AUTH_PASSWORD,

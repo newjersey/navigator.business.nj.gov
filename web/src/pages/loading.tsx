@@ -1,6 +1,4 @@
-import { PageCircularIndicator } from "@/components/PageCircularIndicator";
-import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { LoadingPageComponent } from "@/components/LoadingPageComponent";
 import { AuthContext } from "@/contexts/authContext";
 import { getActiveUser, triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn } from "@/lib/auth/signinHelper";
@@ -61,15 +59,7 @@ const LoadingPage = (): ReactElement => {
     }
   }, userData);
 
-  return (
-    <PageSkeleton showNavBar logoOnly="NAVIGATOR_LOGO">
-      <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
-        <SingleColumnContainer>
-          <PageCircularIndicator />
-        </SingleColumnContainer>
-      </main>
-    </PageSkeleton>
-  );
+  return <LoadingPageComponent />;
 };
 
 export function getStaticProps(): GetStaticPropsResult<{ noAuth: boolean }> {
