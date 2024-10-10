@@ -13,23 +13,23 @@ import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
-  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
   BusinessPersona,
+  businessPersonas,
+  emptyProfileData,
   ForeignBusinessTypeId,
+  generateBusiness,
+  generateMunicipality,
+  generateProfileData,
   Industry,
   OperatingPhase,
   OperatingPhases,
   ProfileData,
-  businessPersonas,
-  emptyProfileData,
-  generateBusiness,
-  generateMunicipality,
-  generateProfileData,
   randomInt,
 } from "@businessnjgovnavigator/shared";
 import {
@@ -51,7 +51,7 @@ import {
   selectByText,
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
@@ -137,10 +137,17 @@ describe("profile - shared", () => {
       return !phase.displayAltHomeBasedBusinessDescription;
     });
 
+    const persona: Partial<ProfileData> = randomElementFromArray([
+      { businessPersona: "STARTING" },
+      { businessPersona: "OWNING" },
+      { businessPersona: "FOREIGN", foreignBusinessTypeIds: ["propertyInNJ"] },
+    ]);
+
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
         industryId: randomHomeBasedIndustry(),
         operatingPhase: randomElementFromArray(defaultDescOperatingPhases as OperatingPhase[]).id,
+        ...persona,
       }),
     });
 
@@ -158,10 +165,18 @@ describe("profile - shared", () => {
     const altDescOperatingPhases = OperatingPhases.filter((phase: OperatingPhase) => {
       return phase.displayAltHomeBasedBusinessDescription;
     });
+
+    const persona: Partial<ProfileData> = randomElementFromArray([
+      { businessPersona: "STARTING" },
+      { businessPersona: "OWNING" },
+      { businessPersona: "FOREIGN", foreignBusinessTypeIds: ["propertyInNJ"] },
+    ]);
+
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
         industryId: randomHomeBasedIndustry(),
         operatingPhase: randomElementFromArray(altDescOperatingPhases as OperatingPhase[]).id,
+        ...persona,
       }),
     });
 
@@ -177,10 +192,9 @@ describe("profile - shared", () => {
 
   it("should never show the non-essential planned renovation question for owning business, with homebase question as no", () => {
     const business = generateBusinessForProfile({
-      profileData: generateProfileData({
+      profileData: generateOwningProfileData({
         industryId: randomHomeBasedIndustry(),
         operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
-        businessPersona: "OWNING",
         homeBasedBusiness: false,
       }),
     });
@@ -259,9 +273,16 @@ describe("profile - shared", () => {
   );
 
   it("sends analytics when municipality entered for first time", async () => {
+    const persona: Partial<ProfileData> = randomElementFromArray([
+      { businessPersona: "STARTING" },
+      { businessPersona: "OWNING" },
+      { businessPersona: "FOREIGN", foreignBusinessTypeIds: ["officeInNJ"] },
+    ]);
+
     const initialBusiness = generateBusinessForProfile({
       profileData: generateProfileData({
         municipality: undefined,
+        ...persona,
       }),
     });
 
@@ -282,9 +303,16 @@ describe("profile - shared", () => {
   it("does not send analytics when municipality already existed", async () => {
     const randomMunicipality = generateMunicipality({});
 
+    const persona: Partial<ProfileData> = randomElementFromArray([
+      { businessPersona: "STARTING" },
+      { businessPersona: "OWNING" },
+      { businessPersona: "FOREIGN", foreignBusinessTypeIds: ["officeInNJ"] },
+    ]);
+
     const initialBusiness = generateBusinessForProfile({
       profileData: generateProfileData({
         municipality: generateMunicipality({ displayName: "Some Display Name" }),
+        ...persona,
       }),
     });
 
@@ -454,6 +482,7 @@ describe("profile - shared", () => {
           dateOfFormation: undefined,
           existingEmployees: undefined,
           legalStructureId: randomPublicFilingLegalStructure(),
+          businessPersona: randomInt() % 2 ? "STARTING" : "OWNING",
         }),
       });
       renderPage({ business });
@@ -498,9 +527,8 @@ describe("profile - shared", () => {
         formationData: generateFormationData({
           completedFilingPayment: true,
         }),
-        profileData: generateProfileData({
+        profileData: generateOwningProfileData({
           dateOfFormation: undefined,
-          businessPersona: "OWNING",
         }),
       });
       renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
@@ -641,9 +669,7 @@ describe("profile - shared", () => {
     it("should NOT display a cannabis specific warning alert when OWNING", () => {
       renderPage({
         business: generateBusinessForProfile({
-          profileData: generateProfileData({
-            businessPersona: "OWNING",
-          }),
+          profileData: generateOwningProfileData({}),
         }),
       });
       expect(

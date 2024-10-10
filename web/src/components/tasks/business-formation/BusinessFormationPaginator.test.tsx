@@ -24,22 +24,22 @@ import {
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { mockPush } from "@/test/mock/mockRouter";
 import {
-  WithStatefulUserData,
   currentBusiness,
   userDataUpdatedNTimes,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  corpLegalStructures,
   DateObject,
+  defaultDateFormat,
   FormationFormData,
   FormationSubmitResponse,
-  ProfileData,
-  corpLegalStructures,
-  defaultDateFormat,
   generateFormationData,
   generateFormationForeignAddress,
   generateFormationUSAddress,
-  generateProfileData,
+  generateStartingProfileData,
   getCurrentDate,
+  ProfileData,
   randomInt,
 } from "@businessnjgovnavigator/shared/";
 import {
@@ -591,7 +591,7 @@ describe("<BusinessFormationPaginator />", () => {
               members: undefined,
             }),
           }),
-          profileData: generateProfileData({ legalStructureId: "nonprofit" }),
+          profileData: generateStartingProfileData({ legalStructureId: "nonprofit" }),
         });
         const page = preparePage({ business: nonprofit, displayContent });
 
@@ -611,7 +611,9 @@ describe("<BusinessFormationPaginator />", () => {
             formationData: generateFormationData({
               formationFormData: generateFormationFormData({ members: undefined }),
             }),
-            profileData: generateProfileData({ legalStructureId: corpLegalStructure }),
+            profileData: generateStartingProfileData({
+              legalStructureId: corpLegalStructure,
+            }),
           });
           const page = preparePage({ business: corporation, displayContent });
 
@@ -717,7 +719,7 @@ describe("<BusinessFormationPaginator />", () => {
           const businessTotalStock: MockApiErrorJestArray = [
             "businessTotalStock",
             {
-              profileData: generateProfileData({
+              profileData: generateStartingProfileData({
                 legalStructureId: "c-corporation",
               }),
               formationFormData: generateFormationFormData(
@@ -1047,7 +1049,9 @@ describe("<BusinessFormationPaginator />", () => {
           const combinedInvestment: MockApiErrorJestArray = [
             "combinedInvestment",
             {
-              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+              profileData: generateStartingProfileData({
+                legalStructureId: "limited-partnership",
+              }),
               formationFormData: generateFormationFormData(
                 { combinedInvestment: "1111111" },
                 { legalStructureId: "limited-partnership" }
@@ -1071,7 +1075,9 @@ describe("<BusinessFormationPaginator />", () => {
           const createLimitedPartnerTerms: MockApiErrorJestArray = [
             "createLimitedPartnerTerms",
             {
-              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+              profileData: generateStartingProfileData({
+                legalStructureId: "limited-partnership",
+              }),
 
               formationFormData: generateFormationFormData(
                 { createLimitedPartnerTerms: "1111111", canCreateLimitedPartner: true },
@@ -1096,7 +1102,9 @@ describe("<BusinessFormationPaginator />", () => {
           const getDistributionTerms: MockApiErrorJestArray = [
             "getDistributionTerms",
             {
-              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+              profileData: generateStartingProfileData({
+                legalStructureId: "limited-partnership",
+              }),
 
               formationFormData: generateFormationFormData(
                 { getDistributionTerms: "1111111", canGetDistribution: true },
@@ -1121,7 +1129,9 @@ describe("<BusinessFormationPaginator />", () => {
           const makeDistributionTerms: MockApiErrorJestArray = [
             "makeDistributionTerms",
             {
-              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+              profileData: generateStartingProfileData({
+                legalStructureId: "limited-partnership",
+              }),
 
               formationFormData: generateFormationFormData(
                 { makeDistributionTerms: "1111111", canMakeDistribution: true },
@@ -1146,7 +1156,9 @@ describe("<BusinessFormationPaginator />", () => {
           const withdrawals: MockApiErrorJestArray = [
             "withdrawals",
             {
-              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+              profileData: generateStartingProfileData({
+                legalStructureId: "limited-partnership",
+              }),
 
               formationFormData: generateFormationFormData(
                 { withdrawals: "1111111" },
@@ -1171,7 +1183,9 @@ describe("<BusinessFormationPaginator />", () => {
           const dissolution: MockApiErrorJestArray = [
             "dissolution",
             {
-              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+              profileData: generateStartingProfileData({
+                legalStructureId: "limited-partnership",
+              }),
 
               formationFormData: generateFormationFormData(
                 { dissolution: "1111111" },
@@ -1197,7 +1211,9 @@ describe("<BusinessFormationPaginator />", () => {
           const canCreateLimitedPartner: MockApiErrorJestArray = [
             "canCreateLimitedPartner",
             {
-              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+              profileData: generateStartingProfileData({
+                legalStructureId: "limited-partnership",
+              }),
 
               formationFormData: generateFormationFormData(
                 { canCreateLimitedPartner: false },
@@ -1221,7 +1237,9 @@ describe("<BusinessFormationPaginator />", () => {
           const canGetDistribution: MockApiErrorJestArray = [
             "canGetDistribution",
             {
-              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+              profileData: generateStartingProfileData({
+                legalStructureId: "limited-partnership",
+              }),
 
               formationFormData: generateFormationFormData(
                 { canGetDistribution: false },
@@ -1245,7 +1263,9 @@ describe("<BusinessFormationPaginator />", () => {
           const canMakeDistribution: MockApiErrorJestArray = [
             "canMakeDistribution",
             {
-              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+              profileData: generateStartingProfileData({
+                legalStructureId: "limited-partnership",
+              }),
 
               formationFormData: generateFormationFormData(
                 { canMakeDistribution: false },

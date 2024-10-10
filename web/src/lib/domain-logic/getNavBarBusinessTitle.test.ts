@@ -8,6 +8,7 @@ import {
   LookupLegalStructureById,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
+import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 
 const Config = getMergedConfig();
@@ -99,9 +100,8 @@ describe("getNavBarBusinessTitle", () => {
       describe("OWNING", () => {
         it("shows business name", () => {
           const business = generateBusiness({
-            profileData: generateProfileData({
+            profileData: generateOwningProfileData({
               ...publicFilingProfile(),
-              businessPersona: "OWNING",
               businessName: name,
             }),
           });
@@ -129,9 +129,8 @@ describe("getNavBarBusinessTitle", () => {
       describe("OWNING", () => {
         it("shows trade name", () => {
           const business = generateBusiness({
-            profileData: generateProfileData({
+            profileData: generateOwningProfileData({
               ...tradeNameProfile(),
-              businessPersona: "OWNING",
               tradeName: name,
             }),
           });
@@ -215,9 +214,8 @@ describe("getNavBarBusinessTitle", () => {
       describe("OWNING", () => {
         it("shows Unnamed Business [Legal Structure]", () => {
           const business = generateBusiness({
-            profileData: generateProfileData({
+            profileData: generateOwningProfileData({
               ...publicFilingProfile(),
-              businessPersona: "OWNING",
               businessName: undefined,
             }),
           });
@@ -253,9 +251,8 @@ describe("getNavBarBusinessTitle", () => {
       describe("OWNING", () => {
         it("shows Unnamed Business [Legal Structure]", () => {
           const business = generateBusiness({
-            profileData: generateProfileData({
+            profileData: generateOwningProfileData({
               ...tradeNameProfile(),
-              businessPersona: "OWNING",
               tradeName: undefined,
             }),
           });
@@ -311,8 +308,7 @@ describe("getNavBarBusinessTitle", () => {
       it("shows Unnamed Business", () => {
         const business = generateBusiness({
           onboardingFormProgress: "COMPLETED",
-          profileData: generateProfileData({
-            businessPersona: "OWNING",
+          profileData: generateOwningProfileData({
             legalStructureId: undefined,
             tradeName: undefined,
             businessName: undefined,

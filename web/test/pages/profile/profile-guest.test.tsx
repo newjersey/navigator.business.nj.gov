@@ -21,6 +21,7 @@ import {
   getBusinessProfileInputFieldName,
   renderPage,
 } from "@/test/pages/profile/profile-helpers";
+import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -59,7 +60,7 @@ describe("profile - guest mode", () => {
   describe("when owning a business", () => {
     beforeEach(() => {
       initialBusiness = generateBusiness({
-        profileData: generateProfileData({ businessPersona: "OWNING", municipality: muni }),
+        profileData: generateOwningProfileData({ municipality: muni }),
         formationData: generateFormationData({
           formationFormData: generateFormationFormData({
             addressMunicipality: muni,

@@ -7,6 +7,7 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import {
   generateBusiness,
@@ -60,8 +61,7 @@ describe("<TaxAccessModal />", () => {
 
     beforeEach(() => {
       undefinedLegalStructureBusiness = generateBusiness({
-        profileData: generateProfileData({
-          businessPersona: "OWNING",
+        profileData: generateOwningProfileData({
           legalStructureId: undefined,
         }),
       });
@@ -124,9 +124,7 @@ describe("<TaxAccessModal />", () => {
     it("shows step 2 question", () => {
       renderModal(
         generateBusiness({
-          profileData: generateProfileData({
-            businessPersona: "OWNING",
-          }),
+          profileData: generateOwningProfileData({}),
         })
       );
       expect(screen.queryByText(Config.taxAccess.stepOneHeader)).not.toBeInTheDocument();
@@ -139,9 +137,7 @@ describe("<TaxAccessModal />", () => {
     it("moves back to step 1 on back button", () => {
       renderModal(
         generateBusiness({
-          profileData: generateProfileData({
-            businessPersona: "OWNING",
-          }),
+          profileData: generateOwningProfileData({}),
         })
       );
       fireEvent.click(screen.getByText(Config.taxAccess.stepTwoBackButton));
