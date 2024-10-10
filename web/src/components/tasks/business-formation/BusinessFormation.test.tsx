@@ -11,17 +11,17 @@ import {
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
+  defaultDateFormat,
   FormationData,
   FormationIncorporator,
   FormationMember,
-  UserData,
-  defaultDateFormat,
   generateBusiness,
   generateMunicipality,
   generateUserDataForBusiness,
   getCurrentBusiness,
   getCurrentDate,
   getCurrentDateInNewJerseyFormatted,
+  UserData,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
@@ -33,6 +33,7 @@ import {
 
 import { Content } from "@/components/Content";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
+import { generateStartingProfileData } from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -68,24 +69,29 @@ describe("<BusinessFormation />", () => {
     useSetupInitialMocks();
   });
 
-  it("does not show form for non-formation legal structure", () => {
-    const profileData = generateProfileData({ legalStructureId: "sole-proprietorship" });
-    preparePage({ business: { profileData }, displayContent });
+  it("does not show form for non-formation legal structure when business persona is STARTING", () => {
+    preparePage({
+      business: {
+        profileData: generateStartingProfileData({
+          legalStructureId: "sole-proprietorship",
+        }),
+      },
+      displayContent,
+    });
     expect(screen.queryByTestId("formation-form")).not.toBeInTheDocument();
   });
 
   it("shows default intro content for in-state formation", () => {
     preparePage({
       business: {
-        profileData: generateProfileData({
+        profileData: generateStartingProfileData({
           legalStructureId: "limited-liability-company",
-          businessPersona: "STARTING",
         }),
       },
       displayContent,
     });
 
-    useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
+    useMockBusiness(generateBusiness({}));
     expect(screen.getByTestId("formation-form")).toContainHTML(
       renderToStaticMarkup(Content({ children: Config.formation.intro.default }))
     );
@@ -1240,9 +1246,8 @@ describe("<BusinessFormation />", () => {
 
       const page = preparePage({
         business: {
-          profileData: generateProfileData({
+          profileData: generateStartingProfileData({
             legalStructureId: "limited-liability-company",
-            businessPersona: "STARTING",
           }),
           formationData: generateEmptyFormationData(),
         },
@@ -1261,9 +1266,8 @@ describe("<BusinessFormation />", () => {
 
       const page = preparePage({
         business: {
-          profileData: generateProfileData({
+          profileData: generateStartingProfileData({
             legalStructureId: "limited-liability-company",
-            businessPersona: "STARTING",
           }),
           formationData: generateEmptyFormationData(),
         },

@@ -7,7 +7,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 
 const nonOwningPersonas: BusinessPersona[] = ["STARTING", "FOREIGN"];
 
@@ -36,8 +36,7 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
       formationData: generateFormationData({
         completedFilingPayment: false,
       }),
-      profileData: generateProfileData({
-        businessPersona: "OWNING",
+      profileData: generateOwningProfileData({
         dateOfFormation: undefined,
       }),
     });

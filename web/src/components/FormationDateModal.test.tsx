@@ -3,10 +3,10 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { selectDate, selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
 import {
-  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   triggerQueueUpdate,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
@@ -16,7 +16,9 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
   getCurrentDate,
+  randomInt,
 } from "@businessnjgovnavigator/shared";
+import { ProfileData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -89,7 +91,19 @@ describe("<FormationDateModal />", () => {
   });
 
   it("shows and saves location field if user has not entered a location", () => {
-    renderComponent(generateBusiness({ profileData: generateProfileData({ municipality: undefined }) }));
+    const startingOrForeign: Partial<ProfileData> =
+      randomInt() % 2
+        ? { businessPersona: "STARTING" }
+        : { businessPersona: "FOREIGN", foreignBusinessTypeIds: ["officeInNJ"] };
+
+    renderComponent(
+      generateBusiness({
+        profileData: generateProfileData({
+          municipality: undefined,
+          ...startingOrForeign,
+        }),
+      })
+    );
     const date = getCurrentDate().subtract(1, "month").date(1);
     selectDate(date);
 
@@ -132,7 +146,16 @@ describe("<FormationDateModal />", () => {
   });
 
   it("shows error when user saves without entering location", () => {
-    renderComponent(generateBusiness({ profileData: generateProfileData({ municipality: undefined }) }));
+    const startingOrForeign: Partial<ProfileData> =
+      randomInt() % 2
+        ? { businessPersona: "STARTING" }
+        : { businessPersona: "FOREIGN", foreignBusinessTypeIds: ["officeInNJ"] };
+
+    renderComponent(
+      generateBusiness({
+        profileData: generateProfileData({ municipality: undefined, ...startingOrForeign }),
+      })
+    );
     expect(
       screen.queryByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
     ).not.toBeInTheDocument();

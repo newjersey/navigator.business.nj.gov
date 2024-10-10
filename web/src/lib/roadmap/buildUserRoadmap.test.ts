@@ -12,9 +12,9 @@ import {
 } from "@businessnjgovnavigator/shared";
 import * as fetchMunicipalityById from "@businessnjgovnavigator/shared/domain-logic/fetchMunicipalityById";
 import {
-  ProfileData,
   createEmptyProfileData,
   emptyIndustrySpecificData,
+  ProfileData,
 } from "@businessnjgovnavigator/shared/profileData";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionAddOn", () => ({
@@ -227,9 +227,19 @@ describe("buildUserRoadmap", () => {
   });
 
   describe("legal structure", () => {
-    it(`adds public-record-filing for public-filing legal structure`, async () => {
-      await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-liability-company" }));
+    it(`adds public-record-filing for public-filing legal structure for STARTING`, async () => {
+      await buildUserRoadmap(
+        generateProfileData({ legalStructureId: "limited-liability-company", businessPersona: "STARTING" })
+      );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
+    });
+
+    it(`adds public-record-filing for public-filing legal structure for FOREIGN`, async () => {
+      await buildUserRoadmap(
+        generateProfileData({ legalStructureId: "limited-liability-company", businessPersona: "FOREIGN" })
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing-foreign");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
     });
 
