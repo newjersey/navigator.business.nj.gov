@@ -490,11 +490,6 @@ export const allLegalStructuresOfType = ({
   return [];
 };
 
-export const randomOperatingPhaseId = (): OperatingPhaseId => {
-  const randomIndex = Math.floor(Math.random() * OperatingPhases.length);
-  return OperatingPhases[randomIndex].id;
-};
-
 export const randomOwnershipType = (): OwnershipType => {
   const randomIndex = Math.floor(Math.random() * ownershipTypes.length);
   return ownershipTypes[randomIndex];
