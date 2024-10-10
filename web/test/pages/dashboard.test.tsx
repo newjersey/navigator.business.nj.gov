@@ -11,7 +11,7 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import {
   generateBusiness,
@@ -154,8 +154,7 @@ describe("dashboard page", () => {
 
   it("renders not-registered-up-and-running card when operatingPhase is GUEST_MODE_OWNING and businessPersona is OWNING", () => {
     const business = generateBusiness({
-      profileData: generateProfileData({
-        businessPersona: "OWNING",
+      profileData: generateOwningProfileData({
         operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
       }),
       preferences: generatePreferences({

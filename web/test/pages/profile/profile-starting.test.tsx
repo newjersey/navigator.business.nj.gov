@@ -26,11 +26,6 @@ import {
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   Business,
-  LookupIndustryById,
-  LookupLegalStructureById,
-  OperatingPhaseId,
-  OperatingPhases,
-  UserData,
   createEmptyBusiness,
   einTaskId,
   emptyAddressData,
@@ -39,8 +34,14 @@ import {
   generateGetFilingResponse,
   generateMunicipality,
   generateProfileData,
+  generateStartingProfileData,
+  LookupIndustryById,
+  LookupLegalStructureById,
   modifyCurrentBusiness,
   naicsCodeTaskId,
+  OperatingPhaseId,
+  OperatingPhases,
+  UserData,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
@@ -417,7 +418,7 @@ describe("profile - starting business", () => {
       const randomMunicipality = generateMunicipality({});
       renderPage({
         business: generateBusinessForProfile({
-          profileData: generateProfileData({
+          profileData: generateStartingProfileData({
             municipality: randomMunicipality,
           }),
           taxFilingData: generateTaxFilingData({

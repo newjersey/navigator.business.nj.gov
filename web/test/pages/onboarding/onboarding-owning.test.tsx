@@ -9,12 +9,13 @@ import {
   renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
-  OperatingPhaseId,
-  ProfileData,
   createEmptyUserData,
   generateMunicipality,
+  generateOwningProfileData,
   generateProfileData,
   generateTaxFilingData,
+  OperatingPhaseId,
+  ProfileData,
 } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,
@@ -39,8 +40,7 @@ const Config = getMergedConfig();
 const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
   return generateUserDataForBusiness(
     generateBusiness({
-      profileData: generateProfileData({
-        businessPersona: "OWNING",
+      profileData: generateOwningProfileData({
         operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
         ...overrides,
       }),
@@ -163,8 +163,7 @@ describe("onboarding - owning a business", () => {
 
   it("prefills form from existing user data", async () => {
     const business = generateBusiness({
-      profileData: generateProfileData({
-        businessPersona: "OWNING",
+      profileData: generateOwningProfileData({
         sectorId: "clean-energy",
       }),
     });
@@ -193,8 +192,7 @@ describe("onboarding - owning a business", () => {
 
     const initialBusiness = generateBusiness({
       taxFilingData: taxData,
-      profileData: generateProfileData({
-        businessPersona: "OWNING",
+      profileData: generateOwningProfileData({
         legalStructureId: undefined,
       }),
       onboardingFormProgress: "COMPLETED",

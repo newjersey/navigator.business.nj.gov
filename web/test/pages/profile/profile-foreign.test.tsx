@@ -8,18 +8,18 @@ import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentBusiness, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  FormationData,
-  LookupLegalStructureById,
-  OperatingPhaseId,
-  ProfileData,
-  TaxFilingData,
   defaultDateFormat,
   emptyAddressData,
   emptyIndustrySpecificData,
+  FormationData,
   generateFormationFormData,
   generateMunicipality,
   generateProfileData,
   getCurrentDateFormatted,
+  LookupLegalStructureById,
+  OperatingPhaseId,
+  ProfileData,
+  TaxFilingData,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
@@ -38,6 +38,7 @@ import {
   removeLocationAndSave,
   renderPage,
 } from "@/test/pages/profile/profile-helpers";
+import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
@@ -526,9 +527,8 @@ describe("profile-foreign", () => {
   describe("non essential questions", () => {
     it("does not show elevator questions for foreign businesses", async () => {
       const business = generateBusinessForProfile({
-        profileData: generateProfileData({
+        profileData: generateOwningProfileData({
           industryId: "generic",
-          businessPersona: "OWNING",
           operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           homeBasedBusiness: false,
         }),
