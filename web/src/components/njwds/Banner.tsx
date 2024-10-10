@@ -7,7 +7,12 @@ export const Banner = (): ReactElement => {
         <div className="grid-container-widescreen desktop:padding-x-7">
           <div className="nj-banner__inner margin-y-1 row-desktop-column-mobile fas flex-align-center-desktop-start-mobile space-between">
             <div className="flex fac margin-y-05">
-              <img className="nj-banner__header-seal" src="/vendor/img/nj_state_seal.png" alt="NJ flag" />
+              <img
+                className="nj-banner__header-seal"
+                src="/vendor/img/nj_state_seal.png"
+                alt="NJ flag"
+                role="presentation"
+              />
               <a href="https://nj.gov">Official Site of the State of New Jersey</a>
             </div>
             <div className="flex row-desktop-column-mobile">
