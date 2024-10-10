@@ -8,10 +8,12 @@ import {
   onOnboardingPageNoneOfTheAbove,
   onOnboardingPageRemoteSellerBusiness,
   onOnboardingPageRemoteWorkerBusiness,
+  onOnboardingPageStartingBusiness,
 } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
 import {
   CarServiceType,
   Industry,
+  PropertyLeaseType,
   ResidentialConstructionType,
   carServiceOptions,
   getIndustries,
@@ -129,6 +131,38 @@ describe("Onboarding for all industries when out of state nexus business [featur
               .should("be.checked");
           } else {
             onOnboardingPageNexusBusiness.getResidentialConstructionTypeRadio().should("not.exist");
+          }
+        }
+
+        const propertyLeaseTypeChoices = [
+          "SHORT_TERM_RENTAL",
+          "LONG_TERM_RENTAL",
+          "BOTH",
+        ] as PropertyLeaseType[];
+
+        const propertyLeaseTypeApplicable = industry.industryOnboardingQuestions.whatIsPropertyLeaseType
+          ? propertyLeaseTypeChoices[Math.floor(Math.random() * 3)]
+          : undefined;
+
+        if (propertyLeaseTypeApplicable === undefined) {
+          onOnboardingPageStartingBusiness.getPropertyLeaseTypeRadio().should("not.exist");
+        } else {
+          onOnboardingPageStartingBusiness.selectLongTermPropertyLeaseTypeRadio(propertyLeaseTypeApplicable);
+          onOnboardingPageStartingBusiness
+            .getPropertyLeaseTypeRadio(propertyLeaseTypeApplicable)
+            .should("be.checked");
+          const randomAnswer = Boolean(randomInt() % 2);
+          if (propertyLeaseTypeApplicable === "SHORT_TERM_RENTAL") {
+            onOnboardingPageStartingBusiness
+              .getHasThreeOrMoreRentalUnitsRadio(randomAnswer)
+              .should("not.exist");
+          } else {
+            onOnboardingPageStartingBusiness.getHasThreeOrMoreRentalUnitsRadio(randomAnswer).should("exist");
+
+            onOnboardingPageStartingBusiness.selectThreeOrMoreRentalUnitsRadio(randomAnswer);
+            onOnboardingPageStartingBusiness
+              .getHasThreeOrMoreRentalUnitsRadio(randomAnswer)
+              .should("be.checked");
           }
         }
 

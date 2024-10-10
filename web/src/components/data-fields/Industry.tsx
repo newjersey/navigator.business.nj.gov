@@ -48,6 +48,11 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
         );
       case "employmentPlacementType":
         return state.profileData.employmentPersonnelServiceType === "EMPLOYERS";
+      case "hasThreeOrMoreRentalUnits":
+        return (
+          state.profileData.propertyLeaseType === "LONG_TERM_RENTAL" ||
+          state.profileData.propertyLeaseType === "BOTH"
+        );
       default:
         return true;
     }

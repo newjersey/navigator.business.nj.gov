@@ -15,6 +15,7 @@ export const constructionOptions = ["RESIDENTIAL", "COMMERCIAL_OR_INDUSTRIAL", "
 export const residentialConstructionOptions = ["NEW_HOME_CONSTRUCTION", "HOME_RENOVATIONS", "BOTH"] as const;
 export const employmentPersonnelServiceOptions = ["JOB_SEEKERS", "EMPLOYERS"] as const;
 export const employmentPlacementOptions = ["TEMPORARY", "PERMANENT", "BOTH"] as const;
+export const propertyLeaseTypeOptions = ["SHORT_TERM_RENTAL", "LONG_TERM_RENTAL", "BOTH"] as const;
 
 export interface IndustrySpecificData {
   readonly liquorLicense: boolean;
@@ -38,6 +39,8 @@ export interface IndustrySpecificData {
   readonly employmentPersonnelServiceType: EmploymentAndPersonnelServicesType;
   readonly employmentPlacementType: EmploymentPlacementType;
   readonly carnivalRideOwningBusiness: boolean | undefined;
+  readonly propertyLeaseType: PropertyLeaseType;
+  readonly hasThreeOrMoreRentalUnits: boolean | undefined;
 }
 
 type IndustrySpecificDataChoices = {
@@ -66,6 +69,8 @@ export const industrySpecificDataChoices: IndustrySpecificDataChoices = {
   employmentPersonnelServiceType: [...employmentPersonnelServiceOptions],
   employmentPlacementType: [...employmentPlacementOptions],
   carnivalRideOwningBusiness: booleanChoice,
+  propertyLeaseType: [...propertyLeaseTypeOptions],
+  hasThreeOrMoreRentalUnits: booleanChoice,
 };
 
 export const emptyIndustrySpecificData: IndustrySpecificData = {
@@ -90,6 +95,8 @@ export const emptyIndustrySpecificData: IndustrySpecificData = {
   employmentPersonnelServiceType: undefined,
   employmentPlacementType: undefined,
   carnivalRideOwningBusiness: undefined,
+  propertyLeaseType: undefined,
+  hasThreeOrMoreRentalUnits: undefined,
 };
 
 export interface ProfileData extends IndustrySpecificData {
@@ -163,6 +170,7 @@ export type ConstructionType = "RESIDENTIAL" | "COMMERCIAL_OR_INDUSTRIAL" | "BOT
 export type ResidentialConstructionType = "NEW_HOME_CONSTRUCTION" | "HOME_RENOVATIONS" | "BOTH" | undefined;
 export type EmploymentAndPersonnelServicesType = "JOB_SEEKERS" | "EMPLOYERS" | undefined;
 export type EmploymentPlacementType = "TEMPORARY" | "PERMANENT" | "BOTH" | undefined;
+export type PropertyLeaseType = "SHORT_TERM_RENTAL" | "LONG_TERM_RENTAL" | "BOTH" | undefined;
 export const businessPersonas = ["STARTING", "OWNING", "FOREIGN"] as const;
 export type BusinessPersona = (typeof businessPersonas)[number] | undefined;
 

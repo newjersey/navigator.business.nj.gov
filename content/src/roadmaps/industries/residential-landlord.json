@@ -55,7 +55,9 @@
   "displayname": "residential-landlord",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
-    "canBeReseller": false
+    "canBeReseller": false,
+    "whatIsPropertyLeaseType": true,
+    "canHaveThreeOrMoreRentalUnits": true
   },
   "modifications": [
     {

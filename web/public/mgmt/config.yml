@@ -5598,6 +5598,51 @@ collections:
                             }
                           - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Property Lease Type
+                    name: propertyLeaseType
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                            label: "Radio Button Short Term Rental Text",
+                            name: "radioButtonShortTermRentalText",
+                            widget: "string",
+                          }
+                          - {
+                            label: "Radio Button Long Term Rental Text",
+                            name: "radioButtonLongTermRentalText",
+                            widget: "string",
+                          }
+                          - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
+                          - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Has Three or More Rental Units
+                    name: propertyLeaseType
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                            label: "Radio Button True Text",
+                            name: "radioButtonTrueText",
+                            widget: "string",
+                          }
+                          - {
+                            label: "Radio Button False Text",
+                            name: "radioButtonFalseText",
+                            widget: "string",
+                          }
+                          - { label: "Description", name: "description", widget: "markdown" }
 
               - label: Profile / Onboarding Defaults
                 name: default

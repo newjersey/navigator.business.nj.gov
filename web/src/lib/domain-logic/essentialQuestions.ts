@@ -28,11 +28,11 @@ export const getIsApplicableToFunctionByFieldName = (
   };
 };
 export const hasEssentialQuestion = (industryId: string | undefined): boolean => {
-  const industry = LookupIndustryById(industryId);
-  const essentialQuestionResults = EssentialQuestions.filter((essentialQuestionFunction) => {
-    return essentialQuestionFunction.isQuestionApplicableToIndustry(industry);
-  });
-  return essentialQuestionResults.length > 0;
+  return getEssentialQuestion(industryId).length > 0;
+};
+
+export const hasMultipleEssentialQuestions = (industryId: string | undefined): boolean => {
+  return getEssentialQuestion(industryId).length > 1;
 };
 
 export const getEssentialQuestion = (industryId: string | undefined): EssentialQuestion[] => {
@@ -178,5 +178,19 @@ export const EssentialQuestions: EssentialQuestion[] = [
       return !!industry.industryOnboardingQuestions.isEmploymentAndPersonnelTypeApplicable;
     },
     fieldName: "employmentPlacementType",
+  }),
+  new EssentialQuestion({
+    shouldBeResetWhenIndustryChanges: true,
+    isQuestionApplicableToIndustry: (industry): boolean => {
+      return !!industry.industryOnboardingQuestions.whatIsPropertyLeaseType;
+    },
+    fieldName: "propertyLeaseType",
+  }),
+  new EssentialQuestion({
+    shouldBeResetWhenIndustryChanges: true,
+    isQuestionApplicableToIndustry: (industry): boolean => {
+      return !!industry.industryOnboardingQuestions.whatIsPropertyLeaseType;
+    },
+    fieldName: "hasThreeOrMoreRentalUnits",
   }),
 ];

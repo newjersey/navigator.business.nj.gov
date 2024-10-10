@@ -5,6 +5,7 @@ import {
   EmploymentPlacementType,
   LookupIndustryById,
   LookupSectorTypeById,
+  PropertyLeaseType,
   ResidentialConstructionType,
 } from "@businessnjgovnavigator/shared";
 
@@ -70,6 +71,22 @@ class OnboardingSharedElementsWithIndustryQuestion extends OnboardingSharedEleme
   }
   getResidentialConstructionTypeItemsRadio(value?: ResidentialConstructionType) {
     return cy.get(`input[name="residential-construction-type"]${`[value="${value}"]`}`);
+  }
+
+  getPropertyLeaseTypeRadio(value?: PropertyLeaseType) {
+    return cy.get(`input[name="property-lease-type"]${`[value="${value}"]`}`);
+  }
+
+  selectLongTermPropertyLeaseTypeRadio(value: PropertyLeaseType) {
+    this.getPropertyLeaseTypeRadio(value).check();
+  }
+
+  getHasThreeOrMoreRentalUnitsRadio(radio?: boolean) {
+    return cy.get(`input[name="has-three-or-more-rental-units"]${`[value="${radio}"]`}`);
+  }
+
+  selectThreeOrMoreRentalUnitsRadio(radio: boolean) {
+    this.getHasThreeOrMoreRentalUnitsRadio(radio).check();
   }
   getEmploymentAndPersonnelServicesTypeItemsRadio(value?: EmploymentAndPersonnelServicesType) {
     return cy.get(`input[name="employment-personnel-service-type"]${`[value="${value}"]`}`);

@@ -226,6 +226,23 @@
           "description": "Learn about other `employment and personnel service types|employment-agency-types` ."
         }
       },
+      "propertyLeaseType": {
+        "default": {
+          "header": "Property Lease Type",
+          "radioButtonShortTermRentalText": "Short Term",
+          "radioButtonLongTermRentalText": "Long Term",
+          "radioButtonBothText": "Both",
+          "description": "How will you lease your property?"
+        }
+      },
+      "hasThreeOrMoreRentalUnits": {
+        "default": {
+          "header": "Rental Unit Count",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Will your property have three or more units?"
+        }
+      },
       "cannabisLicenseType": {
         "default": {
           "header": "Cannabis License",
