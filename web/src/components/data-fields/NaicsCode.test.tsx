@@ -6,14 +6,14 @@ import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  TaxFilingState,
   generateBusiness,
   generateProfileData,
   generateTaxFilingData,
   generateUserDataForBusiness,
+  TaxFilingState,
 } from "@businessnjgovnavigator/shared";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -114,10 +114,9 @@ describe("<NaicsCode />", () => {
 
   it("doesn't display Edit text and displays tooltip when there is a naics code is owning", () => {
     renderComponent({
-      profileData: generateProfileData({
+      profileData: generateOwningProfileData({
         naicsCode: "624410",
         operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
-        businessPersona: "OWNING",
       }),
     });
     expect(screen.queryByText(configForField.editText)).not.toBeInTheDocument();

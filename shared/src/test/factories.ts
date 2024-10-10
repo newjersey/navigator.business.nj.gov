@@ -27,7 +27,7 @@ import {
 } from "../license";
 import { MunicipalityDetail } from "../municipality";
 import { OperatingPhaseId } from "../operatingPhase";
-import { IndustrySpecificData, ProfileData } from "../profileData";
+import { BusinessPersona, IndustrySpecificData, ProfileData } from "../profileData";
 import { arrayOfSectors, SectorType } from "../sector";
 import { TaxFilingCalendarEvent, TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
 import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
@@ -255,7 +255,7 @@ export const generateProfileData = (
   canHavePermanentLocation?: boolean
 ): ProfileData => {
   const id = `some-id-${randomInt()}`;
-  const persona = randomInt() % 2 ? "STARTING" : "OWNING";
+  const persona: BusinessPersona = randomElementFromArray(["STARTING", "OWNING", "FOREIGN"]);
   const industry = randomIndustry(canHavePermanentLocation);
   const legalStructure = randomLegalStructure().id;
 
@@ -294,6 +294,32 @@ export const generateProfileData = (
     carnivalRideOwningBusiness: undefined,
     ...overrides,
   };
+};
+
+export const generateStartingProfileData = (
+  overrides: Partial<ProfileData>,
+  canHavePermanentLocation?: boolean
+): ProfileData => {
+  return generateProfileData(
+    {
+      ...overrides,
+      businessPersona: "STARTING",
+    },
+    canHavePermanentLocation
+  );
+};
+
+export const generateOwningProfileData = (
+  overrides: Partial<ProfileData>,
+  canHavePermanentLocation?: boolean
+): ProfileData => {
+  return generateProfileData(
+    {
+      ...overrides,
+      businessPersona: "OWNING",
+    },
+    canHavePermanentLocation
+  );
 };
 
 export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFilingData => {

@@ -3,6 +3,7 @@
 import { businessStructureTaskId, formationTaskId, taxTaskId } from "@shared/domain-logic/taskIds";
 import {
   generateBusiness,
+  generateOwningProfileData,
   generatePreferences,
   generateProfileData,
   generateUserDataForBusiness,
@@ -18,8 +19,7 @@ describe("updateOperatingPhase", () => {
     it("updates a GUEST_MODE to UP_AND_RUNNING_OWNING if it is not", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
-          profileData: generateProfileData({
-            businessPersona: "OWNING",
+          profileData: generateOwningProfileData({
             operatingPhase: OperatingPhaseId.GUEST_MODE,
           }),
         })
@@ -33,8 +33,7 @@ describe("updateOperatingPhase", () => {
     it("updates a GUEST_MODE_OWNING to UP_AND_RUNNING_OWNING if it is not", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
-          profileData: generateProfileData({
-            businessPersona: "OWNING",
+          profileData: generateOwningProfileData({
             operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
           }),
         })

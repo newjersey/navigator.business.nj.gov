@@ -13,8 +13,6 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  LookupOwnershipTypeById,
-  LookupSectorTypeById,
   defaultDateFormat,
   emptyAddressData,
   generateFormationData,
@@ -22,6 +20,8 @@ import {
   generateMunicipality,
   generateProfileData,
   getCurrentDate,
+  LookupOwnershipTypeById,
+  LookupSectorTypeById,
   randomInt,
 } from "@businessnjgovnavigator/shared";
 import { generateTaxFilingData, randomLegalStructure } from "@businessnjgovnavigator/shared/test";
@@ -50,7 +50,7 @@ import {
   selectByText,
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 const date = getCurrentDate().subtract(1, "month").date(1);
@@ -91,7 +91,7 @@ describe("profile - owning existing business", () => {
       return Promise.resolve(userData);
     });
     business = generateBusinessForProfile({
-      profileData: generateProfileData({ businessPersona: "OWNING" }),
+      profileData: generateOwningProfileData({}),
     });
   });
 
@@ -128,9 +128,8 @@ describe("profile - owning existing business", () => {
 
   it("updates the user data on save", async () => {
     const business = generateBusinessForProfile({
-      profileData: generateProfileData({
+      profileData: generateOwningProfileData({
         taxId: randomInt(9).toString(),
-        businessPersona: "OWNING",
         industryId: "generic",
         legalStructureId: "limited-liability-company",
       }),
@@ -205,8 +204,7 @@ describe("profile - owning existing business", () => {
   it("prefills form from existing user data", () => {
     const randomMunicipality = generateMunicipality({});
     const business = generateBusinessForProfile({
-      profileData: generateProfileData({
-        businessPersona: "OWNING",
+      profileData: generateOwningProfileData({
         businessName: "Applebees",
         entityId: "1234567890",
         employerId: "123456789",
@@ -291,8 +289,7 @@ describe("profile - owning existing business", () => {
 
   it("prevents user from saving if sector is not selected", async () => {
     const business = generateBusinessForProfile({
-      profileData: generateProfileData({
-        businessPersona: "OWNING",
+      profileData: generateOwningProfileData({
         operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
         sectorId: "",
       }),
@@ -339,8 +336,7 @@ describe("profile - owning existing business", () => {
 
   it("displays date of formation input for public filing businesses", () => {
     const initialBusiness = generateBusinessForProfile({
-      profileData: generateProfileData({
-        businessPersona: "OWNING",
+      profileData: generateOwningProfileData({
         legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
       }),
     });
@@ -350,8 +346,7 @@ describe("profile - owning existing business", () => {
 
   it("does not display date of formation input for trade name businesses", () => {
     const initialBusiness = generateBusinessForProfile({
-      profileData: generateProfileData({
-        businessPersona: "OWNING",
+      profileData: generateOwningProfileData({
         legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
       }),
     });
@@ -361,8 +356,7 @@ describe("profile - owning existing business", () => {
 
   it("displays NAICS code when it exists", () => {
     const initialBusiness = generateBusinessForProfile({
-      profileData: generateProfileData({
-        businessPersona: "OWNING",
+      profileData: generateOwningProfileData({
         naicsCode: "123456",
       }),
     });
@@ -374,8 +368,7 @@ describe("profile - owning existing business", () => {
 
   it("doesn't display the NAICS code field when it doesn't exist", () => {
     const initialBusiness = generateBusinessForProfile({
-      profileData: generateProfileData({
-        businessPersona: "OWNING",
+      profileData: generateOwningProfileData({
         naicsCode: "",
       }),
     });
@@ -389,8 +382,7 @@ describe("profile - owning existing business", () => {
       const randomMunicipality = generateMunicipality({});
       renderPage({
         business: generateBusinessForProfile({
-          profileData: generateProfileData({
-            businessPersona: "OWNING",
+          profileData: generateOwningProfileData({
             municipality: randomMunicipality,
           }),
           taxFilingData: generateTaxFilingData({
@@ -413,8 +405,7 @@ describe("profile - owning existing business", () => {
   describe("trade name field behavior", () => {
     it("displays trade name field for an existing trade name business", () => {
       const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          businessPersona: "OWNING",
+        profileData: generateOwningProfileData({
           legalStructureId: "sole-proprietorship",
         }),
       });
@@ -424,8 +415,7 @@ describe("profile - owning existing business", () => {
 
     it("hides trade name field for existing non trade name business", () => {
       const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          businessPersona: "OWNING",
+        profileData: generateOwningProfileData({
           legalStructureId: "limited-liability-company",
         }),
       });
@@ -437,8 +427,7 @@ describe("profile - owning existing business", () => {
   describe("responsible owner name field behavior", () => {
     it("displays responsibleOwnerName field for an existing trade name business", () => {
       const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          businessPersona: "OWNING",
+        profileData: generateOwningProfileData({
           legalStructureId: "general-partnership",
         }),
       });
@@ -459,8 +448,7 @@ describe("profile - owning existing business", () => {
 
     it("displays responsibleOwnerName as locked if user has accessed tax data", () => {
       const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          businessPersona: "OWNING",
+        profileData: generateOwningProfileData({
           legalStructureId: "sole-proprietorship",
         }),
         taxFilingData: generateTaxFilingData({
@@ -478,9 +466,8 @@ describe("profile - owning existing business", () => {
   describe("profile error alert", () => {
     it("displays alert with header when sector has an error", async () => {
       const business = generateBusinessForProfile({
-        profileData: generateProfileData({
+        profileData: generateOwningProfileData({
           industryId: "generic",
-          businessPersona: "OWNING",
           sectorId: undefined,
           operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
         }),
@@ -499,9 +486,8 @@ describe("profile - owning existing business", () => {
     describe("address data is initially empty", () => {
       it("displays alert when address line 1 is filled then blurred", async () => {
         const business = generateBusinessForProfile({
-          profileData: generateProfileData({
+          profileData: generateOwningProfileData({
             industryId: "generic",
-            businessPersona: "OWNING",
             operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
@@ -532,9 +518,8 @@ describe("profile - owning existing business", () => {
 
       it("displays alert when zip code is filled with valid zip and then blurred", async () => {
         const business = generateBusinessForProfile({
-          profileData: generateProfileData({
+          profileData: generateOwningProfileData({
             industryId: "generic",
-            businessPersona: "OWNING",
             operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
@@ -568,9 +553,8 @@ describe("profile - owning existing business", () => {
 
       it("displays alert when zip code is filled with invalid zip and then blurred", async () => {
         const business = generateBusinessForProfile({
-          profileData: generateProfileData({
+          profileData: generateOwningProfileData({
             industryId: "generic",
-            businessPersona: "OWNING",
             operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
@@ -605,9 +589,8 @@ describe("profile - owning existing business", () => {
       it("displays alert when address city is selected then blurred", async () => {
         const randomMunicipality = generateMunicipality({});
         const business = generateBusinessForProfile({
-          profileData: generateProfileData({
+          profileData: generateOwningProfileData({
             industryId: "generic",
-            businessPersona: "OWNING",
             operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
@@ -644,9 +627,8 @@ describe("profile - owning existing business", () => {
 
       it("displays alert when max character limit for business line 1 is reached", async () => {
         const business = generateBusinessForProfile({
-          profileData: generateProfileData({
+          profileData: generateOwningProfileData({
             industryId: "generic",
-            businessPersona: "OWNING",
             operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
@@ -678,9 +660,8 @@ describe("profile - owning existing business", () => {
 
       it("displays alert business line 2 is filled then blurred", async () => {
         const business = generateBusinessForProfile({
-          profileData: generateProfileData({
+          profileData: generateOwningProfileData({
             industryId: "generic",
-            businessPersona: "OWNING",
             operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
@@ -714,9 +695,8 @@ describe("profile - owning existing business", () => {
 
       it("displays alert when max character limit for business line 2 is reached", async () => {
         const business = generateBusinessForProfile({
-          profileData: generateProfileData({
+          profileData: generateOwningProfileData({
             industryId: "generic",
-            businessPersona: "OWNING",
             operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           }),
           formationData: generateFormationData({
@@ -753,9 +733,8 @@ describe("profile - owning existing business", () => {
   describe("non essential questions", () => {
     it("does not show elevator questions for owning businesses", async () => {
       const business = generateBusinessForProfile({
-        profileData: generateProfileData({
+        profileData: generateOwningProfileData({
           industryId: "generic",
-          businessPersona: "OWNING",
           operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
           homeBasedBusiness: false,
         }),
