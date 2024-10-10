@@ -13,7 +13,7 @@ export default async function handler(): Promise<void> {
   const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
   const DYNAMO_OFFLINE_PORT = process.env.DYNAMO_PORT || 8000;
   const STAGE = process.env.STAGE || "local";
-  const logger = LogWriter(`aws/${STAGE}`, "DataMigrationLogs");
+  const dataLogger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
 
   let dynamoDb: DynamoDBDocumentClient;
   if (IS_OFFLINE) {
@@ -37,7 +37,7 @@ export default async function handler(): Promise<void> {
     );
   }
 
-  const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, logger);
+  const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, dataLogger);
 
   const AWS_CRYPTO_KEY = process.env.AWS_CRYPTO_KEY || "";
   const AWS_CRYPTO_CONTEXT_STAGE = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
