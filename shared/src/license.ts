@@ -102,6 +102,10 @@ export const taskIdLicenseNameMapping = {
   "entertainment-agency-reg": "Employment & Personnel Service-Entertainment/Booking Agency",
 } as const;
 
+export const LicenseNameTaskIdMapping = Object.fromEntries(
+  Object.entries(taskIdLicenseNameMapping).map(([key, value]) => [value, key])
+);
+
 export type LicenseTaskID = keyof typeof taskIdLicenseNameMapping;
 
 export type LicenseName = (typeof taskIdLicenseNameMapping)[LicenseTaskID];
