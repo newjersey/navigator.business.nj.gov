@@ -39,7 +39,7 @@ export default async function handler(): Promise<void> {
     );
   }
 
-  const dataLogger = LogWriter(`aws/${STAGE}`, "DataMigrationLogs");
+  const dataLogger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
 
   const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, dataLogger);
   const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
