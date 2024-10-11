@@ -7,16 +7,11 @@ urlSlug: hic-license
 name: Obtain Your Home Improvement Contractor Registration
 webflowName: "Home Contractor: Home Improvement Contractor Registration"
 summaryDescriptionMd: >-
-  :::callout{ showHeader="false" headerText="" showIcon="false"
-  calloutType="informational" }
+  
 
-
-  The [Home Improvement Contractor application](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf) includes an FAQ section.
-
-
+  :::infoAlert 
+   The [Home Improvement Contractor application](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf) includes an FAQ section.
   :::
-
-
 
 
   Home improvement contractors are individuals and companies involved in repairing, renovating, modernizing, installing, replacing, improving, restoring, painting, constructing, remodeling, moving, or demolishing **residential** or **noncommercial** properties.
