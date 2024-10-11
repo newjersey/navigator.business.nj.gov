@@ -1,7 +1,7 @@
 ---
 previewType: renewal
 licenseName: ""
-urlSlug: employment-agency
+urlSlug: employment-agency-license
 expirationEventDisplayName: " Employment Agency License Expiration"
 renewalEventDisplayName: Employment Agency License Renewal Deadline
 disclaimerText: You can renew your license 60 days before it expires and up to
