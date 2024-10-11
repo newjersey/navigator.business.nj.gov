@@ -1,7 +1,7 @@
 ---
 previewType: renewal
 licenseName: ""
-urlSlug: employment-agency
+urlSlug: temporary-help-service-firm-reg
 expirationEventDisplayName: Temporary Help Service Firm Registration Expiration
 renewalEventDisplayName: Temporary Help Service Firm Registration Renewal Deadline
 disclaimerText: You can renew your license 60 days before it expires and up to
@@ -14,6 +14,7 @@ callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-\
   Business-Online-Registration.aspx "
 callToActionText: Renew My Temporary Help Service Firm Registration
 ---
+
 ## Application Requirements
 
 - `Surety bond|surety-bond` number and premium paid receipt

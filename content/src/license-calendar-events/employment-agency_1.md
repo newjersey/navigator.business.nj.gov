@@ -1,7 +1,7 @@
 ---
 previewType: renewal
 licenseName: ""
-urlSlug: employment-agency
+urlSlug: temp-help-consulting-firm-combined
 expirationEventDisplayName: Consulting Firm/Temporary Help Service Firm Expiration
 renewalEventDisplayName: Consulting Firm/Temporary Help Service Firm Renewal Deadline
 disclaimerText: You can renew your license 60 days before it expires and up to
@@ -15,6 +15,7 @@ callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-\
   Business-Online-Registration.aspx "
 callToActionText: " Renew My Consulting Firm/Temporary Help Service Firm"
 ---
+
 ## Application Requirements
 
 - Criminal history of the applicant, company officers, directors, or principals, if applicable
