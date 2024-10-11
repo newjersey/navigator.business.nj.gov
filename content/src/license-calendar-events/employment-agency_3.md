@@ -1,7 +1,7 @@
 ---
 previewType: renewal
 licenseName: ""
-urlSlug: employment-agency
+urlSlug: consulting-firm-headhunter-reg
 expirationEventDisplayName: " Consulting Firm (Headhunter) Registration Expiration"
 renewalEventDisplayName: " Consulting Firm (Headhunter) Registration  Renewal Deadline"
 disclaimerText: You can renew your license 60 days before it expires and up to
@@ -14,6 +14,7 @@ callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-\
   Business-Online-Registration.aspx "
 callToActionText: Renew My Consulting Firm (Headhunter) Registration
 ---
+
 ## Application Requirements
 
 - Criminal history of the applicant, company officers, directors, or principals, if applicable
