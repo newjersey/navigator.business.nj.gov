@@ -26,8 +26,8 @@ webflowId: 66aceedd6ba3dffa8ac9d30b
 ---
 ## Eligibility Criteria
 
-* Moving: You must own or have a minimum one-year lease on your moving vehicle
-* Warehousing: You must own or lease a warehouse
+* **Moving:** You must own or have a minimum 1-year lease on your moving vehicle
+* **Warehousing:** You must own or lease a warehouse
 
 ## Application Requirements (Moving)
 
@@ -42,7 +42,7 @@ webflowId: 66aceedd6ba3dffa8ac9d30b
 * Copy of tariff (formal schedule of rates, services, and terms and conditions)
 * Financial statement (assets and liabilities at the time of application)
 * Copy of vehicle registration or lease
-* Copy of `Workers’ Compensation Insurance|workers-comp` (if more than one full-time employee)
+* Copy of `Workers’ Compensation Insurance|workers-comp` (if more than 1 full-time employee)
 * Insurance form E (Bodily Injury & Property Damage)
 * Insurance form H (Cargo Liability)
 * Copy of all forms and brochures the company will use with customers
