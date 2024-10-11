@@ -2,6 +2,7 @@
 notesMd: "[Muni planning
   doc](https://docs.google.com/document/d/1VUircxpV5ZJuqq1_c5M5yl7aJZ8CkafDsm2T\
   euz_zGk/edit)"
+licenseName: ""
 id: fire-safety-smoke-detectors
 filename: fire-safety-smoke-detectors
 displayname: fire-safety-smoke-detectors
@@ -9,7 +10,6 @@ urlSlug: fire-safety-smoke-detectors
 name: Get Your Smoke Detector, Carbon Monoxide Detector, and Fire Extinguisher
   Certificate, if Applicable
 webflowName: Smoke Detector, Carbon Monoxide Detector, and Fire Extinguisher Certificate
-licenseName: ""
 summaryDescriptionMd: >-
   Before you can rent out a one- or two-family home, you need an inspection and
   certificate that confirms the following devices are installed and working:
@@ -37,7 +37,7 @@ webflowId: 65bd67f31de3409a62b43e80
 
 :::callout{ showHeader="true" headerText="Keep in mind:" showIcon="false" calloutType="informational" }
 
-You need to get a new certificate for each home you are renting out every six months or when a new tenant moves in.
+You need to get a new certificate for each home you are renting out every 6 months or when a new tenant moves in.
 
 :::
 
