@@ -3152,7 +3152,7 @@ collections:
           options: ["expiration", "renewal"],
         }
       - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
-      - { label: "URL Slug", name: "urlSlug", widget: "write-once-read-only-no-space", required: true }
+      - { label: "URL Slug", name: "urlSlug", widget: "no-space", required: true }
       - {
           label: "Expiration Event Label",
           name: "expirationEventDisplayName",
