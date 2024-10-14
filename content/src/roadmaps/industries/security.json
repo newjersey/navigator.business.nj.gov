@@ -43,6 +43,11 @@
       "weight": 25,
       "task": "register-for-taxes",
       "required": true
+    },
+    {
+      "step": 2,
+      "weight": 10,
+      "task": "bank-account"
     }
   ],
   "name": "Security",
