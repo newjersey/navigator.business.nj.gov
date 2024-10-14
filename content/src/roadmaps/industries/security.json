@@ -31,6 +31,12 @@
       "weight": 100,
       "task": "business-structure",
       "required": true
+    },
+    {
+      "step": 2,
+      "weight": 17,
+      "task": "register-for-ein",
+      "required": true
     }
   ],
   "name": "Security",
