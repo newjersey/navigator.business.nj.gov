@@ -25,6 +25,12 @@
       "weight": 5,
       "task": "determine-naics-code",
       "required": true
+    },
+    {
+      "step": 1,
+      "weight": 100,
+      "task": "business-structure",
+      "required": true
     }
   ],
   "name": "Security",
