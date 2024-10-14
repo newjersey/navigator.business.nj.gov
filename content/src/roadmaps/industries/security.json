@@ -1,0 +1,29 @@
+{
+  "naicsCodes": "561622, 561621",
+  "defaultSectorId": "other-services",
+  "canHavePermanentLocation": true,
+  "name": "Security",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "Security",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true,
+    "isCannabisLicenseTypeApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isCarServiceApplicable": false,
+    "isInterstateMovingApplicable": false,
+    "petCareHousing": false,
+    "isLiquorLicenseApplicable": false,
+    "isInterstateLogisticsApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isChildcareForSixOrMore": false,
+    "willSellPetCareItems": false,
+    "isTransportation": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isProvidesStaffingServicesApplicable": false
+  },
+  "isEnabled": false,
+  "additionalSearchTerms": "Security services, burglar alarms, fire Alarm, locksmith, security systems, surveillance systems, alarm maintenance, alarm installation, ",
+  "id": "security",
+  "description": "Security-related services and maintenance, including installation and maintenance of fire and burglar alarms and locksmith services."
+}
