@@ -2,6 +2,20 @@
   "naicsCodes": "561622, 561621",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 1,
+      "licenseTask": "alarm-locksmith-business-license",
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 2,
+      "licenseTask": "alarm-locksmith-license",
+      "required": true
+    }
+  ],
   "name": "Security",
   "nonEssentialQuestionsIds": [],
   "displayname": "Security",
