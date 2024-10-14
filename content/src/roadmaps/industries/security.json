@@ -14,11 +14,50 @@
       "weight": 2,
       "licenseTask": "alarm-locksmith-license",
       "required": true
+    },
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 5,
+      "task": "determine-naics-code",
+      "required": true
+    },
+    {
+      "step": 1,
+      "weight": 100,
+      "task": "business-structure",
+      "required": true
+    },
+    {
+      "step": 2,
+      "weight": 17,
+      "task": "register-for-ein",
+      "required": true
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes",
+      "required": true
+    },
+    {
+      "step": 2,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 20,
+      "task": "get-insurance"
     }
   ],
   "name": "Security",
   "nonEssentialQuestionsIds": [],
-  "displayname": "Security",
+  "displayname": "security",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true,
