@@ -19,6 +19,12 @@
       "step": 1,
       "weight": 1,
       "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 5,
+      "task": "determine-naics-code",
+      "required": true
     }
   ],
   "name": "Security",
