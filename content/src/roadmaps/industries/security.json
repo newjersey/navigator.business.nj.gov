@@ -37,6 +37,12 @@
       "weight": 17,
       "task": "register-for-ein",
       "required": true
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes",
+      "required": true
     }
   ],
   "name": "Security",
