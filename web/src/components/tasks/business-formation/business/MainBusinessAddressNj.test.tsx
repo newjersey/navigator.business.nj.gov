@@ -136,7 +136,7 @@ describe("<MainBusinessAddressNj />", () => {
       });
       await attemptApiSubmission(page);
 
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (Config.formation.fields as any)[field].label
       );

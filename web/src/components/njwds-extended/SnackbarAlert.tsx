@@ -39,6 +39,7 @@ export const SnackbarAlert = (props: Props): ReactElement => {
             noIcon={props.noIcon}
             rounded
             dataTestid={props.dataTestid}
+            noAlertRole
           >
             <div>{props.children}</div>
           </Alert>

@@ -1,0 +1,10 @@
+{
+  "calloutAlerts": {
+    "calloutAlertGroupTitle": "${alertVariant}",
+    "info": "informational",
+    "success": "success",
+    "error": "error",
+    "warning": "warning",
+    "note": "note"
+  }
+}

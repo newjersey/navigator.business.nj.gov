@@ -77,6 +77,7 @@ export const cmsCollections = [
       "404 Page",
       "Global Error Messages",
       "Navigation Config",
+      "Component Accessibility",
     ],
   },
 ];
