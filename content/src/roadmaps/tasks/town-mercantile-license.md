@@ -1,9 +1,9 @@
 ---
 requiresLocation: true
 summaryDescriptionMd: >-
-  
 
-  :::note 
+
+  :::note
    This screen guides your next steps. It does not submit your information for registration purposes.
   :::
 
@@ -15,21 +15,22 @@ displayname: town-mercantile-license
 name: Get Your Mercantile License if Your Town Requires it
 id: check-local-requirements
 callToActionLink: ${municipalityWebsite}
-callToActionText: Visit the ${municipality} Website
+callToActionText: Visit the ${municipalityName} Website
 ---
-:::cannabisLocationAlert 
- 
+
+:::cannabisLocationAlert
+
 :::
 
 ${beginLocationDependentSection}
 
 **Check with your local clerk’s office**
 
-You can find your local municipal clerk's office through the [${municipality} website](${municipalityWebsite}) or by contacting your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.
+You can find your local municipal clerk's office through the [${municipalityName} website](${municipalityWebsite}) or by contacting your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.
 
 ${endLocationDependentSection}
 
-- - -
+---
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 

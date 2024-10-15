@@ -20,15 +20,16 @@ id: check-local-requirements
 callToActionLink: ""
 callToActionText: ""
 ---
+
 ## Actions to Take
 
 ${beginLocationDependentSection}
 
-You can find your local municipal clerk’s office through the [${municipality} website](${municipalityWebsite}) or by contacting your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.
+You can find your local municipal clerk’s office through the [${municipalityName} website](${municipalityWebsite}) or by contacting your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.
 
 ${endLocationDependentSection}
 
-- - -
+---
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
