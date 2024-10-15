@@ -294,7 +294,7 @@ const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: str
 
   return applyTemplateEvalForAllTasks(roadmap, {
     municipalityWebsite: municipality.townWebsite,
-    municipality: municipality.townName,
+    municipalityName: municipality.townName,
     county: municipality.countyName,
     countyClerkPhone: municipality.countyClerkPhone,
     countyClerkWebsite: municipality.countyClerkWebsite,
@@ -309,7 +309,7 @@ const addNaicsCodeData = (roadmap: Roadmap, naicsCode: string): Roadmap => {
 const cleanupMunicipalitySpecificData = (roadmap: Roadmap): Roadmap => {
   return applyTemplateEvalForAllTasks(roadmap, {
     municipalityWebsite: "",
-    municipality: "",
+    municipalityName: "",
     county: "",
     countyClerkPhone: "",
     countyClerkWebsite: "",
