@@ -599,9 +599,11 @@ describe("<BusinessFormationPaginator />", () => {
         await page.submitReviewStep();
 
         await page.stepperClickToContactsStep();
-        expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.errorBanner.errorOnStep);
-        expect(screen.queryByRole("alert")).not.toHaveTextContent(Config.formation.fields.members.label);
-        expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.trustees.label);
+        expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.errorBanner.errorOnStep);
+        expect(screen.queryByTestId("alert-error")).not.toHaveTextContent(
+          Config.formation.fields.members.label
+        );
+        expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.trustees.label);
       });
 
       it.each(corpLegalStructures)(
@@ -622,9 +624,15 @@ describe("<BusinessFormationPaginator />", () => {
 
           await page.stepperClickToContactsStep();
 
-          expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.errorBanner.errorOnStep);
-          expect(screen.queryByRole("alert")).not.toHaveTextContent(Config.formation.fields.members.label);
-          expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.directors.label);
+          expect(screen.getByTestId("alert-error")).toHaveTextContent(
+            Config.formation.errorBanner.errorOnStep
+          );
+          expect(screen.queryByTestId("alert-error")).not.toHaveTextContent(
+            Config.formation.fields.members.label
+          );
+          expect(screen.getByTestId("alert-error")).toHaveTextContent(
+            Config.formation.fields.directors.label
+          );
         }
       );
     });
@@ -1377,12 +1385,14 @@ describe("<BusinessFormationPaginator />", () => {
             if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
             if (formationStepName === "Billing") await page.stepperClickToBillingStep();
 
-            expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.errorBanner.errorOnStep);
-            expect(screen.getByRole("alert")).toHaveTextContent(
+            expect(screen.getByTestId("alert-error")).toHaveTextContent(
+              Config.formation.errorBanner.errorOnStep
+            );
+            expect(screen.getByTestId("alert-error")).toHaveTextContent(
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               (Config.formation.fields as any)[fieldName as string].label
             );
-            expect(screen.getByRole("alert")).toHaveTextContent("very bad input");
+            expect(screen.getByTestId("alert-error")).toHaveTextContent("very bad input");
           });
 
           it.each([
@@ -1428,9 +1438,9 @@ describe("<BusinessFormationPaginator />", () => {
             if (formationStepName === "Business") await page.stepperClickToBusinessStep();
             if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
             if (formationStepName === "Billing") await page.stepperClickToBillingStep();
-            expect(screen.getByRole("alert")).toBeInTheDocument();
+            expect(screen.getByTestId("alert-error")).toBeInTheDocument();
             page.fillText(fieldLabel as string as string, newTextInput as string);
-            expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+            expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
             expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
             expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
               "COMPLETE-ACTIVE"
@@ -1458,9 +1468,9 @@ describe("<BusinessFormationPaginator />", () => {
               if (formationStepName === "Business") await page.stepperClickToBusinessStep();
               if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
               if (formationStepName === "Billing") await page.stepperClickToBillingStep();
-              expect(screen.getByRole("alert")).toBeInTheDocument();
+              expect(screen.getByTestId("alert-error")).toBeInTheDocument();
               fireEvent.click(screen.getByTestId(radioBtnTestId as string));
-              expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+              expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
               expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
               expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
                 "COMPLETE-ACTIVE"
@@ -1491,12 +1501,12 @@ describe("<BusinessFormationPaginator />", () => {
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
               if (formationStepName === "Business") await page.stepperClickToBusinessStep();
-              expect(screen.getByRole("alert")).toBeInTheDocument();
+              expect(screen.getByTestId("alert-error")).toBeInTheDocument();
 
               page.selectByText(dropDownLabel as string, dropDownValue as string);
               fireEvent.focusOut(screen.getAllByLabelText(dropDownLabel as string)[0]);
 
-              expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+              expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
               expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
               expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
                 "COMPLETE-ACTIVE"
@@ -1527,14 +1537,14 @@ describe("<BusinessFormationPaginator />", () => {
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
               if (formationStepName === "Business") await page.stepperClickToBusinessStep();
-              expect(screen.getByRole("alert")).toBeInTheDocument();
+              expect(screen.getByTestId("alert-error")).toBeInTheDocument();
 
               page.selectDate(
                 newDate as DateObject,
                 datePickerFieldType as "Business start date" | "Foreign date of formation"
               );
 
-              expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+              expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
               expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
               expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
                 "COMPLETE-ACTIVE"
@@ -1960,12 +1970,14 @@ describe("<BusinessFormationPaginator />", () => {
             if (formationStepName === "Business") await page.stepperClickToBusinessStep();
             if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
             if (formationStepName === "Billing") await page.stepperClickToBillingStep();
-            expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.errorBanner.errorOnStep);
-            expect(screen.getByRole("alert")).toHaveTextContent(
+            expect(screen.getByTestId("alert-error")).toHaveTextContent(
+              Config.formation.errorBanner.errorOnStep
+            );
+            expect(screen.getByTestId("alert-error")).toHaveTextContent(
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               (Config.formation.fields as any)[fieldName as string].label
             );
-            expect(screen.getByRole("alert")).toHaveTextContent("very bad input");
+            expect(screen.getByTestId("alert-error")).toHaveTextContent("very bad input");
           });
 
           it.each([
@@ -2001,11 +2013,11 @@ describe("<BusinessFormationPaginator />", () => {
             if (formationStepName === "Business") await page.stepperClickToBusinessStep();
             if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
             if (formationStepName === "Billing") await page.stepperClickToBillingStep();
-            expect(screen.getByRole("alert")).toBeInTheDocument();
+            expect(screen.getByTestId("alert-error")).toBeInTheDocument();
 
             page.fillText(fieldLabel as string as string, newTextInput as string);
             await waitFor(() => {
-              expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+              expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
             });
             expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
             expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(

@@ -1,4 +1,6 @@
 import { Heading } from "@/components/njwds-extended/Heading";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { ReactElement, ReactNode } from "react";
 
 export interface AlertProps {
@@ -8,6 +10,7 @@ export interface AlertProps {
   rounded?: boolean;
   dataTestid?: string;
   className?: string;
+  noAlertRole?: boolean;
 }
 
 interface Props extends AlertProps {
@@ -18,12 +21,22 @@ export const AlertVariants = ["info", "success", "warning", "error", "note"] as 
 
 export type AlertVariant = (typeof AlertVariants)[number];
 
+const composeAriaGroupLabel = (content: string, alertMappedName: string): string => {
+  return modifyContent({
+    content,
+    condition: () => true,
+    modificationMap: {
+      alertVariant: alertMappedName,
+    },
+  });
+};
+
 export const Alert = (props: Props): ReactElement => {
   const { variant, children, noIcon, heading, rounded, dataTestid } = props;
   const variantClass = variant ? `usa-alert--${variant}` : "";
   const noIconClass = noIcon ? " usa-alert--no-icon" : "";
   const roundedClass = rounded ? " radius-md" : "";
-  const alertRole = variant === "error" ? { role: "alert" } : {};
+  const alertRole = props.noAlertRole ? {} : { role: "alert" };
   const defaultClassNames = "usa-alert margin-y-2 usa-alert--slim";
   const className = [defaultClassNames, roundedClass, variantClass, noIconClass, props.className ?? ""]
     .map((i) => {
@@ -34,8 +47,26 @@ export const Alert = (props: Props): ReactElement => {
     })
     .join(" ");
 
+  const { Config } = useConfig();
+
+  const AlertVariantsAriaMapping = {
+    info: Config.calloutAlerts.info,
+    success: Config.calloutAlerts.success,
+    warning: Config.calloutAlerts.warning,
+    error: Config.calloutAlerts.error,
+    note: Config.calloutAlerts.note,
+  };
+
   return (
-    <div className={className} {...alertRole} {...(dataTestid ? { "data-testid": dataTestid } : {})}>
+    <div
+      className={className}
+      {...(dataTestid ? { "data-testid": dataTestid } : { "data-testid": `alert-${props.variant}` })}
+      aria-label={composeAriaGroupLabel(
+        Config.calloutAlerts.calloutAlertGroupTitle,
+        AlertVariantsAriaMapping[props.variant]
+      )}
+      {...alertRole}
+    >
       <div className="usa-alert__body">
         {heading && (
           <Heading level={3} className="margin-bottom-0">
