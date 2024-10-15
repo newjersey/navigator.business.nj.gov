@@ -5,6 +5,7 @@ import {
   EssentialQuestions,
   getEssentialQuestion,
   hasEssentialQuestion,
+  hasMultipleEssentialQuestions,
 } from "@/lib/domain-logic/essentialQuestions";
 import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
@@ -330,7 +331,9 @@ export const mockSuccessfulApiSignups = (): void => {
 };
 
 export const industriesWithSingleEssentialQuestion = getIndustries().filter((industry) => {
-  return hasEssentialQuestion(industry.id) && industry.isEnabled && industry.id !== "employment-agency";
+  return (
+    hasEssentialQuestion(industry.id) && industry.isEnabled && !hasMultipleEssentialQuestions(industry.id)
+  );
 });
 
 export const industriesWithOutEssentialQuestion = getIndustries().filter((industry) => {

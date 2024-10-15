@@ -2,6 +2,7 @@ import {
   carServiceOptions,
   CarServiceType,
   getIndustries,
+  PropertyLeaseType,
   randomInt,
   ResidentialConstructionType,
 } from "@businessnjgovnavigator/shared";
@@ -120,6 +121,38 @@ describe("Onboarding for all industries when starting a business [feature] [all]
               .should("be.checked");
           } else {
             onOnboardingPageStartingBusiness.getResidentialConstructionTypeRadio().should("not.exist");
+          }
+        }
+
+        const propertyLeaseTypeChoices = [
+          "SHORT_TERM_RENTAL",
+          "LONG_TERM_RENTAL",
+          "BOTH",
+        ] as PropertyLeaseType[];
+
+        const propertyLeaseTypeApplicable = industry.industryOnboardingQuestions.whatIsPropertyLeaseType
+          ? propertyLeaseTypeChoices[Math.floor(Math.random() * 3)]
+          : undefined;
+
+        if (propertyLeaseTypeApplicable === undefined) {
+          onOnboardingPageStartingBusiness.getPropertyLeaseTypeRadio().should("not.exist");
+        } else {
+          onOnboardingPageStartingBusiness.selectLongTermPropertyLeaseTypeRadio(propertyLeaseTypeApplicable);
+          onOnboardingPageStartingBusiness
+            .getPropertyLeaseTypeRadio(propertyLeaseTypeApplicable)
+            .should("be.checked");
+          const randomAnswer = Boolean(randomInt() % 2);
+          if (propertyLeaseTypeApplicable === "SHORT_TERM_RENTAL") {
+            onOnboardingPageStartingBusiness
+              .getHasThreeOrMoreRentalUnitsRadio(randomAnswer)
+              .should("not.exist");
+          } else {
+            onOnboardingPageStartingBusiness.getHasThreeOrMoreRentalUnitsRadio(randomAnswer).should("exist");
+
+            onOnboardingPageStartingBusiness.selectThreeOrMoreRentalUnitsRadio(randomAnswer);
+            onOnboardingPageStartingBusiness
+              .getHasThreeOrMoreRentalUnitsRadio(randomAnswer)
+              .should("be.checked");
           }
         }
 
