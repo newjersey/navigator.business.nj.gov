@@ -1,26 +1,29 @@
 ---
-id: "appraiser-certification"
-webflowId: "66aceed5a35295b74def2d2d"
-urlSlug: "real-estate-appraiser-certification"
-name: "Apply for Your Residential Real Property Appraiser Certification"
-webflowName: "Real Estate Appraisal: Residential Real Property Appraiser Certification"
-filename: "appraiser-certification"
-displayname: "real-estate-appraiser-certification"
-callToActionLink: "https://newjersey.mylicense.com/eGov/Login.aspx"
-callToActionText: "Apply for My Appraiser Certification"
-agencyId: "nj-consumer-affairs"
-agencyAdditionalContext: "Real Estate Appraiser Board"
-divisionPhone: "(973) 504-6480"
-industryId: "real-estate-appraisals"
-webflowType: "individual-license"
 licenseName: ""
-licenseCertificationClassification: "CERTIFICATION"
-summaryDescriptionMd: "You need a certification to appraise real estate with one to four residential units—regardless of value or complexity. If you are opening an `Appraisal Management Company|appraisal-management-company` you must have a certified appraiser."
+id: appraiser-certification
+filename: appraiser-certification
+displayname: real-estate-appraiser-certification
+urlSlug: real-estate-appraiser-certification
+name: Apply for Your Residential Real Property Appraiser Certification
+webflowName: "Real Estate Appraisal: Residential Real Property Appraiser Certification"
+summaryDescriptionMd: You need a certification to appraise real estate with one
+  to four residential units—regardless of value or complexity. If you are
+  opening an `Appraisal Management Company|appraisal-management-company` you
+  must have a certified appraiser.
+industryId: real-estate-appraisals
+callToActionText: Apply for My Appraiser Certification
+callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
+licenseCertificationClassification: CERTIFICATION
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Real Estate Appraiser Board
+divisionPhone: (973) 504-6480
+webflowType: individual-license
+webflowId: 66aceed5a35295b74def2d2d
 ---
 
 ## Eligibility Criteria
 
-- Have a bachelor’s degree from an accredited university or meet at least [one of the other options pertaining to college-level education](https://www.njconsumeraffairs.gov/rea/Applications/Certified-Residential-Real-Property-Appraiser-Criteria.pdf)
+- Have a bachelor’s degree from an accredited university or meet at least [1 of the other options pertaining to college-level education](https://www.njconsumeraffairs.gov/rea/Applications/Certified-Residential-Real-Property-Appraiser-Criteria.pdf)
 - Complete 1,500 hours of relevant work experience in no fewer than 12 months
 - Complete 200 classroom hours of appraisal education as specified in the [Core Curriculum](https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx) (see “Certified Residential Appraiser Forms”: “Certified Residential Core Curriculum Education Worksheet” and “Certified Residential Course Tracking Worksheet”), including the 15-hour National USPAP Course
 - Successfully pass the AQB (Appraiser Qualifications Board) approved Certified Residential Real Property Appraiser exam
