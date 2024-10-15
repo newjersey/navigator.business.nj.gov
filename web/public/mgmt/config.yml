@@ -5731,6 +5731,29 @@ collections:
               - { label: "Error Description 2", name: "errorDescriptionPt2", widget: "markdown" }
               - { label: "Chat with Expert", name: "errorChatWithExpert", widget: "markdown" }
 
+  - name: "component-accessibility"
+    label: "Component Accessibility"
+    delete: false
+    create: false
+    files:
+      - label: "Callout Alerts"
+        name: "callout-alerts"
+        file: "content/src/mappings/callout-alerts.json"
+        editor:
+          preview: true
+        fields:
+          - label: "Callout Alerts"
+            name: calloutAlerts
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Callout Alert Group Title", name: "calloutAlertGroupTitle", widget: "string" }
+              - { label: "Info (Blue)", name: "info", widget: "string" }
+              - { label: "Success (Green)", name: "success", widget: "string" }
+              - { label: "Error (Red)", name: "error", widget: "string" }
+              - { label: "Warning (Yellow)", name: "warning", widget: "string" }
+              - { label: "Note (Gray)", name: "note", widget: "string" }
+
   - name: "global-error-messages"
     label: "Global Error Messages"
     delete: false

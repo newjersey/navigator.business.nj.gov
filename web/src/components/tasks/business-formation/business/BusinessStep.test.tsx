@@ -992,20 +992,22 @@ describe("Formation - BusinessStep", () => {
     it("displays Business Suffix error label when Business Suffix is undefined", async () => {
       const page = await getPageHelper({}, { businessSuffix: undefined });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.businessSuffix.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.businessSuffix.label
+      );
     });
 
     it("displays Withdrawals error label when Withdrawals is empty", async () => {
       const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { withdrawals: "" });
       await attemptApiSubmission(page);
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.withdrawals.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.withdrawals.label);
     });
 
     it("displays Dissolution error label when Dissolution is empty", async () => {
       const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { dissolution: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.dissolution.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.dissolution.label);
     });
 
     it("displays Combined Investment error label when Combined Investment is empty", async () => {
@@ -1014,7 +1016,9 @@ describe("Formation - BusinessStep", () => {
         { combinedInvestment: "" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.combinedInvestment.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.combinedInvestment.label
+      );
     });
 
     it("displays error label when Partnership Rights can create Limited Partner is undefined", async () => {
@@ -1036,7 +1040,7 @@ describe("Formation - BusinessStep", () => {
       );
       fireEvent.click(screen.getByTestId("canCreateLimitedPartner-true"));
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.createLimitedPartnerTerms.label
       );
     });
@@ -1059,7 +1063,7 @@ describe("Formation - BusinessStep", () => {
       );
       fireEvent.click(screen.getByTestId("canMakeDistribution-true"));
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.makeDistributionTerms.label
       );
     });
@@ -1082,13 +1086,17 @@ describe("Formation - BusinessStep", () => {
       );
       fireEvent.click(screen.getByTestId("canGetDistribution-true"));
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.getDistributionTerms.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.getDistributionTerms.label
+      );
     });
 
     it("displays error label when Total Shares is empty", async () => {
       const page = await getPageHelper({ legalStructureId: "c-corporation" }, { businessTotalStock: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.businessTotalStock.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.businessTotalStock.label
+      );
       expect(screen.getByText(Config.formation.fields.businessTotalStock.error)).toBeInTheDocument();
     });
 
@@ -1098,7 +1106,7 @@ describe("Formation - BusinessStep", () => {
         { foreignDateOfFormation: undefined }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.foreignDateOfFormation.label
       );
       expect(screen.getByText(Config.formation.fields.foreignDateOfFormation.error)).toBeInTheDocument();
@@ -1110,7 +1118,7 @@ describe("Formation - BusinessStep", () => {
         { foreignStateOfFormation: undefined }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.foreignStateOfFormation.label
       );
       expect(screen.getByText(Config.formation.fields.foreignStateOfFormation.error)).toBeInTheDocument();
@@ -1119,13 +1127,15 @@ describe("Formation - BusinessStep", () => {
     it("displays error label when Address line1 is empty", async () => {
       const page = await getPageHelper({ businessPersona: "FOREIGN" }, { addressLine1: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressLine1.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.addressLine1.label);
     });
 
     it("displays error label when Address zip code is empty", async () => {
       const page = await getPageHelper({ businessPersona: "FOREIGN" }, { addressZipCode: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressZipCode.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.addressZipCode.label
+      );
     });
 
     it("displays error label when Address province is undefined", async () => {
@@ -1134,7 +1144,9 @@ describe("Formation - BusinessStep", () => {
         { addressProvince: undefined, businessLocationType: "INTL" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressProvince.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.addressProvince.label
+      );
     });
 
     it("displays error label when Address country is undefined", async () => {
@@ -1143,7 +1155,9 @@ describe("Formation - BusinessStep", () => {
         { addressCountry: undefined, businessLocationType: "INTL" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressCountry.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.addressCountry.label
+      );
     });
 
     it("displays error label when Address city is undefined", async () => {
@@ -1152,7 +1166,7 @@ describe("Formation - BusinessStep", () => {
         { addressCity: undefined, businessLocationType: "INTL" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressCity.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.addressCity.label);
     });
 
     it("displays error label when Address state is undefined", async () => {
@@ -1161,13 +1175,15 @@ describe("Formation - BusinessStep", () => {
         { addressState: undefined, businessLocationType: "US" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressState.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.addressState.label);
     });
 
     it("displays error label when isVeteranNonprofit is undefined", async () => {
       const page = await getPageHelper({ legalStructureId: "nonprofit" }, { isVeteranNonprofit: undefined });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.isVeteranNonprofit.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.isVeteranNonprofit.label
+      );
       expect(screen.getByText(Config.formation.fields.isVeteranNonprofit.error)).toBeInTheDocument();
     });
 
@@ -1177,7 +1193,7 @@ describe("Formation - BusinessStep", () => {
         { hasNonprofitBoardMembers: undefined, legalType: "nonprofit" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.hasNonprofitBoardMembers.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
@@ -1193,7 +1209,7 @@ describe("Formation - BusinessStep", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.nonprofitBoardMemberQualificationsSpecified.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
@@ -1210,7 +1226,7 @@ describe("Formation - BusinessStep", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.nonprofitBoardMemberQualificationsTerms.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
@@ -1226,7 +1242,7 @@ describe("Formation - BusinessStep", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.nonprofitBoardMemberRightsSpecified.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
@@ -1243,7 +1259,7 @@ describe("Formation - BusinessStep", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.nonprofitBoardMemberRightsSpecified.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
@@ -1259,7 +1275,7 @@ describe("Formation - BusinessStep", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.nonprofitTrusteesMethodSpecified.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
@@ -1276,7 +1292,7 @@ describe("Formation - BusinessStep", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.nonprofitTrusteesMethodTerms.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
@@ -1292,7 +1308,7 @@ describe("Formation - BusinessStep", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.nonprofitAssetDistributionSpecified.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
@@ -1309,7 +1325,7 @@ describe("Formation - BusinessStep", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.nonprofitAssetDistributionTerms.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
