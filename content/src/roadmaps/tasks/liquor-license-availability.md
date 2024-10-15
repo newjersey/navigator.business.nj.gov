@@ -1,9 +1,9 @@
 ---
 requiresLocation: true
 summaryDescriptionMd: >-
-  
 
-  :::note 
+
+  :::note
    This screen guides your next steps. It does not submit your information for registration purposes.
   :::
 
@@ -17,13 +17,14 @@ id: liquor-license-availability
 callToActionLink: ${countyClerkWebsite}
 callToActionText: Visit My County Clerk's Website
 ---
+
 ## Actions to Take
 
 ${beginLocationDependentSection}
 
 **Check with your local clerk’s office**
 
-You can find your local clerk's office through the [${municipality} website](${municipalityWebsite}) or by contacting your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.
+You can find your local clerk's office through the [${municipalityName} website](${municipalityWebsite}) or by contacting your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.
 
 ## ${endLocationDependentSection}
 

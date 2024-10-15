@@ -559,6 +559,63 @@ describe("buildUserRoadmap", () => {
       });
     });
 
+    describe("residential landlord", () => {
+      it("add short term rental registration task for short term rental landlords", async () => {
+        await buildUserRoadmap(generateStartingProfile({ propertyLeaseType: "SHORT_TERM_RENTAL" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("short-term-rental-registration");
+      });
+
+      it("add long term many units add on for long term rentals with three or more rental units", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ propertyLeaseType: "LONG_TERM_RENTAL", hasThreeOrMoreRentalUnits: true })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "residential-landlord-long-term-many-units"
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
+          "residential-landlord-long-term-few-units"
+        );
+      });
+
+      it("add long term few units add on for long term rentals with two or fewer rental units", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ propertyLeaseType: "LONG_TERM_RENTAL", hasThreeOrMoreRentalUnits: false })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
+          "residential-landlord-long-term-many-units"
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "residential-landlord-long-term-few-units"
+        );
+      });
+
+      it("adds long term many unit add on and short term rental add on for landlords owning both short and long term rentals", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ propertyLeaseType: "BOTH", hasThreeOrMoreRentalUnits: true })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "residential-landlord-long-term-many-units"
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("short-term-rental-registration");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
+          "residential-landlord-long-term-few-units"
+        );
+      });
+
+      it("adds long term few unit add on and short term rental add on for landlords owning both short and long term rentals", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ propertyLeaseType: "BOTH", hasThreeOrMoreRentalUnits: false })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
+          "residential-landlord-long-term-many-units"
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("short-term-rental-registration");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "residential-landlord-long-term-few-units"
+        );
+      });
+    });
+
     describe("non essential questions", () => {
       it("adds addOn if nonEssentialQuestion value is true", async () => {
         mockGetNonEssentialQuestionAddOn.mockReturnValue("non-essential-add-on-1");
@@ -633,11 +690,11 @@ describe("buildUserRoadmap", () => {
           tasks: [
             generateTask({
               callToActionLink: "${municipalityWebsite}",
-              callToActionText: "Visit the ${municipality} Website",
+              callToActionText: "Visit the ${municipalityName} Website",
               stepNumber: 1,
               contentMd:
                 "You can find your city or town clerk through either " +
-                "the [${municipality} website](${municipalityWebsite}) or by contacting " +
+                "the [${municipalityName} website](${municipalityWebsite}) or by contacting " +
                 "your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.",
             }),
           ],
@@ -663,10 +720,10 @@ describe("buildUserRoadmap", () => {
           tasks: [
             generateTask({
               callToActionLink: "${municipalityWebsite}",
-              callToActionText: "Visit the ${municipality} Website",
+              callToActionText: "Visit the ${municipalityName} Website",
               contentMd:
                 "You can find your city or town clerk through either " +
-                "the [${municipality} website](${municipalityWebsite}) or by contacting " +
+                "the [${municipalityName} website](${municipalityWebsite}) or by contacting " +
                 "your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.",
             }),
           ],
@@ -713,7 +770,7 @@ describe("buildUserRoadmap", () => {
         generateRoadmap({
           tasks: [
             generateTask({ contentMd: "NAICS code ${naicsCode}" }),
-            generateTask({ contentMd: "Visit the ${municipality} Website" }),
+            generateTask({ contentMd: "Visit the ${municipalityName} Website" }),
           ],
         })
       );

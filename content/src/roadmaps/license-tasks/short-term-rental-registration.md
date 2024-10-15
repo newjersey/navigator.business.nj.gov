@@ -13,13 +13,24 @@ industryId: residential-landlord
 agencyAdditionalContext: Your Municipality
 webflowId: 66f31981c7644d30ef1244e8
 licenseCertificationClassification: undefined
+requiresLocation: true
+callToActionLink: ${municipalityWebsite}
+callToActionText: Visit the ${municipalityName} Website
 ---
 
 ---
 
 ## How to Apply
 
-Check with your municipal clerk to see if you need to register and how to do so. Each town will have its own application process.
+Check with your local clerk to see if you need to register and how to do so. Each town has its own application process.
+
+${beginLocationDependentSection}
+
+**Check with your local clerk’s office**
+
+You can find your local clerk's office through the [${municipalityName} website](${municipalityWebsite}) or by contacting your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.
+
+## ${endLocationDependentSection}
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
