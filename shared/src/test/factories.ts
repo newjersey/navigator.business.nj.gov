@@ -409,7 +409,6 @@ export const generateMunicipalityDetail = (overrides: Partial<MunicipalityDetail
   return {
     id: `some-id-${randomInt()}`,
     townName: `some-town-name-${randomInt()}`,
-    countyId: `some-county-id-${randomInt()}`,
     townDisplayName: `some-town-display-name-${randomInt()}`,
     townWebsite: `some-town-website-${randomInt()}`,
     countyName: `some-county-name-${randomInt()}`,
