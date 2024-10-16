@@ -14,10 +14,7 @@ const healthCheckEndPoints: Record<string, string> = {
   webserviceFormation: "webservice/formation",
 };
 
-const url =
-  process.env.STAGE === "prod"
-    ? "https://api.navigator.business.nj.gov"
-    : "https://dev.api.navigator.business.nj.gov";
+const url = process.env.API_BASE_URL ?? "https://api.account.business.nj.gov";
 
 const healthCheck = async (type: string, logger: LogWriterType): Promise<Status> => {
   return axios
