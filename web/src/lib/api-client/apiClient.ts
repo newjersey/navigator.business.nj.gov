@@ -17,11 +17,15 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
 
-export const getUserData = (id: string): Promise<UserData> => {
-  return get<UserData>(`/users/${id}`).then((userData) => {
-    setPhaseDimension(getCurrentBusiness(userData).profileData.operatingPhase);
-    return userData;
-  });
+export const getUserData = (id: string): Promise<undefined | UserData> => {
+  return get<UserData>(`/users/${id}`)
+    .then((userData) => {
+      setPhaseDimension(getCurrentBusiness(userData).profileData.operatingPhase);
+      return userData;
+    })
+    .catch(() => {
+      return undefined;
+    });
 };
 
 export const postUserData = async (userData: UserData): Promise<UserData> => {

@@ -344,7 +344,8 @@ app.use(
     updateSidebarCards,
     updateOperatingPhase,
     AWSEncryptionDecryptionClient,
-    timeStampToBusinessSearch
+    timeStampToBusinessSearch,
+    logger
   )
 );
 

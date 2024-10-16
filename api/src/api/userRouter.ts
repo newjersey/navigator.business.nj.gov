@@ -8,6 +8,7 @@ import {
   UserDataClient,
 } from "@domain/types";
 import { encryptTaxIdFactory } from "@domain/user/encryptTaxIdFactory";
+import { LogWriterType } from "@libs/logWriter";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
@@ -124,9 +125,11 @@ export const userRouterFactory = (
   updateRoadmapSidebarCards: UpdateSidebarCards,
   updateOperatingPhase: UpdateOperatingPhase,
   encryptionDecryptionClient: EncryptionDecryptionClient,
-  timeStampBusinessSearch: TimeStampBusinessSearch
+  timeStampBusinessSearch: TimeStampBusinessSearch,
+  logWriter: LogWriterType
 ): Router => {
   const router = Router();
+  const logId = logWriter.GetId();
   const encryptTaxId = encryptTaxIdFactory(encryptionDecryptionClient);
 
   router.get("/users/:userId", (req, res) => {
@@ -136,29 +139,62 @@ export const userRouterFactory = (
       return;
     }
 
-    userDataClient
-      .get(req.params.userId)
-      .then(async (userData: UserData) => {
-        let updatedUserData = userData;
-        updatedUserData = await updateBusinessNameSearchIfNeeded(updatedUserData)
-          .then((userData) => updateOperatingPhase(userData))
-          .then((userData) => updateRoadmapSidebarCards(userData))
-          .then((userData) => asyncUpdateLicenseStatus(userData));
+    /* NOTES:
+    We have a number of users who are attempting to log into the application who have not previously visited and
+    therefore do not have any user data. This is causing an infinite loop in the frontend where the user is getting
+    bounced between the onboarding and loading pages. It appears that a tell-tale indicator of such a user is a userId
+    that is an email address.
 
-        await userDataClient.put(updatedUserData);
-        res.json(updatedUserData);
-      })
-      .catch((error: Error) => {
-        if (error.message === "Not found") {
-          if (process.env.IS_OFFLINE || process.env.STAGE === "dev") {
-            saveEmptyUserData(req, res, signedInUserId);
+    TODO: Possible solution - check if the userID is a uuid - if not, log the user out, direct them to onboarding step 1
+    It is likely that this user will enter into a behavior loop where they will then attempt to login again. This is
+    significantly better than the loop behavior that they would otherwise experience. Hopefully, these people will reach
+    out via a support request, at which point we can coach them through the onboarding process.
+    */
+
+    // Check if userId is an email address
+    if (signedInUserId.includes("@")) {
+      logWriter.LogError(
+        `userRouterFactory - Id:${logId} -User authenticated with email. signedInUserId:${signedInUserId} - Request: ${req.body}`
+      );
+    } else {
+      logWriter.LogInfo(
+        `userRouterFactory - ID:${logId} -User authenticated. Request: ${JSON.stringify(req.params.userId)}`
+      );
+
+      userDataClient
+        .get(req.params.userId)
+        .then(async (userData: UserData) => {
+          let updatedUserData = userData;
+          updatedUserData = await updateBusinessNameSearchIfNeeded(updatedUserData)
+            .then((userData) => updateOperatingPhase(userData))
+            .then((userData) => updateRoadmapSidebarCards(userData))
+            .then((userData) => asyncUpdateLicenseStatus(userData));
+
+          await userDataClient.put(updatedUserData);
+          res.json(updatedUserData);
+        })
+        .catch((error: Error) => {
+          if (error.message === "Not found") {
+            if (process.env.IS_OFFLINE || process.env.STAGE === "dev") {
+              saveEmptyUserData(req, res, signedInUserId);
+            } else {
+              res.status(StatusCodes.NOT_FOUND).json({ error: error.message });
+              logWriter.LogInfo(
+                `userRouterFactory - ID:${logId} -User Not Found. Error: ${
+                  error.message
+                } Request: ${JSON.stringify(req.params.userId)}`
+              );
+            }
           } else {
-            res.status(StatusCodes.NOT_FOUND).json({ error: error.message });
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+            logWriter.LogInfo(
+              `userRouterFactory - ID:${logId} -Server Error. Error: ${
+                error.message
+              } Request: ${JSON.stringify(req.params.userId)}`
+            );
           }
-        } else {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
-        }
-      });
+        });
+    }
   });
 
   router.post("/users", async (req, res) => {
