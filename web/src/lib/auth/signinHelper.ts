@@ -19,7 +19,10 @@ import { Dispatch } from "react";
 import * as session from "./sessionHelper";
 import { triggerSignOut } from "./sessionHelper";
 
-export const onSignIn = async (dispatch: Dispatch<AuthAction>): Promise<void> => {
+export const onSignIn = async (
+  push: (url: string) => Promise<boolean>,
+  dispatch: Dispatch<AuthAction>
+): Promise<void> => {
   const user = await session.getActiveUser();
   dispatch({
     type: "LOGIN",
@@ -27,6 +30,11 @@ export const onSignIn = async (dispatch: Dispatch<AuthAction>): Promise<void> =>
   });
 
   const userData = await api.getUserData(user.id);
+  if (userData === undefined) {
+    // TODO: Maybe include an interstitial that lets the user know why they're being logged out?
+    onSignOut(push, dispatch);
+    return;
+  }
   setRegistrationDimension("Fully Registered");
   setOnLoadDimensions(userData);
 };
