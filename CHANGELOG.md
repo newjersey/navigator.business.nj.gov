@@ -1,3 +1,27 @@
+# [2024.31.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.30.0...v2024.31.0) (2024-10-16)
+
+
+### Bug Fixes
+
+* [[#187578669](https://github.com/newjersey/navigator.business.nj.gov/issues/187578669)] disable auto test in content-repo ([5b78904](https://github.com/newjersey/navigator.business.nj.gov/commit/5b78904302a3e098a2f7e47051362b936355313a))
+* [[#187578669](https://github.com/newjersey/navigator.business.nj.gov/issues/187578669)] run scheduled daily test at 140 EST ([b7d538c](https://github.com/newjersey/navigator.business.nj.gov/commit/b7d538c26de384b2d72dc46a397ce427407c6b70))
+* [[#187578669](https://github.com/newjersey/navigator.business.nj.gov/issues/187578669)] update cron job for scheduled daily test workflow ([e57da8e](https://github.com/newjersey/navigator.business.nj.gov/commit/e57da8ef2827444c2657cb49b3ea0e0dc7053185))
+* [[#188333470](https://github.com/newjersey/navigator.business.nj.gov/issues/188333470)] fixes to Webflow licenseSync ([b7aa9c5](https://github.com/newjersey/navigator.business.nj.gov/commit/b7aa9c5362cd2916fe5ca3ca05ee3553a6357a86))
+* add missing displayname to license-tasks ([6b348f5](https://github.com/newjersey/navigator.business.nj.gov/commit/6b348f56e30bcef7d11ff230003033e3f50ec7da))
+* **deps:** update dependency rehype-format to v5.0.1 ([f7e04f0](https://github.com/newjersey/navigator.business.nj.gov/commit/f7e04f0c4e42446200d80a09f1e8eac3d263f514))
+* **deps:** update dependency remove-markdown to v0.5.5 ([75fa8b9](https://github.com/newjersey/navigator.business.nj.gov/commit/75fa8b94b28e1706386b69ccc484ca7e055f07af))
+* update missing metadata in cemetery-sales.md ([094be0d](https://github.com/newjersey/navigator.business.nj.gov/commit/094be0d1d66f22b7a6fb0b8c14ad913b75f51570))
+* update url reference ([191ca72](https://github.com/newjersey/navigator.business.nj.gov/commit/191ca72c34753d2fa397e940a6bdb65c648f551d))
+
+
+### Features
+
+* [[#186084688](https://github.com/newjersey/navigator.business.nj.gov/issues/186084688)] fixed formation heading structure ([abb46d7](https://github.com/newjersey/navigator.business.nj.gov/commit/abb46d794e7781e36bd1fdbdb06780eda4011022))
+* [[#186702387](https://github.com/newjersey/navigator.business.nj.gov/issues/186702387)] close button revisions ([db2be2d](https://github.com/newjersey/navigator.business.nj.gov/commit/db2be2d48e035c6e827c0c576cabfc7bca5ed124))
+* [[#188079116](https://github.com/newjersey/navigator.business.nj.gov/issues/188079116)] enable booking agency license search ([a62509a](https://github.com/newjersey/navigator.business.nj.gov/commit/a62509a13418a8f13a549d614e263abff1d8d29e))
+* [[#188172364](https://github.com/newjersey/navigator.business.nj.gov/issues/188172364)] connect businesses table with lambda ([1c89434](https://github.com/newjersey/navigator.business.nj.gov/commit/1c89434d598f077cdb8a8d1c4c99760ac11490a4))
+* [[#188332488](https://github.com/newjersey/navigator.business.nj.gov/issues/188332488)] Add disclaimer to billing step ([d736697](https://github.com/newjersey/navigator.business.nj.gov/commit/d7366977d500493124f0612ceec90623099d7200))
+
 # [2024.30.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.29.0...v2024.30.0) (2024-10-01)
 
 
