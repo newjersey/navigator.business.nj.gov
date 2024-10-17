@@ -50,7 +50,8 @@
   "name": "All Other Businesses",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "cds-lab-research "
+    "cds-lab-research ",
+    "cds-supply"
   ],
   "displayname": "generic",
   "industryOnboardingQuestions": {
