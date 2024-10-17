@@ -74,14 +74,14 @@ describe("licenseStatusRouter", () => {
     stubUpdateLicenseStatus.mockResolvedValue(userData);
 
     const nameAndAddress = generateLicenseSearchNameAndAddress({});
-    const licenseTaskID = "some-task-id";
+    const licenseTaskId = "some-id";
     stubUserDataClient.get.mockResolvedValue(userData);
-    const response = await request(app).post(`/license-status`).send({ nameAndAddress, licenseTaskID });
+    const response = await request(app).post(`/license-status`).send({ nameAndAddress, licenseTaskId });
     expect(response.status).toEqual(StatusCodes.OK);
     expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
     expect(stubUserDataClient.put).toHaveBeenCalledWith(userData);
     expect(response.body).toEqual(userData);
-    expect(stubUpdateLicenseStatus).toHaveBeenCalledWith(userData, nameAndAddress, licenseTaskID);
+    expect(stubUpdateLicenseStatus).toHaveBeenCalledWith(userData, nameAndAddress, licenseTaskId);
   });
 
   it("returns INTERNAL SERVER ERROR if license search errors", async () => {

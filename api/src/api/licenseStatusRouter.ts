@@ -1,13 +1,13 @@
 import { getSignedInUserId } from "@api/userRouter";
 import { UpdateLicenseStatus, UserDataClient } from "@domain/types";
-import { LicenseSearchNameAndAddress, LicenseTaskID } from "@shared/license";
+import { LicenseSearchNameAndAddress, LicenseTaskId } from "@shared/license";
 import { UserData } from "@shared/userData";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
 type LicenseStatusRequestBody = {
   nameAndAddress: LicenseSearchNameAndAddress;
-  licenseTaskID?: LicenseTaskID;
+  licenseTaskId?: LicenseTaskId;
 };
 
 export const licenseStatusRouterFactory = (
@@ -18,9 +18,9 @@ export const licenseStatusRouterFactory = (
 
   router.post("/license-status", async (req, res) => {
     const userId = getSignedInUserId(req);
-    const { nameAndAddress, licenseTaskID } = req.body as LicenseStatusRequestBody;
+    const { nameAndAddress, licenseTaskId } = req.body as LicenseStatusRequestBody;
     const userData = await userDataClient.get(userId);
-    updateLicenseStatus(userData, nameAndAddress, licenseTaskID)
+    updateLicenseStatus(userData, nameAndAddress, licenseTaskId)
       .then(async (userData: UserData) => {
         const updatedUserData = await userDataClient.put(userData);
         res.json(updatedUserData);
