@@ -16,7 +16,7 @@ import {
   enabledLicensesSources,
   LicenseEntity,
   LicenseSearchNameAndAddress,
-  LicenseTaskID,
+  LicenseTaskId,
 } from "@shared/license";
 import { ProfileData } from "@shared/profileData";
 import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
@@ -135,7 +135,7 @@ export type SearchLicenseStatus = (
 export type UpdateLicenseStatus = (
   userData: UserData,
   nameAndAddress: LicenseSearchNameAndAddress,
-  taskId?: LicenseTaskID
+  taskId?: LicenseTaskId
 ) => Promise<UserData>;
 
 export type FireSafetyInspectionStatus = (address: string) => Promise<FireSafetyInspectionResult[]>;

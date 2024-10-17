@@ -13,7 +13,7 @@ import {
   LicenseName,
   Licenses,
   LicenseSearchNameAndAddress,
-  LicenseTaskID,
+  LicenseTaskId,
   taskIdLicenseNameMapping,
 } from "@shared/license";
 import { modifyCurrentBusiness } from "@shared/test";
@@ -42,7 +42,7 @@ const getLicenseTasksProgress = (licenseStatusResult: LicenseStatusResults): Rec
 const getLicenses = (args: {
   nameAndAddress: LicenseSearchNameAndAddress;
   licenseStatusResult: LicenseStatusResults;
-  taskIdWithError?: LicenseTaskID;
+  taskIdWithError?: LicenseTaskId;
 }): Licenses => {
   const results: Licenses = {};
   for (const key of Object.keys(args.licenseStatusResult) as LicenseName[]) {
@@ -52,7 +52,6 @@ const getLicenses = (args: {
       lastUpdatedISO: getCurrentDateISOString(),
     } as LicenseDetails;
   }
-
   const licenseRelatedToCurrentTask = args.taskIdWithError
     ? taskIdLicenseNameMapping[args.taskIdWithError]
     : undefined;
@@ -76,7 +75,7 @@ const update = (
   args: {
     nameAndAddress: LicenseSearchNameAndAddress;
     licenseStatusResult: LicenseStatusResults;
-    taskIdWithError?: LicenseTaskID;
+    taskIdWithError?: LicenseTaskId;
   }
 ): UserData => {
   // TODO: In a future state we need to account for existing license data with address that does not match search query
@@ -108,21 +107,20 @@ export const updateLicenseStatusFactory = (
   return async (
     userData: UserData,
     nameAndAddress: LicenseSearchNameAndAddress,
-    taskId?: LicenseTaskID
+    taskId?: LicenseTaskId
   ): Promise<UserData> => {
     const webserviceLicenseStatusPromise = webserviceLicenseStatusSearch(nameAndAddress);
     const rgbLicenseStatusPromise = rgbLicenseStatusSearch(nameAndAddress);
-
     return Promise.allSettled([webserviceLicenseStatusPromise, rgbLicenseStatusPromise])
       .then(([webserviceLicenseStatusResults, rgbLicenseStatusResults]) => {
         const webserviceHasError = webserviceLicenseStatusResults.status === "rejected";
         const webserviceHasInvalidMatch =
-          webserviceHasError && [NO_MATCH_ERROR].includes(webserviceLicenseStatusResults.reason);
+          webserviceHasError && [NO_MATCH_ERROR].includes(webserviceLicenseStatusResults.reason.message);
         const rgbHasError = rgbLicenseStatusResults.status === "rejected";
         const rgbHasInvalidMatch =
           rgbHasError &&
           [NO_ADDRESS_MATCH_ERROR, NO_MATCH_ERROR, NO_MAIN_APPS_ERROR].includes(
-            rgbLicenseStatusResults.reason
+            rgbLicenseStatusResults.reason.message
           );
 
         if (DEBUG_RegulatedBusinessDynamicsLicenseSearch) {

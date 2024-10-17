@@ -246,8 +246,8 @@ describe("updateLicenseStatus", () => {
 
   describe("error handling", () => {
     it("throws error when both webservice and rgb api call fails", async () => {
-      stubWebserviceLicenseStatusSearch.mockRejectedValue("fail");
-      stubRGBLicenseStatusSearch.mockRejectedValue("fail");
+      stubWebserviceLicenseStatusSearch.mockRejectedValue(new Error("fail"));
+      stubRGBLicenseStatusSearch.mockRejectedValue(new Error("fail"));
 
       userData = modifyCurrentBusiness(userData, (business) => ({
         ...business,
@@ -256,15 +256,15 @@ describe("updateLicenseStatus", () => {
 
       await expect(updateLicenseStatus(userData, nameAndAddress)).rejects.toThrow(
         JSON.stringify({
-          webserviceErrorMessage: "fail",
-          rgbErrorMessage: "fail",
+          webserviceErrorMessage: new Error("fail"),
+          rgbErrorMessage: new Error("fail"),
         })
       );
     });
 
     it("updates license data of current task to have error license data when webservice receives NO_MATCH_ERROR and rgb also fails", async () => {
-      stubWebserviceLicenseStatusSearch.mockRejectedValue(NO_MATCH_ERROR);
-      stubRGBLicenseStatusSearch.mockRejectedValue("fail");
+      stubWebserviceLicenseStatusSearch.mockRejectedValue(new Error(NO_MATCH_ERROR));
+      stubRGBLicenseStatusSearch.mockRejectedValue(new Error("fail"));
 
       userData = modifyCurrentBusiness(userData, (business) => ({
         ...business,
@@ -298,8 +298,8 @@ describe("updateLicenseStatus", () => {
     it.each([NO_MATCH_ERROR, NO_MAIN_APPS_ERROR, NO_ADDRESS_MATCH_ERROR])(
       "updates license data of current task to have error license data when rgb receives %s and webservice also fails",
       async (error) => {
-        stubWebserviceLicenseStatusSearch.mockRejectedValue("fails");
-        stubRGBLicenseStatusSearch.mockRejectedValue(error);
+        stubWebserviceLicenseStatusSearch.mockRejectedValue(new Error("fails"));
+        stubRGBLicenseStatusSearch.mockRejectedValue(new Error(error));
 
         userData = modifyCurrentBusiness(userData, (business) => ({
           ...business,
