@@ -1,0 +1,11 @@
+{
+  "id": "other-cds-supply",
+  "displayname": "other-cds-supply",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 20,
+      "licenseTask": "supply-cds"
+    }
+  ]
+}
