@@ -14,7 +14,7 @@ import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 import {
   LicenseDetails,
   LicenseSearchNameAndAddress,
-  LicenseTaskID,
+  LicenseTaskId,
   taskIdLicenseNameMapping,
   UserData,
 } from "@businessnjgovnavigator/shared/";
@@ -83,15 +83,15 @@ export const LicenseTask = (props: Props): ReactElement => {
 
     setIsLoading(true);
     api
-      .checkLicenseStatus(nameAndAddress, props.task.id as LicenseTaskID)
+      .checkLicenseStatus(nameAndAddress, props.task.id as LicenseTaskId)
       .then((result: UserData) => {
         const resultLicenseData =
           result.businesses[result.currentBusinessId]?.licenseData?.licenses?.[licenseNameForTask];
 
         if (!resultLicenseData) return;
         analytics.event.task_address_form.response.success_application_found();
-
         setLicenseDetails(resultLicenseData);
+
         if (resultLicenseData.licenseStatus === "UNKNOWN") {
           analytics.event.task_address_form.response.fail_application_not_found();
           setError("NOT_FOUND");

@@ -106,9 +106,9 @@ export const LicenseNameTaskIdMapping = Object.fromEntries(
   Object.entries(taskIdLicenseNameMapping).map(([key, value]) => [value, key])
 );
 
-export type LicenseTaskID = keyof typeof taskIdLicenseNameMapping;
+export type LicenseTaskId = keyof typeof taskIdLicenseNameMapping;
 
-export type LicenseName = (typeof taskIdLicenseNameMapping)[LicenseTaskID];
+export type LicenseName = (typeof taskIdLicenseNameMapping)[LicenseTaskId];
 
 export type Licenses = Partial<Record<LicenseName, LicenseDetails>>;
 
