@@ -117,23 +117,34 @@ describe("loadTasks", () => {
         'callToActionLink: ""\n' +
         'callToActionText: ""\n' +
         "---\n";
+      const stepMd1 =
+        "---\n" +
+        'id: "some-id-4"\n' +
+        'name: "Some Step Name"\n' +
+        'urlSlug: "some-url-slug-4"\n' +
+        'callToActionLink: ""\n' +
+        'callToActionText: ""\n' +
+        "---\n";
 
       mockedFs.readFileSync
         .mockReturnValueOnce(taskMd1)
         .mockReturnValueOnce(taskMd2)
-        .mockReturnValueOnce(licenseMd1);
+        .mockReturnValueOnce(licenseMd1)
+        .mockReturnValueOnce(stepMd1);
 
       mockReadDirReturnOnce({ value: ["task1.md", "task2.md"], mockedFs });
       mockReadDirReturnOnce({ value: ["license1.md"], mockedFs });
+      mockReadDirReturnOnce({ value: ["step1.md"], mockedFs });
       mockReadDirReturnOnce({ value: [], mockedFs });
 
       const allTaskUrlSlugs = loadAllTaskUrlSlugs();
-      expect(allTaskUrlSlugs).toHaveLength(3);
+      expect(allTaskUrlSlugs).toHaveLength(4);
       expect(allTaskUrlSlugs).toEqual(
         expect.arrayContaining([
           { params: { taskUrlSlug: "some-url-slug-1" } },
           { params: { taskUrlSlug: "some-url-slug-2" } },
           { params: { taskUrlSlug: "some-url-slug-3" } },
+          { params: { taskUrlSlug: "some-url-slug-4" } },
         ])
       );
     });

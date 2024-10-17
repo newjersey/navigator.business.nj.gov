@@ -42,6 +42,7 @@ import AnytimeActionTaskPreview from "@/lib/cms/previews/AnytimeActionTaskPrevie
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
 import CalloutPreview from "@/lib/cms/previews/CalloutPreview";
 import NavBarPreview from "@/lib/cms/previews/NavBarPreview";
+import RaffleBingoPreview from "@/lib/cms/previews/RaffleBingoPreview";
 import TaxAccessModalPreview from "@/lib/cms/previews/TaxAccessModalPreview";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
@@ -100,6 +101,9 @@ const CMS = dynamic(
 
       // ----- Roadmap Sidebar Card -----
       registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);
+
+      // ----- Steps -----
+      registerPreview(CMS, "raffle-bingo-steps", RaffleBingoPreview);
 
       // ----- Page Metadata -----
       registerPreview(CMS, "page-metadata", PageMetaDataPreview);

@@ -50,7 +50,7 @@ collections:
           name: "id",
           required: true,
           widget: "write-once-read-only-no-space",
-          hint: "This is should be the same as the filename.",
+          hint: "This should be the same as the filename.",
         }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
@@ -1310,14 +1310,14 @@ collections:
           label: "Display Name",
           name: "displayName",
           widget: "string",
-          hint: "This the name displayed internally in CMS list",
+          hint: "This is the name displayed internally in CMS list",
         }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
       - {
           label: "Id",
           name: "id",
           widget: "write-once-read-only-no-space",
-          hint: "This is should be the same as the filename.",
+          hint: "This should be the same as the filename.",
           required: true,
         }
       - {
@@ -1515,14 +1515,14 @@ collections:
           label: "Display Name",
           name: "displayName",
           widget: "string",
-          hint: "This the name displayed internally in CMS list",
+          hint: "This is the name displayed internally in CMS list",
         }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
       - {
           label: "Id",
           name: "id",
           widget: "write-once-read-only-no-space",
-          hint: "This is should be the same as the filename.",
+          hint: "This should be the same as the filename.",
           required: true,
         }
       - {
@@ -2247,7 +2247,7 @@ collections:
             fields:
               - { label: Violation Notice Message Text, name: violationNoticeMessage, widget: string }
               - { label: Violation Notice CTA Text, name: violationNoticeCTA, widget: string }
-              - { label: Violation Notice CTA Link, name: violationNoticeCTALink, widget: nospace }
+              - { label: Violation Notice CTA Link, name: violationNoticeCTALink, widget: no-space }
       - label: "Housing"
         name: "housing-registration-config"
         file: "content/src/fieldConfig/housing-registration.json"
@@ -2348,7 +2348,7 @@ collections:
             fields:
               - { label: Violation Notice Message Text, name: violationNoticeMessage, widget: string }
               - { label: Violation Notice CTA Text, name: violationNoticeCTA, widget: string }
-              - { label: Violation Notice CTA Link, name: violationNoticeCTALink, widget: nospace }
+              - { label: Violation Notice CTA Link, name: violationNoticeCTALink, widget: no-space }
 
   - name: "tasks"
     label: "Tasks - All"
@@ -2373,7 +2373,7 @@ collections:
           label: "Id",
           name: "id",
           widget: "write-once-read-only-no-space",
-          hint: "This is should be the same as the filename.",
+          hint: "This should be the same as the filename.",
           required: true,
         }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -2437,7 +2437,7 @@ collections:
           name: "id",
           widget: "write-once-read-only-no-space",
           required: true,
-          hint: "This is should be the same as the filename.",
+          hint: "This should be the same as the filename.",
         }
       - {
           label: "Filename",
@@ -2451,7 +2451,7 @@ collections:
           name: "displayname",
           widget: "no-space",
           required: true,
-          hint: "This the name displayed internally in CMS list.",
+          hint: "This is the name displayed internally in CMS list.",
         }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
       - { label: "Title (Navigator)", name: "name", widget: "string" }
@@ -2515,6 +2515,51 @@ collections:
           - { label: "individual license", value: "individual-license" }
           - { label: "school/course", value: "school-course" }
           - { label: "object or vehicle", value: "object-vehicle" }
+
+  - name: "raffle-bingo-steps"
+    label: "Raffle Bingo Steps"
+    folder: "content/src/roadmaps/raffle-bingo-steps"
+    summary: "{{displayname}} - {{name}}"
+    identifier_field: "{{filename}}"
+    slug: "{{fields.filename}}"
+    delete: true
+    sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "Id",
+          name: "id",
+          widget: "write-once-read-only-no-space",
+          required: true,
+          hint: "This should be the same as the filename.",
+        }
+      - {
+          label: "Filename",
+          name: "filename",
+          widget: "write-once-read-only-no-space",
+          hint: "This is the name of the file in the code only.",
+        }
+      - {
+          label: "Display Name",
+          name: "displayname",
+          widget: "no-space",
+          required: true,
+          hint: "This is the name displayed internally in CMS list.",
+        }
+      - {
+          label: "Url Slug",
+          name: "urlSlug",
+          widget: "no-space",
+          hint: "Lowercase, no spaces, add hyphens between words.",
+        }
+      - { label: "Title", name: "name", widget: "string" }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
 
   - name: "webflow-licenses"
     label: "Webflow Licenses"
@@ -3229,7 +3274,7 @@ collections:
           label: "Form Id",
           name: "id",
           widget: "write-once-read-only-no-space",
-          hint: "This is should be the same as the filename. Content will appear on the filings page.",
+          hint: "This should be the same as the filename. Content will appear on the filings page.",
           required: true,
         }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -4346,6 +4391,7 @@ collections:
               - { label: Remove Text, name: removeText, widget: string }
               - { label: Back, name: backButtonText, widget: string }
               - { label: Continue Text, name: continueButtonText, widget: string }
+              - { label: Mark As Complete, name: "markAsCompleteButtonText", widget: string }
           - label: Task - Business Name Search
             name: searchBusinessNameTask
             collapsed: true
@@ -5364,6 +5410,21 @@ collections:
                           - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
                           - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
+                  - label: Raffle & Bingo Games
+                    name: raffleBingoGames
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - { label: "Alt Description", name: "altDescription", widget: "markdown" }
                   - label: Home Contractor
                     name: homeContractor
                     collapsed: true
@@ -5845,14 +5906,14 @@ collections:
             fields:
               - { label: Mobile Title, name: navBarMobileQuickLinksTitle, widget: string }
               - { label: Plan, name: navBarPlanText, widget: string }
-              - { label: Plan Link, name: navBarPlanLink, widget: nospace }
+              - { label: Plan Link, name: navBarPlanLink, widget: no-space }
               - { label: Start, name: navBarStartText, widget: string }
-              - { label: Start Link, name: navBarStartLink, widget: nospace }
+              - { label: Start Link, name: navBarStartLink, widget: no-space }
               - { label: Operate, name: navBarOperateText, widget: string }
-              - { label: Operate Link, name: navBarOperateLink, widget: nospace }
+              - { label: Operate Link, name: navBarOperateLink, widget: no-space }
               - { label: Grow, name: navBarGrowText, widget: string }
-              - { label: Grow Link, name: navBarGrowLink, widget: nospace }
+              - { label: Grow Link, name: navBarGrowLink, widget: no-space }
               - { label: Updates, name: navBarUpdatesText, widget: string }
-              - { label: Updates Link, name: navBarUpdatesLink, widget: nospace }
+              - { label: Updates Link, name: navBarUpdatesLink, widget: no-space }
               - { label: Search, name: navBarSearchText, widget: string }
-              - { label: Search Link, name: navBarSearchLink, widget: nospace }
+              - { label: Search Link, name: navBarSearchLink, widget: no-space }
