@@ -2,7 +2,7 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
 import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
-import { ReactElement, ReactNode, useContext, useEffect, useRef } from "react";
+import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
   isOpen: boolean;
@@ -15,20 +15,6 @@ interface Props {
 export const ModalZeroButton = (props: Props): ReactElement => {
   const { contextualInfo } = useContext(ContextualInfoContext);
 
-  const dialogRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (dialogRef.current) {
-      const firstFocusableElement = dialogRef.current.querySelector<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      );
-      if (firstFocusableElement) {
-        firstFocusableElement.focus();
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dialogRef.current]);
-
   return (
     <Dialog
       fullWidth={false}
@@ -37,7 +23,6 @@ export const ModalZeroButton = (props: Props): ReactElement => {
       onClose={props.close}
       aria-labelledby="dialog-modal"
       disableEnforceFocus={contextualInfo.isVisible}
-      ref={dialogRef}
     >
       <div className="display-flex margin-top-1">
         <DialogTitle
