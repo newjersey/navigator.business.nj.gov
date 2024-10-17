@@ -79,6 +79,11 @@
       "id": "cds-lab-research ",
       "questionText": "Do you plan to test or research Controlled Dangerous Substances (CDS)?",
       "addOn": "other-lab-research"
+    },
+    {
+      "questionText": "Does your business make, buy, or sell products that contain Controlled Dangerous Substances (CDS)?",
+      "addOn": "other-cds-supply",
+      "id": "cds-supply"
     }
   ]
 }
