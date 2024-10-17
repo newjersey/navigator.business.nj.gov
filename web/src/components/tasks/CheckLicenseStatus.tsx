@@ -8,7 +8,7 @@ import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   createEmptyLicenseSearchNameAndAddress,
   LicenseSearchNameAndAddress,
-  LicenseTaskID,
+  LicenseTaskId,
   taskIdLicenseNameMapping,
 } from "@businessnjgovnavigator/shared/";
 import { TextField } from "@mui/material";
@@ -31,7 +31,7 @@ interface Props {
   onSubmit: (nameAndAddress: LicenseSearchNameAndAddress) => void;
   error: LicenseSearchError | undefined;
   isLoading: boolean;
-  licenseTaskId: LicenseTaskID;
+  licenseTaskId: LicenseTaskId;
 }
 
 const Config = getMergedConfig();
@@ -101,12 +101,19 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
   const getErrorAlert = (): ReactElement => {
     if (!props.error) {
       return <></>;
+    } else if (props.error === "NOT_FOUND") {
+      return (
+        <Alert dataTestid={`error-alert-${props.error}`} variant="warning">
+          {LicenseSearchErrorLookup[props.error]}
+        </Alert>
+      );
+    } else {
+      return (
+        <Alert dataTestid={`error-alert-${props.error}`} variant="error">
+          {LicenseSearchErrorLookup[props.error]}
+        </Alert>
+      );
     }
-    return (
-      <Alert dataTestid={`error-alert-${props.error}`} variant="error">
-        {LicenseSearchErrorLookup[props.error]}
-      </Alert>
-    );
   };
 
   return (

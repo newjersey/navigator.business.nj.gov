@@ -39,7 +39,7 @@ import {
   InputFile,
   LegalStructure,
   LegalStructures,
-  LicenseTaskID,
+  LicenseTaskId,
   NameAvailability,
   OperatingPhaseId,
   OperatingPhases,
@@ -137,7 +137,7 @@ export const generateTask = (overrides: Partial<Task>): Task => {
 };
 
 export const generateLicenseTask = (overrides: Partial<TaskWithLicenseTaskId>): TaskWithLicenseTaskId => {
-  const licenseTaskId = randomElementFromArray(Object.keys(taskIdLicenseNameMapping)) as LicenseTaskID;
+  const licenseTaskId = randomElementFromArray(Object.keys(taskIdLicenseNameMapping)) as LicenseTaskId;
   return {
     ...generateTask({}),
     id: licenseTaskId,

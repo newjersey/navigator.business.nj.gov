@@ -14,7 +14,7 @@ import {
   FormationSigner,
   IndustrySpecificData,
   LicenseName,
-  LicenseTaskID,
+  LicenseTaskId,
   Preferences,
   ProfileData,
   SectionType,
@@ -364,7 +364,7 @@ export interface Task {
 }
 
 export interface TaskWithLicenseTaskId extends Task {
-  id: LicenseTaskID;
+  id: LicenseTaskId;
   licenseName?: LicenseName;
 }
 

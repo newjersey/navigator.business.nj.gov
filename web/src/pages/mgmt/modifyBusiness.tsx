@@ -12,7 +12,7 @@ import {
   getCurrentDate,
   LicenseStatus,
   licenseStatuses,
-  LicenseTaskID,
+  LicenseTaskId,
   taskIdLicenseNameMapping,
   TaskProgress,
 } from "@businessnjgovnavigator/shared/index";
@@ -94,11 +94,11 @@ const ModifyBusinessPage = (): ReactElement => {
                     variant="outlined"
                     onChange={(event) => {
                       setTaskId(event.target.value);
-                      setLicenseName(taskIdLicenseNameMapping[event.target.value as LicenseTaskID]);
+                      setLicenseName(taskIdLicenseNameMapping[event.target.value as LicenseTaskId]);
                     }}
                   >
                     {licenseSearchEnabledTaskIds.map((taskId) => {
-                      const licenseTaskId = taskIdLicenseNameMapping[taskId as LicenseTaskID];
+                      const licenseTaskId = taskIdLicenseNameMapping[taskId as LicenseTaskId];
                       return (
                         <MenuItem key={`${licenseTaskId}-${taskId}`} value={taskId}>
                           {licenseTaskId} ({taskId} task)

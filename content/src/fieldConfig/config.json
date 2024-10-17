@@ -157,7 +157,7 @@
     "primaryCTASecondLineText": "with the Division of Consumer Affairs",
     "stateLabel": "State",
     "checklistCompletedStatusText": "Checklist Completed",
-    "errorTextNotFound": "We cannot find your application. Please check the information you've entered.",
+    "errorTextNotFound": "License could not be found. Please try again or contact your licensing agency for more information.",
     "submitText": "Submit",
     "closedPermitStatusText": "Closed",
     "zipCodeLabel": "ZIP Code",
@@ -249,7 +249,7 @@
     "similarUnavailableNamesText": "Here are similar business names that are already taken:",
     "availableText": "It looks like \"${name}\" might be available, but you should do an official name check using the button below.",
     "errorTextBadInput": "Sorry, that isn't a valid company name. Try a more specific name.",
-    "errorTextSearchFailed": "Sorry, something went wrong. Please try again later.",
+    "errorTextSearchFailed": "Unable to complete check. Please try again later.",
     "unavailableText": "Sorry, \"${name}\" isn't available. Try another name."
   },
   "footer": {

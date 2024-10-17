@@ -9,7 +9,7 @@ import analytics from "@/lib/utils/analytics";
 import {
   LicenseDetails,
   LicenseStatusItem,
-  LicenseTaskID,
+  LicenseTaskId,
   taskIdLicenseNameMapping,
 } from "@businessnjgovnavigator/shared/";
 import type { ReactElement } from "react";
@@ -17,7 +17,7 @@ import type { ReactElement } from "react";
 interface Props {
   licenseDetails: LicenseDetails;
   onEdit: () => void;
-  licenseTaskId: LicenseTaskID;
+  licenseTaskId: LicenseTaskId;
 }
 
 const Config = getMergedConfig();

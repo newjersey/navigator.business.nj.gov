@@ -1,7 +1,7 @@
 import { generateInputFile } from "@/test/factories";
 import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
 import { randomElementFromArray } from "@businessnjgovnavigator/shared/arrayHelpers";
-import { LicenseTaskID } from "@businessnjgovnavigator/shared/license";
+import { LicenseTaskId } from "@businessnjgovnavigator/shared/license";
 import {
   generateLicenseSearchNameAndAddress,
   generateTaxIdAndBusinessName,
@@ -75,7 +75,7 @@ describe("apiClient", () => {
     mockAxios.post.mockResolvedValue({ data: {} });
     const nameAndAddress = generateLicenseSearchNameAndAddress({});
     const licenseTaskId = randomElementFromArray(Object.keys(taskIdLicenseNameMapping));
-    await checkLicenseStatus(nameAndAddress, licenseTaskId as LicenseTaskID);
+    await checkLicenseStatus(nameAndAddress, licenseTaskId as LicenseTaskId);
     expect(mockAxios.post).toHaveBeenCalledWith(
       "/api/license-status",
       { nameAndAddress, licenseTaskId },

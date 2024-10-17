@@ -1,7 +1,7 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { SelfRegResponse } from "@/lib/types/types";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
-import { getCurrentBusiness, LicenseTaskID } from "@businessnjgovnavigator/shared";
+import { getCurrentBusiness, LicenseTaskId } from "@businessnjgovnavigator/shared";
 import {
   InputFile,
   LicenseSearchNameAndAddress,
@@ -33,8 +33,9 @@ export const postUserData = async (userData: UserData): Promise<UserData> => {
 
 export const checkLicenseStatus = (
   nameAndAddress: LicenseSearchNameAndAddress,
-  licenseTaskId?: LicenseTaskID
+  licenseTaskId?: LicenseTaskId
 ): Promise<UserData> => {
+  console.log(`apiClient -  ${licenseTaskId}`);
   return post(`/license-status`, { nameAndAddress, licenseTaskId });
 };
 
