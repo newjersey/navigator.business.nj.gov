@@ -3,12 +3,12 @@ import { taxFilingRouterFactory } from "@api/taxFilingRouter";
 import { getSignedInUserId } from "@api/userRouter";
 import { EncryptionDecryptionClient, TaxFilingInterface, UserDataClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import {
   generateBusiness,
   generateTaxFilingData,
   generateTaxIdAndBusinessName,
   generateUserDataForBusiness,
-  modifyCurrentBusiness,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
 import { Express } from "express";

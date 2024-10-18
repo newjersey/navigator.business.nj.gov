@@ -2,6 +2,7 @@ import { taxFilingsInterfaceFactory } from "@domain/tax-filings/taxFilingsInterf
 import { TaxFilingClient, TaxFilingInterface } from "@domain/types";
 import * as fetchMunicipality from "@domain/user/fetchMunicipalityByName";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingState } from "@shared/taxFiling";
 import {
   generateBusiness,
@@ -12,7 +13,6 @@ import {
   generateTaxFilingData,
   generateTaxIdAndBusinessName,
   generateUserDataForBusiness,
-  modifyCurrentBusiness,
 } from "@shared/test";
 import { Business, UserData } from "@shared/userData";
 
