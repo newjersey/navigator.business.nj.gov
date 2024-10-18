@@ -7,6 +7,7 @@ import {
   UpdateLicenseStatus,
 } from "@domain/types";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import {
   enabledLicensesSources,
   LicenseDetails,
@@ -16,7 +17,6 @@ import {
   LicenseTaskId,
   taskIdLicenseNameMapping,
 } from "@shared/license";
-import { modifyCurrentBusiness } from "@shared/test";
 import { Business, TaskProgress, UserData } from "@shared/userData";
 
 const DEBUG_RegulatedBusinessDynamicsLicenseSearch = false; // this variable exists in RegulatedBusinessDynamicsLicenseStatusClient; enable both for debugging
@@ -70,7 +70,7 @@ const getLicenses = (args: {
   return results;
 };
 
-const update = (
+const updateLicenseStatusAndLicenseTask = (
   userData: UserData,
   args: {
     nameAndAddress: LicenseSearchNameAndAddress;
@@ -133,7 +133,7 @@ export const updateLicenseStatusFactory = (
 
         if (webserviceHasError && rgbHasError) {
           if (webserviceHasInvalidMatch || rgbHasInvalidMatch) {
-            return update(userData, {
+            return updateLicenseStatusAndLicenseTask(userData, {
               nameAndAddress: nameAndAddress,
               licenseStatusResult: {},
               taskIdWithError: taskId,
@@ -172,7 +172,7 @@ export const updateLicenseStatusFactory = (
           }
         }
 
-        return update(userData, {
+        return updateLicenseStatusAndLicenseTask(userData, {
           nameAndAddress: nameAndAddress,
           licenseStatusResult: results,
         });

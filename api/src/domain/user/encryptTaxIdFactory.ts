@@ -1,8 +1,8 @@
 import { EncryptionDecryptionClient, EncryptTaxId } from "@domain/types";
 import { maskTaxId } from "@domain/user/maskTaxId";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { maskingCharacter } from "@shared/profileData";
-import { modifyCurrentBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";
 
 export const encryptTaxIdFactory = (encryptionDecryptionClient: EncryptionDecryptionClient): EncryptTaxId => {

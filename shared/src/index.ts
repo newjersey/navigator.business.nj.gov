@@ -10,6 +10,7 @@ export * from "./domain-logic/fetchMunicipalityById";
 export * from "./domain-logic/getCurrentBusiness";
 export * from "./domain-logic/hasCompletedBusinessStructure";
 export * from "./domain-logic/hasCompletedFormation";
+export * from "./domain-logic/modifyCurrentBusiness";
 export * from "./domain-logic/onboarding";
 export * from "./domain-logic/opportunityFields";
 export * from "./domain-logic/sidebarCards";

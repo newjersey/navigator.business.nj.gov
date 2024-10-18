@@ -7,6 +7,7 @@ import {
 import { updateLicenseStatusFactory } from "@domain/user/updateLicenseStatusFactory";
 import * as getCurrentDateModule from "@shared/dateHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import {
   generateBusiness,
   generateLicenseData,
@@ -14,7 +15,6 @@ import {
   generateLicenseStatusItem,
   generateProfileData,
   generateUserDataForBusiness,
-  modifyCurrentBusiness,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
 

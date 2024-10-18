@@ -1,7 +1,7 @@
 import { calculateNextAnnualFilingDates } from "@domain/annual-filings/calculateNextAnnualFilingDates";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { LookupLegalStructureById } from "@shared/legalStructure";
-import { modifyCurrentBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";
 
 export const getAnnualFilings = (userData: UserData): UserData => {
