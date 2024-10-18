@@ -1,11 +1,11 @@
 import { UpdateOperatingPhase } from "@domain/types";
 import { isRemoteWorkerOrSellerBusiness } from "@shared/domain-logic/businessPersonaHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { businessStructureTaskId, formationTaskId } from "@shared/domain-logic/taskIds";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { OperatingPhaseId } from "@shared/operatingPhase";
 import { BusinessPersona } from "@shared/profileData";
-import { modifyCurrentBusiness } from "@shared/test";
 import { TaskProgress, UserData } from "@shared/userData";
 
 export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): UserData => {
