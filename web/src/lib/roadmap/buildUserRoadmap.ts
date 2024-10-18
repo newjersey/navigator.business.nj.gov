@@ -282,6 +282,9 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
 
   if (profileData.legalStructureId === "nonprofit") {
     addOns.push("nonprofit");
+    if (profileData.raffleBingoGames) {
+      addOns.push("raffle-bingo-games");
+    }
   }
   return addOns;
 };
