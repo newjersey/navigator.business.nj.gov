@@ -1,8 +1,8 @@
 ---
 id: cds-healthcare
 filename: cds-healthcare
-displayname: cds-healthcare
-urlSlug: cds-healthcare
+displayname: healthcare-cds
+urlSlug: healthcare-cds
 name: Apply for Your Controlled Dangerous Substances Registration, if Applicable
 webflowName: "Healthcare: Controlled Dangerous Substances Registration"
 summaryDescriptionMd: >-
@@ -13,13 +13,14 @@ summaryDescriptionMd: >-
 
 
   Use separate forms to register each CDS storage location. Write "branch" at the top.
-industryId: healthcare
+industryId:
+  - healthcare
 callToActionText: Apply for My CDS Registration
 callToActionLink: https://www.njconsumeraffairs.gov/dcu/Pages/applications.aspx#
+licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: New Jersey Drug Control Unit
 webflowId: 66f3197e83af078f435a6ebf
-licenseCertificationClassification: undefined
 ---
 
 ## Application Requirements
