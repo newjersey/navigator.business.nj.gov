@@ -35,8 +35,8 @@ In addition, you must be at least one of the following:
 
 * College transcripts (sent directly to the committee)
 * Course description form (if your degree is not from an accredited program)
-* Name and contact information for one professional reference
-* Name and contact information for two personal references
+* Name and contact information for 1 professional reference
+* Name and contact information for 2 personal references
 * CLARB examination records (sent directly to the committee)
 * Supporting documentation (like police records) if you answered "Yes” to any questions of criminal history or moral character
 * Applicable fees paid
