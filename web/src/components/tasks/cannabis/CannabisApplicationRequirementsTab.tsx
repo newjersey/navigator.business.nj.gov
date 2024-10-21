@@ -16,8 +16,8 @@ interface Props {
   task: Task;
   priorityStatusState: Record<PriorityApplicationType, boolean>;
   onBack: () => void;
-  CMS_ONLY_isAnnual?: boolean; // for CMS only
-  CMS_ONLY_isConditional?: boolean; // for CMS only
+  CMS_ONLY_isAnnual?: boolean;
+  CMS_ONLY_isConditional?: boolean;
 }
 
 export const CannabisApplicationRequirementsTab = (props: Props): ReactElement => {
