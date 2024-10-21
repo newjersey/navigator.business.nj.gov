@@ -95,9 +95,9 @@ import { ReactElement, ReactNode, useContext, useState } from "react";
 
 interface Props {
   municipalities: Municipality[];
-  CMS_ONLY_businessPersona?: BusinessPersona; // for CMS only
-  CMS_ONLY_tab?: ProfileTabs; // for CMS only
-  CMS_ONLY_fakeBusiness?: Business; // for CMS only
+  CMS_ONLY_businessPersona?: BusinessPersona;
+  CMS_ONLY_tab?: ProfileTabs;
+  CMS_ONLY_fakeBusiness?: Business;
 }
 
 const ProfilePage = (props: Props): ReactElement => {

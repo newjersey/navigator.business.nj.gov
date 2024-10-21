@@ -18,7 +18,7 @@ import { ReactElement, ReactNode, useState } from "react";
 interface Props {
   onBack: () => void;
   onComplete: () => void;
-  CMS_ONLY_tab?: string; // for CMS only
+  CMS_ONLY_tab?: string;
 }
 
 export const CannabisPriorityRequirements = (props: Props): ReactElement => {
