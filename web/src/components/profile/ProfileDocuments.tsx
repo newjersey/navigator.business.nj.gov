@@ -9,7 +9,7 @@ import { Business } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext, useMemo } from "react";
 
 interface Props {
-  CMS_ONLY_fakeBusiness?: Business; // for CMS only
+  CMS_ONLY_fakeBusiness?: Business;
 }
 
 export const ProfileDocuments = (props: Props): ReactElement => {
