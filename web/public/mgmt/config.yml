@@ -3167,7 +3167,7 @@ collections:
           required: true,
           default: "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services.",
         }
-      - { label: "Summary Description (Optional)", name: "summaryDescriptionMd", widget: "markdown" }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown", required: false }
       - { label: "Below License Status Content", name: "body", widget: "markdown", required: true }
       - {
           label: "Issuing Agency",
