@@ -51,7 +51,7 @@
     },
     {
       "step": 3,
-      "weight": 20,
+      "weight": 15,
       "task": "get-insurance"
     }
   ],
