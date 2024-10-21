@@ -25,7 +25,7 @@ import { ReactElement, useState } from "react";
 
 interface Props {
   operateReferences: Record<string, OperateReference>;
-  CMS_ONLY_fakeBusiness?: Business; // for CMS only
+  CMS_ONLY_fakeBusiness?: Business;
   licenseEvents: LicenseEventType[];
 }
 

@@ -11,7 +11,7 @@ import { ReactElement, useState } from "react";
 
 interface Props {
   task: Task;
-  CMS_ONLY_tab?: string; // for CMS only
+  CMS_ONLY_tab?: string;
 }
 
 export const CannabisPriorityStatusTask = (props: Props): ReactElement => {

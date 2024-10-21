@@ -27,7 +27,7 @@ import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   task: Task;
-  CMS_ONLY_fakeBusiness?: Business; // for CMS only
+  CMS_ONLY_fakeBusiness?: Business;
 }
 
 export const BusinessStructureTask = (props: Props): ReactElement => {

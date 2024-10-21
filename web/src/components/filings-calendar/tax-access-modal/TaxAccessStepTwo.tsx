@@ -34,8 +34,8 @@ interface Props {
   close: () => void;
   onSuccess: () => void;
   moveToPrevStep: () => void;
-  CMS_ONLY_fakeError?: "NONE" | "API" | "UNKNOWN"; // for CMS only
-  CMS_ONLY_fakeBusiness?: Business; // for CMS only
+  CMS_ONLY_fakeError?: "NONE" | "API" | "UNKNOWN";
+  CMS_ONLY_fakeBusiness?: Business;
 }
 
 export const TaxAccessStepTwo = (props: Props): ReactElement => {

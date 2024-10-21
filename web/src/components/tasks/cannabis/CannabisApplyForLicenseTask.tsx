@@ -14,10 +14,10 @@ import { ReactElement, useState } from "react";
 
 interface Props {
   task: Task;
-  CMS_ONLY_tab?: string; // for CMS only
-  CMS_ONLY_fakeBusiness?: Business; // for CMS only
-  CMS_ONLY_isAnnual?: boolean; // for CMS only
-  CMS_ONLY_isConditional?: boolean; // for CMS only
+  CMS_ONLY_tab?: string;
+  CMS_ONLY_fakeBusiness?: Business;
+  CMS_ONLY_isAnnual?: boolean;
+  CMS_ONLY_isConditional?: boolean;
 }
 
 export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
