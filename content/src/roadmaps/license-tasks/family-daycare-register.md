@@ -37,7 +37,7 @@ webflowId: 66aceed7a35295b74def2eb8
 
 * Medical examination and Tuberculin Mantoux test results for all staff
 * Background check for staff and anyone over the age of 14 living in the family daycare
-* Names and contact information for two people who can provide a character reference for the business owner
+* Names and contact information for 2 people who can provide a character reference for the business owner
 * Family daycare inspection by a Child Care Resource and Referral Agency
 * Applicable fees paid
 
