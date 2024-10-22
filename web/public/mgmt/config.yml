@@ -2346,9 +2346,24 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: Violation Notice Message Text, name: violationNoticeMessage, widget: string }
-              - { label: Violation Notice CTA Text, name: violationNoticeCTA, widget: string }
-              - { label: Violation Notice CTA Link, name: violationNoticeCTALink, widget: no-space }
+              - {
+                  label: Violation Notice Message Text,
+                  name: violationNoticeMessage,
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  label: Violation Notice CTA Text,
+                  name: violationNoticeCTA,
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  label: Violation Notice CTA Link,
+                  name: violationNoticeCTALink,
+                  widget: no-space,
+                  required: false,
+                }
 
   - name: "tasks"
     label: "Tasks - All"
@@ -4273,8 +4288,6 @@ collections:
               - { label: Link One, name: linkOne, widget: string }
               - { label: Link Two Text, name: linkTwoText, widget: string }
               - { label: Link Two, name: linkTwo, widget: string }
-              - { label: Link Three Text, name: linkThreeText, widget: string }
-              - { label: Link Three, name: linkThree, widget: string }
               - { label: Made With Text, name: madeWithText, widget: string }
               - { label: By The Office of Innovation Text, name: byTheOfficeOfInnovationText, widget: string }
               - {
