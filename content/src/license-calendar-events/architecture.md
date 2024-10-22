@@ -16,14 +16,13 @@ issuingAgency: Division of Consumer Affairs
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 callToActionText: Renew My Architect License
 ---
-
 ### Renewal Requirements
 
-- Certificate of completion for continuing education
-- License number
-- Registration code from your renewal notice (sent to you in the mail at least two weeks prior to your expiration date)
-- Social Security number (SSN)
-- Applicable fees paid
+* Certificate of completion for continuing education
+* License number
+* Registration code from your renewal notice (sent to you in the mail at least 2 weeks prior to your expiration date)
+* Social Security number (SSN)
+* Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
