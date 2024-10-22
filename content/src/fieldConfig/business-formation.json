@@ -31,9 +31,9 @@
       "radioYesText": "Yes",
       "viewMoreButtonText": "Read more",
       "amendmentInfo": "#### Review your information before submitting to the New Jersey Division of Revenue and Enterprise Services.\n If you need to make a change after submitting, you must file an [amendment online.](https://www.njportal.com/dor/businessamendments)",
-      "ariaContextStepperStateComplete": "Complete",
       "viewLessButtonText": "Read less",
-      "genericErrorText": "This field requires information."
+      "genericErrorText": "This field requires information.",
+      "ariaContextStepperStateComplete": "Complete"
     },
     "intro": {
       "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.\n\nYou will need to fill out a [paper application](https://www.nj.gov/treasury/revenue/pdf/2000.pdf) to register if you choose to `reserve your business name.|name-reservation` Business name reservations only last six months.",
@@ -76,10 +76,10 @@
         "reviewStepsServicesSelected": "Services Selected",
         "error": "Select a payment method.",
         "serviceColumnLabel": "Services",
+        "costTotalPaymentDisclaimer": "* Fees are subject to change. Your total amount may vary.",
         "creditCardLabel": "Pay with Credit Card",
         "achLabel": "Pay with E-Check",
         "reviewStepServicesHeader": "Services and Payment",
-        "costTotalPaymentDisclaimer": "* Fees are subject to change. Your total amount may vary.",
         "costColumnLabel": "Cost",
         "label": "Payment Type",
         "costTotalLabel": "* Total"
@@ -233,7 +233,7 @@
         "header": "Check Available Business Names",
         "errorInlineUnavailable": "This name is already being used. Try another business name.",
         "alertDesignator": "It looks like there's a designator in your name like LLC, LP, or CORP. Please remove it and try your search again. You can officially form your business and choose a designator once you find an available name.",
-        "alertUnavailable": "Sorry, \"${name}\" isn't available. Try another name. You can officially form your business once you've found an available name.",
+        "alertUnavailable": "\"${name}\" isn't available. Try another name. You can officially form your business once you've found an available name.",
         "label": "Business Name",
         "description": "We’ll check to see if your desired business name is available. Once you find an available name you can use it to complete this form.\n\nWhat do you want to name your business?",
         "errorInlineNeedsToSearch": "Confirm the availability of your business name."
