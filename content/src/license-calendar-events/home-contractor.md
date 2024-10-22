@@ -16,13 +16,12 @@ issuingAgency: Division of Consumer Affairs
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 callToActionText: Renew My HIC Registration
 ---
-
 ### Renewal Requirements
 
-- License number
-- Registration code from your renewal notice (sent to you in the mail at least two weeks prior to your expiration date)
-- Professional Liability Insurance with a minimum of 500,000 per occurrence
-- Applicable fees paid
+* License number
+* Registration code from your renewal notice (sent to you in the mail at least 2 weeks prior to your expiration date)
+* Professional Liability Insurance with a minimum of 500,000 per occurrence
+* Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
