@@ -8,9 +8,7 @@ disclaimerText: You can renew your license 60 days before it expires and up to
   30 days after expiration. If you fail to renew your license at this point,
   your license will expire, and you won't be able to provide your licensed
   services.
-summaryDescriptionMd: |-
-  
-  Your massage business license will expire every two years.
+summaryDescriptionMd: Your massage business license will expire every 2 years.
 issuingAgency: Division of Consumer Affairs
 callToActionLink: https://newjersey.mylicense.com/eGov/PersonSearchResults.aspx
 callToActionText: Renew My Massage Therapy License
