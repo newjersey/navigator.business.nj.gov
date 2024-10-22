@@ -1,6 +1,6 @@
 ---
 previewType: renewal
-licenseName: "Employment & Personnel Service-Entertainment/Booking Agency"
+licenseName: Employment & Personnel Service-Entertainment/Booking Agency
 urlSlug: independent-artist
 expirationEventDisplayName: Entertainment Agency Registration Expiration
 renewalEventDisplayName: Entertainment Agency Registration Renewal Deadline
@@ -16,10 +16,10 @@ callToActionText: Renew My Entertainment Agency Registration
 ---
 ### Renewal Requirements
 
-- `Surety bond|surety-bond` number and premium paid receipt
-- Criminal history of the applicant, company officers, directors, or principals, if applicable
-- Applicable fees paid
+*  `Surety bond|surety-bond` number and premium paid receipt
+* Criminal history of the applicant, company officers, directors, or principals, if applicable
+* Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A renewed entertainment agency registration valid for one year. It will be sent to your mailing address on file.
+* A renewed entertainment agency registration valid for 1 year. It will be sent to your mailing address on file.
