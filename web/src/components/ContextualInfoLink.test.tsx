@@ -2,6 +2,7 @@ import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import * as FetchContextualInfoModule from "@/lib/async-content-fetchers/fetchContextualInfo";
 import { withContextualInfo } from "@/test/helpers/helpers-renderers";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("@/lib/async-content-fetchers/fetchContextualInfo", () => ({ fetchContextualInfo: jest.fn() }));
 const mockFetchContextualInfo = (FetchContextualInfoModule as jest.Mocked<typeof FetchContextualInfoModule>)
@@ -25,6 +26,7 @@ describe("<ContextualInfoLink />", () => {
       markdown: "some markdown content",
     });
     const setContent = jest.fn();
+    const user = userEvent.setup();
     render(
       withContextualInfo(
         <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
@@ -32,7 +34,7 @@ describe("<ContextualInfoLink />", () => {
         setContent
       )
     );
-    fireEvent.click(screen.getByText("legal structure"));
+    await user.click(screen.getByText("legal structure"));
     await waitFor(() => {
       return expect(setContent).toHaveBeenCalledWith({
         isVisible: true,
@@ -49,6 +51,7 @@ describe("<ContextualInfoLink />", () => {
       markdown: "some markdown content",
     });
     const setContent = jest.fn();
+    const user = userEvent.setup();
     render(
       withContextualInfo(
         <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
@@ -56,7 +59,7 @@ describe("<ContextualInfoLink />", () => {
         setContent
       )
     );
-    fireEvent.click(screen.getByText("legal structure"));
+    await user.click(screen.getByText("legal structure"));
     await waitFor(() => {
       return expect(setContent).toHaveBeenCalledWith({
         isVisible: true,

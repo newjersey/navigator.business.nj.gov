@@ -1,7 +1,7 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import * as materialUi from "@mui/material";
 import { createTheme, Icon, ThemeProvider, useMediaQuery } from "@mui/material";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@mui/material", () => mockMaterialUI());
 
@@ -39,12 +39,12 @@ describe("<ArrowTooltip />", () => {
 
   it("shows onClick on mobile", async () => {
     isMobile(true);
-
+    const user = userEvent.setup();
     renderToolTip();
 
     expect(screen.queryByText(testString)).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByTestId("tooltip"));
+    await user.click(screen.getByTestId("tooltip"));
     await waitFor(() => {
       expect(screen.getByText(testString)).toBeInTheDocument();
     });
@@ -52,11 +52,12 @@ describe("<ArrowTooltip />", () => {
 
   it("shows on hover on desktop", async () => {
     isMobile(false);
+    const user = userEvent.setup();
     renderToolTip();
 
     expect(screen.queryByText(testString)).not.toBeInTheDocument();
 
-    fireEvent.mouseOver(screen.getByTestId("tooltip"));
+    await user.hover(screen.getByTestId("tooltip"));
     await waitFor(() => {
       expect(screen.getByText(testString)).toBeInTheDocument();
     });

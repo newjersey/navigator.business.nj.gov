@@ -20,6 +20,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { ProfileData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -53,37 +54,41 @@ describe("<FormationDateModal />", () => {
     );
   };
 
-  it("updates date of formation in user data", () => {
+  it("updates date of formation in user data", async () => {
+    const user = userEvent.setup();
     renderComponent();
     const date = getCurrentDate().subtract(1, "month").date(1);
     selectDate(date);
-    fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
+    await user.click(screen.getByText(Config.formationDateModal.saveButtonText));
     triggerQueueUpdate();
     expect(currentBusiness().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
   });
 
-  it("allows a date in the future", () => {
+  it("allows a date in the future", async () => {
+    const user = userEvent.setup();
     renderComponent();
     const date = getCurrentDate().add(1, "month").date(1);
     selectDate(date);
-    fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
+    await user.click(screen.getByText(Config.formationDateModal.saveButtonText));
     triggerQueueUpdate();
     expect(currentBusiness().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
   });
 
-  it("shows error when user saves without entering date", () => {
+  it("shows error when user saves without entering date", async () => {
+    const user = userEvent.setup();
     renderComponent(generateBusiness({ profileData: generateProfileData({ dateOfFormation: undefined }) }));
     expect(screen.queryByText(Config.formationDateModal.dateOfFormationErrorText)).not.toBeInTheDocument();
-    fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
+    await user.click(screen.getByText(Config.formationDateModal.saveButtonText));
     expect(screen.getByText(Config.formationDateModal.dateOfFormationErrorText)).toBeInTheDocument();
   });
 
-  it("does not update dateOfFormation if user cancels", () => {
+  it("does not update dateOfFormation if user cancels", async () => {
     const initialBusiness = generateBusiness({});
+    const user = userEvent.setup();
     renderComponent(initialBusiness);
     const date = getCurrentDate().subtract(1, "month").date(1);
     selectDate(date);
-    fireEvent.click(screen.getByText(Config.formationDateModal.cancelButtonText));
+    await user.click(screen.getByText(Config.formationDateModal.cancelButtonText));
     triggerQueueUpdate();
     expect(currentBusiness().profileData.dateOfFormation).toEqual(
       initialBusiness.profileData.dateOfFormation

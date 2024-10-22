@@ -18,7 +18,8 @@ import {
   generateUserData,
 } from "@businessnjgovnavigator/shared/test";
 import { ThemeProvider, createTheme } from "@mui/material";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -69,6 +70,7 @@ describe("<TaskHeader />", () => {
   });
 
   it("locks task status if formation was completed through API", () => {
+    const user = userEvent.setup();
     const task = generateTask({ id: formationTaskId });
     const taskProgress: Record<string, TaskProgress> = { [formationTaskId]: "COMPLETED" };
     const formationData = generateFormationData({
@@ -76,7 +78,7 @@ describe("<TaskHeader />", () => {
     });
     renderTaskHeader(task, generateBusiness({ taskProgress, formationData }));
 
-    fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
+    user.click(screen.getByTestId("change-task-progress-checkbox"));
     expect(screen.getByTestId("status-info-tooltip")).toBeInTheDocument();
   });
 });

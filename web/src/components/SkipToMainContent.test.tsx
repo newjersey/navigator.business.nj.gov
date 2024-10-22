@@ -1,7 +1,8 @@
 import { SkipToMainContent } from "@/components/SkipToMainContent";
 import { getMergedConfig } from "@/contexts/configContext";
 import analytics from "@/lib/utils/analytics";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 const Config = getMergedConfig();
 
@@ -23,9 +24,10 @@ function setupMockAnalytics(): typeof analytics {
 }
 
 describe("<SkipToMainContent>", () => {
-  it("fires skip_to_main_content analytics event when link is clicked", () => {
+  it("fires skip_to_main_content analytics event when link is clicked", async () => {
+    const user = userEvent.setup();
     render(<SkipToMainContent />);
-    fireEvent.click(screen.getByText(Config.skipToMainContent.buttonText));
+    await user.click(screen.getByText(Config.skipToMainContent.buttonText));
     expect(mockAnalytics.event.skip_to_main_content.click.skip_to_main_content).toHaveBeenCalledTimes(1);
   });
 });

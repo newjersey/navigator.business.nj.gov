@@ -1,5 +1,6 @@
 import { ShowHideToggleButton } from "@/components/ShowHideToggleButton";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 const showText = "show";
 const hideText = "hide";
@@ -55,9 +56,10 @@ describe("<ShowHideToggleButton/>", () => {
     expect(screen.getByText(hideOverrideText)).toBeInTheDocument();
   });
 
-  it("triggers toggle function when clicked", () => {
+  it("triggers toggle function when clicked", async () => {
+    const user = userEvent.setup();
     renderButton({ status: "text-view" });
-    fireEvent.click(screen.getByText(hideText));
+    await user.click(screen.getByText(hideText));
     expect(toggleMock).toHaveBeenCalled();
   });
 });
