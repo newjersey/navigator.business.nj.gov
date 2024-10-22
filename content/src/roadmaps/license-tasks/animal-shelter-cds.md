@@ -1,6 +1,9 @@
 ---
-notesMd: 10.22 the formatting was off in the summary description, redoing to see
-  if that fixes it
+notesMd: >-
+  10.22 the formatting was off in the summary description, redoing to see if
+  that fixes it
+
+  10.22 updating copy
 id: animal-shelter-cds
 filename: animal-shelter-cds
 displayname: animal-shelter-cds
@@ -8,8 +11,9 @@ urlSlug: animal-shelter-cds
 name: Apply for Your Animal Shelter’s Controlled Dangerous Substances Registration
 webflowName: "Pet Care: Controlled Dangerous Substance Registration"
 summaryDescriptionMd: >-
-  You need a Controlled Dangerous Substances (CDS) registration if you use CDS
-  to train dogs in narcotics detection. Follow these steps to apply:
+  You need a Controlled Dangerous Substances (CDS) registration if you or your
+  business use sodium pentobarbital for animal euthanasia. Follow these steps to
+  apply:
 
   1. Email the NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the Animal Shelter CDS Registration application.
 
