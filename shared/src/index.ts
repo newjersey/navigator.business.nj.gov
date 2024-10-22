@@ -1,6 +1,7 @@
 export * from "./arrayHelpers";
 export * from "./businessNameSearch";
 export * from "./businessUser";
+export * from "./calendarEvent";
 export * from "./countries";
 export * from "./dateHelpers";
 export * from "./defaultConstants";
@@ -10,6 +11,7 @@ export * from "./domain-logic/fetchMunicipalityById";
 export * from "./domain-logic/getCurrentBusiness";
 export * from "./domain-logic/hasCompletedBusinessStructure";
 export * from "./domain-logic/hasCompletedFormation";
+export * from "./domain-logic/licenseStatusHelpers";
 export * from "./domain-logic/modifyCurrentBusiness";
 export * from "./domain-logic/onboarding";
 export * from "./domain-logic/opportunityFields";

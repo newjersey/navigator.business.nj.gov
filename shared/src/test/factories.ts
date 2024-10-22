@@ -1,5 +1,6 @@
 import { randomElementFromArray } from "../arrayHelpers";
 import { BusinessUser } from "../businessUser";
+import { TaxFilingCalendarEvent } from "../calendarEvent";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
 import { createBusinessId } from "../domain-logic/createBusinessId";
@@ -29,7 +30,7 @@ import { MunicipalityDetail } from "../municipality";
 import { OperatingPhaseId } from "../operatingPhase";
 import { BusinessPersona, IndustrySpecificData, ProfileData } from "../profileData";
 import { arrayOfSectors, SectorType } from "../sector";
-import { TaxFilingCalendarEvent, TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
+import { TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
 import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
 
