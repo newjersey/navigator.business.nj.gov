@@ -1,4 +1,4 @@
-import { TaxFilingCalendarEvent } from "@shared/taxFiling";
+import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
 import { TaxFilingResult, TaxIdentifierToIdsRecord } from "src/domain/types";
 
 export const slugifyTaxId = (id: string): string => {

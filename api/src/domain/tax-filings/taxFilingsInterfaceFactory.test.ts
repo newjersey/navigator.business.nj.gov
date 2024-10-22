@@ -1,9 +1,10 @@
 import { taxFilingsInterfaceFactory } from "@domain/tax-filings/taxFilingsInterfaceFactory";
 import { TaxFilingClient, TaxFilingInterface } from "@domain/types";
 import * as fetchMunicipality from "@domain/user/fetchMunicipalityByName";
+import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
-import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingState } from "@shared/taxFiling";
+import { TaxFilingLookupState, TaxFilingState } from "@shared/taxFiling";
 import {
   generateBusiness,
   generateMunicipalityDetail,
