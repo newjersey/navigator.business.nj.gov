@@ -192,7 +192,7 @@
     "reinstatementPendingPermitStatusText": "Reinstatement Pending",
     "permitStatusText": "Permit Status:",
     "submittedStatusText": "Submitted",
-    "errorTextSearchFailed": "Sorry, something went wrong. Please try again later.",
+    "errorTextSearchFailed": "Something went wrong. Please try again later.",
     "incompleteStatusText": "Incomplete",
     "revokedStatusText": "Revoked",
     "pendingDeficienciesStatusText": "Pending Deficiencies",
@@ -236,11 +236,11 @@
     "removeText": "Remove",
     "nextTaskButtonText": "Next Task",
     "editText": "Edit",
+    "markAsCompleteButtonText": "Mark As Completed",
     "previousTaskButtonText": "Previous Task",
     "formNameText": "Form",
     "defaultCallToActionText": "Start Application",
-    "unlockedByPlural": "Before starting this task, we recommend you take a look at:",
-    "markAsCompleteButtonText": "Mark As Completed"
+    "unlockedByPlural": "Before starting this task, we recommend you take a look at:"
   },
   "searchBusinessNameTask": {
     "designatorText": "It appears you have included a business designator in your name, such as LLC, LP or CORP. Please remove it at try searching again. Once you have found an available name you then can officially form your business.",
@@ -249,24 +249,24 @@
     "nameHasBeenUpdatedText": "Your business name has been updated.",
     "similarUnavailableNamesText": "Here are similar business names that are already taken:",
     "availableText": "It looks like \"${name}\" might be available, but you should do an official name check using the button below.",
-    "errorTextBadInput": "Sorry, that isn't a valid company name. Try a more specific name.",
+    "errorTextBadInput": "That isn't a valid company name. Try a more specific name.",
     "errorTextSearchFailed": "Unable to complete check. Please try again later.",
-    "unavailableText": "Sorry, \"${name}\" isn't available. Try another name."
+    "unavailableText": "\"${name}\" isn't available. Try another name."
   },
   "footer": {
     "creditLinkText": "Open Source",
     "facebookLink": "https://www.facebook.com/BusinessNJgov",
-    "linkTwo": "https://business.nj.gov/newsletter-signup",
     "madeWithLoveByTheOfficeOfInnovationAriaLabel": "Made with love by the Office of Innovation",
     "creditText": " Powered by ",
     "madeWithText": "Made with",
-    "linkTwoText": "Sign Up For Our Newsletter",
     "linkOne": "https://business.nj.gov/privacy-policy",
+    "linkTwo": "https://business.nj.gov/newsletter-signup",
     "creditLink": "https://business.nj.gov/license-and-copyright-notice",
     "officeExternalText": "Follow us on:",
     "officeLink": "https://innovation.nj.gov/",
-    "gitHubLink": "https://github.com/newjersey",
     "linkOneText": "Terms & Privacy Policy",
+    "gitHubLink": "https://github.com/newjersey",
+    "linkTwoText": "Sign Up For Our Newsletter",
     "byTheOfficeOfInnovationText": "by the Office of Innovation"
   },
   "registeredForTaxesModal": {
