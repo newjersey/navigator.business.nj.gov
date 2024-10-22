@@ -4,7 +4,7 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { LicenseEventType } from "@/lib/types/types";
-import { LicenseCalendarEvent } from "@businessnjgovnavigator/shared/taxFiling";
+import { LicenseCalendarEvent } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,
   generateLicenseDetails,

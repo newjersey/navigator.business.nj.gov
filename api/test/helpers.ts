@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/no-null */
-import { TaxFilingCalendarEvent } from "@shared/taxFiling";
+import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
 import { createHmac } from "node:crypto";
 
 export const generateAnnualFilings = (dueDates: string[]): TaxFilingCalendarEvent[] => {

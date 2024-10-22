@@ -1,4 +1,4 @@
-import { LicenseChecklistResponse } from "@api/types";
+import { LicenseChecklistResponse } from "@shared/domain-logic/licenseStatusHelpers";
 import { LicenseSearchAddress, LicenseStatus } from "@shared/license";
 
 export interface BusinessIdsAndNamesClient {

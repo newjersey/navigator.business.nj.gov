@@ -1,5 +1,4 @@
 /* eslint-disable unicorn/no-null */
-import { LicenseChecklistResponse } from "@api/types";
 import { LicenseApplicationIdApiResponse } from "@client/dynamics/license-status/RegulatedBusinessDynamicsLicenseApplicationIdsClient";
 import { LicenseApplicationIdResponse } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
 import {
@@ -10,6 +9,7 @@ import {
   UserTestingResponse,
 } from "@shared/businessUser";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
+import { LicenseChecklistResponse } from "@shared/domain-logic/licenseStatusHelpers";
 import {
   castPublicFilingLegalTypeToFormationType,
   FormationData,

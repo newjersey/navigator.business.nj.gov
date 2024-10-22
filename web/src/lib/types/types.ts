@@ -13,6 +13,7 @@ import {
   FormationMember,
   FormationSigner,
   IndustrySpecificData,
+  LicenseEventSubtype,
   LicenseName,
   LicenseTaskId,
   Preferences,
@@ -22,7 +23,6 @@ import {
   TaxFilingData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
-import { LicenseEventSubtype } from "@businessnjgovnavigator/shared/taxFiling";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 
 // returns all keys in an object of a type
