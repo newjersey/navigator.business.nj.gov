@@ -171,8 +171,8 @@ describe("<LicenseTask />", () => {
   });
 
   describe("on second tab (search tab)", () => {
-    describe("auto fill address values", () => {
-      it("auto fills name and address values from license details in user data", async () => {
+    describe("auto-fill address values", () => {
+      it("auto-fills name and address values from license details in user data", async () => {
         useMockBusiness({
           licenseData: generateLicenseData(
             {},
@@ -260,13 +260,18 @@ describe("<LicenseTask />", () => {
         expect(getValue("zipcode")).toEqual("12345");
       });
 
-      it("auto fills business name from profile data when no licenseData and formation response is not successful", async () => {
+      it("auto-fills business name from profile data when no licenseData and formation response is not successful", async () => {
         useMockBusiness({
           profileData: generateProfileData({
             businessName: "Applebees",
           }),
           licenseData: undefined,
           formationData: generateFormationData({
+            formationFormData: generateFormationFormData({
+              addressLine1: "123 Honeybee Lane",
+              addressLine2: "Suite BB",
+              addressZipCode: "12345",
+            }),
             formationResponse: generateFormationSubmitResponse({
               success: false,
             }),
@@ -278,12 +283,12 @@ describe("<LicenseTask />", () => {
         await waitFor(() => {
           expect(getValue("business-name")).toEqual("Applebees");
         });
-        expect(getValue("address-1")).toEqual("");
-        expect(getValue("address-2")).toEqual("");
-        expect(getValue("zipcode")).toEqual("");
+        expect(getValue("address-1")).toEqual("123 Honeybee Lane");
+        expect(getValue("address-2")).toEqual("Suite BB");
+        expect(getValue("zipcode")).toEqual("12345");
       });
 
-      it("auto fills business name from profile data when lastUpdatedISO in licenseData is empty and name and address fields are empty and formation response is not successful", async () => {
+      it("auto-fills business name from profile data when lastUpdatedISO in licenseData is empty and formation response is not successful", async () => {
         useMockBusiness({
           profileData: generateProfileData({
             businessName: "Applebees",
@@ -298,6 +303,11 @@ describe("<LicenseTask />", () => {
             }
           ),
           formationData: generateFormationData({
+            formationFormData: generateFormationFormData({
+              addressLine1: "123 Honeybee Lane",
+              addressLine2: "Suite BB",
+              addressZipCode: "12345",
+            }),
             formationResponse: generateFormationSubmitResponse({
               success: false,
             }),
@@ -309,9 +319,9 @@ describe("<LicenseTask />", () => {
         await waitFor(() => {
           expect(getValue("business-name")).toEqual("Applebees");
         });
-        expect(getValue("address-1")).toEqual("");
-        expect(getValue("address-2")).toEqual("");
-        expect(getValue("zipcode")).toEqual("");
+        expect(getValue("address-1")).toEqual("123 Honeybee Lane");
+        expect(getValue("address-2")).toEqual("Suite BB");
+        expect(getValue("zipcode")).toEqual("12345");
       });
     });
 
