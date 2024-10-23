@@ -1,3 +1,21 @@
+# [2024.32.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.31.0...v2024.32.0) (2024-10-23)
+
+
+### Bug Fixes
+
+* [[#188251182](https://github.com/newjersey/navigator.business.nj.gov/issues/188251182)] fix unique field names for landlord industry questions ([8a32b70](https://github.com/newjersey/navigator.business.nj.gov/commit/8a32b70c77f310e1f7ef2f1fa7523aae14bc998a))
+* update url reference ([6a79e99](https://github.com/newjersey/navigator.business.nj.gov/commit/6a79e99d703cfc018a2dac4a6c8bee910e5646e4))
+
+
+### Features
+
+* [[#186084688](https://github.com/newjersey/navigator.business.nj.gov/issues/186084688)] callout alerts are now aria groups ([5bf852c](https://github.com/newjersey/navigator.business.nj.gov/commit/5bf852c6c9d79f13e3fe7f628563c848f449b216))
+* [[#186702387](https://github.com/newjersey/navigator.business.nj.gov/issues/186702387)] close button revisions, reversion of previous functionality ([e1b66f6](https://github.com/newjersey/navigator.business.nj.gov/commit/e1b66f63b10cbd6f040d0b2fcc506efdae621a84))
+* [[#188057802](https://github.com/newjersey/navigator.business.nj.gov/issues/188057802)] updated footer and header to align with NJ gov ([453db3f](https://github.com/newjersey/navigator.business.nj.gov/commit/453db3f32d001bdfd45365fa8c34226804f2723e))
+* [[#188109500](https://github.com/newjersey/navigator.business.nj.gov/issues/188109500)] Update error message when no license results are found ([7bede1f](https://github.com/newjersey/navigator.business.nj.gov/commit/7bede1fae0db62edaa3144093461d29a9d85646b))
+* [[#188339189](https://github.com/newjersey/navigator.business.nj.gov/issues/188339189)] remove DUPLICATE_LICENSE_TYPE_ERROR logic ([d9bc270](https://github.com/newjersey/navigator.business.nj.gov/commit/d9bc27095b77c51a44cddca5cd45cd54896610b5))
+* [#[#188251182](https://github.com/newjersey/navigator.business.nj.gov/issues/188251182)] Add essential questions to landlord industry ([6731cc2](https://github.com/newjersey/navigator.business.nj.gov/commit/6731cc28ff0523ca307dd5bc460e653ae5f57283))
+
 # [2024.31.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.30.0...v2024.31.0) (2024-10-16)
 
 
