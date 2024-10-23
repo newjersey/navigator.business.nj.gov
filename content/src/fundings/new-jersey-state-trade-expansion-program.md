@@ -37,13 +37,12 @@ county:
 sector: []
 publishStageArchive: ""
 ---
-
 ## Eligibility
 
-- Small business as defined by the [Small Business Administration](https://www.sba.gov/size-standards/index.html)
-- In business for at least one year as of the date of the application
-- Manufacturing goods or producing services that contain at least 51% U.S. content
-- Registered with NJ START and have a [DUNS number](https://www.dnb.com/duns.html)
+* Small business as defined by the [Small Business Administration](https://www.sba.gov/size-standards/index.html)
+* In business for at least 1 year as of the date of the application
+* Manufacturing goods or producing services that contain at least 51% U.S. content
+* Registered with NJ START and have a [DUNS number](https://www.dnb.com/duns.html)
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
