@@ -4,7 +4,7 @@
     "errorTextNoPropertyInterestFound": "We cannot find your registration. Make sure the building address you entered matches what is in your application.",
     "errorTextNoHotelMotelRegistrations": "We cannot find your registration. Make sure you submit a registration application for your hotel, motel or guesthouse.",
     "errorTextNoMultipleDwellingRegistrations": "We cannot find your registration. Make sure you submit a registration application for your property.",
-    "errorTextSearchFailed": "Sorry, something went wrong. Please try again later.",
+    "errorTextSearchFailed": "Something went wrong. Please try again later.",
     "registrationStartDateText": "Application Started on ",
     "registrationStatusText": "Application Status: ",
     "registrationBuildingCountText": "Buildings included in this application: ",
