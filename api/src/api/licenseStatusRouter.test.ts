@@ -37,6 +37,7 @@ describe("licenseStatusRouter", () => {
       getNeedNewsletterUsers: jest.fn(),
       getNeedToAddToUserTestingUsers: jest.fn(),
       getNeedTaxIdEncryptionUsers: jest.fn(),
+      getUsersWithOutdatedVersion: jest.fn(),
     };
     stubUserDataClient.put.mockImplementation((userData) => {
       return Promise.resolve(userData);

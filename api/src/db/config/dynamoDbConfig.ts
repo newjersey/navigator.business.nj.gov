@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { MigrationFunction, Migrations } from "@db/migrations/migrations";
 import { CURRENT_VERSION } from "@shared/userData";
 
@@ -27,4 +29,32 @@ export const migrateData = (data: any): any => {
     return migration(prevData);
   }, data);
   return { ...migratedData, version: CURRENT_VERSION };
+};
+
+export const createDynamoDbClient = (
+  isOffline: boolean,
+  isDocker: boolean,
+  dynamoPort: number
+): DynamoDBDocumentClient => {
+  let dynamoDb: DynamoDBDocumentClient;
+
+  if (isOffline) {
+    const dynamoDbEndpoint = isDocker ? "dynamodb-local" : "localhost";
+    dynamoDb = DynamoDBDocumentClient.from(
+      new DynamoDBClient({
+        region: "localhost",
+        endpoint: `http://${dynamoDbEndpoint}:${dynamoPort}`,
+      }),
+      dynamoDbTranslateConfig
+    );
+  } else {
+    dynamoDb = DynamoDBDocumentClient.from(
+      new DynamoDBClient({
+        region: "us-east-1",
+      }),
+      dynamoDbTranslateConfig
+    );
+  }
+
+  return dynamoDb;
 };

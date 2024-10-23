@@ -31,6 +31,7 @@ export interface UserDataClient {
   getNeedNewsletterUsers: () => Promise<UserData[]>;
   getNeedToAddToUserTestingUsers: () => Promise<UserData[]>;
   getNeedTaxIdEncryptionUsers: () => Promise<UserData[]>;
+  getUsersWithOutdatedVersion: (latestVersion: number) => Promise<UserData[]>;
 }
 
 export interface BusinessesDataClient {
