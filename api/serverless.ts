@@ -4,6 +4,7 @@ import encryptTaxId from "@functions/encryptTaxId";
 import express from "@functions/express";
 import githubOauth2 from "@functions/githubOauth2";
 import healthCheck from "@functions/healthCheck";
+import migrateUsersVersion from "@functions/migrateUsersVersion";
 import updateExternalStatus from "@functions/updateExternalStatus";
 import type { AWS, AwsLambdaEnvironment } from "@serverless/typescript";
 import "dotenv/config";
@@ -308,6 +309,22 @@ if (stage !== contentEnv && stage !== testEnv) {
   serverlessConfiguration.functions = {
     ...serverlessConfiguration.functions,
     healthCheck: healthCheck(
+      env.CI
+        ? {
+            securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
+            subnetIds: [
+              "${self:custom.config.infrastructure.SUBNET_01}",
+              "${self:custom.config.infrastructure.SUBNET_02}",
+            ],
+          }
+        : undefined
+    ),
+  };
+}
+if (stage === testEnv || stage === "local") {
+  serverlessConfiguration.functions = {
+    ...serverlessConfiguration.functions,
+    migrateUsersVersion: migrateUsersVersion(
       env.CI
         ? {
             securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
