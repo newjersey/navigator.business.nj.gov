@@ -1,6 +1,6 @@
 {
   "name": "@businessnjgovnavigator/root",
-  "version": "2024.31.0",
+  "version": "2024.32.0",
   "description": "This is the development repository for the work-in-progress business navigator from the New Jersey Office of Innovation. For info on the existing [Business.NJ.gov](https://business.nj.gov) site, please see the [bottom of this document](https://github.com/newjersey/navigator.business.nj.gov#businessnjgov)",
   "main": "index.js",
   "private": true,
@@ -33,7 +33,7 @@
   "dependencies": {
     "@aws-amplify/auth": "5.6.1",
     "@aws-amplify/core": "5.8.1",
-    "@aws-crypto/client-node": "4.0.0",
+    "@aws-crypto/client-node": "4.0.2",
     "@aws-crypto/sha256-browser": "5.2.0",
     "@aws-sdk/client-cloudwatch-logs": "3.417.0",
     "@aws-sdk/client-dynamodb": "3.417.0",
