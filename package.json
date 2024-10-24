@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "a": "echo 'hello'",
     "build": "yarn verify:node && yarn workspaces foreach -ptvi run build",
     "build:clean": "yarn clean && yarn build",
     "clean": "yarn workspaces foreach -v run clean",
