@@ -33,7 +33,7 @@
   "dependencies": {
     "@aws-amplify/auth": "5.6.1",
     "@aws-amplify/core": "5.8.1",
-    "@aws-crypto/client-node": "4.0.0",
+    "@aws-crypto/client-node": "4.0.2",
     "@aws-crypto/sha256-browser": "5.2.0",
     "@aws-sdk/client-cloudwatch-logs": "3.417.0",
     "@aws-sdk/client-dynamodb": "3.417.0",
