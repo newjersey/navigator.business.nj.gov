@@ -1,7 +1,5 @@
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
-import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
+import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
 import { addToUserTestingBatch } from "@domain/user-testing/addToUserTestingBatch";
 import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFactory";
 import { LogWriter } from "@libs/logWriter";
@@ -15,32 +13,9 @@ export default async function handler(): Promise<void> {
   const IS_DOCKER = process.env.IS_DOCKER === "true" || false; // set in docker-compose
   const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
   const STAGE = process.env.STAGE || "local";
-
-  const DYNAMO_OFFLINE_PORT = process.env.DYNAMO_PORT || 8000;
-  let dynamoDb: DynamoDBDocumentClient;
-  if (IS_OFFLINE) {
-    let dynamoDbEndpoint = "localhost";
-    if (IS_DOCKER) {
-      dynamoDbEndpoint = "dynamodb-local";
-    }
-    dynamoDb = DynamoDBDocumentClient.from(
-      new DynamoDBClient({
-        region: "localhost",
-        endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`,
-      }),
-      dynamoDbTranslateConfig
-    );
-  } else {
-    dynamoDb = DynamoDBDocumentClient.from(
-      new DynamoDBClient({
-        region: "us-east-1",
-      }),
-      dynamoDbTranslateConfig
-    );
-  }
-
+  const DYNAMO_OFFLINE_PORT = Number.parseInt(process.env.DYNAMO_PORT || "8000");
   const dataLogger = LogWriter(`aws/${STAGE}`, "DataMigrationLogs");
-
+  const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
   const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, dataLogger);
   const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
 

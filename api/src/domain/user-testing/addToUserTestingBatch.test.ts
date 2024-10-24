@@ -19,6 +19,7 @@ describe("addToUserTestingBatch", () => {
       getNeedTaxIdEncryptionUsers: jest.fn(),
       getNeedNewsletterUsers: jest.fn(),
       getNeedToAddToUserTestingUsers: jest.fn(),
+      getUsersWithOutdatedVersion: jest.fn(),
     };
     addToUserTesting = addToUserTestingFactory(stubUserTestingClient);
   });
