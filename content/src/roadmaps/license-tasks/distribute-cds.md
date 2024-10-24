@@ -1,4 +1,6 @@
 ---
+notesMd: "10.24.24: deleting this task as it has been combined with another, now
+  under supply - cds"
 licenseName: ""
 id: distribute-cds
 filename: distribute-cds
