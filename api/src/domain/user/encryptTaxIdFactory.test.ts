@@ -1,11 +1,7 @@
 import { EncryptionDecryptionClient, EncryptTaxId } from "@domain/types";
 import { encryptTaxIdFactory } from "@domain/user/encryptTaxIdFactory";
-import {
-  generateBusiness,
-  generateProfileData,
-  generateUserDataForBusiness,
-  modifyCurrentBusiness,
-} from "@shared/test";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
+import { generateBusiness, generateProfileData, generateUserDataForBusiness } from "@shared/test";
 
 describe("encryptTaxId", () => {
   let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;

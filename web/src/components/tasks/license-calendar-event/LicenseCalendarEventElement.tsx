@@ -5,10 +5,10 @@ import { LicenseCurrentStatusComponent } from "@/components/tasks/LicenseCurrent
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LicenseEventType } from "@/lib/types/types";
+import { LicenseEventSubtype } from "@businessnjgovnavigator/shared/";
 import { parseDate, parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
 import { LicenseName, licenseSearchDateFormat } from "@businessnjgovnavigator/shared/license";
-import { LicenseEventSubtype } from "@businessnjgovnavigator/shared/taxFiling";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
 

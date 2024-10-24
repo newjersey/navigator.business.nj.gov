@@ -23,8 +23,7 @@ import {
   TaxFilingMethod,
   WebflowLicense,
 } from "@/lib/types/types";
-import { LicenseName } from "@businessnjgovnavigator/shared/license";
-import { LicenseEventSubtype } from "@businessnjgovnavigator/shared/taxFiling";
+import { LicenseEventSubtype, LicenseName } from "@businessnjgovnavigator/shared/";
 import matter from "gray-matter";
 
 export const convertContextualInfoMd = (contentMdContents: string): ContextualInfo => {

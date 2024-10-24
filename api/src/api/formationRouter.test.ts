@@ -5,6 +5,7 @@ import { getSignedInUser, getSignedInUserId } from "@api/userRouter";
 import { saveFileFromUrl } from "@domain/s3Writer";
 import { FormationClient, UserDataClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
 import {
   generateBusiness,
@@ -14,7 +15,6 @@ import {
   generateProfileData,
   generateUserData,
   generateUserDataForBusiness,
-  modifyCurrentBusiness,
 } from "@shared/test";
 import { generateInputFile } from "@test/factories";
 import { Express } from "express";

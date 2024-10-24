@@ -1,4 +1,3 @@
-import { LicenseStatusResults } from "@api/types";
 import { formatRegulatedBusinessDynamicsApplications } from "@client/dynamics/license-status/formatRegulatedBusinessDynamicsApplications";
 import {
   BusinessAddressesClient,
@@ -9,6 +8,7 @@ import {
 import { searchBusinessAddressesForMatches } from "@client/dynamics/license-status/searchBusinessAddressesForMatches";
 import { AccessTokenClient } from "@client/dynamics/types";
 import { SearchLicenseStatus } from "@domain/types";
+import { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
 import { LicenseSearchNameAndAddress } from "@shared/license";
 
 interface RgbApiConfiguration {

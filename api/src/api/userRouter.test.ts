@@ -5,6 +5,7 @@ import { EncryptionDecryptionClient, TimeStampBusinessSearch, UserDataClient } f
 import { setupExpress } from "@libs/express";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { createEmptyFormationFormData, emptyAddressData } from "@shared/formationData";
 import { LicenseName } from "@shared/license";
 import {
@@ -24,7 +25,6 @@ import {
   getFirstAnnualFiling,
   getSecondAnnualFiling,
   getThirdAnnualFiling,
-  modifyCurrentBusiness,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
 import { generateAnnualFilings, getLastCalledWith } from "@test/helpers";

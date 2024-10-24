@@ -1,4 +1,5 @@
 import { getAnnualFilings } from "@domain/annual-filings/getAnnualFilings";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import {
   generateBusiness,
   generateProfileData,
@@ -8,7 +9,6 @@ import {
   getFirstAnnualFiling,
   getSecondAnnualFiling,
   getThirdAnnualFiling,
-  modifyCurrentBusiness,
 } from "@shared/test";
 import { generateAnnualFilings } from "@test/helpers";
 import dayjs from "dayjs";

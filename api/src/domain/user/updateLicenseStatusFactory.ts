@@ -1,4 +1,3 @@
-import { LicenseStatusResults } from "@api/types";
 import {
   NO_ADDRESS_MATCH_ERROR,
   NO_MAIN_APPS_ERROR,
@@ -8,6 +7,12 @@ import {
 } from "@domain/types";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
 import {
+  getLicenseTasksProgress,
+  getNonLicenseTasks,
+  LicenseStatusResults,
+} from "@shared/domain-logic/licenseStatusHelpers";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
+import {
   enabledLicensesSources,
   LicenseDetails,
   LicenseName,
@@ -16,28 +21,9 @@ import {
   LicenseTaskId,
   taskIdLicenseNameMapping,
 } from "@shared/license";
-import { modifyCurrentBusiness } from "@shared/test";
-import { Business, TaskProgress, UserData } from "@shared/userData";
+import { Business, UserData } from "@shared/userData";
 
 const DEBUG_RegulatedBusinessDynamicsLicenseSearch = false; // this variable exists in RegulatedBusinessDynamicsLicenseStatusClient; enable both for debugging
-
-const getLicenseTasksProgress = (licenseStatusResult: LicenseStatusResults): Record<string, TaskProgress> => {
-  const licenseTasksProgress: Record<string, TaskProgress> = {};
-  for (const licenseName of Object.keys(licenseStatusResult) as LicenseName[]) {
-    const taskId = Object.keys(taskIdLicenseNameMapping).find(
-      (taskId) => taskIdLicenseNameMapping[taskId as keyof typeof taskIdLicenseNameMapping] === licenseName
-    );
-    let taskStatus: TaskProgress = "NOT_STARTED";
-    if (licenseStatusResult[licenseName]!.licenseStatus === "ACTIVE") {
-      taskStatus = "COMPLETED";
-    } else if (licenseStatusResult[licenseName]!.licenseStatus === "PENDING") {
-      taskStatus = "IN_PROGRESS";
-    }
-    if (taskId !== undefined) licenseTasksProgress[taskId] = taskStatus;
-  }
-
-  return licenseTasksProgress;
-};
 
 const getLicenses = (args: {
   nameAndAddress: LicenseSearchNameAndAddress;
@@ -70,7 +56,7 @@ const getLicenses = (args: {
   return results;
 };
 
-const update = (
+const updateLicenseStatusAndLicenseTask = (
   userData: UserData,
   args: {
     nameAndAddress: LicenseSearchNameAndAddress;
@@ -80,16 +66,10 @@ const update = (
 ): UserData => {
   // TODO: In a future state we need to account for existing license data with address that does not match search query
   return modifyCurrentBusiness(userData, (business: Business): Business => {
-    const nonLicenseTasks = Object.fromEntries(
-      Object.entries(business.taskProgress).filter(
-        ([key]) => !Object.keys(taskIdLicenseNameMapping).includes(key)
-      )
-    );
-
     return {
       ...business,
       taskProgress: {
-        ...nonLicenseTasks,
+        ...getNonLicenseTasks(business),
         ...getLicenseTasksProgress(args.licenseStatusResult),
       },
       licenseData: {
@@ -133,7 +113,7 @@ export const updateLicenseStatusFactory = (
 
         if (webserviceHasError && rgbHasError) {
           if (webserviceHasInvalidMatch || rgbHasInvalidMatch) {
-            return update(userData, {
+            return updateLicenseStatusAndLicenseTask(userData, {
               nameAndAddress: nameAndAddress,
               licenseStatusResult: {},
               taskIdWithError: taskId,
@@ -172,7 +152,7 @@ export const updateLicenseStatusFactory = (
           }
         }
 
-        return update(userData, {
+        return updateLicenseStatusAndLicenseTask(userData, {
           nameAndAddress: nameAndAddress,
           licenseStatusResult: results,
         });

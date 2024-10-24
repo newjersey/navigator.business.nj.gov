@@ -3,6 +3,7 @@ import { TimeStampBusinessSearch } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import {
   generateBusiness,
   generateBusinessNameAvailability,
@@ -13,7 +14,6 @@ import {
   getFirstAnnualFiling,
   getSecondAnnualFiling,
   getThirdAnnualFiling,
-  modifyCurrentBusiness,
 } from "@shared/test";
 import { generateAnnualFilings } from "@test/helpers";
 import dayjs from "dayjs";
