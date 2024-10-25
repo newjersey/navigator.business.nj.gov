@@ -74,6 +74,9 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
         return {
           ...prevValues,
           name: business.profileData.businessName,
+          addressLine1: business.formationData.formationFormData.addressLine1,
+          addressLine2: business.formationData.formationFormData.addressLine2 || "",
+          zipCode: business.formationData.formationFormData.addressZipCode,
         };
       });
     }
