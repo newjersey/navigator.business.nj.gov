@@ -10,16 +10,16 @@ sidebarCardBodyText: Main Street Micro Business Loan will provide financing of
 openDate: 10/06/2022
 dueDate: ""
 summaryDescriptionMd: >-
-  **_Based on the significant number of applications already received, funding
+  ***Based on the significant number of applications already received, funding
   for the Main Street Micro Business Loan is fully subscribed. Based on the fact
   that the New Jersey Economic Development Authority's (NJEDA) application fee
   is non-refundable, NJEDA is no longer accepting new applications. If you have
-  any questions, please contact the NJEDA Call Center at 844-965-1125.
-  Applicants who already have an application in progress will have until 5 PM on
-  Wednesday, October 12th , 2022 to complete and submit their application.
-  Applicants who do not complete and submit their in progress application by
-  Wednesday, October 12th, 2022 at 5 PM will no longer have the ability to do so
-  after that date and time._**
+  any questions, contact the NJEDA Call Center at 844-965-1125. Applicants who
+  already have an application in progress will have until 5 PM on Wednesday,
+  October 12th , 2022 to complete and submit their application. Applicants who
+  do not complete and submit their in progress application by Wednesday, October
+  12th, 2022 at 5 PM will no longer have the ability to do so after that date
+  and time.***
 
 
   Main Street Micro Business Loan will provide financing of up to $50,000 to your eligible micro business in New Jersey with ten or fewer full-time employees and no greater than $1M in annual revenues.
