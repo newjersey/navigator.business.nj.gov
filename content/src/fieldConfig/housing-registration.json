@@ -13,7 +13,7 @@
     "informationalReturned": "Your application has missing or incorrect information. Review and resubmit it using the same application link in the DCA Service Portal.",
     "registrationCallToActionPrimaryText": "Register or Update My Registration with the Department of Community Affairs",
     "applicationsFoundHeader": "REGISTRATION APPLICATION(S) FOR THIS PROPERTY:",
-    "errorTextFieldsRequired": "Please fill in all non-optional fields.",
+    "errorTextFieldsRequired": "Fill in all non-optional fields.",
     "errorTextNoPropertyInterestFound": "We cannot find your registration. Make sure the building address you entered matches what is in your application.",
     "registrationBuildingCountText": "Buildings included in this application: ",
     "registrationInReviewMessage": "Check back later to make sure your property is successfully registered",
@@ -26,7 +26,7 @@
     "registrationStatusText": "Application Status: ",
     "municipalityLabel": "Municipality",
     "registrationCallToActionSecondaryText": "Check My Registration Application Status",
-    "errorTextSearchFailed": "Something went wrong. Please try again later.",
+    "errorTextSearchFailed": "Something went wrong. Try again later.",
     "reviewMyApplicationCallToAction": "Review My Application",
     "registrationRejectedOrReturnedMessage": "Review your incomplete or returned application(s) for any errors or missing information. If your application was returned, you can resubmit it using the same application link in the DCA Service Portal.",
     "errorTextNoHotelMotelRegistrations": "We cannot find your registration. Make sure you submit a registration application for your hotel, motel or guesthouse."
