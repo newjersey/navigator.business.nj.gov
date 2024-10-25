@@ -5,7 +5,8 @@
     {
       "step": 3,
       "weight": 20,
-      "licenseTask": "supply-cds"
+      "licenseTask": "supply-cds",
+      "required": true
     }
   ]
 }
