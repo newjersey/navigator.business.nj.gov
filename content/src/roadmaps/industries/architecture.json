@@ -1,5 +1,5 @@
 {
-  "naicsCodes": "541310",
+  "naicsCodes": "541310, 925120",
   "defaultSectorId": "construction",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -61,15 +61,15 @@
       "required": true
     }
   ],
-  "name": "Architecture",
+  "name": "Architecture and Urban Planning ",
   "nonEssentialQuestionsIds": [],
   "displayname": "architecture",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "architect, engineer, consulting, architectural services",
+  "additionalSearchTerms": "architect, engineer, consulting, architectural services, planning, firm, professional services, urban planning, land use, landscape architect, regional planning",
   "id": "architecture",
-  "description": "Plans, designs, and oversees the construction of buildings",
+  "description": "Plans, designs, and manages the development of buildings, cities, and regions",
   "webflowId": "656a13629e1c371e9fc59cbd"
 }
