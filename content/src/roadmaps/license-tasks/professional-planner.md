@@ -34,6 +34,7 @@ agencyId: nj-consumer-affairs
 ## Application Requirements
 
 * Applicable license number
+* A 2x2 inch photo of your head and shoulders taken in the last 6 months
 * Social Security number (SSN) or Individual Taxpayer Identification number (ITIN)
 * Details of any license denial, revocation, suspension, or surrender, if applicable
 * Written explanation of criminal history, if applicable 
