@@ -18,24 +18,22 @@ summaryDescriptionMd: >
 callToActionText: Request My Tax Clearance Certificate
 callToActionLink: https://www.nj.gov/treasury/contract_compliance/documents/pdf/PBS-Introduction-Page.pdf
 ---
-
-You can request your tax clearance certificate through the [Premier Business Services Portal](https://www.nj.gov/treasury/contract_compliance/documents/pdf/PBS-Introduction-Page.pdf). There is no fee for requesting a certificate through the portal. You are usually only permitted to apply with a [paper application](https://www.nj.gov/treasury/taxation/pdf/busasstTaxClear.pdf) if your business is one of the following: trusts, banking institutions, insurance companies, individuals, and local governments such as school districts and counties. Most others are required to apply online.
+You can request your tax clearance certificate through the [Premier Business Services Portal](https://www.nj.gov/treasury/contract_compliance/documents/pdf/PBS-Introduction-Page.pdf). There is no fee for requesting a certificate through the portal. You are usually only permitted to apply with a [paper application](https://www.nj.gov/treasury/taxation/pdf/busasstTaxClear.pdf) if your business is 1 of the following: trusts, banking institutions, insurance companies, individuals, and local governments such as school districts and counties. Most others are required to apply online.
 
 ## Requirements for Requesting a Tax Clearance Certificate
 
-- Business Name
-- `Employer Identification Number (EIN)|ein` plus State suffix
-- [4-digit PIN](https://www.nj.gov/treasury/assets/contact/taxation/contact-pin.shtml) provided by the State of New Jersey
-- Name of agency from which you will be applying for assistance
+* Business Name
+*  `Employer Identification Number (EIN)|ein` plus State suffix
+* [4-digit PIN](https://www.nj.gov/treasury/assets/contact/taxation/contact-pin.shtml) provided by the State of New Jersey
+* Name of agency from which you will be applying for assistance
 
   \-or-
-
-- Business Name
-- `Employer Identification Number (EIN)|ein` plus State suffix
-- `Business Structure|business-structure-learn-more` /type
-- Year business operations began in New Jersey
-- Zip code where you receive tax forms
-- Name of agency from which you will be applying for assistance
+* Business Name
+*  `Employer Identification Number (EIN)|ein` plus State suffix
+*  `Business Structure|business-structure-learn-more` /type
+* Year business operations began in New Jersey
+* Zip code where you receive tax forms
+* Name of agency from which you will be applying for assistance
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 

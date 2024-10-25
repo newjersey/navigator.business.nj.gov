@@ -6,7 +6,7 @@ previewType: renewal
 licenseName: ""
 urlSlug: architecture
 expirationEventDisplayName: Architect License Expiration
-renewalEventDisplayName: Architect License Expiration Deadline
+renewalEventDisplayName: Architect License Renewal Deadline
 disclaimerText: You can renew your license 60 days before it expires and up to
   30 days after expiration. If you fail to renew your license at this point,
   your license will expire, and you won't be able to provide your licensed
@@ -21,7 +21,7 @@ callToActionText: Renew My Architect License
 
 - Certificate of completion for continuing education
 - License number
-- Registration code from your renewal notice (sent to you in the mail at least two weeks prior to your expiration date)
+- Registration code from your renewal notice (sent to you in the mail at least 2 weeks prior to your expiration date)
 - Social Security number (SSN)
 - Applicable fees paid
 

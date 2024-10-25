@@ -45,13 +45,13 @@
       "required": true
     },
     {
-      "step": 2,
+      "step": 3,
       "weight": 10,
       "task": "bank-account"
     },
     {
       "step": 3,
-      "weight": 20,
+      "weight": 15,
       "task": "get-insurance"
     }
   ],

@@ -26,7 +26,7 @@ callToActionText: File Your Annual Report
 
 :::callout{ showHeader="true" headerText="What if do not complete my report?" showIcon="false" calloutType="conditional" }
 
-After two missed annual reports, you may lose your authority to do business in New Jersey, your `Business Registration Certificate|business-reg-certificate\` may be invalidated, and you could lose access to state services, including funding opportunities and licenses.
+After 2 missed annual reports, you may lose your authority to do business in New Jersey, your `Business Registration Certificate|business-reg-certificate\` may be invalidated, and you could lose access to state services, including funding opportunities and licenses.
 
 To be reinstated, businesses will need to file and pay for past reports as well as pay a reinstatement fee.
 

@@ -1,13 +1,12 @@
 ---
-filename: distribute-cds-reinstate
-name: Reinstate Your Wholesale Distributors Controlled Dangerous Substances
-  Registration
+filename: supply-cds-reinstate
+name: Reinstate Your Manufacturer or Wholesale Distributor’s Controlled
+  Dangerous Substances Registration
 industryIds:
   - generic
-sectorIds:
-  - wholesale-trade
+sectorIds: []
 icon: update-purple.svg
-urlSlug: distribute-cds-reinstate
+urlSlug: supply-cds-reinstate
 summaryDescriptionMd: >-
   If your Controlled Dangerous Substances (CDS) registration expired less than
   30 days ago, [you can renew online](https://newjersey.mylicense.com/). If it
@@ -34,9 +33,9 @@ summaryDescriptionMd: >-
 
 Your reinstatement application must be signed in front of and by a notary public.
 
-:::callout{ showHeader="true" headerText="What if I don't reinstate my registration?" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="What if I don't reinstate my registration? " showIcon="false" calloutType="warning" }
 
-You cannot handle, store, or distribute any CDS.
+You cannot handle, store, manufacture, or distribute any CDS.
 
 :::
 

@@ -8,11 +8,11 @@ sectorIds:
   - construction
 icon: govt-purple.svg
 urlSlug: new-home-warranty-enrollment
-summaryDescriptionMd: >
+summaryDescriptionMd: >-
   If you build and/or sell new homes in New Jersey, such as single-family
   houses, duplexes, or condominiums, you must enroll each home in a `warranty
-  plan|new-home-warranty-plan`. The warranty plan can be the State warranty plan
-  or an [approved private warranty
+  plan|new-home-warranty-plan` . The warranty plan can be the State warranty
+  plan or an [approved private warranty
   plan](https://www.nj.gov/dca/divisions/codes/offices/nhw_war_plans.html).
 
 
@@ -34,11 +34,11 @@ callToActionLink: https://www.nj.gov/dca/divisions/codes/forms/pdf_nhw/COP_App.p
 - Business name
 - Mailing address, as it appears in your new home builder registration application
 - Phone number, as it appears in your new home builder registration application
-- 5-digit home builder registration number
+- Five-digit home builder registration number
 - Name and signature of the principal owner, as listed in your new home builder registration application
 - Address of the home to be covered under the warranty
 - Warranty coverage start date, either the closing date or when the new home is first occupied
-- Building type, such as single-family detached, townhouse, two-family, or condominium
+- Building type, such as single-family detached, townhouse, 2-family, or condominium
 - Construction type, such as pre-manufactured or conventional construction
 - Owner type, such as condominium or homeowners’ association
 - Completed [exclusion sheet](https://www.nj.gov/dca/codes/forms/pdf_nhw/Exclusions.pdf), if there are any conditions excluded from warranty coverage
@@ -68,7 +68,7 @@ callToActionLink: https://www.nj.gov/dca/divisions/codes/forms/pdf_nhw/COP_App.p
 - Notarized letter from the homeowner stating that home was built for their personal use and will not be listed for sale
 
 :::note
-You must print all five copies of the completed application on U.S. legal size paper (8.5 x 14.0 inches). Then, submit all five copies to the Department of Community Affairs at least 10 weeks before the listed warranty coverage start date.
+You must print all 5 copies of the completed application on U.S. legal size paper (8.5 x 14.0 inches). Then, submit all 5 copies to the Department of Community Affairs at least 10 weeks before the listed warranty coverage start date.
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
