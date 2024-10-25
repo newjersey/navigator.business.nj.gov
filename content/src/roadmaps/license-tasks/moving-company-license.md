@@ -7,15 +7,15 @@ urlSlug: movers-warehousemen-license
 name: Apply for Your Public Movers License and/or Warehousemen License
 webflowName: "Moving Company: Public Movers and/or Warehousemen License"
 summaryDescriptionMd: >-
-  
-
-  :::infoAlert Your license must always be displayed at your business location. :::
+  :::infoAlert 
+   Your license must always be displayed at your business location.
+  :::
 
 
   If you transport or warehouse household goods, special commodities, or commercial goods for compensation within New Jersey, you need a public movers license and/or a warehousemen license.
 
 
-  Indicate the type of license you require in the application: moving (PM), moving and warehousing (PC), or warehousing only (PW). *Please note that a self-storage or delivery company does not require a state license*.
+  Indicate the type of license you require in the application: moving (PM), moving and warehousing (PC), or warehousing only (PW). *A self-storage or delivery company does not require a state license*.
 industryId: moving-company
 callToActionText: Apply for My Public Movers and/or Warehousemen License
 callToActionLink: https://www.njconsumeraffairs.gov/pmw/Pages/applications.aspx
