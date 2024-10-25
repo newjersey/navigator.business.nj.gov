@@ -6,7 +6,7 @@
     "dbaAvailableText": "**\"${name}\" is available as your DBA Name!**\n\nYou're now ready to authorize your business in New Jersey.",
     "availableText": "**\"${name}\" is available!** This name will be registered with the State ONLY after you submit your business authorization",
     "searchAgainButtonText": "search again here",
-    "dbaUnavailableText": "The name **\"${name}\"** is already taken in New Jersey. Please search for another DBA name. Here are similar business names that are already taken:",
+    "dbaUnavailableText": "The name **\"${name}\"** is already taken in New Jersey. Search for another DBA name. Here are similar business names that are already taken:",
     "dbaNameHeader": "Find a Doing Business As (DBA) Name",
     "unavailableText": "The name **\"${name}\"** is already taken in New Jersey. You’ll have to create a Doing Business As (DBA) name, below. \n\n(If you entered the wrong name, ${searchAgainButton}).",
     "dbaNameSearchLabel": "DBA Name Search"
