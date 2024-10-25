@@ -876,22 +876,22 @@ workflows:
           requires:
             - webflow-licenses-sync
 
-  webflow-sync:
-    jobs:
-      - sync-fundings:
-          name: webflow-fundings-sync
-          filters:
-            branches:
-              only:
-                - /^webflow-sync-.*/
-      - sync-licenses:
-          name: webflow-licenses-sync
-          requires:
-            - webflow-fundings-sync
-      - sync-industries:
-          name: webflow-industries-sync
-          requires:
-            - webflow-licenses-sync
+  #  webflow-sync:
+  #    jobs:
+  #      - sync-fundings:
+  #          name: webflow-fundings-sync
+  #          filters:
+  #            branches:
+  #              only:
+  #                - /^webflow-sync-.*/
+  #      - sync-licenses:
+  #          name: webflow-licenses-sync
+  #          requires:
+  #            - webflow-fundings-sync
+  #      - sync-industries:
+  #          name: webflow-industries-sync
+  #          requires:
+  #            - webflow-licenses-sync
 
   webflow-fundings-sync:
     jobs:
