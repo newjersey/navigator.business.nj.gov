@@ -27,18 +27,18 @@
     "betaMainText": "This site is in beta."
   },
   "selfRegistration": {
-    "errorTextGeneric": "Something went wrong. Please try again later.",
+    "errorTextGeneric": "Something went wrong. Try again later.",
     "errorTextEmailsNotMatching": "Email addresses must match and be valid.",
     "accountSuccessSnackbarTitleExistingAccount": "Your myNewJersey Account is Linked",
     "nameFieldLabel": "Full name",
     "investNewarkContactSharingCheckboxLabel": "I am willing to share my full name and email with Invest Newark for access to the Newark Navigator Service (free Newark business support and resource referrals).",
     "userTestingCheckboxLabel": "I am willing to be contacted to provide feedback on Business.NJ.gov.",
     "signUpTitleText": "Create account",
-    "errorTextRequiredFields": "Please fill in all fields.",
-    "errorTextDuplicateSignUp": "This email is already registered. Please log in instead.",
+    "errorTextRequiredFields": "Fill in all fields.",
+    "errorTextDuplicateSignUp": "This email is already registered. Log in instead.",
     "errorTextFullName": "Full name is required",
     "needsAccountModalSubText": "Already have an account? [Log In](#)",
-    "signUpDescriptionText": "To get started, please enter your name and email address below.",
+    "signUpDescriptionText": "To get started, enter your name and email address below.",
     "errorTextFullNameLength": "Full name must be 50 characters or fewer",
     "emailFieldLabel": "Email",
     "confirmEmailFieldLabel": "Confirm email",
@@ -146,7 +146,7 @@
     "fieldLabel": "NJ Business Effective Date (mm/yyyy)",
     "areYouSureModalHeader": "Didn't Form Yet?",
     "saveButtonText": "Save",
-    "description": "To see your annual report due date, please provide your Business's `effective date|effective-date` (the date you formed your business) below."
+    "description": "To see your annual report due date, provide your Business's `effective date|effective-date` (the date you formed your business) below."
   },
   "licenseSearchTask": {
     "voluntarySurrenderPermitStatusText": "Voluntary Surrender",
@@ -157,7 +157,7 @@
     "primaryCTASecondLineText": "with the Division of Consumer Affairs",
     "stateLabel": "State",
     "checklistCompletedStatusText": "Checklist Completed",
-    "errorTextNotFound": "License could not be found. Please try again or contact your licensing agency for more information.",
+    "errorTextNotFound": "License could not be found. Try again or contact your licensing agency for more information.",
     "submitText": "Submit",
     "closedPermitStatusText": "Closed",
     "zipCodeLabel": "ZIP Code",
@@ -170,8 +170,8 @@
     "inactiveStatusText": "Inactive",
     "scheduledStatusText": "Scheduled",
     "underInternalReviewStatusText": "Under Internal Review",
-    "errorTextFieldsRequired": "Please fill in all non-optional fields.",
-    "foundText": "Great, we've found your application! Please check the details below:",
+    "errorTextFieldsRequired": "Fill in all non-optional fields.",
+    "foundText": "Great, we've found your application! Check the details below:",
     "specialReviewStatusText": "Special Review",
     "tooltipText": "Your license status will update automatically after the Division of Consumer Affairs has received your application and you enter your identifying information into the “Check Status” tab below.",
     "notApplicableStatusText": "N/A",
@@ -192,7 +192,7 @@
     "reinstatementPendingPermitStatusText": "Reinstatement Pending",
     "permitStatusText": "Permit Status:",
     "submittedStatusText": "Submitted",
-    "errorTextSearchFailed": "Something went wrong. Please try again later.",
+    "errorTextSearchFailed": "Something went wrong. Try again later.",
     "incompleteStatusText": "Incomplete",
     "revokedStatusText": "Revoked",
     "pendingDeficienciesStatusText": "Pending Deficiencies",
@@ -243,14 +243,14 @@
     "unlockedByPlural": "Before starting this task, we recommend you take a look at:"
   },
   "searchBusinessNameTask": {
-    "designatorText": "It appears you have included a business designator in your name, such as LLC, LP or CORP. Please remove it at try searching again. Once you have found an available name you then can officially form your business.",
+    "designatorText": "It appears you have included a business designator in your name, such as LLC, LP or CORP. Remove it at try searching again. Once you have found an available name you then can officially form your business.",
     "searchButtonText": "Check Availability",
     "updateButtonText": "Update the name on your Roadmap with this one",
     "nameHasBeenUpdatedText": "Your business name has been updated.",
     "similarUnavailableNamesText": "Here are similar business names that are already taken:",
     "availableText": "It looks like \"${name}\" might be available, but you should do an official name check using the button below.",
     "errorTextBadInput": "That isn't a valid company name. Try a more specific name.",
-    "errorTextSearchFailed": "Unable to complete check. Please try again later.",
+    "errorTextSearchFailed": "Unable to complete check. Try again later.",
     "unavailableText": "\"${name}\" isn't available. Try another name."
   },
   "footer": {
@@ -277,7 +277,7 @@
   },
   "unsupportedNavigatorUserPage": {
     "title": "Chat with a New Jersey Business Representative",
-    "subtitle": "It seems like you might have some unique needs; please use our chat feature to get guidance from a New Jersey-based business advocate. Should something change, you can come back and use this tool again later."
+    "subtitle": "It seems like you might have some unique needs; use our chat feature to get guidance from a New Jersey-based business advocate. Should something change, you can come back and use this tool again later."
   },
   "autosaveDefaults": {
     "savingText": "Saving",
