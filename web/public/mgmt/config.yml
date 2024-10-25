@@ -4558,6 +4558,18 @@ collections:
                 collapsed: false
                 widget: object
                 fields:
+                  - label: Trade Name
+                    name: tradeName
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Error Text Required", name: "errorTextRequired", widget: "string" }
                   - label: Business Persona
                     name: businessPersona
                     collapsed: true

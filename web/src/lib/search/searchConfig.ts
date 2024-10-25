@@ -72,7 +72,7 @@ const findCmsConfigPath = (cmsConfig: any, keyPath: string[]): string[] => {
     }
   }
 
-  throw `NO MATCHING CMS PATH FOR ${keyPath.toString()}`;
+  throw `NO MATCHING CMS PATH FOR ${keyPath.toString()} (possibly missing in the CMS but exists in the JSON files)`;
 };
 
 const findFilesInCmsConfig = (cmsConfig: any, key: string): FileMatch[] => {
