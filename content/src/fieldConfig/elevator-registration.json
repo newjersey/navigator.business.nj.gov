@@ -8,7 +8,7 @@
     "submitText": "Submit",
     "informationalReturned": "Review your returned application for any errors or missing information. You can resubmit it using the same application link in the DCA Service Portal.",
     "registrationCallToActionPrimaryText": "Register or Update My Elevator Device Registration",
-    "errorTextFieldsRequired": "Please fill in all non-optional fields.",
+    "errorTextFieldsRequired": "Fill in all non-optional fields.",
     "errorTextNoPropertyInterestFound": "We cannot find your registration. Make sure the building address you entered matches what is in your application.",
     "registrationDeviceCountText": "Elevator devices in this application: ",
     "registrationInReviewMessage": "Check back later to make sure your elevator device(s) have been successfully registered",
@@ -21,10 +21,10 @@
     "address2Label": "Building Street Address Line 2 (Optional)",
     "address1Label": "Building Street Address Line 1",
     "registrationStatusText": "Status: ",
-    "registrationApplicationFoundText": "Great, we've found your application(s)! Please check the details below.",
+    "registrationApplicationFoundText": "Great, we've found your application(s)! Check the details below.",
     "municipalityLabel": "Municipality",
     "registrationCallToActionSecondaryText": "Check My Registration Application Status",
-    "errorTextSearchFailed": "Something went wrong. Please try again later.",
+    "errorTextSearchFailed": "Something went wrong. Try again later.",
     "registrationRejectedOrReturnedMessage": "Review your incomplete or returned application(s) for any errors or missing information. If your application was returned, you can resubmit it using the same application link in the DCA Service Portal."
   },
   "elevatorViolationsCard": {
