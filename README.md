@@ -369,3 +369,19 @@ Innovation team, please email us at
 If you are excited to design and deliver modern policies and services to improve
 the lives of all New Jerseyans, you should
 [join us](https://innovation.nj.gov/join.html)!
+
+### Temporary Disablement of Webflow Sync Jobs
+
+Business.NJ.gov is committed to maintaining a stable and reliable CI pipeline.
+To support this, we have temporarily disabled the Webflow sync jobs.
+This change prevents potential issues while we work on improvements to the sync process.
+
+This decision affects the following workflows.
+
+- **Webflow sync jobs**: `webflow-fundings-sync`, `webflow-licenses-sync`, and `sync-industries`
+- jobs have been removed from the `webflow-industries-sync` workflow.
+- **Impact**: This ensures all essential CI processes, such as release and deployment tasks, continue without disruption.
+
+With these jobs disabled, the pipeline will function normally without executing the Webflow syncs.
+This will ensure that all essential processes in the release pipeline,
+staging deployment, and production deployment proceed unaffected.
