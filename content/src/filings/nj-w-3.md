@@ -2,8 +2,9 @@
 urlSlug: nj-w-3
 name: Employer Withholding Tax
 extension: false
+summaryDescriptionMd: \
 treasuryLink: https://www.nj.gov/treasury/taxation/businesses/payroll/index.shtml
-taxRates: Tax rates vary, please refer to the [New Jersey Income Tax Withholding
+taxRates: Tax rates vary. Refer to the [New Jersey Income Tax Withholding
   Instructions](https://www.state.nj.us/treasury/taxation/pdf/current/njwt.pdf)
   or the [New Jersey Department of Taxation withholding
   tables](https://www.nj.gov/treasury/taxation/pdf/withholdingtables.pdf).
