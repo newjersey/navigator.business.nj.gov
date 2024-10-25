@@ -3,14 +3,14 @@
     "naicsLink": "[Naics.com](https://www.naics.com/)",
     "successMessage": "NAICS code ${code} has been saved.",
     "invalidValidationErrorText": "Your NAICS code is invalid",
-    "hasSavedCodeHeader": "Your NAICS Code",
-    "ariaLabelText": "your NAICS code",
     "missingNAICSCodePlaceholder": "(You have not saved a NAICS Code yet)",
+    "hasSavedCodeHeader": "Your NAICS Code",
     "findCodeHeader": "Find Your NAICS Code",
     "findCodeBodyText": "Use the resource listed below to search and find your NAICS code. **This information is used for data and analysis purposes by State and Federal governments, and does not directly impact your business.**",
     "lengthValidationErrorText": "Your NAICS code must be 6 digits",
+    "ariaLabelText": "your NAICS code",
+    "naicsDescriptionURL": "https://www.naics.com/naics-code-description/?v=2022&code=${code}",
     "saveButtonText": "Save NAICS Code",
-    "suggestedCodeBodyText": "Based on the information you have provided, we recommend the NAICS codes listed below.\n **This information is used for data and analysis purposes by State and Federal governments, and does not directly impact your business.**\n\nPlease select one that best represents your primary business activity.",
-    "naicsDescriptionURL": "https://www.naics.com/naics-code-description/?v=2022&code=${code}"
+    "suggestedCodeBodyText": "Based on the information you have provided, we recommend the NAICS codes listed below.\n **This information is used for data and analysis purposes by State and Federal governments, and does not directly impact your business.**\n\nSelect one that best represents your primary business activity."
   }
 }
