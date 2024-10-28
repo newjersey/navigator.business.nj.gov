@@ -7,8 +7,6 @@ import { licenseStatusRouterFactory } from "@api/licenseStatusRouter";
 import { selfRegRouterFactory } from "@api/selfRegRouter";
 import { taxDecryptionRouterFactory } from "@api/taxDecryptionRouter";
 import { userRouterFactory } from "@api/userRouter";
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
@@ -39,7 +37,7 @@ import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
 import { WebserviceLicenseStatusClient } from "@client/WebserviceLicenseStatusClient";
 import { WebserviceLicenseStatusProcessorClient } from "@client/WebserviceLicenseStatusProcessorClient";
-import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
+import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import { HealthCheckMethod } from "@domain/types";
 import { updateSidebarCards } from "@domain/updateSidebarCards";
@@ -64,30 +62,7 @@ const app = setupExpress();
 
 const IS_OFFLINE = process.env.IS_OFFLINE === "true" || false; // set by serverless-offline
 const IS_DOCKER = process.env.IS_DOCKER === "true" || false; // set in docker-compose
-
-const DYNAMO_OFFLINE_PORT = process.env.DYNAMO_PORT || 8000;
-let dynamoDb: DynamoDBDocumentClient;
-if (IS_OFFLINE) {
-  let dynamoDbEndpoint = "localhost";
-  if (IS_DOCKER) {
-    dynamoDbEndpoint = "dynamodb-local";
-  }
-  dynamoDb = DynamoDBDocumentClient.from(
-    new DynamoDBClient({
-      region: "localhost",
-      endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`,
-    }),
-    dynamoDbTranslateConfig
-  );
-} else {
-  dynamoDb = DynamoDBDocumentClient.from(
-    new DynamoDBClient({
-      region: "us-east-1",
-    }),
-    dynamoDbTranslateConfig
-  );
-}
-
+const DYNAMO_OFFLINE_PORT = Number.parseInt(process.env.DYNAMO_PORT || "8000");
 const STAGE = process.env.STAGE || "local";
 const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
 const dataLogger = LogWriter(`aws/${STAGE}`, "DataMigrationLogs");
@@ -295,8 +270,8 @@ const airtableUserTestingClient = AirtableUserTestingClient(
   },
   logger
 );
-
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
+const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
 const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, dataLogger);
 
 const taxFilingInterface = taxFilingsInterfaceFactory(taxFilingClient);

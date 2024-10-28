@@ -81,6 +81,7 @@ describe("userRouter", () => {
       getNeedNewsletterUsers: jest.fn(),
       getNeedToAddToUserTestingUsers: jest.fn(),
       getNeedTaxIdEncryptionUsers: jest.fn(),
+      getUsersWithOutdatedVersion: jest.fn(),
     };
     stubUpdateLicenseStatus = jest.fn();
     stubUpdateRoadmapSidebarCards = jest.fn();
