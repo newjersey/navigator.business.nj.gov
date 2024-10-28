@@ -216,19 +216,20 @@ describe("task page", () => {
 
   describe("License task", () => {
     const mockTaskIdsWithLicenseSearch = [
-      "home-health-aide-license",
       "apply-for-shop-license",
-      "register-home-contractor",
+      "appraiser-company-register",
+      "authorization-architect-firm",
+      "authorization-landscape-architect-firm",
+      "cemetery-certificate",
+      "entertainment-agency-reg",
+      "health-club-registration",
+      "home-health-aide-license",
+      "license-massage-therapy",
       "pharmacy-license",
       "register-accounting-firm",
-      "license-massage-therapy",
-      "appraiser-company-register",
+      "register-home-contractor",
       "telemarketing-license",
-      "health-club-registration",
       "ticket-broker-reseller-registration",
-      "authorization-landscape-architect-firm",
-      "authorization-architect-firm",
-      "entertainment-agency-reg",
     ];
 
     it("mockTaskIdsWithLicenseSearch matches taskIdsWithLicenseSearchEnabled", () => {
