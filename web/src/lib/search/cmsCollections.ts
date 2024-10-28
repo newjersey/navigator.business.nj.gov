@@ -18,7 +18,6 @@ export const cmsCollections = [
       "Roadmaps - Add-ons",
       "Roadmaps - Non Essential Questions",
       "Roadmaps - Settings",
-      "Roadmaps - Raffle Bingo Steps",
     ],
   },
   {
@@ -27,22 +26,23 @@ export const cmsCollections = [
       "Tasks - Config",
       "Tasks - All",
       "License Tasks (Navigator with Webflow mappings)",
+      "Raffle Bingo Steps",
       "Webflow Licenses",
       "Tasks - Cannabis License",
       "Tasks - Cannabis Priority Status",
       "Tasks - EIN",
       "Tasks - Tax ID",
+      "Tasks - Municipal",
       "Tasks - NAICS Code",
       "Tasks - Business Structure",
-      "Tasks - Municipal",
     ],
   },
   {
     label: "🟪 CALENDAR",
     children: [
+      "Tax Access Modal Config",
       "Consumer Affairs License Expiration / Renewal Events",
       "Taxes Filings - All",
-      "Tax Access Modal Config",
     ],
   },
   {
@@ -50,13 +50,11 @@ export const cmsCollections = [
     children: ["Dashboard - Config", "Sidebar Cards Content"],
   },
   {
-    label: "🟧 QUICK ACTIONS",
+    label: "🟧 ANYTIME ACTIONS",
     children: [
-      "Anytime Actions",
-      "Anytime Action Tasks",
-      "Anytime Action License Reinstatements",
-      "Anytime Action Reinstatement Defaults",
-      "Anytime Action Labels",
+      "Anytime Action With Details Page",
+      "Anytime Action With Consumer Affairs License Integrations (Reinstatements)",
+      "Anytime Action License External Link Only",
     ],
   },
   {
@@ -66,19 +64,17 @@ export const cmsCollections = [
   {
     label: "🟩 MISC",
     children: [
-      "Starter Kits",
       "Anytime Action Reinstatement and License Calendar Event Status Defaults",
+      "Starter Kits",
       "Callout Defaults",
-      "Export Pdf Config",
       "Dropdown Mappings",
       "General Config",
       "Profile Page",
-      "Post Onboarding Content",
       "Contextual Information",
       "404 Page",
+      "Component Accessibility",
       "Global Error Messages",
       "Navigation Config",
-      "Component Accessibility",
     ],
   },
 ];
