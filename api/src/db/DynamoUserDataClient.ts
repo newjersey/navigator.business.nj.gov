@@ -136,6 +136,11 @@ export const DynamoUserDataClient = (
     return search(statement);
   };
 
+  const getUsersWithOutdatedVersion = async (latestVersion: number): Promise<UserData[]> => {
+    const statement = `SELECT data FROM "${tableName}" WHERE data["version"] < ${CURRENT_VERSION}`;
+    return await search(statement);
+  };
+
   const search = async (statement: string): Promise<UserData[]> => {
     const { Items = [] } = await db.send(new ExecuteStatementCommand({ Statement: statement }));
     return await Promise.all(
@@ -153,5 +158,6 @@ export const DynamoUserDataClient = (
     getNeedNewsletterUsers,
     getNeedToAddToUserTestingUsers,
     getNeedTaxIdEncryptionUsers,
+    getUsersWithOutdatedVersion,
   };
 };
