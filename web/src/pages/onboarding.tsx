@@ -186,6 +186,13 @@ const OnboardingPage = (props: Props): ReactElement => {
 
       let currentUserData = updateQueue?.current();
 
+      console.log({ state });
+      if (state.activeUser.id.includes("@")) {
+        console.log("onboarding: not linked");
+        router.push(ROUTES.linkMyNJAccount);
+        return;
+      }
+
       if (protectUpdateQueueAgainstRaceCondition(currentUserData)) {
         router.push(ROUTES.dashboard);
         return;

@@ -12,6 +12,7 @@ export const ROUTES = {
   welcome: "/welcome",
   accountSetup: "/account-setup",
   starterKits: "/starter-kits",
+  linkMyNJAccount: "/link-mynj-account",
 };
 
 export interface QUERY_PARAMS_VALUES {

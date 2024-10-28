@@ -19,6 +19,7 @@ const LoadingPage = (): ReactElement => {
   const { dispatch } = useContext(AuthContext);
 
   useEffect(() => {
+    console.log("useEffect");
     if (!router.isReady) {
       return;
     }
@@ -40,6 +41,7 @@ const LoadingPage = (): ReactElement => {
   }, [router, dispatch]);
 
   useMountEffectWhenDefined(() => {
+    console.log("useMountEffectWhenDefined");
     if (!updateQueue) return;
     const business = updateQueue.currentBusiness();
     if (!onboardingCompleted(business)) {

@@ -9,14 +9,13 @@ import {
 } from "@domain/types";
 import { encryptTaxIdFactory } from "@domain/user/encryptTaxIdFactory";
 import { NameAvailability } from "@shared/businessNameSearch";
-import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { createEmptyFormationFormData } from "@shared/formationData";
 import { LicenseName, LicenseSearchNameAndAddress } from "@shared/license";
 import { modifyCurrentBusiness } from "@shared/test";
-import { Business, createEmptyUserData, UserData } from "@shared/userData";
-import { Request, Response, Router } from "express";
+import { Business, UserData } from "@shared/userData";
+import { Request, Router } from "express";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
 
@@ -150,11 +149,11 @@ export const userRouterFactory = (
       })
       .catch((error: Error) => {
         if (error.message === "Not found") {
-          if (process.env.IS_OFFLINE || process.env.STAGE === "dev") {
-            saveEmptyUserData(req, res, signedInUserId);
-          } else {
-            res.status(StatusCodes.NOT_FOUND).json({ error: error.message });
-          }
+          // if (process.env.IS_OFFLINE || process.env.STAGE === "dev") {
+          //   saveEmptyUserData(req, res, signedInUserId);
+          // } else {
+          res.status(StatusCodes.NOT_FOUND).json({ error: error.message });
+          // }
         } else {
           res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
         }
@@ -254,31 +253,31 @@ export const userRouterFactory = (
     return userData;
   };
 
-  const saveEmptyUserData = (req: Request, res: Response, signedInUserId: string): void => {
-    const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
+  // const saveEmptyUserData = (req: Request, res: Response, signedInUserId: string): void => {
+  //   const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
 
-    const emptyUserData = createEmptyUserData({
-      myNJUserKey: signedInUserId,
-      email: signedInUser.email,
-      id: signedInUserId,
-      name: "Test User",
-      externalStatus: {},
-      receiveNewsletter: true,
-      userTesting: true,
-      abExperience: decideABExperience(),
-      accountCreationSource: "Test Source",
-      contactSharingWithAccountCreationPartner: true,
-    });
+  //   const emptyUserData = createEmptyUserData({
+  //     myNJUserKey: signedInUserId,
+  //     email: signedInUser.email,
+  //     id: signedInUserId,
+  //     name: "Test User",
+  //     externalStatus: {},
+  //     receiveNewsletter: true,
+  //     userTesting: true,
+  //     abExperience: decideABExperience(),
+  //     accountCreationSource: "Test Source",
+  //     contactSharingWithAccountCreationPartner: true,
+  //   });
 
-    userDataClient
-      .put(emptyUserData)
-      .then((result) => {
-        res.json(result);
-      })
-      .catch((error) => {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
-      });
-  };
+  //   userDataClient
+  //     .put(emptyUserData)
+  //     .then((result) => {
+  //       res.json(result);
+  //     })
+  //     .catch((error) => {
+  //       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
+  //     });
+  // };
 
   const updateBusinessNameSearchIfNeeded = async (userData: UserData): Promise<UserData> => {
     if (!shouldUpdateBusinessNameSearch(userData)) {
