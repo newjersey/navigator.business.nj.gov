@@ -100,6 +100,7 @@ export const taskIdLicenseNameMapping = {
   "ticket-broker-reseller-registration": "Ticket Brokers",
   "telemarketing-license": "Telemarketers",
   "entertainment-agency-reg": "Employment & Personnel Service-Entertainment/Booking Agency",
+  "cemetery-certificate": "Cemetery-Cemetery",
 } as const;
 
 export const LicenseNameTaskIdMapping = Object.fromEntries(
