@@ -321,7 +321,7 @@ if (stage !== contentEnv && stage !== testEnv) {
     ),
   };
 }
-if (stage === testEnv || stage === "local") {
+if (stage === testEnv || stage === devEnv || stage === "local") {
   serverlessConfiguration.functions = {
     ...serverlessConfiguration.functions,
     migrateUsersVersion: migrateUsersVersion(
