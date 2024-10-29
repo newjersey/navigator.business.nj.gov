@@ -28,7 +28,7 @@
         "default": {
           "header": "Industry Sector",
           "description": "",
-          "errorTextRequired": "Please select an industry sector."
+          "errorTextRequired": "Select an industry sector."
         },
         "onboarding": {
           "default": {
@@ -84,7 +84,7 @@
       "responsibleOwnerName": {
         "default": {
           "header": "Responsible Owner Name",
-          "errorTextRequired": "Please enter your responsible owner name.",
+          "errorTextRequired": "Enter your responsible owner name.",
           "description": "Enter your Last Name, First Name and Middle Initial. The name must match exactly the name listed on your tax confirmation email."
         }
       },
@@ -100,7 +100,7 @@
         "default": {
           "header": "Out-of-State Businesses",
           "description": "Which of the following are **true** about your business? **Select all that apply.**",
-          "errorTextRequired": "Please make a selection.",
+          "errorTextRequired": "Make a selection.",
           "optionContent": {
             "employeeOrContractorInNJ": "I have an employee or independent contractor acting as a sales or manufacturing representative in New Jersey",
             "officeInNJ": "I currently own/lease or plan to own/lease space in New Jersey",
@@ -172,7 +172,7 @@
           "radioButtonStartingText": "Starting a New Jersey-based business",
           "radioButtonOwningText": "A New Jersey business already up and running",
           "radioButtonForeignText": "An out-of-state business",
-          "errorTextRequired": "Please select whether you have an existing business.",
+          "errorTextRequired": "Select whether you have an existing business.",
           "description": "Are you:"
         }
       },
@@ -187,7 +187,7 @@
       "tradeName": {
         "default": {
           "header": "Trade Name",
-          "errorTextRequired": "Please enter your trade name."
+          "errorTextRequired": "Enter your trade name."
         }
       },
       "ownershipTypeIds": {
@@ -212,35 +212,26 @@
           "description": "Which type of residential construction do you plan to do?"
         }
       },
-      "nexusDbaName": {
-        "default": {
-          "header": "Doing Business As (DBA) New Jersey Business Name",
-          "headerContextualInfo": "dba-resolution-foreign",
-          "description": "What is your DBA name?",
-          "errorTextRequired": "Please enter your DBA name."
-        }
-      },
-      "employmentAgency": {
-        "default": {
-          "header": "Employment and Personnel Services Type",
-          "description": "Learn about other `employment and personnel service types|employment-agency-types` ."
-        }
-      },
-      "propertyLeaseType": {
-        "default": {
-          "header": "Property Lease Type",
-          "radioButtonShortTermRentalText": "Short Term",
-          "radioButtonLongTermRentalText": "Long Term",
-          "radioButtonBothText": "Both",
-          "description": "How will you lease your property?"
-        }
-      },
       "hasThreeOrMoreRentalUnits": {
         "default": {
           "header": "Rental Unit Count",
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
           "description": "Will your property have three or more units?"
+        }
+      },
+      "nexusDbaName": {
+        "default": {
+          "header": "Doing Business As (DBA) New Jersey Business Name",
+          "headerContextualInfo": "dba-resolution-foreign",
+          "description": "What is your DBA name?",
+          "errorTextRequired": "Enter your DBA name."
+        }
+      },
+      "employmentAgency": {
+        "default": {
+          "header": "Employment and Personnel Services Type",
+          "description": "Learn about other `employment and personnel service types|employment-agency-types` ."
         }
       },
       "cannabisLicenseType": {
@@ -374,6 +365,15 @@
           }
         }
       },
+      "raffleBingoGames": {
+        "default": {
+          "header": "Raffle or Bingo Game",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Will you be holding, operating, or conducting raffles or bingo games?",
+          "altDescription": "Will you be holding, operating, or conducting raffles or bingo games?"
+        }
+      },
       "employmentPersonnelServiceType": {
         "default": {
           "header": "Employment and Personnel Services Type",
@@ -437,13 +437,13 @@
           "description": "Are you looking to start an appraisal management company?"
         }
       },
-      "raffleBingoGames": {
+      "propertyLeaseType": {
         "default": {
-          "header": "Raffle or Bingo Game",
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Will you be holding, operating, or conducting raffles or bingo games?",
-          "altDescription": "Will you be holding, operating, or conducting raffles or bingo games?"
+          "header": "Property Lease Type",
+          "radioButtonShortTermRentalText": "Short Term",
+          "radioButtonLongTermRentalText": "Long Term",
+          "radioButtonBothText": "Both",
+          "description": "How will you lease your property?"
         }
       }
     },

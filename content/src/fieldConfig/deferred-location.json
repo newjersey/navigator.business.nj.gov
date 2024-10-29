@@ -1,7 +1,7 @@
 {
   "deferredLocation": {
     "header": "Select Your City",
-    "description": "In order to give you the right resources, please select your city. Where in New Jersey will your primary location be?",
+    "description": "Select your city to receive the right resources. Where in New Jersey will your primary location be?",
     "successText": "The city \"${city}\" has been saved.",
     "editText": "Edit City",
     "removeText": "Remove City",

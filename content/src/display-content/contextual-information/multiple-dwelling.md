@@ -11,3 +11,5 @@ A multiple dwelling is a property where people live in separate units or homes. 
 * An apartment building with three or more units where each unit is occupied by different people or households
 * A condominium complex with buildings that have three or more units owned by different people
 * A townhouse development with separate units, each occupied by different households
+
+If you own a multiple dwelling, you need to [register the property with the Department of Community Affairs](https://njdcaportal.dynamics365portals.us/ultra-bhi-home/). For more information, visit the [Department of Community Affairs website](https://www.nj.gov/dca/codes/offices/housinginspection.shtml).
