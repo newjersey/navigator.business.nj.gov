@@ -380,15 +380,12 @@ describe("<LicenseTask />", () => {
         await waitFor(() => {
           expect(screen.getByText("Draft")).toBeInTheDocument();
         });
-        expect(mockApi.checkLicenseStatus).toHaveBeenCalledWith(
-          {
-            name: "My Cool Nail Salon",
-            addressLine1: "123 Main St",
-            addressLine2: "Suite 1",
-            zipCode: "12345",
-          },
-          task.id
-        );
+        expect(mockApi.checkLicenseStatus).toHaveBeenCalledWith({
+          name: "My Cool Nail Salon",
+          addressLine1: "123 Main St",
+          addressLine2: "Suite 1",
+          zipCode: "12345",
+        });
       });
     });
 
@@ -449,16 +446,7 @@ describe("<LicenseTask />", () => {
       });
 
       it("displays NOT_FOUND error alert when license status cannot be found", async () => {
-        useMockBusiness({
-          licenseData: generateLicenseData(
-            {},
-            {
-              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
-                lastUpdatedISO: "",
-              }),
-            }
-          ),
-        });
+        useMockBusiness({});
         renderTask();
         fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
         expect(screen.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
@@ -468,10 +456,7 @@ describe("<LicenseTask />", () => {
               licenseData: generateLicenseData(
                 {},
                 {
-                  [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
-                    licenseStatus: "UNKNOWN",
-                    hasError: true,
-                  }),
+                  [taskIdLicenseNameMapping[task.id]]: {},
                 }
               ),
             })

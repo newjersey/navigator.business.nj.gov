@@ -479,7 +479,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
     });
 
     it("returns UNKNOWN when status is not valid", () => {
-      expect(determineLicenseStatus("fake status")).toBe("UNKNOWN");
+      expect(determineLicenseStatus("fake status")).toBe(undefined);
     });
   });
 });

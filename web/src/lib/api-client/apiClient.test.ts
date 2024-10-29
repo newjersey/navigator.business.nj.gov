@@ -1,7 +1,4 @@
 import { generateInputFile } from "@/test/factories";
-import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
-import { randomElementFromArray } from "@businessnjgovnavigator/shared/arrayHelpers";
-import { LicenseTaskId } from "@businessnjgovnavigator/shared/license";
 import {
   generateLicenseSearchNameAndAddress,
   generateTaxIdAndBusinessName,
@@ -64,7 +61,7 @@ describe("apiClient", () => {
     await checkLicenseStatus(nameAndAddress);
     expect(mockAxios.post).toHaveBeenCalledWith(
       "/api/license-status",
-      { nameAndAddress, licenseTaskId: undefined },
+      { nameAndAddress },
       {
         headers: { Authorization: "Bearer some-token" },
       }
@@ -74,12 +71,11 @@ describe("apiClient", () => {
   it("posts license status with licenseTaskId specified", async () => {
     mockAxios.post.mockResolvedValue({ data: {} });
     const nameAndAddress = generateLicenseSearchNameAndAddress({});
-    const licenseTaskId = randomElementFromArray(Object.keys(taskIdLicenseNameMapping));
-    await checkLicenseStatus(nameAndAddress, licenseTaskId as LicenseTaskId);
+    await checkLicenseStatus(nameAndAddress);
     expect(mockAxios.post).toHaveBeenCalledWith(
       "/api/license-status",
-      { nameAndAddress, licenseTaskId },
-      {
+      { nameAndAddress },
+     {
         headers: { Authorization: "Bearer some-token" },
       }
     );

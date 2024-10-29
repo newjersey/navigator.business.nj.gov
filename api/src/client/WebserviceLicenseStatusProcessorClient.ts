@@ -74,7 +74,7 @@ const updateChecklist = (
   return checklist;
 };
 
-export const determineLicenseStatus = (value: string): LicenseStatus => {
+export const determineLicenseStatus = (value: string): LicenseStatus | undefined => {
   switch (value) {
     case "Active":
       return "ACTIVE";
@@ -98,8 +98,6 @@ export const determineLicenseStatus = (value: string): LicenseStatus => {
       return "VOLUNTARY_SURRENDER";
     case "Withdrawn":
       return "WITHDRAWN";
-    default:
-      return "UNKNOWN";
   }
 };
 
