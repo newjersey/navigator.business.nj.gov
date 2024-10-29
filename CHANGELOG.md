@@ -1,3 +1,21 @@
+# [2024.33.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.32.0...v2024.33.0) (2024-10-29)
+
+
+### Bug Fixes
+
+* [[#188137268](https://github.com/newjersey/navigator.business.nj.gov/issues/188137268)] remove webflow home builder record from licensing & certification guide on webflow ([3946f24](https://github.com/newjersey/navigator.business.nj.gov/commit/3946f24be6cb07c383ea6567411890abf041d439))
+* [[#188456671](https://github.com/newjersey/navigator.business.nj.gov/issues/188456671)] renewal calendar event summary description field is now optional as desired ([4203eed](https://github.com/newjersey/navigator.business.nj.gov/commit/4203eed1e327964049cc8a7bfc93b8d4872cbe42))
+* [[#188462617](https://github.com/newjersey/navigator.business.nj.gov/issues/188462617)] 'Sorry' removed in Check name error ([077bf6f](https://github.com/newjersey/navigator.business.nj.gov/commit/077bf6fe2b8c18d7266f98d0cb7302ef616acd3f))
+* [[#188462617](https://github.com/newjersey/navigator.business.nj.gov/issues/188462617)] allowing content on certain CMS pages to be updated correctly ([5eac578](https://github.com/newjersey/navigator.business.nj.gov/commit/5eac5789c5707f4b9786d0fc52e23c647ca5b56b))
+* [[#188462617](https://github.com/newjersey/navigator.business.nj.gov/issues/188462617)] fixed CMS search ([f8296cb](https://github.com/newjersey/navigator.business.nj.gov/commit/f8296cb6e3d756e7ed28a6e2af57a7d11e23403c))
+* **deps:** update dependency @aws-crypto/client-node to v4.0.2 ([8dfc220](https://github.com/newjersey/navigator.business.nj.gov/commit/8dfc220593b3e2f5c0630ad2247549cee63f45e6))
+
+
+### Features
+
+* [[#187570392](https://github.com/newjersey/navigator.business.nj.gov/issues/187570392)] raffle-bingo-nonessential-ques-license-task ([2b6d050](https://github.com/newjersey/navigator.business.nj.gov/commit/2b6d0507476aa687bd01889daea110c630190ed9))
+* [[#188427382](https://github.com/newjersey/navigator.business.nj.gov/issues/188427382)] Add location dependant section to landlord and short term registration tasks ([b92d577](https://github.com/newjersey/navigator.business.nj.gov/commit/b92d577aa3eadec3b5386af49755b9d318e25f93))
+
 # [2024.32.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.31.0...v2024.32.0) (2024-10-23)
 
 

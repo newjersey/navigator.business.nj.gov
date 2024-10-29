@@ -1,4 +1,5 @@
 ---
+licenseName: ""
 id: alarm-locksmith-business-license
 webflowId: 6721493ccddf06cbf7fe46b4
 urlSlug: alarm-locksmith-business-license
@@ -8,6 +9,7 @@ webflowName:
 filename: alarm-locksmith-business-license
 callToActionLink: https://www.njconsumeraffairs.gov/fbl/Applications/Application-for-a-Business-License.pdf
 callToActionText: Apply for My Business License
+webflowIndustry: ""
 agencyId: nj-consumer-affairs
 divisionPhone: (973) 504-6245
 industryId: electrical-contractor
