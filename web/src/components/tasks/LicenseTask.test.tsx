@@ -515,6 +515,13 @@ describe("<LicenseTask />", () => {
               }),
             }
           ),
+          formationData: generateFormationData({
+            formationFormData: generateFormationFormData({
+              addressLine1: "",
+              addressLine2: "",
+              addressZipCode: "",
+            }),
+          }),
         });
         renderTask();
         fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
