@@ -5,7 +5,7 @@ export interface ExpressRequestBody<T> extends Express.Request {
 }
 
 export type LicenseChecklistResponse = {
-  licenseStatus: LicenseStatus;
+  licenseStatus: LicenseStatus | undefined;
   expirationDateISO: string | undefined;
   checklistItems: LicenseStatusItem[];
   professionNameAndLicenseType: string;

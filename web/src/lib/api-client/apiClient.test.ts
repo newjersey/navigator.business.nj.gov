@@ -64,7 +64,7 @@ describe("apiClient", () => {
     await checkLicenseStatus(nameAndAddress);
     expect(mockAxios.post).toHaveBeenCalledWith(
       "/api/license-status",
-      { nameAndAddress, licenseTaskId: undefined },
+      { nameAndAddress },
       {
         headers: { Authorization: "Bearer some-token" },
       }
@@ -75,10 +75,10 @@ describe("apiClient", () => {
     mockAxios.post.mockResolvedValue({ data: {} });
     const nameAndAddress = generateLicenseSearchNameAndAddress({});
     const licenseTaskId = randomElementFromArray(Object.keys(taskIdLicenseNameMapping));
-    await checkLicenseStatus(nameAndAddress, licenseTaskId as LicenseTaskId);
+    await checkLicenseStatus(nameAndAddress);
     expect(mockAxios.post).toHaveBeenCalledWith(
       "/api/license-status",
-      { nameAndAddress, licenseTaskId },
+      { nameAndAddress},
       {
         headers: { Authorization: "Bearer some-token" },
       }

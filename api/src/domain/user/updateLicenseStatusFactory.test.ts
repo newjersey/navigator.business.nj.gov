@@ -275,23 +275,10 @@ describe("updateLicenseStatus", () => {
       const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
       const resultLicenseData = resultCurrentBusiness.licenseData;
-      const licenseType1Expected = {
-        "Pharmacy-Pharmacy": {
-          licenseStatus: "UNKNOWN",
-          expirationDateISO: undefined,
-          hasError: true,
-
-          checklistItems: [],
-          nameAndAddress,
-          lastUpdatedISO: expectedCurrentDate,
-        },
-      };
 
       expect(resultLicenseData).toEqual({
         lastUpdatedISO: expectedCurrentDate,
-        licenses: {
-          ...licenseType1Expected,
-        },
+        licenses: {},
       });
     });
 
@@ -314,23 +301,10 @@ describe("updateLicenseStatus", () => {
         const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
         const resultLicenseData = resultCurrentBusiness.licenseData;
-        const licenseType1Expected = {
-          "Health Care Services": {
-            licenseStatus: "UNKNOWN",
-            expirationDateISO: undefined,
-            hasError: true,
-
-            checklistItems: [],
-            nameAndAddress,
-            lastUpdatedISO: expectedCurrentDate,
-          },
-        };
 
         expect(resultLicenseData).toEqual({
           lastUpdatedISO: expectedCurrentDate,
-          licenses: {
-            ...licenseType1Expected,
-          },
+          licenses: {},
         });
       }
     );

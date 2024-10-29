@@ -60,12 +60,12 @@ describe("licenseStatusRouter", () => {
     // Note: When search is not initiated from a license task, licenseTaskID should be undefined
     const licenseTaskID = undefined;
     stubUserDataClient.get.mockResolvedValue(userData);
-    const response = await request(app).post(`/license-status`).send({ nameAndAddress, licenseTaskID });
+    const response = await request(app).post(`/license-status`).send({ nameAndAddress });
     expect(response.status).toEqual(StatusCodes.OK);
     expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
     expect(stubUserDataClient.put).toHaveBeenCalledWith(userData);
     expect(response.body).toEqual(userData);
-    expect(stubUpdateLicenseStatus).toHaveBeenCalledWith(userData, nameAndAddress, licenseTaskID);
+    expect(stubUpdateLicenseStatus).toHaveBeenCalledWith(userData, nameAndAddress);
   });
 
   it("returns user data with updated license status when search initiated by user from a license task", async () => {
@@ -76,12 +76,12 @@ describe("licenseStatusRouter", () => {
     const nameAndAddress = generateLicenseSearchNameAndAddress({});
     const licenseTaskId = "some-id";
     stubUserDataClient.get.mockResolvedValue(userData);
-    const response = await request(app).post(`/license-status`).send({ nameAndAddress, licenseTaskId });
+    const response = await request(app).post(`/license-status`).send({ nameAndAddress });
     expect(response.status).toEqual(StatusCodes.OK);
     expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
     expect(stubUserDataClient.put).toHaveBeenCalledWith(userData);
     expect(response.body).toEqual(userData);
-    expect(stubUpdateLicenseStatus).toHaveBeenCalledWith(userData, nameAndAddress, licenseTaskId);
+    expect(stubUpdateLicenseStatus).toHaveBeenCalledWith(userData, nameAndAddress);
   });
 
   it("returns INTERNAL SERVER ERROR if license search errors", async () => {

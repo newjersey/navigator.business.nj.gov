@@ -20,7 +20,7 @@ export const licenseStatusRouterFactory = (
     const userId = getSignedInUserId(req);
     const { nameAndAddress, licenseTaskId } = req.body as LicenseStatusRequestBody;
     const userData = await userDataClient.get(userId);
-    updateLicenseStatus(userData, nameAndAddress, licenseTaskId)
+    updateLicenseStatus(userData, nameAndAddress)
       .then(async (userData: UserData) => {
         const updatedUserData = await userDataClient.put(userData);
         res.json(updatedUserData);

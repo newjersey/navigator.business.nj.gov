@@ -42,7 +42,6 @@ const getLicenseTasksProgress = (licenseStatusResult: LicenseStatusResults): Rec
 const getLicenses = (args: {
   nameAndAddress: LicenseSearchNameAndAddress;
   licenseStatusResult: LicenseStatusResults;
-  taskIdWithError?: LicenseTaskId;
 }): Licenses => {
   const results: Licenses = {};
   for (const key of Object.keys(args.licenseStatusResult) as LicenseName[]) {
@@ -51,20 +50,6 @@ const getLicenses = (args: {
       nameAndAddress: args.nameAndAddress,
       lastUpdatedISO: getCurrentDateISOString(),
     } as LicenseDetails;
-  }
-  const licenseRelatedToCurrentTask = args.taskIdWithError
-    ? taskIdLicenseNameMapping[args.taskIdWithError]
-    : undefined;
-
-  if (licenseRelatedToCurrentTask && !(licenseRelatedToCurrentTask in results)) {
-    results[licenseRelatedToCurrentTask] = {
-      nameAndAddress: args.nameAndAddress,
-      licenseStatus: "UNKNOWN",
-      expirationDateISO: undefined,
-      lastUpdatedISO: getCurrentDateISOString(),
-      checklistItems: [],
-      hasError: true,
-    };
   }
 
   return results;
@@ -75,7 +60,6 @@ const update = (
   args: {
     nameAndAddress: LicenseSearchNameAndAddress;
     licenseStatusResult: LicenseStatusResults;
-    taskIdWithError?: LicenseTaskId;
   }
 ): UserData => {
   // TODO: In a future state we need to account for existing license data with address that does not match search query
@@ -106,8 +90,7 @@ export const updateLicenseStatusFactory = (
 ): UpdateLicenseStatus => {
   return async (
     userData: UserData,
-    nameAndAddress: LicenseSearchNameAndAddress,
-    taskId?: LicenseTaskId
+    nameAndAddress: LicenseSearchNameAndAddress
   ): Promise<UserData> => {
     const webserviceLicenseStatusPromise = webserviceLicenseStatusSearch(nameAndAddress);
     const rgbLicenseStatusPromise = rgbLicenseStatusSearch(nameAndAddress);
@@ -135,8 +118,7 @@ export const updateLicenseStatusFactory = (
           if (webserviceHasInvalidMatch || rgbHasInvalidMatch) {
             return update(userData, {
               nameAndAddress: nameAndAddress,
-              licenseStatusResult: {},
-              taskIdWithError: taskId,
+              licenseStatusResult: {}
             });
           }
 

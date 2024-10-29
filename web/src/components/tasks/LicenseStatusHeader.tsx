@@ -90,7 +90,6 @@ export const LicenseStatusHeader = (props: Props): ReactElement => {
     DENIED: Config.licenseSearchTask.deniedPermitStatusText,
     VOLUNTARY_SURRENDER: Config.licenseSearchTask.voluntarySurrenderPermitStatusText,
     WITHDRAWN: Config.licenseSearchTask.withdrawnPermitStatusText,
-    UNKNOWN: "",
     DRAFT: Config.licenseSearchTask.draftStatusText,
     SUBMITTED: Config.licenseSearchTask.submittedStatusText,
     UNDER_INTERNAL_REVIEW: Config.licenseSearchTask.underInternalReviewStatusText,

@@ -5,7 +5,7 @@ export type LicenseStatusItem = {
 
 export type CheckoffStatus = "ACTIVE" | "PENDING" | "INCOMPLETE" | "SCHEDULED" | "NOT_APPLICABLE";
 
-export const licenseStatuses: LicenseStatusFromAPI[] = [
+export const licenseStatuses: LicenseStatus[] = [
   "ACTIVE",
   "PENDING",
   "EXPIRED",
@@ -33,10 +33,8 @@ export const licenseStatuses: LicenseStatusFromAPI[] = [
   "REVOKED",
 ];
 
-export type LicenseStatus = LicenseStatusFromAPI | LicenseStatusForError;
 
-export type LicenseStatusForError = "UNKNOWN";
-export type LicenseStatusFromAPI =
+export type LicenseStatus =
   | "ACTIVE"
   | "PENDING"
   | "EXPIRED"
@@ -69,7 +67,6 @@ export type LicenseDetails = {
   expirationDateISO: string | undefined;
   lastUpdatedISO: string;
   checklistItems: LicenseStatusItem[];
-  hasError?: boolean;
 };
 
 export const enabledLicensesSources = {
