@@ -36,7 +36,10 @@ export const migrateUserVersion = (
       });
     })
     .catch((error) => {
-      logger.LogError(`Migration failed: ${error instanceof Error ? error.message : "Unknown error"}`);
+      const errorMessage = `MigrateUserVersions Failed: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`;
+      logger.LogError(errorMessage);
       return { success: false, error: error instanceof Error ? error.message : "Unknown error" };
     });
 };
