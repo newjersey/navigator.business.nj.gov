@@ -1,18 +1,18 @@
 ---
-id: supply-cds
-webflowId: 6721493f43b6800b762e24ab
-urlSlug: supply-cds
-name: Apply for Your Manufacturer or Wholesale Distributor’s Controlled Dangerous Substances Registration
-displayname: supply-cds
-webflowName: "All Other Businesses: Manufacturer or Wholesale Distributor Controlled Dangerous Substances Registration"
-filename: supply-cds
+id: manufacture-cds
+webflowId: 6721493ee07ef7099ac1cb40
+urlSlug: manufacture-cds
+name: Apply for Your Manufacturer Controlled Dangerous Substances Registration
+displayname: manufacture-cds
+webflowName: "All Other Businesses: Manufacturer Controlled Dangerous Substances Registration"
+filename: manufacture-cds
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: New Jersey Drug Control Unit
 industryId: generic
 licenseCertificationClassification: undefined
-summaryDescriptionMd: "You need a Controlled Dangerous Substances (CDS) registration if you manufacture, repackage, label, or buy and sell any products containing CDS. Follow these steps to apply:
+summaryDescriptionMd: "You need a Controlled Dangerous Substances (CDS) registration if you manufacture any product containing CDS. You also need it if you prepare, process, repackage, or label substances and use or handle CDS in the process. Follow these steps to apply:
 
-1. Email the NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the CDS registration application for Manufacturers or Wholesale Distributors.
+1. Email the NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the CDS registration application for Manufacturers.
 2. After your completed application has been emailed to the DCU, they will email you an invoice to pay your fees online.
 3. Be sure to register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to the DCU within 60 days."
 ---
@@ -21,19 +21,19 @@ summaryDescriptionMd: "You need a Controlled Dangerous Substances (CDS) registra
 
 ### Business and Facility Information
 
-- New Jersey business address where the CDS will be handled, stored, manufactured, or distributed from (must match your DEA registration address)
+- New Jersey business address where the CDS will be handled, stored, or manufactured (must match your DEA registration address)
 - Copies of current DEA or New Jersey CDS registrations, if applicable
-- Copies of issued stock certificates (front and back) and the next blank certificate (for manufacturers only)
+- Copies of the issued stock certificates (front and back) and the next blank certificate
 - Copy of the `Certificate of Formation|certificate-formation`
-- Copy of the `Certificate of Trade Name|alt-name-trade-name` if a sole proprietorship or partnership (not a corporation)
+- Copy of the `Certificate of Trade Name,|alt-name-trade-name` if a sole proprietorship or partnership (not a corporation)
 - Copy of New Jersey Sales and Use Tax Certificate (or your application)
 - Copy of your lease if the facility or registered area is leased
 - Copy of your mortgage or deed if the facility or registered area is owned by the applicant or business
 - Copy of current Department of Health Drug and Medical Device certificate of registration
-- `Zoning Certification|zoning` completed by your local zoning officer (included in application)
+- `Zoning Certification,|zoning` completed by your local zoning officer (included in application)
 - Notarized Memorandum of Agreement (included in application)
 - Notarized CDS Statement (included in application)
-- Applicable fees paid
+- Applicable fees paid, once the NJ DCU has sent an invoice
 
 ### Employee and Operational Information
 
@@ -44,7 +44,6 @@ summaryDescriptionMd: "You need a Controlled Dangerous Substances (CDS) registra
 - Any professional or work licenses the applicant has from New Jersey or any other state
 - List of corporate officers and their titles
 - A written summary of the business’s history and how it handles making and distributing the CDS
-- List or brochure of the products offered
 
 ### Safety and Security Information
 
@@ -53,7 +52,7 @@ summaryDescriptionMd: "You need a Controlled Dangerous Substances (CDS) registra
 - A map or layout of the facility and nearby areas, showing where the safe, steel cabinet, or vault is located
 - Manufacturer details about the safe, steel cabinet, or vault used to store CDS
 - Photos of the safe, steel cabinet, or vault used to store CDS, including the area around it
-- List of CDS, by schedule, that the business uses or plans to make or distribute
+- List of CDS, by schedule, that the business uses or plans to make
 - A written plan of how the CDS will be used
 - List or brochure of the products offered
 - List of current CDS suppliers and customers, including addresses
@@ -62,7 +61,7 @@ summaryDescriptionMd: "You need a Controlled Dangerous Substances (CDS) registra
 
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" }
 
-You cannot handle, store, manufacture, or distribute CDS or products containing CDS.
+You cannot handle, store, or manufacture any CDS.
 
 :::
 
