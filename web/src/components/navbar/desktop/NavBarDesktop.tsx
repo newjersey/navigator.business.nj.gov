@@ -95,7 +95,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
             dropDownTitle={Config.navigationDefaults.landingPageDropDownTitle}
             handleClose={handleClose}
             textColor={textColor}
-            icon={<Icon className="nav-bar-dropdown-account-icon">account_circle</Icon>}
+            icon={<Icon className="nav-bar-dropdown-account-icon" iconName="account_circle" />}
             subMenuElement={[<GetStartedMenuItem key="GetStarted" />]}
           />
         </div>

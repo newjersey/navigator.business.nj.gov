@@ -62,7 +62,9 @@ export const PageFooter = (): ReactElement => {
                   aria-label={Config.footer.madeWithLoveByTheOfficeOfInnovationAriaLabel}
                 >
                   {Config.footer.madeWithText}
-                  &nbsp;<Icon className="text-accent-hot">favorite</Icon>&nbsp;
+                  &nbsp;
+                  <Icon className="text-accent-hot" iconName="favorite" />
+                  &nbsp;
                   {Config.footer.byTheOfficeOfInnovationText}
                 </a>
               </div>
@@ -93,14 +95,14 @@ export const PageFooter = (): ReactElement => {
                     aria-label="GitHub"
                     className="margin-right-105"
                   >
-                    <Icon className="footer-social-media-icon margin-top-1">github</Icon>
+                    <Icon className="footer-social-media-icon margin-top-1" iconName="github" />
                   </a>
                 </div>
               </li>
               <li>
                 <div>
                   <a href={Config.footer.facebookLink} target="_blank" rel="noreferrer" aria-label="Facebook">
-                    <Icon className="footer-social-media-icon margin-top-1">facebook</Icon>
+                    <Icon className="footer-social-media-icon margin-top-1" iconName="facebook" />
                   </a>
                 </div>
               </li>

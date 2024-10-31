@@ -108,9 +108,7 @@ export const AdditionalProvisions = (): ReactElement => {
                   onClick={(): void => removeProvision(index)}
                   className="display-flex flex-column flex-justify-center"
                 >
-                  <Icon className="font-body-lg" label="remove provision">
-                    delete
-                  </Icon>
+                  <Icon className="font-body-lg" iconName="delete" label="remove provision" />
                 </UnStyledButton>
               </div>
             </div>
@@ -124,7 +122,7 @@ export const AdditionalProvisions = (): ReactElement => {
         state.formationFormData.additionalProvisions &&
         state.formationFormData.additionalProvisions.length < 10 && (
           <UnStyledButton onClick={handleAddAnother} className="margin-top-2" dataTestid="add-new-provision">
-            <Icon>add</Icon>
+            <Icon iconName="add" />
             {Config.formation.fields.additionalProvisions.addAnotherButtonText}
           </UnStyledButton>
         )}

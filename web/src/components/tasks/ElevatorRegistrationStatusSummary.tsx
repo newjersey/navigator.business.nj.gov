@@ -93,7 +93,7 @@ export const ElevatorRegistrationStatusSummary = (props: Props): ReactElement =>
         default:
           return (
             <>
-              <Icon className={`inline-icon ${details.iconTextColor}`}>{details.icon}</Icon>
+              <Icon className={`inline-icon ${details.iconTextColor}`} iconName={details.icon} />
             </>
           );
       }

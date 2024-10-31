@@ -48,7 +48,7 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
             color: "#757575",
           }}
         >
-          <Icon className="usa-icon--size-4 text-white">close</Icon>
+          <Icon className="usa-icon--size-4 text-white" iconName="close" />
         </IconButton>
         <div>
           <img

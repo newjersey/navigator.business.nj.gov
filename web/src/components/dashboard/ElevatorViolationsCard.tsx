@@ -28,7 +28,7 @@ export const ElevatorViolationsCard = (): ReactElement => {
             }}
           >
             <span className="padding-right-1">{config.elevatorViolationsCard.violationNoticeCTA}</span>
-            <Icon>launch</Icon>
+            <Icon iconName="launch" />
           </PrimaryButton>
         </div>
       </ActionBarLayout>
