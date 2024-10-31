@@ -83,6 +83,8 @@ const dynamicsElevatorSafetyURL = process.env.DYNAMICS_ELEVATOR_SAFETY_URL || ""
 const dynamicsElevatorSafetyClientId = process.env.DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID || "";
 const dynamicsElevatorSafetySecret = process.env.DYNAMICS_ELEVATOR_SAFETY_SECRET || "";
 const dynamicsElevatorSafetyTenantId = process.env.DYNAMICS_ELEVATOR_SAFETY_TENANT_ID || "";
+const useWireMockForFormationAndBusinessSearch =
+  process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH || "";
 
 const serverlessConfiguration: AWS = {
   useDotenv: true,
@@ -242,6 +244,7 @@ const serverlessConfiguration: AWS = {
       USE_FAKE_SELF_REG: useFakeSelfReg,
       USERS_TABLE: usersTable,
       BUSINESSES_TABLE: businessesTable,
+      USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH: useWireMockForFormationAndBusinessSearch,
     } as AwsLambdaEnvironment,
     logRetentionInDays: 180,
   },

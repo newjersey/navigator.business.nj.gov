@@ -13,11 +13,12 @@ import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
+import { formationTaskId } from "@businessnjgovnavigator/shared/";
 import { isFormationTask, isTaxTask } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { useRouter } from "next/router";
-import { ReactElement, ReactNode, useContext, useState } from "react";
+import { ReactElement, ReactNode, useContext, useEffect, useState } from "react";
 
 interface Props {
   taskId: string;
@@ -36,6 +37,20 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const [taxRegistrationSnackbarIsOpen, setTaxRegistrationSnackbarIsOpen] = useState<boolean>(false);
   const router = useRouter();
   const { Config } = useConfig();
+
+  const updateTaskProgressDueToWiremockFormationCompletion =
+    process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH === "true" &&
+    business?.formationData?.completedFilingPayment &&
+    business?.formationData?.formationResponse?.success &&
+    isFormationTask(props.taskId) &&
+    business.taskProgress[formationTaskId] !== "COMPLETED";
+
+  useEffect(() => {
+    if (updateTaskProgressDueToWiremockFormationCompletion) {
+      updateQueue?.queueTaskProgress({ [formationTaskId]: "COMPLETED" });
+      updateQueue?.update();
+    }
+  }, [business, updateQueue, updateTaskProgressDueToWiremockFormationCompletion]);
 
   const currentTaskProgress: TaskProgress =
     props.STORYBOOK_ONLY_currentTaskProgress ?? business?.taskProgress[props.taskId] ?? "NOT_STARTED";

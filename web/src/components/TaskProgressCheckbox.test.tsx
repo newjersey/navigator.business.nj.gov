@@ -19,6 +19,8 @@ import {
   defaultDateFormat,
   formationTaskId,
   generateBusiness,
+  generateFormationData,
+  generateFormationSubmitResponse,
   generateProfileData,
   generateUserDataForBusiness,
   getCurrentDate,
@@ -298,6 +300,42 @@ describe("<TaskProgressCheckbox />", () => {
       fireEvent.click(screen.getAllByText(Config.formationDateModal.areYouSureModalCancelButtonText)[0]);
       expect(currentBusiness().taskProgress[id]).toEqual("COMPLETED");
       expect(currentBusiness().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
+    });
+  });
+
+  describe("wire mock is true", () => {
+    const originalEnvironment = process.env;
+
+    beforeEach(() => {
+      process.env = {
+        ...originalEnvironment,
+        USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH: "true",
+      };
+    });
+
+    afterEach(() => {
+      jest.resetModules();
+      process.env = {
+        ...originalEnvironment,
+      };
+    });
+
+    it("updates task progress for wiremock formation completion when true", () => {
+      const id = formationTaskId;
+      renderTaskCheckbox(
+        formationTaskId,
+        generateBusiness({
+          profileData: generateProfileData({ businessPersona: "STARTING" }),
+          formationData: generateFormationData({
+            completedFilingPayment: true,
+            formationResponse: generateFormationSubmitResponse({
+              success: true,
+            }),
+          }),
+        })
+      );
+
+      expect(currentBusiness().taskProgress[id]).toEqual("COMPLETED");
     });
   });
 
