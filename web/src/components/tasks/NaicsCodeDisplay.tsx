@@ -39,7 +39,7 @@ export const NaicsCodeDisplay = (props: Props): ReactElement => {
             data-testid="naics-code-tooltip"
           >
             <div className="fdr fac font-body-lg">
-              <Icon>help_outline</Icon>
+              <Icon iconName="help_outline" />
             </div>
           </ArrowTooltip>
         ) : (

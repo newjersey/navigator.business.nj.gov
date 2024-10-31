@@ -119,6 +119,10 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
     }
   };
 
+  const expandMoreIcon = (): ReactElement => {
+    return <Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />;
+  };
+
   return (
     <div className="flex flex-column space-between min-height-29rem">
       <div className="margin-bottom-3">
@@ -133,7 +137,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
             <hr />
             <Accordion defaultExpanded={true} className="margin-top-2">
               <AccordionSummary
-                expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
+                expandIcon={expandMoreIcon()}
                 aria-controls={`${Config.cannabisPriorityStatus.minorityOrWomenHeaderText}-content`}
               >
                 <Heading level={3} className="margin-y-3">
@@ -151,7 +155,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
             <hr />
             <Accordion defaultExpanded={true} className="margin-top-2">
               <AccordionSummary
-                expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
+                expandIcon={expandMoreIcon()}
                 aria-controls={`${Config.cannabisPriorityStatus.veteranHeaderText}-content`}
               >
                 <Heading level={3} className="margin-y-3">
@@ -169,7 +173,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
             <hr />
             <Accordion defaultExpanded={true} className="margin-top-2">
               <AccordionSummary
-                expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
+                expandIcon={expandMoreIcon()}
                 aria-controls={`${Config.cannabisPriorityStatus.socialEquityHeaderText}-content`}
               >
                 <Heading level={3} className="margin-y-3">

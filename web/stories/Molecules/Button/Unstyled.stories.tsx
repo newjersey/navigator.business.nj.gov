@@ -35,7 +35,7 @@ export const ArrowRightLink: Story = {
     children: (
       <>
         <span className="margin-right-2">Next Task</span>
-        <Icon className="usa-icon--size-4">navigate_next</Icon>
+        <Icon className="usa-icon--size-4" iconName="navigate_next" />
       </>
     ),
     isUnderline: false,
@@ -46,7 +46,7 @@ export const ArrowLeftLink: Story = {
   args: {
     children: (
       <>
-        <Icon className="usa-icon--size-4">navigate_before</Icon>
+        <Icon className="usa-icon--size-4" iconName="navigate_before" />
         <span className="margin-left-2">Previous Task</span>
       </>
     ),
@@ -59,7 +59,7 @@ export const ArrowBackLink: Story = {
     children: (
       <>
         <div className="bg-accent-cool-darker circle-3 icon-blue-bg-color-hover">
-          <Icon className="text-white usa-icon--size-3">arrow_back</Icon>
+          <Icon className="text-white usa-icon--size-3" iconName="arrow_back" />
         </div>
         <div className="margin-left-2 margin-y-auto font-sans-xs text-accent-cool-darker underline">
           Go back
@@ -76,7 +76,7 @@ export const ExternalLink: Story = {
     children: (
       <>
         <>Link</>
-        <Icon className="usa-icon--size-3 margin-left-05">launch</Icon>
+        <Icon className="usa-icon--size-3 margin-left-05" iconName="launch" />
       </>
     ),
     isUnderline: true,

@@ -30,6 +30,10 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
     }
   );
 
+  const expandIcon = (): ReactElement => {
+    return <Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />;
+  };
+
   return (
     <div className="flex flex-column">
       <div className="margin-bottom-4">
@@ -40,7 +44,7 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
             <Accordion defaultExpanded={true} className="margin-top-2">
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.generalApplicationNeeds}-content`}
-                expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
+                expandIcon={expandIcon()}
               >
                 <Heading level={2} styleVariant="h3" className="margin-y-3-override">
                   {Config.cannabisApplyForLicense.generalApplicationNeeds}
@@ -59,7 +63,7 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
             <Accordion defaultExpanded={true} className="margin-top-2">
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.generalApplicationNeeds}-content`}
-                expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
+                expandIcon={expandIcon()}
               >
                 <Heading level={2} styleVariant="h3" className="margin-y-3-override">
                   {Config.cannabisApplyForLicense.generalApplicationNeeds}
@@ -79,7 +83,7 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
             <Accordion defaultExpanded={true} className="margin-top-2">
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.microbusinessApplicationNeeds}-content`}
-                expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
+                expandIcon={expandIcon()}
               >
                 <Heading level={2} styleVariant="h3" className="margin-y-3-override">
                   {Config.cannabisApplyForLicense.microbusinessApplicationNeeds}
@@ -99,7 +103,7 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
             <Accordion defaultExpanded={true} className="margin-top-2">
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.priorityStatusApplicationNeeds}-content`}
-                expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
+                expandIcon={expandIcon()}
               >
                 <Heading level={2} styleVariant="h3" className="margin-y-3-override">
                   {Config.cannabisApplyForLicense.priorityStatusApplicationNeeds}

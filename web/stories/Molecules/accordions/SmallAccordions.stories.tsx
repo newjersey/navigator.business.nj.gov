@@ -8,7 +8,7 @@ const Template = () => {
     <Accordion onChange={() => {}}>
       <AccordionSummary
         aria-controls=""
-        expandIcon={<Icon className={"usa-icon--size-3 text-base-darkest"}>expand_more</Icon>}
+        expandIcon={<Icon className={"usa-icon--size-3 text-base-darkest"} iconName="expand_more" />}
       >
         <div>Accordion Summary Text</div>
       </AccordionSummary>
