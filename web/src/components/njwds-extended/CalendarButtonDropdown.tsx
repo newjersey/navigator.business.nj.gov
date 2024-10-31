@@ -109,9 +109,8 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
             className={`usa-icon--size-5 ${
               props.hideDivider ? "" : "border-left-1px "
             } padding-y-1 flex-align-self-center`}
-          >
-            {open ? "arrow_drop_up" : "arrow_drop_down"}
-          </Icon>
+            iconName={open ? "arrow_drop_up" : "arrow_drop_down"}
+          />
         </div>
       </UnStyledButton>
       <Popper

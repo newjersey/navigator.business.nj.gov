@@ -155,7 +155,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                         }}
                         className="usa-button usa-button--unstyled"
                       >
-                        <Icon className="usa-icon--size-3">edit</Icon>
+                        <Icon className="usa-icon--size-3" iconName="edit" />
                       </IconButton>
                     </div>
                     <div className="margin-x-1 border-1px border-base-light" />
@@ -165,7 +165,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                         onClick={(): void => deleteAddress(index)}
                         className="usa-button usa-button--unstyled"
                       >
-                        <Icon className="usa-icon--size-3">delete</Icon>
+                        <Icon className="usa-icon--size-3" iconName="delete" />
                       </IconButton>
                     </div>
                   </td>
@@ -250,7 +250,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                               }}
                               className="usa-button usa-button--unstyled width-auto"
                             >
-                              <Icon className="usa-icon--size-3">edit</Icon>
+                              <Icon className="usa-icon--size-3" iconName="edit" />
                             </IconButton>
                           </span>
                           <IconButton
@@ -258,7 +258,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                             onClick={(): void => deleteAddress(index)}
                             className="usa-button usa-button--unstyled width-auto"
                           >
-                            <Icon className="usa-icon--size-3">delete</Icon>
+                            <Icon className="usa-icon--size-3" iconName="delete" />
                           </IconButton>
                         </span>
                       </div>
@@ -332,7 +332,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                 setModalOpen(true);
               }}
             >
-              <Icon>add</Icon>
+              <Icon iconName="add" />
               <span
                 className="text-underline"
                 style={{ textUnderlinePosition: "under" }}

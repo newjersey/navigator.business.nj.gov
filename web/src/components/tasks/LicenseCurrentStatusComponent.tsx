@@ -64,7 +64,7 @@ export const LicenseCurrentStatusComponent = (props: Props): ReactElement => {
         <Accordion onChange={() => {}}>
           <AccordionSummary
             aria-controls=""
-            expandIcon={<Icon className={"usa-icon--size-3 text-base-light"}>expand_more</Icon>}
+            expandIcon={<Icon className={"usa-icon--size-3 text-base-light"} iconName="expand_more" />}
           >
             <Heading level={3} styleVariant={"h4"}>
               {Config.licenseSearchTask.applicationChecklistItemsText}

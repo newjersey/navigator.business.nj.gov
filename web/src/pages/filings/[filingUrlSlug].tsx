@@ -60,7 +60,7 @@ export const FilingElement = (props: {
                   <div className="margin-left-1 margin-bottom-05">
                     <ArrowTooltip title={Config.filingDefaults.dueDateToolTip}>
                       <div className="fdr fac font-body-lg text-green" data-testid="due-date-tooltip">
-                        <Icon>help_outline</Icon>
+                        <Icon iconName="help_outline" />
                       </div>
                     </ArrowTooltip>
                   </div>
@@ -96,9 +96,10 @@ export const FilingElement = (props: {
             {props.filing.taxRates && (
               <>
                 <span className="flex" data-testid="tax-rates">
-                  <Icon className="usa-icon--size-3 minw-3 margin-left-1 text-green margin-right-2">
-                    attach_money
-                  </Icon>
+                  <Icon
+                    className="usa-icon--size-3 minw-3 margin-left-1 text-green margin-right-2"
+                    iconName="attach_money"
+                  />
                   <Content className="">{`**${Config.filingDefaults.taxRateTitle}** &nbsp;&nbsp;${props.filing.taxRates}`}</Content>
                 </span>
               </>
@@ -127,14 +128,20 @@ export const FilingElement = (props: {
             {props.filing.frequency && (
               <>
                 <span className="flex margin-top-05">
-                  <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">event</Icon>
+                  <Icon
+                    className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2"
+                    iconName="event"
+                  />
                   <Content className="margin-top-1">{`**${Config.filingDefaults.filingFrequency}** &nbsp;&nbsp;${props.filing.frequency}`}</Content>
                 </span>
               </>
             )}
             {props.filing.agency === "New Jersey Division of Taxation" && (
               <span className="flex margin-top-05" data-testid="late-filing">
-                <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">cancel</Icon>
+                <Icon
+                  className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2"
+                  iconName="cancel"
+                />
                 <Content className="margin-top-1">{`**${Config.filingDefaults.lateFilingsTitle}** &nbsp;&nbsp;${Config.filingDefaults.lateFilingsMarkdown}`}</Content>
               </span>
             )}
@@ -145,7 +152,7 @@ export const FilingElement = (props: {
           <>
             <Accordion data-testid="additional-info" defaultExpanded={props.preview} className="margin-top-2">
               <AccordionSummary
-                expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
+                expandIcon={<Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />}
                 aria-controls={`${Config.filingDefaults.additionalInfo
                   .toLowerCase()
                   .replaceAll(" ", "-")}-content`}

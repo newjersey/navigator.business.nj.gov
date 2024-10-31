@@ -22,7 +22,7 @@ export const LargeList: Story = {
     size: "regular",
     children: (
       <>
-        <Icon className="usa-icon--size-3 margin-right-05">list</Icon>
+        <Icon className="usa-icon--size-3 margin-right-05" iconName="list" />
         <>List View</>
       </>
     ),
@@ -35,7 +35,7 @@ export const LargeGrid: Story = {
     size: "regular",
     children: (
       <>
-        <Icon className="usa-icon--size-3 margin-right-05">grid_view</Icon>
+        <Icon className="usa-icon--size-3 margin-right-05" iconName="grid_view" />
         <>Grid View</>
       </>
     ),
@@ -48,7 +48,7 @@ export const RegularShow: Story = {
     isColor: "border-base-light",
     children: (
       <>
-        <Icon>visibility</Icon>
+        <Icon iconName="visibility" />
         <span className="margin-left-05 line-height-sans-2">List View</span>
       </>
     ),
@@ -61,7 +61,7 @@ export const RegularHide: Story = {
     isColor: "border-base-light",
     children: (
       <>
-        <Icon>visibility_off</Icon>
+        <Icon iconName="visibility_off" />
         <span className="margin-left-05 line-height-sans-2">Hide</span>
       </>
     ),

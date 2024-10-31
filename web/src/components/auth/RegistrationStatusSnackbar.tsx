@@ -79,7 +79,7 @@ export const RegistrationStatusSnackbar = (): ReactElement => {
                 color: "#757575",
               }}
             >
-              <Icon className={"usa-icon--size-4"}>close</Icon>
+              <Icon className="usa-icon--size-4" iconName="close" />
             </IconButton>
             <Content>{contentMap[registrationStatus]}</Content>
           </div>

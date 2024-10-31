@@ -74,7 +74,7 @@ const TaskPage = (props: Props): ReactElement => {
               router.push(`/tasks/${previousUrlSlug}`);
             }}
           >
-            <Icon className="usa-icon--size-4">navigate_before</Icon>
+            <Icon className="usa-icon--size-4" iconName="navigate_before" />
             <span className="margin-left-2"> {Config.taskDefaults.previousTaskButtonText}</span>
           </UnStyledButton>
         )}
@@ -86,7 +86,7 @@ const TaskPage = (props: Props): ReactElement => {
             }}
           >
             <span className="margin-right-2">{Config.taskDefaults.nextTaskButtonText}</span>
-            <Icon className="usa-icon--size-4">navigate_next</Icon>
+            <Icon className="usa-icon--size-4" iconName="navigate_next" />
           </UnStyledButton>
         )}
       </div>

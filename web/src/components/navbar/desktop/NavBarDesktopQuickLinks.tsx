@@ -47,7 +47,7 @@ export const NavBarDesktopQuickLinks = (): ReactElement => {
           dataTestid={"navbar-search-icon"}
           ariaLabel={"search-icon"}
         >
-          <Icon>search</Icon>
+          <Icon iconName="search" />
         </UnStyledButton>
       </div>
     </div>

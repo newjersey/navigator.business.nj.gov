@@ -22,7 +22,7 @@ export const BackButtonForLayout = (props: Props): ReactElement => {
           onClick={analytics.event.task_back_to_roadmap.click.view_roadmap}
         >
           <div className="circle-3 bg-accent-cool-darkest icon-blue-bg-color-hover">
-            <Icon className="text-white usa-icon--size-3">arrow_back</Icon>
+            <Icon className="text-white usa-icon--size-3" iconName="arrow_back" />
           </div>
           <div className="margin-left-2 margin-y-auto text-accent-cool-darkest font-sans-xs usa-link text-blue-color-hover">
             {props.backButtonText}
