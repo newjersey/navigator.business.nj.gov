@@ -39,21 +39,20 @@ sector:
   - technology
 publishStageArchive: ""
 ---
-
 ## Eligibility
 
-- Must have minimum revenues of $100,000 within the `trailing 12 months|trailing-12-months`. Trailing 12 Months (TTM) figures report metrics based on the last 12 months (or four quarters) to date on a rolling basis.
-- Business must be able to demonstrate a minimum of $100,000 in investment interest from at least two investors independent from the company
-- Primary business is commercializing and marketing a product
-- Early stage within an [NJEDA targeted industry](https://www.njeda.gov/wp-content/uploads/2022/11/Appendix-C-Targeted-Industries-Definitions-12.6.22_v2.pdf)
-- Structured as a C-Corporation or LLC
-- Located in physical commercial, co-working, or incubator space in New Jersey
-- A minimum of two full-time founders/C-level executives and 50% of full-time employees working in New Jersey
-- No more than 100 total employees working for the company
-- Company must be registered in New Jersey and in good standing as certified by a valid NJ Tax Clearance Certificate
+* Must have minimum revenues of $100,000 within the `trailing 12 months|trailing-12-months` . Trailing 12 Months (TTM) figures report metrics based on the last 12 months (or four quarters) to date on a rolling basis.
+* Business must be able to demonstrate a minimum of $100,000 in investment interest from at least two investors independent from the company
+* Primary business is commercializing and marketing a product
+* Early stage within an [NJEDA targeted industry](https://www.njeda.gov/wp-content/uploads/2022/11/Appendix-C-Targeted-Industries-Definitions-12.6.22_v2.pdf)
+* Structured as a C-Corporation or LLC
+* Located in physical commercial, co-working, or incubator space in New Jersey
+* A minimum of two full-time founders/C-level executives and 50% of full-time employees working in New Jersey
+* No more than 100 total employees working for the company
+* Company must be registered in New Jersey and in good standing as certified by a valid NJ Tax Clearance Certificate
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-`Convertible note|convertible-note` from $100,000 to $500,000 with 10-year maturity, 3% interest rate, and no payments for the first seven years.
+Businesses receive a `convertible note|convertible-note` from $100,000 to $500,000 with a 10-year maturity, a 3% interest rate, and no payments for the first seven years.
 
 :::
