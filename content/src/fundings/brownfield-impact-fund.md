@@ -9,12 +9,10 @@ sidebarCardBodyText: This is a pilot program by the federal Environmental
   sites.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: >+
-  This pilot program, funded by the federal Environmental Protection Agency's
-  Revolving Loan Fund (USEPA RLF), offers you low-interest (1-2%) loans of up to
-  $350,000 if you are a for-profit or non-profit developer, or a public sector
-  entity, to carry out cleanups at brownfield sites.
-
+summaryDescriptionMd: This pilot program, funded by the Federal Environmental
+  Protection Agency's Revolving Loan Fund (USEPA RLF), addresses funding gaps
+  for cleanup projects at brownfield sites. These funds are available for a
+  for-profit or non-profit developer or a public sector entity.
 callToActionLink: https://www.njeda.com/brownfieldsimpactfund/
 callToActionText: Learn more
 fundingType: loan
@@ -35,13 +33,12 @@ sector:
   - waste-management-and-Remediation
 publishStageArchive: Do Not Publish
 ---
-
 ## Eligibility
 
-- Funds must be allocated to environmental cleanup (not assessment or investigation)
+* Funds must be allocated to environmental cleanup (not assessment or investigation)
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-Addresses funding gaps to make the remediation phase of a project financially viable for remedial actions and other eligible activities.
+You recieve low-interest (1-2%) loans of up to $350,000.
 
 :::
