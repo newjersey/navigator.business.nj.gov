@@ -33,15 +33,13 @@ publishStageArchive: ""
 ---
 ## Eligibility
 
-
-
-* Private entities, such as developers, can be eligible as applicants for clean water through `public conduit borrowers|conduit-borrower` 
+*Private entities, such as developers, can be eligible as applicants for clean water through `public conduit borrowers|conduit-borrower` 
 
 * Applicants with drinking water projects can be public community water systems privately and publicly owned, and nonprofit non-community water systems (as defined by the [National Primary Drinking Water Regulations](https://www.epa.gov/ground-water-and-drinking-water/national-primary-drinking-water-regulations))
 * All applicants must also satisfy the [Water Bank's creditworthiness standards](https://www.njib.gov/nj/Legal+Structure+%252F+Policies.44) (PDF named Amended and Restated Credit Policy”  under the “Policies and Procedures” section)
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-Loans with principal forgiveness and below-market interest rates.
+Businesses recieve loans with principal forgiveness and below-market interest rates.
 
 :::
