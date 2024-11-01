@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { AttributeValue } from "@aws-sdk/client-dynamodb";
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
@@ -28,6 +30,9 @@ export interface UserDataClient {
   getNeedToAddToUserTestingUsers: () => Promise<UserData[]>;
   getNeedTaxIdEncryptionUsers: () => Promise<UserData[]>;
   getUsersWithOutdatedVersion: (latestVersion: number) => Promise<UserData[]>;
+  getUsersWithBusinesses: (
+    ExclusiveStartKey?: Record<string, AttributeValue>
+  ) => Promise<{ users: UserData[]; lastEvaluatedKey: Record<string, AttributeValue> | undefined }>;
 }
 
 export interface BusinessesDataClient {
@@ -197,3 +202,7 @@ export type GetCertHttpsAgent = () => Promise<https.Agent>;
 export const NO_MATCH_ERROR = "NO_MATCH";
 export const NO_ADDRESS_MATCH_ERROR = "NO_ADDRESS_MATCH";
 export const NO_MAIN_APPS_ERROR = "NO_MAIN_APPS";
+
+export interface EvaluationKey {
+  userId: string;
+}
