@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ExecuteStatementCommand, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
+import {
+  AttributeValue,
+  ExecuteStatementCommand,
+  QueryCommand,
+  QueryCommandInput,
+} from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
 import { MigrationFunction, Migrations } from "@db/migrations/migrations";
@@ -24,35 +29,34 @@ const unmarshallOptions = {
 };
 
 export const dynamoDbTranslateConfig = { marshallOptions, unmarshallOptions };
-
-export const migrateUserData = (data: any, logger: LogWriterType): any => {
-  const logId = logger.GetId();
-  const dataVersion = data.version ?? CURRENT_VERSION;
-  const migrationsToRun = Migrations.slice(dataVersion);
-  const migratedData = migrationsToRun.reduce((prevData: any, migration: MigrationFunction) => {
-    try {
-      logger.LogInfo(
-        `Dynamo User Migration - Id:${logId} - Upgrading ${data.user.id} from ${prevData.version} to ${
-          Number(prevData.version) + 1
-        }`
-      );
-      return migration(prevData);
-    } catch (error) {
-      logger.LogError(
-        `Dynamo User Migration Error - Id:${logId} - Error: ${error} - Data: ${JSON.stringify(prevData)}`
-      );
-    }
-  }, data);
-  return { ...migratedData, version: CURRENT_VERSION };
-};
-
 export const DynamoUserDataClient = (
   db: DynamoDBDocumentClient,
   tableName: string,
   logger: LogWriterType
 ): UserDataClient => {
-  const doMigration = async (data: any): Promise<UserData> => {
-    const migratedData = migrateUserData(data, logger);
+  const migrateData = (data: UserData, logger: LogWriterType): any => {
+    const logId = logger.GetId();
+    const dataVersion = data.version ?? CURRENT_VERSION;
+    const migrationsToRun = Migrations.slice(dataVersion);
+    const migratedData = migrationsToRun.reduce((prevData: any, migration: MigrationFunction) => {
+      try {
+        logger.LogInfo(
+          `Database Migration - Id:${logId} - Upgrading ${data.user.id} from ${prevData.version} to ${
+            Number(prevData.version) + 1
+          }`
+        );
+        return migration(prevData);
+      } catch (error) {
+        logger.LogError(
+          `Database Migration Error - Id:${logId} - Error: ${error} - Data: ${JSON.stringify(prevData)}`
+        );
+      }
+    }, data);
+    return { ...migratedData, version: CURRENT_VERSION };
+  };
+
+  const doMigration = async (data: UserData): Promise<UserData> => {
+    const migratedData = migrateData(data, logger);
     await put(migratedData);
     return migratedData;
   };
@@ -92,7 +96,7 @@ export const DynamoUserDataClient = (
 
       .then(async (result) => {
         if (!result.Item) {
-          throw new Error("Not found");
+          throw new Error(`User with ID ${userId} not found in table ${tableName}`);
         }
         return await doMigration(result.Item.data);
       })
@@ -102,7 +106,7 @@ export const DynamoUserDataClient = (
   };
 
   const put = async (userData: UserData): Promise<UserData> => {
-    const migratedData = migrateUserData(userData, logger);
+    const migratedData = migrateData(userData, logger);
     const params = {
       TableName: tableName,
       Item: {
@@ -141,6 +145,31 @@ export const DynamoUserDataClient = (
     return await search(statement);
   };
 
+  const getUsersWithBusinesses = async (
+    ExclusiveStartKey?: Record<string, AttributeValue>
+  ): Promise<{ users: UserData[]; lastEvaluatedKey: Record<string, AttributeValue> | undefined }> => {
+    const statement = `SELECT data FROM "${tableName}" WHERE data["businesses"] IS NOT MISSING AND size(data["businesses"]) > 0`;
+
+    const params = {
+      Statement: statement,
+      ExclusiveStartKey: ExclusiveStartKey,
+    };
+
+    const { Items = [], LastEvaluatedKey } = await db.send(new ExecuteStatementCommand(params));
+
+    const users = await Promise.all(
+      Items.map(async (object: any): Promise<UserData> => {
+        const data = unmarshall(object).data;
+        return await doMigration(data);
+      })
+    );
+
+    return {
+      users,
+      lastEvaluatedKey: LastEvaluatedKey,
+    };
+  };
+
   const search = async (statement: string): Promise<UserData[]> => {
     const { Items = [] } = await db.send(new ExecuteStatementCommand({ Statement: statement }));
     return await Promise.all(
@@ -159,5 +188,6 @@ export const DynamoUserDataClient = (
     getNeedToAddToUserTestingUsers,
     getNeedTaxIdEncryptionUsers,
     getUsersWithOutdatedVersion,
+    getUsersWithBusinesses,
   };
 };
