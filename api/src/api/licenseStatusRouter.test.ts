@@ -10,7 +10,7 @@ import {
 } from "@shared/test";
 import { Express } from "express";
 import { StatusCodes } from "http-status-codes";
-import { UserDataClient } from "src/domain/types";
+import { DatabaseClient } from "src/domain/types";
 import request from "supertest";
 
 jest.mock("@api/userRouter", () => {
@@ -24,26 +24,24 @@ describe("licenseStatusRouter", () => {
   let app: Express;
 
   let stubUpdateLicenseStatus: jest.Mock;
-  let stubUserDataClient: jest.Mocked<UserDataClient>;
+
+  let stubDynamoDataClient: jest.Mocked<DatabaseClient>;
 
   beforeEach(async () => {
     jest.resetAllMocks();
     fakeSignedInUserId.mockReturnValue("some-id");
     stubUpdateLicenseStatus = jest.fn();
-    stubUserDataClient = {
+    stubDynamoDataClient = {
+      migrateData: jest.fn(),
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),
-      getNeedNewsletterUsers: jest.fn(),
-      getNeedToAddToUserTestingUsers: jest.fn(),
-      getNeedTaxIdEncryptionUsers: jest.fn(),
-      getUsersWithOutdatedVersion: jest.fn(),
     };
-    stubUserDataClient.put.mockImplementation((userData) => {
+    stubDynamoDataClient.put.mockImplementation((userData) => {
       return Promise.resolve(userData);
     });
     app = setupExpress(false);
-    app.use(licenseStatusRouterFactory(stubUpdateLicenseStatus, stubUserDataClient));
+    app.use(licenseStatusRouterFactory(stubUpdateLicenseStatus, stubDynamoDataClient));
   });
 
   afterAll(async () => {
@@ -58,10 +56,10 @@ describe("licenseStatusRouter", () => {
     stubUpdateLicenseStatus.mockResolvedValue(userData);
 
     const nameAndAddress = generateLicenseSearchNameAndAddress({});
-    stubUserDataClient.get.mockResolvedValue(userData);
+    stubDynamoDataClient.get.mockResolvedValue(userData);
     const response = await request(app).post(`/license-status`).send({ nameAndAddress });
     expect(response.status).toEqual(StatusCodes.OK);
-    expect(stubUserDataClient.put).toHaveBeenCalledWith(userData);
+    expect(stubDynamoDataClient.put).toHaveBeenCalledWith(userData);
     expect(response.body).toEqual(userData);
     expect(stubUpdateLicenseStatus).toHaveBeenCalledWith(userData, nameAndAddress);
   });
@@ -71,7 +69,7 @@ describe("licenseStatusRouter", () => {
     const response = await request(app)
       .post(`/license-status`)
       .send({ nameAndAddress: generateLicenseSearchNameAndAddress({}) });
-    expect(stubUserDataClient.put).not.toHaveBeenCalled();
+    expect(stubDynamoDataClient.put).not.toHaveBeenCalled();
     expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
   });
 

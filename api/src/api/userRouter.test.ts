@@ -1,5 +1,5 @@
 import { userRouterFactory } from "@api/userRouter";
-import { EncryptionDecryptionClient, TimeStampBusinessSearch, UserDataClient } from "@domain/types";
+import { DatabaseClient, EncryptionDecryptionClient, TimeStampBusinessSearch } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { DummyLogWriter } from "@libs/logWriter";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
@@ -65,7 +65,7 @@ const sixtyOneMinutesAgo: string = getCurrentDate().subtract(1, "hour").subtract
 describe("userRouter", () => {
   let app: Express;
 
-  let stubUserDataClient: jest.Mocked<UserDataClient>;
+  let stubUnifiedDataClient: jest.Mocked<DatabaseClient>;
   let stubUpdateLicenseStatus: jest.Mock;
   let stubUpdateRoadmapSidebarCards: jest.Mock;
   let stubUpdateOperatingPhase: jest.Mock;
@@ -73,14 +73,11 @@ describe("userRouter", () => {
   let stubTimeStampBusinessSearch: jest.Mocked<TimeStampBusinessSearch>;
 
   beforeEach(async () => {
-    stubUserDataClient = {
+    stubUnifiedDataClient = {
+      migrateData: jest.fn(),
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),
-      getNeedNewsletterUsers: jest.fn(),
-      getNeedToAddToUserTestingUsers: jest.fn(),
-      getNeedTaxIdEncryptionUsers: jest.fn(),
-      getUsersWithOutdatedVersion: jest.fn(),
     };
     stubUpdateLicenseStatus = jest.fn();
     stubUpdateRoadmapSidebarCards = jest.fn();
@@ -101,7 +98,7 @@ describe("userRouter", () => {
     app = setupExpress(false);
     app.use(
       userRouterFactory(
-        stubUserDataClient,
+        stubUnifiedDataClient,
         stubUpdateLicenseStatus,
         stubUpdateRoadmapSidebarCards,
         stubUpdateOperatingPhase,
@@ -121,7 +118,7 @@ describe("userRouter", () => {
   describe("GET /users/:userId", () => {
     it("gets user with id", async () => {
       const userData = generateUserData({});
-      stubUserDataClient.get.mockResolvedValue(userData);
+      stubUnifiedDataClient.get.mockResolvedValue(userData);
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
 
@@ -131,7 +128,7 @@ describe("userRouter", () => {
     });
 
     it("returns NOT FOUND when a user isn't registered", async () => {
-      stubUserDataClient.get.mockImplementation(() => {
+      stubUnifiedDataClient.get.mockImplementation(() => {
         return Promise.reject(new Error("Not found"));
       });
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
@@ -145,12 +142,12 @@ describe("userRouter", () => {
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer other-user-token");
 
       expect(mockJwt.decode).toHaveBeenCalledWith("other-user-token");
-      expect(stubUserDataClient.get).not.toHaveBeenCalled();
+      expect(stubUnifiedDataClient.get).not.toHaveBeenCalled();
       expect(response.status).toEqual(StatusCodes.FORBIDDEN);
     });
 
     it("returns a INTERNAL SERVER ERROR when user get fails", async () => {
-      stubUserDataClient.get.mockRejectedValue(new Error("error"));
+      stubUnifiedDataClient.get.mockRejectedValue(new Error("error"));
 
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
@@ -165,8 +162,8 @@ describe("userRouter", () => {
           user: generateUser({ id: "123" }),
         });
         const updatedUserData = generateUserData({});
-        stubUserDataClient.get.mockResolvedValue(userData);
-        stubUserDataClient.put.mockResolvedValue(updatedUserData);
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
+        stubUnifiedDataClient.put.mockResolvedValue(updatedUserData);
         stubUpdateOperatingPhase.mockReturnValue(updatedUserData);
         stubUpdateRoadmapSidebarCards.mockReturnValue(updatedUserData);
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
@@ -177,7 +174,7 @@ describe("userRouter", () => {
         expect(response.body).toEqual(updatedUserData);
         expect(stubUpdateOperatingPhase).toHaveBeenCalledWith(userData);
         expect(stubUpdateRoadmapSidebarCards).toHaveBeenCalledWith(updatedUserData);
-        expect(stubUserDataClient.put).toHaveBeenCalledWith(updatedUserData);
+        expect(stubUnifiedDataClient.put).toHaveBeenCalledWith(updatedUserData);
       });
     });
 
@@ -198,7 +195,7 @@ describe("userRouter", () => {
           })
         );
 
-        stubUserDataClient.get.mockResolvedValue(userData);
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
 
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).not.toHaveBeenCalled();
@@ -219,7 +216,7 @@ describe("userRouter", () => {
           })
         );
 
-        stubUserDataClient.get.mockResolvedValue(userData);
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
 
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).not.toHaveBeenCalled();
@@ -233,7 +230,7 @@ describe("userRouter", () => {
           })
         );
 
-        stubUserDataClient.get.mockResolvedValue(userData);
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
 
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).toHaveBeenCalled();
@@ -253,7 +250,7 @@ describe("userRouter", () => {
           })
         );
 
-        stubUserDataClient.get.mockResolvedValue(userData);
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
 
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).toHaveBeenCalled();
@@ -280,7 +277,7 @@ describe("userRouter", () => {
         const licenseName = Object.keys(licenses!)[0] as LicenseName;
         const licenseNameAndAddress = licenses![licenseName]?.nameAndAddress;
 
-        stubUserDataClient.get.mockResolvedValue(userData);
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
 
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).toHaveBeenLastCalledWith(userData, licenseNameAndAddress);
@@ -301,7 +298,7 @@ describe("userRouter", () => {
         );
 
         const currentBusiness = getCurrentBusiness(userData);
-        stubUserDataClient.get.mockResolvedValue(userData);
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
 
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).toHaveBeenLastCalledWith(userData, {
@@ -320,7 +317,7 @@ describe("userRouter", () => {
             }),
           })
         );
-        stubUserDataClient.get.mockResolvedValue(userData);
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
 
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).not.toHaveBeenCalled();
@@ -337,17 +334,16 @@ describe("userRouter", () => {
             }),
           })
         );
-        stubUserDataClient.get.mockResolvedValue(userData);
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
         const updatedUserData = generateUserData({});
         stubUpdateLicenseStatus.mockResolvedValue(updatedUserData);
 
         const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         const expectedCurrentBusiness = getCurrentBusiness(updatedUserData);
         const resultUserData = result.body as UserData;
-        const resultCurrentBuseinss = getCurrentBusiness(resultUserData);
-
+        const resultCurrentBusiness = getCurrentBusiness(resultUserData);
         expect(stubUpdateLicenseStatus).toHaveBeenCalled();
-        expect(resultCurrentBuseinss.licenseData).toEqual(expectedCurrentBusiness.licenseData);
+        expect(resultCurrentBusiness.licenseData).toEqual(expectedCurrentBusiness.licenseData);
       });
 
       it("sets licenseData lastUpdatedISO if license check fails", async () => {
@@ -361,7 +357,7 @@ describe("userRouter", () => {
             }),
           })
         );
-        stubUserDataClient.get.mockResolvedValue(userData);
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
         stubUpdateLicenseStatus.mockRejectedValue(new Error("license failure"));
 
         const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
@@ -390,7 +386,7 @@ describe("userRouter", () => {
               formationData: generateFormationData({ businessNameAvailability: undefined }),
             })
           );
-          stubUserDataClient.get.mockResolvedValue(userData);
+          stubUnifiedDataClient.get.mockResolvedValue(userData);
 
           await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
           expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
@@ -408,7 +404,7 @@ describe("userRouter", () => {
               }),
             })
           );
-          stubUserDataClient.get.mockResolvedValue(userData);
+          stubUnifiedDataClient.get.mockResolvedValue(userData);
 
           await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
           expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
@@ -427,7 +423,7 @@ describe("userRouter", () => {
               }),
             })
           );
-          stubUserDataClient.get.mockResolvedValue(userData);
+          stubUnifiedDataClient.get.mockResolvedValue(userData);
 
           await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
           expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
@@ -446,7 +442,7 @@ describe("userRouter", () => {
               }),
             })
           );
-          stubUserDataClient.get.mockResolvedValue(userData);
+          stubUnifiedDataClient.get.mockResolvedValue(userData);
           stubTimeStampBusinessSearch.search.mockResolvedValue(
             generateBusinessNameAvailability({
               status: "UNAVAILABLE",
@@ -479,7 +475,7 @@ describe("userRouter", () => {
               }),
             })
           );
-          stubUserDataClient.get.mockResolvedValue(userData);
+          stubUnifiedDataClient.get.mockResolvedValue(userData);
           stubTimeStampBusinessSearch.search.mockResolvedValue(
             generateBusinessNameAvailability({
               status: "UNAVAILABLE",
@@ -512,7 +508,7 @@ describe("userRouter", () => {
               }),
             })
           );
-          stubUserDataClient.get.mockResolvedValue(userData);
+          stubUnifiedDataClient.get.mockResolvedValue(userData);
           stubTimeStampBusinessSearch.search.mockRejectedValue(new Error("message"));
 
           await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
@@ -537,7 +533,7 @@ describe("userRouter", () => {
               }),
             })
           );
-          stubUserDataClient.get.mockResolvedValue(userData);
+          stubUnifiedDataClient.get.mockResolvedValue(userData);
 
           await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
           expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
@@ -561,7 +557,7 @@ describe("userRouter", () => {
               }),
             })
           );
-          stubUserDataClient.get.mockResolvedValue(userData);
+          stubUnifiedDataClient.get.mockResolvedValue(userData);
 
           await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
           expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
@@ -582,7 +578,7 @@ describe("userRouter", () => {
               }),
             })
           );
-          stubUserDataClient.get.mockResolvedValue(userData);
+          stubUnifiedDataClient.get.mockResolvedValue(userData);
           stubTimeStampBusinessSearch.search.mockResolvedValue(
             generateBusinessNameAvailability({
               status: "UNAVAILABLE",
@@ -615,7 +611,7 @@ describe("userRouter", () => {
               }),
             })
           );
-          stubUserDataClient.get.mockResolvedValue(userData);
+          stubUnifiedDataClient.get.mockResolvedValue(userData);
           stubTimeStampBusinessSearch.search.mockResolvedValue(
             generateBusinessNameAvailability({
               status: "UNAVAILABLE",
@@ -650,7 +646,7 @@ describe("userRouter", () => {
               }),
             })
           );
-          stubUserDataClient.get.mockResolvedValue(userData);
+          stubUnifiedDataClient.get.mockResolvedValue(userData);
           stubTimeStampBusinessSearch.search.mockResolvedValue(
             generateBusinessNameAvailability({
               status: "UNAVAILABLE",
@@ -685,7 +681,7 @@ describe("userRouter", () => {
               }),
             })
           );
-          stubUserDataClient.get.mockResolvedValue(userData);
+          stubUnifiedDataClient.get.mockResolvedValue(userData);
           stubTimeStampBusinessSearch.search.mockResolvedValue(
             generateBusinessNameAvailability({
               status: "UNAVAILABLE",
@@ -724,7 +720,7 @@ describe("userRouter", () => {
 
     it("looks up a user by email that does not exist and returns an error", async () => {
       // eslint-disable-next-line unicorn/no-useless-undefined
-      stubUserDataClient.findByEmail.mockResolvedValue(undefined);
+      stubUnifiedDataClient.findByEmail.mockResolvedValue(undefined);
 
       const response = await sendRequest({ email: "user@example.org" });
 
@@ -735,7 +731,7 @@ describe("userRouter", () => {
     it("looks up a user by email that does exist and returns successful", async () => {
       const mockUser = generateUserData({});
 
-      stubUserDataClient.findByEmail.mockResolvedValue(mockUser);
+      stubUnifiedDataClient.findByEmail.mockResolvedValue(mockUser);
 
       const response = await sendRequest({ email: mockUser.user.email });
 
@@ -746,13 +742,13 @@ describe("userRouter", () => {
 
   describe("POST", () => {
     beforeEach(() => {
-      stubUserDataClient.get.mockResolvedValue(generateUserData({}));
+      stubUnifiedDataClient.get.mockResolvedValue(generateUserData({}));
     });
 
     it("puts user data", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const userData = generateUserData({ user: generateUser({ id: "123" }) });
-      stubUserDataClient.put.mockResolvedValue(userData);
+      stubUnifiedDataClient.put.mockResolvedValue(userData);
 
       const response = await request(app)
         .post(`/users`)
@@ -771,12 +767,12 @@ describe("userRouter", () => {
         lastUpdatedISO: dateOneDayAgo,
         user: generateUser({ id: "123" }),
       });
-      stubUserDataClient.put.mockResolvedValue(userData);
+      stubUnifiedDataClient.put.mockResolvedValue(userData);
 
       await request(app).post(`/users`).send(userData).set("Authorization", "Bearer user-123-token");
 
       expect(
-        parseDate(getLastCalledWith(stubUserDataClient.put)[0].lastUpdatedISO).isSame(
+        parseDate(getLastCalledWith(stubUnifiedDataClient.put)[0].lastUpdatedISO).isSame(
           getCurrentDate(),
           "minute"
         )
@@ -801,12 +797,12 @@ describe("userRouter", () => {
         { user: generateUser({ id: "123" }) }
       );
 
-      stubUserDataClient.get.mockResolvedValue(postedUserData);
-      stubUserDataClient.put.mockResolvedValue(postedUserData);
+      stubUnifiedDataClient.get.mockResolvedValue(postedUserData);
+      stubUnifiedDataClient.put.mockResolvedValue(postedUserData);
 
       await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
 
-      const taxFilingsPut = getCurrentBusiness(getLastCalledWith(stubUserDataClient.put)[0]).taxFilingData
+      const taxFilingsPut = getCurrentBusiness(getLastCalledWith(stubUnifiedDataClient.put)[0]).taxFilingData
         .filings;
       expect(taxFilingsPut).toEqual(
         generateAnnualFilings([
@@ -835,8 +831,8 @@ describe("userRouter", () => {
         },
       }));
 
-      stubUserDataClient.get.mockResolvedValue(updatedIndustryUserData);
-      stubUserDataClient.put.mockResolvedValue(newIndustryUserData);
+      stubUnifiedDataClient.get.mockResolvedValue(updatedIndustryUserData);
+      stubUnifiedDataClient.put.mockResolvedValue(newIndustryUserData);
 
       await request(app)
         .post(`/users`)
@@ -844,7 +840,7 @@ describe("userRouter", () => {
         .set("Authorization", "Bearer user-123-token");
 
       const taskItemChecklistPut = getCurrentBusiness(
-        getLastCalledWith(stubUserDataClient.put)[0]
+        getLastCalledWith(stubUnifiedDataClient.put)[0]
       ).taskItemChecklist;
       expect(taskItemChecklistPut).toEqual({});
     });
@@ -859,8 +855,8 @@ describe("userRouter", () => {
         { user: generateUser({ id: "123" }) }
       );
 
-      stubUserDataClient.get.mockResolvedValue(newIndustryUserData);
-      stubUserDataClient.put.mockResolvedValue(newIndustryUserData);
+      stubUnifiedDataClient.get.mockResolvedValue(newIndustryUserData);
+      stubUnifiedDataClient.put.mockResolvedValue(newIndustryUserData);
 
       await request(app)
         .post(`/users`)
@@ -868,7 +864,7 @@ describe("userRouter", () => {
         .set("Authorization", "Bearer user-123-token");
 
       const taskItemChecklistPut = getCurrentBusiness(
-        getLastCalledWith(stubUserDataClient.put)[0]
+        getLastCalledWith(stubUnifiedDataClient.put)[0]
       ).taskItemChecklist;
       expect(taskItemChecklistPut).toEqual({ "some-id": true });
     });
@@ -883,7 +879,7 @@ describe("userRouter", () => {
         .set("Authorization", "Bearer other-user-token");
 
       expect(mockJwt.decode).toHaveBeenCalledWith("other-user-token");
-      expect(stubUserDataClient.put).not.toHaveBeenCalled();
+      expect(stubUnifiedDataClient.put).not.toHaveBeenCalled();
       expect(response.status).toEqual(StatusCodes.FORBIDDEN);
     });
 
@@ -891,7 +887,7 @@ describe("userRouter", () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const userData = generateUserData({ user: generateUser({ id: "123" }) });
 
-      stubUserDataClient.put.mockRejectedValue(new Error("error"));
+      stubUnifiedDataClient.put.mockRejectedValue(new Error("error"));
       const response = await request(app)
         .post(`/users`)
         .send(userData)
@@ -929,8 +925,8 @@ describe("userRouter", () => {
           })
         );
 
-        stubUserDataClient.get.mockResolvedValue(updatedLegalStructureUserData);
-        stubUserDataClient.put.mockResolvedValue(updatedLegalStructureUserData);
+        stubUnifiedDataClient.get.mockResolvedValue(updatedLegalStructureUserData);
+        stubUnifiedDataClient.put.mockResolvedValue(updatedLegalStructureUserData);
 
         await request(app)
           .post(`/users`)
@@ -938,10 +934,10 @@ describe("userRouter", () => {
           .set("Authorization", "Bearer user-123-token");
 
         const formationDataPut = getCurrentBusiness(
-          getLastCalledWith(stubUserDataClient.put)[0]
+          getLastCalledWith(stubUnifiedDataClient.put)[0]
         ).formationData;
-        const legalStructurePut = getCurrentBusiness(getLastCalledWith(stubUserDataClient.put)[0]).profileData
-          .legalStructureId;
+        const legalStructurePut = getCurrentBusiness(getLastCalledWith(stubUnifiedDataClient.put)[0])
+          .profileData.legalStructureId;
 
         expect(legalStructurePut).toEqual("limited-liability-company");
         expect(formationDataPut).toEqual(completedFormationData);
@@ -975,7 +971,7 @@ describe("userRouter", () => {
           { user: generateUser({ id: "123" }) }
         );
 
-        stubUserDataClient.get.mockResolvedValue(existingUserData);
+        stubUnifiedDataClient.get.mockResolvedValue(existingUserData);
 
         const newUserData = modifyCurrentBusiness(existingUserData, (business) => ({
           ...business,
@@ -985,7 +981,7 @@ describe("userRouter", () => {
           },
         }));
 
-        stubUserDataClient.put.mockResolvedValue(newUserData);
+        stubUnifiedDataClient.put.mockResolvedValue(newUserData);
 
         const response = await request(app)
           .post(`/users`)
@@ -994,10 +990,10 @@ describe("userRouter", () => {
 
         expect(getCurrentBusiness(response.body).profileData.legalStructureId).toEqual("c-corporation");
         const formationDataPut = getCurrentBusiness(
-          getLastCalledWith(stubUserDataClient.put)[0]
+          getLastCalledWith(stubUnifiedDataClient.put)[0]
         ).formationData;
-        const legalStructurePut = getCurrentBusiness(getLastCalledWith(stubUserDataClient.put)[0]).profileData
-          .legalStructureId;
+        const legalStructurePut = getCurrentBusiness(getLastCalledWith(stubUnifiedDataClient.put)[0])
+          .profileData.legalStructureId;
         expect(legalStructurePut).toEqual("c-corporation");
         expect(formationDataPut).toEqual({
           formationFormData: {
@@ -1040,12 +1036,14 @@ describe("userRouter", () => {
           { user: oldUserData.user }
         );
 
-        stubUserDataClient.get.mockResolvedValue(oldUserData);
-        stubUserDataClient.put.mockResolvedValue(updatedUserData);
+        stubUnifiedDataClient.get.mockResolvedValue(oldUserData);
+        stubUnifiedDataClient.put.mockResolvedValue(updatedUserData);
 
         await request(app).post(`/users`).send(updatedUserData).set("Authorization", "Bearer user-123-token");
 
-        const profileDataPut = getCurrentBusiness(getLastCalledWith(stubUserDataClient.put)[0]).profileData;
+        const profileDataPut = getCurrentBusiness(
+          getLastCalledWith(stubUnifiedDataClient.put)[0]
+        ).profileData;
         expect(profileDataPut).toEqual({
           ...getCurrentBusiness(updatedUserData).profileData,
           taxId: "*******89123",
@@ -1073,8 +1071,8 @@ describe("userRouter", () => {
           },
         }));
 
-        stubUserDataClient.get.mockResolvedValue(oldUserData);
-        stubUserDataClient.put.mockResolvedValue(updatedUserData);
+        stubUnifiedDataClient.get.mockResolvedValue(oldUserData);
+        stubUnifiedDataClient.put.mockResolvedValue(updatedUserData);
 
         await request(app).post(`/users`).send(updatedUserData).set("Authorization", "Bearer user-123-token");
 

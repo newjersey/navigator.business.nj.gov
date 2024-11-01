@@ -3,7 +3,7 @@
 import { formationRouterFactory } from "@api/formationRouter";
 import { getSignedInUser, getSignedInUserId } from "@api/userRouter";
 import { saveFileFromUrl } from "@domain/s3Writer";
-import { FormationClient, UserDataClient } from "@domain/types";
+import { DatabaseClient, FormationClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
@@ -41,7 +41,7 @@ const fakeSignedInUser = getSignedInUser as jest.Mock;
 describe("formationRouter", () => {
   let app: Express;
   let stubFormationClient: jest.Mocked<FormationClient>;
-  let stubUserDataClient: jest.Mocked<UserDataClient>;
+  let stubDynamoDataClient: jest.Mocked<DatabaseClient>;
 
   beforeEach(async () => {
     jest.resetAllMocks();
@@ -58,17 +58,14 @@ describe("formationRouter", () => {
       getCompletedFiling: jest.fn(),
       health: jest.fn(),
     };
-    stubUserDataClient = {
+    stubDynamoDataClient = {
+      migrateData: jest.fn(),
       get: jest.fn(),
-      findByEmail: jest.fn(),
       put: jest.fn(),
-      getNeedNewsletterUsers: jest.fn(),
-      getNeedToAddToUserTestingUsers: jest.fn(),
-      getNeedTaxIdEncryptionUsers: jest.fn(),
-      getUsersWithOutdatedVersion: jest.fn(),
+      findByEmail: jest.fn(),
     };
     app = setupExpress(false);
-    app.use(formationRouterFactory(stubFormationClient, stubUserDataClient, { shouldSaveDocuments: true }));
+    app.use(formationRouterFactory(stubFormationClient, stubDynamoDataClient, { shouldSaveDocuments: true }));
   });
 
   afterAll(async () => {
@@ -122,7 +119,7 @@ describe("formationRouter", () => {
         },
       }));
 
-      expect(stubUserDataClient.put).toHaveBeenCalledWith(expectedResponse);
+      expect(stubDynamoDataClient.put).toHaveBeenCalledWith(expectedResponse);
     });
 
     it("updates user data even if client fails", async () => {
@@ -134,7 +131,7 @@ describe("formationRouter", () => {
         returnUrl: "some-url",
       });
 
-      expect(stubUserDataClient.put).toHaveBeenCalledWith(userData);
+      expect(stubDynamoDataClient.put).toHaveBeenCalledWith(userData);
     });
   });
 
@@ -173,7 +170,7 @@ describe("formationRouter", () => {
           }),
         })
       );
-      stubUserDataClient.get.mockResolvedValue(userData);
+      stubDynamoDataClient.get.mockResolvedValue(userData);
       const response = await request(app).get(`/completed-filing`).send();
 
       expect(response.status).toEqual(StatusCodes.OK);
@@ -207,7 +204,7 @@ describe("formationRouter", () => {
         undefined
       );
       expect(response.body).toEqual(expectedNewUserData);
-      expect(stubUserDataClient.put).toHaveBeenCalledWith(expectedNewUserData);
+      expect(stubDynamoDataClient.put).toHaveBeenCalledWith(expectedNewUserData);
       expect(stubFormationClient.getCompletedFiling).toHaveBeenCalledWith("some-formation-id");
     });
 
@@ -229,7 +226,7 @@ describe("formationRouter", () => {
           }),
         })
       );
-      stubUserDataClient.get.mockResolvedValue(userData);
+      stubDynamoDataClient.get.mockResolvedValue(userData);
       await request(app).get(`/completed-filing`).send();
 
       const expectedUserData = modifyCurrentBusiness(userData, (business) => ({
@@ -240,7 +237,7 @@ describe("formationRouter", () => {
         },
       }));
 
-      expect(stubUserDataClient.put).toHaveBeenCalledWith(expectedUserData);
+      expect(stubDynamoDataClient.put).toHaveBeenCalledWith(expectedUserData);
     });
 
     it("only fetches files that are in the filingResponse", async () => {
@@ -261,7 +258,7 @@ describe("formationRouter", () => {
           }),
         })
       );
-      stubUserDataClient.get.mockResolvedValue(userData);
+      stubDynamoDataClient.get.mockResolvedValue(userData);
       await request(app).get(`/completed-filing`).send();
 
       const expectedNewUserData = modifyCurrentBusiness(userData, (business) => ({
@@ -302,7 +299,7 @@ describe("formationRouter", () => {
         `us-east-1:identityId/certifiedDoc-1487076708000.pdf`,
         process.env.DOCUMENT_S3_BUCKET
       );
-      expect(stubUserDataClient.put).toHaveBeenCalledWith(expectedNewUserData);
+      expect(stubDynamoDataClient.put).toHaveBeenCalledWith(expectedNewUserData);
     });
   });
 });
