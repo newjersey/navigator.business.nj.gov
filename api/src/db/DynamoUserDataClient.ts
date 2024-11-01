@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ExecuteStatementCommand, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
+import {
+  AttributeValue,
+  ExecuteStatementCommand,
+  QueryCommand,
+  QueryCommandInput,
+} from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
 import { MigrationFunction, Migrations } from "@db/migrations/migrations";
@@ -141,6 +146,31 @@ export const DynamoUserDataClient = (
     return await search(statement);
   };
 
+  const getUsersWithBusinesses = async (
+    ExclusiveStartKey?: Record<string, AttributeValue>
+  ): Promise<{ users: UserData[]; lastEvaluatedKey: Record<string, AttributeValue> | undefined }> => {
+    const statement = `SELECT data FROM "${tableName}" WHERE data["businesses"] IS NOT MISSING AND size(data["businesses"]) > 0`;
+
+    const params = {
+      Statement: statement,
+      ExclusiveStartKey: ExclusiveStartKey,
+    };
+
+    const { Items = [], LastEvaluatedKey } = await db.send(new ExecuteStatementCommand(params));
+
+    const users = await Promise.all(
+      Items.map(async (object: any): Promise<UserData> => {
+        const data = unmarshall(object).data;
+        return await doMigration(data);
+      })
+    );
+
+    return {
+      users,
+      lastEvaluatedKey: LastEvaluatedKey,
+    };
+  };
+
   const search = async (statement: string): Promise<UserData[]> => {
     const { Items = [] } = await db.send(new ExecuteStatementCommand({ Statement: statement }));
     return await Promise.all(
@@ -159,5 +189,6 @@ export const DynamoUserDataClient = (
     getNeedToAddToUserTestingUsers,
     getNeedTaxIdEncryptionUsers,
     getUsersWithOutdatedVersion,
+    getUsersWithBusinesses,
   };
 };

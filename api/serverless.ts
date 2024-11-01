@@ -4,7 +4,9 @@ import encryptTaxId from "@functions/encryptTaxId";
 import express from "@functions/express";
 import githubOauth2 from "@functions/githubOauth2";
 import healthCheck from "@functions/healthCheck";
+import migrateBusinessesOnUserChange from "@functions/migrateBusinessesOnUserChange";
 import migrateUsersVersion from "@functions/migrateUsersVersion";
+import oneTimeBusinessMigration from "@functions/oneTimeBusinessMigration";
 import updateExternalStatus from "@functions/updateExternalStatus";
 import type { AWS, AwsLambdaEnvironment } from "@serverless/typescript";
 import "dotenv/config";
@@ -317,6 +319,30 @@ serverlessConfiguration.functions = {
         }
       : undefined
   ),
+
+  migrateBusinessesOnUserChange: migrateBusinessesOnUserChange(
+    env.CI
+      ? {
+          securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
+          subnetIds: [
+            "${self:custom.config.infrastructure.SUBNET_01}",
+            "${self:custom.config.infrastructure.SUBNET_02}",
+          ],
+        }
+      : undefined
+  ),
+
+  oneTimeBusinessMigration: oneTimeBusinessMigration(
+    env.CI
+      ? {
+          securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
+          subnetIds: [
+            "${self:custom.config.infrastructure.SUBNET_01}",
+            "${self:custom.config.infrastructure.SUBNET_02}",
+          ],
+        }
+      : undefined
+  ),
 };
 
 if (stage !== contentEnv && stage !== testEnv) {
@@ -361,6 +387,9 @@ if (!env.CI || stage === "local") {
         Properties: {
           ...usersDynamoDbSchema,
           TableName: usersTable,
+          StreamSpecification: {
+            StreamViewType: "NEW_IMAGE",
+          },
         },
       },
       BusinessesDynamoDBTable: {

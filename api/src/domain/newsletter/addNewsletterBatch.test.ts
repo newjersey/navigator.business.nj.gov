@@ -20,6 +20,7 @@ describe("addNewsletterBatch", () => {
       getNeedToAddToUserTestingUsers: jest.fn(),
       getNeedTaxIdEncryptionUsers: jest.fn(),
       getUsersWithOutdatedVersion: jest.fn(),
+      getUsersWithBusinesses: jest.fn(),
     };
     addNewsletter = addNewsletterFactory(stubNewsletterClient);
   });

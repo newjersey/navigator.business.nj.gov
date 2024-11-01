@@ -167,6 +167,7 @@ commands:
       - run:
           name: Set Development Environment Variables
           command: |
+            echo 'export ENABLE_BUSINESS_MIGRATION_FROM_USERS_TABLE=ENABLE_BUSINESS_MIGRATION_FROM_USERS_TABLE_DEV' >> $BASH_ENV
             echo 'export AB_TESTING_EXPERIENCE_B_PERCENTAGE=$AB_TESTING_EXPERIENCE_B_PERCENTAGE_DEV' >> $BASH_ENV
             echo 'export ADMIN_PASSWORD=$ADMIN_PASSWORD' >> $BASH_ENV
             echo 'export AIRTABLE_USERS_TABLE=$AIRTABLE_USERS_TABLE_DEV' >> $BASH_ENV
@@ -268,6 +269,7 @@ commands:
       - run:
           name: Set Staging Environment Variables
           command: |
+            echo 'export ENABLE_BUSINESS_MIGRATION_FROM_USERS_TABLE=ENABLE_BUSINESS_MIGRATION_FROM_USERS_TABLE_STAGING' >> $BASH_ENV
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_STAGING' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_STAGING' >> $BASH_ENV
             echo 'export FEATURE_EXPORT_PDF=$FEATURE_EXPORT_PDF_STAGING' >> $BASH_ENV
@@ -325,6 +327,7 @@ commands:
       - run:
           name: Set Production Environment Variables
           command: |
+            echo 'export ENABLE_BUSINESS_MIGRATION_FROM_USERS_TABLE=ENABLE_BUSINESS_MIGRATION_FROM_USERS_TABLE_PROD' >> $BASH_ENV
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_PROD' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_PROD' >> $BASH_ENV
             echo 'export FEATURE_EXPORT_PDF=$FEATURE_EXPORT_PDF_PROD' >> $BASH_ENV
@@ -381,6 +384,7 @@ commands:
       - run:
           name: Set Content Environment Variables
           command: |
+            echo 'export ENABLE_BUSINESS_MIGRATION_FROM_USERS_TABLE=ENABLE_BUSINESS_MIGRATION_FROM_USERS_TABLE_CONTENT' >> $BASH_ENV
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_CONTENT' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_CONTENT' >> $BASH_ENV
             echo 'export MYNJ_ROLE_NAME=$MYNJ_ROLE_NAME_CONTENT' >> $BASH_ENV
@@ -399,6 +403,7 @@ commands:
       - run:
           name: Set Accessibility Testing Environment Variables
           command: |
+            echo 'export ENABLE_BUSINESS_MIGRATION_FROM_USERS_TABLE=ENABLE_BUSINESS_MIGRATION_FROM_USERS_TABLE_TESTING' >> $BASH_ENV
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_TESTING' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_TESTING' >> $BASH_ENV
             echo 'export MYNJ_ROLE_NAME=$MYNJ_ROLE_NAME_TESTING' >> $BASH_ENV

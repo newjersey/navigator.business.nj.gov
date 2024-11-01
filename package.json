@@ -141,6 +141,7 @@
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "15.0.7",
     "@testing-library/user-event": "14.5.2",
+    "@types/aws-lambda": "8.10.145",
     "@types/broken-link-checker": "0.7.3",
     "@types/cors": "2.8.17",
     "@types/cypress-dotenv": "2.0.3",

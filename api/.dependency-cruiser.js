@@ -12,6 +12,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "@types/aws-lambda" },
+    },
+    {
+      from: {},
       to: { path: "@aws-sdk/util-dynamodb" },
     },
     {
