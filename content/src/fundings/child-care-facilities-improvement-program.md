@@ -13,7 +13,7 @@ sidebarCardBodyText: >
   The Child Care Facilities Improvement Program provides grants for facilities improvement to New Jersey child care providers that provide high quality early childhood learning environments.
 openDate: 11/15/2022
 dueDate: ""
-summaryDescriptionMd: >
+summaryDescriptionMd: >-
   The Child Care Facilities Improvement Program offers grants for facilities
   improvement if you are a New Jersey child care provider offering high-quality
   early childhood learning environments.
@@ -56,6 +56,6 @@ publishStageArchive: null
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-Grant between $50,000 to $200,000.
+You receive a grant between $50,000 to $200,000.
 
 :::
