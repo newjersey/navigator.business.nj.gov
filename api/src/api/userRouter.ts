@@ -1,11 +1,11 @@
 import { getAnnualFilings } from "@domain/annual-filings/getAnnualFilings";
 import {
+  DatabaseClient,
   EncryptionDecryptionClient,
   TimeStampBusinessSearch,
   UpdateLicenseStatus,
   UpdateOperatingPhase,
   UpdateSidebarCards,
-  UserDataClient,
 } from "@domain/types";
 import { encryptTaxIdFactory } from "@domain/user/encryptTaxIdFactory";
 import type { LogWriterType } from "@libs/logWriter";
@@ -94,7 +94,7 @@ const shouldUpdateBusinessNameSearch = (userData: UserData): boolean => {
   const isDba = determineIfNexusDbaNameNeeded(currentBusiness);
   const shouldUpdateNameAvailability = isDba ? dbaNameIsOlderThanAnHour : businessNameIsOlderThanAnHour;
 
-  return shouldUpdateNameAvailability && currentBusiness.formationData.completedFilingPayment !== true;
+  return shouldUpdateNameAvailability && !currentBusiness.formationData.completedFilingPayment;
 };
 
 export const getSignedInUser = (req: Request): CognitoJWTPayload => {
@@ -121,7 +121,7 @@ const businessHasFormed = (userData: UserData): boolean => {
 };
 
 export const userRouterFactory = (
-  userDataClient: UserDataClient,
+  dynamoDataClient: DatabaseClient,
   updateLicenseStatus: UpdateLicenseStatus,
   updateRoadmapSidebarCards: UpdateSidebarCards,
   updateOperatingPhase: UpdateOperatingPhase,
@@ -142,7 +142,7 @@ export const userRouterFactory = (
       status = StatusCodes.BAD_REQUEST;
       res.status(status).send({ error: "`email` property required." });
     } else {
-      const userData = await userDataClient.findByEmail(email);
+      const userData = await dynamoDataClient.findByEmail(email);
 
       if (userData) {
         status = StatusCodes.OK;
@@ -163,7 +163,7 @@ export const userRouterFactory = (
       return;
     }
 
-    userDataClient
+    dynamoDataClient
       .get(req.params.userId)
       .then(async (userData: UserData) => {
         let updatedUserData = userData;
@@ -172,7 +172,7 @@ export const userRouterFactory = (
           .then((userData) => updateRoadmapSidebarCards(userData))
           .then((userData) => asyncUpdateLicenseStatus(userData));
 
-        await userDataClient.put(updatedUserData);
+        await dynamoDataClient.put(updatedUserData);
         res.json(updatedUserData);
       })
       .catch((error: Error) => {
@@ -208,7 +208,7 @@ export const userRouterFactory = (
     const userDataWithEncryptedTaxId = await encryptTaxId(userDataWithUpdatedSidebarCards);
     const userDataWithUpdatedISO = setLastUpdatedISO(userDataWithEncryptedTaxId);
 
-    userDataClient
+    dynamoDataClient
       .put(userDataWithUpdatedISO)
       .then((result: UserData) => {
         res.json(result);
@@ -220,7 +220,7 @@ export const userRouterFactory = (
 
   const industryHasChanged = async (userData: UserData): Promise<boolean> => {
     try {
-      const oldUserData = await userDataClient.get(userData.user.id);
+      const oldUserData = await dynamoDataClient.get(userData.user.id);
       const oldBusinessData = getCurrentBusiness(oldUserData);
       const currentBusinessData = getCurrentBusiness(userData);
 
@@ -233,7 +233,7 @@ export const userRouterFactory = (
   const updateLegalStructureIfNeeded = async (userData: UserData): Promise<UserData> => {
     let oldUserData;
     try {
-      oldUserData = await userDataClient.get(userData.user.id);
+      oldUserData = await dynamoDataClient.get(userData.user.id);
     } catch {
       return userData;
     }
@@ -303,7 +303,7 @@ export const userRouterFactory = (
       contactSharingWithAccountCreationPartner: true,
     });
 
-    userDataClient
+    dynamoDataClient
       .put(emptyUserData)
       .then((result) => {
         res.json(result);

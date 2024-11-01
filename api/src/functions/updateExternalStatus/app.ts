@@ -2,6 +2,7 @@ import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
 import { addToUserTestingBatch } from "@domain/user-testing/addToUserTestingBatch";
 import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFactory";
+import { DYNAMO_OFFLINE_PORT, IS_DOCKER, IS_OFFLINE, STAGE, USERS_TABLE } from "@functions/config";
 import { LogWriter } from "@libs/logWriter";
 import { GovDeliveryNewsletterClient } from "src/client/GovDeliveryNewsletterClient";
 import { DynamoUserDataClient } from "src/db/DynamoUserDataClient";
@@ -9,11 +10,6 @@ import { addNewsletterBatch } from "src/domain/newsletter/addNewsletterBatch";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 
 export default async function handler(): Promise<void> {
-  const IS_OFFLINE = process.env.IS_OFFLINE === "true" || false; // set by serverless-offline
-  const IS_DOCKER = process.env.IS_DOCKER === "true" || false; // set in docker-compose
-  const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
-  const STAGE = process.env.STAGE || "local";
-  const DYNAMO_OFFLINE_PORT = Number.parseInt(process.env.DYNAMO_PORT || "8000");
   const dataLogger = LogWriter(`aws/${STAGE}`, "DataMigrationLogs");
   const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
   const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, dataLogger);

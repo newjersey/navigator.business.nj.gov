@@ -394,6 +394,7 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
     preferences: generatePreferences({}),
     taxFilingData: generateTaxFilingData({}),
     environmentData: generateEnvironmentData({}),
+    version: CURRENT_VERSION,
     profileData,
     formationData,
     ...overrides,

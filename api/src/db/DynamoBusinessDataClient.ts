@@ -1,27 +1,19 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { ExecuteStatementCommand, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
+import { AttributeValue, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
 import { DeleteCommand, DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
-import { migrateData } from "@db/config/dynamoDbConfig";
 import { BusinessesDataClient } from "@domain/types";
+import { LogWriterType } from "@libs/logWriter";
 import { Business } from "@shared/userData";
 
-export const DynamoBusinessesDataClient = (
+export const DynamoBusinessDataClient = (
   db: DynamoDBDocumentClient,
-  tableName: string
+  tableName: string,
+  logger: LogWriterType
 ): BusinessesDataClient => {
-  const doMigration = async (data: any): Promise<Business> => {
-    const migratedData = migrateData(data);
-    await put(migratedData);
-    return migratedData;
-  };
-
-  const findBusinessByIndex = (
+  const findSingleBusinessByIndex = (
     indexName: string,
     keyConditionExpression: string,
-    expressionAttributeValues: { [key: string]: any }
+    expressionAttributeValues: Record<string, AttributeValue>
   ): Promise<Business | undefined> => {
     const params: QueryCommandInput = {
       TableName: tableName,
@@ -37,10 +29,10 @@ export const DynamoBusinessesDataClient = (
           return;
         }
         const item = unmarshall(result.Items[0]);
-        return doMigration(item.data);
+        return item.data;
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((error: Error) => {
+        logger.LogError(`Error finding business by index: ${indexName} with error: ${error.message}`);
         throw new Error("Not found");
       });
   };
@@ -48,7 +40,7 @@ export const DynamoBusinessesDataClient = (
   const findAllBusinessesByIndex = (
     indexName: string,
     keyConditionExpression: string,
-    expressionAttributeValues: { [key: string]: any }
+    expressionAttributeValues: Record<string, AttributeValue>
   ): Promise<Business[]> => {
     const params: QueryCommandInput = {
       TableName: tableName,
@@ -64,14 +56,19 @@ export const DynamoBusinessesDataClient = (
           return [];
         }
         const businesses = result.Items.map((item) => unmarshall(item));
-        return Promise.all(businesses.map(async (item) => await doMigration(item.data)));
+        return Promise.all(businesses.map(async (item) => await item.data));
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((error: Error) => {
+        logger.LogError(`Error finding business by index: ${indexName} with error: ${error.message}`);
         throw new Error("Error retrieving items");
       });
   };
 
+  const findAllByBusinessName = (businessName: string): Promise<Business[]> => {
+    return findAllBusinessesByIndex("BusinessName", "businessName = :businessName", {
+      ":businessName": { S: businessName },
+    });
+  };
   const findAllByNAICSCode = (naicsCode: string): Promise<Business[]> => {
     return findAllBusinessesByIndex("NaicsCode", "naicsCode = :naicsCode", {
       ":naicsCode": { S: naicsCode },
@@ -83,13 +80,13 @@ export const DynamoBusinessesDataClient = (
   };
 
   const findByBusinessName = (businessName: string): Promise<Business | undefined> => {
-    return findBusinessByIndex("BusinessName", "businessName = :businessName", {
+    return findSingleBusinessByIndex("BusinessName", "businessName = :businessName", {
       ":businessName": { S: businessName },
     });
   };
 
   const findByEncryptedTaxId = (encryptedTaxId: string): Promise<Business | undefined> => {
-    return findBusinessByIndex("EncryptedTaxId", "encryptedTaxId = :encryptedTaxId", {
+    return findSingleBusinessByIndex("EncryptedTaxId", "encryptedTaxId = :encryptedTaxId", {
       ":encryptedTaxId": { S: encryptedTaxId },
     });
   };
@@ -101,33 +98,31 @@ export const DynamoBusinessesDataClient = (
         businessId: businessId,
       },
     };
-    return db
-      .send(new GetCommand(params))
-
-      .then((result) => {
-        if (!result.Item) {
-          throw new Error("Not found");
-        }
-        return doMigration(result.Item.data);
-      });
+    return db.send(new GetCommand(params)).then((result) => {
+      if (!result.Item) {
+        throw new Error(`Business with ID ${businessId} not found in table ${tableName}`);
+      }
+      return result.Item.data;
+    });
   };
 
   const put = async (businessData: Business): Promise<Business> => {
-    const migratedData = migrateData(businessData);
+    const businessName = businessData.profileData.businessName;
+    const naicsCode = businessData.profileData.naicsCode;
     const params = {
       TableName: tableName,
       Item: {
-        businessId: migratedData.id,
-        businessName: migratedData.profileData.businessName,
-        naicsCode: migratedData.profileData.naicsCode,
-        industry: migratedData.profileData.industryId,
-        encryptedTaxId: migratedData.profileData.encryptedTaxId,
-        data: migratedData,
+        businessId: businessData.id,
+        industry: businessData.profileData.industryId,
+        encryptedTaxId: businessData.profileData.encryptedTaxId,
+        data: businessData,
+        // Replaces empty strings with `undefined` to avoid indexing empty values in DynamoDB.
+        businessName: businessName === "" ? undefined : businessData.profileData.businessName,
+        naicsCode: naicsCode === "" ? undefined : businessData.profileData.naicsCode,
       },
     };
-
     return db.send(new PutCommand(params)).then(() => {
-      return migratedData;
+      return businessData;
     });
   };
 
@@ -145,21 +140,10 @@ export const DynamoBusinessesDataClient = (
         console.log(`Business with ID ${businessId} deleted successfully.`);
       })
       .catch((error) => {
-        console.error("Error deleting business:", error);
+        logger.LogError("Error deleting business:", error);
         throw new Error("Failed to delete business");
       });
   };
-
-  const search = async (statement: string): Promise<Business[]> => {
-    const { Items = [] } = await db.send(new ExecuteStatementCommand({ Statement: statement }));
-    return await Promise.all(
-      Items.map(async (object: any): Promise<Business> => {
-        const data = unmarshall(object).data;
-        return await doMigration(data);
-      })
-    );
-  };
-
   return {
     get,
     put,
@@ -168,5 +152,6 @@ export const DynamoBusinessesDataClient = (
     findByEncryptedTaxId,
     findAllByIndustry,
     findAllByNAICSCode,
+    findAllByBusinessName,
   };
 };
