@@ -33,6 +33,17 @@ sector: []
 publishStageArchive: ""
 municipality: All
 ---
+Your business may qualify for an extra $5,000 tax credit if your apprenticeship program provides opportunities in key industries:
+
+* Manufacturing
+* Construction
+* Healthcare
+* Logistics
+* Pharmaceuticals
+* Transportation
+* Tourism
+* Renewable energy
+
 ## Eligibility
 
 * Your business must be in the first year of running its apprenticeship program
@@ -40,6 +51,6 @@ municipality: All
 
 :::callout{ showHeader="true" headerText="Benefits:" showIcon="false" calloutType="conditional" }
 
-* Your business may qualify for an extra $5,000 tax credit ($10,000 total) if your apprenticeship program provides opportunities in key industries, such as manufacturing, construction, healthcare, logistics, pharmaceuticals, transportation, tourism, or renewable energy
+The tax credit ranges from $5,000 to $10,000 to cover costs associated with first-year development of a new apprenticeship program.
 
 :::
