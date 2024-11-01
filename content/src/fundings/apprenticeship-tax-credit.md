@@ -1,5 +1,8 @@
 ---
-notesMd: 10.31 WIP
+notesMd: "11.1 Jotform response:
+  https://innovatenj.jotform.com/edit/6061967637618862599?utm_source=emailfoote\
+  r&utm_medium=email&utm_term=213624240893051&utm_content=edit_submissions&utm_\
+  campaign=notification_email_footer_submission_links&email_type=notification"
 filename: apprenticeship-tax-credit
 name: Apprenticeship Tax Credit Program
 displayName: apprenticeship-tax-credit
@@ -11,8 +14,7 @@ openDate: ""
 dueDate: ""
 summaryDescriptionMd: The Apprenticeship Tax Credit Program offers your business
   a $5,000 tax credit to offset approved startup expenses in the first year of
-  your apprenticeship program. To receive this credit, you must apply to the
-  Department of Labor and the Division of Taxation and get approval.
+  your apprenticeship program.
 callToActionLink: https://nj.gov/labor/career-services/apprenticeship/taxcredit
 callToActionText: Learn more
 fundingType: tax credit
@@ -35,6 +37,9 @@ municipality: All
 ---
 ## Eligibility
 
+
+
+* Your business must be registered in New Jersey
 * Your business must be in the first year of running its apprenticeship program
 * Enroll at least 1 apprentice in your program
 * Your business may qualify for an extra $5,000 tax credit if your apprenticeship program provides opportunities in key industries: manufacturing, construction, healthcare, logistics, pharmaceuticals, transportation, tourism, or renewable energy
