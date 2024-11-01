@@ -10,8 +10,8 @@ sidebarCardBodyText: "A State tax credit for businesses experiencing startup
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: The Apprenticeship Tax Credit Program offers your business
-  a $5,000 tax credit to offset approved startup costs in the first year of your
-  apprenticeship program. To receive this credit, you must apply to the
+  a $5,000 tax credit to offset approved startup expenses in the first year of
+  your apprenticeship program. To receive this credit, you must apply to the
   Department of Labor and the Division of Taxation and get approval.
 callToActionLink: https://nj.gov/labor/career-services/apprenticeship/taxcredit
 callToActionText: Learn more
@@ -33,14 +33,13 @@ sector: []
 publishStageArchive: ""
 municipality: All
 ---
-The tax credit ranges from $5,000 to $10,000 to cover costs associated with the first-year development of your new apprenticeship program.
-
 ## Eligibility
 
+* Your business must be in the first year of running its apprenticeship program
 * Enroll at least 1 apprentice in your program
 
 :::callout{ showHeader="true" headerText="Benefits:" showIcon="false" calloutType="conditional" }
 
-*
+* Your business may qualify for an extra $5,000 tax credit ($10,000 total) if your apprenticeship program provides opportunities in key industries, such as manufacturing, construction, healthcare, logistics, pharmaceuticals, transportation, tourism, or renewable energy
 
 :::
