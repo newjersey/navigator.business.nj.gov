@@ -41,7 +41,7 @@ export const ModalZeroButton = (props: Props): ReactElement => {
             color: "#757575",
           }}
         >
-          <Icon className="usa-icon--size-4">close</Icon>
+          <Icon className="usa-icon--size-4" iconName="close" />
         </IconButton>
       </div>
       <DialogContent sx={{ padding: 0 }} dividers>

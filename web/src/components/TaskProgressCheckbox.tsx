@@ -230,7 +230,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
           }
           style={{ width: "22px", height: "22px" }}
         >
-          <Icon>{getIcon()}</Icon>
+          <Icon iconName={getIcon()} />
         </span>
       </button>
     );

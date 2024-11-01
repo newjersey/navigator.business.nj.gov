@@ -140,7 +140,7 @@ export const ExternalLink = ({
       }}
     >
       {children}
-      <Icon className="">launch</Icon>
+      <Icon iconName="launch" />
     </a>
   );
 };
@@ -178,9 +178,9 @@ const InlineIcon = (props: any): ReactElement => {
   const getIconByType = (): ReactElement => {
     switch (props.type as InlineIconType) {
       case "green checkmark":
-        return <Icon className="inline-icon text-green">check_circle</Icon>;
+        return <Icon className="inline-icon text-green" iconName="check_circle" />;
       case "red x mark":
-        return <Icon className="inline-icon text-red">cancel</Icon>;
+        return <Icon className="inline-icon text-red" iconName="cancel" />;
       default:
         return <></>;
     }

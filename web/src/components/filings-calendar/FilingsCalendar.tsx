@@ -114,12 +114,12 @@ export const FilingsCalendar = (props: Props): ReactElement => {
         >
           {business?.preferences.isCalendarFullView ? (
             <>
-              <Icon className="usa-icon--size-3 margin-right-05">list</Icon>
+              <Icon className="usa-icon--size-3 margin-right-05" iconName="list" />
               {Config.dashboardDefaults.calendarListViewButton}
             </>
           ) : (
             <>
-              <Icon className="usa-icon--size-3 margin-right-05">grid_view</Icon>
+              <Icon className="usa-icon--size-3 margin-right-05" iconName="grid_view" />
               {Config.dashboardDefaults.calendarGridViewButton}
             </>
           )}
@@ -145,7 +145,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             >
               <ArrowTooltip title={Config.dashboardDefaults.calendarTooltip}>
                 <div className="fdr fac font-body-lg text-green" data-testid="calendar-tooltip">
-                  <Icon>help_outline</Icon>
+                  <Icon iconName="help_outline" />
                 </div>
               </ArrowTooltip>
             </div>

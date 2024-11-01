@@ -173,7 +173,7 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
               }}
             >
               <AccordionSummary
-                expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
+                expandIcon={<Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />}
                 aria-controls="hidden-opportunity-content"
                 id="hidden-opportunity-header"
                 data-testid="hidden-opportunity-header"

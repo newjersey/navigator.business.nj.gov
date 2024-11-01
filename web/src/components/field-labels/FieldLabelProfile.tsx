@@ -66,7 +66,7 @@ export const FieldLabelProfile = (props: Props): ReactElement => {
               data-testid={`${props.fieldName}-locked-tooltip`}
             >
               <div className="fdr fac font-body-lg">
-                <Icon>help_outline</Icon>
+                <Icon iconName="help_outline" />
               </div>
             </ArrowTooltip>
           </div>

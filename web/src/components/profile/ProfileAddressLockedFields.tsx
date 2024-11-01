@@ -18,7 +18,7 @@ export const ProfileAddressLockedFields = (): ReactElement => {
             data-testid="locked-profileBusinessAddressTooltip"
           >
             <div className="fdr fac font-body-lg">
-              <Icon>help_outline</Icon>
+              <Icon iconName="help_outline" />
             </div>
           </ArrowTooltip>
         </div>

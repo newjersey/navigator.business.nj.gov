@@ -98,7 +98,7 @@ export const TaxInput = (props: Props): ReactElement => {
       <div className={"text-wrap margin-bottom-1"}>
         <ArrowTooltip title={Config.profileDefaults.default.lockedFieldTooltipText}>
           <div className="fdr fac  font-body-lg">
-            <Icon>help_outline</Icon>
+            <Icon iconName="help_outline" />
           </div>
         </ArrowTooltip>
       </div>

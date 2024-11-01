@@ -36,9 +36,10 @@ export const SingleCtaLink = (props: Props): ReactElement => {
         >
           {props?.text || Config.taskDefaults.defaultCallToActionText}
           {props.iconName && (
-            <Icon className="text-green usa-icon--size-3 margin-left-1 padding-bottom-05">
-              {props.iconName}
-            </Icon>
+            <Icon
+              className="text-green usa-icon--size-3 margin-left-1 padding-bottom-05"
+              iconName={props.iconName}
+            />
           )}
         </PrimaryButton>
       </ActionBarLayout>

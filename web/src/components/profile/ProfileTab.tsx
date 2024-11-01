@@ -19,7 +19,7 @@ export const ProfileTab = (props: Props): ReactElement => {
       onClick={(): void => props.setProfileTab(props.tab)}
     >
       <div className={`${props.activeTab === props.tab ? "selected" : ""} tal`}>{props.tabText}</div>
-      <Icon className="usa-icon--size-3 margin-x-1">navigate_next</Icon>
+      <Icon className="usa-icon--size-3 margin-x-1" iconName="navigate_next" />
     </button>
   );
 };

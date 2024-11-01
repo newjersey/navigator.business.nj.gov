@@ -99,9 +99,8 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
                   <Icon
                     className="font-body-lg"
                     label={`remove ${camelCaseToSentence(props.fieldName).toLowerCase()}`}
-                  >
-                    delete
-                  </Icon>
+                    iconName="delete"
+                  />
                 </UnStyledButton>
               </div>
             )}
