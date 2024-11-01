@@ -1,5 +1,5 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
-import { HelpOutline } from "@mui/icons-material";
+import { Icon } from "@/components/njwds/Icon";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -26,7 +26,7 @@ const renderToolTip = (): void => {
     <ThemeProvider theme={createTheme()}>
       <ArrowTooltip title={testString}>
         <div className="fdr fac font-body-lg text-green" data-testid="tooltip">
-          <HelpOutline />
+          <Icon iconName="help_outline" />
         </div>
       </ArrowTooltip>
     </ThemeProvider>
