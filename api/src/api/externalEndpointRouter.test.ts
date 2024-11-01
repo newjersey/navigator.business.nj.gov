@@ -1,5 +1,5 @@
 import { externalEndpointRouterFactory } from "@api/externalEndpointRouter";
-import { AddNewsletter, AddToUserTesting, UserDataClient } from "@domain/types";
+import { AddNewsletter, AddToUserTesting, UnifiedDataClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { generateUser, generateUserData } from "@shared/test";
 import { Express } from "express";
@@ -34,25 +34,21 @@ const cognitoPayload = ({ id }: { id: string }): any => {
 
 describe("externalEndpointRouter", () => {
   let app: Express;
-
-  let stubUserDataClient: jest.Mocked<UserDataClient>;
+  let stubUnifiedDataClient: jest.Mocked<UnifiedDataClient>;
   let stubAddNewsletter: jest.MockedFunction<AddNewsletter>;
   let stubAddToUserTesting: jest.MockedFunction<AddToUserTesting>;
 
   beforeEach(async () => {
-    stubUserDataClient = {
-      get: jest.fn(),
-      put: jest.fn(),
+    stubUnifiedDataClient = {
+      migrateUsersAndBusinesses: jest.fn(),
+      getUserData: jest.fn(),
+      addUpdatedUserToUsersAndBusinessesTable: jest.fn(),
       findByEmail: jest.fn(),
-      getNeedNewsletterUsers: jest.fn(),
-      getNeedToAddToUserTestingUsers: jest.fn(),
-      getNeedTaxIdEncryptionUsers: jest.fn(),
-      getUsersWithOutdatedVersion: jest.fn(),
     };
     stubAddNewsletter = jest.fn();
     stubAddToUserTesting = jest.fn();
     app = setupExpress(false);
-    app.use(externalEndpointRouterFactory(stubUserDataClient, stubAddNewsletter, stubAddToUserTesting));
+    app.use(externalEndpointRouterFactory(stubUnifiedDataClient, stubAddNewsletter, stubAddToUserTesting));
   });
 
   afterAll(async () => {
@@ -91,7 +87,7 @@ describe("externalEndpointRouter", () => {
         });
         await request(app).post(`/newsletter`).send(userData);
         expect(stubAddNewsletter).toHaveBeenCalled();
-        expect(stubUserDataClient.put).not.toHaveBeenCalled();
+        expect(stubUnifiedDataClient.addUpdatedUserToUsersAndBusinessesTable).not.toHaveBeenCalled();
       });
 
       it("adds to newsletter and updates the db if the user is authenticated", async () => {
@@ -99,10 +95,10 @@ describe("externalEndpointRouter", () => {
           user: generateUser({ id: "123", externalStatus: {}, receiveNewsletter: true }),
         });
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-        stubUserDataClient.put.mockResolvedValue(userData);
+        stubUnifiedDataClient.addUpdatedUserToUsersAndBusinessesTable.mockResolvedValue(userData);
         await request(app).post(`/newsletter`).send(userData).set("Authorization", "Bearer user-123-token");
         expect(stubAddNewsletter).toHaveBeenCalled();
-        expect(stubUserDataClient.put).toHaveBeenCalled();
+        expect(stubUnifiedDataClient.addUpdatedUserToUsersAndBusinessesTable).toHaveBeenCalled();
       });
     });
 
@@ -135,7 +131,7 @@ describe("externalEndpointRouter", () => {
         });
         await request(app).post(`/userTesting`).send(userData);
         expect(stubAddToUserTesting).toHaveBeenCalled();
-        expect(stubUserDataClient.put).not.toHaveBeenCalled();
+        expect(stubUnifiedDataClient.addUpdatedUserToUsersAndBusinessesTable).not.toHaveBeenCalled();
       });
 
       it("adds to newsletter and updates the db if the user is authenticated", async () => {
@@ -143,10 +139,10 @@ describe("externalEndpointRouter", () => {
           user: generateUser({ id: "123", externalStatus: {}, userTesting: true }),
         });
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-        stubUserDataClient.put.mockResolvedValue(userData);
+        stubUnifiedDataClient.addUpdatedUserToUsersAndBusinessesTable.mockResolvedValue(userData);
         await request(app).post(`/userTesting`).send(userData).set("Authorization", "Bearer user-123-token");
         expect(stubAddToUserTesting).toHaveBeenCalled();
-        expect(stubUserDataClient.put).toHaveBeenCalled();
+        expect(stubUnifiedDataClient.addUpdatedUserToUsersAndBusinessesTable).toHaveBeenCalled();
       });
     });
   });

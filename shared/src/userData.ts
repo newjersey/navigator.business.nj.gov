@@ -12,8 +12,8 @@ export interface UserData {
   readonly lastUpdatedISO: string;
   readonly dateCreatedISO: string;
   readonly versionWhenCreated: number;
-  readonly businesses: Record<string, Business>;
-  readonly currentBusinessId: string;
+  businesses: Record<string, Business>;
+  currentBusinessId: string;
 }
 
 export interface Business {
@@ -29,9 +29,10 @@ export interface Business {
   readonly taxFilingData: TaxFilingData;
   readonly formationData: FormationData;
   readonly environmentData: EnvironmentData | undefined;
+  readonly version: number;
 }
 
-export const CURRENT_VERSION = 150;
+export const CURRENT_VERSION = 151;
 
 export const createEmptyBusiness = (id?: string): Business => {
   return {
@@ -71,6 +72,7 @@ export const createEmptyBusiness = (id?: string): Business => {
       lastVisitedPageIndex: 0,
     },
     environmentData: undefined,
+    version: CURRENT_VERSION,
   };
 };
 

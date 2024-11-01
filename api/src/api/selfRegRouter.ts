@@ -1,4 +1,4 @@
-import { SelfRegClient, UserDataClient } from "@domain/types";
+import { SelfRegClient, UnifiedDataClient } from "@domain/types";
 import { UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { Router } from "express";
@@ -6,7 +6,7 @@ import { StatusCodes } from "http-status-codes";
 import { createHmac } from "node:crypto";
 
 export const selfRegRouterFactory = (
-  userDataClient: UserDataClient,
+  unifiedDataClient: UnifiedDataClient,
   selfRegClient: SelfRegClient
 ): Router => {
   const router = Router();
@@ -33,7 +33,7 @@ export const selfRegRouterFactory = (
   const updateMyNJKey = (userData: UserData, myNJUserKey: string): Promise<UserData> => {
     const hmac = createHmac("sha256", process.env.INTERCOM_HASH_SECRET || "");
     const hash = hmac.update(myNJUserKey).digest("hex");
-    return userDataClient.put({
+    return unifiedDataClient.addUpdatedUserToUsersAndBusinessesTable({
       ...userData,
       user: {
         ...userData.user,

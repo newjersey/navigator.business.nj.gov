@@ -1,5 +1,5 @@
 import { getSignedInUserId } from "@api/userRouter";
-import { EncryptionDecryptionClient, TaxFilingInterface, UserDataClient } from "@domain/types";
+import { EncryptionDecryptionClient, TaxFilingInterface, UnifiedDataClient } from "@domain/types";
 import { maskingCharacter } from "@shared/profileData";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
@@ -20,7 +20,7 @@ const getTaxId = async (
 };
 
 export const taxFilingRouterFactory = (
-  userDataClient: UserDataClient,
+  unifiedDataClient: UnifiedDataClient,
   taxFilingInterface: TaxFilingInterface,
   encryptionDecryptionClient: EncryptionDecryptionClient
 ): Router => {
@@ -31,13 +31,15 @@ export const taxFilingRouterFactory = (
     const { encryptedTaxId, taxId, businessName } = req.body;
     try {
       const plainTextTaxId = await getTaxId(encryptionDecryptionClient, taxId, encryptedTaxId);
-      const userData = await userDataClient.get(userId);
+      const userData = await unifiedDataClient.getUserData(userId);
       const userDataWithTaxFilingData = await taxFilingInterface.lookup({
         userData,
         taxId: plainTextTaxId,
         businessName,
       });
-      const updatedUserData = await userDataClient.put(userDataWithTaxFilingData);
+      const updatedUserData = await unifiedDataClient.addUpdatedUserToUsersAndBusinessesTable(
+        userDataWithTaxFilingData
+      );
       res.json(updatedUserData);
     } catch (error) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
@@ -49,13 +51,15 @@ export const taxFilingRouterFactory = (
     const { encryptedTaxId, taxId, businessName } = req.body;
     try {
       const plainTextTaxId = await getTaxId(encryptionDecryptionClient, taxId, encryptedTaxId);
-      const userData = await userDataClient.get(userId);
+      const userData = await unifiedDataClient.getUserData(userId);
       const userDataWithTaxFilingData = await taxFilingInterface.onboarding({
         userData,
         taxId: plainTextTaxId,
         businessName,
       });
-      const updatedUserData = await userDataClient.put(userDataWithTaxFilingData);
+      const updatedUserData = await unifiedDataClient.addUpdatedUserToUsersAndBusinessesTable(
+        userDataWithTaxFilingData
+      );
       res.json(updatedUserData);
     } catch (error) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });

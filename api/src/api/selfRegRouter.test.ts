@@ -1,5 +1,5 @@
 import { selfRegRouterFactory } from "@api/selfRegRouter";
-import { SelfRegClient, UserDataClient } from "@domain/types";
+import { SelfRegClient, UnifiedDataClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { generateUser, generateUserData } from "@shared/test";
 import { UserData } from "@shared/userData";
@@ -13,18 +13,15 @@ import request, { Response } from "supertest";
 describe("selfRegRouter", () => {
   let app: Express;
 
-  let stubUserDataClient: jest.Mocked<UserDataClient>;
+  let stubUnifiedDataClient: jest.Mocked<UnifiedDataClient>;
   let stubSelfRegClient: jest.Mocked<SelfRegClient>;
 
   beforeEach(async () => {
-    stubUserDataClient = {
-      get: jest.fn(),
-      put: jest.fn(),
+    stubUnifiedDataClient = {
+      migrateUsersAndBusinesses: jest.fn(),
+      getUserData: jest.fn(),
+      addUpdatedUserToUsersAndBusinessesTable: jest.fn(),
       findByEmail: jest.fn(),
-      getNeedNewsletterUsers: jest.fn(),
-      getNeedToAddToUserTestingUsers: jest.fn(),
-      getNeedTaxIdEncryptionUsers: jest.fn(),
-      getUsersWithOutdatedVersion: jest.fn(),
     };
 
     stubSelfRegClient = {
@@ -33,7 +30,7 @@ describe("selfRegRouter", () => {
     };
 
     app = setupExpress(false);
-    app.use(selfRegRouterFactory(stubUserDataClient, stubSelfRegClient));
+    app.use(selfRegRouterFactory(stubUnifiedDataClient, stubSelfRegClient));
   });
 
   afterAll(async () => {
@@ -58,7 +55,9 @@ describe("selfRegRouter", () => {
       const hashedKey = generateHashedKey(myNJKey);
       expect(stubSelfRegClient.resume).toHaveBeenCalledWith(myNJKey);
 
-      const putCalledWith = getLastCalledWith(stubUserDataClient.put)[0];
+      const putCalledWith = getLastCalledWith(
+        stubUnifiedDataClient.addUpdatedUserToUsersAndBusinessesTable
+      )[0];
       expect(putCalledWith.user.intercomHash).toEqual(hashedKey);
       expect(putCalledWith.lastUpdatedISO).not.toBeUndefined();
       expect(putCalledWith.dateCreatedISO).not.toBeUndefined();
@@ -70,7 +69,7 @@ describe("selfRegRouter", () => {
     });
 
     it("returns an INTERNAL SERVER ERROR when auth resume fails", async () => {
-      stubUserDataClient.findByEmail.mockResolvedValue(stubRecordWithMyNJKey);
+      stubUnifiedDataClient.findByEmail.mockResolvedValue(stubRecordWithMyNJKey);
       stubSelfRegClient.resume.mockRejectedValue({});
 
       const response = await sendRequest(stubRecordWithMyNJKey);
@@ -99,7 +98,9 @@ describe("selfRegRouter", () => {
       expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);
       const hashedKey = generateHashedKey(selfRegResponse.myNJUserKey);
 
-      const putCalledWith = getLastCalledWith(stubUserDataClient.put)[0];
+      const putCalledWith = getLastCalledWith(
+        stubUnifiedDataClient.addUpdatedUserToUsersAndBusinessesTable
+      )[0];
       expect(putCalledWith.user.intercomHash).toEqual(hashedKey);
       expect(putCalledWith.user.myNJUserKey).toEqual(selfRegResponse.myNJUserKey);
       expect(putCalledWith.lastUpdatedISO).not.toBeUndefined();
@@ -115,7 +116,7 @@ describe("selfRegRouter", () => {
       stubSelfRegClient.grant.mockRejectedValue({});
       const response = await sendRequest(stubRecordNoKey);
       expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);
-      expect(stubUserDataClient.put).not.toHaveBeenCalled();
+      expect(stubUnifiedDataClient.addUpdatedUserToUsersAndBusinessesTable).not.toHaveBeenCalled();
       expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
     });
 
@@ -124,7 +125,7 @@ describe("selfRegRouter", () => {
 
       const response = await sendRequest(stubRecordNoKey);
       expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);
-      expect(stubUserDataClient.put).not.toHaveBeenCalled();
+      expect(stubUnifiedDataClient.addUpdatedUserToUsersAndBusinessesTable).not.toHaveBeenCalled();
       expect(response.status).toEqual(StatusCodes.CONFLICT);
     });
   });

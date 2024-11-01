@@ -1,5 +1,5 @@
 import { getSignedInUserId } from "@api/userRouter";
-import { UpdateLicenseStatus, UserDataClient } from "@domain/types";
+import { UnifiedDataClient, UpdateLicenseStatus } from "@domain/types";
 import { LicenseSearchNameAndAddress } from "@shared/license";
 import { UserData } from "@shared/userData";
 import { Router } from "express";
@@ -11,17 +11,17 @@ type LicenseStatusRequestBody = {
 
 export const licenseStatusRouterFactory = (
   updateLicenseStatus: UpdateLicenseStatus,
-  userDataClient: UserDataClient
+  unifiedDataClient: UnifiedDataClient
 ): Router => {
   const router = Router();
 
   router.post("/license-status", async (req, res) => {
     const userId = getSignedInUserId(req);
     const { nameAndAddress } = req.body as LicenseStatusRequestBody;
-    const userData = await userDataClient.get(userId);
+    const userData = await unifiedDataClient.getUserData(userId);
     updateLicenseStatus(userData, nameAndAddress)
       .then(async (userData: UserData) => {
-        const updatedUserData = await userDataClient.put(userData);
+        const updatedUserData = await unifiedDataClient.addUpdatedUserToUsersAndBusinessesTable(userData);
         res.json(updatedUserData);
       })
       .catch((error) => {

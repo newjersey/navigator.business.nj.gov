@@ -5,6 +5,7 @@ import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
 import { UserDataClient } from "@domain/types";
 import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
+import { randomInt } from "@shared/intHelpers";
 import { generateUser, generateUserData } from "@shared/test";
 
 // references jest-dynalite-config values
@@ -30,9 +31,14 @@ describe("DynamoUserDataClient", () => {
     dynamoUserDataClient = DynamoUserDataClient(client, dbConfig.tableName, logger);
   });
 
-  it("gets inserted items", async () => {
-    await expect(dynamoUserDataClient.get("some-id")).rejects.toEqual(new Error("Not found"));
+  it("should throw an error when attempting to retrieve a non-existent user by ID", async () => {
+    const randomUserId = `user-id-${randomInt()}`;
+    await expect(dynamoUserDataClient.get(randomUserId)).rejects.toEqual(
+      new Error(`User with ID ${randomUserId} not found in table ${dbConfig.tableName}`)
+    );
+  });
 
+  it("gets inserted items", async () => {
     const userData = generateUserData({ user: generateUser({ id: "some-id" }) });
     await dynamoUserDataClient.put(userData);
 

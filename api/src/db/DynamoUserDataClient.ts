@@ -24,35 +24,34 @@ const unmarshallOptions = {
 };
 
 export const dynamoDbTranslateConfig = { marshallOptions, unmarshallOptions };
-
-export const migrateUserData = (data: any, logger: LogWriterType): any => {
-  const logId = logger.GetId();
-  const dataVersion = data.version ?? CURRENT_VERSION;
-  const migrationsToRun = Migrations.slice(dataVersion);
-  const migratedData = migrationsToRun.reduce((prevData: any, migration: MigrationFunction) => {
-    try {
-      logger.LogInfo(
-        `Dynamo User Migration - Id:${logId} - Upgrading ${data.user.id} from ${prevData.version} to ${
-          Number(prevData.version) + 1
-        }`
-      );
-      return migration(prevData);
-    } catch (error) {
-      logger.LogError(
-        `Dynamo User Migration Error - Id:${logId} - Error: ${error} - Data: ${JSON.stringify(prevData)}`
-      );
-    }
-  }, data);
-  return { ...migratedData, version: CURRENT_VERSION };
-};
-
 export const DynamoUserDataClient = (
   db: DynamoDBDocumentClient,
   tableName: string,
   logger: LogWriterType
 ): UserDataClient => {
-  const doMigration = async (data: any): Promise<UserData> => {
-    const migratedData = migrateUserData(data, logger);
+  const migrateData = (data: UserData, logger: LogWriterType): any => {
+    const logId = logger.GetId();
+    const dataVersion = data.version ?? CURRENT_VERSION;
+    const migrationsToRun = Migrations.slice(dataVersion);
+    const migratedData = migrationsToRun.reduce((prevData: any, migration: MigrationFunction) => {
+      try {
+        logger.LogInfo(
+          `Database Migration - Id:${logId} - Upgrading ${data.user.id} from ${prevData.version} to ${
+            Number(prevData.version) + 1
+          }`
+        );
+        return migration(prevData);
+      } catch (error) {
+        logger.LogError(
+          `Database Migration Error - Id:${logId} - Error: ${error} - Data: ${JSON.stringify(prevData)}`
+        );
+      }
+    }, data);
+    return { ...migratedData, version: CURRENT_VERSION };
+  };
+
+  const doMigration = async (data: UserData): Promise<UserData> => {
+    const migratedData = migrateData(data, logger);
     await put(migratedData);
     return migratedData;
   };
@@ -93,7 +92,7 @@ export const DynamoUserDataClient = (
 
       .then(async (result) => {
         if (!result.Item) {
-          throw new Error("Not found");
+          throw new Error(`User with ID ${userId} not found in table ${tableName}`);
         }
         return await doMigration(result.Item.data);
       })
@@ -103,7 +102,7 @@ export const DynamoUserDataClient = (
   };
 
   const put = async (userData: UserData): Promise<UserData> => {
-    const migratedData = migrateUserData(userData, logger);
+    const migratedData = migrateData(userData, logger);
     const params = {
       TableName: tableName,
       Item: {

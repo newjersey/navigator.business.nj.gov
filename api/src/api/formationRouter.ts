@@ -1,7 +1,7 @@
 import { ExpressRequestBody } from "@api/types";
 import { getSignedInUser, getSignedInUserId } from "@api/userRouter";
 import { saveFileFromUrl } from "@domain/s3Writer";
-import { FormationClient, UserDataClient } from "@domain/types";
+import { FormationClient, UnifiedDataClient } from "@domain/types";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
@@ -19,7 +19,7 @@ type FormationPostBody = {
 
 export const formationRouterFactory = (
   formationClient: FormationClient,
-  userDataClient: UserDataClient,
+  unifiedDataClient: UnifiedDataClient,
   config: { shouldSaveDocuments: boolean }
 ): Router => {
   const router = Router();
@@ -37,11 +37,11 @@ export const formationRouterFactory = (
             formationResponse: formationResponse,
           },
         }));
-        await userDataClient.put(userDataWithResponse);
+        await unifiedDataClient.addUpdatedUserToUsersAndBusinessesTable(userDataWithResponse);
         res.json(userDataWithResponse);
       })
       .catch(async () => {
-        await userDataClient.put(userData);
+        await unifiedDataClient.addUpdatedUserToUsersAndBusinessesTable(userData);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json();
       });
   });
@@ -49,7 +49,7 @@ export const formationRouterFactory = (
   router.get("/completed-filing", async (req, res) => {
     const signedInUser = getSignedInUser(req);
     const signedInUserId = getSignedInUserId(req);
-    const userData = await userDataClient.get(signedInUserId);
+    const userData = await unifiedDataClient.getUserData(signedInUserId);
     const currentBusiness = getCurrentBusiness(userData);
 
     if (!currentBusiness.formationData.formationResponse?.formationId) {
@@ -126,7 +126,7 @@ export const formationRouterFactory = (
             },
           },
         }));
-        await userDataClient.put(userDataWithResponse);
+        await unifiedDataClient.addUpdatedUserToUsersAndBusinessesTable(userDataWithResponse);
         res.json(userDataWithResponse);
       })
       .catch((error) => {

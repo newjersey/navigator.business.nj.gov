@@ -1,13 +1,13 @@
 import { getSignedInUserId } from "@api/userRouter";
 import { shouldAddToNewsletter } from "@domain/newsletter/shouldAddToNewsletter";
-import { AddNewsletter, AddToUserTesting, UserDataClient } from "@domain/types";
+import { AddNewsletter, AddToUserTesting, UnifiedDataClient } from "@domain/types";
 import { shouldAddToUserTesting } from "@domain/user-testing/shouldAddToUserTesting";
 import { UserData } from "@shared/userData";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 
 export const externalEndpointRouterFactory = (
-  userDataClient: UserDataClient,
+  unifiedDataClient: UnifiedDataClient,
   addNewsletter: AddNewsletter,
   addToUserTesting: AddToUserTesting
 ): Router => {
@@ -26,7 +26,7 @@ export const externalEndpointRouterFactory = (
       userData = await addNewsletter(userData);
       if (!isAnonymous) {
         try {
-          userData = await userDataClient.put(userData);
+          userData = await unifiedDataClient.addUpdatedUserToUsersAndBusinessesTable(userData);
         } catch (error) {
           res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
         }
@@ -48,7 +48,7 @@ export const externalEndpointRouterFactory = (
       userData = await addToUserTesting(userData);
       if (!isAnonymous) {
         try {
-          userData = await userDataClient.put(userData);
+          userData = await unifiedDataClient.addUpdatedUserToUsersAndBusinessesTable(userData);
         } catch (error) {
           res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
         }

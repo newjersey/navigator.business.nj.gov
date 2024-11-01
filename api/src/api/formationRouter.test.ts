@@ -3,7 +3,7 @@
 import { formationRouterFactory } from "@api/formationRouter";
 import { getSignedInUser, getSignedInUserId } from "@api/userRouter";
 import { saveFileFromUrl } from "@domain/s3Writer";
-import { FormationClient, UserDataClient } from "@domain/types";
+import { FormationClient, UnifiedDataClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
@@ -41,7 +41,7 @@ const fakeSignedInUser = getSignedInUser as jest.Mock;
 describe("formationRouter", () => {
   let app: Express;
   let stubFormationClient: jest.Mocked<FormationClient>;
-  let stubUserDataClient: jest.Mocked<UserDataClient>;
+  let stubUnifiedDataClient: jest.Mocked<UnifiedDataClient>;
 
   beforeEach(async () => {
     jest.resetAllMocks();
@@ -58,17 +58,16 @@ describe("formationRouter", () => {
       getCompletedFiling: jest.fn(),
       health: jest.fn(),
     };
-    stubUserDataClient = {
-      get: jest.fn(),
+    stubUnifiedDataClient = {
+      migrateUsersAndBusinesses: jest.fn(),
+      getUserData: jest.fn(),
+      addUpdatedUserToUsersAndBusinessesTable: jest.fn(),
       findByEmail: jest.fn(),
-      put: jest.fn(),
-      getNeedNewsletterUsers: jest.fn(),
-      getNeedToAddToUserTestingUsers: jest.fn(),
-      getNeedTaxIdEncryptionUsers: jest.fn(),
-      getUsersWithOutdatedVersion: jest.fn(),
     };
     app = setupExpress(false);
-    app.use(formationRouterFactory(stubFormationClient, stubUserDataClient, { shouldSaveDocuments: true }));
+    app.use(
+      formationRouterFactory(stubFormationClient, stubUnifiedDataClient, { shouldSaveDocuments: true })
+    );
   });
 
   afterAll(async () => {
@@ -122,7 +121,9 @@ describe("formationRouter", () => {
         },
       }));
 
-      expect(stubUserDataClient.put).toHaveBeenCalledWith(expectedResponse);
+      expect(stubUnifiedDataClient.addUpdatedUserToUsersAndBusinessesTable).toHaveBeenCalledWith(
+        expectedResponse
+      );
     });
 
     it("updates user data even if client fails", async () => {
@@ -134,7 +135,7 @@ describe("formationRouter", () => {
         returnUrl: "some-url",
       });
 
-      expect(stubUserDataClient.put).toHaveBeenCalledWith(userData);
+      expect(stubUnifiedDataClient.addUpdatedUserToUsersAndBusinessesTable).toHaveBeenCalledWith(userData);
     });
   });
 
@@ -173,7 +174,7 @@ describe("formationRouter", () => {
           }),
         })
       );
-      stubUserDataClient.get.mockResolvedValue(userData);
+      stubUnifiedDataClient.getUserData.mockResolvedValue(userData);
       const response = await request(app).get(`/completed-filing`).send();
 
       expect(response.status).toEqual(StatusCodes.OK);
@@ -207,7 +208,9 @@ describe("formationRouter", () => {
         undefined
       );
       expect(response.body).toEqual(expectedNewUserData);
-      expect(stubUserDataClient.put).toHaveBeenCalledWith(expectedNewUserData);
+      expect(stubUnifiedDataClient.addUpdatedUserToUsersAndBusinessesTable).toHaveBeenCalledWith(
+        expectedNewUserData
+      );
       expect(stubFormationClient.getCompletedFiling).toHaveBeenCalledWith("some-formation-id");
     });
 
@@ -229,7 +232,7 @@ describe("formationRouter", () => {
           }),
         })
       );
-      stubUserDataClient.get.mockResolvedValue(userData);
+      stubUnifiedDataClient.getUserData.mockResolvedValue(userData);
       await request(app).get(`/completed-filing`).send();
 
       const expectedUserData = modifyCurrentBusiness(userData, (business) => ({
@@ -240,7 +243,9 @@ describe("formationRouter", () => {
         },
       }));
 
-      expect(stubUserDataClient.put).toHaveBeenCalledWith(expectedUserData);
+      expect(stubUnifiedDataClient.addUpdatedUserToUsersAndBusinessesTable).toHaveBeenCalledWith(
+        expectedUserData
+      );
     });
 
     it("only fetches files that are in the filingResponse", async () => {
@@ -261,7 +266,7 @@ describe("formationRouter", () => {
           }),
         })
       );
-      stubUserDataClient.get.mockResolvedValue(userData);
+      stubUnifiedDataClient.getUserData.mockResolvedValue(userData);
       await request(app).get(`/completed-filing`).send();
 
       const expectedNewUserData = modifyCurrentBusiness(userData, (business) => ({
@@ -302,7 +307,9 @@ describe("formationRouter", () => {
         `us-east-1:identityId/certifiedDoc-1487076708000.pdf`,
         process.env.DOCUMENT_S3_BUCKET
       );
-      expect(stubUserDataClient.put).toHaveBeenCalledWith(expectedNewUserData);
+      expect(stubUnifiedDataClient.addUpdatedUserToUsersAndBusinessesTable).toHaveBeenCalledWith(
+        expectedNewUserData
+      );
     });
   });
 });

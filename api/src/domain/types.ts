@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
@@ -20,6 +21,13 @@ import { Business, UserData } from "@shared/userData";
 import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
 
+export interface UnifiedDataClient {
+  migrateUsersAndBusinesses: () => Promise<{ success: boolean; migratedCount?: number; error?: string }>;
+  getUserData: (userId: string) => Promise<UserData>;
+  addUpdatedUserToUsersAndBusinessesTable: (userData: UserData) => Promise<UserData>;
+  findByEmail: (email: string) => Promise<UserData | undefined>;
+}
+
 export interface UserDataClient {
   get: (userId: string) => Promise<UserData>;
   findByEmail: (email: string) => Promise<UserData | undefined>;
@@ -37,6 +45,7 @@ export interface BusinessesDataClient {
   findByBusinessName: (businessName: string) => Promise<Business | undefined>;
   findAllByNAICSCode: (naicsCode: string) => Promise<Business[]>;
   findAllByIndustry: (industry: string) => Promise<Business[]>;
+  findAllByBusinessName: (businessName: string) => Promise<Business[]>;
   findByEncryptedTaxId: (encryptedTaxId: string) => Promise<Business | undefined>;
 }
 
@@ -197,3 +206,7 @@ export type GetCertHttpsAgent = () => Promise<https.Agent>;
 export const NO_MATCH_ERROR = "NO_MATCH";
 export const NO_ADDRESS_MATCH_ERROR = "NO_ADDRESS_MATCH";
 export const NO_MAIN_APPS_ERROR = "NO_MAIN_APPS";
+
+export interface EvaluationKey {
+  userId: string;
+}
