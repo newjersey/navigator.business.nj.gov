@@ -39,14 +39,13 @@ sector:
   - other-services
 publishStageArchive: ""
 ---
-
 ## Eligibility
 
-- Must be a New Jersey-based clean energy and clean technology company
-- Company must have 50 or fewer full-time employees
+* Must be a New Jersey-based clean energy and clean technology company
+* Company must have 50 or fewer full-time employees
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-Companies received vouchers totaling up to $15,000 per year.
+Companies receive vouchers totaling up to $15,000 per year.
 
 :::
