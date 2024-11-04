@@ -17,7 +17,8 @@ callToActionLink: https://www.njconsumeraffairs.gov/eac/Applications/Application
 - License number, if applicable
 - Social Security number
 - Business name, address, and phone number
-- Business registration number or certificate of formation
+- `Certificate of Formation|certificate-formation`
+- Name of business owner(s)
 - Affidavit signed in front of a public notary
 - Reinstatement questions answered by the office manager of the electrologists office 
 - Applicable fees paid
