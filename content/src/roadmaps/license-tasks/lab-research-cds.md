@@ -10,11 +10,15 @@ agencyId: nj-consumer-affairs
 agencyAdditionalContext: New Jersey Drug Control Unit
 industryId: generic
 licenseCertificationClassification: undefined
-summaryDescriptionMd: "You need a Controlled Dangerous Substances (CDS) registration if you, your business, or your facility handle, store, or use CDS for research purposes or to test other substances. Follow these steps to apply:
+summaryDescriptionMd: >-
+  You need a Controlled Dangerous Substances (CDS) registration if you, your business, or your facility handle, store, or use CDS for research purposes or to test other substances. Follow these steps to apply:
 
-1. Email the NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the Analytical Lab or Researcher CDS Registration application.
-2. After your completed application has been emailed to the DCU, they will email you an invoice to pay your fees online.
-3. Be sure to register with the DEA to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to the DCU within 60 days."
+
+  1. Email the NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the Analytical Lab or Researcher CDS Registration application.
+
+  2. After your completed application has been emailed to the DCU, they will email you an invoice to pay your fees online.
+
+  3. Be sure to register with the DEA to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to the DCU within 60 days.
 ---
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }

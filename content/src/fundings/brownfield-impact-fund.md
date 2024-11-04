@@ -33,12 +33,13 @@ sector:
   - waste-management-and-Remediation
 publishStageArchive: Do Not Publish
 ---
+
 ## Eligibility
 
-* Funds must be allocated to environmental cleanup (not assessment or investigation)
+- Funds must be allocated to environmental cleanup (not assessment or investigation)
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-You recieve low-interest (1-2%) loans of up to $350,000.
+You receive low-interest (1-2%) loans of up to $350,000.
 
 :::
