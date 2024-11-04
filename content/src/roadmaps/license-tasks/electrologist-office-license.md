@@ -18,13 +18,11 @@ webflowId: 66e9d9648d1f1a667a8f04eb
 
 ## Application Requirements
 
-- Applicant/licensee name, mailing address
+- Applicant's name, date of birth, home address, and principal business address
 - License number, if applicable
 - Social Security number
-- 
-- Business name and address
+- Business name, address, and phone number
 - Business registration number or certificate of formation
-- Applicant's name, date of birth, home address, and principal business address
 - A permit and passing inspection of the premises to prove that the premises meet the Universal Precautions for Infection Control criteria
 - Applicable fees paid
 
