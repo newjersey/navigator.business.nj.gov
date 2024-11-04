@@ -32,6 +32,7 @@ webflowId: 66e9d9648d1f1a667a8f04ab
 - History of drug use, if applicable
 - List of all criminal offenses of which the applicant has been convicted (if applicable)
 - History of disciplinary actions and suspended licenses, if applicable
+- List of all current licenses or certifications, if applicable
 - Copy of high school diploma or its equivalent
 - Criminal background check
 - Applicable fees paid
