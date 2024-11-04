@@ -24,6 +24,7 @@ webflowId: 66e9d9648d1f1a667a8f04eb
 - Business name, address, and phone number
 - Business registration number or certificate of formation
 - A permit and passing inspection of the premises to prove that the premises meet the Universal Precautions for Infection Control criteria
+- Affidavit signed in front of a public notary
 - Applicable fees paid
 
 Contact the Electrologists Advisory Committee for an Electrologists Office Premise Application
