@@ -33,6 +33,7 @@ export const buildRoadmap = async ({
   while (hasSteps(roadmapBuilder) && lastStepHasNoTasks(roadmapBuilder)) {
     roadmapBuilder = removeLastStep(roadmapBuilder);
   }
+  roadmapBuilder = removeDuplicateTasks(roadmapBuilder);
   return convertToRoadmap(roadmapBuilder);
 };
 
@@ -143,6 +144,18 @@ const modifyTasks = (roadmap: RoadmapBuilder, modifications: TaskModification[])
     }
   }
 
+  return roadmap;
+};
+
+const removeDuplicateTasks = (roadmap: RoadmapBuilder): RoadmapBuilder => {
+  const taskNames: string[] = [];
+  roadmap.tasks = roadmap.tasks.filter((task) => {
+    if (taskNames.includes(task.filename)) {
+      return false;
+    }
+    taskNames.push(task.filename);
+    return true;
+  });
   return roadmap;
 };
 
