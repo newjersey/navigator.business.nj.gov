@@ -262,7 +262,7 @@ describe("updateLicenseStatus", () => {
       );
     });
 
-    it("updates license data of current task to have error license data when webservice receives NO_MATCH_ERROR and rgb also fails", async () => {
+    it("returns empty license object when data of current task to have error license data when webservice receives NO_MATCH_ERROR and rgb also fails", async () => {
       stubWebserviceLicenseStatusSearch.mockRejectedValue(new Error(NO_MATCH_ERROR));
       stubRGBLicenseStatusSearch.mockRejectedValue(new Error("fail"));
 
@@ -271,21 +271,11 @@ describe("updateLicenseStatus", () => {
         licenseData: generateLicenseData({}),
       }));
 
-      const resultUserData = await updateLicenseStatus(userData, nameAndAddress, "pharmacy-license");
+      const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
       const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
       const resultLicenseData = resultCurrentBusiness.licenseData;
-      const licenseType1Expected = {
-        "Pharmacy-Pharmacy": {
-          licenseStatus: "UNKNOWN",
-          expirationDateISO: undefined,
-          hasError: true,
-
-          checklistItems: [],
-          nameAndAddress,
-          lastUpdatedISO: expectedCurrentDate,
-        },
-      };
+      const licenseType1Expected = {};
 
       expect(resultLicenseData).toEqual({
         lastUpdatedISO: expectedCurrentDate,
@@ -296,7 +286,7 @@ describe("updateLicenseStatus", () => {
     });
 
     it.each([NO_MATCH_ERROR, NO_MAIN_APPS_ERROR, NO_ADDRESS_MATCH_ERROR])(
-      "updates license data of current task to have error license data when rgb receives %s and webservice also fails",
+      "returns empty license task of current task to have error license data when rgb receives %s and webservice also fails",
       async (error) => {
         stubWebserviceLicenseStatusSearch.mockRejectedValue(new Error("fails"));
         stubRGBLicenseStatusSearch.mockRejectedValue(new Error(error));
@@ -306,25 +296,11 @@ describe("updateLicenseStatus", () => {
           licenseData: generateLicenseData({}),
         }));
 
-        const resultUserData = await updateLicenseStatus(
-          userData,
-          nameAndAddress,
-          "home-health-aide-license"
-        );
+        const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
         const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
         const resultLicenseData = resultCurrentBusiness.licenseData;
-        const licenseType1Expected = {
-          "Health Care Services": {
-            licenseStatus: "UNKNOWN",
-            expirationDateISO: undefined,
-            hasError: true,
-
-            checklistItems: [],
-            nameAndAddress,
-            lastUpdatedISO: expectedCurrentDate,
-          },
-        };
+        const licenseType1Expected = {};
 
         expect(resultLicenseData).toEqual({
           lastUpdatedISO: expectedCurrentDate,

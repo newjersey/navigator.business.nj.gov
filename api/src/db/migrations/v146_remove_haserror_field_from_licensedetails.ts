@@ -1,146 +1,172 @@
-import { v144Business, v144UserData } from "@db/migrations/v144_add_raffle_bingo_games";
+import {
+  v145Business,
+  v145LicenseName,
+  v145Licenses,
+  v145UserData,
+} from "@db/migrations/v145_add_traveling_circus_or_carnival";
 import { randomInt } from "@shared/intHelpers";
 
-export const migrate_v144_to_v145 = (v144Data: v144UserData): v145UserData => {
+export const migrate_v145_to_v146 = (v145Data: v145UserData): v146UserData => {
   return {
-    ...v144Data,
+    ...v145Data,
     businesses: Object.fromEntries(
-      Object.values(v144Data.businesses)
-        .map((business: v144Business) => migrate_v144Business_to_v145Business(business))
-        .map((currBusiness: v145Business) => [currBusiness.id, currBusiness])
+      Object.values(v145Data.businesses)
+        .map((business: v145Business) => migrate_v145Business_to_v146Business(business))
+        .map((currBusiness: v146Business) => [currBusiness.id, currBusiness])
     ),
-    version: 145,
-  } as v145UserData;
+    version: 146,
+  } as v146UserData;
 };
 
-export const migrate_v144Business_to_v145Business = (business: v144Business): v145Business => {
+export const migrate_v145Business_to_v146Business = (business: v145Business): v146Business => {
+  const newLicenseData = deleteFieldFromInnerObjects(business.licenseData?.licenses);
+
   return {
     ...business,
     profileData: {
       ...business.profileData,
-      travelingCircusOrCarnivalOwningBusiness: undefined,
+      licenseData: {
+        licenses: newLicenseData,
+        ...business.licenseData,
+      },
     },
-  } as v145Business;
+  } as v146Business;
 };
 
-export interface v145IndustrySpecificData {
+export const deleteFieldFromInnerObjects = (
+  v145Licenses: v145Licenses | undefined
+): v146Licenses | undefined => {
+  if (v145Licenses === undefined) {
+    return undefined;
+  }
+
+  for (const licenseName of Object.keys(v145Licenses)) {
+    const licenseDetails = v145Licenses[licenseName as v145LicenseName];
+    if (licenseDetails !== undefined) {
+      delete licenseDetails.hasError;
+    }
+  }
+  return v145Licenses;
+};
+
+export interface v146IndustrySpecificData {
   liquorLicense: boolean;
   requiresCpa: boolean;
   homeBasedBusiness: boolean | undefined;
   providesStaffingService: boolean;
   certifiedInteriorDesigner: boolean;
   realEstateAppraisalManagement: boolean;
-  cannabisLicenseType: v145CannabisLicenseType;
+  cannabisLicenseType: v146CannabisLicenseType;
   cannabisMicrobusiness: boolean | undefined;
   constructionRenovationPlan: boolean | undefined;
-  carService: v145CarServiceType | undefined;
+  carService: v146CarServiceType | undefined;
   interstateTransport: boolean;
   interstateLogistics: boolean | undefined;
   interstateMoving: boolean | undefined;
   isChildcareForSixOrMore: boolean | undefined;
   petCareHousing: boolean | undefined;
   willSellPetCareItems: boolean | undefined;
-  constructionType: v145ConstructionType;
-  residentialConstructionType: v145ResidentialConstructionType;
-  employmentPersonnelServiceType: v145EmploymentAndPersonnelServicesType;
-  employmentPlacementType: v145EmploymentPlacementType;
+  constructionType: v146ConstructionType;
+  residentialConstructionType: v146ResidentialConstructionType;
+  employmentPersonnelServiceType: v146EmploymentAndPersonnelServicesType;
+  employmentPlacementType: v146EmploymentPlacementType;
   carnivalRideOwningBusiness: boolean | undefined;
-  propertyLeaseType: v145PropertyLeaseType;
+  propertyLeaseType: v146PropertyLeaseType;
   hasThreeOrMoreRentalUnits: boolean | undefined;
   travelingCircusOrCarnivalOwningBusiness: boolean | undefined;
 }
 
-export type v145PropertyLeaseType = "SHORT_TERM_RENTAL" | "LONG_TERM_RENTAL" | "BOTH" | undefined;
+export type v146PropertyLeaseType = "SHORT_TERM_RENTAL" | "LONG_TERM_RENTAL" | "BOTH" | undefined;
 
-// ---------------- v145 types ----------------
-type v145TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
-type v145OnboardingFormProgress = "UNSTARTED" | "COMPLETED";
-type v145ABExperience = "ExperienceA" | "ExperienceB";
+// ---------------- v146 types ----------------
+type v146TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+type v146OnboardingFormProgress = "UNSTARTED" | "COMPLETED";
+type v146ABExperience = "ExperienceA" | "ExperienceB";
 
-export interface v145UserData {
-  user: v145BusinessUser;
+export interface v146UserData {
+  user: v146BusinessUser;
   version: number;
   lastUpdatedISO: string;
   dateCreatedISO: string;
   versionWhenCreated: number;
-  businesses: Record<string, v145Business>;
+  businesses: Record<string, v146Business>;
   currentBusinessId: string;
 }
 
-export interface v145Business {
+export interface v146Business {
   id: string;
   dateCreatedISO: string;
   lastUpdatedISO: string;
-  profileData: v145ProfileData;
-  onboardingFormProgress: v145OnboardingFormProgress;
-  taskProgress: Record<string, v145TaskProgress>;
+  profileData: v146ProfileData;
+  onboardingFormProgress: v146OnboardingFormProgress;
+  taskProgress: Record<string, v146TaskProgress>;
   taskItemChecklist: Record<string, boolean>;
-  licenseData: v145LicenseData | undefined;
-  preferences: v145Preferences;
-  taxFilingData: v145TaxFilingData;
-  formationData: v145FormationData;
+  licenseData: v146LicenseData | undefined;
+  preferences: v146Preferences;
+  taxFilingData: v146TaxFilingData;
+  formationData: v146FormationData;
 }
 
-export interface v145ProfileData extends v145IndustrySpecificData {
-  businessPersona: v145BusinessPersona;
+export interface v146ProfileData extends v146IndustrySpecificData {
+  businessPersona: v146BusinessPersona;
   businessName: string;
   responsibleOwnerName: string;
   tradeName: string;
   industryId: string | undefined;
   legalStructureId: string | undefined;
-  municipality: v145Municipality | undefined;
+  municipality: v146Municipality | undefined;
   dateOfFormation: string | undefined;
   entityId: string | undefined;
   employerId: string | undefined;
   taxId: string | undefined;
   encryptedTaxId: string | undefined;
   notes: string;
-  documents: v145ProfileDocuments;
+  documents: v146ProfileDocuments;
   ownershipTypeIds: string[];
   existingEmployees: string | undefined;
   taxPin: string | undefined;
   sectorId: string | undefined;
   naicsCode: string;
-  foreignBusinessTypeIds: v145ForeignBusinessTypeId[];
+  foreignBusinessTypeIds: v146ForeignBusinessTypeId[];
   nexusDbaName: string;
   needsNexusDbaName: boolean;
-  operatingPhase: v145OperatingPhase;
+  operatingPhase: v146OperatingPhase;
   isNonprofitOnboardingRadio: boolean;
   nonEssentialRadioAnswers: Record<string, boolean | undefined>;
   elevatorOwningBusiness: boolean | undefined;
-  communityAffairsAddress?: v145CommunityAffairsAddress;
+  communityAffairsAddress?: v146CommunityAffairsAddress;
   plannedRenovationQuestion: boolean | undefined;
   raffleBingoGames: boolean | undefined;
 }
 
-export type v145CommunityAffairsAddress = {
+export type v146CommunityAffairsAddress = {
   streetAddress1: string;
   streetAddress2?: string;
-  municipality: v145Municipality;
+  municipality: v146Municipality;
 };
 
-type v145BusinessUser = {
+type v146BusinessUser = {
   name?: string;
   email: string;
   id: string;
   receiveNewsletter: boolean;
   userTesting: boolean;
-  externalStatus: v145ExternalStatus;
+  externalStatus: v146ExternalStatus;
   myNJUserKey?: string;
   intercomHash?: string;
-  abExperience: v145ABExperience;
+  abExperience: v146ABExperience;
   accountCreationSource: string;
   contactSharingWithAccountCreationPartner: boolean;
 };
 
-interface v145ProfileDocuments {
+interface v146ProfileDocuments {
   formationDoc: string;
   standingDoc: string;
   certifiedDoc: string;
 }
 
-type v145BusinessPersona = "STARTING" | "OWNING" | "FOREIGN" | undefined;
-type v145OperatingPhase =
+type v146BusinessPersona = "STARTING" | "OWNING" | "FOREIGN" | undefined;
+type v146OperatingPhase =
   | "GUEST_MODE"
   | "NEEDS_TO_FORM"
   | "NEEDS_BUSINESS_STRUCTURE"
@@ -150,18 +176,18 @@ type v145OperatingPhase =
   | "REMOTE_SELLER_WORKER"
   | undefined;
 
-export type v145CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
-export type v145CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
-export type v145ConstructionType = "RESIDENTIAL" | "COMMERCIAL_OR_INDUSTRIAL" | "BOTH" | undefined;
-export type v145ResidentialConstructionType =
+export type v146CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
+export type v146CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
+export type v146ConstructionType = "RESIDENTIAL" | "COMMERCIAL_OR_INDUSTRIAL" | "BOTH" | undefined;
+export type v146ResidentialConstructionType =
   | "NEW_HOME_CONSTRUCTION"
   | "HOME_RENOVATIONS"
   | "BOTH"
   | undefined;
-export type v145EmploymentAndPersonnelServicesType = "JOB_SEEKERS" | "EMPLOYERS" | undefined;
-export type v145EmploymentPlacementType = "TEMPORARY" | "PERMANENT" | "BOTH" | undefined;
+export type v146EmploymentAndPersonnelServicesType = "JOB_SEEKERS" | "EMPLOYERS" | undefined;
+export type v146EmploymentPlacementType = "TEMPORARY" | "PERMANENT" | "BOTH" | undefined;
 
-type v145ForeignBusinessTypeId =
+type v146ForeignBusinessTypeId =
   | "employeeOrContractorInNJ"
   | "officeInNJ"
   | "propertyInNJ"
@@ -171,55 +197,54 @@ type v145ForeignBusinessTypeId =
   | "transactionsInNJ"
   | "none";
 
-type v145Municipality = {
+type v146Municipality = {
   name: string;
   displayName: string;
   county: string;
   id: string;
 };
 
-type v145TaxFilingState = "SUCCESS" | "FAILED" | "UNREGISTERED" | "PENDING" | "API_ERROR";
-type v145TaxFilingErrorFields = "businessName" | "formFailure";
+type v146TaxFilingState = "SUCCESS" | "FAILED" | "UNREGISTERED" | "PENDING" | "API_ERROR";
+type v146TaxFilingErrorFields = "businessName" | "formFailure";
 
-type v145TaxFilingData = {
-  state?: v145TaxFilingState;
+type v146TaxFilingData = {
+  state?: v146TaxFilingState;
   lastUpdatedISO?: string;
   registeredISO?: string;
-  errorField?: v145TaxFilingErrorFields;
+  errorField?: v146TaxFilingErrorFields;
   businessName?: string;
-  filings: v145TaxFilingCalendarEvent[];
+  filings: v146TaxFilingCalendarEvent[];
 };
 
-export type v145CalendarEvent = {
+export type v146CalendarEvent = {
   readonly dueDate: string; // YYYY-MM-DD
   readonly calendarEventType: "TAX-FILING" | "LICENSE";
 };
 
-export interface v145TaxFilingCalendarEvent extends v145CalendarEvent {
+export interface v146TaxFilingCalendarEvent extends v146CalendarEvent {
   readonly identifier: string;
   readonly calendarEventType: "TAX-FILING";
 }
 
-export type v145LicenseSearchAddress = {
+export type v146LicenseSearchAddress = {
   addressLine1: string;
   addressLine2: string;
   zipCode: string;
 };
 
-export interface v145LicenseSearchNameAndAddress extends v145LicenseSearchAddress {
+export interface v146LicenseSearchNameAndAddress extends v146LicenseSearchAddress {
   name: string;
 }
 
-type v145LicenseDetails = {
-  nameAndAddress: v145LicenseSearchNameAndAddress;
-  licenseStatus: v145LicenseStatus;
+type v146LicenseDetails = {
+  nameAndAddress: v146LicenseSearchNameAndAddress;
+  licenseStatus: v146LicenseStatus;
   expirationDateISO: string | undefined;
   lastUpdatedISO: string;
-  checklistItems: v145LicenseStatusItem[];
-  hasError?: boolean;
+  checklistItems: v146LicenseStatusItem[];
 };
 
-const v145taskIdLicenseNameMapping = {
+const v146taskIdLicenseNameMapping = {
   "apply-for-shop-license": "Cosmetology and Hairstyling-Shop",
   "appraiser-license": "Real Estate Appraisers-Appraisal Management Company",
   "architect-license": "Architecture-Certificate of Authorization",
@@ -237,19 +262,19 @@ const v145taskIdLicenseNameMapping = {
   "telemarketing-license": "Telemarketers",
 } as const;
 
-type v145LicenseTaskID = keyof typeof v145taskIdLicenseNameMapping;
+type v146LicenseTaskID = keyof typeof v146taskIdLicenseNameMapping;
 
-export type v145LicenseName = (typeof v145taskIdLicenseNameMapping)[v145LicenseTaskID];
+export type v146LicenseName = (typeof v146taskIdLicenseNameMapping)[v146LicenseTaskID];
 
-export type v145Licenses = Partial<Record<v145LicenseName, v145LicenseDetails>>;
+type v146Licenses = Partial<Record<v146LicenseName, v146LicenseDetails>>;
 
-type v145LicenseData = {
+type v146LicenseData = {
   lastUpdatedISO: string;
-  licenses?: v145Licenses;
+  licenses?: v146Licenses;
 };
 
-type v145Preferences = {
-  roadmapOpenSections: v145SectionType[];
+type v146Preferences = {
+  roadmapOpenSections: v146SectionType[];
   roadmapOpenSteps: number[];
   hiddenFundingIds: string[];
   hiddenCertificationIds: string[];
@@ -260,14 +285,14 @@ type v145Preferences = {
   phaseNewlyChanged: boolean;
 };
 
-type v145LicenseStatusItem = {
+type v146LicenseStatusItem = {
   title: string;
-  status: v145CheckoffStatus;
+  status: v146CheckoffStatus;
 };
 
-type v145CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
+type v146CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
 
-type v145LicenseStatus =
+type v146LicenseStatus =
   | "ACTIVE"
   | "PENDING"
   | "UNKNOWN"
@@ -281,7 +306,7 @@ type v145LicenseStatus =
   | "VOLUNTARY_SURRENDER"
   | "WITHDRAWN";
 
-const v145LicenseStatuses: v145LicenseStatus[] = [
+const v146LicenseStatuses: v146LicenseStatus[] = [
   "ACTIVE",
   "PENDING",
   "UNKNOWN",
@@ -296,31 +321,31 @@ const v145LicenseStatuses: v145LicenseStatus[] = [
   "WITHDRAWN",
 ];
 
-const v145SectionNames = ["PLAN", "START", "DOMESTIC_EMPLOYER_SECTION"] as const;
-type v145SectionType = (typeof v145SectionNames)[number];
+const v146SectionNames = ["PLAN", "START", "DOMESTIC_EMPLOYER_SECTION"] as const;
+type v146SectionType = (typeof v146SectionNames)[number];
 
-type v145ExternalStatus = {
-  newsletter?: v145NewsletterResponse;
-  userTesting?: v145UserTestingResponse;
+type v146ExternalStatus = {
+  newsletter?: v146NewsletterResponse;
+  userTesting?: v146UserTestingResponse;
 };
 
-interface v145NewsletterResponse {
+interface v146NewsletterResponse {
   success?: boolean;
-  status: v145NewsletterStatus;
+  status: v146NewsletterStatus;
 }
 
-interface v145UserTestingResponse {
+interface v146UserTestingResponse {
   success?: boolean;
-  status: v145UserTestingStatus;
+  status: v146UserTestingStatus;
 }
 
-type v145NewsletterStatus = (typeof newsletterStatusList)[number];
+type v146NewsletterStatus = (typeof newsletterStatusList)[number];
 
 const externalStatusList = ["SUCCESS", "IN_PROGRESS", "CONNECTION_ERROR"] as const;
 
 const userTestingStatusList = [...externalStatusList] as const;
 
-type v145UserTestingStatus = (typeof userTestingStatusList)[number];
+type v146UserTestingStatus = (typeof userTestingStatusList)[number];
 
 const newsletterStatusList = [
   ...externalStatusList,
@@ -332,7 +357,7 @@ const newsletterStatusList = [
   "QUESTION_WARNING",
 ] as const;
 
-type v145NameAvailabilityStatus =
+type v146NameAvailabilityStatus =
   | "AVAILABLE"
   | "DESIGNATOR_ERROR"
   | "SPECIAL_CHARACTER_ERROR"
@@ -340,31 +365,31 @@ type v145NameAvailabilityStatus =
   | "RESTRICTED_ERROR"
   | undefined;
 
-interface v145NameAvailabilityResponse {
-  status: v145NameAvailabilityStatus;
+interface v146NameAvailabilityResponse {
+  status: v146NameAvailabilityStatus;
   similarNames: string[];
   invalidWord?: string;
 }
 
-interface v145NameAvailability extends v145NameAvailabilityResponse {
+interface v146NameAvailability extends v146NameAvailabilityResponse {
   lastUpdatedTimeStamp: string;
 }
 
-interface v145FormationData {
-  formationFormData: v145FormationFormData;
-  businessNameAvailability: v145NameAvailability | undefined;
-  dbaBusinessNameAvailability: v145NameAvailability | undefined;
-  formationResponse: v145FormationSubmitResponse | undefined;
-  getFilingResponse: v145GetFilingResponse | undefined;
+interface v146FormationData {
+  formationFormData: v146FormationFormData;
+  businessNameAvailability: v146NameAvailability | undefined;
+  dbaBusinessNameAvailability: v146NameAvailability | undefined;
+  formationResponse: v146FormationSubmitResponse | undefined;
+  getFilingResponse: v146GetFilingResponse | undefined;
   completedFilingPayment: boolean;
   lastVisitedPageIndex: number;
 }
 
-type v145InFormInBylaws = "IN_BYLAWS" | "IN_FORM" | undefined;
+type v146InFormInBylaws = "IN_BYLAWS" | "IN_FORM" | undefined;
 
-interface v145FormationFormData extends v145FormationAddress {
+interface v146FormationFormData extends v146FormationAddress {
   readonly businessName: string;
-  readonly businessSuffix: v145BusinessSuffix | undefined;
+  readonly businessSuffix: v146BusinessSuffix | undefined;
   readonly businessTotalStock: string;
   readonly businessStartDate: string; // YYYY-MM-DD
   readonly businessPurpose: string;
@@ -378,13 +403,13 @@ interface v145FormationFormData extends v145FormationAddress {
   readonly canMakeDistribution: boolean | undefined;
   readonly makeDistributionTerms: string;
   readonly hasNonprofitBoardMembers: boolean | undefined;
-  readonly nonprofitBoardMemberQualificationsSpecified: v145InFormInBylaws;
+  readonly nonprofitBoardMemberQualificationsSpecified: v146InFormInBylaws;
   readonly nonprofitBoardMemberQualificationsTerms: string;
-  readonly nonprofitBoardMemberRightsSpecified: v145InFormInBylaws;
+  readonly nonprofitBoardMemberRightsSpecified: v146InFormInBylaws;
   readonly nonprofitBoardMemberRightsTerms: string;
-  readonly nonprofitTrusteesMethodSpecified: v145InFormInBylaws;
+  readonly nonprofitTrusteesMethodSpecified: v146InFormInBylaws;
   readonly nonprofitTrusteesMethodTerms: string;
-  readonly nonprofitAssetDistributionSpecified: v145InFormInBylaws;
+  readonly nonprofitAssetDistributionSpecified: v146InFormInBylaws;
   readonly nonprofitAssetDistributionTerms: string;
   readonly additionalProvisions: string[] | undefined;
   readonly agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
@@ -397,10 +422,10 @@ interface v145FormationFormData extends v145FormationAddress {
   readonly agentOfficeAddressZipCode: string;
   readonly agentUseAccountInfo: boolean;
   readonly agentUseBusinessAddress: boolean;
-  readonly members: v145FormationMember[] | undefined;
-  readonly incorporators: v145FormationIncorporator[] | undefined;
-  readonly signers: v145FormationSigner[] | undefined;
-  readonly paymentType: v145PaymentType;
+  readonly members: v146FormationMember[] | undefined;
+  readonly incorporators: v146FormationIncorporator[] | undefined;
+  readonly signers: v146FormationSigner[] | undefined;
+  readonly paymentType: v146PaymentType;
   readonly annualReportNotification: boolean;
   readonly corpWatchNotification: boolean;
   readonly officialFormationDocument: boolean;
@@ -409,39 +434,39 @@ interface v145FormationFormData extends v145FormationAddress {
   readonly contactFirstName: string;
   readonly contactLastName: string;
   readonly contactPhoneNumber: string;
-  readonly foreignStateOfFormation: v145StateObject | undefined;
+  readonly foreignStateOfFormation: v146StateObject | undefined;
   readonly foreignDateOfFormation: string | undefined; // YYYY-MM-DD
-  readonly foreignGoodStandingFile: v145ForeignGoodStandingFileObject | undefined;
+  readonly foreignGoodStandingFile: v146ForeignGoodStandingFileObject | undefined;
   readonly legalType: string;
   readonly willPracticeLaw: boolean | undefined;
   readonly isVeteranNonprofit: boolean | undefined;
 }
 
-type v145ForeignGoodStandingFileObject = {
+type v146ForeignGoodStandingFileObject = {
   Extension: "PDF" | "PNG";
   Content: string;
 };
 
-type v145StateObject = {
+type v146StateObject = {
   shortCode: string;
   name: string;
 };
 
-interface v145FormationAddress {
+interface v146FormationAddress {
   readonly addressLine1: string;
   readonly addressLine2: string;
   readonly addressCity?: string;
-  readonly addressState?: v145StateObject;
-  readonly addressMunicipality?: v145Municipality;
+  readonly addressState?: v146StateObject;
+  readonly addressMunicipality?: v146Municipality;
   readonly addressProvince?: string;
   readonly addressZipCode: string;
   readonly addressCountry: string;
-  readonly businessLocationType: v145FormationBusinessLocationType | undefined;
+  readonly businessLocationType: v146FormationBusinessLocationType | undefined;
 }
 
-type v145FormationBusinessLocationType = "US" | "INTL" | "NJ";
+type v146FormationBusinessLocationType = "US" | "INTL" | "NJ";
 
-type v145SignerTitle =
+type v146SignerTitle =
   | "Authorized Representative"
   | "Authorized Partner"
   | "Incorporator"
@@ -451,19 +476,19 @@ type v145SignerTitle =
   | "Chairman of the Board"
   | "CEO";
 
-interface v145FormationSigner {
+interface v146FormationSigner {
   readonly name: string;
   readonly signature: boolean;
-  readonly title: v145SignerTitle;
+  readonly title: v146SignerTitle;
 }
 
-interface v145FormationIncorporator extends v145FormationSigner, v145FormationAddress {}
+interface v146FormationIncorporator extends v146FormationSigner, v146FormationAddress {}
 
-interface v145FormationMember extends v145FormationAddress {
+interface v146FormationMember extends v146FormationAddress {
   readonly name: string;
 }
 
-type v145PaymentType = "CC" | "ACH" | undefined;
+type v146PaymentType = "CC" | "ACH" | undefined;
 
 const llcBusinessSuffix = [
   "LLC",
@@ -521,24 +546,24 @@ export const AllBusinessSuffixes = [
   ...nonprofitBusinessSuffix,
 ] as const;
 
-type v145BusinessSuffix = (typeof AllBusinessSuffixes)[number];
+type v146BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
-type v145FormationSubmitResponse = {
+type v146FormationSubmitResponse = {
   success: boolean;
   token: string | undefined;
   formationId: string | undefined;
   redirect: string | undefined;
-  errors: v145FormationSubmitError[];
+  errors: v146FormationSubmitError[];
   lastUpdatedISO: string | undefined;
 };
 
-type v145FormationSubmitError = {
+type v146FormationSubmitError = {
   field: string;
   type: "FIELD" | "UNKNOWN" | "RESPONSE";
   message: string;
 };
 
-type v145GetFilingResponse = {
+type v146GetFilingResponse = {
   success: boolean;
   entityId: string;
   transactionDate: string;
@@ -548,24 +573,24 @@ type v145GetFilingResponse = {
   certifiedDoc: string;
 };
 
-// ---------------- v145 generators ----------------
+// ---------------- v146 generators ----------------
 
-export const generatev145UserData = (overrides: Partial<v145UserData>): v145UserData => {
+export const generatev146UserData = (overrides: Partial<v146UserData>): v146UserData => {
   return {
-    user: generatev145BusinessUser({}),
+    user: generatev146BusinessUser({}),
     version: 140,
     lastUpdatedISO: "",
     dateCreatedISO: "",
     versionWhenCreated: 141,
     businesses: {
-      "123": generatev145Business({ id: "123" }),
+      "123": generatev146Business({ id: "123" }),
     },
     currentBusinessId: "",
     ...overrides,
   };
 };
 
-export const generatev145BusinessUser = (overrides: Partial<v145BusinessUser>): v145BusinessUser => {
+export const generatev146BusinessUser = (overrides: Partial<v146BusinessUser>): v146BusinessUser => {
   return {
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
@@ -587,15 +612,15 @@ export const generatev145BusinessUser = (overrides: Partial<v145BusinessUser>): 
   };
 };
 
-export const generatev145Business = (overrides: Partial<v145Business>): v145Business => {
-  const profileData = generatev145ProfileData({});
+export const generatev146Business = (overrides: Partial<v146Business>): v146Business => {
+  const profileData = generatev146ProfileData({});
   return {
     id: `some-id-${randomInt()}`,
     dateCreatedISO: "",
     lastUpdatedISO: "",
     profileData: profileData,
-    preferences: generatev145Preferences({}),
-    formationData: generatev145FormationData({}, profileData.legalStructureId ?? ""),
+    preferences: generatev146Preferences({}),
+    formationData: generatev146FormationData({}, profileData.legalStructureId ?? ""),
     onboardingFormProgress: "UNSTARTED",
     taskProgress: {
       "business-structure": "NOT_STARTED",
@@ -604,16 +629,16 @@ export const generatev145Business = (overrides: Partial<v145Business>): v145Busi
       "general-dvob": false,
     },
     licenseData: undefined,
-    taxFilingData: generatev145TaxFilingData({}),
+    taxFilingData: generatev146TaxFilingData({}),
     ...overrides,
   };
 };
 
-export const generatev145ProfileData = (overrides: Partial<v145ProfileData>): v145ProfileData => {
+export const generatev146ProfileData = (overrides: Partial<v146ProfileData>): v146ProfileData => {
   const id = `some-id-${randomInt()}`;
   const persona = randomInt() % 2 ? "STARTING" : "OWNING";
   return {
-    ...generatev145IndustrySpecificData({}),
+    ...generatev146IndustrySpecificData({}),
     businessPersona: persona,
     businessName: `some-business-name-${randomInt()}`,
     industryId: "restaurant",
@@ -651,9 +676,9 @@ export const generatev145ProfileData = (overrides: Partial<v145ProfileData>): v1
   };
 };
 
-export const generatev145IndustrySpecificData = (
-  overrides: Partial<v145IndustrySpecificData>
-): v145IndustrySpecificData => {
+export const generatev146IndustrySpecificData = (
+  overrides: Partial<v146IndustrySpecificData>
+): v146IndustrySpecificData => {
   return {
     liquorLicense: false,
     requiresCpa: false,
@@ -683,7 +708,7 @@ export const generatev145IndustrySpecificData = (
   };
 };
 
-export const generatev145Preferences = (overrides: Partial<v145Preferences>): v145Preferences => {
+export const generatev146Preferences = (overrides: Partial<v146Preferences>): v146Preferences => {
   return {
     roadmapOpenSections: ["PLAN", "START"],
     roadmapOpenSteps: [],
@@ -698,12 +723,12 @@ export const generatev145Preferences = (overrides: Partial<v145Preferences>): v1
   };
 };
 
-export const generatev145FormationData = (
-  overrides: Partial<v145FormationData>,
+export const generatev146FormationData = (
+  overrides: Partial<v146FormationData>,
   legalStructureId: string
-): v145FormationData => {
+): v146FormationData => {
   return {
-    formationFormData: generatev145FormationFormData({}, legalStructureId),
+    formationFormData: generatev146FormationFormData({}, legalStructureId),
     formationResponse: undefined,
     getFilingResponse: undefined,
     completedFilingPayment: false,
@@ -714,13 +739,13 @@ export const generatev145FormationData = (
   };
 };
 
-export const generatev145FormationFormData = (
-  overrides: Partial<v145FormationFormData>,
+export const generatev146FormationFormData = (
+  overrides: Partial<v146FormationFormData>,
   legalStructureId: string
-): v145FormationFormData => {
+): v146FormationFormData => {
   const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
 
-  return <v145FormationFormData>{
+  return <v146FormationFormData>{
     businessName: `some-business-name-${randomInt()}`,
     businessSuffix: "LLC",
     businessTotalStock: isCorp ? randomInt().toString() : "",
@@ -732,7 +757,7 @@ export const generatev145FormationFormData = (
     addressState: { shortCode: "123", name: "new-jersey" },
     addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
     addressCountry: `some-county`,
-    addressMunicipality: generatev145Municipality({}),
+    addressMunicipality: generatev146Municipality({}),
     addressProvince: "",
     withdrawals: `some-withdrawals-text-${randomInt()}`,
     combinedInvestment: `some-combinedInvestment-text-${randomInt()}`,
@@ -764,7 +789,7 @@ export const generatev145FormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [],
-    members: legalStructureId === "limited-liability-partnership" ? [] : [generatev145FormationMember({})],
+    members: legalStructureId === "limited-liability-partnership" ? [] : [generatev146FormationMember({})],
     incorporators: undefined,
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
@@ -787,7 +812,7 @@ export const generatev145FormationFormData = (
   };
 };
 
-export const generatev145Municipality = (overrides: Partial<v145Municipality>): v145Municipality => {
+export const generatev146Municipality = (overrides: Partial<v146Municipality>): v146Municipality => {
   return {
     displayName: `some-display-name-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -797,7 +822,7 @@ export const generatev145Municipality = (overrides: Partial<v145Municipality>): 
   };
 };
 
-export const generatev145FormationMember = (overrides: Partial<v145FormationMember>): v145FormationMember => {
+export const generatev146FormationMember = (overrides: Partial<v146FormationMember>): v146FormationMember => {
   return {
     name: `some-name`,
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -811,7 +836,7 @@ export const generatev145FormationMember = (overrides: Partial<v145FormationMemb
   };
 };
 
-export const generatev145TaxFilingData = (overrides: Partial<v145TaxFilingData>): v145TaxFilingData => {
+export const generatev146TaxFilingData = (overrides: Partial<v146TaxFilingData>): v146TaxFilingData => {
   return {
     state: undefined,
     businessName: undefined,
@@ -823,21 +848,20 @@ export const generatev145TaxFilingData = (overrides: Partial<v145TaxFilingData>)
   };
 };
 
-export const generatev145LicenseDetails = (overrides: Partial<v145LicenseDetails>): v145LicenseDetails => {
+export const generatev146LicenseDetails = (overrides: Partial<v146LicenseDetails>): v146LicenseDetails => {
   return {
-    nameAndAddress: generatev145LicenseSearchNameAndAddress({}),
-    licenseStatus: getRandomV145LicenseStatus(),
+    nameAndAddress: generatev146LicenseSearchNameAndAddress({}),
+    licenseStatus: getRandomV146LicenseStatus(),
     expirationDateISO: "some-expiration-iso",
     lastUpdatedISO: "some-last-updated",
-    checklistItems: [generatev145LicenseStatusItem()],
-    hasError: false,
+    checklistItems: [generatev146LicenseStatusItem()],
     ...overrides,
   };
 };
 
-const generatev145LicenseSearchNameAndAddress = (
-  overrides: Partial<v145LicenseSearchNameAndAddress>
-): v145LicenseSearchNameAndAddress => {
+const generatev146LicenseSearchNameAndAddress = (
+  overrides: Partial<v146LicenseSearchNameAndAddress>
+): v146LicenseSearchNameAndAddress => {
   return {
     name: `some-name`,
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -847,14 +871,14 @@ const generatev145LicenseSearchNameAndAddress = (
   };
 };
 
-const generatev145LicenseStatusItem = (): v145LicenseStatusItem => {
+const generatev146LicenseStatusItem = (): v146LicenseStatusItem => {
   return {
     title: `some-title-${randomInt()}`,
     status: "ACTIVE",
   };
 };
 
-export const getRandomV145LicenseStatus = (): v145LicenseStatus => {
-  const randomIndex = Math.floor(Math.random() * v145LicenseStatuses.length);
-  return v145LicenseStatuses[randomIndex];
+export const getRandomV146LicenseStatus = (): v146LicenseStatus => {
+  const randomIndex = Math.floor(Math.random() * v146LicenseStatuses.length);
+  return v146LicenseStatuses[randomIndex];
 };

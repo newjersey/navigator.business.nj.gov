@@ -1,7 +1,7 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { SelfRegResponse } from "@/lib/types/types";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
-import { getCurrentBusiness, LicenseTaskId } from "@businessnjgovnavigator/shared";
+import { getCurrentBusiness } from "@businessnjgovnavigator/shared";
 import {
   InputFile,
   LicenseSearchNameAndAddress,
@@ -31,12 +31,8 @@ export const postUserData = async (userData: UserData): Promise<UserData> => {
   });
 };
 
-export const checkLicenseStatus = (
-  nameAndAddress: LicenseSearchNameAndAddress,
-  licenseTaskId?: LicenseTaskId
-): Promise<UserData> => {
-  console.log(`apiClient -  ${licenseTaskId}`);
-  return post(`/license-status`, { nameAndAddress, licenseTaskId });
+export const checkLicenseStatus = (nameAndAddress: LicenseSearchNameAndAddress): Promise<UserData> => {
+  return post(`/license-status`, { nameAndAddress });
 };
 
 export const checkElevatorRegistrationStatus = (

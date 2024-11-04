@@ -50,6 +50,7 @@ import { migrate_v141_to_v142 } from "@db/migrations/v142_add_domestic_employer_
 import { migrate_v142_to_v143 } from "@db/migrations/v143_add_property_type_and_rental_unit_count";
 import { migrate_v143_to_v144 } from "@db/migrations/v144_add_raffle_bingo_games";
 import { migrate_v144_to_v145 } from "@db/migrations/v145_add_traveling_circus_or_carnival";
+import { migrate_v145_to_v146 } from "@db/migrations/v146_remove_haserror_field_from_licensedetails";
 import { migrate_v13_to_v14 } from "@db/migrations/v14_add_cleaning_aid_industry";
 import { migrate_v14_to_v15 } from "@db/migrations/v15_add_retail_industry";
 import { migrate_v15_to_v16 } from "@db/migrations/v16_add_user_preferences";
@@ -294,6 +295,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v142_to_v143,
   migrate_v143_to_v144,
   migrate_v144_to_v145,
+  migrate_v145_to_v146,
 ];
 
 export { generatev144UserData as CURRENT_GENERATOR } from "@db/migrations/v144_add_raffle_bingo_games";

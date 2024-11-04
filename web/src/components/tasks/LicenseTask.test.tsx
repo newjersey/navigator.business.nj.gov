@@ -380,15 +380,12 @@ describe("<LicenseTask />", () => {
         await waitFor(() => {
           expect(screen.getByText("Draft")).toBeInTheDocument();
         });
-        expect(mockApi.checkLicenseStatus).toHaveBeenCalledWith(
-          {
-            name: "My Cool Nail Salon",
-            addressLine1: "123 Main St",
-            addressLine2: "Suite 1",
-            zipCode: "12345",
-          },
-          task.id
-        );
+        expect(mockApi.checkLicenseStatus).toHaveBeenCalledWith({
+          name: "My Cool Nail Salon",
+          addressLine1: "123 Main St",
+          addressLine2: "Suite 1",
+          zipCode: "12345",
+        });
       });
     });
 
@@ -448,36 +445,54 @@ describe("<LicenseTask />", () => {
         expect(screen.queryByTestId("error-alert-FIELDS_REQUIRED")).not.toBeInTheDocument();
       });
 
-      it("displays NOT_FOUND error alert when license status cannot be found", async () => {
+      it("displays NOT_FOUND error alert when check status submit and license status cannot be found", async () => {
         useMockBusiness({
-          licenseData: generateLicenseData(
-            {},
-            {
+          lastUpdatedISO: undefined,
+          licenseData: {
+            lastUpdatedISO: "",
+            licenses: {
               [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
                 lastUpdatedISO: "",
+                nameAndAddress: {
+                  name: "some-name",
+                  addressLine1: "some-address-line1",
+                  addressLine2: "",
+                  zipCode: "03938",
+                },
               }),
-            }
-          ),
+            },
+          },
         });
         renderTask();
         fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
         expect(screen.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
-        mockApi.checkLicenseStatus.mockResolvedValue(
-          generateUserDataForBusiness(
-            generateBusiness({
-              licenseData: generateLicenseData(
-                {},
-                {
-                  [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
-                    licenseStatus: "UNKNOWN",
-                    hasError: true,
-                  }),
-                }
-              ),
-            })
-          )
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            lastUpdatedISO: "last-updated",
+            licenseData: {
+              lastUpdatedISO: "last-updated",
+              licenses: {},
+            },
+          })
         );
+        console.log(JSON.stringify(userData));
+        mockApi.checkLicenseStatus.mockResolvedValue(userData);
         fireEvent.submit(screen.getByTestId("check-status-submit"));
+        await waitFor(() => {
+          expect(screen.getByTestId("error-alert-NOT_FOUND")).toBeInTheDocument();
+        });
+      });
+
+      it("displays NOT_FOUND error alert when check status already has been submitted and clicked on the status tab", async () => {
+        useMockBusiness({
+          lastUpdatedISO: "last-updated",
+          licenseData: {
+            lastUpdatedISO: "last-updated",
+            licenses: {},
+          },
+        });
+        renderTask();
+        fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
         await waitFor(() => {
           expect(screen.getByTestId("error-alert-NOT_FOUND")).toBeInTheDocument();
         });
