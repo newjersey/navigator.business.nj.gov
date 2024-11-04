@@ -26,8 +26,6 @@ issuingAgency: ""
 callToActionText: Apply for My Emergency Trip Permit
 callToActionLink: https://www.njportal.com/abc/eps
 ---
-
-
 :::infoAlert 
  You need an emergency trip permit for each pick up or delivery you make in New Jersey. You do not need a permit if you are not stopping in New Jersey.
 :::
@@ -46,5 +44,11 @@ The permit is valid for 24 hours starting from your pick up or delivery date. Yo
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
 A downloadable PDF copy of the emergency trip permit, which you can print out or show on your phone.
+
+:::
+
+:::callout{ showHeader="true" headerText="What happens if I don't get an emergency trip permit?" showIcon="false" calloutType="warning" }
+
+You will not be able to pick up or deliver alcoholic beverages in New Jersey.
 
 :::
