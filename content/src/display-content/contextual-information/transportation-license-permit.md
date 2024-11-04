@@ -14,6 +14,6 @@ If your business often delivers alcoholic beverages, consider getting a transpor
 * **Transportation license** lets your business deliver alcohol in and out of the State
 * **Limited transportation permit** lets your business transport alcohol not meant to be delivered, sold, or used in the State
 
-You also need to get an insignia. An insignia is a marker on a vehicle that shows it is allowed to carry alcohol.
+You will also need to get an insignia. An insignia is a marker on a vehicle that shows it is allowed to carry alcohol.
 
 To see which license, permit, or insignia you need, contact ABC at (609) 984-2830.
