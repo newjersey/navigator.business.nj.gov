@@ -478,8 +478,10 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
       expect(determineLicenseStatus("Withdrawn")).toBe("WITHDRAWN");
     });
 
-    it("returns UNKNOWN when status is not valid", () => {
-      expect(determineLicenseStatus("fake status")).toBe(undefined);
+    it("returns Error when status is not valid", () => {
+      expect(() => {
+        determineLicenseStatus("fake status");
+      }).toThrow("Cannot find license status fake status");
     });
   });
 });

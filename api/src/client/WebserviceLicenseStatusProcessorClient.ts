@@ -74,7 +74,7 @@ const updateChecklist = (
   return checklist;
 };
 
-export const determineLicenseStatus = (value: string): LicenseStatus | undefined => {
+export const determineLicenseStatus = (value: string): LicenseStatus => {
   switch (value) {
     case "Active":
       return "ACTIVE";
@@ -99,7 +99,7 @@ export const determineLicenseStatus = (value: string): LicenseStatus | undefined
     case "Withdrawn":
       return "WITHDRAWN";
     default:
-      return undefined;
+      throw new Error(`Cannot find license status ${value}`);
   }
 };
 

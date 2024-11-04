@@ -66,7 +66,6 @@ export type LicenseDetails = {
   expirationDateISO: string | undefined;
   lastUpdatedISO: string;
   checklistItems: LicenseStatusItem[];
-  hasError?: boolean;
 };
 
 export const enabledLicensesSources = {
