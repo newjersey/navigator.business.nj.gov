@@ -1,5 +1,9 @@
 import { NeedsAccountModalWrapper } from "@/components/auth/NeedsAccountModalWrapper";
 import { Content } from "@/components/Content";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { Icon } from "@/components/njwds/Icon";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CheckLicenseStatus } from "@/components/tasks/CheckLicenseStatus";
 import { LicenseDetailReceipt } from "@/components/tasks/LicenseDetailReceipt";
@@ -140,9 +144,25 @@ export const LicenseTask = (props: Props): ReactElement => {
                 <Content>{props.task.summaryDescriptionMd || ""}</Content>
                 <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
               </div>
-              <div className="flex flex-column margin-top-4 margin-bottom-1">
-                <a href={callToActionLink} target="_blank" rel="noreferrer noopener">
-                  <button
+              <CtaContainer className="margin-btm-neg-2">
+                <div className="btn-container">
+                  <SecondaryButton
+                    isColor="primary"
+                    onClick={(): void => {
+                      analytics.event.task_button_i_already_submitted.click.view_status_tab(
+                        "check_status",
+                        "start_application"
+                      );
+                      setTabIndex(STATUS_TAB_INDEX);
+                    }}
+                    dataTestId="cta-secondary"
+                  >
+                    {Config.licenseSearchTask.secondaryCTAFirstLineText}
+                  </SecondaryButton>
+                </div>
+                <div className="btn-container">
+                  <PrimaryButton
+                    isColor="primary"
                     onClick={(): void => {
                       analytics.event.task_primary_call_to_action.click.open_external_website(
                         Config.licenseSearchTask.primaryCTAFirstLineText,
@@ -150,36 +170,13 @@ export const LicenseTask = (props: Props): ReactElement => {
                         "start_application"
                       );
                     }}
-                    className="usa-button width-100 margin-bottom-2"
-                    data-testid="cta-primary"
+                    dataTestId="cta-primary"
                   >
-                    <div className="flex flex-column">
-                      <div>{Config.licenseSearchTask.primaryCTAFirstLineText}</div>
-                      <div className="font-body-3xs margin-top-05">
-                        {Config.licenseSearchTask.primaryCTASecondLineText}
-                      </div>
-                    </div>
-                  </button>
-                </a>
-                <button
-                  onClick={(): void => {
-                    analytics.event.task_button_i_already_submitted.click.view_status_tab(
-                      "check_status",
-                      "start_application"
-                    );
-                    setTabIndex(STATUS_TAB_INDEX);
-                  }}
-                  className="usa-button usa-button--outline width-100"
-                  data-testid="cta-secondary"
-                >
-                  <div className="flex flex-column">
-                    <div>{Config.licenseSearchTask.secondaryCTAFirstLineText}</div>
-                    <div className="font-body-3xs margin-top-05">
-                      {Config.licenseSearchTask.secondaryCTASecondLineText}
-                    </div>
-                  </div>
-                </button>
-              </div>
+                    {Config.licenseSearchTask.primaryCTAFirstLineText}
+                    <Icon iconName="launch" />
+                  </PrimaryButton>
+                </div>
+              </CtaContainer>
             </TabPanel>
             <TabPanel value="1" sx={{ paddingX: 0 }}>
               {hasCompletedSearch && licenseDetails && !searchHasError ? (

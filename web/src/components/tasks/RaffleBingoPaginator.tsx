@@ -130,7 +130,7 @@ export const RaffleBingoPaginator = (props: Props): ReactElement => {
       </div>
 
       <div>
-        <CtaContainer noBackgroundColor={false}>
+        <CtaContainer>
           <ActionBarLayout>
             {!isLastStep(stepIndex) && (
               <PrimaryButton
