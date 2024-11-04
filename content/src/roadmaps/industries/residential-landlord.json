@@ -50,7 +50,8 @@
   ],
   "name": "Residential Landlord",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "multiple-dwelling-register"
   ],
   "displayname": "residential-landlord",
   "industryOnboardingQuestions": {

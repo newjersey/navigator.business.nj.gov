@@ -1,0 +1,17 @@
+{
+  "filename": "tea-2",
+  "displayname": "tea-2",
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 3,
+      "task": "tea-task-1"
+    },
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "generic-task-1"
+    }
+  ],
+  "modifications": []
+}
