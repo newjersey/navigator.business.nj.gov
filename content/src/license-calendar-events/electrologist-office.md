@@ -21,7 +21,7 @@ Your electrologist office premises license will expire every 2 years.
 - License number
 - Current mailing address
 - Current business address
-- Permit and passed inspections of the premises
+- Renewal questions answered by the office manager of the electrologists office 
 - Applicable fees paid
   :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
   An updated copy of the renewed electrologist office premises license, valid for 2 years.
