@@ -468,10 +468,7 @@ describe("<LicenseTask />", () => {
               licenseData: generateLicenseData(
                 {},
                 {
-                  [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
-                    licenseStatus: "UNKNOWN",
-                    hasError: true,
-                  }),
+                  [taskIdLicenseNameMapping[task.id]]: {},
                 }
               ),
             })

@@ -18,8 +18,6 @@ import {
   LicenseName,
   Licenses,
   LicenseSearchNameAndAddress,
-  LicenseTaskId,
-  taskIdLicenseNameMapping,
 } from "@shared/license";
 import { Business, UserData } from "@shared/userData";
 
@@ -28,7 +26,6 @@ const DEBUG_RegulatedBusinessDynamicsLicenseSearch = false; // this variable exi
 const getLicenses = (args: {
   nameAndAddress: LicenseSearchNameAndAddress;
   licenseStatusResult: LicenseStatusResults;
-  taskIdWithError?: LicenseTaskId;
 }): Licenses => {
   const results: Licenses = {};
   for (const key of Object.keys(args.licenseStatusResult) as LicenseName[]) {
@@ -37,20 +34,6 @@ const getLicenses = (args: {
       nameAndAddress: args.nameAndAddress,
       lastUpdatedISO: getCurrentDateISOString(),
     } as LicenseDetails;
-  }
-  const licenseRelatedToCurrentTask = args.taskIdWithError
-    ? taskIdLicenseNameMapping[args.taskIdWithError]
-    : undefined;
-
-  if (licenseRelatedToCurrentTask && !(licenseRelatedToCurrentTask in results)) {
-    results[licenseRelatedToCurrentTask] = {
-      nameAndAddress: args.nameAndAddress,
-      licenseStatus: "UNKNOWN",
-      expirationDateISO: undefined,
-      lastUpdatedISO: getCurrentDateISOString(),
-      checklistItems: [],
-      hasError: true,
-    };
   }
 
   return results;
@@ -61,7 +44,6 @@ const updateLicenseStatusAndLicenseTask = (
   args: {
     nameAndAddress: LicenseSearchNameAndAddress;
     licenseStatusResult: LicenseStatusResults;
-    taskIdWithError?: LicenseTaskId;
   }
 ): UserData => {
   // TODO: In a future state we need to account for existing license data with address that does not match search query
@@ -84,11 +66,7 @@ export const updateLicenseStatusFactory = (
   webserviceLicenseStatusSearch: SearchLicenseStatus,
   rgbLicenseStatusSearch: SearchLicenseStatus
 ): UpdateLicenseStatus => {
-  return async (
-    userData: UserData,
-    nameAndAddress: LicenseSearchNameAndAddress,
-    taskId?: LicenseTaskId
-  ): Promise<UserData> => {
+  return async (userData: UserData, nameAndAddress: LicenseSearchNameAndAddress): Promise<UserData> => {
     const webserviceLicenseStatusPromise = webserviceLicenseStatusSearch(nameAndAddress);
     const rgbLicenseStatusPromise = rgbLicenseStatusSearch(nameAndAddress);
     return Promise.allSettled([webserviceLicenseStatusPromise, rgbLicenseStatusPromise])
@@ -116,7 +94,6 @@ export const updateLicenseStatusFactory = (
             return updateLicenseStatusAndLicenseTask(userData, {
               nameAndAddress: nameAndAddress,
               licenseStatusResult: {},
-              taskIdWithError: taskId,
             });
           }
 

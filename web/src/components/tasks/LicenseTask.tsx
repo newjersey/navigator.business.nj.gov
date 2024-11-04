@@ -14,7 +14,6 @@ import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 import {
   LicenseDetails,
   LicenseSearchNameAndAddress,
-  LicenseTaskId,
   taskIdLicenseNameMapping,
   UserData,
 } from "@businessnjgovnavigator/shared/";
@@ -42,7 +41,6 @@ export const LicenseTask = (props: Props): ReactElement => {
 
   const licenseNameForTask = taskIdLicenseNameMapping[props.task.id];
   const hasCompletedSearch = !!licenseDetails?.lastUpdatedISO;
-  const searchHasError = !!licenseDetails?.hasError;
 
   const allFieldsHaveValues = (nameAndAddress: LicenseSearchNameAndAddress): boolean => {
     return !!(nameAndAddress.name && nameAndAddress.addressLine1 && nameAndAddress.zipCode);
@@ -55,6 +53,10 @@ export const LicenseTask = (props: Props): ReactElement => {
     if (licenseDetailsReceived) {
       setTabIndex(STATUS_TAB_INDEX);
       setLicenseDetails(business.licenseData?.licenses?.[licenseNameForTask]);
+    }
+
+    if (business.licenseData?.licenses !== undefined && !licenseDetailsReceived) {
+      setError("NOT_FOUND");
     }
   }, [licenseNameForTask, business]);
 
@@ -83,19 +85,19 @@ export const LicenseTask = (props: Props): ReactElement => {
 
     setIsLoading(true);
     api
-      .checkLicenseStatus(nameAndAddress, props.task.id as LicenseTaskId)
+      .checkLicenseStatus(nameAndAddress)
       .then((result: UserData) => {
         const resultLicenseData =
           result.businesses[result.currentBusinessId]?.licenseData?.licenses?.[licenseNameForTask];
 
-        if (!resultLicenseData) return;
-        analytics.event.task_address_form.response.success_application_found();
-        setLicenseDetails(resultLicenseData);
-
-        if (resultLicenseData.licenseStatus === "UNKNOWN") {
+        if (!resultLicenseData) {
           analytics.event.task_address_form.response.fail_application_not_found();
           setError("NOT_FOUND");
+          return;
         }
+
+        analytics.event.task_address_form.response.success_application_found();
+        setLicenseDetails(resultLicenseData);
       })
       .catch(() => {
         setError("SEARCH_FAILED");
@@ -182,7 +184,7 @@ export const LicenseTask = (props: Props): ReactElement => {
               </div>
             </TabPanel>
             <TabPanel value="1" sx={{ paddingX: 0 }}>
-              {hasCompletedSearch && licenseDetails && !searchHasError ? (
+              {hasCompletedSearch && licenseDetails ? (
                 <LicenseDetailReceipt
                   licenseTaskId={props.task.id}
                   licenseDetails={licenseDetails}
