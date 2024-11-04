@@ -261,7 +261,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
         applicationNumber: "12345",
         checklistItem: "Item 1",
         checkoffStatus: "Completed",
-        licenseStatus: "ACTIVE",
+        licenseStatus: "Active",
         issueDate: undefined,
         dateThisStatus: undefined,
         expirationDate: "20210505 000000.000",
@@ -278,6 +278,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
     expect(result["Pharmacy-Pharmacy"]?.expirationDateISO).toEqual(
       parseDateWithFormat("20210505", "YYYYMMDD").toISOString()
     );
+    expect(result["Pharmacy-Pharmacy"]?.licenseStatus).toEqual("ACTIVE");
   });
 
   it("does not save the expirationDate if invalid", async () => {
@@ -287,7 +288,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
         applicationNumber: "12345",
         checklistItem: "Item 1",
         checkoffStatus: "Completed",
-        licenseStatus: "ACTIVE",
+        licenseStatus: "Active",
         issueDate: undefined,
         dateThisStatus: undefined,
         expirationDate: "20210",
@@ -302,6 +303,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
 
     const result = await searchLicenseStatus(nameAndAddress);
     expect(result["Pharmacy-Pharmacy"]?.expirationDateISO).toBeUndefined();
+    expect(result["Pharmacy-Pharmacy"]?.licenseStatus).toEqual("ACTIVE");
   });
 
   it("does not save the expirationDate if undefined", async () => {
@@ -311,7 +313,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
         applicationNumber: "12345",
         checklistItem: "Item 1",
         checkoffStatus: "Completed",
-        licenseStatus: "ACTIVE",
+        licenseStatus: "Active",
         issueDate: undefined,
         dateThisStatus: undefined,
         expirationDate: undefined,
@@ -326,6 +328,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
 
     const result = await searchLicenseStatus(nameAndAddress);
     expect(result["Pharmacy-Pharmacy"]?.expirationDateISO).toBeUndefined();
+    expect(result["Pharmacy-Pharmacy"]?.licenseStatus).toEqual("ACTIVE");
   });
 
   const queryWithAddress = async (address: string): Promise<LicenseStatusResults> => {
@@ -478,8 +481,8 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
       expect(determineLicenseStatus("Withdrawn")).toBe("WITHDRAWN");
     });
 
-    it("returns UNKNOWN when status is not valid", () => {
-      expect(determineLicenseStatus("fake status")).toBe("UNKNOWN");
+    it("returns UNKNOWN when status is any other status", () => {
+      expect(determineLicenseStatus("FakeStatus")).toBe("UNKNOWN");
     });
   });
 });

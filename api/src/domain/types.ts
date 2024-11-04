@@ -13,12 +13,7 @@ import {
   HousingRegistrationRequestLookupResponse,
   PropertyInterestType,
 } from "@shared/housing";
-import {
-  enabledLicensesSources,
-  LicenseEntity,
-  LicenseSearchNameAndAddress,
-  LicenseTaskId,
-} from "@shared/license";
+import { enabledLicensesSources, LicenseEntity, LicenseSearchNameAndAddress } from "@shared/license";
 import { ProfileData } from "@shared/profileData";
 import { TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
 import { Business, UserData } from "@shared/userData";
@@ -136,8 +131,7 @@ export type SearchLicenseStatus = (
 
 export type UpdateLicenseStatus = (
   userData: UserData,
-  nameAndAddress: LicenseSearchNameAndAddress,
-  taskId?: LicenseTaskId
+  nameAndAddress: LicenseSearchNameAndAddress
 ) => Promise<UserData>;
 
 export type FireSafetyInspectionStatus = (address: string) => Promise<FireSafetyInspectionResult[]>;
