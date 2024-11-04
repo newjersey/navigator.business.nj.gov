@@ -6,17 +6,17 @@ icon: update-purple.svg
 urlSlug: electrologist-office-license-reinstatement
 summaryDescriptionMd: You need to reinstate your electrologist office premises
   license if it is expired or inactive.
-issuingAgency: "Division of Consumer Affairs"
+issuingAgency: Division of Consumer Affairs
 callToActionText: Reinstate My Electrologist Office Premises License
 callToActionLink: https://www.njconsumeraffairs.gov/eac/Applications/Application-to-Reinstate-a-License-as-an-Electrologist.pdf
 ---
 
 ## Application Requirements
 
-- Personal information, including address and birth date
+- Applicant/licensee personal information, including address and birth date
+- License number, if applicable
 - Social Security number (SSN)
 - Citizenship/immigration status
-- Current license number
 - Child support information, if applicable
 - A criminal background check, if applicable
 - List of licenses or certificates, past and present, if applicable
