@@ -15,11 +15,13 @@ sectorIds:
 icon: file-purple.svg
 urlSlug: emergency-trip-permit
 summaryDescriptionMd: >-
-  You need an emergency trip permit if your business:
+  You need an emergency trip permit from the Division of Alcoholic Beverage
+  Control (ABC) if your business:
+
 
   * Transports alcoholic beverages into, out of, or within New Jersey for immediate deliveries
 
-  * Does not have an annual `transportation license or permit|transportation-license-permit` 
+  * Does not have an annual `transportation license or permit|transportation-license-permit`
 issuingAgency: ""
 callToActionText: Apply for My Emergency Trip Permit
 callToActionLink: https://www.njportal.com/abc/eps
