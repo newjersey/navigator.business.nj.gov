@@ -19,7 +19,7 @@ webflowId: 66e9d9648d1f1a667a8f04ab
 
 - Be at least 18 years old
 - High school diploma or its equivalent
-- Completing an electrology education program approved by the - - Electrologists Advisory Committee (EAC) or determined to be substantially equivalent to such a program
+- Completing an electrology education program approved by the Electrologists Advisory Committee (EAC) and taught by a licensed instructor in electrology
 - Passing score for the New Jersey Electrology Jurisprudence Examination
 - Passing score for the International Board of Electrologists Certification (IBEC) examination, administered by the American Electrology Association (AEA)
 
