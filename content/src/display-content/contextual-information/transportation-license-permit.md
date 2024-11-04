@@ -11,9 +11,8 @@ displayname: transportation-license-permit
 ---
 If your business often delivers alcoholic beverages, consider getting a transportation license or permit. You can apply for one with the Division of Alcoholic Beverage Control (ABC).
 
-A **transportation license** lets your business deliver alcohol in and out of the State.
-
-A **limited transportation permit** lets your business transport alcohol not meant to be delivered, sold, or used in the State
+* **Transportation license** lets your business deliver alcohol in and out of the State
+* **Limited transportation permit** lets your business transport alcohol not meant to be delivered, sold, or used in the State
 
 Both require you to get an insignia. An insignia is a marker on a vehicle that shows it is allowed to carry alcohol.
 
