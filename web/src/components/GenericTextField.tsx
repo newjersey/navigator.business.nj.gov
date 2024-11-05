@@ -45,6 +45,7 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
   allowMasking?: boolean;
   inputProps?: OutlinedInputProps;
   type?: HTMLInputTypeAttribute;
+  readOnly?: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, react/display-name
@@ -163,10 +164,18 @@ export const GenericTextField = forwardRef(
           {...fieldOptions}
           sx={{ width: 1, ...fieldOptions?.sx }}
           inputProps={{
+            readOnly: props.readOnly,
+            "aria-readonly": props.readOnly,
+            className: `${props.readOnly ? "bg-base-lightest" : ""}`,
             ...fieldOptions?.inputProps,
             "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
           }}
-          InputProps={props.inputProps}
+          InputProps={{
+            readOnly: props.readOnly,
+            "aria-readonly": props.readOnly,
+            className: `${props.readOnly ? "bg-base-lightest" : ""}`,
+            ...props.inputProps,
+          }}
           type={props.type}
           onFocus={props.onFocus}
         />
