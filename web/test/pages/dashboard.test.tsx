@@ -1,4 +1,5 @@
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import * as buildUserRoadmapModule from "@/lib/roadmap/buildUserRoadmap";
 import { RoadmapDisplayContent, SidebarCardContent } from "@/lib/types/types";
 import DashboardPage from "@/pages/dashboard";
 import { generateSidebarCardContent } from "@/test/factories";
@@ -41,6 +42,8 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+const mockBuildUserRoadmap = (buildUserRoadmapModule as jest.Mocked<typeof buildUserRoadmapModule>)
+  .buildUserRoadmap;
 
 const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>): RoadmapDisplayContent => {
   return {

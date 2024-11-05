@@ -2,9 +2,8 @@ import { RoadmapContext } from "@/contexts/roadmapContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap, Task } from "@/lib/types/types";
-import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { SectionType, TaskProgress, sectionNames } from "@businessnjgovnavigator/shared/userData";
-import { useContext, useMemo } from "react";
+import { sectionNames, SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
+import { useContext, useEffect, useMemo, useState } from "react";
 
 export type CurrentAndNextSection = { current: SectionType; next: SectionType | undefined };
 
@@ -15,9 +14,10 @@ export type UseRoadmapReturnValue = {
   currentAndNextSection: (taskId: string) => CurrentAndNextSection;
 };
 
-export const useRoadmap = (): UseRoadmapReturnValue => {
+export const useRoadmap = (TEST_ONLY_currentBusinessId?: string): UseRoadmapReturnValue => {
   const { roadmap, setRoadmap } = useContext(RoadmapContext);
-  const { business } = useUserData();
+  const { business, userData } = useUserData();
+  const [currentBusinessId, setCurrentBusinessId] = useState(TEST_ONLY_currentBusinessId || "");
 
   const sectionNamesInRoadmap = useMemo(() => {
     if (!roadmap) {
@@ -29,13 +29,17 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
     return [...new Set(sections)];
   }, [roadmap]);
 
-  const rebuildRoadmap = !roadmap || roadmap?.steps.length === 0 || roadmap?.tasks.length === 0;
+  const rebuildRoadmap =
+    !roadmap ||
+    roadmap?.steps.length === 0 ||
+    roadmap?.tasks.length === 0 ||
+    currentBusinessId !== userData?.currentBusinessId;
 
-  useMountEffectWhenDefined(() => {
-    if (rebuildRoadmap) {
-      buildAndSetRoadmap();
-    }
-  }, business);
+  // useMountEffectWhenDefined(() => {
+  //   if (rebuildRoadmap) {
+  //     buildAndSetRoadmap();
+  //   }
+  // }, business);
 
   const buildAndSetRoadmap = async (): Promise<void> => {
     if (business?.onboardingFormProgress === "COMPLETED") {
@@ -43,6 +47,29 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
       setRoadmap(roadmap);
     }
   };
+
+  useEffect(() => {
+    if (rebuildRoadmap) {
+      buildAndSetRoadmap();
+    }
+    if (userData && currentBusinessId !== userData.currentBusinessId) {
+      setCurrentBusinessId(userData.currentBusinessId);
+    }
+  }, [buildAndSetRoadmap, currentBusinessId, rebuildRoadmap, userData, userData?.currentBusinessId]);
+
+  // useEffect(() => {
+  //   console.log(1);
+  //   if (rebuildRoadmap && userData && business?.profileData) {
+  //     (function (): void {
+  //       if (business?.onboardingFormProgress === "COMPLETED") {
+  //         buildUserRoadmap(business.profileData).then((roadmap) => {
+  //           setRoadmap(roadmap);
+  //           setCurrentBusinessId(userData.currentBusinessId);
+  //         });
+  //       }
+  //     })();
+  //   }
+  // }, [business, currentBusinessId, rebuildRoadmap, setRoadmap, userData, userData?.currentBusinessId]);
 
   const tasksInSection = (section: SectionType): Task[] => {
     if (!roadmap) return [];

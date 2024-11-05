@@ -3,8 +3,8 @@ import * as buildUserRoadmapModule from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { withRoadmap } from "@/test/helpers/helpers-renderers";
-import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { generateProfileData } from "@businessnjgovnavigator/shared";
+import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
+import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared";
 import { SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { render } from "@testing-library/react";
 
@@ -19,7 +19,13 @@ describe("useRoadmap", () => {
     useMockBusiness({});
   });
 
-  const setupHook = (initialRoadmap?: Roadmap): UseRoadmapReturnValue => {
+  const setupHook = ({
+    initialRoadmap,
+    TEST_ONLY_currentBusinessId,
+  }: {
+    initialRoadmap?: Roadmap;
+    TEST_ONLY_currentBusinessId?: string;
+  }): UseRoadmapReturnValue => {
     const initialReturnVal = {
       roadmap: initialRoadmap,
       sectionNamesInRoadmap: [],
@@ -30,7 +36,7 @@ describe("useRoadmap", () => {
       }),
     };
     function TestComponent(): null {
-      Object.assign(initialReturnVal, useRoadmap());
+      Object.assign(initialReturnVal, useRoadmap(TEST_ONLY_currentBusinessId));
       return null;
     }
     render(
@@ -46,23 +52,73 @@ describe("useRoadmap", () => {
     const profileData = generateProfileData({});
     useMockBusiness({ profileData, onboardingFormProgress: "COMPLETED" });
     mockBuildUserRoadmap.mockResolvedValue(generateRoadmap({}));
-    setupHook();
+    setupHook({});
     expect(mockBuildUserRoadmap).toHaveBeenCalledWith(profileData);
   });
 
-  it("doesn't rebuild roadmap when there are steps and tasks", () => {
+  it("doesn't rebuild roadmap when there are steps and tasks and the currentBusinessId is the same", () => {
     const profileData = generateProfileData({});
-    useMockBusiness({ profileData, onboardingFormProgress: "COMPLETED" });
+    const business = generateBusiness({ profileData, onboardingFormProgress: "COMPLETED" });
 
-    setupHook(generateRoadmap({ steps: [generateStep({})], tasks: [generateTask({})] }));
+    useMockUserData({
+      currentBusinessId: "some-business",
+      businesses: {
+        "some-business": business,
+      },
+    });
+
+    setupHook({
+      initialRoadmap: generateRoadmap({
+        steps: [generateStep({ section: "PLAN", stepNumber: 1 })],
+        tasks: [generateTask({ stepNumber: 1, id: "task1" })],
+      }),
+      TEST_ONLY_currentBusinessId: "some-business",
+    });
+
     expect(mockBuildUserRoadmap).not.toHaveBeenCalled();
+  });
+
+  it("rebuilds roadmap when there are steps and tasks but the currentBusinessId has changed", () => {
+    const profileData1 = generateProfileData({});
+    const business1 = generateBusiness({ profileData: profileData1, onboardingFormProgress: "COMPLETED" });
+
+    const profileData2 = generateProfileData({});
+    const business2 = generateBusiness({ profileData: profileData2, onboardingFormProgress: "COMPLETED" });
+
+    useMockUserData({
+      currentBusinessId: "some-business",
+      businesses: {
+        "some-business": business1,
+        "previous business id": business2,
+      },
+    });
+
+    setupHook({
+      initialRoadmap: generateRoadmap({
+        steps: [generateStep({ section: "PLAN", stepNumber: 1 })],
+        tasks: [generateTask({ stepNumber: 1, id: "task1" })],
+      }),
+      TEST_ONLY_currentBusinessId: "previous business id",
+    });
+
+    expect(mockBuildUserRoadmap).toHaveBeenCalled();
   });
 
   it("rebuilds roadmap when steps and tasks are empty", () => {
     const profileData = generateProfileData({});
-    useMockBusiness({ profileData, onboardingFormProgress: "COMPLETED" });
+    const business = generateBusiness({ profileData, onboardingFormProgress: "COMPLETED" });
 
-    setupHook(generateRoadmap({ steps: [], tasks: [] }));
+    useMockUserData({
+      currentBusinessId: "some-business",
+      businesses: {
+        "some-business": business,
+      },
+    });
+
+    setupHook({
+      initialRoadmap: generateRoadmap({ steps: [], tasks: [] }),
+      TEST_ONLY_currentBusinessId: "some-business",
+    });
     expect(mockBuildUserRoadmap).toHaveBeenCalledTimes(1);
   });
 
@@ -70,7 +126,7 @@ describe("useRoadmap", () => {
     const profileData = generateProfileData({});
     useMockBusiness({ profileData, onboardingFormProgress: "UNSTARTED" });
     mockBuildUserRoadmap.mockResolvedValue(generateRoadmap({}));
-    setupHook();
+    setupHook({});
     expect(mockBuildUserRoadmap).not.toHaveBeenCalled();
   });
 
@@ -99,7 +155,7 @@ describe("useRoadmap", () => {
         },
       });
 
-      const { isSectionCompleted } = setupHook(roadmap);
+      const { isSectionCompleted } = setupHook({ initialRoadmap: roadmap });
       expect(isSectionCompleted("PLAN")).toBe(true);
       expect(isSectionCompleted("START")).toBe(false);
     });
@@ -114,7 +170,7 @@ describe("useRoadmap", () => {
         },
       });
 
-      const { isSectionCompleted } = setupHook(roadmap);
+      const { isSectionCompleted } = setupHook({ initialRoadmap: roadmap });
       expect(isSectionCompleted("PLAN")).toBe(false);
       expect(isSectionCompleted("START")).toBe(true);
     });
@@ -136,7 +192,7 @@ describe("useRoadmap", () => {
         task4: "COMPLETED",
       };
 
-      const { isSectionCompleted } = setupHook(roadmap);
+      const { isSectionCompleted } = setupHook({ initialRoadmap: roadmap });
       expect(isSectionCompleted("PLAN", taskProgressOverride)).toBe(true);
       expect(isSectionCompleted("START", taskProgressOverride)).toBe(true);
     });
@@ -169,7 +225,7 @@ describe("useRoadmap", () => {
     });
 
     it("returns current section for task", () => {
-      const { currentAndNextSection } = setupHook(roadmap);
+      const { currentAndNextSection } = setupHook({ initialRoadmap: roadmap });
       expect(currentAndNextSection("task1").current).toEqual("PLAN");
       expect(currentAndNextSection("task2").current).toEqual("PLAN");
       expect(currentAndNextSection("task3").current).toEqual("PLAN");
@@ -177,7 +233,7 @@ describe("useRoadmap", () => {
     });
 
     it("returns next section for task, or undefined if no next section", () => {
-      const { currentAndNextSection } = setupHook(roadmap);
+      const { currentAndNextSection } = setupHook({ initialRoadmap: roadmap });
       expect(currentAndNextSection("task1").next).toEqual("START");
       expect(currentAndNextSection("task2").next).toEqual("START");
       expect(currentAndNextSection("task3").next).toEqual("START");
@@ -194,7 +250,7 @@ describe("useRoadmap", () => {
         },
       });
 
-      const { currentAndNextSection } = setupHook(roadmap);
+      const { currentAndNextSection } = setupHook({ initialRoadmap: roadmap });
       expect(currentAndNextSection("task3").current).toEqual("PLAN");
       expect(currentAndNextSection("task3").next).toBeUndefined();
       expect(currentAndNextSection("task4").current).toEqual("START");
