@@ -57,9 +57,15 @@ export const useUserData = (): UseUserDataResponse => {
     fetchedUserId.current = data?.user.id;
 
     let licenseDataFromDatabaseDataMoreRecent = false;
-    if (data?.businesses[data.currentBusinessId] && updateQueue?.currentBusiness()) {
+    const currBusinessIdFromUpdateQueue = updateQueue?.current()?.currentBusinessId;
+
+    if (
+      currBusinessIdFromUpdateQueue &&
+      data?.businesses[currBusinessIdFromUpdateQueue] &&
+      updateQueue?.currentBusiness()
+    ) {
       licenseDataFromDatabaseDataMoreRecent = isLicenseDataFromDatabaseDataMoreRecent({
-        businessFromDb: data?.businesses[data.currentBusinessId],
+        businessFromDb: data?.businesses[currBusinessIdFromUpdateQueue],
         businessFromUpdateQueue: updateQueue?.currentBusiness(),
       });
     }
@@ -68,8 +74,16 @@ export const useUserData = (): UseUserDataResponse => {
       setUpdateQueue(new UpdateQueueFactory(data, update));
     } else if (updateQueue?.current() === undefined && data) {
       updateQueue?.queue(data);
-    } else if (licenseDataFromDatabaseDataMoreRecent && updateQueue && data) {
-      const mergedData = modifyCurrentBusiness(updateQueue?.current(), licenseDataModifyingFunction(data));
+    } else if (
+      currBusinessIdFromUpdateQueue &&
+      licenseDataFromDatabaseDataMoreRecent &&
+      updateQueue &&
+      data
+    ) {
+      const mergedData = modifyCurrentBusiness(
+        updateQueue?.current(),
+        licenseDataModifyingFunction(data, currBusinessIdFromUpdateQueue)
+      );
       updateQueue?.queue(mergedData);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
