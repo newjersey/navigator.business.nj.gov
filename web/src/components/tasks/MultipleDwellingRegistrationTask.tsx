@@ -1,8 +1,9 @@
-import { Content } from "@/components/Content";
-import { TaskHeader } from "@/components/TaskHeader";
 import { NeedsAccountModalWrapper } from "@/components/auth/NeedsAccountModalWrapper";
+import { Content } from "@/components/Content";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { TaskHeader } from "@/components/TaskHeader";
 import { CheckHousingRegistrationStatus } from "@/components/tasks/CheckHousingRegistrationStatus";
 import { HousingRegistrationStatusSummary } from "@/components/tasks/HousingRegistrationStatusSummary";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
@@ -124,26 +125,28 @@ export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => 
                 <Content>{props.task.summaryDescriptionMd || ""}</Content>
                 <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
               </div>
-              <div className="flex flex-column margin-top-4 margin-bottom-1">
-                <PrimaryButton
-                  isColor={"primary"}
-                  onClick={() => {
-                    openInNewTab(callToActionLink);
-                  }}
-                >
-                  <div> {Config.housingRegistrationSearchTask.registrationCallToActionPrimaryText}</div>
-                </PrimaryButton>
-              </div>
-              <div className="flex flex-column">
-                <SecondaryButton
-                  isColor={"primary"}
-                  onClick={() => {
-                    setTabIndex(STATUS_TAB_INDEX);
-                  }}
-                >
-                  <div>{Config.housingRegistrationSearchTask.registrationCallToActionSecondaryText}</div>
-                </SecondaryButton>
-              </div>
+              <CtaContainer className="margin-btm-neg-2">
+                <div className="btn-container">
+                  <SecondaryButton
+                    isColor={"primary"}
+                    onClick={() => {
+                      setTabIndex(STATUS_TAB_INDEX);
+                    }}
+                  >
+                    <div>{Config.housingRegistrationSearchTask.registrationCallToActionSecondaryText}</div>
+                  </SecondaryButton>
+                </div>
+                <div className="btn-container">
+                  <PrimaryButton
+                    isColor={"primary"}
+                    onClick={() => {
+                      openInNewTab(callToActionLink);
+                    }}
+                  >
+                    <div> {Config.housingRegistrationSearchTask.registrationCallToActionPrimaryText}</div>
+                  </PrimaryButton>
+                </div>
+              </CtaContainer>
             </TabPanel>
             <TabPanel value="1" sx={{ paddingX: 0 }}>
               {housingRegistrationLookupSummary ? (
