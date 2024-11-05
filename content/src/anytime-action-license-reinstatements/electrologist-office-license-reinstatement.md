@@ -20,7 +20,7 @@ callToActionLink: https://www.njconsumeraffairs.gov/eac/Applications/Application
 - `Certificate of Formation|certificate-formation`
 - Name of business owner(s)
 - Affidavit signed in front of a public notary
-- Reinstatement questions answered by the office manager of the electrologists office 
+- Reinstatement questions answered by the office manager of the electrologist's office
 - Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
