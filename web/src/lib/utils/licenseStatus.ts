@@ -22,9 +22,9 @@ export const getLicenseStatusResultsFromLicenses = (licenses: Licenses): License
   return result;
 };
 
-export const licenseDataModifyingFunction = (dbUserData: UserData) => {
+export const licenseDataModifyingFunction = (dbUserData: UserData, currBusinessId: string) => {
   return (business: Business): Business => {
-    const licenses = dbUserData?.businesses[dbUserData.currentBusinessId]?.licenseData?.licenses || {};
+    const licenses = dbUserData?.businesses[currBusinessId]?.licenseData?.licenses || {};
     const licenseStatusResults = getLicenseStatusResultsFromLicenses(licenses);
 
     return {
@@ -33,7 +33,7 @@ export const licenseDataModifyingFunction = (dbUserData: UserData) => {
         ...getNonLicenseTasks(business),
         ...getLicenseTasksProgress(licenseStatusResults),
       },
-      licenseData: dbUserData?.businesses[dbUserData.currentBusinessId]?.licenseData,
+      licenseData: dbUserData?.businesses[currBusinessId]?.licenseData,
     };
   };
 };
