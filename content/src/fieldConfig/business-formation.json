@@ -6,7 +6,11 @@
       "radioButtonNumberText": "Enter Your Registered Agent ID Number",
       "radioButtonManualText": "Manually Identify Your Registered Agent",
       "sameAddressCheckbox": "The address is the same as the business location.",
-      "sameContactCheckbox": "The agent information is the same as the account holder."
+      "sameContactCheckbox": "The agent information is the same as the account holder.",
+      "noteTitle": "Note: ",
+      "noteBody": "By checking this box, the account holder information will be applied to the 'Registered Agent Name' and 'Registered Agent Email' fields. These fields will be locked.",
+      "checkboxUnCheckedScreenReaderAnnouncement": "The Registered Agent Name and Registered Agent Email fields are now filled with the account holder information and locked",
+      "checkboxCheckedScreenReaderAnnouncement": "The Registered Agent Name and Registered Agent Email fields are now editable"
     },
     "general": {
       "helpButtonText": "Help",
