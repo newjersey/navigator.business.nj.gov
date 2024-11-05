@@ -894,6 +894,18 @@ collections:
                       name: "sameContactCheckbox",
                       widget: "string",
                     }
+                  - { label: "Note Title", name: "noteTitle", widget: "string" }
+                  - { label: "Note Body", name: "noteBody", widget: "markdown" }
+                  - {
+                      label: "Checkbox Unchecked Screen Reader Announcement",
+                      name: "checkboxUnCheckedScreenReaderAnnouncement",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Checkbox Checked Screen Reader Announcement",
+                      name: "checkboxCheckedScreenReaderAnnouncement",
+                      widget: "string",
+                    }
               - label: Sections
                 name: sections
                 collapsed: true

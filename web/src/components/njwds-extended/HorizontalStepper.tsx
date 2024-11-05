@@ -166,7 +166,7 @@ export const HorizontalStepper = (props: Props): ReactElement => {
       content,
       condition: () => true,
       modificationMap: {
-        stepName: stepName,
+        stepName,
       },
     });
   };
@@ -176,7 +176,7 @@ export const HorizontalStepper = (props: Props): ReactElement => {
       content,
       condition: () => true,
       modificationMap: {
-        stepState: stepState,
+        stepState,
       },
     });
   };
