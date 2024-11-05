@@ -28,7 +28,7 @@ webflowId: 66e9d9648d1f1a667a8f04eb
 - Affidavit signed in front of a public notary
 - Applicable fees paid
 
-Contact the Electrologists Advisory Committee for an Electrologists Office Premise Application
+Contact the Electrologists Advisory Committee for an Electrologist Office Premise Application
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
 You can't offer electrolysis services or operate an electrologist's office in New Jersey, and you may be subject to significant fines and legal penalties.
