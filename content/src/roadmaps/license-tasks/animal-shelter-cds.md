@@ -4,6 +4,9 @@ notesMd: >-
   that fixes it
 
   10.22 updating copy
+
+
+  11.6 received info from SME to include zoning cert
 id: animal-shelter-cds
 filename: animal-shelter-cds
 displayname: animal-shelter-cds
@@ -25,30 +28,30 @@ agencyId: nj-consumer-affairs
 webflowId: 67100850cb7b73db412e7610
 licenseCertificationClassification: undefined
 ---
-
 ## Application Requirements
 
 ### Business Information
 
-- New Jersey business address where the CDS will be stored and dispensed (must match your DEA registration address)
-- DEA registration number(s), if applicable
-- Name, address, and telephone number of the person who has administrative or managerial responsibility for the registered location
-- `Registered agent information,|registered-agent` including address and phone number, or the name and address of the New Jersey resident responsible for receiving and handling legal paperwork
-- The name and title of all officers
-- A copy of your business papers, such as your `Business Registration Certificate|business-reg-certificate`
-- Proof of liability insurance for your facility
-- Notarized Memorandum of Agreement (included in application)
-- Applicable fees paid, once the DCU has sent an invoice
+* New Jersey business address where the CDS will be stored and dispensed (must match your DEA registration address)
+* DEA registration number(s), if applicable
+* Name, address, and telephone number of the person who has administrative or managerial responsibility for the registered location
+*  `Registered agent information,|registered-agent` including address and phone number, or the name and address of the New Jersey resident responsible for receiving and handling legal paperwork
+* The name and title of all officers
+* A copy of your business papers, such as your `Business Registration Certificate|business-reg-certificate` 
+* Proof of liability insurance for your facility
+* Notarized Memorandum of Agreement (included in application)
+*  `Zoning Certification,|zoning` completed by your local zoning officer (included in application)
+* Applicable fees paid, once the DCU has sent an invoice
 
 ### Safety and Security
 
-- Schedule of the CDS
-- Criminal History Record Information (CHRI) Part 1 for each person with access to the CDS and applicable fees paid (to be completed online and at the same time as the CDS registration; link in application)
-- CHRI Part 2, including employee names, dates of birth, and email addresses (to be completed right after Part 1 and submitted with your CDS application; form included in application)
-- A detailed document outlining the purpose, method, and use of the CDS, accompanied by an approved protocol from a licensed New Jersey veterinarian
-- A certificate completed by a licensed New Jersey veterinarian, stating that shelter staff who handle the CDS have been proficiently trained in the use of sodium pentobarbital in animal euthanasia
-- The name and title of everyone who will have access to the CDS
-- Security measures in place to prevent loss or theft of the CDS
+* Schedule of the CDS
+* Criminal History Record Information (CHRI) Part 1 for each person with access to the CDS and applicable fees paid (to be completed online and at the same time as the CDS registration; link in application)
+* CHRI Part 2, including employee names, dates of birth, and email addresses (to be completed right after Part 1 and submitted with your CDS application; form included in application)
+* A detailed document outlining the purpose, method, and use of the CDS, accompanied by an approved protocol from a licensed New Jersey veterinarian
+* A certificate completed by a licensed New Jersey veterinarian, stating that shelter staff who handle the CDS have been proficiently trained in the use of sodium pentobarbital in animal euthanasia
+* The name and title of everyone who will have access to the CDS
+* Security measures in place to prevent loss or theft of the CDS
 
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" }
 
