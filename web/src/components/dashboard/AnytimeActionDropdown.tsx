@@ -74,6 +74,11 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
     switch (action.filename) {
       case "carnival-ride-supplemental-modification":
         return !!business?.profileData.carnivalRideOwningBusiness;
+      case "operating-carnival-fire-permit":
+        return (
+          !!business?.profileData.carnivalRideOwningBusiness ||
+          !!business?.profileData.travelingCircusOrCarnivalOwningBusiness
+        );
       default:
         return false;
     }
