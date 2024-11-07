@@ -249,6 +249,7 @@ export const generateIndustrySpecificData = (
     carnivalRideOwningBusiness: !(randomInt() % 2),
     propertyLeaseType: randomElementFromArray(["SHORT_TERM_RENTAL", "LONG_TERM_RENTAL", "BOTH"]),
     hasThreeOrMoreRentalUnits: !(randomInt() % 2),
+    travelingCircusOrCarnivalOwningBusiness: !(randomInt() % 2),
     ...overrides,
   };
 };

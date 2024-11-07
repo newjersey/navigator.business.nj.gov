@@ -41,6 +41,7 @@ export interface IndustrySpecificData {
   readonly carnivalRideOwningBusiness: boolean | undefined;
   readonly propertyLeaseType: PropertyLeaseType;
   readonly hasThreeOrMoreRentalUnits: boolean | undefined;
+  readonly travelingCircusOrCarnivalOwningBusiness: boolean | undefined;
 }
 
 type IndustrySpecificDataChoices = {
@@ -71,6 +72,7 @@ export const industrySpecificDataChoices: IndustrySpecificDataChoices = {
   carnivalRideOwningBusiness: booleanChoice,
   propertyLeaseType: [...propertyLeaseTypeOptions],
   hasThreeOrMoreRentalUnits: booleanChoice,
+  travelingCircusOrCarnivalOwningBusiness: booleanChoice,
 };
 
 export const emptyIndustrySpecificData: IndustrySpecificData = {
@@ -97,6 +99,7 @@ export const emptyIndustrySpecificData: IndustrySpecificData = {
   carnivalRideOwningBusiness: undefined,
   propertyLeaseType: undefined,
   hasThreeOrMoreRentalUnits: undefined,
+  travelingCircusOrCarnivalOwningBusiness: undefined,
 };
 
 export interface ProfileData extends IndustrySpecificData {

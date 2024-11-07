@@ -64,6 +64,13 @@
           "description": "Do you own and/or operate a `carnival or amusement ride|carnival-amusement-ride` ?"
         }
       },
+      "travelingCircusOrCarnivalOwningBusiness": {
+        "default": {
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Do you own and/or operate a traveling carnival or circus?"
+        }
+      },
       "taxId": {
         "default": {
           "header": "New Jersey Tax ID",
