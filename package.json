@@ -150,7 +150,7 @@
     "@types/js-yaml": "4.0.9",
     "@types/jsonwebtoken": "9.0.7",
     "@types/lodash": "4.17.13",
-    "@types/node": "20.17.3",
+    "@types/node": "20.17.6",
     "@types/react": "18.2.79",
     "@types/react-dom": "18.2.25",
     "@types/react-slick": "^0.23.10",
