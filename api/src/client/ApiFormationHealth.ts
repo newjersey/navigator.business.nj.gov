@@ -104,6 +104,7 @@ export const ApiFormationHealth: UserData = {
         raffleBingoGames: undefined,
         propertyLeaseType: undefined,
         hasThreeOrMoreRentalUnits: undefined,
+        travelingCircusOrCarnivalOwningBusiness: undefined,
       },
       formationData: {
         formationResponse: undefined,

@@ -5,8 +5,6 @@ notesMd: "[Muni
 filename: operating-carnival-fire-permit
 name: Get a Fire Permit for Your Carnival or Circus
 industryIds: []
-sectorIds:
-  - arts-entertainment-and-recreation
 icon: govt-purple.svg
 urlSlug: operating-carnival-fire-permit
 summaryDescriptionMd: "You must have a fire permit to do certain activities at
@@ -17,15 +15,15 @@ callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summa
 ---
 
 ## Common Activities That Need a Fire Permit
-* Setting up trailers, tents, stages, and similar structures that people will occupy
-* Setting up a `carnival or amusement ride|carnival-amusement-ride`
-* Setting up food stalls or concession stands that need a fire suppression system, such as fire extinguishers or sprinklers
-* Using an open flame or flame-producing device
-* Storing and handling certain types of flammable or combustible liquids
-* Storing and discharging fireworks
+
+- Setting up trailers, tents, stages, and similar structures that people will occupy
+- Setting up a `carnival or amusement ride|carnival-amusement-ride`
+- Setting up food stalls or concession stands that need a fire suppression system, such as fire extinguishers or sprinklers
+- Using an open flame or flame-producing device
+- Storing and handling certain types of flammable or combustible liquids
+- Storing and discharging fireworks
 
 Contact the `Local Enforcing Agency (LEA)|local-enforcing-agency` in the town where your carnival or circus will be to see which fire permits you need and how to apply.
-
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 

@@ -733,6 +733,18 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
 
         <ProfileField
+          fieldName="travelingCircusOrCarnivalOwningBusiness"
+          isVisible={displayCarnivalRidesQuestion()}
+          hideHeader={true}
+          boldAltDescription={true}
+        >
+          <RadioQuestion<boolean>
+            fieldName={"travelingCircusOrCarnivalOwningBusiness"}
+            choices={[true, false]}
+          />
+        </ProfileField>
+
+        <ProfileField
           fieldName="dateOfFormation"
           isVisible={LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
             "formationDate"
