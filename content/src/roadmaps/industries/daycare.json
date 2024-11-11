@@ -1,9 +1,7 @@
 {
-  "displayname": "daycare",
   "naicsCodes": "624410",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": false,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -46,6 +44,8 @@
     }
   ],
   "name": "Childcare Center",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "daycare",
   "industryOnboardingQuestions": {
     "canBeReseller": true,
     "isChildcareForSixOrMore": true
