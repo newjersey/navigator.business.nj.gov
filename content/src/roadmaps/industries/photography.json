@@ -1,14 +1,7 @@
 {
-  "displayname": "photography",
   "naicsCodes": "541921",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "digital-and-print-media",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -51,6 +44,13 @@
     }
   ],
   "name": "Photography",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "photography",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
+  "isEnabled": true,
   "additionalSearchTerms": "freelance photographer, professional photographer, photographer, media, event photographer, video",
   "id": "photography",
   "description": "Offers portrait and event photography services",
