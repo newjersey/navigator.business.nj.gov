@@ -12,7 +12,6 @@ import {
   industryIdsWithSingleRequiredEssentialQuestion,
   mockSuccessfulApiSignups,
   renderPage,
-  runNonprofitOnboardingTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   LookupIndustryById,
@@ -261,7 +260,6 @@ describe("onboarding - starting a business", () => {
             sectorId: "retail-trade-and-ecommerce",
             homeBasedBusiness: undefined,
             municipality: undefined,
-            isNonprofitOnboardingRadio: false,
           },
           preferences: {
             ...initialUserData.businesses[businessId].preferences,
@@ -292,10 +290,6 @@ describe("onboarding - starting a business", () => {
     expect(screen.getByTestId("banner-alert-REQUIRED_FOREIGN_BUSINESS_TYPE")).toBeInTheDocument();
     page.clickBack();
     expect(screen.queryByTestId("banner-alert-REQUIRED_FOREIGN_BUSINESS_TYPE")).not.toBeInTheDocument();
-  });
-
-  describe("nonprofit onboarding tests", () => {
-    runNonprofitOnboardingTests({ businessPersona: "STARTING", industryPage: 2, lastPage: 2 });
   });
 
   describe("domestic employer", () => {

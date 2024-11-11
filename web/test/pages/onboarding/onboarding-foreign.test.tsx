@@ -13,7 +13,6 @@ import {
   industryIdsWithSingleRequiredEssentialQuestion,
   mockEmptyApiSignups,
   renderPage,
-  runNonprofitOnboardingTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   OperatingPhaseId,
@@ -471,9 +470,5 @@ describe("onboarding - foreign business", () => {
       });
       expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.GUEST_MODE);
     });
-  });
-
-  describe("nonprofit onboarding tests", () => {
-    runNonprofitOnboardingTests({ businessPersona: "FOREIGN", industryPage: 3, lastPage: 3 });
   });
 });
