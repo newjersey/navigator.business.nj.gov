@@ -4789,20 +4789,6 @@ collections:
                                   name: "limited-partnership",
                                   widget: "markdown",
                                 }
-                  - label: Onboarding Nonprofit Radio
-                    name: isNonprofitOnboardingRadio
-                    collapsed: true
-                    widget: object
-                    fields:
-                      - label: Default
-                        name: "default"
-                        collapsed: false
-                        widget: object
-                        fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
-                          - { label: "Radio Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio No Text", name: "radioButtonFalseText", widget: "string" }
                   - label: Municipality
                     name: "municipality"
                     collapsed: true

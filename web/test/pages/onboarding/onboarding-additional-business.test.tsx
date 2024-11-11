@@ -127,7 +127,6 @@ describe("onboarding - additional business", () => {
             sectorId: "retail-trade-and-ecommerce",
             homeBasedBusiness: undefined,
             municipality: undefined,
-            isNonprofitOnboardingRadio: false,
           },
         },
       },

@@ -338,14 +338,6 @@
           "placeholder": "If you are an LLC, Corporation, nonprofit, LP, or LLP, we will automatically add your formation documents once you [Form Your Business](/tasks/form-business-entity) on our site."
         }
       },
-      "isNonprofitOnboardingRadio": {
-        "default": {
-          "header": "Nonprofit",
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Is your business a nonprofit?"
-        }
-      },
       "industryId": {
         "default": {
           "header": "Industry",
