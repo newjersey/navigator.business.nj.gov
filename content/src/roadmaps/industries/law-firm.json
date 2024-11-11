@@ -1,12 +1,7 @@
 {
-  "displayname": "law-firm",
   "naicsCodes": "541110, 541199",
   "defaultSectorId": "other-services",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true
-  },
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -55,6 +50,11 @@
     }
   ],
   "name": "Legal Services",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "law-firm",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true
+  },
   "isEnabled": true,
   "additionalSearchTerms": "attorney, law office, legal consulting, legal services, legal advice, legal consulting",
   "id": "law-firm",
