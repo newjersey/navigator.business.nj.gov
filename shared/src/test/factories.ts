@@ -261,7 +261,6 @@ export const generateProfileData = (
   const id = `some-id-${randomInt()}`;
   const persona: BusinessPersona = randomElementFromArray(["STARTING", "OWNING", "FOREIGN"]);
   const industry = randomIndustry(canHavePermanentLocation);
-  const legalStructure = randomLegalStructure().id;
 
   return {
     ...generateIndustrySpecificData({}),
@@ -292,7 +291,6 @@ export const generateProfileData = (
     nexusDbaName: "",
     needsNexusDbaName: false,
     operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
-    isNonprofitOnboardingRadio: legalStructure === "nonprofit",
     nonEssentialRadioAnswers: {},
     elevatorOwningBusiness: undefined,
     carnivalRideOwningBusiness: undefined,

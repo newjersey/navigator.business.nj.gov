@@ -96,7 +96,6 @@ export const ApiFormationHealth: UserData = {
         nexusDbaName: "",
         needsNexusDbaName: false,
         operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
-        isNonprofitOnboardingRadio: false,
         nonEssentialRadioAnswers: {},
         encryptedTaxId: undefined,
         elevatorOwningBusiness: undefined,

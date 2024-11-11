@@ -1,7 +1,6 @@
 import { BusinessPersonaQuestion } from "@/components/data-fields/BusinessPersonaQuestion";
 import { ForeignBusinessTypeField } from "@/components/data-fields/ForeignBusinessTypeField";
 import { Industry } from "@/components/data-fields/Industry";
-import { NonprofitQuestion } from "@/components/data-fields/NonprofitQuestion";
 import { Sectors } from "@/components/data-fields/Sectors";
 import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
 import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
@@ -52,16 +51,12 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
         name: "industry-page",
         component: (
           <>
-            <FieldLabelOnboarding fieldName="isNonprofitOnboardingRadio" />
-            <NonprofitQuestion />
-            <div className="padding-top-3">
-              <FieldLabelOnboarding fieldName="industryId" />
-              <Industry<OnboardingErrors>
-                essentialQuestionErrorTypes={["REQUIRED_ESSENTIAL_QUESTION"]}
-                errorTypes={["ALERT_BAR"]}
-                onboardingFieldLabel
-              />
-            </div>
+            <FieldLabelOnboarding fieldName="industryId" />
+            <Industry<OnboardingErrors>
+              essentialQuestionErrorTypes={["REQUIRED_ESSENTIAL_QUESTION"]}
+              errorTypes={["ALERT_BAR"]}
+              onboardingFieldLabel
+            />
           </>
         ),
       },
@@ -107,16 +102,12 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
         name: "industry-page",
         component: (
           <>
-            <FieldLabelOnboarding fieldName="isNonprofitOnboardingRadio" />
-            <NonprofitQuestion />
-            <div className="padding-top-3">
-              <FieldLabelOnboarding fieldName="industryId" />
-              <Industry<OnboardingErrors>
-                essentialQuestionErrorTypes={["REQUIRED_ESSENTIAL_QUESTION"]}
-                errorTypes={["ALERT_BAR"]}
-                onboardingFieldLabel
-              />
-            </div>
+            <FieldLabelOnboarding fieldName="industryId" />
+            <Industry<OnboardingErrors>
+              essentialQuestionErrorTypes={["REQUIRED_ESSENTIAL_QUESTION"]}
+              errorTypes={["ALERT_BAR"]}
+              onboardingFieldLabel
+            />
           </>
         ),
       },
