@@ -1,14 +1,7 @@
 {
-  "displayname": "travel-agent",
   "naicsCodes": "561510",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "other-services",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -51,6 +44,13 @@
     }
   ],
   "name": "Travel Agency",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "travel-agent",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
+  "isEnabled": true,
   "additionalSearchTerms": "home-based travel agent",
   "id": "travel-agent",
   "description": "Coordinates the details of transportation, itinerary and accommodations for travelers",
