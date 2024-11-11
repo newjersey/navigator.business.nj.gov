@@ -1,12 +1,7 @@
 {
-  "displayname": "notary-public",
   "naicsCodes": "541120",
   "defaultSectorId": "other-services",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true
-  },
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -55,6 +50,11 @@
     }
   ],
   "name": "Notary Public",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "notary-public",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true
+  },
   "isEnabled": true,
   "additionalSearchTerms": "signing agent, mobile notary, notary service, loan signing, remote online notary",
   "id": "notary-public",
