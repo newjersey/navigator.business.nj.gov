@@ -48,8 +48,7 @@
     "hotel-register",
     "rooming-boarding-house-owner",
     "hotel-food",
-    "hotel-liquor",
-    "weights-measures"
+    "hotel-liquor"
   ],
   "displayname": "lodging",
   "industryOnboardingQuestions": {
