@@ -7,8 +7,8 @@ urlSlug: hvac-license
 name: Get an HVACR License
 webflowName: "HVAC Contractor: HVACR License"
 summaryDescriptionMd: >
-  You or any staff providing HVACR services must be licensed as an HVACR
-  contractor.
+  You or any staff providing heating, ventilation, air conditioning and
+  refrigeration (HVACR) services must be licensed as an HVACR contractor.
 industryId:
   - hvac-contractor
 callToActionText: Apply for My HVACR License
