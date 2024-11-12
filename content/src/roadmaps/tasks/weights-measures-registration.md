@@ -35,6 +35,8 @@ id: weights-measures-registration
 callToActionLink: https://www.njconsumeraffairs.gov/OWM/Applications/Registration-Application-for-Commercial-Weighing-and-Measuring-Devices.pdf
 callToActionText: Register My Commercial Weighing and Measuring Device
 industryId: ""
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Office of Weights and Measures
 ---
 - - -
 
