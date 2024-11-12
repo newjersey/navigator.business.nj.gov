@@ -4,11 +4,14 @@ notesMd: >-
   draft](https://docs.google.com/document/d/1tNiYNAFLSjFAB4vB_YSA5sgx-s2_ODPxJbGBmz6AeVQ/edit)
 
 
-  NOTE: needs SME review
+  NOTE: Approved by SME 11/7
 filename: vacant-building-fire-permit
 name: Get a Fire Permit for Your Vacant or Unoccupied Property
-industryIds: []
-sectorIds: []
+industryIds:
+  - real-estate-investor
+  - residential-landlord
+sectorIds:
+  - real-estate
 icon: file-purple.svg
 urlSlug: hot-work-fire-permit
 summaryDescriptionMd: >-
@@ -22,7 +25,7 @@ summaryDescriptionMd: >-
 
 
   You also need to pass an inspection to get the permit.
-issuingAgency: Division of Fire Safety
+issuingAgency: ""
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 ---
