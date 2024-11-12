@@ -48,6 +48,6 @@ publishStageArchive: ""
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-Tax credits equal to 20% of a qualified investment with a potential 5% bonus.
+Tax credits that equal up to 20% of a qualified investment with a potential 5% bonus.
 
 :::

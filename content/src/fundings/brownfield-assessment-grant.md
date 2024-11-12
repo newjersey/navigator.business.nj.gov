@@ -37,6 +37,6 @@ publishStageArchive: Do Not Publish
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-Free environmental site assessment to evaluate contamination at brownfield sites.
+You receive a free environmental site assessment to evaluate contamination at brownfield sites.
 
 :::

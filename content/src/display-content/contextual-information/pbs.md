@@ -1,8 +1,8 @@
 ---
 slug: pbs
 filename: pbs
-displayname: pbs
 header: Premier Business Services
+displayname: pbs
 ---
 
 [Premier Business Services](https://www-njlib.nj.gov/NJ_PREMIER_EBIZ/jsp/home.jsp) (PBS) provides access to all New Jersey electronic tax filing and payment services that apply to your business, as well as access to your filing/payment history.

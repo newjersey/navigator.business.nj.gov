@@ -50,7 +50,6 @@
   ],
   "name": "Residential Landlord",
   "nonEssentialQuestionsIds": [
-    "weights-measures",
     "multiple-dwelling-register"
   ],
   "displayname": "residential-landlord",

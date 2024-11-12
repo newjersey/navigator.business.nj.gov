@@ -1,9 +1,10 @@
 ---
+licenseName: ""
 id: home-baker-license
 filename: home-baker-license
 displayname: home-baker-license
 urlSlug: home-baker-license
-name: Apply for a Cottage Food Operator Permit
+name: Apply for a Cottage Food Operator (Home Baker) Permit
 webflowName: "Home Baker: Cottage Food Operator Permit"
 summaryDescriptionMd: >
   You need a cottage food operator (home baker) permit to sell food/baked goods
@@ -14,7 +15,6 @@ summaryDescriptionMd: >
   for important information on allowed ingredients, allergens, and labeling
   requirements.
 formName: CFO-1
-licenseName: ""
 industryId:
   - home-baker
 callToActionText: Apply for Your Permit

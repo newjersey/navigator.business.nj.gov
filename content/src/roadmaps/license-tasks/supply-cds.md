@@ -10,11 +10,15 @@ agencyId: nj-consumer-affairs
 agencyAdditionalContext: New Jersey Drug Control Unit
 industryId: generic
 licenseCertificationClassification: undefined
-summaryDescriptionMd: "You need a Controlled Dangerous Substances (CDS) registration if you manufacture, repackage, label, or buy and sell any products containing CDS. Follow these steps to apply:
+summaryDescriptionMd: >-
+  You need a Controlled Dangerous Substances (CDS) registration if you manufacture, repackage, label, or buy and sell any products containing CDS. Follow these steps to apply:
 
-1. Email the NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the CDS registration application for Manufacturers or Wholesale Distributors.
-2. After your completed application has been emailed to the DCU, they will email you an invoice to pay your fees online.
-3. Be sure to register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to the DCU within 60 days."
+
+  1. Email the NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the CDS registration application for Manufacturers or Wholesale Distributors.
+
+  2. After your completed application has been emailed to the DCU, they will email you an invoice to pay your fees online.
+
+  3. Be sure to register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to the DCU within 60 days.
 ---
 
 ## Application Requirements

@@ -51,7 +51,7 @@
     }
   ],
   "name": "Telemarketing",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [],
   "displayname": "telemarketing",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
