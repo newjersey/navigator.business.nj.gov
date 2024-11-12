@@ -1,27 +1,37 @@
 ---
-notesMd: "[Muni
-  draft](https://docs.google.com/document/d/19SKndbaCYmkugJYc7Y-Udc1XBHhJVBNp3q\
-  MrLpxKTis/edit?usp=sharing)"
+notesMd: >-
+  [Muni
+  draft](https://docs.google.com/document/d/1LQ8r0RSTBNFXiaDKeFF3ha8GyY3GBfDaeJySwsyOpXM/edit)
+
+
+  NOTE: SME approved copy on 11/7
 filename: temporary-space-online-biz-fire-permit
-name: Get a Fire Permit to Set Up a Portable Kiosk or Display Booth at a Mall
+name: Get a Fire Permit to Set Up a Temporary Retail Space
 industryIds:
-  - retail
+  - e-commerce
 sectorIds:
   - retail-trade-and-ecommerce
 icon: file-purple.svg
-urlSlug: temporary-kiosk-fire-permit
-summaryDescriptionMd: >
-  You may need a fire permit to place or construct a portable kiosk, display
-  booth, or concession equipment in a covered mall.
+urlSlug: temporary-space-online-biz-fire-permit
+summaryDescriptionMd: You may need a fire permit to sell goods or services from
+  a temporary space, such as a pop-up shop or kiosk at a mall. If you need a
+  permit, you must apply for one for each new setup and pass an inspection to
+  get the permit.
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 ---
 ## How to Apply
 
-Contact your town's `Local Enforcing Agency (LEA)|lea` to see if you need a permit or to get more information. The LEA can be the local fire department or the state Division of Fire Safety.
+Contact your town's `Local Enforcing Agency (LEA)|lea` to see if you need a permit or get more information. Your LEA can be the local fire department or the state Division of Fire Safety.
 
-If you need a permit, you must apply for the permit and pass the required inspection before you do the activity.
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
+
+You may need to get other types of fire permits depending on your business activity. Make sure to check with your LEA to see what fire permits you need.
+
+:::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A fire permit.
+A fire permit for your temporary retail space.
+
+:::
