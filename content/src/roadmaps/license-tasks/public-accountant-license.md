@@ -4,7 +4,7 @@ id: public-accountant-license
 filename: public-accountant-license
 displayname: public-accountant-license
 urlSlug: public-accountant-license
-name: Apply for a Certified Public Accountant License
+name: Apply for Your Certified Public Accountant License
 webflowName: "Accountant: Certified Public Accountant License"
 summaryDescriptionMd: >
   You need a Certified Public Accountant (CPA) license if you want to represent
