@@ -3,7 +3,7 @@ id: alarm-locksmith-license
 filename: alarm-locksmith-license
 displayname: alarm-locksmith-license
 urlSlug: alarm-locksmith-license
-name: Apply for a Fire Alarm License, Burglar Alarm or Locksmith License
+name: Apply for Your  Fire Alarm License, Burglar Alarm or Locksmith License
 webflowName: fire-burglar-locksmith-alarm-systems-if-over-10-volts
 summaryDescriptionMd: You must have a license to work as a locksmith and
   install, service, or maintain burglar alarms, fire alarms, or electronic
