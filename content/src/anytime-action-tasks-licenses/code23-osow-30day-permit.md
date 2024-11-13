@@ -23,7 +23,8 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 * A truck, trailer, and load combination that exceeds 10 feet in width and 70 feet in length
 * Combined vehicle and cargo weight exceeds 80,000 pounds Gross Vehicle Weight (GVW)
 * If a combination vehicle meets the size rules for a Code 23 Overdimensional Trailer Permit, but you do not have the permit
-* If the load exceeds the dimensions of the Code 23 registered trailer, including any overhang
+* If the load is non-divisible and exceeds the size of the Code 23 registered trailer, including any overhang
+
 
 ## Application Requirements
 
