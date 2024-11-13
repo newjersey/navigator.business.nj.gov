@@ -1,19 +1,20 @@
 ---
-id: "telemarketing-license"
-webflowId: "669ac522985e99ee52d4901b"
-urlSlug: "telemarketing-license"
-name: "Apply for a Telemarketing License"
-webflowName: "Telemarketing: Telemarketing License"
-displayname: "telemarketing-license"
-filename: "telemarketing-license"
-callToActionLink: "https://rgbportal.dca.njoag.gov/"
-callToActionText: "Apply for My Telemarketing License"
-agencyId: "nj-consumer-affairs"
-divisionPhone: "(973) 504-6370"
-industryId: "telemarketing"
-licenseCertificationClassification: "undefined"
 licenseName: ""
-summaryDescriptionMd: "If you or your company makes telemarketing sales calls to customers in New Jersey, you need a telemarketing license."
+id: telemarketing-license
+filename: telemarketing-license
+displayname: telemarketing-license
+urlSlug: telemarketing-license
+name: Apply for Your Telemarketing License
+webflowName: "Telemarketing: Telemarketing License"
+summaryDescriptionMd: If you or your company makes telemarketing sales calls to
+  customers in New Jersey, you need a telemarketing license.
+industryId: telemarketing
+callToActionText: Apply for My Telemarketing License
+callToActionLink: https://rgbportal.dca.njoag.gov/
+licenseCertificationClassification: undefined
+agencyId: nj-consumer-affairs
+divisionPhone: (973) 504-6370
+webflowId: 669ac522985e99ee52d4901b
 ---
 
 ---
