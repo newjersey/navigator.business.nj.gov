@@ -13,7 +13,7 @@ industryIds:
 sectorIds:
   - real-estate
 icon: file-purple.svg
-urlSlug: hot-work-fire-permit
+urlSlug: vacant-building-fire-permit
 summaryDescriptionMd: >-
   You need a fire permit to own a property in New Jersey if it:
 
@@ -44,4 +44,3 @@ You may need to get other types of fire permits depending on your business activ
 A fire permit to own a vacant or unoccupied property.
 
 :::
-
