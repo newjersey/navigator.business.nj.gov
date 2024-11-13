@@ -1,18 +1,20 @@
 ---
 id: alarm-locksmith-license
-webflowId: 6721493dfeaa4e04016c605b
-urlSlug: alarm-locksmith-license
-name: Apply for a Fire Alarm License, Burglar Alarm or Locksmith License
-displayname: alarm-locksmith-license
-webflowName: fire-burglar-locksmith-alarm-systems-if-over-10-volts
 filename: alarm-locksmith-license
-callToActionLink: https://www.njconsumeraffairs.gov/fbl/Pages/applications.aspx
+displayname: alarm-locksmith-license
+urlSlug: alarm-locksmith-license
+name: Apply for Your Fire Alarm License, Burglar Alarm or Locksmith License
+webflowName: fire-burglar-locksmith-alarm-systems-if-over-10-volts
+summaryDescriptionMd: You must have a license to work as a locksmith and
+  install, service, or maintain burglar alarms, fire alarms, or electronic
+  security systems in New Jersey.
+industryId: electrical-contractor
 callToActionText: Apply for My License
+callToActionLink: https://www.njconsumeraffairs.gov/fbl/Pages/applications.aspx
+licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs
 divisionPhone: (973) 504-6245
-industryId: electrical-contractor
-licenseCertificationClassification: undefined
-summaryDescriptionMd: "You must have a license to work as a locksmith and install, service, or maintain burglar alarms, fire alarms, or electronic security systems in New Jersey."
+webflowId: 6721493dfeaa4e04016c605b
 ---
 
 ## Eligibility Criteria
@@ -27,7 +29,7 @@ summaryDescriptionMd: "You must have a license to work as a locksmith and instal
 ## Application Requirements
 
 - Applicant's name, date of birth, home address, and principal business address
-- Social Security Number
+- Social Security number
 - Citizenship/immigration status
 - Child support information, if applicable
 - History of drug use, if applicable
