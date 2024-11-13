@@ -1,3 +1,19 @@
+# [2024.34.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.33.0...v2024.34.0) (2024-11-12)
+
+
+### Bug Fixes
+
+* [[#188414550](https://github.com/newjersey/navigator.business.nj.gov/issues/188414550)] license data for correct business is updated when multiple businesses exist ([f95452c](https://github.com/newjersey/navigator.business.nj.gov/commit/f95452c9a2e917012aae53bcbdebb027181b987c))
+
+
+### Features
+
+* [[#186324885](https://github.com/newjersey/navigator.business.nj.gov/issues/186324885)] agent information checkbox missing proper notification ([278b75a](https://github.com/newjersey/navigator.business.nj.gov/commit/278b75ae6f79c9c9d7173979a73a01f19c5829ff))
+* [[#188414550](https://github.com/newjersey/navigator.business.nj.gov/issues/188414550)] update useUserData hook to account for license data discrepancies ([31da67a](https://github.com/newjersey/navigator.business.nj.gov/commit/31da67a84235acf68e7a50a344935eda31bee985))
+* [[#188503417](https://github.com/newjersey/navigator.business.nj.gov/issues/188503417)] update pbs url ([7437d68](https://github.com/newjersey/navigator.business.nj.gov/commit/7437d68566ef6a2458cea7b925a4176b88b3dff4))
+* [[#188507991](https://github.com/newjersey/navigator.business.nj.gov/issues/188507991)] License Task CTA Button Updates ([c2b0359](https://github.com/newjersey/navigator.business.nj.gov/commit/c2b035913b25570592ba29bac72cb7c9347d2908))
+* [[#188520392](https://github.com/newjersey/navigator.business.nj.gov/issues/188520392)] Offer multiple dwelling question to residential landlord industry ([dd4b6dc](https://github.com/newjersey/navigator.business.nj.gov/commit/dd4b6dc7445c94941c3ec6a094d7fe412480d2da))
+
 # [2024.33.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.32.0...v2024.33.0) (2024-10-29)
 
 

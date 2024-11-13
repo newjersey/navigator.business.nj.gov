@@ -125,7 +125,9 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
       <p className="margin-bottom-4 margin-top-3">{Config.licenseSearchTask.checkStatusText}</p>
       <form onSubmit={onSubmit}>
         <div className="margin-bottom-2">
-          <label htmlFor="business-name">{Config.licenseSearchTask.businessNameLabel}</label>
+          <label className="text-bold" htmlFor="business-name">
+            {Config.licenseSearchTask.businessNameLabel}
+          </label>
           <TextField
             value={formValues.name}
             onChange={handleChangeForKey("name")}
@@ -137,7 +139,9 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
           />
         </div>
         <div className="margin-bottom-2">
-          <label htmlFor="address-1">{Config.licenseSearchTask.address1Label}</label>
+          <label className="text-bold" htmlFor="address-1">
+            {Config.licenseSearchTask.address1Label}
+          </label>
           <TextField
             value={formValues.addressLine1}
             onChange={handleChangeForKey("addressLine1")}
@@ -149,7 +153,9 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
           />
         </div>
         <div className="margin-bottom-2">
-          <label htmlFor="address-2">{Config.licenseSearchTask.address2Label}</label>
+          <label className="text-bold" htmlFor="address-2">
+            {Config.licenseSearchTask.address2Label}
+          </label>
           <TextField
             value={formValues.addressLine2}
             onChange={handleChangeForKey("addressLine2")}
@@ -162,7 +168,9 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
         </div>
         <div className="fdr flex-half">
           <div className="flex-half padding-right-1">
-            <label htmlFor="city">{Config.licenseSearchTask.zipCodeLabel}</label>
+            <label className="text-bold" htmlFor="city">
+              {Config.licenseSearchTask.zipCodeLabel}
+            </label>
             <TextField
               value={formValues.zipCode}
               onChange={handleChangeForKey("zipCode")}
@@ -176,7 +184,9 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
             />
           </div>
           <div className="flex-half padding-left-1">
-            <label htmlFor="state">{Config.licenseSearchTask.stateLabel}</label>
+            <label className="text-bold" htmlFor="state">
+              {Config.licenseSearchTask.stateLabel}
+            </label>
             <TextField
               value={"New Jersey"}
               onChange={(): void => {}}
