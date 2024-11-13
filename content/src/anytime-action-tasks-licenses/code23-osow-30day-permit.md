@@ -27,10 +27,8 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 
 ## Application Requirements
 
-* Name, address, and telephone number of the permit applicant
-
 ### Driver and Trip Information
-
+* Name, address, and telephone number of the permit applicant
 * Travel start date (will last 30 days, accounting for travel on weekends or holidays)
 * Vehicle type (examples: Power Unit w/ 1 Trailer)
 * Truck plate/license number and state
@@ -39,12 +37,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 * General origin and destination (cities or state borders)
 * Specific origins and destination (detailed route)
 
-
-
-
 :::callout{ showHeader="false" headerText="" showIcon="false" calloutType="note" }
-
-
 
 If you do not know the actual trailer or truck plate number when applying, please enter the most likely one. Note that the generic plate “SWT,” accepted in the past, is no longer valid. 
 
