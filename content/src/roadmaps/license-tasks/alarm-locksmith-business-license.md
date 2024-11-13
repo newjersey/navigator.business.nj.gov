@@ -1,20 +1,21 @@
 ---
 licenseName: ""
 id: alarm-locksmith-business-license
-webflowId: 6721493ccddf06cbf7fe46b4
-urlSlug: alarm-locksmith-business-license
-name: Apply for a Fire Alarm, Burglar Alarm and Locksmith Business License
-displayname: alarm-locksmith-business-license
-webflowName:
 filename: alarm-locksmith-business-license
-callToActionLink: https://www.njconsumeraffairs.gov/fbl/Applications/Application-for-a-Business-License.pdf
+displayname: alarm-locksmith-business-license
+urlSlug: alarm-locksmith-business-license
+name: Apply for Your Fire Alarm, Burglar Alarm and Locksmith Business License
+webflowName: "  "
+summaryDescriptionMd: You need a business license if your company provides
+  burglar alarm, fire alarm, and locksmith services.
+industryId: electrical-contractor
 callToActionText: Apply for My Business License
+callToActionLink: https://www.njconsumeraffairs.gov/fbl/Applications/Application-for-a-Business-License.pdf
 webflowIndustry: ""
+licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs
 divisionPhone: (973) 504-6245
-industryId: electrical-contractor
-licenseCertificationClassification: undefined
-summaryDescriptionMd: "You need a business license if your company provides burglar alarm, fire alarm, and locksmith services."
+webflowId: 6721493ccddf06cbf7fe46b4
 ---
 
 ## Application Requirements
