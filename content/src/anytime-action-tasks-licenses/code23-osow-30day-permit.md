@@ -31,7 +31,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 ### Driver and Trip Information
 * Name, address, and telephone number of the permit applicant
 * Travel start date (will last 30 days, accounting for travel on weekends or holidays)
-* Vehicle type (examples: Power Unit w/ 1 Trailer)
+* Vehicle type (Power Unit w/ 1 Trailer)
 * Truck plate/license number and state
 * Trailer plate/license number and state
 * Code 23 trailer license (plate) number and state: The system will check the NJ  - - Motor Vehicle Commission records to verify if the Code 23 trailer plate is registered
