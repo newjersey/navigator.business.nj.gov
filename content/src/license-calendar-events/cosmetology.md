@@ -1,5 +1,4 @@
 ---
-previewType: renewal
 licenseName: Cosmetology and Hairstyling-Shop
 urlSlug: cosmetology
 expirationEventDisplayName: Cosmetology Shop License Expiration
@@ -14,6 +13,7 @@ issuingAgency: Division of Consumer Affairs
 callToActionLink: https://www.njconsumeraffairs.gov/renewals/Pages/default.aspx
 callToActionText: Renew My Cosmetology Shop License
 ---
+
 ## Application Requirements
 
 - Business name

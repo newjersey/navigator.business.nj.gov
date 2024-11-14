@@ -1,5 +1,4 @@
 ---
-previewType: renewal
 licenseName: ""
 urlSlug: electrologist-office
 expirationEventDisplayName: Electrologist Office Premises License Expiration
@@ -19,7 +18,7 @@ callToActionText: Renew My Electrologist Office Premises License
 - License number
 - Current mailing address
 - Current business address
-- Renewal questions answered by the office manager of the electrologist's office 
+- Renewal questions answered by the office manager of the electrologist's office
 - Applicable fees paid
   :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
   An updated copy of the renewed electrologist office premises license, valid for 2 years.

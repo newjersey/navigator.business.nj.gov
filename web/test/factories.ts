@@ -383,7 +383,6 @@ export const generateLicenseEvent = (overrides: Partial<LicenseEventType>): Lice
     disclaimerText: `some-disclaimer-text-${randomInt()}`,
     renewalEventDisplayName: `some-renewal-event-${id}`,
     expirationEventDisplayName: `some-expiration-event-${id}`,
-    previewType: id % 2 ? "renewal" : "expiration",
     summaryDescriptionMd: `some-summary-${id}`,
     filename: `some-filename-${id}`,
     urlSlug: `some-url-slug-${id}`,

@@ -1,5 +1,4 @@
 ---
-previewType: renewal
 licenseName: ""
 urlSlug: temporary-help-service-firm-reg
 expirationEventDisplayName: Temporary Help Service Firm Registration Expiration
