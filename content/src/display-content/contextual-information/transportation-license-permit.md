@@ -4,7 +4,7 @@ notesMd: >-
   ](https://docs.google.com/document/d/1Hjs4qlCIRfOZV7svNMtloAstqp2a2UGJBt5XNnbbfao/edit?usp=sharing)
 
 
-  Needs content and SME approval
+  11/14/24: SME approved, but need to update limited transportation permit description. needs content review. 
 header: Transportation License or Permit
 slug: transportation-license-permit
 displayname: transportation-license-permit
