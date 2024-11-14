@@ -1,5 +1,4 @@
 ---
-previewType: expiration
 licenseName: Massage and Bodywork Therapy-Massage and Bodywork Employer
 urlSlug: massage-therapy
 expirationEventDisplayName: Massage Therapy Business License Expiration
@@ -13,6 +12,7 @@ issuingAgency: Division of Consumer Affairs
 callToActionLink: https://newjersey.mylicense.com/eGov/PersonSearchResults.aspx
 callToActionText: Renew My Massage Therapy License
 ---
+
 :::infoAlert
 
 You will only see the option to renew online 60 days prior to your expiration date.

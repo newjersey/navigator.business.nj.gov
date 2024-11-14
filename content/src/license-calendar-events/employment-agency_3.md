@@ -1,9 +1,8 @@
 ---
-previewType: renewal
 licenseName: ""
 urlSlug: consulting-firm-headhunter-reg
-expirationEventDisplayName: " Consulting Firm (Headhunter) Registration Expiration"
-renewalEventDisplayName: " Consulting Firm (Headhunter) Registration  Renewal Deadline"
+expirationEventDisplayName: "Consulting Firm (Headhunter) Registration Expiration"
+renewalEventDisplayName: "Consulting Firm (Headhunter) Registration  Renewal Deadline"
 disclaimerText: You can renew your license 60 days before it expires and up to
   30 days after expiration. If you fail to renew your license at this point,
   your license will be suspended and you won't be able to provide your licensed

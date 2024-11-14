@@ -3216,22 +3216,28 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - {
-          label: "Preview Type (CMS Only)",
-          name: "previewType",
-          widget: "select",
-          default: "expiration",
-          options: ["expiration", "renewal"],
-        }
       - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
-      - { label: "URL Slug", name: "urlSlug", widget: "no-space", required: true }
+      - {
+          label: "URL Slug",
+          name: "urlSlug",
+          widget: "no-space",
+          required: true,
+          hint: "The suffix '-renewal' and '-expiration' are automatically appended to the url slug.",
+        }
       - {
           label: "Expiration Event Label",
           name: "expirationEventDisplayName",
           widget: "string",
           required: true,
+          hint: "This field updates the label on the calendar in the dashboard and header text on the expiration details page",
         }
-      - { label: "Renewal Event Label", name: "renewalEventDisplayName", widget: "string", required: true }
+      - {
+          label: "Renewal Event Label",
+          name: "renewalEventDisplayName",
+          widget: "string",
+          required: true,
+          hint: "This field updates the label on the calendar in the dashboard and header text on the renewal details page",
+        }
       - {
           label: "Disclaimer Text",
           name: "disclaimerText",

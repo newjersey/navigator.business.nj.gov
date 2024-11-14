@@ -13,7 +13,6 @@ import {
   FormationMember,
   FormationSigner,
   IndustrySpecificData,
-  LicenseEventSubtype,
   LicenseName,
   LicenseTaskId,
   Preferences,
@@ -443,7 +442,6 @@ export interface LicenseEventType {
   callToActionLink?: string;
   callToActionText?: string;
   contentMd: string;
-  previewType?: LicenseEventSubtype;
   summaryDescriptionMd?: string;
   licenseName: LicenseName;
 }

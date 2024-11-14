@@ -2,7 +2,6 @@
 notesMd: "Draft:
   https://docs.google.com/document/d/1iYheqxgwQKOocjMybAszFBFF2py2HgnRktPGa1Zpl\
   yY/edit"
-previewType: renewal
 licenseName: ""
 urlSlug: architecture
 expirationEventDisplayName: Architect License Expiration
