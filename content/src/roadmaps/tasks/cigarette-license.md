@@ -13,7 +13,7 @@ summaryDescriptionMd: >-
   * have a vending machine with tobacco products
 
 
-  If you sell container e-liquid and plan to have more than 50 percent of your retail sales derived from electronic smoking devices, related accessories, and/or liquid nicotine, you must [apply for a Vapor Business License with the NJ Division of Taxation](https://www.nj.gov/treasury/taxation/pdf/other_forms/tobacco/vb-r.pdf).
+  If you sell container e-liquid and plan to have more than 50% of your retail sales come from electronic smoking devices, related accessories, and/or liquid nicotine, you must [apply for a Vapor Business License with the NJ Division of Taxation](https://www.nj.gov/treasury/taxation/pdf/other_forms/tobacco/vb-r.pdf).
 urlSlug: cigarette-license
 filename: cigarette-license
 displayname: cigarette-license
@@ -57,9 +57,9 @@ Learn about the new age of sale (21) and the proper way to check an I.D. by visi
 
 ## Cigarette Tax in New Jersey
 
-If you sell cigarettes, you must pay a cigarette tax, and a stamp on each pack of cigarettes will indicate that you have paid this tax.
+If you sell cigarettes, you must pay a cigarette tax. A stamp on each pack of cigarettes will show that you paid this tax.
 
-If you are a cigarette manufacturer, you may purchase stamps to be able to sell to cigarette retailers.
+If you are a cigarette manufacturer, you may buy stamps to be able to sell to cigarette retailers.
 
 Visit the [NJ Division of Taxation website for more information on the New Jersey cigarette tax](https://www.nj.gov/treasury/taxation/cigarette.shtml).
 
@@ -69,7 +69,7 @@ If you sell or manufacture tobacco and nicotine products other than cigarettes, 
 
 Visit the [NJ Division of Taxation website for more information on the New Jersey tobacco and vapor products tax](https://www.nj.gov/treasury/taxation/tobacco.shtml).
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
 
 You may not sell, manufacture, or have a vending machine with tobacco products and may be subject to significant fines and legal penalties, including imprisonment.
 
