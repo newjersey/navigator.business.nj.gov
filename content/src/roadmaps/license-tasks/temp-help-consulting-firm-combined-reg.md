@@ -6,7 +6,7 @@ notesMd: This is essentially the combination of the Register Your Consulting
 id: temp-help-consulting-firm-combined-reg
 filename: temp-help-consulting-firm-combined-reg
 displayname: temp-help-consulting-firm-combined-reg
-urlSlug: temp-help-consulting-firm-combined-registration
+urlSlug: temp-help-consulting-firm-combined-reg
 name: Register Your Temporary Help Service and Consulting Firm (Headhunter)
 webflowName: "Employment and Personnel Service: Temporary Help Service Firm and
   Consulting Firm (Headhunter)"
@@ -20,7 +20,7 @@ callToActionText: Register My Firm
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
 webflowId: 65bd67f3b2eede76015e40e3
 licenseCertificationClassification: undefined
-licenseName: ""
+licenseName: Consulting Firms/Temporary Help Services-Consulting Firm/Temporary Help Service
 ---
 
 ---

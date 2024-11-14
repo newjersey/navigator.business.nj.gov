@@ -1,5 +1,5 @@
 ---
-licenseName: ""
+licenseName: Employment & Personnel Service-Employment Agency
 urlSlug: employment-agency-license
 expirationEventDisplayName: "Employment Agency License Expiration"
 renewalEventDisplayName: Employment Agency License Renewal Deadline
