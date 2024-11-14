@@ -19,9 +19,9 @@ summaryDescriptionMd: >-
   Control (ABC) if your business:
 
 
-  * Picks up or delivers alcoholic beverages into, out of, or within New Jersey 
+  * picks up or delivers alcoholic beverages into, out of, or within New Jersey 
 
-  * Does not have an annual `transportation license or permit|transportation-license-permit`
+  * does not have an annual `transportation license or permit|transportation-license-permit`
 issuingAgency: Division of Alcoholic Beverage Control (ABC)
 callToActionText: Apply for My Emergency Trip Permit
 callToActionLink: https://www.njportal.com/abc/eps
