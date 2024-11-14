@@ -1,5 +1,5 @@
 ---
-licenseName: ""
+licenseName: Consulting Firms/Temporary Help Services-Temporary Help Service
 urlSlug: temporary-help-service-firm-reg
 expirationEventDisplayName: Temporary Help Service Firm Registration Expiration
 renewalEventDisplayName: Temporary Help Service Firm Registration Renewal Deadline

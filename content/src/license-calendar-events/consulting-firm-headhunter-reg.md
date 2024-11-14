@@ -1,5 +1,5 @@
 ---
-licenseName: ""
+licenseName: Consulting Firms/Temporary Help Services-Consulting Firm
 urlSlug: consulting-firm-headhunter-reg
 expirationEventDisplayName: "Consulting Firm (Headhunter) Registration Expiration"
 renewalEventDisplayName: "Consulting Firm (Headhunter) Registration  Renewal Deadline"

@@ -12,7 +12,7 @@ summaryDescriptionMd: You must register as a consulting firm to match job
 industryId: employment-agency
 callToActionText: Register My Consulting Firm
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
-licenseName: ""
+licenseName: Consulting Firms/Temporary Help Services-Consulting Firm
 webflowId: 65bd67f3f9dc39f100108f8b
 licenseCertificationClassification: undefined
 ---

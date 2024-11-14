@@ -221,6 +221,7 @@ describe("task page", () => {
       "authorization-architect-firm",
       "authorization-landscape-architect-firm",
       "cemetery-certificate",
+      "consulting-firm-headhunter-reg",
       "entertainment-agency-reg",
       "health-club-registration",
       "home-health-aide-license",
@@ -228,8 +229,11 @@ describe("task page", () => {
       "pharmacy-license",
       "register-accounting-firm",
       "register-home-contractor",
+      "search-licenses-employment-agency",
       "telemarketing-license",
       "ticket-broker-reseller-registration",
+      "temp-help-consulting-firm-combined-reg",
+      "temporary-help-service-firm-reg",
     ];
 
     it("mockTaskIdsWithLicenseSearch matches taskIdsWithLicenseSearchEnabled", () => {
