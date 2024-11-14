@@ -75,7 +75,7 @@ You may not sell, manufacture, or have a vending machine with tobacco products. 
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
 A printed license, sent to the address on your application.
 
