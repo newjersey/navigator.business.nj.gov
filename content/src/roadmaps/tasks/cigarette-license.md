@@ -71,7 +71,7 @@ Visit the [NJ Division of Taxation website for more information on the New Jerse
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
 
-You may not sell, manufacture, or have a vending machine with tobacco products and may be subject to significant fines and legal penalties, including imprisonment.
+You may not sell, manufacture, or have a vending machine with tobacco products. You may also be subject to significant fines and legal penalties, including imprisonment.
 
 :::
 
