@@ -72,6 +72,9 @@ export type LicenseDetails = {
 };
 
 export const enabledLicensesSources = {
+  "Consulting Firms/Temporary Help Services-Consulting Firm": "RGB",
+  "Consulting Firms/Temporary Help Services-Consulting Firm/Temporary Help Service": "RGB",
+  "Consulting Firms/Temporary Help Services-Temporary Help Service": "RGB",
   "Employment & Personnel Service-Career Counseling Service": "RGB",
   "Employment & Personnel Service-Employment Agency": "RGB",
   "Employment & Personnel Service-Entertainment/Booking Agency": "RGB",
@@ -100,6 +103,11 @@ export const taskIdLicenseNameMapping = {
   "telemarketing-license": "Telemarketers",
   "entertainment-agency-reg": "Employment & Personnel Service-Entertainment/Booking Agency",
   "cemetery-certificate": "Cemetery-Cemetery",
+  "consulting-firm-headhunter-reg": "Consulting Firms/Temporary Help Services-Consulting Firm",
+  "temp-help-consulting-firm-combined-reg":
+    "Consulting Firms/Temporary Help Services-Consulting Firm/Temporary Help Service",
+  "temporary-help-service-firm-reg": "Consulting Firms/Temporary Help Services-Temporary Help Service",
+  "search-licenses-employment-agency": "Employment & Personnel Service-Employment Agency",
 } as const;
 
 export const LicenseNameTaskIdMapping = Object.fromEntries(
