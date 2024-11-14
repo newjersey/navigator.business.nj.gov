@@ -1,5 +1,4 @@
 ---
-previewType: renewal
 licenseName: Landscape Architecture-Certificate of Authorization
 urlSlug: landscape-architecture
 expirationEventDisplayName: Certificate of Authorization Expiration
@@ -14,11 +13,12 @@ issuingAgency: Division of Consumer Affairs
 callToActionLink: https://www.njconsumeraffairs.gov/land/Pages/default.aspx
 callToActionText: Renew My Certificate of Authorization
 ---
+
 ### Application Requirements
 
-* Current license number
-* Current mailing address
-* Applicable fees paid
+- Current license number
+- Current mailing address
+- Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 

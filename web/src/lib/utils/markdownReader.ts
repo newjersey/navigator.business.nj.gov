@@ -23,7 +23,7 @@ import {
   TaxFilingMethod,
   WebflowLicense,
 } from "@/lib/types/types";
-import { LicenseEventSubtype, LicenseName } from "@businessnjgovnavigator/shared/";
+import { LicenseName } from "@businessnjgovnavigator/shared/";
 import matter from "gray-matter";
 
 export const convertContextualInfoMd = (contentMdContents: string): ContextualInfo => {
@@ -195,7 +195,6 @@ type LicenseGrayMatter = {
   urlSlug: string;
   callToActionLink?: string;
   callToActionText?: string;
-  previewType?: LicenseEventSubtype;
   summaryDescriptionMd: string;
   notesMd?: string;
   licenseName: string;

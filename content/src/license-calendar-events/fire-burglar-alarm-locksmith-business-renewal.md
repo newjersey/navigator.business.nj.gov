@@ -1,5 +1,4 @@
 ---
-previewType: renewal
 licenseName: ""
 urlSlug: fire-burglar-alarm-locksmith-business-renewal
 expirationEventDisplayName: Fire Alarm, Burglar Alarm and Locksmith Business License Expiration
@@ -14,7 +13,9 @@ issuingAgency: Division of Consumer Affairs
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 callToActionText: Renew My Business License
 ---
+
 ## Application Requirements
+
 - License number
 - Current mailing address
 - Current business address

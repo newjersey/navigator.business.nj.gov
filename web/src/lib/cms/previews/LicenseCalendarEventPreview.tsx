@@ -55,17 +55,18 @@ const LicenseCalendarEventPreview = (props: PreviewProps): ReactElement => {
     <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
       <div>This file is mapped to the following license (not enabled if blank):</div>
       <div className="margin-bottom-5 text-bold">{license.licenseName}</div>
-      Preview of expiration calendar event and event header
+      Expiration event
       <LicenseEvent LicenseCalendarEvent={expirationLicenseCalendarEvent} licenseEvents={[license]} />
-      Preview of renewal calendar event and event header
+      Renewal event
       <LicenseEvent LicenseCalendarEvent={renewalLicenseCalendarEvent} licenseEvents={[license]} />
       <div className="margin-top-8" />
-      The Preview Type (CMS Only) dropdown toggles between the expiration and renewal
+      The expiration event will be shown in this preview, all the content underneath the header is shared
+      between both renewal and expiration events.
       <div className="margin-top-4" />
       <LicenseElement
         licenseName="IndustryName"
         license={license}
-        licenseEventType={license.previewType ?? "expiration"}
+        licenseEventType="expiration"
         CMS_ONLY_fakeBusiness={business}
         CMS_ONLY_fakeLicenseName={licenseName}
       />

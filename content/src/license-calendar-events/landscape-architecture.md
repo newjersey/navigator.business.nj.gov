@@ -1,5 +1,4 @@
 ---
-previewType: renewal
 licenseName: ""
 urlSlug: landscape-architecture
 expirationEventDisplayName: Landscape Architecture License Expiration
@@ -13,12 +12,13 @@ issuingAgency: Division of Consumer Affairs
 callToActionLink: https://www.njconsumeraffairs.gov/land/Pages/default.aspx
 callToActionText: Renew My Landscape Architecture License
 ---
+
 ### Application Requirements
 
-* Satisfactory proof of 24 credits of Continuing Professional Education (CPE) during each two-year period (not necessary for the first renewal)
-* Current license number
-* Current mailing address
-* Applicable fees paid
+- Satisfactory proof of 24 credits of Continuing Professional Education (CPE) during each two-year period (not necessary for the first renewal)
+- Current license number
+- Current mailing address
+- Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
