@@ -6,7 +6,8 @@ notesMd: >-
 
   Note: SME review complete. needs content review.
 filename: emergency-trip-permit
-name: Get an Emergency Trip Permit for Last-Minute Alcohol Pickups or Deliveries
+name: Apply for an Emergency Trip Permit for Last-Minute Alcohol Pickups or
+  Deliveries
 applyToAllUsers: false
 industryIds:
   - trucking
@@ -15,14 +16,14 @@ sectorIds:
 icon: file-purple.svg
 urlSlug: emergency-trip-permit
 summaryDescriptionMd: >-
-  You need an emergency trip permit from the Division of Alcoholic Beverage
-  Control (ABC) if your business:
+  You need an emergency trip permit from the New Jersey Division of Alcoholic
+  Beverage Control (ABC) if your business:
 
 
   * picks up or delivers alcoholic beverages into, out of, or within New Jersey 
 
   * does not have an annual `transportation license or permit|transportation-license-permit`
-issuingAgency: Division of Alcoholic Beverage Control (ABC)
+issuingAgency: NJ Division of Alcoholic Beverage Control (ABC)
 callToActionText: Apply for My Emergency Trip Permit
 callToActionLink: https://www.njportal.com/abc/eps
 ---
