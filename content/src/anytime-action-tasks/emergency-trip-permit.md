@@ -42,7 +42,7 @@ callToActionLink: https://www.njportal.com/abc/eps
 * Name of delivery site and address
 * Applicable fees paid
 
-The permit is valid for 24 hours starting from your pick up or delivery date. You can apply for the permit up to 3 days in advance of that date.
+The permit is valid for 24 hours from your pickup or delivery date. You can apply for the permit up to 3 days before that date.
 
 If you have questions about the permit, contact ABC at (609) 984-2830.
 
