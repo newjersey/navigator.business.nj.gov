@@ -40,16 +40,6 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 * General origin and destination (cities or state borders)
 * Specific origins and destination (detailed route)
 
-:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="note" }
-
-If you do not know the actual trailer or truck plate number when applying, please enter the most likely one. Note that the generic plate “SWT,” accepted in the past, is no longer valid. 
-
-If your truck or trailer changes at the last minute, you can change the plate numbers on your permit one time before the permit expires. You can only change the plate numbers for a truck or trailer with the same weight, number of axles, and axle spacings as the original permit. 
-
-* Load descriptions: if your load is not listed, select “Other.” The state permit office will review your application. If you are moving more than one type of construction equipment with the same axle weights and size, select “CONSTRUCTION EQUIPMENT.”
-
-:::
-
 ### Vehicle Configuration Information
 
 * Overall length, width, and height
