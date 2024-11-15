@@ -292,7 +292,7 @@
   "packageManager": "yarn@3.8.6",
   "resolutions": {
     "trim@0.0.1": "1.0.1",
-    "postcss": "8.4.47",
+    "postcss": "8.4.49",
     "glob-parent": "6.0.2",
     "tar": "6.2.1",
     "ansi-regex": "5.0.1",
