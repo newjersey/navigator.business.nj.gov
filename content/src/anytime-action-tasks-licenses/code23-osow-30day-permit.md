@@ -8,13 +8,13 @@ industryIds: []
 sectorIds: []
 icon: govt-purple.svg
 urlSlug: code23-osow-30day-permit
-summaryDescriptionMd: >
+summaryDescriptionMd: >-
   In New Jersey, you need a Code 23 OS/OW (30-day) Permit to transport
   overweight or oversized trailers, very large loads, and heavy machinery on
   public roads.
 
 
-  If the truck, trailer, and non-divisible load combination -including any overhang0- exceeds 10 feet in width or 70 feet in length, or if the combined weight exceeds 80,000 pounds in gross vehicle weight (GVW.)
+  If the truck, trailer, and load, including any overhang, exceed 10 feet in width or 70 feet in length, or if the weight exceeds 80,000 pounds in gross vehicle weight (GVW.)
 issuingAgency: NJ Department of Transportation
 callToActionText: Apply for My Code 23 OS/OW Permit
 callToActionLink: https://nj.gotpermits.com/njpass#!
