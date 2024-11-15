@@ -6,7 +6,7 @@ notesMd: >-
 
   Note: SME review complete. needs content review.
 filename: emergency-trip-permit
-name: Apply for an Emergency Trip Permit for Last-Minute Alcohol Pickups or
+name: Apply for Your Emergency Trip Permit for Last-Minute Alcohol Pickups or
   Deliveries
 applyToAllUsers: false
 industryIds:
@@ -23,7 +23,8 @@ summaryDescriptionMd: >-
   * picks up or delivers alcoholic beverages into, out of, or within New Jersey 
 
   * does not have an annual `transportation license or permit|transportation-license-permit`
-issuingAgency: NJ Division of Alcoholic Beverage Control (ABC)
+issuingAgency: NJ Department of Law & Public Safety, Division of Alcoholic
+  Beverage Control (ABC)
 callToActionText: Apply for My Emergency Trip Permit
 callToActionLink: https://www.njportal.com/abc/eps
 ---
@@ -43,6 +44,8 @@ callToActionLink: https://www.njportal.com/abc/eps
 
 The permit is valid for 24 hours starting from your pick up or delivery date. You can apply for the permit up to 3 days in advance of that date.
 
+If you have questions about the permit, contact ABC at (609) 984-2830.
+
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
 A downloadable PDF copy of the emergency trip permit, which you can print out or show on your phone.
@@ -51,6 +54,6 @@ A downloadable PDF copy of the emergency trip permit, which you can print out or
 
 :::callout{ showHeader="true" headerText="What happens if I don't get an emergency trip permit?" showIcon="false" calloutType="warning" }
 
-You will not be able to pick up or deliver alcoholic beverages in New Jersey. If you have questions about the permit, contact ABC at (609) 984-2830.
+You will not be able to pick up or deliver alcoholic beverages in New Jersey. 
 
 :::
