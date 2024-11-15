@@ -1385,6 +1385,7 @@ collections:
             "technical assistance",
             "hiring and employee training support",
             "tax exemption",
+            "investment",
           ]
         hint: "Incentive Type"
       - label: "Program Frequency"
