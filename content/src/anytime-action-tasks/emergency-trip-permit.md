@@ -29,7 +29,7 @@ callToActionText: Apply for My Emergency Trip Permit
 callToActionLink: https://www.njportal.com/abc/eps
 ---
 :::infoAlert 
- You need an emergency trip permit for each pick up or delivery you make in New Jersey. You do not need a permit if you are not stopping in New Jersey.
+ You need an emergency trip permit for each pickup or delivery in New Jersey. You do not need a permit if you are not stopping in New Jersey.
 :::
 
 ## Application Requirements
@@ -37,8 +37,8 @@ callToActionLink: https://www.njportal.com/abc/eps
 * Business address
 * Driver name
 * Vehicle information (year, make, model, VIN or serial number, and license plate number)
-* Date and time of pick up or delivery
-* Name of pick-up site and address
+* Date and time of pickup or delivery
+* Name of pickup site and address
 * Name of delivery site and address
 * Applicable fees paid
 
