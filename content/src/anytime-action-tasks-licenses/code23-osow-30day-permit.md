@@ -23,12 +23,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 * Have an active overweight/overdimensional (Code 23) trailer registration. You can get it at a  [NJ Motor Vehicle Commission (MVC) licensing center](https://www.nj.gov/mvc/locations/facilitylocations.htm)
 * Commercial Driver License (CDL)
 * Trailers hauling heavy equipment/machinery as specified by state regulations
-* A truck, trailer, and load combination that exceeds 10 feet in width and 70 feet in length
-* Combined vehicle and cargo weight exceeds 80,000 pounds gross vehicle weight (GVW)
 * If a combination vehicle meets the size rules for a `Code 23 Overdimensional Trailer Permit|code-23-overdimensional-trailer-permit` , but you do not have the permit
-
-
-* If the load is non-divisible and exceeds the size of the Code 23 registered trailer, including any overhang
 
 ## Application Requirements
 
@@ -39,7 +34,6 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 * Vehicle type (Power Unit w/ 1 Trailer)
 * Truck plate/license number and state
 * Trailer plate/license number and state
-* Code 23 trailer license (plate) number and state: The system will check the NJ  - - Motor Vehicle Commission records to verify if the Code 23 trailer plate is registered
 * General origin and destination (cities or state borders)
 * Specific origins and destination (detailed route)
 
