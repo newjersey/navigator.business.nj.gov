@@ -4920,7 +4920,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.13
     dedent: 1.5.3
-    dependency-cruiser: 16.5.0
+    dependency-cruiser: 16.6.0
     eslint: 8.57.1
     eslint-config-prettier: 9.1.0
     eslint-plugin-jest: 27.9.0
@@ -5083,7 +5083,7 @@ __metadata:
     cypress-wait-until: 3.0.2
     dayjs: 1.11.13
     dedent: 1.5.3
-    dependency-cruiser: 16.5.0
+    dependency-cruiser: 16.6.0
     dotenv: 16.4.5
     dynamodb-admin: ^4.6.1
     eslint: 8.57.1
@@ -5283,7 +5283,7 @@ __metadata:
     cypress-dotenv: 2.0.0
     cypress-wait-until: 3.0.2
     dayjs: 1.11.13
-    dependency-cruiser: 16.5.0
+    dependency-cruiser: 16.6.0
     dotenv: 16.4.5
     eslint: 8.57.1
     eslint-config-next: 14.2.16
@@ -13576,7 +13576,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.0.4, acorn@npm:^8.1.0, acorn@npm:^8.11.0, acorn@npm:^8.11.3, acorn@npm:^8.13.0, acorn@npm:^8.4.1, acorn@npm:^8.7.1, acorn@npm:^8.8.1, acorn@npm:^8.8.2, acorn@npm:^8.9.0":
+"acorn@npm:^8.0.4, acorn@npm:^8.1.0, acorn@npm:^8.11.0, acorn@npm:^8.11.3, acorn@npm:^8.14.0, acorn@npm:^8.4.1, acorn@npm:^8.7.1, acorn@npm:^8.8.1, acorn@npm:^8.8.2, acorn@npm:^8.9.0":
   version: 8.14.0
   resolution: "acorn@npm:8.14.0"
   bin:
@@ -17936,11 +17936,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:16.5.0":
-  version: 16.5.0
-  resolution: "dependency-cruiser@npm:16.5.0"
+"dependency-cruiser@npm:16.6.0":
+  version: 16.6.0
+  resolution: "dependency-cruiser@npm:16.6.0"
   dependencies:
-    acorn: ^8.13.0
+    acorn: ^8.14.0
     acorn-jsx: ^5.3.2
     acorn-jsx-walk: ^2.0.0
     acorn-loose: ^8.4.0
@@ -17969,7 +17969,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: 55d639151db81be477ca3ea54a9e0beffe803dc870cce4fc151cfb20b042e6a8425c55cc0cd5d98aafe46b51aab58dee7379dfab64ad54e0139abf38fe9498c9
+  checksum: 04a27cba76774e6742f6c591507ce9a9cb0ac2f63360d3f91285a84402eb6d3d0c7de3114e52f9f5524e8f6a1d275f2bc092affcf6f2c7d8714d3f8e96493612
   languageName: node
   linkType: hard
 
