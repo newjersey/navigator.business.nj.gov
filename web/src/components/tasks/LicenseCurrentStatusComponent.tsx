@@ -66,13 +66,13 @@ export const LicenseCurrentStatusComponent = (props: Props): ReactElement => {
             aria-controls=""
             expandIcon={<Icon className={"usa-icon--size-3 text-base-light"} iconName="expand_more" />}
           >
-            <Heading level={3} styleVariant={"h4"}>
+            <Heading level={3} styleVariant={"h4"} className="margin-0-override">
               {Config.licenseSearchTask.applicationChecklistItemsText}
             </Heading>
           </AccordionSummary>
           <AccordionDetails>{licenseDetails?.checklistItems.map(receiptItem)}</AccordionDetails>
         </Accordion>
-        <hr className="margin-0-override" />
+        <hr className="margin-2-override" />
         <div className="flex flex-column tablet-flex-row tablet-flex-alignItems-end padding-top-2">
           <div data-testid={`license-name-${licenseDetails?.nameAndAddress.name.toUpperCase()}`}>
             <div className="text-bold">{licenseDetails?.nameAndAddress.name.toUpperCase()}</div>

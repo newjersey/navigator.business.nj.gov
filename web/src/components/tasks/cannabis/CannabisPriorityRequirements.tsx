@@ -125,7 +125,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
 
   return (
     <div className="flex flex-column space-between min-height-29rem">
-      <div className="margin-bottom-3">
+      <div className="margin-bottom-4">
         {!displayNoPriorityType && (
           <>
             <div className="margin-bottom-3">{Config.cannabisPriorityStatus.secondTabDescriptionText}</div>
@@ -140,7 +140,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 expandIcon={expandMoreIcon()}
                 aria-controls={`${Config.cannabisPriorityStatus.minorityOrWomenHeaderText}-content`}
               >
-                <Heading level={3} className="margin-y-3">
+                <Heading level={3} className="margin-y-3-override">
                   {Config.cannabisPriorityStatus.minorityOrWomenHeaderText}
                 </Heading>
               </AccordionSummary>
@@ -158,7 +158,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 expandIcon={expandMoreIcon()}
                 aria-controls={`${Config.cannabisPriorityStatus.veteranHeaderText}-content`}
               >
-                <Heading level={3} className="margin-y-3">
+                <Heading level={3} className="margin-y-3-override">
                   {Config.cannabisPriorityStatus.veteranHeaderText}
                 </Heading>
               </AccordionSummary>
@@ -176,7 +176,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 expandIcon={expandMoreIcon()}
                 aria-controls={`${Config.cannabisPriorityStatus.socialEquityHeaderText}-content`}
               >
-                <Heading level={3} className="margin-y-3">
+                <Heading level={3} className="margin-y-3-override">
                   {Config.cannabisPriorityStatus.socialEquityHeaderText}
                 </Heading>
               </AccordionSummary>
@@ -193,7 +193,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
               <AccordionSummary
                 aria-controls={`${Config.cannabisPriorityStatus.impactZoneHeaderText}-content`}
               >
-                <Heading level={3} className="margin-y-3">
+                <Heading level={3} className="margin-y-3-override">
                   {Config.cannabisPriorityStatus.impactZoneHeaderText}
                 </Heading>
               </AccordionSummary>
@@ -225,7 +225,6 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
           </>
         )}
       </div>
-
       <CtaContainer>
         <ActionBarLayout>
           <div className="margin-top-2 mobile-lg:margin-top-0">
