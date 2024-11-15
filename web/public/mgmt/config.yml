@@ -1427,7 +1427,7 @@ collections:
       - label: "Home Based"
         name: "homeBased"
         widget: "select"
-        options: ["yes", "no", "unknown"]
+        options: ["yes", "no", "unknown", "n/a"]
         default: "unknown"
       - label: "Is nonprofit only"
         name: "isNonprofitOnly"
@@ -1497,13 +1497,26 @@ collections:
         options: ["Do Not Publish"]
         default: ""
         required: false
-
       - label: "Municipality"
         name: "municipality"
         widget: "select"
         multiple: false
         required: false
         options: ["All", "Newark"]
+      - label: "Funding Amount"
+        name: "fundingAmount"
+        widget: "select"
+        required: false
+        multiple: true
+        options: ["Less than $50,000", "$50,000 to $500,000", "More than $500,000"]
+      - label: "Min Employees Required"
+        name: "minEmployeesRequired"
+        required: false
+        widget: number
+      - label: "Max Employees Required"
+        name: "maxEmployeesRequired"
+        required: false
+        widget: number
 
   - name: "archived-funding-opportunities"
     label: "Fund Opps - Archived"
