@@ -36,7 +36,7 @@ issuingAgency: New Jersey Courts and NJ Department of Community Affairs,
 ---
 ## 1. Write a Notice to Quit
 
-Start by writing your tenant a `Notice to Quit|notice-to-quit` . You must give this notice before filing for eviction, unless your tenant hasn’t paid rent and doesn’t live in federally subsidized housing.
+Start by writing your tenant a `Notice to Quit|notice-to-quit`. You must give this notice before filing for eviction, unless your tenant hasn’t paid rent and doesn’t live in federally subsidized housing.
 
 The notice should include:
 
