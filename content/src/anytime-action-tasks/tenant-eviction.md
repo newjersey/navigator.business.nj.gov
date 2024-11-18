@@ -17,7 +17,7 @@ icon: govt-purple.svg
 urlSlug: tenant-eviction
 summaryDescriptionMd: >-
   :::infoAlert 
-   Eviction is a complicated process. The information below is a general description of the process. Consult the [New Jersey Courts Landlord/Tenant website](https://www.njcourts.gov/self-help/landlord-tenant) for more information on how to properly file an eviction in your county.
+   Eviction is a complicated process. The information below is a general description of the process. Visit the [New Jersey Courts Landlord/Tenant website](https://www.njcourts.gov/self-help/landlord-tenant) for more information on how to properly file an eviction in your county.
   :::
 
 
