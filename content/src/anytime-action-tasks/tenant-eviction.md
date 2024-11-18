@@ -1,7 +1,12 @@
 ---
-notesMd: "[Muni
-  draft](https://docs.google.com/document/d/1em8qtCKeLbbtBGLChalhZK0LpQk6w4sS3Y\
-  A2ifoMgok/edit)"
+notesMd: >-
+  [Muni
+  draft](https://docs.google.com/document/d/1em8qtCKeLbbtBGLChalhZK0LpQk6w4sS3YA2ifoMgok/edit)
+
+
+  Regina reviewed: 9/30/24
+
+  SME approved: 11/15/24
 filename: tenant-eviction
 name: Learn About the Tenant Eviction Process
 industryIds:
