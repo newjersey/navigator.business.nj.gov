@@ -3,7 +3,7 @@ notesMd: "[Muni
   draft](https://docs.google.com/document/d/1em8qtCKeLbbtBGLChalhZK0LpQk6w4sS3Y\
   A2ifoMgok/edit)"
 filename: tenant-eviction
-name: Learn How to Evict a Tenant
+name: Learn How to Legally Evict a Tenant
 industryIds:
   - residential-landlord
 sectorIds:
