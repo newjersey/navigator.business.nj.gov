@@ -18,8 +18,6 @@ summaryDescriptionMd: Some towns in New Jersey have rent control laws that limit
 ---
 If you want to increase your tenant’s rent, contact your municipal clerk to see if your town has rent control laws. If so, the laws will explain what process you need to follow to increase rent.
 
-:::
-
 :::callout{ showHeader="true" headerText="Once completed, you will know:" showIcon="false" calloutType="conditional" }
 
 The local rent control laws you need to follow to increase rent, if applicable.
