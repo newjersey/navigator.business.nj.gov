@@ -59,7 +59,7 @@
   "nonEssentialQuestionsIds": [],
   "displayname": "security",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": false,
+    "canBeHomeBased": true,
     "canBeReseller": true,
     "isCannabisLicenseTypeApplicable": false,
     "isCpaRequiredApplicable": false,
