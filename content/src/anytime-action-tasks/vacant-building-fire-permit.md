@@ -35,7 +35,7 @@ Contact your town's `Local Enforcing Agency (LEA)|lea` to apply for the permit. 
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
-You may need to get other types of fire permits depending on your business activity. Check with your LEA to see what fire permits you need.
+You may need to get other fire permits depending on your business activity. Check with your LEA to see what fire permits you need.
 
 :::
 
