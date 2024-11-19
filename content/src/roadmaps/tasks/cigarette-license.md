@@ -55,19 +55,7 @@ Learn about the new age of sale (21) and the proper way to check an I.D. by visi
 
 :::
 
-## Cigarette Tax in New Jersey
 
-If you sell cigarettes, you must pay a cigarette tax. A stamp on each pack of cigarettes will show that you paid this tax.
-
-If you are a cigarette manufacturer, you may buy stamps to be able to sell to cigarette retailers.
-
-Visit the [NJ Division of Taxation website for more information on the New Jersey cigarette tax](https://www.nj.gov/treasury/taxation/cigarette.shtml).
-
-## Tobacco and Vapor Products Tax in New Jersey
-
-If you sell or manufacture tobacco and nicotine products other than cigarettes, you must pay or file a tobacco and vapor products tax. 
-
-Visit the [NJ Division of Taxation website for more information on the New Jersey tobacco and vapor products tax](https://www.nj.gov/treasury/taxation/tobacco.shtml).
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
 
