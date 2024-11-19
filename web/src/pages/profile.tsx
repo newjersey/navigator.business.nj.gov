@@ -41,7 +41,6 @@ import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
-import { ProfileNewJerseyAddress } from "@/components/profile/ProfileNewJerseyAddress";
 import { ProfileNoteDisclaimerForSubmittingData } from "@/components/profile/ProfileNoteForBusinessesFormedOutsideNavigator";
 import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
@@ -75,7 +74,6 @@ import {
   einTaskId,
   emptyAddressData,
   ForeignBusinessType,
-  FormationBusinessLocationType,
   formationTaskId,
   hasCompletedFormation,
   LookupLegalStructureById,
@@ -190,14 +188,13 @@ const ProfilePage = (props: Props): ReactElement => {
       if (!updateQueue || !business) {
         return;
       }
-
-      // console.log("FORM FUNC WRAP", business.formationData.formationFormData.businessLocationType);
-      // console.log("FORM FUNC WRAP businessLocationType", businessLocationType);
       if (businessLocationType) {
-        const validLocation: FormationBusinessLocationType =
-          businessLocationType as FormationBusinessLocationType;
-        updateQueue.queueFormationFormData({ businessLocationType: validLocation });
+        // const validLocation: FormationBusinessLocationType =
+        //   businessLocationType as FormationBusinessLocationType;
+        updateQueue.queueFormationFormData({ businessLocationType: businessLocationType });
       }
+
+      console.log({ businessLocationType });
 
       const dateOfFormationHasBeenDeleted =
         business.profileData.dateOfFormation !== profileData.dateOfFormation &&
@@ -254,6 +251,8 @@ const ProfilePage = (props: Props): ReactElement => {
       !isValid && pageChange && setAlert("ERROR");
     }
   );
+
+  console.log(business?.formationData.formationFormData);
 
   const sendOnSaveAnalytics = (prevProfileData: ProfileData, newProfileData: ProfileData): void => {
     if (prevProfileData.dateOfFormation !== newProfileData.dateOfFormation) {
@@ -378,7 +377,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
 
         <ProfileAddress
-          businessLocationType={businessLocationType || "US"}
+          businessLocationType={businessLocationType}
           setBusinessLocationType={setBusinessLocationType}
         />
 
@@ -565,8 +564,6 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileAddress businessLocationType="NJ" />
 
-        {/* <ProfileNewJerseyAddress /> */}
-
         <ProfileField
           fieldName="responsibleOwnerName"
           isVisible={shouldShowTradeNameElements()}
@@ -728,7 +725,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <BusinessName />
         </ProfileField>
 
-        <ProfileNewJerseyAddress />
+        <ProfileAddress businessLocationType="NJ" />
 
         <ProfileField
           fieldName="responsibleOwnerName"

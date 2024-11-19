@@ -7,11 +7,16 @@ import { BusinessFormationTextBox } from "@/components/tasks/business-formation/
 import { FormationField } from "@/components/tasks/business-formation/FormationField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { Fragment, ReactElement, useContext, useMemo } from "react";
+import { Fragment, ReactElement, useContext, useEffect, useMemo } from "react";
 
 export const BusinessStep = (): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
+
+  useEffect(() => {
+    console.log("BUSINESS STEP");
+    console.log(state.formationFormData);
+  }, [state.formationFormData]);
 
   const isForeign = useMemo(
     () => state.formationFormData.businessLocationType !== "NJ",
@@ -21,7 +26,11 @@ export const BusinessStep = (): ReactElement => {
   const isNonprofit = state.formationFormData.legalType === "nonprofit";
 
   const addressSection = (): ReactElement =>
-    isForeign ? <MainBusinessForeignAddressFlow /> : <MainBusinessAddressNj />;
+    isForeign ? (
+      <MainBusinessForeignAddressFlow businessLocationType={state.formationFormData.businessLocationType} />
+    ) : (
+      <MainBusinessAddressNj />
+    );
 
   const lpSection = (): ReactElement | null => {
     if (state.formationFormData.legalType !== "limited-partnership") return null;
