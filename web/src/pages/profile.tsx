@@ -34,8 +34,8 @@ import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SidebarPageLayout } from "@/components/njwds-layout/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
-import { DakotaProfileBusinessAddress } from "@/components/profile/DakotaProfileBusinessAddress";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
+import { ProfileAddress } from "@/components/profile/ProfileAddress";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
@@ -346,21 +346,6 @@ const ProfilePage = (props: Props): ReactElement => {
     return profileData.legalStructureId === "nonprofit";
   };
 
-  const handleDakotaRadioSelection = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log("ETV", event.target.value);
-    console.log("businessLocationType", businessLocationType);
-
-    setBusinessLocationType(event.target.value);
-
-    console.log("emptyAddressData", emptyAddressData);
-    setAddressData(emptyAddressData);
-    console.log(
-      "businessLocationType handle",
-      business?.formationData.formationFormData.businessLocationType
-    );
-    console.log("formationData handle", business?.formationData.formationFormData);
-  };
-
   const hasSubmittedTaxData =
     business?.taxFilingData.state === "SUCCESS" || business?.taxFilingData.state === "PENDING";
 
@@ -392,9 +377,9 @@ const ProfilePage = (props: Props): ReactElement => {
           <NexusDBANameField />
         </ProfileField>
 
-        <DakotaProfileBusinessAddress
-          handleDakotaRadioSelection={handleDakotaRadioSelection}
-          selectedValue={businessLocationType ?? ""}
+        <ProfileAddress
+          businessLocationType={businessLocationType || "US"}
+          setBusinessLocationType={setBusinessLocationType}
         />
 
         <ProfileField fieldName="industryId">
@@ -578,7 +563,9 @@ const ProfilePage = (props: Props): ReactElement => {
           <BusinessName />
         </ProfileField>
 
-        <ProfileNewJerseyAddress />
+        <ProfileAddress businessLocationType="NJ" />
+
+        {/* <ProfileNewJerseyAddress /> */}
 
         <ProfileField
           fieldName="responsibleOwnerName"
