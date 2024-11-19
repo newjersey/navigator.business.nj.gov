@@ -6,27 +6,27 @@ notesMd: >-
 
   NOTE: SME approved copy on 11/7
 filename: temporary-space-online-biz-fire-permit
-name: Get a Fire Permit to Set Up a Temporary Retail Space
+name: Get a Fire Permit to Set Up Your Temporary Retail Space
 industryIds:
   - e-commerce
-sectorIds:
-  - retail-trade-and-ecommerce
+sectorIds: []
 icon: file-purple.svg
 urlSlug: temporary-space-online-biz-fire-permit
-summaryDescriptionMd: You may need a fire permit to sell goods or services from
-  a temporary space, such as a pop-up shop or kiosk at a mall. If you need a
-  permit, you must apply for one for each new setup and pass an inspection to
-  get the permit.
+summaryDescriptionMd: >
+  You may need a fire permit to sell goods or services from a temporary space,
+  such as a pop-up shop or kiosk at a shopping mall. If you need a fire permit,
+  you will need to apply for one and pass an inspection each time you set up
+  your temporary retail space.
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 ---
 ## How to Apply
 
-Contact your town's `Local Enforcing Agency (LEA)|lea` to see if you need a permit or get more information. Your LEA can be the local fire department or the state Division of Fire Safety.
+Contact your town's `Local Enforcing Agency (LEA)|lea` to see if you need a permit and how to apply. Your LEA can be the local fire department or the state Division of Fire Safety.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
-You may need to get other types of fire permits depending on your business activity. Make sure to check with your LEA to see what fire permits you need.
+You may need to get other fire permits depending on your business activity. Check with your LEA to see if there are other fire permits you need.
 
 :::
 
