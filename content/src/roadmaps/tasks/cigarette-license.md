@@ -51,11 +51,9 @@ Trenton, NJ 08646-0252
 
 :::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
 
-Learn about the new age of sale (21) and the proper way to check an I.D. by visiting [Tobacco-Free for a Healthy New Jersey](https://www.tobaccofreenj.com/stomp).
+Learn about the age of sale (21) and the proper way to check an I.D. by visiting [Tobacco-Free for a Healthy New Jersey](https://www.tobaccofreenj.com/stomp).
 
 :::
-
-
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
 
