@@ -31,11 +31,11 @@ callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summa
 ---
 ## How to Apply
 
-Contact your town's `Local Enforcing Agency (LEA)|lea` to apply for the permit or get more information. Your LEA can be the local fire department or the state Division of Fire Safety.
+Contact your town's `Local Enforcing Agency (LEA)|lea` to apply for the permit. Your LEA can be the local fire department or the New Jersey Division of Fire Safety.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
-You may need to get other types of fire permits depending on your business activity. Make sure to check with your LEA to see what fire permits you need.
+You may need to get other types of fire permits depending on your business activity. Check with your LEA to see what fire permits you need.
 
 :::
 
