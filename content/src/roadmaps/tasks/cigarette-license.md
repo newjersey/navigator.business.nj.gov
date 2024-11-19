@@ -49,8 +49,6 @@ PO Box 252
 
 Trenton, NJ 08646-0252
 
-
-
 :::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
 
 Learn about the age of sale (21) and the proper way to check an I.D. by visiting [Tobacco-Free for a Healthy New Jersey](https://www.tobaccofreenj.com/stomp).
