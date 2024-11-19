@@ -19,7 +19,6 @@ callToActionText: Renew My Business License
 - License number
 - Current mailing address
 - Current business address
-- Certificate of completion for continuing education
 - Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
