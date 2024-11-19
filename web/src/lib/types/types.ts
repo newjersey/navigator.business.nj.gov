@@ -606,7 +606,7 @@ export interface PageMetadata {
 
 export type FieldsForAddressErrorHandling = keyof Address;
 export type AddressFields = keyof Address;
-export type AddressTextField = Exclude<keyof Address, "addressCity" | "addressState">;
+export type AddressTextField = keyof Address;
 
 export type AddressFieldErrorState = {
   field: FieldsForAddressErrorHandling;

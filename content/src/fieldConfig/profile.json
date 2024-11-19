@@ -270,7 +270,9 @@
       },
       "businessAddress": {
         "default": {
-          "header": "Business Address"
+          "header": "Business Address",
+          "usAddress": "U.S. address",
+          "intlAddress": "International address"
         }
       },
       "isChildcareForSixOrMore": {

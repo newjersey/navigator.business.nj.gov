@@ -34,6 +34,7 @@ import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SidebarPageLayout } from "@/components/njwds-layout/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
+import { DakotaProfileBusinessAddress } from "@/components/profile/DakotaProfileBusinessAddress";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
@@ -74,6 +75,7 @@ import {
   einTaskId,
   emptyAddressData,
   ForeignBusinessType,
+  FormationBusinessLocationType,
   formationTaskId,
   hasCompletedFormation,
   LookupLegalStructureById,
@@ -120,6 +122,9 @@ const ProfilePage = (props: Props): ReactElement => {
     profileData.foreignBusinessTypeIds
   );
   const [addressData, setAddressData] = useState(emptyAddressData);
+  const [businessLocationType, setBusinessLocationType] = useState<string>("");
+
+  console.log("businessLocationType in profile high up", businessLocationType);
   const {
     FormFuncWrapper,
     onSubmit,
@@ -136,11 +141,12 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   useScrollToPathAnchor();
-
   useMountEffectWhenDefined(() => {
     if (business) {
       setProfileData(business.profileData);
       setShouldLockFormationFields(hasCompletedFormation(business));
+      const location: string = business.formationData.formationFormData.businessLocationType as string;
+      setBusinessLocationType(location);
     }
   }, business);
 
@@ -185,6 +191,14 @@ const ProfilePage = (props: Props): ReactElement => {
         return;
       }
 
+      // console.log("FORM FUNC WRAP", business.formationData.formationFormData.businessLocationType);
+      // console.log("FORM FUNC WRAP businessLocationType", businessLocationType);
+      if (businessLocationType) {
+        const validLocation: FormationBusinessLocationType =
+          businessLocationType as FormationBusinessLocationType;
+        updateQueue.queueFormationFormData({ businessLocationType: validLocation });
+      }
+
       const dateOfFormationHasBeenDeleted =
         business.profileData.dateOfFormation !== profileData.dateOfFormation &&
         profileData.dateOfFormation === undefined;
@@ -219,8 +233,10 @@ const ProfilePage = (props: Props): ReactElement => {
           .queueTaskProgress({ [naicsCodeTaskId]: "NOT_STARTED" });
       }
 
+      // console.log("updateQueue.queueProfileData(profileData)", updateQueue.queueProfileData(profileData));
+      // console.log("updateQueue", updateQueue);
       updateQueue.queueProfileData(profileData);
-
+      // console.log("updateQueue(addressData)", updateQueue.queueFormationFormData(addressData));
       updateQueue.queueFormationFormData(addressData);
 
       (async (): Promise<void> => {
@@ -330,6 +346,21 @@ const ProfilePage = (props: Props): ReactElement => {
     return profileData.legalStructureId === "nonprofit";
   };
 
+  const handleDakotaRadioSelection = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    console.log("ETV", event.target.value);
+    console.log("businessLocationType", businessLocationType);
+
+    setBusinessLocationType(event.target.value);
+
+    console.log("emptyAddressData", emptyAddressData);
+    setAddressData(emptyAddressData);
+    console.log(
+      "businessLocationType handle",
+      business?.formationData.formationFormData.businessLocationType
+    );
+    console.log("formationData handle", business?.formationData.formationFormData);
+  };
+
   const hasSubmittedTaxData =
     business?.taxFilingData.state === "SUCCESS" || business?.taxFilingData.state === "PENDING";
 
@@ -360,6 +391,11 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <NexusDBANameField />
         </ProfileField>
+
+        <DakotaProfileBusinessAddress
+          handleDakotaRadioSelection={handleDakotaRadioSelection}
+          selectedValue={businessLocationType ?? ""}
+        />
 
         <ProfileField fieldName="industryId">
           <Industry />
@@ -992,3 +1028,6 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
 };
 
 export default ProfilePage;
+
+// console.log("ETV", event.target.value);
+// console.log("formationFormData before UQ", business?.formationData.formationFormData);
