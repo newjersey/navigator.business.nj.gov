@@ -49,7 +49,11 @@
     }
   ],
   "name": "Retail",
-  "nonEssentialQuestionsIds": ["ticket-broker-resell", "weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "ticket-broker-resell",
+    "weights-measures",
+    "cigarette-manufacture-sell"
+  ],
   "displayname": "retail",
   "industryOnboardingQuestions": {
     "canBeReseller": true
