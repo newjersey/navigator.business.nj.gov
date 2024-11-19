@@ -84,6 +84,11 @@
       "questionText": "Does your business make, buy, or sell products that contain Controlled Dangerous Substances (CDS)?",
       "addOn": "other-cds-supply",
       "id": "cds-supply"
+    },
+    {
+      "questionText": "Will you sell, manufacture, or have a vending machine with tobacco products (for example, cigarettes or cigars)?",
+      "id": "cigarette-manufacture-sell",
+      "addOn": "cigarettes-add"
     }
   ]
 }
