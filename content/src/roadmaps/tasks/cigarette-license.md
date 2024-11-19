@@ -5,7 +5,7 @@ notesMd: >-
 
   Planning doc: https://docs.google.com/document/d/1MdJ66sV4W0PRiySHYoXzpE62F43H3YHvMK1wYczHW70/edit?tab=t.0
 summaryDescriptionMd: >-
-  You need a cigarette license to do any of the following in New Jersey:
+  You need a cigarette license to do either of the following in New Jersey:
 
 
   * sell or manufacture tobacco products
