@@ -1422,7 +1422,7 @@ collections:
         name: "businessStage"
         widget: "select"
         options: ["early-stage", "operating", "both"]
-        hint: "Established businesses (open 5+ years) in JotForm = 'operating' - - 'New business (not open yet or less than 5 years)' in JotForm = 'early-stage'"
+        hint: "Early stage business = not yet open or open less than 2 years; Established business = open 2 years or more"
       - { label: "Employees Required", name: "employeesRequired", widget: "select", options: ["yes", "n/a"] }
       - label: "Home Based"
         name: "homeBased"
