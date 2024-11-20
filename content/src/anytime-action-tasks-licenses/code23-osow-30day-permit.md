@@ -8,14 +8,13 @@ industryIds: []
 sectorIds: []
 icon: govt-purple.svg
 urlSlug: code23-osow-30day-permit
-summaryDescriptionMd: >-
-  You need one permit each way to transport overweight or oversized trailers,
-  and very large undivisible loads on public roads. If the truck, trailer, and
-  load, including any overhang, exceed 10 feet in width or 70 feet in length, or
-  weigh over 80,000 pounds.
-
-
-  If a combination vehicle meets the size rules for a `Code 23 Overdimensional Trailer Permit|code-23-overdimensional-trailer-permit`, but you do not have the permit.
+summaryDescriptionMd: You need one permit each way to transport overweight or
+  oversized trailers, and very large undivisible loads on public roads. If the
+  truck, trailer, and load, including any overhang, exceed 10 feet in width or
+  70 feet in length, or weigh over 80,000 pounds. Or if a combination vehicle
+  meets the size rules for a `Code 23 Overdimensional Trailer
+  Permit|code-23-overdimensional-trailer-permit`, but you do not have the
+  permit.
 issuingAgency: NJ Department of Transportation
 callToActionText: Apply for My Code 23 OS/OW Permit
 callToActionLink: https://nj.gotpermits.com/njpass#!
