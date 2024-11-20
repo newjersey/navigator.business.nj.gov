@@ -3,7 +3,7 @@ id: electrologist-office-license
 filename: electrologist-office-license
 displayname: electrologist-office-license
 urlSlug: electrologist-office-license
-name: " Apply for an Electrologist Office Premises"
+name: " Apply for Your Electrologist Office Premises"
 webflowName: electrologist-office-license
 summaryDescriptionMd: You must have an electrologist office premises license to
   offer electrolysis services in New Jersey. Test.

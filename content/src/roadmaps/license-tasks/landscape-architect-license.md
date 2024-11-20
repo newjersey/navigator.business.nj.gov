@@ -1,21 +1,23 @@
 ---
-id: "landscape-architect-license"
-webflowId: "66aceed8453b76e2c7e4181e"
-urlSlug: "landscape-architect-license"
-name: "Apply for a Landscape Architect License"
-webflowName: "Certified Landscape Architect"
-displayname: "landscape-architect-license"
-filename: "landscape-architect-license"
-callToActionLink: "https://www.njconsumeraffairs.gov/land/Pages/applications.aspx"
-callToActionText: "Apply for My Landscape Architect License"
-agencyId: "nj-consumer-affairs"
-agencyAdditionalContext: "Board of Architects"
-divisionPhone: "(973) 504-6385"
-industryId: "landscape-architecture"
-webflowType: "individual-license"
-licenseCertificationClassification: "undefined"
 licenseName: ""
-summaryDescriptionMd: "You need a landscape architect license to practice landscape architecture and hold the title of “Landscape Architect” in the state."
+id: landscape-architect-license
+filename: landscape-architect-license
+displayname: landscape-architect-license
+urlSlug: landscape-architect-license
+name: Apply for Your Landscape Architect License
+webflowName: Certified Landscape Architect
+summaryDescriptionMd: You need a landscape architect license to practice
+  landscape architecture and hold the title of “Landscape Architect” in the
+  state.
+industryId: landscape-architecture
+callToActionText: Apply for My Landscape Architect License
+callToActionLink: https://www.njconsumeraffairs.gov/land/Pages/applications.aspx
+licenseCertificationClassification: undefined
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Board of Architects
+divisionPhone: (973) 504-6385
+webflowType: individual-license
+webflowId: 66aceed8453b76e2c7e4181e
 ---
 
 ## Eligibility Criteria

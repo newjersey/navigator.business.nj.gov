@@ -1,6 +1,6 @@
 ---
 licenseName: ""
-urlSlug: fire-burglar-alarm-locksmith-business-renewal
+urlSlug: fire-burglar-alarm-locksmith-business
 expirationEventDisplayName: Fire Alarm, Burglar Alarm and Locksmith Business License Expiration
 renewalEventDisplayName: Fire Alarm, Burglar Alarm and Locksmith Business License Renewal Deadline
 disclaimerText: You can renew your license 60 days before it expires and up to
@@ -19,7 +19,6 @@ callToActionText: Renew My Business License
 - License number
 - Current mailing address
 - Current business address
-- Certificate of completion for continuing education
 - Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }

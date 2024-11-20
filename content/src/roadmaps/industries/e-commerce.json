@@ -1,9 +1,7 @@
 {
-  "displayname": "e-commerce",
   "naicsCodes": "459920,441330,445320,459210,458110,445131,456120,455110,449210,445250,449121,459310,456191,449110,459420,444140,459120,458310,458320,445240,441227,459140,444240,459410,456130,444180,444230,459910,459130,458210,459110,441340,459991,459510,455211,449122,455219,456199,449129,459999,445298",
   "defaultSectorId": "retail-trade-and-ecommerce",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -51,6 +49,11 @@
     }
   ],
   "name": "Online Business",
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "cigarette-manufacture-sell"
+  ],
+  "displayname": "e-commerce",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true
