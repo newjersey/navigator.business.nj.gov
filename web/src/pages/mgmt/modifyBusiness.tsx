@@ -13,7 +13,6 @@ import {
   LicenseStatus,
   licenseStatuses,
   LicenseTaskId,
-  taskIdLicenseNameMapping,
   TaskProgress,
 } from "@businessnjgovnavigator/shared/index";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
@@ -30,8 +29,10 @@ const ModifyBusinessPage = (): ReactElement => {
   const [licenseStatus, setLicenseStatus] = useState("");
   const [taskID, setTaskId] = useState("");
 
-  const licenseSearchEnabledTaskIds = Object.keys(taskIdLicenseNameMapping).sort();
+  const sortedLicenseNames = Object.keys(LicenseNameTaskIdMapping).sort();
+  const sortedLicenseStatuses = licenseStatuses.sort();
   const isModifyBusinessPageDisabled = process.env.FEATURE_MODIFY_BUSINESS_PAGE !== "true";
+
   useEffect(() => {
     if (isModifyBusinessPageDisabled) {
       router.push(ROUTES.dashboard);
@@ -51,18 +52,18 @@ const ModifyBusinessPage = (): ReactElement => {
             {isLicenseDataUndefined && <div>There is no existing license data for this business</div>}
             {!isLicenseDataUndefined && (
               <div>
-                <div className="">The current busiess contains the following license data:</div>
+                <div className="">The current business contains the following license data:</div>
                 <div className="flex margin-top-1">
-                  <div className="text-underline width-card-lg">License Status</div>
                   <div className="text-underline width-tablet">License Name</div>
+                  <div className="text-underline width-card-lg">License Status</div>
                   <div className="text-underline width-mobile">Task ID</div>
                 </div>
                 {business?.licenseData?.licenses &&
                   Object.entries(business?.licenseData?.licenses).map(
                     ([licenseName, licenseDetails], index) => (
                       <div className="flex margin-bottom-05" key={`${licenseName}-${index}`}>
-                        <div className="width-card-lg">{licenseDetails.licenseStatus}</div>
                         <div className="width-tablet">{licenseName}</div>
+                        <div className="width-card-lg">{licenseDetails.licenseStatus}</div>
                         <div className="width-mobile">{LicenseNameTaskIdMapping[licenseName]}</div>
                       </div>
                     )
@@ -89,19 +90,18 @@ const ModifyBusinessPage = (): ReactElement => {
                   <Select
                     labelId="license-name"
                     id="license-name"
-                    value={taskID}
+                    value={licenseName}
                     label="License Name"
                     variant="outlined"
                     onChange={(event) => {
-                      setTaskId(event.target.value);
-                      setLicenseName(taskIdLicenseNameMapping[event.target.value as LicenseTaskId]);
+                      setTaskId(LicenseNameTaskIdMapping[event.target.value as LicenseTaskId]);
+                      setLicenseName(event.target.value);
                     }}
                   >
-                    {licenseSearchEnabledTaskIds.map((taskId) => {
-                      const licenseTaskId = taskIdLicenseNameMapping[taskId as LicenseTaskId];
+                    {sortedLicenseNames.map((licenseName) => {
                       return (
-                        <MenuItem key={`${licenseTaskId}-${taskId}`} value={taskId}>
-                          {licenseTaskId} ({taskId} task)
+                        <MenuItem key={licenseName} value={licenseName}>
+                          {licenseName}
                         </MenuItem>
                       );
                     })}
@@ -120,7 +120,7 @@ const ModifyBusinessPage = (): ReactElement => {
                     onChange={(event) => setLicenseStatus(event.target.value)}
                     variant="outlined"
                   >
-                    {licenseStatuses.map((licenseStatus) => (
+                    {sortedLicenseStatuses.map((licenseStatus) => (
                       <MenuItem key={licenseStatus} value={licenseStatus}>
                         {licenseStatus}
                       </MenuItem>
@@ -165,7 +165,7 @@ const ModifyBusinessPage = (): ReactElement => {
                 isColor="primary"
                 onClick={() => {
                   if (business?.licenseData) {
-                    const taskProgress = licenseSearchEnabledTaskIds.reduce(
+                    const taskProgress = sortedLicenseNames.reduce(
                       (acc: Record<string, TaskProgress>, curr: string): Record<string, TaskProgress> => {
                         acc[curr] = "NOT_STARTED";
                         return acc;
