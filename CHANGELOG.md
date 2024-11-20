@@ -1,3 +1,22 @@
+# [2024.35.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.34.0...v2024.35.0) (2024-11-20)
+
+
+### Bug Fixes
+
+* [[#188574288](https://github.com/newjersey/navigator.business.nj.gov/issues/188574288)] Update hint for business stage ([2dfcfd4](https://github.com/newjersey/navigator.business.nj.gov/commit/2dfcfd4600eb8f9d66fa1aca457a330b75987960))
+* [[#188574288](https://github.com/newjersey/navigator.business.nj.gov/issues/188574288)] Update hint for business stage in funding opps ([0336dc3](https://github.com/newjersey/navigator.business.nj.gov/commit/0336dc3b1fa5389c89a471333c9ddb09914396dd))
+
+
+### Features
+
+* [[#187978144](https://github.com/newjersey/navigator.business.nj.gov/issues/187978144)] [[#188538877](https://github.com/newjersey/navigator.business.nj.gov/issues/188538877)] [[#188538893](https://github.com/newjersey/navigator.business.nj.gov/issues/188538893)] [[#188538912](https://github.com/newjersey/navigator.business.nj.gov/issues/188538912)]- Employment and Personnel Services License ([2369105](https://github.com/newjersey/navigator.business.nj.gov/commit/236910513c7033bebd2beab1842b9d57f2a21212))
+* [[#188443179](https://github.com/newjersey/navigator.business.nj.gov/issues/188443179)] Unsuccessful Business Address & Zipcode License Check ([7d48652](https://github.com/newjersey/navigator.business.nj.gov/commit/7d486522f2542a5009678600364c242770dff15e))
+* [[#188448107](https://github.com/newjersey/navigator.business.nj.gov/issues/188448107)] Update License task inputs to match rest of product" ([6d8d606](https://github.com/newjersey/navigator.business.nj.gov/commit/6d8d60636f3360b527868c909ed2370849521277))
+* [[#188489128](https://github.com/newjersey/navigator.business.nj.gov/issues/188489128)] non-profit question removal ([479472b](https://github.com/newjersey/navigator.business.nj.gov/commit/479472be03d99f8c53778ca9ac277a9c154510b4))
+* [[#188521509](https://github.com/newjersey/navigator.business.nj.gov/issues/188521509)] Filter Carnival fire permit anytime action by non-essential question ([3fd1da7](https://github.com/newjersey/navigator.business.nj.gov/commit/3fd1da7a3e39ce335ff98892634ec6513a3ed2bf))
+* [[#188563288](https://github.com/newjersey/navigator.business.nj.gov/issues/188563288)] Add offshore wind sector and investment funding type to funding opportunities ([9873823](https://github.com/newjersey/navigator.business.nj.gov/commit/98738233f279b3113d5d79ede92fa6db7a3bbd53))
+* [[#188574288](https://github.com/newjersey/navigator.business.nj.gov/issues/188574288)] Add offshore wind sector and investment funding type to funding opportunities ([fef06f6](https://github.com/newjersey/navigator.business.nj.gov/commit/fef06f6c3f8780f86cc3c8ac2886ef022941fce7))
+
 # [2024.34.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.33.0...v2024.34.0) (2024-11-12)
 
 
