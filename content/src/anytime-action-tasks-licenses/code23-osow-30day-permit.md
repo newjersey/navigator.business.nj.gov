@@ -14,7 +14,7 @@ summaryDescriptionMd: >-
 
   * If the truck, trailer, and load (including any overhang) exceed 10 feet in width, 70 feet in length, or weigh over 80,000 pounds
 
-  * If the combination vehicle meets the size rules for a Code 23 Overdimensional Trailer Permit, but you do not have the permit
+  * If the combination vehicle meets the size rules for a `Code 23 Overdimensional Trailer Permit|code-23-overdimensional-trailer-permit`, but you do not have the permit
 issuingAgency: NJ Department of Transportation
 callToActionText: Apply for My Code 23 OS/OW Permit
 callToActionLink: https://nj.gotpermits.com/njpass#!
