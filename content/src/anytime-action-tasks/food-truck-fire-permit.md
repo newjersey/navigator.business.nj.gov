@@ -15,6 +15,7 @@ urlSlug: food-truck-fire-permit
 summaryDescriptionMd: You must have a fire permit to cook in a mobile canteen or
   cooking trailer, such as a food truck. You need to apply for a permit and pass
   an inspection each time you set up at an event or specific location.
+issuingAgency: New Jersey Division of Fire Safety or your local fire department
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 ---
