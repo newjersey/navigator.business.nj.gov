@@ -1,21 +1,29 @@
 ---
-id: "carnival-fire-permit"
-displayname: "carnival-fire-permit"
-webflowId: "668d72e3b7480d756067a13d"
-urlSlug: "carnival-fire-permit"
-name: "Obtain Fire Permits for Your Traveling Carnival or Circus"
-webflowName: "Entertainment: Traveling Carnival or Circus Fire Permit"
-filename: "carnival-fire-permit"
+notesMd: "11.22.24 Note: This is not connected to a roadmap - we determined it's
+  an anytime action. but we want to show this in the licensing & database guide
+  which is why we have this as a license task (in addition to the anytime
+  action)."
 licenseName: ""
-callToActionLink: "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf"
-callToActionText: "Contact My Local Enforcing Agency"
-agencyId: "nj-community-affairs"
-agencyAdditionalContext: "Division of Fire Safety"
-divisionPhone: "(609) 633-6132"
-industryId: "independent-artist"
-webflowType: "business-license"
-licenseCertificationClassification: "undefined"
-summaryDescriptionMd: "You must have a fire permit to do certain activities at your carnival or circus. You need to get the fire permit for each new setup or event location and pass required inspections. Contact the `Local Enforcing Agency (LEA)|lea` in the town where your carnival or circus will be to see which fire permits you need and how to apply."
+id: carnival-fire-permit
+filename: carnival-fire-permit
+displayname: carnival-fire-permit
+urlSlug: carnival-fire-permit
+name: Obtain Fire Permits for Your Traveling Carnival or Circus
+webflowName: "Entertainment: Traveling Carnival or Circus Fire Permit"
+summaryDescriptionMd: You must have a fire permit to do certain activities at
+  your carnival or circus. You need to get the fire permit for each new setup or
+  event location and pass required inspections. Contact the `Local Enforcing
+  Agency (LEA)|lea` in the town where your carnival or circus will be to see
+  which fire permits you need and how to apply.
+industryId: independent-artist
+callToActionText: Contact My Local Enforcing Agency
+callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
+licenseCertificationClassification: undefined
+agencyId: nj-community-affairs
+agencyAdditionalContext: Division of Fire Safety
+divisionPhone: (609) 633-6132
+webflowType: business-license
+webflowId: 668d72e3b7480d756067a13d
 ---
 
 ---
