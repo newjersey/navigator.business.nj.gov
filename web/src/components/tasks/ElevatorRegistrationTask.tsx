@@ -1,6 +1,11 @@
 import { Content } from "@/components/Content";
 import { TaskHeader } from "@/components/TaskHeader";
 import { NeedsAccountModalWrapper } from "@/components/auth/NeedsAccountModalWrapper";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
+import { Icon } from "@/components/njwds/Icon";
 import { CheckElevatorRegistrationStatus } from "@/components/tasks/CheckElevatorRegistrationStatus";
 import { ElevatorRegistrationStatusSummary } from "@/components/tasks/ElevatorRegistrationStatusSummary";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
@@ -10,6 +15,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { ElevatorRegistrationSearchError, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import { openInNewTab } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 import {
   ElevatorSafetyAddress,
@@ -121,56 +127,58 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
                 />
               </TabList>
             </Box>
-            <TabPanel value="0" sx={{ paddingX: 0 }}>
+            <TabPanel value="0">
               <div className="margin-top-3">
                 <UnlockedBy task={props.task} />
                 <Content>{props.task.summaryDescriptionMd || ""}</Content>
                 <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
               </div>
-              <div className="flex flex-column margin-top-4 margin-bottom-1">
-                <a href={callToActionLink} target="_blank" rel="noreferrer noopener">
-                  <button
+              <CtaContainer>
+                <ActionBarLayout>
+                  <SecondaryButton
+                    isColor="primary"
+                    onClick={(): void => {
+                      analytics.event.task_elevator_registration.click.elevator_registration_button_click_update();
+                      setTabIndex(STATUS_TAB_INDEX);
+                    }}
+                    dataTestId="cta-secondary"
+                  >
+                    {Config.elevatorRegistrationSearchTask.registrationCallToActionSecondaryText}
+                  </SecondaryButton>
+
+                  <PrimaryButton
+                    isColor="primary"
                     onClick={(): void => {
                       analytics.event.task_elevator_registration.click.elevator_registration_button_click_register();
+                      openInNewTab(callToActionLink);
                     }}
-                    className="usa-button width-100 margin-bottom-2"
-                    data-testid="cta-primary"
+                    isRightMarginRemoved
+                    dataTestId="cta-primary"
                   >
-                    <div className="flex flex-column">
-                      <div>{Config.elevatorRegistrationSearchTask.registrationCallToActionPrimaryText}</div>
-                    </div>
-                  </button>
-                </a>
-                <button
-                  onClick={(): void => {
-                    analytics.event.task_elevator_registration.click.elevator_registration_button_click_update();
-                    setTabIndex(STATUS_TAB_INDEX);
-                  }}
-                  className="usa-button usa-button--outline width-100"
-                  data-testid="cta-secondary"
-                >
-                  <div className="flex flex-column">
-                    <div>{Config.elevatorRegistrationSearchTask.registrationCallToActionSecondaryText}</div>
-                  </div>
-                </button>
-              </div>
+                    {Config.elevatorRegistrationSearchTask.registrationCallToActionPrimaryText}
+                    <Icon iconName="launch" className="usa-icon-button-margin" />
+                  </PrimaryButton>
+                </ActionBarLayout>
+              </CtaContainer>
             </TabPanel>
-            <TabPanel value="1" sx={{ paddingX: 0 }}>
-              {elevatorRegistrationSummary ? (
-                <ElevatorRegistrationStatusSummary
-                  onEdit={onEdit}
-                  summary={elevatorRegistrationSummary}
-                  task={props.task}
-                  address={elevatorSafetyAddress}
-                />
-              ) : (
-                <CheckElevatorRegistrationStatus
-                  onSubmit={onSubmit}
-                  error={error}
-                  isLoading={isLoading}
-                  municipalities={municipalities}
-                />
-              )}
+            <TabPanel value="1">
+              <div className="margin-top-3">
+                {elevatorRegistrationSummary ? (
+                  <ElevatorRegistrationStatusSummary
+                    onEdit={onEdit}
+                    summary={elevatorRegistrationSummary}
+                    task={props.task}
+                    address={elevatorSafetyAddress}
+                  />
+                ) : (
+                  <CheckElevatorRegistrationStatus
+                    onSubmit={onSubmit}
+                    error={error}
+                    isLoading={isLoading}
+                    municipalities={municipalities}
+                  />
+                )}
+              </div>
             </TabPanel>
           </TabContext>
         </Box>

@@ -2,6 +2,8 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -118,7 +120,6 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
           <span>{Config.housingRegistrationSearchTask.registrationStartDateText}</span>
           <span data-testid={`registration-${index}-date`}>{`${formattedDate}`}</span>
         </span>
-
         <HorizontalLine />
         <Box className={`${details.headerColor} fdc fg1 radius-lg margin-top-2 drop-shadow-xs`}>
           <span className={"padding-left-2 padding-y-1 text-white"}>Application Status:</span>
@@ -142,7 +143,7 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
 
   return (
     <>
-      <div className={`${rejectedOrIncompleteApplication ? "padding-bottom-4" : ""}`}>
+      <div className={`${rejectedOrIncompleteApplication ? "padding-bottom-2" : ""}`}>
         <Box className="bg-base-extra-light  fdc fg1 padding-y-2 radius-lg drop-shadow-xs">
           <div className={"margin-x-4"}>
             {business?.profileData?.businessName && (
@@ -181,22 +182,19 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
       </div>
 
       {rejectedOrIncompleteApplication && (
-        <div
-          className={
-            "text-align-right bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 padding-right-4 margin-bottom-neg-7 radius-bottom-lg"
-          }
-        >
-          <Box>
+        <CtaContainer>
+          <ActionBarLayout>
             <PrimaryButton
               isColor={"primary"}
+              isRightMarginRemoved
               onClick={() => {
                 openInNewTab(Config.housingRegistrationSearchTask.reviewApplicationCallToActionLink);
               }}
             >
               {Config.housingRegistrationSearchTask.reviewMyApplicationCallToAction}
             </PrimaryButton>
-          </Box>
-        </div>
+          </ActionBarLayout>
+        </CtaContainer>
       )}
 
       <UserDataErrorAlert />

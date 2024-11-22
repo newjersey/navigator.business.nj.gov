@@ -3,6 +3,7 @@ import { Content } from "@/components/Content";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CheckLicenseStatus } from "@/components/tasks/CheckLicenseStatus";
@@ -14,6 +15,7 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LicenseSearchError, TaskWithLicenseTaskId } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import { openInNewTab } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 import {
   LicenseDetails,
@@ -141,14 +143,14 @@ export const LicenseTask = (props: Props): ReactElement => {
                 <Tab value="1" sx={tabStyle} label={Config.licenseSearchTask.tab2Text} />
               </TabList>
             </Box>
-            <TabPanel value="0" sx={{ paddingX: 0 }}>
+            <TabPanel value="0">
               <div className="margin-top-3">
                 <UnlockedBy task={props.task} />
                 <Content>{props.task.summaryDescriptionMd || ""}</Content>
                 <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
               </div>
-              <CtaContainer className="margin-btm-neg-2">
-                <div className="btn-container">
+              <CtaContainer>
+                <ActionBarLayout>
                   <SecondaryButton
                     isColor="primary"
                     onClick={(): void => {
@@ -162,8 +164,7 @@ export const LicenseTask = (props: Props): ReactElement => {
                   >
                     {Config.licenseSearchTask.secondaryCTAFirstLineText}
                   </SecondaryButton>
-                </div>
-                <div className="btn-container">
+
                   <PrimaryButton
                     isColor="primary"
                     onClick={(): void => {
@@ -172,16 +173,18 @@ export const LicenseTask = (props: Props): ReactElement => {
                         callToActionLink,
                         "start_application"
                       );
+                      openInNewTab(callToActionLink);
                     }}
+                    isRightMarginRemoved
                     dataTestId="cta-primary"
                   >
                     {Config.licenseSearchTask.primaryCTAFirstLineText}
-                    <Icon iconName="launch" />
+                    <Icon iconName="launch" className="usa-icon-button-margin" />
                   </PrimaryButton>
-                </div>
+                </ActionBarLayout>
               </CtaContainer>
             </TabPanel>
-            <TabPanel value="1" sx={{ paddingX: 0 }}>
+            <TabPanel value="1">
               {hasCompletedSearch && licenseDetails ? (
                 <LicenseDetailReceipt
                   licenseTaskId={props.task.id}

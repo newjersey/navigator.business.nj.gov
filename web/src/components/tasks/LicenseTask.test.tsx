@@ -24,11 +24,12 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
+window.open = jest.fn();
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({ checkLicenseStatus: jest.fn(), getUserData: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
-
+const mockWindowOpen = window.open as jest.Mocked<typeof window.open>;
 const Config = getMergedConfig();
 
 describe("<LicenseTask />", () => {
@@ -167,6 +168,12 @@ describe("<LicenseTask />", () => {
       renderTask();
       fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
       expect(getValue("business-name")).toEqual("My Cool Nail Salon");
+    });
+
+    it("opens external link in new tab", () => {
+      renderTask();
+      fireEvent.click(screen.getByTestId("cta-primary"));
+      expect(mockWindowOpen).toHaveBeenCalledWith(task.callToActionLink, "_blank", "noopener noreferrer");
     });
   });
 

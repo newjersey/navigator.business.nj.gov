@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { createTheme } from "@mui/material";
 
 export default createTheme({
@@ -55,6 +57,13 @@ export default createTheme({
         },
         root: {
           "&:before": { display: "none" },
+        },
+      },
+    },
+    MuiTabPanel: {
+      styleOverrides: {
+        root: {
+          padding: "0px !important",
         },
       },
     },

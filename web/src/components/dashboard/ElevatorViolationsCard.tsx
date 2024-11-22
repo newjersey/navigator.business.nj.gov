@@ -27,8 +27,8 @@ export const ElevatorViolationsCard = (): ReactElement => {
               openInNewTab(config.elevatorViolationsCard.violationNoticeCTALink);
             }}
           >
-            <span className="padding-right-1">{config.elevatorViolationsCard.violationNoticeCTA}</span>
-            <Icon iconName="launch" />
+            <span>{config.elevatorViolationsCard.violationNoticeCTA}</span>
+            <Icon iconName="launch" className="usa-icon-button-margin" />
           </PrimaryButton>
         </div>
       </ActionBarLayout>
