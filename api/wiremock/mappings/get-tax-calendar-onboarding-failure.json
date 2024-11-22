@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/onboard",
+    "bodyPatterns": [
+      {
+        "contains": "098765432123"
+      }
+    ]
+  },
+  "response": {
+    "status": 500,
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}
