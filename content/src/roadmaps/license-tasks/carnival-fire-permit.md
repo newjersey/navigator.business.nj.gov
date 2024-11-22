@@ -16,7 +16,7 @@ summaryDescriptionMd: >-
   you do the activity.
 
 
-  Contact the `Local Enforcing Agency (LEA)|lea` in the town where your carnival or circus will be to see which fire permits you need to get and how to apply.
+  Contact the `Local Enforcing Agency (LEA)|lea` in the town where your carnival or circus will be to see which fire permits you need to get and how to apply. Your LEA can be your local fire department or the New Jersey Division of Fire Safety.
 industryId: independent-artist
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
