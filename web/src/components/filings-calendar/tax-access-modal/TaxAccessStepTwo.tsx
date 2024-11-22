@@ -10,18 +10,17 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { FieldStateActionKind } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { ProfileFormContext } from "@/contexts/profileFormContext";
-import { postTaxFilingsOnboarding } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { gov2GoSignupAndFetchTaxEvents } from "@/lib/taxation/helpers";
 import { createReducedFieldStates, ProfileFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   Business,
   createEmptyProfileData,
-  getCurrentBusiness,
   LookupLegalStructureById,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
@@ -141,95 +140,17 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
     async () => {
       if (!business || !updateQueue) return;
 
-      setIsLoading(true);
-
-      const encryptedTaxId =
-        profileData.taxId === business.profileData.taxId ? profileData.encryptedTaxId : undefined;
-
-      try {
-        let businessNameToSubmitToTaxApi = "";
-
-        if (displayBusinessName()) {
-          businessNameToSubmitToTaxApi = profileData.businessName;
-        }
-        if (displayResponsibleOwnerName()) {
-          businessNameToSubmitToTaxApi = profileData.responsibleOwnerName;
-        }
-
-        const userDataToSet = await postTaxFilingsOnboarding({
-          taxId: profileData.taxId as string,
-          businessName: businessNameToSubmitToTaxApi,
-          encryptedTaxId: encryptedTaxId as string,
-        });
-
-        updateQueue.queue(userDataToSet).queueProfileData({
-          taxId: profileData.taxId,
-          encryptedTaxId: encryptedTaxId,
-        });
-
-        if (getCurrentBusiness(userDataToSet).taxFilingData.state === "SUCCESS") {
-          if (displayBusinessName()) {
-            updateQueue.queueProfileData({
-              businessName: profileData.businessName,
-            });
-          }
-
-          if (displayResponsibleOwnerName()) {
-            updateQueue.queueProfileData({
-              responsibleOwnerName: profileData.responsibleOwnerName,
-            });
-          }
-        }
-
-        await updateQueue.update();
-      } catch {
-        setOnAPIfailed("UNKNOWN");
-        setIsLoading(false);
-        return;
-      }
-
-      const { taxFilingData } = updateQueue.currentBusiness();
-
-      if (taxFilingData.state === "SUCCESS") {
-        setIsLoading(false);
-        analytics.event.tax_calendar_modal.submit.tax_deadlines_added_to_calendar();
-        props.onSuccess();
-        queueUpdateTaskProgress("determine-naics-code", "COMPLETED");
-        updateQueue.update();
-      }
-
-      if (taxFilingData.state === "PENDING") {
-        setIsLoading(false);
-        analytics.event.tax_calendar_modal.submit.business_exists_but_not_in_Gov2Go();
-        props.close();
-      }
-
-      if (taxFilingData.state === "FAILED") {
-        if (taxFilingData.errorField === "businessName" && displayBusinessName()) {
-          formContextState.reducer({
-            type: FieldStateActionKind.VALIDATION,
-            payload: { field: "businessName", invalid: true },
-          });
-        } else if (taxFilingData.errorField === "businessName" && displayResponsibleOwnerName()) {
-          formContextState.reducer({
-            type: FieldStateActionKind.VALIDATION,
-            payload: { field: "responsibleOwnerName", invalid: true },
-          });
-        } else {
-          formContextState.reducer({
-            type: FieldStateActionKind.VALIDATION,
-            payload: { field: fields, invalid: true },
-          });
-        }
-        setOnAPIfailed("FAILED");
-        analytics.event.tax_calendar_modal.submit.tax_calendar_business_does_not_exist();
-        setIsLoading(false);
-      }
-
-      if (taxFilingData.state === "API_ERROR") {
-        setOnAPIfailed("UNKNOWN");
-        setIsLoading(false);
-      }
+      gov2GoSignupAndFetchTaxEvents({
+        profileData,
+        business,
+        updateQueue,
+        queueUpdateTaskProgress,
+        setIsLoading,
+        setOnAPIfailed,
+        onSuccess: props.onSuccess,
+        close: props.close,
+        formContextState,
+      });
     },
     () => analytics.event.tax_calendar_modal.submit.tax_calendar_modal_validation_error()
   );
