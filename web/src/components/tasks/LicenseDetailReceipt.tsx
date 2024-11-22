@@ -52,8 +52,7 @@ export const LicenseDetailReceipt = (props: Props): ReactElement => {
 
   return (
     <div data-testid="licenseDetailReceipt" className="fdc fg1 overflow-y-hidden margin-top-3">
-      <p className="margin-x-3 margin-bottom-3">{Config.licenseSearchTask.foundText}</p>
-
+      <p className="margin-bottom-3">{Config.licenseSearchTask.foundText}</p>
       <div className="border-2px border-base-lightest radius-lg bg-base-extra-light text-base-darkest padding-x-2 padding-y-205 width-full tablet:padding-x-5 tablet:padding-y-4">
         <div className="flex flex-column tablet-flex-row tablet-flex-alignItems-end">
           <div>

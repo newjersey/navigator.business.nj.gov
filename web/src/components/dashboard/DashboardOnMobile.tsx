@@ -92,11 +92,13 @@ export const DashboardOnMobile = (props: Props): ReactElement => {
           </div>
         }
         secondTab={
-          <SidebarCardsContainer
-            sidebarDisplayContent={props.displayContent.sidebarDisplayContent}
-            certifications={props.certifications}
-            fundings={props.fundings}
-          />
+          <div className="margin-top-3">
+            <SidebarCardsContainer
+              sidebarDisplayContent={props.displayContent.sidebarDisplayContent}
+              certifications={props.certifications}
+              fundings={props.fundings}
+            />
+          </div>
         }
         certifications={props.certifications}
         fundings={props.fundings}
