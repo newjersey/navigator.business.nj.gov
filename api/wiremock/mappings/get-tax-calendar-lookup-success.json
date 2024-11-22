@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/lookup",
+    "bodyPatterns": [
+      {
+        "contains": "123456789098"
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "tax-calendar-lookup-success.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}
