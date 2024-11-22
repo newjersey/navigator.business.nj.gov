@@ -3,6 +3,9 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { NeedsAccountModalWrapper } from "@/components/auth/NeedsAccountModalWrapper";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
+import { Icon } from "@/components/njwds/Icon";
 import { CheckHousingRegistrationStatus } from "@/components/tasks/CheckHousingRegistrationStatus";
 import { HousingRegistrationStatusSummary } from "@/components/tasks/HousingRegistrationStatusSummary";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
@@ -119,49 +122,56 @@ export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
                 />
               </TabList>
             </Box>
-            <TabPanel value="0" sx={{ paddingX: 0 }}>
+            <TabPanel value="0">
               <div className="margin-top-3">
                 <UnlockedBy task={props.task} />
                 <Content>{props.task.summaryDescriptionMd || ""}</Content>
                 <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
               </div>
-              <div className="flex flex-column margin-top-4 margin-bottom-1">
-                <PrimaryButton
-                  isColor={"primary"}
-                  onClick={() => {
-                    openInNewTab(callToActionLink);
-                  }}
-                >
-                  <div> {Config.housingRegistrationSearchTask.registrationCallToActionPrimaryText}</div>
-                </PrimaryButton>
-              </div>
-              <div className="flex flex-column">
-                <SecondaryButton
-                  isColor={"primary"}
-                  onClick={() => {
-                    setTabIndex(STATUS_TAB_INDEX);
-                  }}
-                >
-                  <div>{Config.housingRegistrationSearchTask.registrationCallToActionSecondaryText}</div>
-                </SecondaryButton>
-              </div>
+
+              <CtaContainer>
+                <ActionBarLayout>
+                  <SecondaryButton
+                    isColor="primary"
+                    onClick={(): void => {
+                      setTabIndex(STATUS_TAB_INDEX);
+                    }}
+                    dataTestId="cta-secondary"
+                  >
+                    {Config.housingRegistrationSearchTask.registrationCallToActionSecondaryText}
+                  </SecondaryButton>
+
+                  <PrimaryButton
+                    isColor="primary"
+                    onClick={(): void => {
+                      openInNewTab(callToActionLink);
+                    }}
+                    isRightMarginRemoved
+                  >
+                    {Config.housingRegistrationSearchTask.registrationCallToActionPrimaryText}
+                    <Icon iconName="launch" className="usa-icon-button-margin" />
+                  </PrimaryButton>
+                </ActionBarLayout>
+              </CtaContainer>
             </TabPanel>
-            <TabPanel value="1" sx={{ paddingX: 0 }}>
-              {housingRegistrationLookupSummary ? (
-                <HousingRegistrationStatusSummary
-                  onEdit={onEdit}
-                  summary={housingRegistrationLookupSummary}
-                  task={props.task}
-                  address={housingAddress}
-                />
-              ) : (
-                <CheckHousingRegistrationStatus
-                  onSubmit={onSubmit}
-                  error={error}
-                  isLoading={isLoading}
-                  municipalities={municipalities}
-                />
-              )}
+            <TabPanel value="1">
+              <div className="margin-top-3">
+                {housingRegistrationLookupSummary ? (
+                  <HousingRegistrationStatusSummary
+                    onEdit={onEdit}
+                    summary={housingRegistrationLookupSummary}
+                    task={props.task}
+                    address={housingAddress}
+                  />
+                ) : (
+                  <CheckHousingRegistrationStatus
+                    onSubmit={onSubmit}
+                    error={error}
+                    isLoading={isLoading}
+                    municipalities={municipalities}
+                  />
+                )}
+              </div>
             </TabPanel>
           </TabContext>
         </Box>

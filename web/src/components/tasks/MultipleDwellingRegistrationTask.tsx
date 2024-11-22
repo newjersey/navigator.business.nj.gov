@@ -1,8 +1,9 @@
 import { NeedsAccountModalWrapper } from "@/components/auth/NeedsAccountModalWrapper";
 import { Content } from "@/components/Content";
-import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
+import { Icon } from "@/components/njwds/Icon";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CheckHousingRegistrationStatus } from "@/components/tasks/CheckHousingRegistrationStatus";
 import { HousingRegistrationStatusSummary } from "@/components/tasks/HousingRegistrationStatusSummary";
@@ -21,6 +22,7 @@ import {
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
 import { Box, Tab } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";
+import { CtaContainer } from "../njwds-extended/cta/CtaContainer";
 
 interface Props {
   task: Task;
@@ -119,14 +121,14 @@ export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => 
                 />
               </TabList>
             </Box>
-            <TabPanel value="0" sx={{ paddingX: 0 }}>
+            <TabPanel value="0">
               <div className="margin-top-3">
                 <UnlockedBy task={props.task} />
                 <Content>{props.task.summaryDescriptionMd || ""}</Content>
                 <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
               </div>
-              <CtaContainer className="margin-btm-neg-2">
-                <div className="btn-container">
+              <CtaContainer>
+                <ActionBarLayout>
                   <SecondaryButton
                     isColor={"primary"}
                     onClick={() => {
@@ -135,36 +137,38 @@ export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => 
                   >
                     <div>{Config.housingRegistrationSearchTask.registrationCallToActionSecondaryText}</div>
                   </SecondaryButton>
-                </div>
-                <div className="btn-container">
                   <PrimaryButton
+                    isRightMarginRemoved
                     isColor={"primary"}
                     onClick={() => {
                       openInNewTab(callToActionLink);
                     }}
                   >
-                    <div> {Config.housingRegistrationSearchTask.registrationCallToActionPrimaryText}</div>
+                    <div>{Config.housingRegistrationSearchTask.registrationCallToActionPrimaryText}</div>
+                    <Icon iconName="launch" className="usa-icon-button-margin" />
                   </PrimaryButton>
-                </div>
+                </ActionBarLayout>
               </CtaContainer>
             </TabPanel>
-            <TabPanel value="1" sx={{ paddingX: 0 }}>
-              {housingRegistrationLookupSummary ? (
-                <HousingRegistrationStatusSummary
-                  onEdit={onEdit}
-                  summary={housingRegistrationLookupSummary}
-                  task={props.task}
-                  address={housingAddress}
-                  dueDate={housingRegistrationLookupSummary.renewalDate}
-                />
-              ) : (
-                <CheckHousingRegistrationStatus
-                  onSubmit={onSubmit}
-                  error={error}
-                  isLoading={isLoading}
-                  municipalities={municipalities}
-                />
-              )}
+            <TabPanel value="1">
+              <div className="margin-top-3">
+                {housingRegistrationLookupSummary ? (
+                  <HousingRegistrationStatusSummary
+                    onEdit={onEdit}
+                    summary={housingRegistrationLookupSummary}
+                    task={props.task}
+                    address={housingAddress}
+                    dueDate={housingRegistrationLookupSummary.renewalDate}
+                  />
+                ) : (
+                  <CheckHousingRegistrationStatus
+                    onSubmit={onSubmit}
+                    error={error}
+                    isLoading={isLoading}
+                    municipalities={municipalities}
+                  />
+                )}
+              </div>
             </TabPanel>
           </TabContext>
         </Box>
