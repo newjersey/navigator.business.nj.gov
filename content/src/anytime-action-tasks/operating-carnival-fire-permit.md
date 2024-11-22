@@ -7,9 +7,9 @@ name: Get a Fire Permit for Your Carnival or Circus
 industryIds: []
 icon: govt-purple.svg
 urlSlug: operating-carnival-fire-permit
-summaryDescriptionMd: You need a fire permit to do certain activities at your
-  traveling carnival or circus. You also need to apply for the permit and pass
-  an inspection each time you do the activity.
+summaryDescriptionMd: You must a fire permit to do certain activities at your
+  traveling carnival or circus. You need to apply for the permit and pass an
+  inspection each time you do the activity.
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 ---
