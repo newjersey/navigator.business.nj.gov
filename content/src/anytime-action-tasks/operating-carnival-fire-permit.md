@@ -7,9 +7,9 @@ name: Get a Fire Permit for Your Carnival or Circus
 industryIds: []
 icon: govt-purple.svg
 urlSlug: operating-carnival-fire-permit
-summaryDescriptionMd: "You must have a fire permit to do certain activities at
-  your traveling carnival or circus. You need to get the fire permit for each
-  new setup or event location and pass required inspections. "
+summaryDescriptionMd: You need a fire permit to do certain activities at your
+  traveling carnival or circus. You also need to apply for the permit(s) and
+  pass an inspection each time you do the activity.
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 ---
@@ -23,7 +23,8 @@ callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summa
 - Storing and handling certain types of flammable or combustible liquids
 - Storing and discharging fireworks
 
-Contact the `Local Enforcing Agency (LEA)|local-enforcing-agency` in the town where your carnival or circus will be to see which fire permits you need and how to apply.
+## How to Apply
+Contact the `Local Enforcing Agency (LEA)|local-enforcing-agency` in the town where your carnival or circus will be to see which permits you need and how to apply. Your LEA can be your local fire department or the  New Jersey Division of Fire Safety.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
