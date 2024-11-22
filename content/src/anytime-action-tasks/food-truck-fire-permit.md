@@ -21,7 +21,7 @@ callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summa
 ---
 ## How to Apply
 
-Contact the `Local Enforcing Agency (LEA)|lea` in the town where you are setting up your food truck. Your LEA can be the local fire department or the New Jersey Division of Fire Safety.
+Contact the `Local Enforcing Agency (LEA)|lea` in the town where you are setting up your food truck to apply. Your LEA can be the local fire department or the New Jersey Division of Fire Safety.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
