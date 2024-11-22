@@ -42,6 +42,7 @@ const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();
 
 const renderComponent = (initialUserData?: UserData): void => {
+  console.log(initialUserData?.businesses[initialUserData.currentBusinessId].profileData.businessName);
   render(
     <WithStatefulUserData initialUserData={initialUserData}>
       <TaxAccessStepTwo
@@ -103,6 +104,8 @@ describe("<TaxAccessStepTwo />", () => {
         legalStructureId as FormationLegalType
       );
     }
+
+    console.log(params.businessName);
 
     return generateUserDataForBusiness(
       generateBusiness({

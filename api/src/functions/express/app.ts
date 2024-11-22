@@ -234,7 +234,9 @@ const FORMATION_API_BASE_URL = process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINE
   : process.env.FORMATION_API_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
 
 const GOV2GO_REGISTRATION_API_KEY = process.env.GOV2GO_REGISTRATION_API_KEY || "";
-const GOV2GO_REGISTRATION_BASE_URL = process.env.GOV2GO_REGISTRATION_BASE_URL || "";
+const GOV2GO_REGISTRATION_BASE_URL = IS_OFFLINE
+  ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
+  : process.env.GOV2GO_REGISTRATION_BASE_URL || "";
 
 const AWS_CRYPTO_KEY = process.env.AWS_CRYPTO_KEY || "";
 const AWS_CRYPTO_CONTEXT_STAGE = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";

@@ -71,6 +71,7 @@ export const postTaxFilingsOnboarding = (props: {
   taxId: string;
   encryptedTaxId: string;
 }): Promise<UserData> => {
+  console.log("POSTING TAX FILINGS ONBOARDING");
   return post(`/taxFilings/onboarding`, props);
 };
 

@@ -45,19 +45,27 @@ export const taxFilingRouterFactory = (
   });
 
   router.post("/onboarding", async (req, res) => {
+    console.log("POSTING TAX FILINGS ONBOARDING --- API");
     const userId = getSignedInUserId(req);
+    console.log("USER ID", userId);
     const { encryptedTaxId, taxId, businessName } = req.body;
     try {
+      console.log("TRYING");
       const plainTextTaxId = await getTaxId(encryptionDecryptionClient, taxId, encryptedTaxId);
+      console.log("PLAIN TEXT TAX ID", plainTextTaxId);
       const userData = await userDataClient.get(userId);
+      console.log("USER DATA", userData);
       const userDataWithTaxFilingData = await taxFilingInterface.onboarding({
         userData,
         taxId: plainTextTaxId,
         businessName,
       });
+      console.log("USER DATA WITH TAX FILING DATA", userDataWithTaxFilingData);
       const updatedUserData = await userDataClient.put(userDataWithTaxFilingData);
+      console.log("UPDATED USER DATA", updatedUserData);
       res.json(updatedUserData);
     } catch (error) {
+      console.log("ERROR", error);
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error });
     }
   });
