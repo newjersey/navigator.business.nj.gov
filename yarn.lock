@@ -5105,7 +5105,7 @@ __metadata:
     gray-matter: 4.0.3
     helmet: 7.1.0
     http-status-codes: ^2.3.0
-    husky: 9.1.6
+    husky: 9.1.7
     identity-obj-proxy: 3.0.0
     jest: 29.7.0
     jest-dynalite: 3.6.1
@@ -14528,9 +14528,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1225.0, aws-sdk@npm:^2.1404.0":
-  version: 2.1597.0
-  resolution: "aws-sdk@npm:2.1597.0"
+"aws-sdk@npm:^2.1404.0, aws-sdk@npm:^2.1692.0":
+  version: 2.1692.0
+  resolution: "aws-sdk@npm:2.1692.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -14542,7 +14542,7 @@ __metadata:
     util: ^0.12.4
     uuid: 8.0.0
     xml2js: 0.6.2
-  checksum: 4aa05944bbf14473812807684c5ba0e4b217ff53ed0717bd0014b1ec2dfa2fdcb621c255a91d81b01faf5e87a3dbc79b6e0c2b6a1113c97b9e7145c05dde87d3
+  checksum: 7b245fab02afebeb731db68feeb63c60475511a28bee3ae763c1199e4816f2b2c12315d873c93d827fef5997271d44e00c412ceab2329ca3079797429467c782
   languageName: node
   linkType: hard
 
@@ -15021,7 +15021,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"body-parser@npm:1.20.3, body-parser@npm:^1.20.0":
+"body-parser@npm:1.20.3, body-parser@npm:^1.20.3":
   version: 1.20.3
   resolution: "body-parser@npm:1.20.3"
   dependencies:
@@ -16037,7 +16037,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cli-color@npm:^2.0.1, cli-color@npm:^2.0.3, cli-color@npm:^2.0.4":
+"cli-color@npm:^2.0.1, cli-color@npm:^2.0.4":
   version: 2.0.4
   resolution: "cli-color@npm:2.0.4"
   dependencies:
@@ -16769,13 +16769,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie-parser@npm:^1.4.6":
-  version: 1.4.6
-  resolution: "cookie-parser@npm:1.4.6"
+"cookie-parser@npm:^1.4.7":
+  version: 1.4.7
+  resolution: "cookie-parser@npm:1.4.7"
   dependencies:
-    cookie: 0.4.1
+    cookie: 0.7.2
     cookie-signature: 1.0.6
-  checksum: 1e5a63aa82e8eb4e02d2977c6902983dee87b02e87ec5ec43ac3cb1e72da354003716570cd5190c0ad9e8a454c9d3237f4ad6e2f16d0902205a96a1c72b77ba5
+  checksum: 243fa13f217e793d20a57675e6552beea08c5989fcc68495d543997a31646875335e0e82d687b42dcfd466df57891d22bae7f5ba6ab33b7705ed2dd6eb989105
   languageName: node
   linkType: hard
 
@@ -16786,17 +16786,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:0.4.1":
-  version: 0.4.1
-  resolution: "cookie@npm:0.4.1"
-  checksum: bd7c47f5d94ab70ccdfe8210cde7d725880d2fcda06d8e375afbdd82de0c8d3b73541996e9ce57d35f67f672c4ee6d60208adec06b3c5fc94cebb85196084cf8
-  languageName: node
-  linkType: hard
-
 "cookie@npm:0.6.0":
   version: 0.6.0
   resolution: "cookie@npm:0.6.0"
   checksum: f56a7d32a07db5458e79c726b77e3c2eff655c36792f2b6c58d351fb5f61531e5b1ab7f46987150136e366c65213cbe31729e02a3eaed630c3bf7334635fb410
+  languageName: node
+  linkType: hard
+
+"cookie@npm:0.7.1":
+  version: 0.7.1
+  resolution: "cookie@npm:0.7.1"
+  checksum: cec5e425549b3650eb5c3498a9ba3cde0b9cd419e3b36e4b92739d30b4d89e0b678b98c1ddc209ce7cf958cd3215671fd6ac47aec21f10c2a0cc68abd399d8a7
+  languageName: node
+  linkType: hard
+
+"cookie@npm:0.7.2":
+  version: 0.7.2
+  resolution: "cookie@npm:0.7.2"
+  checksum: 9bf8555e33530affd571ea37b615ccad9b9a34febbf2c950c86787088eb00a8973690833b0f8ebd6b69b753c62669ea60cec89178c1fb007bf0749abed74f93e
   languageName: node
   linkType: hard
 
@@ -18454,22 +18461,22 @@ __metadata:
   linkType: hard
 
 "dynamodb-admin@npm:^4.6.1":
-  version: 4.6.1
-  resolution: "dynamodb-admin@npm:4.6.1"
+  version: 4.6.2
+  resolution: "dynamodb-admin@npm:4.6.2"
   dependencies:
     argparse: ^2.0.1
-    aws-sdk: ^2.1225.0
-    body-parser: ^1.20.0
-    cli-color: ^2.0.3
-    cookie-parser: ^1.4.6
-    ejs: ^3.1.8
+    aws-sdk: ^2.1692.0
+    body-parser: ^1.20.3
+    cli-color: ^2.0.4
+    cookie-parser: ^1.4.7
+    ejs: ^3.1.10
     errorhandler: ^1.5.1
-    express: ^4.18.1
+    express: ^4.21.1
     lodash.pickby: ^4.6.0
-    open: ^8.4.0
+    open: ^8.4.2
   bin:
     dynamodb-admin: bin/dynamodb-admin.js
-  checksum: 9d834eaea55146daeb0e5caf67ae10e2086d449cca6556a5e036a576a929a8f80285b9ce8f3830711a1263762589e279dbfa467620dd747fed4d30e0b55fa6d1
+  checksum: 36878036cbd7aea02038517c39ee07cc04315cdbafbd2c9fdd2b6306c35a310bb65c2ed964dca6c75bd71adc97340c74ab016f6ed1e7e8f1e81575a5ae51982e
   languageName: node
   linkType: hard
 
@@ -19771,7 +19778,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express@npm:4.20.0, express@npm:^4.17.3, express@npm:^4.18.1":
+"express@npm:4.20.0":
   version: 4.20.0
   resolution: "express@npm:4.20.0"
   dependencies:
@@ -19807,6 +19814,45 @@ __metadata:
     utils-merge: 1.0.1
     vary: ~1.1.2
   checksum: faa11bffa16be97b26d9f38187e569378c01cad0b92fbd02094fb4e35a224dc5177cc9cc6849141702da80d2d8cbe857c60a7e622e8106695405dc27e38fb3ee
+  languageName: node
+  linkType: hard
+
+"express@npm:^4.17.3, express@npm:^4.21.1":
+  version: 4.21.1
+  resolution: "express@npm:4.21.1"
+  dependencies:
+    accepts: ~1.3.8
+    array-flatten: 1.1.1
+    body-parser: 1.20.3
+    content-disposition: 0.5.4
+    content-type: ~1.0.4
+    cookie: 0.7.1
+    cookie-signature: 1.0.6
+    debug: 2.6.9
+    depd: 2.0.0
+    encodeurl: ~2.0.0
+    escape-html: ~1.0.3
+    etag: ~1.8.1
+    finalhandler: 1.3.1
+    fresh: 0.5.2
+    http-errors: 2.0.0
+    merge-descriptors: 1.0.3
+    methods: ~1.1.2
+    on-finished: 2.4.1
+    parseurl: ~1.3.3
+    path-to-regexp: 0.1.10
+    proxy-addr: ~2.0.7
+    qs: 6.13.0
+    range-parser: ~1.2.1
+    safe-buffer: 5.2.1
+    send: 0.19.0
+    serve-static: 1.16.2
+    setprototypeof: 1.2.0
+    statuses: 2.0.1
+    type-is: ~1.6.18
+    utils-merge: 1.0.1
+    vary: ~1.1.2
+  checksum: 5ac2b26d8aeddda5564fc0907227d29c100f90c0ead2ead9d474dc5108e8fb306c2de2083c4e3ba326e0906466f2b73417dbac16961f4075ff9f03785fd940fe
   languageName: node
   linkType: hard
 
@@ -20211,6 +20257,21 @@ __metadata:
     statuses: 2.0.1
     unpipe: ~1.0.0
   checksum: 92effbfd32e22a7dff2994acedbd9bcc3aa646a3e919ea6a53238090e87097f8ef07cced90aa2cc421abdf993aefbdd5b00104d55c7c5479a8d00ed105b45716
+  languageName: node
+  linkType: hard
+
+"finalhandler@npm:1.3.1":
+  version: 1.3.1
+  resolution: "finalhandler@npm:1.3.1"
+  dependencies:
+    debug: 2.6.9
+    encodeurl: ~2.0.0
+    escape-html: ~1.0.3
+    on-finished: 2.4.1
+    parseurl: ~1.3.3
+    statuses: 2.0.1
+    unpipe: ~1.0.0
+  checksum: a8c58cd97c9cd47679a870f6833a7b417043f5a288cd6af6d0f49b476c874a506100303a128b6d3b654c3d74fa4ff2ffed68a48a27e8630cda5c918f2977dcf4
   languageName: node
   linkType: hard
 
@@ -22321,12 +22382,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:9.1.6":
-  version: 9.1.6
-  resolution: "husky@npm:9.1.6"
+"husky@npm:9.1.7":
+  version: 9.1.7
+  resolution: "husky@npm:9.1.7"
   bin:
     husky: bin.js
-  checksum: 421ccd8850378231aaefd70dbe9e4f1549b84ffe3a6897f93a202242bbc04e48bd498169aef43849411105d9fcf7c192b757d42661e28d06b934a609a4eb8771
+  checksum: c2412753f15695db369634ba70f50f5c0b7e5cb13b673d0826c411ec1bd9ddef08c1dad89ea154f57da2521d2605bd64308af748749b27d08c5f563bcd89975f
   languageName: node
   linkType: hard
 
@@ -32994,6 +33055,18 @@ __metadata:
     parseurl: ~1.3.3
     send: 0.18.0
   checksum: a479dfe7e9fa7e8cb3ceccb0d944a3c72bb8f88d78472e30989f58fe15a92cfc909ab05a5c7cda2d1a6aa2663ab503ad1e2f40653740346e53e72b3ba41b6951
+  languageName: node
+  linkType: hard
+
+"serve-static@npm:1.16.2":
+  version: 1.16.2
+  resolution: "serve-static@npm:1.16.2"
+  dependencies:
+    encodeurl: ~2.0.0
+    escape-html: ~1.0.3
+    parseurl: ~1.3.3
+    send: 0.19.0
+  checksum: dffc52feb4cc5c68e66d0c7f3c1824d4e989f71050aefc9bd5f822a42c54c9b814f595fc5f2b717f4c7cc05396145f3e90422af31186a93f76cf15f707019759
   languageName: node
   linkType: hard
 
