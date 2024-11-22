@@ -15,17 +15,17 @@ sectorIds:
 icon: file-purple.svg
 urlSlug: vacant-building-fire-permit
 summaryDescriptionMd: >-
-  You need a fire permit to own a property in New Jersey if it:
+  You must have a fire permit to own a property in New Jersey if it:
 
-  * Is vacant (completely empty) or unoccupied (without tenants, but may have furniture or utilities on)
+  * is vacant (completely empty) or unoccupied (without tenants, but may have furniture or utilities on),
 
-  * Has a total floor space of 2,500 square feet or more
+  * has a total floor space of 2,500 square feet or more, and
 
-  * Will be used for commercial, industrial, or residential purposes
+  * will be used for commercial, industrial, or residential purposes
 
 
   You also need to pass an inspection to get the permit.
-issuingAgency: ""
+issuingAgency: NJ Division of Fire Safety or your local fire department
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 ---
@@ -35,8 +35,7 @@ Contact your town's `Local Enforcing Agency (LEA)|lea` to apply for the permit. 
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
-You may need to get other fire permits depending on your business activity. Check with your LEA to see what fire permits you need.
-
+This page does not list every business activity that requires a fire permit. Check with your LEA to see if you need any other fire permits.
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
