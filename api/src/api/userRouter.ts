@@ -227,13 +227,21 @@ export const userRouterFactory = (
 
       const formationFormData =
         userData.businesses[userData.currentBusinessId].formationData.formationFormData;
+
+      const location =
+        userData.businesses[userData.currentBusinessId].formationData.formationFormData.businessLocationType;
+
       const address = {
         addressLine1: formationFormData.addressLine1,
         addressLine2: formationFormData.addressLine2,
         addressCity: formationFormData.addressCity,
         addressMunicipality: formationFormData.addressMunicipality,
+        addressState: formationFormData.addressState,
+        addressCountry: formationFormData.addressCountry,
         addressZipCode: formationFormData.addressZipCode,
+        addressProvince: formationFormData.addressProvince,
       };
+
       return modifyCurrentBusiness(userData, (business) => ({
         ...business,
         formationData: {
@@ -243,6 +251,7 @@ export const userRouterFactory = (
           formationFormData: {
             ...createEmptyFormationFormData(),
             ...address,
+            businessLocationType: location,
           },
           businessNameAvailability: undefined,
           dbaBusinessNameAvailability: undefined,
@@ -250,7 +259,6 @@ export const userRouterFactory = (
         },
       }));
     }
-
     return userData;
   };
 

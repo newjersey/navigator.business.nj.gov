@@ -94,6 +94,9 @@ export interface Address {
   addressMunicipality?: Municipality;
   addressState?: StateObject;
   addressZipCode: string;
+  addressCity?: string;
+  addressProvince?: string;
+  addressCountry?: CountriesShortCodes | undefined;
 }
 
 export const emptyAddressData: Address = {
@@ -102,6 +105,9 @@ export const emptyAddressData: Address = {
   addressMunicipality: undefined,
   addressState: undefined,
   addressZipCode: "",
+  addressCity: "",
+  addressProvince: "",
+  addressCountry: undefined,
 };
 
 export interface FormationSigner {

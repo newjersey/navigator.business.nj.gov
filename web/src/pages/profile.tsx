@@ -35,12 +35,12 @@ import { SidebarPageLayout } from "@/components/njwds-layout/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
+import { ProfileAddress } from "@/components/profile/ProfileAddress";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
-import { ProfileNewJerseyAddress } from "@/components/profile/ProfileNewJerseyAddress";
 import { ProfileNoteDisclaimerForSubmittingData } from "@/components/profile/ProfileNoteForBusinessesFormedOutsideNavigator";
 import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
@@ -74,6 +74,7 @@ import {
   einTaskId,
   emptyAddressData,
   ForeignBusinessType,
+  FormationBusinessLocationType,
   formationTaskId,
   hasCompletedFormation,
   LookupLegalStructureById,
@@ -120,6 +121,10 @@ const ProfilePage = (props: Props): ReactElement => {
     profileData.foreignBusinessTypeIds
   );
   const [addressData, setAddressData] = useState(emptyAddressData);
+  const [businessLocationType, setBusinessLocationType] = useState<
+    FormationBusinessLocationType | undefined
+  >();
+
   const {
     FormFuncWrapper,
     onSubmit,
@@ -136,11 +141,12 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   useScrollToPathAnchor();
-
   useMountEffectWhenDefined(() => {
     if (business) {
       setProfileData(business.profileData);
       setShouldLockFormationFields(hasCompletedFormation(business));
+      const location = business.formationData.formationFormData.businessLocationType;
+      setBusinessLocationType(location);
     }
   }, business);
 
@@ -184,6 +190,11 @@ const ProfilePage = (props: Props): ReactElement => {
       if (!updateQueue || !business) {
         return;
       }
+      if (businessLocationType) {
+        updateQueue.queueFormationFormData({
+          businessLocationType: businessLocationType as FormationBusinessLocationType,
+        });
+      }
 
       const dateOfFormationHasBeenDeleted =
         business.profileData.dateOfFormation !== profileData.dateOfFormation &&
@@ -220,7 +231,6 @@ const ProfilePage = (props: Props): ReactElement => {
       }
 
       updateQueue.queueProfileData(profileData);
-
       updateQueue.queueFormationFormData(addressData);
 
       (async (): Promise<void> => {
@@ -361,6 +371,11 @@ const ProfilePage = (props: Props): ReactElement => {
           <NexusDBANameField />
         </ProfileField>
 
+        <ProfileAddress
+          businessLocationType={businessLocationType}
+          setBusinessLocationType={setBusinessLocationType}
+        />
+
         <ProfileField fieldName="industryId">
           <Industry />
           <NonEssentialQuestionsSection />
@@ -463,6 +478,10 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField fieldName="businessName">
           <BusinessName />
         </ProfileField>
+        <ProfileAddress
+          businessLocationType={businessLocationType}
+          setBusinessLocationType={setBusinessLocationType}
+        />
         <ProfileField fieldName="foreignBusinessTypeIds">
           <ForeignBusinessTypeField required />
         </ProfileField>
@@ -542,7 +561,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <BusinessName />
         </ProfileField>
 
-        <ProfileNewJerseyAddress />
+        <ProfileAddress businessLocationType="NJ" />
 
         <ProfileField
           fieldName="responsibleOwnerName"
@@ -705,7 +724,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <BusinessName />
         </ProfileField>
 
-        <ProfileNewJerseyAddress />
+        <ProfileAddress businessLocationType="NJ" />
 
         <ProfileField
           fieldName="responsibleOwnerName"

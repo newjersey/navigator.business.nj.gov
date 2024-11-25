@@ -4645,6 +4645,8 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - { label: "U.S. Address", name: "usAddress", widget: "string" }
+                          - { label: "International Address", name: "intlAddress", widget: "string" }
                   - label: Business Name
                     name: "businessName"
                     collapsed: true
