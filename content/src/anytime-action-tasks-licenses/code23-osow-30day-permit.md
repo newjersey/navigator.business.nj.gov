@@ -4,8 +4,16 @@ notesMd: "Draft:
   Jo/edit?tab=t.0#heading=h.vdxfup4tf9li"
 filename: code23-osow-30day-permit
 name: Apply for Your Code 23 OS/OW (30-day) Permit, if Applicable
-industryIds: []
-sectorIds: []
+industryIds:
+  - commercial-construction
+  - freight-forwarding
+  - trucking
+sectorIds:
+  - agriculture-forestry-fishing-and-hunting
+  - construction
+  - mining-quarrying-and-oil-and-gas-extraction
+  - transportation-and-warehousing
+  - manufacturing
 icon: govt-purple.svg
 urlSlug: code23-osow-30day-permit
 summaryDescriptionMd: >-
