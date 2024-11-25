@@ -14,6 +14,7 @@ licenseCertificationClassification: ""
 agencyId: nj-consumer-affairs
 divisionPhone: (973) 504-6377
 webflowId: 66e9d9648d1f1a667a8f04eb
+licenseName: "Electrologists-Premises"
 ---
 
 ## Application Requirements

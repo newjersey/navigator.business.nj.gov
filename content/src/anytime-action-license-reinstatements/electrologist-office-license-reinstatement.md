@@ -1,6 +1,6 @@
 ---
 filename: electrologist-office-license-reinstatement
-licenseName: ""
+licenseName: "Electrologists-Premises"
 name: Reinstate Your Electrologist Office Premises License
 icon: update-purple.svg
 urlSlug: electrologist-office-license-reinstatement

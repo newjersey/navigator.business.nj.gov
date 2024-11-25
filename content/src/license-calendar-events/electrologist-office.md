@@ -1,5 +1,5 @@
 ---
-licenseName: ""
+licenseName: "Electrologists-Premises"
 urlSlug: electrologist-office
 expirationEventDisplayName: Electrologist Office Premises License Expiration
 renewalEventDisplayName: Electrologist Office Premises License Renewal Deadline
