@@ -89,6 +89,14 @@ export class ProfilePage extends OnboardingPage {
   getHomeBased(radio?: boolean) {
     return cy.get(`input[name="home-based-business"]${radio === undefined ? "" : `[value="${radio}"]`}`);
   }
+
+  getTaxFilingCalendar() {
+    return cy.get('[data-testid="filings-calendar"]');
+  }
+
+  registerForTaxes() {
+    return cy.get('[data-testid="register-for-taxes"]').first().click();
+  }
 }
 
 export const onProfilePage = new ProfilePage();
