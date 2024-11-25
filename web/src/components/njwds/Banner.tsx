@@ -13,7 +13,9 @@ export const Banner = (): ReactElement => {
                 alt="NJ flag"
                 role="presentation"
               />
-              <a href="https://nj.gov">Official Site of the State of New Jersey</a>
+              <a href="https://nj.gov" target="_blank" rel="noreferrer">
+                Official Site of the State of New Jersey
+              </a>
             </div>
             <div className="flex row-desktop-column-mobile">
               <div className="margin-right-1 padding-right-1 desktop:border-right margin-y-05">
