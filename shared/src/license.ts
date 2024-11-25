@@ -90,6 +90,7 @@ export const taskIdLicenseNameMapping = {
   "apply-for-shop-license": "Cosmetology and Hairstyling-Shop",
   "appraiser-license": "Real Estate Appraisers-Appraisal Management Company",
   "architect-license": "Architecture-Certificate of Authorization",
+  "electrologist-office-license": "Electrologists-Premises",
   "health-club-registration": "Health Club Services",
   "home-health-aide-license": "Health Care Services",
   "hvac-license": "HVACR-HVACR CE Sponsor",
