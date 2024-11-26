@@ -53,6 +53,7 @@ import { migrate_v144_to_v145 } from "@db/migrations/v145_add_traveling_circus_o
 import { migrate_v145_to_v146 } from "@db/migrations/v146_remove_haserror_field_from_licensedetails";
 import { migrate_v146_to_v147 } from "@db/migrations/v147_remove_nonprofit_onboarding_field";
 import { migrate_v147_to_v148 } from "@db/migrations/v148_add_vacant_building_field";
+import { migrate_v148_to_v149 } from "@db/migrations/v149_add_environment_data";
 import { migrate_v13_to_v14 } from "@db/migrations/v14_add_cleaning_aid_industry";
 import { migrate_v14_to_v15 } from "@db/migrations/v15_add_retail_industry";
 import { migrate_v15_to_v16 } from "@db/migrations/v16_add_user_preferences";
@@ -300,6 +301,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v145_to_v146,
   migrate_v146_to_v147,
   migrate_v147_to_v148,
+  migrate_v148_to_v149,
 ];
 
-export { generatev148UserData as CURRENT_GENERATOR } from "@db/migrations/v148_add_vacant_building_field";
+export { generatev149UserData as CURRENT_GENERATOR } from "@db/migrations/v149_add_environment_data";

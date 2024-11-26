@@ -4,6 +4,10 @@ export const cmsCollections = [
     children: ["Biz Form - Config", "Biz Form - DBA Tasks", "Nexus"],
   },
   {
+    label: "🌲 ENVIRONMENTAL COMPLIANCE",
+    children: ["Env Comp - Config"],
+  },
+  {
     label: "🟧 CERTIFICATION OPPS",
     children: ["Cert Opps - Content", "Cert Opps - Archive"],
   },

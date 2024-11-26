@@ -1,0 +1,12 @@
+{
+  "id": "waste-permitting",
+  "displayname": "waste-permitting",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 20,
+      "task": "waste-permitting",
+      "required": false
+    }
+  ]
+}
