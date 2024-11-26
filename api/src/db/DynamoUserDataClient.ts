@@ -69,7 +69,8 @@ export const DynamoUserDataClient = (
     return db
       .send(new QueryCommand(params))
       .then((result) => {
-        if (!result.Items || result.Items.length !== 1) {
+        // implicitly returns only the first match if multiple matches are found
+        if (!result.Items || result.Items.length === 0) {
           return;
         }
         return doMigration(unmarshall(result.Items[0], unmarshallOptions).data);

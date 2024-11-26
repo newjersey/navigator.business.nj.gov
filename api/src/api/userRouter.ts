@@ -8,6 +8,7 @@ import {
   UserDataClient,
 } from "@domain/types";
 import { encryptTaxIdFactory } from "@domain/user/encryptTaxIdFactory";
+import type { LogWriterType } from "@libs/logWriter";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
@@ -124,10 +125,35 @@ export const userRouterFactory = (
   updateRoadmapSidebarCards: UpdateSidebarCards,
   updateOperatingPhase: UpdateOperatingPhase,
   encryptionDecryptionClient: EncryptionDecryptionClient,
-  timeStampBusinessSearch: TimeStampBusinessSearch
+  timeStampBusinessSearch: TimeStampBusinessSearch,
+  logger: LogWriterType
 ): Router => {
   const router = Router();
   const encryptTaxId = encryptTaxIdFactory(encryptionDecryptionClient);
+
+  router.post("/users/emailCheck", async (req, res) => {
+    const { email } = req.body;
+
+    const logId = logger.GetId();
+    let status;
+
+    if (email === undefined) {
+      status = StatusCodes.BAD_REQUEST;
+      res.status(status).send({ error: "`email` property required." });
+    } else {
+      const userData = await userDataClient.findByEmail(email);
+
+      if (userData) {
+        status = StatusCodes.OK;
+        res.status(status).send({ email, found: true });
+      } else {
+        status = StatusCodes.NOT_FOUND;
+        res.status(status).send({ email, found: false });
+      }
+    }
+
+    logger.LogInfo(`Email Check, - Id: ${logId}, Status: ${status}, email: ${email}`);
+  });
 
   router.get("/users/:userId", (req, res) => {
     const signedInUserId = getSignedInUserId(req);

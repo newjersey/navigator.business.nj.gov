@@ -3,6 +3,7 @@
 import { userRouterFactory } from "@api/userRouter";
 import { EncryptionDecryptionClient, TimeStampBusinessSearch, UserDataClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
+import { DummyLogWriter } from "@libs/logWriter";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
@@ -32,7 +33,7 @@ import dayjs from "dayjs";
 import { Express } from "express";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
-import request from "supertest";
+import request, { type Response } from "supertest";
 
 jest.mock("jsonwebtoken", () => {
   return {
@@ -107,7 +108,8 @@ describe("userRouter", () => {
         stubUpdateRoadmapSidebarCards,
         stubUpdateOperatingPhase,
         stubEncryptionDecryptionClient,
-        stubTimeStampBusinessSearch
+        stubTimeStampBusinessSearch,
+        DummyLogWriter
       )
     );
   });
@@ -118,7 +120,7 @@ describe("userRouter", () => {
     });
   });
 
-  describe("GET", () => {
+  describe("GET /users/:userId", () => {
     it("gets user with id", async () => {
       const userData = generateUserData({});
       stubUserDataClient.get.mockResolvedValue(userData);
@@ -704,6 +706,41 @@ describe("userRouter", () => {
           ).toEqual(true);
         });
       });
+    });
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const sendRequest = async (body: any): Promise<Response> => {
+    return request(app).post(`/users/emailCheck`).send(body);
+  };
+
+  describe("POST /users/emailCheck", () => {
+    it("is called without an email property and return an error", async () => {
+      const response = await sendRequest({ notEmail: "user@example.org" });
+
+      expect(response.status).toEqual(StatusCodes.BAD_REQUEST);
+      expect(response.body).toEqual({ error: "`email` property required." });
+    });
+
+    it("looks up a user by email that does not exist and returns an error", async () => {
+      // eslint-disable-next-line unicorn/no-useless-undefined
+      stubUserDataClient.findByEmail.mockResolvedValue(undefined);
+
+      const response = await sendRequest({ email: "user@example.org" });
+
+      expect(response.status).toEqual(StatusCodes.NOT_FOUND);
+      expect(response.body).toEqual({ email: "user@example.org", found: false });
+    });
+
+    it("looks up a user by email that does exist and returns successful", async () => {
+      const mockUser = generateUserData({});
+
+      stubUserDataClient.findByEmail.mockResolvedValue(mockUser);
+
+      const response = await sendRequest({ email: mockUser.user.email });
+
+      expect(response.status).toEqual(StatusCodes.OK);
+      expect(response.body).toEqual({ email: mockUser.user.email, found: true });
     });
   });
 
