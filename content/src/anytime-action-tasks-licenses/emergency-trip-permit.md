@@ -20,7 +20,7 @@ summaryDescriptionMd: >-
   Beverage Control (ABC) if your business:
 
 
-  * picks up or delivers alcoholic beverages into, out of, or within New Jersey 
+  * picks up or delivers alcoholic beverages into, out of, or within New Jersey
 
   * does not have an annual `transportation license or permit|transportation-license-permit`
 issuingAgency: NJ Department of Law & Public Safety, Division of Alcoholic
@@ -28,19 +28,20 @@ issuingAgency: NJ Department of Law & Public Safety, Division of Alcoholic
 callToActionText: Apply for My Emergency Trip Permit
 callToActionLink: https://www.njportal.com/abc/eps
 ---
-:::infoAlert 
- You need an emergency trip permit for each pickup or delivery in New Jersey. You do not need a permit if you are not stopping in New Jersey.
+
+:::infoAlert
+You need an emergency trip permit for each pickup or delivery in New Jersey. You do not need a permit if you are not stopping in New Jersey.
 :::
 
 ## Application Requirements
 
-* Business address
-* Driver name
-* Vehicle information (year, make, model, VIN or serial number, and license plate number)
-* Date and time of pickup or delivery
-* Name of pickup site and address
-* Name of delivery site and address
-* Applicable fees paid
+- Business address
+- Driver name
+- Vehicle information (year, make, model, VIN or serial number, and license plate number)
+- Date and time of pickup or delivery
+- Name of pickup site and address
+- Name of delivery site and address
+- Applicable fees paid
 
 The permit is valid for 24 hours from your pickup or delivery date. You can apply for the permit up to 3 days before that date.
 
@@ -54,6 +55,6 @@ A downloadable PDF copy of the emergency trip permit, which you can print out or
 
 :::callout{ showHeader="true" headerText="What happens if I don't get an emergency trip permit?" showIcon="false" calloutType="warning" }
 
-You will not be able to pick up or deliver alcoholic beverages in New Jersey. 
+You will not be able to pick up or deliver alcoholic beverages in New Jersey.
 
 :::
