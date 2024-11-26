@@ -1,16 +1,16 @@
 {
   "formation": {
     "registeredAgent": {
+      "radioButtonManualText": "Manually Identify Your Registered Agent",
+      "checkboxUnCheckedScreenReaderAnnouncement": "The Registered Agent Name and Registered Agent Email fields are now filled with the account holder information and locked",
+      "radioButtonNumberText": "Enter Your Registered Agent ID Number",
+      "noteTitle": "Note: ",
+      "sameAddressCheckbox": "The address is the same as the business location.",
+      "noteBody": "By checking this box, the account holder information will be applied to the 'Registered Agent Name' and 'Registered Agent Email' fields. These fields will be locked.",
       "label": "Registered Agent",
       "sectionDescription": "Enter your `Registered Agent's|registered-agent` ID number. If your agent did not give you this number, you can enter their name and address.",
-      "radioButtonNumberText": "Enter Your Registered Agent ID Number",
-      "radioButtonManualText": "Manually Identify Your Registered Agent",
-      "sameAddressCheckbox": "The address is the same as the business location.",
-      "sameContactCheckbox": "The agent information is the same as the account holder.",
-      "noteTitle": "Note: ",
-      "noteBody": "By checking this box, the account holder information will be applied to the 'Registered Agent Name' and 'Registered Agent Email' fields. These fields will be locked.",
-      "checkboxUnCheckedScreenReaderAnnouncement": "The Registered Agent Name and Registered Agent Email fields are now filled with the account holder information and locked",
-      "checkboxCheckedScreenReaderAnnouncement": "The Registered Agent Name and Registered Agent Email fields are now editable"
+      "checkboxCheckedScreenReaderAnnouncement": "The Registered Agent Name and Registered Agent Email fields are now editable",
+      "sameContactCheckbox": "The agent information is the same as the account holder."
     },
     "general": {
       "helpButtonText": "Help",
@@ -229,7 +229,7 @@
         "overrides": {
           "foreign": {
             "header": "Check Availability of Your Business Name",
-            "description": "Your business name must match **exactly** with the business name registered in your state of origin, you can find this on your original `Certificate of Formation|certificate-formation` . **This search tool does not register your name with the State.**\n\nCheck if your business name is available in New Jersey."
+            "description": "Your business name must match **exactly** with the business name registered in your state of origin. You can find this on your original `Certificate of Formation|certificate-formation` and your `Certificate of Good Standing|good-standing`. **This search tool does not register your name with the State.**\n\nCheck if your business name is available in New Jersey."
           }
         },
         "errorInlineEmpty": "Enter a business name to check availability.",
