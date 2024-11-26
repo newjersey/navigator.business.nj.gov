@@ -196,8 +196,8 @@
     "IBEC",
     "incentivizing",
     "CHRI",
-    "Overdimensional",
-    "Dafis"
+    "Dafis",
+    "Overdimensional"
   ],
   "ignorePaths": [
     "node_modules/**",
