@@ -35,6 +35,7 @@ import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllLicenseCalendarEvents } from "@/lib/static/loadLicenseCalendarEvents";
 import { loadAllPageMetadata } from "@/lib/static/loadPageMetadata";
 import {
+  loadAllEnvTasks,
   loadAllLicenseTasks,
   loadAllMunicipalTasks,
   loadAllRaffleBingoSteps,
@@ -74,6 +75,7 @@ interface Props {
   tasks: Task[];
   licenseTasks: Task[];
   municipalTasks: Task[];
+  envTasks: Task[];
   raffleBingoSteps: Task[];
   certifications: Certification[];
   archivedCertifications: Certification[];
@@ -100,6 +102,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [licenseTaskMatches, setLicenseTaskMatches] = useState<Match[]>([]);
   const [municipalTaskMatches, setMunicipalTaskMatches] = useState<Match[]>([]);
   const [raffleBingoStepMatches, setRaffleBingoStepMatches] = useState<Match[]>([]);
+  const [envTaskMatches, setEnvTaskMatches] = useState<Match[]>([]);
   const [certMatches, setCertMatches] = useState<Match[]>([]);
   const [certArchiveMatches, setCertArchiveMatches] = useState<Match[]>([]);
   const [fundingMatches, setFundingMatches] = useState<Match[]>([]);
@@ -142,6 +145,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     setLicenseTaskMatches(searchTasks(props.licenseTasks, lowercaseTerm));
     setMunicipalTaskMatches(searchTasks(props.municipalTasks, lowercaseTerm));
     setRaffleBingoStepMatches(searchTasks(props.raffleBingoSteps, lowercaseTerm));
+    setEnvTaskMatches(searchTasks(props.envTasks, lowercaseTerm));
     setCertMatches(searchCertifications(props.certifications, lowercaseTerm));
     setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
     setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
@@ -187,6 +191,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...licenseTaskMatches,
         ...municipalTaskMatches,
         ...raffleBingoStepMatches,
+        ...envTaskMatches,
         ...certMatches,
         ...certArchiveMatches,
         ...fundingMatches,
@@ -212,6 +217,10 @@ const SearchContentPage = (props: Props): ReactElement => {
     "License Tasks (Navigator with Webflow mappings)": licenseTaskMatches,
     "Tasks - Municipal": municipalTaskMatches,
     "Webflow Licenses": webflowLicenseMatches,
+  };
+
+  const envCollection = {
+    "Env Comp - Config": envTaskMatches,
   };
 
   const certCollection = {
@@ -268,6 +277,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         matchedCollections={{ "Biz Form - Config": [] }}
         groupedConfigMatches={groupedConfigMatches}
       />
+      <MatchCollection matchedCollections={envCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={certCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={fundingCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={roadmapsCollection} groupedConfigMatches={groupedConfigMatches} />
@@ -313,6 +323,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       licenseTasks: loadAllLicenseTasks(),
       raffleBingoSteps: loadAllRaffleBingoSteps(),
       municipalTasks: loadAllMunicipalTasks(),
+      envTasks: loadAllEnvTasks(),
       certifications: loadAllCertifications(),
       archivedCertifications: loadAllArchivedCertifications(),
       fundings: loadAllFundings(),

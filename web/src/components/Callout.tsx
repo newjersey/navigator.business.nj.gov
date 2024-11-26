@@ -9,6 +9,7 @@ interface Props {
   showHeader?: string | boolean;
   showIcon?: string | boolean;
   headerText?: string;
+  showIconInBody?: string | boolean;
 }
 
 interface CalloutMappingObj {
@@ -61,6 +62,7 @@ export const Callout = (props: PropsWithChildren<Props>): ReactNode => {
   const { Config } = useConfig();
   const showIcon = Boolean(props.showIcon ?? false);
   const showHeader = Boolean(props.showHeader ?? true);
+  const showIconInBody = Boolean(props.showIconInBody ?? false);
   let headingText = "";
 
   if (typeof props.headerText === "string" && props.headerText.length > 0) {
@@ -89,11 +91,19 @@ export const Callout = (props: PropsWithChildren<Props>): ReactNode => {
               {headingText}
             </span>
           </div>
-
-          <div className="margin-top-105 text-primary-darker">{props.children}</div>
+          {props.children && <div className="margin-top-105 text-primary-darker">{props.children}</div>}
         </>
       ) : (
-        <div className="text-primary-darker">{props.children}</div>
+        <div className="text-primary-darker flex">
+          {showIconInBody && (
+            <div
+              data-testid={getStylingForCalloutType(props.calloutType).iconStyling}
+              className={getStylingForCalloutType(props.calloutType).iconStyling}
+              aria-hidden="true"
+            />
+          )}
+          {props.children}
+        </div>
       )}
     </div>
   );

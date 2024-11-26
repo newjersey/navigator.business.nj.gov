@@ -4,6 +4,7 @@ import { TaxFilingCalendarEvent } from "../calendarEvent";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
 import { createBusinessId } from "../domain-logic/createBusinessId";
+import { EnvironmentData, WasteQuestionnaireData } from "../environment";
 import {
   createEmptyFormationFormData,
   FormationData,
@@ -343,6 +344,30 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
   };
 };
 
+export const generateWasteQuestionnaireData = (
+  overrides: Partial<WasteQuestionnaireData>
+): WasteQuestionnaireData => {
+  return {
+    hazardousMedicalWaste: false,
+    constructionDebris: false,
+    compostWaste: false,
+    treatProcessWaste: false,
+    noWaste: false,
+    ...overrides,
+  };
+};
+
+export const generateEnvironmentData = (overrides: Partial<EnvironmentData>): EnvironmentData => {
+  return {
+    waste: {
+      submitted: false,
+      questionnaireData: generateWasteQuestionnaireData({ ...overrides.waste?.questionnaireData }),
+      ...overrides.waste,
+    },
+    ...overrides,
+  };
+};
+
 export const generateBusiness = (overrides: Partial<Business>): Business => {
   const profileData = overrides.profileData ?? generateProfileData({});
   const formationData: FormationData = publicFilingLegalTypes.includes(
@@ -369,6 +394,7 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
     licenseData: generateLicenseData({}),
     preferences: generatePreferences({}),
     taxFilingData: generateTaxFilingData({}),
+    environmentData: generateEnvironmentData({}),
     profileData,
     formationData,
     ...overrides,

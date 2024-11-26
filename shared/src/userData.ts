@@ -1,5 +1,6 @@
 import { BusinessUser } from "./businessUser";
 import { createBusinessId } from "./domain-logic/createBusinessId";
+import { EnvironmentData } from "./environment";
 import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";
 import { createEmptyProfileData, ProfileData } from "./profileData";
@@ -27,9 +28,10 @@ export interface Business {
   readonly preferences: Preferences;
   readonly taxFilingData: TaxFilingData;
   readonly formationData: FormationData;
+  readonly environmentData: EnvironmentData | undefined;
 }
 
-export const CURRENT_VERSION = 148;
+export const CURRENT_VERSION = 149;
 
 export const createEmptyBusiness = (id?: string): Business => {
   return {
@@ -68,6 +70,7 @@ export const createEmptyBusiness = (id?: string): Business => {
       dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     },
+    environmentData: undefined,
   };
 };
 

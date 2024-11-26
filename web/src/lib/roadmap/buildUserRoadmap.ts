@@ -235,6 +235,10 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("short-term-rental-registration");
   }
 
+  if (industryId === "generic") {
+    addOns.push("waste-permitting");
+  }
+
   if (industry.nonEssentialQuestionsIds) {
     for (const questionId in profileData.nonEssentialRadioAnswers) {
       const addOnToAdd = getNonEssentialQuestionAddOn(questionId);
