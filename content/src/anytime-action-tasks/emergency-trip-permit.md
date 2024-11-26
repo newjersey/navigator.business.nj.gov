@@ -4,7 +4,7 @@ notesMd: >-
   draft](https://docs.google.com/document/d/1Hjs4qlCIRfOZV7svNMtloAstqp2a2UGJBt5XNnbbfao/edit)
 
 
-  Note: SME review complete. needs content review.
+  11/14/24: SME & content review completed. edits made.
 filename: emergency-trip-permit
 name: Apply for Your Emergency Trip Permit for Last-Minute Alcohol Pickups or
   Deliveries
