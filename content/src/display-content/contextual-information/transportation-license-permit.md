@@ -4,7 +4,7 @@ notesMd: >-
   ](https://docs.google.com/document/d/1Hjs4qlCIRfOZV7svNMtloAstqp2a2UGJBt5XNnbbfao/edit?usp=sharing)
 
 
-  11/26/24: decided to publish this without the bullet points for now until we hear back from SMEs. Regina will need to review the "limited transportation permit" description. 
+  11/26/24: talked w/ Product & decided to publish this without the bullet points for now until we hear back from SMEs. Regina will need to review the "limited transportation permit" description. 
 
 
   11/14/24: SME approved, but need to update limited transportation permit description. needs content review. 
