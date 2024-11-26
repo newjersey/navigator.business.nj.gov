@@ -25,9 +25,10 @@ summaryDescriptionMd: >-
 
   You also need to give your tenant(s) a copy of the completed form.
 ---
+
 ## How to Register or Update Your Registration
 
-Contact your municipal or town clerk. Each town has its own application form and process. 
+Contact your municipal or town clerk. Each town has its own application form and process.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 

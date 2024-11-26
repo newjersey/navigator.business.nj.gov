@@ -14,49 +14,126 @@ import { useRouter } from "next/router";
 import { ChangeEvent, type ReactElement, useState } from "react";
 
 interface Props {
-  anytimeActionTasks: AnytimeActionTask[];
+  anytimeActionLicensesTasks: AnytimeActionTask[];
+  anytimeActionAdminTasks: AnytimeActionTask[];
+  anytimeActionReinstatementsTasks: AnytimeActionTask[];
   anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
 }
 
 type AnytimeAction = AnytimeActionTask | AnytimeActionLink | AnytimeActionLicenseReinstatement;
-type AnytimeActionWithType = AnytimeAction & { type: string };
+type AnytimeActionWithTypeAndCategory = AnytimeAction & { type: string; category: string };
 
 export const AnytimeActionDropdown = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const [selectedAnytimeAction, setSelectedAnytimeAction] = useState<AnytimeActionWithType | undefined>(
-    undefined
-  );
+  const [selectedAnytimeAction, setSelectedAnytimeAction] = useState<
+    AnytimeActionWithTypeAndCategory | undefined
+  >(undefined);
   const router = useRouter();
   const { business } = useUserData();
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const industryId = business?.profileData.industryId;
   const sectorId = business?.profileData.sectorId;
 
-  const getApplicableAnytimeActions = (): AnytimeActionWithType[] => {
+  const alphabetizeByName = (
+    anytimeActions: AnytimeActionWithTypeAndCategory[]
+  ): AnytimeActionWithTypeAndCategory[] => {
+    return anytimeActions.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    });
+  };
+
+  const reverseAlphabetizeByCategory = (
+    anytimeActions: AnytimeActionWithTypeAndCategory[]
+  ): AnytimeActionWithTypeAndCategory[] => {
+    return anytimeActions.sort((a, b) => {
+      if (a.category < b.category) {
+        return 1;
+      }
+      if (a.category > b.category) {
+        return -1;
+      }
+      return 0;
+    });
+  };
+
+  const getApplicableAnytimeActions = (): AnytimeActionWithTypeAndCategory[] => {
     const anytimeActionLinkWithType = props.anytimeActionLinks
       .filter((action) => findMatch(action))
       .map((action) => {
-        return { ...action, type: "link" };
+        return {
+          ...action,
+          type: "link",
+          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryAdmin,
+        };
       });
-    const anytimeActionTaskWithType = props.anytimeActionTasks
+
+    const anytimeActionAdminTaskWithType = props.anytimeActionAdminTasks
       .filter((action) => findMatch(action))
       .map((action) => {
-        return { ...action, type: "task" };
+        return {
+          ...action,
+          type: "task",
+          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryAdmin,
+        };
       });
+
+    const anytimeActionAdminOrLink = [...anytimeActionLinkWithType, ...anytimeActionAdminTaskWithType];
+    alphabetizeByName(anytimeActionAdminOrLink);
+
+    const anytimeActionLicensesTaskWithType = props.anytimeActionLicensesTasks
+      .filter((action) => findMatch(action))
+      .map((action) => {
+        return {
+          ...action,
+          type: "task",
+          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryLicenses,
+        };
+      });
+
+    alphabetizeByName(anytimeActionLicensesTaskWithType);
+
     const anytimeActionLicenseReinstatementsWithType = props.anytimeActionLicenseReinstatements
       .filter((action) => licenseReinstatementMatch(action))
       .map((action) => {
-        return { ...action, type: "license" };
+        return {
+          ...action,
+          type: "license-reinstatement",
+          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryReinstatements,
+        };
       });
 
-    const applicableAnytimeActions: AnytimeActionWithType[] = [];
-    applicableAnytimeActions.push(...anytimeActionLinkWithType);
-    applicableAnytimeActions.push(...anytimeActionTaskWithType);
-    applicableAnytimeActions.push(...anytimeActionLicenseReinstatementsWithType);
-    applicableAnytimeActions.sort((a, b) => {
-      return a.name.localeCompare(b.name);
-    });
+    const anytimeActionReinstatementsWithType = props.anytimeActionReinstatementsTasks
+      .filter((action) => findMatch(action))
+      .map((action) => {
+        return {
+          ...action,
+          type: "task",
+          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryReinstatements,
+        };
+      });
+
+    const anytimeActionAllReinstatments = [
+      ...anytimeActionReinstatementsWithType,
+      ...anytimeActionLicenseReinstatementsWithType,
+    ];
+
+    alphabetizeByName(anytimeActionAllReinstatments);
+
+    const applicableAnytimeActions: AnytimeActionWithTypeAndCategory[] = [];
+
+    applicableAnytimeActions.push(...anytimeActionLicensesTaskWithType);
+    applicableAnytimeActions.push(...anytimeActionAdminOrLink);
+    applicableAnytimeActions.push(...anytimeActionAllReinstatments);
+
+    reverseAlphabetizeByCategory(applicableAnytimeActions);
+
     return applicableAnytimeActions;
   };
 
@@ -91,7 +168,10 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
     return licenseStatus === "EXPIRED";
   };
 
-  const handleChange = (event: ChangeEvent<unknown>, value: AnytimeActionWithType | null): void => {
+  const handleChange = (
+    event: ChangeEvent<unknown>,
+    value: AnytimeActionWithTypeAndCategory | null
+  ): void => {
     if (value === null) {
       setSelectedAnytimeAction(undefined);
     } else {
@@ -122,20 +202,66 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
               />
             );
           }}
-          getOptionLabel={(option: AnytimeActionWithType) => {
+          componentsProps={{
+            popper: {
+              modifiers: [
+                {
+                  name: "flip",
+                  enabled: false,
+                },
+              ],
+            },
+          }}
+          getOptionLabel={(option: AnytimeActionWithTypeAndCategory) => {
             return option.name;
           }}
           isOptionEqualToValue={(option, value) => {
             return option.name === value.name && option.filename === value.filename;
           }}
+          groupBy={(option) => option.category}
+          renderGroup={(params) => (
+            <li key={params.key} className="anytime-action-header-group">
+              <div className="text-secondary-vivid text-bold padding-left-2 ">{params.group}</div>
+              <ul className="anytime-action-dropdown-ul-list-container">{params.children}</ul>
+            </li>
+          )}
           options={getApplicableAnytimeActions()}
-          renderOption={(_props, option: AnytimeActionWithType, { selected }): ReactElement => {
+          renderOption={(
+            _props,
+            option: AnytimeActionWithTypeAndCategory,
+            { selected, inputValue }
+          ): ReactElement => {
+            let textComponent = <>{option.name}</>;
+
+            const matches = option.name.toLowerCase().indexOf(inputValue.toLowerCase());
+            if (matches >= 0) {
+              const beforeMatch = option.name.slice(0, matches);
+              const match = option.name.slice(matches, matches + inputValue.length);
+              const afterMatch = option.name.slice(matches + inputValue.length);
+
+              textComponent = (
+                <>
+                  {beforeMatch}
+                  <span className="text-bold">{match}</span>
+                  {afterMatch}
+                </>
+              );
+            }
+
+            const newClassName = `anytime-action-dropdown-option padding-y-1 padding-left-2 ${
+              selected ? "bg-accent-cool-lightest" : ""
+            }`;
+            const newProps = {
+              ..._props,
+              className: newClassName,
+            };
+
             return (
-              <li {..._props} key={option.filename}>
+              <li {...newProps} key={option.filename}>
                 {selected ? (
-                  <MenuOptionSelected>{option.name}</MenuOptionSelected>
+                  <MenuOptionSelected>{textComponent}</MenuOptionSelected>
                 ) : (
-                  <MenuOptionUnselected>{option.name}</MenuOptionUnselected>
+                  <MenuOptionUnselected>{textComponent}</MenuOptionUnselected>
                 )}
               </li>
             );
@@ -166,7 +292,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
                     `${ROUTES.anytimeActions}/${(selectedAnytimeAction as AnytimeActionTask).urlSlug}`
                   );
                 }
-                if (selectedAnytimeAction.type === "license") {
+                if (selectedAnytimeAction.type === "license-reinstatement") {
                   router.push(
                     `${ROUTES.licenseReinstatement}/${
                       (selectedAnytimeAction as AnytimeActionLicenseReinstatement).urlSlug

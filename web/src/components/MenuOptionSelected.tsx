@@ -10,7 +10,7 @@ export const MenuOptionSelected = (props: Props): ReactElement => {
   return (
     <>
       <div className="flex flex-row">
-        <div className="padding-right-05">
+        <div className="padding-right-05 flex fac">
           <Icon iconName="check" />
         </div>
         <div className="text-bold" data-testid="option">

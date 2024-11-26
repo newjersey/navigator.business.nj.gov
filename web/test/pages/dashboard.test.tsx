@@ -69,7 +69,9 @@ describe("dashboard page", () => {
           certifications={[]}
           municipalities={[]}
           anytimeActionLinks={[]}
-          anytimeActionTasks={[]}
+          anytimeActionAdminTasks={[]}
+          anytimeActionLicensesTasks={[]}
+          anytimeActionReinstatementsTasks={[]}
           anytimeActionLicenseReinstatements={[]}
           licenseEvents={[]}
         />
@@ -90,7 +92,9 @@ describe("dashboard page", () => {
             certifications={[]}
             municipalities={[]}
             anytimeActionLinks={[]}
-            anytimeActionTasks={[]}
+            anytimeActionAdminTasks={[]}
+            anytimeActionLicensesTasks={[]}
+            anytimeActionReinstatementsTasks={[]}
             anytimeActionLicenseReinstatements={[]}
             licenseEvents={[]}
           />

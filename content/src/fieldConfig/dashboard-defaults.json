@@ -15,6 +15,9 @@
   "dashboardAnytimeActionDefaults": {
     "defaultHeaderText": "Manage My Business",
     "defaultAutocompleteHeaderText": "Complete these common tasks for your business at anytime.",
-    "anytimeActionPageButtonText": "Start Now"
+    "anytimeActionPageButtonText": "Start Now",
+    "anytimeActionDropdownCategoryAdmin": "Administrative Tasks",
+    "anytimeActionDropdownCategoryLicenses": "Permits, Licenses, and Certifications",
+    "anytimeActionDropdownCategoryReinstatements": "Reinstatements"
   }
 }

@@ -94,14 +94,18 @@ describe("<DashboardOnMobile />", () => {
     sidebarDisplayContent,
     operateReferences,
     anytimeActionLinks,
-    anytimeActionTask,
+    anytimeActionAdminTask,
+    anytimeActionLicensesTask,
+    anytimeActionReinstatementsTask,
     anytimeActionLicenseReinstatements,
     licenseEvents,
   }: {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     operateReferences?: Record<string, OperateReference>;
     anytimeActionLinks?: AnytimeActionLink[];
-    anytimeActionTask?: AnytimeActionTask[];
+    anytimeActionAdminTask?: AnytimeActionTask[];
+    anytimeActionLicensesTask?: AnytimeActionTask[];
+    anytimeActionReinstatementsTask?: AnytimeActionTask[];
     anytimeActionLicenseReinstatements?: AnytimeActionLicenseReinstatement[];
     licenseEvents?: LicenseEventType[];
   }): void => {
@@ -113,7 +117,9 @@ describe("<DashboardOnMobile />", () => {
           fundings={[]}
           certifications={[]}
           anytimeActionLinks={anytimeActionLinks ?? []}
-          anytimeActionTasks={anytimeActionTask ?? []}
+          anytimeActionAdminTasks={anytimeActionAdminTask ?? []}
+          anytimeActionLicensesTasks={anytimeActionLicensesTask ?? []}
+          anytimeActionReinstatementsTasks={anytimeActionReinstatementsTask ?? []}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatements ?? []}
           licenseEvents={licenseEvents ?? []}
         />
@@ -133,7 +139,9 @@ describe("<DashboardOnMobile />", () => {
             fundings={[]}
             certifications={[]}
             anytimeActionLinks={[]}
-            anytimeActionTasks={[]}
+            anytimeActionAdminTasks={[]}
+            anytimeActionLicensesTasks={[]}
+            anytimeActionReinstatementsTasks={[]}
             anytimeActionLicenseReinstatements={[]}
             licenseEvents={[]}
           />
@@ -454,7 +462,9 @@ describe("<DashboardOnMobile />", () => {
         useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
         renderDashboardComponent({
           anytimeActionLinks: [generateAnytimeActionLink({})],
-          anytimeActionTask: [generateAnytimeActionTask({})],
+          anytimeActionAdminTask: [generateAnytimeActionTask({})],
+          anytimeActionLicensesTask: [generateAnytimeActionTask({})],
+          anytimeActionReinstatementsTask: [generateAnytimeActionTask({})],
         });
 
         expect(screen.queryByTestId("anytimeActionDropdown")).not.toBeInTheDocument();
@@ -465,7 +475,9 @@ describe("<DashboardOnMobile />", () => {
       useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
       renderDashboardComponent({
         anytimeActionLinks: [generateAnytimeActionLink({})],
-        anytimeActionTask: [generateAnytimeActionTask({})],
+        anytimeActionAdminTask: [generateAnytimeActionTask({})],
+        anytimeActionLicensesTask: [generateAnytimeActionTask({})],
+        anytimeActionReinstatementsTask: [generateAnytimeActionTask({})],
       });
 
       expect(screen.getByTestId("anytimeActionDropdown")).toBeInTheDocument();

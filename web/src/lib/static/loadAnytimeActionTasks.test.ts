@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import {
   loadAllAnytimeActionTasks,
   loadAllAnytimeActionTaskUrlSlugs,
@@ -14,6 +17,10 @@ jest.mock("process", () => ({
 
 describe("loadAnytimeActionTasks", () => {
   let mockedFs: jest.Mocked<typeof fs>;
+
+  const adminFolder = ["opp1.md"];
+  const licensesFolder = ["opp2.md"];
+  const reinstatementsFolder = ["opp3.md"];
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -46,11 +53,33 @@ describe("loadAnytimeActionTasks", () => {
         "---\n" +
         "Some content description 2";
 
-      mockReadDirReturn({ value: ["opp1.md", "opp2.md"], mockedFs });
-      mockedFs.readFileSync.mockReturnValueOnce(anytimeActionTask1).mockReturnValueOnce(anytimeActionTask2);
+      const anytimeActionTask3 =
+        "---\n" +
+        "filename: some filename 3\n" +
+        "name: anytime action task name3\n" +
+        "icon: test3.svg\n" +
+        "urlSlug: urlslug3\n" +
+        "callToActionLink: CallToActionLink3\n" +
+        "callToActionText: CallToActionText3\n" +
+        "form: Form3\n" +
+        "---\n" +
+        "Some content description 3";
 
-      const anytimeActionTasks = await loadAllAnytimeActionTasks();
-      expect(anytimeActionTasks).toHaveLength(2);
+      mockedFs.readdirSync
+        // @ts-ignore
+        .mockReturnValueOnce(adminFolder)
+        // @ts-ignore
+        .mockReturnValueOnce(licensesFolder)
+        // @ts-ignore
+        .mockReturnValueOnce(reinstatementsFolder);
+
+      mockedFs.readFileSync
+        .mockReturnValueOnce(anytimeActionTask1)
+        .mockReturnValueOnce(anytimeActionTask2)
+        .mockReturnValueOnce(anytimeActionTask3);
+
+      const anytimeActionTasks = loadAllAnytimeActionTasks();
+      expect(anytimeActionTasks).toHaveLength(3);
       expect(anytimeActionTasks).toEqual(
         expect.arrayContaining([
           {
@@ -72,6 +101,16 @@ describe("loadAnytimeActionTasks", () => {
             callToActionLink: "CallToActionLink2",
             callToActionText: "CallToActionText2",
             form: "Form2",
+          },
+          {
+            name: "anytime action task name3",
+            icon: "test3.svg",
+            filename: "some filename 3",
+            urlSlug: "urlslug3",
+            contentMd: "Some content description 3",
+            callToActionLink: "CallToActionLink3",
+            callToActionText: "CallToActionText3",
+            form: "Form3",
           },
         ])
       );
@@ -104,10 +143,18 @@ describe("loadAnytimeActionTasks", () => {
         "---\n" +
         "Some content description 2";
 
-      mockReadDirReturn({ value: ["opp1.md", "opp2.md"], mockedFs });
+      mockedFs.readdirSync
+        // @ts-ignore
+        .mockReturnValueOnce(adminFolder)
+        // @ts-ignore
+        .mockReturnValueOnce(licensesFolder)
+        // @ts-ignore
+        .mockReturnValueOnce(reinstatementsFolder);
+
       mockedFs.readFileSync
-        .mockReturnValueOnce(anytimeActionTask1) // read first file in list
-        .mockReturnValueOnce(anytimeActionTask2) // read second file in list
+        .mockReturnValueOnce(anytimeActionTask1) // read for admin
+        .mockReturnValueOnce(anytimeActionTask2) // read for licenses
+        .mockReturnValueOnce(anytimeActionTask2) // read for reinstatements
         .mockReturnValueOnce(anytimeActionTask2); // read file once we found the match
 
       const anytimeActionTask = loadAnytimeActionTaskByUrlSlug("urlslug2");
@@ -167,7 +214,9 @@ describe("loadAnytimeActionTasks", () => {
         .mockReturnValueOnce(anytimeActionTask2)
         .mockReturnValueOnce(anytimeActionTask3);
 
-      mockReadDirReturn({ value: ["qa1.md", "qa2.md", "qa3.md"], mockedFs });
+      mockReadDirReturn({ value: ["qa1.md"], mockedFs });
+      mockReadDirReturn({ value: ["qa2.md"], mockedFs });
+      mockReadDirReturn({ value: ["qa3.md"], mockedFs });
 
       const anytimeActionsByUrlSlug = loadAllAnytimeActionTaskUrlSlugs();
       expect(anytimeActionsByUrlSlug).toHaveLength(3);

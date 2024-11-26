@@ -96,7 +96,9 @@ const CMS = dynamic(
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
 
       // ----- Anytime Actions -----
-      registerPreview(CMS, "anytime-action-tasks", AnytimeActionTaskPreview);
+      registerPreview(CMS, "anytime-action-tasks-admin", AnytimeActionTaskPreview);
+      registerPreview(CMS, "anytime-action-tasks-licenses", AnytimeActionTaskPreview);
+      registerPreview(CMS, "anytime-action-tasks-reinstatements", AnytimeActionTaskPreview);
       registerPreview(CMS, "anytime-action-license-reinstatements", AnytimeActionLicenseReinstatementPreview);
 
       // ----- Roadmap Sidebar Card -----

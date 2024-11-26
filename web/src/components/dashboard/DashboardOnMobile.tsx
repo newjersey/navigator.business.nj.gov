@@ -28,7 +28,9 @@ import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
 interface Props {
-  anytimeActionTasks: AnytimeActionTask[];
+  anytimeActionLicensesTasks: AnytimeActionTask[];
+  anytimeActionAdminTasks: AnytimeActionTask[];
+  anytimeActionReinstatementsTasks: AnytimeActionTask[];
   anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   displayContent: RoadmapDisplayContent;
@@ -68,7 +70,9 @@ export const DashboardOnMobile = (props: Props): ReactElement => {
 
               {operatingPhase.displayAnytimeActions && (
                 <AnytimeActionDropdown
-                  anytimeActionTasks={props.anytimeActionTasks}
+                  anytimeActionLicensesTasks={props.anytimeActionLicensesTasks}
+                  anytimeActionAdminTasks={props.anytimeActionAdminTasks}
+                  anytimeActionReinstatementsTasks={props.anytimeActionReinstatementsTasks}
                   anytimeActionLinks={props.anytimeActionLinks}
                   anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
                 />

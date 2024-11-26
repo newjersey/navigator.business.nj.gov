@@ -21,6 +21,7 @@ issuingAgency: NJ Division of Fire Safety or your local fire department
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 ---
+
 ## How to Apply
 
 Contact your town's `Local Enforcing Agency (LEA)|lea` to see if you need a permit and how to apply. Your LEA can be the local fire department or the New Jersey Division of Fire Safety.

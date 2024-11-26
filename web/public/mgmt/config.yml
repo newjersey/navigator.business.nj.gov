@@ -3383,6 +3383,21 @@ collections:
                   widget: string,
                 }
               - { label: Anytime Action Page Button Text, name: anytimeActionPageButtonText, widget: string }
+              - {
+                  label: Anytime Action Dropdown Category - Admin,
+                  name: anytimeActionDropdownCategoryAdmin,
+                  widget: string,
+                }
+              - {
+                  label: Anytime Action Dropdown Category - Licenses,
+                  name: anytimeActionDropdownCategoryLicenses,
+                  widget: string,
+                }
+              - {
+                  label: Anytime Action Dropdown Category - Reinstatements,
+                  name: anytimeActionDropdownCategoryReinstatements,
+                  widget: string,
+                }
       - label: "Snackbars"
         name: "dashboard-config-snackbars"
         file: "content/src/fieldConfig/dashboard-snackbars.json"
@@ -3595,9 +3610,137 @@ collections:
     fields:
       - { name: "" }
 
-  - name: "anytime-action-tasks"
-    label: "Anytime Action With Details Page"
-    folder: "content/src/anytime-action-tasks"
+  - name: "anytime-action-tasks-licenses"
+    label: "Anytime Actions (Licenses)"
+    folder: "content/src/anytime-action-tasks-licenses"
+    summary: "{{filename}} - {{name}}"
+    identifier_field: "{{filename}}"
+    slug: "{{fields.filename}}"
+    delete: true
+    sortable_fields: ["name", "filename"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "Filename (disabled after file creation)",
+          name: "filename",
+          widget: "write-once-read-only-no-space",
+          required: true,
+        }
+      - { label: "Name/Title", name: "name", widget: "string" }
+      - {
+          label: "Apply to all - overrides industry and sector dropdown",
+          name: "applyToAllUsers",
+          widget: "boolean",
+          required: false,
+        }
+      - label: Apply to industries
+        name: industryIds
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "roadmaps"
+        search_fields: ["name"]
+        value_field: "{{id}}"
+        display_fields: ["{{name}}"]
+        options_length: 500
+      - label: Apply to sectors
+        name: sectorIds
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "mappings"
+        search_fields: ["arrayOfSectors.*.name"]
+        value_field: "arrayOfSectors.*.id"
+        display_fields: ["arrayOfSectors.*.name"]
+        options_length: 500
+      - label: "Icon"
+        name: icon
+        widget: "relation"
+        multiple: false
+        required: true
+        collection: "mappings"
+        search_fields: ["anytimeActionIcons.*.name"]
+        value_field: "anytimeActionIcons.*.filename"
+        display_fields: ["anytimeActionIcons.*.name"]
+      - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "no-space", required: true }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+      - { label: "Content", name: "body", widget: "markdown", required: true }
+      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+
+  - name: "anytime-action-tasks-reinstatements"
+    label: "Anytime Actions (Reinstatements)"
+    folder: "content/src/anytime-action-tasks-reinstatements"
+    summary: "{{filename}} - {{name}}"
+    identifier_field: "{{filename}}"
+    slug: "{{fields.filename}}"
+    delete: true
+    sortable_fields: ["name", "filename"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "Filename (disabled after file creation)",
+          name: "filename",
+          widget: "write-once-read-only-no-space",
+          required: true,
+        }
+      - { label: "Name/Title", name: "name", widget: "string" }
+      - {
+          label: "Apply to all - overrides industry and sector dropdown",
+          name: "applyToAllUsers",
+          widget: "boolean",
+          required: false,
+        }
+      - label: Apply to industries
+        name: industryIds
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "roadmaps"
+        search_fields: ["name"]
+        value_field: "{{id}}"
+        display_fields: ["{{name}}"]
+        options_length: 500
+      - label: Apply to sectors
+        name: sectorIds
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "mappings"
+        search_fields: ["arrayOfSectors.*.name"]
+        value_field: "arrayOfSectors.*.id"
+        display_fields: ["arrayOfSectors.*.name"]
+        options_length: 500
+      - label: "Icon"
+        name: icon
+        widget: "relation"
+        multiple: false
+        required: true
+        collection: "mappings"
+        search_fields: ["anytimeActionIcons.*.name"]
+        value_field: "anytimeActionIcons.*.filename"
+        display_fields: ["anytimeActionIcons.*.name"]
+      - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "no-space", required: true }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+      - { label: "Content", name: "body", widget: "markdown", required: true }
+      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+
+  - name: "anytime-action-tasks-admin"
+    label: "Anytime Actions (Admin)"
+    folder: "content/src/anytime-action-tasks-admin"
     summary: "{{filename}} - {{name}}"
     identifier_field: "{{filename}}"
     slug: "{{fields.filename}}"

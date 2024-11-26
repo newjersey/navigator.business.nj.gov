@@ -22,8 +22,11 @@ type Story = StoryObj<typeof AnytimeActionDropdown>;
 
 export const AnytimeAction: Story = {
   args: {
-    anytimeActionTasks: [
-      generateAnytimeActionTask({ icon: "loop.svg", name: "Some Anytime Action Text - Task" }),
+    anytimeActionAdminTasks: [
+      generateAnytimeActionTask({ icon: "loop.svg", name: "Some Anytime Action Text - Licenses Task" }),
+    ],
+    anytimeActionLicensesTasks: [
+      generateAnytimeActionTask({ icon: "loop.svg", name: "Some Anytime Action Text - Admin Task" }),
     ],
     anytimeActionLinks: [
       generateAnytimeActionLink({ icon: "loop.svg", name: "Some Anytime Action Text - Link" }),

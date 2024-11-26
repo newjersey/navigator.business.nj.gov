@@ -19,16 +19,17 @@ issuingAgency: NJ Division of Consumer Affairs, New Jersey Drug Control Unit
 callToActionText: "Reinstate My CDS Registration "
 callToActionLink: https://www.njconsumeraffairs.gov/dcu/Pages/applications.aspx
 ---
+
 ## Application Requirements
 
-* New Jersey business address where substances will be stored, prescribed, or dispensed (must match your DEA registration address)
-* Schedule(s) of the controlled dangerous substances
-* Current and active professional license number (Certified Nurse Midwives must include their prescriptive authority suffix)
-* Social Security number
-* CDS registration number
-* DEA registration number
-* Signed attestation (included in application)
-* Applicable fees paid, once the NJ DCU has sent an invoice
+- New Jersey business address where substances will be stored, prescribed, or dispensed (must match your DEA registration address)
+- Schedule(s) of the controlled dangerous substances
+- Current and active professional license number (Certified Nurse Midwives must include their prescriptive authority suffix)
+- Social Security number
+- CDS registration number
+- DEA registration number
+- Signed attestation (included in application)
+- Applicable fees paid, once the NJ DCU has sent an invoice
 
 Your reinstatement application must be signed in front of and by a notary public.\
 \
