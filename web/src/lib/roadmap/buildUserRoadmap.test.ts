@@ -672,6 +672,13 @@ describe("buildUserRoadmap", () => {
         );
       });
     });
+
+    describe("all other industries", () => {
+      it("adds on the waste-permitting task", () => {
+        buildUserRoadmap(generateStartingProfile({ industryId: "generic" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("waste-permitting");
+      });
+    });
   });
 
   describe("municipality", () => {

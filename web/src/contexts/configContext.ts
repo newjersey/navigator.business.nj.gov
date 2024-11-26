@@ -32,6 +32,7 @@ import * as Profile from "@businessnjgovnavigator/content/fieldConfig/profile.js
 import * as StarterKits from "@businessnjgovnavigator/content/fieldConfig/starter-kits.json";
 import * as TaxAccess from "@businessnjgovnavigator/content/fieldConfig/tax-access-modal.json";
 import * as Tax from "@businessnjgovnavigator/content/fieldConfig/tax.json";
+import * as WasteQuestionnairePage from "@businessnjgovnavigator/content/fieldConfig/waste-questionnaire-page.json";
 import * as CalloutAlerts from "@businessnjgovnavigator/content/mappings/callout-alerts.json";
 import * as PageMetadata from "@businessnjgovnavigator/content/page-metadata/page-metadata.json";
 
@@ -78,7 +79,8 @@ const merged = JSON.parse(
       StarterKits,
       HousingRegistrationSearchTask,
       anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
-      CalloutAlerts
+      CalloutAlerts,
+      WasteQuestionnairePage
     )
   )
 );
@@ -120,7 +122,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof StarterKits &
   typeof HousingRegistrationSearchTask &
   typeof anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults &
-  typeof CalloutAlerts;
+  typeof CalloutAlerts &
+  typeof WasteQuestionnairePage;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -158,7 +161,8 @@ export const getMergedConfig = (): ConfigType => {
     StarterKits,
     HousingRegistrationSearchTask,
     anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
-    CalloutAlerts
+    CalloutAlerts,
+    WasteQuestionnairePage
   );
 };
 

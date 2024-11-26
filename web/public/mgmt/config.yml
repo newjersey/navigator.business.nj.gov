@@ -1183,6 +1183,84 @@ collections:
               - { label: CTA Modal Body, name: dbaCtaModalBody, widget: markdown }
               - { label: CTA Modal Continue Button, name: dbaCtaModalContinueButtonText, widget: string }
               - { label: CTA Modal Cancel Button, name: dbaCtaModalCancelButtonText, widget: string }
+
+  - name: "environmental-compliance-label"
+    label: "🌲 ENVIRONMENTAL COMPLIANCE"
+    folder: "content/src"
+    fields:
+      - { name: "" }
+
+  - name: "environmental-compliance-section"
+    label: "Env Comp - Config"
+    files:
+      - label: "Waste Questionnaire Task"
+        name: "waste-questionnaire-task"
+        file: content/src/fieldConfig/waste-questionnaire-page.json
+        editor:
+          preview: false
+        fields:
+          - label: Waste Questionnaire Page Config
+            name: wasteQuestionnaireQuestionsPage
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: text }
+              - { label: Question, name: question, widget: string }
+              - { label: Footer, name: footer, widget: markdown }
+              - { label: Button Text, name: buttonText, widget: string }
+              - { label: Error Text, name: errorText, widget: string }
+              - label: Waste Options
+                name: wasteQuestionnaireOptions
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Hazardous Medical Waste Option, name: hazardousMedicalWaste, widget: text }
+                  - { label: Compost Waste Option, name: compostWaste, widget: text }
+                  - { label: Treat Process Waste Option, name: treatProcessWaste, widget: text }
+                  - { label: Construction Debris Option, name: constructionDebris, widget: text }
+                  - { label: No Waste Option, name: noWaste, widget: text }
+          - label: Waste Results Page Config
+            name: wasteQuestionnaireResultsPage
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: text }
+              - { label: Edit Info, name: editInfo, widget: string }
+              - { label: Edit Text, name: editText, widget: string }
+              - { label: Summary, name: summary, widget: string }
+              - label: Personalized Support
+                name: personalizedSupport
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Title, name: title, widget: text }
+                  - { label: Body, name: body, widget: markdown }
+                  - { label: Contact, name: contact, widget: text }
+              - label: Contact DEP
+                name: contactDep
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Title, name: title, widget: text }
+                  - { label: Heading, name: heading, widget: text }
+                  - { label: Body, name: body, widget: markdown }
+                  - { label: Contact, name: contact, widget: text }
+              - label: See Your Responses
+                name: seeYourResponses
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Title, name: title, widget: text }
+              - label: Low Applicability
+                name: lowApplicability
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Summary Line 1, name: summaryLine1, widget: text }
+                  - { label: Summary Line 2, name: summaryLine2, widget: markdown }
+                  - { label: Callout, name: callout, widget: text }
+                  - { label: Callout Redo Prompt, name: calloutRedo, widget: text }
+
   - name: "certification-label"
     label: "🟧 CERTIFICATION OPPS"
     folder: "content/src"

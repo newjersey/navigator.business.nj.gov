@@ -136,6 +136,7 @@ describe("loadTasks", () => {
       mockReadDirReturnOnce({ value: ["license1.md"], mockedFs });
       mockReadDirReturnOnce({ value: ["step1.md"], mockedFs });
       mockReadDirReturnOnce({ value: [], mockedFs });
+      mockReadDirReturnOnce({ value: [], mockedFs });
 
       const allTaskUrlSlugs = loadAllTaskUrlSlugs();
       expect(allTaskUrlSlugs).toHaveLength(4);

@@ -28,6 +28,7 @@ export const ApiFormationHealth: UserData = {
       taskProgress: {},
       taskItemChecklist: {},
       licenseData: undefined,
+      environmentData: undefined,
       preferences: {
         roadmapOpenSections: ["PLAN", "START", "DOMESTIC_EMPLOYER_SECTION"],
         roadmapOpenSteps: [18013808],
