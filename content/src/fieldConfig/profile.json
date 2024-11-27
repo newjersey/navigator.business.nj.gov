@@ -71,6 +71,13 @@
           "description": "Do you own and/or operate a traveling carnival or circus?"
         }
       },
+      "vacantPropertyOwner": {
+        "default": {
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Do you own a vacant or unoccupied property in New Jersey with a total floor space of 2,500 square feet or more?"
+        }
+      },
       "taxId": {
         "default": {
           "header": "New Jersey Tax ID",

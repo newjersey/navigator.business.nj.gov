@@ -104,6 +104,7 @@ export const ApiFormationHealth: UserData = {
         propertyLeaseType: undefined,
         hasThreeOrMoreRentalUnits: undefined,
         travelingCircusOrCarnivalOwningBusiness: undefined,
+        vacantPropertyOwner: undefined,
       },
       formationData: {
         formationResponse: undefined,

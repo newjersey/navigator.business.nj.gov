@@ -7,11 +7,6 @@ notesMd: >-
   NOTE: Approved by SME 11/7
 filename: vacant-building-fire-permit
 name: Get a Fire Permit for Your Vacant or Unoccupied Property
-industryIds:
-  - real-estate-investor
-  - residential-landlord
-sectorIds:
-  - real-estate
 icon: file-purple.svg
 urlSlug: vacant-building-fire-permit
 summaryDescriptionMd: >-

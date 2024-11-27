@@ -325,6 +325,11 @@ const ProfilePage = (props: Props): ReactElement => {
     );
   };
 
+  const displayVacantBuildingOwnerQuestion = (): boolean => {
+    if (!business) return false;
+    return profileData.industryId === "real-estate-investor" || profileData.sectorId === "real-estate";
+  };
+
   const displayRaffleBingoGameQuestion = (): boolean => {
     if (!business) return false;
     return profileData.legalStructureId === "nonprofit";
@@ -742,6 +747,15 @@ const ProfilePage = (props: Props): ReactElement => {
             fieldName={"travelingCircusOrCarnivalOwningBusiness"}
             choices={[true, false]}
           />
+        </ProfileField>
+
+        <ProfileField
+          fieldName="vacantPropertyOwner"
+          isVisible={displayVacantBuildingOwnerQuestion()}
+          hideHeader={true}
+          boldAltDescription={true}
+        >
+          <RadioQuestion<boolean> fieldName={"vacantPropertyOwner"} choices={[true, false]} />
         </ProfileField>
 
         <ProfileField

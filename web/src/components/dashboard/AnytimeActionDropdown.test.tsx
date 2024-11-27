@@ -435,5 +435,105 @@ describe("<AnytimeActionDropdown />", () => {
 
       expect(screen.queryByText("license - hvac-reinstatement")).not.toBeInTheDocument();
     });
+
+    it("adds vacant property anytime action for vacant property owners", () => {
+      anytimeActionAdminTasks = [
+        generateAnytimeActionTask({ filename: "vacant-building-fire-permit" }),
+        ...anytimeActionAdminTasks,
+      ];
+      useMockBusiness({
+        profileData: generateProfileData({
+          vacantPropertyOwner: false,
+        }),
+      });
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.queryByTestId("vacant-building-fire-permit-option")).not.toBeInTheDocument();
+
+      useMockBusiness({
+        profileData: generateProfileData({
+          vacantPropertyOwner: true,
+        }),
+      });
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.getByTestId("vacant-building-fire-permit-option")).toBeInTheDocument();
+    });
+
+    it("adds fire carnival modification for carnival ride owning businesses", () => {
+      anytimeActionAdminTasks = [
+        generateAnytimeActionTask({ filename: "carnival-ride-supplemental-modification" }),
+        ...anytimeActionAdminTasks,
+      ];
+      useMockBusiness({
+        profileData: generateProfileData({
+          carnivalRideOwningBusiness: false,
+        }),
+      });
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.queryByTestId("carnival-ride-supplemental-modification-option")).not.toBeInTheDocument();
+
+      useMockBusiness({
+        profileData: generateProfileData({
+          carnivalRideOwningBusiness: true,
+        }),
+      });
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.getByTestId("carnival-ride-supplemental-modification-option")).toBeInTheDocument();
+    });
+
+    it("adds operating carnival fire permit for carnvial owning businesses", () => {
+      anytimeActionAdminTasks = [
+        generateAnytimeActionTask({ filename: "operating-carnival-fire-permit" }),
+        ...anytimeActionAdminTasks,
+      ];
+      useMockBusiness({
+        profileData: generateProfileData({
+          carnivalRideOwningBusiness: false,
+          travelingCircusOrCarnivalOwningBusiness: false,
+        }),
+      });
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.queryByTestId("operating-carnival-fire-permit-option")).not.toBeInTheDocument();
+
+      useMockBusiness({
+        profileData: generateProfileData({
+          carnivalRideOwningBusiness: true,
+          travelingCircusOrCarnivalOwningBusiness: false,
+        }),
+      });
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.getByTestId("operating-carnival-fire-permit-option")).toBeInTheDocument();
+    });
+
+    it("adds operating carnival fire permit for traveling circus or carnival owning businesses", () => {
+      anytimeActionAdminTasks = [
+        generateAnytimeActionTask({ filename: "operating-carnival-fire-permit" }),
+        ...anytimeActionAdminTasks,
+      ];
+      useMockBusiness({
+        profileData: generateProfileData({
+          carnivalRideOwningBusiness: false,
+          travelingCircusOrCarnivalOwningBusiness: false,
+        }),
+      });
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.queryByTestId("operating-carnival-fire-permit-option")).not.toBeInTheDocument();
+
+      useMockBusiness({
+        profileData: generateProfileData({
+          carnivalRideOwningBusiness: false,
+          travelingCircusOrCarnivalOwningBusiness: true,
+        }),
+      });
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.getByTestId("operating-carnival-fire-permit-option")).toBeInTheDocument();
+    });
   });
 });
