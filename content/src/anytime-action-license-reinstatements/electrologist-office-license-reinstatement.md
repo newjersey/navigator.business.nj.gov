@@ -1,6 +1,6 @@
 ---
 filename: electrologist-office-license-reinstatement
-licenseName: "Electrologists-Premises"
+licenseName: Electrologists-Premises
 name: Reinstate Your Electrologist Office Premises License
 icon: update-purple.svg
 urlSlug: electrologist-office-license-reinstatement
@@ -24,4 +24,4 @@ callToActionLink: https://www.njconsumeraffairs.gov/eac/Applications/Application
 - Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
-The same license number
+The same license number.
