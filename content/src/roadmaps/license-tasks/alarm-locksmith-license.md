@@ -37,13 +37,13 @@ webflowId: 6721493dfeaa4e04016c605b
 * Criminal background check
 * Applicable fees paid
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
 
 You can't work as a locksmith or install, service, or maintain burglar alarms, fire alarms, or electronic security systems in New Jersey.
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
 A license number.
 
