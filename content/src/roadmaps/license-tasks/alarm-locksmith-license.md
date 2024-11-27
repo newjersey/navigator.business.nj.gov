@@ -43,7 +43,7 @@ You can't work as a locksmith or install, service, or maintain burglar alarms, f
 
 :::
 
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="warning" }
 
 A license number.
 
