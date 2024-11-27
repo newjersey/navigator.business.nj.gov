@@ -27,12 +27,11 @@ webflowId: 6721493dfeaa4e04016c605b
 
 ## Application Requirements
 
-* Applicant's name, date of birth, home address, and principal business address
 * Social Security number
 * Citizenship/immigration status
 * Child support information, if applicable
 * History of drug use, if applicable
-* List of all criminal offenses of which the applicant has been convicted (if applicable)
+* List of all criminal offenses of which the applicant has been convicted, if applicable
 * History of disciplinary actions and suspended licenses, if applicable
 * Copy of high school diploma or its equivalent
 * Criminal background check
