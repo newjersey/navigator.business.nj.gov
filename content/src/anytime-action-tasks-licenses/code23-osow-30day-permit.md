@@ -20,7 +20,7 @@ summaryDescriptionMd: >-
   You need a permit each way to transport overweight or oversized trailers, and
   very large nondivisible loads on public roads. This includes:
 
-  * If the truck, trailer, and load (including any overhang) exceed 10 feet in width, 70 feet in length, or weigh over 80,000 pounds
+  * If the truck, trailer, and load (including any overhang) exceed 10 feet wide, 70 feet long or weigh over 80,000 pounds
 
   * If the combination vehicle meets the size rules for a `Code 23 Overdimensional Trailer Permit|code-23-overdimensional-trailer-permit`, but you do not have the permit
 issuingAgency: NJ Department of Transportation
@@ -29,7 +29,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 ---
 ## Eligibility Requirements
 
-* An active overweight/overdimensional (Code 23) trailer registration. You can get it at a  [NJ Motor Vehicle Commission (MVC) licensing center](https://www.nj.gov/mvc/locations/facilitylocations.htm)
+* An active overweight/overdimensional (Code 23) trailer registration. You can get it at a [NJ Motor Vehicle Commission (MVC) licensing center](https://www.nj.gov/mvc/locations/facilitylocations.htm)
 * Commercial Driver License (CDL)
 
 ## Application Requirements
