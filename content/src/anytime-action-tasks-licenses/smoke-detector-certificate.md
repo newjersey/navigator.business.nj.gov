@@ -27,6 +27,7 @@ summaryDescriptionMd: >-
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 ---
+
 ## How to Apply
 
 You must pass an inspection before you can get the certificate. Contact your `Local Enforcing Agency (LEA)|lea` to schedule an inspection. Your LEA can be the local fire department or the state Division of Fire Safety.

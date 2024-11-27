@@ -43,7 +43,11 @@ describe("findDeadLinks", () => {
       // @ts-ignore
       .mockReturnValueOnce(["anytimeActionLinks.md"])
       // @ts-ignore
-      .mockReturnValueOnce(["anytimeActionTasks.md"])
+      .mockReturnValueOnce(["anytimeActionTasksAdmin.md"])
+      // @ts-ignore
+      .mockReturnValueOnce(["anytimeActionTasksLicenses.md"])
+      // @ts-ignore
+      .mockReturnValueOnce(["anytimeActionTasksReinstatements.md"])
       // @ts-ignore
       .mockReturnValueOnce(["anytimeActionLicenseReinstatements.md"]);
 
@@ -89,8 +93,10 @@ describe("findDeadLinks", () => {
       .mockReturnValueOnce(certifications)
       .mockReturnValueOnce(licenses)
       .mockReturnValueOnce(licenseTasks)
-      .mockReturnValueOnce(anytimeActionTasks)
       .mockReturnValueOnce(anytimeActionLinks)
+      .mockReturnValueOnce(anytimeActionTasks)
+      .mockReturnValueOnce(anytimeActionTasks)
+      .mockReturnValueOnce(anytimeActionTasks)
       .mockReturnValueOnce(anytimeActionLicenseReinstatements);
   });
 
@@ -126,7 +132,9 @@ describe("findDeadLinks", () => {
         "/funding/fundings": [],
         "/certification/certifications": [],
         "/anytime-action-links/anytimeActionLinks": [],
-        "/anytime-action-tasks/anytimeActionTasks": [],
+        "/anytime-action-tasks-admin/anytimeActionTasksAdmin": [],
+        "/anytime-action-tasks-licenses/anytimeActionTasksLicenses": [],
+        "/anytime-action-tasks-reinstatements/anytimeActionTasksReinstatements": [],
         "/anytime-action-license-reinstatements/anytimeActionLicenseReinstatements": [],
       });
     });
