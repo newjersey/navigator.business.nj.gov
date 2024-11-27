@@ -1,4 +1,5 @@
 ---
+licenseName: Electrologists-Premises
 id: electrologist-office-license
 filename: electrologist-office-license
 displayname: electrologist-office-license
@@ -6,20 +7,18 @@ urlSlug: electrologist-office-license
 name: " Apply for Your Electrologist Office Premises"
 webflowName: electrologist-office-license
 summaryDescriptionMd: You must have an electrologist office premises license to
-  offer electrolysis services in New Jersey. Test.
+  offer electrolysis services in New Jersey.
 industryId: healthcare
-callToActionText: Apply for My Electrologist Office Premises License
+callToActionText: Contact the Electrologists Advisory Committee
 callToActionLink: https://www.njconsumeraffairs.gov/eac/Pages/default.aspx
 licenseCertificationClassification: ""
 agencyId: nj-consumer-affairs
 divisionPhone: (973) 504-6377
 webflowId: 66e9d9648d1f1a667a8f04eb
-licenseName: "Electrologists-Premises"
 ---
 
 ## Application Requirements
 
-- Applicant's name, date of birth, home address, and principal business address
 - License number, if applicable
 - Social Security number
 - Business name, address, and phone number
@@ -29,7 +28,7 @@ licenseName: "Electrologists-Premises"
 - Affidavit signed in front of a public notary
 - Applicable fees paid
 
-Contact the Electrologists Advisory Committee for an Electrologist Office Premise Application
+Contact the Electrologists Advisory Committee for an Electrologist Office Premise Application.
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
 You can't offer electrolysis services or operate an electrologist's office in New Jersey, and you may be subject to significant fines and legal penalties.
