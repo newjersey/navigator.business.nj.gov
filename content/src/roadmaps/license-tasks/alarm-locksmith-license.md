@@ -19,10 +19,10 @@ webflowId: 6721493dfeaa4e04016c605b
 ## Eligibility Criteria
 
 * Be at least 18 years old
-* High school diploma or its equal
-* Not found guilty of a crime of the first, second, or third degree in the 10 years before applying for a license
-* Not found guilty of doing electrical work without a license
-* A passing grade on all 3 portions of the burglar alarm examination
+* High school diploma or its equivalent
+* Not have been found guilty of a crime of the first, second, or third degree in the 10 years before applying for a license
+* Not have been found guilty of doing electrical work without a license
+* A passing grade on all 3 portions (Trade, Business and Law, Electronic Security) of the burglar alarm examination
 * At least 4 years of experience in the burglar business
 
 ## Application Requirements
@@ -37,7 +37,7 @@ webflowId: 6721493dfeaa4e04016c605b
 * Criminal background check
 * Applicable fees paid
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
 
 You can't work as a locksmith or install, service, or maintain burglar alarms, fire alarms, or electronic security systems in New Jersey.
 
