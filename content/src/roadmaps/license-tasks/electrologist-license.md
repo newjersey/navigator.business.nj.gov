@@ -1,5 +1,6 @@
 ---
 id: electrologist-license
+filename: electrologist-license
 displayname: electrologist-license
 urlSlug: electrologist-license
 name: Apply for Your Electrologist License
@@ -35,14 +36,10 @@ webflowId: 66e9d9648d1f1a667a8f04ab
 - Criminal background check
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
-
+:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
 You can't work as an electrologist in New Jersey and may be subject to significant fines and legal penalties.
-
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
-
 An electrologist license number.
-
 :::
