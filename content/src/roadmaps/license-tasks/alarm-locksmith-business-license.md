@@ -23,7 +23,7 @@ webflowId: 6721493ccddf06cbf7fe46b4
 *  `Business structure|business-structure-learn-more` 
 * Copy of the `trade name certificate|alt-name-trade-name` if your business name is not the same as the licensee's name
 *  `Employer Identification Number (EIN)|ein` 
-* If not submitting for a corporation, list the names and addresses of each business owner
+* If not submitting for a corporation, list the names and addresses of the business owners
 * Information about the licensee who will serve as your business's business qualifier
 * Copy of  liability insurance certificate with the coverage required on the application
 * Applicable fees paid (the Advisory Committee will send a license fee letter once the application is approved)
