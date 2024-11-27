@@ -20,9 +20,9 @@ webflowId: 6721493dfeaa4e04016c605b
 
 * Be at least 18 years old
 * High school diploma or its equal
-* Not having been found guilty of a crime of the first, second, or third degree in the 10 years before applying for a license
-* Not having been found guilty of doing electrical work without a license
-* A passing grade on all 3 portions (Trade, Business and Law, Electronic Security) of the burglar alarm examination
+* Not found guilty of a crime of the first, second, or third degree in the 10 years before applying for a license
+* Not found guilty of doing electrical work without a license
+* A passing grade on all 3 portions of the burglar alarm examination
 * At least 4 years of experience in the burglar business
 
 ## Application Requirements
