@@ -28,12 +28,12 @@ webflowId: 6721493ccddf06cbf7fe46b4
 * Copy of your liability insurance certificate with adequate coverage (check application for details)
 * Applicable fees paid (the Advisory Committee will send you a license fee letter once your application is approved)
 
-The affidavit on the application executed before a notary public
+The affidavit on the application executed before a notary public.
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
 
-- Your business can’t provide alarm and locksmith services
-- If your business qualifier licensee fails to renew their license, the business license will expire.
+* Your business can’t provide alarm and locksmith services
+* If your business qualifier licensee fails to renew their license, the business license will expire
 
 :::
 
