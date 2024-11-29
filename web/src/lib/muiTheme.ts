@@ -72,6 +72,32 @@ export default createTheme({
         },
       },
     },
+    MuiButtonBase: {
+      styleOverrides: {
+        root: {
+          "&.MuiTab-root": {
+            "&:focus": {
+              outline: ".25rem solid #38536f",
+            },
+          },
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          color: "#38536f !important",
+        },
+      },
+    },
+    MuiTabs: {
+      styleOverrides: {
+        indicator: {
+          height: "4px !important",
+          backgroundColor: "#38536f !important",
+        },
+      },
+    },
     MuiAccordionDetails: {
       styleOverrides: {
         root: {
