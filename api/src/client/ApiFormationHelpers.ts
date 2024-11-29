@@ -70,7 +70,8 @@ export const makePostBody = (
 
   const isCorp = businessType.shortDescription === "DP";
   const isForeignCorp = businessType.shortDescription === "FR";
-  const isDomesticNonProfit = businessType.shortDescription === ("NP" || "NV");
+  const isDomesticNonProfit =
+    businessType.shortDescription === "NP" || businessType.shortDescription === "NV";
 
   const isInFormAndTerms = (
     input: "IN_BYLAWS" | "IN_FORM" | undefined,
