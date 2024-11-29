@@ -8,13 +8,15 @@ name: Apprenticeship Tax Credit Program
 displayName: apprenticeship-tax-credit
 urlSlug: apprenticeship-tax-credit
 id: apprenticeship-tax-credit
-sidebarCardBodyText: "A State tax credit for businesses experiencing startup
-  costs in the first year of developing their apprenticeship program. "
+sidebarCardBodyText: A State tax credit for business startup costs in the first
+  year of developing an apprenticeship program.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: The Apprenticeship Tax Credit Program offers your business
-  a $5,000 tax credit to offset approved startup expenses in the first year of
-  your apprenticeship program.
+summaryDescriptionMd: >+
+  The Apprenticeship Tax Credit Program offers your business a $5,000 tax credit
+  to offset approved startup expenses in the first year of your apprenticeship
+  program.
+
 callToActionLink: https://nj.gov/labor/career-services/apprenticeship/taxcredit
 callToActionText: Learn more
 fundingType: tax credit
@@ -46,6 +48,6 @@ municipality: All
 
 :::callout{ showHeader="true" headerText="Benefits:" showIcon="false" calloutType="conditional" }
 
-The tax credit ranges from $5,000 to $10,000 to cover costs associated with first-year development of a new apprenticeship program.
+The tax credit ranges from $5,000 to $10,000. This will cover costs associated with first-year development of a new apprenticeship program.
 
 :::
