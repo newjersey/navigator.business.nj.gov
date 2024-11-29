@@ -250,6 +250,7 @@ export const generateIndustrySpecificData = (
     propertyLeaseType: randomElementFromArray(["SHORT_TERM_RENTAL", "LONG_TERM_RENTAL", "BOTH"]),
     hasThreeOrMoreRentalUnits: !(randomInt() % 2),
     travelingCircusOrCarnivalOwningBusiness: !(randomInt() % 2),
+    vacantPropertyOwner: !(randomInt() % 2),
     ...overrides,
   };
 };

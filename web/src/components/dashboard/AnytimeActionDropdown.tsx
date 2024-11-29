@@ -156,6 +156,8 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
           !!business?.profileData.carnivalRideOwningBusiness ||
           !!business?.profileData.travelingCircusOrCarnivalOwningBusiness
         );
+      case "vacant-building-fire-permit":
+        return !!business?.profileData.vacantPropertyOwner;
       default:
         return false;
     }
@@ -257,7 +259,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
             };
 
             return (
-              <li {...newProps} key={option.filename}>
+              <li data-testid={`${option.filename}-option`} {...newProps} key={option.filename}>
                 {selected ? (
                   <MenuOptionSelected>{textComponent}</MenuOptionSelected>
                 ) : (
