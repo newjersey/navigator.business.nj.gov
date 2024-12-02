@@ -38,7 +38,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 ### Driver and Trip Information
 
 * Name, address, and telephone number of the permit applicant
-* Travel start date (will last 30 days, accounting for travel on weekends or holidays)
+* Travel start date
 * Vehicle type (Power Unit w/ 1 Trailer)
 * Truck plate/license number and state
 * Trailer plate/license number and state
