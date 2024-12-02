@@ -28,33 +28,34 @@ issuingAgency: NJ Department of Transportation
 callToActionText: Apply for My Code 23 OS/OW Permit
 callToActionLink: https://nj.gotpermits.com/njpass#!
 ---
+
 ## Eligibility Requirements
 
-* An active overweight/overdimensional (Code 23) trailer registration. You can get it at a [NJ Motor Vehicle Commission (MVC) licensing center](https://www.nj.gov/mvc/locations/facilitylocations.htm)
-* Commercial Driver License (CDL)
+- An active overweight/overdimensional (Code 23) trailer registration. You can get it at a [NJ Motor Vehicle Commission (MVC) licensing center](https://www.nj.gov/mvc/locations/facilitylocations.htm)
+- Commercial Driver License (CDL)
 
 ## Application Requirements
 
-### Driver and Trip Information
+#### Driver and Trip Information
 
-* Name, address, and telephone number of the permit applicant
-* Travel start date (will last 30 days, accounting for travel on weekends or holidays)
-* Vehicle type (Power Unit w/ 1 Trailer)
-* Truck plate/license number and state
-* Trailer plate/license number and state
-* General origin and destination (cities or state borders)
-* Specific origins and destination (detailed route)
+- Name, address, and telephone number of the permit applicant
+- Travel start date
+- Vehicle type (Power Unit w/ 1 Trailer)
+- Truck plate/license number and state
+- Trailer plate/license number and state
+- General origin and destination (cities or state borders)
+- Specific origins and destination (detailed route)
 
-### Vehicle Configuration Information
+#### Vehicle Configuration Information
 
-* Overall length, width, and height
-* Trailer length
-* Load length
-* Rear and side overhang
-* Number of axles
-* Gross weight
-* Total axle weight
-* Total axle spacing
+- Overall length, width, and height
+- Trailer length
+- Load length
+- Rear and side overhang
+- Number of axles
+- Gross weight
+- Total axle weight
+- Total axle spacing
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
 
