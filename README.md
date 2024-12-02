@@ -47,9 +47,8 @@ extension.
   installing via package manager, we suggest installing `corepack` if available
   separately.)
 - [AWS CLI](https://aws.amazon.com/cli/)
-- [JRE/JDK 11.x or newer](https://jdk.java.net/21/) - Install the x64 version –
-  even on macOS – not the arm64 version (Latest OpenJDK version recommended)
-- [Python 3.11](https://www.python.org/downloads/)
+- [JRE/JDK 17.x or newer](https://jdk.java.net/)
+- [Python 3.13](https://www.python.org/downloads/)
 
 **Windows (non-WSL) only**:
 
