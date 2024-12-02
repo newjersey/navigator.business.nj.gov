@@ -1,3 +1,10 @@
+# [2024.36.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.35.0...v2024.36.0) (2024-12-02)
+
+
+### Features
+
+* [[#188595606](https://github.com/newjersey/navigator.business.nj.gov/issues/188595606)] Electrologist License Status Check, Renewal Events & Reinstatement Quick Actions (MLO) ([b6abf51](https://github.com/newjersey/navigator.business.nj.gov/commit/b6abf5199882cb06347290b19bb5d8e52038cb4f))
+
 # [2024.35.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.34.0...v2024.35.0) (2024-11-20)
 
 
