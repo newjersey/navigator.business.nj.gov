@@ -22,16 +22,17 @@ summaryDescriptionMd: >-
 
   3. If your [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) registration is also expired, be sure to reinstate it.
 ---
+
 ## Application Requirements
 
-* CDS registration number
-* DEA registration number
-* Signed attestation (included in application)
-* Names, titles, and residential addresses of each owner, partner, officer, or principal shareholder
-* Name and address of the person who has administrative or managerial responsibility for the registered location
-* Criminal history since last renewal, if applicable
-* CDS registration suspension, surrender, denial, revocation, or restrictions since last renewal, if applicable 
-* Applicable fees paid, once the DCU has sent an invoice
+- CDS registration number
+- DEA registration number
+- Signed attestation (included in application)
+- Names, titles, and residential addresses of each owner, partner, officer, or principal shareholder
+- Name and address of the person who has administrative or managerial responsibility for the registered location
+- Criminal history since last renewal, if applicable
+- CDS registration suspension, surrender, denial, revocation, or restrictions since last renewal, if applicable
+- Applicable fees paid, once the DCU has sent an invoice
 
 Your reinstatement application must be signed in front of and by a notary public.
 

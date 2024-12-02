@@ -17,6 +17,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
 
+import { getMergedConfig } from "@/contexts/configContext";
 import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/index";
 
 function setupMockAnalytics(): typeof analytics {
@@ -40,11 +41,18 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 describe("<AnytimeActionDropdown />", () => {
+  const Config = getMergedConfig();
   let anytimeActionLinks: AnytimeActionLink[] = [];
 
-  let anytimeActionTasks: AnytimeActionTask[] = [];
+  let anytimeActionAdminTasks: AnytimeActionTask[] = [];
 
-  let anytimeActionLicense: AnytimeActionLicenseReinstatement[] = [];
+  let anytimeActionLicensesTasks: AnytimeActionTask[] = [];
+
+  let anytimeActionReinstatementsTasks: AnytimeActionTask[] = [];
+
+  let anytimeActionLicenseReinstatement: AnytimeActionLicenseReinstatement[] = [];
+
+  const TASK_NAMES = ["some-admin-task-name", "some-licenses-task-name", "some-reinstatements-task-name"];
 
   describe("routing and analytics", () => {
     beforeEach(() => {
@@ -59,15 +67,31 @@ describe("<AnytimeActionDropdown />", () => {
           applyToAllUsers: true,
         }),
       ];
-      anytimeActionTasks = [
+      anytimeActionAdminTasks = [
         generateAnytimeActionTask({
-          name: "some-task-name",
+          name: "some-admin-task-name",
           urlSlug: "some-url",
           filename: "some-filename-task",
           applyToAllUsers: true,
         }),
       ];
-      anytimeActionLicense = [
+      anytimeActionLicensesTasks = [
+        generateAnytimeActionTask({
+          name: "some-licenses-task-name",
+          urlSlug: "some-url",
+          filename: "some-filename-task",
+          applyToAllUsers: true,
+        }),
+      ];
+      anytimeActionReinstatementsTasks = [
+        generateAnytimeActionTask({
+          name: "some-reinstatements-task-name",
+          urlSlug: "some-url",
+          filename: "some-filename-task",
+          applyToAllUsers: true,
+        }),
+      ];
+      anytimeActionLicenseReinstatement = [
         generateAnytimeActionLicenseReinstatement({
           name: "some-license-name",
           urlSlug: "some-url",
@@ -80,11 +104,31 @@ describe("<AnytimeActionDropdown />", () => {
       render(
         <AnytimeActionDropdown
           anytimeActionLinks={anytimeActionLinks}
-          anytimeActionTasks={anytimeActionTasks}
-          anytimeActionLicenseReinstatements={anytimeActionLicense}
+          anytimeActionAdminTasks={anytimeActionAdminTasks}
+          anytimeActionReinstatementsTasks={anytimeActionReinstatementsTasks}
+          anytimeActionLicensesTasks={anytimeActionLicensesTasks}
+          anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatement}
         />
       );
     };
+
+    it("shows all task categories and elements", () => {
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(
+        screen.getByText(Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryAdmin)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryLicenses)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryReinstatements)
+      ).toBeInTheDocument();
+
+      expect(screen.getByText(TASK_NAMES[0])).toBeInTheDocument();
+      expect(screen.getByText(TASK_NAMES[1])).toBeInTheDocument();
+      expect(screen.getByText(TASK_NAMES[2])).toBeInTheDocument();
+    });
 
     it("routes to actions/url and triggers analytics when external link clicked", () => {
       renderAnytimeActionDropdown();
@@ -97,16 +141,19 @@ describe("<AnytimeActionDropdown />", () => {
       ).toHaveBeenCalledWith("some-filename-link");
     });
 
-    it("routes to actions/url and triggers analytics when internal task clicked", () => {
-      renderAnytimeActionDropdown();
-      fireEvent.click(screen.getByLabelText("Open"));
-      fireEvent.click(screen.getByText("some-task-name"));
-      fireEvent.click(screen.getByTestId("anytimeActionPrimaryButton"));
-      expect(mockPush).toHaveBeenCalledWith(`${ROUTES.anytimeActions}/some-url`);
-      expect(
-        mockAnalytics.event.anytime_action_button.click.go_to_anytime_action_screen
-      ).toHaveBeenCalledWith("some-filename-task");
-    });
+    it.each(TASK_NAMES)(
+      "routes to actions/url and triggers analytics when internal task clicked",
+      (taskName) => {
+        renderAnytimeActionDropdown();
+        fireEvent.click(screen.getByLabelText("Open"));
+        fireEvent.click(screen.getByText(taskName));
+        fireEvent.click(screen.getByTestId("anytimeActionPrimaryButton"));
+        expect(mockPush).toHaveBeenCalledWith(`${ROUTES.anytimeActions}/some-url`);
+        expect(
+          mockAnalytics.event.anytime_action_button.click.go_to_anytime_action_screen
+        ).toHaveBeenCalledWith("some-filename-task");
+      }
+    );
 
     it("routes to actions/url and triggers analytics when internal license reinstatement clicked", () => {
       const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
@@ -120,7 +167,7 @@ describe("<AnytimeActionDropdown />", () => {
           },
         }),
       });
-      anytimeActionLicense = [
+      anytimeActionLicenseReinstatement = [
         generateAnytimeActionLicenseReinstatement({
           licenseName,
           name: "some-license-name",
@@ -153,15 +200,31 @@ describe("<AnytimeActionDropdown />", () => {
           applyToAllUsers: true,
         }),
       ];
-      anytimeActionTasks = [
+      anytimeActionAdminTasks = [
         generateAnytimeActionTask({
-          name: "some-task-name",
+          name: "some-admin-task-name",
           urlSlug: "some-url",
           filename: "some-filename-task",
           applyToAllUsers: true,
         }),
       ];
-      anytimeActionLicense = [
+      anytimeActionLicensesTasks = [
+        generateAnytimeActionTask({
+          name: "some-licenses-task-name",
+          urlSlug: "some-url",
+          filename: "some-filename-task",
+          applyToAllUsers: true,
+        }),
+      ];
+      anytimeActionReinstatementsTasks = [
+        generateAnytimeActionTask({
+          name: "some-reinstatements-task-name",
+          urlSlug: "some-url",
+          filename: "some-filename-task",
+          applyToAllUsers: true,
+        }),
+      ];
+      anytimeActionLicenseReinstatement = [
         generateAnytimeActionLicenseReinstatement({
           name: "some-license-name",
           urlSlug: "some-url",
@@ -174,13 +237,15 @@ describe("<AnytimeActionDropdown />", () => {
       render(
         <AnytimeActionDropdown
           anytimeActionLinks={anytimeActionLinks}
-          anytimeActionTasks={anytimeActionTasks}
-          anytimeActionLicenseReinstatements={anytimeActionLicense}
+          anytimeActionAdminTasks={anytimeActionAdminTasks}
+          anytimeActionReinstatementsTasks={anytimeActionReinstatementsTasks}
+          anytimeActionLicensesTasks={anytimeActionLicensesTasks}
+          anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatement}
         />
       );
     };
 
-    it("sorts all actions by name", () => {
+    it("sorts all actions into correct order (categories are reverse alphabetical, items are alphabetical)", () => {
       const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
 
       useMockBusiness({
@@ -193,7 +258,7 @@ describe("<AnytimeActionDropdown />", () => {
         }),
       });
 
-      anytimeActionLicense = [
+      anytimeActionLicenseReinstatement = [
         generateAnytimeActionLicenseReinstatement({
           name: "some-license-name",
           urlSlug: "some-url",
@@ -210,14 +275,45 @@ describe("<AnytimeActionDropdown />", () => {
 
       renderAnytimeActionDropdown();
       fireEvent.click(screen.getByLabelText("Open"));
-      const task = screen.getByText("some-task-name");
-      const license = screen.getByText("some-license-name");
-      const licenseLast = screen.getByText("zzz-some-license-name");
+      const taskAdmin = screen.getByText("some-admin-task-name");
+      const taskLicenses = screen.getByText("some-licenses-task-name");
+      const taskReinstatements = screen.getByText("some-reinstatements-task-name");
+      const licenseReinstatement = screen.getByText("some-license-name");
+      const licenseReinstatementLast = screen.getByText("zzz-some-license-name");
       const link = screen.getByText("some-link-name");
+      const categoryTitleAdmin = screen.getByText(
+        Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryAdmin
+      );
+      const categoryTitleLicenses = screen.getByText(
+        Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryLicenses
+      );
+      const categoryTitleReinstatements = screen.getByText(
+        Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryReinstatements
+      );
 
-      expect(license.compareDocumentPosition(link)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-      expect(link.compareDocumentPosition(task)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-      expect(task.compareDocumentPosition(licenseLast)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+      expect(categoryTitleReinstatements.compareDocumentPosition(taskReinstatements)).toBe(
+        Node.DOCUMENT_POSITION_FOLLOWING
+      );
+      expect(categoryTitleReinstatements.compareDocumentPosition(licenseReinstatement)).toBe(
+        Node.DOCUMENT_POSITION_FOLLOWING
+      );
+      expect(categoryTitleReinstatements.compareDocumentPosition(licenseReinstatementLast)).toBe(
+        Node.DOCUMENT_POSITION_FOLLOWING
+      );
+      expect(licenseReinstatement.compareDocumentPosition(taskReinstatements)).toBe(
+        Node.DOCUMENT_POSITION_FOLLOWING
+      );
+      expect(taskReinstatements.compareDocumentPosition(licenseReinstatementLast)).toBe(
+        Node.DOCUMENT_POSITION_FOLLOWING
+      );
+
+      expect(categoryTitleLicenses.compareDocumentPosition(taskLicenses)).toBe(
+        Node.DOCUMENT_POSITION_FOLLOWING
+      );
+
+      expect(categoryTitleAdmin.compareDocumentPosition(taskAdmin)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+      expect(categoryTitleAdmin.compareDocumentPosition(link)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+      expect(taskAdmin.compareDocumentPosition(link)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     });
 
     it("filters out licenses unrelated to user industry", () => {
@@ -234,7 +330,7 @@ describe("<AnytimeActionDropdown />", () => {
         }),
       });
 
-      anytimeActionLicense = [
+      anytimeActionLicenseReinstatement = [
         generateAnytimeActionLicenseReinstatement({
           licenseName: validLicenseName,
           name: "hvac-contractor-reinstatement",
@@ -262,7 +358,7 @@ describe("<AnytimeActionDropdown />", () => {
           industryId: "accounting",
         }),
       });
-      anytimeActionTasks = [
+      anytimeActionAdminTasks = [
         generateAnytimeActionTask({
           industryIds: ["accounting"],
           applyToAllUsers: false,
@@ -272,6 +368,22 @@ describe("<AnytimeActionDropdown />", () => {
           industryIds: ["real estate"],
           applyToAllUsers: false,
           name: "task - no match",
+        }),
+      ];
+      anytimeActionLicensesTasks = [
+        generateAnytimeActionTask({
+          name: "some-licenses-task-name",
+          urlSlug: "some-url",
+          filename: "some-filename-task",
+          applyToAllUsers: true,
+        }),
+      ];
+      anytimeActionReinstatementsTasks = [
+        generateAnytimeActionTask({
+          name: "some-reinstatements-task-name",
+          urlSlug: "some-url",
+          filename: "some-filename-task",
+          applyToAllUsers: true,
         }),
       ];
 
@@ -311,7 +423,7 @@ describe("<AnytimeActionDropdown />", () => {
         }),
       });
 
-      anytimeActionLicense = [
+      anytimeActionLicenseReinstatement = [
         generateAnytimeActionLicenseReinstatement({
           licenseName,
           name: "license - hvac-reinstatement",
@@ -322,6 +434,106 @@ describe("<AnytimeActionDropdown />", () => {
       fireEvent.click(screen.getByLabelText("Open"));
 
       expect(screen.queryByText("license - hvac-reinstatement")).not.toBeInTheDocument();
+    });
+
+    it("adds vacant property anytime action for vacant property owners", () => {
+      anytimeActionAdminTasks = [
+        generateAnytimeActionTask({ filename: "vacant-building-fire-permit" }),
+        ...anytimeActionAdminTasks,
+      ];
+      useMockBusiness({
+        profileData: generateProfileData({
+          vacantPropertyOwner: false,
+        }),
+      });
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.queryByTestId("vacant-building-fire-permit-option")).not.toBeInTheDocument();
+
+      useMockBusiness({
+        profileData: generateProfileData({
+          vacantPropertyOwner: true,
+        }),
+      });
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.getByTestId("vacant-building-fire-permit-option")).toBeInTheDocument();
+    });
+
+    it("adds fire carnival modification for carnival ride owning businesses", () => {
+      anytimeActionAdminTasks = [
+        generateAnytimeActionTask({ filename: "carnival-ride-supplemental-modification" }),
+        ...anytimeActionAdminTasks,
+      ];
+      useMockBusiness({
+        profileData: generateProfileData({
+          carnivalRideOwningBusiness: false,
+        }),
+      });
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.queryByTestId("carnival-ride-supplemental-modification-option")).not.toBeInTheDocument();
+
+      useMockBusiness({
+        profileData: generateProfileData({
+          carnivalRideOwningBusiness: true,
+        }),
+      });
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.getByTestId("carnival-ride-supplemental-modification-option")).toBeInTheDocument();
+    });
+
+    it("adds operating carnival fire permit for carnvial owning businesses", () => {
+      anytimeActionAdminTasks = [
+        generateAnytimeActionTask({ filename: "operating-carnival-fire-permit" }),
+        ...anytimeActionAdminTasks,
+      ];
+      useMockBusiness({
+        profileData: generateProfileData({
+          carnivalRideOwningBusiness: false,
+          travelingCircusOrCarnivalOwningBusiness: false,
+        }),
+      });
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.queryByTestId("operating-carnival-fire-permit-option")).not.toBeInTheDocument();
+
+      useMockBusiness({
+        profileData: generateProfileData({
+          carnivalRideOwningBusiness: true,
+          travelingCircusOrCarnivalOwningBusiness: false,
+        }),
+      });
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.getByTestId("operating-carnival-fire-permit-option")).toBeInTheDocument();
+    });
+
+    it("adds operating carnival fire permit for traveling circus or carnival owning businesses", () => {
+      anytimeActionAdminTasks = [
+        generateAnytimeActionTask({ filename: "operating-carnival-fire-permit" }),
+        ...anytimeActionAdminTasks,
+      ];
+      useMockBusiness({
+        profileData: generateProfileData({
+          carnivalRideOwningBusiness: false,
+          travelingCircusOrCarnivalOwningBusiness: false,
+        }),
+      });
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.queryByTestId("operating-carnival-fire-permit-option")).not.toBeInTheDocument();
+
+      useMockBusiness({
+        profileData: generateProfileData({
+          carnivalRideOwningBusiness: false,
+          travelingCircusOrCarnivalOwningBusiness: true,
+        }),
+      });
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.getByTestId("operating-carnival-fire-permit-option")).toBeInTheDocument();
     });
   });
 });
