@@ -327,7 +327,10 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const displayVacantBuildingOwnerQuestion = (): boolean => {
     if (!business) return false;
-    return profileData.industryId === "real-estate-investor" || profileData.sectorId === "real-estate";
+    return (
+      (profileData.industryId === "real-estate-investor" || profileData.sectorId === "real-estate") &&
+      profileData.operatingPhase === "UP_AND_RUNNING"
+    );
   };
 
   const displayRaffleBingoGameQuestion = (): boolean => {
@@ -562,6 +565,15 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField fieldName="industryId">
           <Industry />
           <NonEssentialQuestionsSection />
+        </ProfileField>
+
+        <ProfileField
+          fieldName="vacantPropertyOwner"
+          isVisible={displayVacantBuildingOwnerQuestion()}
+          hideHeader={true}
+          boldAltDescription={true}
+        >
+          <RadioQuestion<boolean> fieldName={"vacantPropertyOwner"} choices={[true, false]} />
         </ProfileField>
         <ProfileField
           fieldName="sectorId"
