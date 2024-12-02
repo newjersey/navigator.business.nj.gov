@@ -138,8 +138,8 @@ const DashboardPage = (props: Props): ReactElement => {
                 operateReferences={props.operateReferences}
                 anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
                 anytimeActionLinks={props.anytimeActionLinks}
-                anytimeActionAdminTasks={props.anytimeActionLicensesTasks}
-                anytimeActionLicensesTasks={props.anytimeActionAdminTasks}
+                anytimeActionAdminTasks={props.anytimeActionAdminTasks}
+                anytimeActionLicensesTasks={props.anytimeActionLicensesTasks}
                 anytimeActionReinstatementsTasks={props.anytimeActionReinstatementsTasks}
                 elevatorViolations={hasElevatorViolations}
                 licenseEvents={props.licenseEvents}
@@ -151,8 +151,8 @@ const DashboardPage = (props: Props): ReactElement => {
                 operateReferences={props.operateReferences}
                 anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
                 anytimeActionLinks={props.anytimeActionLinks}
-                anytimeActionAdminTasks={props.anytimeActionLicensesTasks}
-                anytimeActionLicensesTasks={props.anytimeActionAdminTasks}
+                anytimeActionAdminTasks={props.anytimeActionAdminTasks}
+                anytimeActionLicensesTasks={props.anytimeActionLicensesTasks}
                 anytimeActionReinstatementsTasks={props.anytimeActionReinstatementsTasks}
                 elevatorViolations={hasElevatorViolations}
                 licenseEvents={props.licenseEvents}
