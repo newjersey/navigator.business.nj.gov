@@ -594,7 +594,7 @@ export const generateV108FormationData = (
 export const generateV108UserData = (overrides: Partial<v108UserData>): v108UserData => {
   const profileData = generateV108ProfileData({});
   return {
-    version: 102,
+    version: 108,
     user: generateV108User({}),
     profileData: generateV108ProfileData({}),
     formProgress: "UNSTARTED",

@@ -578,10 +578,10 @@ type v146GetFilingResponse = {
 export const generatev146UserData = (overrides: Partial<v146UserData>): v146UserData => {
   return {
     user: generatev146BusinessUser({}),
-    version: 140,
+    version: 146,
     lastUpdatedISO: "",
     dateCreatedISO: "",
-    versionWhenCreated: 141,
+    versionWhenCreated: -1,
     businesses: {
       "123": generatev146Business({ id: "123" }),
     },
