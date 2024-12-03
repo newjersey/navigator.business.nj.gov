@@ -4,7 +4,7 @@ import { TaxFilingCalendarEvent } from "../calendarEvent";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
 import { createBusinessId } from "../domain-logic/createBusinessId";
-import { EnvironmentData, WasteQuestionnaireData } from "../environment";
+import { EnvironmentData, LandQuestionnaireData, WasteQuestionnaireData } from "../environment";
 import {
   createEmptyFormationFormData,
   FormationData,
@@ -357,12 +357,30 @@ export const generateWasteQuestionnaireData = (
   };
 };
 
+export const generateLandQuestionnaireData = (
+  overrides: Partial<LandQuestionnaireData>
+): LandQuestionnaireData => {
+  return {
+    takeOverExistingBiz: false,
+    propertyAssessment: false,
+    constructionActivities: false,
+    siteImprovementWasteLands: false,
+    noLand: false,
+    ...overrides,
+  };
+};
+
 export const generateEnvironmentData = (overrides: Partial<EnvironmentData>): EnvironmentData => {
   return {
     waste: {
       submitted: false,
       questionnaireData: generateWasteQuestionnaireData({ ...overrides.waste?.questionnaireData }),
       ...overrides.waste,
+    },
+    land: {
+      submitted: false,
+      questionnaireData: generateLandQuestionnaireData({ ...overrides.land?.questionnaireData }),
+      ...overrides.land,
     },
     ...overrides,
   };
