@@ -3,27 +3,27 @@ import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
-import { CheckWasteResultsAccordion } from "@/components/tasks/environment-questionnaire/CheckWasteResultsAccordion";
+import { EnvQuestionnaireResultsAccordion } from "@/components/tasks/environment-questionnaire/EnvQuestionnaireResultsAccordion";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
-import { WasteQuestionnaireFieldIds } from "@businessnjgovnavigator/shared/environment";
+import { LandQuestionnaireFieldIds } from "@businessnjgovnavigator/shared/environment";
 import { ReactElement } from "react";
 
 interface Props {
   task: Task;
 }
 
-export const CheckWastePermitsResults = (props: Props): ReactElement => {
+export const CheckLandPermitsResults = (props: Props): ReactElement => {
   const { business, updateQueue } = useUserData();
   const Config = getMergedConfig();
-  const questionnaireData = business?.environmentData?.waste?.questionnaireData;
+  const questionnaireData = business?.environmentData?.land?.questionnaireData;
 
   const onClick = (): void => {
     updateQueue
       ?.queueEnvironmentData({
-        waste: {
-          ...business?.environmentData?.waste,
+        land: {
+          ...business?.environmentData?.land,
           submitted: false,
         },
       })
@@ -38,13 +38,11 @@ export const CheckWastePermitsResults = (props: Props): ReactElement => {
 
     const optionsMarkedTrue: string[] = [];
 
-    let fieldId: WasteQuestionnaireFieldIds;
+    let fieldId: LandQuestionnaireFieldIds;
     for (fieldId in questionnaireData) {
       questionnaireData[fieldId] === true &&
         optionsMarkedTrue.push(
-          Config.wasteQuestionnaireQuestionsPage.wasteQuestionnaireOptions[
-            fieldId as WasteQuestionnaireFieldIds
-          ]
+          Config.envReqQuestionsPage.land.questionnaireOptions[fieldId as LandQuestionnaireFieldIds]
         );
     }
 
@@ -53,46 +51,40 @@ export const CheckWastePermitsResults = (props: Props): ReactElement => {
 
   const personalizedSupport = (): ReactElement => {
     return (
-      <CheckWasteResultsAccordion title={Config.wasteQuestionnaireResultsPage.personalizedSupport.title}>
+      <EnvQuestionnaireResultsAccordion title={Config.envReqResultsPage.personalizedSupport.title}>
         <div className={"padding-205 margin-y-2 bg-base-extra-light text-body radius-lg"}>
-          <div className={"padding-bottom-1"}>
-            {Config.wasteQuestionnaireResultsPage.personalizedSupport.body}
-          </div>
+          <div className={"padding-bottom-1"}>{Config.envReqResultsPage.personalizedSupport.body}</div>
           <div className="flex flex-align-center">
             <Icon className={"margin-right-1"} iconName={"alternate_email"} />
-            <div className={"text-underline"}>
-              {Config.wasteQuestionnaireResultsPage.personalizedSupport.contact}
-            </div>
+            <div className={"text-underline"}>{Config.envReqResultsPage.personalizedSupport.contact}</div>
           </div>
         </div>
-      </CheckWasteResultsAccordion>
+      </EnvQuestionnaireResultsAccordion>
     );
   };
 
   const contactDep = (): ReactElement => {
     return (
-      <CheckWasteResultsAccordion title={Config.wasteQuestionnaireResultsPage.contactDep.title}>
+      <EnvQuestionnaireResultsAccordion title={Config.envReqResultsPage.contactDep.title}>
         <div className={"padding-205 margin-y-2 bg-base-extra-light radius-lg"}>
-          <h4>{Config.wasteQuestionnaireResultsPage.contactDep.heading}</h4>
+          <h4>{Config.envReqResultsPage.contactDep.waste.heading}</h4>
           <div className={"margin-x-105"}>
-            <Content className={"padding-bottom-1"}>
-              {Config.wasteQuestionnaireResultsPage.contactDep.body}
-            </Content>
+            <Content className={"padding-bottom-1"}>{Config.envReqResultsPage.contactDep.waste.body}</Content>
             <div className="flex flex-align-center">
               <Icon className={"margin-right-1"} iconName={"phone"} />
               <Content className={"text-underline"}>
-                {Config.wasteQuestionnaireResultsPage.contactDep.contact}
+                {Config.envReqResultsPage.contactDep.waste.contact}
               </Content>
             </div>
           </div>
         </div>
-      </CheckWasteResultsAccordion>
+      </EnvQuestionnaireResultsAccordion>
     );
   };
 
   const seeYourResponses = (): ReactElement => {
     return (
-      <CheckWasteResultsAccordion title={Config.wasteQuestionnaireResultsPage.seeYourResponses.title}>
+      <EnvQuestionnaireResultsAccordion title={Config.envReqResultsPage.seeYourResponses.title}>
         <div>
           <ul>
             {getResponseTexts().map((value, i) => {
@@ -104,14 +96,14 @@ export const CheckWastePermitsResults = (props: Props): ReactElement => {
             })}
           </ul>
         </div>
-      </CheckWasteResultsAccordion>
+      </EnvQuestionnaireResultsAccordion>
     );
   };
 
   const highApplicability = (): ReactElement => {
     return (
       <>
-        <Content className={"padding-bottom-3"}>{Config.wasteQuestionnaireResultsPage.summary}</Content>
+        <Content className={"padding-bottom-3"}>{Config.envReqResultsPage.summary}</Content>
         {personalizedSupport()}
         {contactDep()}
         {seeYourResponses()}
@@ -125,16 +117,16 @@ export const CheckWastePermitsResults = (props: Props): ReactElement => {
         <div className={"padding-y-1"}>
           <div>
             <span className={"text-bold margin-right-05"}>
-              {Config.wasteQuestionnaireResultsPage.lowApplicability.summaryLine1}
+              {Config.envReqResultsPage.lowApplicability.summaryLine1}
             </span>
-            <Content>{Config.wasteQuestionnaireResultsPage.lowApplicability.summaryLine2}</Content>
+            <Content>{Config.envReqResultsPage.lowApplicability.summaryLine2}</Content>
           </div>
         </div>
         <Callout calloutType={"note"} showIcon showHeader={false} showIconInBody={true}>
           <span>
-            {Config.wasteQuestionnaireResultsPage.lowApplicability.callout}
+            {Config.envReqResultsPage.lowApplicability.callout}
             <UnStyledButton className={"margin-left-05"} isUnderline onClick={onClick}>
-              {Config.wasteQuestionnaireResultsPage.lowApplicability.calloutRedo}
+              {Config.envReqResultsPage.lowApplicability.calloutRedo}
             </UnStyledButton>
           </span>
         </Callout>
@@ -143,15 +135,15 @@ export const CheckWastePermitsResults = (props: Props): ReactElement => {
   };
 
   const isLowApplicability = (): boolean =>
-    business?.environmentData?.waste?.questionnaireData?.noWaste ?? false;
+    business?.environmentData?.land?.questionnaireData?.noLand ?? false;
 
   return (
     <>
-      <h2>{Config.wasteQuestionnaireResultsPage.title}</h2>
+      <h2>{Config.envReqResultsPage.title}</h2>
       <Alert variant={"success"}>
-        <span className={"margin-right-05"}>{Config.wasteQuestionnaireResultsPage.editInfo}</span>
+        <span className={"margin-right-05"}>{Config.envReqResultsPage.editInfo}</span>
         <UnStyledButton isUnderline onClick={onClick}>
-          {Config.wasteQuestionnaireResultsPage.editText}
+          {Config.envReqResultsPage.editText}
         </UnStyledButton>
       </Alert>
       {isLowApplicability() ? lowApplicability() : highApplicability()}

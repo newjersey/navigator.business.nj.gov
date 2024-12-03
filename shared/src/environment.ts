@@ -1,5 +1,6 @@
 export type EnvironmentData = {
   waste?: WasteData;
+  land?: LandData;
 };
 
 export type WasteData = {
@@ -15,3 +16,17 @@ export type WasteQuestionnaireFieldIds =
   | "noWaste";
 
 export type WasteQuestionnaireData = Record<WasteQuestionnaireFieldIds, boolean>;
+
+export type LandData = {
+  questionnaireData?: LandQuestionnaireData;
+  submitted: boolean;
+};
+
+export type LandQuestionnaireFieldIds =
+  | "takeOverExistingBiz"
+  | "propertyAssessment"
+  | "constructionActivities"
+  | "siteImprovementWasteLands"
+  | "noLand";
+
+export type LandQuestionnaireData = Record<LandQuestionnaireFieldIds, boolean>;
