@@ -568,7 +568,7 @@ export type v149WasteQuestionnaireData = Record<v149WasteQuestionnaireFieldIds, 
 export const generatev149UserData = (overrides: Partial<v149UserData>): v149UserData => {
   return {
     user: generatev149BusinessUser({}),
-    version: 140,
+    version: 149,
     lastUpdatedISO: "",
     dateCreatedISO: "",
     versionWhenCreated: 141,
