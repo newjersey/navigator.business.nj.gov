@@ -1,0 +1,72 @@
+{
+  "naicsCodes": "812210",
+  "defaultSectorId": "other-services",
+  "canHavePermanentLocation": true,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "task": "business-plan",
+      "weight": 1
+    },
+    {
+      "step": 1,
+      "weight": 3,
+      "task": "determine-naics-code",
+      "required": true
+    },
+    {
+      "step": 1,
+      "weight": 100,
+      "task": "business-structure",
+      "required": true
+    },
+    {
+      "step": 2,
+      "task": "register-for-ein",
+      "required": true,
+      "weight": 20
+    },
+    {
+      "step": 2,
+      "task": "register-for-taxes",
+      "required": true,
+      "weight": 28
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "task": "get-insurance",
+      "weight": 15
+    }
+  ],
+  "name": "Funeral Services",
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
+  "displayname": "funeral",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": false,
+    "isCannabisLicenseTypeApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isCarServiceApplicable": false,
+    "isInterstateMovingApplicable": false,
+    "petCareHousing": false,
+    "isLiquorLicenseApplicable": false,
+    "isInterstateLogisticsApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isChildcareForSixOrMore": false,
+    "willSellPetCareItems": false,
+    "isTransportation": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isProvidesStaffingServicesApplicable": false
+  },
+  "isEnabled": true,
+  "additionalSearchTerms": "mortuary, funeral, funeral home, mortician, undertaker, funeral parlor, funeral director, mortuary practitioner, crematory, cremation, embalming, mortuary science, death care, funeral care",
+  "id": "funeral",
+  "description": "Offers embalming, cremation, and funeral services to care for the dead"
+}
