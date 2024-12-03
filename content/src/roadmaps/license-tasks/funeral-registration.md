@@ -49,7 +49,7 @@ divisionPhone: (973) 504-6425
 * The exact name of the corporation
 * Date of incorporation
 * Name and address of the `registered agent|registered-agent` 
-* A copy of the `Certificate of Good Standing,|good-standing` if applicable
+* A copy of the `Certificate of Good Standing|good-standing` 
 * A certified copy of the corporate resolution with the name of the person responsible for mortuary science duties within the company
 * State or federal tax identification number
 * Names of all officers and owners of 5% or more stock
