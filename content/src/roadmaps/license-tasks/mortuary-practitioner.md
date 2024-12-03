@@ -1,7 +1,10 @@
 ---
-notesMd: "Working doc:
-  https://docs.google.com/document/d/1aFT1LEzE-xy8X7OpKQVevmnwWc0sOyUQ9VIQJd2T4\
-  fA/edit?tab=t.0"
+notesMd: >-
+  Working doc:
+  https://docs.google.com/document/d/1aFT1LEzE-xy8X7OpKQVevmnwWc0sOyUQ9VIQJd2T4fA/edit?tab=t.0
+
+
+  12.3: waiting to publish until after SME review as there are discrepancies on the MLO test application
 licenseName: ""
 id: mortuary-practitioner
 filename: mortuary-practitioner
