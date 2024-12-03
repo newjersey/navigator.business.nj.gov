@@ -9,7 +9,7 @@ interface Props {
 export const MenuOptionSelected = (props: Props): ReactElement => {
   return (
     <>
-      <div className="flex flex-row padding-right-205">
+      <div className="flex flex-row">
         <div className="padding-right-05 flex fac">
           <Icon iconName="check" />
         </div>

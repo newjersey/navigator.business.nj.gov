@@ -29,13 +29,8 @@
   cursor: pointer;
 }
 
-li.anytime-action-dropdown-option.MuiAutocomplete-option {
+.anytime-action-dropdown-option {
   margin: 0;
-  padding: 0.5rem 0.5rem 0.5rem 1rem;
-
-  &.MuiAutocomplete-option[aria-selected="true"].Mui-focusVisible {
-    filter: brightness(97%);
-  }
 
   &:hover {
     background-color: $accent-cool-lightest;

@@ -250,17 +250,16 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
               );
             }
 
-            const newClassName = `${_props.className} anytime-action-dropdown-option ${
+            const newClassName = `anytime-action-dropdown-option padding-y-1 padding-left-2 ${
               selected ? "bg-accent-cool-lightest" : ""
-            } `;
+            }`;
+            const newProps = {
+              ..._props,
+              className: newClassName,
+            };
 
             return (
-              <li
-                data-testid={`${option.filename}-option`}
-                {..._props}
-                className={newClassName}
-                key={option.filename}
-              >
+              <li data-testid={`${option.filename}-option`} {...newProps} key={option.filename}>
                 {selected ? (
                   <MenuOptionSelected>{textComponent}</MenuOptionSelected>
                 ) : (
