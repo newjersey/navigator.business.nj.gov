@@ -21,7 +21,7 @@ summaryDescriptionMd: >-
   very large nondivisible loads on public roads. This includes:
 
 
-  * If the truck, trailer, and load (including any overhang) exceed 10 feet wide, 70 feet long or weigh over 80,000 pounds
+  * If the truck, trailer, and load exceed 10 feet wide, 70 feet long, weigh over 80,000 pounds, or are over 13 feet 6 inches high
 
   * If the combination vehicle meets the size rules for a `Code 23 Overdimensional Trailer Permit|code-23-overdimensional-trailer-permit` , but you do not have the permit
 issuingAgency: NJ Department of Transportation
