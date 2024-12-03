@@ -572,7 +572,11 @@ const ProfilePage = (props: Props): ReactElement => {
           isVisible={displayVacantBuildingOwnerQuestion()}
           hideHeader={true}
           boldAltDescription={true}
+          boldDescription={true}
         >
+          <span className={"margin-left-05"}>
+            {Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText}
+          </span>
           <RadioQuestion<boolean> fieldName={"vacantPropertyOwner"} choices={[true, false]} />
         </ProfileField>
         <ProfileField
@@ -766,7 +770,11 @@ const ProfilePage = (props: Props): ReactElement => {
           isVisible={displayVacantBuildingOwnerQuestion()}
           hideHeader={true}
           boldAltDescription={true}
+          boldDescription={true}
         >
+          <span className={"margin-left-05"}>
+            {Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText}
+          </span>
           <RadioQuestion<boolean> fieldName={"vacantPropertyOwner"} choices={[true, false]} />
         </ProfileField>
 
