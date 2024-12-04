@@ -32,7 +32,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 
 * An active overweight/overdimensional (Code 23) trailer registration. You can get it at a [NJ Motor Vehicle Commission (MVC) licensing center](https://www.nj.gov/mvc/locations/facilitylocations.htm)
 * Commercial Driver License (CDL)
-* A New Jersey NJDOT GotPermits account
+* A New Jersey [NJDOT GotPermits website](https://nj.gotpermits.com/njpass#!) account
 
 ## Application Requirements
 
@@ -67,6 +67,6 @@ You cannot operate an overweight or oversized ("Code 23") trailer in New Jersey 
 
 * A permit for an overweight/oversized vehicle using a trailer with Code 23 registration, valid for 30 days
 
-* You will receive your permit by mail, fax, or by downloading the PDF from your profile on the [NJDOT GotPermits website](https://nj.gotpermits.com/njpass#!)
+* You will receive your permit by mail, fax, or by downloading the PDF from your profile on the NJDOT GotPermits website
 
 :::
