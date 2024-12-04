@@ -13,7 +13,7 @@ agencyAdditionalContext: "Regulated Business Section"
 divisionPhone: "(973) 504-6370"
 industryId: "generic"
 licenseCertificationClassification: "undefined"
-licenseName: ""
+licenseName: "Health Club Services"
 summaryDescriptionMd: "You need to register as a health club in New Jersey if you have a health spa, fitness club, or gym."
 ---
 
