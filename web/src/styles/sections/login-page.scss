@@ -1,0 +1,22 @@
+.fit-screen-content:has(.email-check-main) {
+  background-color: $cool-extra-light;
+}
+
+.email-check-card {
+  background-color: $white;
+  border: 1px solid $base-lighter;
+  width: fit-content;
+  @include addDropShadow($drop-shadow-xs);
+
+  .usa-button {
+    margin-top: 10px;
+  }
+}
+
+.my-acccount-login-text {
+  color: $primary;
+}
+
+.link-account-text a {
+  display: inline-block;
+}

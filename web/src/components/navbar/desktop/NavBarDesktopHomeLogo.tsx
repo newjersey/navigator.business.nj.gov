@@ -6,6 +6,7 @@ import { ReactElement } from "react";
 
 interface Props {
   previousBusinessId?: string;
+  isLoginPage?: boolean;
 }
 
 export const NavBarDesktopHomeLogo = (props: Props): ReactElement => {
@@ -17,10 +18,14 @@ export const NavBarDesktopHomeLogo = (props: Props): ReactElement => {
       <div className="margin-x-105">
         <NavBarVerticalLine />
       </div>
-      <NavBarDashboardLink
-        linkText={Config.navigationDefaults.navBarMyAccountText}
-        previousBusinessId={props.previousBusinessId}
-      />
+      {props.isLoginPage ? (
+        <span className="my-acccount-login-text">My Account</span>
+      ) : (
+        <NavBarDashboardLink
+          linkText={Config.navigationDefaults.navBarMyAccountText}
+          previousBusinessId={props.previousBusinessId}
+        />
+      )}
     </div>
   );
 };

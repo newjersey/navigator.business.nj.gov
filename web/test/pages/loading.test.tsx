@@ -1,5 +1,4 @@
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import * as sessionHelper from "@/lib/auth/sessionHelper";
 import * as signinHelper from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
@@ -28,7 +27,6 @@ import { render, waitFor } from "@testing-library/react";
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onGuestSignIn: jest.fn() }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onGuestSignIn: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
@@ -47,14 +45,12 @@ function setupMockAnalytics(): typeof analytics {
   };
 }
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
-const mockSessionHelper = sessionHelper as jest.Mocked<typeof sessionHelper>;
 const mockSigninHelper = signinHelper as jest.Mocked<typeof signinHelper>;
 
 describe("loading page", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
-    mockSessionHelper.triggerSignIn.mockResolvedValue();
   });
 
   it("redirects STARTING users to dashboard", async () => {
@@ -73,7 +69,7 @@ describe("loading page", () => {
     });
   });
 
-  it("redirects OWNING users to dashbaord", async () => {
+  it("redirects OWNING users to dashboard", async () => {
     useMockProfileData({ businessPersona: "OWNING" });
     render(<LoadingPage />);
     await waitFor(() => {
@@ -115,7 +111,6 @@ describe("loading page", () => {
 
     render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
 
-    expect(mockSessionHelper.triggerSignIn).not.toHaveBeenCalled();
     expect(mockAnalytics.event.landing_page.arrive.get_unlinked_myNJ_account).toHaveBeenCalled();
     return expect(mockSigninHelper.onGuestSignIn).toHaveBeenCalledWith({
       push: expect.anything(),
@@ -123,5 +118,13 @@ describe("loading page", () => {
       dispatch: expect.anything(),
       encounteredMyNjLinkingError: true,
     });
+  });
+
+  it("redirects to the email check login page as a fallback if other conditions aren't met", async () => {
+    setMockUserDataResponse(generateUseUserDataResponse({ userData: undefined }));
+    useMockRouter({ isReady: true, asPath: "not-a-saml-error" });
+
+    render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.login);
   });
 });

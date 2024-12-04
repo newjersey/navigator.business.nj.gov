@@ -1,7 +1,6 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { NavMenuItem } from "@/components/navbar/NavMenuItem";
 import { AuthContext } from "@/contexts/authContext";
-import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSignOut } from "@/lib/auth/signinHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -18,10 +17,11 @@ import { ReactElement, useContext } from "react";
 
 export const LoginMenuItem = (): ReactElement => {
   const { Config } = useConfig();
+  const router = useRouter();
   return NavMenuItem({
     onClick: (): void => {
       analytics.event.landing_page_navbar_log_in.click.go_to_myNJ_login();
-      triggerSignIn();
+      router.push(ROUTES.login);
     },
     icon: <ButtonIcon svgFilename="login" sizePx="25px" />,
     itemText: Config.navigationDefaults.logInButton,
