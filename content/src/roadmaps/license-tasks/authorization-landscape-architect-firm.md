@@ -14,7 +14,7 @@ divisionPhone: "(973) 504-6385"
 industryId: "landscape-architecture"
 webflowType: "business-license"
 licenseCertificationClassification: "undefined"
-licenseName: ""
+licenseName: "Landscape Architecture-Certificate of Authorization"
 summaryDescriptionMd: "You need a certificate of authorization to open a business that offers landscape architecture services."
 ---
 
