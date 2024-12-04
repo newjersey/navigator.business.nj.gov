@@ -28,6 +28,7 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
   valueFilter?: (value: string) => string;
   handleChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
   onChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onFocus?: () => void;
   error?: boolean;
   validationText?: string;
@@ -178,6 +179,7 @@ export const GenericTextField = forwardRef(
           }}
           type={props.type}
           onFocus={props.onFocus}
+          onKeyDown={props.onKeyDown}
         />
 
         <div aria-live="polite" className="screen-reader-only">

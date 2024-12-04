@@ -15,6 +15,7 @@ import {
   postTaxFilingsLookup,
   postTaxFilingsOnboarding,
   postUserData,
+  postUserEmailCheck,
 } from "./apiClient";
 
 jest.mock("axios");
@@ -53,6 +54,14 @@ describe("apiClient", () => {
     expect(mockAxios.get).toHaveBeenCalledWith("/api/some/url", {
       headers: { Authorization: "Bearer some-token" },
     });
+  });
+
+  it("posts email check", async () => {
+    const email = "someone@example.com";
+    mockAxios.post.mockResolvedValue({ data: { email, found: true } });
+    const response = await postUserEmailCheck(email);
+    expect(response).toEqual({ email, found: true });
+    expect(mockAxios.post).toHaveBeenCalledWith("/api/users/emailCheck", { email }, {});
   });
 
   it("posts license status", async () => {

@@ -1,6 +1,6 @@
 import { LoadingPageComponent } from "@/components/LoadingPageComponent";
 import { AuthContext } from "@/contexts/authContext";
-import { getActiveUser, triggerSignIn } from "@/lib/auth/sessionHelper";
+import { getActiveUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
@@ -35,7 +35,7 @@ const LoadingPage = (): ReactElement => {
         encounteredMyNjLinkingError: true,
       });
     } else {
-      triggerSignIn();
+      router.push(ROUTES.login);
     }
   }, [router, dispatch]);
 

@@ -482,7 +482,6 @@ describe("<LicenseTask />", () => {
             },
           })
         );
-        console.log(JSON.stringify(userData));
         mockApi.checkLicenseStatus.mockResolvedValue(userData);
         fireEvent.submit(screen.getByTestId("check-status-submit"));
         await waitFor(() => {

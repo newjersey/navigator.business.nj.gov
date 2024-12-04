@@ -6010,6 +6010,38 @@ collections:
               - { label: "Error Description 2", name: "errorDescriptionPt2", widget: "markdown" }
               - { label: "Chat with Expert", name: "errorChatWithExpert", widget: "markdown" }
 
+  - name: "check-account-email-page"
+    label: "Check Account Email Page"
+    delete: false
+    create: false
+    files:
+      - label: "Check Account Email Page Text"
+        name: "check-account-email-page"
+        file: "content/src/fieldConfig/check-account-email-page.json"
+        editor:
+          preview: true
+        fields:
+          - label: "Check Account Email Page Text"
+            name: checkAccountEmailPage
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Header", name: "header", widget: "string" }
+              - { label: "Input label", name: "inputLabel", widget: "string" }
+              - { label: "Invalid Email text", name: "invalidEmailError", widget: "string" }
+              - { label: "Email Not Found Error Text", name: "emailNotFoundError", widget: "string" }
+              - {
+                  label: "Service Unavailable Error Text",
+                  name: "serviceNotAvailableError",
+                  widget: "string",
+                }
+              - { label: "Default Error Message Text", name: "defaultErrorMessage", widget: "string" }
+              - { label: "Input button", name: "inputButton", widget: "string" }
+              - { label: "No Account Text", name: "noAccountText", widget: "string" }
+              - { label: "Link Account Link Text", name: "linkAccountLinkText", widget: "string" }
+              - { label: "Need help text", name: "needHelpText", widget: "string" }
+              - { label: "Intercom chat text", name: "intercomChatText", widget: "string" }
+
   - name: "component-accessibility"
     label: "Component Accessibility"
     delete: false
