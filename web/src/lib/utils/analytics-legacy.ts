@@ -141,7 +141,10 @@ export type LegacyEventCategory =
   | "starter_kit_landing_start_now_button"
   | "starter_kit_landing_get_my_starter_kit_button"
   | "starter_kit_landing_get_my_starter_kit_button_footer"
-  | "show_me_funding_opportunities_button";
+  | "show_me_funding_opportunities_button"
+  | "check_account_help_button"
+  | "check_account_log_in"
+  | "link_your_myNJ_account_link";
 
 export type LegacyEventAction =
   | "click"

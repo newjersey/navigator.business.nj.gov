@@ -76,6 +76,7 @@ export const cmsCollections = [
       "Profile Page",
       "Contextual Information",
       "404 Page",
+      "Check Account Email Page",
       "Component Accessibility",
       "Global Error Messages",
       "Navigation Config",
