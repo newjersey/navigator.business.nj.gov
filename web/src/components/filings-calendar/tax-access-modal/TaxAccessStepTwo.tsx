@@ -10,18 +10,17 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { FieldStateActionKind } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { ProfileFormContext } from "@/contexts/profileFormContext";
-import { postTaxFilingsOnboarding } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { toBeNamed } from "@/lib/taxation/helpers";
 import { createReducedFieldStates, ProfileFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   Business,
   createEmptyProfileData,
-  getCurrentBusiness,
   LookupLegalStructureById,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
@@ -140,47 +139,68 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
   FormFuncWrapper(
     async () => {
       if (!business || !updateQueue) return;
+      //
+      // await gov2GoSignupAndFetchTaxEvents({
+      //   profileData,
+      //   business,
+      //   updateQueue,
+      //   queueUpdateTaskProgress,
+      //   setIsLoading,
+      //   setOnAPIfailed,
+      //   onSuccess: props.onSuccess,
+      //   close: props.close,
+      //   formContextState,
+      // });
+      //
+      // if (!business || !updateQueue) return;
 
       setIsLoading(true);
 
-      const encryptedTaxId =
-        profileData.taxId === business.profileData.taxId ? profileData.encryptedTaxId : undefined;
+      // const encryptedTaxId =
+      //   profileData.taxId === business.profileData.taxId ? profileData.encryptedTaxId : undefined;
+      console.log({
+        "profileData.taxId": profileData.taxId,
+        "business.profileData.taxId": business.profileData.taxId,
+        "business.profileData.encryptedTaxId": business.profileData.encryptedTaxId,
+        "profileData.encryptedTaxId": profileData.encryptedTaxId,
+      });
 
       try {
-        let businessNameToSubmitToTaxApi = "";
+        // let businessNameToSubmitToTaxApi = "";
+        //
+        // if (displayBusinessName()) {
+        //   businessNameToSubmitToTaxApi = profileData.businessName;
+        // }
+        // if (displayResponsibleOwnerName()) {
+        //   businessNameToSubmitToTaxApi = profileData.responsibleOwnerName;
+        // }
 
-        if (displayBusinessName()) {
-          businessNameToSubmitToTaxApi = profileData.businessName;
-        }
-        if (displayResponsibleOwnerName()) {
-          businessNameToSubmitToTaxApi = profileData.responsibleOwnerName;
-        }
+        // const userDataToSet = await postTaxFilingsOnboarding({
+        //   taxId: profileData.taxId as string,
+        //   businessName: businessNameToSubmitToTaxApi,
+        //   encryptedTaxId: encryptedTaxId as string,
+        // });
+        //
+        // updateQueue.queue(userDataToSet).queueProfileData({
+        //   taxId: profileData.taxId,
+        //   encryptedTaxId: encryptedTaxId,
+        // });
+        //
+        // if (getCurrentBusiness(userDataToSet).taxFilingData.state === "SUCCESS") {
+        //   if (displayBusinessName()) {
+        //     updateQueue.queueProfileData({
+        //       businessName: profileData.businessName,
+        //     });
+        //   }
+        //
+        //   if (displayResponsibleOwnerName()) {
+        //     updateQueue.queueProfileData({
+        //       responsibleOwnerName: profileData.responsibleOwnerName,
+        //     });
+        //   }
+        // }
 
-        const userDataToSet = await postTaxFilingsOnboarding({
-          taxId: profileData.taxId as string,
-          businessName: businessNameToSubmitToTaxApi,
-          encryptedTaxId: encryptedTaxId as string,
-        });
-
-        updateQueue.queue(userDataToSet).queueProfileData({
-          taxId: profileData.taxId,
-          encryptedTaxId: encryptedTaxId,
-        });
-
-        if (getCurrentBusiness(userDataToSet).taxFilingData.state === "SUCCESS") {
-          if (displayBusinessName()) {
-            updateQueue.queueProfileData({
-              businessName: profileData.businessName,
-            });
-          }
-
-          if (displayResponsibleOwnerName()) {
-            updateQueue.queueProfileData({
-              responsibleOwnerName: profileData.responsibleOwnerName,
-            });
-          }
-        }
-
+        await toBeNamed({ updateQueue, optionalProfileDataIfSeparateContext: profileData });
         await updateQueue.update();
       } catch {
         setOnAPIfailed("UNKNOWN");
