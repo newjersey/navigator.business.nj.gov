@@ -1,5 +1,5 @@
 ---
-licenseName: ""
+licenseName: "Telemarketers"
 id: telemarketing-license
 filename: telemarketing-license
 displayname: telemarketing-license
