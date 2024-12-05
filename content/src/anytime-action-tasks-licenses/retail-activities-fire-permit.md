@@ -12,7 +12,7 @@ notesMd: >-
 
   Second pass SME review/approval: TBD
 filename: retail-activities-fire-permit
-name: Get a Fire Permit for Retail Activities
+name: Get a Fire Permit for Temporary Retail Activities
 industryIds:
   - retail
 sectorIds:
