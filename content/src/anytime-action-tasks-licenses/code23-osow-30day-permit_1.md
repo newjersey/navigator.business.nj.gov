@@ -67,6 +67,6 @@ You cannot operate an overweight or oversized ("Code 23") trailer in New Jersey 
 
 * A permit for an overweight/oversized vehicle using a trailer with Code 23 registration, valid for 30 days
 
-* You will receive your permit by mail, fax, or by printing the PDF from theh "My Queue" page on your profile on the NJDOT GotPermits website
+* You will receive your permit by mail, fax, or by printing the PDF from the "My Queue" page on your profile on the NJDOT GotPermits website
 
 :::
