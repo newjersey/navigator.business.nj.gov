@@ -58,7 +58,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 
 :::callout{ showHeader="true" headerText="What if I don't get this permit?" showIcon="false" calloutType="warning" }
 
-If your combination vehicle, trailer, and load meet the requirements for the code 23 OS/OW (30-day) permit, you may face fines.
+If your combination vehicle, trailer, and load meet the requirements for the Code 23 OS/OW (30-day) Permit, you may face fines.
 
 :::
 
