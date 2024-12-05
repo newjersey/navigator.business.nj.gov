@@ -57,7 +57,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 * Total axle weight
 * Total axle spacing
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="What if I don't get this permit?" showIcon="false" calloutType="warning" }
 
 You cannot operate an overweight or oversized ("Code 23") trailer in New Jersey without a Code 23 OS/OW (30-day) Permit, and you may face fines if you do so.
 
