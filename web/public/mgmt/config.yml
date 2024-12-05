@@ -1070,6 +1070,12 @@ collections:
                 collapsed: true
                 widget: object
                 fields:
+                  - label: Foreign Corporation Alert
+                    name: certificateOfGoodStandingAlert
+                    widget: object
+                    fields:
+                      - { label: "Beginning", name: "beginning", widget: "string" }
+                      - { label: "End", name: "end", widget: "string" }
                   - { label: "Default / in-state intro", name: "default", widget: "markdown" }
                   - { label: "Foreign intro", name: "foreign", widget: "markdown" }
       - label: "Interim Success Page"
