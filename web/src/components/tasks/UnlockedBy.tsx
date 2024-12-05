@@ -1,4 +1,5 @@
 import { UnlockingAlert } from "@/components/tasks/UnlockingAlert";
+import { UnlockingAlertDakotaFormation } from "@/components/tasks/UnlockingAlertDakotaFormation";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -22,7 +23,19 @@ export const UnlockedBy = (props: Props): ReactElement => {
       })
     : [];
 
-  return (
+  const isDakotaFormation =
+    props.task.id === "form-business-entity" &&
+    unlockedByTaskLinks.some((task) => task.id === "certificate-good-standing-foreign");
+
+  return isDakotaFormation ? (
+    <UnlockingAlertDakotaFormation
+      taskLinks={unlockedByTaskLinks}
+      variant="warning"
+      className="margin-bottom-3"
+      isLoading={!taskFromRoadmap}
+      dataTestid={props.dataTestid}
+    />
+  ) : (
     <UnlockingAlert
       taskLinks={unlockedByTaskLinks}
       variant="warning"
