@@ -59,6 +59,11 @@
       "weight": 30,
       "licenseTask": "authorization-architect-firm",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 1,
+      "licenseTask": "professional-planner"
     }
   ],
   "name": "Architecture and Urban Planning ",
