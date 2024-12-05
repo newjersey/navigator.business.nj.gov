@@ -256,8 +256,7 @@
 }
 
 .usa-icon-button-margin {
-  width: 22px;
-  height: 22px;
+  min-width: 22px !important;
+  min-height: 22px !important;
   margin-left: 0.5rem;
-  margin-right: -0.5rem;
 }
