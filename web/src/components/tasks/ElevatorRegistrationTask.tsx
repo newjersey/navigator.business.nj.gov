@@ -135,17 +135,18 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
               </div>
               <CtaContainer>
                 <ActionBarLayout>
-                  <SecondaryButton
-                    isColor="primary"
-                    onClick={(): void => {
-                      analytics.event.task_elevator_registration.click.elevator_registration_button_click_update();
-                      setTabIndex(STATUS_TAB_INDEX);
-                    }}
-                    dataTestId="cta-secondary"
-                  >
-                    {Config.elevatorRegistrationSearchTask.registrationCallToActionSecondaryText}
-                  </SecondaryButton>
-
+                  <div className="margin-top-2 mobile-lg:margin-top-0">
+                    <SecondaryButton
+                      isColor="primary"
+                      onClick={(): void => {
+                        analytics.event.task_elevator_registration.click.elevator_registration_button_click_update();
+                        setTabIndex(STATUS_TAB_INDEX);
+                      }}
+                      dataTestId="cta-secondary"
+                    >
+                      {Config.elevatorRegistrationSearchTask.registrationCallToActionSecondaryText}
+                    </SecondaryButton>
+                  </div>
                   <PrimaryButton
                     isColor="primary"
                     onClick={(): void => {
