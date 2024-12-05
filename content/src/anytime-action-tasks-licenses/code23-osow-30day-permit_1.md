@@ -17,8 +17,8 @@ sectorIds:
 icon: govt-purple.svg
 urlSlug: code23-osow-30day-permit
 summaryDescriptionMd: >-
-  You need a permit each way to transport overweight or oversized trailers, and
-  very large nondivisible loads on public roads. This includes:
+  You need a permit to transport overweight or oversized trailers, and very
+  large nondivisible loads on public roads. This includes:
 
 
   * If the truck, trailer, and load exceed 10 feet wide, 70 feet long, weigh over 80,000 pounds, or are over 13 feet 6 inches high
@@ -67,6 +67,6 @@ You cannot operate an overweight or oversized ("Code 23") trailer in New Jersey 
 
 * A permit for an overweight/oversized vehicle using a trailer with Code 23 registration, valid for 30 days
 
-* You will receive your permit by mail, fax, or by downloading the PDF from your profile on the NJDOT GotPermits website
+* You will receive your permit by mail, fax, or by printing the PDF from theh "My Queue" page on your profile on the NJDOT GotPermits website
 
 :::
