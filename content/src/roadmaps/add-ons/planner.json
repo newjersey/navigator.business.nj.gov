@@ -4,7 +4,8 @@
   "roadmapSteps": [
     {
       "step": 4,
-      "weight": 10
+      "weight": 10,
+      "required": true
     }
   ]
 }
