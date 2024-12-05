@@ -16,7 +16,6 @@ callToActionLink: ""
 callToActionText: ""
 formName: ""
 ---
-
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
 Bylaws to document your business operations.
