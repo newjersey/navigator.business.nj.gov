@@ -1,12 +1,7 @@
 {
-  "displayname": "engineering",
   "naicsCodes": "541330",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "construction",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true
-  },
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -60,6 +55,14 @@
     }
   ],
   "name": "Engineering",
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "planning-services"
+  ],
+  "displayname": "engineering",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true
+  },
   "isEnabled": true,
   "additionalSearchTerms": "engineering consulting, firm, professional services, ",
   "id": "engineering",
