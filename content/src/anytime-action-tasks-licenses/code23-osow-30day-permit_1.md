@@ -38,7 +38,6 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 
 ### Driver and Trip Information
 
-* Name, address, and telephone number of the permit applicant
 * Travel start date
 * Vehicle type (Power Unit w/ 1 Trailer)
 * Truck plate/license number and state
@@ -59,7 +58,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 
 :::callout{ showHeader="true" headerText="What if I don't get this permit?" showIcon="false" calloutType="warning" }
 
-You cannot operate an overweight or oversized ("Code 23") trailer in New Jersey without a Code 23 OS/OW (30-day) Permit, and you may face fines if you do so.
+If your combination vehicle, trailer, and load meet the requirements for the code 23 OS/OW (30-day) permit, you may face fines.
 
 :::
 
@@ -67,6 +66,6 @@ You cannot operate an overweight or oversized ("Code 23") trailer in New Jersey 
 
 * A permit for an overweight/oversized vehicle using a trailer with Code 23 registration, valid for 30 days
 
-* You will receive your permit by mail, fax, or by printing the PDF from the "My Queue" page on your profile on the NJDOT GotPermits website
+* You will get your permit by mail, fax, or from the "My Queue" page on your NJDOT GotPermits profile
 
 :::
