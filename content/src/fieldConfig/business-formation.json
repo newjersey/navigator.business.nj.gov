@@ -41,7 +41,11 @@
     },
     "intro": {
       "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.\n\nYou will need to fill out a [paper application](https://www.nj.gov/treasury/revenue/pdf/2000.pdf) to register if you choose to `reserve your business name.|name-reservation` Business name reservations only last six months.",
-      "foreign": "You must register your business name and form your business with the State. To do this, you first need to see if your business name is available."
+      "foreign": "You must register your business name and form your business with the State. To do this, you first need to see if your business name is available.",
+      "certificateOfGoodStandingAlert": {
+        "beginning": "Before starting this task, you must:",
+        "end": "You need it to authorize your business in New Jersey."
+      }
     },
     "sections": {
       "addressHeader": "Primary Business Address",
