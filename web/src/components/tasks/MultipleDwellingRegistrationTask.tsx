@@ -129,14 +129,16 @@ export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => 
               </div>
               <CtaContainer>
                 <ActionBarLayout>
-                  <SecondaryButton
-                    isColor={"primary"}
-                    onClick={() => {
-                      setTabIndex(STATUS_TAB_INDEX);
-                    }}
-                  >
-                    <div>{Config.housingRegistrationSearchTask.registrationCallToActionSecondaryText}</div>
-                  </SecondaryButton>
+                  <div className="margin-top-2 mobile-lg:margin-top-0">
+                    <SecondaryButton
+                      isColor={"primary"}
+                      onClick={() => {
+                        setTabIndex(STATUS_TAB_INDEX);
+                      }}
+                    >
+                      <div>{Config.housingRegistrationSearchTask.registrationCallToActionSecondaryText}</div>
+                    </SecondaryButton>
+                  </div>
                   <PrimaryButton
                     isRightMarginRemoved
                     isColor={"primary"}

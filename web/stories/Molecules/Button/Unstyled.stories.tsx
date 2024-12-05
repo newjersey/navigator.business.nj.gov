@@ -75,8 +75,8 @@ export const ExternalLink: Story = {
   args: {
     children: (
       <>
-        <>Link</>
-        <Icon className="usa-icon--size-3 margin-left-05" iconName="launch" />
+        <span className="margin-right-05">Link</span>
+        <Icon className="usa-icon--size-3" iconName="launch" />
       </>
     ),
     isUnderline: true,

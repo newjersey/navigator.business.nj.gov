@@ -151,20 +151,21 @@ export const LicenseTask = (props: Props): ReactElement => {
               </div>
               <CtaContainer>
                 <ActionBarLayout>
-                  <SecondaryButton
-                    isColor="primary"
-                    onClick={(): void => {
-                      analytics.event.task_button_i_already_submitted.click.view_status_tab(
-                        "check_status",
-                        "start_application"
-                      );
-                      setTabIndex(STATUS_TAB_INDEX);
-                    }}
-                    dataTestId="cta-secondary"
-                  >
-                    {Config.licenseSearchTask.secondaryCTAFirstLineText}
-                  </SecondaryButton>
-
+                  <div className="margin-top-2 mobile-lg:margin-top-0">
+                    <SecondaryButton
+                      isColor="primary"
+                      onClick={(): void => {
+                        analytics.event.task_button_i_already_submitted.click.view_status_tab(
+                          "check_status",
+                          "start_application"
+                        );
+                        setTabIndex(STATUS_TAB_INDEX);
+                      }}
+                      dataTestId="cta-secondary"
+                    >
+                      {Config.licenseSearchTask.secondaryCTAFirstLineText}
+                    </SecondaryButton>
+                  </div>
                   <PrimaryButton
                     isColor="primary"
                     onClick={(): void => {

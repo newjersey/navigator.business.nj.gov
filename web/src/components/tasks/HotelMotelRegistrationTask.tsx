@@ -131,16 +131,17 @@ export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
 
               <CtaContainer>
                 <ActionBarLayout>
-                  <SecondaryButton
-                    isColor="primary"
-                    onClick={(): void => {
-                      setTabIndex(STATUS_TAB_INDEX);
-                    }}
-                    dataTestId="cta-secondary"
-                  >
-                    {Config.housingRegistrationSearchTask.registrationCallToActionSecondaryText}
-                  </SecondaryButton>
-
+                  <div className="margin-top-2 mobile-lg:margin-top-0">
+                    <SecondaryButton
+                      isColor="primary"
+                      onClick={(): void => {
+                        setTabIndex(STATUS_TAB_INDEX);
+                      }}
+                      dataTestId="cta-secondary"
+                    >
+                      {Config.housingRegistrationSearchTask.registrationCallToActionSecondaryText}
+                    </SecondaryButton>
+                  </div>
                   <PrimaryButton
                     isColor="primary"
                     onClick={(): void => {
