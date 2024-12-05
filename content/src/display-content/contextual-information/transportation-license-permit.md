@@ -12,8 +12,11 @@ header: Transportation License or Permit
 slug: transportation-license-permit
 displayname: transportation-license-permit
 ---
-If your business regularly delivers alcoholic beverages, consider getting a transportation license or permit. You can apply for one with the Division of Alcoholic Beverage Control (ABC).
+If your business often delivers alcoholic beverages, consider getting a transportation license or permit. You can apply for one with the Division of Alcoholic Beverage Control (ABC):
 
-You will also need to get an insignia. An insignia is a decal on a vehicle that shows it is permitted to carry alcohol.
+* **Transportation license** lets your business deliver alcohol both into and out of New Jersey
+* **Limited transportation permit** allows your business to pick up alcohol at points in NJ and transports to points outside of NJ
+
+You will also need to get an insignia. An insignia is a marker on a vehicle that shows it is allowed to carry alcohol.
 
 To see which license, permit, or insignia you need, contact ABC at (609) 984-2830.
