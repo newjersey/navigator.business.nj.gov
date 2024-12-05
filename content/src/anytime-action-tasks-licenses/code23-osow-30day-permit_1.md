@@ -57,8 +57,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 * Total axle spacing
 
 :::callout{ showHeader="true" headerText="What if I don't get this permit?" showIcon="false" calloutType="warning" }
-
-If your combination vehicle, trailer, and load meet the requirements for the Code 23 OS/OW (30-day) Permit, you may face fines.
+If you don't get this permit and your combination vehicle, trailer, and load meet the Code 23 OS/OW (30-day) Permit requirements, you may face fines.
 
 :::
 
