@@ -1,5 +1,6 @@
 export type EnvironmentData = {
   waste?: WasteData;
+  air?: AirData;
 };
 
 export type WasteData = {
@@ -14,4 +15,13 @@ export type WasteQuestionnaireFieldIds =
   | "constructionDebris"
   | "noWaste";
 
+export type AirData = {
+  questionaireData?: AirQuestionnaireData;
+  submitted: boolean;
+};
+
+export type AirQuestionnaireFieldIds = "airPollutants" | "airEmissions" | "constructionActivities" | "noAir";
+
 export type WasteQuestionnaireData = Record<WasteQuestionnaireFieldIds, boolean>;
+
+export type AirQuestionnaireData = Record<AirQuestionnaireFieldIds, boolean>;
