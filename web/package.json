@@ -149,7 +149,7 @@
     "dependency-cruiser": "16.6.0",
     "dotenv": "16.4.5",
     "eslint": "8.57.1",
-    "eslint-config-next": "14.2.18",
+    "eslint-config-next": "14.2.19",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-cypress": "2.15.2",
     "eslint-plugin-jest": "27.9.0",
