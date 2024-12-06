@@ -8,6 +8,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
+import { isForeignCorporation } from "@/lib/utils/helpers";
 import {
   DateObject,
   advancedDateLibrary,
@@ -15,7 +16,7 @@ import {
   getCurrentDateInNewJersey,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
-import { TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
@@ -30,22 +31,27 @@ export const FormationDate = (props: Props): ReactElement => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doesFieldHaveError } = useFormationErrors();
   const dateFormat = "MM/DD/YYYY";
+  const direction = isForeignCorporation(state.formationFormData.legalType) ? "column" : "row";
 
   const contentProps = useMemo(
     () => ({
       businessStartDate: {
         label: (
-          <>
-            <strong>
-              <ContextualInfoButton
-                text={Config.formation.fields.businessStartDate.label}
-                id={Config.formation.fields.businessStartDate.labelContextualInfo}
-              />
-            </strong>
-            <span className="margin-left-05">
-              {Config.formation.fields.businessStartDate.labelSecondaryText}
-            </span>
-          </>
+          <Grid container direction={direction}>
+            <Grid item>
+              <strong>
+                <ContextualInfoButton
+                  text={Config.formation.fields.businessStartDate.label}
+                  id={Config.formation.fields.businessStartDate.labelContextualInfo}
+                />
+              </strong>
+            </Grid>
+            <Grid item>
+              <span className="margin-left-05 flex">
+                {Config.formation.fields.foreignDateOfFormation.labelSecondaryText}
+              </span>
+            </Grid>
+          </Grid>
         ),
         helperText: getBusinessStartDateHelperText(state.formationFormData.legalType),
       },

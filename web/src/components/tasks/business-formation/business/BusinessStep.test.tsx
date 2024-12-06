@@ -26,7 +26,12 @@ import {
   randomElementFromArray,
   randomPublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
-import { corpLegalStructures, publicFilingLegalTypes } from "@businessnjgovnavigator/shared/formationData";
+import {
+  corpLegalStructures,
+  incorporationLegalStructures,
+  nonCorporationLegalStructures,
+  publicFilingLegalTypes,
+} from "@businessnjgovnavigator/shared/formationData";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";
 
@@ -489,77 +494,124 @@ describe("Formation - BusinessStep", () => {
       });
     }
 
-    describe("Business Designator Options based on Will Practice Law Answer", () => {
-      it.each(corpLegalStructures)(
-        "Shows PA and PC options for Business Designator when Will You Practice Law is Yes",
-        async (legalStructureId) => {
-          await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: true });
+    describe("Business Designator", () => {
+      describe("Business Designator secondary label foreign corporation", () => {
+        it.each(corpLegalStructures)(
+          "Shows secondary label foreign corporation",
+          async (legalStructureId) => {
+            await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
+            expect(
+              screen.getByText(Config.formation.fields.businessSuffix.labelSecondaryTextForeignCorporation)
+            ).toBeInTheDocument();
+            expect(
+              screen.getByText(Config.formation.fields.businessSuffix.labelSecondaryTextForeignCorporation)
+            ).toBeInTheDocument();
+          }
+        );
 
-          expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
-          expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
+        it.each(nonCorporationLegalStructures)(
+          "Does Not shows secondary label foreign corporation",
+          async (legalStructureId) => {
+            await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
+            expect(
+              screen.queryByText(Config.formation.fields.businessSuffix.labelSecondaryTextForeignCorporation)
+            ).not.toBeInTheDocument();
+          }
+        );
 
-          await userEvent.click(screen.getByTestId("business-suffix-main"));
-          expect(screen.getByText("P.C.")).toBeInTheDocument();
-          expect(screen.getByText("P.A.")).toBeInTheDocument();
-        }
-      );
+        it.each(incorporationLegalStructures)(
+          "Does Not shows secondary label foreign corporation for Oscars",
+          async (legalStructureId) => {
+            await getPageHelper({ businessPersona: "OWNING", legalStructureId }, {});
+            expect(
+              screen.queryByText(Config.formation.fields.businessSuffix.labelSecondaryTextForeignCorporation)
+            ).not.toBeInTheDocument();
+          }
+        );
 
-      it.each(corpLegalStructures)(
-        "Does not show PA and PC options for Business Designator when Will You Practice Law is No",
-        async (legalStructureId) => {
-          await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: false });
-          expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
-          expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
+        it.each(incorporationLegalStructures)(
+          "Does Not shows secondary label foreign corporation for Poppy",
+          async (legalStructureId) => {
+            await getPageHelper({ businessPersona: "STARTING", legalStructureId }, {});
+            expect(
+              screen.queryByText(Config.formation.fields.businessSuffix.labelSecondaryTextForeignCorporation)
+            ).not.toBeInTheDocument();
+          }
+        );
+      });
 
-          await userEvent.click(screen.getByTestId("business-suffix-main"));
+      describe("Business Designator Options based on Will Practice Law Answer", () => {
+        it.each(corpLegalStructures)(
+          "Shows PA and PC options for Business Designator when Will You Practice Law is Yes",
+          async (legalStructureId) => {
+            await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: true });
 
-          expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
-          expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
-        }
-      );
+            expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
+            expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
 
-      it.each(corpLegalStructures)(
-        "Does not show PA and PC options for Business Designator when Will You Practice Law is Undefined",
-        async (legalStructureId) => {
-          await getPageHelper(
-            { businessPersona: "FOREIGN", legalStructureId },
-            { willPracticeLaw: undefined }
-          );
-          expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
-          expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
+            await userEvent.click(screen.getByTestId("business-suffix-main"));
+            expect(screen.getByText("P.C.")).toBeInTheDocument();
+            expect(screen.getByText("P.A.")).toBeInTheDocument();
+          }
+        );
 
-          await userEvent.click(screen.getByTestId("business-suffix-main"));
+        it.each(corpLegalStructures)(
+          "Does not show PA and PC options for Business Designator when Will You Practice Law is No",
+          async (legalStructureId) => {
+            await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: false });
+            expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
+            expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
 
-          expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
-          expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
-        }
-      );
+            await userEvent.click(screen.getByTestId("business-suffix-main"));
 
-      it.each(corpLegalStructures)(
-        "Displays an Alert when selecting an option for the Will you practice law question to tell the user Business Designator options have changed",
-        async (legalStructureId) => {
-          await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
-          expect(
-            screen.queryByText(Config.formation.fields.businessSuffix.optionsUpdatedSnackbarAlert)
-          ).not.toBeInTheDocument();
-          fireEvent.click(screen.getByTestId("willPracticeLaw-true"));
-          expect(
-            screen.getByText(Config.formation.fields.businessSuffix.optionsUpdatedSnackbarAlert)
-          ).toBeInTheDocument();
-        }
-      );
+            expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
+            expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
+          }
+        );
 
-      it.each(corpLegalStructures)(
-        "clears Business Designator if Will you practice law question is changed and Business designator is selected",
-        async (legalStructureId) => {
-          await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: true });
-          await userEvent.click(screen.getByTestId("business-suffix-main"));
-          await userEvent.click(screen.getByText("P.C."));
-          expect(screen.getByTestId("business-suffix-main")).toHaveTextContent("P.C.");
-          fireEvent.click(screen.getByTestId("willPracticeLaw-false"));
-          expect(screen.getByTestId("business-suffix-main")).toBeEmptyDOMElement();
-        }
-      );
+        it.each(corpLegalStructures)(
+          "Does not show PA and PC options for Business Designator when Will You Practice Law is Undefined",
+          async (legalStructureId) => {
+            await getPageHelper(
+              { businessPersona: "FOREIGN", legalStructureId },
+              { willPracticeLaw: undefined }
+            );
+            expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
+            expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
+
+            await userEvent.click(screen.getByTestId("business-suffix-main"));
+
+            expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
+            expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
+          }
+        );
+
+        it.each(corpLegalStructures)(
+          "Displays an Alert when selecting an option for the Will you practice law question to tell the user Business Designator options have changed",
+          async (legalStructureId) => {
+            await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
+            expect(
+              screen.queryByText(Config.formation.fields.businessSuffix.optionsUpdatedSnackbarAlert)
+            ).not.toBeInTheDocument();
+            fireEvent.click(screen.getByTestId("willPracticeLaw-true"));
+            expect(
+              screen.getByText(Config.formation.fields.businessSuffix.optionsUpdatedSnackbarAlert)
+            ).toBeInTheDocument();
+          }
+        );
+
+        it.each(corpLegalStructures)(
+          "clears Business Designator if Will you practice law question is changed and Business designator is selected",
+          async (legalStructureId) => {
+            await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: true });
+            await userEvent.click(screen.getByTestId("business-suffix-main"));
+            await userEvent.click(screen.getByText("P.C."));
+            expect(screen.getByTestId("business-suffix-main")).toHaveTextContent("P.C.");
+            fireEvent.click(screen.getByTestId("willPracticeLaw-false"));
+            expect(screen.getByTestId("business-suffix-main")).toBeEmptyDOMElement();
+          }
+        );
+      });
     });
   });
 
