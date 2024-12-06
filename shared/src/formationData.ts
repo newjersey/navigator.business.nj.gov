@@ -104,6 +104,14 @@ export const emptyAddressData: Address = {
   addressZipCode: "",
 };
 
+export const emptyFormationAddressData: FormationAddress = {
+  ...emptyAddressData,
+  addressCity: undefined,
+  addressProvince: undefined,
+  addressCountry: undefined,
+  businessLocationType: undefined,
+};
+
 export interface FormationSigner {
   readonly name: string;
   readonly signature: boolean;

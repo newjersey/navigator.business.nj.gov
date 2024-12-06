@@ -54,12 +54,11 @@ import {
   arrayOfStateObjects as states,
 } from "@businessnjgovnavigator/shared";
 import {
-  Address,
   OperatingPhase,
   randomIntFromInterval,
   taskIdLicenseNameMapping,
 } from "@businessnjgovnavigator/shared/";
-import { FormationData } from "@businessnjgovnavigator/shared/formationData";
+import { FormationAddress, FormationData } from "@businessnjgovnavigator/shared/formationData";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import { filterRandomIndustry, randomIndustry, randomSector } from "@businessnjgovnavigator/shared/test";
 
@@ -412,13 +411,17 @@ export const generateActiveUser = (overrides: Partial<ActiveUser>): ActiveUser =
   };
 };
 
-export const generateAddress = (overrides: Partial<Address>): Address => {
+export const generateAddress = (overrides: Partial<FormationAddress>): FormationAddress => {
   return {
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
     addressMunicipality: undefined,
     addressState: undefined,
     addressZipCode: `0${randomIntFromInterval("7001", "8999")}`,
+    addressCity: `some-city-${randomInt()}`,
+    addressProvince: undefined,
+    addressCountry: undefined,
+    businessLocationType: undefined,
     ...overrides,
   };
 };

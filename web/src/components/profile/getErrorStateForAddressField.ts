@@ -1,21 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { getMergedConfig } from "@/contexts/configContext";
+import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
+import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
 import { AddressFieldErrorState, AddressFields, FieldsForAddressErrorHandling } from "@/lib/types/types";
 import {
   BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
   BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
 } from "@/lib/utils/formation-helpers";
 import { templateEval } from "@/lib/utils/helpers";
-import { Address } from "@businessnjgovnavigator/shared/index";
+import { FormationAddress } from "@businessnjgovnavigator/shared/index";
 
 export const getErrorStateForAddressField = ({
   field,
-  addressData,
+  formationAddressData,
 }: {
   field: FieldsForAddressErrorHandling;
-  addressData: Address;
+  formationAddressData: FormationAddress;
 }): AddressFieldErrorState => {
   const Config = getMergedConfig();
   const errorState = {
@@ -24,8 +26,8 @@ export const getErrorStateForAddressField = ({
   };
 
   const fieldWithMaxLength = (params: { required: boolean; maxLen: number }): AddressFieldErrorState => {
-    const exists = !!addressData[field];
-    const isTooLong = (addressData[field] as string)?.length > params.maxLen;
+    const exists = !!formationAddressData[field];
+    const isTooLong = (formationAddressData[field] as string)?.length > params.maxLen;
     let label = errorState.label;
     const isValid = params.required ? exists && !isTooLong : !isTooLong;
     if (params.required && !exists) {
@@ -43,8 +45,8 @@ export const getErrorStateForAddressField = ({
     associatedFields: AddressFields[];
     label: string;
   }): AddressFieldErrorState => {
-    const exists = !!addressData[field];
-    const anAssociatedFieldExists = params.associatedFields.some((it) => !!addressData[it]);
+    const exists = !!formationAddressData[field];
+    const anAssociatedFieldExists = params.associatedFields.some((it) => !!formationAddressData[it]);
 
     let label = errorState.label;
     let isValid = true;
@@ -78,7 +80,14 @@ export const getErrorStateForAddressField = ({
     const maxLengthError = fieldWithMaxLength({ required: false, maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR });
 
     const partialAddressError = fieldWithAssociatedFields({
-      associatedFields: ["addressMunicipality", "addressZipCode", "addressLine2"],
+      associatedFields: [
+        "addressMunicipality",
+        "addressZipCode",
+        "addressLine2",
+        "addressCity",
+        "addressProvince",
+        "addressCountry",
+      ],
       label: (Config.formation.fields as any)[field].error,
     });
 
@@ -96,24 +105,80 @@ export const getErrorStateForAddressField = ({
     });
   }
 
+  if (field === "addressState") {
+    return fieldWithAssociatedFields({
+      associatedFields: [
+        "addressLine1",
+        "addressCity",
+        "addressMunicipality",
+        "addressZipCode",
+        "addressLine2",
+      ],
+      label: (Config.formation.fields as any)[field].error,
+    });
+  }
+
+  if (field === "addressCity") {
+    return fieldWithAssociatedFields({
+      associatedFields: [
+        "addressLine1",
+        "addressProvince",
+        "addressCountry",
+        "addressZipCode",
+        "addressLine2",
+      ],
+      label: (Config.formation.fields as any)[field].error,
+    });
+  }
+
+  if (field === "addressProvince") {
+    return fieldWithAssociatedFields({
+      associatedFields: ["addressLine1", "addressCity", "addressCountry", "addressZipCode", "addressLine2"],
+      label: (Config.formation.fields as any)[field].error,
+    });
+  }
+
+  if (field === "addressCountry") {
+    return fieldWithAssociatedFields({
+      associatedFields: ["addressLine1", "addressCity", "addressProvince", "addressZipCode", "addressLine2"],
+      label: (Config.formation.fields as any)[field].error,
+    });
+  }
+
   if (field === "addressZipCode") {
-    const exists = !!addressData[field];
+    const exists = !!formationAddressData[field];
     let inRange = false;
+    const isValidUsZipCode = isZipCodeUs(formationAddressData[field]);
+    const isValidNjZipCode = isZipCodeNj(formationAddressData[field]);
+    const isIntlPostalCode = isZipCodeIntl(formationAddressData[field]);
+
+    if (formationAddressData.addressState?.shortCode === "NJ") {
+      inRange = isValidNjZipCode;
+    } else if (formationAddressData.addressState?.shortCode) {
+      inRange = isValidUsZipCode;
+    } else {
+      inRange = isIntlPostalCode;
+    }
+
+    const hasError = exists && !inRange;
+
+    const zipCodeErrorLabel =
+      formationAddressData.addressState?.shortCode === "NJ"
+        ? (Config.formation.fields as any)[field].error
+        : (Config.formation.fields as any)[field].foreign.errorUS;
 
     const partialAddressError = fieldWithAssociatedFields({
       associatedFields: ["addressMunicipality", "addressLine1", "addressLine2"],
-      label: (Config.formation.fields as any)[field].error,
+      label: zipCodeErrorLabel,
     });
-    inRange = isZipCodeNj(addressData[field]);
-    const hasError = exists && !inRange;
+
     const inRangeError = {
       ...errorState,
       hasError: hasError,
-      label: (Config.formation.fields as any)[field].error,
+      label: zipCodeErrorLabel,
     };
 
     return combineErrorStates({ firstPriority: inRangeError, secondPriority: partialAddressError });
   }
-
   return { ...errorState, hasError: false };
 };
