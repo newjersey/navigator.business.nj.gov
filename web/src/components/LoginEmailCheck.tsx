@@ -1,10 +1,20 @@
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { Heading } from "@/components/njwds-extended/Heading";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+
 import { ReactElement } from "react";
 
 export const LoginEmailCheck = (): ReactElement => {
   // const [email, setEmail] = useState<string>("");
+  const { Config } = useConfig();
+  console.log(Config);
+  return (
+    <pre>
+      {"Config fields:\n"}
+      {JSON.stringify(Config.checkAccountEmailPage, null, 2)}
+    </pre>
+  );
 
   return (
     <div>
