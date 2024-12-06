@@ -8,6 +8,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
+import { isForeignCorporation } from "@/lib/utils/helpers";
 import {
   DateObject,
   advancedDateLibrary,
@@ -30,22 +31,25 @@ export const FormationDate = (props: Props): ReactElement => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doesFieldHaveError } = useFormationErrors();
   const dateFormat = "MM/DD/YYYY";
+  const floatClass = isForeignCorporation(state.formationFormData.legalType) ? "float-none" : "float-left";
 
   const contentProps = useMemo(
     () => ({
       businessStartDate: {
         label: (
-          <>
-            <strong>
-              <ContextualInfoButton
-                text={Config.formation.fields.businessStartDate.label}
-                id={Config.formation.fields.businessStartDate.labelContextualInfo}
-              />
-            </strong>
-            <span className="margin-left-05">
-              {Config.formation.fields.businessStartDate.labelSecondaryText}
-            </span>
-          </>
+          <div>
+            <div className={`${floatClass}`}>
+              <strong>
+                <ContextualInfoButton
+                  text={Config.formation.fields.businessStartDate.label}
+                  id={Config.formation.fields.businessStartDate.labelContextualInfo}
+                />
+              </strong>
+            </div>
+            <div className={`${floatClass}`}>
+              <span>{Config.formation.fields.foreignDateOfFormation.labelSecondaryText}</span>
+            </div>
+          </div>
         ),
         helperText: getBusinessStartDateHelperText(state.formationFormData.legalType),
       },
