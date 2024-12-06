@@ -29,10 +29,19 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
           label={Config.formation.fields.addressCity.label}
           value={getAddressCity(state.formationFormData)}
         />
-        <ReviewLineItem
-          label={Config.formation.fields.addressState.label}
-          value={getAddressState(state.formationFormData)}
-        />
+
+        {businessLocationType === "INTL" ? (
+          <ReviewLineItem
+            label={Config.formation.fields.addressProvince.label}
+            value={getAddressState(state.formationFormData)}
+          />
+        ) : (
+          <ReviewLineItem
+            label={Config.formation.fields.addressState.label}
+            value={getAddressState(state.formationFormData)}
+          />
+        )}
+
         <ReviewLineItem
           label={Config.formation.fields.addressZipCode.label}
           value={state.formationFormData.addressZipCode}

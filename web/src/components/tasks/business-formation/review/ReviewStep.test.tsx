@@ -447,6 +447,14 @@ describe("Formation - ReviewStep", () => {
       expect(screen.getByText("Random place whatever", { exact: false })).toBeInTheDocument();
     });
 
+    it("displays province name label in address when intl", async () => {
+      await renderStep(
+        { businessPersona: "FOREIGN" },
+        { addressProvince: "Province", businessLocationType: "INTL" }
+      );
+      expect(screen.getByText(Config.formation.fields.addressProvince.label)).toBeInTheDocument();
+    });
+
     it("displays city name in address when non-nj", async () => {
       await renderStep(
         { businessPersona: "FOREIGN" },
