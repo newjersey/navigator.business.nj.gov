@@ -201,6 +201,10 @@ module.exports = {
       from: { path: "src/db" },
       to: { path: "src/libs" },
     },
+    {
+      from: { path: "src/api" },
+      to: { path: "src/libs" },
+    },
   ],
   forbidden: [
     /* rules from the 'recommended' preset: */
