@@ -323,7 +323,8 @@ app.use(
     updateSidebarCards,
     updateOperatingPhase,
     AWSEncryptionDecryptionClient,
-    timeStampToBusinessSearch
+    timeStampToBusinessSearch,
+    logger
   )
 );
 
@@ -350,7 +351,6 @@ app.use(
   taxFilingRouterFactory(userDataClient, taxFilingInterface, AWSEncryptionDecryptionClient)
 );
 app.use("/api", taxDecryptionRouterFactory(AWSEncryptionDecryptionClient));
-
 app.use(
   "/health",
   healthCheckRouterFactory(
