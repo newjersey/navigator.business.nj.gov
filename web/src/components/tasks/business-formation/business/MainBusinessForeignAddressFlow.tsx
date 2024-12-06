@@ -31,6 +31,53 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
     }
   });
 
+  // useMountEffect(() => {
+  //   if (state.formationFormData.businessLocationType === "US" ||state.formationFormData.businessLocationType === "INTL") {
+  //     setFormationFormData((previousState) => {
+  //       return {
+  //         ...previousState,
+  //         addressCountry: previousState.addressCountry,
+  //       };
+  //     });
+  //   }
+  // });
+
+  console.log(
+    "state.formationFormData.businessLocationType outside Mount",
+    state.formationFormData.businessLocationType
+  );
+  console.log("useUserData", useUserData());
+  console.log("business", business);
+  console.log("biz...", business?.formationData.formationFormData.businessLocationType);
+  // useMountEffect(() => {
+  //   // if (state.formationFormData.businessLocationType === "US") {
+  //   console.log("state biz type", state.formationFormData.businessLocationType);
+  //   const persistedLocation = business?.formationData.formationFormData.businessLocationType;
+  //   console.log("persistedLocation", persistedLocation);
+
+  //   if (!state.formationFormData.businessLocationType) {
+  //     const defaultLocation = persistedLocation || "US";
+  //     console.log("defaultLocation", defaultLocation);
+  //     setFormationFormData((previousState) => {
+  //       console.log("previousState", previousState);
+  //       const updatedState = {
+  //         ...previousState,
+  //         businessLocationType: defaultLocation,
+  //         addressCountry: defaultLocation === "US" ? "US" : previousState.addressCountry,
+  //       };
+  //       // return {
+  //       //   ...previousState,
+  //       //   businessLocationType: defaultLocation,
+  //       //   addressCountry: defaultLocation === "US" ? "US" : previousState.addressCountry,
+  //       // };
+  //       console.log("updatedstate", updatedState);
+  //       return updatedState;
+  //     });
+  //   }
+  //   console.log("updated bizlocation", state.formationFormData.businessLocationType);
+  // });
+  console.log("business in MainBiz", business);
+
   const onChange = (value: FlowBusinessLocationType): void => {
     let resetAddress = createEmptyFormationAddress();
     setFieldsInteracted(Object.keys(createEmptyFormationAddress()) as (keyof FormationAddress)[], {
@@ -64,6 +111,7 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
           onChange={(event): void => onChange(event.target.value as FlowBusinessLocationType)}
           row
         >
+          {/* {console.log(state.formationFormData.businessLocationType)} */}
           <>
             <FormControlLabel
               style={{ alignItems: "center" }}

@@ -18,6 +18,9 @@ export const useAddressErrors = (): AddressErrorsResponse => {
     "addressMunicipality",
     "addressState",
     "addressZipCode",
+    "addressCity",
+    "addressCountry",
+    "addressProvince",
   ]);
 
   const doesFieldHaveError = (field: FieldsForAddressErrorHandling): boolean => {
