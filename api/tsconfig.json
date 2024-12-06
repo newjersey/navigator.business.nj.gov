@@ -16,10 +16,4 @@
   },
   "include": ["src/**/*.ts", "test/**/*.ts", "serverless.ts"],
   "exclude": ["node_modules/**/*", ".serverless/**/*", ".webpack/**/*", "_warmup/**/*", ".vscode/**/*"],
-  "ts-node": {
-    "require": ["tsconfig-paths/register"],
-    "moduleTypes": {
-      "jest.config.ts": "cjs"
-    }
-  }
 }

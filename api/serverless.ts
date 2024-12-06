@@ -89,14 +89,8 @@ const useWireMockForFormationAndBusinessSearch =
 const serverlessConfiguration: AWS = {
   useDotenv: true,
   service: "businessnjgov-api",
-  frameworkVersion: "3",
+  frameworkVersion: "4",
   custom: {
-    webpack: {
-      webpackConfig: "./webpack.config.ts",
-      includeModules: {
-        nodeModulesRelativeDir: "../",
-      },
-    },
     "serverless-dynamodb": {
       port: dynamoOfflinePort,
       start: {
@@ -119,9 +113,17 @@ const serverlessConfiguration: AWS = {
       automatic: true,
       number: 5,
     },
+    esbuild: {
+      bundle: true,
+      minify: true,
+      target: "node20",
+      platform: "node",
+      external: ["aws-sdk"],
+      sourcemap: true,
+    },
   },
   plugins: [
-    "serverless-webpack",
+    "serverless-esbuild",
     ...(isDocker ? [] : ["serverless-dynamodb"]),
     "serverless-offline-ssm",
     "serverless-offline",
