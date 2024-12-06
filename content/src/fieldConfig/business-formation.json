@@ -284,6 +284,7 @@
       "businessSuffix": {
         "label": "Business Designator",
         "labelContextualInfo": "business-designator",
+        "labelSecondaryTextForeignCorporation": "(Must match Certificate of Good Standing)",
         "error": "Select a business designator.",
         "optionsUpdatedSnackbarAlert": "Your Business Designator list has been updated. Make your selection from the dropdown menu."
       },
