@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ReactElement } from "react";
-import rehypeReact from "rehype-react";
+import rehypeReact  from "rehype-react";
 import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
@@ -23,8 +23,8 @@ export const PureMarkdownContent = (props: Props): ReactElement => {
     .use(rehypeReact, {
       createElement: React.createElement,
       Fragment: React.Fragment,
-      components: props.components,
-    })
+      components: props.components
+    }as any)
     .processSync(props.children).result;
   return <>{markdown}</>;
 };
