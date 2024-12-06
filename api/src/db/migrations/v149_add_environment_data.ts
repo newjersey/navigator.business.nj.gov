@@ -571,7 +571,7 @@ export const generatev149UserData = (overrides: Partial<v149UserData>): v149User
     version: 149,
     lastUpdatedISO: "",
     dateCreatedISO: "",
-    versionWhenCreated: 141,
+    versionWhenCreated: -1,
     businesses: {
       "123": generatev149Business({ id: "123" }),
     },
