@@ -36,7 +36,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 
 ## Application Requirements
 
-### Driver and Trip Information
+### Trip Information
 
 * Travel start date
 * Vehicle type (Power Unit w/ 1 Trailer)
@@ -65,6 +65,6 @@ If you don't get this permit and your combination vehicle, trailer, and load mee
 
 * A permit for an overweight/oversized vehicle using a trailer with Code 23 registration, valid for 30 days
 
-* You will get your permit by mail, fax, or from the "My Queue" page on your NJDOT GotPermits profile
+* You will get your permit by email, fax, or from the "My Queue" page on your NJDOT GotPermits profile
 
 :::
