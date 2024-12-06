@@ -329,7 +329,7 @@ const ProfilePage = (props: Props): ReactElement => {
     if (!business) return false;
     return (
       (profileData.industryId === "real-estate-investor" || profileData.sectorId === "real-estate") &&
-      (profileData.operatingPhase === "UP_AND_RUNNING" || profileData.operatingPhase === "GUEST_MODE_OWNING")
+      (profileData.operatingPhase === "UP_AND_RUNNING" || profileData.businessPersona === "OWNING")
     );
   };
 
@@ -567,18 +567,6 @@ const ProfilePage = (props: Props): ReactElement => {
           <NonEssentialQuestionsSection />
         </ProfileField>
 
-        <ProfileField
-          fieldName="vacantPropertyOwner"
-          isVisible={displayVacantBuildingOwnerQuestion()}
-          hideHeader={true}
-          boldAltDescription={true}
-          boldDescription={true}
-        >
-          <span className={"margin-left-05"}>
-            {Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText}
-          </span>
-          <RadioQuestion<boolean> fieldName={"vacantPropertyOwner"} choices={[true, false]} />
-        </ProfileField>
         <ProfileField
           fieldName="sectorId"
           isVisible={profileData.industryId === "generic" || !!props.CMS_ONLY_fakeBusiness}

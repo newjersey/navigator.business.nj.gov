@@ -748,6 +748,63 @@ describe("profile - owning existing business", () => {
 
       expect(screen.queryByTestId("elevatorOwningBusiness-radio-group")).not.toBeInTheDocument();
     });
+
+    it("shows vacant building question for real estate up and running poppies", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateOwningProfileData({
+          industryId: "real-estate-investor",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
+          businessPersona: "STARTING",
+          homeBasedBusiness: false,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
+    });
+
+    it("shows vacant building question for owning guest mode users", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateOwningProfileData({
+          industryId: "real-estate-investor",
+          operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
+          businessPersona: "OWNING",
+          homeBasedBusiness: false,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
+    });
+
+    it("shows vacant building question for owning signed in users", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateOwningProfileData({
+          industryId: "real-estate-investor",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
+          businessPersona: "OWNING",
+          homeBasedBusiness: false,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
+    });
   });
 
   const getSectorIDValue = (): string => {
