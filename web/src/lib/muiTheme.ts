@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
+import "@mui/lab/themeAugmentation";
 import { createTheme } from "@mui/material";
 
 export default createTheme({
@@ -101,6 +100,9 @@ export default createTheme({
     },
     MuiTabs: {
       styleOverrides: {
+        root: {
+          margin: "0px !important",
+        },
         indicator: {
           height: "4px !important",
           backgroundColor: "#38536f !important",
