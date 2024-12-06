@@ -2,7 +2,7 @@ import { fetchMunicipalityById } from "./fetchMunicipalityById";
 
 describe("fetchMunicipalityById", () => {
   it("returns a record when a valid id is supplied", async () => {
-    const record = await fetchMunicipalityById("recbPn663zF8jPRoR");
+    const record = await fetchMunicipalityById("recrh3iGsUjfuIOju");
     expect(record.townName).toEqual("Absecon");
   });
 
