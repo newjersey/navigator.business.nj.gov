@@ -1,17 +1,18 @@
-import { GenericTextField } from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { ReactElement, useState } from "react";
+import { Heading } from "@/components/njwds-extended/Heading";
+import { ReactElement } from "react";
 
 export const LoginEmailCheck = (): ReactElement => {
-  const [email, setEmail] = useState<string>("");
+  // const [email, setEmail] = useState<string>("");
 
   return (
     <div>
-      <div>{"Log in to Business.NJ.gov"}</div>
+      <Heading level={2}>{"Log in to Business.NJ.gov"}</Heading>
 
       <WithErrorBar
-        hasError={!!addressErrorMap["addressName"].invalid}
+        // hasError={!!addressErrorMap["addressName"].invalid}
+        hasError={false}
         type="ALWAYS"
         className="margin-bottom-2"
       >
@@ -19,8 +20,8 @@ export const LoginEmailCheck = (): ReactElement => {
           <ModifiedContent>{"Email"}</ModifiedContent>
         </strong>
         {/* copied from DateOfFormation, and AddressModal */}
-        <GenericTextField
-          inputWidth={"full"}
+        {/*<GenericTextField
+          //inputWidth={"full"}
           // fieldName={fieldName}
           // onValidation={onValidation}
           // validationText={errorText}
@@ -28,7 +29,7 @@ export const LoginEmailCheck = (): ReactElement => {
           // fieldOptions={{
           //   error: isFormFieldInvalid,
           // }}
-        />
+        />*/}
       </WithErrorBar>
     </div>
   );
