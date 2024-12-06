@@ -3,8 +3,12 @@
 
 import {
   clickDeferredSaveButton,
+  clickModalSaveButton,
   completeBusinessStructureTask,
+  openFormationDateModal,
   randomPublicFilingLegalStructure,
+  selectDate,
+  selectLocation,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import {
   completeForeignBusinessOnboarding,
@@ -251,11 +255,6 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
     cy.get('[data-task="check-local-requirements"]').first().click({ force: true });
   };
 
-  const selectLocation = (townDisplayName: string): void => {
-    cy.get('[data-testid="municipality"]').type(townDisplayName);
-    cy.get("#municipality-option-0").click({ force: true });
-  };
-
   const expectLocationSuccessBanner = (townDisplayName: string): void => {
     cy.get(`[data-testid="city-success-banner"]`).should("contain", townDisplayName);
   };
@@ -267,18 +266,5 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
 
   const navigateBackToDashboard = (): void => {
     cy.get(`[data-testid="back-to-dashboard"]`).first().click();
-  };
-
-  const openFormationDateModal = (): void => {
-    cy.get('[data-testid="cta-formation-nudge"]').first().click();
-  };
-
-  const selectDate = (monthYear: string): void => {
-    cy.chooseDatePicker('[name="dateOfFormation"]', monthYear);
-  };
-
-  const clickModalSaveButton = (): void => {
-    cy.get('[data-testid="modal-button-primary"]').first().click();
-    cy.wait(1000);
   };
 });
