@@ -1,13 +1,13 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { ContextualInfo } from "@/contexts/contextualInfoContext";
 import {
-  Address,
   BusinessPersona,
   BusinessUser,
-  emptyAddressData,
   emptyBusinessUser,
+  emptyFormationAddressData,
   emptyProfileData,
   FieldsForErrorHandling,
+  FormationAddress,
   FormationData,
   FormationFormData,
   FormationMember,
@@ -89,7 +89,7 @@ export type ProfileContentField = Exclude<
   "businessPersona"
 >;
 
-export type ProfileFields = keyof ProfileData | keyof BusinessUser | keyof Address;
+export type ProfileFields = keyof ProfileData | keyof BusinessUser | keyof FormationAddress;
 
 export type FieldErrorType = undefined | unknown;
 
@@ -119,7 +119,7 @@ const allProfileFields = Object.keys(profileFieldsFromConfig) as ProfileFields[]
 
 const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof BusinessUser)[];
 const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
-const formationAddressFields = Object.keys(emptyAddressData) as (keyof Address)[];
+const formationAddressFields = Object.keys(emptyFormationAddressData) as (keyof FormationAddress)[];
 
 const profileFields: ProfileFields[] = [
   ...new Set([
@@ -604,9 +604,9 @@ export interface PageMetadata {
   featureFlagsTitle: string;
 }
 
-export type FieldsForAddressErrorHandling = keyof Address;
-export type AddressFields = keyof Address;
-export type AddressTextField = Exclude<keyof Address, "addressCity" | "addressState">;
+export type FieldsForAddressErrorHandling = keyof FormationAddress;
+export type AddressFields = keyof FormationAddress;
+export type AddressTextField = keyof FormationAddress;
 
 export type AddressFieldErrorState = {
   field: FieldsForAddressErrorHandling;

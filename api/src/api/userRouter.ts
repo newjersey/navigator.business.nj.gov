@@ -15,7 +15,7 @@ import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/date
 import { determineIfNexusDbaNameNeeded } from "@shared/domain-logic/businessPersonaHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
-import { createEmptyFormationFormData } from "@shared/formationData";
+import { createEmptyFormationFormData, FormationAddress } from "@shared/formationData";
 import { LicenseName, LicenseSearchNameAndAddress } from "@shared/license";
 import { Business, createEmptyUserData, UserData } from "@shared/userData";
 import { Request, Response, Router } from "express";
@@ -254,13 +254,19 @@ export const userRouterFactory = (
 
       const formationFormData =
         userData.businesses[userData.currentBusinessId].formationData.formationFormData;
-      const address = {
+
+      const address: FormationAddress = {
         addressLine1: formationFormData.addressLine1,
         addressLine2: formationFormData.addressLine2,
         addressCity: formationFormData.addressCity,
         addressMunicipality: formationFormData.addressMunicipality,
+        addressState: formationFormData.addressState,
+        addressCountry: formationFormData.addressCountry,
         addressZipCode: formationFormData.addressZipCode,
+        addressProvince: formationFormData.addressProvince,
+        businessLocationType: formationFormData.businessLocationType,
       };
+
       return modifyCurrentBusiness(userData, (business) => ({
         ...business,
         formationData: {

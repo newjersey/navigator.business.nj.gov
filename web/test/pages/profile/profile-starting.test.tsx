@@ -339,6 +339,7 @@ describe("profile - starting business", () => {
             name: "New Jersey",
             shortCode: "NJ",
           },
+          businessLocationType: "NJ",
         },
       },
       taskProgress: {
@@ -380,6 +381,7 @@ describe("profile - starting business", () => {
             name: "New Jersey",
             shortCode: "NJ",
           },
+          businessLocationType: "NJ",
         },
       },
       taxFilingData: { ...taxData, filings: [] },
@@ -1679,7 +1681,7 @@ describe("profile - starting business", () => {
       ).toBeInTheDocument();
     });
 
-    it("renders locked profile address fields when business has formed", () => {
+    it("renders locked profile address fields when NJ business has formed", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
@@ -1695,6 +1697,7 @@ describe("profile - starting business", () => {
               shortCode: "NJ",
             },
             addressZipCode: "07781",
+            businessLocationType: "NJ",
           }),
         }),
       });
@@ -1704,7 +1707,7 @@ describe("profile - starting business", () => {
       expect(screen.getByTestId("locked-profileAddressMuniStateZip")).toBeInTheDocument();
     });
 
-    it("does not render locked profile address fields when business has not been formed", () => {
+    it("does not render locked profile address fields when NJ business has not been formed", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
@@ -1720,6 +1723,7 @@ describe("profile - starting business", () => {
               shortCode: "NJ",
             },
             addressZipCode: "07781",
+            businessLocationType: "NJ",
           }),
         }),
       });
