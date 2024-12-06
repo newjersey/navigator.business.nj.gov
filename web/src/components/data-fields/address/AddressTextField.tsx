@@ -3,11 +3,11 @@ import { ModifiedContent } from "@/components/ModifiedContent";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { AddressContext } from "@/contexts/addressContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
-import { Address } from "@businessnjgovnavigator/shared/";
+import { FormationAddress } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext } from "react";
 
 export interface Props extends Omit<GenericTextFieldProps, "value" | "error" | "inputWidth"> {
-  fieldName: keyof Address;
+  fieldName: keyof FormationAddress;
   label?: string;
   secondaryLabel?: string;
   errorBarType: "ALWAYS" | "MOBILE-ONLY" | "DESKTOP-ONLY" | "NEVER";

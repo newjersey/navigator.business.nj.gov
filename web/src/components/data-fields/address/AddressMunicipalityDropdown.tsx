@@ -2,7 +2,7 @@ import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropd
 import { AddressContext } from "@/contexts/addressContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
-import { Address, Municipality } from "@businessnjgovnavigator/shared/";
+import { FormationAddress, Municipality } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
 
 interface Props {
@@ -15,7 +15,7 @@ export const AddressMunicipalityDropdown = (props: Props): ReactElement => {
   const { doesFieldHaveError, getFieldErrorLabel } = useAddressErrors();
 
   const onSelect = (value: Municipality | undefined): void => {
-    setAddressData((previousAddressData: Address): Address => {
+    setAddressData((previousAddressData: FormationAddress): FormationAddress => {
       return { ...previousAddressData, addressMunicipality: value };
     });
   };
