@@ -139,67 +139,10 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
   FormFuncWrapper(
     async () => {
       if (!business || !updateQueue) return;
-      //
-      // await gov2GoSignupAndFetchTaxEvents({
-      //   profileData,
-      //   business,
-      //   updateQueue,
-      //   queueUpdateTaskProgress,
-      //   setIsLoading,
-      //   setOnAPIfailed,
-      //   onSuccess: props.onSuccess,
-      //   close: props.close,
-      //   formContextState,
-      // });
-      //
-      // if (!business || !updateQueue) return;
 
       setIsLoading(true);
 
-      // const encryptedTaxId =
-      //   profileData.taxId === business.profileData.taxId ? profileData.encryptedTaxId : undefined;
-      console.log({
-        "profileData.taxId": profileData.taxId,
-        "business.profileData.taxId": business.profileData.taxId,
-        "business.profileData.encryptedTaxId": business.profileData.encryptedTaxId,
-        "profileData.encryptedTaxId": profileData.encryptedTaxId,
-      });
-
       try {
-        // let businessNameToSubmitToTaxApi = "";
-        //
-        // if (displayBusinessName()) {
-        //   businessNameToSubmitToTaxApi = profileData.businessName;
-        // }
-        // if (displayResponsibleOwnerName()) {
-        //   businessNameToSubmitToTaxApi = profileData.responsibleOwnerName;
-        // }
-
-        // const userDataToSet = await postTaxFilingsOnboarding({
-        //   taxId: profileData.taxId as string,
-        //   businessName: businessNameToSubmitToTaxApi,
-        //   encryptedTaxId: encryptedTaxId as string,
-        // });
-        //
-        // updateQueue.queue(userDataToSet).queueProfileData({
-        //   taxId: profileData.taxId,
-        //   encryptedTaxId: encryptedTaxId,
-        // });
-        //
-        // if (getCurrentBusiness(userDataToSet).taxFilingData.state === "SUCCESS") {
-        //   if (displayBusinessName()) {
-        //     updateQueue.queueProfileData({
-        //       businessName: profileData.businessName,
-        //     });
-        //   }
-        //
-        //   if (displayResponsibleOwnerName()) {
-        //     updateQueue.queueProfileData({
-        //       responsibleOwnerName: profileData.responsibleOwnerName,
-        //     });
-        //   }
-        // }
-
         await toBeNamed({ updateQueue, optionalProfileDataIfSeparateContext: profileData });
         await updateQueue.update();
       } catch {

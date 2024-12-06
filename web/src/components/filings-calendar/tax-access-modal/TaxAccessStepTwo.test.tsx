@@ -178,7 +178,6 @@ describe("<TaxAccessStepTwo />", () => {
     it("updates taxId but not businessName on submit", async () => {
       renderComponent(userDataWithPrefilledFields);
       const business = userDataWithPrefilledFields.businesses[userDataWithPrefilledFields.currentBusinessId];
-      console.log(business.profileData.encryptedTaxId);
       mockApiResponse(userDataWithPrefilledFields, {
         profileData: {
           ...business.profileData,
@@ -200,7 +199,7 @@ describe("<TaxAccessStepTwo />", () => {
         return expect(currentBusiness().profileData.businessName).not.toEqual("zoom");
       });
       expect(currentBusiness().profileData.taxId).toEqual("999888777666");
-      expect(currentBusiness().profileData.encryptedTaxId).toEqual(undefined);
+      expect(currentBusiness().profileData.encryptedTaxId).toEqual("");
     });
 
     it("updates businessName on submit if tax filing is success", async () => {

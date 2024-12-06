@@ -28,7 +28,7 @@ export const toBeNamed = async (props: Props) => {
   const displayResponsibleOwnerNameValue = displayResponsibleOwnerName(profileData);
 
   if (profileData.taxId === currentBusiness.profileData.taxId) {
-    encryptedTaxIdToSubmitToTaxApi = profileData.encryptedTaxId || ""; // handling for undefined when hitting api
+    encryptedTaxIdToSubmitToTaxApi = profileData.encryptedTaxId || "";
   }
   if (displayBusinessNameValue) {
     businessNameToSubmitToTaxApi = profileData.businessName;
@@ -45,7 +45,7 @@ export const toBeNamed = async (props: Props) => {
 
   updateQueue.queue(userDataToSet).queueProfileData({
     taxId: taxIdToSubmitToTaxApi,
-    encryptedTaxId: encryptedTaxIdToSubmitToTaxApi ?? undefined, // reverting back to undefined
+    encryptedTaxId: encryptedTaxIdToSubmitToTaxApi,
   });
 
   if (getCurrentBusiness(userDataToSet).taxFilingData.state === "SUCCESS") {
