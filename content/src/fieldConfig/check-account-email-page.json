@@ -1,10 +1,10 @@
 {
   "checkAccountEmailPage": {
-    "header": "",
-    "inputLabel": "",
-    "inputButton": "",
-    "linkAccountText": "",
-    "needHelpText": "",
-    "intercomChatText": ""
+    "header": "TEST header",
+    "inputLabel": "TEST inputLabel",
+    "inputButton": "TEST inputButton",
+    "linkAccountText": "TEST linkAccountText",
+    "needHelpText": "TEST needHelpText",
+    "intercomChatText": "TEST intercomChatText"
   }
 }

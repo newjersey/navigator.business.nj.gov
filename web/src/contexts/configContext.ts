@@ -10,6 +10,7 @@ import * as CannabisLicenseEligibilityModal from "@businessnjgovnavigator/conten
 import * as CannabisLicenseTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-license-tab1.json";
 import * as CannabisPriorityStatusTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab1.json";
 import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab2.json";
+import * as CheckAccountEmailPage from "@businessnjgovnavigator/content/fieldConfig/check-account-email-page.json";
 import * as ConfigOriginal from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import * as DashboardCalendar from "@businessnjgovnavigator/content/fieldConfig/dashboard-calendar.json";
 import * as DashboardDefaults from "@businessnjgovnavigator/content/fieldConfig/dashboard-defaults.json";
@@ -80,7 +81,8 @@ const merged = JSON.parse(
       HousingRegistrationSearchTask,
       anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
       CalloutAlerts,
-      WasteQuestionnairePage
+      WasteQuestionnairePage,
+      CheckAccountEmailPage
     )
   )
 );
@@ -123,8 +125,10 @@ export type ConfigType = typeof ConfigOriginal &
   typeof HousingRegistrationSearchTask &
   typeof anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults &
   typeof CalloutAlerts &
+  typeof CheckAccountEmailPage &
   typeof WasteQuestionnairePage;
 
+// ?: What's the reason for both `getMergedConfig` and `merged`?
 export const getMergedConfig = (): ConfigType => {
   return merge(
     ConfigOriginal,
@@ -162,7 +166,8 @@ export const getMergedConfig = (): ConfigType => {
     HousingRegistrationSearchTask,
     anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
     CalloutAlerts,
-    WasteQuestionnairePage
+    WasteQuestionnairePage,
+    CheckAccountEmailPage
   );
 };
 
