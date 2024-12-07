@@ -1,10 +1,10 @@
 {
   "checkAccountEmailPage": {
-    "header": "TEST header",
-    "inputLabel": "TEST inputLabel",
-    "inputButton": "TEST inputButton",
-    "linkAccountText": "TEST linkAccountText",
-    "needHelpText": "TEST needHelpText",
-    "intercomChatText": "TEST intercomChatText"
+    "header": "Log in to Business.NJ.gov",
+    "inputLabel": "Email",
+    "inputButton": "Next",
+    "linkAccountText": "Don’t have an account? [Sign up and link your myNewJersey account](https://my.nj.gov/aui/Login)",
+    "needHelpText": "Need help?",
+    "intercomChatText": "Chat with us"
   }
 }
