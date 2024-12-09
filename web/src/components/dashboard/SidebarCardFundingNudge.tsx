@@ -2,7 +2,6 @@ import { SectorModal } from "@/components/dashboard/SectorModal";
 import { SidebarCardGeneric } from "@/components/dashboard/SidebarCardGeneric";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
-import { toBeNamed } from "@/lib/taxation/helpers";
 import { SidebarCardContent } from "@/lib/types/types";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { useRouter } from "next/router";
@@ -12,25 +11,19 @@ type Props = {
   card: SidebarCardContent;
 };
 
-// no need to test analytics - aleks goes that
-
 export const SidebarCardFundingNudge = (props: Props): ReactElement => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const router = useRouter();
   const { updateQueue, business } = useUserData();
 
   const updateToUpAndRunningAndCompleteTaxTask = async (): Promise<void> => {
-    if (!updateQueue) return;
-
-    try {
-      await toBeNamed({ updateQueue });
-    } finally {
-      updateQueue?.queueProfileData({
+    if (!business) return;
+    await updateQueue
+      ?.queueProfileData({
         operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
-      });
-      await updateQueue.update();
-      routeShallowWithQuery(router, QUERIES.fromFunding, "true");
-    }
+      })
+      .update();
+    routeShallowWithQuery(router, QUERIES.fromFunding, "true");
   };
 
   const onClick = async (): Promise<void> => {
