@@ -22,6 +22,7 @@ describe("DynamoUserDataClient", () => {
   let client: DynamoDBDocumentClient;
   let dynamoUserDataClient: UserDataClient;
   let logger: LogWriterType;
+  const errorId = "some-id";
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -31,7 +32,9 @@ describe("DynamoUserDataClient", () => {
   });
 
   it("gets inserted items", async () => {
-    await expect(dynamoUserDataClient.get("some-id")).rejects.toEqual(new Error("Not found"));
+    await expect(dynamoUserDataClient.get(errorId)).rejects.toEqual(
+      new Error(`User with ID ${errorId} not found in table ${dbConfig.tableName}`)
+    );
 
     const userData = generateUserData({ user: generateUser({ id: "some-id" }) });
     await dynamoUserDataClient.put(userData);

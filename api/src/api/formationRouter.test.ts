@@ -66,6 +66,8 @@ describe("formationRouter", () => {
       getNeedToAddToUserTestingUsers: jest.fn(),
       getNeedTaxIdEncryptionUsers: jest.fn(),
       getUsersWithOutdatedVersion: jest.fn(),
+      getUsersWithBusinesses: jest.fn(),
+      findUserByBusinessName: jest.fn(),
     };
     app = setupExpress(false);
     app.use(formationRouterFactory(stubFormationClient, stubUserDataClient, { shouldSaveDocuments: true }));

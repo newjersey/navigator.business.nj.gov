@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
 import { DynamoBusinessesDataClient } from "@db/DynamoBusinessesDataClient";
 import { BusinessesDataClient } from "@domain/types";
+import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
 import { generateBusiness, generateProfileData, generateTaxFilingData } from "@shared/test";
+import { CURRENT_VERSION } from "@shared/userData";
 import dayjs from "dayjs";
 
 // references jest-dynalite-config values
@@ -22,10 +22,12 @@ describe("DynamoBusinessesDataClient", () => {
 
   let client: DynamoDBDocumentClient;
   let dynamoBusinessesDataClient: BusinessesDataClient;
+  let logger: LogWriterType;
   const formationDate = dayjs().subtract(3, "year").add(1, "month").day(1).format("YYYY-MM-DD");
   const naicsCode = "12345";
   const industry = "test-industry";
   const encryptedTaxId = "test-id-12345";
+  const errorId = "some-id";
 
   const businessData = generateBusiness({
     profileData: generateProfileData({
@@ -39,25 +41,25 @@ describe("DynamoBusinessesDataClient", () => {
     taxFilingData: generateTaxFilingData({
       filings: [],
     }),
+    version: CURRENT_VERSION,
   });
 
   beforeEach(() => {
+    logger = DummyLogWriter;
     client = DynamoDBDocumentClient.from(new DynamoDBClient(config), dynamoDbTranslateConfig);
-    dynamoBusinessesDataClient = DynamoBusinessesDataClient(client, dbConfig.tableName);
+    dynamoBusinessesDataClient = DynamoBusinessesDataClient(client, dbConfig.tableName, logger);
   });
 
   it("inserts and retrieves items from the db", async () => {
-    await expect(dynamoBusinessesDataClient.get("some-id")).rejects.toEqual(new Error("Not found"));
+    await expect(dynamoBusinessesDataClient.get(errorId)).rejects.toEqual(
+      new Error(`Business with ID ${errorId} not found in table ${dbConfig.tableName}`)
+    );
 
     const businessId = businessData.id;
     await dynamoBusinessesDataClient.put(businessData);
 
     const expectedValue = await dynamoBusinessesDataClient.get(businessId);
-    const { version, ...filteredExpectedValue } = expectedValue as unknown as {
-      version?: string;
-      [key: string]: any;
-    };
-    expect(filteredExpectedValue).toEqual(businessData);
+    expect(expectedValue).toEqual(businessData);
   });
 
   it("finds a business by the businessName", async () => {
@@ -70,23 +72,16 @@ describe("DynamoBusinessesDataClient", () => {
 
     const expectedValue = await dynamoBusinessesDataClient.findByBusinessName(businessName);
     expect(expectedValue).toBeDefined();
-    const { version, ...filteredExpectedValue } = expectedValue as unknown as {
-      version?: string;
-      [key: string]: any;
-    };
-    expect(filteredExpectedValue).toEqual(businessData);
+    expect(expectedValue).toEqual(businessData);
   });
 
   it("finds all businesses by the naicsCode", async () => {
     expect(await dynamoBusinessesDataClient.findAllByNAICSCode("some-naicsCode")).toHaveLength(0);
     await dynamoBusinessesDataClient.put(businessData);
     const expectedValue = await dynamoBusinessesDataClient.findAllByNAICSCode(naicsCode);
+    expect(expectedValue).toHaveLength(1);
     expect(expectedValue[0]).toBeDefined();
-    const { version, ...filteredExpectedValue } = expectedValue[0] as unknown as {
-      version?: string;
-      [key: string]: any;
-    };
-    expect(filteredExpectedValue).toEqual(businessData);
+    expect(expectedValue[0]).toEqual(businessData);
   });
 
   it("finds all businesses by the industry", async () => {
@@ -94,12 +89,9 @@ describe("DynamoBusinessesDataClient", () => {
 
     await dynamoBusinessesDataClient.put(businessData);
     const expectedValue = await dynamoBusinessesDataClient.findAllByIndustry(industry);
+    expect(expectedValue).toHaveLength(1);
     expect(expectedValue[0]).toBeDefined();
-    const { version, ...filteredExpectedValue } = expectedValue[0] as unknown as {
-      version?: string;
-      [key: string]: any;
-    };
-    expect(filteredExpectedValue).toEqual(businessData);
+    expect(expectedValue[0]).toEqual(businessData);
   });
 
   it("finds a business by the encryptedId", async () => {
@@ -108,29 +100,24 @@ describe("DynamoBusinessesDataClient", () => {
     await dynamoBusinessesDataClient.put(businessData);
     const expectedValue = await dynamoBusinessesDataClient.findByEncryptedTaxId(encryptedTaxId);
     expect(expectedValue).toBeDefined();
-    const { version, ...filteredExpectedValue } = expectedValue as unknown as {
-      version?: string;
-      [key: string]: any;
-    };
-    expect(filteredExpectedValue).toEqual(businessData);
+    expect(expectedValue).toEqual(businessData);
   });
 
   it("deletes a business by the ID", async () => {
-    await expect(dynamoBusinessesDataClient.get("some-id")).rejects.toEqual(new Error("Not found"));
+    await expect(dynamoBusinessesDataClient.get(errorId)).rejects.toEqual(
+      new Error(`Business with ID ${errorId} not found in table ${dbConfig.tableName}`)
+    );
 
     const businessId = businessData.id;
     await dynamoBusinessesDataClient.put(businessData);
 
     const expectedValueBeforeDelete = await dynamoBusinessesDataClient.get(businessId);
-    const { version, ...filteredExpectedValue } = expectedValueBeforeDelete as unknown as {
-      version?: string;
-      [key: string]: any;
-    };
-
     expect(expectedValueBeforeDelete).toBeDefined();
-    expect(filteredExpectedValue).toEqual(businessData);
+    expect(expectedValueBeforeDelete).toEqual(businessData);
 
     await dynamoBusinessesDataClient.deleteBusinessById(businessId);
-    await expect(dynamoBusinessesDataClient.get(businessId)).rejects.toEqual(new Error("Not found"));
+    await expect(dynamoBusinessesDataClient.get(businessId)).rejects.toEqual(
+      new Error(`Business with ID ${businessId} not found in table ${dbConfig.tableName}`)
+    );
   });
 });
