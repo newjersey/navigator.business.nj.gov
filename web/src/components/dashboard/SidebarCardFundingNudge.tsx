@@ -2,7 +2,6 @@ import { SectorModal } from "@/components/dashboard/SectorModal";
 import { SidebarCardGeneric } from "@/components/dashboard/SidebarCardGeneric";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
-import { toBeNamed } from "@/lib/taxation/helpers";
 import { SidebarCardContent } from "@/lib/types/types";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { useRouter } from "next/router";
@@ -12,38 +11,18 @@ type Props = {
   card: SidebarCardContent;
 };
 
-// no need to test analytics - aleks goes that
-
 export const SidebarCardFundingNudge = (props: Props): ReactElement => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const router = useRouter();
-  // const { queueUpdateTaskProgress } = useUpdateTaskProgress();
   const { updateQueue, business } = useUserData();
 
-  // useMountEffectWhenDefined(() => {
-  //   if (!business) return;
-  //   setProfileData(business.profileData);
-  // }, business);
-
   const updateToUpAndRunningAndCompleteTaxTask = async (): Promise<void> => {
-    if (!updateQueue) return;
-
-    // .update();
-    // if (!updateQueue) return;
-
-    // await gov2GoSignupAndFetchTaxEvents({
-    //   business,
-    //   profileData: business.profileData,
-    //   updateQueue,
-    //   // queueUpdateTaskProgress:,
-    // });
-
-    await toBeNamed({ updateQueue });
-    updateQueue?.queueProfileData({
-      operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
-    });
-    await updateQueue.update();
-
+    if (!business) return;
+    await updateQueue
+      ?.queueProfileData({
+        operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
+      })
+      .update();
     routeShallowWithQuery(router, QUERIES.fromFunding, "true");
   };
 

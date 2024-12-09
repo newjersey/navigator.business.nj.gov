@@ -10,7 +10,7 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import {
   generateBusiness,
@@ -23,11 +23,6 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postTaxFilingsOnboarding: jest.fn(),
-  postTaxFilingsLookup: jest.fn(),
-}));
-
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 
 const Config = getMergedConfig();
