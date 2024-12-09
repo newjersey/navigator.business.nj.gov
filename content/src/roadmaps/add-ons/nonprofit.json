@@ -4,6 +4,11 @@
   "roadmapSteps": [
     {
       "step": 1,
+      "weight": 2,
+      "task": "nonprofit-business-bylaws"
+    },
+    {
+      "step": 1,
       "weight": 3,
       "task": "nonprofit-business-trustees"
     },
