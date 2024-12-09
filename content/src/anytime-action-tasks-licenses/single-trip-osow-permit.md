@@ -45,9 +45,10 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 * Number of axles
 * Gross weight
 * Axle weight
+* Axle spacing
 * Number of tires
 * Tire width
-* Axle spacing
+
 
 :::callout{ showHeader="true" headerText="What if I don't get this permit?" showIcon="false" calloutType="warning" }
 If you don’t get this permit and your combination vehicle, trailer, and load meet the Single Trip OS/OW Permit (5-day) requirements, you may face fines.
