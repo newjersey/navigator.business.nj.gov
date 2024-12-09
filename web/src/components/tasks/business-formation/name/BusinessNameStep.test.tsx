@@ -7,13 +7,13 @@ import {
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import {
-  FormationLegalType,
-  NameAvailability,
   createEmptyFormationFormData,
   foreignLegalTypePrefix,
+  FormationLegalType,
   generateBusiness,
   generateBusinessNameAvailability,
   generateFormationFormData,
+  NameAvailability,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";
@@ -279,7 +279,6 @@ describe("Formation - BusinessNameStep", () => {
           legalStructureId: legalStructureWithoutPrefix,
           businessPersona: "FOREIGN",
           businessName: "some name",
-          needsNexusDbaName: false,
         });
 
         preparePage({

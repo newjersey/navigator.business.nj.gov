@@ -1,5 +1,3 @@
-/* eslint-disable jest/no-commented-out-tests */
-
 import { userRouterFactory } from "@api/userRouter";
 import { EncryptionDecryptionClient, TimeStampBusinessSearch, UserDataClient } from "@domain/types";
 import { setupExpress } from "@libs/express";
@@ -460,7 +458,6 @@ describe("userRouter", () => {
           const resultBusiness = getCurrentBusiness(result.body as UserData);
           expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
           expect(resultBusiness.formationData.businessNameAvailability?.status).toEqual("UNAVAILABLE");
-          expect(resultBusiness.profileData.needsNexusDbaName).toEqual(false);
           expect(
             parseDate(resultBusiness.formationData.businessNameAvailability?.lastUpdatedTimeStamp).isSame(
               getCurrentDate(),
@@ -494,7 +491,6 @@ describe("userRouter", () => {
           const resultBusiness = getCurrentBusiness(result.body as UserData);
           expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
           expect(resultBusiness.formationData.businessNameAvailability?.status).toEqual("UNAVAILABLE");
-          expect(resultBusiness.profileData.needsNexusDbaName).toEqual(false);
           expect(
             parseDate(resultBusiness.formationData.businessNameAvailability?.lastUpdatedTimeStamp).isSame(
               getCurrentDate(),
@@ -527,13 +523,13 @@ describe("userRouter", () => {
         });
       });
 
-      describe("when businessPersona is 'FOREIGN'", () => {
+      describe("when businessPersona is 'FOREIGN' and Foreign type is Nexus", () => {
         it("does not recheck business name availability if businessNameAvailability and dbaBusinessNameAvailability are undefined", async () => {
           const userData = generateUserDataForBusiness(
             generateBusiness({
               profileData: generateProfileData({
                 businessPersona: "FOREIGN",
-                needsNexusDbaName: true,
+                foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
               }),
               formationData: generateFormationData({
                 businessNameAvailability: undefined,
@@ -547,14 +543,17 @@ describe("userRouter", () => {
           expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
         });
 
-        it("does not update dbaBusinessNameAvailability if needsNexusDbaName is false", async () => {
+        it("does not update dbaBusinessNameAvailability if businessNameAvailability status is not Unavailable", async () => {
           const userData = generateUserDataForBusiness(
             generateBusiness({
               profileData: generateProfileData({
                 businessPersona: "FOREIGN",
-                needsNexusDbaName: false,
+                foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
               }),
               formationData: generateFormationData({
+                businessNameAvailability: generateBusinessNameAvailability({
+                  status: "AVAILABLE",
+                }),
                 dbaBusinessNameAvailability: generateBusinessNameAvailability({
                   status: "AVAILABLE",
                   lastUpdatedTimeStamp: sixtyOneMinutesAgo,
@@ -568,12 +567,12 @@ describe("userRouter", () => {
           expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
         });
 
-        it("sets needsNexusDbaName to true when business name becomes unavailable", async () => {
+        it("sets businessNameAvailability status to unavailable", async () => {
           const userData = generateUserDataForBusiness(
             generateBusiness({
               profileData: generateProfileData({
                 businessPersona: "FOREIGN",
-                needsNexusDbaName: false,
+                foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
               }),
               formationData: generateFormationData({
                 businessNameAvailability: generateBusinessNameAvailability({
@@ -595,15 +594,14 @@ describe("userRouter", () => {
           const resultBusiness = getCurrentBusiness(result.body as UserData);
           expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
           expect(resultBusiness.formationData.businessNameAvailability?.status).toEqual("UNAVAILABLE");
-          expect(resultBusiness.profileData.needsNexusDbaName).toEqual(true);
         });
 
-        it("when needsNexusDbaName is false only businessNameAvailability is updated", async () => {
+        it("when businessNameAvailability status is not unavailable then businessNameAvailability is updated", async () => {
           const userData = generateUserDataForBusiness(
             generateBusiness({
               profileData: generateProfileData({
                 businessPersona: "FOREIGN",
-                needsNexusDbaName: false,
+                foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
               }),
               formationData: generateFormationData({
                 businessNameAvailability: generateBusinessNameAvailability({
@@ -630,15 +628,14 @@ describe("userRouter", () => {
           expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
           expect(resultBusiness.formationData.businessNameAvailability?.status).toEqual("UNAVAILABLE");
           expect(resultBusiness.formationData.dbaBusinessNameAvailability?.status).toEqual("AVAILABLE");
-          expect(resultBusiness.profileData.needsNexusDbaName).toEqual(true);
         });
 
-        it("when needsNexusDbaName is true only dbaBusinessNameAvailability is updated", async () => {
+        it("when businessNameAvailability status is unavailable then dbaBusinessNameAvailability is updated", async () => {
           const userData = generateUserDataForBusiness(
             generateBusiness({
               profileData: generateProfileData({
                 businessPersona: "FOREIGN",
-                needsNexusDbaName: true,
+                foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
               }),
               formationData: generateFormationData({
                 completedFilingPayment: false,
@@ -664,8 +661,8 @@ describe("userRouter", () => {
           const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
           const resultBusiness = getCurrentBusiness(result.body as UserData);
           expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
-          expect(resultBusiness.formationData.dbaBusinessNameAvailability?.status).toEqual("UNAVAILABLE");
-          expect(resultBusiness.formationData.businessNameAvailability?.status).toEqual("AVAILABLE");
+          expect(resultBusiness.formationData.dbaBusinessNameAvailability?.status).toEqual("AVAILABLE");
+          expect(resultBusiness.formationData.businessNameAvailability?.status).toEqual("UNAVAILABLE");
           expect(parseDate(resultBusiness.lastUpdatedISO).isSame(getCurrentDate(), "minute")).toEqual(true);
         });
 
@@ -674,10 +671,13 @@ describe("userRouter", () => {
             generateBusiness({
               profileData: generateProfileData({
                 businessPersona: "FOREIGN",
-                needsNexusDbaName: true,
+                foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
               }),
               formationData: generateFormationData({
                 completedFilingPayment: false,
+                businessNameAvailability: generateBusinessNameAvailability({
+                  status: "UNAVAILABLE",
+                }),
                 dbaBusinessNameAvailability: generateBusinessNameAvailability({
                   status: "AVAILABLE",
                   lastUpdatedTimeStamp: sixtyOneMinutesAgo,

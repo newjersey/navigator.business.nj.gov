@@ -127,7 +127,6 @@ export interface ProfileData extends IndustrySpecificData {
   readonly naicsCode: string;
   readonly foreignBusinessTypeIds: ForeignBusinessTypeId[];
   readonly nexusDbaName: string;
-  readonly needsNexusDbaName: boolean;
   readonly operatingPhase: OperatingPhaseId;
   readonly nonEssentialRadioAnswers: Record<string, boolean | undefined>;
   readonly elevatorOwningBusiness: boolean | undefined;
@@ -157,7 +156,6 @@ export const emptyProfileData: ProfileData = {
   naicsCode: "",
   foreignBusinessTypeIds: [],
   nexusDbaName: "",
-  needsNexusDbaName: false,
   operatingPhase: OperatingPhaseId.GUEST_MODE,
   nonEssentialRadioAnswers: {},
   elevatorOwningBusiness: undefined,

@@ -4,6 +4,8 @@ import {
   BusinessPersona,
   ForeignBusinessTypeId,
   generateBusiness,
+  generateBusinessNameAvailability,
+  generateFormationData,
   LookupIndustryById,
   LookupLegalStructureById,
   ProfileData,
@@ -141,21 +143,25 @@ describe("getNavBarBusinessTitle", () => {
     });
 
     describe("Nexus DBA", () => {
-      it("shows unnamed dba when the nexusDbaName is empty and needsNexusDbaName is true", () => {
+      it("shows unnamed dba when the nexusDbaName is empty and businessNameAvailability status is unavailable", () => {
         const business = generateBusiness({
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
             foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
             businessName: "test business Name",
-            needsNexusDbaName: true,
             nexusDbaName: "",
+          }),
+          formationData: generateFormationData({
+            businessNameAvailability: generateBusinessNameAvailability({
+              status: "UNAVAILABLE",
+            }),
           }),
         });
         const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
         expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedDbaBusinessText);
       });
 
-      it("shows the dba name when the user has entered a DBA name", () => {
+      it("shows the dba name when the user has entered a DBA name and businessNameAvailability status is unavailable", () => {
         const dbaName = "dbaName";
 
         const business = generateBusiness({
@@ -163,8 +169,12 @@ describe("getNavBarBusinessTitle", () => {
             businessPersona: "FOREIGN",
             foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
             businessName: "test business Name",
-            needsNexusDbaName: true,
             nexusDbaName: dbaName,
+          }),
+          formationData: generateFormationData({
+            businessNameAvailability: generateBusinessNameAvailability({
+              status: "UNAVAILABLE",
+            }),
           }),
         });
         const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
