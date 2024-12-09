@@ -47,7 +47,6 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 * Axle weight
 * Number of tires
 * Tire width
-* Axel weight
 * Axle spacing
 
 :::callout{ showHeader="true" headerText="What if I don't get this permit?" showIcon="false" calloutType="warning" }
