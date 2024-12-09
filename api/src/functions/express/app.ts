@@ -45,6 +45,7 @@ import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFa
 import { timeStampBusinessSearch } from "@domain/user/timeStampBusinessSearch";
 import { updateLicenseStatusFactory } from "@domain/user/updateLicenseStatusFactory";
 import { updateOperatingPhase } from "@domain/user/updateOperatingPhase";
+import { DYNAMO_OFFLINE_PORT, IS_DOCKER, IS_OFFLINE, STAGE } from "@functions/config";
 import { setupExpress } from "@libs/express";
 import { LogWriter } from "@libs/logWriter";
 import bodyParser from "body-parser";
@@ -60,10 +61,6 @@ import { taxFilingsInterfaceFactory } from "src/domain/tax-filings/taxFilingsInt
 
 const app = setupExpress();
 
-const IS_OFFLINE = process.env.IS_OFFLINE === "true" || false; // set by serverless-offline
-const IS_DOCKER = process.env.IS_DOCKER === "true" || false; // set in docker-compose
-const DYNAMO_OFFLINE_PORT = Number.parseInt(process.env.DYNAMO_PORT || "8000");
-const STAGE = process.env.STAGE || "local";
 const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
 const dataLogger = LogWriter(`aws/${STAGE}`, "DataMigrationLogs");
 

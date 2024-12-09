@@ -1,11 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-import { MigrationFunction, Migrations } from "@db/migrations/migrations";
-import { CURRENT_VERSION } from "@shared/userData";
-
 export const marshallOptions = {
   // Whether to automatically convert empty strings, blobs, and sets to `null`.
   convertEmptyValues: false, // false, by default.
@@ -21,15 +15,6 @@ export const unmarshallOptions = {
 };
 
 export const dynamoDbTranslateConfig = { marshallOptions, unmarshallOptions };
-
-export const migrateData = (data: any): any => {
-  const dataVersion = data.version ?? CURRENT_VERSION;
-  const migrationsToRun = Migrations.slice(dataVersion);
-  const migratedData = migrationsToRun.reduce((prevData: any, migration: MigrationFunction) => {
-    return migration(prevData);
-  }, data);
-  return { ...migratedData, version: CURRENT_VERSION };
-};
 
 export const createDynamoDbClient = (
   isOffline: boolean,
