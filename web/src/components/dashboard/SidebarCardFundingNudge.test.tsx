@@ -199,11 +199,13 @@ describe("<SidebarCardFundingNudge />", () => {
       console.log({ business });
 
       expect(screen.getByText(Config.dashboardDefaults.sectorModalTitle)).toBeInTheDocument();
+      selectDropdownByValue("Sector", "clean-energy");
       fireEvent.mouseDown(screen.getByLabelText("Sector"));
-      const listbox = within(screen.getByRole("combobox"));
-      fireEvent.click(listbox.getByTestId("agriculturual-forestry-fishing-and-hunting"));
-      fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalSaveButton));
-      expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.UP_AND_RUNNING);
+      const listbox = within(screen.getByRole("listbox"));
+      fireEvent.click(listbox.getByTestId("clean-energy"));
+      await waitFor(() => {
+        expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.UP_AND_RUNNING);
+      });
       expect(currentBusiness().profileData.sectorId).toEqual("clean-energy");
     });
 
