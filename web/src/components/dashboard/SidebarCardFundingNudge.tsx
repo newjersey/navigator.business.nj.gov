@@ -17,20 +17,34 @@ type Props = {
 export const SidebarCardFundingNudge = (props: Props): ReactElement => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const router = useRouter();
+  // const { queueUpdateTaskProgress } = useUpdateTaskProgress();
   const { updateQueue, business } = useUserData();
+
+  // useMountEffectWhenDefined(() => {
+  //   if (!business) return;
+  //   setProfileData(business.profileData);
+  // }, business);
 
   const updateToUpAndRunningAndCompleteTaxTask = async (): Promise<void> => {
     if (!updateQueue) return;
 
-    try {
-      await toBeNamed({ updateQueue });
-    } finally {
-      updateQueue?.queueProfileData({
-        operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
-      });
-      await updateQueue.update();
-      routeShallowWithQuery(router, QUERIES.fromFunding, "true");
-    }
+    // .update();
+    // if (!updateQueue) return;
+
+    // await gov2GoSignupAndFetchTaxEvents({
+    //   business,
+    //   profileData: business.profileData,
+    //   updateQueue,
+    //   // queueUpdateTaskProgress:,
+    // });
+
+    await toBeNamed({ updateQueue });
+    updateQueue?.queueProfileData({
+      operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
+    });
+    await updateQueue.update();
+
+    routeShallowWithQuery(router, QUERIES.fromFunding, "true");
   };
 
   const onClick = async (): Promise<void> => {
