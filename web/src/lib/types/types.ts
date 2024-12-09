@@ -8,6 +8,7 @@ import {
   emptyBusinessUser,
   emptyProfileData,
   FieldsForErrorHandling,
+  FormationAddress,
   FormationData,
   FormationFormData,
   FormationMember,
@@ -89,7 +90,7 @@ export type ProfileContentField = Exclude<
   "businessPersona"
 >;
 
-export type ProfileFields = keyof ProfileData | keyof BusinessUser | keyof Address;
+export type ProfileFields = keyof ProfileData | keyof BusinessUser | keyof FormationAddress;
 
 export type FieldErrorType = undefined | unknown;
 
@@ -604,9 +605,9 @@ export interface PageMetadata {
   featureFlagsTitle: string;
 }
 
-export type FieldsForAddressErrorHandling = keyof Address;
-export type AddressFields = keyof Address;
-export type AddressTextField = Exclude<keyof Address, "addressCity" | "addressState">;
+export type FieldsForAddressErrorHandling = keyof FormationAddress;
+export type AddressFields = keyof FormationAddress;
+export type AddressTextField = keyof FormationAddress;
 
 export type AddressFieldErrorState = {
   field: FieldsForAddressErrorHandling;
