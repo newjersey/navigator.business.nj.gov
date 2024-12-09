@@ -25,7 +25,8 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 * A [NJDOT GotPermits website](https://nj.gotpermits.com/njpass#!) account
 
 ### Application Requirements
-* Trailer make, plate/license number, and state 
+* Trailer make
+* Plate/license number, and state 
 * Vehicle Identification Number ( VIN) and year
 * Vehicle and trailer’s combined overall length
 * Trailer length and width
