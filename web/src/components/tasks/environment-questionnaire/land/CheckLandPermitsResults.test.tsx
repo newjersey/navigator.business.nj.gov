@@ -1,8 +1,9 @@
-import { CheckWastePermitsResults } from "@/components/tasks/environment-questionnaire/CheckWastePermitsResults";
+import { CheckLandPermitsResults } from "@/components/tasks/environment-questionnaire/land/CheckLandPermitsResults";
 import { getMergedConfig } from "@/contexts/configContext";
 import { generateTask } from "@/test/factories";
 import { currentBusiness, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { Business, generateWasteQuestionnaireData } from "@businessnjgovnavigator/shared";
+import { generateLandQuestionnaireData } from "@businessnjgovnavigator/shared";
+import { Business } from "@businessnjgovnavigator/shared/index";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { generateEnvironmentData } from "@businessnjgovnavigator/shared/test/factories";
 import { render, screen } from "@testing-library/react";
@@ -10,14 +11,14 @@ import userEvent, { UserEvent } from "@testing-library/user-event";
 
 const Config = getMergedConfig();
 
-describe("<CheckWastePermitsResults />", () => {
+describe("<CheckLandPermitsResults />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
 
   const task = generateTask({ id: "waste-permitting-test" });
 
-  const renderCheckWastePermitsResults = (business?: Business): void => {
+  const renderCheckLandPermitsResults = (business?: Business): void => {
     render(
       <WithStatefulUserData
         initialUserData={generateUserDataForBusiness(
@@ -28,12 +29,12 @@ describe("<CheckWastePermitsResults />", () => {
             : generateBusiness({})
         )}
       >
-        <CheckWastePermitsResults task={task} />
+        <CheckLandPermitsResults task={task} />
       </WithStatefulUserData>
     );
   };
 
-  const renderCheckWastePermitsResultsAndSetupUser = (business?: Business): { user: UserEvent } => {
+  const renderCheckLandPermitsResultsAndSetupUser = (business?: Business): { user: UserEvent } => {
     render(
       <WithStatefulUserData
         initialUserData={generateUserDataForBusiness(
@@ -44,7 +45,7 @@ describe("<CheckWastePermitsResults />", () => {
             : generateBusiness({})
         )}
       >
-        <CheckWastePermitsResults task={task} />
+        <CheckLandPermitsResults task={task} />
       </WithStatefulUserData>
     );
     const user: UserEvent = userEvent.setup();
@@ -52,13 +53,13 @@ describe("<CheckWastePermitsResults />", () => {
   };
 
   it("displays the texts of the responses that are true in user data", () => {
-    renderCheckWastePermitsResults(
+    renderCheckLandPermitsResults(
       generateBusiness({
         environmentData: generateEnvironmentData({
-          waste: {
-            questionnaireData: generateWasteQuestionnaireData({
-              hazardousMedicalWaste: true,
-              compostWaste: true,
+          land: {
+            questionnaireData: generateLandQuestionnaireData({
+              takeOverExistingBiz: true,
+              propertyAssessment: true,
             }),
             submitted: true,
           },
@@ -66,22 +67,22 @@ describe("<CheckWastePermitsResults />", () => {
       })
     );
     expect(
-      screen.getByText(Config.wasteQuestionnaireQuestionsPage.wasteQuestionnaireOptions.hazardousMedicalWaste)
+      screen.getByText(Config.envReqQuestionsPage.land.questionnaireOptions.takeOverExistingBiz)
     ).toBeInTheDocument();
     expect(
-      screen.getByText(Config.wasteQuestionnaireQuestionsPage.wasteQuestionnaireOptions.compostWaste)
+      screen.getByText(Config.envReqQuestionsPage.land.questionnaireOptions.propertyAssessment)
     ).toBeInTheDocument();
   });
 
   it("doesn't display the texts of the responses that are false in user data", () => {
-    renderCheckWastePermitsResults(
+    renderCheckLandPermitsResults(
       generateBusiness({
         environmentData: generateEnvironmentData({
-          waste: {
-            questionnaireData: generateWasteQuestionnaireData({
-              hazardousMedicalWaste: true,
-              constructionDebris: false,
-              treatProcessWaste: false,
+          land: {
+            questionnaireData: generateLandQuestionnaireData({
+              takeOverExistingBiz: true,
+              propertyAssessment: false,
+              constructionActivities: false,
             }),
             submitted: true,
           },
@@ -89,69 +90,69 @@ describe("<CheckWastePermitsResults />", () => {
       })
     );
     expect(
-      screen.getByText(Config.wasteQuestionnaireQuestionsPage.wasteQuestionnaireOptions.hazardousMedicalWaste)
+      screen.getByText(Config.envReqQuestionsPage.land.questionnaireOptions.takeOverExistingBiz)
     ).toBeInTheDocument();
     expect(
-      screen.queryByText(Config.wasteQuestionnaireQuestionsPage.wasteQuestionnaireOptions.constructionDebris)
+      screen.queryByText(Config.envReqQuestionsPage.land.questionnaireOptions.propertyAssessment)
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByText(Config.wasteQuestionnaireQuestionsPage.wasteQuestionnaireOptions.treatProcessWaste)
+      screen.queryByText(Config.envReqQuestionsPage.land.questionnaireOptions.constructionActivities)
     ).not.toBeInTheDocument();
   });
 
   it("updates submitted to false when the user clicks edit", async () => {
-    const { user } = renderCheckWastePermitsResultsAndSetupUser(
+    const { user } = renderCheckLandPermitsResultsAndSetupUser(
       generateBusiness({
         environmentData: generateEnvironmentData({
-          waste: {
+          land: {
             submitted: true,
           },
         }),
       })
     );
-    await user.click(screen.getByText(Config.wasteQuestionnaireResultsPage.editText));
-    expect(currentBusiness().environmentData?.waste?.submitted).toBe(false);
+    await user.click(screen.getByText(Config.envReqResultsPage.editText));
+    expect(currentBusiness().environmentData?.land?.submitted).toBe(false);
   });
 
   it("updates submitted to false when the user clicks redo form", async () => {
-    const { user } = renderCheckWastePermitsResultsAndSetupUser(
+    const { user } = renderCheckLandPermitsResultsAndSetupUser(
       generateBusiness({
         environmentData: generateEnvironmentData({
-          waste: {
-            questionnaireData: generateWasteQuestionnaireData({
-              noWaste: true,
+          land: {
+            questionnaireData: generateLandQuestionnaireData({
+              noLand: true,
             }),
             submitted: true,
           },
         }),
       })
     );
-    await user.click(screen.getByText(Config.wasteQuestionnaireResultsPage.lowApplicability.calloutRedo));
-    expect(currentBusiness().environmentData?.waste?.submitted).toBe(false);
+    await user.click(screen.getByText(Config.envReqResultsPage.lowApplicability.calloutRedo));
+    expect(currentBusiness().environmentData?.land?.submitted).toBe(false);
   });
 
   it("updates task progress to IN_PROGRESS when the user clicks edit", async () => {
-    const { user } = renderCheckWastePermitsResultsAndSetupUser(
+    const { user } = renderCheckLandPermitsResultsAndSetupUser(
       generateBusiness({
         environmentData: generateEnvironmentData({
-          waste: {
+          land: {
             submitted: true,
           },
         }),
         taskProgress: { [task.id]: "COMPLETED" },
       })
     );
-    await user.click(screen.getByText(Config.wasteQuestionnaireResultsPage.editText));
+    await user.click(screen.getByText(Config.envReqResultsPage.editText));
     expect(currentBusiness().taskProgress[task.id]).toBe("IN_PROGRESS");
   });
 
   it("updates task progress to IN_PROGRESS when the user clicks redo form", async () => {
-    const { user } = renderCheckWastePermitsResultsAndSetupUser(
+    const { user } = renderCheckLandPermitsResultsAndSetupUser(
       generateBusiness({
         environmentData: generateEnvironmentData({
-          waste: {
-            questionnaireData: generateWasteQuestionnaireData({
-              noWaste: true,
+          land: {
+            questionnaireData: generateLandQuestionnaireData({
+              noLand: true,
             }),
             submitted: true,
           },
@@ -159,7 +160,7 @@ describe("<CheckWastePermitsResults />", () => {
         taskProgress: { [task.id]: "COMPLETED" },
       })
     );
-    await user.click(screen.getByText(Config.wasteQuestionnaireResultsPage.lowApplicability.calloutRedo));
+    await user.click(screen.getByText(Config.envReqResultsPage.lowApplicability.calloutRedo));
     expect(currentBusiness().taskProgress[task.id]).toBe("IN_PROGRESS");
   });
 });

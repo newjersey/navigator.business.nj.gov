@@ -1,6 +1,6 @@
 import { TaskHeader } from "@/components/TaskHeader";
-import { CheckWastePermitsQuestionnaire } from "@/components/tasks/environment-questionnaire/CheckWastePermitsQuestionnaire";
-import { CheckWastePermitsResults } from "@/components/tasks/environment-questionnaire/CheckWastePermitsResults";
+import { CheckWastePermitsQuestionnaire } from "@/components/tasks/environment-questionnaire/waste/CheckWastePermitsQuestionnaire";
+import { CheckWastePermitsResults } from "@/components/tasks/environment-questionnaire/waste/CheckWastePermitsResults";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";

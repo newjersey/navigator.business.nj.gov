@@ -1,19 +1,16 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { generateTask } from "@/test/factories";
 import { currentBusiness, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import {
-  Business,
-  generateEnvironmentData,
-  generateWasteQuestionnaireData,
-} from "@businessnjgovnavigator/shared";
+import { generateLandQuestionnaireData } from "@businessnjgovnavigator/shared";
+import { Business, generateEnvironmentData } from "@businessnjgovnavigator/shared/index";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent, { UserEvent } from "@testing-library/user-event";
-import { CheckWastePermits } from "./CheckWastePermits";
+import { CheckLandPermits } from "./CheckLandPermits";
 
 const Config = getMergedConfig();
 
-describe("<CheckWastePermits />", () => {
+describe("<CheckLandPermits />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
@@ -23,7 +20,7 @@ describe("<CheckWastePermits />", () => {
   const renderQuestionnaireAndSetupUser = (business?: Business): { user: UserEvent } => {
     render(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
-        <CheckWastePermits task={task} />
+        <CheckLandPermits task={task} />
       </WithStatefulUserData>
     );
     const user = userEvent.setup();
@@ -33,7 +30,7 @@ describe("<CheckWastePermits />", () => {
   const renderQuestionnaire = (business?: Business): void => {
     render(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
-        <CheckWastePermits task={task} />
+        <CheckLandPermits task={task} />
       </WithStatefulUserData>
     );
   };
@@ -41,14 +38,12 @@ describe("<CheckWastePermits />", () => {
   it("displays the results page when the user submits the questionnaire", async () => {
     const { user } = renderQuestionnaireAndSetupUser();
     await user.click(
-      screen.getByLabelText(
-        Config.wasteQuestionnaireQuestionsPage.wasteQuestionnaireOptions.hazardousMedicalWaste
-      )
+      screen.getByLabelText(Config.envReqQuestionsPage.land.questionnaireOptions.takeOverExistingBiz)
     );
-    await user.click(screen.getByText(Config.wasteQuestionnaireQuestionsPage.buttonText));
-    expect(currentBusiness().environmentData?.waste?.submitted).toBe(true);
+    await user.click(screen.getByText(Config.envReqQuestionsPage.generic.buttonText));
+    expect(currentBusiness().environmentData?.land?.submitted).toBe(true);
     await waitFor(() => {
-      expect(screen.getByText(Config.wasteQuestionnaireResultsPage.title)).toBeInTheDocument();
+      expect(screen.getByText(Config.envReqResultsPage.title)).toBeInTheDocument();
     });
   });
 
@@ -56,28 +51,28 @@ describe("<CheckWastePermits />", () => {
     renderQuestionnaire(
       generateBusiness({
         environmentData: {
-          waste: {
+          land: {
             submitted: false,
           },
         },
       })
     );
-    expect(screen.getByText(Config.wasteQuestionnaireQuestionsPage.title)).toBeInTheDocument();
+    expect(screen.getByText(Config.envReqQuestionsPage.generic.title)).toBeInTheDocument();
   });
 
   it("displays the results page if submitted is true", () => {
     renderQuestionnaire(
       generateBusiness({
         environmentData: generateEnvironmentData({
-          waste: {
-            questionnaireData: generateWasteQuestionnaireData({
-              hazardousMedicalWaste: true,
+          land: {
+            questionnaireData: generateLandQuestionnaireData({
+              takeOverExistingBiz: true,
             }),
             submitted: true,
           },
         }),
       })
     );
-    expect(screen.getByText(Config.wasteQuestionnaireResultsPage.title)).toBeInTheDocument();
+    expect(screen.getByText(Config.envReqResultsPage.title)).toBeInTheDocument();
   });
 });
