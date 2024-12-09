@@ -1,8 +1,6 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { NeedsAccountContext } from "@/contexts/needsAccountContext";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -12,7 +10,7 @@ import {
   WasteQuestionnaireFieldIds,
 } from "@businessnjgovnavigator/shared/environment";
 import { Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, useMediaQuery } from "@mui/material";
-import { ChangeEvent, ReactElement, useContext, useState } from "react";
+import { ChangeEvent, ReactElement, useState } from "react";
 
 interface Props {
   task: Task;
@@ -21,7 +19,6 @@ interface Props {
 export const CheckWastePermitsQuestionnaire = (props: Props): ReactElement => {
   const { updateQueue, business } = useUserData();
   const { Config } = useConfig();
-  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const [showError, setShowError] = useState<boolean>(false);
   const [wasteQuestionnaireData, setWasteData] = useState<WasteQuestionnaireData>({
     hazardousMedicalWaste:
@@ -61,10 +58,6 @@ export const CheckWastePermitsQuestionnaire = (props: Props): ReactElement => {
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    if (isAuthenticated === IsAuthenticated.FALSE) {
-      setShowNeedsAccountModal(true);
-      return;
-    }
     const value: WasteQuestionnaireFieldIds = event.target.id as WasteQuestionnaireFieldIds;
     if (value === "noWaste") {
       setWasteData({

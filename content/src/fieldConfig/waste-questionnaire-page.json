@@ -3,7 +3,7 @@
     "title": "Tell Us About Your Business",
     "question": "Which of the following are true?",
     "footer": "To learn more about waste permits, visit [NJDEP’s page on Sustainable Waste Management](https://www.nj.gov/dep/dshw/).",
-    "buttonText": "Save & See My Results",
+    "buttonText": "See My Results",
     "errorText": "Select a response below.",
     "wasteQuestionnaireOptions": {
       "hazardousMedicalWaste": "My business will generate `hazardous waste|hazardous-waste` or `medical waste|medical-waste`.",
