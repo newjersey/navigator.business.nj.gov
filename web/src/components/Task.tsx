@@ -49,7 +49,6 @@ export const Task = (props: Props): ReactElement => {
               href={`/tasks/${props.task.urlSlug}`}
               className={`usa-link margin-right-105 ${props.task.required ? "text-bold" : ""}`}
               data-task={props.task.id}
-              data-testid={props.task.id}
             >
               {props.task.name}
             </a>
