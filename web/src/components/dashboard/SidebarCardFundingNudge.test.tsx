@@ -37,7 +37,7 @@ import {
   randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -199,12 +199,15 @@ describe("<SidebarCardFundingNudge />", () => {
       console.log({ business });
 
       expect(screen.getByText(Config.dashboardDefaults.sectorModalTitle)).toBeInTheDocument();
-      fireEvent.mouseDown(screen.getByLabelText("Sector"));
-      const listbox = within(screen.getByRole("combobox"));
-      fireEvent.click(listbox.getByTestId("agriculturual-forestry-fishing-and-hunting"));
+      selectDropdownByValue("Sector", "clean-energy");
       fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalSaveButton));
-      expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.UP_AND_RUNNING);
-      expect(currentBusiness().profileData.sectorId).toEqual("clean-energy");
+      console.log({ business });
+      await waitFor(() => {
+        expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.UP_AND_RUNNING);
+      });
+      await waitFor(() => {
+        expect(currentBusiness().profileData.sectorId).toEqual("clean-energy");
+      });
     });
 
     it("does not update operating phase when user cancels from within modal", () => {
