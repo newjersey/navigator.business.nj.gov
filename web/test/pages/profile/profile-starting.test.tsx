@@ -34,6 +34,7 @@ import {
   formationTaskId,
   generateGetFilingResponse,
   generateMunicipality,
+  generateOwningProfileData,
   generateProfileData,
   generateStartingProfileData,
   LegalStructures,
@@ -1397,6 +1398,25 @@ describe("profile - starting business", () => {
       renderPage({ business });
 
       expect(screen.queryByTestId("raffleBingoGames-radio-group")).not.toBeInTheDocument();
+    });
+
+    it("shows vacant building question for real estate up and running poppies", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateOwningProfileData({
+          industryId: "real-estate-investor",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
+          businessPersona: "STARTING",
+          homeBasedBusiness: false,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
     });
   });
 
