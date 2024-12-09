@@ -10,12 +10,12 @@ import {
 import { dbaInputField } from "@/test/helpers/helpersSearchBusinessName";
 import { currentBusiness, userDataWasNotUpdated } from "@/test/mock/withStatefulUserData";
 import {
-  FormationData,
-  ProfileData,
-  PublicFilingLegalType,
   castPublicFilingLegalTypeToFormationType,
+  FormationData,
   generateBusiness,
   generateFormationFormData,
+  ProfileData,
+  PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
 import { generateBusinessNameAvailability } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
@@ -131,7 +131,6 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
     await page.searchBusinessName({ status: "AVAILABLE" });
 
     expect(currentBusiness().profileData.nexusDbaName).toEqual("");
-    expect(currentBusiness().profileData.needsNexusDbaName).toEqual(false);
     expect(currentBusiness().profileData.businessName).toEqual("My Cool Business");
   });
 
@@ -144,15 +143,6 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
     page.fillText("Search business name", "My Cool Business");
     await page.searchBusinessName({ status: "AVAILABLE" });
     expect(currentBusiness().formationData.formationFormData.businessName).toEqual("My Cool Business");
-  });
-
-  it("sets needsDbaName in profile to true when unavailable", async () => {
-    const page = await getPageHelper({});
-    page.fillText("Search business name", "My Cool Business");
-    await page.searchBusinessName({ status: "UNAVAILABLE" });
-    expect(currentBusiness().profileData.nexusDbaName).toEqual("");
-    expect(currentBusiness().profileData.needsNexusDbaName).toEqual(true);
-    expect(currentBusiness().profileData.businessName).toEqual("My Cool Business");
   });
 
   it("does not save business name if designator error", async () => {

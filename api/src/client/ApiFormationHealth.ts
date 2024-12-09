@@ -95,7 +95,6 @@ export const ApiFormationHealth: UserData = {
         naicsCode: "375127",
         foreignBusinessTypeIds: ["officeInNJ"],
         nexusDbaName: "",
-        needsNexusDbaName: false,
         operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
         nonEssentialRadioAnswers: {},
         encryptedTaxId: undefined,

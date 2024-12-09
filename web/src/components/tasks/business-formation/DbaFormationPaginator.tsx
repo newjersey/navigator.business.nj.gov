@@ -15,6 +15,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab, scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
+import { determineIfNexusDbaNameNeeded } from "@businessnjgovnavigator/shared/";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
@@ -60,7 +61,7 @@ export const DbaFormationPaginator = (): ReactElement => {
     moveToStep(state.stepIndex - 1);
   };
 
-  const isDba = business?.profileData.businessName && business.profileData.needsNexusDbaName;
+  const isDba = business?.profileData.businessName && determineIfNexusDbaNameNeeded(business);
 
   const onMoveToStep = async (
     stepIndex: number,
