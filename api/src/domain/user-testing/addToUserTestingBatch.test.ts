@@ -21,6 +21,7 @@ describe("addToUserTestingBatch", () => {
       getNeedToAddToUserTestingUsers: jest.fn(),
       getUsersWithOutdatedVersion: jest.fn(),
       getUsersWithBusinesses: jest.fn(),
+      findUserByBusinessName: jest.fn(),
     };
     addToUserTesting = addToUserTestingFactory(stubUserTestingClient);
   });

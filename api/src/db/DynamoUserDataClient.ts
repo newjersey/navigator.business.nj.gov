@@ -171,6 +171,26 @@ export const DynamoUserDataClient = (
     };
   };
 
+  const findUserByBusinessName = async (businessName: string): Promise<UserData[]> => {
+    const statement = `SELECT data FROM "${tableName}" WHERE data["businesses"] IS NOT MISSING AND size(data["businesses"]) > 0`;
+
+    const { Items = [] } = await db.send(new ExecuteStatementCommand({ Statement: statement }));
+    const users = await Promise.all(
+      Items.map(async (object: any): Promise<UserData | undefined> => {
+        const data = unmarshall(object).data;
+
+        console.log("Business data structure:", data.businesses);
+
+        const matchingBusinesses = Object.values(data.businesses).some(
+          (business: any) => business.profileData && business.profileData.businessName === businessName
+        );
+
+        return matchingBusinesses ? await doMigration(data) : undefined;
+      })
+    );
+    return users.filter((user): user is UserData => user !== null);
+  };
+
   const search = async (statement: string): Promise<UserData[]> => {
     const { Items = [] } = await db.send(new ExecuteStatementCommand({ Statement: statement }));
     return await Promise.all(
@@ -190,5 +210,6 @@ export const DynamoUserDataClient = (
     getNeedTaxIdEncryptionUsers,
     getUsersWithOutdatedVersion,
     getUsersWithBusinesses,
+    findUserByBusinessName,
   };
 };

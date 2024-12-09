@@ -49,6 +49,7 @@ describe("taxFilingRouter", () => {
       getNeedTaxIdEncryptionUsers: jest.fn(),
       getUsersWithOutdatedVersion: jest.fn(),
       getUsersWithBusinesses: jest.fn(),
+      findUserByBusinessName: jest.fn(),
     };
 
     apiTaxFilingClient = {

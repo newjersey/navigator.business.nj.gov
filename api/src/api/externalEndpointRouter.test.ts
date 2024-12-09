@@ -49,6 +49,7 @@ describe("externalEndpointRouter", () => {
       getNeedTaxIdEncryptionUsers: jest.fn(),
       getUsersWithOutdatedVersion: jest.fn(),
       getUsersWithBusinesses: jest.fn(),
+      findUserByBusinessName: jest.fn(),
     };
     stubAddNewsletter = jest.fn();
     stubAddToUserTesting = jest.fn();

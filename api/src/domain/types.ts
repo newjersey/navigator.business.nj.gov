@@ -33,6 +33,7 @@ export interface UserDataClient {
   getUsersWithBusinesses: (
     ExclusiveStartKey?: Record<string, AttributeValue>
   ) => Promise<{ users: UserData[]; lastEvaluatedKey: Record<string, AttributeValue> | undefined }>;
+  findUserByBusinessName: (businessName: string) => Promise<UserData[]>;
 }
 
 export interface BusinessesDataClient {
