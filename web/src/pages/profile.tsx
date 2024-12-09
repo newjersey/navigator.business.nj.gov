@@ -568,19 +568,6 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
 
         <ProfileField
-          fieldName="vacantPropertyOwner"
-          isVisible={displayVacantBuildingOwnerQuestion()}
-          hideHeader={true}
-          boldAltDescription={true}
-          boldDescription={true}
-        >
-          <span className={"margin-left-05"}>
-            {Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText}
-          </span>
-          <RadioQuestion<boolean> fieldName={"vacantPropertyOwner"} choices={[true, false]} />
-        </ProfileField>
-
-        <ProfileField
           fieldName="sectorId"
           isVisible={profileData.industryId === "generic" || !!props.CMS_ONLY_fakeBusiness}
         >
