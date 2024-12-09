@@ -421,6 +421,13 @@ export const incorporationLegalStructures: FormationLegalType[] = [
   "nonprofit",
 ];
 
+export const nonCorporationLegalStructures: FormationLegalType[] = [
+  "limited-liability-company",
+  "limited-liability-partnership",
+  "limited-partnership",
+  "nonprofit",
+];
+
 export type AcceptedFileType = "PDF" | "PNG";
 
 export type InputFile = {

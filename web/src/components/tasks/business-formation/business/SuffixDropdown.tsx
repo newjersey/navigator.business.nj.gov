@@ -3,6 +3,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
+import { isForeignCorporation } from "@/lib/utils/helpers";
 import {
   BusinessSuffix,
   BusinessSuffixMap,
@@ -15,7 +16,15 @@ import {
   LpBusinessSuffix,
   NonprofitBusinessSuffix,
 } from "@businessnjgovnavigator/shared/";
-import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import {
+  FormControl,
+  FormHelperText,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import { ReactElement, ReactNode, useContext } from "react";
 
 interface MySelectDisplayProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -53,14 +62,21 @@ export const SuffixDropdown = (): ReactElement => {
 
   return (
     <>
-      <div className="flex">
-        <strong>
-          <ContextualInfoButton
-            text={Config.formation.fields.businessSuffix.label}
-            id={Config.formation.fields.businessSuffix.labelContextualInfo}
-          />
-        </strong>
-      </div>
+      <Grid container direction={"column"}>
+        <Grid item>
+          <strong>
+            <ContextualInfoButton
+              text={Config.formation.fields.businessSuffix.label}
+              id={Config.formation.fields.businessSuffix.labelContextualInfo}
+            />
+          </strong>
+        </Grid>
+        {isForeignCorporation(state.formationFormData.legalType) && (
+          <Grid item className="tablet:display-flex">
+            {Config.formation.fields.businessSuffix.labelSecondaryTextForeignCorporation}
+          </Grid>
+        )}
+      </Grid>
       <FormControl fullWidth error={doesFieldHaveError(FIELD)}>
         <InputLabel id="business-suffix-label" className="visibility-hidden">
           {camelCaseToSentence("businessSuffix")}
