@@ -22,7 +22,7 @@ interface Props extends OmitGenericButtonProps {
 const colors = {
   primary: "usa-button usa-button--outline",
   "accent-cooler":
-    "usa-button border-accent-cooler bg-transparent text-bold text-accent-cooler padding-x-1 border-2px hide-unhide-button-accent-cooler",
+    "usa-button border-accent-cooler bg-transparent text-accent-cooler border-2px padding-x-205 padding-y-2 hide-unhide-button-accent-cooler",
   "border-base-light":
     "usa-button border-base-light bg-transparent text-normal text-base padding-x-1 border-1px hide-unhide-button font-body-2xs",
 };

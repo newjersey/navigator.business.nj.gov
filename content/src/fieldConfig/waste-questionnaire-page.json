@@ -6,21 +6,23 @@
     "buttonText": "Save & See My Results",
     "errorText": "Select a response below.",
     "wasteQuestionnaireOptions": {
-      "hazardousMedicalWaste": "My business will generate `hazardous waste|hazardous-waste` or medical waste.",
+      "hazardousMedicalWaste": "My business will generate `hazardous waste|hazardous-waste` or `medical waste|medical-waste`.",
       "compostWaste": "My business will `compost waste|compost-waste` on site.",
       "treatProcessWaste": "My business will treat or process waste.",
-      "constructionDebris": "My business will process `construction/demolition|construction-and-debris` debris and recyclable materials.",
-      "noWaste": "None of the above apply to my business."
+      "constructionDebris": "My business will process `construction/demolition debris|construction-and-demo-debris` and recyclable materials.",
+      "noWaste": "None of the above apply."
     }
   },
   "wasteQuestionnaireResultsPage": {
     "title": "Actions to Take",
     "editInfo": "Your answers were successfully completed!",
     "editText": "Edit.",
-    "summary": "Based on your answers, your business may be legally required to have a Department of Environmental Protection’s (DEP) waste license or permit. Find out your business' requirements below.",
+    "summaryPtOne": "Based on your answers, your business may be legally required to have a Department of Environmental Protection’s (DEP)",
+    "summaryPtTwo": "license or permit. Find out your business' requirements below.",
+    "summaryMediaArea": "waste",
     "personalizedSupport": {
       "title": "Contact DEP’s Small Business Assistance Program (SBAP)",
-      "body": "An expert at SBAP can help you figure out which permits your business needs.SBAP does not regulate or enforce environmental rules.",
+      "body": "An expert at SBAP can help you figure out which permits your business needs. SBAP does not regulate or enforce environmental rules.",
       "contact": "edward.bakos@dep.nj.gov"
     },
     "contactDep": {
