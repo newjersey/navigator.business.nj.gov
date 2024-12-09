@@ -69,24 +69,6 @@ export const clickDeferredSaveButton = () => {
   return cy.get(`button[data-testid="deferred-question-save"]`).first().click();
 };
 
-export const clickModalSaveButton = (): void => {
-  cy.get('[data-testid="modal-button-primary"]').first().click();
-  cy.wait(1000);
-};
-
-export const selectDate = (monthYear: string): void => {
-  cy.chooseDatePicker('[name="dateOfFormation"]', monthYear);
-};
-
-export const selectLocation = (townDisplayName: string): void => {
-  cy.get('[data-testid="municipality"]').type(townDisplayName);
-  cy.get("#municipality-option-0").click({ force: true });
-};
-
-export const openFormationDateModal = (): void => {
-  cy.get('[data-testid="cta-formation-nudge"]').first().click();
-};
-
 //Cypress Mobile Viewport
 export const setMobileViewport = () => {
   cy.viewport(375, 667);
