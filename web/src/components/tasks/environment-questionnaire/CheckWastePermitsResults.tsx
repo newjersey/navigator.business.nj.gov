@@ -111,7 +111,13 @@ export const CheckWastePermitsResults = (props: Props): ReactElement => {
   const highApplicability = (): ReactElement => {
     return (
       <>
-        <Content className={"padding-bottom-3"}>{Config.wasteQuestionnaireResultsPage.summary}</Content>
+        <div className={"padding-bottom-3"}>
+          {Config.wasteQuestionnaireResultsPage.summaryPtOne}
+          <span className={"text-bold margin-x-05"}>
+            {Config.wasteQuestionnaireResultsPage.summaryMediaArea}
+          </span>
+          {Config.wasteQuestionnaireResultsPage.summaryPtTwo}
+        </div>
         {personalizedSupport()}
         {contactDep()}
         {seeYourResponses()}
@@ -123,12 +129,10 @@ export const CheckWastePermitsResults = (props: Props): ReactElement => {
     return (
       <>
         <div className={"padding-y-1"}>
-          <div>
-            <span className={"text-bold margin-right-05"}>
-              {Config.wasteQuestionnaireResultsPage.lowApplicability.summaryLine1}
-            </span>
-            <Content>{Config.wasteQuestionnaireResultsPage.lowApplicability.summaryLine2}</Content>
+          <div className={"text-bold margin-bottom-1"}>
+            {Config.wasteQuestionnaireResultsPage.lowApplicability.summaryLine1}
           </div>
+          <Content>{Config.wasteQuestionnaireResultsPage.lowApplicability.summaryLine2}</Content>
         </div>
         <Callout calloutType={"note"} showIcon showHeader={false} showIconInBody={true}>
           <span>

@@ -5,12 +5,12 @@ header: Hazardous Waste
 displayname: Hazardous Waste
 ---
 
-Hazardous waste is any material that is harmful to the environment and to humans. For waste to be classified as hazardous, it must meet at one of the following criteria:
+Hazardous waste is any material that is harmful to the environment and to humans. For waste to be classified as hazardous, it must meet at least one of the following criteria:
 
-- Corrosivity: Breaks down metals and other materials (for example, acids)
-- Reactivity: Is unstable and can explode easily (for example, batteries, bleach)
-- Toxicity: Contains materials that are harmful if consumed or absorbed
-- Flammability: Can easily catch on fire
+- **Corrosivity**: Breaks down metals and other materials (for example, acids)
+- **Reactivity**: Is unstable and can explode easily (for example, batteries, bleach)
+- **Toxicity**: Contains materials that are harmful if consumed or absorbed
+- **Flammability**: Can easily catch on fire
 
 Hazardous waste can come from various places, such as manufacturing, dry cleaners, and gas stations.
 

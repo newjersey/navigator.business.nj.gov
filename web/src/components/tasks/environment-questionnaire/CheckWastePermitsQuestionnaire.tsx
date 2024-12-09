@@ -1,17 +1,16 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { NeedsAccountContext } from "@/contexts/needsAccountContext";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { MediaQueries } from "@/lib/PageSizes";
 import { Task } from "@/lib/types/types";
 import {
   WasteQuestionnaireData,
   WasteQuestionnaireFieldIds,
 } from "@businessnjgovnavigator/shared/environment";
-import { Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel } from "@mui/material";
-import { ChangeEvent, ReactElement, useContext, useState } from "react";
+import { Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, useMediaQuery } from "@mui/material";
+import { ChangeEvent, ReactElement, useState } from "react";
 
 interface Props {
   task: Task;
@@ -20,7 +19,6 @@ interface Props {
 export const CheckWastePermitsQuestionnaire = (props: Props): ReactElement => {
   const { updateQueue, business } = useUserData();
   const { Config } = useConfig();
-  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const [showError, setShowError] = useState<boolean>(false);
   const [wasteQuestionnaireData, setWasteData] = useState<WasteQuestionnaireData>({
     hazardousMedicalWaste:
@@ -60,10 +58,6 @@ export const CheckWastePermitsQuestionnaire = (props: Props): ReactElement => {
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    if (isAuthenticated === IsAuthenticated.FALSE) {
-      setShowNeedsAccountModal(true);
-      return;
-    }
     const value: WasteQuestionnaireFieldIds = event.target.id as WasteQuestionnaireFieldIds;
     if (value === "noWaste") {
       setWasteData({
@@ -82,15 +76,17 @@ export const CheckWastePermitsQuestionnaire = (props: Props): ReactElement => {
     }
   };
 
+  const isMobile = useMediaQuery(MediaQueries.isMobile);
+
   return (
-    <div className={"bg-base-extra-light padding-205 radius-lg"}>
-      <h3>{Config.wasteQuestionnaireQuestionsPage.title}</h3>
+    <div className={"bg-accent-cooler-50 padding-2 radius-lg"}>
+      {!isMobile && <h3>{Config.wasteQuestionnaireQuestionsPage.title}</h3>}
       {showError && <Alert variant={"error"}>{Config.wasteQuestionnaireQuestionsPage.errorText}</Alert>}
-      <FormControl component="fieldset" variant="standard">
+      <FormControl component="fieldset" variant="standard" fullWidth={true}>
         <FormLabel component="legend" className="text-base-darkest text-bold">
           {Config.wasteQuestionnaireQuestionsPage.question}
         </FormLabel>
-        <FormGroup className={"margin-y-1 margin-left-105"}>
+        <FormGroup className={`margin-y-1 ${isMobile ? "" : "margin-left-105"}`}>
           {wasteQuestionnaireFieldIds.map((fieldId) => {
             return (
               <FormControlLabel
@@ -121,7 +117,12 @@ export const CheckWastePermitsQuestionnaire = (props: Props): ReactElement => {
         <Content>{Config.wasteQuestionnaireQuestionsPage.footer}</Content>
       </div>
       <div className={"flex flex-row flex-justify-end"}>
-        <SecondaryButton isColor="accent-cooler" onClick={() => onSave(wasteQuestionnaireData)}>
+        <SecondaryButton
+          isVerticalPaddingRemoved
+          isRightMarginRemoved
+          isColor="accent-cooler"
+          onClick={() => onSave(wasteQuestionnaireData)}
+        >
           {Config.wasteQuestionnaireQuestionsPage.buttonText}
         </SecondaryButton>
       </div>

@@ -1,21 +1,17 @@
 import { CheckWastePermitsQuestionnaire } from "@/components/tasks/environment-questionnaire/CheckWastePermitsQuestionnaire";
 import { getMergedConfig } from "@/contexts/configContext";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { generateTask } from "@/test/factories";
-import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { currentBusiness, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { Business } from "@businessnjgovnavigator/shared";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent, { UserEvent } from "@testing-library/user-event";
 
-let setShowNeedsAccountModal: jest.Mock;
 const Config = getMergedConfig();
 
 describe("<CheckWastePermitsQuestionnaire />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    setShowNeedsAccountModal = jest.fn();
   });
 
   const task = generateTask({ id: "waste-permitting-test" });
@@ -29,32 +25,6 @@ describe("<CheckWastePermitsQuestionnaire />", () => {
     const user: UserEvent = userEvent.setup();
     return { user };
   };
-
-  const renderQuestionnaireAndSetupUserWithAuthAlert = (business?: Business): { user: UserEvent } => {
-    render(
-      withNeedsAccountContext(
-        <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
-          <CheckWastePermitsQuestionnaire task={task} />
-        </WithStatefulUserData>,
-        IsAuthenticated.FALSE,
-        { showNeedsAccountModal: false, setShowNeedsAccountModal: setShowNeedsAccountModal }
-      )
-    );
-    const user: UserEvent = userEvent.setup();
-    return { user };
-  };
-
-  it("shows the registration modal if the user in not authenticated", async () => {
-    const { user } = renderQuestionnaireAndSetupUserWithAuthAlert();
-    await user.click(
-      screen.getByLabelText(
-        Config.wasteQuestionnaireQuestionsPage.wasteQuestionnaireOptions.hazardousMedicalWaste
-      )
-    );
-    await waitFor(() => {
-      return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
-    });
-  });
 
   it("clears all choices if the user selects none of the above", async () => {
     const { user } = renderQuestionnaireAndSetupUser();
