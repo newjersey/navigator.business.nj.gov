@@ -82,8 +82,8 @@ export interface FormationData {
 
 export type FormationBusinessLocationType = "US" | "INTL" | "NJ";
 export interface FormationAddress extends Address {
-  readonly addressCity?: string;
-  readonly addressProvince?: string;
+  readonly addressCity?: string; //may need to remove since in Address
+  readonly addressProvince?: string; //may need to remove since in Address
   readonly addressCountry: CountriesShortCodes | undefined;
   readonly businessLocationType: FormationBusinessLocationType | undefined;
 }
@@ -94,6 +94,9 @@ export interface Address {
   addressMunicipality?: Municipality;
   addressState?: StateObject;
   addressZipCode: string;
+  addressCity?: string;
+  addressProvince?: string;
+  addressCountry?: CountriesShortCodes | undefined;
 }
 
 export const emptyAddressData: Address = {
@@ -102,6 +105,9 @@ export const emptyAddressData: Address = {
   addressMunicipality: undefined,
   addressState: undefined,
   addressZipCode: "",
+  addressCity: "",
+  addressProvince: "",
+  addressCountry: undefined,
 };
 
 export interface FormationSigner {

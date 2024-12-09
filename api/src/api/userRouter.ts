@@ -253,6 +253,7 @@ export const userRouterFactory = (
 
       const formationFormData =
         userData.businesses[userData.currentBusinessId].formationData.formationFormData;
+      console.log("userRouter formationFormData", formationFormData);
       const address = {
         addressLine1: formationFormData.addressLine1,
         addressLine2: formationFormData.addressLine2,
@@ -260,6 +261,7 @@ export const userRouterFactory = (
         addressMunicipality: formationFormData.addressMunicipality,
         addressZipCode: formationFormData.addressZipCode,
       };
+      console.log("userRouter address", address);
       return modifyCurrentBusiness(userData, (business) => ({
         ...business,
         formationData: {
