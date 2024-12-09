@@ -209,9 +209,10 @@ const dynamicsHousingRegistrationStatusClient = DynamicsHousingRegistrationStatu
   housingPropertyInterestClient: dynamicsHousingPropertyInterestClient,
 });
 
-const BUSINESS_NAME_BASE_URL = process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH
-  ? "http://localhost:9000"
-  : process.env.BUSINESS_NAME_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
+const BUSINESS_NAME_BASE_URL =
+  process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
+    ? "http://localhost:9000"
+    : process.env.BUSINESS_NAME_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
 const businessNameClient = ApiBusinessNameClient(BUSINESS_NAME_BASE_URL, logger);
 
 const GOV_DELIVERY_BASE_URL =
@@ -229,9 +230,10 @@ const AIRTABLE_BASE_URL =
 
 const FORMATION_API_ACCOUNT = process.env.FORMATION_API_ACCOUNT || "";
 const FORMATION_API_KEY = process.env.FORMATION_API_KEY || "";
-const FORMATION_API_BASE_URL = process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH
-  ? "http://localhost:9000"
-  : process.env.FORMATION_API_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
+const FORMATION_API_BASE_URL =
+  process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
+    ? "http://localhost:9000"
+    : process.env.FORMATION_API_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
 
 const GOV2GO_REGISTRATION_API_KEY = process.env.GOV2GO_REGISTRATION_API_KEY || "";
 const GOV2GO_REGISTRATION_BASE_URL = IS_OFFLINE
