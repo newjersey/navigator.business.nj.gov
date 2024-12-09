@@ -12,6 +12,7 @@ import type { LogWriterType } from "@libs/logWriter";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
+import { determineIfNexusDbaNameNeeded } from "@shared/domain-logic/businessPersonaHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import { createEmptyFormationFormData } from "@shared/formationData";
@@ -90,7 +91,7 @@ const shouldUpdateBusinessNameSearch = (userData: UserData): boolean => {
     currentBusiness.formationData.businessNameAvailability !== undefined &&
     hasBeenMoreThanOneHour(currentBusiness.formationData.businessNameAvailability.lastUpdatedTimeStamp);
 
-  const isDba = currentBusiness.profileData.needsNexusDbaName;
+  const isDba = determineIfNexusDbaNameNeeded(currentBusiness);
   const shouldUpdateNameAvailability = isDba ? dbaNameIsOlderThanAnHour : businessNameIsOlderThanAnHour;
 
   return shouldUpdateNameAvailability && currentBusiness.formationData.completedFilingPayment !== true;
@@ -313,7 +314,7 @@ export const userRouterFactory = (
     try {
       const currentBusiness = getCurrentBusiness(userData);
       const isForeign = currentBusiness.profileData.businessPersona === "FOREIGN";
-      const needsDba = currentBusiness.profileData.needsNexusDbaName;
+      const needsDba = determineIfNexusDbaNameNeeded(currentBusiness);
       const nameToSearch = needsDba
         ? currentBusiness.profileData.nexusDbaName
         : currentBusiness.profileData.businessName;

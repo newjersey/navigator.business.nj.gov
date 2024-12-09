@@ -102,9 +102,9 @@ describe("<NexusFormationFlow />", () => {
     const profileData = generateFormationProfileData({
       legalStructureId,
       businessPersona: "FOREIGN",
+      foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
       businessName: "",
       nexusDbaName: "",
-      needsNexusDbaName: false,
     });
     const formationData = generateEmptyFormationData();
     displayContent = {
@@ -128,7 +128,6 @@ describe("<NexusFormationFlow />", () => {
       businessName: "Pizza Joint",
       nexusDbaName: "",
       municipality: undefined,
-      needsNexusDbaName: false,
     });
     const formationData = generateEmptyFormationData();
     initialBusiness = generateBusiness({ profileData, formationData });
@@ -325,7 +324,6 @@ describe("<NexusFormationFlow />", () => {
             businessPersona: "FOREIGN",
             businessName: businessName ?? "",
             nexusDbaName: "",
-            needsNexusDbaName: false,
           });
           const formationData = generateFormationData({ lastVisitedPageIndex });
           displayContent = {
@@ -500,7 +498,6 @@ describe("<NexusFormationFlow />", () => {
           businessPersona: "FOREIGN",
           businessName: "",
           nexusDbaName: "",
-          needsNexusDbaName: false,
         });
         const formationData = generateEmptyFormationData();
         const partnershipBusiness = generateBusiness({ profileData, formationData });

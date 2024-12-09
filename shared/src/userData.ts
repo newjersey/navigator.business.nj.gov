@@ -31,7 +31,7 @@ export interface Business {
   readonly environmentData: EnvironmentData | undefined;
 }
 
-export const CURRENT_VERSION = 149;
+export const CURRENT_VERSION = 150;
 
 export const createEmptyBusiness = (id?: string): Business => {
   return {
