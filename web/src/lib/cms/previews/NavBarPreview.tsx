@@ -6,56 +6,53 @@ import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import {
   generateBusiness,
+  generateBusinessNameAvailability,
+  generateFormationData,
   generateProfileData,
   generateUserData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 
 const NavBarPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [userData, setUserData] = useState(generateUserData({}));
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [userDataOwningNoName, setUserDataOwningNoName] = useState(
-    generateUserDataForBusiness(
-      generateBusiness({
-        profileData: generateProfileData({
-          businessPersona: "OWNING",
-          businessName: "",
-          tradeName: "",
-        }),
-      })
-    )
+  const userData = generateUserData({});
+
+  const userDataOwningNoName = generateUserDataForBusiness(
+    generateBusiness({
+      profileData: generateProfileData({
+        businessPersona: "OWNING",
+        businessName: "",
+        tradeName: "",
+      }),
+    })
   );
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [userDataRemoteSellerWorkerNoName, setUserDataNexusNoName] = useState(
-    generateUserDataForBusiness(
-      generateBusiness({
-        profileData: generateProfileData({
-          businessPersona: "FOREIGN",
-          businessName: "",
-          tradeName: "",
-          foreignBusinessTypeIds: ["employeesInNJ"],
-        }),
-      })
-    )
+  const userDataRemoteSellerWorkerNoName = generateUserDataForBusiness(
+    generateBusiness({
+      profileData: generateProfileData({
+        businessPersona: "FOREIGN",
+        businessName: "",
+        tradeName: "",
+        foreignBusinessTypeIds: ["employeesInNJ"],
+      }),
+    })
   );
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [userDataDBANoName, setUserDataDBAsNoName] = useState(
-    generateUserDataForBusiness(
-      generateBusiness({
-        profileData: generateProfileData({
-          businessPersona: "FOREIGN",
-          businessName: "",
-          tradeName: "",
-          needsNexusDbaName: true,
-          nexusDbaName: "",
+  const userDataDBANoName = generateUserDataForBusiness(
+    generateBusiness({
+      profileData: generateProfileData({
+        businessPersona: "FOREIGN",
+        businessName: "",
+        tradeName: "",
+        nexusDbaName: "",
+      }),
+      formationData: generateFormationData({
+        businessNameAvailability: generateBusinessNameAvailability({
+          status: "UNAVAILABLE",
         }),
-      })
-    )
+      }),
+    })
   );
 
   return (

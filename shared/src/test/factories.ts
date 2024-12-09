@@ -291,7 +291,6 @@ export const generateProfileData = (
     naicsCode: randomInt(6).toString(),
     foreignBusinessTypeIds: [],
     nexusDbaName: "",
-    needsNexusDbaName: false,
     operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
     nonEssentialRadioAnswers: {},
     elevatorOwningBusiness: undefined,

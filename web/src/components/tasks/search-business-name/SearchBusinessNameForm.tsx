@@ -10,7 +10,11 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SearchBusinessNameError } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import { emptyProfileData, NameAvailability } from "@businessnjgovnavigator/shared/";
+import {
+  determineIfNexusDbaNameNeeded,
+  emptyProfileData,
+  NameAvailability,
+} from "@businessnjgovnavigator/shared/";
 import { TextField } from "@mui/material";
 import { FormEvent, ReactElement, useCallback, useContext, useEffect, useRef } from "react";
 
@@ -80,8 +84,6 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     const validName = ["AVAILABLE", "UNAVAILABLE"].includes(nameAvailability.status ?? "");
     if (!updateQueue || !validName) return;
 
-    const nameUnavailable = nameAvailability.status === "UNAVAILABLE";
-    const needsNexusDbaName = nameUnavailable ? true : false;
     setFieldsInteracted([FIELD_NAME]);
     updateQueue
       .queueFormationData({
@@ -91,7 +93,6 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
       .queueProfileData({
         businessName: submittedName,
         nexusDbaName: emptyProfileData.nexusDbaName,
-        needsNexusDbaName,
       })
       .update();
 
@@ -166,7 +167,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     (function showBusinessNameSearchResultsIfDBANameExists(): void {
       if (!business) return;
       if (props.isDba) return;
-      const shouldDoInitialSearch = currentName.length > 0 && business.profileData.needsNexusDbaName;
+      const shouldDoInitialSearch = currentName.length > 0 && determineIfNexusDbaNameNeeded(business);
       if (shouldDoInitialSearch && !didInitialSearch.current) {
         didInitialSearch.current = true;
         doSearch(undefined, { isInitialSubmit: true });
