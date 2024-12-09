@@ -37,7 +37,7 @@ You cannot transport a Code 23 trailer in New Jersey without a Code 23 Special O
 
 ::: 
 
-:::callout{ showHeader="true" headerText="Once completed, you will have" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
 * A Code 23 trailer permit, valid for the trailer's life, or as long as the Code 23 registration remains valid
 * You will get your permit by email, fax, or from the "My Queue" page on your NJDOT GotPermits profile
 :::
