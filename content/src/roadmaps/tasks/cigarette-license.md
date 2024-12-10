@@ -4,6 +4,33 @@ notesMd: >-
 
 
   Planning doc: https://docs.google.com/document/d/1MdJ66sV4W0PRiySHYoXzpE62F43H3YHvMK1wYczHW70/edit?tab=t.0
+
+
+  \---
+
+
+  SME feedback, **From:** Friedmann, Brian \[TREAS] <Brian.Friedmann@treas.nj.gov>\
+
+  **Sent:** Tuesday, November 26, 2024 2:55 PM\
+
+  \
+
+  1.        ‘Tobacco products’ must be replaced with ‘cigarettes’ throughout the document. 
+
+
+  This license is for rolled cigarettes only.  Other tobacco products do not require this license to be sold.
+
+
+  2.       The manufacturer representative line should have ‘if applicable’ added to the end and ‘address of machine location’ removed. 
+
+
+  Both this and the supplier information are only needed if applicable to the license type selected at the top of the application.
+
+
+  3.       If needed there should be a bullet for vending machine license which states what information is needed.
+
+
+  4.       Under “once completed…”, it should be changed to say “A printed license will be sent directly to your business location.”
 summaryDescriptionMd: >-
   You need a cigarette license to do either of the following in New Jersey:
 
