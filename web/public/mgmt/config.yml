@@ -1233,7 +1233,9 @@ collections:
               - { label: Title, name: title, widget: text }
               - { label: Edit Info, name: editInfo, widget: string }
               - { label: Edit Text, name: editText, widget: string }
-              - { label: Summary, name: summary, widget: string }
+              - { label: Summary Text Pt.1, name: summaryPtOne, widget: string }
+              - { label: Summary Text Pt.2, name: summaryPtTwo, widget: string }
+              - { label: Summary Media Area, name: summaryMediaArea, widget: string }
               - label: Personalized Support
                 name: personalizedSupport
                 collapsed: true

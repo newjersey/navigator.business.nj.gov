@@ -1,8 +1,8 @@
 ---
-slug: construction-and-debris
-filename: construction-and-debris
-header: Construction and Debris
-displayname: Construction and Debris
+slug: construction-and-demo-debris
+filename: construction-and-demo-debris
+header: Construction and Demolition Debris
+displayname: Construction and Demolition Debris
 ---
 
 Construction and demolition debris is waste material from construction and demolition activities.
