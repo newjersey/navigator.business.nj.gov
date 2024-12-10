@@ -3,6 +3,7 @@ import { SidebarCardGeneric } from "@/components/dashboard/SidebarCardGeneric";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { SidebarCardContent } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
@@ -28,6 +29,7 @@ export const SidebarCardFundingNudge = (props: Props): ReactElement => {
 
   const onClick = async (): Promise<void> => {
     if (!business) return;
+    analytics.event.show_me_funding_opportunities.click.show_me_funding_opportunities();
     if (business.profileData.industryId === "generic" || !business.profileData.industryId) {
       setModalOpen(true);
     } else {
