@@ -31,6 +31,8 @@ export default async function handler(): Promise<void> {
   const AIRTABLE_BASE_URL =
     process.env.AIRTABLE_BASE_URL ||
     (IS_OFFLINE ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000` : "https://api.airtable.com");
+
+  console.log({ AIRTABLE_BASE_URL });
   const AIRTABLE_USERS_TABLE = process.env.AIRTABLE_USERS_TABLE || "Users Dev";
 
   const newsletterGovDeliveryClient = GovDeliveryNewsletterClient({

@@ -228,6 +228,8 @@ const AIRTABLE_BASE_URL =
   process.env.AIRTABLE_BASE_URL ||
   (IS_OFFLINE ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000` : "https://api.airtable.com");
 
+console.log({ AIRTABLE_BASE_URL });
+
 const FORMATION_API_ACCOUNT = process.env.FORMATION_API_ACCOUNT || "";
 const FORMATION_API_KEY = process.env.FORMATION_API_KEY || "";
 const FORMATION_API_BASE_URL =

@@ -400,6 +400,7 @@ commands:
           name: Set Accessibility Testing Environment Variables
           command: |
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_TESTING' >> $BASH_ENV
+            echo 'export AIRTABLE_BASE_URL=https://not.a.site.com' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_TESTING' >> $BASH_ENV
             echo 'export MYNJ_ROLE_NAME=$MYNJ_ROLE_NAME_TESTING' >> $BASH_ENV
             echo 'export MYNJ_SERVICE_TOKEN=$MYNJ_SERVICE_TOKEN_TESTING' >> $BASH_ENV
