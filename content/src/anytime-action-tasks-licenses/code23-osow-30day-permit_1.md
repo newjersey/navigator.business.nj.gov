@@ -65,6 +65,6 @@ If you don't get this permit and your combination vehicle, trailer, and load mee
 
 - A permit for an overweight/oversized vehicle using a trailer with Code 23 registration, valid for 30 days
 
-- You will get your permit by email, fax, or from the "My Queue" page on your NJDOT GotPermits profile
+- A permit that you will get by email, fax, or from the "My Queue" page on your NJDOT GotPermits profile
 
 :::
