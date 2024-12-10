@@ -35,9 +35,9 @@ summaryDescriptionMd: >-
   You need a cigarette license to do either of the following in New Jersey:
 
 
-  * sell or manufacture tobacco products
+  * sell or manufacture cigarettes
 
-  * have a vending machine with tobacco products
+  * have a vending machine with cigarettes
 
 
   If you sell container e-liquid and plan to have more than 50% of your retail sales come from electronic smoking devices, related accessories, and/or liquid nicotine, you must [apply for a Vapor Business License with the NJ Division of Taxation](https://www.nj.gov/treasury/taxation/pdf/other_forms/tobacco/vb-r.pdf).
@@ -65,8 +65,10 @@ webflowType: business-license
 *  `Business type/structure|business-structure-learn-more` 
 * Owner’s information, including name, address, and email
 * Supplier information, including name, address, and phone number, if applicable
-* Manufacturer representative information, including company name, address of machine location, and 12-digit `NJ Tax ID number|tax-id` 
+* Manufacturer representative information, including company name, and 12-digit `NJ Tax ID number|tax-id`, if applicable
+* Any additional requirements for owning and operating a vending machine in your location; check with your municipality
 * Applicable fees paid
+
 
 Mail your completed application and any fees to: 
 
@@ -76,6 +78,8 @@ PO Box 252
 
 Trenton, NJ 08646-0252
 
+
+
 :::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
 
 Learn about the age of sale (21) and the proper way to check an I.D. by visiting [Tobacco-Free for a Healthy New Jersey](https://www.tobaccofreenj.com/stomp).
@@ -84,12 +88,12 @@ Learn about the age of sale (21) and the proper way to check an I.D. by visiting
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
 
-You may not sell, manufacture, or have a vending machine with tobacco products. You may also be subject to significant fines and legal penalties, including imprisonment.
+You may not sell, manufacture, or have a vending machine with cigarettes. You may also be subject to significant fines and legal penalties, including imprisonment.
 
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A printed license, sent to the address on your application.
+A printed license, sent directly to your business location.
 
 :::
