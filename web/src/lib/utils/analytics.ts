@@ -216,7 +216,8 @@ type Item =
   | "hidden_opportunities_section"
   | "link_with_myNJ"
   | "landing_page"
-  | "skip_to_main_content";
+  | "skip_to_main_content"
+  | "show_funding_opportunities";
 
 type BooleanResponseOption = "yes" | "no";
 
@@ -2343,6 +2344,20 @@ export default {
             legacy_event_label: "go_to_onboarding",
             event: "call_to_action_clicks",
             clicked_to: "/onboarding",
+          });
+        },
+      },
+    },
+    show_me_funding_opportunities: {
+      click: {
+        show_me_funding_opportunities: () => {
+          eventRunner.track({
+            legacy_event_category: "show_me_funding_opportunities_button",
+            legacy_event_action: "click",
+            legacy_event_label: "show_calendar",
+            event: "link_clicks",
+            click_text: "show_calendar",
+            item: "show_funding_opportunities",
           });
         },
       },
