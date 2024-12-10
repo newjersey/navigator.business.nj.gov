@@ -1,6 +1,7 @@
 import { SidebarCardFundingNudge } from "@/components/dashboard/SidebarCardFundingNudge";
 import { getMergedConfig } from "@/contexts/configContext";
 import { SidebarCardContent } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { generateSidebarCardContent } from "@/test/factories";
 import { selectDropdownByValue } from "@/test/helpers/helpers-testing-library-selectors";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -24,6 +25,22 @@ import { fireEvent, render, screen } from "@testing-library/react";
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      show_me_funding_opportunities: {
+        click: {
+          show_me_funding_opportunities: jest.fn(),
+        },
+      },
+    },
+  };
+}
 
 const Config = getMergedConfig();
 
@@ -96,5 +113,19 @@ describe("<SidebarCardFundingNudge />", () => {
       fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalCancelButton));
       expect(userDataWasNotUpdated()).toEqual(true);
     });
+  });
+
+  it("fires show_me_funding_opportunities analytics event when link is clicked", () => {
+    renderWithBusiness({
+      profileData: generateProfileData({
+        businessPersona: "STARTING",
+        industryId: "acupuncture",
+      }),
+      preferences: generatePreferences({ visibleSidebarCards: [fundingNudge] }),
+    });
+    fireEvent.click(screen.getByTestId("cta-funding-nudge"));
+    expect(
+      mockAnalytics.event.show_me_funding_opportunities.click.show_me_funding_opportunities
+    ).toHaveBeenCalledTimes(1);
   });
 });
