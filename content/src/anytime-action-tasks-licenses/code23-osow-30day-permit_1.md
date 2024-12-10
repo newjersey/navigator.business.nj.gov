@@ -1,6 +1,7 @@
 ---
 notesMd: "Draft:
-  https://docs.google.com/document/d/1n6Cffog3BT3u9JuuPbhQ92CYTu-GuJn5WbUZR_WNmJo/edit?tab=t.0#heading=h.vdxfup4tf9li"
+  https://docs.google.com/document/d/1n6Cffog3BT3u9JuuPbhQ92CYTu-GuJn5WbUZR_WNm\
+  Jo/edit?tab=t.0#heading=h.vdxfup4tf9li"
 filename: code23-osow-30day-permit
 name: Apply for Your Code 23 OS/OW (30-day) Permit, if Applicable
 industryIds:
@@ -30,15 +31,15 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 
 ## Eligibility Requirements
 
-- An active overweight/overdimensional (Code 23) trailer registration. You can get it at a [NJ Motor Vehicle Commission (MVC) licensing center](https://www.nj.gov/mvc/locations/facilitylocations.htm)
-- A [NJDOT GotPermits website](https://nj.gotpermits.com/njpass#!) account
+- An active overweight/overdimensional (Code 23) trailer registration. You can get that at a [NJ Motor Vehicle Commission (MVC) licensing center](https://www.nj.gov/mvc/locations/facilitylocations.htm)
+- A [NJDOT GotPermits](https://nj.gotpermits.com/njpass#!) account
 
 ## Application Requirements
 
 ### Trip Information
 
 - Travel start date
-- Vehicle type (Power Unit w/ 1 Trailer)
+- Vehicle type (power unit with 1 Trailer)
 - Truck plate/license number and state
 - Trailer plate/license number and state
 - General origin and destination (cities or state borders)
@@ -64,6 +65,6 @@ If you don't get this permit and your combination vehicle, trailer, and load mee
 
 - A permit for an overweight/oversized vehicle using a trailer with Code 23 registration, valid for 30 days
 
-- You will get your permit by email, fax, or from the "My Queue" page on your NJDOT GotPermits profile
+- A permit that you will get by email, fax, or from the "My Queue" page on your NJDOT GotPermits profile
 
 :::
