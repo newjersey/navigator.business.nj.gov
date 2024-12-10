@@ -1,18 +1,18 @@
-import { Address, emptyAddressData } from "@businessnjgovnavigator/shared/";
-import { Dispatch, SetStateAction, createContext } from "react";
+import { emptyFormationAddressData, FormationAddress } from "@businessnjgovnavigator/shared/";
+import { createContext, Dispatch, SetStateAction } from "react";
 
 interface AddressState {
-  addressData: Address;
+  formationAddressData: FormationAddress;
 }
 
-interface AddressContextType {
+interface FormationAddressContextType {
   state: AddressState;
-  setAddressData: Dispatch<SetStateAction<Address>>;
+  setAddressData: Dispatch<SetStateAction<FormationAddress>>;
 }
 
-export const AddressContext = createContext<AddressContextType>({
+export const AddressContext = createContext<FormationAddressContextType>({
   state: {
-    addressData: emptyAddressData,
+    formationAddressData: emptyFormationAddressData,
   },
   setAddressData: () => {},
 });

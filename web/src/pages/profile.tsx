@@ -35,12 +35,12 @@ import { SidebarPageLayout } from "@/components/njwds-layout/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
+import { ProfileAddress } from "@/components/profile/ProfileAddress";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
-import { ProfileNewJerseyAddress } from "@/components/profile/ProfileNewJerseyAddress";
 import { ProfileNoteDisclaimerForSubmittingData } from "@/components/profile/ProfileNoteForBusinessesFormedOutsideNavigator";
 import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
@@ -72,8 +72,9 @@ import {
   createEmptyProfileData,
   determineForeignBusinessType,
   einTaskId,
-  emptyAddressData,
+  emptyFormationAddressData,
   ForeignBusinessType,
+  FormationAddress,
   formationTaskId,
   hasCompletedFormation,
   LookupLegalStructureById,
@@ -119,7 +120,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const foreignBusinessType: ForeignBusinessType = determineForeignBusinessType(
     profileData.foreignBusinessTypeIds
   );
-  const [addressData, setAddressData] = useState(emptyAddressData);
+  const [formationAddressData, setAddressData] = useState<FormationAddress>(emptyFormationAddressData);
   const {
     FormFuncWrapper,
     onSubmit,
@@ -220,9 +221,7 @@ const ProfilePage = (props: Props): ReactElement => {
       }
 
       updateQueue.queueProfileData(profileData);
-
-      updateQueue.queueFormationFormData(addressData);
-
+      updateQueue.queueFormationFormData(formationAddressData);
       (async (): Promise<void> => {
         updateQueue
           .queue(await postGetAnnualFilings(updateQueue.current()))
@@ -369,6 +368,8 @@ const ProfilePage = (props: Props): ReactElement => {
           <NexusDBANameField />
         </ProfileField>
 
+        <ProfileAddress />
+
         <ProfileField fieldName="industryId">
           <Industry />
           <NonEssentialQuestionsSection />
@@ -471,6 +472,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField fieldName="businessName">
           <BusinessName />
         </ProfileField>
+        <ProfileAddress />
         <ProfileField fieldName="foreignBusinessTypeIds">
           <ForeignBusinessTypeField required />
         </ProfileField>
@@ -550,7 +552,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <BusinessName />
         </ProfileField>
 
-        <ProfileNewJerseyAddress />
+        <ProfileAddress />
 
         <ProfileField
           fieldName="responsibleOwnerName"
@@ -727,7 +729,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <BusinessName />
         </ProfileField>
 
-        <ProfileNewJerseyAddress />
+        <ProfileAddress />
 
         <ProfileField
           fieldName="responsibleOwnerName"
@@ -922,10 +924,9 @@ const ProfilePage = (props: Props): ReactElement => {
             onBack,
           }}
         >
-          {" "}
           <AddressContext.Provider
             value={{
-              state: { addressData },
+              state: { formationAddressData },
               setAddressData,
             }}
           >
