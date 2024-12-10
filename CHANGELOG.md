@@ -1,3 +1,20 @@
+# [2024.37.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.36.0...v2024.37.0) (2024-12-10)
+
+
+### Bug Fixes
+
+* [[#188599283](https://github.com/newjersey/navigator.business.nj.gov/issues/188599283)] Correct anytime action dropdown categories ([370a811](https://github.com/newjersey/navigator.business.nj.gov/commit/370a81146727461cee1323f1934e14edfd9c57ed))
+* [[#188599283](https://github.com/newjersey/navigator.business.nj.gov/issues/188599283)] Enable vacant building question for up and running Poppies ([7c4158a](https://github.com/newjersey/navigator.business.nj.gov/commit/7c4158a72b9b24551dc9e34c734f7fd39af32a47))
+* **deps:** update dependency axios to v1.7.8 ([#9176](https://github.com/newjersey/navigator.business.nj.gov/issues/9176)) ([13e9dd8](https://github.com/newjersey/navigator.business.nj.gov/commit/13e9dd8be3fa7346d1266831332cdd3d778a3895))
+* **deps:** update dependency express to v4.21.1 ([#9182](https://github.com/newjersey/navigator.business.nj.gov/issues/9182)) ([d8fa1f8](https://github.com/newjersey/navigator.business.nj.gov/commit/d8fa1f88ca320a130a72f74c3f90e3785ca74023))
+
+
+### Features
+
+* [[#188489104](https://github.com/newjersey/navigator.business.nj.gov/issues/188489104)] anytime action dropdown categories ([431e868](https://github.com/newjersey/navigator.business.nj.gov/commit/431e8687c65fba46d26529ed0881bcca493d7da3))
+* [[#188599283](https://github.com/newjersey/navigator.business.nj.gov/issues/188599283)] Add vacant building non-essential question and anytime action connection ([9df1d46](https://github.com/newjersey/navigator.business.nj.gov/commit/9df1d4625abd5375d04221c4419d699ccea4972f))
+* script to update CMS branches ([fac79f9](https://github.com/newjersey/navigator.business.nj.gov/commit/fac79f97907fc595def45728f692680912835156))
+
 # [2024.36.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.35.0...v2024.36.0) (2024-12-02)
 
 
