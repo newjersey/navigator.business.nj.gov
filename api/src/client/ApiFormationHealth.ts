@@ -177,6 +177,7 @@ export const ApiFormationHealth: UserData = {
         lastVisitedPageIndex: 0,
       },
       lastUpdatedISO: getCurrentDateISOString(),
+      version: CURRENT_VERSION,
     },
   },
 };
