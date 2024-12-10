@@ -1,6 +1,7 @@
 ---
 notesMd: "Draft:
-  https://docs.google.com/document/d/1n6Cffog3BT3u9JuuPbhQ92CYTu-GuJn5WbUZR_WNmJo/edit?tab=t.0#heading=h.vdxfup4tf9li"
+  https://docs.google.com/document/d/1n6Cffog3BT3u9JuuPbhQ92CYTu-GuJn5WbUZR_WNm\
+  Jo/edit?tab=t.0#heading=h.vdxfup4tf9li"
 filename: code23-osow-30day-permit
 name: Apply for Your Code 23 OS/OW (30-day) Permit, if Applicable
 industryIds:
@@ -38,7 +39,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 ### Trip Information
 
 - Travel start date
-- Vehicle type (Power Unit w/ 1 Trailer)
+- Vehicle type (power unit with 1 Trailer)
 - Truck plate/license number and state
 - Trailer plate/license number and state
 - General origin and destination (cities or state borders)
