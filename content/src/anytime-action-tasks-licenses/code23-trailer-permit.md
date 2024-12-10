@@ -27,7 +27,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 ### Application Requirements
 * Trailer make
 * Plate/license number, and state 
-* Vehicle Identification Number ( VIN) and year
+* Vehicle Identification Number (VIN) and year
 * Vehicle and trailer’s combined overall length
 * Trailer length and width
 * Registered owner's name and address
@@ -39,7 +39,8 @@ You cannot transport a Code 23 trailer in New Jersey without a Code 23 Special O
 
 :::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
 * A Code 23 trailer permit, valid for the trailer's life, or as long as the Code 23 registration remains valid
-* You will get your permit by email, fax, or from the "My Queue" page on your NJDOT GotPermits profile
+* A permit that you will get by email, fax, or from the "My Queue" page on your NJDOT GotPermits profile
+
 :::
 
 
