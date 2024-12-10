@@ -22,8 +22,8 @@ callToActionText: Apply for My Single Trip OS/OW Permit
 callToActionLink: https://nj.gotpermits.com/njpass#!
 ---
 ## Eligibility Criteria
-* An active overweight/overdimensional (Code 23) trailer registration. You can get it at a [NJ Motor Vehicle Commission (MVC) licensing center](https://www.nj.gov/mvc/locations/facilitylocations.htm)
-* A [NJDOT GotPermits website](https://nj.gotpermits.com/njpass#!) account
+* An active overweight/overdimensional (Code 23) trailer registration. You can get this at a [NJ Motor Vehicle Commission (MVC) licensing center](https://www.nj.gov/mvc/locations/facilitylocations.htm)
+* A [NJDOT GotPermits](https://nj.gotpermits.com/njpass#!) account
 
 ## Application Requirements
 ### Trip Information
