@@ -31,8 +31,8 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 
 ## Eligibility Requirements
 
-- An active overweight/overdimensional (Code 23) trailer registration. You can get it at a [NJ Motor Vehicle Commission (MVC) licensing center](https://www.nj.gov/mvc/locations/facilitylocations.htm)
-- A [NJDOT GotPermits website](https://nj.gotpermits.com/njpass#!) account
+- An active overweight/overdimensional (Code 23) trailer registration. You can get that at a [NJ Motor Vehicle Commission (MVC) licensing center](https://www.nj.gov/mvc/locations/facilitylocations.htm)
+- A [NJDOT GotPermits](https://nj.gotpermits.com/njpass#!) account
 
 ## Application Requirements
 
