@@ -28,7 +28,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 ## Application Requirements
 ### Trip Information
 * Travel start date
-* Vehicle type (Power Unit w/ 1 Trailer)
+* Vehicle type (power unit with 1 trailer)
 * Truck plate/license number and state
 * Trailer plate/license number and state
 * Load description
@@ -54,7 +54,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 If you don’t get this permit and your combination vehicle, trailer, and load meet the Single Trip OS/OW Permit (5-day) requirements, you may face fines.
 :::
 :::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
-* A single trip permit for an overweight/oversized vehicle using a trailer with Code 23 registration, valid for 5 days
-* You will get your permit by email, fax, or from the "My Queue" page on your NJDOT GotPermits profile
+* A 5-day single trip permit for an overweight, oversized vehicle using a Code 23 trailer
+* A permit that you will get by email, fax, or from the "My Queue" page on your NJDOT GotPermits profile
 :::
 
