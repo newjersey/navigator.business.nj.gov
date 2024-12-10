@@ -86,9 +86,14 @@
       "id": "cds-supply"
     },
     {
-      "questionText": "Will you sell, manufacture, or have a vending machine with tobacco products (for example, cigarettes or cigars)?",
+      "questionText": "Will you sell, manufacture, or have a vending machine with cigarettes?",
       "id": "cigarette-manufacture-sell",
       "addOn": "cigarettes-add"
+    },
+    {
+      "addOn": "planner",
+      "id": "planning-services",
+      "questionText": "Will you offer professional planning services?"
     }
   ]
 }
