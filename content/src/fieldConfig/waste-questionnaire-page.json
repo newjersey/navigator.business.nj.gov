@@ -22,7 +22,7 @@
     "summaryMediaArea": "waste",
     "personalizedSupport": {
       "title": "Contact DEP’s Small Business Assistance Program (SBAP)",
-      "body": "An expert at SBAP can help you figure out which permits your business needs. SBAP does not regulate or enforce environmental rules.",
+      "body": "An expert at SBAP can help you figure out which licenses or permits your business needs. SBAP does not regulate or enforce environmental rules.",
       "contact": "edward.bakos@dep.nj.gov"
     },
     "contactDep": {
@@ -35,7 +35,7 @@
       "title": "See Your Responses"
     },
     "lowApplicability": {
-      "summaryLine1": "You most likely will not need to apply for permits with the Department of Environmental Protection (DEP).",
+      "summaryLine1": "You most likely will not need to apply for licenses or permits with the Department of Environmental Protection (DEP).",
       "summaryLine2": "Visit [DEP’s Permits, Applications & Registrations page](https://dep.nj.gov/permits-applications-registrations/) for more information about your license and permit needs.",
       "callout": "If your business activities or equipment change at any point,",
       "calloutRedo": "redo this form."
