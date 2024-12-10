@@ -43,9 +43,10 @@ export const SectorModal = (props: Props): ReactElement => {
     formContextState.reducer({ type: FieldStateActionKind.RESET });
   };
 
-  FormFuncWrapper(() => {
+  FormFuncWrapper(async () => {
     if (!updateQueue) return;
     updateQueue.queueProfileData(profileData);
+    await updateQueue.update();
     props.onContinue();
   });
 
