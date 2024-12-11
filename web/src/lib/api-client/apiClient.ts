@@ -36,7 +36,7 @@ type EmailCheckResponse = {
   found: boolean;
 };
 export const postUserEmailCheck = async (email: string): Promise<EmailCheckResponse> => {
-  return post("/users/emailCheck", { email });
+  return post("/users/emailCheck", { email }, false);
 };
 
 export const checkLicenseStatus = (nameAndAddress: LicenseSearchNameAndAddress): Promise<UserData> => {
