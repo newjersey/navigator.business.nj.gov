@@ -1,18 +1,15 @@
 import { Content } from "@/components/Content";
+import { GenericTextField } from "@/components/GenericTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import analytics from "@/lib/utils/analytics";
-
-import { GenericTextField } from "@/components/GenericTextField";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { postUserEmailCheck } from "@/lib/api-client/apiClient";
-import { InputLabel } from "@mui/material";
-import { useState } from "react";
-
+import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-
-import { type ReactElement } from "react";
+import analytics from "@/lib/utils/analytics";
+import { InputLabel } from "@mui/material";
+import { useState, type ReactElement } from "react";
 
 // const BUSINESS_NJ_LOGIN = "https://account.business.nj.gov/login";
 
@@ -25,6 +22,8 @@ export const LoginEmailCheck = (): ReactElement => {
       const response = await postUserEmailCheck(email);
       if (response.found) {
         setEmailError("");
+        triggerSignIn();
+        analytics.event.check_account_next_button.submit.go_to_myNJ_login();
       }
     } catch (error) {
       if (error === 404) {
@@ -48,7 +47,7 @@ export const LoginEmailCheck = (): ReactElement => {
       <WithErrorBar hasError={Boolean(emailError)} type="ALWAYS">
         <InputLabel htmlFor="email">Email</InputLabel>
         <GenericTextField
-          inputWidth="reduced"
+          inputWidth="default"
           fieldName="email"
           value={email}
           handleChange={handleTextInputChange}
@@ -57,7 +56,7 @@ export const LoginEmailCheck = (): ReactElement => {
         ></GenericTextField>
       </WithErrorBar>
 
-      <PrimaryButton isColor="primary" isSubmitButton onClick={() => checkEmail(email)}>
+      <PrimaryButton isFullWidthOnDesktop isColor="primary" isSubmitButton onClick={() => checkEmail(email)}>
         {Config.checkAccountEmailPage.inputButton}
       </PrimaryButton>
 

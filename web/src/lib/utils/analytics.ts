@@ -2376,5 +2376,19 @@ export default {
         },
       },
     },
+    check_account_next_button: {
+      submit: {
+        go_to_myNJ_login: () => {
+          eventRunner.track({
+            event: "account_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "landing_page_hero_log_in",
+            legacy_event_label: "go_to_myNJ_login",
+            clicked: "go_to_myNJ_login",
+            item: "landing_page_hero_log_in",
+          });
+        },
+      },
+    },
   },
 };
