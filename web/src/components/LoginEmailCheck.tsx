@@ -1,5 +1,4 @@
 import { Content } from "@/components/Content";
-import { ModifiedContent } from "@/components/ModifiedContent";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
@@ -13,20 +12,27 @@ import { useState } from "react";
 
 import { useConfig } from "@/lib/data-hooks/useConfig";
 
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 // const BUSINESS_NJ_LOGIN = "https://account.business.nj.gov/login";
 
-const checkEmail = async (email: string) => {
-  try {
-    const response = await postUserEmailCheck(email);
-    console.log("success", response);
-  } catch (error) {
-    console.error("error", error);
-  }
-};
 export const LoginEmailCheck = (): ReactElement => {
   const [email, setEmail] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+
+  const checkEmail = async (email: string) => {
+    try {
+      const response = await postUserEmailCheck(email);
+      if (response.found) {
+        setEmailError("");
+      }
+    } catch (error) {
+      if (error === 404) {
+        setEmailError("No account found. Try a different email address.");
+      }
+    }
+  };
+
   const { Config } = useConfig();
 
   const handleTextInputChange = (value: string): void => {
@@ -39,13 +45,17 @@ export const LoginEmailCheck = (): ReactElement => {
         {Config.checkAccountEmailPage.header}
       </Heading>
 
-      <InputLabel htmlFor="email">Email</InputLabel>
-      <GenericTextField
-        inputWidth="reduced"
-        fieldName="email"
-        value={email}
-        handleChange={handleTextInputChange}
-      ></GenericTextField>
+      <WithErrorBar hasError={Boolean(emailError)} type="ALWAYS">
+        <InputLabel htmlFor="email">Email</InputLabel>
+        <GenericTextField
+          inputWidth="reduced"
+          fieldName="email"
+          value={email}
+          handleChange={handleTextInputChange}
+          error={Boolean(emailError)}
+          validationText={emailError}
+        ></GenericTextField>
+      </WithErrorBar>
 
       <PrimaryButton isColor="primary" isSubmitButton onClick={() => checkEmail(email)}>
         {Config.checkAccountEmailPage.inputButton}
@@ -65,34 +75,6 @@ export const LoginEmailCheck = (): ReactElement => {
           {Config.checkAccountEmailPage.intercomChatText}
         </UnStyledButton>
       </div>
-    </div>
-  );
-
-  return (
-    <div>
-      <Heading level={2}>{"Log in to Business.NJ.gov"}</Heading>
-
-      <WithErrorBar
-        // hasError={!!addressErrorMap["addressName"].invalid}
-        hasError={false}
-        type="ALWAYS"
-        className="margin-bottom-2"
-      >
-        <strong>
-          <ModifiedContent>{"Email"}</ModifiedContent>
-        </strong>
-        {/* copied from DateOfFormation, and AddressModal */}
-        {/*<GenericTextField
-          //inputWidth={"full"}
-          // fieldName={fieldName}
-          // onValidation={onValidation}
-          // validationText={errorText}
-          // error={isFormFieldInvalid}
-          // fieldOptions={{
-          //   error: isFormFieldInvalid,
-          // }}
-        />*/}
-      </WithErrorBar>
     </div>
   );
 };
