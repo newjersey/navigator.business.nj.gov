@@ -50,22 +50,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/auth@npm:5.6.1":
-  version: 5.6.1
-  resolution: "@aws-amplify/auth@npm:5.6.1"
+"@aws-amplify/auth@npm:5.6.15":
+  version: 5.6.15
+  resolution: "@aws-amplify/auth@npm:5.6.15"
   dependencies:
-    "@aws-amplify/core": 5.8.1
-    amazon-cognito-identity-js: 6.3.2
+    "@aws-amplify/core": 5.8.14
+    amazon-cognito-identity-js: 6.3.14
     buffer: 4.9.2
     tslib: ^1.8.0
     url: 0.11.0
-  checksum: 2856aafa833bba22c0bd148a4e02544a96c24d0e858246a813a8d89f26e802c1b7963c563c366cb3316836e72df46e008c48e2e2d96c052d061ed5bf8a75cd0d
+  checksum: 1aa70d76c50cabfaa7c7c442428e7248fb80e76830eee7fb5ddeed1260c33f934bae693b3acc973eb63c84238671722d77e01e03752bf59c9ea0e94c77b2e441
   languageName: node
   linkType: hard
 
-"@aws-amplify/core@npm:5.8.1":
-  version: 5.8.1
-  resolution: "@aws-amplify/core@npm:5.8.1"
+"@aws-amplify/core@npm:5.8.14":
+  version: 5.8.14
+  resolution: "@aws-amplify/core@npm:5.8.14"
   dependencies:
     "@aws-crypto/sha256-js": 1.2.2
     "@aws-sdk/client-cloudwatch-logs": 3.6.1
@@ -75,9 +75,9 @@ __metadata:
     isomorphic-unfetch: ^3.0.0
     react-native-url-polyfill: ^1.3.0
     tslib: ^1.8.0
-    universal-cookie: ^4.0.4
+    universal-cookie: ^7.2.2
     zen-observable-ts: 0.8.19
-  checksum: f5e1ceb52b6854838aa57062b0547832c6a948ffdb0b531ad67aad875f8ec3444744a9e245740b1bd1d856dca83d88fc0d8fc9f094e8ccdeae3080c2e7efb14a
+  checksum: bd53ebafd4f93808750108c3a652513bfc1db83141f99004ecd890c9e1969e4373f0511accaf042f7538e470595de5ce18ad97bcbcfd9f7a6d638ac15e1e7616
   languageName: node
   linkType: hard
 
@@ -4978,8 +4978,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/root@workspace:."
   dependencies:
-    "@aws-amplify/auth": 5.6.1
-    "@aws-amplify/core": 5.8.1
+    "@aws-amplify/auth": 5.6.15
+    "@aws-amplify/core": 5.8.14
     "@aws-crypto/client-node": 4.0.2
     "@aws-crypto/sha256-browser": 5.2.0
     "@aws-sdk/client-cloudwatch-logs": 3.417.0
@@ -5210,8 +5210,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/web@workspace:web"
   dependencies:
-    "@aws-amplify/auth": 5.6.1
-    "@aws-amplify/core": 5.8.1
+    "@aws-amplify/auth": 5.6.15
+    "@aws-amplify/core": 5.8.14
     "@aws-crypto/sha256-browser": 5.2.0
     "@aws-sdk/protocol-http": 3.370.0
     "@aws-sdk/s3-request-presigner": 3.417.0
@@ -12195,10 +12195,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/cookie@npm:^0.3.3":
-  version: 0.3.3
-  resolution: "@types/cookie@npm:0.3.3"
-  checksum: 450c930d792a4fd5a93645b4123f02596368f904dbb1fe6fbb5043bce8f6ecf877a08511c6ba11c8e28168f62bc278e68d214f002fab927c9056c0bc69f21370
+"@types/cookie@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "@types/cookie@npm:0.6.0"
+  checksum: 5edce7995775b0b196b142883e4d4f71fd93c294eaec973670f1fa2540b70ea7390408ed513ddefef5fcb12a578100c76596e8f2a714b0c2ae9f70ee773f4510
   languageName: node
   linkType: hard
 
@@ -13889,16 +13889,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"amazon-cognito-identity-js@npm:6.3.2":
-  version: 6.3.2
-  resolution: "amazon-cognito-identity-js@npm:6.3.2"
+"amazon-cognito-identity-js@npm:6.3.14":
+  version: 6.3.14
+  resolution: "amazon-cognito-identity-js@npm:6.3.14"
   dependencies:
     "@aws-crypto/sha256-js": 1.2.2
     buffer: 4.9.2
     fast-base64-decode: ^1.0.0
     isomorphic-unfetch: ^3.0.0
     js-cookie: ^2.2.1
-  checksum: e1855b1671bbe1017fd0c0204efef77586a5f1962e14942dc4a468060386e2e81a33f211b1a3560f3a6fecca591415aa725025ee91a6911be1985a346ac15a6a
+  checksum: 593f4dfc8c008de22b23592fa511a9b0a138cb48714de60b95a5b94ca02e742e39775ae7c919de0047890e18ed52057df858614b7e953e0272e384e590362124
   languageName: node
   linkType: hard
 
@@ -16946,14 +16946,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:0.7.2":
+"cookie@npm:0.7.2, cookie@npm:^0.7.2":
   version: 0.7.2
   resolution: "cookie@npm:0.7.2"
   checksum: 9bf8555e33530affd571ea37b615ccad9b9a34febbf2c950c86787088eb00a8973690833b0f8ebd6b69b753c62669ea60cec89178c1fb007bf0749abed74f93e
   languageName: node
   linkType: hard
 
-"cookie@npm:^0.4.0, cookie@npm:^0.4.1":
+"cookie@npm:^0.4.1":
   version: 0.4.2
   resolution: "cookie@npm:0.4.2"
   checksum: a00833c998bedf8e787b4c342defe5fa419abd96b32f4464f718b91022586b8f1bafbddd499288e75c037642493c83083da426c6a9080d309e3bd90fd11baa9b
@@ -36239,13 +36239,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"universal-cookie@npm:^4.0.4":
-  version: 4.0.4
-  resolution: "universal-cookie@npm:4.0.4"
+"universal-cookie@npm:^7.2.2":
+  version: 7.2.2
+  resolution: "universal-cookie@npm:7.2.2"
   dependencies:
-    "@types/cookie": ^0.3.3
-    cookie: ^0.4.0
-  checksum: bb2bafa7eb7e213e5448924329572dd1a913be00e23906189be2a0dc889b0eea1750f9c33462fc1c911d89092dbd82f6e220c2d61c4057bb3f69e7665d9d8ddf
+    "@types/cookie": ^0.6.0
+    cookie: ^0.7.2
+  checksum: 0d9b7c085a44e2d55be356c1eb8e542cbb9471754da9acffd795fab6924150d685ac1e3a2a7c7fc18790689f441b808dffde36a0f8d1e7c7f5b9f6aa721f72de
   languageName: node
   linkType: hard
 
