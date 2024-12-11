@@ -217,7 +217,8 @@ type Item =
   | "link_with_myNJ"
   | "landing_page"
   | "skip_to_main_content"
-  | "show_funding_opportunities";
+  | "show_funding_opportunities"
+  | "check_account_log_in";
 
 type BooleanResponseOption = "yes" | "no";
 
@@ -2368,9 +2369,9 @@ export default {
           eventRunner.track({
             event: "link_clicks",
             legacy_event_action: "click",
-            legacy_event_category: "business_formation_help_button",
+            legacy_event_category: "check_account_help_button",
             legacy_event_label: "open_live_chat",
-            click_text: "business_formation_help_button",
+            click_text: "check_account_help_button",
             clicked_to: "open_live_chat",
           });
         },
@@ -2382,10 +2383,10 @@ export default {
           eventRunner.track({
             event: "account_clicks",
             legacy_event_action: "click",
-            legacy_event_category: "landing_page_hero_log_in",
+            legacy_event_category: "check_account_log_in",
             legacy_event_label: "go_to_myNJ_login",
             clicked: "go_to_myNJ_login",
-            item: "landing_page_hero_log_in",
+            item: "check_account_log_in",
           });
         },
       },
