@@ -34,7 +34,7 @@ export const LoginEmailCheck = (): ReactElement => {
   };
 
   return (
-    <>
+    <div className="email-check-card padding-5 desktop:margin-x-7 margin-x-2 radius-md">
       <Heading level={2} className="text-normal">
         {Config.checkAccountEmailPage.header}
       </Heading>
@@ -51,16 +51,21 @@ export const LoginEmailCheck = (): ReactElement => {
         {Config.checkAccountEmailPage.inputButton}
       </PrimaryButton>
 
-      <Content>{Config.checkAccountEmailPage.linkAccountText}</Content>
-      <p>{Config.checkAccountEmailPage.needHelpText}</p>
-      <UnStyledButton
-        isUnderline
-        isIntercomEnabled
-        onClick={analytics.event.check_account_help_button.click.open_live_chat}
-      >
-        {Config.checkAccountEmailPage.intercomChatText}
-      </UnStyledButton>
-    </>
+      <hr className="margin-y-3" />
+      <Content className="link-account-text">{Config.checkAccountEmailPage.linkAccountText}</Content>
+
+      <div className="display-flex flex-align-end">
+        <p>{Config.checkAccountEmailPage.needHelpText}</p>
+        <UnStyledButton
+          isUnderline
+          isIntercomEnabled
+          onClick={analytics.event.check_account_help_button.click.open_live_chat}
+          className="margin-left-05"
+        >
+          {Config.checkAccountEmailPage.intercomChatText}
+        </UnStyledButton>
+      </div>
+    </div>
   );
 
   return (

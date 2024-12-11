@@ -135,7 +135,7 @@ export const userRouterFactory = (
   router.post("/users/emailCheck", async (req, res) => {
     const { email } = req.body;
 
-    // const logId = logger.GetId();
+    const logId = logger.GetId();
     let status;
 
     if (email === undefined) {
@@ -153,7 +153,7 @@ export const userRouterFactory = (
       }
     }
 
-    // logger.LogInfo(`Email Check, - Id: ${logId}, Status: ${status}, email: ${email}`);
+    logger.LogInfo(`Email Check, - Id: ${logId}, Status: ${status}, email: ${email}`);
   });
 
   router.get("/users/:userId", (req, res) => {
