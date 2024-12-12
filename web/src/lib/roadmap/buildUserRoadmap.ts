@@ -268,9 +268,10 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
     }
     if (
       profileData.legalStructureId === "s-corporation" ||
-      profileData.legalStructureId === "c-corporation"
+      profileData.legalStructureId === "c-corporation" ||
+      profileData.legalStructureId === "nonprofit"
     ) {
-      addOns.push("scorp-ccorp-foreign");
+      addOns.push("nonprofit-and-corp-foreign");
     }
   } else {
     if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
