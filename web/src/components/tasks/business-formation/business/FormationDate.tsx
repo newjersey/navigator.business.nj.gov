@@ -8,7 +8,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import { isForeignCorporation } from "@/lib/utils/helpers";
+import { isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
 import {
   DateObject,
   advancedDateLibrary,
@@ -31,7 +31,9 @@ export const FormationDate = (props: Props): ReactElement => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doesFieldHaveError } = useFormationErrors();
   const dateFormat = "MM/DD/YYYY";
-  const floatClass = isForeignCorporation(state.formationFormData.legalType) ? "float-none" : "float-left";
+  const floatClass = isForeignCorporationOrNonprofit(state.formationFormData.legalType)
+    ? "float-none"
+    : "float-left";
 
   const contentProps = useMemo(
     () => ({
