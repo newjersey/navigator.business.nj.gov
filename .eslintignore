@@ -38,6 +38,8 @@ api/.webpack
 api/src/setupTests.js
 api/src/teardownTests.js
 
+scripts/
+
 .yarn
 .vscode
 coverage
