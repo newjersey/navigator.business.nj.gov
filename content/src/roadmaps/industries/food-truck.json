@@ -15,7 +15,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -81,9 +81,7 @@
     }
   ],
   "name": "Food Truck",
-  "nonEssentialQuestionsIds": [
-    "weights-measures"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "food-truck",
   "industryOnboardingQuestions": {
     "canBeReseller": true

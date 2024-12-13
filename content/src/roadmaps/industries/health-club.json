@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -49,10 +49,7 @@
     }
   ],
   "name": "Health Club",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "electrologist"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "electrologist"],
   "displayname": "health-club",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,

@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -44,11 +44,7 @@
     }
   ],
   "name": "Pet Care",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "petcare-cds-shelter",
-    "petcare-cds-trainer"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "petcare-cds-shelter", "petcare-cds-trainer"],
   "displayname": "petcare",
   "industryOnboardingQuestions": {
     "isPetCareHousingApplicable": true,

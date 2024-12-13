@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -49,9 +49,7 @@
     }
   ],
   "name": "Residential Landlord",
-  "nonEssentialQuestionsIds": [
-    "multiple-dwelling-register"
-  ],
+  "nonEssentialQuestionsIds": ["multiple-dwelling-register"],
   "displayname": "residential-landlord",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,

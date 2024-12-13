@@ -5078,13 +5078,13 @@ __metadata:
     cross-env: 7.0.3
     cspell: 8.16.1
     css-loader: 6.11.0
-    cypress: 13.16.0
+    cypress: 13.16.1
     cypress-dotenv: 2.0.0
     cypress-wait-until: 3.0.2
     dayjs: 1.11.13
     dedent: 1.5.3
     dependency-cruiser: 16.6.0
-    dotenv: 16.4.5
+    dotenv: 16.4.7
     dynamodb-admin: ^4.6.1
     eslint: 8.57.1
     eslint-config-next: 14.2.19
@@ -5279,12 +5279,12 @@ __metadata:
     cross-env: 7.0.3
     cspell: 8.16.1
     css-loader: 6.11.0
-    cypress: 13.16.0
+    cypress: 13.16.1
     cypress-dotenv: 2.0.0
     cypress-wait-until: 3.0.2
     dayjs: 1.11.13
     dependency-cruiser: 16.6.0
-    dotenv: 16.4.5
+    dotenv: 16.4.7
     eslint: 8.57.1
     eslint-config-next: 14.2.19
     eslint-config-prettier: 9.1.0
@@ -17573,9 +17573,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:13.16.0":
-  version: 13.16.0
-  resolution: "cypress@npm:13.16.0"
+"cypress@npm:13.16.1":
+  version: 13.16.1
+  resolution: "cypress@npm:13.16.1"
   dependencies:
     "@cypress/request": ^3.0.6
     "@cypress/xvfb": ^1.2.4
@@ -17622,7 +17622,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 1c9beb259998336aaf27fb8548d9880d603db0d4b935be068acbc5545a2537554ae01f928ee28559323cc42213cd2e4c0730c796a682bbcadb82e4a95b370954
+  checksum: 9307ec98858979d01920b3da884223c1132501716fe055017f6aa19b0af58ae50998b502940678ce935804b383d8784a21da48fed3e53b740789aac1768c2a3f
   languageName: node
   linkType: hard
 
@@ -18527,10 +18527,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:16.4.5, dotenv@npm:^16.0.0, dotenv@npm:^16.3.1":
-  version: 16.4.5
-  resolution: "dotenv@npm:16.4.5"
-  checksum: 301a12c3d44fd49888b74eb9ccf9f07a1f5df43f489e7fcb89647a2edcd84c42d6bc349dc8df099cd18f07c35c7b04685c1a4f3e6a6a9e6b30f8d48c15b7f49c
+"dotenv@npm:16.4.7, dotenv@npm:^16.0.0, dotenv@npm:^16.3.1":
+  version: 16.4.7
+  resolution: "dotenv@npm:16.4.7"
+  checksum: c27419b5875a44addcc56cc69b7dc5b0e6587826ca85d5b355da9303c6fc317fc9989f1f18366a16378c9fdd9532d14117a1abe6029cc719cdbbef6eaef2cea4
   languageName: node
   linkType: hard
 
