@@ -5053,7 +5053,7 @@ __metadata:
     "@types/react": 18.2.79
     "@types/react-dom": 18.2.25
     "@types/react-slick": ^0.23.10
-    "@types/react-swipeable-views": 0.13.5
+    "@types/react-swipeable-views": 0.13.6
     "@types/react-transition-group": 4.4.11
     "@types/remove-markdown": 0.3.4
     "@types/simple-oauth2": 5.0.7
@@ -5263,7 +5263,7 @@ __metadata:
     "@types/react": 18.2.79
     "@types/react-dom": 18.2.25
     "@types/react-slick": ^0.23.10
-    "@types/react-swipeable-views": 0.13.5
+    "@types/react-swipeable-views": 0.13.6
     "@types/react-transition-group": 4.4.11
     "@types/remove-markdown": 0.3.4
     "@types/testing-library__jest-dom": 5.14.9
@@ -12714,12 +12714,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-swipeable-views@npm:0.13.5":
-  version: 0.13.5
-  resolution: "@types/react-swipeable-views@npm:0.13.5"
+"@types/react-swipeable-views@npm:0.13.6":
+  version: 0.13.6
+  resolution: "@types/react-swipeable-views@npm:0.13.6"
   dependencies:
     "@types/react": "*"
-  checksum: 09982781f66d9d366b0fe5461dfdd05e7db98642898b4bcc9e401927d2e2cb90fdb0709b87ccc961227cdd9db9f9c40be08da8bcea6c4d4b07425ee011e50f56
+  checksum: 85fdd5d68fd4d23b9dec2c31abf6bbca89bbe18909645cc1e5eb65f11c0db7b3ac02193ba858d8a0b656a1c3c319057964e3ecc8074d0205bf0ea99e564246a5
   languageName: node
   linkType: hard
 
