@@ -177,7 +177,7 @@
     "cypress-dotenv": "2.0.0",
     "cypress-wait-until": "3.0.2",
     "dependency-cruiser": "16.6.0",
-    "dotenv": "16.4.5",
+    "dotenv": "16.4.7",
     "dynamodb-admin": "^4.6.1",
     "eslint": "8.57.1",
     "eslint-config-next": "14.2.19",
