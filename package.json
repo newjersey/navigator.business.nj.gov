@@ -200,7 +200,7 @@
     "jest-environment-jsdom": "29.7.0",
     "jest-junit": "16.0.0",
     "kill-port": "1.6.1",
-    "lint-staged": "15.2.10",
+    "lint-staged": "15.2.11",
     "nc": "git+https://github.com/dsueltenfuss/nc.git",
     "prettier": "2.8.8",
     "prettier-plugin-organize-imports": "3.2.4",
@@ -289,7 +289,7 @@
       "@semantic-release/git"
     ]
   },
-  "packageManager": "yarn@3.8.6",
+  "packageManager": "yarn@3.8.7",
   "resolutions": {
     "trim@0.0.1": "1.0.1",
     "postcss": "8.4.49",
