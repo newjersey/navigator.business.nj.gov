@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -55,9 +55,7 @@
     }
   ],
   "name": "Home Health Aide Placement",
-  "nonEssentialQuestionsIds": [
-    "weights-measures"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "home-health-aide",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
