@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -49,10 +49,7 @@
     }
   ],
   "name": "Online Business",
-  "nonEssentialQuestionsIds": [
-    "weights-measures",
-    "cigarette-manufacture-sell"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures", "cigarette-manufacture-sell"],
   "displayname": "e-commerce",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

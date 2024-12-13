@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -56,9 +56,7 @@
     }
   ],
   "name": "Moving Company",
-  "nonEssentialQuestionsIds": [
-    "weights-measures"
-  ],
+  "nonEssentialQuestionsIds": ["weights-measures"],
   "displayname": "moving-company",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

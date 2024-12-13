@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -44,9 +44,7 @@
     }
   ],
   "name": "Real Estate Investing",
-  "nonEssentialQuestionsIds": [
-    "multiple-dwelling-register"
-  ],
+  "nonEssentialQuestionsIds": ["multiple-dwelling-register"],
   "displayname": "real-estate-investor",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -49,11 +49,7 @@
     }
   ],
   "name": "Retail",
-  "nonEssentialQuestionsIds": [
-    "ticket-broker-resell",
-    "weights-measures",
-    "cigarette-manufacture-sell"
-  ],
+  "nonEssentialQuestionsIds": ["ticket-broker-resell", "weights-measures", "cigarette-manufacture-sell"],
   "displayname": "retail",
   "industryOnboardingQuestions": {
     "canBeReseller": true
