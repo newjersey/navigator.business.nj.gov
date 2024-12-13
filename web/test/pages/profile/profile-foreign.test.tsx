@@ -282,6 +282,59 @@ describe("profile-foreign", () => {
       ).not.toBeInTheDocument();
     });
 
+    it("renders locked profile address fields when business has formed", () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+        }),
+        formationData: generateFormationData({
+          completedFilingPayment: true,
+          formationFormData: generateFormationFormData({
+            addressLine1: "123 Testing Road",
+            addressLine2: "",
+            addressCity: "New York",
+            addressState: {
+              name: "New York",
+              shortCode: "NY",
+            },
+            addressZipCode: "10030",
+            businessLocationType: "US",
+          }),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.getByTestId("locked-profileAddressLine1")).toBeInTheDocument();
+      expect(screen.getByTestId("locked-profileAddressCityStateZip")).toBeInTheDocument();
+    });
+
+    it("renders editable profile address fields when business has not been formed", () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+        }),
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({
+            addressLine1: "123 Testing Road",
+            addressLine2: "",
+            addressMunicipality: generateMunicipality({ displayName: "Allendale" }),
+            addressCity: "New York",
+            addressState: {
+              name: "New York",
+              shortCode: "NY",
+            },
+            addressZipCode: "10030",
+            businessLocationType: "US",
+          }),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.queryByTestId("locked-profileAddressLine1")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("locked-profileAddressCityStateZip")).not.toBeInTheDocument();
+    });
+
     describe("location", () => {
       const renderWithLegalStructureAndPhase = (params: {
         legalStructureId: string;
