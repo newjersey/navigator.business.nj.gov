@@ -149,12 +149,15 @@ describe("buildUserRoadmap", () => {
       expect(roadmap.tasks).toHaveLength(0);
     });
 
-    it("adds scorp-ccorp-foreign for S-Corp/C-Corp legal structures", async () => {
+    it("adds nonprofit-and-corp-foreign for S-Corp/C-Corp/foreign nonprofit legal structures", async () => {
       await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "s-corporation" }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("scorp-ccorp-foreign");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("nonprofit-and-corp-foreign");
 
       await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "c-corporation" }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("scorp-ccorp-foreign");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("nonprofit-and-corp-foreign");
+
+      await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "nonprofit" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("nonprofit-and-corp-foreign");
     });
   });
 

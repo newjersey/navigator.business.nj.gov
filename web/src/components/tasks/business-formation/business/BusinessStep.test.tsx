@@ -491,7 +491,7 @@ describe("Formation - BusinessStep", () => {
 
     describe("Business Designator", () => {
       describe("Business Designator secondary label foreign corporation", () => {
-        it.each(corpLegalStructures)(
+        it.each(["c-corporation", "s-corporation", "nonprofit"])(
           `Shows secondary label foreign corporation when persona is foreign and legal structure is %s`,
           async (legalStructureId) => {
             await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
