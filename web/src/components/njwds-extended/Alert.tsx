@@ -1,7 +1,7 @@
 import { Heading } from "@/components/njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { modifyContent } from "@/lib/domain-logic/modifyContent";
-import { ReactElement, ReactNode } from "react";
+import { ForwardedRef, forwardRef, ReactElement, ReactNode } from "react";
 
 export interface AlertProps {
   variant: AlertVariant;
@@ -31,7 +31,7 @@ const composeAriaGroupLabel = (content: string, alertMappedName: string): string
   });
 };
 
-export const Alert = (props: Props): ReactElement => {
+const Alert = forwardRef((props: Props, ref: ForwardedRef<HTMLDivElement>): ReactElement => {
   const { variant, children, noIcon, heading, rounded, dataTestid } = props;
   const variantClass = variant ? `usa-alert--${variant}` : "";
   const noIconClass = noIcon ? " usa-alert--no-icon" : "";
@@ -66,6 +66,8 @@ export const Alert = (props: Props): ReactElement => {
         AlertVariantsAriaMapping[props.variant]
       )}
       {...alertRole}
+      ref={ref}
+      tabIndex={-1}
     >
       <div className="usa-alert__body">
         {heading && (
@@ -77,4 +79,8 @@ export const Alert = (props: Props): ReactElement => {
       </div>
     </div>
   );
-};
+});
+
+Alert.displayName = "Alert";
+
+export { Alert };

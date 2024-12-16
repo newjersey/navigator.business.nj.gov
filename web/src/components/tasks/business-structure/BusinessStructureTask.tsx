@@ -17,13 +17,13 @@ import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { createProfileFieldErrorMap, Task } from "@/lib/types/types";
-import { getFlow, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { getFlow, scrollToTopOfElement, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Business, hasCompletedFormation } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
   task: Task;
@@ -46,6 +46,8 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     state: formContextState,
   } = useFormContextHelper(createProfileFieldErrorMap());
 
+  const whenErrorScrollToRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     return (): void => {
       if (business?.profileData.legalStructureId) {
@@ -63,14 +65,21 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     setShowRadioQuestion(!business.profileData.legalStructureId);
   }, business);
 
-  FormFuncWrapper(async () => {
-    if (!updateQueue || !business) return;
+  FormFuncWrapper(
+    async () => {
+      if (!updateQueue || !business) return;
 
-    queueUpdateTaskProgress(props.task.id, "COMPLETED");
-    await updateQueue.queueProfileData(profileData).update();
-    setShowRadioQuestion(false);
-    setSuccessSnackbarIsOpen(true);
-  });
+      queueUpdateTaskProgress(props.task.id, "COMPLETED");
+      await updateQueue.queueProfileData(profileData).update();
+      setShowRadioQuestion(false);
+      setSuccessSnackbarIsOpen(true);
+    },
+    (isValid) => {
+      if (!isValid) {
+        scrollToTopOfElement(whenErrorScrollToRef.current, { focusElement: true });
+      }
+    }
+  );
 
   const setBackToEditing = (): void => {
     if (!business || !updateQueue) return;
@@ -146,7 +155,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
               onBack: (): void => {},
             }}
           >
-            <LegalStructureRadio taskId={props.task.id} />
+            <LegalStructureRadio taskId={props.task.id} ref={whenErrorScrollToRef} />
             <div className="margin-top-4">
               <SecondaryButton isColor="primary" onClick={onSubmit} dataTestId={"save-business-structure"}>
                 {Config.businessStructureTask.saveButton}
