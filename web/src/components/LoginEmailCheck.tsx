@@ -33,7 +33,7 @@ export const LoginEmailCheck = (): ReactElement => {
       const response = await postUserEmailCheck(email);
       if (response.found) {
         setEmailError("");
-        triggerSignIn();
+        await triggerSignIn();
         analytics.event.check_account_next_button.submit.go_to_myNJ_login();
       }
     } catch (error) {
