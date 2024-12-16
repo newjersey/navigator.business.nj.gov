@@ -22,7 +22,6 @@ import { Roadmap, UpdateQueue, UserDataError } from "@/lib/types/types";
 import analytics, { GTM_ID } from "@/lib/utils/analytics";
 import { setOnLoadDimensions } from "@/lib/utils/analytics-helpers";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { Hub, HubCapsule } from "@aws-amplify/core";
 import { BusinessPersona, OperatingPhaseId, RegistrationStatus } from "@businessnjgovnavigator/shared";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import "@newjersey/njwds/dist/css/styles.css";
@@ -33,6 +32,7 @@ import { useRouter } from "next/compat/router";
 import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
+import { Hub, type HubCapsule } from "aws-amplify/utils";
 
 import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
 import "../styles/main.scss";
@@ -81,7 +81,22 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     }
   }, [router]);
 
-  const listener = (data: HubCapsule): void => {
+  type AuthEvent = {
+    event:
+      | "signIn"
+      | "signUp"
+      | "signOut"
+      | "signIn_failure"
+      | "tokenRefresh"
+      | "tokenRefresh_failure"
+      | "configured";
+    data: {
+      username: string;
+      error?: string;
+    };
+  };
+
+  const listener = (data: HubCapsule<string, AuthEvent>): void => {
     switch (data.payload.event) {
       case "signIn":
         onSignIn(dispatch);

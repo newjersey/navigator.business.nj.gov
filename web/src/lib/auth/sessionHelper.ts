@@ -1,12 +1,21 @@
 import { ActiveUser } from "@/lib/auth/AuthContext";
 import { AccountLinkingErrorStorageFactory } from "@/lib/storage/AccountLinkingErrorStorage";
-import { Auth } from "@aws-amplify/auth";
+import { ResourcesConfig } from "@aws-amplify/core";
 import { Sha256 } from "@aws-crypto/sha256-browser";
 import { HttpRequest } from "@aws-sdk/protocol-http";
 import { S3RequestPresigner } from "@aws-sdk/s3-request-presigner";
 import { parseUrl } from "@aws-sdk/url-parser";
 import { formatUrl } from "@aws-sdk/util-format-url";
-import axios, { AxiosResponse } from "axios";
+import { Amplify } from "aws-amplify";
+import {
+  CredentialsAndIdentityId,
+  fetchAuthSession,
+  JWT,
+  signInWithRedirect,
+  signOut,
+  updateUserAttributes,
+  UpdateUserAttributesInput,
+} from "aws-amplify/auth";
 
 type CognitoIdPayload = {
   aud: string;
@@ -34,55 +43,60 @@ type CognitoIdentityPayload = {
   userId: string;
 };
 
-type CognitoRefreshAuthResult = {
-  AuthenticationResult: {
-    AccessToken: string;
-    ExpiresIn: number;
-    IdToken: string;
-    TokenType: string;
+export const getCredentialsAndIdentity = async (): Promise<CredentialsAndIdentityId> => {
+  const session = await fetchAuthSession({ forceRefresh: true });
+  const credentials = session?.credentials;
+  const identityId = session?.identityId;
+  if (!credentials || !identityId) {
+    throw new Error("Missing AWS credentials or IdentityId");
+  }
+  return {
+    credentials,
+    identityId,
   };
 };
 
-type CognitoRefreshAuth = {
-  token: string;
-  expires_at: number;
-  identity_id: string;
-};
-
 export const configureAmplify = (): void => {
-  Auth.configure({
-    identityPoolRegion: process.env.AWS_REGION,
-    identityPoolId: process.env.COGNITO_IDENTITY_POOL_ID,
-    region: process.env.AWS_REGION,
-    userPoolId: process.env.COGNITO_USER_POOL_ID,
-    userPoolWebClientId: process.env.COGNITO_WEB_CLIENT_ID,
-    ssr: true,
-    oauth: {
-      domain: process.env.AUTH_DOMAIN,
-      scope: ["email", "profile", "openid", "aws.cognito.signin.user.admin"],
-      redirectSignIn: process.env.REDIRECT_URL,
-      redirectSignOut: process.env.REDIRECT_URL,
-      responseType: "code",
+  const responseType: "code" | "token" = "code";
+  const amplifyConfig = {
+    Auth: {
+      Cognito: {
+        identityPoolId: process.env.COGNITO_IDENTITY_POOL_ID,
+        userPoolId: process.env.COGNITO_USER_POOL_ID,
+        userPoolClientId: process.env.COGNITO_WEB_CLIENT_ID,
+        loginWith: {
+          oauth: {
+            domain: process.env.AUTH_DOMAIN,
+            scopes: ["email", "profile", "openid", "aws.cognito.signin.user.admin"],
+            redirectSignIn: [process.env.REDIRECT_URL],
+            redirectSignOut: [process.env.REDIRECT_URL],
+            responseType,
+          },
+        },
+      },
     },
-    refreshHandlers: {
-      myNJ: refreshToken,
-    },
-  });
+  };
+  Amplify.configure(amplifyConfig as ResourcesConfig, { ssr: true });
 };
 
 export const triggerSignOut = async (): Promise<void> => {
-  await Auth.signOut();
+  await signOut();
 };
 
 export const triggerSignIn = async (): Promise<void> => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   configureAmplify();
-  await Auth.federatedSignIn({ customProvider: "myNJ" });
+  await signInWithRedirect({
+    provider: {
+      custom: "myNJ",
+    },
+  });
 };
 
 export const getSignedS3Link = async (value: string, expires?: number): Promise<string> => {
-  const credentials = await Auth.currentUserCredentials();
+  const credentialsAndIdentityId = await getCredentialsAndIdentity();
+  const credentials = credentialsAndIdentityId.credentials;
   const presigner = new S3RequestPresigner({
     credentials,
     region: process.env.AWS_REGION || "us-east-1",
@@ -93,21 +107,26 @@ export const getSignedS3Link = async (value: string, expires?: number): Promise<
   return formatUrl(url);
 };
 
-export const getCurrentToken = async (): Promise<string> => {
-  const cognitoSession = await Auth.currentSession();
-  return cognitoSession.getIdToken().getJwtToken();
+export const getCurrentToken = async (): Promise<JWT> => {
+  const session = await fetchAuthSession({ forceRefresh: true });
+  if (!session.tokens || !session.tokens.idToken) {
+    throw new Error("Unable to retrieve access token. Ensure the session is valid.");
+  }
+  return session.tokens.idToken;
 };
 
 export const getActiveUser = async (): Promise<ActiveUser> => {
   configureAmplify();
-  const cognitoSession = await Auth.currentSession();
-  const cognitoPayload = cognitoSession.getIdToken().decodePayload() as CognitoIdPayload;
+  const cognitoSession = await getCurrentToken();
+  const cognitoPayload = cognitoSession.payload as CognitoIdPayload;
   if (!cognitoPayload["custom:identityId"]) {
-    const user = await Auth.currentAuthenticatedUser();
-    const credentials = await Auth.currentUserCredentials();
-    await Auth.updateUserAttributes(user, {
-      "custom:identityId": credentials.identityId,
-    });
+    const credentialsAndIdentityId = await getCredentialsAndIdentity();
+    const input: UpdateUserAttributesInput = {
+      userAttributes: {
+        "custom:identityId": credentialsAndIdentityId.identityId,
+      },
+    };
+    await updateUserAttributes(input);
   }
   const encounteredMyNjLinkingError = AccountLinkingErrorStorageFactory().getEncounteredMyNjLinkingError();
   return cognitoPayloadToActiveUser({ cognitoPayload, encounteredMyNjLinkingError });
@@ -128,31 +147,4 @@ const cognitoPayloadToActiveUser = ({
     email: cognitoPayload.email,
     encounteredMyNjLinkingError,
   };
-};
-
-export const refreshToken = async (): Promise<CognitoRefreshAuth> => {
-  const cognitoSession = await Auth.currentSession();
-  const token = cognitoSession.getRefreshToken().getToken();
-  return axios
-    .post(
-      "https://cognito-idp.us-east-1.amazonaws.com/",
-      {
-        ClientId: process.env.COGNITO_WEB_CLIENT_ID,
-        AuthFlow: "REFRESH_TOKEN_AUTH",
-        AuthParameters: { REFRESH_TOKEN: token },
-      },
-      {
-        headers: {
-          "X-Amz-Target": "AWSCognitoIdentityProviderService.InitiateAuth",
-          "Content-Type": "application/x-amz-json-1.1",
-        },
-      }
-    )
-    .then((response: AxiosResponse<CognitoRefreshAuthResult>) => {
-      return {
-        token: response.data.AuthenticationResult.AccessToken,
-        expires_at: response.data.AuthenticationResult.ExpiresIn,
-        identity_id: response.data.AuthenticationResult.IdToken,
-      };
-    });
 };
