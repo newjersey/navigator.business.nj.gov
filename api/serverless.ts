@@ -86,6 +86,7 @@ const dynamicsElevatorSafetySecret = process.env.DYNAMICS_ELEVATOR_SAFETY_SECRET
 const dynamicsElevatorSafetyTenantId = process.env.DYNAMICS_ELEVATOR_SAFETY_TENANT_ID || "";
 const useWireMockForFormationAndBusinessSearch =
   process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH || "";
+const useWireMockForGetTaxCalendarSearch = process.env.USE_WIREMOCK_FOR_GET_TAX_CALENDAR_SEARCH || "";
 
 const serverlessConfiguration: AWS = {
   useDotenv: true,
@@ -240,6 +241,7 @@ const serverlessConfiguration: AWS = {
       USERS_TABLE: usersTable,
       BUSINESSES_TABLE: businessesTable,
       USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH: useWireMockForFormationAndBusinessSearch,
+      USE_WIREMOCK_FOR_GET_TAX_CALENDAR_SEARCH: useWireMockForGetTaxCalendarSearch,
     } as AwsLambdaEnvironment,
     logRetentionInDays: 180,
   },

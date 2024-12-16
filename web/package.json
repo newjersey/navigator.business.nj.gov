@@ -44,8 +44,6 @@
     "endOfLine": "auto"
   },
   "dependencies": {
-    "@aws-amplify/auth": "5.6.1",
-    "@aws-amplify/core": "5.8.1",
     "@aws-crypto/sha256-browser": "5.2.0",
     "@aws-sdk/protocol-http": "3.374.0",
     "@aws-sdk/s3-request-presigner": "3.726.1",
@@ -61,6 +59,7 @@
     "@mui/x-date-pickers": "5.0.20",
     "@newjersey/njwds": "0.3.0",
     "@types/mdast": "4.0.4",
+    "aws-amplify": "6.11.0",
     "axios": "1.7.9",
     "broken-link-checker": "0.7.8",
     "cypress-axe": "1.5.0",
