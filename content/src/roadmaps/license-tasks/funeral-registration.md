@@ -4,7 +4,8 @@ webflowId: 6761e527ee5119895f67bf4a
 urlSlug: funeral-registration
 name: Apply for Your Funeral Home’s Certificate of Registration
 displayname: funeral-registration
-webflowName: Funeral Services: Funeral Home Certificate of Registration
+webflowName: >-
+  Funeral Services: Funeral Home Certificate of Registration
 filename: funeral-registration
 callToActionLink: https://www.njconsumeraffairs.gov/mor/Pages/applications.aspx
 callToActionText: Apply for My Certificate of Registration
