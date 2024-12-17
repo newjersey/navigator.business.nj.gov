@@ -3,6 +3,6 @@
     "notCompletedTaskPromptAnyTask": "Select your `business structure|business-structure-learn-more` to learn how to **register your business**.",
     "notCompletedTaskPromptBusinessStructureTask": "Select your `business structure|business-structure-learn-more` to learn how to **register your business**.",
     "buttonText": "Select Business Structure",
-    "businessStructureNotSelectedAlertText": "Complete the field below."
+    "businessStructureNotSelectedAlertText": "Complete the required Business Structure Question"
   }
 }

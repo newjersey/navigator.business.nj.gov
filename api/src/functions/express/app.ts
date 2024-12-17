@@ -38,6 +38,8 @@ import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
 import { WebserviceLicenseStatusClient } from "@client/WebserviceLicenseStatusClient";
 import { WebserviceLicenseStatusProcessorClient } from "@client/WebserviceLicenseStatusProcessorClient";
 import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
+import { DynamoBusinessDataClient } from "@db/DynamoBusinessDataClient";
+import { DynamoDataClient } from "@db/DynamoDataClient";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import { HealthCheckMethod } from "@domain/types";
 import { updateSidebarCards } from "@domain/updateSidebarCards";
@@ -45,6 +47,7 @@ import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFa
 import { timeStampBusinessSearch } from "@domain/user/timeStampBusinessSearch";
 import { updateLicenseStatusFactory } from "@domain/user/updateLicenseStatusFactory";
 import { updateOperatingPhase } from "@domain/user/updateOperatingPhase";
+import { BUSINESSES_TABLE, DYNAMO_OFFLINE_PORT, IS_DOCKER, IS_OFFLINE, STAGE } from "@functions/config";
 import { setupExpress } from "@libs/express";
 import { LogWriter } from "@libs/logWriter";
 import bodyParser from "body-parser";
@@ -60,10 +63,6 @@ import { taxFilingsInterfaceFactory } from "src/domain/tax-filings/taxFilingsInt
 
 const app = setupExpress();
 
-const IS_OFFLINE = process.env.IS_OFFLINE === "true" || false; // set by serverless-offline
-const IS_DOCKER = process.env.IS_DOCKER === "true" || false; // set in docker-compose
-const DYNAMO_OFFLINE_PORT = Number.parseInt(process.env.DYNAMO_PORT || "8000");
-const STAGE = process.env.STAGE || "local";
 const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
 const dataLogger = LogWriter(`aws/${STAGE}`, "DataMigrationLogs");
 
@@ -279,6 +278,8 @@ const airtableUserTestingClient = AirtableUserTestingClient(
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
 const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, dataLogger);
+const businessesDataClient = DynamoBusinessDataClient(dynamoDb, BUSINESSES_TABLE, dataLogger);
+const dynamoDataClient = DynamoDataClient(userDataClient, businessesDataClient, dataLogger);
 
 const taxFilingInterface = taxFilingsInterfaceFactory(taxFilingClient);
 
@@ -320,7 +321,7 @@ app.use(bodyParser.json({ strict: false }));
 app.use(
   "/api",
   userRouterFactory(
-    userDataClient,
+    dynamoDataClient,
     updateLicenseStatus,
     updateSidebarCards,
     updateOperatingPhase,
@@ -332,10 +333,10 @@ app.use(
 
 app.use(
   "/api/external",
-  externalEndpointRouterFactory(userDataClient, addGovDeliveryNewsletter, addToAirtableUserTesting)
+  externalEndpointRouterFactory(dynamoDataClient, addGovDeliveryNewsletter, addToAirtableUserTesting)
 );
 app.use("/api/guest", guestRouterFactory(timeStampToBusinessSearch));
-app.use("/api", licenseStatusRouterFactory(updateLicenseStatus, userDataClient));
+app.use("/api", licenseStatusRouterFactory(updateLicenseStatus, dynamoDataClient));
 app.use(
   "/api",
   elevatorSafetyRouterFactory(
@@ -346,11 +347,11 @@ app.use(
 );
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
 app.use("/api", housingRouterFactory(dynamicsHousingClient, dynamicsHousingRegistrationStatusClient));
-app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));
-app.use("/api", formationRouterFactory(apiFormationClient, userDataClient, { shouldSaveDocuments }));
+app.use("/api", selfRegRouterFactory(dynamoDataClient, selfRegClient));
+app.use("/api", formationRouterFactory(apiFormationClient, dynamoDataClient, { shouldSaveDocuments }));
 app.use(
   "/api/taxFilings",
-  taxFilingRouterFactory(userDataClient, taxFilingInterface, AWSEncryptionDecryptionClient)
+  taxFilingRouterFactory(dynamoDataClient, taxFilingInterface, AWSEncryptionDecryptionClient)
 );
 app.use("/api", taxDecryptionRouterFactory(AWSEncryptionDecryptionClient));
 app.use(
