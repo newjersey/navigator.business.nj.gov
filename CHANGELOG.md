@@ -1,3 +1,38 @@
+# [2024.38.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.37.0...v2024.38.0) (2024-12-17)
+
+
+### Bug Fixes
+
+* [[#188464297](https://github.com/newjersey/navigator.business.nj.gov/issues/188464297)] update design and content ([587ead2](https://github.com/newjersey/navigator.business.nj.gov/commit/587ead2302d377decd830b5c036c2bf6d6a0a0ab))
+* [[#188464297](https://github.com/newjersey/navigator.business.nj.gov/issues/188464297)] update env content ([d61cecb](https://github.com/newjersey/navigator.business.nj.gov/commit/d61cecb5fe63756af7190efb40ec2d8ba24c825c))
+* [[#188540248](https://github.com/newjersey/navigator.business.nj.gov/issues/188540248)] add check email endpoint to serverless config ([30a9fc8](https://github.com/newjersey/navigator.business.nj.gov/commit/30a9fc8348cfc98856c8e7c4b9eb85dd7732026d))
+* [[#188599283](https://github.com/newjersey/navigator.business.nj.gov/issues/188599283)] Have vacant building question appear for signed in owning users ([bc0665c](https://github.com/newjersey/navigator.business.nj.gov/commit/bc0665cefabc5d40d3c580d99c4905be3eb1ef73))
+* [[#188599283](https://github.com/newjersey/navigator.business.nj.gov/issues/188599283)] Update styling for non-essential question ([9b2ac30](https://github.com/newjersey/navigator.business.nj.gov/commit/9b2ac30fe3edd3751eab35131de340fa8e1edf78))
+* **deps:** update dependency helmet to v7.2.0 ([#9184](https://github.com/newjersey/navigator.business.nj.gov/issues/9184)) ([f47e32a](https://github.com/newjersey/navigator.business.nj.gov/commit/f47e32a36eaba4da7a3e2349113cb58b7a71a372))
+* handle wiremock env variable consistently ([8f15c3c](https://github.com/newjersey/navigator.business.nj.gov/commit/8f15c3c2d2d17b279651e34cf66641ff031fdc1c))
+* will practice law reivew text, always no ([b28f5f7](https://github.com/newjersey/navigator.business.nj.gov/commit/b28f5f7b66e832cd3778275fd8dd1ab11c2ca4cb))
+
+
+### Features
+
+* [[#188464297](https://github.com/newjersey/navigator.business.nj.gov/issues/188464297)] add environmental questionnaire for waste ([0089e5c](https://github.com/newjersey/navigator.business.nj.gov/commit/0089e5cf9de737326fc940dc042594d4fd3d3b09))
+* [[#188489104](https://github.com/newjersey/navigator.business.nj.gov/issues/188489104)] anytime action dropdown categories are keyboard accessible ([53bcc98](https://github.com/newjersey/navigator.business.nj.gov/commit/53bcc985dc5c73b6a03340eeccdd2558464f20b8))
+* [[#188540248](https://github.com/newjersey/navigator.business.nj.gov/issues/188540248)] add check email endpoint ([#9159](https://github.com/newjersey/navigator.business.nj.gov/issues/9159)) ([dfc7a07](https://github.com/newjersey/navigator.business.nj.gov/commit/dfc7a07feb901417797a7465de6f0e0cc38ab892))
+* [[#188595618](https://github.com/newjersey/navigator.business.nj.gov/issues/188595618)] update Dakota c-corp formation alert on Name step ([094b816](https://github.com/newjersey/navigator.business.nj.gov/commit/094b8169a8088feeb24d993763a5c96e6646756a))
+* [[#188595628](https://github.com/newjersey/navigator.business.nj.gov/issues/188595628)] Dakota Corporations Formation Task - Certificate of Good Standing ([8757864](https://github.com/newjersey/navigator.business.nj.gov/commit/8757864f27b4c5695c428c6fef10b4ab314aab72))
+* [[#188601241](https://github.com/newjersey/navigator.business.nj.gov/issues/188601241)] Enabled License Status Check Tasks for Unmapped Supported License Types ([e8c7c56](https://github.com/newjersey/navigator.business.nj.gov/commit/e8c7c567c12f27a0fd0621981e3dbb219e640ace))
+* [[#188645454](https://github.com/newjersey/navigator.business.nj.gov/issues/188645454)] show me opportunities button analytics ([b89b991](https://github.com/newjersey/navigator.business.nj.gov/commit/b89b99144cc3c243052a24125940f56d059c6a43))
+* [[#188651554](https://github.com/newjersey/navigator.business.nj.gov/issues/188651554)] remove registration modal & amend button text ([8b40af4](https://github.com/newjersey/navigator.business.nj.gov/commit/8b40af405e78fbc92280d928c5a7d60d10f70631))
+* [[#188667769](https://github.com/newjersey/navigator.business.nj.gov/issues/188667769)] reshuffle roadmap tasks to maintain consistent order ([625daf9](https://github.com/newjersey/navigator.business.nj.gov/commit/625daf92b61d59625c395423662d352bebe7be38))
+* [[#188682553](https://github.com/newjersey/navigator.business.nj.gov/issues/188682553)] add certifiate of good standing to Dakota NP ([e945e90](https://github.com/newjersey/navigator.business.nj.gov/commit/e945e90b94b5be587d8bfef07b5f6d2aac8a5d9d))
+* add bylaws task to nonprofit roadmap add-on ([45a9f75](https://github.com/newjersey/navigator.business.nj.gov/commit/45a9f7581ac6bb241fac33f359af5c1ebf3c8dd7))
+
+
+### Reverts
+
+* Revert "chore: updating Anytime Actions (Licenses) code23-osow-30day-permit_1" ([853398e](https://github.com/newjersey/navigator.business.nj.gov/commit/853398ec977c7afac734b1e08c1be2be51ee8017))
+* Revert "chore(deps): update dependency cspell to v8.16.1 (#9183)" ([d7e8acd](https://github.com/newjersey/navigator.business.nj.gov/commit/d7e8acd936d79669a3b19aaf2433dc0d786cad25)), closes [#9183](https://github.com/newjersey/navigator.business.nj.gov/issues/9183)
+
 # [2024.37.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.36.0...v2024.37.0) (2024-12-10)
 
 

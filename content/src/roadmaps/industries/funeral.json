@@ -74,5 +74,6 @@
   "isEnabled": true,
   "additionalSearchTerms": "mortuary, funeral, funeral home, mortician, undertaker, funeral parlor, funeral director, mortuary practitioner, crematory, cremation, embalming, mortuary science, death care, funeral care",
   "id": "funeral",
-  "description": "Offers embalming, cremation, and funeral services to care for the dead"
+  "description": "Offers embalming, cremation, and funeral services to care for the dead",
+  "webflowId": "6761e57d7cf913c3dc28724d"
 }

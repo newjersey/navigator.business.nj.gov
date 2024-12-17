@@ -25,7 +25,7 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
 
   const formattLawResponse = (willPracticeLaw: boolean | undefined): string | undefined => {
     if (willPracticeLaw === true) {
-      return Config.formation.fields.willPracticeLaw.radioNoText;
+      return Config.formation.fields.willPracticeLaw.radioYesText;
     } else if (willPracticeLaw === false) {
       return Config.formation.fields.willPracticeLaw.radioNoText;
     }
