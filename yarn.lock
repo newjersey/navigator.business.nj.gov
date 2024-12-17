@@ -5054,7 +5054,7 @@ __metadata:
     "@types/react-dom": 18.2.25
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.6
-    "@types/react-transition-group": 4.4.11
+    "@types/react-transition-group": 4.4.12
     "@types/remove-markdown": 0.3.4
     "@types/simple-oauth2": 5.0.7
     "@types/supertest": 6.0.2
@@ -5264,7 +5264,7 @@ __metadata:
     "@types/react-dom": 18.2.25
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.6
-    "@types/react-transition-group": 4.4.11
+    "@types/react-transition-group": 4.4.12
     "@types/remove-markdown": 0.3.4
     "@types/testing-library__jest-dom": 5.14.9
     "@typescript-eslint/eslint-plugin": 7.18.0
@@ -12723,12 +12723,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-transition-group@npm:4.4.11, @types/react-transition-group@npm:^4.4.10, @types/react-transition-group@npm:^4.4.5":
-  version: 4.4.11
-  resolution: "@types/react-transition-group@npm:4.4.11"
-  dependencies:
+"@types/react-transition-group@npm:4.4.12, @types/react-transition-group@npm:^4.4.10, @types/react-transition-group@npm:^4.4.5":
+  version: 4.4.12
+  resolution: "@types/react-transition-group@npm:4.4.12"
+  peerDependencies:
     "@types/react": "*"
-  checksum: a6e3b2e4363cb019e256ae4f19dadf9d7eb199da1a5e4109bbbf6a132821884044d332e9c74b520b1e5321a7f545502443fd1ce0b18649c8b510fa4220b0e5c2
+  checksum: 13d36396cae4d3c316b03d4a0ba299f0d039c59368ba65e04b0c3dc06fd0a16f59d2c669c3e32d6d525a95423f156b84e550d26bff0bdd8df285f305f8f3a0ed
   languageName: node
   linkType: hard
 
