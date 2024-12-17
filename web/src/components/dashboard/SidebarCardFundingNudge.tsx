@@ -2,6 +2,7 @@ import { SectorModal } from "@/components/dashboard/SectorModal";
 import { SidebarCardGeneric } from "@/components/dashboard/SidebarCardGeneric";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
+import { gov2GovTaxFiling } from "@/lib/taxation/helpers";
 import { SidebarCardContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
@@ -18,12 +19,17 @@ export const SidebarCardFundingNudge = (props: Props): ReactElement => {
   const { updateQueue, business } = useUserData();
 
   const updateToUpAndRunningAndCompleteTaxTask = async (): Promise<void> => {
-    if (!business) return;
-    await updateQueue
-      ?.queueProfileData({
+    if (!updateQueue) return;
+
+    try {
+      await gov2GovTaxFiling({ updateQueue });
+    } finally {
+      updateQueue?.queueProfileData({
         operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
-      })
-      .update();
+      });
+      await updateQueue.update();
+    }
+
     routeShallowWithQuery(router, QUERIES.fromFunding, "true");
   };
 
