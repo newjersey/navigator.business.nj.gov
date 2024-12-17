@@ -1,0 +1,18 @@
+{
+  "id": "env-permitting",
+  "displayname": "env-permitting",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 20,
+      "task": "waste-permitting",
+      "required": false
+    },
+    {
+      "step": 3,
+      "weight": 21,
+      "task": "land-permitting",
+      "required": false
+    }
+  ]
+}
