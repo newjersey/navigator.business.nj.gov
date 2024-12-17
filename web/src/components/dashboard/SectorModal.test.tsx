@@ -3,7 +3,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const submitSectorModal = (): void => {
   fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalSaveButton));
@@ -65,7 +65,7 @@ describe("<SectorModal />", () => {
     ).toBeInTheDocument();
   });
 
-  it("calls onContinue prop on successful submit", () => {
+  it("calls onContinue prop on successful submit", async () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         sectorId: undefined,
@@ -78,6 +78,8 @@ describe("<SectorModal />", () => {
     const { page } = renderSectorModal(onContinue);
     page.selectByValue("Sector", "clean-energy");
     submitSectorModal();
-    expect(onContinue).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(onContinue).toHaveBeenCalled();
+    });
   });
 });

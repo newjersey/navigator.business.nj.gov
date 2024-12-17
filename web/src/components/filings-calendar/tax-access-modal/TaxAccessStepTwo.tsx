@@ -10,18 +10,17 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { FieldStateActionKind } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { ProfileFormContext } from "@/contexts/profileFormContext";
-import { postTaxFilingsOnboarding } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { gov2GovTaxFiling } from "@/lib/taxation/helpers";
 import { createReducedFieldStates, ProfileFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   Business,
   createEmptyProfileData,
-  getCurrentBusiness,
   LookupLegalStructureById,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
@@ -143,45 +142,19 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
 
       setIsLoading(true);
 
-      const encryptedTaxId =
-        profileData.taxId === business.profileData.taxId ? profileData.encryptedTaxId : undefined;
-
       try {
-        let businessNameToSubmitToTaxApi = "";
-
-        if (displayBusinessName()) {
-          businessNameToSubmitToTaxApi = profileData.businessName;
-        }
-        if (displayResponsibleOwnerName()) {
-          businessNameToSubmitToTaxApi = profileData.responsibleOwnerName;
-        }
-
-        const userDataToSet = await postTaxFilingsOnboarding({
-          taxId: profileData.taxId as string,
-          businessName: businessNameToSubmitToTaxApi,
-          encryptedTaxId: encryptedTaxId as string,
-        });
-
-        updateQueue.queue(userDataToSet).queueProfileData({
-          taxId: profileData.taxId,
-          encryptedTaxId: encryptedTaxId,
-        });
-
-        if (getCurrentBusiness(userDataToSet).taxFilingData.state === "SUCCESS") {
-          if (displayBusinessName()) {
-            updateQueue.queueProfileData({
-              businessName: profileData.businessName,
-            });
-          }
-
-          if (displayResponsibleOwnerName()) {
-            updateQueue.queueProfileData({
-              responsibleOwnerName: profileData.responsibleOwnerName,
-            });
-          }
-        }
-
+        await gov2GovTaxFiling({ updateQueue, stagedProfileData: profileData });
         await updateQueue.update();
+        if (profileData.businessName) {
+          updateQueue.queueProfileData({
+            businessName: profileData.businessName,
+          });
+        }
+        if (profileData.responsibleOwnerName) {
+          updateQueue.queueProfileData({
+            responsibleOwnerName: profileData.responsibleOwnerName,
+          });
+        }
       } catch {
         setOnAPIfailed("UNKNOWN");
         setIsLoading(false);
