@@ -63,6 +63,7 @@ describe("formationRouter", () => {
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),
+      findUserByBusinessName: jest.fn(),
     };
     app = setupExpress(false);
     app.use(formationRouterFactory(stubFormationClient, stubDynamoDataClient, { shouldSaveDocuments: true }));

@@ -137,9 +137,14 @@ export const DynamoUserDataClient = (
     return search(statement);
   };
 
-  const getUsersWithOutdatedVersion = async (latestVersion: number): Promise<UserData[]> => {
+  const getUsersWithOutdatedVersion = (latestVersion: number): Promise<UserData[]> => {
     const statement = `SELECT data FROM "${tableName}" WHERE data["version"] < ${CURRENT_VERSION}`;
-    return await search(statement);
+    return search(statement);
+  };
+
+  const queryUsersWithBusinesses = (): Promise<UserData[]> => {
+    const statement = `SELECT data FROM "${tableName}" WHERE data["businesses"] IS NOT MISSING AND size(data["businesses"]) > 0`;
+    return search(statement);
   };
 
   const search = async (statement: string): Promise<UserData[]> => {
@@ -160,5 +165,6 @@ export const DynamoUserDataClient = (
     getNeedToAddToUserTestingUsers,
     getNeedTaxIdEncryptionUsers,
     getUsersWithOutdatedVersion,
+    queryUsersWithBusinesses,
   };
 };
