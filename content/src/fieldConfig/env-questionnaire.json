@@ -1,0 +1,80 @@
+{
+  "envQuestionPage": {
+    "generic": {
+      "title": "Tell Us About Your Business",
+      "question": "Which of the following are true?",
+      "buttonText": "See My Results",
+      "errorText": "Select a response below.",
+      "footerText": "To learn more about ${mediaAreaText} permits, visit ${mediaAreaLink}."
+    },
+    "waste": {
+      "mediaAreaText": "waste",
+      "mediaAreaLink": "[NJDEP’s page on Sustainable Waste Management](https://www.nj.gov/dep/dshw/)",
+      "questionnaireOptions": {
+        "hazardousMedicalWaste": "My business will generate `hazardous waste|hazardous-waste` or `medical waste|medical-waste`.",
+        "compostWaste": "My business will `compost waste|compost-waste` on site.",
+        "treatProcessWaste": "My business will treat or process waste.",
+        "constructionDebris": "My business will process `construction/demolition debris|construction-and-demo-debris` and recyclable materials.",
+        "noWaste": "None of the above apply."
+      }
+    },
+    "land": {
+      "mediaAreaText": "land management",
+      "mediaAreaLink": "[NJDEP’s page on the Watershed and Land Management Program](https://dep.nj.gov/wlm/)",
+      "questionnaireOptions": {
+        "takeOverExistingBiz": "My business will take over an existing business or a site where a business used to be.",
+        "propertyAssessment": "My business will carry out `property assessment|property-assessment` work at the site.",
+        "constructionActivities": "My business will carry out construction activities on a site affecting 0.25 or more acres of land.",
+        "siteImprovementWasteLands": "My business will carry out site improvement in or near wetlands or flood hazard areas. This includes activities such as cutting down trees.",
+        "noLand": "None of the above apply."
+      }
+    }
+  },
+  "envResultsPage": {
+    "title": "Actions to Take",
+    "editInfo": "Your answers were successfully completed!",
+    "editText": "Edit.",
+    "summary": {
+      "partOne": "Based on your answers, your business may be legally required to have a Department of Environmental Protection (DEP)",
+      "partTwo": "license or permit. Find out your business's requirements below.",
+      "mediaAreaText": {
+        "waste": "waste",
+        "land": "watershed and land management"
+      }
+    },
+    "personalizedSupport": {
+      "title": "Contact DEP’s Small Business Assistance Program (SBAP)",
+      "body": "An expert at SBAP can help you figure out which licenses or permits your business needs. SBAP does not regulate or enforce environmental rules.",
+      "contact": "edward.bakos@dep.nj.gov"
+    },
+    "contactDep": {
+      "title": "Contact DEP",
+      "body": "To find out which licenses or permits you need, contact the ${bodyLink}",
+      "waste": {
+        "heading": "Waste Requirements",
+        "bodyLink": "[Division of Sustainable Waste Management](https://www.nj.gov/dep/dshw/):",
+        "contact": {
+          "phone": "609-633-1418",
+          "form": ""
+        }
+      },
+      "land": {
+        "heading": "Watershed and Land Management Requirements",
+        "bodyLink": "[Watershed and Land Management Program](https://dep.nj.gov/wlm/contact-us/):",
+        "contact": {
+          "phone": "877-927-6337",
+          "form": "[Form](https://dep.nj.gov/wlm/contact-us/)"
+        }
+      }
+    },
+    "seeYourResponses": {
+      "title": "See Your Responses"
+    },
+    "lowApplicability": {
+      "summaryLineOne": "You most likely will not need to apply for licenses or permits with the Department of Environmental Protection (DEP).",
+      "summaryLineTwo": "Visit [DEP’s Permits, Applications & Registrations page](https://dep.nj.gov/permits-applications-registrations/) for more information about your license and permit needs.",
+      "callout": "If your business activities or equipment change at any point,",
+      "calloutRedo": "redo this form."
+    }
+  }
+}
