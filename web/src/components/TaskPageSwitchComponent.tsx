@@ -11,7 +11,7 @@ import { BusinessFormation } from "@/components/tasks/business-formation/Busines
 import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
-import { CheckWastePermits } from "@/components/tasks/environment-questionnaire/CheckWastePermits";
+import { EnvPermit } from "@/components/tasks/environment-questionnaire/EnvPermit";
 import { Roadmap, Task, TasksDisplayContent, TaskWithLicenseTaskId } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
@@ -63,7 +63,8 @@ export const TaskPageSwitchComponent = ({
   }
 
   return rswitch(task.id, {
-    "waste-permitting": <CheckWastePermits task={task} />,
+    "waste-permitting": <EnvPermit task={task} />,
+    "land-permitting": <EnvPermit task={task} />,
     "elevator-registration": (
       <ElevatorRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),

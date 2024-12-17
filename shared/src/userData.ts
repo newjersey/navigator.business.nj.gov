@@ -32,7 +32,7 @@ export interface Business {
   readonly version: number;
 }
 
-export const CURRENT_VERSION = 151;
+export const CURRENT_VERSION = 152;
 
 export const createEmptyBusiness = (id?: string): Business => {
   return {
