@@ -4,7 +4,6 @@ name: Reinstate Your Controlled Dangerous Substances Registration
 industryIds:
   - healthcare
 sectorIds: []
-icon: update-purple.svg
 urlSlug: healthcare-cds-reinstate
 summaryDescriptionMd: >-
   If you’re a Medical Doctor, Doctor of Osteopathy, Dentist, Optometrist,

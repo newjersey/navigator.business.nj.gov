@@ -2,7 +2,6 @@
 filename: landscape-architect-license-reinstatement
 licenseName: ""
 name: Apply to Reinstate Your Landscape Architect License
-icon: update-purple.svg
 urlSlug: landscape-architect-license-reinstatement
 summaryDescriptionMd: You need to reinstate your license as a landscape
   architect if it is expired or inactive.

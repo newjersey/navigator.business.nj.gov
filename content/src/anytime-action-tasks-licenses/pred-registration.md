@@ -11,7 +11,6 @@ industryIds:
   - commercial-construction
 sectorIds:
   - construction
-icon: file-purple.svg
 urlSlug: pred-registration
 summaryDescriptionMd: >-
   You must register a `planned real estate

@@ -3,7 +3,6 @@ filename: landscape-architecture-certificate-reinstatement
 licenseName: Landscape Architecture-Certificate of Authorization
 name: Apply to Reinstate Your Certificate of Authorization for Landscape
   Architectural Services
-icon: update-purple.svg
 urlSlug: landscape-architecture-certificate-reinstatement
 summaryDescriptionMd: You must reinstate your Certificate of Authorization to
   Provide or Offer Landscape Architectural Services if it is expired or

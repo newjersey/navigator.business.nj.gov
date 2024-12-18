@@ -5,7 +5,6 @@ notesMd: "Draft:
 filename: registry-update-brc-amendment
 name: Update Your Business Registration Certificate and/or Registry Account
 applyToAllUsers: true
-icon: update-purple.svg
 urlSlug: registry-update-brc-amendment
 summaryDescriptionMd: >-
   If your business registration information has changed since you last updated

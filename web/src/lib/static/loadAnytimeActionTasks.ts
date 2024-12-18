@@ -140,7 +140,6 @@ export const loadAnytimeActionTaskByUrlSlug = (urlSlug: string): AnytimeActionTa
     callToActionText: undefined,
     issuingAgency: undefined,
     name: "",
-    icon: "",
     filename: "",
     urlSlug: "",
     contentMd: "Content Not Found",

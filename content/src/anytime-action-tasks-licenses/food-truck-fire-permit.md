@@ -10,7 +10,6 @@ name: Get a Fire Permit for Your Food Truck
 industryIds: []
 sectorIds:
   - accommodation-and-food-services
-icon: govt-purple.svg
 urlSlug: food-truck-fire-permit
 summaryDescriptionMd: You must have a fire permit to cook in a mobile canteen or
   cooking trailer, such as a food truck. You need to apply for a permit and pass

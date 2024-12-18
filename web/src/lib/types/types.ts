@@ -207,7 +207,6 @@ export interface Opportunity {
 
 interface AnytimeAction {
   name: string;
-  icon: string;
   filename: string;
 }
 
@@ -217,7 +216,6 @@ export interface AnytimeActionTask extends AnytimeAction {
   callToActionLink?: string;
   callToActionText?: string;
   issuingAgency?: string;
-  icon: string;
   industryIds: string[];
   sectorIds: string[];
   applyToAllUsers: boolean;

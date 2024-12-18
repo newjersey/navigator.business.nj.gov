@@ -26,7 +26,6 @@ sectorIds:
   - transportation-and-warehousing
   - waste-management-and-Remediation
   - wholesale-trade
-icon: govt-purple.svg
 urlSlug: state-contracting
 summaryDescriptionMd: >-
   ## **Register Your Business with NJSTART**

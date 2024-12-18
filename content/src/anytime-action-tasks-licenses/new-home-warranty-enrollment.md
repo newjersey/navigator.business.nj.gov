@@ -6,7 +6,6 @@ industryIds:
   - commercial-construction
 sectorIds:
   - construction
-icon: govt-purple.svg
 urlSlug: new-home-warranty-enrollment
 summaryDescriptionMd: >-
   If you build and/or sell new homes in New Jersey, such as single-family

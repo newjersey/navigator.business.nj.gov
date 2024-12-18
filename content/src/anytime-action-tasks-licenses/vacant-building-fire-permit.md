@@ -7,7 +7,6 @@ notesMd: >-
   NOTE: Approved by SME 11/7
 filename: vacant-building-fire-permit
 name: Get a Fire Permit for Your Vacant or Unoccupied Property
-icon: file-purple.svg
 urlSlug: vacant-building-fire-permit
 summaryDescriptionMd: >-
   You must have a fire permit to own a property in New Jersey if it:

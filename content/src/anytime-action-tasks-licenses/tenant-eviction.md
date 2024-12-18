@@ -13,7 +13,6 @@ industryIds:
   - residential-landlord
 sectorIds:
   - real-estate
-icon: govt-purple.svg
 urlSlug: tenant-eviction
 summaryDescriptionMd: >-
   :::infoAlert

@@ -293,7 +293,6 @@ export const generateAnytimeActionTask = (overrides: Partial<AnytimeActionTask>)
     filename: `some-filename-${randomInt()}`,
     name: `some-name-${randomInt()}`,
     urlSlug: `some-url-slug-${randomInt()}`,
-    icon: `some-icon-${randomInt()}`,
     callToActionLink: `some-cta-link-${randomInt()}`,
     callToActionText: `some-cta-text-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
@@ -313,7 +312,6 @@ export const generateAnytimeActionLicenseReinstatement = (
     filename: `some-filename-${randomInt()}`,
     name: `some-name-${randomInt()}`,
     urlSlug: `some-url-slug-${randomInt()}`,
-    icon: `some-icon-${randomInt()}`,
     callToActionLink: `some-cta-link-${randomInt()}`,
     callToActionText: `some-cta-text-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
@@ -328,7 +326,6 @@ export const generateAnytimeActionLink = (overrides: Partial<AnytimeActionLink>)
   return {
     filename: `some-filename-${randomInt()}`,
     name: `some-name-${randomInt()}`,
-    icon: `some-icon-${randomInt()}`,
     externalRoute: `some-external-route-${randomInt()}`,
     industryIds: [`some-industry-id-${randomInt()}`],
     sectorIds: [`some-sector-id-${randomInt()}`],

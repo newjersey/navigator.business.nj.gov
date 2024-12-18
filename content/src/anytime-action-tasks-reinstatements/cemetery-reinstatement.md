@@ -4,7 +4,6 @@ name: Reinstate Your Cemetery Salesperson License
 industryIds:
   - cemetery
 sectorIds: []
-icon: update-purple.svg
 urlSlug: cemetery-reinstatement
 summaryDescriptionMd: "If your Cemetery Salesperson license expired less than 30
   days ago, [you can renew online](https://newjersey.mylicense.com/). If your

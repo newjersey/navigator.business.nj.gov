@@ -24,7 +24,6 @@ export const fetchAnytimeActionByFilename = async (id: string): Promise<AnytimeA
           callToActionText: undefined,
           issuingAgency: undefined,
           name: "",
-          icon: "",
           filename: "",
           urlSlug: "",
           contentMd: "Content Not Found",

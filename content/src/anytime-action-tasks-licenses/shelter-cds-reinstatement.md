@@ -4,7 +4,6 @@ name: Reinstate Your Animal Shelter’s Controlled Dangerous Substances Registra
 industryIds:
   - petcare
 sectorIds: []
-icon: update-purple.svg
 urlSlug: shelter-cds-reinstatement
 summaryDescriptionMd: >-
   If your Controlled Dangerous Substances (CDS) registration expired less than

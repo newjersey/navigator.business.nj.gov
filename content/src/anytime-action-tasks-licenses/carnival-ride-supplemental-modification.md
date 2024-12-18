@@ -5,7 +5,6 @@ notesMd: "[Muni planning
 filename: carnival-ride-supplemental-modification
 name: Modify Your Carnival or Amusement Ride
 industryIds: []
-icon: file-purple.svg
 urlSlug: carnival-ride-supplemental-modification
 summaryDescriptionMd: If you want to make major changes to your `carnival or
   amusement ride|carnival-amusement-ride` , you need a `Supplemental

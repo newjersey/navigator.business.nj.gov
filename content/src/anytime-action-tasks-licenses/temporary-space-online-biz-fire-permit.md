@@ -10,7 +10,6 @@ name: Get a Fire Permit to Set Up Your Temporary Retail Space
 industryIds:
   - e-commerce
 sectorIds: []
-icon: file-purple.svg
 urlSlug: temporary-space-online-biz-fire-permit
 summaryDescriptionMd: >
   You may need a fire permit to sell goods or services from a temporary space,

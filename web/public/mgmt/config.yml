@@ -3749,15 +3749,6 @@ collections:
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
         options_length: 500
-      - label: "Icon"
-        name: icon
-        widget: "relation"
-        multiple: false
-        required: true
-        collection: "mappings"
-        search_fields: ["anytimeActionIcons.*.name"]
-        value_field: "anytimeActionIcons.*.filename"
-        display_fields: ["anytimeActionIcons.*.name"]
       - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "no-space", required: true }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown", required: true }
@@ -3813,15 +3804,6 @@ collections:
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
         options_length: 500
-      - label: "Icon"
-        name: icon
-        widget: "relation"
-        multiple: false
-        required: true
-        collection: "mappings"
-        search_fields: ["anytimeActionIcons.*.name"]
-        value_field: "anytimeActionIcons.*.filename"
-        display_fields: ["anytimeActionIcons.*.name"]
       - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "no-space", required: true }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown", required: true }
@@ -3877,15 +3859,6 @@ collections:
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
         options_length: 500
-      - label: "Icon"
-        name: icon
-        widget: "relation"
-        multiple: false
-        required: true
-        collection: "mappings"
-        search_fields: ["anytimeActionIcons.*.name"]
-        value_field: "anytimeActionIcons.*.filename"
-        display_fields: ["anytimeActionIcons.*.name"]
       - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "no-space", required: true }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown", required: true }
@@ -3914,15 +3887,6 @@ collections:
         }
       - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
       - { label: "Name/Title", name: "name", widget: "string" }
-      - label: "Icon"
-        name: icon
-        widget: "relation"
-        multiple: false
-        required: true
-        collection: "mappings"
-        search_fields: ["anytimeActionIcons.*.name"]
-        value_field: "anytimeActionIcons.*.filename"
-        display_fields: ["anytimeActionIcons.*.name"]
       - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "no-space", required: true }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Below License Status Content", name: "body", widget: "markdown", required: true }
@@ -3984,15 +3948,6 @@ collections:
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
         options_length: 500
-      - label: "Icon"
-        name: icon
-        widget: "relation"
-        multiple: false
-        required: true
-        collection: "mappings"
-        search_fields: ["anytimeActionIcons.*.name"]
-        value_field: "anytimeActionIcons.*.filename"
-        display_fields: ["anytimeActionIcons.*.name"]
       - { label: "External Link", name: "externalRoute", widget: "no-space", required: true }
 
   - name: "page-metadata"
@@ -4226,22 +4181,6 @@ collections:
       preview: false
     delete: false
     files:
-      - label: "Anytime Action Icons"
-        name: "anytimeActionIcons"
-        file: "content/src/mappings/anytimeActionIcons.json"
-        fields:
-          - label: Anytime Action Icons
-            name: anytimeActionIcons
-            widget: list
-            allow_add: false
-            summary: "{{name}}"
-            fields:
-              - label: Name
-                name: name
-                widget: string
-              - label: Filename
-                name: filename
-                widget: hidden
       - label: "Funding Agencies"
         name: "arrayOfFundingAgencies"
         file: "content/src/mappings/fundingAgency.json"

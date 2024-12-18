@@ -10,7 +10,6 @@ name: Register as a Short-term Rental, if Your Town Requires It
 industryIds: []
 sectorIds:
   - real-estate
-icon: file-purple.svg
 urlSlug: register-short-term-rental
 summaryDescriptionMd: >
   If you are renting out a residential property for 60 days or less, you may
