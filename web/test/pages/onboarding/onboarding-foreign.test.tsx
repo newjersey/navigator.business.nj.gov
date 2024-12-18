@@ -15,10 +15,10 @@ import {
   renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
-  OperatingPhaseId,
-  ProfileData,
   emptyIndustrySpecificData,
   generateProfileData,
+  OperatingPhaseId,
+  ProfileData,
 } from "@businessnjgovnavigator/shared/";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
@@ -313,17 +313,18 @@ describe("onboarding - foreign business", () => {
     });
 
     it("sets homeBasedBusiness to false if business is foreign nexus with location in NJ", async () => {
+      const initialIndustryId = randomHomeBasedIndustry();
       const userData = generateTestUserData({
         ...emptyIndustrySpecificData,
         businessPersona: "FOREIGN",
         foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
-        industryId: randomHomeBasedIndustry(),
+        industryId: initialIndustryId,
         homeBasedBusiness: true,
       });
       useMockRouter({ isReady: true, query: { page: "3" } });
       const { page } = renderPage({ userData });
       fireEvent.change(screen.getByLabelText("Industry"), {
-        target: { value: "acupuncture" },
+        target: { value: randomHomeBasedIndustry(initialIndustryId) },
       });
       fireEvent.click(screen.getByText("Acupuncture"));
       page.clickNext();
