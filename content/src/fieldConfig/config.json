@@ -225,6 +225,7 @@
     "requiredLabelText": "Required",
     "secondaryNavigationAriaLabel": "Previous Page Navigation",
     "continueButtonText": "Continue",
+    "saveAndContinueButtonText": "Save & Continue",
     "backButtonText": "Back",
     "backToRoadmapText": "Go Back",
     "issuingAgencyText": "Issuing Agency",
