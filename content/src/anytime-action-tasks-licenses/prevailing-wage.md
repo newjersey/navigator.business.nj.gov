@@ -3,7 +3,6 @@ notesMd: This is part of a multi-step task for the Government Contracting quick 
 filename: prevailing-wage
 name: prevailing-wage
 sectorIds: []
-icon: govt-purple.svg
 urlSlug: prevailing-wage
 summaryDescriptionMd: \
 ---

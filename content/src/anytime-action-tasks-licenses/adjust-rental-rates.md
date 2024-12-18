@@ -11,7 +11,6 @@ industryIds:
   - residential-landlord
 sectorIds:
   - real-estate
-icon: update-purple.svg
 urlSlug: adjust-rental-rates
 summaryDescriptionMd: Some towns in New Jersey have rent control laws that limit
   how much and how often landlords can increase rent.

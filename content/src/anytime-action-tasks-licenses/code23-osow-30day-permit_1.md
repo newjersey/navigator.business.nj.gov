@@ -14,7 +14,6 @@ sectorIds:
   - mining-quarrying-and-oil-and-gas-extraction
   - transportation-and-warehousing
   - manufacturing
-icon: govt-purple.svg
 urlSlug: code23-osow-30day-permit
 summaryDescriptionMd: >-
   You need a permit to transport overweight or oversized trailers, and very

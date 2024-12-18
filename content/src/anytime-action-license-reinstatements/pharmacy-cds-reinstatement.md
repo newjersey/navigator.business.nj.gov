@@ -7,7 +7,6 @@ notesMd: >-
   * 8.12: updated steps 1-3 per CDS SME
 filename: pharmacy-cds-reinstatement
 name: Reinstate Your Pharmacy’s Controlled Dangerous Substances Registration
-icon: update-purple.svg
 urlSlug: pharmacy-cds-reinstatement
 licenseName: ""
 issuingAgency: "Division of Consumer Affairs"

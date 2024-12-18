@@ -5,7 +5,6 @@ name: Reinstate Your Dog Trainer Controlled Dangerous Substances Registration
 industryIds:
   - petcare
 sectorIds: []
-icon: update-purple.svg
 urlSlug: trainer-cds-reinstatement
 summaryDescriptionMd: >-
   If your Controlled Dangerous Substances (CDS) registration expired less than

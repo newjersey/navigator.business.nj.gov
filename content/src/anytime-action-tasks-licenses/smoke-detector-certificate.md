@@ -11,7 +11,6 @@ name: Get a New Smoke Detector, Carbon Monoxide Detector, and Fire Extinguisher
 industryIds: []
 sectorIds:
   - real-estate
-icon: govt-purple.svg
 urlSlug: smoke-detector-certificate
 summaryDescriptionMd: >-
   You need a new certificate for each one- or two-family home you are renting

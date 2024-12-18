@@ -10,7 +10,6 @@ name: Register as a Landlord
 industryIds: []
 sectorIds:
   - real-estate
-icon: update-purple.svg
 urlSlug: landlord-registration-update
 summaryDescriptionMd: >-
   If you are renting out a one- or two-unit residential property, you must

@@ -1,7 +1,6 @@
 ---
 filename: massage-license-reinstatement
 name: Apply to Reinstate Your Massage and Bodywork Business License
-icon: update-purple.svg
 licenseName: Massage and Bodywork Therapy-Massage and Bodywork Employer
 urlSlug: massage-license-reinstatement
 issuingAgency: "Division of Consumer Affairs"

@@ -13,7 +13,6 @@ industryIds:
   - trucking
 sectorIds:
   - transportation-and-warehousing
-icon: file-purple.svg
 urlSlug: emergency-trip-permit
 summaryDescriptionMd: >-
   You need an emergency trip permit from the New Jersey Division of Alcoholic

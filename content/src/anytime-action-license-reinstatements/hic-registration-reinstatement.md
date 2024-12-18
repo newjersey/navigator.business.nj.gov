@@ -4,7 +4,6 @@ notesMd: "Draft:
   RE/edit"
 filename: hic-registration-reinstatement
 name: Apply to Reinstate Your Home Improvement Contractor Registration
-icon: update-purple.svg
 licenseName: Home Improvement Contractors-Home Improvement Contractor
 urlSlug: hic-registration-reinstatement
 issuingAgency: "Division of Consumer Affairs"

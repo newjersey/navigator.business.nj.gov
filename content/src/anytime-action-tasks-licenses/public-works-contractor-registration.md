@@ -3,7 +3,6 @@ notesMd: ""
 filename: public-works-contractor-registration
 name: public-works-contractor-registration
 sectorIds: []
-icon: file-purple.svg
 urlSlug: public-works-contractor-registration
 summaryDescriptionMd: >-
   ## Register Your Business as a Public Works Contractor

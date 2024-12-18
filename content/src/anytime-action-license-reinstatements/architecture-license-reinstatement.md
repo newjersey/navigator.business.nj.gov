@@ -5,7 +5,6 @@ filename: architecture-license-reinstatement
 licenseName: ""
 issuingAgency: "Division of Consumer Affairs"
 name: Apply to Reinstate Your Architecture License
-icon: update-purple.svg
 urlSlug: architecture-license-reinstatement
 summaryDescriptionMd: >-
   You need to submit a reinstatement application if:

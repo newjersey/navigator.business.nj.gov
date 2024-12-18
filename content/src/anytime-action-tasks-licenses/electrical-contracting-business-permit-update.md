@@ -4,7 +4,6 @@ name: Update Your Electrical Contracting Business Permit
 industryIds:
   - electrical-contractor
 sectorIds: []
-icon: update-purple.svg
 urlSlug: electrical-contracting-business-permit-update
 summaryDescriptionMd: >-
   You need to update your electrical contracting business permit if you are

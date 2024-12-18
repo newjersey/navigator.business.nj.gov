@@ -12,7 +12,6 @@ industryIds:
 sectorIds:
   - construction
   - professional-scientific-and-technical-services
-icon: file-purple.svg
 urlSlug: hot-work-fire-permit
 summaryDescriptionMd: >-
   You may need a fire permit to perform hot work such as:

@@ -5,7 +5,6 @@ notesMd: "Working doc:
 filename: funeral-reinstatement
 licenseName: ""
 name: " Reinstate Your Funeral Home’s Certificate of Registration "
-icon: update-purple.svg
 urlSlug: funeral-reinstatement
 summaryDescriptionMd: If your certificate of registration expired less than 30
   days ago, [you can renew online](https://newjersey.mylicense.com/). If your
@@ -15,27 +14,28 @@ issuingAgency: Division of Consumer Affairs
 callToActionText: Reinstate My Certificate of Registration
 callToActionLink: https://www.njconsumeraffairs.gov/mor/Pages/applications.aspx
 ---
+
 ## Application Requirements
 
-*  `Business structure|business-structure-learn-more` 
-* Date of last renewal 
-* Manager’s license number, or the license number of the licensee-in-charge
-* Documentation of any changes to the funeral home’s manager or licensee-in-charge, if applicable
-* A letter from the new funeral home manager stating they accept their position as manager, if applicable 
-* Documentation of any change of ownership, including a copy of the `Certificate of Formation (or Certificate of Incorporation),|certificate-formation` if applicable
-* Full name and home address of each new owner, if applicable
-* Additional funeral home name(s), address(es), and license number(s), if managing more than 1 funeral home
-* Details of any license denial, revocation, suspension, or surrender since last renewal, if applicable
-* Details of any criminal history since last renewal, if applicable 
-* Applicable fees paid
+- `Business structure|business-structure-learn-more`
+- Date of last renewal
+- Manager’s license number, or the license number of the licensee-in-charge
+- Documentation of any changes to the funeral home’s manager or licensee-in-charge, if applicable
+- A letter from the new funeral home manager stating they accept their position as manager, if applicable
+- Documentation of any change of ownership, including a copy of the `Certificate of Formation (or Certificate of Incorporation),|certificate-formation` if applicable
+- Full name and home address of each new owner, if applicable
+- Additional funeral home name(s), address(es), and license number(s), if managing more than 1 funeral home
+- Details of any license denial, revocation, suspension, or surrender since last renewal, if applicable
+- Details of any criminal history since last renewal, if applicable
+- Applicable fees paid
 
 Your application must be signed in front of and by a notary public.
 
-Mail your completed application and any fees to: 
+Mail your completed application and any fees to:
 
 State Board of Mortuary Science of New Jersey
 
-P.O. Box 45009 
+P.O. Box 45009
 
 Newark, NJ 07101
 

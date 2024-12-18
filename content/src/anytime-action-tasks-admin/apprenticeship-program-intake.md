@@ -4,7 +4,6 @@ filename: apprenticeship-program-intake
 name: apprenticeship-program-intake
 industryIds: []
 sectorIds: []
-icon: govt-purple.svg
 urlSlug: apprenticeship-program-intake
 summaryDescriptionMd: You can start a registered apprenticeship program within
   your business through the U.S. Department of Labor (USDOL). An apprenticeship

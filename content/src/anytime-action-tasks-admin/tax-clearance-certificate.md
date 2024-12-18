@@ -8,7 +8,6 @@ name: Obtain a Tax Clearance Certificate
 applyToAllUsers: true
 industryIds: []
 sectorIds: []
-icon: file-purple.svg
 urlSlug: tax-clearance-certificate-apply
 summaryDescriptionMd: >
   If you are interested in receiving New Jersey state grants, incentives, and

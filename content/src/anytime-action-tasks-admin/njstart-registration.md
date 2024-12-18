@@ -3,7 +3,6 @@ notesMd: ""
 filename: njstart-registration
 name: njstart-registration
 sectorIds: []
-icon: file-purple.svg
 urlSlug: njstart-registration
 summaryDescriptionMd: >-
   ## Register Your Business with NJSTART

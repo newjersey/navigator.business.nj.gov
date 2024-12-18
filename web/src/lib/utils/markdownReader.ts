@@ -202,7 +202,6 @@ type LicenseGrayMatter = {
 
 type AnytimeActionLinkGrayMatter = {
   name: string;
-  icon: string;
   externalRoute: string;
   industryIds: string[];
   sectorIds: string[];
@@ -215,7 +214,6 @@ type AnytimeActionTaskGrayMatter = {
   callToActionLink: string;
   callToActionText: string;
   issuingAgency?: string;
-  icon: string;
   industryIds: string[];
   sectorIds: string[];
   applyToAllUsers: boolean;
@@ -228,7 +226,6 @@ type AnytimeActionLicenseReinsatementGrayMatter = {
   callToActionLink: string;
   callToActionText: string;
   issuingAgency: string;
-  icon: string;
   licenseName: LicenseName;
   summaryDescriptionMd: string;
 };

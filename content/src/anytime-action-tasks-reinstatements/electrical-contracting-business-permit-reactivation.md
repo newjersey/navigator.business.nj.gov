@@ -3,7 +3,6 @@ filename: electrical-contracting-business-permit-reactivation
 name: Reactivate Your Electrical Contracting Business Permit
 industryIds: []
 sectorIds: []
-icon: loop.svg
 urlSlug: electrical-contracting-business-permit-reactivation
 summaryDescriptionMd: You need to reactivate your electrical contracting
   business permit if it has been expired for less than three years with no
