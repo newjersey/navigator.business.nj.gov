@@ -514,7 +514,6 @@ export const randomHomeBasedIndustry = (excludeIndustryId?: string): string => {
 
 export const randomNonHomeBasedIndustry = (excludeIndustryId?: string): string => {
   const filter = (it: Industry): boolean => {
-    return !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation && it.isEnabled;
     const filterCriteria =
       !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation && it.isEnabled;
 
