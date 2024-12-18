@@ -93,7 +93,7 @@ export const DynamoUserDataClient = (
       .then(async (result) => {
         if (!result.Item) {
           logger.LogInfo(`User with ID ${userId} not found in table ${tableName}`);
-          throw new Error("Not Found");
+          throw new Error("Not found");
         }
         return await doMigration(result.Item.data);
       })
