@@ -33,7 +33,7 @@ describe("DynamoUserDataClient", () => {
 
   it("should throw an error when attempting to retrieve a non-existent user by ID", async () => {
     const randomUserId = `user-id-${randomInt()}`;
-    await expect(dynamoUserDataClient.get(randomUserId)).rejects.toEqual(new Error("Not Found"));
+    await expect(dynamoUserDataClient.get(randomUserId)).rejects.toEqual(new Error("Not found"));
   });
 
   it("gets inserted items", async () => {

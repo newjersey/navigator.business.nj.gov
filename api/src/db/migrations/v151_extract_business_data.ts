@@ -1,4 +1,8 @@
-import { v150Business, v150UserData } from "@db/migrations/v150_remove_needs_nexus_dba_name";
+import {
+  v150Business,
+  v150BusinessUser,
+  v150UserData,
+} from "@db/migrations/v150_remove_needs_nexus_dba_name";
 import { randomInt } from "@shared/intHelpers";
 
 export const migrate_v150_to_v151 = (v150Data: v150UserData): v151UserData => {
@@ -7,17 +11,21 @@ export const migrate_v150_to_v151 = (v150Data: v150UserData): v151UserData => {
     businesses: Object.fromEntries(
       Object.entries(v150Data.businesses).map(([id, business]) => [
         id,
-        migrate_v150Business_to_v151Business(business),
+        migrate_v150Business_to_v151Business(business, v150Data.user),
       ])
     ),
     version: 151,
   } as v151UserData;
 };
 
-export const migrate_v150Business_to_v151Business = (business: v150Business): v151Business => {
+export const migrate_v150Business_to_v151Business = (
+  business: v150Business,
+  user: v150BusinessUser
+): v151Business => {
   return {
     ...business,
     version: 151,
+    userId: user.id,
   } as v151Business;
 };
 
@@ -80,6 +88,7 @@ export interface v151Business {
   formationData: v151FormationData;
   environmentData: v151EnvironmentData | undefined;
   version: number;
+  userId: string;
 }
 
 export interface v151ProfileData extends v151IndustrySpecificData {
@@ -605,6 +614,7 @@ export const generatev151BusinessUser = (overrides: Partial<v151BusinessUser>): 
 
 export const generatev151Business = (overrides: Partial<v151Business>): v151Business => {
   const profileData = generatev151ProfileData({});
+  const user = generatev151BusinessUser({});
   return {
     id: `some-id-${randomInt()}`,
     dateCreatedISO: "",
@@ -623,6 +633,7 @@ export const generatev151Business = (overrides: Partial<v151Business>): v151Busi
     licenseData: undefined,
     taxFilingData: generatev151TaxFilingData({}),
     environmentData: undefined,
+    userId: user.id,
     ...overrides,
   };
 };

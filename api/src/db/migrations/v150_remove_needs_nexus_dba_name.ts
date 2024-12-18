@@ -117,7 +117,7 @@ export type v150CommunityAffairsAddress = {
   municipality: v150Municipality;
 };
 
-type v150BusinessUser = {
+export type v150BusinessUser = {
   name?: string;
   email: string;
   id: string;
