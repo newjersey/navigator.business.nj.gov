@@ -204,6 +204,20 @@
   "fundingDefaults": {
     "issuingAgencyText": "Issuing Agency"
   },
+  "taxClearanceCertificateTask": {
+    "reviewSectionMainHeaderText": "Check Eligibility",
+    "reviewSectionSecondSectionHeaderText": "Business Information",
+    "taxCertificateAgencyLabel": "What agency is requesting the Tax Clearance Certificate?",
+    "reviewSectionAddressLabel": "Address",
+    "certificationReasonLabel": "Reason for Certification",
+    "businessNameLabel": "Business Name",
+    "addressLine1Label": "Address Line 1",
+    "addressLine2Label": "Address Line 2",
+    "entityIdLabel": "Entity ID",
+    "entityIdSubLabel": "(Corporate Number)",
+    "taxIdLabel": "NJ State Tax ID",
+    "taxPinLabel":"Tax"
+  },
   "taskProgress": {
     "NOT_STARTED": "Not started",
     "IN_PROGRESS": "In progress",
@@ -225,6 +239,7 @@
     "requiredLabelText": "Required",
     "secondaryNavigationAriaLabel": "Previous Page Navigation",
     "continueButtonText": "Continue",
+    "saveAndContinueButtonText": "Save & Continue",
     "backButtonText": "Back",
     "backToRoadmapText": "Go Back",
     "issuingAgencyText": "Issuing Agency",

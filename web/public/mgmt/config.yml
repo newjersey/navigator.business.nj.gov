@@ -4372,7 +4372,24 @@ collections:
             summary: "{{fundingDefaults}}"
             fields:
               - { label: Issuing Agency Label, name: issuingAgencyText, widget: string }
-
+          - label: Tax Clearance Certificate
+            name: taxClearanceCertificateTask
+            collapsed: true
+            widget: object
+            summary: "{{taxClearanceCertificateTask}}"
+            fields:
+              - { label: Review Section Header Text, name: reviewSectionMainHeaderText, widget: string }
+              - { label: Review Section First Section Header Text, name: reviewSectionFirstSectionHeaderText, widget: string }
+              - { label: Review Section Second Section Header Text, name: reviewSectionSecondSectionHeaderText, widget: string }
+              - { label: Tax Certificate Agency, name: taxCertificateAgencyLabel, widget: string }
+              - { label: Address Review Label, name: reviewSectionAddressLabel, widget: string }
+              - { label: Business Name Label, name: businessNameLabel, widget: string }
+              - { label: Entity Id Label, name: entityIdLabel, widget: string }
+              - { label: Entity Id Sub Label, name: entityIdSubLabel, widget: string }
+              - { label: Address Line 1 Label, name: addressLine1Label, widget: string }
+              - { label: Address Line 2 Label, name: addressLine2Label, widget: string }
+              - { label: Tax Id Label, name: taxIdLabel, widget: string }
+              - { label: Tax Pin Label, name: taxPinLabel, widget: string }
           - label: Landing Page
             name: landingPage
             collapsed: true
