@@ -28,8 +28,8 @@ icon: govt-purple.svg
 ## Application Requirements
 ### Trip Information
 * Travel start date
-* Vehicle type (power unit with 1 trailer)
-* Truck plate/license number and state
+* Vehicle type
+* Truck plate/license number and state, if applicable
 * Trailer plate/license number and state
 * Load description
 * Load quantity
