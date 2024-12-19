@@ -34,6 +34,7 @@ icon: govt-purple.svg
 ## Application Requirements
 - Travel start date
 - Number of permits you are applying for (1-99)
+- Applicable fees paid
 
 
 :::callout{ showHeader="true" headerText="What if I don't get this permit?" showIcon="false" calloutType="warning" }
