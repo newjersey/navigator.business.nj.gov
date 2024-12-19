@@ -43,6 +43,6 @@ Without a permit, you cannot transport an ocean container on public roads. You m
 
 
 :::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
-- An Ocean Borne Container Permit, valid for 1 year
-- A permit sent to your mailing address
+*  An Ocean Borne Container Permit, valid for 1 year
+*  A permit sent to your mailing address
 :::
