@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
+import * as prod from "react/jsx-runtime";
 import rehypeReact from "rehype-react";
 import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
@@ -19,13 +20,17 @@ export const PureMarkdownContent = (props: Props): ReactElement<any> => {
     .use(remarkGfm)
     .use(remarkDirective)
     .use(customRemarkPlugin)
-    .use(remarkRehype)
-    .use(rehypeReact, {
-      createElement: React.createElement,
-      Fragment: React.Fragment,
-      components: props.components,
-    })
-    .processSync(props.children).result;
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(
+      rehypeReact as any,
+      {
+        Fragment: prod.Fragment,
+        jsx: prod.jsx,
+        jsxs: prod.jsxs,
+        components: props.components,
+      } as any
+    )
+    .processSync(props.children).result as any;
   return <>{markdown}</>;
 };
 

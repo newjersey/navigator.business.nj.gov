@@ -1,4 +1,4 @@
-import { ReactElement } from "rehype-react/lib";
+import type { ReactElement } from "react";
 
 export const NavBarVerticalLineDivider = (): ReactElement<any> => {
   return <div className="margin-right-3 text-base-lighter font-body-lg">|</div>;
