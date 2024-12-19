@@ -26,6 +26,7 @@ import React, { ReactElement, useEffect, useRef, useState } from "react";
 interface Props {
   previousBusinessId?: string | undefined;
   isLanding: boolean | undefined;
+  isLoginPage?: boolean;
   isSeoStarterKit?: boolean;
   logoOnlyType?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
   currentlyOnboarding: boolean | undefined;
@@ -68,6 +69,12 @@ export const NavBarDesktop = (props: Props): ReactElement => {
   if (props.logoOnlyType) {
     // loading/redirect/ethan onboarding
     return <NavBarLogoOnlyDesktop logoType={props.logoOnlyType} />;
+  } else if (props.isLoginPage) {
+    return (
+      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
+        <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} isLoginPage />
+      </NavBarDesktopWrapper>
+    );
   } else if (props.isSeoStarterKit) {
     // starter kits page for SEO
     return (
@@ -107,7 +114,6 @@ export const NavBarDesktop = (props: Props): ReactElement => {
       <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
         <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
         <div className={"display-flex flex-row flex-align-center"}>
-          <NavBarLoginButton />
           <NavBarDesktopDropDown
             disabled={true}
             anchorRef={anchorRef}

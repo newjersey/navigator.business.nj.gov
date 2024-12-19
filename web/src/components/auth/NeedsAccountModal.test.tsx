@@ -1,7 +1,6 @@
 import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import * as session from "@/lib/auth/sessionHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
@@ -14,9 +13,6 @@ const Config = getMergedConfig();
 jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
-
-const mockSession = session as jest.Mocked<typeof session>;
 
 describe("<NeedsAccount Modal />", () => {
   beforeEach(() => {
@@ -72,6 +68,6 @@ describe("<NeedsAccount Modal />", () => {
   it("goes to myNJ when Log-in link is clicked", () => {
     setupHookWithAuth(IsAuthenticated.FALSE);
     fireEvent.click(screen.getByText(markdownToText(Config.selfRegistration.needsAccountModalSubText)));
-    expect(mockSession.triggerSignIn).toHaveBeenCalled();
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.login);
   });
 });
