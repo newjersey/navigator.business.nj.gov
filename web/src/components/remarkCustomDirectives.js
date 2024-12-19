@@ -1,9 +1,8 @@
-import type { Plugin } from "unified";
 import { visit } from "unist-util-visit";
 
-export const remarkCustomDirectives: Plugin = () => {
+export const remarkCustomDirectives = () => {
   return (tree) => {
-    visit(tree, (node: any) => {
+    visit(tree, (node) => {
       if (node.type === "containerDirective") {
         const data = node.data || (node.data = {});
         data.hName = node.name;
@@ -15,7 +14,10 @@ export const remarkCustomDirectives: Plugin = () => {
             break;
           case "callout":
             data.hProperties = {
-              headerText: node.attributes.headerText?.length > 0 ? node.attributes.headerText : undefined,
+              headerText:
+                node.attributes.headerText && node.attributes.headerText.length > 0
+                  ? node.attributes.headerText
+                  : undefined,
               showHeader: node.attributes.showHeader === "true",
               showIcon: node.attributes.showIcon === "true",
               calloutType: node.attributes.calloutType,

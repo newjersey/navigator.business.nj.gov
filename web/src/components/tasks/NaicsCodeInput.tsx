@@ -1,6 +1,7 @@
-import { Content, ExternalLink } from "@/components/Content";
+import { Content } from "@/components/Content";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { GenericTextField } from "@/components/GenericTextField";
+import { ExternalLink } from "@/components/MdxProvider";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { WithErrorBar } from "@/components/WithErrorBar";

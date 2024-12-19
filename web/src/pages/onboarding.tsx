@@ -24,13 +24,13 @@ import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import {
+  createProfileFieldErrorMap,
   FlowType,
   OnboardingErrors,
   OnboardingStatus,
   Page,
   ProfileError,
   UpdateQueue,
-  createProfileFieldErrorMap,
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
@@ -38,7 +38,7 @@ import {
   setAnalyticsDimensions,
   setRegistrationDimension,
 } from "@/lib/utils/analytics-helpers";
-import { OnboardingStatusLookup, getFlow, scrollToTop } from "@/lib/utils/helpers";
+import { getFlow, OnboardingStatusLookup, scrollToTop } from "@/lib/utils/helpers";
 import {
   evalHeaderStepsTemplate,
   flowQueryParamIsValid,
@@ -50,14 +50,14 @@ import {
 } from "@/lib/utils/onboardingPageHelpers";
 import { determineForeignBusinessType } from "@businessnjgovnavigator/shared";
 import {
+  createEmptyProfileData,
+  createEmptyUserData,
   LookupMunicipalityByName,
   Municipality,
   OperatingPhaseId,
   ProfileData,
   TaskProgress,
   UserData,
-  createEmptyProfileData,
-  createEmptyUserData,
 } from "@businessnjgovnavigator/shared/";
 import { createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
 import { isRemoteWorkerOrSellerBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
@@ -462,7 +462,7 @@ const OnboardingPage = (props: Props): ReactElement<any> => {
     );
   };
   return (
-    (<MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
+    <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
       <ProfileFormContext.Provider value={formContextState}>
         <ProfileDataContext.Provider
           value={{
@@ -502,10 +502,8 @@ const OnboardingPage = (props: Props): ReactElement<any> => {
                     <>
                       {OnboardingStatusLookup()[alert].body}
                       {OnboardingStatusLookup()[alert] && (
-                        <Link href={ROUTES.dashboard} data-testid={`snackbar-link`}>
-
-                          {OnboardingStatusLookup()[alert].link}
-
+                        <Link href={ROUTES.dashboard} data-testid={`snackbar-link`} legacyBehavior>
+                          <span>{OnboardingStatusLookup()[alert].link}</span>
                         </Link>
                       )}
                     </>
@@ -547,7 +545,7 @@ const OnboardingPage = (props: Props): ReactElement<any> => {
           </PageSkeleton>
         </ProfileDataContext.Provider>
       </ProfileFormContext.Provider>
-    </MunicipalitiesContext.Provider>)
+    </MunicipalitiesContext.Provider>
   );
 };
 

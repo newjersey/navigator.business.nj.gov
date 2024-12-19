@@ -22,37 +22,39 @@ export const CalendarEventItem = (props: Props): ReactElement<any> => {
 
   if (props.index !== undefined) {
     return (
-      (<div className={`margin-bottom-05 ${props.index === 0 ? "margin-top-05" : ""}`}>
+      <div className={`margin-bottom-05 ${props.index === 0 ? "margin-top-05" : ""}`}>
         <Link
           href={props.urlSlug}
           passHref
           onClick={onClick}
-          data-testid="calendar-event-anchor">
-
-          {props.title}
-
+          data-testid="calendar-event-anchor"
+          legacyBehavior
+        >
+          <span>{props.title}</span>
         </Link>
-      </div>)
+      </div>
     );
   }
 
   return (
-    (<div className="line-height-1 margin-bottom-1">
+    <div className="line-height-1 margin-bottom-1">
       <Tag backgroundColor="accent-warm-extra-light" isHover isRadiusMd isWrappingText>
         <Link
           href={props.urlSlug}
           data-testid="calendar-event-anchor"
           onClick={onClick}
-          className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline">
-
-          <span className="text-bold text-uppercase text-base-dark">
-            {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
-            {parseDateWithFormat(props.dueDate, defaultDateFormat).format("M/D")}
-          </span>{" "}
-          <span className="text-no-uppercase text-underline text-base-dark">{props.title}</span>
-
+          className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline"
+          legacyBehavior
+        >
+          <span>
+            <span className="text-bold text-uppercase text-base-dark">
+              {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
+              {parseDateWithFormat(props.dueDate, defaultDateFormat).format("M/D")}
+            </span>{" "}
+            <span className="text-no-uppercase text-underline text-base-dark">{props.title}</span>
+          </span>
         </Link>
       </Tag>
-    </div>)
+    </div>
   );
 };

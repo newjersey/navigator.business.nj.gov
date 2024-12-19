@@ -31,7 +31,7 @@ export const Task = (props: Props): ReactElement<any> => {
   };
 
   return (
-    (<li className="margin-0">
+    <li className="margin-0">
       <div
         className={`line-height-sans-2 flex flex-align-start ${
           isTabletAndUp ? "margin-bottom-2" : "margin-bottom-1"
@@ -49,10 +49,10 @@ export const Task = (props: Props): ReactElement<any> => {
             onClick={(): void => analytics.event.roadmap_task_title.click.go_to_task(props.task.urlSlug)}
             className={`usa-link margin-right-105 ${props.task.required ? "text-bold" : ""}`}
             data-task={props.task.id}
-            data-testid={props.task.id}>
-
-            {props.task.name}
-
+            data-testid={props.task.id}
+            legacyBehavior
+          >
+            <span>{props.task.name}</span>
           </Link>
 
           {isTabletAndUp && renderRequiredLabel()}
@@ -63,6 +63,6 @@ export const Task = (props: Props): ReactElement<any> => {
           {TaskProgressTagLookup[taskProgress]} <span className="margin-left-1">{renderRequiredLabel()}</span>
         </div>
       )}
-    </li>)
+    </li>
   );
 };
