@@ -1,5 +1,4 @@
 ---
-filename: fire-safety-key-box
 displayname: fire-safety-key-box
 urlSlug: fire-safety-key-box
 name: Install a Key Box, If Required for Your Site

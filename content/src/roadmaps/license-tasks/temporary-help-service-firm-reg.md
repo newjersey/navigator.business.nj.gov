@@ -1,6 +1,5 @@
 ---
 id: temporary-help-service-firm-reg
-filename: temporary-help-service-firm-reg
 displayname: temporary-help-service-firm-reg
 urlSlug: temporary-help-service-firm-reg
 name: "Register Your Temporary Help Service Firm"

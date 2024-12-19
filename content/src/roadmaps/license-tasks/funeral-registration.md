@@ -14,7 +14,7 @@ divisionPhone: (973) 504-6425
 industryId: funeral
 licenseCertificationClassification: undefined
 summaryDescriptionMd: >-
-  You need a Certificate of Registration to have and operate a funeral home or mortuary establishment in New Jersey. If you have a chapel, preparation room, or any other facility at a different address, it needs a separate Certificate of Registration. 
+  You need a Certificate of Registration to have and operate a funeral home or mortuary establishment in New Jersey. If you have a chapel, preparation room, or any other facility at a different address, it needs a separate Certificate of Registration.
 
 
   If you are applying in an even-numbered year (for example, 2024 or 2026), use the first-year application. If you are applying in an odd-numbered year (for example, 2025 or 2027), use the second-year application."

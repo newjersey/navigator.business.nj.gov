@@ -1,6 +1,5 @@
 ---
 id: job-listing-service-reg
-filename: job-listing-service-reg
 displayname: job-listing-service-reg
 urlSlug: job-listing-service-reg
 name: "Register Your Job Listing Service"

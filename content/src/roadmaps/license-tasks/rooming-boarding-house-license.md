@@ -1,7 +1,6 @@
 ---
 licenseName: ""
 id: rooming-boarding-house-license
-filename: rooming-boarding-house-license
 displayname: rooming-boarding-house-license
 urlSlug: rooming-boarding-house-license
 name: Apply for Your Rooming or Boarding House License

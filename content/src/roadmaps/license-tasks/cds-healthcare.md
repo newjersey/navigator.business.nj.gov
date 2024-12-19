@@ -1,6 +1,5 @@
 ---
 id: cds-healthcare
-filename: cds-healthcare
 displayname: healthcare-cds
 urlSlug: healthcare-cds
 name: Apply for Your Controlled Dangerous Substances Registration, if Applicable

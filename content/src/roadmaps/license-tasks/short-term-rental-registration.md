@@ -1,6 +1,5 @@
 ---
 id: short-term-rental-registration
-filename: short-term-rental-registration
 displayname: short-term-rental-registration
 urlSlug: short-term-rental-registration
 name: Register as a Short-Term Rental, if Your Town Requires It

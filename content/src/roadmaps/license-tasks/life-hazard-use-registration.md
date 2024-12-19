@@ -1,5 +1,4 @@
 ---
-filename: life-hazard-use-registration
 displayname: life-hazard-use-registration
 urlSlug: life-hazard-use-registration
 name: Complete Your Life Hazard Use Registration

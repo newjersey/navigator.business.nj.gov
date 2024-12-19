@@ -1,6 +1,5 @@
 ---
 id: bus-inspection
-filename: bus-inspection
 displayname: bus-inspection
 urlSlug: bus-inspection
 name: Inspect and Register Your Vehicles
