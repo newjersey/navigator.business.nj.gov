@@ -1,6 +1,5 @@
 ---
 slug: controlling-person
-filename: controlling-person
 displayname: controlling-person
 header: Controlling Person
 ---

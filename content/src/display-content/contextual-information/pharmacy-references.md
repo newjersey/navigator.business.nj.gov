@@ -1,6 +1,5 @@
 ---
 slug: pharmacy-references
-filename: pharmacy-references
 displayname: pharmacy-references
 header: Required Pharmacy Equipment and References
 ---

@@ -1,6 +1,5 @@
 ---
 slug: njstart
-filename: njstart
 displayname: njstart
 header: NJStart
 ---

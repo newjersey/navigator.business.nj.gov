@@ -1,6 +1,5 @@
 ---
 slug: women
-filename: women
 displayname: women
 header: Women
 ---

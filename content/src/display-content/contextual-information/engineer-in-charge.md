@@ -1,6 +1,5 @@
 ---
 slug: engineer-in-charge
-filename: engineer-in-charge
 displayname: engineer-in-charge
 header: Engineer-in-Charge
 ---

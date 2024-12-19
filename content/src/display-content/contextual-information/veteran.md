@@ -1,6 +1,5 @@
 ---
 slug: veteran
-filename: veteran
 displayname: veteran
 header: Veteran
 ---

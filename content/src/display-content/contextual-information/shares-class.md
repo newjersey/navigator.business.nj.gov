@@ -1,6 +1,5 @@
 ---
 slug: shares-class
-filename: shares-class
 displayname: shares-class
 header: Class of Shares
 ---

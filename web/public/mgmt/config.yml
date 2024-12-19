@@ -5979,7 +5979,7 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Header", name: "header", widget: "string" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "write-once-read-only-no-space", required: true }
+      - { label: "Id", name: "slug", widget: "write-once-read-only-no-space", required: true }
       - { label: "Display Name", name: "displayname", widget: "no-space" }
 
   - name: "page-not-found-error"

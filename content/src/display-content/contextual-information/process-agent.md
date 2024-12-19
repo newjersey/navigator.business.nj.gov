@@ -1,6 +1,5 @@
 ---
 slug: process-agent
-filename: process-agent
 displayname: process-agent
 header: Process Agent
 ---

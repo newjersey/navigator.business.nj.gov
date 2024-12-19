@@ -1,6 +1,5 @@
 ---
 slug: general-partner
-filename: general-partner
 displayname: general-partner
 header: General Partner
 ---

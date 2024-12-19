@@ -1,6 +1,5 @@
 ---
 slug: logisticare
-filename: logisticare
 displayname: logisticare
 header: Logisticare
 ---
