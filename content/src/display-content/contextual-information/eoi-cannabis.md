@@ -1,6 +1,5 @@
 ---
 slug: eoi-cannabis
-filename: eoi-cannabis
 displayname: eoi-cannabis
 header: Entity of Interest
 ---

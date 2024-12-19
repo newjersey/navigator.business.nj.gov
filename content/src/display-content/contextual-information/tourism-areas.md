@@ -1,6 +1,5 @@
 ---
 slug: tourism-areas
-filename: tourism-areas
 displayname: tourism-areas
 header: Tourism Areas
 ---

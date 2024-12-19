@@ -1,6 +1,5 @@
 ---
 slug: construction-permits
-filename: construction-permits
 displayname: construction-permits
 header: Construction Permits
 ---

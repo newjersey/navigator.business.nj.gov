@@ -1,6 +1,5 @@
 ---
 slug: identogo
-filename: identogo
 displayname: identogo
 header: IdentoGo
 ---

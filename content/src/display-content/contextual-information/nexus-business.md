@@ -1,6 +1,5 @@
 ---
 slug: nexus-business
-filename: nexus-business
 header: Nexus Business - Operations in New Jersey
 displayname: nexus-business
 ---

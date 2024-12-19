@@ -1,6 +1,5 @@
 ---
 slug: compost-waste
-filename: compost-waste
 header: Compost Waste
 displayname: Compost Waste
 ---

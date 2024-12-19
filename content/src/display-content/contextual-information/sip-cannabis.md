@@ -1,6 +1,5 @@
 ---
 slug: sip-cannabis
-filename: sip-cannabis
 displayname: sip-cannabis
 header: Significantly Involved Person
 ---

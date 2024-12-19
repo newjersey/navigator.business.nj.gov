@@ -1,6 +1,5 @@
 ---
 slug: allied-professionals
-filename: allied-professionals
 displayname: allied-professionals
 header: Closely Allied Professionals
 ---

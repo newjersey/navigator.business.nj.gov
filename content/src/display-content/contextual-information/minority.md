@@ -1,6 +1,5 @@
 ---
 slug: minority
-filename: minority
 displayname: minority
 header: Minority
 ---

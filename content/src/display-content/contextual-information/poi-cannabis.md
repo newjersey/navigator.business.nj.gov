@@ -1,6 +1,5 @@
 ---
 slug: poi-cannabis
-filename: poi-cannabis
 displayname: poi-cannabis
 header: Person of Interest
 ---

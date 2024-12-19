@@ -1,6 +1,5 @@
 ---
 slug: compliance-officer
-filename: compliance-officer
 displayname: compliance-officer
 header: Compliance Officer
 ---

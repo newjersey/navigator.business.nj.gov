@@ -1,6 +1,5 @@
 ---
 slug: nccaom
-filename: nccaom
 displayname: nccaom
 header: NCCAOM
 ---
