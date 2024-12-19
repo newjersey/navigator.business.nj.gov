@@ -11,7 +11,7 @@ interface Props {
   isDividerDisabled?: boolean;
 }
 
-export const CheckWasteResultsAccordion = (props: Props): ReactElement => {
+export const ResultsSectionAccordion = (props: Props): ReactElement => {
   const dropdownIconClasses = props.mini
     ? "usa-icon--size-5 text-base-light"
     : "usa-icon--size-5 margin-left-1";
