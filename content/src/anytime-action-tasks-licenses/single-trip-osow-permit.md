@@ -3,7 +3,6 @@ filename: single-trip-osow-permit
 name: Apply for Your Single Trip OS/OW Permit (5-day), if Applicable
 industryIds: []
 sectorIds: []
-icon: govt-purple.svg
 urlSlug: single-trip-osow-permit
 summaryDescriptionMd: >
   You must get a permit for each trip to transport overweight or oversized
@@ -20,6 +19,7 @@ summaryDescriptionMd: >
 issuingAgency: NJ Department of Transportation
 callToActionText: Apply for My Single Trip OS/OW Permit
 callToActionLink: https://nj.gotpermits.com/njpass#!
+icon: govt-purple.svg
 ---
 ## Eligibility Criteria
 * An active overweight/overdimensional (Code 23) trailer registration. You can get this at a [NJ Motor Vehicle Commission (MVC) licensing center](https://www.nj.gov/mvc/locations/facilitylocations.htm)
@@ -54,7 +54,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 If you don’t get this permit and your combination vehicle, trailer, and load meet the Single Trip OS/OW Permit (5-day) requirements, you may face fines.
 :::
 :::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
-* A 5-day single trip permit for an overweight, oversized vehicle using a Code 23 trailer
+* A 5-day single trip permit for an overweight, oversized vehicle using a Single Trip OS/OW Permit (5-day)
 * A permit that you will get by email, fax, or from the "My Queue" page on your NJDOT GotPermits profile
 :::
 
