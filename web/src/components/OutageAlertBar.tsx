@@ -5,7 +5,7 @@ import { useMountEffect } from "@/lib/utils/helpers";
 import axios from "axios";
 import { ReactElement, useContext, useState } from "react";
 
-export const OutageAlertBar = (): ReactElement => {
+export const OutageAlertBar = (): ReactElement<any> => {
   const { state } = useContext(AuthContext);
 
   const [outageConfig, setOutageConfig] = useState<OutageConfig>({

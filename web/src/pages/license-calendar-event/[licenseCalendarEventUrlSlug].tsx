@@ -18,7 +18,7 @@ interface Props {
   licenseEventType: LicenseEventSubtype;
 }
 
-const LicenseCalendarEventPage = (props: Props): ReactElement => {
+const LicenseCalendarEventPage = (props: Props): ReactElement<any> => {
   const licenseName = props.license.licenseName;
 
   return (

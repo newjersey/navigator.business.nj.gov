@@ -10,7 +10,7 @@ import { templateEval } from "@/lib/utils/helpers";
 import { generateTask } from "@/test/factories";
 import { ReactElement } from "react";
 
-const CannabisPriorityStatusPreview = (props: PreviewProps): ReactElement => {
+const CannabisPriorityStatusPreview = (props: PreviewProps): ReactElement<any> => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

@@ -30,7 +30,7 @@ interface Props {
 
 const NUM_OF_FILINGS_ALWAYS_VIEWABLE = 2;
 
-export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
+export const FilingsCalendarSingleGrid = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const [showExpandFilingsButton, setShowExpandFilingsButton] = useState(false);
   const date = getJanOfYear(parseDateWithFormat(props.activeYear, "YYYY")).add(props.num, "months");

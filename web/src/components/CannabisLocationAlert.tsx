@@ -6,7 +6,7 @@ type Props = {
   industryId?: string;
 };
 
-export const CannabisLocationAlert = (props: Props): ReactElement => {
+export const CannabisLocationAlert = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   return props.industryId === "cannabis" ? (

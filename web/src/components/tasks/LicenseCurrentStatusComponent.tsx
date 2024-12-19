@@ -20,7 +20,7 @@ interface Props {
   licenseName: LicenseName;
 }
 
-export const LicenseCurrentStatusComponent = (props: Props): ReactElement => {
+export const LicenseCurrentStatusComponent = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   if (!props.licenseData) return <></>;
@@ -35,7 +35,7 @@ export const LicenseCurrentStatusComponent = (props: Props): ReactElement => {
     return `${nameAndAddress.addressLine1}${secondLineAddress}, ${nameAndAddress.zipCode} NJ`.toUpperCase();
   };
 
-  const receiptItem = (item: LicenseStatusItem, index: number): ReactElement => {
+  const receiptItem = (item: LicenseStatusItem, index: number): ReactElement<any> => {
     return (
       <div key={index} data-testid={`item-${item.status}`}>
         <div

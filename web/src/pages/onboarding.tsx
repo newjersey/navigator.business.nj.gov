@@ -77,7 +77,7 @@ interface Props {
   municipalities: Municipality[];
 }
 
-const OnboardingPage = (props: Props): ReactElement => {
+const OnboardingPage = (props: Props): ReactElement<any> => {
   const { state } = useContext(AuthContext);
 
   const router = useRouter();
@@ -451,7 +451,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     },
   });
 
-  const header = (): ReactElement => {
+  const header = (): ReactElement<any> => {
     return (
       <div
         className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-1"
@@ -462,7 +462,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     );
   };
   return (
-    <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
+    (<MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
       <ProfileFormContext.Provider value={formContextState}>
         <ProfileDataContext.Provider
           value={{
@@ -502,10 +502,10 @@ const OnboardingPage = (props: Props): ReactElement => {
                     <>
                       {OnboardingStatusLookup()[alert].body}
                       {OnboardingStatusLookup()[alert] && (
-                        <Link href={ROUTES.dashboard}>
-                          <a href={ROUTES.dashboard} data-testid={`snackbar-link`}>
-                            {OnboardingStatusLookup()[alert].link}
-                          </a>
+                        <Link href={ROUTES.dashboard} data-testid={`snackbar-link`}>
+
+                          {OnboardingStatusLookup()[alert].link}
+
                         </Link>
                       )}
                     </>
@@ -547,7 +547,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           </PageSkeleton>
         </ProfileDataContext.Provider>
       </ProfileFormContext.Provider>
-    </MunicipalitiesContext.Provider>
+    </MunicipalitiesContext.Provider>)
   );
 };
 

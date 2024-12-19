@@ -16,7 +16,7 @@ interface Props {
   isTaskPage?: boolean;
 }
 
-export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
+export const DeferredOnboardingQuestion = (props: Props): ReactElement<any> => {
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const { business, updateQueue } = useUserData();
   const { Config } = useConfig();

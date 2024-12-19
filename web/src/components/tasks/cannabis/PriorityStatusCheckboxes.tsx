@@ -10,7 +10,7 @@ interface Props {
   onCheckboxChange: (checkbox: PriorityApplicationType, checked: boolean) => void;
 }
 
-export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
+export const PriorityStatusCheckboxes = (props: Props): ReactElement<any> => {
   const [eligibleModalIsOpenWith, setEligibleModalIsOpenWith] = useState<PriorityApplicationType | "">("");
 
   const { Config } = useConfig();

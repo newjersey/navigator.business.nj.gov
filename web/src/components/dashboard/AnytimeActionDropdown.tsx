@@ -24,7 +24,7 @@ interface Props {
 type AnytimeAction = AnytimeActionTask | AnytimeActionLink | AnytimeActionLicenseReinstatement;
 type AnytimeActionWithTypeAndCategory = AnytimeAction & { type: string; category: string };
 
-export const AnytimeActionDropdown = (props: Props): ReactElement => {
+export const AnytimeActionDropdown = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const [selectedAnytimeAction, setSelectedAnytimeAction] = useState<
     AnytimeActionWithTypeAndCategory | undefined
@@ -182,7 +182,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
   };
 
   return (
-    <div className={"anytime-action-dropdown-container"}>
+    (<div className={"anytime-action-dropdown-container"}>
       <Heading level={2} className={"h2-styling text-medium"}>
         {Config.dashboardAnytimeActionDefaults.defaultHeaderText}
       </Heading>
@@ -190,7 +190,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
       <div className="text-bold">{Config.dashboardAnytimeActionDefaults.defaultAutocompleteHeaderText}</div>
       <span className={isDesktopAndUp ? "flex" : "flex-column"}>
         <Autocomplete
-          renderInput={(params): ReactElement => {
+          renderInput={(params): ReactElement<any> => {
             return (
               <TextField
                 {...params}
@@ -232,7 +232,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
             _props,
             option: AnytimeActionWithTypeAndCategory,
             { selected, inputValue }
-          ): ReactElement => {
+          ): ReactElement<any> => {
             let textComponent = <>{option.name}</>;
 
             const matches = option.name.toLowerCase().indexOf(inputValue.toLowerCase());
@@ -312,6 +312,6 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
           </span>
         )}
       </span>
-    </div>
+    </div>)
   );
 };

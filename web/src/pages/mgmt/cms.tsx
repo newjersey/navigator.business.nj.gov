@@ -46,10 +46,10 @@ import RaffleBingoPreview from "@/lib/cms/previews/RaffleBingoPreview";
 import TaxAccessModalPreview from "@/lib/cms/previews/TaxAccessModalPreview";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
-import { ReactElement } from "react";
+import { ReactElement, type JSX } from "react";
 
 const CMS_CONFIG = {};
-const Loading = (): ReactElement => {
+const Loading = (): ReactElement<any> => {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <p className="text-gray-500 font-semibold text-xl">Loading...</p>
@@ -183,7 +183,7 @@ const registerPreview = (
   CMS.registerPreviewTemplate(name, applyTheme(preview));
 };
 
-const Admin = (): ReactElement => {
+const Admin = (): ReactElement<any> => {
   useMountEffect(() => {
     setInterval(() => {
       window.location.reload();

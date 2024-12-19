@@ -9,7 +9,7 @@ interface Props {
   downloadLink?: string;
 }
 
-export const FormationSuccessDocument = (props: Props): ReactElement => {
+export const FormationSuccessDocument = (props: Props): ReactElement<any> => {
   const contents = (
     <div className="margin-1 bg-base-lightest padding-1 fdr fac">
       <img src={`/img/${props.icon}.svg`} alt="" />

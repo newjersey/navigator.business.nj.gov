@@ -18,7 +18,7 @@ const useStylesBootstrap = makeStyles((theme: Theme) => {
   };
 });
 
-export const ArrowTooltip = (props: TooltipProps): ReactElement => {
+export const ArrowTooltip = (props: TooltipProps): ReactElement<any> => {
   const classes = useStylesBootstrap();
 
   const isMobile = useMediaQuery(MediaQueries.isMobile);

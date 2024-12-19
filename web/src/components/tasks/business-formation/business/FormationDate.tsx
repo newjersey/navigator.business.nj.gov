@@ -20,13 +20,13 @@ import { TextField } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import { ReactElement, useContext, useMemo } from "react";
+import { ReactElement, useContext, useMemo, type JSX } from "react";
 
 advancedDateLibrary();
 type Props = {
   fieldName: "businessStartDate" | "foreignDateOfFormation";
 };
-export const FormationDate = (props: Props): ReactElement => {
+export const FormationDate = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doesFieldHaveError } = useFormationErrors();

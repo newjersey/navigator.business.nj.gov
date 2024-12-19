@@ -8,7 +8,7 @@ interface Props {
   previousBusinessId?: string;
 }
 
-export const NavBarDesktopHomeLogo = (props: Props): ReactElement => {
+export const NavBarDesktopHomeLogo = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   return (

@@ -19,7 +19,7 @@ import { determineIfNexusDbaNameNeeded } from "@businessnjgovnavigator/shared/do
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext } from "react";
 
-export const NexusFormationFlow = (): ReactElement => {
+export const NexusFormationFlow = (): ReactElement<any> => {
   const { business } = useUserData();
   const { state, setStepIndex } = useContext(BusinessFormationContext);
   const { Config } = useConfig();

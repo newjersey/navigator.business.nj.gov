@@ -10,14 +10,14 @@ import * as React from "react";
 import { ReactElement, ReactNode, useEffect } from "react";
 
 interface Props {
-  firstTab: ReactElement;
-  secondTab: ReactElement;
-  aboveTabs: ReactElement;
+  firstTab: ReactElement<any>;
+  secondTab: ReactElement<any>;
+  aboveTabs: ReactElement<any>;
   certifications: Certification[];
   fundings: Funding[];
 }
 
-export default function TwoTabDashboardLayout(props: Props): ReactElement {
+export default function TwoTabDashboardLayout(props: Props): ReactElement<any> {
   const DASHBOARD_TAB = 0;
   const FOR_YOU_TAB = 1;
 

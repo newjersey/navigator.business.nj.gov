@@ -5,7 +5,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getPhoneNumberFormat } from "@/lib/utils/helpers";
 import { ReactElement, useContext } from "react";
 
-export const ReviewBillingContact = (): ReactElement => {
+export const ReviewBillingContact = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
 

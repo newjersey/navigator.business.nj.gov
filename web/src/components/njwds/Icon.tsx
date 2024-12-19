@@ -7,7 +7,7 @@ interface Props {
   "data-testid"?: string;
 }
 
-export const Icon = (props: Props): ReactElement => {
+export const Icon = (props: Props): ReactElement<any> => {
   return (
     <svg
       className={`usa-icon ${props.className ?? ""}`}

@@ -11,7 +11,7 @@ const UserDataErrorLookup: Record<UserDataError, string> = {
   UPDATE_FAILED: Config.siteWideErrorMessages.errorTextUpdateFailed,
 };
 
-export const UserDataErrorAlert = (): ReactElement => {
+export const UserDataErrorAlert = (): ReactElement<any> => {
   const { error } = useUserData();
 
   return error ? (

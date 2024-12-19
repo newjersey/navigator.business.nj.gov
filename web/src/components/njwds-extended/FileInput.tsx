@@ -51,7 +51,7 @@ export const FileInput = ({
   maxFileSize,
   value,
   onChange,
-}: Props): ReactElement => {
+}: Props): ReactElement<any> => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const fileInput = require("../../../../node_modules/@uswds/uswds/packages/usa-file-input/src");
   const fileInputRef = useRef<HTMLInputElement>(null);

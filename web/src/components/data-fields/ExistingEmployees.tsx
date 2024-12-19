@@ -5,7 +5,7 @@ interface Props {
   children?: ReactNode;
 }
 
-export const ExistingEmployees = (props: Props): ReactElement => {
+export const ExistingEmployees = (props: Props): ReactElement<any> => {
   const fieldName = "existingEmployees";
 
   return (

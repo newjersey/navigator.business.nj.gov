@@ -10,7 +10,7 @@ interface Props {
   handleChangeOverride?: (value: string) => void;
 }
 
-export const TaxPin = (props: Props): ReactElement => {
+export const TaxPin = (props: Props): ReactElement<any> => {
   const fieldName = "taxPin";
   const { Config } = useConfig();
   const { state } = useContext(ProfileDataContext);

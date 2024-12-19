@@ -16,7 +16,7 @@ interface Props<T> extends FormContextFieldProps<T> {
   essentialQuestionErrorTypes?: T[];
   onboardingFieldLabel?: boolean;
 }
-export const Industry = <T,>(props: Props<T>): ReactElement => {
+export const Industry = <T,>(props: Props<T>): ReactElement<any> => {
   const { state } = useContext(ProfileDataContext);
   const fieldName = "industryId";
 

@@ -17,7 +17,7 @@ interface Props {
   licenseEvents: LicenseEventType[];
 }
 
-export const FilingsCalendarGrid = (props: Props): ReactElement => {
+export const FilingsCalendarGrid = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   const monthIndices = [...Array(12).keys()];

@@ -15,7 +15,7 @@ interface Props {
   CMS_ONLY_fakeBusiness?: Business;
 }
 
-export const TaskElement = (props: Props): ReactElement => {
+export const TaskElement = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const shouldShowDeferredQuestion = props.task.requiresLocation;
   let hasDeferredLocationQuestion = false;

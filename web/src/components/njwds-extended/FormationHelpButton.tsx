@@ -4,7 +4,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { ReactElement } from "react";
 
-export const FormationHelpButton = (): ReactElement => {
+export const FormationHelpButton = (): ReactElement<any> => {
   const { Config } = useConfig();
 
   return (

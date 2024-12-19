@@ -13,7 +13,7 @@ interface Props {
   children: ReactNode;
 }
 
-export const ReviewSection = (props: Props): ReactElement => {
+export const ReviewSection = (props: Props): ReactElement<any> => {
   const { setStepIndex } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
   const onClick = (): void => {

@@ -23,7 +23,7 @@ interface Props {
   contentMd: string;
 }
 
-export const BusinessFormationTextBox = (props: Props): ReactElement => {
+export const BusinessFormationTextBox = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const [isExpanded, setIsExpanded] = useState(props.required || !!state.formationFormData[props.fieldName]);

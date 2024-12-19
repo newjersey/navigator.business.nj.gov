@@ -19,7 +19,7 @@ interface Props {
   taskId: string;
 }
 
-const LegalStructureRadio = forwardRef((props: Props, ref: ForwardedRef<HTMLDivElement>): ReactElement => {
+const LegalStructureRadio = forwardRef((props: Props, ref: ForwardedRef<HTMLDivElement>): ReactElement<any> => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
@@ -59,7 +59,7 @@ const LegalStructureRadio = forwardRef((props: Props, ref: ForwardedRef<HTMLDivE
     });
   };
 
-  const makeLabel = (legalStructureId: string): ReactElement => {
+  const makeLabel = (legalStructureId: string): ReactElement<any> => {
     return (
       <div data-value={legalStructureId} className={"text-bold"}>
         {LookupLegalStructureById(legalStructureId).name}

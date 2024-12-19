@@ -8,7 +8,7 @@ interface Props {
   fileName: string;
 }
 
-export const ConfigMatchList = (props: Props): ReactElement => {
+export const ConfigMatchList = (props: Props): ReactElement<any> => {
   const COLLAPSED_LEN = 5;
 
   const [expanded, setExpanded] = useState<boolean>(false);

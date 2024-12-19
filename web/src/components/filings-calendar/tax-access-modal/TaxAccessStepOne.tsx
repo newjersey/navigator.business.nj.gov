@@ -22,7 +22,7 @@ interface Props {
   moveToNextStep: () => void;
 }
 
-export const TaxAccessStepOne = (props: Props): ReactElement => {
+export const TaxAccessStepOne = (props: Props): ReactElement<any> => {
   const fields: ProfileFields[] = ["legalStructureId"];
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const { business, updateQueue } = useUserData();

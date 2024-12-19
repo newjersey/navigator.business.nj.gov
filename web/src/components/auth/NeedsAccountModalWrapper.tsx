@@ -6,7 +6,7 @@ import { ReactElement, ReactNode, useContext } from "react";
 export const NeedsAccountModalWrapper = (props: {
   children: ReactNode;
   CMS_ONLY_disable_overlay?: boolean;
-}): ReactElement => {
+}): ReactElement<any> => {
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   useMountEffectWhenDefined(() => {
     if (isAuthenticated !== IsAuthenticated.TRUE) {

@@ -33,7 +33,7 @@ type CardDisplayDetails = {
   iconTextColor: string;
 };
 
-export const HousingRegistrationStatusSummary = (props: Props): ReactElement => {
+export const HousingRegistrationStatusSummary = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const rejectedOrIncompleteApplication =
     props.summary.registrations[0].status === "Returned" ||
@@ -90,14 +90,14 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
     status: string,
     index: number,
     renewalDate?: string
-  ): ReactElement => {
+  ): ReactElement<any> => {
     const details = getDetailsForRegistrationCard(status);
     const formattedDate = parseDate(date).format("MMMM d, YYYY");
     const formattedRenewalDate = parseDate(renewalDate).format("MMMM d, YYYY");
     const informationalMessage = getInformationalMessageText(status);
     const renewalMessage = `${Config.housingRegistrationSearchTask.renewRegistrationMessage} ${formattedRenewalDate}`;
 
-    const getIconForRegistrationCard = (): ReactElement => {
+    const getIconForRegistrationCard = (): ReactElement<any> => {
       switch (status) {
         case "In Review":
           return <img src={`/img/access_time_filled.svg`} alt="" style={{ width: "17px", height: "17px" }} />;

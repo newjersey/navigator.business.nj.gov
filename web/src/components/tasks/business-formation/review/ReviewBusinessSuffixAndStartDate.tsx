@@ -7,7 +7,7 @@ import { defaultDateFormat } from "@businessnjgovnavigator/shared";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { ReactElement, useContext } from "react";
 
-export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
+export const ReviewBusinessSuffixAndStartDate = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
   const isCorp =

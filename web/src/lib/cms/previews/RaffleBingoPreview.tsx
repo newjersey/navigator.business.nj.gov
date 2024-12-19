@@ -6,7 +6,7 @@ import { Task } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
-const RaffleBingoPreview = (props: PreviewProps): ReactElement => {
+const RaffleBingoPreview = (props: PreviewProps): ReactElement<any> => {
   const ref = usePreviewRef(props);
   const task = usePageData<Task>(props);
 

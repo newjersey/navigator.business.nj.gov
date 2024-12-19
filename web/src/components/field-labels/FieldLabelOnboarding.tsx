@@ -13,7 +13,7 @@ interface Props {
   CMS_ONLY_flow?: FlowType;
 }
 
-export const FieldLabelOnboarding = (props: Props): ReactElement => {
+export const FieldLabelOnboarding = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(ProfileDataContext);
 

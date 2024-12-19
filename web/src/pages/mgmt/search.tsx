@@ -93,7 +93,7 @@ interface Props {
   cmsConfig: any;
 }
 
-const SearchContentPage = (props: Props): ReactElement => {
+const SearchContentPage = (props: Props): ReactElement<any> => {
   const [isAuthed, setIsAuthed] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
   const [hasSearched, setHasSearched] = useState<boolean>(false);

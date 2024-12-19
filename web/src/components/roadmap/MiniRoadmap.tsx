@@ -14,7 +14,7 @@ interface Props {
   onTaskClick?: () => void;
 }
 
-export const MiniRoadmap = (props: Props): ReactElement => {
+export const MiniRoadmap = (props: Props): ReactElement<any> => {
   const { roadmap, sectionNamesInRoadmap } = useRoadmap();
   const { updateQueue, business } = useUserData();
 

@@ -13,10 +13,10 @@ type PermitColorScheme = {
   bgHdrColor: string;
   bgSubHdrColor: string;
   textAndIconColor: string;
-  icon: ReactElement;
+  icon: ReactElement<any>;
 };
 
-export const LicenseStatusHeader = (props: Props): ReactElement => {
+export const LicenseStatusHeader = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   const permitColorScheme: Record<string, PermitColorScheme> = {

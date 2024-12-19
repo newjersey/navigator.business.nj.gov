@@ -37,7 +37,7 @@ import {
 } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement } from "react";
 
-const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
+const ProfileFieldsPreview = (props: PreviewProps): ReactElement<any> => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

@@ -16,7 +16,7 @@ interface Props {
   previousBusiness: Business | undefined;
 }
 
-export const ReturnToPreviousBusinessBar = (props: Props): ReactElement | null => {
+export const ReturnToPreviousBusinessBar = (props: Props): ReactElement<any> | null => {
   const { Config } = useConfig();
   const { updateQueue, userData } = useUserData();
   const { state } = useContext(AuthContext);

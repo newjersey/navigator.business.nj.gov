@@ -7,7 +7,7 @@ interface Props {
   legalStructureId?: string;
 }
 
-export const TaxDisclaimer = (props: Props): ReactElement => {
+export const TaxDisclaimer = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   return (

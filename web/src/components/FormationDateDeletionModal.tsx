@@ -9,7 +9,7 @@ interface Props {
   handleDelete: () => void;
 }
 
-export const FormationDateDeletionModal = (props: Props): ReactElement => {
+export const FormationDateDeletionModal = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   return (

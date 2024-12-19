@@ -9,7 +9,7 @@ interface Props {
   fieldErrors: string[];
 }
 
-export const ProfileErrorAlert = (props: Props): ReactElement | null => {
+export const ProfileErrorAlert = (props: Props): ReactElement<any> | null => {
   const { Config } = useConfig();
 
   const displayProfileErrorAlert = (): boolean => props.fieldErrors.length > 0;

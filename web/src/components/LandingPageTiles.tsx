@@ -6,7 +6,7 @@ import analytics from "@/lib/utils/analytics";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
-export const LandingPageTiles = (): ReactElement => {
+export const LandingPageTiles = (): ReactElement<any> => {
   const router = useRouter();
   const { Config } = useConfig();
 

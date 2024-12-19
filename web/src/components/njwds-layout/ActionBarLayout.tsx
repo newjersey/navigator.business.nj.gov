@@ -7,7 +7,7 @@ interface Props {
   alignLeft?: boolean;
   disableReverseOrderInMobile?: boolean;
 }
-export const ActionBarLayout = (props: Props): ReactElement => {
+export const ActionBarLayout = (props: Props): ReactElement<any> => {
   return (
     <div
       className={`mobile-lg:display-flex ${

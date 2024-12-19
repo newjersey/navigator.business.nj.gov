@@ -17,7 +17,7 @@ export const IntercomScript = ({
   legalStructureId?: string;
   industryId?: string;
   businessPersona?: BusinessPersona;
-}): ReactElement => {
+}): ReactElement<any> => {
   useEffect(() => {
     if (!operatingPhaseId) return;
     const item = document.querySelector("#intercom-identity");

@@ -12,7 +12,7 @@ interface Props {
   handleClose: () => void;
 }
 
-export const CongratulatoryModal = (props: Props): ReactElement => {
+export const CongratulatoryModal = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const router = useRouter();
 

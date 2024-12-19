@@ -35,7 +35,7 @@ export const WithStatefulUserData = ({
 }: {
   children: ReactNode;
   initialUserData: UserData | undefined;
-}): ReactElement => {
+}): ReactElement<any> => {
   return WithStatefulData(updateSpy)({ children, initialData: initialUserData });
 };
 

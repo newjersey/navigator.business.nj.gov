@@ -5,7 +5,7 @@ import { NexusSearchBusinessNameStep } from "@/components/tasks/business-formati
 import { DbaStepNames } from "@/lib/types/types";
 import { ReactElement } from "react";
 
-export const DbaFormationSteps: { component: ReactElement; step: DbaStepNames }[] = [
+export const DbaFormationSteps: { component: ReactElement<any>; step: DbaStepNames }[] = [
   {
     component: <NexusSearchBusinessNameStep />,
     step: DbaFormationStepsConfiguration[0].name,

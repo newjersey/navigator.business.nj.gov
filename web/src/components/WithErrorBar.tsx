@@ -9,7 +9,7 @@ interface Props {
   className?: string;
 }
 
-export const WithErrorBar = (props: Props): ReactElement => {
+export const WithErrorBar = (props: Props): ReactElement<any> => {
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   const shouldShowBar = ((): boolean => {

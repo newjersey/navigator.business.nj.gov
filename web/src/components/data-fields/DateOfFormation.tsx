@@ -28,7 +28,7 @@ interface Props {
   inputWidth?: "full" | "default" | "reduced";
 }
 
-export const DateOfFormation = (props: Props): ReactElement => {
+export const DateOfFormation = (props: Props): ReactElement<any> => {
   const fieldName = "dateOfFormation";
   const { Config } = useConfig();
   const { state, setProfileData } = useContext(ProfileDataContext);
@@ -71,7 +71,7 @@ export const DateOfFormation = (props: Props): ReactElement => {
     process.env.NODE_ENV === "test" || process.env.CI === "true" ? DesktopDatePicker : DatePicker;
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    (<LocalizationProvider dateAdapter={AdapterDayjs}>
       <Picker
         views={["year", "month"]}
         inputFormat={"MM/YYYY"}
@@ -87,7 +87,7 @@ export const DateOfFormation = (props: Props): ReactElement => {
         onError={(hasError: string | null): void => {
           setDateError(!!hasError);
         }}
-        renderInput={(params: TextFieldProps): ReactElement => {
+        renderInput={(params: TextFieldProps): ReactElement<any> => {
           return (
             <GenericTextField
               inputWidth={props.inputWidth || "reduced"}
@@ -108,6 +108,6 @@ export const DateOfFormation = (props: Props): ReactElement => {
           );
         }}
       />
-    </LocalizationProvider>
+    </LocalizationProvider>)
   );
 };

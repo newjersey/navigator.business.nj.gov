@@ -5,7 +5,7 @@ import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { formationTaskId } from "@businessnjgovnavigator/shared";
 import { ReactElement, ReactNode, useContext } from "react";
 
-export const NexusBusinessNameField = (): ReactElement => {
+export const NexusBusinessNameField = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(ProfileDataContext);
 

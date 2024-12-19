@@ -14,10 +14,10 @@ import { ReactElement, useContext } from "react";
 
 interface Props extends Omit<DataFieldProps, "fieldName" | "handleChange" | "onValidation" | "inputWidth"> {
   handleChangeOverride?: (value: string) => void;
-  getShowHideToggleButton: () => ReactElement;
+  getShowHideToggleButton: () => ReactElement<any>;
   taxIdDisplayStatus: TaxIdDisplayStatus;
 }
-export const SingleTaxId = ({ handleChangeOverride, validationText, ...props }: Props): ReactElement => {
+export const SingleTaxId = ({ handleChangeOverride, validationText, ...props }: Props): ReactElement<any> => {
   const fieldName = "taxId";
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 

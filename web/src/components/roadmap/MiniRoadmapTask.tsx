@@ -12,13 +12,13 @@ interface Props {
   onTaskClick?: () => void;
 }
 
-export const MiniRoadmapTask = (props: Props): ReactElement => {
+export const MiniRoadmapTask = (props: Props): ReactElement<any> => {
   const { business } = useUserData();
   const taskProgress = business?.taskProgress[props.task.id] || "NOT_STARTED";
   const taskProgressReadable = taskProgress.replace("_", " ");
 
   return (
-    <Link href={`/tasks/${props.task.urlSlug}`}>
+    (<Link href={`/tasks/${props.task.urlSlug}`} legacyBehavior>
       <div>
         <UnStyledButton
           onClick={(): void => {
@@ -44,6 +44,6 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
           </div>
         </UnStyledButton>
       </div>
-    </Link>
+    </Link>)
   );
 };

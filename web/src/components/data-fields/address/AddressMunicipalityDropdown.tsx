@@ -9,7 +9,7 @@ interface Props {
   onValidation: () => void;
 }
 
-export const AddressMunicipalityDropdown = (props: Props): ReactElement => {
+export const AddressMunicipalityDropdown = (props: Props): ReactElement<any> => {
   const { state, setAddressData } = useContext(AddressContext);
   const { municipalities } = useContext(MunicipalitiesContext);
   const { doesFieldHaveError, getFieldErrorLabel } = useAddressErrors();

@@ -5,7 +5,7 @@ import { ReactElement } from "react";
 
 const Config = getMergedConfig();
 
-export const TaskProgressTagLookup: Record<TaskProgress, ReactElement> = {
+export const TaskProgressTagLookup: Record<TaskProgress, ReactElement<any>> = {
   NOT_STARTED: (
     <Tag backgroundColor="base-lighter" dataTestid="NOT_STARTED" isFixedWidth>
       {Config.taskProgress.NOT_STARTED}

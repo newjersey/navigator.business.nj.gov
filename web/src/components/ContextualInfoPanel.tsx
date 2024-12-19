@@ -5,7 +5,7 @@ import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfo
 import analytics from "@/lib/utils/analytics";
 import { ReactElement, useContext } from "react";
 
-export const ContextualInfoPanel = (): ReactElement => {
+export const ContextualInfoPanel = (): ReactElement<any> => {
   const { contextualInfo, setContextualInfo } = useContext(ContextualInfoContext);
 
   const close = (): void => {

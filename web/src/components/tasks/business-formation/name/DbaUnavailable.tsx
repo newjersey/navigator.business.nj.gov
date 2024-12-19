@@ -5,7 +5,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { templateEval } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
-export const DbaUnavailable = (props: UnavailableProps): ReactElement => {
+export const DbaUnavailable = (props: UnavailableProps): ReactElement<any> => {
   const { Config } = useConfig();
   return (
     <div data-testid="unavailable-text" className="margin-bottom-2">

@@ -9,7 +9,7 @@ interface Props {
   isAuthenticated?: boolean;
 }
 
-export const ProfileHeader = (props: Props): ReactElement => {
+export const ProfileHeader = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   return (

@@ -15,7 +15,7 @@ interface Props {
   isDividerDisabled?: boolean;
 }
 
-export const SectionAccordion = (props: Props): ReactElement => {
+export const SectionAccordion = (props: Props): ReactElement<any> => {
   const { updateQueue, business } = useUserData();
   const dropdownIconClasses = props.mini
     ? "usa-icon--size-5 text-base-light"

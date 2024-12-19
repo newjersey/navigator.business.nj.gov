@@ -6,7 +6,7 @@ import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { StateObject } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
 
-export const ForeignStateOfFormation = (): ReactElement => {
+export const ForeignStateOfFormation = (): ReactElement<any> => {
   const FIELD = "foreignStateOfFormation";
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);

@@ -12,7 +12,7 @@ import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
-export const NeedsAccountModal = (): ReactElement => {
+export const NeedsAccountModal = (): ReactElement<any> => {
   const { business } = useUserData();
   const router = useRouter();
   const { isAuthenticated, showNeedsAccountModal, setShowNeedsAccountModal } =

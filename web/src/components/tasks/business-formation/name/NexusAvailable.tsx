@@ -5,7 +5,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { templateEval } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
-export const NexusAvailable = (props: AvailableProps): ReactElement => {
+export const NexusAvailable = (props: AvailableProps): ReactElement<any> => {
   const { Config } = useConfig();
 
   return (

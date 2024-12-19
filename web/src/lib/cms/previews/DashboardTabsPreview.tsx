@@ -6,7 +6,7 @@ import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateCertification, generateFunding } from "@/test/factories";
 import { ReactElement } from "react";
 
-const DashboardTabsPreview = (props: PreviewProps): ReactElement => {
+const DashboardTabsPreview = (props: PreviewProps): ReactElement<any> => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

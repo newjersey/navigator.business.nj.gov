@@ -11,7 +11,7 @@ interface Props {
   isAltDescriptionDisplayed?: boolean;
 }
 
-export const FieldLabelDescriptionOnly = (props: Props): ReactElement => {
+export const FieldLabelDescriptionOnly = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(ProfileDataContext);
 

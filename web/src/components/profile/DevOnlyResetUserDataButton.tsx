@@ -7,7 +7,7 @@ import { createEmptyUserData } from "@businessnjgovnavigator/shared/userData";
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
-export const DevOnlyResetUserDataButton = (): ReactElement => {
+export const DevOnlyResetUserDataButton = (): ReactElement<any> => {
   const { state } = useContext(AuthContext);
   const { updateQueue } = useUserData();
   const router = useRouter();

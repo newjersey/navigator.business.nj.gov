@@ -11,7 +11,7 @@ interface Props {
   task: Task;
 }
 
-export const UnlockedBy = (props: Props): ReactElement => {
+export const UnlockedBy = (props: Props): ReactElement<any> => {
   const { business } = useUserData();
   const { Config } = useConfig();
 

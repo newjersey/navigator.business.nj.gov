@@ -36,7 +36,7 @@ interface Props {
   housingMunicipalities: HousingMunicipality[];
 }
 
-const TaskPage = (props: Props): ReactElement => {
+const TaskPage = (props: Props): ReactElement<any> => {
   const router = useRouter();
   const { business } = useUserData();
   const { roadmap } = useRoadmap();
@@ -51,7 +51,7 @@ const TaskPage = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const renderLoadingState = !business || !roadmap;
 
-  const renderNextAndPreviousButtons = (): ReactElement | undefined => {
+  const renderNextAndPreviousButtons = (): ReactElement<any> | undefined => {
     const isValidLegalStructure = allowFormation(
       business?.profileData.legalStructureId,
       business?.profileData.businessPersona

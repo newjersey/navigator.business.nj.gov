@@ -8,7 +8,7 @@ interface Props extends Omit<SidebarPageLayoutProps, "navChildren"> {
   hideMiniRoadmap?: boolean;
 }
 
-export const TaskSidebarPageLayout = ({ children, task, ...props }: Props): ReactElement => {
+export const TaskSidebarPageLayout = ({ children, task, ...props }: Props): ReactElement<any> => {
   return (
     <main id="main">
       <SidebarPageLayout

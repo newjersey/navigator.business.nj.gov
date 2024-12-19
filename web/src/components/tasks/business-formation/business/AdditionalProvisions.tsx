@@ -8,7 +8,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
 
-export const AdditionalProvisions = (): ReactElement => {
+export const AdditionalProvisions = (): ReactElement<any> => {
   const MAX_CHARS = 3000;
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);

@@ -306,30 +306,28 @@ export const openInNewTab = (url: string): void => {
 };
 
 export const removeMarkdownFormatting = (markdownText: string): string => {
-  return (
-    markdownText
-      // Remove headers
-      .replaceAll(/(^|\s)(#{1,6})\s/g, "$1")
-      // Remove images
-      .replaceAll(/!\[.*?]\(.*?\)/g, "")
-      // Remove links
-      .replaceAll(/\[.*?]\(.*?\)/g, "")
-      // Remove strong and em tags
-      .replaceAll(/(\*\*|__)(.*?)\1/g, "$2")
-      .replaceAll(/(\*|_)(.*?)\1/g, "$2")
-      // Remove inline code
-      .replaceAll(/`{1,2}[^`]*`{1,2}/g, "")
-      // Remove blockquotes
-      .replaceAll(/^\s*>\s?/gm, "")
-      // Remove unordered list bullets
-      .replaceAll(/^\s*[*+-]\s/gm, "")
-      // Remove ordered list numbers
-      .replaceAll(/^\s*\d+\.\s/gm, "")
-      // Remove horizontal rules
-      .replaceAll(/^-{3,}\s*$/gm, "")
-      // Remove extra lines
-      .replaceAll(/\n{2,}/g, " ")
-      // Remove all remaining line breaks
-      .replaceAll(/(\r\n|\n|\r)/gm, "")
-  );
+  return (markdownText
+    // Remove headers
+    .replaceAll(/(^|\s)(#{1,6})\s/g, "$1")
+    // Remove images
+    .replaceAll(/!\[.*?]\(.*?\)/g, "")
+    // Remove links
+    .replaceAll(/\[.*?]\(.*?\)/g, "")
+    // Remove strong and em tags
+    .replaceAll(/(\*\*|__)(.*?)\1/g, "$2")
+    .replaceAll(/(\*|_)(.*?)\1/g, "$2")
+    // Remove inline code
+    .replaceAll(/`{1,2}[^`]*`{1,2}/g, "")
+    // Remove blockquotes
+    .replaceAll(/^\s*>\s?/gm, "")
+    // Remove unordered list bullets
+    .replaceAll(/^\s*[*+-]\s/gm, "")
+    // Remove ordered list numbers
+    .replaceAll(/^\s*\d+\.\s/gm, "")
+    // Remove horizontal rules
+    .replaceAll(/^-{3,}\s*$/gm, "")
+    // Remove extra lines
+    .replaceAll(/\n{2,}/g, " ")
+    // Remove all remaining line breaks
+    .replaceAll(/(\r\n|\n|\r)/gm, ""));
 };

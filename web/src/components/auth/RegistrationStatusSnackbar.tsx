@@ -12,7 +12,7 @@ import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { IconButton } from "@mui/material";
 import { ReactElement, useContext, useEffect } from "react";
 
-export const RegistrationStatusSnackbar = (): ReactElement => {
+export const RegistrationStatusSnackbar = (): ReactElement<any> => {
   const { isAuthenticated, registrationStatus, setRegistrationStatus } = useContext(NeedsAccountContext);
   const { state } = useContext(AuthContext);
   const { Config } = useConfig();

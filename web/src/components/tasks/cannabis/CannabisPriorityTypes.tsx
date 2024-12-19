@@ -28,7 +28,7 @@ interface Props {
   CMS_ONLY_tab?: string;
 }
 
-export const CannabisPriorityTypes = (props: Props): ReactElement => {
+export const CannabisPriorityTypes = (props: Props): ReactElement<any> => {
   const { updateQueue, business } = useUserData();
   const [displayNextTabButton, setDisplayNextTabButton] = useState(false);
   const [eligibityPhrase, setEligibiltyPhrase] = useState("");

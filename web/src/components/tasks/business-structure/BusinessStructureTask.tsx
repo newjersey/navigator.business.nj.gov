@@ -30,7 +30,7 @@ interface Props {
   CMS_ONLY_fakeBusiness?: Business;
 }
 
-export const BusinessStructureTask = (props: Props): ReactElement => {
+export const BusinessStructureTask = (props: Props): ReactElement<any> => {
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [showRadioQuestion, setShowRadioQuestion] = useState<boolean>(true);
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState<boolean>(false);

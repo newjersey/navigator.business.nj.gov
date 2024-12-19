@@ -5,11 +5,11 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
 
-export const ReviewPartnership = (): ReactElement => {
+export const ReviewPartnership = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
 
-  const notEnteredText = (question: string): ReactElement => {
+  const notEnteredText = (question: string): ReactElement<any> => {
     return (
       <>
         <span className={"bg-accent-warm-extra-light text-italic"}>
@@ -26,7 +26,7 @@ export const ReviewPartnership = (): ReactElement => {
     questionText: string;
     yesBody: string;
     noBody: string;
-  }): ReactElement => {
+  }): ReactElement<any> => {
     return (
       <>
         {params.radioData === undefined ? (

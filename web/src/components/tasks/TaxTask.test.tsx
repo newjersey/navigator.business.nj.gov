@@ -41,7 +41,7 @@ const WithStatefulBusiness = ({
 }: {
   children: ReactNode;
   initialBusiness: Business;
-}): ReactElement => (
+}): ReactElement<any> => (
   <WithStatefulProfileFormContext>
     <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
       {children}

@@ -5,7 +5,7 @@ interface Props {
   handleChangeOverride?: (value: string) => void;
 }
 
-export const Notes = (props: Props): ReactElement => {
+export const Notes = (props: Props): ReactElement<any> => {
   return (
     <DataField
       inputWidth="default"

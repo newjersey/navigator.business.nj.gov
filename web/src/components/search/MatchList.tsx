@@ -7,7 +7,7 @@ interface Props {
   collectionLabel: string;
 }
 
-export const MatchList = (props: Props): ReactElement => {
+export const MatchList = (props: Props): ReactElement<any> => {
   const COLLAPSED_LEN = 5;
 
   const [expanded, setExpanded] = useState<boolean>(false);

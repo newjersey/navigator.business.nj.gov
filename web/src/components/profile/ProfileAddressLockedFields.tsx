@@ -5,7 +5,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ReactElement, ReactNode, useContext } from "react";
 
-export const ProfileAddressLockedFields = (): ReactElement => {
+export const ProfileAddressLockedFields = (): ReactElement<any> => {
   const { state } = useContext(AddressContext);
   const { business } = useUserData();
 

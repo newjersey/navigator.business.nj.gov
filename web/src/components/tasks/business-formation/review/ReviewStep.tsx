@@ -24,7 +24,7 @@ import { isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext } from "react";
 
-export const ReviewStep = (): ReactElement => {
+export const ReviewStep = (): ReactElement<any> => {
   const { state } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
 
@@ -35,7 +35,7 @@ export const ReviewStep = (): ReactElement => {
   const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
   const isNonProfit = state.formationFormData.legalType === "nonprofit";
 
-  const getProvisionsAndPurposeSections = (): ReactElement => {
+  const getProvisionsAndPurposeSections = (): ReactElement<any> => {
     return (
       <>
         {hasProvisions && <ReviewAdditionalProvisions />}

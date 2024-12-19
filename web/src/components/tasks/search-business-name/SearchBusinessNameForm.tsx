@@ -25,8 +25,8 @@ type SearchBusinessNameFormConfig = {
 };
 
 interface Props {
-  unavailable: (props: UnavailableProps) => ReactElement;
-  available: (props: AvailableProps) => ReactElement;
+  unavailable: (props: UnavailableProps) => ReactElement<any>;
+  available: (props: AvailableProps) => ReactElement<any>;
   businessName: string;
   config: SearchBusinessNameFormConfig;
   className?: string;
@@ -36,7 +36,7 @@ interface Props {
   nameAvailability: NameAvailability | undefined;
 }
 
-export const SearchBusinessNameForm = (props: Props): ReactElement => {
+export const SearchBusinessNameForm = (props: Props): ReactElement<any> => {
   const {
     currentName,
     isLoading,

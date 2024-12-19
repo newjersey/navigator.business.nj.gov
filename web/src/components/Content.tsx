@@ -20,12 +20,12 @@ interface ContentProps {
   children: string;
   className?: string;
   style?: CSSProperties;
-  overrides?: { [key: string]: { ({ children }: { children: string[] }): ReactElement } };
+  overrides?: { [key: string]: { ({ children }: { children: string[] }): ReactElement<any> } };
   onClick?: (url?: string) => void;
-  customComponents?: Record<string, ReactElement>;
+  customComponents?: Record<string, ReactElement<any>>;
 }
 
-export const Content = (props: ContentProps): ReactElement => {
+export const Content = (props: ContentProps): ReactElement<any> => {
   const { business } = useUserData();
   const updatedContent = useContentModifiedByUserData(props.children);
 
@@ -33,31 +33,31 @@ export const Content = (props: ContentProps): ReactElement => {
 
   const components = {
     code: isTest
-      ? (props: any): ReactElement => {
+      ? (props: any): ReactElement<any> => {
           return <>{`\`${props.children}\``}</>;
         }
       : ContextualInfoLink,
     a: Link(props.onClick),
-    h2: (props: any): ReactElement => {
+    h2: (props: any): ReactElement<any> => {
       return (
         <Heading level={2} styleVariant="h3" style={{ marginTop: "1rem" }}>
           {props.children}
         </Heading>
       );
     },
-    h5: (props: any): ReactElement => {
+    h5: (props: any): ReactElement<any> => {
       return <div className="h5-styling">{props.children}</div>;
     },
-    h6: (props: any): ReactElement => {
+    h6: (props: any): ReactElement<any> => {
       return <div className="h6-styling">{props.children}</div>;
     },
-    hr: (): ReactElement => {
+    hr: (): ReactElement<any> => {
       return <HorizontalLine />;
     },
-    note: (props: any): ReactElement => {
+    note: (props: any): ReactElement<any> => {
       return <Alert variant="note">{props.children}</Alert>;
     },
-    callout: (props: any): ReactElement => {
+    callout: (props: any): ReactElement<any> => {
       return (
         <Callout
           showHeader={props.showHeader}
@@ -69,10 +69,10 @@ export const Content = (props: ContentProps): ReactElement => {
         </Callout>
       );
     },
-    infoAlert: (props: any): ReactElement => {
+    infoAlert: (props: any): ReactElement<any> => {
       return <Alert variant="info">{props.children}</Alert>;
     },
-    cannabisLocationAlert: (): ReactElement => (
+    cannabisLocationAlert: (): ReactElement<any> => (
       <CannabisLocationAlert industryId={business?.profileData.industryId} />
     ),
     icon: InlineIcon,
@@ -83,7 +83,7 @@ export const Content = (props: ContentProps): ReactElement => {
     th: Unformatted,
     td: Unformatted,
     tbody: Unformatted,
-    del: (delProps: any): ReactElement => {
+    del: (delProps: any): ReactElement<any> => {
       return props.customComponents ? props.customComponents[delProps.children] : delProps.children;
     },
     ...props.overrides,
@@ -98,7 +98,7 @@ export const Content = (props: ContentProps): ReactElement => {
 
 const Link = (onClick?: (url?: string) => void): any => {
   return Object.assign(
-    (props: any): ReactElement => {
+    (props: any): ReactElement<any> => {
       if (/^https?:\/\/(.*)/.test(props.href)) {
         return (
           <ExternalLink href={props.href} onClick={(): void => onClick && onClick(props.href)}>
@@ -128,7 +128,7 @@ export const ExternalLink = ({
   children: string;
   href: string;
   onClick?: (url?: string) => void;
-}): ReactElement => {
+}): ReactElement<any> => {
   return (
     <a
       className="usa-link"
@@ -145,11 +145,11 @@ export const ExternalLink = ({
   );
 };
 
-const Unformatted = (props: any): ReactElement => {
+const Unformatted = (props: any): ReactElement<any> => {
   return <div>{props.children}</div>;
 };
 
-const OutlineBox = (props: any): ReactElement => {
+const OutlineBox = (props: any): ReactElement<any> => {
   return (
     <div className="text-normal padding-2 margin-top-2 border-base-lighter border-1px font-body-2xs">
       {props.children}
@@ -157,7 +157,7 @@ const OutlineBox = (props: any): ReactElement => {
   );
 };
 
-const ListOrCheckbox = (props: any): ReactElement => {
+const ListOrCheckbox = (props: any): ReactElement<any> => {
   if (props.children && typeof props.children[0] === "string" && props.children[0].startsWith("[]")) {
     const checklistItemId = props.children[0].slice("[]".length).split("{")[1].split("}")[0];
     const checklistItemBody = [props.children[0].split("}")[1], ...props.children.slice(1)];
@@ -174,8 +174,8 @@ const ListOrCheckbox = (props: any): ReactElement => {
   return <li>{props.children ?? ""}</li>;
 };
 
-const InlineIcon = (props: any): ReactElement => {
-  const getIconByType = (): ReactElement => {
+const InlineIcon = (props: any): ReactElement<any> => {
+  const getIconByType = (): ReactElement<any> => {
     switch (props.type as InlineIconType) {
       case "green checkmark":
         return <Icon className="inline-icon text-green" iconName="check_circle" />;

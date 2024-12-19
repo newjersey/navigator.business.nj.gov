@@ -12,7 +12,7 @@ interface Props {
   business: Business;
   roadmap: Roadmap;
 }
-export const TaskBody = (props: Props): ReactElement => {
+export const TaskBody = (props: Props): ReactElement<any> => {
   const addNaicsCodeData = (contentMd: string): string => {
     const naicsCode = props.business?.profileData.naicsCode || "";
     const naicsTemplateValue = getNaicsDisplayMd(naicsCode);

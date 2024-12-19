@@ -15,7 +15,7 @@ interface Props {
 
 // eslint-disable-next-line react/display-name
 export const UnStyledButton = forwardRef(
-  (props: Props, ref?: React.LegacyRef<HTMLButtonElement>): ReactElement => {
+  (props: Props, ref?: React.Ref<HTMLButtonElement>): ReactElement<any> => {
     const style = props.isBgTransparent
       ? "usa-button bg-transparent"
       : "usa-button usa-button--unstyled width-auto font-weight-inherit font-size-inherit";

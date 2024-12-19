@@ -22,7 +22,7 @@ interface Props {
   licenseEvents: LicenseEventType[];
 }
 
-export const FilingsCalendarAsList = (props: Props): ReactElement => {
+export const FilingsCalendarAsList = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const [numberOfVisibleCalendarEntries, setNumberOfVisibleCalendarEntries] =
     useState<number>(LIST_VIEW_MORE_INCREMENT);

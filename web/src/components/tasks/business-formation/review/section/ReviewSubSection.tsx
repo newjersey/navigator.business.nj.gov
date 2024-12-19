@@ -8,7 +8,7 @@ interface Props {
   children: ReactNode;
 }
 
-export const ReviewSubSection = (props: Props): ReactElement => {
+export const ReviewSubSection = (props: Props): ReactElement<any> => {
   return (
     <>
       <div

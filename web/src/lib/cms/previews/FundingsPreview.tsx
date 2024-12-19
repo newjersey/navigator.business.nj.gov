@@ -6,7 +6,7 @@ import { Funding } from "@/lib/types/types";
 import { FundingElement } from "@/pages/funding/[fundingUrlSlug]";
 import { ReactElement } from "react";
 
-const FundingsPreview = (props: PreviewProps): ReactElement => {
+const FundingsPreview = (props: PreviewProps): ReactElement<any> => {
   const ref = usePreviewRef(props);
   const funding = usePageData<Funding>(props);
 

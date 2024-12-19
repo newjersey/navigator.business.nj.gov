@@ -12,7 +12,7 @@ interface Props {
   employerId: string;
 }
 
-export const EinDisplay = (props: Props): ReactElement => {
+export const EinDisplay = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   return (

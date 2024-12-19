@@ -55,7 +55,7 @@ export const TaskPageSwitchComponent = ({
   business,
   roadmap,
   CMS_ONLY_disable_overlay,
-}: Props): ReactElement => {
+}: Props): ReactElement<any> => {
   if (taskIdsWithLicenseSearchEnabled.includes(task.id)) {
     return (
       <LicenseTask task={task as TaskWithLicenseTaskId} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />

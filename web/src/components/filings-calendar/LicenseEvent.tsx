@@ -9,7 +9,7 @@ interface Props {
   index?: number;
 }
 
-export const LicenseEvent = (props: Props): ReactElement | null => {
+export const LicenseEvent = (props: Props): ReactElement<any> | null => {
   const licenseEvent = props.licenseEvents.find((event) => {
     return event.licenseName === props.LicenseCalendarEvent.licenseName;
   });

@@ -27,7 +27,7 @@ const ElevatorSearchErrorLookup: Record<ElevatorRegistrationSearchError, string>
   SEARCH_FAILED: Config.elevatorRegistrationSearchTask.errorTextSearchFailed,
 };
 
-export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
+export const CheckElevatorRegistrationStatus = (props: Props): ReactElement<any> => {
   const [formValues, setFormValues] = useState<ElevatorSafetyAddress>({ address1: "" });
   const [selectedMunicipality, setSelectedMunicipality] = useState<Municipality | undefined>(undefined);
   const { business, updateQueue } = useUserData();
@@ -109,7 +109,7 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
     };
   };
 
-  const getErrorAlert = (): ReactElement => {
+  const getErrorAlert = (): ReactElement<any> => {
     if (!props.error) {
       return <></>;
     }

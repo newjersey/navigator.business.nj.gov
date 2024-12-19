@@ -8,7 +8,7 @@ interface Props extends Omit<DataFieldProps, "fieldName" | "inputWidth"> {
   fieldOptions?: TextFieldProps;
 }
 
-export const NexusDBANameField = (props: Props): ReactElement => {
+export const NexusDBANameField = (props: Props): ReactElement<any> => {
   return (
     <DataField
       fieldName={"nexusDbaName"}

@@ -9,7 +9,7 @@ import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateTask } from "@/test/factories";
 import { ReactElement } from "react";
 
-const EinInputPreview = (props: PreviewProps): ReactElement => {
+const EinInputPreview = (props: PreviewProps): ReactElement<any> => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

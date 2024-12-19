@@ -4,7 +4,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
-export const NavBarDesktopQuickLinks = (): ReactElement => {
+export const NavBarDesktopQuickLinks = (): ReactElement<any> => {
   const { Config } = useConfig();
 
   const sharedMargins = "margin-right-3";

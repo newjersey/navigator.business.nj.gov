@@ -3,7 +3,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { ReactElement } from "react";
 
-export const LegalMessage = (): ReactElement => {
+export const LegalMessage = (): ReactElement<any> => {
   const { Config } = useConfig();
 
   return (

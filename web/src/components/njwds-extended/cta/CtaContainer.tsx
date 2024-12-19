@@ -5,7 +5,7 @@ interface Props {
   noBackgroundColor?: boolean;
 }
 
-export const CtaContainer = (props: Props): ReactElement => {
+export const CtaContainer = (props: Props): ReactElement<any> => {
   return (
     <div
       className={`${

@@ -16,7 +16,7 @@ interface Props {
   task: Task;
 }
 
-export const CheckWastePermitsQuestionnaire = (props: Props): ReactElement => {
+export const CheckWastePermitsQuestionnaire = (props: Props): ReactElement<any> => {
   const { updateQueue, business } = useUserData();
   const { Config } = useConfig();
   const [showError, setShowError] = useState<boolean>(false);

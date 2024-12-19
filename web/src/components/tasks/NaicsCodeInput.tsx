@@ -34,7 +34,7 @@ const errorMessages: Record<NaicsErrorTypes, string> = {
 
 const REQUIRED_LENGTH = 6;
 
-export const NaicsCodeInput = (props: Props): ReactElement => {
+export const NaicsCodeInput = (props: Props): ReactElement<any> => {
   const userDataFromHook = useUserData();
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const updateQueue = userDataFromHook.updateQueue;

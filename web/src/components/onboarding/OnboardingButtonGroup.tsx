@@ -11,7 +11,7 @@ interface Props {
   isAdditionalBusiness: boolean;
 }
 
-export const OnboardingButtonGroup = (props: Props): ReactElement => {
+export const OnboardingButtonGroup = (props: Props): ReactElement<any> => {
   const { state, onBack } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 

@@ -21,7 +21,7 @@ interface Props {
   CMS_ONLY_stepIndex?: number;
 }
 
-export const RaffleBingoPaginator = (props: Props): ReactElement => {
+export const RaffleBingoPaginator = (props: Props): ReactElement<any> => {
   const [stepIndex, setStepIndex] = useState(props.CMS_ONLY_stepIndex ?? 0);
   const [step, setStep] = useState<Task>();
   const { business, updateQueue } = useUserData();

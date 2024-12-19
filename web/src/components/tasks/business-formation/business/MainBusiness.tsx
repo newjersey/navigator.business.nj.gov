@@ -16,7 +16,7 @@ import { isForeignCorporation, isForeignCorporationOrNonprofit } from "@/lib/uti
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext, useMemo } from "react";
 
-export const MainBusiness = (): ReactElement => {
+export const MainBusiness = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
   const { doSomeFieldsHaveError, doesFieldHaveError } = useFormationErrors();

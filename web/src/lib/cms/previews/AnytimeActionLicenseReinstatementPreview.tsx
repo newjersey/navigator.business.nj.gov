@@ -10,7 +10,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { ReactElement } from "react";
 
-const AnytimeActionLicenseReinstatementPreview = (props: PreviewProps): ReactElement => {
+const AnytimeActionLicenseReinstatementPreview = (props: PreviewProps): ReactElement<any> => {
   const ref = usePreviewRef(props);
   const anytimeAction = usePageData<AnytimeActionLicenseReinstatement>(props);
   const licenseName = anytimeAction.licenseName || "Health Care Services";

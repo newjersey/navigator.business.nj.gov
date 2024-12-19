@@ -16,11 +16,11 @@ interface Props {
   isLast?: boolean;
 }
 
-export const UserSupportActionCard = (props: Props): ReactElement => {
+export const UserSupportActionCard = (props: Props): ReactElement<any> => {
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 
   return (
-    <div
+    (<div
       className={`landing-card border-${props.borderColor} border-top-105 ${
         isDesktopAndUp && !props.isLast ? "margin-right-3" : ""
       } ${!isDesktopAndUp && !props.isLast ? "margin-bottom-2" : ""}`}
@@ -33,7 +33,7 @@ export const UserSupportActionCard = (props: Props): ReactElement => {
           <div>{props.supportingText}</div>
         </div>
         <div>
-          <Link href={props.buttonLink}>
+          <Link href={props.buttonLink} legacyBehavior>
             <div>
               <PrimaryButton
                 isColor={props.primaryButtonColor}
@@ -46,6 +46,6 @@ export const UserSupportActionCard = (props: Props): ReactElement => {
           </Link>
         </div>
       </div>
-    </div>
+    </div>)
   );
 };

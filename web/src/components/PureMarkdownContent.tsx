@@ -10,10 +10,10 @@ import { visit } from "unist-util-visit";
 
 interface Props {
   children: string;
-  components?: { [key: string]: { ({ children }: { children: string[] }): ReactElement } };
+  components?: { [key: string]: { ({ children }: { children: string[] }): ReactElement<any> } };
 }
 
-export const PureMarkdownContent = (props: Props): ReactElement => {
+export const PureMarkdownContent = (props: Props): ReactElement<any> => {
   const markdown = unified()
     .use(remarkParse)
     .use(remarkGfm)

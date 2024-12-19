@@ -8,8 +8,8 @@ import React, { forwardRef, ReactElement } from "react";
 export const ContextInfoElement = forwardRef(
   (
     props: { isVisible: boolean; header: string; markdown: string; close?: () => void },
-    ref?: React.LegacyRef<any>
-  ): ReactElement => {
+    ref?: React.Ref<any>
+  ): ReactElement<any> => {
     return (
       <aside
         data-testid="info-panel"

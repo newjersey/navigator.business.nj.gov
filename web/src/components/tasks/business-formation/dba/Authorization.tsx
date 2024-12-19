@@ -4,11 +4,11 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
 
-export const Authorization = (): ReactElement => {
+export const Authorization = (): ReactElement<any> => {
   const { state } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
 
-  const getFormattedBody = (): ReactElement => {
+  const getFormattedBody = (): ReactElement<any> => {
     const [beforeIndentation, after] = state.dbaContent.Authorize.contentMd.split(
       "${beginIndentationSection}"
     );

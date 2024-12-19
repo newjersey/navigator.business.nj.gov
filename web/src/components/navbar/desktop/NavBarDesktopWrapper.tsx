@@ -7,7 +7,7 @@ interface NavBarDesktopWrapperProps {
   CMS_ONLY_disableSticky?: boolean;
 }
 
-export const NavBarDesktopWrapper = (props: NavBarDesktopWrapperProps): ReactElement => {
+export const NavBarDesktopWrapper = (props: NavBarDesktopWrapperProps): ReactElement<any> => {
   return (
     <div
       className={`${props.CMS_ONLY_disableSticky ? "" : "position-sticky"} top-0 z-500 bg-white`}

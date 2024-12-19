@@ -27,7 +27,7 @@ class CustomDocument extends Document {
     return { ...initialProps };
   }
 
-  render(): ReactElement {
+  render(): ReactElement<any> {
     return (
       <Html lang="en">
         <Head>

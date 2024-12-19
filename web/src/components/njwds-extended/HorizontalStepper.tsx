@@ -19,7 +19,7 @@ type StepperState =
   | "INCOMPLETE-ACTIVE"
   | "INCOMPLETE";
 
-export const HorizontalStepper = (props: Props): ReactElement => {
+export const HorizontalStepper = (props: Props): ReactElement<any> => {
   const [focusStep, setFocusStep] = useState(props.currentStep);
 
   const { Config } = useConfig();
@@ -187,47 +187,47 @@ export const HorizontalStepper = (props: Props): ReactElement => {
 
   const divRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  return (
-    <>
-      <div className="horizontal-step-indicator display-block">
-        <div className="usa-step-indicator usa-step-indicator--counters-sm">
-          <div className={`usa-step-indicator__segments stepper-wrapper`} role={"tablist"}>
-            {props.steps.map((step: StepperStep, index: number) => {
-              return (
-                <div
-                  key={`${step.name}-${index}`}
-                  className={
-                    `border-bottom-2px ${getBorderColor(index)} cursor-pointer ` +
-                    `usa-step-indicator__segment usa-step-indicator__segment${getCSSClassColor(index)}`
-                  }
-                  data-num={getIcon(index)}
-                  data-state={determineState(index)}
-                  data-testid={`stepper-${index}`}
-                  onClick={(): void => props.onStepClicked(index)}
-                  onKeyDown={(e) => handleKeyDown(e, index)}
-                  role="tab"
-                  tabIndex={index === props.currentStep ? 0 : -1}
-                  aria-label={composeFormationTabAriaLabel(
-                    Config.formation.general.ariaContextStepperLabels,
-                    step.name,
-                    determineAriaState(determineState(index))
-                  )}
-                  aria-selected={index === props.currentStep}
-                  ref={(el) => (divRefs.current[index] = el)}
-                >
-                  <div className={`usa-step-indicator__segment-label ${getBoldClass(index)}`}>
-                    <span>{step.name}</span>
-                  </div>
+  return (<>
+    <div className="horizontal-step-indicator display-block">
+      <div className="usa-step-indicator usa-step-indicator--counters-sm">
+        <div className={`usa-step-indicator__segments stepper-wrapper`} role={"tablist"}>
+          {props.steps.map((step: StepperStep, index: number) => {
+            return (
+              (<div
+                key={`${step.name}-${index}`}
+                className={
+                  `border-bottom-2px ${getBorderColor(index)} cursor-pointer ` +
+                  `usa-step-indicator__segment usa-step-indicator__segment${getCSSClassColor(index)}`
+                }
+                data-num={getIcon(index)}
+                data-state={determineState(index)}
+                data-testid={`stepper-${index}`}
+                onClick={(): void => props.onStepClicked(index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
+                role="tab"
+                tabIndex={index === props.currentStep ? 0 : -1}
+                aria-label={composeFormationTabAriaLabel(
+                  Config.formation.general.ariaContextStepperLabels,
+                  step.name,
+                  determineAriaState(determineState(index))
+                )}
+                aria-selected={index === props.currentStep}
+                ref={el => {
+                  (divRefs.current[index] = el);
+                }}
+              >
+                <div className={`usa-step-indicator__segment-label ${getBoldClass(index)}`}>
+                  <span>{step.name}</span>
                 </div>
-              );
-            })}
-          </div>
+              </div>)
+            );
+          })}
         </div>
       </div>
-      <div className={"display-only-mobile-and-tablet margin-top-1 margin-bottom-2"}>
-        <strong>{`Step ${props.currentStep + 1} of ${props.steps.length}:`}</strong>
-        {` ${props.steps[props.currentStep].name}`}
-      </div>
-    </>
-  );
+    </div>
+    <div className={"display-only-mobile-and-tablet margin-top-1 margin-bottom-2"}>
+      <strong>{`Step ${props.currentStep + 1} of ${props.steps.length}:`}</strong>
+      {` ${props.steps[props.currentStep].name}`}
+    </div>
+  </>);
 };

@@ -20,7 +20,7 @@ export const ShowHideToggleButton = ({
   useOverrideText,
   hideOverrideText,
   showOverrideText,
-}: Props): ReactElement => {
+}: Props): ReactElement<any> => {
   const hideButtonText = (): string | undefined => {
     return useOverrideText ? hideOverrideText : hideText;
   };

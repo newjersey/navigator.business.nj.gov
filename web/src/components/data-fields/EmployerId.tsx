@@ -8,7 +8,7 @@ interface Props {
   handleChangeOverride?: (value: string) => void;
 }
 
-export const EmployerId = (props: Props): ReactElement => {
+export const EmployerId = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const fieldName = "employerId";
 

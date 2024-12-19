@@ -10,7 +10,7 @@ import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { ReactElement, useContext } from "react";
 
-export const DbaNameSearch = (): ReactElement => {
+export const DbaNameSearch = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
   const { business } = useUserData();

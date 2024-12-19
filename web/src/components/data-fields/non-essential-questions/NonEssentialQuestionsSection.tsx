@@ -4,7 +4,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
-export const NonEssentialQuestionsSection = (): ReactElement => {
+export const NonEssentialQuestionsSection = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(ProfileDataContext);
 
@@ -12,8 +12,8 @@ export const NonEssentialQuestionsSection = (): ReactElement => {
     return LookupIndustryById(state.profileData.industryId).nonEssentialQuestionsIds.length > 0;
   };
 
-  const nonEssentialQuestions = (): ReactElement[] => {
-    const nonEssentialQuestionsArray: ReactElement[] = [];
+  const nonEssentialQuestions = (): ReactElement<any>[] => {
+    const nonEssentialQuestionsArray: ReactElement<any>[] = [];
     const questionIds = LookupIndustryById(state.profileData.industryId).nonEssentialQuestionsIds;
     for (const question of questionIds) {
       nonEssentialQuestionsArray.push(<NonEssentialQuestion key={question} essentialQuestionId={question} />);

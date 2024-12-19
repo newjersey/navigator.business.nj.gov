@@ -19,7 +19,7 @@ interface Props extends Omit<DataFieldProps, "fieldName" | "handleChange" | "onV
   inputWidth?: "full" | "default" | "reduced";
 }
 
-export const TaxId = (props: Props): ReactElement => {
+export const TaxId = (props: Props): ReactElement<any> => {
   const fieldName = "taxId";
 
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
@@ -57,7 +57,7 @@ export const TaxId = (props: Props): ReactElement => {
     }
   }, [business?.profileData.taxId]);
 
-  const getShowHideToggleButton = (toggleFunc?: (taxId: string) => void): ReactElement => {
+  const getShowHideToggleButton = (toggleFunc?: (taxId: string) => void): ReactElement<any> => {
     return ShowHideToggleButton({
       status: taxIdDisplayStatus,
       toggle: taxIdToggle(toggleFunc),

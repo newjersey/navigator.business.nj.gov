@@ -42,7 +42,7 @@ NeedsAccountContext.displayName = "Needs Account";
 ContextualInfoContext.displayName = "Contextual Info";
 UserDataErrorContext.displayName = "User Data Error";
 
-const App = ({ Component, pageProps }: AppProps): ReactElement => {
+const App = ({ Component, pageProps }: AppProps): ReactElement<any> => {
   const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
   const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(undefined);
   const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);

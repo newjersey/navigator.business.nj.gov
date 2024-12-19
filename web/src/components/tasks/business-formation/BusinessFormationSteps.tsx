@@ -7,7 +7,7 @@ import { ReviewStep } from "@/components/tasks/business-formation/review/ReviewS
 import { FormationStepNames } from "@/lib/types/types";
 import { ReactElement } from "react";
 
-export const BusinessFormationSteps: { component: ReactElement; step: FormationStepNames }[] = [
+export const BusinessFormationSteps: { component: ReactElement<any>; step: FormationStepNames }[] = [
   {
     component: <BusinessNameStep />,
     step: BusinessFormationStepsConfiguration[0].name,

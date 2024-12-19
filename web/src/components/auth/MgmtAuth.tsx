@@ -8,7 +8,7 @@ interface Props {
   setIsAuthed: (value: boolean) => void;
 }
 
-export const MgmtAuth = (props: Props): ReactElement => {
+export const MgmtAuth = (props: Props): ReactElement<any> => {
   const { password } = props;
   const [hasError, setHasError] = useState<boolean>(false);
 

@@ -28,7 +28,7 @@ interface Props {
 
 type ModalTypes = "formation" | "formation-unset" | "registered-for-taxes-unset";
 
-export const TaskProgressCheckbox = (props: Props): ReactElement => {
+export const TaskProgressCheckbox = (props: Props): ReactElement<any> => {
   const { business, updateQueue } = useUserData();
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { queueUpdateTaskProgress, congratulatoryModal } = useUpdateTaskProgress();

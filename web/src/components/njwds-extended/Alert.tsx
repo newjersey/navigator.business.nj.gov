@@ -31,7 +31,7 @@ const composeAriaGroupLabel = (content: string, alertMappedName: string): string
   });
 };
 
-const Alert = forwardRef((props: Props, ref: ForwardedRef<HTMLDivElement>): ReactElement => {
+const Alert = forwardRef((props: Props, ref: ForwardedRef<HTMLDivElement>): ReactElement<any> => {
   const { variant, children, noIcon, heading, rounded, dataTestid } = props;
   const variantClass = variant ? `usa-alert--${variant}` : "";
   const noIconClass = noIcon ? " usa-alert--no-icon" : "";

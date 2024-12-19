@@ -12,9 +12,9 @@ import { useMediaQuery } from "@mui/material";
 import { ReactElement, ReactNode, useContext, useEffect, useMemo, useState } from "react";
 
 type Props = {
-  template?: (props: { children: ReactNode }) => ReactElement;
+  template?: (props: { children: ReactNode }) => ReactElement<any>;
 };
-export const DisabledTaxId = (props: Props): ReactElement => {
+export const DisabledTaxId = (props: Props): ReactElement<any> => {
   const fieldName = "taxId";
 
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
@@ -53,7 +53,7 @@ export const DisabledTaxId = (props: Props): ReactElement => {
   const [locationValue, setLocationValue] = useState(state.profileData[fieldName]?.trim().slice(9, 12) ?? "");
   const [taxIdValue, setTaxIdValue] = useState(state.profileData[fieldName]?.trim().slice(0, 9) ?? "");
   const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<TaxIdDisplayStatus>(taxIdInitialDisplay());
-  const getShowHideToggleButton = (): ReactElement => {
+  const getShowHideToggleButton = (): ReactElement<any> => {
     return ShowHideToggleButton({
       status: taxIdDisplayStatus,
       toggle: updateTaxIdDisplay,
@@ -98,7 +98,7 @@ export const DisabledTaxId = (props: Props): ReactElement => {
     toggleTaxIdDisplay();
   };
 
-  const SimpleDiv = (props: { children: ReactNode }): ReactElement => (
+  const SimpleDiv = (props: { children: ReactNode }): ReactElement<any> => (
     <div className="flex">
       <div>{props.children}</div>
     </div>

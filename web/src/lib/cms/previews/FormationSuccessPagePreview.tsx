@@ -10,7 +10,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { ReactElement } from "react";
 
-const FormationSuccessPreview = (props: PreviewProps): ReactElement => {
+const FormationSuccessPreview = (props: PreviewProps): ReactElement<any> => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

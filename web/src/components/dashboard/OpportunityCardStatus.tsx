@@ -6,7 +6,7 @@ interface Props {
   status?: string;
 }
 
-export const OpportunityCardStatus = (props: Props): ReactElement => {
+export const OpportunityCardStatus = (props: Props): ReactElement<any> => {
   return (
     <>
       {props.dueDate &&

@@ -19,7 +19,7 @@ interface Props {
   boldDescription?: boolean;
 }
 
-export const ProfileField = (props: Props): ReactElement => {
+export const ProfileField = (props: Props): ReactElement<any> => {
   const { isFormFieldInvalid } = useFormContextFieldHelpers(props.fieldName, ProfileFormContext);
 
   if (props.isVisible === false) {

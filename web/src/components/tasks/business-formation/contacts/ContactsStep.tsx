@@ -15,7 +15,7 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
 
-export const ContactsStep = (): ReactElement => {
+export const ContactsStep = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const { doesFieldHaveError } = useFormationErrors();

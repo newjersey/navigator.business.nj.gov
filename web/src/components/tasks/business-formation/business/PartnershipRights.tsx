@@ -6,7 +6,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { FormationFields, FormationTextField } from "@businessnjgovnavigator/shared";
 import { ReactElement, ReactNode, useContext } from "react";
 
-export const PartnershipRights = (): ReactElement => {
+export const PartnershipRights = (): ReactElement<any> => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
 

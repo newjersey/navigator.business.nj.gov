@@ -32,7 +32,7 @@ const industrySpecificStarterKitsLink = (industryId: string): void => {
   window.location.href = url.toString();
 };
 
-const StarterKitsPage = (props: Props): ReactElement => {
+const StarterKitsPage = (props: Props): ReactElement<any> => {
   const Config = getMergedConfig();
 
   const heroTitle = insertIndustryContent(

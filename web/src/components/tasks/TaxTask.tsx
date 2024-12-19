@@ -13,7 +13,7 @@ interface Props {
   task: Task;
 }
 
-export const TaxTask = (props: Props): ReactElement => {
+export const TaxTask = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const { business } = useUserData();
 

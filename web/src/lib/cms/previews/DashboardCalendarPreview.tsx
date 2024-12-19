@@ -22,7 +22,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import dayjs from "dayjs";
 import { ReactElement } from "react";
 
-const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
+const DashboardCalendarPreview = (props: PreviewProps): ReactElement<any> => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

@@ -2,7 +2,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { ReactElement } from "react";
 
-export const SkipToMainContent = (): ReactElement => {
+export const SkipToMainContent = (): ReactElement<any> => {
   const { Config } = useConfig();
 
   return (

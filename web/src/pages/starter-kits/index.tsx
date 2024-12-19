@@ -7,7 +7,7 @@ import { STARTER_KITS_GENERIC_SLUG } from "@/lib/utils/starterKits";
 import { GetServerSideProps } from "next";
 import { ReactElement } from "react";
 
-const StarterKitsRootPage = (): ReactElement => {
+const StarterKitsRootPage = (): ReactElement<any> => {
   return (
     <PageSkeleton landingPage={true}>
       <NavBar isSeoStarterKit={true} />

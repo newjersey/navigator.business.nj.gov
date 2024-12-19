@@ -29,7 +29,7 @@ interface Props {
   licenseEvents: LicenseEventType[];
 }
 
-export const FilingsCalendar = (props: Props): ReactElement => {
+export const FilingsCalendar = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const { updateQueue } = useUserData();
   const business = props.CMS_ONLY_fakeBusiness ?? updateQueue?.currentBusiness();
@@ -54,7 +54,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     );
   };
 
-  const renderCalendar = (): ReactElement => {
+  const renderCalendar = (): ReactElement<any> => {
     const type = LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCalendarType;
     if (type === "LIST")
       return (
@@ -87,7 +87,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     return <></>;
   };
 
-  const renderToggleButton = (): ReactElement => {
+  const renderToggleButton = (): ReactElement<any> => {
     const displayToggleButton =
       business?.taxFilingData?.filings &&
       business?.taxFilingData?.filings.length > 0 &&

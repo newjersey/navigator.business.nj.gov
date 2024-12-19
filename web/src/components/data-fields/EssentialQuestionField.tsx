@@ -15,7 +15,7 @@ interface Props<T> extends FormContextFieldProps<T> {
   essentialQuestion: EssentialQuestion;
   onboardingFieldLabel?: boolean;
 }
-export const EssentialQuestionField = <T,>(props: Props<T>): ReactElement => {
+export const EssentialQuestionField = <T,>(props: Props<T>): ReactElement<any> => {
   const { state } = useContext(ProfileDataContext);
 
   const { RegisterForOnSubmit, isFormFieldInvalid } = useFormContextFieldHelpers(

@@ -13,7 +13,7 @@ interface Props {
   hasError: boolean;
 }
 
-export const Members = (props: Props): ReactElement => {
+export const Members = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);

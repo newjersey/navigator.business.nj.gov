@@ -9,7 +9,7 @@ interface Props {
   anytimeAction: AnytimeActionLicenseReinstatement | AnytimeActionTask;
 }
 
-export const AnytimeActionElement = (props: Props): ReactElement => {
+export const AnytimeActionElement = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   return (

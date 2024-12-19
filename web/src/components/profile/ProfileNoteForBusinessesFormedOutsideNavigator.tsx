@@ -10,7 +10,7 @@ interface Props {
   isAuthenticated: IsAuthenticated;
 }
 
-export const ProfileNoteDisclaimerForSubmittingData = (props: Props): ReactElement => {
+export const ProfileNoteDisclaimerForSubmittingData = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   if (!shouldShowDisclaimerForProfileNotSubmittingData(props.business, props.isAuthenticated)) {

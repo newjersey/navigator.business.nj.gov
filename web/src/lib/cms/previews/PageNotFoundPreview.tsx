@@ -5,7 +5,7 @@ import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import PageNotFound from "@/pages/404";
 import { ReactElement } from "react";
 
-const PageNotFoundPreview = (props: PreviewProps): ReactElement => {
+const PageNotFoundPreview = (props: PreviewProps): ReactElement<any> => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

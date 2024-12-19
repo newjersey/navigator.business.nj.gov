@@ -52,8 +52,8 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
 export const GenericTextField = forwardRef(
   <T,>(
     props: GenericTextFieldProps<T>,
-    ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined
-  ): ReactElement => {
+    ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement | null> | null | undefined
+  ): ReactElement<any> => {
     const widthStyling =
       props.inputWidth === "reduced"
         ? "text-field-width-reduced"

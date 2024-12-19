@@ -20,7 +20,7 @@ interface Props {
   CMS_ONLY_isConditional?: boolean;
 }
 
-export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
+export const CannabisApplyForLicenseTask = (props: Props): ReactElement<any> => {
   const userDataFromHook = useUserData();
   const updateQueue = userDataFromHook.updateQueue;
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;

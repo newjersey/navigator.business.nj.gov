@@ -11,7 +11,7 @@ import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { getPhoneNumberFormat } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
-export const BillingStep = (): ReactElement => {
+export const BillingStep = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { doSomeFieldsHaveError, getFieldErrorLabel } = useFormationErrors();
 

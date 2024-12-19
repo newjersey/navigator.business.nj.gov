@@ -5,7 +5,7 @@ import analytics from "@/lib/utils/analytics";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement } from "react";
 
-export const MicrobusinessRadioQuestion = (): ReactElement => {
+export const MicrobusinessRadioQuestion = (): ReactElement<any> => {
   const { updateQueue, business } = useUserData();
   const { Config } = useConfig();
 

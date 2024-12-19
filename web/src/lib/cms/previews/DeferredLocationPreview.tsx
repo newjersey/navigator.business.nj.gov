@@ -6,7 +6,7 @@ import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateBusiness, generateMunicipality, generateProfileData } from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
-const DeferredLocationPreview = (props: PreviewProps): ReactElement => {
+const DeferredLocationPreview = (props: PreviewProps): ReactElement<any> => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

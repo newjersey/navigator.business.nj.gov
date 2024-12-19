@@ -14,7 +14,7 @@ interface Props<T> extends FormContextFieldProps<T> {
   disabled?: boolean;
 }
 
-export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
+export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement<any> => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
@@ -49,7 +49,7 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
     }
   };
 
-  const renderOption = (legalStructureId: string): ReactElement => {
+  const renderOption = (legalStructureId: string): ReactElement<any> => {
     return (
       <div className="padding-top-1 padding-bottom-1">
         {state.profileData.legalStructureId === legalStructureId ? (

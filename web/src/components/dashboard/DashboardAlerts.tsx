@@ -4,7 +4,7 @@ import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { getTaskStatusUpdatedMessage } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
-export const DashboardAlerts = (): ReactElement => {
+export const DashboardAlerts = (): ReactElement<any> => {
   const { Config } = useConfig();
 
   const secondSnackbarTimeDelay = Config.dashboardDefaults.timeDelayBetweenMultipleSnackbars;

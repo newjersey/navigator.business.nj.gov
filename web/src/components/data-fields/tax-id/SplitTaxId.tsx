@@ -18,7 +18,7 @@ import { ReactElement, useContext, useRef, useState } from "react";
 
 interface Props extends Omit<DataFieldProps, "fieldName" | "handleChange" | "onValidation" | "inputWidth"> {
   handleChangeOverride?: (value: string) => void;
-  getShowHideToggleButton: (toggleFunc?: (taxId: string) => void) => ReactElement;
+  getShowHideToggleButton: (toggleFunc?: (taxId: string) => void) => ReactElement<any>;
   taxIdDisplayStatus: TaxIdDisplayStatus;
 }
 export const SplitTaxId = ({
@@ -26,7 +26,7 @@ export const SplitTaxId = ({
   additionalValidationIsValid,
   validationText,
   ...props
-}: Props): ReactElement => {
+}: Props): ReactElement<any> => {
   const fieldName = "taxId";
 
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);

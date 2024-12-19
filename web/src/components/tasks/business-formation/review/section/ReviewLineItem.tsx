@@ -15,7 +15,7 @@ interface Props {
   noColonAfterLabel?: boolean;
 }
 
-export const ReviewLineItem = (props: Props): ReactElement => {
+export const ReviewLineItem = (props: Props): ReactElement<any> => {
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   return (
     <div

@@ -19,7 +19,7 @@ import { StateObject } from "@businessnjgovnavigator/shared/states";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
-export const ProfileAddress = (): ReactElement => {
+export const ProfileAddress = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { business } = useUserData();
   const { state, setAddressData } = useContext(AddressContext);
@@ -96,7 +96,7 @@ export const ProfileAddress = (): ReactElement => {
     }
   }, business);
 
-  const addressLines1And2 = (): ReactElement => {
+  const addressLines1And2 = (): ReactElement<any> => {
     return (
       <>
         <div id={`question-addressLine1`} className="text-field-width-default add-spacing-on-ele-scroll">
@@ -124,7 +124,7 @@ export const ProfileAddress = (): ReactElement => {
     );
   };
 
-  const showAddressFields = (): ReactElement => {
+  const showAddressFields = (): ReactElement<any> => {
     switch (state.formationAddressData.businessLocationType) {
       case "INTL":
         return (

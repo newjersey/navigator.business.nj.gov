@@ -11,7 +11,7 @@ interface Props {
   onboardingKey?: keyof ProfileData | undefined;
 }
 
-export const TaskCtaLinks = (props: Props): ReactElement => {
+export const TaskCtaLinks = (props: Props): ReactElement<any> => {
   const ctaButtons: CallToActionHyperlink[] = [];
   const { Config } = useConfig();
 

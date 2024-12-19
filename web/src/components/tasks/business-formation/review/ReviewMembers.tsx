@@ -5,7 +5,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
 
-export const ReviewMembers = (): ReactElement => {
+export const ReviewMembers = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
 
@@ -23,7 +23,7 @@ export const ReviewMembers = (): ReactElement => {
     };
   };
 
-  const displayMembers = (): ReactElement => {
+  const displayMembers = (): ReactElement<any> => {
     return (
       <>
         {state.formationFormData.members?.map((member, index) => {
@@ -67,7 +67,7 @@ export const ReviewMembers = (): ReactElement => {
     );
   };
 
-  const displayEmptyMembers = (): ReactElement => {
+  const displayEmptyMembers = (): ReactElement<any> => {
     return (
       <div data-testid="empty-members-section">
         <ReviewLineItem label={getConfig().label} value={undefined} marginOverride={"margin-top-0"} />
@@ -83,7 +83,7 @@ export const ReviewMembers = (): ReactElement => {
     );
   };
 
-  const members = (): ReactElement => {
+  const members = (): ReactElement<any> => {
     if (hasMembers) {
       return displayMembers();
     } else {

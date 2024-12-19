@@ -14,7 +14,7 @@ export const WithStatefulAddressData = ({
   children: ReactNode;
   initialData: FormationAddress;
   municipalities: Municipality[];
-}): ReactElement => {
+}): ReactElement<any> => {
   const [addressData, setAddressData] = useState<FormationAddress>(initialData);
   const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
 

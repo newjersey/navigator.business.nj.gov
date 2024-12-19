@@ -9,7 +9,7 @@ type Props = {
   card: SidebarCardContent;
 };
 
-export const SidebarCardGoToProfileNudge = (props: Props): ReactElement => {
+export const SidebarCardGoToProfileNudge = (props: Props): ReactElement<any> => {
   const router = useRouter();
 
   const onClick = (): void => {

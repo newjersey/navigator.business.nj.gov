@@ -13,7 +13,7 @@ interface Props {
   }[];
 }
 
-export const FieldEntryAlert = (props: Props): ReactElement => {
+export const FieldEntryAlert = (props: Props): ReactElement<any> => {
   const router = useRouter();
 
   const onAnchorClick = (): void => {

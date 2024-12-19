@@ -21,7 +21,7 @@ interface Props {
   funding: Funding;
 }
 
-export const FundingElement = (props: { funding: Funding }): ReactElement => {
+export const FundingElement = (props: { funding: Funding }): ReactElement<any> => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const { Config } = useConfig();
 
@@ -82,7 +82,7 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
   );
 };
 
-const FundingPage = (props: Props): ReactElement => {
+const FundingPage = (props: Props): ReactElement<any> => {
   return (
     <>
       <NextSeo title={getNextSeoTitle(props.funding.name)} />

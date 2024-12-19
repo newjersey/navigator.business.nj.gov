@@ -13,7 +13,7 @@ interface Props {
   setStepIndex: (stepIndex: number) => void;
 }
 
-export const FormationInterimSuccessPage = (props: Props): ReactElement => {
+export const FormationInterimSuccessPage = (props: Props): ReactElement<any> => {
   const [showConfirmResubmitModal, setShowConfirmResubmitModal] = useState<boolean>(false);
   const { Config } = useConfig();
   const { updateQueue } = useUserData();

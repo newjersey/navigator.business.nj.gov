@@ -13,7 +13,7 @@ interface Props {
   index?: number;
 }
 
-export const CalendarEventItem = (props: Props): ReactElement => {
+export const CalendarEventItem = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   const onClick = (): void => {
@@ -22,34 +22,37 @@ export const CalendarEventItem = (props: Props): ReactElement => {
 
   if (props.index !== undefined) {
     return (
-      <div className={`margin-bottom-05 ${props.index === 0 ? "margin-top-05" : ""}`}>
-        <Link href={props.urlSlug} passHref>
-          <a href={props.urlSlug} onClick={onClick} data-testid="calendar-event-anchor">
-            {props.title}
-          </a>
+      (<div className={`margin-bottom-05 ${props.index === 0 ? "margin-top-05" : ""}`}>
+        <Link
+          href={props.urlSlug}
+          passHref
+          onClick={onClick}
+          data-testid="calendar-event-anchor">
+
+          {props.title}
+
         </Link>
-      </div>
+      </div>)
     );
   }
 
   return (
-    <div className="line-height-1 margin-bottom-1">
+    (<div className="line-height-1 margin-bottom-1">
       <Tag backgroundColor="accent-warm-extra-light" isHover isRadiusMd isWrappingText>
-        <Link href={props.urlSlug}>
-          <a
-            data-testid="calendar-event-anchor"
-            href={props.urlSlug}
-            onClick={onClick}
-            className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline"
-          >
-            <span className="text-bold text-uppercase text-base-dark">
-              {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
-              {parseDateWithFormat(props.dueDate, defaultDateFormat).format("M/D")}
-            </span>{" "}
-            <span className="text-no-uppercase text-underline text-base-dark">{props.title}</span>
-          </a>
+        <Link
+          href={props.urlSlug}
+          data-testid="calendar-event-anchor"
+          onClick={onClick}
+          className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline">
+
+          <span className="text-bold text-uppercase text-base-dark">
+            {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
+            {parseDateWithFormat(props.dueDate, defaultDateFormat).format("M/D")}
+          </span>{" "}
+          <span className="text-no-uppercase text-underline text-base-dark">{props.title}</span>
+
         </Link>
       </Tag>
-    </div>
+    </div>)
   );
 };

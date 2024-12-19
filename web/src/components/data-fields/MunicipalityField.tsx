@@ -16,7 +16,7 @@ interface Props extends FormContextFieldProps {
   required?: boolean;
 }
 
-export const MunicipalityField = (props: Props): ReactElement => {
+export const MunicipalityField = (props: Props): ReactElement<any> => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { municipalities } = useContext(MunicipalitiesContext);
   const { Config } = useConfig();

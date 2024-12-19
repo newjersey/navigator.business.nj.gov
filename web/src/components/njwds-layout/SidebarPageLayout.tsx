@@ -24,7 +24,7 @@ export const SidebarPageLayout = ({
   belowBoxComponent,
   titleOverColumns,
   nonWrappingLeftColumn,
-}: SidebarPageLayoutProps): ReactElement => {
+}: SidebarPageLayoutProps): ReactElement<any> => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const { Config } = useConfig();
 

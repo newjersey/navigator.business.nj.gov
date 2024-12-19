@@ -13,7 +13,7 @@ import { ReactElement, useContext, useEffect } from "react";
 
 export const signInSamlError = "Name+ID+value+was+not+found+in+SAML";
 
-const LoadingPage = (): ReactElement => {
+const LoadingPage = (): ReactElement<any> => {
   const { updateQueue, userData } = useUserData();
   const router = useRouter();
   const { dispatch } = useContext(AuthContext);

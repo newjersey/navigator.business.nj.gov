@@ -34,7 +34,7 @@ interface Props<T extends FormationMember | FormationIncorporator> {
 
 export const AddressModal = <T extends FormationMember | FormationIncorporator>(
   props: Props<T>
-): ReactElement => {
+): ReactElement<any> => {
   const { business } = useUserData();
   const isStarting = isStartingBusiness(business);
   const { Config } = useConfig();

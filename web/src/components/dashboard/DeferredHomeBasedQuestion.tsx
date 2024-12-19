@@ -8,7 +8,7 @@ interface Props {
   business: Business | undefined;
   onSave: () => void;
 }
-export const DeferredHomeBasedQuestion = (props: Props): ReactElement => {
+export const DeferredHomeBasedQuestion = (props: Props): ReactElement<any> => {
   if (!props.business) return <></>;
   const operatingPhase = LookupOperatingPhaseById(props.business.profileData.operatingPhase);
 

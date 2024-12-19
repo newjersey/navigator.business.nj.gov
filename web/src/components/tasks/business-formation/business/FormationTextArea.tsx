@@ -11,7 +11,7 @@ interface Props {
   maxChars: number;
 }
 
-export const FormationTextArea = (props: Props): ReactElement => {
+export const FormationTextArea = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
 

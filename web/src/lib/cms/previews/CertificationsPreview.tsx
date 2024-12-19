@@ -6,7 +6,7 @@ import { Certification } from "@/lib/types/types";
 import { CertificationElement } from "@/pages/certification/[certificationUrlSlug]";
 import { ReactElement } from "react";
 
-const CertificationsPreview = (props: PreviewProps): ReactElement => {
+const CertificationsPreview = (props: PreviewProps): ReactElement<any> => {
   const ref = usePreviewRef(props);
   const certification = usePageData<Certification>(props);
 

@@ -16,7 +16,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { ReactElement, useContext, useState } from "react";
 
-export const MainBusinessAddressNj = (): ReactElement => {
+export const MainBusinessAddressNj = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { setFormationFormData, state } = useContext(BusinessFormationContext);
   const { business } = useUserData();

@@ -14,7 +14,7 @@ interface Props {
   CMS_ONLY_tab?: string;
 }
 
-export const CannabisPriorityStatusTask = (props: Props): ReactElement => {
+export const CannabisPriorityStatusTask = (props: Props): ReactElement<any> => {
   const { business, updateQueue } = useUserData();
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState(false);
   const [displayFirstTab, setDisplayFirstTab] = useState(true);

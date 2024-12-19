@@ -6,7 +6,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { hasCompletedBusinessStructure, LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
 import { ReactElement } from "react";
 
-export const Roadmap = (): ReactElement => {
+export const Roadmap = (): ReactElement<any> => {
   const { roadmap, sectionNamesInRoadmap } = useRoadmap();
   const { updateQueue } = useUserData();
 

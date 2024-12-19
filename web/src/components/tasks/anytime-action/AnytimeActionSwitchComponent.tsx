@@ -8,7 +8,7 @@ interface Props {
   anytimeActionTask: AnytimeActionTask;
 }
 
-export const AnytimeActionSwitchComponent = (props: Props): ReactElement => {
+export const AnytimeActionSwitchComponent = (props: Props): ReactElement<any> => {
   return rswitch(props.anytimeActionTask.filename, {
     "government-contracting": (
       <AnytimeActionGovernmentContractingElement anytimeAction={props.anytimeActionTask} />

@@ -17,7 +17,7 @@ interface Props {
   iconName?: string;
 }
 
-export const SingleCtaLink = (props: Props): ReactElement => {
+export const SingleCtaLink = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   return (

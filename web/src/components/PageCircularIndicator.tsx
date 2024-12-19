@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 interface Props {
   displayText?: string;
 }
-export const PageCircularIndicator = (props?: Props): ReactElement => {
+export const PageCircularIndicator = (props?: Props): ReactElement<any> => {
   return (
     <div className="margin-top-3 desktop:margin-top-0 padding-top-0 desktop:padding-top-6 padding-bottom-15">
       <div className="flex flex-justify-center flex-align-center" data-testid={"loading"}>

@@ -18,7 +18,7 @@ interface Props {
   boldDescription?: boolean;
 }
 
-export const FieldLabelProfile = (props: Props): ReactElement => {
+export const FieldLabelProfile = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(ProfileDataContext);
 

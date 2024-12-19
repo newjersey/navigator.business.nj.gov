@@ -19,7 +19,7 @@ interface Props {
   setProfileTab: (profileTab: ProfileTabs) => void;
 }
 
-export const ProfileTabNav = (props: Props): ReactElement => {
+export const ProfileTabNav = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   const isSuccessfulFilingResponse = props.business?.formationData.getFilingResponse?.success;

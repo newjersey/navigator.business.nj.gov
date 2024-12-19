@@ -9,7 +9,7 @@ interface Props {
   essentialQuestionId: string;
 }
 
-export const NonEssentialQuestion = (props: Props): ReactElement => {
+export const NonEssentialQuestion = (props: Props): ReactElement<any> => {
   const nonEssentialQuestionText = getNonEssentialQuestionText(props.essentialQuestionId);
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();

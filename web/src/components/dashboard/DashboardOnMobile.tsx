@@ -41,7 +41,7 @@ interface Props {
   licenseEvents: LicenseEventType[];
 }
 
-export const DashboardOnMobile = (props: Props): ReactElement => {
+export const DashboardOnMobile = (props: Props): ReactElement<any> => {
   const { business } = useUserData();
   const router = useRouter();
   const operatingPhase = LookupOperatingPhaseById(business?.profileData.operatingPhase);

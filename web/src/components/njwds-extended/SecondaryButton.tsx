@@ -27,7 +27,7 @@ const colors = {
     "usa-button border-base-light bg-transparent text-normal text-base padding-x-1 border-1px hide-unhide-button font-body-2xs",
 };
 
-export const SecondaryButton = (props: Props): ReactElement => {
+export const SecondaryButton = (props: Props): ReactElement<any> => {
   const classNames = `${colors[props.isColor]} ${props.className}`;
   return (
     <GenericButton {...props} isVerticalPaddingRemoved={props.size === "small"} className={classNames} />

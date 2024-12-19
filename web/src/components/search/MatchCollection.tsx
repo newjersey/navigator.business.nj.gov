@@ -12,7 +12,7 @@ interface Props {
   groupedConfigMatches: GroupedConfigMatch[];
 }
 
-export const MatchCollection = (props: Props): ReactElement => {
+export const MatchCollection = (props: Props): ReactElement<any> => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
 
   useEffect(() => {

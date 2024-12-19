@@ -11,7 +11,7 @@ interface Props {
   isRightMarginRemoved?: boolean;
 }
 
-export const PrimaryButtonDropdown = (props: Props): ReactElement => {
+export const PrimaryButtonDropdown = (props: Props): ReactElement<any> => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
 
@@ -43,61 +43,59 @@ export const PrimaryButtonDropdown = (props: Props): ReactElement => {
     prevOpen.current = open;
   }, [open]);
 
-  return (
-    <>
-      <GenericButton
-        className="usa-button"
-        ref={anchorRef}
-        id="composition-button"
-        isAriaControls={open ? "composition-menu" : undefined}
-        isAriaExpanded={open ? true : undefined}
-        isAriaHaspopup={true}
-        onClick={handleToggle}
-        isRightMarginRemoved={props.isRightMarginRemoved}
-      >
-        <>
-          {props.children}
-          <Icon className="usa-icon--size-3 margin-left-05 margin-right-neg-1" iconName="arrow_drop_down" />
-        </>
-      </GenericButton>
-      <Popper
-        open={open}
-        anchorEl={anchorRef.current}
-        role={undefined}
-        placement="bottom-end"
-        transition
-        disablePortal
-      >
-        {({ TransitionProps }): ReactElement => (
-          <Grow
-            {...TransitionProps}
-            style={{
-              transformOrigin: "left top",
-            }}
-          >
-            <Paper>
-              <ClickAwayListener onClickAway={handleClose}>
-                <MenuList
-                  autoFocusItem={open}
-                  id="composition-menu"
-                  aria-labelledby="composition-button"
-                  onKeyDown={handleListKeyDown}
-                >
-                  {props.dropdownOptions.map((option, i) => {
-                    return (
-                      <MenuItem onClick={option.onClick} key={i}>
-                        <UnStyledButton isTextBold isSmallerText>
-                          {option.text}
-                        </UnStyledButton>
-                      </MenuItem>
-                    );
-                  })}
-                </MenuList>
-              </ClickAwayListener>
-            </Paper>
-          </Grow>
-        )}
-      </Popper>
-    </>
-  );
+  return (<>
+    <GenericButton
+      className="usa-button"
+      ref={anchorRef}
+      id="composition-button"
+      isAriaControls={open ? "composition-menu" : undefined}
+      isAriaExpanded={open ? true : undefined}
+      isAriaHaspopup={true}
+      onClick={handleToggle}
+      isRightMarginRemoved={props.isRightMarginRemoved}
+    >
+      <>
+        {props.children}
+        <Icon className="usa-icon--size-3 margin-left-05 margin-right-neg-1" iconName="arrow_drop_down" />
+      </>
+    </GenericButton>
+    <Popper
+      open={open}
+      anchorEl={anchorRef.current}
+      role={undefined}
+      placement="bottom-end"
+      transition
+      disablePortal
+    >
+      {({ TransitionProps }): ReactElement<any> => (
+        <Grow
+          {...TransitionProps}
+          style={{
+            transformOrigin: "left top",
+          }}
+        >
+          <Paper>
+            <ClickAwayListener onClickAway={handleClose}>
+              <MenuList
+                autoFocusItem={open}
+                id="composition-menu"
+                aria-labelledby="composition-button"
+                onKeyDown={handleListKeyDown}
+              >
+                {props.dropdownOptions.map((option, i) => {
+                  return (
+                    <MenuItem onClick={option.onClick} key={i}>
+                      <UnStyledButton isTextBold isSmallerText>
+                        {option.text}
+                      </UnStyledButton>
+                    </MenuItem>
+                  );
+                })}
+              </MenuList>
+            </ClickAwayListener>
+          </Paper>
+        </Grow>
+      )}
+    </Popper>
+  </>);
 };

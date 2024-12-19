@@ -15,7 +15,7 @@ interface Props {
   task: Task;
 }
 
-export const NaicsCodeTask = (props: Props): ReactElement => {
+export const NaicsCodeTask = (props: Props): ReactElement<any> => {
   const [showInput, setShowInput] = useState<boolean>(true);
   const { business, updateQueue } = useUserData();
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);

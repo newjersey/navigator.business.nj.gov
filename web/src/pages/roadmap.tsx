@@ -7,7 +7,7 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useEffect } from "react";
 
-const RoadmapPage = (): ReactElement => {
+const RoadmapPage = (): ReactElement<any> => {
   const { state } = useContext(AuthContext);
   const router = useRouter();
 

@@ -12,7 +12,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { ReactElement } from "react";
 
-const LicenseCalendarEventPreview = (props: PreviewProps): ReactElement => {
+const LicenseCalendarEventPreview = (props: PreviewProps): ReactElement<any> => {
   const ref = usePreviewRef(props);
   const license = usePageData<LicenseEventType>(props);
 

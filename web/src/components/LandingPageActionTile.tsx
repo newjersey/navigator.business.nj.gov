@@ -1,7 +1,7 @@
 import { ActionTile } from "@/lib/types/types";
 import { ReactElement } from "react";
 
-export const LandingPageActionTile = (props: ActionTile): ReactElement => {
+export const LandingPageActionTile = (props: ActionTile): ReactElement<any> => {
   return (
     <button
       className={"landing-page-secondary-tile usa-button"}

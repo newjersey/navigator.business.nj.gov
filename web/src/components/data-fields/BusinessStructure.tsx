@@ -10,7 +10,7 @@ import { hasCompletedFormation } from "@businessnjgovnavigator/shared";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
-export const BusinessStructure = (): ReactElement => {
+export const BusinessStructure = (): ReactElement<any> => {
   const { state } = useContext(ProfileDataContext);
   const { Config } = useConfig();
   const { roadmap } = useRoadmap();

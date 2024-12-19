@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-export const Banner = (): ReactElement => {
+export const Banner = (): ReactElement<any> => {
   return (
     <div className="nj-banner">
       <div className="nj-banner__header">

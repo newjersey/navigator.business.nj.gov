@@ -16,7 +16,7 @@ interface Props {
   onSave: () => void;
 }
 
-export const EinInput = (props: Props): ReactElement => {
+export const EinInput = (props: Props): ReactElement<any> => {
   const LENGTH = 9;
   const { Config } = useConfig();
   const [isInvalid, setIsInvalid] = useState<boolean>(false);

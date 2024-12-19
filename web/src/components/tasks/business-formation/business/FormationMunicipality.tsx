@@ -5,7 +5,7 @@ import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { Municipality } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
 
-export const FormationMunicipality = (): ReactElement => {
+export const FormationMunicipality = (): ReactElement<any> => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { municipalities } = useContext(MunicipalitiesContext);
   const { doesFieldHaveError, getFieldErrorLabel } = useFormationErrors();

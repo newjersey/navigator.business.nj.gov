@@ -16,7 +16,7 @@ interface Props {
   lockField: boolean;
 }
 
-export const NaicsCodeDisplay = (props: Props): ReactElement => {
+export const NaicsCodeDisplay = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   return (

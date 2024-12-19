@@ -8,7 +8,7 @@ import { randomPublicFilingLegalStructure, randomTradeNameLegalStructure } from 
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { ReactElement, useState } from "react";
 
-const TaxAccessModalPreview = (props: PreviewProps): ReactElement => {
+const TaxAccessModalPreview = (props: PreviewProps): ReactElement<any> => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
