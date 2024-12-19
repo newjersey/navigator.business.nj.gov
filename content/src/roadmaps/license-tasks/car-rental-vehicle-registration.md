@@ -2,7 +2,6 @@
 notesMd: "06/29/23: This task is part of the Car Rental industry, which has not
   yet been enabled and does not appear in Navigator."
 id: car-rental-vehicle-registration
-filename: car-rental-vehicle-registration
 displayname: car-rental-vehicle-registration
 urlSlug: car-rental-vehicle-registration
 licenseName: ""

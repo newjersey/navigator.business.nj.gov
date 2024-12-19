@@ -5,7 +5,6 @@ notesMd: '10.2.24: editing copy from "If you are a licensed dentist who owns
   you practice." per SME review'
 licenseName: ""
 id: dental-branch
-filename: dental-branch
 displayname: dental-branch
 urlSlug: dental-branch
 name: Apply for Your Dental Branch Office Registration, if Applicable
@@ -19,11 +18,12 @@ agencyId: nj-consumer-affairs
 webflowId: 669ac515f93c28d7e8d25ada
 licenseCertificationClassification: undefined
 ---
+
 ## Application Requirements
 
-* Dental license number
-* Business name and address of the office branch you are registering
-* Applicable fees paid, once the Board of Dentistry sends an invoice
+- Dental license number
+- Business name and address of the office branch you are registering
+- Applicable fees paid, once the Board of Dentistry sends an invoice
 
 Email your completed application to dentistry@dca.njoag.gov. The New Jersey Dental Board will email you an invoice to pay your fee online.
 

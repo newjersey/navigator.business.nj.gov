@@ -1,7 +1,6 @@
 ---
 requiresLocation: true
 id: landlord-registration
-filename: landlord-registration
 displayname: landlord-registration
 urlSlug: landlord-registration
 name: Register as a Landlord
@@ -16,11 +15,12 @@ callToActionLink: ${municipalityWebsite}
 webflowId: 66f3198052d588875cacb94c
 licenseCertificationClassification: undefined
 ---
-:::note 
- If you are renting out a `multiple dwelling|multiple-dwelling` (residential property with 3 or more units), you need to [register with the Department of Community Affairs](https://njdcaportal.dynamics365portals.us/ultra-bhi-home/).
+
+:::note
+If you are renting out a `multiple dwelling|multiple-dwelling` (residential property with 3 or more units), you need to [register with the Department of Community Affairs](https://njdcaportal.dynamics365portals.us/ultra-bhi-home/).
 :::
 
-- - -
+---
 
 ## How to Apply
 

@@ -1,6 +1,5 @@
 ---
 id: petcare-license
-filename: petcare-license
 displayname: petcare-license
 urlSlug: petcare-license
 name: Obtain an Animal Facilities License, if Required

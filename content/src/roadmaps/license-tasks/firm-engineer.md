@@ -1,6 +1,5 @@
 ---
 id: firm-engineer
-filename: firm-engineer
 displayname: firm-engineer
 urlSlug: firm-engineer
 name: Obtain a Certificate of Authorization for Your Engineering Firm

@@ -1,7 +1,6 @@
 ---
 licenseName: ""
 id: detective-agency-license
-filename: detective-agency-license
 displayname: detective-agency-license
 urlSlug: detective-agency-license
 name: Obtain Your Detective Agency License
