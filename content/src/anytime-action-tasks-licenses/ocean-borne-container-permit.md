@@ -12,7 +12,7 @@ summaryDescriptionMd: >+
   roads. The vehicle, trailer, and container combination must meet the weight
   and configuration requirements:
 
-  -5 or 6 axles on a tractor/semi-trailer combination
+  - 5 or 6 axles on a tractor/semi-trailer combination
 
   - Gross vehicle weight under 90,000 pounds 
 
@@ -28,8 +28,8 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 icon: govt-purple.svg
 ---
 ## Eligibility Criteria
-- An active trailer registration. You can get it at a NJ Motor Vehicle Commission (MVC) licensing center
-- A NJDOT GotPermits account
+* An active trailer registration. You can get it at a [NJ Motor Vehicle Commission (MVC) licensing center](https://www.nj.gov/mvc/locations/facilitylocations.htm)
+* A [NJDOT GotPermits](https://nj.gotpermits.com/njpass#!) account
 
 ## Application Requirements
 - Travel start date
@@ -42,6 +42,6 @@ Without a permit, you cannot transport an ocean container on public roads. You m
 
 
 :::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
-An Ocean Borne Container Permit, valid for 1 year
-A permit sent to your mailing address
+- An Ocean Borne Container Permit, valid for 1 year
+- A permit sent to your mailing address
 :::
