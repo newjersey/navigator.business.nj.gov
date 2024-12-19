@@ -36,6 +36,7 @@ describe("licenseStatusRouter", () => {
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),
+      findUserByBusinessName: jest.fn(),
     };
     stubDynamoDataClient.put.mockImplementation((userData) => {
       return Promise.resolve(userData);

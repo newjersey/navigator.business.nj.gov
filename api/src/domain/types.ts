@@ -26,6 +26,7 @@ export interface DatabaseClient {
   get: (userId: string) => Promise<UserData>;
   put: (userData: UserData) => Promise<UserData>;
   findByEmail: (email: string) => Promise<UserData | undefined>;
+  findUserByBusinessName: (businessName: string) => Promise<UserData[]>;
 }
 
 export interface UserDataClient {
@@ -36,6 +37,7 @@ export interface UserDataClient {
   getNeedToAddToUserTestingUsers: () => Promise<UserData[]>;
   getNeedTaxIdEncryptionUsers: () => Promise<UserData[]>;
   getUsersWithOutdatedVersion: (latestVersion: number) => Promise<UserData[]>;
+  queryUsersWithBusinesses: () => Promise<UserData[]>;
 }
 
 export interface BusinessesDataClient {

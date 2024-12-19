@@ -45,8 +45,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
   const naicsCode = `naics-code-${randomInt()}`;
   const industry = `industry-${randomInt()}`;
   const encryptedTaxId = `encryptedId-${randomInt()}`;
-
-  const generateUserData = (): UserData => {
+  const generateUserData = (businessName = "Default Business Name"): UserData => {
     return generateUserDataForBusiness(
       generateBusiness({
         profileData: generateProfileData({
@@ -55,6 +54,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
           naicsCode: naicsCode,
           industryId: industry,
           encryptedTaxId: encryptedTaxId,
+          businessName: businessName,
         }),
         taxFilingData: generateTaxFilingData({
           filings: [],
@@ -62,6 +62,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
       })
     );
   };
+
   const userData = generateUserData();
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -128,5 +129,44 @@ describe("User and Business Migration with DynamoDataClient", () => {
     expect(logger.LogError).toHaveBeenCalledWith(`MigrateData Failed: ${mockError.message}`);
 
     expect(logger.LogInfo).not.toHaveBeenCalledWith("Successfully migrated business");
+  });
+
+  it("should migrate data for multiple users with outdated versions", async () => {
+    const userData1 = { ...structuredClone(generateUserData()), version: 140 };
+    const userData2 = { ...structuredClone(generateUserData()), version: 143 };
+    jest
+      .spyOn(dynamoUsersDataClient, "getUsersWithOutdatedVersion")
+      .mockResolvedValue([userData1, userData2]);
+    const result = await dynamoDataClient.migrateData();
+
+    expect(result.success).toBe(true);
+    expect(result.migratedCount).toBe(2);
+    expect(dynamoBusinessesDataClient.put).toHaveBeenCalledTimes(2);
+
+    for (const data of [userData1, userData2]) {
+      const businessId = data.businesses[data.currentBusinessId].id;
+      expect(dynamoBusinessesDataClient.put).toHaveBeenCalledWith(
+        expect.objectContaining({ id: businessId })
+      );
+      expect(logger.LogInfo).toHaveBeenCalledWith(expect.stringContaining(`Updated business ${businessId}`));
+    }
+  });
+
+  it("should find user by businessName", async () => {
+    const businessName = "Test Business Name";
+    const userData1 = generateUserData(businessName);
+    const userData2 = generateUserData(businessName);
+    const userData3 = generateUserData();
+    const userData4 = generateUserData("test Business Name");
+    const userData5 = generateUserData("test Business Name!");
+
+    jest
+      .spyOn(dynamoUsersDataClient, "queryUsersWithBusinesses")
+      .mockResolvedValue([userData1, userData2, userData3, userData4, userData5]);
+
+    const result = await dynamoDataClient.findUserByBusinessName(businessName);
+
+    expect(dynamoUsersDataClient.queryUsersWithBusinesses).toHaveBeenCalledTimes(1);
+    expect(result).toEqual([userData1, userData2, userData4, userData5]);
   });
 });
