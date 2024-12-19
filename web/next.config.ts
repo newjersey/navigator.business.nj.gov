@@ -1,11 +1,42 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable no-undef */
-const CopyPlugin = require("copy-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-});
-module.exports = withBundleAnalyzer({
+import withBundleAnalyzer from "@next/bundle-analyzer";
+import withMDX from "@next/mdx";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
+import CopyPlugin from "copy-webpack-plugin";
+import type { NextConfig } from "next";
+import process from "node:process";
+import remarkDirective from "remark-directive";
+import remarkGfm from "remark-gfm";
+import type { Configuration as WebpackConfig } from "webpack";
+import { remarkCustomDirectives } from "./src/components/remarkCustomDirectives";
+
+type EnvVars = {
+  API_BASE_URL?: string;
+  AUTH_DOMAIN?: string;
+  REDIRECT_URL?: string;
+  GOOGLE_TAG_MANAGER_ID?: string;
+  FEATURE_BUSINESS_FLP: string;
+  FEATURE_LANDING_PAGE_REDIRECT: string;
+  ALTERNATE_LANDING_PAGE_URL: string;
+  COGNITO_WEB_CLIENT_ID?: string;
+  COGNITO_USER_POOL_ID?: string;
+  COGNITO_IDENTITY_POOL_ID?: string;
+  AWS_REGION?: string;
+  MYNJ_PROFILE_LINK?: string;
+  CHECK_DEAD_LINKS?: string;
+  FEATURE_MODIFY_BUSINESS_PAGE: string;
+  USE_BASIC_AUTH?: string;
+  BASIC_AUTH_USERNAME?: string;
+  BASIC_AUTH_PASSWORD?: string;
+  AB_TESTING_EXPERIENCE_B_PERCENTAGE?: string;
+  SHOW_DISABLED_INDUSTRIES: string;
+  USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH: string;
+  DISABLE_GTM?: string;
+  OUTAGE_ALERT_CONFIG_URL?: string;
+};
+
+// Create configuration object
+const createConfig = (): NextConfig => ({
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   env: {
     API_BASE_URL: process.env.API_BASE_URL,
     AUTH_DOMAIN: process.env.AUTH_DOMAIN,
@@ -30,16 +61,16 @@ module.exports = withBundleAnalyzer({
       process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH ?? "false",
     DISABLE_GTM: process.env.DISABLE_GTM,
     OUTAGE_ALERT_CONFIG_URL: process.env.OUTAGE_ALERT_CONFIG_URL,
-  },
+  } as EnvVars,
   staticPageGenerationTimeout: 120,
-  webpack: (config) => {
-    config.module.rules.push(
+  webpack: (config: WebpackConfig): WebpackConfig => {
+    config.module!.rules!.push(
       {
-        test: /\.md$/,
+        test: /\.md\$/,
         use: "raw-loader",
       },
       {
-        test: /\.(ts)x?$/,
+        test: /\.(ts)x?\$/,
         use: [
           {
             loader: "ts-loader",
@@ -53,7 +84,7 @@ module.exports = withBundleAnalyzer({
       }
     );
 
-    config.plugins.push(
+    config.plugins!.push(
       new CleanWebpackPlugin({
         dry: false,
         cleanOnceBeforeBuildPatterns: ["../public/vendor"],
@@ -61,7 +92,7 @@ module.exports = withBundleAnalyzer({
       })
     );
 
-    config.plugins.push(
+    config.plugins!.push(
       new CopyPlugin({
         patterns: [
           {
@@ -91,3 +122,22 @@ module.exports = withBundleAnalyzer({
     ];
   },
 });
+
+// Configure MDX
+const mdxConfig = {
+  extension: /\.mdx?\$/,
+  options: {
+    remarkPlugins: [remarkGfm, remarkDirective, remarkCustomDirectives],
+    rehypePlugins: [],
+  },
+};
+
+// Configure bundle analyzer
+const analyzerConfig = {
+  enabled: process.env.ANALYZE === "true",
+};
+
+// Create the final configuration
+const config = withBundleAnalyzer(analyzerConfig)(withMDX(mdxConfig)(createConfig()));
+
+export default config;
