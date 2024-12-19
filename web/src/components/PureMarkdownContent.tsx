@@ -20,7 +20,7 @@ export const PureMarkdownContent = (props: Props): ReactElement<any> => {
     .use(remarkGfm)
     .use(remarkDirective)
     .use(customRemarkPlugin)
-    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(remarkRehype)
     .use(
       rehypeReact as any,
       {
