@@ -31,6 +31,7 @@ icon: govt-purple.svg
 * Vehicle and trailer’s combined overall length
 * Trailer length and width
 * Registered owner's name and address
+* Applicable fees paid
 
 :::callout{ showHeader="true" headerText="What if I don't get this permit?" showIcon="false" calloutType="warning" }
 You cannot transport a Code 23 trailer in New Jersey without a Code 23 Special Oversize Trailer Permit or a Code 23 OS/OW route specific permit. You may face fines if you do so.
