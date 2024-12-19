@@ -34,6 +34,7 @@ icon: govt-purple.svg
 * Load quantity
 * General origin and destination (cities or state borders)
 * Specific origins and destination (detailed route)
+* Applicable fees paid
 
 
 ### Vehicle Configuration Information
