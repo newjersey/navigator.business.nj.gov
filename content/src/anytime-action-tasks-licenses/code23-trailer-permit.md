@@ -3,7 +3,6 @@ filename: code23-trailer-permit
 name: Apply for Your Code 23 Special Oversize Trailer Permit, if Applicable
 industryIds: []
 sectorIds: []
-icon: govt-purple.svg
 urlSlug: code23-trailer-permit
 summaryDescriptionMd: >
   You need a permit to transport a Code 23 oversized trailer on public roads.
@@ -19,10 +18,11 @@ summaryDescriptionMd: >
 issuingAgency: NJ Department of Transportation
 callToActionText: Apply for My Code 23 Trailer Permit
 callToActionLink: https://nj.gotpermits.com/njpass#!
+icon: govt-purple.svg
 ---
 ## Eligibility Criteria
 * An active overweight/overdimensional (Code 23) trailer registration. You can get it at a [NJ Motor Vehicle Commission (MVC) licensing center](https://www.nj.gov/mvc/locations/facilitylocations.htm)
-* A [NJDOT GotPermits website](https://nj.gotpermits.com/njpass#!) account
+* A [NJDOT GotPermits](https://nj.gotpermits.com/njpass#!) account
 
 ### Application Requirements
 * Trailer make
