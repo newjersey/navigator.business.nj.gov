@@ -31,6 +31,14 @@ export const postUserData = async (userData: UserData): Promise<UserData> => {
   });
 };
 
+type EmailCheckResponse = {
+  email: string;
+  found: boolean;
+};
+export const postUserEmailCheck = async (email: string): Promise<EmailCheckResponse> => {
+  return post("/users/emailCheck", { email }, false);
+};
+
 export const checkLicenseStatus = (nameAndAddress: LicenseSearchNameAndAddress): Promise<UserData> => {
   return post(`/license-status`, { nameAndAddress });
 };

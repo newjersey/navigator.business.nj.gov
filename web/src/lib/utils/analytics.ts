@@ -106,7 +106,8 @@ type Clicked =
   | "go_to_NavigatorAccount_setup"
   | "log_out"
   | "unlinked_myNJ_account"
-  | "get_unlinked_myNJ_account_modal";
+  | "get_unlinked_myNJ_account_modal"
+  | "link_your_myNJ_account";
 
 type OnSiteSection =
   | "landing_page"
@@ -217,7 +218,9 @@ type Item =
   | "link_with_myNJ"
   | "landing_page"
   | "skip_to_main_content"
-  | "show_funding_opportunities";
+  | "show_funding_opportunities"
+  | "check_account_log_in"
+  | "link_your_myNJ_account_link";
 
 type BooleanResponseOption = "yes" | "no";
 
@@ -2358,6 +2361,49 @@ export default {
             event: "link_clicks",
             click_text: "show_calendar",
             item: "show_funding_opportunities",
+          });
+        },
+      },
+    },
+    check_account_help_button: {
+      click: {
+        open_live_chat: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "check_account_help_button",
+            legacy_event_label: "open_live_chat",
+            click_text: "check_account_help_button",
+            clicked_to: "open_live_chat",
+          });
+        },
+      },
+    },
+    check_account_next_button: {
+      submit: {
+        go_to_myNJ_login: () => {
+          eventRunner.track({
+            event: "account_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "check_account_log_in",
+            legacy_event_label: "go_to_myNJ_login",
+            clicked: "go_to_myNJ_login",
+            item: "check_account_log_in",
+          });
+        },
+      },
+    },
+    check_account_link_account_button: {
+      click: {
+        link_account: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_category: "link_your_myNJ_account_link",
+            legacy_event_action: "click",
+            legacy_event_label: "unhide_card",
+            clicked: "link_your_myNJ_account",
+            item: "link_your_myNJ_account_link",
+            clicked_to: "/onboarding",
           });
         },
       },

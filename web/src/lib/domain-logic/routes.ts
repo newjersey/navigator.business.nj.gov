@@ -12,6 +12,7 @@ export const ROUTES = {
   welcome: "/welcome",
   accountSetup: "/account-setup",
   starterKits: "/starter-kits",
+  loginEmailCheck: "/login-email-check",
 };
 
 export interface QUERY_PARAMS_VALUES {
