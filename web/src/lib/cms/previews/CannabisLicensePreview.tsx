@@ -6,7 +6,7 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateTask } from "@/test/factories";
-import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared";
+import { generateBusiness, generateProfileData, generateUserData } from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
 const CannabisLicensePreview = (props: PreviewProps): ReactElement => {
@@ -17,7 +17,8 @@ const CannabisLicensePreview = (props: PreviewProps): ReactElement => {
   const isAnnual = props.entry.toJS().slug.includes("Annual");
   const isConditional = props.entry.toJS().slug.includes("Conditional");
 
-  const eachUniquePriorityTypeSelected = generateBusiness({
+  const userData = generateUserData({});
+  const eachUniquePriorityTypeSelected = generateBusiness(userData, {
     profileData: generateProfileData({ cannabisMicrobusiness: true }),
     taskItemChecklist: {
       "general-minority-owned": true,

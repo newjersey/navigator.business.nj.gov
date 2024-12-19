@@ -16,7 +16,12 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
-import { Business, generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared";
+import {
+  Business,
+  generateBusiness,
+  generateUserData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { generatePreferences, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { ThemeProvider, createTheme } from "@mui/material";
@@ -36,6 +41,7 @@ describe("<SidebarCardsContainer />", () => {
     setupStatefulUserDataContext();
   });
 
+  const userData = generateUserData({});
   const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>): RoadmapDisplayContent => {
     return {
       sidebarDisplayContent: sidebar ?? {
@@ -96,7 +102,7 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("removes successful registration card when it's closed", async () => {
-      const business = generateBusiness({
+      const business = generateBusiness(userData, {
         preferences: generatePreferences({
           visibleSidebarCards: ["fake-visible-card"],
         }),
@@ -207,7 +213,7 @@ describe("<SidebarCardsContainer />", () => {
 
   describe("funding opportunities", () => {
     it("displays fundings filtered & sorted from user data when user is UP_AND_RUNNING", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(userData, {
         profileData: generateProfileData({
           homeBasedBusiness: false,
           municipality: undefined,
@@ -240,7 +246,7 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("does not display fundings for non 'up and running' operating phase", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(userData, {
         profileData: generateProfileData({
           homeBasedBusiness: false,
           municipality: undefined,
@@ -270,7 +276,7 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("displays link to learn more about fundings when user is UP_AND_RUNNING", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(userData, {
         profileData: generateProfileData({
           operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
         }),
@@ -282,7 +288,7 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("does not display link to learn more about fundings when user is not UP_AND_RUNNING", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(userData, {
         profileData: generateProfileData({
           operatingPhase: OperatingPhaseId.FORMED,
         }),
@@ -303,10 +309,13 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("moves an opportunity to/from Hidden accordion when hide/unhide is clicked", () => {
-      renderWithBusiness(generateBusiness({ profileData: getProfileDataForUnfilteredOpportunities() }), {
-        certifications,
-        fundings,
-      });
+      renderWithBusiness(
+        generateBusiness(userData, { profileData: getProfileDataForUnfilteredOpportunities() }),
+        {
+          certifications,
+          fundings,
+        }
+      );
 
       let cert1 = within(screen.getByTestId("cert1-id"));
       const visibleOpportunities = within(screen.getByTestId("visible-opportunities"));
@@ -334,7 +343,7 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("saves hidden opportunities to user data", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(userData, {
         profileData: getProfileDataForUnfilteredOpportunities(),
         preferences: generatePreferences({
           hiddenCertificationIds: [],
@@ -350,7 +359,7 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("hides opportunities from user data", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(userData, {
         profileData: getProfileDataForUnfilteredOpportunities(),
         preferences: generatePreferences({
           hiddenCertificationIds: [],
@@ -366,7 +375,7 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("only counts hidden certifications before fundings are unlocked", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(userData, {
         profileData: generateProfileData({
           operatingPhase: OperatingPhaseId.FORMED,
         }),
@@ -383,7 +392,7 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("counts both hidden fundings and certifications after fundings are unlocked", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(userData, {
         profileData: generateProfileData({
           operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
         }),

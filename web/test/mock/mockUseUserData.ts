@@ -14,7 +14,8 @@ import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
 
 export const useMockBusiness = (overrides: Partial<Business>): void => {
-  const business = generateBusiness(overrides);
+  const baseUserdata = generateUserData({});
+  const business = generateBusiness(baseUserdata, overrides);
   setMockUserDataResponse({ userData: generateUserDataForBusiness(business) });
 };
 
@@ -32,7 +33,8 @@ export const useMockUserDataError = (error: UserDataError): void => {
 };
 
 export const useMockProfileData = (profileData: Partial<ProfileData>): void => {
-  const business = generateBusiness({
+  const baseUserdata = generateUserData({});
+  const business = generateBusiness(baseUserdata, {
     profileData: generateProfileData(profileData),
     onboardingFormProgress: "COMPLETED",
   });

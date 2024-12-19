@@ -38,6 +38,7 @@ import {
   generateFormationForeignAddress,
   generateFormationUSAddress,
   generateStartingProfileData,
+  generateUserData,
   getCurrentDate,
   ProfileData,
   randomInt,
@@ -122,7 +123,7 @@ describe("<BusinessFormationPaginator />", () => {
     displayContent = {
       formationDbaContent: generateFormationDbaContent({}),
     };
-    business = generateBusiness({ profileData, formationData });
+    business = generateBusiness(generateUserData({}), { profileData, formationData });
   });
 
   describe("button text", () => {
@@ -585,7 +586,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("shows the Trustees label when members' field has an error and legalType is nonprofit", async () => {
-        const nonprofit = generateBusiness({
+        const nonprofit = generateBusiness(generateUserData({}), {
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
               members: undefined,
@@ -609,7 +610,7 @@ describe("<BusinessFormationPaginator />", () => {
       it.each(corpLegalStructures)(
         "shows Board of Directors label when members' field has an error and legalType is %s",
         async (corpLegalStructure) => {
-          const corporation = generateBusiness({
+          const corporation = generateBusiness(generateUserData({}), {
             formationData: generateFormationData({
               formationFormData: generateFormationFormData({ members: undefined }),
             }),
@@ -2245,7 +2246,7 @@ describe("<BusinessFormationPaginator />", () => {
       const profileData = generateFormationProfileData({ legalStructureId });
       const formationData = generateFormationData({ lastVisitedPageIndex: 4 });
 
-      business = generateBusiness({ profileData, formationData });
+      business = generateBusiness(generateUserData({}), { profileData, formationData });
       preparePage({ business, displayContent });
       expect(screen.getByTestId("review-step")).toBeInTheDocument();
     });
@@ -2304,7 +2305,7 @@ describe("<BusinessFormationPaginator />", () => {
         lastVisitedPageIndex: BusinessFormationStepsConfiguration.length,
       });
 
-      business = generateBusiness({ profileData, formationData });
+      business = generateBusiness(generateUserData({}), { profileData, formationData });
       preparePage({ business, displayContent });
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
     });
@@ -2313,7 +2314,7 @@ describe("<BusinessFormationPaginator />", () => {
       const profileData = generateFormationProfileData({});
       const formationData = generateFormationData({ lastVisitedPageIndex: -1 });
 
-      business = generateBusiness({ profileData, formationData });
+      business = generateBusiness(generateUserData({}), { profileData, formationData });
       preparePage({ business, displayContent });
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
     });

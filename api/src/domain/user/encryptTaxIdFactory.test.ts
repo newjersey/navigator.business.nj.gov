@@ -1,7 +1,12 @@
 import { EncryptionDecryptionClient, EncryptTaxId } from "@domain/types";
 import { encryptTaxIdFactory } from "@domain/user/encryptTaxIdFactory";
 import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
-import { generateBusiness, generateProfileData, generateUserDataForBusiness } from "@shared/test";
+import {
+  generateBusiness,
+  generateProfileData,
+  generateUserData,
+  generateUserDataForBusiness,
+} from "@shared/test";
 
 describe("encryptTaxId", () => {
   let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;
@@ -15,18 +20,19 @@ describe("encryptTaxId", () => {
   });
 
   it("updates user by masking and encrypting tax id", async () => {
-    const userData = generateUserDataForBusiness(
-      generateBusiness({
-        profileData: generateProfileData({
-          taxId: "123456789000",
-          encryptedTaxId: undefined,
-        }),
-      })
-    );
-    const response = await encryptTaxId(userData);
+    const userData = generateUserData({});
+    const business = generateBusiness(userData, {
+      profileData: generateProfileData({
+        taxId: "123456789000",
+        encryptedTaxId: undefined,
+      }),
+    });
+
+    const userDataForBusiness = generateUserDataForBusiness(business);
+    const response = await encryptTaxId(userDataForBusiness);
     expect(stubEncryptionDecryptionClient.encryptValue).toHaveBeenCalledWith("123456789000");
 
-    const expectedUserData = modifyCurrentBusiness(userData, (business) => ({
+    const expectedUserData = modifyCurrentBusiness(userDataForBusiness, (business) => ({
       ...business,
       profileData: {
         ...business.profileData,

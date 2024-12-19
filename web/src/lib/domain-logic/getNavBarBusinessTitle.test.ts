@@ -6,6 +6,7 @@ import {
   generateBusiness,
   generateBusinessNameAvailability,
   generateFormationData,
+  generateUserData,
   LookupIndustryById,
   LookupLegalStructureById,
   ProfileData,
@@ -34,7 +35,7 @@ const tradeNameProfile = (): Partial<ProfileData> => {
 describe("getNavBarBusinessTitle", () => {
   describe("when not authenticated", () => {
     it("shows Guest text", () => {
-      const navBarBusinessTitle = getNavBarBusinessTitle(generateBusiness({}), false);
+      const navBarBusinessTitle = getNavBarBusinessTitle(generateBusiness(generateUserData({}), {}), false);
       expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarGuestBusinessText);
     });
   });
@@ -42,7 +43,7 @@ describe("getNavBarBusinessTitle", () => {
   describe("when name is defined", () => {
     describe("when legal structure undefined", () => {
       it.each(["STARTING", "OWNING"])("shows business name", (businessPersona) => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             businessPersona: businessPersona as BusinessPersona,
             businessName: name,
@@ -55,7 +56,7 @@ describe("getNavBarBusinessTitle", () => {
       });
 
       it.each(["STARTING", "OWNING"])("shows business name", (businessPersona) => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             businessPersona: businessPersona as BusinessPersona,
             businessName: "",
@@ -70,7 +71,7 @@ describe("getNavBarBusinessTitle", () => {
       it.each(["STARTING", "OWNING"])(
         "shows business name over trade name if both defined",
         (businessPersona) => {
-          const business = generateBusiness({
+          const business = generateBusiness(generateUserData({}), {
             profileData: generateProfileData({
               businessPersona: businessPersona as BusinessPersona,
               businessName: name,
@@ -87,7 +88,7 @@ describe("getNavBarBusinessTitle", () => {
     describe("Public Filing", () => {
       describe("STARTING", () => {
         it("shows business name", () => {
-          const business = generateBusiness({
+          const business = generateBusiness(generateUserData({}), {
             profileData: generateProfileData({
               ...publicFilingProfile(),
               businessPersona: "STARTING",
@@ -101,7 +102,7 @@ describe("getNavBarBusinessTitle", () => {
 
       describe("OWNING", () => {
         it("shows business name", () => {
-          const business = generateBusiness({
+          const business = generateBusiness(generateUserData({}), {
             profileData: generateOwningProfileData({
               ...publicFilingProfile(),
               businessName: name,
@@ -116,7 +117,7 @@ describe("getNavBarBusinessTitle", () => {
     describe("Trade Name", () => {
       describe("STARTING", () => {
         it("shows trade name", () => {
-          const business = generateBusiness({
+          const business = generateBusiness(generateUserData({}), {
             profileData: generateProfileData({
               ...tradeNameProfile(),
               businessPersona: "STARTING",
@@ -130,7 +131,7 @@ describe("getNavBarBusinessTitle", () => {
 
       describe("OWNING", () => {
         it("shows trade name", () => {
-          const business = generateBusiness({
+          const business = generateBusiness(generateUserData({}), {
             profileData: generateOwningProfileData({
               ...tradeNameProfile(),
               tradeName: name,
@@ -144,7 +145,7 @@ describe("getNavBarBusinessTitle", () => {
 
     describe("Nexus DBA", () => {
       it("shows unnamed dba when the nexusDbaName is empty and businessNameAvailability status is unavailable", () => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
             foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
@@ -164,7 +165,7 @@ describe("getNavBarBusinessTitle", () => {
       it("shows the dba name when the user has entered a DBA name and businessNameAvailability status is unavailable", () => {
         const dbaName = "dbaName";
 
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
             foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
@@ -187,7 +188,7 @@ describe("getNavBarBusinessTitle", () => {
     describe("Public Filing", () => {
       describe("STARTING", () => {
         it("shows Unnamed [Industry] [Legal Structure] when non-generic industry", () => {
-          const business = generateBusiness({
+          const business = generateBusiness(generateUserData({}), {
             profileData: generateProfileData({
               ...publicFilingProfile(),
               industryId: "cannabis",
@@ -204,7 +205,7 @@ describe("getNavBarBusinessTitle", () => {
         });
 
         it("shows Unnamed Business [Legal Structure] when generic industry", () => {
-          const business = generateBusiness({
+          const business = generateBusiness(generateUserData({}), {
             profileData: generateProfileData({
               ...publicFilingProfile(),
               industryId: "generic",
@@ -223,7 +224,7 @@ describe("getNavBarBusinessTitle", () => {
 
       describe("OWNING", () => {
         it("shows Unnamed Business [Legal Structure]", () => {
-          const business = generateBusiness({
+          const business = generateBusiness(generateUserData({}), {
             profileData: generateOwningProfileData({
               ...publicFilingProfile(),
               businessName: undefined,
@@ -242,7 +243,7 @@ describe("getNavBarBusinessTitle", () => {
     describe("Trade Name", () => {
       describe("STARTING", () => {
         it("shows Unnamed [Industry] [Legal Structure]", () => {
-          const business = generateBusiness({
+          const business = generateBusiness(generateUserData({}), {
             profileData: generateProfileData({
               ...tradeNameProfile(),
               businessPersona: "STARTING",
@@ -260,7 +261,7 @@ describe("getNavBarBusinessTitle", () => {
 
       describe("OWNING", () => {
         it("shows Unnamed Business [Legal Structure]", () => {
-          const business = generateBusiness({
+          const business = generateBusiness(generateUserData({}), {
             profileData: generateOwningProfileData({
               ...tradeNameProfile(),
               tradeName: undefined,
@@ -280,7 +281,7 @@ describe("getNavBarBusinessTitle", () => {
   describe("when name undefined, legal structure undefined, and industry defined", () => {
     describe("STARTING", () => {
       it("shows Unnamed [Industry] when non-generic industry", () => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           onboardingFormProgress: "COMPLETED",
           profileData: generateProfileData({
             businessPersona: "STARTING",
@@ -299,7 +300,7 @@ describe("getNavBarBusinessTitle", () => {
       });
 
       it("shows Unnamed Business when generic industry", () => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           onboardingFormProgress: "COMPLETED",
           profileData: generateProfileData({
             businessPersona: "STARTING",
@@ -316,7 +317,7 @@ describe("getNavBarBusinessTitle", () => {
 
     describe("OWNING", () => {
       it("shows Unnamed Business", () => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           onboardingFormProgress: "COMPLETED",
           profileData: generateOwningProfileData({
             legalStructureId: undefined,
@@ -332,7 +333,7 @@ describe("getNavBarBusinessTitle", () => {
 
   describe("when legal structure, industry, and name undefined", () => {
     it.each(["STARTING", "OWNING"])("shows Unnamed Business", (persona) => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           businessPersona: persona as BusinessPersona,
           legalStructureId: undefined,
@@ -349,7 +350,7 @@ describe("getNavBarBusinessTitle", () => {
       it.each(["employeesInNJ", "revenueInNJ", "transactionsInNJ"])(
         "shows Unnamed Out-of-State Business when FOREIGN and %s",
         (foreignBusinessTypeId) => {
-          const business = generateBusiness({
+          const business = generateBusiness(generateUserData({}), {
             profileData: generateProfileData({
               legalStructureId: undefined,
               businessName: undefined,

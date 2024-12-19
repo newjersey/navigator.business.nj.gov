@@ -6,6 +6,7 @@ import {
   generateBusiness,
   generateLicenseData,
   generateLicenseSearchNameAndAddress,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@shared/test";
 import { Express } from "express";
@@ -52,7 +53,9 @@ describe("licenseStatusRouter", () => {
 
   it("returns user data when search initiated by user and no license", async () => {
     const licenseData = generateLicenseData({});
-    const userData = generateUserDataForBusiness(generateBusiness({ licenseData }));
+    const baseUserData = generateUserData({});
+    const business = generateBusiness(baseUserData, { licenseData });
+    const userData = generateUserDataForBusiness(business);
     stubUpdateLicenseStatus.mockResolvedValue(userData);
 
     const nameAndAddress = generateLicenseSearchNameAndAddress({});

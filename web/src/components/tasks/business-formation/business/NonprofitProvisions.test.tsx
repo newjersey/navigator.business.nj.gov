@@ -13,7 +13,11 @@ import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { generateBusiness, generateFormationFormData } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generateFormationFormData,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { screen } from "@testing-library/react";
 
@@ -60,7 +64,7 @@ describe("<NonprofitProvisions />", () => {
       lastVisitedPageIndex: 0,
     };
     const page = preparePage({
-      business: generateBusiness({ profileData, formationData }),
+      business: generateBusiness(generateUserData({}), { profileData, formationData }),
       displayContent,
       municipalities,
     });

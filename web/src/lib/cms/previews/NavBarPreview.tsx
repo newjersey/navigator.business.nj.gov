@@ -21,7 +21,7 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
   const userData = generateUserData({});
 
   const userDataOwningNoName = generateUserDataForBusiness(
-    generateBusiness({
+    generateBusiness(userData, {
       profileData: generateProfileData({
         businessPersona: "OWNING",
         businessName: "",
@@ -29,8 +29,9 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
       }),
     })
   );
+
   const userDataRemoteSellerWorkerNoName = generateUserDataForBusiness(
-    generateBusiness({
+    generateBusiness(userData, {
       profileData: generateProfileData({
         businessPersona: "FOREIGN",
         businessName: "",
@@ -40,7 +41,7 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
     })
   );
   const userDataDBANoName = generateUserDataForBusiness(
-    generateBusiness({
+    generateBusiness(userData, {
       profileData: generateProfileData({
         businessPersona: "FOREIGN",
         businessName: "",

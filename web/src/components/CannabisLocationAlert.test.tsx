@@ -6,6 +6,7 @@ import {
   filterRandomIndustry,
   generateBusiness,
   generateProfileData,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
@@ -15,7 +16,8 @@ const Config = getMergedConfig();
 describe("<CannabisLocationAlert />", () => {
   const renderWithBusiness = (industryId?: string): void => {
     const profileData = generateProfileData({ industryId });
-    const business = generateBusiness({ profileData });
+    const userData = generateUserData({});
+    const business = generateBusiness(userData, { profileData });
 
     render(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>

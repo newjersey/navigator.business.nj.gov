@@ -7,6 +7,7 @@ import { WithStatefulUserData, setupStatefulUserDataContext } from "@/test/mock/
 import {
   generateBusiness,
   generatePreferences,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
@@ -24,6 +25,7 @@ describe("<HideableTasks />", () => {
     useMockRoadmap({});
   });
 
+  const userData = generateUserData({});
   const renderHideableTask = (business: Business): void => {
     render(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
@@ -37,7 +39,7 @@ describe("<HideableTasks />", () => {
     const content = templateEval(Config.dashboardDefaults.hiddenTasksText, {
       count: String(tasks.length),
     });
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       preferences: generatePreferences({ isHideableRoadmapOpen: true }),
     });
 
@@ -57,7 +59,7 @@ describe("<HideableTasks />", () => {
       count: String(tasks.length),
     });
 
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       preferences: generatePreferences({ isHideableRoadmapOpen: false }),
     });
 

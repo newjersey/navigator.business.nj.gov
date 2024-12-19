@@ -4,7 +4,7 @@ import { generateStep } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { generateBusiness } from "@businessnjgovnavigator/shared";
+import { generateBusiness, generateUserData } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { render, screen } from "@testing-library/react";
@@ -27,7 +27,7 @@ describe("<TaskSidebarPageLayout />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
-    useMockBusiness(generateBusiness({}));
+    useMockBusiness(generateBusiness(generateUserData({}), {}));
     useMockRoadmap({
       steps: [generateStep({ section: "PLAN" }), generateStep({ section: "START" })],
     });

@@ -26,6 +26,7 @@ import {
   generateBusiness,
   generateMunicipality,
   generateProfileData,
+  generateUserData,
   Industry,
   OperatingPhase,
   OperatingPhases,
@@ -597,7 +598,7 @@ describe("profile - shared", () => {
 
   describe("non essential questions", () => {
     const generateBusinessForNonEssentialQuestionTest = (profileData: Partial<ProfileData>): Business => {
-      return generateBusiness({
+      return generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           ...profileData,
           foreignBusinessTypeIds:

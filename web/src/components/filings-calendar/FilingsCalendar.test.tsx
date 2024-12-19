@@ -22,6 +22,7 @@ import {
   generateBusiness,
   generateLicenseDetails,
   generateTaxFilingCalendarEvent,
+  generateUserData,
   generateUserDataForBusiness,
   OperatingPhases,
   randomInt,
@@ -117,7 +118,7 @@ describe("<FilingsCalendar />", () => {
       dueDate: dueDate.format(defaultDateFormat),
     });
 
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -157,7 +158,7 @@ describe("<FilingsCalendar />", () => {
       dueDate: recentDueDate.format(defaultDateFormat),
     });
 
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -201,7 +202,7 @@ describe("<FilingsCalendar />", () => {
       dueDate: recentDueDate.format(defaultDateFormat),
     });
 
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -242,7 +243,7 @@ describe("<FilingsCalendar />", () => {
       dueDate: getAprilDateOfThisYear().add(2, "months").format(defaultDateFormat),
     });
 
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -278,7 +279,7 @@ describe("<FilingsCalendar />", () => {
       dueDate: getAprilDateOfThisYear().add(2, "years").format(defaultDateFormat),
     });
 
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -317,7 +318,7 @@ describe("<FilingsCalendar />", () => {
       dueDate: getAprilDateOfThisYear().add(2, "years").format(defaultDateFormat),
     });
 
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -357,7 +358,7 @@ describe("<FilingsCalendar />", () => {
   });
 
   it("hides year selector when there are no taxFilings", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -374,7 +375,7 @@ describe("<FilingsCalendar />", () => {
   });
 
   it("displays empty calendar content when there are no filings", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -409,7 +410,7 @@ describe("<FilingsCalendar />", () => {
     it.each(publicFilingLegalStructures)(
       "shows formation date prompt if %s and not yet entered Formation Date",
       (legalStructureId) => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({ dateOfFormation: undefined, legalStructureId }),
           taxFilingData: generateTaxFilingData({ filings: [] }),
         });
@@ -421,7 +422,7 @@ describe("<FilingsCalendar />", () => {
     it.each(publicFilingLegalStructures)(
       "shows formation date prompt if %s and not yet entered Formation Date even if other filings exist",
       (legalStructureId) => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({ dateOfFormation: undefined, legalStructureId }),
           taxFilingData: generateTaxFilingData({
             filings: [generateTaxFilingCalendarEvent({ identifier: "filing1" })],
@@ -439,7 +440,7 @@ describe("<FilingsCalendar />", () => {
     it.each(publicFilingLegalStructures)(
       "does not show formation date prompt if %s and has entered Formation Date",
       (legalStructureId) => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({ dateOfFormation: "2023-01-01", legalStructureId }),
           taxFilingData: generateTaxFilingData({ filings: [] }),
         });
@@ -449,7 +450,7 @@ describe("<FilingsCalendar />", () => {
     );
 
     it.each(tradeNameLegalStructures)("does not show formation date prompt if %s", (legalStructureId) => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({ legalStructureId }),
         taxFilingData: generateTaxFilingData({ filings: [] }),
       });
@@ -465,7 +466,7 @@ describe("<FilingsCalendar />", () => {
       dueDate: dueDate.format(defaultDateFormat),
     });
 
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -497,7 +498,7 @@ describe("<FilingsCalendar />", () => {
 
     const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
     const licenseEvents = [generateLicenseEvent({ licenseName })];
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -544,7 +545,7 @@ describe("<FilingsCalendar />", () => {
       dueDate: getAprilDateOfThisYear().format(defaultDateFormat),
     });
 
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -579,7 +580,7 @@ describe("<FilingsCalendar />", () => {
         dueDate: dueDate.format(defaultDateFormat),
       });
 
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
           operatingPhase: randomElementFromArray(
@@ -608,7 +609,7 @@ describe("<FilingsCalendar />", () => {
       const whateverReport = generateTaxFilingCalendarEvent({
         identifier: "whatever-report",
       });
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
           operatingPhase: randomElementFromArray(
@@ -640,7 +641,7 @@ describe("<FilingsCalendar />", () => {
         dueDate: dueDate.format(defaultDateFormat),
       });
 
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
           operatingPhase: randomElementFromArray(
@@ -666,7 +667,7 @@ describe("<FilingsCalendar />", () => {
     });
 
     it("displays button on filings calendar in up and running guest mode for PublicFiling", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
           operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
@@ -677,7 +678,7 @@ describe("<FilingsCalendar />", () => {
     });
 
     it("display buttons on filings calendar in up and running guest mode for TradeName", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
           operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
@@ -704,7 +705,7 @@ describe("<FilingsCalendar />", () => {
         dueDate: dueDate.format(defaultDateFormat),
       });
 
-      business = generateBusiness({
+      business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => {
@@ -749,7 +750,7 @@ describe("<FilingsCalendar />", () => {
         dueDate: futureDueDate.format(defaultDateFormat),
       });
 
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => {
@@ -787,7 +788,7 @@ describe("<FilingsCalendar />", () => {
         dueDate: dueDate.format(defaultDateFormat),
       });
 
-      business = generateBusiness({
+      business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => {
@@ -827,7 +828,7 @@ describe("<FilingsCalendar />", () => {
     });
 
     it("displays the calendar toggle button in operating phases that need it", () => {
-      business = generateBusiness({
+      business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => obj.displayCalendarToggleButton)
@@ -842,7 +843,7 @@ describe("<FilingsCalendar />", () => {
     });
 
     it("doesnt't display the toggle button for operating phases that don't need it", () => {
-      business = generateBusiness({
+      business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => !obj.displayCalendarToggleButton)
@@ -879,7 +880,7 @@ describe("<FilingsCalendar />", () => {
         }
       });
 
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => {

@@ -30,6 +30,7 @@ export interface Business {
   readonly formationData: FormationData;
   readonly environmentData: EnvironmentData | undefined;
   readonly version: number;
+  readonly userId: string;
 }
 
 export const CURRENT_VERSION = 151;
@@ -73,6 +74,7 @@ export const createEmptyBusiness = (id?: string): Business => {
     },
     environmentData: undefined,
     version: CURRENT_VERSION,
+    userId: "",
   };
 };
 

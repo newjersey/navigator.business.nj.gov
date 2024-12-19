@@ -4,6 +4,7 @@ import { currentBusiness, WithStatefulUserData } from "@/test/mock/withStatefulU
 import {
   Business,
   generateEnvironmentData,
+  generateUserData,
   generateWasteQuestionnaireData,
 } from "@businessnjgovnavigator/shared";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
@@ -22,7 +23,9 @@ describe("<CheckWastePermits />", () => {
 
   const renderQuestionnaireAndSetupUser = (business?: Business): { user: UserEvent } => {
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business ?? generateBusiness(generateUserData({}), {}))}
+      >
         <CheckWastePermits task={task} />
       </WithStatefulUserData>
     );
@@ -32,7 +35,9 @@ describe("<CheckWastePermits />", () => {
 
   const renderQuestionnaire = (business?: Business): void => {
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business ?? generateBusiness(generateUserData({}), {}))}
+      >
         <CheckWastePermits task={task} />
       </WithStatefulUserData>
     );
@@ -54,7 +59,7 @@ describe("<CheckWastePermits />", () => {
 
   it("displays the questionnaire if submitted is false", async () => {
     renderQuestionnaire(
-      generateBusiness({
+      generateBusiness(generateUserData({}), {
         environmentData: {
           waste: {
             submitted: false,
@@ -67,7 +72,7 @@ describe("<CheckWastePermits />", () => {
 
   it("displays the results page if submitted is true", () => {
     renderQuestionnaire(
-      generateBusiness({
+      generateBusiness(generateUserData({}), {
         environmentData: generateEnvironmentData({
           waste: {
             questionnaireData: generateWasteQuestionnaireData({

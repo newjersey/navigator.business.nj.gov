@@ -19,6 +19,8 @@ import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const Config = getMergedConfig();
+const userData = generateUserData({});
+
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
@@ -41,7 +43,7 @@ describe("<TaxAccessModal />", () => {
   describe("when poppy or dakota", () => {
     it.each(["STARTING", "FOREIGN"])("shows step 2 only with no step 1 for %s", (persona) => {
       renderModal(
-        generateBusiness({
+        generateBusiness(userData, {
           profileData: generateProfileData({
             businessPersona: persona as BusinessPersona,
           }),
@@ -60,7 +62,7 @@ describe("<TaxAccessModal />", () => {
     let undefinedLegalStructureBusiness: Business;
 
     beforeEach(() => {
-      undefinedLegalStructureBusiness = generateBusiness({
+      undefinedLegalStructureBusiness = generateBusiness(userData, {
         profileData: generateOwningProfileData({
           legalStructureId: undefined,
         }),
@@ -123,7 +125,7 @@ describe("<TaxAccessModal />", () => {
   describe("when legal structure is defined", () => {
     it("shows step 2 question", () => {
       renderModal(
-        generateBusiness({
+        generateBusiness(userData, {
           profileData: generateOwningProfileData({}),
         })
       );
@@ -136,7 +138,7 @@ describe("<TaxAccessModal />", () => {
 
     it("moves back to step 1 on back button", () => {
       renderModal(
-        generateBusiness({
+        generateBusiness(userData, {
           profileData: generateOwningProfileData({}),
         })
       );

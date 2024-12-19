@@ -104,7 +104,7 @@ describe("SigninHelper", () => {
     });
 
     it("does not use a returnToLink if path is account-setup", async () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         preferences: generatePreferences({ returnToLink: "" }),
       });
       userData = generateUserDataForBusiness(business);
@@ -133,7 +133,7 @@ describe("SigninHelper", () => {
 
     it("posts userData to api self-reg with current pathname included when returnToLink is empty", async () => {
       fakeRouter = { replace: mockPush, asPath: ROUTES.accountSetup };
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         preferences: generatePreferences({ returnToLink: "" }),
       });
 
@@ -163,7 +163,7 @@ describe("SigninHelper", () => {
     });
 
     it("posts userData to api self-reg with the returnToLink if exists", async () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         preferences: generatePreferences({ returnToLink: "/pathname?query=true" }),
       });
       userData = generateUserDataForBusiness(business);
@@ -311,7 +311,9 @@ describe("SigninHelper", () => {
     });
 
     it("redirect user to onboarding if still in progress", async () => {
-      const userData = generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: "UNSTARTED" }));
+      const userData = generateUserDataForBusiness(
+        generateBusiness(generateUserData({}), { onboardingFormProgress: "UNSTARTED" })
+      );
       mockGetCurrentUserData.mockImplementation(() => {
         return userData;
       });

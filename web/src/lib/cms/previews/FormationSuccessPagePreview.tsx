@@ -7,6 +7,7 @@ import {
   generateBusiness,
   generateFormationData,
   generateGetFilingResponse,
+  generateUserData,
 } from "@businessnjgovnavigator/shared/test";
 import { ReactElement } from "react";
 
@@ -14,7 +15,8 @@ const FormationSuccessPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
-  const business = generateBusiness({
+  const userData = generateUserData({});
+  const business = generateBusiness(userData, {
     formationData: generateFormationData({
       getFilingResponse: generateGetFilingResponse({}),
     }),

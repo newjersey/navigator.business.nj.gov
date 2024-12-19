@@ -1,14 +1,16 @@
 import { isStepCompleted } from "@/lib/domain-logic/isStepCompleted";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
-import { generateBusiness } from "@businessnjgovnavigator/shared";
+import { generateBusiness, generateUserData } from "@businessnjgovnavigator/shared";
 
 describe("isStepCompleted", () => {
   it("returns false if roadmap is undefined", () => {
-    expect(isStepCompleted(undefined, generateStep({}), generateBusiness({}))).toEqual(false);
+    expect(isStepCompleted(undefined, generateStep({}), generateBusiness(generateUserData({}), {}))).toEqual(
+      false
+    );
   });
 
   it("returns true if every task in roadmap associated with the step is completed", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       taskProgress: {
         "step1-task1": "COMPLETED",
         "step1-task2": "COMPLETED",
@@ -30,7 +32,7 @@ describe("isStepCompleted", () => {
   });
 
   it("returns false if some tasks in roadmap associated with step are not completed", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       taskProgress: {
         "step1-task1": "COMPLETED",
         "step1-task2": "IN_PROGRESS",

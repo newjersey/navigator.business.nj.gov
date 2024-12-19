@@ -11,6 +11,7 @@ import {
 import {
   generateBusiness,
   generateProfileData,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
@@ -29,11 +30,12 @@ describe("<DeferredOnboardingQuestion />", () => {
     useMockRouter({});
   });
 
+  const userData = generateUserData({});
   const renderComponent = ({ onSave }: { onSave?: () => void }): void => {
     render(
       <WithStatefulUserData
         initialUserData={generateUserDataForBusiness(
-          generateBusiness({ profileData: generateProfileData({ ...emptyIndustrySpecificData }) })
+          generateBusiness(userData, { profileData: generateProfileData({ ...emptyIndustrySpecificData }) })
         )}
       >
         <DeferredOnboardingQuestion label="" onSave={onSave || jest.fn()}>

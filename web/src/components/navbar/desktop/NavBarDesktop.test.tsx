@@ -9,6 +9,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { ReactNode } from "react";
 
 const Config = getMergedConfig();
+const baseUserData = generateUserData({});
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -106,7 +107,7 @@ describe("<NavBarDesktop />", () => {
     });
 
     it("shows profile, add business, MyNj and logout in dropdown", () => {
-      const firstBusiness = generateBusiness({
+      const firstBusiness = generateBusiness(baseUserData, {
         profileData: generateProfileData({
           businessName: "first-biz",
           legalStructureId: randomPublicFilingLegalStructure(),

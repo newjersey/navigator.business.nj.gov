@@ -4,7 +4,7 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { LicenseEventType } from "@/lib/types/types";
-import { LicenseCalendarEvent } from "@businessnjgovnavigator/shared/";
+import { generateUserData, LicenseCalendarEvent } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,
   generateLicenseDetails,
@@ -17,7 +17,8 @@ const LicenseCalendarEventPreview = (props: PreviewProps): ReactElement => {
   const license = usePageData<LicenseEventType>(props);
 
   const licenseName = license.licenseName || "Health Care Services";
-  const business = generateBusiness({
+  const userData = generateUserData({});
+  const business = generateBusiness(userData, {
     profileData: generateProfileData({ legalStructureId: undefined }),
     licenseData: {
       lastUpdatedISO: "tbd",

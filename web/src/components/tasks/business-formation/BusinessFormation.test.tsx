@@ -91,7 +91,7 @@ describe("<BusinessFormation />", () => {
       displayContent,
     });
 
-    useMockBusiness(generateBusiness({}));
+    useMockBusiness(generateBusiness(generateUserData({}), {}));
     expect(screen.getByTestId("formation-form")).toContainHTML(
       renderToStaticMarkup(Content({ children: Config.formation.intro.default }))
     );
@@ -108,7 +108,7 @@ describe("<BusinessFormation />", () => {
       displayContent,
     });
 
-    useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
+    useMockBusiness(generateBusiness(generateUserData({}), {})); // necessary for renderToStaticMarkup for Content
     expect(screen.getByTestId("formation-form")).toContainHTML(
       renderToStaticMarkup(Content({ children: Config.formation.intro.foreign }))
     );
@@ -174,7 +174,7 @@ describe("<BusinessFormation />", () => {
       const validGetFilingResponse = generateGetFilingResponse({ success: true });
 
       const userDataReturnFromApi = generateUserDataForBusiness(
-        generateBusiness({
+        generateBusiness(generateUserData({}), {
           formationData: generateFormationData({
             formationResponse: generateFormationSubmitResponse({ success: true }),
             getFilingResponse: validGetFilingResponse,

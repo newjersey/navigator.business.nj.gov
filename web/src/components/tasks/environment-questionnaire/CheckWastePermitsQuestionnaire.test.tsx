@@ -2,7 +2,7 @@ import { CheckWastePermitsQuestionnaire } from "@/components/tasks/environment-q
 import { getMergedConfig } from "@/contexts/configContext";
 import { generateTask } from "@/test/factories";
 import { currentBusiness, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { Business } from "@businessnjgovnavigator/shared";
+import { Business, generateUserData } from "@businessnjgovnavigator/shared";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
 import userEvent, { UserEvent } from "@testing-library/user-event";
@@ -18,7 +18,9 @@ describe("<CheckWastePermitsQuestionnaire />", () => {
 
   const renderQuestionnaireAndSetupUser = (business?: Business): { user: UserEvent } => {
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business ?? generateBusiness(generateUserData({}), {}))}
+      >
         <CheckWastePermitsQuestionnaire task={task} />
       </WithStatefulUserData>
     );
@@ -60,7 +62,7 @@ describe("<CheckWastePermitsQuestionnaire />", () => {
 
   it("throws an error if no selection is made and user clicks save", async () => {
     const { user } = renderQuestionnaireAndSetupUser(
-      generateBusiness({
+      generateBusiness(generateUserData({}), {
         environmentData: {
           waste: undefined,
         },

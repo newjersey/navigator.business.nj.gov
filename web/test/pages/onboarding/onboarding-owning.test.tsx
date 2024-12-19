@@ -14,6 +14,7 @@ import {
   generateOwningProfileData,
   generateProfileData,
   generateTaxFilingData,
+  generateUserData,
   OperatingPhaseId,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
@@ -39,7 +40,7 @@ const Config = getMergedConfig();
 
 const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
   return generateUserDataForBusiness(
-    generateBusiness({
+    generateBusiness(generateUserData({}), {
       profileData: generateOwningProfileData({
         operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
         ...overrides,
@@ -87,7 +88,7 @@ describe("onboarding - owning a business", () => {
     });
 
     it("updates operating phase when user changes their business persona", async () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: OperatingPhaseId.GUEST_MODE,
@@ -162,7 +163,7 @@ describe("onboarding - owning a business", () => {
   });
 
   it("prefills form from existing user data", async () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateOwningProfileData({
         sectorId: "clean-energy",
       }),
@@ -190,7 +191,7 @@ describe("onboarding - owning a business", () => {
       });
     });
 
-    const initialBusiness = generateBusiness({
+    const initialBusiness = generateBusiness(generateUserData({}), {
       taxFilingData: taxData,
       profileData: generateOwningProfileData({
         legalStructureId: undefined,

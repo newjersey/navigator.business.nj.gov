@@ -2,11 +2,15 @@
 
 import { addAdditionalBusiness } from "@/lib/domain-logic/addAdditionalBusiness";
 import { createEmptyProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generateUserData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
 
 describe("addAdditionalBusiness", () => {
   it("adds a new empty business to a userData", () => {
-    const firstBusiness = generateBusiness({});
+    const firstBusiness = generateBusiness(generateUserData({}), {});
     const userData = generateUserDataForBusiness(firstBusiness);
     const newUserData = addAdditionalBusiness(userData);
 

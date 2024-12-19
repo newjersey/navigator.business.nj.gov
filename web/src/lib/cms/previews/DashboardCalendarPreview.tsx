@@ -10,6 +10,7 @@ import {
   defaultDateFormat,
   generateBusiness,
   generateTaxFilingCalendarEvent,
+  generateUserData,
   randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
@@ -26,7 +27,8 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
-  const emptyFilingsUserData = generateBusiness({
+  const userData = generateUserData({});
+  const emptyFilingsUserData = generateBusiness(userData, {
     profileData: generateProfileData({
       operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
       legalStructureId: "general-partnership",
@@ -36,7 +38,7 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
     }),
   });
 
-  const filingsBusiness = generateBusiness({
+  const filingsBusiness = generateBusiness(userData, {
     profileData: generateProfileData({
       operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
       legalStructureId: "general-partnership",

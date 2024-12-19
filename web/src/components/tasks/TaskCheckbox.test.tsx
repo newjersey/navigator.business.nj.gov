@@ -50,7 +50,7 @@ describe("<TaskCheckbox />", () => {
   it("sets checked property from userData for task", () => {
     renderTaskCheckbox({
       checklistItemId: "some-id",
-      initialBusiness: generateBusiness({
+      initialBusiness: generateBusiness(generateUserData({}), {
         taskItemChecklist: {
           "some-id": true,
           "some-other-id": false,
@@ -63,7 +63,7 @@ describe("<TaskCheckbox />", () => {
   it("updates userData when item is checked off", () => {
     renderTaskCheckbox({
       checklistItemId: "some-id",
-      initialBusiness: generateBusiness({
+      initialBusiness: generateBusiness(generateUserData({}), {
         taskItemChecklist: {
           "some-id": false,
         },

@@ -6,7 +6,12 @@ import * as helpers from "@/lib/utils/helpers";
 import { removeMarkdownFormatting } from "@/lib/utils/helpers";
 import { generateCertification, generateFunding, generateSidebarCardContent } from "@/test/factories";
 import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
-import { OperatingPhaseId, OperatingPhases, generateUser } from "@businessnjgovnavigator/shared/";
+import {
+  OperatingPhaseId,
+  OperatingPhases,
+  generateUser,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/";
 import { ForeignBusinessTypeId } from "@businessnjgovnavigator/shared/profileData";
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
@@ -47,6 +52,7 @@ function setupMockAnalytics(): typeof analytics {
 }
 
 const Config = getMergedConfig();
+const userData = generateUserData({});
 
 const getOnlyDisplayCertificationOperatingPhase = (): OperatingPhaseId => {
   const phase = OperatingPhases.find((op): boolean => {
@@ -156,7 +162,7 @@ describe("<SidebarCardsList />", () => {
       it.each(foreignBusinessTypeIds)(
         "displays when the business is a Remote Seller/Worker",
         (foreignBusinessTypeId) => {
-          const mockBusiness = generateBusiness({
+          const mockBusiness = generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
               operatingPhase: OperatingPhaseId.REMOTE_SELLER_WORKER,
@@ -175,7 +181,7 @@ describe("<SidebarCardsList />", () => {
       it.each(foreignBusinessTypeIds)(
         "displays when the business is a Remote Seller/Worker and operating phase is GUEST_MODE",
         (foreignBusinessTypeId) => {
-          const mockBusiness = generateBusiness({
+          const mockBusiness = generateBusiness(userData, {
             profileData: generateProfileData({
               operatingPhase: OperatingPhaseId.GUEST_MODE,
               businessPersona: "FOREIGN",
@@ -294,7 +300,7 @@ describe("<SidebarCardsList />", () => {
       });
     });
 
-    const mockBusiness = generateBusiness({
+    const mockBusiness = generateBusiness(userData, {
       profileData: generateProfileData({
         operatingPhase: getDisplayCertificationAndFundingOperatingPhase(),
         municipality: undefined,
@@ -406,7 +412,7 @@ describe("<SidebarCardsList />", () => {
     it("displays certifications above fundings for most users", async () => {
       useMockUserData({
         businesses: {
-          "biz-1": generateBusiness({
+          "biz-1": generateBusiness(userData, {
             profileData: {
               ...generateProfileData({
                 operatingPhase: getDisplayFundingOperatingPhase(),
@@ -449,7 +455,7 @@ describe("<SidebarCardsList />", () => {
     it("displays fundings above certifications for investNewark users", async () => {
       useMockUserData({
         businesses: {
-          "biz-1": generateBusiness({
+          "biz-1": generateBusiness(userData, {
             profileData: {
               ...generateProfileData({
                 operatingPhase: getDisplayFundingOperatingPhase(),

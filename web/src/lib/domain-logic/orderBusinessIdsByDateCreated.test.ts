@@ -3,9 +3,9 @@ import { generateBusiness, generateUserData } from "@businessnjgovnavigator/shar
 
 describe("orderBusinessIdsByDateCreated", () => {
   it("returns list of businesses in order oldest to newest", () => {
-    const oldest = generateBusiness({ dateCreatedISO: "2022-04-19T12:00:00" });
-    const middle = generateBusiness({ dateCreatedISO: "2022-05-19T12:00:00" });
-    const newest = generateBusiness({ dateCreatedISO: "2022-06-19T12:00:00" });
+    const oldest = generateBusiness(generateUserData({}), { dateCreatedISO: "2022-04-19T12:00:00" });
+    const middle = generateBusiness(generateUserData({}), { dateCreatedISO: "2022-05-19T12:00:00" });
+    const newest = generateBusiness(generateUserData({}), { dateCreatedISO: "2022-06-19T12:00:00" });
 
     const userData = generateUserData({
       currentBusinessId: middle.id,

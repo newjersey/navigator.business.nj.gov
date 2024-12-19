@@ -3,15 +3,15 @@ import { generateBusiness, generateUserData } from "@businessnjgovnavigator/shar
 
 describe("remove business", () => {
   it("removes a business from userData by ID when not current", () => {
-    const firstBusiness = generateBusiness({});
-    const secondBusiness = generateBusiness({});
-    const userData = generateUserData({
-      currentBusinessId: firstBusiness.id,
-      businesses: {
-        [firstBusiness.id]: firstBusiness,
-        [secondBusiness.id]: secondBusiness,
-      },
-    });
+    const userData = generateUserData({});
+    const firstBusiness = generateBusiness(userData, {});
+    const secondBusiness = generateBusiness(userData, {});
+    userData.businesses = {
+      [firstBusiness.id]: firstBusiness,
+      [secondBusiness.id]: secondBusiness,
+    };
+    userData.currentBusinessId = firstBusiness.id;
+
     const newUserData = removeBusiness({
       userData,
       idToRemove: secondBusiness.id,
@@ -24,15 +24,16 @@ describe("remove business", () => {
   });
 
   it("removes a business from userData by ID when it is current", () => {
-    const firstBusiness = generateBusiness({});
-    const secondBusiness = generateBusiness({});
-    const userData = generateUserData({
-      currentBusinessId: firstBusiness.id,
-      businesses: {
-        [firstBusiness.id]: firstBusiness,
-        [secondBusiness.id]: secondBusiness,
-      },
-    });
+    const userData = generateUserData({});
+    const firstBusiness = generateBusiness(userData, {});
+    const secondBusiness = generateBusiness(userData, {});
+
+    userData.businesses = {
+      [firstBusiness.id]: firstBusiness,
+      [secondBusiness.id]: secondBusiness,
+    };
+    userData.currentBusinessId = firstBusiness.id;
+
     const newUserData = removeBusiness({
       userData,
       idToRemove: firstBusiness.id,

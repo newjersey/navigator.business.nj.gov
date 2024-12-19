@@ -3,8 +3,8 @@ import { generateBusiness, generateUserData } from "@businessnjgovnavigator/shar
 
 describe("switch business", () => {
   it("sets given id to current", () => {
-    const firstBusiness = generateBusiness({});
-    const secondBusiness = generateBusiness({});
+    const firstBusiness = generateBusiness(generateUserData({}), {});
+    const secondBusiness = generateBusiness(generateUserData({}), {});
     const userData = generateUserData({
       currentBusinessId: firstBusiness.id,
       businesses: {

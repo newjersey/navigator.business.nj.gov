@@ -11,7 +11,7 @@ import {
   triggerQueueUpdate,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import { generateUserData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import {
   generateBusiness,
@@ -52,7 +52,7 @@ describe("<BusinessStructureTask />", () => {
   };
 
   it("shows tooltip text on task progress checkbox", async () => {
-    const business = generateBusiness({ taskProgress: { [taskId]: "IN_PROGRESS" } });
+    const business = generateBusiness(generateUserData({}), { taskProgress: { [taskId]: "IN_PROGRESS" } });
     renderTask(business);
     expect(screen.queryByText(Config.businessStructureTask.uncompletedTooltip)).not.toBeInTheDocument();
     expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
@@ -63,7 +63,7 @@ describe("<BusinessStructureTask />", () => {
   });
 
   it("shows completed tooltip text on task progress checkbox when task is completed", async () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       taskProgress: { [taskId]: "COMPLETED" },
       formationData: generateFormationData({ completedFilingPayment: true }),
     });
@@ -79,7 +79,7 @@ describe("<BusinessStructureTask />", () => {
   });
 
   it("shows locked formation tooltip text on task progress checkbox when formation is completed", async () => {
-    const business = generateBusiness({ taskProgress: { [taskId]: "COMPLETED" } });
+    const business = generateBusiness(generateUserData({}), { taskProgress: { [taskId]: "COMPLETED" } });
     renderTask(business);
     expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
     expect(screen.queryByText(Config.businessStructureTask.uncompletedTooltip)).not.toBeInTheDocument();
@@ -91,14 +91,14 @@ describe("<BusinessStructureTask />", () => {
 
   it("shows successful business structure alert when business has a legal structure", () => {
     const legalStructure = randomLegalStructure();
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({ legalStructureId: legalStructure.id }),
     });
     renderTask(business);
     const successMessage = templateEval(Config.businessStructureTask.successMessage, {
       legalStructure: legalStructure.name,
     });
-    useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
+    useMockBusiness(generateBusiness(generateUserData({}), {})); // necessary for renderToStaticMarkup for Content
     expect(screen.getByTestId("success-alert")).toContainHTML(
       renderToStaticMarkup(Content({ children: successMessage }))
     );
@@ -106,7 +106,7 @@ describe("<BusinessStructureTask />", () => {
 
   it("shows radio question when edit button is clicked in alter", () => {
     const legalStructure = randomLegalStructure();
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({ legalStructureId: legalStructure.id }),
     });
     renderTask(business);
@@ -117,7 +117,7 @@ describe("<BusinessStructureTask />", () => {
 
   it("does not allow editing when formation is completed", () => {
     const legalStructure = randomLegalStructure();
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({ legalStructureId: legalStructure.id }),
       formationData: generateFormationData({ completedFilingPayment: true }),
     });
@@ -126,7 +126,9 @@ describe("<BusinessStructureTask />", () => {
   });
 
   it("saves and shows success banner when save button clicked", async () => {
-    const business = generateBusiness({ profileData: generateProfileData({ legalStructureId: undefined }) });
+    const business = generateBusiness(generateUserData({}), {
+      profileData: generateProfileData({ legalStructureId: undefined }),
+    });
     renderTask(business);
     expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
     expect(screen.getByText(Config.businessStructureTask.radioQuestionHeader)).toBeInTheDocument();
@@ -149,7 +151,7 @@ describe("<BusinessStructureTask />", () => {
 
   it("allows saving without changes", async () => {
     const legalStructure = randomLegalStructure();
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({ legalStructureId: legalStructure.id }),
     });
     renderTask(business);
@@ -165,7 +167,7 @@ describe("<BusinessStructureTask />", () => {
 
   it("updates task progress to in-progress and updates tooltip when editing", async () => {
     const legalStructure = randomLegalStructure();
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({ legalStructureId: legalStructure.id }),
       taskProgress: { [taskId]: "COMPLETED" },
     });
@@ -183,7 +185,7 @@ describe("<BusinessStructureTask />", () => {
   });
 
   it("updates task progress to completed when saving", async () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({ legalStructureId: undefined }),
       taskProgress: { [taskId]: "IN_PROGRESS" },
     });
@@ -196,7 +198,7 @@ describe("<BusinessStructureTask />", () => {
   });
 
   it("updates operating phase from GUEST_MODE to GUEST_MODE_WITH_BUSINESS_STRUCTURE when business structure is saved", async () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         legalStructureId: undefined,
         operatingPhase: OperatingPhaseId.GUEST_MODE,
@@ -213,7 +215,7 @@ describe("<BusinessStructureTask />", () => {
   });
 
   it("does not update operating phase to GUEST_MODE_WITH_BUSINESS_STRUCTURE when business structure is saved", async () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         legalStructureId: undefined,
         operatingPhase: OperatingPhaseId.NEEDS_BUSINESS_STRUCTURE,
@@ -231,7 +233,7 @@ describe("<BusinessStructureTask />", () => {
   });
 
   it("updates task progress to in-progress when business structure radio is selected", async () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({ legalStructureId: undefined }),
       taskProgress: { [taskId]: "NOT_STARTED" },
     });
@@ -247,7 +249,7 @@ describe("<BusinessStructureTask />", () => {
   });
 
   it("renders error message and alert when save button is clicked without a radio being selected and removed when selected", async () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({ legalStructureId: undefined }),
       taskProgress: { [taskId]: "NOT_STARTED" },
     });
@@ -271,7 +273,7 @@ describe("<BusinessStructureTask />", () => {
   it("updates task to NOT_STARTED when remove button is clicked", async () => {
     const legalStructure = randomLegalStructure();
 
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({ legalStructureId: legalStructure.id }),
       taskProgress: { [taskId]: "COMPLETED" },
     });
@@ -289,7 +291,7 @@ describe("<BusinessStructureTask />", () => {
   it("updates operating phase from GUEST_MODE_WITH_BUSINESS_STRUCTURE to GUEST_MODE when business structure is removed", async () => {
     const legalStructure = randomLegalStructure();
 
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         legalStructureId: legalStructure.id,
         operatingPhase: OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE,

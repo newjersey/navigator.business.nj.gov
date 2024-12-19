@@ -8,6 +8,7 @@ import {
   generateBusiness,
   generateTaxFilingData,
   generateTaxIdAndBusinessName,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
@@ -28,9 +29,11 @@ describe("taxFilingRouter", () => {
   let stubDynamoDataClient: jest.Mocked<DatabaseClient>;
   let apiTaxFilingClient: jest.Mocked<TaxFilingInterface>;
   let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;
-  const userData = generateUserDataForBusiness(
-    generateBusiness({ taxFilingData: generateTaxFilingData({ state: "PENDING" }) })
-  );
+  const baseUserData = generateUserData({});
+  const business = generateBusiness(baseUserData, {
+    taxFilingData: generateTaxFilingData({ state: "PENDING" }),
+  });
+  const userData = generateUserDataForBusiness(business);
   const responseUserData: UserData = modifyCurrentBusiness(userData, (business) => ({
     ...business,
     taxFilingData: generateTaxFilingData({ state: "SUCCESS" }),

@@ -8,7 +8,7 @@ import {
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
-import { Business } from "@businessnjgovnavigator/shared";
+import { Business, generateUserData } from "@businessnjgovnavigator/shared";
 import {
   generateBusiness,
   generateUser,
@@ -67,11 +67,14 @@ describe("<NavBarDashboardLink/>", () => {
     let userData: UserData;
 
     beforeEach(() => {
-      previousBusiness = generateBusiness({
+      previousBusiness = generateBusiness(generateUserData({}), {
         id: "previous-business-id",
         onboardingFormProgress: "COMPLETED",
       });
-      newBusiness = generateBusiness({ id: "new-business-id", onboardingFormProgress: "UNSTARTED" });
+      newBusiness = generateBusiness(generateUserData({}), {
+        id: "new-business-id",
+        onboardingFormProgress: "UNSTARTED",
+      });
       userData = generateUserDataForBusiness(newBusiness, {
         businesses: {
           "new-business-id": newBusiness,
@@ -105,7 +108,9 @@ describe("<NavBarDashboardLink/>", () => {
 
   describe("when previousBusinessId prop is not present", () => {
     it("navigates to the onboarding if onboarding hasn't been started", async () => {
-      const userData = generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: undefined }));
+      const userData = generateUserDataForBusiness(
+        generateBusiness(generateUserData({}), { onboardingFormProgress: undefined })
+      );
       renderComponent({ userData });
       fireEvent.click(screen.getByText(displayedLinkText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);

@@ -3,6 +3,7 @@ import {
   generateBusiness,
   generateLicenseData,
   generateLicenseDetails,
+  generateUserData,
   generateUserDataForBusiness,
   randomElementFromArray,
   taskIdLicenseNameMapping,
@@ -45,7 +46,7 @@ describe("licenseStatus", () => {
       // Used variable names that refer to the specific use case to simplify readability
       const currBusinessIdFromUpdateQueue = "id 1";
 
-      const businessFromUpdateQueue = generateBusiness({
+      const businessFromUpdateQueue = generateBusiness(generateUserData({}), {
         id: currBusinessIdFromUpdateQueue,
         licenseData: undefined,
       });
@@ -56,7 +57,7 @@ describe("licenseStatus", () => {
         },
       };
       const userDataFromDb = generateUserDataForBusiness(
-        generateBusiness({
+        generateBusiness(generateUserData({}), {
           id: currBusinessIdFromUpdateQueue,
           licenseData: generateLicenseData({ licenses: licensesFromDb }),
         })

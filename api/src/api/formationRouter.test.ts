@@ -156,26 +156,26 @@ describe("formationRouter", () => {
       const getFilingResponse = generateGetFilingResponse({ success: true });
       stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
 
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          formationData: generateFormationData({
-            formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
-          }),
-          profileData: generateProfileData({
-            documents: {
-              certifiedDoc: "",
-              formationDoc: "",
-              standingDoc: "",
-            },
-          }),
-        })
-      );
-      stubDynamoDataClient.get.mockResolvedValue(userData);
+      const userData = generateUserData({});
+      const business = generateBusiness(userData, {
+        formationData: generateFormationData({
+          formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
+        }),
+        profileData: generateProfileData({
+          documents: {
+            certifiedDoc: "",
+            formationDoc: "",
+            standingDoc: "",
+          },
+        }),
+      });
+      const userDataForBusiness = generateUserDataForBusiness(business);
+      stubDynamoDataClient.get.mockResolvedValue(userDataForBusiness);
       const response = await request(app).get(`/completed-filing`).send();
 
       expect(response.status).toEqual(StatusCodes.OK);
 
-      const expectedNewUserData = modifyCurrentBusiness(userData, (business) => ({
+      const expectedNewUserData = modifyCurrentBusiness(userDataForBusiness, (business) => ({
         ...business,
         formationData: {
           ...business.formationData,
@@ -212,24 +212,25 @@ describe("formationRouter", () => {
       const getFilingResponse = generateGetFilingResponse({ success: false });
       stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
 
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          formationData: generateFormationData({
-            formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
-          }),
-          profileData: generateProfileData({
-            documents: {
-              certifiedDoc: "",
-              formationDoc: "",
-              standingDoc: "",
-            },
-          }),
-        })
-      );
-      stubDynamoDataClient.get.mockResolvedValue(userData);
+      const userData = generateUserData({});
+      const business = generateBusiness(userData, {
+        formationData: generateFormationData({
+          formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
+        }),
+        profileData: generateProfileData({
+          documents: {
+            certifiedDoc: "",
+            formationDoc: "",
+            standingDoc: "",
+          },
+        }),
+      });
+
+      const userDataForBusiness = generateUserDataForBusiness(business);
+      stubDynamoDataClient.get.mockResolvedValue(userDataForBusiness);
       await request(app).get(`/completed-filing`).send();
 
-      const expectedUserData = modifyCurrentBusiness(userData, (business) => ({
+      const expectedUserData = modifyCurrentBusiness(userDataForBusiness, (business) => ({
         ...business,
         formationData: {
           ...business.formationData,
@@ -243,25 +244,25 @@ describe("formationRouter", () => {
     it("only fetches files that are in the filingResponse", async () => {
       const getFilingResponse = generateGetFilingResponse({ success: true, certifiedDoc: "" });
       stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
+      const userData = generateUserData({});
+      const business = generateBusiness(userData, {
+        formationData: generateFormationData({
+          formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
+        }),
+        profileData: generateProfileData({
+          documents: {
+            certifiedDoc: "",
+            formationDoc: "",
+            standingDoc: "",
+          },
+        }),
+      });
 
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          formationData: generateFormationData({
-            formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
-          }),
-          profileData: generateProfileData({
-            documents: {
-              certifiedDoc: "",
-              formationDoc: "",
-              standingDoc: "",
-            },
-          }),
-        })
-      );
-      stubDynamoDataClient.get.mockResolvedValue(userData);
+      const userDataForBusiness = generateUserDataForBusiness(business);
+      stubDynamoDataClient.get.mockResolvedValue(userDataForBusiness);
       await request(app).get(`/completed-filing`).send();
 
-      const expectedNewUserData = modifyCurrentBusiness(userData, (business) => ({
+      const expectedNewUserData = modifyCurrentBusiness(userDataForBusiness, (business) => ({
         ...business,
         formationData: {
           ...business.formationData,

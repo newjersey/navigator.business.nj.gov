@@ -21,6 +21,7 @@ import {
   OperatingPhaseId,
   createEmptyProfileData,
   generateProfileData,
+  generateUserData,
 } from "@businessnjgovnavigator/shared/";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
@@ -69,7 +70,7 @@ describe("onboarding - shared", () => {
 
   it("routes to the second onboarding page when they have answered the first question and we route them to page 2", async () => {
     useMockRouter({ isReady: true, query: { page: "2" } });
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         businessPersona: "STARTING",
         legalStructureId: "c-corporation",
@@ -134,7 +135,9 @@ describe("onboarding - shared", () => {
   });
 
   it("updates locally for each step", async () => {
-    const business = generateBusiness({ profileData: generateProfileData({ businessPersona: "STARTING" }) });
+    const business = generateBusiness(generateUserData({}), {
+      profileData: generateProfileData({ businessPersona: "STARTING" }),
+    });
     const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
     const numberOfPages = onboardingFlows.STARTING.pages.length;
 
@@ -168,7 +171,7 @@ describe("onboarding - shared", () => {
   });
 
   it("resets non-shared information when switching from starting flow to owning flow", async () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       onboardingFormProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
@@ -207,7 +210,7 @@ describe("onboarding - shared", () => {
   });
 
   it("does not reset information when re-visiting page 1 but not switching the answer", async () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       onboardingFormProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });

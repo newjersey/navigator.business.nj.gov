@@ -1,7 +1,12 @@
 import { EncryptionDecryptionClient, EncryptTaxId, UserDataClient } from "@domain/types";
 import { encryptTaxIdBatch } from "@domain/user/encryptTaxIdBatch";
 import { encryptTaxIdFactory } from "@domain/user/encryptTaxIdFactory";
-import { generateBusiness, generateProfileData, generateUserDataForBusiness } from "@shared/test";
+import {
+  generateBusiness,
+  generateProfileData,
+  generateUserData,
+  generateUserDataForBusiness,
+} from "@shared/test";
 import { UserData } from "@shared/userData";
 
 describe("encryptTaxIdBatch", () => {
@@ -25,29 +30,36 @@ describe("encryptTaxIdBatch", () => {
   });
 
   it("encrypts and masks tax id for users who need it and returns success, failed, and total count when all succeed", async () => {
+    const userData = generateUserData({});
     stubUserDataClient.put.mockImplementation((userData: UserData): Promise<UserData> => {
       return Promise.resolve(userData);
     });
     stubEncryptionDecryptionClient.encryptValue.mockResolvedValue("some-encrypted-value");
-
     stubUserDataClient.getNeedTaxIdEncryptionUsers.mockResolvedValue([
       generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({ taxId: "123456789000", encryptedTaxId: undefined }),
+        generateBusiness(userData, {
+          profileData: generateProfileData({
+            taxId: "123456789000",
+            encryptedTaxId: undefined,
+          }),
         })
       ),
       generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({ taxId: "000987654321", encryptedTaxId: undefined }),
+        generateBusiness(userData, {
+          profileData: generateProfileData({
+            taxId: "000987654321",
+            encryptedTaxId: undefined,
+          }),
         })
       ),
     ]);
-
     const results = await encryptTaxIdBatch(encryptTaxId, stubUserDataClient);
     expect(results).toEqual({ total: 2, success: 2, failed: 0 });
   });
 
   it("does not stop execution if one fails", async () => {
+    const userData = generateUserData({});
+
     stubUserDataClient.put.mockImplementation((userData: UserData): Promise<UserData> => {
       return Promise.resolve(userData);
     });
@@ -57,12 +69,12 @@ describe("encryptTaxIdBatch", () => {
 
     stubUserDataClient.getNeedTaxIdEncryptionUsers.mockResolvedValue([
       generateUserDataForBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           profileData: generateProfileData({ taxId: "123456789000", encryptedTaxId: undefined }),
         })
       ),
       generateUserDataForBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           profileData: generateProfileData({ taxId: "000987654321", encryptedTaxId: undefined }),
         })
       ),

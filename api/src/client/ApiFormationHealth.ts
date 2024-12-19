@@ -177,6 +177,7 @@ export const ApiFormationHealth: UserData = {
       },
       lastUpdatedISO: getCurrentDateISOString(),
       version: CURRENT_VERSION,
+      userId: "test-user-id-17591518",
     },
   },
 };

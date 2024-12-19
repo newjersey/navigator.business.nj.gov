@@ -16,7 +16,7 @@ import {
   mockSuccessfulApiSignups,
   renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import { generateProfileData } from "@businessnjgovnavigator/shared";
+import { generateProfileData, generateUserData } from "@businessnjgovnavigator/shared";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { UserData, createEmptyBusiness } from "@businessnjgovnavigator/shared/userData";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
@@ -59,7 +59,7 @@ describe("onboarding - additional business", () => {
 
   it("returns user to previous business without saving", async () => {
     useMockRouter({ isReady: true, query: { additionalBusiness: "true" } });
-    const initialBusiness = generateBusiness({});
+    const initialBusiness = generateBusiness(generateUserData({}), {});
     const initialData = generateUserDataForBusiness(initialBusiness);
     renderPage({ userData: initialData });
     await waitFor(() => {
@@ -80,7 +80,7 @@ describe("onboarding - additional business", () => {
 
   it("onboards and saves an additional empty business", async () => {
     const emptyBusiness = createEmptyBusiness();
-    const initialBusiness = generateBusiness({});
+    const initialBusiness = generateBusiness(generateUserData({}), {});
     const initialData = generateUserDataForBusiness(initialBusiness);
     expect(Object.keys(initialData.businesses)).toHaveLength(1);
 
@@ -136,7 +136,7 @@ describe("onboarding - additional business", () => {
   });
 
   it("navigates to the unsupported page with additionalBusiness param when additional business is being added", async () => {
-    const initialBusiness = generateBusiness({
+    const initialBusiness = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         businessPersona: "STARTING",
       }),

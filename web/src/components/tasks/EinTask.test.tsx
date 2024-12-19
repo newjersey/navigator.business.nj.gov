@@ -16,6 +16,7 @@ import {
   Business,
   generateBusiness,
   generateProfileData,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -60,7 +61,7 @@ describe("<EinTask />", () => {
     };
 
     beforeEach(() => {
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({ employerId: "" }),
         taskProgress: { [taskId]: "NOT_STARTED" },
       });
@@ -133,7 +134,7 @@ describe("<EinTask />", () => {
     };
 
     beforeEach(() => {
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({ employerId: "123456789" }),
         taskProgress: { [taskId]: "COMPLETED" },
       });
@@ -191,7 +192,7 @@ describe("<EinTask />", () => {
     };
 
     beforeEach(() => {
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({ employerId: "" }),
         taskProgress: { [taskId]: "NOT_STARTED" },
       });

@@ -13,6 +13,7 @@ import {
   businessStructureTaskId,
   generateBusiness,
   generateProfileData,
+  generateUserData,
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
 
@@ -28,13 +29,14 @@ describe("<Roadmap />", () => {
   });
 
   const Config = getMergedConfig();
+  const userData = generateUserData({});
 
   describe.each(operatingPhasesDisplayingBusinessStructurePrompt)(
     "BusinessStructurePrompt",
     (operatingPhase) => {
       beforeEach(() => {
         useMockBusiness(
-          generateBusiness({ profileData: generateProfileData({ operatingPhase: operatingPhase }) })
+          generateBusiness(userData, { profileData: generateProfileData({ operatingPhase: operatingPhase }) })
         );
       });
 
@@ -60,7 +62,7 @@ describe("<Roadmap />", () => {
     "does not render the roadmap with the business structure prompt for %p",
     (operatingPhase) => {
       useMockBusiness(
-        generateBusiness({ profileData: generateProfileData({ operatingPhase: operatingPhase }) })
+        generateBusiness(userData, { profileData: generateProfileData({ operatingPhase: operatingPhase }) })
       );
       render(<Roadmap />);
       expect(screen.queryByTestId("business-structure-prompt")).not.toBeInTheDocument();

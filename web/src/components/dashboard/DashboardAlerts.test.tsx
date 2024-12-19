@@ -5,7 +5,7 @@ import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData";
 import { WithStatefulUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
-import { generatePreferences } from "@businessnjgovnavigator/shared/";
+import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { act, render, screen } from "@testing-library/react";
@@ -25,12 +25,15 @@ describe("<DashboardAlerts />", () => {
     jest.useFakeTimers();
   });
 
+  const userData = generateUserData({});
   const renderStatefulPage = (business?: Business): void => {
     setupStatefulUserDataContext();
     render(
       <WithStatefulUserData
         initialUserData={
-          business ? generateUserDataForBusiness(business) : generateUserDataForBusiness(generateBusiness({}))
+          business
+            ? generateUserDataForBusiness(business)
+            : generateUserDataForBusiness(generateBusiness(userData, {}))
         }
       >
         <DashboardAlerts />
@@ -42,7 +45,7 @@ describe("<DashboardAlerts />", () => {
     useMockProfileData({});
     useMockRouter({ isReady: true, query: { success: "true" } });
     renderStatefulPage(
-      generateBusiness({
+      generateBusiness(userData, {
         preferences: generatePreferences({ phaseNewlyChanged: true }),
         onboardingFormProgress: "COMPLETED",
       })

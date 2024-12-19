@@ -9,6 +9,7 @@ import {
   generateBusiness,
   generateProfileData,
 } from "@businessnjgovnavigator/shared/";
+import { generateUserData } from "../test";
 import {
   isDomesticEmployerBusiness,
   isNexusBusiness,
@@ -18,7 +19,7 @@ import {
 } from "./businessPersonaHelpers";
 
 const generateBusinessWithBusinessPersona = (businessPersona: BusinessPersona): Business =>
-  generateBusiness({
+  generateBusiness(generateUserData({}), {
     profileData: generateProfileData({
       businessPersona: businessPersona,
     }),
@@ -28,7 +29,7 @@ const generateBusinessWithBusinessPersonaAndIndustry = (
   businessPersona: BusinessPersona,
   industryId: string
 ): Business =>
-  generateBusiness({
+  generateBusiness(generateUserData({}), {
     profileData: generateProfileData({
       businessPersona: businessPersona,
       industryId: industryId,
@@ -38,7 +39,7 @@ const generateBusinessWithBusinessPersonaAndIndustry = (
 const generateForeignBusinessWithForeignBusinessTypeIds = (
   foreignBusinessTypeIds: ForeignBusinessTypeId[]
 ): Business => {
-  return generateBusiness({
+  return generateBusiness(generateUserData({}), {
     profileData: generateProfileData({
       foreignBusinessTypeIds: foreignBusinessTypeIds,
       businessPersona: "FOREIGN",
@@ -112,7 +113,7 @@ describe("businessPersonaHelpers", () => {
     it("returns false when business persona is not Foreign", () => {
       expect(
         isNexusBusiness(
-          generateBusiness({
+          generateBusiness(generateUserData({}), {
             profileData: generateProfileData({
               foreignBusinessTypeIds: ["employeesInNJ"],
               businessPersona: "STARTING",
@@ -156,7 +157,7 @@ describe("businessPersonaHelpers", () => {
     it("returns false when business persona is not Foreign", () => {
       expect(
         isRemoteWorkerOrSellerBusiness(
-          generateBusiness({
+          generateBusiness(generateUserData({}), {
             profileData: generateProfileData({
               foreignBusinessTypeIds: ["employeesInNJ"],
               businessPersona: "STARTING",

@@ -10,6 +10,7 @@ import {
   generateFormationFormData,
   generateMunicipality,
   generateProfileData,
+  generateUserData,
   Municipality,
 } from "@businessnjgovnavigator/shared";
 
@@ -46,7 +47,7 @@ describe("profile - guest mode", () => {
 
   describe("when prospective business owner", () => {
     beforeEach(() => {
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "limited-liability-company",
@@ -59,7 +60,7 @@ describe("profile - guest mode", () => {
 
   describe("when owning a business", () => {
     beforeEach(() => {
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateOwningProfileData({ municipality: muni }),
         formationData: generateFormationData({
           formationFormData: generateFormationFormData({

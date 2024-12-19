@@ -29,7 +29,7 @@ describe("Unsupported", () => {
       useMockUserData(
         generateUserData({
           businesses: {
-            "prev-biz-id": generateBusiness({
+            "prev-biz-id": generateBusiness(generateUserData({}), {
               id: "prev-biz-id",
             }),
           },
@@ -44,7 +44,7 @@ describe("Unsupported", () => {
       useMockUserData(
         generateUserData({
           businesses: {
-            "prev-biz-id": generateBusiness({
+            "prev-biz-id": generateBusiness(generateUserData({}), {
               id: "prev-biz-id",
             }),
           },

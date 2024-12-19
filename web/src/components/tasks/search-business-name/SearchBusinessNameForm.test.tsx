@@ -20,6 +20,7 @@ import {
   castPublicFilingLegalTypeToFormationType,
   generateBusiness,
   generateFormationFormData,
+  generateUserData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";
@@ -77,7 +78,11 @@ describe("SearchBusinessNameForm", () => {
       dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     };
-    return preparePage({ business: generateBusiness({ profileData, formationData }), displayContent });
+
+    return preparePage({
+      business: generateBusiness(generateUserData({}), { profileData, formationData }),
+      displayContent,
+    });
   };
 
   it("displays modal when legal structure Edit button clicked", async () => {

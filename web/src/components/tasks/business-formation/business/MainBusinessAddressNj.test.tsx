@@ -11,7 +11,11 @@ import {
   PublicFilingLegalType,
   castPublicFilingLegalTypeToFormationType,
 } from "@businessnjgovnavigator/shared/formationData";
-import { generateBusiness, generateFormationFormData } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generateFormationFormData,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen } from "@testing-library/react";
 import { displayContent } from "../contacts/testHelpers";
@@ -54,7 +58,7 @@ const getPageHelper = async (
     lastVisitedPageIndex: 0,
   };
 
-  const business = generateBusiness({ profileData, formationData });
+  const business = generateBusiness(generateUserData({}), { profileData, formationData });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (business.profileData as any).municipality = formationData.formationFormData.addressMunicipality;
   const page = preparePage({ business, displayContent });

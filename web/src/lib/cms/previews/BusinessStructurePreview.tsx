@@ -4,7 +4,7 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateTask } from "@/test/factories";
-import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
+import { generateBusiness, generateProfileData, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { ReactElement } from "react";
 
 const BusinessStructurePreview = (props: PreviewProps): ReactElement => {
@@ -16,14 +16,15 @@ const BusinessStructurePreview = (props: PreviewProps): ReactElement => {
     contentMd: "Body content is controlled by Task Metadata\n\n---",
   });
 
-  const missingLegalStructure = generateBusiness({
+  const userData = generateUserData({});
+  const missingLegalStructure = generateBusiness(userData, {
     profileData: generateProfileData({ legalStructureId: undefined }),
   });
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <BusinessStructureTask task={task} CMS_ONLY_fakeBusiness={generateBusiness({})} />
+        <BusinessStructureTask task={task} CMS_ONLY_fakeBusiness={generateBusiness(userData, {})} />
         <hr className="margin-y-6" />
         <BusinessStructureTask task={task} CMS_ONLY_fakeBusiness={missingLegalStructure} />
       </div>

@@ -184,124 +184,120 @@ describe("userRouter", () => {
       });
 
       it("does not update license if licenseData is undefined and formationFormData address does not exist", async () => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            licenseData: undefined,
-            formationData: {
-              ...generateFormationData({
-                formationFormData: createEmptyFormationFormData(),
-              }),
-            },
-          })
-        );
+        const userData = generateUserData({});
+        const business = generateBusiness(userData, {
+          licenseData: undefined,
+          formationData: {
+            ...generateFormationData({
+              formationFormData: createEmptyFormationFormData(),
+            }),
+          },
+        });
+        const userDataForBusiness = generateUserDataForBusiness(business);
 
-        stubUnifiedDataClient.get.mockResolvedValue(userData);
+        stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
 
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).not.toHaveBeenCalled();
       });
 
       it("does not update license if licenses is undefined and formationFormData address does not exist", async () => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            licenseData: {
-              licenses: undefined,
-              lastUpdatedISO: sixtyOneMinutesAgo,
-            },
-            formationData: {
-              ...generateFormationData({
-                formationFormData: createEmptyFormationFormData(),
-              }),
-            },
-          })
-        );
+        const userData = generateUserData({});
+        const business = generateBusiness(userData, {
+          licenseData: {
+            licenses: undefined,
+            lastUpdatedISO: sixtyOneMinutesAgo,
+          },
+          formationData: {
+            ...generateFormationData({
+              formationFormData: createEmptyFormationFormData(),
+            }),
+          },
+        });
 
-        stubUnifiedDataClient.get.mockResolvedValue(userData);
-
+        const userDataForBusiness = generateUserDataForBusiness(business);
+        stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).not.toHaveBeenCalled();
       });
 
       it("updates license if licenseData is undefined and if an address exists in formationFormData", async () => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            licenseData: undefined,
-            formationData: generateFormationData({}),
-          })
-        );
+        const userData = generateUserData({});
+        const business = generateBusiness(userData, {
+          licenseData: undefined,
+          formationData: generateFormationData({}),
+        });
 
-        stubUnifiedDataClient.get.mockResolvedValue(userData);
+        const userDataForBusiness = generateUserDataForBusiness(business);
+        stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
 
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).toHaveBeenCalled();
       });
 
       it("updates license if licenseData is present and if no address exists in formationFormData", async () => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            licenseData: generateLicenseData({
-              lastUpdatedISO: sixtyOneMinutesAgo,
+        const userData = generateUserData({});
+        const business = generateBusiness(userData, {
+          licenseData: generateLicenseData({
+            lastUpdatedISO: sixtyOneMinutesAgo,
+          }),
+          formationData: generateFormationData({
+            formationFormData: generateFormationFormData({
+              ...emptyAddressData,
             }),
-            formationData: generateFormationData({
-              formationFormData: generateFormationFormData({
-                ...emptyAddressData,
-              }),
-            }),
-          })
-        );
-
-        stubUnifiedDataClient.get.mockResolvedValue(userData);
+          }),
+        });
+        const userDataForBusiness = generateUserDataForBusiness(business);
+        stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
 
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).toHaveBeenCalled();
       });
 
       it("queries for license data using name and address from licenseData if present", async () => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            licenseData: generateLicenseData({
-              lastUpdatedISO: sixtyOneMinutesAgo,
+        const userData = generateUserData({});
+        const business = generateBusiness(userData, {
+          licenseData: generateLicenseData({
+            lastUpdatedISO: sixtyOneMinutesAgo,
+          }),
+          formationData: generateFormationData({
+            formationFormData: generateFormationFormData({
+              addressLine1: "123 Main Street",
+              addressLine2: "Suite 100",
+              addressZipCode: "07123",
             }),
-            formationData: generateFormationData({
-              formationFormData: generateFormationFormData({
-                addressLine1: "123 Main Street",
-                addressLine2: "Suite 100",
-                addressZipCode: "07123",
-              }),
-            }),
-          })
-        );
-
-        const currentBusiness = getCurrentBusiness(userData);
+          }),
+        });
+        const userDataForBusiness = generateUserDataForBusiness(business);
+        const currentBusiness = getCurrentBusiness(userDataForBusiness);
         const licenses = currentBusiness.licenseData!.licenses;
         const licenseName = Object.keys(licenses!)[0] as LicenseName;
         const licenseNameAndAddress = licenses![licenseName]?.nameAndAddress;
 
-        stubUnifiedDataClient.get.mockResolvedValue(userData);
-
+        stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
-        expect(stubUpdateLicenseStatus).toHaveBeenLastCalledWith(userData, licenseNameAndAddress);
+        expect(stubUpdateLicenseStatus).toHaveBeenLastCalledWith(userDataForBusiness, licenseNameAndAddress);
       });
 
       it("queries for license data using formation address if no licenseData is present", async () => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            licenseData: undefined,
-            formationData: generateFormationData({
-              formationFormData: generateFormationFormData({
-                addressLine1: "123 Main Street",
-                addressLine2: "Suite 100",
-                addressZipCode: "07123",
-              }),
+        const userData = generateUserData({});
+        const business = generateBusiness(userData, {
+          licenseData: undefined,
+          formationData: generateFormationData({
+            formationFormData: generateFormationFormData({
+              addressLine1: "123 Main Street",
+              addressLine2: "Suite 100",
+              addressZipCode: "07123",
             }),
-          })
-        );
+          }),
+        });
 
-        const currentBusiness = getCurrentBusiness(userData);
-        stubUnifiedDataClient.get.mockResolvedValue(userData);
+        const userDataForBusiness = generateUserDataForBusiness(business);
+        const currentBusiness = getCurrentBusiness(userDataForBusiness);
+        stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
 
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
-        expect(stubUpdateLicenseStatus).toHaveBeenLastCalledWith(userData, {
+        expect(stubUpdateLicenseStatus).toHaveBeenLastCalledWith(userDataForBusiness, {
           name: currentBusiness.profileData.businessName,
           addressLine1: "123 Main Street",
           addressLine2: "Suite 100",
@@ -310,31 +306,34 @@ describe("userRouter", () => {
       });
 
       it("does not update license if licenseData lastCheckedDate is within the last hour", async () => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            licenseData: generateLicenseData({
-              lastUpdatedISO: fiftyNineMinutesAgo,
-            }),
-          })
-        );
-        stubUnifiedDataClient.get.mockResolvedValue(userData);
+        const userData = generateUserData({});
+        const business = generateBusiness(userData, {
+          licenseData: generateLicenseData({
+            lastUpdatedISO: fiftyNineMinutesAgo,
+          }),
+        });
+
+        const userDataForBusiness = generateUserDataForBusiness(business);
+        stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
 
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).not.toHaveBeenCalled();
       });
 
       it("updates userData with license information if license query returns data", async () => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              industryId: "home-contractor",
-            }),
-            licenseData: generateLicenseData({
-              lastUpdatedISO: sixtyOneMinutesAgo,
-            }),
-          })
-        );
-        stubUnifiedDataClient.get.mockResolvedValue(userData);
+        const userData = generateUserData({});
+        const business = generateBusiness(userData, {
+          profileData: generateProfileData({
+            industryId: "home-contractor",
+          }),
+          licenseData: generateLicenseData({
+            lastUpdatedISO: sixtyOneMinutesAgo,
+          }),
+        });
+
+        const userDataForBusiness = generateUserDataForBusiness(business);
+        stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
+
         const updatedUserData = generateUserData({});
         stubUpdateLicenseStatus.mockResolvedValue(updatedUserData);
 
@@ -347,23 +346,23 @@ describe("userRouter", () => {
       });
 
       it("sets licenseData lastUpdatedISO if license check fails", async () => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              industryId: "home-contractor",
-            }),
-            licenseData: generateLicenseData({
-              lastUpdatedISO: sixtyOneMinutesAgo,
-            }),
-          })
-        );
-        stubUnifiedDataClient.get.mockResolvedValue(userData);
+        const userData = generateUserData({});
+        const business = generateBusiness(userData, {
+          profileData: generateProfileData({
+            industryId: "home-contractor",
+          }),
+          licenseData: generateLicenseData({
+            lastUpdatedISO: sixtyOneMinutesAgo,
+          }),
+        });
+
+        const userDataForBusiness = generateUserDataForBusiness(business);
+        stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
         stubUpdateLicenseStatus.mockRejectedValue(new Error("license failure"));
 
         const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
-        expect(stubUpdateOperatingPhase).toHaveBeenCalledWith(userData);
-
-        const initialCurrentBusiness = getCurrentBusiness(userData);
+        expect(stubUpdateOperatingPhase).toHaveBeenCalledWith(userDataForBusiness);
+        const initialCurrentBusiness = getCurrentBusiness(userDataForBusiness);
         const updatedUserData = result.body as UserData;
         const currentBusiness = getCurrentBusiness(updatedUserData);
         expect(
@@ -380,69 +379,73 @@ describe("userRouter", () => {
 
       describe("when businessPersona is 'STARTING'", () => {
         it("does not update business name search if businessNameAvailability is undefined", async () => {
-          const userData = generateUserDataForBusiness(
-            generateBusiness({
-              profileData: generateStartingProfileData({}),
-              formationData: generateFormationData({ businessNameAvailability: undefined }),
-            })
-          );
-          stubUnifiedDataClient.get.mockResolvedValue(userData);
+          const userData = generateUserData({});
+          const business = generateBusiness(userData, {
+            profileData: generateStartingProfileData({}),
+            formationData: generateFormationData({ businessNameAvailability: undefined }),
+          });
+
+          const userDataForBusiness = generateUserDataForBusiness(business);
+          stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
 
           await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
           expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
         });
 
         it("does not update businessNameAvailability if it's lastUpdatedTimeStamp is within the last hour", async () => {
-          const userData = generateUserDataForBusiness(
-            generateBusiness({
-              profileData: generateStartingProfileData({}),
-              formationData: generateFormationData({
-                businessNameAvailability: generateBusinessNameAvailability({
-                  status: "AVAILABLE",
-                  lastUpdatedTimeStamp: fiftyNineMinutesAgo,
-                }),
+          const userData = generateUserData({});
+          const business = generateBusiness(userData, {
+            profileData: generateStartingProfileData({}),
+            formationData: generateFormationData({
+              businessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: fiftyNineMinutesAgo,
               }),
-            })
-          );
-          stubUnifiedDataClient.get.mockResolvedValue(userData);
+            }),
+          });
+
+          const userDataForBusiness = generateUserDataForBusiness(business);
+          stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
 
           await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
           expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
         });
 
         it("does not update businessNameAvailability if it's completedFilingPayment is true", async () => {
-          const userData = generateUserDataForBusiness(
-            generateBusiness({
-              profileData: generateStartingProfileData({}),
-              formationData: generateFormationData({
-                completedFilingPayment: true,
-                businessNameAvailability: generateBusinessNameAvailability({
-                  status: "AVAILABLE",
-                  lastUpdatedTimeStamp: fiftyNineMinutesAgo,
-                }),
+          const userData = generateUserData({});
+          const business = generateBusiness(userData, {
+            profileData: generateStartingProfileData({}),
+            formationData: generateFormationData({
+              completedFilingPayment: true,
+              businessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: fiftyNineMinutesAgo,
               }),
-            })
-          );
-          stubUnifiedDataClient.get.mockResolvedValue(userData);
+            }),
+          });
+
+          const userDataForBusiness = generateUserDataForBusiness(business);
+          stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
 
           await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
           expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
         });
 
         it("updates user in the background if businessNameAvailability lastUpdatedTimeStamp is older than last hour", async () => {
-          const userData = generateUserDataForBusiness(
-            generateBusiness({
-              profileData: generateStartingProfileData({}),
-              formationData: generateFormationData({
-                completedFilingPayment: false,
-                businessNameAvailability: generateBusinessNameAvailability({
-                  status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-                }),
+          const userData = generateUserData({});
+          const business = generateBusiness(userData, {
+            profileData: generateStartingProfileData({}),
+            formationData: generateFormationData({
+              completedFilingPayment: false,
+              businessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
               }),
-            })
-          );
-          stubUnifiedDataClient.get.mockResolvedValue(userData);
+            }),
+          });
+
+          const userDataForBusiness = generateUserDataForBusiness(business);
+          stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
           stubTimeStampBusinessSearch.search.mockResolvedValue(
             generateBusinessNameAvailability({
               status: "UNAVAILABLE",
@@ -463,19 +466,20 @@ describe("userRouter", () => {
         });
 
         it("updates user in the background only if completedFilingPayment is false", async () => {
-          const userData = generateUserDataForBusiness(
-            generateBusiness({
-              profileData: generateStartingProfileData({}),
-              formationData: generateFormationData({
-                completedFilingPayment: false,
-                businessNameAvailability: generateBusinessNameAvailability({
-                  status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-                }),
+          const userData = generateUserData({});
+          const business = generateBusiness(userData, {
+            profileData: generateStartingProfileData({}),
+            formationData: generateFormationData({
+              completedFilingPayment: false,
+              businessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
               }),
-            })
-          );
-          stubUnifiedDataClient.get.mockResolvedValue(userData);
+            }),
+          });
+
+          const userDataForBusiness = generateUserDataForBusiness(business);
+          stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
           stubTimeStampBusinessSearch.search.mockResolvedValue(
             generateBusinessNameAvailability({
               status: "UNAVAILABLE",
@@ -496,89 +500,94 @@ describe("userRouter", () => {
         });
 
         it("does not update userData if the business name search fails and continues with other updates", async () => {
-          const userData = generateUserDataForBusiness(
-            generateBusiness({
-              profileData: generateStartingProfileData({}),
-              formationData: generateFormationData({
-                completedFilingPayment: false,
-                businessNameAvailability: generateBusinessNameAvailability({
-                  status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-                }),
+          const userData = generateUserData({});
+          const business = generateBusiness(userData, {
+            profileData: generateStartingProfileData({}),
+            formationData: generateFormationData({
+              completedFilingPayment: false,
+              businessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
               }),
-            })
-          );
-          stubUnifiedDataClient.get.mockResolvedValue(userData);
+            }),
+          });
+
+          const userDataForBusiness = generateUserDataForBusiness(business);
+          stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
           stubTimeStampBusinessSearch.search.mockRejectedValue(new Error("message"));
 
           await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
           expect(stubTimeStampBusinessSearch.search).toHaveBeenCalledWith(
-            getCurrentBusiness(userData).profileData.businessName
+            getCurrentBusiness(userDataForBusiness).profileData.businessName
           );
-          expect(stubUpdateOperatingPhase).toHaveBeenCalledWith(userData);
+          expect(stubUpdateOperatingPhase).toHaveBeenCalledWith(userDataForBusiness);
         });
       });
 
       describe("when businessPersona is 'FOREIGN' and Foreign type is Nexus", () => {
         it("does not recheck business name availability if businessNameAvailability and dbaBusinessNameAvailability are undefined", async () => {
-          const userData = generateUserDataForBusiness(
-            generateBusiness({
-              profileData: generateProfileData({
-                businessPersona: "FOREIGN",
-                foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
-              }),
-              formationData: generateFormationData({
-                businessNameAvailability: undefined,
-                dbaBusinessNameAvailability: undefined,
-              }),
-            })
-          );
-          stubUnifiedDataClient.get.mockResolvedValue(userData);
+          const userData = generateUserData({});
+          const business = generateBusiness(userData, {
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+            }),
+            formationData: generateFormationData({
+              businessNameAvailability: undefined,
+              dbaBusinessNameAvailability: undefined,
+            }),
+          });
+
+          const userDataForBusiness = generateUserDataForBusiness(business);
+          stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
 
           await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
           expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
         });
 
         it("does not update dbaBusinessNameAvailability if businessNameAvailability status is not Unavailable", async () => {
-          const userData = generateUserDataForBusiness(
-            generateBusiness({
-              profileData: generateProfileData({
-                businessPersona: "FOREIGN",
-                foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+          const userData = generateUserData({});
+          const business = generateBusiness(userData, {
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+            }),
+            formationData: generateFormationData({
+              businessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
               }),
-              formationData: generateFormationData({
-                businessNameAvailability: generateBusinessNameAvailability({
-                  status: "AVAILABLE",
-                }),
-                dbaBusinessNameAvailability: generateBusinessNameAvailability({
-                  status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-                }),
+              dbaBusinessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
               }),
-            })
-          );
-          stubUnifiedDataClient.get.mockResolvedValue(userData);
+            }),
+          });
+
+          const userDataForBusiness = generateUserDataForBusiness(business);
+          stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
 
           await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
           expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
         });
 
         it("sets businessNameAvailability status to unavailable", async () => {
-          const userData = generateUserDataForBusiness(
-            generateBusiness({
-              profileData: generateProfileData({
-                businessPersona: "FOREIGN",
-                foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+          const userData = generateUserData({});
+          const business = generateBusiness(userData, {
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+            }),
+            formationData: generateFormationData({
+              businessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
               }),
-              formationData: generateFormationData({
-                businessNameAvailability: generateBusinessNameAvailability({
-                  status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-                }),
-              }),
-            })
-          );
-          stubUnifiedDataClient.get.mockResolvedValue(userData);
+            }),
+          });
+
+          const userDataForBusiness = generateUserDataForBusiness(business);
+          stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
+
           stubTimeStampBusinessSearch.search.mockResolvedValue(
             generateBusinessNameAvailability({
               status: "UNAVAILABLE",
@@ -593,25 +602,26 @@ describe("userRouter", () => {
         });
 
         it("when businessNameAvailability status is not unavailable then businessNameAvailability is updated", async () => {
-          const userData = generateUserDataForBusiness(
-            generateBusiness({
-              profileData: generateProfileData({
-                businessPersona: "FOREIGN",
-                foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+          const userData = generateUserData({});
+          const business = generateBusiness(userData, {
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+            }),
+            formationData: generateFormationData({
+              businessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
               }),
-              formationData: generateFormationData({
-                businessNameAvailability: generateBusinessNameAvailability({
-                  status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-                }),
-                dbaBusinessNameAvailability: generateBusinessNameAvailability({
-                  status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-                }),
+              dbaBusinessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
               }),
-            })
-          );
-          stubUnifiedDataClient.get.mockResolvedValue(userData);
+            }),
+          });
+
+          const userDataForBusiness = generateUserDataForBusiness(business);
+          stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
           stubTimeStampBusinessSearch.search.mockResolvedValue(
             generateBusinessNameAvailability({
               status: "UNAVAILABLE",
@@ -627,26 +637,27 @@ describe("userRouter", () => {
         });
 
         it("when businessNameAvailability status is unavailable then dbaBusinessNameAvailability is updated", async () => {
-          const userData = generateUserDataForBusiness(
-            generateBusiness({
-              profileData: generateProfileData({
-                businessPersona: "FOREIGN",
-                foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+          const userData = generateUserData({});
+          const business = generateBusiness(userData, {
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+            }),
+            formationData: generateFormationData({
+              completedFilingPayment: false,
+              dbaBusinessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
               }),
-              formationData: generateFormationData({
-                completedFilingPayment: false,
-                dbaBusinessNameAvailability: generateBusinessNameAvailability({
-                  status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-                }),
-                businessNameAvailability: generateBusinessNameAvailability({
-                  status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-                }),
+              businessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
               }),
-            })
-          );
-          stubUnifiedDataClient.get.mockResolvedValue(userData);
+            }),
+          });
+
+          const userDataForBusiness = generateUserDataForBusiness(business);
+          stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
           stubTimeStampBusinessSearch.search.mockResolvedValue(
             generateBusinessNameAvailability({
               status: "UNAVAILABLE",
@@ -663,25 +674,26 @@ describe("userRouter", () => {
         });
 
         it("updates user in the background if dbaBusinessNameAvailability lastUpdatedTimeStamp is older than last hour", async () => {
-          const userData = generateUserDataForBusiness(
-            generateBusiness({
-              profileData: generateProfileData({
-                businessPersona: "FOREIGN",
-                foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+          const userData = generateUserData({});
+          const business = generateBusiness(userData, {
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+            }),
+            formationData: generateFormationData({
+              completedFilingPayment: false,
+              businessNameAvailability: generateBusinessNameAvailability({
+                status: "UNAVAILABLE",
               }),
-              formationData: generateFormationData({
-                completedFilingPayment: false,
-                businessNameAvailability: generateBusinessNameAvailability({
-                  status: "UNAVAILABLE",
-                }),
-                dbaBusinessNameAvailability: generateBusinessNameAvailability({
-                  status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-                }),
+              dbaBusinessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
               }),
-            })
-          );
-          stubUnifiedDataClient.get.mockResolvedValue(userData);
+            }),
+          });
+
+          const userDataForBusiness = generateUserDataForBusiness(business);
+          stubUnifiedDataClient.get.mockResolvedValue(userDataForBusiness);
           stubTimeStampBusinessSearch.search.mockResolvedValue(
             generateBusinessNameAvailability({
               status: "UNAVAILABLE",
@@ -784,7 +796,7 @@ describe("userRouter", () => {
       const formationDate = dayjs().subtract(3, "year").add(1, "month").day(1).format("YYYY-MM-DD");
 
       const postedUserData = generateUserDataForBusiness(
-        generateBusiness({
+        generateBusiness({ user: generateUser({ id: "123" }) } as UserData, {
           profileData: generateProfileData({
             dateOfFormation: formationDate,
             entityId: undefined,
@@ -815,8 +827,9 @@ describe("userRouter", () => {
 
     it("clears taskChecklistItems if industry has changed", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+
       const newIndustryUserData = generateUserDataForBusiness(
-        generateBusiness({
+        generateBusiness({ user: generateUser({ id: "123" }) } as UserData, {
           profileData: generateProfileData({ industryId: "cannabis" }),
           taskItemChecklist: { "some-id": true },
         }),
@@ -848,7 +861,7 @@ describe("userRouter", () => {
     it("does not clear taskChecklistItems if industry has not changed", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const newIndustryUserData = generateUserDataForBusiness(
-        generateBusiness({
+        generateBusiness({ user: generateUser({ id: "123" }) } as UserData, {
           profileData: generateProfileData({ industryId: "cannabis" }),
           taskItemChecklist: { "some-id": true },
         }),
@@ -907,7 +920,7 @@ describe("userRouter", () => {
         };
 
         const newLegalStructureUserData = generateUserDataForBusiness(
-          generateBusiness({
+          generateBusiness({ user: generateUser({ id: "123" }) } as UserData, {
             profileData: generateProfileData({ legalStructureId: "c-corporation" }),
             formationData: completedFormationData,
           }),
@@ -947,7 +960,7 @@ describe("userRouter", () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
 
         const existingUserData = generateUserDataForBusiness(
-          generateBusiness({
+          generateBusiness({ user: generateUser({ id: "123" }) } as UserData, {
             profileData: generateStartingProfileData({
               legalStructureId: "limited-liability-company",
             }),
@@ -1026,7 +1039,7 @@ describe("userRouter", () => {
         });
 
         const updatedUserData = generateUserDataForBusiness(
-          generateBusiness({
+          generateBusiness({ user: generateUser({ id: "123" }) } as UserData, {
             profileData: generateProfileData({
               ...getCurrentBusiness(oldUserData).profileData,
               taxId: "123456789123",
@@ -1055,7 +1068,7 @@ describe("userRouter", () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
 
         const oldUserData = generateUserDataForBusiness(
-          generateBusiness({
+          generateBusiness({ user: generateUser({ id: "123" }) } as UserData, {
             profileData: generateProfileData({
               taxId: "*******89123",
             }),

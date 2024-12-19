@@ -12,6 +12,7 @@ import {
   generateLicenseData,
   generateLicenseSearchNameAndAddress,
   generateProfileData,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import { generateLicenseDetails, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
@@ -55,7 +56,7 @@ describe("<LicenseTask />", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockBusiness(generateBusiness({}));
+    useMockBusiness(generateBusiness(generateUserData({}), {}));
     useMockRoadmap({});
     jest.useFakeTimers();
   });
@@ -63,7 +64,7 @@ describe("<LicenseTask />", () => {
   describe("task status checkbox", () => {
     it("task status checkbox is editable when lastUpdatedISO is empty", async () => {
       setupStatefulUserDataContext();
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         taskProgress: { [task.id]: "IN_PROGRESS" },
         licenseData: generateLicenseData(
           {},
@@ -82,7 +83,7 @@ describe("<LicenseTask />", () => {
 
     it("task status checkbox is not editable when lastUpdatedISO has a value", () => {
       setupStatefulUserDataContext();
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         taskProgress: { [task.id]: "IN_PROGRESS" },
         licenseData: generateLicenseData(
           {},
@@ -355,7 +356,7 @@ describe("<LicenseTask />", () => {
       it("submits license status search with name, address and task id", async () => {
         mockApi.checkLicenseStatus.mockResolvedValue(
           generateUserDataForBusiness(
-            generateBusiness({
+            generateBusiness(generateUserData({}), {
               licenseData: generateLicenseData(
                 {},
                 {
@@ -369,7 +370,7 @@ describe("<LicenseTask />", () => {
         );
 
         setupStatefulUserDataContext();
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           taskProgress: { [task.id]: "IN_PROGRESS" },
           licenseData: generateLicenseData(
             {},
@@ -418,7 +419,7 @@ describe("<LicenseTask />", () => {
 
         mockApi.checkLicenseStatus.mockResolvedValue(
           generateUserDataForBusiness(
-            generateBusiness({
+            generateBusiness(generateUserData({}), {
               licenseData: generateLicenseData(
                 {},
                 {
@@ -474,7 +475,7 @@ describe("<LicenseTask />", () => {
         fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
         expect(screen.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
         const userData = generateUserDataForBusiness(
-          generateBusiness({
+          generateBusiness(generateUserData({}), {
             lastUpdatedISO: "last-updated",
             licenseData: {
               lastUpdatedISO: "last-updated",
@@ -482,7 +483,6 @@ describe("<LicenseTask />", () => {
             },
           })
         );
-        console.log(JSON.stringify(userData));
         mockApi.checkLicenseStatus.mockResolvedValue(userData);
         fireEvent.submit(screen.getByTestId("check-status-submit"));
         await waitFor(() => {
@@ -570,7 +570,7 @@ describe("<LicenseTask />", () => {
         });
         mockApi.checkLicenseStatus.mockResolvedValue(
           generateUserDataForBusiness(
-            generateBusiness({
+            generateBusiness(generateUserData({}), {
               licenseData: generateLicenseData(
                 {},
                 {

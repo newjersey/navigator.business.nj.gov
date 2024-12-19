@@ -17,6 +17,7 @@ import {
   generateBusiness,
   generatePreferences,
   generateProfileData,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
@@ -188,7 +189,7 @@ describe("<MiniRoadmap />", () => {
   };
 
   describe("User Step State Preferences", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       preferences: generatePreferences({
         roadmapOpenSections: ["PLAN", "START"],
         roadmapOpenSteps: [2],

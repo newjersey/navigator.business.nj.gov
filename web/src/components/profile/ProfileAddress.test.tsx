@@ -15,12 +15,14 @@ import {
   generateFormationFormData,
   generateMunicipality,
   generateProfileData,
+  generateUserData,
 } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
+const userData = generateUserData({});
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@mui/material", () => mockMaterialUI());
@@ -56,7 +58,7 @@ describe("<ProfileAddress  />", () => {
         addressLine1: "1111 Home Alone",
       });
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           formationData: generateFormationData({
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address }),
@@ -72,7 +74,7 @@ describe("<ProfileAddress  />", () => {
         addressLine1: "",
       });
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           formationData: generateFormationData({
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address }),
@@ -91,7 +93,7 @@ describe("<ProfileAddress  />", () => {
         addressLine1: "",
       });
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           formationData: generateFormationData({
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address }),
@@ -109,7 +111,7 @@ describe("<ProfileAddress  />", () => {
         addressLine2: "1111 Home Alone",
       });
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           formationData: generateFormationData({
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address }),
@@ -126,7 +128,7 @@ describe("<ProfileAddress  />", () => {
         addressLine2: "",
       });
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           formationData: generateFormationData({
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address }),
@@ -146,7 +148,7 @@ describe("<ProfileAddress  />", () => {
         addressLine2: "123",
       });
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           profileData: generateProfileData({
             businessPersona: "STARTING",
           }),
@@ -168,7 +170,7 @@ describe("<ProfileAddress  />", () => {
         addressZipCode: "08437",
       });
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           formationData: generateFormationData({
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address }),
@@ -184,7 +186,7 @@ describe("<ProfileAddress  />", () => {
         addressZipCode: "",
       });
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           formationData: generateFormationData({
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address }),
@@ -203,7 +205,7 @@ describe("<ProfileAddress  />", () => {
         addressState: undefined,
       });
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           formationData: generateFormationData({
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({
@@ -228,7 +230,7 @@ describe("<ProfileAddress  />", () => {
         addressZipCode: "",
       });
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           profileData: generateProfileData({
             businessPersona: "STARTING",
           }),
@@ -248,7 +250,7 @@ describe("<ProfileAddress  />", () => {
         addressZipCode: "",
       });
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           formationData: generateFormationData({
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address, businessLocationType: "NJ" }),
@@ -265,7 +267,7 @@ describe("<ProfileAddress  />", () => {
         addressMunicipality: municipality,
       });
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           formationData: generateFormationData({
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address, businessLocationType: "NJ" }),
@@ -284,7 +286,7 @@ describe("<ProfileAddress  />", () => {
         addressMunicipality: undefined,
       });
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           formationData: generateFormationData({
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address, businessLocationType: "NJ" }),
@@ -304,7 +306,7 @@ describe("<ProfileAddress  />", () => {
         addressMunicipality: undefined,
       });
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           formationData: generateFormationData({
             completedFilingPayment: false,
             formationFormData: generateFormationFormData({ ...address, businessLocationType: "NJ" }),
@@ -328,7 +330,7 @@ describe("<ProfileAddress  />", () => {
         addressZipCode: "00893",
       });
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           profileData: generateProfileData({ businessPersona: "STARTING" }),
           formationData: generateFormationData({
             completedFilingPayment: true,
@@ -356,7 +358,7 @@ describe("<ProfileAddress  />", () => {
         addressZipCode: "",
       });
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           profileData: generateProfileData({ businessPersona: "STARTING" }),
           formationData: generateFormationData({
             completedFilingPayment: true,
@@ -376,7 +378,7 @@ describe("<ProfileAddress  />", () => {
   describe("non-NJ business location", () => {
     it("renders radio buttons for US and International address options", () => {
       useMockBusiness(
-        generateBusiness({
+        generateBusiness(userData, {
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
           }),
@@ -394,7 +396,7 @@ describe("<ProfileAddress  />", () => {
     describe("US business", () => {
       it("displays profile address fields for a US business", () => {
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -420,7 +422,7 @@ describe("<ProfileAddress  />", () => {
         });
 
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -440,7 +442,7 @@ describe("<ProfileAddress  />", () => {
         });
 
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -462,7 +464,7 @@ describe("<ProfileAddress  />", () => {
           addressLine1: "",
         });
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -483,7 +485,7 @@ describe("<ProfileAddress  />", () => {
           addressLine2: "1111 Home Alone",
         });
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -503,7 +505,7 @@ describe("<ProfileAddress  />", () => {
           addressLine2: "",
         });
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -526,7 +528,7 @@ describe("<ProfileAddress  />", () => {
           addressLine2: "123",
         });
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -548,7 +550,7 @@ describe("<ProfileAddress  />", () => {
           addressZipCode: "11429",
         });
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -568,7 +570,7 @@ describe("<ProfileAddress  />", () => {
           addressZipCode: "",
         });
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -591,7 +593,7 @@ describe("<ProfileAddress  />", () => {
         });
         console.log(address);
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -611,7 +613,7 @@ describe("<ProfileAddress  />", () => {
           addressZipCode: "",
         });
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -631,7 +633,7 @@ describe("<ProfileAddress  />", () => {
     describe("International business", () => {
       it("displays profile address fields for an International business", () => {
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -659,7 +661,7 @@ describe("<ProfileAddress  />", () => {
           addressLine1: "1111 Home Alone",
         });
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -678,7 +680,7 @@ describe("<ProfileAddress  />", () => {
           addressLine1: "",
         });
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -700,7 +702,7 @@ describe("<ProfileAddress  />", () => {
           addressLine1: "",
         });
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -721,7 +723,7 @@ describe("<ProfileAddress  />", () => {
           addressLine2: "1111 Home Alone",
         });
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -741,7 +743,7 @@ describe("<ProfileAddress  />", () => {
           addressLine2: "",
         });
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -766,7 +768,7 @@ describe("<ProfileAddress  />", () => {
 
         console.log("addy", address);
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -790,7 +792,7 @@ describe("<ProfileAddress  />", () => {
           addressZipCode: "ERT45",
         });
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -810,7 +812,7 @@ describe("<ProfileAddress  />", () => {
           addressZipCode: "",
         });
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -832,7 +834,7 @@ describe("<ProfileAddress  />", () => {
           addressProvince: "some-Province",
         });
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),
@@ -851,7 +853,7 @@ describe("<ProfileAddress  />", () => {
           addressZipCode: "",
         });
         useMockBusiness(
-          generateBusiness({
+          generateBusiness(userData, {
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
             }),

@@ -38,7 +38,7 @@ const Config = getMergedConfig();
 
 const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
   return generateUserDataForBusiness(
-    generateBusiness({
+    generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         businessPersona: "STARTING",
         ...overrides,
@@ -215,7 +215,7 @@ describe("onboarding - starting a business", () => {
     const userData = generateUserData({
       currentBusinessId: "12345",
       businesses: {
-        "12345": generateBusiness({
+        "12345": generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             businessPersona: "STARTING",
             businessName: "Applebees",
@@ -295,7 +295,7 @@ describe("onboarding - starting a business", () => {
   describe("domestic employer", () => {
     it("resets industry-page to industry-page-without-nonprofit for STARTING businessPersona if industry is domestic-employer", () => {
       generateUserDataForBusiness(
-        generateBusiness({
+        generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             businessPersona: "STARTING",
             industryId: "domestic-employer",

@@ -13,6 +13,7 @@ import {
 import {
   generateBusiness,
   generatePreferences,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business, TaskProgress } from "@businessnjgovnavigator/shared/userData";
@@ -60,7 +61,7 @@ describe("useUpdateTaskProgress", () => {
   };
 
   it("updates task progress", async () => {
-    const initialBusiness = generateBusiness({
+    const initialBusiness = generateBusiness(generateUserData({}), {
       taskProgress: { "some-id": "COMPLETED" },
     });
     const { queueUpdateTaskProgress, updateQueue } = setupHook(initialBusiness);
@@ -90,7 +91,7 @@ describe("useUpdateTaskProgress", () => {
     });
 
     it("closes all roadmap sections when all sections complete", async () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         taskProgress: {
           [planTaskId]: "COMPLETED",
           [startTaskId]: "NOT_STARTED",
@@ -124,7 +125,7 @@ describe("useUpdateTaskProgress", () => {
     });
 
     it("closes PLAN roadmap section when complete", async () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         taskProgress: {
           [planTaskId]: "NOT_STARTED",
           [startTaskId]: "NOT_STARTED",

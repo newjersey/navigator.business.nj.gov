@@ -39,6 +39,7 @@ import {
   generateProfileData,
   generateTaxFilingCalendarEvent,
   generateTaxFilingData,
+  generateUserData,
   generateUserDataForBusiness,
   getCurrentDate,
   getIndustries,
@@ -126,12 +127,14 @@ describe("<DashboardOnMobile />", () => {
       </ThemeProvider>
     );
   };
-
+  const userData = generateUserData({});
   const renderStatefulDashboardComponent = ({ business }: { business?: Business }): void => {
     setupStatefulUserDataContext();
 
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business ?? generateBusiness(userData, {}))}
+      >
         <ThemeProvider theme={createTheme()}>
           <DashboardOnMobile
             operateReferences={{}}
@@ -315,7 +318,7 @@ describe("<DashboardOnMobile />", () => {
         describe(`${operatingPhase}`, () => {
           it("does not show home-based business question when not applicable to operating phase", () => {
             useMockBusiness(
-              generateBusiness({
+              generateBusiness(userData, {
                 profileData: generateProfileData({
                   industryId: randomHomeBasedIndustry(),
                   homeBasedBusiness: undefined,
@@ -345,7 +348,7 @@ describe("<DashboardOnMobile />", () => {
         describe(`${operatingPhase}`, () => {
           it("does not show home-based business question when not applicable to industry", () => {
             useMockBusiness(
-              generateBusiness({
+              generateBusiness(userData, {
                 profileData: generateProfileData({
                   homeBasedBusiness: undefined,
                   industryId: randomNonHomeBasedIndustry(),
@@ -367,7 +370,7 @@ describe("<DashboardOnMobile />", () => {
           });
 
           it("sets homeBasedBusiness in profile and removes question when radio is selected", async () => {
-            const business = generateBusiness({
+            const business = generateBusiness(userData, {
               profileData: generateProfileData({
                 industryId: randomHomeBasedIndustry(),
                 homeBasedBusiness: undefined,
@@ -389,7 +392,7 @@ describe("<DashboardOnMobile />", () => {
           });
 
           it("shallow routes with query parameter when radio is selected", async () => {
-            const business = generateBusiness({
+            const business = generateBusiness(userData, {
               profileData: generateProfileData({
                 industryId: randomHomeBasedIndustry(),
                 homeBasedBusiness: undefined,
@@ -422,7 +425,7 @@ describe("<DashboardOnMobile />", () => {
         describe(`${operatingPhase}`, () => {
           it("shows home-based business question with alt description when applicable to industry and not yet answered", () => {
             useMockBusiness(
-              generateBusiness({
+              generateBusiness(userData, {
                 profileData: generateProfileData({
                   industryId: randomHomeBasedIndustry(),
                   homeBasedBusiness: undefined,
@@ -459,7 +462,9 @@ describe("<DashboardOnMobile />", () => {
     it.each(operatingPhasesWithoutAnytimeActions)(
       "does not display anytime action section for %s",
       (phase) => {
-        useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
+        useMockBusiness(
+          generateBusiness(userData, { profileData: generateProfileData({ operatingPhase: phase }) })
+        );
         renderDashboardComponent({
           anytimeActionLinks: [generateAnytimeActionLink({})],
           anytimeActionAdminTask: [generateAnytimeActionTask({})],
@@ -472,7 +477,9 @@ describe("<DashboardOnMobile />", () => {
     );
 
     it.each(operatingPhasesWithAnytimeActions)("displays anytime action section for %s", (phase) => {
-      useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
+      useMockBusiness(
+        generateBusiness(userData, { profileData: generateProfileData({ operatingPhase: phase }) })
+      );
       renderDashboardComponent({
         anytimeActionLinks: [generateAnytimeActionLink({})],
         anytimeActionAdminTask: [generateAnytimeActionTask({})],
@@ -580,7 +587,7 @@ describe("<DashboardOnMobile />", () => {
   });
 
   it("sets phaseNewlyChanged to false on mobile when rendering For You tab", async () => {
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       preferences: generatePreferences({ phaseNewlyChanged: true }),
       onboardingFormProgress: "COMPLETED",
     });
@@ -595,7 +602,7 @@ describe("<DashboardOnMobile />", () => {
   });
 
   it("shows indicator next to For You tab when phaseNewlyChanged is true", async () => {
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       preferences: generatePreferences({ phaseNewlyChanged: true }),
       onboardingFormProgress: "COMPLETED",
     });
