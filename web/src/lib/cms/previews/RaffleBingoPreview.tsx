@@ -10,6 +10,7 @@ const RaffleBingoPreview = (props: PreviewProps): ReactElement => {
   const ref = usePreviewRef(props);
   const task = usePageData<Task>(props);
 
+  // TODO: Update to use ID
   const raffleBingoSwitch = rswitch(task.filename, {
     "raffle-license-step-1": <RaffleBingoPaginator task={task} CMS_ONLY_stepIndex={0} />,
     "raffle-license-step-2": <RaffleBingoPaginator task={task} CMS_ONLY_stepIndex={1} />,

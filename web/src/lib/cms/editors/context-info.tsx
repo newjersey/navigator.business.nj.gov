@@ -21,6 +21,7 @@ export default {
 
       widget: "string",
     },
+    // TODO: What is this?
     {
       name: "contextId",
       label: "Contextual Info Panel Id",
