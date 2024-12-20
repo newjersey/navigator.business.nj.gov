@@ -37,7 +37,7 @@ agencyAdditionalContext: State Board of Mortuary Science of New Jersey
 * Mortuary intern registration number 
 * Social Security number (SSN) or Individual Taxpayer Identification number (ITIN)
 * A 2x2 inch photo of your head and shoulders taken in the last 6 months
-* Official college transcripts with the school’s seal, from each college and mortuary school attended, emailed, or mailed to the State Board of Mortuary Science of New Jersey
+* Official college transcripts with the school’s seal, from each college and mortuary school attended, emailed or mailed to the State Board of Mortuary Science of New Jersey
 * Date and scores of both the Arts and Science portions of the International Conference of Funeral Service Examining Board National Board exam
 * List of professional licenses or certificates of any kind, held in any state 
 * Past employment history, including dates
@@ -49,11 +49,12 @@ agencyAdditionalContext: State Board of Mortuary Science of New Jersey
 * Details of any professional license denial, revocation, suspension, or surrender, if applicable
 * Applicable fees paid
 
-Official transcripts can be mailed to: 
+Official transcripts can be emailed to [mortuaryscience@dca.njoag.gov](mailto:mortuaryscience@dca.njoag.gov), or mailed to:
 
+\
 State Board of Mortuary Science of New Jersey
 
-PO Box 45009
+P.O. Box 45009 
 
 Newark, NJ 07101
 
