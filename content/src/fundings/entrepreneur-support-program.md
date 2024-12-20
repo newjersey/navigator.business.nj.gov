@@ -1,5 +1,4 @@
 ---
-filename: entrepreneur-support-program
 name: Entrepreneur Support Program
 displayName: entrepreneur-support
 urlSlug: entrepreneur-support-program

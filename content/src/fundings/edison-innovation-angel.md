@@ -1,9 +1,8 @@
 ---
-filename: edison-innovation-angel
 name: Edison Innovation Angel Growth Fund
-displayName: edison-innovation-angel
+displayName: edison-innovation-angel-growth-fund
 urlSlug: edison-innovation-angel
-id: edison-innovation-angel-growth-fund
+id: edison-innovation-angel
 sidebarCardBodyText: Edison Innovation Angel Growth Fund provides funding to
   early-stage, emerging technology businesses matched with an outside equity
   investor within the last 90 days.

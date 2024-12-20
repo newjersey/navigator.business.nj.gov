@@ -1,9 +1,8 @@
 ---
-filename: Clean Energy Program - Large Energy Users
 name: New Jersey’s Clean Energy Program - Large Energy Users
 displayName: leu-clean-energy
 urlSlug: njcep-leu
-id: njcep-leu
+id: clean-energy-program-large-energy-users
 sidebarCardBodyText: The Large Energy Users Program (LEUP) encourages large
   commercial and industrial utility customers that have facilities in New Jersey
   to to upgrade or install energy conserving measures in existing buildings and

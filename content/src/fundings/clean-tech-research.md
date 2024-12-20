@@ -1,9 +1,8 @@
 ---
-filename: clean-tech-research
 name: Clean Tech Research & Development (R&D) Voucher Program
-displayName: clean-tech-research
+displayName: clean-tech-research-development-rd-voucher-program
 urlSlug: clean-tech-research
-id: clean-tech-research-development-rd-voucher-program
+id: clean-tech-research
 sidebarCardBodyText: The Clean Tech Research & Development (R&D) Voucher Program
   helps New Jersey early-stage clean tech and clean energy companies offset
   certain costs.
@@ -39,10 +38,11 @@ sector:
   - other-services
 publishStageArchive: ""
 ---
+
 ## Eligibility
 
-* Must be a New Jersey-based clean energy and clean technology company
-* Company must have 50 or fewer full-time employees
+- Must be a New Jersey-based clean energy and clean technology company
+- Company must have 50 or fewer full-time employees
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
