@@ -1,5 +1,5 @@
 ---
-filename: electrical-contracting-business-permit-reactivation
+id: electrical-contracting-business-permit-reactivation
 name: Reactivate Your Electrical Contracting Business Permit
 industryIds: []
 sectorIds: []

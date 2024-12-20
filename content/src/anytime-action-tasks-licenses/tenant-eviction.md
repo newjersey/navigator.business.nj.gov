@@ -7,7 +7,7 @@ notesMd: >-
   Regina reviewed: 9/30/24
 
   SME approved: 11/15/24
-filename: tenant-eviction
+id: tenant-eviction
 name: Learn About the Tenant Eviction Process
 industryIds:
   - residential-landlord
