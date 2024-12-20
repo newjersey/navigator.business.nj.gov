@@ -38,13 +38,15 @@ divisionPhone: (609) 984-5463
 * Vehicle/trailer facility year, make, model, state, plate number, VIN, and copy of registration, if applicable
 * Max energy (kVp, mA, and MeV), if applicable
 
-:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
+
 
 DEP will provide the registration number and a Facility ID for a new location via mail after you submit the temporary registration form.
 
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+
 A copy of your registration number sent via mail.
 
 :::
