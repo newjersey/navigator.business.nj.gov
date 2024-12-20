@@ -1,6 +1,7 @@
 import { Task, TaskDependencies, TaskLink } from "@/lib/types/types";
 import { convertTaskMd } from "@/lib/utils/markdownReader";
 
+// TODO: Update to use ID
 export const fetchTaskByFilename = async (filename: string): Promise<Task> => {
   const taskWithoutLinks = convertTaskMd(await fetchTaskFile(filename));
 
@@ -16,6 +17,7 @@ export const fetchTaskByFilename = async (filename: string): Promise<Task> => {
 
   const unlockedByTaskLinks = await Promise.all(mappedDependencies);
 
+  // TODO: Update to use ID
   return {
     ...taskWithoutLinks,
     unlockedBy: unlockedByTaskLinks,
@@ -23,6 +25,7 @@ export const fetchTaskByFilename = async (filename: string): Promise<Task> => {
   };
 };
 
+// TODO: Update to use ID
 export const fetchTaskLinkByFilename = async (filename: string): Promise<TaskLink> => {
   const taskWithoutLinks = convertTaskMd(await fetchTaskFile(filename));
   return {
@@ -40,6 +43,8 @@ const fetchDependenciesFile = async (): Promise<TaskDependencies[]> => {
   return file.default.dependencies;
 };
 
+// TODO: Update to use ID
+// Maybe refactor???
 const fetchTaskFile = async (filename: string): Promise<string> => {
   let file;
 

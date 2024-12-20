@@ -33,6 +33,7 @@ export const MatchList = (props: Props): ReactElement => {
       </span>
       <ul>
         {(expanded ? props.matches : collapsedMatches).map((match) => (
+          //TODO: update to reference ID
           <li key={match.filename}>
             <div>
               <b>{match.filename}</b>

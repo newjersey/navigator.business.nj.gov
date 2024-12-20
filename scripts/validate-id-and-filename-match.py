@@ -37,7 +37,7 @@ def validate_markdown_ids(directory):
 
 
 # Specify the directory containing markdown files
-directory = "../content/src/roadmaps/license-tasks"
+directory = "../content/src/fundings"
 
 # Validate the markdown files
 mismatched_files = validate_markdown_ids(directory)

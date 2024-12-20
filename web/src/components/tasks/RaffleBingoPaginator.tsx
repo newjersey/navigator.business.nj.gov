@@ -95,6 +95,7 @@ export const RaffleBingoPaginator = (props: Props): ReactElement => {
 
   const agencyName = step?.agencyId ? LookupTaskAgencyById(step.agencyId).name : "";
 
+  // TODO: Update to use ID
   return (
     <>
       <TaskHeader task={props.task} />
