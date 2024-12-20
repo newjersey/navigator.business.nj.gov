@@ -58,7 +58,8 @@
     "weights-measures",
     "dentist",
     "freestanding-residential-health-care-license",
-    "electrologist"
+    "electrologist",
+    "healthcare-xray-regis"
   ],
   "displayname": "healthcare",
   "industryOnboardingQuestions": {
