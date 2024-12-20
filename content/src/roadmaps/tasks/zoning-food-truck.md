@@ -1,6 +1,5 @@
 ---
 displayname: zoning-food-truck
-filename: zoning-food-truck
 urlSlug: zoning
 name: Obtain Zoning and Overnight Parking Approval if Required
 id: zoning
