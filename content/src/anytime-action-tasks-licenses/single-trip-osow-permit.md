@@ -22,14 +22,15 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 icon: govt-purple.svg
 ---
 ## Eligibility Criteria
+
 * A [NJDOT GotPermits](https://nj.gotpermits.com/njpass#!) account
 
 ## Application Requirements
 ### Trip Information
 * Travel start date
 * Vehicle type
-* Truck plate/license number and state, if applicable
-* Trailer plate/license number and state
+* Truck plate/license number and state
+* Trailer plate/license number and state, if applicable
 * Load description
 * Load quantity
 * General origin and destination (cities or state borders)
