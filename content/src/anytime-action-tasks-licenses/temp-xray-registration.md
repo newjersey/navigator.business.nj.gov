@@ -2,7 +2,8 @@
 notesMd: https://docs.google.com/document/d/1MZGaJIYDG2jV4Lr7NyBoFNR_GW17EeHdQpOP0L45koY/edit?tab=t.0
 filename: temp-xray-registration
 name: Register Your Temporary X-Ray Machine
-industryIds: []
+industryIds:
+  - healthcare
 sectorIds: []
 urlSlug: temp-xray-registration
 summaryDescriptionMd: >-
