@@ -26,20 +26,18 @@ agencyAdditionalContext: State Board of Mortuary Science of New Jersey
 
 * Be at least 21 years old
 * Have completed a minimum of 2 years at an accredited college or university 
-* Have a valid mortuary intern license and have completed your training 
+* Have a valid mortuary registration card and have completed your training
 * Completed 1 year at a mortuary science school approved by the State Board of Mortuary Science of New Jersey
-* Have helped with at least 75 embalmments and 75 funerals, and have attended at least 25 funerals during your internship 
+* Have conducted or assisted with at least 75 embalmments and 75 funerals, and have attended at least 25 funerals during your internship
 * Passed the National Board exam given by the International Conference of Funeral Service Examining Board
 * Passed the State Board of Mortuary Science of New Jersey Jurisprudence exam and the Practical exam
 
-
-
 ## Application Requirements
 
-* Mortuary intern license number 
+* Mortuary intern registration number 
 * Social Security number (SSN) or Individual Taxpayer Identification number (ITIN)
 * A 2x2 inch photo of your head and shoulders taken in the last 6 months
-* Official college transcripts with school’s seal, mailed to the State Board of Mortuary Science of New Jersey
+* Official college transcripts with the school’s seal, from each college and mortuary school attended, emailed, or mailed to the State Board of Mortuary Science of New Jersey
 * Date and scores of both the Arts and Science portions of the International Conference of Funeral Service Examining Board National Board exam
 * List of professional licenses or certificates of any kind, held in any state 
 * Past employment history, including dates
@@ -60,8 +58,6 @@ PO Box 45009
 Newark, NJ 07101
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
-
-
 
 * You can’t legally practice mortuary science, including funeral directing and embalming
 * You can’t be the manager or licensee-in-charge of any mortuary establishment
