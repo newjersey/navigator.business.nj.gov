@@ -2,7 +2,7 @@
 notesMd: "Draft:
   https://docs.google.com/document/d/1zaZpaifJyX8bE7S-y-iEt8Zn_ssZHw4zIi_4QgjU5\
   RE/edit"
-filename: hic-registration-reinstatement
+id: hic-registration-reinstatement
 name: Apply to Reinstate Your Home Improvement Contractor Registration
 licenseName: Home Improvement Contractors-Home Improvement Contractor
 urlSlug: hic-registration-reinstatement

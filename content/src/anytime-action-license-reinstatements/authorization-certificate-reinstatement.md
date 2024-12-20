@@ -1,5 +1,5 @@
 ---
-filename: authorization-certificate-reinstatement
+id: authorization-certificate-reinstatement
 name: Apply to Reinstate Your Application for a Certificate of Authorization
 licenseName: Architecture-Certificate of Authorization
 urlSlug: authorization-certificate-reinstatement

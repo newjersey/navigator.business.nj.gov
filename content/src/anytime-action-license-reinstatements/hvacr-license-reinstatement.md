@@ -1,5 +1,5 @@
 ---
-filename: hvacr-license-reinstatement
+id: hvacr-license-reinstatement
 licenseName: ""
 name: Reinstate Your HVACR License
 urlSlug: hvacr-license-reinstatement
