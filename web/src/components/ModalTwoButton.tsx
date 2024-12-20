@@ -18,7 +18,7 @@ interface Props {
   isLoading?: boolean;
 }
 
-export const ModalTwoButton = (props: Props): ReactElement => {
+export const ModalTwoButton = (props: Props): ReactElement<any> => {
   const isMobileAndUp = useMediaQuery(MediaQueries.mobileAndUp);
 
   const buttonNode = (

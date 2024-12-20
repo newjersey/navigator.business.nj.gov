@@ -6,7 +6,7 @@ interface Props {
   secondaryText?: string;
 }
 
-export const MenuOptionSelected = (props: Props): ReactElement => {
+export const MenuOptionSelected = (props: Props): ReactElement<any> => {
   return (
     <>
       <div className="flex flex-row padding-right-205">

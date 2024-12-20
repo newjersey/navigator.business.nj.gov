@@ -37,7 +37,7 @@ interface Props {
   CMS_ONLY_fakeBusiness?: Business;
 }
 
-export const TaxAccessStepTwo = (props: Props): ReactElement => {
+export const TaxAccessStepTwo = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const { updateQueue } = useUserData();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
@@ -109,7 +109,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
     return "";
   };
 
-  const errorAlert = (): ReactElement => {
+  const errorAlert = (): ReactElement<any> => {
     const errorApiFailed = apiFailed === "FAILED" || props.CMS_ONLY_fakeError === "API";
 
     if (business?.taxFilingData.errorField === "businessName" && errorApiFailed) {

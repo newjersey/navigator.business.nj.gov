@@ -1,4 +1,9 @@
-import { FieldStateActionKind, FormContextReducer, FormContextType } from "@/contexts/formContext";
+import {
+  FieldStateActionKind,
+  FormContextReducer,
+  FormContextReducerActions,
+  FormContextType,
+} from "@/contexts/formContext";
 import { FieldErrorType, FieldStatus, ReducedFieldStates } from "@/lib/types/types";
 import { FormEvent, useCallback, useEffect, useReducer, useState } from "react";
 
@@ -80,7 +85,10 @@ export const useFormContextHelper = <
     }
   };
 
-  const [fieldStates, fieldStateDispatch] = useReducer<FormContextReducer<T>>(fieldStatesReducer, initState);
+  const [fieldStates, fieldStateDispatch] = useReducer<
+    ReducedFieldStates<keyof T, unknown>,
+    [action: FormContextReducerActions<T, unknown>]
+  >(fieldStatesReducer, initState);
   debug && console.log(fieldStates);
 
   const getErrors = (): FieldError[] =>

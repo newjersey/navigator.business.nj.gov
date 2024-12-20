@@ -12,7 +12,7 @@ interface Props {
   saveDataFunction: () => void;
 }
 
-export const AutosaveSpinner = (props: Props): ReactElement => {
+export const AutosaveSpinner = (props: Props): ReactElement<any> => {
   const [savingSpinnerClock, setSavingSpinnerClock] = useState<"HIDDEN" | "SAVING" | "SAVED">("HIDDEN");
   const [savingSpinnerState, setSavingSpinnerState] = useState<"HIDDEN" | "SAVING" | "SAVED">("HIDDEN");
   const [timestampOfLastSave, setTimestampOfLastSave] = useState<number>(0);

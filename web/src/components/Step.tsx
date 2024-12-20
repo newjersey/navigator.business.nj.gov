@@ -12,7 +12,7 @@ interface Props {
   last: boolean;
 }
 
-export const Step = (props: Props): ReactElement => {
+export const Step = (props: Props): ReactElement<any> => {
   const { business } = useUserData();
   const { roadmap } = useRoadmap();
   return (

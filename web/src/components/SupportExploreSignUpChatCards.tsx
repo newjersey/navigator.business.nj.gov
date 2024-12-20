@@ -4,7 +4,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
 
-export const SupportExploreSignUpChatCards = (): ReactElement => {
+export const SupportExploreSignUpChatCards = (): ReactElement<any> => {
   const { Config } = useConfig();
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const cardConfig = Config.landingPage;

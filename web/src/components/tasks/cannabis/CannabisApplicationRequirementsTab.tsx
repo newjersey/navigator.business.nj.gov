@@ -20,7 +20,7 @@ interface Props {
   CMS_ONLY_isConditional?: boolean;
 }
 
-export const CannabisApplicationRequirementsTab = (props: Props): ReactElement => {
+export const CannabisApplicationRequirementsTab = (props: Props): ReactElement<any> => {
   const { business } = useUserData();
   const { Config } = useConfig();
 
@@ -30,7 +30,7 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
     }
   );
 
-  const expandIcon = (): ReactElement => {
+  const expandIcon = (): ReactElement<any> => {
     return <Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />;
   };
 

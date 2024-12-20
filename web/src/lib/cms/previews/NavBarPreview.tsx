@@ -14,7 +14,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { ReactElement } from "react";
 
-const NavBarPreview = (props: PreviewProps): ReactElement => {
+const NavBarPreview = (props: PreviewProps): ReactElement<any> => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

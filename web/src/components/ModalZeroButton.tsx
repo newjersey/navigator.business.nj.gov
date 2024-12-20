@@ -12,7 +12,7 @@ interface Props {
   unpaddedChildren?: ReactNode;
 }
 
-export const ModalZeroButton = (props: Props): ReactElement => {
+export const ModalZeroButton = (props: Props): ReactElement<any> => {
   const { contextualInfo } = useContext(ContextualInfoContext);
 
   return (

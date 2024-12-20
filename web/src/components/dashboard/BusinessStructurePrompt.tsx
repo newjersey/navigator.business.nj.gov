@@ -12,7 +12,7 @@ import { ReactElement } from "react";
 interface Props {
   isCTAButtonHidden?: boolean;
 }
-export const BusinessStructurePrompt = (props: Props): ReactElement => {
+export const BusinessStructurePrompt = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const router = useRouter();

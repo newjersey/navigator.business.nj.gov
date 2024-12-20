@@ -3,7 +3,7 @@ import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { StateObject, arrayOfStateObjects as states } from "@businessnjgovnavigator/shared/";
 import { Autocomplete, TextField, createFilterOptions } from "@mui/material";
-import { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
+import { ChangeEvent, FocusEvent, ReactElement, useState, type JSX } from "react";
 
 interface Props {
   value: string | undefined;
@@ -22,7 +22,7 @@ interface Props {
   required?: boolean;
 }
 
-export const StateDropdown = (props: Props): ReactElement => {
+export const StateDropdown = (props: Props): ReactElement<any> => {
   const [open, setOpen] = useState<boolean>(false);
 
   const handleOnChange = (event: ChangeEvent<unknown>, value: StateObject | null): void => {

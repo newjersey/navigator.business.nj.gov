@@ -1,59 +1,62 @@
+@use "../sass-files/mixin";
+@use "../sass-files/variables";
+
 .drop-shadow-xs {
-  @include addDropShadow($drop-shadow-xs);
+  @include mixin.addDropShadow(variables.$drop-shadow-xs);
 }
 
 .drop-shadow-xs-on-hover {
   &:hover {
-    @include addDropShadow($drop-shadow-xs);
+    @include mixin.addDropShadow(variables.$drop-shadow-xs);
   }
 }
 
 .drop-shadow-xs-darker {
-  @include addDropShadow($drop-shadow-xs-darker);
+  @include mixin.addDropShadow(variables.$drop-shadow-xs-darker);
 }
 
 .drop-shadow-xs-darker-on-hover {
   &:hover {
-    @include addDropShadow($drop-shadow-xs-darker);
+    @include mixin.addDropShadow(variables.$drop-shadow-xs-darker);
   }
 }
 
 .drop-shadow-sm {
-  @include addDropShadow($drop-shadow-sm);
+  @include mixin.addDropShadow(variables.$drop-shadow-sm);
 }
 
 .drop-shadow-sm-on-hover {
   &:hover {
-    @include addDropShadow($drop-shadow-sm);
+    @include mixin.addDropShadow(variables.$drop-shadow-sm);
   }
 }
 
 .drop-shadow-md {
-  @include addDropShadow($drop-shadow-md);
+  @include mixin.addDropShadow(variables.$drop-shadow-md);
 }
 
 .drop-shadow-md-on-hover {
   &:hover {
-    @include addDropShadow($drop-shadow-md);
+    @include mixin.addDropShadow(variables.$drop-shadow-md);
   }
 }
 
 .drop-shadow-lg {
-  @include addDropShadow($drop-shadow-lg);
+  @include mixin.addDropShadow(variables.$drop-shadow-lg);
 }
 
 .drop-shadow-lg-on-hover {
   &:hover {
-    @include addDropShadow($drop-shadow-lg);
+    @include mixin.addDropShadow(variables.$drop-shadow-lg);
   }
 }
 
 .drop-shadow-xl {
-  @include addDropShadow($drop-shadow-xl);
+  @include mixin.addDropShadow(variables.$drop-shadow-xl);
 }
 
 .drop-shadow-xl-on-hover {
   &:hover {
-    @include addDropShadow($drop-shadow-xl);
+    @include mixin.addDropShadow(variables.$drop-shadow-xl);
   }
 }

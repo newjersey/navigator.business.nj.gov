@@ -20,7 +20,7 @@ interface Props extends FormContextFieldProps {
   setUser: (user: BusinessUser) => void;
 }
 
-export const AccountSetupForm = (props: Props): ReactElement => {
+export const AccountSetupForm = (props: Props): ReactElement<any> => {
   const [email, setEmail] = useState<string>(props.user.email || "");
   const [confirmEmail, setConfirmEmail] = useState<string | undefined>(props.user.email || undefined);
   const { Config } = useConfig();

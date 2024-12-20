@@ -16,7 +16,7 @@ interface Props {
   isLast?: boolean;
 }
 
-export const UserSupportActionCard = (props: Props): ReactElement => {
+export const UserSupportActionCard = (props: Props): ReactElement<any> => {
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 
   return (
@@ -33,16 +33,14 @@ export const UserSupportActionCard = (props: Props): ReactElement => {
           <div>{props.supportingText}</div>
         </div>
         <div>
-          <Link href={props.buttonLink}>
-            <div>
-              <PrimaryButton
-                isColor={props.primaryButtonColor}
-                isRightMarginRemoved={true}
-                isIntercomEnabled={props.isIntercomEnabled}
-              >
-                {props.buttonText}
-              </PrimaryButton>
-            </div>
+          <Link href={props.buttonLink} legacyBehavior>
+            <PrimaryButton
+              isColor={props.primaryButtonColor}
+              isRightMarginRemoved={true}
+              isIntercomEnabled={props.isIntercomEnabled}
+            >
+              {props.buttonText}
+            </PrimaryButton>
           </Link>
         </div>
       </div>

@@ -26,7 +26,7 @@ type Props<T> = {
   onChange?: (value: T) => void;
 };
 
-export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): ReactElement => {
+export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): ReactElement<any> => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
   const fieldName = props.contentFieldName ?? props.fieldName;

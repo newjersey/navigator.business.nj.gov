@@ -7,7 +7,7 @@ import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { ReactElement } from "react";
 
-const DashboardSnackbarsPreview = (props: PreviewProps): ReactElement => {
+const DashboardSnackbarsPreview = (props: PreviewProps): ReactElement<any> => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

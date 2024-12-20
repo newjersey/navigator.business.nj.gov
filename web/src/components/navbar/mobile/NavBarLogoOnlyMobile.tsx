@@ -10,7 +10,7 @@ interface Props {
   scrolled: boolean;
 }
 
-export const NavBarLogoOnlyMobile = (props: Props): ReactElement => {
+export const NavBarLogoOnlyMobile = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   return (
     <NavBarMobileWrapper scrolled={props.scrolled}>

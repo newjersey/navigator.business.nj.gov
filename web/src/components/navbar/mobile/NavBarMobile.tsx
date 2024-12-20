@@ -37,7 +37,7 @@ interface Props {
   CMS_PREVIEW_ONLY_SHOW_MENU?: boolean;
 }
 
-export const NavBarMobile = (props: Props): ReactElement => {
+export const NavBarMobile = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   let currentBusiness = undefined;

@@ -42,10 +42,10 @@ type StatefulDataProps = {
   initialData: GenericData | undefined;
 };
 
-export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) => ReactElement) => {
+export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) => ReactElement<any>) => {
   type UpdateFn = (newData: GenericData | undefined, config?: { local?: boolean }) => Promise<void>;
 
-  return ({ children, initialData }: StatefulDataProps): ReactElement => {
+  return ({ children, initialData }: StatefulDataProps): ReactElement<any> => {
     const update = (newData: GenericData | undefined, config?: { local?: boolean }): Promise<void> => {
       spy(newData, config);
       setGenericData(newData);

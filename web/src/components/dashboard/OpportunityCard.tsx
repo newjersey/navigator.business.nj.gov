@@ -20,12 +20,12 @@ interface Props {
 
 export const OPPORTUNITY_CARD_MAX_BODY_CHARS = 150;
 
-export const OpportunityCard = (props: Props): ReactElement => {
+export const OpportunityCard = (props: Props): ReactElement<any> => {
   const { updateQueue, business } = useUserData();
   const { Config } = useConfig();
   const router = useRouter();
 
-  const TYPE_TO_LABEL: Record<"funding" | "certification", ReactElement> = {
+  const TYPE_TO_LABEL: Record<"funding" | "certification", ReactElement<any>> = {
     funding: (
       <Tag isLowerCase={true} backgroundColor="accent-semi-cool-light">
         {capitalizeEachWord(Config.dashboardDefaults.fundingTagText)}

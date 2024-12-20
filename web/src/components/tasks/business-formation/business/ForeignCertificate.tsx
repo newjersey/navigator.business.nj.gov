@@ -10,7 +10,7 @@ interface Props {
   hasError: boolean;
 }
 
-export const ForeignCertificate = (props: Props): ReactElement => {
+export const ForeignCertificate = (props: Props): ReactElement<any> => {
   const { hasError } = props;
   const { Config } = useConfig();
   const { state, setForeignGoodStandingFile } = useContext(BusinessFormationContext);

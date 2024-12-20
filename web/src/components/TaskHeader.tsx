@@ -14,7 +14,7 @@ interface Props {
   tooltipText?: string;
 }
 
-export const TaskHeader = (props: Props): ReactElement => {
+export const TaskHeader = (props: Props): ReactElement<any> => {
   const { business } = useUserData();
   const { roadmap } = useRoadmap();
 

@@ -3,7 +3,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
 
-export const IsVeteranNonprofit = (): ReactElement => {
+export const IsVeteranNonprofit = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const fieldName = "isVeteranNonprofit";

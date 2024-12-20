@@ -43,7 +43,7 @@ interface Props {
   displayContent: TasksDisplayContent;
 }
 
-export const BusinessFormation = (props: Props): ReactElement => {
+export const BusinessFormation = (props: Props): ReactElement<any> => {
   const { roadmap } = useRoadmap();
   const { updateQueue, business, userData } = useUserData();
   const router = useRouter();

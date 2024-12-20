@@ -5,7 +5,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
-export const ReviewSignatures = (): ReactElement => {
+export const ReviewSignatures = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
   const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
@@ -23,7 +23,7 @@ export const ReviewSignatures = (): ReactElement => {
     };
   };
 
-  const displaySigners = (): ReactElement => {
+  const displaySigners = (): ReactElement<any> => {
     return (
       <>
         {state.formationFormData.signers?.map((signer, index) => {
@@ -52,7 +52,7 @@ export const ReviewSignatures = (): ReactElement => {
     );
   };
 
-  const displayEmptySigners = (): ReactElement => {
+  const displayEmptySigners = (): ReactElement<any> => {
     return (
       <div data-testid="review-signers-not-entered" className={"margin-top-2"}>
         <ReviewLineItem label={getConfig().label} value={undefined} marginOverride={"margin-top-0"} />
@@ -67,7 +67,7 @@ export const ReviewSignatures = (): ReactElement => {
     );
   };
 
-  const displayIncorporators = (): ReactElement => {
+  const displayIncorporators = (): ReactElement<any> => {
     return (
       <>
         {state.formationFormData.incorporators?.map((signer, index) => {
@@ -107,7 +107,7 @@ export const ReviewSignatures = (): ReactElement => {
     );
   };
 
-  const displayEmptyIncorporators = (): ReactElement => {
+  const displayEmptyIncorporators = (): ReactElement<any> => {
     return (
       <div data-testid="review-incorporators-not-entered" className={"margin-top-2"}>
         <ReviewLineItem label={getConfig().label} value={undefined} marginOverride={"margin-top-0"} />
@@ -122,7 +122,7 @@ export const ReviewSignatures = (): ReactElement => {
     );
   };
 
-  const signers = (): ReactElement | null => {
+  const signers = (): ReactElement<any> | null => {
     if (!areSignersApplicable) return null;
 
     if (hasSigners) {
@@ -132,7 +132,7 @@ export const ReviewSignatures = (): ReactElement => {
     }
   };
 
-  const incorporators = (): ReactElement | null => {
+  const incorporators = (): ReactElement<any> | null => {
     if (!areIncorporatorsApplicable) return null;
 
     if (hasIncorporators) {

@@ -9,7 +9,7 @@ import { generateTask } from "@/test/factories";
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
-const CannabisLicensePreview = (props: PreviewProps): ReactElement => {
+const CannabisLicensePreview = (props: PreviewProps): ReactElement<any> => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

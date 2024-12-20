@@ -1,7 +1,7 @@
 import { Icon } from "@/components/njwds/Icon";
 import analytics from "@/lib/utils/analytics";
 import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
-import { ReactElement } from "react";
+import { ReactElement, type JSX } from "react";
 
 interface Props {
   disabled?: boolean;
@@ -12,11 +12,11 @@ interface Props {
   dropDownTitle: string;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   handleClose: () => void;
-  icon?: ReactElement;
-  subMenuElement: ReactElement[];
+  icon?: ReactElement<any>;
+  subMenuElement: ReactElement<any>[];
 }
 
-export const NavBarDesktopDropDown = (props: Props): ReactElement => {
+export const NavBarDesktopDropDown = (props: Props): ReactElement<any> => {
   const toggleDropdown = (): void => {
     if (!props.open) {
       analytics.event.account_name.click.expand_account_menu();

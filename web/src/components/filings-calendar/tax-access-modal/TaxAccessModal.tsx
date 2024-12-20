@@ -10,7 +10,7 @@ interface Props {
   onSuccess: () => void;
 }
 
-export const TaxAccessModal = (props: Props): ReactElement => {
+export const TaxAccessModal = (props: Props): ReactElement<any> => {
   const [isStepOne, setIsStepOne] = useState<boolean>(true);
   const { business } = useUserData();
 

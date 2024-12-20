@@ -21,7 +21,7 @@ interface Props {
   handleClose: () => void;
 }
 
-export const SectorModal = (props: Props): ReactElement => {
+export const SectorModal = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const { updateQueue, business } = useUserData();

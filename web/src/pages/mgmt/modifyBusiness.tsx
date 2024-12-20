@@ -19,7 +19,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useState } from "react";
 
-const ModifyBusinessPage = (): ReactElement => {
+const ModifyBusinessPage = (): ReactElement<any> => {
   const router = useRouter();
 
   const { business, updateQueue } = useUserData();

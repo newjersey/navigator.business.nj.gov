@@ -4,7 +4,7 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { ReactElement } from "react";
 
-const ContextInfoPreview = (props: PreviewProps): ReactElement => {
+const ContextInfoPreview = (props: PreviewProps): ReactElement<any> => {
   const ref = usePreviewRef(props);
 
   const { body, ...data } = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));

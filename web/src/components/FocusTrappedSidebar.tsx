@@ -16,7 +16,7 @@ export const FocusTrappedSidebar = ({
   isOpen,
   delayTime = 300,
   CMS_ONLY_disable_focus_trap,
-}: Props): ReactElement => {
+}: Props): ReactElement<any> => {
   const [showDiv, setShowDiv] = useState(false);
 
   useEffect(() => {

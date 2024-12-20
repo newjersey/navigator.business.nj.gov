@@ -22,7 +22,7 @@ interface Props {
   overrideLabelMap?: Record<InFormBylawsRadioType, string> | Record<TrueFalseRadioType, string>;
 }
 
-export const FormationRadio = (props: Props): ReactElement => {
+export const FormationRadio = (props: Props): ReactElement<any> => {
   const { doesFieldHaveError } = useFormationErrors();
   const { state } = useContext(BusinessFormationContext);
   const { Config } = useConfig();

@@ -9,7 +9,7 @@ interface Props {
   lines: number;
 }
 
-export const ExpandCollapseString = (props: Props): ReactElement => {
+export const ExpandCollapseString = (props: Props): ReactElement<any> => {
   return (
     <div {...(props.dataTestId ? { "data-testid": props.dataTestId } : {})}>
       <ClampLines

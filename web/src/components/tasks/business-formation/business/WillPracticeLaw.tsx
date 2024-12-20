@@ -4,7 +4,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext, useState } from "react";
 
-export const WillPracticeLaw = (): ReactElement => {
+export const WillPracticeLaw = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const fieldName = "willPracticeLaw";

@@ -4,8 +4,8 @@ import { ReactElement, useState } from "react";
 interface Props {
   onClick: () => void;
   selected?: boolean;
-  icon?: ReactElement;
-  hoverIcon?: ReactElement;
+  icon?: ReactElement<any>;
+  hoverIcon?: ReactElement<any>;
   className?: string;
   itemText: string;
   key: string;
@@ -13,7 +13,7 @@ interface Props {
   reducedLeftMargin?: boolean;
 }
 
-export const NavMenuItem = (props: Props): ReactElement => {
+export const NavMenuItem = (props: Props): ReactElement<any> => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const icon = props.hoverIcon && isHovered ? props.hoverIcon : props.icon ?? "";
 

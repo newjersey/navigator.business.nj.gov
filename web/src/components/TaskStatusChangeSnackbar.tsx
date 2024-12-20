@@ -10,7 +10,7 @@ interface Props {
   status: TaskProgress;
 }
 
-export const TaskStatusChangeSnackbar = (props: Props): ReactElement => {
+export const TaskStatusChangeSnackbar = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   return (
     <SnackbarAlert

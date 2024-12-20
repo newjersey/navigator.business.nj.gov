@@ -1,3 +1,5 @@
+@use "../sass-files/variables";
+
 .blueRightGutter {
-  background: linear-gradient(to right, $white 70%, $cool-extra-light 70% 100%);
+  background: linear-gradient(to right, variables.$white 70%, variables.$cool-extra-light 70% 100%);
 }

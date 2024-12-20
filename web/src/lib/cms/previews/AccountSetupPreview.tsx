@@ -5,7 +5,7 @@ import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import AccountSetupPage from "@/pages/account-setup";
 import { ReactElement } from "react";
 
-const AccountSetupPreview = (props: PreviewProps): ReactElement => {
+const AccountSetupPreview = (props: PreviewProps): ReactElement<any> => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

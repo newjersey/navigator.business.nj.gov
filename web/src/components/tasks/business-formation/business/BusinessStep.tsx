@@ -9,7 +9,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { Fragment, ReactElement, useContext, useMemo } from "react";
 
-export const BusinessStep = (): ReactElement => {
+export const BusinessStep = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
 
@@ -20,10 +20,10 @@ export const BusinessStep = (): ReactElement => {
 
   const isNonprofit = state.formationFormData.legalType === "nonprofit";
 
-  const addressSection = (): ReactElement =>
+  const addressSection = (): ReactElement<any> =>
     isForeign ? <MainBusinessForeignAddressFlow /> : <MainBusinessAddressNj />;
 
-  const lpSection = (): ReactElement | null => {
+  const lpSection = (): ReactElement<any> | null => {
     if (state.formationFormData.legalType !== "limited-partnership") return null;
     return (
       <>
@@ -63,7 +63,7 @@ export const BusinessStep = (): ReactElement => {
     );
   };
 
-  const businessPurposeSection = (): ReactElement => (
+  const businessPurposeSection = (): ReactElement<any> => (
     <>
       <hr className="margin-y-3" aria-hidden={true} key={"business-line-2"} />
       <FormationField fieldName="businessPurpose">
@@ -81,7 +81,7 @@ export const BusinessStep = (): ReactElement => {
     </>
   );
 
-  const additionalProvisionsSection = (): ReactElement | null => {
+  const additionalProvisionsSection = (): ReactElement<any> | null => {
     if (
       state.formationFormData.businessLocationType !== "NJ" &&
       state.formationFormData.legalType !== "foreign-limited-partnership"
@@ -91,7 +91,7 @@ export const BusinessStep = (): ReactElement => {
     return <AdditionalProvisions />;
   };
 
-  const defaultOrder: (ReactElement | null)[] = [
+  const defaultOrder: (ReactElement<any> | null)[] = [
     <MainBusiness key={"main-business"} />,
     addressSection(),
     lpSection(),
@@ -99,7 +99,7 @@ export const BusinessStep = (): ReactElement => {
     additionalProvisionsSection(),
   ];
 
-  const nonprofitOrder: (ReactElement | null)[] = [
+  const nonprofitOrder: (ReactElement<any> | null)[] = [
     <MainBusiness key={"main-business"} />,
     additionalProvisionsSection(),
     businessPurposeSection(),

@@ -7,7 +7,7 @@ interface Props {
   handleChangeOverride?: (value: string) => void;
 }
 
-export const EntityId = (props: Props): ReactElement => {
+export const EntityId = (props: Props): ReactElement<any> => {
   const fieldName = "entityId";
 
   return (

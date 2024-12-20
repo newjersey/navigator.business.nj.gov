@@ -13,7 +13,7 @@ interface Props {
   miniRoadmapSubtaskisOpen?: boolean;
 }
 
-export const VerticalStepIndicator = (props: Props): ReactElement => {
+export const VerticalStepIndicator = (props: Props): ReactElement<any> => {
   const { business } = useUserData();
   const { isOpen: sectionIsOpen } = useContext(SectionAccordionContext);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);

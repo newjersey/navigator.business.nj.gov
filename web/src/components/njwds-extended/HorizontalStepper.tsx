@@ -19,7 +19,7 @@ type StepperState =
   | "INCOMPLETE-ACTIVE"
   | "INCOMPLETE";
 
-export const HorizontalStepper = (props: Props): ReactElement => {
+export const HorizontalStepper = (props: Props): ReactElement<any> => {
   const [focusStep, setFocusStep] = useState(props.currentStep);
 
   const { Config } = useConfig();
@@ -213,7 +213,9 @@ export const HorizontalStepper = (props: Props): ReactElement => {
                     determineAriaState(determineState(index))
                   )}
                   aria-selected={index === props.currentStep}
-                  ref={(el) => (divRefs.current[index] = el)}
+                  ref={(el) => {
+                    divRefs.current[index] = el;
+                  }}
                 >
                   <div className={`usa-step-indicator__segment-label ${getBoldClass(index)}`}>
                     <span>{step.name}</span>

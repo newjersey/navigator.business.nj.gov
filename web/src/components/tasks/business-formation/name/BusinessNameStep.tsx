@@ -15,7 +15,7 @@ import { templateEval } from "@/lib/utils/helpers";
 import { TextField, useMediaQuery } from "@mui/material";
 import { FocusEvent, FormEvent, ReactElement, useContext, useEffect, useRef } from "react";
 
-export const BusinessNameStep = (): ReactElement => {
+export const BusinessNameStep = (): ReactElement<any> => {
   const FIELD_NAME = "businessName";
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);

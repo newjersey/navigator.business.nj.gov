@@ -1,3 +1,5 @@
+@use "../sass-files/variables";
+
 /* flex */
 
 .flex {
@@ -39,7 +41,7 @@
 
 .flex-half-tablet {
   flex: 0 0 100%;
-  @media all and (min-width: $md) {
+  @media all and (min-width: variables.$md) {
     flex: 0 0 50%;
   }
 }
@@ -99,7 +101,7 @@
 
 .fww-tablet {
   flex-wrap: wrap;
-  @media all and (min-width: $md) {
+  @media all and (min-width: variables.$md) {
     flex-wrap: nowrap;
   }
 }
@@ -128,32 +130,32 @@
   }
 }
 
-@media only screen and (min-width: $sm) {
+@media only screen and (min-width: variables.$sm) {
   .flex-direction {
     flex-direction: column !important;
   }
 }
 
-@media only screen and (min-width: $lg) {
+@media only screen and (min-width: variables.$lg) {
   .flex-direction {
     flex-direction: row !important;
   }
 }
 
 .desktop\:flex-align-self-center {
-  @media (min-width: $lg) {
+  @media (min-width: variables.$lg) {
     align-self: center;
   }
 }
 
 .tablet\:flex-align-self-center {
-  @media (min-width: $xs) and (max-width: $lg) {
+  @media (min-width: variables.$xs) and (max-width: variables.$lg) {
     align-self: center;
   }
 }
 
 .desktop\:flex-row {
-  @media (min-width: $lg) {
+  @media (min-width: variables.$lg) {
     flex-direction: row;
   }
 }

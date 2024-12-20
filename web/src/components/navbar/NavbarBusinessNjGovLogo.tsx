@@ -7,7 +7,7 @@ interface Props {
   useSmall?: boolean;
 }
 
-export const NavbarBusinessNjGovLogo = (props: Props): ReactElement => {
+export const NavbarBusinessNjGovLogo = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const router = useRouter();
   return (

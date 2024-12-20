@@ -12,7 +12,7 @@ import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
-export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): ReactElement => {
+export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): ReactElement<any> => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 

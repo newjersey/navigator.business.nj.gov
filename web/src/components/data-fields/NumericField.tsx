@@ -10,7 +10,7 @@ interface NumericFieldProps {
 
 interface Props<T> extends Omit<DataFieldProps<T>, "numericProps">, NumericFieldProps {}
 
-export const NumericField = <T,>({ minLength, maxLength, ...props }: Props<T>): ReactElement => {
+export const NumericField = <T,>({ minLength, maxLength, ...props }: Props<T>): ReactElement<any> => {
   const { Config } = useConfig();
 
   const validationText =

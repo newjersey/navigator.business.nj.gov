@@ -23,7 +23,7 @@ interface MySelectDisplayProps extends React.HTMLAttributes<HTMLDivElement> {
   "data-testid"?: string;
 }
 
-export const SuffixDropdown = (): ReactElement => {
+export const SuffixDropdown = (): ReactElement<any> => {
   const FIELD = "businessSuffix";
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);

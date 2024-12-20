@@ -5,11 +5,11 @@ import { ReactElement } from "react";
 
 const Template = () => {
   const renderFiveColumns = (section: {
-    title?: ReactElement;
-    usaProseElement?: ReactElement;
-    usaProseCSS: ReactElement;
-    element?: ReactElement;
-    cSS: ReactElement;
+    title?: ReactElement<any>;
+    usaProseElement?: ReactElement<any>;
+    usaProseCSS: ReactElement<any>;
+    element?: ReactElement<any>;
+    cSS: ReactElement<any>;
   }) => {
     return (
       <div className="grid-container width-tablet-lg">
@@ -39,11 +39,11 @@ const Template = () => {
     );
   };
 
-  const renderWithUSAProse = (children: ReactElement) => {
+  const renderWithUSAProse = (children: ReactElement<any>) => {
     return <div className="usa-prose display-inline-block">{children}</div>;
   };
 
-  const renderElement = (children: ReactElement) => {
+  const renderElement = (children: ReactElement<any>) => {
     return <div className="display-inline-block">{children}</div>;
   };
 

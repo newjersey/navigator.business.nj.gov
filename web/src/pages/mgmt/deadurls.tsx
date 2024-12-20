@@ -15,7 +15,7 @@ interface Props {
   noAuth: boolean;
 }
 
-const DeadUrlsPage = (props: Props): ReactElement => {
+const DeadUrlsPage = (props: Props): ReactElement<any> => {
   const [isAuthed, setIsAuthed] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
   const config = getMergedConfig();

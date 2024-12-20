@@ -30,7 +30,7 @@ const HousingRegistrationSearchErrorLookup: Record<
     Config.housingRegistrationSearchTask.errorTextNoMultipleDwellingRegistrations,
 };
 
-export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
+export const CheckHousingRegistrationStatus = (props: Props): ReactElement<any> => {
   const [formValues, setFormValues] = useState<HousingAddress>({ address1: "" });
   const [selectedMunicipality, setSelectedMunicipality] = useState<Municipality | undefined>(undefined);
   const { business, updateQueue } = useUserData();
@@ -101,7 +101,7 @@ export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
     };
   };
 
-  const getErrorAlert = (): ReactElement => {
+  const getErrorAlert = (): ReactElement<any> => {
     if (!props.error) {
       return <></>;
     }

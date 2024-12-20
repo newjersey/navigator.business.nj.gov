@@ -17,7 +17,7 @@ interface Props {
   noPriorityStatus: boolean;
 }
 
-export const CannabisApplicationQuestionsTab = (props: Props): ReactElement => {
+export const CannabisApplicationQuestionsTab = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   return (

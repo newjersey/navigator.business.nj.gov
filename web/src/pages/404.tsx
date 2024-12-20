@@ -5,7 +5,7 @@ import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer"
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement } from "react";
 
-const PageNotFound = (): ReactElement => {
+const PageNotFound = (): ReactElement<any> => {
   const { Config } = useConfig();
 
   return (

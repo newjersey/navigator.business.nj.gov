@@ -10,7 +10,7 @@ interface Props {
   hasTopBorder?: boolean;
 }
 
-export const ProfileTab = (props: Props): ReactElement => {
+export const ProfileTab = (props: Props): ReactElement<any> => {
   return (
     <button
       className="cursor-pointer profile-tab-nav-button bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3 border-2px border-base-lighter btn-profile-hoverstate line-height-120"

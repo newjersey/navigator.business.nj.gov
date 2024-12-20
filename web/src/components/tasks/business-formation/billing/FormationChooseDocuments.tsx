@@ -6,7 +6,7 @@ import { getDollarValue } from "@/lib/utils/formatters";
 import { Checkbox } from "@mui/material";
 import { ReactElement, useContext, useEffect, useState } from "react";
 
-export const FormationChooseDocuments = (): ReactElement => {
+export const FormationChooseDocuments = (): ReactElement<any> => {
   const { Config } = useConfig();
 
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);

@@ -6,7 +6,7 @@ import { ProfileContentField } from "@/lib/types/types";
 import { getFieldsForProfile, isFieldAnswered } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
-export const ProfileOpportunitiesAlert = (): ReactElement => {
+export const ProfileOpportunitiesAlert = (): ReactElement<any> => {
   const { state } = useContext(ProfileDataContext);
   const { Config } = useConfig();
   const unansweredOpportunityFields = getFieldsForProfile(state.profileData).filter((field) => {

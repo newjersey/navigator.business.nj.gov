@@ -32,7 +32,7 @@ interface Props {
 const APPLICATION_TAB_INDEX = 0;
 const STATUS_TAB_INDEX = 1;
 
-export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
+export const HotelMotelRegistrationTask = (props: Props): ReactElement<any> => {
   const { roadmap } = useRoadmap();
   const callToActionLink = getModifiedTaskContent(roadmap, props.task, "callToActionLink");
   const [tabIndex, setTabIndex] = useState(APPLICATION_TAB_INDEX);

@@ -17,7 +17,7 @@ interface Props {
   task: Task;
 }
 
-export const EinTask = (props: Props): ReactElement => {
+export const EinTask = (props: Props): ReactElement<any> => {
   const [showInput, setShowInput] = useState<boolean>(true);
   const { business, updateQueue } = useUserData();
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);

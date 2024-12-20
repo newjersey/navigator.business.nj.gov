@@ -11,7 +11,7 @@ interface Props {
 const uswdsFileImagePreview =
   "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
-export const ReviewForeignCertificate = (props: Props): ReactElement => {
+export const ReviewForeignCertificate = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   return (
     <ReviewSubSection header={Config.formation.fields.foreignGoodStandingFile.label}>

@@ -6,7 +6,7 @@ import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { ReactElement, useState } from "react";
 
-const DashboardModalsPreview = (props: PreviewProps): ReactElement => {
+const DashboardModalsPreview = (props: PreviewProps): ReactElement<any> => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

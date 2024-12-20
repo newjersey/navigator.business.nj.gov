@@ -67,7 +67,7 @@ interface Props extends React.HTMLProps<HTMLHeadingElement> {
 }
 
 export const Heading: React.FC<Props> = (props) => {
-  let headingElement: ReactElement;
+  let headingElement: ReactElement<any>;
   const { level, styleVariant, children, className, ...defaultProps } = props;
   const classList = determineClassNames(level, styleVariant, className);
 

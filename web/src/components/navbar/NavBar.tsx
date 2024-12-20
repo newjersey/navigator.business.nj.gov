@@ -17,7 +17,7 @@ type Props = {
   previousBusinessId?: string | undefined;
 };
 
-export const NavBar = (props: Props): ReactElement => {
+export const NavBar = (props: Props): ReactElement<any> => {
   const [scrolled, setScrolled] = useState(false);
   const { userData } = useUserData();
 

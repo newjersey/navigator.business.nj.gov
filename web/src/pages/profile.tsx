@@ -102,7 +102,7 @@ interface Props {
   CMS_ONLY_fakeBusiness?: Business;
 }
 
-const ProfilePage = (props: Props): ReactElement => {
+const ProfilePage = (props: Props): ReactElement<any> => {
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const router = useRouter();
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);

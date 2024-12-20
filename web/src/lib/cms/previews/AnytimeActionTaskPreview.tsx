@@ -5,7 +5,7 @@ import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { AnytimeActionTask } from "@/lib/types/types";
 import { ReactElement } from "react";
 
-const AnytimeActionTaskPreview = (props: PreviewProps): ReactElement => {
+const AnytimeActionTaskPreview = (props: PreviewProps): ReactElement<any> => {
   const ref = usePreviewRef(props);
   const anytimeAction = usePageData<AnytimeActionTask>(props);
 

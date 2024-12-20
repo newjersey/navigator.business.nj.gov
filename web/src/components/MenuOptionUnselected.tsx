@@ -5,7 +5,7 @@ interface Props {
   secondaryText?: ReactNode;
 }
 
-export const MenuOptionUnselected = (props: Props): ReactElement => {
+export const MenuOptionUnselected = (props: Props): ReactElement<any> => {
   return (
     <>
       <div className="padding-left-205 text-wrap padding-right-205" data-testid="option">

@@ -10,7 +10,7 @@ import { templateEval } from "@/lib/utils/helpers";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
 
-export const HideableTasks = (): ReactElement => {
+export const HideableTasks = (): ReactElement<any> => {
   const { updateQueue, business } = useUserData();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();

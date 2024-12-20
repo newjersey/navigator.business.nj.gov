@@ -1,7 +1,7 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { Box, ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
-import React, { ReactElement, ReactNode, useEffect, useRef, useState } from "react";
+import React, { ReactElement, ReactNode, useEffect, useRef, useState, type JSX } from "react";
 
 type ButtonDropdownOption = {
   text: string;
@@ -15,13 +15,13 @@ interface Props {
   name?: string;
   dropdownOptions: ButtonDropdownOption[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  wrapper?: (props: { children: ReactNode; [key: string]: any }) => ReactElement;
+  wrapper?: (props: { children: ReactNode; [key: string]: any }) => ReactElement<any>;
   dropdownClassName?: string;
   horizontal?: boolean;
   hideDivider?: boolean;
 }
 
-export const CalendarButtonDropdown = (props: Props): ReactElement => {
+export const CalendarButtonDropdown = (props: Props): ReactElement<any> => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement | null>(null);
   const prevOpen = useRef(open);
@@ -61,7 +61,7 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
     children: ReactNode;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
-  }): ReactElement => (
+  }): ReactElement<any> => (
     <UnStyledButton isTextBold isSmallerText {...props}>
       {children}
     </UnStyledButton>
@@ -69,7 +69,7 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
 
   const Wrapper = props.wrapper ?? DefaultButton;
 
-  const DropdownMenu = (): ReactElement => {
+  const DropdownMenu = (): ReactElement<any> => {
     return (
       <MenuList
         autoFocusItem={open}

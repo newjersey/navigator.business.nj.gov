@@ -7,7 +7,7 @@ import {
 import { Checkbox, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { ReactElement, ReactNode, useContext } from "react";
 
-export const Ownership = (): ReactElement => {
+export const Ownership = (): ReactElement<any> => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const NONE_OF_THE_ABOVE = "none";
 

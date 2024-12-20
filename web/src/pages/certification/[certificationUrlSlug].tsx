@@ -22,7 +22,7 @@ interface Props {
   certification: Certification;
 }
 
-export const CertificationElement = (props: { certification: Certification }): ReactElement => {
+export const CertificationElement = (props: { certification: Certification }): ReactElement<any> => {
   const { business } = useUserData();
 
   const addNaicsCodeData = (contentMd: string): string => {
@@ -55,7 +55,7 @@ export const CertificationElement = (props: { certification: Certification }): R
   );
 };
 
-const CertificationPage = (props: Props): ReactElement => {
+const CertificationPage = (props: Props): ReactElement<any> => {
   return (
     <>
       {props.certification.name && <NextSeo title={getNextSeoTitle(props.certification.name)} />}

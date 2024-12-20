@@ -13,7 +13,7 @@ type Props = {
   card: SidebarCardContent;
 };
 
-export const SidebarCardFundingNudge = (props: Props): ReactElement => {
+export const SidebarCardFundingNudge = (props: Props): ReactElement<any> => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const router = useRouter();
   const { updateQueue, business } = useUserData();

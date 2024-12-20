@@ -14,7 +14,7 @@ import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalSt
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
-export const DashboardHeader = (): ReactElement => {
+export const DashboardHeader = (): ReactElement<any> => {
   const { state } = useContext(AuthContext);
   const { Config } = useConfig();
   const { business, userData } = useUserData();

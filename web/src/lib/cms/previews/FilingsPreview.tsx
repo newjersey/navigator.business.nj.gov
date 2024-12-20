@@ -5,7 +5,7 @@ import { Filing } from "@/lib/types/types";
 import { FilingElement } from "@/pages/filings/[filingUrlSlug]";
 import { ReactElement } from "react";
 
-const FilingsPreview = (props: PreviewProps): ReactElement => {
+const FilingsPreview = (props: PreviewProps): ReactElement<any> => {
   const ref = usePreviewRef(props);
   const filing = usePageData<Filing>(props);
 

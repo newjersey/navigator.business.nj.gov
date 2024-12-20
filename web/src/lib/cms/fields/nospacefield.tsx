@@ -56,7 +56,7 @@ class NoSpaceControl extends Component<NoSpaceProps, NoSpaceState> {
     this.props.onChange(e.target.value.trim());
   };
 
-  render(): ReactElement {
+  render(): ReactElement<any> {
     const { forID, value, classNameWrapper, setActiveStyle, setInactiveStyle } = this.props;
     return (
       <input

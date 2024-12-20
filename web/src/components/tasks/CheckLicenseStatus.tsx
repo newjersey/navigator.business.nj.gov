@@ -41,7 +41,7 @@ const LicenseSearchErrorLookup: Record<LicenseSearchError, string> = {
   SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
 };
 
-export const CheckLicenseStatus = (props: Props): ReactElement => {
+export const CheckLicenseStatus = (props: Props): ReactElement<any> => {
   const classes = useStyles();
   const [formValues, setFormValues] = useState<LicenseSearchNameAndAddress>(
     createEmptyLicenseSearchNameAndAddress()
@@ -101,7 +101,7 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
     };
   };
 
-  const getErrorAlert = (): ReactElement => {
+  const getErrorAlert = (): ReactElement<any> => {
     if (!props.error) {
       return <></>;
     } else if (props.error === "NOT_FOUND") {

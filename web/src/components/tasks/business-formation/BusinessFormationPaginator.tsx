@@ -31,7 +31,7 @@ import { Business, FormationFormData, getCurrentBusiness } from "@businessnjgovn
 import { useRouter } from "next/router";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
-export const BusinessFormationPaginator = (): ReactElement => {
+export const BusinessFormationPaginator = (): ReactElement<any> => {
   const { updateQueue, business } = useUserData();
   const { state, setStepIndex, setHasBeenSubmitted, setFormationFormData, setFieldsInteracted } =
     useContext(BusinessFormationContext);

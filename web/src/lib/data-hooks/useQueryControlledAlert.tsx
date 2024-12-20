@@ -15,7 +15,7 @@ interface QueryControlledAlertConfig {
   delayInMilliseconds?: number;
 }
 
-export const useQueryControlledAlert = (config: QueryControlledAlertConfig): ReactElement => {
+export const useQueryControlledAlert = (config: QueryControlledAlertConfig): ReactElement<any> => {
   const router = useRouter();
   const [alertIsVisible, setAlertIsVisible] = useState<boolean>(false);
   const effectOccurred = useRef<boolean>(false);

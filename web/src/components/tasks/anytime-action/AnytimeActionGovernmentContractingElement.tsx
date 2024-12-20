@@ -8,7 +8,7 @@ interface Props {
   anytimeAction: AnytimeActionLicenseReinstatement | AnytimeActionTask;
 }
 
-export const AnytimeActionGovernmentContractingElement = (props: Props): ReactElement => {
+export const AnytimeActionGovernmentContractingElement = (props: Props): ReactElement<any> => {
   return (
     <div className="min-height-38rem">
       <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 radius-top-lg">

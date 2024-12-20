@@ -2,6 +2,8 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { ThemeProvider } from "@mui/material";
 import muiTheme from "../../muiTheme";
 
+import type { JSX } from "react";
+
 type ReturnType = (props: PreviewProps) => JSX.Element;
 
 export const applyTheme = (child: ReturnType): ReturnType => {

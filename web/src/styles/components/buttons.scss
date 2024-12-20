@@ -1,5 +1,8 @@
+@use "../sass-files/mixin";
+@use "../sass-files/variables";
+
 .usa-button--outline {
-  background-color: $white !important;
+  background-color: variables.$white !important;
 }
 
 .usa-button--simple {
@@ -8,7 +11,7 @@
 }
 
 .usa-button--unstyled {
-  color: $accent-cool-darkest !important;
+  color: variables.$accent-cool-darkest !important;
   @extend .usa-button--simple;
   > .dashed-underline > h1,
   h2,
@@ -16,7 +19,7 @@
   h4,
   h5,
   h6 {
-    color: $primary !important;
+    color: variables.$primary !important;
     margin-bottom: 0;
     margin-top: 0;
     clear: both;
@@ -57,107 +60,107 @@
 
 .task-checkbox-base-lighter:hover,
 .task-checkbox-base-lighter:focus {
-  background-color: $base-lighter;
+  background-color: variables.$base-lighter;
 }
 
 .task-checkbox-accent-cool-lighter:hover,
 .task-checkbox-accent-cool-lighter:focus {
-  background-color: $accent-cool-lighter;
+  background-color: variables.$accent-cool-lighter;
 }
 
 .task-checkbox-primary-lightest:hover,
 .task-checkbox-primary-lightest:focus {
-  background-color: $primary-lightest;
+  background-color: variables.$primary-lightest;
 }
 
 .btn-accent-cool-darker {
-  background-color: $accent-cool-darker !important;
+  background-color: variables.$accent-cool-darker !important;
   &:hover {
-    background-color: $accent-cool-darkest !important;
+    background-color: variables.$accent-cool-darkest !important;
   }
   &:active {
-    background-color: $accent-cool-more-dark !important;
+    background-color: variables.$accent-cool-more-dark !important;
   }
 }
 
 .btn-accent-cool-darker {
-  background-color: $accent-cool-darker !important;
+  background-color: variables.$accent-cool-darker !important;
   &:hover {
-    background-color: $accent-cool-darkest !important;
+    background-color: variables.$accent-cool-darkest !important;
   }
   &:active {
-    background-color: $accent-cool-more-dark !important;
+    background-color: variables.$accent-cool-more-dark !important;
   }
 }
 
 .btn-accent-cooler {
-  background-color: $accent-cooler !important;
+  background-color: variables.$accent-cooler !important;
   &:hover {
-    background-color: $accent-cooler-dark !important;
+    background-color: variables.$accent-cooler-dark !important;
   }
   &:active {
-    background-color: $accent-cooler-darker !important;
+    background-color: variables.$accent-cooler-darker !important;
   }
 }
 
 .btn-error-dark {
-  background-color: $error-dark !important;
+  background-color: variables.$error-dark !important;
   &:hover {
-    background-color: $accent-hot-darker !important;
+    background-color: variables.$accent-hot-darker !important;
   }
   &:active {
-    background-color: $error-darker !important;
+    background-color: variables.$error-darker !important;
   }
 }
 
 .btn-accent-semi-cool {
-  background-color: $accent-semi-cool-700 !important;
+  background-color: variables.$accent-semi-cool-700 !important;
   &:hover {
-    background-color: $accent-semi-cool-800 !important;
+    background-color: variables.$accent-semi-cool-800 !important;
   }
   &:active {
-    background-color: $accent-semi-cool-900 !important;
+    background-color: variables.$accent-semi-cool-900 !important;
   }
 }
 
 .btn-success-extra-light {
-  color: $primary-dark !important;
-  background: $success-extra-light;
+  color: variables.$primary-dark !important;
+  background: variables.$success-extra-light;
   &:hover {
-    background-color: $success-lighter !important;
+    background-color: variables.$success-lighter !important;
   }
   &:active {
-    background-color: $primary-lighter !important;
+    background-color: variables.$primary-lighter !important;
   }
 }
 
 .btn-accent-cool-lightest {
-  background-color: $accent-cool-lightest !important;
-  color: $base-darkest !important;
+  background-color: variables.$accent-cool-lightest !important;
+  color: variables.$base-darkest !important;
   &:hover {
-    background-color: $accent-cool-lighter !important;
+    background-color: variables.$accent-cool-lighter !important;
   }
   &:active {
-    background-color: $accent-cool-light !important;
+    background-color: variables.$accent-cool-light !important;
   }
 }
 
 .btn-white {
   &:hover {
-    @include addDropShadow($drop-shadow-md);
+    @include mixin.addDropShadow(variables.$drop-shadow-md);
   }
 
-  background-color: $white !important;
+  background-color: variables.$white !important;
 
   &:active {
-    background-color: $base-lighter !important;
+    background-color: variables.$base-lighter !important;
   }
 }
 
 .btn-profile-hoverstate {
   &:hover,
   & .selected {
-    color: $primary-dark;
+    color: variables.$primary-dark;
     font-weight: bold;
     opacity: 0.8;
   }
@@ -172,9 +175,9 @@
   padding: 0;
   transform: translate(0, -50%);
   cursor: pointer;
-  color: $secondary;
+  color: variables.$secondary;
   border: none;
-  background-color: $white;
+  background-color: variables.$white;
   opacity: 90%;
 
   &.next {
@@ -193,10 +196,10 @@
     width: 4.375rem;
     height: 5rem;
     &:hover {
-      color: $secondary-dark;
+      color: variables.$secondary-dark;
     }
     &:active {
-      color: $secondary-dark;
+      color: variables.$secondary-dark;
     }
   }
 }
@@ -208,26 +211,26 @@
   padding: 2.5rem 1.5rem;
   gap: 1rem;
   font-weight: bold;
-  background-color: $accent-cool-lightest;
+  background-color: variables.$accent-cool-lightest;
   height: 4.25rem;
   width: 100%;
-  border: 0.125rem solid $secondary-lighter;
+  border: 0.125rem solid variables.$secondary-lighter;
   border-radius: 0.625rem;
   cursor: pointer;
   color: black;
   &:hover {
-    @include addDropShadow($drop-shadow-md);
-    border: 0.125rem solid $primary-light;
+    @include mixin.addDropShadow(variables.$drop-shadow-md);
+    border: 0.125rem solid variables.$primary-light;
     color: black;
   }
   &:active {
-    background-color: $secondary-lighter;
+    background-color: variables.$secondary-lighter;
   }
   &:focus {
     outline-offset: 0.25rem;
   }
 
-  @media (max-width: $md) {
+  @media (max-width: variables.$md) {
     width: 16.5rem;
     padding: 0.5rem 1rem;
   }
@@ -236,13 +239,13 @@
 .landing-page-secondary-tile {
   @extend .landing-page-tile;
   font-weight: normal;
-  background-color: $white;
-  border: 0.125rem solid $base-lighter;
+  background-color: variables.$white;
+  border: 0.125rem solid variables.$base-lighter;
   &:hover {
-    background-color: $white;
+    background-color: variables.$white;
   }
   &:active {
-    background-color: $base-lightest;
+    background-color: variables.$base-lightest;
   }
 }
 

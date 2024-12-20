@@ -2,7 +2,7 @@ import { CalendarButtonDropdown } from "@/components/njwds-extended/CalendarButt
 import { Icon } from "@/components/njwds/Icon";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { IconButton } from "@mui/material";
-import { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, type JSX } from "react";
 
 const colors = {
   active: "usa-button",
@@ -15,7 +15,7 @@ type Props = {
   activeYear: string;
   years: string[];
 };
-export const ThreeYearSelector = (props: Props): ReactElement => {
+export const ThreeYearSelector = (props: Props): ReactElement<any> => {
   const getColors = (year: string): string | undefined => {
     if (year === props.activeYear) return colors["active"];
     if (year === getCurrentDate().year().toString()) return colors["current"];

@@ -22,7 +22,7 @@ interface Props {
 
 const Config = getMergedConfig();
 
-export const LicenseDetailReceipt = (props: Props): ReactElement => {
+export const LicenseDetailReceipt = (props: Props): ReactElement<any> => {
   const { business } = useUserData();
 
   const getOneLineAddress = (): string => {
@@ -35,7 +35,7 @@ export const LicenseDetailReceipt = (props: Props): ReactElement => {
     return `${nameAndAddress.addressLine1}${secondLineAddress}, ${nameAndAddress.zipCode} NJ`;
   };
 
-  const receiptItem = (item: LicenseStatusItem, index: number): ReactElement => {
+  const receiptItem = (item: LicenseStatusItem, index: number): ReactElement<any> => {
     return (
       <div key={index} data-testid={`item-${item.status}`}>
         <div

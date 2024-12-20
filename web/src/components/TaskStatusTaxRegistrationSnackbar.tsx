@@ -8,7 +8,7 @@ interface Props {
   close: () => void;
 }
 
-export const TaskStatusTaxRegistrationSnackbar = (props: Props): ReactElement => {
+export const TaskStatusTaxRegistrationSnackbar = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   return (

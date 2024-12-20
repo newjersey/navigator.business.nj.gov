@@ -9,13 +9,13 @@ import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { Dispatch, ReactElement, SetStateAction } from "react";
 
 export const withAuth = (
-  subject: ReactElement,
+  subject: ReactElement<any>,
   context: {
     activeUser?: ActiveUser;
     dispatch?: Dispatch<AuthAction>;
     isAuthenticated?: IsAuthenticated;
   }
-): ReactElement => {
+): ReactElement<any> => {
   const isAuthenticated =
     context.isAuthenticated || (context.activeUser ? IsAuthenticated.TRUE : IsAuthenticated.FALSE);
   const dispatch = context.dispatch || jest.fn();
@@ -24,10 +24,10 @@ export const withAuth = (
 };
 
 export const withContextualInfo = (
-  subject: ReactElement,
+  subject: ReactElement<any>,
   contextualInfo: ContextualInfo,
   setContextualInfo: Dispatch<SetStateAction<ContextualInfo>>
-): ReactElement => {
+): ReactElement<any> => {
   return (
     <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
       {subject}
@@ -36,7 +36,7 @@ export const withContextualInfo = (
 };
 
 export const withNeedsAccountContext = (
-  subject: ReactElement,
+  subject: ReactElement<any>,
   isAuthenticated: IsAuthenticated,
   context?: {
     showNeedsAccountSnackbar?: boolean;
@@ -46,7 +46,7 @@ export const withNeedsAccountContext = (
     setShowNeedsAccountSnackbar?: (value: boolean) => void;
     setShowNeedsAccountModal?: (value: boolean) => void;
   }
-): ReactElement => {
+): ReactElement<any> => {
   return (
     <NeedsAccountContext.Provider
       value={{
@@ -65,10 +65,10 @@ export const withNeedsAccountContext = (
 };
 
 export const withUserDataError = (
-  subject: ReactElement,
+  subject: ReactElement<any>,
   userDataError: UserDataError | undefined,
   setUserDataError?: (userDataError: UserDataError | undefined) => void
-): ReactElement => {
+): ReactElement<any> => {
   return (
     <UserDataErrorContext.Provider value={{ userDataError, setUserDataError: setUserDataError || jest.fn() }}>
       {subject}
@@ -77,10 +77,10 @@ export const withUserDataError = (
 };
 
 export const withRoadmap = (params: {
-  component: ReactElement;
+  component: ReactElement<any>;
   initialRoadmap: Roadmap | undefined;
   mockSetRoadmapFunction?: (roadmap: Roadmap | undefined) => void;
-}): ReactElement => {
+}): ReactElement<any> => {
   return (
     <RoadmapContext.Provider
       value={{

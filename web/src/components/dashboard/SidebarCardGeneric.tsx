@@ -14,7 +14,7 @@ type Props = {
   ctaOnClick?: () => void;
 };
 
-export const SidebarCardGeneric = (props: Props): ReactElement => {
+export const SidebarCardGeneric = (props: Props): ReactElement<any> => {
   const { hideCard } = useSidebarCards();
 
   const closeSelf = async (): Promise<void> => {

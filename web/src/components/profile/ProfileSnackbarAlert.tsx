@@ -9,7 +9,7 @@ interface Props {
   close: () => void;
 }
 
-export const ProfileSnackbarAlert = (props: Props): ReactElement => {
+export const ProfileSnackbarAlert = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const content = OnboardingStatusLookup(Config)[props.alert];
   return (

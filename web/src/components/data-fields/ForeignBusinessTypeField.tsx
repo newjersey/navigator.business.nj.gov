@@ -26,7 +26,7 @@ const allForeignBusinessTypeIdsOrdered = [
 interface Props<T> extends FormContextFieldProps<T> {
   required?: boolean;
 }
-export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
+export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement<any> => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 

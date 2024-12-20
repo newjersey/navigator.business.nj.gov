@@ -40,7 +40,7 @@ interface Props {
   licenseEvents: LicenseEventType[];
 }
 
-export const DashboardOnDesktop = (props: Props): ReactElement => {
+export const DashboardOnDesktop = (props: Props): ReactElement<any> => {
   const { business } = useUserData();
   const router = useRouter();
   const operatingPhase = LookupOperatingPhaseById(business?.profileData.operatingPhase);

@@ -11,7 +11,7 @@ import { getBusinessById } from "@businessnjgovnavigator/shared/domain-logic/get
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
-const UnsupportedPage = (): ReactElement => {
+const UnsupportedPage = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { userData } = useUserData();
   const router = useRouter();

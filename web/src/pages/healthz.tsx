@@ -1,7 +1,7 @@
 import { GetStaticPropsResult } from "next";
 import { ReactElement } from "react";
 
-const HealthCheck = (): ReactElement => {
+const HealthCheck = (): ReactElement<any> => {
   return <>Application is healthy</>;
 };
 

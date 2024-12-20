@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 
 export const ResponsibleOwnerName = (
   props: Omit<DataFieldProps, "fieldName" | "inputWidth">
-): ReactElement => {
+): ReactElement<any> => {
   return (
     <DataField
       fieldName="responsibleOwnerName"

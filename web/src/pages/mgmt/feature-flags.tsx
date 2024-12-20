@@ -12,7 +12,7 @@ interface Props {
   noAuth: boolean;
 }
 
-const FeatureFlagsPage = (props: Props): ReactElement => {
+const FeatureFlagsPage = (props: Props): ReactElement<any> => {
   const [isAuthed, setIsAuthed] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
   const config = getMergedConfig();

@@ -7,7 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import { ReactElement, useState } from "react";
 
-export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement => {
+export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement<any> => {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
 
   const open = (): void => {

@@ -25,7 +25,7 @@ import {
 import { Checkbox, FormHelperText, MenuItem, Select, useMediaQuery } from "@mui/material";
 import { ChangeEvent, ReactElement, ReactNode, useContext, useMemo } from "react";
 
-export const Signatures = (): ReactElement => {
+export const Signatures = (): ReactElement<any> => {
   const FIELD_NAME = "signers";
   const SIGNER_NAME_MAX_LEN = 50;
   const { Config } = useConfig();

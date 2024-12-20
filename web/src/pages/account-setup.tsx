@@ -22,7 +22,7 @@ import { BusinessUser, createEmptyUser } from "@businessnjgovnavigator/shared/bu
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
-const AccountSetupPage = (): ReactElement => {
+const AccountSetupPage = (): ReactElement<any> => {
   usePageWithNeedsAccountSnackbar();
   const { Config } = useConfig();
   const { updateQueue, userData } = useUserData();

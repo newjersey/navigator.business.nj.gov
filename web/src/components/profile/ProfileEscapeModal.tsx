@@ -9,7 +9,7 @@ interface Props {
   primaryButtonOnClick: () => void;
 }
 
-export const ProfileEscapeModal = (props: Props): ReactElement => {
+export const ProfileEscapeModal = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   return (
     <ModalTwoButton

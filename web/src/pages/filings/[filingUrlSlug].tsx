@@ -1,7 +1,8 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Callout } from "@/components/Callout";
-import { Content, ExternalLink } from "@/components/Content";
+import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
+import { ExternalLink } from "@/components/MdxProvider";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { Tag } from "@/components/njwds-extended/Tag";
@@ -40,7 +41,7 @@ export const FilingElement = (props: {
   filing: Filing;
   dueDate: string;
   preview?: boolean;
-}): ReactElement => {
+}): ReactElement<any> => {
   return (
     <>
       <div className="min-height-38rem">
@@ -197,7 +198,7 @@ export const FilingElement = (props: {
   );
 };
 
-const FilingPage = (props: Props): ReactElement => {
+const FilingPage = (props: Props): ReactElement<any> => {
   const { business } = useUserData();
   const matchingFiling = sortCalendarEventsEarliestToLatest(business?.taxFilingData.filings ?? []).find(
     (it: TaxFilingCalendarEvent) => it.identifier === props.filing.id

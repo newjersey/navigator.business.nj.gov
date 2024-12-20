@@ -11,13 +11,13 @@ import { LookupSectorTypeById, SectorType, arrayOfSectors as sectors } from "@bu
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
 import { Autocomplete, TextField } from "@mui/material";
 import { orderBy } from "lodash";
-import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
+import React, { ChangeEvent, ReactElement, useContext, useState, type JSX } from "react";
 
 interface Props<T> extends FormContextFieldProps<T> {
   isSectorModal?: boolean;
 }
 
-export const Sectors = <T,>(props: Props<T>): ReactElement => {
+export const Sectors = <T,>(props: Props<T>): ReactElement<any> => {
   const [searchText, setSearchText] = useState<string>("");
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();

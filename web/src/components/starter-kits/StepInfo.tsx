@@ -2,7 +2,7 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { Step } from "@/lib/types/types";
 import { ReactElement } from "react";
 
-export const StepInfo = (props: { step: Step; taskNames: string[] }): ReactElement => {
+export const StepInfo = (props: { step: Step; taskNames: string[] }): ReactElement<any> => {
   return (
     <div className="flex-basis-100">
       <div className="margin-top-05 margin-bottom-2">

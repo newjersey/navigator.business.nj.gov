@@ -9,7 +9,7 @@ import { PaymentType } from "@businessnjgovnavigator/shared/";
 import { FormHelperText, Radio } from "@mui/material";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 
-export const PaymentTypeTable = (): ReactElement => {
+export const PaymentTypeTable = (): ReactElement<any> => {
   const fieldName = "paymentType";
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);

@@ -19,7 +19,7 @@ import { determineIfNexusDbaNameNeeded } from "@businessnjgovnavigator/shared/";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
-export const DbaFormationPaginator = (): ReactElement => {
+export const DbaFormationPaginator = (): ReactElement<any> => {
   const { business, updateQueue } = useUserData();
   const { state, setStepIndex } = useContext(BusinessFormationContext);
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
@@ -111,7 +111,7 @@ export const DbaFormationPaginator = (): ReactElement => {
       analytics.event.business_formation_dba_authorization_step_continue_button.click.arrive_on_business_formation_dba_authorization_step();
     }
   };
-  const ForwardButton = (): ReactElement => {
+  const ForwardButton = (): ReactElement<any> => {
     const getForwardButtonText = (): string => {
       if (isAuthenticated === IsAuthenticated.FALSE && !isDba) {
         return `Register & ${Config.formation.general.initialNextButtonText}`;
@@ -136,7 +136,7 @@ export const DbaFormationPaginator = (): ReactElement => {
     );
   };
 
-  const BackButton = (): ReactElement => (
+  const BackButton = (): ReactElement<any> => (
     <div
       className={
         " margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-105 width-full mobile-lg:width-auto"

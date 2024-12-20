@@ -14,7 +14,7 @@ import {
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
-export const MainBusinessForeignAddressFlow = (): ReactElement => {
+export const MainBusinessForeignAddressFlow = (): ReactElement<any> => {
   type FlowBusinessLocationType = Exclude<FormationBusinessLocationType, "NJ">;
   const { Config } = useConfig();
   const { state, setFieldsInteracted, setFormationFormData } = useContext(BusinessFormationContext);

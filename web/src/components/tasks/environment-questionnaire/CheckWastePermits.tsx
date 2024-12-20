@@ -9,7 +9,7 @@ import { ReactElement } from "react";
 interface Props {
   task: Task;
 }
-export const CheckWastePermits = (props: Props): ReactElement => {
+export const CheckWastePermits = (props: Props): ReactElement<any> => {
   const { business } = useUserData();
 
   return (

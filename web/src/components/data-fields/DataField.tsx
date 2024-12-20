@@ -14,7 +14,7 @@ export interface DataFieldProps<T = unknown> extends Omit<GenericTextFieldProps<
   type?: HTMLInputTypeAttribute;
 }
 
-export const DataField = <T,>({ fieldName, className, ...props }: DataFieldProps<T>): ReactElement => {
+export const DataField = <T,>({ fieldName, className, ...props }: DataFieldProps<T>): ReactElement<any> => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
   const { Config } = useConfig();

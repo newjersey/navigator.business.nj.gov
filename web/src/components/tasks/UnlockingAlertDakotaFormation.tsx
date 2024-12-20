@@ -11,7 +11,7 @@ interface Props {
   dataTestid?: string;
 }
 
-export const UnlockingAlertDakotaFormation = (props: Props): ReactElement => {
+export const UnlockingAlertDakotaFormation = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   if (props.taskLinks.length === 0 && !props.isLoading) {

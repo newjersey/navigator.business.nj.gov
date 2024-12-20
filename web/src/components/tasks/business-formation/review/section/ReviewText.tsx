@@ -12,7 +12,7 @@ interface Props {
   fieldName: FormationTextField;
   isExpandable?: boolean;
 }
-export const ReviewText = (props: Props): ReactElement => {
+export const ReviewText = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
   const kebabCaseFieldName = camelCaseToKebabCase(props.fieldName);

@@ -21,7 +21,7 @@ interface Props {
   CMS_ONLY_tab?: string;
 }
 
-export const CannabisPriorityRequirements = (props: Props): ReactElement => {
+export const CannabisPriorityRequirements = (props: Props): ReactElement<any> => {
   const [displayMWPriorityType, setDisplayMWPriorityType] = useState(false);
   const [displayVeteranPriorityType, setDisplayVeteranPriorityType] = useState(false);
   const [displayImpactZonePriorityType, setDisplayImpactZonePriorityType] = useState(false);
@@ -119,7 +119,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
     }
   };
 
-  const expandMoreIcon = (): ReactElement => {
+  const expandMoreIcon = (): ReactElement<any> => {
     return <Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />;
   };
 

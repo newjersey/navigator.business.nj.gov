@@ -13,7 +13,7 @@ interface Props {
   dataTestid?: string;
 }
 
-export const UnlockingAlert = (props: Props): ReactElement => {
+export const UnlockingAlert = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   if (props.taskLinks.length === 0 && !props.isLoading) {

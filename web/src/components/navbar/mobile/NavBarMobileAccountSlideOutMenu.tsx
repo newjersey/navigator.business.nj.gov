@@ -11,7 +11,7 @@ interface Props {
   showSidebar?: boolean;
   hideMiniRoadmap?: boolean;
   task?: Task;
-  subMenuElement: ReactElement[];
+  subMenuElement: ReactElement<any>[];
   closeSideBar: () => void;
   openSideBar: () => void;
   isSideBarOpen: boolean;
@@ -19,7 +19,7 @@ interface Props {
   CMS_PREVIEW_ONLY_SHOW_MENU?: boolean;
 }
 
-export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement => {
+export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement<any> => {
   return (
     <>
       <button

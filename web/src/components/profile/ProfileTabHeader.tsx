@@ -7,7 +7,7 @@ interface Props {
   tab: ProfileTabs;
 }
 
-export const ProfileTabHeader = (props: Props): ReactElement => {
+export const ProfileTabHeader = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   const getTitle = (): string => {

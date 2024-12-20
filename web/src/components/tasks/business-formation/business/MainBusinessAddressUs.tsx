@@ -8,7 +8,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { ReactElement, useContext } from "react";
 
-export const MainBusinessAddressUs = (): ReactElement => {
+export const MainBusinessAddressUs = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useFormationErrors();

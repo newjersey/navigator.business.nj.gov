@@ -10,7 +10,7 @@ import Profile from "@/pages/profile";
 import { createEmptyProfileData, generateBusiness } from "@businessnjgovnavigator/shared";
 import { ReactElement, useState } from "react";
 
-const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
+const ProfilePreviewMisc = (props: PreviewProps): ReactElement<any> => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

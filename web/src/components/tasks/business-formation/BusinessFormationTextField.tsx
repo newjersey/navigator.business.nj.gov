@@ -14,7 +14,7 @@ export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"
   readOnly?: boolean;
 }
 
-export const BusinessFormationTextField = ({ className, ...props }: Props): ReactElement => {
+export const BusinessFormationTextField = ({ className, ...props }: Props): ReactElement<any> => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doesFieldHaveError } = useFormationErrors();
 

@@ -27,7 +27,7 @@ export interface GenericButtonProps {
 export const GenericButton = forwardRef(function GenericButton(
   props: GenericButtonProps,
   ref?: Ref<HTMLButtonElement> | undefined
-): ReactElement {
+): ReactElement<any> {
   const disabledClass = "usa-button--disabled";
   const showDisabledClass = props.isLoading ? disabledClass : "";
   const noRightMargin = props.isRightMarginRemoved ? "margin-right-0" : "margin-right-2";

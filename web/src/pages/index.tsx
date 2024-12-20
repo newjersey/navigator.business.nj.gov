@@ -21,7 +21,7 @@ import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
-const Home = (): ReactElement => {
+const Home = (): ReactElement<any> => {
   const { business, userData, error } = useUserData();
   const { state } = useContext(AuthContext);
   const { Config } = useConfig();
@@ -95,7 +95,7 @@ const Home = (): ReactElement => {
     imageSrc: string,
     imageAlt: string,
     reverseOrder?: boolean
-  ): ReactElement => {
+  ): ReactElement<any> => {
     return (
       <div className={`${isDesktopAndUp ? "landing-two-column-row" : "landing-one-column-row"}`}>
         <div className="grid-row margin-x-05">

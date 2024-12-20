@@ -22,7 +22,7 @@ interface Props {
   task: Task;
 }
 
-export const TaxInput = (props: Props): ReactElement => {
+export const TaxInput = (props: Props): ReactElement<any> => {
   const { business, updateQueue } = useUserData();
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
@@ -88,7 +88,7 @@ export const TaxInput = (props: Props): ReactElement => {
       });
   });
 
-  const DisabledElement = (props: { children: ReactNode }): ReactElement => (
+  const DisabledElement = (props: { children: ReactNode }): ReactElement<any> => (
     <div className={`flex ${isTabletAndUp ? "flex-row" : "flex-column margin-right-2"} no-wrap`}>
       <div className={`${isTabletAndUp ? "padding-right-1" : ""}`}>{Config.tax.lockedPreText}</div>
       <div>{props.children}</div>

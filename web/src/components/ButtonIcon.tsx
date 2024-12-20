@@ -5,7 +5,7 @@ interface Props {
   sizePx?: string;
 }
 
-export const ButtonIcon = (props: Props): ReactElement => {
+export const ButtonIcon = (props: Props): ReactElement<any> => {
   const sizePx = props.sizePx ?? "20px";
 
   return (

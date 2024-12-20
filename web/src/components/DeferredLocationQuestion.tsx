@@ -16,7 +16,7 @@ interface Props {
   CMS_ONLY_fakeBusiness?: Business;
 }
 
-export const DeferredLocationQuestion = (props: Props): ReactElement => {
+export const DeferredLocationQuestion = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const userDataFromHook = useUserData();
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;

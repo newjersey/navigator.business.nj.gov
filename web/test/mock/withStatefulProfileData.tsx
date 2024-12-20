@@ -19,7 +19,7 @@ export const profileDataWasNotUpdated = helpers.dataWasNotUpdated;
 
 export const profileDataUpdatedNTimes = helpers.dataUpdatedNTimes;
 
-export const WithStatefulProfileFormContext = ({ children }: { children: ReactNode }): ReactElement => {
+export const WithStatefulProfileFormContext = ({ children }: { children: ReactNode }): ReactElement<any> => {
   const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
   return <ProfileFormContext.Provider value={formContextState}>{children}</ProfileFormContext.Provider>;
 };
@@ -30,7 +30,7 @@ export const WithStatefulProfileData = ({
 }: {
   children: ReactNode;
   initialData: ProfileData;
-}): ReactElement => {
+}): ReactElement<any> => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [genericData, setGenericData] = useState<ProfileData>(initialData);
 

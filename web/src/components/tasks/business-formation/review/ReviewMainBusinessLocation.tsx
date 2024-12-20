@@ -5,7 +5,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getAddressCity, getAddressCountry, getAddressState } from "@/lib/utils/formation-helpers";
 import { ReactElement, useContext } from "react";
 
-export const ReviewMainBusinessLocation = (): ReactElement => {
+export const ReviewMainBusinessLocation = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
   const businessLocationType = state.formationFormData.businessLocationType;

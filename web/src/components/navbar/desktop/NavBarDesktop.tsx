@@ -34,7 +34,7 @@ interface Props {
   CMS_PREVIEW_ONLY_SHOW_MENU?: boolean;
 }
 
-export const NavBarDesktop = (props: Props): ReactElement => {
+export const NavBarDesktop = (props: Props): ReactElement<any> => {
   const business = props.userData ? getCurrentBusiness(props.userData) : undefined;
   const { Config } = useConfig();
 

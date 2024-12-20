@@ -20,7 +20,7 @@ interface LicenseElementProps {
   CMS_ONLY_fakeLicenseName?: LicenseName;
 }
 
-export const LicenseElement = (props: LicenseElementProps): ReactElement => {
+export const LicenseElement = (props: LicenseElementProps): ReactElement<any> => {
   const userDataFromHook = useUserData();
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const { Config } = useConfig();

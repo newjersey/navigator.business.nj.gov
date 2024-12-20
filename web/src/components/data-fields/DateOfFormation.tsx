@@ -28,7 +28,7 @@ interface Props {
   inputWidth?: "full" | "default" | "reduced";
 }
 
-export const DateOfFormation = (props: Props): ReactElement => {
+export const DateOfFormation = (props: Props): ReactElement<any> => {
   const fieldName = "dateOfFormation";
   const { Config } = useConfig();
   const { state, setProfileData } = useContext(ProfileDataContext);
@@ -87,7 +87,7 @@ export const DateOfFormation = (props: Props): ReactElement => {
         onError={(hasError: string | null): void => {
           setDateError(!!hasError);
         }}
-        renderInput={(params: TextFieldProps): ReactElement => {
+        renderInput={(params: TextFieldProps): ReactElement<any> => {
           return (
             <GenericTextField
               inputWidth={props.inputWidth || "reduced"}

@@ -1,3 +1,5 @@
+@use "../sass-files/variables";
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -10,7 +12,7 @@ th,
 td,
 .usa-prose > table td,
 .usa-prose > table th {
-  border: 1px solid $base-lighter;
+  border: 1px solid variables.$base-lighter;
 }
 
 td {
@@ -20,7 +22,7 @@ td {
 }
 
 .td-gray-border {
-  border: 1px solid $base-lighter !important;
+  border: 1px solid variables.$base-lighter !important;
 }
 
 .env-table td {
@@ -55,7 +57,7 @@ table.business-formation-table {
       th {
         height: 1rem;
         border: 0px;
-        border-bottom: 1px solid $base-light;
+        border-bottom: 1px solid variables.$base-light;
       }
     }
   }
@@ -98,7 +100,7 @@ table.business-formation-document {
 
 table.business-formation-payment {
   thead {
-    border-top: 1px solid $base-light;
+    border-top: 1px solid variables.$base-light;
     border-left: 1px solid #f0f0f0;
     border-right: 1px solid #f0f0f0;
     tr:nth-child(1) th {

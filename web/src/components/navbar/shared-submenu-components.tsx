@@ -16,7 +16,7 @@ import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
-export const LoginMenuItem = (): ReactElement => {
+export const LoginMenuItem = (): ReactElement<any> => {
   const { Config } = useConfig();
   return NavMenuItem({
     onClick: (): void => {
@@ -29,7 +29,7 @@ export const LoginMenuItem = (): ReactElement => {
   });
 };
 
-export const LogoutMenuItem = (props: { handleClose: () => void }): ReactElement => {
+export const LogoutMenuItem = (props: { handleClose: () => void }): ReactElement<any> => {
   const { Config } = useConfig();
   const { dispatch } = useContext(AuthContext);
 
@@ -46,7 +46,7 @@ export const LogoutMenuItem = (props: { handleClose: () => void }): ReactElement
   });
 };
 
-export const MyNjMenuItem = (props: { handleClose: () => void }): ReactElement => {
+export const MyNjMenuItem = (props: { handleClose: () => void }): ReactElement<any> => {
   const { Config } = useConfig();
   return NavMenuItem({
     onClick: (): void => {
@@ -60,7 +60,7 @@ export const MyNjMenuItem = (props: { handleClose: () => void }): ReactElement =
   });
 };
 
-export const AddBusinessItem = (props: { handleClose: () => void }): ReactElement[] => {
+export const AddBusinessItem = (props: { handleClose: () => void }): ReactElement<any>[] => {
   const { Config } = useConfig();
 
   const router = useRouter();
@@ -83,7 +83,7 @@ export const AddBusinessItem = (props: { handleClose: () => void }): ReactElemen
   ];
 };
 
-export const RegisterMenuItem = (): ReactElement => {
+export const RegisterMenuItem = (): ReactElement<any> => {
   const { Config } = useConfig();
   const router = useRouter();
 
@@ -98,7 +98,7 @@ export const RegisterMenuItem = (): ReactElement => {
   });
 };
 
-export const GetStartedMenuItem = (): ReactElement => {
+export const GetStartedMenuItem = (): ReactElement<any> => {
   const { Config } = useConfig();
 
   const router = useRouter();
@@ -118,7 +118,7 @@ export const ProfileMenuItem = (props: {
   handleClose: () => void;
   isAuthenticated: boolean;
   userData?: UserData;
-}): ReactElement[] => {
+}): ReactElement<any>[] => {
   const { Config } = useConfig();
 
   const { updateQueue } = useUserData();
@@ -169,7 +169,7 @@ export const ProfileMenuItem = (props: {
   });
 };
 
-export const Search = (): ReactElement => {
+export const Search = (): ReactElement<any> => {
   const { Config } = useConfig();
   return NavMenuItem({
     onClick: (): void => {
@@ -182,7 +182,7 @@ export const Search = (): ReactElement => {
   });
 };
 
-export const Plan = (): ReactElement => {
+export const Plan = (): ReactElement<any> => {
   const { Config } = useConfig();
   return NavMenuItem({
     onClick: (): void => {
@@ -195,7 +195,7 @@ export const Plan = (): ReactElement => {
   });
 };
 
-export const Start = (): ReactElement => {
+export const Start = (): ReactElement<any> => {
   const { Config } = useConfig();
   return NavMenuItem({
     onClick: (): void => {
@@ -208,7 +208,7 @@ export const Start = (): ReactElement => {
   });
 };
 
-export const Operate = (): ReactElement => {
+export const Operate = (): ReactElement<any> => {
   const { Config } = useConfig();
   return NavMenuItem({
     onClick: (): void => {
@@ -221,7 +221,7 @@ export const Operate = (): ReactElement => {
   });
 };
 
-export const Grow = (): ReactElement => {
+export const Grow = (): ReactElement<any> => {
   const { Config } = useConfig();
   return NavMenuItem({
     onClick: (): void => {
@@ -234,7 +234,7 @@ export const Grow = (): ReactElement => {
   });
 };
 
-export const Updates = (): ReactElement => {
+export const Updates = (): ReactElement<any> => {
   const { Config } = useConfig();
   return NavMenuItem({
     onClick: (): void => {

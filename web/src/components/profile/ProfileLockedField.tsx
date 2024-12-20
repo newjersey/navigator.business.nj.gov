@@ -8,7 +8,7 @@ export interface Props {
   valueFormatter?: (value: string) => string;
 }
 
-export const ProfileLockedField = (props: Props): ReactElement => {
+export const ProfileLockedField = (props: Props): ReactElement<any> => {
   const { state } = useContext(ProfileDataContext);
 
   let valueToDisplay = state.profileData[props.fieldName] as string;

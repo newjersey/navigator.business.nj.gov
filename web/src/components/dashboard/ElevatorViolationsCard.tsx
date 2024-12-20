@@ -6,7 +6,7 @@ import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
-export const ElevatorViolationsCard = (): ReactElement => {
+export const ElevatorViolationsCard = (): ReactElement<any> => {
   const config = getMergedConfig();
 
   const violationMessage = (

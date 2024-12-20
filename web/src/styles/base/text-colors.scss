@@ -1,233 +1,235 @@
+@use "../sass-files/variables";
+
 .text-base-extra-light {
-  color: $base-extra-light !important;
+  color: variables.$base-extra-light !important;
 }
 
 .text-primary-extra-light {
-  color: $primary-extra-light !important;
+  color: variables.$primary-extra-light !important;
 }
 
 .text-base {
-  color: $base !important;
+  color: variables.$base !important;
 }
 
 .text-base-darkest {
-  color: $base-darkest !important;
+  color: variables.$base-darkest !important;
 }
 
 .text-primary-extra-extra-light {
-  color: $primary-extra-extra-light !important;
+  color: variables.$primary-extra-extra-light !important;
 }
 .text-primary {
-  color: $primary !important;
+  color: variables.$primary !important;
 }
 
 .text-primary-lightest {
-  color: $primary-lightest !important;
+  color: variables.$primary-lightest !important;
 }
 
 .text-primary-light-vivid {
-  color: $primary-light-vivid !important;
+  color: variables.$primary-light-vivid !important;
 }
 
 .text-primary-more-light {
-  color: $primary-more-light !important;
+  color: variables.$primary-more-light !important;
 }
 
 .text-accent-cool-lightest {
-  color: $accent-cool-lightest !important;
+  color: variables.$accent-cool-lightest !important;
 }
 
 .text-accent-cool-dark-medium {
-  color: $accent-cool-dark-medium !important;
+  color: variables.$accent-cool-dark-medium !important;
 }
 
 .text-accent-cool-darker {
-  color: $accent-cool-darker !important;
+  color: variables.$accent-cool-darker !important;
 }
 
 .text-accent-cool-darkest {
-  color: $accent-cool-darkest !important;
+  color: variables.$accent-cool-darkest !important;
 }
 
 .text-accent-cool-more-dark {
-  color: $accent-cool-more-dark !important;
+  color: variables.$accent-cool-more-dark !important;
 }
 
 .text-accent-warm-extra-light {
-  color: $accent-warm-extra-light !important;
+  color: variables.$accent-warm-extra-light !important;
 }
 
 .text-success-extra-light {
-  color: $success-extra-light !important;
+  color: variables.$success-extra-light !important;
 }
 
 .text-success-lighter {
-  color: $success-lighter !important;
+  color: variables.$success-lighter !important;
 }
 
 .text-success-light {
-  color: $success-light !important;
+  color: variables.$success-light !important;
 }
 
 .text-success {
-  color: $success !important;
+  color: variables.$success !important;
 }
 
 .text-success-dark {
-  color: $success-dark !important;
+  color: variables.$success-dark !important;
 }
 
 .text-success-darker {
-  color: $success-darker !important;
+  color: variables.$success-darker !important;
 }
 
 .text-info-extra-light {
-  color: $info-extra-light !important;
+  color: variables.$info-extra-light !important;
 }
 
 .text-info-light {
-  color: $info-light !important;
+  color: variables.$info-light !important;
 }
 
 .text-info {
-  color: $info !important;
+  color: variables.$info !important;
 }
 
 .text-info-dark {
-  color: $info-dark !important;
+  color: variables.$info-dark !important;
 }
 
 .text-info-dark-medium {
-  color: $info-dark-medium !important;
+  color: variables.$info-dark-medium !important;
 }
 
 .text-info-darker {
-  color: $info-darker !important;
+  color: variables.$info-darker !important;
 }
 
 .text-info-darkest {
-  color: $info-darkest !important;
+  color: variables.$info-darkest !important;
 }
 
 .text-warning-extra-light {
-  color: $warning-extra-light !important;
+  color: variables.$warning-extra-light !important;
 }
 
 .text-warning-light {
-  color: $warning-light !important;
+  color: variables.$warning-light !important;
 }
 
 .text-warning {
-  color: $warning !important;
+  color: variables.$warning !important;
 }
 
 .text-warning-dark {
-  color: $warning-dark !important;
+  color: variables.$warning-dark !important;
 }
 
 .text-warning-darker {
-  color: $warning-darker !important;
+  color: variables.$warning-darker !important;
 }
 
 .text-error-extra-light {
-  color: $error-extra-light !important;
+  color: variables.$error-extra-light !important;
 }
 
 .text-error-light {
-  color: $error-light !important;
+  color: variables.$error-light !important;
 }
 
 .text-error {
-  color: $error !important;
+  color: variables.$error !important;
 }
 
 .text-error-dark {
-  color: $error-dark !important;
+  color: variables.$error-dark !important;
 }
 
 .text-error-darker {
-  color: $error-darker !important;
+  color: variables.$error-darker !important;
 }
 
 .text-white {
-  color: $white !important;
+  color: variables.$white !important;
 }
 
 .text-disabled {
-  color: $disabled !important;
+  color: variables.$disabled !important;
 }
 
 .text-cool-extra-light {
-  color: $cool-extra-light !important;
+  color: variables.$cool-extra-light !important;
 }
 
 .text-cool-lighter {
-  color: $cool-lighter !important;
+  color: variables.$cool-lighter !important;
 }
 .text-accent-cooler-lightest {
-  color: $accent-cooler-lightest !important;
+  color: variables.$accent-cooler-lightest !important;
 }
 .text-accent-cooler-light {
-  color: $accent-cooler-light !important;
+  color: variables.$accent-cooler-light !important;
 }
 
 .text-accent-cooler {
-  color: $accent-cooler !important;
+  color: variables.$accent-cooler !important;
 }
 
 .text-accent-cooler-dark {
-  color: $accent-cooler-dark !important;
+  color: variables.$accent-cooler-dark !important;
 }
 
 .text-accent-cooler-darker {
-  color: $accent-cooler-darker !important;
+  color: variables.$accent-cooler-darker !important;
 }
 
 .text-accent-hot-extra-light {
-  color: $accent-hot-extra-light !important;
+  color: variables.$accent-hot-extra-light !important;
 }
 
 .text-accent-hot {
-  color: $accent-hot !important;
+  color: variables.$accent-hot !important;
 }
 
 .text-accent-hot-darker {
-  color: $accent-hot-darker !important;
+  color: variables.$accent-hot-darker !important;
 }
 
 .text-accent-semi-cool-extra-light {
-  color: $accent-semi-cool-extra-light !important;
+  color: variables.$accent-semi-cool-extra-light !important;
 }
 
 .text-accent-semi-cool-lightest {
-  color: $accent-semi-cool-lightest !important;
+  color: variables.$accent-semi-cool-lightest !important;
 }
 .text-accent-semi-cool-light {
-  color: $accent-semi-cool-light !important;
+  color: variables.$accent-semi-cool-light !important;
 }
 .text-accent-semi-cool-vivid {
-  color: $accent-semi-cool-vivid !important;
+  color: variables.$accent-semi-cool-vivid !important;
 }
 .text-accent-semi-cool {
-  color: $accent-semi-cool !important;
+  color: variables.$accent-semi-cool !important;
 }
 .text-accent-semi-cool-500 {
-  color: $accent-semi-cool-500 !important;
+  color: variables.$accent-semi-cool-500 !important;
 }
 .text-accent-semi-cool-700 {
-  color: $accent-semi-cool-700 !important;
+  color: variables.$accent-semi-cool-700 !important;
 }
 .text-accent-semi-cool-800 {
-  color: $accent-semi-cool-800 !important;
+  color: variables.$accent-semi-cool-800 !important;
 }
 .text-accent-semi-cool-900 {
-  color: $accent-semi-cool-900 !important;
+  color: variables.$accent-semi-cool-900 !important;
 }
 
 .text-secondary-vivid-dark {
-  color: $secondary-vivid-dark !important;
+  color: variables.$secondary-vivid-dark !important;
 }
 
 .text-secondary-vivid {
-  color: $secondary-vivid !important;
+  color: variables.$secondary-vivid !important;
 }

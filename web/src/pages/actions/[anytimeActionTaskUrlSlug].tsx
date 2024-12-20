@@ -16,7 +16,7 @@ interface Props {
   anytimeActionTask: AnytimeActionTask;
 }
 
-const AnytimeActionTaskPage = (props: Props): ReactElement => {
+const AnytimeActionTaskPage = (props: Props): ReactElement<any> => {
   return (
     <>
       <NextSeo title={getNextSeoTitle(props.anytimeActionTask.name)} />

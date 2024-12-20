@@ -23,7 +23,7 @@ interface Props {
   isWrappingText?: boolean;
 }
 
-export const Tag = (props: Props): ReactElement => {
+export const Tag = (props: Props): ReactElement<any> => {
   let styling = "";
   let hoverStyling = "";
 

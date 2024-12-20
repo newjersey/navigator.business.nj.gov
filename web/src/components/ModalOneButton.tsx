@@ -13,7 +13,7 @@ interface Props {
   uncloseable?: boolean;
 }
 
-export const ModalOneButton = (props: Props): ReactElement => {
+export const ModalOneButton = (props: Props): ReactElement<any> => {
   const buttonNode = (
     <div
       className="padding-x-4 padding-y-3 bg-base-lightest flex flex-column flex-align-end"

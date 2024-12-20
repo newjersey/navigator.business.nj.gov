@@ -11,7 +11,7 @@ interface Props {
   isRightMarginRemoved?: boolean;
 }
 
-export const PrimaryButtonDropdown = (props: Props): ReactElement => {
+export const PrimaryButtonDropdown = (props: Props): ReactElement<any> => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
 
@@ -68,7 +68,7 @@ export const PrimaryButtonDropdown = (props: Props): ReactElement => {
         transition
         disablePortal
       >
-        {({ TransitionProps }): ReactElement => (
+        {({ TransitionProps }): ReactElement<any> => (
           <Grow
             {...TransitionProps}
             style={{

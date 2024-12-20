@@ -1,11 +1,26 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable no-undef */
-const CopyPlugin = require("copy-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
+import withBundleAnalyzer from "@next/bundle-analyzer";
+import withMDX from "@next/mdx";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
+import CopyPlugin from "copy-webpack-plugin";
+import process from "node:process";
+import remarkDirective from "remark-directive";
+import remarkGfm from "remark-gfm";
+import { remarkCustomDirectives } from "./src/components/remarkCustomDirectives.mjs";
+
+const analyzerConfig = {
   enabled: process.env.ANALYZE === "true",
-});
-module.exports = withBundleAnalyzer({
+};
+
+const mdxConfig = {
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [remarkGfm, remarkDirective, remarkCustomDirectives],
+    rehypePlugins: [],
+  },
+};
+
+const config = {
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   env: {
     API_BASE_URL: process.env.API_BASE_URL,
     AUTH_DOMAIN: process.env.AUTH_DOMAIN,
@@ -32,14 +47,14 @@ module.exports = withBundleAnalyzer({
     OUTAGE_ALERT_CONFIG_URL: process.env.OUTAGE_ALERT_CONFIG_URL,
   },
   staticPageGenerationTimeout: 120,
-  webpack: (config) => {
-    config.module.rules.push(
+  webpack: (webpackConfig) => {
+    webpackConfig.module.rules.push(
       {
         test: /\.md$/,
         use: "raw-loader",
       },
       {
-        test: /\.(ts)x?$/,
+        test: /\.(ts|tsx)$/,
         use: [
           {
             loader: "ts-loader",
@@ -53,15 +68,12 @@ module.exports = withBundleAnalyzer({
       }
     );
 
-    config.plugins.push(
+    webpackConfig.plugins.push(
       new CleanWebpackPlugin({
         dry: false,
         cleanOnceBeforeBuildPatterns: ["../public/vendor"],
         dangerouslyAllowCleanPatternsOutsideProject: true,
-      })
-    );
-
-    config.plugins.push(
+      }),
       new CopyPlugin({
         patterns: [
           {
@@ -76,7 +88,7 @@ module.exports = withBundleAnalyzer({
       })
     );
 
-    return config;
+    return webpackConfig;
   },
   experimental: {
     largePageDataBytes: 1.28 * 1024 * 1024,
@@ -90,4 +102,6 @@ module.exports = withBundleAnalyzer({
       },
     ];
   },
-});
+};
+
+export default withBundleAnalyzer(analyzerConfig)(withMDX(mdxConfig)(config));

@@ -28,7 +28,7 @@ type CardDisplayDetails = {
   iconTextColor: string;
 };
 
-export const ElevatorRegistrationStatusSummary = (props: Props): ReactElement => {
+export const ElevatorRegistrationStatusSummary = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   const { business } = useUserData();
@@ -81,12 +81,12 @@ export const ElevatorRegistrationStatusSummary = (props: Props): ReactElement =>
     deviceCount: number,
     status: string,
     index: number
-  ): ReactElement => {
+  ): ReactElement<any> => {
     const details = getDetailsForRegistrationCard(status);
     const formattedDate = parseDate(date).format("MMMM d, YYYY");
     const informationalMessage = getInformationalMessageText(status);
 
-    const getIconForRegistrationCard = (): ReactElement => {
+    const getIconForRegistrationCard = (): ReactElement<any> => {
       switch (status) {
         case "In Review":
           return <img src={`/img/access_time_filled.svg`} alt="" style={{ width: "17px", height: "17px" }} />;

@@ -19,7 +19,7 @@ const isBeforeTheFollowingSaturday = (registeredISO: string | undefined): boolea
   return getCurrentDate().isBefore(sundayAfterRegisteredDate);
 };
 
-export const FilingsCalendarTaxAccess = (): ReactElement => {
+export const FilingsCalendarTaxAccess = (): ReactElement<any> => {
   const { updateQueue, business } = useUserData();
   const { Config } = useConfig();
   const { isAuthenticated, setShowNeedsAccountModal, showNeedsAccountModal } =
@@ -77,7 +77,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
     }
   };
 
-  const getWidgetComponent = (): ReactElement => {
+  const getWidgetComponent = (): ReactElement<any> => {
     if (business?.taxFilingData.registeredISO) {
       if (business?.taxFilingData.state === "PENDING") {
         return (

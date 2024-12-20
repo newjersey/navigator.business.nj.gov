@@ -24,7 +24,7 @@ export interface SidebarCardsListProps {
   cardCount: number;
 }
 
-export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => {
+export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement<any> => {
   const [hiddenAccordionIsOpen, setHiddenAccordionIsOpen] = useState<boolean>(false);
   const { Config } = useConfig();
   const { userData } = useUserData();

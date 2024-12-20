@@ -11,7 +11,7 @@ type Props = {
   card: SidebarCardContent;
 };
 
-export const SidebarCard = (props: Props): ReactElement => {
+export const SidebarCard = (props: Props): ReactElement<any> => {
   return (
     <>
       {rswitch(props.card.id, {

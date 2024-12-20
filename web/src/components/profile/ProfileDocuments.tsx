@@ -12,7 +12,7 @@ interface Props {
   CMS_ONLY_fakeBusiness?: Business;
 }
 
-export const ProfileDocuments = (props: Props): ReactElement => {
+export const ProfileDocuments = (props: Props): ReactElement<any> => {
   const userDataFromHook = useUserData();
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const { Config } = useConfig();

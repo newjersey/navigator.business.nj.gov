@@ -11,7 +11,7 @@ interface Props {
   businessNavBarTitle: string;
 }
 
-export const NavBarMobileHomeLogo = (props: Props): ReactElement => {
+export const NavBarMobileHomeLogo = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   return (

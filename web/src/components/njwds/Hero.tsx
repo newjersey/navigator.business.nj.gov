@@ -10,7 +10,7 @@ import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
-export const Hero = (): ReactElement => {
+export const Hero = (): ReactElement<any> => {
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const router = useRouter();

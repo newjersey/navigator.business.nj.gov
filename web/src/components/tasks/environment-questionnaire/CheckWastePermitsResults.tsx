@@ -14,7 +14,7 @@ interface Props {
   task: Task;
 }
 
-export const CheckWastePermitsResults = (props: Props): ReactElement => {
+export const CheckWastePermitsResults = (props: Props): ReactElement<any> => {
   const { business, updateQueue } = useUserData();
   const Config = getMergedConfig();
   const questionnaireData = business?.environmentData?.waste?.questionnaireData;
@@ -51,7 +51,7 @@ export const CheckWastePermitsResults = (props: Props): ReactElement => {
     return optionsMarkedTrue;
   };
 
-  const personalizedSupport = (): ReactElement => {
+  const personalizedSupport = (): ReactElement<any> => {
     return (
       <CheckWasteResultsAccordion title={Config.wasteQuestionnaireResultsPage.personalizedSupport.title}>
         <div className={"padding-205 margin-y-2 bg-base-extra-light text-body radius-lg"}>
@@ -69,7 +69,7 @@ export const CheckWastePermitsResults = (props: Props): ReactElement => {
     );
   };
 
-  const contactDep = (): ReactElement => {
+  const contactDep = (): ReactElement<any> => {
     return (
       <CheckWasteResultsAccordion title={Config.wasteQuestionnaireResultsPage.contactDep.title}>
         <div className={"padding-205 margin-y-2 bg-base-extra-light radius-lg"}>
@@ -90,7 +90,7 @@ export const CheckWastePermitsResults = (props: Props): ReactElement => {
     );
   };
 
-  const seeYourResponses = (): ReactElement => {
+  const seeYourResponses = (): ReactElement<any> => {
     return (
       <CheckWasteResultsAccordion title={Config.wasteQuestionnaireResultsPage.seeYourResponses.title}>
         <div>
@@ -108,7 +108,7 @@ export const CheckWastePermitsResults = (props: Props): ReactElement => {
     );
   };
 
-  const highApplicability = (): ReactElement => {
+  const highApplicability = (): ReactElement<any> => {
     return (
       <>
         <div className={"padding-bottom-3"}>
@@ -125,7 +125,7 @@ export const CheckWastePermitsResults = (props: Props): ReactElement => {
     );
   };
 
-  const lowApplicability = (): ReactElement => {
+  const lowApplicability = (): ReactElement<any> => {
     return (
       <>
         <div className={"padding-y-1"}>

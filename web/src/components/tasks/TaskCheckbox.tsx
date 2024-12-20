@@ -9,7 +9,7 @@ interface Props {
   checkboxProps?: CheckboxProps;
 }
 
-export const TaskCheckbox = (props: Props): ReactElement => {
+export const TaskCheckbox = (props: Props): ReactElement<any> => {
   const { updateQueue, business } = useUserData();
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
 

@@ -13,7 +13,7 @@ export interface Props extends Omit<GenericTextFieldProps, "value" | "error" | "
   errorBarType: "ALWAYS" | "MOBILE-ONLY" | "DESKTOP-ONLY" | "NEVER";
 }
 
-export const AddressTextField = ({ className, ...props }: Props): ReactElement => {
+export const AddressTextField = ({ className, ...props }: Props): ReactElement<any> => {
   const { state, setAddressData } = useContext(AddressContext);
   const { doesFieldHaveError } = useAddressErrors();
 

@@ -7,10 +7,10 @@ interface Props {
   value: boolean | undefined;
 }
 
-export const ReviewIsVeteranNonprofit = (props: Props): ReactElement => {
+export const ReviewIsVeteranNonprofit = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
-  const displayResponse = (): ReactElement => {
+  const displayResponse = (): ReactElement<any> => {
     if (props.value) {
       return <Content>{Config.formation.fields.isVeteranNonprofit.reviewTextYes}</Content>;
     } else if (props.value === false) {

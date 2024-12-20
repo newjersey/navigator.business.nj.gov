@@ -14,7 +14,7 @@ import { FormationFields } from "@businessnjgovnavigator/shared/formationData";
 import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext, useEffect } from "react";
 
-export const RegisteredAgent = (): ReactElement => {
+export const RegisteredAgent = (): ReactElement<any> => {
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { userData } = useUserData();
@@ -128,7 +128,7 @@ export const RegisteredAgent = (): ReactElement => {
     }
   };
 
-  const getAriaLiveRegion = (): ReactElement | undefined => {
+  const getAriaLiveRegion = (): ReactElement<any> | undefined => {
     const interactedWithAgentCheckbox =
       state.interactedFields.includes("agentEmail") && state.interactedFields.includes("agentName");
     if (interactedWithAgentCheckbox && !state.formationFormData.agentUseAccountInfo) {

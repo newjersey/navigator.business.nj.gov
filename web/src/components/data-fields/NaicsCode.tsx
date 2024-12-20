@@ -12,7 +12,7 @@ import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext, useMemo } from "react";
 
-export const NaicsCode = (): ReactElement => {
+export const NaicsCode = (): ReactElement<any> => {
   const { state } = useContext(ProfileDataContext);
   const { business } = useUserData();
   const { Config } = useConfig();

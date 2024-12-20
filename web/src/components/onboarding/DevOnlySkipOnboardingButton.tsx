@@ -10,7 +10,7 @@ interface Props {
   routeToPage: (page: number) => void;
 }
 
-export const DevOnlySkipOnboardingButton = (props: Props): ReactElement => {
+export const DevOnlySkipOnboardingButton = (props: Props): ReactElement<any> => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { updateQueue } = useUserData();
 

@@ -20,7 +20,7 @@ interface Props {
   CMS_ONLY_fakeLicenseName?: LicenseName;
 }
 
-export const AnytimeActionLicenseReinstatementElement = (props: Props): ReactElement => {
+export const AnytimeActionLicenseReinstatementElement = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const userDataFromHook = useUserData();
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;

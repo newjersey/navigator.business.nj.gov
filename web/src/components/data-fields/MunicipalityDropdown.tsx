@@ -4,7 +4,7 @@ import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { splitAndBoldSearchText } from "@/lib/utils/splitAndBoldSearchText";
 import { Municipality } from "@businessnjgovnavigator/shared";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
-import { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
+import { ChangeEvent, FocusEvent, ReactElement, useState, type JSX } from "react";
 
 interface Props {
   fieldName: string;
@@ -21,7 +21,7 @@ interface Props {
   hideErrorLabel?: boolean;
 }
 
-export const MunicipalityDropdown = (props: Props): ReactElement => {
+export const MunicipalityDropdown = (props: Props): ReactElement<any> => {
   const [searchText, setSearchText] = useState<string>("");
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {

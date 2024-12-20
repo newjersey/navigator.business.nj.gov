@@ -5,7 +5,7 @@ interface ContentProps {
   children: string;
 }
 
-export const ModifiedContent = (props: ContentProps): ReactElement => {
+export const ModifiedContent = (props: ContentProps): ReactElement<any> => {
   const updatedContent = useContentModifiedByUserData(props.children ?? "");
 
   return <>{updatedContent}</>;

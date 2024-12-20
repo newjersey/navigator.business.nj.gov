@@ -17,7 +17,7 @@ interface Props {
   overrides?: FieldOverrides;
 }
 
-export const FieldLabelModal = (props: Props): ReactElement => {
+export const FieldLabelModal = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const { state } = useContext(ProfileDataContext);
 

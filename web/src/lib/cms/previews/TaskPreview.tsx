@@ -11,7 +11,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { ReactElement } from "react";
 
-const TaskPreview = (props: PreviewProps): ReactElement => {
+const TaskPreview = (props: PreviewProps): ReactElement<any> => {
   const ref = usePreviewRef(props);
   const task = usePageData<TaskWithLicenseTaskId>(props);
 

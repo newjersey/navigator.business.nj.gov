@@ -8,7 +8,7 @@ interface Props {
   showHeader: boolean;
 }
 
-export const TaxAccessModalBody = (props: Props): ReactElement => {
+export const TaxAccessModalBody = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
 
   const getHeader = (): string => {

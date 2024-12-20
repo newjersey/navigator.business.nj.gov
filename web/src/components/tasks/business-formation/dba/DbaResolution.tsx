@@ -3,7 +3,7 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { ReactElement, useContext } from "react";
 
-export const DbaResolution = (): ReactElement => {
+export const DbaResolution = (): ReactElement<any> => {
   const { state } = useContext(BusinessFormationContext);
 
   return (

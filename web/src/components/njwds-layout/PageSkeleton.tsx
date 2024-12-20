@@ -18,7 +18,7 @@ interface Props {
   previousBusinessId?: string | undefined;
 }
 
-export const PageSkeleton = (props: Props): ReactElement => {
+export const PageSkeleton = (props: Props): ReactElement<any> => {
   return (
     <>
       <section aria-label="Official government website">

@@ -23,7 +23,7 @@ interface Props {
   isReviewStep?: boolean;
 }
 
-export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): ReactElement => {
+export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const [legalStructureWarningIsOpen, setLegalStructureWarningIsOpen] = useState<boolean>(false);
   const { state, setStepIndex } = useContext(BusinessFormationContext);
@@ -65,13 +65,13 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
     return <></>;
   }
 
-  const legalStructureContextualInfo = (): ReactElement => {
+  const legalStructureContextualInfo = (): ReactElement<any> => {
     const label = Config.formation.legalStructure.label;
     const contextualInfo = Config.formation.legalStructure.contextualInfo;
     return <ContextualInfoButton text={label} id={contextualInfo} />;
   };
 
-  const notEnteredBusinessName = (): ReactElement => {
+  const notEnteredBusinessName = (): ReactElement<any> => {
     if (isReviewStep) {
       return <ReviewNotEntered />;
     } else {

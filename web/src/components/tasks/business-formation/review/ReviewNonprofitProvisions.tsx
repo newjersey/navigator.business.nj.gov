@@ -8,7 +8,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { FormationFields, InFormInBylaws } from "@businessnjgovnavigator/shared";
 import { Fragment, ReactElement, useContext } from "react";
 
-export const ReviewNonprofitProvisions = (): ReactElement => {
+export const ReviewNonprofitProvisions = (): ReactElement<any> => {
   const { state } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
 
@@ -20,7 +20,7 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
   }: {
     fieldName: FormationFields;
     value: InFormInBylaws;
-  }): ReactElement => {
+  }): ReactElement<any> => {
     const endOfSentence = ((): string => {
       switch (value) {
         case "IN_FORM":

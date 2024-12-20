@@ -9,7 +9,7 @@ interface Props {
   logoType: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO";
 }
 
-export const NavBarLogoOnlyDesktop = (props: Props): ReactElement => {
+export const NavBarLogoOnlyDesktop = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   return (
     <NavBarDesktopWrapper>

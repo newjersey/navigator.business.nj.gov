@@ -5,7 +5,7 @@ interface Props {
   isSmallerWidth?: boolean;
 }
 
-export const SingleColumnContainer = (props: Props): ReactElement => {
+export const SingleColumnContainer = (props: Props): ReactElement<any> => {
   return (
     <div
       className={`${

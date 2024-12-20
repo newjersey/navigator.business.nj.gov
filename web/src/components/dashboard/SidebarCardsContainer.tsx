@@ -23,7 +23,7 @@ interface Props {
   fundings: Funding[];
 }
 
-export const SidebarCardsContainer = (props: Props): ReactElement => {
+export const SidebarCardsContainer = (props: Props): ReactElement<any> => {
   const { business, userData } = useUserData();
 
   const visibleSidebarCards = getVisibleSideBarCards(business, props.sidebarDisplayContent);

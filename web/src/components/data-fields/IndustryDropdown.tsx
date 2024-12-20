@@ -20,7 +20,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 import { Autocomplete, FilterOptionsState, TextField, createFilterOptions } from "@mui/material";
-import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
+import { ChangeEvent, FocusEvent, ReactElement, useContext, useState, type JSX } from "react";
 
 interface Props {
   handleChange?: () => void;
@@ -30,7 +30,7 @@ interface Props {
   validationLabel?: string;
 }
 
-export const IndustryDropdown = (props: Props): ReactElement => {
+export const IndustryDropdown = (props: Props): ReactElement<any> => {
   const [searchText, setSearchText] = useState<string>("");
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();

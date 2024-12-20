@@ -12,7 +12,7 @@ interface Props {
   ctaText: string;
 }
 
-export const StepSection = (props: Props): ReactElement => {
+export const StepSection = (props: Props): ReactElement<any> => {
   const getTaskNamesForStep = (tasks: Task[], step: number): string[] => {
     return tasks.filter((task) => task.stepNumber === step).map((task) => task.name);
   };

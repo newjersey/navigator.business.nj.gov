@@ -10,7 +10,7 @@ interface Props {
   id: string;
 }
 
-export const ContextualInfoButton = (props: Props): ReactElement => {
+export const ContextualInfoButton = (props: Props): ReactElement<any> => {
   const { contextualInfo, setContextualInfo } = useContext(ContextualInfoContext);
   const [cachedContent, setCachedContent] = useState<ContextualInfo>();
   const [currentId, setId] = useState<string>();

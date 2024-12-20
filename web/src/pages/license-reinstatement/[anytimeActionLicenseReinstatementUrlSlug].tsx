@@ -16,7 +16,7 @@ interface Props {
   anytimeActionLicenseReinstatement: AnytimeActionLicenseReinstatement;
 }
 
-const AnytimeActionLicenseReinstatementPage = (props: Props): ReactElement => {
+const AnytimeActionLicenseReinstatementPage = (props: Props): ReactElement<any> => {
   return (
     <>
       <NextSeo title={getNextSeoTitle(props.anytimeActionLicenseReinstatement.name)} />

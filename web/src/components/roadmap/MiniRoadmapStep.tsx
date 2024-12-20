@@ -16,7 +16,7 @@ interface Props {
   toggleStep: (number: number, setOpen: boolean, click: boolean) => void;
 }
 
-export const MiniRoadmapStep = (props: Props): ReactElement => {
+export const MiniRoadmapStep = (props: Props): ReactElement<any> => {
   const { roadmap } = useRoadmap();
   const [isOpen, setIsOpen] = useState<boolean>(props.isOpen ?? false);
   const stepNumber = props.step.stepNumber;

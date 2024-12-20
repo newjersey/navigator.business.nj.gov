@@ -12,7 +12,7 @@ interface Props {
   business: Business;
 }
 
-export const FormationSuccessPage = (props: Props): ReactElement => {
+export const FormationSuccessPage = (props: Props): ReactElement<any> => {
   const { documents } = useDocuments();
   const { Config } = useConfig();
 

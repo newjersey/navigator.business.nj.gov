@@ -13,7 +13,7 @@ interface Props {
   task: types.Task;
 }
 
-export const Task = (props: Props): ReactElement => {
+export const Task = (props: Props): ReactElement<any> => {
   const { business } = useUserData();
   const { Config } = useConfig();
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
@@ -43,22 +43,21 @@ export const Task = (props: Props): ReactElement => {
           </span>
         )}
         <div>
-          <Link href={`/tasks/${props.task.urlSlug}`} passHref>
-            <a
-              onClick={(): void => analytics.event.roadmap_task_title.click.go_to_task(props.task.urlSlug)}
-              href={`/tasks/${props.task.urlSlug}`}
-              className={`usa-link margin-right-105 ${props.task.required ? "text-bold" : ""}`}
-              data-task={props.task.id}
-              data-testid={props.task.id}
-            >
-              {props.task.name}
-            </a>
+          <Link
+            href={`/tasks/${props.task.urlSlug}`}
+            passHref
+            onClick={(): void => analytics.event.roadmap_task_title.click.go_to_task(props.task.urlSlug)}
+            className={`usa-link margin-right-105 ${props.task.required ? "text-bold" : ""}`}
+            data-task={props.task.id}
+            data-testid={props.task.id}
+            legacyBehavior
+          >
+            <span>{props.task.name}</span>
           </Link>
 
           {isTabletAndUp && renderRequiredLabel()}
         </div>
       </div>
-
       {!isTabletAndUp && (
         <div className="margin-bottom-2">
           {TaskProgressTagLookup[taskProgress]} <span className="margin-left-1">{renderRequiredLabel()}</span>

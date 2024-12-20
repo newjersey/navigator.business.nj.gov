@@ -21,7 +21,7 @@ interface Props {
   onSave: ({ redirectOnSuccess }: { redirectOnSuccess: boolean }) => void;
 }
 
-export const FormationDateModal = (props: Props): ReactElement => {
+export const FormationDateModal = (props: Props): ReactElement<any> => {
   const { Config } = useConfig();
   const { business, updateQueue } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());

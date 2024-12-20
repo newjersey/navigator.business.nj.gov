@@ -9,7 +9,7 @@ import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
-export const NexusUnavailable = (props: UnavailableProps): ReactElement => {
+export const NexusUnavailable = (props: UnavailableProps): ReactElement<any> => {
   const { Config } = useConfig();
 
   const onClick = (): void => {
@@ -22,7 +22,7 @@ export const NexusUnavailable = (props: UnavailableProps): ReactElement => {
   }).split("${searchAgainButton}");
 
   const inlineParagraphComponent = {
-    p: (props: { children: string[] }): ReactElement => {
+    p: (props: { children: string[] }): ReactElement<any> => {
       return <div className="display-inline">{props.children}</div>;
     },
   };

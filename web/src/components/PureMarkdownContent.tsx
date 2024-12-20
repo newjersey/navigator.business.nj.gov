@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
+import * as prod from "react/jsx-runtime";
 import rehypeReact from "rehype-react";
 import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
@@ -10,22 +11,26 @@ import { visit } from "unist-util-visit";
 
 interface Props {
   children: string;
-  components?: { [key: string]: { ({ children }: { children: string[] }): ReactElement } };
+  components?: { [key: string]: { ({ children }: { children: string[] }): ReactElement<any> } };
 }
 
-export const PureMarkdownContent = (props: Props): ReactElement => {
+export const PureMarkdownContent = (props: Props): ReactElement<any> => {
   const markdown = unified()
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkDirective)
     .use(customRemarkPlugin)
     .use(remarkRehype)
-    .use(rehypeReact, {
-      createElement: React.createElement,
-      Fragment: React.Fragment,
-      components: props.components,
-    })
-    .processSync(props.children).result;
+    .use(
+      rehypeReact as any,
+      {
+        Fragment: prod.Fragment,
+        jsx: prod.jsx,
+        jsxs: prod.jsxs,
+        components: props.components,
+      } as any
+    )
+    .processSync(props.children).result as any;
   return <>{markdown}</>;
 };
 

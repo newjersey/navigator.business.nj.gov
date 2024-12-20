@@ -15,7 +15,7 @@ import { AnytimeActionTask } from "@/lib/types/types";
 import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
 import { ReactElement, ReactNode, useEffect, useRef, useState } from "react";
 
-export const GovernmentContractorPaginator = (): ReactElement => {
+export const GovernmentContractorPaginator = (): ReactElement<any> => {
   const stepperRef = useRef<HTMLDivElement>(null);
   const [stepIndex, setStepIndex] = useState(0);
   const [anytimeActionTask, setAnytimeActionTask] = useState<AnytimeActionTask>();

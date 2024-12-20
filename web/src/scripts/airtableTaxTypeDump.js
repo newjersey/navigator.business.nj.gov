@@ -80,25 +80,22 @@ const convertFilingMethod = (value) => {
 };
 
 const writeMarkdownString = (opportunity) => {
-  return (
-    `---\n` +
-    `id: "${opportunity.id}"\n` +
-    `urlSlug: "${opportunity.urlSlug}"\n` +
-    `name: "${opportunity.name}"\n` +
-    `callToActionLink: "${opportunity.callToActionLink}"\n` +
-    `callToActionText: "${opportunity.callToActionText}"\n` +
-    `treasuryLink: "${opportunity.treasuryLink}"\n` +
-    `extension: "${opportunity.extension}"\n` +
-    `frequency: "${opportunity.frequency?.replace(/"/g, '\\"')}"\n` +
-    `taxRates: "${opportunity.taxRates?.replace(/"/g, '\\"')}"\n` +
-    `additionalInfo: "${opportunity.additionalInfo?.replace(/"/g, '\\"')}"\n` +
-    `filingMethod: "${opportunity.filingMethod}"\n` +
-    `filingDetails: "${opportunity.filingDetails?.replace(/"/g, '\\"')}"\n` +
-    `agency: "${opportunity.agency}"\n` +
-    `---\n` +
-    `\n` +
-    `${opportunity.description}`
-  );
+  return (`---\n` +
+  `id: "${opportunity.id}"\n` +
+  `urlSlug: "${opportunity.urlSlug}"\n` +
+  `name: "${opportunity.name}"\n` +
+  `callToActionLink: "${opportunity.callToActionLink}"\n` +
+  `callToActionText: "${opportunity.callToActionText}"\n` +
+  `treasuryLink: "${opportunity.treasuryLink}"\n` +
+  `extension: "${opportunity.extension}"\n` +
+  `frequency: "${opportunity.frequency?.replace(/"/g, '\\"')}"\n` +
+  `taxRates: "${opportunity.taxRates?.replace(/"/g, '\\"')}"\n` +
+  `additionalInfo: "${opportunity.additionalInfo?.replace(/"/g, '\\"')}"\n` +
+  `filingMethod: "${opportunity.filingMethod}"\n` +
+  `filingDetails: "${opportunity.filingDetails?.replace(/"/g, '\\"')}"\n` +
+  `agency: "${opportunity.agency}"\n` +
+  `---\n` +
+  `\n` + `${opportunity.description}`);
 };
 
 const toPipeCase = (str) => {

@@ -40,7 +40,7 @@ interface Props<T> {
 
 export const Addresses = <T extends FormationMember | FormationIncorporator>(
   props: Props<T>
-): ReactElement => {
+): ReactElement<any> => {
   const { Config } = useConfig();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [editIndex, setEditIndex] = useState<number | undefined>(undefined);

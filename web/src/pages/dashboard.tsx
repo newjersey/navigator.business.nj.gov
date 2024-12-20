@@ -58,7 +58,7 @@ interface Props {
   licenseEvents: LicenseEventType[];
 }
 
-const DashboardPage = (props: Props): ReactElement => {
+const DashboardPage = (props: Props): ReactElement<any> => {
   usePageWithNeedsAccountSnackbar();
   const { business, updateQueue } = useUserData();
   const router = useRouter();
