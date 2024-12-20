@@ -13,7 +13,6 @@ summaryDescriptionMd: >-
 
   :::
 urlSlug: trade-name-registration
-filename: register-trade-name
 displayname: trade-name-registration
 name: Register Your Trade Name
 id: register-trade-name

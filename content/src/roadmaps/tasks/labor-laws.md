@@ -1,7 +1,6 @@
 ---
 displayname: labor-laws
 urlSlug: employer-requirements
-filename: labor-laws
 name: Prepare for Employees in New Jersey
 id: labor-laws
 callToActionLink: https://business.nj.gov/pages/employer-requirements

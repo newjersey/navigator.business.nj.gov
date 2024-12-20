@@ -1,13 +1,12 @@
 ---
 summaryDescriptionMd: >-
-  :::note 
+  :::note
    This screen guides your next steps. It does not submit your information for registration purposes.
   :::
 
 
   An `Employer Identification Number (EIN)|ein` is essentially a Social Security Number (SSN) for your business, provided by the federal government. It's better to get an EIN to avoid using your personal SSN on tax filings and business registrations. You need an EIN if you plan to have employees.
 urlSlug: ein-registration
-filename: register-for-ein
 displayname: ein-registration
 name: Get Your EIN from the IRS
 id: register-for-ein
@@ -16,11 +15,12 @@ callToActionText: ""
 agencyAdditionalContext: Internal Revenue Service
 formName: SS-4
 ---
+
 ## Application Requirements
 
-* Your business name
+- Your business name
 
-- - -
+---
 
 ## Next Steps
 
@@ -29,7 +29,7 @@ formName: SS-4
 
 ${einInputComponent}
 
-- - -
+---
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 

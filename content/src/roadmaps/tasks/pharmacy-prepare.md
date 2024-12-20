@@ -1,7 +1,6 @@
 ---
 displayname: pharmacy-prepare
 urlSlug: pharmacy-prepare
-filename: pharmacy-prepare
 name: Prepare for Pharmacy Requirements
 id: pharmacy-prepare
 callToActionLink: https://www.njconsumeraffairs.gov/regulations/Chapter-39-State-Board-of-Pharmacy.pdf

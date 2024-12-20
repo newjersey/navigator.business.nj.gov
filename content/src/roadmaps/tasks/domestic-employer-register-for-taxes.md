@@ -14,7 +14,6 @@ summaryDescriptionMd: >-
 
   :::
 urlSlug: domestic-employer-tax-registration
-filename: domestic-employer-register-for-taxes
 displayname: domestic-employer-tax-registration
 name: Register for State Taxes and Employer Purposes
 id: domestic-employer-register-for-taxes
@@ -23,16 +22,17 @@ callToActionText: Register for State Taxes
 agencyId: nj-taxation
 formName: NJ-Reg
 ---
+
 ## Application Requirements
 
-* [NAICS code](/tasks/naics-code-determination): ${naicsCode}
-* Social Security number 
-* Estimated start date
-* Description of the type of work
-* Estimated number of employees
-* Anticipated first payroll withholding date for employees
+- [NAICS code](/tasks/naics-code-determination): ${naicsCode}
+- Social Security number
+- Estimated start date
+- Description of the type of work
+- Estimated number of employees
+- Anticipated first payroll withholding date for employees
 
-- - -
+---
 
 ## Register for State Taxes
 
@@ -40,14 +40,13 @@ formName: NJ-Reg
 
 \-or-
 
-[Paper NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) --  complete page 17 and choose "Employer of Domestic Household Employee(s)" under step A and "Domestic (Household Employer)" under step H.
+[Paper NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) -- complete page 17 and choose "Employer of Domestic Household Employee(s)" under step A and "Domestic (Household Employer)" under step H.
 
-
-- - -
+---
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-* A `NJ Tax ID|tax-id` 
-* A `Business Tax PIN|tax-pin`
+- A `NJ Tax ID|tax-id`
+- A `Business Tax PIN|tax-pin`
 
 :::

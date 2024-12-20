@@ -6,18 +6,18 @@ summaryDescriptionMd: >-
 
   Cannabis is not legal at the federal level. For this reason, Federal Deposit Insurance Corporation - insured (FDIC) banks cannot open accounts for cannabis businesses. Confirm your bank is able to service cannabis businesses, their document requirements, services, and fees.
 urlSlug: cannabis-bank-account
-filename: cannabis-bank-account
 displayname: cannabis-bank-account
 name: Open Your Bank Account for Your Cannabis Business
 id: cannabis-bank-account
 ---
+
 ## Information Often Needed to Open a Bank Account
 
-- `EIN|ein` 
+- `EIN|ein`
 
-- `Certificate of Formation|certificate-formation` 
+- `Certificate of Formation|certificate-formation`
 
-- `Business Registration Certificate|business-reg-certificate` 
+- `Business Registration Certificate|business-reg-certificate`
 
 :::callout{ showHeader="true" headerText="After you complete this task, you will have:" showIcon="false" calloutType="conditional" }
 

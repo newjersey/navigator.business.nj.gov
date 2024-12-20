@@ -14,7 +14,6 @@ summaryDescriptionMd: >-
 
   Check out [resources for appointing trustees](https://business.nj.gov/pages/business-support#section-4).
 urlSlug: nonprofit-business-trustees
-filename: nonprofit-business-trustees
 displayname: nonprofit-business-trustees
 name: "Appoint Trustees"
 id: nonprofit-business-trustees

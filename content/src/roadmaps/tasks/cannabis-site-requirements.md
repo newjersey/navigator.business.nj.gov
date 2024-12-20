@@ -8,13 +8,13 @@ summaryDescriptionMd: >-
 
   Prior to opening, your business site will need to be inspected and approved locally and by NJCRC to ensure customer and employee safety.
 urlSlug: cannabis-site-requirements
-filename: cannabis-site-requirements
 displayname: cannabis-site-requirements
 name: Determine Cannabis Site Requirements
 id: cannabis-site-requirements
 callToActionLink: ""
 callToActionText: ""
 ---
+
 ## Safety Permits
 
 1. **Fire protection permits:** Talk to your fire department to make sure your space meets requirements, like working sprinklers, extinguishers, and signage.
