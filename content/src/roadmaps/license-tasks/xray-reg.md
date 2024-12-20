@@ -41,7 +41,7 @@ divisionPhone: (609) 984-5463
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
 
-DEP will provide the registration number and a Facility ID for a new location via mail after you submit the temporary registration form.
+DEP will provide the registration number and a Facility ID for a new location via mail after you submit the registration form.
 
 :::
 
