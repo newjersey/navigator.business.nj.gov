@@ -55,7 +55,7 @@ icon: govt-purple.svg
 If you don’t get this permit and your combination vehicle, trailer, and load meet the Single Trip OS/OW Permit (5-day) requirements, you may face fines.
 :::
 :::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
-* A 5-day single trip permit for an overweight, oversized vehicle using a Single Trip OS/OW Permit
+* A 5-day single trip permit for an overweight, oversized vehicle with or without a trailer
 * A permit that you will get by email, fax, or from the "My Queue" page on your NJDOT GotPermits profile
 :::
 
