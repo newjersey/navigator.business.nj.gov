@@ -71,7 +71,7 @@ export const DateOfFormation = (props: Props): ReactElement<any> => {
     process.env.NODE_ENV === "test" || process.env.CI === "true" ? DesktopDatePicker : DatePicker;
 
   return (
-    (<LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Picker
         views={["year", "month"]}
         inputFormat={"MM/YYYY"}
@@ -108,6 +108,6 @@ export const DateOfFormation = (props: Props): ReactElement<any> => {
           );
         }}
       />
-    </LocalizationProvider>)
+    </LocalizationProvider>
   );
 };

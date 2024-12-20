@@ -11,30 +11,27 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { MDXProvider as BaseMDXProvider } from "@mdx-js/react";
 import { FormControlLabel } from "@mui/material";
-import type { ComponentType, ReactElement, ReactNode } from "react";
+import { ComponentType, ReactElement, ReactNode } from "react";
 
-// Define the MDX component types
 type MDXComponents = {
   [key: string]: ComponentType<any>;
 };
 
-interface MDXProviderProps {
-  children: React.ReactNode;
+interface MdxProviderProps {
+  children: ReactNode;
   className?: string;
   style?: React.CSSProperties;
   onClick?: (url?: string) => void;
   customComponents?: Record<string, React.ReactElement>;
 }
 
-export const ExternalLink = ({
-  children,
-  href,
-  onClick,
-}: {
-  children: string;
+interface ExternalLinkProps {
+  children: ReactNode;
   href: string;
   onClick?: (url?: string) => void;
-}): ReactElement => {
+}
+
+export const ExternalLink = ({ children, href, onClick }: ExternalLinkProps): ReactElement => {
   return (
     <a
       className="usa-link"
@@ -42,27 +39,33 @@ export const ExternalLink = ({
       target="_blank"
       rel="noreferrer noopener"
       onClick={(): void => {
-        onClick ? onClick(href) : analytics.event.external_link.click.open_external_website(children, href);
+        onClick
+          ? onClick(href)
+          : analytics.event.external_link.click.open_external_website(children?.toString() ?? "", href);
       }}
     >
-      {children}
-      <Icon iconName="launch" />
+      <span>
+        {children}
+        <Icon iconName="launch" />
+      </span>
     </a>
   );
 };
 
-const Link = (onClick?: (url?: string) => void) => {
-  function LinkComponent({ href, children }: { href: string; children: string }): ReactElement {
+const Link = (
+  onClick?: (url?: string) => void
+): (({ href, children }: { href: string; children: ReactNode }) => ReactElement) => {
+  function LinkComponent({ href, children }: { href: string; children: ReactNode }): ReactElement {
     if (/^https?:\/\/(.*)/.test(href)) {
       return (
-        <ExternalLink href={href} onClick={() => onClick?.(href)}>
-          {children}
+        <ExternalLink href={href} onClick={(url) => onClick?.(url)}>
+          <span>{children}</span>
         </ExternalLink>
       );
     }
     return (
       <a href={href} className="usa-link" onClick={() => onClick?.(href)}>
-        {children}
+        <span>{children}</span>
       </a>
     );
   }
@@ -70,11 +73,11 @@ const Link = (onClick?: (url?: string) => void) => {
   return LinkComponent;
 };
 
-const Unformatted = (props: { children: React.ReactNode }): ReactElement => {
+const Unformatted = (props: { children: ReactNode }): ReactElement => {
   return <div>{props.children}</div>;
 };
 
-const OutlineBox = (props: { children: React.ReactNode }): ReactElement => {
+const OutlineBox = (props: { children: ReactNode }): ReactElement => {
   return (
     <div className="text-normal padding-2 margin-top-2 border-base-lighter border-1px font-body-2xs">
       {props.children}
@@ -99,7 +102,7 @@ const ListOrCheckbox = (props: { children: string[] }): ReactElement => {
   return <li>{props.children ?? ""}</li>;
 };
 
-const InlineIcon = (props: { type: InlineIconType; children: React.ReactNode }): ReactElement => {
+const InlineIcon = (props: { type: InlineIconType; children: ReactNode }): ReactElement => {
   const getIconByType = (): ReactElement => {
     switch (props.type) {
       case "green checkmark":
@@ -119,13 +122,13 @@ const InlineIcon = (props: { type: InlineIconType; children: React.ReactNode }):
   );
 };
 
-export const MDXProvider = ({
+export const MdxProvider = ({
   children,
   onClick,
   className = "",
   style,
   customComponents = {},
-}: MDXProviderProps): ReactElement => {
+}: MdxProviderProps): ReactElement => {
   const { business } = useUserData();
   const isTest = process.env.NODE_ENV === "test";
 

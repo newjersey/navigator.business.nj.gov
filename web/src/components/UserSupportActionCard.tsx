@@ -20,7 +20,7 @@ export const UserSupportActionCard = (props: Props): ReactElement<any> => {
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 
   return (
-    (<div
+    <div
       className={`landing-card border-${props.borderColor} border-top-105 ${
         isDesktopAndUp && !props.isLast ? "margin-right-3" : ""
       } ${!isDesktopAndUp && !props.isLast ? "margin-bottom-2" : ""}`}
@@ -34,18 +34,16 @@ export const UserSupportActionCard = (props: Props): ReactElement<any> => {
         </div>
         <div>
           <Link href={props.buttonLink} legacyBehavior>
-            <div>
-              <PrimaryButton
-                isColor={props.primaryButtonColor}
-                isRightMarginRemoved={true}
-                isIntercomEnabled={props.isIntercomEnabled}
-              >
-                {props.buttonText}
-              </PrimaryButton>
-            </div>
+            <PrimaryButton
+              isColor={props.primaryButtonColor}
+              isRightMarginRemoved={true}
+              isIntercomEnabled={props.isIntercomEnabled}
+            >
+              {props.buttonText}
+            </PrimaryButton>
           </Link>
         </div>
       </div>
-    </div>)
+    </div>
   );
 };

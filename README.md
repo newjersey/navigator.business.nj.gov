@@ -166,7 +166,7 @@ line in `_app.tsx`).
 ### Environment variables
 
 For Next.js, environment variables are inserted at build time. In
-`./web/next.config.js`, the environment variables that the code will have access
+`./web/next.config.mjs`, the environment variables that the code will have access
 to are set up for the Next.js framework by pulling them in from the `.env` file.
 This works because the system that is building the Next.js code (via CircleCI
 workflow) has access to these variables via environment variables set during

@@ -1,11 +1,13 @@
+@use "../sass-files/variables";
+
 .footer-social-media-icon {
-  color: $base-lighter;
+  color: variables.$base-lighter;
   width: 2.5rem !important;
   height: 2.5rem !important;
 }
 
 .footer-social-media-icon:hover {
-  color: $white;
+  color: variables.$white;
 }
 
 ul.footer-social-media-structure {

@@ -182,7 +182,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement<any> => {
   };
 
   return (
-    (<div className={"anytime-action-dropdown-container"}>
+    <div className={"anytime-action-dropdown-container"}>
       <Heading level={2} className={"h2-styling text-medium"}>
         {Config.dashboardAnytimeActionDefaults.defaultHeaderText}
       </Heading>
@@ -312,6 +312,6 @@ export const AnytimeActionDropdown = (props: Props): ReactElement<any> => {
           </span>
         )}
       </span>
-    </div>)
+    </div>
   );
 };

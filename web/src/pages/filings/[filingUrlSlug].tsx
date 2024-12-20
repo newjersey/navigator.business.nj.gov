@@ -1,7 +1,8 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Callout } from "@/components/Callout";
-import { Content, ExternalLink } from "@/components/Content";
+import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
+import { ExternalLink } from "@/components/MdxProvider";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { Tag } from "@/components/njwds-extended/Tag";

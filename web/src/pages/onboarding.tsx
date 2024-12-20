@@ -24,21 +24,17 @@ import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import {
+  createProfileFieldErrorMap,
   FlowType,
   OnboardingErrors,
   OnboardingStatus,
   Page,
   ProfileError,
   UpdateQueue,
-  createProfileFieldErrorMap,
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import {
-  sendOnboardingOnSubmitEvents,
-  setAnalyticsDimensions,
-  setRegistrationDimension,
-} from "@/lib/utils/analytics-helpers";
-import { OnboardingStatusLookup, getFlow, scrollToTop } from "@/lib/utils/helpers";
+import { setRegistrationDimension } from "@/lib/utils/analytics-helpers";
+import { getFlow, OnboardingStatusLookup } from "@/lib/utils/helpers";
 import {
   evalHeaderStepsTemplate,
   flowQueryParamIsValid,
@@ -50,20 +46,19 @@ import {
 } from "@/lib/utils/onboardingPageHelpers";
 import { determineForeignBusinessType } from "@businessnjgovnavigator/shared";
 import {
+  createEmptyProfileData,
+  createEmptyUserData,
   LookupMunicipalityByName,
   Municipality,
   OperatingPhaseId,
   ProfileData,
   TaskProgress,
   UserData,
-  createEmptyProfileData,
-  createEmptyUserData,
 } from "@businessnjgovnavigator/shared/";
 import { createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
 import { isRemoteWorkerOrSellerBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
-import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
@@ -171,6 +166,79 @@ const OnboardingPage = (props: Props): ReactElement<any> => {
 
   useEffect(() => {
     (async (): Promise<void> => {
+      const setBusinessPersonaAndRouteToPage = async (
+        flow: string,
+        updateQueue: UpdateQueue | undefined
+      ): Promise<void> => {
+        const flowType = mapFlowQueryToPersona[flow as QUERY_PARAMS_VALUES["flow"]];
+        const newProfileData: ProfileData = {
+          ...profileData,
+          businessPersona: flowType,
+        };
+
+        setProfileData(newProfileData);
+        setCurrentFlow(flowType);
+        if (flowType === "OWNING") {
+          setPage({ current: 1, previous: 1 });
+        } else {
+          setPage({ current: 2, previous: 1 });
+        }
+        await updateQueue?.queueProfileData(newProfileData);
+      };
+
+      const completeOnboarding = async (
+        newProfileData: ProfileData,
+        updateQueue: UpdateQueue | undefined
+      ): Promise<void> => {
+        if (!updateQueue) return;
+
+        setRegistrationDimension("Onboarded Guest");
+        if (isAdditionalBusiness) {
+          analytics.event.onboarding_last_step_save_additional_business_button.click.finish_additional_business_onboarding();
+        } else {
+          analytics.event.onboarding_last_step.submit.finish_onboarding();
+        }
+
+        const isRemoteSellerWorker = isRemoteWorkerOrSellerBusiness({
+          ...updateQueue.currentBusiness(),
+          profileData: newProfileData,
+        });
+
+        let newUserData: UserData = {
+          ...updateQueue.current(),
+          businesses: {
+            ...updateQueue.current().businesses,
+            [updateQueue.current().currentBusinessId]: {
+              ...updateQueue.currentBusiness(),
+              profileData: {
+                ...newProfileData,
+                operatingPhase: isRemoteSellerWorker
+                  ? OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE
+                  : newProfileData.operatingPhase,
+              },
+              onboardingFormProgress: "COMPLETED",
+            },
+          },
+        };
+
+        newUserData = await api.postGetAnnualFilings(newUserData);
+        updateQueue.queue(newUserData);
+
+        if (newProfileData.legalStructureId) {
+          const completed: TaskProgress = "COMPLETED";
+          updateQueue.queueTaskProgress({ [businessStructureTaskId]: completed });
+        }
+
+        await updateQueue.update();
+
+        await router.push({
+          pathname: ROUTES.dashboard,
+          query: isAdditionalBusiness
+            ? { [QUERIES.fromAdditionalBusiness]: "true" }
+            : { [QUERIES.fromOnboarding]: "true" },
+        });
+      };
+
       if (
         !router.isReady ||
         hasHandledRouting.current ||
@@ -274,158 +342,139 @@ const OnboardingPage = (props: Props): ReactElement<any> => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady, state.activeUser, state.isAuthenticated, hasCompletedFetch]);
 
-  const setBusinessPersonaAndRouteToPage = async (
-    flow: string,
-    updateQueue: UpdateQueue | undefined
-  ): Promise<void> => {
-    const flowType = mapFlowQueryToPersona[flow as QUERY_PARAMS_VALUES["flow"]];
-    const newProfileData: ProfileData = {
-      ...profileData,
-      businessPersona: flowType,
-    };
-
-    setProfileData(newProfileData);
-    setCurrentFlow(flowType);
-    if (flowType === "OWNING") {
-      setPage({ current: 1, previous: 1 });
-    } else {
-      setPage({ current: 2, previous: 1 });
-    }
-    await updateQueue?.queueProfileData(newProfileData);
-  };
-
-  const completeOnboarding = async (
-    newProfileData: ProfileData,
-    updateQueue: UpdateQueue | undefined
-  ): Promise<void> => {
-    if (!updateQueue) return;
-
-    setRegistrationDimension("Onboarded Guest");
-    if (isAdditionalBusiness) {
-      analytics.event.onboarding_last_step_save_additional_business_button.click.finish_additional_business_onboarding();
-    } else {
-      analytics.event.onboarding_last_step.submit.finish_onboarding();
-    }
-
-    const isRemoteSellerWorker = isRemoteWorkerOrSellerBusiness({
-      ...updateQueue.currentBusiness(),
-      profileData: newProfileData,
-    });
-
-    let newUserData: UserData = {
-      ...updateQueue.current(),
-      businesses: {
-        ...updateQueue.current().businesses,
-        [updateQueue.current().currentBusinessId]: {
-          ...updateQueue.currentBusiness(),
-          profileData: {
-            ...newProfileData,
-            operatingPhase: isRemoteSellerWorker
-              ? OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE
-              : newProfileData.operatingPhase,
-          },
-          onboardingFormProgress: "COMPLETED",
-        },
-      },
-    };
-
-    newUserData = await api.postGetAnnualFilings(newUserData);
-    updateQueue.queue(newUserData);
-
-    if (newProfileData.legalStructureId) {
-      const completed: TaskProgress = "COMPLETED";
-      updateQueue.queueTaskProgress({ [businessStructureTaskId]: completed });
-    }
-
-    await updateQueue.update();
-
-    await router.push({
-      pathname: ROUTES.dashboard,
-      query: isAdditionalBusiness
-        ? { [QUERIES.fromAdditionalBusiness]: "true" }
-        : { [QUERIES.fromOnboarding]: "true" },
-    });
-  };
-
   FormFuncWrapper(
-    async (): Promise<void> => {
-      scrollToTop();
-      if (!updateQueue) return;
-      let newProfileData = profileData;
-
-      const hasBusinessPersonaChanged =
-        profileData.businessPersona !== updateQueue.currentBusiness().profileData.businessPersona;
-
-      if (page.current === 1 && hasBusinessPersonaChanged) {
-        newProfileData = {
-          ...emptyProfileData,
-          businessName: profileData.businessName,
-          industryId: profileData.businessPersona === "OWNING" ? "generic" : undefined,
-          homeBasedBusiness: profileData.homeBasedBusiness,
-          liquorLicense: profileData.liquorLicense,
-          municipality: profileData.municipality,
-          businessPersona: profileData.businessPersona,
-          requiresCpa: profileData.requiresCpa,
-          providesStaffingService: profileData.providesStaffingService,
-          certifiedInteriorDesigner: profileData.certifiedInteriorDesigner,
-          realEstateAppraisalManagement: profileData.realEstateAppraisalManagement,
-          operatingPhase:
-            profileData.businessPersona === "OWNING"
-              ? OperatingPhaseId.GUEST_MODE_OWNING
-              : OperatingPhaseId.GUEST_MODE,
-          interstateLogistics: profileData.interstateLogistics,
-          interstateMoving: profileData.interstateMoving,
-          sectorId: profileData.sectorId,
-        };
-
-        setProfileData(newProfileData);
-        setCurrentFlow(getFlow(profileData));
-      }
-
-      const currentPage = onboardingFlows[currentFlow].pages[page.current - 1];
-      sendOnboardingOnSubmitEvents(newProfileData, currentPage?.name);
-      setAnalyticsDimensions(newProfileData);
-
-      if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NONE") {
-        await router.push({
-          pathname: ROUTES.unsupported,
-          query: isAdditionalBusiness
-            ? { [QUERIES.additionalBusiness]: "true", [QUERIES.previousBusinessId]: previousBusiness?.id }
-            : {},
-        });
-      } else if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
-        updateQueue
-          .queueProfileData(newProfileData)
-          .update({ local: true })
-          .then(() => {
-            const nextCurrentPage = page.current + 1;
-            setPage({
-              current: nextCurrentPage,
-              previous: page.current,
-            });
-            routeToPage(nextCurrentPage);
-            headerRef.current?.focus();
-          });
-      } else {
-        completeOnboarding(newProfileData, updateQueue);
-      }
-    },
-    (isValid, errors) => {
-      if (errors.length > 0 && !isValid) {
-        scrollToTop();
-        if (errors.includes("ALERT_BAR")) {
-          setAlert("ERROR");
-        }
-        const banner = errors.filter((error) => error !== "ALERT_BAR") as ProfileError[];
-        if (banner.length > 0) {
-          setError(banner[0]);
-        }
-        headerRef.current?.focus();
-      } else {
-        setError(undefined);
-        setAlert(undefined);
-      }
-    }
+    () => {}
+    // async (): Promise<void> => {
+    //   const completeOnboarding = async (
+    //     newProfileData: ProfileData,
+    //     updateQueue: UpdateQueue | undefined
+    //   ): Promise<void> => {
+    //     if (!updateQueue) return;
+    //
+    //     setRegistrationDimension("Onboarded Guest");
+    //     if (isAdditionalBusiness) {
+    //       analytics.event.onboarding_last_step_save_additional_business_button.click.finish_additional_business_onboarding();
+    //     } else {
+    //       analytics.event.onboarding_last_step.submit.finish_onboarding();
+    //     }
+    //
+    //     const isRemoteSellerWorker = isRemoteWorkerOrSellerBusiness({
+    //       ...updateQueue.currentBusiness(),
+    //       profileData: newProfileData,
+    //     });
+    //
+    //     let newUserData: UserData = {
+    //       ...updateQueue.current(),
+    //       businesses: {
+    //         ...updateQueue.current().businesses,
+    //         [updateQueue.current().currentBusinessId]: {
+    //           ...updateQueue.currentBusiness(),
+    //           profileData: {
+    //             ...newProfileData,
+    //             operatingPhase: isRemoteSellerWorker
+    //               ? OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE
+    //               : newProfileData.operatingPhase,
+    //           },
+    //           onboardingFormProgress: "COMPLETED",
+    //         },
+    //       },
+    //     };
+    //
+    //     newUserData = await api.postGetAnnualFilings(newUserData);
+    //     updateQueue.queue(newUserData);
+    //
+    //     if (newProfileData.legalStructureId) {
+    //       const completed: TaskProgress = "COMPLETED";
+    //       updateQueue.queueTaskProgress({ [businessStructureTaskId]: completed });
+    //     }
+    //
+    //     await updateQueue.update();
+    //
+    //     await router.push({
+    //       pathname: ROUTES.dashboard,
+    //       query: isAdditionalBusiness
+    //         ? { [QUERIES.fromAdditionalBusiness]: "true" }
+    //         : { [QUERIES.fromOnboarding]: "true" },
+    //     });
+    //   };
+    //
+    //   scrollToTop();
+    //   if (!updateQueue) return;
+    //   let newProfileData = profileData;
+    //
+    //   const hasBusinessPersonaChanged =
+    //     profileData.businessPersona !== updateQueue.currentBusiness().profileData.businessPersona;
+    //
+    //   if (page.current === 1 && hasBusinessPersonaChanged) {
+    //     newProfileData = {
+    //       ...emptyProfileData,
+    //       businessName: profileData.businessName,
+    //       industryId: profileData.businessPersona === "OWNING" ? "generic" : undefined,
+    //       homeBasedBusiness: profileData.homeBasedBusiness,
+    //       liquorLicense: profileData.liquorLicense,
+    //       municipality: profileData.municipality,
+    //       businessPersona: profileData.businessPersona,
+    //       requiresCpa: profileData.requiresCpa,
+    //       providesStaffingService: profileData.providesStaffingService,
+    //       certifiedInteriorDesigner: profileData.certifiedInteriorDesigner,
+    //       realEstateAppraisalManagement: profileData.realEstateAppraisalManagement,
+    //       operatingPhase:
+    //         profileData.businessPersona === "OWNING"
+    //           ? OperatingPhaseId.GUEST_MODE_OWNING
+    //           : OperatingPhaseId.GUEST_MODE,
+    //       interstateLogistics: profileData.interstateLogistics,
+    //       interstateMoving: profileData.interstateMoving,
+    //       sectorId: profileData.sectorId,
+    //     };
+    //
+    //     setProfileData(newProfileData);
+    //     setCurrentFlow(getFlow(profileData));
+    //   }
+    //
+    //   const currentPage = onboardingFlows[currentFlow].pages[page.current - 1];
+    //   sendOnboardingOnSubmitEvents(newProfileData, currentPage?.name);
+    //   setAnalyticsDimensions(newProfileData);
+    //
+    //   if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NONE") {
+    //     await router.push({
+    //       pathname: ROUTES.unsupported,
+    //       query: isAdditionalBusiness
+    //         ? { [QUERIES.additionalBusiness]: "true", [QUERIES.previousBusinessId]: previousBusiness?.id }
+    //         : {},
+    //     });
+    //   } else if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
+    //     updateQueue
+    //       .queueProfileData(newProfileData)
+    //       .update({ local: true })
+    //       .then(() => {
+    //         const nextCurrentPage = page.current + 1;
+    //         setPage({
+    //           current: nextCurrentPage,
+    //           previous: page.current,
+    //         });
+    //         routeToPage(nextCurrentPage);
+    //         headerRef.current?.focus();
+    //       });
+    //   } else {
+    //     completeOnboarding(newProfileData, updateQueue);
+    //   }
+    // },
+    // (isValid, errors) => {
+    //   if (errors.length > 0 && !isValid) {
+    //     scrollToTop();
+    //     if (errors.includes("ALERT_BAR")) {
+    //       setAlert("ERROR");
+    //     }
+    //     const banner = errors.filter((error) => error !== "ALERT_BAR") as ProfileError[];
+    //     if (banner.length > 0) {
+    //       setError(banner[0]);
+    //     }
+    //     headerRef.current?.focus();
+    //   } else {
+    //     setError(undefined);
+    //     setAlert(undefined);
+    //   }
+    // }
   );
 
   const onBack = (): void => {
@@ -462,7 +511,7 @@ const OnboardingPage = (props: Props): ReactElement<any> => {
     );
   };
   return (
-    (<MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
+    <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
       <ProfileFormContext.Provider value={formContextState}>
         <ProfileDataContext.Provider
           value={{
@@ -502,10 +551,8 @@ const OnboardingPage = (props: Props): ReactElement<any> => {
                     <>
                       {OnboardingStatusLookup()[alert].body}
                       {OnboardingStatusLookup()[alert] && (
-                        <Link href={ROUTES.dashboard} data-testid={`snackbar-link`}>
-
-                          {OnboardingStatusLookup()[alert].link}
-
+                        <Link href={ROUTES.dashboard} data-testid={`snackbar-link`} legacyBehavior>
+                          <span>{OnboardingStatusLookup()[alert].link}</span>
                         </Link>
                       )}
                     </>
@@ -547,7 +594,7 @@ const OnboardingPage = (props: Props): ReactElement<any> => {
           </PageSkeleton>
         </ProfileDataContext.Provider>
       </ProfileFormContext.Provider>
-    </MunicipalitiesContext.Provider>)
+    </MunicipalitiesContext.Provider>
   );
 };
 

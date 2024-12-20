@@ -1,7 +1,11 @@
 import { Heading } from "@/components/njwds-extended/Heading";
 import { ReactElement } from "react";
 
-export const Card = (props: { iconFilename: string; title: string; description: string }): ReactElement<any> => {
+export const Card = (props: {
+  iconFilename: string;
+  title: string;
+  description: string;
+}): ReactElement<any> => {
   return (
     <>
       <div className="display-none-desktop border-1px shadow-2 padding-3 radius-lg border-gray-10 display-flex flex-column gap-2">

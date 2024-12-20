@@ -1,7 +1,9 @@
+@use "../sass-files/variables";
+
 .row-desktop-column-mobile {
   display: flex;
   flex-direction: column;
-  @media (min-width: $xs) {
+  @media (min-width: variables.$xs) {
     flex-direction: row;
   }
 }
@@ -9,7 +11,7 @@
 .flex-align-center-desktop-start-mobile {
   display: flex;
   align-items: flex-start;
-  @media (min-width: $xs) {
+  @media (min-width: variables.$xs) {
     align-items: center;
   }
 }

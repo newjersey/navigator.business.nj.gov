@@ -1,9 +1,10 @@
 import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
+import { ReactElement } from "react";
 import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
-import { MDXProvider } from "./MDXProvider";
+import { MdxProvider } from "./MdxProvider";
 
 interface ContentProps {
   children: string;
@@ -13,7 +14,7 @@ interface ContentProps {
   customComponents?: Record<string, React.ReactElement>;
 }
 
-export const Content = async (props: ContentProps) => {
+export const Content = async (props: ContentProps): Promise<ReactElement> => {
   const updatedContent = useContentModifiedByUserData(props.children);
 
   const mdxSource = await serialize(updatedContent, {
@@ -27,10 +28,10 @@ export const Content = async (props: ContentProps) => {
   });
 
   return (
-    <MDXProvider onClick={props.onClick} customComponents={props.customComponents}>
+    <MdxProvider onClick={props.onClick} customComponents={props.customComponents}>
       <div className={props.className} style={props.style}>
         <MDXRemote {...mdxSource} />
       </div>
-    </MDXProvider>
+    </MdxProvider>
   );
 };

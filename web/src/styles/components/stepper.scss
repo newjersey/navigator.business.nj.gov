@@ -1,3 +1,5 @@
+@use "../sass-files/variables";
+
 .vertical-step-indicator {
   .usa-step-indicator--counters .usa-step-indicator__segment,
   .usa-step-indicator--counters-smaller .usa-step-indicator__segment {
@@ -7,7 +9,7 @@
 
   .usa-step-indicator--counters .usa-step-indicator__segment:before {
     height: 2rem;
-    background-color: $white;
+    background-color: variables.$white;
     border-radius: 99rem;
     width: 2rem;
     font-feature-settings: "tnum" 1, "kern" 1;
@@ -22,8 +24,8 @@
     font-size: 18px;
     margin-top: 12px;
     margin-left: 3px;
-    color: $primary-darker !important;
-    box-shadow: inset 0 0 0 0.2rem $primary-darker, 0 0 0 0 #fff !important;
+    color: variables.$primary-darker !important;
+    box-shadow: inset 0 0 0 0.2rem variables.$primary-darker, 0 0 0 0 #fff !important;
   }
 
   .usa-step-indicator--counters .usa-step-indicator__segment-smaller {
@@ -35,7 +37,7 @@
     width: 1.5rem;
     padding: 4.25px;
     font-size: 16px;
-    box-shadow: inset 0 0 0 0.15rem $primary-darker, 0 0 0 0 #fff !important;
+    box-shadow: inset 0 0 0 0.15rem variables.$primary-darker, 0 0 0 0 #fff !important;
   }
 
   .vertical-bar {
@@ -43,7 +45,7 @@
     position: absolute;
     height: 0rem;
     z-index: 90;
-    background-color: $cool-lighter;
+    background-color: variables.$cool-lighter;
     left: 18px;
   }
 
@@ -52,7 +54,7 @@
     position: absolute;
     height: 0rem;
     z-index: 90;
-    background-color: $cool-lighter;
+    background-color: variables.$cool-lighter;
     left: 14px;
   }
 }
@@ -78,7 +80,7 @@
     @media (min-width: 40em) {
       padding-bottom: 1rem;
     }
-    @media all and (max-width: $sm) {
+    @media all and (max-width: variables.$sm) {
       padding-top: 1rem;
       margin-top: 0;
       padding-bottom: 2.5rem;
@@ -92,7 +94,7 @@
     left: 50%;
     right: -50%;
     top: 1.7rem;
-    @media all and (max-width: $sm) {
+    @media all and (max-width: variables.$sm) {
       top: 1.5rem;
     }
   }
@@ -101,7 +103,7 @@
   .usa-step-indicator__segment--current:after,
   .usa-step-indicator__segment--error:after,
   .usa-step-indicator__segment--complete:after {
-    background-color: $base-light;
+    background-color: variables.$base-light;
   }
 
   .usa-step-indicator--counters-sm.usa-step-indicator .usa-step-indicator__segment:last-child:after,
@@ -114,24 +116,24 @@
   /* ----- LABEL STYLING ----- */
 
   .usa-step-indicator__segment-label {
-    color: $base;
+    color: variables.$base;
     text-align: center;
     padding: 1.5rem 0 0 0;
-    @media all and (max-width: $sm) {
+    @media all and (max-width: variables.$sm) {
       padding: 0 0 0 0;
     }
   }
 
   .usa-step-indicator__segment--current .usa-step-indicator__segment-label {
-    color: $accent-cool-darker;
+    color: variables.$accent-cool-darker;
   }
 
   .usa-step-indicator__segment--complete .usa-step-indicator__segment-label {
-    color: $primary;
+    color: variables.$primary;
   }
 
   .usa-step-indicator__segment--error .usa-step-indicator__segment-label {
-    color: $error-dark;
+    color: variables.$error-dark;
   }
 
   /* ----- COUNTER CIRCLES STYLING ----- */
@@ -158,27 +160,27 @@
     margin-left: 1px;
     margin-right: 1px;
 
-    @media all and (max-width: $sm) {
+    @media all and (max-width: variables.$sm) {
       top: 0.75;
     }
   }
 
   .usa-step-indicator__segment::before {
-    color: $white !important;
-    background-color: $base-light !important;
+    color: variables.$white !important;
+    background-color: variables.$base-light !important;
     box-shadow: none !important;
   }
 
   .usa-step-indicator__segment--error::before {
-    background-color: $error-dark !important;
+    background-color: variables.$error-dark !important;
   }
 
   .usa-step-indicator__segment--current::before {
-    background-color: $accent-cool-darker !important;
+    background-color: variables.$accent-cool-darker !important;
   }
 
   .usa-step-indicator__segment--complete::before {
-    background-color: $primary !important;
+    background-color: variables.$primary !important;
   }
 
   .usa-step-indicator__segment--complete:before,
@@ -192,8 +194,8 @@
 
 .substep-unchecked:before {
   border-radius: 99rem;
-  background-color: $white;
-  border: 2px solid $primary-darker;
+  background-color: variables.$white;
+  border: 2px solid variables.$primary-darker;
   box-sizing: border-box;
   font-feature-settings: "tnum" 1, "kern" 1;
   content: "";
@@ -208,13 +210,13 @@
   margin-left: 1px;
   margin-right: 1px;
 
-  @media all and (min-width: $sm) {
+  @media all and (min-width: variables.$sm) {
     margin-top: 0;
   }
 }
 
 .substep-unchecked.active:before {
-  border: 2px solid $primary-darker;
+  border: 2px solid variables.$primary-darker;
 }
 
 .checked-task {
@@ -224,7 +226,7 @@
 
 .stepper-wrapper {
   margin-bottom: 0;
-  @media screen and (min-width: $sm) {
+  @media screen and (min-width: variables.$sm) {
     margin-bottom: 2rem;
   }
 }
