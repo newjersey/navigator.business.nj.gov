@@ -1,5 +1,5 @@
 ---
-filename: cemetery-reinstatement
+id: cemetery-reinstatement
 name: Reinstate Your Cemetery Salesperson License
 industryIds:
   - cemetery

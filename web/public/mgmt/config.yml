@@ -1277,8 +1277,8 @@ collections:
     label: "Cert Opps - Content"
     folder: "content/src/certifications"
     summary: "/{{urlSlug}} - {{name}}"
-    identifier_field: "{{urlSlug}}"
-    slug: "{{urlSlug}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
     delete: true
     create: true
     editor:
@@ -1293,12 +1293,7 @@ collections:
         }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - {
-          label: "Url Slug / Filename",
-          name: "urlSlug",
-          widget: "write-once-read-only-no-space",
-          required: true,
-        }
+      - { label: "Url Slug", name: "urlSlug", widget: "write-once-read-only-no-space", required: true }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -1325,6 +1320,7 @@ collections:
           - { label: "Disabled Veteran Owned", value: "disabled-veteran" }
           - { label: "LGBTQ Owned", value: "lgbtq-owned" }
       - { label: "is SBE (show if fewer than 120 employees)", name: "isSbe", widget: boolean, default: false }
+  # TODO: Do we want to keep "archived" collections?
   - name: "archived-certification-opportunities"
     label: "Cert Opps - Archived"
     folder: "content/src/archived-certifications"
@@ -1382,12 +1378,13 @@ collections:
     fields:
       - { name: "" }
 
+  # here
   - name: "funding-opportunities"
     label: "Fund Opps - Content"
     folder: "content/src/fundings"
     summary: "[{{agency[0]}}] - {{displayName}}"
-    identifier_field: "{{filename}}"
-    slug: "{{filename}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
     delete: true
     sortable_fields: ["displayName", "agency"]
     create: true
@@ -1395,7 +1392,6 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "File Name", name: "filename", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Name",
           name: "name",
@@ -2475,12 +2471,12 @@ collections:
                   required: false,
                 }
 
-  - name: "tasks"
+  - name: "tasks" # TODO: also some webflow stuff and sync script stuff to do
     label: "Tasks - All"
     folder: "content/src/roadmaps/tasks"
     summary: "{{displayname}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
     sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
     create: true
@@ -2491,16 +2487,9 @@ collections:
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
-      - { label: "Filename", name: "filename", widget: "write-once-read-only-no-space", required: true }
       - { label: "Display Name", name: "displayname", widget: "no-space", required: true }
       - { label: "Name", name: "name", widget: "string" }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          hint: "This should be the same as the filename.",
-          required: true,
-        }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - {
@@ -2638,8 +2627,8 @@ collections:
     label: "Raffle Bingo Steps"
     folder: "content/src/roadmaps/raffle-bingo-steps"
     summary: "{{displayname}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
     sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
     create: true
@@ -2647,19 +2636,7 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          required: true,
-          hint: "This should be the same as the filename.",
-        }
-      - {
-          label: "Filename",
-          name: "filename",
-          widget: "write-once-read-only-no-space",
-          hint: "This is the name of the file in the code only.",
-        }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Display Name",
           name: "displayname",
@@ -2679,7 +2656,7 @@ collections:
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
 
-  - name: "webflow-licenses"
+  - name: "webflow-licenses" # TODO: fuck with sync scripts, also there is no ID here soooo, are we replacing filename with ID?
     label: "Webflow Licenses"
     folder: "content/src/webflow-licenses"
     summary: "{{displayname}} - {{name}}"
@@ -3055,15 +3032,16 @@ collections:
     folder: "content/src/roadmaps/municipal-tasks"
     delete: false
     create: false
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    summary: "{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
+    editor:
+      preview: false
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Name", name: "name", widget: "string", required: false }
       - { label: "ID", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Webflow Name", name: "webflowName", widget: "string", required: false }
-      - { label: "File name", name: "filename", widget: "write-once-read-only-no-space", required: true }
       - { label: "Call to Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call to Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Agency ID", name: "agencyId", widget: "string", required: false }
@@ -3360,7 +3338,7 @@ collections:
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - {
-          label: "Url Slug / Filename",
+          label: "Url Slug / Filename", #idk if we wnat to rename this label or also change the summary / identifier fields
           name: "urlSlug",
           widget: "write-once-read-only-no-space",
           required: true,
@@ -3690,20 +3668,21 @@ collections:
   - name: "anytime-action-tasks-licenses"
     label: "Anytime Actions (Licenses)"
     folder: "content/src/anytime-action-tasks-licenses"
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    summary: "{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
-    sortable_fields: ["name", "filename"]
+    sortable_fields: ["name", "id"]
     create: true
     editor:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - {
-          label: "Filename (disabled after file creation)",
-          name: "filename",
+          label: "Id",
+          name: "id",
           widget: "write-once-read-only-no-space",
+          hint: "disabled after file creation",
           required: true,
         }
       - { label: "Name/Title", name: "name", widget: "string" }
@@ -3745,20 +3724,21 @@ collections:
   - name: "anytime-action-tasks-reinstatements"
     label: "Anytime Actions (Reinstatements)"
     folder: "content/src/anytime-action-tasks-reinstatements"
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    summary: "{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
-    sortable_fields: ["name", "filename"]
+    sortable_fields: ["name", "id"]
     create: true
     editor:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - {
-          label: "Filename (disabled after file creation)",
-          name: "filename",
+          label: "Id",
+          name: "id",
           widget: "write-once-read-only-no-space",
+          hint: "disabled after file creation",
           required: true,
         }
       - { label: "Name/Title", name: "name", widget: "string" }
@@ -3800,20 +3780,21 @@ collections:
   - name: "anytime-action-tasks-admin"
     label: "Anytime Actions (Admin)"
     folder: "content/src/anytime-action-tasks-admin"
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    summary: "{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
-    sortable_fields: ["name", "filename"]
+    sortable_fields: ["name", "id"]
     create: true
     editor:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - {
-          label: "Filename (disabled after file creation)",
-          name: "filename",
+          label: "Id",
+          name: "id",
           widget: "write-once-read-only-no-space",
+          hint: "disabled after file creation",
           required: true,
         }
       - { label: "Name/Title", name: "name", widget: "string" }
@@ -3855,20 +3836,21 @@ collections:
   - name: "anytime-action-license-reinstatements"
     label: "Anytime Action With Consumer Affairs License Integrations (Reinstatements)"
     folder: "content/src/anytime-action-license-reinstatements"
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    summary: "{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
-    sortable_fields: ["name", "filename"]
+    sortable_fields: ["name", "id"]
     create: true
     editor:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - {
-          label: "Filename (disabled after file creation)",
-          name: "filename",
+          label: "Id",
+          name: "id",
           widget: "write-once-read-only-no-space",
+          hint: "disabled after file creation",
           required: true,
         }
       - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
@@ -3889,20 +3871,21 @@ collections:
   - name: "anytime-action-links"
     label: "Anytime Action External Link Only"
     folder: "content/src/anytime-action-links"
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    summary: "{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
-    sortable_fields: ["name", "filename"]
+    sortable_fields: ["name", "id"]
     create: true
     editor:
       preview: false
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - {
-          label: "Filename (disabled after file creation)",
-          name: "filename",
+          label: "Id",
+          name: "id",
           widget: "write-once-read-only-no-space",
+          hint: "disabled after file creation",
           required: true,
         }
       - { label: "Name/Title", name: "name", widget: "string" }
