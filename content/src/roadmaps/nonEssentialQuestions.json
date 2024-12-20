@@ -97,7 +97,7 @@
     },
     {
       "addOn": "healthcare-xray-reg",
-      "id": "xray-reg-2",
+      "id": "healthcare-xray-regis",
       "questionText": "Will you be using x-ray machines?"
     }
   ]
