@@ -5,6 +5,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement } from "react";
 
 interface Props {
+  isLoginPage?: boolean;
   scrolled: boolean;
   showSidebar: boolean | undefined;
   previousBusinessId: string | undefined;
@@ -24,13 +25,17 @@ export const NavBarMobileHomeLogo = (props: Props): ReactElement => {
           <NavBarVerticalLine />
         </div>
         <div>
-          <NavBarDashboardLink
-            className={props.showSidebar ? "truncate-long-business-names_NavBarMobile" : ""}
-            linkText={
-              props.showSidebar ? props.businessNavBarTitle : Config.navigationDefaults.navBarMyAccountText
-            }
-            previousBusinessId={props.previousBusinessId}
-          />
+          {props.isLoginPage ? (
+            <span className="my-acccount-login-text font-body-sm">My Account</span>
+          ) : (
+            <NavBarDashboardLink
+              className={props.showSidebar ? "truncate-long-business-names_NavBarMobile" : ""}
+              linkText={
+                props.showSidebar ? props.businessNavBarTitle : Config.navigationDefaults.navBarMyAccountText
+              }
+              previousBusinessId={props.previousBusinessId}
+            />
+          )}
         </div>
       </div>
     </div>

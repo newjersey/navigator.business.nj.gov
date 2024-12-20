@@ -3,9 +3,6 @@ import { getMergedConfig } from "@/contexts/configContext";
 import analytics from "@/lib/utils/analytics";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/auth/sessionHelper", () => ({
-  triggerSignIn: jest.fn(),
-}));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 function setupMockAnalytics(): typeof analytics {

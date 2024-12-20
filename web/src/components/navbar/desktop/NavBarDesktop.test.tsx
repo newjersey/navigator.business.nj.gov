@@ -92,7 +92,6 @@ describe("<NavBarDesktop />", () => {
       render(<NavBarDesktop isLanding={false} currentlyOnboarding={true} isAuthenticated={false} />);
 
       quickLinksDoNotExist();
-      expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
       expect(screen.getByTestId("nav-bar-desktop-dropdown-button")).toBeInTheDocument();
     });
   });
