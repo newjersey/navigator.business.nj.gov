@@ -32,7 +32,7 @@ divisionPhone: (609) 984-5463
 * Generator serial number
 * Tube insert serial number
 * Type of image receptor used in the x-ray
-* Copy of radiation safety survey 
+* Copy of `radiation safety survey|radiation-safety-survey` 
 * Applicable fees paid
 * Location/room ID, if applicable
 * Vehicle/trailer facility year, make, model, state, plate number, VIN, and copy of registration, if applicable
