@@ -21,6 +21,7 @@ import {
   generateBusiness,
   generatePreferences,
   generateProfileData,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { render, waitFor } from "@testing-library/react";
@@ -91,7 +92,7 @@ describe("loading page", () => {
   });
 
   it("redirects user to returnToLink page url if they have one and resets returnToLink", async () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({ businessPersona: "STARTING" }),
       preferences: generatePreferences({ returnToLink: "/tasks/some-task" }),
       onboardingFormProgress: "COMPLETED",

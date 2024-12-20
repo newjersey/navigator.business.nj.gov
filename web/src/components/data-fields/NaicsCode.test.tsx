@@ -9,6 +9,7 @@ import {
   generateBusiness,
   generateProfileData,
   generateTaxFilingData,
+  generateUserData,
   generateUserDataForBusiness,
   TaxFilingState,
 } from "@businessnjgovnavigator/shared";
@@ -19,6 +20,7 @@ import { render, screen } from "@testing-library/react";
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const Config = getMergedConfig();
 
+const userData = generateUserData({});
 const renderComponent = (businessOverrides: Partial<Business>): void => {
   const data = generateProfileData({
     businessPersona: "STARTING",
@@ -37,7 +39,7 @@ const renderComponent = (businessOverrides: Partial<Business>): void => {
         }}
       >
         <WithStatefulUserData
-          initialUserData={generateUserDataForBusiness(generateBusiness(businessOverrides))}
+          initialUserData={generateUserDataForBusiness(generateBusiness(userData, businessOverrides))}
         >
           <NaicsCode />
         </WithStatefulUserData>

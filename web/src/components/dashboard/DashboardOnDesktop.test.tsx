@@ -36,6 +36,7 @@ import {
   generatePreferences,
   generateProfileData,
   generateTaxFilingData,
+  generateUserData,
   generateUserDataForBusiness,
   getIndustries,
   OperatingPhases,
@@ -59,6 +60,7 @@ const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>): Roa
     },
   };
 };
+const userData = generateUserData({});
 
 const operatingPhasesThatDontDisplayHideableRoadmapTasks = OperatingPhases.filter((obj) => {
   return !obj.displayHideableRoadmapTasks;
@@ -118,7 +120,9 @@ describe("<DashboardOnDesktop />", () => {
     setupStatefulUserDataContext();
 
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business ?? generateBusiness(userData, {}))}
+      >
         <ThemeProvider theme={createTheme()}>
           <DashboardOnDesktop
             operateReferences={{}}
@@ -295,7 +299,7 @@ describe("<DashboardOnDesktop />", () => {
         describe(`${operatingPhase}`, () => {
           it("does not show home-based business question when not applicable to operating phase", () => {
             useMockBusiness(
-              generateBusiness({
+              generateBusiness(userData, {
                 profileData: generateProfileData({
                   industryId: randomHomeBasedIndustry(),
                   homeBasedBusiness: undefined,
@@ -325,7 +329,7 @@ describe("<DashboardOnDesktop />", () => {
         describe(`${operatingPhase}`, () => {
           it("does not show home-based business question when not applicable to industry", () => {
             useMockBusiness(
-              generateBusiness({
+              generateBusiness(userData, {
                 profileData: generateProfileData({
                   homeBasedBusiness: undefined,
                   industryId: randomNonHomeBasedIndustry(),
@@ -347,7 +351,7 @@ describe("<DashboardOnDesktop />", () => {
           });
 
           it("sets homeBasedBusiness in profile and removes question when radio is selected", async () => {
-            const business = generateBusiness({
+            const business = generateBusiness(userData, {
               profileData: generateProfileData({
                 industryId: randomHomeBasedIndustry(),
                 homeBasedBusiness: undefined,
@@ -369,7 +373,7 @@ describe("<DashboardOnDesktop />", () => {
           });
 
           it("shallow routes with query parameter when radio is selected", async () => {
-            const business = generateBusiness({
+            const business = generateBusiness(userData, {
               profileData: generateProfileData({
                 industryId: randomHomeBasedIndustry(),
                 homeBasedBusiness: undefined,
@@ -402,7 +406,7 @@ describe("<DashboardOnDesktop />", () => {
         describe(`${operatingPhase}`, () => {
           it("shows home-based business question with alt description when applicable to industry and not yet answered", () => {
             useMockBusiness(
-              generateBusiness({
+              generateBusiness(userData, {
                 profileData: generateProfileData({
                   industryId: randomHomeBasedIndustry(),
                   homeBasedBusiness: undefined,
@@ -439,7 +443,9 @@ describe("<DashboardOnDesktop />", () => {
     it.each(operatingPhasesWithoutAnytimeActions)(
       "does not display anytime action section for %s",
       (phase) => {
-        useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
+        useMockBusiness(
+          generateBusiness(userData, { profileData: generateProfileData({ operatingPhase: phase }) })
+        );
         renderDashboardComponent({
           anytimeActionLinks: [generateAnytimeActionLink({})],
           anytimeActionAdminTask: [generateAnytimeActionTask({})],
@@ -452,7 +458,9 @@ describe("<DashboardOnDesktop />", () => {
     );
 
     it.each(operatingPhasesWithAnytimeActions)("displays anytime action section for %s", (phase) => {
-      useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
+      useMockBusiness(
+        generateBusiness(userData, { profileData: generateProfileData({ operatingPhase: phase }) })
+      );
       renderDashboardComponent({
         anytimeActionLinks: [generateAnytimeActionLink({})],
         anytimeActionAdminTask: [generateAnytimeActionTask({})],

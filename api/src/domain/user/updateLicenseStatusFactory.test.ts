@@ -14,6 +14,7 @@ import {
   generateLicenseSearchNameAndAddress,
   generateLicenseStatusItem,
   generateProfileData,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
@@ -33,7 +34,7 @@ describe("updateLicenseStatus", () => {
 
   let stubWebserviceLicenseStatusSearch: jest.Mock;
   let stubRGBLicenseStatusSearch: jest.Mock;
-  let userData: UserData;
+  let userDataForBusiness: UserData;
   const nameAndAddress = generateLicenseSearchNameAndAddress({});
   const expectedCurrentDate = getCurrentDateModule.getCurrentDate().toISOString();
 
@@ -50,28 +51,29 @@ describe("updateLicenseStatus", () => {
       stubRGBLicenseStatusSearch
     );
 
-    userData = generateUserDataForBusiness(
-      generateBusiness({
-        taskProgress: { "generic-task": "COMPLETED" },
-        profileData: generateProfileData({
-          industryId: "home-contractor",
-        }),
-        licenseData: generateLicenseData({
-          lastUpdatedISO: getCurrentDateModule
-            .getCurrentDate()
-            .subtract(1, "hour")
-            .subtract(1, "minute")
-            .toISOString(),
-        }),
-      })
-    );
+    const userData = generateUserData({});
+    const business = generateBusiness(userData, {
+      taskProgress: { "generic-task": "COMPLETED" },
+      profileData: generateProfileData({
+        industryId: "home-contractor",
+      }),
+      licenseData: generateLicenseData({
+        lastUpdatedISO: getCurrentDateModule
+          .getCurrentDate()
+          .subtract(1, "hour")
+          .subtract(1, "minute")
+          .toISOString(),
+      }),
+    });
+
+    userDataForBusiness = generateUserDataForBusiness(business);
   });
 
   describe("license data", () => {
     it("searches for any license information with user supplied business name and address", async () => {
       stubWebserviceLicenseStatusSearch.mockResolvedValue(generateLicenseData({}));
       stubRGBLicenseStatusSearch.mockResolvedValue(generateLicenseData({}));
-      await updateLicenseStatus(userData, nameAndAddress);
+      await updateLicenseStatus(userDataForBusiness, nameAndAddress);
       expect(stubWebserviceLicenseStatusSearch).toHaveBeenCalledWith({
         name: nameAndAddress.name,
         addressLine1: nameAndAddress.addressLine1,
@@ -108,12 +110,12 @@ describe("updateLicenseStatus", () => {
       stubWebserviceLicenseStatusSearch.mockResolvedValue(licenseType1);
       stubRGBLicenseStatusSearch.mockResolvedValue(licenseType2);
 
-      userData = modifyCurrentBusiness(userData, (business) => ({
+      userDataForBusiness = modifyCurrentBusiness(userDataForBusiness, (business) => ({
         ...business,
         licenseData: generateLicenseData({}),
       }));
 
-      const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+      const resultUserData = await updateLicenseStatus(userDataForBusiness, nameAndAddress);
       const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
       const resultLicenseData = resultCurrentBusiness.licenseData;
@@ -167,12 +169,12 @@ describe("updateLicenseStatus", () => {
       stubWebserviceLicenseStatusSearch.mockResolvedValue(licenseType1);
       stubRGBLicenseStatusSearch.mockResolvedValue(licenseType2);
 
-      userData = modifyCurrentBusiness(userData, (business) => ({
+      userDataForBusiness = modifyCurrentBusiness(userDataForBusiness, (business) => ({
         ...business,
         licenseData: generateLicenseData({}),
       }));
 
-      const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+      const resultUserData = await updateLicenseStatus(userDataForBusiness, nameAndAddress);
       const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
       const resultLicenseData = resultCurrentBusiness.licenseData;
@@ -216,12 +218,12 @@ describe("updateLicenseStatus", () => {
       stubWebserviceLicenseStatusSearch.mockResolvedValue(licenseType1);
       stubRGBLicenseStatusSearch.mockResolvedValue(licenseType2);
 
-      userData = modifyCurrentBusiness(userData, (business) => ({
+      userDataForBusiness = modifyCurrentBusiness(userDataForBusiness, (business) => ({
         ...business,
         licenseData: generateLicenseData({}),
       }));
 
-      const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+      const resultUserData = await updateLicenseStatus(userDataForBusiness, nameAndAddress);
       const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
       const resultLicenseData = resultCurrentBusiness.licenseData;
@@ -249,12 +251,12 @@ describe("updateLicenseStatus", () => {
       stubWebserviceLicenseStatusSearch.mockRejectedValue(new Error("fail"));
       stubRGBLicenseStatusSearch.mockRejectedValue(new Error("fail"));
 
-      userData = modifyCurrentBusiness(userData, (business) => ({
+      userDataForBusiness = modifyCurrentBusiness(userDataForBusiness, (business) => ({
         ...business,
         licenseData: generateLicenseData({}),
       }));
 
-      await expect(updateLicenseStatus(userData, nameAndAddress)).rejects.toThrow(
+      await expect(updateLicenseStatus(userDataForBusiness, nameAndAddress)).rejects.toThrow(
         JSON.stringify({
           webserviceErrorMessage: new Error("fail"),
           rgbErrorMessage: new Error("fail"),
@@ -266,12 +268,12 @@ describe("updateLicenseStatus", () => {
       stubWebserviceLicenseStatusSearch.mockRejectedValue(new Error(NO_MATCH_ERROR));
       stubRGBLicenseStatusSearch.mockRejectedValue(new Error("fail"));
 
-      userData = modifyCurrentBusiness(userData, (business) => ({
+      userDataForBusiness = modifyCurrentBusiness(userDataForBusiness, (business) => ({
         ...business,
         licenseData: generateLicenseData({}),
       }));
 
-      const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+      const resultUserData = await updateLicenseStatus(userDataForBusiness, nameAndAddress);
       const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
       const resultLicenseData = resultCurrentBusiness.licenseData;
@@ -291,12 +293,12 @@ describe("updateLicenseStatus", () => {
         stubWebserviceLicenseStatusSearch.mockRejectedValue(new Error("fails"));
         stubRGBLicenseStatusSearch.mockRejectedValue(new Error(error));
 
-        userData = modifyCurrentBusiness(userData, (business) => ({
+        userDataForBusiness = modifyCurrentBusiness(userDataForBusiness, (business) => ({
           ...business,
           licenseData: generateLicenseData({}),
         }));
 
-        const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+        const resultUserData = await updateLicenseStatus(userDataForBusiness, nameAndAddress);
         const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
         const resultLicenseData = resultCurrentBusiness.licenseData;
@@ -327,14 +329,14 @@ describe("updateLicenseStatus", () => {
     stubWebserviceLicenseStatusSearch.mockResolvedValue(licenseType1);
     stubRGBLicenseStatusSearch.mockResolvedValue({});
 
-    const initialTaskProgress = getCurrentBusiness(userData).taskProgress;
+    const initialTaskProgress = getCurrentBusiness(userDataForBusiness).taskProgress;
 
-    userData = modifyCurrentBusiness(userData, (business) => ({
+    userDataForBusiness = modifyCurrentBusiness(userDataForBusiness, (business) => ({
       ...business,
       licenseData: generateLicenseData({}),
     }));
 
-    const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+    const resultUserData = await updateLicenseStatus(userDataForBusiness, nameAndAddress);
     const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
     expect(resultCurrentBusiness.taskProgress).toEqual({
@@ -356,14 +358,14 @@ describe("updateLicenseStatus", () => {
     stubWebserviceLicenseStatusSearch.mockResolvedValue(licenseType1);
     stubRGBLicenseStatusSearch.mockResolvedValue({});
 
-    const initialTaskProgress = getCurrentBusiness(userData).taskProgress;
+    const initialTaskProgress = getCurrentBusiness(userDataForBusiness).taskProgress;
 
-    userData = modifyCurrentBusiness(userData, (business) => ({
+    userDataForBusiness = modifyCurrentBusiness(userDataForBusiness, (business) => ({
       ...business,
       licenseData: generateLicenseData({}),
     }));
 
-    const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+    const resultUserData = await updateLicenseStatus(userDataForBusiness, nameAndAddress);
     const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
     expect(resultCurrentBusiness.taskProgress).toEqual({
@@ -385,14 +387,14 @@ describe("updateLicenseStatus", () => {
     stubWebserviceLicenseStatusSearch.mockResolvedValue(licenseType1);
     stubRGBLicenseStatusSearch.mockResolvedValue({});
 
-    const initialTaskProgress = getCurrentBusiness(userData).taskProgress;
+    const initialTaskProgress = getCurrentBusiness(userDataForBusiness).taskProgress;
 
-    userData = modifyCurrentBusiness(userData, (business) => ({
+    userDataForBusiness = modifyCurrentBusiness(userDataForBusiness, (business) => ({
       ...business,
       licenseData: generateLicenseData({}),
     }));
 
-    const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+    const resultUserData = await updateLicenseStatus(userDataForBusiness, nameAndAddress);
     const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
     expect(resultCurrentBusiness.taskProgress).toEqual({
@@ -424,14 +426,14 @@ describe("updateLicenseStatus", () => {
     stubWebserviceLicenseStatusSearch.mockResolvedValue(licenseType1);
     stubRGBLicenseStatusSearch.mockResolvedValue(licenseType2);
 
-    const initialTaskProgress = getCurrentBusiness(userData).taskProgress;
+    const initialTaskProgress = getCurrentBusiness(userDataForBusiness).taskProgress;
 
-    userData = modifyCurrentBusiness(userData, (business) => ({
+    userDataForBusiness = modifyCurrentBusiness(userDataForBusiness, (business) => ({
       ...business,
       licenseData: generateLicenseData({}),
     }));
 
-    const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+    const resultUserData = await updateLicenseStatus(userDataForBusiness, nameAndAddress);
     const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
     expect(resultCurrentBusiness.taskProgress).toEqual({
@@ -454,9 +456,9 @@ describe("updateLicenseStatus", () => {
     stubWebserviceLicenseStatusSearch.mockResolvedValue(licenseType1);
     stubRGBLicenseStatusSearch.mockResolvedValue({});
 
-    const initialTaskProgress = getCurrentBusiness(userData).taskProgress;
+    const initialTaskProgress = getCurrentBusiness(userDataForBusiness).taskProgress;
 
-    userData = modifyCurrentBusiness(userData, (business) => ({
+    userDataForBusiness = modifyCurrentBusiness(userDataForBusiness, (business) => ({
       ...business,
       taskProgress: {
         ...business.taskProgress,
@@ -465,7 +467,7 @@ describe("updateLicenseStatus", () => {
       licenseData: generateLicenseData({}),
     }));
 
-    const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+    const resultUserData = await updateLicenseStatus(userDataForBusiness, nameAndAddress);
     const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
     expect(resultCurrentBusiness.taskProgress).toEqual({

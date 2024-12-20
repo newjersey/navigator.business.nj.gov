@@ -5,7 +5,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { SectionType } from "@businessnjgovnavigator/shared/";
+import { generateUserData, SectionType } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,
   generatePreferences,
@@ -24,6 +24,7 @@ describe("<SectionAccordion />", () => {
     useMockRoadmap({});
   });
 
+  const userData = generateUserData({});
   const statefulRender = (type: SectionType, business: Business): void => {
     render(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
@@ -35,7 +36,7 @@ describe("<SectionAccordion />", () => {
   it("expands and collapses the accordion", async () => {
     statefulRender(
       "PLAN",
-      generateBusiness({
+      generateBusiness(userData, {
         preferences: generatePreferences({
           roadmapOpenSections: [],
         }),
@@ -58,7 +59,7 @@ describe("<SectionAccordion />", () => {
   it("adds and removes section from preferences on accordion open/close", () => {
     statefulRender(
       "PLAN",
-      generateBusiness({
+      generateBusiness(userData, {
         preferences: generatePreferences({
           roadmapOpenSections: ["PLAN", "START"],
         }),

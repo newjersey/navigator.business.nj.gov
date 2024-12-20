@@ -7,6 +7,7 @@ import {
   GetFilingResponse,
   ProfileData,
   generateBusiness,
+  generateUserData,
 } from "@businessnjgovnavigator/shared";
 import { generateFormationData, generateGetFilingResponse } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
@@ -29,7 +30,7 @@ describe("Formation - <FormationSuccessPage />", () => {
     getFilingResponse = generateGetFilingResponse({ success: true, ...overrides });
     const profileData = generateFormationProfileData(profileOverrides);
 
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData,
       formationData: generateFormationData(
         { getFilingResponse },

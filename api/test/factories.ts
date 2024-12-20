@@ -26,7 +26,7 @@ import {
   generateFormationFormData,
   generateLicenseStatusItem,
   generateProfileData,
-  generateUserDataForBusiness,
+  generateUserData,
   randomPublicFilingLegalType,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
@@ -81,9 +81,14 @@ export const generateFormationUserData = (
     },
     legalStructureId
   );
-  return generateUserDataForBusiness(
-    generateBusiness({ formationData: _formationData, profileData: _profileData })
-  );
+
+  const _userData = generateUserData({});
+  const business = generateBusiness(_userData, { formationData: _formationData, profileData: _profileData });
+
+  _userData.businesses[business.id] = business;
+  _userData.currentBusinessId = business.id;
+
+  return _userData;
 };
 
 export const generateInputFile = (overrides: Partial<InputFile>): InputFile => {

@@ -21,6 +21,7 @@ import {
   UserData,
   createEmptyFormationFormData,
   generateBusiness,
+  generateUserData,
   generateUserDataForBusiness,
   getCurrentDateISOString,
 } from "@businessnjgovnavigator/shared";
@@ -46,6 +47,7 @@ const mockApi = api as jest.Mocked<typeof api>;
 
 const Config = getMergedConfig();
 let setShowNeedsAccountModal: jest.Mock;
+const userData = generateUserData({});
 
 const renderFilingsCalendarTaxAccess = (initialUserData?: UserData): void => {
   render(
@@ -127,7 +129,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
     }
 
     return generateUserDataForBusiness(
-      generateBusiness({
+      generateBusiness(userData, {
         profileData: generateProfileData({
           legalStructureId: legalStructureId,
           operatingPhase: randomElementFromArray(
@@ -151,7 +153,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
 
   describe("guest mode / query param behavior", () => {
     it("opens the Needs Account modal when button is clicked in up and running guest mode", async () => {
-      const business = generateBusiness({
+      const business = generateBusiness(userData, {
         profileData: generateProfileData({
           operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
         }),
@@ -166,7 +168,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
 
     it("updates userData with return link when the button is clicked in up and running guest mode", async () => {
-      const business = generateBusiness({
+      const business = generateBusiness(userData, {
         profileData: generateProfileData({
           operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
         }),
@@ -181,15 +183,14 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
 
     it("opens tax modal if the query parameter openTaxFilingsModal is true and shallow reloads", async () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
-          }),
-        })
-      );
+      const business = generateBusiness(userData, {
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
+        }),
+      });
+      const userDataForBusiness = generateUserDataForBusiness(business);
       useMockRouter({ query: { openTaxFilingsModal: "true" }, isReady: true });
-      renderFilingsCalendarTaxAccess(userData);
+      renderFilingsCalendarTaxAccess(userDataForBusiness);
       await screen.findByTestId("modal-content");
       expect(mockPush).toHaveBeenCalledWith({ pathname: ROUTES.dashboard }, undefined, { shallow: true });
     });

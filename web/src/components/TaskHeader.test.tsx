@@ -74,7 +74,7 @@ describe("<TaskHeader />", () => {
     const formationData = generateFormationData({
       getFilingResponse: generateGetFilingResponse({ success: true }),
     });
-    renderTaskHeader(task, generateBusiness({ taskProgress, formationData }));
+    renderTaskHeader(task, generateBusiness(generateUserData({}), { taskProgress, formationData }));
 
     fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
     expect(screen.getByTestId("status-info-tooltip")).toBeInTheDocument();

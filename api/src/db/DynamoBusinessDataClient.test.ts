@@ -5,7 +5,7 @@ import { DynamoBusinessDataClient } from "@db/DynamoBusinessDataClient";
 import { BusinessesDataClient } from "@domain/types";
 import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
 import { randomInt } from "@shared/intHelpers";
-import { generateBusiness, generateProfileData, generateTaxFilingData } from "@shared/test";
+import { generateBusiness, generateProfileData, generateTaxFilingData, generateUserData } from "@shared/test";
 import { CURRENT_VERSION } from "@shared/userData";
 import dayjs from "dayjs";
 
@@ -29,7 +29,8 @@ describe("DynamoBusinessesDataClient", () => {
   const industry = "test-industry";
   const encryptedTaxId = "test-id-12345";
 
-  const businessData = generateBusiness({
+  const baseUserData = generateUserData({});
+  const businessData = generateBusiness(baseUserData, {
     profileData: generateProfileData({
       dateOfFormation: formationDate,
       entityId: undefined,

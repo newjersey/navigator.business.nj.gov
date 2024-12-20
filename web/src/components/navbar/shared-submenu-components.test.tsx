@@ -101,6 +101,7 @@ describe("shared-submenu-components", () => {
   });
 
   const Config = getMergedConfig();
+  const baseUserData = generateUserData({});
   window.open = jest.fn();
 
   it("renders LoginMenuItem and it navigates correclty onClick", () => {
@@ -156,29 +157,27 @@ describe("shared-submenu-components", () => {
 
   describe("ProfileMenuItem", () => {
     it("renders ProfileMenuItem and navigates to dashbaord correclty onClick", () => {
-      const userData = generateUserData({});
-      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />);
+      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={baseUserData} />);
       expect(screen.getByText(Config.navigationDefaults.navBarGuestBusinessText)).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestBusinessText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
     });
 
     it("renders ProfileMenuItem and navigates correclty onClick", () => {
-      const userData = generateUserData({});
-      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />);
+      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={baseUserData} />);
       expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.navigationDefaults.profileLinkText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
     });
 
     it("renders multiple businesses", () => {
-      const firstBusiness = generateBusiness({
+      const firstBusiness = generateBusiness(baseUserData, {
         profileData: generateProfileData({
           businessName: "first-biz",
           legalStructureId: randomPublicFilingLegalStructure(),
         }),
       });
-      const secondBusiness = generateBusiness({
+      const secondBusiness = generateBusiness(baseUserData, {
         profileData: generateProfileData({
           businessName: "second-biz",
           legalStructureId: randomPublicFilingLegalStructure(),
@@ -199,10 +198,10 @@ describe("shared-submenu-components", () => {
     });
 
     it("only shows profile link for current business", () => {
-      const firstBusiness = generateBusiness({
+      const firstBusiness = generateBusiness(baseUserData, {
         profileData: generateProfileData({ businessName: "first-biz" }),
       });
-      const secondBusiness = generateBusiness({
+      const secondBusiness = generateBusiness(baseUserData, {
         profileData: generateProfileData({ businessName: "second-biz" }),
       });
       const userData = generateUserData({

@@ -16,6 +16,7 @@ import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-l
 import { ReactNode } from "react";
 
 const Config = getMergedConfig();
+const userData = generateUserData({});
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -43,7 +44,7 @@ const setLargeScreen = (value: boolean): void => {
 const businessName = "businessName";
 
 const generateBusinessNamedBusiness = (overrides?: Partial<Business>): Business => {
-  return generateBusiness({
+  return generateBusiness(userData, {
     profileData: generateProfileData({
       businessName: businessName,
       tradeName: "",

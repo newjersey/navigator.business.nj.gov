@@ -2,9 +2,14 @@ import { CheckWastePermitsResults } from "@/components/tasks/environment-questio
 import { getMergedConfig } from "@/contexts/configContext";
 import { generateTask } from "@/test/factories";
 import { currentBusiness, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { Business, generateWasteQuestionnaireData } from "@businessnjgovnavigator/shared";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
-import { generateEnvironmentData } from "@businessnjgovnavigator/shared/test/factories";
+import {
+  Business,
+  generateBusiness,
+  generateEnvironmentData,
+  generateUserData,
+  generateUserDataForBusiness,
+  generateWasteQuestionnaireData,
+} from "@businessnjgovnavigator/shared";
 import { render, screen } from "@testing-library/react";
 import userEvent, { UserEvent } from "@testing-library/user-event";
 
@@ -22,10 +27,10 @@ describe("<CheckWastePermitsResults />", () => {
       <WithStatefulUserData
         initialUserData={generateUserDataForBusiness(
           business
-            ? generateBusiness({
+            ? generateBusiness(generateUserData({}), {
                 ...business,
               })
-            : generateBusiness({})
+            : generateBusiness(generateUserData({}), {})
         )}
       >
         <CheckWastePermitsResults task={task} />
@@ -38,10 +43,10 @@ describe("<CheckWastePermitsResults />", () => {
       <WithStatefulUserData
         initialUserData={generateUserDataForBusiness(
           business
-            ? generateBusiness({
+            ? generateBusiness(generateUserData({}), {
                 ...business,
               })
-            : generateBusiness({})
+            : generateBusiness(generateUserData({}), {})
         )}
       >
         <CheckWastePermitsResults task={task} />
@@ -53,7 +58,7 @@ describe("<CheckWastePermitsResults />", () => {
 
   it("displays the texts of the responses that are true in user data", () => {
     renderCheckWastePermitsResults(
-      generateBusiness({
+      generateBusiness(generateUserData({}), {
         environmentData: generateEnvironmentData({
           waste: {
             questionnaireData: generateWasteQuestionnaireData({
@@ -75,7 +80,7 @@ describe("<CheckWastePermitsResults />", () => {
 
   it("doesn't display the texts of the responses that are false in user data", () => {
     renderCheckWastePermitsResults(
-      generateBusiness({
+      generateBusiness(generateUserData({}), {
         environmentData: generateEnvironmentData({
           waste: {
             questionnaireData: generateWasteQuestionnaireData({
@@ -101,7 +106,7 @@ describe("<CheckWastePermitsResults />", () => {
 
   it("updates submitted to false when the user clicks edit", async () => {
     const { user } = renderCheckWastePermitsResultsAndSetupUser(
-      generateBusiness({
+      generateBusiness(generateUserData({}), {
         environmentData: generateEnvironmentData({
           waste: {
             submitted: true,
@@ -115,7 +120,7 @@ describe("<CheckWastePermitsResults />", () => {
 
   it("updates submitted to false when the user clicks redo form", async () => {
     const { user } = renderCheckWastePermitsResultsAndSetupUser(
-      generateBusiness({
+      generateBusiness(generateUserData({}), {
         environmentData: generateEnvironmentData({
           waste: {
             questionnaireData: generateWasteQuestionnaireData({
@@ -132,7 +137,7 @@ describe("<CheckWastePermitsResults />", () => {
 
   it("updates task progress to IN_PROGRESS when the user clicks edit", async () => {
     const { user } = renderCheckWastePermitsResultsAndSetupUser(
-      generateBusiness({
+      generateBusiness(generateUserData({}), {
         environmentData: generateEnvironmentData({
           waste: {
             submitted: true,
@@ -147,7 +152,7 @@ describe("<CheckWastePermitsResults />", () => {
 
   it("updates task progress to IN_PROGRESS when the user clicks redo form", async () => {
     const { user } = renderCheckWastePermitsResultsAndSetupUser(
-      generateBusiness({
+      generateBusiness(generateUserData({}), {
         environmentData: generateEnvironmentData({
           waste: {
             questionnaireData: generateWasteQuestionnaireData({

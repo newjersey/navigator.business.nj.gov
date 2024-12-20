@@ -16,6 +16,7 @@ import {
   FormationData,
   FormationLegalType,
   generateBusiness,
+  generateUserData,
   generateUserDataForBusiness,
   getCurrentBusiness,
   getCurrentDateISOString,
@@ -40,6 +41,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 const mockApi = api as jest.Mocked<typeof api>;
 
 const Config = getMergedConfig();
+const userData = generateUserData({});
 
 const renderComponent = (initialUserData?: UserData): void => {
   render(
@@ -104,7 +106,7 @@ describe("<TaxAccessStepTwo />", () => {
       );
     }
     return generateUserDataForBusiness(
-      generateBusiness({
+      generateBusiness(userData, {
         profileData: generateProfileData({
           legalStructureId: legalStructureId,
           operatingPhase: randomElementFromArray(
@@ -227,8 +229,8 @@ describe("<TaxAccessStepTwo />", () => {
       await waitFor(() => {
         return expect(currentBusiness().profileData.businessName).toEqual("zoom");
       });
-      return expect(currentBusiness().profileData.taxId).toEqual("999888777666");
-      return expect(currentBusiness().profileData.encryptedTaxId).toEqual(undefined);
+      expect(currentBusiness().profileData.taxId).toEqual("999888777666");
+      expect(currentBusiness().profileData.encryptedTaxId).toEqual("");
     });
 
     it("displays in-line error and alert when businessName field is empty and save button is clicked", async () => {

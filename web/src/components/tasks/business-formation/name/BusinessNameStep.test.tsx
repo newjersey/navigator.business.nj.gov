@@ -13,6 +13,7 @@ import {
   generateBusiness,
   generateBusinessNameAvailability,
   generateFormationFormData,
+  generateUserData,
   NameAvailability,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
@@ -61,7 +62,7 @@ describe("Formation - BusinessNameStep", () => {
       lastVisitedPageIndex: 0,
     };
     return preparePage({
-      business: generateBusiness({ profileData, formationData }),
+      business: generateBusiness(generateUserData({}), { profileData, formationData }),
       displayContent: { formationDbaContent: generateFormationDbaContent({}) },
     });
   };
@@ -261,7 +262,7 @@ describe("Formation - BusinessNameStep", () => {
         };
 
         preparePage({
-          business: generateBusiness({ profileData, formationData }),
+          business: generateBusiness(generateUserData({}), { profileData, formationData }),
           displayContent: { formationDbaContent: generateFormationDbaContent({}) },
         });
 
@@ -282,7 +283,10 @@ describe("Formation - BusinessNameStep", () => {
         });
 
         preparePage({
-          business: generateBusiness({ profileData, formationData: generateEmptyFormationData() }),
+          business: generateBusiness(generateUserData({}), {
+            profileData,
+            formationData: generateEmptyFormationData(),
+          }),
           displayContent: { formationDbaContent: generateFormationDbaContent({}) },
         });
 

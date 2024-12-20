@@ -91,8 +91,9 @@ export const preparePage = ({
   user,
 }: PreparePageParams): FormationPageHelpers => {
   const profileData = generateFormationProfileData({ ...business.profileData });
+  const baseUserData = generateUserData({});
   const isValid = publicFilingLegalTypes.includes(profileData.legalStructureId as PublicFilingLegalType);
-  const initialBusiness = generateBusiness({
+  const initialBusiness = generateBusiness(baseUserData, {
     ...business,
     profileData,
     formationData: isValid

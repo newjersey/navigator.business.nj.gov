@@ -4,6 +4,7 @@ import {
   generateMunicipality,
   generatePreferences,
   generateProfileData,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@shared/test";
 
@@ -17,16 +18,17 @@ const { formationNudge, fundingNudge, goToProfile, notRegistered, notRegisteredU
 describe("updateRoadmapSidebarCards", () => {
   describe("not registered card", () => {
     it("removes not-registered card and adds formation nudge card", async () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
-          }),
-          preferences: generatePreferences({
-            visibleSidebarCards: [notRegistered],
-          }),
-        })
-      );
+      const baseUserData = generateUserData({});
+      const business = generateBusiness(baseUserData, {
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
+        }),
+        preferences: generatePreferences({
+          visibleSidebarCards: [notRegistered],
+        }),
+      });
+
+      const userData = generateUserDataForBusiness(business);
 
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
@@ -36,16 +38,17 @@ describe("updateRoadmapSidebarCards", () => {
     });
 
     it("removes not-registered-up-and-running card and adds formation nudge card", async () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
-          }),
-          preferences: generatePreferences({
-            visibleSidebarCards: [notRegisteredUpAndRunning],
-          }),
-        })
-      );
+      const baseUserData = generateUserData({});
+      const business = generateBusiness(baseUserData, {
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
+        }),
+        preferences: generatePreferences({
+          visibleSidebarCards: [notRegisteredUpAndRunning],
+        }),
+      });
+
+      const userData = generateUserDataForBusiness(business);
 
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
@@ -55,16 +58,16 @@ describe("updateRoadmapSidebarCards", () => {
     });
 
     it("leaves existing cards except for not registered when adding formation nudge card", async () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
-          }),
-          preferences: generatePreferences({
-            visibleSidebarCards: ["other-card", notRegistered],
-          }),
-        })
-      );
+      const baseUserData = generateUserData({});
+      const business = generateBusiness(baseUserData, {
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
+        }),
+        preferences: generatePreferences({
+          visibleSidebarCards: ["other-card", notRegistered],
+        }),
+      });
+      const userData = generateUserDataForBusiness(business);
 
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
@@ -75,16 +78,17 @@ describe("updateRoadmapSidebarCards", () => {
     });
 
     it("leaves existing cards except for not-registered-up-and-running when adding formation nudge card", async () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
-          }),
-          preferences: generatePreferences({
-            visibleSidebarCards: ["other-card", notRegisteredUpAndRunning],
-          }),
-        })
-      );
+      const baseUserData = generateUserData({});
+      const business = generateBusiness(baseUserData, {
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
+        }),
+        preferences: generatePreferences({
+          visibleSidebarCards: ["other-card", notRegisteredUpAndRunning],
+        }),
+      });
+
+      const userData = generateUserDataForBusiness(business);
 
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
@@ -98,17 +102,16 @@ describe("updateRoadmapSidebarCards", () => {
   describe("formation nudge", () => {
     it("adds formation-nudge if operatingPhase is NEEDS_TO_FORM", () => {
       const taskId = formationTaskId;
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          taskProgress: { [taskId]: "NOT_STARTED" },
+      const baseUserData = generateUserData({});
+      const business = generateBusiness(baseUserData, {
+        taskProgress: { [taskId]: "NOT_STARTED" },
 
-          profileData: generateProfileData({
-            operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
-          }),
-          preferences: generatePreferences({ visibleSidebarCards: [] }),
-        })
-      );
-
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
+        }),
+        preferences: generatePreferences({ visibleSidebarCards: [] }),
+      });
+      const userData = generateUserDataForBusiness(business);
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(formationNudge);
     });
@@ -127,14 +130,15 @@ describe("updateRoadmapSidebarCards", () => {
     it.each(operatingPhasesWithNoFormationNudge)(
       "removes formation-nudge if operatingPhase is %s",
       (operatingPhase) => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              operatingPhase: operatingPhase as OperatingPhaseId,
-            }),
-            preferences: generatePreferences({ visibleSidebarCards: [formationNudge] }),
-          })
-        );
+        const baseUserData = generateUserData({});
+        const business = generateBusiness(baseUserData, {
+          profileData: generateProfileData({
+            operatingPhase: operatingPhase as OperatingPhaseId,
+          }),
+          preferences: generatePreferences({ visibleSidebarCards: [formationNudge] }),
+        });
+
+        const userData = generateUserDataForBusiness(business);
 
         const updatedUserData = updateSidebarCards(userData);
         expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
@@ -146,14 +150,14 @@ describe("updateRoadmapSidebarCards", () => {
 
   describe("funding nudge", () => {
     it("adds funding-nudge when operatingPhase is FORMED", () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: OperatingPhaseId.FORMED,
-          }),
-          preferences: generatePreferences({ visibleSidebarCards: [] }),
-        })
-      );
+      const baseUserData = generateUserData({});
+      const business = generateBusiness(baseUserData, {
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.FORMED,
+        }),
+        preferences: generatePreferences({ visibleSidebarCards: [] }),
+      });
+      const userData = generateUserDataForBusiness(business);
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
         formationNudge
@@ -162,14 +166,15 @@ describe("updateRoadmapSidebarCards", () => {
     });
 
     it("removes funding-nudge when operatingPhase is NEEDS_TO_FORM", () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
-          }),
-          preferences: generatePreferences({ visibleSidebarCards: [fundingNudge] }),
-        })
-      );
+      const baseUserData = generateUserData({});
+      const business = generateBusiness(baseUserData, {
+        profileData: generateProfileData({
+          operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
+        }),
+        preferences: generatePreferences({ visibleSidebarCards: [fundingNudge] }),
+      });
+
+      const userData = generateUserDataForBusiness(business);
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(fundingNudge);
     });
@@ -184,15 +189,15 @@ describe("updateRoadmapSidebarCards", () => {
     );
 
     it.each(phasesWhereGoToProfileNudgeFalse)("does not add go-to-profile nudge for %s", (operatingPhase) => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase,
-            homeBasedBusiness: undefined,
-          }),
-          preferences: generatePreferences({ visibleSidebarCards: [] }),
-        })
-      );
+      const baseUserData = generateUserData({});
+      const business = generateBusiness(baseUserData, {
+        profileData: generateProfileData({
+          operatingPhase,
+          homeBasedBusiness: undefined,
+        }),
+        preferences: generatePreferences({ visibleSidebarCards: [] }),
+      });
+      const userData = generateUserDataForBusiness(business);
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(goToProfile);
     });
@@ -200,15 +205,15 @@ describe("updateRoadmapSidebarCards", () => {
     it.each(phasesWhereGoToProfileNudgeTrue)(
       "adds go-to-profile nudge for %s when at least one opportunity question unanswered",
       (operatingPhase) => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              operatingPhase,
-              homeBasedBusiness: undefined,
-            }),
-            preferences: generatePreferences({ visibleSidebarCards: [] }),
-          })
-        );
+        const baseUserData = generateUserData({});
+        const business = generateBusiness(baseUserData, {
+          profileData: generateProfileData({
+            operatingPhase,
+            homeBasedBusiness: undefined,
+          }),
+          preferences: generatePreferences({ visibleSidebarCards: [] }),
+        });
+        const userData = generateUserDataForBusiness(business);
         const updatedUserData = updateSidebarCards(userData);
         expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(goToProfile);
       }
@@ -217,19 +222,19 @@ describe("updateRoadmapSidebarCards", () => {
     it.each(phasesWhereGoToProfileNudgeTrue)(
       "removes go-to-profile nudge for %s when all opportunity questions answered",
       (operatingPhase) => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              operatingPhase,
-              homeBasedBusiness: true,
-              dateOfFormation: "2020-01-01",
-              municipality: generateMunicipality({}),
-              ownershipTypeIds: ["none"],
-              existingEmployees: "12",
-            }),
-            preferences: generatePreferences({ visibleSidebarCards: [] }),
-          })
-        );
+        const baseUserData = generateUserData({});
+        const business = generateBusiness(baseUserData, {
+          profileData: generateProfileData({
+            operatingPhase,
+            homeBasedBusiness: true,
+            dateOfFormation: "2020-01-01",
+            municipality: generateMunicipality({}),
+            ownershipTypeIds: ["none"],
+            existingEmployees: "12",
+          }),
+          preferences: generatePreferences({ visibleSidebarCards: [] }),
+        });
+        const userData = generateUserDataForBusiness(business);
         const updatedUserData = updateSidebarCards(userData);
         expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
           goToProfile

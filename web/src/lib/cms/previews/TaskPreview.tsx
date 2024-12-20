@@ -8,6 +8,7 @@ import {
   generateBusiness,
   generateMunicipality,
   generateProfileData,
+  generateUserData,
 } from "@businessnjgovnavigator/shared/test";
 import { ReactElement } from "react";
 
@@ -15,7 +16,9 @@ const TaskPreview = (props: PreviewProps): ReactElement => {
   const ref = usePreviewRef(props);
   const task = usePageData<TaskWithLicenseTaskId>(props);
 
-  const fakeBusinessWithMunicipality = generateBusiness({
+  const userData = generateUserData({});
+
+  const fakeBusinessWithMunicipality = generateBusiness(userData, {
     profileData: generateProfileData({
       municipality: generateMunicipality({}),
       constructionRenovationPlan: true,

@@ -21,6 +21,7 @@ import {
   TaxFilingState,
   generateBusiness,
   generateProfileData,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import { ThemeProvider, createTheme } from "@mui/material";
@@ -81,7 +82,7 @@ describe("<NaicsCodeTask />", () => {
     };
 
     beforeEach(() => {
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({ naicsCode: "", industryId: validIndustryId }),
         taskProgress: { [taskId]: "NOT_STARTED" },
       });
@@ -182,7 +183,7 @@ describe("<NaicsCodeTask />", () => {
     };
 
     beforeEach(() => {
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({ naicsCode: "", industryId: "" }),
         taskProgress: { [taskId]: "NOT_STARTED" },
       });
@@ -306,7 +307,7 @@ describe("<NaicsCodeTask />", () => {
     };
 
     beforeEach(() => {
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({ naicsCode: validNaicsCode }),
         taskProgress: { [taskId]: "COMPLETED" },
       });
@@ -406,7 +407,7 @@ describe("<NaicsCodeTask />", () => {
 
     beforeEach(() => {
       setShowNeedsAccountModal = jest.fn();
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({ naicsCode: "", industryId: "" }),
         taskProgress: { [taskId]: "NOT_STARTED" },
       });
@@ -424,7 +425,7 @@ describe("<NaicsCodeTask />", () => {
     });
 
     it("opens Needs Account modal on NAICS Code radio button click", () => {
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({ naicsCode: "", industryId: "acupuncture" }),
       });
       renderPage();
@@ -436,7 +437,7 @@ describe("<NaicsCodeTask />", () => {
     });
 
     it("opens Needs Account modal on NAICS Code input radio button click", () => {
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({ naicsCode: "", industryId: "acupuncture" }),
       });
       renderPage();
@@ -448,7 +449,7 @@ describe("<NaicsCodeTask />", () => {
     });
 
     it("keeps task progress as NOT_STARTED when radio button is clicked", () => {
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({ naicsCode: "", industryId: "acupuncture" }),
       });
       renderPage();
@@ -458,7 +459,7 @@ describe("<NaicsCodeTask />", () => {
 
     describe("guest mode - generic industry", () => {
       it("opens modal when a user types in NAICS code input field", () => {
-        initialBusiness = generateBusiness({
+        initialBusiness = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({ naicsCode: "", industryId: "generic" }),
         });
         renderPage();

@@ -17,6 +17,7 @@ import {
   generateBusiness,
   generateFormationFormData,
   generateUser,
+  generateUserData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen } from "@testing-library/react";
@@ -74,7 +75,7 @@ describe("Formation - BillingStep", () => {
     const user = initialUser ? generateUser(initialUser) : generateUser({});
     // eslint-disable-next-line testing-library/render-result-naming-convention
     const page = preparePage({
-      business: generateBusiness({
+      business: generateBusiness(generateUserData({}), {
         profileData,
         formationData,
       }),

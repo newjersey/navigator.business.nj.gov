@@ -23,6 +23,7 @@ import {
   generateBusiness,
   generateProfileData,
   generateTaxFilingData,
+  generateUserData,
   generateUserDataForBusiness,
   randomInt,
 } from "@businessnjgovnavigator/shared";
@@ -64,7 +65,7 @@ describe("<TaxTask />", () => {
 
   it("replaces ${taxInputComponent} with taxInput component", () => {
     render(
-      <WithStatefulBusiness initialBusiness={generateBusiness({})}>
+      <WithStatefulBusiness initialBusiness={generateBusiness(generateUserData({}), {})}>
         <TaxTask task={task} />
       </WithStatefulBusiness>
     );
@@ -76,7 +77,7 @@ describe("<TaxTask />", () => {
 
   it("renders CTA button", () => {
     render(
-      <WithStatefulBusiness initialBusiness={generateBusiness({})}>
+      <WithStatefulBusiness initialBusiness={generateBusiness(generateUserData({}), {})}>
         <TaxTask task={task} />
       </WithStatefulBusiness>
     );
@@ -84,7 +85,7 @@ describe("<TaxTask />", () => {
   });
 
   it("shows disabled taxId when taxCalendar is PENDING or SUCCESS", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({ taxId: "*******89123", encryptedTaxId: "some-encrypted-value" }),
       taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
     });
@@ -116,7 +117,7 @@ describe("<TaxTask />", () => {
     };
 
     beforeEach(() => {
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({ taxId: "" }),
         taskProgress: { [taskId]: "NOT_STARTED" },
       });
@@ -128,7 +129,7 @@ describe("<TaxTask />", () => {
     });
 
     it("updates the progress of the task to IN_PROGRESS if there is a pre-existing 9 digit tax id", async () => {
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({ taxId: "123456789" }),
         taskProgress: { [taskId]: "COMPLETED" },
       });
@@ -139,7 +140,7 @@ describe("<TaxTask />", () => {
     });
 
     it("renders the split field if there is a pre-existing 9 digit tax id", async () => {
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({ taxId: "123456789" }),
         taskProgress: { [taskId]: "COMPLETED" },
       });
@@ -197,7 +198,7 @@ describe("<TaxTask />", () => {
     };
 
     beforeEach(() => {
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({ taxId: "*******89123", encryptedTaxId: "some-encrypted-value" }),
         taskProgress: { [taskId]: "COMPLETED" },
       });
@@ -226,7 +227,7 @@ describe("<TaxTask />", () => {
     };
 
     beforeEach(() => {
-      initialBusiness = generateBusiness({
+      initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({ taxId: "" }),
         taskProgress: { [taskId]: "NOT_STARTED" },
       });
@@ -274,7 +275,7 @@ describe("<TaxTask />", () => {
     };
 
     it("shows disclaimer for trade name legal structure", () => {
-      const initialBusiness = generateBusiness({
+      const initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           legalStructureId: randomTradeNameLegalStructure(),
         }),
@@ -287,7 +288,7 @@ describe("<TaxTask />", () => {
     });
 
     it("does not show disclaimer for public filing legal structure", () => {
-      const initialBusiness = generateBusiness({
+      const initialBusiness = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           legalStructureId: randomPublicFilingLegalStructure(),
         }),

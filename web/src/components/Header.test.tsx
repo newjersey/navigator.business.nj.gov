@@ -7,7 +7,12 @@ import { randomPublicFilingLegalStructure, randomTradeNameLegalStructure } from 
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness, useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
-import { generateUser, getCurrentDateInNewJersey, randomInt } from "@businessnjgovnavigator/shared/";
+import {
+  generateUser,
+  generateUserData,
+  getCurrentDateInNewJersey,
+  randomInt,
+} from "@businessnjgovnavigator/shared/";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import {
@@ -19,6 +24,7 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
+const baseUserData = generateUserData({});
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -81,7 +87,7 @@ describe("<Header />", () => {
       const personas: BusinessPersona[] = ["OWNING", "FOREIGN"];
 
       it.each(personas)("displays greeting text", (persona) => {
-        const business = generateBusiness({
+        const business = generateBusiness(baseUserData, {
           profileData: generateProfileData({ industryId: "generic", businessPersona: persona }),
         });
         const userData = generateUserDataForBusiness(business, { user: generateUser({ name: undefined }) });

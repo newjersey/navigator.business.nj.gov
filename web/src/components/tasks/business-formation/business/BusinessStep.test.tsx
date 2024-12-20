@@ -21,6 +21,7 @@ import {
   generateBusiness,
   generateFormationFormData,
   generateMunicipality,
+  generateUserData,
   getCurrentDate,
   getCurrentDateFormatted,
   randomElementFromArray,
@@ -83,7 +84,7 @@ describe("Formation - BusinessStep", () => {
       lastVisitedPageIndex: 0,
     };
     const page = preparePage({
-      business: generateBusiness({ profileData, formationData }),
+      business: generateBusiness(generateUserData({}), { profileData, formationData }),
       displayContent,
     });
     if (isForeign) {

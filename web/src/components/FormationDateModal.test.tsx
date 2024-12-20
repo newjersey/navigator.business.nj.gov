@@ -14,6 +14,7 @@ import {
   generateBusiness,
   generateMunicipality,
   generateProfileData,
+  generateUserData,
   generateUserDataForBusiness,
   getCurrentDate,
   randomInt,
@@ -24,6 +25,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 const Config = getMergedConfig();
+const userData = generateUserData({});
 
 describe("<FormationDateModal />", () => {
   const municipality = generateMunicipality({});
@@ -34,7 +36,7 @@ describe("<FormationDateModal />", () => {
   });
 
   const renderComponent = (initialBusiness?: Business): void => {
-    const business = initialBusiness ?? generateBusiness({});
+    const business = initialBusiness ?? generateBusiness(userData, {});
 
     const businessWithMunicipality = {
       ...business,
@@ -72,14 +74,16 @@ describe("<FormationDateModal />", () => {
   });
 
   it("shows error when user saves without entering date", () => {
-    renderComponent(generateBusiness({ profileData: generateProfileData({ dateOfFormation: undefined }) }));
+    renderComponent(
+      generateBusiness(userData, { profileData: generateProfileData({ dateOfFormation: undefined }) })
+    );
     expect(screen.queryByText(Config.formationDateModal.dateOfFormationErrorText)).not.toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
     expect(screen.getByText(Config.formationDateModal.dateOfFormationErrorText)).toBeInTheDocument();
   });
 
   it("does not update dateOfFormation if user cancels", () => {
-    const initialBusiness = generateBusiness({});
+    const initialBusiness = generateBusiness(userData, {});
     renderComponent(initialBusiness);
     const date = getCurrentDate().subtract(1, "month").date(1);
     selectDate(date);
@@ -97,7 +101,7 @@ describe("<FormationDateModal />", () => {
         : { businessPersona: "FOREIGN", foreignBusinessTypeIds: ["officeInNJ"] };
 
     renderComponent(
-      generateBusiness({
+      generateBusiness(userData, {
         profileData: generateProfileData({
           municipality: undefined,
           ...startingOrForeign,
@@ -121,7 +125,7 @@ describe("<FormationDateModal />", () => {
 
   it("shows location field if user is dakota nexus with a new jersey location", () => {
     renderComponent(
-      generateBusiness({
+      generateBusiness(userData, {
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
           foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
@@ -134,7 +138,7 @@ describe("<FormationDateModal />", () => {
 
   it("does not show location field if user is dakota nexus with no new jersey location", () => {
     renderComponent(
-      generateBusiness({
+      generateBusiness(userData, {
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
           foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
@@ -152,7 +156,7 @@ describe("<FormationDateModal />", () => {
         : { businessPersona: "FOREIGN", foreignBusinessTypeIds: ["officeInNJ"] };
 
     renderComponent(
-      generateBusiness({
+      generateBusiness(userData, {
         profileData: generateProfileData({ municipality: undefined, ...startingOrForeign }),
       })
     );

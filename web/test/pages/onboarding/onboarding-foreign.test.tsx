@@ -17,6 +17,7 @@ import {
 import {
   emptyIndustrySpecificData,
   generateProfileData,
+  generateUserData,
   OperatingPhaseId,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
@@ -40,7 +41,7 @@ const { employeesInNJ, transactionsInNJ, revenueInNJ, employeeOrContractorInNJ, 
 
 const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
   return generateUserDataForBusiness(
-    generateBusiness({
+    generateBusiness(generateUserData({}), {
       profileData: generateProfileData(overrides),
       onboardingFormProgress: "UNSTARTED",
     })

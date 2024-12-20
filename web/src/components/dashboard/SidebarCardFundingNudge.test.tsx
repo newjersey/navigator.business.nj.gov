@@ -19,6 +19,7 @@ import {
 import {
   FormationData,
   FormationLegalType,
+  generateUserData,
   getCurrentBusiness,
   getCurrentDateISOString,
   OperatingPhaseId,
@@ -50,6 +51,7 @@ const mockApi = api as jest.Mocked<typeof api>;
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 
 const Config = getMergedConfig();
+const userData = generateUserData({});
 
 const mockApiResponse = (userData: UserData, overrides: Partial<Business>): void => {
   mockApi.postTaxFilingsOnboarding.mockResolvedValue({
@@ -70,7 +72,9 @@ describe("<SidebarCardFundingNudge />", () => {
 
   const renderWithBusiness = (business: Partial<Business>): void => {
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(generateBusiness(business))}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(generateBusiness(userData, business))}
+      >
         <SidebarCardFundingNudge card={card} />
       </WithStatefulUserData>
     );
@@ -107,7 +111,7 @@ describe("<SidebarCardFundingNudge />", () => {
     }
 
     return generateUserDataForBusiness(
-      generateBusiness({
+      generateBusiness(userData, {
         profileData: generateProfileData({
           legalStructureId: legalStructureId,
           operatingPhase: randomElementFromArray(

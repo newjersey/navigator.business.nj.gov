@@ -11,7 +11,11 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import {
+  generateOwningProfileData,
+  generateUserData,
+  OperatingPhaseId,
+} from "@businessnjgovnavigator/shared/";
 import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import {
   generateBusiness,
@@ -83,7 +87,9 @@ describe("dashboard page", () => {
     setupStatefulUserDataContext();
 
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business ?? generateBusiness(generateUserData({}), {}))}
+      >
         <ThemeProvider theme={createTheme()}>
           <DashboardPage
             operateReferences={{}}
@@ -128,7 +134,7 @@ describe("dashboard page", () => {
   });
 
   it("renders not-registered card when operatingPhase is GUEST_MODE and businessPersona is STARTING", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         businessPersona: "STARTING",
         operatingPhase: OperatingPhaseId.GUEST_MODE,
@@ -142,7 +148,7 @@ describe("dashboard page", () => {
   });
 
   it("renders not-registered card when operatingPhase is GUEST_MODE and businessPersona is FOREIGN", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         businessPersona: "FOREIGN",
         operatingPhase: OperatingPhaseId.GUEST_MODE,
@@ -157,7 +163,7 @@ describe("dashboard page", () => {
   });
 
   it("renders not-registered-up-and-running card when operatingPhase is GUEST_MODE_OWNING and businessPersona is OWNING", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateOwningProfileData({
         operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
       }),
@@ -173,7 +179,9 @@ describe("dashboard page", () => {
 
   describe("phase newly changed indicator", () => {
     it("shows no indicator on desktop", () => {
-      const business = generateBusiness({ preferences: generatePreferences({ phaseNewlyChanged: true }) });
+      const business = generateBusiness(generateUserData({}), {
+        preferences: generatePreferences({ phaseNewlyChanged: true }),
+      });
       useMockBusiness(business);
       renderDashboardPage();
       expect(screen.queryByTestId("for-you-indicator")).not.toBeInTheDocument();
@@ -181,7 +189,7 @@ describe("dashboard page", () => {
 
     it("immediately sets phaseNewlyChanged to false when in desktop mode", async () => {
       setDesktopScreen(true);
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         preferences: generatePreferences({ phaseNewlyChanged: true }),
         onboardingFormProgress: "COMPLETED",
       });
@@ -193,7 +201,9 @@ describe("dashboard page", () => {
     });
 
     it("does not update userData when phaseNewlyChanged is false in desktop mode", async () => {
-      const business = generateBusiness({ preferences: generatePreferences({ phaseNewlyChanged: false }) });
+      const business = generateBusiness(generateUserData({}), {
+        preferences: generatePreferences({ phaseNewlyChanged: false }),
+      });
       useMockBusiness(business);
       renderDashboardPage();
       expect(userDataWasNotUpdated()).toBe(true);

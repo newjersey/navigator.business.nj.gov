@@ -15,6 +15,7 @@ import {
   generateBusiness,
   generateMunicipality,
   generateProfileData,
+  generateUserData,
   generateUserDataForBusiness,
   OperatingPhases,
   ProfileData,
@@ -30,11 +31,13 @@ const Config = getMergedConfig();
 
 export const generateBusinessForProfile = (overrides: Partial<Business>): Business => {
   const profileData = generateProfileData({ ...overrides.profileData });
+  const userData = generateUserData({});
+
   const taskProgress: Record<string, TaskProgress> =
     profileData.employerId && profileData.employerId.length > 0
       ? { [einTaskId]: "COMPLETED", ...overrides.taskProgress }
       : { ...overrides.taskProgress };
-  return generateBusiness({ ...overrides, profileData, taskProgress });
+  return generateBusiness(userData, { ...overrides, profileData, taskProgress });
 };
 
 export const renderPage = ({
@@ -58,9 +61,10 @@ export const renderPage = ({
   if (formationNJAddress) municipalitiesList.push(formationNJAddress);
   if (municipalities) municipalitiesList.push(...municipalities);
 
+  const userData = generateUserData({});
   const initialBusiness =
     business ??
-    generateBusiness({
+    generateBusiness(userData, {
       profileData: generateProfileData({
         municipality: genericTown,
       }),

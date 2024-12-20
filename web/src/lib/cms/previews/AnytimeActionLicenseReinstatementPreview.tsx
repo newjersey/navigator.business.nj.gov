@@ -7,6 +7,7 @@ import {
   generateBusiness,
   generateLicenseDetails,
   generateProfileData,
+  generateUserData,
 } from "@businessnjgovnavigator/shared/test";
 import { ReactElement } from "react";
 
@@ -14,7 +15,8 @@ const AnytimeActionLicenseReinstatementPreview = (props: PreviewProps): ReactEle
   const ref = usePreviewRef(props);
   const anytimeAction = usePageData<AnytimeActionLicenseReinstatement>(props);
   const licenseName = anytimeAction.licenseName || "Health Care Services";
-  const business = generateBusiness({
+  const userData = generateUserData({});
+  const business = generateBusiness(userData, {
     profileData: generateProfileData({ legalStructureId: undefined }),
     licenseData: {
       lastUpdatedISO: "tbd",

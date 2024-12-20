@@ -1,5 +1,10 @@
 import { isLicenseDataFromDatabaseDataMoreRecent } from "@/lib/domain-logic/isLicenseDataFromDatabaseDataMoreRecent";
-import { generateBusiness, generateLicenseData, getCurrentDate } from "@businessnjgovnavigator/shared/";
+import {
+  generateBusiness,
+  generateLicenseData,
+  generateUserData,
+  getCurrentDate,
+} from "@businessnjgovnavigator/shared/";
 
 const currentDate = getCurrentDate();
 const currentDateISOString = currentDate.toISOString();
@@ -8,8 +13,8 @@ const currentDatePlusOneHourISOString = currentDate.add(1, "hour").toISOString()
 describe("isLicenseDataFromDatabaseDataMoreRecent", () => {
   it("returns true when license data is undefined in businessFromDb but defined in businessFromUpdateQueue", () => {
     const result = isLicenseDataFromDatabaseDataMoreRecent({
-      businessFromDb: generateBusiness({ licenseData: undefined }),
-      businessFromUpdateQueue: generateBusiness({}),
+      businessFromDb: generateBusiness(generateUserData({}), { licenseData: undefined }),
+      businessFromUpdateQueue: generateBusiness(generateUserData({}), {}),
     });
 
     expect(result).toBe(true);
@@ -17,8 +22,8 @@ describe("isLicenseDataFromDatabaseDataMoreRecent", () => {
 
   it("returns true when license data from businessFromUpdateQueue is not defined but license data from businessFromDb is", () => {
     const result = isLicenseDataFromDatabaseDataMoreRecent({
-      businessFromDb: generateBusiness({}),
-      businessFromUpdateQueue: generateBusiness({
+      businessFromDb: generateBusiness(generateUserData({}), {}),
+      businessFromUpdateQueue: generateBusiness(generateUserData({}), {
         licenseData: undefined,
       }),
     });
@@ -27,7 +32,7 @@ describe("isLicenseDataFromDatabaseDataMoreRecent", () => {
   });
 
   it("returns false when license data lastUpdatedISO is the same", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       licenseData: generateLicenseData({
         lastUpdatedISO: currentDateISOString,
       }),
@@ -41,12 +46,12 @@ describe("isLicenseDataFromDatabaseDataMoreRecent", () => {
   });
 
   it("returns false when license data lastUpdatedISO businessFromUpdateQueue is more recent", () => {
-    const moreRecentLicenceData = generateBusiness({
+    const moreRecentLicenceData = generateBusiness(generateUserData({}), {
       licenseData: generateLicenseData({
         lastUpdatedISO: currentDatePlusOneHourISOString,
       }),
     });
-    const olderLicenceData = generateBusiness({
+    const olderLicenceData = generateBusiness(generateUserData({}), {
       licenseData: generateLicenseData({
         lastUpdatedISO: currentDateISOString,
       }),
@@ -60,12 +65,12 @@ describe("isLicenseDataFromDatabaseDataMoreRecent", () => {
   });
 
   it("returns true when license data lastUpdatedISO businessFromDb is more recent", () => {
-    const moreRecentLicenceData = generateBusiness({
+    const moreRecentLicenceData = generateBusiness(generateUserData({}), {
       licenseData: generateLicenseData({
         lastUpdatedISO: currentDatePlusOneHourISOString,
       }),
     });
-    const olderLicenceData = generateBusiness({
+    const olderLicenceData = generateBusiness(generateUserData({}), {
       licenseData: generateLicenseData({
         lastUpdatedISO: currentDateISOString,
       }),

@@ -35,7 +35,7 @@ describe("sidebarCard Helpers", () => {
     });
 
     it("returns hidden certifications when there is a match", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         preferences: generatePreferences({ hiddenCertificationIds: ["three"] }),
       });
       const certification = generateCertification({ id: "three" });
@@ -75,7 +75,7 @@ describe("sidebarCard Helpers", () => {
     });
 
     it("returns an array of all certifications when there is no matching id in hiddenCertificationIds", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         preferences: generatePreferences({ hiddenCertificationIds: ["three"] }),
       });
       const certifications = [generateCertification({ id: "one" }), generateCertification({ id: "two" })];
@@ -84,7 +84,7 @@ describe("sidebarCard Helpers", () => {
     });
 
     it("returns an array of filtered certifications when there is a matching id in hiddenCertificationIds", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         preferences: generatePreferences({ hiddenCertificationIds: ["two"] }),
       });
 
@@ -248,7 +248,7 @@ describe("sidebarCard Helpers", () => {
     });
 
     it("should return an empty array if sidebarDisplayContent is undefined", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         preferences: generatePreferences({ visibleSidebarCards: ["some-id"] }),
       });
       const result = getVisibleSideBarCards(business, undefined);
@@ -256,7 +256,7 @@ describe("sidebarCard Helpers", () => {
     });
 
     it("should return array with matching id", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         preferences: generatePreferences({ visibleSidebarCards: ["some-id"] }),
       });
       const sidebarCardContent = generateSidebarCardContent({
@@ -277,7 +277,7 @@ describe("sidebarCard Helpers", () => {
     });
 
     it("returns an array of all fundings when there is no matching id in hiddenFundingIds", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         preferences: generatePreferences({ hiddenFundingIds: ["three"] }),
       });
       const fundings = [generateFunding({ id: "one" }), generateFunding({ id: "two" })];
@@ -286,7 +286,7 @@ describe("sidebarCard Helpers", () => {
     });
 
     it("returns an array of filtered fundings when there is a matching id in hiddenFundingIds", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         preferences: generatePreferences({ hiddenFundingIds: ["two"] }),
       });
       const funding1 = generateFunding({ id: "one" });
@@ -303,7 +303,7 @@ describe("sidebarCard Helpers", () => {
     });
 
     it("returns hidden fundings when there is a match", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         preferences: generatePreferences({ hiddenFundingIds: ["three"] }),
       });
       const funding = generateFunding({ id: "three" });
@@ -313,7 +313,7 @@ describe("sidebarCard Helpers", () => {
   });
 
   describe("getForYouCardCount", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
         municipality: undefined,
@@ -365,13 +365,13 @@ describe("sidebarCard Helpers", () => {
     });
 
     it("returns an empty array when funding is undefined", () => {
-      const business = generateBusiness({});
+      const business = generateBusiness(generateUserData({}), {});
       const result = filterFundings({ business });
       expect(result.length).toEqual(0);
     });
 
     it("shows home-based-business yes or unknown when user home-based-business is true", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           homeBasedBusiness: true,
           municipality: undefined,
@@ -411,7 +411,7 @@ describe("sidebarCard Helpers", () => {
     });
 
     it("shows all when user home-based-business is false", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           homeBasedBusiness: false,
           municipality: undefined,
@@ -453,7 +453,7 @@ describe("sidebarCard Helpers", () => {
 
     describe("filtering by municipality", () => {
       it("shows fundings where user municipality is in specified county", () => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             homeBasedBusiness: false,
             municipality: generateMunicipality({ county: "Atlantic" }),
@@ -481,7 +481,7 @@ describe("sidebarCard Helpers", () => {
       });
 
       it("shows fundings where user municipality is undefined", () => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             homeBasedBusiness: false,
             municipality: undefined,
@@ -512,7 +512,7 @@ describe("sidebarCard Helpers", () => {
     });
 
     it("does not display any fundings with a past due due date", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           homeBasedBusiness: false,
           municipality: undefined,
@@ -538,7 +538,7 @@ describe("sidebarCard Helpers", () => {
     });
 
     it("displays any fundings with a due date in the future", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           homeBasedBusiness: false,
           municipality: undefined,
@@ -565,7 +565,7 @@ describe("sidebarCard Helpers", () => {
     });
 
     it("does not display any fundings marked as Do Not Publish", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           homeBasedBusiness: false,
           municipality: undefined,
@@ -597,7 +597,7 @@ describe("sidebarCard Helpers", () => {
 
     describe("filtering by number of employees", () => {
       it('displays only fundings with employeesRequired "n/a" when # employees is 0', () => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             homeBasedBusiness: false,
             municipality: undefined,
@@ -620,7 +620,7 @@ describe("sidebarCard Helpers", () => {
       });
 
       it('displays only fundings with employeesRequired "n/a" when # employees is equivalent to 0', () => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             homeBasedBusiness: false,
             municipality: undefined,
@@ -643,7 +643,7 @@ describe("sidebarCard Helpers", () => {
       });
 
       it("displays all fundings when # employees > 0", () => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             homeBasedBusiness: false,
             municipality: undefined,
@@ -669,7 +669,7 @@ describe("sidebarCard Helpers", () => {
       });
 
       it("displays all fundings when # employees is not answered", () => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             homeBasedBusiness: false,
             municipality: undefined,
@@ -688,7 +688,7 @@ describe("sidebarCard Helpers", () => {
     });
 
     it("shows fundings where user sector is in specified sectors list", () => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           homeBasedBusiness: false,
           municipality: undefined,
@@ -730,7 +730,7 @@ describe("sidebarCard Helpers", () => {
       const listOfFundingTypes = [funding1, funding2, funding3, funding4, funding5, funding6, funding7];
 
       it("returns a generic funding when certifications are not defined", () => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             ownershipTypeIds: ["woman-owned", "veteran-owned"],
             homeBasedBusiness: false,
@@ -746,7 +746,7 @@ describe("sidebarCard Helpers", () => {
       });
 
       it("does not return ownership types funding's when applicable ownership types do not match", () => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             ownershipTypeIds: ["woman-owned", "veteran-owned"],
             homeBasedBusiness: false,
@@ -762,7 +762,7 @@ describe("sidebarCard Helpers", () => {
       });
 
       it("does not return sbe funding when existing employees is greater than small business threshold", () => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             ownershipTypeIds: [],
             homeBasedBusiness: false,
@@ -780,7 +780,7 @@ describe("sidebarCard Helpers", () => {
       });
 
       it("returns sbe funding when existing employees is greater than small business threshold", () => {
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             ownershipTypeIds: [],
             homeBasedBusiness: false,
@@ -801,7 +801,7 @@ describe("sidebarCard Helpers", () => {
     describe("isNonprofitOnly", () => {
       it("includes fundings marked as isNonprofitOnly when user legal structure is nonprofit", () => {
         const funding = generateFunding({ isNonprofitOnly: true });
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             legalStructureId: "nonprofit",
             ownershipTypeIds: [],
@@ -819,7 +819,7 @@ describe("sidebarCard Helpers", () => {
 
       it("includes fundings marked as isNonprofitOnly when user legal structure is not yet defined", () => {
         const funding = generateFunding({ isNonprofitOnly: true });
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             legalStructureId: undefined,
             ownershipTypeIds: [],
@@ -837,7 +837,7 @@ describe("sidebarCard Helpers", () => {
 
       it("does not include fundings marked as isNonprofitOnly when user legal structure is not nonprofit", () => {
         const funding = generateFunding({ isNonprofitOnly: true });
-        const business = generateBusiness({
+        const business = generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             legalStructureId: "limited-liability-company",
             ownershipTypeIds: [],
@@ -856,7 +856,7 @@ describe("sidebarCard Helpers", () => {
 
     it("includes fundings marked as NOT isNonprofitOnly when user legal structure is nonprofit", () => {
       const funding = generateFunding({ isNonprofitOnly: false });
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           legalStructureId: "nonprofit",
           ownershipTypeIds: [],
@@ -874,7 +874,7 @@ describe("sidebarCard Helpers", () => {
 
     it("includes fundings marked as NOT isNonprofitOnly when user legal structure is not nonprofit", () => {
       const funding = generateFunding({ isNonprofitOnly: false });
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           legalStructureId: "limited-liability-company",
           ownershipTypeIds: [],
@@ -893,7 +893,7 @@ describe("sidebarCard Helpers", () => {
 
   describe("filterCertifications", () => {
     const businessWithDefaultProfileData = (overrides: Partial<ProfileData>): Business => {
-      return generateBusiness({
+      return generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           ownershipTypeIds: [],
           existingEmployees: String(SMALL_BUSINESS_MAX_EMPLOYEE_COUNT),

@@ -2,7 +2,7 @@ import { SectorModal } from "@/components/dashboard/SectorModal";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
-import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared";
+import { generateBusiness, generateProfileData, generateUserData } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const submitSectorModal = (): void => {
@@ -19,6 +19,7 @@ describe("<SectorModal />", () => {
     useMockBusiness({});
   });
 
+  const userData = generateUserData({});
   const renderSectorModal = (onContinue?: jest.Mock): { page: PageHelpers } => {
     render(
       <SectorModal open={true} handleClose={(): void => {}} onContinue={onContinue ?? ((): void => {})} />
@@ -28,7 +29,7 @@ describe("<SectorModal />", () => {
   };
 
   it("shows sector for generic industry", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       profileData: generateProfileData({
         industryId: "generic",
         businessPersona: "STARTING",
@@ -43,7 +44,7 @@ describe("<SectorModal />", () => {
   });
 
   it("fires validations when clicking submit", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       profileData: generateProfileData({
         businessPersona: "STARTING",
         legalStructureId: "limited-liability-partnership",
@@ -66,7 +67,7 @@ describe("<SectorModal />", () => {
   });
 
   it("calls onContinue prop on successful submit", async () => {
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       profileData: generateProfileData({
         sectorId: undefined,
         industryId: "generic",

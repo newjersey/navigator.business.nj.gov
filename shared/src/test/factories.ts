@@ -367,7 +367,7 @@ export const generateEnvironmentData = (overrides: Partial<EnvironmentData>): En
   };
 };
 
-export const generateBusiness = (overrides: Partial<Business>): Business => {
+export const generateBusiness = (userData: UserData, overrides: Partial<Business>): Business => {
   const profileData = overrides.profileData ?? generateProfileData({});
   const formationData: FormationData = publicFilingLegalTypes.includes(
     profileData.legalStructureId as PublicFilingLegalType
@@ -395,6 +395,7 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
     taxFilingData: generateTaxFilingData({}),
     environmentData: generateEnvironmentData({}),
     version: CURRENT_VERSION,
+    userId: userData.user.id,
     profileData,
     formationData,
     ...overrides,
@@ -403,19 +404,26 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
 
 export const generateUserData = (overrides: Partial<UserData>): UserData => {
   const id = createBusinessId();
-  return {
+
+  const userData: UserData = {
     version: CURRENT_VERSION,
     versionWhenCreated: -1,
     dateCreatedISO: getCurrentDateISOString(),
     lastUpdatedISO: getCurrentDateISOString(),
     user: generateUser({}),
     currentBusinessId: overrides.currentBusinessId ?? id,
-    businesses: {
-      ...overrides.businesses,
-      [id]: generateBusiness({ id }),
-    },
+    businesses: {},
     ...overrides,
   };
+
+  if (!overrides.businesses || Object.keys(overrides.businesses).length === 0) {
+    const business = generateBusiness(userData, { id });
+    userData.businesses = {
+      [id]: business,
+    };
+  }
+
+  return userData;
 };
 
 export const generateUserDataForBusiness = (business: Business, overrides?: Partial<UserData>): UserData => {

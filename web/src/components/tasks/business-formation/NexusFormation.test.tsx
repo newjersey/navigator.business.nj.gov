@@ -25,6 +25,7 @@ import {
   generateFormationData,
   generateFormationFormData,
   generateFormationSubmitResponse,
+  generateUserData,
   getCurrentDate,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
@@ -110,7 +111,7 @@ describe("<NexusFormationFlow />", () => {
     displayContent = {
       formationDbaContent: generateFormationDbaContent({}),
     };
-    initialBusiness = generateBusiness({ profileData, formationData });
+    initialBusiness = generateBusiness(generateUserData({}), { profileData, formationData });
   });
 
   it("posts to the api with userData and foreign good standing file", async () => {
@@ -130,9 +131,9 @@ describe("<NexusFormationFlow />", () => {
       municipality: undefined,
     });
     const formationData = generateEmptyFormationData();
-    initialBusiness = generateBusiness({ profileData, formationData });
+    initialBusiness = generateBusiness(generateUserData({}), { profileData, formationData });
 
-    const foreignBusiness = generateBusiness({
+    const foreignBusiness = generateBusiness(generateUserData({}), {
       profileData,
       formationData: {
         ...generateEmptyFormationData(),
@@ -329,7 +330,7 @@ describe("<NexusFormationFlow />", () => {
           displayContent = {
             formationDbaContent: generateFormationDbaContent({}),
           };
-          return (initialBusiness = generateBusiness({ profileData, formationData }));
+          return (initialBusiness = generateBusiness(generateUserData({}), { profileData, formationData }));
         };
 
         beforeEach(() => {
@@ -500,7 +501,7 @@ describe("<NexusFormationFlow />", () => {
           nexusDbaName: "",
         });
         const formationData = generateEmptyFormationData();
-        const partnershipBusiness = generateBusiness({ profileData, formationData });
+        const partnershipBusiness = generateBusiness(generateUserData({}), { profileData, formationData });
 
         process.env.FEATURE_BUSINESS_FLP = "false";
         page = preparePage({

@@ -8,6 +8,7 @@ import {
   LookupLegalStructureById,
   generateBusiness,
   generateProfileData,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import { ThemeProvider, createTheme } from "@mui/material";
@@ -29,6 +30,7 @@ const renderComponent = (business: Business): void => {
   );
 };
 
+const userData = generateUserData({});
 const configForField = Config.profileDefaults.fields.legalStructureId.default;
 
 describe("<BusinessStructure />", () => {
@@ -41,7 +43,7 @@ describe("<BusinessStructure />", () => {
   it(`add text is displayed with href that routes to business structure URL`, () => {
     useMockRoadmapTask({ id: "business-structure", urlSlug: "some-business-structure-url" });
     renderComponent(
-      generateBusiness({
+      generateBusiness(userData, {
         profileData: generateProfileData({ legalStructureId: undefined }),
       })
     );
@@ -55,7 +57,7 @@ describe("<BusinessStructure />", () => {
   it(`edit text is displayed with href that routes to business structure URL`, () => {
     useMockRoadmapTask({ id: "business-structure", urlSlug: "some-business-structure-url" });
     renderComponent(
-      generateBusiness({
+      generateBusiness(userData, {
         profileData: generateProfileData({ legalStructureId: "c-corporation" }),
       })
     );
@@ -67,7 +69,7 @@ describe("<BusinessStructure />", () => {
 
   it("displays Not Entered text when user has no legal structure", () => {
     renderComponent(
-      generateBusiness({
+      generateBusiness(userData, {
         profileData: generateProfileData({ legalStructureId: undefined }),
       })
     );
@@ -76,7 +78,7 @@ describe("<BusinessStructure />", () => {
 
   it("displays business structure when exists", () => {
     renderComponent(
-      generateBusiness({
+      generateBusiness(userData, {
         profileData: generateProfileData({ legalStructureId: "c-corporation" }),
       })
     );

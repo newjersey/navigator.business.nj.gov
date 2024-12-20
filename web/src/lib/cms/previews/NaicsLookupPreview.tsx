@@ -6,7 +6,7 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateTask } from "@/test/factories";
-import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared";
+import { generateBusiness, generateProfileData, generateUserData } from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
 const NaicsLookupPreview = (props: PreviewProps): ReactElement => {
@@ -17,8 +17,8 @@ const NaicsLookupPreview = (props: PreviewProps): ReactElement => {
     name: "Name is controlled by Task Metadata",
     contentMd: "Body content is controlled by Task Metadata",
   });
-
-  const business = generateBusiness({
+  const userData = generateUserData({});
+  const business = generateBusiness(userData, {
     profileData: generateProfileData({
       naicsCode: "",
       industryId: "cannabis",

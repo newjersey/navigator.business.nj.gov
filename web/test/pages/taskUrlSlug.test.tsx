@@ -19,6 +19,7 @@ import {
   generateBusiness,
   generateMunicipality,
   generateProfileData,
+  generateUserData,
   generateUserDataForBusiness,
   LookupTaskAgencyById,
 } from "@businessnjgovnavigator/shared";
@@ -49,7 +50,9 @@ const renderPage = (task: Task, initialBusiness?: Business): void => {
   render(
     <materialUi.ThemeProvider theme={materialUi.createTheme()}>
       <WithStatefulUserData
-        initialUserData={generateUserDataForBusiness(initialBusiness ?? generateBusiness({}))}
+        initialUserData={generateUserDataForBusiness(
+          initialBusiness ?? generateBusiness(generateUserData({}), {})
+        )}
       >
         <TaskPage
           task={task}
@@ -133,7 +136,9 @@ describe("task page", () => {
   it("shows loading state when roadmap is undefined", () => {
     setMockRoadmapResponse({ roadmap: undefined });
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(generateBusiness({}))}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(generateBusiness(generateUserData({}), {}))}
+      >
         <TaskPage
           task={generateTask({})}
           displayContent={createEmptyTaskDisplayContent()}
@@ -244,7 +249,10 @@ describe("task page", () => {
     });
 
     it.each(mockTaskIdsWithLicenseSearch)("loads License task screen for %s", (licenseId) => {
-      renderPage(generateTask({ id: licenseId }), generateBusiness({ licenseData: undefined }));
+      renderPage(
+        generateTask({ id: licenseId }),
+        generateBusiness(generateUserData({}), { licenseData: undefined })
+      );
       expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
     });
   });
@@ -375,7 +383,10 @@ describe("task page", () => {
       });
 
       useMockRoadmapWithTask(task);
-      renderPage(task, generateBusiness({ taskProgress: { "do-this-first": "COMPLETED" } }));
+      renderPage(
+        task,
+        generateBusiness(generateUserData({}), { taskProgress: { "do-this-first": "COMPLETED" } })
+      );
 
       expect(
         screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
@@ -389,7 +400,7 @@ describe("task page", () => {
   it("does not render next and previous buttons for STARTING when legal structure allows for business formation and form-business-entity task is rendered", () => {
     renderPage(
       generateTask({ id: formationTaskId }),
-      generateBusiness({
+      generateBusiness(generateUserData({}), {
         taskProgress: {},
         profileData: generateProfileData({
           legalStructureId: randomPublicFilingLegalType(),
@@ -404,7 +415,7 @@ describe("task page", () => {
   it("does not render next and previous buttons for FOREIGN when legal structure allows for business formation and form-business-entity task is rendered", () => {
     renderPage(
       generateTask({ id: formationTaskId }),
-      generateBusiness({
+      generateBusiness(generateUserData({}), {
         taskProgress: {},
         profileData: generateProfileData({
           legalStructureId: randomPublicFilingLegalType(),
@@ -422,7 +433,7 @@ describe("task page", () => {
       setLargeScreen(false);
       renderPage(
         generateTask({ id: businessStructureTaskId }),
-        generateBusiness({
+        generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             operatingPhase,
           }),
@@ -439,7 +450,7 @@ describe("task page", () => {
       setLargeScreen(false);
       renderPage(
         generateTask({ id: businessStructureTaskId }),
-        generateBusiness({
+        generateBusiness(generateUserData({}), {
           profileData: generateProfileData({
             operatingPhase,
           }),
@@ -464,7 +475,7 @@ describe("task page", () => {
         requiresLocation: true,
         contentMd: contentWithLocationSection,
       });
-      const businessWithoutMunicipality = generateBusiness({
+      const businessWithoutMunicipality = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           municipality: undefined,
         }),
@@ -480,7 +491,7 @@ describe("task page", () => {
         requiresLocation: true,
         contentMd: contentWithLocationSection,
       });
-      const businessWithMunicipality = generateBusiness({
+      const businessWithMunicipality = generateBusiness(generateUserData({}), {
         profileData: generateProfileData({
           municipality: generateMunicipality({}),
         }),

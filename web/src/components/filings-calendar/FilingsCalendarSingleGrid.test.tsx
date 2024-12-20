@@ -8,6 +8,7 @@ import {
   generateLicenseDetails,
   generateTaxFilingCalendarEvent,
   generateTaxFilingData,
+  generateUserData,
   parseDateWithFormat,
   randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
@@ -63,11 +64,12 @@ const operateReferences: Record<string, OperateReference> = {
     urlPath: "tax-filing-three-url-path",
   },
 };
+const userData = generateUserData({});
 
 describe("<FilingsCalendarSingleGrid />", () => {
   it("renders a tax filings", () => {
     const taxFilingData = generateTaxFilingData({ filings: [taxFilingOne] });
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       taxFilingData: taxFilingData,
     });
     render(
@@ -83,7 +85,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
   });
 
   it("does not render tax filing if it's in a month that has elapsed", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       taxFilingData: generateTaxFilingData({
         filings: [
           generateTaxFilingCalendarEvent({
@@ -112,7 +114,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
   });
 
   it("renders tax filing when on a future year in a month that has elapsed", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       taxFilingData: generateTaxFilingData({
         filings: [
           generateTaxFilingCalendarEvent({
@@ -142,7 +144,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
 
   it("does not render tax filing when on a future year", () => {
     const taxFilingData = generateTaxFilingData({ filings: [taxFilingOne] });
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       taxFilingData: taxFilingData,
     });
     render(
@@ -161,7 +163,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
   it("renders a licenseEvent expiration task", () => {
     const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
     const licenseEvent = generateLicenseEvent({ licenseName });
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       licenseData: generateLicenseData({
         licenses: {
           [licenseName]: generateLicenseDetails({
@@ -191,7 +193,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
   it("renders a licenseEvent renewal task", () => {
     const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
     const licenseEvent = generateLicenseEvent({ licenseName });
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       licenseData: generateLicenseData({
         licenses: {
           [licenseName]: generateLicenseDetails({
@@ -220,7 +222,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
   it("renders expiration event and renewal event in the same month when expiration is on the 1st of a 31-day month", () => {
     const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
     const licenseEvent = generateLicenseEvent({ licenseName });
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       licenseData: generateLicenseData({
         licenses: {
           [licenseName]: generateLicenseDetails({
@@ -254,7 +256,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
   });
 
   it("does not render expand collapse button when there are only two tax filings", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo] }),
     });
     render(
@@ -285,7 +287,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
 
     const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
     const licenseEvent = generateLicenseEvent({ licenseName });
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       taxFilingData: generateTaxFilingData({ filings: [last, first] }),
       licenseData: generateLicenseData({
         licenses: {
@@ -333,7 +335,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
 
     const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
     const licenseEvent = generateLicenseEvent({ licenseName });
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       taxFilingData: generateTaxFilingData({ filings: [first, last, second] }),
       licenseData: generateLicenseData({
         licenses: {
@@ -367,7 +369,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
   });
 
   it("shows and hides the additional tax filings when the view more / view less button is clicked", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(userData, {
       taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo, taxFilingThree] }),
     });
     render(

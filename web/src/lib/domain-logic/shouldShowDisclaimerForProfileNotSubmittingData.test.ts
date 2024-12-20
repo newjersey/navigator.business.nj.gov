@@ -4,6 +4,7 @@ import {
   generateBusiness,
   generateFormationData,
   generateProfileData,
+  generateUserData,
 } from "@businessnjgovnavigator/shared/test";
 
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -18,7 +19,7 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
   });
 
   it("returns true if isAuthenticated is UNKNOWN", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       formationData: generateFormationData({
         completedFilingPayment: false,
       }),
@@ -32,7 +33,7 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
   });
 
   it("returns true if persona is OWNING and Authenticated", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       formationData: generateFormationData({
         completedFilingPayment: false,
       }),
@@ -46,7 +47,7 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
   it.each(nonOwningPersonas)(
     "returns true if completedFilingPayment is false and dateOfFormation is defined for %s persona",
     (persona) => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         formationData: generateFormationData({
           completedFilingPayment: false,
         }),
@@ -60,7 +61,7 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
   );
 
   it("returns true for REMOTE_WORKER", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         businessPersona: "FOREIGN",
         foreignBusinessTypeIds: ["employeesInNJ"],
@@ -72,7 +73,7 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
   });
 
   it("returns true for REMOTE_SELLER", () => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       profileData: generateProfileData({
         businessPersona: "FOREIGN",
         foreignBusinessTypeIds: ["revenueInNJ", "transactionsInNJ"],
@@ -86,7 +87,7 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
   it.each(nonOwningPersonas)(
     "returns false if completedFilingPayment is true for %s persona and is not owning or authenticated",
     (persona) => {
-      const business = generateBusiness({
+      const business = generateBusiness(generateUserData({}), {
         formationData: generateFormationData({
           completedFilingPayment: true,
         }),
@@ -101,7 +102,7 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
   );
 
   it.each(nonOwningPersonas)("returns false if dateOfFormation is undefined for %s persona", (persona) => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       formationData: generateFormationData({
         completedFilingPayment: false,
       }),
@@ -115,7 +116,7 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
   });
 
   it.each(businessPersonas)("returns true for a %s persona in who is not authenticated", (persona) => {
-    const business = generateBusiness({
+    const business = generateBusiness(generateUserData({}), {
       formationData: generateFormationData({
         completedFilingPayment: false,
       }),

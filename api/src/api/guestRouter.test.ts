@@ -10,6 +10,7 @@ import {
   generateProfileData,
   generateTaxFilingData,
   generateUser,
+  generateUserData,
   generateUserDataForBusiness,
   getFirstAnnualFiling,
   getSecondAnnualFiling,
@@ -41,7 +42,8 @@ describe("guestRouter", () => {
     it("calculates 3 new annual filing dates and updates them for dateOfFormation", async () => {
       const formationDate = dayjs().subtract(3, "year").add(1, "month").day(1).format("YYYY-MM-DD");
 
-      const business = generateBusiness({
+      const userData = generateUserData({});
+      const business = generateBusiness(userData, {
         profileData: generateProfileData({
           dateOfFormation: formationDate,
           entityId: undefined,
@@ -51,6 +53,7 @@ describe("guestRouter", () => {
           filings: [],
         }),
       });
+
       const postedUserData = generateUserDataForBusiness(business, { user: generateUser({ id: "123" }) });
 
       const response = await request(app).post(`/annualFilings`).send(postedUserData);

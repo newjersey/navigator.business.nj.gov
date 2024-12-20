@@ -16,6 +16,7 @@ import {
   generateFormationUSAddress,
   generateMunicipality,
   generateProfileData,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@shared/test";
 import { generateFormationUserData, generateInputFile } from "@test/factories";
@@ -812,15 +813,16 @@ describe("ApiFormationClient", () => {
           { legalStructureId: "limited-liability-partnership" }
         );
 
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              legalStructureId: "limited-liability-partnership",
-              businessPersona: "STARTING",
-            }),
-            formationData: generateFormationData({ formationFormData }),
-          })
-        );
+        const baseUserData = generateUserData({});
+        const business = generateBusiness(baseUserData, {
+          profileData: generateProfileData({
+            legalStructureId: "limited-liability-partnership",
+            businessPersona: "STARTING",
+          }),
+          formationData: generateFormationData({ formationFormData }),
+        });
+
+        const userData = generateUserDataForBusiness(business);
 
         await client.form(userData, "hostname.com/form-business");
         const currentBusiness = getCurrentBusiness(userData);
@@ -939,16 +941,16 @@ describe("ApiFormationClient", () => {
           },
           { legalStructureId: "foreign-limited-liability-partnership" }
         );
+        const baseUserData = generateUserData({});
+        const business = generateBusiness(baseUserData, {
+          profileData: generateProfileData({
+            legalStructureId: "limited-liability-partnership",
+            businessPersona: "FOREIGN",
+          }),
+          formationData: generateFormationData({ formationFormData }),
+        });
 
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              legalStructureId: "limited-liability-partnership",
-              businessPersona: "FOREIGN",
-            }),
-            formationData: generateFormationData({ formationFormData }),
-          })
-        );
+        const userData = generateUserDataForBusiness(business);
         const currentBusiness = getCurrentBusiness(userData);
 
         await client.form(userData, "hostname.com/form-business");
@@ -1085,15 +1087,16 @@ describe("ApiFormationClient", () => {
           { legalStructureId: "limited-partnership" }
         );
 
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              legalStructureId: "limited-partnership",
-              businessPersona: "STARTING",
-            }),
-            formationData: generateFormationData({ formationFormData }),
-          })
-        );
+        const baseUserData = generateUserData({});
+        const business = generateBusiness(baseUserData, {
+          profileData: generateProfileData({
+            legalStructureId: "limited-partnership",
+            businessPersona: "STARTING",
+          }),
+          formationData: generateFormationData({ formationFormData }),
+        });
+
+        const userData = generateUserDataForBusiness(business);
         const currentBusiness = getCurrentBusiness(userData);
 
         await client.form(userData, "hostname.com/form-business");
@@ -1233,15 +1236,16 @@ describe("ApiFormationClient", () => {
     describe("when Nonprofit", () => {
       // eslint-disable-next-line unicorn/consistent-function-scoping
       const getUserDataForNonProfit = (formationFormData: FormationFormData): UserData => {
-        return generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              legalStructureId: "nonprofit",
-              businessPersona: "STARTING",
-            }),
-            formationData: generateFormationData({ formationFormData }),
-          })
-        );
+        const userData = generateUserData({});
+        const business = generateBusiness(userData, {
+          profileData: generateProfileData({
+            legalStructureId: "nonprofit",
+            businessPersona: "STARTING",
+          }),
+          formationData: generateFormationData({ formationFormData }),
+        });
+
+        return generateUserDataForBusiness(business);
       };
 
       it("posts to the endpoint with the api formation object when nonprofit provisions are IN_BYLAWS", async () => {

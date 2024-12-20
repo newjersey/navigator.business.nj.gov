@@ -15,6 +15,7 @@ import {
   generateBusiness,
   generateMunicipality,
   generateProfileData,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
@@ -39,6 +40,7 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 const Config = getMergedConfig();
+const userData = generateUserData({});
 
 describe("<DeferredLocationQuestion />", () => {
   let setRoadmap: jest.Mock;
@@ -74,7 +76,9 @@ describe("<DeferredLocationQuestion />", () => {
   };
 
   it("shows location question and not inner content if location is not yet answered", () => {
-    const business = generateBusiness({ profileData: generateProfileData({ municipality: undefined }) });
+    const business = generateBusiness(userData, {
+      profileData: generateProfileData({ municipality: undefined }),
+    });
     renderComponent({ initialBusiness: business, innerContent: "inner-content" });
     expect(screen.getByText(Config.deferredLocation.header)).toBeInTheDocument();
     expect(screen.queryByText("inner-content")).not.toBeInTheDocument();
@@ -83,7 +87,7 @@ describe("<DeferredLocationQuestion />", () => {
 
   it("shows inner content without question nor success banner when already location saved", () => {
     const municipality = generateMunicipality({});
-    const business = generateBusiness({ profileData: generateProfileData({ municipality }) });
+    const business = generateBusiness(userData, { profileData: generateProfileData({ municipality }) });
     renderComponent({ initialBusiness: business, innerContent: "inner-content" });
     expect(screen.queryByText(Config.deferredLocation.header)).not.toBeInTheDocument();
     expect(screen.getByText("inner-content")).toBeInTheDocument();
@@ -93,7 +97,9 @@ describe("<DeferredLocationQuestion />", () => {
   describe("when saving location", () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const absecon = generateMunicipality({ displayName: "Absecon" });
-    const business = generateBusiness({ profileData: generateProfileData({ municipality: undefined }) });
+    const business = generateBusiness(userData, {
+      profileData: generateProfileData({ municipality: undefined }),
+    });
 
     const selectNewarkAndSave = async (): Promise<void> => {
       renderComponent({

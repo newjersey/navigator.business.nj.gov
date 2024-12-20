@@ -14,6 +14,7 @@ import {
   FormationData,
   generateBusiness,
   generateFormationFormData,
+  generateUserData,
   ProfileData,
   PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
@@ -99,7 +100,10 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
       lastVisitedPageIndex: 0,
       ...initialFormationData,
     };
-    const page = preparePage({ business: generateBusiness({ profileData, formationData }), displayContent });
+    const page = preparePage({
+      business: generateBusiness(generateUserData({}), { profileData, formationData }),
+      displayContent,
+    });
     return page;
   };
 

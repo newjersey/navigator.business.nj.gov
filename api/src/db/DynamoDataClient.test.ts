@@ -13,9 +13,9 @@ import {
   generateBusiness,
   generateProfileData,
   generateTaxFilingData,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@shared/test";
-import { UserData } from "@shared/userData";
 import dayjs from "dayjs";
 
 // references jest-dynalite-config values
@@ -46,23 +46,21 @@ describe("User and Business Migration with DynamoDataClient", () => {
   const industry = `industry-${randomInt()}`;
   const encryptedTaxId = `encryptedId-${randomInt()}`;
 
-  const generateUserData = (): UserData => {
-    return generateUserDataForBusiness(
-      generateBusiness({
-        profileData: generateProfileData({
-          dateOfFormation: formationDate,
-          legalStructureId: "limited-liability-company",
-          naicsCode: naicsCode,
-          industryId: industry,
-          encryptedTaxId: encryptedTaxId,
-        }),
-        taxFilingData: generateTaxFilingData({
-          filings: [],
-        }),
-      })
-    );
-  };
-  const userData = generateUserData();
+  const baseUserData = generateUserData({});
+  const business = generateBusiness(baseUserData, {
+    profileData: generateProfileData({
+      dateOfFormation: formationDate,
+      legalStructureId: "limited-liability-company",
+      naicsCode: naicsCode,
+      industryId: industry,
+      encryptedTaxId: encryptedTaxId,
+    }),
+    taxFilingData: generateTaxFilingData({
+      filings: [],
+    }),
+  });
+
+  const userData = generateUserDataForBusiness(business);
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const mockLogger = () => {
