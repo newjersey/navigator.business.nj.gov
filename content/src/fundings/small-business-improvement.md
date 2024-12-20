@@ -1,9 +1,8 @@
 ---
-filename: small-business-improvement
 name: Small Business Improvement Grant
-displayName: small-business-improvement
+displayName: small-business-improvement-grant
 urlSlug: small-business-improvement
-id: small-business-improvement-grant
+id: small-business-improvement
 sidebarCardBodyText: The Small Business Improvement Grant offers reimbursement
   for costs associated with certain building improvements.
 openDate: ""

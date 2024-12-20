@@ -1,5 +1,4 @@
 ---
-filename: dep-work-clean
 name: "WorkClean: Diesel Modernization Program"
 displayName: dep-work-clean
 urlSlug: dep-work-clean
@@ -28,15 +27,16 @@ county:
 sector: []
 publishStageArchive: ""
 ---
+
 ## Eligibility
 
 The following items are examples of activities eligible to apply for funding:
 
-* Non-road diesel-to-diesel replacements
-* Marine vessel engine replacements
-* Electric Transport Refrigeration Unit (eTRU) replacements
-* Non-road diesel-to-electric replacements 
-* On-road vehicle electrification projects
+- Non-road diesel-to-diesel replacements
+- Marine vessel engine replacements
+- Electric Transport Refrigeration Unit (eTRU) replacements
+- Non-road diesel-to-electric replacements
+- On-road vehicle electrification projects
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 

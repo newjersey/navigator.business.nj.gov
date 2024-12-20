@@ -1,9 +1,8 @@
 ---
-filename: new-jersey-founders
 name: New Jersey Founders & Funders
 displayName: new-jersey-founders
 urlSlug: new-jersey-founders
-id: new-jersey-founders-funders
+id: new-jersey-founders
 sidebarCardBodyText: Founders & Funders enables early-stage New Jersey
   technology and life sciences companies to meet potential investors in
   10-minute, one-on-one “speed dating” sessions to discuss strategy, business

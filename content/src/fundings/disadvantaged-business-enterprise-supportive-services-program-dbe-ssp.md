@@ -1,9 +1,8 @@
 ---
-filename: Disadvantaged Business Enterprise Supportive Services Program (DBE/SSP)
 name: Disadvantaged Business Enterprise Supportive Services Program (DBE/SSP)
 displayName: dbe-ssp
 urlSlug: dbe-ssp
-id: disadvantaged-business-enterprise-support-services
+id: disadvantaged-business-enterprise-supportive-services-program-dbe-ssp
 sidebarCardBodyText: The DBE/SS Program provides training and technical
   assistance to minority, disadvantaged, and women-owned businesses. This
   program aims to increase opportunities with the New Jersey Department of
