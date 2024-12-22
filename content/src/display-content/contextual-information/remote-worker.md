@@ -1,5 +1,5 @@
 ---
-slug: remote-worker
+id: remote-worker
 header: Remote Worker
 displayname: remote-worker
 ---

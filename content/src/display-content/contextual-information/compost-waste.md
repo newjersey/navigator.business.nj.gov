@@ -1,5 +1,5 @@
 ---
-slug: compost-waste
+id: compost-waste
 header: Compost Waste
 displayname: Compost Waste
 ---

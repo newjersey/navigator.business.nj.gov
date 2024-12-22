@@ -1,5 +1,5 @@
 ---
-slug: nexus-business
+id: nexus-business
 header: Nexus Business - Operations in New Jersey
 displayname: nexus-business
 ---

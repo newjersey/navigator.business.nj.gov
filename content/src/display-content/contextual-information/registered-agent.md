@@ -1,5 +1,5 @@
 ---
-slug: registered-agent
+id: registered-agent
 displayname: registered-agent
 header: Registered Agent
 ---

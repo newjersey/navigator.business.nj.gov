@@ -1,5 +1,5 @@
 ---
-slug: reserved-words
+id: reserved-words
 displayname: reserved-words
 header: Reserved Words
 ---

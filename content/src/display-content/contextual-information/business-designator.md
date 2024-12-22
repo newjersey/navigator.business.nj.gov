@@ -1,5 +1,5 @@
 ---
-slug: business-designator
+id: business-designator
 displayname: business-designator
 header: Business Designator
 ---

@@ -1,5 +1,5 @@
 ---
-slug: ada
+id: ada
 header: The Americans with Disabilities Act (ADA)
 displayname: ada
 ---

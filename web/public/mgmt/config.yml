@@ -5920,8 +5920,8 @@ collections:
     label: "Contextual Information"
     folder: "content/src/display-content/contextual-information"
     summary: "{{displayname}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
+    identifier_field: "{{fields.id}}"
+    slug: "{{fields.id}}"
     delete: true
     create: true
     editor:
@@ -5930,7 +5930,7 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Header", name: "header", widget: "string" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Id", name: "slug", widget: "write-once-read-only-no-space", required: true }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Display Name", name: "displayname", widget: "no-space" }
 
   - name: "page-not-found-error"

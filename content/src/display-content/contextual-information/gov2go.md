@@ -1,5 +1,5 @@
 ---
-slug: gov2go
+id: gov2go
 header: Gov2Go
 displayname: gov2go
 ---

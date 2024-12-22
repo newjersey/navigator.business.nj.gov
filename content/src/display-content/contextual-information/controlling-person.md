@@ -1,5 +1,5 @@
 ---
-slug: controlling-person
+id: controlling-person
 displayname: controlling-person
 header: Controlling Person
 ---

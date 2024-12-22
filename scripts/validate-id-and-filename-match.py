@@ -38,7 +38,7 @@ def validate_markdown_ids(directory):
 
 
 # Specify the directory containing markdown files
-directory = "../content/src/webflow-licenses"
+directory = "../content/src/display-content/contextual-information"
 
 # Validate the markdown files
 mismatched_files = validate_markdown_ids(directory)

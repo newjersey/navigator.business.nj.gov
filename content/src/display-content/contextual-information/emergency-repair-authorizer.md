@@ -3,7 +3,7 @@ notesMd: "[Muni planning
   doc](https://docs.google.com/document/d/1m7-VF_dH-0HwPEETY8JumOOcfuP2LrHJXT8I\
   7RGaOSo/edit)"
 header: Emergency Repair Expenditure Authorizer
-slug: emergency-repair-authorizer
+id: emergency-repair-authorizer
 displayname: emergency-repair-authorizer
 ---
 

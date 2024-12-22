@@ -1,5 +1,5 @@
 ---
-slug: veteran-corporation
+id: veteran-corporation
 displayname: veteran-corporation
 header: Veteran Corporation
 ---

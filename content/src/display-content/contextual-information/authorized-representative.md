@@ -1,5 +1,5 @@
 ---
-slug: authorized-representative
+id: authorized-representative
 displayname: authorized-representative
 header: Authorized Representative
 ---

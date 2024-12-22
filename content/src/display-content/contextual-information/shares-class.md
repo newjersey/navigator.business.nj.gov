@@ -1,5 +1,5 @@
 ---
-slug: shares-class
+id: shares-class
 displayname: shares-class
 header: Class of Shares
 ---

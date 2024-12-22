@@ -1,5 +1,5 @@
 ---
-slug: impact-zone-business-cannabis
+id: impact-zone-business-cannabis
 displayname: impact-zone-business-cannabis
 header: Impact Zone Businesses
 ---

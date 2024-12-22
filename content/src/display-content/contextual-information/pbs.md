@@ -1,5 +1,5 @@
 ---
-slug: pbs
+id: pbs
 header: Premier Business Services
 displayname: pbs
 ---

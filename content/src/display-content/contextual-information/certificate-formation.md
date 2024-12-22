@@ -1,5 +1,5 @@
 ---
-slug: certificate-formation
+id: certificate-formation
 header: Certificate of Formation / Certificate of Incorporation / Certificate of
   Authority
 displayname: certificate-formation

@@ -1,5 +1,5 @@
 ---
-slug: eoi-cannabis
+id: eoi-cannabis
 displayname: eoi-cannabis
 header: Entity of Interest
 ---

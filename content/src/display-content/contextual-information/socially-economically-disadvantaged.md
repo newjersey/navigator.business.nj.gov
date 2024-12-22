@@ -1,5 +1,5 @@
 ---
-slug: socially-economically-disadvantaged
+id: socially-economically-disadvantaged
 displayname: socially-economically-disadvantaged
 header: Socially and Economically Disadvantaged Individuals
 ---

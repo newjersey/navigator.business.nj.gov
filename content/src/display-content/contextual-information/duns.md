@@ -1,5 +1,5 @@
 ---
-slug: duns
+id: duns
 displayname: duns
 header: Dun and Bradstreet Number
 ---

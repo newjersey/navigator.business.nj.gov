@@ -1,5 +1,5 @@
 ---
-slug: minority
+id: minority
 displayname: minority
 header: Minority
 ---

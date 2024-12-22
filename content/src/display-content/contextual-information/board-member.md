@@ -1,5 +1,5 @@
 ---
-slug: board-member
+id: board-member
 displayname: board-member
 header: Board Member
 ---

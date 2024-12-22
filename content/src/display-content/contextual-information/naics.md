@@ -1,5 +1,5 @@
 ---
-slug: naics
+id: naics
 header: NAICS Code
 displayname: naics
 ---

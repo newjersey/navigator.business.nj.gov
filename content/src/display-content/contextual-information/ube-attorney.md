@@ -1,5 +1,5 @@
 ---
-slug: ube-attorney
+id: ube-attorney
 displayname: ube-attorney
 header: Uniform Bar Examination (UBE)
 ---
