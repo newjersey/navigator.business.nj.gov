@@ -1320,13 +1320,13 @@ collections:
           - { label: "Disabled Veteran Owned", value: "disabled-veteran" }
           - { label: "LGBTQ Owned", value: "lgbtq-owned" }
       - { label: "is SBE (show if fewer than 120 employees)", name: "isSbe", widget: boolean, default: false }
-  # TODO: Do we want to keep "archived" collections?
+  # TODO: Do we want to keep "archived" collections? - idk but its a sand, because I don't want to talk to content more during this ticket, will slow things down unnecessarily. So I'mma fix it for now real quick
   - name: "archived-certification-opportunities"
     label: "Cert Opps - Archived"
     folder: "content/src/archived-certifications"
-    summary: "/{{urlSlug}} - {{name}}"
-    identifier_field: "{{urlSlug}}"
-    slug: "{{urlSlug}}"
+    summary: "/{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
     delete: true
     create: true
     editor:
@@ -1340,12 +1340,7 @@ collections:
           hint: "This appears only in My Account, in the For You column, max char is 150 including spaces, plain text only",
         }
       - { label: "Content", name: "body", widget: "markdown" }
-      - {
-          label: "Url Slug / Filename",
-          name: "urlSlug",
-          widget: "write-once-read-only-no-space",
-          required: true,
-        }
+      - { label: "Url Slug", name: "urlSlug", widget: "write-once-read-only-no-space", required: true }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -1405,13 +1400,7 @@ collections:
           hint: "This is the name displayed internally in CMS list",
         }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          hint: "This should be the same as the filename.",
-          required: true,
-        }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
@@ -1598,19 +1587,18 @@ collections:
         required: false
         widget: number
 
-  - name: "archived-funding-opportunities"
+  - name: "archived-funding-opportunities" # I updated these, a sand to talk to content about must deleting them instead
     label: "Fund Opps - Archived"
     folder: "content/src/archived-fundings"
-    summary: "/{{urlSlug}} - {{name}}"
-    identifier_field: "{{urlSlug}}"
-    slug: "{{urlSlug}}"
+    summary: "/{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
     delete: true
     create: true
     editor:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "File Name", name: "filename", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Name",
           name: "name",
@@ -1624,13 +1612,7 @@ collections:
           hint: "This is the name displayed internally in CMS list",
         }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          hint: "This should be the same as the filename.",
-          required: true,
-        }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
@@ -1847,7 +1829,7 @@ collections:
         name: naicsCodes
         widget: string
         required: false
-      - label: Id / Filename
+      - label: Id
         name: id
         widget: write-once-read-only-no-space
       - label: "Display Name"
@@ -2013,7 +1995,7 @@ collections:
     editor:
       preview: false
     fields:
-      - label: Filename
+      - label: Id
         name: id
         widget: write-once-read-only-no-space
       - label: Displayname
@@ -2546,13 +2528,7 @@ collections:
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          required: true,
-          hint: "This will also be the filename.",
-        }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Display Name",
           name: "displayname",
@@ -2660,8 +2636,8 @@ collections:
     label: "Webflow Licenses"
     folder: "content/src/webflow-licenses"
     summary: "{{displayname}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: false
     sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
     create: false
@@ -2669,7 +2645,7 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Filename", name: "filename", widget: "write-once-read-only-no-space", required: true }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Display Name", name: "displayname", widget: "no-space", required: true }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
       - { label: "Title (Navigator)", name: "name", widget: "string", required: false }
@@ -3373,7 +3349,7 @@ collections:
           required: false,
         }
       - {
-          label: "Form Id",
+          label: "Form Id", # unclear if this should be the filename and such instead
           name: "id",
           widget: "write-once-read-only-no-space",
           hint: "This should be the same as the filename. Content will appear on the filings page.",
@@ -6062,20 +6038,18 @@ collections:
 
   - name: "navigation-config"
     label: "Navigation Config"
-    summary: "{{filename}}"
+    summary: "Navigation Config"
     delete: false
     create: false
     files:
       - label: "Navigation Defaults"
         name: "navigation-defaults"
-        summary: "{{filename}}"
         file: "content/src/fieldConfig/navigation-defaults.json"
         editor:
           preview: true
         fields:
           - label: "Navigation Defaults"
             name: "navigationDefaults"
-            summary: "{{filename}}"
             widget: object
             fields:
               - { label: Login Button, name: logInButton, widget: string }
@@ -6120,7 +6094,6 @@ collections:
           - label: "Navigation Quick Links"
             name: "navigationQuickLinks"
             widget: object
-            summary: "{{filename}}"
             fields:
               - { label: Mobile Title, name: navBarMobileQuickLinksTitle, widget: string }
               - { label: Plan, name: navBarPlanText, widget: string }
