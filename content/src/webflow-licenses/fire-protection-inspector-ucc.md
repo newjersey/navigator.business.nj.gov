@@ -1,7 +1,7 @@
 ---
 urlSlug: fire-protection-inspector-ucc
 webflowName: Fire Protection Inspector (UCC)
-filename: fire-protection-inspector-ucc
+id: fire-protection-inspector-ucc
 displayname: fire-protection-inspector-ucc
 agencyId: nj-community-affairs
 agencyAdditionalContext: Division of Fire Safety Contractor Certification Unit

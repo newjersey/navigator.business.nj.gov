@@ -1,5 +1,5 @@
 ---
-filename: sprinkler-fire-installer
+id: sprinkler-fire-installer
 urlSlug: sprinkler-fire-installer
 webflowName: Sprinkler (Fire) Installer
 displayname: sprinkler-fire-installer

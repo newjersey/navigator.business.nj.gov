@@ -1,4 +1,5 @@
 import os
+
 import yaml
 
 
@@ -37,7 +38,7 @@ def validate_markdown_ids(directory):
 
 
 # Specify the directory containing markdown files
-directory = "../content/src/fundings"
+directory = "../content/src/webflow-licenses"
 
 # Validate the markdown files
 mismatched_files = validate_markdown_ids(directory)

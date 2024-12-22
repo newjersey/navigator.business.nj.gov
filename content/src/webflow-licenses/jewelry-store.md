@@ -1,5 +1,5 @@
 ---
-filename: jewelry-store
+id: jewelry-store
 displayname: jewelry-store
 id: "jewelry-store"
 webflowId: "5f772997d2749a39599cf7e1"

@@ -4,7 +4,7 @@ id: "raffle"
 webflowId: "640b846709fda071989bebf7"
 urlSlug: "raffle"
 webflowName: "Raffle"
-filename: "raffle"
+id: "raffle"
 callToActionLink: "http://njconsumeraffairs.gov/lgccc/Pages/default.aspx"
 agencyId: nj-consumer-affairs
 divisionPhone: "(973) 5273-8000"

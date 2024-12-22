@@ -1,7 +1,7 @@
 ---
 urlSlug: proprietary-school-adult
 webflowName: Adult Proprietary School
-filename: proprietary-school-adult
+id: proprietary-school-adult
 displayname: proprietary-school-adult
 agencyId: njdol
 agencyAdditionalContext: Adult Private Schools Licensing and Credentials

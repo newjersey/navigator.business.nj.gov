@@ -1,5 +1,5 @@
 ---
-filename: laboratory-director
+id: laboratory-director
 displayname: laboratory-director
 id: "laboratory-director"
 webflowId: "5f7729982400611df77834c0"

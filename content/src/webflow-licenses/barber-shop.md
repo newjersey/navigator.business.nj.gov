@@ -1,5 +1,5 @@
 ---
-filename: barber-shop
+id: barber-shop
 displayname: barber-shop
 id: "barber-shop"
 webflowId: "5f772972b4710f369e3c37bf"

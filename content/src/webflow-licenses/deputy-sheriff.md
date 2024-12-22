@@ -1,7 +1,7 @@
 ---
 urlSlug: deputy-sheriff
 webflowName: Deputy Sheriff
-filename: deputy-sheriff
+id: deputy-sheriff
 displayname: deputy-sheriff
 agencyId: law-public-safety
 agencyAdditionalContext: Division of Criminal Justice, Police Training Commission

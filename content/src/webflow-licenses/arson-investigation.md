@@ -1,7 +1,7 @@
 ---
 urlSlug: arson-investigation
 webflowName: Arson Investigation
-filename: arson-investigation
+id: arson-investigation
 displayname: arson-investigation
 agencyId: nj-community-affairs
 agencyAdditionalContext: Division of Fire Safety Contractor Certification Unit

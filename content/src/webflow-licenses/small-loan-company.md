@@ -1,7 +1,7 @@
 ---
 urlSlug: small-loan-company
 webflowName: Small Loan Company
-filename: small-loan-company
+id: small-loan-company
 displayname: small-loan-company
 agencyId: nj-banking-insurance
 agencyAdditionalContext: Office of Consumer Finance, License Services

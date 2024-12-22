@@ -1,5 +1,5 @@
 ---
-filename: milk-vending-machine
+id: milk-vending-machine
 displayname: milk-vending-machine
 id: "milk-vending-machine"
 webflowId: "5f7728e3d9d23733276f48b5"

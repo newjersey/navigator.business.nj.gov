@@ -1,5 +1,5 @@
 ---
-filename: mortuary-science-trainee
+id: mortuary-science-trainee
 displayname: mortuary-science-trainee
 id: "mortuary-science-trainee"
 webflowId: "5f77299eeb5558747cfeb5a7"

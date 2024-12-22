@@ -1,5 +1,5 @@
 ---
-filename: osha
+id: osha
 urlSlug: osha
 webflowName: OSHA
 displayname: osha

@@ -1,5 +1,5 @@
 ---
-filename: real-estate-instructor
+id: real-estate-instructor
 displayname: real-estate-instructor
 id: "real-estate-instructor"
 webflowId: "5f77292dc8aaf5061fc9b52c"

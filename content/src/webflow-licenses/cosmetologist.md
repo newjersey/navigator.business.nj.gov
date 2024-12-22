@@ -1,5 +1,5 @@
 ---
-filename: cosmetologist
+id: cosmetologist
 displayname: cosmetologist
 id: "cosmetologist"
 webflowId: "5f772982147ced365526bf46"

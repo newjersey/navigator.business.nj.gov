@@ -1,5 +1,5 @@
 ---
-filename: fundraiser
+id: fundraiser
 displayname: fundraiser
 id: "fundraiser"
 webflowId: "5f77298d147ced7cb526bf47"

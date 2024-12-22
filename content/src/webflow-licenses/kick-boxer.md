@@ -1,5 +1,5 @@
 ---
-filename: kick-boxer
+id: kick-boxer
 displayname: kick-boxer
 id: "kick-boxer"
 webflowId: "5f772961df77de6417e1a529"

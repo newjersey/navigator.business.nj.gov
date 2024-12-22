@@ -1,5 +1,5 @@
 ---
-filename: alcoholic-beverage-import-for-personal-consumption
+id: alcoholic-beverage-import-for-personal-consumption
 displayname: alcoholic-beverage-import-for-personal-consumption
 agencyId: law-public-safety
 agencyAdditionalContext: Division of Alcoholic Beverage Control

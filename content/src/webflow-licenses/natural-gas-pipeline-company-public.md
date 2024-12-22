@@ -1,5 +1,5 @@
 ---
-filename: natural-gas-pipeline-company-public
+id: natural-gas-pipeline-company-public
 displayname: natural-gas-pipeline-company-public
 id: "natural-gas-pipeline-company-public"
 webflowId: "5f7728edeb5558933dfeb59a"

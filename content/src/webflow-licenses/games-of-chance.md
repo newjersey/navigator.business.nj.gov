@@ -1,5 +1,5 @@
 ---
-filename: games-of-chance
+id: games-of-chance
 displayname: games-of-chance
 id: "games-of-chance"
 webflowId: "5f77298ee8bf5046be3178a4"
