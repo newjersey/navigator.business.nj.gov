@@ -1,5 +1,5 @@
 ---
-slug: compliance-officer
+id: compliance-officer
 displayname: compliance-officer
 header: Compliance Officer
 ---

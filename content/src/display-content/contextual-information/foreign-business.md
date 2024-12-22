@@ -1,5 +1,5 @@
 ---
-slug: foreign-business
+id: foreign-business
 displayname: foreign-business
 header: Out-of-State or Foreign Business
 ---

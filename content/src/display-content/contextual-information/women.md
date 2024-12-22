@@ -1,5 +1,5 @@
 ---
-slug: women
+id: women
 displayname: women
 header: Women
 ---

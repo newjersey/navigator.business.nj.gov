@@ -1,5 +1,5 @@
 ---
-slug: certificate-occupancy
+id: certificate-occupancy
 displayname: certificate-occupancy
 header: Certificate of Approval
 ---

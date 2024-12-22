@@ -1,5 +1,5 @@
 ---
-slug: business-reg-certificate
+id: business-reg-certificate
 displayname: business-reg-certificate
 header: Business Registration Certificate
 ---

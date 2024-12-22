@@ -3,7 +3,7 @@ notesMd: "Initially defined in:
   https://docs.google.com/document/d/1GKtYlOLZQNeCHWQ4SvyIzEqNmYDECEUSLahp8_yC4\
   T4/edit"
 header: "Alternate Name Certificate / Trade Name Certificate"
-slug: alt-name-trade-name
+id: alt-name-trade-name
 displayname: alt-name-trade-name
 ---
 

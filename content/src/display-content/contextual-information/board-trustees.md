@@ -1,5 +1,5 @@
 ---
-slug: board-trustees
+id: board-trustees
 displayname: board-trustees
 header: Board of Trustees
 ---

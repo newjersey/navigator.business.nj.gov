@@ -1,5 +1,5 @@
 ---
-slug: tax-annual-report
+id: tax-annual-report
 displayname: tax-annual-report
 header: Annual Report
 ---

@@ -1,5 +1,5 @@
 ---
-slug: charter-documents
+id: charter-documents
 displayname: charter-documents
 header: Charter Documents
 ---

@@ -1,5 +1,5 @@
 ---
-slug: veteran
+id: veteran
 displayname: veteran
 header: Veteran
 ---

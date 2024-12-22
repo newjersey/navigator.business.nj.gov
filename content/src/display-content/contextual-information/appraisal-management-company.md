@@ -1,5 +1,5 @@
 ---
-slug: appraisal-management-company
+id: appraisal-management-company
 displayname: appraisal-management-company
 header: Appraisal Management Company
 ---

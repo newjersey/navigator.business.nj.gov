@@ -1,5 +1,5 @@
 ---
-slug: architect-in-charge
+id: architect-in-charge
 displayname: architect-in-charge
 header: Architect in Charge
 ---

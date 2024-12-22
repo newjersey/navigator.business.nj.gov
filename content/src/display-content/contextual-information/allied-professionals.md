@@ -1,5 +1,5 @@
 ---
-slug: allied-professionals
+id: allied-professionals
 displayname: allied-professionals
 header: Closely Allied Professionals
 ---

@@ -1,5 +1,5 @@
 ---
-slug: home-based-business
+id: home-based-business
 notesMd: "9.30.24: [Muni updated
   content](https://docs.google.com/document/d/1tH8rV0frH0GbZCpuhSHV0tt9KFpLZ-0Q\
   i-3i2S1fDVQ/edit)"

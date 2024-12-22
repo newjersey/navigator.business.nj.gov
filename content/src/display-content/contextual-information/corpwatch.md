@@ -1,5 +1,5 @@
 ---
-slug: corpwatch
+id: corpwatch
 displayname: corpwatch
 header: CorpWatch
 ---

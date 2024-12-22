@@ -1,5 +1,5 @@
 ---
-slug: good-standing
+id: good-standing
 displayname: good-standing
 header: Certificate of Good Standing
 ---

@@ -1,5 +1,5 @@
 ---
-slug: zoning
+id: zoning
 header: Zoning
 displayname: zoning
 ---

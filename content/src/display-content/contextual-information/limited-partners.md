@@ -1,5 +1,5 @@
 ---
-slug: limited-partners
+id: limited-partners
 displayname: limited-partners
 header: Limited Partners
 ---

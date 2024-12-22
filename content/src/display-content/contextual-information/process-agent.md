@@ -1,5 +1,5 @@
 ---
-slug: process-agent
+id: process-agent
 displayname: process-agent
 header: Process Agent
 ---

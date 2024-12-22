@@ -1,5 +1,5 @@
 ---
-slug: logisticare
+id: logisticare
 displayname: logisticare
 header: Logisticare
 ---

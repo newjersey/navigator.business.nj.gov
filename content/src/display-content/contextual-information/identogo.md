@@ -1,5 +1,5 @@
 ---
-slug: identogo
+id: identogo
 displayname: identogo
 header: IdentoGo
 ---

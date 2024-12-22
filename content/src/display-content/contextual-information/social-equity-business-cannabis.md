@@ -1,5 +1,5 @@
 ---
-slug: social-equity-business-cannabis
+id: social-equity-business-cannabis
 displayname: social-equity-business-cannabis
 header: Social Equity Business or a Legacy Cannabis Application
 ---

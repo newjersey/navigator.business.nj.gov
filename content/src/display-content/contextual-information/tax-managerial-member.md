@@ -1,5 +1,5 @@
 ---
-slug: tax-managerial-member
+id: tax-managerial-member
 displayname: tax-managerial-member
 header: Managerial Member
 ---

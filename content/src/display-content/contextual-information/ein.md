@@ -1,5 +1,5 @@
 ---
-slug: ein
+id: ein
 header: Employer Identification Number
 displayname: ein
 ---

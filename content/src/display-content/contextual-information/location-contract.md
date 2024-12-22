@@ -1,5 +1,5 @@
 ---
-slug: location-contract
+id: location-contract
 displayname: location-contract
 header: Location Contract
 ---

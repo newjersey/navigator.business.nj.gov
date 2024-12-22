@@ -1,5 +1,5 @@
 ---
-slug: tax-id
+id: tax-id
 header: NJ Tax ID
 displayname: tax-id
 ---

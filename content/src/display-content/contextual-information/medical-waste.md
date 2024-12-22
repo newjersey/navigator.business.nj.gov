@@ -1,5 +1,5 @@
 ---
-slug: medical-waste
+id: medical-waste
 header: Medical Waste
 displayname: Medical Waste
 ---

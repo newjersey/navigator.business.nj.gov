@@ -1,5 +1,5 @@
 ---
-slug: tourism-areas
+id: tourism-areas
 displayname: tourism-areas
 header: Tourism Areas
 ---
