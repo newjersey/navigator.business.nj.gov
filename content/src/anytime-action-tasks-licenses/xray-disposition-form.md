@@ -8,6 +8,10 @@ sectorIds: []
 urlSlug: xray-disposition-form
 summaryDescriptionMd: You must submit the x-ray machine disposition form within
   30 days of selling, relocating, storing, or disposing your x-ray machine.
+issuingAgency: Department of Environmental Protection, Radiation Protection
+  Element, Bureau of X-Ray Compliance
+callToActionText: Submit My X-Ray Machine Disposition Form
+callToActionLink: https://www.nj.gov/dep/rpp/reg/dispo.htm
 ---
 ## Application Requirements
 
