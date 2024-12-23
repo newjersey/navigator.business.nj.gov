@@ -1,8 +1,19 @@
 ---
 filename: single-trip-osow-permit
 name: Apply for Your Single Trip OS/OW Permit (5-day), if Applicable
-industryIds: []
-sectorIds: []
+industryIds:
+  - commercial-construction
+  - freight-forwarding
+  - trucking
+  - moving-company
+  - home-contractor
+  - hvac-contractor
+sectorIds:
+  - agriculture-forestry-fishing-and-hunting
+  - construction
+  - mining-quarrying-and-oil-and-gas-extraction
+  - transportation-and-warehousing
+  - manufacturing
 urlSlug: single-trip-osow-permit
 summaryDescriptionMd: >
   You must get a permit for each trip to transport overweight or oversized
