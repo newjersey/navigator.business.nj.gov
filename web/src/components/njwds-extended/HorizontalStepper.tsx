@@ -213,7 +213,9 @@ export const HorizontalStepper = (props: Props): ReactElement => {
                     determineAriaState(determineState(index))
                   )}
                   aria-selected={index === props.currentStep}
-                  ref={(el) => (divRefs.current[index] = el)}
+                  ref={(el) => {
+                    divRefs.current[index] = el;
+                  }}
                 >
                   <div className={`usa-step-indicator__segment-label ${getBoldClass(index)}`}>
                     <span>{step.name}</span>
