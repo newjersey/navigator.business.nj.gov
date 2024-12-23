@@ -45,6 +45,7 @@ export const Task = (props: Props): ReactElement => {
         <div>
           <Link
             href={`/tasks/${props.task.urlSlug}`}
+            passHref
             onClick={(): void => analytics.event.roadmap_task_title.click.go_to_task(props.task.urlSlug)}
             className={`usa-link margin-right-105 ${props.task.required ? "text-bold" : ""}`}
             data-task={props.task.id}
@@ -56,7 +57,6 @@ export const Task = (props: Props): ReactElement => {
           {isTabletAndUp && renderRequiredLabel()}
         </div>
       </div>
-
       {!isTabletAndUp && (
         <div className="margin-bottom-2">
           {TaskProgressTagLookup[taskProgress]} <span className="margin-left-1">{renderRequiredLabel()}</span>
