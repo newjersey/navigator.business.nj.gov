@@ -8,6 +8,9 @@ industryIds:
   - commercial-construction
   - freight-forwarding
   - trucking
+  - moving-company
+  - home-contractor
+  - hvac-contractor
 sectorIds:
   - agriculture-forestry-fishing-and-hunting
   - construction
