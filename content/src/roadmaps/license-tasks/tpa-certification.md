@@ -15,7 +15,7 @@ summaryDescriptionMd: As a licensed optometrist who prescribes or administers
   and renewed separately.
 industryId:
   - healthcare
-callToActionText: "Apply for My TPA Certification "
+callToActionText: "Apply for My Branch TPA Certificate "
 callToActionLink: https://www.njconsumeraffairs.gov/opt/Applications/Application-for-Branch-Office-Certificate.pdf
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: New Jersey State Board of Optometrists
