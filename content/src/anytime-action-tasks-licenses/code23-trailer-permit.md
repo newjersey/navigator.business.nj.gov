@@ -1,8 +1,16 @@
 ---
 filename: code23-trailer-permit
 name: Apply for Your Code 23 Special Oversize Trailer Permit, if Applicable
-industryIds: []
-sectorIds: []
+industryIds:
+  - commercial-construction
+  - freight-forwarding
+  - trucking
+sectorIds:
+  - construction
+  - agriculture-forestry-fishing-and-hunting
+  - manufacturing
+  - mining-quarrying-and-oil-and-gas-extraction
+  - transportation-and-warehousing
 urlSlug: code23-trailer-permit
 summaryDescriptionMd: >
   You need a permit to transport a Code 23 oversized trailer on public roads.
