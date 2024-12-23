@@ -140,7 +140,7 @@ module.exports = {
     },
     {
       from: {},
-      to: { path: "netlify-cms-app" },
+      to: { path: "decap-cms-app" },
     },
     {
       from: {},
