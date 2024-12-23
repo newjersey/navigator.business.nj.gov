@@ -59,7 +59,8 @@
     "dentist",
     "freestanding-residential-health-care-license",
     "electrologist",
-    "healthcare-xray-regis"
+    "healthcare-xray-regis",
+    "healthcare-optometrist "
   ],
   "displayname": "healthcare",
   "industryOnboardingQuestions": {
