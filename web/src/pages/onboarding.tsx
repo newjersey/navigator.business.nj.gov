@@ -502,10 +502,8 @@ const OnboardingPage = (props: Props): ReactElement => {
                     <>
                       {OnboardingStatusLookup()[alert].body}
                       {OnboardingStatusLookup()[alert] && (
-                        <Link href={ROUTES.dashboard}>
-                          <a href={ROUTES.dashboard} data-testid={`snackbar-link`}>
-                            {OnboardingStatusLookup()[alert].link}
-                          </a>
+                        <Link href={ROUTES.dashboard} data-testid={`snackbar-link`}>
+                          {OnboardingStatusLookup()[alert].link}
                         </Link>
                       )}
                     </>
