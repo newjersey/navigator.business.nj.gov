@@ -4,8 +4,7 @@ webflowId: 6761e527ee5119895f67bf4a
 urlSlug: funeral-registration
 name: Apply for Your Funeral Home’s Certificate of Registration
 displayname: funeral-registration
-webflowName: >-
-  Funeral Services: Funeral Home Certificate of Registration
+webflowName: "Funeral Services: Funeral Home Certificate of Registration"
 filename: funeral-registration
 callToActionLink: https://www.njconsumeraffairs.gov/mor/Pages/applications.aspx
 callToActionText: Apply for My Certificate of Registration
@@ -14,9 +13,11 @@ agencyAdditionalContext: State Board of Mortuary Science of New Jersey
 divisionPhone: (973) 504-6425
 industryId: funeral
 licenseCertificationClassification: undefined
-summaryDescriptionMd: "You need a Certificate of Registration to have and operate a funeral home or mortuary establishment in New Jersey. If you have a chapel, preparation room, or any other facility at a different address, it needs a separate Certificate of Registration. 
+summaryDescriptionMd: >-
+  You need a Certificate of Registration to have and operate a funeral home or mortuary establishment in New Jersey. If you have a chapel, preparation room, or any other facility at a different address, it needs a separate Certificate of Registration. 
 
-If you are applying in an even-numbered year (for example, 2024 or 2026), use the first-year application. If you are applying in an odd-numbered year (for example, 2025 or 2027), use the second-year application."
+
+  If you are applying in an even-numbered year (for example, 2024 or 2026), use the first-year application. If you are applying in an odd-numbered year (for example, 2025 or 2027), use the second-year application."
 ---
 
 ## Application Requirements
