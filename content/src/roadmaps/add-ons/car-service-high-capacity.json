@@ -1,6 +1,6 @@
 {
   "displayname": "car-service-high-capacity",
-  "filename": "car-service-high-capacity",
+  "id": "car-service-high-capacity",
   "roadmapSteps": [
     {
       "step": 3,

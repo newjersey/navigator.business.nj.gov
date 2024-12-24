@@ -1,6 +1,6 @@
 {
   "displayname": "daycare",
-  "filename": "daycare",
+  "id": "daycare",
   "roadmapSteps": [
     {
       "step": 1,
