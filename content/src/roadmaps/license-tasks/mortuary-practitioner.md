@@ -4,10 +4,10 @@ webflowId: 676af48c9cb5af3dca268721
 urlSlug: mortuary-practitioner
 name: Apply for Your Mortuary Practitioner License, if Applicable
 displayname: mortuary-practitioner
-webflowName: Funeral Services: Mortuary Practitioner License 
+webflowName: "Funeral Services: Mortuary Practitioner License"
 filename: mortuary-practitioner
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
-callToActionText:  Apply for My Mortuary Practitioner License
+callToActionText: Apply for My Mortuary Practitioner License
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: State Board of Mortuary Science of New Jersey
 industryId: funeral

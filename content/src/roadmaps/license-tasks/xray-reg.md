@@ -4,7 +4,7 @@ webflowId: 676af48d3cee0bce2f93edd8
 urlSlug: xray-reg
 name: Register Your X-Ray Machine
 displayname: xray-reg
-webflowName:  Healthcare: X-Ray Registration
+webflowName:  "Healthcare: X-Ray Registration"
 filename: xray-reg
 callToActionLink: https://www.nj.gov/dep/rpp/reg/index.htm
 callToActionText: Register My X-Ray Machine
