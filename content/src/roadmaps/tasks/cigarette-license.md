@@ -71,17 +71,21 @@ webflowType: business-license
 - - -
 
 ## Application Requirements
-
+### General Licensee
 * Business name
 *  `Trade name|alt-name-trade-name` , if applicable
 * 12-digit `New Jersey tax ID number|tax-id` 
 * Business address
-*  `Business type/structure|business-structure-learn-more` 
-* Owner’s information, including name, address, and email
-* Supplier information, including name, address, and phone number, if applicable
-* Manufacturer representative information, including company name, and 12-digit `NJ Tax ID number|tax-id` , if applicable
-* Any additional requirements for owning and operating a vending machine in your location; check with your municipality
+*  `Business type/structure|business-structure-learn-more`
 * Applicable fees paid
+### Owner
+* Name, address, and email of each owner
+### Supplier
+For a retail over-the-counter license or a vending machine license (provide lists as necessary):
+* Supplier information, including name, address, and phone number, if applicable
+* Address where vending machine is located, if applicable
+### Manufacturer Representative
+* Manufacturer representative information, including company name, and 12-digit `NJ Tax ID number|tax-id` , if applicable
 
 Mail your completed application and any fees to: 
 
@@ -91,6 +95,10 @@ PO Box 252
 
 Trenton, NJ 08646-0252
 
+## Vending Machines: Additional Requirements
+Check with your municipality for any additional requirements for owning and operating a vending machine in your location, if applicable.
+
+## Additional Tax Requirements
 For more information on taxes and other requirements visit the [Tobacco and Vapor Products Tax page](https://www.nj.gov/treasury/taxation/tobacco.shtml).
 
 :::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
