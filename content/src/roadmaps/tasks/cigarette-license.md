@@ -9,7 +9,7 @@ notesMd: >-
   \---
 
 
-  SME feedback, **From:** Friedmann, Brian \[TREAS] <Brian.Friedmann@treas.nj.gov>\
+  SME feedback, **From:** Friedmann, Brian \[TREAS] [Brian.Friedmann@treas.nj.gov](mailto:Brian.Friedmann@treas.nj.gov)\
 
   **Sent:** Tuesday, November 26, 2024 2:55 PM\
 
@@ -31,6 +31,14 @@ notesMd: >-
 
 
   4.       Under “once completed…”, it should be changed to say “A printed license will be sent directly to your business location.”
+
+
+
+
+  \===
+
+
+  Further feedback received by Jaime and Kellie on 10 Dec 2024 (see planning doc)
 summaryDescriptionMd: >-
   You need a cigarette license to do either of the following in New Jersey:
 
@@ -41,6 +49,12 @@ summaryDescriptionMd: >-
 
 
   If you sell container e-liquid and plan to have more than 50% of your retail sales come from electronic smoking devices, related accessories, and/or liquid nicotine, you must [apply for a Vapor Business License with the NJ Division of Taxation](https://www.nj.gov/treasury/taxation/pdf/other_forms/tobacco/vb-r.pdf).
+
+
+  <br><br>
+
+
+  If you are a manufacturer (not a manufacturer representative), you must [submit an application with the NJ Division of Taxation] (https://www.nj.gov/treasury/taxation/prnttobacco.shtml).
 urlSlug: cigarette-license
 filename: cigarette-license
 displayname: cigarette-license
@@ -65,10 +79,9 @@ webflowType: business-license
 *  `Business type/structure|business-structure-learn-more` 
 * Owner’s information, including name, address, and email
 * Supplier information, including name, address, and phone number, if applicable
-* Manufacturer representative information, including company name, and 12-digit `NJ Tax ID number|tax-id`, if applicable
+* Manufacturer representative information, including company name, and 12-digit `NJ Tax ID number|tax-id` , if applicable
 * Any additional requirements for owning and operating a vending machine in your location; check with your municipality
 * Applicable fees paid
-
 
 Mail your completed application and any fees to: 
 
@@ -78,7 +91,7 @@ PO Box 252
 
 Trenton, NJ 08646-0252
 
-
+For more information on taxes and other requirements visit the [Tobacco and Vapor Products Tax page](https://www.nj.gov/treasury/taxation/tobacco.shtml).
 
 :::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
 
