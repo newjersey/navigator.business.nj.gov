@@ -208,7 +208,7 @@
     "raw-loader": "4.0.2",
     "require-from-string": "2.0.2",
     "rimraf": "5.0.10",
-    "sass": "1.82.0",
+    "sass": "1.83.0",
     "sass-loader": "14.2.1",
     "semantic-release": "19.0.5",
     "serverless": "3.40.0",
