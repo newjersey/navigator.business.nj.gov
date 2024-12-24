@@ -2,7 +2,7 @@
 asttokens==3.0.0
 black==24.10.0
 black==24.10.0
-certifi==2024.8.30
+certifi==2024.12.14
 cffi==1.17.1
 charset-normalizer==3.4.0
 click==8.1.7
