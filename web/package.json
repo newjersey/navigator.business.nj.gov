@@ -172,7 +172,7 @@
     "rimraf": "5.0.10",
     "sass": "1.82.0",
     "sass-loader": "14.2.1",
-    "storybook": "7.6.20",
+    "storybook": "8.4.7",
     "style-loader": "3.3.4",
     "ts-jest": "29.2.5",
     "ts-loader": "9.5.1",
