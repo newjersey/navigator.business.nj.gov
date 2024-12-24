@@ -59,7 +59,7 @@ const Loading = (): ReactElement => {
 const CMS = dynamic(
   // @ts-expect-error: No type definition available
   () => {
-    return import("netlify-cms-app").then((CMS) => {
+    return import("decap-cms-app").then((CMS) => {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       // @ts-expect-error: No type definition available
       CMS.init({ CMS_CONFIG });
@@ -159,14 +159,14 @@ const CMS = dynamic(
   { ssr: false, loading: Loading }
 );
 
-const registerAsTask = (CMS: typeof import("netlify-cms-app"), names: string[]): void => {
+const registerAsTask = (CMS: typeof import("decap-cms-app"), names: string[]): void => {
   for (const name of names) {
     // @ts-expect-error: No type definition available
     CMS.registerPreviewTemplate(name, TaskPreview);
   }
 };
 
-const registerAsCannabisLicensePreview = (CMS: typeof import("netlify-cms-app"), names: string[]): void => {
+const registerAsCannabisLicensePreview = (CMS: typeof import("decap-cms-app"), names: string[]): void => {
   for (const name of names) {
     // @ts-expect-error: No type definition available
     CMS.registerPreviewTemplate(name, CannabisLicensePreview);
@@ -174,7 +174,7 @@ const registerAsCannabisLicensePreview = (CMS: typeof import("netlify-cms-app"),
 };
 
 const registerPreview = (
-  CMS: typeof import("netlify-cms-app"),
+  CMS: typeof import("decap-cms-app"),
   name: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   preview: (props: any) => JSX.Element
