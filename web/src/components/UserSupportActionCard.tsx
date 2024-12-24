@@ -33,16 +33,14 @@ export const UserSupportActionCard = (props: Props): ReactElement => {
           <div>{props.supportingText}</div>
         </div>
         <div>
-          <Link href={props.buttonLink} legacyBehavior>
-            <div>
-              <PrimaryButton
-                isColor={props.primaryButtonColor}
-                isRightMarginRemoved={true}
-                isIntercomEnabled={props.isIntercomEnabled}
-              >
-                {props.buttonText}
-              </PrimaryButton>
-            </div>
+          <Link href={props.buttonLink}>
+            <PrimaryButton
+              isColor={props.primaryButtonColor}
+              isRightMarginRemoved={true}
+              isIntercomEnabled={props.isIntercomEnabled}
+            >
+              {props.buttonText}
+            </PrimaryButton>
           </Link>
         </div>
       </div>
