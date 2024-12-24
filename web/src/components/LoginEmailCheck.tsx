@@ -88,9 +88,7 @@ export const LoginEmailCheck = (): ReactElement => {
       <hr className="margin-y-3" />
       <p className="link-account-text">
         <span className="margin-right-05">{Config.checkAccountEmailPage.noAccountText}</span>
-        <Link href={ROUTES.onboarding} legacyBehavior>
-          {Config.checkAccountEmailPage.linkAccountLinkText}
-        </Link>
+        <Link href={ROUTES.onboarding}>{Config.checkAccountEmailPage.linkAccountLinkText}</Link>
       </p>
       <div className="display-flex flex-align-end">
         <p>{Config.checkAccountEmailPage.needHelpText}</p>
