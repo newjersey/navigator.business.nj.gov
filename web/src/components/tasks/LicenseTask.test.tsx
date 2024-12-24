@@ -171,6 +171,7 @@ describe("<LicenseTask />", () => {
     });
 
     it("opens external link in new tab", () => {
+      useMockBusiness({ licenseData: undefined });
       renderTask();
       fireEvent.click(screen.getByTestId("cta-primary"));
       expect(mockWindowOpen).toHaveBeenCalledWith(task.callToActionLink, "_blank", "noopener noreferrer");
