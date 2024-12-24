@@ -94,6 +94,16 @@
       "addOn": "planner",
       "id": "planning-services",
       "questionText": "Will you offer professional planning services?"
+    },
+    {
+      "addOn": "healthcare-xray-reg",
+      "id": "healthcare-xray-regis",
+      "questionText": "Will you be using x-ray machines?"
+    },
+    {
+      "questionText": "Are you an optometrist?",
+      "id": "healthcare-optometrist ",
+      "addOn": "healthcare-tpa"
     }
   ]
 }

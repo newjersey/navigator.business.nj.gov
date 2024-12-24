@@ -1,0 +1,11 @@
+{
+  "id": "healthcare-xray-reg",
+  "displayname": "healthcare-xray-reg",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "licenseTask": "xray-reg",
+      "weight": 1
+    }
+  ]
+}

@@ -8,6 +8,9 @@ industryIds:
   - commercial-construction
   - freight-forwarding
   - trucking
+  - moving-company
+  - home-contractor
+  - hvac-contractor
 sectorIds:
   - agriculture-forestry-fishing-and-hunting
   - construction
@@ -43,6 +46,7 @@ callToActionLink: https://nj.gotpermits.com/njpass#!
 - Trailer plate/license number and state
 - General origin and destination (cities or state borders)
 - Specific origins and destination (detailed route)
+- Applicable fees paid
 
 ### Vehicle Configuration Information
 
