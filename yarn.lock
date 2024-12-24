@@ -4584,7 +4584,7 @@ __metadata:
     eslint-plugin-jest: 27.9.0
     eslint-plugin-jest-formatting: 3.1.0
     eslint-plugin-unicorn: 51.0.1
-    express: 4.21.1
+    express: 4.21.2
     helmet: 7.2.0
     http-status-codes: 2.3.0
     jest: 29.7.0
@@ -4757,7 +4757,7 @@ __metadata:
     eslint-plugin-storybook: 0.11.0
     eslint-plugin-testing-library: 6.5.0
     eslint-plugin-unicorn: 51.0.1
-    express: 4.21.1
+    express: 4.21.2
     fast-deep-equal: 3.1.3
     focus-trap-react: 10.2.3
     gray-matter: 4.0.3
@@ -19877,46 +19877,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express@npm:4.21.1":
-  version: 4.21.1
-  resolution: "express@npm:4.21.1"
-  dependencies:
-    accepts: ~1.3.8
-    array-flatten: 1.1.1
-    body-parser: 1.20.3
-    content-disposition: 0.5.4
-    content-type: ~1.0.4
-    cookie: 0.7.1
-    cookie-signature: 1.0.6
-    debug: 2.6.9
-    depd: 2.0.0
-    encodeurl: ~2.0.0
-    escape-html: ~1.0.3
-    etag: ~1.8.1
-    finalhandler: 1.3.1
-    fresh: 0.5.2
-    http-errors: 2.0.0
-    merge-descriptors: 1.0.3
-    methods: ~1.1.2
-    on-finished: 2.4.1
-    parseurl: ~1.3.3
-    path-to-regexp: 0.1.10
-    proxy-addr: ~2.0.7
-    qs: 6.13.0
-    range-parser: ~1.2.1
-    safe-buffer: 5.2.1
-    send: 0.19.0
-    serve-static: 1.16.2
-    setprototypeof: 1.2.0
-    statuses: 2.0.1
-    type-is: ~1.6.18
-    utils-merge: 1.0.1
-    vary: ~1.1.2
-  checksum: 5ac2b26d8aeddda5564fc0907227d29c100f90c0ead2ead9d474dc5108e8fb306c2de2083c4e3ba326e0906466f2b73417dbac16961f4075ff9f03785fd940fe
-  languageName: node
-  linkType: hard
-
-"express@npm:^4.17.3, express@npm:^4.18.1":
+"express@npm:4.21.2, express@npm:^4.17.3, express@npm:^4.18.1":
   version: 4.21.2
   resolution: "express@npm:4.21.2"
   dependencies:
@@ -30013,13 +29974,6 @@ __metadata:
     lru-cache: ^10.2.0
     minipass: ^5.0.0 || ^6.0.2 || ^7.0.0
   checksum: 890d5abcd593a7912dcce7cf7c6bf7a0b5648e3dee6caf0712c126ca0a65c7f3d7b9d769072a4d1baf370f61ce493ab5b038d59988688e0c5f3f646ee3c69023
-  languageName: node
-  linkType: hard
-
-"path-to-regexp@npm:0.1.10":
-  version: 0.1.10
-  resolution: "path-to-regexp@npm:0.1.10"
-  checksum: ab7a3b7a0b914476d44030340b0a65d69851af2a0f33427df1476100ccb87d409c39e2182837a96b98fb38c4ef2ba6b87bdad62bb70a2c153876b8061760583c
   languageName: node
   linkType: hard
 
