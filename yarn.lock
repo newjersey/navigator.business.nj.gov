@@ -4490,6 +4490,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.23.5":
+  version: 7.26.0
+  resolution: "@babel/runtime@npm:7.26.0"
+  dependencies:
+    regenerator-runtime: ^0.14.0
+  checksum: c8e2c0504ab271b3467a261a8f119bf2603eb857a0d71e37791f4e3fae00f681365073cc79f141ddaa90c6077c60ba56448004ad5429d07ac73532be9f7cf28a
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.22.15, @babel/template@npm:^7.24.7, @babel/template@npm:^7.25.9, @babel/template@npm:^7.3.3":
   version: 7.25.9
   resolution: "@babel/template@npm:7.25.9"
@@ -4586,7 +4595,7 @@ __metadata:
     eslint-plugin-unicorn: 51.0.1
     express: 4.21.1
     helmet: 7.2.0
-    http-status-codes: ^2.3.0
+    http-status-codes: 2.3.0
     jest: 29.7.0
     jest-dynalite: 3.6.1
     jest-junit: 16.0.0
@@ -4600,7 +4609,7 @@ __metadata:
     serverless-http: 3.2.0
     serverless-offline: 13.9.0
     serverless-offline-ssm: 6.2.0
-    serverless-prune-plugin: ^2.0.2
+    serverless-prune-plugin: 2.0.2
     serverless-webpack: 5.15.0
     simple-oauth2: 5.0.1
     supertest: 6.3.4
@@ -4662,7 +4671,7 @@ __metadata:
     "@emotion/react": 11.11.4
     "@emotion/styled": 11.11.5
     "@jest/types": 29.6.3
-    "@mui/icons-material": ^5.15.1
+    "@mui/icons-material": 5.15.1
     "@mui/lab": 5.0.0-alpha.170
     "@mui/material": 5.15.19
     "@mui/styles": 5.15.19
@@ -4710,7 +4719,7 @@ __metadata:
     "@types/node": 20.17.10
     "@types/react": 18.2.79
     "@types/react-dom": 18.2.25
-    "@types/react-slick": ^0.23.10
+    "@types/react-slick": 0.23.10
     "@types/react-swipeable-views": 0.13.6
     "@types/react-transition-group": 4.4.12
     "@types/remove-markdown": 0.3.4
@@ -4743,7 +4752,7 @@ __metadata:
     dedent: 1.5.3
     dependency-cruiser: 16.6.0
     dotenv: 16.4.7
-    dynamodb-admin: ^4.6.1
+    dynamodb-admin: 4.6.1
     eslint: 8.57.1
     eslint-config-next: 15.1.2
     eslint-config-prettier: 9.1.0
@@ -4754,7 +4763,7 @@ __metadata:
     eslint-plugin-jsx-a11y: 6.10.2
     eslint-plugin-react: 7.37.2
     eslint-plugin-react-hooks: 4.6.2
-    eslint-plugin-storybook: ^0.11.0
+    eslint-plugin-storybook: 0.11.0
     eslint-plugin-testing-library: 6.5.0
     eslint-plugin-unicorn: 51.0.1
     express: 4.21.1
@@ -4762,7 +4771,7 @@ __metadata:
     focus-trap-react: 10.2.3
     gray-matter: 4.0.3
     helmet: 7.2.0
-    http-status-codes: ^2.3.0
+    http-status-codes: 2.3.0
     husky: 9.1.7
     identity-obj-proxy: 3.0.0
     jest: 29.7.0
@@ -4777,7 +4786,7 @@ __metadata:
     nc: "git+https://github.com/dsueltenfuss/nc.git"
     netlify-cms-app: 2.15.72
     next: 15.1.2
-    next-router-mock: ^0.9.13
+    next-router-mock: 0.9.13
     next-seo: 6.5.0
     prettier: 2.8.8
     prettier-plugin-organize-imports: 3.2.4
@@ -4785,7 +4794,7 @@ __metadata:
     react: 18.2.0
     react-clamp-lines: 3.0.3
     react-dom: 18.2.0
-    react-slick: ^0.30.0
+    react-slick: 0.30.0
     react-transition-group: 4.4.5
     rehype-format: 5.0.1
     rehype-raw: 7.0.0
@@ -4807,10 +4816,10 @@ __metadata:
     serverless-http: 3.2.0
     serverless-offline: 13.9.0
     serverless-offline-ssm: 6.2.0
-    serverless-prune-plugin: ^2.0.2
+    serverless-prune-plugin: 2.0.2
     serverless-webpack: 5.15.0
     simple-oauth2: 5.0.1
-    slick-carousel: ^1.8.1
+    slick-carousel: 1.8.1
     storybook: 7.6.20
     style-loader: 3.3.4
     supertest: 6.3.4
@@ -4883,7 +4892,7 @@ __metadata:
     "@emotion/react": 11.11.4
     "@emotion/styled": 11.11.5
     "@jest/types": 29.6.3
-    "@mui/icons-material": ^5.15.1
+    "@mui/icons-material": 5.15.1
     "@mui/lab": 5.0.0-alpha.170
     "@mui/material": 5.15.19
     "@mui/styles": 5.15.19
@@ -4921,7 +4930,7 @@ __metadata:
     "@types/node": 20.17.10
     "@types/react": 18.2.79
     "@types/react-dom": 18.2.25
-    "@types/react-slick": ^0.23.10
+    "@types/react-slick": 0.23.10
     "@types/react-swipeable-views": 0.13.6
     "@types/react-transition-group": 4.4.12
     "@types/remove-markdown": 0.3.4
@@ -4953,7 +4962,7 @@ __metadata:
     eslint-plugin-jsx-a11y: 6.10.2
     eslint-plugin-react: 7.37.2
     eslint-plugin-react-hooks: 4.6.2
-    eslint-plugin-storybook: ^0.11.0
+    eslint-plugin-storybook: 0.11.0
     eslint-plugin-testing-library: 6.5.0
     eslint-plugin-unicorn: 51.0.1
     fast-deep-equal: 3.1.3
@@ -4967,7 +4976,7 @@ __metadata:
     lodash: 4.17.21
     netlify-cms-app: 2.15.72
     next: 15.1.2
-    next-router-mock: ^0.9.13
+    next-router-mock: 0.9.13
     next-seo: 6.5.0
     prettier: 2.8.8
     prettier-plugin-organize-imports: 3.2.4
@@ -4975,7 +4984,7 @@ __metadata:
     react: 18.2.0
     react-clamp-lines: 3.0.3
     react-dom: 18.2.0
-    react-slick: ^0.30.0
+    react-slick: 0.30.0
     react-transition-group: 4.4.5
     rehype-format: 5.0.1
     rehype-raw: 7.0.0
@@ -4991,7 +5000,7 @@ __metadata:
     rimraf: 5.0.10
     sass: 1.82.0
     sass-loader: 14.2.1
-    slick-carousel: ^1.8.1
+    slick-carousel: 1.8.1
     storybook: 7.6.20
     style-loader: 3.3.4
     swr: 1.3.0
@@ -7510,11 +7519,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/icons-material@npm:^5.15.1":
-  version: 5.15.19
-  resolution: "@mui/icons-material@npm:5.15.19"
+"@mui/icons-material@npm:5.15.1":
+  version: 5.15.1
+  resolution: "@mui/icons-material@npm:5.15.1"
   dependencies:
-    "@babel/runtime": ^7.23.9
+    "@babel/runtime": ^7.23.5
   peerDependencies:
     "@mui/material": ^5.0.0
     "@types/react": ^17.0.0 || ^18.0.0
@@ -7522,7 +7531,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 365d9e93bef6cd19b7c8862ee926e2afd96c815df0c777670cca6e9c348f1fc0178ad0e060684c34f6953bb8a1a5f87648ff0a129ec23a9664964dbe0a8d2026
+  checksum: e769b2f6fecfd92721b182e0d6569a9950fd44d88cc7b3bd6ac5cc77d6085c26316093c9cdb750b456ff6860e47a1b6e6e749e284ecdc6b50fad659c9cb75818
   languageName: node
   linkType: hard
 
@@ -11962,7 +11971,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/user-event@npm:14.5.2":
+"@testing-library/user-event@npm:14.5.2, @testing-library/user-event@npm:^14.3.0":
   version: 14.5.2
   resolution: "@testing-library/user-event@npm:14.5.2"
   peerDependencies:
@@ -12645,12 +12654,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-slick@npm:^0.23.10":
-  version: 0.23.13
-  resolution: "@types/react-slick@npm:0.23.13"
+"@types/react-slick@npm:0.23.10":
+  version: 0.23.10
+  resolution: "@types/react-slick@npm:0.23.10"
   dependencies:
     "@types/react": "*"
-  checksum: 3e363220dd7efb7eb9d60aec80588365ddffb366cc75307b86ce83d84e6664d9a66edc9d796cc0b4f87bfd217fa912d4005a00c2a87c41b36fbe4412ae7a15a7
+  checksum: 1e53fe8385e853881741a450d15c52d6433334b671fee4044939037f8e5b83968cb91fd9dbe7e6686e906882ebcf370b81bd55b6688f8e810020e23a968c0385
   languageName: node
   linkType: hard
 
@@ -14591,7 +14600,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1404.0, aws-sdk@npm:^2.1692.0":
+"aws-sdk@npm:^2.1225.0, aws-sdk@npm:^2.1404.0":
   version: 2.1692.0
   resolution: "aws-sdk@npm:2.1692.0"
   dependencies:
@@ -15084,7 +15093,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"body-parser@npm:1.20.3, body-parser@npm:^1.20.3":
+"body-parser@npm:1.20.3, body-parser@npm:^1.20.0":
   version: 1.20.3
   resolution: "body-parser@npm:1.20.3"
   dependencies:
@@ -16125,7 +16134,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cli-color@npm:^2.0.1, cli-color@npm:^2.0.4":
+"cli-color@npm:^2.0.1, cli-color@npm:^2.0.3, cli-color@npm:^2.0.4":
   version: 2.0.4
   resolution: "cli-color@npm:2.0.4"
   dependencies:
@@ -16864,7 +16873,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie-parser@npm:^1.4.7":
+"cookie-parser@npm:^1.4.6":
   version: 1.4.7
   resolution: "cookie-parser@npm:1.4.7"
   dependencies:
@@ -18571,23 +18580,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dynamodb-admin@npm:^4.6.1":
-  version: 4.6.2
-  resolution: "dynamodb-admin@npm:4.6.2"
+"dynamodb-admin@npm:4.6.1":
+  version: 4.6.1
+  resolution: "dynamodb-admin@npm:4.6.1"
   dependencies:
     argparse: ^2.0.1
-    aws-sdk: ^2.1692.0
-    body-parser: ^1.20.3
-    cli-color: ^2.0.4
-    cookie-parser: ^1.4.7
-    ejs: ^3.1.10
+    aws-sdk: ^2.1225.0
+    body-parser: ^1.20.0
+    cli-color: ^2.0.3
+    cookie-parser: ^1.4.6
+    ejs: ^3.1.8
     errorhandler: ^1.5.1
-    express: ^4.21.1
+    express: ^4.18.1
     lodash.pickby: ^4.6.0
-    open: ^8.4.2
+    open: ^8.4.0
   bin:
     dynamodb-admin: bin/dynamodb-admin.js
-  checksum: 36878036cbd7aea02038517c39ee07cc04315cdbafbd2c9fdd2b6306c35a310bb65c2ed964dca6c75bd71adc97340c74ab016f6ed1e7e8f1e81575a5ae51982e
+  checksum: 9d834eaea55146daeb0e5caf67ae10e2086d449cca6556a5e036a576a929a8f80285b9ce8f3830711a1263762589e279dbfa467620dd747fed4d30e0b55fa6d1
   languageName: node
   linkType: hard
 
@@ -19514,16 +19523,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-storybook@npm:^0.11.0":
-  version: 0.11.1
-  resolution: "eslint-plugin-storybook@npm:0.11.1"
+"eslint-plugin-storybook@npm:0.11.0":
+  version: 0.11.0
+  resolution: "eslint-plugin-storybook@npm:0.11.0"
   dependencies:
     "@storybook/csf": ^0.1.11
     "@typescript-eslint/utils": ^8.8.1
     ts-dedent: ^2.2.0
   peerDependencies:
     eslint: ">=6"
-  checksum: 8b8eb30b598f3c44c2bbf921e318215338f1159c1fba2d2f6cd5bc0b2ec14515655cf1760b5e11355baddabc2ac8446d4dc18ee6df6d2252555b126ff649a421
+  checksum: 52baa35ed4f49bc46bd323784ac2a48a615f0fd929b66dfec11bb2cbceded1a9978b68cbb1165aa36f078190651f93243f871ead368bb2f1ee131c7d00e265e9
   languageName: node
   linkType: hard
 
@@ -19903,7 +19912,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express@npm:4.21.1, express@npm:^4.17.3, express@npm:^4.21.1":
+"express@npm:4.21.1, express@npm:^4.17.3":
   version: 4.21.1
   resolution: "express@npm:4.21.1"
   dependencies:
@@ -19939,6 +19948,45 @@ __metadata:
     utils-merge: 1.0.1
     vary: ~1.1.2
   checksum: 5ac2b26d8aeddda5564fc0907227d29c100f90c0ead2ead9d474dc5108e8fb306c2de2083c4e3ba326e0906466f2b73417dbac16961f4075ff9f03785fd940fe
+  languageName: node
+  linkType: hard
+
+"express@npm:^4.18.1":
+  version: 4.21.2
+  resolution: "express@npm:4.21.2"
+  dependencies:
+    accepts: ~1.3.8
+    array-flatten: 1.1.1
+    body-parser: 1.20.3
+    content-disposition: 0.5.4
+    content-type: ~1.0.4
+    cookie: 0.7.1
+    cookie-signature: 1.0.6
+    debug: 2.6.9
+    depd: 2.0.0
+    encodeurl: ~2.0.0
+    escape-html: ~1.0.3
+    etag: ~1.8.1
+    finalhandler: 1.3.1
+    fresh: 0.5.2
+    http-errors: 2.0.0
+    merge-descriptors: 1.0.3
+    methods: ~1.1.2
+    on-finished: 2.4.1
+    parseurl: ~1.3.3
+    path-to-regexp: 0.1.12
+    proxy-addr: ~2.0.7
+    qs: 6.13.0
+    range-parser: ~1.2.1
+    safe-buffer: 5.2.1
+    send: 0.19.0
+    serve-static: 1.16.2
+    setprototypeof: 1.2.0
+    statuses: 2.0.1
+    type-is: ~1.6.18
+    utils-merge: 1.0.1
+    vary: ~1.1.2
+  checksum: 3aef1d355622732e20b8f3a7c112d4391d44e2131f4f449e1f273a309752a41abfad714e881f177645517cbe29b3ccdc10b35e7e25c13506114244a5b72f549d
   languageName: node
   linkType: hard
 
@@ -22373,7 +22421,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"http-status-codes@npm:^2.3.0":
+"http-status-codes@npm:2.3.0":
   version: 2.3.0
   resolution: "http-status-codes@npm:2.3.0"
   checksum: dae3b99e0155441b6df28e8265ff27c56a45f82c6092f736414233e9ccf063d5ea93c1e1279e8b499c4642e2538b37995c76b1640ed3f615d0e2883d3a1dcfd5
@@ -28368,7 +28416,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-router-mock@npm:^0.9.13":
+"next-router-mock@npm:0.9.13":
   version: 0.9.13
   resolution: "next-router-mock@npm:0.9.13"
   peerDependencies:
@@ -30019,6 +30067,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"path-to-regexp@npm:0.1.12":
+  version: 0.1.12
+  resolution: "path-to-regexp@npm:0.1.12"
+  checksum: ab237858bee7b25ecd885189f175ab5b5161e7b712b360d44f5c4516b8d271da3e4bf7bf0a7b9153ecb04c7d90ce8ff5158614e1208819cf62bac2b08452722e
+  languageName: node
+  linkType: hard
+
 "path-to-regexp@npm:^1.7.0":
   version: 1.8.0
   resolution: "path-to-regexp@npm:1.8.0"
@@ -31485,10 +31540,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-slick@npm:^0.30.0":
-  version: 0.30.2
-  resolution: "react-slick@npm:0.30.2"
+"react-slick@npm:0.30.0":
+  version: 0.30.0
+  resolution: "react-slick@npm:0.30.0"
   dependencies:
+    "@testing-library/user-event": ^14.3.0
     classnames: ^2.2.5
     enquire.js: ^2.1.6
     json2mq: ^0.2.0
@@ -31497,7 +31553,7 @@ __metadata:
   peerDependencies:
     react: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: 7d415c745ca7d9d19947a6ce62ab866757310fbaf0941b14479cf2779f8db8951b037ab6a357a2d013518dd50fd41080dac7e7949cb201b4c6431f13c6e8975f
+  checksum: ba52a40cae71bab230e2443be8d869650136c2f6735acdba2843b4a55bfeab88fca96f876b7f0dabf2934ac86061dfdc85ab67399947744e042fcb061202b372
   languageName: node
   linkType: hard
 
@@ -33214,14 +33270,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-prune-plugin@npm:^2.0.2":
-  version: 2.1.0
-  resolution: "serverless-prune-plugin@npm:2.1.0"
+"serverless-prune-plugin@npm:2.0.2":
+  version: 2.0.2
+  resolution: "serverless-prune-plugin@npm:2.0.2"
   dependencies:
     bluebird: ^3.7.2
   peerDependencies:
-    serverless: 1.x || 2.x || 3.x || 4.x
-  checksum: 78b627acf475cfa1eaefd537a8119a02f982b8f6c7e917b415899ff0890f41ad326369f029da479008c6a0b44f7c5de14b916c3a86c1e030cc957687e637af83
+    serverless: 1 || 2 || 3
+  checksum: aac15937a49e2fba3fe999d5457160814568ff94553fc559f070cd4ef3f1a54090100d21a69dc7740371122bbb2deb654c219d2b598b77c95d212a1bec6968d7
   languageName: node
   linkType: hard
 
@@ -33813,7 +33869,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"slick-carousel@npm:^1.8.1":
+"slick-carousel@npm:1.8.1":
   version: 1.8.1
   resolution: "slick-carousel@npm:1.8.1"
   peerDependencies:
