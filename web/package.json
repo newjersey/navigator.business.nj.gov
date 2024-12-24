@@ -128,7 +128,7 @@
     "@types/node": "20.17.10",
     "@types/react": "18.2.79",
     "@types/react-dom": "18.2.25",
-    "@types/react-slick": "0.23.10",
+    "@types/react-slick": "0.23.13",
     "@types/react-swipeable-views": "0.13.6",
     "@types/react-transition-group": "4.4.12",
     "@types/remove-markdown": "0.3.4",
