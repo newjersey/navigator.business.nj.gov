@@ -1,6 +1,8 @@
+@use "../sass-files/variables";
+
 .anytime-action-dropdown-container {
-  background-color: $cool-extra-light;
-  border: 1px solid $base-lighter;
+  background-color: variables.$cool-extra-light;
+  border: 1px solid variables.$base-lighter;
   padding: 2rem;
   margin: 1.5rem 0;
   border-radius: 0.5rem;
@@ -38,7 +40,7 @@ li.anytime-action-dropdown-option.MuiAutocomplete-option {
   }
 
   &:hover {
-    background-color: $accent-cool-lightest;
+    background-color: variables.$accent-cool-lightest;
   }
 }
 
@@ -53,6 +55,6 @@ li.anytime-action-dropdown-option.MuiAutocomplete-option {
     display: block;
     width: 100%;
     height: 2px;
-    background-color: $base-lighter;
+    background-color: variables.$base-lighter;
   }
 }
