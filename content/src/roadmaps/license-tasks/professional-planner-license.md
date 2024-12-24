@@ -1,12 +1,12 @@
 ---
-id: professional-planner
+id: professional-planner-license
 webflowId: 6761e5278bbf7849854e3228
-urlSlug: professional-planner
+urlSlug: professional-planner-license
 name: Apply for Your Professional Planner License
-displayname: professional-planner
+displayname: professional-planner-license
 webflowName: >-
   Architecture and Urban Planning: Professional Planner License
-filename: professional-planner
+filename: professional-planner-license
 callToActionLink: https://www.njconsumeraffairs.gov/plan/Pages/applications.aspx
 callToActionText: Apply for My Professional Planner License
 agencyId: nj-consumer-affairs
