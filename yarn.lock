@@ -695,7 +695,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-dynamodb@npm:3.716.0, @aws-sdk/client-dynamodb@npm:^3.428.0":
+"@aws-sdk/client-dynamodb@npm:3.716.0, @aws-sdk/client-dynamodb@npm:^3.428.0, @aws-sdk/client-dynamodb@npm:^3.693.0":
   version: 3.716.0
   resolution: "@aws-sdk/client-dynamodb@npm:3.716.0"
   dependencies:
@@ -1967,7 +1967,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/lib-dynamodb@npm:3.716.0, @aws-sdk/lib-dynamodb@npm:^3.428.0":
+"@aws-sdk/lib-dynamodb@npm:3.716.0, @aws-sdk/lib-dynamodb@npm:^3.428.0, @aws-sdk/lib-dynamodb@npm:^3.693.0":
   version: 3.716.0
   resolution: "@aws-sdk/lib-dynamodb@npm:3.716.0"
   dependencies:
@@ -4743,7 +4743,7 @@ __metadata:
     dedent: 1.5.3
     dependency-cruiser: 16.6.0
     dotenv: 16.4.7
-    dynamodb-admin: 4.6.1
+    dynamodb-admin: 5.1.3
     eslint: 8.57.1
     eslint-config-next: 15.1.2
     eslint-config-prettier: 9.1.0
@@ -14591,7 +14591,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1225.0, aws-sdk@npm:^2.1404.0":
+"aws-sdk@npm:^2.1404.0":
   version: 2.1692.0
   resolution: "aws-sdk@npm:2.1692.0"
   dependencies:
@@ -15084,7 +15084,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"body-parser@npm:1.20.3, body-parser@npm:^1.20.0":
+"body-parser@npm:1.20.3, body-parser@npm:^1.20.3":
   version: 1.20.3
   resolution: "body-parser@npm:1.20.3"
   dependencies:
@@ -15457,6 +15457,15 @@ __metadata:
   dependencies:
     semver: ^7.0.0
   checksum: 66d204657fe36522822a95b288943ad11b58f5eaede235b11d8c4edaa28ce4800087d44a2681524c340494aadb120a0068011acabe99d30e8f11a7d826d83515
+  languageName: node
+  linkType: hard
+
+"bundle-name@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "bundle-name@npm:4.1.0"
+  dependencies:
+    run-applescript: ^7.0.0
+  checksum: 1d966c8d2dbf4d9d394e53b724ac756c2414c45c01340b37743621f59cc565a435024b394ddcb62b9b335d1c9a31f4640eb648c3fec7f97ee74dc0694c9beb6c
   languageName: node
   linkType: hard
 
@@ -16118,7 +16127,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cli-color@npm:^2.0.1, cli-color@npm:^2.0.3, cli-color@npm:^2.0.4":
+"cli-color@npm:^2.0.1, cli-color@npm:^2.0.4":
   version: 2.0.4
   resolution: "cli-color@npm:2.0.4"
   dependencies:
@@ -16857,7 +16866,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie-parser@npm:^1.4.6":
+"cookie-parser@npm:^1.4.7":
   version: 1.4.7
   resolution: "cookie-parser@npm:1.4.7"
   dependencies:
@@ -17877,6 +17886,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"default-browser-id@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "default-browser-id@npm:5.0.0"
+  checksum: 185bfaecec2c75fa423544af722a3469b20704c8d1942794a86e4364fe7d9e8e9f63241a5b769d61c8151993bc65833a5b959026fa1ccea343b3db0a33aa6deb
+  languageName: node
+  linkType: hard
+
+"default-browser@npm:^5.2.1":
+  version: 5.2.1
+  resolution: "default-browser@npm:5.2.1"
+  dependencies:
+    bundle-name: ^4.1.0
+    default-browser-id: ^5.0.0
+  checksum: afab7eff7b7f5f7a94d9114d1ec67273d3fbc539edf8c0f80019879d53aa71e867303c6f6d7cffeb10a6f3cfb59d4f963dba3f9c96830b4540cc7339a1bf9840
+  languageName: node
+  linkType: hard
+
 "default-user-agent@npm:^1.0.0":
   version: 1.0.0
   resolution: "default-user-agent@npm:1.0.0"
@@ -17940,6 +17966,13 @@ __metadata:
   version: 2.0.0
   resolution: "define-lazy-prop@npm:2.0.0"
   checksum: 0115fdb065e0490918ba271d7339c42453d209d4cb619dfe635870d906731eff3e1ade8028bb461ea27ce8264ec5e22c6980612d332895977e89c1bbc80fcee2
+  languageName: node
+  linkType: hard
+
+"define-lazy-prop@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "define-lazy-prop@npm:3.0.0"
+  checksum: 54884f94caac0791bf6395a3ec530ce901cf71c47b0196b8754f3fd17edb6c0e80149c1214429d851873bb0d689dbe08dcedbb2306dc45c8534a5934723851b6
   languageName: node
   linkType: hard
 
@@ -18557,23 +18590,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dynamodb-admin@npm:4.6.1":
-  version: 4.6.1
-  resolution: "dynamodb-admin@npm:4.6.1"
+"dynamodb-admin@npm:5.1.3":
+  version: 5.1.3
+  resolution: "dynamodb-admin@npm:5.1.3"
   dependencies:
+    "@aws-sdk/client-dynamodb": ^3.693.0
+    "@aws-sdk/lib-dynamodb": ^3.693.0
     argparse: ^2.0.1
-    aws-sdk: ^2.1225.0
-    body-parser: ^1.20.0
-    cli-color: ^2.0.3
-    cookie-parser: ^1.4.6
-    ejs: ^3.1.8
+    body-parser: ^1.20.3
+    cli-color: ^2.0.4
+    cookie-parser: ^1.4.7
+    ejs: ^3.1.10
     errorhandler: ^1.5.1
-    express: ^4.18.1
+    express: ^4.21.1
     lodash.pickby: ^4.6.0
-    open: ^8.4.0
+    open: ^10.1.0
   bin:
-    dynamodb-admin: bin/dynamodb-admin.js
-  checksum: 9d834eaea55146daeb0e5caf67ae10e2086d449cca6556a5e036a576a929a8f80285b9ce8f3830711a1263762589e279dbfa467620dd747fed4d30e0b55fa6d1
+    dynamodb-admin: dist/dynamodb-admin.js
+  checksum: c49a71151c4b13717df82561c568500b858f13f01b29ad44240607c3e377c85ff0e9e1d2ca1dde75358d45e7f5311c970c07b0eb62c13c99096f858230c0ad0e
   languageName: node
   linkType: hard
 
@@ -19877,7 +19911,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express@npm:4.21.2, express@npm:^4.17.3, express@npm:^4.18.1":
+"express@npm:4.21.2, express@npm:^4.17.3, express@npm:^4.21.1":
   version: 4.21.2
   resolution: "express@npm:4.21.2"
   dependencies:
@@ -29260,6 +29294,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"open@npm:^10.1.0":
+  version: 10.1.0
+  resolution: "open@npm:10.1.0"
+  dependencies:
+    default-browser: ^5.2.1
+    define-lazy-prop: ^3.0.0
+    is-inside-container: ^1.0.0
+    is-wsl: ^3.1.0
+  checksum: 079b0771616bac13b08129b0300032dc9328d72f345e460dd0416b8a8196a5bdf5e0251fefec8aa2a6a97c736734ac65dd8f1d29ab3fc9a13e85624aa5bc4470
+  languageName: node
+  linkType: hard
+
 "open@npm:^7.4.2":
   version: 7.4.2
   resolution: "open@npm:7.4.2"
@@ -32689,6 +32735,13 @@ __metadata:
     stream-combiner: ^0.2.1
     through: ^2.3.4
   checksum: d6b0b59d556a1cefd4072de8bfe0f5c2c64cbb9806c2cf8485d36272a693b568a20d34e0b56a6d6308c5f77adecbbcdf7e073c2061815b0d515cf664725ad8ab
+  languageName: node
+  linkType: hard
+
+"run-applescript@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "run-applescript@npm:7.0.0"
+  checksum: b02462454d8b182ad4117e5d4626e9e6782eb2072925c9fac582170b0627ae3c1ea92ee9b2df7daf84b5e9ffe14eb1cf5fb70bc44b15c8a0bfcdb47987e2410c
   languageName: node
   linkType: hard
 
