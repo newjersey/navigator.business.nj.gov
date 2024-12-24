@@ -1,6 +1,6 @@
 {
   "displayname": "car-service-standard",
-  "filename": "car-service-standard",
+  "id": "car-service-standard",
   "roadmapSteps": [
     {
       "step": 3,
