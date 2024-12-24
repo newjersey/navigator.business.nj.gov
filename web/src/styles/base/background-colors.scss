@@ -1,254 +1,256 @@
+@use "../sass-files/variables";
+
 .bg-white-transparent {
   background-color: rgba(255, 255, 255, 0.9);
 }
 
 .bg-white {
-  background-color: $white;
+  background-color: variables.$white;
 }
 
 .bg-base-lighter-hover:hover {
-  background-color: $base-light !important;
+  background-color: variables.$base-light !important;
 }
 
 .bg-base-lightest {
-  background-color: $base-lightest !important;
+  background-color: variables.$base-lightest !important;
 }
 
 .bg-base-lightest-hover:hover {
-  background-color: $base-lightest !important;
+  background-color: variables.$base-lightest !important;
 }
 
 .bg-info-extra-light {
-  background-color: $info-extra-light !important;
+  background-color: variables.$info-extra-light !important;
 }
 
 .bg-primary-extra-extra-light {
-  background-color: $primary-extra-extra-light !important;
+  background-color: variables.$primary-extra-extra-light !important;
 }
 
 .bg-info-light {
-  background-color: $info-light !important;
+  background-color: variables.$info-light !important;
 }
 
 .bg-info {
-  background-color: $info !important;
+  background-color: variables.$info !important;
 }
 
 .bg-info-dark {
-  background-color: $info-dark !important;
+  background-color: variables.$info-dark !important;
 }
 
 .bg-info-dark-medium {
-  background-color: $info-dark-medium !important;
+  background-color: variables.$info-dark-medium !important;
 }
 
 .bg-info-darker {
-  background-color: $info-darker !important;
+  background-color: variables.$info-darker !important;
 }
 
 .bg-error-extra-light {
-  background-color: $error-extra-light !important;
+  background-color: variables.$error-extra-light !important;
 }
 
 .bg-error-light {
-  background-color: $error-light !important;
+  background-color: variables.$error-light !important;
 }
 
 .bg-error {
-  background-color: $error !important;
+  background-color: variables.$error !important;
 }
 
 .bg-error-dark {
-  background-color: $error-dark !important;
+  background-color: variables.$error-dark !important;
 }
 
 .bg-error-darker {
-  background-color: $error-darker !important;
+  background-color: variables.$error-darker !important;
 }
 
 .bg-success-extra-light {
-  background-color: $success-extra-light !important;
+  background-color: variables.$success-extra-light !important;
 }
 
 .bg-success-lighter {
-  background-color: $success-lighter !important;
+  background-color: variables.$success-lighter !important;
 }
 
 .bg-success-light {
-  background-color: $success-light !important;
+  background-color: variables.$success-light !important;
 }
 
 .bg-success {
-  background-color: $success !important;
+  background-color: variables.$success !important;
 }
 
 .bg-success-dark {
-  background-color: $success-dark !important;
+  background-color: variables.$success-dark !important;
 }
 
 .bg-success-darker {
-  background-color: $success-darker !important;
+  background-color: variables.$success-darker !important;
 }
 
 .bg-warning-extra-light {
-  background-color: $warning-extra-light !important;
+  background-color: variables.$warning-extra-light !important;
 }
 
 .bg-warning-light {
-  background-color: $warning-light !important;
+  background-color: variables.$warning-light !important;
 }
 
 .bg-warning {
-  background-color: $warning !important;
+  background-color: variables.$warning !important;
 }
 
 .bg-warning-dark {
-  background-color: $warning-dark !important;
+  background-color: variables.$warning-dark !important;
 }
 
 .bg-warning-darker {
-  background-color: $warning-darker !important;
+  background-color: variables.$warning-darker !important;
 }
 
 .bg-disabled {
-  background-color: $disabled !important;
+  background-color: variables.$disabled !important;
 }
 
 .bg-transparent {
-  background-color: $transparent !important;
+  background-color: variables.$transparent !important;
 }
 
 .bg-base-extra-light {
-  background-color: $base-extra-light !important;
+  background-color: variables.$base-extra-light !important;
 }
 
 .bg-accent-cool-light {
-  background-color: $accent-cool-light !important;
+  background-color: variables.$accent-cool-light !important;
 }
 
 .bg-info-light {
-  background-color: $info-light !important;
+  background-color: variables.$info-light !important;
 }
 
 .bg-cool-extra-light {
-  background-color: $cool-extra-light !important;
+  background-color: variables.$cool-extra-light !important;
 }
 
 .bg-cool-lighter {
-  background-color: $cool-lighter !important;
+  background-color: variables.$cool-lighter !important;
 }
 
 .bg-primary-extra-light {
-  background-color: $primary-extra-light !important;
+  background-color: variables.$primary-extra-light !important;
 }
 
 .bg-primary-lightest {
-  background-color: $primary-lightest !important;
+  background-color: variables.$primary-lightest !important;
 }
 
 .bg-primary-more-light {
-  background-color: $primary-more-light !important;
+  background-color: variables.$primary-more-light !important;
 }
 
 .bg-primary-light-vivid {
-  background-color: $primary-light-vivid !important;
+  background-color: variables.$primary-light-vivid !important;
 }
 
 .bg-accent-cool-lightest {
-  background-color: $accent-cool-lightest !important;
+  background-color: variables.$accent-cool-lightest !important;
 }
 
 .bg-accent-cool-dark-medium {
-  background-color: $accent-cool-dark-medium !important;
+  background-color: variables.$accent-cool-dark-medium !important;
 }
 
 .bg-accent-cool-darkest {
-  background-color: $accent-cool-darkest !important;
+  background-color: variables.$accent-cool-darkest !important;
 }
 
 .bg-accent-cool-more-dark {
-  background-color: $accent-cool-more-dark !important;
+  background-color: variables.$accent-cool-more-dark !important;
 }
 
 .bg-info-darkest {
-  background-color: $info-darkest !important;
+  background-color: variables.$info-darkest !important;
 }
 
 .bg-accent-cooler-lightest {
-  background-color: $accent-cooler-lightest !important;
+  background-color: variables.$accent-cooler-lightest !important;
 }
 
 .bg-accent-cooler-50 {
-  background-color: $accent-cooler-50 !important;
+  background-color: variables.$accent-cooler-50 !important;
 }
 
 .bg-accent-cooler-light {
-  background-color: $accent-cooler-light !important;
+  background-color: variables.$accent-cooler-light !important;
 }
 
 .bg-accent-cooler {
-  background-color: $accent-cooler !important;
+  background-color: variables.$accent-cooler !important;
 }
 
 .bg-accent-cooler-dark {
-  background-color: $accent-cooler-dark !important;
+  background-color: variables.$accent-cooler-dark !important;
 }
 
 .bg-accent-cooler-darker {
-  background-color: $accent-cooler-darker !important;
+  background-color: variables.$accent-cooler-darker !important;
 }
 
 .bg-accent-cooler-lightest {
-  background-color: $accent-cooler-lightest !important;
+  background-color: variables.$accent-cooler-lightest !important;
 }
 
 .bg-accent-warm-lighter-on-hover:hover {
-  background-color: $accent-warm-lighter !important;
+  background-color: variables.$accent-warm-lighter !important;
 }
 
 .bg-accent-warm-extra-light {
-  background-color: $accent-warm-extra-light !important;
+  background-color: variables.$accent-warm-extra-light !important;
 }
 
 .bg-accent-hot-extra-light {
-  background-color: $accent-hot-extra-light !important;
+  background-color: variables.$accent-hot-extra-light !important;
 }
 .bg-accent-hot {
-  background-color: $accent-hot !important;
+  background-color: variables.$accent-hot !important;
 }
 
 .bg-accent-hot-darker {
-  background-color: $accent-hot-darker !important;
+  background-color: variables.$accent-hot-darker !important;
 }
 
 .bg-accent-semi-cool-extra-light {
-  background-color: $accent-semi-cool-extra-light !important;
+  background-color: variables.$accent-semi-cool-extra-light !important;
 }
 .bg-accent-semi-cool-lightest {
-  background-color: $accent-semi-cool-lightest !important;
+  background-color: variables.$accent-semi-cool-lightest !important;
 }
 .bg-accent-semi-cool-light {
-  background-color: $accent-semi-cool-light !important;
+  background-color: variables.$accent-semi-cool-light !important;
 }
 .bg-accent-semi-cool-vivid {
-  background-color: $accent-semi-cool-vivid !important;
+  background-color: variables.$accent-semi-cool-vivid !important;
 }
 .bg-accent-semi-cool {
-  background-color: $accent-semi-cool !important;
+  background-color: variables.$accent-semi-cool !important;
 }
 .bg-accent-semi-cool-500 {
-  background-color: $accent-semi-cool-500 !important;
+  background-color: variables.$accent-semi-cool-500 !important;
 }
 .bg-accent-semi-cool-700 {
-  background-color: $accent-semi-cool-700 !important;
+  background-color: variables.$accent-semi-cool-700 !important;
 }
 .bg-accent-semi-cool-800 {
-  background-color: $accent-semi-cool-800 !important;
+  background-color: variables.$accent-semi-cool-800 !important;
 }
 .bg-accent-semi-cool-900 {
-  background-color: $accent-semi-cool-900 !important;
+  background-color: variables.$accent-semi-cool-900 !important;
 }
 
 .bg-secondary-vivid-dark {
-  background-color: $secondary-vivid-dark !important;
+  background-color: variables.$secondary-vivid-dark !important;
 }

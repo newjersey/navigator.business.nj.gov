@@ -1,3 +1,5 @@
+@use "../sass-files/variables";
+
 .members-table {
   table,
   td {
@@ -12,10 +14,10 @@
     padding-left: 1em;
   }
   table > thead {
-    border-bottom: 2px solid $base-light;
+    border-bottom: 2px solid variables.$base-light;
   }
   table > tfoot {
-    border-bottom: 1px solid $base-light;
+    border-bottom: 1px solid variables.$base-light;
   }
 
   table > thead,
