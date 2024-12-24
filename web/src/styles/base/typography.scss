@@ -1,3 +1,5 @@
+@use "../sass-files/variables";
+
 @font-face {
   font-family: "Public Sans Web";
   font-style: normal;
@@ -11,7 +13,7 @@
 
 body,
 button {
-  color: $base-darkest;
+  color: variables.$base-darkest;
 }
 
 .h1-styling-large {
@@ -36,7 +38,7 @@ h1 {
   font-size: 2rem !important;
   line-height: 120% !important;
   letter-spacing: -0.4px;
-  color: $base-darkest;
+  color: variables.$base-darkest;
   text-transform: none;
 }
 
@@ -50,7 +52,7 @@ h2 {
   font-weight: 600;
   font-size: 1.75rem !important;
   line-height: 120% !important;
-  color: $base-darkest;
+  color: variables.$base-darkest;
   text-transform: none;
 }
 
@@ -64,7 +66,7 @@ h3 {
   font-weight: 500;
   font-size: 1.375rem !important;
   line-height: 120% !important;
-  color: $base-darkest;
+  color: variables.$base-darkest;
   text-transform: none;
 }
 
@@ -78,7 +80,7 @@ h4 {
   font-weight: 700;
   font-size: 1.125rem !important;
   line-height: 140% !important;
-  color: $base-darkest;
+  color: variables.$base-darkest;
   text-transform: none;
 }
 
@@ -97,7 +99,7 @@ h5 {
   font-weight: 700;
   font-size: 0.875rem !important;
   line-height: 132% !important;
-  color: $base-darkest;
+  color: variables.$base-darkest;
   display: inline;
   text-transform: none;
 }
@@ -112,7 +114,7 @@ h6 {
   font-weight: 400;
   font-size: 0.875rem !important;
   line-height: 132% !important;
-  color: $base-darkest;
+  color: variables.$base-darkest;
   display: inline;
   text-transform: none;
 }

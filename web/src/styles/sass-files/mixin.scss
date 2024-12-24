@@ -1,8 +1,9 @@
+@use "sass:list";
 @mixin addDropShadow($drop-shadow) {
-  $x: nth($drop-shadow, 1);
-  $y: nth($drop-shadow, 2);
-  $blur: nth($drop-shadow, 3);
-  $alpha: nth($drop-shadow, 4);
+  $x: list.nth($drop-shadow, 1);
+  $y: list.nth($drop-shadow, 2);
+  $blur: list.nth($drop-shadow, 3);
+  $alpha: list.nth($drop-shadow, 4);
 
   box-shadow: $x $y $blur rgba(0, 0, 0, $alpha);
 }

@@ -1,5 +1,7 @@
+@use "../sass-files/variables";
+
 .nav-bar-override-usa-accordion__button {
-  background-color: $white !important;
+  background-color: variables.$white !important;
   padding: 0px !important;
   background-position: right !important;
 }
@@ -33,18 +35,18 @@ $icon-offset: 45px;
 
 .Mui-focusVisible {
   &.nav-menu-item-container {
-    background-color: $transparent;
+    background-color: variables.$transparent;
   }
 
   &.nav-menu-item-container.bg-primary-extra-light-mui-selected-override {
-    background-color: $primary-extra-light;
+    background-color: variables.$primary-extra-light;
   }
 
   &.profile-menu-item {
-    background-color: $white;
+    background-color: variables.$white;
 
     &.current {
-      background-color: $primary-extra-extra-light;
+      background-color: variables.$primary-extra-extra-light;
     }
   }
 }
@@ -54,19 +56,19 @@ $icon-offset: 45px;
 }
 
 .profile-menu-item {
-  background-color: $white;
+  background-color: variables.$white;
 
   &.current {
-    background-color: $primary-extra-extra-light;
+    background-color: variables.$primary-extra-extra-light;
   }
 
   &:hover {
-    background-color: $primary-extra-light;
+    background-color: variables.$primary-extra-light;
   }
 }
 
 .Mui-selected.bg-primary-extra-light-mui-selected-override {
-  background-color: $primary-extra-light;
+  background-color: variables.$primary-extra-light;
 }
 
 .truncate-long-business-names_NavBarMobile {
@@ -89,7 +91,7 @@ $icon-offset: 45px;
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background-color: $base-lightest;
+  background-color: variables.$base-lightest;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,5 +101,5 @@ $icon-offset: 45px;
   font-size: 28px;
   margin-left: -5px;
   margin-right: 10px;
-  color: $accent-cool-darker;
+  color: variables.$accent-cool-darker;
 }
