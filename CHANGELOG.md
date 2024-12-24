@@ -1,3 +1,22 @@
+# [2024.39.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.38.0...v2024.39.0) (2024-12-24)
+
+
+### Bug Fixes
+
+* [[#188172536](https://github.com/newjersey/navigator.business.nj.gov/issues/188172536)] add owningUser to v151 migration ([6e955a1](https://github.com/newjersey/navigator.business.nj.gov/commit/6e955a1290ee3afd3b7e34af4526b4b33e3e1b2f))
+* [[#188172536](https://github.com/newjersey/navigator.business.nj.gov/issues/188172536)] update DynamoUserDataClient 'Not found' error message ([3ce7d6d](https://github.com/newjersey/navigator.business.nj.gov/commit/3ce7d6d5bc44ef5d7c13cda7f74b6da94739bc23))
+* [[#188704018](https://github.com/newjersey/navigator.business.nj.gov/issues/188704018)] update randomHomeBasedIndustry to fix flakey home based industry test ([4688ba0](https://github.com/newjersey/navigator.business.nj.gov/commit/4688ba081c052ecae22faa595b70db76f08cb940))
+* [[#188704018](https://github.com/newjersey/navigator.business.nj.gov/issues/188704018)] update randomHomeBasedIndustry to fix flakey home based industry test ([f1d705d](https://github.com/newjersey/navigator.business.nj.gov/commit/f1d705d6a41a90ed1dafa33a33e528d1339b2437))
+* **deps:** update serverless-and-webpack ([#9055](https://github.com/newjersey/navigator.business.nj.gov/issues/9055)) ([a7c783a](https://github.com/newjersey/navigator.business.nj.gov/commit/a7c783a2f07142fa8a03c4fbc05e5acda0559501))
+
+
+### Features
+
+* [[#187194162](https://github.com/newjersey/navigator.business.nj.gov/issues/187194162)] add profile address to dakota persona ([b54b439](https://github.com/newjersey/navigator.business.nj.gov/commit/b54b43917048dc0a74dca6bfb72ce4ddd83c591f))
+* [[#187466951](https://github.com/newjersey/navigator.business.nj.gov/issues/187466951)] bussiness structure task, error is now auto scroll and screen reader accessible ([c896bd9](https://github.com/newjersey/navigator.business.nj.gov/commit/c896bd9757042db116ec3cc35dc32887c3b21077))
+* [[#188172536](https://github.com/newjersey/navigator.business.nj.gov/issues/188172536)] copy businesses data from users table and sync ([92d3e35](https://github.com/newjersey/navigator.business.nj.gov/commit/92d3e35eeaca9da9c115a7cd9714e14cf98160e6))
+* [[#188507862](https://github.com/newjersey/navigator.business.nj.gov/issues/188507862)] Automatic Tax Calendar Check ([5fc7a92](https://github.com/newjersey/navigator.business.nj.gov/commit/5fc7a92233933610aa038907be0afab6a9e754dd))
+
 # [2024.38.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.37.0...v2024.38.0) (2024-12-17)
 
 
