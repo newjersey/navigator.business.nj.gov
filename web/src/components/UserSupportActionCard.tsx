@@ -33,7 +33,7 @@ export const UserSupportActionCard = (props: Props): ReactElement => {
           <div>{props.supportingText}</div>
         </div>
         <div>
-          <Link href={props.buttonLink}>
+          <Link href={props.buttonLink} legacyBehavior>
             <div>
               <PrimaryButton
                 isColor={props.primaryButtonColor}

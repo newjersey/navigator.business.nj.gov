@@ -65,7 +65,6 @@ export const LoginEmailCheck = (): ReactElement => {
       <Heading level={1} styleVariant="h2">
         {Config.checkAccountEmailPage.header}
       </Heading>
-
       <WithErrorBar hasError={Boolean(emailError)} type="ALWAYS">
         <InputLabel htmlFor="email">Email</InputLabel>
         <GenericTextField
@@ -78,7 +77,6 @@ export const LoginEmailCheck = (): ReactElement => {
           onKeyDown={(e) => handleKeyDown(e)}
         />
       </WithErrorBar>
-
       <PrimaryButton
         isFullWidthOnDesktop
         isColor="primary"
@@ -87,13 +85,13 @@ export const LoginEmailCheck = (): ReactElement => {
       >
         {Config.checkAccountEmailPage.inputButton}
       </PrimaryButton>
-
       <hr className="margin-y-3" />
       <p className="link-account-text">
         <span className="margin-right-05">{Config.checkAccountEmailPage.noAccountText}</span>
-        <Link href={ROUTES.onboarding}>{Config.checkAccountEmailPage.linkAccountLinkText}</Link>
+        <Link href={ROUTES.onboarding} legacyBehavior>
+          {Config.checkAccountEmailPage.linkAccountLinkText}
+        </Link>
       </p>
-
       <div className="display-flex flex-align-end">
         <p>{Config.checkAccountEmailPage.needHelpText}</p>
         <UnStyledButton

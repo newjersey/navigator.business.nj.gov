@@ -18,7 +18,7 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
   const taskProgressReadable = taskProgress.replace("_", " ");
 
   return (
-    <Link href={`/tasks/${props.task.urlSlug}`}>
+    <Link href={`/tasks/${props.task.urlSlug}`} legacyBehavior>
       <div>
         <UnStyledButton
           onClick={(): void => {
