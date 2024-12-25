@@ -106,6 +106,6 @@
     "typescript": "5.7.2",
     "webpack": "5.97.1",
     "webpack-node-externals": "3.0.0",
-    "wiremock": "3.9.2"
+    "wiremock": "3.10.0"
   }
 }
