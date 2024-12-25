@@ -4600,7 +4600,7 @@ __metadata:
     serverless-http: 3.2.0
     serverless-offline: 13.9.0
     serverless-offline-ssm: 6.2.0
-    serverless-prune-plugin: 2.0.2
+    serverless-prune-plugin: 2.1.0
     serverless-webpack: 5.15.0
     simple-oauth2: 5.0.1
     supertest: 6.3.4
@@ -4807,7 +4807,7 @@ __metadata:
     serverless-http: 3.2.0
     serverless-offline: 13.9.0
     serverless-offline-ssm: 6.2.0
-    serverless-prune-plugin: 2.0.2
+    serverless-prune-plugin: 2.1.0
     serverless-webpack: 5.15.0
     simple-oauth2: 5.0.1
     slick-carousel: 1.8.1
@@ -33098,14 +33098,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-prune-plugin@npm:2.0.2":
-  version: 2.0.2
-  resolution: "serverless-prune-plugin@npm:2.0.2"
+"serverless-prune-plugin@npm:2.1.0":
+  version: 2.1.0
+  resolution: "serverless-prune-plugin@npm:2.1.0"
   dependencies:
     bluebird: ^3.7.2
   peerDependencies:
-    serverless: 1 || 2 || 3
-  checksum: aac15937a49e2fba3fe999d5457160814568ff94553fc559f070cd4ef3f1a54090100d21a69dc7740371122bbb2deb654c219d2b598b77c95d212a1bec6968d7
+    serverless: 1.x || 2.x || 3.x || 4.x
+  checksum: 78b627acf475cfa1eaefd537a8119a02f982b8f6c7e917b415899ff0890f41ad326369f029da479008c6a0b44f7c5de14b916c3a86c1e030cc957687e637af83
   languageName: node
   linkType: hard
 
