@@ -23,7 +23,7 @@ import {
   RoadmapDisplayContent,
 } from "@/lib/types/types";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
 
 interface Props {
@@ -44,8 +44,9 @@ export const DashboardOnDesktop = (props: Props): ReactElement => {
   const { business } = useUserData();
   const router = useRouter();
   const operatingPhase = LookupOperatingPhaseById(business?.profileData.operatingPhase);
-  const deferredHomeBasedOnSaveButtonClick = (): void =>
-    routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true");
+  const deferredHomeBasedOnSaveButtonClick = (): void => {
+    router && routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true");
+  };
 
   const renderDeferredHomeBasedQuestion =
     isHomeBasedBusinessApplicable(business?.profileData.industryId) &&

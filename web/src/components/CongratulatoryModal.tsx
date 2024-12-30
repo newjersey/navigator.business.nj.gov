@@ -3,7 +3,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { SectionType } from "@businessnjgovnavigator/shared";
 import { Dialog, DialogContent, IconButton } from "@mui/material";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
 
 interface Props {
@@ -17,7 +17,7 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
   const router = useRouter();
 
   const onClickComplete = (): void => {
-    router.push(ROUTES.dashboard);
+    router && router.push(ROUTES.dashboard);
   };
 
   const publicName = props.nextSectionType ? Config.sectionHeaders[props.nextSectionType] : "";

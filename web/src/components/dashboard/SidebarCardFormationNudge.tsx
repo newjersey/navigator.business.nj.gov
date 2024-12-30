@@ -6,7 +6,7 @@ import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { SidebarCardContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { formationTaskId } from "@businessnjgovnavigator/shared/";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useState } from "react";
 
 type Props = {
@@ -25,7 +25,7 @@ export const SidebarCardFormationNudge = (props: Props): ReactElement => {
     }
     queueUpdateTaskProgress(formationTaskId, "COMPLETED");
     await updateQueue.update();
-    routeShallowWithQuery(router, QUERIES.fromForming, "true");
+    router && routeShallowWithQuery(router, QUERIES.fromForming, "true");
   };
 
   const onClick = (): void => {

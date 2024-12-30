@@ -92,7 +92,7 @@ import dayjs from "dayjs";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, ReactNode, useContext, useState } from "react";
 
 interface Props {
@@ -131,7 +131,7 @@ const ProfilePage = (props: Props): ReactElement => {
   } = useFormContextHelper(createProfileFieldErrorMap(), props.CMS_ONLY_tab ?? profileTabs[0]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const redirect = (params?: { [key: string]: any }, routerType = router.push): Promise<boolean> => {
+  const redirect = (params?: { [key: string]: any }, routerType = router!.push): Promise<boolean> => {
     const urlParams = params ? `?${new URLSearchParams(params).toString()}` : "";
     return routerType(`${ROUTES.dashboard}${urlParams}`);
   };
@@ -165,7 +165,7 @@ const ProfilePage = (props: Props): ReactElement => {
       analytics.event.profile_back_to_roadmap.click.view_roadmap();
     }
     if (deepEqual(profileData, business.profileData)) {
-      await redirect(undefined, router.replace);
+      router && (await redirect(undefined, router.replace));
     } else {
       setEscapeModal(true);
     }

@@ -7,7 +7,7 @@ import { setMockUserDataResponse, useMockBusiness } from "@/test/mock/mockUseUse
 import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { render } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/utils/useIntersectionOnElement", () => ({ useIntersectionOnElement: jest.fn() }));
 

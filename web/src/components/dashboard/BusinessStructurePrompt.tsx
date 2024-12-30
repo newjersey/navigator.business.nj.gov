@@ -6,7 +6,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
 
 interface Props {
@@ -29,7 +29,7 @@ export const BusinessStructurePrompt = (props: Props): ReactElement => {
     >
       <div className={isDesktopAndUp ? "flex flex-row flex-align-start" : ""}>
         <div className={isDesktopAndUp ? "flex-fill margin-right-2" : ""}>
-          {router.asPath === `/tasks/${businessStructureUrlSlug}` ? (
+          {router && router.asPath === `/tasks/${businessStructureUrlSlug}` ? (
             <div data-testid={"content-when-on-business-structure-task"}>
               <Content>{Config.businessStructurePrompt.notCompletedTaskPromptBusinessStructureTask}</Content>
             </div>
@@ -46,7 +46,7 @@ export const BusinessStructurePrompt = (props: Props): ReactElement => {
               isRightMarginRemoved
               isFullWidthOnDesktop
               onClick={(): void => {
-                router.push(`/tasks/${businessStructureUrlSlug}`);
+                router && router.push(`/tasks/${businessStructureUrlSlug}`);
               }}
               dataTestId={"business-structure-prompt-button"}
             >

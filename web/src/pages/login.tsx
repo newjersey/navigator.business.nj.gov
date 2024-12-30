@@ -4,7 +4,7 @@ import { getActiveUser } from "@/lib/auth/sessionHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { type GetStaticPropsResult } from "next";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 
 import { ReactElement } from "react";
 
@@ -14,7 +14,7 @@ const LoginEmailCheckPage = (): ReactElement => {
   useMountEffect(() => {
     getActiveUser()
       .then(() => {
-        router.push(ROUTES.dashboard);
+        router && router.push(ROUTES.dashboard);
       })
       .catch(() => {});
   });

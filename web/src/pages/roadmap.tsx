@@ -4,7 +4,7 @@ import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer"
 import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useEffect } from "react";
 
 const RoadmapPage = (): ReactElement => {
@@ -13,9 +13,9 @@ const RoadmapPage = (): ReactElement => {
 
   useEffect(() => {
     if (state.isAuthenticated === IsAuthenticated.TRUE) {
-      router.replace(ROUTES.dashboard);
+      router && router.replace(ROUTES.dashboard);
     } else if (state.isAuthenticated === IsAuthenticated.FALSE) {
-      router.replace(ROUTES.landing);
+      router && router.replace(ROUTES.landing);
     }
   }, [router, state.isAuthenticated]);
 

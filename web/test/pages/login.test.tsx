@@ -5,7 +5,7 @@ import { generateActiveUser } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { render, waitFor } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/auth/sessionHelper", () => ({
   getActiveUser: jest.fn(),
 }));

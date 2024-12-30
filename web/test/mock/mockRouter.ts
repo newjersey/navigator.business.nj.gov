@@ -1,4 +1,5 @@
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
+import { Router } from "next/router";
 
 export const mockPush = jest.fn().mockResolvedValue({});
 export const mockQuery = jest.fn().mockResolvedValue({});

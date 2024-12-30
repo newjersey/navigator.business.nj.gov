@@ -11,7 +11,7 @@ import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { getCurrentDate, parseDate } from "@businessnjgovnavigator/shared";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
 const isBeforeTheFollowingSaturday = (registeredISO: string | undefined): boolean => {
