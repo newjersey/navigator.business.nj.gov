@@ -12,7 +12,7 @@ import { switchCurrentBusiness } from "@/lib/domain-logic/switchCurrentBusiness"
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useContext } from "react";
 
 export const LoginMenuItem = (): ReactElement => {
@@ -20,6 +20,7 @@ export const LoginMenuItem = (): ReactElement => {
   const router = useRouter();
   return NavMenuItem({
     onClick: (): void => {
+      if (!router) return;
       analytics.event.landing_page_navbar_log_in.click.go_to_myNJ_login();
       router.push(ROUTES.login);
     },
@@ -37,6 +38,7 @@ export const LogoutMenuItem = (props: { handleClose: () => void }): ReactElement
 
   return NavMenuItem({
     onClick: (): void => {
+      if (!router) return;
       onSignOut(router.push, dispatch);
       props.handleClose();
     },
@@ -67,10 +69,11 @@ export const AddBusinessItem = (props: { handleClose: () => void }): ReactElemen
   return [
     NavMenuItem({
       onClick: (): void => {
-        routeWithQuery(router, {
-          path: ROUTES.onboarding,
-          queries: { [QUERIES.additionalBusiness]: "true" },
-        });
+        router &&
+          routeWithQuery(router, {
+            path: ROUTES.onboarding,
+            queries: { [QUERIES.additionalBusiness]: "true" },
+          });
         props.handleClose();
       },
       icon: <ButtonIcon svgFilename="add-business-plus" sizePx="25px" />,
@@ -90,7 +93,7 @@ export const RegisterMenuItem = (): ReactElement => {
   return NavMenuItem({
     onClick: (): void => {
       analytics.event.guest_menu.click.go_to_NavigatorAccount_setup();
-      router.push(ROUTES.accountSetup);
+      router && router.push(ROUTES.accountSetup);
     },
     icon: <ButtonIcon svgFilename="profile" sizePx="25px" />,
     itemText: Config.navigationDefaults.navBarGuestRegistrationText,
@@ -106,7 +109,7 @@ export const GetStartedMenuItem = (): ReactElement => {
   return NavMenuItem({
     onClick: (): void => {
       analytics.event.landing_page_navbar_register.click.go_to_onboarding();
-      router.push(ROUTES.onboarding);
+      router && router.push(ROUTES.onboarding);
     },
     itemText: Config.navigationDefaults.getStartedText,
     key: "getStartedMenuItem",
@@ -137,7 +140,7 @@ export const ProfileMenuItem = (props: {
             await updateQueue?.queue(switchCurrentBusiness(userData, businessId)).update();
           }
           props.handleClose();
-          await router.push(ROUTES.dashboard);
+          router && (await router.push(ROUTES.dashboard));
         },
         selected: !isProfileSelected && isCurrent,
         icon: <ButtonIcon svgFilename={`business-${getBusinessIconColor(i)}`} sizePx="35px" />,
@@ -152,7 +155,7 @@ export const ProfileMenuItem = (props: {
       const profileLink = NavMenuItem({
         onClick: (): void => {
           analytics.event.account_menu_my_profile.click.go_to_profile_screen();
-          router.push(ROUTES.profile);
+          router && router.push(ROUTES.profile);
         },
         selected: isProfileSelected && isCurrent,
         itemText: Config.navigationDefaults.profileLinkText,

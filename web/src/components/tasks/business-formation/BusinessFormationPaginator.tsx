@@ -28,7 +28,7 @@ import { FormationStepNames, StepperStep } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getConfigFieldByLegalStructure, scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
 import { Business, FormationFormData, getCurrentBusiness } from "@businessnjgovnavigator/shared";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
 export const BusinessFormationPaginator = (): ReactElement => {
@@ -294,7 +294,8 @@ export const BusinessFormationPaginator = (): ReactElement => {
 
     if (
       newBusiness.formationData.formationResponse?.success &&
-      newBusiness.formationData.formationResponse?.redirect
+      newBusiness.formationData.formationResponse?.redirect &&
+      router
     ) {
       analytics.event.business_formation.submit.go_to_NIC_formation_processing();
       await router.replace(newBusiness.formationData.formationResponse.redirect);

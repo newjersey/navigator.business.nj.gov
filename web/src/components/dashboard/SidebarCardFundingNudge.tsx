@@ -6,7 +6,7 @@ import { gov2GovTaxFiling } from "@/lib/taxation/helpers";
 import { SidebarCardContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useState } from "react";
 
 type Props = {
@@ -30,7 +30,7 @@ export const SidebarCardFundingNudge = (props: Props): ReactElement => {
       await updateQueue.update();
     }
 
-    routeShallowWithQuery(router, QUERIES.fromFunding, "true");
+    router && routeShallowWithQuery(router, QUERIES.fromFunding, "true");
   };
 
   const onClick = async (): Promise<void> => {

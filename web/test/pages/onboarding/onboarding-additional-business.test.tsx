@@ -18,10 +18,10 @@ import {
 } from "@/test/pages/onboarding/helpers-onboarding";
 import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
-import { UserData, createEmptyBusiness } from "@businessnjgovnavigator/shared/userData";
+import { createEmptyBusiness, UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({

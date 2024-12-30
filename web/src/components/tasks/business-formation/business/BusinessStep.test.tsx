@@ -12,17 +12,17 @@ import { mockPush } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
-  FormationFormData,
-  ProfileData,
-  PublicFilingLegalType,
   businessStructureTaskId,
   castPublicFilingLegalTypeToFormationType,
   defaultDateFormat,
+  FormationFormData,
   generateBusiness,
   generateFormationFormData,
   generateMunicipality,
   getCurrentDate,
   getCurrentDateFormatted,
+  ProfileData,
+  PublicFilingLegalType,
   randomElementFromArray,
   randomPublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
@@ -45,7 +45,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),

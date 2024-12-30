@@ -24,13 +24,13 @@ import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import {
+  createProfileFieldErrorMap,
   FlowType,
   OnboardingErrors,
   OnboardingStatus,
   Page,
   ProfileError,
   UpdateQueue,
-  createProfileFieldErrorMap,
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
@@ -38,7 +38,7 @@ import {
   setAnalyticsDimensions,
   setRegistrationDimension,
 } from "@/lib/utils/analytics-helpers";
-import { OnboardingStatusLookup, getFlow, scrollToTop } from "@/lib/utils/helpers";
+import { getFlow, OnboardingStatusLookup, scrollToTop } from "@/lib/utils/helpers";
 import {
   evalHeaderStepsTemplate,
   flowQueryParamIsValid,
@@ -50,14 +50,14 @@ import {
 } from "@/lib/utils/onboardingPageHelpers";
 import { determineForeignBusinessType } from "@businessnjgovnavigator/shared";
 import {
+  createEmptyProfileData,
+  createEmptyUserData,
   LookupMunicipalityByName,
   Municipality,
   OperatingPhaseId,
   ProfileData,
   TaskProgress,
   UserData,
-  createEmptyProfileData,
-  createEmptyUserData,
 } from "@businessnjgovnavigator/shared/";
 import { createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
 import { isRemoteWorkerOrSellerBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
@@ -68,8 +68,8 @@ import { Business } from "@businessnjgovnavigator/shared/userData";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
+import { useRouter } from "next/compat/router";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { ReactElement, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 
@@ -152,7 +152,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const routeToPage = useCallback(
     (page: number) => {
-      return routeShallowWithQuery(router, "page", page);
+      return router && routeShallowWithQuery(router, "page", page);
     },
     [router]
   );
@@ -172,7 +172,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   useEffect(() => {
     (async (): Promise<void> => {
       if (
-        !router.isReady ||
+        !router ||
         hasHandledRouting.current ||
         !state.activeUser ||
         state.isAuthenticated === IsAuthenticated.UNKNOWN ||
@@ -272,7 +272,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.isReady, state.activeUser, state.isAuthenticated, hasCompletedFetch]);
+  }, [router, state.activeUser, state.isAuthenticated, hasCompletedFetch]);
 
   const setBusinessPersonaAndRouteToPage = async (
     flow: string,
@@ -291,7 +291,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     } else {
       setPage({ current: 2, previous: 1 });
     }
-    await updateQueue?.queueProfileData(newProfileData);
+    updateQueue?.queueProfileData(newProfileData);
   };
 
   const completeOnboarding = async (
@@ -339,12 +339,13 @@ const OnboardingPage = (props: Props): ReactElement => {
 
     await updateQueue.update();
 
-    await router.push({
-      pathname: ROUTES.dashboard,
-      query: isAdditionalBusiness
-        ? { [QUERIES.fromAdditionalBusiness]: "true" }
-        : { [QUERIES.fromOnboarding]: "true" },
-    });
+    router &&
+      (await router.push({
+        pathname: ROUTES.dashboard,
+        query: isAdditionalBusiness
+          ? { [QUERIES.fromAdditionalBusiness]: "true" }
+          : { [QUERIES.fromOnboarding]: "true" },
+      }));
   };
 
   FormFuncWrapper(
@@ -387,12 +388,13 @@ const OnboardingPage = (props: Props): ReactElement => {
       setAnalyticsDimensions(newProfileData);
 
       if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NONE") {
-        await router.push({
-          pathname: ROUTES.unsupported,
-          query: isAdditionalBusiness
-            ? { [QUERIES.additionalBusiness]: "true", [QUERIES.previousBusinessId]: previousBusiness?.id }
-            : {},
-        });
+        router &&
+          (await router.push({
+            pathname: ROUTES.unsupported,
+            query: isAdditionalBusiness
+              ? { [QUERIES.additionalBusiness]: "true", [QUERIES.previousBusinessId]: previousBusiness?.id }
+              : {},
+          }));
       } else if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
         updateQueue
           .queueProfileData(newProfileData)

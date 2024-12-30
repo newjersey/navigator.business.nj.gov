@@ -15,11 +15,11 @@ import {
   searchButton,
 } from "@/test/helpers/helpersSearchBusinessName";
 import {
-  ProfileData,
-  PublicFilingLegalType,
   castPublicFilingLegalTypeToFormationType,
   generateBusiness,
   generateFormationFormData,
+  ProfileData,
+  PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";
@@ -35,7 +35,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),

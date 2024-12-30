@@ -18,7 +18,7 @@ import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
 import { ABExperience, decideABExperience } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { NextSeo } from "next-seo";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
 const Home = (): ReactElement => {
@@ -69,7 +69,7 @@ const Home = (): ReactElement => {
     }
   }
   useEffect(() => {
-    if (state.isAuthenticated === IsAuthenticated.TRUE) {
+    if (state.isAuthenticated === IsAuthenticated.TRUE && router) {
       if (business?.onboardingFormProgress === "COMPLETED") {
         router.replace(ROUTES.dashboard);
       } else if (business?.onboardingFormProgress === "UNSTARTED") {
@@ -81,13 +81,13 @@ const Home = (): ReactElement => {
   }, [business, userData, error, router, state.isAuthenticated]);
 
   useEffect(() => {
-    if (!router.isReady || !router.query[QUERIES.signUp]) {
+    if (!router || !router.isReady || !router.query[QUERIES.signUp]) {
       return;
     }
     if (checkQueryValue(router, QUERIES.signUp, "true")) {
       router.replace(ROUTES.onboarding);
     }
-  }, [router.isReady, router, router.query]);
+  }, [router]);
 
   const renderTwoColumnRow = (
     headingText: string,

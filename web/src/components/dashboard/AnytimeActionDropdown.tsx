@@ -10,7 +10,7 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import { AnytimeActionLicenseReinstatement, AnytimeActionLink, AnytimeActionTask } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { Autocomplete, TextField, useMediaQuery } from "@mui/material";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ChangeEvent, type ReactElement, useState } from "react";
 
 interface Props {
@@ -287,6 +287,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
               isColor={"primary"}
               dataTestId={"anytimeActionPrimaryButton"}
               onClick={() => {
+                if (!router) return;
                 analytics.event.anytime_action_button.click.go_to_anytime_action_screen(
                   selectedAnytimeAction.filename
                 );

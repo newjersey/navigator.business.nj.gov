@@ -2,7 +2,7 @@ import { Content } from "@/components/Content";
 import { AlertVariant } from "@/components/njwds-extended/Alert";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { QUERIES } from "@/lib/domain-logic/routes";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useCallback, useEffect, useRef, useState } from "react";
 
 interface QueryControlledAlertConfig {
@@ -21,11 +21,11 @@ export const useQueryControlledAlert = (config: QueryControlledAlertConfig): Rea
   const effectOccurred = useRef<boolean>(false);
 
   const redirect = useCallback(() => {
-    router.replace({ pathname: config.pagePath }, undefined, { shallow: true });
+    router && router.replace({ pathname: config.pagePath }, undefined, { shallow: true });
   }, [router, config.pagePath]);
 
   useEffect(() => {
-    if (!router.isReady || effectOccurred.current) {
+    if (!router || !router.isReady || effectOccurred.current) {
       return;
     }
     if (router.query[config.queryKey] === "true") {

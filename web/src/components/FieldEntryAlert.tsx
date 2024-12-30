@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Alert, AlertProps } from "@/components/njwds-extended/Alert";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {
@@ -18,7 +18,7 @@ export const FieldEntryAlert = (props: Props): ReactElement => {
 
   const onAnchorClick = (): void => {
     setTimeout(() => {
-      router.push(router.asPath, undefined, { shallow: true });
+      router && router.push(router.asPath, undefined, { shallow: true });
     });
   };
 

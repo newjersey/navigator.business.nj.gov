@@ -29,13 +29,14 @@ import "@newjersey/njwds/dist/css/styles.css";
 import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
 
 import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
 import "../styles/main.scss";
+
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
 NeedsAccountContext.displayName = "Needs Account";
@@ -72,11 +73,13 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const showGtm = !(process.env.DISABLE_GTM === "true");
 
   useEffect(() => {
-    router.events.on("routeChangeComplete", analytics.pageview);
-    return (): void => {
-      router.events.off("routeChangeComplete", analytics.pageview);
-    };
-  }, [router.events]);
+    if (router) {
+      router.events.on("routeChangeComplete", analytics.pageview);
+      return (): void => {
+        router.events.off("routeChangeComplete", analytics.pageview);
+      };
+    }
+  }, [router]);
 
   const listener = (data: HubCapsule): void => {
     switch (data.payload.event) {
@@ -117,12 +120,12 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           });
         })
         .catch(() => {
-          onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
+          router && onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
         });
     }
   });
 
-  const isSeoPage = router.pathname.includes("/starter-kits");
+  const isSeoPage = router && router.pathname.includes("/starter-kits");
 
   const heroTitle = insertIndustryContent(
     config.starterKits.hero.title,

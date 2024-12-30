@@ -14,20 +14,20 @@ import {
   renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
-  LookupIndustryById,
-  ProfileData,
-  UserData,
   createEmptyUser,
   createEmptyUserData,
   generateMunicipality,
   generateProfileData,
   generateUserData,
+  LookupIndustryById,
+  ProfileData,
+  UserData,
 } from "@businessnjgovnavigator/shared/";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { act, screen, waitFor, within } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({

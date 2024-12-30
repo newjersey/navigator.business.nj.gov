@@ -12,9 +12,9 @@ import {
   useMockProfileData,
 } from "@/test/mock/mockUseUserData";
 import {
-  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   generateBusiness,
@@ -24,7 +24,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { render, waitFor } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onGuestSignIn: jest.fn() }));

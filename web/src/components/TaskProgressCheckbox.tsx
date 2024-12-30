@@ -17,7 +17,7 @@ import { formationTaskId } from "@businessnjgovnavigator/shared/";
 import { isFormationTask, isTaxTask } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { TaskProgress } from "@businessnjgovnavigator/shared/userData";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, ReactNode, useContext, useEffect, useState } from "react";
 
 interface Props {
@@ -112,12 +112,13 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         if (!redirectOnSuccess) {
           return;
         }
-        routeWithQuery(router, {
-          path: ROUTES.dashboard,
-          queries: {
-            [QUERIES.fromFormBusinessEntity]: isFormationTask(props.taskId) ? "true" : "false",
-          },
-        });
+        router &&
+          routeWithQuery(router, {
+            path: ROUTES.dashboard,
+            queries: {
+              [QUERIES.fromFormBusinessEntity]: isFormationTask(props.taskId) ? "true" : "false",
+            },
+          });
       })
       .catch(() => {});
   };

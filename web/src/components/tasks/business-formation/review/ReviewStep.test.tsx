@@ -10,19 +10,19 @@ import {
 import { withMarkup } from "@/test/helpers/helpers-testing-library-selectors";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import {
-  FormationFormData,
-  FormationLegalType,
-  LegalStructures,
-  ProfileData,
-  PublicFilingLegalType,
   arrayOfCountriesObjects,
   castPublicFilingLegalTypeToFormationType,
   defaultDateFormat,
+  FormationFormData,
+  FormationLegalType,
   generateFormationFormData,
   generateFormationIncorporator,
   generateFormationMember,
   generateFormationSigner,
   generateMunicipality,
+  LegalStructures,
+  ProfileData,
+  PublicFilingLegalType,
   randomInt,
 } from "@businessnjgovnavigator/shared";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
@@ -42,7 +42,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),

@@ -4,7 +4,7 @@ import { QUERIES } from "@/lib/domain-logic/routes";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData";
-import { WithStatefulUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
+import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { generatePreferences } from "@businessnjgovnavigator/shared/";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
@@ -12,7 +12,7 @@ import { act, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 
 const Config = getMergedConfig();
 

@@ -1,8 +1,9 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
+
 interface Props {
   useSmall?: boolean;
 }
@@ -16,7 +17,7 @@ export const NavbarBusinessNjGovLogo = (props: Props): ReactElement => {
         dataTestid={"business-nj-gov-logo"}
         onClick={() => {
           analytics.event.business_nj_gov_logo.click.business_nj_gov_logo();
-          router.push(Config.navigationDefaults.navBarBusinessNJGovLink);
+          router && router.push(Config.navigationDefaults.navBarBusinessNJGovLink);
         }}
       >
         <img

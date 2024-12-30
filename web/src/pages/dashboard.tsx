@@ -41,7 +41,7 @@ import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useState } from "react";
 
 interface Props {
@@ -99,7 +99,7 @@ const DashboardPage = (props: Props): ReactElement => {
       }
 
       if (business?.onboardingFormProgress !== "COMPLETED") {
-        await router.replace(ROUTES.onboarding);
+        router && (await router.replace(ROUTES.onboarding));
       }
 
       if (isDesktopAndUp && business?.preferences.phaseNewlyChanged) {

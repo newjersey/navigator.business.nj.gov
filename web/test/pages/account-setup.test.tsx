@@ -10,12 +10,12 @@ import { withAuth, withNeedsAccountContext } from "@/test/helpers/helpers-render
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
-  WithStatefulUserData,
   currentUserData,
   setupStatefulUserDataContext,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { PageHelpers, createPageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
-import { RegistrationStatus, createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
+import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
+import { createEmptyUser, RegistrationStatus } from "@businessnjgovnavigator/shared/businessUser";
 import { generateUser, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -49,7 +49,7 @@ jest.mock("@/lib/auth/signinHelper", () => ({ onSelfRegister: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 
 const mockApi = api as jest.Mocked<typeof api>;
 const mockSigninHelper = signinHelper as jest.Mocked<typeof signinHelper>;

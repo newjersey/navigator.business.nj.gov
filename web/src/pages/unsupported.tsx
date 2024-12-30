@@ -8,7 +8,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES } from "@/lib/domain-logic/routes";
 import { getBusinessById } from "@businessnjgovnavigator/shared/domain-logic/getBusinessById";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
 
 const UnsupportedPage = (): ReactElement => {
@@ -18,7 +18,7 @@ const UnsupportedPage = (): ReactElement => {
 
   return (
     <PageSkeleton>
-      {router.query.additionalBusiness === "true" && userData ? (
+      {router && router.query.additionalBusiness === "true" && userData ? (
         <ReturnToPreviousBusinessBar
           previousBusiness={getBusinessById({
             userData,

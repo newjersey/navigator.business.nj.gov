@@ -9,7 +9,7 @@ import { Opportunity } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { capitalizeEachWord } from "@/lib/utils/cases-helpers";
 import { truncate } from "lodash";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
 
 interface Props {
@@ -77,7 +77,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
   const routeToPage = (): void => {
     const url = `/${props.urlPath}/${props.opportunity.urlSlug}`;
     analytics.event.opportunity_card.click.go_to_opportunity_screen();
-    router.push(url);
+    router && router.push(url);
   };
 
   return (
