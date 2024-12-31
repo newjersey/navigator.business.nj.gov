@@ -1,3 +1,10 @@
+## [2024.39.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.39.0...v2024.39.1) (2024-12-31)
+
+
+### Bug Fixes
+
+* [[#188734302](https://github.com/newjersey/navigator.business.nj.gov/issues/188734302)] make city in formation more reliable ([3dd399c](https://github.com/newjersey/navigator.business.nj.gov/commit/3dd399c8c4ae88748750ec415caf50bb13d3aa4b))
+
 # [2024.39.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.38.0...v2024.39.0) (2024-12-24)
 
 
