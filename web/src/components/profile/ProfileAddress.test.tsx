@@ -22,19 +22,19 @@ import { fireEvent, render, screen, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@mui/material", () => mockMaterialUI());
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@mui/material", () => mockMaterialUI());
 
 function mockMaterialUI(): typeof materialUi {
   return {
-    ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    ...vi.requireActual("@mui/material"),
+    useMediaQuery: vi.fn(),
   };
 }
 
 describe("<ProfileAddress  />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   const renderComponent = ({ municipalities }: { municipalities?: Municipality[] }): void => {

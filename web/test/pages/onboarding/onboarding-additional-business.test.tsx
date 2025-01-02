@@ -21,26 +21,26 @@ import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnav
 import { createEmptyBusiness, UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postNewsletter: jest.fn(),
-  postUserTesting: jest.fn(),
-  postGetAnnualFilings: jest.fn(),
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({
+  postNewsletter: vi.fn(),
+  postUserTesting: vi.fn(),
+  postGetAnnualFilings: vi.fn(),
 }));
 
-const mockApi = api as jest.Mocked<typeof api>;
+const mockApi = api as vi.Mocked<typeof api>;
 const Config = getMergedConfig();
 const { none: nexusNoneOfTheAboveCheckboxLabel } =
   Config.profileDefaults.fields.foreignBusinessTypeIds.default.optionContent;
 
 describe("onboarding - additional business", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     setupStatefulUserDataContext();
     mockSuccessfulApiSignups();
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   it("displays Additional keyword in header", async () => {

@@ -11,18 +11,18 @@ import { render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: vi.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
 
 describe("<RegistrationStatusSnackbar />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
     useMockBusiness({});
   });
 
-  const setRegistrationStatus = jest.fn();
+  const setRegistrationStatus = vi.fn();
 
   const setupHookWithAuth = ({
     isAuthenticated,

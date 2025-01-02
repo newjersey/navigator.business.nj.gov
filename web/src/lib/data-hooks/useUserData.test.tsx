@@ -13,29 +13,29 @@ import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, render, waitFor } from "@testing-library/react";
 import { SWRConfig } from "swr";
 
-jest.mock("@/lib/utils/analytics-helpers", () => ({ setAnalyticsDimensions: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  getUserData: jest.fn(),
-  postUserData: jest.fn(),
+vi.mock("@/lib/utils/analytics-helpers", () => ({ setAnalyticsDimensions: vi.fn() }));
+vi.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({
+  getUserData: vi.fn(),
+  postUserData: vi.fn(),
 }));
-const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
-const mockAnalyticsHelpers = analyticsHelpers as jest.Mocked<typeof analyticsHelpers>;
-const mockApi = api as jest.Mocked<typeof api>;
+const mockBuildUserRoadmap = buildUserRoadmap as vi.Mocked<typeof buildUserRoadmap>;
+const mockAnalyticsHelpers = analyticsHelpers as vi.Mocked<typeof analyticsHelpers>;
+const mockApi = api as vi.Mocked<typeof api>;
 
 const userDataStorage = UserDataStorageFactory();
 
-const mockDispatch = jest.fn();
+const mockDispatch = vi.fn();
 
 describe("useUserData", () => {
-  let mockSetError: jest.Mock;
-  let mockSetRoadmap: jest.Mock;
+  let mockSetError: vi.Mock;
+  let mockSetRoadmap: vi.Mock;
 
   beforeEach(() => {
     userDataStorage.clear();
-    jest.resetAllMocks();
-    mockSetError = jest.fn();
-    mockSetRoadmap = jest.fn();
+    vi.resetAllMocks();
+    mockSetError = vi.fn();
+    mockSetRoadmap = vi.fn();
     mockApi.postUserData.mockResolvedValue(generateUserData({}));
   });
 
@@ -203,7 +203,7 @@ describe("useUserData", () => {
 
   describe("when there is a guest current user", () => {
     beforeEach(() => {
-      jest.restoreAllMocks();
+      vi.restoreAllMocks();
     });
 
     it("uses user id to get user data from cache", async () => {

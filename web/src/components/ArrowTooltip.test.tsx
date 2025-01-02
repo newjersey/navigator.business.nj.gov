@@ -1,20 +1,18 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Icon } from "@/components/njwds/Icon";
-import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@mui/material", () => mockMaterialUI());
-
-function mockMaterialUI(): typeof materialUi {
+vi.mock("@mui/material", async () => {
+  const actual = await vi.importActual<typeof import("@mui/material")>("@mui/material");
   return {
-    ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    ...actual,
+    useMediaQuery: vi.fn(),
   };
-}
+});
 
 const isMobile = (value: boolean): void => {
-  (useMediaQuery as jest.Mock).mockImplementation(() => {
+  (useMediaQuery as vi.Mock).mockImplementation(() => {
     return value;
   });
 };
@@ -35,7 +33,7 @@ const renderToolTip = (): void => {
 
 describe("<ArrowTooltip />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("shows onClick on mobile", async () => {

@@ -57,33 +57,33 @@ const date = getCurrentDate().subtract(1, "month").date(1);
 const Config = getMergedConfig();
 
 const dateOfFormation = date.format(defaultDateFormat);
-const mockApi = api as jest.Mocked<typeof api>;
+const mockApi = api as vi.Mocked<typeof api>;
 
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       profile_location_question: {
         submit: {
-          location_entered_for_first_time: jest.fn(),
+          location_entered_for_first_time: vi.fn(),
         },
       },
     },
   };
 }
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 describe("profile - owning existing business", () => {
   let business: Business;
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
     useMockRoadmap({});
     setupStatefulUserDataContext();

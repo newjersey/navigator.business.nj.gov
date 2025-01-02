@@ -11,7 +11,7 @@ import {
 import { generateBusiness } from "@businessnjgovnavigator/shared/test";
 import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 
-const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
+const mockUseUserData = (useUserModule as vi.Mocked<typeof useUserModule>).useUserData;
 
 export const useMockBusiness = (overrides: Partial<Business>): void => {
   const business = generateBusiness(overrides);
@@ -50,9 +50,9 @@ export const generateUseUserDataResponse = (overrides: Partial<UseUserDataRespon
     business,
     error: undefined,
     isLoading: false,
-    refresh: jest.fn().mockResolvedValue({}),
-    updateQueue: new UpdateQueueFactory(userData, jest.fn().mockResolvedValue({})),
-    createUpdateQueue: jest.fn().mockResolvedValue({}),
+    refresh: vi.fn().mockResolvedValue({}),
+    updateQueue: new UpdateQueueFactory(userData, vi.fn().mockResolvedValue({})),
+    createUpdateQueue: vi.fn().mockResolvedValue({}),
     hasCompletedFetch: true,
     ...overrides,
   };

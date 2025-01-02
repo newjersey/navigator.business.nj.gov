@@ -3,13 +3,13 @@ import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { render, screen } from "@testing-library/react";
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/auth/signinHelper", () => ({ onSelfRegister: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/auth/signinHelper", () => ({ onSelfRegister: vi.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
 
 describe("<Content />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
     useMockBusiness({});
   });

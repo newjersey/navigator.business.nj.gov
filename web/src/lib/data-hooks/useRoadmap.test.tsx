@@ -8,14 +8,14 @@ import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { render } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-const mockBuildUserRoadmap = (buildUserRoadmapModule as jest.Mocked<typeof buildUserRoadmapModule>)
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: vi.fn() }));
+const mockBuildUserRoadmap = (buildUserRoadmapModule as vi.Mocked<typeof buildUserRoadmapModule>)
   .buildUserRoadmap;
 
 describe("useRoadmap", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockBusiness({});
   });
 

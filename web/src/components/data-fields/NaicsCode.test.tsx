@@ -16,7 +16,7 @@ import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavig
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
 const Config = getMergedConfig();
 
 const renderComponent = (businessOverrides: Partial<Business>): void => {
@@ -50,7 +50,7 @@ describe("<NaicsCode />", () => {
   const configForField = Config.profileDefaults.fields.naicsCode.default;
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRoadmap({});
   });
 

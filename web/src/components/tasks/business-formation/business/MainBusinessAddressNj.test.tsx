@@ -18,20 +18,20 @@ import { displayContent } from "../contacts/testHelpers";
 
 function mockMaterialUI(): typeof materialUi {
   return {
-    ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    ...vi.requireActual("@mui/material"),
+    useMediaQuery: vi.fn(),
   };
 }
 
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postBusinessFormation: jest.fn(),
-  getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn(),
+vi.mock("@mui/material", () => mockMaterialUI());
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/data-hooks/useDocuments");
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({
+  postBusinessFormation: vi.fn(),
+  getCompletedFiling: vi.fn(),
+  searchBusinessName: vi.fn(),
 }));
 
 const getPageHelper = async (
@@ -64,7 +64,7 @@ const getPageHelper = async (
 
 describe("<MainBusinessAddressNj />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useSetupInitialMocks();
   });
 

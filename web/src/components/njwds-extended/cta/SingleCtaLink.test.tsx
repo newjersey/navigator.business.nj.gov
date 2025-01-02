@@ -6,33 +6,33 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       task_primary_call_to_action: {
         click: {
-          open_external_website: jest.fn(),
+          open_external_website: vi.fn(),
         },
       },
     },
   };
 }
 
-jest.mock("@/lib/utils/helpers", () => {
+vi.mock("@/lib/utils/helpers", () => {
   return {
-    openInNewTab: jest.fn(),
+    openInNewTab: vi.fn(),
   };
 });
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockAnalytics = analytics as vi.Mocked<typeof analytics>;
 const mockedOpenInNewTab = openInNewTab;
 
 describe("<TaskFooterCtas />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockBusiness({});
   });
 

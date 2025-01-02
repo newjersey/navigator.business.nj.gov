@@ -30,18 +30,17 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: vi.fn() }));
 
 const Config = getMergedConfig();
-let setShowNeedsAccountModal: jest.Mock;
+let setShowNeedsAccountModal: vi.Mock;
 
 describe("<TaskProgressCheckbox />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
-    setShowNeedsAccountModal = jest.fn();
+    vi.resetAllMocks();
     useMockRoadmap({});
     useMockRouter({});
     setupStatefulUserDataContext();
@@ -220,7 +219,7 @@ describe("<TaskProgressCheckbox />", () => {
     });
 
     it("updates status and date of formation, and redirects user on save", async () => {
-      jest.useFakeTimers();
+      vi.useFakeTimers();
       const id = formationTaskId;
       const startingPersonaForRoadmapUrl = generateProfileData({ businessPersona: "STARTING" });
       renderTaskCheckbox(formationTaskId, generateBusiness({ profileData: startingPersonaForRoadmapUrl }));
@@ -228,7 +227,7 @@ describe("<TaskProgressCheckbox />", () => {
 
       expect(screen.getByText(getTaskStatusUpdatedMessage("IN_PROGRESS"))).toBeInTheDocument();
       act(() => {
-        jest.advanceTimersByTime(7000);
+        vi.advanceTimersByTime(7000);
       });
       await waitFor(() => {
         return expect(screen.queryByText(getTaskStatusUpdatedMessage("IN_PROGRESS"))).not.toBeInTheDocument();
@@ -314,7 +313,7 @@ describe("<TaskProgressCheckbox />", () => {
     });
 
     afterEach(() => {
-      jest.resetModules();
+      vi.resetModules();
       process.env = {
         ...originalEnvironment,
       };

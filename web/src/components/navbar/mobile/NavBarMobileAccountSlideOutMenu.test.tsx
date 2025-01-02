@@ -3,42 +3,42 @@ import analytics from "@/lib/utils/analytics";
 import { MenuItem } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       mobile_hamburger_icon: {
         click: {
-          open_mobile_menu: jest.fn(),
+          open_mobile_menu: vi.fn(),
         },
       },
       mobile_menu_close_button: {
         click: {
-          close_mobile_menu: jest.fn(),
+          close_mobile_menu: vi.fn(),
         },
       },
       mobile_menu: {
         click_outside: {
-          close_mobile_menu: jest.fn(),
+          close_mobile_menu: vi.fn(),
         },
       },
     },
   };
 }
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockAnalytics = analytics as vi.Mocked<typeof analytics>;
 
 describe("<NavBarMobileAccountSlideOutMenu />", () => {
-  window.open = jest.fn();
+  window.open = vi.fn();
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
-  const openSideBar = jest.fn();
-  const closeSideBar = jest.fn();
+  const openSideBar = vi.fn();
+  const closeSideBar = vi.fn();
 
   const innerMenuTitle = "title";
   const subMenuText = "submenutext";

@@ -5,17 +5,17 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockAnalytics = analytics as vi.Mocked<typeof analytics>;
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       skip_to_main_content: {
         click: {
-          skip_to_main_content: jest.fn(),
+          skip_to_main_content: vi.fn(),
         },
       },
     },

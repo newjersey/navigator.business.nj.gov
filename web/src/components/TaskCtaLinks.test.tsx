@@ -5,36 +5,26 @@ import { generateTask } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-function setupMockAnalytics(): typeof analytics {
+vi.mock("@/lib/utils/helpers", async () => {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
-    event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
-      task_primary_call_to_action: {
-        click: {
-          open_external_website: jest.fn(),
-        },
-      },
-    },
-  };
-}
-
-jest.mock("@/lib/utils/helpers", () => {
-  return {
-    ...jest.requireActual("@/lib/utils/helpers").default,
-    openInNewTab: jest.fn(),
+    ...(await vi.importActual("@/lib/utils/helpers")),
+    openInNewTab: vi.fn(),
   };
 });
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/utils/analytics", async () => {
+  const actual = await vi.importActual<typeof import("@/lib/utils/analytics")>("@/lib/utils/analytics");
+  actual.default.event.task_primary_call_to_action.click.open_external_website = vi.fn();
+  return actual;
+});
 
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
-const mockHelpers = helpers as jest.Mocked<typeof helpers>;
+const mockAnalytics = vi.mocked(analytics);
+const mockHelpers = vi.mocked(helpers);
 
 describe("<TaskFooterCtas />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockBusiness({});
   });
 

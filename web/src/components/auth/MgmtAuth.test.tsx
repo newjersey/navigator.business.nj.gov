@@ -2,13 +2,13 @@ import { MgmtAuth } from "@/components/auth/MgmtAuth";
 import * as api from "@/lib/api-client/apiClient";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/api-client/apiClient", () => ({ post: jest.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({ post: vi.fn() }));
 
-const mockApi = api as jest.Mocked<typeof api>;
+const mockApi = api as vi.Mocked<typeof api>;
 
 describe("<MgmtAuth />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     password = "";
     isAuthed = false;
   });

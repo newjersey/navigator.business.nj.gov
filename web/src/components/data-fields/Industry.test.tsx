@@ -9,23 +9,23 @@ import {
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { WithStatefulProfileData, currentProfileData } from "@/test/mock/withStatefulProfileData";
+import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { filterRandomIndustry, generateProfileData, randomIndustry } from "@businessnjgovnavigator/shared";
 import {
-  ProfileData,
   createEmptyProfileData,
   emptyIndustrySpecificData,
   industrySpecificDataChoices,
+  ProfileData,
 } from "@businessnjgovnavigator/shared/profileData";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 const Config = getMergedConfig();
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
 
 describe("<Industry />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockBusiness({});
   });
 

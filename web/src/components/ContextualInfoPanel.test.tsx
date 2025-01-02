@@ -5,7 +5,7 @@ import { render, screen } from "@testing-library/react";
 describe("<ContextualInfoPanel />", () => {
   it("is closed when contextual info is empty", () => {
     render(
-      withContextualInfo(<ContextualInfoPanel />, { isVisible: false, header: "", markdown: "" }, jest.fn())
+      withContextualInfo(<ContextualInfoPanel />, { isVisible: false, header: "", markdown: "" }, vi.fn())
     );
     expect(screen.getByTestId("overlay")).not.toHaveClass("is-visible");
     expect(screen.queryByTestId("info-panel")).not.toBeInTheDocument();
@@ -16,7 +16,7 @@ describe("<ContextualInfoPanel />", () => {
       withContextualInfo(
         <ContextualInfoPanel />,
         { isVisible: true, header: "some header", markdown: "some content" },
-        jest.fn()
+        vi.fn()
       )
     );
     expect(screen.getByTestId("overlay")).toHaveClass("is-visible");
@@ -28,7 +28,7 @@ describe("<ContextualInfoPanel />", () => {
       withContextualInfo(
         <ContextualInfoPanel />,
         { isVisible: true, header: "a header", markdown: "a paragraph" },
-        jest.fn()
+        vi.fn()
       )
     );
     expect(screen.getByText("a header")).toBeInTheDocument();

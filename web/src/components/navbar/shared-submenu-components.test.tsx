@@ -24,77 +24,77 @@ import { generateBusiness, generateProfileData, generateUserData } from "@busine
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { ReactNode } from "react";
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/auth/signinHelper", () => {
-  const originalSigninHelper = jest.requireActual("@/lib/auth/signinHelper");
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/auth/signinHelper", () => {
+  const originalSigninHelper = vi.requireActual("@/lib/auth/signinHelper");
   return {
     ...originalSigninHelper,
-    onSignOut: jest.fn(),
+    onSignOut: vi.fn(),
   };
 });
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
-jest.mock(
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: vi.fn() }));
+vi.mock(
   "next/link",
   () =>
     ({ children }: { children: ReactNode }): ReactNode =>
       children
 );
 
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       mobile_hamburger_quick_links_search: {
         click: {
-          search_page: jest.fn(),
+          search_page: vi.fn(),
         },
       },
       mobile_hamburger_quick_links_updates: {
         click: {
-          updates_page: jest.fn(),
+          updates_page: vi.fn(),
         },
       },
       mobile_hamburger_quick_links_grow: {
         click: {
-          grow_page: jest.fn(),
+          grow_page: vi.fn(),
         },
       },
       mobile_hamburger_quick_links_start: {
         click: {
-          start_page: jest.fn(),
+          start_page: vi.fn(),
         },
       },
       mobile_hamburger_quick_links_plan: {
         click: {
-          plan_page: jest.fn(),
+          plan_page: vi.fn(),
         },
       },
       mobile_hamburger_quick_links_operate: {
         click: {
-          operate_page: jest.fn(),
+          operate_page: vi.fn(),
         },
       },
     },
   };
 }
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockAnalytics = analytics as vi.Mocked<typeof analytics>;
 
 describe("shared-submenu-components", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
     useMockUserData({});
   });
 
   const Config = getMergedConfig();
-  window.open = jest.fn();
+  window.open = vi.fn();
 
   it("renders LoginMenuItem and it navigates correclty onClick", () => {
     render(<LoginMenuItem />);
@@ -113,7 +113,7 @@ describe("shared-submenu-components", () => {
   it("renders MyNjMenuItem and it navigates correclty onClick", () => {
     render(<MyNjMenuItem handleClose={() => null} />);
     expect(screen.getByText(Config.navigationDefaults.myNJAccountText)).toBeInTheDocument();
-    const openMock = jest.fn();
+    const openMock = vi.fn();
     global.open = openMock;
 
     const profileLink = "www.njprofilelink.com";

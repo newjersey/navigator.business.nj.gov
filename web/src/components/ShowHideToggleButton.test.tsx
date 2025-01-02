@@ -6,7 +6,7 @@ const hideText = "hide";
 const showOverrideText = "show-override";
 const hideOverrideText = "hide-override";
 
-const toggleMock = jest.fn();
+const toggleMock = vi.fn();
 
 const renderButton = ({
   status,

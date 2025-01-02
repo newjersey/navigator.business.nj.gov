@@ -10,18 +10,18 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: vi.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
 
 describe("<NeedsAccount Modal />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
     useMockBusiness({});
   });
 
-  const setShowNeedsAccountModal = jest.fn();
+  const setShowNeedsAccountModal = vi.fn();
 
   const setupHookWithAuth = (isAuthenticated: IsAuthenticated, showNeedsAccountModal = true): void => {
     render(

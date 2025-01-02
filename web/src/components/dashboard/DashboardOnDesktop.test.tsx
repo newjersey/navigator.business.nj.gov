@@ -45,10 +45,10 @@ import { OperatingPhase, OperatingPhaseId } from "@businessnjgovnavigator/shared
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: vi.fn() }));
 
 const Config = getMergedConfig();
 
@@ -70,11 +70,11 @@ const operatingPhasesThatDisplayHideableRoadmapTasks = OperatingPhases.filter((o
 
 describe("<DashboardOnDesktop />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockBusiness({ onboardingFormProgress: "COMPLETED" });
     useMockRoadmap({});
     useMockRouter({});
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   const renderDashboardComponent = ({

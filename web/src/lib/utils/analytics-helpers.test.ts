@@ -3,9 +3,9 @@ import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { generateProfileData, getIndustries } from "@businessnjgovnavigator/shared/";
 import { sendOnboardingOnSubmitEvents } from "./analytics-helpers";
 
-jest.mock("@/lib/utils/analytics");
+vi.mock("@/lib/utils/analytics");
 
-const mockAnalytic = analytics as jest.Mocked<typeof analytics>;
+const mockAnalytic = analytics as vi.Mocked<typeof analytics>;
 
 const liquorLicenseApplicableIndustries = getIndustries().filter((industry) => {
   return industry.industryOnboardingQuestions.isLiquorLicenseApplicable === true;
@@ -13,7 +13,7 @@ const liquorLicenseApplicableIndustries = getIndustries().filter((industry) => {
 
 describe("analytics-helpers", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   describe("sendOnboardingOnSubmitEvents", () => {

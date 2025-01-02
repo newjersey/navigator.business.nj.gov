@@ -4,46 +4,46 @@ import analytics from "@/lib/utils/analytics";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
 
 const Config = getMergedConfig();
 
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockAnalytics = analytics as vi.Mocked<typeof analytics>;
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       landing_page_get_my_registration_guide_tile: {
         click: {
-          go_to_onboarding: jest.fn(),
+          go_to_onboarding: vi.fn(),
         },
       },
       landing_page_file_and_pay_my_taxes_tile: {
         click: {
-          go_to_onboarding: jest.fn(),
+          go_to_onboarding: vi.fn(),
         },
       },
       landing_page_im_an_out_of_business_tile: {
         click: {
-          go_to_onboarding: jest.fn(),
+          go_to_onboarding: vi.fn(),
         },
       },
       landing_page_find_funding_for_my_business_tile: {
         click: {
-          go_to_onboarding: jest.fn(),
+          go_to_onboarding: vi.fn(),
         },
       },
       landing_page_im_starting_a_nj_business_tile: {
         click: {
-          go_to_onboarding: jest.fn(),
+          go_to_onboarding: vi.fn(),
         },
       },
       landing_page_im_running_a_nj_business_tile: {
         click: {
-          go_to_onboarding: jest.fn(),
+          go_to_onboarding: vi.fn(),
         },
       },
     },
@@ -52,7 +52,7 @@ function setupMockAnalytics(): typeof analytics {
 
 describe("<LandingPageTiles />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
   });
 

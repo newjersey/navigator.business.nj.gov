@@ -43,42 +43,42 @@ import dayjs, { Dayjs } from "dayjs";
 
 function mockMaterialUI(): typeof materialUi {
   return {
-    ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    ...vi.requireActual("@mui/material"),
+    useMediaQuery: vi.fn(),
   };
 }
 
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       share_calendar_feedback: {
         click: {
-          open_live_chat: jest.fn(),
+          open_live_chat: vi.fn(),
         },
       },
     },
   };
 }
 
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
-jest.mock("@businessnjgovnavigator/shared/dateHelpers", () => {
+vi.mock("@mui/material", () => mockMaterialUI());
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("@businessnjgovnavigator/shared/dateHelpers", () => {
   return {
-    ...jest.requireActual("@businessnjgovnavigator/shared/dateHelpers"),
-    getCurrentDate: jest.fn(),
+    ...vi.requireActual("@businessnjgovnavigator/shared/dateHelpers"),
+    getCurrentDate: vi.fn(),
   };
 });
-const currentDateMock = (getCurrentDateModule as jest.Mocked<typeof getCurrentDateModule>).getCurrentDate;
+const currentDateMock = (getCurrentDateModule as vi.Mocked<typeof getCurrentDateModule>).getCurrentDate;
 
 const getAprilDateOfThisYear = (): Dayjs => {
   return dayjs().month(3);
 };
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockAnalytics = analytics as vi.Mocked<typeof analytics>;
 const Config = getMergedConfig();
 
 const renderFilingsCalendar = (
@@ -96,14 +96,14 @@ const renderFilingsCalendar = (
 };
 
 const setTabletScreen = (value: boolean): void => {
-  (useMediaQuery as jest.Mock).mockImplementation(() => {
+  (useMediaQuery as vi.Mock).mockImplementation(() => {
     return value;
   });
 };
 
 describe("<FilingsCalendar />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
     setTabletScreen(true);
     setupStatefulUserDataContext();

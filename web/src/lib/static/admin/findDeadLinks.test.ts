@@ -5,15 +5,15 @@ import { findDeadContextualInfo, findDeadLinks, findDeadTasks } from "@/lib/stat
 import { Options } from "broken-link-checker";
 import fs from "fs";
 
-jest.mock("fs");
-jest.mock("process", () => ({ cwd: (): string => "/test" }));
+vi.mock("fs");
+vi.mock("process", () => ({ cwd: (): string => "/test" }));
 
 describe("findDeadLinks", () => {
-  let mockedFs: jest.Mocked<typeof fs>;
+  let mockedFs: vi.Mocked<typeof fs>;
 
   beforeEach(() => {
-    jest.resetAllMocks();
-    mockedFs = fs as jest.Mocked<typeof fs>;
+    vi.resetAllMocks();
+    mockedFs = fs as vi.Mocked<typeof fs>;
 
     mockedFs.readdirSync
       // @ts-ignore
@@ -141,7 +141,7 @@ describe("findDeadLinks", () => {
   });
 });
 
-jest.mock("broken-link-checker", () => {
+vi.mock("broken-link-checker", () => {
   return {
     HtmlUrlChecker: function SpyHtmlUrlChecker(
       options: Options,

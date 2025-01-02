@@ -24,12 +24,12 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-window.open = jest.fn();
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ checkLicenseStatus: jest.fn(), getUserData: jest.fn() }));
-const mockApi = api as jest.Mocked<typeof api>;
-const mockWindowOpen = window.open as jest.Mocked<typeof window.open>;
+window.open = vi.fn();
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({ checkLicenseStatus: vi.fn(), getUserData: vi.fn() }));
+const mockApi = api as vi.Mocked<typeof api>;
+const mockWindowOpen = window.open as vi.Mocked<typeof window.open>;
 const Config = getMergedConfig();
 
 describe("<LicenseTask />", () => {
@@ -54,10 +54,10 @@ describe("<LicenseTask />", () => {
   };
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockBusiness(generateBusiness({}));
     useMockRoadmap({});
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   describe("task status checkbox", () => {

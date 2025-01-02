@@ -40,14 +40,14 @@ import {
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postTaxFilingsOnboarding: jest.fn(),
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({
+  postTaxFilingsOnboarding: vi.fn(),
 }));
-const mockApi = api as jest.Mocked<typeof api>;
+const mockApi = api as vi.Mocked<typeof api>;
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
 
 const Config = getMergedConfig();
 
@@ -77,7 +77,7 @@ describe("<SidebarCardFundingNudge />", () => {
   };
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
     setupStatefulUserDataContext();
     card = generateSidebarCardContent({ id: fundingNudge });

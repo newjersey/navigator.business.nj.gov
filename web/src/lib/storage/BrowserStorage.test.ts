@@ -4,7 +4,7 @@ describe("BrowserStorageFactory", () => {
   const storage = BrowserStorageFactory();
 
   beforeEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
     storage.clear();
   });
 

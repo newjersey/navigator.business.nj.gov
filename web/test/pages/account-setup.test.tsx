@@ -24,40 +24,40 @@ const Config = getMergedConfig();
 
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       finish_setup_on_myNewJersey_button: {
         submit: {
-          go_to_myNJ_registration: jest.fn(),
+          go_to_myNJ_registration: vi.fn(),
         },
       },
       guest_snackbar: {
         click: {
-          go_to_NavigatorAccount_setup: jest.fn(),
+          go_to_NavigatorAccount_setup: vi.fn(),
         },
       },
     },
   };
 }
 
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postNewsletter: jest.fn(),
-  postUserTesting: jest.fn(),
+vi.mock("@/lib/api-client/apiClient", () => ({
+  postNewsletter: vi.fn(),
+  postUserTesting: vi.fn(),
 }));
-jest.mock("@/lib/auth/signinHelper", () => ({ onSelfRegister: jest.fn() }));
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
+vi.mock("@/lib/auth/signinHelper", () => ({ onSelfRegister: vi.fn() }));
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
 
-const mockApi = api as jest.Mocked<typeof api>;
-const mockSigninHelper = signinHelper as jest.Mocked<typeof signinHelper>;
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockApi = api as vi.Mocked<typeof api>;
+const mockSigninHelper = signinHelper as vi.Mocked<typeof signinHelper>;
+const mockAnalytics = analytics as vi.Mocked<typeof analytics>;
 
 describe("Account Setup page", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
     setupStatefulUserDataContext();
 

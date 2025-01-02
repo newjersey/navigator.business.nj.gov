@@ -2,19 +2,19 @@ import { BusinessStructure } from "@/components/data-fields/BusinessStructure";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { WithStatefulUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
+import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  LookupLegalStructureById,
   generateBusiness,
   generateProfileData,
   generateUserDataForBusiness,
+  LookupLegalStructureById,
 } from "@businessnjgovnavigator/shared";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
 const Config = getMergedConfig();
 
 const renderComponent = (business: Business): void => {
@@ -33,7 +33,7 @@ const configForField = Config.profileDefaults.fields.legalStructureId.default;
 
 describe("<BusinessStructure />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRoadmap({});
     setupStatefulUserDataContext();
   });

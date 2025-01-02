@@ -5,12 +5,12 @@ import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withSta
 import { createEmptyProfileData, generateProfileData, ProfileData } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 
-jest.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
-  getNonEssentialQuestionText: jest.fn(),
+vi.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
+  getNonEssentialQuestionText: vi.fn(),
 }));
 
 const mockGetNonEssentialQuestionText = (
-  GetNonEssentialQuestionTextModule as jest.Mocked<typeof GetNonEssentialQuestionTextModule>
+  GetNonEssentialQuestionTextModule as vi.Mocked<typeof GetNonEssentialQuestionTextModule>
 ).getNonEssentialQuestionText;
 
 const questionText = "Cool Test Question?";
@@ -18,7 +18,7 @@ const Config = getMergedConfig();
 
 describe("ProfileNonEssentialQuestion", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     mockGetNonEssentialQuestionText.mockReturnValue(questionText);
   });
 

@@ -25,22 +25,22 @@ import {
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postGetAnnualFilings: jest.fn(),
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({
+  postGetAnnualFilings: vi.fn(),
 }));
 
 const Config = getMergedConfig();
 
 describe("onboarding - shared", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({ isReady: true });
     setupStatefulUserDataContext();
     mockSuccessfulApiSignups();
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   it("routes to the dashboard when the user is authenticated and userData is undefined", async () => {

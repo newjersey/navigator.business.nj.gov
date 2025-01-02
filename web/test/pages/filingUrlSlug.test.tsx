@@ -11,16 +11,16 @@ import {
   getCurrentDate,
   randomInt,
 } from "@businessnjgovnavigator/shared";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 import dayjs from "dayjs";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
 const Config = getMergedConfig();
 
 describe("filing page", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   const renderFilingPage = (filing: Filing): void => {

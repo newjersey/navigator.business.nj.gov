@@ -12,17 +12,17 @@ const Config = getMergedConfig();
 
 function mockMaterialUI(): typeof materialUi {
   return {
-    ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    ...vi.requireActual("@mui/material"),
+    useMediaQuery: vi.fn(),
   };
 }
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
-jest.mock(
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@mui/material", () => mockMaterialUI());
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: vi.fn() }));
+vi.mock(
   "next/link",
   () =>
     ({ children }: { children: ReactNode }): ReactNode =>
@@ -31,7 +31,7 @@ jest.mock(
 
 describe("<NavBarDesktop />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
     useMockUserData({});
   });

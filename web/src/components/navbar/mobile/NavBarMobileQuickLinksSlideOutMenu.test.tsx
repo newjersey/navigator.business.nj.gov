@@ -3,40 +3,40 @@ import { getMergedConfig } from "@/contexts/configContext";
 import analytics from "@/lib/utils/analytics";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       mobile_menu_quick_links: {
         click_outside: {
-          close_mobile_menu: jest.fn(),
+          close_mobile_menu: vi.fn(),
         },
       },
       mobile_hamburger_icon_quick_links: {
         click: {
-          open_mobile_menu: jest.fn(),
+          open_mobile_menu: vi.fn(),
         },
       },
       mobile_menu_close_button_quick_links: {
         click: {
-          close_mobile_menu: jest.fn(),
+          close_mobile_menu: vi.fn(),
         },
       },
     },
   };
 }
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockAnalytics = analytics as vi.Mocked<typeof analytics>;
 
 describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
   const Config = getMergedConfig();
 
-  window.open = jest.fn();
+  window.open = vi.fn();
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("opens when the icon is clicked", async () => {

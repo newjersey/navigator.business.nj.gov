@@ -3,13 +3,13 @@ import * as FetchContextualInfoModule from "@/lib/async-content-fetchers/fetchCo
 import { withContextualInfo } from "@/test/helpers/helpers-renderers";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/async-content-fetchers/fetchContextualInfo", () => ({ fetchContextualInfo: jest.fn() }));
-const mockFetchContextualInfo = (FetchContextualInfoModule as jest.Mocked<typeof FetchContextualInfoModule>)
+vi.mock("@/lib/async-content-fetchers/fetchContextualInfo", () => ({ fetchContextualInfo: vi.fn() }));
+const mockFetchContextualInfo = (FetchContextualInfoModule as vi.Mocked<typeof FetchContextualInfoModule>)
   .fetchContextualInfo;
 
 describe("<ContextualInfoLink />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("splits the text on a | and displays the first half as a label", () => {
@@ -24,7 +24,7 @@ describe("<ContextualInfoLink />", () => {
       header: "some header content",
       markdown: "some markdown content",
     });
-    const setContent = jest.fn();
+    const setContent = vi.fn();
     render(
       withContextualInfo(
         <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
@@ -48,7 +48,7 @@ describe("<ContextualInfoLink />", () => {
       header: "some header content",
       markdown: "some markdown content",
     });
-    const setContent = jest.fn();
+    const setContent = vi.fn();
     render(
       withContextualInfo(
         <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,

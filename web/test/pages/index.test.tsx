@@ -7,13 +7,13 @@ import { setMockUserDataResponse, useMockBusiness } from "@/test/mock/mockUseUse
 import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { render } from "@testing-library/react";
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/utils/useIntersectionOnElement", () => ({ useIntersectionOnElement: jest.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/utils/useIntersectionOnElement", () => ({ useIntersectionOnElement: vi.fn() }));
 
 describe("HomePage", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
     useMockBusiness({});
   });

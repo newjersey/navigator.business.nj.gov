@@ -22,9 +22,9 @@ import {
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
 
 const renderMiniRoadMap = (taskId: string): void => {
   render(<MiniRoadmap activeTaskId={taskId} />);
@@ -32,7 +32,7 @@ const renderMiniRoadMap = (taskId: string): void => {
 
 describe("<MiniRoadmap />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     setupStatefulUserDataContext();
     useMockRouter({ asPath: "" });
     useMockRoadmap({

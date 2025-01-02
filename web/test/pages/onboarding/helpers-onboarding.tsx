@@ -13,19 +13,19 @@ import Onboarding from "@/pages/onboarding";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
-  DateObject,
-  Municipality,
-  UserData,
   createEmptyUserData,
+  DateObject,
   emptyIndustrySpecificData,
   generateUser,
   getIndustries,
   industrySpecificDataChoices,
+  Municipality,
+  UserData,
 } from "@businessnjgovnavigator/shared/";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitForElementToBeRemoved, within } from "@testing-library/react";
 
-const mockApi = api as jest.Mocked<typeof api>;
+const mockApi = api as vi.Mocked<typeof api>;
 const Config = getMergedConfig();
 
 export const renderPage = ({

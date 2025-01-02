@@ -16,11 +16,11 @@ import { generatePreferences, generateUserData } from "@businessnjgovnavigator/s
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: vi.fn() }));
+const mockBuildUserRoadmap = buildUserRoadmap as vi.Mocked<typeof buildUserRoadmap>;
 
 const Config = getMergedConfig();
 
@@ -37,7 +37,7 @@ describe("<SidebarCardFormationNudge />", () => {
 
   describe("when clicking formation button", () => {
     beforeEach(() => {
-      jest.resetAllMocks();
+      vi.resetAllMocks();
       useMockRouter({});
       setupStatefulUserDataContext();
       card = generateSidebarCardContent({ id: SIDEBAR_CARDS.formationNudge });

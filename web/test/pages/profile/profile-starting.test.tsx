@@ -1,8 +1,11 @@
-/* eslint-disable jest/expect-expect */
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import {
+  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
+} from "@/lib/utils/formation-helpers";
 import { templateEval } from "@/lib/utils/helpers";
 import {
   allLegalStructuresOfType,
@@ -24,6 +27,28 @@ import {
   industryIdsWithOutEssentialQuestion,
   industryIdsWithSingleRequiredEssentialQuestion,
 } from "@/test/pages/onboarding/helpers-onboarding";
+import {
+  chooseRadio,
+  chooseTab,
+  clickBack,
+  clickSave,
+  expectLocationNotSavedAndError,
+  expectLocationSavedAsUndefined,
+  fillText,
+  generateBusinessForProfile,
+  getBusinessNameValue,
+  getBusinessProfileInputFieldName,
+  getDateOfFormation,
+  getEmployerIdValue,
+  getEntityIdValue,
+  getMunicipalityValue,
+  getNotesValue,
+  getTaxIdValue,
+  removeLocationAndSave,
+  renderPage,
+  selectByText,
+  selectByValue,
+} from "@/test/pages/profile/profile-helpers";
 import {
   Business,
   businessPersonas,
@@ -52,71 +77,46 @@ import {
   generateFormationFormData,
   generateTaxFilingData,
 } from "@businessnjgovnavigator/shared/test";
-
-import analytics from "@/lib/utils/analytics";
-import {
-  BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
-  BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
-} from "@/lib/utils/formation-helpers";
-import {
-  chooseRadio,
-  chooseTab,
-  clickBack,
-  clickSave,
-  expectLocationNotSavedAndError,
-  expectLocationSavedAsUndefined,
-  fillText,
-  generateBusinessForProfile,
-  getBusinessNameValue,
-  getBusinessProfileInputFieldName,
-  getDateOfFormation,
-  getEmployerIdValue,
-  getEntityIdValue,
-  getMunicipalityValue,
-  getNotesValue,
-  getTaxIdValue,
-  removeLocationAndSave,
-  renderPage,
-  selectByText,
-  selectByValue,
-} from "@/test/pages/profile/profile-helpers";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-const mockApi = api as jest.Mocked<typeof api>;
+const mockApi = vi.mocked(api);
 
-function setupMockAnalytics(): typeof analytics {
+vi.mock("@/lib/utils/analytics", async () => {
+  const analytics = await vi.importActual<typeof import("@/lib/utils/analytics")>("@/lib/utils/analytics");
+
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
-    event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
-      profile_location_question: {
-        submit: {
-          location_entered_for_first_time: jest.fn(),
+    ...analytics,
+    default: {
+      event: {
+        ...analytics.default.event,
+        profile_location_question: {
+          submit: {
+            location_entered_for_first_time: vi.fn(),
+          },
         },
       },
     },
   };
-}
+});
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/data-hooks/useDocuments");
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
 
 describe("profile - starting business", () => {
   let businessFromSetup: Business;
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
     useMockRoadmap({});
     setupStatefulUserDataContext();
     useMockDocuments({});
-    mockApi.postGetAnnualFilings.mockImplementation((userData) => {
+    mockApi.postGetAnnualFilings.mockImplementation((userData: UserData) => {
       return Promise.resolve(userData);
     });
     businessFromSetup = generateBusinessForProfile({

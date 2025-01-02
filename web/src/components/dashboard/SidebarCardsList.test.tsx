@@ -6,7 +6,7 @@ import * as helpers from "@/lib/utils/helpers";
 import { removeMarkdownFormatting } from "@/lib/utils/helpers";
 import { generateCertification, generateFunding, generateSidebarCardContent } from "@/test/factories";
 import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
-import { OperatingPhaseId, OperatingPhases, generateUser } from "@businessnjgovnavigator/shared/";
+import { generateUser, OperatingPhaseId, OperatingPhases } from "@businessnjgovnavigator/shared/";
 import { ForeignBusinessTypeId } from "@businessnjgovnavigator/shared/profileData";
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
@@ -15,31 +15,31 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
-    ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    ...vi.requireActual("@mui/material"),
+    useMediaQuery: vi.fn(),
   };
 }
 
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/utils/helpers", () => {
+vi.mock("@mui/material", () => mockMaterialUI());
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/utils/helpers", () => {
   return {
-    ...jest.requireActual("@/lib/utils/helpers"),
-    scrollToTopOfElement: jest.fn(),
+    ...vi.requireActual("@/lib/utils/helpers"),
+    scrollToTopOfElement: vi.fn(),
   };
 });
-const mockHelpers = helpers as jest.Mocked<typeof helpers>;
+const mockHelpers = helpers as vi.Mocked<typeof helpers>;
 
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockAnalytics = analytics as vi.Mocked<typeof analytics>;
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       for_you_card_unhide_button: {
         click: {
-          unhide_cards: jest.fn(),
+          unhide_cards: vi.fn(),
         },
       },
     },
@@ -95,8 +95,8 @@ const getDontDisplayCertificationAndFundingOperatingPhase = (): OperatingPhaseId
 
 describe("<SidebarCardsList />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
-    (useMediaQuery as jest.Mock).mockImplementation(() => {
+    vi.resetAllMocks();
+    (useMediaQuery as vi.Mock).mockImplementation(() => {
       return true;
     });
     useMockBusiness({});
@@ -288,8 +288,8 @@ describe("<SidebarCardsList />", () => {
 
   describe("SidebarCardsList For You Counter", () => {
     beforeEach(() => {
-      jest.resetAllMocks();
-      (useMediaQuery as jest.Mock).mockImplementation(() => {
+      vi.resetAllMocks();
+      (useMediaQuery as vi.Mock).mockImplementation(() => {
         return true;
       });
     });

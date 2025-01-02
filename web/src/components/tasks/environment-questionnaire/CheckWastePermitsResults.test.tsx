@@ -12,7 +12,7 @@ const Config = getMergedConfig();
 
 describe("<CheckWastePermitsResults />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   const task = generateTask({ id: "waste-permitting-test" });

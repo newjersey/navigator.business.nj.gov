@@ -35,17 +35,17 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postTaxFilingsOnboarding: jest.fn(),
-  postTaxFilingsLookup: jest.fn(),
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({
+  postTaxFilingsOnboarding: vi.fn(),
+  postTaxFilingsLookup: vi.fn(),
 }));
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-const mockApi = api as jest.Mocked<typeof api>;
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+const mockApi = api as vi.Mocked<typeof api>;
 
 const Config = getMergedConfig();
-let setShowNeedsAccountModal: jest.Mock;
+let setShowNeedsAccountModal: vi.Mock;
 
 const renderFilingsCalendarTaxAccess = (initialUserData?: UserData): void => {
   render(
@@ -88,8 +88,8 @@ const mockApiResponse = (userData: UserData, overrides: Partial<Business>): void
 
 describe("<FilingsCalendarTaxAccess />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
-    setShowNeedsAccountModal = jest.fn();
+    vi.resetAllMocks();
+    setShowNeedsAccountModal = vi.fn();
     setupStatefulUserDataContext();
     useMockRouter({});
   });

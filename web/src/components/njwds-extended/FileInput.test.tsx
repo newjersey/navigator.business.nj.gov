@@ -11,7 +11,7 @@ describe("<FileInput />", () => {
   });
 
   it("passes file to onchange handler", async () => {
-    const mockOnChange = jest.fn();
+    const mockOnChange = vi.fn();
     render(
       <FileInput
         errorMessageRequired="error-message-required"
@@ -38,7 +38,7 @@ describe("<FileInput />", () => {
   });
 
   it("refuses files larger than the provided max file size", async () => {
-    const mockOnChange = jest.fn();
+    const mockOnChange = vi.fn();
     const errorMessageFileSize = Config.formation.fields.foreignGoodStandingFile.errorMessageFileSize;
 
     const halfMegabyteFile = new File(["x".repeat(1048576 / 2)], "cool.png", { type: "image/png" });
@@ -64,7 +64,7 @@ describe("<FileInput />", () => {
   });
 
   it("refuses files of the wrong type", async () => {
-    const mockOnChange = jest.fn();
+    const mockOnChange = vi.fn();
     render(
       <FileInput
         acceptedFileTypes={{

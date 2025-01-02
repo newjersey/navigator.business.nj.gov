@@ -7,7 +7,7 @@ import { statefulDataHelpers } from "@/test/mock/withStatefulData";
 import { ProfileData } from "@businessnjgovnavigator/shared/";
 import { ReactElement, ReactNode, useEffect, useState } from "react";
 
-const updateSpy = jest.fn();
+const updateSpy = vi.fn();
 
 export const helpers = statefulDataHelpers(updateSpy);
 
@@ -47,7 +47,7 @@ export const WithStatefulProfileData = ({
             flow: getFlow(genericData),
             profileData: genericData,
           },
-          onBack: jest.fn(),
+          onBack: vi.fn(),
           setProfileData: setGenericData,
         }}
       >

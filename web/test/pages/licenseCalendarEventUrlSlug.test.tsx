@@ -13,13 +13,13 @@ import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
 
 const currentDate = getCurrentDate();
 
 describe("license page", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   const renderLicensePage = (license: LicenseEventType, licenseEventType: LicenseEventSubtype): void => {

@@ -5,15 +5,15 @@ import { withAuth } from "@/test/helpers/helpers-renderers";
 import { render, screen, waitFor } from "@testing-library/react";
 import axios from "axios";
 
-jest.mock("axios");
-const mockAxios = axios as jest.Mocked<typeof axios>;
+vi.mock("axios");
+const mockAxios = axios as vi.Mocked<typeof axios>;
 
 describe("<OutageAlertBar />", () => {
   let originalUrlValue: string | undefined;
   const url = "www.example.com";
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     originalUrlValue = process.env.OUTAGE_ALERT_CONFIG_URL;
     process.env.OUTAGE_ALERT_CONFIG_URL = url;
   });

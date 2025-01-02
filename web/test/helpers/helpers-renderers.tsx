@@ -18,7 +18,7 @@ export const withAuth = (
 ): ReactElement => {
   const isAuthenticated =
     context.isAuthenticated || (context.activeUser ? IsAuthenticated.TRUE : IsAuthenticated.FALSE);
-  const dispatch = context.dispatch || jest.fn();
+  const dispatch = context.dispatch || vi.fn();
   const state: AuthState = { isAuthenticated, activeUser: context.activeUser };
   return <AuthContext.Provider value={{ state, dispatch }}>{subject}</AuthContext.Provider>;
 };
@@ -54,9 +54,9 @@ export const withNeedsAccountContext = (
         showNeedsAccountSnackbar: context?.showNeedsAccountSnackbar ?? false,
         showNeedsAccountModal: context?.showNeedsAccountModal ?? false,
         registrationStatus: context?.registrationStatus ?? undefined,
-        setRegistrationStatus: context?.setRegistrationStatus || jest.fn(),
-        setShowNeedsAccountSnackbar: context?.setShowNeedsAccountSnackbar || jest.fn(),
-        setShowNeedsAccountModal: context?.setShowNeedsAccountModal || jest.fn(),
+        setRegistrationStatus: context?.setRegistrationStatus || vi.fn(),
+        setShowNeedsAccountSnackbar: context?.setShowNeedsAccountSnackbar || vi.fn(),
+        setShowNeedsAccountModal: context?.setShowNeedsAccountModal || vi.fn(),
       }}
     >
       {subject}
@@ -70,7 +70,7 @@ export const withUserDataError = (
   setUserDataError?: (userDataError: UserDataError | undefined) => void
 ): ReactElement => {
   return (
-    <UserDataErrorContext.Provider value={{ userDataError, setUserDataError: setUserDataError || jest.fn() }}>
+    <UserDataErrorContext.Provider value={{ userDataError, setUserDataError: setUserDataError || vi.fn() }}>
       {subject}
     </UserDataErrorContext.Provider>
   );
@@ -85,7 +85,7 @@ export const withRoadmap = (params: {
     <RoadmapContext.Provider
       value={{
         roadmap: params.initialRoadmap,
-        setRoadmap: params.mockSetRoadmapFunction || jest.fn(),
+        setRoadmap: params.mockSetRoadmapFunction || vi.fn(),
       }}
     >
       {params.component}

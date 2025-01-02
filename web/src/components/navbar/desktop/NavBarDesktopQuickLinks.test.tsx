@@ -5,10 +5,10 @@ import { fireEvent, render, screen } from "@testing-library/react";
 describe("<NavBarDesktopQuickLinks />", () => {
   const Config = getMergedConfig();
 
-  window.open = jest.fn();
+  window.open = vi.fn();
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("renders the quick links as expected", () => {

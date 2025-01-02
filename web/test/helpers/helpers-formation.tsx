@@ -36,6 +36,7 @@ import {
   PublicFilingLegalType,
   publicFilingLegalTypes,
   randomInt,
+  UserData,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
@@ -136,7 +137,7 @@ export const preparePage = ({
       isAuthenticated ?? IsAuthenticated.TRUE,
       {
         showNeedsAccountModal: false,
-        setShowNeedsAccountModal: setShowNeedsAccountModal ?? jest.fn(),
+        setShowNeedsAccountModal: setShowNeedsAccountModal ?? vi.fn(),
       }
     )
   );
@@ -144,8 +145,8 @@ export const preparePage = ({
 };
 
 export const mockApiResponse = (response?: FormationSubmitResponse): void => {
-  const mockApi = api as jest.Mocked<typeof api>;
-  mockApi.postBusinessFormation.mockImplementation((userData) => {
+  const mockApi = api as vi.Mocked<typeof api>;
+  mockApi.postBusinessFormation.mockImplementation((userData: UserData) => {
     return Promise.resolve({
       ...userData,
       businesses: {
@@ -163,7 +164,7 @@ export const mockApiResponse = (response?: FormationSubmitResponse): void => {
 };
 
 export const setDesktopScreen = (value: boolean): void => {
-  (useMediaQuery as jest.Mock).mockImplementation(() => {
+  (useMediaQuery as vi.Mock).mockImplementation(() => {
     return value;
   });
 };
@@ -217,7 +218,7 @@ export type FormationPageHelpers = {
 };
 
 export const createFormationPageHelpers = (): FormationPageHelpers => {
-  const mockApi = api as jest.Mocked<typeof api>;
+  const mockApi = api as vi.Mocked<typeof api>;
 
   const fillText = (label: string, value: string): void => {
     const item = screen.getByLabelText(label);

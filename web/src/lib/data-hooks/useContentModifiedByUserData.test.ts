@@ -1,11 +1,11 @@
 import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
 import { useMockProfileData } from "@/test/mock/mockUseUserData";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
 
 describe("useContentModifiedByUserData", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   describe("${oos} keyword", () => {

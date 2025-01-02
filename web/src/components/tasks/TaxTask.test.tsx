@@ -13,10 +13,10 @@ import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulProfileFormContext } from "@/test/mock/withStatefulProfileData";
 import {
-  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
@@ -26,12 +26,12 @@ import {
   generateUserDataForBusiness,
   randomInt,
 } from "@businessnjgovnavigator/shared";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { ReactElement, ReactNode } from "react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
 
 const Config = getMergedConfig();
 
@@ -56,7 +56,7 @@ describe("<TaxTask />", () => {
   const ctaText = "some-CTA-Text";
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRoadmap({});
     setupStatefulUserDataContext();
     task = generateTask({ contentMd: content, id: taskId, callToActionText: ctaText });
@@ -211,7 +211,7 @@ describe("<TaxTask />", () => {
 
   describe("guest mode", () => {
     let initialBusiness: Business;
-    const setShowNeedsAccountModal = jest.fn();
+    const setShowNeedsAccountModal = vi.fn();
 
     const renderPage = (): void => {
       render(

@@ -5,16 +5,16 @@ import { generateActiveUser } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { render, waitFor } from "@testing-library/react";
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/auth/sessionHelper", () => ({
-  getActiveUser: jest.fn(),
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/auth/sessionHelper", () => ({
+  getActiveUser: vi.fn(),
 }));
 
-const mockSession = session as jest.Mocked<typeof session>;
+const mockSession = session as vi.Mocked<typeof session>;
 
 describe("login page", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
   });
 

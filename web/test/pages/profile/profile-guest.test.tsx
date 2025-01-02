@@ -24,18 +24,18 @@ import {
 import { generateOwningProfileData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/data-hooks/useDocuments");
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
 
 describe("profile - guest mode", () => {
-  let setShowNeedsAccountModal: jest.Mock;
+  let setShowNeedsAccountModal: vi.Mock;
 
   beforeEach(() => {
-    jest.resetAllMocks();
-    setShowNeedsAccountModal = jest.fn();
+    vi.resetAllMocks();
+    setShowNeedsAccountModal = vi.fn();
     useMockRouter({});
     useMockRoadmap({});
     setupStatefulUserDataContext();

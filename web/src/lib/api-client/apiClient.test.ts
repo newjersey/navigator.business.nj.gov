@@ -18,16 +18,16 @@ import {
   postUserEmailCheck,
 } from "./apiClient";
 
-jest.mock("axios");
-const mockAxios = axios as jest.Mocked<typeof axios>;
+vi.mock("axios");
+const mockAxios = vi.mocked(axios, true);
 
-jest.mock("@/lib/auth/sessionHelper", () => ({
+vi.mock("@/lib/auth/sessionHelper", () => ({
   getCurrentToken: (): string => "some-token",
 }));
 
 describe("apiClient", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("calls to the api to get user data", async () => {

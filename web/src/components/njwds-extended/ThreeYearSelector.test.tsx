@@ -6,20 +6,20 @@ import { Dayjs } from "dayjs";
 
 function mockShared(): typeof shared {
   return {
-    ...jest.requireActual("@businessnjgovnavigator/shared"),
+    ...vi.requireActual("@businessnjgovnavigator/shared"),
     getCurrentDate: (): Dayjs => {
       return parseDateWithFormat(`2024-02-15`, "YYYY-MM-DD");
     },
   };
 }
 
-jest.mock("@businessnjgovnavigator/shared", () => mockShared());
+vi.mock("@businessnjgovnavigator/shared", () => mockShared());
 
-const onChange = jest.fn();
+const onChange = vi.fn();
 
 describe("<ThreeYearSelector />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("changes the year when dropdown pill is pressed", () => {

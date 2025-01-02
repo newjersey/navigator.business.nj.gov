@@ -2,9 +2,9 @@ import * as useRoadmapModule from "@/lib/data-hooks/useRoadmap";
 import { CurrentAndNextSection } from "@/lib/data-hooks/useRoadmap";
 import { Roadmap, Task } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
-import { SectionType, sectionNames } from "@businessnjgovnavigator/shared/userData";
+import { sectionNames, SectionType } from "@businessnjgovnavigator/shared/userData";
 
-const mockUseRoadmap = (useRoadmapModule as jest.Mocked<typeof useRoadmapModule>).useRoadmap;
+const mockUseRoadmap = (useRoadmapModule as vi.Mocked<typeof useRoadmapModule>).useRoadmap;
 
 export const useMockRoadmap = (overrides: Partial<Roadmap>): void => {
   const roadmap = generateRoadmap(overrides);
@@ -19,7 +19,7 @@ export const setMockRoadmapResponse = (params: {
   mockUseRoadmap.mockReturnValue({
     roadmap: params.roadmap,
     sectionNamesInRoadmap: [...sectionNames],
-    isSectionCompleted: params.isSectionCompletedFn ?? jest.fn(),
+    isSectionCompleted: params.isSectionCompletedFn ?? vi.fn(),
     currentAndNextSection:
       params.currentAndNextSection ?? ((): CurrentAndNextSection => ({ current: "PLAN", next: "START" })),
   });

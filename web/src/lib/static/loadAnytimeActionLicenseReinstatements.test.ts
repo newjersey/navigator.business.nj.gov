@@ -6,18 +6,18 @@ import {
 import { mockReadDirReturn } from "@/lib/static/mockHelpers";
 import fs from "fs";
 
-jest.mock("fs");
+vi.mock("fs");
 
-jest.mock("process", () => ({
+vi.mock("process", () => ({
   cwd: (): string => "/test",
 }));
 
 describe("loadAnytimeActionLicenseReinstatements", () => {
-  let mockedFs: jest.Mocked<typeof fs>;
+  let mockedFs: vi.Mocked<typeof fs>;
 
   beforeEach(() => {
-    jest.resetAllMocks();
-    mockedFs = fs as jest.Mocked<typeof fs>;
+    vi.resetAllMocks();
+    mockedFs = fs as vi.Mocked<typeof fs>;
   });
 
   describe("loadAllAnytimeActionLicenseReinstatements", () => {

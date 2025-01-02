@@ -7,30 +7,30 @@ import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generatePreferences } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
 
 const Config = getMergedConfig();
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockAnalytics = analytics as vi.Mocked<typeof analytics>;
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       for_you_card_hide_button: {
         click: {
-          hide_card: jest.fn(),
+          hide_card: vi.fn(),
         },
       },
       for_you_card_unhide_button: {
         click: {
-          unhide_card: jest.fn(),
+          unhide_card: vi.fn(),
         },
       },
       opportunity_card: {
         click: {
-          go_to_opportunity_screen: jest.fn(),
+          go_to_opportunity_screen: vi.fn(),
         },
       },
     },
@@ -39,7 +39,7 @@ function setupMockAnalytics(): typeof analytics {
 
 describe("OpportunityCard", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockBusiness({});
     useMockRouter({});
   });

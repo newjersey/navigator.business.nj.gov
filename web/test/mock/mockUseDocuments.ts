@@ -1,7 +1,7 @@
 import * as useDocumentsModule from "@/lib/data-hooks/useDocuments";
 import { generateProfileData, ProfileDocuments } from "@businessnjgovnavigator/shared/";
 
-const mockUseDocuments = (useDocumentsModule as jest.Mocked<typeof useDocumentsModule>).useDocuments;
+const mockUseDocuments = (useDocumentsModule as vi.Mocked<typeof useDocumentsModule>).useDocuments;
 
 export const useMockDocuments = (overrides: Partial<ProfileDocuments>): void => {
   const profileData = generateProfileData({});

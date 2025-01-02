@@ -7,15 +7,15 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-jest.mock("@/lib/api-client/apiClient", () => ({ postUserEmailCheck: jest.fn() }));
-jest.mock("@/lib/auth/sessionHelper", () => ({
-  triggerSignIn: jest.fn(),
+vi.mock("@/lib/api-client/apiClient", () => ({ postUserEmailCheck: vi.fn() }));
+vi.mock("@/lib/auth/sessionHelper", () => ({
+  triggerSignIn: vi.fn(),
 }));
-const mockApi = api as jest.Mocked<typeof api>;
+const mockApi = api as vi.Mocked<typeof api>;
 
 describe("<LoginEmailCheck />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("calls triggerSignIn when a matching user is found", async () => {

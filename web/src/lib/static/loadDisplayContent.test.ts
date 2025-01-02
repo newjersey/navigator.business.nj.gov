@@ -2,17 +2,17 @@ import { mockReadDirReturn } from "@/lib/static/mockHelpers";
 import fs from "fs";
 import { loadRoadmapSideBarDisplayContent, loadTasksDisplayContent } from "./loadDisplayContent";
 
-jest.mock("fs");
-jest.mock("process", () => ({
+vi.mock("fs");
+vi.mock("process", () => ({
   cwd: (): string => "/test",
 }));
 
 describe("loadDisplayContent", () => {
-  let mockedFs: jest.Mocked<typeof fs>;
+  let mockedFs: vi.Mocked<typeof fs>;
 
   beforeEach(() => {
-    jest.resetAllMocks();
-    mockedFs = fs as jest.Mocked<typeof fs>;
+    vi.resetAllMocks();
+    mockedFs = fs as vi.Mocked<typeof fs>;
   });
 
   describe("loadRoadmapSideBarDisplayContent", () => {

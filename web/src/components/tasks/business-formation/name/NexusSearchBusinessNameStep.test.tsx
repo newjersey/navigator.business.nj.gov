@@ -23,44 +23,44 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
-    ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    ...vi.requireActual("@mui/material"),
+    useMediaQuery: vi.fn(),
   };
 }
 
 const Config = getMergedConfig();
 
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postBusinessFormation: jest.fn(),
-  getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn(),
+vi.mock("@mui/material", () => mockMaterialUI());
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/data-hooks/useDocuments");
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({
+  postBusinessFormation: vi.fn(),
+  getCompletedFiling: vi.fn(),
+  searchBusinessName: vi.fn(),
 }));
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       business_formation_search_existing_name_again: {
         click: {
-          refresh_name_search_field: jest.fn(),
+          refresh_name_search_field: vi.fn(),
         },
       },
       business_formation_dba_name_search_field: {
         appears: {
-          dba_name_search_field_appears: jest.fn(),
+          dba_name_search_field_appears: vi.fn(),
         },
       },
     },
   };
 }
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockAnalytics = analytics as vi.Mocked<typeof analytics>;
 
 describe("Formation - NexusSearchBusinessNameStep", () => {
   const displayContent = {
@@ -68,7 +68,7 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
   };
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useSetupInitialMocks();
   });
 

@@ -10,16 +10,12 @@ import { generateTask, generateTaskLink } from "@/test/factories";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
-import {
-  WithStatefulUserData,
-  currentBusiness,
-  setupStatefulUserDataContext,
-} from "@/test/mock/withStatefulUserData";
+import { currentBusiness, setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { generateUserData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
 
 const Config = getMergedConfig();
 const C = Config.cannabisPriorityStatus;
@@ -44,7 +40,7 @@ describe("<CannabisPriorityStatusTask />", () => {
   ];
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     setupStatefulUserDataContext();
   });
 

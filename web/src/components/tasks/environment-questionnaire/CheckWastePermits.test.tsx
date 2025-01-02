@@ -15,7 +15,7 @@ const Config = getMergedConfig();
 
 describe("<CheckWastePermits />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   const task = generateTask({});

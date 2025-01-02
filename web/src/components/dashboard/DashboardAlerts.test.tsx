@@ -10,19 +10,19 @@ import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnav
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { act, render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
 
 const Config = getMergedConfig();
 
 describe("<DashboardAlerts />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockBusiness({ onboardingFormProgress: "COMPLETED" });
     useMockRoadmap({});
     useMockRouter({});
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   const renderStatefulPage = (business?: Business): void => {
@@ -59,7 +59,7 @@ describe("<DashboardAlerts />", () => {
   it("renders task status updated snackbar when fromFormBusinessEntity query parameter is provided", () => {
     useMockRouter({ isReady: true, query: { [QUERIES.fromFormBusinessEntity]: "true" } });
     renderStatefulPage();
-    act(() => jest.runAllTimers());
+    act(() => vi.runAllTimers());
     expect(screen.getByTestId("checkbox-status-updated-snackbar-alert")).toBeInTheDocument();
   });
 
@@ -72,7 +72,7 @@ describe("<DashboardAlerts />", () => {
   it("renders deadlines and opportunities snackbar when fromForming query parameter is provided", () => {
     useMockRouter({ isReady: true, query: { [QUERIES.fromForming]: "true" } });
     renderStatefulPage();
-    act(() => jest.runAllTimers());
+    act(() => vi.runAllTimers());
     expect(screen.getByTestId("deadlines-opportunities-alert")).toBeInTheDocument();
   });
 

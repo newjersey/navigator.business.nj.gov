@@ -27,15 +27,15 @@ import { renderToStaticMarkup } from "react-dom/server";
 
 const Config = getMergedConfig();
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
 
 describe("<BusinessStructureTask />", () => {
   const content = "some content here\n\n" + "${businessStructureSelectionComponent}\n\n" + "more content";
   const taskId = "12345";
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRoadmap({});
     setupStatefulUserDataContext();
   });

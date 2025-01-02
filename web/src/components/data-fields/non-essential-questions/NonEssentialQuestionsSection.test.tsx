@@ -6,9 +6,9 @@ import { ProfileData } from "@businessnjgovnavigator/shared";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
 
-jest.mock("../../../../../shared/lib/content/lib/industry.json", () => ({
+vi.mock("../../../../../shared/lib/content/lib/industry.json", () => ({
   industries: [
-    ...jest.requireActual("../../../../../shared/lib/content/lib/industry.json").industries,
+    ...vi.requireActual("../../../../../shared/lib/content/lib/industry.json").industries,
     {
       id: "test-industry-with-non-essential-questions",
       name: "test-industry-with-non-essential-questions",
@@ -34,12 +34,12 @@ jest.mock("../../../../../shared/lib/content/lib/industry.json", () => ({
   ],
 }));
 
-jest.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
-  getNonEssentialQuestionText: jest.fn(),
+vi.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
+  getNonEssentialQuestionText: vi.fn(),
 }));
 
 const mockGetNonEssentialQuestionText = (
-  GetNonEssentialQuestionTextModule as jest.Mocked<typeof GetNonEssentialQuestionTextModule>
+  GetNonEssentialQuestionTextModule as vi.Mocked<typeof GetNonEssentialQuestionTextModule>
 ).getNonEssentialQuestionText;
 
 describe("ProfileNonEssentialQuestionsSection", () => {

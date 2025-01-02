@@ -31,13 +31,13 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postTaxFilingsOnboarding: jest.fn(),
-  postTaxFilingsLookup: jest.fn(),
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({
+  postTaxFilingsOnboarding: vi.fn(),
+  postTaxFilingsLookup: vi.fn(),
 }));
-const mockApi = api as jest.Mocked<typeof api>;
+const mockApi = api as vi.Mocked<typeof api>;
 
 const Config = getMergedConfig();
 
@@ -69,7 +69,7 @@ const mockApiResponse = (userData: UserData, overrides: Partial<Business>): void
 
 describe("<TaxAccessStepTwo />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockBusiness({ onboardingFormProgress: "COMPLETED" });
     setupStatefulUserDataContext();
   });

@@ -1,19 +1,19 @@
 import analytics from "./analytics";
 import analyticsBase from "./analytics-base";
 
-jest.mock("@/lib/utils/analytics-base", () => ({
-  sendEvent: jest.fn(),
-  userUpdate: jest.fn(),
+vi.mock("@/lib/utils/analytics-base", () => ({
+  sendEvent: vi.fn(),
+  userUpdate: vi.fn(),
   context: { calendar_view: undefined },
 }));
 
-const mockAnalyticsBase = analyticsBase as jest.Mocked<typeof analyticsBase>;
+const mockAnalyticsBase = analyticsBase as vi.Mocked<typeof analyticsBase>;
 
 describe("analytics", () => {
   const originalWindowLocation = window.location;
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     Object.defineProperty(window, "location", {
       configurable: true,
       enumerable: true,

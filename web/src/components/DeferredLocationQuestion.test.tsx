@@ -22,31 +22,31 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       task_location_question: {
         submit: {
-          location_entered_for_first_time: jest.fn(),
+          location_entered_for_first_time: vi.fn(),
         },
       },
     },
   };
 }
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+const mockAnalytics = analytics as vi.Mocked<typeof analytics>;
 const Config = getMergedConfig();
 
 describe("<DeferredLocationQuestion />", () => {
-  let setRoadmap: jest.Mock;
+  let setRoadmap: vi.Mock;
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     setupStatefulUserDataContext();
-    setRoadmap = jest.fn();
+    setRoadmap = vi.fn();
   });
 
   const renderComponent = ({

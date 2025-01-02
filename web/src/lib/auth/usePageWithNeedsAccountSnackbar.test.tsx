@@ -4,15 +4,15 @@ import { withAuth, withNeedsAccountContext } from "@/test/helpers/helpers-render
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { render } from "@testing-library/react";
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
 
 describe("usePageWithNeedsAccountSnackbar", () => {
-  let setShowNeedsAccountSnackbar: jest.Mock;
+  let setShowNeedsAccountSnackbar: vi.Mock;
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({ isReady: true, asPath: "", query: { fromOnboarding: "true" } });
-    setShowNeedsAccountSnackbar = jest.fn();
+    setShowNeedsAccountSnackbar = vi.fn();
   });
 
   const setupHookWithAuth = ({

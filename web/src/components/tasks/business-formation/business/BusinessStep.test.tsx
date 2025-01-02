@@ -27,30 +27,28 @@ import {
   randomPublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
 import { corpLegalStructures, publicFilingLegalTypes } from "@businessnjgovnavigator/shared/formationData";
-import * as materialUi from "@mui/material";
-import { fireEvent, screen, within } from "@testing-library/react";
+import { fireEvent, prettyDOM, screen, within } from "@testing-library/react";
 
 import userEvent from "@testing-library/user-event";
 
-function mockMaterialUI(): typeof materialUi {
+vi.mock("@mui/material", async () => {
+  const actual = await vi.importActual<typeof import("@mui/material")>("@mui/material");
   return {
-    ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    ...actual,
+    useMediaQuery: vi.fn(),
   };
-}
+});
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/data-hooks/useDocuments");
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({
+  postBusinessFormation: vi.fn(),
+  getCompletedFiling: vi.fn(),
+  searchBusinessName: vi.fn(),
+}));
 
 const Config = getMergedConfig();
-
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postBusinessFormation: jest.fn(),
-  getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn(),
-}));
 
 describe("Formation - BusinessStep", () => {
   const displayContent = {
@@ -58,7 +56,7 @@ describe("Formation - BusinessStep", () => {
   };
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useSetupInitialMocks();
   });
 
@@ -86,11 +84,13 @@ describe("Formation - BusinessStep", () => {
       business: generateBusiness({ profileData, formationData }),
       displayContent,
     });
+
     if (isForeign) {
       await page.submitNexusBusinessNameStep();
     } else {
       await page.stepperClickToBusinessStep();
     }
+
     return page;
   };
 
@@ -297,13 +297,20 @@ describe("Formation - BusinessStep", () => {
     });
 
     it("shows provisions when forming as a foreign business and the legalStructureId is foreign-limited-partnership", async () => {
-      await getPageHelper(
+      const page = await getPageHelper(
         {
           businessPersona: "FOREIGN",
+          // foreignBusinessTypeIds: ["officeInNJ"],
           legalStructureId: randomPublicFilingLegalType((value) => value === "limited-partnership"),
         },
         { additionalProvisions: [] }
       );
+      screen.debug();
+
+      // Debug: Log the page and DOM
+      console.log(page);
+      console.log(prettyDOM(document.body));
+
       expect(screen.getByText(Config.formation.fields.additionalProvisions.label)).toBeInTheDocument();
       expect(
         screen.getByText(Config.formation.fields.additionalProvisions.addButtonText)

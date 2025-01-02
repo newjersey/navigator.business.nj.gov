@@ -6,13 +6,13 @@ import { render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-jest.mock("@/lib/data-hooks/useTaskFromRoadmap", () => ({ useTaskFromRoadmap: jest.fn() }));
+vi.mock("@/lib/data-hooks/useTaskFromRoadmap", () => ({ useTaskFromRoadmap: vi.fn() }));
 
-const fakeTaskFromRoadmap = useTaskFromRoadmap as jest.Mock;
+const fakeTaskFromRoadmap = useTaskFromRoadmap as vi.Mock;
 
 describe("<UnlockedBy />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("renders <UnlockingAlert />", () => {

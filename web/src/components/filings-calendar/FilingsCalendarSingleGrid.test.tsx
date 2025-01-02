@@ -24,12 +24,12 @@ const month: number = Number.parseInt(currentDate.month().toString());
 
 function mockShared(): typeof shared {
   return {
-    ...jest.requireActual("@businessnjgovnavigator/shared"),
+    ...vi.requireActual("@businessnjgovnavigator/shared"),
     getCurrentDate: (): Dayjs => currentDate,
   };
 }
 
-jest.mock("@businessnjgovnavigator/shared", () => mockShared());
+vi.mock("@businessnjgovnavigator/shared", () => mockShared());
 
 const taxFilingOne = generateTaxFilingCalendarEvent({
   identifier: "tax-filing-one",

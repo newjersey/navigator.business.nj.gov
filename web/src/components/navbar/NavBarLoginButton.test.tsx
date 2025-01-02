@@ -4,7 +4,7 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
 
 describe("NavBarLoginButton", () => {
   beforeEach(() => {

@@ -11,15 +11,15 @@ const submitSectorModal = (): void => {
 
 const Config = getMergedConfig();
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
 
 describe("<SectorModal />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockBusiness({});
   });
 
-  const renderSectorModal = (onContinue?: jest.Mock): { page: PageHelpers } => {
+  const renderSectorModal = (onContinue?: vi.Mock): { page: PageHelpers } => {
     render(
       <SectorModal open={true} handleClose={(): void => {}} onContinue={onContinue ?? ((): void => {})} />
     );
@@ -56,7 +56,7 @@ describe("<SectorModal />", () => {
     });
 
     useMockBusiness(business);
-    const onContinue = jest.fn();
+    const onContinue = vi.fn();
     renderSectorModal(onContinue);
     submitSectorModal();
     expect(onContinue).not.toHaveBeenCalled();
@@ -74,7 +74,7 @@ describe("<SectorModal />", () => {
     });
 
     useMockBusiness(business);
-    const onContinue = jest.fn();
+    const onContinue = vi.fn();
     const { page } = renderSectorModal(onContinue);
     page.selectByValue("Sector", "clean-energy");
     submitSectorModal();

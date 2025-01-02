@@ -7,14 +7,14 @@ import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
 
 describe("<BusinessStructurePrompt />", () => {
   const Config = getMergedConfig();
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
     useMockRoadmap({
       tasks: [generateTask({ id: businessStructureTaskId, urlSlug: "business-structure-url-slug" })],

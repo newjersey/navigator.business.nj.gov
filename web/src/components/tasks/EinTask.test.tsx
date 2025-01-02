@@ -20,8 +20,8 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
 
 const Config = getMergedConfig();
 
@@ -31,7 +31,7 @@ describe("<EinTask />", () => {
   const taskId = "12345";
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRoadmap({});
     setupStatefulUserDataContext();
     task = generateTask({ contentMd: content, id: taskId });
@@ -176,7 +176,7 @@ describe("<EinTask />", () => {
 
   describe("guest mode", () => {
     let initialBusiness: Business;
-    const setShowNeedsAccountModal = jest.fn();
+    const setShowNeedsAccountModal = vi.fn();
 
     const renderPage = (): void => {
       render(

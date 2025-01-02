@@ -4,16 +4,16 @@ import { useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData
 import { ProfileDocuments } from "@businessnjgovnavigator/shared/";
 import { act, render, waitFor } from "@testing-library/react";
 
-const mockGetSignedS3Link = (sessionHelper as jest.Mocked<typeof sessionHelper>).getSignedS3Link;
+const mockGetSignedS3Link = (sessionHelper as vi.Mocked<typeof sessionHelper>).getSignedS3Link;
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/auth/sessionHelper", () => ({
-  getSignedS3Link: jest.fn((url) => `${url}`),
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/auth/sessionHelper", () => ({
+  getSignedS3Link: vi.fn((url) => `${url}`),
 }));
 
 describe("useDocuments", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockBusiness({});
   });
 
@@ -60,7 +60,7 @@ describe("useDocuments", () => {
   });
 
   it("regenerates documents every 15 minutes", async () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     useMockProfileData({
       documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
     });
@@ -71,13 +71,13 @@ describe("useDocuments", () => {
       return expect(mockGetSignedS3Link).toHaveBeenCalledTimes(3);
     });
     act(() => {
-      jest.advanceTimersByTime(900000);
+      vi.advanceTimersByTime(900000);
     });
     await waitFor(() => {
       return expect(mockGetSignedS3Link).toHaveBeenCalledTimes(6);
     });
     act(() => {
-      jest.advanceTimersByTime(900000);
+      vi.advanceTimersByTime(900000);
     });
     await waitFor(() => {
       return expect(mockGetSignedS3Link).toHaveBeenCalledTimes(9);
@@ -85,7 +85,7 @@ describe("useDocuments", () => {
   });
 
   it("does not regenerate documents before 15 minutes", async () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     useMockProfileData({
       documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
     });
@@ -96,7 +96,7 @@ describe("useDocuments", () => {
       return expect(mockGetSignedS3Link).toHaveBeenCalledTimes(3);
     });
     act(() => {
-      jest.advanceTimersByTime(840000);
+      vi.advanceTimersByTime(840000);
     });
     await waitFor(() => {
       return expect(mockGetSignedS3Link).toHaveBeenCalledTimes(3);

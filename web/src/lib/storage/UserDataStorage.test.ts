@@ -4,12 +4,12 @@ import { generateUserData } from "@businessnjgovnavigator/shared";
 describe("userDataStorage", () => {
   const storage = UserDataStorageFactory();
   const user = generateUserData({});
-  let setItemSpy: jest.SpyInstance, getItemSpy: jest.SpyInstance;
+  let setItemSpy: vi.SpyInstance, getItemSpy: vi.SpyInstance;
 
   beforeEach(() => {
-    jest.restoreAllMocks();
-    getItemSpy = jest.spyOn(global.Storage.prototype, "getItem");
-    setItemSpy = jest.spyOn(global.Storage.prototype, "setItem");
+    vi.restoreAllMocks();
+    getItemSpy = vi.spyOn(global.Storage.prototype, "getItem");
+    setItemSpy = vi.spyOn(global.Storage.prototype, "setItem");
     storage.clear();
   });
 

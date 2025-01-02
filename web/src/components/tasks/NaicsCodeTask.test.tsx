@@ -8,29 +8,29 @@ import { generateTask } from "@/test/factories";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
-  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
   BusinessPersona,
-  LookupIndustryById,
-  OperatingPhaseId,
-  TaxFilingState,
   generateBusiness,
   generateProfileData,
   generateUserDataForBusiness,
+  LookupIndustryById,
+  OperatingPhaseId,
+  TaxFilingState,
 } from "@businessnjgovnavigator/shared";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+vi.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: vi.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
 
-jest.mock("@/lib/static/records/naics2022.json", () => {
+vi.mock("@/lib/static/records/naics2022.json", () => {
   const industryId = "auto-body-repair";
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { generateNaicsObject } = require("@/test/factories");
@@ -52,7 +52,7 @@ describe("<NaicsCodeTask />", () => {
   const taskId = "12345";
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRoadmap({});
     setupStatefulUserDataContext();
     task = generateTask({ contentMd: content, id: taskId });
@@ -390,7 +390,7 @@ describe("<NaicsCodeTask />", () => {
 
   describe("guest mode", () => {
     let initialBusiness: Business;
-    let setShowNeedsAccountModal: jest.Mock;
+    let setShowNeedsAccountModal: vi.Mock;
 
     const renderPage = (): void => {
       render(
@@ -405,7 +405,7 @@ describe("<NaicsCodeTask />", () => {
     };
 
     beforeEach(() => {
-      setShowNeedsAccountModal = jest.fn();
+      setShowNeedsAccountModal = vi.fn();
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ naicsCode: "", industryId: "" }),
         taskProgress: { [taskId]: "NOT_STARTED" },

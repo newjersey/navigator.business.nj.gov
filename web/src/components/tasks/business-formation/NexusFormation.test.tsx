@@ -14,7 +14,7 @@ import {
   generateFormationProfileData,
   mockApiResponse,
   preparePage,
-  useSetupInitialMocks,
+  useSetupInitialMocks
 } from "@/test/helpers/helpers-formation";
 import { fillText, searchAndGetValue } from "@/test/helpers/helpersSearchBusinessName";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
@@ -25,7 +25,7 @@ import {
   generateFormationData,
   generateFormationFormData,
   generateFormationSubmitResponse,
-  getCurrentDate,
+  getCurrentDate
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
@@ -34,54 +34,54 @@ const Config = getMergedConfig();
 
 function mockMaterialUI(): typeof materialUi {
   return {
-    ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    ...vi.requireActual("@mui/material"),
+    useMediaQuery: vi.fn(),
   };
 }
 
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       business_formation_dba_resolution_tab: {
         click: {
-          arrive_on_business_formation_dba_resolution_step: jest.fn(),
+          arrive_on_business_formation_dba_resolution_step: vi.fn(),
         },
       },
       business_formation_dba_authorization_tab: {
         click: {
-          arrive_on_business_formation_dba_authorization_step: jest.fn(),
+          arrive_on_business_formation_dba_authorization_step: vi.fn(),
         },
       },
       business_formation_dba_resolution_step_continue_button: {
         click: {
-          arrive_on_business_formation_dba_resolution_step: jest.fn(),
+          arrive_on_business_formation_dba_resolution_step: vi.fn(),
         },
       },
       business_formation_dba_authorization_step_continue_button: {
         click: {
-          arrive_on_business_formation_dba_authorization_step: jest.fn(),
+          arrive_on_business_formation_dba_authorization_step: vi.fn(),
         },
       },
     },
   };
 }
 
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postBusinessFormation: jest.fn(),
-  getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn(),
+vi.mock("@mui/material", () => mockMaterialUI());
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/data-hooks/useDocuments");
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("@/lib/api-client/apiClient", () => ({
+  postBusinessFormation: vi.fn(),
+  getCompletedFiling: vi.fn(),
+  searchBusinessName: vi.fn(),
 }));
 
-const mockApi = api as jest.Mocked<typeof api>;
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockApi = api as vi.Mocked<typeof api>;
+const mockAnalytics = analytics as vi.Mocked<typeof analytics>;
 
 const clickBack = (): void => {
   fireEvent.click(screen.getByText(Config.formation.general.previousButtonText));
@@ -95,7 +95,7 @@ describe("<NexusFormationFlow />", () => {
   let displayContent: TasksDisplayContent;
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useSetupInitialMocks();
 
     const legalStructureId = "limited-liability-company";
@@ -333,7 +333,7 @@ describe("<NexusFormationFlow />", () => {
         };
 
         beforeEach(() => {
-          jest.resetAllMocks();
+          vi.resetAllMocks();
           useSetupInitialMocks();
         });
 
@@ -462,10 +462,10 @@ describe("<NexusFormationFlow />", () => {
 
       describe("when in guest mode", () => {
         const guestModeNextButtonText = `Register & ${Config.formation.general.initialNextButtonText}`;
-        let setShowNeedsAccountModal: jest.Mock;
+        let setShowNeedsAccountModal: vi.Mock;
 
         beforeEach(() => {
-          setShowNeedsAccountModal = jest.fn();
+          setShowNeedsAccountModal = vi.fn();
           page = preparePage({
             business: initialBusiness,
             displayContent,

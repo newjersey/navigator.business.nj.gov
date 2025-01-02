@@ -7,24 +7,24 @@ import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  decryptTaxId: jest.fn(),
+vi.mock("@mui/material", () => mockMaterialUI());
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({
+  decryptTaxId: vi.fn(),
 }));
-const mockApi = api as jest.Mocked<typeof api>;
+const mockApi = api as vi.Mocked<typeof api>;
 
 const Config = getMergedConfig();
 
 function mockMaterialUI(): typeof materialUi {
   return {
-    ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    ...vi.requireActual("@mui/material"),
+    useMediaQuery: vi.fn(),
   };
 }
 
 const setLargeScreen = (value: boolean): void => {
-  (useMediaQuery as jest.Mock).mockImplementation(() => {
+  (useMediaQuery as vi.Mock).mockImplementation(() => {
     return value;
   });
 };
@@ -43,7 +43,7 @@ describe("<DisabledTaxId />", () => {
   let profileData: ProfileData;
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     setLargeScreen(true);
     profileData = generateProfileData({
       businessPersona: "STARTING",

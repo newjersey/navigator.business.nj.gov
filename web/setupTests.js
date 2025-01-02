@@ -1,36 +1,38 @@
 /* eslint-disable no-undef */
-require("@testing-library/jest-dom");
+import "@testing-library/jest-dom";
+import React from "react";
 import { TextDecoder, TextEncoder } from "util";
+import { vi } from "vitest";
+
+global.React = React;
 
 process.env.API_BASE_URL = "";
 process.env.REDIRECT_URL = "http://www.example.com";
 
-global.scrollTo = jest.fn();
-global.gtag = jest.fn();
+global.scrollTo = vi.fn();
+global.gtag = vi.fn();
 
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
 
 global.console.warn = (message) => {
-  throw message;
+  throw new Error(message);
 };
 
 global.console.error = (message) => {
-  throw message;
+  throw new Error(message);
 };
 
-window.gtm = jest.fn();
+window.gtm = vi.fn();
 
 window.matchMedia =
   window.matchMedia ||
   function () {
     return {
       matches: false,
-      addListener: function () {},
-      removeListener: function () {},
+      addListener: () => {},
+      removeListener: () => {},
     };
   };
 
-jest.setTimeout(10000);
-
-jest.mock("next/router", () => require("next-router-mock"));
+vi.mock("next/router", () => require("next-router-mock"));

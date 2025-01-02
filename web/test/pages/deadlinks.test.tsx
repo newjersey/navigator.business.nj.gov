@@ -3,10 +3,10 @@ import DeadLinksPage from "@/pages/mgmt/deadlinks";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Options } from "broken-link-checker";
 
-jest.mock("@/lib/api-client/apiClient", () => ({ post: jest.fn() }));
-const mockApi = api as jest.Mocked<typeof api>;
+vi.mock("@/lib/api-client/apiClient", () => ({ post: vi.fn() }));
+const mockApi = api as vi.Mocked<typeof api>;
 
-jest.mock("broken-link-checker", () => {
+vi.mock("broken-link-checker", () => {
   return {
     HtmlUrlChecker: function SpyHtmlUrlChecker(
       options: Options,

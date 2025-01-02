@@ -14,7 +14,7 @@ import { OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
 import { generatePreferences } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
 
 const Config = getMergedConfig();
 

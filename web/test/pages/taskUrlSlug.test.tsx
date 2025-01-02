@@ -29,20 +29,20 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
-    ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    ...vi.requireActual("@mui/material"),
+    useMediaQuery: vi.fn(),
   };
 }
 
 const Config = getMergedConfig();
 
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+vi.mock("@mui/material", () => mockMaterialUI());
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
 
 const setLargeScreen = (value = true): void => {
-  (useMediaQuery as jest.Mock).mockImplementation(() => value);
+  (useMediaQuery as vi.Mock).mockImplementation(() => value);
 };
 
 const renderPage = (task: Task, initialBusiness?: Business): void => {
@@ -64,7 +64,7 @@ const renderPage = (task: Task, initialBusiness?: Business): void => {
 
 describe("task page", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     setLargeScreen();
     useMockRoadmap({});
     useMockRouter({});

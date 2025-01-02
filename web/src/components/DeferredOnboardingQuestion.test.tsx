@@ -16,15 +16,15 @@ import {
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
 
 const Config = getMergedConfig();
 
 describe("<DeferredOnboardingQuestion />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     setupStatefulUserDataContext();
     useMockRouter({});
   });
@@ -36,7 +36,7 @@ describe("<DeferredOnboardingQuestion />", () => {
           generateBusiness({ profileData: generateProfileData({ ...emptyIndustrySpecificData }) })
         )}
       >
-        <DeferredOnboardingQuestion label="" onSave={onSave || jest.fn()}>
+        <DeferredOnboardingQuestion label="" onSave={onSave || vi.fn()}>
           <HomeBasedBusiness />
         </DeferredOnboardingQuestion>
       </WithStatefulUserData>
@@ -51,7 +51,7 @@ describe("<DeferredOnboardingQuestion />", () => {
   });
 
   it("calls onSave prop", async () => {
-    const onSave = jest.fn();
+    const onSave = vi.fn();
     renderComponent({ onSave });
     fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
     fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));

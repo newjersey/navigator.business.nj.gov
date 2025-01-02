@@ -25,7 +25,7 @@ describe("<CannabisLocationAlert />", () => {
   };
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("is displayed for cannabis businesses", () => {

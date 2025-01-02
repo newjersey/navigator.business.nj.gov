@@ -47,7 +47,7 @@ export const renderPage = ({
   business?: Business;
   isAuthenticated?: IsAuthenticated;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setShowNeedsAccountModal?: jest.Mock<any, any, any>;
+  setShowNeedsAccountModal?: vi.Mock<any, any, any>;
 }): void => {
   const genericTown = generateMunicipality({ displayName: "GenericTown" });
   const profileDataMunicipality = business && business.profileData.municipality;
@@ -76,7 +76,7 @@ export const renderPage = ({
         </WithStatefulProfileFormContext>
       </ThemeProvider>,
       isAuthenticated ?? IsAuthenticated.TRUE,
-      { showNeedsAccountModal: false, setShowNeedsAccountModal: setShowNeedsAccountModal ?? jest.fn() }
+      { showNeedsAccountModal: false, setShowNeedsAccountModal: setShowNeedsAccountModal ?? vi.fn() }
     )
   );
 };

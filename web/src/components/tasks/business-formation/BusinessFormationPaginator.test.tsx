@@ -50,7 +50,6 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
-import * as materialUi from "@mui/material";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -73,47 +72,38 @@ type MockApiErrorJestArray = [string, MockApiErrorTestData];
 
 const Config = getMergedConfig();
 
-function mockMaterialUI(): typeof materialUi {
+vi.mock("@mui/material", async () => {
+  const actual = await vi.importActual("@mui/material");
   return {
-    ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    ...actual,
+    useMediaQuery: vi.fn(),
   };
-}
+});
 
-function setupMockAnalytics(): typeof analytics {
-  return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
-    event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
-      business_formation_location_question: {
-        submit: {
-          location_entered_for_first_time: jest.fn(),
-        },
-      },
-    },
-  };
-}
+vi.mock("@/lib/utils/analytics", async () => {
+  const actual = await vi.importActual<typeof import("@/lib/utils/analytics")>("@/lib/utils/analytics");
+  actual.default.event.business_formation_location_question.submit.location_entered_for_first_time = vi.fn();
+  return actual;
+});
 
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postBusinessFormation: jest.fn(),
-  getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn(),
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/data-hooks/useDocuments");
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({
+  postBusinessFormation: vi.fn(),
+  getCompletedFiling: vi.fn(),
+  searchBusinessName: vi.fn(),
 }));
 
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockAnalytics = vi.mocked(analytics);
 
 describe("<BusinessFormationPaginator />", () => {
   let business: Business;
   let displayContent: TasksDisplayContent;
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useSetupInitialMocks();
 
     const legalStructureId = "limited-liability-company";
@@ -167,10 +157,10 @@ describe("<BusinessFormationPaginator />", () => {
 
   describe("when in guest mode", () => {
     const guestModeNextButtonText = `Register & ${Config.formation.general.initialNextButtonText}`;
-    let setShowNeedsAccountModal: jest.Mock;
+    let setShowNeedsAccountModal: () => void;
 
     beforeEach(() => {
-      setShowNeedsAccountModal = jest.fn();
+      setShowNeedsAccountModal = vi.fn();
     });
 
     const renderAsGuest = (): void => {
@@ -2089,17 +2079,17 @@ describe("<BusinessFormationPaginator />", () => {
 
   describe("autosave", () => {
     beforeEach(() => {
-      jest.useFakeTimers();
+      vi.useFakeTimers();
     });
 
     afterEach(() => {
-      jest.useRealTimers();
+      vi.useRealTimers();
     });
 
     it("autosaves every second if a field has changed", async () => {
       const page = preparePage({ business, displayContent });
       act(() => {
-        jest.advanceTimersByTime(1000);
+        vi.advanceTimersByTime(1000);
       });
       page.fillText("Search business name", "Pizza Joint");
       await waitFor(() =>
@@ -2119,11 +2109,11 @@ describe("<BusinessFormationPaginator />", () => {
       };
       const page = preparePage({ business: businessWithName, displayContent });
       act(() => {
-        jest.advanceTimersByTime(1000);
+        vi.advanceTimersByTime(1000);
       });
       page.fillText("Search business name", "Pizza Joint");
       act(() => {
-        jest.advanceTimersByTime(1000);
+        vi.advanceTimersByTime(1000);
       });
       await page.searchBusinessName({ status: "UNAVAILABLE" });
       expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
@@ -2136,7 +2126,7 @@ describe("<BusinessFormationPaginator />", () => {
       preparePage({ business, displayContent });
       expect(userDataUpdatedNTimes()).toEqual(1);
       act(() => {
-        jest.advanceTimersByTime(1000);
+        vi.advanceTimersByTime(1000);
       });
       expect(userDataUpdatedNTimes()).toEqual(1);
     });
@@ -2146,7 +2136,7 @@ describe("<BusinessFormationPaginator />", () => {
       await page.stepperClickToBusinessStep();
 
       act(() => {
-        jest.advanceTimersByTime(1000);
+        vi.advanceTimersByTime(1000);
       });
 
       fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addButtonText));
@@ -2164,7 +2154,7 @@ describe("<BusinessFormationPaginator />", () => {
       expect(userDataUpdatedNTimes()).toEqual(1);
       makeChangeToForm(page);
       act(() => {
-        jest.advanceTimersByTime(900);
+        vi.advanceTimersByTime(900);
       });
       expect(userDataUpdatedNTimes()).toEqual(1);
     });
@@ -2175,7 +2165,7 @@ describe("<BusinessFormationPaginator />", () => {
       expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
 
       act(() => {
-        jest.advanceTimersByTime(1000);
+        vi.advanceTimersByTime(1000);
       });
       makeChangeToForm(page);
       await waitFor(() =>
@@ -2186,7 +2176,7 @@ describe("<BusinessFormationPaginator />", () => {
       expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
 
       act(() => {
-        jest.advanceTimersByTime(59000);
+        vi.advanceTimersByTime(59000);
       });
 
       expect(screen.getByText(Config.autosaveDefaults.savingText)).toBeInTheDocument();
@@ -2194,7 +2184,7 @@ describe("<BusinessFormationPaginator />", () => {
       expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
 
       act(() => {
-        jest.advanceTimersByTime(2500);
+        vi.advanceTimersByTime(2500);
       });
 
       expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
@@ -2205,21 +2195,21 @@ describe("<BusinessFormationPaginator />", () => {
       const page = preparePage({ business, displayContent });
 
       act(() => {
-        jest.advanceTimersByTime(1000);
+        vi.advanceTimersByTime(1000);
       });
       makeChangeToForm(page);
       act(() => {
-        jest.advanceTimersByTime(59000);
+        vi.advanceTimersByTime(59000);
       });
       act(() => {
-        jest.advanceTimersByTime(2500);
+        vi.advanceTimersByTime(2500);
       });
 
       expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
       expect(screen.getByText(Config.autosaveDefaults.savedText)).toBeInTheDocument();
 
       act(() => {
-        jest.runOnlyPendingTimers();
+        vi.runOnlyPendingTimers();
       });
 
       expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();

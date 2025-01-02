@@ -11,15 +11,15 @@ import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnav
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
 
 describe("<TaskCheckbox />", () => {
-  let setShowNeedsAccountModal: jest.Mock;
+  let setShowNeedsAccountModal: vi.Mock;
 
   beforeEach(() => {
-    jest.resetAllMocks();
-    setShowNeedsAccountModal = jest.fn();
+    vi.resetAllMocks();
+    setShowNeedsAccountModal = vi.fn();
     setupStatefulUserDataContext();
   });
 

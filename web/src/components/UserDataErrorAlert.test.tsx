@@ -2,11 +2,11 @@ import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { useMockBusiness, useMockUserDataError } from "@/test/mock/mockUseUserData";
 import { render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
 
 describe("<UserDataErrorAlert />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("does not display when no error", () => {

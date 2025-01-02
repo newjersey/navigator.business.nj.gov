@@ -10,47 +10,55 @@ import {
   generateProfileData,
   getIndustries,
   LegalStructures,
-  randomElementFromArray,
+  randomElementFromArray
 } from "@businessnjgovnavigator/shared";
 import * as fetchMunicipalityById from "@businessnjgovnavigator/shared/domain-logic/fetchMunicipalityById";
 import {
   createEmptyProfileData,
   emptyIndustrySpecificData,
-  ProfileData,
+  ProfileData
 } from "@businessnjgovnavigator/shared/profileData";
+import { Mocked } from "vitest";
 
-jest.mock("@/lib/domain-logic/getNonEssentialQuestionAddOn", () => ({
-  getNonEssentialQuestionAddOn: jest.fn(),
+vi.mock("@/lib/domain-logic/getNonEssentialQuestionAddOn", () => ({
+  getNonEssentialQuestionAddOn: vi.fn(),
 }));
 
 const mockGetNonEssentialQuestionAddOn = (
-  getNonEssentialAddOnModule as jest.Mocked<typeof getNonEssentialAddOnModule>
+  getNonEssentialAddOnModule as vi.Mocked<typeof getNonEssentialAddOnModule>
 ).getNonEssentialQuestionAddOn;
 
-jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
-  industries: [
-    ...jest.requireActual("../../../../shared/lib/content/lib/industry.json").industries,
-    {
-      id: "non-essential-question-industry",
-      name: "Non Essential Question Industry",
-      description: "",
-      canHavePermanentLocation: true,
-      roadmapSteps: [],
-      nonEssentialQuestionsIds: ["non-essential-question-1", "non-essential-question-2"],
-      naicsCodes: "",
-      isEnabled: true,
-      industryOnboardingQuestions: {},
+vi.mock("../../../../shared/lib/content/lib/industry.json", async () => {
+  const actual = await vi.importActual<any>("../../../../shared/lib/content/lib/industry.json");
+  return {
+    default: {
+      industries: [
+        ...actual.default.industries,
+        {
+          id: "non-essential-question-industry",
+          name: "Non Essential Question Industry",
+          description: "",
+          canHavePermanentLocation: true,
+          roadmapSteps: [],
+          nonEssentialQuestionsIds: ["non-essential-question-1", "non-essential-question-2"],
+          naicsCodes: "",
+          isEnabled: true,
+          industryOnboardingQuestions: {},
+        },
+      ],
     },
-  ],
+  };
+});
+
+vi.mock("@/lib/roadmap/roadmapBuilder", () => ({ buildRoadmap: vi.fn() }));
+vi.mock("@businessnjgovnavigator/shared/domain-logic/fetchMunicipalityById", () => ({
+  fetchMunicipalityById: vi.fn(),
 }));
 
-jest.mock("@/lib/roadmap/roadmapBuilder", () => ({ buildRoadmap: jest.fn() }));
-jest.mock("@businessnjgovnavigator/shared/domain-logic/fetchMunicipalityById", () => ({
-  fetchMunicipalityById: jest.fn(),
-}));
+const mockRoadmapBuilder = (roadmapBuilderModule as Mocked<typeof roadmapBuilderModule>).buildRoadmap;
+Mocking getNonEssentialQuestionAddOn
 
-const mockRoadmapBuilder = (roadmapBuilderModule as jest.Mocked<typeof roadmapBuilderModule>).buildRoadmap;
-const mockFetchMunicipality = (fetchMunicipalityById as jest.Mocked<typeof fetchMunicipalityById>)
+const mockFetchMunicipality = (fetchMunicipalityById as Mocked<typeof fetchMunicipalityById>)
   .fetchMunicipalityById;
 const Config = getMergedConfig();
 
@@ -74,7 +82,7 @@ const createEmptyNexusProfile = (overrides: Partial<ProfileData>): ProfileData =
 
 describe("buildUserRoadmap", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     mockRoadmapBuilder.mockResolvedValue(generateRoadmap({}));
   });
 

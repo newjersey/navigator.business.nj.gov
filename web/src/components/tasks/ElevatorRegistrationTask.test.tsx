@@ -10,21 +10,21 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/api-client/apiClient", () => ({
-  checkElevatorRegistrationStatus: jest.fn(),
+vi.mock("@/lib/api-client/apiClient", () => ({
+  checkElevatorRegistrationStatus: vi.fn(),
 }));
-const mockApi = api as jest.Mocked<typeof api>;
+const mockApi = api as vi.Mocked<typeof api>;
 
-window.open = jest.fn();
-const mockWindowOpen = window.open as jest.Mocked<typeof window.open>;
+window.open = vi.fn();
+const mockWindowOpen = window.open as vi.Mocked<typeof window.open>;
 
-jest.mock("@/lib/utils/analytics-base", () => ({
-  sendEvent: jest.fn(),
-  userUpdate: jest.fn(),
+vi.mock("@/lib/utils/analytics-base", () => ({
+  sendEvent: vi.fn(),
+  userUpdate: vi.fn(),
   context: { calendar_view: undefined },
 }));
 
-const mockAnalyticsBase = analyticsBase as jest.Mocked<typeof analyticsBase>;
+const mockAnalyticsBase = analyticsBase as vi.Mocked<typeof analyticsBase>;
 
 describe("<ElevatorRegistrationTask />", () => {
   const task = generateTask({});
@@ -41,8 +41,8 @@ describe("<ElevatorRegistrationTask />", () => {
   };
 
   beforeEach(() => {
-    jest.resetAllMocks();
-    jest.useFakeTimers();
+    vi.resetAllMocks();
+    vi.useFakeTimers();
   });
 
   describe("start application tab", () => {

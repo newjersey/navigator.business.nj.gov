@@ -2,17 +2,17 @@ import { generateMunicipalityDetail } from "@businessnjgovnavigator/shared";
 import fs from "fs";
 import { loadAllMunicipalities } from "./loadMunicipalities";
 
-jest.mock("fs");
+vi.mock("fs");
 
-jest.mock("process", () => ({
+vi.mock("process", () => ({
   cwd: (): string => "/test",
 }));
 
 describe("loadMunicipalities", () => {
-  let mockedFs: jest.Mocked<typeof fs>;
+  let mockedFs: vi.Mocked<typeof fs>;
 
   beforeEach(() => {
-    mockedFs = fs as jest.Mocked<typeof fs>;
+    mockedFs = fs as vi.Mocked<typeof fs>;
   });
 
   it("returns a list of municipality objects", async () => {

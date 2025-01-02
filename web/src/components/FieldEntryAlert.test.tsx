@@ -4,13 +4,13 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
 
 describe("<FieldEntryAlert/>", () => {
   const alertMessage = `This is my alert message ${randomInt()}`;
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
   });
 

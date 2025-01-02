@@ -3,7 +3,7 @@ import {
   getIsApplicableToFunctionByFieldName,
 } from "@/lib/domain-logic/essentialQuestions";
 
-jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
+vi.mock("../../../../shared/lib/content/lib/industry.json", () => ({
   industries: [
     {
       naicsCodes: "000000",
@@ -64,7 +64,7 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
 
 describe("hasEssentialQuestion", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   describe("getEssentialQuestion", () => {

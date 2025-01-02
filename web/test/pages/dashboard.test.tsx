@@ -26,21 +26,21 @@ import { render, screen, waitFor } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
-    ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    ...vi.requireActual("@mui/material"),
+    useMediaQuery: vi.fn(),
   };
 }
 
 const setDesktopScreen = (value: boolean): void => {
-  (useMediaQuery as jest.Mock).mockImplementation(() => {
+  (useMediaQuery as vi.Mock).mockImplementation(() => {
     return value;
   });
 };
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+vi.mock("@mui/material", () => mockMaterialUI());
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: vi.fn() }));
 
 const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>): RoadmapDisplayContent => {
   return {
@@ -52,11 +52,11 @@ const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>): Roa
 
 describe("dashboard page", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockBusiness({ onboardingFormProgress: "COMPLETED" });
     useMockRoadmap({});
     useMockRouter({});
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   const renderDashboardPage = (): void => {

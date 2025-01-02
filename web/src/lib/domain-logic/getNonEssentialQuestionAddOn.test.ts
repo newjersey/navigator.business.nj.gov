@@ -1,6 +1,6 @@
 import { getNonEssentialQuestionAddOn } from "@/lib/domain-logic/getNonEssentialQuestionAddOn";
 
-jest.mock("../../../../content/src/roadmaps/nonEssentialQuestions.json", () => ({
+vi.mock("../../../../content/src/roadmaps/nonEssentialQuestions.json", () => ({
   nonEssentialQuestionsArray: [
     {
       id: "test-non-essential",
@@ -12,7 +12,7 @@ jest.mock("../../../../content/src/roadmaps/nonEssentialQuestions.json", () => (
 
 describe("getNonEssentialQuestionAddOn", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("returns the question text if essential question exists", () => {

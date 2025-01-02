@@ -1,17 +1,14 @@
 import { getNonEssentialQuestionText } from "@/lib/domain-logic/getNonEssentialQuestionText";
 
-jest.mock("../../../../content/src/roadmaps/nonEssentialQuestions.json", () => ({
-  nonEssentialQuestionsArray: [
-    {
-      id: "test-non-essential",
-      questionText: "Test Question?",
-    },
-  ],
+vi.mock("@businessnjgovnavigator/content/roadmaps/nonEssentialQuestions.json", () => ({
+  default: {
+    nonEssentialQuestionsArray: [{ id: "test-non-essential", questionText: "Test Question?" }],
+  },
 }));
 
 describe("getNonEssentialQuestionText", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("returns the question text if essential question exists", () => {

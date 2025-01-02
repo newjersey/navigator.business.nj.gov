@@ -18,38 +18,38 @@ import { waitFor } from "@testing-library/react";
 import { UpdateQueue } from "../types/types";
 import { UpdateQueueFactory } from "../UpdateQueue";
 
-const mockGetCurrentUserData = jest.fn();
-const mockDelete = jest.fn();
-jest.mock("@/lib/storage/UserDataStorage");
-jest.mock("@/lib/storage/AccountLinkingErrorStorage");
-const mockUserDataStorage = UserDataStorage as jest.Mocked<typeof UserDataStorage>;
-const mockAccountLinkingErrorStorage = AccountLinkingErrorStorage as jest.Mocked<
+const mockGetCurrentUserData = vi.fn();
+const mockDelete = vi.fn();
+vi.mock("@/lib/storage/UserDataStorage");
+vi.mock("@/lib/storage/AccountLinkingErrorStorage");
+const mockUserDataStorage = UserDataStorage as vi.Mocked<typeof UserDataStorage>;
+const mockAccountLinkingErrorStorage = AccountLinkingErrorStorage as vi.Mocked<
   typeof AccountLinkingErrorStorage
 >;
-const originalModule = jest.requireActual("@/lib/storage/UserDataStorage");
+const originalModule = vi.requireActual("@/lib/storage/UserDataStorage");
 
-jest.mock("@/lib/auth/sessionHelper", () => ({
-  getActiveUser: jest.fn(),
-  triggerSignOut: jest.fn().mockResolvedValue({}),
+vi.mock("@/lib/auth/sessionHelper", () => ({
+  getActiveUser: vi.fn(),
+  triggerSignOut: vi.fn().mockResolvedValue({}),
 }));
 
-const mockSession = session as jest.Mocked<typeof session>;
+const mockSession = session as vi.Mocked<typeof session>;
 
-jest.mock("@/lib/api-client/apiClient", () => ({
-  getUserData: jest.fn(),
-  postUserData: jest.fn(),
-  postSelfReg: jest.fn(),
+vi.mock("@/lib/api-client/apiClient", () => ({
+  getUserData: vi.fn(),
+  postUserData: vi.fn(),
+  postSelfReg: vi.fn(),
 }));
-const mockApi = api as jest.Mocked<typeof api>;
+const mockApi = api as vi.Mocked<typeof api>;
 
 describe("SigninHelper", () => {
-  let mockPush: jest.Mock;
-  let mockDispatch: jest.Mock;
+  let mockPush: vi.Mock;
+  let mockDispatch: vi.Mock;
 
   beforeEach(() => {
-    jest.restoreAllMocks();
-    mockPush = jest.fn();
-    mockDispatch = jest.fn();
+    vi.restoreAllMocks();
+    mockPush = vi.fn();
+    mockDispatch = vi.fn();
     mockUserDataStorage.UserDataStorageFactory.mockImplementation(() => ({
       ...originalModule.UserDataStorageFactory(),
       getCurrentUserData: mockGetCurrentUserData,
@@ -57,8 +57,8 @@ describe("SigninHelper", () => {
     }));
 
     mockAccountLinkingErrorStorage.AccountLinkingErrorStorageFactory.mockImplementation(() => ({
-      setEncounteredMyNjLinkingError: jest.fn(),
-      getEncounteredMyNjLinkingError: jest.fn(),
+      setEncounteredMyNjLinkingError: vi.fn(),
+      getEncounteredMyNjLinkingError: vi.fn(),
     }));
   });
 
@@ -80,15 +80,15 @@ describe("SigninHelper", () => {
   describe("onSelfRegister", () => {
     let userData: UserData;
     let updateQueue: UpdateQueue;
-    let update: jest.Mock;
-    let mockSetRegistrationStatus: jest.Mock;
+    let update: vi.Mock;
+    let mockSetRegistrationStatus: vi.Mock;
     let fakeRouter: SelfRegRouter;
 
     beforeEach(() => {
       userData = generateUserData({});
-      update = jest.fn();
+      update = vi.fn();
       updateQueue = new UpdateQueueFactory(userData, update);
-      mockSetRegistrationStatus = jest.fn();
+      mockSetRegistrationStatus = vi.fn();
       fakeRouter = { replace: mockPush, asPath: "/tasks/some-url" };
     });
 
@@ -276,10 +276,10 @@ describe("SigninHelper", () => {
         return undefined;
       });
 
-      const mockGetFn = jest.fn().mockReturnValue(true);
+      const mockGetFn = vi.fn().mockReturnValue(true);
 
       mockAccountLinkingErrorStorage.AccountLinkingErrorStorageFactory.mockImplementation(() => ({
-        setEncounteredMyNjLinkingError: jest.fn(),
+        setEncounteredMyNjLinkingError: vi.fn(),
         getEncounteredMyNjLinkingError: mockGetFn,
       }));
 
@@ -294,11 +294,11 @@ describe("SigninHelper", () => {
       mockGetCurrentUserData.mockImplementation(() => {
         return undefined;
       });
-      const mockSetFn = jest.fn();
+      const mockSetFn = vi.fn();
 
       mockAccountLinkingErrorStorage.AccountLinkingErrorStorageFactory.mockImplementation(() => ({
         setEncounteredMyNjLinkingError: mockSetFn,
-        getEncounteredMyNjLinkingError: jest.fn(),
+        getEncounteredMyNjLinkingError: vi.fn(),
       }));
 
       await onGuestSignIn({

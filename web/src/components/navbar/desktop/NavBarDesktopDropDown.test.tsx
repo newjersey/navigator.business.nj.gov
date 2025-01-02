@@ -3,27 +3,27 @@ import analytics from "@/lib/utils/analytics";
 import MenuItem from "@mui/material/MenuItem";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       account_name: {
         click: {
-          expand_account_menu: jest.fn(),
+          expand_account_menu: vi.fn(),
         },
       },
     },
   };
 }
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockAnalytics = analytics as vi.Mocked<typeof analytics>;
 
 describe("<NavBarDesktopDropDown/>", () => {
-  window.open = jest.fn();
-  const setOpen = jest.fn();
-  const handleClose = jest.fn();
+  window.open = vi.fn();
+  const setOpen = vi.fn();
+  const handleClose = vi.fn();
 
   const menuButtonTitle = "menuButtonTitle";
   const dropDownTitle = "dropDownTitle";

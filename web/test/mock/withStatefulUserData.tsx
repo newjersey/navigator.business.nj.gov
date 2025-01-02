@@ -9,7 +9,7 @@ import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, screen } from "@testing-library/react";
 import { ReactElement, ReactNode, useContext } from "react";
 
-const updateSpy = jest.fn();
+const updateSpy = vi.fn();
 
 export const helpers = statefulDataHelpers(updateSpy);
 
@@ -39,7 +39,7 @@ export const WithStatefulUserData = ({
   return WithStatefulData(updateSpy)({ children, initialData: initialUserData });
 };
 
-const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
+const mockUseUserData = (useUserModule as vi.Mocked<typeof useUserModule>).useUserData;
 
 export const setupStatefulUserDataContext = (): void => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -65,7 +65,7 @@ export const setupStatefulUserDataContext = (): void => {
       hasCompletedFetch: true,
       updateQueue: updateQueue,
       createUpdateQueue,
-      refresh: jest.fn(),
+      refresh: vi.fn(),
     };
   });
 };

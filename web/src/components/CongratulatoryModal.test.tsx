@@ -6,11 +6,11 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
 
 describe("<CongratulatoryModal />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
   });
 

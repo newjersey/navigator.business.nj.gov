@@ -24,14 +24,14 @@ import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnav
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postNewsletter: jest.fn(),
-  postUserTesting: jest.fn(),
-  postGetAnnualFilings: jest.fn(),
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({
+  postNewsletter: vi.fn(),
+  postUserTesting: vi.fn(),
+  postGetAnnualFilings: vi.fn(),
 }));
 
 const Config = getMergedConfig();
@@ -49,11 +49,11 @@ const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
 
 describe("onboarding - foreign business", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({ isReady: true });
     mockEmptyApiSignups();
     setupStatefulUserDataContext();
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   describe("page headers", () => {

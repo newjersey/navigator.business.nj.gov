@@ -55,25 +55,25 @@ import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavig
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
-const mockApi = api as jest.Mocked<typeof api>;
+const mockApi = api as vi.Mocked<typeof api>;
 
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       profile_location_question: {
         submit: {
-          location_entered_for_first_time: jest.fn(),
+          location_entered_for_first_time: vi.fn(),
         },
       },
     },
   };
 }
 
-jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
+vi.mock("../../../../shared/lib/content/lib/industry.json", () => ({
   industries: [
-    ...jest.requireActual("../../../../shared/lib/content/lib/industry.json").industries,
+    ...vi.requireActual("../../../../shared/lib/content/lib/industry.json").industries,
     {
       id: "test-industry-with-non-essential-questions",
       name: "test-industry-with-non-essential-questions",
@@ -99,19 +99,19 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
   ],
 }));
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/data-hooks/useDocuments");
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockAnalytics = analytics as vi.Mocked<typeof analytics>;
 const nonOwningPersonas: BusinessPersona[] = ["STARTING", "FOREIGN"];
 
 describe("profile - shared", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useMockRouter({});
     useMockRoadmap({});
     setupStatefulUserDataContext();

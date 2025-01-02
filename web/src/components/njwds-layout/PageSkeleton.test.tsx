@@ -1,11 +1,11 @@
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
 
 describe("<PageSkeleton />", () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("does not render the beta bar, legal message, and skip main content when landingPage prop is true", () => {

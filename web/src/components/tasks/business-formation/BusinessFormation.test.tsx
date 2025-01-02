@@ -34,30 +34,28 @@ import {
 import { Content } from "@/components/Content";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generateStartingProfileData } from "@businessnjgovnavigator/shared/";
-import * as materialUi from "@mui/material";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
 
-function mockMaterialUI(): typeof materialUi {
-  return {
-    ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
-  };
-}
-
 const Config = getMergedConfig();
 
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postBusinessFormation: jest.fn(),
-  getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn(),
+vi.mock("@mui/material", async () => {
+  const actual = await vi.importActual<typeof import("@mui/material")>("@mui/material");
+  return {
+    ...actual,
+    useMediaQuery: vi.fn(), // Mock only the necessary parts
+  };
+});
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
+vi.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: vi.fn() }));
+vi.mock("@/lib/data-hooks/useDocuments");
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/api-client/apiClient", () => ({
+  postBusinessFormation: vi.fn(),
+  getCompletedFiling: vi.fn(),
+  searchBusinessName: vi.fn(),
 }));
-const mockApi = api as jest.Mocked<typeof api>;
+const mockApi = api as vi.Mocked<typeof api>;
 
 describe("<BusinessFormation />", () => {
   const displayContent = {
@@ -65,7 +63,7 @@ describe("<BusinessFormation />", () => {
   };
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
     useSetupInitialMocks();
   });
 
@@ -1237,7 +1235,7 @@ describe("<BusinessFormation />", () => {
 
   describe("businessStartDate", () => {
     afterEach(() => {
-      jest.useRealTimers();
+      vi.useRealTimers();
     });
 
     it("when user is in US Eastern Timezone, initial value is current date in NJ", async () => {
@@ -1261,8 +1259,8 @@ describe("<BusinessFormation />", () => {
       const mockDate = new Date("2020-04-13T00:00:00.000+08:00");
       const expectedDateString = "04/12/2020";
 
-      jest.useFakeTimers();
-      jest.setSystemTime(mockDate);
+      vi.useFakeTimers();
+      vi.setSystemTime(mockDate);
 
       const page = preparePage({
         business: {
@@ -1274,15 +1272,17 @@ describe("<BusinessFormation />", () => {
         displayContent,
       });
       await page.fillAndSubmitBusinessNameStep("Pizza Joint");
-      expect(screen.getByTestId("date-businessStartDate")).toHaveValue(expectedDateString);
+      await waitFor(() => {
+        expect(screen.getByTestId("date-businessStartDate")).toHaveValue(expectedDateString);
+      });
     });
 
     it("when user is in US Pacific Timezone, initial value is current date in NJ", async () => {
       const mockDate = new Date("2020-04-13T22:00:00.000-08:00");
       const expectedDateString = "04/14/2020";
 
-      jest.useFakeTimers();
-      jest.setSystemTime(mockDate);
+      vi.useFakeTimers();
+      vi.setSystemTime(mockDate);
 
       const page = preparePage({
         business: {

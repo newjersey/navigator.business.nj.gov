@@ -22,23 +22,23 @@ import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/index";
 
 function setupMockAnalytics(): typeof analytics {
   return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
+    ...vi.requireActual("@/lib/utils/analytics").default,
     event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      ...vi.requireActual("@/lib/utils/analytics").default.event,
       anytime_action_button: {
         click: {
-          go_to_anytime_action_screen: jest.fn(),
+          go_to_anytime_action_screen: vi.fn(),
         },
       },
     },
   };
 }
 
-jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+vi.mock("next/compat/router", () => ({ useRouter: vi.fn() }));
+vi.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+vi.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: vi.fn() }));
 
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockAnalytics = analytics as vi.Mocked<typeof analytics>;
 
 describe("<AnytimeActionDropdown />", () => {
   const Config = getMergedConfig();
@@ -56,7 +56,7 @@ describe("<AnytimeActionDropdown />", () => {
 
   describe("routing and analytics", () => {
     beforeEach(() => {
-      jest.resetAllMocks();
+      vi.resetAllMocks();
       useMockRouter({});
       useMockBusiness({});
       anytimeActionLinks = [
@@ -189,7 +189,7 @@ describe("<AnytimeActionDropdown />", () => {
 
   describe("filtering and sorting", () => {
     beforeEach(() => {
-      jest.resetAllMocks();
+      vi.resetAllMocks();
       useMockRouter({});
       useMockBusiness({});
       anytimeActionLinks = [
