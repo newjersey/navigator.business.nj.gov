@@ -43,8 +43,6 @@ callToActionText: Renew My Out-of-State Pharmacy Registration
 * Any action taken or pending against any employee’s license since the last renewal, if applicable
 * Applicable fees paid
 
-
-
 ### Prescription Totals for Compounded (Sterile and Non-sterile) Products
 
 You need the total number of prescriptions for compounded (sterile and non-sterile) products for human use filled by the pharmacy last calendar year.
@@ -57,7 +55,7 @@ You also need last year’s total number of prescriptions for compounded human d
 * Mailed, shipped, or delivered to other states (sterile only)
 * Mailed, shipped, or delivered to patients in New Jersey (sterile and non-sterile)
 
-:::callout{ showHeader="true" headerText="What if I don’t renew my registration? " showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="What if I don’t renew my registration?" showIcon="false" calloutType="warning" }
 
 * Your pharmacy can’t ship or deliver prescription medications or devices to patients in New Jersey
 * Your current out-of-state pharmacy registration will expire and you will need to reapply
