@@ -9,9 +9,9 @@ displayname: oos-pharmacy-registration
 urlSlug: oos-pharmacy-registration
 name: Apply for Your Out-of-State Pharmacy Registration
 webflowName: "Pharmacy: Out-of-State Pharmacy Registration"
-summaryDescriptionMd: You need an out-of-state pharmacy registration if your
-  pharmacy is located outside New Jersey and will send or deliver prescription
-  medications or devices to patients in New Jersey.
+summaryDescriptionMd: If your pharmacy is outside New Jersey and you send
+  prescription drugs or devices to patients in New Jersey, you need to register
+  as an out-of-state pharmacy.
 industryId:
   - pharmacy
 callToActionText: "Apply for My Out-of-State Pharmacy Registration "
