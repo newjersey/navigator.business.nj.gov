@@ -1,6 +1,6 @@
 ---
 filename: single-trip-osow-permit
-name: Apply for Your Single Trip OS/OW Permit (5-day), if Applicable
+name: Apply for Your Single Trip OS/OW Permit (5-day)
 industryIds:
   - commercial-construction
   - freight-forwarding
