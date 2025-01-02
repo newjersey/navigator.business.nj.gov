@@ -3,7 +3,7 @@ notesMd: "Draft:
   https://docs.google.com/document/d/1n6Cffog3BT3u9JuuPbhQ92CYTu-GuJn5WbUZR_WNm\
   Jo/edit?tab=t.0#heading=h.vdxfup4tf9li"
 filename: code23-osow-30day-permit
-name: Apply for Your Code 23 OS/OW (30-day) Permit, if Applicable
+name: Apply for Your Code 23 OS/OW (30-day) Permit
 industryIds:
   - commercial-construction
   - freight-forwarding
