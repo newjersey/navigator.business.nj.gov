@@ -681,6 +681,11 @@ describe("buildUserRoadmap", () => {
         buildUserRoadmap(generateStartingProfile({ industryId: "generic" }));
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("waste-permitting");
       });
+
+      it("adds on the air-permitting task", () => {
+        buildUserRoadmap(generateStartingProfile({ industryId: "generic" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("air-permitting");
+      });
     });
   });
 

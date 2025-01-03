@@ -237,6 +237,7 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
 
   if (industryId === "generic") {
     addOns.push("waste-permitting");
+    addOns.push("air-permitting");
   }
 
   if (industry.nonEssentialQuestionsIds) {
