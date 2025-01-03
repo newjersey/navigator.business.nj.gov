@@ -1,5 +1,4 @@
 ---
-filename: private-detective-investigator
 displayname: private-detective-investigator
 id: "private-detective-investigator"
 webflowId: "5f772963147cede8cb26bf42"

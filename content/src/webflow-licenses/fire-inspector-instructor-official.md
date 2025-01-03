@@ -1,5 +1,4 @@
 ---
-filename: fire-inspector-instructor-official
 displayname: fire-inspector-instructor-official
 id: "fire-inspector-instructor-official"
 webflowId: "5f77298b486eebc0a2c25619"

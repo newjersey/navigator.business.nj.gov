@@ -1,5 +1,4 @@
 ---
-filename: teacher-of-handicapped
 displayname: teacher-of-handicapped
 id: "teacher-of-handicapped"
 webflowId: "5f772938c68adf80a14cdc12"

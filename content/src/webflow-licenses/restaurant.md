@@ -4,7 +4,6 @@ id: "restaurant"
 webflowId: "640b8468eee0342502f163d7"
 urlSlug: "restaurant"
 webflowName: "Restaurant"
-filename: "restaurant"
 callToActionLink: ""
 agencyId: local-health
 divisionPhone: ""

@@ -1,5 +1,4 @@
 ---
-filename: continuing-care-retirement-community
 displayname: continuing-care-retirement-community
 id: "continuing-care-retirement-community"
 webflowId: "5f772981d9d23735566f48c1"

@@ -1,5 +1,4 @@
 ---
-filename: teacher-of-agricultural-occupations
 displayname: teacher-of-agricultural-occupations
 id: "teacher-of-agricultural-occupations"
 webflowId: "5f772937e0229428f1eaa5c4"

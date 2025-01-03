@@ -1,5 +1,4 @@
 ---
-filename: delivery-service-van-or-car
 displayname: delivery-service-van-or-car
 id: "delivery-service-van-or-car"
 webflowId: "5f772957240061aec97834bc"

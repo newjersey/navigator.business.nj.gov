@@ -1,5 +1,4 @@
 ---
-filename: health-maintenance-organization-hmo
 displayname: health-maintenance-organization-hmo
 id: "health-maintenance-organization-hmo"
 webflowId: "5f772925d9d2375f9d6f48ba"

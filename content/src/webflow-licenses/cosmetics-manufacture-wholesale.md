@@ -1,5 +1,4 @@
 ---
-filename: cosmetics-manufacture-wholesale
 displayname: cosmetics-manufacture-wholesale
 notesMd: "June 2023: This license is managed by the department of health, not
   Consumer Affairs (like the other cosmetology licenses)."

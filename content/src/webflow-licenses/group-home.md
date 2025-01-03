@@ -1,5 +1,4 @@
 ---
-filename: group-home
 displayname: group-home
 id: "group-home"
 webflowId: "5f77294cdf77de360de1a525"

@@ -1,5 +1,4 @@
 ---
-filename: bio-analytical-laboratory-director
 displayname: bio-analytical-laboratory-director
 id: "bio-analytical-laboratory-director"
 webflowId: "5f772978e8bf5057e73178a2"
