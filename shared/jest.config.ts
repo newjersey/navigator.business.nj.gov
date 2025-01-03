@@ -10,4 +10,5 @@ export default {
   ...sharedConfig,
   displayName: "shared",
   rootDir: "src",
+  setupFilesAfterEnv: ["../setupTests.ts"],
 };

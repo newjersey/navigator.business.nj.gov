@@ -1,13 +1,14 @@
 import { DynamicsElevatorSafetyHealthCheckClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyHealthCheckClient";
 import { AccessTokenClient } from "@client/dynamics/types";
 import { HealthCheckMethod } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 jest.mock("axios");
 jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("DynamicsElevatorSafetyHealthCheckClient", () => {
   let client: HealthCheckMethod;
@@ -21,7 +22,7 @@ describe("DynamicsElevatorSafetyHealthCheckClient", () => {
     stubAccessTokenClient = {
       getAccessToken: jest.fn(),
     };
-    client = DynamicsElevatorSafetyHealthCheckClient(logger, {
+    client = DynamicsElevatorSafetyHealthCheckClient(DEBUG ? logger : DummyLogWriter, {
       accessTokenClient: stubAccessTokenClient,
       orgUrl: ORG_URL,
     });

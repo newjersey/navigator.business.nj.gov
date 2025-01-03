@@ -6,6 +6,8 @@ import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
 
+const isNotTestEnv = process.env.NODE_ENV !== "test";
+
 const roadmapsDir = path.join(process.cwd(), "..", "content", "src", "roadmaps");
 const displayContentDir = path.join(process.cwd(), "..", "content", "src", "display-content");
 const filingsDir = path.join(process.cwd(), "..", "content", "src", "filings");
@@ -326,7 +328,7 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     const startIndex = j * 5;
     const batch = pages.slice(startIndex, startIndex + 5);
 
-    console.debug("batch:", batch);
+    isNotTestEnv && console.debug("batch:", batch);
 
     for (const page of batch) {
       const promise = new Promise((resolve) => {
