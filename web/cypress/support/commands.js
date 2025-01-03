@@ -24,21 +24,25 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-import { Auth } from "@aws-amplify/auth";
 import "@cypress-audit/lighthouse/commands";
 import "@cypress-audit/pa11y/commands";
+import { Amplify } from "aws-amplify";
+import { fetchAuthSession, signIn } from "aws-amplify/auth";
+
 import "cypress-wait-until";
 import { getCurrentBusiness } from "../../../shared/src/domain-logic/getCurrentBusiness";
 import { createEmptyUserData } from "../../../shared/src/userData";
 import { testUserEmail, testUserPassword } from "./e2e";
 
-Auth.configure({
-  identityPoolRegion: "us-east-1",
-  identityPoolId: Cypress.env("COGNITO_IDENTITY_POOL_ID"),
-  region: "us-east-1",
-  userPoolId: Cypress.env("COGNITO_USER_POOL_ID"),
-  userPoolWebClientId: Cypress.env("COGNITO_WEB_CLIENT_ID"),
-  oauth: {},
+Amplify.configure({
+  Auth: {
+    Cognito: {
+      identityPoolId: Cypress.env("COGNITO_IDENTITY_POOL_ID"),
+      userPoolId: Cypress.env("COGNITO_USER_POOL_ID"),
+      userPoolClientId: Cypress.env("COGNITO_WEB_CLIENT_ID"),
+      loginWith: { oauth: {} },
+    },
+  },
 });
 
 Cypress.Commands.add("loginByCognitoApi", () => {
@@ -52,50 +56,37 @@ Cypress.Commands.add("loginByCognitoApi", () => {
   return cy
     .clearLocalStorage()
     .clearCookies()
-    .wrap(Auth.signIn({ username: testUserEmail, password: testUserPassword }), { log: true })
-    .then((cognitoResponse) => {
-      const keyPrefixWithUsername = `${cognitoResponse.keyPrefix}.${cognitoResponse.username}`;
+    .wrap(signIn({ username: testUserEmail, password: testUserPassword }), { log: true })
+    .then(() => fetchAuthSession({ forceRefresh: true }))
+    .then((response) => {
+      const keyPrefixWithUsername = response.tokens.accessToken.payload.username;
+      window.localStorage.setItem(`${keyPrefixWithUsername}.accessToken`, response.tokens.accessToken);
       window.localStorage.setItem(
-        `${keyPrefixWithUsername}.idToken`,
-        cognitoResponse.signInUserSession.idToken.jwtToken
+        `${keyPrefixWithUsername}.LastAuthUser`,
+        response.tokens.accessToken.payload.username
       );
-
-      window.localStorage.setItem(
-        `${keyPrefixWithUsername}.accessToken`,
-        cognitoResponse.signInUserSession.accessToken.jwtToken
-      );
-
-      window.localStorage.setItem(
-        `${keyPrefixWithUsername}.refreshToken`,
-        cognitoResponse.signInUserSession.refreshToken.token
-      );
-
-      window.localStorage.setItem(
-        `${keyPrefixWithUsername}.clockDrift`,
-        cognitoResponse.signInUserSession.clockDrift
-      );
-
-      window.localStorage.setItem(`${cognitoResponse.keyPrefix}.LastAuthUser`, cognitoResponse.username);
-
       window.localStorage.setItem("amplify-authenticator-authState", "signedIn");
       log.snapshot("after");
       log.end();
-      return cognitoResponse;
+      return {
+        accessToken: response.tokens.accessToken.toString(),
+        userID: response.tokens.accessToken.payload.username,
+      };
     })
     .wait(2000)
-    .then((cognitoResponse) => {
+    .then((response) => {
       cy.request({
         method: "POST",
         url: `${Cypress.env("API_BASE_URL")}/api/users`,
         body: createEmptyUserData({
           email: testUserEmail,
           name: "Some Name",
-          id: cognitoResponse.attributes.sub,
+          id: response.userID,
           receiveNewsletter: true,
           externalStatus: {},
         }),
         auth: {
-          bearer: cognitoResponse.signInUserSession.idToken.jwtToken,
+          bearer: response.accessToken,
         },
       })
         .then((response) => {

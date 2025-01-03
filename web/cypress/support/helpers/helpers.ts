@@ -42,6 +42,7 @@ export const randomElementFromArray = (array: any[]) => {
 };
 
 export const completeBusinessStructureTask = ({ legalStructureId }: { legalStructureId: string }): void => {
+  cy.url().should("contain", "/dashboard");
   cy.get('[data-task="business-structure"]').first().scrollIntoView();
   cy.get('[data-task="business-structure"]').first().click();
   cy.get('[data-testid="business-structure-task"]');
