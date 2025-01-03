@@ -2,12 +2,10 @@
 
 set -euo pipefail
 
-# TODO make these environment variables whose values the user sets.
-PROD_PROFILE="nav-prod"
-DEV_PROFILE="nav-dev"
+source ./api/.env
 
-if [[ -z $PROD_PROFILE ]] || [[ -z $DEV_PROFILE ]]; then
-    echo "PROD_PROFILE and DEV_PROFILE environment variables must be set."
+if [[ -z $AWS_PROFILE_PROD ]] || [[ -z $AWS_PROFILE_DEV ]]; then
+    echo "AWS_PROFILE_PROD and AWS_PROFILE_DEV environment variables must be set."
     exit 1
 fi
 
@@ -46,9 +44,13 @@ TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 DEV_DATA_BACKUP_FILE="$BACKUP_DIR/${DEV_UUID}_${TIMESTAMP}.json"
 
 echo "Querying production user..."
+if ! aws sts get-caller-identity --profile $AWS_PROFILE_PROD &>/dev/null; then
+    echo "Access Token expired, logging you in first..."
+    aws sso login --profile $AWS_PROFILE_PROD
+fi
 aws dynamodb query \
-  --profile $PROD_PROFILE \
-  --table-name "users-table-prod" \
+  --profile $AWS_PROFILE_PROD \
+  --table-name "$DYNAMODB_TABLE_PROD" \
   --region "us-east-1" \
   --key-condition-expression "userId = :uuid" \
   --expression-attribute-values "{\":uuid\":{\"S\":\"$PROD_UUID\"}}" > "$TEMP_PROD_DATA"
@@ -60,8 +62,8 @@ fi
 
 echo "Backing up dev user data..."
 aws dynamodb query \
-  --profile $DEV_PROFILE \
-  --table-name "users-table-dev" \
+  --profile $AWS_PROFILE_DEV \
+  --table-name "$DYNAMODB_TABLE_DEV" \
   --region "us-east-1" \
   --key-condition-expression "userId = :uuid" \
   --expression-attribute-values "{\":uuid\":{\"S\":\"$DEV_UUID\"}}" > "$DEV_DATA_BACKUP_FILE"
@@ -79,7 +81,7 @@ PROD_ITEM_WITH_DEV_UUID=$(echo "$PROD_ITEM" | jq --arg uuid "$DEV_UUID" '.userId
 echo $PROD_ITEM >> prod-item.json
 echo $PROD_ITEM_WITH_DEV_UUID >> prod-item-with-dev-uuid.json
 
-# AWS_PROFILE=$DEV_PROFILE aws dynamodb put-item \
+# AWS_PROFILE=$AWS_PROFILE_DEV aws dynamodb put-item \
 #   --table-name "my-dev-table" \
 #   --region "us-east-1" \
 #   --item "$PROD_ITEM_WITH_DEV_UUID"
@@ -88,8 +90,8 @@ echo $PROD_ITEM_WITH_DEV_UUID >> prod-item-with-dev-uuid.json
 # whereas update-item can update specific properties.
 # In this case, just update `data`
 
-AWS_PROFILE=$DEV_PROFILE aws dynamodb update-item \
-  --table-name "users-table-dev" \
+AWS_PROFILE=$AWS_PROFILE_DEV aws dynamodb update-item \
+  --table-name "$DYNAMODB_TABLE_DEV" \
   --key '{"userId": {"S": "'$DEV_UUID'"}}' \
   --update-expression "SET #data = :data" \
   --expression-attribute-names '{"#data": "data"}' \

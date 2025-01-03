@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+source ./api/.env
+
 # Parse arguments
 while [[ $# -gt 0 ]]; do
   case $1 in
@@ -24,15 +26,12 @@ fi
 
 # Find the most recent backup for this UUID
 BACKUP_DIR="$HOME/.dynamodb-backups"
-echo 'HERE'
 LATEST_BACKUP=$(ls -t "$BACKUP_DIR"/${DEV_UUID}_*.json 2>/dev/null | head -n1)
-echo "STILL HERE"
 if [ -z "$LATEST_BACKUP" ]; then
   echo "No backup found for UUID: $DEV_UUID"
   exit 1
 fi
 
-echo 'here'
 # Verify backup file contains data
 if [ "$(jq '.Items | length' "$LATEST_BACKUP")" -eq 0 ]; then
   echo "Backup file is empty or corrupted"
@@ -44,7 +43,7 @@ echo "Restoring from backup: $LATEST_BACKUP"
 BACKUP_ITEM=$(jq -c '.Items[0]' "$LATEST_BACKUP")
 
 AWS_PROFILE=nav-dev aws dynamodb put-item \
-  --table-name "users-table-dev" \
+  --table-name "$DYNAMODB_TABLE_DEV" \
   --region "us-east-1" \
   --item "$BACKUP_ITEM"
 
