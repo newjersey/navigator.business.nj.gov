@@ -34,7 +34,7 @@
     "@aws-crypto/client-node": "4.0.2",
     "@aws-sdk/client-cloudwatch-logs": "3.716.0",
     "@aws-sdk/client-dynamodb": "3.716.0",
-    "@aws-sdk/client-s3": "3.716.0",
+    "@aws-sdk/client-s3": "3.717.0",
     "@aws-sdk/lib-dynamodb": "3.716.0",
     "@aws-sdk/smithy-client": "3.374.0",
     "@aws-sdk/types": "3.714.0",
