@@ -1,5 +1,4 @@
 ---
-filename: harbor-pilots
 displayname: harbor-pilots
 id: "harbor-pilots"
 webflowId: "5f7729688e9f87519f6859c2"

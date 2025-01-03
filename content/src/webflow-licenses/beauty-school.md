@@ -1,5 +1,4 @@
 ---
-filename: beauty-school
 displayname: beauty-school
 id: "beauty-school"
 webflowId: "5f772975de9e06691f7f5a96"

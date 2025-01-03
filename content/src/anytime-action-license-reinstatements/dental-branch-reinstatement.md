@@ -1,5 +1,5 @@
 ---
-filename: dental-branch-reinstatement
+id: dental-branch-reinstatement
 name: Reinstate Your Dental Branch Office Registration, if Applicable
 industryIds:
   - healthcare

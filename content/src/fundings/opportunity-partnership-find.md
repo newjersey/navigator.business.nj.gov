@@ -1,9 +1,8 @@
 ---
-filename: opportunity-partnership-find
 name: "Opportunity Partnership: Find Skilled Employees"
-displayName: opportunity-partnership
+displayName: opportunity-partnership-find-skilled-employees
 urlSlug: opportunity-partnership-find
-id: opportunity-partnership-find-skilled-employees
+id: opportunity-partnership-find
 sidebarCardBodyText: Opportunity Partnership helps employers identify an
   appropriate educational institution or training provider to train employees.
   The business and the school develop training programs to teach necessary
@@ -47,6 +46,7 @@ sector:
   - other-services
 publishStageArchive: Do Not Publish
 ---
+
 ## Eligibility
 
 Any business can be part of the application, though funding is tied to individuals becoming future employees, not businesses.

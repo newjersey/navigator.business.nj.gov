@@ -1,6 +1,5 @@
 ---
 urlSlug: building-permit
-filename: building-permit
 displayname: building-permit
 name: Prepare for Site Renovation, if Applicable
 id: building-permit

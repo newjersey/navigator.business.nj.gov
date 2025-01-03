@@ -1,15 +1,15 @@
 ---
-slug: zoning
-filename: zoning
+id: zoning
 header: Zoning
 displayname: zoning
 ---
+
 Every municipality (City, Township, Borough, etc.) has a Land Use/Zoning Ordinance which regulates the kinds of business activities that are permitted within a designated zone and places restrictions on building or land parcels, including:
 
-* Building setbacks
-* Building heights
-* Signage
-* Various other aspects of the land usage
+- Building setbacks
+- Building heights
+- Signage
+- Various other aspects of the land usage
 
 Speaking with a zoning office will help you make sure you are allowed to use the space for your business. Failure to do so might result in unexpected costs associated with receiving zoning approvals.
 

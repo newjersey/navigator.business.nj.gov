@@ -1,6 +1,5 @@
 ---
 id: consulting-firm-headhunter-reg
-filename: consulting-firm-headhunter-reg
 displayname: consulting-firm-headhunter-reg
 urlSlug: consulting-firm-headhunter-reg
 name: "Register Your Consulting Firm (Headhunter)"

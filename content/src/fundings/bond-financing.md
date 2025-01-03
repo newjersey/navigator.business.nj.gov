@@ -1,5 +1,4 @@
 ---
-filename: bond-financing
 name: Bond Financing
 displayName: bond-financing
 urlSlug: bond-financing

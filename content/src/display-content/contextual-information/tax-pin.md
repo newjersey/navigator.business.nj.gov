@@ -1,6 +1,5 @@
 ---
-slug: tax-pin
-filename: tax-pin
+id: tax-pin
 displayname: tax-pin
 header: Tax PIN
 ---

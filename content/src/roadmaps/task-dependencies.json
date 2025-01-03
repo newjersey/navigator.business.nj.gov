@@ -62,7 +62,7 @@
       "taskDependencies": ["site-safety-permits-cosmetology"]
     },
     {
-      "licenseTask": "Haul-Waste",
+      "licenseTask": "haul-waste-hic",
       "licenseTaskDependencies": ["register-home-contractor"]
     },
     {

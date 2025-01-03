@@ -2,7 +2,6 @@
 urlSlug: certified-interpreter
 webflowName: Certified Interpreter
 agencyAdditionalContext: Administrative Office of the Courts Language Services Section
-filename: certified-interpreter
 displayname: certified-interpreter
 callToActionText: ""
 callToActionLink: https://www.njcourts.gov/public/lang-services

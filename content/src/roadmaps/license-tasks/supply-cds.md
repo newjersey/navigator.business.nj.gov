@@ -5,7 +5,6 @@ urlSlug: supply-cds
 name: Apply for Your Manufacturer or Wholesale Distributor’s Controlled Dangerous Substances Registration
 displayname: supply-cds
 webflowName: "All Other Businesses: Manufacturer or Wholesale Distributor Controlled Dangerous Substances Registration"
-filename: supply-cds
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: New Jersey Drug Control Unit
 industryId: generic

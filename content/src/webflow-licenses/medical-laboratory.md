@@ -1,5 +1,4 @@
 ---
-filename: medical-laboratory
 displayname: medical-laboratory
 id: "medical-laboratory"
 webflowId: "5f77299cdd6a49425e9b606b"

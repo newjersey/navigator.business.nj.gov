@@ -1,6 +1,5 @@
 ---
 id: detective-employees
-filename: detective-employees
 displayname: detective-employees
 urlSlug: detective-employees
 name: Register Your Employees with New Jersey State Police

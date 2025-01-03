@@ -1,6 +1,5 @@
 ---
-slug: remote-seller
-filename: remote-seller
+id: remote-seller
 displayname: remote-seller
 header: Remote Seller
 ---

@@ -1,5 +1,4 @@
 ---
-filename: medical-devices
 displayname: medical-devices
 id: "medical-devices"
 webflowId: "5f7729449491d5bd24036b55"

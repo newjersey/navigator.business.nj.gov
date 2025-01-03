@@ -1,6 +1,5 @@
 ---
-slug: hazardous-waste
-filename: hazardous-waste
+id: hazardous-waste
 header: Hazardous Waste
 displayname: Hazardous Waste
 ---

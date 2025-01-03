@@ -1,6 +1,5 @@
 ---
-slug: name-reservation
-filename: name-reservation
+id: name-reservation
 displayname: name-reservation
 header: Name Reservation
 ---

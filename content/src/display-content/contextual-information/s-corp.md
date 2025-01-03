@@ -1,6 +1,5 @@
 ---
-slug: s-corp
-filename: s-corp
+id: s-corp
 displayname: s-corp
 header: S Corporation
 ---

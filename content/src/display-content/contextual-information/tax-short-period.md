@@ -1,6 +1,5 @@
 ---
-slug: tax-short-period
-filename: tax-short-period
+id: tax-short-period
 header: Short-period Returns
 displayname: tax-short-period
 ---

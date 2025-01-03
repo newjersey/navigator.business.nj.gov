@@ -1,5 +1,5 @@
 ---
-filename: healthcare-cds-reinstate
+id: healthcare-cds-reinstate
 name: Reinstate Your Controlled Dangerous Substances Registration
 industryIds:
   - healthcare
@@ -10,7 +10,7 @@ summaryDescriptionMd: >-
   Podiatrist, Veterinarian, Physician Assistant, Advanced Practice Nurse, or
   Certified Nurse Midwife, and your CDS registration expired less than 30 days
   ago, [you can renew online](https://newjersey.mylicense.com/). If it has been
-  expired for more than 30 days or is inactive, you need to reinstate it. 
+  expired for more than 30 days or is inactive, you need to reinstate it.
 
 
   You must be registered with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) before applying for your CDS reinstatement.

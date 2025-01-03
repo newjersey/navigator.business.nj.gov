@@ -1,5 +1,4 @@
 ---
-filename: international-standard-book-number-isbn
 displayname: international-standard-book-number-isbn
 id: "international-standard-book-number-isbn"
 webflowId: "5f7728dff17efb3a6ceefb2f"

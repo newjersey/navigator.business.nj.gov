@@ -1,6 +1,5 @@
 ---
-slug: cannabis-annual-license
-filename: cannabis-annual-license
+id: cannabis-annual-license
 displayname: cannabis-annual-license
 header: Annual License
 ---

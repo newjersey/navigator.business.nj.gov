@@ -1,5 +1,4 @@
 ---
-filename: nj-cool
 name: NJ Cool
 displayName: nj-cool
 urlSlug: nj-cool

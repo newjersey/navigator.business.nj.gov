@@ -1,5 +1,4 @@
 ---
-filename: painting-house
 displayname: painting-house
 id: "painting-house"
 webflowId: "5f772911614a2d913ad207a1"

@@ -1,6 +1,5 @@
 ---
-slug: business-structure-learn-more
-filename: business-structure-learn-more
+id: business-structure-learn-more
 header: Business Structures
 displayname: business-structure-learn-more
 ---

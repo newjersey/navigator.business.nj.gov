@@ -1,6 +1,5 @@
 ---
-slug: authorized-representative
-filename: authorized-representative
+id: authorized-representative
 displayname: authorized-representative
 header: Authorized Representative
 ---

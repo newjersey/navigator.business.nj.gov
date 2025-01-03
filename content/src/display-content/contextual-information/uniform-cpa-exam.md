@@ -1,6 +1,5 @@
 ---
-slug: uniform-cpa-exam
-filename: uniform-cpa-exam
+id: uniform-cpa-exam
 displayname: uniform-cpa-exam
 header: Uniform CPA Exam
 ---

@@ -1,5 +1,4 @@
 ---
-filename: frozen-desserts
 displayname: frozen-desserts
 id: "frozen-desserts"
 webflowId: "5f772941b4710f2b773c37b7"

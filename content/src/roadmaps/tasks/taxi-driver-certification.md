@@ -7,7 +7,6 @@ summaryDescriptionMd: >-
 
   (Only drivers holding a Commercial Driver’s License (CDL) with a Passenger (P) endorsement are exempt from this requirement.)
 urlSlug: driver-certification
-filename: taxi-driver-certification
 displayname: driver-certification
 name: Apply to Certify Your Drivers
 id: taxi-driver-certification
@@ -15,20 +14,21 @@ callToActionLink: https://www.state.nj.us/mvc/pdf/business/CDL-5.pdf
 callToActionText: Apply to Certify My Drivers
 agencyId: nj-motor-vehicle
 ---
+
 ## Eligibility Requirements
 
-* Drivers must be at least 21 years old
-* Drivers must pass a criminal background check
+- Drivers must be at least 21 years old
+- Drivers must pass a criminal background check
 
 ## Application Requirements
 
-* Business name
-* Business address
-*  `NJ Tax ID|tax-id` 
-* Driver’s name
-* Driver’s address
-* Driver’s license number
-* Driver’s Social Security Number (SSN)
+- Business name
+- Business address
+- `NJ Tax ID|tax-id`
+- Driver’s name
+- Driver’s address
+- Driver’s license number
+- Driver’s Social Security Number (SSN)
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 

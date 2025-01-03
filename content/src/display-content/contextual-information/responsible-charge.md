@@ -1,6 +1,5 @@
 ---
-slug: responsible-charge
-filename: responsible-charge
+id: responsible-charge
 displayname: responsible-charge
 header: Responsible Charge
 ---

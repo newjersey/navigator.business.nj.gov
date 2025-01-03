@@ -1,6 +1,5 @@
 ---
-slug: financial-business
-filename: financial-business
+id: financial-business
 displayname: financial-business
 header: Financial Business
 ---

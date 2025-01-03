@@ -10,7 +10,6 @@ summaryDescriptionMd: >-
 
   Every local government has a unique process and cost associated with obtaining a liquor license. Contact your local clerk's office to verify the cost and availability of a liquor license in your area.
 urlSlug: liquor-license-availability
-filename: liquor-license-availability
 displayname: liquor-license-availability
 name: Confirm Liquor License Availability
 id: liquor-license-availability

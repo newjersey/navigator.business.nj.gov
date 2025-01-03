@@ -1,5 +1,4 @@
 ---
-filename: inspector-electrical-ucc
 displayname: inspector-electrical-ucc
 id: "inspector-electrical-ucc"
 webflowId: "5f7729958e9f8750f56859c7"

@@ -1,7 +1,6 @@
 ---
-filename: employment-agency-types
 header: Employment and Personnel Services
-slug: employment-agency-types
+id: employment-agency-types
 displayname: employment-agency-types
 ---
 

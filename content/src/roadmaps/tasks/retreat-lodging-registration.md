@@ -8,7 +8,6 @@ summaryDescriptionMd: If your nonprofit organization owns a new `retreat or
   property, update the registration to transfer the ownership to your
   organization.
 urlSlug: retreat-lodging-registration
-filename: retreat-lodging-registration
 displayname: retreat-lodging-registration
 name: Register Your Overnight Retreat or Conference Center
 id: retreat-lodging-registration
@@ -18,28 +17,29 @@ industryId: ""
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of Housing Inspection
 ---
+
 ## Application Requirements
 
-* Business name
-*  `Employee Identification Number (EIN)|ein` 
-*  `Entity ID|entity-id` or NJ corporate registration number
-*  `Form of property ownership|property-ownership` 
-* Name and address of each officer
-* Name and address of your `registered agent|registered-agent` 
-*  `Certificate of Formation or Authority|certificate-formation` 
-* Property name and address
-* Date when you acquired the property, if you are the new owner of an existing property
-* Building names and addresses if there is more than 1 building on the property
-* The year, or approximate year, the building(s) was built
-* Number of rooms or units in each building
-* Number of stories in each building
-* Name, address, and phone number of your `authorized agent|authorized-agent` 
-* Name and address of your `mortgagee|mortgagee` , if applicable
-* Name and address of your `net lessee|net-lessee` , if applicable
-* Name and address of your maintenance service provider
-* Name, address, and phone number of your `emergency repair expenditure authorizer|emergency-repair-authorizer` 
-* Name and address of your fuel oil supplier and the grade of fuel oil used, if your building(s) is heated by fuel oil
-* Applicable fees paid
+- Business name
+- `Employee Identification Number (EIN)|ein`
+- `Entity ID|entity-id` or NJ corporate registration number
+- `Form of property ownership|property-ownership`
+- Name and address of each officer
+- Name and address of your `registered agent|registered-agent`
+- `Certificate of Formation or Authority|certificate-formation`
+- Property name and address
+- Date when you acquired the property, if you are the new owner of an existing property
+- Building names and addresses if there is more than 1 building on the property
+- The year, or approximate year, the building(s) was built
+- Number of rooms or units in each building
+- Number of stories in each building
+- Name, address, and phone number of your `authorized agent|authorized-agent`
+- Name and address of your `mortgagee|mortgagee` , if applicable
+- Name and address of your `net lessee|net-lessee` , if applicable
+- Name and address of your maintenance service provider
+- Name, address, and phone number of your `emergency repair expenditure authorizer|emergency-repair-authorizer`
+- Name and address of your fuel oil supplier and the grade of fuel oil used, if your building(s) is heated by fuel oil
+- Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 

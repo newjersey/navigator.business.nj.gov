@@ -1,5 +1,4 @@
 ---
-filename: phone-wiring
 displayname: phone-wiring
 id: "phone-wiring"
 webflowId: "5f7729b015a3950288f71660"

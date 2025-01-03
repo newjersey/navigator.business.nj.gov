@@ -1,6 +1,5 @@
 ---
-slug: lease-considerations
-filename: lease-considerations
+id: lease-considerations
 displayname: lease-considerations
 header: Lease Considerations
 ---

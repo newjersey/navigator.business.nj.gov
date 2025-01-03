@@ -1,6 +1,5 @@
 ---
 id: multiple-dwelling-registration
-filename: multiple-dwelling-registration
 displayname: multiple-dwelling-registration
 urlSlug: multiple-dwelling-registration
 name: Register Your Multiple Dwelling, Such as an Apartment or Condominium Complex

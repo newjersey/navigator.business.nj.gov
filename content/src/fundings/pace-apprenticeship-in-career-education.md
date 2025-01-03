@@ -1,9 +1,8 @@
 ---
-filename: Pace Apprenticeship in Career Education
 name: Pace Apprenticeship in Career Education
 displayName: pace
 urlSlug: pace-apprentice
-id: pace
+id: pace-apprenticeship-in-career-education
 sidebarCardBodyText: The Pre-Apprenticeship in Career Education (PACE) program
   aims to better align secondary, post-secondary, adult education, and
   occupational training to meet labor demands unique to New Jersey and develop
@@ -14,7 +13,7 @@ summaryDescriptionMd: >-
   The Pre-Apprenticeship in Career Education (PACE) program aims to better align
   secondary, post-secondary, adult education, and occupational training to meet
   labor demands unique to New Jersey and develop career pathways leading to
-  economically sustainable wages. 
+  economically sustainable wages.
 
 
   As a participant, you or your organization could be part of a program that provides education and training leading to one of the following outcomes:
@@ -44,10 +43,11 @@ county:
 sector: []
 publishStageArchive: null
 ---
+
 ## Eligibility
 
-* Entities who are developing new, or building upon existing Registered Apprenticeship programs
-* Any employer, trade associations, labor organization, or others with programs supporting the industries in which they work
+- Entities who are developing new, or building upon existing Registered Apprenticeship programs
+- Any employer, trade associations, labor organization, or others with programs supporting the industries in which they work
 
 :::callout{ showHeader="true" headerText="Benefit" showIcon="false" calloutType="conditional" }
 

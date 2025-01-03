@@ -1,5 +1,4 @@
 ---
-filename: charitable-organization
 displayname: charitable-organization
 id: "charitable-organization"
 webflowId: "5f77297ff278ccfbccb0ce23"

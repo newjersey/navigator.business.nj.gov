@@ -1,9 +1,8 @@
 ---
-filename: brownfield-impact-fund
 name: Brownfield Impact Fund (USEPA RLF)
 displayName: brownfield-impact
 urlSlug: brownfield-impact-fund
-id: brownfield-impact-fund-usepa-rlf
+id: brownfield-impact-fund
 sidebarCardBodyText: This is a pilot program by the federal Environmental
   Protection Agency's Revolving Loan Fund to support cleanups at brownfield
   sites.

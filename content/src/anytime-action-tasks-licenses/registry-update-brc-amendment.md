@@ -2,7 +2,7 @@
 notesMd: "Draft:
   https://docs.google.com/document/d/1WrduHkRAUP5nvXrz7Q7A0nV5NUXGDJdaWO423D2R7\
   ic/edit"
-filename: registry-update-brc-amendment
+id: registry-update-brc-amendment
 name: Update Your Business Registration Certificate and/or Registry Account
 applyToAllUsers: true
 urlSlug: registry-update-brc-amendment

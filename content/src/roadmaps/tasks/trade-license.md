@@ -2,7 +2,6 @@
 summaryDescriptionMd: Ensure you, your employees, or subcontractors have any
   required trade license(s).
 urlSlug: trade-license
-filename: trade-license
 displayname: trade-license
 name: Ensure You, Your Employees, or Subcontractors are Licensed
 id: trade-license

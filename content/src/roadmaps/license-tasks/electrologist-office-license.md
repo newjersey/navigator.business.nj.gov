@@ -1,7 +1,6 @@
 ---
 licenseName: Electrologists-Premises
 id: electrologist-office-license
-filename: electrologist-office-license
 displayname: electrologist-office-license
 urlSlug: electrologist-office-license
 name: " Apply for Your Electrologist Office Premises"
@@ -16,16 +15,17 @@ agencyId: nj-consumer-affairs
 divisionPhone: (973) 504-6377
 webflowId: 66e9d9648d1f1a667a8f04eb
 ---
+
 ## Application Requirements
 
-* License number, if applicable
-* Social Security number
-* Business name, address, and phone number
-*  `Certificate of Formation|certificate-formation` 
-* Name of business owner(s)
-* A permit and passing inspection of the premises to prove that the premises meet the Universal Precautions for Infection Control criteria
-* Affidavit signed in front of a public notary
-* Applicable fees paid
+- License number, if applicable
+- Social Security number
+- Business name, address, and phone number
+- `Certificate of Formation|certificate-formation`
+- Name of business owner(s)
+- A permit and passing inspection of the premises to prove that the premises meet the Universal Precautions for Infection Control criteria
+- Affidavit signed in front of a public notary
+- Applicable fees paid
 
 Contact the Electrologists Advisory Committee for an Electrologist Office Premise Application.
 

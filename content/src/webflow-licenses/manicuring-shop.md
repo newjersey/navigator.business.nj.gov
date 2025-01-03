@@ -1,5 +1,4 @@
 ---
-filename: manicuring-shop
 displayname: manicuring-shop
 id: "manicuring-shop"
 webflowId: "5f77299928e85509291958c8"

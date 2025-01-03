@@ -1,5 +1,4 @@
 ---
-filename: solid-waste-facility
 displayname: solid-waste-facility
 id: "solid-waste-facility"
 webflowId: "5f77291f486eeb6579c2560e"
