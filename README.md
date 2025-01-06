@@ -260,7 +260,7 @@ account for and understand this.
 We solve this by using **document versioning** and running **migrations** on
 individual documents as we retrieve them from storage. The documents are stored
 with a schema version number (which is stripped before sending to the frontend).
-On a get request for a document, if its version is out-of-date with the most
+On a `GET` request for a document, if its version is out-of-date with the most
 recent, we run a series of migrations on it to map the data to the current
 structure. We then save that new document in the current version, and return it
 to the frontend.
@@ -280,27 +280,31 @@ Notes about this approach:
 
 #### Adding a new migration
 
-If you want to change the structure of the `UserData` object, here's how:
+If you want to change the structure of the `UserData` object, there is a helper script
+that creates and updates most of the relevant code at `./scripts/generate-new-migration.sh`.
+It takes the following actions:
 
-1. **Create a new file** in `./api/src/db/migrations` and name it
-   `v{X}_descriptionHere.ts` where `{X}` is replaced by the next successive
-   version.
+1. **Creates a new file** in `./api/src/db/migrations` and names it
+   `v{X}_{migration_description}.ts` where `{X}` is replaced by the next
+   successive version and `{migration_description}` is a snake-cased name
+   describing the data being changed in the migration. The`{migration_description}`
+   is prompted by the script and input by the user when running `generate-new-migration.sh`.
 
-2. **Create a new type** in the file and name it `v{X}UserData` that defines the
-   new structure of your new UserData type.
+2. **Creates a new type** in the file and names it `v{X}UserData`, which defines the
+   new structure of your new `UserData` type.
 
-3. **Create a migration function** in the file with type signature
-   `(v{X-1}UserData) => v{X}UserData` and in here, define the way that the
-   previous version of the object should be mapped to the new structure. Test
-   it.
+3. **Creates a migration function** in the file with type signature
+   `(v{X-1}UserData) => v{X}UserData`, which defines the way that the
+   previous version of the object should be mapped to the new structure.
 
-4. **Add the migration function to the list** of functions in
-   `./api/src/db/migrations/migrations.ts`. Make sure it's in order at its
-   proper index. Do **NOT** skip versions because the index of this array must
-   match the index that it is migrating from. ie, `migrate_v4_to_v5` must be at
-   index 4 of this array.
+   - **Note:** `generate-new-migration.sh` currently just copies the previous migration function.
+     _You must write your own updated migration function_. You should also test it to verify transformations
+     are executed properly.
 
-5. **Change the types** in `types.ts` for `UserData` (and `factories` and
+4. **Adds the migration function to the list** of functions in
+   `./api/src/db/migrations/migrations.ts`. This array should be ordered by ascending version number.
+
+5. **Changes the types** in `types.ts` for `UserData` (and `factories` and
    anywhere else needed) to reflect the newest version of the type to the rest
    of the code.
 
