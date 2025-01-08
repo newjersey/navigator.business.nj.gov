@@ -5,6 +5,8 @@ import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from
 import { defaultDateFormat } from "../defaultConstants";
 import { createBusinessId } from "../domain-logic/createBusinessId";
 import {
+  AirData,
+  AirQuestionnaireData,
   EnvironmentData,
   LandData,
   LandQuestionnaireData,
@@ -395,10 +397,33 @@ export const generateWasteData = (overrides: Partial<WasteData>): WasteData => {
   };
 };
 
+export const generateAirQuestionnaireData = (
+  overrides: Partial<AirQuestionnaireData>
+): AirQuestionnaireData => {
+  return {
+    emitEmissions: false,
+    emitPollutants: false,
+    constructionActivities: false,
+    noAir: false,
+    ...overrides,
+  };
+};
+
+export const generateAirData = (overrides: Partial<AirData>): AirData => {
+  return {
+    questionnaireData: generateAirQuestionnaireData({
+      ...overrides.questionnaireData,
+    }),
+    submitted: false,
+    ...overrides,
+  };
+};
+
 export const generateEnvironmentData = (overrides: Partial<EnvironmentData>): EnvironmentData => {
   return {
     waste: undefined,
     land: undefined,
+    air: undefined,
     ...overrides,
   };
 };

@@ -66,6 +66,7 @@ export const TaskPageSwitchComponent = ({
   return rswitch(task.id, {
     "waste-permitting": <EnvPermit task={task} />,
     "land-permitting": <EnvPermit task={task} />,
+    "air-permitting": <EnvPermit task={task} />,
     "elevator-registration": (
       <ElevatorRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),

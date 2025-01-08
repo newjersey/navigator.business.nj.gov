@@ -1,10 +1,14 @@
 export type EnvironmentData = {
   waste?: WasteData;
   land?: LandData;
+  air?: AirData;
 };
 
 export type MediaArea = keyof EnvironmentData;
-export type QuestionnaireFieldIds = WasteQuestionnaireFieldIds | LandQuestionnaireFieldIds;
+export type QuestionnaireFieldIds =
+  | WasteQuestionnaireFieldIds
+  | LandQuestionnaireFieldIds
+  | AirQuestionnaireFieldIds;
 export type Questionnaire = Record<QuestionnaireFieldIds, boolean>;
 export type QuestionnaireConfig = Record<QuestionnaireFieldIds, string>;
 
@@ -35,3 +39,16 @@ export type LandQuestionnaireFieldIds =
   | "noLand";
 
 export type LandQuestionnaireData = Record<LandQuestionnaireFieldIds, boolean>;
+
+export type AirData = {
+  questionnaireData?: AirQuestionnaireData;
+  submitted: boolean;
+};
+
+export type AirQuestionnaireFieldIds =
+  | "emitPollutants"
+  | "emitEmissions"
+  | "constructionActivities"
+  | "noAir";
+
+export type AirQuestionnaireData = Record<AirQuestionnaireFieldIds, boolean>;

@@ -28,6 +28,16 @@
         "siteImprovementWasteLands": "My business will carry out site improvement in or near wetlands or flood hazard areas. This includes activities such as cutting down trees.",
         "noLand": "None of the above apply."
       }
+    },
+    "air": {
+      "mediaAreaText": "air",
+      "mediaAreaLink": "[NJDEP’s page on Stationary Sources](https://dep.nj.gov/boss/)",
+      "questionnaireOptions": {
+        "emitPollutants": "My business will be using equipment that emits air `pollutants|pollutants`.",
+        "emitEmissions": "My business will release `air emissions|air-emissions` (dust, fumes, vapors, odors, etc).",
+        "constructionActivities": "My business plans to conduct construction activities (crushers, conveyors, shredders, stationary engines, or equipment that generate dust).",
+        "noAir": "None of the above apply."
+      }
     }
   },
   "envResultsPage": {
@@ -39,7 +49,8 @@
       "partTwo": "license or permit. Find out your business's requirements below.",
       "mediaAreaText": {
         "waste": "waste",
-        "land": "watershed and land management"
+        "land": "watershed and land management",
+        "air": "air"
       }
     },
     "personalizedSupport": {
@@ -49,21 +60,35 @@
     },
     "contactDep": {
       "title": "Contact DEP",
-      "body": "To find out which licenses or permits you need, contact the ${bodyLink}",
+      "body": "To find out which licenses or permits you need, contact the ${bodyLink}:",
       "waste": {
         "heading": "Waste Requirements",
-        "bodyLink": "[Division of Sustainable Waste Management](https://www.nj.gov/dep/dshw/):",
+        "bodyLink": "[Division of Sustainable Waste Management](https://www.nj.gov/dep/dshw/)",
         "contact": {
+          "phoneInfo": "",
           "phone": "(609) 633-1418",
-          "form": ""
+          "form": "",
+          "email": ""
         }
       },
       "land": {
         "heading": "Watershed and Land Management Requirements",
-        "bodyLink": "[Watershed and Land Management Program](https://dep.nj.gov/wlm/contact-us/):",
+        "bodyLink": "[Watershed and Land Management Program](https://dep.nj.gov/wlm/contact-us/)",
         "contact": {
+          "phoneInfo": "",
           "phone": "(877) 927-6337",
-          "form": "[Form](https://dep.nj.gov/wlm/contact-us/)"
+          "form": "[Form](https://dep.nj.gov/wlm/contact-us/)",
+          "email": ""
+        }
+      },
+      "air": {
+        "heading": "Air Requirements",
+        "bodyLink": "[Bureau of Stationary Sources](https://dep.nj.gov/boss/contact-information/)",
+        "contact": {
+          "phoneInfo": "General Permit Help Desk:",
+          "phone": "(609) 633-2829",
+          "form": "",
+          "email": "aqppls@dep.nj.gov"
         }
       }
     },

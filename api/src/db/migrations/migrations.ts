@@ -58,6 +58,7 @@ import { migrate_v13_to_v14 } from "@db/migrations/v14_add_cleaning_aid_industry
 import { migrate_v149_to_v150 } from "@db/migrations/v150_remove_needs_nexus_dba_name";
 import { migrate_v150_to_v151 } from "@db/migrations/v151_extract_business_data";
 import { migrate_v151_to_v152 } from "@db/migrations/v152_add_land_to_environment_data";
+import { migrate_v152_to_v153 } from "@db/migrations/v153_add_air_to_environment_data";
 import { migrate_v14_to_v15 } from "@db/migrations/v15_add_retail_industry";
 import { migrate_v15_to_v16 } from "@db/migrations/v16_add_user_preferences";
 import { migrate_v16_to_v17 } from "@db/migrations/v17_add_operate_section";
@@ -308,6 +309,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v149_to_v150,
   migrate_v150_to_v151,
   migrate_v151_to_v152,
+  migrate_v152_to_v153,
 ];
 
-export { generatev152UserData as CURRENT_GENERATOR } from "@db/migrations/v152_add_land_to_environment_data";
+export { generatev153UserData as CURRENT_GENERATOR } from "@db/migrations/v153_add_air_to_environment_data";

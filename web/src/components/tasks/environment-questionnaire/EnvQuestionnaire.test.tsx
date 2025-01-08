@@ -5,7 +5,11 @@ import { currentBusiness, WithStatefulUserData } from "@/test/mock/withStatefulU
 import { generateEnvironmentData, generateLandData, generateWasteData } from "@businessnjgovnavigator/shared";
 import { MediaArea, QuestionnaireFieldIds } from "@businessnjgovnavigator/shared/environment";
 import { Business } from "@businessnjgovnavigator/shared/index";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import {
+  generateAirData,
+  generateBusiness,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
 import userEvent, { UserEvent } from "@testing-library/user-event";
 
@@ -104,15 +108,6 @@ describe("<EnvQuestionnaire />", () => {
       await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
       expect(currentBusiness().taskProgress[taskId]).toEqual("COMPLETED");
     });
-
-    it("calls scrollToTop when saved", async () => {
-      const { user } = renderQuestionnaireAndSetupUser();
-      await user.click(
-        screen.getByLabelText(Config.envQuestionPage.waste.questionnaireOptions.hazardousMedicalWaste)
-      );
-      await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
-      expect(mockHelpers.scrollToTop).toHaveBeenCalledTimes(1);
-    });
   });
 
   describe("land", () => {
@@ -185,14 +180,68 @@ describe("<EnvQuestionnaire />", () => {
       await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
       expect(currentBusiness().taskProgress[taskId]).toEqual("COMPLETED");
     });
+  });
 
-    it("calls scrollToTop when saved", async () => {
+  describe("air", () => {
+    beforeEach(() => {
+      jest.resetAllMocks();
+      taskId = "air-permitting";
+      mediaArea = "air";
+      noSelectionOption = "noAir";
+    });
+
+    it("clears all choices if the user selects none of the above", async () => {
       const { user } = renderQuestionnaireAndSetupUser();
-      await user.click(
-        screen.getByLabelText(Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz)
+      await user.click(screen.getByLabelText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions));
+      await user.click(screen.getByText(Config.envQuestionPage.air.questionnaireOptions.noAir));
+      const emitEmissions: HTMLInputElement = screen.getByLabelText(
+        Config.envQuestionPage.air.questionnaireOptions.emitEmissions
+      );
+      expect(emitEmissions).not.toBeChecked();
+    });
+
+    it("clears none of the above if another selection is made", async () => {
+      const { user } = renderQuestionnaireAndSetupUser();
+      await user.click(screen.getByLabelText(Config.envQuestionPage.air.questionnaireOptions.noAir));
+      await user.click(screen.getByLabelText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions));
+      const noAir: HTMLInputElement = screen.getByLabelText(
+        Config.envQuestionPage.air.questionnaireOptions.noAir
+      );
+      expect(noAir).not.toBeChecked();
+    });
+
+    it("throws an error if no selection is made and user clicks save", async () => {
+      const { user } = renderQuestionnaireAndSetupUser(
+        generateBusiness({
+          environmentData: generateEnvironmentData({
+            air: generateAirData({
+              questionnaireData: {
+                emitEmissions: false,
+                emitPollutants: false,
+                constructionActivities: false,
+                noAir: false,
+              },
+              submitted: false,
+            }),
+          }),
+        })
       );
       await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
-      expect(mockHelpers.scrollToTop).toHaveBeenCalledTimes(1);
+      expect(screen.getByText(Config.envQuestionPage.generic.errorText)).toBeInTheDocument();
+    });
+
+    it("updates user data with the user's selections when saved", async () => {
+      const { user } = renderQuestionnaireAndSetupUser();
+      await user.click(screen.getByLabelText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions));
+      await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
+      expect(currentBusiness().environmentData?.air?.questionnaireData?.emitEmissions).toBe(true);
+    });
+
+    it("updates the task progress to COMPLETED when saved", async () => {
+      const { user } = renderQuestionnaireAndSetupUser();
+      await user.click(screen.getByLabelText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions));
+      await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
+      expect(currentBusiness().taskProgress[taskId]).toEqual("COMPLETED");
     });
   });
 
@@ -204,6 +253,7 @@ describe("<EnvQuestionnaire />", () => {
     const getOptionText = (mediaArea: string): string => {
       if (mediaArea === "land") return Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz;
       if (mediaArea === "waste") return Config.envQuestionPage.waste.questionnaireOptions.compostWaste;
+      if (mediaArea === "air") return Config.envQuestionPage.air.questionnaireOptions.emitEmissions;
       return "";
     };
 
@@ -220,6 +270,13 @@ describe("<EnvQuestionnaire />", () => {
           taskId: "waste-permitting",
           mediaArea: "waste",
           noSelectionOption: "noWaste",
+        },
+      ],
+      [
+        {
+          taskId: "air-permitting",
+          mediaArea: "air",
+          noSelectionOption: "noAir",
         },
       ],
     ])("calls scrollToTop when saved when media area is %s", async (obj) => {
