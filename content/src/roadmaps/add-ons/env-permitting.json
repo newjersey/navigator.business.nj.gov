@@ -13,6 +13,12 @@
       "weight": 21,
       "task": "land-permitting",
       "required": false
+    },
+    {
+      "step": 3,
+      "weight": 22,
+      "task": "air-permitting",
+      "required": false
     }
   ]
 }

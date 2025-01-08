@@ -2,17 +2,17 @@ import { EnvPermitsResults } from "@/components/tasks/environment-questionnaire/
 import { getMergedConfig } from "@/contexts/configContext";
 import { currentBusiness, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
-  generateLandData,
-  generateLandQuestionnaireData,
-  generateWasteData,
-} from "@businessnjgovnavigator/shared";
-import { MediaArea, QuestionnaireFieldIds } from "@businessnjgovnavigator/shared/environment";
-import {
+  generateAirData,
+  generateAirQuestionnaireData,
   generateBusiness,
   generateEnvironmentData,
+  generateLandData,
+  generateLandQuestionnaireData,
   generateUserDataForBusiness,
+  generateWasteData,
   generateWasteQuestionnaireData,
-} from "@businessnjgovnavigator/shared/test";
+} from "@businessnjgovnavigator/shared";
+import { MediaArea, QuestionnaireFieldIds } from "@businessnjgovnavigator/shared/environment";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { render, screen } from "@testing-library/react";
 import userEvent, { UserEvent } from "@testing-library/user-event";
@@ -300,6 +300,131 @@ describe("<EnvPermitsResults />", () => {
             land: {
               questionnaireData: generateLandQuestionnaireData({
                 noLand: true,
+              }),
+              submitted: true,
+            },
+          }),
+          taskProgress: { [taskId]: "COMPLETED" },
+        })
+      );
+      await user.click(screen.getByText(Config.envResultsPage.lowApplicability.calloutRedo));
+      expect(currentBusiness().taskProgress[taskId]).toBe("IN_PROGRESS");
+    });
+  });
+
+  describe("air", () => {
+    beforeEach(() => {
+      jest.resetAllMocks();
+      taskId = "air-permitting";
+      mediaArea = "air";
+      noSelectionOption = "noAir";
+    });
+
+    it("displays the texts of the responses that are true in user data", () => {
+      renderEnvPermitsResults(
+        generateBusiness({
+          environmentData: generateEnvironmentData({
+            air: {
+              questionnaireData: generateAirQuestionnaireData({
+                emitPollutants: true,
+                emitEmissions: true,
+                constructionActivities: true,
+              }),
+              submitted: true,
+            },
+          }),
+        })
+      );
+      expect(
+        screen.getByText(Config.envQuestionPage.air.questionnaireOptions.emitPollutants)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.envQuestionPage.air.questionnaireOptions.constructionActivities)
+      ).toBeInTheDocument();
+    });
+
+    it("doesn't display the texts of the responses that are false in user data", () => {
+      renderEnvPermitsResults(
+        generateBusiness({
+          environmentData: generateEnvironmentData({
+            air: {
+              questionnaireData: generateAirQuestionnaireData({
+                emitPollutants: false,
+                emitEmissions: false,
+                constructionActivities: false,
+              }),
+              submitted: true,
+            },
+          }),
+        })
+      );
+      expect(
+        screen.queryByText(Config.envQuestionPage.air.questionnaireOptions.emitPollutants)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.envQuestionPage.air.questionnaireOptions.constructionActivities)
+      ).not.toBeInTheDocument();
+    });
+
+    it("updates submitted to false when the user clicks edit", async () => {
+      const { user } = renderEnvPermitsResultsAndSetupUser(
+        generateBusiness({
+          environmentData: generateEnvironmentData({
+            air: generateAirData({
+              submitted: true,
+            }),
+          }),
+        })
+      );
+      await user.click(screen.getByText(Config.envResultsPage.editText));
+      expect(currentBusiness().environmentData?.air?.submitted).toBe(false);
+    });
+
+    it("updates submitted to false when the user clicks redo form", async () => {
+      const { user } = renderEnvPermitsResultsAndSetupUser(
+        generateBusiness({
+          environmentData: generateEnvironmentData({
+            air: {
+              questionnaireData: generateAirQuestionnaireData({
+                noAir: true,
+              }),
+              submitted: true,
+            },
+          }),
+        })
+      );
+      await user.click(screen.getByText(Config.envResultsPage.lowApplicability.calloutRedo));
+      expect(currentBusiness().environmentData?.air?.submitted).toBe(false);
+    });
+
+    it("updates task progress to IN_PROGRESS when the user clicks edit", async () => {
+      const { user } = renderEnvPermitsResultsAndSetupUser(
+        generateBusiness({
+          environmentData: generateEnvironmentData({
+            air: generateAirData({
+              submitted: true,
+            }),
+          }),
+          taskProgress: { [taskId]: "COMPLETED" },
+        })
+      );
+      await user.click(screen.getByText(Config.envResultsPage.editText));
+      expect(currentBusiness().taskProgress[taskId]).toBe("IN_PROGRESS");
+    });
+
+    it("updates task progress to IN_PROGRESS when the user clicks redo form", async () => {
+      const { user } = renderEnvPermitsResultsAndSetupUser(
+        generateBusiness({
+          environmentData: generateEnvironmentData({
+            air: {
+              questionnaireData: generateAirQuestionnaireData({
+                noAir: true,
               }),
               submitted: true,
             },

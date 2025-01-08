@@ -80,7 +80,6 @@ describe("v152_add_land_to_environment_data", () => {
   it("adds land section to environment data", () => {
     const id = "biz-1";
     const v151Business = generatev151Business({
-      taskProgress: { "waste-permitting": "IN_PROGRESS" },
       environmentData: {
         waste: generatev151WasteData({}),
       },

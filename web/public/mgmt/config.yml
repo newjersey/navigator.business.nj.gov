@@ -1252,6 +1252,22 @@ collections:
                       - { label: Construction Activities, name: constructionActivities, widget: text }
                       - { label: Site Improvement Waste Land, name: siteImprovementWasteLands, widget: text }
                       - { label: No Land Option, name: noLand, widget: text }
+              - label: Air
+                name: air
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Media Area Text, name: mediaAreaText, widget: string }
+                  - { label: Media Area Link, name: mediaAreaLink, widget: markdown }
+                  - label: Air Questionnaire Options
+                    name: questionnaireOptions
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Emit Pollutants, name: emitPollutants, widget: text }
+                      - { label: Emit Emissions, name: emitEmissions, widget: text }
+                      - { label: Construction Activities, name: constructionActivities, widget: text }
+                      - { label: No Air Option, name: noAir, widget: text }
           - label: Results Page Config
             name: envResultsPage
             collapsed: false
@@ -1274,6 +1290,7 @@ collections:
                     fields:
                       - { label: Waste Media Area Text, name: waste, widget: string }
                       - { label: Watershed and Land Media Area Text, name: land, widget: string }
+                      - { label: Air Media Area Text, name: air, widget: string }
               - label: Personalized Support
                 name: personalizedSupport
                 collapsed: true
@@ -1317,6 +1334,21 @@ collections:
                         fields:
                           - { label: Phone Number, name: phone, widget: text }
                           - { label: Form, name: form, widget: text }
+                  - label: Air Details
+                    name: air
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Heading, name: heading, widget: text }
+                      - { label: Link in Body, name: bodyLink, widget: text }
+                      - label: Contact
+                        name: contact
+                        collapsed: true
+                        widget: object
+                        fields:
+                          - { label: Phone Number Info, name: phoneInfo, widget: text }
+                          - { label: Phone Number, name: phone, widget: text }
+                          - { label: Email, name: email, widget: text }
               - label: See Your Responses
                 name: seeYourResponses
                 collapsed: true
