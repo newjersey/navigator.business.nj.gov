@@ -4,7 +4,13 @@ import { TaxFilingCalendarEvent } from "../calendarEvent";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
 import { createBusinessId } from "../domain-logic/createBusinessId";
-import { EnvironmentData, WasteQuestionnaireData } from "../environment";
+import {
+  EnvironmentData,
+  LandData,
+  LandQuestionnaireData,
+  WasteData,
+  WasteQuestionnaireData,
+} from "../environment";
 import {
   createEmptyFormationFormData,
   FormationData,
@@ -343,6 +349,29 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
   };
 };
 
+export const generateLandQuestionnaireData = (
+  overrides: Partial<LandQuestionnaireData>
+): LandQuestionnaireData => {
+  return {
+    takeOverExistingBiz: false,
+    propertyAssessment: false,
+    constructionActivities: false,
+    siteImprovementWasteLands: false,
+    noLand: false,
+    ...overrides,
+  };
+};
+
+export const generateLandData = (overrides: Partial<LandData>): LandData => {
+  return {
+    questionnaireData: generateLandQuestionnaireData({
+      ...overrides.questionnaireData,
+    }),
+    submitted: false,
+    ...overrides,
+  };
+};
+
 export const generateWasteQuestionnaireData = (
   overrides: Partial<WasteQuestionnaireData>
 ): WasteQuestionnaireData => {
@@ -356,13 +385,20 @@ export const generateWasteQuestionnaireData = (
   };
 };
 
+export const generateWasteData = (overrides: Partial<WasteData>): WasteData => {
+  return {
+    questionnaireData: generateWasteQuestionnaireData({
+      ...overrides.questionnaireData,
+    }),
+    submitted: false,
+    ...overrides,
+  };
+};
+
 export const generateEnvironmentData = (overrides: Partial<EnvironmentData>): EnvironmentData => {
   return {
-    waste: {
-      submitted: false,
-      questionnaireData: generateWasteQuestionnaireData({ ...overrides.waste?.questionnaireData }),
-      ...overrides.waste,
-    },
+    waste: undefined,
+    land: undefined,
     ...overrides,
   };
 };

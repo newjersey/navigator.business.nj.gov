@@ -1204,43 +1204,83 @@ collections:
   - name: "environmental-compliance-section"
     label: "Env Comp - Config"
     files:
-      - label: "Waste Questionnaire Task"
-        name: "waste-questionnaire-task"
-        file: content/src/fieldConfig/waste-questionnaire-page.json
+      - label: "Environment Questionnaire Tasks"
+        name: "env-questionnaire-task"
+        file: content/src/fieldConfig/env-questionnaire.json
         editor:
           preview: false
         fields:
-          - label: Waste Questionnaire Page Config
-            name: wasteQuestionnaireQuestionsPage
+          - label: Questionnaire Page Config
+            name: envQuestionPage
             collapsed: false
             widget: object
             fields:
-              - { label: Title, name: title, widget: text }
-              - { label: Question, name: question, widget: string }
-              - { label: Footer, name: footer, widget: markdown }
-              - { label: Button Text, name: buttonText, widget: string }
-              - { label: Error Text, name: errorText, widget: string }
-              - label: Waste Options
-                name: wasteQuestionnaireOptions
+              - label: Generic
+                name: generic
                 collapsed: true
                 widget: object
                 fields:
-                  - { label: Hazardous Medical Waste Option, name: hazardousMedicalWaste, widget: text }
-                  - { label: Compost Waste Option, name: compostWaste, widget: text }
-                  - { label: Treat Process Waste Option, name: treatProcessWaste, widget: text }
-                  - { label: Construction Debris Option, name: constructionDebris, widget: text }
-                  - { label: No Waste Option, name: noWaste, widget: text }
-          - label: Waste Results Page Config
-            name: wasteQuestionnaireResultsPage
+                  - { label: Title, name: title, widget: text }
+                  - { label: Question, name: question, widget: string }
+                  - { label: Button Text, name: buttonText, widget: string }
+                  - { label: Error Text, name: errorText, widget: string }
+                  - { label: Footer, name: footerText, widget: markdown }
+              - label: Waste
+                name: waste
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Media Area Text, name: mediaAreaText, widget: string }
+                  - { label: Media Area Link, name: mediaAreaLink, widget: markdown }
+                  - label: Waste Questionnaire Options
+                    name: questionnaireOptions
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Hazardous Medical Waste Option, name: hazardousMedicalWaste, widget: text }
+                      - { label: Compost Waste Option, name: compostWaste, widget: text }
+                      - { label: Treat Process Waste Option, name: treatProcessWaste, widget: text }
+                      - { label: Construction Debris Option, name: constructionDebris, widget: text }
+                      - { label: No Waste Option, name: noWaste, widget: text }
+              - label: Land
+                name: land
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Media Area Text, name: mediaAreaText, widget: string }
+                  - { label: Media Area Link, name: mediaAreaLink, widget: markdown }
+                  - label: Land Questionnaire Options
+                    name: questionnaireOptions
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Take Over Existing Business, name: takeOverExistingBiz, widget: text }
+                      - { label: Property Assessment, name: propertyAssessment, widget: text }
+                      - { label: Construction Activities, name: constructionActivities, widget: text }
+                      - { label: Site Improvement Waste Land, name: siteImprovementWasteLands, widget: text }
+                      - { label: No Land Option, name: noLand, widget: text }
+          - label: Results Page Config
+            name: envResultsPage
             collapsed: false
             widget: object
             fields:
               - { label: Title, name: title, widget: text }
               - { label: Edit Info, name: editInfo, widget: string }
               - { label: Edit Text, name: editText, widget: string }
-              - { label: Summary Text Pt.1, name: summaryPtOne, widget: string }
-              - { label: Summary Text Pt.2, name: summaryPtTwo, widget: string }
-              - { label: Summary Media Area, name: summaryMediaArea, widget: string }
+              - label: Summary
+                name: summary
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Summary Text Pt.1, name: partOne, widget: string }
+                  - { label: Summary Text Pt.2, name: partTwo, widget: string }
+                  - label: Media Area Texts
+                    name: mediaAreaText
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Waste Media Area Text, name: waste, widget: string }
+                      - { label: Watershed and Land Media Area Text, name: land, widget: string }
               - label: Personalized Support
                 name: personalizedSupport
                 collapsed: true
@@ -1255,9 +1295,35 @@ collections:
                 widget: object
                 fields:
                   - { label: Title, name: title, widget: text }
-                  - { label: Heading, name: heading, widget: text }
-                  - { label: Body, name: body, widget: markdown }
-                  - { label: Contact, name: contact, widget: text }
+                  - { label: Body, name: body, widget: text }
+                  - label: Waste Details
+                    name: waste
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Heading, name: heading, widget: text }
+                      - { label: Link in Body, name: bodyLink, widget: text }
+                      - label: Contact
+                        name: contact
+                        collapsed: true
+                        widget: object
+                        fields:
+                          - { label: Phone Number, name: phone, widget: text }
+                          - { label: Form, name: form, widget: text }
+                  - label: Land Details
+                    name: land
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Heading, name: heading, widget: text }
+                      - { label: Link in Body, name: bodyLink, widget: text }
+                      - label: Contact
+                        name: contact
+                        collapsed: true
+                        widget: object
+                        fields:
+                          - { label: Phone Number, name: phone, widget: text }
+                          - { label: Form, name: form, widget: text }
               - label: See Your Responses
                 name: seeYourResponses
                 collapsed: true
@@ -1269,8 +1335,8 @@ collections:
                 collapsed: true
                 widget: object
                 fields:
-                  - { label: Summary Line 1, name: summaryLine1, widget: text }
-                  - { label: Summary Line 2, name: summaryLine2, widget: markdown }
+                  - { label: Summary Line 1, name: summaryLineOne, widget: text }
+                  - { label: Summary Line 2, name: summaryLineTwo, widget: markdown }
                   - { label: Callout, name: callout, widget: text }
                   - { label: Callout Redo Prompt, name: calloutRedo, widget: text }
 
