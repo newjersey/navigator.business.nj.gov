@@ -1,7 +1,10 @@
 ---
-notesMd: "Working doc:
-  https://docs.google.com/document/d/1mQcuS5Pvywl83NEyfi_MqZkupnJ80tkiBDffHS-r-\
-  nA/edit?tab=t.0"
+notesMd: >-
+  Working doc:
+  https://docs.google.com/document/d/1mQcuS5Pvywl83NEyfi_MqZkupnJ80tkiBDffHS-r-nA/edit?tab=t.0
+
+
+  1.9.25: updated with SME revisions
 licenseName: ""
 urlSlug: oos-pharmacy
 expirationEventDisplayName: Out-of-State Pharmacy Registration Expiration
@@ -57,13 +60,12 @@ You also need last year’s total number of prescriptions for compounded human d
 
 :::callout{ showHeader="true" headerText="What if I don’t renew my registration?" showIcon="false" calloutType="warning" }
 
-* Your pharmacy can’t ship or deliver prescription medications or devices to patients in New Jersey
-* Your current out-of-state pharmacy registration will expire and you will need to reapply
+Your current registration will expire and you will need to reapply for a new registration before resuming any pharmacy-related services to patients in New Jersey.
 
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-The same permit number.
+A hardcopy registration mailed to the pharmacy with an updated expiration date.
 
 :::
