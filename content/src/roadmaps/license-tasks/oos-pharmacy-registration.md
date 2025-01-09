@@ -1,7 +1,10 @@
 ---
-notesMd: "Working doc:
-  https://docs.google.com/document/d/1xojVLfQYYOQ5A4yLuOaIoi6kpBllttp4dAurn1aAT\
-  x0/edit?tab=t.0"
+notesMd: >-
+  Working doc:
+  https://docs.google.com/document/d/1xojVLfQYYOQ5A4yLuOaIoi6kpBllttp4dAurn1aATx0/edit?tab=t.0
+
+
+  1.9.25: updated with SME revisions
 licenseName: ""
 id: oos-pharmacy-registration
 filename: oos-pharmacy-registration
@@ -24,7 +27,7 @@ agencyAdditionalContext: New Jersey Board of Pharmacy
 
 ### Pharmacy Information
 
-* Pharmacy permit number from the state of origin 
+* Pharmacy permit number from the state where the pharmacy is located
 * Pharmacist-in-charge (PIC) license number
 * Weekly working hours for the PIC
 * Pharmacy hours of operation
@@ -40,7 +43,7 @@ agencyAdditionalContext: New Jersey Board of Pharmacy
 * The toll-free phone number for patient and pharmacist communication
 * If the pharmacy will not ship compounded sterile products to patients in New Jersey, complete the [Sterile Compounding Affidavit](https://www.njconsumeraffairs.gov/phar/Applications/Sterile-Compounding-Affidavit.pdf)
 * If the pharmacy will ship compounded sterile products to patients in New Jersey, complete the [Sterile Compounding Questionnaire](https://www.njconsumeraffairs.gov/phar/Applications/Sterile-Compounding-Questionnaire.pdf)
-* If the pharmacy is not open 6 days a week, a statement on pharmacy letterhead stating that New Jersey patients can still talk to a pharmacist on the 6th day
+* If the pharmacy is not open 6 days a week, a statement on pharmacy letterhead stating that New Jersey patients can still talk to a pharmacist who has access to patient records on the 6th day
 * Types of services the pharmacy provides (mail order, retail, etc.)
 
 ### Ownership Information
@@ -63,7 +66,7 @@ Email your completed application to the New Jersey Board of Pharmacy at [oosphar
 
 :::callout{ showHeader="true" headerText="What if I don't get this registration?" showIcon="false" calloutType="warning" }
 
-Your pharmacy can’t ship or deliver prescription medications or devices to patients in New Jersey, and doing so may result in severe legal penalties.
+Your pharmacy can’t ship or deliver prescription medications to patients in New Jersey. Doing so may result in fines and disciplinary actions imposed by the NJ Board of Pharmacy.
 
 :::
 
