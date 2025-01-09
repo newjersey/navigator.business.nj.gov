@@ -1,7 +1,10 @@
 ---
-notesMd: "Working doc:
-  https://docs.google.com/document/d/1xojVLfQYYOQ5A4yLuOaIoi6kpBllttp4dAurn1aAT\
-  x0/edit?tab=t.0"
+notesMd: >-
+  Working doc:
+  https://docs.google.com/document/d/1xojVLfQYYOQ5A4yLuOaIoi6kpBllttp4dAurn1aATx0/edit?tab=t.0
+
+
+  1.9.25: updated with SME revisions
 licenseName: ""
 id: oos-pharmacy-registration
 filename: oos-pharmacy-registration
