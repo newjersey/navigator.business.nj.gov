@@ -7445,15 +7445,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:15.1.4":
-  version: 15.1.4
-  resolution: "@next/eslint-plugin-next@npm:15.1.4"
-  dependencies:
-    fast-glob: 3.3.1
-  checksum: f09cfb50cf26672df5cbeac9594ff4ce2196eeb3a3192f7f53b2b88770d7e40c5bd4a39e4129a7cae5d623d65c7f5f4d1580ba289a2922438073bae7326cae40
-  languageName: node
-  linkType: hard
-
 "@next/swc-darwin-arm64@npm:15.1.4":
   version: 15.1.4
   resolution: "@next/swc-darwin-arm64@npm:15.1.4"
