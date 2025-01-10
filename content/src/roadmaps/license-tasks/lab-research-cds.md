@@ -50,6 +50,7 @@ webflowId: 6721493e43b6800b762e2452
 * Name and resume of the CDS manager or responsible person in charge of the CDS operation at your facility
 * List of people (name, address, date of birth, social security number, and title) at your facility who will have access to the CDS
 * A list of all CDS, by schedule, used or planned for use at the facility
+* A description of the research to be conducted, *or* a copy of the Food and Drug Administration (FDA) approved research protocol (for schedule I researchers only)
 * A summary or copy of the research plan, detailing how the CDS will be used (for researchers only)
 * Details of qualifications, including the researcher’s qualifications or the credentials of those overseeing the testing  (for researchers only)
 * Any professional or work licenses the applicant has from New Jersey or any other state
