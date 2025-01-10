@@ -1,4 +1,5 @@
 ---
+notesMd: "1.10.25: updated with SME revision"
 id: lab-research-cds
 filename: lab-research-cds
 displayname: lab-research-cds
