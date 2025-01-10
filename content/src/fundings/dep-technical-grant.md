@@ -16,7 +16,7 @@ summaryDescriptionMd: >-
   :::
 
 
-  Your nonprofit community group| could receive funds from Technical Assistance Grants (TAGs) to hire independent experts called Licensed Site Remediation Professionals (LSRPs). These experts help nonprofits understand the site's existing conditions, such as polluted areas.
+  Your nonprofit community group could receive funds from Technical Assistance Grants (TAGs) to hire independent experts called Licensed Site Remediation Professionals (LSRPs). These experts help nonprofits understand the site's existing conditions, such as polluted areas.
 callToActionLink: https://dep.nj.gov/grantandloanprograms/technical-assistance-grants/
 callToActionText: Learn More
 fundingType: grant
