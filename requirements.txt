@@ -16,7 +16,7 @@ idna==3.10
 ipdb==0.13.13
 ipython==8.31.0
 jedi==0.19.2
-kiwisolver==1.4.7
+kiwisolver==1.4.8
 Markdown==3.7
 matplotlib-inline==0.1.7
 matplotlib==3.10.0
