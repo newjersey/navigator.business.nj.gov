@@ -1,5 +1,4 @@
 ---
-filename: nj-accelerate
 name: NJ Accelerate
 displayName: accelerate
 urlSlug: nj-accelerate

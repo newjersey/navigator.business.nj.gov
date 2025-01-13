@@ -1,7 +1,6 @@
 ---
 urlSlug: business-education
 webflowName: Business Education
-filename: business-education
 displayname: business-education
 agencyId: education
 agencyAdditionalContext: Division of Licensing, Office of Teacher Certification and Academic Credentials

@@ -1,6 +1,5 @@
 ---
-slug: standard-business-cannabis
-filename: standard-business-cannabis
+id: standard-business-cannabis
 displayname: standard-business-cannabis
 header: Standard Business
 ---

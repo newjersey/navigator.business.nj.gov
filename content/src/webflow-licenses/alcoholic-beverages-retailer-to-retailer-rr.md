@@ -1,7 +1,6 @@
 ---
 urlSlug: alcoholic-beverages-retailer-to-retailer-rr
 webflowName: Alcoholic Beverages Retailer to Retailer (RR)
-filename: alcoholic-beverages-retailer-to-retailer-rr
 displayname: alcoholic-beverages-retailer-to-retailer-rr
 agencyId: law-public-safety
 agencyAdditionalContext: Division of Alcoholic Beverage Control

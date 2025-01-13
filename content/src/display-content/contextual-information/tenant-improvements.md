@@ -1,6 +1,5 @@
 ---
-slug: tenant-improvements
-filename: tenant-improvements
+id: tenant-improvements
 displayname: tenant-improvements
 header: Tenant Improvements
 ---

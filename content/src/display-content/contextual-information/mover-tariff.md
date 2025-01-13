@@ -1,6 +1,5 @@
 ---
-slug: mover-tariff
-filename: mover-tariff
+id: mover-tariff
 displayname: mover-tariff
 header: Tariff
 ---

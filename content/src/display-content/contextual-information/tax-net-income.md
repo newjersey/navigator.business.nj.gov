@@ -1,6 +1,5 @@
 ---
-slug: tax-net-income
-filename: tax-net-income
+id: tax-net-income
 displayname: tax-net-income
 header: Entire Net Income
 ---

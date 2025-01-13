@@ -2,7 +2,7 @@
 notesMd: "[Muni
   draft](https://docs.google.com/document/d/1Kb5h1xeshi-Vm_KjjHbRXo-ji-3DejgKUG\
   4U1shk2QQ/edit?usp=sharing)"
-filename: operating-carnival-fire-permit
+id: operating-carnival-fire-permit
 name: Get a Fire Permit for Your Carnival or Circus
 industryIds: []
 urlSlug: operating-carnival-fire-permit

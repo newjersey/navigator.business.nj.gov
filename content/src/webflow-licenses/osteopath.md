@@ -1,5 +1,4 @@
 ---
-filename: osteopath
 displayname: osteopath
 id: "osteopath"
 webflowId: "5f7729a9dd6a4950c09b606d"

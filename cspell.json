@@ -207,7 +207,9 @@
     "NCPDP",
     "NJPMP",
     "hardcopy",
-    "LSRPs"
+    "LSRPs",
+    "sitehazardous",
+    "womenled"
   ],
   "ignorePaths": [
     "node_modules/**",

@@ -1,9 +1,8 @@
 ---
-filename: sales-and-use
 name: Sales and Use Tax Exemption Program
-displayName: sales-and-use
+displayName: sales-and-use-tax-exemption-program
 urlSlug: sales-and-use
-id: sales-and-use-tax-exemption-program
+id: sales-and-use
 sidebarCardBodyText: The Sales and Use Tax Exemption Program allows qualified
   businesses to receive a sales tax exemption certificate for purchases related
   to the construction and renovation of a new business location.
@@ -33,10 +32,11 @@ county:
 sector: []
 publishStageArchive: ""
 ---
+
 ## Eligibility
 
-* Companies must have 1,000 or more employees and relocate at least 500 workers to a new or substantially rehabilitated facility, or
-* Life sciences or manufacturing companies relocating 250 or more employees
+- Companies must have 1,000 or more employees and relocate at least 500 workers to a new or substantially rehabilitated facility, or
+- Life sciences or manufacturing companies relocating 250 or more employees
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 

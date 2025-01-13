@@ -1,5 +1,4 @@
 ---
-filename: casino-owner
 displayname: casino-owner
 id: "casino-owner"
 webflowId: "5f77295fa6bfb56eb702ee08"

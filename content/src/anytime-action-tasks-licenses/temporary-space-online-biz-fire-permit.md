@@ -5,7 +5,7 @@ notesMd: >-
 
 
   NOTE: SME approved copy on 11/7
-filename: temporary-space-online-biz-fire-permit
+id: temporary-space-online-biz-fire-permit
 name: Get a Fire Permit to Set Up Your Temporary Retail Space
 industryIds:
   - e-commerce

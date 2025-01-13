@@ -1,6 +1,5 @@
 ---
-slug: provisions
-filename: provisions
+id: provisions
 header: Provisions
 displayname: provisions
 ---

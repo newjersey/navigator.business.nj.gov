@@ -1,5 +1,4 @@
 ---
-filename: pet-store
 displayname: pet-store
 id: "pet-store"
 webflowId: "5f772916d9d23748de6f48b8"

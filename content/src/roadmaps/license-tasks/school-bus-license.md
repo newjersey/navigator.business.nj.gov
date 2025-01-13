@@ -1,6 +1,5 @@
 ---
 id: school-bus-license
-filename: school-bus-license
 displayname: school-bus-license
 urlSlug: school-bus-license
 name: Ensure You or Your Drivers Have the Right Credentials

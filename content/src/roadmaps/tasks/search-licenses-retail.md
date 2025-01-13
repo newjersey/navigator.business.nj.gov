@@ -1,7 +1,6 @@
 ---
 displayname: licenses-retail-search
 urlSlug: licenses-retail-search
-filename: search-licenses-retail
 name: Search for Your License Requirements for Regulated Goods
 id: search-licenses-retail
 callToActionLink: https://business.nj.gov/licensing-and-certification-guide

@@ -109,9 +109,9 @@ describe("Dashboard [feature] [all] [group2]", () => {
 
         // tasks mini-nav
         cy.get('[data-step="4"]').first().click({ force: true });
-        cy.get('[data-task="check-local-requirements"]').first().click({ force: true });
+        cy.get('[data-task="town-mercantile-license"]').first().click({ force: true });
         cy.get('[data-task-id="register-trade-name"]').should("not.exist");
-        cy.get('[data-task-id="check-local-requirements"]').should("exist");
+        cy.get('[data-task-id="town-mercantile-license"]').should("exist");
 
         cy.get('[data-testid="back-to-dashboard"]').first().click({ force: true });
       });

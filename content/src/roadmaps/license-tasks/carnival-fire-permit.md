@@ -5,7 +5,6 @@ notesMd: "11.22.24 Note: This is not connected to a roadmap - we determined it's
   action)."
 licenseName: ""
 id: carnival-fire-permit
-filename: carnival-fire-permit
 displayname: carnival-fire-permit
 urlSlug: carnival-fire-permit
 name: Get Fire Permits for Your Traveling Carnival or Circus
@@ -27,4 +26,3 @@ divisionPhone: (609) 633-6132
 webflowType: business-license
 webflowId: 668d72e3b7480d756067a13d
 ---
-

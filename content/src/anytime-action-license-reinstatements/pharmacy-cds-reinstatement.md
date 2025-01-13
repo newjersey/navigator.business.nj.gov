@@ -5,7 +5,7 @@ notesMd: >-
   * Working draft: https://docs.google.com/document/d/1Z-DF2hB6N4wyVUQqH_-G0A2DPt4Rcb5uqWdJ35q3EeQ/edit
 
   * 8.12: updated steps 1-3 per CDS SME
-filename: pharmacy-cds-reinstatement
+id: pharmacy-cds-reinstatement
 name: Reinstate Your Pharmacy’s Controlled Dangerous Substances Registration
 urlSlug: pharmacy-cds-reinstatement
 licenseName: ""

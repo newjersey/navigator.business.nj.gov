@@ -1,6 +1,5 @@
 ---
-slug: general-partner
-filename: general-partner
+id: general-partner
 displayname: general-partner
 header: General Partner
 ---

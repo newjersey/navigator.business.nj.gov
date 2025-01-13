@@ -1,5 +1,4 @@
 ---
-filename: money-order-seller
 displayname: money-order-seller
 id: "money-order-seller"
 webflowId: "5f772929c8aaf5eacbc9b52b"

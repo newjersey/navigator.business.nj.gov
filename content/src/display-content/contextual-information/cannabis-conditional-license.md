@@ -1,6 +1,5 @@
 ---
-slug: cannabis-conditional-license
-filename: cannabis-conditional-license
+id: cannabis-conditional-license
 displayname: cannabis-conditional-license
 header: Conditional & Conversion Licenses
 ---

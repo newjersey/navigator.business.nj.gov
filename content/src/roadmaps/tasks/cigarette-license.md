@@ -15,13 +15,13 @@ notesMd: >-
 
   \
 
-  1.        ‘Tobacco products’ must be replaced with ‘cigarettes’ throughout the document. 
+  1.        ‘Tobacco products’ must be replaced with ‘cigarettes’ throughout the document.
 
 
   This license is for rolled cigarettes only.  Other tobacco products do not require this license to be sold.
 
 
-  2.       The manufacturer representative line should have ‘if applicable’ added to the end and ‘address of machine location’ removed. 
+  2.       The manufacturer representative line should have ‘if applicable’ added to the end and ‘address of machine location’ removed.
 
 
   Both this and the supplier information are only needed if applicable to the license type selected at the top of the application.
@@ -42,7 +42,6 @@ summaryDescriptionMd: >-
 
   If you sell container e-liquid and plan to have more than 50% of your retail sales come from electronic smoking devices, related accessories, and/or liquid nicotine, you must [apply for a Vapor Business License with the NJ Division of Taxation](https://www.nj.gov/treasury/taxation/pdf/other_forms/tobacco/vb-r.pdf).
 urlSlug: cigarette-license
-filename: cigarette-license
 displayname: cigarette-license
 name: Apply for Your Cigarette License
 id: cigarette-license
@@ -54,31 +53,29 @@ agencyId: nj-revenue-enterprise-services
 formName: ""
 webflowType: business-license
 ---
-- - -
+
+---
 
 ## Application Requirements
 
-* Business name
-*  `Trade name|alt-name-trade-name` , if applicable
-* 12-digit `New Jersey tax ID number|tax-id` 
-* Business address
-*  `Business type/structure|business-structure-learn-more` 
-* Owner’s information, including name, address, and email
-* Supplier information, including name, address, and phone number, if applicable
-* Manufacturer representative information, including company name, and 12-digit `NJ Tax ID number|tax-id`, if applicable
-* Any additional requirements for owning and operating a vending machine in your location; check with your municipality
-* Applicable fees paid
+- Business name
+- `Trade name|alt-name-trade-name` , if applicable
+- 12-digit `New Jersey tax ID number|tax-id`
+- Business address
+- `Business type/structure|business-structure-learn-more`
+- Owner’s information, including name, address, and email
+- Supplier information, including name, address, and phone number, if applicable
+- Manufacturer representative information, including company name, and 12-digit `NJ Tax ID number|tax-id`, if applicable
+- Any additional requirements for owning and operating a vending machine in your location; check with your municipality
+- Applicable fees paid
 
-
-Mail your completed application and any fees to: 
+Mail your completed application and any fees to:
 
 Division of Revenue and Enterprise Services
 
 PO Box 252
 
 Trenton, NJ 08646-0252
-
-
 
 :::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
 

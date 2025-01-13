@@ -1,5 +1,4 @@
 ---
-filename: teacher-of-production-personal-or-service-occupations
 displayname: teacher-of-production-personal-or-service-occupations
 id: "teacher-of-production-personal-or-service-occupations"
 webflowId: "5f772939ef4962a21746d0dc"

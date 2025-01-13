@@ -1,6 +1,6 @@
 ---
 notesMd: This is part of a multi-step task for the Government Contracting quick action
-filename: prevailing-wage
+id: prevailing-wage
 name: prevailing-wage
 sectorIds: []
 urlSlug: prevailing-wage

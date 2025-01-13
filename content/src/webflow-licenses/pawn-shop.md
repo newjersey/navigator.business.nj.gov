@@ -1,5 +1,4 @@
 ---
-filename: pawn-shop
 displayname: pawn-shop
 id: "pawn-shop"
 webflowId: "5f77292b9a1bb879fab3b912"

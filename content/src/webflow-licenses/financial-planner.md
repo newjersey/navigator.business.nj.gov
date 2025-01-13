@@ -1,5 +1,4 @@
 ---
-filename: financial-planner
 displayname: financial-planner
 id: "financial-planner"
 webflowId: "5f77298ba195c8507115b18c"

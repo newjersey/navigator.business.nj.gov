@@ -248,7 +248,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
   };
 
   const goToMercantileTask = (): void => {
-    cy.get('[data-task="check-local-requirements"]').first().click({ force: true });
+    cy.get('[data-task="town-mercantile-license"]').first().click({ force: true });
   };
 
   const selectLocation = (townDisplayName: string): void => {

@@ -1,6 +1,5 @@
 ---
-slug: entity-id
-filename: entity-id
+id: entity-id
 displayname: entity-id
 header: Entity ID
 ---
