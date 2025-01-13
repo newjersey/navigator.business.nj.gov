@@ -1,6 +1,5 @@
 ---
-slug: qualifying-applicant
-filename: qualifying-applicant
+id: qualifying-applicant
 displayname: qualifying-applicant
 header: Qualifying Applicant
 ---

@@ -5,7 +5,7 @@ notesMd: >-
 
 
   (Note: Poppies also see a version of this, but in their roadmap)
-filename: register-short-term-rental
+id: register-short-term-rental
 name: Register as a Short-term Rental, if Your Town Requires It
 industryIds: []
 sectorIds:

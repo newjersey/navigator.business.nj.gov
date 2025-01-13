@@ -1,6 +1,5 @@
 ---
-slug: certified-copy
-filename: certified-copy
+id: certified-copy
 displayname: certified-copy
 header: Certified Copy
 ---

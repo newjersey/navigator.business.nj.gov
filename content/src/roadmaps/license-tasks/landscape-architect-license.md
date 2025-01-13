@@ -1,7 +1,6 @@
 ---
 licenseName: ""
 id: landscape-architect-license
-filename: landscape-architect-license
 displayname: landscape-architect-license
 urlSlug: landscape-architect-license
 name: Apply for Your Landscape Architect License

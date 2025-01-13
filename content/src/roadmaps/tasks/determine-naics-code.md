@@ -7,15 +7,15 @@ summaryDescriptionMd: >-
   New Jersey uses a code system known as the North American Industry Classification System (NAICS).
 
 
-  :::note 
+  :::note
    This screen guides your next steps. It does not submit your information for registration purposes.
   :::
 urlSlug: naics-code-determination
-filename: determine-naics-code
 displayname: naics-code-determination
 name: Determine Your NAICS Code
 id: determine-naics-code
 ---
+
 ${naicsCodeLookupComponent}
 
 :::callout{ showHeader="true" headerText="Why do I need a NAICS code?" showIcon="false" calloutType="conditional" }

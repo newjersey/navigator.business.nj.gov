@@ -4,7 +4,6 @@ notesMd: "[Muni
   16H_XXaX4/edit)"
 licenseName: ""
 id: fire-permit-food-truck
-filename: fire-permit-food-truck
 displayname: fire-permit-food-truck
 urlSlug: fire-permit-food-truck
 name: Get a Fire Permit for Your Food Truck

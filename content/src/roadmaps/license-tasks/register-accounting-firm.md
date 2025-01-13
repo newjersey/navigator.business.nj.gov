@@ -1,6 +1,5 @@
 ---
 id: register-accounting-firm
-filename: register-accounting-firm
 displayname: register-accounting-firm
 urlSlug: register-accounting-firm
 name: Register Your Accounting Firm

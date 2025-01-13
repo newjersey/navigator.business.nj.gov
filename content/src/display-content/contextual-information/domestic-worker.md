@@ -1,19 +1,20 @@
 ---
 notesMd: https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/5923
 header: Domestic Worker
-slug: domestic-worker
+id: domestic-worker
 displayname: domestic-worker
 ---
+
 Domestic workers provide in-home services to private households, including child care, house cleaning, care for elderly or disabled people, and cooking.
 
 These are examples of domestic workers:
 
-* Nannies
-* Child care providers
-* Au pairs
-* Babysitters
-* Caretakers or companions for elderly, disabled or convalescing individuals
-* House cleaners, cooks, and gardeners
+- Nannies
+- Child care providers
+- Au pairs
+- Babysitters
+- Caretakers or companions for elderly, disabled or convalescing individuals
+- House cleaners, cooks, and gardeners
 
 Domestic workers can be hired directly by a household or by an agency. Some work for multiple clients. They can be full-time, part-time, or temporary workers. They can be paid a salary or hourly, and by cash, check, or direct deposit.
 

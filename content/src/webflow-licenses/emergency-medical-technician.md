@@ -1,5 +1,4 @@
 ---
-filename: emergency-medical-technician
 displayname: emergency-medical-technician
 id: "emergency-medical-technician"
 webflowId: "5f77293fdf77de204ce1a4c7"

@@ -2,7 +2,6 @@
 name: Register Your Elevators, Lifts, and Related Devices
 id: elevator-registration
 webflowName: Elevator Registration
-filename: elevator-registration
 callToActionLink: https://njdcaportal.dynamics365portals.us/
 callToActionText: Register or Update My Elevator Device Registration
 agencyId: nj-community-affairs
@@ -22,14 +21,15 @@ webflowType: object-vehicle
 webflowId: 65d91b5ef6f946f6f6e0fbb2
 licenseCertificationClassification: undefined
 ---
+
 ## Application Requirements
 
-*  `Employer Identification Number (EIN)|ein` , if your business is a Corporation, General Partnership, Limited Liability Partnership (LLP), or Limited Partnership (LP)
-*  `Entity ID|entity-id` , if your business is a Corporation, General Partnership, Limited Liability Partnership (LLP), or Limited Partnership (LP)
-* Building address where the device is located
-* Device information, including type, classification, ID number, manufacturer, model, and installation date
-* Device specifications, such as travel distance, speed, and occupancy load
-* Applicable fees paid
+- `Employer Identification Number (EIN)|ein` , if your business is a Corporation, General Partnership, Limited Liability Partnership (LLP), or Limited Partnership (LP)
+- `Entity ID|entity-id` , if your business is a Corporation, General Partnership, Limited Liability Partnership (LLP), or Limited Partnership (LP)
+- Building address where the device is located
+- Device information, including type, classification, ID number, manufacturer, model, and installation date
+- Device specifications, such as travel distance, speed, and occupancy load
+- Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 

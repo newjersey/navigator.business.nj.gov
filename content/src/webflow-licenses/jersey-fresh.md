@@ -1,5 +1,4 @@
 ---
-filename: jersey-fresh
 displayname: jersey-fresh
 id: "jersey-fresh"
 webflowId: "5f7728e1b4710f3f613c37ae"

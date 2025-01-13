@@ -1,5 +1,4 @@
 ---
-filename: gold-seal
 displayname: gold-seal
 id: "gold-seal"
 webflowId: "5f772951de9e06cb7a7f59a0"

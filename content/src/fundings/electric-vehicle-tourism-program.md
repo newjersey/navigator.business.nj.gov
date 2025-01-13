@@ -1,9 +1,8 @@
 ---
-filename: Electric Vehicle Tourism Program
 name: Electric Vehicle Tourism Program
 displayName: electric-vehicle-tourism
 urlSlug: evtp
-id: evtp
+id: electric-vehicle-tourism-program
 sidebarCardBodyText: The Electric Vehicle (EV) Tourism Program is offering
   incentives to promote electric vehicle adoption and tourism through investment
   in EV chargers at key New Jersey tourism sites, landmarks, and other Tourism

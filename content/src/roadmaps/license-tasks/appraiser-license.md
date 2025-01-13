@@ -1,6 +1,5 @@
 ---
 id: appraiser-license
-filename: appraiser-license
 displayname: real-estate-appraiser-license
 urlSlug: appraiser-license
 name: Apply for Your Residential Real Property Appraiser License

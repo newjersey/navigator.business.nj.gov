@@ -1,9 +1,8 @@
 ---
-filename: Clean Energy Program - Combined Heat and Power - Fuel Cells
 name: New Jersey’s Clean Energy Program – Combined Heat & Power - Fuel Cells
 displayName: chp-clean-energy
 urlSlug: njcep-chpfc
-id: njcep-chpfc
+id: clean-energy-program-combined-heat-and-power-fuel-cells
 sidebarCardBodyText: The program plans to do this by providing generous
   financial incentives for Combined Heat & Power (CHP) and Fuel Cell (FC)
   installations.

@@ -4,7 +4,6 @@ summaryDescriptionMd: Certified Home Health Aide (CHHA) licenses are required
   of all individuals who have completed their [education and training
   programs](https://www.njconsumeraffairs.gov/nur/Pages/default.aspx).
 urlSlug: individual-staff-licenses-health-aide
-filename: individual-staff-licenses-health-aide
 displayname: individual-staff-licenses-health-aide
 name: Ensure Your Staff is Licensed
 id: individual-staff-licenses-health-aide
@@ -13,9 +12,10 @@ callToActionText: Verify a CHHA License
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Nursing
 ---
+
 ## Application Requirements
 
-* Criminal background check
+- Criminal background check
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 

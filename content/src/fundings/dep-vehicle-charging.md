@@ -1,5 +1,4 @@
 ---
-filename: dep-vehicle-charging
 name: "It Pays to Plug In: Electric Vehicle Workplace Charging Grant Program"
 displayName: workplace-vehicle-charging
 urlSlug: vehicle-charging-grant

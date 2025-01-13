@@ -1,5 +1,5 @@
 ---
-filename: electrical-contracting-business-permit-update
+id: electrical-contracting-business-permit-update
 name: Update Your Electrical Contracting Business Permit
 industryIds:
   - electrical-contractor

@@ -1,7 +1,6 @@
 ---
 licenseName: "Telemarketers"
 id: telemarketing-license
-filename: telemarketing-license
 displayname: telemarketing-license
 urlSlug: telemarketing-license
 name: Apply for Your Telemarketing License

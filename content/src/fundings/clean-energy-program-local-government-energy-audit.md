@@ -1,9 +1,8 @@
 ---
-filename: Clean Energy Program - Local Government Energy Audit
 name: New Jersey’s Clean Energy Program - Local Government Energy Audit
 displayName: lgea-clean-energy
 urlSlug: njcep-lgea
-id: njcep-lgea
+id: clean-energy-program-local-government-energy-audit
 sidebarCardBodyText: The LEGA program provides an energy audit for free for
   facilities owned by municipalities, school districts, non-profits, and
   government entities.
@@ -44,17 +43,18 @@ descriptionMd: The Local Government Energy Audit (LGEA) program provides an
   implement these measures, and guide applicants towards financial incentives
   offered by utilities and state.
 ---
+
 ## Eligibility
 
 The program is open to:
 
-* Local governments
-* New Jersey state colleges or universities, county colleges, and public schools
-* 501(c)(3) non-profit agencies
+- Local governments
+- New Jersey state colleges or universities, county colleges, and public schools
+- 501(c)(3) non-profit agencies
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-* Up to a value of $150,000 per program year, per applicant 
-* For larger applicants, if the audit cost exceeds or is expected to exceed $150,000, there is a potential larger cost cap for applicants pursuing the Energy Savings Improvement Program and eligible healthcare entities, not to exceed $300,000
+- Up to a value of $150,000 per program year, per applicant
+- For larger applicants, if the audit cost exceeds or is expected to exceed $150,000, there is a potential larger cost cap for applicants pursuing the Energy Savings Improvement Program and eligible healthcare entities, not to exceed $300,000
 
 :::

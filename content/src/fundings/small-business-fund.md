@@ -1,5 +1,4 @@
 ---
-filename: small-business-fund
 name: Small Business Fund
 displayName: small-business-fund
 urlSlug: small-business-fund

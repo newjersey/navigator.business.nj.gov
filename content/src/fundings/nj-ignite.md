@@ -1,5 +1,4 @@
 ---
-filename: nj-ignite
 name: NJ Ignite
 displayName: ignite
 urlSlug: nj-ignite

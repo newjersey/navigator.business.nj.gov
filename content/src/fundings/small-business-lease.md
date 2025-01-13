@@ -1,9 +1,8 @@
 ---
-filename: small-business-lease
 name: Small Business Lease Grant
-displayName: small-business-lease
+displayName: small-business-lease-grant
 urlSlug: small-business-lease
-id: small-business-lease-grant
+id: small-business-lease
 sidebarCardBodyText: The Small Business Lease Grant supports the growth and
   success of small businesses and nonprofits by providing grant funding to cover
   a portion of lease payments for businesses and nonprofits leasing new or
@@ -38,7 +37,6 @@ descriptionMd: The Small Business Lease Grant supports the growth and success of
   of lease payments for businesses and nonprofits leasing new or additional
   space.
 ---
-
 
 ## Eligibility
 

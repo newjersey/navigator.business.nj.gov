@@ -27,7 +27,6 @@ summaryDescriptionMd: >
   for your business. This includes scales, meters, and other weighing or
   measuring devices.
 urlSlug: weights-measures-registration
-filename: weights-measures-registration
 displayname: weights-measures-registration
 name: Register a Scale, Meter, or Other Weighing and Measuring Device for Your
   Business
@@ -38,14 +37,15 @@ industryId: ""
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Office of Weights and Measures
 ---
-- - -
+
+---
 
 ## Application Requirements
 
-* City and county of business
-* Business name
-* Representative name, address, and phone number for device location; completion of a separate application for each business location
-* Mailing address, if applicable
+- City and county of business
+- Business name
+- Representative name, address, and phone number for device location; completion of a separate application for each business location
+- Mailing address, if applicable
 
 :::callout{ showHeader="true" headerText="" showIcon="true" calloutType="informational" }
 
@@ -55,14 +55,14 @@ All applications must be filled out in their entirety and submitted with all app
 
 Provide the following Information about the device:
 
-* Type*
-* ID number*
-* Model number
-* Serial number
-* Manufacturer/brand
-* Capacity, if applicable
-* Number of hoses (metering devices), if applicable
-* Amount due*
+- Type\*
+- ID number\*
+- Model number
+- Serial number
+- Manufacturer/brand
+- Capacity, if applicable
+- Number of hoses (metering devices), if applicable
+- Amount due\*
 
 \*See page 4 of the [Registration Application for Commercial Weighing and Measuring Devices](https://www.njconsumeraffairs.gov/OWM/Applications/Registration-Application-for-Commercial-Weighing-and-Measuring-Devices.pdf) to help you find this information.
 

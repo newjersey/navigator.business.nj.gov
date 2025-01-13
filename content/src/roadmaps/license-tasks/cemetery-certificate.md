@@ -4,7 +4,6 @@ notesMd: "* h2 and h3 still look the same, using h3 per Spencer but ideally we
   this task once this is remedied."
 licenseName: "Cemetery-Cemetery"
 id: cemetery-certificate
-filename: cemetery-certificate
 displayname: cemetery-certificate
 urlSlug: cemetery-certificate
 name: Apply for Your Certificate of Authority
@@ -22,7 +21,7 @@ licenseCertificationClassification: undefined
 
 ## Application Requirements
 
-### Cemetery Information 
+### Cemetery Information
 
 - Date organized (when the cemetery was legally established)
 - Date of incorporation (when the cemetery was legally registered as a business)

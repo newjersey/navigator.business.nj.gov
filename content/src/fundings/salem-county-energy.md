@@ -1,9 +1,8 @@
 ---
-filename: salem-county-energy
 name: Salem County Energy Sales Tax Exemption
-displayName: salem-county-energy
+displayName: salem-county-energy-sales-tax-exemption
 urlSlug: salem-county-energy
-id: salem-county-energy-sales-tax-exemption
+id: salem-county-energy
 sidebarCardBodyText: The Salem County Energy Sales Tax Exemption program
   provides an energy sales tax exemption for the retail sales of electricity and
   natural gas and their transport to manufacturing businesses in Salem County.
@@ -35,12 +34,13 @@ sector:
   - clean-energy
 publishStageArchive: ""
 ---
+
 ## Eligibility
 
-* Manufacturing businesses in Salem County with at least 50 employees
-* At least 50% of employees must be involved in the manufacturing process
-* The energy and utility services must be consumed exclusively at the facility
-* Must not be in default with any other state program
+- Manufacturing businesses in Salem County with at least 50 employees
+- At least 50% of employees must be involved in the manufacturing process
+- The energy and utility services must be consumed exclusively at the facility
+- Must not be in default with any other state program
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 

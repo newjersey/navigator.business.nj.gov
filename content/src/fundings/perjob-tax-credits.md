@@ -1,9 +1,8 @@
 ---
-filename: perjob-tax-credits
 name: Per-Job Tax Credits with the Emerge Program
-displayName: perjob-tax-credits
+displayName: perjob-tax-credits-with-the-emerge-program
 urlSlug: perjob-tax-credits
-id: perjob-tax-credits-with-the-emerge-program
+id: perjob-tax-credits
 sidebarCardBodyText: The Emerge Program provides per-job tax credits to projects
   in targeted communities that invest private capital into New Jersey and create
   new full-time jobs or retain a significant number of jobs in Governor Phil

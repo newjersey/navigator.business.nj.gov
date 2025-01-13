@@ -1,5 +1,5 @@
 ---
-filename: landscape-architecture-certificate-reinstatement
+id: landscape-architecture-certificate-reinstatement
 licenseName: Landscape Architecture-Certificate of Authorization
 name: Apply to Reinstate Your Certificate of Authorization for Landscape
   Architectural Services

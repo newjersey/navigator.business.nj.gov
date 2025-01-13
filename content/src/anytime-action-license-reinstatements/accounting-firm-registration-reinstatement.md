@@ -1,5 +1,5 @@
 ---
-filename: accounting-firm-registration-reinstatement
+id: accounting-firm-registration-reinstatement
 name: Apply to Reinstate Your Accounting Firm Registration
 licenseName: Accountancy-Firm Registration
 urlSlug: accounting-firm-registration-reinstatement

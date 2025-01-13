@@ -1,6 +1,6 @@
 ---
 header: Code 23 Overdimensional Trailer Permit
-slug: code-23-overdimensional-trailer-permit
+id: code-23-overdimensional-trailer-permit
 displayname: code-23-overdimensional-trailer-permit
 ---
 

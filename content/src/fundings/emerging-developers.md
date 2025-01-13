@@ -1,5 +1,4 @@
 ---
-filename: emerging-developers
 name: Emerging Developers Grant
 displayName: emerging-developers
 urlSlug: emerging-developers
@@ -9,7 +8,7 @@ sidebarCardBodyText: NJEDA’s Emerging Developers Grant Program provides emergi
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: >+
-  :::infoAlert 
+  :::infoAlert
    Payment is due at the time of application. A non-refundable fee of $1,000 is required per application.
   :::
 
@@ -36,30 +35,31 @@ sector:
   - other-services
 publishStageArchive: ""
 ---
+
 ## Eligibility
 
-* Be a non-profit or for-profit development entity
-* Have completed at least two and no more than five commercial or mixed-use projects of similar scope
-* Have at least 51% ownership of the proposed project
-* Have site control (deed) of the project at the time of application
-* Have a current Tax Clearance certificate
-* No more than 5 employees at the time of application
-* Cannot have already started construction on the proposed project
+- Be a non-profit or for-profit development entity
+- Have completed at least two and no more than five commercial or mixed-use projects of similar scope
+- Have at least 51% ownership of the proposed project
+- Have site control (deed) of the project at the time of application
+- Have a current Tax Clearance certificate
+- No more than 5 employees at the time of application
+- Cannot have already started construction on the proposed project
 
 **Eligible Costs:** 50% of eligible predevelopment soft costs and costs unrelated to any construction activity are eligible for reimbursement under this program, including:
 
-* Architectural and design fees
-* Construction drawings and specifications
-* Engineering fees and surveys
-* Municipal zoning and Inspection fees
-* Insurance costs
-* Professional fees, legal fees, accounting fees, and project management fees
-* Market/feasibility study
-* Appraisal
-* Phase I environmental review
-* Property taxes (must be current)
-* Loan interest (if applicable)
-* Utilities
+- Architectural and design fees
+- Construction drawings and specifications
+- Engineering fees and surveys
+- Municipal zoning and Inspection fees
+- Insurance costs
+- Professional fees, legal fees, accounting fees, and project management fees
+- Market/feasibility study
+- Appraisal
+- Phase I environmental review
+- Property taxes (must be current)
+- Loan interest (if applicable)
+- Utilities
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 

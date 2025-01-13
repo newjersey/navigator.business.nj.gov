@@ -13,7 +13,6 @@ summaryDescriptionMd: >-
 
   In addition to a liquor license, some local governments require businesses to get a mercantile license. Each town will have its own application process for both the liquor license and the mercantile license.
 urlSlug: mercantile-liquor-license
-filename: town-mercantile-license-liquor
 displayname: town-mercantile-liquor-license
 name: Get Your Liquor and Mercantile License
 id: check-local-requirements

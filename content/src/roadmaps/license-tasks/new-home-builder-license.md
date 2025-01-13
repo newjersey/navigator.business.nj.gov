@@ -2,7 +2,6 @@
 notesMd: "[Muni planning doc/draft](https://docs.google.com/document/d/1GKtYlOLZQNeCHWQ4SvyIzEqNmYDECEUSLahp8_yC4T4/edit)"
 licenseName: ""
 id: new-home-builder-license
-filename: new-home-builder-license
 displayname: new-home-builder-license
 urlSlug: new-home-builder-license
 name: Register Your Business as a New Home Builder
