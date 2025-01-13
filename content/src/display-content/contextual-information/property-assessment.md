@@ -1,6 +1,6 @@
 ---
 slug: property-assessment
-filename: property-assessment
+id: property-assessment
 header: Property Assessment
 displayname: Property Assessment
 ---
