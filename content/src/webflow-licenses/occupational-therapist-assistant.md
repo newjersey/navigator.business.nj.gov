@@ -1,5 +1,4 @@
 ---
-filename: occupational-therapist-assistant
 displayname: occupational-therapist-assistant
 id: "occupational-therapist-assistant"
 webflowId: "5f7729a7306c6c1a67066fa3"

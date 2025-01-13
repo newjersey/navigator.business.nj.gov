@@ -1,6 +1,6 @@
 {
   "displayname": "trade-name",
-  "filename": "trade-name",
+  "id": "trade-name",
   "roadmapSteps": [
     {
       "step": 2,

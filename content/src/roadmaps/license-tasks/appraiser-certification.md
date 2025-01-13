@@ -1,7 +1,6 @@
 ---
 licenseName: ""
 id: appraiser-certification
-filename: appraiser-certification
 displayname: real-estate-appraiser-certification
 urlSlug: real-estate-appraiser-certification
 name: Apply for Your Residential Real Property Appraiser Certification

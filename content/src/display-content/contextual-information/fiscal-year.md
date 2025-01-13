@@ -1,6 +1,5 @@
 ---
-slug: fiscal-year
-filename: fiscal-year
+id: fiscal-year
 displayname: fiscal-year
 header: Fiscal Year
 ---

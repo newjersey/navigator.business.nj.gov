@@ -1,6 +1,5 @@
 ---
 id: entertainment-agency-reg
-filename: entertainment-agency-reg
 displayname: entertainment-agency-reg
 urlSlug: entertainment-agency-reg
 name: "Register Your Entertainment Agency"

@@ -1,7 +1,6 @@
 ---
 urlSlug: swine-garbage-feeding
 webflowName: Swine, Garbage-Feeding
-filename: swine-garbage-feeding
 displayname: swine-garbage-feeding
 agencyId: agriculture
 agencyAdditionalContext: Division of Animal Health

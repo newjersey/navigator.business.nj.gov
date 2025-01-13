@@ -1,9 +1,8 @@
 ---
-filename: the-federal-bonding
 name: "The Federal Bonding Program: Assurance for Hiring Risk Workers"
-displayName: federal-bonding
+displayName: the-federal-bonding-program-assurance-for-hiring-risk-workers
 urlSlug: the-federal-bonding
-id: the-federal-bonding-program-assurance-for-hiring-risk-workers
+id: the-federal-bonding
 sidebarCardBodyText: This program is for businesses considering hiring employees
   with high-risk factors such as an inconsistent work or credit history,
   substance abuse, public assistance, or parole. This unique job-placement tool

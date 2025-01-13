@@ -54,7 +54,7 @@
     {
       "step": 4,
       "weight": 200,
-      "licenseTask": "Haul-Waste",
+      "licenseTask": "haul-waste-hic",
       "required": true
     }
   ],

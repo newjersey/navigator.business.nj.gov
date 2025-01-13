@@ -1,5 +1,5 @@
 ---
-filename: state-contracting
+id: state-contracting
 name: Learn How to Contract with the NJ State Government
 industryIds: []
 sectorIds:

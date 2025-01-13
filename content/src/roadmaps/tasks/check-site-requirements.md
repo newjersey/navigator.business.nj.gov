@@ -1,6 +1,5 @@
 ---
 urlSlug: site-requirements
-filename: check-site-requirements
 displayname: site-requirements
 name: Determine Your Site Requirements
 id: check-site-requirements

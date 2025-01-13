@@ -5,7 +5,6 @@ urlSlug: dog-trainer-cds
 name: Apply for Your Dog Trainer Controlled Dangerous Substances Registration
 displayname: dog-trainer-cds
 webflowName: "Pet Care: Dog Trainer Controlled Dangerous Substances Registration"
-filename: dog-trainer-cds
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: New Jersey Drug Control Unit
 industryId: petcare

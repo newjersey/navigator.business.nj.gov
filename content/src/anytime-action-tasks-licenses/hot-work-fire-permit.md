@@ -2,7 +2,7 @@
 notesMd: "[Muni
   draft](https://docs.google.com/document/d/1VopTcRXLEeQKLfHAPrv_eyv8cl5iewc7Li\
   U22qxSZf0/edit)"
-filename: hot-work-fire-permit
+id: hot-work-fire-permit
 name: Get a Fire Permit to Perform Hot Work
 industryIds:
   - commercial-construction

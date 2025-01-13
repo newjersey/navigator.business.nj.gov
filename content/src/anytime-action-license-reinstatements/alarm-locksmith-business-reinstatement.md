@@ -1,5 +1,5 @@
 ---
-filename: alarm-locksmith-business-reinstatement
+id: alarm-locksmith-business-reinstatement
 licenseName: ""
 name: Reinstate Your Fire Alarm, Burglar Alarm, and Locksmith Business License
 urlSlug: alarm-locksmith-business-reinstatement

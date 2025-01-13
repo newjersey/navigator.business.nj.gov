@@ -1,9 +1,8 @@
 ---
-filename: New Jersey State Trade Expansion Program
 name: New Jersey State Trade Expansion Program (NJSTEP)
 displayName: trade-expansion
 urlSlug: nj-trade-expansion-program
-id: nj-trade-expansion-program
+id: new-jersey-state-trade-expansion-program
 sidebarCardBodyText: The New Jersey Business Action Center's (NJBAC) State Trade
   Expansion Program (NJSTEP) provides financial awards to domestic small
   businesses that are new to exporting and those who currently sell their goods
@@ -37,12 +36,13 @@ county:
 sector: []
 publishStageArchive: ""
 ---
+
 ## Eligibility
 
-* Small business as defined by the [Small Business Administration](https://www.sba.gov/size-standards/index.html)
-* In business for at least 1 year as of the date of the application
-* Manufacturing goods or producing services that contain at least 51% U.S. content
-* Registered with NJ START and have a [DUNS number](https://www.dnb.com/duns.html)
+- Small business as defined by the [Small Business Administration](https://www.sba.gov/size-standards/index.html)
+- In business for at least 1 year as of the date of the application
+- Manufacturing goods or producing services that contain at least 51% U.S. content
+- Registered with NJ START and have a [DUNS number](https://www.dnb.com/duns.html)
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 

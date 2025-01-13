@@ -3,7 +3,6 @@ notesMd: "[2526: Add non-essential question tasks: raffle task screen](https://d
 id: "raffle-license-step-2"
 urlSlug: "raffle-license-step-2"
 name: "Apply for a Raffle or Bingo License in the NJ Municipality"
-filename: "raffle-license-step-2"
 displayname: "raffle-license-step-2"
 callToActionLink: "https://www.njconsumeraffairs.gov/lgccc/Pages/applications.aspx"
 callToActionText: "Apply for a Raffle or Bingo License"

@@ -1,6 +1,5 @@
 ---
 id: register-vehicle
-filename: register-vehicle
 displayname: register-vehicle
 urlSlug: register-vehicle
 name: "Register Your Vehicle"

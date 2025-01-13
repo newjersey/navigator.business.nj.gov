@@ -1,5 +1,4 @@
 ---
-filename: x-ray-technologist-radiologic-technologist
 displayname: x-ray-technologist-radiologic-technologist
 id: "x-ray-technologist-radiologic-technologist"
 webflowId: "5f772922e8bf505b1231789b"

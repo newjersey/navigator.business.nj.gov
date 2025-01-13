@@ -40,6 +40,7 @@ const fetchDependenciesFile = async (): Promise<TaskDependencies[]> => {
   return file.default.dependencies;
 };
 
+// refactor needed
 const fetchTaskFile = async (filename: string): Promise<string> => {
   let file;
 

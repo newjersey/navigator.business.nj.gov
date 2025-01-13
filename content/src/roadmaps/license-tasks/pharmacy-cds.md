@@ -1,6 +1,5 @@
 ---
 id: pharmacy-cds
-filename: pharmacy-cds
 displayname: pharmacy-cds
 urlSlug: pharmacy-cds
 name: Apply for Your Pharmacy’s Controlled Dangerous Substances Registration

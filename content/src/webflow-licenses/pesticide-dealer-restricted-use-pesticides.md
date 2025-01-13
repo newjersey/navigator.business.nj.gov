@@ -1,5 +1,4 @@
 ---
-filename: pesticide-dealer-restricted-use-pesticides
 displayname: pesticide-dealer-restricted-use-pesticides
 id: "pesticide-dealer-restricted-use-pesticides"
 webflowId: "5f7729120b0d00076af25207"

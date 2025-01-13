@@ -8,10 +8,11 @@ notesMd: >-
 
   SME approved: 11/15/24
 header: Notice to Quit
-slug: notice-to-quit
+id: notice-to-quit
 displayname: notice-to-quit
 ---
-A Notice to Quit is a written notice to end a tenancy. You must give this notice to your tenant before you can file an eviction suit. The notice is required for all [legal grounds for an eviction](https://www.nj.gov/dca/divisions/codes/publications/pdf_lti/grnds_for_evicti_bulltin.pdf), except not paying rent. 
+
+A Notice to Quit is a written notice to end a tenancy. You must give this notice to your tenant before you can file an eviction suit. The notice is required for all [legal grounds for an eviction](https://www.nj.gov/dca/divisions/codes/publications/pdf_lti/grnds_for_evicti_bulltin.pdf), except not paying rent.
 
 The notice should include specific details about why you are ending the tenancy.
 

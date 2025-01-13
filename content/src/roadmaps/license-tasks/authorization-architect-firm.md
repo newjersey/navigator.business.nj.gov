@@ -1,7 +1,6 @@
 ---
 licenseName: "Architecture-Certificate of Authorization"
 id: authorization-architect-firm
-filename: authorization-architect-firm
 displayname: authorization-architect-firm
 urlSlug: authorization-architect-firm
 name: Obtain a Certificate of Authorization for Your Architecture Firm

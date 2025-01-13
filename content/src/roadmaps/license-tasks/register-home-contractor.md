@@ -1,13 +1,12 @@
 ---
 licenseName: Home Improvement Contractors-Home Improvement Contractor
 id: register-home-contractor
-filename: register-home-contractor
 displayname: register-home-contractor
 urlSlug: hic-license
 name: Obtain Your Home Improvement Contractor Registration
 webflowName: "Home Contractor: Home Improvement Contractor Registration"
 summaryDescriptionMd: >-
-  :::infoAlert 
+  :::infoAlert
    The [Home Improvement Contractor application](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf) includes an FAQ section.
   :::
 
@@ -26,21 +25,22 @@ divisionPhone: (973) 424-8150
 webflowType: business-license
 webflowId: 66aceedf6ba3dffa8ac9d4f0
 ---
+
 ## Application Requirements
 
-* Business name
-*  `EIN|ein` 
-* Social Security number (SSN)
-*  `Business structure|business-structure-learn-more` 
-* Copy of the Trade Name Certificate, Certificate of Incorporation, or `Certificate of Formation|certificate-formation` (depending on the structure of your business)
-* A certificate of insurance with a commercial general liability insurance policy in a minimum amount of $500,000 per occurrence
-* Name, home address, business address, and business telephone number of each owner, officer, director, principal, and stakeholders with an ownership interest of 10% or more in the business and the percentage of ownership held. Include the same information for each member if the business structure is a partnership
-* A criminal background check
-* Applicable fees paid
-* Copy of Alternate Name Form if your business has an alternate name
-*  `Certificate of Authority|certificate-formation` , if applicable
-* Name, address, and phone number of registered agent<insert contextual info>, if applicable
-* Child support information, if applicable
+- Business name
+- `EIN|ein`
+- Social Security number (SSN)
+- `Business structure|business-structure-learn-more`
+- Copy of the Trade Name Certificate, Certificate of Incorporation, or `Certificate of Formation|certificate-formation` (depending on the structure of your business)
+- A certificate of insurance with a commercial general liability insurance policy in a minimum amount of $500,000 per occurrence
+- Name, home address, business address, and business telephone number of each owner, officer, director, principal, and stakeholders with an ownership interest of 10% or more in the business and the percentage of ownership held. Include the same information for each member if the business structure is a partnership
+- A criminal background check
+- Applicable fees paid
+- Copy of Alternate Name Form if your business has an alternate name
+- `Certificate of Authority|certificate-formation` , if applicable
+- Name, address, and phone number of registered agent<insert contextual info>, if applicable
+- Child support information, if applicable
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 

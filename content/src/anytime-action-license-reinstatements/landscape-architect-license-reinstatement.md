@@ -1,5 +1,5 @@
 ---
-filename: landscape-architect-license-reinstatement
+id: landscape-architect-license-reinstatement
 licenseName: ""
 name: Apply to Reinstate Your Landscape Architect License
 urlSlug: landscape-architect-license-reinstatement

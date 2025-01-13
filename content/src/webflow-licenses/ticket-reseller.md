@@ -1,5 +1,4 @@
 ---
-filename: ticket-reseller
 displayname: ticket-reseller
 id: "ticket-reseller"
 webflowId: "5f7729e0f8387c78d88bdabe"

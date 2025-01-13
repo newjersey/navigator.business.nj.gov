@@ -1,5 +1,4 @@
 ---
-filename: tow-truck
 displayname: tow-truck
 id: "tow-truck"
 webflowId: "5f772959147ceda2d426bf41"

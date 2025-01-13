@@ -1,10 +1,9 @@
 ---
 notesMd: To be promoted with 30 Jan 2024 post on https://www.facebook.com/NewJerseyEDA
-filename: njeda-capital-access
 name: New Jersey Capital Access Fund
 displayName: New Jersey Capital Access Fund
 urlSlug: capital-access-fund
-id: capital-access-fund
+id: njeda-capital-access
 sidebarCardBodyText: The NJ Capital Access Fund leverages local and regional
   Community Development Financial Institutions (CDFIs) and Minority Depository
   Institutions (MDIs) to offer working capital loans to New Jersey small

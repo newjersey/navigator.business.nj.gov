@@ -1,6 +1,5 @@
 ---
-slug: qit-njeda
-filename: qit-njeda
+id: qit-njeda
 displayname: qit-njeda
 header: Qualified Incentive Tract
 ---

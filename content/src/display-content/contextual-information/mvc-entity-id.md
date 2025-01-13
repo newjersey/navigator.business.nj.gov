@@ -1,6 +1,5 @@
 ---
-slug: mvc-entity-id
-filename: mvc-entity-id
+id: mvc-entity-id
 displayname: mvc-entity-id
 header: Entity ID Number
 ---

@@ -1,9 +1,8 @@
 ---
-filename: offshore-wind-tax
 name: Offshore Wind Tax Credit Program
-displayName: offshore-wind
+displayName: offshore-wind-tax-credit-program
 urlSlug: offshore-wind-tax
-id: offshore-wind-tax-credit-program
+id: offshore-wind-tax
 sidebarCardBodyText: The Offshore Wind Tax Credit Program is a financial tool
   that spurs private capital investment and employment growth in major,
   land-based offshore wind industry projects.
