@@ -108,7 +108,7 @@
     "@aws-sdk/types": "3.714.0",
     "@babel/core": "7.26.0",
     "@businessnjgovnavigator/shared": "*",
-    "@commitlint/cli": "19.6.0",
+    "@commitlint/cli": "19.6.1",
     "@commitlint/config-conventional": "19.6.0",
     "@cypress-audit/lighthouse": "1.4.2",
     "@cypress-audit/pa11y": "1.4.2",
