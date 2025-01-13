@@ -60,14 +60,9 @@
       "groupName": "testing-library"
     },
     {
-      "matchPackageNames": [
-        "@types/webpack-node-externals",
-        "copy-webpack-plugin",
-        "tsconfig-paths-webpack-plugin",
-        "@serverless/typescript"
-      ],
-      "matchPackagePrefixes": ["serverless", "webpack"],
-      "groupName": "serverless-and-webpack"
+      "matchPackageNames": ["@serverless/typescript"],
+      "matchPackagePrefixes": ["serverless"],
+      "groupName": "serverless"
     },
     {
       "matchPackagePrefixes": ["@storybook"],

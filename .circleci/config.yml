@@ -19,7 +19,18 @@ commands:
       - run:
           name: Install yarn packages
           command: yarn install
-
+  validate-serverless-access-key:
+    steps:
+      - run:
+          name: Validate Serverless Access Key
+          command: |
+            echo "Validating SERVERLESS_ACCESS_KEY"
+            if [ -z "${SERVERLESS_ACCESS_KEY}" ]; then
+              echo "Error: SERVERLESS_ACCESS_KEY is not set"
+              exit 1
+            else
+              echo "SERVERLESS_ACCESS_KEY is set"
+            fi
   install-dynamodb:
     steps:
       - run:
@@ -29,10 +40,7 @@ commands:
   configure:
     steps:
       - bootstrap-code
-      - run:
-          name: Configure Serverless
-          command: yarn workspace @businessnjgovnavigator/api serverless config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY}
-
+      - validate-serverless-access-key
   configure-smoke-test:
     steps:
       - run: sudo apt update
@@ -162,11 +170,19 @@ commands:
           name: Deploy Serverless
           command: yarn workspace @businessnjgovnavigator/api serverless deploy --verbose --stage ${STAGE} --region us-east-1
 
+  set-shared-stage-env-vars:
+    steps:
+      - run:
+          name: Set Shared Stage Environment Variables
+          command: |
+            echo 'export MYNJ_PROFILE_LINK=https://myt1.nj.gov/portal/Desktop' >> $BASH_ENV
   set-dev-env-vars:
     steps:
       - run:
           name: Set Development Environment Variables
           command: |
+            echo 'export BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME=$BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME_DEV' >> $BASH_ENV
+            echo 'export SERVERLESS_ACCESS_KEY=$SERVERLESS_ACCESS_KEY_DEV' >> $BASH_ENV
             echo 'export AB_TESTING_EXPERIENCE_B_PERCENTAGE=$AB_TESTING_EXPERIENCE_B_PERCENTAGE_DEV' >> $BASH_ENV
             echo 'export ADMIN_PASSWORD=$ADMIN_PASSWORD' >> $BASH_ENV
             echo 'export AIRTABLE_USERS_TABLE=$AIRTABLE_USERS_TABLE_DEV' >> $BASH_ENV
@@ -226,6 +242,7 @@ commands:
       - run:
           name: Set Cypress Environment Variables
           command: |
+            echo 'export SERVERLESS_ACCESS_KEY=$SERVERLESS_ACCESS_KEY_DEV' >> $BASH_ENV
             echo 'export API_BASE_URL=http://localhost:5002/local' >> $BASH_ENV
             echo 'export USE_FAKE_SELF_REG=true' >> $BASH_ENV
             echo 'export REDIRECT_URL=http://localhost:3000/' >> $BASH_ENV
@@ -268,6 +285,8 @@ commands:
       - run:
           name: Set Staging Environment Variables
           command: |
+            echo 'export BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME=$BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME_STAGING' >> $BASH_ENV
+            echo 'export SERVERLESS_ACCESS_KEY=$SERVERLESS_ACCESS_KEY_STAGING' >> $BASH_ENV
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_STAGING' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_STAGING' >> $BASH_ENV
             echo 'export FEATURE_EXPORT_PDF=$FEATURE_EXPORT_PDF_STAGING' >> $BASH_ENV
@@ -325,6 +344,9 @@ commands:
       - run:
           name: Set Production Environment Variables
           command: |
+            echo 'export BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME=$BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME_PROD' >> $BASH_ENV
+            echo 'export MYNJ_PROFILE_LINK=https://my.nj.gov/portal/Desktop' >> $BASH_ENV
+            echo 'export SERVERLESS_ACCESS_KEY=$SERVERLESS_ACCESS_KEY_PROD' >> $BASH_ENV
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_PROD' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_PROD' >> $BASH_ENV
             echo 'export FEATURE_EXPORT_PDF=$FEATURE_EXPORT_PDF_PROD' >> $BASH_ENV
@@ -381,6 +403,8 @@ commands:
       - run:
           name: Set Content Environment Variables
           command: |
+            echo 'export BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME=$BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME_CONTENT' >> $BASH_ENV
+            echo 'export SERVERLESS_ACCESS_KEY=$SERVERLESS_ACCESS_KEY_CONTENT' >> $BASH_ENV
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_CONTENT' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_CONTENT' >> $BASH_ENV
             echo 'export MYNJ_ROLE_NAME=$MYNJ_ROLE_NAME_CONTENT' >> $BASH_ENV
@@ -399,6 +423,8 @@ commands:
       - run:
           name: Set Accessibility Testing Environment Variables
           command: |
+            echo 'export BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME=$BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME_TESTING' >> $BASH_ENV
+            echo 'export SERVERLESS_ACCESS_KEY=$SERVERLESS_ACCESS_KEY_TESTING' >> $BASH_ENV
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_TESTING' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_TESTING' >> $BASH_ENV
             echo 'export MYNJ_ROLE_NAME=$MYNJ_ROLE_NAME_TESTING' >> $BASH_ENV
@@ -629,68 +655,70 @@ jobs:
       - generate-release-notes
 
   deploy-content:
+    environment:
+      STAGE: content
     docker:
       - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_18_1
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
+      - set-shared-stage-env-vars
       - set-dev-env-vars
       - set-content-env-vars
       - attach_workspace:
           at: .
       - deploy-content-env
-    environment:
-      STAGE: content
-      MYNJ_PROFILE_LINK: https://myt1.nj.gov/portal/Desktop
 
   deploy-accessibility-testing:
+    environment:
+      STAGE: testing
     docker:
       - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_18_1
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
+      - set-shared-stage-env-vars
       - set-dev-env-vars
       - set-accessibility-testing-env-vars
       - attach_workspace:
           at: .
       - deploy-accessibility-testing-env
-    environment:
-      STAGE: testing
-      MYNJ_PROFILE_LINK: https://myt1.nj.gov/portal/Desktop
 
   deploy-dev:
+    environment:
+      STAGE: dev
     docker:
       - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_18_1
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
+      - set-shared-stage-env-vars
       - set-dev-env-vars
       - attach_workspace:
           at: .
       - deploy
       - deploy-storybook
       - store-deploy-cache
-    environment:
-      STAGE: dev
-      MYNJ_PROFILE_LINK: https://myt1.nj.gov/portal/Desktop
 
   deploy-staging:
+    environment:
+      STAGE: staging
     docker:
       - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_18_1
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
+      - set-shared-stage-env-vars
       - set-staging-env-vars
       - deploy
-    environment:
-      STAGE: staging
-      MYNJ_PROFILE_LINK: https://myt1.nj.gov/portal/Desktop
 
   deploy-production:
+    environment:
+      STAGE: prod
     docker:
       - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_18_1
         aws_auth:
@@ -699,9 +727,6 @@ jobs:
     steps:
       - set-prod-env-vars
       - deploy
-    environment:
-      STAGE: prod
-      MYNJ_PROFILE_LINK: https://my.nj.gov/portal/Desktop
 
   integration-tests:
     parameters:
