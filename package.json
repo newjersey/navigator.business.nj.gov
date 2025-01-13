@@ -172,7 +172,7 @@
     "cspell": "8.17.1",
     "css-loader": "6.11.0",
     "cypress": "13.17.0",
-    "cypress-dotenv": "2.0.0",
+    "cypress-dotenv": "2.0.2",
     "cypress-wait-until": "3.0.2",
     "dependency-cruiser": "16.8.0",
     "dotenv": "16.4.7",

@@ -4256,7 +4256,7 @@ __metadata:
     cspell: 8.17.1
     css-loader: 6.11.0
     cypress: 13.17.0
-    cypress-dotenv: 2.0.0
+    cypress-dotenv: 2.0.2
     cypress-wait-until: 3.0.2
     dayjs: 1.11.13
     decap-cms-app: 3.4.0
@@ -4455,7 +4455,7 @@ __metadata:
     cspell: 8.17.1
     css-loader: 6.11.0
     cypress: 13.17.0
-    cypress-dotenv: 2.0.0
+    cypress-dotenv: 2.0.2
     cypress-wait-until: 3.0.2
     dayjs: 1.11.13
     decap-cms-app: 3.4.0
@@ -16599,9 +16599,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress-dotenv@npm:2.0.0":
-  version: 2.0.0
-  resolution: "cypress-dotenv@npm:2.0.0"
+"cypress-dotenv@npm:2.0.2":
+  version: 2.0.2
+  resolution: "cypress-dotenv@npm:2.0.2"
   dependencies:
     camelcase: ^6.2.0
     dotenv-parse-variables: ^2.0.0
@@ -16609,7 +16609,7 @@ __metadata:
   peerDependencies:
     cypress: ">= 8.x"
     dotenv: ">= 10.x"
-  checksum: 8aa52317a3474a3e82e0cec32afb1be8bf7168ecde7d70d3d962ca45c1caaad9aa1e8c2f19f838aff5b36b8e7dfdda35f4c6067c8c95d9ae402aba5994bae0ed
+  checksum: f618c39d7bf515dfcde4645856d5b20767217f66632a0d004292bde49b063aec84a8ff8b3ba22ba3f2befae7d3e1f283752be8fe9670030da3aa1c40e7db8b2e
   languageName: node
   linkType: hard
 
