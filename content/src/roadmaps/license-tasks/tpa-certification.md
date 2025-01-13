@@ -5,7 +5,6 @@ urlSlug: tpa-certification
 name: Get Your Branch Therapeutic Pharmaceutical Agents Certificate, if Applicable
 displayname: tpa-certification
 webflowName: "Healthcare: Therapeutic Pharmaceutical Agents Certificate"
-filename: tpa-certification
 callToActionLink: https://www.njconsumeraffairs.gov/opt/Applications/Application-for-Branch-Office-Certificate.pdf
 callToActionText: Apply for My Branch TPA Certificate
 agencyId: nj-consumer-affairs
