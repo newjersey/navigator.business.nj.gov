@@ -170,7 +170,7 @@
     "raw-loader": "4.0.2",
     "require-from-string": "2.0.2",
     "rimraf": "5.0.10",
-    "sass": "1.83.0",
+    "sass": "1.83.1",
     "sass-loader": "14.2.1",
     "storybook": "7.6.20",
     "style-loader": "3.3.4",
