@@ -5,7 +5,6 @@ urlSlug: mortuary-practitioner
 name: Apply for Your Mortuary Practitioner License, if Applicable
 displayname: mortuary-practitioner
 webflowName: "Funeral Services: Mortuary Practitioner License"
-filename: mortuary-practitioner
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 callToActionText: Apply for My Mortuary Practitioner License
 agencyId: nj-consumer-affairs

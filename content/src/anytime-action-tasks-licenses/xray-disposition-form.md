@@ -1,6 +1,6 @@
 ---
 notesMd: https://docs.google.com/document/d/1gFdVGtUZiQHjvjU0fdhNK7BdM_508Wq8AzT448-dc8A/edit?tab=t.0
-filename: xray-disposition-form
+id: xray-disposition-form
 name: Submit Your X-Ray Machine Disposition Form
 industryIds:
   - healthcare
@@ -13,24 +13,26 @@ issuingAgency: Department of Environmental Protection, Radiation Protection
 callToActionText: Submit My X-Ray Machine Disposition Form
 callToActionLink: https://www.nj.gov/dep/rpp/reg/dispo.htm
 ---
+
 ## Application Requirements
 
 ### General Requirements
 
-* Current facility name and address
-* Current facility number
-* Current registration number
-* Disposal date
-* Applicable disposition code
-* Model number
-* Serial number
-* X-ray film storage location, if applicable
+- Current facility name and address
+- Current facility number
+- Current registration number
+- Disposal date
+- Applicable disposition code
+- Model number
+- Serial number
+- X-ray film storage location, if applicable
 
 ### Sale Requirements
 
-- Name and address of the new owner and/or new location 
+- Name and address of the new owner and/or new location
 
 ### Relocation Requirements
+
 - Name and address of the new location
 - Updated registration form
 - Copy of `radiation safety survey|radiation-safety-survey`
@@ -46,4 +48,3 @@ The survey must be completed within 60 days of the registering the x-ray machine
 You will not receive a confirmation after submitting the disposition form. However, you can confirm by emailing bxc@dep.nj.gov.
 
 :::
-
