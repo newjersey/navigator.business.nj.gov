@@ -92,7 +92,7 @@
     "remark-gfm": "3.0.1",
     "remark-parse": "10.0.2",
     "remark-rehype": "10.1.0",
-    "remove-markdown": "0.5.5",
+    "remove-markdown": "0.6.0",
     "serverless-http": "3.2.0",
     "simple-oauth2": "5.0.1",
     "slick-carousel": "1.8.1",
