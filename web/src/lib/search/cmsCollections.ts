@@ -73,6 +73,8 @@ export const cmsCollections = [
       "Callout Defaults",
       "Dropdown Mappings",
       "General Config",
+      "Landing Pages",
+      "License Search Task",
       "Profile Page",
       "Contextual Information",
       "404 Page",

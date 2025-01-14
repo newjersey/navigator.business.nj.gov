@@ -69,7 +69,7 @@ export const LandingPageTiles = (): ReactElement => {
     {
       imgPath: "/img/gear-icon.svg",
       dataTestId: "run-biz-tile",
-      tileText: landingPageConfig.landingPageTileRunBizTile,
+      tileText: landingPageConfig.landingPageRunBizTile,
       onClick: (): void => {
         setFlowAndRouteUser("up-and-running");
         analytics.event.landing_page_im_running_a_nj_business_tile.click.go_to_onboarding();

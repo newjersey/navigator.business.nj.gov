@@ -114,7 +114,7 @@ describe("<LandingPageTiles />", () => {
   it("routes user to business status section when the I'm running a business button is clicked", async () => {
     render(<LandingPageTiles />);
 
-    fireEvent.click(screen.getByText(Config.landingPage.landingPageTileRunBizTile));
+    fireEvent.click(screen.getByText(Config.landingPage.landingPageRunBizTile));
 
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "up-and-running" } });
     expect(
