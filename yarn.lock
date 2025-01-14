@@ -4247,7 +4247,7 @@ __metadata:
     "@smithy/node-http-handler": 2.5.0
     "@types/cors": 2.8.17
     "@types/dedent": 0.7.2
-    "@types/express": 4.17.21
+    "@types/express": 5.0.0
     "@types/jest": 29.5.14
     "@types/jsonwebtoken": 9.0.7
     "@types/lodash": 4.17.14
@@ -4383,7 +4383,7 @@ __metadata:
     "@types/cors": 2.8.17
     "@types/cypress-dotenv": 2.0.3
     "@types/dedent": 0.7.2
-    "@types/express": 4.17.21
+    "@types/express": 5.0.0
     "@types/jest": 29.5.14
     "@types/js-yaml": 4.0.9
     "@types/jsonwebtoken": 9.0.7
@@ -12389,7 +12389,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:4.17.21, @types/express@npm:^4.7.0":
+"@types/express-serve-static-core@npm:^5.0.0":
+  version: 5.0.5
+  resolution: "@types/express-serve-static-core@npm:5.0.5"
+  dependencies:
+    "@types/node": "*"
+    "@types/qs": "*"
+    "@types/range-parser": "*"
+    "@types/send": "*"
+  checksum: d66e603674fafabab94430fb5665c9bda5a867373b8e29f30631a43a29dd246057fe584a61395b3472b45cdb23caeeef4931b781b1030fa5ebb2b38ccad27108
+  languageName: node
+  linkType: hard
+
+"@types/express@npm:5.0.0":
+  version: 5.0.0
+  resolution: "@types/express@npm:5.0.0"
+  dependencies:
+    "@types/body-parser": "*"
+    "@types/express-serve-static-core": ^5.0.0
+    "@types/qs": "*"
+    "@types/serve-static": "*"
+  checksum: ef68d8e2b7593c930093b1e79bf4df15413773508c9acd6a1a933ed7017f2a4892a8d128b2222d7eab9a3fa43181067a378c2600d9258bd7ae917f170e962df4
+  languageName: node
+  linkType: hard
+
+"@types/express@npm:^4.7.0":
   version: 4.17.21
   resolution: "@types/express@npm:4.17.21"
   dependencies:
