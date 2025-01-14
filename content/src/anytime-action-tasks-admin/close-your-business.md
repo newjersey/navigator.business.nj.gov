@@ -1,4 +1,5 @@
 ---
+notesMd: https://docs.google.com/document/d/1riQ2ETmNCcn3hosFvujoFV-6pWJiptwayLhX1_LxnrM/edit?tab=t.0
 id: close-your-business
 name: Close Your Business
 applyToAllUsers: true
