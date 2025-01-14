@@ -4287,7 +4287,7 @@ __metadata:
     serverless-offline: 14.4.0
     serverless-offline-ssm: 6.2.0
     serverless-prune-plugin: 2.1.0
-    simple-oauth2: 5.0.1
+    simple-oauth2: 5.1.0
     supertest: 6.3.4
     ts-jest: 29.2.5
     ts-loader: 9.5.2
@@ -4489,7 +4489,7 @@ __metadata:
     serverless-offline: 14.4.0
     serverless-offline-ssm: 6.2.0
     serverless-prune-plugin: 2.1.0
-    simple-oauth2: 5.0.1
+    simple-oauth2: 5.1.0
     slick-carousel: 1.8.1
     storybook: 7.6.20
     style-loader: 3.3.4
@@ -32701,15 +32701,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simple-oauth2@npm:5.0.1":
-  version: 5.0.1
-  resolution: "simple-oauth2@npm:5.0.1"
+"simple-oauth2@npm:5.1.0":
+  version: 5.1.0
+  resolution: "simple-oauth2@npm:5.1.0"
   dependencies:
     "@hapi/hoek": ^11.0.4
     "@hapi/wreck": ^18.0.0
     debug: ^4.3.4
     joi: ^17.6.4
-  checksum: 64a48f0387860a2850b6bb564b0bc50ef242721c6cb718043f9c99cc5b9007fc808037d6d2a0a660f3258c2c6cae499c0ca001c39bbf6bf78dc7ea122c2adf5e
+  checksum: 65e07a92ffdfbc38fdd7db5480349b09c4c896559b6b3786a256546fe3aa6ac80086fa4f2c30d1d68ff551668147343c0a0dcc53c33fe7e5d1a7b42b4772eedc
   languageName: node
   linkType: hard
 
