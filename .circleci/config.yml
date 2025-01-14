@@ -236,6 +236,7 @@ commands:
             echo 'export SMOKE_TEST_ENV=$SMOKE_TEST_ENV_DEV' >> $BASH_ENV
             echo 'export USE_BASIC_AUTH=$USE_BASIC_AUTH_DEV' >> $BASH_ENV
             echo 'export NEXT_PUBLIC_WEB_BASE_URL=$WEB_BASE_URL_DEV' >> $BASH_ENV
+            echo 'export FEATURE_LOGIN_PAGE=$FEATURE_LOGIN_PAGE_DEV' >> $BASH_ENV
 
   set-cypress-env-vars:
     steps:
@@ -250,6 +251,7 @@ commands:
             echo 'export NEXT_PUBLIC_WEB_BASE_URL=http://localhost:3000' >> $BASH_ENV
 
             echo 'export FEATURE_BUSINESS_FLP=false' >> $BASH_ENV
+            echo 'export FEATURE_LOGIN_PAGE=true' >> $BASH_ENV
 
             echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_DEV' >> $BASH_ENV
             echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_DEV' >> $BASH_ENV
@@ -306,6 +308,7 @@ commands:
             echo 'export REDIRECT_URL=$REDIRECT_URL_STAGING' >> $BASH_ENV
             echo 'export NEXT_PUBLIC_WEB_BASE_URL=$WEB_BASE_URL_STAGING' >> $BASH_ENV
 
+            echo 'export FEATURE_LOGIN_PAGE=$FEATURE_LOGIN_PAGE_STAGING' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLP=$FEATURE_BUSINESS_FLP_STAGING' >> $BASH_ENV
 
             echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_STAGING' >> $BASH_ENV
@@ -366,6 +369,7 @@ commands:
             echo 'export REDIRECT_URL=$REDIRECT_URL_PROD' >> $BASH_ENV
             echo 'export NEXT_PUBLIC_WEB_BASE_URL=$WEB_BASE_URL_PROD' >> $BASH_ENV
 
+            echo 'export FEATURE_LOGIN_PAGE=$FEATURE_LOGIN_PAGE_PROD' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLP=$FEATURE_BUSINESS_FLP_PROD' >> $BASH_ENV
 
             echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_NEWPROD' >> $BASH_ENV
