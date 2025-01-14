@@ -1,6 +1,7 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { NavMenuItem } from "@/components/navbar/NavMenuItem";
 import { AuthContext } from "@/contexts/authContext";
+import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSignOut } from "@/lib/auth/signinHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -18,11 +19,17 @@ import { ReactElement, useContext } from "react";
 export const LoginMenuItem = (): ReactElement => {
   const { Config } = useConfig();
   const router = useRouter();
+  const loginPageEnabled = process.env.FEATURE_LOGIN_PAGE === "true";
+
   return NavMenuItem({
     onClick: (): void => {
       if (!router) return;
       analytics.event.landing_page_navbar_log_in.click.go_to_myNJ_login();
-      router.push(ROUTES.login);
+      if (loginPageEnabled) {
+        router && router.push(ROUTES.login);
+      } else {
+        triggerSignIn();
+      }
     },
     icon: <ButtonIcon svgFilename="login" sizePx="25px" />,
     itemText: Config.navigationDefaults.logInButton,
