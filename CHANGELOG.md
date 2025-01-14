@@ -1,3 +1,42 @@
+# [2025.0.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.39.1...v2025.0.0) (2025-01-14)
+
+
+### Bug Fixes
+
+* [[#188645598](https://github.com/newjersey/navigator.business.nj.gov/issues/188645598)] land env task phone number format and title ([b883899](https://github.com/newjersey/navigator.business.nj.gov/commit/b883899ecc86c8f2409c235f61c3bbf9229b496d))
+* [[#188684012](https://github.com/newjersey/navigator.business.nj.gov/issues/188684012)] waste env task phone number format ([6be4e8a](https://github.com/newjersey/navigator.business.nj.gov/commit/6be4e8a7a8600645a40fcb9cd62a89198e82c43c))
+* [[#188734302](https://github.com/newjersey/navigator.business.nj.gov/issues/188734302)] make city in formation more reliable ([1d8dd3d](https://github.com/newjersey/navigator.business.nj.gov/commit/1d8dd3db2721b5d75743a6ba59ac3a8c478cff19))
+* **deps:** update aws-sdk ([#8281](https://github.com/newjersey/navigator.business.nj.gov/issues/8281)) ([683ece7](https://github.com/newjersey/navigator.business.nj.gov/commit/683ece7e5fe619d5177688f1ca513a7bd9709fd0))
+* **deps:** update aws-sdk ([#9386](https://github.com/newjersey/navigator.business.nj.gov/issues/9386)) ([09b2210](https://github.com/newjersey/navigator.business.nj.gov/commit/09b2210d7f18ddc956f4d20e23530542e38e78f3))
+* **deps:** update aws-sdk to v3.721.0 ([#9336](https://github.com/newjersey/navigator.business.nj.gov/issues/9336)) ([aebaf5f](https://github.com/newjersey/navigator.business.nj.gov/commit/aebaf5fcc2fe7e5011a84539a4499d9c3576afa4))
+* **deps:** update dependency axios to v1.7.9 ([#9273](https://github.com/newjersey/navigator.business.nj.gov/issues/9273)) ([fed9efc](https://github.com/newjersey/navigator.business.nj.gov/commit/fed9efc9e84d2ae59e181c7569556b07a994a17f))
+* **deps:** update dependency express to v4.21.2 ([#9274](https://github.com/newjersey/navigator.business.nj.gov/issues/9274)) ([aba6047](https://github.com/newjersey/navigator.business.nj.gov/commit/aba6047f62e41b44a97e34d0714b47794b3b3a20))
+* **deps:** update dependency next-seo to v6.6.0 ([#9388](https://github.com/newjersey/navigator.business.nj.gov/issues/9388)) ([1cd9970](https://github.com/newjersey/navigator.business.nj.gov/commit/1cd997031ddda6592d7a3bc8d0462a7814279842))
+* **deps:** update dependency simple-oauth2 to v5.1.0 ([#9391](https://github.com/newjersey/navigator.business.nj.gov/issues/9391)) ([7da7700](https://github.com/newjersey/navigator.business.nj.gov/commit/7da7700df60b9300ce870d7a11175161eabf18bf))
+* **deps:** update dependency winston to v3.17.0 ([#9392](https://github.com/newjersey/navigator.business.nj.gov/issues/9392)) ([92a987e](https://github.com/newjersey/navigator.business.nj.gov/commit/92a987e4facd3a2b8ed5b7bc24250b0bb7e6e524))
+* **deps:** update dependency winston-cloudwatch to v6.3.0 ([#9394](https://github.com/newjersey/navigator.business.nj.gov/issues/9394)) ([ca2e680](https://github.com/newjersey/navigator.business.nj.gov/commit/ca2e680bc0e9bbb9952d11fb084963d1e6be0781))
+* **deps:** update emotion monorepo to v11.14.0 ([#9395](https://github.com/newjersey/navigator.business.nj.gov/issues/9395)) ([75389b1](https://github.com/newjersey/navigator.business.nj.gov/commit/75389b1a73eed4342bf0e1ab1cdceaf79c3bc1b6))
+* **deps:** update nextjs monorepo to v15.1.4 ([#9380](https://github.com/newjersey/navigator.business.nj.gov/issues/9380)) ([80818d9](https://github.com/newjersey/navigator.business.nj.gov/commit/80818d949a59e34761b97cb8a5431e41571f1820))
+* **deps:** update serverless-and-webpack ([#9275](https://github.com/newjersey/navigator.business.nj.gov/issues/9275)) ([4866acb](https://github.com/newjersey/navigator.business.nj.gov/commit/4866acbdcd9e26b96a986f8004eb6b46d2a283fb))
+* update yarn lock file ([4b9a227](https://github.com/newjersey/navigator.business.nj.gov/commit/4b9a227b33bb13e15fe91387ef6b7726639dcc3b))
+
+
+* chore!: major version bump to 2025 ([54fece8](https://github.com/newjersey/navigator.business.nj.gov/commit/54fece8684a26fa8c415c50adeecf8fa7cece259))
+
+
+### Features
+
+* [[#188347468](https://github.com/newjersey/navigator.business.nj.gov/issues/188347468)] unifying filename and ID in the cms ([534d541](https://github.com/newjersey/navigator.business.nj.gov/commit/534d541c4b1da7811cf9cd4b1acced12606c08de))
+* [[#188347468](https://github.com/newjersey/navigator.business.nj.gov/issues/188347468)] unifying filename and ID in the cms, changes from content repo ([93877a7](https://github.com/newjersey/navigator.business.nj.gov/commit/93877a73bdcc0c9c95d478f857cbcf6c4ecc1a67))
+* [[#188347489](https://github.com/newjersey/navigator.business.nj.gov/issues/188347489)] Add scripts to transfer production data to a dev user ([615e4f7](https://github.com/newjersey/navigator.business.nj.gov/commit/615e4f73363ef07c2cda4362b4d84cc5eba0f24a))
+* [[#188540268](https://github.com/newjersey/navigator.business.nj.gov/issues/188540268)] Implement new login navigation pattern ([0401a0c](https://github.com/newjersey/navigator.business.nj.gov/commit/0401a0c427a0e7f892b397691bb59587ef9293e5))
+* [[#188645598](https://github.com/newjersey/navigator.business.nj.gov/issues/188645598)] add environmental questionnaire for land ([f0c2f6e](https://github.com/newjersey/navigator.business.nj.gov/commit/f0c2f6e19df73e0f2446c1dafb13446b700aa184))
+
+
+### BREAKING CHANGES
+
+* Next.js v15 and calendar year increase
+
 ## [2024.39.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.39.0...v2024.39.1) (2024-12-31)
 
 
