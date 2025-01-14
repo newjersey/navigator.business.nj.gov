@@ -1,16 +1,16 @@
 ---
+notesMd: "1.10.25: updated with SME revision"
 id: lab-research-cds
-webflowId: 6721493e43b6800b762e2452
-urlSlug: lab-research-cds
-name: Apply for Your Analytical Lab or Researcher’s Controlled Dangerous Substances Registration
 displayname: lab-research-cds
-webflowName: "All Other Businesses: Analytical Lab or Researcher Controlled Dangerous Substances Registration"
-agencyId: nj-consumer-affairs
-agencyAdditionalContext: New Jersey Drug Control Unit
-industryId: generic
-licenseCertificationClassification: undefined
+urlSlug: lab-research-cds
+name: Apply for Your Analytical Lab or Researcher’s Controlled Dangerous
+  Substances Registration
+webflowName: "All Other Businesses: Analytical Lab or Researcher Controlled
+  Dangerous Substances Registration"
 summaryDescriptionMd: >-
-  You need a Controlled Dangerous Substances (CDS) registration if you, your business, or your facility handle, store, or use CDS for research purposes or to test other substances. Follow these steps to apply:
+  You need a Controlled Dangerous Substances (CDS) registration if you, your
+  business, or your facility handle, store, or use CDS for research purposes or
+  to test other substances. Follow these steps to apply:
 
 
   1. Email the NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the Analytical Lab or Researcher CDS Registration application.
@@ -18,13 +18,12 @@ summaryDescriptionMd: >-
   2. After your completed application has been emailed to the DCU, they will email you an invoice to pay your fees online.
 
   3. Be sure to register with the DEA to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to the DCU within 60 days.
+industryId: generic
+licenseCertificationClassification: undefined
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: New Jersey Drug Control Unit
+webflowId: 6721493e43b6800b762e2452
 ---
-
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
-
-If you are applying for Schedule I CDS as a researcher, you must get your DEA registration before applying for CDS registration.
-
-:::
 
 ## Application Requirements
 
@@ -52,6 +51,7 @@ If you are applying for Schedule I CDS as a researcher, you must get your DEA re
 - Name and resume of the CDS manager or responsible person in charge of the CDS operation at your facility
 - List of people (name, address, date of birth, social security number, and title) at your facility who will have access to the CDS
 - A list of all CDS, by schedule, used or planned for use at the facility
+- A description of the research to be conducted, _or_ a copy of the Food and Drug Administration (FDA) approved research protocol (for schedule I researchers only)
 - A summary or copy of the research plan, detailing how the CDS will be used (for researchers only)
 - Details of qualifications, including the researcher’s qualifications or the credentials of those overseeing the testing  (for researchers only)
 - Any professional or work licenses the applicant has from New Jersey or any other state

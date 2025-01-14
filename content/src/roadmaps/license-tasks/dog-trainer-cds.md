@@ -1,22 +1,25 @@
 ---
+notesMd: "1.10.25: updated with SME revisions."
 id: dog-trainer-cds
-webflowId: 67100850618dd6edbee87473
+displayname: dog-trainer-cds
 urlSlug: dog-trainer-cds
 name: Apply for Your Dog Trainer Controlled Dangerous Substances Registration
-displayname: dog-trainer-cds
 webflowName: "Pet Care: Dog Trainer Controlled Dangerous Substances Registration"
-agencyId: nj-consumer-affairs
-agencyAdditionalContext: New Jersey Drug Control Unit
-industryId: petcare
-licenseCertificationClassification: undefined
 summaryDescriptionMd: >-
-  You need a Controlled Dangerous Substances (CDS) registration if you use CDS to train dogs in narcotics detection. Follow these steps to apply:
+  You need a Controlled Dangerous Substances (CDS) registration if you use CDS
+  to train dogs in narcotics detection. Follow these steps to apply:
+
 
   1. Email the NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the Dog Trainer CDS Registration application.
 
-  2. After your completed application has been emailed to the DCU, they will email you an invoice to pay the fee online.
+  2. After your completed application has been emailed to the DCU, they will email you an invoice to pay the fee online (if applicable).
 
   3. Be sure to register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) to validate your CDS registration. Email a copy of your DEA registration to the DCU within 60 days.
+industryId: petcare
+licenseCertificationClassification: undefined
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: New Jersey Drug Control Unit
+webflowId: 67100850618dd6edbee87473
 ---
 
 ## Application Requirements
@@ -36,10 +39,10 @@ summaryDescriptionMd: >-
 ### Safety and Security
 
 - Schedule of the CDS
-- Criminal History Record Information (CHRI) Part 1 for each person with access to the CDS and applicable fees paid (to be completed online and at the same time as the CDS registration; link in application)
-- CHRI Part 2, including employee names, dates of birth, and email addresses (to be completed right after Part 1 and submitted with your CDS application; form included in application)
-- The name and title of everyone who will have access to the CDS
-- Security measures in place to prevent loss or theft of the CDS
+- Criminal History Record Information (CHRI) Part 1 for each person with access to the CDS and applicable fees paid (to be completed online and at the same time as the CDS registration, link in application. Not applicable for law enforcement officers)
+- CHRI Part 2, including employee names, dates of birth, and email addresses (to be completed right after Part 1 and submitted with your CDS application, form included in application. Not applicable for law enforcement officers)
+- The name and title of everyone who will have access to the CDS (not applicable for law enforcement officers)
+- Security measures in place to prevent loss or theft of the CDS (not applicable for law enforcement officers)
 
 :::callout{ showHeader="true" headerText="What if I don't complete this registration?" showIcon="false" calloutType="warning" }
 

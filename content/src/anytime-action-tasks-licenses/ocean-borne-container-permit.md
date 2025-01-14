@@ -1,6 +1,6 @@
 ---
 id: ocean-borne-container-permit
-name: Apply for Your Ocean Borne Container Permit, if Applicable
+name: Apply for Your Ocean Borne Container Permit
 industryIds:
   - freight-forwarding
   - moving-company

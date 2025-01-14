@@ -1,21 +1,25 @@
 ---
 id: xray-reg
-webflowId: 676af48d3cee0bce2f93edd8
+filename: xray-reg
+displayname: xray-reg
 urlSlug: xray-reg
 name: Register Your X-Ray Machine
-displayname: xray-reg
-webflowName:  "Healthcare: X-Ray Registration"
-callToActionLink: https://www.nj.gov/dep/rpp/reg/index.htm
-callToActionText: Register My X-Ray Machine
-agencyId: njdep
-agencyAdditionalContext:  Radiation Protection Element, Bureau of X-Ray Compliance
-divisionPhone: (609) 984-5463
-industryId: healthcare
-licenseCertificationClassification: undefined
-summaryDescriptionMd: "You must register all x-ray machines on your premises with the Department of Environmental Protection (DEP).
+webflowName: "Healthcare: X-Ray Registration"
+summaryDescriptionMd: >-
+  You must register all x-ray machines on your premises with the Department of
+  Environmental Protection (DEP).
 
-Submit the registration form within 30 days of installation.
-"
+
+
+  Submit the registration form within 30 days of installation.
+industryId: healthcare
+callToActionText: Register My X-Ray Machine
+callToActionLink: https://www.nj.gov/dep/rpp/reg/index.htm
+agencyId: njdep
+agencyAdditionalContext: Radiation Protection Element, Bureau of X-Ray Compliance
+divisionPhone: (609) 984-5463
+webflowId: 676af48d3cee0bce2f93edd8
+licenseCertificationClassification: undefined
 ---
 
 ## Registration Requirements
