@@ -4102,7 +4102,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.13
     dedent: 1.5.3
-    dependency-cruiser: 16.8.0
+    dependency-cruiser: 16.9.0
     eslint: 8.57.1
     eslint-config-prettier: 9.1.0
     eslint-plugin-jest: 27.9.0
@@ -4261,7 +4261,7 @@ __metadata:
     dayjs: 1.11.13
     decap-cms-app: 3.4.0
     dedent: 1.5.3
-    dependency-cruiser: 16.8.0
+    dependency-cruiser: 16.9.0
     dotenv: 16.4.7
     dynamodb-admin: 5.1.3
     eslint: 8.57.1
@@ -4459,7 +4459,7 @@ __metadata:
     cypress-wait-until: 3.0.2
     dayjs: 1.11.13
     decap-cms-app: 3.4.0
-    dependency-cruiser: 16.8.0
+    dependency-cruiser: 16.9.0
     dotenv: 16.4.7
     eslint: 8.57.1
     eslint-config-next: 15.1.4
@@ -7433,15 +7433,6 @@ __metadata:
   version: 15.1.4
   resolution: "@next/env@npm:15.1.4"
   checksum: bb26fa2184a81d0d5265962d4f162f32d5a5a19281af475ab32e13bd700b4cf32164ca4add9fd1f849f4c970bad7a7cca25ed3414e94396472a94e2d567c4600
-  languageName: node
-  linkType: hard
-
-"@next/eslint-plugin-next@npm:15.1.4":
-  version: 15.1.4
-  resolution: "@next/eslint-plugin-next@npm:15.1.4"
-  dependencies:
-    fast-glob: 3.3.1
-  checksum: f09cfb50cf26672df5cbeac9594ff4ce2196eeb3a3192f7f53b2b88770d7e40c5bd4a39e4129a7cae5d623d65c7f5f4d1580ba289a2922438073bae7326cae40
   languageName: node
   linkType: hard
 
@@ -15694,6 +15685,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:^13.0.0":
+  version: 13.0.0
+  resolution: "commander@npm:13.0.0"
+  checksum: 3981c8c197c93ceeb949f6e2250785ea319209c502b7c53d6dc36148347739c72b15de2e4bcad80bedc3f8e1e5544a89ca4e7d673b2f3238ac51b44292ad08d6
+  languageName: node
+  linkType: hard
+
 "commander@npm:^2.20.0":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
@@ -17707,9 +17705,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:16.8.0":
-  version: 16.8.0
-  resolution: "dependency-cruiser@npm:16.8.0"
+"dependency-cruiser@npm:16.9.0":
+  version: 16.9.0
+  resolution: "dependency-cruiser@npm:16.9.0"
   dependencies:
     acorn: ^8.14.0
     acorn-jsx: ^5.3.2
@@ -17717,9 +17715,9 @@ __metadata:
     acorn-loose: ^8.4.0
     acorn-walk: ^8.3.4
     ajv: ^8.17.1
-    commander: ^12.1.0
-    enhanced-resolve: ^5.17.1
-    ignore: ^6.0.2
+    commander: ^13.0.0
+    enhanced-resolve: ^5.18.0
+    ignore: ^7.0.0
     interpret: ^3.1.1
     is-installed-globally: ^1.0.0
     json5: ^2.2.3
@@ -17740,7 +17738,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: 60caadb9f41a6eb768b8868508835d3f6eb37daaa7b9b699aeb0fda83fc617edad974de98ce3bc0dbdeafb8363638e32253e687c53aa2037d45dff20a487c287
+  checksum: f4cef5c4af15ef70644dc2328eadfef5c1df83d07687ce08b4aad0537b7ee3a056606495090a2319cc766d79140a3e2a39308f2db42c6c3ffed9f8019f44af63
   languageName: node
   linkType: hard
 
@@ -18418,13 +18416,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"enhanced-resolve@npm:^5.0.0, enhanced-resolve@npm:^5.12.0, enhanced-resolve@npm:^5.17.1, enhanced-resolve@npm:^5.7.0":
-  version: 5.17.1
-  resolution: "enhanced-resolve@npm:5.17.1"
+"enhanced-resolve@npm:^5.0.0, enhanced-resolve@npm:^5.12.0, enhanced-resolve@npm:^5.17.1, enhanced-resolve@npm:^5.18.0, enhanced-resolve@npm:^5.7.0":
+  version: 5.18.0
+  resolution: "enhanced-resolve@npm:5.18.0"
   dependencies:
     graceful-fs: ^4.2.4
     tapable: ^2.2.0
-  checksum: 4bc38cf1cea96456f97503db7280394177d1bc46f8f87c267297d04f795ac5efa81e48115a2f5b6273c781027b5b6bfc5f62b54df629e4d25fa7001a86624f59
+  checksum: 77c6b11f0d19f21f52214e5a2c0dfb7070decb4045572f44be4cacf92b4be5e2c1d9a4c044a226d1003ca9daf9b71d498d256e7520ff5060f23d0284f814d392
   languageName: node
   linkType: hard
 
@@ -22027,10 +22025,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore@npm:^6.0.2":
-  version: 6.0.2
-  resolution: "ignore@npm:6.0.2"
-  checksum: b5dfb811428a067d79c128144814d3d20f01ef21e19c2b2e5bc270895995ce352da9b0e1c46a33de7daaf214bf0cf59d3353c78cdf9e365aaea677db729c721e
+"ignore@npm:^7.0.0":
+  version: 7.0.3
+  resolution: "ignore@npm:7.0.3"
+  checksum: a0826b70b217d560e3703e3d64483283dc85f4c4ebca1f5bffeeecec9a7453dd542f33a02daeefa8d6f3c5f7ef387ec014ce2733014333357dd620002fa1fd4a
   languageName: node
   linkType: hard
 
