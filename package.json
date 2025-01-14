@@ -198,7 +198,7 @@
     "jest-environment-jsdom": "29.7.0",
     "jest-junit": "16.0.0",
     "kill-port": "1.6.1",
-    "lint-staged": "15.2.11",
+    "lint-staged": "15.3.0",
     "nc": "git+https://github.com/dsueltenfuss/nc.git",
     "next-router-mock": "0.9.13",
     "prettier": "2.8.8",
