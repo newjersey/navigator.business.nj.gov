@@ -4030,7 +4030,7 @@ collections:
                 }
 
   - name: "misc-label"
-    label: "🟩 MISC"
+    label: "🟦 MISC"
     folder: "content/src"
     fields:
       - { name: "" }
@@ -4413,79 +4413,6 @@ collections:
             fields:
               - { label: Issuing Agency Label, name: issuingAgencyText, widget: string }
 
-          - label: Landing Page
-            name: landingPage
-            collapsed: true
-            widget: object
-            summary: "{{landingPage}}"
-            fields:
-              - { label: Hero - First Line, name: heroCallOutFirstLineText, widget: string }
-              - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
-              - { label: Tile Title Text, name: tileTitleText, widget: string }
-              - { label: Section 2 - Header, name: section2HeaderText, widget: string }
-              - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: text }
-              - { label: Section 2 - Call to Action, name: section2CallToActionText, widget: string }
-              - { label: Section 3 - Header, name: section3HeaderText, widget: string }
-              - { label: Section 3 - Supporting Text, name: section3SupportingText, widget: string }
-              - { label: Section 3 - Call to Action, name: section3CallToActionText, widget: string }
-              - { label: Section 4 - Header Text, name: section4HeaderText, widget: string }
-              - { label: Section 4 - First Icon Text, name: section4FirstIconText, widget: string }
-              - { label: Section 4 - Second Icon Text, name: section4SecondIconText, widget: string }
-              - { label: Section 4 - Third Icon Text, name: section4ThirdIconText, widget: string }
-              - { label: Section 5 - First Header Text, name: section5FirstHeaderText, widget: string }
-              - { label: Section 5 - First Supporting Text, name: section5FirstSupportingText, widget: text }
-              - { label: Section 5 - Second Header Text, name: section5SecondHeaderText, widget: string }
-              - {
-                  label: Section 5 - Second Supporting Text,
-                  name: section5SecondSupportingText,
-                  widget: text,
-                }
-              - { label: Section 5 - Third Header Text, name: section5ThirdHeaderText, widget: string }
-              - { label: Section 5 - Third Supporting Text, name: section5ThirdSupportingText, widget: text }
-              - { label: Section 6 - Header Text, name: section6Header, widget: string }
-              - { label: Card 1 - Header Line 1, name: card1Header, widget: string }
-              - { label: Card 1 - Supporting Text, name: card1SupportingText, widget: string }
-              - { label: Card 1 - Button Text, name: card1Button, widget: string }
-              - { label: Card 1 - Button Link, name: card1ButtonLink, widget: string }
-              - { label: Card 2 - Header Line 2, name: card2Header, widget: string }
-              - { label: Card 2 - Supporting Text, name: card2SupportingText, widget: text }
-              - { label: Card 2 - Button Text, name: card2Button, widget: string }
-              - { label: Card 2 - Button Link, name: card2ButtonLink, widget: string }
-              - { label: Card 3 - Header Line 3, name: card3Header, widget: string }
-              - { label: Card 3 - Supporting Text, name: card3SupportingText, widget: text }
-              - { label: Card 3 - Button Text, name: card3Button, widget: string }
-              - {
-                  label: Landing Page - Get Started Tile Line 1,
-                  name: landingPageGetStartedTileLine1,
-                  widget: string,
-                }
-              - {
-                  label: Landing Page - Get Started Tile Line 2,
-                  name: landingPageGetStartedTileLine2,
-                  widget: string,
-                }
-              - { label: Landing Page - Register Biz Tile, name: landingPageRegisterBizTile, widget: string }
-              - { label: Landing Page - Taxes Tile, name: landingPageTaxesTile, widget: string }
-              - { label: Landing Page - Out Of State Tile, name: landingPageOutOfStateTile, widget: string }
-              - { label: Landing Page - Funding Tile, name: landingPageFundingTile, widget: string }
-              - { label: Landing Page - Start Biz Tile, name: landingPageStartBizTile, widget: string }
-              - { label: Landing Page - Run Biz Tile, name: landingPageTileRunBizTile, widget: string }
-          - label: Landing Page Experience B
-            name: landingPageExperienceB
-            collapsed: true
-            widget: object
-            summary: "{{landingPageExperienceB}}"
-            fields:
-              - { label: Hero - First Line, name: heroCallOutFirstLineText, widget: string }
-              - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
-              - { label: Section 2 - Header, name: section2HeaderText, widget: string }
-              - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: text }
-              - { label: Section 2 - Call to Action, name: section2CallToActionText, widget: string }
-              - { label: Section 3 - Call to Action, name: section3CallToActionText, widget: string }
-              - { label: Section 4 - Second Icon Text, name: section4SecondIconText, widget: string }
-              - { label: Section 5 - First Supporting Text, name: section5FirstSupportingText, widget: text }
-              - { label: Section 5 - Third Supporting Text, name: section5ThirdSupportingText, widget: text }
-              - { label: Section 5 - First Header Text, name: section5FirstHeaderText, widget: string }
           - label: Legal Messages
             name: legalMessageDefaults
             collapsed: true
@@ -4669,83 +4596,6 @@ collections:
               - { label: Name has been Updated Message, name: nameHasBeenUpdatedText, widget: string }
               - { label: Error - Bad Input, name: errorTextBadInput, widget: string }
               - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
-          - label: Task - License Search
-            name: licenseSearchTask
-            collapsed: true
-            widget: object
-            summary: "{{licenseSearchTask}}"
-            fields:
-              - { label: Primary CTA - Line 1, name: primaryCTAFirstLineText, widget: string }
-              - { label: Primary CTA - Line 2, name: primaryCTASecondLineText, widget: string }
-              - { label: Secondary CTA - Line 1, name: secondaryCTAFirstLineText, widget: string }
-              - { label: Secondary CTA - Line 2, name: secondaryCTASecondLineText, widget: string }
-              - { label: Tab 1 Label, name: tab1Text, widget: string }
-              - { label: Tab 2 Label, name: tab2Text, widget: string }
-              - { label: Check Status Text, name: checkStatusText, widget: text }
-              - { label: Business Name Label, name: businessNameLabel, widget: string }
-              - { label: Address 1 Label, name: address1Label, widget: string }
-              - { label: Address 2 Label, name: address2Label, widget: string }
-              - { label: Zip Code Label, name: zipCodeLabel, widget: string }
-              - { label: State Label, name: stateLabel, widget: string }
-              - { label: Submit Button Text, name: submitText, widget: string }
-              - { label: Error - Not Found, name: errorTextNotFound, widget: string }
-              - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
-              - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
-              - { label: Found Text, name: foundText, widget: string }
-              - { label: Permit Status Label, name: permitStatusText, widget: string }
-              - {
-                  label: Application Checklist Items Label,
-                  name: applicationChecklistItemsText,
-                  widget: string,
-                }
-              - { label: Edit Button Text, name: editButtonText, widget: string }
-              - { label: Status - Pending, name: pendingPermitStatusText, widget: string }
-              - { label: Status - Active, name: activePermitStatusText, widget: string }
-              - { label: Status - Expired, name: expiredPermitStatusText, widget: string }
-              - { label: Status - Barred, name: barredPermitStatusText, widget: string }
-              - { label: Status - Out of State, name: outOfBusinessPermitStatusText, widget: string }
-              - {
-                  label: Status - Reinstatement Pending,
-                  name: reinstatementPendingPermitStatusText,
-                  widget: string,
-                }
-              - { label: Status - Closed, name: closedPermitStatusText, widget: string }
-              - { label: Status - Deleted, name: deletedPermitStatusText, widget: string }
-              - { label: Status - Denied, name: deniedPermitStatusText, widget: string }
-              - {
-                  label: Status - Voluntary Surrender,
-                  name: voluntarySurrenderPermitStatusText,
-                  widget: string,
-                }
-              - { label: Status - Withdrawn, name: withdrawnPermitStatusText, widget: string }
-              - { label: Status - Draft, name: draftStatusText, widget: string }
-              - { label: Status - Submitted, name: submittedStatusText, widget: string }
-              - { label: Status - Under Internal Review, name: underInternalReviewStatusText, widget: string }
-              - { label: Status - Special Review, name: specialReviewStatusText, widget: string }
-              - { label: Status - Pending Deficiencies, name: pendingDeficienciesStatusText, widget: string }
-              - {
-                  label: Status - Deficiencies Submitted,
-                  name: deficienciesSubmittedStatusText,
-                  widget: string,
-                }
-              - { label: Status - Checklist Completed, name: checklistCompletedStatusText, widget: string }
-              - { label: Status - Approved, name: approvedStatusText, widget: string }
-              - { label: Status - Pending Renewal, name: pendingRenewalStatusText, widget: string }
-              - {
-                  label: Status - Pending Reinstatement,
-                  name: pendingReinstatementStatusText,
-                  widget: string,
-                }
-              - { label: Status - Inactive, name: inactiveStatusText, widget: string }
-              - { label: Status - Abandoned, name: abandonedStatusText, widget: string }
-              - { label: Status - Suspended, name: suspendedStatusText, widget: string }
-              - { label: Status - Revoked, name: revokedStatusText, widget: string }
-              - { label: Tooltip Text, name: tooltipText, widget: text }
-              - { label: Status - Completed, name: completedStatusText, widget: string }
-              - { label: Status - Incomplete, name: incompleteStatusText, widget: string }
-              - { label: Status - Scheduled, name: scheduledStatusText, widget: string }
-              - { label: Status - Not Applicable, name: notApplicableStatusText, widget: text }
-              - { label: Issuing Agency Name, name: issuingAgencyNameText, widget: text }
           - label: Task Progress
             name: taskProgress
             collapsed: true
@@ -4781,6 +4631,183 @@ collections:
             fields:
               - { label: Saving Text, name: savingText, widget: string }
               - { label: Saved Text, name: savedText, widget: string }
+
+  - name: "landing-pages"
+    label: "Landing Pages"
+    delete: false
+    create: false
+    files:
+      - label: "Landing Page"
+        name: "landing-page"
+        file: "content/src/fieldConfig/landing-page.json"
+        editor:
+          preview: false
+        fields:
+          - label: "Landing Page"
+            name: landingPage
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Card 1 - Button Text, name: card1Button, widget: string }
+              - { label: Card 1 - Button Link, name: card1ButtonLink, widget: string }
+              - { label: Card 1 - Header Line 1, name: card1Header, widget: string }
+              - { label: Card 1 - Supporting Text, name: card1SupportingText, widget: string }
+              - { label: Card 2 - Button Text, name: card2Button, widget: string }
+              - { label: Card 2 - Button Link, name: card2ButtonLink, widget: string }
+              - { label: Card 2 - Header Line 2, name: card2Header, widget: string }
+              - { label: Card 2 - Supporting Text, name: card2SupportingText, widget: text }
+              - { label: Card 3 - Button Text, name: card3Button, widget: string }
+              - { label: Card 3 - Header Line 3, name: card3Header, widget: string }
+              - { label: Card 3 - Supporting Text, name: card3SupportingText, widget: text }
+              - { label: Hero - First Line, name: heroCallOutFirstLineText, widget: string }
+              - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
+              - { label: Landing Page - Funding Tile, name: landingPageFundingTile, widget: string }
+              - {
+                  label: Landing Page - Get Started Tile Line 1,
+                  name: landingPageGetStartedTileLine1,
+                  widget: string,
+                }
+              - {
+                  label: Landing Page - Get Started Tile Line 2,
+                  name: landingPageGetStartedTileLine2,
+                  widget: string,
+                }
+              - { label: Landing Page - Out Of State Tile, name: landingPageOutOfStateTile, widget: string }
+              - { label: Landing Page - Register Biz Tile, name: landingPageRegisterBizTile, widget: string }
+              - { label: Landing Page - Run Biz Tile, name: landingPageRunBizTile, widget: string }
+              - { label: Landing Page - Start Biz Tile, name: landingPageStartBizTile, widget: string }
+              - { label: Landing Page - Taxes Tile, name: landingPageTaxesTile, widget: string }
+              - { label: Section 2 - Call to Action, name: section2CallToActionText, widget: string }
+              - { label: Section 2 - Header, name: section2HeaderText, widget: string }
+              - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: text }
+              - { label: Section 3 - Call to Action, name: section3CallToActionText, widget: string }
+              - { label: Section 3 - Header, name: section3HeaderText, widget: string }
+              - { label: Section 3 - Supporting Text, name: section3SupportingText, widget: string }
+              - { label: Section 4 - First Icon Text, name: section4FirstIconText, widget: string }
+              - { label: Section 4 - Header Text, name: section4HeaderText, widget: string }
+              - { label: Section 4 - Second Icon Text, name: section4SecondIconText, widget: string }
+              - { label: Section 4 - Third Icon Text, name: section4ThirdIconText, widget: string }
+              - { label: Section 5 - First Header Text, name: section5FirstHeaderText, widget: string }
+              - { label: Section 5 - First Supporting Text, name: section5FirstSupportingText, widget: text }
+              - { label: Section 5 - Second Header Text, name: section5SecondHeaderText, widget: string }
+              - {
+                  label: Section 5 - Second Supporting Text,
+                  name: section5SecondSupportingText,
+                  widget: text,
+                }
+              - { label: Section 5 - Third Header Text, name: section5ThirdHeaderText, widget: string }
+              - { label: Section 5 - Third Supporting Text, name: section5ThirdSupportingText, widget: text }
+              - { label: Section 6 - Header Text, name: section6Header, widget: string }
+              - { label: Tile Title Text, name: tileTitleText, widget: string }
+      - label: "Landing Page Experience B"
+        name: "landing-page-experience-b"
+        file: "content/src/fieldConfig/landing-page-experience-b.json"
+        editor:
+          preview: false
+        fields:
+          - label: "Landing Page Experience B"
+            name: landingPageExperienceB
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Hero - First Line, name: heroCallOutFirstLineText, widget: string }
+              - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
+              - { label: Section 2 - Call to Action, name: section2CallToActionText, widget: string }
+              - { label: Section 2 - Header, name: section2HeaderText, widget: string }
+              - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: text }
+              - { label: Section 3 - Call to Action, name: section3CallToActionText, widget: string }
+              - { label: Section 4 - Second Icon Text, name: section4SecondIconText, widget: string }
+              - { label: Section 5 - First Header Text, name: section5FirstHeaderText, widget: string }
+              - { label: Section 5 - First Supporting Text, name: section5FirstSupportingText, widget: text }
+              - { label: Section 5 - Third Supporting Text, name: section5ThirdSupportingText, widget: text }
+
+  - name: "license-search-task"
+    label: "License Search Task"
+    delete: false
+    create: false
+    files:
+      - label: "License Search Task"
+        name: "licenseSearchTask"
+        file: "content/src/fieldConfig/license-search-task.json"
+        editor:
+          preview: false
+        fields:
+          - label: "License Search Task"
+            name: "licenseSearchTask"
+            collapsed: false
+            widget: object
+            fields:
+              - { labeL: Status - Abandoned, name: abandonedStatusText, widget: string }
+              - { labeL: Status - Active, name: activePermitStatusText, widget: string }
+              - { label: Address 1 - Label, name: address1Label, widget: string }
+              - { label: Address 2 - Label, name: address2Label, widget: string }
+              - {
+                  label: Application Checklist Items Text,
+                  name: applicationChecklistItemsText,
+                  widget: string,
+                }
+              - { label: Status - Approved, name: approvedStatusText, widget: string }
+              - { label: Status - Barred, name: barredPermitStatusText, widget: string }
+              - { label: Business Name Label, name: businessNameLabel, widget: string }
+              - { label: Check Status Text, name: checkStatusText, widget: string }
+              - { label: Status - Checklist Completed, name: checklistCompletedStatusText, widget: string }
+              - { label: Status - Closed, name: closedPermitStatusText, widget: string }
+              - { label: Status - Completed, name: completedStatusText, widget: string }
+              - {
+                  label: Status - Deficiencies Submitted,
+                  name: deficienciesSubmittedStatusText,
+                  widget: string,
+                }
+              - { label: Status - Deleted, name: deletedPermitStatusText, widget: string }
+              - { label: Status - Denied, name: deniedPermitStatusText, widget: string }
+              - { label: Status - Draft, name: draftStatusText, widget: string }
+              - { label: Edit Button Text, name: editButtonText, widget: string }
+              - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
+              - { label: Error - Not Found, name: errorTextNotFound, widget: string }
+              - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
+              - { label: Status - Expired, name: expiredPermitStatusText, widget: string }
+              - { label: Found Text, name: foundText, widget: string }
+              - { label: Status - Inactive, name: inactiveStatusText, widget: string }
+              - { label: Status - Incomplete, name: incompleteStatusText, widget: string }
+              - { label: Issuing Agency Name, name: issuingAgencyNameText, widget: string }
+              - { label: Status - Not Applicable, name: notApplicableStatusText, widget: string }
+              - { label: Status - Out of Business, name: outOfBusinessPermitStatusText, widget: string }
+              - { label: Status - Pending Deficiencies, name: pendingDeficienciesStatusText, widget: string }
+              - { label: Status - Pending, name: pendingPermitStatusText, widget: string }
+              - {
+                  label: Status - Pending Reinstatement,
+                  name: pendingReinstatementStatusText,
+                  widget: string,
+                }
+              - { label: Status - Pending Renewal, name: pendingRenewalStatusText, widget: string }
+              - { label: Permit Status Label, name: permitStatusText, widget: string }
+              - { label: Primary CTA - Line 1, name: primaryCTAFirstLineText, widget: string }
+              - { label: Primary CTA - Line 2, name: primaryCTASecondLineText, widget: string }
+              - {
+                  label: Status - Reinstatement Pending,
+                  name: reinstatementPendingPermitStatusText,
+                  widget: string,
+                }
+              - { label: Status - Revoked, name: revokedStatusText, widget: string }
+              - { label: Status - Scheduled, name: scheduledStatusText, widget: string }
+              - { label: Secondary CTA - Line 1, name: secondaryCTAFirstLineText, widget: string }
+              - { label: Secondary CTA - Line 2, name: secondaryCTASecondLineText, widget: string }
+              - { label: Status - Special Review, name: specialReviewStatusText, widget: string }
+              - { label: State Label, name: stateLabel, widget: string }
+              - { label: Submit Button Text, name: submitText, widget: string }
+              - { label: Status - Submitted, name: submittedStatusText, widget: string }
+              - { label: Status - Suspended, name: suspendedStatusText, widget: string }
+              - { label: Tab 1 Label, name: tab1Text, widget: string }
+              - { label: Tab 2 Label, name: tab2Text, widget: string }
+              - { label: Tooltip Text, name: tooltipText, widget: string }
+              - { label: Status - Under Internal Review, name: underInternalReviewStatusText, widget: string }
+              - {
+                  label: Status - Voluntary Surrender,
+                  name: voluntarySurrenderPermitStatusText,
+                  widget: string,
+                }
+              - { label: Status - Withdrawn, name: withdrawnPermitStatusText, widget: string }
+              - { label: Zip Code Label, name: zipCodeLabel, widget: string }
 
   - name: "profile-onboarding"
     label: "Profile Page"

@@ -25,6 +25,9 @@ import * as FormationInterimSuccessPage from "@businessnjgovnavigator/content/fi
 import * as FormationSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-success-page.json";
 import * as SiteWideErrorMessages from "@businessnjgovnavigator/content/fieldConfig/global-errors-defaults.json";
 import * as HousingRegistrationSearchTask from "@businessnjgovnavigator/content/fieldConfig/housing-registration.json";
+import * as LandingPageExperienceB from "@businessnjgovnavigator/content/fieldConfig/landing-page-experience-b.json";
+import * as LandingPage from "@businessnjgovnavigator/content/fieldConfig/landing-page.json";
+import * as LicenseSearchTask from "@businessnjgovnavigator/content/fieldConfig/license-search-task.json";
 import * as NaicsCode from "@businessnjgovnavigator/content/fieldConfig/naics-code.json";
 import * as NavigationDefaults from "@businessnjgovnavigator/content/fieldConfig/navigation-defaults.json";
 import * as NexusDbaFormation from "@businessnjgovnavigator/content/fieldConfig/nexus-dba-formation.json";
@@ -82,7 +85,10 @@ const merged = JSON.parse(
       anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
       CalloutAlerts,
       EnvQuestionnaire,
-      CheckAccountEmailPage
+      CheckAccountEmailPage,
+      LicenseSearchTask,
+      LandingPage,
+      LandingPageExperienceB
     )
   )
 );
@@ -126,7 +132,10 @@ export type ConfigType = typeof ConfigOriginal &
   typeof anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults &
   typeof CalloutAlerts &
   typeof CheckAccountEmailPage &
-  typeof EnvQuestionnaire;
+  typeof EnvQuestionnaire &
+  typeof LicenseSearchTask &
+  typeof LandingPage &
+  typeof LandingPageExperienceB;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -166,7 +175,10 @@ export const getMergedConfig = (): ConfigType => {
     anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
     CalloutAlerts,
     EnvQuestionnaire,
-    CheckAccountEmailPage
+    CheckAccountEmailPage,
+    LicenseSearchTask,
+    LandingPage,
+    LandingPageExperienceB
   );
 };
 
