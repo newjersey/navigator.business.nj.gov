@@ -26,13 +26,13 @@ packaging==24.2
 parso==0.8.4
 pathspec==0.12.1
 pexpect==4.9.0
-pillow==11.0.0
+pillow==11.1.0
 platformdirs==4.3.6
 prompt_toolkit==3.0.48
 ptyprocess==0.7.0
 pure_eval==0.2.3
 pycparser==2.22
-Pygments==2.18.0
+Pygments==2.19.1
 pyparsing==3.2.1
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
