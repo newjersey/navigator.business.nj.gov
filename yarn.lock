@@ -4287,7 +4287,7 @@ __metadata:
     serverless-offline: 14.4.0
     serverless-offline-ssm: 6.2.0
     serverless-prune-plugin: 2.1.0
-    simple-oauth2: 5.0.1
+    simple-oauth2: 5.1.0
     supertest: 6.3.4
     ts-jest: 29.2.5
     ts-loader: 9.5.2
@@ -4295,7 +4295,7 @@ __metadata:
     tsconfig-paths: 4.2.0
     typescript: 5.7.3
     uuid: 9.0.1
-    winston: 3.12.0
+    winston: 3.17.0
     winston-cloudwatch: 6.2.0
     wiremock: 3.10.0
     xml2js: 0.6.2
@@ -4489,7 +4489,7 @@ __metadata:
     serverless-offline: 14.4.0
     serverless-offline-ssm: 6.2.0
     serverless-prune-plugin: 2.1.0
-    simple-oauth2: 5.0.1
+    simple-oauth2: 5.1.0
     slick-carousel: 1.8.1
     storybook: 7.6.20
     style-loader: 3.3.4
@@ -4504,7 +4504,7 @@ __metadata:
     unist-util-visit: 5.0.0
     uuid: 9.0.1
     webpack: 5.97.1
-    winston: 3.12.0
+    winston: 3.17.0
     winston-cloudwatch: 6.2.0
     wiremock: 3.10.0
     xml2js: 0.6.2
@@ -25864,9 +25864,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"logform@npm:^2.3.2, logform@npm:^2.4.0":
-  version: 2.6.0
-  resolution: "logform@npm:2.6.0"
+"logform@npm:^2.7.0":
+  version: 2.7.0
+  resolution: "logform@npm:2.7.0"
   dependencies:
     "@colors/colors": 1.6.0
     "@types/triple-beam": ^1.3.2
@@ -25874,7 +25874,7 @@ __metadata:
     ms: ^2.1.1
     safe-stable-stringify: ^2.3.1
     triple-beam: ^1.3.0
-  checksum: b9ea74bb75e55379ad0eb3e4d65ae6e8d02bc45b431c218162878bf663997ab9258a73104c2b30e09dd2db288bb83c8bf8748e46689d75f5e7e34cf69378d6df
+  checksum: a202d10897254735ead75a640f889998f9b91a0c36be9cac3f5471fa740d36bc2fbbcf9d113dcdadec4ddf09e257393ff800e6aab80019bdc7456363d6ea21f6
   languageName: node
   linkType: hard
 
@@ -30959,7 +30959,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"readable-stream@npm:3, readable-stream@npm:^3.0.0, readable-stream@npm:^3.1.1, readable-stream@npm:^3.4.0, readable-stream@npm:^3.5.0, readable-stream@npm:^3.6.0":
+"readable-stream@npm:3, readable-stream@npm:^3.0.0, readable-stream@npm:^3.1.1, readable-stream@npm:^3.4.0, readable-stream@npm:^3.5.0, readable-stream@npm:^3.6.0, readable-stream@npm:^3.6.2":
   version: 3.6.2
   resolution: "readable-stream@npm:3.6.2"
   dependencies:
@@ -32701,15 +32701,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simple-oauth2@npm:5.0.1":
-  version: 5.0.1
-  resolution: "simple-oauth2@npm:5.0.1"
+"simple-oauth2@npm:5.1.0":
+  version: 5.1.0
+  resolution: "simple-oauth2@npm:5.1.0"
   dependencies:
     "@hapi/hoek": ^11.0.4
     "@hapi/wreck": ^18.0.0
     debug: ^4.3.4
     joi: ^17.6.4
-  checksum: 64a48f0387860a2850b6bb564b0bc50ef242721c6cb718043f9c99cc5b9007fc808037d6d2a0a660f3258c2c6cae499c0ca001c39bbf6bf78dc7ea122c2adf5e
+  checksum: 65e07a92ffdfbc38fdd7db5480349b09c4c896559b6b3786a256546fe3aa6ac80086fa4f2c30d1d68ff551668147343c0a0dcc53c33fe7e5d1a7b42b4772eedc
   languageName: node
   linkType: hard
 
@@ -36148,33 +36148,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"winston-transport@npm:^4.7.0":
-  version: 4.7.0
-  resolution: "winston-transport@npm:4.7.0"
+"winston-transport@npm:^4.9.0":
+  version: 4.9.0
+  resolution: "winston-transport@npm:4.9.0"
   dependencies:
-    logform: ^2.3.2
-    readable-stream: ^3.6.0
+    logform: ^2.7.0
+    readable-stream: ^3.6.2
     triple-beam: ^1.3.0
-  checksum: ce074b5c76a99bee5236cf2b4d30fadfaf1e551d566f654f1eba303dc5b5f77169c21545ff5c5e4fdad9f8e815fc6d91b989f1db34161ecca6e860e62fd3a862
+  checksum: f5fd06a27def7597229925ba2b8b9ffa61b5b8748f994c8325064744e4e36dfea19868a16c16b3806f9b98bb7da67c25f08ae6fba3bdc6db4a9555673474a972
   languageName: node
   linkType: hard
 
-"winston@npm:3.12.0":
-  version: 3.12.0
-  resolution: "winston@npm:3.12.0"
+"winston@npm:3.17.0":
+  version: 3.17.0
+  resolution: "winston@npm:3.17.0"
   dependencies:
     "@colors/colors": ^1.6.0
     "@dabh/diagnostics": ^2.0.2
     async: ^3.2.3
     is-stream: ^2.0.0
-    logform: ^2.4.0
+    logform: ^2.7.0
     one-time: ^1.0.0
     readable-stream: ^3.4.0
     safe-stable-stringify: ^2.3.1
     stack-trace: 0.0.x
     triple-beam: ^1.3.0
-    winston-transport: ^4.7.0
-  checksum: 7549e90d471312f3678c86fc51c86da05717be0390ecc0dc1a312a57f4ab3eb22e4fae1829291a05334376db8caa5f118d1de019d8c67e5f031ed70678363703
+    winston-transport: ^4.9.0
+  checksum: ba772c25937007cea6cdeddc931de18a1ea336ae7b3aff2c15de762de5c559b2d310ca2e7a911c209711d325e47d653485e33271ddfb27cd73179e35c7d52267
   languageName: node
   linkType: hard
 

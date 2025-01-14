@@ -3,6 +3,7 @@ import { ModalZeroButton } from "@/components/ModalZeroButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
@@ -17,6 +18,7 @@ export const NeedsAccountModal = (): ReactElement => {
   const { isAuthenticated, showNeedsAccountModal, setShowNeedsAccountModal } =
     useContext(NeedsAccountContext);
   const { Config } = useConfig();
+  const loginPageEnabled = process.env.FEATURE_LOGIN_PAGE === "true";
 
   useMountEffectWhenDefined(() => {
     if (isAuthenticated === IsAuthenticated.TRUE) {
@@ -59,7 +61,11 @@ export const NeedsAccountModal = (): ReactElement => {
             <Content
               onClick={(): void => {
                 analytics.event.guest_modal.click.go_to_myNJ_login();
-                router && router.push(ROUTES.login);
+                if (loginPageEnabled) {
+                  router && router.push(ROUTES.login);
+                } else {
+                  triggerSignIn();
+                }
               }}
             >
               {Config.selfRegistration.needsAccountModalSubText}

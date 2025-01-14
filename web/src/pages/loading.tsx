@@ -1,6 +1,6 @@
 import { LoadingPageComponent } from "@/components/LoadingPageComponent";
 import { AuthContext } from "@/contexts/authContext";
-import { getActiveUser } from "@/lib/auth/sessionHelper";
+import { getActiveUser, triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
@@ -17,6 +17,8 @@ const LoadingPage = (): ReactElement => {
   const { updateQueue, userData } = useUserData();
   const router = useRouter();
   const { dispatch } = useContext(AuthContext);
+  const loginPageEnabled = process.env.FEATURE_LOGIN_PAGE === "true";
+
   useEffect(() => {
     if (!router) {
       return;
@@ -35,9 +37,13 @@ const LoadingPage = (): ReactElement => {
         encounteredMyNjLinkingError: true,
       });
     } else {
-      router.push(ROUTES.login);
+      if (loginPageEnabled) {
+        router && router.push(ROUTES.login);
+      } else {
+        triggerSignIn();
+      }
     }
-  }, [router, dispatch]);
+  }, [router, dispatch, loginPageEnabled]);
 
   useMountEffectWhenDefined(() => {
     if (!updateQueue) return;
