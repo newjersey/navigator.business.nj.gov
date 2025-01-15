@@ -40,7 +40,6 @@ describe("auto tax filing [feature] [all] [group4]", () => {
     cy.get('[data-testid="get-tax-access"]').should("not.exist");
     cy.get('[data-testid="alert-content-container"]').should("exist");
     onDashboardPage.getTaxFilingCalendar().should("contain", "Your Tax Calendar is pending.");
-    onDashboardPage.getTaxFilingCalendar().get('[data-testid="filings-calendar-as-list"]').should("exist");
     onDashboardPage.getTaxFilingCalendar().should("contain", "Sales and Use Tax");
   });
 

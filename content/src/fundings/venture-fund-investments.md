@@ -1,5 +1,4 @@
 ---
-filename: venture-fund-investments
 name: Venture Fund Investments
 displayName: venture-fund-investments
 urlSlug: venture-fund-investments

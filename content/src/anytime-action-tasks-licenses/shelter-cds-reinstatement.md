@@ -1,5 +1,5 @@
 ---
-filename: shelter-cds-reinstatement
+id: shelter-cds-reinstatement
 name: Reinstate Your Animal Shelter’s Controlled Dangerous Substances Registration
 industryIds:
   - petcare

@@ -1,6 +1,5 @@
 ---
-slug: cbt-annually
-filename: cbt-annually
+id: cbt-annually
 displayname: cbt-annually
 header: Annual Corporate Business Tax Due Dates
 ---

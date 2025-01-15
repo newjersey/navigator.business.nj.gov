@@ -1,5 +1,4 @@
 ---
-filename: food-agriculture-grant
 name: Food and Agriculture Research & Development Grant Program
 displayName: food-agriculture-rd
 urlSlug: food-agriculture-grant

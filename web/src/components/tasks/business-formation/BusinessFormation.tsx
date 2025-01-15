@@ -35,7 +35,7 @@ import {
   PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared/";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
 
 interface Props {
@@ -137,7 +137,8 @@ export const BusinessFormation = (props: Props): ReactElement => {
       if (!business || getCompletedFilingApiCallOccurred.current) {
         return false;
       }
-      const completeFilingQueryParamExists = checkQueryValue(router, QUERIES.completeFiling, "true");
+      const completeFilingQueryParamExists =
+        router && checkQueryValue(router, QUERIES.completeFiling, "true");
       const completedPayment = business.formationData.formationResponse?.success === true;
       const noCompletedFilingExists = !business.formationData.getFilingResponse?.success;
       return completeFilingQueryParamExists || (completedPayment && noCompletedFilingExists);

@@ -1,7 +1,6 @@
 ---
 urlSlug: beer-making-for-personal-consumption
 webflowName: Beer Making for Personal Consumption
-filename: beer-making-for-personal-consumption
 displayname: beer-making-for-personal-consumption
 agencyId: law-public-safety
 agencyAdditionalContext: Division of Alcoholic Beverage, Control Licensing Bureau

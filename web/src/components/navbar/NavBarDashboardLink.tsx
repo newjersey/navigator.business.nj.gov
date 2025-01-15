@@ -3,7 +3,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { removeBusiness } from "@/lib/domain-logic/removeBusiness";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactNode } from "react";
 
 interface Props {
@@ -19,6 +19,7 @@ export const NavBarDashboardLink = (props: Props): ReactNode => {
     <div>
       <UnStyledButton
         onClick={async (): Promise<void> => {
+          if (!router) return;
           analytics.event.my_account.click.my_account();
           if (!business?.onboardingFormProgress) {
             await router.push(ROUTES.onboarding);

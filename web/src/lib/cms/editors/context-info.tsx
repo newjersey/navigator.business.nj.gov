@@ -27,10 +27,10 @@ export default {
       required: true,
       widget: "relation",
       collection: "contextual-information",
-      search_fields: ["{{filename}}"],
+      search_fields: ["{{displayname}}"],
       options_length: 500,
-      value_field: "{{filename}}",
-      display_fields: ["{{filename}}"],
+      value_field: "{{fields.id}}",
+      display_fields: ["{{displayname}}"],
     },
 
     {

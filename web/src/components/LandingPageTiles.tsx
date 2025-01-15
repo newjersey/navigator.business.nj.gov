@@ -3,7 +3,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import { ActionTile } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
 
 export const LandingPageTiles = (): ReactElement => {
@@ -13,10 +13,11 @@ export const LandingPageTiles = (): ReactElement => {
   const landingPageConfig = Config.landingPage;
 
   const setFlowAndRouteUser = (flow: "starting" | "out-of-state" | "up-and-running"): void => {
-    routeWithQuery(router, {
-      path: ROUTES.onboarding,
-      queries: { [QUERIES.flow]: flow },
-    });
+    router &&
+      routeWithQuery(router, {
+        path: ROUTES.onboarding,
+        queries: { [QUERIES.flow]: flow },
+      });
   };
 
   const actionTiles: ActionTile[] = [

@@ -16,7 +16,7 @@ import {
   TaskProgress,
 } from "@businessnjgovnavigator/shared/index";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useEffect, useState } from "react";
 
 const ModifyBusinessPage = (): ReactElement => {
@@ -35,7 +35,7 @@ const ModifyBusinessPage = (): ReactElement => {
 
   useEffect(() => {
     if (isModifyBusinessPageDisabled) {
-      router.push(ROUTES.dashboard);
+      router && router.push(ROUTES.dashboard);
     }
   }, [isModifyBusinessPageDisabled, router]);
 

@@ -19,7 +19,7 @@ import { createProfileFieldErrorMap, OnboardingErrors } from "@/lib/types/types"
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { BusinessUser, createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
 const AccountSetupPage = (): ReactElement => {
@@ -41,7 +41,7 @@ const AccountSetupPage = (): ReactElement => {
   useEffect(() => {
     (async (): Promise<void> => {
       if (state.isAuthenticated === IsAuthenticated.TRUE) {
-        await router.replace(ROUTES.dashboard);
+        router && (await router.replace(ROUTES.dashboard));
       }
     })();
   }, [state.isAuthenticated, router]);
@@ -54,7 +54,7 @@ const AccountSetupPage = (): ReactElement => {
 
   FormFuncWrapper(
     async (): Promise<void> => {
-      if (!updateQueue) return;
+      if (!updateQueue || !router) return;
 
       updateQueue.queueUser(user);
       let userDataWithUser = updateQueue.current();
@@ -81,7 +81,7 @@ const AccountSetupPage = (): ReactElement => {
   );
 
   useEffect(() => {
-    if (!router.isReady || queryAnalyticsOccurred.current) {
+    if (!router || !router.isReady || queryAnalyticsOccurred.current) {
       return;
     }
     if (router.query[QUERIES.source] !== undefined) {

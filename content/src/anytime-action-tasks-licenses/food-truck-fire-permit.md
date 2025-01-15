@@ -5,7 +5,7 @@ notesMd: >-
 
 
   Note: this is also be on the Food Truck Starter Kit
-filename: food-truck-fire-permit
+id: food-truck-fire-permit
 name: Get a Fire Permit for Your Food Truck
 industryIds: []
 sectorIds:

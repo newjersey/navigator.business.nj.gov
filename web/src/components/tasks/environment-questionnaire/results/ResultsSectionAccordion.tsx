@@ -7,15 +7,9 @@ import { ReactElement, ReactNode, useState } from "react";
 interface Props {
   title: string;
   children: ReactNode;
-  mini?: boolean;
-  isDividerDisabled?: boolean;
 }
 
-export const CheckWasteResultsAccordion = (props: Props): ReactElement => {
-  const dropdownIconClasses = props.mini
-    ? "usa-icon--size-5 text-base-light"
-    : "usa-icon--size-5 margin-left-1";
-  const headerClasses = props.mini ? "" : "margin-top-3 tablet:margin-left-3";
+export const ResultsSectionAccordion = (props: Props): ReactElement => {
   const sectionName = props.title.toLowerCase();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -24,13 +18,16 @@ export const CheckWasteResultsAccordion = (props: Props): ReactElement => {
       <SectionAccordionContext.Provider value={{ isOpen }}>
         <Accordion expanded={isOpen} onChange={() => setIsOpen(!isOpen)}>
           <AccordionSummary
-            expandIcon={<Icon className={dropdownIconClasses} iconName={"expand_more"} />}
+            expandIcon={<Icon className={"usa-icon--size-5 margin-left-1"} iconName={"expand_more"} />}
             aria-controls={`${sectionName}-content`}
             id={`${sectionName}-header`}
             data-testid={`${sectionName}-header`}
           >
             <div>
-              <Heading level={3} className={`flex flex-align-center margin-0-override ${headerClasses}`}>
+              <Heading
+                level={3}
+                className={`flex flex-align-center margin-0-override margin-top-3 tablet:margin-left-3`}
+              >
                 <div className="inline">{props.title}</div>
               </Heading>
             </div>
@@ -38,7 +35,7 @@ export const CheckWasteResultsAccordion = (props: Props): ReactElement => {
           <AccordionDetails>{props.children}</AccordionDetails>
         </Accordion>
       </SectionAccordionContext.Provider>
-      {!props.isDividerDisabled && <hr className="margin-y-05" />}
+      <hr className="margin-y-05" />
     </div>
   );
 };

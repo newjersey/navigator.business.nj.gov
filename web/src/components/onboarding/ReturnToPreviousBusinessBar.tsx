@@ -9,7 +9,7 @@ import { removeBusiness } from "@/lib/domain-logic/removeBusiness";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
 import { Business } from "@businessnjgovnavigator/shared/userData";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useContext } from "react";
 
 interface Props {
@@ -40,7 +40,7 @@ export const ReturnToPreviousBusinessBar = (props: Props): ReactElement | null =
         })
       )
       .update();
-    await router.push(ROUTES.dashboard);
+    router && (await router.push(ROUTES.dashboard));
   };
 
   return (

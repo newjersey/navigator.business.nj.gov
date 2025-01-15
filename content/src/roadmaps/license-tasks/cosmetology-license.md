@@ -1,7 +1,6 @@
 ---
 licenseName: ""
 id: cosmetology-license
-filename: cosmetology-license
 displayname: cosmetology-license
 urlSlug: cosmetology-license
 name: Get Your Individual Cosmetology License and Ensure Your Staff is Licensed

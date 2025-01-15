@@ -6,11 +6,11 @@ import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpe
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   BusinessSignerTypeMap,
-  FormationLegalType,
-  PublicFilingLegalType,
   castPublicFilingLegalTypeToFormationType,
+  FormationLegalType,
   generateFormationFormData,
   generateFormationSigner,
+  PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen } from "@testing-library/react";
@@ -28,7 +28,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),

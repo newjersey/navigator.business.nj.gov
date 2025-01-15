@@ -1,6 +1,6 @@
 ---
 notesMd: ""
-filename: trainer-cds-reinstatement
+id: trainer-cds-reinstatement
 name: Reinstate Your Dog Trainer Controlled Dangerous Substances Registration
 industryIds:
   - petcare

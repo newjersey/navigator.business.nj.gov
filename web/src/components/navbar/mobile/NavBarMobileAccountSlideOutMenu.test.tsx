@@ -3,9 +3,6 @@ import analytics from "@/lib/utils/analytics";
 import { MenuItem } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/auth/sessionHelper", () => ({
-  triggerSignIn: jest.fn(),
-}));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 function setupMockAnalytics(): typeof analytics {

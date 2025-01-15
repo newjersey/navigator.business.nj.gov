@@ -1,6 +1,5 @@
 ---
-slug: pbs
-filename: pbs
+id: pbs
 header: Premier Business Services
 displayname: pbs
 ---

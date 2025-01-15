@@ -40,7 +40,7 @@
       "ariaContextStepperStateComplete": "Complete"
     },
     "intro": {
-      "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.\n\nYou will need to fill out a [paper application](https://www.nj.gov/treasury/revenue/pdf/2000.pdf) to register if you choose to `reserve your business name.|name-reservation` Business name reservations only last six months.",
+      "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.\n\nYou will need to fill out an [application](https://www.nj.gov/treasury/revenue/pdf/2000.pdf) to register if you choose to `reserve your business name.|name-reservation` Business name reservations only last six months. If you are not able to complete the online application [fill out the paper application](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf).",
       "foreign": "You must register your business name and form your business with the State. To do this, you first need to see if your business name is available.",
       "certificateOfGoodStandingAlert": {
         "beginning": "Before starting this task, you must:",
@@ -233,7 +233,7 @@
         "overrides": {
           "foreign": {
             "header": "Check Availability of Your Business Name",
-            "description": "Your business name must match **exactly** with the business name registered in your state of origin. You can find this on your original `Certificate of Formation|certificate-formation` and your `Certificate of Good Standing|good-standing`. **This search tool does not register your name with the State.**\n\nCheck if your business name is available in New Jersey."
+            "description": "Your business name must match **exactly** with the business name registered in your state of origin. You can find this on your original `Certificate of Formation|certificate-formation` and your `Certificate of Good Standing|good-standing` . **This search tool does not register your name with the State.**\n\nCheck if your business name is available in New Jersey."
           }
         },
         "errorInlineEmpty": "Enter a business name to check availability.",

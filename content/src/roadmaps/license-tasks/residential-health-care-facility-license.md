@@ -1,7 +1,6 @@
 ---
 licenseName: ""
 id: residential-health-care-facility-license
-filename: residential-health-care-facility-license
 displayname: residential-health-care-facility-license
 urlSlug: residential-health-care-facility-license
 name: Apply for Your Free-Standing Residential Health Care Facility License

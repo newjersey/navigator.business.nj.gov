@@ -11,7 +11,7 @@ import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/
 import { getCurrentDateInNewJersey } from "@businessnjgovnavigator/shared/index";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useContext } from "react";
 
 export const DashboardHeader = (): ReactElement => {
@@ -22,7 +22,7 @@ export const DashboardHeader = (): ReactElement => {
 
   const editOnClick = (): void => {
     analytics.event.roadmap_profile_edit_button.click.go_to_profile_screen();
-    router.push(ROUTES.profile);
+    router && router.push(ROUTES.profile);
   };
 
   const getHeader = (): string => {

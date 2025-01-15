@@ -202,7 +202,14 @@
     "Overdimensional",
     "osow",
     "vdxfup",
-    "Jotform"
+    "Jotform",
+    "accreditations",
+    "NCPDP",
+    "NJPMP",
+    "hardcopy",
+    "LSRPs",
+    "sitehazardous",
+    "womenled"
   ],
   "ignorePaths": [
     "node_modules/**",

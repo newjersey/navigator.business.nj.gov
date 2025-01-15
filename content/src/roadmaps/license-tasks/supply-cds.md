@@ -1,24 +1,28 @@
 ---
+notesMd: "1.10.25: updated with SME revisions."
 id: supply-cds
-webflowId: 6721493f43b6800b762e24ab
-urlSlug: supply-cds
-name: Apply for Your Manufacturer or Wholesale Distributor’s Controlled Dangerous Substances Registration
 displayname: supply-cds
-webflowName: "All Other Businesses: Manufacturer or Wholesale Distributor Controlled Dangerous Substances Registration"
-filename: supply-cds
-agencyId: nj-consumer-affairs
-agencyAdditionalContext: New Jersey Drug Control Unit
-industryId: generic
-licenseCertificationClassification: undefined
+urlSlug: supply-cds
+name: Apply for Your Manufacturer or Wholesaler/Distributor Controlled Dangerous
+  Substances Registration
+webflowName: "All Other Businesses: Manufacturer or Wholesaler/Distributor
+  Controlled Dangerous Substances Registration"
 summaryDescriptionMd: >-
-  You need a Controlled Dangerous Substances (CDS) registration if you manufacture, repackage, label, or buy and sell any products containing CDS. Follow these steps to apply:
+  You need a Controlled Dangerous Substances (CDS) registration if you
+  manufacture, repackage, label, or buy and sell any products containing CDS.
+  Follow these steps to apply:
 
 
-  1. Email the NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the CDS registration application for Manufacturers or Wholesale Distributors.
+  1. Email the NJ Drug Control Unit (DCU) at [cds@dca.njoag.gov](mailto:CDS@dca.njoag.gov) to request the CDS registration application for Manufacturers or Wholesalers/Distributors.
 
   2. After your completed application has been emailed to the DCU, they will email you an invoice to pay your fees online.
 
   3. Be sure to register with the [U.S. Drug Enforcement Administration (DEA)](https://www.deadiversion.usdoj.gov/online_forms_apps.html) to validate your CDS registration. You will need your CDS number for this process. Email a copy of your DEA registration to the DCU within 60 days.
+industryId: generic
+licenseCertificationClassification: undefined
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: New Jersey Drug Control Unit
+webflowId: 6721493f43b6800b762e24ab
 ---
 
 ## Application Requirements
@@ -54,7 +58,7 @@ summaryDescriptionMd: >-
 
 - Criminal History Record Information (CHRI) Part 1 for each person with access to the CDS and applicable fees paid (to be completed online and at the same time as the CDS registration; link in application)
 - CHRI Part 2, including employee names, dates of birth, and email addresses (to be completed right after Part 1 and submitted with your CDS application; form included in application)
-- A map or layout of the facility and nearby areas, showing where the safe, steel cabinet, or vault is located
+- A map or layout of the facility and nearby areas, showing where the CDS safe, steel cabinet, or vault is located
 - Manufacturer details about the safe, steel cabinet, or vault used to store CDS
 - Photos of the safe, steel cabinet, or vault used to store CDS, including the area around it
 - List of CDS, by schedule, that the business uses or plans to make or distribute
@@ -72,6 +76,6 @@ You cannot handle, store, manufacture, or distribute CDS or products containing 
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A CDS registration certificate sent to your mailing address, valid for 1 year.
+A CDS registration certificate sent to your mailing address.
 
 :::

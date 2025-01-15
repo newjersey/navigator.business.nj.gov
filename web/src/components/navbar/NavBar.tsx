@@ -4,11 +4,12 @@ import { AuthContext } from "@/contexts/authContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { Task } from "@/lib/types/types";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
 type Props = {
   landingPage?: boolean;
+  isLoginPage?: boolean;
   isSeoStarterKit?: boolean;
   task?: Task;
   showSidebar?: boolean;
@@ -55,6 +56,7 @@ export const NavBar = (props: Props): ReactElement => {
         <NavBarDesktop
           isSeoStarterKit={props.isSeoStarterKit}
           isLanding={props.landingPage}
+          isLoginPage={props.isLoginPage}
           logoOnlyType={props.logoOnly}
           previousBusinessId={props.previousBusinessId}
           currentlyOnboarding={currentlyOnboarding()}
@@ -65,11 +67,12 @@ export const NavBar = (props: Props): ReactElement => {
       <div className="display-inline desktop:display-none">
         <NavBarMobile
           isSeoStarterKit={props.isSeoStarterKit}
+          isLanding={props.landingPage}
+          isLoginPage={props.isLoginPage}
           scrolled={scrolled}
           task={props.task}
           showSidebar={props.showSidebar}
           hideMiniRoadmap={props.hideMiniRoadmap}
-          isLanding={props.landingPage}
           previousBusinessId={props.previousBusinessId}
           logoOnlyType={props.logoOnly}
           currentlyOnboarding={currentlyOnboarding()}

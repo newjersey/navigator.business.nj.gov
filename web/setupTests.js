@@ -32,3 +32,5 @@ window.matchMedia =
   };
 
 jest.setTimeout(10000);
+
+jest.mock("next/router", () => require("next-router-mock"));

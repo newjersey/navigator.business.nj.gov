@@ -1,0 +1,25 @@
+@use "../sass-files/mixin";
+@use "../sass-files/variables";
+
+.fit-screen-content:has(.email-check-main) {
+  background-color: variables.$cool-extra-light;
+}
+
+.email-check-card {
+  background-color: variables.$white;
+  border: 1px solid variables.$base-lighter;
+  width: fit-content;
+  @include mixin.addDropShadow(variables.$drop-shadow-xs);
+
+  .usa-button {
+    margin-top: 10px;
+  }
+}
+
+.my-acccount-login-text {
+  color: variables.$primary;
+}
+
+.link-account-text a {
+  display: inline-block;
+}

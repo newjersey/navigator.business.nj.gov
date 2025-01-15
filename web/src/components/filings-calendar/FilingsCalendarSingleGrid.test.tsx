@@ -162,6 +162,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
     const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
     const licenseEvent = generateLicenseEvent({ licenseName });
     const business = generateBusiness({
+      taxFilingData: generateTaxFilingData({ filings: [] }),
       licenseData: generateLicenseData({
         licenses: {
           [licenseName]: generateLicenseDetails({
@@ -192,6 +193,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
     const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
     const licenseEvent = generateLicenseEvent({ licenseName });
     const business = generateBusiness({
+      taxFilingData: generateTaxFilingData({ filings: [] }),
       licenseData: generateLicenseData({
         licenses: {
           [licenseName]: generateLicenseDetails({
@@ -221,6 +223,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
     const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
     const licenseEvent = generateLicenseEvent({ licenseName });
     const business = generateBusiness({
+      taxFilingData: generateTaxFilingData({ filings: [] }),
       licenseData: generateLicenseData({
         licenses: {
           [licenseName]: generateLicenseDetails({

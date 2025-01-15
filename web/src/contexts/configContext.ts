@@ -10,6 +10,7 @@ import * as CannabisLicenseEligibilityModal from "@businessnjgovnavigator/conten
 import * as CannabisLicenseTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-license-tab1.json";
 import * as CannabisPriorityStatusTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab1.json";
 import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab2.json";
+import * as CheckAccountEmailPage from "@businessnjgovnavigator/content/fieldConfig/check-account-email-page.json";
 import * as ConfigOriginal from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import * as DashboardCalendar from "@businessnjgovnavigator/content/fieldConfig/dashboard-calendar.json";
 import * as DashboardDefaults from "@businessnjgovnavigator/content/fieldConfig/dashboard-defaults.json";
@@ -19,6 +20,7 @@ import * as DashboardTabs from "@businessnjgovnavigator/content/fieldConfig/dash
 import * as DeferredLocation from "@businessnjgovnavigator/content/fieldConfig/deferred-location.json";
 import * as Ein from "@businessnjgovnavigator/content/fieldConfig/ein.json";
 import * as ElevatorRegistration from "@businessnjgovnavigator/content/fieldConfig/elevator-registration.json";
+import * as EnvQuestionnaire from "@businessnjgovnavigator/content/fieldConfig/env-questionnaire.json";
 import * as FormationInterimSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-interim-success-page.json";
 import * as FormationSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-success-page.json";
 import * as SiteWideErrorMessages from "@businessnjgovnavigator/content/fieldConfig/global-errors-defaults.json";
@@ -32,7 +34,6 @@ import * as Profile from "@businessnjgovnavigator/content/fieldConfig/profile.js
 import * as StarterKits from "@businessnjgovnavigator/content/fieldConfig/starter-kits.json";
 import * as TaxAccess from "@businessnjgovnavigator/content/fieldConfig/tax-access-modal.json";
 import * as Tax from "@businessnjgovnavigator/content/fieldConfig/tax.json";
-import * as WasteQuestionnairePage from "@businessnjgovnavigator/content/fieldConfig/waste-questionnaire-page.json";
 import * as CalloutAlerts from "@businessnjgovnavigator/content/mappings/callout-alerts.json";
 import * as PageMetadata from "@businessnjgovnavigator/content/page-metadata/page-metadata.json";
 
@@ -80,7 +81,8 @@ const merged = JSON.parse(
       HousingRegistrationSearchTask,
       anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
       CalloutAlerts,
-      WasteQuestionnairePage
+      EnvQuestionnaire,
+      CheckAccountEmailPage
     )
   )
 );
@@ -123,7 +125,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof HousingRegistrationSearchTask &
   typeof anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults &
   typeof CalloutAlerts &
-  typeof WasteQuestionnairePage;
+  typeof CheckAccountEmailPage &
+  typeof EnvQuestionnaire;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -162,7 +165,8 @@ export const getMergedConfig = (): ConfigType => {
     HousingRegistrationSearchTask,
     anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
     CalloutAlerts,
-    WasteQuestionnairePage
+    EnvQuestionnaire,
+    CheckAccountEmailPage
   );
 };
 

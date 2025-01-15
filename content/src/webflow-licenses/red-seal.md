@@ -1,5 +1,4 @@
 ---
-filename: red-seal
 displayname: red-seal
 id: "red-seal"
 webflowId: "5f772953eb555847e8feb5a0"

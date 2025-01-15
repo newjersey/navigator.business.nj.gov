@@ -885,3 +885,26 @@ export const getRandomv151LicenseStatus = (): v151LicenseStatus => {
   const randomIndex = Math.floor(Math.random() * v151LicenseStatuses.length);
   return v151LicenseStatuses[randomIndex];
 };
+
+export const generatev151WasteQuestionnaireData = (
+  overrides: Partial<v151WasteQuestionnaireData>
+): v151WasteQuestionnaireData => {
+  return {
+    hazardousMedicalWaste: false,
+    constructionDebris: false,
+    compostWaste: false,
+    treatProcessWaste: false,
+    noWaste: false,
+    ...overrides,
+  };
+};
+
+export const generatev151WasteData = (overrides: Partial<v151WasteData>): v151WasteData => {
+  return {
+    questionnaireData: generatev151WasteQuestionnaireData({
+      ...overrides.questionnaireData,
+    }),
+    submitted: false,
+    ...overrides,
+  };
+};

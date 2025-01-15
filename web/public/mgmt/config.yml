@@ -30,8 +30,8 @@ collections:
     label: "Biz Form - DBA Tasks"
     folder: "content/src/display-content/business-formation/nexus"
     summary: "{{displayname}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
     sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
     create: true
@@ -42,16 +42,9 @@ collections:
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
-      - { label: "Filename", name: "filename", widget: "write-once-read-only-no-space", required: true }
       - { label: "Display Name", name: "displayname", widget: "no-space", required: true }
       - { label: "Name", name: "name", widget: "string" }
-      - {
-          label: "Id",
-          name: "id",
-          required: true,
-          widget: "write-once-read-only-no-space",
-          hint: "This should be the same as the filename.",
-        }
+      - { label: "Id", name: "id", required: true, widget: "write-once-read-only-no-space" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - label: Agency
@@ -274,7 +267,7 @@ collections:
                           collection: "contextual-information",
                           search_fields: ["{{displayname}}"],
                           options_length: 500,
-                          value_field: "{{filename}}",
+                          value_field: "{{fields.id}}",
                           display_fields: ["{{displayname}}"],
                         }
                       - { label: "Inline error - future", name: "errorFuture", widget: "string" }
@@ -295,7 +288,7 @@ collections:
                           collection: "contextual-information",
                           search_fields: ["{{displayname}}"],
                           options_length: 500,
-                          value_field: "{{filename}}",
+                          value_field: "{{fields.id}}",
                           display_fields: ["{{displayname}}"],
                         }
                       - {
@@ -375,7 +368,7 @@ collections:
                           collection: "contextual-information",
                           search_fields: ["{{displayname}}"],
                           options_length: 500,
-                          value_field: "{{filename}}",
+                          value_field: "{{fields.id}}",
                           display_fields: ["{{displayname}}"],
                         }
                       - { label: "Cost", name: "cost", widget: "string" }
@@ -393,7 +386,7 @@ collections:
                           collection: "contextual-information",
                           search_fields: ["{{displayname}}"],
                           options_length: 500,
-                          value_field: "{{filename}}",
+                          value_field: "{{fields.id}}",
                           display_fields: ["{{displayname}}"],
                         }
                       - { label: "Cost", name: "cost", widget: "string" }
@@ -411,7 +404,7 @@ collections:
                           collection: "contextual-information",
                           search_fields: ["{{displayname}}"],
                           options_length: 500,
-                          value_field: "{{filename}}",
+                          value_field: "{{fields.id}}",
                           display_fields: ["{{displayname}}"],
                         }
                       - { label: "Cost", name: "cost", widget: "string" }
@@ -988,7 +981,7 @@ collections:
                       collection: "contextual-information",
                       search_fields: ["{{displayname}}"],
                       options_length: 500,
-                      value_field: "{{filename}}",
+                      value_field: "{{fields.id}}",
                       display_fields: ["{{displayname}}"],
                     }
                   - {
@@ -1204,43 +1197,83 @@ collections:
   - name: "environmental-compliance-section"
     label: "Env Comp - Config"
     files:
-      - label: "Waste Questionnaire Task"
-        name: "waste-questionnaire-task"
-        file: content/src/fieldConfig/waste-questionnaire-page.json
+      - label: "Environment Questionnaire Tasks"
+        name: "env-questionnaire-task"
+        file: content/src/fieldConfig/env-questionnaire.json
         editor:
           preview: false
         fields:
-          - label: Waste Questionnaire Page Config
-            name: wasteQuestionnaireQuestionsPage
+          - label: Questionnaire Page Config
+            name: envQuestionPage
             collapsed: false
             widget: object
             fields:
-              - { label: Title, name: title, widget: text }
-              - { label: Question, name: question, widget: string }
-              - { label: Footer, name: footer, widget: markdown }
-              - { label: Button Text, name: buttonText, widget: string }
-              - { label: Error Text, name: errorText, widget: string }
-              - label: Waste Options
-                name: wasteQuestionnaireOptions
+              - label: Generic
+                name: generic
                 collapsed: true
                 widget: object
                 fields:
-                  - { label: Hazardous Medical Waste Option, name: hazardousMedicalWaste, widget: text }
-                  - { label: Compost Waste Option, name: compostWaste, widget: text }
-                  - { label: Treat Process Waste Option, name: treatProcessWaste, widget: text }
-                  - { label: Construction Debris Option, name: constructionDebris, widget: text }
-                  - { label: No Waste Option, name: noWaste, widget: text }
-          - label: Waste Results Page Config
-            name: wasteQuestionnaireResultsPage
+                  - { label: Title, name: title, widget: text }
+                  - { label: Question, name: question, widget: string }
+                  - { label: Button Text, name: buttonText, widget: string }
+                  - { label: Error Text, name: errorText, widget: string }
+                  - { label: Footer, name: footerText, widget: markdown }
+              - label: Waste
+                name: waste
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Media Area Text, name: mediaAreaText, widget: string }
+                  - { label: Media Area Link, name: mediaAreaLink, widget: markdown }
+                  - label: Waste Questionnaire Options
+                    name: questionnaireOptions
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Hazardous Medical Waste Option, name: hazardousMedicalWaste, widget: text }
+                      - { label: Compost Waste Option, name: compostWaste, widget: text }
+                      - { label: Treat Process Waste Option, name: treatProcessWaste, widget: text }
+                      - { label: Construction Debris Option, name: constructionDebris, widget: text }
+                      - { label: No Waste Option, name: noWaste, widget: text }
+              - label: Land
+                name: land
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Media Area Text, name: mediaAreaText, widget: string }
+                  - { label: Media Area Link, name: mediaAreaLink, widget: markdown }
+                  - label: Land Questionnaire Options
+                    name: questionnaireOptions
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Take Over Existing Business, name: takeOverExistingBiz, widget: text }
+                      - { label: Property Assessment, name: propertyAssessment, widget: text }
+                      - { label: Construction Activities, name: constructionActivities, widget: text }
+                      - { label: Site Improvement Waste Land, name: siteImprovementWasteLands, widget: text }
+                      - { label: No Land Option, name: noLand, widget: text }
+          - label: Results Page Config
+            name: envResultsPage
             collapsed: false
             widget: object
             fields:
               - { label: Title, name: title, widget: text }
               - { label: Edit Info, name: editInfo, widget: string }
               - { label: Edit Text, name: editText, widget: string }
-              - { label: Summary Text Pt.1, name: summaryPtOne, widget: string }
-              - { label: Summary Text Pt.2, name: summaryPtTwo, widget: string }
-              - { label: Summary Media Area, name: summaryMediaArea, widget: string }
+              - label: Summary
+                name: summary
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Summary Text Pt.1, name: partOne, widget: string }
+                  - { label: Summary Text Pt.2, name: partTwo, widget: string }
+                  - label: Media Area Texts
+                    name: mediaAreaText
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Waste Media Area Text, name: waste, widget: string }
+                      - { label: Watershed and Land Media Area Text, name: land, widget: string }
               - label: Personalized Support
                 name: personalizedSupport
                 collapsed: true
@@ -1255,9 +1288,35 @@ collections:
                 widget: object
                 fields:
                   - { label: Title, name: title, widget: text }
-                  - { label: Heading, name: heading, widget: text }
-                  - { label: Body, name: body, widget: markdown }
-                  - { label: Contact, name: contact, widget: text }
+                  - { label: Body, name: body, widget: text }
+                  - label: Waste Details
+                    name: waste
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Heading, name: heading, widget: text }
+                      - { label: Link in Body, name: bodyLink, widget: text }
+                      - label: Contact
+                        name: contact
+                        collapsed: true
+                        widget: object
+                        fields:
+                          - { label: Phone Number, name: phone, widget: text }
+                          - { label: Form, name: form, widget: text }
+                  - label: Land Details
+                    name: land
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Heading, name: heading, widget: text }
+                      - { label: Link in Body, name: bodyLink, widget: text }
+                      - label: Contact
+                        name: contact
+                        collapsed: true
+                        widget: object
+                        fields:
+                          - { label: Phone Number, name: phone, widget: text }
+                          - { label: Form, name: form, widget: text }
               - label: See Your Responses
                 name: seeYourResponses
                 collapsed: true
@@ -1269,8 +1328,8 @@ collections:
                 collapsed: true
                 widget: object
                 fields:
-                  - { label: Summary Line 1, name: summaryLine1, widget: text }
-                  - { label: Summary Line 2, name: summaryLine2, widget: markdown }
+                  - { label: Summary Line 1, name: summaryLineOne, widget: text }
+                  - { label: Summary Line 2, name: summaryLineTwo, widget: markdown }
                   - { label: Callout, name: callout, widget: text }
                   - { label: Callout Redo Prompt, name: calloutRedo, widget: text }
 
@@ -1284,8 +1343,8 @@ collections:
     label: "Cert Opps - Content"
     folder: "content/src/certifications"
     summary: "/{{urlSlug}} - {{name}}"
-    identifier_field: "{{urlSlug}}"
-    slug: "{{urlSlug}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
     delete: true
     create: true
     editor:
@@ -1300,12 +1359,7 @@ collections:
         }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - {
-          label: "Url Slug / Filename",
-          name: "urlSlug",
-          widget: "write-once-read-only-no-space",
-          required: true,
-        }
+      - { label: "Url Slug", name: "urlSlug", widget: "write-once-read-only-no-space", required: true }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -1335,9 +1389,9 @@ collections:
   - name: "archived-certification-opportunities"
     label: "Cert Opps - Archived"
     folder: "content/src/archived-certifications"
-    summary: "/{{urlSlug}} - {{name}}"
-    identifier_field: "{{urlSlug}}"
-    slug: "{{urlSlug}}"
+    summary: "/{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
     delete: true
     create: true
     editor:
@@ -1351,12 +1405,7 @@ collections:
           hint: "This appears only in My Account, in the For You column, max char is 150 including spaces, plain text only",
         }
       - { label: "Content", name: "body", widget: "markdown" }
-      - {
-          label: "Url Slug / Filename",
-          name: "urlSlug",
-          widget: "write-once-read-only-no-space",
-          required: true,
-        }
+      - { label: "Url Slug", name: "urlSlug", widget: "write-once-read-only-no-space", required: true }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -1393,8 +1442,8 @@ collections:
     label: "Fund Opps - Content"
     folder: "content/src/fundings"
     summary: "[{{agency[0]}}] - {{displayName}}"
-    identifier_field: "{{filename}}"
-    slug: "{{filename}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
     delete: true
     sortable_fields: ["displayName", "agency"]
     create: true
@@ -1402,7 +1451,6 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "File Name", name: "filename", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Name",
           name: "name",
@@ -1416,13 +1464,7 @@ collections:
           hint: "This is the name displayed internally in CMS list",
         }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          hint: "This should be the same as the filename.",
-          required: true,
-        }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
@@ -1612,16 +1654,15 @@ collections:
   - name: "archived-funding-opportunities"
     label: "Fund Opps - Archived"
     folder: "content/src/archived-fundings"
-    summary: "/{{urlSlug}} - {{name}}"
-    identifier_field: "{{urlSlug}}"
-    slug: "{{urlSlug}}"
+    summary: "/{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
     delete: true
     create: true
     editor:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "File Name", name: "filename", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Name",
           name: "name",
@@ -1635,13 +1676,7 @@ collections:
           hint: "This is the name displayed internally in CMS list",
         }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          hint: "This should be the same as the filename.",
-          required: true,
-        }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
@@ -1858,7 +1893,7 @@ collections:
         name: naicsCodes
         widget: string
         required: false
-      - label: Id / Filename
+      - label: Id
         name: id
         widget: write-once-read-only-no-space
       - label: "Display Name"
@@ -1973,7 +2008,7 @@ collections:
             widget: "relation"
             collection: "tasks"
             search_fields: ["{{displayname}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
+            value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             required: false
             options_length: 500
@@ -1982,7 +2017,7 @@ collections:
             widget: "relation"
             collection: "license-tasks"
             search_fields: ["{{displayname}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
+            value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             required: false
             options_length: 500
@@ -2000,7 +2035,7 @@ collections:
             widget: "relation"
             collection: "tasks"
             search_fields: ["{{displayname}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
+            value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             options_length: 500
           - label: Modified Task
@@ -2008,7 +2043,7 @@ collections:
             widget: "relation"
             collection: "tasks"
             search_fields: ["{{displayname}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
+            value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             options_length: 500
   - name: addons
@@ -2024,7 +2059,7 @@ collections:
     editor:
       preview: false
     fields:
-      - label: Filename
+      - label: Id
         name: id
         widget: write-once-read-only-no-space
       - label: Displayname
@@ -2050,7 +2085,7 @@ collections:
             widget: "relation"
             collection: "tasks"
             search_fields: ["{{displayname}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
+            value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             required: false
             options_length: 500
@@ -2059,7 +2094,7 @@ collections:
             widget: "relation"
             collection: "license-tasks"
             search_fields: ["{{displayname}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
+            value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             required: false
             options_length: 500
@@ -2077,7 +2112,7 @@ collections:
             widget: "relation"
             collection: "tasks"
             search_fields: ["{{displayname}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
+            value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             options_length: 500
           - label: Modified Task
@@ -2085,7 +2120,7 @@ collections:
             widget: "relation"
             collection: "tasks"
             search_fields: ["{{displayname}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
+            value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             options_length: 500
   - name: "nonEssentialQuestionsCollection"
@@ -2114,7 +2149,7 @@ collections:
                 widget: "relation"
                 collection: "addons"
                 search_fields: ["{{displayname}}"]
-                value_field: "{{filename}}"
+                value_field: "{{fields.id}}"
                 display_fields: ["{{displayname}}"]
                 options_length: 500
 
@@ -2218,7 +2253,7 @@ collections:
                 widget: "relation"
                 collection: "tasks"
                 search_fields: ["{{displayname}}", "name", "urlSlug"]
-                value_field: "{{filename}}"
+                value_field: "{{fields.id}}"
                 display_fields: ["{{displayname}}"]
                 required: false
                 options_length: 500
@@ -2227,7 +2262,7 @@ collections:
                 widget: "relation"
                 collection: "license-tasks"
                 search_fields: ["{{displayname}}", "name", "urlSlug"]
-                value_field: "{{filename}}"
+                value_field: "{{fields.id}}"
                 display_fields: ["{{displayname}}"]
                 required: false
                 options_length: 500
@@ -2236,7 +2271,7 @@ collections:
                 widget: "relation"
                 collection: "tasks"
                 search_fields: ["{{displayname}}", "name", "urlSlug"]
-                value_field: "{{filename}}"
+                value_field: "{{fields.id}}"
                 display_fields: ["{{displayname}}"]
                 multiple: true
                 required: false
@@ -2246,7 +2281,7 @@ collections:
                 widget: "relation"
                 collection: "license-tasks"
                 search_fields: ["{{displayname}}", "name", "urlSlug"]
-                value_field: "{{filename}}"
+                value_field: "{{fields.id}}"
                 display_fields: ["{{displayname}}"]
                 multiple: true
                 required: false
@@ -2486,8 +2521,8 @@ collections:
     label: "Tasks - All"
     folder: "content/src/roadmaps/tasks"
     summary: "{{displayname}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
     sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
     create: true
@@ -2498,16 +2533,9 @@ collections:
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
-      - { label: "Filename", name: "filename", widget: "write-once-read-only-no-space", required: true }
       - { label: "Display Name", name: "displayname", widget: "no-space", required: true }
       - { label: "Name", name: "name", widget: "string" }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          hint: "This should be the same as the filename.",
-          required: true,
-        }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - {
@@ -2554,8 +2582,8 @@ collections:
     label: "License Tasks (Navigator with Webflow mappings)"
     folder: "content/src/roadmaps/license-tasks"
     summary: "{{displayname}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
     sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
     create: true
@@ -2564,20 +2592,7 @@ collections:
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          required: true,
-          hint: "This should be the same as the filename.",
-        }
-      - {
-          label: "Filename",
-          name: "filename",
-          widget: "write-once-read-only-no-space",
-          hint: "This is the name of the file in the code only.",
-          required: true,
-        }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Display Name",
           name: "displayname",
@@ -2652,8 +2667,8 @@ collections:
     label: "Raffle Bingo Steps"
     folder: "content/src/roadmaps/raffle-bingo-steps"
     summary: "{{displayname}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
     sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
     create: true
@@ -2661,19 +2676,7 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          required: true,
-          hint: "This should be the same as the filename.",
-        }
-      - {
-          label: "Filename",
-          name: "filename",
-          widget: "write-once-read-only-no-space",
-          hint: "This is the name of the file in the code only.",
-        }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Display Name",
           name: "displayname",
@@ -2697,8 +2700,8 @@ collections:
     label: "Webflow Licenses"
     folder: "content/src/webflow-licenses"
     summary: "{{displayname}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: false
     sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
     create: false
@@ -2706,7 +2709,7 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Filename", name: "filename", widget: "write-once-read-only-no-space", required: true }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Display Name", name: "displayname", widget: "no-space", required: true }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
       - { label: "Title (Navigator)", name: "name", widget: "string", required: false }
@@ -3069,15 +3072,16 @@ collections:
     folder: "content/src/roadmaps/municipal-tasks"
     delete: false
     create: false
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    summary: "{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
+    editor:
+      preview: false
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Name", name: "name", widget: "string", required: false }
       - { label: "ID", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Webflow Name", name: "webflowName", widget: "string", required: false }
-      - { label: "File name", name: "filename", widget: "write-once-read-only-no-space", required: true }
       - { label: "Call to Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call to Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Agency ID", name: "agencyId", widget: "string", required: false }
@@ -3704,20 +3708,21 @@ collections:
   - name: "anytime-action-tasks-licenses"
     label: "Anytime Actions (Licenses)"
     folder: "content/src/anytime-action-tasks-licenses"
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    summary: "{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
-    sortable_fields: ["name", "filename"]
+    sortable_fields: ["name", "id"]
     create: true
     editor:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - {
-          label: "Filename (disabled after file creation)",
-          name: "filename",
+          label: "Id",
+          name: "id",
           widget: "write-once-read-only-no-space",
+          hint: "disabled after file creation",
           required: true,
         }
       - { label: "Name/Title", name: "name", widget: "string" }
@@ -3759,20 +3764,21 @@ collections:
   - name: "anytime-action-tasks-reinstatements"
     label: "Anytime Actions (Reinstatements)"
     folder: "content/src/anytime-action-tasks-reinstatements"
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    summary: "{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
-    sortable_fields: ["name", "filename"]
+    sortable_fields: ["name", "id"]
     create: true
     editor:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - {
-          label: "Filename (disabled after file creation)",
-          name: "filename",
+          label: "Id",
+          name: "id",
           widget: "write-once-read-only-no-space",
+          hint: "disabled after file creation",
           required: true,
         }
       - { label: "Name/Title", name: "name", widget: "string" }
@@ -3814,20 +3820,21 @@ collections:
   - name: "anytime-action-tasks-admin"
     label: "Anytime Actions (Admin)"
     folder: "content/src/anytime-action-tasks-admin"
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    summary: "{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
-    sortable_fields: ["name", "filename"]
+    sortable_fields: ["name", "id"]
     create: true
     editor:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - {
-          label: "Filename (disabled after file creation)",
-          name: "filename",
+          label: "Id",
+          name: "id",
           widget: "write-once-read-only-no-space",
+          hint: "disabled after file creation",
           required: true,
         }
       - { label: "Name/Title", name: "name", widget: "string" }
@@ -3869,20 +3876,21 @@ collections:
   - name: "anytime-action-license-reinstatements"
     label: "Anytime Action With Consumer Affairs License Integrations (Reinstatements)"
     folder: "content/src/anytime-action-license-reinstatements"
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    summary: "{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
-    sortable_fields: ["name", "filename"]
+    sortable_fields: ["name", "id"]
     create: true
     editor:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - {
-          label: "Filename (disabled after file creation)",
-          name: "filename",
+          label: "Id",
+          name: "id",
           widget: "write-once-read-only-no-space",
+          hint: "disabled after file creation",
           required: true,
         }
       - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
@@ -3903,20 +3911,21 @@ collections:
   - name: "anytime-action-links"
     label: "Anytime Action External Link Only"
     folder: "content/src/anytime-action-links"
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    summary: "{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
-    sortable_fields: ["name", "filename"]
+    sortable_fields: ["name", "id"]
     create: true
     editor:
       preview: false
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - {
-          label: "Filename (disabled after file creation)",
-          name: "filename",
+          label: "Id",
+          name: "id",
           widget: "write-once-read-only-no-space",
+          hint: "disabled after file creation",
           required: true,
         }
       - { label: "Name/Title", name: "name", widget: "string" }
@@ -3973,7 +3982,6 @@ collections:
             widget: object
             summary: "{{pagesMetadata}}"
             fields:
-              - { label: "filename", name: "filename", widget: "hidden" }
               - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
               - { label: "Title Postfix", name: "titlePostfix", widget: "string", required: true }
               - { label: "Site Description", name: "siteDescription", widget: "string", required: true }
@@ -4839,7 +4847,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
@@ -4894,7 +4902,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - {
@@ -4939,7 +4947,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
@@ -5003,7 +5011,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - {
@@ -5048,7 +5056,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - {
@@ -5104,7 +5112,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - {
@@ -5150,7 +5158,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
@@ -5185,7 +5193,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - {
@@ -5260,7 +5268,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Description", name: "description", widget: "string", required: false }
@@ -5284,7 +5292,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
@@ -5323,7 +5331,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
@@ -5346,7 +5354,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - {
@@ -5375,7 +5383,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Edit Text", name: "editText", widget: "string" }
@@ -5405,7 +5413,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Error Text", name: "errorTextRequired", widget: "string" }
@@ -5429,7 +5437,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Error Text", name: "errorTextRequired", widget: "string" }
@@ -5582,7 +5590,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
@@ -5608,7 +5616,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
@@ -5976,8 +5984,8 @@ collections:
     label: "Contextual Information"
     folder: "content/src/display-content/contextual-information"
     summary: "{{displayname}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
+    identifier_field: "{{fields.id}}"
+    slug: "{{fields.id}}"
     delete: true
     create: true
     editor:
@@ -5986,7 +5994,7 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Header", name: "header", widget: "string" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "write-once-read-only-no-space", required: true }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Display Name", name: "displayname", widget: "no-space" }
 
   - name: "page-not-found-error"
@@ -6009,6 +6017,38 @@ collections:
               - { label: "Error Description 1", name: "errorDescriptionPt1", widget: "markdown" }
               - { label: "Error Description 2", name: "errorDescriptionPt2", widget: "markdown" }
               - { label: "Chat with Expert", name: "errorChatWithExpert", widget: "markdown" }
+
+  - name: "check-account-email-page"
+    label: "Check Account Email Page"
+    delete: false
+    create: false
+    files:
+      - label: "Check Account Email Page Text"
+        name: "check-account-email-page"
+        file: "content/src/fieldConfig/check-account-email-page.json"
+        editor:
+          preview: true
+        fields:
+          - label: "Check Account Email Page Text"
+            name: checkAccountEmailPage
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Header", name: "header", widget: "string" }
+              - { label: "Input label", name: "inputLabel", widget: "string" }
+              - { label: "Invalid Email text", name: "invalidEmailError", widget: "string" }
+              - { label: "Email Not Found Error Text", name: "emailNotFoundError", widget: "string" }
+              - {
+                  label: "Service Unavailable Error Text",
+                  name: "serviceNotAvailableError",
+                  widget: "string",
+                }
+              - { label: "Default Error Message Text", name: "defaultErrorMessage", widget: "string" }
+              - { label: "Input button", name: "inputButton", widget: "string" }
+              - { label: "No Account Text", name: "noAccountText", widget: "string" }
+              - { label: "Link Account Link Text", name: "linkAccountLinkText", widget: "string" }
+              - { label: "Need help text", name: "needHelpText", widget: "string" }
+              - { label: "Intercom chat text", name: "intercomChatText", widget: "string" }
 
   - name: "component-accessibility"
     label: "Component Accessibility"
@@ -6062,20 +6102,18 @@ collections:
 
   - name: "navigation-config"
     label: "Navigation Config"
-    summary: "{{filename}}"
+    summary: "Navigation Config"
     delete: false
     create: false
     files:
       - label: "Navigation Defaults"
         name: "navigation-defaults"
-        summary: "{{filename}}"
         file: "content/src/fieldConfig/navigation-defaults.json"
         editor:
           preview: true
         fields:
           - label: "Navigation Defaults"
             name: "navigationDefaults"
-            summary: "{{filename}}"
             widget: object
             fields:
               - { label: Login Button, name: logInButton, widget: string }
@@ -6120,7 +6158,6 @@ collections:
           - label: "Navigation Quick Links"
             name: "navigationQuickLinks"
             widget: object
-            summary: "{{filename}}"
             fields:
               - { label: Mobile Title, name: navBarMobileQuickLinksTitle, widget: string }
               - { label: Plan, name: navBarPlanText, widget: string }

@@ -171,6 +171,7 @@ describe("<LicenseTask />", () => {
     });
 
     it("opens external link in new tab", () => {
+      useMockBusiness({ licenseData: undefined });
       renderTask();
       fireEvent.click(screen.getByTestId("cta-primary"));
       expect(mockWindowOpen).toHaveBeenCalledWith(task.callToActionLink, "_blank", "noopener noreferrer");
@@ -482,7 +483,6 @@ describe("<LicenseTask />", () => {
             },
           })
         );
-        console.log(JSON.stringify(userData));
         mockApi.checkLicenseStatus.mockResolvedValue(userData);
         fireEvent.submit(screen.getByTestId("check-status-submit"));
         await waitFor(() => {

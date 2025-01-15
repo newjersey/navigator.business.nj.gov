@@ -26,7 +26,7 @@ import {
 import { HousingMunicipality } from "@businessnjgovnavigator/shared/housing";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useMemo } from "react";
 
 interface Props {
@@ -71,7 +71,7 @@ const TaskPage = (props: Props): ReactElement => {
         {previousUrlSlug && (
           <UnStyledButton
             onClick={(): void => {
-              router.push(`/tasks/${previousUrlSlug}`);
+              router && router.push(`/tasks/${previousUrlSlug}`);
             }}
           >
             <Icon className="usa-icon--size-4" iconName="navigate_before" />
@@ -82,7 +82,7 @@ const TaskPage = (props: Props): ReactElement => {
           <UnStyledButton
             dataTestid={"nextUrlSlugButton"}
             onClick={(): void => {
-              router.push(`/tasks/${nextUrlSlug}`);
+              router && router.push(`/tasks/${nextUrlSlug}`);
             }}
           >
             <span className="margin-right-2">{Config.taskDefaults.nextTaskButtonText}</span>

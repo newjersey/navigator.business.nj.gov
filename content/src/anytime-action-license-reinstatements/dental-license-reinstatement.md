@@ -1,5 +1,5 @@
 ---
-filename: dental-license-reinstatement
+id: dental-license-reinstatement
 name: Reinstate Your Dental License
 licenseName: ""
 urlSlug: dental-license-reinstatement

@@ -1,5 +1,4 @@
 ---
-filename: dep-clean-construction
 name: NJ Clean Construction Program
 displayName: clean-construction
 urlSlug: clean-construction

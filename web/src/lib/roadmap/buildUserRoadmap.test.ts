@@ -677,9 +677,9 @@ describe("buildUserRoadmap", () => {
     });
 
     describe("all other industries", () => {
-      it("adds on the waste-permitting task", () => {
+      it("adds env permitting add on", () => {
         buildUserRoadmap(generateStartingProfile({ industryId: "generic" }));
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("waste-permitting");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("env-permitting");
       });
     });
   });

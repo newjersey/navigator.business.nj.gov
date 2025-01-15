@@ -1,4 +1,6 @@
-@media only screen and (min-width: $lg) {
+@use "../sass-files/variables";
+
+@media only screen and (min-width: variables.$lg) {
   .padding-top-1 {
     padding-top: 1rem !important;
   }
@@ -12,22 +14,22 @@
   height: 3rem;
   width: 20rem;
   position: relative;
-  border-top: 0.125rem solid $primary-light;
+  border-top: 0.125rem solid variables.$primary-light;
 }
 
 .hero-gradient-bg {
-  background: linear-gradient($white, $white, $primary-extra-light) !important;
+  background: linear-gradient(variables.$white, variables.$white, variables.$primary-extra-light) !important;
 }
 
 .hero-gradient-bg-bottom {
   padding-bottom: 100px;
-  background: $primary-extra-light url(/img/Bg-wavy-white.svg) bottom center no-repeat;
+  background: variables.$primary-extra-light url(/img/Bg-wavy-white.svg) bottom center no-repeat;
   background-size: 100%;
   height: auto;
 }
 
 .hero-gradient-bg-bottom-mobile {
-  background: $primary-extra-light url(/img/Bg-wavy-white.svg) bottom center no-repeat;
+  background: variables.$primary-extra-light url(/img/Bg-wavy-white.svg) bottom center no-repeat;
   background-size: 200%;
 }
 
@@ -181,11 +183,11 @@
   gap: 1rem;
   width: 100%;
 
-  @media (max-width: $lg) {
+  @media (max-width: variables.$lg) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: $md) {
+  @media (max-width: variables.$md) {
     grid-template-columns: 1fr;
     width: auto;
   }

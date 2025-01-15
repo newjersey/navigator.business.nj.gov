@@ -47,7 +47,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 const mockApi = api as jest.Mocked<typeof api>;
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 
 const Config = getMergedConfig();
 

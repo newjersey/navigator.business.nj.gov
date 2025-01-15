@@ -5,7 +5,7 @@ notesMd: >-
 
 
   Note: this one is an informational task screen. There is no application form -- it's a bunch of documents a lawyer essentially puts together. Our SME has told us PRED developers should be familiar with the industry terms here (like title search).
-filename: pred-registration
+id: pred-registration
 name: Register Your Condominium or Other Planned Real Estate Development
 industryIds:
   - commercial-construction

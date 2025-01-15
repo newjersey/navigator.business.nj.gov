@@ -4,7 +4,6 @@ notesMd: "[Muni planning
   euz_zGk/edit)"
 licenseName: ""
 id: fire-safety-smoke-detectors
-filename: fire-safety-smoke-detectors
 displayname: fire-safety-smoke-detectors
 urlSlug: fire-safety-smoke-detectors
 name: Get Your Smoke Detector, Carbon Monoxide Detector, and Fire Extinguisher
