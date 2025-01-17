@@ -1,4 +1,6 @@
 ---
+agencyId: nj-revenue-enterprise-services
+filename: cigarette-license
 notesMd: >-
   https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/6751
 
@@ -56,7 +58,6 @@ summaryDescriptionMd: >-
 
   If you are a manufacturer (not a manufacturer representative), you must [submit an application with the NJ Division of Taxation] (https://www.nj.gov/treasury/taxation/prnttobacco.shtml).
 urlSlug: cigarette-license
-filename: cigarette-license
 displayname: cigarette-license
 name: Apply for Your Cigarette License
 id: cigarette-license
@@ -64,7 +65,6 @@ callToActionLink: "https://www.njportal.com/DOR/CM100/Content/pdfs/cm100CigApp.p
 callToActionText: Apply for My Cigarette License
 webflowName: Cigarette License
 industryId: ""
-agencyId: nj-revenue-enterprise-services
 formName: ""
 webflowType: business-license
 ---
@@ -99,7 +99,7 @@ Trenton, NJ 08646-0252
 Check with your municipality for any additional requirements for owning and operating a vending machine in your location, if applicable.
 
 ## Additional Tax Requirements
-For more information on taxes and other requirements visit the [Tobacco and Vapor Products Tax page](https://www.nj.gov/treasury/taxation/tobacco.shtml).
+For more information on taxes and other requirements visit the [Cigarette Tax page](https://www.nj.gov/treasury/taxation/cigarette.shtml).
 
 :::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
 
