@@ -13,29 +13,28 @@ issuingAgency: Department of Environmental Protection, Radiation Protection
 callToActionText: Submit My X-Ray Machine Disposition Form
 callToActionLink: https://www.nj.gov/dep/rpp/reg/dispo.htm
 ---
-
 ## Application Requirements
 
-### General Requirements
+#### General Requirements
 
-- Current facility name and address
-- Current facility number
-- Current registration number
-- Disposal date
-- Applicable disposition code
-- Model number
-- Serial number
-- X-ray film storage location, if applicable
+* Current facility name and address
+* Current facility number
+* Current registration number
+* Disposal date
+* Applicable disposition code
+* Model number
+* Serial number
+* X-ray film storage location, if applicable
 
-### Sale Requirements
+#### Sale Requirements
 
-- Name and address of the new owner and/or new location
+* Name and address of the new owner and/or new location
 
-### Relocation Requirements
+#### Relocation Requirements
 
-- Name and address of the new location
-- Updated registration form
-- Copy of `radiation safety survey|radiation-safety-survey`
+* Name and address of the new location
+* Updated registration form
+* Copy of `radiation safety survey|` 
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
