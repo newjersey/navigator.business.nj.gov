@@ -59,6 +59,6 @@
   "isEnabled": true,
   "additionalSearchTerms": "dog walker, dog groomer, pet groomer, doggy daycare, kennel, boarding, shelter, pound, training",
   "id": "petcare",
-  "description": "Provides care, training, grooming, or boarding services to domestic animals. (For veterinarian, see \"Healthcare\")",
+  "description": "Provides care, training, grooming, or boarding services to domestic animals. (For Veterinarian, see \"Healthcare\")",
   "webflowId": "656a1362f58a7269b112bdc6"
 }
