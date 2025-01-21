@@ -40,11 +40,15 @@
     {
       "step": 3,
       "weight": 15,
-      "task": "get-insurance"
+      "task": null
     }
   ],
   "name": "Pet Care",
-  "nonEssentialQuestionsIds": ["weights-measures", "petcare-cds-shelter", "petcare-cds-trainer"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "petcare-cds-shelter",
+    "petcare-cds-trainer"
+  ],
   "displayname": "petcare",
   "industryOnboardingQuestions": {
     "isPetCareHousingApplicable": true,

@@ -45,7 +45,7 @@
     {
       "step": 3,
       "weight": 15,
-      "task": "get-insurance"
+      "task": null
     },
     {
       "step": 4,
@@ -58,10 +58,17 @@
       "licenseTask": "pharmacy-cds",
       "weight": 10,
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 12,
+      "task": "pharmacy-staff-licenses"
     }
   ],
   "name": "Pharmacy",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
   "displayname": "pharmacy",
   "industryOnboardingQuestions": {},
   "isEnabled": true,
