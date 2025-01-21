@@ -26,6 +26,7 @@ This pull request resolves [#00000000](https://www.pivotaltracker.com/story/show
 
 - [ ] I have rebased this branch from the latest main branch
 - [ ] I have performed a self-review of my code
+- [ ] My code follows the style guide
 - [ ] I have created and/or updated relevant documentation on the engineering documentation website
 - [ ] I have not used any relative imports
 - [ ] I have pruned any instances of unused code
