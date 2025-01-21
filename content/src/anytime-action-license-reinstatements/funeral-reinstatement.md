@@ -3,7 +3,7 @@ notesMd: "Working doc:
   https://docs.google.com/document/d/1sQdDYdrTo50bhPhlY8jwcksxqGmJPnmL6OJUUjsMW\
   ic/edit?tab=t.0"
 id: funeral-reinstatement
-licenseName: ""
+licenseName: "Mortuary Science-Funeral Home"
 name: " Reinstate Your Funeral Home’s Certificate of Registration "
 urlSlug: funeral-reinstatement
 summaryDescriptionMd: If your certificate of registration expired less than 30

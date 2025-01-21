@@ -1,7 +1,7 @@
 ---
 notesMd: "Working doc:
   https://docs.google.com/document/d/1WhyXdHt_4qwSt_GdOAoTGSjND0n6XIQyse6VYfMzECQ/edit?tab=t.0#heading=h.8lw8lq8qmscd"
-licenseName: ""
+licenseName: "Mortuary Science-Funeral Home"
 urlSlug: funeral-renewal
 expirationEventDisplayName: Funeral Home Certificate of Registration Expiration
 renewalEventDisplayName: "Renew Your Funeral Home’s Certificate of Registration"
