@@ -28,8 +28,8 @@ import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import "@newjersey/njwds/dist/css/styles.css";
 import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
-import Head from "next/head";
 import { useRouter } from "next/compat/router";
+import Head from "next/head";
 import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
@@ -82,8 +82,10 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   }, [router]);
 
   const listener = (data: HubCapsule): void => {
+    console.log(`HUB LISTENER: ${data.payload.event}`);
     switch (data.payload.event) {
       case "signIn":
+        console.log("in signIn dispatch call");
         onSignIn(dispatch);
         break;
       case "signUp":
@@ -114,12 +116,14 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     if (!pageProps.noAuth) {
       getActiveUser()
         .then((activeUser) => {
+          console.log("dispatch login from _app then");
           dispatch({
             type: "LOGIN",
             activeUser: activeUser,
           });
         })
         .catch(() => {
+          console.log("onGuestSignIn from _app catch");
           router && onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
         });
     }

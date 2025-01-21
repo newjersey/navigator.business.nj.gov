@@ -44,6 +44,19 @@ export const useMountEffectWhenDefined = (fun: () => void, thingToBeDefined: unk
   }, [thingToBeDefined, fun]);
 };
 
+// export const useMountEffectWhenAllAreDefined = (
+//   fun: () => void,
+//   thingsToBeDefined: unknown[] | undefined
+// ): void => {
+//   const effectOccurred = useRef<boolean>(false);
+//   useEffect(() => {
+//     if (thingsToBeDefined?.every((thing) => thing) && !effectOccurred.current) {
+//       effectOccurred.current = true;
+//       fun();
+//     }
+//   }, [thingsToBeDefined, fun]);
+// };
+
 export const useScrollToPathAnchor = (): void => {
   useEffect(() => {
     if (window.location.pathname === "/mgmt/cms") return;

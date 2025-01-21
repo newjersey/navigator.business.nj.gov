@@ -35,14 +35,13 @@ import {
   OperateReference,
   RoadmapDisplayContent,
 } from "@/lib/types/types";
-import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Municipality } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -60,7 +59,8 @@ interface Props {
 
 const DashboardPage = (props: Props): ReactElement => {
   usePageWithNeedsAccountSnackbar();
-  const { business, updateQueue } = useUserData();
+  const { business, updateQueue, userData } = useUserData();
+
   const router = useRouter();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
@@ -68,59 +68,63 @@ const DashboardPage = (props: Props): ReactElement => {
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const [hasElevatorViolations, setHasElevatorViolations] = useState(false);
 
-  useMountEffectWhenDefined(() => {
-    (async (): Promise<void> => {
-      if (
-        business?.profileData.operatingPhase === OperatingPhaseId.GUEST_MODE &&
-        (business?.profileData.businessPersona === "STARTING" ||
-          business?.profileData.businessPersona === "FOREIGN") &&
-        !business.preferences.visibleSidebarCards.includes("not-registered")
-      ) {
-        await updateQueue
-          ?.queuePreferences({
-            visibleSidebarCards: [...business.preferences.visibleSidebarCards, "not-registered"],
-          })
-          .update();
-      }
-
-      if (
-        business?.profileData.operatingPhase === OperatingPhaseId.GUEST_MODE_OWNING &&
-        business?.profileData.businessPersona === "OWNING" &&
-        !business.preferences.visibleSidebarCards.includes("not-registered-up-and-running")
-      ) {
-        await updateQueue
-          ?.queuePreferences({
-            visibleSidebarCards: [
-              ...business.preferences.visibleSidebarCards,
-              "not-registered-up-and-running",
-            ],
-          })
-          .update();
-      }
-
-      if (business?.onboardingFormProgress !== "COMPLETED") {
-        router && (await router.replace(ROUTES.onboarding));
-      }
-
-      if (isDesktopAndUp && business?.preferences.phaseNewlyChanged) {
-        if (!updateQueue || business?.onboardingFormProgress !== "COMPLETED") {
-          return;
+  useEffect(() => {
+    if (!business || !updateQueue) {
+      console.log("no business or updateQueue yet...");
+    } else {
+      (async (): Promise<void> => {
+        if (
+          business?.profileData.operatingPhase === OperatingPhaseId.GUEST_MODE &&
+          (business?.profileData.businessPersona === "STARTING" ||
+            business?.profileData.businessPersona === "FOREIGN") &&
+          !business.preferences.visibleSidebarCards.includes("not-registered")
+        ) {
+          await updateQueue
+            ?.queuePreferences({
+              visibleSidebarCards: [...business.preferences.visibleSidebarCards, "not-registered"],
+            })
+            .update();
         }
-        await updateQueue.queuePreferences({ phaseNewlyChanged: false }).update();
-      }
 
-      if (
-        business?.profileData.communityAffairsAddress &&
-        business?.profileData.operatingPhase === OperatingPhaseId.UP_AND_RUNNING
-      ) {
-        const hasViolations = await api.checkElevatorViolations(
-          business.profileData.communityAffairsAddress.streetAddress1,
-          business.profileData.communityAffairsAddress.municipality.id
-        );
-        setHasElevatorViolations(hasViolations);
-      }
-    })();
-  }, [business, updateQueue]);
+        if (
+          business?.profileData.operatingPhase === OperatingPhaseId.GUEST_MODE_OWNING &&
+          business?.profileData.businessPersona === "OWNING" &&
+          !business.preferences.visibleSidebarCards.includes("not-registered-up-and-running")
+        ) {
+          await updateQueue
+            ?.queuePreferences({
+              visibleSidebarCards: [
+                ...business.preferences.visibleSidebarCards,
+                "not-registered-up-and-running",
+              ],
+            })
+            .update();
+        }
+
+        if (business?.onboardingFormProgress !== "COMPLETED") {
+          router && (await router.replace(ROUTES.onboarding));
+        }
+
+        if (isDesktopAndUp && business?.preferences.phaseNewlyChanged) {
+          if (!updateQueue || business?.onboardingFormProgress !== "COMPLETED") {
+            return;
+          }
+          await updateQueue.queuePreferences({ phaseNewlyChanged: false }).update();
+        }
+
+        if (
+          business?.profileData.communityAffairsAddress &&
+          business?.profileData.operatingPhase === OperatingPhaseId.UP_AND_RUNNING
+        ) {
+          const hasViolations = await api.checkElevatorViolations(
+            business.profileData.communityAffairsAddress.streetAddress1,
+            business.profileData.communityAffairsAddress.municipality.id
+          );
+          setHasElevatorViolations(hasViolations);
+        }
+      })();
+    }
+  }, [business, updateQueue, isDesktopAndUp, router, userData]);
 
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>

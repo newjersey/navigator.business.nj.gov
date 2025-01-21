@@ -30,7 +30,8 @@ export const useUserData = (): UseUserDataResponse => {
     api.getUserData,
     {
       isPaused: () => {
-        return state.isAuthenticated !== IsAuthenticated.TRUE;
+        const isPaused = state.isAuthenticated !== IsAuthenticated.TRUE;
+        return isPaused;
       },
     }
   );
