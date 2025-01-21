@@ -1,4 +1,5 @@
 ---
+licenseName: ""
 id: appraiser-license
 displayname: real-estate-appraiser-license
 urlSlug: appraiser-license
@@ -12,8 +13,7 @@ summaryDescriptionMd: "You need a real estate appraiser license if you open an
   or market conditions) having a transaction value less than $250,000."
 industryId:
   - real-estate-appraisals
-callToActionText: "Apply for My Appraiser License"
-licenseName: ""
+callToActionText: Apply for My Appraiser License
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 webflowIndustry: Real Estate Appraiser
 licenseCertificationClassification: LICENSE
@@ -27,7 +27,7 @@ webflowId: 640b8467b7c8237f0cdd1541
 ## Eligibility Criteria
 
 - Complete 1,000 hours of relevant work experience in no fewer than 6 months
-- Complete 300 classroom hours of appraisal education as specified in the [Required \* Core Curriculum](https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx) (see “Licensed Residential Appraiser Forms”: “Licensed Residential Real Property Appraiser Criteria” and “License Residential Core Curriculum Education Worksheet”)
+- Complete 300 classroom hours of appraisal education as specified in the [Required Core Curriculum](https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx) (see “Licensed Residential Appraiser Forms” > “Licensed Residential Real Property Appraiser Criteria” and “License Residential Core Curriculum Education Worksheet”)
 - Successfully pass the AQB (Appraiser Qualifications Board) approved Licensed Residential Real Property Appraiser Examination
 
 ## Application Requirements
