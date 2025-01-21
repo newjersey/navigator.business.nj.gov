@@ -217,7 +217,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
       const currentBusiness = currentUserData.businesses[currentUserData.currentBusinessId];
       if (currentBusiness.onboardingFormProgress === "COMPLETED") {
-        await router.replace(ROUTES.profile);
+        await router.replace(ROUTES.dashboard);
         return;
       } else {
         const queryPage = Number(router.query[QUERIES.page]);
