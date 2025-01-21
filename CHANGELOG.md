@@ -1,3 +1,17 @@
+# [2025.1.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.0.0...v2025.1.0) (2025-01-21)
+
+
+### Bug Fixes
+
+* [[#187166104](https://github.com/newjersey/navigator.business.nj.gov/issues/187166104)] add dependency for cypress accessibility feat ([eb906ea](https://github.com/newjersey/navigator.business.nj.gov/commit/eb906ea5a6a10d0f5c2ee58043cbf05f0c4259f7))
+* **deps:** update material-ui ([#9398](https://github.com/newjersey/navigator.business.nj.gov/issues/9398)) ([639fff4](https://github.com/newjersey/navigator.business.nj.gov/commit/639fff41d5f083067a4db05e32732634c11b23be))
+* resolve build error by setting empty task arrays to null ([19a0226](https://github.com/newjersey/navigator.business.nj.gov/commit/19a0226822291d1217337ab38200cf5972d2b2f0))
+
+
+### Features
+
+* [[#187166104](https://github.com/newjersey/navigator.business.nj.gov/issues/187166104)] Cypress Automated Accessibility added for onboarding ([bdd8f66](https://github.com/newjersey/navigator.business.nj.gov/commit/bdd8f669362b33845c13fc64e3457046a484748c))
+
 # [2025.0.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.39.1...v2025.0.0) (2025-01-14)
 
 
