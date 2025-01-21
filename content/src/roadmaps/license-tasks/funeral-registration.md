@@ -3,6 +3,7 @@ notesMd: "1.1.25: revision made per SME review"
 id: funeral-registration
 displayname: funeral-registration
 urlSlug: funeral-registration
+licenseName: "Mortuary Science-Funeral Home"
 name: Apply for Your Funeral Home’s Certificate of Registration
 webflowName: "Funeral Services: Funeral Home Certificate of Registration"
 summaryDescriptionMd: >-
