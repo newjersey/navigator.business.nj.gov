@@ -20,7 +20,12 @@ const LoadingPage = (): ReactElement => {
   const loginPageEnabled = process.env.FEATURE_LOGIN_PAGE === "true";
 
   useEffect(() => {
-    if (!router) {
+    /**
+     * For client-side rendering of the Next.js router, the `query` property
+     * is first initialized as an empty object. This `isReady` check ensures
+     * we don't have false negatives when checking `router.query`.
+     */
+    if (!router?.isReady) {
       return;
     }
 
@@ -48,7 +53,7 @@ const LoadingPage = (): ReactElement => {
   useMountEffectWhenDefined(() => {
     if (!updateQueue) return;
     const business = updateQueue.currentBusiness();
-    if (!onboardingCompleted(business)) {
+    if (business?.onboardingFormProgress && !onboardingCompleted(business)) {
       router && router.push(ROUTES.onboarding);
     } else if (business.preferences.returnToLink) {
       const pageLink = business.preferences.returnToLink;

@@ -1,4 +1,5 @@
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import * as signinHelper from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
@@ -30,6 +31,7 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onGuestSignIn: jest.fn() }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onGuestSignIn: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
 
 function setupMockAnalytics(): typeof analytics {
   return {
@@ -51,6 +53,10 @@ describe("loading page", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
+  });
+
+  afterEach(() => {
+    process.env.FEATURE_LOGIN_PAGE = "true";
   });
 
   it("redirects STARTING users to dashboard", async () => {
@@ -120,11 +126,20 @@ describe("loading page", () => {
     });
   });
 
-  it("redirects to the email check login page as a fallback if other conditions aren't met", async () => {
+  it("redirects to the email check login page as a fallback if other conditions aren't met and the login page is enabled", async () => {
     setMockUserDataResponse(generateUseUserDataResponse({ userData: undefined }));
     useMockRouter({ isReady: true, asPath: "not-a-saml-error" });
 
     render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
     expect(mockPush).toHaveBeenCalledWith(ROUTES.login);
+  });
+
+  it("attempts to trigger sign in as a fallback if other conditions aren't met and the login page is disabled", async () => {
+    process.env.FEATURE_LOGIN_PAGE = "false";
+    setMockUserDataResponse(generateUseUserDataResponse({ userData: undefined }));
+    useMockRouter({ isReady: true, asPath: "not-a-saml-error" });
+
+    render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
+    expect(triggerSignIn).toHaveBeenCalled();
   });
 });
