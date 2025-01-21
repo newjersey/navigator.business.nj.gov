@@ -45,7 +45,7 @@
     {
       "step": 3,
       "weight": 15,
-      "task": []
+      "task": null
     },
     {
       "step": 4,
