@@ -42,10 +42,10 @@ export const ContactDep = (props: Props): ReactElement => {
             <div className="flex flex-align-center margin-top-05">
               <Icon className={"margin-right-1"} iconName={"alternate_email"} />
               <a
-                href={`mailto:${Config.envResultsPage.personalizedSupport.contact}`}
+                href={`mailto:${contactConfig.contact.email}`}
                 className={"text-underline text-base-darkest"}
               >
-                {Config.envResultsPage.personalizedSupport.contact}
+                {contactConfig.contact.email}
               </a>
             </div>
           )}
