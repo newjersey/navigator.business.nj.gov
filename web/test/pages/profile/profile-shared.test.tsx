@@ -389,6 +389,23 @@ describe("profile - shared", () => {
         });
       });
     });
+
+    describe("tax pin", () => {
+      it.each(["STARTING", "OWNING"])(
+        "displays the tax pin field for %s businessPersona",
+        (businessPersona) => {
+          renderPage({
+            business: generateBusinessForProfile({
+              profileData: generateProfileData({
+                businessPersona: businessPersona as BusinessPersona,
+              }),
+            }),
+          });
+          chooseTab("numbers");
+          expect(screen.getByText(Config.profileDefaults.fields.taxPin.default.header)).toBeInTheDocument();
+        }
+      );
+    });
   });
 
   describe("profile opportunities alert", () => {
