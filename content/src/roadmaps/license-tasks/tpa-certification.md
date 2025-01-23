@@ -1,4 +1,6 @@
 ---
+notesMd: "1.23.25: Unpublishing based on SME feedback. Will work to get changes
+  made and sent back to SME."
 id: tpa-certification
 displayname: tpa-certification
 urlSlug: tpa-certification
