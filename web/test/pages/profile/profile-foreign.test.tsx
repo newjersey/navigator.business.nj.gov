@@ -11,6 +11,7 @@ import {
   defaultDateFormat,
   emptyAddressData,
   emptyIndustrySpecificData,
+  ForeignBusinessTypeId,
   FormationData,
   generateFormationFormData,
   generateMunicipality,
@@ -30,6 +31,7 @@ import {
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { industryIdsWithSingleRequiredEssentialQuestion } from "@/test/pages/onboarding/helpers-onboarding";
 import {
+  chooseTab,
   clickBack,
   clickSave,
   expectLocationNotSavedAndError,
@@ -211,6 +213,12 @@ describe("profile-foreign", () => {
       expect(
         screen.getByText(Config.profileDefaults.fields.nexusBusinessName.default.outOfStateNameHeader)
       ).toBeInTheDocument();
+    });
+
+    it("displays the tax pin field", () => {
+      renderPage({ business: nexusForeignBusinessProfile({}) });
+      chooseTab("numbers");
+      expect(screen.getByText(Config.profileDefaults.fields.taxPin.default.header)).toBeInTheDocument();
     });
 
     it("displays Not Entered when the user hasn't entered a business name yet", () => {
@@ -549,32 +557,37 @@ describe("profile-foreign", () => {
     });
   });
 
-  describe("Remote Worker", () => {
-    const foreignRemoteWorkerProfile = generateBusinessForProfile({
-      profileData: generateProfileData({
-        businessPersona: "FOREIGN",
-        foreignBusinessTypeIds: ["employeesInNJ"],
-      }),
-    });
+  describe("Remote Worker and Seller", () => {
+    it.each(["employeesInNJ", "revenueInNJ", "transactionsInNJ"])(
+      "renders the business name field for %s",
+      (foreignBusinessTypeId) => {
+        renderPage({
+          business: generateBusinessForProfile({
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              foreignBusinessTypeIds: [foreignBusinessTypeId as ForeignBusinessTypeId],
+            }),
+          }),
+        });
+        expect(screen.getByTestId("businessName")).toBeInTheDocument();
+      }
+    );
 
-    it("renders the business name field for remote worker", () => {
-      renderPage({ business: foreignRemoteWorkerProfile });
-      expect(screen.getByTestId("businessName")).toBeInTheDocument();
-    });
-  });
-
-  describe("Remote Seller", () => {
-    const foreignRemoteSellerProfile = generateBusinessForProfile({
-      profileData: generateProfileData({
-        businessPersona: "FOREIGN",
-        foreignBusinessTypeIds: ["revenueInNJ", "transactionsInNJ"],
-      }),
-    });
-
-    it("renders the business name field for remote seller", () => {
-      renderPage({ business: foreignRemoteSellerProfile });
-      expect(screen.getByTestId("businessName")).toBeInTheDocument();
-    });
+    it.each(["employeesInNJ", "revenueInNJ", "transactionsInNJ"])(
+      "renders the tax pin field for %s",
+      (foreignBusinessTypeId) => {
+        renderPage({
+          business: generateBusinessForProfile({
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              foreignBusinessTypeIds: [foreignBusinessTypeId as ForeignBusinessTypeId],
+            }),
+          }),
+        });
+        chooseTab("numbers");
+        expect(screen.getByText(Config.profileDefaults.fields.taxPin.default.header)).toBeInTheDocument();
+      }
+    );
   });
 
   describe("non essential questions", () => {

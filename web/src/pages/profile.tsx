@@ -457,6 +457,10 @@ const ProfilePage = (props: Props): ReactElement => {
             </div>
           )}
         </ProfileField>
+
+        <ProfileField fieldName="taxPin">
+          <TaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
+        </ProfileField>
       </>
     ),
   };
@@ -504,6 +508,10 @@ const ProfilePage = (props: Props): ReactElement => {
               <TaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
+        </ProfileField>
+
+        <ProfileField fieldName="taxPin">
+          <TaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
       </>
     ),
@@ -701,6 +709,10 @@ const ProfilePage = (props: Props): ReactElement => {
               <TaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
+        </ProfileField>
+
+        <ProfileField fieldName="taxPin">
+          <TaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
       </>
     ),
