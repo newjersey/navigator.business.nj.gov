@@ -132,6 +132,7 @@ export interface ProfileData extends IndustrySpecificData {
   readonly elevatorOwningBusiness: boolean | undefined;
   readonly communityAffairsAddress?: CommunityAffairsAddress;
   readonly raffleBingoGames: boolean | undefined;
+  readonly businessOpenMoreThanTwoYears: boolean | undefined;
 }
 
 export const emptyProfileData: ProfileData = {
@@ -161,6 +162,7 @@ export const emptyProfileData: ProfileData = {
   elevatorOwningBusiness: undefined,
   communityAffairsAddress: undefined,
   raffleBingoGames: undefined,
+  businessOpenMoreThanTwoYears: undefined,
   ...emptyIndustrySpecificData,
 };
 

@@ -32,7 +32,7 @@ export interface Business {
   readonly version: number;
 }
 
-export const CURRENT_VERSION = 153;
+export const CURRENT_VERSION = 154;
 
 export const createEmptyBusiness = (id?: string): Business => {
   return {
@@ -106,6 +106,7 @@ export interface Preferences {
   isCalendarFullView: boolean;
   isHideableRoadmapOpen: boolean;
   phaseNewlyChanged: boolean;
+  isNonProfitFromFunding?: boolean;
 }
 
 export type OnboardingFormProgress = "UNSTARTED" | "COMPLETED";

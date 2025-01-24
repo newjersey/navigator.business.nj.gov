@@ -39,6 +39,7 @@ export const ApiFormationHealth: UserData = {
         isCalendarFullView: true,
         isHideableRoadmapOpen: true,
         phaseNewlyChanged: false,
+        isNonProfitFromFunding: false,
       },
       taxFilingData: {
         filings: [
@@ -105,6 +106,7 @@ export const ApiFormationHealth: UserData = {
         hasThreeOrMoreRentalUnits: undefined,
         travelingCircusOrCarnivalOwningBusiness: undefined,
         vacantPropertyOwner: undefined,
+        businessOpenMoreThanTwoYears: undefined,
       },
       formationData: {
         formationResponse: undefined,
