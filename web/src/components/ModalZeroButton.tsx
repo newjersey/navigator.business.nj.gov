@@ -6,10 +6,11 @@ import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
   isOpen: boolean;
-  close: () => void;
+  close?: () => void;
   title: string;
   children: ReactNode;
   unpaddedChildren?: ReactNode;
+  maxWidth?: boolean;
 }
 
 export const ModalZeroButton = (props: Props): ReactElement => {
@@ -17,7 +18,7 @@ export const ModalZeroButton = (props: Props): ReactElement => {
 
   return (
     <Dialog
-      fullWidth={false}
+      fullWidth={props.maxWidth ?? false}
       maxWidth="sm"
       open={props.isOpen}
       onClose={props.close}
@@ -33,16 +34,18 @@ export const ModalZeroButton = (props: Props): ReactElement => {
             {props.title}
           </Heading>
         </DialogTitle>
-        <IconButton
-          aria-label="close"
-          className="margin-left-auto margin-3"
-          onClick={props.close}
-          sx={{
-            color: "#757575",
-          }}
-        >
-          <Icon className="usa-icon--size-4" iconName="close" />
-        </IconButton>
+        {props.close && (
+          <IconButton
+            aria-label="close"
+            className="margin-left-auto margin-3"
+            onClick={props.close}
+            sx={{
+              color: "#757575",
+            }}
+          >
+            <Icon className="usa-icon--size-4" iconName="close" />
+          </IconButton>
+        )}
       </div>
       <DialogContent sx={{ padding: 0 }} dividers>
         <div className="padding-x-4 margin-bottom-4 margin-top-2" data-testid="modal-body">

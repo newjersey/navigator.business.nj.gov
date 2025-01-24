@@ -150,6 +150,9 @@ export const onGuestSignIn = async ({
         push(ROUTES.onboarding);
         break;
       }
+      case ROUTES.fundings: {
+        break;
+      }
       default: {
         setRegistrationDimension("Not Started");
         push(ROUTES.landing);

@@ -4,13 +4,13 @@ import { ReactElement, ReactNode } from "react";
 
 interface Props {
   isOpen: boolean;
-  close: () => void;
+  close?: () => void;
   title: string;
   children: ReactNode;
   primaryButtonText: string;
   primaryButtonOnClick: () => void;
   isLoading?: boolean;
-  uncloseable?: boolean;
+  maxWidth?: boolean;
 }
 
 export const ModalOneButton = (props: Props): ReactElement => {
@@ -36,6 +36,7 @@ export const ModalOneButton = (props: Props): ReactElement => {
       close={props.close}
       title={props.title}
       unpaddedChildren={buttonNode}
+      maxWidth={props.maxWidth}
     >
       {props.children}
     </ModalZeroButton>
