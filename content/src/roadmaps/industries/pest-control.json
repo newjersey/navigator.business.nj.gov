@@ -1,0 +1,63 @@
+{
+  "naicsCodes": "561710",
+  "defaultSectorId": "other-services",
+  "canHavePermanentLocation": true,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 50,
+      "task": "determine-naics-code",
+      "required": true
+    },
+    {
+      "step": 1,
+      "weight": 100,
+      "task": "business-structure",
+      "required": true
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein",
+      "required": true
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 1,
+      "task": "search-licenses"
+    }
+  ],
+  "name": "Pest Control",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "pest-control",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
+  "isEnabled": false,
+  "additionalSearchTerms": "exterminator, pest removal, pest management, bugs, insects, rodents, termites, roaches, pesticides",
+  "id": "pest-control",
+  "description": "Gets rid of pests and vermin and prevents new infestation",
+  "webflowId": "656a13628934eb2330f44bcb"
+}
