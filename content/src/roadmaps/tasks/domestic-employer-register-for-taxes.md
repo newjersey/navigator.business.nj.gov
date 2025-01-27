@@ -17,10 +17,12 @@ notesMd: >-
 summaryDescriptionMd: >-
   It's time to register for State taxes. Doing so will tell the State more about
   you as an employer of one or more `domestic workers|domestic-worker` and
-  determine the taxes and employer contributions you're responsible for.
+  determine the taxes and employer contributions you're responsible for. This
+  registration does not mean you are a registered as a business for tax purposes
+  in New Jersey: you are an employer of domestic workers.
 
 
-  As an employer of domestic/household workers, you are required to report, contribute to, and pay out, as applicable:
+  As an employer of domestic or household workers, you are required to report, contribute to, and pay out, as applicable:
 
   * Unemployment insurance
 
