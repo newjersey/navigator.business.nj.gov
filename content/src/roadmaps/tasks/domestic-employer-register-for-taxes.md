@@ -20,6 +20,17 @@ summaryDescriptionMd: >-
   determine the taxes and employer contributions you're responsible for.
 
 
+  As an employer of domestic/household workers, you are required to report, contribute to, and pay out, as applicable:
+
+  * Unemployment insurance
+
+  * Workforce and Temporary Disability insurance
+
+  * Family Leave insurance
+
+  * Gross Income Tax withholding
+
+
   :::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
 
 
