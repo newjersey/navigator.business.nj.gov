@@ -47,6 +47,7 @@ import TaxAccessModalPreview from "@/lib/cms/previews/TaxAccessModalPreview";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
 import { ReactElement } from "react";
+import AnytimeActionTaxClearancePreview from "@/lib/cms/previews/AnytimeActionTaxClearancePreview";
 
 const CMS_CONFIG = {};
 const Loading = (): ReactElement => {
@@ -100,6 +101,10 @@ const CMS = dynamic(
       registerPreview(CMS, "anytime-action-tasks-licenses", AnytimeActionTaskPreview);
       registerPreview(CMS, "anytime-action-tasks-reinstatements", AnytimeActionTaskPreview);
       registerPreview(CMS, "anytime-action-license-reinstatements", AnytimeActionLicenseReinstatementPreview);
+      registerPreview(CMS, "taxClearanceCertificate-step1", AnytimeActionTaxClearancePreview);
+      registerPreview(CMS, "taxClearanceCertificate-step2", AnytimeActionTaxClearancePreview);
+      registerPreview(CMS, "taxClearanceCertificate-step3", AnytimeActionTaxClearancePreview);
+      registerPreview(CMS, "taxClearanceCertificate-shared", AnytimeActionTaxClearancePreview);
 
       // ----- Roadmap Sidebar Card -----
       registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);

@@ -40,6 +40,7 @@ import * as TaxAccess from "@businessnjgovnavigator/content/fieldConfig/tax-acce
 import * as Tax from "@businessnjgovnavigator/content/fieldConfig/tax.json";
 import * as CalloutAlerts from "@businessnjgovnavigator/content/mappings/callout-alerts.json";
 import * as PageMetadata from "@businessnjgovnavigator/content/page-metadata/page-metadata.json";
+import * as TaxClearanceCertificateStep1 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step1.json";
 
 import { merge } from "lodash";
 import { createContext } from "react";
@@ -89,8 +90,9 @@ const merged = JSON.parse(
       CheckAccountEmailPage,
       LicenseSearchTask,
       LandingPage,
+      FundingsOnboarding,
       LandingPageExperienceB,
-      FundingsOnboarding
+      TaxClearanceCertificateStep1
     )
   )
 );
@@ -138,7 +140,9 @@ export type ConfigType = typeof ConfigOriginal &
   typeof LicenseSearchTask &
   typeof LandingPage &
   typeof LandingPageExperienceB &
-  typeof FundingsOnboarding;
+  typeof FundingsOnboarding
+   &
+  typeof TaxClearanceCertificateStep1;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -181,8 +185,9 @@ export const getMergedConfig = (): ConfigType => {
     CheckAccountEmailPage,
     LicenseSearchTask,
     LandingPage,
+    FundingsOnboarding,
     LandingPageExperienceB,
-    FundingsOnboarding
+    TaxClearanceCertificateStep1
   );
 };
 

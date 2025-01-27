@@ -11,7 +11,7 @@ const AnytimeActionTaskPreview = (props: PreviewProps): ReactElement => {
 
   return (
     <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-      <AnytimeActionSwitchComponent anytimeActionTask={anytimeAction} />
+      <AnytimeActionSwitchComponent anytimeActionTask={anytimeAction}  />
     </div>
   );
 };

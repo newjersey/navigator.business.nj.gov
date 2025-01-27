@@ -3990,6 +3990,59 @@ collections:
         display_fields: ["arrayOfSectors.*.name"]
         options_length: 500
       - { label: "External Link", name: "externalRoute", widget: "no-space", required: true }
+  - name: "tax-clearance-certificate-anytime-action"
+    label: "Tax Clearance Anytime Action"
+    delete: false
+    create: false
+    files:
+      - label: "Tax Clearance Step 1"
+        name: "taxClearanceCertificate-step1"
+        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step1.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Step 1
+            name: taxClearanceCertificateStep1
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Content Body", name: "content", widget: "markdown", required: false }
+      - label: "Tax Clearance Step 2"
+        name: "taxClearanceCertificate-step2"
+        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step2.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Step 2
+            name: taxClearanceCertificateStep2
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Content Body", name: "tbd", widget: "markdown", required: false }
+      - label: "Tax Clearance Step 3"
+        name: "taxClearanceCertificate-step3"
+        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step3.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Step 3
+            name: taxClearanceCertificateStep3
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Content Body", name: "tbd", widget: "markdown", required: false }
+      - label: "Tax Clearance Shared"
+        name: "taxClearanceCertificate-shared"
+        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-shared.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Shared
+            name: taxClearanceCertificateShared
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Content Body", name: "tbd", widget: "markdown", required: false }
 
   - name: "page-metadata"
     label: "🟨 PAGE METADATA"
