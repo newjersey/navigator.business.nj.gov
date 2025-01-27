@@ -172,7 +172,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   useEffect(() => {
     (async (): Promise<void> => {
       if (
-        !router ||
+        !router?.isReady ||
         hasHandledRouting.current ||
         !state.activeUser ||
         state.isAuthenticated === IsAuthenticated.UNKNOWN ||
