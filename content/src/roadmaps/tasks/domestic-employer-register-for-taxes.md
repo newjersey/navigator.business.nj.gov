@@ -1,5 +1,19 @@
 ---
-notesMd: Need to add link to Rights for Domestic Workers page when live
+notesMd: >-
+  Need to add link to Rights for Domestic Workers page when live
+
+
+  ==
+
+  27 Jan 2025 Call with Treas
+
+  Removed the following per Yamileth:
+
+
+  \-or-
+
+
+  [Paper NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) -- complete page 17 and choose "Employer of Domestic Household Employee(s)" under step A and "Domestic (Household Employer)" under step H.
 summaryDescriptionMd: >-
   It's time to register for State taxes. Doing so will tell the State more about
   you as an employer of one or more `domestic workers|domestic-worker` and
@@ -32,15 +46,7 @@ formName: NJ-Reg
 - Estimated number of employees
 - Anticipated first payroll withholding date for employees
 
----
 
-## Register for State Taxes
-
-[Register online](https://www.njportal.com/DOR/BusinessRegistration/Home/FirstStep)
-
-\-or-
-
-[Paper NJ-REG form](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf) -- complete page 17 and choose "Employer of Domestic Household Employee(s)" under step A and "Domestic (Household Employer)" under step H.
 
 ---
 
