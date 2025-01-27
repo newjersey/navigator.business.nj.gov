@@ -45,9 +45,11 @@ summaryDescriptionMd: >-
   You need a cigarette license to do either of the following in New Jersey:
 
 
-  * sell or manufacture cigarettes
+  * Sell or manufacture cigarettes
 
-  * have a vending machine with cigarettes
+  * Have a vending machine with cigarettes
+
+  * Operate as a manufacturer representative
 
 
   If you sell container e-liquid and plan to have more than 50% of your retail sales come from electronic smoking devices, related accessories, and/or liquid nicotine, you must [apply for a Vapor Business License with the NJ Division of Taxation](https://www.nj.gov/treasury/taxation/pdf/other_forms/tobacco/vb-r.pdf).
@@ -87,6 +89,15 @@ For a retail over-the-counter license or a vending machine license (provide list
 ### Manufacturer Representative
 * Manufacturer representative information, including company name, and 12-digit `NJ Tax ID number|tax-id` , if applicable
 
+## Vending Machines: Additional Requirements
+Check with your municipality for any additional requirements for owning and operating a vending machine in your location, if applicable.
+
+## Additional Tax Requirements
+For more information on taxes and other requirements visit the [Cigarette Tax page](https://www.nj.gov/treasury/taxation/cigarette.shtml).
+
+<br>
+<br>
+
 Mail your completed application and any fees to: 
 
 Division of Revenue and Enterprise Services
@@ -94,12 +105,6 @@ Division of Revenue and Enterprise Services
 PO Box 252
 
 Trenton, NJ 08646-0252
-
-## Vending Machines: Additional Requirements
-Check with your municipality for any additional requirements for owning and operating a vending machine in your location, if applicable.
-
-## Additional Tax Requirements
-For more information on taxes and other requirements visit the [Cigarette Tax page](https://www.nj.gov/treasury/taxation/cigarette.shtml).
 
 :::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
 
