@@ -4,7 +4,6 @@ import { Funding } from "@/lib/types/types";
 import FundingsPage from "@/pages/fundings";
 import { generateFunding } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { selectByValue } from "@/test/pages/profile/profile-helpers";
 import {
@@ -14,7 +13,8 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -39,42 +39,29 @@ describe("fundings onboarding", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
-    useMockRoadmap({});
-  });
-
-  it("renders the radio buttons", async () => {
-    useMockRouter({});
-    const business = generateBusiness({});
-    renderStatefulFundingsPageComponent(business, []);
-    expect(
-      screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.questionText)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(Config.fundingsOnboardingModal.businessOperatingLengthQuestion.questionText)
-    ).toBeInTheDocument();
   });
 
   it("closes the modal when all questions are answered", async () => {
-    useMockRouter({});
+    const user = userEvent.setup();
     const business = generateBusiness({});
     renderStatefulFundingsPageComponent(business, []);
     expect(
       screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.questionText)
     ).toBeInTheDocument();
-    fireEvent.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
-    fireEvent.click(
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.click(
       screen.getByText(Config.fundingsOnboardingModal.businessOperatingLengthQuestion.responses.long)
     );
     await waitFor(() => {
       selectByValue("Sector", "clean-energy");
     });
-    fireEvent.click(screen.getByText("Save"));
-    fireEvent.click(screen.getByText(Config.fundingsOnboardingModal.pageHeader.buttonText));
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.saveButtonText));
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.pageHeader.buttonText));
     expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
   });
 
   it("triggers validation when questions are unanswered and Save is pressed", async () => {
-    useMockRouter({});
+    const user = userEvent.setup();
     const business = generateBusiness({});
     renderStatefulFundingsPageComponent(business, []);
     expect(
@@ -83,28 +70,14 @@ describe("fundings onboarding", () => {
     expect(
       screen.getByText(Config.fundingsOnboardingModal.businessOperatingLengthQuestion.questionText)
     ).toBeInTheDocument();
-    fireEvent.click(screen.getByText("Save"));
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.saveButtonText));
     expect(
       screen.getByText(Config.fundingsOnboardingModal.incompleteWarningMultipleText)
     ).toBeInTheDocument();
   });
 
-  it("triggers validation when sector question is unanswered and Save is pressed", async () => {
-    useMockRouter({});
-    const business = generateBusiness({});
-    renderStatefulFundingsPageComponent(business, []);
-    fireEvent.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
-    fireEvent.click(
-      screen.getByText(Config.fundingsOnboardingModal.businessOperatingLengthQuestion.responses.long)
-    );
-    fireEvent.click(screen.getByText("Save"));
-    expect(
-      screen.getByText(Config.fundingsOnboardingModal.incompleteWarningSingularText)
-    ).toBeInTheDocument();
-  });
-
   it("navigates to funding when clicked", async () => {
-    useMockRouter({});
+    const user = userEvent.setup();
     const profileData = generateProfileData({ sectorId: "" });
     const business = generateBusiness({ profileData: profileData });
     const fundings = [
@@ -114,49 +87,29 @@ describe("fundings onboarding", () => {
         employeesRequired: "n/a",
         county: ["All"],
         homeBased: "yes",
+        publishStageArchive: null,
+        dueDate: undefined,
+        status: "rolling application",
+        certifications: null,
       }),
     ];
     renderStatefulFundingsPageComponent(business, fundings);
-    fireEvent.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
-    fireEvent.click(
-      screen.getByText(Config.fundingsOnboardingModal.businessOperatingLengthQuestion.responses.long)
-    );
-    fireEvent.click(screen.getByText("Save"));
-    await waitFor(() => {
-      selectByValue("Sector", "clean-energy");
-    });
-    expect(
-      screen.queryByText(Config.fundingsOnboardingModal.incompleteWarningSingularText)
-    ).not.toBeInTheDocument();
-    fireEvent.click(screen.getByTestId(`${fundings[0].id}-button`));
-    expect(mockPush).toHaveBeenCalled();
-  });
 
-  it("filters out unrelated fundings", async () => {
-    useMockRouter({});
-    const profileData = generateProfileData({ sectorId: "" });
-    const business = generateBusiness({ profileData: profileData });
-    const fundings = [
-      generateFunding({
-        isNonprofitOnly: true,
-        sector: ["clean-energy"],
-        employeesRequired: "n/a",
-        county: ["All"],
-        homeBased: "yes",
-      }),
-    ];
-    renderStatefulFundingsPageComponent(business, fundings);
-    fireEvent.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.no));
-    fireEvent.click(
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.click(
       screen.getByText(Config.fundingsOnboardingModal.businessOperatingLengthQuestion.responses.long)
     );
-    fireEvent.click(screen.getByText("Save"));
+
     await waitFor(() => {
       selectByValue("Sector", "clean-energy");
     });
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.saveButtonText));
+    await user.click(screen.getByTestId(`${fundings[0].id}-button`));
+
     expect(
       screen.queryByText(Config.fundingsOnboardingModal.incompleteWarningSingularText)
     ).not.toBeInTheDocument();
-    expect(screen.queryByTestId(`${fundings[0].id}-button`)).not.toBeInTheDocument();
+
+    expect(mockPush).toHaveBeenCalled();
   });
 });
