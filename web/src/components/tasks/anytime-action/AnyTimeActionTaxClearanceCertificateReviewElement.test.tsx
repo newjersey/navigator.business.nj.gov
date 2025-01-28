@@ -3,6 +3,7 @@ import { render, screen, within } from "@testing-library/react";
 import {
   AnyTimeActionTaxClearanceCertificateReviewElement
 } from "@/components/tasks/anytime-action/AnyTimeActionTaxClearanceCertificateReviewElement";
+import {getMergedConfig} from "@/contexts/configContext";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@mui/material", () => mockMaterialUI());
@@ -14,10 +15,13 @@ function mockMaterialUI(): typeof materialUi {
   };
 }
 
+const Config = getMergedConfig();
+
 describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
+
 
   const renderComponent = (): void => {
     render(
@@ -28,20 +32,20 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
   it("render tax clearance review main header", () => {
     renderComponent();
     const mainHeader = screen.getByTestId("reviewMainHeader");
-    expect(within(mainHeader).getByText("Check Eligibility")).toBeInTheDocument();
+    expect(within(mainHeader).getByText(Config.taxClearanceCertificateStep3.mainTitleHeader)).toBeInTheDocument();
   });
 
   it("render tax clearance review reason section header", () => {
     renderComponent();
     const reasonHeader = screen.getByTestId("certificationReasonHeader");
-    expect(within(reasonHeader).getByText("Reason for Certification")).toBeInTheDocument();
+    expect(within(reasonHeader).getByText(Config.taxClearanceCertificateShared.reasonSectionHeader)).toBeInTheDocument();
   });
 
 
   it("render tax clearance review issuing agency label", () => {
     renderComponent();
     const taxIssuingAgencyLabel = screen.getByTestId("taxIssuingAgencyLabel");
-    expect(within(taxIssuingAgencyLabel).getByText("What agency is requesting the Tax Clearance Certificate?")).toBeInTheDocument();
+    expect(within(taxIssuingAgencyLabel).getByText(Config.taxClearanceCertificateShared.certificationReasonLabel)).toBeInTheDocument();
   });
 
   it("render tax clearance review issuing agency data", () => {
@@ -53,7 +57,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
   it("render tax clearance review business section header", () => {
     renderComponent();
     const businessSectionHeader = screen.getByTestId("businessSectionHeader");
-    expect(within(businessSectionHeader).getByText("Business Information")).toBeInTheDocument();
+    expect(within(businessSectionHeader).getByText(Config.taxClearanceCertificateShared.businessSectionHeader)).toBeInTheDocument();
   });
 
 
@@ -72,7 +76,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
   it("render tax clearance review entity id label", () => {
     renderComponent();
     const entityIdLabel = screen.getByTestId("entityIdLabel");
-    expect(within(entityIdLabel).getByText("Entity ID (Corporate Number)")).toBeInTheDocument();
+    expect(within(entityIdLabel).getByText(`${Config.taxClearanceCertificateShared.entityIdLabel} ${Config.taxClearanceCertificateStep3.entityIdSecondLabel}`)).toBeInTheDocument();
   });
 
   it("render tax clearance review entity id data", () => {
@@ -105,7 +109,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
   it("render tax clearance review tax id label", () => {
     renderComponent();
     const taxIdLabel = screen.getByTestId("taxIdLabel");
-    expect(within(taxIdLabel).getByText("NJ State Tax ID")).toBeInTheDocument();
+    expect(within(taxIdLabel).getByText(Config.taxClearanceCertificateShared.stateTaxIdLabel)).toBeInTheDocument();
   });
 
   it("render tax clearance review tax id data", () => {
@@ -117,7 +121,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
   it("render tax clearance review tax pin label", () => {
     renderComponent();
     const taxPinLabel = screen.getByTestId("taxPinLabel");
-    expect(within(taxPinLabel).getByText("Tax Pin")).toBeInTheDocument();
+    expect(within(taxPinLabel).getByText(Config.taxClearanceCertificateShared.taxPinLabel)).toBeInTheDocument();
   });
 
   it("render tax clearance review tax pin data", () => {

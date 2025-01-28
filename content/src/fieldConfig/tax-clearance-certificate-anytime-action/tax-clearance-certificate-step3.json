@@ -1,5 +1,7 @@
 {
   "taxClearanceCertificateStep3": {
-    "tbd": "taxClearanceCertificateStep3"
+    "mainTitleHeader": "Check Eligibility",
+    "entityIdSecondLabel": "(Corporate Number)",
+    "addressLabel" : "Address"
   }
 }

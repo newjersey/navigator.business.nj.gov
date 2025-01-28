@@ -7,7 +7,7 @@
   "ignorePaths": [".yarn"],
   "postUpdateOptions": ["yarnDedupeHighest"],
   "lockFileMaintenance": { "enabled": true },
-  "ignoreDeps": ["node", "cimg/node", "kill-port", "semantic-release"],
+  "ignoreDeps": ["node", "cimg/node", "kill-port", "semantic-release", "decap-cms-app"],
   "rebaseWhen": "conflicted",
   "packageRules": [
     {

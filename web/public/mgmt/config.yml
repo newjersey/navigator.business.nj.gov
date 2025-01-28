@@ -4030,7 +4030,10 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: "Content Body", name: "tbd", widget: "markdown", required: false }
+              - { label: "Main Title Header", name: "mainTitleHeader", widget: "string", required: true }
+              - { label: "Entity Id Second Label", name: "entityIdSecondLabel", widget: "string", required: true }
+              - { label: "Address Label", name: "addressLabel", widget: "string", required: true }
+
       - label: "Tax Clearance Shared"
         name: "taxClearanceCertificate-shared"
         file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-shared.json"
@@ -4042,7 +4045,13 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: "Content Body", name: "tbd", widget: "markdown", required: false }
+              - { label: "Reason Section Header", name: "reasonSectionHeader", widget: "string", required: true  }
+              - { label: "Business Section Header", name: "businessSectionHeader", widget: "string", required: true }
+              - { label: "Certification Reason Label", name: "certificationReasonLabel", widget: "string", required: true }
+              - { label: "Business Name Label", name: "businessNameLabel", widget: "string", required: true }
+              - { label: "Entity Id Label", name: "entityIdLabel", widget: "string", required: true }
+              - { label: "State Tax Id Label", name: "stateTaxIdLabel", widget: "string", required: true }
+              - { label: "Tax Pin Label", name: "taxPinLabel", widget: "string", required: true }
 
   - name: "page-metadata"
     label: "🟨 PAGE METADATA"
