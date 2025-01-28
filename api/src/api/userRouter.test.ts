@@ -201,6 +201,32 @@ describe("userRouter", () => {
         expect(stubUpdateLicenseStatus).not.toHaveBeenCalled();
       });
 
+      it("does not update license if businessName is empty string and licenses is undefined and has formation address", async () => {
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            licenseData: {
+              licenses: undefined,
+              lastUpdatedISO: sixtyOneMinutesAgo,
+            },
+            formationData: generateFormationData({
+              formationFormData: generateFormationFormData({
+                addressLine1: "123 Main Street",
+                addressLine2: "Suite 100",
+                addressZipCode: "07123",
+              }),
+            }),
+            profileData: generateProfileData({
+              businessName: "",
+            }),
+          })
+        );
+
+        stubUnifiedDataClient.get.mockResolvedValue(userData);
+
+        await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubUpdateLicenseStatus).not.toHaveBeenCalled();
+      });
+
       it("does not update license if licenses is undefined and formationFormData address does not exist", async () => {
         const userData = generateUserDataForBusiness(
           generateBusiness({
@@ -222,7 +248,7 @@ describe("userRouter", () => {
         expect(stubUpdateLicenseStatus).not.toHaveBeenCalled();
       });
 
-      it("updates license if licenseData is undefined and if an address exists in formationFormData", async () => {
+      it("updates license if licenseData is undefined and if an address exists in formationFormData and has a business name", async () => {
         const userData = generateUserDataForBusiness(
           generateBusiness({
             licenseData: undefined,

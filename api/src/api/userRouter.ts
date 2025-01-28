@@ -59,11 +59,13 @@ const clearTaskItemChecklists = (userData: UserData): UserData => {
 
 const shouldCheckLicense = (currentBusiness: Business): boolean => {
   const formationFormData = currentBusiness.formationData.formationFormData;
-  const hasFormationAddress =
-    formationFormData.addressLine1.length > 0 && formationFormData.addressZipCode.length > 0;
+  const hasFormationAddressAndBusinessName =
+    formationFormData.addressLine1.length > 0 &&
+    formationFormData.addressZipCode.length > 0 &&
+    !!currentBusiness.profileData.businessName;
 
   const hasLicenseDataOrFormationAddress =
-    currentBusiness.licenseData?.licenses !== undefined || hasFormationAddress;
+    currentBusiness.licenseData?.licenses !== undefined || hasFormationAddressAndBusinessName;
   const licenseDataOlderThanOneHour =
     currentBusiness.licenseData === undefined
       ? true
