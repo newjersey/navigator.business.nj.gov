@@ -55,7 +55,7 @@
     "canBeHomeBased": true,
     "canBeReseller": true
   },
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "exterminator, pest removal, pest management, bugs, insects, rodents, termites, roaches, pesticides",
   "id": "pest-control",
   "description": "Gets rid of pests and vermin and prevents new infestation",
