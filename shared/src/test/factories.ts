@@ -304,6 +304,7 @@ export const generateProfileData = (
     elevatorOwningBusiness: undefined,
     carnivalRideOwningBusiness: undefined,
     raffleBingoGames: undefined,
+    businessOpenMoreThanTwoYears: undefined,
     ...overrides,
   };
 };

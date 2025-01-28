@@ -23,6 +23,7 @@ import * as ElevatorRegistration from "@businessnjgovnavigator/content/fieldConf
 import * as EnvQuestionnaire from "@businessnjgovnavigator/content/fieldConfig/env-questionnaire.json";
 import * as FormationInterimSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-interim-success-page.json";
 import * as FormationSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-success-page.json";
+import * as FundingsOnboarding from "@businessnjgovnavigator/content/fieldConfig/fundings-onboarding.json";
 import * as SiteWideErrorMessages from "@businessnjgovnavigator/content/fieldConfig/global-errors-defaults.json";
 import * as HousingRegistrationSearchTask from "@businessnjgovnavigator/content/fieldConfig/housing-registration.json";
 import * as LandingPageExperienceB from "@businessnjgovnavigator/content/fieldConfig/landing-page-experience-b.json";
@@ -88,7 +89,8 @@ const merged = JSON.parse(
       CheckAccountEmailPage,
       LicenseSearchTask,
       LandingPage,
-      LandingPageExperienceB
+      LandingPageExperienceB,
+      FundingsOnboarding
     )
   )
 );
@@ -135,7 +137,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof EnvQuestionnaire &
   typeof LicenseSearchTask &
   typeof LandingPage &
-  typeof LandingPageExperienceB;
+  typeof LandingPageExperienceB &
+  typeof FundingsOnboarding;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -178,7 +181,8 @@ export const getMergedConfig = (): ConfigType => {
     CheckAccountEmailPage,
     LicenseSearchTask,
     LandingPage,
-    LandingPageExperienceB
+    LandingPageExperienceB,
+    FundingsOnboarding
   );
 };
 

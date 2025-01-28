@@ -1140,6 +1140,54 @@ collections:
                       name: "confirmationNumberLabel",
                       widget: "markdown",
                     }
+  - label: "Fundings Onboarding Modal"
+    name: "business-fundings-onboarding-page"
+    file: "content/src/fieldConfig/fundings-onboarding.json"
+    editor:
+      preview: true
+    fields:
+      - label: fundingsOnboardingModal
+        name: fundingsOnboardingModal
+        collapsed: false
+        widget: object
+        fields:
+          - { label: Header Tooltip, name: headerTooltip, widget: string }
+          - { label: Modal Header, name: modalHeader, widget: string }
+          - { label: Incomplete Warning Singular Text, name: incompleteWarningSingularText, widget: string }
+          - { label: Incomplete Warning Multiple Text, name: incompleteWarningMultipleText, widget: string }
+          - { label: Save Button Text, name: saveButtonText, widget: string }
+          - label: "Non Profit Question"
+            name: "nonProfitQuestion"
+            widget: object
+            fields:
+              - { label: Question Text, name: questionText, widget: string }
+              - { label: Select an Answer Text, name: selectAnAnswerText, widget: string }
+              - label: Responses
+                name: responses
+                widget: object
+                fields:
+                  - { label: no, name: no, widget: string }
+                  - { label: yes, name: yes, widget: string }
+          - label: "Business Operating Length Question"
+            name: "businessOperatingLengthQuestion"
+            widget: object
+            fields:
+              - { label: Question Text, name: questionText, widget: string }
+              - { label: Select an Answer Text, name: selectAnAnswerText, widget: string }
+              - label: Responses
+                name: responses
+                widget: object
+                fields:
+                  - { label: short, name: short, widget: string }
+                  - { label: long, name: long, widget: string }
+          - label: "Page header"
+            name: "pageHeader"
+            widget: object
+            fields:
+              - { label: Header Text, name: headerText, widget: string }
+              - { label: Subheader Text, name: subHeaderText, widget: string }
+              - { label: Button Text, name: buttonText, widget: string }
+
   - name: nexus
     label: "Nexus"
     delete: false
