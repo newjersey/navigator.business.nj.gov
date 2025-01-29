@@ -209,7 +209,8 @@
     "hardcopy",
     "LSRPs",
     "sitehazardous",
-    "womenled"
+    "womenled",
+    "Yamileth"
   ],
   "ignorePaths": [
     "node_modules/**",
