@@ -1,3 +1,25 @@
+# [2025.2.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.1.0...v2025.2.0) (2025-01-29)
+
+
+### Bug Fixes
+
+* [[#188540268](https://github.com/newjersey/navigator.business.nj.gov/issues/188540268)] Fix routing logic for authenticated login ([d4c5dbe](https://github.com/newjersey/navigator.business.nj.gov/commit/d4c5dbe0af21786fd3efbe60b97aedfe7fb0f052))
+* [[#188623677](https://github.com/newjersey/navigator.business.nj.gov/issues/188623677)] air contact email ([064a59c](https://github.com/newjersey/navigator.business.nj.gov/commit/064a59c43e480b619f912739dbc10e9032d7f74e))
+* [[#188623677](https://github.com/newjersey/navigator.business.nj.gov/issues/188623677)] amend pollutants contextual info ([1aa9ed0](https://github.com/newjersey/navigator.business.nj.gov/commit/1aa9ed029d21e2381fbe391bc90384877dae79d1))
+* [[#188666282](https://github.com/newjersey/navigator.business.nj.gov/issues/188666282)] restore cms collections ([2ac5b8a](https://github.com/newjersey/navigator.business.nj.gov/commit/2ac5b8ac3cc5329a287cb3ecccecfe768728e082))
+* [[#188671705](https://github.com/newjersey/navigator.business.nj.gov/issues/188671705)] prevent license auto lookup with empty business name ([547d687](https://github.com/newjersey/navigator.business.nj.gov/commit/547d687b635167cb10a6a250d8ca59681555d966))
+
+
+### Features
+
+* [[#188666282](https://github.com/newjersey/navigator.business.nj.gov/issues/188666282)] add new onboarding page for fundings ([4be4ee3](https://github.com/newjersey/navigator.business.nj.gov/commit/4be4ee31bd8b22641c0656cb335ecb54d4e0fecd))
+* [[#188666282](https://github.com/newjersey/navigator.business.nj.gov/issues/188666282)] add new onboarding page for fundings ([1efd684](https://github.com/newjersey/navigator.business.nj.gov/commit/1efd684fb6d0d0dc8ba59185037dfb3b00f21d5b))
+* [[#188666282](https://github.com/newjersey/navigator.business.nj.gov/issues/188666282)] properly track current business sector in fundings onboarding ([ff78d95](https://github.com/newjersey/navigator.business.nj.gov/commit/ff78d9531ea4a4b0b51852aebe4137aae93d4168))
+* [[#188682502](https://github.com/newjersey/navigator.business.nj.gov/issues/188682502)] Funeral Home License Status Check ([0d8ec63](https://github.com/newjersey/navigator.business.nj.gov/commit/0d8ec63f276691c9d93884ea7df68cc62b80b029))
+* [[#188789999](https://github.com/newjersey/navigator.business.nj.gov/issues/188789999)] tax pin field in profile for everyone ([7ef704e](https://github.com/newjersey/navigator.business.nj.gov/commit/7ef704e160ec228cf8685d1ce18c5fb3004c1b29))
+* [188347496] landing page and license search config ([eab165f](https://github.com/newjersey/navigator.business.nj.gov/commit/eab165fb6886745f15d2090591e1f6ea585454f9))
+* [188623677] add environmental questionnaire for air ([48f6b24](https://github.com/newjersey/navigator.business.nj.gov/commit/48f6b24c9d15dda565e08385aa0684450de7ea37))
+
 # [2025.1.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.0.0...v2025.1.0) (2025-01-21)
 
 
