@@ -55,7 +55,7 @@ summaryDescriptionMd: >-
   If you sell container e-liquid and plan to have more than 50% of your retail sales come from electronic smoking devices, related accessories, and/or liquid nicotine, you must [apply for a Vapor Business License with the NJ Division of Taxation](https://www.nj.gov/treasury/taxation/pdf/other_forms/tobacco/vb-r.pdf).
 
 
-  <br><br>
+  &nbsp;
 
 
   If you are a manufacturer (not a manufacturer representative), you must [submit an application with the NJ Division of Taxation] (https://www.nj.gov/treasury/taxation/prnttobacco.shtml).
@@ -95,8 +95,7 @@ Check with your municipality for any additional requirements for owning and oper
 ## Additional Tax Requirements
 For more information on taxes and other requirements visit the [Cigarette Tax page](https://www.nj.gov/treasury/taxation/cigarette.shtml).
 
-<br>
-<br>
+&nbsp;
 
 Mail your completed application and any fees to: 
 
