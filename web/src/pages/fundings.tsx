@@ -94,7 +94,9 @@ const FundingsPage = (props: Props): ReactElement => {
       });
       await updateQueue?.update();
       setShouldCloseModal(true);
-      setFilteredFundings(filterFundings({ fundings: filteredFundings, business }));
+      setFilteredFundings(
+        filterFundings({ fundings: filteredFundings, business: updateQueue?.currentBusiness() })
+      );
     } else {
       setShouldShowErrorAlert(true);
     }
