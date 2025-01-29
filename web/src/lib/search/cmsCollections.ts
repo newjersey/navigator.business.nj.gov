@@ -76,6 +76,7 @@ export const cmsCollections = [
       "Landing Pages",
       "License Search Task",
       "Profile Page",
+      "Fundings Onboarding Page",
       "Contextual Information",
       "404 Page",
       "Check Account Email Page",
