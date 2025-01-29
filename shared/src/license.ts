@@ -99,7 +99,7 @@ export const taskIdLicenseNameMapping = {
   "moving-company-license": "Public Movers and Warehousemen-Public Mover and Warehouseman",
   "pharmacy-license": "Pharmacy-Pharmacy",
   "register-accounting-firm": "Accountancy-Firm Registration",
-  "register-home-contractor": "Home Improvement Contractors-Home Improvement Contractor",
+  "register-home-contractor": "Home Improvement Contractors-Home Improvement Business Contr",
   "ticket-broker-reseller-registration": "Ticket Brokers",
   "telemarketing-license": "Telemarketers",
   "entertainment-agency-reg": "Employment & Personnel Service-Entertainment/Booking Agency",

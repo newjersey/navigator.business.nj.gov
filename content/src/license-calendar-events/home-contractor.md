@@ -2,7 +2,7 @@
 notesMd: "Draft:
   https://docs.google.com/document/d/1zaZpaifJyX8bE7S-y-iEt8Zn_ssZHw4zIi_4QgjU5\
   RE/edit"
-licenseName: Home Improvement Contractors-Home Improvement Contractor
+licenseName: Home Improvement Contractors-Home Improvement Business Contr
 urlSlug: home-contractor
 expirationEventDisplayName: Home Improvement Contractor Expiration
 renewalEventDisplayName: Home Improvement Contractor Renewal Deadline
