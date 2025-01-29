@@ -86,7 +86,7 @@
       "id": "cds-supply"
     },
     {
-      "questionText": "Will you sell, manufacture, or have a vending machine with cigarettes?",
+      "questionText": "Will you sell or manufacture cigarettes, have a cigarette vending machine, or be a cigarette manufacturer representative?",
       "id": "cigarette-manufacture-sell",
       "addOn": "cigarettes-add"
     },
