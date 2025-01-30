@@ -21,7 +21,7 @@ programPurpose: In State
 agency:
   - njeda
 agencyContact: ""
-businessStage: operating
+businessStage: both
 employeesRequired: n/a
 homeBased: no
 certifications: []
