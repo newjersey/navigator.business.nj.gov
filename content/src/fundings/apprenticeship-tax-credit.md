@@ -16,7 +16,7 @@ summaryDescriptionMd: >+
   to offset approved startup expenses in the first year of your apprenticeship
   program.
 
-callToActionLink: https://nj.gov/labor/career-services/apprenticeship/taxcredit
+callToActionLink: https://www.nj.gov/labor/career-services/apprenticeship/taxcredit.shtml
 callToActionText: Learn more
 fundingType: tax credit
 programFrequency: ongoing
