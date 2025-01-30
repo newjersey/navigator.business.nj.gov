@@ -33,7 +33,6 @@ sector:
   - real-estate
   - construction
   - agriculture-forestry-fishing-and-hunting
-  - other-services
   - waste-management-and-Remediation
 publishStageArchive: ""
 ---
