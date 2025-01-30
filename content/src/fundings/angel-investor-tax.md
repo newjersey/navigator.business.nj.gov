@@ -35,7 +35,8 @@ sector:
   - technology
   - life-sciences
   - clean-energy
-  - other-services
+  - manufacturing
+  - offshore-wind
 publishStageArchive: ""
 ---
 
