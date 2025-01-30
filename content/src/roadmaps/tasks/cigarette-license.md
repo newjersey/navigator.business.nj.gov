@@ -45,7 +45,7 @@ summaryDescriptionMd: >-
   You need a cigarette license to do either of the following in New Jersey:
 
 
-  * Sell or manufacture cigarettes
+  * Sell cigarettes
 
   * Have a vending machine with cigarettes
 
