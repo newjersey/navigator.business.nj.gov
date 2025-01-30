@@ -32,6 +32,8 @@ county:
 sector:
   - technology
   - life-sciences
+  - clean-energy
+  - educational-services
 publishStageArchive: ""
 ---
 
