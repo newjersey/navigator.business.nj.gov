@@ -1,14 +1,14 @@
 ---
+licenseName: ""
 id: bus-inspection
 displayname: bus-inspection
 urlSlug: bus-inspection
-name: Inspect and Register Your Vehicles
+name: Inspect and Register Your School Transportation Vehicles
 webflowName: "School Bus: School Bus Inspection"
-licenseName: ""
 summaryDescriptionMd: >
-  Your commercial buses need to be inspected by the Motor Vehicle Commission’s
-  School Bus Inspection Unit **before** obtaining registration and license
-  plates for them.
+  Your commercial buses and any school transportation vehicles need to be
+  inspected by the Motor Vehicle Commission’s School Bus Inspection Unit
+  **before** obtaining registration and license plates for them.
 
   :::infoAlert
 
