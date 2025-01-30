@@ -34,7 +34,11 @@ certifications:
 preferenceForOpportunityZone: no
 county:
   - All
-sector: []
+sector:
+  - clean-energy
+  - offshore-wind
+  - technology
+  - utilities
 publishStageArchive: ""
 ---
 
