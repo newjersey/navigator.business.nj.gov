@@ -37,6 +37,7 @@ county:
   - All
 sector:
   - educational-services
+  - health-care-and-social-assistance
 publishStageArchive: null
 ---
 
