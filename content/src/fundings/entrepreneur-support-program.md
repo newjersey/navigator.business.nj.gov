@@ -33,7 +33,14 @@ county:
 sector:
   - life-sciences
   - technology
-  - other-services
+  - transportation-and-warehousing
+  - manufacturing
+  - offshore-wind
+  - finance-and-insurance
+  - professional-scientific-and-technical-services
+  - digital-and-print-media
+  - arts-entertainment-and-recreation
+  - retail-trade-and-ecommerce
 publishStageArchive: ""
 ---
 
