@@ -49,7 +49,7 @@ summaryDescriptionMd: >-
 
   * Have a vending machine with cigarettes
 
-  * Operate as a manufacturer representative
+  * Operate as a manufacturer sales representative
 
 
   If you sell container e-liquid and plan to have more than 50% of your retail sales come from electronic smoking devices, related accessories, and/or liquid nicotine, you must [apply for a Vapor Business License with the NJ Division of Taxation](https://www.nj.gov/treasury/taxation/pdf/other_forms/tobacco/vb-r.pdf).
