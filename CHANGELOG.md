@@ -1,3 +1,11 @@
+## [2025.2.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.2.0...v2025.2.1) (2025-01-31)
+
+
+### Bug Fixes
+
+* [[#188666282](https://github.com/newjersey/navigator.business.nj.gov/issues/188666282)] add url and additional filtering ([a2f342b](https://github.com/newjersey/navigator.business.nj.gov/commit/a2f342bab45bfb5b200629a075cea3be0d0a969d))
+* [[#188826997](https://github.com/newjersey/navigator.business.nj.gov/issues/188826997)] check router.isReady in onboarding ([4f7e5e3](https://github.com/newjersey/navigator.business.nj.gov/commit/4f7e5e31c51039f71d8dc917be8c546047d053b8))
+
 # [2025.2.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.1.0...v2025.2.0) (2025-01-29)
 
 
