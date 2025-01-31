@@ -1,6 +1,6 @@
 {
   "fundingsOnboardingModal": {
-    "headerTooltip": "This tool is only for New Jersey-based businesses. Others can explore NJEDA funding on Business.NJ.gov.",
+    "headerTooltip": "This tool is only for New Jersey-based businesses. Others can explore NJEDA funding on [Business.NJ.gov](/onboarding?page=1).",
     "modalHeader": "Tell Us About Your Business",
     "incompleteWarningSingularText": "Complete the field below.",
     "incompleteWarningMultipleText": "Complete the fields below.",
@@ -11,7 +11,7 @@
         "no": "No",
         "yes": "Yes"
       },
-      "selectAnAnswerText": "Select if your New Jersey business is a nonprofit"
+      "selectAnAnswerText": "Select if your New Jersey business is a nonprofit."
     },
     "businessOperatingLengthQuestion": {
       "questionText": "How long has your New Jersey business been open for?",
@@ -19,7 +19,7 @@
         "short": "Less than 2 years",
         "long": "2+ years"
       },
-      "selectAnAnswerText": "Select how long your New Jersey business has been open for"
+      "selectAnAnswerText": "Select how long your New Jersey business has been open for."
     },
     "pageHeader": {
       "headerText": "Explore NJEDA Funding Programs",

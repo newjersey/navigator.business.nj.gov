@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { Sectors } from "@/components/data-fields/Sectors";
 import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
@@ -28,6 +29,7 @@ import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   fundings: Funding[];
+  noAuth: boolean;
 }
 
 const FundingsPage = (props: Props): ReactElement => {
@@ -46,10 +48,6 @@ const FundingsPage = (props: Props): ReactElement => {
   const [filteredFundings, setFilteredFundings] = useState<Funding[]>(props.fundings);
   const [shouldShowErrorAlert, setShouldShowErrorAlert] = useState<boolean>(false);
 
-  const allQuestionsAnswered = (): boolean => {
-    return getQuestionsAnsweredCount() === 3;
-  };
-
   const getQuestionsAnsweredCount = (): number => {
     let count = 0;
     if (profileData.sectorId !== undefined) {
@@ -66,6 +64,8 @@ const FundingsPage = (props: Props): ReactElement => {
     return count;
   };
 
+  const allQuestionsAnswered = getQuestionsAnsweredCount() === 3;
+
   useEffect(() => {
     if (!updateQueue) {
       createUpdateQueue(currentUserData);
@@ -75,7 +75,7 @@ const FundingsPage = (props: Props): ReactElement => {
   const saveUserData = async (): Promise<void> => {
     onSubmit();
 
-    if (allQuestionsAnswered()) {
+    if (allQuestionsAnswered) {
       updateQueue?.queueBusiness({
         ...updateQueue?.currentBusiness(),
         onboardingFormProgress: "COMPLETED",
@@ -92,10 +92,17 @@ const FundingsPage = (props: Props): ReactElement => {
         visibleSidebarCards: ["not-registered-up-and-running"],
         isNonProfitFromFunding: isNonProfit,
       });
+      updateQueue?.queueUser({
+        accountCreationSource: "NJEDA",
+      });
       await updateQueue?.update();
       setShouldCloseModal(true);
       setFilteredFundings(
-        filterFundings({ fundings: filteredFundings, business: updateQueue?.currentBusiness() })
+        filterFundings({ fundings: filteredFundings, business: updateQueue?.currentBusiness() }).filter(
+          (it) => {
+            return it.agency?.includes("njeda");
+          }
+        )
       );
     } else {
       setShouldShowErrorAlert(true);
@@ -203,7 +210,9 @@ const FundingsPage = (props: Props): ReactElement => {
                   </Alert>
                 )}
                 {!shouldShowErrorAlert && (
-                  <Alert variant={"info"}>{Config.fundingsOnboardingModal.headerTooltip}</Alert>
+                  <Alert variant={"info"}>
+                    <Content>{Config.fundingsOnboardingModal.headerTooltip}</Content>
+                  </Alert>
                 )}
               </div>
               <div className={"text-bold"}>
@@ -295,6 +304,7 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
   return {
     props: {
       fundings: loadAllFundings(),
+      noAuth: true,
     },
   };
 };

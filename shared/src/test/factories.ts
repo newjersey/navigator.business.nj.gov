@@ -102,6 +102,7 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
     isCalendarFullView: !(randomInt() % 2),
     isHideableRoadmapOpen: !(randomInt() % 2),
     phaseNewlyChanged: false,
+    isNonProfitFromFunding: false,
     ...overrides,
   };
 };
