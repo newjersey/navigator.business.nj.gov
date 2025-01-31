@@ -85,7 +85,7 @@ export const LoginEmailCheck = (): ReactElement => {
       >
         {Config.checkAccountEmailPage.inputButton}
       </PrimaryButton>
-      <hr className="margin-y-3" />
+      <hr className="margin-y-3" aria-hidden="true" />
       <p className="link-account-text">
         <span className="margin-right-05">{Config.checkAccountEmailPage.noAccountText}</span>
         <Link href={ROUTES.onboarding}>{Config.checkAccountEmailPage.linkAccountLinkText}</Link>
