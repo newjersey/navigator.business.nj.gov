@@ -44,7 +44,7 @@ divisionPhone: (609) 984-6568
 Wait to pay the fee until you receive an invoice. Note that you must pay the fee for the license to be valid.
 :::
 
-:::
+
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
