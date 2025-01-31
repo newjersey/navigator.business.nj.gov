@@ -29,7 +29,7 @@ const renderStatefulFundingsPageComponent = (business: Business, fundings: Fundi
   render(
     <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
       <ThemeProvider theme={createTheme()}>
-        <FundingsPage fundings={fundings} />
+        <FundingsPage fundings={fundings} noAuth={true} />
       </ThemeProvider>
     </WithStatefulUserData>
   );
@@ -91,6 +91,7 @@ describe("fundings onboarding", () => {
         dueDate: undefined,
         status: "rolling application",
         certifications: null,
+        agency: ["njeda"],
       }),
     ];
     renderStatefulFundingsPageComponent(business, fundings);
@@ -111,5 +112,51 @@ describe("fundings onboarding", () => {
     ).not.toBeInTheDocument();
 
     expect(mockPush).toHaveBeenCalled();
+  });
+
+  it("filters out non-njeda fundings", async () => {
+    const user = userEvent.setup();
+    const profileData = generateProfileData({ sectorId: "" });
+    const business = generateBusiness({ profileData: profileData });
+    const fundings = [
+      generateFunding({
+        isNonprofitOnly: false,
+        sector: ["clean-energy"],
+        employeesRequired: "n/a",
+        county: ["All"],
+        homeBased: "yes",
+        publishStageArchive: null,
+        dueDate: undefined,
+        status: "rolling application",
+        certifications: null,
+        agency: ["njeda"],
+      }),
+      generateFunding({
+        isNonprofitOnly: false,
+        sector: ["clean-energy"],
+        employeesRequired: "n/a",
+        county: ["All"],
+        homeBased: "yes",
+        publishStageArchive: null,
+        dueDate: undefined,
+        status: "rolling application",
+        certifications: null,
+        agency: ["other-cool-agency"],
+      }),
+    ];
+    renderStatefulFundingsPageComponent(business, fundings);
+
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.click(
+      screen.getByText(Config.fundingsOnboardingModal.businessOperatingLengthQuestion.responses.long)
+    );
+
+    await waitFor(() => {
+      selectByValue("Sector", "clean-energy");
+    });
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.saveButtonText));
+
+    expect(screen.getByTestId(`${fundings[0].id}-button`)).toBeInTheDocument();
+    expect(screen.queryByTestId(`${fundings[1].id}-button`)).not.toBeInTheDocument();
   });
 });
