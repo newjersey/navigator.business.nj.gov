@@ -39,7 +39,7 @@
     },
     {
       "step": 3,
-      "task": "get-insurance",
+      "task": [],
       "weight": 15
     },
     {
@@ -47,6 +47,12 @@
       "weight": 20,
       "licenseTask": "funeral-registration",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 25,
+      "licenseTask": "mortuary-practitioner",
+      "required": false
     }
   ],
   "name": "Funeral Services",
