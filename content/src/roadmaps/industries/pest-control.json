@@ -46,6 +46,13 @@
       "step": 4,
       "weight": 1,
       "task": "search-licenses"
+    },
+    {
+      "step": 4,
+      "weight": 1,
+      "task": "",
+      "licenseTask": "pest-applicator-business-license",
+      "required": true
     }
   ],
   "name": "Pest Control",
