@@ -1,11 +1,12 @@
 import { ApiBusinessNameClient, ApiNameAvailabilityResponse } from "@client/ApiBusinessNameClient";
 import { BusinessNameClient } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 
 jest.mock("axios");
 jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("ApiBusinessNameClient", () => {
   let client: BusinessNameClient;
@@ -13,7 +14,7 @@ describe("ApiBusinessNameClient", () => {
 
   beforeEach(() => {
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
-    client = ApiBusinessNameClient("www.example.com", logger);
+    client = ApiBusinessNameClient("www.example.com", DEBUG ? logger : DummyLogWriter);
     jest.resetAllMocks();
   });
 

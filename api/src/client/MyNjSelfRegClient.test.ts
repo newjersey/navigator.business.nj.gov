@@ -1,11 +1,12 @@
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
 import { SelfRegClient } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import { generateUser } from "@shared/test";
 import axios from "axios";
 
 jest.mock("axios");
 jest.mock("winston");
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("MyNJSelfRegClient", () => {
   let mockedAxios: jest.Mock;
@@ -23,7 +24,7 @@ describe("MyNJSelfRegClient", () => {
     jest.resetAllMocks();
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
     mockedAxios = axios as unknown as jest.Mock;
-    client = MyNJSelfRegClientFactory(config, logger);
+    client = MyNJSelfRegClientFactory(config, DEBUG ? logger : DummyLogWriter);
     mockedAxios.mockRejectedValue({});
   });
 

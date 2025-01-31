@@ -1,11 +1,12 @@
 import { DynamicsHousingPropertyInterestClient } from "@client/dynamics/housing/DynamicsHousingPropertyInterestClient";
 import { HousingPropertyInterestClient } from "@client/dynamics/housing/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 
 jest.mock("axios");
 jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("DynamicsHousingPropertyInterestClient", () => {
   let client: HousingPropertyInterestClient;
@@ -17,7 +18,7 @@ describe("DynamicsHousingPropertyInterestClient", () => {
     jest.resetAllMocks();
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
 
-    client = DynamicsHousingPropertyInterestClient(logger, ORG_URL);
+    client = DynamicsHousingPropertyInterestClient(DEBUG ? logger : DummyLogWriter, ORG_URL);
   });
 
   const mockAccessToken = "access-granted";

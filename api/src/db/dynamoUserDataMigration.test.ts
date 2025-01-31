@@ -58,7 +58,6 @@ describe("DynamoUserDataClient Migrations", () => {
   });
 
   it("migrates and saves data from initial state", async () => {
-    // before migration
     expect(await getDbItem("v0-id")).toEqual({
       user: {
         id: "v0-id",

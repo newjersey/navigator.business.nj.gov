@@ -4,8 +4,6 @@ import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import { randomInt } from "@shared/intHelpers";
 import axios from "axios";
 
-const DEBUG = Boolean(process.env.DEBUG ?? false);
-
 const generateGovDeliveryResponse = (
   overrides: Partial<GovDeliveryResponse>,
   failed = !!(randomInt() % 2)
@@ -21,6 +19,7 @@ const generateGovDeliveryResponse = (
 jest.mock("axios");
 jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("GovDeliveryNewsletterClient", () => {
   let client: NewsletterClient;

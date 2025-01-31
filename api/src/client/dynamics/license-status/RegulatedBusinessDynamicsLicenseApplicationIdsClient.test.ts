@@ -13,7 +13,6 @@ import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import { generateLicenseApplicationIdApiResponseValue } from "@test/factories";
 import { RGB_APP_TYPE_KEYS, RGB_LICENSE_APPLICATION_INFORMATION } from "@test/helpers";
 import axios from "axios";
-import * as console from "node:console";
 
 jest.mock("axios");
 jest.mock("winston");
@@ -444,7 +443,6 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
         const repsonse = await client.getLicenseApplicationIdsForAllBusinessIds(mockAccessToken, [
           mockBusinessNameAndId_1,
         ]);
-        console.log(repsonse[0].professionNameAndLicenseType);
         expect(repsonse[0].professionNameAndLicenseType).toEqual(expectedProfession);
       }
     );

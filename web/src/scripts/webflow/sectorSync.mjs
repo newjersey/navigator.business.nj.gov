@@ -8,6 +8,8 @@ import { wait } from "./helpers2.mjs";
 import { createItem, deleteItem, getAllItems, modifyItem } from "./methods.mjs";
 import { allIndustryId, sectorCollectionId } from "./webflowIds.mjs";
 
+const isNotTestEnv = process.env.NODE_ENV !== "test";
+
 const sectorDir = path.resolve(
   `${path.dirname(fileURLToPath(import.meta.url))}/../../../../content/src/mappings`
 );
@@ -98,7 +100,7 @@ const getSortedSectors = async () => {
 const deleteSectors = async () => {
   const unUsedSectors = await getUnUsedSectors();
   return unUsedSectors.map((item) => {
-    console.info(`Attempting to delete ${item.fieldData.name}`);
+    isNotTestEnv && console.info(`Attempting to delete ${item.fieldData.name}`);
     return deleteItem(item.id, sectorCollectionId);
   });
 };
@@ -106,7 +108,7 @@ const deleteSectors = async () => {
 const updateSectorNames = async () => {
   const updatedSectorNames = await getUpdatedSectorNames();
   return updatedSectorNames.map((item) => {
-    console.info(`Attempting to modify ${item.fieldData.name}`);
+    isNotTestEnv && console.info(`Attempting to modify ${item.fieldData.name}`);
     return modifyItem(item.id, sectorCollectionId, { name: item.fieldData.name });
   });
 };
@@ -114,7 +116,7 @@ const updateSectorNames = async () => {
 const createNewSectors = async () => {
   const newSectors = await getNewSectors();
   return newSectors.map((item) => {
-    console.info(`Attempting to create ${item.name}`);
+    isNotTestEnv && console.info(`Attempting to create ${item.name}`);
     return createItem(item, sectorCollectionId, false);
   });
 };
@@ -122,24 +124,24 @@ const createNewSectors = async () => {
 const reSortSectors = async () => {
   const sortedSectors = await getSortedSectors();
   return sortedSectors.map((item) => {
-    console.info(`Attempting to sort ${item.fieldData.name}`);
+    isNotTestEnv && console.info(`Attempting to sort ${item.fieldData.name}`);
     return modifyItem(item.id, sectorCollectionId, { rank: item.rank });
   });
 };
 
 const syncSectors = async () => {
-  console.log("deleting unused sectors");
+  isNotTestEnv && console.log("deleting unused sectors");
   await deleteSectors();
-  console.log("updating renamed sectors");
+  isNotTestEnv && console.log("updating renamed sectors");
   await wait();
   await updateSectorNames();
-  console.log("creating new sectors");
+  isNotTestEnv && console.log("creating new sectors");
   await wait();
   await createNewSectors();
-  console.log("updating sectors order");
+  isNotTestEnv && console.log("updating sectors order");
   await wait();
   await reSortSectors();
-  console.log("Complete Sectors Sync!");
+  isNotTestEnv && console.log("Complete Sectors Sync!");
 };
 export {
   createNewSectors,
@@ -177,7 +179,7 @@ if (
   })
 ) {
   await (async () => {
-    console.info(await getUnUsedSectors());
+    isNotTestEnv && console.info(await getUnUsedSectors());
     process.exit(1);
   })();
 } else if (
@@ -186,7 +188,7 @@ if (
   })
 ) {
   await (async () => {
-    console.info(await getNewSectors());
+    isNotTestEnv && console.info(await getNewSectors());
     process.exit(1);
   })();
 } else if (
@@ -195,15 +197,15 @@ if (
   })
 ) {
   await (async () => {
-    console.info(await getUpdatedSectorNames());
+    isNotTestEnv && console.info(await getUpdatedSectorNames());
     process.exit(1);
   })();
 } else {
-  console.log("Expected at least one argument! Use one of the following: ");
-  console.log("--previewUnused = Preview Sectors to Delete");
-  console.log("--previewCreate = Preview Sectors to Create");
-  console.log("--previewUpdate = Preview Sectors to Update");
-  console.log("--sync = Syncs sectors");
+  isNotTestEnv && console.log("Expected at least one argument! Use one of the following: ");
+  isNotTestEnv && console.log("--previewUnused = Preview Sectors to Delete");
+  isNotTestEnv && console.log("--previewCreate = Preview Sectors to Create");
+  isNotTestEnv && console.log("--previewUpdate = Preview Sectors to Update");
+  isNotTestEnv && console.log("--sync = Syncs sectors");
 }
 
 export { allIndustryId } from "./webflowIds.mjs";
