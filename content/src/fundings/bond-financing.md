@@ -29,7 +29,11 @@ certifications: []
 preferenceForOpportunityZone: ""
 county:
   - All
-sector: []
+sector:
+  - manufacturing
+  - waste-management-and-Remediation
+  - utilities
+  - other-services
 publishStageArchive: ""
 ---
 

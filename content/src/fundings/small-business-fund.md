@@ -20,7 +20,7 @@ programPurpose: Both
 agency:
   - njeda
 agencyContact: ""
-businessStage: operating
+businessStage: both
 employeesRequired: n/a
 homeBased: yes
 certifications:

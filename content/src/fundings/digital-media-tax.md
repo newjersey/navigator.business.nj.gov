@@ -35,6 +35,7 @@ county:
   - Mercer or Salem County
 sector:
   - arts-entertainment-and-recreation
+  - digital-and-print-media
 publishStageArchive: ""
 ---
 

@@ -35,23 +35,23 @@ county:
 sector:
   - construction
   - other-services
+  - real-estate
 publishStageArchive: ""
 ---
-
 ## Eligibility
 
-- Must be a commercial building owner or a commercial tenant with landlord/building owner approval for the proposed project
-- Must have a valid New Jersey tax clearance certificate no older than 180 days at the time of application approval
-- Must be in good standing with the New Jersey Department of Labor and Workforce Development (DOL) and the New Jersey Department of Environmental Protection (DEP)
-- Must demonstrate proof of funding/financing for the estimated project costs plus a 15% project contingency following grant award approval and before finalizing the grant agreement
-- The building must be located in Newark, Edison, or Atlantic City
-- Must meet building occupancy classifications: Mercantile Group M, Assembly Group A-2, or Business Group B per the New Jersey Building Code
-- All work must comply with NJ `prevailing wage|prevailing-wage` and affirmative action requirements
-- Total eligible project costs must be greater than or equal to $100,000 (no upper limit)
-- Projects must not involve new construction or enlargements (adding square footage)
-- Must switch 75% or more of building space heating loads from fossil fuel-based systems to non-combustion-based systems with low to zero direct operating emissions
-- Must replace 75% or more of existing high global warming potential (GWP) refrigerants with lower GWP alternatives
-- The 75% switching requirement applies only to the portions of the building within the tenant’s lease or the building systems affecting the tenant’s space
+* Must be a commercial building owner or a commercial tenant with landlord/building owner approval for the proposed project
+* Must have a valid New Jersey tax clearance certificate no older than 180 days at the time of application approval
+* Must be in good standing with the New Jersey Department of Labor and Workforce Development (DOL) and the New Jersey Department of Environmental Protection (DEP)
+* Must demonstrate proof of funding/financing for the estimated project costs plus a 15% project contingency following grant award approval and before finalizing the grant agreement
+* The building must be located in Newark, Edison, or Atlantic City
+* Must meet building occupancy classifications: Mercantile Group M, Assembly Group A-2, or Business Group B per the New Jersey Building Code
+* All work must comply with NJ `prevailing wage|prevailing-wage` and affirmative action requirements
+* Total eligible project costs must be greater than or equal to $100,000 (no upper limit)
+* Projects must not involve new construction or enlargements (adding square footage)
+* Must switch 75% or more of building space heating loads from fossil fuel-based systems to non-combustion-based systems with low to zero direct operating emissions
+* Must replace 75% or more of existing high global warming potential (GWP) refrigerants with lower GWP alternatives
+* The 75% switching requirement applies only to the portions of the building within the tenant’s lease or the building systems affecting the tenant’s space
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
