@@ -2,7 +2,7 @@
 notesMd: "Drafted here:
   https://docs.google.com/document/d/1qycUgskcIPRt-SfnpSaJ8d4T_Zt1Y126yJ1mQMhcJ\
   OA/edit"
-licenseName: ""
+licenseName: "Public Movers and Warehousemen"
 urlSlug: moving-company
 expirationEventDisplayName: Public Movers and/or Warehousemen License Expiration
 renewalEventDisplayName: Public Movers and/or Warehousemen License Renewal Deadline
