@@ -1,9 +1,13 @@
 ---
-notesMd: "1.1.25: revision made per SME review"
+notesMd: >-
+  1.31.25: removing accidental quotation mark. updating year examples in
+  summary.
+
+  1.1.25: revision made per SME review
+licenseName: Mortuary Science-Funeral Home
 id: funeral-registration
 displayname: funeral-registration
 urlSlug: funeral-registration
-licenseName: "Mortuary Science-Funeral Home"
 name: Apply for Your Funeral Home’s Certificate of Registration
 webflowName: "Funeral Services: Funeral Home Certificate of Registration"
 summaryDescriptionMd: >-
@@ -13,7 +17,7 @@ summaryDescriptionMd: >-
   of Registration.
 
 
-  If you are applying in an even-numbered year (for example, 2024 or 2026), use the first-year application. If you are applying in an odd-numbered year (for example, 2025 or 2027), use the second-year application."
+  If you are applying in an even-numbered year (for example, 2026 or 2028), use the first-year application. If you are applying in an odd-numbered year (for example, 2025 or 2027), use the second-year application.
 industryId: funeral
 callToActionText: Apply for My Certificate of Registration
 callToActionLink: https://www.njconsumeraffairs.gov/mor/Pages/applications.aspx
