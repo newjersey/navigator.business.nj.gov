@@ -9,8 +9,8 @@ urlSlug: pest-applicator-business-license
 name: Apply for Your Pesticide Applicator Business License
 webflowName: "Pest Control: Pesticide Applicator Business License"
 summaryDescriptionMd: >-
-  You must apply for your  pesticide applicator business license if you do any
-  of the following in New Jersey:
+  You must apply for your  `pesticide|pesticide` applicator business license if
+  you do any of the following in New Jersey:
 
 
   * You offer pesticide application services (for example, pest extermination)
@@ -30,7 +30,7 @@ divisionPhone: (609) 984-6568
 ## Eligibility Criteria
 
 * You have a staff member who has their commercial pesticide applicator license
-* $300,000 liability insurance if work does not include <insert contextual information>fumigation
+* $300,000 liability insurance if work does not include `fumigation|fumigation`
 * $500,000 liability insurance if work does include fumigation
 
 ## Application Requirements
