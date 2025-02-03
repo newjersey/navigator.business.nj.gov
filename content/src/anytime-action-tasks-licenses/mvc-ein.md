@@ -32,7 +32,7 @@ callToActionLink: "https://www.nj.gov/mvc/pdf/business/BA-8.pdf "
 * Name, driver’s license number, and contact information of the executive requesting the MVC EIN
 * Power of attorney (if the executive is not listed in the corporate documents)
 
-Scan and email your completed application (Form BA-8) and accompanying documents to: MVCCorpcodes@mvc.nj.gov.
+Scan and email your completed application (Form BA-8) and accompanying documents to: MVC.MVCCorpcodes@mvc.nj.gov.
 
 
 You can also mail your completed application and accompanying documents to:
