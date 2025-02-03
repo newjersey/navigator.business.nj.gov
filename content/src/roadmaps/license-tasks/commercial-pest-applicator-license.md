@@ -9,7 +9,7 @@ urlSlug: commercial-pest-applicator-license
 name: Apply for Your Commercial Pesticide Applicator License
 webflowName: "Pest Control: Commercial Pesticide Applicator License"
 summaryDescriptionMd: >
-  You must have a commercial `pesticide| pesticide` applicator license if you do
+  You must have a commercial `pesticide|pesticide` applicator license if you do
   any of the following in New Jersey:
 
   * Provide pesticide application services 
