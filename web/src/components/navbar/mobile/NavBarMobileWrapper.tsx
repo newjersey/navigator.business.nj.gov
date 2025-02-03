@@ -9,7 +9,7 @@ interface NavBarMobileWrapperProps {
 
 export const NavBarMobileWrapper = (props: NavBarMobileWrapperProps): ReactElement => {
   return (
-    <div className={`${props.scrolled ? "scrolled scrolled-transition bg-white" : ""}`}>
+    <div className={`bg-white ${props.scrolled ? "scrolled scrolled-transition" : ""}`}>
       <OutageAlertBar />
       <nav
         aria-label="Primary"
