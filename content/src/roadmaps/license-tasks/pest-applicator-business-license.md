@@ -37,7 +37,7 @@ divisionPhone: (609) 984-6568
 
 * Name and license of the certified pesticide applicator
 * Name and phone number of the liability insurance agent
-- Applicable fees paid
+* Applicable fees paid
 
 :::infoAlert 
  Email the pesticide applicator business license application ([VPA-013](https://www.nj.gov/dep/enforcement/pcp/bpo/certification/forms/ab_license_application_vpa-013_fillable.pdf)) form to pestcertcourses@dep.nj.gov. 
