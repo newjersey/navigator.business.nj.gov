@@ -1,4 +1,32 @@
-export const TaxClearanceCertificateIssuingAgencies = [
+import {emptyFormationAddressData, FormationAddress} from "./formationData";
+
+export type TaxClearanceCertificateIssuingAgency = {
+  name: string;
+  displayName: string;
+};
+
+export type TaxClearanceCertificate = {
+  issuingAgency: TaxClearanceCertificateIssuingAgency | undefined;
+  businessName: string | undefined;
+  entityId: string | undefined;
+  taxId: string | undefined;
+  encryptedTaxId: string | undefined;
+  taxPin: string | undefined;
+  address: FormationAddress | undefined
+}
+
+export const emptyTaxClearanceCertificateData = (): TaxClearanceCertificate => ({
+  issuingAgency: undefined,
+  businessName: undefined,
+  entityId: undefined,
+  taxId: undefined,
+  encryptedTaxId: undefined,
+  taxPin: undefined,
+  address: emptyFormationAddressData,
+});
+
+
+export const TaxClearanceCertificateIssuingAgencies : TaxClearanceCertificateIssuingAgency[] = [
   { name: "New Jersey Board of Public Utilities", displayName: "New Jersey Board of Public Utilities" },
   {
     name: "New Jersey Department of Community Affairs",
@@ -49,3 +77,4 @@ export const TaxClearanceCertificateIssuingAgencies = [
     displayName: "New Jersey Department of Environmental Protection",
   },
 ];
+

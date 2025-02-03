@@ -1,6 +1,6 @@
 import { AnytimeActionElement } from "@/components/tasks/anytime-action/AnytimeActionElement";
 import { AnytimeActionGovernmentContractingElement } from "@/components/tasks/anytime-action/AnytimeActionGovernmentContractingElement";
-import { AnytimeActionTaxClearanceCertificateElement } from "@/components/tasks/anytime-action/AnytimeActionTaxClearanceCertificateElement";
+import { AnytimeActionTaxClearanceCertificateElement } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateElement";
 import { AnytimeActionTask } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
 import { ReactElement } from "react";

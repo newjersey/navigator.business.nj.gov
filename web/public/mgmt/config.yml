@@ -4018,7 +4018,11 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: "Content Body", name: "tbd", widget: "markdown", required: false }
+              - { label: "First Section Header", name: "firstSectionHeader", widget: "string", required: true }
+              - { label: "Second Section Header", name: "secondSectionHeader", widget: "string", required: true }
+              - { label: "Certification Reason Label", name: "certificationReasonLabel", widget: "string", required: true }
+              - { label: "Business Name Label", name: "businessNameLabel", widget: "string", required: true }
+              - { label: "Entity Id Label", name: "entityIdLabel", widget: "string", required: true }
       - label: "Tax Clearance Step 3"
         name: "taxClearanceCertificate-step3"
         file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step3.json"
@@ -4031,9 +4035,16 @@ collections:
             widget: object
             fields:
               - { label: "Main Title Header", name: "mainTitleHeader", widget: "string", required: true }
+              - { label: "First Section Header", name: "firstSectionHeader", widget: "string", required: true }
+              - { label: "Second Section Header", name: "secondSectionHeader", widget: "string", required: true }
+              - { label: "Business Name Label", name: "businessNameLabel", widget: "string", required: true }
+              - { label: "Entity Id Label", name: "entityIdLabel", widget: "string", required: true }
               - { label: "Entity Id Second Label", name: "entityIdSecondLabel", widget: "string", required: true }
+              - { label: "State Tax Id Label", name: "stateTaxIdLabel", widget: "string", required: true }
               - { label: "Address Label", name: "addressLabel", widget: "string", required: true }
-
+              - { label: "Tax Pin Label", name: "taxPinLabel", widget: "string", required: true }
+              - { label: "Certification Reason Label", name: "certificationReasonLabel", widget: "string", required: true }
+              - { label: "Edit Button Text", name: "editButtonText", widget: "string", required: true }
       - label: "Tax Clearance Shared"
         name: "taxClearanceCertificate-shared"
         file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-shared.json"
@@ -4045,14 +4056,10 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: "Reason Section Header", name: "reasonSectionHeader", widget: "string", required: true  }
-              - { label: "Business Section Header", name: "businessSectionHeader", widget: "string", required: true }
-              - { label: "Certification Reason Label", name: "certificationReasonLabel", widget: "string", required: true }
-              - { label: "Business Name Label", name: "businessNameLabel", widget: "string", required: true }
-              - { label: "Entity Id Label", name: "entityIdLabel", widget: "string", required: true }
-              - { label: "State Tax Id Label", name: "stateTaxIdLabel", widget: "string", required: true }
-              - { label: "Tax Pin Label", name: "taxPinLabel", widget: "string", required: true }
-
+              - { label: "Save Button Text", name: "saveButtonText", widget: "string", required: true }
+              - { label: "Continue Button Text", name: "continueButtonText", widget: "string", required: true }
+              - { label: "Back Button Text", name: "backButtonText", widget: "string", required: true }
+              - { label: "Help Button Text", name: "helpButtonText", widget: "string", required: true }
   - name: "page-metadata"
     label: "🟨 PAGE METADATA"
     folder: "content/src"
@@ -4474,7 +4481,6 @@ collections:
             summary: "{{fundingDefaults}}"
             fields:
               - { label: Issuing Agency Label, name: issuingAgencyText, widget: string }
-
           - label: Legal Messages
             name: legalMessageDefaults
             collapsed: true

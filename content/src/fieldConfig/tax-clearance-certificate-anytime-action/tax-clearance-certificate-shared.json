@@ -1,12 +1,8 @@
 {
   "taxClearanceCertificateShared": {
-    "tbd": "taxClearanceCertificateShared",
-    "reasonSectionHeader": "Reason for Certification",
-    "businessSectionHeader":  "Business Information",
-    "certificationReasonLabel": "What agency is requesting the Tax Clearance Certificate?",
-    "businessNameLabel": "Business Name",
-    "entityIdLabel": "Entity ID",
-    "stateTaxIdLabel": "NJ State Tax ID",
-    "taxPinLabel": "Tax Pin"
+    "saveButtonText": "Save & Continue",
+    "continueButtonText": "Continue",
+    "backButtonText": "Back",
+    "helpButtonText": "Help"
   }
 }

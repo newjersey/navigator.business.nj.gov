@@ -6,7 +6,7 @@ import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { ReactElement } from "react";
 import {
   AnytimeActionTaxClearanceCertificateElement
-} from "@/components/tasks/anytime-action/AnytimeActionTaxClearanceCertificateElement";
+} from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateElement";
 import {generateAnytimeActionTask} from "@/test/factories";
 
 const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => {

@@ -1,5 +1,9 @@
 {
   "taxClearanceCertificateStep2": {
-    "tbd": "taxClearanceCertificateStep2"
+    "firstSectionHeader": "Reason for Certification",
+    "secondSectionHeader":  "Business Information",
+    "certificationReasonLabel": "What agency is requesting the Tax Clearance Certificate?",
+    "businessNameLabel": "Business Name",
+    "entityIdLabel": "Entity ID"
   }
 }

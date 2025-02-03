@@ -1,8 +1,8 @@
 import * as materialUi from "@mui/material";
-import {fireEvent, render, screen, within} from "@testing-library/react";
+import {fireEvent, render, screen} from "@testing-library/react";
 import {
   AnytimeActionTaxClearanceCertificateElement
-} from "@/components/tasks/anytime-action/AnytimeActionTaxClearanceCertificateElement";
+} from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateElement";
 import {AnytimeActionLicenseReinstatement, AnytimeActionTask} from "@/lib/types/types";
 import {useMockBusiness} from "@/test/mock/mockUseUserData";
 
