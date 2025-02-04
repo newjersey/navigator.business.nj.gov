@@ -3,20 +3,24 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { AuthContext } from "@/contexts/authContext";
 import { postUserEmailCheck } from "@/lib/api-client/apiClient";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
+import { onGuestSignIn } from "@/lib/auth/signinHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { validateEmail } from "@/lib/utils/helpers";
 import { InputLabel } from "@mui/material";
-import Link from "next/link";
+import { useRouter } from "next/compat/router";
 
-import { useState, type ReactElement } from "react";
+import { useContext, useState, type ReactElement } from "react";
 
 export const LoginEmailCheck = (): ReactElement => {
   const [email, setEmail] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
+  const router = useRouter();
+
+  const { dispatch } = useContext(AuthContext);
 
   const handleSubmit = (email: string): void => {
     const isValidEmail = validateEmail(email);
@@ -88,7 +92,16 @@ export const LoginEmailCheck = (): ReactElement => {
       <hr className="margin-y-3" aria-hidden="true" />
       <p className="link-account-text">
         <span className="margin-right-05">{Config.checkAccountEmailPage.noAccountText}</span>
-        <Link href={ROUTES.onboarding}>{Config.checkAccountEmailPage.linkAccountLinkText}</Link>
+        <UnStyledButton
+          isUnderline
+          onClick={() => {
+            if (!router) return;
+            onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
+          }}
+          isButtonALink
+        >
+          {Config.checkAccountEmailPage.linkAccountLinkText}
+        </UnStyledButton>
       </p>
       <div className="display-flex flex-align-end">
         <p>{Config.checkAccountEmailPage.needHelpText}</p>
