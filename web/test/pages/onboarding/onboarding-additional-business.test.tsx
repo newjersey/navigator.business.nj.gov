@@ -79,8 +79,9 @@ describe("onboarding - additional business", () => {
   });
 
   it("onboards and saves an additional empty business", async () => {
-    const emptyBusiness = createEmptyBusiness();
-    const initialBusiness = generateBusiness({});
+    const userId = "user-id";
+    const emptyBusiness = createEmptyBusiness({ userId: userId });
+    const initialBusiness = generateBusiness({ userId: userId });
     const initialData = generateUserDataForBusiness(initialBusiness);
     expect(Object.keys(initialData.businesses)).toHaveLength(1);
 

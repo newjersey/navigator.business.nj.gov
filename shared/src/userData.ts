@@ -29,14 +29,22 @@ export interface Business {
   readonly taxFilingData: TaxFilingData;
   readonly formationData: FormationData;
   readonly environmentData: EnvironmentData | undefined;
+  readonly versionWhenCreated: number;
   readonly version: number;
+  readonly userId: string;
 }
 
-export const CURRENT_VERSION = 154;
+export const CURRENT_VERSION = 155;
 
-export const createEmptyBusiness = (id?: string): Business => {
+export const createEmptyBusiness = ({
+  userId,
+  businessId,
+}: {
+  userId: string;
+  businessId?: string;
+}): Business => {
   return {
-    id: id || createBusinessId(),
+    id: businessId || createBusinessId(),
     dateCreatedISO: new Date(Date.now()).toISOString(),
     lastUpdatedISO: new Date(Date.now()).toISOString(),
     profileData: createEmptyProfileData(),
@@ -73,6 +81,8 @@ export const createEmptyBusiness = (id?: string): Business => {
     },
     environmentData: undefined,
     version: CURRENT_VERSION,
+    versionWhenCreated: CURRENT_VERSION,
+    userId: userId,
   };
 };
 
@@ -86,7 +96,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
     versionWhenCreated: CURRENT_VERSION,
     currentBusinessId: businessId,
     businesses: {
-      [businessId]: createEmptyBusiness(businessId),
+      [businessId]: createEmptyBusiness({ userId: user.id, businessId }),
     },
   };
 };
