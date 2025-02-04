@@ -1,9 +1,10 @@
 ---
+header: Motor Vehicle Commission EIN
 id: mvc-entity-id
-displayname: mvc-entity-id
-header: Entity ID Number
+displayname: mvc-ein
 ---
+A Motor Vehicle Commission (MVC) Entity Identification Number (EIN) is a 15-digit number that identifies a business in New Jersey's motor vehicle system. The MVC EIN, once called the Corporation Code (Corpcode), is only for business motor vehicle activities.
 
-An Entity ID Number (formerly known as Corp. Code) is a 15-digit number issued upon request by the New Jersey Motor Vehicle Commission (MVC). You need an Entity ID from MVC if your business operates commercial passenger vehicles and it will be required in all documentation you submit to the MVC.
+The MVC EIN is different from the 9-digit [federal Employer Identification Number (EIN)](https://www.irs.gov/businesses/employer-identification-number). The IRS issues the EIN for tax purposes. 
 
-**Important:** The 15-digit Entity ID number issued by MVC will only be used and requested by the MVC and is a different number from the EIN issued by the Internal Revenue Service, and the Entity ID number issued by the New Jersey Department of Treasury.
+You need an MVC EIN to register and title vehicles under your business name. It is also required to get licenses for vehicle-related businesses.
