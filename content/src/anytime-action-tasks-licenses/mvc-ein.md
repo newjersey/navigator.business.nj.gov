@@ -6,8 +6,8 @@ industryIds: []
 sectorIds: []
 urlSlug: mvc-ein
 summaryDescriptionMd: >-
-  You need an `Entity Identification Number (EIN)|mvc-entity-id` from the Motor
-  Vehicle Commission (MVC), once called the Corporation Code(Corpcode), to get:
+  You need a  Motor Vehicle Commission `(MVC) Entity Identification Number
+  (EIN)|mvc-entity-id`, once called the Corporation Code (Corpcode), to get:
 
 
   * Titles for vehicles under a business name
@@ -32,8 +32,9 @@ callToActionLink: "https://www.nj.gov/mvc/pdf/business/BA-8.pdf "
 * Name, driver’s license number, and contact information of the executive requesting the MVC EIN
 * Power of attorney (if the executive is not listed in the corporate documents)
 
-Scan and email your completed application (Form BA-8) and accompanying documents to: MVC.MVCCorpcodes@mvc.nj.gov.
+Scan and email your completed application (Form BA-8) and accompanying documents to: mvc.mvccorpcodes@mvc.nj.gov.
 
+&nbsp;
 
 You can also mail your completed application and accompanying documents to:
 
