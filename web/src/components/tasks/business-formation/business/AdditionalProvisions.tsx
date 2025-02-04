@@ -108,7 +108,7 @@ export const AdditionalProvisions = (): ReactElement => {
                   onClick={(): void => removeProvision(index)}
                   className="display-flex flex-column flex-justify-center"
                 >
-                  <Icon className="font-body-lg" iconName="delete" label="remove provision" />
+                  {Config.formation.general.removeSectionText}
                 </UnStyledButton>
               </div>
             </div>

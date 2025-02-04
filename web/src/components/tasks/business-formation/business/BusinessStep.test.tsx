@@ -308,7 +308,7 @@ describe("Formation - BusinessStep", () => {
       expect(
         screen.getByText(Config.formation.fields.additionalProvisions.addButtonText)
       ).toBeInTheDocument();
-      expect(screen.queryByLabelText("remove provision")).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.general.removeSectionText)).not.toBeInTheDocument();
       expect(screen.queryByLabelText("provision 0")).not.toBeInTheDocument();
     });
 
@@ -318,7 +318,7 @@ describe("Formation - BusinessStep", () => {
       expect(
         screen.getByText(Config.formation.fields.additionalProvisions.addButtonText)
       ).toBeInTheDocument();
-      expect(screen.queryByLabelText("remove provision")).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.general.removeSectionText)).not.toBeInTheDocument();
       expect(screen.queryByLabelText("provision 0")).not.toBeInTheDocument();
     });
 
@@ -327,7 +327,7 @@ describe("Formation - BusinessStep", () => {
       expect(
         screen.queryByText(Config.formation.fields.additionalProvisions.addButtonText)
       ).not.toBeInTheDocument();
-      expect(screen.queryAllByLabelText("remove provision")).toHaveLength(2);
+      expect(screen.queryAllByText(Config.formation.general.removeSectionText)).toHaveLength(2);
       expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
       expect(screen.getByLabelText("Provisions 1")).toBeInTheDocument();
     });
@@ -338,7 +338,7 @@ describe("Formation - BusinessStep", () => {
       expect(
         screen.queryByText(Config.formation.fields.additionalProvisions.addButtonText)
       ).not.toBeInTheDocument();
-      expect(screen.getByLabelText("remove provision")).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.general.removeSectionText)).toBeInTheDocument();
       expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
     });
 
@@ -346,7 +346,7 @@ describe("Formation - BusinessStep", () => {
       await getPageHelper({}, { additionalProvisions: [] });
       fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addButtonText));
       fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText));
-      expect(screen.queryAllByLabelText("remove provision")).toHaveLength(2);
+      expect(screen.queryAllByText(Config.formation.general.removeSectionText)).toHaveLength(2);
       expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
       expect(screen.getByLabelText("Provisions 1")).toBeInTheDocument();
     });
@@ -358,7 +358,7 @@ describe("Formation - BusinessStep", () => {
           additionalProvisions: ["provision1", "provision2", "provision3"],
         }
       );
-      const removeProvision2Button = screen.getAllByLabelText("remove provision")[1];
+      const removeProvision2Button = screen.getAllByText(Config.formation.general.removeSectionText)[1];
       fireEvent.click(removeProvision2Button);
       await page.submitBusinessStep();
       expect(currentBusiness().formationData.formationFormData.additionalProvisions).toEqual([

@@ -1,13 +1,11 @@
 import { Content } from "@/components/Content";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { Icon } from "@/components/njwds/Icon";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext, useState } from "react";
 
@@ -96,11 +94,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
                   onClick={(): void => removeEntry()}
                   className="display-flex flex-column flex-justify-center"
                 >
-                  <Icon
-                    className="font-body-lg"
-                    label={`remove ${camelCaseToSentence(props.fieldName).toLowerCase()}`}
-                    iconName="delete"
-                  />
+                  {Config.formation.general.removeSectionText}
                 </UnStyledButton>
               </div>
             )}

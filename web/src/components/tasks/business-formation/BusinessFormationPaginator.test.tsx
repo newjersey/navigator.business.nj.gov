@@ -291,7 +291,7 @@ describe("<BusinessFormationPaginator />", () => {
           "provision2",
         ]);
         await page.stepperClickToBusinessStep();
-        expect(screen.getByLabelText("remove provision")).toBeInTheDocument();
+        expect(screen.getByText(Config.formation.general.removeSectionText)).toBeInTheDocument();
       });
 
       describe("business name step", () => {
