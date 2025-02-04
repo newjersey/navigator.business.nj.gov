@@ -20,7 +20,8 @@
     "invokeNewsletter": "IS_OFFLINE=true sls invoke local --function govDelivery",
     "start:wiremock": "wiremock --root-dir ./wiremock --port 9000",
     "start:wiremock:with-port": "wiremock --root-dir ./wiremock",
-    "test": "jest",
+    "test": "jest --silent",
+    "test-verbose": "jest",
     "typecheck": "tsc --noemit"
   },
   "engines": {

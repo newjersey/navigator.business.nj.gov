@@ -3,10 +3,11 @@ import { ElevatorSafetyRegistrationClient } from "@client/dynamics/elevator-safe
 import { HousingPropertyInterestClient } from "@client/dynamics/housing/types";
 import { AccessTokenClient } from "@client/dynamics/types";
 import { ElevatorSafetyRegistrationStatus } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 
 jest.mock("axios");
 jest.mock("winston");
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("DynamicsElevatorSafetyRegistrationStatusClient", () => {
   let client: ElevatorSafetyRegistrationStatus;
@@ -36,7 +37,7 @@ describe("DynamicsElevatorSafetyRegistrationStatusClient", () => {
       getElevatorRegistrationsForBuilding: jest.fn(),
     };
 
-    client = DynamicsElevatorSafetyRegistrationStatusClient(logger, {
+    client = DynamicsElevatorSafetyRegistrationStatusClient(DEBUG ? logger : DummyLogWriter, {
       accessTokenClient: stubAccessTokenClient,
       housingPropertyInterestClient: stubHousingClient,
       elevatorRegistrationClient: stubElevatorRegistrationClient,
