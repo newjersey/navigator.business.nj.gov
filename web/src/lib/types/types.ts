@@ -24,6 +24,7 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
 import { Business } from "@businessnjgovnavigator/shared/userData";
+import {TaxClearanceCertificateData} from "@businessnjgovnavigator/shared/taxClearanceCertificate";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types
@@ -533,6 +534,7 @@ export interface UpdateQueue {
   queueProfileData: (profileData: Partial<ProfileData>) => UpdateQueue;
   queuePreferences: (preferences: Partial<Preferences>) => UpdateQueue;
   queueTaxFilingData: (taxFilingData: Partial<TaxFilingData>) => UpdateQueue;
+  queueTaxClearanceCertificateData: (taxClearanceCertificateData: Partial<TaxClearanceCertificateData>) => UpdateQueue;
   queueFormationData: (formationData: Partial<FormationData>) => UpdateQueue;
   queueFormationFormData: (formatdionFormData: Partial<FormationFormData>) => UpdateQueue;
   queueTaskItemChecklist: (taskItemChecklist: Record<string, boolean>) => UpdateQueue;

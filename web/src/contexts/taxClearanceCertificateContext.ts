@@ -1,8 +1,11 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-import {emptyTaxClearanceCertificateData, TaxClearanceCertificate} from "../../../shared/src/taxClearanceCertificate";
+import {
+  emptyTaxClearanceCertificate,
+  TaxClearanceCertificate
+} from "@businessnjgovnavigator/shared/taxClearanceCertificate";
 
 export interface TaxClearanceCertificateState {
-  taxClearanceCertificateData: TaxClearanceCertificate
+  taxClearanceCertificate: TaxClearanceCertificate
 }
 
 interface TaxClearanceCertificateContextType {
@@ -12,7 +15,7 @@ interface TaxClearanceCertificateContextType {
 
 export const TaxClearanceCertificateContext = createContext<TaxClearanceCertificateContextType>({
   taxClearanceCertificateState: {
-    taxClearanceCertificateData: emptyTaxClearanceCertificateData(),
+    taxClearanceCertificate: emptyTaxClearanceCertificate(),
   },
   setTaxClearanceCertificateState: () => {},
 });

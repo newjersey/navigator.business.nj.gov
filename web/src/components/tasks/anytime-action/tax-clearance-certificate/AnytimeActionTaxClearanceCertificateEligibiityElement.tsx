@@ -38,7 +38,7 @@ export const AnytimeActionTaxClearanceCertificateEligibiityElement = (): ReactEl
               taxClearances={TaxClearanceCertificateIssuingAgencies}
               fieldName={"taxClearanceCertificateIssuingAgencies"}
               error={false}
-              value={taxClearanceCertificateState.taxClearanceCertificateData.issuingAgency}
+              value={taxClearanceCertificateState.taxClearanceCertificate.issuingAgency}
               onSelect={(value: TaxClearanceCertificateIssuingAgency | undefined): void => {
                 setTaxClearanceCertificateState((prevTaxClearanceData: TaxClearanceCertificate) => {
                   return { ...prevTaxClearanceData, issuingAgency: value };
@@ -60,7 +60,7 @@ export const AnytimeActionTaxClearanceCertificateEligibiityElement = (): ReactEl
           <strong>{Config.taxClearanceCertificateStep2.businessNameLabel}</strong>
           <GenericTextField
             inputWidth={"full"}
-            value={taxClearanceCertificateState.taxClearanceCertificateData.businessName}
+            value={taxClearanceCertificateState.taxClearanceCertificate.businessName}
             onValidation={undefined}
             fieldName={"businessName"}
             ariaLabel={"Business Name"}
@@ -76,7 +76,7 @@ export const AnytimeActionTaxClearanceCertificateEligibiityElement = (): ReactEl
           <strong>{Config.taxClearanceCertificateStep2.entityIdLabel}</strong>
           <GenericTextField
             inputWidth={"full"}
-            value={taxClearanceCertificateState.taxClearanceCertificateData.entityId}
+            value={taxClearanceCertificateState.taxClearanceCertificate.entityId}
             onValidation={undefined}
             fieldName={"entityId"}
             ariaLabel={"Entity Id"}

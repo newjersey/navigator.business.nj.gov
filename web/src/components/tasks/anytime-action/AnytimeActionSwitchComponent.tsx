@@ -10,15 +10,26 @@ interface Props {
 }
 
 export const AnytimeActionSwitchComponent = (props: Props): ReactElement => {
-  return rswitch(props.anytimeActionTask.filename, {
-    "government-contracting": (
-      <AnytimeActionGovernmentContractingElement anytimeAction={props.anytimeActionTask} />
-    ),
-    "tax-clearance-certificate": (
-      <AnytimeActionTaxClearanceCertificateElement
-        anytimeAction={props.anytimeActionTask}
-      />
-    ),
-    default: <AnytimeActionElement anytimeAction={props.anytimeActionTask} />,
-  });
+  const taxClearanceCertificateEnabled = process.env.FEATURE_TAX_CLEARANCE_CERTIFICATE === "true";
+
+  if (taxClearanceCertificateEnabled) {
+    return rswitch(props.anytimeActionTask.filename, {
+      "government-contracting": (
+        <AnytimeActionGovernmentContractingElement anytimeAction={props.anytimeActionTask} />
+      ),
+      "tax-clearance-certificate": (
+        <AnytimeActionTaxClearanceCertificateElement
+          anytimeAction={props.anytimeActionTask}
+        />
+      ),
+      default: <AnytimeActionElement anytimeAction={props.anytimeActionTask} />,
+    });
+  }else {
+    return rswitch(props.anytimeActionTask.filename, {
+      "government-contracting": (
+        <AnytimeActionGovernmentContractingElement anytimeAction={props.anytimeActionTask}/>
+      ),
+      default: <AnytimeActionElement anytimeAction={props.anytimeActionTask}/>,
+    });
+  }
 };

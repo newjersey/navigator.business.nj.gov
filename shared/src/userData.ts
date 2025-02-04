@@ -5,6 +5,7 @@ import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";
 import { createEmptyProfileData, ProfileData } from "./profileData";
 import { TaxFilingData } from "./taxFiling";
+import {TaxClearanceCertificateData } from "./taxClearanceCertificate";
 
 export interface UserData {
   readonly user: BusinessUser;
@@ -27,6 +28,7 @@ export interface Business {
   readonly licenseData: LicenseData | undefined;
   readonly preferences: Preferences;
   readonly taxFilingData: TaxFilingData;
+  readonly taxClearanceCertificateData: TaxClearanceCertificateData;
   readonly formationData: FormationData;
   readonly environmentData: EnvironmentData | undefined;
   readonly versionWhenCreated: number;
@@ -34,7 +36,7 @@ export interface Business {
   readonly userId: string;
 }
 
-export const CURRENT_VERSION = 155;
+export const CURRENT_VERSION = 156;
 
 export const createEmptyBusiness = ({
   userId,
@@ -69,6 +71,17 @@ export const createEmptyBusiness = ({
       lastUpdatedISO: undefined,
       registeredISO: undefined,
       filings: [],
+    },
+    taxClearanceCertificateData: {
+      issuingAgency: undefined,
+      businessName: undefined,
+      addressLine1: undefined,
+      addressLine2: undefined,
+      addressCity: undefined,
+      addressState: undefined,
+      addressProvince: undefined,
+      addressZipCode: undefined,
+      addressCountry: undefined
     },
     formationData: {
       formationFormData: createEmptyFormationFormData(),

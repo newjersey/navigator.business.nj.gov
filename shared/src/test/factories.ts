@@ -42,6 +42,7 @@ import { arrayOfSectors, SectorType } from "../sector";
 import { TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
 import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
+import {TaxClearanceCertificateData} from "../taxClearanceCertificate";
 
 export const generateFormationSubmitResponse = (
   overrides: Partial<FormationSubmitResponse>
@@ -353,6 +354,21 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
   };
 };
 
+export const generateTaxClearanceCertificateData = (overrides: Partial<TaxClearanceCertificateData >): TaxClearanceCertificateData  => {
+  return {
+    issuingAgency: undefined,
+    businessName: undefined,
+    addressLine1: undefined,
+    addressLine2: undefined,
+    addressCity: undefined,
+    addressState: undefined,
+    addressProvince: undefined,
+    addressZipCode: undefined,
+    addressCountry: undefined,
+    ...overrides,
+  };
+};
+
 export const generateLandQuestionnaireData = (
   overrides: Partial<LandQuestionnaireData>
 ): LandQuestionnaireData => {
@@ -456,6 +472,7 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
     licenseData: generateLicenseData({}),
     preferences: generatePreferences({}),
     taxFilingData: generateTaxFilingData({}),
+    taxClearanceCertificateData: generateTaxClearanceCertificateData({}),
     environmentData: generateEnvironmentData({}),
     version: CURRENT_VERSION,
     userId: generateUser({}).id,

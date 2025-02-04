@@ -10,6 +10,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
 import { FormationData, FormationFormData } from "@businessnjgovnavigator/shared/formationData";
+import {TaxClearanceCertificateData} from "@businessnjgovnavigator/shared/taxClearanceCertificate";
 
 export class UpdateQueueFactory implements UpdateQueue {
   private internalQueue: UserData;
@@ -166,6 +167,25 @@ export class UpdateQueueFactory implements UpdateQueue {
 
     return this;
   }
+
+  queueTaxClearanceCertificateData(taxClearanceCertificateData: Partial<TaxClearanceCertificateData>): UpdateQueue {
+    this.internalQueue = {
+      ...this.internalQueue,
+      businesses: {
+        ...this.internalQueue.businesses,
+        [this.internalQueue.currentBusinessId]: {
+          ...this.currentBusiness(),
+          taxClearanceCertificateData: {
+            ...this.currentBusiness().taxClearanceCertificateData,
+            ...taxClearanceCertificateData,
+          },
+        },
+      },
+    };
+
+    return this;
+  }
+
 
   queueEnvironmentData(environmentData: Partial<EnvironmentData>): UpdateQueue {
     this.internalQueue = {

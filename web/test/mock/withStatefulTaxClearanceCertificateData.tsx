@@ -9,12 +9,12 @@ export const WithStatefulTaxClearanceCertificateData = ({
   children: ReactNode;
   initialData: TaxClearanceCertificate;
 }): ReactElement => {
-  const [taxClearanceCertificateData, setTaxClearanceCertificateData] = useState<TaxClearanceCertificate>(initialData);
+  const [taxClearanceCertificate, setTaxClearanceCertificate] = useState<TaxClearanceCertificate>(initialData);
 
   return (
     <TaxClearanceCertificateContext.Provider value={{
-      taxClearanceCertificateState: {taxClearanceCertificateData: taxClearanceCertificateData},
-      setTaxClearanceCertificateState: setTaxClearanceCertificateData,
+      taxClearanceCertificateState: {taxClearanceCertificate: taxClearanceCertificate},
+      setTaxClearanceCertificateState: setTaxClearanceCertificate,
     }}>
           {children}
     </TaxClearanceCertificateContext.Provider>

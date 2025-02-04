@@ -1,32 +1,47 @@
-import {emptyFormationAddressData, FormationAddress} from "./formationData";
+import { CountriesShortCodes } from "./countries";
+import { StateObject } from "./states";
 
 export type TaxClearanceCertificateIssuingAgency = {
   name: string;
   displayName: string;
 };
 
-export type TaxClearanceCertificate = {
+export type TaxClearanceCertificateData = {
   issuingAgency: TaxClearanceCertificateIssuingAgency | undefined;
   businessName: string | undefined;
+  addressLine1: string | undefined;
+  addressLine2: string | undefined;
+  addressCity: string | undefined;
+  addressState: StateObject | undefined;
+  addressProvince: string | undefined;
+  addressZipCode: string | undefined;
+  addressCountry: CountriesShortCodes | undefined;
+};
+
+export interface TaxClearanceCertificate extends TaxClearanceCertificateData {
   entityId: string | undefined;
   taxId: string | undefined;
   encryptedTaxId: string | undefined;
   taxPin: string | undefined;
-  address: FormationAddress | undefined
-}
+};
 
-export const emptyTaxClearanceCertificateData = (): TaxClearanceCertificate => ({
+export const emptyTaxClearanceCertificate = (): TaxClearanceCertificate => ({
   issuingAgency: undefined,
   businessName: undefined,
   entityId: undefined,
   taxId: undefined,
   encryptedTaxId: undefined,
   taxPin: undefined,
-  address: emptyFormationAddressData,
+  addressLine1: undefined,
+  addressLine2: undefined,
+  addressCity: undefined,
+  addressState: undefined,
+  addressProvince: undefined,
+  addressZipCode: undefined,
+  addressCountry: undefined,
 });
 
-
-export const TaxClearanceCertificateIssuingAgencies : TaxClearanceCertificateIssuingAgency[] = [
+export const TaxClearanceCertificateIssuingAgencies: TaxClearanceCertificateIssuingAgency[] = [
   { name: "New Jersey Board of Public Utilities", displayName: "New Jersey Board of Public Utilities" },
   {
     name: "New Jersey Department of Community Affairs",
@@ -77,4 +92,3 @@ export const TaxClearanceCertificateIssuingAgencies : TaxClearanceCertificateIss
     displayName: "New Jersey Department of Environmental Protection",
   },
 ];
-
