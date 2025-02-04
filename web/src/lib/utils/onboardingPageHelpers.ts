@@ -1,7 +1,6 @@
 import { OnboardingFlow } from "@/components/onboarding/OnboardingFlows";
 import { getMergedConfig } from "@/contexts/configContext";
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
-import { Business } from "@businessnjgovnavigator/shared/userData";
+import { Business, LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared";
 import { QUERY_PARAMS_VALUES } from "../domain-logic/routes";
 import { FlowType, Page } from "../types/types";
 import { getFlow, templateEval } from "./helpers";
@@ -16,6 +15,10 @@ export const mapFlowQueryToPersona: Record<QUERY_PARAMS_VALUES["flow"], FlowType
 
 export const industryQueryParamIsValid = (industryId: string | undefined): boolean => {
   return !!LookupIndustryById(industryId).id;
+};
+
+export const sectorQueryParamIsValid = (sectorId: string): boolean => {
+  return !!LookupSectorTypeById(sectorId).id;
 };
 
 export const flowQueryParamIsValid = (flow: string): boolean => {
