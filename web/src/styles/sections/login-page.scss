@@ -17,13 +17,14 @@
 
   .MuiFormLabel-root {
     color: variables.$base-darkest;
+    font-weight: bold;
+  }
+
+  p {
+    color: variables.$base-dark;
   }
 }
 
-.my-acccount-login-text {
+.my-account-login-text {
   color: variables.$primary;
-}
-
-.link-account-text a {
-  display: inline-block;
 }
