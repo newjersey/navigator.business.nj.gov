@@ -178,7 +178,9 @@ export const ApiFormationHealth: UserData = {
         lastVisitedPageIndex: 0,
       },
       lastUpdatedISO: getCurrentDateISOString(),
+      userId: "test-user-id-17591518",
       version: CURRENT_VERSION,
+      versionWhenCreated: -1,
     },
   },
 };
