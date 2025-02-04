@@ -287,7 +287,7 @@ describe("profile - starting business", () => {
   });
 
   it("updates the user data on save", async () => {
-    const emptyBusiness = createEmptyBusiness();
+    const emptyBusiness = createEmptyBusiness({ userId: "user-id" });
     const initialBusiness: Business = {
       ...emptyBusiness,
       profileData: {

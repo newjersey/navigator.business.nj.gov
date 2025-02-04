@@ -458,6 +458,8 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
     taxFilingData: generateTaxFilingData({}),
     environmentData: generateEnvironmentData({}),
     version: CURRENT_VERSION,
+    userId: generateUser({}).id,
+    versionWhenCreated: CURRENT_VERSION,
     profileData,
     formationData,
     ...overrides,
@@ -487,7 +489,7 @@ export const generateUserDataForBusiness = (business: Business, overrides?: Part
     versionWhenCreated: -1,
     dateCreatedISO: getCurrentDateISOString(),
     lastUpdatedISO: getCurrentDateISOString(),
-    user: generateUser({}),
+    user: generateUser({ id: business.userId }),
     currentBusinessId: business.id,
     businesses: {
       [business.id]: business,

@@ -154,6 +154,7 @@ import { migrate_v150_to_v151 } from "@db/migrations/v151_extract_business_data"
 import { migrate_v151_to_v152 } from "@db/migrations/v152_add_land_to_environment_data";
 import { migrate_v152_to_v153 } from "@db/migrations/v153_add_air_to_environment_data";
 import { migrate_v153_to_v154 } from "@db/migrations/v154_add_business_operating_length_and_nonprofit_status";
+import { migrate_v154_to_v155 } from "@db/migrations/v155_add_user_id_and_version_to_business";
 
 export type MigrationFunction = (data: any) => any;
 
@@ -312,6 +313,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v151_to_v152,
   migrate_v152_to_v153,
   migrate_v153_to_v154,
+  migrate_v154_to_v155,
 ];
 
-export { generatev154UserData as CURRENT_GENERATOR } from "@db/migrations/v154_add_business_operating_length_and_nonprofit_status";
+export { generatev155UserData as CURRENT_GENERATOR } from "@db/migrations/v155_add_user_id_and_version_to_business";
