@@ -19,7 +19,7 @@ export const NavBarDesktopHomeLogo = (props: Props): ReactElement => {
         <NavBarVerticalLine />
       </div>
       {props.isLoginPage ? (
-        <span className="my-acccount-login-text">My Account</span>
+        <span className="my-account-login-text">My Account</span>
       ) : (
         <NavBarDashboardLink
           linkText={Config.navigationDefaults.navBarMyAccountText}
