@@ -90,7 +90,7 @@ export const LoginEmailCheck = (): ReactElement => {
         {Config.checkAccountEmailPage.inputButton}
       </PrimaryButton>
       <hr className="margin-y-3" aria-hidden="true" />
-      <p className="link-account-text">
+      <p>
         <span className="margin-right-05">{Config.checkAccountEmailPage.noAccountText}</span>
         <UnStyledButton
           isUnderline
