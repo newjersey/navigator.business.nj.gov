@@ -178,6 +178,7 @@ export type Funding = {
   programPurpose: string | null | undefined;
   agencyContact: string | null | undefined;
   isNonprofitOnly: boolean | undefined | null;
+  priority: boolean | undefined;
 };
 
 export type Certification = {

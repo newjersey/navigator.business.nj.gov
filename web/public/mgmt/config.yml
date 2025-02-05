@@ -1682,6 +1682,10 @@ collections:
         name: "maxEmployeesRequired"
         required: false
         widget: number
+      - label: "Priority"
+        name: "priority"
+        widget: "boolean"
+        required: false
 
   - name: "archived-funding-opportunities"
     label: "Fund Opps - Archived"

@@ -284,6 +284,7 @@ export const generateFunding = (overrides: Partial<Funding>): Funding => {
     programPurpose: `some-purpose-${randomInt()}`,
     agencyContact: `some-contact-${randomInt()}`,
     isNonprofitOnly: false,
+    priority: false,
     ...overrides,
   };
 };
