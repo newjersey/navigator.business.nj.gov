@@ -13,7 +13,7 @@ export const ROUTES = {
   accountSetup: "/account-setup",
   starterKits: "/starter-kits",
   login: "/login",
-  fundings: "/fundings",
+  njeda: "/njeda",
 };
 
 export interface QUERY_PARAMS_VALUES {

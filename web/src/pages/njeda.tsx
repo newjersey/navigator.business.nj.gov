@@ -32,7 +32,7 @@ interface Props {
   noAuth: boolean;
 }
 
-const FundingsPage = (props: Props): ReactElement => {
+const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const router = useRouter();
   const currentUserData = createEmptyUserData(createEmptyUser());
@@ -309,4 +309,4 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
   };
 };
 
-export default FundingsPage;
+export default NJEDAFundingsOnboardingPaage;
