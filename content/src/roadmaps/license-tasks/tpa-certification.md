@@ -1,10 +1,12 @@
 ---
-notesMd: "1.23.25: Unpublishing based on SME feedback. Will work to get changes
-  made and sent back to SME."
+notesMd: >-
+  2.5.25: Updating with SME input.
+
+  1.23.25: Unpublishing based on SME feedback. Will work to get changes made and sent back to SME.
 id: tpa-certification
 displayname: tpa-certification
 urlSlug: tpa-certification
-name: Get Your Branch Therapeutic Pharmaceutical Agents Certificate, if Applicable
+name: Get Your Branch Office Certificate, if Applicable
 webflowName: "Healthcare: Therapeutic Pharmaceutical Agents Certificate"
 summaryDescriptionMd: As a licensed optometrist who prescribes or administers
   therapeutic pharmaceutical agents (TPA) to patients, you need to have a valid
