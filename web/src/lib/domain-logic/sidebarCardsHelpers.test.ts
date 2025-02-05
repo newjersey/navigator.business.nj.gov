@@ -237,6 +237,22 @@ describe("sidebarCard Helpers", () => {
         expect(result.length).toEqual(5);
         expect(result).toEqual([funding2, funding1, funding3, funding4, funding5]);
       });
+
+      it("bubbles priority fundings to the top of list while maintaining previous sort", () => {
+        const userData = generateUserData({
+          user: generateUser({}),
+        });
+        const funding1 = generateFunding({ name: "Bca", status: "deadline" });
+        const funding2 = generateFunding({ name: "Abc", status: "deadline", priority: undefined });
+        const funding3 = generateFunding({ name: "cba", status: "deadline", priority: true });
+        const funding4 = generateFunding({ name: "abc", status: "first come, first serve", priority: false });
+        const funding5 = generateFunding({ name: "bca", status: "rolling application", priority: true });
+        const fundings = [funding5, funding2, funding3, funding1, funding4];
+
+        const result = sortFundingsForUser(fundings, userData);
+        expect(result.length).toEqual(5);
+        expect(result).toEqual([funding3, funding5, funding2, funding1, funding4]);
+      });
     });
   });
 
