@@ -1,3 +1,18 @@
+# [2025.3.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.2.1...v2025.3.0) (2025-02-05)
+
+
+### Bug Fixes
+
+* [[#188838423](https://github.com/newjersey/navigator.business.nj.gov/issues/188838423)] from login page to onboarding working again ([56c9cb4](https://github.com/newjersey/navigator.business.nj.gov/commit/56c9cb4a9327c551d4d571208e39b4fdb04093f0))
+* [[#188838885](https://github.com/newjersey/navigator.business.nj.gov/issues/188838885)] Login Page Design QA ([f92d3cb](https://github.com/newjersey/navigator.business.nj.gov/commit/f92d3cb2e6506a817417e2b57b8eae7bd192ca67))
+* [[#188844549](https://github.com/newjersey/navigator.business.nj.gov/issues/188844549)] add userId, versionWhenCreated and version to business object ([5a182b7](https://github.com/newjersey/navigator.business.nj.gov/commit/5a182b7361d72179e24850b486ff9c8624e09876))
+* added spelling exception for Corpcode ([3461332](https://github.com/newjersey/navigator.business.nj.gov/commit/34613327ae952904a99ccfae864f74899afbf265))
+
+
+### Features
+
+* [[#188838885](https://github.com/newjersey/navigator.business.nj.gov/issues/188838885)] login page design review updates ([ad80076](https://github.com/newjersey/navigator.business.nj.gov/commit/ad800767ca65ffcc47084f6426875ed7167d728b))
+
 ## [2025.2.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.2.0...v2025.2.1) (2025-01-31)
 
 
