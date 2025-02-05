@@ -90,29 +90,32 @@ export const LoginEmailCheck = (): ReactElement => {
         {Config.checkAccountEmailPage.inputButton}
       </PrimaryButton>
       <hr className="margin-y-3" aria-hidden="true" />
-      <p>
-        <span className="margin-right-05">{Config.checkAccountEmailPage.noAccountText}</span>
-        <UnStyledButton
-          isUnderline
-          onClick={() => {
-            if (!router) return;
-            onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
-          }}
-          isButtonALink
-        >
-          {Config.checkAccountEmailPage.linkAccountLinkText}
-        </UnStyledButton>
-      </p>
-      <div className="display-flex flex-align-end">
-        <p>{Config.checkAccountEmailPage.needHelpText}</p>
-        <UnStyledButton
-          isUnderline
-          isIntercomEnabled
-          onClick={analytics.event.check_account_help_button.click.open_live_chat}
-          className="margin-left-05"
-        >
-          {Config.checkAccountEmailPage.intercomChatText}
-        </UnStyledButton>
+      <div className="help-text-container">
+        <p>
+          <span className="margin-right-05">{Config.checkAccountEmailPage.noAccountText}</span>
+          <UnStyledButton
+            className="margin-0-override"
+            isUnderline
+            onClick={() => {
+              if (!router) return;
+              onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
+            }}
+            isButtonALink
+          >
+            {Config.checkAccountEmailPage.linkAccountLinkText}
+          </UnStyledButton>
+        </p>
+        <div className="need-help-text display-flex flex-align-end margin-top-1">
+          <p>{Config.checkAccountEmailPage.needHelpText}</p>
+          <UnStyledButton
+            isUnderline
+            isIntercomEnabled
+            onClick={analytics.event.check_account_help_button.click.open_live_chat}
+            className="margin-left-05"
+          >
+            {Config.checkAccountEmailPage.intercomChatText}
+          </UnStyledButton>
+        </div>
       </div>
     </div>
   );

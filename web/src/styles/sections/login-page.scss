@@ -23,6 +23,15 @@
   p {
     color: variables.$base-dark;
   }
+  .need-help-text button {
+    margin-top: 0;
+  }
+
+  @media (max-width: variables.$sm) {
+    .help-text-container {
+      max-width: 16.25rem;
+    }
+  }
 }
 
 .my-account-login-text {
