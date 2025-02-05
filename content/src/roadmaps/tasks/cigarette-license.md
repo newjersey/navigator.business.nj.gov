@@ -47,7 +47,7 @@ summaryDescriptionMd: >-
 
   * Sell cigarettes
 
-  * Have a vending machine with cigarettes
+  * Own a vending machine with cigarettes
 
   * Operate as a manufacturer sales representative
 
@@ -97,7 +97,7 @@ For more information on taxes and other requirements visit the [Cigarette Tax pa
 
 &nbsp;
 
-Mail your completed application and any fees to: 
+**Mail your completed application and any fees to:**
 
 Division of Revenue and Enterprise Services
 

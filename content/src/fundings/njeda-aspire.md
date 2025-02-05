@@ -47,7 +47,7 @@ publishStageArchive: ""
 
 * Total award cap of $42M, but residential projects also receiving Low-Income Housing Tax Credits (LIHTC), or projects located in certain economically disadvantaged locations may receive up to $60M
 * Tax credits equal to 45% of project costs up to $42M
-* Commercial projects in a Government Restricted Municipalities (GRM) (These municipalities include: Atlantic City, Paterson and Trenton) can receive tax credits up to 50% of costs in project support
+* Commercial projects in a Government Restricted Municipalities (GRM) (These municipalities include: Atlantic City, Camden, East Orange, New Brunswick, Paterson, and Trenton) can receive tax credits up to 55% of costs in project support
 * Newly constructed residential projects that are also utilizing 4% LIHTCs can receive tax credits for up to 60% of project costs
 * Projects using LIHTC or any other project in a `Qualified Incentive Track|qit-njeda` (QIT), GRM, or municipality with a [Municipal Revitalization Index](https://nj.gov/dca/home/MuniRevitIndex.html) (MRI) distress score of at least 50, can receive tax credits up to $60M
 

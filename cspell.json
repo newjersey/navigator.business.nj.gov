@@ -29,6 +29,7 @@
     "CLARB",
     "Con-Con",
     "Corrosivity",
+    "Corpcode",
     "corpwatch",
     "covest",
     "cpcn",
@@ -210,7 +211,8 @@
     "LSRPs",
     "sitehazardous",
     "womenled",
-    "Yamileth"
+    "Yamileth",
+    "Rutger"
   ],
   "ignorePaths": [
     "node_modules/**",
