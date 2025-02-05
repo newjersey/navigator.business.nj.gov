@@ -8,12 +8,14 @@ displayname: tpa-certification
 urlSlug: tpa-certification
 name: Get Your Branch Office Certificate, if Applicable
 webflowName: "Healthcare: Therapeutic Pharmaceutical Agents Certificate"
-summaryDescriptionMd: As a licensed optometrist who prescribes or administers
-  therapeutic pharmaceutical agents (TPA) to patients, you need to have a valid
-  TPA certification. Each branch location where you use TPAs must be registered
-  and renewed separately.
-industryId: healthcare
-callToActionText: Apply for My Branch TPA Certificate
+summaryDescriptionMd: When registering a branch office, you will apply for both
+  your Optometry license (OA) and the appropriate therapeutic pharmaceutical
+  agents (TPA) certification — either OM (Oral TPA) or TO (the older TPA
+  certification). Both licenses ensure you are authorized to practice and
+  prescribe as necessary at your branch location.
+industryId:
+  - healthcare
+callToActionText: Apply for My Branch Office TPA Certificate
 callToActionLink: https://www.njconsumeraffairs.gov/opt/Applications/Application-for-Branch-Office-Certificate.pdf
 licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs
@@ -55,6 +57,6 @@ You can’t administer or prescribe TPAs to patients in any branch office that i
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A TPA certification number.
+A branch office TPA certification number.
 
 :::
