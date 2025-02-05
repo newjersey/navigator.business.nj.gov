@@ -6049,7 +6049,7 @@ collections:
     files:
       - label: "Funding Onboarding Modal Config"
         name: "funding-onboarding-modal-config"
-        file: "content/src/fieldConfig/fundings-onboarding.json"
+        file: "content/src/fieldConfig/njeda-fundings-onboarding.json"
         editor:
           preview: false
         fields:

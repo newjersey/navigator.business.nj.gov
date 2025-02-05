@@ -155,7 +155,7 @@ export const onGuestSignIn = async ({
         push(ROUTES.onboarding);
         break;
       }
-      case ROUTES.fundings: {
+      case ROUTES.njeda: {
         break;
       }
       default: {
