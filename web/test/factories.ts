@@ -500,21 +500,19 @@ export const randomNegativeFilteredIndustry = (func: (industry: Industry) => boo
   });
 };
 
-export const randomHomeBasedIndustry = (excludeIndustryId?: string): string => {
+export const randomHomeBasedIndustry = (excludedIndustryIds?: string[]): string => {
   const filter = (it: Industry): boolean => {
     const filterCriteria = !!it.industryOnboardingQuestions.canBeHomeBased && it.isEnabled;
-
-    return excludeIndustryId ? filterCriteria && it.id !== excludeIndustryId : filterCriteria;
+    return excludedIndustryIds ? filterCriteria && !excludedIndustryIds.includes(it.id) : filterCriteria;
   };
   return filterRandomIndustry(filter).id;
 };
 
-export const randomNonHomeBasedIndustry = (excludeIndustryId?: string): string => {
+export const randomNonHomeBasedIndustry = (excludedIndustryIds?: string[]): string => {
   const filter = (it: Industry): boolean => {
     const filterCriteria =
       !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation && it.isEnabled;
-
-    return excludeIndustryId ? filterCriteria && it.id !== excludeIndustryId : filterCriteria;
+    return excludedIndustryIds ? filterCriteria && !excludedIndustryIds.includes(it.id) : filterCriteria;
   };
   return filterRandomIndustry(filter).id;
 };
