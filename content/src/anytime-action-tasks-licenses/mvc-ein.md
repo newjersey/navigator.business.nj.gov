@@ -15,6 +15,13 @@ industryIds:
   - trucking
 sectorIds:
   - transportation-and-warehousing
+  - utilities
+  - waste-management-and-Remediation
+  - accommodation-and-food-services
+  - agriculture-forestry-fishing-and-hunting
+  - construction
+  - manufacturing
+  - mining-quarrying-and-oil-and-gas-extraction
 urlSlug: mvc-ein
 summaryDescriptionMd: >-
   You need a  Motor Vehicle Commission `(MVC) Entity Identification Number
