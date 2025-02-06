@@ -2,8 +2,19 @@
 notesMd: ""
 id: mvc-ein
 name: Get Your Motor Vehicle Commission EIN
-industryIds: []
-sectorIds: []
+industryIds:
+  - auto-body-repair
+  - car-rental
+  - car-service
+  - food-truck
+  - logistics
+  - moving-company
+  - school-bus
+  - non-medical-transport
+  - freight-forwarding
+  - trucking
+sectorIds:
+  - transportation-and-warehousing
 urlSlug: mvc-ein
 summaryDescriptionMd: >-
   You need a  Motor Vehicle Commission `(MVC) Entity Identification Number
