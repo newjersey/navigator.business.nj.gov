@@ -47,24 +47,24 @@ import {
   industryQueryParamIsValid,
   mapFlowQueryToPersona,
   pageQueryParamisValid,
+  sectorQueryParamIsValid,
 } from "@/lib/utils/onboardingPageHelpers";
-import { determineForeignBusinessType } from "@businessnjgovnavigator/shared";
 import {
+  Business,
+  businessStructureTaskId,
   createEmptyProfileData,
+  createEmptyUser,
   createEmptyUserData,
+  determineForeignBusinessType,
+  emptyProfileData,
+  getCurrentBusiness,
+  isRemoteWorkerOrSellerBusiness,
   LookupMunicipalityByName,
   Municipality,
   OperatingPhaseId,
   ProfileData,
-  TaskProgress,
   UserData,
-} from "@businessnjgovnavigator/shared/";
-import { createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
-import { isRemoteWorkerOrSellerBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
-import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
-import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
-import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { Business } from "@businessnjgovnavigator/shared/userData";
+} from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -222,6 +222,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       } else {
         const queryPage = Number(router.query[QUERIES.page]);
         const queryIndustryId = router.query[QUERIES.industry] as string | undefined;
+        const querySectorId = router.query[QUERIES.sector] as string | undefined;
         const businessMunicipality = router.query[QUERIES.businessMunicipality] as string | undefined;
         const queryFlow = router.query[QUERIES.flow] as string;
         const utmSource = router.query[QUERIES.utmSource] as string | undefined;
@@ -261,6 +262,17 @@ const OnboardingPage = (props: Props): ReactElement => {
           } else {
             completeOnboarding(newProfileData, localUpdateQueue);
           }
+        } else if (querySectorId && sectorQueryParamIsValid(querySectorId)) {
+          const newProfileData: ProfileData = {
+            ...currentBusiness.profileData,
+            businessPersona: "OWNING",
+            sectorId: querySectorId,
+            operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
+          };
+
+          setProfileData(newProfileData);
+          localUpdateQueue?.queueProfileData(newProfileData);
+          completeOnboarding(newProfileData, localUpdateQueue);
         } else if (pageQueryParamisValid(onboardingFlows, currentBusiness, queryPage)) {
           setPage({ current: queryPage, previous: queryPage - 1 });
         } else if (flowQueryParamIsValid(queryFlow)) {
@@ -301,42 +313,27 @@ const OnboardingPage = (props: Props): ReactElement => {
     if (!updateQueue) return;
 
     setRegistrationDimension("Onboarded Guest");
-    if (isAdditionalBusiness) {
-      analytics.event.onboarding_last_step_save_additional_business_button.click.finish_additional_business_onboarding();
-    } else {
-      analytics.event.onboarding_last_step.submit.finish_onboarding();
-    }
 
-    const isRemoteSellerWorker = isRemoteWorkerOrSellerBusiness({
+    isAdditionalBusiness
+      ? analytics.event.onboarding_last_step_save_additional_business_button.click.finish_additional_business_onboarding()
+      : analytics.event.onboarding_last_step.submit.finish_onboarding();
+
+    updateQueue.queueBusiness({
       ...updateQueue.currentBusiness(),
       profileData: newProfileData,
+      onboardingFormProgress: "COMPLETED",
     });
 
-    let newUserData: UserData = {
-      ...updateQueue.current(),
-      businesses: {
-        ...updateQueue.current().businesses,
-        [updateQueue.current().currentBusinessId]: {
-          ...updateQueue.currentBusiness(),
-          profileData: {
-            ...newProfileData,
-            operatingPhase: isRemoteSellerWorker
-              ? OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE
-              : newProfileData.operatingPhase,
-          },
-          onboardingFormProgress: "COMPLETED",
-        },
-      },
-    };
-
-    newUserData = await api.postGetAnnualFilings(newUserData);
-    updateQueue.queue(newUserData);
-
-    if (newProfileData.legalStructureId) {
-      const completed: TaskProgress = "COMPLETED";
-      updateQueue.queueTaskProgress({ [businessStructureTaskId]: completed });
+    if (isRemoteWorkerOrSellerBusiness(updateQueue.currentBusiness()) && OperatingPhaseId.GUEST_MODE) {
+      updateQueue.queueProfileData({ operatingPhase: OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE });
     }
 
+    if (updateQueue.currentBusiness().profileData.legalStructureId) {
+      updateQueue.queueTaskProgress({ [businessStructureTaskId]: "COMPLETED" });
+    }
+
+    const newUserData = await api.postGetAnnualFilings(updateQueue.current());
+    updateQueue.queue(newUserData);
     await updateQueue.update();
 
     router &&

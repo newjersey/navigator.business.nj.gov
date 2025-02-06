@@ -51,6 +51,7 @@ export enum QUERIES {
   path = "path",
   signUp = "signUp",
   industry = "industry",
+  sector = "sector",
   code = "code",
   openTaxFilingsModal = "openTaxFilingsModal",
   flow = "flow",
