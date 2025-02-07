@@ -1,3 +1,15 @@
+# [2025.4.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.3.0...v2025.4.0) (2025-02-07)
+
+
+### Bug Fixes
+
+* [[#188838885](https://github.com/newjersey/navigator.business.nj.gov/issues/188838885)] Login Page Design QA Follow-ups ([eff77a3](https://github.com/newjersey/navigator.business.nj.gov/commit/eff77a3f86a850e1d289a36a70f16dda019e6599))
+
+
+### Features
+
+* [[#188843468](https://github.com/newjersey/navigator.business.nj.gov/issues/188843468)] implement sector query in onboarding ([8336860](https://github.com/newjersey/navigator.business.nj.gov/commit/83368605059425a8d1f34e53a75403ca45a0cd45))
+
 # [2025.3.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.2.1...v2025.3.0) (2025-02-05)
 
 
