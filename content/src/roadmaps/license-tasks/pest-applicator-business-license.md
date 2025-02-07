@@ -2,26 +2,29 @@
 notesMd: "Draft:
   https://docs.google.com/document/d/1IqfIk7SIeoe1QfUatsOKa5YOyunK0dHMxTjj4OIp6\
   8I/edit?tab=t.0"
-id: pest-applicator-business-license
-webflowId: 67a38776f8b25424993772fa
-urlSlug: pest-applicator-business-license
-name: Apply for Your Pesticide Applicator Business License
 displayname: pest-applicator-business-license
-webflowName: "Pest Control: Pesticide Applicator Business License"
-filename: pest-applicator-business-license
-callToActionLink: https://www.nj.gov/dep/enforcement/pcp/bpo-busappl.htm
-callToActionText: Apply for My Pesticide Applicator Business License
+urlSlug: pest-applicator-business-license
 agencyId: njdep
 divisionPhone: (609) 984-6568
-industryId: pest-control
-licenseCertificationClassification: undefined
+filename: pest-applicator-business-license
+id: pest-applicator-business-license
+name: Apply for Your Pesticide Applicator Business License
+webflowName: "Pest Control: Pesticide Applicator Business License"
 summaryDescriptionMd: >-
-  You must apply for your  `pesticide|pesticide` applicator business license if you do any of the following in New Jersey:
+  You must apply for your  `pesticide|pesticide` applicator business license if
+  you do any of the following in New Jersey:
 
-  * You offer pesticide application services (for example, pest extermination)
+  * You offer pesticide application services (for example, pest extermination) 
+
   * Your work includes pesticide application (for example, pet grooming)
 
+
   If you have more than one location, you will need a separate license for each one.
+industryId: pest-control
+callToActionText: Apply for My Pesticide Applicator Business License
+callToActionLink: https://www.nj.gov/dep/enforcement/pcp/bpo-busappl.htm
+webflowId: 67a38776f8b25424993772fa
+licenseCertificationClassification: undefined
 ---
 
 ## Eligibility Criteria
