@@ -14,10 +14,13 @@ summaryDescriptionMd: >-
   You must have a commercial `pesticide|pesticide` applicator license if you do
   any of the following in New Jersey:
 
+
   * Provide pesticide application services 
 
-  * Apply pesticides as part of government work
-   To get your license: 
+  * Apply pesticides as part of government work  
+
+
+  To get your license:
 industryId: pest-control
 callToActionText: Apply for My Commercial Pesticide Applicator License
 callToActionLink: https://www.nj.gov/dep/enforcement/pcp/bpo-appcom.htm
