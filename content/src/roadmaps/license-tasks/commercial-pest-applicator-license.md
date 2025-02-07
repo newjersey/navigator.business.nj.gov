@@ -17,13 +17,14 @@ summaryDescriptionMd: >-
   * Provide pesticide application services 
 
   * Apply pesticides as part of government work
+
+   To get your license: 
 industryId: pest-control
 callToActionText: Apply for My Commercial Pesticide Applicator License
 callToActionLink: https://www.nj.gov/dep/enforcement/pcp/bpo-appcom.htm
 webflowId: 67a387751e36a7b8eaa5a57f
 licenseCertificationClassification: undefined
 ---
- To get your license: 
 
 1. Take the [Basic Pesticide Safety Training class](https://www.nj.gov/dep/enforcement/pcp/bpo-courses.htm) certificate before taking the core exam.
 2. Get 40 hours of on-the-job training or take the [accepted categories of training courses](https://www.nj.gov/dep/enforcement/pcp/bpo-courses.htm).
