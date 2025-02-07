@@ -734,11 +734,15 @@ collections:
                         }
                       - { label: "Name column label", name: "nameLabel", widget: "string" }
                       - { label: "Title column label", name: "titleLabel", widget: "string" }
-                      - { label: "Sign column label", name: "signColumnLabel", widget: "string" }
-                      - { label: "Table headers", name: "tableHeader", widget: "string" }
+                      - { label: "Sign column label", name: "columnLabel", widget: "string" }
+                      - { label: "Sign delete label", name: "deleteLabel", widget: "string" }
+                      - { label: "Sign edit label", name: "editLabel", widget: "string" }
+                      - { label: "Table headers Name", name: "tableHeaderName", widget: "string" }
+                      - { label: "Table headers Address", name: "tableHeaderAddress", widget: "string" }
+                      - { label: "Table headers Sign", name: "tableHeaderSign", widget: "string" }
+                      - { label: "Table headers Actions", name: "tableHeaderActions", widget: "string" }
                       - { label: "Add button text", name: "addButtonText", widget: "string" }
                       - { label: "Signature aid text", name: "aidText", widget: "string" }
-                      - { label: "Delete text (mobile)", name: "deleteTextMobile", widget: "string" }
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                       - label: Overrides
@@ -1024,6 +1028,7 @@ collections:
                   - { label: "Read less button text", name: "viewLessButtonText", widget: "string" }
                   - { label: "Radio no text", name: "radioNoText", widget: "string" }
                   - { label: "Radio yes text", name: "radioYesText", widget: "string" }
+                  - { label: "Remove Section Text", name: "removeSectionText", widget: "string" }
                   - {
                       label: "Aria Context - Will Need to Provide Business date for checking formation task",
                       name: "ariaContextWillNeedToProvideBusinessDate",

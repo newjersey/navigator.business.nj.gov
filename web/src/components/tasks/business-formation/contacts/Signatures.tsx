@@ -134,7 +134,7 @@ export const Signatures = (): ReactElement => {
     const checked = state.formationFormData.signers[index].signature;
     return (
       <div
-        className={`grid-col-auto width-6 display-flex flex-column flex-align-center ${
+        className={`mobile-sign-wrapper grid-col-auto width-6 display-flex flex-column flex-align-center ${
           index === 0 ? "flex-justify-center" : "tablet:flex-justify-start margin-top-4 tablet:margin-top-0"
         }`}
       >
@@ -143,7 +143,7 @@ export const Signatures = (): ReactElement => {
           className="text-bold"
           style={{ display: "none" }}
         >
-          {Config.formation.fields.signers.signColumnLabel}*
+          {Config.formation.fields.signers.columnLabel}
         </label>
         <div
           style={{ height: `${index === 0 ? "44px" : "60px"}` }}
@@ -173,11 +173,15 @@ export const Signatures = (): ReactElement => {
       <div className="grid-col-auto padding-left-1 flex-column flex-align-center flex-justify-center">
         <div style={{ height: "56px" }} className="display-flex flex-column flex-justify-center">
           {visible ? (
-            <UnStyledButton onClick={onClick} className="display-flex flex-column flex-justify-center">
-              <Icon className="font-body-lg" label="delete additional signer" iconName="delete" />
+            <UnStyledButton
+              onClick={onClick}
+              isUnderline
+              className="display-flex flex-column flex-justify-center"
+            >
+              {Config.formation.general.removeSectionText}
             </UnStyledButton>
           ) : (
-            <Icon className="font-body-lg visibility-hidden" iconName="delete" />
+            <></>
           )}
         </div>
       </div>
@@ -362,7 +366,7 @@ export const Signatures = (): ReactElement => {
                 </div>
                 <div className="margin-top-1" style={{ marginBottom: "1em" }}>
                   <strong>
-                    <ModifiedContent>{`${Config.formation.fields.signers.signColumnLabel}`}</ModifiedContent>
+                    <ModifiedContent>{`${Config.formation.fields.signers.columnLabel}`}</ModifiedContent>
                   </strong>
                   {renderSignatureColumn({
                     index: 0,
@@ -385,7 +389,7 @@ export const Signatures = (): ReactElement => {
                 className="grid-row margin-bottom-2"
               >
                 <div className="grid-col">
-                  <div className="grid-row margin-bottom-1" data-testid={`signers-${index}`}>
+                  <div className="grid-row margin-bottom-1 fac" data-testid={`signers-${index}`}>
                     <div className="grid-col flex-align-self-center margin-top-1">
                       <div className="grid-row">
                         <div
@@ -418,7 +422,7 @@ export const Signatures = (): ReactElement => {
                       isUnderline
                       onClick={(): void => removeSigner(index)}
                     >
-                      {Config.formation.fields.signers.deleteTextMobile}
+                      {Config.formation.general.removeSectionText}
                     </UnStyledButton>
                   )}
                 </div>
