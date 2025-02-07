@@ -49,9 +49,7 @@ describe("njeda fundings onboarding", () => {
       screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.questionText)
     ).toBeInTheDocument();
     await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
-    await user.click(
-      screen.getByText(Config.fundingsOnboardingModal.businessOperatingLengthQuestion.responses.long)
-    );
+    await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "35");
     await waitFor(() => {
       selectByValue("Sector", "clean-energy");
     });
@@ -62,13 +60,17 @@ describe("njeda fundings onboarding", () => {
 
   it("triggers validation when questions are unanswered and Save is pressed", async () => {
     const user = userEvent.setup();
-    const business = generateBusiness({});
+    const business = generateBusiness({
+      profileData: generateProfileData({
+        existingEmployees: "",
+      }),
+    });
     renderStatefulFundingsPageComponent(business, []);
     expect(
       screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.questionText)
     ).toBeInTheDocument();
     expect(
-      screen.getByText(Config.fundingsOnboardingModal.businessOperatingLengthQuestion.questionText)
+      screen.getByText(Config.fundingsOnboardingModal.numberOfEmployeesQuestion.questionText)
     ).toBeInTheDocument();
     await user.click(screen.getByText(Config.fundingsOnboardingModal.saveButtonText));
     expect(
@@ -97,9 +99,7 @@ describe("njeda fundings onboarding", () => {
     renderStatefulFundingsPageComponent(business, fundings);
 
     await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
-    await user.click(
-      screen.getByText(Config.fundingsOnboardingModal.businessOperatingLengthQuestion.responses.long)
-    );
+    await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "2000");
 
     await waitFor(() => {
       selectByValue("Sector", "clean-energy");
@@ -147,9 +147,7 @@ describe("njeda fundings onboarding", () => {
     renderStatefulFundingsPageComponent(business, fundings);
 
     await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
-    await user.click(
-      screen.getByText(Config.fundingsOnboardingModal.businessOperatingLengthQuestion.responses.long)
-    );
+    await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "2");
 
     await waitFor(() => {
       selectByValue("Sector", "clean-energy");

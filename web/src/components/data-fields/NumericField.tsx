@@ -27,6 +27,7 @@ export const NumericField = <T,>({ minLength, maxLength, ...props }: Props<T>): 
       numericProps={{ minLength, maxLength }}
       {...props}
       validationText={props.validationText ?? validationText}
+      onChange={props.onChange}
     />
   );
 };
