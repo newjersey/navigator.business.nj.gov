@@ -2,12 +2,30 @@
 notesMd: ""
 id: mvc-ein
 name: Get Your Motor Vehicle Commission EIN
-industryIds: []
-sectorIds: []
+industryIds:
+  - auto-body-repair
+  - car-rental
+  - car-service
+  - food-truck
+  - logistics
+  - moving-company
+  - school-bus
+  - non-medical-transport
+  - freight-forwarding
+  - trucking
+sectorIds:
+  - transportation-and-warehousing
+  - utilities
+  - waste-management-and-Remediation
+  - accommodation-and-food-services
+  - agriculture-forestry-fishing-and-hunting
+  - construction
+  - manufacturing
+  - mining-quarrying-and-oil-and-gas-extraction
 urlSlug: mvc-ein
 summaryDescriptionMd: >-
   You need a  Motor Vehicle Commission `(MVC) Entity Identification Number
-  (EIN)|mvc-entity-id`, once called the Corporation Code (Corpcode), to get:
+  (EIN)|mvc-entity-id` , once called the Corporation Code (Corpcode), to get:
 
 
   * Titles for vehicles under a business name
@@ -48,7 +66,7 @@ Trenton, NJ 08666-0170
 
 :::callout{ showHeader="true" headerText="What if I don't get this permit?" showIcon="false" calloutType="warning" }
 
-Without an MVC EIN, you cannot register or title vehicles under your business's name. Also, the MVC must connect specific business licenses to an MVC EIN. If you do not have one, the MVC will create one when you apply for your business license. 
+Without an MVC EIN, you cannot register or title vehicles under your business's name. Also, the MVC must connect specific business licenses to an MVC EIN. If you do not have one, the MVC will create one when you apply for your business license.
 
 :::
 
