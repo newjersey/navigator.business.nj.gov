@@ -15,12 +15,13 @@ agencyId: njdep
 divisionPhone: (609) 984-6568
 industryId: pest-control
 licenseCertificationClassification: undefined
-summaryDescriptionMd: "You must apply for your  `pesticide|pesticide` applicator business license if you do any of the following in New Jersey:
+summaryDescriptionMd: >-
+  You must apply for your  `pesticide|pesticide` applicator business license if you do any of the following in New Jersey:
 
-* You offer pesticide application services (for example, pest extermination)
-* Your work includes pesticide application (for example, pet grooming)
+  * You offer pesticide application services (for example, pest extermination)
+  * Your work includes pesticide application (for example, pet grooming)
 
-If you have more than one location, you will need a separate license for each one."
+  If you have more than one location, you will need a separate license for each one.
 ---
 
 ## Eligibility Criteria

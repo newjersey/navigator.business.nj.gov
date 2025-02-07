@@ -14,10 +14,11 @@ agencyId: njdep
 divisionPhone: (609) 984-6568
 industryId: pest-control
 licenseCertificationClassification: undefined
-summaryDescriptionMd: "You must have a commercial `pesticide|pesticide` applicator license if you do any of the following in New Jersey:
-* Provide pesticide application services
-* Apply pesticides as part of government work
-"
+summaryDescriptionMd: >-
+  You must have a commercial `pesticide|pesticide` applicator license if you do any of the following in New Jersey:
+
+  * Provide pesticide application services
+  * Apply pesticides as part of government work
 ---
 
 ## Eligibility Criteria
