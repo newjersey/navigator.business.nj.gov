@@ -235,7 +235,7 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("short-term-rental-registration");
   }
 
-  if (industryId === "generic") {
+  if (industryId === "generic" && profileData.homeBasedBusiness !== true) {
     addOns.push("env-permitting");
   }
 
