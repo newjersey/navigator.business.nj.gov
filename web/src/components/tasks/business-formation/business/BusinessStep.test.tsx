@@ -243,9 +243,19 @@ describe("Formation - BusinessStep", () => {
     it("keeps business purpose closed by default", async () => {
       await getPageHelper({}, { businessPurpose: "" });
       expect(screen.getByText(Config.formation.fields.businessPurpose.label)).toBeInTheDocument();
-      expect(screen.getByText(Config.formation.fields.businessPurpose.addButtonText)).toBeInTheDocument();
-      expect(screen.queryByLabelText("remove business purpose")).not.toBeInTheDocument();
-      expect(screen.queryByLabelText("Business purpose")).not.toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).getByText(
+          Config.formation.fields.businessPurpose.addButtonText
+        )
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).queryByText(
+          Config.formation.general.removeSectionText
+        )
+      ).not.toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).queryByLabelText("Business purpose")
+      ).not.toBeInTheDocument();
     });
 
     it("shows business purpose open if exists", async () => {
@@ -253,23 +263,45 @@ describe("Formation - BusinessStep", () => {
       expect(
         screen.queryByText(Config.formation.fields.businessPurpose.addButtonText)
       ).not.toBeInTheDocument();
-      expect(screen.getByLabelText("remove business purpose")).toBeInTheDocument();
-      expect(screen.getByLabelText("Business purpose")).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).getByText(
+          Config.formation.general.removeSectionText
+        )
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).getByLabelText("Business purpose")
+      ).toBeInTheDocument();
     });
 
     it("opens business purpose when Add button clicked", async () => {
       await getPageHelper({}, { businessPurpose: "" });
-      fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
+      fireEvent.click(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).getByText(
+          Config.formation.fields.businessPurpose.addButtonText
+        )
+      );
       expect(
-        screen.queryByText(Config.formation.fields.businessPurpose.addButtonText)
+        within(screen.getByTestId("formation-text-box-businessPurpose")).queryByText(
+          Config.formation.fields.businessPurpose.addButtonText
+        )
       ).not.toBeInTheDocument();
-      expect(screen.getByLabelText("remove business purpose")).toBeInTheDocument();
-      expect(screen.getByLabelText("Business purpose")).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).getByText(
+          Config.formation.general.removeSectionText
+        )
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).getByLabelText("Business purpose")
+      ).toBeInTheDocument();
     });
 
     it("removes business purpose when Remove button clicked", async () => {
       const page = await getPageHelper({}, { businessPurpose: "some purpose" });
-      fireEvent.click(screen.getByLabelText("remove business purpose"));
+      fireEvent.click(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).getByText(
+          Config.formation.general.removeSectionText
+        )
+      );
       await page.submitBusinessStep();
       expect(currentBusiness().formationData.formationFormData.businessPurpose).toEqual("");
     });
@@ -304,49 +336,99 @@ describe("Formation - BusinessStep", () => {
         },
         { additionalProvisions: [] }
       );
-      expect(screen.getByText(Config.formation.fields.additionalProvisions.label)).toBeInTheDocument();
       expect(
-        screen.getByText(Config.formation.fields.additionalProvisions.addButtonText)
+        within(screen.getByTestId("additional-provisions")).getByText(
+          Config.formation.fields.additionalProvisions.label
+        )
       ).toBeInTheDocument();
-      expect(screen.queryByLabelText("remove provision")).not.toBeInTheDocument();
-      expect(screen.queryByLabelText("provision 0")).not.toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).getByText(
+          Config.formation.fields.additionalProvisions.addButtonText
+        )
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).queryByText(
+          Config.formation.general.removeSectionText
+        )
+      ).not.toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).queryByLabelText("provision 0")
+      ).not.toBeInTheDocument();
     });
 
     it("keeps provisions closed by default when page loads", async () => {
       await getPageHelper({}, { additionalProvisions: [] });
-      expect(screen.getByText(Config.formation.fields.additionalProvisions.label)).toBeInTheDocument();
       expect(
-        screen.getByText(Config.formation.fields.additionalProvisions.addButtonText)
+        within(screen.getByTestId("additional-provisions")).getByText(
+          Config.formation.fields.additionalProvisions.label
+        )
       ).toBeInTheDocument();
-      expect(screen.queryByLabelText("remove provision")).not.toBeInTheDocument();
-      expect(screen.queryByLabelText("provision 0")).not.toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).getByText(
+          Config.formation.fields.additionalProvisions.addButtonText
+        )
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).queryByText(
+          Config.formation.general.removeSectionText
+        )
+      ).not.toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).queryByLabelText("provision 0")
+      ).not.toBeInTheDocument();
     });
 
     it("shows provisions open if exists", async () => {
       await getPageHelper({}, { additionalProvisions: ["provision1", "provision2"] });
       expect(
-        screen.queryByText(Config.formation.fields.additionalProvisions.addButtonText)
+        within(screen.getByTestId("additional-provisions")).queryByText(
+          Config.formation.fields.additionalProvisions.addButtonText
+        )
       ).not.toBeInTheDocument();
-      expect(screen.queryAllByLabelText("remove provision")).toHaveLength(2);
-      expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
-      expect(screen.getByLabelText("Provisions 1")).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).queryAllByText(
+          Config.formation.general.removeSectionText
+        )
+      ).toHaveLength(2);
+      expect(
+        within(screen.getByTestId("additional-provisions")).getByLabelText("Provisions 0")
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).getByLabelText("Provisions 1")
+      ).toBeInTheDocument();
     });
 
     it("opens provisions when Add button clicked", async () => {
       await getPageHelper({}, { additionalProvisions: [] });
-      fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addButtonText));
+      fireEvent.click(
+        within(screen.getByTestId("additional-provisions")).getByText(
+          Config.formation.fields.additionalProvisions.addButtonText
+        )
+      );
       expect(
-        screen.queryByText(Config.formation.fields.additionalProvisions.addButtonText)
+        within(screen.getByTestId("additional-provisions")).queryByText(
+          Config.formation.fields.additionalProvisions.addButtonText
+        )
       ).not.toBeInTheDocument();
-      expect(screen.getByLabelText("remove provision")).toBeInTheDocument();
-      expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).getByText(
+          Config.formation.general.removeSectionText
+        )
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).getByLabelText("Provisions 0")
+      ).toBeInTheDocument();
     });
 
     it("adds more provisions when Add More button clicked", async () => {
       await getPageHelper({}, { additionalProvisions: [] });
       fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addButtonText));
       fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText));
-      expect(screen.queryAllByLabelText("remove provision")).toHaveLength(2);
+      expect(
+        within(screen.getByTestId("additional-provisions")).queryAllByText(
+          Config.formation.general.removeSectionText
+        )
+      ).toHaveLength(2);
       expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
       expect(screen.getByLabelText("Provisions 1")).toBeInTheDocument();
     });
@@ -358,9 +440,14 @@ describe("Formation - BusinessStep", () => {
           additionalProvisions: ["provision1", "provision2", "provision3"],
         }
       );
-      const removeProvision2Button = screen.getAllByLabelText("remove provision")[1];
+
+      const removeProvision2Button = within(screen.getByTestId("additional-provisions")).getAllByText(
+        Config.formation.general.removeSectionText
+      )[1];
+
       fireEvent.click(removeProvision2Button);
       await page.submitBusinessStep();
+
       expect(currentBusiness().formationData.formationFormData.additionalProvisions).toEqual([
         "provision1",
         "provision3",

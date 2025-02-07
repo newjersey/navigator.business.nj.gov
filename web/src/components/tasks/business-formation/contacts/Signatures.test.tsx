@@ -89,7 +89,7 @@ describe("Formation - Signatures", () => {
         page.fillText("Signer 1", "V");
         page.checkSignerBox(1, "signers");
 
-        fireEvent.click(screen.getAllByLabelText("delete additional signer")[0]);
+        fireEvent.click(screen.getAllByText(Config.formation.general.removeSectionText)[0]);
 
         await page.submitContactsStep();
         expect(currentBusiness().formationData.formationFormData.signers).toEqual([

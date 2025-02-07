@@ -37,7 +37,8 @@
       "amendmentInfo": "#### Review your information before submitting to the New Jersey Division of Revenue and Enterprise Services.\n If you need to make a change after submitting, you must file an [amendment online.](https://www.njportal.com/dor/businessamendments)",
       "viewLessButtonText": "Read less",
       "genericErrorText": "This field requires information.",
-      "ariaContextStepperStateComplete": "Complete"
+      "ariaContextStepperStateComplete": "Complete",
+      "removeSectionText": "Remove"
     },
     "intro": {
       "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.\n\nYou will need to fill out an [application](https://www.nj.gov/treasury/revenue/pdf/2000.pdf) to register if you choose to `reserve your business name.|name-reservation` Business name reservations only last six months. If you are not able to complete the online application [fill out the paper application](https://www.nj.gov/treasury/revenue/pdf/2000-legacy.pdf).",
@@ -156,7 +157,9 @@
       },
       "signers": {
         "addButtonText": "Add New Signer",
-        "signColumnLabel": "Sign*",
+        "columnLabel": "Sign*",
+        "deleteLabel": "Delete",
+        "editLabel": "Edit",
         "overrides": {
           "limited-liability-partnership": {
             "description": "Authorized Partner(s) should sign below by adding their full name. You can have up to 10 signers listed."
@@ -175,10 +178,12 @@
         "errorInlineSignerName": "Enter a signer's name.",
         "errorInlineSignature": "Click the checkbox to authorize the signer’s signature.",
         "errorBannerCheckbox": "Sign by clicking the checkbox above.",
-        "deleteTextMobile": "Delete Signer",
         "errorBannerSignerTitle": "Select the signer titles below.",
         "errorBannerMinimum": "Enter at least 1 signer's name.",
-        "tableHeader": "Name,Address,Sign*,Actions",
+        "tableHeaderName": "Name",
+        "tableHeaderAddress": "Address",
+        "tableHeaderSign": "Sign*",
+        "tableHeaderActions": "Actions",
         "titleLabel": "Title",
         "description": "Authorized Representative(s) should sign below by adding their full name. You can have up to 10 signers listed.",
         "errorInlineAdditionalSignerName": "Enter the first and last name of each signer."
