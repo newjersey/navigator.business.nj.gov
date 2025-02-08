@@ -8,7 +8,7 @@ import {
   selectLocation,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
-import { randomNonHomeBasedIndustry } from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
+import { randomNonHomeBasedNonDomesticEmployerIndustry } from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
 import { onDashboardPage } from "@businessnjgovnavigator/cypress/support/page_objects/dashboardPage";
 import { onProfilePage } from "@businessnjgovnavigator/cypress/support/page_objects/profilePage";
 
@@ -21,7 +21,7 @@ describe("auto tax filing [feature] [all] [group4]", () => {
 
   // TODO: There is an issue in Cypress where the value of the taxId is being entered incorrectly by the automation. Need to investigate further. Temporarily skipping this test to avoid false failures.
   it.skip("automatically registers for Gov2Go and retrieves tax events if business name and tax id are provided", () => {
-    completeNewBusinessOnboarding({ industry: randomNonHomeBasedIndustry() });
+    completeNewBusinessOnboarding({ industry: randomNonHomeBasedNonDomesticEmployerIndustry() });
     completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
 
     onDashboardPage.getEditProfileLink().should("exist");
@@ -45,7 +45,7 @@ describe("auto tax filing [feature] [all] [group4]", () => {
   });
 
   it("does not automatically register for Gov2Go and retrieve tax filing if missing business name", () => {
-    completeNewBusinessOnboarding({ industry: randomNonHomeBasedIndustry() });
+    completeNewBusinessOnboarding({ industry: randomNonHomeBasedNonDomesticEmployerIndustry() });
     completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
 
     onDashboardPage.getEditProfileLink().should("exist");
@@ -64,7 +64,7 @@ describe("auto tax filing [feature] [all] [group4]", () => {
   });
 
   it("does not automatically register for Gov2Go and retrieve tax filing if missing tax id", () => {
-    completeNewBusinessOnboarding({ industry: randomNonHomeBasedIndustry() });
+    completeNewBusinessOnboarding({ industry: randomNonHomeBasedNonDomesticEmployerIndustry() });
     completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
 
     onDashboardPage.getEditProfileLink().should("exist");
