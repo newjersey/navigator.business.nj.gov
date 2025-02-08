@@ -44,7 +44,7 @@ export const randomElementFromArray = (array: any[]) => {
 export const completeBusinessStructureTask = ({ legalStructureId }: { legalStructureId: string }): void => {
   cy.get('[data-task="business-structure"]').first().scrollIntoView();
   cy.get('[data-task="business-structure"]').first().click();
-  cy.get('[data-testid="business-structure-task"]');
+  cy.get('[data-testid="business-structure-task"]').should("be.visible");
 
   onBusinessStructurePage.selectLegalStructure(legalStructureId as string);
   onBusinessStructurePage.getLegalStructure(legalStructureId as string).should("be.checked");
