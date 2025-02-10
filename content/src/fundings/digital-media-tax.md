@@ -37,6 +37,7 @@ sector:
   - arts-entertainment-and-recreation
   - digital-and-print-media
 publishStageArchive: ""
+minEmployeesRequired: 1
 ---
 
 ## Eligibility
