@@ -36,6 +36,7 @@ sector:
   - manufacturing
   - other-services
 publishStageArchive: ""
+priority: true
 ---
 
 ## Eligibility
