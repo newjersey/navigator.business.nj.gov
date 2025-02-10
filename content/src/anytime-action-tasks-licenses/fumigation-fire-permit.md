@@ -10,6 +10,8 @@ notesMd: >-
   * Industry: Pest Control
 
   * Content Type: Anytime Action because this is something an up-and-running business may need to do over the course of their lifespan. It is a temporary/single-use permit they need to get each time they do the activity. It is not essential to starting a business because the activity is just one pest control method.
+
+  * Does not need a non-essential question because this is common for this industry
 id: fumigation-fire-permit
 name: Get a Fire Permit for Fumigation or Thermal Insecticide Fogging
 industryIds:
