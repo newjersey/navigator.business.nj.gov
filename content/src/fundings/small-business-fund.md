@@ -31,6 +31,7 @@ county:
   - All
 sector: []
 publishStageArchive: null
+minEmployeesRequired: 1
 priority: true
 ---
 
