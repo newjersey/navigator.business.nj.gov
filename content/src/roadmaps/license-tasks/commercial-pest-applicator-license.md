@@ -27,12 +27,11 @@ callToActionLink: https://www.nj.gov/dep/enforcement/pcp/bpo-appcom.htm
 webflowId: 67a387751e36a7b8eaa5a57f
 licenseCertificationClassification: undefined
 ---
-
 1. Take the [Basic Pesticide Safety Training class](https://www.nj.gov/dep/enforcement/pcp/bpo-courses.htm) .
 2. Get 40 hours of on-the-job training or take the [accepted categories of training courses](https://www.nj.gov/dep/enforcement/pcp/bpo-courses.htm).
 3. Apply to take the core and category exams on [Rutger’s Pacer system](http://pacer.rutgers.edu). Upload the class certificate and [on-the-job training form](https://www.nj.gov/dep/enforcement/pcp/bpo/certification/Training_Verification_Form_VPE-002.pdf) with your application.
 4. Pass the core exam and the category exam. You must pass the exams within a calendar year.
-5. Pay your license invoice. You must pay the invoice for the license to be valid.
+5. Pay your license invoice. You must [pay the invoice](https://www9.nj.gov/DEP_RSP/Orchestrate.do?initiate=true&orchestrationId=NJDEP-EL-PayInvoice&service_category_id=30&service_class_id=109) for the license to be valid.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
