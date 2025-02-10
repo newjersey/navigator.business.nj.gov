@@ -38,6 +38,8 @@ sector:
   - manufacturing
   - offshore-wind
 publishStageArchive: ""
+minEmployeesRequired: 1
+maxEmployeesRequired: 225
 ---
 
 ## Eligibility
