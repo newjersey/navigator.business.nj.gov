@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
+import { ExistingEmployees } from "@/components/data-fields/ExistingEmployees";
 import { Sectors } from "@/components/data-fields/Sectors";
 import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
 import { ModalOneButton } from "@/components/ModalOneButton";
@@ -41,9 +42,9 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
     business?.profileData || currentUserData.businesses[currentUserData.currentBusinessId].profileData
   );
   const [isNonProfit, setIsNonProfit] = useState<boolean | undefined>(undefined);
-  const [isBusinessOpenLongerThanTwoYears, setIsBusinessOpenLongerThanTwoYears] = useState<
-    boolean | undefined
-  >(business?.profileData.businessOpenMoreThanTwoYears);
+  const [numberOfEmployees, setNumberofEmployees] = useState<string>(
+    business?.profileData.existingEmployees ?? ""
+  );
   const [shouldCloseModal, setShouldCloseModal] = useState<boolean>(false);
   const [filteredFundings, setFilteredFundings] = useState<Funding[]>(props.fundings);
   const [shouldShowErrorAlert, setShouldShowErrorAlert] = useState<boolean>(false);
@@ -54,7 +55,7 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
       count += 1;
     }
 
-    if (isBusinessOpenLongerThanTwoYears !== undefined) {
+    if (numberOfEmployees !== "") {
       count += 1;
     }
 
@@ -85,7 +86,7 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
         operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
         industryId: "generic",
         legalStructureId: isNonProfit ? "nonprofit" : undefined,
-        businessOpenMoreThanTwoYears: isBusinessOpenLongerThanTwoYears,
+        existingEmployees: numberOfEmployees,
         sectorId: profileData.sectorId,
       });
       updateQueue?.queuePreferences({
@@ -109,8 +110,8 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
     }
   };
 
-  const shouldShowBusinessLengthError = (): boolean => {
-    return shouldShowErrorAlert && isBusinessOpenLongerThanTwoYears === undefined;
+  const shouldShowEmployeeCountError = (): boolean => {
+    return shouldShowErrorAlert && numberOfEmployees.length === 0;
   };
 
   const shouldShowNonProfitError = (): boolean => {
@@ -221,34 +222,20 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
               </div>
 
               <div className={"padding-top-1 border-error error-side-border"}>
-                <WithErrorBar hasError={shouldShowBusinessLengthError()} type={"ALWAYS"}>
-                  <div className={"text-bold"}>
-                    {Config.fundingsOnboardingModal.businessOperatingLengthQuestion.questionText}
-                  </div>
-                  <FormControl variant="outlined" fullWidth>
-                    <RadioGroup
-                      aria-label="business operating length"
-                      name="business-operating-length"
-                      onChange={(event) => {
-                        setIsBusinessOpenLongerThanTwoYears(
-                          (event.target.value as string) ===
-                            Config.fundingsOnboardingModal.businessOperatingLengthQuestion.responses.long
-                        );
+                <WithErrorBar hasError={shouldShowEmployeeCountError()} type={"ALWAYS"}>
+                  <div>
+                    <div className={"text-bold"}>
+                      {Config.fundingsOnboardingModal.numberOfEmployeesQuestion.questionText}
+                    </div>
+                    <ExistingEmployees
+                      onChange={(val) => {
+                        setNumberofEmployees(val);
                       }}
-                    >
-                      {radioButtonOption(
-                        Config.fundingsOnboardingModal.businessOperatingLengthQuestion.responses.short,
-                        shouldShowBusinessLengthError()
-                      )}
-                      {radioButtonOption(
-                        Config.fundingsOnboardingModal.businessOperatingLengthQuestion.responses.long,
-                        shouldShowBusinessLengthError()
-                      )}
-                    </RadioGroup>
-                  </FormControl>
-                  {shouldShowBusinessLengthError() && (
+                    />
+                  </div>
+                  {shouldShowEmployeeCountError() && (
                     <div className="text-error-dark text-bold" data-testid="business-structure-error">
-                      {Config.fundingsOnboardingModal.businessOperatingLengthQuestion.selectAnAnswerText}
+                      {Config.fundingsOnboardingModal.numberOfEmployeesQuestion.selectAnAnswerText}
                     </div>
                   )}
                 </WithErrorBar>

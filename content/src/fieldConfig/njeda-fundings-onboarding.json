@@ -13,13 +13,9 @@
       },
       "selectAnAnswerText": "Select if your New Jersey business is a nonprofit."
     },
-    "businessOperatingLengthQuestion": {
-      "questionText": "How long has your New Jersey business been open for?",
-      "responses": {
-        "short": "Less than 2 years",
-        "long": "2+ years"
-      },
-      "selectAnAnswerText": "Select how long your New Jersey business has been open for."
+    "numberOfEmployeesQuestion": {
+      "questionText": "How many full-time employees does your business have?",
+      "selectAnAnswerText": "Enter your current number of full-time employees."
     },
     "pageHeader": {
       "headerText": "Explore NJEDA Funding Programs",
