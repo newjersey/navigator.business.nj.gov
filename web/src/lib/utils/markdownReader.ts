@@ -272,6 +272,7 @@ type FundingGrayMatter = {
   sidebarCardBodyText: string;
   isNonprofitOnly: boolean | undefined | null;
   summaryDescriptionMd: string;
+  priority: boolean | undefined;
 };
 
 type CertificationGrayMatter = {

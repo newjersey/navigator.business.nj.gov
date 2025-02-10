@@ -45,7 +45,7 @@ export const getVisibleCertifications = (
   });
 };
 export const sortFundingsForUser = (fundings: Funding[], userData?: UserData): Funding[] => {
-  const initialSorting = fundings.sort((a, b) => {
+  const statusSortedFundings = fundings.sort((a, b) => {
     const nameA = a.name.toUpperCase(); // ignore upper and lowercase
     const nameB = b.name.toUpperCase();
     if (FundingStatusOrder[a.status] < FundingStatusOrder[b.status]) {
@@ -58,9 +58,10 @@ export const sortFundingsForUser = (fundings: Funding[], userData?: UserData): F
   });
   if (userData?.user.accountCreationSource) {
     const agencySource = mapAccountCreationSourceToAgencySource(userData.user.accountCreationSource);
-    return prioritizeFundingByAgencySource(initialSorting, agencySource);
+    const agencySortedFundings = prioritizeFundingByAgencySource(statusSortedFundings, agencySource);
+    return sortFundingsByPrioritization(agencySortedFundings);
   }
-  return initialSorting;
+  return sortFundingsByPrioritization(statusSortedFundings);
 };
 
 const mapAccountCreationSourceToAgencySource = (accountCreationSource: string): string => {
@@ -88,6 +89,19 @@ const prioritizeFundingByAgencySource = (fundings: Funding[], agencyName: string
   }
   agencyFundings.push(...nonAgencyFundings);
   return agencyFundings;
+};
+
+const sortFundingsByPrioritization = (fundings: Funding[]): Funding[] => {
+  const priorityFundings: Funding[] = [];
+  const nonPriorityFundings: Funding[] = [];
+
+  for (const funding of fundings) {
+    if (funding.priority) {
+      priorityFundings.push(funding);
+    } else nonPriorityFundings.push(funding);
+  }
+  priorityFundings.push(...nonPriorityFundings);
+  return priorityFundings;
 };
 export const getVisibleSideBarCards = (
   business: Business | undefined,
