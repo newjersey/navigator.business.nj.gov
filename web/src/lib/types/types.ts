@@ -178,6 +178,8 @@ export type Funding = {
   programPurpose: string | null | undefined;
   agencyContact: string | null | undefined;
   isNonprofitOnly: boolean | undefined | null;
+  minEmployeesRequired: number | undefined;
+  maxEmployeesRequired: number | undefined;
   priority: boolean | undefined;
 };
 

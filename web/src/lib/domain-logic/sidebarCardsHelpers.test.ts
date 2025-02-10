@@ -701,6 +701,44 @@ describe("sidebarCard Helpers", () => {
         expect(result.length).toEqual(2);
         expect(result).toEqual(expect.arrayContaining([funding1, funding2]));
       });
+
+      it("filters fundings by max employee count", () => {
+        const business = generateBusiness({
+          profileData: generateProfileData({
+            homeBasedBusiness: false,
+            municipality: undefined,
+            existingEmployees: "200",
+            sectorId: undefined,
+          }),
+        });
+        const funding1 = generateFunding({ status: "rolling application", maxEmployeesRequired: 250 });
+        const funding2 = generateFunding({ status: "rolling application", maxEmployeesRequired: 199 });
+        const funding3 = generateFunding({ status: "rolling application", maxEmployeesRequired: 200 });
+        const fundings = [funding1, funding2, funding3];
+
+        const result = filterFundings({ fundings, business });
+        expect(result.length).toEqual(2);
+        expect(result).toEqual(expect.arrayContaining([funding1, funding3]));
+      });
+
+      it("filters fundings by min employee count", () => {
+        const business = generateBusiness({
+          profileData: generateProfileData({
+            homeBasedBusiness: false,
+            municipality: undefined,
+            existingEmployees: "100",
+            sectorId: undefined,
+          }),
+        });
+        const funding1 = generateFunding({ status: "rolling application", minEmployeesRequired: 50 });
+        const funding2 = generateFunding({ status: "rolling application", minEmployeesRequired: 199 });
+        const funding3 = generateFunding({ status: "rolling application", minEmployeesRequired: 100 });
+        const fundings = [funding1, funding2, funding3];
+
+        const result = filterFundings({ fundings, business });
+        expect(result.length).toEqual(2);
+        expect(result).toEqual(expect.arrayContaining([funding1, funding3]));
+      });
     });
 
     it("shows fundings where user sector is in specified sectors list", () => {

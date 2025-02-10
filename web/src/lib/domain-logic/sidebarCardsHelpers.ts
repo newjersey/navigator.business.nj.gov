@@ -207,6 +207,22 @@ export const filterFundings = ({
           return false;
         }
       }
+
+      if (
+        it.maxEmployeesRequired &&
+        business.profileData.existingEmployees &&
+        Number.parseInt(business.profileData.existingEmployees) > it.maxEmployeesRequired
+      ) {
+        return false;
+      }
+
+      if (
+        it.minEmployeesRequired &&
+        business.profileData.existingEmployees &&
+        Number.parseInt(business.profileData.existingEmployees) < it.minEmployeesRequired
+      ) {
+        return false;
+      }
     }
 
     return true;
