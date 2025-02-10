@@ -40,6 +40,8 @@ sector:
   - technology
   - utilities
 publishStageArchive: ""
+minEmployeesRequired: 1
+maxEmployeesRequired: 750
 ---
 
 ## Eligibility
