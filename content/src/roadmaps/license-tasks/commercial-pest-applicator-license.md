@@ -1,7 +1,6 @@
 ---
 notesMd: "Draft:
-  https://docs.google.com/document/d/1LeeaqXW1t8z3fsV4c61DxFannz7YnMTLuG17XGLKY\
-  LE/edit?tab=t.0#heading=h.au84q0gvta3m"
+  https://docs.google.com/document/d/1LeeaqXW1t8z3fsV4c61DxFannz7YnMTLuG17XGLKYLE/edit?tab=t.0#heading=h.au84q0gvta3m"
 displayname: commercial-pest-applicator-license
 urlSlug: commercial-pest-applicator-license
 agencyId: njdep
@@ -15,9 +14,9 @@ summaryDescriptionMd: >-
   any of the following in New Jersey:
 
 
-  * Provide pesticide application services 
+  * Provide pesticide application services
 
-  * Apply pesticides as part of government work  
+  * Apply pesticides as part of government work
 
 
   To get your license:
@@ -27,6 +26,7 @@ callToActionLink: https://www.nj.gov/dep/enforcement/pcp/bpo-appcom.htm
 webflowId: 67a387751e36a7b8eaa5a57f
 licenseCertificationClassification: undefined
 ---
+
 1. Take the [Basic Pesticide Safety Training class](https://www.nj.gov/dep/enforcement/pcp/bpo-courses.htm) .
 2. Get 40 hours of on-the-job training or take the [accepted categories of training courses](https://www.nj.gov/dep/enforcement/pcp/bpo-courses.htm).
 3. Apply to take the core and category exams on [Rutger’s Pacer system](http://pacer.rutgers.edu). Upload the class certificate and [on-the-job training form](https://www.nj.gov/dep/enforcement/pcp/bpo/certification/Training_Verification_Form_VPE-002.pdf) with your application.
