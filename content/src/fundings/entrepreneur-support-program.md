@@ -42,6 +42,8 @@ sector:
   - arts-entertainment-and-recreation
   - retail-trade-and-ecommerce
 publishStageArchive: ""
+minEmployeesRequired: 1
+maxEmployeesRequired: 225
 ---
 
 ## Eligibility
