@@ -1,7 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { Funding } from "@/lib/types/types";
-import FundingsPage from "@/pages/fundings";
+import NJEDAFundingsOnboardingPaage from "@/pages/njeda";
 import { generateFunding } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
@@ -29,13 +29,13 @@ const renderStatefulFundingsPageComponent = (business: Business, fundings: Fundi
   render(
     <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
       <ThemeProvider theme={createTheme()}>
-        <FundingsPage fundings={fundings} noAuth={true} />
+        <NJEDAFundingsOnboardingPaage fundings={fundings} noAuth={true} />
       </ThemeProvider>
     </WithStatefulUserData>
   );
 };
 
-describe("fundings onboarding", () => {
+describe("njeda fundings onboarding", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});

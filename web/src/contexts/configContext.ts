@@ -23,7 +23,6 @@ import * as ElevatorRegistration from "@businessnjgovnavigator/content/fieldConf
 import * as EnvQuestionnaire from "@businessnjgovnavigator/content/fieldConfig/env-questionnaire.json";
 import * as FormationInterimSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-interim-success-page.json";
 import * as FormationSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-success-page.json";
-import * as FundingsOnboarding from "@businessnjgovnavigator/content/fieldConfig/fundings-onboarding.json";
 import * as SiteWideErrorMessages from "@businessnjgovnavigator/content/fieldConfig/global-errors-defaults.json";
 import * as HousingRegistrationSearchTask from "@businessnjgovnavigator/content/fieldConfig/housing-registration.json";
 import * as LandingPageExperienceB from "@businessnjgovnavigator/content/fieldConfig/landing-page-experience-b.json";
@@ -33,6 +32,7 @@ import * as NaicsCode from "@businessnjgovnavigator/content/fieldConfig/naics-co
 import * as NavigationDefaults from "@businessnjgovnavigator/content/fieldConfig/navigation-defaults.json";
 import * as NexusDbaFormation from "@businessnjgovnavigator/content/fieldConfig/nexus-dba-formation.json";
 import * as NexusNameSearch from "@businessnjgovnavigator/content/fieldConfig/nexus-name-search.json";
+import * as FundingsOnboarding from "@businessnjgovnavigator/content/fieldConfig/njeda-fundings-onboarding.json";
 import * as PageNotFoundError from "@businessnjgovnavigator/content/fieldConfig/page-not-found-error.json";
 import * as Profile from "@businessnjgovnavigator/content/fieldConfig/profile.json";
 import * as StarterKits from "@businessnjgovnavigator/content/fieldConfig/starter-kits.json";
