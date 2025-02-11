@@ -4,7 +4,7 @@ summaryDescriptionMd: You need a `New Jersey Motor Vehicle Commission (MVC)
   commercial vehicles.
 urlSlug: transportation-entity-id
 displayname: transportation-entity-id
-name: Apply for Your Motor Vehicle Entity ID
+name: Get Your Motor Vehicle Commission EIN
 id: transportation-entity-id
 callToActionLink: https://www.state.nj.us/mvc/pdf/business/BA-8.pdf
 callToActionText: Apply for My Entity ID with MVC
