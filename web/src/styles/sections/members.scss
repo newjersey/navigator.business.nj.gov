@@ -57,6 +57,9 @@ table.table {
     &.sign {
       grid-area: sign;
       justify-content: center;
+      padding-left: 0;
+      padding-right: 0;
+
       @media (max-width: variables.$sm) {
         justify-content: left;
         margin-bottom: 0;
@@ -85,6 +88,10 @@ table.table {
         align-self: center;
       }
     }
+  }
+
+  th.action {
+    padding-left: 0;
   }
 
   thead {

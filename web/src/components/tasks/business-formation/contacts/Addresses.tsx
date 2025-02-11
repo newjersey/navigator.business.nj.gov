@@ -112,7 +112,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
           {props.needSignature && (
             <th className="sign tac">{Config.formation.fields.signers.tableHeaderSign}</th>
           )}
-          <th className="actions tac">{Config.formation.fields.signers.tableHeaderActions}</th>
+          <th className="action tac">{Config.formation.fields.signers.tableHeaderActions}</th>
         </tr>
       </thead>
       <tbody>
