@@ -158,7 +158,7 @@
       "signers": {
         "addButtonText": "Add New Signer",
         "columnLabel": "Sign*",
-        "deleteLabel": "Delete",
+        "deleteLabel": "Remove",
         "editLabel": "Edit",
         "overrides": {
           "limited-liability-partnership": {
