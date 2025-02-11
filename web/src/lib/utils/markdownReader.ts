@@ -273,6 +273,8 @@ type FundingGrayMatter = {
   isNonprofitOnly: boolean | undefined | null;
   summaryDescriptionMd: string;
   priority: boolean | undefined;
+  minEmployeesRequired: number | undefined;
+  maxEmployeesRequired: number | undefined;
 };
 
 type CertificationGrayMatter = {
