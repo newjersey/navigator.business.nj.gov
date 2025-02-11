@@ -485,4 +485,30 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
       expect(determineLicenseStatus("FakeStatus")).toBe("UNKNOWN");
     });
   });
+
+  /*
+    Note: The HIC license applications have different names in the DCA test db than their production db.
+
+    Test - Home Improvement Contractors-Home Improvement Contractor
+    Prod - Home Improvement Contractors-Home Improvement Business Contr
+  */
+  it("renames the HIC license application used in test environment", async () => {
+    stubLicenseStatusClient.search.mockResolvedValue([
+      generateLicenseEntity({
+        addressLine1: "1234 Main St",
+        professionName: "Home Improvement Contractors",
+        licenseType: "Home Improvement Contractor",
+      }),
+    ]);
+
+    const nameAndAddress = generateLicenseSearchNameAndAddress({
+      addressLine1: "1234 Main St",
+    });
+
+    const result = await searchLicenseStatus(nameAndAddress);
+
+    const unTypedResult = result as Record<string, unknown>;
+    expect(unTypedResult["Home Improvement Contractors-Home Improvement Contractor"]).toBeUndefined();
+    expect(result["Home Improvement Contractors-Home Improvement Business Contr"]).toBeDefined();
+  });
 });
