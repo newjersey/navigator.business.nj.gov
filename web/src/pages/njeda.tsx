@@ -14,7 +14,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { filterFundings } from "@/lib/domain-logic/sidebarCardsHelpers";
+import { filterFundings, sortFundingsForUser } from "@/lib/domain-logic/sidebarCardsHelpers";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { createProfileFieldErrorMap, Funding } from "@/lib/types/types";
 import {
@@ -99,10 +99,13 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
       await updateQueue?.update();
       setShouldCloseModal(true);
       setFilteredFundings(
-        filterFundings({ fundings: filteredFundings, business: updateQueue?.currentBusiness() }).filter(
-          (it) => {
-            return it.agency?.includes("njeda");
-          }
+        sortFundingsForUser(
+          filterFundings({ fundings: filteredFundings, business: updateQueue?.currentBusiness() }).filter(
+            (it) => {
+              return it.agency?.includes("njeda");
+            }
+          ),
+          updateQueue?.current()
         )
       );
     } else {

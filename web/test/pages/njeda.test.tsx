@@ -157,4 +157,53 @@ describe("njeda fundings onboarding", () => {
     expect(screen.getByTestId(`${fundings[0].id}-button`)).toBeInTheDocument();
     expect(screen.queryByTestId(`${fundings[1].id}-button`)).not.toBeInTheDocument();
   });
+
+  it("sorts priority fundings to top", async () => {
+    const user = userEvent.setup();
+    const profileData = generateProfileData({ sectorId: "" });
+    const business = generateBusiness({ profileData: profileData });
+    const fundings = [
+      generateFunding({
+        isNonprofitOnly: false,
+        sector: ["clean-energy"],
+        employeesRequired: "n/a",
+        county: ["All"],
+        homeBased: "yes",
+        publishStageArchive: null,
+        dueDate: undefined,
+        status: "rolling application",
+        certifications: null,
+        agency: ["njeda"],
+        name: "funding-1",
+      }),
+      generateFunding({
+        isNonprofitOnly: false,
+        sector: ["clean-energy"],
+        employeesRequired: "n/a",
+        county: ["All"],
+        homeBased: "yes",
+        publishStageArchive: null,
+        dueDate: undefined,
+        status: "rolling application",
+        certifications: null,
+        agency: ["njeda"],
+        name: "funding-2",
+      }),
+    ];
+    renderStatefulFundingsPageComponent(business, fundings);
+
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "2");
+
+    await waitFor(() => {
+      selectByValue("Sector", "clean-energy");
+    });
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.saveButtonText));
+
+    expect(screen.getByTestId(`${fundings[0].id}-button`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${fundings[1].id}-button`)).toBeInTheDocument();
+    expect(screen.getByText("funding-2").compareDocumentPosition(screen.getByText("funding-1"))).toBe(
+      Node.DOCUMENT_POSITION_PRECEDING
+    );
+  });
 });
