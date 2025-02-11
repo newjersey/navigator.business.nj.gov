@@ -785,6 +785,38 @@ describe("sidebarCard Helpers", () => {
       expect(result).toEqual(expect.arrayContaining([funding1, funding2, funding3]));
     });
 
+    it("filters out future due fundings if other filters are not met", () => {
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          homeBasedBusiness: false,
+          municipality: undefined,
+          existingEmployees: "1",
+          sectorId: "construction",
+        }),
+      });
+
+      const funding1 = generateFunding({
+        sector: ["offshore-wind"],
+        status: "rolling application",
+        dueDate: "01/01/2076",
+      });
+      const funding2 = generateFunding({ sector: [], status: "rolling application" });
+      const funding3 = generateFunding({
+        sector: ["construction", "cannabis"],
+        status: "rolling application",
+      });
+      const funding4 = generateFunding({
+        sector: ["cannabis", "manufacturing"],
+        status: "rolling application",
+      });
+      const funding5 = generateFunding({ sector: ["Construction"], status: "rolling application" });
+      const fundings = [funding1, funding2, funding3, funding4, funding5];
+
+      const result = filterFundings({ fundings, business });
+      expect(result.length).toEqual(3);
+      expect(result).toEqual(expect.arrayContaining([funding2, funding3]));
+    });
+
     describe("certifications", () => {
       const funding1 = generateFunding({
         certifications: ["woman-owned"],
