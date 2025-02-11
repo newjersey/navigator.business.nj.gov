@@ -709,11 +709,27 @@ describe("sidebarCard Helpers", () => {
             municipality: undefined,
             existingEmployees: "200",
             sectorId: undefined,
+            legalStructureId: undefined,
           }),
         });
-        const funding1 = generateFunding({ status: "rolling application", maxEmployeesRequired: 250 });
-        const funding2 = generateFunding({ status: "rolling application", maxEmployeesRequired: 199 });
-        const funding3 = generateFunding({ status: "rolling application", maxEmployeesRequired: 200 });
+        const funding1 = generateFunding({
+          status: "rolling application",
+          maxEmployeesRequired: 250,
+          certifications: [],
+          employeesRequired: "yes",
+        });
+        const funding2 = generateFunding({
+          status: "rolling application",
+          maxEmployeesRequired: 199,
+          certifications: [],
+          employeesRequired: "yes",
+        });
+        const funding3 = generateFunding({
+          status: "rolling application",
+          maxEmployeesRequired: 200,
+          certifications: [],
+          employeesRequired: "yes",
+        });
         const fundings = [funding1, funding2, funding3];
 
         const result = filterFundings({ fundings, business });
