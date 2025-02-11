@@ -31,8 +31,8 @@ county:
   - All
 sector: []
 publishStageArchive: null
-priority: true
 minEmployeesRequired: 1
+priority: true
 ---
 
 ## Eligibility

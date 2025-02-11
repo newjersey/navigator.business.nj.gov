@@ -40,6 +40,7 @@ sector:
   - finance-and-insurance
   - professional-scientific-and-technical-services
 publishStageArchive: ""
+minEmployeesRequired: 1
 maxEmployeesRequired: 100
 ---
 
