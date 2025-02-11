@@ -33,6 +33,10 @@ export const WebserviceLicenseStatusProcessorClient = (
     const results: LicenseStatusResults = {};
 
     for (const checklistItem of allMatchingAddressesArray) {
+      if (checklistItem.licenseType === "Home Improvement Contractor") {
+        checklistItem.licenseType = "Home Improvement Business Contr";
+      }
+
       const licenseName = `${checklistItem.professionName}-${checklistItem.licenseType}` as LicenseName;
       if (licenseName in results) {
         results[licenseName]!.checklistItems = updateChecklist(
