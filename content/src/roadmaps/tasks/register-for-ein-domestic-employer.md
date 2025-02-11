@@ -6,7 +6,7 @@ summaryDescriptionMd: >-
   :::
 
 
-  An `Employer Identification Number (EIN)|ein` is like a Social Security number (SSN) for your business, provided by the federal government. Although you can use your personal SSN, it's better to get an EIN to avoid using your SSN on tax filings and business registrations.
+  An `Employer Identification Number (EIN)|ein` is like a Social Security number (SSN) for your business, provided by the federal government. You can use your personal SSN; however, it is recommended to get an EIN. This protects your personal security because you can avoid using your SSN on tax filings and business registrations.
 urlSlug: ein-registration-domestic-employer
 displayname: ein-registration-domestic-employer
 name: Get Your EIN from the IRS
