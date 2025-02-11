@@ -1,5 +1,5 @@
 ---
-licenseName: Home Improvement Contractors-Home Improvement Contractor
+licenseName: Home Improvement Contractors-Home Improvement Business Contr
 id: register-home-contractor
 displayname: register-home-contractor
 urlSlug: hic-license
