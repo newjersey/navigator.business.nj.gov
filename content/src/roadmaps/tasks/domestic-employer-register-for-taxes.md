@@ -19,7 +19,7 @@ summaryDescriptionMd: >-
   you as an employer of one or more `domestic workers|domestic-worker` and
   determine the taxes and employer contributions you're responsible for. This
   registration does not mean you are a registered as a business for tax purposes
-  in New Jersey: you are an employer of domestic workers.
+  in New Jersey: you will be registered as an employer of domestic workers.
 
 
   &nbsp;
