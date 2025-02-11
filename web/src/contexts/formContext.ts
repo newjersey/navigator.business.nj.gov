@@ -1,5 +1,6 @@
-import { FieldErrorType, ReducedFieldStates } from "@/lib/types/types";
-import { Context, Reducer, createContext } from "react";
+import { Context, createContext, Reducer } from "react";
+
+export type FieldErrorType = undefined | unknown;
 
 export enum FieldStateActionKind {
   RESET = "RESET",
@@ -34,6 +35,17 @@ export type FormContextReducerActions<T, FieldError = FieldErrorType> =
   | RegisterAction<T>
   | UnRegisterAction<T>;
 
+export type FieldStatus<FieldError = FieldErrorType> = {
+  invalid: boolean;
+  updated?: boolean;
+  errorTypes?: FieldError[];
+};
+
+export type ReducedFieldStates<K extends string | number | symbol, FieldError = FieldErrorType> = Record<
+  K,
+  FieldStatus<FieldError>
+>;
+
 export type FormContextReducer<T, FieldError = FieldErrorType> = Reducer<
   ReducedFieldStates<keyof T, FieldError>,
   FormContextReducerActions<T, FieldError>
@@ -44,6 +56,17 @@ export interface FormContextType<T, FieldError = FieldErrorType> {
   runValidations: boolean;
   reducer: React.Dispatch<FormContextReducerActions<ReducedFieldStates<keyof T, FieldError>, FieldError>>;
 }
+
+export type FormContextFieldProps<K = FieldErrorType> = { errorTypes?: K[] };
+
+export const createReducedFieldStates = <K extends string | number | symbol, FieldError = FieldErrorType>(
+  fields: K[]
+): ReducedFieldStates<K, FieldError> => {
+  return fields.reduce((p, c: K) => {
+    p[c] = { invalid: false };
+    return p;
+  }, {} as ReducedFieldStates<K, FieldError>);
+};
 
 export const createFormContext = <T>(): Context<FormContextType<T>> =>
   createContext<FormContextType<T>>({

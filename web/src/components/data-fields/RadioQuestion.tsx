@@ -1,9 +1,9 @@
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
+import { ProfileContentField, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileContentField, profileFieldsFromConfig } from "@/lib/types/types";
+import { profileFieldsFromConfig } from "@/lib/types/types";
 import {
   camelCaseToKebabCase,
   camelCaseToSentence,

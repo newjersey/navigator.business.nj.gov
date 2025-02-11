@@ -1,8 +1,7 @@
 import { AddressContext } from "@/contexts/addressContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
+import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { FormationAddress, Municipality } from "@businessnjgovnavigator/shared/";
 import { ReactElement, ReactNode, useState } from "react";
 
