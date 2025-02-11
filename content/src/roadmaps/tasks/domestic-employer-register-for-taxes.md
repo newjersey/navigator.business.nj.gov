@@ -22,7 +22,11 @@ summaryDescriptionMd: >-
   in New Jersey: you are an employer of domestic workers.
 
 
+  &nbsp;
+
+
   As an employer of domestic or household workers, you are required to report, contribute to, and pay out, as applicable:
+
 
   * Unemployment insurance
 
@@ -49,23 +53,20 @@ callToActionText: Register for State Taxes
 agencyId: nj-taxation
 formName: NJ-Reg
 ---
-
 ## Application Requirements
 
-- [NAICS code](/tasks/naics-code-determination): ${naicsCode}
-- Social Security number
-- Estimated start date
-- Description of the type of work
-- Estimated number of employees
-- Anticipated first payroll withholding date for employees
+* [NAICS code](/tasks/naics-code-determination): ${naicsCode}
+* Social Security number
+* Estimated start date
+* Description of the type of work
+* Estimated number of employees
+* Anticipated first payroll withholding date for employees
 
-
-
----
+- - -
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A `NJ Tax ID|tax-id`
-- A `Business Tax PIN|tax-pin`
+* A `NJ Tax ID|tax-id` 
+* A `Business Tax PIN|tax-pin`
 
 :::
