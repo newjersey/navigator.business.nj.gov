@@ -335,7 +335,7 @@ export const Signatures = (): ReactElement => {
 
   return (
     <>
-      <div className="grid-col">
+      <div className="grid-col" data-testid="signers-section">
         <Heading level={2} styleVariant={"h3"}>
           {Config.formation.fields.signers.label}
         </Heading>

@@ -13,7 +13,7 @@ import {
   PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, within } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -89,7 +89,11 @@ describe("Formation - Signatures", () => {
         page.fillText("Signer 1", "V");
         page.checkSignerBox(1, "signers");
 
-        fireEvent.click(screen.getAllByText(Config.formation.general.removeSectionText)[0]);
+        fireEvent.click(
+          within(screen.getByTestId("signers-section")).getAllByText(
+            Config.formation.general.removeSectionText
+          )[0]
+        );
 
         await page.submitContactsStep();
         expect(currentBusiness().formationData.formationFormData.signers).toEqual([
