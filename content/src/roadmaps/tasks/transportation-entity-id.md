@@ -14,7 +14,7 @@ displayname: transportation-entity-id
 name: Get My MVC EIN
 id: transportation-entity-id
 callToActionLink: "https://www.nj.gov/mvc/pdf/business/BA-8.pdf "
-callToActionText: Apply for My Entity ID with MVC
+callToActionText: Get My MVC EIN
 agencyId: nj-motor-vehicle
 formName: BA-8
 ---
