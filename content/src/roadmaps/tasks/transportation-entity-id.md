@@ -11,7 +11,7 @@ summaryDescriptionMd: >-
   * Licenses and permits related to operating a motor vehicle industry business
 urlSlug: transportation-entity-id
 displayname: transportation-entity-id
-name: Get My MVC EIN
+name: Get Your Motor Vehicle Commission EIN
 id: transportation-entity-id
 callToActionLink: "https://www.nj.gov/mvc/pdf/business/BA-8.pdf "
 callToActionText: Get My MVC EIN
