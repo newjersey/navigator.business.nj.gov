@@ -1,5 +1,11 @@
-import { FieldStateActionKind, FormContextReducer, FormContextType } from "@/contexts/formContext";
-import { FieldErrorType, FieldStatus, ReducedFieldStates } from "@/lib/types/types";
+import {
+  FieldErrorType,
+  FieldStateActionKind,
+  FieldStatus,
+  FormContextReducer,
+  FormContextType,
+  ReducedFieldStates,
+} from "@/contexts/formContext";
 import { FormEvent, useCallback, useEffect, useReducer, useState } from "react";
 
 const debug = false;

@@ -1,9 +1,8 @@
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
+import { ProfileContentField, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileContentField } from "@/lib/types/types";
 import { OutlinedInputProps, TextFieldProps } from "@mui/material";
 import { HTMLInputTypeAttribute, ReactElement, useContext } from "react";
 

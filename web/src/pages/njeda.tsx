@@ -9,14 +9,14 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
+import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { filterFundings, sortFundingsForUser } from "@/lib/domain-logic/sidebarCardsHelpers";
 import { loadAllFundings } from "@/lib/static/loadFundings";
-import { createProfileFieldErrorMap, Funding } from "@/lib/types/types";
+import { Funding } from "@/lib/types/types";
 import {
   createEmptyUser,
   createEmptyUserData,

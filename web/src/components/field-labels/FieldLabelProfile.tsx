@@ -5,8 +5,9 @@ import { Icon } from "@/components/njwds/Icon";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileContentField } from "@/lib/types/types";
 import { ReactElement, useContext } from "react";
+
+import { ProfileContentField } from "@/contexts/profileFormContext";
 
 interface Props {
   fieldName: ProfileContentField;
