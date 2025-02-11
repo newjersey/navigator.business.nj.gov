@@ -10,7 +10,7 @@ import { ReturnToPreviousBusinessBar } from "@/components/onboarding/ReturnToPre
 import { AuthContext } from "@/contexts/authContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
+import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { MediaQueries } from "@/lib/PageSizes";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -24,7 +24,6 @@ import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import {
-  createProfileFieldErrorMap,
   FlowType,
   OnboardingErrors,
   OnboardingStatus,

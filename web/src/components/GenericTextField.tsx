@@ -1,7 +1,6 @@
-import { FormContextType } from "@/contexts/formContext";
+import { FieldErrorType, FormContextFieldProps, FormContextType } from "@/contexts/formContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import { FieldErrorType, FormContextFieldProps } from "@/lib/types/types";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { OutlinedInputProps, TextField, TextFieldProps } from "@mui/material";
 

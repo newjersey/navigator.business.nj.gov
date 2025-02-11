@@ -3,16 +3,12 @@ import { ContextualInfo } from "@/contexts/contextualInfoContext";
 import {
   BusinessPersona,
   BusinessUser,
-  emptyBusinessUser,
-  emptyFormationAddressData,
-  emptyProfileData,
   FieldsForErrorHandling,
   FormationAddress,
   FormationData,
   FormationFormData,
   FormationMember,
   FormationSigner,
-  IndustrySpecificData,
   LicenseName,
   LicenseTaskId,
   Preferences,
@@ -83,57 +79,6 @@ export type FormationFieldErrorState = {
 };
 
 export const profileFieldsFromConfig = getMergedConfig().profileDefaults.fields;
-
-export type ProfileContentField = Exclude<
-  (keyof ProfileData | keyof IndustrySpecificData) & keyof typeof profileFieldsFromConfig,
-  "businessPersona"
->;
-
-export type ProfileFields = keyof ProfileData | keyof BusinessUser | keyof FormationAddress;
-
-export type FieldErrorType = undefined | unknown;
-
-export type FormContextFieldProps<K = FieldErrorType> = { errorTypes?: K[] };
-
-export type FieldStatus<FieldError = FieldErrorType> = {
-  invalid: boolean;
-  updated?: boolean;
-  errorTypes?: FieldError[];
-};
-
-export type ReducedFieldStates<K extends string | number | symbol, FieldError = FieldErrorType> = Record<
-  K,
-  FieldStatus<FieldError>
->;
-
-export const createReducedFieldStates = <K extends string | number | symbol, FieldError = FieldErrorType>(
-  fields: K[]
-): ReducedFieldStates<K, FieldError> => {
-  return fields.reduce((p, c: K) => {
-    p[c] = { invalid: false };
-    return p;
-  }, {} as ReducedFieldStates<K, FieldError>);
-};
-
-const allProfileFields = Object.keys(profileFieldsFromConfig) as ProfileFields[];
-
-const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof BusinessUser)[];
-const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
-const formationAddressFields = Object.keys(emptyFormationAddressData) as (keyof FormationAddress)[];
-
-const profileFields: ProfileFields[] = [
-  ...new Set([
-    ...allProfileFields,
-    ...onboardingDataFields,
-    ...businessUserDisplayFields,
-    ...formationAddressFields,
-  ]),
-] as ProfileFields[];
-
-export const createProfileFieldErrorMap = <FieldError>(): ReducedFieldStates<ProfileFields, FieldError> =>
-  createReducedFieldStates<(typeof profileFields)[number], FieldError>(profileFields);
-
-export type ProfileFieldErrorMap = ReducedFieldStates<ProfileFields>;
 
 export type RoadmapDisplayContent = {
   sidebarDisplayContent: Record<string, SidebarCardContent>;

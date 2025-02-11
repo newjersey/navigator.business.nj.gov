@@ -7,15 +7,14 @@ import { TaxAccessModalBody } from "@/components/filings-calendar/tax-access-mod
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { FieldStateActionKind } from "@/contexts/formContext";
+import { createReducedFieldStates, FieldStateActionKind } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFields, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { gov2GovTaxFiling } from "@/lib/taxation/helpers";
-import { createReducedFieldStates, ProfileFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {

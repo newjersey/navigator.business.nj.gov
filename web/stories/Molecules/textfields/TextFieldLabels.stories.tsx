@@ -10,10 +10,10 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
+import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { createEmptyDbaDisplayContent, createProfileFieldErrorMap } from "@/lib/types/types";
+import { createEmptyDbaDisplayContent } from "@/lib/types/types";
 import {
   generateFormationFormData,
   generateProfileData,
