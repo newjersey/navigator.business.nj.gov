@@ -30,11 +30,10 @@ preferenceForOpportunityZone: ""
 county:
   - All
 sector:
-  - clean-energy
-  - clean-energy
   - professional-scientific-and-technical-services
   - manufacturing
   - other-services
+  - offshore-wind
 publishStageArchive: ""
 priority: true
 ---
