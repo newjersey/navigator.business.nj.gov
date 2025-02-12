@@ -14,7 +14,7 @@ callToActionText: File My Certificate
 
 - Business name
 - Business physical address
-- `Entity ID Number|mvc-entity-id`
+- `MVC EIN|mvc-entity-id`
 - `Registered agent|registered-agent` name and contact information
 - Vehicle information (year, make, model, etc.)
 
