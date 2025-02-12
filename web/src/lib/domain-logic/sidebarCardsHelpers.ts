@@ -141,8 +141,8 @@ export const filterFundings = ({
       return false;
     }
 
-    if (it.dueDate) {
-      return !parseDateWithFormat(it.dueDate, defaultMarkdownDateFormat).isBefore(getCurrentDate());
+    if (it.dueDate && parseDateWithFormat(it.dueDate, defaultMarkdownDateFormat).isBefore(getCurrentDate())) {
+      return false;
     }
 
     if (business.profileData.homeBasedBusiness && it.homeBased !== "yes" && it.homeBased !== "unknown") {
