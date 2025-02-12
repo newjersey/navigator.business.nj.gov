@@ -26,18 +26,17 @@ callToActionLink: https://www.nj.gov/dep/enforcement/pcp/bpo-busappl.htm
 webflowId: 67a38776f8b25424993772fa
 licenseCertificationClassification: undefined
 ---
-
 ## Eligibility Criteria
 
-- You have a staff member who has their commercial pesticide applicator license
-- $300,000 liability insurance if work does not include `fumigation|fumigation`
-- $500,000 liability insurance if work does include fumigation
+* You have a staff member who has their commercial pesticide applicator license
+* $300,000 liability insurance if work does not include `fumigation|` 
+* $500,000 liability insurance if work does include fumigation
 
 ## Application Requirements
 
-- Name and license of the certified pesticide applicator
-- Name and phone number of the liability insurance agent
-- Applicable fees paid
+* Name and license of the certified pesticide applicator
+* Name and phone number of the [liability insurance agent](https://www.nj.gov/dep/enforcement/pcp/bpo/certification/forms/insurance_coverage_verification_vpi-001-fillable.pdf)
+* Applicable fees paid
 
 :::infoAlert
 Email the pesticide applicator business license application ([VPA-013](https://www.nj.gov/dep/enforcement/pcp/bpo/certification/forms/ab_license_application_vpa-013_fillable.pdf)) form to pestcertcourses@dep.nj.gov.
