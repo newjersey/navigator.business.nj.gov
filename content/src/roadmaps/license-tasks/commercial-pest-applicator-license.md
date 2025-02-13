@@ -1,7 +1,6 @@
 ---
 notesMd: "Draft:
-  https://docs.google.com/document/d/1LeeaqXW1t8z3fsV4c61DxFannz7YnMTLuG17XGLKY\
-  LE/edit?tab=t.0#heading=h.au84q0gvta3m"
+  https://docs.google.com/document/d/1LeeaqXW1t8z3fsV4c61DxFannz7YnMTLuG17XGLKYLE/edit?tab=t.0#heading=h.au84q0gvta3m"
 displayname: commercial-pest-applicator-license
 urlSlug: commercial-pest-applicator-license
 agencyId: njdep
