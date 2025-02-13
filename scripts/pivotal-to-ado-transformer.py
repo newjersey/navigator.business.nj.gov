@@ -1,4 +1,5 @@
 import csv
+import os
 import re
 
 import pandas as pd
@@ -92,25 +93,59 @@ def convert_newlines_to_html(text):
     return text
 
 
-# TODO - Update CSV file to a more recent export/prompt the user for the file path
+# Read the CSV file
+input_file = input("Enter the path to the input CSV file: ").strip()
+is_accessibility = (
+    input("Is this file related to the accessibility audit? (y/n): ").strip().lower()
+)
+
 df = pd.read_csv(
-    "business-nj-gov-navigator-delivery-2024-12-23.csv",
+    input_file,
     lineterminator="\n",
     escapechar="\\",
     encoding="utf-8",
     quoting=csv.QUOTE_ALL,  # Force quoting of all fields
 )
 
+# Create Tags column with base value and existing Labels
+df["Tags"] = "Pivotal Legacy Import"
+
+# Add Labels (if they exist) and Accessibility Audit tag if applicable
+df["Tags"] = df.apply(
+    lambda row: ";".join(
+        filter(
+            None,
+            [
+                "Pivotal Legacy Import",
+                (
+                    str(row["Labels"]).replace(",", ";")
+                    if pd.notna(row["Labels"]) and str(row["Labels"]).strip()
+                    else None
+                ),
+                "Accessibility Audit" if is_accessibility == "y" else None,
+            ],
+        )
+    ),
+    axis=1,
+)
+
+# Drop the original Labels column
+df = df.drop(columns=["Labels"])
+
 # Filter out rows where Type is 'release'
 df = df[df["Type"] != "release"]
 
 # Transform type column to Work Item Type with title case
-type_mapping = {"bug": "Bug", "chore": "Chore", "epic": "Epic", "feature": "Feature"}
+type_mapping = {
+    "bug": "Bug",
+    "chore": "Chore",
+    "epic": "Epics",
+    "feature": "User Story",
+}
 
 # Rename and transform the column
 df["Work Item Type"] = df["Type"].map(type_mapping)
 df = df.drop(columns=["Type"])
-
 DEFAULT_MESSAGE = (
     "This is an import from Pivotal Tracker. This field was previously blank."
 )
@@ -133,6 +168,10 @@ def get_base_columns(columns, prefix):
 
 
 def get_numbered_suffixes(columns, prefix):
+    # Only return suffixes if the base column exists
+    if not any(col.startswith(prefix) for col in columns):
+        return []
+
     suffixes = [""]
     i = 1
     while f"{prefix}.{i}" in columns:
@@ -152,12 +191,44 @@ review_suffixes = get_numbered_suffixes(columns, "Review Type")
 pr_cols = get_base_columns(columns, "Pull Request")
 branch_cols = get_base_columns(columns, "Git Branch")
 
-# Create Comments column
-df["Comments"] = df[comment_cols].apply(
-    lambda x: "\n-------------------\n".join(
-        [str(val) for val in x if pd.notna(val) and str(val).strip()]
-    ),
-    axis=1,
+# Create new consolidated columns only if they exist in the input
+df["Comments"] = (
+    df[comment_cols].apply(
+        lambda x: "\n-------------------\n".join(
+            [str(val) for val in x if pd.notna(val) and str(val).strip()]
+        ),
+        axis=1,
+    )
+    if comment_cols
+    else ""
+)
+df["Owners"] = (
+    df.apply(lambda row: combine_owners(row, owner_cols), axis=1) if owner_cols else ""
+)
+df["Blockers"] = (
+    df.apply(lambda row: combine_blockers(row, blocker_base_cols), axis=1)
+    if blocker_base_cols
+    else ""
+)
+df["Tasks"] = (
+    df.apply(lambda row: combine_tasks(row, task_base_cols), axis=1)
+    if task_base_cols
+    else ""
+)
+df["Reviews"] = (
+    df.apply(lambda row: combine_reviews(row, review_suffixes), axis=1)
+    if review_suffixes
+    else ""
+)
+df["Pull Requests"] = (
+    df.apply(lambda row: combine_simple_columns(row, pr_cols), axis=1)
+    if pr_cols
+    else ""
+)
+df["Git Branches"] = (
+    df.apply(lambda row: combine_simple_columns(row, branch_cols), axis=1)
+    if branch_cols
+    else ""
 )
 
 # Append Comments to Description with formatting
@@ -179,16 +250,6 @@ df.loc[(mask) & (df["Repro Steps"].str.strip() == ""), "Repro Steps"] = DEFAULT_
 df["Description"] = df["Description"].apply(convert_newlines_to_html)
 df["Repro Steps"] = df["Repro Steps"].apply(convert_newlines_to_html)
 
-# Create new consolidated columns
-df["Owners"] = df.apply(lambda row: combine_owners(row, owner_cols), axis=1)
-df["Blockers"] = df.apply(lambda row: combine_blockers(row, blocker_base_cols), axis=1)
-df["Tasks"] = df.apply(lambda row: combine_tasks(row, task_base_cols), axis=1)
-df["Reviews"] = df.apply(lambda row: combine_reviews(row, review_suffixes), axis=1)
-df["Pull Requests"] = df.apply(lambda row: combine_simple_columns(row, pr_cols), axis=1)
-df["Git Branches"] = df.apply(
-    lambda row: combine_simple_columns(row, branch_cols), axis=1
-)
-
 # Get all columns to drop
 columns_to_drop = []
 for col in columns:
@@ -208,26 +269,32 @@ for col in columns:
 # Drop the original columns
 df = df.drop(columns=columns_to_drop)
 
+# Filter rows based on Current State values
+df = df[df["Current State"].str.lower().isin(["finished", "delivered", "accepted"])]
+
 # Sort by Id to ensure consistent splitting
 df = df.sort_values("Id")
+
+# Get base filename without extension for output files
+base_filename = os.path.splitext(os.path.basename(input_file))[0]
 
 # Create full version files
 ITEMS_PER_FILE = 1000
 
 df_first = df.iloc[:ITEMS_PER_FILE]
 df_first.to_csv(
-    "business-nj-gov-navigator-delivery-consolidated-1.csv",
+    f"{base_filename}-consolidated-1.csv",
     index=False,
-    lineterminator="\n",  # Use \n for line endings between rows
+    lineterminator="\n",
     quoting=csv.QUOTE_ALL,
     escapechar="\\",
-    doublequote=True,  # Handle quotes within quoted strings
+    doublequote=True,
 )
 
 df_second = df.iloc[ITEMS_PER_FILE:]
 if not df_second.empty:
     df_second.to_csv(
-        "business-nj-gov-navigator-delivery-consolidated-2.csv",
+        f"{base_filename}-consolidated-2.csv",
         index=False,
         lineterminator="\n",
         quoting=csv.QUOTE_ALL,
@@ -235,24 +302,24 @@ if not df_second.empty:
         doublequote=True,
     )
 
-# Create simplified version with Title, Work Item Type, Description, and Repro Steps
-df_simple = df[["Title", "Work Item Type", "Description", "Repro Steps"]]
+# Create simplified version with Title, Work Item Type, Description, Repro Steps, and Tags
+df_simple = df[["Title", "Work Item Type", "Description", "Repro Steps", "Tags"]]
 
 # Split simplified version into chunks of 1000
 df_simple_first = df_simple.iloc[:ITEMS_PER_FILE]
 df_simple_first.to_csv(
-    "business-nj-gov-navigator-delivery-simplified-1.csv",
+    f"{base_filename}-simplified-1.csv",
     index=False,
     lineterminator="\n",
-    quoting=csv.QUOTE_ALL,  # Force quoting of all fields
+    quoting=csv.QUOTE_ALL,
     escapechar="\\",
-    doublequote=True,  # Handle quotes within quoted strings
+    doublequote=True,
 )
 
 df_simple_second = df_simple.iloc[ITEMS_PER_FILE:]
 if not df_simple_second.empty:
     df_simple_second.to_csv(
-        "business-nj-gov-navigator-delivery-simplified-2.csv",
+        f"{base_filename}-simplified-2.csv",
         index=False,
         lineterminator="\n",
         quoting=csv.QUOTE_ALL,
