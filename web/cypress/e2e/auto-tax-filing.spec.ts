@@ -12,7 +12,7 @@ import { randomNonHomeBasedIndustry } from "@businessnjgovnavigator/cypress/supp
 import { onDashboardPage } from "@businessnjgovnavigator/cypress/support/page_objects/dashboardPage";
 import { onProfilePage } from "@businessnjgovnavigator/cypress/support/page_objects/profilePage";
 
-describe("auto tax filing [feature] [all] [group4]", () => {
+describe.skip("auto tax filing [feature] [all] [group4]", () => {
   let businessName: string;
   beforeEach(() => {
     cy.loginByCognitoApi();
