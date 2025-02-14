@@ -29,7 +29,7 @@ licenseCertificationClassification: undefined
 ## Eligibility Criteria
 
 * You have a staff member who has their commercial pesticide applicator license
-* $300,000 liability insurance if work does not include `fumigation|Fumigation` 
+* $300,000 liability insurance if work does not include `fumigation|fumigation' 
 * $500,000 liability insurance if work does include fumigation
 
 ## Application Requirements
