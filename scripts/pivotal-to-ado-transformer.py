@@ -270,7 +270,7 @@ for col in columns:
 df = df.drop(columns=columns_to_drop)
 
 # Filter rows based on Current State values
-df = df[df["Current State"].str.lower().isin(["finished", "delivered", "accepted"])]
+df = df[df["Current State"].str.lower().isin(["delivered", "accepted"])]
 
 # Sort by Id to ensure consistent splitting
 df = df.sort_values("Id")
