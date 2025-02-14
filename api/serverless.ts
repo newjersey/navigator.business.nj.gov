@@ -53,7 +53,7 @@ const useFakeSelfReg = process.env.USE_FAKE_SELF_REG || "";
 const intercomHashSecret = process.env.INTERCOM_HASH_SECRET || "";
 
 const healthCheckLambda = `businessnjgov-api-${stage}-healthCheck`;
-const healthCheckEventRule = `health_check_lambda_event_rule`;
+const healthCheckEventRule = `health_check_lambda_event_rule-${stage}`;
 
 const documentS3Bucket = `nj-bfs-user-documents-${stage}`;
 const serverlessDeploymentS3Bucket = process.env.BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME || "default-bucket";
