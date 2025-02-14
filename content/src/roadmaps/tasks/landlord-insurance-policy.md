@@ -10,7 +10,7 @@ summaryDescriptionMd: >-
   To find an insurance broker, talk to people in your network, local Chamber of Commerce, or a real estate agent. Often, the best way to find a broker is by asking people you know.
 urlSlug: landlord-insurance-policy
 displayname: landlord-insurance-policy
-name: Get an Insurance Policy
+name: Get Your Insurance Policy
 id: landlord-insurance-policy
 callToActionLink: ""
 callToActionText: ""
