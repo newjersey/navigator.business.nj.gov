@@ -55,7 +55,7 @@ callToActionLink: https://www.nj.gov/mvc/vehicles/titlenew.htm
 ---
 ## Eligibility Criteria
 
-You need a `(MVC) Entity Identification Number (EIN)|mvc-entity-id` to apply for a business title.
+You need a Motor Vehicle Commission `(MVC) Entity Identification Number (EIN)|mvc-entity-id` to apply for a business title.
 
 ## Application Requirements
 
