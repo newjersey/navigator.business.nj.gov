@@ -49,7 +49,7 @@ summaryDescriptionMd: >-
   * Does not have a title (this is rare)
 
   * Is a boat or watercraft (vessel), longer than twelve feet, that is owned by someone other than the intended business owner
-issuingAgency: Motor Vehicle Commission
+issuingAgency: ""
 callToActionText: Get My Vehicle Title
 callToActionLink: https://www.nj.gov/mvc/vehicles/titlenew.htm
 ---
