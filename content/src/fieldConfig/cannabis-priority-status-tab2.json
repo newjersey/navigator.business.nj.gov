@@ -1,26 +1,26 @@
 {
   "cannabisPriorityStatus": {
+    "socialEquityRequirements": "- []{cannabis-social-equity-notarized-statement}A [notarized statement](https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf) by the owner(s) that they meet the criteria for a `Social Equity Business|social-equity-business-cannabis`\n- []{cannabis-social-equity-residency-doc}Documentation (such as a tax return) to prove residency\n",
     "noPriorityStatusText": "Based on your answers, you are not eligible for any priority status. You can mark this task as completed.",
-    "greenBoxHeadingText": "",
     "greenBoxVeteranText": "A Disabled Veteran-Owned Business certificate",
     "certificationButtonLink": "https://www.njportal.com/DOR/SBERegistry/",
     "backButtonText": "Back",
     "greenBoxMinorityOrWomenText": "A Minority/Women-Owned Business Enterprise certificate",
     "greenBoxSocialEquityText": "A completed Social Equity Business form",
-    "secondTabDescriptionText": "You qualify for the following priority statuses. Diversely-Owned Business will have the highest priority followed by Social Equity Businesses and Impact Zone Businesses. Having multiple priorities does not give you an additional advantage.",
+    "greenBoxHeadingText": "Once completed, you will have:",
+    "secondTabDescriptionText": "You qualify for the following priority statuses. If you qualify for more than one, your application will be reviewed and approved according to the highest priority status: Social Equity Business, Diversely-Owned Business, and Impact Zone Business. \n\n\n\n",
     "completeTaskProgressButtonText": "Mark as Completed",
     "impactZoneHeaderText": "Impact Zone Business",
     "socialEquityHeaderText": "Social Equity Business (SEB)",
+    "minorityWomenOwnedRequirements": "- []{general-minority-and-women-owned-owner-names}Names and addresses of the owner, partners, or shareholders, as applicable, and their representative shares of ownership\n- []{general-minority-and-women-owned-officer-names}Names and addresses of the officers of the business\n- []{general-minority-and-women-owned-bod-names}Names and addresses of members of the board of directors (c-corps only)\n- []{general-minority-and-women-owned-shares}Number of shares of stock issued and outstanding (c-corps only)\n- []{general-minority-and-women-owned-agreements}Articles of incorporation, bylaws, partnership agreements, or joint venture agreements (as applicable)\n- []{general-minority-and-women-charts}Organizational charts\n- []{general-minority-and-women-identification}Applicant's certificate of birth, or motor vehicle driver's license, passport, or other acceptable form of identification\n- []{general-minority-and-women-affidavit}An affidavit, signed by the individual seeking certification, certifying that the applicant is a minority business or women's business\n",
     "socialEquityButtonText": "Get My SEB Form",
-    "veteranHeaderText": "Diversely-Owned Business: DVOB Certification",
+    "veteranOwnedRequirements": "- \\[]{general-veteran-honorable-discharge}Federal Service-Disabled Veteran-Owned Business Determination Letter, Disability Award Letter or Federal Service-Disabled Veteran Letter. (Must be provided for majority owners).\n- \\[]{general-veteran-nj-residency}Proof of New Jersey residency for majority owner(s)\n",
+    "veteranHeaderText": "Diversely-Owned Business: Disabled Veteran-Owned Business (DVOB) Certification",
     "certificationButtonText": "Apply for My Certification",
-    "secondTabHeaderText": "Application Needs",
-    "minorityOrWomenHeaderText": "Diversely-Owned Business: M/WBE Certification",
+    "secondTabHeaderText": "Application Requirements",
+    "minorityOrWomenHeaderText": "Diversely-Owned Business: Minority or Women-Owned Business Enterprise (M/WBE) Certification",
     "socialEquityButtonLink": "https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf",
-    "impactZoneText": "Nothing else to do here, you’re ready to start applying for your Cannabis license.",
-    "veteranOwnedRequirements": "- \\[]{general-veteran-honorable-discharge}Federal Service-Disabled Veteran-Owned Business Determination Letter, Disability Award Letter or Federal Service-Disabled Veteran Letter. (Must be provided for Majority owners).\n- \\[]{general-veteran-nj-residency}Proof of New Jersey residency for Majority owner(s)\n",
-    "socialEquityRequirements": "- []{cannabis-social-equity-notarized-statement}A [notarized statement](https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf) by the owner(s) that they meet the criteria for a `Social Equity Business|social-equity-business-cannabis`\n- []{cannabis-social-equity-residency-doc}Documentation (such as a tax return) to prove residency\n",
-    "minorityWomenOwnedRequirements": "- []{general-minority-and-women-owned-owner-names}The names and addresses of the owner, partners, or shareholders, as applicable, and their representative shares of ownership\n- []{general-minority-and-women-owned-officer-names}The names and addresses of the officers of the business\n- []{general-minority-and-women-owned-bod-names}The names and addresses of members of the board of directors (c-corps only)\n- []{general-minority-and-women-owned-shares}The number of shares of stock issued and outstanding (c-corps only)\n- []{general-minority-and-women-owned-agreements}The articles of incorporation, bylaws, partnership agreements, or joint venture agreements (as applicable)\n- []{general-minority-and-women-charts}Organizational charts\n- []{general-minority-and-women-identification}An applicant's certificate of birth, or motor vehicle driver's license, passport, or other acceptable form of identification\n- []{general-minority-and-women-affidavit}An affidavit, signed by the individual seeking certification, certifying that the applicant is a minority business or women's business\n",
-    "dropdownCTAButtonText": "Get Started"
+    "dropdownCTAButtonText": "Get Started",
+    "impactZoneText": "Nothing else to do here. You’re ready to start applying for your cannabis license."
   }
 }
