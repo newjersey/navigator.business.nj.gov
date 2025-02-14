@@ -61,7 +61,7 @@ You need a Motor Vehicle Commission `(MVC) Entity Identification Number (EIN)|mv
 
 For vehicles, you will need:
 * **Proof of ownership,** such as a Manufacturer’s Certificate of Origin (MCO)
-* **Universal Title Application (Form OS/SS-UTA)**
+* **[Universal Title Application (Form OS/SS-UTA)](https://www.nj.gov/mvc/pdf/vehicles/OS-SS-UTA.pdf)**
 * **Proof of Identity,** such as a valid driver’s license or other government-issued photo identification
 * **Proof of current insurance,** such as a card or policy declaration page
 * **Lienholder information,** if adding or removing a lien from a title
@@ -73,13 +73,13 @@ For vehicles, you will need:
 Proof of address, to confirm New Jersey residency
 
 For vessels, you will need:
-* **Boat Registration Application (Form BA-51)**
-* **Universal Title Application (Form OS/SS-UTA)**
-* **Hull Identification Number (HIN)**
+* **[Boat Registration Application (Form BA-51)](https://www.nj.gov/mvc/pdf/vehicles/BA-51.pdf)**
+* **[Universal Title Application (Form OS/SS-UTA)](https://www.nj.gov/mvc/pdf/vehicles/OS-SS-UTA.pdf)**
+* **Hull Identification Number (HIN),** the vessel equivalent of a Vehicle Identification Number (VIN)
 * **Proof of sales tax payment** or exemption
 * **USCG documentation,** if the vessel is documented with the U.S. Coast Guard
 
-You must apply for a title in person. Complete the Universal Title Application (Form OS/SS-UTA) and take it to any NJ MVC agency. To save time, make an appointment online.
+You must apply for a title in person. Complete the appropriate form(s) and take them to any NJ MVC agency. To save time, [make an appointment online](https://telegov.njportal.com/njmvc).
 
 &nbsp;
 
@@ -89,7 +89,7 @@ You must apply for a title in person. Complete the Universal Title Application (
 **Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov
 
 :::callout{ showHeader="true" headerText="What if I don't get a title?" showIcon="false" calloutType="warning" }
-If you operate a vehicle or vessel for business purposes that is not owned by the business, you may be subject to vehicle impoundment or fines.
+If you operate a vehicle or vessel under a individual's name for business purposes, you may be subject to vehicle impoundment or fines.
 
 :::
 
