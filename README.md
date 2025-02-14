@@ -42,13 +42,15 @@ extension.
 
 ### Software requirements
 
-- [Node.js 20.x "Iron" LTS](https://nodejs.org/en/download/) (We recommend using
+- [Node.js 20.18.1 "Iron" LTS](https://nodejs.org/en/download/) (We recommend using
   [nvm](https://github.com/nvm-sh/nvm#readme) for managing Node.js versions. If
   installing via package manager, we suggest installing `corepack` if available
   separately.)
 - [AWS CLI](https://aws.amazon.com/cli/)
 - [JRE/JDK 17.x or newer](https://jdk.java.net/)
 - [Python 3.13](https://www.python.org/downloads/)
+- [yarn](https://yarnpkg.com/)
+- [wget](https://www.gnu.org/software/wget/)
 
 **Windows (non-WSL) only**:
 
@@ -80,13 +82,16 @@ Before you can run locally, you will need to:
 - create a `./api/.env` that includes all the values laid out in the
   `./api/.env-template` file.
 - create a `.venv` virtual environment and install requirements if working on
-  Python:
-
-```shell
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
+  Python
+  ```shell
+  python3 -m venv .venv
+  source .venv/bin/activate
+  pip install -r requirements.txt
+  ```
+- do an initial build
+  ```shell
+  yarn build
+  ```
 
 ### Run tests
 
@@ -98,21 +103,18 @@ yarn test
 ```
 
 We use Cypress for end-to-end (e2e) testing. You can run these tests locally
-with:
+as follows. Since some Cypress tests only run in the CI environment, they require
+running a local instance of the application to test against.
 
 ```shell
 ./scripts/local-feature-tests.sh
 ```
 
-To run all tests with code coverage (locally):
+To run all tests with code coverage:
 
 ```shell
 yarn test:coverage
 ```
-
-Some of the Cypress tests only run in the CI environment. When using the
-`local-feature-tests` script, make sure to have a locally running instance of
-the application.
 
 We use Python's `unittest` for our Python tests. Run all Python unit tests with:
 
