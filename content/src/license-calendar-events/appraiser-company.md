@@ -18,9 +18,10 @@ callToActionText: "Renew My Appraisal Management Company License "
 ---
 ## Application Requirements
 
+* Disciplinary actions of the `controlling person,|controlling-person` owners, or compliance officers since last renewal, if applicable
+* Criminal history of the controlling person, owners, or `compliance officers|compliance-officer` since last renewal, if applicable
 
-
-:::callout{ showHeader="true" headerText="What if I don’t renew my registration? " showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="What if I don’t renew my registration?" showIcon="false" calloutType="warning" }
 
 Your real estate appraisal management company cannot operate in New Jersey. Offering these services without a valid registration may result in fines and other legal consequences.
 
