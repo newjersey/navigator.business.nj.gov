@@ -1,6 +1,6 @@
 {
   "cannabisPriorityStatus": {
-    "socialEquityRequirements": "* []{cannabis-social-equity-notarized-statement}A [notarized statement or attestation](https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf) by the owner(s) that they meet the criteria for a `Social Equity Business|social-equity-business-cannabis` \n* \\[]{cannabis-social-equity-residency-doc}Documentation (such as a tax return) to prove residency",
+    "socialEquityRequirements": "* []{cannabis-social-equity-notarized-statement}A [notarized statement or attestation](https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf) by the owner(s) that they meet the criteria for a `Social Equity Business|social-equity-business-cannabis` \n* \\[]{cannabis-social-equity-residency-doc}Documentation to prove income (such as tax return), residency (such as mortgage statements or bills), and any records related to past cannabis charges, if applicable\n\n\n\n",
     "noPriorityStatusText": "Based on your answers, you are not eligible for any priority status. You can mark this task as completed.",
     "greenBoxVeteranText": "A Disabled Veteran-Owned Business certificate",
     "certificationButtonLink": "https://www.njportal.com/DOR/SBERegistry/",
@@ -8,7 +8,7 @@
     "greenBoxMinorityOrWomenText": "A Minority/Women-Owned Business Enterprise certificate",
     "greenBoxSocialEquityText": "A completed Social Equity Business form",
     "greenBoxHeadingText": "Once completed, you will have:",
-    "secondTabDescriptionText": "You qualify for the following priority statuses. If you qualify for more than one, your application will be reviewed and approved according to the highest priority status: Social Equity Business, Diversely-Owned Business, and Impact Zone Business. \n\n\n\n",
+    "secondTabDescriptionText": "You qualify for the following priority statuses. If you qualify for more than one, your application will be reviewed and approved based on the highest priority status: Social Equity Business, Diversely-Owned Business, and Impact Zone Business. \n\n\n",
     "completeTaskProgressButtonText": "Mark as Completed",
     "impactZoneHeaderText": "Impact Zone Business",
     "socialEquityHeaderText": "Social Equity Business (SEB)",
