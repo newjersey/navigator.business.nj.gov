@@ -12,7 +12,6 @@ export type MunicipalityDetail = {
   townName: string;
   townDisplayName: string;
   townWebsite: string;
-  countyId: string;
   countyName: string;
   countyClerkPhone: string;
   countyClerkWebsite: string;
