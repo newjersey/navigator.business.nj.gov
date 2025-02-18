@@ -6,9 +6,9 @@ urlSlug: conditional-cannabis-license
 name: Apply for Your Conditional Cannabis License
 webflowName: "Cannabis: Conditional License"
 summaryDescriptionMd: To start your cannabis application before opening a site,
-  you may apply for a conditional license that gives you up to 165 days to find
-  a location, get municipal approval, and apply for a conversion license (which
-  will give your business approval to operate).
+  you may apply for a conditional license. A conditional license gives you up to
+  165 days to find a location, get municipal approval, and apply for a
+  conversion license (which you need to operate).
 industryId: cannabis
 callToActionText: Apply for My Conditional Cannabis License
 callToActionLink: https://www.nj.gov/cannabis/businesses/
