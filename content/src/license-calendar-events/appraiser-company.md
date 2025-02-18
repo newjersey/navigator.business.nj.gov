@@ -23,6 +23,7 @@ callToActionText: "Renew My Appraisal Management Company License "
 
 * Disciplinary actions of the `controlling person,|controlling-person` owners, or compliance officers since last renewal, if applicable
 * Criminal history of the controlling person, owners, or `compliance officers|compliance-officer` since last renewal, if applicable
+* Applicable fees paid
 
 :::callout{ showHeader="true" headerText="What if I don’t renew my registration?" showIcon="false" calloutType="warning" }
 
