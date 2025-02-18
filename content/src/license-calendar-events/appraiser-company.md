@@ -1,10 +1,7 @@
 ---
-notesMd: >-
-  Working doc:
-  https://docs.google.com/document/d/1IDMyO1Eo21OD6PnZF3hsTFt2BXQd1xeRB_6cey7Jbb8/edit?tab=t.0
-
-
-  Note: the formatting seems off for the bullet points under App Reqs; there doesn't appear to be a bullet point for the first item, but it still shows up with one in the righthand view. I do want all items under App Reqs to have them.
+notesMd: "Working doc:
+  https://docs.google.com/document/d/1IDMyO1Eo21OD6PnZF3hsTFt2BXQd1xeRB_6cey7Jb\
+  b8/edit?tab=t.0"
 licenseName: ""
 urlSlug: appraiser-company
 expirationEventDisplayName: Real Estate Appraisal Management Company License Expiration
