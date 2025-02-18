@@ -1,8 +1,9 @@
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
+import { DataFieldFormContext } from "@/contexts/dataFieldFormContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileContentField, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
+import { ProfileContentField } from "@/lib/types/types";
 import { OutlinedInputProps, TextFieldProps } from "@mui/material";
 import { HTMLInputTypeAttribute, ReactElement, useContext } from "react";
 
@@ -40,7 +41,7 @@ export const DataField = <T,>({ fieldName, className, ...props }: DataFieldProps
     <div className={className}>
       <GenericTextField
         value={state.profileData[fieldName] as string | undefined}
-        formContext={ProfileFormContext}
+        formContext={DataFieldFormContext}
         fieldName={fieldName as string}
         {...props}
         validationText={props.validationText ?? contentFromConfig.errorTextRequired ?? ""}

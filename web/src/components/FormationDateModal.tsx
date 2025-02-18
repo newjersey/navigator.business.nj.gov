@@ -4,8 +4,8 @@ import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
 import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
+import { createDataFieldErrorMap, DataFieldFormContext } from "@/contexts/dataFieldFormContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -30,7 +30,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
     onSubmit,
     isValid,
     state: formContextState,
-  } = useFormContextHelper(createProfileFieldErrorMap());
+  } = useFormContextHelper(createDataFieldErrorMap());
 
   useEffect(() => {
     if (!business) return;
@@ -58,7 +58,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
   });
 
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFieldFormContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -113,6 +113,6 @@ export const FormationDateModal = (props: Props): ReactElement => {
           )}
         </ModalTwoButton>
       </ProfileDataContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFieldFormContext.Provider>
   );
 };

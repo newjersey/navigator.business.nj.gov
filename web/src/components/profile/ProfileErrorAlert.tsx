@@ -4,7 +4,7 @@ import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { templateEval } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
-import { ProfileContentField } from "@/contexts/profileFormContext";
+import { ProfileContentField } from "@/lib/types/types";
 
 interface Props {
   fieldErrors: string[];

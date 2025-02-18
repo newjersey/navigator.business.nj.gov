@@ -1,12 +1,12 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { ConfigType } from "@/contexts/configContext";
-import { FormContextFieldProps } from "@/contexts/formContext";
+import { DataFieldFormContext } from "@/contexts/dataFieldFormContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
+import { FormContextFieldProps } from "@/lib/types/types";
 import { LookupSectorTypeById, SectorType, arrayOfSectors as sectors } from "@businessnjgovnavigator/shared";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
 import { Autocomplete, TextField } from "@mui/material";
@@ -24,7 +24,7 @@ export const Sectors = <T,>(props: Props<T>): ReactElement => {
 
   const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     "sectorId",
-    ProfileFormContext,
+    DataFieldFormContext,
     props.errorTypes
   );
 
