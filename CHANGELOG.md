@@ -1,3 +1,29 @@
+# [2025.5.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.4.0...v2025.5.0) (2025-02-18)
+
+
+### Bug Fixes
+
+* [[#188832886](https://github.com/newjersey/navigator.business.nj.gov/issues/188832886)] update HIC license application name ([89f0aa0](https://github.com/newjersey/navigator.business.nj.gov/commit/89f0aa0c7db1f661c6c46767b37e4b9b1fbbeb65))
+* [[#188879179](https://github.com/newjersey/navigator.business.nj.gov/issues/188879179)] ensure funding sorting happens for njeda fundings page ([5ca0f7f](https://github.com/newjersey/navigator.business.nj.gov/commit/5ca0f7f78287c62b89f2dade6e1123406362bf25))
+* [[#188879179](https://github.com/newjersey/navigator.business.nj.gov/issues/188879179)] sync content with content-repo for njeda fundings ([d5ccbfe](https://github.com/newjersey/navigator.business.nj.gov/commit/d5ccbfe2fdc4625f686ec51f2986167a04eacfe5))
+* [[#188879179](https://github.com/newjersey/navigator.business.nj.gov/issues/188879179)] update funding test to not rely on generation ([cf1f753](https://github.com/newjersey/navigator.business.nj.gov/commit/cf1f753cb4beebec00ede26ae2bd57d9db51be47))
+* [[#188879179](https://github.com/newjersey/navigator.business.nj.gov/issues/188879179)] update njeda onboarding hyperlink and mark fundings program as priority ([6adf39a](https://github.com/newjersey/navigator.business.nj.gov/commit/6adf39ac435cd2514a8041f76faf4d523643a9c8))
+* ensure funding filtering on fundings that expire in the future ([7ffcbbd](https://github.com/newjersey/navigator.business.nj.gov/commit/7ffcbbd5435776c200206f2c9874bc192651f94e))
+* redeploy; skip staging deploy ([15ea0f1](https://github.com/newjersey/navigator.business.nj.gov/commit/15ea0f179e6fcc049539b5220da7f8e2d6ca7ae1))
+* update metadata for new license tasks ([e73952c](https://github.com/newjersey/navigator.business.nj.gov/commit/e73952c0d3749d0f23a71d31b93392baf79d83f6))
+* wording issue for icon formation accessibility issues ([b9c8d14](https://github.com/newjersey/navigator.business.nj.gov/commit/b9c8d14f0b4362a9f6703a3b1343ac01c8bd64ff))
+* wording issue for icon formation accessibility issues test for signers ([164fbec](https://github.com/newjersey/navigator.business.nj.gov/commit/164fbecf0c7939fde7b953432f0af8dc36eaa966))
+
+
+### Features
+
+* [[#188778935](https://github.com/newjersey/navigator.business.nj.gov/issues/188778935)] consolidate AWS resources to two environments ([f74a567](https://github.com/newjersey/navigator.business.nj.gov/commit/f74a5676da8e291a4dcd0ac71b210dec41abf6ff))
+* [[#188793304](https://github.com/newjersey/navigator.business.nj.gov/issues/188793304)] replaced trash and penicl icons with text ([7b58496](https://github.com/newjersey/navigator.business.nj.gov/commit/7b58496554efe77c31db9c3f465629463777ed3e))
+* [[#188853770](https://github.com/newjersey/navigator.business.nj.gov/issues/188853770)] env task filter home-based businesses ([fdf21f6](https://github.com/newjersey/navigator.business.nj.gov/commit/fdf21f6a2a7637cb45b1496635416a9ed9577af8))
+* [[#188862738](https://github.com/newjersey/navigator.business.nj.gov/issues/188862738)] add priority field to CMS Fundings ([e18651a](https://github.com/newjersey/navigator.business.nj.gov/commit/e18651a570ba10e05c0aaf1e5829e6520d438f78))
+* [[#188862738](https://github.com/newjersey/navigator.business.nj.gov/issues/188862738)] change url to /njeda from /fundings ([048d31b](https://github.com/newjersey/navigator.business.nj.gov/commit/048d31bd2df91f9e8cfed7718d666260f1fae256))
+* [[#188877973](https://github.com/newjersey/navigator.business.nj.gov/issues/188877973)] add employee count question to njeda onboarding page ([28c2edc](https://github.com/newjersey/navigator.business.nj.gov/commit/28c2edcf790f75840eb8b11ef2c4e1c659c9b38f))
+
 # [2025.5.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.4.0...v2025.5.0) (2025-02-14)
 
 
