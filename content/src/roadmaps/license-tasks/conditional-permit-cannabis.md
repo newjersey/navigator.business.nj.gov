@@ -5,8 +5,8 @@ displayname: conditional-permit-cannabis
 urlSlug: conditional-cannabis-license
 name: Apply for Your Conditional Cannabis License
 webflowName: "Cannabis: Conditional License"
-summaryDescriptionMd: To get started with your cannabis business, you may apply
-  for a conditional license. This is a temporary license that gives you up to
+summaryDescriptionMd: To get started with your cannabis business, apply for a
+  conditional cannabis license. This is a temporary license that gives you up to
   165 days to find a location, get municipal approval, and apply for a
   conversion license (which you need to operate).
 industryId: cannabis
