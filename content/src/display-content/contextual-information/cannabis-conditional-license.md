@@ -7,4 +7,4 @@ A **conditional license** allows you to start your cannabis business but not ope
 
 Once you are ready to operate and have the necessary paperwork, you then need to apply for a **conversion license**. With a conversion license, you can legally run your cannabis business.
 
-Conditional and conversion license applications get priority review over annual license applications.
+Conditional and conversion license applications get priority review over `annual license|annual-license` applications.
