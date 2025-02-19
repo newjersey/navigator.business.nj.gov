@@ -14,7 +14,7 @@ interface Props {
 
 export const MiniRoadmapTask = (props: Props): ReactElement => {
   const { business } = useUserData();
-  const taskProgress = business?.taskProgress[props.task.id] || "NOT_STARTED";
+  const taskProgress = business?.taskProgress[props.task.id] || "TO_DO";
   const taskProgressReadable = taskProgress.replace("_", " ");
 
   return (

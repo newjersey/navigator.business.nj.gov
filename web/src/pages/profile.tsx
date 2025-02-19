@@ -193,7 +193,7 @@ const ProfilePage = (props: Props): ReactElement => {
       if (dateOfFormationHasBeenDeleted) {
         if (isFormationDateDeletionModalOpen) {
           setFormationDateDeletionModalOpen(false);
-          updateQueue.queueTaskProgress({ [formationTaskId]: "IN_PROGRESS" });
+          updateQueue.queueTaskProgress({ [formationTaskId]: "TO_DO" });
         } else {
           setFormationDateDeletionModalOpen(true);
           return;
@@ -217,7 +217,7 @@ const ProfilePage = (props: Props): ReactElement => {
       if (business.profileData.industryId !== profileData.industryId) {
         updateQueue
           .queueBusiness({ ...updateQueue.currentBusiness(), taskItemChecklist: {} })
-          .queueTaskProgress({ [naicsCodeTaskId]: "NOT_STARTED" });
+          .queueTaskProgress({ [naicsCodeTaskId]: "TO_DO" });
       }
 
       updateQueue.queueProfileData(profileData);

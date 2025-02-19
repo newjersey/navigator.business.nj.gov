@@ -64,13 +64,13 @@ describe("useUpdateTaskProgress", () => {
       taskProgress: { "some-id": "COMPLETED" },
     });
     const { queueUpdateTaskProgress, updateQueue } = setupHook(initialBusiness);
-    queueUpdateTaskProgress("some-other-id", "IN_PROGRESS");
+    queueUpdateTaskProgress("some-other-id", "TO_DO");
     await act(() => {
       return updateQueue.update();
     });
     expect(currentBusiness().taskProgress).toEqual({
       "some-id": "COMPLETED",
-      "some-other-id": "IN_PROGRESS",
+      "some-other-id": "TO_DO",
     });
   });
 
@@ -93,7 +93,7 @@ describe("useUpdateTaskProgress", () => {
       const business = generateBusiness({
         taskProgress: {
           [planTaskId]: "COMPLETED",
-          [startTaskId]: "NOT_STARTED",
+          [startTaskId]: "TO_DO",
         },
         preferences: generatePreferences({ roadmapOpenSections: ["START"] }),
       });
@@ -126,8 +126,8 @@ describe("useUpdateTaskProgress", () => {
     it("closes PLAN roadmap section when complete", async () => {
       const business = generateBusiness({
         taskProgress: {
-          [planTaskId]: "NOT_STARTED",
-          [startTaskId]: "NOT_STARTED",
+          [planTaskId]: "TO_DO",
+          [startTaskId]: "TO_DO",
         },
         preferences: generatePreferences({ roadmapOpenSections: ["PLAN", "START"] }),
       });
@@ -151,7 +151,7 @@ describe("useUpdateTaskProgress", () => {
 
       expect(currentBusiness().taskProgress).toEqual({
         [planTaskId]: "COMPLETED",
-        [startTaskId]: "NOT_STARTED",
+        [startTaskId]: "TO_DO",
       });
 
       expect(currentBusiness().preferences.roadmapOpenSections).toEqual(["START"]);
