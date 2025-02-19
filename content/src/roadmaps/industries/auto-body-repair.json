@@ -55,9 +55,10 @@
     },
     {
       "step": 3,
-      "weight": 40,
+      "weight": 41,
       "task": "transportation-entity-id",
-      "required": true
+      "required": true,
+      "licenseTask": ""
     }
   ],
   "name": "Auto-Body Repair",
@@ -68,6 +69,7 @@
   "industryOnboardingQuestions": {
     "canBeReseller": true
   },
+  "modifications": [],
   "isEnabled": true,
   "additionalSearchTerms": "car,auto body shop,auto shop,car center,auto center",
   "id": "auto-body-repair",
