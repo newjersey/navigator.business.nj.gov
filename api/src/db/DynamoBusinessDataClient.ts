@@ -137,7 +137,7 @@ export const DynamoBusinessDataClient = (
     return db
       .send(new DeleteCommand(params))
       .then(() => {
-        console.log(`Business with ID ${businessId} deleted successfully.`);
+        logger.LogInfo(`Business with ID ${businessId} deleted successfully.`);
       })
       .catch((error) => {
         logger.LogError("Error deleting business:", error);

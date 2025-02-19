@@ -1,11 +1,12 @@
 import { DynamicsElevatorSafetyRegistrationClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyRegistrationClient";
 import { ElevatorSafetyRegistrationClient } from "@client/dynamics/elevator-safety/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 
 jest.mock("axios");
 jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("DynamicsElevatorSafetyRegistrationClient", () => {
   let client: ElevatorSafetyRegistrationClient;
@@ -17,7 +18,7 @@ describe("DynamicsElevatorSafetyRegistrationClient", () => {
     jest.resetAllMocks();
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
 
-    client = DynamicsElevatorSafetyRegistrationClient(logger, ORG_URL);
+    client = DynamicsElevatorSafetyRegistrationClient(DEBUG ? logger : DummyLogWriter, ORG_URL);
   });
 
   const mockAccessToken = "access-granted";
