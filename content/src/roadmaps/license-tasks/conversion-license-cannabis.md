@@ -19,12 +19,11 @@ licenseCertificationClassification: LICENSE
 ## Application Requirements
 
 * \[]{cannabis-updates} Share any updates or changes since the original application
-* \[]{cannabis-site-plan} A site plan of the proposed location including a floor plan
-* \[]{cannabis-location-description} A description of the suitability of the location, which may include renderings, architectural plans, or engineering plans
-* \[]{cannabis-final-site-control} Documentation demonstrating that the license applicant will have final site control of the premises upon approval of the application
+* \[]{cannabis-site-plan} A site plan of the proposed location, including a floor plan and description of the suitability of the location
 * \[]{cannabis-local-codes-compliance} Evidence of compliance with local codes and ordinances for the proposed location
-* \[]{cannabis-zoning-compliance} Zoning approval in the form of a letter or affidavit from appropriate municipal officials stating that the location will conform to local zoning requirements, allows for activities related to the operations of the proposed cannabis business, and lists any variances granted for the business
-* \[]{cannabis-local-gov-resolution} A resolution adopted by the municipality’s governing body, or where the municipality has no governing body, a written letter of support from the municipality’s executive stating that the applicant is compliant with [Section VIII of Notice of Application Acceptance](https://www.nj.gov/cannabis/documents/businesses/personal-use/Final%20Notice%20of%20Application%20Acceptance.pdf)
+* \[]{cannabis-final-site-control} Documentation showing that you will have final site control of the location once your application is approved
+* \[]{cannabis-zoning-compliance} Zoning approval in the form of a letter or affidavit from your local government that states your location meets zoning requirements, allows for activities related to the operations of your proposed cannabis business, and lists any variances granted 
+* \[]{cannabis-local-gov-resolution} Proof of local support stating that you are in compliant with [Section VIII of Notice of Application Acceptance](https://www.nj.gov/cannabis/documents/businesses/personal-use/Final%20Notice%20of%20Application%20Acceptance.pdf) (either a resolution or letter of support from your local government)
 * \[]{cannabis-labor peace-agreement} Your application can gain additional priority by providing an attestation from a labor organization indicating that you both have entered a labor peace agreement(this is not required and no additional priority is offered for micro businesses)
 
 :::callout{ showHeader="true" headerText="Once approved, you will have:" showIcon="false" calloutType="conditional" }
