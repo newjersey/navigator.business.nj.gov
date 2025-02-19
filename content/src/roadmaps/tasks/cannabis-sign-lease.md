@@ -14,7 +14,7 @@ callToActionText: ""
 
 ## Contract Considerations
 
-- **Federal Deposit Insurance Corporation- backed (FDIC) mortgage:** Cannabis is not legal at a federal level. For this reason, properties with federally insured mortgages cannot be used for cannabis businesses
+- **Federal Deposit Insurance Corporation- backed (FDIC) mortgage:** Cannabis is not legal at a federal level. For this reason, properties with federally insured mortgages can't be used for cannabis businesses
 - **Lease start date:** Identify a start date for your lease that considers potential delays due to renovations, industry licenses, or other activities that are out of your control like getting local government approvals
 - **Lease length:** Determine your ideal lease length by analyzing a few `lease considerations|lease-considerations`
 - **Tenant improvements:** Identify the entity responsible and write out expectations for `tenant improvements|tenant-improvements` in your lease
@@ -22,6 +22,6 @@ callToActionText: ""
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A signed lease or letter of intent to lease for your business site.
+A signed lease or letter of intent to lease for your business site, which is required to apply for a conversion or annual cannabis license.
 
 :::
