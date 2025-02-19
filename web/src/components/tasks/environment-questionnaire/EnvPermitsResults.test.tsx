@@ -145,7 +145,7 @@ describe("<EnvPermitsResults />", () => {
       expect(currentBusiness().environmentData?.waste?.submitted).toBe(false);
     });
 
-    it("updates task progress to IN_PROGRESS when the user clicks edit", async () => {
+    it("updates task progress to TO_DO when the user clicks edit", async () => {
       const { user } = renderEnvPermitsResultsAndSetupUser(
         generateBusiness({
           environmentData: generateEnvironmentData({
@@ -157,10 +157,10 @@ describe("<EnvPermitsResults />", () => {
         })
       );
       await user.click(screen.getByText(Config.envResultsPage.editText));
-      expect(currentBusiness().taskProgress[taskId]).toBe("IN_PROGRESS");
+      expect(currentBusiness().taskProgress[taskId]).toBe("TO_DO");
     });
 
-    it("updates task progress to IN_PROGRESS when the user clicks redo form", async () => {
+    it("updates task progress to TO_DO when the user clicks redo form", async () => {
       const { user } = renderEnvPermitsResultsAndSetupUser(
         generateBusiness({
           environmentData: generateEnvironmentData({
@@ -175,7 +175,7 @@ describe("<EnvPermitsResults />", () => {
         })
       );
       await user.click(screen.getByText(Config.envResultsPage.lowApplicability.calloutRedo));
-      expect(currentBusiness().taskProgress[taskId]).toBe("IN_PROGRESS");
+      expect(currentBusiness().taskProgress[taskId]).toBe("TO_DO");
     });
   });
 
@@ -278,7 +278,7 @@ describe("<EnvPermitsResults />", () => {
       expect(currentBusiness().environmentData?.land?.submitted).toBe(false);
     });
 
-    it("updates task progress to IN_PROGRESS when the user clicks edit", async () => {
+    it("updates task progress to TO_DO when the user clicks edit", async () => {
       const { user } = renderEnvPermitsResultsAndSetupUser(
         generateBusiness({
           environmentData: generateEnvironmentData({
@@ -290,10 +290,10 @@ describe("<EnvPermitsResults />", () => {
         })
       );
       await user.click(screen.getByText(Config.envResultsPage.editText));
-      expect(currentBusiness().taskProgress[taskId]).toBe("IN_PROGRESS");
+      expect(currentBusiness().taskProgress[taskId]).toBe("TO_DO");
     });
 
-    it("updates task progress to IN_PROGRESS when the user clicks redo form", async () => {
+    it("updates task progress to TO_DO when the user clicks redo form", async () => {
       const { user } = renderEnvPermitsResultsAndSetupUser(
         generateBusiness({
           environmentData: generateEnvironmentData({
@@ -308,7 +308,7 @@ describe("<EnvPermitsResults />", () => {
         })
       );
       await user.click(screen.getByText(Config.envResultsPage.lowApplicability.calloutRedo));
-      expect(currentBusiness().taskProgress[taskId]).toBe("IN_PROGRESS");
+      expect(currentBusiness().taskProgress[taskId]).toBe("TO_DO");
     });
   });
 
@@ -403,7 +403,7 @@ describe("<EnvPermitsResults />", () => {
       expect(currentBusiness().environmentData?.air?.submitted).toBe(false);
     });
 
-    it("updates task progress to IN_PROGRESS when the user clicks edit", async () => {
+    it("updates task progress to TO_DO when the user clicks edit", async () => {
       const { user } = renderEnvPermitsResultsAndSetupUser(
         generateBusiness({
           environmentData: generateEnvironmentData({
@@ -415,10 +415,10 @@ describe("<EnvPermitsResults />", () => {
         })
       );
       await user.click(screen.getByText(Config.envResultsPage.editText));
-      expect(currentBusiness().taskProgress[taskId]).toBe("IN_PROGRESS");
+      expect(currentBusiness().taskProgress[taskId]).toBe("TO_DO");
     });
 
-    it("updates task progress to IN_PROGRESS when the user clicks redo form", async () => {
+    it("updates task progress to TO_DO when the user clicks redo form", async () => {
       const { user } = renderEnvPermitsResultsAndSetupUser(
         generateBusiness({
           environmentData: generateEnvironmentData({
@@ -433,7 +433,7 @@ describe("<EnvPermitsResults />", () => {
         })
       );
       await user.click(screen.getByText(Config.envResultsPage.lowApplicability.calloutRedo));
-      expect(currentBusiness().taskProgress[taskId]).toBe("IN_PROGRESS");
+      expect(currentBusiness().taskProgress[taskId]).toBe("TO_DO");
     });
   });
 });

@@ -100,7 +100,7 @@ describe("updateRoadmapSidebarCards", () => {
       const taskId = formationTaskId;
       const userData = generateUserDataForBusiness(
         generateBusiness({
-          taskProgress: { [taskId]: "NOT_STARTED" },
+          taskProgress: { [taskId]: "TO_DO" },
 
           profileData: generateProfileData({
             operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,

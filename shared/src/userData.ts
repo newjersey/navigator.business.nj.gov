@@ -104,7 +104,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
 export const sectionNames = ["PLAN", "START", "DOMESTIC_EMPLOYER_SECTION"] as const;
 export type SectionType = (typeof sectionNames)[number];
 
-export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+export type TaskProgress = "TO_DO" | "COMPLETED";
 
 export interface Preferences {
   roadmapOpenSections: SectionType[];

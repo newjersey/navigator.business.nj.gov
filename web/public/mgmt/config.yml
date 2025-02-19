@@ -4611,8 +4611,7 @@ collections:
             widget: object
             summary: "{{taskProgress}}"
             fields:
-              - { label: Not Started Text, name: NOT_STARTED, widget: string }
-              - { label: In Progress Text, name: IN_PROGRESS, widget: string }
+              - { label: To Do Text, name: TO_DO, widget: string }
               - { label: Completed Text, name: COMPLETED, widget: string }
           - label: Task Progress Card
             name: taskProgressCard

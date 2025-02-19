@@ -53,7 +53,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       if (business?.profileData.legalStructureId) {
         queueUpdateTaskProgress(props.task.id, "COMPLETED");
       } else if (!business?.profileData.legalStructureId) {
-        queueUpdateTaskProgress(props.task.id, "NOT_STARTED");
+        queueUpdateTaskProgress(props.task.id, "TO_DO");
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -84,7 +84,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   const setBackToEditing = (): void => {
     if (!business || !updateQueue) return;
     setShowRadioQuestion(true);
-    queueUpdateTaskProgress(props.task.id, "IN_PROGRESS");
+    queueUpdateTaskProgress(props.task.id, "TO_DO");
   };
 
   const removeTaskCompletion = async (): Promise<void> => {
@@ -98,7 +98,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
             ? OperatingPhaseId.GUEST_MODE
             : profileData.operatingPhase,
       })
-      .queueTaskProgress({ [props.task.id]: "NOT_STARTED" });
+      .queueTaskProgress({ [props.task.id]: "TO_DO" });
 
     setShowRadioQuestion(true);
     await updateQueue.update();

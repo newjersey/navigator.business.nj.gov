@@ -73,10 +73,8 @@ export const getTaskStatusUpdatedMessage = (taskStatus: TaskProgress): string =>
   const taskUpdatedMessagePrefix = Config.taskDefaults.taskProgressSnackbarPrefix;
 
   switch (taskStatus) {
-    case "NOT_STARTED":
-      return `${taskUpdatedMessagePrefix} "${Config.taskProgress.NOT_STARTED}"`;
-    case "IN_PROGRESS":
-      return `${taskUpdatedMessagePrefix} "${Config.taskProgress.IN_PROGRESS}"`;
+    case "TO_DO":
+      return `${taskUpdatedMessagePrefix} "${Config.taskProgress.TO_DO}"`;
     case "COMPLETED":
       return `${taskUpdatedMessagePrefix} "${Config.taskProgress.COMPLETED}"`;
   }

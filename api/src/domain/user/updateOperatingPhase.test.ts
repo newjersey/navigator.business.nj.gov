@@ -178,7 +178,7 @@ describe("updateOperatingPhase", () => {
             legalStructureId: undefined,
           }),
           taskProgress: {
-            [businessStructureTaskId]: "NOT_STARTED",
+            [businessStructureTaskId]: "TO_DO",
           },
         })
       );
