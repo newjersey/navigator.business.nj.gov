@@ -26,7 +26,10 @@ licenseCertificationClassification: LICENSE
 * \[]{cannabis-local-gov-resolution} Proof of local support stating that you are in compliant with [Section VIII of Notice of Application Acceptance](<>) (either a resolution or letter of support from your local government)
 * \[]{cannabis-final-site-control} Documentation showing that you will have final site control of the location once your application is approved  
 * \[]{cannabis-labor peace-agreement} Attestation from a labor organization stating that you both have entered a labor peace agreement *(not required for conditional license holders operating as a microbusiness)*
+* \[]{cannabis-standard-operating-procedure} Standard Operating Procedures (SOPs) for your business, which detail how to run operations safely
+* \[]{cannabis-final-agreements} Final agreements, such as signed contracts and leases, if applicable
 * \[]{cannabis-priority-status-proof} Proof you still meet the requirements to be a Social Equity Business, Diversely-Owned Business, and Impact Zone Business, if applicable
+
 
 :::callout{ showHeader="true" headerText="Once approved, you will have:" showIcon="false" calloutType="conditional" }
 
