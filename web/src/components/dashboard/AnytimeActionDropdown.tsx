@@ -14,9 +14,7 @@ import { useRouter } from "next/compat/router";
 import { ChangeEvent, type ReactElement, useState } from "react";
 
 interface Props {
-  anytimeActionLicensesTasks: AnytimeActionTask[];
-  anytimeActionAdminTasks: AnytimeActionTask[];
-  anytimeActionReinstatementsTasks: AnytimeActionTask[];
+  anytimeActionTasks: AnytimeActionTask[];
   anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
 }
@@ -35,19 +33,19 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
   const industryId = business?.profileData.industryId;
   const sectorId = business?.profileData.sectorId;
 
-  const alphabetizeByName = (
-    anytimeActions: AnytimeActionWithTypeAndCategory[]
-  ): AnytimeActionWithTypeAndCategory[] => {
-    return anytimeActions.sort((a, b) => {
-      if (a.name < b.name) {
-        return -1;
-      }
-      if (a.name > b.name) {
-        return 1;
-      }
-      return 0;
-    });
-  };
+  // const alphabetizeByName = (
+  //   anytimeActions: AnytimeActionWithTypeAndCategory[]
+  // ): AnytimeActionWithTypeAndCategory[] => {
+  //   return anytimeActions.sort((a, b) => {
+  //     if (a.name < b.name) {
+  //       return -1;
+  //     }
+  //     if (a.name > b.name) {
+  //       return 1;
+  //     }
+  //     return 0;
+  //   });
+  // };
 
   const reverseAlphabetizeByCategory = (
     anytimeActions: AnytimeActionWithTypeAndCategory[]
@@ -70,34 +68,44 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
         return {
           ...action,
           type: "link",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryAdmin,
+          category: "temporary",
         };
       });
 
-    const anytimeActionAdminTaskWithType = props.anytimeActionAdminTasks
+    const anytimeActionTEMPORARYWithType = props.anytimeActionTasks
       .filter((action) => findMatch(action))
       .map((action) => {
         return {
           ...action,
           type: "task",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryAdmin,
+          category: "temporary",
         };
       });
 
-    const anytimeActionAdminOrLink = [...anytimeActionLinkWithType, ...anytimeActionAdminTaskWithType];
-    alphabetizeByName(anytimeActionAdminOrLink);
+    // const anytimeActionAdminTaskWithType = props.anytimeActionAdminTasks
+    //   .filter((action) => findMatch(action))
+    //   .map((action) => {
+    //     return {
+    //       ...action,
+    //       type: "task",
+    //       category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryAdmin,
+    //     };
+    //   });
 
-    const anytimeActionLicensesTaskWithType = props.anytimeActionLicensesTasks
-      .filter((action) => findMatch(action))
-      .map((action) => {
-        return {
-          ...action,
-          type: "task",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryLicenses,
-        };
-      });
+    // const anytimeActionAdminOrLink = [...anytimeActionLinkWithType, ...anytimeActionAdminTaskWithType];
+    // alphabetizeByName(anytimeActionAdminOrLink);
 
-    alphabetizeByName(anytimeActionLicensesTaskWithType);
+    // const anytimeActionLicensesTaskWithType = props.anytimeActionLicensesTasks
+    //   .filter((action) => findMatch(action))
+    //   .map((action) => {
+    //     return {
+    //       ...action,
+    //       type: "task",
+    //       category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryLicenses,
+    //     };
+    //   });
+
+    // alphabetizeByName(anytimeActionLicensesTaskWithType);
 
     const anytimeActionLicenseReinstatementsWithType = props.anytimeActionLicenseReinstatements
       .filter((action) => licenseReinstatementMatch(action))
@@ -105,32 +113,32 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
         return {
           ...action,
           type: "license-reinstatement",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryReinstatements,
+          category: "reinstatements",
         };
       });
 
-    const anytimeActionReinstatementsWithType = props.anytimeActionReinstatementsTasks
-      .filter((action) => findMatch(action))
-      .map((action) => {
-        return {
-          ...action,
-          type: "task",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryReinstatements,
-        };
-      });
+    // const anytimeActionReinstatementsWithType = props.anytimeActionReinstatementsTasks
+    //   .filter((action) => findMatch(action))
+    //   .map((action) => {
+    //     return {
+    //       ...action,
+    //       type: "task",
+    //       category: "reinstatements",
+    //     };
+    //   });
 
-    const anytimeActionAllReinstatments = [
-      ...anytimeActionReinstatementsWithType,
-      ...anytimeActionLicenseReinstatementsWithType,
-    ];
+    // const anytimeActionAllReinstatments = [
+    //   ...anytimeActionReinstatementsWithType,
+    //   ...anytimeActionLicenseReinstatementsWithType,
+    // ];
 
-    alphabetizeByName(anytimeActionAllReinstatments);
+    // alphabetizeByName(anytimeActionAllReinstatments);
 
     const applicableAnytimeActions: AnytimeActionWithTypeAndCategory[] = [];
 
-    applicableAnytimeActions.push(...anytimeActionLicensesTaskWithType);
-    applicableAnytimeActions.push(...anytimeActionAdminOrLink);
-    applicableAnytimeActions.push(...anytimeActionAllReinstatments);
+    applicableAnytimeActions.push(...anytimeActionTEMPORARYWithType);
+    applicableAnytimeActions.push(...anytimeActionLinkWithType);
+    applicableAnytimeActions.push(...anytimeActionLicenseReinstatementsWithType);
 
     reverseAlphabetizeByCategory(applicableAnytimeActions);
 
