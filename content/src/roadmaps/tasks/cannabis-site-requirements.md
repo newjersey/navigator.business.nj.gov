@@ -31,8 +31,7 @@ callToActionText: ""
 
 :::callout{ showHeader="true" headerText="Once completed, you will know:" showIcon="false" calloutType="conditional" }
 
-- The site-related permits and inspections required to apply for a conversion or annual cannabis license and operate your cannabis business
-- The process for meeting requirements from your local government and NJCRC
-- The time it takes to receive any permits or licenses
+- The site-related permits and inspections you need to apply for a conversion or annual cannabis license and operate your cannabis business
+- The process for meeting your local government and CRC site requirements
 
 :::
