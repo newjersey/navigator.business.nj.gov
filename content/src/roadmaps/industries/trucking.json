@@ -1,9 +1,7 @@
 {
-  "displayname": "trucking",
   "naicsCodes": "484110, 484121, 484122, 484220, 484230",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -41,7 +39,7 @@
     },
     {
       "step": 3,
-      "weight": 15,
+      "weight": 12,
       "task": "trucking-cdl"
     },
     {
@@ -67,9 +65,19 @@
       "weight": 30,
       "task": "trucking-irp",
       "required": true
+    },
+    {
+      "step": 3,
+      "weight": 14,
+      "task": "transportation-entity-id",
+      "required": true
     }
   ],
   "name": "Trucking",
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
+  "displayname": "trucking",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "isTransportation": true
