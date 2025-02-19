@@ -23,11 +23,11 @@ licenseCertificationClassification: LICENSE
 * \[]{cannabis-site-plan} A site plan of the proposed location, including a floor plan and description of the suitability of the location
 * \[]{cannabis-local-codes-compliance} Evidence of compliance with local codes and ordinances for the proposed location
 * \[]{cannabis-zoning-compliance} Zoning approval in the form of a letter or affidavit from your local government that states your location meets zoning requirements, allows for activities related to the operations of your proposed cannabis business, and lists any variances granted 
-* \[]{cannabis-local-gov-resolution} Proof of local support stating that you are in compliant with [Section VIII of Notice of Application Acceptance](<>) (either a resolution or letter of support from your local government)
-* \[]{cannabis-final-site-control} Documentation showing that you will have final site control of the location once your application is approved  
+* \[]{cannabis-local-gov-resolution} Proof of local support stating that you are in compliance with [Section VIII of Notice of Application Acceptance](<>) (either a resolution or letter of support from your local government)
+* \[]{cannabis-final-site-control} Documentation showing that you will have final site control of the location once your application is approved (such as a copy of the lease)
 * \[]{cannabis-labor peace-agreement} Attestation from a labor organization stating that you both have entered a labor peace agreement *(not required for conditional license holders operating as a microbusiness)*
 * \[]{cannabis-standard-operating-procedure} Standard Operating Procedures (SOPs) for your business, which detail how to run operations safely
-* \[]{cannabis-final-agreements} Final agreements, such as signed contracts and leases, if applicable
+* \[]{cannabis-final-agreements} Final agreements, such as signed vendor contracts, if applicable
 * \[]{cannabis-priority-status-proof} Proof you still meet the requirements to be a Social Equity Business, Diversely-Owned Business, and Impact Zone Business, if applicable
 
 
