@@ -4,6 +4,8 @@ notesMd: "Draft:
   Jo/edit?tab=t.0#heading=h.vdxfup4tf9li"
 id: code23-osow-30day-permit
 name: Apply for Your Code 23 OS/OW (30-day) Permit, if Applicable
+category:
+  - Transport My Products or Equipment
 industryIds:
   - commercial-construction
   - freight-forwarding

@@ -7,6 +7,8 @@ notesMd: >-
   Approved by SME (Dean Dafis): 11/15/24
 id: adjust-rental-rates
 name: Learn How to Adjust Your Rental Rates
+category:
+  - Manage My Properties
 industryIds:
   - residential-landlord
 sectorIds:

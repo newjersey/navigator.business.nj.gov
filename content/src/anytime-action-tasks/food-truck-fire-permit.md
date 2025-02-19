@@ -7,6 +7,8 @@ notesMd: >-
   Note: this is also be on the Food Truck Starter Kit
 id: food-truck-fire-permit
 name: Get a Fire Permit for Your Food Truck
+category:
+  - Set Up at a Temporary Location
 industryIds: []
 sectorIds:
   - accommodation-and-food-services
@@ -18,7 +20,6 @@ issuingAgency: NJ Division of Fire Safety or your local fire department
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 ---
-
 ## How to Apply
 
 Contact the `Local Enforcing Agency (LEA)|lea` in the town where you are setting up your food truck to apply. Your LEA can be the local fire department or the New Jersey Division of Fire Safety.
@@ -26,6 +27,7 @@ Contact the `Local Enforcing Agency (LEA)|lea` in the town where you are setting
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
 This page does not list all business activities that require a fire permit. You may need to get other fire permits depending on your business activity, so check requirements with your LEA.
+
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }

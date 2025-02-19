@@ -47,7 +47,7 @@ describe("<AnytimeActionDropdown />", () => {
 
   let anytimeActionLicenseReinstatement: AnytimeActionLicenseReinstatement[] = [];
 
-  const TASK_NAMES = ["some-admin-task-name", "some-licenses-task-name", "some-reinstatements-task-name"];
+  // const TASK_NAMES = ["some-admin-task-name", "some-licenses-task-name", "some-reinstatements-task-name"];
 
   describe("routing and analytics", () => {
     beforeEach(() => {

@@ -1,6 +1,8 @@
 ---
 id: cemetery-reinstatement
 name: Reinstate Your Cemetery Salesperson License
+category:
+  - Reactivate My Expired Permite, License or Registration
 industryIds:
   - cemetery
 sectorIds: []

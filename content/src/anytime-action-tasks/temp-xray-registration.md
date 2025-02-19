@@ -2,6 +2,8 @@
 notesMd: https://docs.google.com/document/d/1MZGaJIYDG2jV4Lr7NyBoFNR_GW17EeHdQpOP0L45koY/edit?tab=t.0
 id: temp-xray-registration
 name: Register Your Temporary X-Ray Machine
+category:
+  - Purchase New Products of Equipment
 industryIds:
   - healthcare
 sectorIds: []
@@ -26,22 +28,21 @@ issuingAgency: NJ Department of Environmental Protection, Radiation Protection
 callToActionText: Register My Temporary X-Ray Machine
 callToActionLink: https://www.nj.gov/dep/rpp/reg/temp.htm
 ---
-
 ## Registration Requirements
 
-- Facility ID, name, address, and contact information
-- X-ray machine category (letter and two numbers that refer to the type of machine)
-- Manufacturer
-- Model name
-- Generator model number
-- Generator serial number
-- Tube insert serial number
-- Type of image receptor used in the x-ray
-- Copy of `radiation safety survey|radiation-safety-survey`
-- Applicable fees paid
-- Location/room ID, if applicable
-- Vehicle/trailer facility year, make, model, state, plate number, VIN, and copy of registration, if applicable
-- Max energy (kVp, mA, and MeV), if applicable
+* Facility ID, name, address, and contact information
+* X-ray machine category (letter and two numbers that refer to the type of machine)
+* Manufacturer
+* Model name
+* Generator model number
+* Generator serial number
+* Tube insert serial number
+* Type of image receptor used in the x-ray
+* Copy of `radiation safety survey|` 
+* Applicable fees paid
+* Location/room ID, if applicable
+* Vehicle/trailer facility year, make, model, state, plate number, VIN, and copy of registration, if applicable
+* Max energy (kVp, mA, and MeV), if applicable
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 

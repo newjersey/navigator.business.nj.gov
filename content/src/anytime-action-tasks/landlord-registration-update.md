@@ -7,6 +7,9 @@ notesMd: >-
   [](https://docs.google.com/document/d/1IeptNehcZTOpnzHWcZgm8LqtJaYqraxWHqH9f1yoZN4/edit)Note: a version of this task is available to Poppies, but in the roadmap
 id: landlord-registration-update
 name: Register or Update Your Landlord Registration
+category:
+  - Manage My Properties
+  - Change My Business Information
 industryIds: []
 sectorIds:
   - real-estate

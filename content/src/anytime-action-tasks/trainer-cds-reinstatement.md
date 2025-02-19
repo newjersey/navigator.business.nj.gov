@@ -2,6 +2,8 @@
 notesMd: ""
 id: trainer-cds-reinstatement
 name: Reinstate Your Dog Trainer Controlled Dangerous Substances Registration
+category:
+  - Reactivate My Expired Permite, License or Registration
 industryIds:
   - petcare
 sectorIds: []

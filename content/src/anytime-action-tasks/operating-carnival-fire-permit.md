@@ -4,15 +4,18 @@ notesMd: "[Muni
   4U1shk2QQ/edit?usp=sharing)"
 id: operating-carnival-fire-permit
 name: Get a Fire Permit for Your Carnival or Circus
+category:
+  - Set Up at a Temporary Location
 industryIds: []
 urlSlug: operating-carnival-fire-permit
 summaryDescriptionMd: >-
   You must have a fire permit to do certain activities at your traveling
   carnival or circus, such as:
 
+
   * Setting up trailers, tents, stages, and similar structures that people will occupy
 
-  * Setting up a `carnival or amusement ride|carnival-amusement-ride`
+  * Setting up a `carnival or amusement ride|carnival-amusement-ride` 
 
   * Setting up food stalls or concession stands that need a fire suppression system, such as fire extinguishers or sprinklers
 
@@ -28,14 +31,14 @@ issuingAgency: NJ Division of Fire Safety or your local fire department
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 ---
-
 ## How to Apply
 
-Contact the `Local Enforcing Agency (LEA)|local-enforcing-agency` in the town where your carnival or circus will be to see which permits you need and how to apply. Your LEA can be your local fire department or the New Jersey Division of Fire Safety.
+Contact the `Local Enforcing Agency (LEA)|` in the town where your carnival or circus will be to see which permits you need and how to apply. Your LEA can be your local fire department or the New Jersey Division of Fire Safety.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
 This page does not list all business activities that require a fire permit. You may need to get other fire permits depending on your business activity, so check requirements with your LEA.
+
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }

@@ -8,6 +8,8 @@ notesMd: >-
 id: emergency-trip-permit
 name: Apply for Your Emergency Trip Permit for Last-Minute Alcohol Pickups or
   Deliveries
+category:
+  - Transport My Products or Equipment
 applyToAllUsers: false
 industryIds:
   - trucking

@@ -9,6 +9,8 @@ notesMd: >-
   SME approved: 11/15/24
 id: tenant-eviction
 name: Learn About the Tenant Eviction Process
+category:
+  - Manage My Properties
 industryIds:
   - residential-landlord
 sectorIds:
@@ -38,18 +40,17 @@ summaryDescriptionMd: >-
 issuingAgency: New Jersey Courts and NJ Department of Community Affairs,
   Division of Housing and Community Resources
 ---
-
 ## 1. Write a Notice to Quit
 
-Start by writing your tenant a `Notice to Quit|notice-to-quit`. You must give this notice before filing for eviction, unless your tenant hasn’t paid rent and doesn’t live in federally subsidized housing.
+Start by writing your tenant a `Notice to Quit|notice-to-quit` . You must give this notice before filing for eviction, unless your tenant hasn’t paid rent and doesn’t live in federally subsidized housing.
 
 The notice should include:
 
-- Why you are ending the tenancy
-- How your tenant can resolve the issue
-- When they need to resolve the issue by to avoid eviction
+* Why you are ending the tenancy
+* How your tenant can resolve the issue
+* When they need to resolve the issue by to avoid eviction
 
-In some cases, you may also need to give your tenant a `Notice to Cease|notice-to-cease`. For more information about the notices, review the [Truth in Renting Guide](https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf).
+In some cases, you may also need to give your tenant a `Notice to Cease|notice-to-cease` . For more information about the notices, review the [Truth in Renting Guide](https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf).
 
 ## 2. File for Eviction
 

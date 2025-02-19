@@ -1,6 +1,8 @@
 ---
 id: code23-trailer-permit
 name: Apply for Your Code 23 Special Oversize Trailer Permit
+category:
+  - Transport My Products or Equipment
 industryIds:
   - commercial-construction
   - freight-forwarding

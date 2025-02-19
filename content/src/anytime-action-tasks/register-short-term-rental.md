@@ -7,6 +7,8 @@ notesMd: >-
   (Note: Poppies also see a version of this, but in their roadmap)
 id: register-short-term-rental
 name: Register as a Short-term Rental, if Your Town Requires It
+category:
+  - Manage My Properties
 industryIds: []
 sectorIds:
   - real-estate
