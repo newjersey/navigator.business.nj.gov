@@ -9,6 +9,7 @@ summaryDescriptionMd: You need to obtain a conversion license to fully operate
   your cannabis business. A `conditional license|cannabis-conditional-license`
   is temporary and limits the activities your business can do. It may take
   around 90 days for your application to be reviewed.
+formName: ""
 industryId: cannabis
 callToActionText: Apply for My Conversion License
 callToActionLink: https://nj-crc-public.nls.egov.com/#!/signin
@@ -18,7 +19,7 @@ licenseCertificationClassification: LICENSE
 ---
 ## Application Requirements
 
-* \[]{cannabis-updates} Share any updates or changes since the original application
+* \[]{cannabis-updates} Share any changes to information on your conditional license application, such as updates to your `Persons of Interest|poi-cannabis` or `Entities of Interest|eoi-cannabis`
 * \[]{cannabis-site-plan} A site plan of the proposed location, including a floor plan and description of the suitability of the location
 * \[]{cannabis-local-codes-compliance} Evidence of compliance with local codes and ordinances for the proposed location
 * \[]{cannabis-zoning-compliance} Zoning approval in the form of a letter or affidavit from your local government that states your location meets zoning requirements, allows for activities related to the operations of your proposed cannabis business, and lists any variances granted 
