@@ -1,9 +1,7 @@
 {
-  "displayname": "car-service",
   "naicsCodes": "485999, 485210, 485310, 485320, 485410, 485510",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -38,9 +36,19 @@
       "step": 3,
       "weight": 10,
       "task": "bank-account"
+    },
+    {
+      "weight": 11,
+      "step": 3,
+      "task": "transportation-entity-id",
+      "required": true
     }
   ],
   "name": "Car Service",
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
+  "displayname": "car-service",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "isCarServiceApplicable": true,
