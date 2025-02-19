@@ -3,11 +3,12 @@ licenseName: ""
 id: conversion-license-cannabis
 displayname: conversion-license-cannabis
 urlSlug: conversion-license
-name: Submit Your Cannabis Conversion License
+name: Apply for Your Conversion Cannabis License
 webflowName: "Cannabis: Conversion License"
-summaryDescriptionMd: If you have a Conditional License, you need to obtain a
-  Conversion License. A Conditional License limits the activities your business
-  can do. It may take ~90 days for your application to be reviewed.
+summaryDescriptionMd: You need to obtain a conversion license to fully operate
+  your cannabis business. A `conditional license|cannabis-conditional-license`
+  is temporary and limits the activities your business can do. It may take
+  around 90 days for your application to be reviewed.
 industryId: cannabis
 callToActionText: Apply for My Conversion License
 callToActionLink: https://nj-crc-public.nls.egov.com/#!/signin
