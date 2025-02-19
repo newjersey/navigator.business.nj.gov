@@ -45,7 +45,8 @@
     {
       "step": 4,
       "weight": 1,
-      "task": "transportation-entity-id"
+      "task": "transportation-entity-id",
+      "required": true
     }
   ],
   "name": "Logistics",
