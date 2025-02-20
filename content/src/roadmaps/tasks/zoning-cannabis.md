@@ -5,7 +5,7 @@ summaryDescriptionMd: >
   :::
 
 
-  To apply for a conversion or annual cannabis license, you need zoning approval and proof that your local government approves and is in support of your cannabis business. The proof can be a resolution or letter of support from your local government.
+  To apply for a `conversion|cannabis-conditional-license` or `annual cannabis license|cannabis-annual-license`, you need zoning approval and proof that your local government approves and is in support of your cannabis business. The proof can be a resolution or letter of support from your local government.
 urlSlug: zoning-cannabis
 displayname: zoning-cannabis
 name: Obtain Your Zoning Approval and Proof of Local Support
