@@ -1,7 +1,9 @@
 ---
 summaryDescriptionMd: >+
-  Speak to your local government to determine specific requirements for your
-  site and business. Your site should also comply with New Jersey's [Cannabis
+  To obtain a `conversion|cannabis-conditional-license` or `annual cannabis
+  license|cannabis-annual-license`, you must meet all local requirements for
+  your cannabis site. Speak to your local government to determine specific
+  requirements. Your site should also comply with New Jersey's [Cannabis
   Regulatory Commission (CRC) site requirements
   (p.59)](https://www.nj.gov/cannabis/documents/CREAMM%20Act.PDF)
 
