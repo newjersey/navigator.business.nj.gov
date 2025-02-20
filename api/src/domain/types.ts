@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { EmergencyTripPermitSubmitResponse } from "@client/AbcEmergencyTripPermitHelpers";
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
@@ -65,6 +66,10 @@ export interface FormationClient {
   ) => Promise<FormationSubmitResponse>;
   getCompletedFiling: (formationId: string) => Promise<GetFilingResponse>;
   health: HealthCheckMethod;
+}
+
+export interface EmergencyTripPermitClient {
+  apply: () => Promise<EmergencyTripPermitSubmitResponse>;
 }
 
 export interface TaxFilingClient {

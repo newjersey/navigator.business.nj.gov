@@ -1,6 +1,7 @@
 import { Content } from "@/components/Content";
 import { EmergencyTripPermitStepsConfiguration } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitStepsConfiguration";
 import { InstructionsStep } from "@/components/tasks/abc-emergency-trip-permit/steps/InstructionsStep";
+import { RequestorStep } from "@/components/tasks/abc-emergency-trip-permit/steps/RequestorStep";
 import { AbcEmergencyTripPermitStepNames } from "@/lib/types/types";
 import { ReactElement } from "react";
 
@@ -11,7 +12,7 @@ export const EmergencyTripPermitSteps: { component: ReactElement; step: AbcEmerg
       step: EmergencyTripPermitStepsConfiguration[0].name,
     },
     {
-      component: <Content>EmergencyTripPermitStepsConfiguration[1].name</Content>,
+      component: <RequestorStep />,
       step: EmergencyTripPermitStepsConfiguration[1].name,
     },
     {
