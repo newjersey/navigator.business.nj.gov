@@ -9,7 +9,7 @@
     "businessSizeHeader": "Business Size",
     "microbusinessRadioYes": " Yes, I'm a microbusiness",
     "priorityStatusNoneSelectedText": "You did not select any [priority status designations](/tasks/priority-status-cannabis).",
-    "microbusinessRadioNo": "No, I'm a standard business",
+    "microbusinessRadioNo": "No, I'm a `standard business|standard-business-cannabis`",
     "microbusinessRadioQuestion": "Are you a `microbusiness|microbusiness-cannabis`?",
     "sbeLabel": " `Social Equity Business (SEB)|social-equity-business-cannabis`"
   }
