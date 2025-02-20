@@ -1,6 +1,6 @@
 ---
 summaryDescriptionMd: >+
-  To apply for a `conversion|cannabis-conditional-license` or `annual cannabis
+  To obtain a `conversion|cannabis-conditional-license` or `annual cannabis
   license|cannabis-annual-license`, you must meet all local requirements for
   your cannabis site. Speak to your local government to determine specific
   requirements. Your site should also comply with New Jersey's [Cannabis
