@@ -1,9 +1,11 @@
 ---
-summaryDescriptionMd: It's important that you and your attorney review your
-  lease (or letter of intent to lease) thoroughly to confirm that you're in
-  agreement with all the clauses. Signing your lease under your registered
-  business name may protect you from liabilities and costs associated with your
-  new commercial or industrial location.
+summaryDescriptionMd: "To apply for a `conversion|cannabis-conditional-license`
+  or `annual cannabis license|cannabis-annual-license`, you must show proof of
+  final site control, such as a signed lease. It's important that you and your
+  attorney review your lease (or letter of intent to lease) thoroughly to
+  confirm that you're in agreement with all the clauses. Signing your lease
+  under your registered business name may protect you from liabilities and costs
+  associated with your new commercial or industrial location. "
 urlSlug: cannabis-sign-lease
 displayname: cannabis-sign-lease
 name: Sign a Lease for Your Cannabis Business
