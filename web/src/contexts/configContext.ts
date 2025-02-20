@@ -1,3 +1,4 @@
+import * as AbcEmergencyTripPermit from "@businessnjgovnavigator/content/fieldConfig/abc-emergency-trip-permit.json";
 import * as AccountSetup from "@businessnjgovnavigator/content/fieldConfig/account-setup-page.json";
 import * as anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults from "@businessnjgovnavigator/content/fieldConfig/anytime-action-reinstatement-and-license-calendar-event-status-defaults.json";
 import * as BusinessFormation from "@businessnjgovnavigator/content/fieldConfig/business-formation.json";
@@ -90,7 +91,8 @@ const merged = JSON.parse(
       LicenseSearchTask,
       LandingPage,
       LandingPageExperienceB,
-      FundingsOnboarding
+      FundingsOnboarding,
+      AbcEmergencyTripPermit
     )
   )
 );
@@ -138,7 +140,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof LicenseSearchTask &
   typeof LandingPage &
   typeof LandingPageExperienceB &
-  typeof FundingsOnboarding;
+  typeof FundingsOnboarding &
+  typeof AbcEmergencyTripPermit;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -182,7 +185,8 @@ export const getMergedConfig = (): ConfigType => {
     LicenseSearchTask,
     LandingPage,
     LandingPageExperienceB,
-    FundingsOnboarding
+    FundingsOnboarding,
+    AbcEmergencyTripPermit
   );
 };
 

@@ -1,0 +1,16 @@
+{
+  "abcEmergencyTripPermit": {
+    "steps": {
+      "instructions": {
+        "description": "You need an emergency trip permit from the New Jersey Division of Alcoholic Beverage Control (ABC) if your business: \n - picks up or delivers alcoholic beverages into, out of, or within New Jersey\n - does not have an `annual transportation license or permit|transportation-license-permit`",
+        "applicationHeader": "Application Instructions",
+        "applicationInstructionsDescription": "Apply for a permit for each pickup or delivery you make in New Jersey. You can apply up to 5 days in advance of your pickup or delivery date. The permit is valid for 24 hours from that date or a single trip.",
+        "applicationDetails": "This application takes 5-10 minutes to compete. After you submit your payment, you will get a confirmation email with the permit download link.",
+        "buttonText": "Start"
+      },
+      "requestor": {
+
+      }
+    }
+  }
+}

@@ -71,6 +71,7 @@ export type OnboardingStatus = "SUCCESS" | "ERROR";
 
 export type FormationStepNames = "Name" | "Business" | "Contacts" | "Billing" | "Review";
 export type DbaStepNames = "Business Name" | "DBA Resolution" | "Authorize Business";
+export type AbcEmergencyTripPermitStepNames = "Instructions" | "Requestor" | "Trip" | "Billing" | "Review";
 
 export type FormationFieldErrorState = {
   field: FieldsForErrorHandling;
