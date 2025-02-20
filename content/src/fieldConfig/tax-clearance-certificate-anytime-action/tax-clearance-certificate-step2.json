@@ -1,0 +1,9 @@
+{
+  "taxClearanceCertificateStep2": {
+    "requestingAgencySectionHeader": "Reason for Certification",
+    "businessInformationSectionHeader": "Business Information",
+    "requestingAgencyLabel": "What agency is requesting the Tax Clearance Certificate?",
+    "businessNameLabel": "Business Name",
+    "entityIdLabel": "Entity ID"
+  }
+}

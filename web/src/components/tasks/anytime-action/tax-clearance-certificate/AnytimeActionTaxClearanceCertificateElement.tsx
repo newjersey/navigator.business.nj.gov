@@ -36,15 +36,15 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
 
   const initialTaxClearanceCertificateData = {
     requestingAgencyId: business?.taxClearanceCertificateData?.requestingAgencyId || "",
-    businessName: business?.taxClearanceCertificateData?.businessName || "",
-    entityId: "",
-    addressLine1: "",
-    addressLine2: "",
-    addressCity: "",
-    addressState: "",
-    addressZipCode: "",
-    taxId: "",
-    taxPin: "",
+    // businessName: business?.taxClearanceCertificateData?.businessName || "",
+    // entityId: "",
+    // addressLine1: "",
+    // addressLine2: "",
+    // addressCity: "",
+    // addressState: "",
+    // addressZipCode: "",
+    // taxId: "",
+    // taxPin: "",
   };
   const [taxClearanceCertificateData, setTaxClearanceCertificateData] = useState(
     initialTaxClearanceCertificateData
@@ -54,14 +54,15 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
   //   useDynamicFormContext(taxClearanceCertificateFields);
   // const { state: formContextState } = useFormContextHelper(taxClearanceFieldErrorMap);
 
-  const {
-    // FormFuncWrapper,
-    // onSubmit,
-    // tab: profileTab,
-    // onTabChange: setProfileTab,
-    state: formContextState,
-    // getInvalidFieldIds,
-  } = useFormContextHelper(createDataFieldErrorMap());
+  // const {
+  //   // FormFuncWrapper,
+  //   // onSubmit,
+  //   // tab: profileTab,
+  //   // onTabChange: setProfileTab,
+  //   state: formContextState,
+  //   // getInvalidFieldIds,
+
+  const { state: formContextState } = useFormContextHelper(createDataFieldErrorMap());
 
   const updateSteps = (step: number): void => {
     const steps = initialTaxClearanceCertificateSteps();
@@ -73,22 +74,24 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
   }, [stepIndex]);
 
   return (
+    // {/* Used for Error State / Form Context Helper*/}
     <DataFieldFormContext.Provider value={formContextState}>
-      {/* Used for Error State / Form Context Helper*/}
+      {/* Used for address context*/}
       <AddressContext.Provider
         value={{
           state: { formationAddressData },
           setAddressData,
         }}
       >
-        {/* Used for address context*/}
+        {/* Used for tax clearance context - only for new drowdown value*/}
         <TaxClearanceCertificateDataContext.Provider
           value={{
             state: taxClearanceCertificateData,
             setTaxClearanceCertificateData,
           }}
         >
-          {/* Used for tax clearance context - address will not be stored here, make updates*/}
+          {/* Add Profile Data Context to other fields*/}
+
           <div className="min-height-38rem" data-testid="AnytimeActionTaxClearanceCertificateElement">
             <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 radius-top-lg">
               <div className="padding-y-4 margin-x-4 margin-bottom-2">

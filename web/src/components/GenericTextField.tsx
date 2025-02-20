@@ -17,7 +17,7 @@ import {
 
 export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFieldProps<T> {
   fieldName: string;
-  inputWidth: "full" | "default" | "reduced";
+  inputWidth?: "full" | "default" | "reduced";
   fieldOptions?: TextFieldProps;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formContext?: Context<FormContextType<any>>;

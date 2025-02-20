@@ -1,7 +1,9 @@
 import { DataField, DataFieldProps } from "@/components/data-fields/DataField";
 import { ReactElement } from "react";
 
-export const BusinessName = (props: Omit<DataFieldProps, "fieldName">): ReactElement => {
+type BusinessNameProps = Omit<DataFieldProps, "fieldName"> & { inputWidth?: string };
+
+export const BusinessName = ({ inputWidth = "default", ...props }: BusinessNameProps): ReactElement => {
   return (
     <DataField
       fieldName="businessName"
@@ -9,7 +11,7 @@ export const BusinessName = (props: Omit<DataFieldProps, "fieldName">): ReactEle
         inputProps: { "data-testid": "businessName" },
       }}
       {...props}
-      inputWidth={props.inputWidth ?? "default"}
+      inputWidth={inputWidth ?? "default"}
     />
   );
 };
