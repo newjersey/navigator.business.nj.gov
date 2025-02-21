@@ -22,9 +22,7 @@ Complete an exemption form if any of the following are true:
 
 - Your building is an administrative site only
 - Your building has no EHS
-
 - Your building has EHS below the threshold
-
 - Your building has no staff on-site
 
 Note: If you complete an exemption form and CRTK says your business is exempt, you do not need to complete an exemption form every year.
