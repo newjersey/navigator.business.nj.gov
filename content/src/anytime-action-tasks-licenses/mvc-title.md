@@ -1,7 +1,7 @@
 ---
 notesMd: ""
 id: mvc-title
-name: Get a Title for Your Business Vehicle
+name: Get a Title for Your Business Vehicle(s)
 industryIds:
   - auto-body-repair
   - car-service
@@ -24,8 +24,16 @@ sectorIds:
   - mining-quarrying-and-oil-and-gas-extraction
 urlSlug: mvc-title
 summaryDescriptionMd: >-
-  You must get a title showing business ownership of any vehicles used for
-  business purposes.
+  :::infoAlert 
+
+  A Motor Vehicle Commission 
+
+  (MVC) Entity Identification Number (EIN) is requiring before applying for or changing a vehicle title.
+
+  :::
+
+
+  You may need a title showing business ownership of any vehicles you plan to use for business purposes.
 
 
   &nbsp;
@@ -44,7 +52,7 @@ summaryDescriptionMd: >-
 
   * Has a title owned by anyone other than the present business owner
 
-  * Is owned by a lien that must be added or removed from the title
+  * Has a title including a lien you want removed, or if you want to add a lien to the title
 
   * Does not have a title (this is rare)
 
@@ -79,7 +87,7 @@ For vessels, you will need:
 * **USCG documentation,** if the vessel is documented with the U.S. Coast Guard
 
 :::infoAlert 
- You must apply for a title in person. Complete the appropriate form(s) and take them to any NJ MVC agency. To save time, [make an appointment online](<>).
+ You must apply for a title in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). To save time, [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8).
 :::
 
 &nbsp;
