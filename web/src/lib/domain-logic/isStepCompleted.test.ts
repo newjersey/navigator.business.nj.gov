@@ -12,7 +12,7 @@ describe("isStepCompleted", () => {
       taskProgress: {
         "step1-task1": "COMPLETED",
         "step1-task2": "COMPLETED",
-        "step2-task1": "IN_PROGRESS",
+        "step2-task1": "TO_DO",
       },
     });
 
@@ -33,7 +33,7 @@ describe("isStepCompleted", () => {
     const business = generateBusiness({
       taskProgress: {
         "step1-task1": "COMPLETED",
-        "step1-task2": "IN_PROGRESS",
+        "step1-task2": "TO_DO",
         "step2-task1": "COMPLETED",
       },
     });

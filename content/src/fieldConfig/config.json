@@ -111,8 +111,7 @@
     "issuingAgencyText": "Issuing Agency"
   },
   "taskProgress": {
-    "NOT_STARTED": "Not started",
-    "IN_PROGRESS": "In progress",
+    "TO_DO": "To do",
     "COMPLETED": "Completed"
   },
   "taskDefaults": {

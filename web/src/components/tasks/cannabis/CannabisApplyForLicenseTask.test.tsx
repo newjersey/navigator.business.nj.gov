@@ -191,7 +191,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
   describe("requirements tab", () => {
     it("does not show unlocked-by alert on requirements tab", async () => {
       const business = generateBusiness({
-        taskProgress: { "annual-license-cannabis": "NOT_STARTED" },
+        taskProgress: { "annual-license-cannabis": "TO_DO" },
       });
       const task = generateTask({
         id: "annual-license-cannabis",
@@ -204,14 +204,14 @@ describe("<CannabisApplyForLicenseTask />", () => {
       expect(screen).not.toContain("Do this first");
     });
 
-    it("updates taskProgress to from not_started to in-progress when View Requirements is clicked", () => {
+    it("taskProgress remains to-do when View Requirements is clicked", () => {
       const business = generateBusiness({
-        taskProgress: { "annual-license-cannabis": "NOT_STARTED" },
+        taskProgress: { "annual-license-cannabis": "TO_DO" },
       });
       renderPage(generateTask({ id: "annual-license-cannabis" }), business);
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
       expect(currentBusiness().taskProgress).toEqual({
-        "annual-license-cannabis": "IN_PROGRESS",
+        "annual-license-cannabis": "TO_DO",
       });
     });
 

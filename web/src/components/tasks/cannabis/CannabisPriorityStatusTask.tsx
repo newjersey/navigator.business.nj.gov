@@ -35,10 +35,10 @@ export const CannabisPriorityStatusTask = (props: Props): ReactElement => {
     scrollToTop();
     if (
       business.taskProgress[props.task.id] === undefined ||
-      business.taskProgress[props.task.id] === "NOT_STARTED"
+      business.taskProgress[props.task.id] === "TO_DO"
     ) {
       setSuccessSnackbarIsOpen(true);
-      updateQueue.queueTaskProgress({ [props.task.id]: "IN_PROGRESS" }).update();
+      updateQueue.queueTaskProgress({ [props.task.id]: "TO_DO" }).update();
     }
   };
 
@@ -60,7 +60,7 @@ export const CannabisPriorityStatusTask = (props: Props): ReactElement => {
       <TaskStatusChangeSnackbar
         isOpen={successSnackbarIsOpen}
         close={(): void => setSuccessSnackbarIsOpen(false)}
-        status={business?.taskProgress[props.task.id] ?? "NOT_STARTED"}
+        status={business?.taskProgress[props.task.id] ?? "TO_DO"}
       />
       <TaskHeader task={props.task} />
       <UnlockedBy task={props.task} />

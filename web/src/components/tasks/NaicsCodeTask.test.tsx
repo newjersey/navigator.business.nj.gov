@@ -83,7 +83,7 @@ describe("<NaicsCodeTask />", () => {
     beforeEach(() => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ naicsCode: "", industryId: validIndustryId }),
-        taskProgress: { [taskId]: "NOT_STARTED" },
+        taskProgress: { [taskId]: "TO_DO" },
       });
     });
 
@@ -114,11 +114,11 @@ describe("<NaicsCodeTask />", () => {
       expect(screen.queryByLabelText("Save NAICS Code")).not.toBeInTheDocument();
     });
 
-    it("updates task progress when radio button is pressed", async () => {
+    it("task progress remains to-do when radio button is pressed", async () => {
       renderPage();
       fireEvent.click(screen.getByTestId(`naics-radio-${validNaicsCode}`));
       await waitFor(() => {
-        expect(currentBusiness().taskProgress[taskId]).toEqual("IN_PROGRESS");
+        expect(currentBusiness().taskProgress[taskId]).toEqual("TO_DO");
       });
     });
 
@@ -184,7 +184,7 @@ describe("<NaicsCodeTask />", () => {
     beforeEach(() => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ naicsCode: "", industryId: "" }),
-        taskProgress: { [taskId]: "NOT_STARTED" },
+        taskProgress: { [taskId]: "TO_DO" },
       });
     });
 
@@ -341,16 +341,16 @@ describe("<NaicsCodeTask />", () => {
       expect(currentBusiness().profileData.naicsCode).toEqual("");
     });
 
-    it("sets task status to in-progress on edit button", () => {
+    it("keeps task status to to-do on edit button", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.editText));
-      expect(currentBusiness().taskProgress[taskId]).toEqual("IN_PROGRESS");
+      expect(currentBusiness().taskProgress[taskId]).toEqual("TO_DO");
     });
 
-    it("sets task status to in-progress on remove button", () => {
+    it("sets task status to to-do on remove button", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
-      expect(currentBusiness().taskProgress[taskId]).toEqual("IN_PROGRESS");
+      expect(currentBusiness().taskProgress[taskId]).toEqual("TO_DO");
     });
 
     describe("when the naics code is present", () => {
@@ -408,7 +408,7 @@ describe("<NaicsCodeTask />", () => {
       setShowNeedsAccountModal = jest.fn();
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ naicsCode: "", industryId: "" }),
-        taskProgress: { [taskId]: "NOT_STARTED" },
+        taskProgress: { [taskId]: "TO_DO" },
       });
     });
 
@@ -447,7 +447,7 @@ describe("<NaicsCodeTask />", () => {
       expect(within(screen.getByTestId("naics-radio-input")).getByRole("radio")).not.toBeChecked();
     });
 
-    it("keeps task progress as NOT_STARTED when radio button is clicked", () => {
+    it("keeps task progress as TO_DO when radio button is clicked", () => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ naicsCode: "", industryId: "acupuncture" }),
       });

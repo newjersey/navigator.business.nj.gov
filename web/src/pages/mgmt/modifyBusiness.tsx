@@ -75,8 +75,7 @@ const ModifyBusinessPage = (): ReactElement => {
               Note 1: to view an anytime actions reinstatement, the license status must be set to expired.
             </div>
             <div>
-              Note 2: deleting the license data will reset all license search enabled task statuses to
-              NOT_STARTED
+              Note 2: deleting the license data will reset all license search enabled task statuses to TO_DO
             </div>
             <div>
               Note 3: to view the license details in the task, you must select an industry that has the task
@@ -167,7 +166,7 @@ const ModifyBusinessPage = (): ReactElement => {
                   if (business?.licenseData) {
                     const taskProgress = sortedLicenseNames.reduce(
                       (acc: Record<string, TaskProgress>, curr: string): Record<string, TaskProgress> => {
-                        acc[curr] = "NOT_STARTED";
+                        acc[curr] = "TO_DO";
                         return acc;
                       },
                       {}

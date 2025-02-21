@@ -37,7 +37,7 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
     setShowInput(true);
     const newNaicsValue = remove ? emptyProfileData.naicsCode : business.profileData.naicsCode;
     updateQueue
-      .queueTaskProgress({ [props.task.id]: "IN_PROGRESS" })
+      .queueTaskProgress({ [props.task.id]: "TO_DO" })
       .queueProfileData({ naicsCode: newNaicsValue })
       .update();
   };
