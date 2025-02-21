@@ -96,7 +96,7 @@ For vessels, you will need:
 
 :::callout{ showHeader="true" headerText="What if I don't get a title?" showIcon="false" calloutType="warning" }
 
-If you operate a vehicle or vessel under a individual's name for business purposes, you may be subject to vehicle impoundment or fines.
+If you operate a vehicle or vessel under a individual's name for business purposes, you may be subject to vehicle impoundment, fines, or eligibility issues with your insurance.
 
 :::
 
