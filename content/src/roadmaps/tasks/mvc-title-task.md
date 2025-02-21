@@ -1,8 +1,16 @@
 ---
 notesMd: ""
 summaryDescriptionMd: >-
-  You must get a title showing business ownership of any vehicles used for
-  business purposes.
+  :::infoAlert 
+
+  A Motor Vehicle Commission 
+
+  (MVC) Entity Identification Number (EIN) is requiring before applying for or changing a vehicle title.
+
+  :::
+
+
+  You may need a title showing business ownership of any vehicles you plan to use for business purposes.
 
 
   &nbsp;
@@ -21,14 +29,14 @@ summaryDescriptionMd: >-
 
   * Has a title owned by anyone other than the present business owner
 
-  * Is owned by a lien that must be added or removed from the title
+  * Has a title including a lien you want removed, or if you want to add a lien to the title
 
   * Does not have a title (this is rare)
 
   * Is a boat or watercraft (vessel), longer than twelve feet, that is owned by someone other than the intended business owner
 urlSlug: mvc-title-task
 displayname: mvc-title-task
-name: Get a Title for Your Business Vehicle
+name: Get a Title for Your Business Vehicle(s)
 id: mvc-title-task
 callToActionLink: Get My Vehicle Title
 callToActionText: Get My Vehicle Title
@@ -60,7 +68,7 @@ For vessels, you will need:
 * **USCG documentation,** if the vessel is documented with the U.S. Coast Guard
 
 :::infoAlert 
- You must apply for a title in person. Complete the appropriate form(s) and take them to any NJ MVC agency. To save time, [make an appointment online](<>).
+ You must apply for a title in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). To save time, [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8).
 :::
 
 &nbsp;
@@ -69,7 +77,7 @@ For vessels, you will need:
 
 :::callout{ showHeader="true" headerText="What if I don't get a title?" showIcon="false" calloutType="warning" }
 
-If you operate a vehicle or vessel under a individual's name for business purposes, you may be subject to vehicle impoundment or fines.
+If you operate a vehicle or vessel under a individual's name for business purposes, you may be subject to vehicle impoundment, fines, or eligibility issues with your insurance.
 
 :::
 
