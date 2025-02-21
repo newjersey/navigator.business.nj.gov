@@ -12,6 +12,7 @@ import { ReactElement, useContext } from "react";
 interface Props {
   onValidation: () => void;
   isFullWidth?: boolean;
+  excludeNJ?: boolean | true;
 }
 
 export const UnitesStatesAddress = (props: Props): ReactElement => {
@@ -65,7 +66,7 @@ export const UnitesStatesAddress = (props: Props): ReactElement => {
                         error={doesFieldHaveError("addressState")}
                         disabled={false}
                         onValidation={props.onValidation}
-                        excludeNJ
+                        excludeNJ={props.excludeNJ}
                       />
                     </div>
                   </div>

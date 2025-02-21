@@ -11,6 +11,9 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { AnytimeActionLicenseReinstatement, AnytimeActionTask, StepperStep } from "@/lib/types/types";
 import { emptyFormationAddressData, FormationAddress } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useEffect, useState } from "react";
+import {ProfileDataContext} from "@/contexts/profileDataContext";
+import {createEmptyProfileData, ProfileData} from "@businessnjgovnavigator/shared/profileData";
+import {getFlow, useMountEffectWhenDefined} from "@/lib/utils/helpers";
 
 interface Props {
   anytimeAction: AnytimeActionLicenseReinstatement | AnytimeActionTask;
@@ -31,7 +34,7 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
   );
   const [formationAddressData, setAddressData] = useState<FormationAddress>({
     ...emptyFormationAddressData,
-    businessLocationType: "US",
+    businessLocationType: business?.formationData.formationFormData.businessLocationType==="NJ"?"NJ":"US",
   });
 
   const initialTaxClearanceCertificateData = {
@@ -62,6 +65,9 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
   //   state: formContextState,
   //   // getInvalidFieldIds,
 
+  const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
+
+
   const { state: formContextState } = useFormContextHelper(createDataFieldErrorMap());
 
   const updateSteps = (step: number): void => {
@@ -69,9 +75,36 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
     step === 0 ? (steps[0].isComplete = false) : (steps[0].isComplete = true);
     setStateTaxClearanceCertificateSteps(steps);
   };
+
   useEffect(() => {
     updateSteps(stepIndex);
   }, [stepIndex]);
+
+  useMountEffectWhenDefined(() => {
+    if(business?.formationData.formationFormData.businessLocationType==="US"||business?.formationData.formationFormData.businessLocationType==="NJ") {
+      if (business?.profileData) {
+        setProfileData(business.profileData);
+      }
+
+      if (business?.formationData.formationFormData.addressLine1) {
+        console.log(JSON.stringify(business.formationData.formationFormData));
+        const addressCity = business.formationData.formationFormData.addressState?.shortCode === "NJ" ? business.formationData.formationFormData.addressMunicipality?.displayName : business.formationData.formationFormData.addressCity;
+
+        setAddressData({
+          addressLine1: business.formationData.formationFormData.addressLine1,
+          addressLine2: business.formationData.formationFormData.addressLine2,
+          addressCity: addressCity,
+          addressMunicipality: business.formationData.formationFormData.addressMunicipality,
+          addressState: business.formationData.formationFormData.addressState,
+          addressZipCode: business.formationData.formationFormData.addressZipCode,
+          addressCountry: business.formationData.formationFormData.addressCountry,
+          addressProvince: business.formationData.formationFormData.addressProvince,
+          businessLocationType: business.formationData.formationFormData.businessLocationType,
+        });
+      }
+    }
+
+  }, business);
 
   return (
     // {/* Used for Error State / Form Context Helper*/}
@@ -91,6 +124,14 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
           }}
         >
           {/* Add Profile Data Context to other fields*/}
+          <ProfileDataContext.Provider value={{
+            state: {
+              profileData: profileData,
+              flow: getFlow(profileData),
+            },
+            setProfileData,
+            onBack: (): void => {},
+          }}>
 
           <div className="min-height-38rem" data-testid="AnytimeActionTaxClearanceCertificateElement">
             <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 radius-top-lg">
@@ -109,6 +150,7 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
             {stepIndex === 1 && <TaxClearanceStepTwo />}
             {stepIndex === 2 && <TaxClearanceStepThree />}
           </div>
+          </ProfileDataContext.Provider>
         </TaxClearanceCertificateDataContext.Provider>
       </AddressContext.Provider>
     </DataFieldFormContext.Provider>

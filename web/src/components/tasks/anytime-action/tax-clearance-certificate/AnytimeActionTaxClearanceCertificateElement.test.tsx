@@ -77,5 +77,16 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       fireEvent.click(screen.getByTestId("stepper-1"));
       expect(screen.getByText(agencyId.name)).toBeInTheDocument();
     });
+
+    it("renders business name from userData", () => {
+      const agencyId = randomElementFromArray(getTaxClearanceCertificateAgencies());
+      const business = generateBusiness({
+        taxClearanceCertificateData: generateTaxClearanceCertificateData({ requestingAgencyId: agencyId.id }),
+      });
+      renderComponent(business);
+      fireEvent.click(screen.getByTestId("stepper-1"));
+      expect(screen.getByText(business.profileData.businessName)).toBeInTheDocument();
+    });
+
   });
 });

@@ -360,16 +360,16 @@ export const generateTaxClearanceCertificateData = (
 ): TaxClearanceCertificateData => {
   return {
     requestingAgencyId: randomElementFromArray(getTaxClearanceCertificateAgencies()).id,
-    businessName: `some-business-name-${randomInt()}`,
-    entityId: randomInt(10).toString(),
-    addressLine1: `some-address-1-${randomInt()}`,
-    addressLine2: `some-address-2-${randomInt()}`,
-    addressCity: `some-city-${randomInt()}`,
-    addressState: `some-state--${randomInt()}`,
-    addressZipCode: randomInt(5).toString(),
-    taxId: `${randomInt(12)}`,
-    taxPin: randomInt(4).toString(),
-    ...overrides,
+    // businessName: `some-business-name-${randomInt()}`,
+    // entityId: randomInt(10).toString(),
+    // addressLine1: `some-address-1-${randomInt()}`,
+    // addressLine2: `some-address-2-${randomInt()}`,
+    // addressCity: `some-city-${randomInt()}`,
+    // addressState: `some-state--${randomInt()}`,
+    // addressZipCode: randomInt(5).toString(),
+    // taxId: `${randomInt(12)}`,
+    // taxPin: randomInt(4).toString(),
+     ...overrides,
   };
 };
 

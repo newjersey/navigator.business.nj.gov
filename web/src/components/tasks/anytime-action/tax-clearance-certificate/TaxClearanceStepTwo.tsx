@@ -38,7 +38,7 @@ export const TaxClearanceStepTwo = (): ReactElement => {
         <EntityId inputWidth="full" />
 
         <div className="margin-y-2">
-          <UnitesStatesAddress onValidation={() => {}} isFullWidth />
+          <UnitesStatesAddress excludeNJ={false} onValidation={() => {}} isFullWidth />
         </div>
 
         {/* if encryption is wonky, use regular text field */}

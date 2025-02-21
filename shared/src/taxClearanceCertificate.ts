@@ -14,28 +14,28 @@ export const getTaxClearanceCertificateAgencies = (): TaxClearanceCertificateAge
 
 export const emptyTaxClearanceCertificateData = {
   requestingAgencyId: "",
-  businessName: "",
-  entityId: "",
-  addressLine1: "",
-  addressLine2: "",
-  addressCity: "",
-  addressState: "",
-  addressZipCode: "",
-  taxId: "",
-  taxPin: "",
+  // businessName: "",
+  // entityId: "",
+  // addressLine1: "",
+  // addressLine2: "",
+  // addressCity: "",
+  // addressState: "",
+  // addressZipCode: "",
+  // taxId: "",
+  // taxPin: "",
 };
 
 export type TaxClearanceCertificateData = {
   requestingAgencyId: string;
-  businessName: string;
-  entityId: string;
-  addressLine1: string;
-  addressLine2: string;
-  addressCity: string;
-  addressState: string;
-  addressZipCode: string;
-  taxId: string;
-  taxPin: string;
+  // businessName: string;
+  // entityId: string;
+  // addressLine1: string;
+  // addressLine2: string;
+  // addressCity: string;
+  // addressState: string;
+  // addressZipCode: string;
+  // taxId: string;
+  // taxPin: string;
 };
 
 export const LookupTaxClearanceCertificateAgenciesById = (
