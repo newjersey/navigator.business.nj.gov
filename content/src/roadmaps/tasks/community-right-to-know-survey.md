@@ -20,6 +20,7 @@ Complete the survey every year by March 1 if your facility has any EHS above a s
 
 Complete an exemption form if any of the following are true:
 
+- Your building is an administrative site only
 - Your building has no EHS
 
 - Your building has EHS below the threshold
