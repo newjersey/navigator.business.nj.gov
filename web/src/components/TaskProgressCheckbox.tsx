@@ -124,7 +124,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const sendAnalytics = (nextStatus: TaskProgress): void => {
     switch (nextStatus) {
       case "TO_DO":
-        analytics.event.task_status_checkbox.click.selected_not_started_status();
+        analytics.event.task_status_checkbox.click.selected_to_do_status();
         break;
       case "COMPLETED":
         analytics.event.task_status_checkbox.click.selected_completed_status();
@@ -196,7 +196,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
       <button
         data-testid="change-task-progress-checkbox"
         role="checkbox"
-        aria-checked={currentTaskProgress == "COMPLETED"}
+        aria-checked={currentTaskProgress === "COMPLETED"}
         aria-label={`update task status. ${getAdditionalAriaContext()}`}
         onClick={isDisabled ? undefined : (): void => setToNextStatus()}
         className={`cursor-pointer margin-neg-105 padding-105 usa-button--unstyled task-checkbox-base ${styles.hover}`}
