@@ -4,8 +4,8 @@ import { GenericTextField } from "@/components/GenericTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { DataFieldProps } from "@/components/data-fields/DataField";
 import { TaxIdDisplayStatus } from "@/components/data-fields/tax-id/TaxIdHelpers";
+import { DataFieldFormContext } from "@/contexts/dataFieldFormContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
@@ -22,7 +22,7 @@ export const SingleTaxId = ({ handleChangeOverride, validationText, ...props }: 
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   const { state, setProfileData } = useContext(ProfileDataContext);
-  const { isFormFieldInvalid } = useFormContextFieldHelpers(fieldName, ProfileFormContext);
+  const { isFormFieldInvalid } = useFormContextFieldHelpers(fieldName, DataFieldFormContext);
 
   const handleChange = (value: string): void => {
     if (handleChangeOverride) {
@@ -42,7 +42,7 @@ export const SingleTaxId = ({ handleChangeOverride, validationText, ...props }: 
           allowMasking={true}
           disabled={props.taxIdDisplayStatus === "password-view"}
           fieldName={fieldName}
-          formContext={ProfileFormContext}
+          formContext={DataFieldFormContext}
           handleChange={handleChange}
           inputProps={{
             endAdornment: (

@@ -46,6 +46,7 @@ export const ApiFormationHealth: UserData = {
           { identifier: "some-identifier-15484222", dueDate: "2024-02-09", calendarEventType: "TAX-FILING" },
         ],
       },
+      taxClearanceCertificateData: undefined,
       profileData: {
         liquorLicense: true,
         requiresCpa: false,

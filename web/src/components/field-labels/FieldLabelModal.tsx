@@ -4,7 +4,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ReactElement, useContext } from "react";
 
-import { ProfileContentField } from "@/contexts/profileFormContext";
+import { ProfileContentField } from "@/lib/types/types";
 
 interface FieldOverrides {
   header: string | undefined;

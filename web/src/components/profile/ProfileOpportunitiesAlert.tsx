@@ -5,7 +5,7 @@ import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { getFieldsForProfile, isFieldAnswered } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
-import { ProfileContentField } from "@/contexts/profileFormContext";
+import { ProfileContentField } from "@/lib/types/types";
 
 export const ProfileOpportunitiesAlert = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);

@@ -5,7 +5,7 @@ import {
   LookupIndustryById,
 } from "@businessnjgovnavigator/shared";
 
-import { ProfileContentField } from "@/contexts/profileFormContext";
+import { ProfileContentField } from "@/lib/types/types";
 
 export const getResetIndustrySpecificData = (
   industryId: string | undefined

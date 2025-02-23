@@ -5,7 +5,7 @@ import {
   FormContextReducer,
   FormContextType,
   ReducedFieldStates,
-} from "@/contexts/formContext";
+} from "@/lib/types/types";
 import { FormEvent, useCallback, useEffect, useReducer, useState } from "react";
 
 const debug = false;

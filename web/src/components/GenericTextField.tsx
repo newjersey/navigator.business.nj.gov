@@ -1,9 +1,9 @@
-import { FieldErrorType, FormContextFieldProps, FormContextType } from "@/contexts/formContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { OutlinedInputProps, TextField, TextFieldProps } from "@mui/material";
 
+import { FieldErrorType, FormContextFieldProps, FormContextType } from "@/lib/types/types";
 import {
   ChangeEvent,
   Context,
@@ -17,7 +17,7 @@ import {
 
 export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFieldProps<T> {
   fieldName: string;
-  inputWidth: "full" | "default" | "reduced";
+  inputWidth?: "full" | "default" | "reduced";
   fieldOptions?: TextFieldProps;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formContext?: Context<FormContextType<any>>;

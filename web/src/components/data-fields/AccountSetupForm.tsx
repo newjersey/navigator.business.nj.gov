@@ -1,8 +1,7 @@
 import { GenericTextField } from "@/components/GenericTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { FormContextFieldProps } from "@/contexts/formContext";
+import { DataFieldFormContext } from "@/contexts/dataFieldFormContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import {
@@ -10,6 +9,7 @@ import {
   getFullNameErrorVariant,
   isFullNameValid,
 } from "@/lib/domain-logic/isFullNameValid";
+import { FormContextFieldProps } from "@/lib/types/types";
 import { validateEmail } from "@/lib/utils/helpers";
 import { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
@@ -26,9 +26,9 @@ export const AccountSetupForm = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { registrationStatus, setRegistrationStatus } = useContext(NeedsAccountContext);
 
-  const emailFormContextHelpers = useFormContextFieldHelpers("email", ProfileFormContext, props.errorTypes);
+  const emailFormContextHelpers = useFormContextFieldHelpers("email", DataFieldFormContext, props.errorTypes);
 
-  const nameFormContextHelpers = useFormContextFieldHelpers("name", ProfileFormContext, props.errorTypes);
+  const nameFormContextHelpers = useFormContextFieldHelpers("name", DataFieldFormContext, props.errorTypes);
 
   emailFormContextHelpers.RegisterForOnSubmit(() =>
     props.user.email ? validateEmail(props.user.email) : false
@@ -105,7 +105,7 @@ export const AccountSetupForm = (props: Props): ReactElement => {
           </label>
           <GenericTextField
             value={props.user.name}
-            formContext={ProfileFormContext}
+            formContext={DataFieldFormContext}
             fieldName={"name"}
             error={nameFormContextHelpers.isFormFieldInvalid}
             validationText={FullNameErrorMessageLookup[getFullNameErrorVariant(props.user.name)]}

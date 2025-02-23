@@ -2,7 +2,7 @@ import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { ReactElement, useContext } from "react";
 
-import { ProfileContentField } from "@/contexts/profileFormContext";
+import { ProfileContentField } from "@/lib/types/types";
 
 export interface Props {
   fieldName: ProfileContentField;
