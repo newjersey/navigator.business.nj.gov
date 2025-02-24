@@ -40,7 +40,7 @@
     {
       "step": 3,
       "weight": 15,
-      "task": "get-insurance",
+      "task": [],
       "required": true
     },
     {
@@ -48,10 +48,17 @@
       "weight": 16,
       "licenseTask": "electrical-business-license",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 90,
+      "task": "community-right-to-know-survey"
     }
   ],
   "name": "Electrical Contractor",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
   "displayname": "electrical-contractor",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
