@@ -59,6 +59,12 @@
       "task": "transportation-entity-id",
       "required": true,
       "licenseTask": ""
+    },
+    {
+      "step": 4,
+      "weight": 90,
+      "task": "community-right-to-know-survey",
+      "required": false
     }
   ],
   "name": "Auto-Body Repair",
