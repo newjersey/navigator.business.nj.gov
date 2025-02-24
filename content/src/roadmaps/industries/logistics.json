@@ -51,7 +51,8 @@
   ],
   "name": "Logistics",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "logistics-CRTK-survey"
   ],
   "displayname": "logistics",
   "industryOnboardingQuestions": {
