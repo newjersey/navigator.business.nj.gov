@@ -28,7 +28,7 @@ summaryDescriptionMd: >-
 
   A Motor Vehicle Commission 
 
-  (MVC) Entity Identification Number (EIN) is required before registering a business vehicle.
+  (MVC) Entity Identification Number (EIN) and title showing business ownership are required before registering a business vehicle.
 
   :::
 
@@ -66,7 +66,7 @@ callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm?utm
 * **Applicable fees paid,** based on vehicle type and weight
 
 :::infoAlert 
- You must apply for a title in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). To save time, [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8).
+ You must register your vehicle in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). To save time, [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8).
 :::
 
 &nbsp;
@@ -76,3 +76,10 @@ callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm?utm
 :::callout{ showHeader="true" headerText="What if I don't register my vehicle?" showIcon="false" calloutType="warning" }
 
 If you use an unregistered vehicle for your business, you may be subject to vehicle impoundment, fines, or or eligibility issues with your insurance.
+
+:::
+
+:::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
+* A valid registration card
+* A valid license plate
+:::
