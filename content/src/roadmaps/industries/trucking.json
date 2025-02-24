@@ -71,6 +71,11 @@
       "weight": 14,
       "task": "transportation-entity-id",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 90,
+      "task": "community-right-to-know-survey"
     }
   ],
   "name": "Trucking",
