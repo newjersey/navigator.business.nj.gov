@@ -110,6 +110,7 @@ export const taskIdLicenseNameMapping = {
   "temporary-help-service-firm-reg": "Consulting Firms/Temporary Help Services-Temporary Help Service",
   "search-licenses-employment-agency": "Employment & Personnel Service-Employment Agency",
   "funeral-registration": "Mortuary Science-Funeral Home",
+  "oos-pharmacy-registration": "Pharmacy-Out of State Pharmacy",
 } as const;
 
 export const LicenseNameTaskIdMapping = Object.fromEntries(

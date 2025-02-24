@@ -72,6 +72,9 @@ const getForeignAddOns = (profileData: ProfileData): string[] => {
 
   if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NEXUS") {
     addOns.push("foreign-nexus");
+    if (profileData.industryId === "pharmacy") {
+      addOns.push("oos-pharmacy");
+    }
   }
 
   return addOns;
