@@ -10,7 +10,7 @@ urlSlug: community-right-to-know-survey
 displayname: community-right-to-know-survey
 name: "Complete the Community Right to Know Survey or Get an Exemption  "
 id: community-right-to-know-survey
-callToActionLink: https://www.nj.gov/dep/enforcement/opppc/crtk/crtkguidance.pdf?form=MG0AV3
+callToActionLink: https://www.nj.gov/dep/enforcement/opppc/crtk/crtkguidance.pdf?form
 callToActionText: "Review the Instructions for Completing the CRTK Survey and Exemption "
 industryId: ""
 agencyId: njdep
