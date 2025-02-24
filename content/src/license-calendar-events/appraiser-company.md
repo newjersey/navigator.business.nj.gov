@@ -5,7 +5,7 @@ notesMd: "Working doc:
 licenseName: ""
 urlSlug: appraiser-company
 expirationEventDisplayName: Real Estate Appraisal Management Company License Expiration
-renewalEventDisplayName: Renew Your Real Estate Appraisal Management Company Registration
+renewalEventDisplayName: Real Estate Appraisal Management Company Registration Renewal
 disclaimerText: You can renew your license 60 days before it expires and up to
   30 days after expiration. If you fail to renew your license at this point,
   your license will be suspended and you won't be able to provide your licensed
