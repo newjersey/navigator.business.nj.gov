@@ -1,14 +1,7 @@
 {
-  "displayname": "printing-business",
   "naicsCodes": "323111, 323117, 323113",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "digital-and-print-media",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -47,10 +40,24 @@
     {
       "step": 3,
       "weight": 15,
-      "task": "get-insurance"
+      "task": []
+    },
+    {
+      "step": 4,
+      "weight": 90,
+      "task": "community-right-to-know-survey"
     }
   ],
   "name": "Printing Business",
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
+  "displayname": "printing-business",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
+  "isEnabled": true,
   "additionalSearchTerms": "office printing, commercial printing, printing services",
   "id": "printing-business",
   "description": "Offers printing services for individuals and other companies",
