@@ -1,6 +1,7 @@
 import { BusinessesDataClient, DatabaseClient, UserDataClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { CURRENT_VERSION, UserData } from "@shared/userData";
+import { get as levenshteinDistance } from "fast-levenshtein";
 
 export const DynamoDataClient = (
   userDataClient: UserDataClient,
@@ -87,10 +88,41 @@ export const DynamoDataClient = (
     return await userDataClient.findByEmail(email);
   };
 
+  const findUsersByBusinessName = async (businessName: string): Promise<UserData[]> => {
+    const normalizedBusinessName = businessName.trim().toLowerCase();
+
+    const businesses = await businessesDataClient.findAllByBusinessName(businessName);
+    if (businesses.length === 0) {
+      logger.LogInfo(`No businesses found for business name: ${businessName}`);
+      return [];
+    }
+    const matchedBusinesses = businesses.filter((business) => {
+      const businessNameNormalized = business.profileData?.businessName?.toLowerCase();
+      if (!businessNameNormalized) return false;
+      const distance = levenshteinDistance(normalizedBusinessName, businessNameNormalized);
+      return distance <= 2;
+    });
+
+    if (matchedBusinesses.length === 0) {
+      logger.LogInfo(`No matched businesses found for business name: ${businessName}`);
+      return [];
+    }
+
+    const owningUserIds = [...new Set(matchedBusinesses.map((business) => business.userId))];
+    const users = await Promise.all(owningUserIds.map(async (userId) => userDataClient.get(userId)));
+    const validUsers = users.filter((user): user is UserData => !!user);
+
+    if (validUsers.length === 0) {
+      logger.LogInfo(`No users found for matched business name: ${businessName}`);
+    }
+    return validUsers;
+  };
+
   return {
     migrateData,
     get,
     put,
     findByEmail,
+    findUsersByBusinessName,
   };
 };

@@ -26,6 +26,7 @@ export interface DatabaseClient {
   get: (userId: string) => Promise<UserData>;
   put: (userData: UserData) => Promise<UserData>;
   findByEmail: (email: string) => Promise<UserData | undefined>;
+  findUsersByBusinessName: (businessName: string) => Promise<UserData[]>;
 }
 
 export interface UserDataClient {
