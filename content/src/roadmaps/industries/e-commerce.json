@@ -49,7 +49,11 @@
     }
   ],
   "name": "Online Business",
-  "nonEssentialQuestionsIds": ["weights-measures", "cigarette-manufacture-sell"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "cigarette-manufacture-sell",
+    "other-businesses-CRTK-survey"
+  ],
   "displayname": "e-commerce",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
