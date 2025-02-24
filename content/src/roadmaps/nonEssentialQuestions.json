@@ -104,6 +104,26 @@
       "questionText": "Are you an optometrist?",
       "id": "healthcare-optometrist ",
       "addOn": "healthcare-tpa"
+    },
+    {
+      "id": "other-businesses-CRTK-survey",
+      "questionText": "Will your business fall under [one of these industries](https://www.nj.gov/dep/enforcement/opppc/reports/rtknaics.pdf)?",
+      "addOn": "community-RTK-survey"
+    },
+    {
+      "questionText": "Will you deliver packages by air (for example by airplane or helicopter)?",
+      "id": "courier-CRTK-survey",
+      "addOn": "community-RTK-survey"
+    },
+    {
+      "questionText": "\nWill your business fall under [one of these industries](<>)?",
+      "id": "other-businesses-CRTK-survey",
+      "addOn": "community-RTK-survey"
+    },
+    {
+      "questionText": "\nWill you sell lawn and garden supplies, flowers, or florists’ supplies?",
+      "id": "lawn-businesses-CRTK-survey",
+      "addOn": "community-RTK-survey"
     }
   ]
 }
