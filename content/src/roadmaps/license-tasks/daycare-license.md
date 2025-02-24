@@ -29,7 +29,7 @@ webflowId: 5f7728f5e8bf507c5e317899
 
 - `EIN|ein`
 - `Business registration certificate (BRC)|business-reg-certificate`
-- `Certificate of formation|certificate-formation`
+- `Certificate of Formation|certificate-formation`
 - Letter of certification from the local government indicating the building’s previous type of use
 - Water bill and a water testing report from your local government
 - Map of your business location with the location of the outdoor playing area
