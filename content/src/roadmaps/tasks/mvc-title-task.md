@@ -10,7 +10,7 @@ summaryDescriptionMd: >-
   :::
 
 
-  You may need a title showing business ownership of any vehicles that will be owned by your business.
+  You may need a title showing business ownership owned by your business.
 
 
   &nbsp;
