@@ -40,11 +40,18 @@
     {
       "step": 3,
       "weight": 14,
-      "task": "get-insurance"
+      "task": []
+    },
+    {
+      "step": 4,
+      "weight": 90,
+      "task": "community-right-to-know-survey"
     }
   ],
   "name": "Construction",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
   "displayname": "commercial-construction",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
