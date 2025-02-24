@@ -4,7 +4,8 @@
   "roadmapSteps": [
     {
       "step": 4,
-      "weight": 90
+      "weight": 90,
+      "task": "community-right-to-know-survey"
     }
   ]
 }
