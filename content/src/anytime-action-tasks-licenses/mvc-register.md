@@ -66,7 +66,7 @@ callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm?utm
 * **Applicable fees paid,** based on vehicle type and weight
 
 :::infoAlert 
- You must register your vehicle in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). To save time, [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8).
+ You must register your vehicle in person. Complete the appropriate form and take them to any NJ MVC vehicle center (or complete the forms on site). To save time, [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8).
 :::
 
 &nbsp;
