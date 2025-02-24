@@ -129,6 +129,11 @@
       "questionText": "Will your business do management consulting services (manufacturing management, physical distribution, and site location consulting)?",
       "id": "logistics-CRTK-survey",
       "addOn": "community-RTK-survey"
+    },
+    {
+      "questionText": "Will your business fall under [one of these industries](https://www.nj.gov/dep/enforcement/opppc/reports/rtknaics.pdf)?",
+      "id": "other-businesses-CRTK-survey",
+      "addOn": "community-RTK-survey"
     }
   ]
 }
