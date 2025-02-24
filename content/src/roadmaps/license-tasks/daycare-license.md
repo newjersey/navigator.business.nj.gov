@@ -6,8 +6,8 @@ urlSlug: daycare-license
 name: Obtain Your Child Care Center License
 webflowName: "Daycare: License for a Child Care Center"
 summaryDescriptionMd: >
-  If you have more than six children under your care you must run your child
-  care services outside of your home and will need a child care center license.
+  If you have more than 6 children under your care, you must run your child care
+  services outside of your home and will need a child care center license.
 industryId:
   - daycare
 callToActionText: Apply for My License
