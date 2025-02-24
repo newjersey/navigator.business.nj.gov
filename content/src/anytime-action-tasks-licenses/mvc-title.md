@@ -28,7 +28,7 @@ summaryDescriptionMd: >-
 
   A Motor Vehicle Commission 
 
-  (MVC) Entity Identification Number (EIN) is requiring before applying for or changing a vehicle title.
+  (MVC) Entity Identification Number (EIN) is required before applying for or changing a vehicle title.
 
   :::
 
