@@ -1,14 +1,7 @@
 {
-  "displayname": "lawn-care",
   "naicsCodes": "561730",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "other-services",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -47,10 +40,20 @@
     {
       "step": 3,
       "weight": 15,
-      "task": "get-insurance"
+      "task": []
     }
   ],
   "name": "Lawn Care",
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "lawn-businesses-CRTK-survey"
+  ],
+  "displayname": "lawn-care",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
+  "isEnabled": true,
   "additionalSearchTerms": "yard, lawn, mowing, maintenance, service, landscape",
   "id": "lawn-care",
   "description": "Offers lawn maintenance services",
