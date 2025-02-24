@@ -20,6 +20,7 @@ describe("encryptTaxIdBatch", () => {
       getNeedToAddToUserTestingUsers: jest.fn(),
       getNeedTaxIdEncryptionUsers: jest.fn(),
       getUsersWithOutdatedVersion: jest.fn(),
+      getAllUsersWithBusinesses: jest.fn(),
     };
     encryptTaxId = encryptTaxIdFactory(stubEncryptionDecryptionClient);
   });

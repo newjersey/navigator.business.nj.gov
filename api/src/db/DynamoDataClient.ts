@@ -1,6 +1,7 @@
 import { BusinessesDataClient, DatabaseClient, UserDataClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { CURRENT_VERSION, UserData } from "@shared/userData";
+import { get as levenshteinDistance } from "fast-levenshtein";
 
 export const DynamoDataClient = (
   userDataClient: UserDataClient,
@@ -87,10 +88,36 @@ export const DynamoDataClient = (
     return await userDataClient.findByEmail(email);
   };
 
+  const findUsersByBusinessName = async (businessName: string): Promise<UserData[]> => {
+    const normalizedBusinessName = businessName.trim().toLowerCase();
+
+    const usersWithBusinesses = await userDataClient.getAllUsersWithBusinesses();
+
+    if (usersWithBusinesses.length === 0) {
+      logger.LogInfo(`No users with businesses found`);
+      return [];
+    }
+    const matchedUsers = usersWithBusinesses.filter((user) => {
+      const businesses = Object.values(user.businesses);
+      const matchedBusinesses = businesses.filter((business) => {
+        const businessNameNormalized = business.profileData?.businessName?.toLowerCase();
+        if (!businessNameNormalized) return false;
+        const distance = levenshteinDistance(normalizedBusinessName, businessNameNormalized);
+        return distance <= 2;
+      });
+      return matchedBusinesses.length > 0;
+    });
+
+    if (matchedUsers.length === 0) {
+      logger.LogInfo(`No users found for business name: ${businessName}`);
+    }
+    return matchedUsers;
+  };
   return {
     migrateData,
     get,
     put,
     findByEmail,
+    findUsersByBusinessName,
   };
 };

@@ -44,6 +44,7 @@ describe("taxFilingRouter", () => {
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),
+      findUsersByBusinessName: jest.fn(),
     };
     apiTaxFilingClient = {
       lookup: jest.fn(),
