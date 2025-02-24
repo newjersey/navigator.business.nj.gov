@@ -51,6 +51,11 @@
       "step": 3,
       "weight": 28,
       "licenseTask": "cds-healthcare"
+    },
+    {
+      "step": 4,
+      "weight": 90,
+      "task": "community-right-to-know-survey"
     }
   ],
   "name": "Healthcare",
