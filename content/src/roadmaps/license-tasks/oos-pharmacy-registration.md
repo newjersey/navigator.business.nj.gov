@@ -13,6 +13,7 @@ agencyAdditionalContext: New Jersey Board of Pharmacy
 industryId: pharmacy
 licenseCertificationClassification: undefined
 summaryDescriptionMd: "If your pharmacy is outside New Jersey and you send prescription drugs or devices to patients in New Jersey, you need to register as an out-of-state pharmacy."
+licenseName: "Pharmacy-Out of State Pharmacy"
 ---
 
 ## Application Requirements

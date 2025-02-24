@@ -1,0 +1,12 @@
+{
+  "displayname": "oos-pharmacy",
+  "id": "oos-pharmacy",
+  "roadmapSteps": [],
+  "modifications": [
+    {
+      "step": 4,
+      "taskToReplaceFilename": "pharmacy-license",
+      "replaceWithFilename": "oos-pharmacy-registration"
+    }
+  ]
+}
