@@ -38,12 +38,6 @@
       "task": "bank-account"
     },
     {
-      "step": 3,
-      "weight": 15,
-      "task": [],
-      "required": true
-    },
-    {
       "step": 4,
       "weight": 16,
       "task": "transportation-entity-id",

@@ -39,11 +39,6 @@
     },
     {
       "step": 3,
-      "weight": 20,
-      "task": []
-    },
-    {
-      "step": 3,
       "weight": 50,
       "licenseTask": "auto-body-repair-license",
       "required": true

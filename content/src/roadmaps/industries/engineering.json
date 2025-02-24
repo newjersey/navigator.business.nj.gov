@@ -39,11 +39,6 @@
     },
     {
       "step": 3,
-      "weight": 15,
-      "task": []
-    },
-    {
-      "step": 3,
       "weight": 20,
       "licenseTask": "license-engineer"
     },
