@@ -10,7 +10,8 @@ summaryDescriptionMd: >-
   :::
 
 
-  You may need a title showing business ownership owned by your business.
+  You may need a title for any vehicles owned by your business.
+
 
 
   &nbsp;
@@ -38,7 +39,7 @@ urlSlug: mvc-title-task
 displayname: mvc-title-task
 name: Get a Title for Your Business Vehicle(s)
 id: mvc-title-task
-callToActionLink: Get My Vehicle Title
+callToActionLink: https://www.nj.gov/mvc/vehicles/titlenew.htm
 callToActionText: Get My Vehicle Title
 agencyId: nj-motor-vehicle
 ---
