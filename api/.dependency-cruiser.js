@@ -131,6 +131,10 @@ module.exports = {
       to: { path: "lodash" },
     },
     {
+      from: {},
+      to: { path: "fast-levenshtein" },
+    },
+    {
       from: { path: "src/libs" },
       to: { path: "helmet" },
     },
