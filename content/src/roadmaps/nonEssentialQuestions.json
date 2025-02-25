@@ -111,7 +111,7 @@
       "addOn": "community-rtk-survey"
     },
     {
-      "questionText": "\nWill your business fall under [one of these industries](<>)?",
+      "questionText": "Will your business fall under [one of these industries](https://www.nj.gov/dep/enforcement/opppc/reports/rtknaics.pdf)?",
       "id": "other-businesses-CRTK-survey",
       "addOn": "community-rtk-survey"
     },
