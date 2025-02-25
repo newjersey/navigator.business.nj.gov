@@ -34,7 +34,7 @@ A completed CRTK survey or an exemption.
 
 :::
 
-:::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="What if I don't complete this task?" showIcon="false" calloutType="warning" }
 
 If you don’t complete the survey or request an exemption by the deadline, you may receive significant fines and penalties.
 
