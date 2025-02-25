@@ -28,7 +28,7 @@ licenseCertificationClassification: LICENSE
 * \[]{cannabis-labor peace-agreement} Attestation from a labor organization stating that you both have entered a labor peace agreement *(not required for conditional license holders operating as a microbusiness)*
 * \[]{cannabis-standard-operating-procedure} Standard Operating Procedures (SOPs) for your business, which detail how to run operations safely
 * \[]{cannabis-final-agreements} Final agreements, such as signed vendor contracts, if applicable
-* \[]{cannabis-priority-status-proof} Proof you still meet the requirements to be a Social Equity Business, Diversely-Owned Business, and Impact Zone Business, if applicable
+* \[]{cannabis-priority-status-proof} Proof you still meet the requirements to be a `Social Equity Business|social-equity-business-cannabis`, `Diversely-Owned Business|diversely-owned-business-cannabis`, and `Impact Zone Business|impact-zone-business-cannabis`, if applicable
 
 
 :::callout{ showHeader="true" headerText="Once approved, you will have:" showIcon="false" calloutType="conditional" }
