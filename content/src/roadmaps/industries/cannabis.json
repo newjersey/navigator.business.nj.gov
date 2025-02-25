@@ -71,11 +71,6 @@
     },
     {
       "step": 4,
-      "weight": 30,
-      "task": ""
-    },
-    {
-      "step": 4,
       "weight": 35,
       "licenseTask": "town-mercantile-license"
     }
