@@ -18,7 +18,7 @@ export const TaskHeader = (props: Props): ReactElement => {
   const { business } = useUserData();
   const { roadmap } = useRoadmap();
 
-  const currentTaskProgress: TaskProgress = business?.taskProgress[props.task.id] ?? "NOT_STARTED";
+  const currentTaskProgress: TaskProgress = business?.taskProgress[props.task.id] ?? "TO_DO";
 
   const { Config } = useConfig();
 
@@ -36,10 +36,8 @@ export const TaskHeader = (props: Props): ReactElement => {
 
   const getTextColorClass = (): string => {
     switch (currentTaskProgress) {
-      case "NOT_STARTED":
+      case "TO_DO":
         return "text-base-dark";
-      case "IN_PROGRESS":
-        return "text-accent-cooler-dark";
       case "COMPLETED":
         return "text-primary";
     }
@@ -47,10 +45,8 @@ export const TaskHeader = (props: Props): ReactElement => {
 
   const getBgColorClass = (): string => {
     switch (currentTaskProgress) {
-      case "NOT_STARTED":
+      case "TO_DO":
         return "bg-base-extra-light";
-      case "IN_PROGRESS":
-        return "bg-accent-cool-lightest";
       case "COMPLETED":
         return "bg-primary-extra-light";
     }

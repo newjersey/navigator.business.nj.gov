@@ -8,28 +8,14 @@ const Template = () => {
         <TaskProgressCheckbox
           disabledTooltipText={undefined}
           taskId={`1`}
-          STORYBOOK_ONLY_currentTaskProgress={"NOT_STARTED"}
+          STORYBOOK_ONLY_currentTaskProgress={"TO_DO"}
         />
       </div>
       <div className={"margin-bottom-2"}>
         <TaskProgressCheckbox
           disabledTooltipText={"disabled text"}
           taskId={`2`}
-          STORYBOOK_ONLY_currentTaskProgress={"NOT_STARTED"}
-        />
-      </div>
-      <div className={"margin-bottom-2"}>
-        <TaskProgressCheckbox
-          disabledTooltipText={undefined}
-          taskId={`3`}
-          STORYBOOK_ONLY_currentTaskProgress={"IN_PROGRESS"}
-        />
-      </div>
-      <div className={"margin-bottom-2"}>
-        <TaskProgressCheckbox
-          disabledTooltipText={"disabled text"}
-          taskId={`4`}
-          STORYBOOK_ONLY_currentTaskProgress={"IN_PROGRESS"}
+          STORYBOOK_ONLY_currentTaskProgress={"TO_DO"}
         />
       </div>
       <div className={"margin-bottom-2"}>

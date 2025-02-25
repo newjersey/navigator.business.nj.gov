@@ -62,7 +62,7 @@ export const TaxInput = (props: Props): ReactElement => {
       business.profileData.taxId?.length > 0 &&
       business.profileData.taxId?.length < 12
     ) {
-      updateQueue.queueTaskProgress({ [props.task.id]: "IN_PROGRESS" }).update();
+      updateQueue.queueTaskProgress({ [props.task.id]: "TO_DO" }).update();
     }
   }, business);
 

@@ -28,7 +28,7 @@ import {
   taxTaskId,
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -73,22 +73,22 @@ describe("<TaskProgressCheckbox />", () => {
     );
   };
 
-  it("displays Not Started status when user data does not contain status", () => {
+  it("displays To Do status when user data does not contain status", () => {
     renderTaskCheckbox("123", generateBusiness({}));
-    expect(screen.getByText(Config.taskProgress.NOT_STARTED)).toBeInTheDocument();
+    expect(screen.getByText(Config.taskProgress.TO_DO)).toBeInTheDocument();
   });
 
   it("displays task status from user data", () => {
     const taskId = "123";
     const taskProgress: Record<string, TaskProgress> = {
       "some-id": "COMPLETED",
-      [taskId]: "IN_PROGRESS",
+      [taskId]: "TO_DO",
     };
     renderTaskCheckbox(taskId, generateBusiness({ taskProgress }));
-    expect(screen.getByText(Config.taskProgress.IN_PROGRESS)).toBeInTheDocument();
+    expect(screen.getByText(Config.taskProgress.TO_DO)).toBeInTheDocument();
   });
 
-  it("cycles through updating task status when progress checkbox is clicked", async () => {
+  it("updates task status when progress checkbox is clicked", async () => {
     const taskId = "123";
     const taskProgress: Record<string, TaskProgress> = { "some-id": "COMPLETED" };
 
@@ -98,27 +98,27 @@ describe("<TaskProgressCheckbox />", () => {
     await waitFor(() => {
       return expect(currentBusiness().taskProgress).toEqual({
         "some-id": "COMPLETED",
-        [taskId]: "IN_PROGRESS",
+        [taskId]: "COMPLETED",
       });
     });
-    await screen.findByText(Config.taskProgress.IN_PROGRESS);
+    await screen.findByText(Config.taskProgress.COMPLETED);
 
     fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
     await waitFor(() => {
       return expect(currentBusiness().taskProgress).toEqual({
         "some-id": "COMPLETED",
-        [taskId]: "COMPLETED",
+        [taskId]: "TO_DO",
       });
     });
-    await screen.findByText(Config.taskProgress.COMPLETED);
+    await screen.findByText(Config.taskProgress.TO_DO);
   });
 
   it("shows a success snackbar when an option is selected", async () => {
     renderTaskCheckbox("123", generateBusiness({}));
-    expect(screen.queryByText(getTaskStatusUpdatedMessage("IN_PROGRESS"))).not.toBeInTheDocument();
+    expect(screen.queryByText(getTaskStatusUpdatedMessage("COMPLETED"))).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
-    await screen.findByText(getTaskStatusUpdatedMessage("IN_PROGRESS"));
+    await screen.findByText(getTaskStatusUpdatedMessage("COMPLETED"));
   });
 
   it("opens Needs Account modal for guest mode user when checkbox is clicked", async () => {
@@ -149,8 +149,8 @@ describe("<TaskProgressCheckbox />", () => {
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
 
       fireEvent.click(screen.getByText(Config.registeredForTaxesModal.areYouSureTaxContinueButton));
-      await screen.findByText(Config.taskProgress.NOT_STARTED);
-      expect(currentBusiness().taskProgress[taxTaskId]).toEqual("NOT_STARTED");
+      await screen.findByText(Config.taskProgress.TO_DO);
+      expect(currentBusiness().taskProgress[taxTaskId]).toEqual("TO_DO");
     });
 
     it("doesn't update the task progress if the user cancels in the warning modal", async () => {
@@ -176,7 +176,7 @@ describe("<TaskProgressCheckbox />", () => {
       expect(screen.getByText(Config.formationDateModal.header)).toBeInTheDocument();
     });
 
-    it("does not open modal when task changed to unstarted or in-progress", () => {
+    it("does not open modal when task changed to TO_DO", () => {
       renderTaskCheckbox(
         formationTaskId,
         generateBusiness({
@@ -196,7 +196,7 @@ describe("<TaskProgressCheckbox />", () => {
       renderTaskCheckbox(
         formationTaskId,
         generateBusiness({
-          taskProgress: { [formationTaskId]: "IN_PROGRESS" },
+          taskProgress: { [formationTaskId]: "TO_DO" },
         })
       );
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
@@ -209,7 +209,7 @@ describe("<TaskProgressCheckbox />", () => {
       renderTaskCheckbox(
         formationTaskId,
         generateBusiness({
-          taskProgress: { [formationTaskId]: "IN_PROGRESS" },
+          taskProgress: { [formationTaskId]: "TO_DO" },
         })
       );
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
@@ -225,14 +225,6 @@ describe("<TaskProgressCheckbox />", () => {
       const startingPersonaForRoadmapUrl = generateProfileData({ businessPersona: "STARTING" });
       renderTaskCheckbox(formationTaskId, generateBusiness({ profileData: startingPersonaForRoadmapUrl }));
       await selectCompleted();
-
-      expect(screen.getByText(getTaskStatusUpdatedMessage("IN_PROGRESS"))).toBeInTheDocument();
-      act(() => {
-        jest.advanceTimersByTime(7000);
-      });
-      await waitFor(() => {
-        return expect(screen.queryByText(getTaskStatusUpdatedMessage("IN_PROGRESS"))).not.toBeInTheDocument();
-      });
 
       const date = getCurrentDate().subtract(1, "month").date(1);
       selectDate(date);
@@ -341,7 +333,6 @@ describe("<TaskProgressCheckbox />", () => {
 
   const selectCompleted = async (): Promise<void> => {
     fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
-    await screen.findByText(Config.taskProgress.IN_PROGRESS);
-    fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
+    await screen.findByText(Config.taskProgress.TO_DO);
   };
 });

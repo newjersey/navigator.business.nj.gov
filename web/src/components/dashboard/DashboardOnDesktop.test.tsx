@@ -174,20 +174,18 @@ describe("<DashboardOnDesktop />", () => {
       tasks: [
         generateTask({ id: "task1", name: "task1", stepNumber: 1 }),
         generateTask({ id: "task2", name: "task2", stepNumber: 1 }),
-        generateTask({ id: "task3", name: "task3", stepNumber: 2 }),
       ],
     });
 
     useMockBusiness({
-      taskProgress: { task1: "IN_PROGRESS", task2: "COMPLETED" },
+      taskProgress: { task1: "TO_DO", task2: "COMPLETED" },
       onboardingFormProgress: "COMPLETED",
     });
 
     renderDashboardComponent({});
 
-    expect(screen.getByText("In progress")).toBeInTheDocument();
+    expect(screen.getByText("To do")).toBeInTheDocument();
     expect(screen.getByText("Completed")).toBeInTheDocument();
-    expect(screen.getByText("Not started")).toBeInTheDocument();
   });
 
   it("displays each step under associated section", () => {

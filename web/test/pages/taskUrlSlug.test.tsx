@@ -427,7 +427,7 @@ describe("task page", () => {
           profileData: generateProfileData({
             operatingPhase,
           }),
-          taskProgress: { [businessStructureTaskId]: "NOT_STARTED" },
+          taskProgress: { [businessStructureTaskId]: "TO_DO" },
         })
       );
       expect(screen.queryByTestId("nextUrlSlugButton")).not.toBeInTheDocument();
