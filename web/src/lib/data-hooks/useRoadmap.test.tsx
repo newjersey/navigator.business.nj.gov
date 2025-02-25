@@ -95,7 +95,7 @@ describe("useRoadmap", () => {
           task1: "COMPLETED",
           task2: "COMPLETED",
           task3: "COMPLETED",
-          task4: "NOT_STARTED",
+          task4: "TO_DO",
         },
       });
 
@@ -109,7 +109,7 @@ describe("useRoadmap", () => {
         taskProgress: {
           task1: "COMPLETED",
           task2: "COMPLETED",
-          task3: "IN_PROGRESS",
+          task3: "TO_DO",
           task4: "COMPLETED",
         },
       });
@@ -124,8 +124,8 @@ describe("useRoadmap", () => {
         taskProgress: {
           task1: "COMPLETED",
           task2: "COMPLETED",
-          task3: "IN_PROGRESS",
-          task4: "IN_PROGRESS",
+          task3: "TO_DO",
+          task4: "TO_DO",
         },
       });
 
@@ -160,10 +160,10 @@ describe("useRoadmap", () => {
     beforeEach(() => {
       useMockBusiness({
         taskProgress: {
-          task1: "NOT_STARTED",
-          task2: "NOT_STARTED",
-          task3: "NOT_STARTED",
-          task4: "NOT_STARTED",
+          task1: "TO_DO",
+          task2: "TO_DO",
+          task3: "TO_DO",
+          task4: "TO_DO",
         },
       });
     });

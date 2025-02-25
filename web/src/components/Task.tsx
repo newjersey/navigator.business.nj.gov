@@ -17,7 +17,7 @@ export const Task = (props: Props): ReactElement => {
   const { business } = useUserData();
   const { Config } = useConfig();
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-  const taskProgress = (business?.taskProgress && business.taskProgress[props.task.id]) || "NOT_STARTED";
+  const taskProgress = (business?.taskProgress && business.taskProgress[props.task.id]) || "TO_DO";
 
   const renderRequiredLabel = (): ReactNode => {
     if (!props.task.required) {

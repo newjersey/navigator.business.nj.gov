@@ -36,7 +36,7 @@ export const EinTask = (props: Props): ReactElement => {
     setShowInput(true);
     const newEinValue = remove ? emptyProfileData.employerId : business.profileData.employerId;
     updateQueue
-      .queueTaskProgress({ [props.task.id]: "IN_PROGRESS" })
+      .queueTaskProgress({ [props.task.id]: "TO_DO" })
       .queueProfileData({ employerId: newEinValue })
       .update();
   };

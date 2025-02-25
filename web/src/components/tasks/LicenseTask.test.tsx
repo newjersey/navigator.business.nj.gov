@@ -64,7 +64,7 @@ describe("<LicenseTask />", () => {
     it("task status checkbox is editable when lastUpdatedISO is empty", async () => {
       setupStatefulUserDataContext();
       const business = generateBusiness({
-        taskProgress: { [task.id]: "IN_PROGRESS" },
+        taskProgress: { [task.id]: "TO_DO" },
         licenseData: generateLicenseData(
           {},
           { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({ lastUpdatedISO: "" }) }
@@ -75,24 +75,23 @@ describe("<LicenseTask />", () => {
       await waitFor(() => {
         expect(screen.getByTestId("COMPLETED")).toBeInTheDocument();
       });
-      expect(screen.queryByTestId("NOT_STARTED")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("IN_PROGRESS")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("TO_DO")).not.toBeInTheDocument();
       expect(screen.queryByTestId("status-info-tooltip")).not.toBeInTheDocument();
     });
 
     it("task status checkbox is not editable when lastUpdatedISO has a value", () => {
       setupStatefulUserDataContext();
       const business = generateBusiness({
-        taskProgress: { [task.id]: "IN_PROGRESS" },
+        taskProgress: { [task.id]: "TO_DO" },
         licenseData: generateLicenseData(
           {},
           { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({}) }
         ),
       });
       renderTaskWithStatefulData(business);
-      expect(screen.getByTestId("IN_PROGRESS")).toBeInTheDocument();
+      expect(screen.getByTestId("TO_DO")).toBeInTheDocument();
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
-      expect(screen.getByTestId("IN_PROGRESS")).toBeInTheDocument();
+      expect(screen.getByTestId("TO_DO")).toBeInTheDocument();
       expect(screen.getByTestId("status-info-tooltip")).toBeInTheDocument();
       expect(screen.queryByTestId("COMPLETED")).not.toBeInTheDocument();
     });
@@ -371,7 +370,7 @@ describe("<LicenseTask />", () => {
 
         setupStatefulUserDataContext();
         const business = generateBusiness({
-          taskProgress: { [task.id]: "IN_PROGRESS" },
+          taskProgress: { [task.id]: "TO_DO" },
           licenseData: generateLicenseData(
             {},
             { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({ lastUpdatedISO: "" }) }

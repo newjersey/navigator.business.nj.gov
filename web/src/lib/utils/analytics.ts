@@ -985,22 +985,13 @@ export default {
     },
     task_status_checkbox: {
       click: {
-        selected_not_started_status: () => {
+        selected_to_do_status: () => {
           eventRunner.track({
             event: "task_manual_status_change",
             legacy_event_action: "click",
             legacy_event_category: "task_status_checkbox",
             legacy_event_label: "selected_not_started_status",
             status_selected: "selected_not_started",
-          });
-        },
-        selected_in_progress_status: () => {
-          eventRunner.track({
-            event: "task_manual_status_change",
-            legacy_event_action: "click",
-            legacy_event_category: "task_status_checkbox",
-            legacy_event_label: "selected_in_progress_status",
-            status_selected: "selected_in_progress",
           });
         },
         selected_completed_status: () => {

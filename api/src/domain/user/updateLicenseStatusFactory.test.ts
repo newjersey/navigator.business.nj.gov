@@ -314,7 +314,7 @@ describe("updateLicenseStatus", () => {
 
   describe("task progress", () => {});
 
-  it("defaults the license task status to NOT_STARTED", async () => {
+  it("defaults the license task status to TO_DO", async () => {
     const webserviceChecklistItems = [generateLicenseStatusItem({})];
     const licenseType1 = {
       "Pharmacy-Pharmacy": {
@@ -339,11 +339,11 @@ describe("updateLicenseStatus", () => {
 
     expect(resultCurrentBusiness.taskProgress).toEqual({
       ...initialTaskProgress,
-      "pharmacy-license": "NOT_STARTED",
+      "pharmacy-license": "TO_DO",
     });
   });
 
-  it("updates the license task status to IN_PROGRESS when license is pending", async () => {
+  it("the license task status remains TO_DO when license is pending", async () => {
     const webserviceChecklistItems = [generateLicenseStatusItem({})];
     const licenseType1 = {
       "Pharmacy-Pharmacy": {
@@ -368,7 +368,7 @@ describe("updateLicenseStatus", () => {
 
     expect(resultCurrentBusiness.taskProgress).toEqual({
       ...initialTaskProgress,
-      "pharmacy-license": "IN_PROGRESS",
+      "pharmacy-license": "TO_DO",
     });
   });
 
@@ -437,7 +437,7 @@ describe("updateLicenseStatus", () => {
     expect(resultCurrentBusiness.taskProgress).toEqual({
       ...initialTaskProgress,
       "pharmacy-license": "COMPLETED",
-      "home-health-aide-license": "IN_PROGRESS",
+      "home-health-aide-license": "TO_DO",
     });
   });
 
@@ -460,7 +460,7 @@ describe("updateLicenseStatus", () => {
       ...business,
       taskProgress: {
         ...business.taskProgress,
-        "health-club-registration": "IN_PROGRESS",
+        "health-club-registration": "TO_DO",
       },
       licenseData: generateLicenseData({}),
     }));

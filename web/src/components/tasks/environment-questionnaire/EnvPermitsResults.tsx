@@ -52,7 +52,7 @@ export const EnvPermitsResults = (props: Props): ReactElement => {
         },
       })
       .queueTaskProgress({
-        [props.taskId]: "IN_PROGRESS",
+        [props.taskId]: "TO_DO",
       })
       .update();
   };

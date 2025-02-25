@@ -6,14 +6,9 @@ import { ReactElement } from "react";
 const Config = getMergedConfig();
 
 export const TaskProgressTagLookup: Record<TaskProgress, ReactElement> = {
-  NOT_STARTED: (
-    <Tag backgroundColor="base-lighter" dataTestid="NOT_STARTED" isFixedWidth>
-      {Config.taskProgress.NOT_STARTED}
-    </Tag>
-  ),
-  IN_PROGRESS: (
-    <Tag backgroundColor="accent-cool-lighter-lighttext" dataTestid="IN_PROGRESS" isFixedWidth>
-      {Config.taskProgress.IN_PROGRESS}
+  TO_DO: (
+    <Tag backgroundColor="base-lighter" dataTestid="TO_DO" isFixedWidth>
+      {Config.taskProgress.TO_DO}
     </Tag>
   ),
   COMPLETED: (

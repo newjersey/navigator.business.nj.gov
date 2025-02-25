@@ -62,7 +62,7 @@ describe("<EinTask />", () => {
     beforeEach(() => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ employerId: "" }),
-        taskProgress: { [taskId]: "NOT_STARTED" },
+        taskProgress: { [taskId]: "TO_DO" },
       });
     });
 
@@ -161,16 +161,16 @@ describe("<EinTask />", () => {
       expect(currentBusiness().profileData.employerId).toEqual(undefined);
     });
 
-    it("sets task status to in-progress on edit button", () => {
+    it("sets task status to to-do on edit button", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.editText));
-      expect(currentBusiness().taskProgress[taskId]).toEqual("IN_PROGRESS");
+      expect(currentBusiness().taskProgress[taskId]).toEqual("TO_DO");
     });
 
-    it("sets task status to in-progress on remove button", () => {
+    it("sets task status to to-do on remove button", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
-      expect(currentBusiness().taskProgress[taskId]).toEqual("IN_PROGRESS");
+      expect(currentBusiness().taskProgress[taskId]).toEqual("TO_DO");
     });
   });
 
@@ -193,7 +193,7 @@ describe("<EinTask />", () => {
     beforeEach(() => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ employerId: "" }),
-        taskProgress: { [taskId]: "NOT_STARTED" },
+        taskProgress: { [taskId]: "TO_DO" },
       });
     });
 
