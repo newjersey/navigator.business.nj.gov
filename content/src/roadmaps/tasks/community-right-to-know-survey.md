@@ -8,7 +8,7 @@ summaryDescriptionMd: >-
   Businesses report certain chemicals they have on-site, known as `Environmental Hazardous Substances (EHS)|environmental hazardous substances`, to the CRTK program. CRTK uses this information to help New Jersey businesses and communities stay safe.
 urlSlug: community-right-to-know-survey
 displayname: community-right-to-know-survey
-name: "Complete the Community Right to Know Survey or Get an Exemption  "
+name: Complete the Community Right to Know Survey
 id: community-right-to-know-survey
 callToActionLink: https://www.nj.gov/dep/enforcement/opppc/crtk/crtkguidance.pdf?form
 callToActionText: "Complete the CRTK Survey or Exemption "
