@@ -34,17 +34,17 @@
     },
     {
       "step": 3,
-      "weight": 2,
+      "weight": 1,
       "task": "cannabis-bank-account"
     },
     {
       "step": 3,
-      "weight": 3,
+      "weight": 2,
       "task": "cannabis-insurance-policy"
     },
     {
       "step": 3,
-      "weight": 1,
+      "weight": 3,
       "task": "priority-status-cannabis",
       "required": true
     },
