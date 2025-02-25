@@ -15,7 +15,7 @@ callToActionText: "Complete the CRTK Survey or Exemption "
 industryId: ""
 agencyId: njdep
 ---
-## Survey or Exemption Requirements
+## Survey and Exemption Requirements
 
 Complete the survey by March 1 each year if your facility had any EHS above a specific threshold at any time during the previous calendar year. You must complete a survey for each location where your business operates.
 
