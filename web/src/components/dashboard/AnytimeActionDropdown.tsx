@@ -14,15 +14,13 @@ import { useRouter } from "next/compat/router";
 import { ChangeEvent, type ReactElement, useState } from "react";
 
 interface Props {
-  anytimeActionLicensesTasks: AnytimeActionTask[];
-  anytimeActionAdminTasks: AnytimeActionTask[];
-  anytimeActionReinstatementsTasks: AnytimeActionTask[];
+  anytimeActionTasks: AnytimeActionTask[];
   anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
 }
 
 type AnytimeAction = AnytimeActionTask | AnytimeActionLink | AnytimeActionLicenseReinstatement;
-type AnytimeActionWithTypeAndCategory = AnytimeAction & { type: string; category: string };
+type AnytimeActionWithTypeAndCategory = AnytimeAction & { type: string; category: string[] };
 
 export const AnytimeActionDropdown = (props: Props): ReactElement => {
   const { Config } = useConfig();
@@ -63,6 +61,11 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
     });
   };
 
+  // TODO, I imagine that this won't work well with list of strings for categories and I'll have to do something about that
+  // Also I'm getting some repeate categories but I think that might have to do with ordering of elements?
+
+  // TODO, also need to do testing at some point
+
   const getApplicableAnytimeActions = (): AnytimeActionWithTypeAndCategory[] => {
     const anytimeActionLinkWithType = props.anytimeActionLinks
       .filter((action) => findMatch(action))
@@ -70,34 +73,20 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
         return {
           ...action,
           type: "link",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryAdmin,
+          category: ["Sell or Close My Business"],
         };
       });
 
-    const anytimeActionAdminTaskWithType = props.anytimeActionAdminTasks
+    const anytimeActionTasksWithType = props.anytimeActionTasks
       .filter((action) => findMatch(action))
       .map((action) => {
         return {
           ...action,
           type: "task",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryAdmin,
+          category: action.category ?? ["General"], // this is something I should verify or delete before committing
         };
       });
-
-    const anytimeActionAdminOrLink = [...anytimeActionLinkWithType, ...anytimeActionAdminTaskWithType];
-    alphabetizeByName(anytimeActionAdminOrLink);
-
-    const anytimeActionLicensesTaskWithType = props.anytimeActionLicensesTasks
-      .filter((action) => findMatch(action))
-      .map((action) => {
-        return {
-          ...action,
-          type: "task",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryLicenses,
-        };
-      });
-
-    alphabetizeByName(anytimeActionLicensesTaskWithType);
+    alphabetizeByName(anytimeActionTasksWithType);
 
     const anytimeActionLicenseReinstatementsWithType = props.anytimeActionLicenseReinstatements
       .filter((action) => licenseReinstatementMatch(action))
@@ -105,32 +94,17 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
         return {
           ...action,
           type: "license-reinstatement",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryReinstatements,
+          category: ["Reactivate My Expired Permite, License or Registration"],
         };
       });
 
-    const anytimeActionReinstatementsWithType = props.anytimeActionReinstatementsTasks
-      .filter((action) => findMatch(action))
-      .map((action) => {
-        return {
-          ...action,
-          type: "task",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryReinstatements,
-        };
-      });
-
-    const anytimeActionAllReinstatments = [
-      ...anytimeActionReinstatementsWithType,
-      ...anytimeActionLicenseReinstatementsWithType,
-    ];
-
-    alphabetizeByName(anytimeActionAllReinstatments);
+    alphabetizeByName(anytimeActionLicenseReinstatementsWithType);
 
     const applicableAnytimeActions: AnytimeActionWithTypeAndCategory[] = [];
 
-    applicableAnytimeActions.push(...anytimeActionLicensesTaskWithType);
-    applicableAnytimeActions.push(...anytimeActionAdminOrLink);
-    applicableAnytimeActions.push(...anytimeActionAllReinstatments);
+    applicableAnytimeActions.push(...anytimeActionTasksWithType);
+    applicableAnytimeActions.push(...anytimeActionLinkWithType);
+    applicableAnytimeActions.push(...anytimeActionLicenseReinstatementsWithType);
 
     reverseAlphabetizeByCategory(applicableAnytimeActions);
 

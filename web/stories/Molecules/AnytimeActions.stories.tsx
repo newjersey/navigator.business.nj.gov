@@ -22,12 +22,7 @@ type Story = StoryObj<typeof AnytimeActionDropdown>;
 
 export const AnytimeAction: Story = {
   args: {
-    anytimeActionAdminTasks: [
-      generateAnytimeActionTask({ name: "Some Anytime Action Text - Licenses Task" }),
-    ],
-    anytimeActionLicensesTasks: [
-      generateAnytimeActionTask({ name: "Some Anytime Action Text - Admin Task" }),
-    ],
+    anytimeActionTasks: [generateAnytimeActionTask({ name: "Some Anytime Action Text - Licenses Task" })],
     anytimeActionLinks: [generateAnytimeActionLink({ name: "Some Anytime Action Text - Link" })],
     anytimeActionLicenseReinstatements: [
       generateAnytimeActionLicenseReinstatement({

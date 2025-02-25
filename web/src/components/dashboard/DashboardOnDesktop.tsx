@@ -27,9 +27,7 @@ import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
 
 interface Props {
-  anytimeActionLicensesTasks: AnytimeActionTask[];
-  anytimeActionAdminTasks: AnytimeActionTask[];
-  anytimeActionReinstatementsTasks: AnytimeActionTask[];
+  anytimeActionTasks: AnytimeActionTask[];
   anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   displayContent: RoadmapDisplayContent;
@@ -73,9 +71,7 @@ export const DashboardOnDesktop = (props: Props): ReactElement => {
 
                 {operatingPhase.displayAnytimeActions && (
                   <AnytimeActionDropdown
-                    anytimeActionLicensesTasks={props.anytimeActionLicensesTasks}
-                    anytimeActionAdminTasks={props.anytimeActionAdminTasks}
-                    anytimeActionReinstatementsTasks={props.anytimeActionReinstatementsTasks}
+                    anytimeActionTasks={props.anytimeActionTasks}
                     anytimeActionLinks={props.anytimeActionLinks}
                     anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
                   />

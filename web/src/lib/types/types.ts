@@ -170,6 +170,7 @@ export interface AnytimeActionTask extends AnytimeAction {
   summaryDescriptionMd: string;
   contentMd: string;
   filename: string;
+  category?: string[]; // should probably be required, but later to avoid errors now
 }
 
 export interface AnytimeActionLink extends AnytimeAction {
