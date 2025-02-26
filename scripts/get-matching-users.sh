@@ -53,7 +53,16 @@ while true; do
     fi
 
     echo "$RESULT" | \
-    $JQ -r '.Items[] | select(.data.M.businesses and .data.M.businesses.M) | select(.data.M.businesses.M | to_entries[] | .value.M.profileData and .value.M.profileData.M.businessPersona.S == "FOREIGN" and .value.M.profileData.M.industryId.S == "cannabis") | [.userId.S, (to_entries | .[].key)] | @csv' >> $OUTPUT_FILE
+    $JQ -r '.Items[] | select(.data.M.businesses and .data.M.businesses.M) |
+    select(.data.M.businesses.M | to_entries[] |
+    .value.M.profileData and
+    .value.M.profileData.M.businessPersona.S == "STARTING" and
+    .value.M.profileData.M.industryId.S == "generic" and
+    .value.M.environmentData and
+    ((.value.M.environmentData.M.land and .value.M.environmentData.M.land.M.submitted.BOOL == true) or
+    (.value.M.environmentData.M.waste and .value.M.environmentData.M.waste.M.submitted.BOOL == true) or
+    (.value.M.environmentData.M.air and .value.M.environmentData.M.air.M.submitted.BOOL == true)))  |
+    [.userId.S, (to_entries | .[].key)] | @csv' >> $OUTPUT_FILE
 
     LAST_EVALUATED_KEY=$(echo "$RESULT" | $JQ -r '.NextToken | tostring')
     echo "Last Evaluated Key: $LAST_EVALUATED_KEY"
