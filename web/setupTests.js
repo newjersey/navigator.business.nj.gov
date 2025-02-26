@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 require("@testing-library/jest-dom");
+import seedrandom from "seedrandom";
 import { TextDecoder, TextEncoder } from "util";
 
 process.env.API_BASE_URL = "";
@@ -18,6 +19,9 @@ global.console.warn = (message) => {
 global.console.error = (message) => {
   throw message;
 };
+
+// make an actual random string, then log and seed using that
+seedrandom("hello.", { global: true });
 
 window.gtm = jest.fn();
 
