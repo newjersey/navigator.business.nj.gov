@@ -121,7 +121,7 @@
       "addOn": "community-rtk-survey"
     },
     {
-      "questionText": "Will your business do management consulting services (manufacturing management, physical distribution, and site location consulting)?",
+      "questionText": "Will your business do management consulting services (excluding manufacturing management, physical distribution, and site location consulting)?",
       "id": "logistics-CRTK-survey",
       "addOn": "community-rtk-survey"
     }
