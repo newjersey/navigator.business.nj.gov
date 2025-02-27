@@ -7,6 +7,7 @@ import { MultipleDwellingRegistrationTask } from "@/components/tasks/MultipleDwe
 import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
 import { RaffleBingoPaginator } from "@/components/tasks/RaffleBingoPaginator";
 import { TaxTask } from "@/components/tasks/TaxTask";
+import { XrayRegistrationTask } from "@/components/tasks/XrayRegistrationTask";
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
@@ -67,6 +68,9 @@ export const TaskPageSwitchComponent = ({
     "waste-permitting": <EnvPermit task={task} />,
     "land-permitting": <EnvPermit task={task} />,
     "air-permitting": <EnvPermit task={task} />,
+    "x-ray-registration": (
+      <XrayRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
+    ),
     "elevator-registration": (
       <ElevatorRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),
