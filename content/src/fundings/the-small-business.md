@@ -33,6 +33,7 @@ county:
   - All
 sector: []
 publishStageArchive: null
+maxEmployeesRequired: 50
 priority: true
 ---
 
