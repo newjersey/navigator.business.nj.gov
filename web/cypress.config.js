@@ -51,6 +51,8 @@ export default defineConfig({
       runMode: 2,
       openMode: 0,
     },
-    video: false,
+    video: true,
+    videoCompression: 32, // Optional, adjusts video compression quality (0-51)
+    videoUploadOnPasses: false, // Set to false if you only want videos for failed tests
   },
 });

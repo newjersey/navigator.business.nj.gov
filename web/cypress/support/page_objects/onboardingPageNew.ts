@@ -17,10 +17,10 @@ class OnboardingSharedElements {
     this.getBusinessPersonaRadio(radio).check();
   }
   clickNext() {
-    cy.get('[data-testid="next"]').first().click({ force: true });
+    cy.get('[data-testid="next"]').first().click();
   }
   clickShowMyGuide() {
-    cy.get('[data-testid="next"]').first().click({ force: true });
+    cy.get('[data-testid="next"]').first().click();
   }
 }
 
