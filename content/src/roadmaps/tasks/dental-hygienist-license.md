@@ -18,7 +18,7 @@ webflowType: individual-license
 
 ### Personal Information
 
-* Social Security number (SSN), `Individual Taxpayer Identification number (ITIN)|` , or `Division Issued Identification number (DIIN)|diin` 
+* Social Security number (SSN), `Individual Taxpayer Identification number (ITIN)|itin` , or `Division Issued Identification number (DIIN)|diin` 
 * Proof of citizenship or immigration status
 * 2-inch x 2-inch passport photo taken in the past 6 months
 
