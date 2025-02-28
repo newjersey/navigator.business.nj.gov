@@ -6,9 +6,9 @@
 
 ### Ticket
 
-<!-- Link to ticket in pivotal. Append ticket_id to provided URL. -->
+<!-- Link to ticket in ADO. Append ticket_id to provided URL. -->
 
-This pull request resolves [#00000000](https://www.pivotaltracker.com/story/show/00000000).
+This pull request resolves [#0000](https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/0000).
 
 ### Approach
 
