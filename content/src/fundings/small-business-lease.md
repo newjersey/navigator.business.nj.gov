@@ -32,6 +32,7 @@ county:
   - All
 sector: []
 publishStageArchive: null
+maxEmployeesRequired: 50
 priority: true
 descriptionMd: The Small Business Lease Grant supports the growth and success of
   small businesses and nonprofits by providing grant funding to cover a portion
