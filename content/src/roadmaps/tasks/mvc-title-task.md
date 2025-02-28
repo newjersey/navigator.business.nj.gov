@@ -57,7 +57,7 @@ For vehicles, you will need:
 * **Odometer disclosure statement,** if the vehicle is less than 10 years old
 * **Notarized power of attorney,** if acting on behalf of the business owner
 * **Proof of sales tax payment** or exemption
-* **Emissions** or **Safety Inspection Certificate,** for certain passenger and commercial vehicles
+* **Emissions** or **Safety Inspection Certificate,** for certain passenger, commercial, and out-of-state vehicles
 * **Bill of sale,** if the vehicle was purchased from a private seller
   Proof of address, to confirm New Jersey residency
 
