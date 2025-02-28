@@ -3,7 +3,7 @@ licenseName: ""
 id: bus-inspection
 displayname: bus-inspection
 urlSlug: bus-inspection
-name: Inspect and Register Your School Transportation Vehicles
+name: Inspect Your School Transportation Vehicles
 webflowName: "School Bus: School Bus Inspection"
 summaryDescriptionMd: >
   Your commercial buses and any school transportation vehicles need to be
