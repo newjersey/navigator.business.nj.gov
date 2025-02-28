@@ -1,8 +1,7 @@
-import csv
-import os
-import re
-
 import pandas as pd
+import csv
+import re
+import os
 
 
 def combine_owners(row, owner_cols):
@@ -85,10 +84,12 @@ def combine_simple_columns(row, cols):
 def convert_newlines_to_html(text):
     if pd.isna(text):
         return text
+    # Convert literal '\n' strings to actual newlines first
+    text = str(text).replace("\\n", "\n")
+    # Normalize different types of newlines
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
     # Convert markdown line breaks to <br> tags
-    # First, preserve double line breaks (paragraphs)
-    text = re.sub(r"\n\s*\n", "<br><br>", str(text))
-    # Then convert single line breaks
+    text = re.sub(r"\n\s*\n", "<br><br>", text)
     text = re.sub(r"\n", "<br>", text)
     return text
 
@@ -107,9 +108,6 @@ df = pd.read_csv(
     quoting=csv.QUOTE_ALL,  # Force quoting of all fields
 )
 
-# Create Tags column with base value and existing Labels
-df["Tags"] = "Pivotal Legacy Import"
-
 # Add Labels (if they exist) and Accessibility Audit tag if applicable
 df["Tags"] = df.apply(
     lambda row: ";".join(
@@ -117,6 +115,7 @@ df["Tags"] = df.apply(
             None,
             [
                 "Pivotal Legacy Import",
+                "Icebox",
                 (
                     str(row["Labels"]).replace(",", ";")
                     if pd.notna(row["Labels"]) and str(row["Labels"]).strip()
@@ -134,6 +133,9 @@ df = df.drop(columns=["Labels"])
 
 # Filter out rows where Type is 'release'
 df = df[df["Type"] != "release"]
+
+# Filter for rows that have icebox-* labels
+df = df[df["Tags"].str.contains(r"icebox-[^;]*", regex=True, na=False)]
 
 # Transform type column to Work Item Type with title case
 type_mapping = {
@@ -153,6 +155,9 @@ DEFAULT_MESSAGE = (
 # Fill empty Description fields
 df["Description"] = df["Description"].fillna(DEFAULT_MESSAGE)
 df.loc[df["Description"].str.strip() == "", "Description"] = DEFAULT_MESSAGE
+
+# Convert both Description and Repro Steps newlines to HTML breaks
+df["Description"] = df["Description"].apply(convert_newlines_to_html)
 
 
 # Get base column names and their variations
@@ -269,8 +274,12 @@ for col in columns:
 # Drop the original columns
 df = df.drop(columns=columns_to_drop)
 
+# Rename URL column to External IDs
+df = df.rename(columns={"URL": "External IDs"})
+
 # Filter rows based on Current State values
-df = df[df["Current State"].str.lower().isin(["delivered", "accepted"])]
+# ! This was for the archived export. We want everything now that it's just the icebox
+# df = df[df["Current State"].str.lower().isin(["delivered", "accepted"])]
 
 # Sort by Id to ensure consistent splitting
 df = df.sort_values("Id")
@@ -278,12 +287,15 @@ df = df.sort_values("Id")
 # Get base filename without extension for output files
 base_filename = os.path.splitext(os.path.basename(input_file))[0]
 
+# Create transformed-exports directory if it doesn't exist
+os.makedirs("transformed-exports", exist_ok=True)
+
 # Create full version files
 ITEMS_PER_FILE = 1000
 
 df_first = df.iloc[:ITEMS_PER_FILE]
 df_first.to_csv(
-    f"{base_filename}-consolidated-1.csv",
+    os.path.join("transformed-exports", f"{base_filename}-consolidated-1.csv"),
     index=False,
     lineterminator="\n",
     quoting=csv.QUOTE_ALL,
@@ -294,7 +306,7 @@ df_first.to_csv(
 df_second = df.iloc[ITEMS_PER_FILE:]
 if not df_second.empty:
     df_second.to_csv(
-        f"{base_filename}-consolidated-2.csv",
+        os.path.join("transformed-exports", f"{base_filename}-consolidated-2.csv"),
         index=False,
         lineterminator="\n",
         quoting=csv.QUOTE_ALL,
@@ -302,13 +314,15 @@ if not df_second.empty:
         doublequote=True,
     )
 
-# Create simplified version with Title, Work Item Type, Description, Repro Steps, and Tags
-df_simple = df[["Title", "Work Item Type", "Description", "Repro Steps", "Tags"]]
+# Create simplified version with Title, Work Item Type, Description, Repro Steps, Tags, and External IDs
+df_simple = df[
+    ["Title", "Work Item Type", "Description", "Repro Steps", "Tags", "External IDs"]
+]
 
 # Split simplified version into chunks of 1000
 df_simple_first = df_simple.iloc[:ITEMS_PER_FILE]
 df_simple_first.to_csv(
-    f"{base_filename}-simplified-1.csv",
+    os.path.join("transformed-exports", f"{base_filename}-simplified-1.csv"),
     index=False,
     lineterminator="\n",
     quoting=csv.QUOTE_ALL,
@@ -319,7 +333,7 @@ df_simple_first.to_csv(
 df_simple_second = df_simple.iloc[ITEMS_PER_FILE:]
 if not df_simple_second.empty:
     df_simple_second.to_csv(
-        f"{base_filename}-simplified-2.csv",
+        os.path.join("transformed-exports", f"{base_filename}-simplified-2.csv"),
         index=False,
         lineterminator="\n",
         quoting=csv.QUOTE_ALL,
@@ -328,12 +342,12 @@ if not df_simple_second.empty:
     )
 
 # Print stats
-print(f"\nFull version stats:")
+print("\nFull version stats:")
 print(f"Total items: {len(df)}")
 print(f"Items in first file: {len(df_first)}")
 print(f"Items in second file: {len(df_second)}")
 
-print(f"\nSimplified version stats:")
+print("\nSimplified version stats:")
 print(f"Total items: {len(df_simple)}")
 print(f"Items in first file: {len(df_simple_first)}")
 print(f"Items in second file: {len(df_simple_second)}")
