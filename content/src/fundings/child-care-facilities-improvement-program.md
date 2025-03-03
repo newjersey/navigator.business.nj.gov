@@ -1,4 +1,6 @@
 ---
+notesMd: "3.3.25: NJEDA let us know we can unpublish this program. Dev will
+  archive this "
 name: Child Care Facilities Improvement Program
 displayName: child-care-facilities
 urlSlug: childcare-improvement
