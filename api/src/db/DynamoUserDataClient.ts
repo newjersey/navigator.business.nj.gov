@@ -138,7 +138,7 @@ export const DynamoUserDataClient = (
   };
 
   const getUsersWithOutdatedVersion = async (latestVersion: number): Promise<UserData[]> => {
-    const statement = `SELECT data FROM "${tableName}" WHERE data["version"] < ${CURRENT_VERSION}`;
+    const statement = `SELECT data FROM "${tableName}" WHERE data["version"] < ${latestVersion}`;
     return await search(statement);
   };
 
