@@ -46,7 +46,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
   const industry = `industry-${randomInt()}`;
   const encryptedTaxId = `encryptedId-${randomInt()}`;
 
-  const generateUserData = (): UserData => {
+  const generateUserData = (businessName = "Default Business Name"): UserData => {
     return generateUserDataForBusiness(
       generateBusiness({
         profileData: generateProfileData({
@@ -55,6 +55,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
           naicsCode: naicsCode,
           industryId: industry,
           encryptedTaxId: encryptedTaxId,
+          businessName: businessName,
         }),
         taxFilingData: generateTaxFilingData({
           filings: [],
@@ -128,5 +129,109 @@ describe("User and Business Migration with DynamoDataClient", () => {
     expect(logger.LogError).toHaveBeenCalledWith(`MigrateData Failed: ${mockError.message}`);
 
     expect(logger.LogInfo).not.toHaveBeenCalledWith("Successfully migrated business");
+  });
+
+  it("should migrate data for multiple users with outdated versions", async () => {
+    const userData1 = { ...structuredClone(generateUserData()), version: 140 };
+    const userData2 = { ...structuredClone(generateUserData()), version: 143 };
+    jest
+      .spyOn(dynamoUsersDataClient, "getUsersWithOutdatedVersion")
+      .mockResolvedValue([userData1, userData2]);
+    const result = await dynamoDataClient.migrateData();
+
+    expect(result.success).toBe(true);
+    expect(result.migratedCount).toBe(2);
+    expect(dynamoBusinessesDataClient.put).toHaveBeenCalledTimes(2);
+
+    for (const data of [userData1, userData2]) {
+      const businessId = data.businesses[data.currentBusinessId].id;
+      expect(dynamoBusinessesDataClient.put).toHaveBeenCalledWith(
+        expect.objectContaining({ id: businessId })
+      );
+      expect(logger.LogInfo).toHaveBeenCalledWith(expect.stringContaining(`Updated business ${businessId}`));
+    }
+  });
+
+  it("should find users by business name with fuzzy matching", async () => {
+    const businessName = "Test Business Name";
+
+    const business1 = generateBusiness({
+      profileData: generateProfileData({ businessName: "Test Business Name" }),
+      userId: "user-1",
+    });
+    const business2 = generateBusiness({
+      profileData: generateProfileData({ businessName: "Test Business Name!" }),
+      userId: "user-2",
+    });
+    const business3 = generateBusiness({
+      profileData: generateProfileData({ businessName: "test Buziness Name" }),
+      userId: "user-3",
+    });
+    const business4 = generateBusiness({
+      profileData: generateProfileData({ businessName: "Completely Different Name" }),
+      userId: "user-4",
+    });
+    const business5 = generateBusiness({
+      profileData: generateProfileData({ businessName: "Test Bizzness" }),
+      userId: "user-5",
+    });
+
+    const userData1 = generateUserData(business1.profileData.businessName);
+    const userData2 = generateUserData(business2.profileData.businessName);
+    const userData3 = generateUserData(business3.profileData.businessName);
+    const userData4 = generateUserData(business4.profileData.businessName);
+    const userData5 = generateUserData(business5.profileData.businessName);
+
+    jest
+      .spyOn(dynamoUsersDataClient, "getAllUsersWithBusinesses")
+      .mockResolvedValue([userData1, userData2, userData3, userData4, userData5]);
+
+    const logSpy = jest.spyOn(logger, "LogInfo");
+
+    const result = await dynamoDataClient.findUsersByBusinessName(businessName);
+    expect(dynamoUsersDataClient.getAllUsersWithBusinesses).toHaveBeenCalled();
+    expect(result).toEqual([userData1, userData2, userData3]);
+    expect(logSpy).not.toHaveBeenCalledWith(`No matched businesses found for business name: ${businessName}`);
+  });
+
+  it("should return an empty array when no businesses are found", async () => {
+    jest.spyOn(dynamoUsersDataClient, "getAllUsersWithBusinesses").mockResolvedValue([]);
+    const logSpy = jest.spyOn(logger, "LogInfo");
+
+    const result = await dynamoDataClient.findUsersByBusinessName("Non-Existent Name");
+    expect(logSpy).toHaveBeenCalledWith(`No users with businesses found`);
+    expect(result).toEqual([]);
+  });
+
+  it("should return an empty array when no businesses match within the distance threshold", async () => {
+    const businessName = "Non Matching Name";
+
+    const business1 = generateBusiness({
+      profileData: generateProfileData({ businessName: "Nebraska Home Incident" }),
+      userId: "user-1",
+    });
+    const business2 = generateBusiness({
+      profileData: generateProfileData({ businessName: "Another Unrelated Business!" }),
+      userId: "user-2",
+    });
+    const business3 = generateBusiness({
+      profileData: generateProfileData({ businessName: "Task Force Concept" }),
+      userId: "user-3",
+    });
+
+    const userData1 = generateUserData(business1.profileData.businessName);
+    const userData2 = generateUserData(business2.profileData.businessName);
+    const userData3 = generateUserData(business3.profileData.businessName);
+
+    jest
+      .spyOn(dynamoUsersDataClient, "getAllUsersWithBusinesses")
+      .mockResolvedValue([userData1, userData2, userData3]);
+
+    const logSpy = jest.spyOn(logger, "LogInfo");
+    const result = await dynamoDataClient.findUsersByBusinessName(businessName);
+
+    expect(dynamoUsersDataClient.getAllUsersWithBusinesses).toHaveBeenCalled();
+    expect(result).toEqual([]);
+    expect(logSpy).toHaveBeenCalledWith(`No users found for business name: ${businessName}`);
   });
 });
