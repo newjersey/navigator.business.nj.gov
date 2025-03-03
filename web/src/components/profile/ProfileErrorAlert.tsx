@@ -1,10 +1,9 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
+import { ProfileContentField } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
-
-import { ProfileContentField } from "@/contexts/profileFormContext";
 
 interface Props {
   fieldErrors: string[];

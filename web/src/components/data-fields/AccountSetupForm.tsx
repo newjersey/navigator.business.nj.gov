@@ -1,6 +1,5 @@
 import { GenericTextField } from "@/components/GenericTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { FormContextFieldProps } from "@/contexts/formContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -10,6 +9,7 @@ import {
   getFullNameErrorVariant,
   isFullNameValid,
 } from "@/lib/domain-logic/isFullNameValid";
+import { FormContextFieldProps } from "@/lib/types/types";
 import { validateEmail } from "@/lib/utils/helpers";
 import { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";

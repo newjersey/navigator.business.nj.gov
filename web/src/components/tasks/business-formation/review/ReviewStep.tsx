@@ -1,6 +1,8 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/business/BusinessNameAndLegalStructure";
+import { BusinessFormationReviewSection } from "@/components/tasks/business-formation/review/BusinessFormationReviewSection";
+import { BusinessFormationReviewText } from "@/components/tasks/business-formation/review/BusinessFormationReviewText";
 import { ReviewAdditionalProvisions } from "@/components/tasks/business-formation/review/ReviewAdditionalProvisions";
 import { ReviewBillingContact } from "@/components/tasks/business-formation/review/ReviewBillingContact";
 import { ReviewBillingServices } from "@/components/tasks/business-formation/review/ReviewBillingServices";
@@ -13,9 +15,7 @@ import { ReviewNonprofitProvisions } from "@/components/tasks/business-formation
 import { ReviewPartnership } from "@/components/tasks/business-formation/review/ReviewPartnership";
 import { ReviewRegisteredAgent } from "@/components/tasks/business-formation/review/ReviewRegisteredAgent";
 import { ReviewSignatures } from "@/components/tasks/business-formation/review/ReviewSignatures";
-import { ReviewSection } from "@/components/tasks/business-formation/review/section/ReviewSection";
-import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
-import { ReviewText } from "@/components/tasks/business-formation/review/section/ReviewText";
+import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
@@ -41,7 +41,7 @@ export const ReviewStep = (): ReactElement => {
         {hasProvisions && <ReviewAdditionalProvisions />}
         {hasPurpose && (
           <ReviewSubSection header={Config.formation.fields.businessPurpose.label}>
-            <ReviewText fieldName={"businessPurpose"} isExpandable={true} />
+            <BusinessFormationReviewText fieldName={"businessPurpose"} isExpandable={true} />
           </ReviewSubSection>
         )}
       </>
@@ -51,7 +51,7 @@ export const ReviewStep = (): ReactElement => {
   return (
     <>
       <div data-testid="review-step">
-        <ReviewSection stepName={"Business"} testId="edit-business-name-step">
+        <BusinessFormationReviewSection stepName={"Business"} dataTestId="edit-business-name-step">
           <BusinessNameAndLegalStructure isReviewStep />
           <ReviewBusinessSuffixAndStartDate />
           {isNonProfit && <ReviewIsVeteranNonprofit value={state.formationFormData.isVeteranNonprofit} />}
@@ -71,28 +71,28 @@ export const ReviewStep = (): ReactElement => {
           {isLP && (
             <>
               <ReviewSubSection header={Config.formation.fields.combinedInvestment.label}>
-                <ReviewText fieldName={"combinedInvestment"} />
+                <BusinessFormationReviewText fieldName={"combinedInvestment"} />
               </ReviewSubSection>
               <ReviewSubSection header={Config.formation.fields.withdrawals.label}>
-                <ReviewText fieldName={"withdrawals"} />
+                <BusinessFormationReviewText fieldName={"withdrawals"} />
               </ReviewSubSection>
               <ReviewPartnership />
               <ReviewSubSection header={Config.formation.fields.dissolution.label}>
-                <ReviewText fieldName={"dissolution"} />
+                <BusinessFormationReviewText fieldName={"dissolution"} />
               </ReviewSubSection>
             </>
           )}
           {!isNonProfit && getProvisionsAndPurposeSections()}
-        </ReviewSection>
-        <ReviewSection stepName={"Contacts"} testId="edit-contacts-step">
+        </BusinessFormationReviewSection>
+        <BusinessFormationReviewSection stepName={"Contacts"} dataTestId="edit-contacts-step">
           <ReviewRegisteredAgent />
           {(isNonProfit || isCorp || (!isLP && hasMembers)) && <ReviewMembers />}
           <ReviewSignatures />
-        </ReviewSection>
-        <ReviewSection stepName={"Billing"} testId="edit-billing-step">
+        </BusinessFormationReviewSection>
+        <BusinessFormationReviewSection stepName={"Billing"} dataTestId="edit-billing-step">
           <ReviewBillingContact />
           <ReviewBillingServices />
-        </ReviewSection>
+        </BusinessFormationReviewSection>
         <Alert variant="info">
           <Content
             onClick={(): void => {

@@ -23,16 +23,13 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { LegalStructureRadio } from "@/components/tasks/business-structure/LegalStructureRadio";
 import { ConfigContext } from "@/contexts/configContext";
-import {
-  createProfileFieldErrorMap,
-  ProfileContentField,
-  ProfileFormContext,
-} from "@/contexts/profileFormContext";
+import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
+import { ProfileContentField } from "@/lib/types/types";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/";
 import {
   IndustrySpecificData,
