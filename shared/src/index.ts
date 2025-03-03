@@ -32,6 +32,7 @@ export * from "./sector";
 export * from "./states";
 export * from "./stringHelpers";
 export * from "./taskAgency";
+export * from "./taxClearanceCertificate";
 export * from "./taxFiling";
 export * from "./test";
 export * from "./userData";

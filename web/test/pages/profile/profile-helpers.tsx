@@ -3,7 +3,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ProfileTabs } from "@/lib/types/types";
 import Profile from "@/pages/profile";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
-import { WithStatefulProfileFormContext } from "@/test/mock/withStatefulProfileData";
+import { WithStatefulDataFieldFormContext } from "@/test/mock/withStatefulProfileData";
 import {
   currentBusiness,
   userDataWasNotUpdated,
@@ -69,11 +69,11 @@ export const renderPage = ({
   render(
     withNeedsAccountContext(
       <ThemeProvider theme={createTheme()}>
-        <WithStatefulProfileFormContext>
+        <WithStatefulDataFieldFormContext>
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <Profile municipalities={municipalitiesList} />
           </WithStatefulUserData>
-        </WithStatefulProfileFormContext>
+        </WithStatefulDataFieldFormContext>
       </ThemeProvider>,
       isAuthenticated ?? IsAuthenticated.TRUE,
       { showNeedsAccountModal: false, setShowNeedsAccountModal: setShowNeedsAccountModal ?? jest.fn() }

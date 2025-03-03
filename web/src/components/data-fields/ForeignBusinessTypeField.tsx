@@ -1,12 +1,12 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { ConfigType } from "@/contexts/configContext";
-import { FormContextFieldProps } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
+import { FormContextFieldProps } from "@/lib/types/types";
 import { determineForeignBusinessType } from "@businessnjgovnavigator/shared";
 import { ForeignBusinessTypeId } from "@businessnjgovnavigator/shared/";
 import { Checkbox, FormControl, FormControlLabel } from "@mui/material";

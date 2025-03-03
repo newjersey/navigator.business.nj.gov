@@ -1,0 +1,54 @@
+{
+  "arrayOfTaxClearanceCertificateIssuingAgencies": [
+    { "name": "New Jersey Board of Public Utilities", "id": "newJerseyBoardOfPublicUtilities" },
+    {
+      "name": "New Jersey Department of Community Affairs",
+      "id": "newJerseyDepartmentOfCommunityAffairs"
+    },
+
+    { "name": "New Jersey Department of Health", "id": "newJerseyDepartmentOfHealth" },
+    {
+      "name": "New Jersey Department of Labor & Workforce Development",
+      "id": "newJerseyDepartmentOfLabor&WorkforceDevelopment"
+    },
+    {
+      "name": "New Jersey Department of Transportation",
+      "id": "newJerseyDepartmentOfTransportation"
+    },
+    {
+      "name": "New Jersey Economic Development Authority",
+      "id": "newJerseyEconomicDevelopmentAuthority"
+    },
+    {
+      "name": "New Jersey Casino Reinvestment Development Authority",
+      "id": "newJerseyCasinoReinvestmentDevelopmentAuthority"
+    },
+    {
+      "name": "New Jersey Commerce, Economic Growth & Tourism Commission",
+      "id": "newJerseyCommerceEconomicGrowth&TourismCommission"
+    },
+    {
+      "name": "New Jersey Commission on Science, innovation and Technology",
+      "id": "newJerseyCommissionOnScienceInnovation&Technology"
+    },
+    {
+      "name": "New Jersey Department of Children & Families",
+      "id": "newJerseyDepartmentOfChildren&Families"
+    },
+    {
+      "name": "New Jersey Department of Human Services",
+      "id": "newJerseyDepartmentOfHumanServices"
+    },
+    { "name": "New Jersey Department of Treasury", "id": "newJerseyDepartmentOfTreasury" },
+    {
+      "name": "New Jersey Housing & Mortgage Finance Agency",
+      "id": "newJerseyHousing&MortgageFinanceAgency"
+    },
+    { "name": "New Jersey Secretary of State", "id": "newJerseySecretaryOfState" },
+    { "name": "New Jersey Redevelopment Authority", "id": "newJerseyRedevelopmentAuthority" },
+    {
+      "name": "New Jersey Department of Environmental Protection",
+      "id": "newJerseyDepartmentOfEnvironmentalProtection"
+    }
+  ]
+}
