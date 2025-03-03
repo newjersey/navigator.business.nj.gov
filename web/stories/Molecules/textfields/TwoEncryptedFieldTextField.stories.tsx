@@ -2,9 +2,9 @@ import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
+import { createDataFieldErrorMap, DataFieldFormContext } from "@/contexts/dataFieldFormContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { generateProfileData } from "@businessnjgovnavigator/shared";
@@ -15,10 +15,10 @@ import { useState } from "react";
 const Template = () => {
   const [config, setConfig] = useState<ConfigType>(getMergedConfig());
   const [profileData, setProfileData] = useState<ProfileData>(generateProfileData({ taxId: "2" }));
-  const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
+  const { state: formContextState } = useFormContextHelper(createDataFieldErrorMap());
 
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFieldFormContext.Provider value={formContextState}>
       <NeedsAccountContext.Provider
         value={{
           isAuthenticated: IsAuthenticated.UNKNOWN,
@@ -70,7 +70,7 @@ const Template = () => {
           </ProfileDataContext.Provider>
         </ConfigContext.Provider>
       </NeedsAccountContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFieldFormContext.Provider>
   );
 };
 

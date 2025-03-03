@@ -1,4 +1,4 @@
-import { FormationHelpButton } from "@/components/njwds-extended/FormationHelpButton";
+import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import analytics from "@/lib/utils/analytics";
 import { fireEvent, render, screen } from "@testing-library/react";
 
@@ -20,9 +20,9 @@ const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
-describe("<FormationHelpButton />", () => {
+describe("<LiveChatHelpButton />", () => {
   it("the help button fires analytics", async () => {
-    render(<FormationHelpButton />);
+    render(<LiveChatHelpButton />);
     fireEvent.click(screen.getByTestId("help-button"));
     expect(mockAnalytics.event.business_formation_help_button.click.open_live_chat).toHaveBeenCalledTimes(1);
   });

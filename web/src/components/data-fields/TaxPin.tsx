@@ -8,6 +8,7 @@ import { ReactElement, ReactNode, useContext } from "react";
 interface Props {
   children?: ReactNode;
   handleChangeOverride?: (value: string) => void;
+  inputWidth?: "full" | "default" | "reduced";
 }
 
 export const TaxPin = (props: Props): ReactElement => {
@@ -24,7 +25,7 @@ export const TaxPin = (props: Props): ReactElement => {
   return (
     <>
       <NumericField
-        inputWidth="default"
+        inputWidth={props.inputWidth ?? "default"}
         fieldName={fieldName}
         maxLength={4}
         minLength={4}

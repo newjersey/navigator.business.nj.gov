@@ -50,10 +50,10 @@ import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AddressContext } from "@/contexts/addressContext";
 import { getMergedConfig } from "@/contexts/configContext";
+import { createDataFieldErrorMap, DataFieldFormContext } from "@/contexts/dataFieldFormContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -128,7 +128,7 @@ const ProfilePage = (props: Props): ReactElement => {
     onTabChange: setProfileTab,
     state: formContextState,
     getInvalidFieldIds,
-  } = useFormContextHelper(createProfileFieldErrorMap(), props.CMS_ONLY_tab ?? profileTabs[0]);
+  } = useFormContextHelper(createDataFieldErrorMap(), props.CMS_ONLY_tab ?? profileTabs[0]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const redirect = (params?: { [key: string]: any }, routerType = router!.push): Promise<boolean> => {
@@ -924,7 +924,7 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFieldFormContext.Provider value={formContextState}>
       <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
         <ProfileDataContext.Provider
           value={{
@@ -1027,7 +1027,7 @@ const ProfilePage = (props: Props): ReactElement => {
           </AddressContext.Provider>
         </ProfileDataContext.Provider>
       </MunicipalitiesContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFieldFormContext.Provider>
   );
 };
 

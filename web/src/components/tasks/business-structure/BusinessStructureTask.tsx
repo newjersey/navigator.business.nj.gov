@@ -9,8 +9,8 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { LegalStructureRadio } from "@/components/tasks/business-structure/LegalStructureRadio";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
+import { createDataFieldErrorMap, DataFieldFormContext } from "@/contexts/dataFieldFormContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
@@ -44,7 +44,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     FormFuncWrapper,
     onSubmit,
     state: formContextState,
-  } = useFormContextHelper(createProfileFieldErrorMap());
+  } = useFormContextHelper(createDataFieldErrorMap());
 
   const whenErrorScrollToRef = useRef<HTMLDivElement>(null);
 
@@ -144,7 +144,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       <UnlockedBy task={props.task} />
       <Content>{preLookupContent}</Content>
       {showRadioQuestion && (
-        <ProfileFormContext.Provider value={formContextState}>
+        <DataFieldFormContext.Provider value={formContextState}>
           <ProfileDataContext.Provider
             value={{
               state: {
@@ -162,7 +162,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
               </SecondaryButton>
             </div>
           </ProfileDataContext.Provider>
-        </ProfileFormContext.Provider>
+        </DataFieldFormContext.Provider>
       )}
       {business && !showRadioQuestion && (
         <>

@@ -30,7 +30,10 @@ import {
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import {
   arrayOfFundingAgencies,
+  BusinessPersona,
   createEmptyFormationFormData,
+  FormationAddress,
+  FormationData,
   FormationSubmitError,
   FundingAgency,
   generateProfileData,
@@ -41,6 +44,7 @@ import {
   LegalStructures,
   LicenseTaskId,
   NameAvailability,
+  OperatingPhase,
   OperatingPhaseId,
   OperatingPhases,
   OwnershipType,
@@ -49,17 +53,10 @@ import {
   PublicFilingLegalType,
   publicFilingLegalTypes,
   randomInt,
-  SectionType,
-  StateObject,
-  arrayOfStateObjects as states,
-} from "@businessnjgovnavigator/shared";
-import {
-  OperatingPhase,
   randomIntFromInterval,
+  SectionType,
   taskIdLicenseNameMapping,
-} from "@businessnjgovnavigator/shared/";
-import { FormationAddress, FormationData } from "@businessnjgovnavigator/shared/formationData";
-import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+} from "@businessnjgovnavigator/shared";
 import { filterRandomIndustry, randomIndustry, randomSector } from "@businessnjgovnavigator/shared/test";
 
 export const generateSectionType = (): SectionType => {
@@ -203,10 +200,6 @@ export const generateSidebarCardContent = (overrides: Partial<SidebarCardContent
     hasCloseButton: !!(randomInt() % 2),
     ...overrides,
   };
-};
-
-export const generateStateItem = (): StateObject => {
-  return randomElementFromArray(states);
 };
 
 export const generateEmptyFormationData = (): FormationData => {

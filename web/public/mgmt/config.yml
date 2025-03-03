@@ -3999,7 +3999,129 @@ collections:
         display_fields: ["arrayOfSectors.*.name"]
         options_length: 500
       - { label: "External Link", name: "externalRoute", widget: "no-space", required: true }
-
+  - name: "tax-clearance-certificate-anytime-action"
+    label: "Tax Clearance Anytime Action"
+    delete: false
+    create: false
+    files:
+      - label: "Tax Clearance Step 1"
+        name: "taxClearanceCertificate-step1"
+        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step1.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Step 1
+            name: taxClearanceCertificateStep1
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Content Body", name: "content", widget: "markdown", required: true }
+              - {
+                  label: "Issuing Agency Label Text",
+                  name: "issuingAgencyLabelText",
+                  widget: "string",
+                  required: true,
+                }
+              - { label: "Issuing Agency Text", name: "issuingAgencyText", widget: "string", required: true }
+              - { label: "Next Button Text", name: "continueButtonText", widget: "string", required: true }
+      - label: "Tax Clearance Step 2"
+        name: "taxClearanceCertificate-step2"
+        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step2.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Step 2
+            name: taxClearanceCertificateStep2
+            collapsed: false
+            widget: object
+            fields:
+              - {
+                  label: "Requesting Agency Section Header",
+                  name: "requestingAgencySectionHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Requesting Agency Label",
+                  name: "requestingAgencyLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Business Information Section Header",
+                  name: "businessInformationSectionHeader",
+                  widget: "string",
+                  required: true,
+                }
+      - label: "Tax Clearance Step 3"
+        name: "taxClearanceCertificate-step3"
+        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step3.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Step 3
+            name: taxClearanceCertificateStep3
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Main Title Header", name: "mainTitleHeader", widget: "string", required: true }
+              - { label: "Edit Button Text", name: "editButtonText", widget: "string", required: true }
+              - {
+                  label: "First Section Header",
+                  name: "firstSectionHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Certification Reason Label",
+                  name: "certificationReasonLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Second Section Header",
+                  name: "secondSectionHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - { label: "Business Name Label", name: "businessNameLabel", widget: "string", required: true }
+              - { label: "Entity Id Label", name: "entityIdLabel", widget: "string", required: true }
+              - { label: "Address Label", name: "addressLabel", widget: "string", required: true }
+              - { label: "State Tax Id Label", name: "stateTaxIdLabel", widget: "string", required: true }
+              - { label: "Tax Pin Label", name: "taxPinLabel", widget: "string", required: true }
+      - label: "Tax Clearance Shared"
+        name: "taxClearanceCertificate-shared"
+        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-shared.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Shared
+            name: taxClearanceCertificateShared
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Stepper One Tab Text", name: "stepperOneLabel", widget: "string", required: true }
+              - { label: "Stepper Two Tab Text", name: "stepperTwoLabel", widget: "string", required: true }
+              - {
+                  label: "Stepper Three Tab Text",
+                  name: "stepperThreeLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Save Button Text",
+                  name: "saveButtonText",
+                  widget: "string",
+                  required: true,
+                  hint: Only applies to tab 2 and 3,
+                }
+              - {
+                  label: "Back Button Text",
+                  name: "backButtonText",
+                  widget: "string",
+                  required: true,
+                  hint: Only applies to tab 2 and 3,
+                }
   - name: "page-metadata"
     label: "🟨 PAGE METADATA"
     folder: "content/src"
@@ -4252,6 +4374,22 @@ collections:
         fields:
           - label: Sectors
             name: arrayOfSectors
+            widget: list
+            allow_add: false
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Id
+                name: id
+                widget: hidden
+      - label: "Tax Clearance Certificate Issuing Agencies"
+        name: "arrayOfTaxClearanceCertificateIssuingAgencies"
+        file: "content/src/mappings/taxClearanceCertificateIssuingAgencies.json"
+        fields:
+          - label: Issuing Agencies
+            name: arrayOfTaxClearanceCertificateIssuingAgencies
             widget: list
             allow_add: false
             summary: "{{name}}"

@@ -1,9 +1,9 @@
+import { DataFieldFormContext } from "@/contexts/dataFieldFormContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileContentField, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { profileFieldsFromConfig } from "@/lib/types/types";
+import { ProfileContentField, profileFieldsFromConfig } from "@/lib/types/types";
 import {
   camelCaseToKebabCase,
   camelCaseToSentence,
@@ -31,7 +31,10 @@ export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): Reac
   const { Config } = useConfig();
   const fieldName = props.contentFieldName ?? props.fieldName;
 
-  const { RegisterForOnSubmit, setIsValid } = useFormContextFieldHelpers(props.fieldName, ProfileFormContext);
+  const { RegisterForOnSubmit, setIsValid } = useFormContextFieldHelpers(
+    props.fieldName,
+    DataFieldFormContext
+  );
 
   const contentFromConfig = getProfileConfig({
     config: Config,

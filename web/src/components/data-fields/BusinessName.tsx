@@ -1,15 +1,15 @@
-import { DataField, DataFieldProps } from "@/components/data-fields/DataField";
+import { ProfileDataField, ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
 import { ReactElement } from "react";
 
-export const BusinessName = (props: Omit<DataFieldProps, "fieldName" | "inputWidth">): ReactElement => {
+export const BusinessName = (props: Omit<ProfileDataFieldProps, "fieldName">): ReactElement => {
   return (
-    <DataField
-      fieldName="businessName"
+    <ProfileDataField
       fieldOptions={{
         inputProps: { "data-testid": "businessName" },
       }}
-      inputWidth="default"
       {...props}
+      fieldName="businessName"
+      inputWidth={props.inputWidth ?? "default"}
     />
   );
 };

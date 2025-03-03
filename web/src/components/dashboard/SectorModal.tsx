@@ -3,12 +3,12 @@ import { Sectors } from "@/components/data-fields/Sectors";
 import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { FieldStateActionKind } from "@/contexts/formContext";
+import { createDataFieldErrorMap, DataFieldFormContext } from "@/contexts/dataFieldFormContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { FieldStateActionKind } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/";
 import { FormControl } from "@mui/material";
@@ -29,7 +29,7 @@ export const SectorModal = (props: Props): ReactElement => {
     FormFuncWrapper,
     onSubmit,
     state: formContextState,
-  } = useFormContextHelper(createProfileFieldErrorMap());
+  } = useFormContextHelper(createDataFieldErrorMap());
 
   useMountEffectWhenDefined(() => {
     if (business) {
@@ -50,7 +50,7 @@ export const SectorModal = (props: Props): ReactElement => {
   });
 
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFieldFormContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -83,6 +83,6 @@ export const SectorModal = (props: Props): ReactElement => {
           </div>
         </ModalTwoButton>
       </ProfileDataContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFieldFormContext.Provider>
   );
 };
