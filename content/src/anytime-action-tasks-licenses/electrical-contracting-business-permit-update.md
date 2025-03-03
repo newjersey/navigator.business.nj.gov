@@ -1,6 +1,8 @@
 ---
 id: electrical-contracting-business-permit-update
 name: Update Your Electrical Contracting Business Permit
+category:
+  - Change My Business Information
 industryIds:
   - electrical-contractor
 sectorIds: []

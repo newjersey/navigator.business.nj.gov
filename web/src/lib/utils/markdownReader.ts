@@ -210,6 +210,7 @@ type AnytimeActionLinkGrayMatter = {
 
 type AnytimeActionTaskGrayMatter = {
   name: string;
+  category: string[];
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;

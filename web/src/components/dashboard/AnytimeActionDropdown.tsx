@@ -14,15 +14,13 @@ import { useRouter } from "next/compat/router";
 import { ChangeEvent, type ReactElement, useState } from "react";
 
 interface Props {
-  anytimeActionLicensesTasks: AnytimeActionTask[];
-  anytimeActionAdminTasks: AnytimeActionTask[];
-  anytimeActionReinstatementsTasks: AnytimeActionTask[];
+  anytimeActionTasks: AnytimeActionTask[];
   anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
 }
 
 type AnytimeAction = AnytimeActionTask | AnytimeActionLink | AnytimeActionLicenseReinstatement;
-type AnytimeActionWithTypeAndCategory = AnytimeAction & { type: string; category: string };
+type AnytimeActionWithTypeAndCategory = AnytimeAction & { type: string; category: string[] };
 
 export const AnytimeActionDropdown = (props: Props): ReactElement => {
   const { Config } = useConfig();
@@ -70,34 +68,20 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
         return {
           ...action,
           type: "link",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryAdmin,
+          category: ["Sell or Close My Business"],
         };
       });
 
-    const anytimeActionAdminTaskWithType = props.anytimeActionAdminTasks
+    const anytimeActionTasksWithType = props.anytimeActionTasks
       .filter((action) => findMatch(action))
       .map((action) => {
         return {
           ...action,
           type: "task",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryAdmin,
+          category: action.category,
         };
       });
-
-    const anytimeActionAdminOrLink = [...anytimeActionLinkWithType, ...anytimeActionAdminTaskWithType];
-    alphabetizeByName(anytimeActionAdminOrLink);
-
-    const anytimeActionLicensesTaskWithType = props.anytimeActionLicensesTasks
-      .filter((action) => findMatch(action))
-      .map((action) => {
-        return {
-          ...action,
-          type: "task",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryLicenses,
-        };
-      });
-
-    alphabetizeByName(anytimeActionLicensesTaskWithType);
+    alphabetizeByName(anytimeActionTasksWithType);
 
     const anytimeActionLicenseReinstatementsWithType = props.anytimeActionLicenseReinstatements
       .filter((action) => licenseReinstatementMatch(action))
@@ -105,32 +89,17 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
         return {
           ...action,
           type: "license-reinstatement",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryReinstatements,
+          category: ["Reactivate My Expired Permit, License or Registration"],
         };
       });
 
-    const anytimeActionReinstatementsWithType = props.anytimeActionReinstatementsTasks
-      .filter((action) => findMatch(action))
-      .map((action) => {
-        return {
-          ...action,
-          type: "task",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryReinstatements,
-        };
-      });
-
-    const anytimeActionAllReinstatments = [
-      ...anytimeActionReinstatementsWithType,
-      ...anytimeActionLicenseReinstatementsWithType,
-    ];
-
-    alphabetizeByName(anytimeActionAllReinstatments);
+    alphabetizeByName(anytimeActionLicenseReinstatementsWithType);
 
     const applicableAnytimeActions: AnytimeActionWithTypeAndCategory[] = [];
 
-    applicableAnytimeActions.push(...anytimeActionLicensesTaskWithType);
-    applicableAnytimeActions.push(...anytimeActionAdminOrLink);
-    applicableAnytimeActions.push(...anytimeActionAllReinstatments);
+    applicableAnytimeActions.push(...anytimeActionTasksWithType);
+    applicableAnytimeActions.push(...anytimeActionLinkWithType);
+    applicableAnytimeActions.push(...anytimeActionLicenseReinstatementsWithType);
 
     reverseAlphabetizeByCategory(applicableAnytimeActions);
 
@@ -138,10 +107,10 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
   };
 
   const findMatch = (action: AnytimeActionTask | AnytimeActionLink): boolean => {
+    if ("category" in action && action.category[0] === "Only Show in Subtask") return false;
     if (action.applyToAllUsers) return true;
     if (action.industryIds && industryId && action.industryIds.includes(industryId)) return true;
     if (isAnytimeActionFromNonEssentialQuestions(action)) return true;
-
     return !!(action.sectorIds && sectorId && action.sectorIds.includes(sectorId));
   };
 
@@ -220,7 +189,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
           isOptionEqualToValue={(option, value) => {
             return option.name === value.name && option.filename === value.filename;
           }}
-          groupBy={(option) => option.category}
+          groupBy={(option) => option.category[0]} // Currently just showing the first category
           renderGroup={(params) => (
             <li key={params.key} className="anytime-action-header-group">
               <div className="text-secondary-vivid text-bold padding-left-2 ">{params.group}</div>

@@ -56,7 +56,7 @@ export const cmsCollections = [
   {
     label: "🟧 ANYTIME ACTIONS",
     children: [
-      "Anytime Action With Details Page",
+      "Anytime Action Tasks",
       "Anytime Action With Consumer Affairs License Integrations (Reinstatements)",
       "Anytime Action License External Link Only",
     ],
