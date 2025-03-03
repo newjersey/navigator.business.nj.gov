@@ -3519,21 +3519,6 @@ collections:
                   widget: string,
                 }
               - { label: Anytime Action Page Button Text, name: anytimeActionPageButtonText, widget: string }
-              - {
-                  label: Anytime Action Dropdown Category - Admin,
-                  name: anytimeActionDropdownCategoryAdmin,
-                  widget: string,
-                }
-              - {
-                  label: Anytime Action Dropdown Category - Licenses,
-                  name: anytimeActionDropdownCategoryLicenses,
-                  widget: string,
-                }
-              - {
-                  label: Anytime Action Dropdown Category - Reinstatements,
-                  name: anytimeActionDropdownCategoryReinstatements,
-                  widget: string,
-                }
       - label: "Snackbars"
         name: "dashboard-config-snackbars"
         file: "content/src/fieldConfig/dashboard-snackbars.json"
@@ -3746,14 +3731,14 @@ collections:
     fields:
       - { name: "" }
 
-  - name: "anytime-action-tasks-licenses"
-    label: "Anytime Actions (Licenses)"
-    folder: "content/src/anytime-action-tasks-licenses"
-    summary: "{{id}} - {{name}}"
+  - name: "anytime-action-tasks"
+    label: "Anytime Actions Tasks"
+    folder: "content/src/anytime-action-tasks"
+    summary: "{{name}} - {{category[0]}} - {{category[1]}}"
     identifier_field: "{{id}}"
     slug: "{{fields.id}}"
     delete: true
-    sortable_fields: ["name", "id"]
+    sortable_fields: ["name", "id", "category"]
     create: true
     editor:
       preview: true
@@ -3768,117 +3753,28 @@ collections:
         }
       - { label: "Name/Title", name: "name", widget: "string" }
       - {
-          label: "Apply to all - overrides industry and sector dropdown",
-          name: "applyToAllUsers",
-          widget: "boolean",
-          required: false,
-        }
-      - label: Apply to industries
-        name: industryIds
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "roadmaps"
-        search_fields: ["name"]
-        value_field: "{{id}}"
-        display_fields: ["{{name}}"]
-        options_length: 500
-      - label: Apply to sectors
-        name: sectorIds
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "mappings"
-        search_fields: ["arrayOfSectors.*.name"]
-        value_field: "arrayOfSectors.*.id"
-        display_fields: ["arrayOfSectors.*.name"]
-        options_length: 500
-      - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "no-space", required: true }
-      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
-      - { label: "Content", name: "body", widget: "markdown", required: true }
-      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-
-  - name: "anytime-action-tasks-reinstatements"
-    label: "Anytime Actions (Reinstatements)"
-    folder: "content/src/anytime-action-tasks-reinstatements"
-    summary: "{{id}} - {{name}}"
-    identifier_field: "{{id}}"
-    slug: "{{fields.id}}"
-    delete: true
-    sortable_fields: ["name", "id"]
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          hint: "disabled after file creation",
+          label: "Category",
+          name: "category",
+          widget: "select",
+          hint: "only the first category will be used",
           required: true,
+          multiple: true,
+          options:
+            [
+              "Contract With NJ State Government",
+              "Sell or Close My Business",
+              "Change My Business Information",
+              "Hire New Employees",
+              "Reactivate My Expired Permit, License or Registration",
+              "Apply for State Funding",
+              "Offer new Products or Services",
+              "Transport My Products or Equipment",
+              "Manage My Properties",
+              "Set Up at a Temporary Location",
+              "Purchase New Products of Equipment",
+              "Only Show in Subtask",
+            ],
         }
-      - { label: "Name/Title", name: "name", widget: "string" }
-      - {
-          label: "Apply to all - overrides industry and sector dropdown",
-          name: "applyToAllUsers",
-          widget: "boolean",
-          required: false,
-        }
-      - label: Apply to industries
-        name: industryIds
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "roadmaps"
-        search_fields: ["name"]
-        value_field: "{{id}}"
-        display_fields: ["{{name}}"]
-        options_length: 500
-      - label: Apply to sectors
-        name: sectorIds
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "mappings"
-        search_fields: ["arrayOfSectors.*.name"]
-        value_field: "arrayOfSectors.*.id"
-        display_fields: ["arrayOfSectors.*.name"]
-        options_length: 500
-      - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "no-space", required: true }
-      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
-      - { label: "Content", name: "body", widget: "markdown", required: true }
-      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-
-  - name: "anytime-action-tasks-admin"
-    label: "Anytime Actions (Admin)"
-    folder: "content/src/anytime-action-tasks-admin"
-    summary: "{{id}} - {{name}}"
-    identifier_field: "{{id}}"
-    slug: "{{fields.id}}"
-    delete: true
-    sortable_fields: ["name", "id"]
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          hint: "disabled after file creation",
-          required: true,
-        }
-      - { label: "Name/Title", name: "name", widget: "string" }
       - {
           label: "Apply to all - overrides industry and sector dropdown",
           name: "applyToAllUsers",

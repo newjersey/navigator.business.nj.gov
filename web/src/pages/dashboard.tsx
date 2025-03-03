@@ -14,11 +14,7 @@ import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllAnytimeActionLicenseReinstatements } from "@/lib/static/loadAnytimeActionLicenseReinstatements";
 import { loadAllAnytimeActionLinks } from "@/lib/static/loadAnytimeActionLinks";
-import {
-  loadAllAnytimeActionAdminTasks,
-  loadAllAnytimeActionLicensesTasks,
-  loadAllAnytimeActionReinstatementsTasks,
-} from "@/lib/static/loadAnytimeActionTasks";
+import { loadAllAnytimeActionTasks } from "@/lib/static/loadAnytimeActionTasks";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFundings } from "@/lib/static/loadFundings";
@@ -50,9 +46,7 @@ interface Props {
   fundings: Funding[];
   certifications: Certification[];
   municipalities: Municipality[];
-  anytimeActionLicensesTasks: AnytimeActionTask[];
-  anytimeActionAdminTasks: AnytimeActionTask[];
-  anytimeActionReinstatementsTasks: AnytimeActionTask[];
+  anytimeActionTasks: AnytimeActionTask[];
   anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   licenseEvents: LicenseEventType[];
@@ -138,9 +132,7 @@ const DashboardPage = (props: Props): ReactElement => {
                 operateReferences={props.operateReferences}
                 anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
                 anytimeActionLinks={props.anytimeActionLinks}
-                anytimeActionAdminTasks={props.anytimeActionAdminTasks}
-                anytimeActionLicensesTasks={props.anytimeActionLicensesTasks}
-                anytimeActionReinstatementsTasks={props.anytimeActionReinstatementsTasks}
+                anytimeActionTasks={props.anytimeActionTasks}
                 elevatorViolations={hasElevatorViolations}
                 licenseEvents={props.licenseEvents}
               />
@@ -151,9 +143,7 @@ const DashboardPage = (props: Props): ReactElement => {
                 operateReferences={props.operateReferences}
                 anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
                 anytimeActionLinks={props.anytimeActionLinks}
-                anytimeActionAdminTasks={props.anytimeActionAdminTasks}
-                anytimeActionLicensesTasks={props.anytimeActionLicensesTasks}
-                anytimeActionReinstatementsTasks={props.anytimeActionReinstatementsTasks}
+                anytimeActionTasks={props.anytimeActionTasks}
                 elevatorViolations={hasElevatorViolations}
                 licenseEvents={props.licenseEvents}
               />
@@ -173,9 +163,7 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
       fundings: loadAllFundings(),
       certifications: loadAllCertifications(),
       municipalities: loadAllMunicipalities(),
-      anytimeActionAdminTasks: loadAllAnytimeActionAdminTasks(),
-      anytimeActionLicensesTasks: loadAllAnytimeActionLicensesTasks(),
-      anytimeActionReinstatementsTasks: loadAllAnytimeActionReinstatementsTasks(),
+      anytimeActionTasks: loadAllAnytimeActionTasks(),
       anytimeActionLinks: loadAllAnytimeActionLinks(),
       anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
       licenseEvents: loadAllLicenseCalendarEvents(),

@@ -159,7 +159,9 @@ interface AnytimeAction {
 }
 
 export interface AnytimeActionTask extends AnytimeAction {
+  filename: string;
   name: string;
+  category: string[];
   urlSlug: string;
   callToActionLink?: string;
   callToActionText?: string;
@@ -169,7 +171,6 @@ export interface AnytimeActionTask extends AnytimeAction {
   applyToAllUsers: boolean;
   summaryDescriptionMd: string;
   contentMd: string;
-  filename: string;
 }
 
 export interface AnytimeActionLink extends AnytimeAction {

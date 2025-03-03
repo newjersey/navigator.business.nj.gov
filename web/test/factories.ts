@@ -295,6 +295,7 @@ export const generateAnytimeActionTask = (overrides: Partial<AnytimeActionTask>)
   return {
     filename: `some-filename-${randomInt()}`,
     name: `some-name-${randomInt()}`,
+    category: [`Category ${randomInt()}`],
     urlSlug: `some-url-slug-${randomInt()}`,
     callToActionLink: `some-cta-link-${randomInt()}`,
     callToActionText: `some-cta-text-${randomInt()}`,
