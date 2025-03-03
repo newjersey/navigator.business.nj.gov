@@ -1,4 +1,5 @@
 ---
+notesMd: "3.3.25: NJEDA let us know we can unpublish this program. Dev will archive it."
 name: Edison Innovation VC Growth
 displayName: Edison Innovation VC Growth
 urlSlug: edison-innovation-vc
