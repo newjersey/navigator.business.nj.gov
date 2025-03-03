@@ -15,7 +15,7 @@ import {
   generateTaxFilingData,
   generateUserDataForBusiness,
 } from "@shared/test";
-import { UserData } from "@shared/userData";
+import { CURRENT_VERSION, UserData } from "@shared/userData";
 import dayjs from "dayjs";
 
 // references jest-dynalite-config values
@@ -128,5 +128,15 @@ describe("User and Business Migration with DynamoDataClient", () => {
     expect(logger.LogError).toHaveBeenCalledWith(`MigrateData Failed: ${mockError.message}`);
 
     expect(logger.LogInfo).not.toHaveBeenCalledWith("Successfully migrated business");
+  });
+
+  it("should log an info message when no users with outdated versions are found", async () => {
+    jest.spyOn(dynamoUsersDataClient, "getUsersWithOutdatedVersion").mockResolvedValueOnce([]);
+
+    const logSpy = jest.spyOn(logger, "LogInfo");
+
+    await dynamoDataClient.migrateData();
+
+    expect(logSpy).toHaveBeenCalledWith(`No users need migration. Current version: ${CURRENT_VERSION}`);
   });
 });

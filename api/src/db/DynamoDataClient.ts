@@ -15,7 +15,7 @@ export const DynamoDataClient = (
     try {
       const usersToMigrate = await userDataClient.getUsersWithOutdatedVersion(CURRENT_VERSION);
       if (usersToMigrate.length === 0) {
-        logger.LogInfo("No users need migration.");
+        logger.LogInfo(`No users need migration. Current version: ${CURRENT_VERSION}`);
         return { success: true, migratedCount: 0 };
       }
 
