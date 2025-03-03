@@ -1,7 +1,7 @@
 import { ExpandCollapseString } from "@/components/ExpandCollapseString";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ProfileField } from "@/components/profile/ProfileField";
-import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
+import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";

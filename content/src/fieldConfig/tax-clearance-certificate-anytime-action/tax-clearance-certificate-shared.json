@@ -1,0 +1,9 @@
+{
+  "taxClearanceCertificateShared": {
+    "saveButtonText": "Save & Continue",
+    "backButtonText": "Back",
+    "stepperOneLabel": "Requirements",
+    "stepperTwoLabel": "Check Eligibility",
+    "stepperThreeLabel": "Review"
+  }
+}

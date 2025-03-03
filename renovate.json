@@ -16,7 +16,11 @@
       "automergeStrategy": "rebase"
     },
     {
-      "matchPackageNames": ["@aws-amplify/core", "@aws-amplify/auth"],
+      "matchPackageNames": [
+        "@aws-amplify/core",
+        "@aws-amplify/auth",
+        "decap-cms-app"
+      ],
       "automerge": false
     },
     {
