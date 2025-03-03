@@ -50,12 +50,15 @@ callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm?utm
 ---
 ## Application Requirements
 
+You will need:
 * `Tax ID number|tax-id`
 * **Motor Vehicle Commission** `(MVC) Entity Identification Number (EIN)|mvc-entity-id\` 
 * **[Application for Vehicle Registration (Form BA-49)](https://www.nj.gov/mvc/pdf/vehicles/BA-49.pdf)**
 * **Proof of Identity,** such as a valid driver’s license or other government-issued photo identification
 * **Proof of current insurance,** such as a card or policy declaration page
 * **Vehicle title** showing business ownership
+
+You may also need:
 * **Manufacturer’s Certificate of Origin (MCO),** for new vehicles
 * **Emissions or Safety Inspection Certificate,** if applicable
 * **Weight Certificate,** for vehicles weighing over 26,000 pounds
