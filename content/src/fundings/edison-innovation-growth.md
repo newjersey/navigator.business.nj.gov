@@ -1,4 +1,5 @@
 ---
+notesMd: "3.3.25: NJEDA let us know we can unpublish this program. Dev will archive it."
 name: Edison Innovation Growth Stars Fund
 displayName: Edison Innovation Growth Stars Fund
 urlSlug: edison-innovation-growth
