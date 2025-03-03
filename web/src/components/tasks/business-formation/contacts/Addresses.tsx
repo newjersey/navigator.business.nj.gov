@@ -7,6 +7,7 @@ import { AddressModal } from "@/components/tasks/business-formation/contacts/Add
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
+import { formatAddress } from "@/lib/domain-logic/formatAddress";
 import { FormationFields, FormationIncorporator, FormationMember } from "@businessnjgovnavigator/shared/";
 import { Checkbox } from "@mui/material";
 import React, { ChangeEvent, Fragment, ReactElement, ReactNode, useState } from "react";
@@ -45,12 +46,6 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
   const [editIndex, setEditIndex] = useState<number | undefined>(undefined);
   const [alert, setAlert] = useState<boolean | undefined>(undefined);
   const { doesFieldHaveError } = useFormationErrors();
-
-  const formatAddress = (address: T): string => {
-    return `${address.addressLine1}, ${address.addressLine2 ? `${address.addressLine2},` : ""} ${
-      address.addressMunicipality?.displayName ?? address.addressCity
-    }, ${address.addressState?.name} ${address.addressZipCode}`;
-  };
 
   const handleSignerCheckbox = (event: ChangeEvent<HTMLInputElement>, index: number): void => {
     const addresses = [...props.addressData];

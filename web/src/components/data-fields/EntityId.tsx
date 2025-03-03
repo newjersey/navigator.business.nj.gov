@@ -5,6 +5,7 @@ interface Props {
   children?: ReactNode;
   disabled?: boolean;
   handleChangeOverride?: (value: string) => void;
+  inputWidth?: "full" | "default" | "reduced";
 }
 
 export const EntityId = (props: Props): ReactElement => {
@@ -13,7 +14,7 @@ export const EntityId = (props: Props): ReactElement => {
   return (
     <>
       <NumericField
-        inputWidth="default"
+        inputWidth={props.inputWidth ?? "default"}
         fieldName={fieldName}
         maxLength={10}
         disabled={props.disabled}

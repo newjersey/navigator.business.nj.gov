@@ -39,6 +39,7 @@ import { useMountEffect } from "@/lib/utils/helpers";
 import AccountSetupPreview from "@/lib/cms/previews/AccountSetupPreview";
 import AnytimeActionLicenseReinstatementPreview from "@/lib/cms/previews/AnytimeActionLicenseReinstatementPreview";
 import AnytimeActionTaskPreview from "@/lib/cms/previews/AnytimeActionTaskPreview";
+import AnytimeActionTaxClearancePreview from "@/lib/cms/previews/AnytimeActionTaxClearancePreview";
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
 import CalloutPreview from "@/lib/cms/previews/CalloutPreview";
 import NavBarPreview from "@/lib/cms/previews/NavBarPreview";
@@ -98,6 +99,10 @@ const CMS = dynamic(
       // ----- Anytime Actions -----
       registerPreview(CMS, "anytime-action-tasks", AnytimeActionTaskPreview);
       registerPreview(CMS, "anytime-action-license-reinstatements", AnytimeActionLicenseReinstatementPreview);
+      registerPreview(CMS, "taxClearanceCertificate-step1", AnytimeActionTaxClearancePreview);
+      registerPreview(CMS, "taxClearanceCertificate-step2", AnytimeActionTaxClearancePreview);
+      registerPreview(CMS, "taxClearanceCertificate-step3", AnytimeActionTaxClearancePreview);
+      registerPreview(CMS, "taxClearanceCertificate-shared", AnytimeActionTaxClearancePreview);
 
       // ----- Roadmap Sidebar Card -----
       registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);
