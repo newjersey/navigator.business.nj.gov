@@ -39,11 +39,6 @@
     },
     {
       "step": 3,
-      "weight": 15,
-      "task": "get-insurance"
-    },
-    {
-      "step": 3,
       "weight": 20,
       "licenseTask": "license-engineer"
     },
@@ -55,13 +50,16 @@
     }
   ],
   "name": "Engineering",
-  "nonEssentialQuestionsIds": ["weights-measures", "planning-services"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "planning-services"
+  ],
   "displayname": "engineering",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "engineering consulting, firm, professional services",
+  "additionalSearchTerms": "engineering consulting, firm, professional services, land surveyor, land surveying",
   "id": "engineering",
   "description": "Designs and plans the building of systems and structures",
   "webflowId": "656a13621861f431fc9765d2"

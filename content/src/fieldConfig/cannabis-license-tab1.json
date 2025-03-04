@@ -1,16 +1,16 @@
 {
   "cannabisApplyForLicense": {
-    "applicationQuestionsText": "Answer the two questions below and we can highlight the information you need to prepare for you application on the following page.",
-    "businessSizeHeader": "Business Size",
-    "microbusinessRadioQuestion": "Are you a `microbusiness|microbusiness-cannabis`?",
-    "microbusinessRadioYes": " Yes, I'm a microbusiness",
-    "microbusinessRadioNo": "No, I'm a `standard business|standard-business-cannabis`",
+    "impactZoneLabel": "`Impact Zone Business|impact-zone-business-cannabis`",
     "priorityStatusHeader": "Priority Status",
     "priorityStatusText": "Based on your preferences in [Determine if You Are Eligible for Priority Status](/tasks/priority-status-cannabis), you are eligible as the following:",
+    "viewRequirementsButton": "View Application Requirements",
+    "applicationQuestionsText": "Answer the two questions below and we'll show you what you need to prepare for your application on the next page.",
+    "diverselyOwnedLabel": "`Diversely-Owned Business|diversely-owned-business-cannabis` ",
+    "businessSizeHeader": "Business Size",
+    "microbusinessRadioYes": " Yes, I'm a microbusiness",
     "priorityStatusNoneSelectedText": "You did not select any [priority status designations](/tasks/priority-status-cannabis).",
-    "diverselyOwnedLabel": "`Diversely-Owned Business|diversely-owned-business-cannabis`",
-    "impactZoneLabel": "`Impact Zone Business|impact-zone-business-cannabis`",
-    "sbeLabel": "`Social Equity Business (SEB)|social-equity-business-cannabis`",
-    "viewRequirementsButton": "View Application Needs"
+    "microbusinessRadioNo": "No, I'm a `standard business|standard-business-cannabis`",
+    "microbusinessRadioQuestion": "Are you a `microbusiness|microbusiness-cannabis`?",
+    "sbeLabel": " `Social Equity Business (SEB)|social-equity-business-cannabis`"
   }
 }

@@ -1,13 +1,7 @@
 {
-  "displayname": "non-medical-transport",
   "naicsCodes": "485999",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "health-care-and-social-assistance",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -63,9 +57,23 @@
       "step": 3,
       "weight": 30,
       "task": "logisticare"
+    },
+    {
+      "step": 3,
+      "weight": 17,
+      "task": "transportation-entity-id",
+      "required": true
     }
   ],
   "name": "Non-Medical Transport",
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
+  "displayname": "non-medical-transport",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true
+  },
+  "isEnabled": true,
   "additionalSearchTerms": "transportation service,non-emergency transportation",
   "id": "non-medical-transport",
   "description": "The transportation of an individual with medical needs",

@@ -1,14 +1,7 @@
 {
-  "displayname": "courier",
   "naicsCodes": "492110, 491110, 492210",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "other-services",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -43,14 +36,19 @@
       "step": 3,
       "weight": 10,
       "task": "bank-account"
-    },
-    {
-      "step": 3,
-      "weight": 15,
-      "task": "get-insurance"
     }
   ],
   "name": "Courier Service",
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "courier-CRTK-survey"
+  ],
+  "displayname": "courier",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
+  "isEnabled": true,
   "additionalSearchTerms": "messenger service, same day delivery service",
   "id": "courier",
   "description": "Offers message and package delivery services",

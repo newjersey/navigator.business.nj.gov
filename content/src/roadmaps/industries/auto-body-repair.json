@@ -1,13 +1,7 @@
 {
-  "displayname": "auto-body-repair",
   "naicsCodes": "811121, 811111, 811198, 811114",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "other-services",
-  "industryOnboardingQuestions": {
-    "canBeReseller": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -45,11 +39,6 @@
     },
     {
       "step": 3,
-      "weight": 20,
-      "task": "get-insurance"
-    },
-    {
-      "step": 3,
       "weight": 50,
       "licenseTask": "auto-body-repair-license",
       "required": true
@@ -58,9 +47,31 @@
       "step": 3,
       "weight": 60,
       "licenseTask": "spray-paint-booth-permit-auto-body-repair"
+    },
+    {
+      "step": 3,
+      "weight": 41,
+      "task": "transportation-entity-id",
+      "required": true,
+      "licenseTask": ""
+    },
+    {
+      "step": 4,
+      "weight": 61,
+      "task": "community-right-to-know-survey",
+      "required": false
     }
   ],
   "name": "Auto-Body Repair",
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
+  "displayname": "auto-body-repair",
+  "industryOnboardingQuestions": {
+    "canBeReseller": true
+  },
+  "modifications": [],
+  "isEnabled": true,
   "additionalSearchTerms": "car,auto body shop,auto shop,car center,auto center",
   "id": "auto-body-repair",
   "description": "A facility for the repair and restoration of vehicles",

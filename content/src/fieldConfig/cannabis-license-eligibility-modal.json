@@ -2,7 +2,7 @@
   "cannabisEligibilityModal": {
     "eligibleModalCancelButton": "I'm not sure",
     "eligibleModalTitle": "Ensure Your Eligibility",
-    "eligibleModalContinueButton": "I am eligible",
-    "eligibleModalBody": "We recommend you first [Determine if You are Eligible for Priority Status](/tasks/priority-status-cannabis) before proceeding."
+    "eligibleModalContinueButton": "I'm eligible",
+    "eligibleModalBody": "We recommend you first [Determine if You are Eligible for Priority Status](/tasks/priority-status-cannabis) before moving forward."
   }
 }

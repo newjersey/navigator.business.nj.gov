@@ -53,10 +53,17 @@
       "weight": 18,
       "licenseTask": "car-rental-vehicle-registration",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 101,
+      "task": "community-right-to-know-survey"
     }
   ],
   "name": "Car Rental",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
   "displayname": "car-rental",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,

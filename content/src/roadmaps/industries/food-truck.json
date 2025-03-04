@@ -55,7 +55,7 @@
     },
     {
       "step": 3,
-      "weight": 4,
+      "weight": 5,
       "task": "get-insurance"
     },
     {
@@ -78,10 +78,18 @@
       "step": 4,
       "weight": 2,
       "licenseTask": "town-mercantile-license"
+    },
+    {
+      "step": 3,
+      "weight": 4,
+      "task": "transportation-entity-id",
+      "required": true
     }
   ],
   "name": "Food Truck",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
   "displayname": "food-truck",
   "industryOnboardingQuestions": {
     "canBeReseller": true

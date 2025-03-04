@@ -55,6 +55,7 @@ collections:
         search_fields: ["arrayOfTaskAgencies.*.name"]
         value_field: "arrayOfTaskAgencies.*.id"
         display_fields: ["arrayOfTaskAgencies.*.name"]
+        options_length: 500
   - name: "business-formation-config"
     label: "Biz Form - Config"
     delete: false
@@ -1411,6 +1412,7 @@ collections:
         search_fields: ["arrayOfFundingAgencies.*.name"]
         value_field: "arrayOfFundingAgencies.*.id"
         display_fields: ["arrayOfFundingAgencies.*.name"]
+        options_length: 500
       - label: "Applicable Ownership Types"
         name: applicableOwnershipTypes
         widget: "select"
@@ -1457,6 +1459,7 @@ collections:
         search_fields: ["arrayOfFundingAgencies.*.name"]
         value_field: "arrayOfFundingAgencies.*.id"
         display_fields: ["arrayOfFundingAgencies.*.name"]
+        options_length: 500
       - label: "Applicable Ownership Types"
         name: applicableOwnershipTypes
         widget: "select"
@@ -1581,6 +1584,7 @@ collections:
         search_fields: ["arrayOfFundingAgencies.*.name"]
         value_field: "arrayOfFundingAgencies.*.id"
         display_fields: ["arrayOfFundingAgencies.*.name"]
+        options_length: 500
       - {
           label: "Agency Contact",
           name: "agencyContact",
@@ -1661,6 +1665,7 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
+        options_length: 500
       - label: "Publish/Stage/Archive"
         name: "publishStageArchive"
         widget: "select"
@@ -1796,6 +1801,7 @@ collections:
         search_fields: ["arrayOfFundingAgencies.*.name"]
         value_field: "arrayOfFundingAgencies.*.id"
         display_fields: ["arrayOfFundingAgencies.*.name"]
+        options_length: 500
       - {
           label: "Agency Contact",
           name: "agencyContact",
@@ -1876,6 +1882,7 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
+        options_length: 500
       - label: "Publish/Stage/Archive"
         name: "publishStageArchive"
         widget: "select"
@@ -1930,6 +1937,7 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
+        options_length: 500
       - label: NAICS Codes
         name: naicsCodes
         widget: string
@@ -2029,6 +2037,7 @@ collections:
         search_fields: ["nonEssentialQuestionsArray.*.id"]
         value_field: "nonEssentialQuestionsArray.*.id"
         display_fields: ["nonEssentialQuestionsArray.*.id"]
+        options_length: 500
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
@@ -2041,6 +2050,7 @@ collections:
             search_fields: ["steps.*.name"]
             value_field: "steps.*.stepNumber"
             display_fields: ["steps.*.name"]
+            options_length: 500
           - label: Weight
             name: weight
             widget: number
@@ -2118,6 +2128,7 @@ collections:
             search_fields: ["steps.*.name"]
             value_field: "steps.*.stepNumber"
             display_fields: ["steps.*.name"]
+            options_length: 500
           - label: Weight
             name: weight
             widget: number
@@ -2602,6 +2613,7 @@ collections:
         search_fields: ["arrayOfTaskAgencies.*.name"]
         value_field: "arrayOfTaskAgencies.*.id"
         display_fields: ["arrayOfTaskAgencies.*.name"]
+        options_length: 500
       - {
           label: "Additional Agency Context",
           name: "agencyAdditionalContext",
@@ -2687,6 +2699,7 @@ collections:
         search_fields: ["arrayOfTaskAgencies.*.name"]
         value_field: "arrayOfTaskAgencies.*.id"
         display_fields: ["arrayOfTaskAgencies.*.name"]
+        options_length: 500
       - {
           label: "Agency additional context (Webflow & Navigator)",
           name: "agencyAdditionalContext",
@@ -2769,6 +2782,7 @@ collections:
         search_fields: ["arrayOfTaskAgencies.*.name"]
         value_field: "arrayOfTaskAgencies.*.id"
         display_fields: ["arrayOfTaskAgencies.*.name"]
+        options_length: 500
       - {
           label: "Agency additional context (Webflow & Navigator)",
           name: "agencyAdditionalContext",

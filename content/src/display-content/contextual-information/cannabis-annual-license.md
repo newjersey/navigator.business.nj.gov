@@ -1,13 +1,12 @@
 ---
+header: Annual License
 id: cannabis-annual-license
 displayname: cannabis-annual-license
-header: Annual License
 ---
+You should be ready to operate if you want to obtain an annual cannabis license. You will be required to submit a more detailed application that includes:
 
-A business seeking an annual Cannabis license should be ready to operate. An annual applicant will be required to submit a more detailed application that includes:
+* Information on your owned or leased business location
+* Local government approvals, including zoning approval
+* Any final agreements for your business, such as lease agreements or vendor contracts, if applicable
 
-- Information on their owned or leased business location
-- Municipal approval including zoning approval
-- An operating summary plan in which applicants detail their experience, history, and knowledge of critical pieces of operating a cannabis business
-
-Conditional license applicants will eventually need to submit this information when they're ready to convert to an annual license.
+`Conditional license|cannabis-conditional-license` applicants will eventually need to submit this information when they're ready to convert to an annual license (also known as a conversion license).

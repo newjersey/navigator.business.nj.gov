@@ -34,6 +34,7 @@ county:
   - All
 sector: []
 publishStageArchive: ""
+maxEmployeesRequired: 50
 ---
 
 ## Eligibility

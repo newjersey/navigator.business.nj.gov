@@ -1,9 +1,7 @@
 {
-  "displayname": "logistics",
   "naicsCodes": "493110, 493190, 493120, 493130",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -40,12 +38,18 @@
       "task": "bank-account"
     },
     {
-      "step": 3,
-      "weight": 12,
-      "task": "get-insurance"
+      "step": 4,
+      "weight": 1,
+      "task": "transportation-entity-id",
+      "required": true
     }
   ],
   "name": "Logistics",
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "logistics-CRTK-survey"
+  ],
+  "displayname": "logistics",
   "industryOnboardingQuestions": {
     "isInterstateLogisticsApplicable": true
   },
