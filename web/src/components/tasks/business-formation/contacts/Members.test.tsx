@@ -3,7 +3,6 @@ import { getPageHelper } from "@/components/tasks/business-formation/contacts/te
 
 import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
-import { generateStateItem } from "@/test/factories";
 import {
   FormationPageHelpers,
   setDesktopScreen,
@@ -16,6 +15,7 @@ import {
   generateFormationMember,
   generateFormationUSAddress,
   generateMunicipality,
+  generateStateItem,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";

@@ -8,9 +8,9 @@ import { ModifiedContent } from "@/components/ModifiedContent";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
+import { createDataFieldErrorMap, DataFieldFormContext } from "@/contexts/dataFieldFormContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { createEmptyDbaDisplayContent } from "@/lib/types/types";
@@ -29,7 +29,7 @@ const Template = () => {
   const [profileData, setProfileData] = useState<ProfileData>(
     generateProfileData({ taxId: "2", naicsCode: "" })
   );
-  const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
+  const { state: formContextState } = useFormContextHelper(createDataFieldErrorMap());
 
   return (
     <BusinessFormationContext.Provider
@@ -56,7 +56,7 @@ const Template = () => {
         setForeignGoodStandingFile: () => {},
       }}
     >
-      <ProfileFormContext.Provider value={formContextState}>
+      <DataFieldFormContext.Provider value={formContextState}>
         <NeedsAccountContext.Provider
           value={{
             isAuthenticated: IsAuthenticated.UNKNOWN,
@@ -142,7 +142,7 @@ const Template = () => {
             </ProfileDataContext.Provider>
           </ConfigContext.Provider>
         </NeedsAccountContext.Provider>
-      </ProfileFormContext.Provider>
+      </DataFieldFormContext.Provider>
     </BusinessFormationContext.Provider>
   );
 };

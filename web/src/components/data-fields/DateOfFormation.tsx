@@ -1,7 +1,7 @@
 import { GenericTextField } from "@/components/GenericTextField";
 import { ConfigType } from "@/contexts/configContext";
+import { DataFieldFormContext } from "@/contexts/dataFieldFormContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
@@ -37,7 +37,7 @@ export const DateOfFormation = (props: Props): ReactElement => {
 
   const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     fieldName,
-    ProfileFormContext
+    DataFieldFormContext
   );
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["dateOfFormation"]["default"] =

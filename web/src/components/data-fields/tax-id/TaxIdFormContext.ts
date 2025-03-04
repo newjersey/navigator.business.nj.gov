@@ -2,4 +2,4 @@ import { createFormContext, createReducedFieldStates } from "@/contexts/formCont
 
 export const taxIdFormContextErrorMap = createReducedFieldStates(["taxId", "taxIdLocation"]);
 type ErrorMapType = typeof taxIdFormContextErrorMap;
-export const taxIdFormContext = createFormContext<ErrorMapType>();
+export const TaxIdFormContext = createFormContext<ErrorMapType>();

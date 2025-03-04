@@ -1,9 +1,9 @@
-import { DataField, DataFieldProps } from "@/components/data-fields/DataField";
+import { ProfileDataField, ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
 import { ReactElement } from "react";
 
-export const TradeName = (props: Omit<DataFieldProps, "fieldName" | "inputWidth">): ReactElement => {
+export const TradeName = (props: Omit<ProfileDataFieldProps, "fieldName" | "inputWidth">): ReactElement => {
   return (
-    <DataField
+    <ProfileDataField
       fieldName="tradeName"
       inputWidth="default"
       fieldOptions={{

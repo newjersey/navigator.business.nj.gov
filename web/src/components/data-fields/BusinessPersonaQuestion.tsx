@@ -1,12 +1,12 @@
 import { Content } from "@/components/Content";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { ConfigType } from "@/contexts/configContext";
-import { FormContextFieldProps } from "@/contexts/formContext";
+import { DataFieldFormContext } from "@/contexts/dataFieldFormContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
+import { FormContextFieldProps } from "@/lib/types/types";
 import { BusinessPersona } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
@@ -18,7 +18,7 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
 
   const { RegisterForOnSubmit, setIsValid } = useFormContextFieldHelpers(
     "businessPersona",
-    ProfileFormContext,
+    DataFieldFormContext,
     props.errorTypes
   );
 

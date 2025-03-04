@@ -1,11 +1,11 @@
-import { DataField, DataFieldProps } from "@/components/data-fields/DataField";
+import { ProfileDataField, ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
 import { ReactElement } from "react";
 
 export const ResponsibleOwnerName = (
-  props: Omit<DataFieldProps, "fieldName" | "inputWidth">
+  props: Omit<ProfileDataFieldProps, "fieldName" | "inputWidth">
 ): ReactElement => {
   return (
-    <DataField
+    <ProfileDataField
       fieldName="responsibleOwnerName"
       fieldOptions={{
         inputProps: { "data-testid": "responsibleOwnerName" },

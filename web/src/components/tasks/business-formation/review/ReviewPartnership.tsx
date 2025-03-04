@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { ModifiedContent } from "@/components/ModifiedContent";
-import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
+import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
