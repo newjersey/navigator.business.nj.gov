@@ -213,7 +213,9 @@
     "womenled",
     "Yamileth",
     "Rutger",
-    "Unpublishing"
+    "Unpublishing",
+    "CRTK",
+    "DIIN"
   ],
   "ignorePaths": [
     "node_modules/**",
