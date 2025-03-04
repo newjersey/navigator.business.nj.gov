@@ -159,6 +159,12 @@ describe("buildUserRoadmap", () => {
       await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "nonprofit" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("nonprofit-and-corp-foreign");
     });
+
+    it("adds oos-pharmacy add-on for out of state pharmacy", async () => {
+      const profileData = createEmptyNexusProfile({ industryId: "pharmacy" });
+      await buildUserRoadmap(profileData);
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("oos-pharmacy");
+    });
   });
 
   describe("home-based business", () => {
