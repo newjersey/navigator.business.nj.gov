@@ -126,7 +126,7 @@
       "addOn": "community-rtk-survey"
     },
     {
-      "id": "pest-pesticide-dealer-biz-licensing",
+      "id": "pest-pesticide-dealer-licensing",
       "questionText": "Will your business be selling pesticides? \n",
       "addOn": "pest-pesticide-dealer-biz-license"
     }
