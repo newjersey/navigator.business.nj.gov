@@ -129,11 +129,6 @@
       "id": "pest-pesticide-dealer-biz-licensing",
       "questionText": "Will your business be selling pesticides? \n",
       "addOn": "pest-pesticide-dealer-biz-license"
-    },
-    {
-      "id": "pest-pesticide-dealer-licensing",
-      "questionText": "Will your business be selling pesticides? \n",
-      "addOn": "pest-pesticide-dealer-license"
     }
   ]
 }
