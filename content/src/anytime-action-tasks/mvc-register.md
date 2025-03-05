@@ -1,6 +1,6 @@
 ---
 id: mvc-register
-name: Register Your Business Vehicle(s)
+name: Register Your Business-Owned Vehicle(s)
 category:
   - Only Show in Subtask
 industryIds:
@@ -51,6 +51,7 @@ callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm?utm
 You will need:
 * Federal Tax ID Number (FEIN)
 * Motor Vehicle Commission `(MVC) Entity Identification Number (EIN)|mvc-entity-id`
+* [Application for Vehicle Registration (Form BA-49](https://www.nj.gov/mvc/pdf/vehicles/BA-49.pdf)
 * Proof of Identity, such as a valid driver’s license or other government-issued photo identification
 * Proof of current insurance, such as a card, policy number, or policy declaration page
 
