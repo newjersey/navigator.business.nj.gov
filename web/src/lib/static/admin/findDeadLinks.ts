@@ -18,7 +18,6 @@ const fieldConfigDir = path.join(process.cwd(), "..", "content", "src", "fieldCo
 const fundingsDir = path.join(process.cwd(), "..", "content", "src", "fundings");
 const certificationsDir = path.join(process.cwd(), "..", "content", "src", "certifications");
 const licensesDir = path.join(process.cwd(), "..", "content", "src", "license-calendar-events");
-const anytimeActionLinksDir = path.join(process.cwd(), "..", "content", "src", "anytime-action-links");
 const anytimeActionTasksDir = path.join(process.cwd(), "..", "content", "src", "anytime-action-tasks");
 const anytimeActionLicenseReinstatementsDir = path.join(
   process.cwd(),
@@ -40,7 +39,6 @@ type Filenames = {
   certifications: string[];
   licenses: string[];
   licenseTasks: string[];
-  anytimeActionLinks: string[];
   anytimeActionTasks: string[];
   anytimeActionLicenseReinstatements: string[];
 };
@@ -85,7 +83,6 @@ const getFilenames = (): Filenames => {
     certifications: fs.readdirSync(certificationsDir),
     licenses: fs.readdirSync(licensesDir),
     licenseTasks: fs.readdirSync(licenseTasksDir),
-    anytimeActionLinks: fs.readdirSync(anytimeActionLinksDir),
     anytimeActionTasks: fs.readdirSync(anytimeActionTasksDir),
     anytimeActionLicenseReinstatements: fs.readdirSync(anytimeActionLicenseReinstatementsDir),
   };
@@ -255,9 +252,6 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     }),
     ...filenames.certifications.map((it) => {
       return `/certification/${it.split(".md")[0]}`;
-    }),
-    ...filenames.anytimeActionLinks.map((it) => {
-      return `/anytime-action-links/${it.split(".md")[0]}`;
     }),
     ...filenames.anytimeActionTasks.map((it) => {
       return `/anytime-action-tasks/${it.split(".md")[0]}`;
