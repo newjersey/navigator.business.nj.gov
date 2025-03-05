@@ -7,7 +7,6 @@ import { MatchCollection } from "@/components/search/MatchCollection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { searchAnytimeActionLicenseReinstatements } from "@/lib/search/searchAnytimeActionLicenseReinstatement";
-import { searchAnytimeActionLinks } from "@/lib/search/searchAnytimeActionLinks";
 import { searchAnytimeActionTasks } from "@/lib/search/searchAnytimeActionTasks";
 import { searchCertifications } from "@/lib/search/searchCertifications";
 import { searchConfig } from "@/lib/search/searchConfig";
@@ -24,7 +23,6 @@ import { searchWebflowLicenses } from "@/lib/search/searchWebflowLicenses";
 import { GroupedConfigMatch, Match } from "@/lib/search/typesForSearch";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
 import { loadAllAnytimeActionLicenseReinstatements } from "@/lib/static/loadAnytimeActionLicenseReinstatements";
-import { loadAllAnytimeActionLinks } from "@/lib/static/loadAnytimeActionLinks";
 import { loadAllAnytimeActionTasks } from "@/lib/static/loadAnytimeActionTasks";
 import { loadAllArchivedCertifications, loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadCmsConfig } from "@/lib/static/loadCmsConfig";
@@ -44,7 +42,6 @@ import {
 import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
 import {
   AnytimeActionLicenseReinstatement,
-  AnytimeActionLink,
   AnytimeActionTask,
   Certification,
   ContextualInfoFile,
@@ -87,7 +84,6 @@ interface Props {
   archivedContextualInfo: ContextualInfoFile[];
   licenseCalendarEvents: LicenseEventType[];
   anytimeActionTasks: AnytimeActionTask[];
-  anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   pageMetaData: PageMetadata[];
   cmsConfig: any;
@@ -115,7 +111,6 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [anytimeActionLicenseReinstatementMatches, setAnytimeActionLicenseReinstatementMatches] = useState<
     Match[]
   >([]);
-  const [anytimeActionLinkMatches, setAnytimeActionLinkMatches] = useState<Match[]>([]);
   const [sidebarCardMatches, setSidebarCardMatches] = useState<Match[]>([]);
   const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>([]);
   const [archivedContextualInfoMatches, setArchivedContextualInfoMatches] = useState<Match[]>([]);
@@ -152,7 +147,6 @@ const SearchContentPage = (props: Props): ReactElement => {
     setIndustryMatches(
       searchIndustries(getIndustries({ overrideShowDisabledIndustries: true }), lowercaseTerm)
     );
-    setAnytimeActionLinkMatches(searchAnytimeActionLinks(props.anytimeActionLinks, lowercaseTerm));
     setAnytimeActionTaskMatches(searchAnytimeActionTasks(props.anytimeActionTasks, lowercaseTerm));
     setAnytimeActionLicenseReinstatementMatches(
       searchAnytimeActionLicenseReinstatements(props.anytimeActionLicenseReinstatements, lowercaseTerm)
@@ -206,7 +200,6 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...contextualInfoMatches,
         ...groupedConfigMatches,
         ...anytimeActionTaskMatches,
-        ...anytimeActionLinkMatches,
         ...anytimeActionLicenseReinstatementMatches,
       ].length === 0
     );
@@ -252,7 +245,6 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const anytimeActionCollection = {
     "Anytime Action Tasks": anytimeActionTaskMatches,
-    "Anytime Action Links": anytimeActionLinkMatches,
     "Anytime Action License Reinstatements": anytimeActionLicenseReinstatementMatches,
   };
 
@@ -334,7 +326,6 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       archivedContextualInfo: loadAllArchivedContextualInfo(),
       licenseCalendarEvents: loadAllLicenseCalendarEvents(),
       anytimeActionTasks: loadAllAnytimeActionTasks(),
-      anytimeActionLinks: loadAllAnytimeActionLinks(),
       anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
       pageMetaData: loadAllPageMetadata(),
       cmsConfig: loadCmsConfig(),
