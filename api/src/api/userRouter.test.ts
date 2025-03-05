@@ -744,6 +744,15 @@ describe("userRouter", () => {
       expect(response.body).toEqual({ error: "`email` property required." });
     });
 
+    it("converts email to lowercase before lookup", async () => {
+      const mixedCaseEmails = ["User@EXAMPLE.com", "USERNAME@gmail.COM", "MixedCase@COMPANY.com"];
+
+      for (const mixedCaseEmail of mixedCaseEmails) {
+        await sendRequest({ email: mixedCaseEmail });
+        expect(stubUnifiedDataClient.findByEmail).toHaveBeenCalledWith(mixedCaseEmail.toLowerCase());
+      }
+    });
+
     it("looks up a user by email that does not exist and returns an error", async () => {
       // eslint-disable-next-line unicorn/no-useless-undefined
       stubUnifiedDataClient.findByEmail.mockResolvedValue(undefined);
