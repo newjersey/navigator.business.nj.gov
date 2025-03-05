@@ -52,12 +52,10 @@ For vehicles, you will need:
 * Proof of ownership, such as a Manufacturer’s Certificate of Origin (MCO)
 * [Universal Title Application (Form OS/SS-UTA)](https://www.nj.gov/mvc/pdf/vehicles/OS-SS-UTA.pdf)
 * Proof of Identity, such as a valid driver’s license or other government-issued photo identification
-* Proof of current insurance, such as a card or policy declaration page
 * Lienholder information if adding or removing a lien from a title
 * Odometer disclosure statement if the vehicle is less than 10 years old
 * Notarized Power of Attorney if acting on behalf of the business owner
 * Proof of sales tax payment or exemption
-* Emissions or Safety Inspection Certificate for certain passenger, commercial, and out-of-state vehicles
 * Bill of sale if the vehicle was purchased from a private seller
 * Proof of address, to confirm New Jersey residency
 
