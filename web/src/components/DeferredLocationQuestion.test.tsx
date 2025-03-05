@@ -18,7 +18,8 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 function setupMockAnalytics(): typeof analytics {
   return {
@@ -91,6 +92,7 @@ describe("<DeferredLocationQuestion />", () => {
   });
 
   describe("when saving location", () => {
+    const user = userEvent.setup();
     const newark = generateMunicipality({ displayName: "Newark" });
     const absecon = generateMunicipality({ displayName: "Absecon" });
     const business = generateBusiness({ profileData: generateProfileData({ municipality: undefined }) });
@@ -103,7 +105,7 @@ describe("<DeferredLocationQuestion />", () => {
       });
 
       selectLocationByText("Newark");
-      fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
+      await user.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
       await screen.findByTestId("city-success-banner");
     };
 
@@ -120,29 +122,32 @@ describe("<DeferredLocationQuestion />", () => {
 
     it("shows location question when edit button is clicked", async () => {
       await selectNewarkAndSave();
-      fireEvent.click(screen.getByText(Config.deferredLocation.editText));
+      await user.click(screen.getByText(Config.deferredLocation.editText));
       expect(screen.getByText(Config.deferredLocation.header)).toBeInTheDocument();
       expect(screen.queryByTestId("city-success-banner")).not.toBeInTheDocument();
     });
 
     it("shows inner content when saving location after editing", async () => {
+      const user = userEvent.setup();
       await selectNewarkAndSave();
-      fireEvent.click(screen.getByText(Config.deferredLocation.editText));
+      await user.click(screen.getByText(Config.deferredLocation.editText));
       selectLocationByText("Absecon");
-      fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
+      await user.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
       await screen.findByTestId("city-success-banner");
       expect(screen.getByText("inner-content")).toBeInTheDocument();
     });
 
     it("removes municipality from user profile when clicking remove button", async () => {
+      const user = userEvent.setup();
       await selectNewarkAndSave();
-      fireEvent.click(screen.getByText(Config.deferredLocation.removeText));
+      await user.click(screen.getByText(Config.deferredLocation.removeText));
       expect(currentBusiness().profileData.municipality).toEqual(undefined);
     });
 
     it("shows question and removes inner-content/success banner when removing location", async () => {
+      const user = userEvent.setup();
       await selectNewarkAndSave();
-      fireEvent.click(screen.getByText(Config.deferredLocation.removeText));
+      await user.click(screen.getByText(Config.deferredLocation.removeText));
       expect(screen.getByText(Config.deferredLocation.header)).toBeInTheDocument();
       expect(screen.queryByTestId("city-success-banner")).not.toBeInTheDocument();
       expect(screen.queryByText("inner-content")).not.toBeInTheDocument();

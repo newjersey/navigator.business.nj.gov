@@ -16,7 +16,7 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
@@ -127,34 +127,38 @@ describe("<Header />", () => {
   });
 
   describe("go to profile link", () => {
-    it("displays guest mode content when user is not authenticated and routes to profile page on button click", () => {
+    it("displays guest mode content when user is not authenticated and routes to profile page on button click", async () => {
       useMockProfileData({
         businessName: "Business Name",
         legalStructureId: randomPublicFilingLegalStructure(),
       });
+      const user = userEvent.setup();
       renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
-      fireEvent.click(screen.getByText(Config.dashboardHeaderDefaults.guestModeToProfileButtonText));
+      await user.click(screen.getByText(Config.dashboardHeaderDefaults.guestModeToProfileButtonText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
     });
 
-    it("displays generic content when business name is not an empty string and user is authenticated then routes to profile page on button click", () => {
+    it("displays generic content when business name is not an empty string and user is authenticated then routes to profile page on button click", async () => {
       useMockProfileData({ businessName: "", legalStructureId: randomPublicFilingLegalStructure() });
+      const user = userEvent.setup();
       renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
-      fireEvent.click(screen.getByText(Config.dashboardHeaderDefaults.genericToProfileButtonText));
+      await user.click(screen.getByText(Config.dashboardHeaderDefaults.genericToProfileButtonText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
     });
 
-    it("displays generic content when trade name is undefined and user is authenticated then routes to profile page on button click", () => {
+    it("displays generic content when trade name is undefined and user is authenticated then routes to profile page on button click", async () => {
       useMockProfileData({ tradeName: undefined, legalStructureId: randomTradeNameLegalStructure() });
+      const user = userEvent.setup();
       renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
-      fireEvent.click(screen.getByText(Config.dashboardHeaderDefaults.genericToProfileButtonText));
+      await user.click(screen.getByText(Config.dashboardHeaderDefaults.genericToProfileButtonText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
     });
 
-    it("displays generic content when business name is undefined and user is authenticated then routes to profile page on button click", () => {
+    it("displays generic content when business name is undefined and user is authenticated then routes to profile page on button click", async () => {
       useMockProfileData({ businessName: undefined, legalStructureId: randomPublicFilingLegalStructure() });
+      const user = userEvent.setup();
       renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
-      fireEvent.click(screen.getByText(Config.dashboardHeaderDefaults.genericToProfileButtonText));
+      await user.click(screen.getByText(Config.dashboardHeaderDefaults.genericToProfileButtonText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
     });
 

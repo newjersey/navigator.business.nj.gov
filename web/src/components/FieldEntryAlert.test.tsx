@@ -2,7 +2,8 @@ import { FieldEntryAlert } from "@/components/FieldEntryAlert";
 import { AlertVariants } from "@/components/njwds-extended/Alert";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 
@@ -90,6 +91,7 @@ describe("<FieldEntryAlert/>", () => {
 
   it("calls shallow routing to asPath value", async () => {
     useMockRouter({ asPath: "welcome/2" });
+    const user = userEvent.setup();
     render(
       <FieldEntryAlert
         alertMessage={alertMessage}
@@ -100,7 +102,7 @@ describe("<FieldEntryAlert/>", () => {
       />
     );
 
-    fireEvent.click(screen.getByText("Field Name"));
+    await user.click(screen.getByText("Field Name"));
 
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalledWith("welcome/2", undefined, { shallow: true });

@@ -43,7 +43,7 @@ export const MgmtAuth = (props: Props): ReactElement => {
         name="password"
         variant="outlined"
         type="password"
-        value={password}
+        defaultValue={password}
         error={hasError}
         helperText={hasError ? "Authentication failed" : ""}
         onChange={handlePasswordInput}

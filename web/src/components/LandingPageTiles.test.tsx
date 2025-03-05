@@ -2,7 +2,8 @@ import { LandingPageTiles } from "@/components/LandingPageTiles";
 import { getMergedConfig } from "@/contexts/configContext";
 import analytics from "@/lib/utils/analytics";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 
@@ -57,9 +58,10 @@ describe("<LandingPageTiles />", () => {
   });
 
   it("routes user to industry selection when the starting a business button is clicked", async () => {
+    const user = userEvent.setup();
     render(<LandingPageTiles />);
 
-    fireEvent.click(screen.getByText(Config.landingPage.landingPageRegisterBizTile));
+    await user.click(screen.getByText(Config.landingPage.landingPageRegisterBizTile));
 
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "starting" } });
     expect(
@@ -68,9 +70,10 @@ describe("<LandingPageTiles />", () => {
   });
 
   it("routes user to out-of-state business section when the out-of-state business button is clicked", async () => {
+    const user = userEvent.setup();
     render(<LandingPageTiles />);
 
-    fireEvent.click(screen.getByText(Config.landingPage.landingPageOutOfStateTile));
+    await user.click(screen.getByText(Config.landingPage.landingPageOutOfStateTile));
 
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "out-of-state" } });
     expect(
@@ -79,9 +82,10 @@ describe("<LandingPageTiles />", () => {
   });
 
   it("routes user to business status section when the running a business button is clicked", async () => {
+    const user = userEvent.setup();
     render(<LandingPageTiles />);
 
-    fireEvent.click(screen.getByText(Config.landingPage.landingPageTaxesTile));
+    await user.click(screen.getByText(Config.landingPage.landingPageTaxesTile));
 
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "up-and-running" } });
     expect(
@@ -90,9 +94,10 @@ describe("<LandingPageTiles />", () => {
   });
 
   it("routes user to business status section when the fundings a business button is clicked", async () => {
+    const user = userEvent.setup();
     render(<LandingPageTiles />);
 
-    fireEvent.click(screen.getByText(Config.landingPage.landingPageFundingTile));
+    await user.click(screen.getByText(Config.landingPage.landingPageFundingTile));
 
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "up-and-running" } });
     expect(
@@ -101,9 +106,10 @@ describe("<LandingPageTiles />", () => {
   });
 
   it("routes user to industry selection section when the start business a business button is clicked", async () => {
+    const user = userEvent.setup();
     render(<LandingPageTiles />);
 
-    fireEvent.click(screen.getByText(Config.landingPage.landingPageStartBizTile));
+    await user.click(screen.getByText(Config.landingPage.landingPageStartBizTile));
 
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "starting" } });
     expect(
@@ -112,9 +118,10 @@ describe("<LandingPageTiles />", () => {
   });
 
   it("routes user to business status section when the I'm running a business button is clicked", async () => {
+    const user = userEvent.setup();
     render(<LandingPageTiles />);
 
-    fireEvent.click(screen.getByText(Config.landingPage.landingPageRunBizTile));
+    await user.click(screen.getByText(Config.landingPage.landingPageTileRunBizTile));
 
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "up-and-running" } });
     expect(
