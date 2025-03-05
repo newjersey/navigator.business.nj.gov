@@ -1,7 +1,10 @@
 ---
-notesMd: "Working doc:
-  https://docs.google.com/document/d/1qc868sPE0u3y1DgG_6f9Jh-DgfOchm3wGEhmP5utr\
-  sA/edit?tab=t.0"
+notesMd: >-
+  Working doc:
+  https://docs.google.com/document/d/1qc868sPE0u3y1DgG_6f9Jh-DgfOchm3wGEhmP5utrsA/edit?tab=t.0
+
+
+  3.5.25: SME review complete
 licenseName: ""
 urlSlug: authorization-architect-certificate
 expirationEventDisplayName: "Architecture Certificate of Authorization Expiration "
