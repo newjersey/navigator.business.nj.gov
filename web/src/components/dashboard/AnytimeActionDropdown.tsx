@@ -7,7 +7,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { AnytimeActionLicenseReinstatement, AnytimeActionLink, AnytimeActionTask } from "@/lib/types/types";
+import { AnytimeActionLicenseReinstatement, AnytimeActionTask } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { Autocomplete, TextField, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/compat/router";
@@ -15,11 +15,10 @@ import { ChangeEvent, type ReactElement, useState } from "react";
 
 interface Props {
   anytimeActionTasks: AnytimeActionTask[];
-  anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
 }
 
-type AnytimeAction = AnytimeActionTask | AnytimeActionLink | AnytimeActionLicenseReinstatement;
+type AnytimeAction = AnytimeActionTask | AnytimeActionLicenseReinstatement;
 type AnytimeActionWithTypeAndCategory = AnytimeAction & { type: string; category: string[] };
 
 export const AnytimeActionDropdown = (props: Props): ReactElement => {
@@ -62,16 +61,6 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
   };
 
   const getApplicableAnytimeActions = (): AnytimeActionWithTypeAndCategory[] => {
-    const anytimeActionLinkWithType = props.anytimeActionLinks
-      .filter((action) => findMatch(action))
-      .map((action) => {
-        return {
-          ...action,
-          type: "link",
-          category: ["Sell or Close My Business"],
-        };
-      });
-
     const anytimeActionTasksWithType = props.anytimeActionTasks
       .filter((action) => findMatch(action))
       .map((action) => {
@@ -98,7 +87,6 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
     const applicableAnytimeActions: AnytimeActionWithTypeAndCategory[] = [];
 
     applicableAnytimeActions.push(...anytimeActionTasksWithType);
-    applicableAnytimeActions.push(...anytimeActionLinkWithType);
     applicableAnytimeActions.push(...anytimeActionLicenseReinstatementsWithType);
 
     reverseAlphabetizeByCategory(applicableAnytimeActions);
@@ -106,7 +94,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
     return applicableAnytimeActions;
   };
 
-  const findMatch = (action: AnytimeActionTask | AnytimeActionLink): boolean => {
+  const findMatch = (action: AnytimeActionTask): boolean => {
     if ("category" in action && action.category[0] === "Only Show in Subtask") return false;
     if (action.applyToAllUsers) return true;
     if (action.industryIds && industryId && action.industryIds.includes(industryId)) return true;
@@ -114,9 +102,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
     return !!(action.sectorIds && sectorId && action.sectorIds.includes(sectorId));
   };
 
-  const isAnytimeActionFromNonEssentialQuestions = (
-    action: AnytimeActionTask | AnytimeActionLink
-  ): boolean => {
+  const isAnytimeActionFromNonEssentialQuestions = (action: AnytimeActionTask): boolean => {
     switch (action.filename) {
       case "carnival-ride-supplemental-modification":
         return !!business?.profileData.carnivalRideOwningBusiness;
@@ -271,9 +257,6 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
                       (selectedAnytimeAction as AnytimeActionLicenseReinstatement).urlSlug
                     }`
                   );
-                }
-                if (selectedAnytimeAction?.type === "link") {
-                  router.push((selectedAnytimeAction as AnytimeActionLink).externalRoute);
                 }
               }}
             >

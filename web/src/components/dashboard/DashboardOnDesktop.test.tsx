@@ -2,7 +2,6 @@ import { DashboardOnDesktop } from "@/components/dashboard/DashboardOnDesktop";
 import { getMergedConfig } from "@/contexts/configContext";
 import {
   AnytimeActionLicenseReinstatement,
-  AnytimeActionLink,
   AnytimeActionTask,
   LicenseEventType,
   OperateReference,
@@ -10,7 +9,6 @@ import {
   SidebarCardContent,
 } from "@/lib/types/types";
 import {
-  generateAnytimeActionLink,
   generateAnytimeActionTask,
   generateBusinessPersona,
   generateSidebarCardContent,
@@ -80,14 +78,12 @@ describe("<DashboardOnDesktop />", () => {
   const renderDashboardComponent = ({
     sidebarDisplayContent,
     operateReferences,
-    anytimeActionLinks,
     anytimeActionTasks,
     anytimeActionLicenseReinstatements,
     licenseEvents,
   }: {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     operateReferences?: Record<string, OperateReference>;
-    anytimeActionLinks?: AnytimeActionLink[];
     anytimeActionTasks?: AnytimeActionTask[];
     anytimeActionLicenseReinstatements?: AnytimeActionLicenseReinstatement[];
     licenseEvents?: LicenseEventType[];
@@ -99,7 +95,6 @@ describe("<DashboardOnDesktop />", () => {
           displayContent={createDisplayContent(sidebarDisplayContent)}
           fundings={[]}
           certifications={[]}
-          anytimeActionLinks={anytimeActionLinks ?? []}
           anytimeActionTasks={anytimeActionTasks ?? []}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatements ?? []}
           licenseEvents={licenseEvents ?? []}
@@ -119,7 +114,6 @@ describe("<DashboardOnDesktop />", () => {
             displayContent={createDisplayContent()}
             fundings={[]}
             certifications={[]}
-            anytimeActionLinks={[]}
             anytimeActionTasks={[]}
             anytimeActionLicenseReinstatements={[]}
             licenseEvents={[]}
@@ -431,7 +425,6 @@ describe("<DashboardOnDesktop />", () => {
       (phase) => {
         useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
         renderDashboardComponent({
-          anytimeActionLinks: [generateAnytimeActionLink({})],
           anytimeActionTasks: [generateAnytimeActionTask({})],
         });
 
@@ -442,7 +435,6 @@ describe("<DashboardOnDesktop />", () => {
     it.each(operatingPhasesWithAnytimeActions)("displays anytime action section for %s", (phase) => {
       useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
       renderDashboardComponent({
-        anytimeActionLinks: [generateAnytimeActionLink({})],
         anytimeActionTasks: [generateAnytimeActionTask({})],
       });
 

@@ -2,7 +2,6 @@ import { ActiveUser } from "@/lib/auth/AuthContext";
 import {
   AllCounties,
   AnytimeActionLicenseReinstatement,
-  AnytimeActionLink,
   AnytimeActionTask,
   Certification,
   County,
@@ -322,18 +321,6 @@ export const generateAnytimeActionLicenseReinstatement = (
     issuingAgency: `some-issusing-agency-${randomInt()}`,
     summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
     licenseName: randomElementFromArray(Object.values(taskIdLicenseNameMapping)),
-    ...overrides,
-  };
-};
-
-export const generateAnytimeActionLink = (overrides: Partial<AnytimeActionLink>): AnytimeActionLink => {
-  return {
-    filename: `some-filename-${randomInt()}`,
-    name: `some-name-${randomInt()}`,
-    externalRoute: `some-external-route-${randomInt()}`,
-    industryIds: [`some-industry-id-${randomInt()}`],
-    sectorIds: [`some-sector-id-${randomInt()}`],
-    applyToAllUsers: false,
     ...overrides,
   };
 };

@@ -2,7 +2,6 @@ import { DashboardOnMobile } from "@/components/dashboard/DashboardOnMobile";
 import { getMergedConfig } from "@/contexts/configContext";
 import {
   AnytimeActionLicenseReinstatement,
-  AnytimeActionLink,
   AnytimeActionTask,
   LicenseEventType,
   OperateReference,
@@ -10,7 +9,6 @@ import {
   SidebarCardContent,
 } from "@/lib/types/types";
 import {
-  generateAnytimeActionLink,
   generateAnytimeActionTask,
   generateBusinessPersona,
   generateSidebarCardContent,
@@ -93,14 +91,12 @@ describe("<DashboardOnMobile />", () => {
   const renderDashboardComponent = ({
     sidebarDisplayContent,
     operateReferences,
-    anytimeActionLinks,
     anytimeActionTasks,
     anytimeActionLicenseReinstatements,
     licenseEvents,
   }: {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     operateReferences?: Record<string, OperateReference>;
-    anytimeActionLinks?: AnytimeActionLink[];
     anytimeActionTasks?: AnytimeActionTask[];
     anytimeActionLicenseReinstatements?: AnytimeActionLicenseReinstatement[];
     licenseEvents?: LicenseEventType[];
@@ -112,7 +108,6 @@ describe("<DashboardOnMobile />", () => {
           displayContent={createDisplayContent(sidebarDisplayContent)}
           fundings={[]}
           certifications={[]}
-          anytimeActionLinks={anytimeActionLinks ?? []}
           anytimeActionTasks={anytimeActionTasks ?? []}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatements ?? []}
           licenseEvents={licenseEvents ?? []}
@@ -132,7 +127,6 @@ describe("<DashboardOnMobile />", () => {
             displayContent={createDisplayContent()}
             fundings={[]}
             certifications={[]}
-            anytimeActionLinks={[]}
             anytimeActionTasks={[]}
             anytimeActionLicenseReinstatements={[]}
             licenseEvents={[]}
@@ -451,7 +445,6 @@ describe("<DashboardOnMobile />", () => {
       (phase) => {
         useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
         renderDashboardComponent({
-          anytimeActionLinks: [generateAnytimeActionLink({})],
           anytimeActionTasks: [generateAnytimeActionTask({})],
         });
 
@@ -462,7 +455,6 @@ describe("<DashboardOnMobile />", () => {
     it.each(operatingPhasesWithAnytimeActions)("displays anytime action section for %s", (phase) => {
       useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
       renderDashboardComponent({
-        anytimeActionLinks: [generateAnytimeActionLink({})],
         anytimeActionTasks: [generateAnytimeActionTask({})],
       });
 

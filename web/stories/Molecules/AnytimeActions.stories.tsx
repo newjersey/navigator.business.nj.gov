@@ -1,9 +1,5 @@
 import { AnytimeActionDropdown } from "@/components/dashboard/AnytimeActionDropdown";
-import {
-  generateAnytimeActionLicenseReinstatement,
-  generateAnytimeActionLink,
-  generateAnytimeActionTask,
-} from "@/test/factories";
+import { generateAnytimeActionLicenseReinstatement, generateAnytimeActionTask } from "@/test/factories";
 import { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof AnytimeActionDropdown> = {
@@ -23,7 +19,6 @@ type Story = StoryObj<typeof AnytimeActionDropdown>;
 export const AnytimeAction: Story = {
   args: {
     anytimeActionTasks: [generateAnytimeActionTask({ name: "Some Anytime Action Text - Licenses Task" })],
-    anytimeActionLinks: [generateAnytimeActionLink({ name: "Some Anytime Action Text - Link" })],
     anytimeActionLicenseReinstatements: [
       generateAnytimeActionLicenseReinstatement({
         name: "Some Anytime Action Text - License",

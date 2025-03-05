@@ -58,7 +58,6 @@ export const cmsCollections = [
     children: [
       "Anytime Action Tasks",
       "Anytime Action With Consumer Affairs License Integrations (Reinstatements)",
-      "Anytime Action License External Link Only",
     ],
   },
   {
