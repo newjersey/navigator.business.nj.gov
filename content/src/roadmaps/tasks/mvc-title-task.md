@@ -59,7 +59,7 @@ For vehicles, you will need:
 * Proof of sales tax payment or exemption
 * Emissions or Safety Inspection Certificate for certain passenger, commercial, and out-of-state vehicles
 * Bill of sale if the vehicle was purchased from a private seller
-  Proof of address, to confirm New Jersey residency
+* Proof of address, to confirm New Jersey residency
 
 For vessels, you will need:
 
