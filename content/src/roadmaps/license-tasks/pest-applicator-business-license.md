@@ -38,8 +38,8 @@ licenseCertificationClassification: undefined
 * Name and phone number of the [liability insurance agent](https://www.nj.gov/dep/enforcement/pcp/bpo/certification/forms/insurance_coverage_verification_vpi-001-fillable.pdf)
 * Applicable fees paid
 
+Email the [pesticide applicator business license application (VPA-013) form](https://www.nj.gov/dep/enforcement/pcp/bpo/certification/forms/ab_license_application_vpa-013_fillable.pdf) to pestcertcourses@dep.nj.gov.
 :::infoAlert
-Email the pesticide applicator business license application ([VPA-013](https://www.nj.gov/dep/enforcement/pcp/bpo/certification/forms/ab_license_application_vpa-013_fillable.pdf)) form to pestcertcourses@dep.nj.gov.
 
 You will receive a license invoice from the Department of Environmental Protection (DEP). You must pay the fee for the license to be valid.
 :::
