@@ -63,7 +63,8 @@
   ],
   "name": "Pest Control",
   "nonEssentialQuestionsIds": [
-    "pest-pesticide-dealer-biz-licensing"
+    "pest-pesticide-dealer-biz-licensing",
+    "pest-pesticide-dealer-licensing"
   ],
   "displayname": "pest-control",
   "industryOnboardingQuestions": {
