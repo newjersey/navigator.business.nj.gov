@@ -1,4 +1,4 @@
-import { DataField } from "@/components/data-fields/DataField";
+import { ProfileDataField } from "@/components/data-fields/ProfileDataField";
 import { ReactElement } from "react";
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
 
 export const Notes = (props: Props): ReactElement => {
   return (
-    <DataField
+    <ProfileDataField
       inputWidth="default"
       fieldName={"notes"}
       fieldOptions={{ multiline: true, minRows: 4, inputProps: { maxLength: "500" } }}

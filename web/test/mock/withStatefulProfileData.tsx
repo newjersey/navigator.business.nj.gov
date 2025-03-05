@@ -18,7 +18,7 @@ export const profileDataWasNotUpdated = helpers.dataWasNotUpdated;
 
 export const profileDataUpdatedNTimes = helpers.dataUpdatedNTimes;
 
-export const WithStatefulProfileFormContext = ({ children }: { children: ReactNode }): ReactElement => {
+export const WithStatefulDataFieldFormContext = ({ children }: { children: ReactNode }): ReactElement => {
   const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
   return <ProfileFormContext.Provider value={formContextState}>{children}</ProfileFormContext.Provider>;
 };
@@ -38,7 +38,7 @@ export const WithStatefulProfileData = ({
   }, [genericData]);
 
   return (
-    <WithStatefulProfileFormContext>
+    <WithStatefulDataFieldFormContext>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -52,6 +52,6 @@ export const WithStatefulProfileData = ({
       >
         {children}
       </ProfileDataContext.Provider>{" "}
-    </WithStatefulProfileFormContext>
+    </WithStatefulDataFieldFormContext>
   );
 };

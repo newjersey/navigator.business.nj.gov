@@ -1,16 +1,16 @@
 /* eslint-disable unicorn/filename-case */
 
-import { DataField, DataFieldProps } from "@/components/data-fields/DataField";
+import { ProfileDataField, ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
 import { TextFieldProps } from "@mui/material";
 import { ReactElement } from "react";
 
-interface Props extends Omit<DataFieldProps, "fieldName" | "inputWidth"> {
+interface Props extends Omit<ProfileDataFieldProps, "fieldName" | "inputWidth"> {
   fieldOptions?: TextFieldProps;
 }
 
 export const NexusDBANameField = (props: Props): ReactElement => {
   return (
-    <DataField
+    <ProfileDataField
       fieldName={"nexusDbaName"}
       fieldOptions={{
         inputProps: { "data-testid": "nexusDBAName" },

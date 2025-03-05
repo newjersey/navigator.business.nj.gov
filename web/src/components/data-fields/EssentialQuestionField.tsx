@@ -2,12 +2,12 @@ import { RadioQuestion } from "@/components/data-fields/RadioQuestion";
 import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { FormContextFieldProps } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileContentField, ProfileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { EssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
+import { FormContextFieldProps, ProfileContentField } from "@/lib/types/types";
 import { IndustrySpecificData, industrySpecificDataChoices } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
