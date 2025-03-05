@@ -14,7 +14,6 @@ import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBus
 import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import {
   AnytimeActionLicenseReinstatement,
-  AnytimeActionLink,
   AnytimeActionTask,
   Certification,
   Funding,
@@ -28,7 +27,6 @@ import { ReactElement } from "react";
 
 interface Props {
   anytimeActionTasks: AnytimeActionTask[];
-  anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   displayContent: RoadmapDisplayContent;
   operateReferences: Record<string, OperateReference>;
@@ -72,7 +70,6 @@ export const DashboardOnDesktop = (props: Props): ReactElement => {
                 {operatingPhase.displayAnytimeActions && (
                   <AnytimeActionDropdown
                     anytimeActionTasks={props.anytimeActionTasks}
-                    anytimeActionLinks={props.anytimeActionLinks}
                     anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
                   />
                 )}
