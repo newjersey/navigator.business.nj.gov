@@ -13,12 +13,19 @@ export const selfRegRouterFactory = (
 
   router.post("/self-reg", async (req, res) => {
     const userData = req.body as UserData;
+    const cleanedUserData: UserData = {
+      ...userData,
+      user: {
+        ...userData.user,
+        email: userData.user.email.toLowerCase(),
+      },
+    };
 
     try {
-      const selfRegResponse = await (userData.user.myNJUserKey
-        ? selfRegClient.resume(userData.user.myNJUserKey)
-        : selfRegClient.grant(userData.user));
-      const updatedUserData = await updateMyNJKey(userData, selfRegResponse.myNJUserKey);
+      const selfRegResponse = await (cleanedUserData.user.myNJUserKey
+        ? selfRegClient.resume(cleanedUserData.user.myNJUserKey)
+        : selfRegClient.grant(cleanedUserData.user));
+      const updatedUserData = await updateMyNJKey(cleanedUserData, selfRegResponse.myNJUserKey);
       res.json({ authRedirectURL: selfRegResponse.authRedirectURL, userData: updatedUserData });
     } catch (error) {
       const message = (error as Error).message;
