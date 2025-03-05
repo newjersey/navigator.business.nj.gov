@@ -8,8 +8,8 @@ name: Apply for Your Pesticide Dealer Business License
 webflowName: " Pest Control: Pesticide Dealer Business License"
 summaryDescriptionMd: >-
   You must apply for your `pesticide|pesticide` dealer business license if your
-  business is responsible for distributing or selling restricted use pesticide
-  products.
+  business is responsible for distributing or selling `restricted use
+  pesticide|restricted-use-pesticides` products.
 
 
   If you have more than one location, you will need a separate license for each one.
@@ -18,6 +18,8 @@ industryId:
   - pest-control
 callToActionText: Apply for My Pesticide Dealer Business License
 callToActionLink: https://www.nj.gov/dep/enforcement/pcp/bpo-busdeal.htm
+agencyId: njdep
+divisionPhone: (609) 984-6568
 ---
 ## Application Requirements
 
