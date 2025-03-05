@@ -34,7 +34,7 @@ summaryDescriptionMd: >-
 
   * Does not have a title (this is rare)
 
-  * Is a boat or watercraft (vessel), longer than twelve feet, that is owned by someone other than the intended business owner
+  * Is a boat or watercraft (vessel), longer than 12 feet, that is owned by someone other than the intended business owner
 urlSlug: mvc-title-task
 displayname: mvc-title-task
 name: Get a Title for Your Business Vehicle(s)
@@ -45,19 +45,18 @@ agencyId: nj-motor-vehicle
 formName: OS/SS-UTA
 ---
 ## Application Requirements
-
 For vehicles, you will need:
 
-* Motor Vehicle Commission `(MVC) Entity Identification Number (EIN)|mvc-entity-id` 
+* Motor Vehicle Commission `(MVC) Entity Identification Number (EIN)|mvc-entity-id`
 * Proof of ownership, such as a Manufacturer’s Certificate of Origin (MCO)
 * [Universal Title Application (Form OS/SS-UTA)](https://www.nj.gov/mvc/pdf/vehicles/OS-SS-UTA.pdf)
 * Proof of Identity, such as a valid driver’s license or other government-issued photo identification
 * Lienholder information if adding or removing a lien from a title
 * Odometer disclosure statement if the vehicle is less than 10 years old
-* Notarized Power of Attorney if acting on behalf of the business owner
+* Notarized power of attorney if acting on behalf of the business owner
 * Proof of sales tax payment or exemption
 * Bill of sale if the vehicle was purchased from a private seller
-* Proof of address, to confirm New Jersey residency
+* Proof of address to confirm New Jersey residency
 
 For vessels, you will need:
 
@@ -68,17 +67,13 @@ For vessels, you will need:
 * USCG documentation, if the vessel is documented with the U.S. Coast Guard
 
 :::infoAlert 
- You must apply for a title in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). To save time, [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8).
+ You must apply for a title in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). Be sure to [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8) before showing up.
 :::
-
-&nbsp;
 
 **Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov
 
 :::callout{ showHeader="true" headerText="What if I don't get a title?" showIcon="false" calloutType="warning" }
-
-If you operate a vehicle or vessel under a individual's name for business purposes, you may be subject to vehicle impoundment, fines, or eligibility issues with your insurance.
-
+If you operate a vehicle or vessel under an individual's name for business purposes, you may be subject to vehicle impoundment, fines, or eligibility issues with your insurance.
 :::
 
 :::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
