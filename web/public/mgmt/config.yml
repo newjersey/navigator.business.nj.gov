@@ -1146,6 +1146,7 @@ collections:
                       name: "confirmationNumberLabel",
                       widget: "markdown",
                     }
+                  - { label: "Survey link", name: "surveyLinkText", widget: "markdown" }
   - name: nexus
     label: "Nexus"
     delete: false
