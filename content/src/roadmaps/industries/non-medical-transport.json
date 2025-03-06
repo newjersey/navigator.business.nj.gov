@@ -49,13 +49,6 @@
     },
     {
       "step": 3,
-      "weight": 20,
-      "licenseTask": "",
-      "required": true,
-      "task": "mvc-registration-task"
-    },
-    {
-      "step": 3,
       "weight": 30,
       "task": "logisticare"
     },
@@ -64,6 +57,13 @@
       "weight": 17,
       "task": "transportation-entity-id",
       "required": true
+    },
+    {
+      "step": 3,
+      "weight": 20,
+      "licenseTask": "",
+      "required": true,
+      "task": "mvc-registration-task"
     }
   ],
   "name": "Non-Medical Transport",
