@@ -1,5 +1,5 @@
 ---
-licenseName: ""
+licenseName: "Public Movers and Warehousemen"
 id: moving-company-license
 displayname: moving-company-license
 urlSlug: movers-warehousemen-license
