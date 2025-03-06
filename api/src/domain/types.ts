@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { EmergencyTripPermitSubmitResponse } from "@client/AbcEmergencyTripPermitHelpers";
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
@@ -7,6 +8,7 @@ import {
   ElevatorSafetyDeviceInspectionDetails,
   ElevatorSafetyRegistrationSummary,
 } from "@shared/elevatorSafety";
+import { EmergencyTripPermitApplicationInfo } from "@shared/emergencyTripPermit";
 import { FireSafetyInspectionResult } from "@shared/fireSafety";
 import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
 import {
@@ -65,6 +67,10 @@ export interface FormationClient {
   ) => Promise<FormationSubmitResponse>;
   getCompletedFiling: (formationId: string) => Promise<GetFilingResponse>;
   health: HealthCheckMethod;
+}
+
+export interface EmergencyTripPermitClient {
+  apply: (applicationInfo: EmergencyTripPermitApplicationInfo) => Promise<EmergencyTripPermitSubmitResponse>;
 }
 
 export interface TaxFilingClient {
