@@ -124,16 +124,6 @@
       "questionText": "Will you do management consulting services (not including manufacturing management, physical distribution, and site location consulting)?",
       "id": "logistics-CRTK-survey",
       "addOn": "community-rtk-survey"
-    },
-    {
-      "id": "pest-pesticide-dealer-licensing",
-      "questionText": "Will your business be selling pesticides? \n",
-      "addOn": "pest-pesticide-dealer-biz-license"
-    },
-    {
-      "id": "pest-pesticide-dealer-licensing",
-      "questionText": "Will your business be selling pesticides? ",
-      "addOn": "pest-pesticide-dealer-license"
     }
   ]
 }
