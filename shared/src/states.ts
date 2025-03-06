@@ -116,8 +116,13 @@ export const arrayOfStateShortCodes = [
   "Outside of the USA",
 ] as const;
 
+export const arrayOfStateShortCodesDomestic = arrayOfStateShortCodes.filter(
+  (it) => it !== "Outside of the USA"
+);
+
 export type StateNames = (typeof arrayOfStateNames)[number];
 export type StateShortCodes = (typeof arrayOfStateShortCodes)[number];
+export type StateShortCodesDomestic = (typeof arrayOfStateShortCodesDomestic)[number];
 
 export type StateObject = {
   shortCode: StateShortCodes;
