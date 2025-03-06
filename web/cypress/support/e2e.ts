@@ -35,7 +35,7 @@ beforeEach(function () {
 
   const randomSeed = Date.now().toString();
   // const randomSeed = "hello.";
-  console.log("Random seed:", randomSeed);
+  cy.task("log", `Random seed: ${randomSeed}`);
   seedrandom(randomSeed, { global: true });
 });
 
