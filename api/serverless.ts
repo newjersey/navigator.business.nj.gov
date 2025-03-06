@@ -88,6 +88,10 @@ const useWireMockForFormationAndBusinessSearch =
   process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH || "";
 const useWireMockForGetTaxCalendarSearch = process.env.USE_WIREMOCK_FOR_GET_TAX_CALENDAR_SEARCH || "";
 
+const etpApiAccount = process.env.ABC_ETP_API_ACCOUNT || "";
+const etpApiKey = process.env.ABC_ETP_API_KEY || "";
+const etpApiBaseUrl = process.env.ABC_ETP_API_BASE_URL || "";
+
 const serverlessConfiguration: AWS = {
   useDotenv: true,
   service: "businessnjgov-api",
@@ -242,6 +246,9 @@ const serverlessConfiguration: AWS = {
       BUSINESSES_TABLE: businessesTable,
       USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH: useWireMockForFormationAndBusinessSearch,
       USE_WIREMOCK_FOR_GET_TAX_CALENDAR_SEARCH: useWireMockForGetTaxCalendarSearch,
+      ABC_ETP_API_ACCOUNT: etpApiAccount,
+      ABC_ETP_API_KEY: etpApiKey,
+      ABC_ETP_API_BASE_URL: etpApiBaseUrl,
     } as AwsLambdaEnvironment,
     logRetentionInDays: 180,
   },
