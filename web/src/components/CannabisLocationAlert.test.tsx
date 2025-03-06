@@ -16,6 +16,7 @@ describe("<CannabisLocationAlert />", () => {
   const renderWithBusiness = (industryId?: string): void => {
     const profileData = generateProfileData({ industryId });
     console.log(profileData);
+    expect(Math.random()).toEqual(5);
     const business = generateBusiness({ profileData });
 
     render(
