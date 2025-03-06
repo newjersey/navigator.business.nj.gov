@@ -1,12 +1,8 @@
 import { AnytimeActionDropdown } from "@/components/dashboard/AnytimeActionDropdown";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { AnytimeActionLicenseReinstatement, AnytimeActionLink, AnytimeActionTask } from "@/lib/types/types";
+import { AnytimeActionLicenseReinstatement, AnytimeActionTask } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import {
-  generateAnytimeActionLicenseReinstatement,
-  generateAnytimeActionLink,
-  generateAnytimeActionTask,
-} from "@/test/factories";
+import { generateAnytimeActionLicenseReinstatement, generateAnytimeActionTask } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { randomElementFromArray } from "@businessnjgovnavigator/shared/arrayHelpers";
@@ -40,12 +36,10 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 describe("<AnytimeActionDropdown />", () => {
-  let anytimeActionLinks: AnytimeActionLink[] = [];
   let anytimeActionTasks: AnytimeActionTask[] = [];
   let anytimeActionLicenseReinstatement: AnytimeActionLicenseReinstatement[] = [];
 
   const taskName = "some-task-name";
-  const linkName = "some-link-name";
   const licenseReinstatementName = "some-license-reinstatement-name";
 
   describe("routing and analytics", () => {
@@ -64,14 +58,6 @@ describe("<AnytimeActionDropdown />", () => {
         }),
       });
 
-      anytimeActionLinks = [
-        generateAnytimeActionLink({
-          name: "some-link-name",
-          externalRoute: "some-url",
-          filename: "some-filename-link",
-          applyToAllUsers: true,
-        }),
-      ];
       anytimeActionTasks = [
         generateAnytimeActionTask({
           name: "some-task-name",
@@ -94,7 +80,6 @@ describe("<AnytimeActionDropdown />", () => {
     const renderAnytimeActionDropdown = (): void => {
       render(
         <AnytimeActionDropdown
-          anytimeActionLinks={anytimeActionLinks}
           anytimeActionTasks={anytimeActionTasks}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatement}
         />
@@ -106,10 +91,8 @@ describe("<AnytimeActionDropdown />", () => {
       fireEvent.click(screen.getByLabelText("Open"));
       expect(screen.getByText("Some Category")).toBeInTheDocument();
       expect(screen.getByText("Reactivate My Expired Permit, License or Registration")).toBeInTheDocument();
-      expect(screen.getByText("Sell or Close My Business")).toBeInTheDocument();
 
       expect(screen.getByText(taskName)).toBeInTheDocument();
-      expect(screen.getByText(linkName)).toBeInTheDocument();
       expect(screen.getByText(licenseReinstatementName)).toBeInTheDocument();
     });
 
@@ -141,17 +124,6 @@ describe("<AnytimeActionDropdown />", () => {
       expect(category1Title.compareDocumentPosition(category1Task1)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
       expect(category1Title.compareDocumentPosition(category1Task2)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
       expect(category2Title.compareDocumentPosition(category2Task)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    });
-
-    it("routes to actions/url and triggers analytics when external link clicked", () => {
-      renderAnytimeActionDropdown();
-      fireEvent.click(screen.getByLabelText("Open"));
-      fireEvent.click(screen.getByText("some-link-name"));
-      fireEvent.click(screen.getByTestId("anytimeActionPrimaryButton"));
-      expect(mockPush).toHaveBeenCalledWith("some-url");
-      expect(
-        mockAnalytics.event.anytime_action_button.click.go_to_anytime_action_screen
-      ).toHaveBeenCalledWith("some-filename-link");
     });
 
     it("routes to actions/url and triggers analytics when internal task clicked", () => {
@@ -202,14 +174,6 @@ describe("<AnytimeActionDropdown />", () => {
       jest.resetAllMocks();
       useMockRouter({});
       useMockBusiness({});
-      anytimeActionLinks = [
-        generateAnytimeActionLink({
-          name: "some-link-name",
-          externalRoute: "some-url",
-          filename: "some-filename-link",
-          applyToAllUsers: true,
-        }),
-      ];
       anytimeActionTasks = [
         generateAnytimeActionTask({
           name: "some-task-name",
@@ -231,7 +195,6 @@ describe("<AnytimeActionDropdown />", () => {
     const renderAnytimeActionDropdown = (): void => {
       render(
         <AnytimeActionDropdown
-          anytimeActionLinks={anytimeActionLinks}
           anytimeActionTasks={anytimeActionTasks}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatement}
         />
@@ -267,10 +230,8 @@ describe("<AnytimeActionDropdown />", () => {
       const taskGeneral = screen.getByText("some-task-name");
       const taskLicenseReinstatement = screen.getByText("some-license-reinstatement-name");
       const tasklicenseReinstatementLast = screen.getByText("zzz-some-license-reinstatement-name");
-      const taskLink = screen.getByText("some-link-name");
 
       const categoryTitleGeneral = screen.getByText("Some Category");
-      const categoryTitleLinks = screen.getByText("Sell or Close My Business");
       const categoryTitleReinstatements = screen.getByText(
         "Reactivate My Expired Permit, License or Registration"
       );
@@ -279,10 +240,7 @@ describe("<AnytimeActionDropdown />", () => {
         Node.DOCUMENT_POSITION_FOLLOWING
       );
 
-      expect(taskGeneral.compareDocumentPosition(categoryTitleLinks)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-      expect(categoryTitleLinks.compareDocumentPosition(taskLink)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-
-      expect(taskLink.compareDocumentPosition(categoryTitleReinstatements)).toBe(
+      expect(taskGeneral.compareDocumentPosition(categoryTitleReinstatements)).toBe(
         Node.DOCUMENT_POSITION_FOLLOWING
       );
 

@@ -173,13 +173,6 @@ export interface AnytimeActionTask extends AnytimeAction {
   contentMd: string;
 }
 
-export interface AnytimeActionLink extends AnytimeAction {
-  externalRoute: string;
-  industryIds: string[];
-  sectorIds: string[];
-  applyToAllUsers: boolean;
-}
-
 export interface AnytimeActionLicenseReinstatement extends AnytimeAction {
   licenseName: LicenseName;
   urlSlug: string;
