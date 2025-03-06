@@ -40,6 +40,7 @@ export const taskIdsWithLicenseSearchEnabled = [
   "health-club-registration",
   "home-health-aide-license",
   "license-massage-therapy",
+  "moving-company-license",
   "oos-pharmacy-registration",
   "pharmacy-license",
   "register-accounting-firm",

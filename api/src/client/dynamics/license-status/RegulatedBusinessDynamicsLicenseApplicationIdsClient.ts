@@ -154,9 +154,7 @@ export const licenseAppType: Record<string, string> = {
   [HOME_ELEVATION_LICENSE_UUID]: "Home Elevation Contractor",
   [HOME_IMPROVEMENT_LICENSE_UUID]: "Home Improvement Contractor",
   [LABOR_MATCHING_LICENSE_UUID]: "International Labor Matching/Matchmaking Organization",
-  [`${PUBLIC_MOVERS_LICENSE_UUID}-100000000`]: "Public Movers and Warehousemen-Moving Only",
-  [`${PUBLIC_MOVERS_LICENSE_UUID}-100000001`]: "Public Movers and Warehousemen-Warehousing Only",
-  [`${PUBLIC_MOVERS_LICENSE_UUID}-100000002`]: "Public Movers and Warehousemen-Moving and Warehouse",
+  [`${PUBLIC_MOVERS_LICENSE_UUID}`]: "Public Movers and Warehousemen",
   [TELEMARKETERS_LICENSE_UUID]: "Telemarketers",
   [TICKET_BROKERS_LICENSE_UUID]: "Ticket Brokers",
   [VEHICLE_PROTECTION_LICENSE_UUID]: "Vehicle Protection Product Warrantor",
@@ -166,7 +164,6 @@ const appTypeKeys: Record<string, string> = {
   [CAREER_CONSULTING_LICENSE_UUID]: "rgb_careerconsultingapptypecode",
   [CONSULTING_FIRM_LICENSE_UUID]: "rgb_cfthsapptypecode",
   [EPS_LICENSE_UUID]: "rgb_epsapptypecode",
-  [PUBLIC_MOVERS_LICENSE_UUID]: "rgb_publicmoverscode",
 };
 
 export const appTypeKeysString = Object.values(appTypeKeys).join(",");

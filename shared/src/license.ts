@@ -72,7 +72,9 @@ export type LicenseDetails = {
 };
 
 export const enabledLicensesSources = {
+  // TODO: Add Public Movers
   "Consulting Firms/Temporary Help Services-Consulting Firm": "RGB",
+  "Public Movers and Warehousemen": "RGB",
   "Consulting Firms/Temporary Help Services-Consulting Firm/Temporary Help Service": "RGB",
   "Consulting Firms/Temporary Help Services-Temporary Help Service": "RGB",
   "Employment & Personnel Service-Career Counseling Service": "RGB",
@@ -96,7 +98,7 @@ export const taskIdLicenseNameMapping = {
   "hvac-license": "HVACR-HVACR CE Sponsor",
   "landscape-architect-license": "Landscape Architecture-Certificate of Authorization",
   "license-massage-therapy": "Massage and Bodywork Therapy-Massage and Bodywork Employer",
-  "moving-company-license": "Public Movers and Warehousemen-Public Mover and Warehouseman",
+  "moving-company-license": "Public Movers and Warehousemen",
   "pharmacy-license": "Pharmacy-Pharmacy",
   "register-accounting-firm": "Accountancy-Firm Registration",
   "register-home-contractor": "Home Improvement Contractors-Home Improvement Business Contr",
