@@ -1,6 +1,7 @@
 import { BusinessesDataClient, DatabaseClient, UserDataClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { CURRENT_VERSION, UserData } from "@shared/userData";
+import { chunk } from "lodash";
 
 export const DynamoDataClient = (
   userDataClient: UserDataClient,
@@ -13,27 +14,38 @@ export const DynamoDataClient = (
     error?: string;
   }> => {
     try {
-      const usersToMigrate = await userDataClient.getUsersWithOutdatedVersion(CURRENT_VERSION);
-      if (usersToMigrate.length === 0) {
-        logger.LogInfo(`No users need migration. Current version: ${CURRENT_VERSION}`);
-        return { success: true, migratedCount: 0 };
-      }
+      let nextToken: string | undefined = undefined;
+      let migratedCount = 0;
+      const batchSize = 100;
 
-      const usersNeedingUpdates = usersToMigrate.map(async (user) => {
-        try {
-          await updateUserAndBusinesses(user);
-          logger.LogInfo(`Migrated user ${user.user.id} to version ${CURRENT_VERSION}`);
-        } catch (error) {
-          logger.LogError(`Failed to migrate user ${user.user.id}: ${error}`);
+      do {
+        const { usersToMigrate, nextToken: newNextToken } = await userDataClient.getUsersWithOutdatedVersion(
+          CURRENT_VERSION,
+          nextToken
+        );
+        const batches = chunk(usersToMigrate, batchSize);
+        for (const batch of batches) {
+          await processBatch(batch);
+          migratedCount += batch.length;
+          logger.LogInfo(`Processed batch of ${batch.length} users. Total migrated so far: ${migratedCount}`);
         }
-      });
-      await Promise.all(usersNeedingUpdates);
-      logger.LogInfo(`Migration complete. Migrated ${usersToMigrate.length} users.`);
-      return { success: true, migratedCount: usersToMigrate.length };
+        nextToken = newNextToken;
+      } while (nextToken);
+      logger.LogInfo(
+        `Migration complete. Migrated ${migratedCount} users. Current version: ${CURRENT_VERSION}`
+      );
+      return { success: true, migratedCount };
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.LogError(`MigrateData Failed: ${errorMessage}`);
-      return { success: false, error: error instanceof Error ? error.message : "Unknown error" };
+      return { success: false, error: errorMessage };
+    }
+  };
+
+  const processBatch = async (usersToMigrate: UserData[]): Promise<void> => {
+    for (const user of usersToMigrate) {
+      await updateUserAndBusinesses(user);
+      logger.LogInfo(`Migrated user ${user.user.id} to version ${CURRENT_VERSION}`);
     }
   };
 
