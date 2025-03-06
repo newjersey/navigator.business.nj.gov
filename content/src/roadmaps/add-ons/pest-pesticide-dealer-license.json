@@ -1,0 +1,16 @@
+{
+  "id": "pest-pesticide-dealer-license",
+  "displayname": "pest-pesticide-dealer-license",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 3,
+      "licenseTask": "pesticide-dealer-license"
+    },
+    {
+      "step": 4,
+      "weight": 0,
+      "licenseTask": "pesticide-dealer-business-license"
+    }
+  ]
+}
