@@ -18,8 +18,8 @@ import dayjs from "dayjs";
 describe("Business Formation [feature] [all] [group2]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
+    expect(Math.random()).equals(4);
   });
-  expect(Math.random()).equals(4);
 
   it("successfully forms an LLC business", () => {
     const industry = LookupIndustryById("food-truck");

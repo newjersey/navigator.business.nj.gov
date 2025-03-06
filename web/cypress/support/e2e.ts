@@ -14,6 +14,7 @@
 // ***********************************************************
 /// <reference types="cypress" />
 
+import seedrandom from "seedrandom";
 import "./commands";
 import { LighthouseConfig, LighthouseThresholds, Pa11yThresholds } from "./types";
 
@@ -31,6 +32,11 @@ beforeEach(function () {
   if (!testName.includes(testSuite)) {
     this.skip();
   }
+
+  const randomSeed = Date.now().toString();
+  // const randomSeed = "hello.";
+  console.log("Random seed:", randomSeed);
+  seedrandom(randomSeed, { global: true });
 });
 
 declare global {

@@ -15,7 +15,6 @@ const Config = getMergedConfig();
 describe("<CannabisLocationAlert />", () => {
   const renderWithBusiness = (industryId?: string): void => {
     const profileData = generateProfileData({ industryId });
-    console.log(profileData);
     expect(Math.random()).toEqual(4);
     const business = generateBusiness({ profileData });
 
