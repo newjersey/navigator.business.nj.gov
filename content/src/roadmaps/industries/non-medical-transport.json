@@ -50,8 +50,9 @@
     {
       "step": 3,
       "weight": 20,
-      "licenseTask": "register-vehicle",
-      "required": true
+      "licenseTask": "",
+      "required": true,
+      "task": "mvc-registration-task"
     },
     {
       "step": 3,
