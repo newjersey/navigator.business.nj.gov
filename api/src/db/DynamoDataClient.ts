@@ -13,27 +13,36 @@ export const DynamoDataClient = (
     error?: string;
   }> => {
     try {
-      const usersToMigrate = await userDataClient.getUsersWithOutdatedVersion(CURRENT_VERSION);
-      if (usersToMigrate.length === 0) {
-        logger.LogInfo(`No users need migration. Current version: ${CURRENT_VERSION}`);
-        return { success: true, migratedCount: 0 };
-      }
+      let nextToken: string | undefined = undefined;
+      let migratedCount = 0;
+      do {
+        const { usersToMigrate, nextToken: newNextToken } = await userDataClient.getUsersWithOutdatedVersion(
+          CURRENT_VERSION,
+          nextToken
+        );
 
-      const usersNeedingUpdates = usersToMigrate.map(async (user) => {
-        try {
+        if (usersToMigrate.length === 0) {
+          logger.LogInfo(`No users need migration. Current version: ${CURRENT_VERSION}`);
+          break;
+        }
+        for (const user of usersToMigrate) {
           await updateUserAndBusinesses(user);
           logger.LogInfo(`Migrated user ${user.user.id} to version ${CURRENT_VERSION}`);
-        } catch (error) {
-          logger.LogError(`Failed to migrate user ${user.user.id}: ${error}`);
+          migratedCount++;
         }
-      });
-      await Promise.all(usersNeedingUpdates);
-      logger.LogInfo(`Migration complete. Migrated ${usersToMigrate.length} users.`);
-      return { success: true, migratedCount: usersToMigrate.length };
+
+        nextToken = newNextToken;
+      } while (nextToken);
+      if (migratedCount === 0) {
+        logger.LogInfo(`No users need migration. Current version: ${CURRENT_VERSION}`);
+      } else {
+        logger.LogInfo(`Migration complete. Migrated ${migratedCount} users.`);
+      }
+      return { success: true, migratedCount };
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.LogError(`MigrateData Failed: ${errorMessage}`);
-      return { success: false, error: error instanceof Error ? error.message : "Unknown error" };
+      return { success: false, error: errorMessage };
     }
   };
 

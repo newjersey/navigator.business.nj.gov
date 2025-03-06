@@ -27,7 +27,7 @@ export const createDynamoDbClient = (
     const dynamoDbEndpoint = isDocker ? "dynamodb-local" : "localhost";
     dynamoDb = DynamoDBDocumentClient.from(
       new DynamoDBClient({
-        region: "localhost",
+        region: "us-east-1",
         endpoint: `http://${dynamoDbEndpoint}:${dynamoPort}`,
       }),
       dynamoDbTranslateConfig
