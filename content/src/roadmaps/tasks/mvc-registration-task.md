@@ -24,6 +24,7 @@ name: Register Your Business-Owned Vehicle(s)
 id: mvc-registration-task
 callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm?utm
 callToActionText: Register My Business Vehicle(s)
+industryId: car-rental
 agencyId: nj-motor-vehicle
 formName: BA-49
 ---
