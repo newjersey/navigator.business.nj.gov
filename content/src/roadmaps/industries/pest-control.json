@@ -44,7 +44,7 @@
     },
     {
       "step": 4,
-      "weight": -50,
+      "weight": 50,
       "task": "search-licenses"
     },
     {
