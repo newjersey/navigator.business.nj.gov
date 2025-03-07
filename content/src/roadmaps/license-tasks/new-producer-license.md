@@ -16,7 +16,7 @@ divisionPhone: " 609-292-7272"
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="note" }
 
-You need to get your business name approved by the New Jersey Department of Banking and Insurance (NJDOBI) if it includes the words "Insurance," "Assurance," or "Underwriters. You need this before applying for a resident insurance producer license. To request approval, fill out the "[Business Name & Trade Name Approval Request Form](https://www.nj.gov/dobi/insliced/busnameapprov.pdf?utm_source=chatgpt.com)" and send it by email to inslic@dobi.nj.gov or fax it to (609) 984-5263.
+You need to get your business name approved by the New Jersey Department of Banking and Insurance (NJDOBI) if it includes the word "Insurance." Get this approval first. Then, apply for your [business formation](<>) and resident insurance producer license. To request approval, fill out the "[Business Name & Trade Name Approval Request Form](https://www.nj.gov/dobi/insliced/busnameapprov.pdf?utm_source=chatgpt.com)" and send it by email to inslic@dobi.nj.gov or fax it to (609) 984-5263.
 
 :::
 
@@ -34,15 +34,15 @@ You need to get your business name approved by the New Jersey Department of Bank
 * National Producer Number, if assigned
 * FINRA Firm Central Registration Depository, if applicable
 * Designated Licensed Producers name, Social Security number, and National Producer Number (NPN)
-* Name, Social Security number, and title of all officers, partners, and owners with at least 10% ownership of the business entity
-* Proof that every officer, partner, and owner with 10% or more ownership has passed the background check (resident business applicants)
+* Name, Social Security number, and title of all officers, partners, directors, and owners with at least 10% ownership of the business entity
+* Proof that every officer, partner, directors, and owner with 10% or more ownership has passed the background check (resident business applicants)
 * History of criminal history, if applicable
 * History of disciplinary actions or termination for any alleged misconduct, if applicable
 * Applicable fees paid
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
 
-You cannot legally sell or negotiate insurance products. The business may face fines and legal penalties.
+You cannot legally sell, solicit or negotiate insurance products. The business may face fines and legal penalties.
 
 :::
 
