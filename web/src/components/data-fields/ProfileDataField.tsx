@@ -1,19 +1,25 @@
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileContentField, ProfileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
+import { ProfileContentField } from "@/lib/types/types";
 import { OutlinedInputProps, TextFieldProps } from "@mui/material";
 import { HTMLInputTypeAttribute, ReactElement, useContext } from "react";
 
-export interface DataFieldProps<T = unknown> extends Omit<GenericTextFieldProps<T>, "fieldName"> {
+export interface ProfileDataFieldProps<T = unknown> extends Omit<GenericTextFieldProps<T>, "fieldName"> {
   fieldName: ProfileContentField;
   fieldOptions?: TextFieldProps;
   inputProps?: OutlinedInputProps;
   type?: HTMLInputTypeAttribute;
+  inputWidth?: "full" | "default" | "reduced" | undefined;
 }
 
-export const DataField = <T,>({ fieldName, className, ...props }: DataFieldProps<T>): ReactElement => {
+export const ProfileDataField = <T,>({
+  fieldName,
+  className,
+  ...props
+}: ProfileDataFieldProps<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
   const { Config } = useConfig();

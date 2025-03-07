@@ -58,6 +58,7 @@ export const cmsCollections = [
     children: [
       "Anytime Action Tasks",
       "Anytime Action With Consumer Affairs License Integrations (Reinstatements)",
+      "Tax Clearance Anytime Action",
     ],
   },
   {
@@ -65,7 +66,7 @@ export const cmsCollections = [
     children: ["Page Metadata"],
   },
   {
-    label: "🟩 MISC",
+    label: "🟦 MISC",
     children: [
       "Anytime Action Reinstatement and License Calendar Event Status Defaults",
       "Starter Kits",
