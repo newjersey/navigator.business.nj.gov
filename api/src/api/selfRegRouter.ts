@@ -17,7 +17,7 @@ export const selfRegRouterFactory = (
       ...userData,
       user: {
         ...userData.user,
-        email: userData.user.email.toLowerCase(),
+        email: userData.user.email.toLowerCase().normalize(),
       },
     };
 

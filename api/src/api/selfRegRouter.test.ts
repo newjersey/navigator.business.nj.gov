@@ -127,41 +127,16 @@ describe("selfRegRouter", () => {
   });
 
   describe("converts email to lowercase before self registration", () => {
-    it("should convert an uppercase email to lowercase", async () => {
-      const upperCaseEmail = "USERNAME@EXAMPLE.COM";
-      const userData = generateUserData({ user: generateUser({ email: upperCaseEmail }) });
-
+    it.each([
+      { testCase: "uppercase email", email: "USERNAME@EXAMPLE.COM" },
+      { testCase: "mixed case email", email: "UserName@EXAMPLE.com" },
+      { testCase: "already lowercase email", email: "username@example.com" },
+    ])("should convert $testCase to lowercase", async ({ email }) => {
+      const userData = generateUserData({ user: generateUser({ email }) });
       await sendRequest(userData);
-
       expect(stubSelfRegClient.grant).toHaveBeenCalledWith(
         expect.objectContaining({
-          email: upperCaseEmail.toLowerCase(),
-        })
-      );
-    });
-
-    it("should convert a mixed case email to lowercase", async () => {
-      const mixedCaseEmail = "UserName@EXAMPLE.com";
-      const userData = generateUserData({ user: generateUser({ email: mixedCaseEmail }) });
-
-      await sendRequest(userData);
-
-      expect(stubSelfRegClient.grant).toHaveBeenCalledWith(
-        expect.objectContaining({
-          email: mixedCaseEmail.toLowerCase(),
-        })
-      );
-    });
-
-    it("should not modify an already lowercase email", async () => {
-      const lowerCaseEmail = "username@example.com";
-      const userData = generateUserData({ user: generateUser({ email: lowerCaseEmail }) });
-
-      await sendRequest(userData);
-
-      expect(stubSelfRegClient.grant).toHaveBeenCalledWith(
-        expect.objectContaining({
-          email: lowerCaseEmail,
+          email: email.toLowerCase(),
         })
       );
     });
