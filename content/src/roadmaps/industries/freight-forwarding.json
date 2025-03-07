@@ -45,17 +45,20 @@
     {
       "step": 3,
       "weight": 16,
-      "task": "transportation-entity-id"
+      "task": "transportation-entity-id",
+      "required": true
     },
     {
       "step": 3,
       "weight": 14,
-      "task": "mvc-title-task"
+      "task": "mvc-title-task",
+      "required": true
     },
     {
       "step": 3,
       "weight": 18,
-      "task": "mvc-registration-task"
+      "task": "mvc-registration-task",
+      "required": true
     }
   ],
   "name": "Freight Forwarding",
