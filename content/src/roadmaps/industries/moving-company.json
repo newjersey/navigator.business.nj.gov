@@ -63,12 +63,14 @@
     {
       "weight": 22,
       "step": 3,
-      "task": "mvc-title-task"
+      "task": "mvc-title-task",
+      "required": true
     },
     {
       "weight": 23,
       "step": 3,
-      "task": "mvc-registration-task"
+      "task": "mvc-registration-task",
+      "required": true
     }
   ],
   "name": "Moving Company",
