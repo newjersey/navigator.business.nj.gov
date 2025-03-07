@@ -1,6 +1,5 @@
 ---
-notesMd: "3.3.25: NJEDA let us know we can unpublish this program. Dev will
-  archive this "
+notesMd: ""
 name: Brownfield Impact Fund (USEPA RLF)
 displayName: brownfield-impact
 urlSlug: brownfield-impact-fund
