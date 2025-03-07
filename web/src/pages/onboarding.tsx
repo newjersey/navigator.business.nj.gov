@@ -8,9 +8,9 @@ import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonG
 import { onboardingFlows as onboardingFlowObject } from "@/components/onboarding/OnboardingFlows";
 import { ReturnToPreviousBusinessBar } from "@/components/onboarding/ReturnToPreviousBusinessBar";
 import { AuthContext } from "@/contexts/authContext";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { MediaQueries } from "@/lib/PageSizes";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -105,7 +105,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     FormFuncWrapper,
     onSubmit,
     state: formContextState,
-  } = useFormContextHelper(createProfileFieldErrorMap<OnboardingErrors>());
+  } = useFormContextHelper(createDataFormErrorMap<OnboardingErrors>());
 
   const onboardingFlows = useMemo(() => {
     let onboardingFlows = onboardingFlowObject;
@@ -461,7 +461,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   };
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
-      <ProfileFormContext.Provider value={formContextState}>
+      <DataFormErrorMapContext.Provider value={formContextState}>
         <ProfileDataContext.Provider
           value={{
             state: {
@@ -542,7 +542,7 @@ const OnboardingPage = (props: Props): ReactElement => {
             </main>
           </PageSkeleton>
         </ProfileDataContext.Provider>
-      </ProfileFormContext.Provider>
+      </DataFormErrorMapContext.Provider>
     </MunicipalitiesContext.Provider>
   );
 };

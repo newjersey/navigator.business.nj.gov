@@ -8,8 +8,8 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -121,7 +121,7 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
     return shouldShowErrorAlert && isNonProfit === undefined;
   };
 
-  const { onSubmit, state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
+  const { onSubmit, state: formContextState } = useFormContextHelper(createDataFormErrorMap());
 
   const FundingsHeader = (): ReactElement => {
     return (
@@ -183,7 +183,7 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
   };
 
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFormErrorMapContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -286,7 +286,7 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
           })}
         </>
       </ProfileDataContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFormErrorMapContext.Provider>
   );
 };
 

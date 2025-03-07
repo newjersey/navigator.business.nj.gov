@@ -1,6 +1,6 @@
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -24,7 +24,7 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
     FormFuncWrapper,
     onSubmit,
     state: formContextState,
-  } = useFormContextHelper(createProfileFieldErrorMap());
+  } = useFormContextHelper(createDataFormErrorMap());
 
   useEffect(() => {
     if (!business) return;
@@ -81,7 +81,7 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
   );
 
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFormErrorMapContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -94,6 +94,6 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
       >
         {props.isTaskPage ? onTaskPage : onDashboard}
       </ProfileDataContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFormErrorMapContext.Provider>
   );
 };

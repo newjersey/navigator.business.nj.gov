@@ -3,8 +3,8 @@ import { EssentialQuestionField } from "@/components/data-fields/EssentialQuesti
 import { HomeContractor } from "@/components/data-fields/HomeContractor";
 import { IndustryDropdown } from "@/components/data-fields/IndustryDropdown";
 import { ConfigType } from "@/contexts/configContext";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { EssentialQuestion, EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
@@ -22,7 +22,7 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
 
   const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     fieldName,
-    ProfileFormContext,
+    DataFormErrorMapContext,
     props.errorTypes
   );
 

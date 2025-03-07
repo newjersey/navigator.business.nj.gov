@@ -5,8 +5,8 @@ import { TaxClearanceStepThree } from "@/components/tasks/anytime-action/tax-cle
 import { TaxClearanceStepTwo } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceStepTwo";
 import { AddressContext } from "@/contexts/addressContext";
 import { getMergedConfig } from "@/contexts/configContext";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { TaxClearanceCertificateDataContext } from "@/contexts/taxClearanceCertificateDataContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -133,7 +133,7 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
   //   state: dataFormContextState,
   //   // getInvalidFieldIds,
 
-  const { state: dataFormContextState } = useFormContextHelper(createProfileFieldErrorMap());
+  const { state: dataFormContextState } = useFormContextHelper(createDataFormErrorMap());
 
   const updateSteps = (step: number): void => {
     const steps = initialTaxClearanceCertificateSteps();
@@ -148,7 +148,7 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
   }, [stepIndex]);
 
   return (
-    <ProfileFormContext.Provider value={dataFormContextState}>
+    <DataFormErrorMapContext.Provider value={dataFormContextState}>
       <AddressContext.Provider
         value={{
           state: { formationAddressData },
@@ -199,6 +199,6 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
           </ProfileDataContext.Provider>
         </TaxClearanceCertificateDataContext.Provider>
       </AddressContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFormErrorMapContext.Provider>
   );
 };
