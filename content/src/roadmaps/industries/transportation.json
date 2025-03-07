@@ -46,12 +46,14 @@
     {
       "step": 4,
       "weight": 17,
-      "task": "mvc-title-task"
+      "task": "mvc-title-task",
+      "required": true
     },
     {
       "step": 4,
       "weight": 18,
-      "task": "mvc-registration-task"
+      "task": "mvc-registration-task",
+      "required": true
     }
   ],
   "name": "Car Service (Large Capacity Vehicles)",
