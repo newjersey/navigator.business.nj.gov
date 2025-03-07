@@ -9,7 +9,8 @@
       "header": "Hooray!",
       "entityIdLabel": "`Entity ID|entity-id`",
       "confirmationNumberLabel": "Confirmation Number:",
-      "amendmentText": "**Made a mistake?** File an [amendment online](https://www.njportal.com/dor/businessamendments)."
+      "amendmentText": "**Made a mistake?** File an [amendment online](https://www.njportal.com/dor/businessamendments).",
+      "survey": "h"
     }
   }
 }
