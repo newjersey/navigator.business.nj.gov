@@ -21,7 +21,7 @@ global.console.error = (message) => {
 };
 
 beforeEach(function () {
-  let randomSeed = Date.now().toString();
+  let randomSeed = Math.random().toString().slice(2);
   if (process.env.RANDOM_SEED) {
     randomSeed = process.env.RANDOM_SEED;
   }
