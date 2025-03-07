@@ -44,6 +44,16 @@
       "required": true
     },
     {
+      "step": 3,
+      "weight": 12,
+      "task": "mvc-title-task"
+    },
+    {
+      "step": 3,
+      "weight": 13,
+      "task": "mvc-registration-task"
+    },
+    {
       "step": 4,
       "weight": 90,
       "task": "community-right-to-know-survey"
