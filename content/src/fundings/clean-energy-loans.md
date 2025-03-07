@@ -36,7 +36,6 @@ county:
   - All
 sector:
   - clean-energy
-  - offshore-wind
   - technology
   - utilities
 publishStageArchive: ""
