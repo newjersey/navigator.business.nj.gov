@@ -33,6 +33,7 @@ county:
 sector:
   - manufacturing
 publishStageArchive: ""
+minEmployeesRequired: 250
 ---
 
 ## Eligibility
