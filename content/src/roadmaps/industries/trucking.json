@@ -51,12 +51,14 @@
     {
       "step": 3,
       "task": "mvc-title-task",
-      "weight": 17
+      "weight": 17,
+      "required": true
     },
     {
       "step": 3,
       "task": "mvc-registration-task",
-      "weight": 16
+      "weight": 16,
+      "required": true
     },
     {
       "step": 3,
