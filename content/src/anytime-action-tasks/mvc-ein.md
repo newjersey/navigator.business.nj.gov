@@ -24,6 +24,23 @@ sectorIds:
   - construction
   - manufacturing
   - mining-quarrying-and-oil-and-gas-extraction
+  - administrative-and-employment-services
+  - arts-entertainment-and-recreation
+  - clean-energy
+  - cannabis
+  - educational-services
+  - digital-and-print-media
+  - health-care-and-social-assistance
+  - finance-and-insurance
+  - life-sciences
+  - organizational-or-financial-management
+  - offshore-wind
+  - other-services
+  - professional-scientific-and-technical-services
+  - real-estate
+  - retail-trade-and-ecommerce
+  - technology
+  - wholesale-trade
 urlSlug: mvc-ein
 summaryDescriptionMd: >-
   You need a  Motor Vehicle Commission `(MVC) Entity Identification Number
