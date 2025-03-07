@@ -23,6 +23,23 @@ sectorIds:
   - construction
   - manufacturing
   - mining-quarrying-and-oil-and-gas-extraction
+  - administrative-and-employment-services
+  - arts-entertainment-and-recreation
+  - cannabis
+  - clean-energy
+  - digital-and-print-media
+  - educational-services
+  - finance-and-insurance
+  - life-sciences
+  - health-care-and-social-assistance
+  - organizational-or-financial-management
+  - offshore-wind
+  - professional-scientific-and-technical-services
+  - other-services
+  - real-estate
+  - technology
+  - retail-trade-and-ecommerce
+  - wholesale-trade
 urlSlug: mvc-register
 summaryDescriptionMd: >-
   :::infoAlert
