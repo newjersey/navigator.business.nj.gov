@@ -33,8 +33,8 @@ beforeEach(function () {
     this.skip();
   }
 
-  const randomSeed = Date.now().toString();
-  // const randomSeed = "hello.";
+  // const randomSeed = Date.now().toString();
+  const randomSeed = "1741298326615";
   cy.task("log", `Random seed: ${randomSeed}`);
   seedrandom(randomSeed, { global: true });
 });
