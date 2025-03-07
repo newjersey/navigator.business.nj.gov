@@ -59,6 +59,16 @@
       "weight": 21,
       "task": "transportation-entity-id",
       "required": true
+    },
+    {
+      "weight": 22,
+      "step": 3,
+      "task": "mvc-title-task"
+    },
+    {
+      "weight": 23,
+      "step": 3,
+      "task": "mvc-registration-task"
     }
   ],
   "name": "Moving Company",
