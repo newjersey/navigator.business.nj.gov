@@ -1,9 +1,7 @@
 {
-  "displayname": "freight-forwarding",
   "naicsCodes": "493110, 493190, 493120, 493130",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -43,17 +41,36 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 3,
+      "weight": 16,
+      "task": "transportation-entity-id"
+    },
+    {
+      "step": 3,
+      "weight": 14,
+      "task": "mvc-title-task"
+    },
+    {
+      "step": 3,
+      "weight": 18,
+      "task": "mvc-registration-task"
     }
   ],
   "name": "Freight Forwarding",
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
+  "displayname": "freight-forwarding",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": false,
     "isCpaRequiredApplicable": false,
-    "isInterstateLogisticsApplicable": false,
-    "isInterstateMovingApplicable": false,
     "isCarServiceApplicable": false,
+    "isInterstateMovingApplicable": false,
     "isLiquorLicenseApplicable": false,
+    "isInterstateLogisticsApplicable": false,
     "isRealEstateAppraisalManagementApplicable": false,
     "isTransportation": false,
     "isCertifiedInteriorDesignerApplicable": false,
