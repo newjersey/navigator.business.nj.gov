@@ -62,11 +62,11 @@
       "step": 3,
       "task": "mvc-title-task",
       "required": true,
-      "weight": 20
+      "weight": 10
     },
     {
       "step": 3,
-      "weight": 20,
+      "weight": 10,
       "licenseTask": "",
       "required": true,
       "task": "mvc-registration-task"
