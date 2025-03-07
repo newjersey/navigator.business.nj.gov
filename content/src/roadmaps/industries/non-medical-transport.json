@@ -60,6 +60,12 @@
     },
     {
       "step": 3,
+      "task": "mvc-title-task",
+      "required": true,
+      "weight": 20
+    },
+    {
+      "step": 3,
       "weight": 20,
       "licenseTask": "",
       "required": true,
