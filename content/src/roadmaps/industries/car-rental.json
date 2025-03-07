@@ -50,9 +50,14 @@
     },
     {
       "step": 3,
+      "weight": 17,
+      "task": "mvc-title-task"
+    },
+    {
+      "step": 3,
       "weight": 18,
       "licenseTask": "",
-      "required": true,
+      "required": false,
       "task": "mvc-registration-task"
     },
     {
