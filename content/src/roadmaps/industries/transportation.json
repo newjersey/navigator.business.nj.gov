@@ -42,6 +42,16 @@
       "weight": 16,
       "task": "transportation-entity-id",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 17,
+      "task": "mvc-title-task"
+    },
+    {
+      "step": 4,
+      "weight": 18,
+      "task": "mvc-registration-task"
     }
   ],
   "name": "Car Service (Large Capacity Vehicles)",
