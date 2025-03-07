@@ -5,6 +5,10 @@ import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 import { createHmac } from "node:crypto";
 
+type Mutable<T> = {
+  -readonly [P in keyof T]: T[P] extends object ? Mutable<T[P]> : T[P];
+};
+
 export const selfRegRouterFactory = (
   databaseClient: DatabaseClient,
   selfRegClient: SelfRegClient
@@ -13,13 +17,9 @@ export const selfRegRouterFactory = (
 
   router.post("/self-reg", async (req, res) => {
     const userData = req.body as UserData;
-    const cleanedUserData: UserData = {
-      ...userData,
-      user: {
-        ...userData.user,
-        email: userData.user.email.toLowerCase(),
-      },
-    };
+    const mutableClone = structuredClone(userData) as Mutable<UserData>;
+    mutableClone.user.email = mutableClone.user.email.toLowerCase().normalize();
+    const cleanedUserData: UserData = mutableClone as UserData;
 
     try {
       const selfRegResponse = await (cleanedUserData.user.myNJUserKey
