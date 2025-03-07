@@ -33,6 +33,7 @@ county:
   - All
 sector:
   - technology
+  - life-sciences
 publishStageArchive: ""
 ---
 
