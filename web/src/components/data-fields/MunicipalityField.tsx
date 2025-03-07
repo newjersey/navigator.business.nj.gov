@@ -1,8 +1,8 @@
 import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropdown";
 import { ConfigType } from "@/contexts/configContext";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
@@ -24,7 +24,7 @@ export const MunicipalityField = (props: Props): ReactElement => {
 
   const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     fieldName,
-    ProfileFormContext,
+    DataFormErrorMapContext,
     props.errorTypes
   );
 

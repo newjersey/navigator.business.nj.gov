@@ -1,5 +1,5 @@
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
@@ -31,7 +31,10 @@ export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): Reac
   const { Config } = useConfig();
   const fieldName = props.contentFieldName ?? props.fieldName;
 
-  const { RegisterForOnSubmit, setIsValid } = useFormContextFieldHelpers(props.fieldName, ProfileFormContext);
+  const { RegisterForOnSubmit, setIsValid } = useFormContextFieldHelpers(
+    props.fieldName,
+    DataFormErrorMapContext
+  );
 
   const contentFromConfig = getProfileConfig({
     config: Config,
