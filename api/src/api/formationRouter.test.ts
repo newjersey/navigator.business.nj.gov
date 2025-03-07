@@ -44,6 +44,7 @@ describe("formationRouter", () => {
   let stubDynamoDataClient: jest.Mocked<DatabaseClient>;
 
   beforeEach(async () => {
+    expect(Math.random()).toEqual(4);
     jest.resetAllMocks();
     fakeSignedInUserId.mockReturnValue("some-id");
     fakeSignedInUser.mockReturnValue({

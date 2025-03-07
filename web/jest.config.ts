@@ -13,6 +13,7 @@ export default {
   ...sharedConfig,
   displayName: "web",
   setupFilesAfterEnv: ["./setupTests.js"],
+  globalSetup: "./globalSetup.js",
   testEnvironment: "jsdom",
   testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/", "<rootDir>/cypress/"],
   rootDir: "./",

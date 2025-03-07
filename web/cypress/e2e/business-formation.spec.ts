@@ -15,7 +15,7 @@ import dayjs from "dayjs";
 
 // NOTE: in the api .env BUSINESS_NAME_BASE_URL and FORMATION_API_BASE_URL have to be removed for this test to use wiremock correctly
 
-describe("Business Formation [feature] [all] [group2]", () => {
+describe.only("Business Formation [feature] [all] [group2]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
     expect(Math.random()).equals(4);

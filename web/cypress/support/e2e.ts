@@ -35,7 +35,7 @@ beforeEach(function () {
 
   // const randomSeed = Date.now().toString();
   const randomSeed = "1741298326615";
-  cy.task("log", `Random seed: ${randomSeed}`);
+  cy.task("log", `Random seed: ${randomSeed} ${testName}`);
   seedrandom(randomSeed, { global: true });
 });
 
