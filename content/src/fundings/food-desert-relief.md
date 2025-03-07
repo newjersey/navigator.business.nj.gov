@@ -1,9 +1,7 @@
 ---
-notesMd: >-
+notesMd: >+
   https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/4033
 
-
-  3.3.25: NJEDA let us know we can unpublish this. Dev will archive this.
 name: Food Desert Relief Supermarket Tax Credit Program
 displayName: food-desert-relief
 urlSlug: food-desert-relief
