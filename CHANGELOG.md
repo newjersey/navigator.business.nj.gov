@@ -1,3 +1,28 @@
+# [2025.6.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.5.0...v2025.6.0) (2025-03-07)
+
+
+### Bug Fixes
+
+* [AB[#12799](https://github.com/newjersey/navigator.business.nj.gov/issues/12799)] update query to use current version dynamically ([b3b3c51](https://github.com/newjersey/navigator.business.nj.gov/commit/b3b3c516af6dfd9eba901a74d4cd8964b6280679))
+* add retry to first cypress test as workaround to race condition causing a failure ([d557f09](https://github.com/newjersey/navigator.business.nj.gov/commit/d557f09bca0bf20b4e9301f9f509230dadd249e9))
+* align add-on name with file anem for community-rtk-survey ([791bd97](https://github.com/newjersey/navigator.business.nj.gov/commit/791bd97b824c17b3396d533e4afdb9547f09ad16))
+* **deps:** update dependency remove-markdown to v0.6.0 ([5d55d95](https://github.com/newjersey/navigator.business.nj.gov/commit/5d55d95e0b84d8c87ab3dbe82ccfe1144f23d029))
+* filter out domestic employers for auto-tax-filing e2e tests ([779ac4b](https://github.com/newjersey/navigator.business.nj.gov/commit/779ac4b5be2f2f13d5e89fe02d9bdd6320081f1e))
+* remove roadmap steps without tasks from roadmap ([7c2a3e6](https://github.com/newjersey/navigator.business.nj.gov/commit/7c2a3e6386bcb57b150ae77d1da4f6d736f5c18a))
+* remove the pending license task for easier testing ([de8fe44](https://github.com/newjersey/navigator.business.nj.gov/commit/de8fe44ec09b9c26e3f6f0c69f07f700637c290c))
+
+
+### Features
+
+* [[#188814053](https://github.com/newjersey/navigator.business.nj.gov/issues/188814053)] add out of state pharmacy license task ([6d226e6](https://github.com/newjersey/navigator.business.nj.gov/commit/6d226e634536ed8d5733869a4fea3d019336e30c))
+* [[#188814053](https://github.com/newjersey/navigator.business.nj.gov/issues/188814053)] add out of state pharmacy license task ([64125de](https://github.com/newjersey/navigator.business.nj.gov/commit/64125deb354c06a0299b84db9ad6ff81c96c9521))
+* [[#188924188](https://github.com/newjersey/navigator.business.nj.gov/issues/188924188)] set options_length: 500 for all relation widgets in the CMS ([e73a6dc](https://github.com/newjersey/navigator.business.nj.gov/commit/e73a6dc3737a0c0e055198cb299726e66d102015))
+
+
+### Reverts
+
+* Revert "feat: [#188778935] consolidate AWS resources to two environments" ([7475f5f](https://github.com/newjersey/navigator.business.nj.gov/commit/7475f5fdd9d40dce8958822807bacde80a77d856)), closes [#188778935](https://github.com/newjersey/navigator.business.nj.gov/issues/188778935)
+
 # [2025.5.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.4.0...v2025.5.0) (2025-02-18)
 
 ### Bug Fixes
