@@ -16,7 +16,7 @@ divisionPhone: " 609-292-7272"
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="note" }
 
-You need to get your business name approved by the New Jersey Department of Banking and Insurance (NJDOBI) if it includes the word "Insurance." Get this approval first. Then, apply for your [business formation](<>) and resident insurance producer license. To request approval, fill out the "[Business Name & Trade Name Approval Request Form](https://www.nj.gov/dobi/insliced/busnameapprov.pdf?utm_source=chatgpt.com)" and send it by email to inslic@dobi.nj.gov or fax it to (609) 984-5263.
+You need to get your business name approved by the New Jersey Department of Banking and Insurance (NJDOBI) if it includes the word "Insurance." Get this approval first. Then, apply for your [business formation](https://business.nj.gov/pages/register-your-business#section-3) and resident insurance producer license. To request approval, fill out the "[Business Name & Trade Name Approval Request Form](https://www.nj.gov/dobi/insliced/busnameapprov.pdf?utm_source=chatgpt.com)" and send it by email to inslic@dobi.nj.gov or fax it to (609) 984-5263.
 
 :::
 
