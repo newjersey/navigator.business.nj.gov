@@ -1,6 +1,6 @@
 import { WebserviceLicenseStatusClient } from "@client/WebserviceLicenseStatusClient";
 import { LicenseStatusClient } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import { generateLicenseEntity } from "@test/factories";
 import axios from "axios";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
@@ -8,6 +8,7 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 jest.mock("axios");
 jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("WebserviceLicenseStatusClient", () => {
   let client: LicenseStatusClient;
@@ -15,7 +16,7 @@ describe("WebserviceLicenseStatusClient", () => {
 
   beforeEach(() => {
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
-    client = WebserviceLicenseStatusClient("www.example.com", logger);
+    client = WebserviceLicenseStatusClient("www.example.com", DEBUG ? logger : DummyLogWriter);
     jest.resetAllMocks();
   });
 

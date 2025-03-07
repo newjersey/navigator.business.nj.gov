@@ -1,8 +1,10 @@
 import { AccessTokenClient } from "@client/dynamics/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 
 import { DynamicsHousingClient } from "@client/dynamics/housing/DynamicsHousingClient";
 import { HousingPropertyInterestClient, HousingPropertyInterestInfo } from "@client/dynamics/housing/types";
+
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("DynamicsHousingClient", () => {
   let client: HousingPropertyInterestInfo;
@@ -23,7 +25,7 @@ describe("DynamicsHousingClient", () => {
       getPropertyInterest: jest.fn(),
     };
 
-    client = DynamicsHousingClient(logger, {
+    client = DynamicsHousingClient(DEBUG ? logger : DummyLogWriter, {
       accessTokenClient: stubAccessTokenClient,
       housingPropertyInterestClient: stubHousingPropertyInterestClient,
     });
