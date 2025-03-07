@@ -33,10 +33,12 @@ beforeEach(function () {
     this.skip();
   }
 
-  // const randomSeed = Date.now().toString();
-  const randomSeed = "1741298326615";
-  cy.task("log", `Random seed: ${randomSeed}`);
+  const randomSeed = Date.now().toString();
+  // const randomSeed = "1741298326615";
   seedrandom(randomSeed, { global: true });
+  if (testName.includes("[logRandomSeed]")) {
+    cy.task("log", `Random seed: ${randomSeed}`);
+  }
 });
 
 declare global {

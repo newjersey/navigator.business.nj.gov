@@ -20,18 +20,18 @@ global.console.error = (message) => {
   throw message;
 };
 
-// make an actual random string, then log and seed using that
-
-// console.log(`Shard (unit tests): (${process.env.CIRCLE_NODE_INDEX} + 1)/${process.env.CIRCLE_NODE_TOTAL}`);
-const randomSeed = "1741298494986";
-// const randomSeed = Date.now().toString();b
-console.log(expect.getState().currentTestName);
-let message = `Random seed: ${randomSeed}`;
-if (process.env.CIRCLE_NODE_INDEX) {
-  message += `${Number(process.env.CIRCLE_NODE_INDEX) + 1}/${process.env.CIRCLE_NODE_TOTAL}`;
-}
-console.log(message);
-seedrandom(randomSeed, { global: true });
+beforeEach(function () {
+  const randomSeed = Date.now().toString();
+  seedrandom(randomSeed, { global: true });
+  if (expect.getState().currentTestName.includes("[logRandomSeed]")) {
+    let message = `Random seed: ${randomSeed}`;
+    if (process.env.CIRCLE_NODE_INDEX) {
+      message += `${Number(process.env.CIRCLE_NODE_INDEX) + 1}/${process.env.CIRCLE_NODE_TOTAL}`;
+    }
+    message += ` (${expect.getState().currentTestName})`;
+    console.log(message);
+  }
+});
 
 window.gtm = jest.fn();
 

@@ -34,7 +34,7 @@ describe("<CannabisLocationAlert />", () => {
     expect(screen.getByText(Config.profileDefaults.default.cannabisLocationAlert)).toBeInTheDocument();
   });
 
-  it("is NOT displayed for non-cannabis businesses", () => {
+  it("is NOT displayed for non-cannabis businesses [logRandomSeed]", () => {
     const filter = (industry: Industry): boolean => industry.id !== "cannabis";
     const industry = filterRandomIndustry(filter);
 
@@ -42,7 +42,7 @@ describe("<CannabisLocationAlert />", () => {
     expect(screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)).not.toBeInTheDocument();
   });
 
-  it("is NOT displayed when industry is undefined", () => {
+  it("is NOT displayed when industry is undefined [logRandomSeed]", () => {
     renderWithBusiness();
     expect(screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)).not.toBeInTheDocument();
   });
