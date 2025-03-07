@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { ConfigType } from "@/contexts/configContext";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
@@ -32,7 +32,7 @@ export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
 
   const { RegisterForOnSubmit, setIsValid } = useFormContextFieldHelpers(
     "foreignBusinessTypeIds",
-    ProfileFormContext,
+    DataFormErrorMapContext,
     props.errorTypes
   );
 

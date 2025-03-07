@@ -1,7 +1,7 @@
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { ProfileLockedField } from "@/components/profile/ProfileLockedField";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { ProfileContentField } from "@/lib/types/types";
 import { ReactElement, ReactNode } from "react";
@@ -20,7 +20,7 @@ interface Props {
 }
 
 export const ProfileField = (props: Props): ReactElement => {
-  const { isFormFieldInvalid } = useFormContextFieldHelpers(props.fieldName, ProfileFormContext);
+  const { isFormFieldInvalid } = useFormContextFieldHelpers(props.fieldName, DataFormErrorMapContext);
 
   if (props.isVisible === false) {
     return <></>;

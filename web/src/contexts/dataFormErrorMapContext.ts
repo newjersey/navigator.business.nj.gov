@@ -11,13 +11,13 @@ import {
   TaxClearanceCertificateData,
 } from "@businessnjgovnavigator/shared";
 
-export type ProfileFields =
+export type DataFormFields =
   | keyof ProfileData
   | keyof BusinessUser
   | keyof FormationAddress
   | keyof TaxClearanceCertificateData;
 
-const allProfileFields = Object.keys(profileFieldsFromConfig) as ProfileFields[];
+const allProfileFields = Object.keys(profileFieldsFromConfig) as (keyof ProfileData)[];
 const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof BusinessUser)[];
 const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
 const formationAddressFields = Object.keys(emptyFormationAddressData) as (keyof FormationAddress)[];
@@ -25,7 +25,7 @@ const taxClearanceCertificateFields = Object.keys(
   emptyTaxClearanceCertificateData
 ) as (keyof TaxClearanceCertificateData)[];
 
-const profileFields: ProfileFields[] = [
+const dataFormFields: DataFormFields[] = [
   ...new Set([
     ...allProfileFields,
     ...onboardingDataFields,
@@ -35,9 +35,9 @@ const profileFields: ProfileFields[] = [
   ]),
 ];
 
-export type ProfileFieldErrorMap = ReducedFieldStates<ProfileFields>;
+export type DataFormErrorMap = ReducedFieldStates<DataFormFields>;
 
-export const ProfileFormContext = createFormContext<ProfileFieldErrorMap>();
+export const DataFormErrorMapContext = createFormContext<DataFormErrorMap>();
 
-export const createProfileFieldErrorMap = <FieldError>(): ReducedFieldStates<ProfileFields, FieldError> =>
-  createReducedFieldStates<(typeof profileFields)[number], FieldError>(profileFields);
+export const createDataFormErrorMap = <FieldError>(): ReducedFieldStates<DataFormFields, FieldError> =>
+  createReducedFieldStates<(typeof dataFormFields)[number], FieldError>(dataFormFields);

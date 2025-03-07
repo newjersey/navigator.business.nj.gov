@@ -1,6 +1,6 @@
 import { AddressContext } from "@/contexts/addressContext";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { FormationAddress, Municipality } from "@businessnjgovnavigator/shared/";
 import { ReactElement, ReactNode, useState } from "react";
@@ -15,10 +15,10 @@ export const WithStatefulAddressData = ({
   municipalities: Municipality[];
 }): ReactElement => {
   const [addressData, setAddressData] = useState<FormationAddress>(initialData);
-  const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
+  const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
 
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFormErrorMapContext.Provider value={formContextState}>
       <MunicipalitiesContext.Provider value={{ municipalities: municipalities }}>
         <AddressContext.Provider
           value={{
@@ -31,6 +31,6 @@ export const WithStatefulAddressData = ({
           {children}
         </AddressContext.Provider>
       </MunicipalitiesContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFormErrorMapContext.Provider>
   );
 };
