@@ -15,6 +15,7 @@ interface Props {
 export const FormationSuccessPage = (props: Props): ReactElement => {
   const { documents } = useDocuments();
   const { Config } = useConfig();
+  const showSurveyLink = process.env.FEATURE_FORMATION_SURVEY === "true";
 
   useMountEffect(() => {
     analytics.event.business_formation_success_screen.arrive.arrive_from_NIC_formation_processing();
@@ -30,7 +31,6 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
         <p className="text-center">{Config.formation.successPage.subheader}</p>
         <p className="text-center">{Config.formation.successPage.body}</p>
       </div>
-
       <div className="fdr fww">
         <FormationSuccessDocument
           label={Config.formation.successPage.formationDocLabel}
@@ -59,13 +59,13 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
         />
       </div>
 
-      <p className="text-center font-body-2xs">
+      <p className="text-center font-body-2xs margin-bottom-2">
         {Config.formation.successPage.confirmationNumberLabel}
         <span className="margin-left-05">
           {props.business.formationData.getFilingResponse?.confirmationNumber}
         </span>
       </p>
-      <div className="text-center">
+      <div className="text-center margin-bottom-2">
         <Content
           onClick={
             analytics.event.business_formation_success_amendments_external_link.click
@@ -75,6 +75,11 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
           {Config.formation.successPage.amendmentText}
         </Content>
       </div>
+      {showSurveyLink && (
+        <div className="text-center" data-testid="survey-link">
+          <Content>{Config.formation.successPage.surveyLinkText}</Content>
+        </div>
+      )}
     </>
   );
 };

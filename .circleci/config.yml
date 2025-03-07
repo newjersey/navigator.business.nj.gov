@@ -238,6 +238,7 @@ commands:
             echo 'export NEXT_PUBLIC_WEB_BASE_URL=$WEB_BASE_URL_DEV' >> $BASH_ENV
             echo 'export FEATURE_LOGIN_PAGE=$FEATURE_LOGIN_PAGE_DEV' >> $BASH_ENV
             echo 'export FEATURE_TAX_CLEARANCE_CERTIFICATE=$FEATURE_TAX_CLEARANCE_CERTIFICATE_DEV' >> $BASH_ENV
+            echo 'export FEATURE_FORMATION_SURVEY=$FEATURE_FORMATION_SURVEY_DEV' >> $BASH_ENV
 
   set-cypress-env-vars:
     steps:
@@ -283,7 +284,7 @@ commands:
             echo 'export DYNAMICS_HOUSING_CLIENT_ID=$DYNAMICS_HOUSING_CLIENT_ID_DEV' >> $BASH_ENV
             echo 'export DYNAMICS_HOUSING_SECRET=$DYNAMICS_HOUSING_SECRET_DEV' >> $BASH_ENV
             echo 'export DYNAMICS_HOUSING_TENANT_ID=$DYNAMICS_HOUSING_TENANT_ID_DEV' >> $BASH_ENV
-
+            echo 'export FEATURE_FORMATION_SURVEY=$FEATURE_FORMATION_SURVEY_DEV' >> $BASH_ENV
   set-staging-env-vars:
     steps:
       - run:
@@ -344,6 +345,7 @@ commands:
             echo 'export DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID=$DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID_STAGING' >> $BASH_ENV
             echo 'export DYNAMICS_ELEVATOR_SAFETY_SECRET=$DYNAMICS_ELEVATOR_SAFETY_SECRET_STAGING' >> $BASH_ENV
             echo 'export DYNAMICS_ELEVATOR_SAFETY_TENANT_ID=$DYNAMICS_ELEVATOR_SAFETY_TENANT_ID_STAGING' >> $BASH_ENV
+            echo 'export FEATURE_FORMATION_SURVEY=$FEATURE_FORMATION_SURVEY_STAGING' >> $BASH_ENV
 
   set-prod-env-vars:
     steps:
@@ -404,6 +406,7 @@ commands:
             echo 'export DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID=$DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID_PROD' >> $BASH_ENV
             echo 'export DYNAMICS_ELEVATOR_SAFETY_SECRET=$DYNAMICS_ELEVATOR_SAFETY_SECRET_PROD' >> $BASH_ENV
             echo 'export DYNAMICS_ELEVATOR_SAFETY_TENANT_ID=$DYNAMICS_ELEVATOR_SAFETY_TENANT_ID_PROD' >> $BASH_ENV
+            echo 'export FEATURE_FORMATION_SURVEY=$FEATURE_FORMATION_SURVEY_PROD' >> $BASH_ENV
 
   # These inherit environment variables from dev unless overridden below.
   set-content-env-vars:

@@ -16,10 +16,16 @@ const Config = getMergedConfig();
 
 describe("Formation - <FormationSuccessPage />", () => {
   let getFilingResponse: GetFilingResponse;
+  let originalFeatureFormationSurveyValue: string | undefined;
 
   beforeEach(() => {
     jest.resetAllMocks();
     useMockDocuments({});
+    originalFeatureFormationSurveyValue = process.env.FEATURE_FORMATION_SURVEY;
+  });
+
+  afterEach(() => {
+    process.env.FEATURE_FORMATION_SURVEY = originalFeatureFormationSurveyValue;
   });
 
   const renderSuccessPage = (
@@ -70,5 +76,11 @@ describe("Formation - <FormationSuccessPage />", () => {
       { documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" } }
     );
     expect(screen.queryByTestId(Config.formation.successPage.certifiedDocLabel)).not.toBeInTheDocument();
+  });
+
+  it("shows the survey link", () => {
+    process.env.FEATURE_FORMATION_SURVEY = "true";
+    renderSuccessPage({});
+    expect(screen.getByTestId("survey-link")).toBeInTheDocument();
   });
 });
