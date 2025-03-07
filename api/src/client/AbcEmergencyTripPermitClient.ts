@@ -1,11 +1,10 @@
-import {
-  ApiConfig,
-  EmergencyTripPermitSubmitResponse,
-  getApiSubmissionBody,
-} from "@client/AbcEmergencyTripPermitHelpers";
+import { ApiConfig, getApiSubmissionBody } from "@client/AbcEmergencyTripPermitHelpers";
 import { EmergencyTripPermitClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
-import { EmergencyTripPermitApplicationInfo } from "@shared/emergencyTripPermit";
+import {
+  EmergencyTripPermitApplicationInfo,
+  EmergencyTripPermitSubmitResponse,
+} from "@shared/emergencyTripPermit";
 import axios from "axios";
 
 export const AbcEmergencyTripPermitClient = (
