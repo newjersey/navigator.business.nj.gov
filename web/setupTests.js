@@ -21,7 +21,10 @@ global.console.error = (message) => {
 };
 
 beforeEach(function () {
-  const randomSeed = Date.now().toString();
+  let randomSeed = Date.now().toString();
+  if (process.env.RANDOM_SEED) {
+    randomSeed = process.env.RANDOM_SEED;
+  }
   seedrandom(randomSeed, { global: true });
   if (expect.getState().currentTestName.includes("[logRandomSeed]")) {
     let message = `Random seed: ${randomSeed}`;

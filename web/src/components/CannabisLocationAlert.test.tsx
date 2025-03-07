@@ -15,7 +15,7 @@ const Config = getMergedConfig();
 describe("<CannabisLocationAlert />", () => {
   const renderWithBusiness = (industryId?: string): void => {
     const profileData = generateProfileData({ industryId });
-    expect(Math.random()).toEqual(4);
+
     const business = generateBusiness({ profileData });
 
     render(
@@ -26,6 +26,7 @@ describe("<CannabisLocationAlert />", () => {
   };
 
   beforeEach(() => {
+    expect(Math.random()).toEqual(4);
     jest.resetAllMocks();
   });
 

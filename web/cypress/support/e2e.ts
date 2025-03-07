@@ -33,8 +33,10 @@ beforeEach(function () {
     this.skip();
   }
 
-  const randomSeed = Date.now().toString();
-  // const randomSeed = "1741298326615";
+  let randomSeed = Date.now().toString();
+  if (process.env.RANDOM_SEED) {
+    randomSeed = process.env.RANDOM_SEED;
+  }
   seedrandom(randomSeed, { global: true });
   if (testName.includes("[logRandomSeed]")) {
     cy.task("log", `Random seed: ${randomSeed}`);
