@@ -215,7 +215,8 @@
     "Rutger",
     "Unpublishing",
     "CRTK",
-    "DIIN"
+    "DIIN",
+    "GVWR"
   ],
   "ignorePaths": [
     "node_modules/**",
