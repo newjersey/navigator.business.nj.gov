@@ -1,5 +1,5 @@
 ---
-notesMd: "3.3.25: NJEDA let us know we can unpublish this. Dev will archive this."
+notesMd: ""
 name: Urban Enterprise Zone Manufacturers Energy Sales Tax Exemption
 displayName: uze-energy-sales
 urlSlug: urban-enterprise-zone
