@@ -1,7 +1,6 @@
 ---
+header: Architect-in-Charge
 id: architect-in-charge
 displayname: architect-in-charge
-header: Architect in Charge
 ---
-
-An Architect in Charge is a licensed professional who is directly responsible and personally liable for the construction supervision of a project.
+An architect-in-charge or architect-in-charge of construction is a licensed professional who manages construction projects. They are in charge of making sure the work is done correctly and overseeing the outcome of the project.
