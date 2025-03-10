@@ -36,8 +36,10 @@ A letter of qualification or disqualification for the driver. The letter will on
 
 :::
 
-:::callout{ showHeader="true" headerText="What if don’t complete this task?" showIcon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="What if I don't get this permit?" showIcon="false" calloutType="warning" }
 
 You, as the employer, can be fined up to $500 for each uncertified driver operating your vehicles.
 
 :::
+
+**Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov
