@@ -429,10 +429,10 @@ commands:
             echo 'export NEXT_PUBLIC_WEB_BASE_URL=$WEB_BASE_URL_CONTENT' >> $BASH_ENV
 
   # These inherit environment variables from dev unless overridden below.
-  set-accessibility-testing-env-vars:
+  set-testing-env-vars:
     steps:
       - run:
-          name: Set Accessibility Testing Environment Variables
+          name: Set Testing Environment Variables
           command: |
             echo 'export BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME=$BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME_TESTING' >> $BASH_ENV
             echo 'export SERVERLESS_ACCESS_KEY=$SERVERLESS_ACCESS_KEY_TESTING' >> $BASH_ENV
@@ -464,7 +464,7 @@ commands:
           name: Deploy WebApp
           command: aws ecs update-service --cluster bfs_container_cluster --service bfs-navigator-content --region ${AWS_REGION} --force-new-deployment
 
-  deploy-accessibility-testing-env:
+  deploy-testing-env:
     steps:
       - deploy-setup
       - package-webapp-docker:
@@ -681,7 +681,7 @@ jobs:
           at: .
       - deploy-content-env
 
-  deploy-accessibility-testing:
+  deploy-testing:
     environment:
       STAGE: testing
     docker:
@@ -692,10 +692,10 @@ jobs:
     steps:
       - set-shared-stage-env-vars
       - set-dev-env-vars
-      - set-accessibility-testing-env-vars
+      - set-testing-env-vars
       - attach_workspace:
           at: .
-      - deploy-accessibility-testing-env
+      - deploy-testing-env
 
   deploy-dev:
     environment:
@@ -924,6 +924,15 @@ workflows:
               only:
                 - /^webflow-industries-sync-.*/
 
+  deploy-testing-environment:
+    jobs:
+      - deploy-testing:
+          name: Deploy Testing
+          filters:
+            branches:
+              only:
+                - testing-repo
+
   build-and-test:
     jobs:
       - docker-build-builder-image:
@@ -949,12 +958,12 @@ workflows:
                 - /^webflow-licenses-sync-.*/
                 - /^webflow-industries-sync-.*/
                 - /^webflow-sync-.*/
+                - testing-repo
       - lint:
           name: Lint
           filters:
             branches:
               ignore:
-                - accessibility-testing-repo
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
@@ -968,7 +977,6 @@ workflows:
           filters:
             branches:
               ignore:
-                - accessibility-testing-repo
                 - content-repo
                 - /^release-.*/
                 - /^staging-.*/
@@ -986,7 +994,6 @@ workflows:
             branches:
               ignore:
                 - main
-                - accessibility-testing-repo
                 - content-repo
                 - /^release-.*/
                 - /^staging-.*/
@@ -1004,7 +1011,6 @@ workflows:
             branches:
               ignore:
                 - main
-                - accessibility-testing-repo
                 - content-repo
                 - /^release-.*/
                 - /^staging-.*/
@@ -1022,7 +1028,6 @@ workflows:
             branches:
               ignore:
                 - main
-                - accessibility-testing-repo
                 - content-repo
                 - /^release-.*/
                 - /^staging-.*/
@@ -1040,7 +1045,6 @@ workflows:
             branches:
               ignore:
                 - main
-                - accessibility-testing-repo
                 - content-repo
                 - /^release-.*/
                 - /^staging-.*/
@@ -1058,7 +1062,6 @@ workflows:
             branches:
               ignore:
                 - main
-                - accessibility-testing-repo
                 - content-repo
                 - /^release-.*/
                 - /^staging-.*/
@@ -1132,14 +1135,6 @@ workflows:
             branches:
               only:
                 - content-repo
-          requires:
-            - build
-      - deploy-accessibility-testing:
-          name: accessibility-testing-deploy
-          filters:
-            branches:
-              only:
-                - accessibility-testing-repo
           requires:
             - build
 
@@ -1246,7 +1241,7 @@ workflows:
     jobs:
       - docker-build-builder-image
 
-  build-accessibility-testing-weekly:
+  build-testing-weekly:
     triggers:
       - schedule:
           # Every Saturday, at Noon.
@@ -1254,9 +1249,9 @@ workflows:
           filters:
             branches:
               only:
-                - accessibility-testing-repo
+                - testing-repo
     jobs:
-      - deploy-accessibility-testing
+      - deploy-testing
   scheduled-daily-tests-content-repo:
     triggers:
       - schedule:
