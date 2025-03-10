@@ -26,7 +26,7 @@ webflowType: individual-license
 
 * Official transcripts from a completed dental hygiene program accredited by the Commission on Dental Accreditation (CODA)
 * Passing score from the American Board of Dental Examiners (ADEX) dental hygiene exam given by CODA, or a comparable clinical exam
-* National Board DENTPIN number ([retrieve a forgotten DENTPIN number here](https://adadts.my.site.com/dts/s/login/))
+* National Board DENTPIN number ([retrieve a forgotten DENTPIN number here](https://www.ada.org/education/manage-your-dentpin))
 
 ### Background Documentation
 
