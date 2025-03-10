@@ -61,7 +61,7 @@ export const AdditionalProvisions = (): ReactElement => {
     <div data-testid="additional-provisions">
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
         <Heading level={2} styleVariant="h3" className="margin-0-override">
-          {Config.formation.fields.additionalProvisions.label}
+          {Config.formation.fields.additionalProvisions.label}{" "}
           <span className="text-normal font-body-lg">{Config.formation.general.optionalLabel}</span>
         </Heading>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
