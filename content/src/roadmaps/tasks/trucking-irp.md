@@ -11,6 +11,7 @@ name: File Your International Registration Plan (IRP)
 id: trucking-irp
 callToActionLink: https://www.state.nj.us/mvc/pdf/business/irpqui1.pdf
 callToActionText: File My IRP
+agencyId: nj-motor-vehicle
 ---
 
 ## Application Requirements
@@ -26,3 +27,5 @@ callToActionText: File My IRP
 Registration credentials for each vehicle registered with the IRP.
 
 :::
+
+**Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov
