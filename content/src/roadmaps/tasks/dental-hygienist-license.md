@@ -52,7 +52,7 @@ Newark, NJ 07101
 
 Send verification of any licenses you already hold to [dentistry@dca.njoag.gov](mailto:dentistry@dca.njoag.gov).
 
-3. After you submit your application, you will receive email instructions to complete the required, free N.J. Law and Jurisprudence Orientation Program online course. This training helps you understand relevant laws and regulations.
+3. After you submit your application, you will receive email instructions to complete the required, free [N.J. Law and Jurisprudence Orientation Program online course](http://www.state.nj.us/lps/ca2/Dent1/examDH/index.htm). This training helps you understand relevant laws and regulations. It has 25 questions and takes about 30 minutes to complete.
 
 4. After you receive fingerprint instructions, follow the instructions to submit your fingerprints.
 
