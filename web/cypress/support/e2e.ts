@@ -35,7 +35,7 @@ beforeEach(function () {
 
   // figure this env varible thing
   // let randomSeed = process.env.RANDOM_SEED || Math.random().toString(36).slice(2);
-  let randomSeed = "wfslb71bc9p";
+  // let randomSeed = "wfslb71bc9p";
   seedrandom(randomSeed, { global: true });
   if (testName.includes("[logRandomSeed]")) {
     cy.task("log", `Random seed: ${randomSeed} (${testName})`);
