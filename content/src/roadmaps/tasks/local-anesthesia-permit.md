@@ -30,7 +30,6 @@ You must also complete a Board-approved course in local anesthesia administratio
 * Proof of course completion on school letterhead showing dates of attendance
 * Proof of passing grade on the CDCA-WREB-CITA exam
 * State, status, issue date, expiration date for local anesthesia permits in any states other than New Jersey
-* Applicable fees paid
 
 Your application must be signed in front of and by a notary public.
 
