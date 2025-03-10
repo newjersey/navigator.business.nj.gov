@@ -6,11 +6,12 @@ const { utils } = require("@jest/reporters");
 // failing, see: https://github.com/mozilla/addons-frontend/issues/2980.
 class FingersCrossedReporter extends DefaultReporter {
   printTestFileHeader(testPath, config, result) {
+    console.log("hihihihihihi");
     this.log(utils.getResultHeader(result, this._globalConfig, config));
 
     const consoleBuffer = result.console;
     const testFailed = result.numFailingTests > 0;
-
+    debugger;
     if (testFailed && consoleBuffer && consoleBuffer.length > 0) {
       // prettier-ignore
       this.log(
