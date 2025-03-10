@@ -173,6 +173,8 @@ export interface AnytimeActionTask extends AnytimeAction {
   applyToAllUsers: boolean;
   summaryDescriptionMd: string;
   contentMd: string;
+  description?: string;
+  searchMetaDataMatch?: string;
 }
 
 export interface AnytimeActionLicenseReinstatement extends AnytimeAction {

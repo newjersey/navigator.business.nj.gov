@@ -3790,6 +3790,13 @@ collections:
             ],
         }
       - {
+          label: "Meta Data for Search (searching will match this text but it will never appear)",
+          name: "searchMetaDataMatch",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Dropdown Description", name: "description", widget: "string", required: false }
+      - {
           label: "Apply to all - overrides industry and sector dropdown",
           name: "applyToAllUsers",
           widget: "boolean",

@@ -207,7 +207,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
 
             const newClassName = `${_props.className} anytime-action-dropdown-option ${
               selected ? "bg-accent-cool-lightest" : ""
-            } `;
+            } fdc`;
 
             return (
               <li
@@ -217,9 +217,13 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
                 key={option.filename}
               >
                 {selected ? (
-                  <MenuOptionSelected>{textComponent}</MenuOptionSelected>
+                  <MenuOptionSelected secondaryText={"this is a test, kinda thing for tufs"}>
+                    {textComponent}
+                  </MenuOptionSelected>
                 ) : (
-                  <MenuOptionUnselected>{textComponent}</MenuOptionUnselected>
+                  <MenuOptionUnselected secondaryText={"this is a test, kinda thing for tufs"}>
+                    {textComponent}
+                  </MenuOptionUnselected>
                 )}
               </li>
             );
