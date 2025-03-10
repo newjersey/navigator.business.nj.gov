@@ -48,7 +48,9 @@
     }
   ],
   "name": "Acupuncture",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "acupuncture",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
