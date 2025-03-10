@@ -43,7 +43,7 @@ webflowType: individual-license
 Board of Dentistry 
 &nbsp;
 
-PO Box 45005 
+P.O. Box 45005 
 &nbsp;
 
 Newark, NJ 07101
