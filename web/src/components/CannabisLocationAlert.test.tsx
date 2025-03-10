@@ -26,6 +26,7 @@ describe("<CannabisLocationAlert />", () => {
   };
 
   beforeEach(() => {
+    console.log("test hihih");
     jest.resetAllMocks();
   });
 
