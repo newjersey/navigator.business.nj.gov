@@ -1,6 +1,6 @@
 ---
 summaryDescriptionMd: >-
-
+  
 
   :::infoAlert
    Inspection decals must be displayed on your vehicle to avoid fines.
@@ -13,8 +13,9 @@ displayname: transportation-inspection
 name: Request Your Vehicle Inspection
 id: transportation-inspection
 callToActionLink: https://www.nj.gov/mvc/pdf/inspections/Commercial_Bus_Application.pdf
-issuingAgency: New Jersey Motor Vehicle Commission Bus Inspection Unit
 callToActionText: Request My Vehicle Inspection
+agencyId: nj-motor-vehicle
+issuingAgency: New Jersey Motor Vehicle Commission Bus Inspection Unit
 ---
 
 ## Application Requirements
