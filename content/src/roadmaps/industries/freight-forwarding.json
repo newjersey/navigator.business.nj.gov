@@ -39,24 +39,24 @@
     },
     {
       "step": 3,
-      "weight": 15,
+      "weight": 11,
       "task": "get-insurance"
     },
     {
       "step": 3,
-      "weight": 16,
+      "weight": 12,
       "task": "transportation-entity-id",
       "required": true
     },
     {
       "step": 3,
-      "weight": 14,
+      "weight": 13,
       "task": "mvc-title-task",
       "required": true
     },
     {
       "step": 3,
-      "weight": 18,
+      "weight": 14,
       "task": "mvc-registration-task",
       "required": true
     }
