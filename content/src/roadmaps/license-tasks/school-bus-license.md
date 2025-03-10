@@ -1,10 +1,10 @@
 ---
+licenseName: ""
 id: school-bus-license
 displayname: school-bus-license
 urlSlug: school-bus-license
 name: Ensure You or Your Drivers Have the Right Credentials
 webflowName: "School Bus: School Bus Driver Credentials"
-licenseName: ""
 summaryDescriptionMd: >-
   :::infoAlert
 
@@ -49,3 +49,4 @@ webflowId: 5f772935f278cc9d99b0ce1e
 A Commercial Driver’s License (CDL) with P and S endorsements.
 
 :::
+**Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov
