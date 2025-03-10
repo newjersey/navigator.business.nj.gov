@@ -38,7 +38,7 @@ webflowType: business-license
 * Total acreage details
 * Acreage developed and sold
 * Date, time, and place of annual lot owner’s meeting or annual meeting, if applicable
-* Copies of the minutes with consideration and * Trustee approval of the crematory construction
+* Copies of the minutes with consideration and Trustee approval of the crematory construction
 * Name and address of custodial institution maintaining M&P Fund
 * Book and market values of M&P fund
 * Names and business addresses of all trustees or directors
