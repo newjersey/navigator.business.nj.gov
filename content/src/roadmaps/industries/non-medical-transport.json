@@ -44,17 +44,17 @@
     },
     {
       "step": 3,
-      "weight": 15,
+      "weight": 11,
       "task": "get-insurance"
     },
     {
       "step": 3,
-      "weight": 30,
+      "weight": 12,
       "task": "logisticare"
     },
     {
       "step": 3,
-      "weight": 17,
+      "weight": 13,
       "task": "transportation-entity-id",
       "required": true
     },
@@ -62,11 +62,11 @@
       "step": 3,
       "task": "mvc-title-task",
       "required": true,
-      "weight": 10
+      "weight": 14
     },
     {
       "step": 3,
-      "weight": 10,
+      "weight": 15,
       "licenseTask": "",
       "required": true,
       "task": "mvc-registration-task"
