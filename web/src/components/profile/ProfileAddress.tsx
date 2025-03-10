@@ -3,7 +3,7 @@ import { NewJerseyAddress } from "@/components/data-fields/address/NewJerseyAddr
 import { UnitesStatesAddress } from "@/components/data-fields/address/UnitesStatesAddress";
 import { ProfileAddressLockedFields } from "@/components/profile/ProfileAddressLockedFields";
 import { AddressContext } from "@/contexts/addressContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
@@ -22,24 +22,30 @@ export const ProfileAddress = (): ReactElement => {
   const { doesFieldHaveError } = useAddressErrors();
   const { setIsValid: setIsValidAddressLine1 } = useFormContextFieldHelpers(
     "addressLine1",
-    ProfileFormContext
+    DataFormErrorMapContext
   );
   const { setIsValid: setIsValidAddressLine2 } = useFormContextFieldHelpers(
     "addressLine2",
-    ProfileFormContext
+    DataFormErrorMapContext
   );
-  const { setIsValid: setIsValidCity } = useFormContextFieldHelpers("addressCity", ProfileFormContext);
+  const { setIsValid: setIsValidCity } = useFormContextFieldHelpers("addressCity", DataFormErrorMapContext);
   const { setIsValid: setIsValidMunicipality } = useFormContextFieldHelpers(
     "addressMunicipality",
-    ProfileFormContext
+    DataFormErrorMapContext
   );
   const { setIsValid: setIsValidProvince } = useFormContextFieldHelpers(
     "addressProvince",
-    ProfileFormContext
+    DataFormErrorMapContext
   );
-  const { setIsValid: setIsValidState } = useFormContextFieldHelpers("addressState", ProfileFormContext);
-  const { setIsValid: setIsValidCountry } = useFormContextFieldHelpers("addressCountry", ProfileFormContext);
-  const { setIsValid: setIsValidZipCode } = useFormContextFieldHelpers("addressZipCode", ProfileFormContext);
+  const { setIsValid: setIsValidState } = useFormContextFieldHelpers("addressState", DataFormErrorMapContext);
+  const { setIsValid: setIsValidCountry } = useFormContextFieldHelpers(
+    "addressCountry",
+    DataFormErrorMapContext
+  );
+  const { setIsValid: setIsValidZipCode } = useFormContextFieldHelpers(
+    "addressZipCode",
+    DataFormErrorMapContext
+  );
 
   const handleAddressTypeChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const businessLocationTypeValue = event.target.value as FormationBusinessLocationType;

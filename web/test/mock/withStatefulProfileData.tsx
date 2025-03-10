@@ -1,5 +1,5 @@
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { getFlow } from "@/lib/utils/helpers";
 import { statefulDataHelpers } from "@/test/mock/withStatefulData";
@@ -19,8 +19,10 @@ export const profileDataWasNotUpdated = helpers.dataWasNotUpdated;
 export const profileDataUpdatedNTimes = helpers.dataUpdatedNTimes;
 
 export const WithStatefulDataFieldFormContext = ({ children }: { children: ReactNode }): ReactElement => {
-  const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
-  return <ProfileFormContext.Provider value={formContextState}>{children}</ProfileFormContext.Provider>;
+  const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
+  return (
+    <DataFormErrorMapContext.Provider value={formContextState}>{children}</DataFormErrorMapContext.Provider>
+  );
 };
 
 export const WithStatefulProfileData = ({

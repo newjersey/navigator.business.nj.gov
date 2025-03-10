@@ -5,8 +5,8 @@ import { TaxIdFormContext, taxIdFormContextErrorMap } from "@/components/data-fi
 import { TaxIdDisplayStatus } from "@/components/data-fields/tax-id/TaxIdHelpers";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ConfigType } from "@/contexts/configContext";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
@@ -41,7 +41,7 @@ export const SplitTaxId = ({
 
   const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     fieldName,
-    ProfileFormContext
+    DataFormErrorMapContext
   );
 
   RegisterForOnSubmit(
