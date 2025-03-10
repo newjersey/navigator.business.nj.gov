@@ -57,7 +57,8 @@
   ],
   "name": "Auto-Body Repair",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "business-vehicle-title-reg"
   ],
   "displayname": "auto-body-repair",
   "industryOnboardingQuestions": {
