@@ -1,7 +1,5 @@
 ---
-notesMd: "LLM-assisted (sort of -- heavy revisions made) Planning Doc:
-  https://docs.google.com/document/d/1yoHDEM7vMXgHyWt9CmHKB6Uloz7lFQ_6B3h8jKfc4\
-  JU/edit?tab=t.0#heading=h.gjdgxs "
+notesMd: "LLM-assisted (sort of -- heavy revisions made) Planning Doc: https://docs.google.com/document/d/1yoHDEM7vMXgHyWt9CmHKB6Uloz7lFQ_6B3h8jKfc4JU/edit"
 summaryDescriptionMd: You need a dental hygienist license to practice in New
   Jersey, after completing your degree.
 urlSlug: dental-hygienist-license
@@ -14,36 +12,37 @@ industryId: healthcare
 agencyId: nj-consumer-affairs
 webflowType: individual-license
 ---
+
 ## Application Requirements
 
 ### Personal Information
 
-* Social Security number (SSN), `Individual Taxpayer Identification number (ITIN)|itin` , or `Division Issued Identification number (DIIN)|diin` 
-* Proof of citizenship or immigration status
-* 2-inch x 2-inch passport photo taken in the past 6 months
+- Social Security number (SSN), `Individual Taxpayer Identification number (ITIN)|itin` , or `Division Issued Identification number (DIIN)|diin`
+- Proof of citizenship or immigration status
+- 2-inch x 2-inch passport photo taken in the past 6 months
 
 ### Education and Examination
 
-* Official transcripts from a completed dental hygiene program accredited by the Commission on Dental Accreditation (CODA)
-* Passing score from the American Board of Dental Examiners (ADEX) dental hygiene exam given by CODA, or a comparable clinical exam
-* National Board DENTPIN number ([retrieve a forgotten DENTPIN number here](https://www.ada.org/education/manage-your-dentpin))
+- Official transcripts from a completed dental hygiene program accredited by the Commission on Dental Accreditation (CODA)
+- Passing score from the American Board of Dental Examiners (ADEX) dental hygiene exam given by CODA, or a comparable clinical exam
+- National Board DENTPIN number ([retrieve a forgotten DENTPIN number here](https://www.ada.org/education/manage-your-dentpin))
 
 ### Background Documentation
 
-* Criminal history background check, including information on previous fingerprinting, if applicable
-* Child support status, if applicable
-* Information about medical conditions
-* Professional discipline history, if applicable
+- Criminal history background check, including information on previous fingerprinting, if applicable
+- Child support status, if applicable
+- Information about medical conditions
+- Professional discipline history, if applicable
 
 ## To Get Your License:
 
 1. [Submit an application](https://newjersey.mylicense.com/eGov/Login.aspx). Make sure to provide all requested information, including licenses in any state and name change documentation, if applicable. You may be asked to submit any missing documentation.
 2. Ask your school to send transcripts to dentistry@dca.njoag.gov (preferred) or by mail to:
 
-Board of Dentistry 
+Board of Dentistry
 &nbsp;
 
-P.O. Box 45005 
+P.O. Box 45005
 &nbsp;
 
 Newark, NJ 07101
