@@ -1,3 +1,4 @@
+import { XrayData } from "src/xray";
 import { BusinessUser } from "./businessUser";
 import { createBusinessId } from "./domain-logic/createBusinessId";
 import { EnvironmentData } from "./environment";
@@ -29,6 +30,7 @@ export interface Business {
   readonly taxFilingData: TaxFilingData;
   readonly formationData: FormationData;
   readonly environmentData: EnvironmentData | undefined;
+  readonly xrayRegistrationData: XrayData | undefined;
   readonly versionWhenCreated: number;
   readonly version: number;
   readonly userId: string;
@@ -79,6 +81,7 @@ export const createEmptyBusiness = ({
       dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     },
+    xrayRegistrationData: undefined,
     environmentData: undefined,
     version: CURRENT_VERSION,
     versionWhenCreated: CURRENT_VERSION,
