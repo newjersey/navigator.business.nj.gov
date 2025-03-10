@@ -11,7 +11,7 @@ import {
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { WithStatefulProfileFormContext } from "@/test/mock/withStatefulProfileData";
+import { WithStatefulDataFieldFormContext } from "@/test/mock/withStatefulProfileData";
 import {
   WithStatefulUserData,
   currentBusiness,
@@ -42,11 +42,11 @@ const WithStatefulBusiness = ({
   children: ReactNode;
   initialBusiness: Business;
 }): ReactElement => (
-  <WithStatefulProfileFormContext>
+  <WithStatefulDataFieldFormContext>
     <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
       {children}
     </WithStatefulUserData>
-  </WithStatefulProfileFormContext>
+  </WithStatefulDataFieldFormContext>
 );
 
 describe("<TaxTask />", () => {

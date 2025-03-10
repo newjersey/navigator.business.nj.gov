@@ -1,7 +1,6 @@
 import { ContextualInfo } from "@/contexts/contextualInfoContext";
 import {
   AnytimeActionLicenseReinstatement,
-  AnytimeActionLink,
   AnytimeActionTask,
   Certification,
   County,
@@ -86,18 +85,6 @@ export const convertAnytimeActionLicenseReinstatementMd = (
   const anytimeActionGrayMatter = matterResult.data as AnytimeActionLicenseReinsatementGrayMatter;
   return {
     contentMd: matterResult.content,
-    filename,
-    ...anytimeActionGrayMatter,
-  };
-};
-
-export const convertAnytimeActionLinkMd = (
-  anytimeActionLinkMdContents: string,
-  filename: string
-): AnytimeActionLink => {
-  const matterResult = matter(anytimeActionLinkMdContents);
-  const anytimeActionGrayMatter = matterResult.data as AnytimeActionLinkGrayMatter;
-  return {
     filename,
     ...anytimeActionGrayMatter,
   };
@@ -200,16 +187,9 @@ type LicenseGrayMatter = {
   licenseName: string;
 };
 
-type AnytimeActionLinkGrayMatter = {
-  name: string;
-  externalRoute: string;
-  industryIds: string[];
-  sectorIds: string[];
-  applyToAllUsers: boolean;
-};
-
 type AnytimeActionTaskGrayMatter = {
   name: string;
+  category: string[];
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;

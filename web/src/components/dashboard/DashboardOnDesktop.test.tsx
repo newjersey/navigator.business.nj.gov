@@ -2,7 +2,6 @@ import { DashboardOnDesktop } from "@/components/dashboard/DashboardOnDesktop";
 import { getMergedConfig } from "@/contexts/configContext";
 import {
   AnytimeActionLicenseReinstatement,
-  AnytimeActionLink,
   AnytimeActionTask,
   LicenseEventType,
   OperateReference,
@@ -10,7 +9,6 @@ import {
   SidebarCardContent,
 } from "@/lib/types/types";
 import {
-  generateAnytimeActionLink,
   generateAnytimeActionTask,
   generateBusinessPersona,
   generateSidebarCardContent,
@@ -80,19 +78,13 @@ describe("<DashboardOnDesktop />", () => {
   const renderDashboardComponent = ({
     sidebarDisplayContent,
     operateReferences,
-    anytimeActionLinks,
-    anytimeActionAdminTask,
-    anytimeActionLicensesTask,
-    anytimeActionReinstatementsTask,
+    anytimeActionTasks,
     anytimeActionLicenseReinstatements,
     licenseEvents,
   }: {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     operateReferences?: Record<string, OperateReference>;
-    anytimeActionLinks?: AnytimeActionLink[];
-    anytimeActionAdminTask?: AnytimeActionTask[];
-    anytimeActionLicensesTask?: AnytimeActionTask[];
-    anytimeActionReinstatementsTask?: AnytimeActionTask[];
+    anytimeActionTasks?: AnytimeActionTask[];
     anytimeActionLicenseReinstatements?: AnytimeActionLicenseReinstatement[];
     licenseEvents?: LicenseEventType[];
   }): void => {
@@ -103,10 +95,7 @@ describe("<DashboardOnDesktop />", () => {
           displayContent={createDisplayContent(sidebarDisplayContent)}
           fundings={[]}
           certifications={[]}
-          anytimeActionLinks={anytimeActionLinks ?? []}
-          anytimeActionAdminTasks={anytimeActionAdminTask ?? []}
-          anytimeActionLicensesTasks={anytimeActionLicensesTask ?? []}
-          anytimeActionReinstatementsTasks={anytimeActionReinstatementsTask ?? []}
+          anytimeActionTasks={anytimeActionTasks ?? []}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatements ?? []}
           licenseEvents={licenseEvents ?? []}
         />
@@ -125,10 +114,7 @@ describe("<DashboardOnDesktop />", () => {
             displayContent={createDisplayContent()}
             fundings={[]}
             certifications={[]}
-            anytimeActionLinks={[]}
-            anytimeActionAdminTasks={[]}
-            anytimeActionLicensesTasks={[]}
-            anytimeActionReinstatementsTasks={[]}
+            anytimeActionTasks={[]}
             anytimeActionLicenseReinstatements={[]}
             licenseEvents={[]}
           />
@@ -439,10 +425,7 @@ describe("<DashboardOnDesktop />", () => {
       (phase) => {
         useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
         renderDashboardComponent({
-          anytimeActionLinks: [generateAnytimeActionLink({})],
-          anytimeActionAdminTask: [generateAnytimeActionTask({})],
-          anytimeActionLicensesTask: [generateAnytimeActionTask({})],
-          anytimeActionReinstatementsTask: [generateAnytimeActionTask({})],
+          anytimeActionTasks: [generateAnytimeActionTask({})],
         });
 
         expect(screen.queryByTestId("anytimeActionDropdown")).not.toBeInTheDocument();
@@ -452,10 +435,7 @@ describe("<DashboardOnDesktop />", () => {
     it.each(operatingPhasesWithAnytimeActions)("displays anytime action section for %s", (phase) => {
       useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
       renderDashboardComponent({
-        anytimeActionLinks: [generateAnytimeActionLink({})],
-        anytimeActionAdminTask: [generateAnytimeActionTask({})],
-        anytimeActionLicensesTask: [generateAnytimeActionTask({})],
-        anytimeActionReinstatementsTask: [generateAnytimeActionTask({})],
+        anytimeActionTasks: [generateAnytimeActionTask({})],
       });
 
       expect(screen.getByTestId("anytimeActionDropdown")).toBeInTheDocument();

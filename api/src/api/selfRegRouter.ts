@@ -5,6 +5,10 @@ import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 import { createHmac } from "node:crypto";
 
+type Mutable<T> = {
+  -readonly [P in keyof T]: T[P] extends object ? Mutable<T[P]> : T[P];
+};
+
 export const selfRegRouterFactory = (
   databaseClient: DatabaseClient,
   selfRegClient: SelfRegClient
@@ -13,12 +17,15 @@ export const selfRegRouterFactory = (
 
   router.post("/self-reg", async (req, res) => {
     const userData = req.body as UserData;
+    const mutableClone = structuredClone(userData) as Mutable<UserData>;
+    mutableClone.user.email = mutableClone.user.email.toLowerCase().normalize();
+    const cleanedUserData: UserData = mutableClone as UserData;
 
     try {
-      const selfRegResponse = await (userData.user.myNJUserKey
-        ? selfRegClient.resume(userData.user.myNJUserKey)
-        : selfRegClient.grant(userData.user));
-      const updatedUserData = await updateMyNJKey(userData, selfRegResponse.myNJUserKey);
+      const selfRegResponse = await (cleanedUserData.user.myNJUserKey
+        ? selfRegClient.resume(cleanedUserData.user.myNJUserKey)
+        : selfRegClient.grant(cleanedUserData.user));
+      const updatedUserData = await updateMyNJKey(cleanedUserData, selfRegResponse.myNJUserKey);
       res.json({ authRedirectURL: selfRegResponse.authRedirectURL, userData: updatedUserData });
     } catch (error) {
       const message = (error as Error).message;

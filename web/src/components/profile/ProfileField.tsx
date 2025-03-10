@@ -1,8 +1,9 @@
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { ProfileLockedField } from "@/components/profile/ProfileLockedField";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { ProfileContentField, ProfileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { ProfileContentField } from "@/lib/types/types";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {

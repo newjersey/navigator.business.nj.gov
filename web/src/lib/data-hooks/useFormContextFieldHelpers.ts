@@ -1,4 +1,4 @@
-import { FieldErrorType, FieldStateActionKind, FormContextType } from "@/contexts/formContext";
+import { FieldErrorType, FieldStateActionKind, FormContextType } from "@/lib/types/types";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { Context, useContext, useEffect, useMemo } from "react";
 

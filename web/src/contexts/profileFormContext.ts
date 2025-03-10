@@ -1,28 +1,37 @@
-import { createFormContext, createReducedFieldStates, ReducedFieldStates } from "@/contexts/formContext";
-import { profileFieldsFromConfig } from "@/lib/types/types";
+import { createFormContext, createReducedFieldStates } from "@/contexts/formContext";
+import { profileFieldsFromConfig, ReducedFieldStates } from "@/lib/types/types";
 import {
   BusinessUser,
   emptyBusinessUser,
   emptyFormationAddressData,
   emptyProfileData,
+  emptyTaxClearanceCertificateData,
   FormationAddress,
-  IndustrySpecificData,
   ProfileData,
+  TaxClearanceCertificateData,
 } from "@businessnjgovnavigator/shared";
 
-export type ProfileFields = keyof ProfileData | keyof BusinessUser | keyof FormationAddress;
+export type ProfileFields =
+  | keyof ProfileData
+  | keyof BusinessUser
+  | keyof FormationAddress
+  | keyof TaxClearanceCertificateData;
 
 const allProfileFields = Object.keys(profileFieldsFromConfig) as ProfileFields[];
 const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof BusinessUser)[];
 const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
 const formationAddressFields = Object.keys(emptyFormationAddressData) as (keyof FormationAddress)[];
+const taxClearanceCertificateFields = Object.keys(
+  emptyTaxClearanceCertificateData
+) as (keyof TaxClearanceCertificateData)[];
 
-export const profileFields: ProfileFields[] = [
+const profileFields: ProfileFields[] = [
   ...new Set([
     ...allProfileFields,
     ...onboardingDataFields,
     ...businessUserDisplayFields,
     ...formationAddressFields,
+    ...taxClearanceCertificateFields,
   ]),
 ];
 
@@ -32,8 +41,3 @@ export const ProfileFormContext = createFormContext<ProfileFieldErrorMap>();
 
 export const createProfileFieldErrorMap = <FieldError>(): ReducedFieldStates<ProfileFields, FieldError> =>
   createReducedFieldStates<(typeof profileFields)[number], FieldError>(profileFields);
-
-export type ProfileContentField = Exclude<
-  (keyof ProfileData | keyof IndustrySpecificData) & keyof typeof profileFieldsFromConfig,
-  "businessPersona"
->;

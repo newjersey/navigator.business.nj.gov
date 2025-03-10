@@ -2,7 +2,7 @@
 
 import { GenericTextField } from "@/components/GenericTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { DataFieldProps } from "@/components/data-fields/DataField";
+import { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
 import { TaxIdDisplayStatus } from "@/components/data-fields/tax-id/TaxIdHelpers";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { ProfileFormContext } from "@/contexts/profileFormContext";
@@ -12,7 +12,8 @@ import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
 import { InputAdornment, useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
-interface Props extends Omit<DataFieldProps, "fieldName" | "handleChange" | "onValidation" | "inputWidth"> {
+interface Props
+  extends Omit<ProfileDataFieldProps, "fieldName" | "handleChange" | "onValidation" | "inputWidth"> {
   handleChangeOverride?: (value: string) => void;
   getShowHideToggleButton: () => ReactElement;
   taxIdDisplayStatus: TaxIdDisplayStatus;

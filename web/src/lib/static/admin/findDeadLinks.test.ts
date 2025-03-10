@@ -41,13 +41,7 @@ describe("findDeadLinks", () => {
       // @ts-ignore
       .mockReturnValueOnce(["licenseTasks.md"])
       // @ts-ignore
-      .mockReturnValueOnce(["anytimeActionLinks.md"])
-      // @ts-ignore
-      .mockReturnValueOnce(["anytimeActionTasksAdmin.md"])
-      // @ts-ignore
-      .mockReturnValueOnce(["anytimeActionTasksLicenses.md"])
-      // @ts-ignore
-      .mockReturnValueOnce(["anytimeActionTasksReinstatements.md"])
+      .mockReturnValueOnce(["anytimeActionTasks.md"])
       // @ts-ignore
       .mockReturnValueOnce(["anytimeActionLicenseReinstatements.md"]);
 
@@ -71,7 +65,6 @@ describe("findDeadLinks", () => {
     const licenses = "License Content";
     const licenseTasks = "LicenseTask Content";
     const anytimeActionTasks = "AnytimeActionTask Content";
-    const anytimeActionLinks = "AnytimeActionLink Content";
     const anytimeActionLicenseReinstatements = "AnytimeActionLicenseReinstatement Content";
 
     mockedFs.readFileSync
@@ -93,9 +86,6 @@ describe("findDeadLinks", () => {
       .mockReturnValueOnce(certifications)
       .mockReturnValueOnce(licenses)
       .mockReturnValueOnce(licenseTasks)
-      .mockReturnValueOnce(anytimeActionLinks)
-      .mockReturnValueOnce(anytimeActionTasks)
-      .mockReturnValueOnce(anytimeActionTasks)
       .mockReturnValueOnce(anytimeActionTasks)
       .mockReturnValueOnce(anytimeActionLicenseReinstatements);
   });
@@ -131,10 +121,7 @@ describe("findDeadLinks", () => {
         "/license-calendar-event/licenses-expiration": [],
         "/funding/fundings": [],
         "/certification/certifications": [],
-        "/anytime-action-links/anytimeActionLinks": [],
-        "/anytime-action-tasks-admin/anytimeActionTasksAdmin": [],
-        "/anytime-action-tasks-licenses/anytimeActionTasksLicenses": [],
-        "/anytime-action-tasks-reinstatements/anytimeActionTasksReinstatements": [],
+        "/anytime-action-tasks/anytimeActionTasks": [],
         "/anytime-action-license-reinstatements/anytimeActionLicenseReinstatements": [],
       });
     });

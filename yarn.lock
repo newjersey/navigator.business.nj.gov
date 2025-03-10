@@ -4388,14 +4388,14 @@ __metadata:
     "@types/jest": 29.5.14
     "@types/jsonwebtoken": 9.0.7
     "@types/lodash": 4.17.14
-    "@types/node": 20.17.17
+    "@types/node": 20.17.23
     "@types/simple-oauth2": 5.0.7
     "@types/supertest": 6.0.2
     "@types/xml2js": 0.4.14
     "@typescript-eslint/eslint-plugin": 7.18.0
     "@typescript-eslint/parser": 7.18.0
     airtable: 0.12.2
-    axios: 1.7.9
+    axios: 1.8.2
     body-parser: 1.20.3
     cors: 2.8.5
     cross-env: 7.0.3
@@ -4443,7 +4443,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
-    "@types/node": 20.17.17
+    "@types/node": 20.17.23
     cross-env: 7.0.3
     cspell: 8.17.5
     prettier: 2.8.8
@@ -4506,7 +4506,7 @@ __metadata:
     "@storybook/react": 7.6.20
     "@storybook/storybook-deployer": 2.8.16
     "@storybook/theming": 7.6.20
-    "@swc/core": 1.10.11
+    "@swc/core": 1.11.6
     "@swc/jest": 0.2.37
     "@testing-library/dom": 10.4.0
     "@testing-library/jest-dom": 6.6.3
@@ -4522,7 +4522,7 @@ __metadata:
     "@types/jsonwebtoken": 9.0.7
     "@types/lodash": 4.17.14
     "@types/mdast": 4.0.4
-    "@types/node": 20.17.17
+    "@types/node": 20.17.23
     "@types/react": 18.2.79
     "@types/react-dom": 18.2.25
     "@types/react-slick": 0.23.13
@@ -4538,7 +4538,7 @@ __metadata:
     "@typescript-eslint/parser": 7.18.0
     airtable: 0.12.2
     aws-amplify: 6.11.0
-    axios: 1.7.9
+    axios: 1.8.2
     babel-jest: 29.7.0
     babel-loader: 9.2.1
     body-parser: 1.20.3
@@ -4556,7 +4556,7 @@ __metadata:
     cypress-dotenv: 2.0.2
     cypress-wait-until: 3.0.2
     dayjs: 1.11.13
-    decap-cms-app: 3.4.0
+    decap-cms-app: 3.0.12
     dedent: 1.5.3
     dependency-cruiser: 16.9.0
     dotenv: 16.4.7
@@ -4654,7 +4654,7 @@ __metadata:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 29.6.3
     "@types/jest": 29.5.14
-    "@types/node": 20.17.17
+    "@types/node": 20.17.23
     "@types/uuid": 9.0.8
     "@typescript-eslint/eslint-plugin": 7.18.0
     "@typescript-eslint/parser": 7.18.0
@@ -4717,7 +4717,7 @@ __metadata:
     "@storybook/react": 7.6.20
     "@storybook/storybook-deployer": 2.8.16
     "@storybook/theming": 7.6.20
-    "@swc/core": 1.10.11
+    "@swc/core": 1.11.6
     "@swc/jest": 0.2.37
     "@testing-library/dom": 10.4.0
     "@testing-library/jest-dom": 6.6.3
@@ -4729,7 +4729,7 @@ __metadata:
     "@types/js-yaml": 4.0.9
     "@types/lodash": 4.17.14
     "@types/mdast": 4.0.4
-    "@types/node": 20.17.17
+    "@types/node": 20.17.23
     "@types/react": 18.2.79
     "@types/react-dom": 18.2.25
     "@types/react-slick": 0.23.13
@@ -4741,7 +4741,7 @@ __metadata:
     "@typescript-eslint/parser": 7.18.0
     airtable: 0.12.2
     aws-amplify: 6.11.0
-    axios: 1.7.9
+    axios: 1.8.2
     babel-jest: 29.7.0
     babel-loader: 9.2.1
     broken-link-checker: 0.7.8
@@ -4755,7 +4755,7 @@ __metadata:
     cypress-dotenv: 2.0.2
     cypress-wait-until: 3.0.2
     dayjs: 1.11.13
-    decap-cms-app: 3.4.0
+    decap-cms-app: 3.0.12
     dependency-cruiser: 16.9.0
     dotenv: 16.4.7
     eslint: 8.57.1
@@ -11896,92 +11896,92 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-arm64@npm:1.10.11":
-  version: 1.10.11
-  resolution: "@swc/core-darwin-arm64@npm:1.10.11"
+"@swc/core-darwin-arm64@npm:1.11.6":
+  version: 1.11.6
+  resolution: "@swc/core-darwin-arm64@npm:1.11.6"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-x64@npm:1.10.11":
-  version: 1.10.11
-  resolution: "@swc/core-darwin-x64@npm:1.10.11"
+"@swc/core-darwin-x64@npm:1.11.6":
+  version: 1.11.6
+  resolution: "@swc/core-darwin-x64@npm:1.11.6"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm-gnueabihf@npm:1.10.11":
-  version: 1.10.11
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.10.11"
+"@swc/core-linux-arm-gnueabihf@npm:1.11.6":
+  version: 1.11.6
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.11.6"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.10.11":
-  version: 1.10.11
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.10.11"
+"@swc/core-linux-arm64-gnu@npm:1.11.6":
+  version: 1.11.6
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.11.6"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-musl@npm:1.10.11":
-  version: 1.10.11
-  resolution: "@swc/core-linux-arm64-musl@npm:1.10.11"
+"@swc/core-linux-arm64-musl@npm:1.11.6":
+  version: 1.11.6
+  resolution: "@swc/core-linux-arm64-musl@npm:1.11.6"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.10.11":
-  version: 1.10.11
-  resolution: "@swc/core-linux-x64-gnu@npm:1.10.11"
+"@swc/core-linux-x64-gnu@npm:1.11.6":
+  version: 1.11.6
+  resolution: "@swc/core-linux-x64-gnu@npm:1.11.6"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-musl@npm:1.10.11":
-  version: 1.10.11
-  resolution: "@swc/core-linux-x64-musl@npm:1.10.11"
+"@swc/core-linux-x64-musl@npm:1.11.6":
+  version: 1.11.6
+  resolution: "@swc/core-linux-x64-musl@npm:1.11.6"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.10.11":
-  version: 1.10.11
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.10.11"
+"@swc/core-win32-arm64-msvc@npm:1.11.6":
+  version: 1.11.6
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.11.6"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-ia32-msvc@npm:1.10.11":
-  version: 1.10.11
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.10.11"
+"@swc/core-win32-ia32-msvc@npm:1.11.6":
+  version: 1.11.6
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.11.6"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.10.11":
-  version: 1.10.11
-  resolution: "@swc/core-win32-x64-msvc@npm:1.10.11"
+"@swc/core-win32-x64-msvc@npm:1.11.6":
+  version: 1.11.6
+  resolution: "@swc/core-win32-x64-msvc@npm:1.11.6"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core@npm:1.10.11, @swc/core@npm:^1.3.82":
-  version: 1.10.11
-  resolution: "@swc/core@npm:1.10.11"
+"@swc/core@npm:1.11.6, @swc/core@npm:^1.3.82":
+  version: 1.11.6
+  resolution: "@swc/core@npm:1.11.6"
   dependencies:
-    "@swc/core-darwin-arm64": 1.10.11
-    "@swc/core-darwin-x64": 1.10.11
-    "@swc/core-linux-arm-gnueabihf": 1.10.11
-    "@swc/core-linux-arm64-gnu": 1.10.11
-    "@swc/core-linux-arm64-musl": 1.10.11
-    "@swc/core-linux-x64-gnu": 1.10.11
-    "@swc/core-linux-x64-musl": 1.10.11
-    "@swc/core-win32-arm64-msvc": 1.10.11
-    "@swc/core-win32-ia32-msvc": 1.10.11
-    "@swc/core-win32-x64-msvc": 1.10.11
+    "@swc/core-darwin-arm64": 1.11.6
+    "@swc/core-darwin-x64": 1.11.6
+    "@swc/core-linux-arm-gnueabihf": 1.11.6
+    "@swc/core-linux-arm64-gnu": 1.11.6
+    "@swc/core-linux-arm64-musl": 1.11.6
+    "@swc/core-linux-x64-gnu": 1.11.6
+    "@swc/core-linux-x64-musl": 1.11.6
+    "@swc/core-win32-arm64-msvc": 1.11.6
+    "@swc/core-win32-ia32-msvc": 1.11.6
+    "@swc/core-win32-x64-msvc": 1.11.6
     "@swc/counter": ^0.1.3
-    "@swc/types": ^0.1.17
+    "@swc/types": ^0.1.19
   peerDependencies:
     "@swc/helpers": "*"
   dependenciesMeta:
@@ -12008,7 +12008,7 @@ __metadata:
   peerDependenciesMeta:
     "@swc/helpers":
       optional: true
-  checksum: f0c389d9a3c2078cbed965a2f4f72660fd8c8baaae4f51a7776c375014b676302d24a0cdadef6b813c4315c84c78394cfd1a53a31320f7fd26f7001be80805e9
+  checksum: e99a0bbe48bce8626630bd1d39dab7dad44b9af3f504919160332924fff2bef67bdab6aff1bc97f440b653d60e19924c0d6717f129ef0eef81bf2ccab21be913
   languageName: node
   linkType: hard
 
@@ -12041,12 +12041,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/types@npm:^0.1.17":
-  version: 0.1.17
-  resolution: "@swc/types@npm:0.1.17"
+"@swc/types@npm:^0.1.19":
+  version: 0.1.19
+  resolution: "@swc/types@npm:0.1.19"
   dependencies:
     "@swc/counter": ^0.1.3
-  checksum: 6cc87b8ddfb540096abdf40bc29742df0b7d068f97c1ce6c32cd1b7073cde263ed7bc3bae1fba7bf0e1a0f5d63336e9fa092e05a54f6d9b3570df956d2acaff6
+  checksum: 167c64b6f7e0c595ba78e3d451215f1ed18eae11681703d3ae75e5b92a2198bbb1bf46824b6be2fe60a66d064316ab5d1e3487f8ef47db97362d96871962bf31
   languageName: node
   linkType: hard
 
@@ -12678,12 +12678,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:20.17.17, @types/node@npm:>=6":
-  version: 20.17.17
-  resolution: "@types/node@npm:20.17.17"
+"@types/node@npm:*, @types/node@npm:20.17.23, @types/node@npm:>=6":
+  version: 20.17.23
+  resolution: "@types/node@npm:20.17.23"
   dependencies:
     undici-types: ~6.19.2
-  checksum: 94a8b10cf1ef3745dac87ae758d491852321a86a627edba1cc77bb8eb73d289d02eb4c2795248535d7127cdbfff233464225c48a2200b86b8be2c7f88a9fc9b3
+  checksum: 9957916d0781f6efd59f2db5bff8be51e0ea0de96f64aa282c0ed7482668b5bc0ad041ea772265ece0e57e1afb64f56b7a5be5fecb03ba467f7c48753b313d86
   languageName: node
   linkType: hard
 
@@ -14628,14 +14628,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.7.9, axios@npm:^1.7.4":
-  version: 1.7.9
-  resolution: "axios@npm:1.7.9"
+"axios@npm:1.8.2, axios@npm:^1.7.4":
+  version: 1.8.2
+  resolution: "axios@npm:1.8.2"
   dependencies:
     follow-redirects: ^1.15.6
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
-  checksum: cb8ce291818effda09240cb60f114d5625909b345e10f389a945320e06acf0bc949d0f8422d25720f5dd421362abee302c99f5e97edec4c156c8939814b23d19
+  checksum: c47a43b79a058aa9e53a65bec9ade35c9f6e76a3999c795a79a2d205fb5f803fd4245497a0209a9727cbbe4f558791dd852ad2c168c5fc030259c11598ed8fd7
   languageName: node
   linkType: hard
 
@@ -17446,84 +17446,56 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-app@npm:3.4.0":
-  version: 3.4.0
-  resolution: "decap-cms-app@npm:3.4.0"
+"decap-cms-app@npm:3.0.12":
+  version: 3.0.12
+  resolution: "decap-cms-app@npm:3.0.12"
   dependencies:
     "@emotion/react": ^11.11.1
     "@emotion/styled": ^11.11.0
     codemirror: ^5.46.0
-    dayjs: ^1.11.10
-    decap-cms-backend-aws-cognito-github-proxy: ^3.2.2
-    decap-cms-backend-azure: ^3.1.3
-    decap-cms-backend-bitbucket: ^3.1.4
-    decap-cms-backend-git-gateway: ^3.2.2
-    decap-cms-backend-github: ^3.2.2
-    decap-cms-backend-gitlab: ^3.2.2
-    decap-cms-backend-proxy: ^3.1.4
-    decap-cms-backend-test: ^3.1.3
-    decap-cms-core: ^3.5.0
-    decap-cms-editor-component-image: ^3.1.3
-    decap-cms-lib-auth: ^3.0.5
-    decap-cms-lib-util: ^3.1.0
-    decap-cms-lib-widgets: ^3.1.0
-    decap-cms-locales: ^3.2.0
-    decap-cms-ui-default: ^3.1.4
-    decap-cms-widget-boolean: ^3.1.3
-    decap-cms-widget-code: ^3.1.4
-    decap-cms-widget-colorstring: ^3.1.3
-    decap-cms-widget-datetime: ^3.2.3
-    decap-cms-widget-file: ^3.1.3
-    decap-cms-widget-image: ^3.1.3
-    decap-cms-widget-list: ^3.2.2
-    decap-cms-widget-map: ^3.1.4
-    decap-cms-widget-markdown: ^3.2.0
-    decap-cms-widget-number: ^3.1.3
-    decap-cms-widget-object: ^3.1.4
-    decap-cms-widget-relation: ^3.3.2
-    decap-cms-widget-select: ^3.2.2
-    decap-cms-widget-string: ^3.1.3
-    decap-cms-widget-text: ^3.1.3
+    decap-cms-backend-azure: ^3.0.2
+    decap-cms-backend-bitbucket: ^3.0.2
+    decap-cms-backend-git-gateway: ^3.0.3
+    decap-cms-backend-github: ^3.0.3
+    decap-cms-backend-gitlab: ^3.0.2
+    decap-cms-backend-proxy: ^3.0.2
+    decap-cms-backend-test: ^3.0.2
+    decap-cms-core: ^3.2.8
+    decap-cms-editor-component-image: ^3.0.0
+    decap-cms-lib-auth: ^3.0.2
+    decap-cms-lib-util: ^3.0.1
+    decap-cms-lib-widgets: ^3.0.0
+    decap-cms-locales: ^3.1.2
+    decap-cms-ui-default: ^3.0.5
+    decap-cms-widget-boolean: ^3.0.2
+    decap-cms-widget-code: ^3.0.2
+    decap-cms-widget-colorstring: ^3.0.2
+    decap-cms-widget-datetime: ^3.0.3
+    decap-cms-widget-file: ^3.0.4
+    decap-cms-widget-image: ^3.0.3
+    decap-cms-widget-list: ^3.0.4
+    decap-cms-widget-map: ^3.0.2
+    decap-cms-widget-markdown: ^3.0.3
+    decap-cms-widget-number: ^3.0.1
+    decap-cms-widget-object: ^3.0.2
+    decap-cms-widget-relation: ^3.0.3
+    decap-cms-widget-select: ^3.0.1
+    decap-cms-widget-string: ^3.0.1
+    decap-cms-widget-text: ^3.0.1
     immutable: ^3.7.6
     lodash: ^4.17.11
+    moment: ^2.24.0
     prop-types: ^15.7.2
     react-immutable-proptypes: ^2.1.0
     uuid: ^8.3.2
   peerDependencies:
-    react: ^18.2.0
-    react-dom: ^18.2.0
-  checksum: 68752df8b554f05d4c9e1ff47cd698d03d4b9cb3608b70ba7bc74ba3aa83b25134c5c28025616ebe9751fd237c8e0a9959155cdef6efc28c461656b561803ddb
+    react: ^16.8.4 || ^17.0.0
+    react-dom: ^16.8.4 || ^17.0.0
+  checksum: 81c2e27ce3ed7b47cd33a6a0d10cb189ca5f23b30e8077fbfee1aed51f1a469201e6b333a6d149bc35fc64d90d873c5d2ce8f35a45e754cc48ed2eb8aadcb321
   languageName: node
   linkType: hard
 
-"decap-cms-backend-aws-cognito-github-proxy@npm:^3.2.2":
-  version: 3.2.2
-  resolution: "decap-cms-backend-aws-cognito-github-proxy@npm:3.2.2"
-  dependencies:
-    apollo-cache-inmemory: ^1.6.2
-    apollo-client: ^2.6.3
-    apollo-link-context: ^1.0.18
-    apollo-link-http: ^1.5.15
-    common-tags: ^1.8.0
-    graphql: ^15.0.0
-    graphql-tag: ^2.10.1
-    js-base64: ^3.0.0
-    semaphore: ^1.1.0
-  peerDependencies:
-    "@emotion/react": ^11.11.1
-    "@emotion/styled": ^11.11.0
-    decap-cms-backend-github: ^3.0.0
-    decap-cms-lib-auth: ^3.0.0
-    decap-cms-lib-util: ^3.0.0
-    decap-cms-ui-default: ^3.0.0
-    lodash: ^4.17.11
-    prop-types: ^15.7.2
-    react: ^18.2.0
-  checksum: 989bc8f7b3cde8ab1494a04cc7fc7a719dcbe4430e7e4d6396bbeb242148a805f408bce38563d24a4478056dd591c2efe010c8c4ac9f02b63cba83d8ea331a00
-  languageName: node
-  linkType: hard
-
-"decap-cms-backend-azure@npm:^3.1.3":
+"decap-cms-backend-azure@npm:^3.0.2":
   version: 3.1.3
   resolution: "decap-cms-backend-azure@npm:3.1.3"
   dependencies:
@@ -17543,7 +17515,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-backend-bitbucket@npm:^3.1.4":
+"decap-cms-backend-bitbucket@npm:^3.0.2":
   version: 3.1.4
   resolution: "decap-cms-backend-bitbucket@npm:3.1.4"
   dependencies:
@@ -17565,7 +17537,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-backend-git-gateway@npm:^3.2.2":
+"decap-cms-backend-git-gateway@npm:^3.0.3":
   version: 3.2.2
   resolution: "decap-cms-backend-git-gateway@npm:3.2.2"
   dependencies:
@@ -17589,7 +17561,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-backend-github@npm:^3.2.2":
+"decap-cms-backend-github@npm:^3.0.3":
   version: 3.2.2
   resolution: "decap-cms-backend-github@npm:3.2.2"
   dependencies:
@@ -17615,7 +17587,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-backend-gitlab@npm:^3.2.2":
+"decap-cms-backend-gitlab@npm:^3.0.2":
   version: 3.2.2
   resolution: "decap-cms-backend-gitlab@npm:3.2.2"
   dependencies:
@@ -17639,7 +17611,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-backend-proxy@npm:^3.1.4":
+"decap-cms-backend-proxy@npm:^3.0.2":
   version: 3.1.4
   resolution: "decap-cms-backend-proxy@npm:3.1.4"
   peerDependencies:
@@ -17653,7 +17625,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-backend-test@npm:^3.1.3":
+"decap-cms-backend-test@npm:^3.0.2":
   version: 3.1.3
   resolution: "decap-cms-backend-test@npm:3.1.3"
   peerDependencies:
@@ -17669,7 +17641,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-core@npm:^3.5.0":
+"decap-cms-core@npm:^3.2.8":
   version: 3.5.0
   resolution: "decap-cms-core@npm:3.5.0"
   dependencies:
@@ -17741,7 +17713,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-editor-component-image@npm:^3.1.3":
+"decap-cms-editor-component-image@npm:^3.0.0":
   version: 3.1.3
   resolution: "decap-cms-editor-component-image@npm:3.1.3"
   peerDependencies:
@@ -17750,7 +17722,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-lib-auth@npm:^3.0.5":
+"decap-cms-lib-auth@npm:^3.0.2":
   version: 3.0.5
   resolution: "decap-cms-lib-auth@npm:3.0.5"
   peerDependencies:
@@ -17761,7 +17733,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-lib-util@npm:^3.1.0":
+"decap-cms-lib-util@npm:^3.0.1":
   version: 3.1.0
   resolution: "decap-cms-lib-util@npm:3.1.0"
   dependencies:
@@ -17775,7 +17747,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-lib-widgets@npm:^3.1.0":
+"decap-cms-lib-widgets@npm:^3.0.0":
   version: 3.1.0
   resolution: "decap-cms-lib-widgets@npm:3.1.0"
   dependencies:
@@ -17787,14 +17759,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-locales@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "decap-cms-locales@npm:3.2.0"
-  checksum: fcb3a6cf263afaa703ccf42cd5f2ec6e6176a2c7037f38c74f11149fa941bcffbaa169a048c30d1417450d255916841ffdd7088491c73e25b40a6e07b8b33ad4
+"decap-cms-locales@npm:^3.1.2":
+  version: 3.3.0
+  resolution: "decap-cms-locales@npm:3.3.0"
+  checksum: 8adb1f0faa1014c870c68b4ff5aa15dfaa8a0f4ba3ffd2a5b897da55222332c1e255401f492d1c0612bddabc010c0f083c65d42dc619f1a01b5b55c7ace11372
   languageName: node
   linkType: hard
 
-"decap-cms-ui-default@npm:^3.1.4":
+"decap-cms-ui-default@npm:^3.0.5":
   version: 3.1.4
   resolution: "decap-cms-ui-default@npm:3.1.4"
   dependencies:
@@ -17810,7 +17782,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-widget-boolean@npm:^3.1.3":
+"decap-cms-widget-boolean@npm:^3.0.2":
   version: 3.1.3
   resolution: "decap-cms-widget-boolean@npm:3.1.3"
   peerDependencies:
@@ -17824,7 +17796,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-widget-code@npm:^3.1.4":
+"decap-cms-widget-code@npm:^3.0.2":
   version: 3.1.4
   resolution: "decap-cms-widget-code@npm:3.1.4"
   dependencies:
@@ -17840,7 +17812,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-widget-colorstring@npm:^3.1.3":
+"decap-cms-widget-colorstring@npm:^3.0.2":
   version: 3.1.3
   resolution: "decap-cms-widget-colorstring@npm:3.1.3"
   dependencies:
@@ -17856,7 +17828,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-widget-datetime@npm:^3.2.3":
+"decap-cms-widget-datetime@npm:^3.0.3":
   version: 3.2.3
   resolution: "decap-cms-widget-datetime@npm:3.2.3"
   dependencies:
@@ -17868,7 +17840,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-widget-file@npm:^3.1.3":
+"decap-cms-widget-file@npm:^3.0.4":
   version: 3.1.3
   resolution: "decap-cms-widget-file@npm:3.1.3"
   dependencies:
@@ -17890,7 +17862,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-widget-image@npm:^3.1.3":
+"decap-cms-widget-image@npm:^3.0.3":
   version: 3.1.3
   resolution: "decap-cms-widget-image@npm:3.1.3"
   peerDependencies:
@@ -17905,7 +17877,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-widget-list@npm:^3.2.2":
+"decap-cms-widget-list@npm:^3.0.4":
   version: 3.2.2
   resolution: "decap-cms-widget-list@npm:3.2.2"
   dependencies:
@@ -17927,7 +17899,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-widget-map@npm:^3.1.4":
+"decap-cms-widget-map@npm:^3.0.2":
   version: 3.1.4
   resolution: "decap-cms-widget-map@npm:3.1.4"
   dependencies:
@@ -17943,7 +17915,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-widget-markdown@npm:^3.2.0":
+"decap-cms-widget-markdown@npm:^3.0.3":
   version: 3.2.0
   resolution: "decap-cms-widget-markdown@npm:3.2.0"
   dependencies:
@@ -17983,7 +17955,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-widget-number@npm:^3.1.3":
+"decap-cms-widget-number@npm:^3.0.1":
   version: 3.1.3
   resolution: "decap-cms-widget-number@npm:3.1.3"
   peerDependencies:
@@ -17994,9 +17966,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-widget-object@npm:^3.1.4":
-  version: 3.1.4
-  resolution: "decap-cms-widget-object@npm:3.1.4"
+"decap-cms-widget-object@npm:^3.0.2":
+  version: 3.2.0
+  resolution: "decap-cms-widget-object@npm:3.2.0"
   peerDependencies:
     "@emotion/react": ^11.11.1
     "@emotion/styled": ^11.11.0
@@ -18006,11 +17978,11 @@ __metadata:
     prop-types: ^15.7.2
     react: ^18.2.0
     react-immutable-proptypes: ^2.1.0
-  checksum: 8abac203b0e62c82d86e73f077c2116efa99a835a96e95e5dacbaea48f4cae0be6543975252f2c43e6d6a444abb949e371ba290c772dd16d6ea3de1fe0820e2d
+  checksum: b94a37b2c110aafb6d1742ac85c289412110bfedbd665adb197ac3e4e0b319f495f106132f863ef1d5c22ac831524d89edc9684a4ce48e800729dccade5811bb
   languageName: node
   linkType: hard
 
-"decap-cms-widget-relation@npm:^3.3.2":
+"decap-cms-widget-relation@npm:^3.0.3":
   version: 3.3.2
   resolution: "decap-cms-widget-relation@npm:3.3.2"
   dependencies:
@@ -18033,7 +18005,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-widget-select@npm:^3.2.2":
+"decap-cms-widget-select@npm:^3.0.1":
   version: 3.2.2
   resolution: "decap-cms-widget-select@npm:3.2.2"
   dependencies:
@@ -18049,7 +18021,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-widget-string@npm:^3.1.3":
+"decap-cms-widget-string@npm:^3.0.1":
   version: 3.1.3
   resolution: "decap-cms-widget-string@npm:3.1.3"
   peerDependencies:
@@ -18060,7 +18032,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decap-cms-widget-text@npm:^3.1.3":
+"decap-cms-widget-text@npm:^3.0.1":
   version: 3.1.3
   resolution: "decap-cms-widget-text@npm:3.1.3"
   dependencies:
@@ -27388,6 +27360,13 @@ __metadata:
   version: 1.0.1
   resolution: "modify-values@npm:1.0.1"
   checksum: 8296610c608bc97b03c2cf889c6cdf4517e32fa2d836440096374c2209f6b7b3e256c209493a0b32584b9cb32d528e99d0dd19dcd9a14d2d915a312d391cc7e9
+  languageName: node
+  linkType: hard
+
+"moment@npm:^2.24.0":
+  version: 2.30.1
+  resolution: "moment@npm:2.30.1"
+  checksum: 859236bab1e88c3e5802afcf797fc801acdbd0ee509d34ea3df6eea21eb6bcc2abd4ae4e4e64aa7c986aa6cba563c6e62806218e6412a765010712e5fa121ba6
   languageName: node
   linkType: hard
 

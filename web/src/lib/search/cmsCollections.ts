@@ -56,9 +56,9 @@ export const cmsCollections = [
   {
     label: "🟧 ANYTIME ACTIONS",
     children: [
-      "Anytime Action With Details Page",
+      "Anytime Action Tasks",
       "Anytime Action With Consumer Affairs License Integrations (Reinstatements)",
-      "Anytime Action License External Link Only",
+      "Tax Clearance Anytime Action",
     ],
   },
   {
@@ -66,7 +66,7 @@ export const cmsCollections = [
     children: ["Page Metadata"],
   },
   {
-    label: "🟩 MISC",
+    label: "🟦 MISC",
     children: [
       "Anytime Action Reinstatement and License Calendar Event Status Defaults",
       "Starter Kits",

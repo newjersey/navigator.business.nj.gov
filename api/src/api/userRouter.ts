@@ -144,7 +144,7 @@ export const userRouterFactory = (
       status = StatusCodes.BAD_REQUEST;
       res.status(status).send({ error: "`email` property required." });
     } else {
-      const userData = await dynamoDataClient.findByEmail(email);
+      const userData = await dynamoDataClient.findByEmail(email.toLowerCase());
 
       if (userData) {
         status = StatusCodes.OK;
