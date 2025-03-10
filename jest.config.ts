@@ -6,6 +6,7 @@ export default {
   projects: ["<rootDir>/api", "<rootDir>/shared", "<rootDir>/web"],
   reporters: [
     "default",
+    "<rootDir>/shared/src/test/reporters/logIfFail.js",
     [
       "jest-junit",
       {
