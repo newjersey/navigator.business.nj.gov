@@ -1,0 +1,18 @@
+{
+  "id": "healthcare-dental-hygienist",
+  "displayname": "healthcare-dental-hygienist",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 20,
+      "task": "dental-hygienist-license",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 25,
+      "task": "local-anesthesia-permit",
+      "required": true
+    }
+  ]
+}
