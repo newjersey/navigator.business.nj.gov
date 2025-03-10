@@ -37,7 +37,7 @@ webflowType: individual-license
 
 ## To Get Your License:
 
-1. [Submit an application](https://newjersey.mylicense.com/eGov/Login.aspx) and pay all applicable fees.
+1. [Submit an application](https://newjersey.mylicense.com/eGov/Login.aspx). Make sure to provide all requested information, including licenses in any state, and name change documentation. You may be asked to submit any missing documentation.
 2. Ask your school to send transcripts to dentistry@dca.njoag.gov (preferred) or by mail to:
 
 Board of Dentistry 
@@ -56,7 +56,6 @@ Send verification of any licenses you already hold to [dentistry@dca.njoag.gov](
 
 4. After you receive fingerprint instructions, follow the instructions to submit your fingerprints.
 
-You may be asked for additional information depending on your application.
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
 
 If you practice dental hygiene without a license, you may face criminal, civil, or administrative penalties.
