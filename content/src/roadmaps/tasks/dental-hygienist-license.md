@@ -37,7 +37,7 @@ webflowType: individual-license
 
 ## To Get Your License:
 
-1. [Submit an application](https://newjersey.mylicense.com/eGov/Login.aspx). Make sure to provide all requested information, including licenses in any state, and name change documentation. You may be asked to submit any missing documentation.
+1. [Submit an application](https://newjersey.mylicense.com/eGov/Login.aspx). Make sure to provide all requested information, including licenses in any state and name change documentation, if applicable. You may be asked to submit any missing documentation.
 2. Ask your school to send transcripts to dentistry@dca.njoag.gov (preferred) or by mail to:
 
 Board of Dentistry 
