@@ -41,3 +41,5 @@ webflowId: 5f7729541a08097ccbbb2ecb
 An auto-body repair license.
 
 :::
+
+**Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov
