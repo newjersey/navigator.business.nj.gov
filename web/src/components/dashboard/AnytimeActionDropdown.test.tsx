@@ -231,18 +231,10 @@ describe("<AnytimeActionDropdown />", () => {
       const taskLicenseReinstatement = screen.getByText("some-license-reinstatement-name");
       const tasklicenseReinstatementLast = screen.getByText("zzz-some-license-reinstatement-name");
 
-      const categoryTitleGeneral = screen.getByText("Some Category");
       const categoryTitleReinstatements = screen.getByText(
         "Reactivate My Expired Permit, License or Registration"
       );
-
-      expect(categoryTitleGeneral.compareDocumentPosition(taskGeneral)).toBe(
-        Node.DOCUMENT_POSITION_FOLLOWING
-      );
-
-      expect(taskGeneral.compareDocumentPosition(categoryTitleReinstatements)).toBe(
-        Node.DOCUMENT_POSITION_FOLLOWING
-      );
+      const categoryTitleGeneral = screen.getByText("Some Category");
 
       expect(categoryTitleReinstatements.compareDocumentPosition(taskLicenseReinstatement)).toBe(
         Node.DOCUMENT_POSITION_FOLLOWING
@@ -251,6 +243,14 @@ describe("<AnytimeActionDropdown />", () => {
         Node.DOCUMENT_POSITION_FOLLOWING
       );
       expect(taskLicenseReinstatement.compareDocumentPosition(tasklicenseReinstatementLast)).toBe(
+        Node.DOCUMENT_POSITION_FOLLOWING
+      );
+
+      expect(tasklicenseReinstatementLast.compareDocumentPosition(categoryTitleGeneral)).toBe(
+        Node.DOCUMENT_POSITION_FOLLOWING
+      );
+
+      expect(categoryTitleGeneral.compareDocumentPosition(taskGeneral)).toBe(
         Node.DOCUMENT_POSITION_FOLLOWING
       );
     });
