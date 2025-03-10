@@ -37,7 +37,6 @@ webflowId: 648b6ec5ff1d0d38af2f5a57
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A vehicle registration
-- License plates
+Authorization to register your vehicles
 
 :::
