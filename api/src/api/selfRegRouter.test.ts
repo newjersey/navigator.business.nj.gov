@@ -125,4 +125,20 @@ describe("selfRegRouter", () => {
       expect(response.status).toEqual(StatusCodes.CONFLICT);
     });
   });
+
+  describe("converts email to lowercase before self registration", () => {
+    it.each([
+      { testCase: "uppercase email", email: "USERNAME@EXAMPLE.COM" },
+      { testCase: "mixed case email", email: "UserName@EXAMPLE.com" },
+      { testCase: "already lowercase email", email: "username@example.com" },
+    ])("should convert $testCase to lowercase", async ({ email }) => {
+      const userData = generateUserData({ user: generateUser({ email }) });
+      await sendRequest(userData);
+      expect(stubSelfRegClient.grant).toHaveBeenCalledWith(
+        expect.objectContaining({
+          email: email.toLowerCase(),
+        })
+      );
+    });
+  });
 });
