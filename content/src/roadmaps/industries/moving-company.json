@@ -39,35 +39,35 @@
     },
     {
       "step": 3,
-      "weight": 15,
+      "weight": 11,
       "task": "moving-company-insurance",
       "required": true
     },
     {
       "step": 3,
-      "weight": 20,
+      "weight": 12,
       "licenseTask": "moving-company-license",
       "required": true
     },
     {
       "step": 3,
-      "weight": 22,
+      "weight": 13,
       "task": "trucking-cdl"
     },
     {
       "step": 3,
-      "weight": 21,
+      "weight": 14,
       "task": "transportation-entity-id",
       "required": true
     },
     {
-      "weight": 22,
+      "weight": 12,
       "step": 3,
       "task": "mvc-title-task",
       "required": true
     },
     {
-      "weight": 23,
+      "weight": 16,
       "step": 3,
       "task": "mvc-registration-task",
       "required": true
