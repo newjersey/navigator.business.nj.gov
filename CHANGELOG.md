@@ -1,3 +1,15 @@
+# [2025.7.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.6.0...v2025.7.0) (2025-03-10)
+
+
+### Bug Fixes
+
+* remove unintended whitespace from cannabis-license-tab1.json ([c768e36](https://github.com/newjersey/navigator.business.nj.gov/commit/c768e36a04756a258967d654cf4318fdaa44b746))
+
+
+### Features
+
+* [[#188960391](https://github.com/newjersey/navigator.business.nj.gov/issues/188960391) | AB[#13170](https://github.com/newjersey/navigator.business.nj.gov/issues/13170)] add survey link behind a feature flag on formation success ([edf4d10](https://github.com/newjersey/navigator.business.nj.gov/commit/edf4d10d4304c4172b9d22fde292019e4768ecb3))
+
 # [2025.6.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.5.0...v2025.6.0) (2025-03-07)
 
 
