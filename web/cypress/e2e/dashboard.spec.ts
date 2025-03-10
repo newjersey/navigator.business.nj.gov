@@ -18,7 +18,7 @@ const sizes = [
   [1024, 768],
 ];
 
-describe("Dashboard [feature] [all] [group2]", () => {
+describe("Dashboard [feature] [all] [group2] [logRandomSeed]", () => {
   for (const size of sizes) {
     beforeEach(() => {
       cy.loginByCognitoApi();

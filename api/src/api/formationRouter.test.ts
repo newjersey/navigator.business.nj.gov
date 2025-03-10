@@ -45,6 +45,7 @@ describe("formationRouter", () => {
 
   beforeEach(async () => {
     jest.resetAllMocks();
+    expect(Math.random()).toEqual(4);
     fakeSignedInUserId.mockReturnValue("some-id");
     fakeSignedInUser.mockReturnValue({
       sub: "1234",
@@ -90,6 +91,7 @@ describe("formationRouter", () => {
       expect(stubFormationClient.form).toHaveBeenCalledWith(userData, "some-url", foreignGoodStandingFile);
 
       expect(response.status).toEqual(StatusCodes.OK);
+
       const expectedResponse = modifyCurrentBusiness(userData, (business) => ({
         ...business,
         formationData: {

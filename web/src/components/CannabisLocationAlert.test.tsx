@@ -14,8 +14,9 @@ const Config = getMergedConfig();
 
 describe("<CannabisLocationAlert />", () => {
   const renderWithBusiness = (industryId?: string): void => {
-    const profileData = generateProfileData({ industryId });
-    const business = generateBusiness({ profileData });
+    const profileData = generateProfileData({ industryId }); // calls math.random 7 times
+
+    const business = generateBusiness({ profileData }); // calls math.random 10 times
 
     render(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
@@ -29,12 +30,14 @@ describe("<CannabisLocationAlert />", () => {
   });
 
   it("is displayed for cannabis businesses", () => {
+    expect(Math.random()).toEqual(4);
     renderWithBusiness("cannabis");
     expect(screen.getByText(Config.profileDefaults.default.cannabisLocationAlert)).toBeInTheDocument();
   });
 
-  it("is NOT displayed for non-cannabis businesses", () => {
+  it("is NOT displayed for non-cannabis businesses [logRandomSeed]", () => {
     const filter = (industry: Industry): boolean => industry.id !== "cannabis";
+    expect(Math.random()).toEqual(4);
     const industry = filterRandomIndustry(filter);
 
     renderWithBusiness(industry.id);
@@ -42,6 +45,7 @@ describe("<CannabisLocationAlert />", () => {
   });
 
   it("is NOT displayed when industry is undefined", () => {
+    expect(Math.random()).toEqual(4);
     renderWithBusiness();
     expect(screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)).not.toBeInTheDocument();
   });

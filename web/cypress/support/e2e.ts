@@ -14,6 +14,7 @@
 // ***********************************************************
 /// <reference types="cypress" />
 
+import seedrandom from "seedrandom";
 import "./commands";
 import { LighthouseConfig, LighthouseThresholds, Pa11yThresholds } from "./types";
 
@@ -30,6 +31,14 @@ beforeEach(function () {
   testSuite = `[${testSuite}]`;
   if (!testName.includes(testSuite)) {
     this.skip();
+  }
+
+  // figure this env varible thing
+  // let randomSeed = process.env.RANDOM_SEED || Math.random().toString(36).slice(2);
+  let randomSeed = "wfslb71bc9p";
+  seedrandom(randomSeed, { global: true });
+  if (testName.includes("[logRandomSeed]")) {
+    cy.task("log", `Random seed: ${randomSeed} (${testName})`);
   }
 });
 
