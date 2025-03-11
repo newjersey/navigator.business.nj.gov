@@ -15,7 +15,13 @@ urlSlug: sedb
 name: "Get Certified as a Socially and Economically Disadvantaged Business "
 id: sedb
 agency: []
-isSbe: false
+applicableOwnershipTypes:
+  - woman-owned
+  - veteran-owned
+  - minority-owned
+  - disabled-veteran
+  - lgbtq-owned
+isSbe: true
 ---
 ## Eligibility Criteria
 
@@ -50,3 +56,9 @@ isSbe: false
 * Copies of office/warehouse leases, rental agreements, deeds, or mortgages ,if home-based
 * Proof that the owner(s) have lived long-term in an isolated area or one with high unemployment
 * Information showing the business is located in an area with a poverty rate of 20% or more, or in an area where the median family income is 80% or less of the higher of the statewide median or the median income of the area
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+
+A Socially and Economically Disadvantaged Business Enterprise (SEDB) certification.
+
+:::
