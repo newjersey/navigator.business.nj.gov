@@ -45,7 +45,8 @@
   ],
   "name": "Printing Business",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "business-vehicle-title-reg"
   ],
   "displayname": "printing-business",
   "industryOnboardingQuestions": {
