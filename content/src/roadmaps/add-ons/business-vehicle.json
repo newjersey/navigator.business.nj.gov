@@ -4,18 +4,18 @@
   "roadmapSteps": [
     {
       "step": 4,
-      "weight": 1,
+      "weight": 100,
       "task": "transportation-entity-id",
       "required": false
     },
     {
       "step": 4,
-      "weight": 2,
+      "weight": 97,
       "task": "mvc-title-task"
     },
     {
       "step": 4,
-      "weight": 3,
+      "weight": 102,
       "task": "mvc-registration-task",
       "required": false
     }
