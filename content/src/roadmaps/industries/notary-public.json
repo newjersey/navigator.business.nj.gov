@@ -50,7 +50,9 @@
     }
   ],
   "name": "Notary Public",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "notary-public",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true
