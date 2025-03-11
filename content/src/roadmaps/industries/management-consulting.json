@@ -44,7 +44,9 @@
     }
   ],
   "name": "Management Consulting",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "management-consulting",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
