@@ -45,7 +45,7 @@ isSbe: true
 * Organizational charts
 * An owner's birth certificate, driver's license, passport, or other acceptable form of identification
 * An affidavit, signed by the individual seeking certification, stating that the applicant is a disadvantaged business enterprise
-* A completed personal net worth statement for each socially and economically disadvantaged owner
+* A completed [personal net worth statement](https://www.nj.gov/treasury/revenue/pdf/PNWStatement.pdf) for each socially and economically disadvantaged owner
 
 **The following information may be requested:**
 
