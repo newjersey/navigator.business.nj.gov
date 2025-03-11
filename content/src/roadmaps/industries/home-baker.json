@@ -51,7 +51,8 @@
   ],
   "name": "Home Baker",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "business-vehicle-title-reg"
   ],
   "displayname": "home-baker",
   "industryOnboardingQuestions": {
