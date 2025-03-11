@@ -1,13 +1,13 @@
 ---
 summaryDescriptionMd: >-
-  Any employee driving a truck with a Gross Weight Rating Scale (GWRS) of 26,000
-  lbs or more needs a Commercial Driver's License (CDL).
+  Vehicles with a Gross Weight Rating Scale (GWRS) of 26,000 lbs or more require
+  drivers have a Commercial Driver's License (CDL).
 
 
   &nbsp;
 
 
-  **A business owner only needs a CDL if they themselves plan to do any load-hauling for the business.** Otherwise, they must ensure that their drivers have this license.
+  **A business owner only needs a CDL if they themselves plan to drive these vehicles.** Otherwise, they must ensure that their drivers have this license.
 urlSlug: trucking-cdl
 displayname: trucking-cdl
 name: Apply for a Commercial Driver's License (CDL) and Ensure Your Drivers are
