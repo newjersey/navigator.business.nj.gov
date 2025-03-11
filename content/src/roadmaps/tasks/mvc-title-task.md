@@ -48,12 +48,12 @@ formName: OS/SS-UTA
 For vehicles, you will need:
 
 * Motor Vehicle Commission `(MVC) Entity Identification Number (EIN)|mvc-entity-id`
-* Proof of ownership, such as a Manufacturer’s Certificate of Origin (MCO)
+* Proof of ownership, such as a `Manufacturer’s Certificate of Origin (MCO)|manufacturers-cert-of-origin`
 * [Universal Title Application (Form OS/SS-UTA)](https://www.nj.gov/mvc/pdf/vehicles/OS-SS-UTA.pdf)
 * Proof of Identity, such as a valid driver’s license or other government-issued photo identification
 * Lienholder information if adding or removing a lien from a title
 * Odometer disclosure statement if the vehicle is less than 10 years old
-* Notarized power of attorney if acting on behalf of the business owner
+* Notarized `Power of Attorney (POA)|power-of-attorney` if acting on behalf of the business owner
 * Proof of sales tax payment or exemption
 * Bill of sale if the vehicle was purchased from a private seller
 * Proof of address to confirm New Jersey residency
