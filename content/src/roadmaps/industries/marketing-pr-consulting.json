@@ -44,7 +44,9 @@
     }
   ],
   "name": "Marketing and PR Consulting",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "marketing-pr-consulting",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
