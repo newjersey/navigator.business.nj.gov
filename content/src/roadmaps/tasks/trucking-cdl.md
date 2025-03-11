@@ -4,7 +4,10 @@ summaryDescriptionMd: >-
   lbs or more needs a Commercial Driver's License (CDL).
 
 
-  As the business owner, you only need a CDL if **you** plan to do any load-hauling for your business.
+  &nbsp;
+
+
+  **A business owner only needs a CDL if they themselves plan to do any load-hauling for the business.** Otherwise, they must ensure that their drivers have this license.
 urlSlug: trucking-cdl
 displayname: trucking-cdl
 name: Apply for a Commercial Driver's License and Ensure Your Drivers are Licensed
