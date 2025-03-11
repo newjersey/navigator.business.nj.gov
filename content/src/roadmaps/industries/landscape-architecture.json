@@ -57,7 +57,11 @@
     }
   ],
   "name": "Landscape Architecture",
-  "nonEssentialQuestionsIds": ["weights-measures", "planning-services"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "planning-services",
+    "business-vehicle-title-reg"
+  ],
   "displayname": "landscape architecture",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
