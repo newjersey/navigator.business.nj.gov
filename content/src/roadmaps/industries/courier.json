@@ -41,7 +41,8 @@
   "name": "Courier Service",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "courier-CRTK-survey"
+    "courier-CRTK-survey",
+    "business-vehicle-title-reg"
   ],
   "displayname": "courier",
   "industryOnboardingQuestions": {
