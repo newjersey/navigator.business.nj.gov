@@ -3,6 +3,7 @@ id: mvc-title
 name: Get a Title for Your Business Vehicle(s)
 category:
   - Only Show in Subtask
+  - Purchase New Products of Equipment
 industryIds:
   - auto-body-repair
   - car-service
