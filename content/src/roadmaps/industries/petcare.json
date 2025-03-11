@@ -47,7 +47,8 @@
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "petcare-cds-shelter",
-    "petcare-cds-trainer"
+    "petcare-cds-trainer",
+    "business-vehicle-title-reg"
   ],
   "displayname": "petcare",
   "industryOnboardingQuestions": {
