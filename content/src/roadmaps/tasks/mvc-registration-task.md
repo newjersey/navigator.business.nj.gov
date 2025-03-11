@@ -39,7 +39,7 @@ You will need:
 If applicable, you may also need:
 * Emissions or Safety Inspection Certificate, for certain passenger and commercial vehicles
 * Weight Certificate, for vehicles weighing over 26,000 pounds
-* United States Department of Transportation (USDOT) number, for vehicles used in interstate commerce or with a gross vehicle weight rating (GVWR) over 10,000 pounds
+* `United States Department of Transportation (USDOT) Number|usdot-number`, for vehicles used in interstate commerce or with a gross vehicle weight rating (GVWR) over 10,000 pounds
 * `Agricultural Certificate Number|agricultural-cert-number`
 * Notarized `Power of Attorney (POA)|power-of-attorney`, if applying on behalf of the business owner
 * Lease/Finance agreement
