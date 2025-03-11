@@ -23,7 +23,9 @@
     }
   ],
   "name": "Domestic Employer",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "domestic-employer",
   "industryOnboardingQuestions": {},
   "isEnabled": true,
