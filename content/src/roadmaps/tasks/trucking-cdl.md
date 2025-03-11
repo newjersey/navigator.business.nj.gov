@@ -10,7 +10,8 @@ summaryDescriptionMd: >-
   **A business owner only needs a CDL if they themselves plan to do any load-hauling for the business.** Otherwise, they must ensure that their drivers have this license.
 urlSlug: trucking-cdl
 displayname: trucking-cdl
-name: Apply for a Commercial Driver's License and Ensure Your Drivers are Licensed
+name: Apply for a Commercial Driver's License (CDL) and Ensure Your Drivers are
+  Licensed
 id: trucking-cdl
 callToActionLink: https://telegov.njportal.com/njmvc/AppointmentWizard
 callToActionText: Apply for My CDL
