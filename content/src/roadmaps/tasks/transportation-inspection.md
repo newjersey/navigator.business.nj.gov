@@ -32,3 +32,5 @@ issuingAgency: New Jersey Motor Vehicle Commission Bus Inspection Unit
 - CMC-9 and CMC-12 Certificates for registration and license plates
 
 :::
+
+**Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov
