@@ -4,17 +4,7 @@ id: mvc-ein
 name: Get Your Motor Vehicle Commission EIN
 category:
   - Purchase New Products of Equipment
-industryIds:
-  - auto-body-repair
-  - car-rental
-  - car-service
-  - food-truck
-  - logistics
-  - moving-company
-  - school-bus
-  - non-medical-transport
-  - freight-forwarding
-  - trucking
+industryIds: []
 sectorIds:
   - transportation-and-warehousing
   - utilities
