@@ -60,7 +60,8 @@
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "planning-services",
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "pesticides-applictor-licensing"
   ],
   "displayname": "landscape architecture",
   "industryOnboardingQuestions": {
