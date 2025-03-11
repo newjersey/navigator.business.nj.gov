@@ -50,7 +50,9 @@
     }
   ],
   "name": "Legal Services",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "law-firm",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true
