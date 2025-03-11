@@ -54,7 +54,8 @@
     "weights-measures",
     "cigarette-manufacture-sell",
     "other-businesses-CRTK-survey",
-    "retail-pesticide-dealer-licensing"
+    "retail-pesticide-dealer-licensing",
+    "business-vehicle-title-reg"
   ],
   "displayname": "retail",
   "industryOnboardingQuestions": {
