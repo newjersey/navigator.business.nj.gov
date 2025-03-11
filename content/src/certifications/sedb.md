@@ -35,13 +35,14 @@ isSbe: true
 ## Application Needs
 
 * 12-digit NJ tax ID \[contextual info], Employer Identification Number \[contextual info], or Social Security number (SSN)
+* 12-digit `NJ tax ID,|tax-id` `Employer Identification Number,|ein` or Social Security number (SSN)
 * Business name or trade name
 * Names and addresses of the owner, partners, or shareholders, and their representative shares of ownership
 * Names and addresses of members of the board of directors (if a corporation)
 * Names and addresses of the business officers
 * Number of shares of stock issued and outstanding (if a corporation)
 * The articles of incorporation, bylaws, partnership agreements, or joint venture agreements, as applicable
-* Copy of the Certificate of Formation \[contextual info]
+* Copy of the `Certificate of Formation|certificate-formation` 
 * Organizational charts
 * An owner's birth certificate, driver's license, passport, or other acceptable form of identification
 * An affidavit, signed by the individual seeking certification, stating that the applicant is a disadvantaged business enterprise
