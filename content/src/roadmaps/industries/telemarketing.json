@@ -51,7 +51,9 @@
     }
   ],
   "name": "Telemarketing",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "telemarketing",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
