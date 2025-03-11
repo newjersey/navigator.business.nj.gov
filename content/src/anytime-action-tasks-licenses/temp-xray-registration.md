@@ -3,7 +3,7 @@ notesMd: https://docs.google.com/document/d/1MZGaJIYDG2jV4Lr7NyBoFNR_GW17EeHdQpO
 id: temp-xray-registration
 name: Register Your Temporary X-Ray Machine
 category:
-  - Purchase New Products of Equipment
+  - Purchase New Products or Equipment
 industryIds:
   - healthcare
 sectorIds: []
