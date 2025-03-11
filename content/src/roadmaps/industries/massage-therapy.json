@@ -57,7 +57,9 @@
     }
   ],
   "name": "Massage Therapy",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "massage-therapy",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
