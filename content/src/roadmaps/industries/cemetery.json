@@ -60,7 +60,9 @@
     }
   ],
   "name": "Cemetery",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "cemetery",
   "industryOnboardingQuestions": {
     "canBeReseller": true
