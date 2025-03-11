@@ -56,7 +56,10 @@
     }
   ],
   "name": "Cosmetology",
-  "nonEssentialQuestionsIds": ["electrologist"],
+  "nonEssentialQuestionsIds": [
+    "electrologist",
+    "business-vehicle-title-reg"
+  ],
   "displayname": "cosmetology",
   "industryOnboardingQuestions": {
     "canBeReseller": true
