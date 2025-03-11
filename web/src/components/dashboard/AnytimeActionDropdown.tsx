@@ -10,6 +10,7 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import { AnytimeActionLicenseReinstatement, AnytimeActionTask } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { Autocomplete, TextField, useMediaQuery } from "@mui/material";
+import { orderBy } from "lodash";
 import { useRouter } from "next/compat/router";
 import { ChangeEvent, type ReactElement, useState } from "react";
 
@@ -32,36 +33,8 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
   const industryId = business?.profileData.industryId;
   const sectorId = business?.profileData.sectorId;
 
-  const alphabetizeByName = (
-    anytimeActions: AnytimeActionWithTypeAndCategory[]
-  ): AnytimeActionWithTypeAndCategory[] => {
-    return anytimeActions.sort((a, b) => {
-      if (a.name < b.name) {
-        return -1;
-      }
-      if (a.name > b.name) {
-        return 1;
-      }
-      return 0;
-    });
-  };
-
-  const reverseAlphabetizeByCategory = (
-    anytimeActions: AnytimeActionWithTypeAndCategory[]
-  ): AnytimeActionWithTypeAndCategory[] => {
-    return anytimeActions.sort((a, b) => {
-      if (a.category < b.category) {
-        return 1;
-      }
-      if (a.category > b.category) {
-        return -1;
-      }
-      return 0;
-    });
-  };
-
   const getApplicableAnytimeActions = (): AnytimeActionWithTypeAndCategory[] => {
-    const anytimeActionTasksWithType = props.anytimeActionTasks
+    let anytimeActionTasksWithType = props.anytimeActionTasks
       .filter((action) => findMatch(action))
       .map((action) => {
         return {
@@ -70,9 +43,9 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
           category: action.category,
         };
       });
-    alphabetizeByName(anytimeActionTasksWithType);
+    anytimeActionTasksWithType = orderBy(anytimeActionTasksWithType, ["name"]);
 
-    const anytimeActionLicenseReinstatementsWithType = props.anytimeActionLicenseReinstatements
+    let anytimeActionLicenseReinstatementsWithType = props.anytimeActionLicenseReinstatements
       .filter((action) => licenseReinstatementMatch(action))
       .map((action) => {
         return {
@@ -81,15 +54,14 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
           category: ["Reactivate My Expired Permit, License or Registration"],
         };
       });
+    anytimeActionLicenseReinstatementsWithType = orderBy(anytimeActionLicenseReinstatementsWithType, [
+      "name",
+    ]);
 
-    alphabetizeByName(anytimeActionLicenseReinstatementsWithType);
-
-    const applicableAnytimeActions: AnytimeActionWithTypeAndCategory[] = [];
-
+    let applicableAnytimeActions: AnytimeActionWithTypeAndCategory[] = [];
     applicableAnytimeActions.push(...anytimeActionTasksWithType);
     applicableAnytimeActions.push(...anytimeActionLicenseReinstatementsWithType);
-
-    reverseAlphabetizeByCategory(applicableAnytimeActions);
+    applicableAnytimeActions = orderBy(applicableAnytimeActions, ["category"]);
 
     return applicableAnytimeActions;
   };
