@@ -52,7 +52,8 @@
     "weights-measures",
     "cds-lab-research ",
     "cds-supply",
-    "other-businesses-CRTK-survey"
+    "other-businesses-CRTK-survey",
+    "business-vehicle-title-reg"
   ],
   "displayname": "generic",
   "industryOnboardingQuestions": {
