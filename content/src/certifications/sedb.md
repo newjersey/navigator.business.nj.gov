@@ -5,12 +5,9 @@ notesMd: "Working doc:
 sidebarCardBodyText: "A Socially and Economically Disadvantaged Business
   Enterprise (SEDB) certification may provide an advantage for State and federal
   contracts. "
-summaryDescriptionMd: >-
-  Having a Socially and Economically Disadvantaged Business Enterprise (SEDB)
-  certification may give you an advantage with government contracts. 
-
-
-  https://business.nj.gov/pages/government-contracting
+summaryDescriptionMd: Having a Socially and Economically Disadvantaged Business
+  Enterprise (SEDB) certification may give you an advantage with [government
+  contracts.](https://business.nj.gov/pages/government-contracting)
 urlSlug: sedb
 name: "Get Certified as a Socially and Economically Disadvantaged Business "
 id: sedb
@@ -34,7 +31,6 @@ isSbe: true
 
 ## Application Needs
 
-* 12-digit NJ tax ID \[contextual info], Employer Identification Number \[contextual info], or Social Security number (SSN)
 * 12-digit `NJ tax ID,|tax-id` `Employer Identification Number,|ein` or Social Security number (SSN)
 * Business name or trade name
 * Names and addresses of the owner, partners, or shareholders, and their representative shares of ownership
