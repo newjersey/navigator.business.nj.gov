@@ -51,7 +51,8 @@
   "name": "Health Club",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "electrologist"
+    "electrologist",
+    "business-vehicle-title-reg"
   ],
   "displayname": "health-club",
   "industryOnboardingQuestions": {
