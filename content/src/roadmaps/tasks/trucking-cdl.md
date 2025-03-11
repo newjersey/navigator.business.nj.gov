@@ -36,3 +36,5 @@ agencyId: nj-motor-vehicle
 - CDL after passing the driving exam
 
 :::
+
+**Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov
