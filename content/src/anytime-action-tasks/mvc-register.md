@@ -66,7 +66,7 @@ callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm?utm
 ---
 ## Application Requirements
 You will need:
-* Federal Tax ID Number (FEIN)
+* `Federal Tax ID Number (FEIN)|federal-tax-id`
 * Motor Vehicle Commission `(MVC) Entity Identification Number (EIN)|mvc-entity-id`
 * [Application for Vehicle Registration (Form BA-49](https://www.nj.gov/mvc/pdf/vehicles/BA-49.pdf)
 * Proof of Identity, such as a valid driver’s license or other government-issued photo identification
@@ -75,9 +75,9 @@ You will need:
 If applicable, you may also need:
 * Emissions or Safety Inspection Certificate, for certain passenger and commercial vehicles
 * Weight Certificate, for vehicles weighing over 26,000 pounds
-* United States Department of Transportation (USDOT) number, for vehicles used in interstate commerce or with a gross vehicle weight rating (GVWR) over 10,000 pounds
-* Agricultural certificate number
-* Notarized Power of Attorney, if applying on behalf of the business owner
+* `United States Department of Transportation (USDOT) Number|usdot-number`, for vehicles used in interstate commerce or with a gross vehicle weight rating (GVWR) over 10,000 pounds
+* `Agricultural Certificate Number|agricultural-cert-number`
+* Notarized `Power of Attorney (POA)|power-of-attorney`, if applying on behalf of the business owner
 * Lease/Finance agreement
 * Fees paid, based on your vehicle type and weight
 
