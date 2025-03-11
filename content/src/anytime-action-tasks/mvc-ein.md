@@ -3,7 +3,7 @@ notesMd: ""
 id: mvc-ein
 name: Get Your Motor Vehicle Commission EIN
 category:
-  - Only Show in Subtask
+  - Purchase New Products of Equipment
 industryIds: []
 sectorIds:
   - transportation-and-warehousing
