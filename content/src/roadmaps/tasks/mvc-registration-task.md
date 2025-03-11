@@ -24,12 +24,13 @@ name: Register Your Business-Owned Vehicle(s)
 id: mvc-registration-task
 callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm?utm
 callToActionText: Register My Business Vehicle(s)
+industryId: car-rental
 agencyId: nj-motor-vehicle
 formName: BA-49
 ---
 ## Application Requirements
 You will need:
-* Federal Tax ID Number (FEIN)
+* `Federal Tax ID Number (FEIN)|federal-tax-id`
 * Motor Vehicle Commission `(MVC) Entity Identification Number (EIN)|mvc-entity-id`
 * [Application for Vehicle Registration (Form BA-49](https://www.nj.gov/mvc/pdf/vehicles/BA-49.pdf)
 * Proof of Identity, such as a valid driver’s license or other government-issued photo identification
@@ -38,17 +39,15 @@ You will need:
 If applicable, you may also need:
 * Emissions or Safety Inspection Certificate, for certain passenger and commercial vehicles
 * Weight Certificate, for vehicles weighing over 26,000 pounds
-* United States Department of Transportation (USDOT) number, for vehicles used in interstate commerce or with a gross vehicle weight rating (GVWR) over 10,000 pounds
-* Agricultural certificate number
-* Notarized Power of Attorney, if applying on behalf of the business owner
+* `United States Department of Transportation (USDOT) Number|usdot-number`, for vehicles used in interstate commerce or with a gross vehicle weight rating (GVWR) over 10,000 pounds
+* `Agricultural Certificate Number|agricultural-cert-number`
+* Notarized `Power of Attorney (POA)|power-of-attorney`, if applying on behalf of the business owner
 * Lease/Finance agreement
 * Fees paid, based on your vehicle type and weight
 
 :::infoAlert 
  You must apply for a title in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). Be sure to [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8) before showing up.
 :::
-
-**Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov
 
 :::callout{ showHeader="true" headerText="What if I don't get a title?" showIcon="false" calloutType="warning" }
 If you use an unregistered vehicle for your business, you may be subject to vehicle impoundment, fines, or eligibility issues with your insurance.
@@ -58,3 +57,5 @@ If you use an unregistered vehicle for your business, you may be subject to vehi
 * A valid registration card 
 * A valid license plate
 :::
+
+**Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov
