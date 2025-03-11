@@ -44,7 +44,9 @@
     }
   ],
   "name": "IT Consulting",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "it-consultant",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
