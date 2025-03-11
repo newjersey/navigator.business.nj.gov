@@ -14,6 +14,8 @@ summaryDescriptionMd: >-
 urlSlug: sedb
 name: "Get Certified as a Socially and Economically Disadvantaged Business "
 id: sedb
+callToActionLink: https://www.nj.gov/treasury/revenue/business-cert-program.shtml
+callToActionText: Apply for My SEDB Certification
 agency: []
 applicableOwnershipTypes:
   - woman-owned
