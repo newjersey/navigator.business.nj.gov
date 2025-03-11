@@ -72,7 +72,8 @@
   ],
   "name": "Pharmacy",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "business-vehicle-title-reg"
   ],
   "displayname": "pharmacy",
   "industryOnboardingQuestions": {},
