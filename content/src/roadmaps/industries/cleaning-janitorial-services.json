@@ -46,7 +46,8 @@
   "name": "Cleaning and Janitorial Services",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "pesticides-applictor-licensing"
   ],
   "displayname": "cleaning-janitorial-services",
   "industryOnboardingQuestions": {
