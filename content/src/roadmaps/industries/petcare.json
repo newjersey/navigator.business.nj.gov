@@ -48,7 +48,8 @@
     "weights-measures",
     "petcare-cds-shelter",
     "petcare-cds-trainer",
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "pesticides-applictor-licensing"
   ],
   "displayname": "petcare",
   "industryOnboardingQuestions": {
