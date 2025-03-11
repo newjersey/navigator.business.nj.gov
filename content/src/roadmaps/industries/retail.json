@@ -53,7 +53,8 @@
     "ticket-broker-resell",
     "weights-measures",
     "cigarette-manufacture-sell",
-    "other-businesses-CRTK-survey"
+    "other-businesses-CRTK-survey",
+    "retail-pesticide-dealer-licensing"
   ],
   "displayname": "retail",
   "industryOnboardingQuestions": {
