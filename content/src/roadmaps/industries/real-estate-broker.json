@@ -1,10 +1,7 @@
 {
-  "displayname": "real-estate-broker",
   "naicsCodes": "531210",
   "defaultSectorId": "real-estate",
   "canHavePermanentLocation": true,
-  "industryOnboardingQuestions": {},
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -53,6 +50,12 @@
     }
   ],
   "name": "Real Estate Brokerage",
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "business-vehicle-title-reg"
+  ],
+  "displayname": "real-estate-broker",
+  "industryOnboardingQuestions": {},
   "isEnabled": true,
   "additionalSearchTerms": "real estate broker, brokerage, ",
   "id": "real-estate-broker",
