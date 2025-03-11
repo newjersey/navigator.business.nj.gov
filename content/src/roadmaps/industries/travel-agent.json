@@ -44,7 +44,9 @@
     }
   ],
   "name": "Travel Agency",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "travel-agent",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
