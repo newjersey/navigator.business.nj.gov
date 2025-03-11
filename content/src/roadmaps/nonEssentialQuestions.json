@@ -134,6 +134,11 @@
       "id": "business-vehicle-title-reg",
       "addOn": "business-vehicle",
       "questionText": "Do you plan to own and operate business vehicles in NJ? "
+    },
+    {
+      "id": "dental-hygienist",
+      "questionText": "Are you a dental hygienist?",
+      "addOn": "healthcare-dental-hygienist"
     }
   ]
 }
