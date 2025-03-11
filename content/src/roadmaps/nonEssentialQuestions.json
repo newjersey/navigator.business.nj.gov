@@ -139,6 +139,11 @@
       "id": "dental-hygienist",
       "questionText": "Are you a dental hygienist?",
       "addOn": "healthcare-dental-hygienist"
+    },
+    {
+      "id": "retail-pesticide-dealer-licensing",
+      "questionText": "Will your business be selling pesticides? ",
+      "addOn": "retail-pesticide-dealer-license"
     }
   ]
 }
