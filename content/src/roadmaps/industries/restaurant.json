@@ -1,14 +1,7 @@
 {
-  "displayname": "restaurant",
   "naicsCodes": "722511, 722310, 722320, 722410, 722513, 722514, 722515",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "accommodation-and-food-services",
-  "industryOnboardingQuestions": {
-    "canBeReseller": true,
-    "isLiquorLicenseApplicable": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -62,6 +55,16 @@
     }
   ],
   "name": "Restaurant",
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "business-vehicle-title-reg"
+  ],
+  "displayname": "restaurant",
+  "industryOnboardingQuestions": {
+    "canBeReseller": true,
+    "isLiquorLicenseApplicable": true
+  },
+  "isEnabled": true,
   "additionalSearchTerms": "cafe, grill",
   "id": "restaurant",
   "description": "Provides food to patrons",
