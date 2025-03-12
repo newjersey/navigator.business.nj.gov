@@ -18,7 +18,7 @@ export interface EmergencyTripPermitApplicationInfo {
   requestorPhone: string;
   carrier: string;
   requestorAddress1: string;
-  requestAddress2?: string;
+  requestorAddress2?: string;
   requestorCity: string;
   requestorCountry: string;
   requestorStateProvince: StateShortCodesDomestic;
@@ -50,6 +50,58 @@ export interface EmergencyTripPermitApplicationInfo {
   pdfAttach: string;
 }
 
+export const generateEmptyEmergencyTripPermitData = (): EmergencyTripPermitApplicationInfo => {
+  return {
+    additionalConfirmemail: "",
+    additionalEmail: "",
+    carrier: "",
+    deliveryAddress: "",
+    deliveryCity: "",
+    deliveryCountry: "",
+    deliverySiteName: "",
+    deliveryStateProvince: "NJ",
+    deliveryZipPostalCode: "",
+    payerAddress1: "",
+    payerAddress2: "",
+    payerCity: "",
+    payerCompanyName: "",
+    payerCountry: "",
+    payerEmail: "",
+    payerFirstName: "",
+    payerLastName: "",
+    payerPhoneNumber: "",
+    payerStateAbbreviation: "NJ",
+    pdfAttach: "",
+    permitDate: "",
+    permitStartTime: "",
+    pickupAddress: "",
+    pickupCity: "",
+    pickupCountry: "",
+    pickupSiteName: "",
+    pickupStateProvince: "NJ",
+    pickupZipPostalCode: "",
+    requestorAddress2: "",
+    requestorAddress1: "",
+    requestorCity: "",
+    requestorConfirmemail: "",
+    requestorCountry: "",
+    requestorEmail: "",
+    requestorFirstName: "",
+    requestorLastName: "",
+    requestorPhone: "",
+    requestorStateProvince: "NJ",
+    requestorZipPostalCode: "",
+    textMsg: "",
+    textMsgMobile: "",
+    vehicleCountry: "",
+    vehicleLicensePlateNum: "",
+    vehicleMake: "",
+    vehicleStateProvince: "",
+    vehicleVinSerial: "",
+    vehicleYear: "",
+  };
+};
+
 export interface EmergencyTripPermitSubmitSuccessResponse {
   Success: true;
   Id: string;
@@ -65,3 +117,5 @@ export interface EmergencyTripPermitSubmitErrorResponse {
 export type EmergencyTripPermitSubmitResponse =
   | EmergencyTripPermitSubmitSuccessResponse
   | EmergencyTripPermitSubmitErrorResponse;
+
+export type EmergencyTripPermitFieldNames = keyof EmergencyTripPermitApplicationInfo;

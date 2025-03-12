@@ -9,13 +9,24 @@ import {
   IndustrySpecificData,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
+import {
+  EmergencyTripPermitApplicationInfo,
+  generateEmptyEmergencyTripPermitData,
+} from "@businessnjgovnavigator/shared/emergencyTripPermit";
 
-export type ProfileFields = keyof ProfileData | keyof BusinessUser | keyof FormationAddress;
+export type ProfileFields =
+  | keyof ProfileData
+  | keyof BusinessUser
+  | keyof FormationAddress
+  | keyof EmergencyTripPermitApplicationInfo;
 
 const allProfileFields = Object.keys(profileFieldsFromConfig) as ProfileFields[];
 const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof BusinessUser)[];
 const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
 const formationAddressFields = Object.keys(emptyFormationAddressData) as (keyof FormationAddress)[];
+const emergencyTripPermitFields = Object.keys(
+  generateEmptyEmergencyTripPermitData()
+) as (keyof EmergencyTripPermitApplicationInfo)[];
 
 export const profileFields: ProfileFields[] = [
   ...new Set([
@@ -23,6 +34,7 @@ export const profileFields: ProfileFields[] = [
     ...onboardingDataFields,
     ...businessUserDisplayFields,
     ...formationAddressFields,
+    ...emergencyTripPermitFields,
   ]),
 ];
 

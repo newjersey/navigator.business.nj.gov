@@ -18,6 +18,7 @@ import {
   TaxFilingData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { EmergencyTripPermitFieldNames } from "@businessnjgovnavigator/shared/emergencyTripPermit";
 import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 
@@ -71,12 +72,15 @@ export type OnboardingStatus = "SUCCESS" | "ERROR";
 
 export type FormationStepNames = "Name" | "Business" | "Contacts" | "Billing" | "Review";
 export type DbaStepNames = "Business Name" | "DBA Resolution" | "Authorize Business";
+export type AbcEmergencyTripPermitStepNames = "Instructions" | "Requestor" | "Trip" | "Billing" | "Review";
 
-export type FormationFieldErrorState = {
-  field: FieldsForErrorHandling;
+export type FieldErrorState<T> = {
+  field: T;
   hasError: boolean;
   label: string;
 };
+
+export type FormationFieldErrorState = FieldErrorState<FieldsForErrorHandling>;
 
 export const profileFieldsFromConfig = getMergedConfig().profileDefaults.fields;
 
@@ -548,8 +552,5 @@ export type FieldsForAddressErrorHandling = keyof FormationAddress;
 export type AddressFields = keyof FormationAddress;
 export type AddressTextField = keyof FormationAddress;
 
-export type AddressFieldErrorState = {
-  field: FieldsForAddressErrorHandling;
-  hasError: boolean;
-  label: string;
-};
+export type AddressFieldErrorState = FieldErrorState<FieldsForAddressErrorHandling>;
+export type EmergencyTripPermitErrorState = FieldErrorState<EmergencyTripPermitFieldNames>;

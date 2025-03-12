@@ -2,7 +2,7 @@ import { FieldErrorType, FieldStateActionKind, FormContextType } from "@/context
 import { useMountEffect } from "@/lib/utils/helpers";
 import { Context, useContext, useEffect, useMemo } from "react";
 
-const debug = false;
+const debug = true;
 
 export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
   fieldName: keyof T,
