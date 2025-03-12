@@ -4,7 +4,7 @@ name: Register Your Business-Owned Vehicle(s)
 category:
   - Only Show in Subtask
   - Purchase New Products or Equipment
-applyToAllUsers: true
+applyToAllUsers: false
 industryIds: []
 sectorIds:
   - agriculture-forestry-fishing-and-hunting
