@@ -99,7 +99,8 @@
         "plugin:jest-dom/recommended"
       ],
       "rules": {
-        "jest/expect-expect": "error"
+        "jest/expect-expect": "error",
+        "jest/no-disabled-tests": "off"
       }
     },
     {

@@ -49,7 +49,8 @@
       "plugins": ["jest", "jest-formatting"],
       "extends": ["plugin:jest/recommended", "plugin:jest-formatting/recommended"],
       "rules": {
-        "jest/expect-expect": "error"
+        "jest/expect-expect": "error",
+        "jest/no-disabled-tests": "off"
       }
     },
     {

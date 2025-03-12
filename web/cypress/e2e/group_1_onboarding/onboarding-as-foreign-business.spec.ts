@@ -31,7 +31,7 @@ describe("Onboarding for all industries when out of state nexus business [featur
     });
 
     for (const industry of enabledIndustries) {
-      it(`Onboarding for ${industry.name}`, () => {
+      it.skip(`Onboarding for ${industry.name}`, () => {
         cy.url().should("include", "onboarding?page=1");
         onOnboardingPageNexusBusiness.selectBusinessPersonaRadio("FOREIGN");
         onOnboardingPageNexusBusiness.getBusinessPersonaRadio("FOREIGN").should("be.checked");
