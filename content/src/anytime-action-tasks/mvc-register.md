@@ -4,18 +4,8 @@ name: Register Your Business-Owned Vehicle(s)
 category:
   - Only Show in Subtask
   - Purchase New Products or Equipment
-applyToAllUsers: true
-industryIds:
-  - auto-body-repair
-  - car-service
-  - car-rental
-  - food-truck
-  - logistics
-  - moving-company
-  - school-bus
-  - non-medical-transport
-  - freight-forwarding
-  - trucking
+applyToAllUsers: false
+industryIds: []
 sectorIds:
   - agriculture-forestry-fishing-and-hunting
   - accommodation-and-food-services
