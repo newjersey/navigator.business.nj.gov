@@ -2,8 +2,8 @@ import { RadioQuestion } from "@/components/data-fields/RadioQuestion";
 import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { WithErrorBar } from "@/components/WithErrorBar";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { EssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
@@ -20,7 +20,7 @@ export const EssentialQuestionField = <T,>(props: Props<T>): ReactElement => {
 
   const { RegisterForOnSubmit, isFormFieldInvalid } = useFormContextFieldHelpers(
     props.essentialQuestion.fieldName,
-    ProfileFormContext,
+    DataFormErrorMapContext,
     props.errorTypes
   );
 

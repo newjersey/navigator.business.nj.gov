@@ -7,9 +7,9 @@ import { TaxAccessModalBody } from "@/components/filings-calendar/tax-access-mod
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { WithErrorBar } from "@/components/WithErrorBar";
+import { DataFormErrorMapContext, DataFormErrorMapFields } from "@/contexts/dataFormErrorMapContext";
 import { createReducedFieldStates } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFields, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
@@ -47,7 +47,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [apiFailed, setOnAPIfailed] = useState<undefined | "FAILED" | "UNKNOWN">(undefined);
   const [onSubmitClicked, setOnSubmitClicked] = useState<boolean>(false);
-  const fields: ProfileFields[] = ["businessName", "taxId", "responsibleOwnerName"];
+  const fields: DataFormErrorMapFields[] = ["businessName", "taxId", "responsibleOwnerName"];
   const has_CMS_ONLY_fakeError = props.CMS_ONLY_fakeError && props.CMS_ONLY_fakeError !== "NONE";
 
   const {
@@ -79,7 +79,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
     }
   });
 
-  const errorMessages: Partial<Record<ProfileFields, string>> = {
+  const errorMessages: Partial<Record<DataFormErrorMapFields, string>> = {
     businessName: Config.taxAccess.modalBusinessFieldErrorName,
     responsibleOwnerName: Config.taxAccess.modalResponsibleOwnerFieldErrorName,
     taxId: Config.taxAccess.modalTaxFieldErrorName,
@@ -219,7 +219,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
   if (profileData.legalStructureId === undefined) return <></>;
 
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFormErrorMapContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -327,6 +327,6 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
           </WithErrorBar>
         </ModalTwoButton>
       </ProfileDataContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFormErrorMapContext.Provider>
   );
 };

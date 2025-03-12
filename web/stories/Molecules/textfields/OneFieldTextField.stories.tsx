@@ -2,8 +2,8 @@ import { GenericTextField } from "@/components/GenericTextField";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Meta, StoryObj } from "@storybook/react";
@@ -21,11 +21,11 @@ const Template = () => {
   };
   const [config, setConfig] = useState<ConfigType>(mergedConfig);
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
-  const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
+  const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
 
   const fieldName = "dateOfFormation";
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFormErrorMapContext.Provider value={formContextState}>
       <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
         <ProfileDataContext.Provider
           value={{
@@ -63,7 +63,7 @@ const Template = () => {
           </WithErrorBar>
         </ProfileDataContext.Provider>
       </ConfigContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFormErrorMapContext.Provider>
   );
 };
 
