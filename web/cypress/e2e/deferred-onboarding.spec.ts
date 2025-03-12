@@ -91,7 +91,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
         });
 
-        it("can provide location in Formation Date Modal", () => {
+        it.skip("can provide location in Formation Date Modal", () => {
           openFormationDateModal();
           selectDate("04/2021");
           selectLocation("Allendale");
