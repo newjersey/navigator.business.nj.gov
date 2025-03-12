@@ -1,17 +1,17 @@
 #!/bin/sh
 
 # Define the regex pattern for commit messages
-COMMIT_MSG_REGEX="^(fix|feat|chore|docs|style|refactor|test): (\[#[0-9]+ \| AB#[0-9]+\] .+|spell check fixes)$"
+COMMIT_MSG_REGEX="^(fix|feat|chore|docs|style|refactor|test): (\[AB#[0-9]+\] .+|spell check fixes)$"
 COMMIT_MSG_FILE="$1"
 COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
 
 # Check if the commit message matches the pattern
 if ! echo "$COMMIT_MSG" | grep -Eq "$COMMIT_MSG_REGEX"; then
   echo "❌ Commit message does not match the required format!"
-  echo "❌ Expected format: 'fix|feat|chore|docs|style|refactor|test: [#<Pivotal ID> | AB#<ticket ID>] <message here>'"
-  echo "❌ Example: 'feat: [#123456 | AB#1234] added status page'"
+  echo "❌ Expected format: 'fix|feat|chore|docs|style|refactor|test: [AB#<ticket ID>] <message here>'"
+  echo "❌ Example: 'feat: [AB#1234] added status page'"
   echo "---- Alternatively you can ignore this by having '--no-verify' as a commandline argument to the commit command'"
-  echo "---- We also support 'fix: spell check fixes' as a message"
+  echo "---- We also support '<prefix>: spell check fixes' as a message"
   exit 1
 fi
 
