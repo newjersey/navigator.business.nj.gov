@@ -58,8 +58,9 @@
     {
       "weight": 16,
       "step": 3,
-      "licenseTask": "school-bus-license",
-      "required": true
+      "licenseTask": "",
+      "required": true,
+      "task": "trucking-cdl"
     },
     {
       "step": 3,
