@@ -3,7 +3,8 @@ id: mvc-register
 name: Register Your Business-Owned Vehicle(s)
 category:
   - Only Show in Subtask
-  - Purchase New Products of Equipment
+  - Purchase New Products or Equipment
+applyToAllUsers: true
 industryIds:
   - auto-body-repair
   - car-service
