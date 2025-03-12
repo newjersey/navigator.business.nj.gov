@@ -14,6 +14,14 @@ const licenseTasksDir = path.join(roadmapsDir, "license-tasks");
 const industriesDir = path.join(roadmapsDir, "industries");
 const addOnsDir = path.join(roadmapsDir, "add-ons");
 const contextualInfoDir = path.join(displayContentDir, "contextual-information");
+const fieldConfigsTaxClearanceCertificateAnytimeActionDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "fieldConfig",
+  "tax-clearance-certificate-anytime-action"
+);
 const fieldConfigDir = path.join(process.cwd(), "..", "content", "src", "fieldConfig");
 const fundingsDir = path.join(process.cwd(), "..", "content", "src", "fundings");
 const certificationsDir = path.join(process.cwd(), "..", "content", "src", "certifications");
@@ -35,6 +43,7 @@ type Filenames = {
   contextualInfos: string[];
   displayContents: string[];
   fieldConfigs: string[];
+  fieldConfigsTaxClearanceCertificateAnytimeAction: string[];
   fundings: string[];
   certifications: string[];
   licenses: string[];
@@ -51,6 +60,7 @@ type FileContents = {
   contextualInfos: string[];
   displayContents: string[];
   fieldConfigs: string[];
+  fieldConfigsTaxClearanceCertificateAnytimeAction: string[];
 };
 
 const getFlattenedFilenames = (dir: string): string[] => {
@@ -78,7 +88,12 @@ const getFilenames = (): Filenames => {
     displayContents: getFlattenedFilenames(displayContentDir).filter((it) => {
       return it.endsWith(".md");
     }),
-    fieldConfigs: fs.readdirSync(fieldConfigDir),
+    fieldConfigs: fs.readdirSync(fieldConfigDir).filter((it) => {
+      return it.endsWith(".json");
+    }),
+    fieldConfigsTaxClearanceCertificateAnytimeAction: fs.readdirSync(
+      fieldConfigsTaxClearanceCertificateAnytimeActionDir
+    ),
     fundings: fs.readdirSync(fundingsDir),
     certifications: fs.readdirSync(certificationsDir),
     licenses: fs.readdirSync(licensesDir),
@@ -98,6 +113,10 @@ const getContents = (filenames: Filenames): FileContents => {
   const fieldConfigs = filenames.fieldConfigs.map((it) => {
     return fs.readFileSync(path.join(fieldConfigDir, it), "utf8");
   });
+  const fieldConfigsTaxClearanceCertificateAnytimeAction =
+    filenames.fieldConfigsTaxClearanceCertificateAnytimeAction.map((it) => {
+      return fs.readFileSync(path.join(fieldConfigsTaxClearanceCertificateAnytimeActionDir, it), "utf8");
+    });
 
   return {
     tasks: filenames.tasks.map((it) => {
@@ -123,6 +142,7 @@ const getContents = (filenames: Filenames): FileContents => {
       return matter(fs.readFileSync(it, "utf8")).content;
     }),
     fieldConfigs,
+    fieldConfigsTaxClearanceCertificateAnytimeAction,
   };
 };
 
@@ -334,7 +354,11 @@ export const findDeadContextualInfo = async (): Promise<string[]> => {
         (await isReferencedInAMarkdown(contextualInfo, contents.tasks)) ||
         (await isReferencedInAMarkdown(contextualInfo, contents.displayContents)) ||
         (await isReferencedInAMarkdown(contextualInfo, contents.contextualInfos)) ||
-        (await isReferencedInConfig(contextualInfo, contents.fieldConfigs))
+        (await isReferencedInConfig(contextualInfo, contents.fieldConfigs)) ||
+        (await isReferencedInConfig(
+          contextualInfo,
+          contents.fieldConfigsTaxClearanceCertificateAnytimeAction
+        ))
       )
     ) {
       deadContextualInfos.push(contextualInfo);
