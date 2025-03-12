@@ -46,6 +46,7 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
   inputProps?: OutlinedInputProps;
   type?: HTMLInputTypeAttribute;
   readOnly?: boolean;
+  preventRefreshWhenUnmounted?: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, react/display-name
@@ -132,7 +133,7 @@ export const GenericTextField = forwardRef(
       return isValidAdditional && isValidRequired;
     };
 
-    RegisterForOnSubmit(() => isFieldValid(value));
+    RegisterForOnSubmit(() => isFieldValid(value), props.preventRefreshWhenUnmounted);
 
     const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
       const isValid = isFieldValid(event.target.value);
@@ -169,6 +170,7 @@ export const GenericTextField = forwardRef(
             className: `${props.readOnly ? "bg-base-lightest" : ""}`,
             ...fieldOptions?.inputProps,
             "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
+            tabIndex: 0,
           }}
           InputProps={{
             readOnly: props.readOnly,

@@ -4,6 +4,7 @@ import { TaxFilingCalendarEvent } from "../calendarEvent";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
 import { createBusinessId } from "../domain-logic/createBusinessId";
+import { EmergencyTripPermitApplicationInfo, getEarliestPermitDate } from "../emergencyTripPermit";
 import {
   AirData,
   AirQuestionnaireData,
@@ -23,7 +24,7 @@ import {
   publicFilingLegalTypes,
 } from "../formationData";
 import { getIndustries, Industry } from "../industry";
-import { randomInt } from "../intHelpers";
+import { randomInt, randomIntFromInterval } from "../intHelpers";
 import { LegalStructure, LegalStructures } from "../legalStructure";
 import {
   LicenseData,
@@ -589,6 +590,67 @@ export const generateMunicipalityDetail = (overrides: Partial<MunicipalityDetail
     countyClerkPhone: `some-phone-${randomInt()}`,
     countyClerkWebsite: `some-clerk-webpage-${randomInt()}`,
     countyWebsite: `some-county-website-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateEmergencyTripPermitApplicationData = (
+  overrides: Partial<EmergencyTripPermitApplicationInfo>
+): EmergencyTripPermitApplicationInfo => {
+  const requestorEmail = `email-${randomInt()}@email.com`;
+  const payerEmail = `email-${randomInt()}@email.com`;
+  const additionalEmail = `email-${randomInt()}@email.com`;
+  return {
+    additionalConfirmemail: additionalEmail,
+    additionalEmail: additionalEmail,
+    carrier: `some-carrier-${randomInt()}`,
+    deliveryAddress: `some-delivery-address-${randomInt()}`,
+    deliveryCity: `some-delivery-city-${randomInt()}`,
+    deliveryCountry: "US",
+    deliverySiteName: `some-delivery-site-name-${randomInt()}`,
+    deliveryStateProvince: "NJ",
+    deliveryZipPostalCode: `${randomInt(5)}`,
+    payerCountry: "US",
+    payerStateAbbreviation: "NJ",
+    payerFirstName: `some-payer-first-name-${randomInt()}`,
+    payerLastName: `some-payer-last-name-${randomInt()}`,
+    payerCompanyName: "`some-payer-company-${randomInt()}`",
+    payerCity: `some-payer-city-${randomInt()}`,
+    payerEmail: payerEmail,
+    payerZipCode: `${randomInt(5)}`,
+    payerPhoneNumber: `${randomInt(10)}`,
+    payerAddress1: `some-payer-address-1-${randomInt()}`,
+    payerAddress2: `some-payer-address-1-${randomInt()}`,
+    shouldAttachPdfToEmail: false,
+    permitDate: getEarliestPermitDate()
+      .add(randomIntFromInterval("1", "4"), "days")
+      .format(defaultDateFormat),
+    permitStartTime: `${randomIntFromInterval("0", "11")}:00`,
+    pickupAddress: `some-pickup-address-${randomInt()}`,
+    pickupCity: `some-pickup-city-${randomInt()}`,
+    pickupCountry: "US",
+    pickupSiteName: `some-pickup-site-name-${randomInt()}`,
+    pickupStateProvince: "NJ",
+    pickupZipPostalCode: `${randomInt(5)}`,
+    requestorAddress2: `some-requestor-address-2-${randomInt()}`,
+    requestorAddress1: `some-requestor-address-1-${randomInt()}`,
+    requestorCity: `some-requestor-city-${randomInt()}`,
+    requestorConfirmemail: requestorEmail,
+    requestorCountry: "US",
+    requestorEmail: requestorEmail,
+    requestorFirstName: `some-requestor-first-name-${randomInt()}`,
+    requestorLastName: `some-requestor-last-name-${randomInt()}`,
+    requestorPhone: `${randomInt(10)}`,
+    requestorStateProvince: "NJ",
+    requestorZipPostalCode: "",
+    shouldSendTextConfirmation: false,
+    textMsgMobile: `${randomInt(10)}`,
+    vehicleCountry: "US",
+    vehicleLicensePlateNum: `${randomInt(6)}`,
+    vehicleMake: `some-vehicle-make-${randomInt()}`,
+    vehicleStateProvince: "NJ",
+    vehicleVinSerial: `${randomInt(10)}`,
+    vehicleYear: `${randomInt(4)}`,
     ...overrides,
   };
 };

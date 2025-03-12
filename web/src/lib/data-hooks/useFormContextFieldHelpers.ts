@@ -9,7 +9,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
   context?: Context<FormContextType<T, FieldError>>,
   errorTypes?: FieldError[]
 ): {
-  RegisterForOnSubmit: (isValidFunc: () => boolean) => void;
+  RegisterForOnSubmit: (isValidFunc: () => boolean, preventRefreshWhenUnmounted?: boolean) => void;
   setIsValid: (isValid: boolean) => void;
   isFormFieldInvalid: boolean;
 } => {
@@ -25,7 +25,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { runValidations, fieldStates, reducer } = useContext(context);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const RegisterForOnSubmit = (isValidFunc: () => boolean): void => {
+  const RegisterForOnSubmit = (isValidFunc: () => boolean, preventRefreshWhenUnmounted?: boolean): void => {
     debug && console.log("register func");
     useMountEffect(() => {
       debug && console.log("mounted");
@@ -35,7 +35,9 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
       return (): void => {
         debug && console.log("unmounted");
         debug && console.log(fieldName);
-        reducer({ type: FieldStateActionKind.UNREGISTER, payload: { field: fieldName } });
+        if (!preventRefreshWhenUnmounted) {
+          reducer({ type: FieldStateActionKind.UNREGISTER, payload: { field: fieldName } });
+        }
       };
     });
 

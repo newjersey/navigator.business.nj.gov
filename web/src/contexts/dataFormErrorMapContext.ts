@@ -10,12 +10,17 @@ import {
   ProfileData,
   TaxClearanceCertificateData,
 } from "@businessnjgovnavigator/shared";
+import {
+  EmergencyTripPermitApplicationInfo,
+  generateNewEmergencyTripPermitData,
+} from "@businessnjgovnavigator/shared/emergencyTripPermit";
 
 export type DataFormErrorMapFields =
   | keyof ProfileData
   | keyof BusinessUser
   | keyof FormationAddress
-  | keyof TaxClearanceCertificateData;
+  | keyof TaxClearanceCertificateData
+  | keyof EmergencyTripPermitApplicationInfo;
 
 const allProfileFields = Object.keys(profileFieldsFromConfig) as (keyof ProfileData)[];
 const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof BusinessUser)[];
@@ -24,6 +29,9 @@ const formationAddressFields = Object.keys(emptyFormationAddressData) as (keyof 
 const taxClearanceCertificateFields = Object.keys(
   emptyTaxClearanceCertificateData
 ) as (keyof TaxClearanceCertificateData)[];
+const emergencyTripPermitFields = Object.keys(
+  generateNewEmergencyTripPermitData()
+) as (keyof EmergencyTripPermitApplicationInfo)[];
 
 const dataFormErrorMapFields: DataFormErrorMapFields[] = [
   ...new Set([
@@ -32,6 +40,7 @@ const dataFormErrorMapFields: DataFormErrorMapFields[] = [
     ...businessUserDisplayFields,
     ...formationAddressFields,
     ...taxClearanceCertificateFields,
+    ...emergencyTripPermitFields,
   ]),
 ];
 

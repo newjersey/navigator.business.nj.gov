@@ -18,6 +18,7 @@ interface Props {
   autoComplete?: boolean;
   disabled?: boolean;
   required?: boolean;
+  options?: CountriesObject[];
 }
 
 export const CountryDropdown = (props: Props): ReactElement => {
@@ -58,15 +59,17 @@ export const CountryDropdown = (props: Props): ReactElement => {
         })
       : countries;
 
+  const options = props.options ?? filteredCountries();
+
   const getCountry = (value: string | undefined): CountriesObject | undefined => {
-    return filteredCountries().find((country: CountriesObject) => {
+    return options.find((country: CountriesObject) => {
       return country.name === value || country.shortCode === value?.toUpperCase();
     });
   };
 
   return (
     <Autocomplete
-      options={filteredCountries()}
+      options={options}
       value={getCountry(props.value) || null}
       filterOptions={filterOptions}
       getOptionLabel={(option: CountriesObject): string => {
