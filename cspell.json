@@ -219,7 +219,9 @@
     "womenled",
     "WREB",
     "Yamileth",
-    "YTTW"
+    "YTTW",
+    "SEDB",
+    "NPN"
   ],
   "ignorePaths": [
     "node_modules/**",

@@ -146,7 +146,7 @@
       "addOn": "retail-pesticide-dealer-license"
     },
     {
-      "id": "pesticides-applictor-licensing",
+      "id": "pesticides-applicator-licensing",
       "questionText": "Will your business be using pesticides or offering pesticide application services? \n",
       "addOn": "multi-pest-applicator-license"
     }
