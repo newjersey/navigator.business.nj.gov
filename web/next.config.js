@@ -34,6 +34,7 @@ module.exports = withBundleAnalyzer({
       process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH ?? "false",
     DISABLE_GTM: process.env.DISABLE_GTM,
     OUTAGE_ALERT_CONFIG_URL: process.env.OUTAGE_ALERT_CONFIG_URL,
+    FEATURE_ABC_ETP_APPLICATION: process.env.FEATURE_ABC_ETP_APPLICATION ?? "false",
   },
   staticPageGenerationTimeout: 120,
   webpack: (config) => {

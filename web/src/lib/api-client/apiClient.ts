@@ -11,6 +11,10 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { ElevatorSafetyRegistrationSummary } from "@businessnjgovnavigator/shared/elevatorSafety";
 import {
+  EmergencyTripPermitApplicationInfo,
+  EmergencyTripPermitSubmitResponse,
+} from "@businessnjgovnavigator/shared/emergencyTripPermit";
+import {
   HousingRegistrationRequestLookupResponse,
   PropertyInterestType,
 } from "@businessnjgovnavigator/shared/housing";
@@ -118,6 +122,12 @@ export const postGetAnnualFilings = (userData: UserData): Promise<UserData> => {
 
 export const searchBusinessName = (name: string): Promise<NameAvailability> => {
   return get(`/guest/business-name-availability?query=${encodeURIComponent(name)}`, false);
+};
+
+export const postEmergencyTripPermitApplication = (
+  applicationInfo: EmergencyTripPermitApplicationInfo
+): Promise<EmergencyTripPermitSubmitResponse> => {
+  return post("/emergencyTripPermit", applicationInfo);
 };
 
 export const postSelfReg = (userData: UserData): Promise<SelfRegResponse> => {

@@ -885,6 +885,142 @@ collections:
         }
       - { label: "Summary Description MD", name: "summaryDescriptionMd", widget: "string", required: false }
       - { label: "Body", name: "body", widget: "markdown", required: false }
+  - name: "abc-tasks"
+    label: "Tasks - ABC"
+    delete: false
+    create: false
+    files:
+      - label: "ABC Emergency Trip Permit Application Task"
+        name: abc-emergency-trip-permit
+        file: content/src/fieldConfig/abc-emergency-trip-permit.json
+        editor:
+          preview: false
+        fields:
+          - label: "Steps"
+            name: steps
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Task Name, name: taskName, widget: string }
+              - { label: Next Step Text, name: nextStepText, widget: string }
+              - { label: Previous Step Text, name: previousStepText, widget: string }
+              - { label: Submit Text, name: submitText, widget: string }
+              - label: "Instructions"
+                name: instructions
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Description, name: description, widget: string }
+                  - { label: Application Header, name: applicationHeader, widget: string }
+                  - {
+                      label: Application Instructions Description,
+                      name: applicationInstructionsDescription,
+                      widget: string,
+                    }
+                  - { label: Application Details, name: applicationDetails, widget: string }
+                  - { label: Button Text, name: buttonText, widget: string }
+                  - { label: Help Text, name: helpText, widget: string }
+              - label: "Requestor"
+                name: requestor
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Vehicle Section, name: vehicleSection, widget: string }
+                  - { label: Requestor Section, name: requestorSection, widget: string }
+                  - { label: Requestor Section Subheading, name: requestorSectionSubHeading, widget: string }
+              - label: "Trip"
+                name: trip
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Subheader, name: subHeader, widget: string }
+                  - { label: Pickup Site Section, name: pickupSiteSection, widget: string }
+                  - { label: Delivery Site Section, name: deliverySiteSection, widget: string }
+              - label: "Billing"
+                name: billing
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Services Section, name: servicesSection, widget: string }
+                  - { label: Billing Section, name: billingSection, widget: string }
+                  - { label: Permit Section, name: permitSection, widget: string }
+                  - { label: Permit Subheader, name: permitSubheader, widget: string }
+                  - { label: PDF Attach Checkbox Label, name: pdfAttachCheckboxLabel, widget: string }
+                  - {
+                      label: Text Message Download Link Checkbox Label,
+                      name: textMessageDownloadLinkCheckboxLabel,
+                      widget: string,
+                    }
+                  - {
+                      label: Additional Email Download Link Checkbox Label,
+                      name: additionalEmailDownloadLinkCheckboxLabel,
+                      widget: string,
+                    }
+                  - { label: Trip Permit Fee Line Item, name: tripPermitFeeLineItem, widget: string }
+                  - { label: Trip Permit Fee Info, name: tripPermitFeeInfo, widget: string }
+                  - { label: Online Process Fee Line Item, name: onlineProcessFeeLineItem, widget: string }
+                  - { label: Total Fee Line Item, name: totalFeeLineItem, widget: string }
+              - label: "Review"
+                name: review
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Info Alert Text, name: infoAlertText, widget: string }
+                  - { label: Error Submit Text, name: errorSubmitText, widget: string }
+                  - { label: API Error Text, name: apiErrorText, widget: string }
+                  - { label: Confirmation Email, name: confirmationEmail, widget: string }
+                  - { label: Permit Attach, name: permitAttach, widget: string }
+                  - { label: Permit Text Message, name: permitTextMessage, widget: string }
+                  - { label: AlternateEmail, name: alternateEmail, widget: string }
+              - label: "Fields"
+                name: fields
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Carrier, name: carrier, widget: string }
+                  - { label: Requestor First Name, name: requestorFirstName, widget: string }
+                  - { label: Requestor Last Name, name: requestorLastName, widget: string }
+                  - { label: Requestor Email, name: requestorEmail, widget: string }
+                  - { label: Requestor Phone, name: requestorPhone, widget: string }
+                  - { label: Requestor Country, name: requestorCountry, widget: string }
+                  - { label: Requestor Address 1, name: requestorAddress1, widget: string }
+                  - { label: Requestor Address 2, name: requestorAddress2, widget: string }
+                  - { label: Requestor State Province, name: requestorStateProvince, widget: string }
+                  - { label: Requestor City, name: requestorCity, widget: string }
+                  - { label: Requestor Zip Postal Code, name: requestorZipPostalCode, widget: string }
+                  - { label: Vehicle Country, name: vehicleCountry, widget: string }
+                  - { label: Vehicle License Plate Number, name: vehicleLicensePlateNum, widget: string }
+                  - { label: Vehicle Make, name: vehicleMake, widget: string }
+                  - { label: Vehicle State Province, name: vehicleStateProvince, widget: string }
+                  - { label: Vehicle Vin Serial Number, name: vehicleVinSerial, widget: string }
+                  - { label: Vehicle Year, name: vehicleYear, widget: string }
+                  - { label: Permit Date, name: permitDate, widget: string }
+                  - { label: Permit Start Time, name: permitStartTime, widget: string }
+                  - { label: Pickup Country, name: pickupCountry, widget: string }
+                  - { label: Pickup City, name: pickupCity, widget: string }
+                  - { label: Pickup Address, name: pickupAddress, widget: string }
+                  - { label: Pickup Site Name, name: pickupSiteName, widget: string }
+                  - { label: Pickup State Province, name: pickupStateProvince, widget: string }
+                  - { label: Pickup Zip Postal Code, name: pickupZipPostalCode, widget: string }
+                  - { label: Delivery Site Name, name: deliverySiteName, widget: string }
+                  - { label: Delivery Country, name: deliveryCountry, widget: string }
+                  - { label: Delivery Address, name: deliveryAddress, widget: string }
+                  - { label: Delivery City, name: deliveryCity, widget: string }
+                  - { label: Delivery State Province, name: deliveryStateProvince, widget: string }
+                  - { label: Delivery Zip Postal Code, name: deliveryZipPostalCode, widget: string }
+                  - { label: Payer First Name, name: payerFirstName, widget: string }
+                  - { label: Payer Last Name, name: payerLastName, widget: string }
+                  - { label: Payer Email, name: payerEmail, widget: string }
+                  - { label: Payer Phone Number, name: payerPhoneNumber, widget: string }
+                  - { label: Payer Country, name: payerCountry, widget: string }
+                  - { label: Payer Address 1, name: payerAddress1, widget: string }
+                  - { label: Payer Address 2, name: payerAddress2, widget: string }
+                  - { label: Payer City, name: payerCity, widget: string }
+                  - { label: Payer State Abbreviation, name: payerStateAbbreviation, widget: string }
+                  - { label: Payer Zip Code, name: payerZipCode, widget: string }
+                  - { label: Payer Company Name, name: payerCompanyName, widget: string }
+                  - { label: Text Message Mobile, name: textMsgMobile, widget: string }
+                  - { label: Additional Email, name: additionalEmail, widget: string }
 
   - name: "naics-code"
     label: "Tasks - NAICS Code"
