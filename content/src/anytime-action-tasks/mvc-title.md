@@ -4,18 +4,8 @@ name: Get a Title for Your Business Vehicle(s)
 category:
   - Only Show in Subtask
   - Purchase New Products or Equipment
-applyToAllUsers: true
-industryIds:
-  - auto-body-repair
-  - car-service
-  - car-rental
-  - food-truck
-  - logistics
-  - moving-company
-  - school-bus
-  - non-medical-transport
-  - freight-forwarding
-  - trucking
+applyToAllUsers: false
+industryIds: []
 sectorIds:
   - transportation-and-warehousing
   - utilities
