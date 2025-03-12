@@ -99,7 +99,7 @@ export const getApiSubmissionBody = (
       RequestorPhone: applicationInfo.requestorPhone,
       Carrier: applicationInfo.carrier,
       RequestorAddress1: applicationInfo.requestorAddress1,
-      RequestAddress2: applicationInfo.requestAddress2 ?? null,
+      RequestAddress2: applicationInfo.requestorAddress2 ?? null,
       RequestorCity: applicationInfo.requestorCity,
       RequestorCountry: applicationInfo.requestorCountry,
       RequestorStateProvince: applicationInfo.requestorStateProvince,
