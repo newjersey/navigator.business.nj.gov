@@ -29,8 +29,7 @@ summaryDescriptionMd: >
   * Class A or B with “X” Endorsement, for vehicles that require a combination of Hazmat (“H”) and Tanker (“N”) endorsements, such as fuel tankers and chemical transport trucks
 urlSlug: trucking-cdl
 displayname: trucking-cdl
-name: Apply for a Commercial Driver's License (CDL) and Ensure Your Drivers are
-  Licensed
+name: Make Sure You or Your Drivers Have a Commercial Driver's License (CDL)
 id: trucking-cdl
 callToActionLink: https://www.nj.gov/mvc/pdf/license/BA-208C.pdf
 callToActionText: Apply for My CDL
