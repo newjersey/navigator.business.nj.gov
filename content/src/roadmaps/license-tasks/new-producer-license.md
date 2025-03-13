@@ -31,8 +31,8 @@ You need to get your business name approved by the New Jersey Department of Bank
 * Business name, address, and phone number
 *  `Certificate of Formation|certificate-formation` (resident business applicants)
 *  `EIN|ein` 
-* National Producer Number, if assigned
-* FINRA Firm Central Registration Depository, if applicable
+* `National Producer Number|national-producer-number`, if assigned
+* FINRA Firm Central Registration Depository (CRD), if applicable
 * Designated responsible licensed producers name, Social Security number, and National Producer Number (NPN)
 * Name, Social Security number, and title of all officers, partners, directors, and owners with at least 10% ownership of the business entity
 * Proof that every officer, partner, directors, and owner with 10% or more ownership has passed the background check (resident business applicants)
