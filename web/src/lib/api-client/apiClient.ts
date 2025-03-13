@@ -1,7 +1,11 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { SelfRegResponse } from "@/lib/types/types";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
-import { getCurrentBusiness } from "@businessnjgovnavigator/shared";
+import {
+  FacilityDetails,
+  getCurrentBusiness,
+  XrayRegistrationStatusResponse,
+} from "@businessnjgovnavigator/shared";
 import {
   InputFile,
   LicenseSearchNameAndAddress,
@@ -60,6 +64,41 @@ export const checkHousingRegistrationStatus = (
   propertyInterestType: PropertyInterestType
 ): Promise<HousingRegistrationRequestLookupResponse> => {
   return post(`/housing/registrations/`, { address, municipalityId, propertyInterestType });
+};
+
+export const checkXrayRegistrationStatus = (
+  facilityDetails: FacilityDetails
+): Promise<XrayRegistrationStatusResponse> => {
+  console.log(facilityDetails);
+  const response: XrayRegistrationStatusResponse = {
+    machines: [
+      {
+        name: "Tomographic Machine",
+        registrationNumber: "12345A",
+        roomId: "01",
+        registrationCategory: "Cone Beam Volumetric Tomographic Machine",
+        manufacturer: "Gendex Corp.",
+        modelNumber: "123-1234567AB",
+        serialNumber: "12-123456AB",
+        annualFee: 94,
+      },
+      {
+        name: "Dental Unit in Dental Facility",
+        registrationNumber: "12345B",
+        roomId: "01",
+        registrationCategory: "Cone Beam Volumetric Tomographic Machine",
+        manufacturer: "Gendex Corp.",
+        modelNumber: "123-1234567AB",
+        serialNumber: "12-123456AB",
+        annualFee: 94,
+      },
+    ],
+    status: "ACTIVE",
+    expirationDate: "04/15/2025",
+  };
+  return new Promise((resolve) => {
+    resolve(response);
+  });
 };
 
 export const postBusinessFormation = (

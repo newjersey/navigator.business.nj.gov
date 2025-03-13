@@ -35,3 +35,4 @@ export * from "./taskAgency";
 export * from "./taxFiling";
 export * from "./test";
 export * from "./userData";
+export * from "./xray";
