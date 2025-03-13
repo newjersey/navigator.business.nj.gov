@@ -499,7 +499,126 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       expect(within(screen.getByTestId("taxPinLabel")).getByText(notStartedText)).toBeInTheDocument();
     });
 
-    it("renders requesting agency text when input is valid", () => {
+    it("renders not started text when addressLine1 is not filled out", () => {
+      const notStartedText = Config.formation.general.notEntered;
+      const business = generateBusiness({
+        taxClearanceCertificateData: undefined,
+        profileData: emptyProfileData,
+        formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
+      });
+      renderComponent(business);
+      fireEvent.click(screen.getByTestId("stepper-1"));
+      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+
+      selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+      fillText("Address line2", "Test Line 2");
+      fillText("Address city", "Baltimore");
+
+      selectValueByTestId("addressState", "MD");
+      fillText("Address zip code", "21210");
+      fireEvent.click(screen.getByTestId("stepper-2"));
+      expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+
+      expect(within(screen.getByTestId("addressLabel")).getByText(notStartedText)).toBeInTheDocument();
+    });
+
+    it("renders not started text when address city is not filled out", () => {
+      const notStartedText = Config.formation.general.notEntered;
+      const business = generateBusiness({
+        taxClearanceCertificateData: undefined,
+        profileData: emptyProfileData,
+        formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
+      });
+      renderComponent(business);
+      fireEvent.click(screen.getByTestId("stepper-1"));
+      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+
+      selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+      fillText("Address line1", "123 Test Road");
+      fillText("Address line2", "Test Line 2");
+
+      selectValueByTestId("addressState", "MD");
+      fillText("Address zip code", "21210");
+      fireEvent.click(screen.getByTestId("stepper-2"));
+      expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+
+      expect(within(screen.getByTestId("addressLabel")).getByText(notStartedText)).toBeInTheDocument();
+    });
+
+    it("renders not started text when addressState is not filled out", () => {
+      const notStartedText = Config.formation.general.notEntered;
+      const business = generateBusiness({
+        taxClearanceCertificateData: undefined,
+        profileData: emptyProfileData,
+        formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
+      });
+      renderComponent(business);
+      fireEvent.click(screen.getByTestId("stepper-1"));
+      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+
+      selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+      fillText("Address line1", "123 Test Road");
+      fillText("Address line2", "Test Line 2");
+      fillText("Address city", "Baltimore");
+      fillText("Address zip code", "21210");
+      fireEvent.click(screen.getByTestId("stepper-2"));
+      expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+
+      expect(within(screen.getByTestId("addressLabel")).getByText(notStartedText)).toBeInTheDocument();
+    });
+
+    it("renders not started text when address zip code is not filled out", () => {
+      const notStartedText = Config.formation.general.notEntered;
+      const business = generateBusiness({
+        taxClearanceCertificateData: undefined,
+        profileData: emptyProfileData,
+        formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
+      });
+      renderComponent(business);
+      fireEvent.click(screen.getByTestId("stepper-1"));
+      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+
+      selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+      fillText("Address line1", "123 Test Road");
+      fillText("Address line2", "Test Line 2");
+      fillText("Address city", "Baltimore");
+      selectValueByTestId("addressState", "MD");
+      fireEvent.click(screen.getByTestId("stepper-2"));
+      expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+
+      expect(within(screen.getByTestId("addressLabel")).getByText(notStartedText)).toBeInTheDocument();
+    });
+
+    it("renders formatted address when everything except addressLine2 is filled out", () => {
+      const business = generateBusiness({
+        taxClearanceCertificateData: undefined,
+        profileData: emptyProfileData,
+        formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
+      });
+      renderComponent(business);
+      fireEvent.click(screen.getByTestId("stepper-1"));
+      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+
+      selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+      fillText("Address line1", "123 Test Road");
+      fillText("Address city", "Baltimore");
+
+      selectValueByTestId("addressState", "MD");
+      fillText("Address zip code", "21210");
+      fireEvent.click(screen.getByTestId("stepper-2"));
+      expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+
+      const address = formatAddress({
+        addressLine1: "123 Test Road",
+        addressCity: "Baltimore",
+        addressState: { shortCode: "MD", name: "Maryland" },
+        addressZipCode: "21210",
+      });
+
+      expect(within(screen.getByTestId("addressLabel")).getByText(address)).toBeInTheDocument();
+    });
+
+    it("renders requesting agency text when all input is valid", () => {
       const business = generateBusiness({
         taxClearanceCertificateData: generateTaxClearanceCertificateData({
           requestingAgencyId: undefined,

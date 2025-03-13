@@ -25,7 +25,6 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
 
   const isAddressComplete = Boolean(
     business?.taxClearanceCertificateData?.addressLine1 &&
-      business?.taxClearanceCertificateData?.addressLine2 &&
       business?.taxClearanceCertificateData?.addressCity &&
       business?.taxClearanceCertificateData?.addressState &&
       business?.taxClearanceCertificateData?.addressZipCode
