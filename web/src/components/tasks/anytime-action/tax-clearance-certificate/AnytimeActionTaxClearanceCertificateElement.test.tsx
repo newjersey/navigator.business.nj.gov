@@ -16,8 +16,8 @@ import {
   generateFormationFormData,
   generateMunicipality,
   generateProfileData,
-  generateStateItem,
   generateTaxClearanceCertificateData,
+  generateUnitedStatesStateDropdownOption,
   generateUserDataForBusiness,
   getTaxClearanceCertificateAgencies,
   LookupTaxClearanceCertificateAgenciesById,
@@ -188,7 +188,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       });
 
       it("renders address state", () => {
-        const addressState = generateStateItem();
+        const addressState = generateUnitedStatesStateDropdownOption({});
         const business = generateBusiness({
           taxClearanceCertificateData: generateTaxClearanceCertificateData({
             addressState: addressState,
@@ -332,7 +332,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       });
 
       it("renders address state from formation form data", () => {
-        const addressState = generateStateItem();
+        const addressState = generateUnitedStatesStateDropdownOption({});
         const business = generateBusiness({
           formationData: generateFormationData({
             formationFormData: generateFormationFormData({
