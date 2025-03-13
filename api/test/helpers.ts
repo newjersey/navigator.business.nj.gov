@@ -133,7 +133,7 @@ export const RGB_LICENSE_APPLICATION_INFORMATION = [
   },
   {
     uuid: PUBLIC_MOVERS_LICENSE_UUID,
-    appTypeCode: 100000000,
+    appTypeCode: null,
     expectedProfession: "Public Movers and Warehousemen",
   },
   {
