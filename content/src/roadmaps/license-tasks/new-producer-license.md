@@ -23,7 +23,7 @@ You need to get your business name approved by the New Jersey Department of Bank
 ## Eligibility Criteria
 
 * Be at least 18 years old
-* Have at least one responsible licensed producer, such as an officer, partner, or director. The producer needs an active NJ producer license that covers all the lines of authority listed in the application
+* Have at least one designated responsible licensed producer, such as an officer, partner, or director. The producer needs an active NJ producer license that covers all the lines of authority listed in the application
 * Resident business license applicants: [Criminal background checks](https://www.nj.gov/dobi/insliced/livescan.htm) for all officers, partners, and owners with at least 10% ownership. This applies to those without an active New Jersey producer license
 
 ## Application Requirements
@@ -33,7 +33,7 @@ You need to get your business name approved by the New Jersey Department of Bank
 *  `EIN|ein` 
 * National Producer Number, if assigned
 * FINRA Firm Central Registration Depository, if applicable
-* Designated licensed producers name, Social Security number, and National Producer Number (NPN)
+* Designated responsible licensed producers name, Social Security number, and National Producer Number (NPN)
 * Name, Social Security number, and title of all officers, partners, directors, and owners with at least 10% ownership of the business entity
 * Proof that every officer, partner, directors, and owner with 10% or more ownership has passed the background check (resident business applicants)
 * History of criminal history, if applicable
