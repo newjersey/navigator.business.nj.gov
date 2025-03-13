@@ -33,8 +33,6 @@ describe("findDeadLinks", () => {
       // @ts-ignore
       .mockReturnValueOnce(["config.json"])
       // @ts-ignore
-      .mockReturnValueOnce(["fieldConfigsTaxClearanceCertificateAnytimeAction.json"])
-      // @ts-ignore
       .mockReturnValueOnce(["fundings.md"])
       // @ts-ignore
       .mockReturnValueOnce(["certifications.md"])
@@ -62,7 +60,6 @@ describe("findDeadLinks", () => {
     const display1 = "Display contents with `contextual info|info3` in it";
     const displaySubfolderItem1 = "Display contents with `contextual info|info4` in it";
     const config = '{"testheader":"test"}';
-    const fieldConfigsTaxClearanceCertificateAnytimeAction = '{"testheader":"test"}';
     const fundings = "Funding Content";
     const certifications = "Certification Content";
     const licenses = "License Content";
@@ -85,7 +82,6 @@ describe("findDeadLinks", () => {
       .mockReturnValueOnce(display1)
       .mockReturnValueOnce(displaySubfolderItem1)
       .mockReturnValueOnce(config)
-      .mockReturnValueOnce(fieldConfigsTaxClearanceCertificateAnytimeAction)
       .mockReturnValueOnce(fundings)
       .mockReturnValueOnce(certifications)
       .mockReturnValueOnce(licenses)
