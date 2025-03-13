@@ -355,8 +355,36 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
   };
 };
 
-export const generateStateItem = (): StateObject => {
-  return randomElementFromArray(states);
+export const generateUnitedStatesStateDropdownOption = ({
+  includeOutsideOfTheUSA,
+  excludeNJ,
+  excludeTerritories,
+}: {
+  includeOutsideOfTheUSA?: boolean;
+  excludeNJ?: boolean;
+  excludeTerritories?: boolean;
+}): StateObject => {
+  let filteredStates = states;
+  if (!includeOutsideOfTheUSA) {
+    filteredStates = filteredStates.filter((stateObject) => {
+      return stateObject.shortCode !== "Outside of the USA";
+    });
+  }
+  if (excludeNJ) {
+    filteredStates = filteredStates.filter((stateObject) => {
+      return stateObject.shortCode !== "NJ";
+    });
+  }
+
+  if (excludeTerritories) {
+    filteredStates = filteredStates.filter((stateObject) => {
+      return (
+        stateObject.shortCode !== "AS" && stateObject.shortCode !== "VI" && stateObject.shortCode !== "GU"
+      );
+    });
+  }
+
+  return randomElementFromArray(filteredStates);
 };
 
 export const generateTaxClearanceCertificateData = (
@@ -369,7 +397,7 @@ export const generateTaxClearanceCertificateData = (
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
     addressCity: `some-city-${randomInt()}`,
-    addressState: generateStateItem(),
+    addressState: generateUnitedStatesStateDropdownOption({}),
     addressZipCode: randomInt(5).toString(),
     taxId: `${randomInt(12)}`,
     taxPin: randomInt(4).toString(),
