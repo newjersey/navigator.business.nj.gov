@@ -4,7 +4,7 @@ notesMd: >+
   https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/4216
 
 id: tax-clearance-certificate
-name: Obtain a Tax Clearance Certificate
+name: Get a Tax Clearance Certificate
 category:
   - Apply for State Funding
 applyToAllUsers: true
