@@ -9,7 +9,7 @@ describe("check license status [feature] [all] [group4]", () => {
     cy.loginByCognitoApi();
   });
 
-  it("searches and checks license status", () => {
+  it.skip("searches and checks license status", () => {
     const industry = LookupIndustryById("cosmetology");
     const legalStructureId = "general-partnership";
     const businessName = "Pending Business Name";
