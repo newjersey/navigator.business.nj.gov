@@ -55,6 +55,9 @@ const DashboardPage = (props: Props): ReactElement => {
   const router = useRouter();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
+  // TODO: an empty object does not necessarily mean that the user is not authenticated
+  // It just means they aren't linked to myNJ. This is the 2 accounts with the same email issue, where
+  // the second account hasn't been linked via the self-reg call.
   const isLoading = !business || business?.onboardingFormProgress !== "COMPLETED" || !roadmap;
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const [hasElevatorViolations, setHasElevatorViolations] = useState(false);
