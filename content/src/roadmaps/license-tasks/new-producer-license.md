@@ -14,15 +14,8 @@ callToActionLink: https://nipr.com/licensing-center/apply
 agencyId: nj-banking-insurance
 divisionPhone: " 609-292-7272"
 ---
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="note" }
-To get a resident insurance business producer license, first, check your business name. If it includes "insurance," you must get it approved by the New Jersey Department of Banking and Insurance (NJDOBI). Get this approval first.  Then, apply for your [business formation](https://business.nj.gov/pages/register-your-business#section-3) and insurance business producer license. 
-
-To request name approval, complete the "[Business Name & Trade Name Approval Request Form](https://www.nj.gov/dobi/insliced/busnameapprov.pdf?utm_source=chatgpt.com)." Then, email it to inslic@dobi.nj.gov or fax it to (609) 984-5263.
-
-:::
 
 ## Eligibility Criteria
-
 * Be at least 18 years old
 * Have at least one designated responsible licensed `producer|national-producer-number`. The producer needs an active NJ producer license that covers all the lines of authority listed in the application
 * Resident business license applicants: [Criminal background checks](https://www.nj.gov/dobi/insliced/livescan.htm) for all officers, partners, directors, and owners with at least 10% ownership. This applies to those without an active New Jersey producer license
@@ -37,7 +30,7 @@ To request name approval, complete the "[Business Name & Trade Name Approval Req
 * Designated responsible licensed producers name, Social Security number, and National Producer Number (NPN)
 * Name, Social Security number, and title of all officers, partners, directors, and owners with at least 10% ownership of the business entity
 * Proof that every officer, partner, directors, and owner with 10% or more ownership has passed the background check (resident business applicants)
-* History of criminal history, if applicable
+* History and documentation of criminal history, if applicable
 * History and documentation of disciplinary actions or termination for any alleged misconduct, if applicable
 * Applicable fees paid
 
