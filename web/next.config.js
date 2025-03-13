@@ -6,6 +6,8 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 module.exports = withBundleAnalyzer({
+  // Enable source maps in production for the testing environment
+  productionBrowserSourceMaps: process.env.STAGE === "testing",
   env: {
     API_BASE_URL: process.env.API_BASE_URL,
     AUTH_DOMAIN: process.env.AUTH_DOMAIN,
