@@ -6,13 +6,14 @@ urlSlug: bus-inspection
 name: Inspect Your School Transportation Vehicles
 webflowName: "School Bus: School Bus Inspection"
 summaryDescriptionMd: >
-  Your commercial buses and any school transportation vehicles need to be
-  inspected by the Motor Vehicle Commission’s School Bus Inspection Unit
-  **before** obtaining registration and license plates for them.
+  Your school transportation vehicles need to be inspected by the Motor Vehicle
+  Commission’s School Bus Inspection Unit **before** obtaining registration and
+  S1 or S2 license plates.
+
 
   :::infoAlert
 
-  Your vehicle needs to be inspected twice a year.
+  Once registered, all school transportation vehicles must be inspected twice a year.
 
   :::
 industryId: school-bus
@@ -25,19 +26,21 @@ divisionPhone: (609) 633-9473
 webflowType: object-vehicle
 webflowId: 648b6ec5ff1d0d38af2f5a57
 ---
-
-## Inspection Requirements
+## Application Requirements
 
 - Vehicle title
-
-## Registration Requirements
-
-- Form SS-14 Authorization to Issue School Bus License Plates (received upon successful vehicle inspection)
 - Copy of the commercial vehicle insurance policy for your vehicle
+
+To schedule an inspection, contact the NJ MVC School Bus Inspection Unit at **(609) 633-9473.** Established school bus companies and school districts can contact their assigned inspection teams.
+
+&nbsp;
+
+After passing inspection, take Form SS-14 to any NJ Motor Vehicle Agency to purchase license plates and registration.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-Authorization to register your vehicles
+- Form SS-14 "Authorization to Issue School Bus License Plates"
+- MVC-issued inspection sticker, to be displayed on the vehicle
 
 :::
 
