@@ -1,7 +1,7 @@
 import { LoadingPageComponent } from "@/components/LoadingPageComponent";
 import { AuthContext } from "@/contexts/authContext";
 import { getActiveUser, triggerSignIn } from "@/lib/auth/sessionHelper";
-import { onGuestSignIn } from "@/lib/auth/signinHelper";
+import { onGuestSignIn, onSignOut } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
@@ -30,9 +30,15 @@ const LoadingPage = (): ReactElement => {
     }
 
     if (router.query[QUERIES.code]) {
-      getActiveUser().then((currentUser) => {
-        dispatch({ type: "LOGIN", activeUser: currentUser });
-      });
+      getActiveUser()
+        .then((currentUser) => {
+          console.log(`The userID is ${currentUser.id} and email is ${currentUser.email}`);
+          dispatch({ type: "LOGIN", activeUser: currentUser });
+        })
+        .catch((err) => {
+          console.log("in loading catch");
+          router && onSignOut(router.push, dispatch);
+        });
     } else if (router && router.asPath && router.asPath.includes(signInSamlError)) {
       analytics.event.landing_page.arrive.get_unlinked_myNJ_account();
       onGuestSignIn({

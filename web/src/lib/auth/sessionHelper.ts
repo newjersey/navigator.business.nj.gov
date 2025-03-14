@@ -16,6 +16,16 @@ import {
   updateUserAttributes,
   UpdateUserAttributesInput,
 } from "aws-amplify/auth";
+import { validateEmail } from "../utils/helpers";
+
+export class UnlinkedMyNJAccountError extends Error {
+  constructor(msg: string) {
+    super(msg);
+
+    this.name = "UnlinkedMyNJAccountError";
+    Error.captureStackTrace(this, UnlinkedMyNJAccountError);
+  }
+}
 
 type CognitoIdPayload = {
   aud: string;
@@ -129,7 +139,17 @@ export const getActiveUser = async (): Promise<ActiveUser> => {
     await updateUserAttributes(input);
   }
   const encounteredMyNjLinkingError = AccountLinkingErrorStorageFactory().getEncounteredMyNjLinkingError();
-  return cognitoPayloadToActiveUser({ cognitoPayload, encounteredMyNjLinkingError });
+  const activeUser = cognitoPayloadToActiveUser({ cognitoPayload, encounteredMyNjLinkingError });
+
+  console.log("activeUser: ", activeUser);
+  console.log("is userId an email: ", validateEmail(activeUser.id));
+
+  if (validateEmail(activeUser.id)) {
+    console.log("before error throw in getActiveUser");
+    throw new UnlinkedMyNJAccountError("This account is not linked.");
+  }
+
+  return activeUser;
 };
 
 const cognitoPayloadToActiveUser = ({

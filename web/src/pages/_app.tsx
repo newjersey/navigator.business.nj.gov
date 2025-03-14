@@ -129,12 +129,14 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     if (!pageProps.noAuth) {
       getActiveUser()
         .then((activeUser) => {
+          console.log("in then in _app.tsx", activeUser);
           dispatch({
             type: "LOGIN",
             activeUser: activeUser,
           });
         })
         .catch(() => {
+          console.log("in _app catch");
           router && onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
         });
     }
