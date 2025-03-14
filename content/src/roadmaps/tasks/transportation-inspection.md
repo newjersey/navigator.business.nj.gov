@@ -7,7 +7,7 @@ summaryDescriptionMd: >-
   :::
 
 
-  To operate a commercial bus, you must have an inspection conducted by the New Jersey Motor Vehicle Commission Bus Inspection Unit. Once your application is reviewed, you will be contacted by an inspector to schedule an inspection date.
+  Before registering a commercial bus, you must request and pass an inspection conducted by the New Jersey Motor Vehicle Commission Bus Inspection Unit.
 urlSlug: transportation-inspection
 displayname: transportation-inspection
 name: Get Your Commercial Buses Inspected
@@ -25,6 +25,22 @@ issuingAgency: New Jersey Motor Vehicle Commission Bus Inspection Unit
 - Insurance company name and policy number
 - Copy of the vehicle title
 - Vehicle information (year, make, model, etc.)
+
+Please complete the following steps and email all required documentation to CBIU@mvc.nj.gov or mail to:
+
+&nbsp;
+
+NJMVC CBIU
+&nbsp;
+
+PO Box 680
+&nbsp;
+
+Trenton, NJ 08666
+
+&nbsp;
+
+Once your application is reviewed, you will be contacted to schedule an inspection date.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
