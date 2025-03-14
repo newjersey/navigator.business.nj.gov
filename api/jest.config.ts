@@ -8,8 +8,8 @@ export default {
   ...require("ts-jest/jest-preset"),
   displayName: "api",
   testEnvironment: "<rootDir>/test/customNodeEnvironment.ts",
-  // setupFiles: ["./setupBeforeEnv.js"],
-  setupFilesAfterEnv: ["<rootDir>/test/setupFilesAfterEnv.ts"],
+  setupFiles: ["<rootDir>/test/setupFile.ts"],
+  setupFilesAfterEnv: ["<rootDir>/test/setupFileAfterEnv.ts"],
   moduleNameMapper: {
     "@shared/(.*)": "<rootDir>/../shared/src/$1",
     "@domain/(.*)": "<rootDir>/src/domain/$1",

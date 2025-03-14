@@ -5,7 +5,7 @@ import NodeEnvironment from "jest-environment-node";
 class CustomTestEnvironment extends NodeEnvironment {
   constructor(config: JestEnvironmentConfig, context: EnvironmentContext) {
     super(config, context);
-    this.global.testRandomSeeds = new Map() as Map<string, string>;
+    this.global.testRandomSeeds = new Map<string, string>();
   }
 
   async handleTestEvent(event: Circus.Event): Promise<void> {
