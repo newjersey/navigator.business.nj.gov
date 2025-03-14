@@ -41,7 +41,7 @@ Trenton, NJ 08666
 
 &nbsp;
 
-Once your application is reviewed, you will be contacted to schedule an inspection date.
+Once your application is reviewed, you will be contacted to set up an inspection appointment.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
