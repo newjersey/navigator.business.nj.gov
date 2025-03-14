@@ -4,6 +4,7 @@ id: apprenticeship-program-intake
 name: apprenticeship-program-intake
 category:
   - Only Show in Subtask
+description: To be a contractor, submit your intake form to begin an apprenticeship program.
 industryIds: []
 sectorIds: []
 urlSlug: apprenticeship-program-intake
@@ -13,11 +14,10 @@ summaryDescriptionMd: You can start a registered apprenticeship program within
 callToActionText: Submit Your Apprenticeship Program Intake Form
 callToActionLink: https://nj.gov/labor/lwdhome/apprenticeship/apprenticeshipOnboarding.html
 ---
-
 ## Submit Your Apprenticeship Program Intake Form
 
-:::infoAlert
-You will need to have an approved apprenticeship program to register as a public works contractor.
+:::infoAlert 
+ You will need to have an approved apprenticeship program to register as a public works contractor.
 :::
 
 Having an apprenticeship program is a requirement to be a contractor. This program allows you to develop skilled employees who work to meet your business needs. You can develop the training to best suit your business.
@@ -26,14 +26,14 @@ Start the process by connecting with the New Jersey Department of Labor (NJDOL) 
 
 You will then work with a representative from the United States Department of Labor (USDOL) to develop and register your program.
 
----
+- - -
 
 ### Intake Form Requirements
 
-- Business name
-- `Business Structure|business-structure-learn-more`
-- Primary contact information
-- List of occupations to be developed in the program
+* Business name
+*  `Business Structure|business-structure-learn-more` 
+* Primary contact information
+* List of occupations to be developed in the program
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 

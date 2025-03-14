@@ -3,6 +3,7 @@ id: healthcare-cds-reinstate
 name: Reinstate Your Controlled Dangerous Substances Registration
 category:
   - Reactivate My Expired Permit, License or Registration
+description: Reactivate your registration to handle controlled substances legally.
 industryIds:
   - healthcare
 sectorIds: []

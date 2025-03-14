@@ -173,6 +173,8 @@ export interface AnytimeActionTask extends AnytimeAction {
   applyToAllUsers: boolean;
   summaryDescriptionMd: string;
   contentMd: string;
+  description?: string;
+  searchMetaDataMatch?: string;
 }
 
 export interface AnytimeActionLicenseReinstatement extends AnytimeAction {
@@ -183,6 +185,8 @@ export interface AnytimeActionLicenseReinstatement extends AnytimeAction {
   callToActionText: string | undefined;
   issuingAgency: string;
   summaryDescriptionMd: string;
+  description?: string;
+  searchMetaDataMatch?: string;
 }
 
 export type FundingType =
