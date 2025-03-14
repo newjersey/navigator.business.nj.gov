@@ -6084,18 +6084,12 @@ collections:
                     fields:
                       - { label: no, name: no, widget: string }
                       - { label: yes, name: yes, widget: string }
-              - label: "Business Operating Length Question"
-                name: "businessOperatingLengthQuestion"
+              - label: "Number of Employees Question"
+                name: "numberOfEmployeesQuestion"
                 widget: object
                 fields:
                   - { label: Question Text, name: questionText, widget: string }
                   - { label: Select an Answer Text, name: selectAnAnswerText, widget: string }
-                  - label: Responses
-                    name: responses
-                    widget: object
-                    fields:
-                      - { label: short, name: short, widget: string }
-                      - { label: long, name: long, widget: string }
               - label: "Page header"
                 name: "pageHeader"
                 widget: object

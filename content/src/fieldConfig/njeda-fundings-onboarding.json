@@ -1,6 +1,6 @@
 {
   "fundingsOnboardingModal": {
-    "headerTooltip": "This tool is only for New Jersey-based businesses. Others can explore NJEDA funding on [Business.NJ.gov](https://business.nj.gov/funding).",
+    "headerTooltip": "This tool shows NJEDA programs for in-state businesses. If you’re an out-of-state business, see more NJEDA programs and other funding you may be eligible for at [Business.NJ.gov](https://business.nj.gov/funding).",
     "modalHeader": "Tell Us About Your Business",
     "incompleteWarningSingularText": "Complete the field below.",
     "incompleteWarningMultipleText": "Complete the fields below.",
