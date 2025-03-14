@@ -11,7 +11,7 @@ beforeEach(function () {
     throw new Error("expect.getState().currentTestName is undefined");
   }
   if ((global as unknown as TestGlobalThis).testRandomSeeds.has(currentTestName)) {
-    throw new Error(`Unexpected duplicate test name ${currentTestName} at ${expect.getState().testPath}`);
+    throw new Error(`Unexpected duplicate test name "${currentTestName}" at ${expect.getState().testPath}`);
   }
   const randomSeed = process.env.RANDOM_SEED || Math.random().toString(36).slice(2);
   (global as unknown as TestGlobalThis).testRandomSeeds.set(currentTestName, randomSeed);
