@@ -10,7 +10,7 @@ summaryDescriptionMd: >-
   To operate a commercial bus, you must have an inspection conducted by the New Jersey Motor Vehicle Commission Bus Inspection Unit. Once your application is reviewed, you will be contacted by an inspector to schedule an inspection date.
 urlSlug: transportation-inspection
 displayname: transportation-inspection
-name: Request Your Vehicle Inspection
+name: Get Your Commercial Buses Inspected
 id: transportation-inspection
 callToActionLink: https://www.nj.gov/mvc/pdf/inspections/Commercial_Bus_Application.pdf
 callToActionText: Request My Vehicle Inspection
