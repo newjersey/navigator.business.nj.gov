@@ -3,7 +3,7 @@ licenseName: ""
 id: bus-inspection
 displayname: bus-inspection
 urlSlug: bus-inspection
-name: Get Your School Transportation Vehicles Inspected
+name: Get Your School Transportation Vehicle(s) Inspected
 webflowName: "School Bus: School Bus Inspection"
 summaryDescriptionMd: >
   Your school transportation vehicles need to be inspected by the Motor Vehicle
