@@ -8,7 +8,8 @@ export default {
   ...require("ts-jest/jest-preset"),
   displayName: "api",
   testEnvironment: "<rootDir>/test/customNodeEnvironment.ts",
-  setupFilesAfterEnv: ["<rootDir>/src/setupTests.js"],
+  // setupFiles: ["./setupBeforeEnv.js"],
+  setupFilesAfterEnv: ["<rootDir>/test/setupTests.js"],
   moduleNameMapper: {
     "@shared/(.*)": "<rootDir>/../shared/src/$1",
     "@domain/(.*)": "<rootDir>/src/domain/$1",
@@ -21,6 +22,6 @@ export default {
     "@wiremock/(.*)": "<rootDir>/wiremock/$1",
     "@scripts/(.*)": "<rootDir>/../scripts/$1",
   },
-  globalSetup: "<rootDir>/src/globalSetup.ts",
-  globalTeardown: "<rootDir>/src/teardownTests.ts",
+  globalSetup: "<rootDir>/test/globalSetup.ts",
+  globalTeardown: "<rootDir>/test/teardownTests.ts",
 };
