@@ -221,7 +221,9 @@
     "Yamileth",
     "YTTW",
     "SEDB",
-    "NPN"
+    "NPN",
+    "CBIU",
+    "NJMVC"
   ],
   "ignorePaths": [
     "node_modules/**",
