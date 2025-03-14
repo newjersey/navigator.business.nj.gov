@@ -29,7 +29,7 @@ type CognitoIdPayload = {
   iss: string;
   sub: string;
   token_use: string;
-  "custom:myNJUserKey": string;
+  "custom:myNJUserKey"?: string; // This doesn't exist on unlinked accounts
   "custom:identityId": string | undefined;
   identities: CognitoIdentityPayload[] | undefined;
 };
@@ -67,7 +67,12 @@ export const configureAmplify = (): void => {
         loginWith: {
           oauth: {
             domain: process.env.AUTH_DOMAIN,
-            scopes: ["email", "profile", "openid", "aws.cognito.signin.user.admin"],
+            scopes: [
+              "email",
+              "profile",
+              "openid",
+              "aws.cognito.signin.user.admin" /* TODO: are there other custom scopes myNJ has defined */,
+            ],
             redirectSignIn: [process.env.REDIRECT_URL],
             redirectSignOut: [process.env.REDIRECT_URL],
             responseType,
@@ -108,6 +113,7 @@ export const getSignedS3Link = async (value: string, expires?: number): Promise<
 };
 
 export const getCurrentToken = async (): Promise<JWT> => {
+  // debugger;
   const session = await fetchAuthSession({ forceRefresh: true });
   if (!session.tokens || !session.tokens.idToken) {
     throw new Error("Unable to retrieve access token. Ensure the session is valid.");
@@ -116,6 +122,7 @@ export const getCurrentToken = async (): Promise<JWT> => {
 };
 
 export const getActiveUser = async (): Promise<ActiveUser> => {
+  // debugger;
   configureAmplify();
   const cognitoSession = await getCurrentToken();
   const cognitoPayload = cognitoSession.payload as CognitoIdPayload;
