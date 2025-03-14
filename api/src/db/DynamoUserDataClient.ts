@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { ExecuteStatementCommand, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
@@ -110,6 +109,7 @@ export const DynamoUserDataClient = (
         userId: migratedData.user.id,
         email: migratedData.user.email,
         data: migratedData,
+        version: migratedData.version,
       },
     };
     return db
@@ -136,10 +136,30 @@ export const DynamoUserDataClient = (
     const statement = `SELECT data FROM "${tableName}" WHERE data["profileData"].encryptedTaxId IS MISSING AND data["profileData"].taxId IS NOT MISSING`;
     return search(statement);
   };
-
-  const getUsersWithOutdatedVersion = async (latestVersion: number): Promise<UserData[]> => {
+  const getUsersWithOutdatedVersion = async (
+    latestVersion: number,
+    nextToken?: string
+  ): Promise<{ usersToMigrate: UserData[]; nextToken?: string }> => {
     const statement = `SELECT data FROM "${tableName}" WHERE data["version"] < ${latestVersion}`;
-    return await search(statement);
+    return await searchWithPagination(statement, nextToken);
+  };
+
+  const searchWithPagination = async (
+    statement: string,
+    nextToken?: string
+  ): Promise<{ usersToMigrate: UserData[]; nextToken?: string }> => {
+    const { Items = [], NextToken } = await db.send(
+      new ExecuteStatementCommand({
+        Statement: statement,
+        NextToken: nextToken,
+      })
+    );
+
+    const usersToMigrate = Items.map((object: any): UserData => {
+      return unmarshall(object).data;
+    });
+
+    return { usersToMigrate, nextToken: NextToken };
   };
 
   const search = async (statement: string): Promise<UserData[]> => {
