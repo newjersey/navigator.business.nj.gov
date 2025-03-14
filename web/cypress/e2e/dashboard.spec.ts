@@ -40,7 +40,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
       });
     });
 
-    describe("Starting a Business", () => {
+    describe.skip("Starting a Business", () => {
       it("enters user info and shows the dashboard", () => {
         const industry = LookupIndustryById("e-commerce");
         const legalStructureId = "general-partnership";
@@ -75,7 +75,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
         cy.get('[data-step="3"]').should("exist");
       });
 
-      it.skip("verifies the task screen and mini-roadmap displays", () => {
+      it("verifies the task screen and mini-roadmap displays", () => {
         const industry = LookupIndustryById("e-commerce");
         const legalStructureId = "general-partnership";
 

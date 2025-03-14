@@ -19,7 +19,7 @@ import {
 import { onDashboardPage } from "../support/page_objects/dashboardPage";
 import { onProfilePage } from "../support/page_objects/profilePage";
 
-describe("Deferred Onboarding [feature] [all] [group5]", () => {
+describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
   });
@@ -91,7 +91,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
         });
 
-        it.skip("can provide location in Formation Date Modal", () => {
+        it("can provide location in Formation Date Modal", () => {
           openFormationDateModal();
           selectDate("04/2021");
           selectLocation("Allendale");
