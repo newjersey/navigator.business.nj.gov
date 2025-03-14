@@ -41,7 +41,7 @@ describe("getNavBarBusinessTitle", () => {
 
   describe("when name is defined", () => {
     describe("when legal structure undefined", () => {
-      it.each(["STARTING", "OWNING"])("shows business name", (businessPersona) => {
+      it.each(["STARTING", "OWNING"])("shows business name for %s", (businessPersona) => {
         const business = generateBusiness({
           profileData: generateProfileData({
             businessPersona: businessPersona as BusinessPersona,
@@ -54,7 +54,7 @@ describe("getNavBarBusinessTitle", () => {
         expect(navBarBusinessTitle).toEqual(name);
       });
 
-      it.each(["STARTING", "OWNING"])("shows business name", (businessPersona) => {
+      it.each(["STARTING", "OWNING"])("shows business name for %s", (businessPersona) => {
         const business = generateBusiness({
           profileData: generateProfileData({
             businessPersona: businessPersona as BusinessPersona,
@@ -68,7 +68,7 @@ describe("getNavBarBusinessTitle", () => {
       });
 
       it.each(["STARTING", "OWNING"])(
-        "shows business name over trade name if both defined",
+        "shows business name over trade name if both defined for %s",
         (businessPersona) => {
           const business = generateBusiness({
             profileData: generateProfileData({
@@ -330,7 +330,7 @@ describe("getNavBarBusinessTitle", () => {
     });
   });
 
-  describe("when legal structure, industry, and name undefined", () => {
+  describe("when legal structure, industry, and name undefined for %s", () => {
     it.each(["STARTING", "OWNING"])("shows Unnamed Business", (persona) => {
       const business = generateBusiness({
         profileData: generateProfileData({

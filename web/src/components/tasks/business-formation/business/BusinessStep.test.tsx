@@ -591,7 +591,7 @@ describe("Formation - BusinessStep", () => {
 
       describe("Business Designator Options based on Will Practice Law Answer", () => {
         it.each(corpLegalStructures)(
-          "Shows PA and PC options for Business Designator when Will You Practice Law is Yes",
+          "Shows PA and PC options for Business Designator when Will You Practice Law is Yes for %s",
           async (legalStructureId) => {
             await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: true });
 
@@ -605,7 +605,7 @@ describe("Formation - BusinessStep", () => {
         );
 
         it.each(corpLegalStructures)(
-          "Does not show PA and PC options for Business Designator when Will You Practice Law is No",
+          "Does not show PA and PC options for Business Designator when Will You Practice Law is No for %s",
           async (legalStructureId) => {
             await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: false });
             expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
@@ -619,7 +619,7 @@ describe("Formation - BusinessStep", () => {
         );
 
         it.each(corpLegalStructures)(
-          "Does not show PA and PC options for Business Designator when Will You Practice Law is Undefined",
+          "Does not show PA and PC options for Business Designator when Will You Practice Law is Undefined for %s",
           async (legalStructureId) => {
             await getPageHelper(
               { businessPersona: "FOREIGN", legalStructureId },
@@ -636,7 +636,7 @@ describe("Formation - BusinessStep", () => {
         );
 
         it.each(corpLegalStructures)(
-          "Displays an Alert when selecting an option for the Will you practice law question to tell the user Business Designator options have changed",
+          "Displays an Alert when selecting an option for the Will you practice law question to tell the user Business Designator options have changed for %s",
           async (legalStructureId) => {
             await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
             expect(
@@ -650,7 +650,7 @@ describe("Formation - BusinessStep", () => {
         );
 
         it.each(corpLegalStructures)(
-          "clears Business Designator if Will you practice law question is changed and Business designator is selected",
+          "clears Business Designator if Will you practice law question is changed and Business designator is selected for %s",
           async (legalStructureId) => {
             await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: true });
             await userEvent.click(screen.getByTestId("business-suffix-main"));

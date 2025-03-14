@@ -154,7 +154,7 @@ describe("<SidebarCardsList />", () => {
       ];
 
       it.each(foreignBusinessTypeIds)(
-        "displays when the business is a Remote Seller/Worker",
+        "displays when the business %s is a Remote Seller/Worker",
         (foreignBusinessTypeId) => {
           const mockBusiness = generateBusiness({
             profileData: generateProfileData({
@@ -173,7 +173,7 @@ describe("<SidebarCardsList />", () => {
       );
 
       it.each(foreignBusinessTypeIds)(
-        "displays when the business is a Remote Seller/Worker and operating phase is GUEST_MODE",
+        "displays when the business %s is a Remote Seller/Worker and operating phase is GUEST_MODE",
         (foreignBusinessTypeId) => {
           const mockBusiness = generateBusiness({
             profileData: generateProfileData({

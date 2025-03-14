@@ -80,7 +80,7 @@ describe("<Header />", () => {
     describe("when in guest mode - other phases", () => {
       const personas: BusinessPersona[] = ["OWNING", "FOREIGN"];
 
-      it.each(personas)("displays greeting text", (persona) => {
+      it.each(personas)("displays greeting text for %s", (persona) => {
         const business = generateBusiness({
           profileData: generateProfileData({ industryId: "generic", businessPersona: persona }),
         });

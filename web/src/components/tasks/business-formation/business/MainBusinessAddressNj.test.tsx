@@ -129,7 +129,7 @@ describe("<MainBusinessAddressNj />", () => {
       ["addressLine1", ""],
       ["addressMunicipality", undefined],
       ["addressZipCode", ""],
-    ])("shows an error on submission when missing address field", async (field, initialValue) => {
+    ])("shows an error on submission when missing address field for %s", async (field, initialValue) => {
       const page = await getPageHelper({
         [field]: initialValue,
         legalType: "limited-liability-company",

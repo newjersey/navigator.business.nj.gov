@@ -25,7 +25,6 @@ describe("DynamicsHousingPropertyInterestClient", () => {
   const buildingCount = 4;
 
   it("makes a successful get request and returns first registration data sorted by date", async () => {
-    expect(Math.random()).toEqual(4);
     const housingHousingRegistrationMockResponse = {
       value: [
         {
@@ -106,7 +105,6 @@ describe("DynamicsHousingPropertyInterestClient", () => {
   });
 
   it("returns empty array if there is no registrations found", async () => {
-    expect(Math.random()).toEqual(4);
     const housingHousingRegistrationMockResponse = {
       value: [],
     };
