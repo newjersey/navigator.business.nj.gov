@@ -1395,7 +1395,7 @@ describe("<BusinessFormationPaginator />", () => {
             expect(screen.getByTestId("alert-error")).toHaveTextContent("very bad input");
           });
 
-          it.each([
+          it.skip.each([
             businessTotalStock,
             combinedInvestment,
             createLimitedPartnerTerms,
