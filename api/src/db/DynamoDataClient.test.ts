@@ -89,7 +89,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
   });
 
   it("should migrate data correctly", async () => {
-    const result = await dynamoDataClient.migrateData();
+    const result = await dynamoDataClient.migrateOutdatedVersionUsers();
 
     expect(result.success).toBe(true);
     expect(result.migratedCount).toBeGreaterThan(0);
@@ -116,7 +116,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
       nextToken: undefined,
     });
 
-    await dynamoDataClient.migrateData();
+    await dynamoDataClient.migrateOutdatedVersionUsers();
 
     expect(logger.LogInfo).toHaveBeenCalledWith(`No businesses found for user ${userData.user.id}`);
     expect(dynamoBusinessesDataClient.put).not.toHaveBeenCalled();
@@ -126,7 +126,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
     const mockError = new Error("Unexpected failure during migration");
 
     jest.spyOn(dynamoUsersDataClient, "getUsersWithOutdatedVersion").mockRejectedValue(mockError);
-    const result = await dynamoDataClient.migrateData();
+    const result = await dynamoDataClient.migrateOutdatedVersionUsers();
 
     expect(result.success).toBe(false);
     expect(result.error).toBe(mockError.message);
@@ -144,7 +144,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
 
     const logSpy = jest.spyOn(logger, "LogInfo");
 
-    await dynamoDataClient.migrateData();
+    await dynamoDataClient.migrateOutdatedVersionUsers();
 
     expect(logSpy).toHaveBeenCalledWith(
       `Migration complete. Migrated 0 users. Current version: ${CURRENT_VERSION}`
@@ -178,7 +178,7 @@ describe("User and Business Migration with DynamoDataClient", () => {
       });
     const logSpy = jest.spyOn(logger, "LogInfo");
 
-    const result = await dynamoDataClient.migrateData();
+    const result = await dynamoDataClient.migrateOutdatedVersionUsers();
     expect(result.migratedCount).toBe(3);
     expect(logger.LogInfo).toHaveBeenCalledWith(
       expect.stringContaining(`Processed user ${userDataBatch1.user.id} in the user data table`)

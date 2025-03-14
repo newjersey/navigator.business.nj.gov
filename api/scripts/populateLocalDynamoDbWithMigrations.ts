@@ -102,7 +102,7 @@ const run = async (): Promise<void> => {
   const businessesDataClient = DynamoBusinessDataClient(dynamoDb, BUSINESSES_TABLE, logger);
   const dynamoDataClient = DynamoDataClient(userDataClient, businessesDataClient, logger);
 
-  await dynamoDataClient.migrateData();
+  await dynamoDataClient.migrateOutdatedVersionUsers();
 };
 
 run().catch(console.error); // eslint-disable-line unicorn/prefer-top-level-await
