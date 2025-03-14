@@ -59,7 +59,7 @@ describe("formationRouter", () => {
       health: jest.fn(),
     };
     stubDynamoDataClient = {
-      migrateData: jest.fn(),
+      migrateOutdatedVersionUsers: jest.fn(),
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),

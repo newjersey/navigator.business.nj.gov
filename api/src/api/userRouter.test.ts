@@ -74,7 +74,7 @@ describe("userRouter", () => {
 
   beforeEach(async () => {
     stubUnifiedDataClient = {
-      migrateData: jest.fn(),
+      migrateOutdatedVersionUsers: jest.fn(),
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),

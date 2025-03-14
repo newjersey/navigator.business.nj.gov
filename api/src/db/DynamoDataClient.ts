@@ -8,7 +8,7 @@ export const DynamoDataClient = (
   businessesDataClient: BusinessesDataClient,
   logger: LogWriterType
 ): DatabaseClient => {
-  const migrateData = async (): Promise<{
+  const migrateOutdatedVersionUsers = async (): Promise<{
     success: boolean;
     migratedCount?: number;
     error?: string;
@@ -100,7 +100,7 @@ export const DynamoDataClient = (
   };
 
   return {
-    migrateData,
+    migrateOutdatedVersionUsers,
     get,
     put,
     findByEmail,

@@ -19,5 +19,5 @@ export default async function handler(): Promise<void> {
   const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, logger);
   const businessesDataClient = DynamoBusinessDataClient(dynamoDb, BUSINESSES_TABLE, logger);
   const dynamoDataClient = DynamoDataClient(userDataClient, businessesDataClient, logger);
-  await dynamoDataClient.migrateData();
+  await dynamoDataClient.migrateOutdatedVersionUsers();
 }
