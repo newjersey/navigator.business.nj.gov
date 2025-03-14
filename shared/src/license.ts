@@ -72,7 +72,6 @@ export type LicenseDetails = {
 };
 
 export const enabledLicensesSources = {
-  // TODO: Add Public Movers
   "Consulting Firms/Temporary Help Services-Consulting Firm": "RGB",
   "Public Movers and Warehousemen": "RGB",
   "Consulting Firms/Temporary Help Services-Consulting Firm/Temporary Help Service": "RGB",
