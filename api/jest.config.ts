@@ -9,7 +9,7 @@ export default {
   displayName: "api",
   testEnvironment: "<rootDir>/test/customNodeEnvironment.ts",
   // setupFiles: ["./setupBeforeEnv.js"],
-  setupFilesAfterEnv: ["<rootDir>/test/setupTests.js"],
+  setupFilesAfterEnv: ["<rootDir>/test/setupFilesAfterEnv.ts"],
   moduleNameMapper: {
     "@shared/(.*)": "<rootDir>/../shared/src/$1",
     "@domain/(.*)": "<rootDir>/src/domain/$1",
