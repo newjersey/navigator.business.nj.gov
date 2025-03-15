@@ -7,6 +7,9 @@ export default {
   ...require("jest-dynalite/jest-preset"),
   ...require("ts-jest/jest-preset"),
   displayName: "api",
+  testEnvironment: "<rootDir>/test/customNodeEnvironment.ts",
+  setupFiles: ["<rootDir>/test/setupFile.ts"],
+  setupFilesAfterEnv: ["<rootDir>/test/setupFileAfterEnv.ts"],
   moduleNameMapper: {
     "@shared/(.*)": "<rootDir>/../shared/src/$1",
     "@domain/(.*)": "<rootDir>/src/domain/$1",
@@ -19,6 +22,6 @@ export default {
     "@wiremock/(.*)": "<rootDir>/wiremock/$1",
     "@scripts/(.*)": "<rootDir>/../scripts/$1",
   },
-  globalSetup: "<rootDir>/src/setupTests.ts",
-  globalTeardown: "<rootDir>/src/teardownTests.ts",
+  globalSetup: "<rootDir>/test/globalSetup.ts",
+  globalTeardown: "<rootDir>/test/teardownTests.ts",
 };
