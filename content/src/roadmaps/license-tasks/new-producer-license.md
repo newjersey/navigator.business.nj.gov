@@ -15,7 +15,7 @@ agencyId: nj-banking-insurance
 divisionPhone: " 609-292-7272"
 ---
 :::infoAlert 
- The requirements below apply to all New Jersey residents and non-residents, unless an exception is noted.
+ The requirements below apply to all New Jersey residents and non-resident applicants, unless noted.
 :::
 
 ## Eligibility Criteria
