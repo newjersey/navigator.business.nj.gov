@@ -7,6 +7,7 @@ import { ModalOneButton } from "@/components/ModalOneButton";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -125,8 +126,24 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
 
   const FundingsHeader = (): ReactElement => {
     return (
-      <div className={"bg-accent-cool-lightest padding-bottom-4 border-bottom border-accent-cool-light"}>
+      <div
+        className={
+          "bg-accent-cool-lightest padding-bottom-4 padding-top-3 border-bottom border-accent-cool-light"
+        }
+      >
         <div className={"margin-left-3ch"}>
+          <div className="desktop:grid-col-6 display-block padding-bottom-3">
+            <UnStyledButton
+              dataTestid={"njeda-logo-button"}
+              isButtonALink={true}
+              ariaLabel={Config.fundingsOnboardingModal.pageHeader.logoAriaText}
+              onClick={() => {
+                router && router.push(Config.fundingsOnboardingModal.pageHeader.logoLink);
+              }}
+            >
+              <img src="/img/njeda-logo.webp" alt="" />
+            </UnStyledButton>
+          </div>
           <Heading
             level={1}
             styleVariant="h1"
