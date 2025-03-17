@@ -1,4 +1,3 @@
-import "jest-dynalite/withDb";
 import seedrandom from "seedrandom";
 
 type TestGlobalThis = {

@@ -41,20 +41,23 @@ describe("getNavBarBusinessTitle", () => {
 
   describe("when name is defined", () => {
     describe("when legal structure undefined", () => {
-      it.each(["STARTING", "OWNING"])("shows business name", (businessPersona) => {
-        const business = generateBusiness({
-          profileData: generateProfileData({
-            businessPersona: businessPersona as BusinessPersona,
-            businessName: name,
-            tradeName: "",
-            legalStructureId: undefined,
-          }),
-        });
-        const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
-        expect(navBarBusinessTitle).toEqual(name);
-      });
+      it.each(["STARTING", "OWNING"])(
+        "shows business name for %s when name is populated",
+        (businessPersona) => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              businessPersona: businessPersona as BusinessPersona,
+              businessName: name,
+              tradeName: "",
+              legalStructureId: undefined,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
+          expect(navBarBusinessTitle).toEqual(name);
+        }
+      );
 
-      it.each(["STARTING", "OWNING"])("shows business name", (businessPersona) => {
+      it.each(["STARTING", "OWNING"])("shows business name for %s when name is empty", (businessPersona) => {
         const business = generateBusiness({
           profileData: generateProfileData({
             businessPersona: businessPersona as BusinessPersona,
@@ -68,7 +71,7 @@ describe("getNavBarBusinessTitle", () => {
       });
 
       it.each(["STARTING", "OWNING"])(
-        "shows business name over trade name if both defined",
+        "shows business name over trade name if both defined for %s",
         (businessPersona) => {
           const business = generateBusiness({
             profileData: generateProfileData({
@@ -331,7 +334,7 @@ describe("getNavBarBusinessTitle", () => {
   });
 
   describe("when legal structure, industry, and name undefined", () => {
-    it.each(["STARTING", "OWNING"])("shows Unnamed Business", (persona) => {
+    it.each(["STARTING", "OWNING"])("shows Unnamed Business for %s", (persona) => {
       const business = generateBusiness({
         profileData: generateProfileData({
           businessPersona: persona as BusinessPersona,

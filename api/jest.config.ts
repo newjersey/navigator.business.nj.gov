@@ -9,7 +9,10 @@ export default {
   displayName: "api",
   testEnvironment: "<rootDir>/test/customNodeEnvironment.ts",
   setupFiles: ["<rootDir>/test/setupFile.ts"],
-  setupFilesAfterEnv: ["<rootDir>/test/setupFileAfterEnv.ts"],
+  setupFilesAfterEnv: [
+    "<rootDir>/test/setupJestDynalite.ts",
+    "<rootDir>/../shared/src/test/setupRandomSeed.ts",
+  ],
   moduleNameMapper: {
     "@shared/(.*)": "<rootDir>/../shared/src/$1",
     "@domain/(.*)": "<rootDir>/src/domain/$1",
