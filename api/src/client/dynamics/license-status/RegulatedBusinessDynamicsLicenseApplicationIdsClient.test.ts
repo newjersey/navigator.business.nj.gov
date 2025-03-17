@@ -194,7 +194,7 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
           expirationDateISO: application_1.rgb_expirationdate,
           applicationId: application_1.rgb_applicationid,
           licenseStatus: "ACTIVE",
-          professionNameAndLicenseType: "Public Movers and Warehousemen-Moving Only",
+          professionNameAndLicenseType: "Public Movers and Warehousemen",
         },
         {
           expirationDateISO: application_3.rgb_expirationdate,
@@ -243,13 +243,13 @@ describe("RegulatedBusinessDynamicsLicenseApplicationIdClient", () => {
           expirationDateISO: application_1.rgb_expirationdate,
           applicationId: application_1.rgb_applicationid,
           licenseStatus: "ACTIVE",
-          professionNameAndLicenseType: "Public Movers and Warehousemen-Moving Only",
+          professionNameAndLicenseType: "Public Movers and Warehousemen",
         },
         {
           expirationDateISO: application_2.rgb_expirationdate,
           applicationId: application_2.rgb_applicationid,
           licenseStatus: "ACTIVE",
-          professionNameAndLicenseType: "Public Movers and Warehousemen-Warehousing Only",
+          professionNameAndLicenseType: "Public Movers and Warehousemen",
         },
       ]);
     });
