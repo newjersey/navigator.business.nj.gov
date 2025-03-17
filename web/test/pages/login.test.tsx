@@ -23,7 +23,7 @@ const AuthContextWrapper = ({ children }: { children: ReactNode }): ReactNode =>
 describe("login page", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockRouter({});
+    useMockRouter({ isReady: true });
   });
 
   it("redirects to the dashboard if the user is already logged in", async () => {

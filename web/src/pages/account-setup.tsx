@@ -41,7 +41,7 @@ const AccountSetupPage = (): ReactElement => {
   useEffect(() => {
     (async (): Promise<void> => {
       if (state.isAuthenticated === IsAuthenticated.TRUE) {
-        router && (await router.replace(ROUTES.dashboard));
+        router?.isReady && (await router.replace(ROUTES.dashboard));
       }
     })();
   }, [state.isAuthenticated, router]);
@@ -81,7 +81,7 @@ const AccountSetupPage = (): ReactElement => {
   );
 
   useEffect(() => {
-    if (!router || !router.isReady || queryAnalyticsOccurred.current) {
+    if (!router?.isReady || queryAnalyticsOccurred.current) {
       return;
     }
     if (router.query[QUERIES.source] !== undefined) {
