@@ -223,7 +223,9 @@
     "SEDB",
     "NPN",
     "CBIU",
-    "NJMVC"
+    "NJMVC",
+    "recert",
+    "Recertification"
   ],
   "ignorePaths": [
     "node_modules/**",
