@@ -5,7 +5,12 @@ summaryDescriptionMd: >-
   employer’s responsibility to file an application for a driver's certification
   if the driver doesn't already have one.
 
-  (Only drivers holding a Commercial Driver’s License (CDL) with a Passenger (P) endorsement are exempt from this requirement.)
+
+  :::infoAlert
+
+  Drivers holding a Commercial Driver’s License (CDL) with a Passenger (P) endorsement are exempt from this requirement.
+
+  :::
 urlSlug: driver-certification
 displayname: driver-certification
 name: Apply to Certify Your Drivers
@@ -17,8 +22,8 @@ agencyId: nj-motor-vehicle
 
 ## Eligibility Requirements
 
-- Drivers must be at least 21 years old
-- Drivers must pass a criminal background check
+- At least 21 years old
+- Ability to pass a criminal background check
 
 ## Application Requirements
 
