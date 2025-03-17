@@ -7,7 +7,7 @@ summaryDescriptionMd: >-
   :::
 
 
-  All drivers of passenger vehicles such as limos, taxis, and rental cars, need to have a letter of certification before they can legally operate company vehicles. It’s the employer’s responsibility to file an application for a driver's certification if the driver doesn't already have one.
+  All drivers of vehicles designed to transport **16 or more passengers,** such as limos, taxis, and rental cars, need to have a letter of certification before they can legally operate company vehicles. It’s the employer’s responsibility to file an application for a driver's certification if the driver doesn't already have one.
 urlSlug: driver-certification
 displayname: driver-certification
 name: Apply to Certify Your Passenger Vehicle Drivers
