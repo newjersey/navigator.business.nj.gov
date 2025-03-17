@@ -17,6 +17,7 @@ interface Props
   handleChangeOverride?: (value: string) => void;
   getShowHideToggleButton: () => ReactElement;
   taxIdDisplayStatus: TaxIdDisplayStatus;
+  required?: boolean | false;
 }
 export const SingleTaxId = ({ handleChangeOverride, validationText, ...props }: Props): ReactElement => {
   const fieldName = "taxId";
@@ -58,6 +59,7 @@ export const SingleTaxId = ({ handleChangeOverride, validationText, ...props }: 
           validationText={validationText}
           value={state.profileData[fieldName] as string | undefined}
           visualFilter={formatTaxId}
+          required={props.required}
           {...props}
         />
       </WithErrorBar>

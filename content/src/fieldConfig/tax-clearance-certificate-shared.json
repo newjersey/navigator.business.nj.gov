@@ -4,6 +4,11 @@
     "backButtonText": "Back",
     "stepperOneLabel": "Requirements",
     "stepperTwoLabel": "Check Eligibility",
-    "stepperThreeLabel": "Review"
+    "stepperThreeLabel": "Review",
+    "preHeaderErrorText": "Missing or invalid information.",
+    "singularErrorText": "Review the following field:",
+    "pluralErrorText": "Review the following fields:",
+    "requestingAgencyErrorText": "Select a Requesting Agency",
+    "businessNameErrorText": "Enter a Business Name"
   }
 }

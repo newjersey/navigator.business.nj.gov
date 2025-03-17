@@ -13,6 +13,7 @@ export interface ProfileDataFieldProps<T = unknown> extends Omit<GenericTextFiel
   inputProps?: OutlinedInputProps;
   type?: HTMLInputTypeAttribute;
   inputWidth?: "full" | "default" | "reduced" | undefined;
+  required?: boolean | false;
 }
 
 export const ProfileDataField = <T,>({
@@ -48,6 +49,7 @@ export const ProfileDataField = <T,>({
         value={state.profileData[fieldName] as string | undefined}
         formContext={DataFormErrorMapContext}
         fieldName={fieldName as string}
+        required={props.required}
         {...props}
         validationText={props.validationText ?? contentFromConfig.errorTextRequired ?? ""}
         handleChange={handleChange}

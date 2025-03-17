@@ -11,6 +11,7 @@ export interface Props extends Omit<GenericTextFieldProps, "value" | "error" | "
   label?: string;
   secondaryLabel?: string;
   errorBarType: "ALWAYS" | "MOBILE-ONLY" | "DESKTOP-ONLY" | "NEVER";
+  required?: boolean | false;
 }
 
 export const AddressTextField = ({ className, ...props }: Props): ReactElement => {
@@ -36,6 +37,7 @@ export const AddressTextField = ({ className, ...props }: Props): ReactElement =
         inputWidth={"full"}
         value={state.formationAddressData[props.fieldName] as string}
         onValidation={props.onValidation}
+        required={props.required}
         {...props}
         handleChange={handleChange}
         error={hasError}

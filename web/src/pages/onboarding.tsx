@@ -409,6 +409,8 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
     },
     (isValid, errors) => {
+      console.log(JSON.stringify(errors));
+      console.log(JSON.stringify(isValid));
       if (errors.length > 0 && !isValid) {
         scrollToTop();
         if (errors.includes("ALERT_BAR")) {

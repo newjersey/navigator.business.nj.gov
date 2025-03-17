@@ -16,7 +16,6 @@ export const getTaxClearanceCertificateAgencies = (): TaxClearanceCertificateAge
 export const emptyTaxClearanceCertificateData: TaxClearanceCertificateData = {
   requestingAgencyId: "",
   businessName: "",
-  entityId: "",
   addressLine1: "",
   addressLine2: "",
   addressCity: "",
@@ -29,7 +28,6 @@ export const emptyTaxClearanceCertificateData: TaxClearanceCertificateData = {
 export type TaxClearanceCertificateData = {
   requestingAgencyId: string;
   businessName: string;
-  entityId: string;
   addressLine1: string;
   addressLine2: string;
   addressCity: string;

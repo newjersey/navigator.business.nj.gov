@@ -71,11 +71,6 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
               dataTestId={"businessName"}
             />
             <ReviewLineItem
-              label={Config.taxClearanceCertificateStep3.entityIdLabel}
-              value={business?.taxClearanceCertificateData?.entityId}
-              dataTestId={"entityId"}
-            />
-            <ReviewLineItem
               label={Config.taxClearanceCertificateStep3.addressLabel}
               value={addressValue}
               dataTestId={"addressLabel"}
