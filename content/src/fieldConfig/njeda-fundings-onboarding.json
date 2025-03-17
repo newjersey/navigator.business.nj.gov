@@ -20,7 +20,9 @@
     "pageHeader": {
       "headerText": "Explore NJEDA Funding Programs",
       "subHeaderText": "Discover funding programs your business may be eligible for. To see more personalized funding and business resources, create a Business.NJ.gov account.",
-      "buttonText": "See More Funding & Resources"
+      "buttonText": "See More Funding & Resources",
+      "logoLink": "https://www.njeda.gov/",
+      "logoAriaText": "Visit NJEDA home"
     }
   }
 }

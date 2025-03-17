@@ -41,7 +41,7 @@ describe("njeda fundings onboarding", () => {
     useMockRouter({});
   });
 
-  it("closes the modal when all questions are answered", async () => {
+  it("closes the modal when all questions are answered and routes to dashboard", async () => {
     const user = userEvent.setup();
     const business = generateBusiness({});
     renderStatefulFundingsPageComponent(business, []);
@@ -56,6 +56,23 @@ describe("njeda fundings onboarding", () => {
     await user.click(screen.getByText(Config.fundingsOnboardingModal.saveButtonText));
     await user.click(screen.getByText(Config.fundingsOnboardingModal.pageHeader.buttonText));
     expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
+  });
+
+  it("closes the modal when all questions are answered and routes to njeda when logo is clicked", async () => {
+    const user = userEvent.setup();
+    const business = generateBusiness({});
+    renderStatefulFundingsPageComponent(business, []);
+    expect(
+      screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.questionText)
+    ).toBeInTheDocument();
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "35");
+    await waitFor(() => {
+      selectByValue("Sector", "clean-energy");
+    });
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.saveButtonText));
+    await user.click(screen.getByTestId("njeda-logo-button"));
+    expect(mockPush).toHaveBeenCalledWith(Config.fundingsOnboardingModal.pageHeader.logoLink);
   });
 
   it("triggers validation when questions are unanswered and Save is pressed", async () => {
