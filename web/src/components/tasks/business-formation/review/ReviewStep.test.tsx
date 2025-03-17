@@ -698,7 +698,7 @@ describe("Formation - ReviewStep", () => {
       { radio: "nonprofitBoardMemberRightsSpecified", terms: "nonprofitBoardMemberRightsTerms" },
       { radio: "nonprofitTrusteesMethodSpecified", terms: "nonprofitTrusteesMethodTerms" },
       { radio: "nonprofitAssetDistributionSpecified", terms: "nonprofitAssetDistributionTerms" },
-    ])("provisions radio questions", (args) => {
+    ])("provisions $radio radio questions", (args) => {
       it(`does not display ${args.radio} when no board members`, async () => {
         await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: false, [args.radio]: "IN_FORM" });
         expect(

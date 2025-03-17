@@ -523,21 +523,24 @@ describe("profile - shared", () => {
   });
 
   describe("Special Note Alert for Businesses Formed outside the Navigator", () => {
-    it.each(businessPersonas)("shows the Note Alert for all personas when unauthenticated", (persona) => {
-      const business = generateBusinessForProfile({
-        formationData: generateFormationData({
-          completedFilingPayment: false,
-        }),
-        profileData: generateProfileData({
-          dateOfFormation: undefined,
-          businessPersona: persona,
-        }),
-      });
-      renderPage({ business, isAuthenticated: IsAuthenticated.FALSE });
-      expect(
-        screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
-      ).toBeInTheDocument();
-    });
+    it.each(businessPersonas)(
+      "shows the Note Alert for all personas when unauthenticated for %s",
+      (persona) => {
+        const business = generateBusinessForProfile({
+          formationData: generateFormationData({
+            completedFilingPayment: false,
+          }),
+          profileData: generateProfileData({
+            dateOfFormation: undefined,
+            businessPersona: persona,
+          }),
+        });
+        renderPage({ business, isAuthenticated: IsAuthenticated.FALSE });
+        expect(
+          screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+        ).toBeInTheDocument();
+      }
+    );
 
     it("shows the Note Alert for OWNING businesses and authenticated", () => {
       const business = generateBusinessForProfile({

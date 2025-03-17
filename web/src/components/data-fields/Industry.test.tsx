@@ -97,6 +97,7 @@ describe("<Industry />", () => {
         eq.fieldName !== "hasThreeOrMoreRentalUnits"
       );
     });
+
     nonConditionalEssentialQuestions.map((el) => {
       const validIndustryId = filterRandomIndustry(el.isQuestionApplicableToIndustry);
       const nonValidIndustryId = randomNegativeFilteredIndustry(el.isQuestionApplicableToIndustry);
@@ -148,7 +149,7 @@ describe("<Industry />", () => {
           ).not.toBeInTheDocument();
         });
 
-        it(`sets ${el.fieldName} back to ${
+        it(`sets ${el.fieldName} as a ${persona} back to ${
           emptyIndustrySpecificData[el.fieldName]
         } if they select a different industry`, () => {
           const profileData = {
@@ -169,7 +170,7 @@ describe("<Industry />", () => {
           expect(currentProfileData()[el.fieldName]).toEqual(emptyIndustrySpecificData[el.fieldName]);
         });
 
-        it(`displays FieldLabelProfile for ${validIndustryId.id} as a ${persona} when onboardingFieldLabel is false`, () => {
+        it(`displays FieldLabelProfile for ${validIndustryId.id} as a ${persona} when onboardingFieldLabel is false for ${el.fieldName}`, () => {
           render(
             <WithStatefulProfileData initialData={generateProfileData({ industryId: validIndustryId.id })}>
               <Industry onboardingFieldLabel={false} />
@@ -178,7 +179,7 @@ describe("<Industry />", () => {
           expect(screen.getAllByTestId("FieldLabelProfile")[0]).toBeInTheDocument();
         });
 
-        it(`displays FieldLabelOnboarding for ${validIndustryId.id} as a ${persona} when onboardingFieldLabel is true`, () => {
+        it(`displays FieldLabelOnboarding for ${validIndustryId.id} as a ${persona} when onboardingFieldLabel is true for ${el.fieldName}`, () => {
           render(
             <WithStatefulProfileData initialData={generateProfileData({ industryId: validIndustryId.id })}>
               <Industry onboardingFieldLabel={true} />
