@@ -14,7 +14,7 @@ jest.mock("@/lib/utils/useIntersectionOnElement", () => ({ useIntersectionOnElem
 describe("HomePage", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockRouter({});
+    useMockRouter({ isReady: true });
     useMockBusiness({});
   });
 

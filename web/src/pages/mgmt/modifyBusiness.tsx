@@ -35,7 +35,7 @@ const ModifyBusinessPage = (): ReactElement => {
 
   useEffect(() => {
     if (isModifyBusinessPageDisabled) {
-      router && router.push(ROUTES.dashboard);
+      router?.isReady && router.push(ROUTES.dashboard);
     }
   }, [isModifyBusinessPageDisabled, router]);
 
