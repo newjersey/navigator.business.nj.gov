@@ -14,22 +14,26 @@ callToActionLink: https://nipr.com/licensing-center/apply
 agencyId: nj-banking-insurance
 divisionPhone: " 609-292-7272"
 ---
+:::infoAlert 
+ The requirements below apply to all New Jersey residents and non-residents, unless an exception is noted.
+:::
+
 ## Eligibility Criteria
 
 * Be at least 18 years old
 * Have at least one designated responsible licensed `producer|national-producer-number` . The producer needs an active NJ producer license that covers all the lines of authority listed in the application
-* [Criminal background checks](https://www.nj.gov/dobi/insliced/livescan.htm) for all officers, partners, directors, and owners with at least 10% ownership. This applies to those without an active New Jersey producer license (**only for NJ residents**)
+* [Criminal background checks](https://www.nj.gov/dobi/insliced/livescan.htm) for all officers, partners, directors, and owners with at least 10% ownership. This applies to those without an active New Jersey producer license **(only for NJ resident applicants)**
 
 ## Application Requirements
 
 * Business name, address, and phone number
-*  `Certificate of Formation|certificate-formation` (resident business applicants)
+*  `Certificate of Formation|certificate-formation` **(only for NJ resident applicants)**
 *  `EIN|ein` 
 *  `National Producer Number|national-producer-number` , if assigned
 * FINRA Firm Central Registration Depository (CRD) number, if applicable
 * Designated responsible licensed producers name, Social Security number, and National Producer Number (NPN)
 * Name, Social Security number, and title of all officers, partners, directors, and owners with at least 10% ownership of the business entity
-* Proof that every officer, partner, director, and owner with 10% or more ownership has passed the background check **(only for NJ residents)**
+* Proof that every officer, partner, director, and owner with 10% or more ownership has passed the background check **(only for NJ resident applicants)**
 * History and documentation of criminal history, if applicable
 * History and documentation of disciplinary actions or termination for any alleged misconduct, if applicable
 * Applicable fees paid
