@@ -1,19 +1,16 @@
 ---
 summaryDescriptionMd: >-
-  All drivers (limo, taxi, rental car chauffeur) need to have a letter of
-  certification before they can legally operate company vehicles. It’s the
-  employer’s responsibility to file an application for a driver's certification
-  if the driver doesn't already have one.
-
-
   :::infoAlert
 
-  Drivers holding a Commercial Driver’s License (CDL) with a Passenger (P) endorsement are exempt from this requirement.
+  Drivers that already have a Commercial Driver’s License (CDL) with a Passenger "P" endorsement are exempt from this requirement.
 
   :::
+
+
+  All drivers of vehicles designed to transport **16 or more passengers,** such as limos, taxis, and rental cars, need to have a letter of certification before they can legally operate company vehicles. It’s the employer’s responsibility to file an application for a driver's certification if the driver doesn't already have one.
 urlSlug: driver-certification
 displayname: driver-certification
-name: Apply to Certify Your Drivers
+name: Apply to Certify Your Passenger Vehicle Drivers
 id: taxi-driver-certification
 callToActionLink: https://www.state.nj.us/mvc/pdf/business/CDL-5.pdf
 callToActionText: Apply to Certify My Drivers
