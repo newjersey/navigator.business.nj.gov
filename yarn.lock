@@ -4528,6 +4528,7 @@ __metadata:
     "@types/react-swipeable-views": 0.13.6
     "@types/react-transition-group": 4.4.12
     "@types/remove-markdown": 0.3.4
+    "@types/seedrandom": ^3.0.8
     "@types/simple-oauth2": 5.0.7
     "@types/supertest": 6.0.2
     "@types/testing-library__jest-dom": 5.14.9
@@ -4616,6 +4617,7 @@ __metadata:
     rimraf: 5.0.10
     sass: 1.83.1
     sass-loader: 14.2.1
+    seedrandom: ^3.0.5
     semantic-release: 19.0.5
     serverless: 4.4.18
     serverless-dynamodb: 0.2.56
@@ -12813,6 +12815,13 @@ __metadata:
   version: 1.20.6
   resolution: "@types/resolve@npm:1.20.6"
   checksum: dc35f5517606b6687cd971c0281ac58bdee2c50c051b030f04647d3991688be2259c304ee97e5b5d4b9936072c36767eb5933b54611a407d6557972bb6fea4f6
+  languageName: node
+  linkType: hard
+
+"@types/seedrandom@npm:^3.0.8":
+  version: 3.0.8
+  resolution: "@types/seedrandom@npm:3.0.8"
+  checksum: 9651de4ecb5ad060053678d6a42403dd78222bcca80016417c23b58b4f739e544b7197a78b97d6862cf417ea80fd2df612cc50ca0fa387fbe794e326a382ab0b
   languageName: node
   linkType: hard
 
@@ -31946,6 +31955,13 @@ __metadata:
     extend-shallow: ^2.0.1
     kind-of: ^6.0.0
   checksum: 3cc4131705493b2955729b075dcf562359bba66183debb0332752dc9cad35616f6da7a23e42b6cab45cd2e4bb5cda113e9e84c8f05aee77adb6b0289a0229101
+  languageName: node
+  linkType: hard
+
+"seedrandom@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "seedrandom@npm:3.0.5"
+  checksum: 728b56bc3bc1b9ddeabd381e449b51cb31bdc0aa86e27fcd0190cea8c44613d5bcb2f6bb63ed79f78180cbe791c20b8ec31a9627f7b7fc7f476fd2bdb7e2da9f
   languageName: node
   linkType: hard
 

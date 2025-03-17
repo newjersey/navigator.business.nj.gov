@@ -49,7 +49,7 @@ describe("migrate_v126_to_v127", () => {
   ];
 
   it.each(foreignBusinessTypeIds)(
-    "does not modify operatingPhase for other Foreign businesses",
+    "does not modify operatingPhase for other Foreign businesses %s",
     (foreignBusinessTypeId) => {
       const id = "biz-1";
       const v126ProfileData = generateV126ProfileData({});
