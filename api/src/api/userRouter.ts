@@ -180,6 +180,7 @@ export const userRouterFactory = (
       .catch((error: Error) => {
         if (error.message === "Not found") {
           if (process.env.IS_OFFLINE || process.env.STAGE === "dev") {
+            debugger;
             saveEmptyUserData(req, res, signedInUserId);
           } else {
             res.status(StatusCodes.NOT_FOUND).json({ error: error.message });

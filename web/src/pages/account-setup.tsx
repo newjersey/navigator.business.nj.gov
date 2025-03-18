@@ -40,11 +40,16 @@ const AccountSetupPage = (): ReactElement => {
 
   useEffect(() => {
     (async (): Promise<void> => {
-      if (state.isAuthenticated === IsAuthenticated.TRUE) {
+      // Only redirect to dashboard if user is authenticated AND has completed account setup
+      // User with minimal registration will be authenticated but need to complete the form
+      const hasCompletedSetup = userData?.user?.receiveNewsletter !== undefined &&
+                               userData?.user?.contactSharingWithAccountCreationPartner !== undefined;
+                               
+      if (state.isAuthenticated === IsAuthenticated.TRUE && hasCompletedSetup) {
         router && (await router.replace(ROUTES.dashboard));
       }
     })();
-  }, [state.isAuthenticated, router]);
+  }, [state.isAuthenticated, router, userData]);
 
   const {
     FormFuncWrapper,

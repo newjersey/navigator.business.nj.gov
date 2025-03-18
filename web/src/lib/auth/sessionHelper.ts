@@ -44,6 +44,7 @@ type CognitoIdentityPayload = {
 };
 
 export const getCredentialsAndIdentity = async (): Promise<CredentialsAndIdentityId> => {
+  // debugger;
   const session = await fetchAuthSession({ forceRefresh: true });
   const credentials = session?.credentials;
   const identityId = session?.identityId;
