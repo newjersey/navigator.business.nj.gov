@@ -1,13 +1,9 @@
 ---
 summaryDescriptionMd: >-
   Before hauling loads across state lines, your vehicles must be registered with
-  the IRP in the state where you formed your business.
-
-
-  &nbsp;
-
-
-  The IRP is a reciprocity agreement between all states in the U.S. and Canada, and allows legal operation between jurisdictions.
+  the IRP in the state where you formed your business. The IRP is a reciprocity
+  agreement between all states in the U.S. and Canada, and **allows legal
+  operation between jurisdictions.**
 
 
   &nbsp;
@@ -15,7 +11,7 @@ summaryDescriptionMd: >-
 
   Vehicles qualify for IRP registration if they:
 
-  * Will be operated within one or more states or provinces
+  * Will be operated within 1 or more states or provinces
 
   * Are designed to transport persons or property for hire
 
