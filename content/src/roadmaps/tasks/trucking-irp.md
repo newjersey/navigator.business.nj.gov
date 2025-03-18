@@ -8,10 +8,24 @@ summaryDescriptionMd: >-
   &nbsp;
 
 
-  The IRP is a reciprocity agreement between all states in the U.S. and Canada, and allows legal travel across state and country lines.
+  The IRP is a reciprocity agreement between all states in the U.S. and Canada, and allows legal operation between jurisdictions.
+
+
+  &nbsp;
+
+
+  Vehicles qualify for IRP registration if they:
+
+  * Will be operated within one or more states or provinces
+
+  * Are designed to transport persons or property for hire
+
+  * Have 2 axels and weigh more than 26,000 pounds
+
+  * Have 3 or more axels, regardless of weight
 urlSlug: trucking-irp
 displayname: trucking-irp
-name: File Your International Registration Plan (IRP)
+name: Register Your Vehicles Under the IRP
 id: trucking-irp
 callToActionLink: https://www.state.nj.us/mvc/pdf/business/irpqui1.pdf
 callToActionText: File My IRP
