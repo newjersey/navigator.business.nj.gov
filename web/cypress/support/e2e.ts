@@ -58,7 +58,7 @@ afterEach(function () {
     const testName = Cypress.mocha.getRunner().test.fullTitle();
     cy.task(
       "log",
-      `Failed ${testName}. Replicate randomness by running with CYPRESS_RANDOM_SEED=${testRandomSeeds.get(
+      `Failed ${testName}. Replicate Math.random() numbers by running with CYPRESS_RANDOM_SEED=${testRandomSeeds.get(
         testName
       )}`
     );
