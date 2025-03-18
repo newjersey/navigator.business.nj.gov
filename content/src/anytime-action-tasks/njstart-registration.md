@@ -4,6 +4,7 @@ id: njstart-registration
 name: njstart-registration
 category:
   - Only Show in Subtask
+description: Complete your NJSTART registration to bid on state contracts.
 sectorIds: []
 urlSlug: njstart-registration
 summaryDescriptionMd: >-

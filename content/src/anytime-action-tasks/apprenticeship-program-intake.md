@@ -4,6 +4,7 @@ id: apprenticeship-program-intake
 name: apprenticeship-program-intake
 category:
   - Only Show in Subtask
+description: To be a contractor, submit your intake form to begin an apprenticeship program.
 industryIds: []
 sectorIds: []
 urlSlug: apprenticeship-program-intake

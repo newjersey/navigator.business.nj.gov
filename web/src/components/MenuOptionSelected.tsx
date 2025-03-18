@@ -3,7 +3,7 @@ import { ReactElement, ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
-  secondaryText?: string;
+  secondaryText?: ReactNode;
 }
 
 export const MenuOptionSelected = (props: Props): ReactElement => {

@@ -3,6 +3,7 @@ id: shelter-cds-reinstatement
 name: Reinstate Your Animal Shelter’s Controlled Dangerous Substances Registration
 category:
   - Reactivate My Expired Permit, License or Registration
+description: Restore your registration to manage controlled substances at your shelter.
 industryIds:
   - petcare
 sectorIds: []

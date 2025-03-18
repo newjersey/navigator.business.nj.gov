@@ -3790,6 +3790,14 @@ collections:
               "Only Show in Subtask",
             ],
         }
+      # This is implemented but needs follow up in a future ticket for content before going live (Also same code for anytime action license reinstatements)
+      # - {
+      #     label: "Meta Data for Dropdown Search (searching will match this text but it will never appear)",
+      #     name: "searchMetaDataMatch",
+      #     widget: "string",
+      #     required: false,
+      #   }
+      - { label: "Dropdown Description", name: "description", widget: "string", required: false }
       - {
           label: "Apply to all - overrides industry and sector dropdown",
           name: "applyToAllUsers",
@@ -3849,6 +3857,14 @@ collections:
       - { label: "Name/Title", name: "name", widget: "string" }
       - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "no-space", required: true }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+      # This is implemented but needs follow up in a future ticket for content before going live (Also same code for anytime action license tasks)
+      # - {
+      #     label: "Meta Data for Dropdown Search (searching will match this text but it will never appear)",
+      #     name: "searchMetaDataMatch",
+      #     widget: "string",
+      #     required: false,
+      #   }
+      - { label: "Dropdown Description", name: "description", widget: "string", required: false }
       - { label: "Below License Status Content", name: "body", widget: "markdown", required: true }
       - {
           label: "Issuing Agency",

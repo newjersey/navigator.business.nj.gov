@@ -9,6 +9,7 @@ id: food-truck-fire-permit
 name: Get a Fire Permit for Your Food Truck
 category:
   - Set Up at a Temporary Location
+description: Apply for a permit to ensure your food truck meets fire safety regulations.
 industryIds: []
 sectorIds:
   - accommodation-and-food-services
