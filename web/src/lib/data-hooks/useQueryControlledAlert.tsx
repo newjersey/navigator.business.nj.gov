@@ -25,7 +25,7 @@ export const useQueryControlledAlert = (config: QueryControlledAlertConfig): Rea
   }, [router, config.pagePath]);
 
   useEffect(() => {
-    if (!router || !router.isReady || effectOccurred.current) {
+    if (!router?.isReady || effectOccurred.current) {
       return;
     }
     if (router.query[config.queryKey] === "true") {

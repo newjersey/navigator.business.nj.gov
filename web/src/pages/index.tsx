@@ -69,7 +69,7 @@ const Home = (): ReactElement => {
     }
   }
   useEffect(() => {
-    if (state.isAuthenticated === IsAuthenticated.TRUE && router) {
+    if (state.isAuthenticated === IsAuthenticated.TRUE && router?.isReady) {
       if (business?.onboardingFormProgress === "COMPLETED") {
         router.replace(ROUTES.dashboard);
       } else if (business?.onboardingFormProgress === "UNSTARTED") {
@@ -81,7 +81,7 @@ const Home = (): ReactElement => {
   }, [business, userData, error, router, state.isAuthenticated]);
 
   useEffect(() => {
-    if (!router || !router.isReady || !router.query[QUERIES.signUp]) {
+    if (!router?.isReady || !router.query[QUERIES.signUp]) {
       return;
     }
     if (checkQueryValue(router, QUERIES.signUp, "true")) {

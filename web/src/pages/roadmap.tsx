@@ -12,10 +12,14 @@ const RoadmapPage = (): ReactElement => {
   const router = useRouter();
 
   useEffect(() => {
+    if (!router?.isReady) {
+      return;
+    }
+
     if (state.isAuthenticated === IsAuthenticated.TRUE) {
-      router && router.replace(ROUTES.dashboard);
+      router.replace(ROUTES.dashboard);
     } else if (state.isAuthenticated === IsAuthenticated.FALSE) {
-      router && router.replace(ROUTES.landing);
+      router.replace(ROUTES.landing);
     }
   }, [router, state.isAuthenticated]);
 

@@ -45,7 +45,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
   }, business);
 
   useEffect(() => {
-    if (!router || !router.isReady) {
+    if (!router?.isReady) {
       return;
     }
     if (checkQueryValue(router, QUERIES.openTaxFilingsModal, "true")) {
