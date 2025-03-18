@@ -3,6 +3,7 @@ id: state-contracting
 name: Learn How to Contract with the NJ State Government
 category:
   - Contract With NJ State Government
+description: Discover the steps to become a contractor for the state government.
 industryIds: []
 sectorIds:
   - accommodation-and-food-services

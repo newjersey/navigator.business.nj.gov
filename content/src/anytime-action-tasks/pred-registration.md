@@ -9,6 +9,7 @@ id: pred-registration
 name: Register Your Condominium or Other Planned Real Estate Development
 category:
   - Manage My Properties
+description: File your development plans to comply with state regulations.
 industryIds:
   - commercial-construction
 sectorIds:

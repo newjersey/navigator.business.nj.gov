@@ -7,6 +7,7 @@ id: tax-clearance-certificate
 name: Get a Tax Clearance Certificate
 category:
   - Apply for State Funding
+description: Apply for a certificate to verify your tax compliance status.
 applyToAllUsers: true
 industryIds: []
 sectorIds: []

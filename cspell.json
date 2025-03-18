@@ -216,7 +216,8 @@
     "Unpublishing",
     "CRTK",
     "DIIN",
-    "GVWR"
+    "GVWR",
+    "XRSY"
   ],
   "ignorePaths": [
     "node_modules/**",

@@ -12,7 +12,7 @@ import analytics from "@/lib/utils/analytics";
 import { Autocomplete, TextField, useMediaQuery } from "@mui/material";
 import { orderBy } from "lodash";
 import { useRouter } from "next/compat/router";
-import { ChangeEvent, type ReactElement, useState } from "react";
+import { ChangeEvent, type ReactElement, ReactNode, useState } from "react";
 
 interface Props {
   anytimeActionTasks: AnytimeActionTask[];
@@ -21,6 +21,24 @@ interface Props {
 
 type AnytimeAction = AnytimeActionTask | AnytimeActionLicenseReinstatement;
 type AnytimeActionWithTypeAndCategory = AnytimeAction & { type: string; category: string[] };
+
+const getBoldedTextComponent = (searchValue: string, textToBold: string): ReactNode => {
+  const matches = textToBold.toLowerCase().indexOf(searchValue.toLowerCase());
+  if (matches >= 0) {
+    const beforeMatch = textToBold.slice(0, matches);
+    const match = textToBold.slice(matches, matches + searchValue.length);
+    const afterMatch = textToBold.slice(matches + searchValue.length);
+
+    return (
+      <>
+        {beforeMatch}
+        <span className="text-bold">{match}</span>
+        {afterMatch}
+      </>
+    );
+  }
+  return <>{textToBold}</>;
+};
 
 export const AnytimeActionDropdown = (props: Props): ReactElement => {
   const { Config } = useConfig();
@@ -155,31 +173,30 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
             </li>
           )}
           options={getApplicableAnytimeActions()}
+          filterOptions={(options, state) => {
+            const searchValue = state.inputValue.toLowerCase();
+            if (searchValue === "") {
+              return options;
+            }
+            return options.filter((option) => {
+              return (
+                option.name.toLowerCase().includes(searchValue) ||
+                option.description?.toLowerCase().includes(searchValue) ||
+                option.searchMetaDataMatch?.toLowerCase().includes(searchValue)
+              );
+            });
+          }}
           renderOption={(
             _props,
             option: AnytimeActionWithTypeAndCategory,
             { selected, inputValue }
           ): ReactElement => {
-            let textComponent = <>{option.name}</>;
-
-            const matches = option.name.toLowerCase().indexOf(inputValue.toLowerCase());
-            if (matches >= 0) {
-              const beforeMatch = option.name.slice(0, matches);
-              const match = option.name.slice(matches, matches + inputValue.length);
-              const afterMatch = option.name.slice(matches + inputValue.length);
-
-              textComponent = (
-                <>
-                  {beforeMatch}
-                  <span className="text-bold">{match}</span>
-                  {afterMatch}
-                </>
-              );
-            }
+            const titleText = getBoldedTextComponent(inputValue, option.name);
+            const descriptionText = getBoldedTextComponent(inputValue, option.description ?? "");
 
             const newClassName = `${_props.className} anytime-action-dropdown-option ${
               selected ? "bg-accent-cool-lightest" : ""
-            } `;
+            } fdc`;
 
             return (
               <li
@@ -189,9 +206,9 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
                 key={option.filename}
               >
                 {selected ? (
-                  <MenuOptionSelected>{textComponent}</MenuOptionSelected>
+                  <MenuOptionSelected secondaryText={descriptionText}>{titleText}</MenuOptionSelected>
                 ) : (
-                  <MenuOptionUnselected>{textComponent}</MenuOptionUnselected>
+                  <MenuOptionUnselected secondaryText={descriptionText}>{titleText}</MenuOptionUnselected>
                 )}
               </li>
             );

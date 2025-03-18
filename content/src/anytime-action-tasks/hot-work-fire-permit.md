@@ -6,6 +6,7 @@ id: hot-work-fire-permit
 name: Get a Fire Permit to Perform Hot Work
 category:
   - Set Up at a Temporary Location
+description: Obtain a permit to conduct welding, cutting, or other hot work safely.
 industryIds:
   - commercial-construction
   - auto-body-repair
