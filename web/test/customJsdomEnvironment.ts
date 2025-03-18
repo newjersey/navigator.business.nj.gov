@@ -13,7 +13,7 @@ class CustomJSDOMEnvironment extends JSDOMEnvironment {
       const testRandomSeeds = this.global.testRandomSeeds as Map<string, string>;
       const currentTestName = this.getVmContext()?.expect.getState().currentTestName;
       console.log(
-        `Failed ${currentTestName}. Reproduce randomness by running with RANDOM_SEED=${testRandomSeeds.get(
+        `Failed ${currentTestName}. Replicate randomness by running with RANDOM_SEED=${testRandomSeeds.get(
           currentTestName
         )}`
       );

@@ -142,7 +142,8 @@ describe("Profile [feature] [all] [group4]", () => {
     });
   });
 
-  it("onboards existing business and updates profile data ", () => {
+  it("onboards existing business and updates profile data", () => {
+    cy.task("log", "running test onboards existing business and updates profile data");
     expect(Math.random()).to.equal(4);
     const sectorId = randomElementFromArray(arrayOfSectors).id;
 

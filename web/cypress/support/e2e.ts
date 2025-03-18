@@ -42,6 +42,7 @@ beforeEach(function () {
   const testName = Cypress.mocha.getRunner().test.fullTitle();
   const randomSeed = Cypress.env("RANDOM_SEED") || Math.random().toString(36).slice(2);
   if (testRandomSeeds.has(testName)) {
+    cy.task("log", `Found duplicate ${testName}}`);
     throw new Error(`Unexpected duplicate test name "${testName}". Please make test names unique.`);
   }
   testRandomSeeds.set(testName, randomSeed);
@@ -57,7 +58,7 @@ afterEach(function () {
     const testName = Cypress.mocha.getRunner().test.fullTitle();
     cy.task(
       "log",
-      `Failed ${testName}. Reproduce randomness by running with CYPRESS_RANDOM_SEED=${testRandomSeeds.get(
+      `Failed ${testName}. Replicate randomness by running with CYPRESS_RANDOM_SEED=${testRandomSeeds.get(
         testName
       )}`
     );
