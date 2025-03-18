@@ -10,7 +10,7 @@ summaryDescriptionMd: |
 formName: BLC-25
 industryId:
   - auto-body-repair
-callToActionText: Apply for My Auto-Body Repair License
+callToActionText: Get My Auto-Body Repair License
 callToActionLink: https://www.nj.gov/mvc/business/autobodylic.htm
 webflowIndustry: Auto Body
 licenseCertificationClassification: LICENSE
