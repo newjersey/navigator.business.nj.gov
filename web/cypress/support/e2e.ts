@@ -14,13 +14,16 @@
 // ***********************************************************
 /// <reference types="cypress" />
 
+import seedrandom from "seedrandom";
 import "./commands";
 import { LighthouseConfig, LighthouseThresholds, Pa11yThresholds } from "./types";
 
 export const testUserEmail = Cypress.env("TEST_USER_EMAIL");
 export const testUserPassword = Cypress.env("TEST_USER_PASSWORD");
 
-beforeEach(function () {
+const testRandomSeeds = new Map();
+
+const isRelevantSuite = () => {
   let testSuite = Cypress.env("SUITE");
   if (!testSuite) {
     testSuite = "all";
@@ -28,8 +31,36 @@ beforeEach(function () {
 
   const testName = Cypress.mocha.getRunner().test.fullTitle();
   testSuite = `[${testSuite}]`;
-  if (!testName.includes(testSuite)) {
+  return testName.includes(testSuite);
+};
+
+beforeEach(function () {
+  if (!isRelevantSuite()) {
     this.skip();
+  }
+
+  const testName = Cypress.mocha.getRunner().test.fullTitle();
+  const randomSeed = Cypress.env("RANDOM_SEED") || Math.random().toString(36).slice(2);
+  if (testRandomSeeds.has(testName)) {
+    throw new Error(`Unexpected duplicate test name "${testName}". Please make test names unique.`);
+  }
+  testRandomSeeds.set(testName, randomSeed);
+  seedrandom(randomSeed, { global: true });
+});
+
+afterEach(function () {
+  if (!isRelevantSuite()) {
+    this.skip();
+  }
+
+  if (this.currentTest?.state === "failed") {
+    const testName = Cypress.mocha.getRunner().test.fullTitle();
+    cy.task(
+      "log",
+      `Failed ${testName}. Reproduce randomness by running with CYPRESS_RANDOM_SEED=${testRandomSeeds.get(
+        testName
+      )}`
+    );
   }
 });
 

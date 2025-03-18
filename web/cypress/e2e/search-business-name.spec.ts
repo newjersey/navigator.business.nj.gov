@@ -10,6 +10,7 @@ describe("search business name [feature] [all] [group2]", () => {
   });
 
   it("searches available names", () => {
+    expect(Math.random()).to.equal(4);
     const businessName = "Aculyst";
     const industry = LookupIndustryById("e-commerce");
     const legalStructureId = "limited-partnership";
