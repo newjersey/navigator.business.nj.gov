@@ -37,7 +37,7 @@ Fill out form CDL-5 and mail it to:
 
 &nbsp;
 
-Motor Vehicle Commission
+New Jersey Motor Vehicle Commission
 &nbsp;
 
 Limo Application Unit
