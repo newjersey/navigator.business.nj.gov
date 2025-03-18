@@ -1793,7 +1793,7 @@ describe("<BusinessFormationPaginator />", () => {
             },
           ];
           const foreignIntlMainAddressZipCode: MockApiErrorJestArray = [
-            "foreignUsMainAddressZipCode",
+            "foreignIntlMainAddressZipCode",
             {
               formationFormData: generateFormationFormData(
                 {

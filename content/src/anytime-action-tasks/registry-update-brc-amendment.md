@@ -7,6 +7,7 @@ name: Update Your Business Registration Certificate and/or Registry Account
 category:
   - Change My Business Information
   - Hire New Employees
+description: Make changes to your business registration to keep it up to date.
 applyToAllUsers: true
 urlSlug: registry-update-brc-amendment
 summaryDescriptionMd: >-

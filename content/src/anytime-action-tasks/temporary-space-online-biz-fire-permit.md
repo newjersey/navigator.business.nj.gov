@@ -9,6 +9,7 @@ id: temporary-space-online-biz-fire-permit
 name: Get a Fire Permit to Set Up Your Temporary Retail Space
 category:
   - Set Up at a Temporary Location
+description: "Ensure your kiosk or booth meets fire safety requirements with a permit."
 industryIds:
   - e-commerce
 sectorIds: []

@@ -4,6 +4,7 @@ id: prevailing-wage
 name: prevailing-wage
 category:
   - Only Show in Subtask
+description: Learn the requirements for complying with prevailing wage laws.
 sectorIds: []
 urlSlug: prevailing-wage
 summaryDescriptionMd: \

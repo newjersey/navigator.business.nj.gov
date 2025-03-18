@@ -11,6 +11,7 @@ name: Get a New Smoke Detector, Carbon Monoxide Detector, and Fire Extinguisher
 category:
   - Manage My Properties
   - Purchase New Products or Equipment
+description: Apply for a certificate to ensure your property meets safety standards.
 industryIds: []
 sectorIds:
   - real-estate

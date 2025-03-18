@@ -1235,7 +1235,6 @@ describe("getErrorStateForField", () => {
     runTests(onlyHasErrorIfUndefinedTest);
 
     runTests(["foreignStateOfFormation"], Config.formation.fields.foreignStateOfFormation.error);
-    runTests(["foreignStateOfFormation"], Config.formation.fields.foreignStateOfFormation.error);
   });
 
   describe("foreignGoodStandingFile", () => {

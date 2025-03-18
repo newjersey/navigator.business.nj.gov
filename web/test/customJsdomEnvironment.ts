@@ -1,8 +1,8 @@
 import type { EnvironmentContext, JestEnvironmentConfig } from "@jest/environment";
 import { Circus } from "@jest/types";
-import NodeEnvironment from "jest-environment-node";
+import JSDOMEnvironment from "jest-environment-jsdom";
 
-class CustomNodeEnvironment extends NodeEnvironment {
+class CustomJSDOMEnvironment extends JSDOMEnvironment {
   constructor(config: JestEnvironmentConfig, context: EnvironmentContext) {
     super(config, context);
     this.global.testRandomSeeds = new Map<string, string>();
@@ -11,7 +11,7 @@ class CustomNodeEnvironment extends NodeEnvironment {
   async handleTestEvent(event: Circus.Event): Promise<void> {
     if (event.name === "hook_failure" || event.name === "test_fn_failure") {
       const testRandomSeeds = this.global.testRandomSeeds as Map<string, string>;
-      const currentTestName = this.context?.expect.getState().currentTestName;
+      const currentTestName = this.getVmContext()?.expect.getState().currentTestName;
       console.log(
         `Test failed, reproduce randomness by running with RANDOM_SEED=${testRandomSeeds.get(
           currentTestName
@@ -21,4 +21,4 @@ class CustomNodeEnvironment extends NodeEnvironment {
   }
 }
 
-export default CustomNodeEnvironment;
+export default CustomJSDOMEnvironment;

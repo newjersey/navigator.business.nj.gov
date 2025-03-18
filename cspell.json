@@ -225,7 +225,8 @@
     "CBIU",
     "NJMVC",
     "recert",
-    "Recertification"
+    "Recertification",
+    "XRSY"
   ],
   "ignorePaths": [
     "node_modules/**",

@@ -14,6 +14,7 @@ import {
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/index";
+import userEvent from "@testing-library/user-event";
 
 function setupMockAnalytics(): typeof analytics {
   return {
@@ -41,6 +42,30 @@ describe("<AnytimeActionDropdown />", () => {
 
   const taskName = "some-task-name";
   const licenseReinstatementName = "some-license-reinstatement-name";
+
+  const anytimeActionTasksAlternate = [
+    generateAnytimeActionTask({
+      name: "test-title-1",
+      applyToAllUsers: true,
+      category: ["Category 1"],
+      description: "test-description-1",
+      searchMetaDataMatch: "meta-data-1",
+    }),
+    generateAnytimeActionTask({
+      name: "test-title-2",
+      applyToAllUsers: true,
+      category: ["Category 1"],
+      description: "test-description-2",
+      searchMetaDataMatch: "meta-data-2",
+    }),
+    generateAnytimeActionTask({
+      name: "test-title-3",
+      applyToAllUsers: true,
+      category: ["Category 3"],
+      description: "test-description-3",
+      searchMetaDataMatch: "meta-data-3",
+    }),
+  ];
 
   describe("routing and analytics", () => {
     beforeEach(() => {
@@ -459,6 +484,84 @@ describe("<AnytimeActionDropdown />", () => {
       renderAnytimeActionDropdown();
       fireEvent.click(screen.getByLabelText("Open"));
       expect(screen.getByTestId("operating-carnival-fire-permit-option")).toBeInTheDocument();
+    });
+
+    it("renders an anytime action with a description", () => {
+      const testDescription = "test-description-1";
+
+      anytimeActionTasks = [
+        generateAnytimeActionTask({
+          name: "test-title-1",
+          applyToAllUsers: true,
+          category: ["Category 1"],
+          description: testDescription,
+        }),
+      ];
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.getByText(testDescription)).toBeInTheDocument();
+    });
+
+    it("renders an anytime actions that match search value to a title with correct bolding", async () => {
+      anytimeActionTasks = anytimeActionTasksAlternate;
+
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      await userEvent.type(screen.getByRole("combobox"), "test-title-3");
+      expect(screen.getByText("test-title-3")).toBeInTheDocument();
+      expect(screen.getByText("test-title-3")).toHaveClass("text-bold");
+      expect(screen.getByText("Category 3")).toBeInTheDocument();
+      expect(screen.queryByText("test-title-2")).not.toBeInTheDocument();
+      expect(screen.queryByText("test-title-1")).not.toBeInTheDocument();
+      expect(screen.queryByText("Category 1")).not.toBeInTheDocument();
+    });
+
+    it("returns no searched elements when nothing matches", async () => {
+      anytimeActionTasks = anytimeActionTasksAlternate;
+
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      expect(screen.getByText("test-title-3")).toBeInTheDocument();
+      expect(screen.getByText("Category 3")).toBeInTheDocument();
+      expect(screen.getByText("test-title-2")).toBeInTheDocument();
+      expect(screen.getByText("test-title-1")).toBeInTheDocument();
+      expect(screen.getByText("Category 1")).toBeInTheDocument();
+      expect(screen.queryByText("No options")).not.toBeInTheDocument();
+      await userEvent.type(screen.getByRole("combobox"), "test-title-33333");
+      expect(screen.queryByText("test-title-3")).not.toBeInTheDocument();
+      expect(screen.queryByText("Category 3")).not.toBeInTheDocument();
+      expect(screen.queryByText("test-title-2")).not.toBeInTheDocument();
+      expect(screen.queryByText("test-title-1")).not.toBeInTheDocument();
+      expect(screen.queryByText("Category 1")).not.toBeInTheDocument();
+      expect(screen.getByText("No options")).toBeInTheDocument();
+    });
+
+    it("renders an anytime actions that match search value to a description with correct bolding", async () => {
+      anytimeActionTasks = anytimeActionTasksAlternate;
+
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      await userEvent.type(screen.getByRole("combobox"), "test-description-3");
+      expect(screen.getByText("test-description-3")).toBeInTheDocument();
+      expect(screen.getByText("test-description-3")).toHaveClass("text-bold");
+      expect(screen.getByText("Category 3")).toBeInTheDocument();
+      expect(screen.queryByText("test-description-2")).not.toBeInTheDocument();
+      expect(screen.queryByText("test-description-1")).not.toBeInTheDocument();
+      expect(screen.queryByText("Category 1")).not.toBeInTheDocument();
+    });
+
+    it("renders an anytime actions that match search value to a meta data, without showing meta data values", async () => {
+      anytimeActionTasks = anytimeActionTasksAlternate;
+
+      renderAnytimeActionDropdown();
+      fireEvent.click(screen.getByLabelText("Open"));
+      await userEvent.type(screen.getByRole("combobox"), "meta-data-3");
+      expect(screen.getByText("test-title-3")).toBeInTheDocument();
+      expect(screen.queryByText("test-title-3")).not.toHaveClass("text-bold");
+      expect(screen.getByText("Category 3")).toBeInTheDocument();
+      expect(screen.queryByText("test-title-2")).not.toBeInTheDocument();
+      expect(screen.queryByText("test-title-1")).not.toBeInTheDocument();
+      expect(screen.queryByText("Category 1")).not.toBeInTheDocument();
     });
   });
 });

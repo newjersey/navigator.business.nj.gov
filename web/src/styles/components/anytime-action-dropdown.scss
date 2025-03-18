@@ -34,6 +34,7 @@
 li.anytime-action-dropdown-option.MuiAutocomplete-option {
   margin: 0;
   padding: 0.5rem 0.5rem 0.5rem 1rem;
+  align-items: flex-start;
 
   &.MuiAutocomplete-option[aria-selected="true"].Mui-focusVisible {
     filter: brightness(97%);
