@@ -1,8 +1,7 @@
 ---
 summaryDescriptionMd: >-
   Before hauling loads across state lines, your vehicles must be registered with
-  the International Registration Plan (IRP) in the state where you formed your
-  business.
+  the IRP in the state where you formed your business.
 
 
   &nbsp;
@@ -25,7 +24,7 @@ summaryDescriptionMd: >-
   * Have 3 or more axels, regardless of weight
 urlSlug: trucking-irp
 displayname: trucking-irp
-name: Register Your Vehicles Under the IRP
+name: Register Your Vehicles Under the International Registration Plan (IRP)
 id: trucking-irp
 callToActionLink: https://www.state.nj.us/mvc/pdf/business/irpqui1.pdf
 callToActionText: File My IRP
