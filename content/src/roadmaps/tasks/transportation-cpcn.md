@@ -3,7 +3,7 @@ summaryDescriptionMd: To provide transportation services, you need to file a
   Certificate of Public Convenience and Necessity.
 urlSlug: transportation-cpcn
 displayname: transportation-cpcn
-name: File Your Certificate of Public Convenience and Necessity
+name: File Your Certificate of Public Convenience and Necessity (CPCN)
 id: transportation-cpcn
 callToActionLink: https://www.nj.gov/mvc/pdf/business/cpcn.pdf
 callToActionText: File My Certificate
