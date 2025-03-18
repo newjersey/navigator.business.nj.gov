@@ -8,7 +8,7 @@ summaryDescriptionMd: >-
   &nbsp;
 
 
-  The IRP is a reciprocity agreement between all states in the U.S. and Canada, and allows legal operation between different states and jurisdictions.
+  The IRP is a reciprocity agreement between all states in the U.S. and Canada, and allows legal operation between jurisdictions.
 
 
   &nbsp;
