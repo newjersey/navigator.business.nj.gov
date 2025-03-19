@@ -1,3 +1,28 @@
+# [2025.8.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.7.0...v2025.8.0) (2025-03-19)
+
+
+### Bug Fixes
+
+* [[#0](https://github.com/newjersey/navigator.business.nj.gov/issues/0) | AB[#0](https://github.com/newjersey/navigator.business.nj.gov/issues/0)] disable flaky test ([f293d57](https://github.com/newjersey/navigator.business.nj.gov/commit/f293d57ed4faefb54cc6541f7c0f060f02f97fd1))
+* [[#188887754](https://github.com/newjersey/navigator.business.nj.gov/issues/188887754) | AB[#8670](https://github.com/newjersey/navigator.business.nj.gov/issues/8670)] Fix Anytime Actions Category Spelling ([08e6467](https://github.com/newjersey/navigator.business.nj.gov/commit/08e6467984f7466435e1c474c77a52190f61d831))
+* [[#188908973](https://github.com/newjersey/navigator.business.nj.gov/issues/188908973) | AB[#12673](https://github.com/newjersey/navigator.business.nj.gov/issues/12673)] convert email to lowercase for /self-reg and /users/emailCheck ([93770ce](https://github.com/newjersey/navigator.business.nj.gov/commit/93770ce961d67030731f4cf38fa353a3d48780cb))
+* [[#188924007](https://github.com/newjersey/navigator.business.nj.gov/issues/188924007) | AB[#12737](https://github.com/newjersey/navigator.business.nj.gov/issues/12737)] add space in Additional Provisions header ([9b41edb](https://github.com/newjersey/navigator.business.nj.gov/commit/9b41edbdfaf8a747580fabc71be12f1bc6b4f258))
+* [AB[#12799](https://github.com/newjersey/navigator.business.nj.gov/issues/12799)] fix user data migration ([aa01679](https://github.com/newjersey/navigator.business.nj.gov/commit/aa01679f1c2271d192b238f24c3da7adaf1195ee))
+* [AB[#13172](https://github.com/newjersey/navigator.business.nj.gov/issues/13172)] skip or update all flaky tests in CircleCI Insights ([275003f](https://github.com/newjersey/navigator.business.nj.gov/commit/275003f4a2fb1748d9c071fd5acefb2ac6c0bdd3))
+* [AB[#13379](https://github.com/newjersey/navigator.business.nj.gov/issues/13379)] resolve requestException in fetchAuthSession ([f475f19](https://github.com/newjersey/navigator.business.nj.gov/commit/f475f19f152688564b981daae4c3e67eb71c611a))
+* [AB[#4703](https://github.com/newjersey/navigator.business.nj.gov/issues/4703)] PR review comments fix ([eac4229](https://github.com/newjersey/navigator.business.nj.gov/commit/eac4229905babba1149ea0166fe53abc513c67fa))
+* **deps:** update dependency axios to v1.8.2 [security] ([0efb38c](https://github.com/newjersey/navigator.business.nj.gov/commit/0efb38c420898b3e9414fb75a11c9ad284a04fb6))
+* remove unintended whitespace from cannabis-license-tab1.json ([5b8e1da](https://github.com/newjersey/navigator.business.nj.gov/commit/5b8e1da4af69bb7b561dfa77503e9e2aac951cb2))
+
+
+### Features
+
+* [[#188595636](https://github.com/newjersey/navigator.business.nj.gov/issues/188595636) | AB[#4703](https://github.com/newjersey/navigator.business.nj.gov/issues/4703)] add tax clearance certificate screens ([be2dc99](https://github.com/newjersey/navigator.business.nj.gov/commit/be2dc999a5377804e741633e472f741d385fbb45))
+* [[#188887754](https://github.com/newjersey/navigator.business.nj.gov/issues/188887754) #AB8670] Update anytime action categories ([2b544e2](https://github.com/newjersey/navigator.business.nj.gov/commit/2b544e2dd4c4a29feed43ecca01810dfd4530d7b)), closes [#AB8670](https://github.com/newjersey/navigator.business.nj.gov/issues/AB8670)
+* [[#188887754](https://github.com/newjersey/navigator.business.nj.gov/issues/188887754) | AB[#8670](https://github.com/newjersey/navigator.business.nj.gov/issues/8670)] Alphabetize anytime actions dropdown category order ([7be461c](https://github.com/newjersey/navigator.business.nj.gov/commit/7be461c2cb91ee279cf23458fc350d4fe4330ad9))
+* [[#188887754](https://github.com/newjersey/navigator.business.nj.gov/issues/188887754) | AB[#8670](https://github.com/newjersey/navigator.business.nj.gov/issues/8670)] Remove duplicate close business task and the anytime action link category ([d56aa98](https://github.com/newjersey/navigator.business.nj.gov/commit/d56aa98d8ed6f07c17ca128ee2407167a849ec22))
+* [AB[#8670](https://github.com/newjersey/navigator.business.nj.gov/issues/8670)] Fix anytime actions that were not moved over ([e494375](https://github.com/newjersey/navigator.business.nj.gov/commit/e494375d06f18d1eb342e5635e686359549f8bfa))
+
 # [2025.7.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.6.0...v2025.7.0) (2025-03-10)
 
 
