@@ -1914,7 +1914,7 @@ export default {
 
     tax_calendar_banner_button: {
       click: {
-        show_tax_calendar_modal: () => {
+        show_tax_calendar: () => {
           eventRunner.track({
             event: "link_clicks",
             legacy_event_action: "click",
