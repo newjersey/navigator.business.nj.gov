@@ -1,13 +1,16 @@
 ---
-summaryDescriptionMd: To provide transportation services, you need to file a
-  Certificate of Public Convenience and Necessity.
+summaryDescriptionMd: To legally provide transportation services in New Jersey,
+  you need a Certificate of Public Convenience and Necessity. This document
+  certifies that your business vehicle(s) meet public needs and established
+  standards.
 urlSlug: transportation-cpcn
 displayname: transportation-cpcn
-name: File Your Certificate of Public Convenience and Necessity
+name: Get Your Certificate of Public Convenience and Necessity (CPCN)
 id: transportation-cpcn
 callToActionLink: https://www.nj.gov/mvc/pdf/business/cpcn.pdf
-callToActionText: File My Certificate
+callToActionText: Get My CPCN
 agencyId: nj-motor-vehicle
+agencyAdditionalContext: Inspection Services - Omnibus 2 Unit
 issuingAgency: New Jersey Motor Vehicle Commission
 ---
 
@@ -19,9 +22,31 @@ issuingAgency: New Jersey Motor Vehicle Commission
 - `Registered agent|registered-agent` name and contact information
 - Vehicle information (year, make, model, etc.)
 
+Complete the Omnibus 2 Vehicle Fleet Summary Form and mail it to:
+
+&nbsp;
+
+New Jersey Motor Vehicle Commission
+&nbsp;
+
+Inspection Services - Omnibus 2 Unit
+&nbsp;
+
+225 East State Street
+&nbsp;
+
+PO Box 680
+&nbsp;
+
+Trenton, NJ 08666
+
+&nbsp;
+
+Please allow 2 weeks for processing. Applicants will receive their certificate by mail.
+
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A Certificate of Public Convenience and Necessity mailed to you.
+A Certificate of Public Convenience and Necessity (CPCN) mailed to you.
 
 :::
 **Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov
