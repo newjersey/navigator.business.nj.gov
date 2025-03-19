@@ -14,13 +14,16 @@
 // ***********************************************************
 /// <reference types="cypress" />
 
+import seedrandom from "seedrandom";
 import "./commands";
 import { LighthouseConfig, LighthouseThresholds, Pa11yThresholds } from "./types";
 
 export const testUserEmail = Cypress.env("TEST_USER_EMAIL");
 export const testUserPassword = Cypress.env("TEST_USER_PASSWORD");
 
-beforeEach(function () {
+const testRandomSeeds = new Map();
+
+const isRelevantSuite = () => {
   let testSuite = Cypress.env("SUITE");
   if (!testSuite) {
     testSuite = "all";
@@ -28,8 +31,37 @@ beforeEach(function () {
 
   const testName = Cypress.mocha.getRunner().test.fullTitle();
   testSuite = `[${testSuite}]`;
-  if (!testName.includes(testSuite)) {
+  return testName.includes(testSuite);
+};
+
+beforeEach(function () {
+  if (!isRelevantSuite()) {
     this.skip();
+  }
+
+  const testName = Cypress.mocha.getRunner().test.fullTitle();
+  // Cypress test will rerun on the CI if they fail, resulting in multiple runs for the same test with the same name.
+  // Reusing the same seed for reruns thus allows us to better discover breaking edge cases. Unlike in unit tests,
+  // where we error on duplicate test name.
+  const randomSeed =
+    Cypress.env("RANDOM_SEED") || testRandomSeeds.get(testName) || Math.random().toString(36).slice(2);
+  testRandomSeeds.set(testName, randomSeed);
+  seedrandom(randomSeed, { global: true });
+});
+
+afterEach(function () {
+  if (!isRelevantSuite()) {
+    this.skip();
+  }
+
+  if (this.currentTest?.state === "failed") {
+    const testName = Cypress.mocha.getRunner().test.fullTitle();
+    cy.task(
+      "log",
+      `Failed ${testName}. Replicate Math.random() values by running with CYPRESS_RANDOM_SEED=${testRandomSeeds.get(
+        testName
+      )}`
+    );
   }
 });
 
