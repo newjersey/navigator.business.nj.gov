@@ -22,15 +22,13 @@ At the top of the application, write: 'To reinstate a registered appraisal manag
 
 :::
 
-## Application Requirements 
+## Application Requirements
 
 *  `Federal tax ID number or federal employer ID number (EIN)|federal-tax-id` 
 * Prior AMC registration number
 * Name and contact information of the `compliance officer|compliance-officer` 
 * License number of the controlling person
 * The name and contact information for each `controlling person|controlling-person` 
-
-
 * An updated `surety bond|surety-bond` 
 * The completed Certification and Authorization form for an updated criminal history background check for each controlling person (included in application)
 * Disciplinary actions of controlling person, owners, or compliance officers, if applicable
@@ -38,3 +36,15 @@ At the top of the application, write: 'To reinstate a registered appraisal manag
 * Disciplinary actions of the AMC, if applicable
 *  `Registered agent|registered-agent` information, if applicable
 * Applicable fees paid
+
+:::callout{ showHeader="true" headerText="What if I don't reinstate my registration?" showIcon="false" calloutType="warning" }
+
+Your real estate appraisal management company cannot operate in New Jersey. Offering these services without a valid registration may result in fines and other legal consequences.
+
+:::
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+
+The same 12-digit appraisal management company registration number.
+
+:::
