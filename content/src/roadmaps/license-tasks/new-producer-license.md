@@ -11,7 +11,7 @@ summaryDescriptionMd: >+
 
 industryId:
   - retail
-callToActionText: Apply for My New Business Producer License
+callToActionText: Apply for My Business Producer License
 callToActionLink: https://nipr.com/licensing-center/apply
 agencyId: nj-banking-insurance
 divisionPhone: " 609-292-7272"
