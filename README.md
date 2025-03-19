@@ -95,11 +95,14 @@ Before you can run locally, you will need to:
 
 ### Run tests
 
-We use Jest for our TypeScript-based unit tests across our projects. Run all
-tests with:
+We use Jest for our TypeScript-based unit tests across our projects.
 
 ```shell
+# Run all unit tests
 yarn test
+
+# Run a single unit test or file, rerunning if files change
+yarn test <path to test file> -t "<part of test name>" --watch
 ```
 
 We use Cypress for end-to-end (e2e) testing. You can run these tests locally
@@ -108,6 +111,16 @@ running a local instance of the application to test against.
 
 ```shell
 ./scripts/local-feature-tests.sh
+```
+
+Both unit and Cypress tests utilize random values in test setup. Should a test
+fail, the random values used can be reproduced by finding the log output line
+containing `RANDOM_SEED=`/`CYPRESS_RANDOM_SEED=` for the test that failed. Then,
+run the test with the indicated environment variable, as in:
+
+```shell
+RANDOM_SEED=<random seed from failure log> yarn test <path to test file> -t "<part of test name>"
+CYPRESS_RANDOM_SEED=<random seed from failure log> ./scripts/local-feature-tests.sh
 ```
 
 To run all tests with code coverage:
