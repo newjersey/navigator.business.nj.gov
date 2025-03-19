@@ -45,7 +45,8 @@
   ],
   "name": "Construction",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "business-vehicle-title-reg"
   ],
   "displayname": "commercial-construction",
   "industryOnboardingQuestions": {

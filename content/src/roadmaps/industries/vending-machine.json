@@ -1,12 +1,7 @@
 {
-  "displayname": "vending-machine",
   "naicsCodes": "445132, 454210",
   "defaultSectorId": "accommodation-and-food-services",
-  "industryOnboardingQuestions": {
-    "canBeReseller": true
-  },
   "canHavePermanentLocation": false,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -54,6 +49,14 @@
     }
   ],
   "name": "Vending Machine",
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "business-vehicle-title-reg"
+  ],
+  "displayname": "vending-machine",
+  "industryOnboardingQuestions": {
+    "canBeReseller": true
+  },
   "isEnabled": true,
   "additionalSearchTerms": "vending machine service, vending machine business, snack machine, vending machine operator",
   "id": "vending-machine",

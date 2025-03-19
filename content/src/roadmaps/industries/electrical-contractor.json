@@ -51,7 +51,8 @@
   ],
   "name": "Electrical Contractor",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "business-vehicle-title-reg"
   ],
   "displayname": "electrical-contractor",
   "industryOnboardingQuestions": {

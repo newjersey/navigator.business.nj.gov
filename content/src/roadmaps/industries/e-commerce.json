@@ -52,7 +52,8 @@
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "cigarette-manufacture-sell",
-    "other-businesses-CRTK-survey"
+    "other-businesses-CRTK-survey",
+    "business-vehicle-title-reg"
   ],
   "displayname": "e-commerce",
   "industryOnboardingQuestions": {

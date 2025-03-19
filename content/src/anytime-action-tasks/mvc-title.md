@@ -2,18 +2,9 @@
 id: mvc-title
 name: Get a Title for Your Business Vehicle(s)
 category:
-  - Only Show in Subtask
-industryIds:
-  - auto-body-repair
-  - car-service
-  - car-rental
-  - food-truck
-  - logistics
-  - moving-company
-  - school-bus
-  - non-medical-transport
-  - freight-forwarding
-  - trucking
+  - Purchase New Products or Equipment
+applyToAllUsers: false
+industryIds: []
 sectorIds:
   - transportation-and-warehousing
   - utilities
@@ -23,6 +14,23 @@ sectorIds:
   - construction
   - manufacturing
   - mining-quarrying-and-oil-and-gas-extraction
+  - administrative-and-employment-services
+  - cannabis
+  - digital-and-print-media
+  - educational-services
+  - arts-entertainment-and-recreation
+  - clean-energy
+  - finance-and-insurance
+  - health-care-and-social-assistance
+  - life-sciences
+  - offshore-wind
+  - organizational-or-financial-management
+  - other-services
+  - professional-scientific-and-technical-services
+  - real-estate
+  - retail-trade-and-ecommerce
+  - technology
+  - wholesale-trade
 urlSlug: mvc-title
 summaryDescriptionMd: >-
   :::infoAlert
@@ -64,12 +72,12 @@ callToActionLink: https://www.nj.gov/mvc/vehicles/titlenew.htm
 For vehicles, you will need:
 
 * Motor Vehicle Commission `(MVC) Entity Identification Number (EIN)|mvc-entity-id`
-* Proof of ownership, such as a Manufacturer’s Certificate of Origin (MCO)
+* Proof of ownership, such as a `Manufacturer’s Certificate of Origin (MCO)|manufacturers-cert-of-origin`
 * [Universal Title Application (Form OS/SS-UTA)](https://www.nj.gov/mvc/pdf/vehicles/OS-SS-UTA.pdf)
 * Proof of Identity, such as a valid driver’s license or other government-issued photo identification
 * Lienholder information if adding or removing a lien from a title
 * Odometer disclosure statement if the vehicle is less than 10 years old
-* Notarized power of attorney if acting on behalf of the business owner
+* Notarized `Power of Attorney (POA)|power-of-attorney` if acting on behalf of the business owner
 * Proof of sales tax payment or exemption
 * Bill of sale if the vehicle was purchased from a private seller
 * Proof of address to confirm New Jersey residency
@@ -86,8 +94,6 @@ For vessels, you will need:
  You must apply for a title in person. Complete the appropriate form(s) and take them to any NJ MVC vehicle center (or complete the forms on site). Be sure to [make an appointment online](https://telegov.njportal.com/njmvc/AppointmentWizard/8) before showing up.
 :::
 
-**Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov
-
 :::callout{ showHeader="true" headerText="What if I don't get a title?" showIcon="false" calloutType="warning" }
 If you operate a vehicle or vessel under an individual's name for business purposes, you may be subject to vehicle impoundment, fines, or eligibility issues with your insurance.
 :::
@@ -95,3 +101,5 @@ If you operate a vehicle or vessel under an individual's name for business purpo
 :::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
 A Certificate of Title showing business ownership of the vehicles or vessels intended for business use.
 :::
+
+**Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov

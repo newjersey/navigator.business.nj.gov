@@ -49,7 +49,9 @@
     }
   ],
   "name": "Employment Agency",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "employment-agency",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

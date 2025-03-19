@@ -44,7 +44,10 @@
     }
   ],
   "name": "Real Estate Investing",
-  "nonEssentialQuestionsIds": ["multiple-dwelling-register"],
+  "nonEssentialQuestionsIds": [
+    "multiple-dwelling-register",
+    "business-vehicle-title-reg"
+  ],
   "displayname": "real-estate-investor",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

@@ -50,9 +50,16 @@
     },
     {
       "step": 3,
-      "weight": 18,
-      "licenseTask": "car-rental-vehicle-registration",
+      "weight": 17,
+      "task": "mvc-title-task",
       "required": true
+    },
+    {
+      "step": 3,
+      "weight": 18,
+      "licenseTask": "",
+      "required": true,
+      "task": "mvc-registration-task"
     },
     {
       "step": 4,

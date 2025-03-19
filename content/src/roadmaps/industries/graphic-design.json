@@ -44,7 +44,9 @@
     }
   ],
   "name": "Graphic Design",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "graphic-design",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

@@ -16,6 +16,18 @@
     },
     {
       "step": 3,
+      "weight": 21,
+      "task": "mvc-title-task",
+      "required": true
+    },
+    {
+      "step": 3,
+      "task": "mvc-registration-task",
+      "weight": 22,
+      "required": true
+    },
+    {
+      "step": 3,
       "weight": 25,
       "task": "transportation-inspection",
       "required": true

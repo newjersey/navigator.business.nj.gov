@@ -48,7 +48,8 @@
     "hotel-register",
     "rooming-boarding-house-owner",
     "hotel-food",
-    "hotel-liquor"
+    "hotel-liquor",
+    "business-vehicle-title-reg"
   ],
   "displayname": "lodging",
   "industryOnboardingQuestions": {

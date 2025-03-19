@@ -56,7 +56,9 @@
     }
   ],
   "name": "Security",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "security",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

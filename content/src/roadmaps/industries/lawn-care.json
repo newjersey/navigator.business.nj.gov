@@ -41,7 +41,9 @@
   "name": "Lawn Care",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "lawn-businesses-CRTK-survey"
+    "lawn-businesses-CRTK-survey",
+    "business-vehicle-title-reg",
+    "pesticides-applicator-licensing"
   ],
   "displayname": "lawn-care",
   "industryOnboardingQuestions": {

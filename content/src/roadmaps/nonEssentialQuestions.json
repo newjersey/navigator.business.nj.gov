@@ -129,6 +129,26 @@
       "id": "pest-pesticide-dealer-licensing",
       "questionText": "Will your business be selling pesticides? ",
       "addOn": "pest-pesticide-dealer-license"
+    },
+    {
+      "id": "business-vehicle-title-reg",
+      "addOn": "business-vehicle",
+      "questionText": "Do you plan to either own or operate business vehicles in NJ? "
+    },
+    {
+      "id": "dental-hygienist",
+      "questionText": "Are you a dental hygienist?",
+      "addOn": "healthcare-dental-hygienist"
+    },
+    {
+      "id": "retail-pesticide-dealer-licensing",
+      "questionText": "Will your business be selling pesticides? ",
+      "addOn": "retail-pesticide-dealer-license"
+    },
+    {
+      "id": "pesticides-applicator-licensing",
+      "questionText": "Will your business be using pesticides or offering pesticide application services? \n",
+      "addOn": "multi-pest-applicator-license"
     }
   ]
 }

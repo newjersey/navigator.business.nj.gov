@@ -52,7 +52,8 @@
   "name": "Engineering",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "planning-services"
+    "planning-services",
+    "business-vehicle-title-reg"
   ],
   "displayname": "engineering",
   "industryOnboardingQuestions": {

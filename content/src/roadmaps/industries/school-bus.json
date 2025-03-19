@@ -38,10 +38,29 @@
       "task": "bank-account"
     },
     {
-      "weight": 15,
       "step": 3,
-      "licenseTask": "school-bus-license",
+      "weight": 13,
+      "task": "transportation-entity-id",
       "required": true
+    },
+    {
+      "step": 3,
+      "weight": 14,
+      "task": "mvc-title-task",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "mvc-registration-task",
+      "required": true
+    },
+    {
+      "weight": 16,
+      "step": 3,
+      "licenseTask": "",
+      "required": true,
+      "task": "trucking-cdl"
     },
     {
       "step": 3,
@@ -59,12 +78,6 @@
       "step": 4,
       "weight": 10,
       "task": "trucking-parking"
-    },
-    {
-      "step": 3,
-      "weight": 13,
-      "task": "transportation-entity-id",
-      "required": true
     },
     {
       "step": 4,

@@ -49,7 +49,10 @@
     }
   ],
   "name": "Residential Landlord",
-  "nonEssentialQuestionsIds": ["multiple-dwelling-register"],
+  "nonEssentialQuestionsIds": [
+    "multiple-dwelling-register",
+    "business-vehicle-title-reg"
+  ],
   "displayname": "residential-landlord",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
