@@ -6113,6 +6113,8 @@ collections:
                   - { label: Header Text, name: headerText, widget: string }
                   - { label: Subheader Text, name: subHeaderText, widget: string }
                   - { label: Button Text, name: buttonText, widget: string }
+                  - { label: Logo link, name: logoLink, widget: string }
+                  - { label: Logo Aria Text, name: logoAriaText, widget: string }
 
   - name: "contextual-information"
     label: "Contextual Information"
