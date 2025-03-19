@@ -223,4 +223,68 @@ describe("njeda fundings onboarding", () => {
       Node.DOCUMENT_POSITION_PRECEDING
     );
   });
+
+  it("displays alert when no fundings provided", async () => {
+    const user = userEvent.setup();
+    const profileData = generateProfileData({ sectorId: "" });
+    const business = generateBusiness({ profileData: profileData });
+    const fundings: Funding[] = [];
+    renderStatefulFundingsPageComponent(business, fundings);
+
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "2");
+
+    await waitFor(() => {
+      selectByValue("Sector", "cannabis");
+    });
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.saveButtonText));
+
+    expect(screen.getByTestId("alert-no-results")).toBeInTheDocument();
+  });
+
+  it("filters out all njeda fundings for cannabis sector and displays alert", async () => {
+    const user = userEvent.setup();
+    const profileData = generateProfileData({ sectorId: "" });
+    const business = generateBusiness({ profileData: profileData });
+    const fundings = [
+      generateFunding({
+        isNonprofitOnly: false,
+        sector: ["clean-energy"],
+        employeesRequired: "n/a",
+        county: ["All"],
+        homeBased: "yes",
+        publishStageArchive: null,
+        dueDate: undefined,
+        status: "rolling application",
+        certifications: null,
+        agency: ["njeda"],
+        name: "funding-1",
+      }),
+      generateFunding({
+        isNonprofitOnly: false,
+        sector: ["cannabis"],
+        employeesRequired: "n/a",
+        county: ["All"],
+        homeBased: "yes",
+        publishStageArchive: null,
+        dueDate: undefined,
+        status: "rolling application",
+        certifications: null,
+        agency: ["njeda"],
+        name: "funding-2",
+      }),
+    ];
+    renderStatefulFundingsPageComponent(business, fundings);
+
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "2");
+
+    await waitFor(() => {
+      selectByValue("Sector", "cannabis");
+    });
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.saveButtonText));
+
+    expect(screen.queryByTestId(`${fundings[0].id}-button`)).not.toBeInTheDocument();
+    expect(screen.getByTestId("alert-no-results")).toBeInTheDocument();
+  });
 });

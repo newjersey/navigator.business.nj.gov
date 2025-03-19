@@ -6115,6 +6115,11 @@ collections:
                   - { label: Button Text, name: buttonText, widget: string }
                   - { label: Logo link, name: logoLink, widget: string }
                   - { label: Logo Aria Text, name: logoAriaText, widget: string }
+              - label: "Page"
+                name: "page"
+                widget: object
+                fields:
+                  - { label: No Results Found Alert Text, name: noResultsFoundAlertText, widget: string }
 
   - name: "contextual-information"
     label: "Contextual Information"
