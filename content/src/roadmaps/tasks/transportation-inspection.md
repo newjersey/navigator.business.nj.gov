@@ -3,7 +3,9 @@ summaryDescriptionMd: >-
   
 
   :::infoAlert
-   Inspection decals must be displayed on your vehicle to avoid fines.
+
+  Commercial busses must be inspected twice a year.
+
   :::
 
 
@@ -27,7 +29,7 @@ issuingAgency: New Jersey Motor Vehicle Commission Bus Inspection Unit
 - Copy of the vehicle title
 - Vehicle information (year, make, model, etc.)
 
-Please complete the Application for Commercial Bus Operation and email all required documentation to CBIU@mvc.nj.gov or mail to:
+Complete the Application for Commercial Bus Operation and email all required documentation to CBIU@mvc.nj.gov or mail to:
 
 &nbsp;
 
