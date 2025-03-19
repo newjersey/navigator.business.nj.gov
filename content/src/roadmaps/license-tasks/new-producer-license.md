@@ -46,4 +46,4 @@ You cannot legally sell, solicit or negotiate insurance products. The business m
 
 :::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
 
-A Business Entity Producer License with a unique number valid for two years.
+A business entity producer license with a unique number valid for two years.
