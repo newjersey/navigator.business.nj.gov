@@ -35,7 +35,6 @@ sector:
   - technology
   - transportation-and-warehousing
   - manufacturing
-  - offshore-wind
   - finance-and-insurance
   - professional-scientific-and-technical-services
   - digital-and-print-media

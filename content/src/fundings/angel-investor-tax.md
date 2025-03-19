@@ -36,7 +36,6 @@ sector:
   - life-sciences
   - clean-energy
   - manufacturing
-  - offshore-wind
 publishStageArchive: ""
 minEmployeesRequired: 1
 maxEmployeesRequired: 225

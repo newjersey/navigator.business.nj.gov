@@ -36,7 +36,6 @@ sector:
   - life-sciences
   - technology
   - manufacturing
-  - offshore-wind
   - finance-and-insurance
   - professional-scientific-and-technical-services
 publishStageArchive: ""
