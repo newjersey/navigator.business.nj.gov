@@ -23,6 +23,9 @@
       "buttonText": "See More Funding & Resources",
       "logoLink": "https://www.njeda.gov/",
       "logoAriaText": "Visit NJEDA home"
+    },
+    "page": {
+      "noResultsFoundAlertText": "We couldn’t find NJEDA programs matching your criteria, but you may still be eligible for others. Explore more funding options at [Business.NJ.gov](https://business.nj.gov/funding)."
     }
   }
 }
