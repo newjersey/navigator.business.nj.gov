@@ -40,11 +40,11 @@ const AccountSetupPage = (): ReactElement => {
 
   useEffect(() => {
     (async (): Promise<void> => {
-      if (state.isAuthenticated === IsAuthenticated.TRUE) {
+      if (state.isAuthenticated === IsAuthenticated.TRUE && userData?.user.id !== userData?.user.email) {
         router?.isReady && (await router.replace(ROUTES.dashboard));
       }
     })();
-  }, [state.isAuthenticated, router]);
+  }, [state.isAuthenticated, router, userData?.user.id, userData?.user.email]);
 
   const {
     FormFuncWrapper,

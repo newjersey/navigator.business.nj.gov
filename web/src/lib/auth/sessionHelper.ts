@@ -113,7 +113,6 @@ export const getSignedS3Link = async (value: string, expires?: number): Promise<
 };
 
 export const getCurrentToken = async (): Promise<JWT> => {
-  // debugger;
   const session = await fetchAuthSession({ forceRefresh: true });
   if (!session.tokens || !session.tokens.idToken) {
     throw new Error("Unable to retrieve access token. Ensure the session is valid.");
@@ -122,7 +121,6 @@ export const getCurrentToken = async (): Promise<JWT> => {
 };
 
 export const getActiveUser = async (): Promise<ActiveUser> => {
-  // debugger;
   configureAmplify();
   const cognitoSession = await getCurrentToken();
   const cognitoPayload = cognitoSession.payload as CognitoIdPayload;
