@@ -94,7 +94,7 @@ describe("SigninHelper", () => {
 
     it("sets registration status to IN_PROGRESS", async () => {
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister({
+      onSelfRegister({
         router: fakeRouter,
         updateQueue,
         userData,
@@ -111,7 +111,7 @@ describe("SigninHelper", () => {
       updateQueue = new UpdateQueueFactory(userData, update);
 
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister({
+      onSelfRegister({
         router: fakeRouter,
         updateQueue,
         userData,
@@ -141,7 +141,7 @@ describe("SigninHelper", () => {
       updateQueue = new UpdateQueueFactory(userData, update);
 
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister({
+      onSelfRegister({
         router: fakeRouter,
         updateQueue,
         userData,
@@ -169,7 +169,7 @@ describe("SigninHelper", () => {
       userData = generateUserDataForBusiness(business);
       updateQueue = new UpdateQueueFactory(userData, update);
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister({
+      onSelfRegister({
         router: fakeRouter,
         updateQueue,
         userData,
@@ -195,7 +195,7 @@ describe("SigninHelper", () => {
         userData: returnedUserData,
         authRedirectURL: "/some-url",
       });
-      await onSelfRegister({
+      onSelfRegister({
         router: fakeRouter,
         updateQueue,
         userData,
@@ -209,7 +209,7 @@ describe("SigninHelper", () => {
 
     it("sets alert to DUPLICATE_ERROR on 409 response code", async () => {
       mockApi.postSelfReg.mockRejectedValue(409);
-      await onSelfRegister({
+      onSelfRegister({
         router: fakeRouter,
         updateQueue,
         userData,
@@ -224,7 +224,7 @@ describe("SigninHelper", () => {
 
     it("sets alert to RESPONSE_ERROR on generic error", async () => {
       mockApi.postSelfReg.mockRejectedValue(500);
-      await onSelfRegister({
+      onSelfRegister({
         router: fakeRouter,
         updateQueue,
         userData,
@@ -353,6 +353,41 @@ describe("SigninHelper", () => {
       });
       await onGuestSignIn({ push: mockPush, pathname: ROUTES.welcome, dispatch: mockDispatch });
       expect(mockPush).not.toHaveBeenCalledWith(ROUTES.landing);
+    });
+
+    it("redirects user to /account-setup from /login when onboarding has been completed", async () => {
+      const userData = generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: "COMPLETED" }));
+      mockGetCurrentUserData.mockImplementation(() => {
+        return userData;
+      });
+      mockSession.getActiveUser.mockImplementation(() => {
+        throw new Error("New");
+      });
+      await onGuestSignIn({ push: mockPush, pathname: ROUTES.login, dispatch: mockDispatch });
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.accountSetup);
+    });
+
+    it("redirects user to /onboarding from /login when onboarding has not been completed", async () => {
+      const userData = generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: "UNSTARTED" }));
+      mockGetCurrentUserData.mockImplementation(() => {
+        return userData;
+      });
+      mockSession.getActiveUser.mockImplementation(() => {
+        throw new Error("New");
+      });
+      await onGuestSignIn({ push: mockPush, pathname: ROUTES.login, dispatch: mockDispatch });
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
+    });
+
+    it("redirects user to /onboarding from /login when userData is undefined", async () => {
+      mockGetCurrentUserData.mockImplementation(() => {
+        return undefined;
+      });
+      mockSession.getActiveUser.mockImplementation(() => {
+        throw new Error("New");
+      });
+      await onGuestSignIn({ push: mockPush, pathname: ROUTES.login, dispatch: mockDispatch });
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
     });
   });
 

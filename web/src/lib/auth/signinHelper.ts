@@ -131,6 +131,9 @@ export const onGuestSignIn = async ({
     if (getCurrentBusiness(userData).onboardingFormProgress === "UNSTARTED") {
       setRegistrationDimension("Began Onboarding");
       push(ROUTES.onboarding);
+    } else if (pathname === ROUTES.login) {
+      setRegistrationDimension("Onboarded Guest");
+      push(ROUTES.accountSetup);
     } else {
       setRegistrationDimension("Onboarded Guest");
     }
