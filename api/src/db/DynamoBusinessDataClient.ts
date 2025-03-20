@@ -1,4 +1,10 @@
-import { AttributeValue, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  AttributeValue,
+  BatchWriteItemCommand,
+  QueryCommand,
+  QueryCommandInput,
+} from "@aws-sdk/client-dynamodb";
 import { DeleteCommand, DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
 import { BusinessesDataClient } from "@domain/types";
@@ -144,6 +150,47 @@ export const DynamoBusinessDataClient = (
         throw new Error("Failed to delete business");
       });
   };
+
+  const batchWriteToTable = async (chunkedItems: Business[]): Promise<void> => {
+    await batchWrite(db, tableName, chunkedItems, logger);
+  };
+
+  const batchWrite = async (
+    db: DynamoDBDocumentClient,
+    tableName: string,
+    chunkedItems: any[],
+    logger: LogWriterType
+  ): Promise<void> => {
+    logger.LogInfo(`Received ${chunkedItems.length} items for batch write to ${tableName}`);
+
+    const validItems = chunkedItems.filter((item) => item !== null);
+
+    if (validItems.length === 0) {
+      logger.LogError("No valid items to batch write.");
+      return;
+    }
+    const requestItems = validItems.map((item) => ({
+      PutRequest: {
+        Item: item,
+      },
+    }));
+
+    try {
+      const params = {
+        RequestItems: {
+          [tableName]: requestItems,
+        },
+      };
+
+      logger.LogInfo(`Batch write started for table ${tableName} with ${chunkedItems.length} valid items`);
+      await db.send(new BatchWriteItemCommand(params));
+      logger.LogInfo(`Batch write successful for table ${tableName}`);
+    } catch (error) {
+      logger.LogError(`Batch write failed for table ${tableName} - Error: ${error}`);
+      throw new Error("Batch write failed");
+    }
+  };
+
   return {
     get,
     put,
@@ -153,5 +200,6 @@ export const DynamoBusinessDataClient = (
     findAllByIndustry,
     findAllByNAICSCode,
     findAllByBusinessName,
+    batchWriteToTable,
   };
 };

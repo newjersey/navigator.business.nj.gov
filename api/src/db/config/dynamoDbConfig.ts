@@ -1,5 +1,6 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+
 export const marshallOptions = {
   // Whether to automatically convert empty strings, blobs, and sets to `null`.
   convertEmptyValues: false, // false, by default.
@@ -43,3 +44,6 @@ export const createDynamoDbClient = (
 
   return dynamoDb;
 };
+
+export const BATCH_SIZE = 25;
+export const CONCURRENCY_LIMIT = 5;

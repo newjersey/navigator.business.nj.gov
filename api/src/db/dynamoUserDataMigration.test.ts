@@ -5,7 +5,8 @@
 
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
-import { dynamoDbTranslateConfig, DynamoUserDataClient } from "@db/DynamoUserDataClient";
+import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
+import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
 import { UserDataClient } from "@domain/types";
 import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
 import * as sharedUserData from "@shared/userData";

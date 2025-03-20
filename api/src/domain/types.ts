@@ -39,6 +39,7 @@ export interface UserDataClient {
     latestVersion: number,
     nextToken?: string
   ) => Promise<{ usersToMigrate: UserData[]; nextToken?: string }>;
+  batchWriteToTable: (chunkedItems: UserData[]) => Promise<void>;
 }
 
 export interface BusinessesDataClient {
@@ -50,6 +51,7 @@ export interface BusinessesDataClient {
   findAllByIndustry: (industry: string) => Promise<Business[]>;
   findAllByBusinessName: (businessName: string) => Promise<Business[]>;
   findByEncryptedTaxId: (encryptedTaxId: string) => Promise<Business | undefined>;
+  batchWriteToTable: (chunkedItems: Business[]) => Promise<void>;
 }
 
 export interface BusinessNameClient {

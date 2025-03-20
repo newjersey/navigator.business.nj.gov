@@ -158,7 +158,7 @@ import { migrate_v154_to_v155 } from "@db/migrations/v155_add_user_id_and_versio
 import { migrate_v155_to_v156 } from "@db/migrations/v156_remove_in_progress_task_status";
 import { migrate_v156_to_v157 } from "@db/migrations/v157_add_tax_clearance_data";
 import { migrate_v157_to_v158 } from "@db/migrations/v158_login_email_to_lowercase";
-
+import { migrate_v158_to_v159 } from "@db/migrations/v159_migrate_testing_to_latest";
 export type MigrationFunction = (data: any) => any;
 
 export const Migrations: MigrationFunction[] = [
@@ -320,6 +320,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v155_to_v156,
   migrate_v156_to_v157,
   migrate_v157_to_v158,
+  migrate_v158_to_v159,
 ];
 
-export { generatev158UserData as CURRENT_GENERATOR } from "@db/migrations/v158_login_email_to_lowercase";
+export { generatev159UserData as CURRENT_GENERATOR } from "@db/migrations/v159_migrate_testing_to_latest";
