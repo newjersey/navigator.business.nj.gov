@@ -34,7 +34,7 @@ divisionPhone: " 609-292-7272"
 * FINRA Firm Central Registration Depository (CRD) number, if applicable
 * Designated responsible licensed producers name, Social Security number, and National Producer Number (NPN)
 * Name, Social Security number, and title of all officers, partners, directors, and owners with at least 10% ownership of the business entity
-* Completed background questionaire and documentation, if applicable
+* Completed background questionnaire and documentation, if applicable
 * Proof that every officer, partner, director, and owner with 10% or more ownership has passed the [criminal background checks](https://www.nj.gov/dobi/insliced/livescan.htm) **(only for NJ resident applicants)**
 * Applicable fees paid
 
