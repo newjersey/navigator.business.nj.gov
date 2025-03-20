@@ -99,19 +99,25 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
       });
       await updateQueue?.update();
       setShouldCloseModal(true);
-      setFilteredFundings(
-        sortFundingsForUser(
-          filterFundings({ fundings: filteredFundings, business: updateQueue?.currentBusiness() }).filter(
-            (it) => {
-              return it.agency?.includes("njeda");
-            }
-          ),
-          updateQueue?.current()
-        )
-      );
+      setFilteredFundings(getFilteredAndSortedFundings());
     } else {
       setShouldShowErrorAlert(true);
     }
+  };
+
+  const getFilteredAndSortedFundings = (): Funding[] => {
+    if (updateQueue?.currentBusiness().profileData.sectorId === "cannabis") {
+      return [];
+    }
+
+    return sortFundingsForUser(
+      filterFundings({ fundings: filteredFundings, business: updateQueue?.currentBusiness() }).filter(
+        (it) => {
+          return it.agency?.includes("njeda");
+        }
+      ),
+      updateQueue?.current()
+    );
   };
 
   const shouldShowEmployeeCountError = (): boolean => {
@@ -298,6 +304,11 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
             </div>
           </ModalOneButton>
           <FundingsHeader />
+          {filteredFundings.length === 0 && (
+            <Alert variant={"info"} dataTestid={"alert-no-results"}>
+              <Content>{Config.fundingsOnboardingModal.page.noResultsFoundAlertText}</Content>
+            </Alert>
+          )}
           {filteredFundings.map((funding, index) => {
             return fundingEntry(funding, index === 0);
           })}
