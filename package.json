@@ -78,6 +78,7 @@
     "lodash": "4.17.21",
     "next": "15.2.3",
     "next-seo": "6.6.0",
+    "p-limit": "6.2.0",
     "react": "18.2.0",
     "react-clamp-lines": "3.0.3",
     "react-dom": "18.2.0",

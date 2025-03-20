@@ -2,11 +2,10 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
 import { DynamoBusinessDataClient } from "@db/DynamoBusinessDataClient";
+import { DynamoDataClient } from "@db/DynamoDataClient";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import { BusinessesDataClient, DatabaseClient, UserDataClient } from "@domain/types";
 import { DummyLogWriter, LogWriterType } from "@libs/logWriter";
-
-import { DynamoDataClient } from "@db/DynamoDataClient";
 
 import { randomInt } from "@shared/intHelpers";
 import {
@@ -25,6 +24,12 @@ const dbConfig = {
 
 const usersDbConfig = {
   tableName: "users-table-test",
+};
+
+type MockedLimitFunction<T> = (fn: () => Promise<T>) => Promise<T>;
+
+const mockLimitFunction: MockedLimitFunction<UserData> = async (fn) => {
+  return fn();
 };
 
 describe("User and Business Migration with DynamoDataClient", () => {
@@ -77,11 +82,16 @@ describe("User and Business Migration with DynamoDataClient", () => {
     dynamoUsersDataClient = DynamoUserDataClient(client, usersDbConfig.tableName, logger);
 
     dynamoDataClient = DynamoDataClient(dynamoUsersDataClient, dynamoBusinessesDataClient, logger);
-    (dynamoBusinessesDataClient.put as jest.Mock) = jest.fn();
-    (dynamoUsersDataClient.put as jest.Mock) = jest.fn();
+
+    (dynamoBusinessesDataClient.batchWriteToTable as jest.Mock) = jest.fn();
+    (dynamoUsersDataClient.batchWriteToTable as jest.Mock) = jest.fn();
 
     mockLogger();
-    jest.spyOn(dynamoBusinessesDataClient, "put").mockResolvedValue(userData.businesses[userData.user.id]);
+
+    jest.mock("p-limit", () => {
+      return jest.fn(() => mockLimitFunction);
+    });
+
     jest.spyOn(dynamoUsersDataClient, "getUsersWithOutdatedVersion").mockResolvedValue({
       usersToMigrate: [userData],
       nextToken: undefined,
@@ -90,36 +100,11 @@ describe("User and Business Migration with DynamoDataClient", () => {
 
   it("should migrate data correctly", async () => {
     const result = await dynamoDataClient.migrateOutdatedVersionUsers();
-
     expect(result.success).toBe(true);
     expect(result.migratedCount).toBeGreaterThan(0);
-    expect(dynamoBusinessesDataClient.put).toHaveBeenCalledTimes(1);
-    const businessId = userData.businesses[userData.currentBusinessId].id;
-    expect(dynamoBusinessesDataClient.put).toHaveBeenCalledWith(expect.objectContaining({ id: businessId }));
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Processed user ${userData.user.id} in the user data table`)
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Updated business ${businessId} for user ${userData.user.id}`)
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Processed business with ID ${businessId} for user ${userData.user.id}`)
-    );
+    expect(dynamoUsersDataClient.batchWriteToTable).toHaveBeenCalledTimes(1);
+    expect(dynamoBusinessesDataClient.batchWriteToTable).toHaveBeenCalledTimes(1);
     expect(logger.LogInfo).toHaveBeenCalledWith(expect.stringContaining("Migration complete"));
-  });
-
-  it("should log an error when no businesses are found for a user", async () => {
-    userData.businesses = {};
-
-    jest.spyOn(dynamoUsersDataClient, "getUsersWithOutdatedVersion").mockResolvedValueOnce({
-      usersToMigrate: [userData],
-      nextToken: undefined,
-    });
-
-    await dynamoDataClient.migrateOutdatedVersionUsers();
-
-    expect(logger.LogInfo).toHaveBeenCalledWith(`No businesses found for user ${userData.user.id}`);
-    expect(dynamoBusinessesDataClient.put).not.toHaveBeenCalled();
   });
 
   it("should log an error and rethrow when migration fails", async () => {
@@ -156,10 +141,6 @@ describe("User and Business Migration with DynamoDataClient", () => {
     const userDataBatch2 = generateUserData();
     const userDataBatch3 = generateUserData();
 
-    const businessId1 = userDataBatch1.businesses[userDataBatch1.currentBusinessId].id;
-    const businessId2 = userDataBatch2.businesses[userDataBatch2.currentBusinessId].id;
-    const businessId3 = userDataBatch3.businesses[userDataBatch3.currentBusinessId].id;
-
     const nextTokenBatch1: string = "nextTokenBatch1";
     const nextTokenBatch2: string = "nextTokenBatch2";
     jest
@@ -180,35 +161,6 @@ describe("User and Business Migration with DynamoDataClient", () => {
 
     const result = await dynamoDataClient.migrateOutdatedVersionUsers();
     expect(result.migratedCount).toBe(3);
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Processed user ${userDataBatch1.user.id} in the user data table`)
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Updated business ${businessId1} for user ${userDataBatch1.user.id}`)
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Processed business with ID ${businessId1} for user ${userDataBatch1.user.id}`)
-    );
-
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Processed user ${userDataBatch2.user.id} in the user data table`)
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Updated business ${businessId2} for user ${userDataBatch2.user.id}`)
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Processed business with ID ${businessId2} for user ${userDataBatch2.user.id}`)
-    );
-
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Processed user ${userDataBatch3.user.id} in the user data table`)
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Updated business ${businessId3} for user ${userDataBatch3.user.id}`)
-    );
-    expect(logger.LogInfo).toHaveBeenCalledWith(
-      expect.stringContaining(`Processed business with ID ${businessId3} for user ${userDataBatch3.user.id}`)
-    );
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("Migration complete"));
     expect(dynamoUsersDataClient.getUsersWithOutdatedVersion).toHaveBeenCalledTimes(3);
     expect(dynamoUsersDataClient.getUsersWithOutdatedVersion).toHaveBeenCalledWith(

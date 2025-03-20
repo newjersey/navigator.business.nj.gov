@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+import { BATCH_SIZE, CONCURRENCY_LIMIT } from "@db/config/dynamoDbConfig";
 import { BusinessesDataClient, DatabaseClient, UserDataClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
-import { CURRENT_VERSION, UserData } from "@shared/userData";
+import { Business, CURRENT_VERSION, UserData } from "@shared/userData";
 import { chunk } from "lodash";
 
 export const DynamoDataClient = (
@@ -16,19 +18,27 @@ export const DynamoDataClient = (
     try {
       let nextToken: string | undefined = undefined;
       let migratedCount = 0;
-      const batchSize = 100;
 
       do {
         const { usersToMigrate, nextToken: newNextToken } = await userDataClient.getUsersWithOutdatedVersion(
           CURRENT_VERSION,
           nextToken
         );
-        const batches = chunk(usersToMigrate, batchSize);
-        for (const batch of batches) {
-          await processBatch(batch);
-          migratedCount += batch.length;
-          logger.LogInfo(`Processed batch of ${batch.length} users. Total migrated so far: ${migratedCount}`);
-        }
+        const batches = chunk(usersToMigrate, BATCH_SIZE);
+        const pLimit = require("p-limit");
+        const limit = pLimit(CONCURRENCY_LIMIT);
+
+        const batchPromises = batches.map((batch) =>
+          limit(async () => {
+            await processBatch(batch);
+            migratedCount += batch.length;
+            logger.LogInfo(
+              `Processed batch of ${batch.length} users. Total migrated so far: ${migratedCount}`
+            );
+          })
+        );
+
+        await Promise.all(batchPromises);
         nextToken = newNextToken;
       } while (nextToken);
       logger.LogInfo(
@@ -43,9 +53,19 @@ export const DynamoDataClient = (
   };
 
   const processBatch = async (usersToMigrate: UserData[]): Promise<void> => {
-    for (const user of usersToMigrate) {
-      await updateUserAndBusinesses(user);
-      logger.LogInfo(`Migrated user ${user.user.id} to version ${CURRENT_VERSION}`);
+    try {
+      userDataClient.batchWriteToTable(usersToMigrate);
+      const businessBatch: Business[] = usersToMigrate.flatMap((userData) =>
+        Object.entries(userData.businesses).map(([businessId, businessData]) => ({
+          ...businessData,
+          id: businessId,
+        }))
+      );
+
+      businessesDataClient.batchWriteToTable(businessBatch);
+    } catch (error) {
+      logger.LogError(`Error processing batch: ${error}`);
+      throw new Error(`Error processing batch: ${error}`);
     }
   };
 
