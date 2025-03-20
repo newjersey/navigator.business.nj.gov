@@ -27,36 +27,3 @@
     align-items: center;
   }
 }
-
-.tax-access-container {
-  background-color: variables.$white;
-  padding: 2rem;
-  border: 1px solid variables.$base-lighter;
-  margin-bottom: 2rem;
-  border-radius: 0.25rem;
-
-  input {
-    max-width: 100%;
-  }
-
-  .position-relative {
-    position: relative;
-  }
-
-  .position-absolute {
-    position: absolute;
-  }
-
-  .usa-button--unstyled {
-    color: variables.$primary;
-    text-decoration: underline;
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-
-    &:hover {
-      color: variables.$primary-darker;
-    }
-  }
-}
