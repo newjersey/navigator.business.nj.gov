@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { TaxAccessModal } from "@/components/filings-calendar/tax-access-modal/TaxAccessModal";
+import { TaxAccess } from "@/components/filings-calendar/tax-access-modal/TaxAccess";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
@@ -18,6 +18,8 @@ const isBeforeTheFollowingSaturday = (registeredISO: string | undefined): boolea
   const sundayAfterRegisteredDate = parseDate(registeredISO).day(7);
   return getCurrentDate().isBefore(sundayAfterRegisteredDate);
 };
+
+export const UnauthenticatedCalendarTaxAccess = (): ReactElement => {};
 
 export const FilingsCalendarTaxAccess = (): ReactElement => {
   const { updateQueue, business } = useUserData();
@@ -63,18 +65,46 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showNeedsAccountModal]);
 
-  const openRegisterOrTaxModal = (): void => {
-    if (!business) return;
-    if (isAuthenticated === IsAuthenticated.FALSE) {
-      updateQueue
-        ?.queuePreferences({ returnToLink: `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true` })
-        .update();
-      analytics.event.tax_calendar_banner_button.click.show_myNJ_registration_prompt_modal();
-      setShowNeedsAccountModal(true);
-    } else {
-      analytics.event.tax_calendar_banner_button.click.show_tax_calendar_modal();
-      setShowTaxModal(true);
-    }
+  // const openRegisterOrTaxModal = (): void => {
+  //   if (!business) return;
+  //   if (isAuthenticated === IsAuthenticated.FALSE) {
+  //     updateQueue
+  //       ?.queuePreferences({ returnToLink: `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true` })
+  //       .update();
+  //     analytics.event.tax_calendar_banner_button.click.show_myNJ_registration_prompt_modal();
+  //     setShowNeedsAccountModal(true);
+  //   } else {
+  //     analytics.event.tax_calendar_banner_button.click.show_tax_calendar_modal();
+  //     setShowTaxModal(true);
+  //   }
+  // };
+
+  const getUnauthenticatedUserComponent = (): ReactElement => {
+    return (
+      <>
+        <div className="margin-bottom-2 mobile-lg:margin-bottom-0 margin-right-1 mobile-lg:grid-col-6 grid-col-12">
+          <Content>{Config.taxCalendar.accessBody || "Get access to your tax calendar."}</Content>
+        </div>
+        <PrimaryButton
+          isColor="primary"
+          dataTestId="create-account-get-tax-access"
+          isRightMarginRemoved={true}
+          onClick={(): void => {
+            // this is saying. points to myNJ login. should return (returnToLink) to the dashboard page with the modal already open
+            // we won't have a modal anymore. but we might still need to tell it to come back to the dashboard page
+            updateQueue
+              ?.queuePreferences({
+                returnToLink: `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true`,
+              })
+              .update();
+            analytics.event.tax_calendar_banner_button.click.show_myNJ_registration_prompt_modal();
+            setShowNeedsAccountModal(true);
+          }}
+        >
+          {Config.taxCalendar.accessButton}
+        </PrimaryButton>
+      </>
+    );
   };
 
   const getWidgetComponent = (): ReactElement => {
@@ -99,9 +129,18 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
         return <></>;
       }
     } else {
+      // Guest user
+      return (
+        <div
+          className="tax-calendar-upper-widget-container border-primary-light grid-row"
+          data-testid="button-container"
+        >
+          {isAuthenticated === IsAuthenticated.TRUE ? <TaxAccess /> : getUnauthenticatedUserComponent()}
+        </div>
+      );
       return (
         <>
-          <TaxAccessModal
+          {/* <TaxAccessModal
             isOpen={showTaxModal}
             close={(): void => setShowTaxModal(false)}
             onSuccess={(): void => {
@@ -110,7 +149,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
                 setShowAlert(true);
               }, 500);
             }}
-          />
+          /> */}
           <div
             className="tax-calendar-upper-widget-container border-primary-light grid-row"
             data-testid="button-container"

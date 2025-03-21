@@ -3,9 +3,8 @@ import { BusinessName } from "@/components/data-fields/BusinessName";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
 import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
-import { TaxAccessModalBody } from "@/components/filings-calendar/tax-access-modal/TaxAccessModalBody";
-import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { DataFormErrorMapContext, DataFormErrorMapFields } from "@/contexts/dataFormErrorMapContext";
 import { createReducedFieldStates } from "@/contexts/formContext";
@@ -233,19 +232,20 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
         <Backdrop sx={{ zIndex: 20000 }} open={isLoading}>
           <CircularProgress aria-label="Loading indicator" aria-busy={true} />
         </Backdrop>
-        <ModalTwoButton
-          isOpen={props.isOpen}
-          close={onClose}
-          title={Config.taxAccess.modalHeader}
-          primaryButtonText={Config.taxAccess.stepTwoNextButton}
-          primaryButtonOnClick={(): void => {
-            onSubmit();
-            setOnSubmitClicked(true);
-          }}
-          secondaryButtonText={
-            canMoveToPrevStep ? Config.taxAccess.stepTwoBackButton : Config.taxAccess.stepTwoCancelButton
-          }
-          secondaryButtonOnClick={canMoveToPrevStep ? props.moveToPrevStep : onClose}
+        {/* used to be <ModalTwoButton */}
+        <div
+        // isOpen={props.isOpen}
+        // close={onClose}
+        // title={Config.taxAccess.modalHeader}
+        // primaryButtonText={Config.taxAccess.stepTwoNextButton}
+        // primaryButtonOnClick={(): void => {
+        //   onSubmit();
+        //   setOnSubmitClicked(true);
+        // }}
+        // secondaryButtonText={
+        //   canMoveToPrevStep ? Config.taxAccess.stepTwoBackButton : Config.taxAccess.stepTwoCancelButton
+        // }
+        // secondaryButtonOnClick={canMoveToPrevStep ? props.moveToPrevStep : onClose}
         >
           {!isValid() && onSubmitClicked && !apiFailed && (
             <Alert variant={"error"}>
@@ -262,7 +262,15 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
 
           {(apiFailed || has_CMS_ONLY_fakeError) && <Alert variant={"error"}> {errorAlert()}</Alert>}
 
-          <TaxAccessModalBody isStepOne={false} showHeader={canMoveToPrevStep} />
+          {/* <TaxAccessModalBody isStepOne={false} showHeader={canMoveToPrevStep} /> */}
+          <div className="margin-y-3">
+            {canMoveToPrevStep && (
+              <Heading level={2} styleVariant="h4">
+                {Config.taxAccess.stepTwoHeader}
+              </Heading>
+            )}
+            <Content>{Config.taxAccess.stepTwoBody}</Content>
+          </div>
 
           {displayBusinessName() && (
             <WithErrorBar
@@ -325,7 +333,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
             </div>
             <TaxId validationText={Config.taxAccess.failedTaxIdHelper} required inputWidth={"full"} />
           </WithErrorBar>
-        </ModalTwoButton>
+        </div>
       </ProfileDataContext.Provider>
     </DataFormErrorMapContext.Provider>
   );
