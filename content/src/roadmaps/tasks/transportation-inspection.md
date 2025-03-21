@@ -4,7 +4,7 @@ summaryDescriptionMd: >-
 
   :::infoAlert
 
-  Commercial busses must be inspected twice a year.
+  Commercial buses must be inspected twice a year.
 
   :::
 
