@@ -1,7 +1,6 @@
-
 asttokens==3.0.0
 black==24.10.0
-black==24.10.0
+cachetools==5.5.1
 certifi==2024.12.14
 cffi==1.17.1
 charset-normalizer==3.4.1
@@ -41,5 +40,6 @@ requests==2.32.3
 six==1.17.0
 stack-data==0.6.3
 traitlets==5.14.3
+typing_extensions==4.12.2
 urllib3==2.3.0
 wcwidth==0.2.13
