@@ -1,3 +1,10 @@
+## [2025.8.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.8.0...v2025.8.1) (2025-03-21)
+
+
+### Bug Fixes
+
+* hotfix update MVC-related content ([53fa179](https://github.com/newjersey/navigator.business.nj.gov/commit/53fa179ac1b79d9cfa4a7f784f2aa43898949f37))
+
 # [2025.8.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.7.0...v2025.8.0) (2025-03-19)
 
 
