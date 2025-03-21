@@ -1,5 +1,8 @@
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { BatchWriteItemCommand, DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+import { marshall } from "@aws-sdk/util-dynamodb";
+import { LogWriterType } from "@libs/logWriter";
+
 export const marshallOptions = {
   // Whether to automatically convert empty strings, blobs, and sets to `null`.
   convertEmptyValues: false, // false, by default.
@@ -42,4 +45,33 @@ export const createDynamoDbClient = (
   }
 
   return dynamoDb;
+};
+
+export const BATCH_SIZE = 25;
+export const CONCURRENCY_LIMIT = 5;
+
+export const batchWrite = async <T>(
+  db: DynamoDBDocumentClient,
+  tableName: string,
+  chunkedItems: T[],
+  logger: LogWriterType
+): Promise<void> => {
+  const params = {
+    RequestItems: {
+      [tableName]: chunkedItems.map((item) => ({
+        PutRequest: {
+          Item: marshall(item, { removeUndefinedValues: true }),
+        },
+      })),
+    },
+  };
+
+  try {
+    logger.LogInfo(`Batch write started for table ${tableName} with ${chunkedItems.length} items`);
+    await db.send(new BatchWriteItemCommand(params));
+    logger.LogInfo(`Batch write successful for table ${tableName}`);
+  } catch (error) {
+    logger.LogError(`Batch write failed for table ${tableName} - Error: ${error}`);
+    throw new Error("Batch write failed");
+  }
 };
