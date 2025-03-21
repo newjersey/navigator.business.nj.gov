@@ -5,12 +5,14 @@ notesMd: >-
 
 
   [](https://docs.google.com/document/d/1IeptNehcZTOpnzHWcZgm8LqtJaYqraxWHqH9f1yoZN4/edit)Note: a version of this task is available to Poppies, but in the roadmap
-filename: landlord-registration-update
-name: Register as a Landlord
+id: landlord-registration-update
+name: Register or Update Your Landlord Registration
+category:
+  - Manage My Properties
+  - Change My Business Information
 industryIds: []
 sectorIds:
   - real-estate
-icon: update-purple.svg
 urlSlug: landlord-registration-update
 summaryDescriptionMd: >-
   If you are renting out a one- or two-unit residential property, you must
@@ -25,9 +27,10 @@ summaryDescriptionMd: >-
 
   You also need to give your tenant(s) a copy of the completed form.
 ---
+
 ## How to Register or Update Your Registration
 
-Contact your municipal or town clerk. Each town has its own application form and process. 
+Contact your municipal or town clerk. Each town has its own application form and process.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 

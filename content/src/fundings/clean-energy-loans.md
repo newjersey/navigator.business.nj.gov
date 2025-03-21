@@ -1,9 +1,8 @@
 ---
-filename: Clean Energy Loans
 name: New Jersey Clean Energy Loans
 displayName: clean-energy-loans
-urlSlug: nj-cels
-id: nj-cels
+urlSlug: clean-energy-loans
+id: clean-energy-loans
 sidebarCardBodyText: New Jersey Clean Energy Loans (NJ CELs) will unlock capital
   for small businesses, catalyze the deployment of clean energy in New Jersey,
   and support Minority-, Woman-, and Veteran-owned businesses to participate in
@@ -35,8 +34,13 @@ certifications:
 preferenceForOpportunityZone: no
 county:
   - All
-sector: []
+sector:
+  - clean-energy
+  - technology
+  - utilities
 publishStageArchive: ""
+minEmployeesRequired: 1
+maxEmployeesRequired: 750
 ---
 
 ## Eligibility
@@ -55,6 +59,6 @@ publishStageArchive: ""
 
 - Loans at 3% below the financial institution's interest rate
 - Minority-, Woman-, and Veteran-owned businesses receive an additional 1% interest rate reduction
-- Businesses/projects located in [Overburdened Communities](https://dep.nj.gov/ej/communities/) also receive a 1% interest rate reduction
+- Businesses/projects located in [overburdened communities](https://dep.nj.gov/ej/communities/) receive a 1% interest rate reduction
 
 :::

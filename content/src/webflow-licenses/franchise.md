@@ -1,5 +1,4 @@
 ---
-filename: franchise
 displayname: franchise
 id: "franchise"
 webflowId: "5f7728df5ddf76c5173ac42d"

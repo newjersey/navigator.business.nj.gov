@@ -1,9 +1,7 @@
 {
-  "displayname": "home-contractor",
   "naicsCodes": "238990,238390,238910,238350,238340,238330,238320,238310,238290,238220,238210,238190,238170,238160,238150,238140,238130,238120,238110,236118",
   "defaultSectorId": "construction",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -12,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -54,11 +52,16 @@
     {
       "step": 4,
       "weight": 200,
-      "licenseTask": "Haul-Waste",
+      "licenseTask": "haul-waste-hic",
       "required": true
     }
   ],
   "name": "Home Improvement Contractor",
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "business-vehicle-title-reg"
+  ],
+  "displayname": "home-contractor",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true

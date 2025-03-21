@@ -237,6 +237,22 @@ describe("sidebarCard Helpers", () => {
         expect(result.length).toEqual(5);
         expect(result).toEqual([funding2, funding1, funding3, funding4, funding5]);
       });
+
+      it("bubbles priority fundings to the top of list while maintaining previous sort", () => {
+        const userData = generateUserData({
+          user: generateUser({}),
+        });
+        const funding1 = generateFunding({ name: "Bca", status: "deadline" });
+        const funding2 = generateFunding({ name: "Abc", status: "deadline", priority: undefined });
+        const funding3 = generateFunding({ name: "cba", status: "deadline", priority: true });
+        const funding4 = generateFunding({ name: "abc", status: "first come, first serve", priority: false });
+        const funding5 = generateFunding({ name: "bca", status: "rolling application", priority: true });
+        const fundings = [funding5, funding2, funding3, funding1, funding4];
+
+        const result = sortFundingsForUser(fundings, userData);
+        expect(result.length).toEqual(5);
+        expect(result).toEqual([funding3, funding5, funding2, funding1, funding4]);
+      });
     });
   });
 
@@ -685,6 +701,60 @@ describe("sidebarCard Helpers", () => {
         expect(result.length).toEqual(2);
         expect(result).toEqual(expect.arrayContaining([funding1, funding2]));
       });
+
+      it("filters fundings by max employee count", () => {
+        const business = generateBusiness({
+          profileData: generateProfileData({
+            homeBasedBusiness: false,
+            municipality: undefined,
+            existingEmployees: "200",
+            sectorId: undefined,
+            legalStructureId: undefined,
+          }),
+        });
+        const funding1 = generateFunding({
+          status: "rolling application",
+          maxEmployeesRequired: 250,
+          certifications: [],
+          employeesRequired: "yes",
+        });
+        const funding2 = generateFunding({
+          status: "rolling application",
+          maxEmployeesRequired: 199,
+          certifications: [],
+          employeesRequired: "yes",
+        });
+        const funding3 = generateFunding({
+          status: "rolling application",
+          maxEmployeesRequired: 200,
+          certifications: [],
+          employeesRequired: "yes",
+        });
+        const fundings = [funding1, funding2, funding3];
+
+        const result = filterFundings({ fundings, business });
+        expect(result.length).toEqual(2);
+        expect(result).toEqual(expect.arrayContaining([funding1, funding3]));
+      });
+
+      it("filters fundings by min employee count", () => {
+        const business = generateBusiness({
+          profileData: generateProfileData({
+            homeBasedBusiness: false,
+            municipality: undefined,
+            existingEmployees: "100",
+            sectorId: undefined,
+          }),
+        });
+        const funding1 = generateFunding({ status: "rolling application", minEmployeesRequired: 50 });
+        const funding2 = generateFunding({ status: "rolling application", minEmployeesRequired: 199 });
+        const funding3 = generateFunding({ status: "rolling application", minEmployeesRequired: 100 });
+        const fundings = [funding1, funding2, funding3];
+
+        const result = filterFundings({ fundings, business });
+        expect(result.length).toEqual(2);
+        expect(result).toEqual(expect.arrayContaining([funding1, funding3]));
+      });
     });
 
     it("shows fundings where user sector is in specified sectors list", () => {
@@ -713,6 +783,38 @@ describe("sidebarCard Helpers", () => {
       const result = filterFundings({ fundings, business });
       expect(result.length).toEqual(4);
       expect(result).toEqual(expect.arrayContaining([funding1, funding2, funding3]));
+    });
+
+    it("filters out future due fundings if other filters are not met", () => {
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          homeBasedBusiness: false,
+          municipality: undefined,
+          existingEmployees: "1",
+          sectorId: "construction",
+        }),
+      });
+
+      const funding1 = generateFunding({
+        sector: ["offshore-wind"],
+        status: "rolling application",
+        dueDate: "01/01/2076",
+      });
+      const funding2 = generateFunding({ sector: [], status: "rolling application" });
+      const funding3 = generateFunding({
+        sector: ["construction", "cannabis"],
+        status: "rolling application",
+      });
+      const funding4 = generateFunding({
+        sector: ["cannabis", "manufacturing"],
+        status: "rolling application",
+      });
+      const funding5 = generateFunding({ sector: ["Construction"], status: "rolling application" });
+      const fundings = [funding1, funding2, funding3, funding4, funding5];
+
+      const result = filterFundings({ fundings, business });
+      expect(result.length).toEqual(3);
+      expect(result).toEqual(expect.arrayContaining([funding2, funding3]));
     });
 
     describe("certifications", () => {

@@ -6,7 +6,6 @@ urlSlug: health-club
 renewalEventDisplayName: Health Club Registration Renewal Deadline
 expirationEventDisplayName: Health Club Registration Expiration
 licenseName: Health Club Services
-previewType: renewal
 summaryDescriptionMd: If you want to continue operating your health spa, fitness
   club, or gym business, you must renew your health club registration.
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx

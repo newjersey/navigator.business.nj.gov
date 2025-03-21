@@ -1,33 +1,108 @@
-.members-table {
-  table,
-  td {
-    border: none !important;
-    height: auto;
-  }
+@use "../sass-files/variables";
 
-  table,
+table.table {
+  display: grid;
+  border: none !important;
   th {
     text-align: left;
     border: none !important;
     padding-left: 1em;
   }
-  table > thead {
-    border-bottom: 2px solid $base-light;
-  }
-  table > tfoot {
-    border-bottom: 1px solid $base-light;
+
+  tr.three-columns {
+    display: grid;
+    grid-template-areas: "name address action";
+    grid-template-columns: 1fr 2fr 1fr;
+
+    @media (max-width: variables.$sm) {
+      grid-template-areas:
+        "name"
+        "address"
+        "action";
+      grid-template-columns: 1fr;
+      padding: 1rem;
+    }
   }
 
-  table > thead,
-  th:nth-child(1) {
-    width: 30%;
+  tr.four-columns {
+    display: grid;
+    grid-template-areas: "name address sign action";
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+
+    @media (max-width: variables.$sm) {
+      grid-template-areas:
+        "name name"
+        "address address"
+        "sign action";
+      grid-template-columns: 1fr 1fr;
+      justify-content: space-between;
+      padding: 1rem;
+    }
   }
-  table > thead,
-  th:nth-child(3) {
-    width: 100px;
+
+  td,
+  th {
+    border: none !important;
+    height: fit-content;
+
+    @media (max-width: variables.$sm) {
+      padding: 0;
+      margin-bottom: 1rem;
+    }
+
+    &.name {
+      grid-area: name;
+    }
+
+    &.sign {
+      grid-area: sign;
+      justify-content: center;
+      padding-left: 0;
+      padding-right: 0;
+
+      @media (max-width: variables.$sm) {
+        justify-content: left;
+        margin-bottom: 0;
+      }
+
+      .mobile-sign-wrapper {
+        flex-direction: column;
+        @media (max-width: variables.$sm) {
+          display: flex;
+          flex-direction: row;
+          height: auto;
+        }
+      }
+    }
+
+    &.address {
+      grid-area: address;
+    }
+
+    &.action {
+      grid-area: action;
+      justify-content: center;
+      @media (max-width: variables.$sm) {
+        justify-content: right;
+        margin-bottom: 0;
+        align-self: center;
+      }
+    }
   }
-  table > thead,
-  th:nth-child(4) {
-    width: 100px;
+
+  th.action {
+    padding-left: 0;
+  }
+
+  thead {
+    border-bottom: 2px solid variables.$base-light;
+
+    @media (max-width: variables.$sm) {
+      display: none;
+    }
+  }
+
+  .tac {
+    text-align: center;
   }
 }

@@ -140,7 +140,11 @@ export type LegacyEventCategory =
   | "view_my_violation_note_button_click"
   | "starter_kit_landing_start_now_button"
   | "starter_kit_landing_get_my_starter_kit_button"
-  | "starter_kit_landing_get_my_starter_kit_button_footer";
+  | "starter_kit_landing_get_my_starter_kit_button_footer"
+  | "show_me_funding_opportunities_button"
+  | "check_account_help_button"
+  | "check_account_log_in"
+  | "link_your_myNJ_account_link";
 
 export type LegacyEventAction =
   | "click"
@@ -267,4 +271,5 @@ export type LegacyEventLabel =
   | "go_to_quick_action_screen"
   | "skip_to_main_content"
   | "go_to_dashboard"
-  | "go_to_business.nj.gov";
+  | "go_to_business.nj.gov"
+  | "show_calendar";

@@ -1,10 +1,9 @@
-import { FormContextType } from "@/contexts/formContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import { FieldErrorType, FormContextFieldProps } from "@/lib/types/types";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { OutlinedInputProps, TextField, TextFieldProps } from "@mui/material";
 
+import { FieldErrorType, FormContextFieldProps, FormContextType } from "@/lib/types/types";
 import {
   ChangeEvent,
   Context,
@@ -18,7 +17,7 @@ import {
 
 export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFieldProps<T> {
   fieldName: string;
-  inputWidth: "full" | "default" | "reduced";
+  inputWidth?: "full" | "default" | "reduced";
   fieldOptions?: TextFieldProps;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formContext?: Context<FormContextType<any>>;
@@ -28,6 +27,7 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
   valueFilter?: (value: string) => string;
   handleChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
   onChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onFocus?: () => void;
   error?: boolean;
   validationText?: string;
@@ -45,6 +45,7 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
   allowMasking?: boolean;
   inputProps?: OutlinedInputProps;
   type?: HTMLInputTypeAttribute;
+  readOnly?: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, react/display-name
@@ -163,12 +164,21 @@ export const GenericTextField = forwardRef(
           {...fieldOptions}
           sx={{ width: 1, ...fieldOptions?.sx }}
           inputProps={{
+            readOnly: props.readOnly,
+            "aria-readonly": props.readOnly,
+            className: `${props.readOnly ? "bg-base-lightest" : ""}`,
             ...fieldOptions?.inputProps,
             "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
           }}
-          InputProps={props.inputProps}
+          InputProps={{
+            readOnly: props.readOnly,
+            "aria-readonly": props.readOnly,
+            className: `${props.readOnly ? "bg-base-lightest" : ""}`,
+            ...props.inputProps,
+          }}
           type={props.type}
           onFocus={props.onFocus}
+          onKeyDown={props.onKeyDown}
         />
 
         <div aria-live="polite" className="screen-reader-only">

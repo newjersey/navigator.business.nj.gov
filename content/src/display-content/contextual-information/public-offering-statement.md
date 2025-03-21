@@ -6,15 +6,16 @@ notesMd: >-
 
   Readability: Grade 9
 header: Public Offering Statement
-slug: public-offering-statement
+id: public-offering-statement
 displayname: public-offering-statement
 ---
+
 A public offering statement is a legal document developers must give to prospective buyers. This document lets buyers know what to expect when they buy a property in a planned real estate development.
 
 The public offering statement includes information such as:
 
-* Bylaws of the condominium or homeowners’ association
-* Any existing or planned shared areas and amenities
-* Estimated title closing or settlement costs the buyer needs to pay
+- Bylaws of the condominium or homeowners’ association
+- Any existing or planned shared areas and amenities
+- Estimated title closing or settlement costs the buyer needs to pay
 
 Real estate or land use attorneys draft this document on behalf of developers.

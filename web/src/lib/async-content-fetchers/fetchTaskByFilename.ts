@@ -40,8 +40,10 @@ const fetchDependenciesFile = async (): Promise<TaskDependencies[]> => {
   return file.default.dependencies;
 };
 
+// refactor needed
 const fetchTaskFile = async (filename: string): Promise<string> => {
   let file;
+
   if (process.env.NODE_ENV === "test") {
     file = await import(`@/lib/roadmap/fixtures/tasks/${filename}.md`);
   } else {
@@ -51,7 +53,15 @@ const fetchTaskFile = async (filename: string): Promise<string> => {
       try {
         file = await import(`@businessnjgovnavigator/content/roadmaps/license-tasks/${filename}.md`);
       } catch {
-        file = await import(`@businessnjgovnavigator/content/roadmaps/municipal-tasks/${filename}.md`);
+        try {
+          file = await import(`@businessnjgovnavigator/content/roadmaps/municipal-tasks/${filename}.md`);
+        } catch {
+          try {
+            file = await import(`@businessnjgovnavigator/content/roadmaps/raffle-bingo-steps/${filename}.md`);
+          } catch {
+            file = await import(`@businessnjgovnavigator/content/roadmaps/env-tasks/${filename}.md`);
+          }
+        }
       }
     }
   }

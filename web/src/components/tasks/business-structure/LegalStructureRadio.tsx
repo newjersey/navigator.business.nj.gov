@@ -3,8 +3,8 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { ConfigType } from "@/contexts/configContext";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
@@ -13,13 +13,13 @@ import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@busi
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { orderBy } from "lodash";
-import React, { ReactElement, useContext } from "react";
+import React, { ForwardedRef, forwardRef, ReactElement, useContext } from "react";
 
 interface Props {
   taskId: string;
 }
 
-export const LegalStructureRadio = (props: Props): ReactElement => {
+const LegalStructureRadio = forwardRef((props: Props, ref: ForwardedRef<HTMLDivElement>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
@@ -33,7 +33,7 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
 
   const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     "legalStructureId",
-    ProfileFormContext,
+    DataFormErrorMapContext,
     undefined
   );
 
@@ -48,7 +48,7 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
 
   const handleLegalStructure = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
     setIsValid(true);
-    queueUpdateTaskProgress(props.taskId, "IN_PROGRESS");
+    queueUpdateTaskProgress(props.taskId, "TO_DO");
     setProfileData({
       ...state.profileData,
       legalStructureId: event.target.value as string,
@@ -71,7 +71,7 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
     <>
       {isFormFieldInvalid && (
         <div className={"padding-bottom-1"}>
-          <Alert variant="error" dataTestid="business-structure-alert">
+          <Alert variant="error" dataTestid="business-structure-alert" ref={ref}>
             {Config.businessStructurePrompt.businessStructureNotSelectedAlertText}
           </Alert>
         </div>
@@ -123,4 +123,8 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
       </WithErrorBar>
     </>
   );
-};
+});
+
+LegalStructureRadio.displayName = "LegalStructureRadio";
+
+export { LegalStructureRadio };

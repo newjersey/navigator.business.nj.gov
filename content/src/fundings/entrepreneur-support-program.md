@@ -1,5 +1,4 @@
 ---
-filename: entrepreneur-support-program
 name: Entrepreneur Support Program
 displayName: entrepreneur-support
 urlSlug: entrepreneur-support-program
@@ -34,8 +33,16 @@ county:
 sector:
   - life-sciences
   - technology
-  - other-services
+  - transportation-and-warehousing
+  - manufacturing
+  - finance-and-insurance
+  - professional-scientific-and-technical-services
+  - digital-and-print-media
+  - arts-entertainment-and-recreation
+  - retail-trade-and-ecommerce
 publishStageArchive: ""
+minEmployeesRequired: 1
+maxEmployeesRequired: 225
 ---
 
 ## Eligibility

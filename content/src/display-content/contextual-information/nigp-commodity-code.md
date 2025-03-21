@@ -1,6 +1,6 @@
 ---
 header: NIGP Commodity Code
-slug: nigp-commodity-code
+id: nigp-commodity-code
 displayname: nigp-commodity-code
 ---
 

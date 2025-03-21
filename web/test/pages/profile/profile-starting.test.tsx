@@ -26,6 +26,7 @@ import {
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   Business,
+  businessPersonas,
   createEmptyBusiness,
   einTaskId,
   emptyAddressData,
@@ -33,14 +34,17 @@ import {
   formationTaskId,
   generateGetFilingResponse,
   generateMunicipality,
+  generateOwningProfileData,
   generateProfileData,
   generateStartingProfileData,
+  LegalStructures,
   LookupIndustryById,
   LookupLegalStructureById,
   modifyCurrentBusiness,
   naicsCodeTaskId,
   OperatingPhaseId,
   OperatingPhases,
+  randomElementFromArray,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import {
@@ -96,7 +100,7 @@ function setupMockAnalytics(): typeof analytics {
   };
 }
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
@@ -225,7 +229,7 @@ describe("profile - starting business", () => {
         expect(userDataWasNotUpdated()).toBe(true);
       });
 
-      it("allows user to delete formation date and sets task progress to IN_PROGRESS", async () => {
+      it("allows user to delete formation date and sets task progress to TO_DO", async () => {
         const initialBusiness = generateBusinessForProfile({
           profileData: generateProfileData({
             businessPersona: "STARTING",
@@ -243,7 +247,7 @@ describe("profile - starting business", () => {
         );
 
         await waitFor(() => {
-          expect(currentBusiness().taskProgress[formationTaskId]).toEqual("IN_PROGRESS");
+          expect(currentBusiness().taskProgress[formationTaskId]).toEqual("TO_DO");
         });
         expect(currentBusiness().profileData.dateOfFormation).toEqual(undefined);
       });
@@ -283,7 +287,7 @@ describe("profile - starting business", () => {
   });
 
   it("updates the user data on save", async () => {
-    const emptyBusiness = createEmptyBusiness();
+    const emptyBusiness = createEmptyBusiness({ userId: "user-id" });
     const initialBusiness: Business = {
       ...emptyBusiness,
       profileData: {
@@ -335,11 +339,12 @@ describe("profile - starting business", () => {
             name: "New Jersey",
             shortCode: "NJ",
           },
+          businessLocationType: "NJ",
         },
       },
       taskProgress: {
         [einTaskId]: "COMPLETED",
-        [naicsCodeTaskId]: "NOT_STARTED",
+        [naicsCodeTaskId]: "TO_DO",
       },
       taskItemChecklist: {},
     });
@@ -376,6 +381,7 @@ describe("profile - starting business", () => {
             name: "New Jersey",
             shortCode: "NJ",
           },
+          businessLocationType: "NJ",
         },
       },
       taxFilingData: { ...taxData, filings: [] },
@@ -969,7 +975,7 @@ describe("profile - starting business", () => {
           },
           taskProgress: {
             ...business.taskProgress,
-            [naicsCodeTaskId]: "NOT_STARTED",
+            [naicsCodeTaskId]: "TO_DO",
           },
           taskItemChecklist: {},
         })
@@ -1094,7 +1100,7 @@ describe("profile - starting business", () => {
     clickSave();
 
     await waitFor(() => {
-      expect(currentBusiness().taskProgress[naicsCodeTaskId]).toEqual("NOT_STARTED");
+      expect(currentBusiness().taskProgress[naicsCodeTaskId]).toEqual("TO_DO");
     });
     expect(currentBusiness().profileData.naicsCode).toEqual("");
   });
@@ -1355,6 +1361,64 @@ describe("profile - starting business", () => {
       renderPage({ business });
 
       expect(screen.getByTestId("elevatorOwningBusiness-radio-group")).toBeInTheDocument();
+    });
+
+    it("displays raffle bingo question for non-profit starting businesses", () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "nonprofit",
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.getByTestId("raffleBingoGames-radio-group")).toBeInTheDocument();
+    });
+
+    it("does not display raffle bingo question for starting businesses that are not non-profit", () => {
+      const filterNonprofitOut = LegalStructures.filter((x) => x.id !== "nonprofit");
+      const randomLegalStructure = randomElementFromArray(filterNonprofitOut);
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: randomLegalStructure.id,
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.queryByTestId("raffleBingoGames-radio-group")).not.toBeInTheDocument();
+    });
+
+    it("does not display raffle bingo question for businesses that are not starting", () => {
+      const filterStartingPersonaOut = businessPersonas.filter((persona) => persona !== "STARTING");
+      const randomBusinessPersona = randomElementFromArray(filterStartingPersonaOut);
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: randomBusinessPersona,
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.queryByTestId("raffleBingoGames-radio-group")).not.toBeInTheDocument();
+    });
+
+    it("shows vacant building question for real estate up and running poppies", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateOwningProfileData({
+          industryId: "real-estate-investor",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING,
+          businessPersona: "STARTING",
+          homeBasedBusiness: false,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
     });
   });
 
@@ -1617,7 +1681,7 @@ describe("profile - starting business", () => {
       ).toBeInTheDocument();
     });
 
-    it("renders locked profile address fields when business has formed", () => {
+    it("renders locked profile address fields when NJ business has formed", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
@@ -1633,6 +1697,7 @@ describe("profile - starting business", () => {
               shortCode: "NJ",
             },
             addressZipCode: "07781",
+            businessLocationType: "NJ",
           }),
         }),
       });
@@ -1642,7 +1707,7 @@ describe("profile - starting business", () => {
       expect(screen.getByTestId("locked-profileAddressMuniStateZip")).toBeInTheDocument();
     });
 
-    it("does not render locked profile address fields when business has not been formed", () => {
+    it("does not render locked profile address fields when NJ business has not been formed", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
@@ -1658,6 +1723,7 @@ describe("profile - starting business", () => {
               shortCode: "NJ",
             },
             addressZipCode: "07781",
+            businessLocationType: "NJ",
           }),
         }),
       });

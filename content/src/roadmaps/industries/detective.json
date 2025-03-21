@@ -1,9 +1,7 @@
 {
-  "displayname": "detective",
   "naicsCodes": "561611",
   "defaultSectorId": "professional-scientific-and-technical-services",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -12,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -58,6 +56,10 @@
     }
   ],
   "name": "Detective Agency",
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
+  "displayname": "detective",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": false

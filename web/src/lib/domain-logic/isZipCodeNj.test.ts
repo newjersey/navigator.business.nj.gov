@@ -24,4 +24,9 @@ describe("isZipCodeNj", () => {
     expect(isZipCodeNj("12345")).toBe(false);
     expect(isZipCodeNj("99999")).toBe(false);
   });
+
+  it("returns false if zipcode does not have 5 digits", () => {
+    expect(isZipCodeNj("1234")).toBe(false);
+    expect(isZipCodeNj("123456")).toBe(false);
+  });
 });

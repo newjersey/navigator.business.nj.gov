@@ -1,29 +1,29 @@
 ---
-id: "notary-register"
-webflowId: "66aceedf6ba3dffa8ac9d488"
-urlSlug: "notary-certificate"
-name: "Register as a Notary Public"
-webflowName: "Notary Public: Notary Public Certificate"
-displayname: "notary-register"
-filename: "notary-register"
-callToActionLink: "https://www.njportal.com/DOR/Notary"
-callToActionText: "Apply for My Notary Public Certificate"
-agencyId: "nj-revenue-enterprise-services"
-agencyAdditionalContext: "Bureau of Corporate Records"
-divisionPhone: "(609) 292-9292"
-industryId: "notary-public"
-webflowType: "individual-license"
-licenseCertificationClassification: ""
 licenseName: ""
+id: notary-register
+displayname: notary-register
+urlSlug: notary-certificate
+name: Register as a Notary Public
+webflowName: "Notary Public: Notary Public Certificate"
 summaryDescriptionMd: >-
-
-
   :::infoAlert
-  A notary public who is not licensed as an attorney-at-law must provide a statement in any advertisements stating that they're not an attorney licensed to practice law and cannot offer legal advice.
+   A notary public who is not a licensed attorney-at-law must provide a statement in any advertisements stating that they're not an attorney licensed to practice law and cannot offer legal advice.
   :::
 
 
   You or any staff providing notary services must be registered as a notary public.
+
+
+  After you submit your application, you need to take your notary public commission and oath qualification certificates to the county clerk's office where you live. If you don't live in New Jersey but work there, go to the office in the county where you work. You must do this to swear to the Oath of Office within 3 months of submitting your application.
+industryId: notary-public
+callToActionText: Apply for My Notary Public Certificate
+callToActionLink: https://www.njportal.com/DOR/Notary
+licenseCertificationClassification: ""
+agencyId: nj-revenue-enterprise-services
+agencyAdditionalContext: Bureau of Corporate Records
+divisionPhone: (609) 292-9292
+webflowType: individual-license
+webflowId: 66aceedf6ba3dffa8ac9d488
 ---
 
 ## Eligibility Criteria
@@ -40,11 +40,5 @@ summaryDescriptionMd: >-
 
 - A notary public commission certificate
 - An oath qualification certificate
-
-:::
-
-:::callout{ showHeader="true" headerText="After Receiving Your Notary Public Commission Certificate:" showIcon="false" calloutType="conditional" }
-
-Within three months, take your notary public commission certificate and oath qualification certificate to the office of the county clerk where you reside (for non‐residents, where you are employed in New Jersey) to swear to the Oath of Office.
 
 :::

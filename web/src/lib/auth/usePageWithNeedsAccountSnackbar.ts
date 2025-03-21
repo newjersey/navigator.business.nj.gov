@@ -2,7 +2,7 @@ import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { useContext, useEffect } from "react";
 
 export const usePageWithNeedsAccountSnackbar = (): void => {
@@ -12,6 +12,7 @@ export const usePageWithNeedsAccountSnackbar = (): void => {
   useMountEffectWhenDefined(() => {
     if (
       isAuthenticated === IsAuthenticated.FALSE &&
+      router &&
       checkQueryValue(router, QUERIES.fromOnboarding, "true")
     ) {
       setShowNeedsAccountSnackbar(true);

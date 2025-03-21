@@ -1,6 +1,5 @@
 ---
-previewType: renewal
-licenseName: "Employment & Personnel Service-Entertainment/Booking Agency"
+licenseName: Employment & Personnel Service-Entertainment/Booking Agency
 urlSlug: independent-artist
 expirationEventDisplayName: Entertainment Agency Registration Expiration
 renewalEventDisplayName: Entertainment Agency Registration Renewal Deadline
@@ -14,6 +13,7 @@ callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-\
   Business-Online-Registration.aspx "
 callToActionText: Renew My Entertainment Agency Registration
 ---
+
 ### Renewal Requirements
 
 - `Surety bond|surety-bond` number and premium paid receipt
@@ -22,4 +22,4 @@ callToActionText: Renew My Entertainment Agency Registration
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A renewed entertainment agency registration valid for one year. It will be sent to your mailing address on file.
+- A renewed entertainment agency registration valid for 1 year. It will be sent to your mailing address on file.

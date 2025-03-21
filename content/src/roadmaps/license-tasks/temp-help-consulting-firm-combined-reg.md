@@ -4,23 +4,20 @@ notesMd: This is essentially the combination of the Register Your Consulting
   which will appear with two required onboarding questions for Employment and
   Personnel Services businesses
 id: temp-help-consulting-firm-combined-reg
-filename: temp-help-consulting-firm-combined-reg
 displayname: temp-help-consulting-firm-combined-reg
-urlSlug: temp-help-consulting-firm-combined-registration
-name: Register Your Temporary Help Service and Consulting Firm (Headhunter)
-webflowName: "Employment and Personnel Service: Temporary Help Service Firm and
-  Consulting Firm (Headhunter)"
-summaryDescriptionMd: You must register as a temporary help service firm *and*
-  consulting firm to place job seekers who are on your payroll with clients for
-  temporary help services and to match job seekers with prospective employers or
-  prospective employers with job seekers in New Jersey. Submit your application
-  through the Regulated Business (RGB) Online Registration Portal.
+urlSlug: temp-help-consulting-firm
+name: "Register Your Temporary Help Consulting Firm"
+webflowName: "Employment and Personnel Service: Temporary Help Consulting Firm"
+summaryDescriptionMd: You must register as a temporary help consulting firm to
+  place job seekers who are on your payroll with clients for temporary help
+  services and to match job seekers with prospective employers or prospective
+  employers with job seekers in New Jersey.
 industryId: employment-agency
 callToActionText: Register My Firm
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
 webflowId: 65bd67f3b2eede76015e40e3
 licenseCertificationClassification: undefined
-licenseName: ""
+licenseName: Consulting Firms/Temporary Help Services-Consulting Firm/Temporary Help Service
 ---
 
 ---

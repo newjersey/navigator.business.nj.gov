@@ -1,6 +1,5 @@
 ---
-slug: effective-date
-filename: effective-date
+id: effective-date
 displayname: effective-date
 header: Effective Date
 ---

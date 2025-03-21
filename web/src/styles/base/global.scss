@@ -1,3 +1,5 @@
+@use "../sass-files/variables";
+
 * {
   box-sizing: border-box;
 }
@@ -68,33 +70,33 @@ ol {
   // .usa-file-input__target.usa-file-input--drag
   .usa-file-input__preview,
   .usa-file-input__preview-heading {
-    background: $accent-cool-lighter;
+    background: variables.$accent-cool-lighter;
   }
 }
 .usa-form-group--error .usa-file-input__target {
   border-color: #b50909;
 }
 
-@media all and (min-width: $xs) {
+@media all and (min-width: variables.$xs) {
   .display-block {
     display: block;
   }
 }
 
 .display-only-desktop {
-  @media screen and (max-width: $lg) {
+  @media screen and (max-width: variables.$lg) {
     display: none;
   }
 }
 
 .display-only-mobile-and-tablet {
-  @media screen and (min-width: $sm) {
+  @media screen and (min-width: variables.$sm) {
     display: none;
   }
 }
 
 .display-none-desktop {
-  @media screen and (min-width: $lg) {
+  @media screen and (min-width: variables.$lg) {
     display: none;
   }
 }

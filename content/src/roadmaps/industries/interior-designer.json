@@ -1,13 +1,7 @@
 {
-  "displayname": "interior-designer",
   "naicsCodes": "541410",
   "defaultSectorId": "construction",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "isCertifiedInteriorDesignerApplicable": true
-  },
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -16,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -56,6 +50,15 @@
     }
   ],
   "name": "Interior Design",
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "business-vehicle-title-reg"
+  ],
+  "displayname": "interior-designer",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "isCertifiedInteriorDesignerApplicable": true
+  },
   "isEnabled": true,
   "additionalSearchTerms": "interior decorating, design studio, interior designer, home interior designer",
   "id": "interior-designer",

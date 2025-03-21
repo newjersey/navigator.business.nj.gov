@@ -1,9 +1,8 @@
 ---
-filename: clean-tech-research
 name: Clean Tech Research & Development (R&D) Voucher Program
-displayName: clean-tech-research
+displayName: clean-tech-research-development-rd-voucher-program
 urlSlug: clean-tech-research
-id: clean-tech-research-development-rd-voucher-program
+id: clean-tech-research
 sidebarCardBodyText: The Clean Tech Research & Development (R&D) Voucher Program
   helps New Jersey early-stage clean tech and clean energy companies offset
   certain costs.
@@ -47,6 +46,6 @@ publishStageArchive: ""
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-Companies received vouchers totaling up to $15,000 per year.
+Companies receive vouchers totaling up to $15,000 per year.
 
 :::

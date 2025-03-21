@@ -15,7 +15,6 @@ import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBus
 import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import {
   AnytimeActionLicenseReinstatement,
-  AnytimeActionLink,
   AnytimeActionTask,
   Certification,
   Funding,
@@ -24,12 +23,11 @@ import {
   RoadmapDisplayContent,
 } from "@/lib/types/types";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
 
 interface Props {
   anytimeActionTasks: AnytimeActionTask[];
-  anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   displayContent: RoadmapDisplayContent;
   operateReferences: Record<string, OperateReference>;
@@ -44,8 +42,9 @@ export const DashboardOnMobile = (props: Props): ReactElement => {
   const router = useRouter();
   const operatingPhase = LookupOperatingPhaseById(business?.profileData.operatingPhase);
 
-  const deferredHomeBasedOnSaveButtonClick = (): void =>
-    routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true");
+  const deferredHomeBasedOnSaveButtonClick = (): void => {
+    router && routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true");
+  };
 
   const renderDeferredHomeBasedQuestion =
     isHomeBasedBusinessApplicable(business?.profileData.industryId) &&
@@ -69,7 +68,6 @@ export const DashboardOnMobile = (props: Props): ReactElement => {
               {operatingPhase.displayAnytimeActions && (
                 <AnytimeActionDropdown
                   anytimeActionTasks={props.anytimeActionTasks}
-                  anytimeActionLinks={props.anytimeActionLinks}
                   anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
                 />
               )}
@@ -92,11 +90,13 @@ export const DashboardOnMobile = (props: Props): ReactElement => {
           </div>
         }
         secondTab={
-          <SidebarCardsContainer
-            sidebarDisplayContent={props.displayContent.sidebarDisplayContent}
-            certifications={props.certifications}
-            fundings={props.fundings}
-          />
+          <div className="margin-top-3">
+            <SidebarCardsContainer
+              sidebarDisplayContent={props.displayContent.sidebarDisplayContent}
+              certifications={props.certifications}
+              fundings={props.fundings}
+            />
+          </div>
         }
         certifications={props.certifications}
         fundings={props.fundings}

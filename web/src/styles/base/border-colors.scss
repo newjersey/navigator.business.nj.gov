@@ -1,277 +1,279 @@
+@use "../sass-files/variables";
+
 .border-base-extra-light {
-  border-color: $base-extra-light !important;
+  border-color: variables.$base-extra-light !important;
 }
 .border-base-lightest {
-  border-color: $base-lightest !important;
+  border-color: variables.$base-lightest !important;
 }
 .border-base-lighter {
-  border-color: $base-lighter !important;
+  border-color: variables.$base-lighter !important;
 }
 .border-base-light {
-  border-color: $base-light !important;
+  border-color: variables.$base-light !important;
 }
 .border-base {
-  border-color: $base !important;
+  border-color: variables.$base !important;
 }
 .border-base-dark {
-  border-color: $base-dark !important;
+  border-color: variables.$base-dark !important;
 }
 .border-base-darkest {
-  border-color: $base-darkest !important;
+  border-color: variables.$base-darkest !important;
 }
 .border-right-base {
-  border-right-color: $base !important;
+  border-right-color: variables.$base !important;
 }
 
 .border-primary-extra-extra-light {
-  border-color: $primary-extra-extra-light !important;
+  border-color: variables.$primary-extra-extra-light !important;
 }
 .border-primary-extra-light {
-  border-color: $primary-extra-light !important;
+  border-color: variables.$primary-extra-light !important;
 }
 .border-primary-lightest {
-  border-color: $primary-lightest !important;
+  border-color: variables.$primary-lightest !important;
 }
 .border-primary-lighter {
-  border-color: $primary-lighter !important;
+  border-color: variables.$primary-lighter !important;
 }
 .border-primary,
 .hover\:border-primary:hover {
-  border-color: $primary !important;
+  border-color: variables.$primary !important;
 }
 .border-primary-more-light {
-  border-color: $primary-more-light !important;
+  border-color: variables.$primary-more-light !important;
 }
 .border-primary-light {
-  border-color: $primary-light !important;
+  border-color: variables.$primary-light !important;
 }
 .border-primary-light-vivid {
-  border-color: $primary-light-vivid !important;
+  border-color: variables.$primary-light-vivid !important;
 }
 .border-primary-vivid {
-  border-color: $primary-vivid !important;
+  border-color: variables.$primary-vivid !important;
 }
 .border-primary-dark {
-  border-color: $primary-dark !important;
+  border-color: variables.$primary-dark !important;
 }
 .border-primary-darker {
-  border-color: $primary-darker !important;
+  border-color: variables.$primary-darker !important;
 }
 
 .border-secondary-lighter {
-  border-color: $secondary-lighter !important;
+  border-color: variables.$secondary-lighter !important;
 }
 .border-secondary-light {
-  border-color: $secondary-light !important;
+  border-color: variables.$secondary-light !important;
 }
 .border-secondary-vivid {
-  border-color: $secondary-vivid !important;
+  border-color: variables.$secondary-vivid !important;
 }
 .border-secondary {
-  border-color: $secondary !important;
+  border-color: variables.$secondary !important;
 }
 .border-secondary-dark {
-  border-color: $secondary-dark !important;
+  border-color: variables.$secondary-dark !important;
 }
 .border-secondary-darker {
-  border-color: $secondary-darker !important;
+  border-color: variables.$secondary-darker !important;
 }
 .border-secondary-vivid-dark {
-  border-color: $secondary-vivid-dark !important;
+  border-color: variables.$secondary-vivid-dark !important;
 }
 
 .border-accent-cool-lightest {
-  border-color: $accent-cool-lightest !important;
+  border-color: variables.$accent-cool-lightest !important;
 }
 .border-accent-cool-lighter {
-  border-color: $accent-cool-lighter !important;
+  border-color: variables.$accent-cool-lighter !important;
 }
 .border-accent-cool-light {
-  border-color: $accent-cool-light !important;
+  border-color: variables.$accent-cool-light !important;
 }
 .border-accent-cool {
-  border-color: $accent-cool !important;
+  border-color: variables.$accent-cool !important;
 }
 .border-accent-cool-dark {
-  border-color: $accent-cool-dark !important;
+  border-color: variables.$accent-cool-dark !important;
 }
 .border-accent-cool-dark-medium {
-  border-color: $accent-cool-dark-medium !important;
+  border-color: variables.$accent-cool-dark-medium !important;
 }
 .border-accent-cool-darker {
-  border-color: $accent-cool-darker !important;
+  border-color: variables.$accent-cool-darker !important;
 }
 .border-accent-cool-darkest {
-  border-color: $accent-cool-darkest !important;
+  border-color: variables.$accent-cool-darkest !important;
 }
 .border-accent-cool-more-dark {
-  border-color: $accent-cool-more-dark !important;
+  border-color: variables.$accent-cool-more-dark !important;
 }
 
 .border-accent-warm-extra-light {
-  border-color: $accent-warm-extra-light !important;
+  border-color: variables.$accent-warm-extra-light !important;
 }
 .border-accent-warm-lighter {
-  border-color: $accent-warm-lighter !important;
+  border-color: variables.$accent-warm-lighter !important;
 }
 .border-accent-warm-light {
-  border-color: $accent-warm-light !important;
+  border-color: variables.$accent-warm-light !important;
 }
 .border-accent-warm {
-  border-color: $accent-warm !important;
+  border-color: variables.$accent-warm !important;
 }
 .border-accent-warm-dark {
-  border-color: $accent-warm-dark !important;
+  border-color: variables.$accent-warm-dark !important;
 }
 .border-accent-warm-darker {
-  border-color: $accent-warm-darker !important;
+  border-color: variables.$accent-warm-darker !important;
 }
 
 .border-success-extra-light {
-  border-color: $success-extra-light !important;
+  border-color: variables.$success-extra-light !important;
 }
 .border-success-lighter {
-  border-color: $success-lighter !important;
+  border-color: variables.$success-lighter !important;
 }
 .border-success-light {
-  border-color: $success-light !important;
+  border-color: variables.$success-light !important;
 }
 .border-success {
-  border-color: $success !important;
+  border-color: variables.$success !important;
 }
 .border-success-dark {
-  border-color: $success-dark !important;
+  border-color: variables.$success-dark !important;
 }
 .border-success-darker {
-  border-color: $success-darker !important;
+  border-color: variables.$success-darker !important;
 }
 
 .border-info-extra-light {
-  border-color: $info-extra-light !important;
+  border-color: variables.$info-extra-light !important;
 }
 .border-info-light {
-  border-color: $info-light !important;
+  border-color: variables.$info-light !important;
 }
 .border-info {
-  border-color: $info !important;
+  border-color: variables.$info !important;
 }
 .border-info-dark {
-  border-color: $info-dark !important;
+  border-color: variables.$info-dark !important;
 }
 .border-info-dark-medium {
-  border-color: $info-dark-medium !important;
+  border-color: variables.$info-dark-medium !important;
 }
 .border-info-darker {
-  border-color: $info-darker !important;
+  border-color: variables.$info-darker !important;
 }
 .border-info-darkest {
-  border-color: $info-darkest !important;
+  border-color: variables.$info-darkest !important;
 }
 
 .border-warning-extra-light {
-  border-color: $warning-extra-light !important;
+  border-color: variables.$warning-extra-light !important;
 }
 .border-warning-light {
-  border-color: $warning-light !important;
+  border-color: variables.$warning-light !important;
 }
 .border-warning {
-  border-color: $warning !important;
+  border-color: variables.$warning !important;
 }
 .border-warning-dark {
-  border-color: $warning-dark !important;
+  border-color: variables.$warning-dark !important;
 }
 .border-warning-darker {
-  border-color: $warning-darker !important;
+  border-color: variables.$warning-darker !important;
 }
 
 .border-error-extra-light {
-  border-color: $error-extra-light !important;
+  border-color: variables.$error-extra-light !important;
 }
 .border-error-light {
-  border-color: $error-light !important;
+  border-color: variables.$error-light !important;
 }
 .border-error {
-  border-color: $error !important;
+  border-color: variables.$error !important;
 }
 .border-error-dark {
-  border-color: $error-dark !important;
+  border-color: variables.$error-dark !important;
 }
 .border-error-darker {
-  border-color: $error-darker !important;
+  border-color: variables.$error-darker !important;
 }
 
 .border-white {
-  border-color: $white !important;
+  border-color: variables.$white !important;
 }
 .border-disabled {
-  border-color: $disabled !important;
+  border-color: variables.$disabled !important;
 }
 
 .border-cool-extra-light {
-  border-color: $cool-extra-light !important;
+  border-color: variables.$cool-extra-light !important;
 }
 .border-cool-lighter {
-  border-color: $cool-lighter !important;
+  border-color: variables.$cool-lighter !important;
 }
 
 .border-accent-cooler-lightest {
-  border-color: $accent-cooler-lightest !important;
+  border-color: variables.$accent-cooler-lightest !important;
 }
 
 .border-accent-cooler-200 {
-  border-color: $accent-cooler-200 !important;
+  border-color: variables.$accent-cooler-200 !important;
 }
 
 .border-accent-cooler-light {
-  border-color: $accent-cooler-light !important;
+  border-color: variables.$accent-cooler-light !important;
 }
 .border-accent-cooler-dark {
-  border-color: $accent-cooler-dark !important;
+  border-color: variables.$accent-cooler-dark !important;
 }
 .border-accent-cooler-darker {
-  border-color: $accent-cooler-darker !important;
+  border-color: variables.$accent-cooler-darker !important;
 }
 .border-accent-cooler-light {
-  border-color: $accent-cooler-light !important;
+  border-color: variables.$accent-cooler-light !important;
 }
 .border-accent-cooler {
-  border-color: $accent-cooler !important;
+  border-color: variables.$accent-cooler !important;
 }
 .border-accent-hot-extra-light {
-  border-color: $accent-hot-extra-light !important;
+  border-color: variables.$accent-hot-extra-light !important;
 }
 .border-accent-hot {
-  border-color: $accent-hot !important;
+  border-color: variables.$accent-hot !important;
 }
 
 .border-accent-hot-darker {
-  border-color: $accent-hot-darker !important;
+  border-color: variables.$accent-hot-darker !important;
 }
 
 .border-accent-semi-cool-extra-light {
-  border-color: $accent-semi-cool-extra-light !important;
+  border-color: variables.$accent-semi-cool-extra-light !important;
 }
 .border-accent-semi-cool-lightest {
-  border-color: $accent-semi-cool-lightest !important;
+  border-color: variables.$accent-semi-cool-lightest !important;
 }
 .border-accent-semi-cool-light {
-  border-color: $accent-semi-cool-light !important;
+  border-color: variables.$accent-semi-cool-light !important;
 }
 .border-accent-semi-cool-vivid {
-  border-color: $accent-semi-cool-vivid !important;
+  border-color: variables.$accent-semi-cool-vivid !important;
 }
 .border-accent-semi-cool {
-  border-color: $accent-semi-cool !important;
+  border-color: variables.$accent-semi-cool !important;
 }
 .border-accent-semi-cool-500 {
-  border-color: $accent-semi-cool-500 !important;
+  border-color: variables.$accent-semi-cool-500 !important;
 }
 .border-accent-semi-cool-700 {
-  border-color: $accent-semi-cool-700 !important;
+  border-color: variables.$accent-semi-cool-700 !important;
 }
 .border-accent-semi-cool-800 {
-  border-color: $accent-semi-cool-800 !important;
+  border-color: variables.$accent-semi-cool-800 !important;
 }
 .border-accent-semi-cool-900 {
-  border-color: $accent-semi-cool-900 !important;
+  border-color: variables.$accent-semi-cool-900 !important;
 }

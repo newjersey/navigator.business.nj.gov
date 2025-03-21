@@ -1,5 +1,7 @@
+@use "../sass-files/variables";
+
 hr {
-  background-color: $base-lighter;
+  background-color: variables.$base-lighter;
   height: 1px !important;
   border: none !important;
 }
@@ -9,5 +11,5 @@ hr {
 }
 
 .vertical-line {
-  border-right: 1px solid $base-lighter;
+  border-right: 1px solid variables.$base-lighter;
 }

@@ -1,5 +1,5 @@
 ---
-slug: combined-group
+id: combined-group
 header: Combined Group
 displayname: combined-group
 ---

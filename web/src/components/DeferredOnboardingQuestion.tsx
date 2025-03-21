@@ -1,10 +1,9 @@
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { getFlow } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, ReactNode, useEffect, useState } from "react";
@@ -25,7 +24,7 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
     FormFuncWrapper,
     onSubmit,
     state: formContextState,
-  } = useFormContextHelper(createProfileFieldErrorMap());
+  } = useFormContextHelper(createDataFormErrorMap());
 
   useEffect(() => {
     if (!business) return;
@@ -82,7 +81,7 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
   );
 
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFormErrorMapContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -95,6 +94,6 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
       >
         {props.isTaskPage ? onTaskPage : onDashboard}
       </ProfileDataContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFormErrorMapContext.Provider>
   );
 };

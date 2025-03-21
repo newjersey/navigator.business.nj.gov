@@ -22,20 +22,21 @@ import { Roadmap, UpdateQueue, UserDataError } from "@/lib/types/types";
 import analytics, { GTM_ID } from "@/lib/utils/analytics";
 import { setOnLoadDimensions } from "@/lib/utils/analytics-helpers";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { Hub, HubCapsule } from "@aws-amplify/core";
 import { BusinessPersona, OperatingPhaseId, RegistrationStatus } from "@businessnjgovnavigator/shared";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import "@newjersey/njwds/dist/css/styles.css";
 import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
+import { useRouter } from "next/compat/router";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
+import { Hub, type HubCapsule } from "aws-amplify/utils";
 
 import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
 import "../styles/main.scss";
+
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
 NeedsAccountContext.displayName = "Needs Account";
@@ -72,13 +73,30 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const showGtm = !(process.env.DISABLE_GTM === "true");
 
   useEffect(() => {
-    router.events.on("routeChangeComplete", analytics.pageview);
-    return (): void => {
-      router.events.off("routeChangeComplete", analytics.pageview);
-    };
-  }, [router.events]);
+    if (router?.isReady) {
+      router.events.on("routeChangeComplete", analytics.pageview);
+      return (): void => {
+        router.events.off("routeChangeComplete", analytics.pageview);
+      };
+    }
+  }, [router]);
 
-  const listener = (data: HubCapsule): void => {
+  type AuthEvent = {
+    event:
+      | "signIn"
+      | "signUp"
+      | "signOut"
+      | "signIn_failure"
+      | "tokenRefresh"
+      | "tokenRefresh_failure"
+      | "configured";
+    data: {
+      username: string;
+      error?: string;
+    };
+  };
+
+  const listener = (data: HubCapsule<string, AuthEvent>): void => {
     switch (data.payload.event) {
       case "signIn":
         onSignIn(dispatch);
@@ -117,12 +135,12 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           });
         })
         .catch(() => {
-          onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
+          router && onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
         });
     }
   });
 
-  const isSeoPage = router.pathname.includes("/starter-kits");
+  const isSeoPage = router && router.pathname.includes("/starter-kits");
 
   const heroTitle = insertIndustryContent(
     config.starterKits.hero.title,

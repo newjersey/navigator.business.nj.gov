@@ -1,5 +1,4 @@
 ---
-filename: nj-accelerate
 name: NJ Accelerate
 displayName: accelerate
 urlSlug: nj-accelerate
@@ -33,6 +32,8 @@ county:
 sector:
   - technology
   - life-sciences
+  - clean-energy
+  - educational-services
 publishStageArchive: ""
 ---
 

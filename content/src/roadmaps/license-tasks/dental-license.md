@@ -1,6 +1,6 @@
 ---
+licenseName: ""
 id: dental-license
-filename: dental-license
 displayname: dental-license
 urlSlug: dental-license
 name: Apply for Your Dental License
@@ -13,7 +13,6 @@ callToActionText: Apply for My Dental License
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 agencyId: nj-consumer-affairs
 webflowId: 669ac515985e99ee52d48390
-licenseName: ""
 licenseCertificationClassification: undefined
 ---
 
@@ -23,7 +22,7 @@ Once your application has been approved, you will receive an Initial Registratio
 
 :::
 
-## Eligibility Criteria 
+## Eligibility Criteria
 
 - Be at least 18 years old
 - Have or will have completed a doctorate in dentistry from a school accredited by the Commission on Dental Accreditation (CODA)
@@ -41,7 +40,7 @@ Once your application has been approved, you will receive an Initial Registratio
 - Official dental school transcripts emailed to the New Jersey Board of Dentistry at [dentistry@dca.njoag.gov](mailto:Dentistry@dca.njoag.gov)
 - Names and addresses of all jobs, residencies, or training programs since graduating from dental school
 - Uploaded photo ID
-- A 2x2 inch photo of your head and shoulders taken in the last six months
+- A 2x2 inch photo of your head and shoulders taken in the last 6 months
 - Criminal history background check (fingerprinting information will be emailed to you after submitting your application)
 - Applicable fees paid
 - Name change documentation, if applicable
@@ -57,6 +56,6 @@ You cannot legally perform dentistry and may be subject to significant fines.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A dental license number, valid for two years.
+A dental license number, valid for 2 years.
 
 :::

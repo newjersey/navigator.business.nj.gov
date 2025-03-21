@@ -4,6 +4,8 @@ import {
   BusinessPersona,
   ForeignBusinessTypeId,
   generateBusiness,
+  generateBusinessNameAvailability,
+  generateFormationData,
   LookupIndustryById,
   LookupLegalStructureById,
   ProfileData,
@@ -39,20 +41,23 @@ describe("getNavBarBusinessTitle", () => {
 
   describe("when name is defined", () => {
     describe("when legal structure undefined", () => {
-      it.each(["STARTING", "OWNING"])("shows business name", (businessPersona) => {
-        const business = generateBusiness({
-          profileData: generateProfileData({
-            businessPersona: businessPersona as BusinessPersona,
-            businessName: name,
-            tradeName: "",
-            legalStructureId: undefined,
-          }),
-        });
-        const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
-        expect(navBarBusinessTitle).toEqual(name);
-      });
+      it.each(["STARTING", "OWNING"])(
+        "shows business name for %s when name is populated",
+        (businessPersona) => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              businessPersona: businessPersona as BusinessPersona,
+              businessName: name,
+              tradeName: "",
+              legalStructureId: undefined,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
+          expect(navBarBusinessTitle).toEqual(name);
+        }
+      );
 
-      it.each(["STARTING", "OWNING"])("shows business name", (businessPersona) => {
+      it.each(["STARTING", "OWNING"])("shows business name for %s when name is empty", (businessPersona) => {
         const business = generateBusiness({
           profileData: generateProfileData({
             businessPersona: businessPersona as BusinessPersona,
@@ -66,7 +71,7 @@ describe("getNavBarBusinessTitle", () => {
       });
 
       it.each(["STARTING", "OWNING"])(
-        "shows business name over trade name if both defined",
+        "shows business name over trade name if both defined for %s",
         (businessPersona) => {
           const business = generateBusiness({
             profileData: generateProfileData({
@@ -141,21 +146,25 @@ describe("getNavBarBusinessTitle", () => {
     });
 
     describe("Nexus DBA", () => {
-      it("shows unnamed dba when the nexusDbaName is empty and needsNexusDbaName is true", () => {
+      it("shows unnamed dba when the nexusDbaName is empty and businessNameAvailability status is unavailable", () => {
         const business = generateBusiness({
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
             foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
             businessName: "test business Name",
-            needsNexusDbaName: true,
             nexusDbaName: "",
+          }),
+          formationData: generateFormationData({
+            businessNameAvailability: generateBusinessNameAvailability({
+              status: "UNAVAILABLE",
+            }),
           }),
         });
         const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
         expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedDbaBusinessText);
       });
 
-      it("shows the dba name when the user has entered a DBA name", () => {
+      it("shows the dba name when the user has entered a DBA name and businessNameAvailability status is unavailable", () => {
         const dbaName = "dbaName";
 
         const business = generateBusiness({
@@ -163,8 +172,12 @@ describe("getNavBarBusinessTitle", () => {
             businessPersona: "FOREIGN",
             foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
             businessName: "test business Name",
-            needsNexusDbaName: true,
             nexusDbaName: dbaName,
+          }),
+          formationData: generateFormationData({
+            businessNameAvailability: generateBusinessNameAvailability({
+              status: "UNAVAILABLE",
+            }),
           }),
         });
         const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
@@ -321,7 +334,7 @@ describe("getNavBarBusinessTitle", () => {
   });
 
   describe("when legal structure, industry, and name undefined", () => {
-    it.each(["STARTING", "OWNING"])("shows Unnamed Business", (persona) => {
+    it.each(["STARTING", "OWNING"])("shows Unnamed Business for %s", (persona) => {
       const business = generateBusiness({
         profileData: generateProfileData({
           businessPersona: persona as BusinessPersona,

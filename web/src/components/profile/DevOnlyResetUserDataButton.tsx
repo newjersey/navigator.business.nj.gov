@@ -4,7 +4,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
 import { createEmptyUserData } from "@businessnjgovnavigator/shared/userData";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useContext } from "react";
 
 export const DevOnlyResetUserDataButton = (): ReactElement => {
@@ -21,7 +21,7 @@ export const DevOnlyResetUserDataButton = (): ReactElement => {
       };
       const emptyUserData = createEmptyUserData(emptyUser);
       await updateQueue?.queue(emptyUserData).update();
-      router.push(ROUTES.landing);
+      router && router.push(ROUTES.landing);
     }
   };
   if (process.env.NODE_ENV === "development") {

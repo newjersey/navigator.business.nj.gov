@@ -10,7 +10,7 @@ import {
 } from "@shared/test";
 import { Express } from "express";
 import { StatusCodes } from "http-status-codes";
-import { UserDataClient } from "src/domain/types";
+import { DatabaseClient } from "src/domain/types";
 import request from "supertest";
 
 jest.mock("@api/userRouter", () => {
@@ -24,25 +24,24 @@ describe("licenseStatusRouter", () => {
   let app: Express;
 
   let stubUpdateLicenseStatus: jest.Mock;
-  let stubUserDataClient: jest.Mocked<UserDataClient>;
+
+  let stubDynamoDataClient: jest.Mocked<DatabaseClient>;
 
   beforeEach(async () => {
     jest.resetAllMocks();
     fakeSignedInUserId.mockReturnValue("some-id");
     stubUpdateLicenseStatus = jest.fn();
-    stubUserDataClient = {
+    stubDynamoDataClient = {
+      migrateOutdatedVersionUsers: jest.fn(),
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),
-      getNeedNewsletterUsers: jest.fn(),
-      getNeedToAddToUserTestingUsers: jest.fn(),
-      getNeedTaxIdEncryptionUsers: jest.fn(),
     };
-    stubUserDataClient.put.mockImplementation((userData) => {
+    stubDynamoDataClient.put.mockImplementation((userData) => {
       return Promise.resolve(userData);
     });
     app = setupExpress(false);
-    app.use(licenseStatusRouterFactory(stubUpdateLicenseStatus, stubUserDataClient));
+    app.use(licenseStatusRouterFactory(stubUpdateLicenseStatus, stubDynamoDataClient));
   });
 
   afterAll(async () => {
@@ -51,37 +50,18 @@ describe("licenseStatusRouter", () => {
     });
   });
 
-  it("returns user data with updated license status when search is not initiated from a license task", async () => {
-    const licenseData = generateLicenseData({});
-    const userData = generateUserDataForBusiness(generateBusiness({ licenseData }));
-    const nameAndAddress = generateLicenseSearchNameAndAddress({});
-    stubUpdateLicenseStatus.mockResolvedValue(userData);
-
-    // Note: When search is not initiated from a license task, licenseTaskID should be undefined
-    const licenseTaskID = undefined;
-    stubUserDataClient.get.mockResolvedValue(userData);
-    const response = await request(app).post(`/license-status`).send({ nameAndAddress, licenseTaskID });
-    expect(response.status).toEqual(StatusCodes.OK);
-    expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
-    expect(stubUserDataClient.put).toHaveBeenCalledWith(userData);
-    expect(response.body).toEqual(userData);
-    expect(stubUpdateLicenseStatus).toHaveBeenCalledWith(userData, nameAndAddress, licenseTaskID);
-  });
-
-  it("returns user data with updated license status when search initiated by user from a license task", async () => {
+  it("returns user data when search initiated by user and no license", async () => {
     const licenseData = generateLicenseData({});
     const userData = generateUserDataForBusiness(generateBusiness({ licenseData }));
     stubUpdateLicenseStatus.mockResolvedValue(userData);
 
     const nameAndAddress = generateLicenseSearchNameAndAddress({});
-    const licenseTaskID = "some-task-id";
-    stubUserDataClient.get.mockResolvedValue(userData);
-    const response = await request(app).post(`/license-status`).send({ nameAndAddress, licenseTaskID });
+    stubDynamoDataClient.get.mockResolvedValue(userData);
+    const response = await request(app).post(`/license-status`).send({ nameAndAddress });
     expect(response.status).toEqual(StatusCodes.OK);
-    expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
-    expect(stubUserDataClient.put).toHaveBeenCalledWith(userData);
+    expect(stubDynamoDataClient.put).toHaveBeenCalledWith(userData);
     expect(response.body).toEqual(userData);
-    expect(stubUpdateLicenseStatus).toHaveBeenCalledWith(userData, nameAndAddress, licenseTaskID);
+    expect(stubUpdateLicenseStatus).toHaveBeenCalledWith(userData, nameAndAddress);
   });
 
   it("returns INTERNAL SERVER ERROR if license search errors", async () => {
@@ -89,7 +69,15 @@ describe("licenseStatusRouter", () => {
     const response = await request(app)
       .post(`/license-status`)
       .send({ nameAndAddress: generateLicenseSearchNameAndAddress({}) });
-    expect(stubUserDataClient.put).not.toHaveBeenCalled();
+    expect(stubDynamoDataClient.put).not.toHaveBeenCalled();
     expect(response.status).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+  });
+
+  it("returns an empty object when update license status returns an empty object", async () => {
+    const nameAndAddress = generateLicenseSearchNameAndAddress({});
+    stubUpdateLicenseStatus.mockResolvedValue({});
+    const response = await request(app).post(`/license-status`).send({ nameAndAddress: nameAndAddress });
+    expect(response.status).toEqual(StatusCodes.OK);
+    expect(response.body).toEqual({});
   });
 });

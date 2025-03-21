@@ -5,7 +5,7 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useState } from "react";
 
 interface Props {
@@ -29,7 +29,7 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
       .update()
       .then(() => {
         props.setStepIndex(LookupStepIndexByName("Review"));
-        router.replace({ pathname: `/tasks/${props.taskUrlSlug}` }, undefined, { shallow: true });
+        router && router.replace({ pathname: `/tasks/${props.taskUrlSlug}` }, undefined, { shallow: true });
       });
   };
 

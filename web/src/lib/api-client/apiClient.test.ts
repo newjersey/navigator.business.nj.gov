@@ -1,7 +1,4 @@
 import { generateInputFile } from "@/test/factories";
-import { taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
-import { randomElementFromArray } from "@businessnjgovnavigator/shared/arrayHelpers";
-import { LicenseTaskID } from "@businessnjgovnavigator/shared/license";
 import {
   generateLicenseSearchNameAndAddress,
   generateTaxIdAndBusinessName,
@@ -18,6 +15,7 @@ import {
   postTaxFilingsLookup,
   postTaxFilingsOnboarding,
   postUserData,
+  postUserEmailCheck,
 } from "./apiClient";
 
 jest.mock("axios");
@@ -58,27 +56,21 @@ describe("apiClient", () => {
     });
   });
 
-  it("posts license status without licenseTaskId specified", async () => {
+  it("posts email check", async () => {
+    const email = "someone@example.com";
+    mockAxios.post.mockResolvedValue({ data: { email, found: true } });
+    const response = await postUserEmailCheck(email);
+    expect(response).toEqual({ email, found: true });
+    expect(mockAxios.post).toHaveBeenCalledWith("/api/users/emailCheck", { email }, {});
+  });
+
+  it("posts license status", async () => {
     mockAxios.post.mockResolvedValue({ data: {} });
     const nameAndAddress = generateLicenseSearchNameAndAddress({});
     await checkLicenseStatus(nameAndAddress);
     expect(mockAxios.post).toHaveBeenCalledWith(
       "/api/license-status",
-      { nameAndAddress, licenseTaskId: undefined },
-      {
-        headers: { Authorization: "Bearer some-token" },
-      }
-    );
-  });
-
-  it("posts license status with licenseTaskId specified", async () => {
-    mockAxios.post.mockResolvedValue({ data: {} });
-    const nameAndAddress = generateLicenseSearchNameAndAddress({});
-    const licenseTaskId = randomElementFromArray(Object.keys(taskIdLicenseNameMapping));
-    await checkLicenseStatus(nameAndAddress, licenseTaskId as LicenseTaskID);
-    expect(mockAxios.post).toHaveBeenCalledWith(
-      "/api/license-status",
-      { nameAndAddress, licenseTaskId },
+      { nameAndAddress },
       {
         headers: { Authorization: "Bearer some-token" },
       }

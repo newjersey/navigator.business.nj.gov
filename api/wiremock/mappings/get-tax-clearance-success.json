@@ -1,0 +1,45 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/tax-clearance",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$.taxpayerId"
+      },
+      {
+        "matchesJsonPath": "$.busName"
+      },
+      {
+        "matchesJsonPath": "$.repName"
+      },
+      {
+        "matchesJsonPath": "$.repId"
+      },
+      {
+        "matchesJsonPath": "$.agencyName"
+      },
+      {
+        "matchesJsonPath": "$.corporateNbr"
+      },
+      {
+        "matchesJsonPath": "$.addressLine1"
+      },
+      {
+        "matchesJsonPath": "$.city"
+      },
+      {
+        "matchesJsonPath": "$.state"
+      },
+      {
+        "matchesJsonPath": "$.zip"
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "tax-clearance-success.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}

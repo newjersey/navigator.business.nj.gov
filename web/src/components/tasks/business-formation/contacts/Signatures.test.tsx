@@ -6,14 +6,14 @@ import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpe
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   BusinessSignerTypeMap,
-  FormationLegalType,
-  PublicFilingLegalType,
   castPublicFilingLegalTypeToFormationType,
+  FormationLegalType,
   generateFormationFormData,
   generateFormationSigner,
+  PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, within } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -28,7 +28,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
@@ -89,7 +89,11 @@ describe("Formation - Signatures", () => {
         page.fillText("Signer 1", "V");
         page.checkSignerBox(1, "signers");
 
-        fireEvent.click(screen.getAllByLabelText("delete additional signer")[0]);
+        fireEvent.click(
+          within(screen.getByTestId("signers-section")).getAllByText(
+            Config.formation.general.removeSectionText
+          )[0]
+        );
 
         await page.submitContactsStep();
         expect(currentBusiness().formationData.formationFormData.signers).toEqual([

@@ -1,9 +1,8 @@
 import { AddressContext } from "@/contexts/addressContext";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { createProfileFieldErrorMap } from "@/lib/types/types";
-import { Address, Municipality } from "@businessnjgovnavigator/shared/";
+import { FormationAddress, Municipality } from "@businessnjgovnavigator/shared/";
 import { ReactElement, ReactNode, useState } from "react";
 
 export const WithStatefulAddressData = ({
@@ -12,19 +11,19 @@ export const WithStatefulAddressData = ({
   municipalities,
 }: {
   children: ReactNode;
-  initialData: Address;
+  initialData: FormationAddress;
   municipalities: Municipality[];
 }): ReactElement => {
-  const [addressData, setAddressData] = useState<Address>(initialData);
-  const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
+  const [addressData, setAddressData] = useState<FormationAddress>(initialData);
+  const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
 
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFormErrorMapContext.Provider value={formContextState}>
       <MunicipalitiesContext.Provider value={{ municipalities: municipalities }}>
         <AddressContext.Provider
           value={{
             state: {
-              addressData: addressData,
+              formationAddressData: addressData,
             },
             setAddressData: setAddressData,
           }}
@@ -32,6 +31,6 @@ export const WithStatefulAddressData = ({
           {children}
         </AddressContext.Provider>
       </MunicipalitiesContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFormErrorMapContext.Provider>
   );
 };

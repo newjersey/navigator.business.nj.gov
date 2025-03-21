@@ -1,5 +1,4 @@
 ---
-filename: nuclear-medicine-technologist
 displayname: nuclear-medicine-technologist
 id: "nuclear-medicine-technologist"
 webflowId: "5f77291190d9ac440e1309d7"

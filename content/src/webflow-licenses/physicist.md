@@ -1,5 +1,4 @@
 ---
-filename: physicist
 displayname: physicist
 id: "physicist"
 webflowId: "5f77291aecb74e8cbd23aacc"

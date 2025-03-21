@@ -1,6 +1,5 @@
-import { createFormContext } from "@/contexts/formContext";
-import { createReducedFieldStates } from "@/lib/types/types";
+import { createFormContext, createReducedFieldStates } from "@/contexts/formContext";
 
 export const taxIdFormContextErrorMap = createReducedFieldStates(["taxId", "taxIdLocation"]);
 type ErrorMapType = typeof taxIdFormContextErrorMap;
-export const taxIdFormContext = createFormContext<ErrorMapType>();
+export const TaxIdFormContext = createFormContext<ErrorMapType>();

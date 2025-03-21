@@ -20,7 +20,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
@@ -109,15 +109,15 @@ describe("Formation - Registered Agent Field", () => {
 
     expect(page.getInputElementByLabel("Agent name").value).toEqual("Original Name");
     expect(page.getInputElementByLabel("Agent email").value).toEqual("original@example.com");
-    expect(page.getInputElementByLabel("Agent name").disabled).toEqual(false);
-    expect(page.getInputElementByLabel("Agent email").disabled).toEqual(false);
+    expect(page.getInputElementByLabel("Agent name").readOnly).toEqual(false);
+    expect(page.getInputElementByLabel("Agent email").readOnly).toEqual(false);
 
     page.selectCheckbox(Config.formation.registeredAgent.sameContactCheckbox);
 
     expect(page.getInputElementByLabel("Agent name").value).toEqual("New Name");
     expect(page.getInputElementByLabel("Agent email").value).toEqual("new@example.com");
-    expect(page.getInputElementByLabel("Agent name").disabled).toEqual(true);
-    expect(page.getInputElementByLabel("Agent email").disabled).toEqual(true);
+    expect(page.getInputElementByLabel("Agent name").readOnly).toEqual(true);
+    expect(page.getInputElementByLabel("Agent email").readOnly).toEqual(true);
   });
 
   it("un-disables but leaves values for agent name and email when user unchecks", async () => {

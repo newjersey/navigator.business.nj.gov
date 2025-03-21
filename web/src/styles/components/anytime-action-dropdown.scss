@@ -1,6 +1,8 @@
+@use "../sass-files/variables";
+
 .anytime-action-dropdown-container {
-  background-color: $cool-extra-light;
-  border: 1px solid $base-lighter;
+  background-color: variables.$cool-extra-light;
+  border: 1px solid variables.$base-lighter;
   padding: 2rem;
   margin: 1.5rem 0;
   border-radius: 0.5rem;
@@ -21,4 +23,39 @@
 .anytime-action-primary-button-mobile {
   padding-top: 3rem;
   width: 100%;
+}
+
+.anytime-action-dropdown-ul-list-container {
+  list-style: none;
+  padding-left: 0;
+  cursor: pointer;
+}
+
+li.anytime-action-dropdown-option.MuiAutocomplete-option {
+  margin: 0;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  align-items: flex-start;
+
+  &.MuiAutocomplete-option[aria-selected="true"].Mui-focusVisible {
+    filter: brightness(97%);
+  }
+
+  &:hover {
+    background-color: variables.$accent-cool-lightest;
+  }
+}
+
+.anytime-action-header-group {
+  margin: 0;
+}
+
+.anytime-action-header-group:not(:first-child) {
+  &::before {
+    margin: 0 0 0.5rem 0;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: variables.$base-lighter;
+  }
 }

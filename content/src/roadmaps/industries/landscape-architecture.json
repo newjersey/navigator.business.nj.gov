@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -57,7 +57,12 @@
     }
   ],
   "name": "Landscape Architecture",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "planning-services",
+    "business-vehicle-title-reg",
+    "pesticides-applicator-licensing"
+  ],
   "displayname": "landscape architecture",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

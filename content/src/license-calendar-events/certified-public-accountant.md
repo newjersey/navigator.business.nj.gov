@@ -1,5 +1,4 @@
 ---
-previewType: renewal
 licenseName: Accountancy-Firm Registration
 urlSlug: certified-public-accountant
 expirationEventDisplayName: Accounting Firm Registration Expiration
@@ -8,7 +7,7 @@ disclaimerText: You can renew your license 60 days before it expires and up to
   30 days after expiration. If you fail to renew your license at this point,
   your license will expire, and you won't be able to provide your licensed
   services.
-summaryDescriptionMd: Your accounting firm registration will expire every three years.
+summaryDescriptionMd: Your accounting firm registration will expire every 3 years.
 issuingAgency: Division of Consumer Affairs
 callToActionLink: https://newjersey.mylicense.com/eGov/Login
 callToActionText: Renew My Accounting Firm Registration
@@ -17,7 +16,8 @@ callToActionText: Renew My Accounting Firm Registration
 :::infoAlert
 If you renew your accounting firm registration within the 30-day late renewal period, you will have to pay a late renewal fee charge.
 :::
-Your accounting firm registration will expire every three years.
+
+Your accounting firm registration will expire every 3 years.
 
 ---
 
@@ -33,6 +33,6 @@ Your accounting firm registration will expire every three years.
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A renewed accounting firm registration valid for three years. It will be sent to your business mailing address on file.
+A renewed accounting firm registration valid for 3 years. It will be sent to your business mailing address on file.
 
 :::

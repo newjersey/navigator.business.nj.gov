@@ -1,8 +1,10 @@
 import { BusinessUser } from "./businessUser";
 import { createBusinessId } from "./domain-logic/createBusinessId";
+import { EnvironmentData } from "./environment";
 import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";
 import { createEmptyProfileData, ProfileData } from "./profileData";
+import { emptyTaxClearanceCertificateData, TaxClearanceCertificateData } from "./taxClearanceCertificate";
 import { TaxFilingData } from "./taxFiling";
 
 export interface UserData {
@@ -11,8 +13,8 @@ export interface UserData {
   readonly lastUpdatedISO: string;
   readonly dateCreatedISO: string;
   readonly versionWhenCreated: number;
-  readonly businesses: Record<string, Business>;
-  readonly currentBusinessId: string;
+  businesses: Record<string, Business>;
+  currentBusinessId: string;
 }
 
 export interface Business {
@@ -26,14 +28,25 @@ export interface Business {
   readonly licenseData: LicenseData | undefined;
   readonly preferences: Preferences;
   readonly taxFilingData: TaxFilingData;
+  readonly taxClearanceCertificateData: TaxClearanceCertificateData;
   readonly formationData: FormationData;
+  readonly environmentData: EnvironmentData | undefined;
+  readonly versionWhenCreated: number;
+  readonly version: number;
+  readonly userId: string;
 }
 
-export const CURRENT_VERSION = 142;
+export const CURRENT_VERSION = 158;
 
-export const createEmptyBusiness = (id?: string): Business => {
+export const createEmptyBusiness = ({
+  userId,
+  businessId,
+}: {
+  userId: string;
+  businessId?: string;
+}): Business => {
   return {
-    id: id || createBusinessId(),
+    id: businessId || createBusinessId(),
     dateCreatedISO: new Date(Date.now()).toISOString(),
     lastUpdatedISO: new Date(Date.now()).toISOString(),
     profileData: createEmptyProfileData(),
@@ -59,6 +72,7 @@ export const createEmptyBusiness = (id?: string): Business => {
       registeredISO: undefined,
       filings: [],
     },
+    taxClearanceCertificateData: emptyTaxClearanceCertificateData,
     formationData: {
       formationFormData: createEmptyFormationFormData(),
       formationResponse: undefined,
@@ -68,6 +82,10 @@ export const createEmptyBusiness = (id?: string): Business => {
       dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     },
+    environmentData: undefined,
+    version: CURRENT_VERSION,
+    versionWhenCreated: CURRENT_VERSION,
+    userId: userId,
   };
 };
 
@@ -81,7 +99,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
     versionWhenCreated: CURRENT_VERSION,
     currentBusinessId: businessId,
     businesses: {
-      [businessId]: createEmptyBusiness(businessId),
+      [businessId]: createEmptyBusiness({ userId: user.id, businessId }),
     },
   };
 };
@@ -89,7 +107,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
 export const sectionNames = ["PLAN", "START", "DOMESTIC_EMPLOYER_SECTION"] as const;
 export type SectionType = (typeof sectionNames)[number];
 
-export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+export type TaskProgress = "TO_DO" | "COMPLETED";
 
 export interface Preferences {
   roadmapOpenSections: SectionType[];
@@ -101,6 +119,7 @@ export interface Preferences {
   isCalendarFullView: boolean;
   isHideableRoadmapOpen: boolean;
   phaseNewlyChanged: boolean;
+  isNonProfitFromFunding?: boolean;
 }
 
 export type OnboardingFormProgress = "UNSTARTED" | "COMPLETED";

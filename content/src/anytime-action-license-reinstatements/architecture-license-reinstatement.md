@@ -1,11 +1,10 @@
 ---
 notesMd: Need to check with engineering team what the system is returning -- is
   it definitely showing licenses that have been expired for five years or less?
-filename: architecture-license-reinstatement
+id: architecture-license-reinstatement
 licenseName: ""
 issuingAgency: "Division of Consumer Affairs"
 name: Apply to Reinstate Your Architecture License
-icon: update-purple.svg
 urlSlug: architecture-license-reinstatement
 summaryDescriptionMd: >-
   You need to submit a reinstatement application if:

@@ -1,5 +1,4 @@
 ---
-filename: painting-spray
 displayname: painting-spray
 id: "painting-spray"
 webflowId: "5f7729119a1bb864c0b3b90f"

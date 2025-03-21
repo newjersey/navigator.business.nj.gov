@@ -14,7 +14,7 @@ import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifie
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { FormControlLabel } from "@mui/material";
-import { CSSProperties, ReactElement } from "react";
+import { CSSProperties, type ReactElement, type ReactNode } from "react";
 
 interface ContentProps {
   children: string;
@@ -25,7 +25,7 @@ interface ContentProps {
   customComponents?: Record<string, ReactElement>;
 }
 
-export const Content = (props: ContentProps): ReactElement => {
+export const Content = (props: ContentProps): ReactNode => {
   const { business } = useUserData();
   const updatedContent = useContentModifiedByUserData(props.children);
 
@@ -140,7 +140,7 @@ export const ExternalLink = ({
       }}
     >
       {children}
-      <Icon className="">launch</Icon>
+      <Icon iconName="launch" />
     </a>
   );
 };
@@ -178,9 +178,9 @@ const InlineIcon = (props: any): ReactElement => {
   const getIconByType = (): ReactElement => {
     switch (props.type as InlineIconType) {
       case "green checkmark":
-        return <Icon className="inline-icon text-green">check_circle</Icon>;
+        return <Icon className="inline-icon text-green" iconName="check_circle" />;
       case "red x mark":
-        return <Icon className="inline-icon text-red">cancel</Icon>;
+        return <Icon className="inline-icon text-red" iconName="cancel" />;
       default:
         return <></>;
     }

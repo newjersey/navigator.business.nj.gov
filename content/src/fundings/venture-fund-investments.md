@@ -1,5 +1,5 @@
 ---
-filename: venture-fund-investments
+notesMd: ""
 name: Venture Fund Investments
 displayName: venture-fund-investments
 urlSlug: venture-fund-investments
@@ -33,6 +33,7 @@ county:
   - All
 sector:
   - technology
+  - life-sciences
 publishStageArchive: ""
 ---
 

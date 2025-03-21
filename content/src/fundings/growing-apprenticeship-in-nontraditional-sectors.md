@@ -1,9 +1,8 @@
 ---
-filename: Growing Apprenticeship in Nontraditional Sectors
 name: Growing Apprenticeship in Nontraditional Sectors (GAINS)
 displayName: gains
 urlSlug: gains
-id: gains
+id: growing-apprenticeship-in-nontraditional-sectors
 sidebarCardBodyText: The Growing Apprenticeship in Nontraditional Sectors
   (GAINS) program aims to promote the expansion and development of
   USDOL-approved Registered Apprenticeship programs.
@@ -41,10 +40,10 @@ publishStageArchive: null
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-Eligible applicants can request funding up to $9,500 per registered apprentice to:
+Eligible applicants can request funding up to $12,000 per registered apprentice to:
 
 * Offset administrative costs incurred creating the Registered Apprenticeship Program
 * Offset costs incurred for training the new apprentice
-* Provide a 50% wage reimbursement for the first twelve months of newly hired apprentices’ employment for occupations paying a starting wage of at least $16.00 per hour
+* Provide a 50% wage reimbursement for the first twelve months of newly hired apprentices’ employment for occupations paying a starting wage of at least $17.00 per hour
 
 :::

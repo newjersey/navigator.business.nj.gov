@@ -9,7 +9,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -50,7 +50,10 @@
   "name": "All Other Businesses",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "cds-lab-research "
+    "cds-lab-research ",
+    "cds-supply",
+    "other-businesses-CRTK-survey",
+    "business-vehicle-title-reg"
   ],
   "displayname": "generic",
   "industryOnboardingQuestions": {

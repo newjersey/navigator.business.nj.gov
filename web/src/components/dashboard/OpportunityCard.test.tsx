@@ -7,7 +7,7 @@ import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generatePreferences } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 

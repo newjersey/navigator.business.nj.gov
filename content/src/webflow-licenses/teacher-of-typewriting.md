@@ -1,5 +1,4 @@
 ---
-filename: teacher-of-typewriting
 displayname: teacher-of-typewriting
 id: "teacher-of-typewriting"
 webflowId: "5f77293a9a1bb837ccb3b915"

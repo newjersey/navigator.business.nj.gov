@@ -17,7 +17,7 @@ export const Task = (props: Props): ReactElement => {
   const { business } = useUserData();
   const { Config } = useConfig();
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-  const taskProgress = (business?.taskProgress && business.taskProgress[props.task.id]) || "NOT_STARTED";
+  const taskProgress = (business?.taskProgress && business.taskProgress[props.task.id]) || "TO_DO";
 
   const renderRequiredLabel = (): ReactNode => {
     if (!props.task.required) {
@@ -43,21 +43,20 @@ export const Task = (props: Props): ReactElement => {
           </span>
         )}
         <div>
-          <Link href={`/tasks/${props.task.urlSlug}`} passHref>
-            <a
-              onClick={(): void => analytics.event.roadmap_task_title.click.go_to_task(props.task.urlSlug)}
-              href={`/tasks/${props.task.urlSlug}`}
-              className={`usa-link margin-right-105 ${props.task.required ? "text-bold" : ""}`}
-              data-task={props.task.id}
-            >
-              {props.task.name}
-            </a>
+          <Link
+            href={`/tasks/${props.task.urlSlug}`}
+            passHref
+            onClick={(): void => analytics.event.roadmap_task_title.click.go_to_task(props.task.urlSlug)}
+            className={`usa-link margin-right-105 ${props.task.required ? "text-bold" : ""}`}
+            data-task={props.task.id}
+            data-testid={props.task.id}
+          >
+            {props.task.name}
           </Link>
 
           {isTabletAndUp && renderRequiredLabel()}
         </div>
       </div>
-
       {!isTabletAndUp && (
         <div className="margin-bottom-2">
           {TaskProgressTagLookup[taskProgress]} <span className="margin-left-1">{renderRequiredLabel()}</span>

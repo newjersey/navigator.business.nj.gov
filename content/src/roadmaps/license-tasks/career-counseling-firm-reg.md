@@ -1,6 +1,5 @@
 ---
 id: career-counseling-firm-reg
-filename: career-counseling-firm-reg
 displayname: career-counseling-firm-reg
 urlSlug: career-counseling-firm-reg
 name: Register Your Career Counseling Firm

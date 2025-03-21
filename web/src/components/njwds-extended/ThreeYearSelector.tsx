@@ -35,7 +35,7 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
           props.onChange(props.years[props.years.indexOf(props.activeYear) - 1]);
         }}
       >
-        <Icon className={`usa-icon--size-3 vam text-base`}>navigate_before</Icon>
+        <Icon className={`usa-icon--size-3 vam text-base`} iconName="navigate_before" />
       </IconButton>
       <CalendarButtonDropdown
         dropdownOptions={props.years.map((year) => {
@@ -74,9 +74,8 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
           className={`usa-icon--size-3 vam text-base ${
             props.years.indexOf(props.activeYear) === 2 ? "visibility-hidden" : ""
           }`}
-        >
-          navigate_next
-        </Icon>
+          iconName="navigate_next"
+        />
       </IconButton>
     </div>
   );

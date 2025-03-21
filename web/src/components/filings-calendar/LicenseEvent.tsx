@@ -1,6 +1,6 @@
 import { CalendarEventItem } from "@/components/filings-calendar/CalendarEventItem";
 import { LicenseEventType } from "@/lib/types/types";
-import { LicenseCalendarEvent } from "@businessnjgovnavigator/shared/taxFiling";
+import { LicenseCalendarEvent } from "@businessnjgovnavigator/shared/";
 import { ReactElement } from "react";
 
 interface Props {

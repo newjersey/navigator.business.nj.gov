@@ -1,4 +1,4 @@
-import { LicenseChecklistResponse, LicenseStatusResults } from "@api/types";
+import { LicenseChecklistResponse, LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
 import { LicenseName } from "@shared/license";
 
 export const formatRegulatedBusinessDynamicsApplications = (

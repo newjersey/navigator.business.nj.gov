@@ -1,6 +1,5 @@
 ---
 displayname: sell-milk
-filename: sell-milk
 urlSlug: sell-milk
 name: Sell Milk Task
 id: sell-milk

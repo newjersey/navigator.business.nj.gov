@@ -52,7 +52,7 @@ describe("<BusinessStructureTask />", () => {
   };
 
   it("shows tooltip text on task progress checkbox", async () => {
-    const business = generateBusiness({ taskProgress: { [taskId]: "IN_PROGRESS" } });
+    const business = generateBusiness({ taskProgress: { [taskId]: "TO_DO" } });
     renderTask(business);
     expect(screen.queryByText(Config.businessStructureTask.uncompletedTooltip)).not.toBeInTheDocument();
     expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
@@ -163,7 +163,7 @@ describe("<BusinessStructureTask />", () => {
     expect(currentBusiness().profileData.legalStructureId).toEqual(legalStructure.id);
   });
 
-  it("updates task progress to in-progress and updates tooltip when editing", async () => {
+  it("task progress remains to-do when editing", async () => {
     const legalStructure = randomLegalStructure();
     const business = generateBusiness({
       profileData: generateProfileData({ legalStructureId: legalStructure.id }),
@@ -174,7 +174,7 @@ describe("<BusinessStructureTask />", () => {
 
     triggerQueueUpdate();
     await waitFor(() => {
-      expect(currentBusiness().taskProgress[taskId]).toEqual("IN_PROGRESS");
+      expect(currentBusiness().taskProgress[taskId]).toEqual("TO_DO");
     });
 
     fireEvent.mouseOver(screen.getByTestId("status-info-tooltip"));
@@ -185,7 +185,7 @@ describe("<BusinessStructureTask />", () => {
   it("updates task progress to completed when saving", async () => {
     const business = generateBusiness({
       profileData: generateProfileData({ legalStructureId: undefined }),
-      taskProgress: { [taskId]: "IN_PROGRESS" },
+      taskProgress: { [taskId]: "TO_DO" },
     });
     renderTask(business);
     fireEvent.click(screen.getByLabelText("limited-liability-company"));
@@ -233,23 +233,23 @@ describe("<BusinessStructureTask />", () => {
   it("updates task progress to in-progress when business structure radio is selected", async () => {
     const business = generateBusiness({
       profileData: generateProfileData({ legalStructureId: undefined }),
-      taskProgress: { [taskId]: "NOT_STARTED" },
+      taskProgress: { [taskId]: "TO_DO" },
     });
     renderTask(business);
     fireEvent.click(screen.getByLabelText("limited-liability-company"));
     triggerQueueUpdate();
     await waitFor(() => {
-      expect(screen.getByTestId("taskProgress")).toHaveTextContent(Config.taskProgress.IN_PROGRESS);
+      expect(screen.getByTestId("taskProgress")).toHaveTextContent(Config.taskProgress.TO_DO);
     });
     await waitFor(() => {
-      expect(currentBusiness().taskProgress[taskId]).toEqual("IN_PROGRESS");
+      expect(currentBusiness().taskProgress[taskId]).toEqual("TO_DO");
     });
   });
 
   it("renders error message and alert when save button is clicked without a radio being selected and removed when selected", async () => {
     const business = generateBusiness({
       profileData: generateProfileData({ legalStructureId: undefined }),
-      taskProgress: { [taskId]: "NOT_STARTED" },
+      taskProgress: { [taskId]: "TO_DO" },
     });
     renderTask(business);
 
@@ -268,7 +268,7 @@ describe("<BusinessStructureTask />", () => {
     expect(screen.queryByTestId("business-structure-alert")).not.toBeInTheDocument();
   });
 
-  it("updates task to NOT_STARTED when remove button is clicked", async () => {
+  it("updates task to TO_DO when remove button is clicked", async () => {
     const legalStructure = randomLegalStructure();
 
     const business = generateBusiness({
@@ -282,7 +282,7 @@ describe("<BusinessStructureTask />", () => {
       expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
     });
     expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
-    expect(currentBusiness().taskProgress[taskId]).toEqual("NOT_STARTED");
+    expect(currentBusiness().taskProgress[taskId]).toEqual("TO_DO");
     expect(currentBusiness().profileData.legalStructureId).toEqual(undefined);
   });
 
@@ -304,7 +304,7 @@ describe("<BusinessStructureTask />", () => {
       expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
     });
     expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
-    expect(currentBusiness().taskProgress[taskId]).toEqual("NOT_STARTED");
+    expect(currentBusiness().taskProgress[taskId]).toEqual("TO_DO");
     expect(currentBusiness().profileData.legalStructureId).toEqual(undefined);
     expect(currentBusiness().profileData.operatingPhase).toEqual("GUEST_MODE");
   });

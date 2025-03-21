@@ -161,8 +161,8 @@ const updateLicenses = async (licenseMarkdowns) => {
   console.info(`Modified a total of ${licenseMarkdowns.length} licenses`);
 };
 
-const updateLicenseWithWebflowId = (webflowId, filename) => {
-  const [mdObject, filepath] = loadNavigatorLicense(`${filename}.md`);
+const updateLicenseWithWebflowId = (webflowId, id) => {
+  const [mdObject, filepath] = loadNavigatorLicense(`${id}.md`);
   const updatedMdObject = {
     ...mdObject,
     webflowId: webflowId,
@@ -189,9 +189,9 @@ const createNewLicenses = async () => {
     }
 
     if (licenseMd.webflowId === undefined) {
-      const filename = licenseMd.filename;
+      const id = licenseMd.id;
       const webflowId = result.data.id;
-      updateLicenseWithWebflowId(webflowId, filename);
+      updateLicenseWithWebflowId(webflowId, id);
     }
     return;
   };
@@ -283,7 +283,7 @@ if (process.env.NODE_ENV === "test") {
 } else if (argsInclude("--legacy-preview")) {
   await (async () => {
     console.info("---- To be updated: -----");
-    console.info((await getWebflowLicensesAlreadyInWebflow()).map((it) => it.filename));
+    console.info((await getWebflowLicensesAlreadyInWebflow()).map((it) => it.id));
     process.exit(0);
   })();
 } else {

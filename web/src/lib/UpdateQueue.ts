@@ -8,6 +8,7 @@ import {
   TaxFilingData,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
 import { FormationData, FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 
 export class UpdateQueueFactory implements UpdateQueue {
@@ -162,6 +163,25 @@ export class UpdateQueueFactory implements UpdateQueue {
         },
       },
     };
+
+    return this;
+  }
+
+  queueEnvironmentData(environmentData: Partial<EnvironmentData>): UpdateQueue {
+    this.internalQueue = {
+      ...this.internalQueue,
+      businesses: {
+        ...this.internalQueue.businesses,
+        [this.internalQueue.currentBusinessId]: {
+          ...this.currentBusiness(),
+          environmentData: {
+            ...this.currentBusiness().environmentData,
+            ...environmentData,
+          },
+        },
+      },
+    };
+
     return this;
   }
 

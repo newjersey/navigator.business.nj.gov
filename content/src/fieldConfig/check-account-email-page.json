@@ -1,0 +1,15 @@
+{
+  "checkAccountEmailPage": {
+    "defaultErrorMessage": "An error has occurred. Please try again later.",
+    "invalidEmailError": "Please enter a valid email address.",
+    "needHelpText": "Need help?",
+    "inputLabel": "Email",
+    "intercomChatText": "Chat with us",
+    "header": "Log in to Business.NJ.gov",
+    "noAccountText": "Don’t have an account?",
+    "linkAccountLinkText": "Sign up and link your myNewJersey account",
+    "inputButton": "Next",
+    "serviceNotAvailableError": "Service unavailable. Please try again later.",
+    "emailNotFoundError": "No account found. Try a different email address."
+  }
+}

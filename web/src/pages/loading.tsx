@@ -1,6 +1,4 @@
-import { PageCircularIndicator } from "@/components/PageCircularIndicator";
-import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { LoadingPageComponent } from "@/components/LoadingPageComponent";
 import { AuthContext } from "@/contexts/authContext";
 import { getActiveUser, triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn } from "@/lib/auth/signinHelper";
@@ -8,9 +6,9 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { onboardingCompleted } from "@businessnjgovnavigator/shared";
+import { onboardingCompleted } from "@businessnjgovnavigator/shared/";
 import { GetStaticPropsResult } from "next";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useEffect } from "react";
 
 export const signInSamlError = "Name+ID+value+was+not+found+in+SAML";
@@ -19,16 +17,23 @@ const LoadingPage = (): ReactElement => {
   const { updateQueue, userData } = useUserData();
   const router = useRouter();
   const { dispatch } = useContext(AuthContext);
+  const loginPageEnabled = process.env.FEATURE_LOGIN_PAGE === "true";
 
   useEffect(() => {
-    if (!router.isReady) {
+    /**
+     * For client-side rendering of the Next.js router, the `query` property
+     * is first initialized as an empty object. This `isReady` check ensures
+     * we don't have false negatives when checking `router.query`.
+     */
+    if (!router?.isReady) {
       return;
     }
+
     if (router.query[QUERIES.code]) {
       getActiveUser().then((currentUser) => {
         dispatch({ type: "LOGIN", activeUser: currentUser });
       });
-    } else if (router.asPath.includes(signInSamlError)) {
+    } else if (router && router.asPath && router.asPath.includes(signInSamlError)) {
       analytics.event.landing_page.arrive.get_unlinked_myNJ_account();
       onGuestSignIn({
         push: router.push,
@@ -37,39 +42,35 @@ const LoadingPage = (): ReactElement => {
         encounteredMyNjLinkingError: true,
       });
     } else {
-      triggerSignIn();
+      if (loginPageEnabled) {
+        router && router.push(ROUTES.login);
+      } else {
+        triggerSignIn();
+      }
     }
-  }, [router, dispatch]);
+  }, [router, dispatch, loginPageEnabled]);
 
   useMountEffectWhenDefined(() => {
     if (!updateQueue) return;
     const business = updateQueue.currentBusiness();
-    if (!onboardingCompleted(business)) {
-      router.push(ROUTES.onboarding);
+    if (business?.onboardingFormProgress && !onboardingCompleted(business)) {
+      router && router.push(ROUTES.onboarding);
     } else if (business.preferences.returnToLink) {
       const pageLink = business.preferences.returnToLink;
       updateQueue
         .queuePreferences({ returnToLink: "" })
         .update()
         .then(() => {
-          router.push(pageLink);
+          router && router.push(pageLink);
         });
     } else {
       updateQueue.update().then(() => {
-        router.push(ROUTES.dashboard);
+        router && router.push(ROUTES.dashboard);
       });
     }
   }, userData);
 
-  return (
-    <PageSkeleton showNavBar logoOnly="NAVIGATOR_LOGO">
-      <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
-        <SingleColumnContainer>
-          <PageCircularIndicator />
-        </SingleColumnContainer>
-      </main>
-    </PageSkeleton>
-  );
+  return <LoadingPageComponent />;
 };
 
 export function getStaticProps(): GetStaticPropsResult<{ noAuth: boolean }> {

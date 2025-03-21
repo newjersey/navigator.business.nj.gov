@@ -1,5 +1,4 @@
 ---
-filename: reseller-of-telecommunications-services
 displayname: reseller-of-telecommunications-services
 id: "reseller-of-telecommunications-services"
 webflowId: "5f7728f090d9ace1c11309d3"

@@ -1,6 +1,5 @@
 ---
-slug: women
-filename: women
+id: women
 displayname: women
 header: Women
 ---

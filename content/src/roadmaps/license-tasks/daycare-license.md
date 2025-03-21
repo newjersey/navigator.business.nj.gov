@@ -1,19 +1,18 @@
 ---
+licenseName: ""
 id: daycare-license
-filename: daycare-license
 displayname: daycare-license
 urlSlug: daycare-license
 name: Obtain Your Child Care Center License
 webflowName: "Daycare: License for a Child Care Center"
 summaryDescriptionMd: >
-  If you have more than six children under your care you must run your child
-  care services outside of your home and will need a child care center license.
+  If you have more than 6 children under your care, you must run your child care
+  services outside of your home and will need a child care center license.
 industryId:
   - daycare
 callToActionText: Apply for My License
 callToActionLink: https://www.nj.gov/dcf/providers/licensing/
 webflowIndustry: Child Care
-licenseName: ""
 licenseCertificationClassification: LICENSE
 agencyId: nj-children-families
 agencyAdditionalContext: Office of Licensing
@@ -23,14 +22,14 @@ webflowId: 5f7728f5e8bf507c5e317899
 
 ## Eligibility Criteria
 
-- Have six or more children under your care
+- Have 6 or more children under your care
 - Have all staff be at least 18 years old
 
 ## Application Requirements
 
 - `EIN|ein`
 - `Business registration certificate (BRC)|business-reg-certificate`
-- `Certificate of formation|certificate-formation`
+- `Certificate of Formation|certificate-formation`
 - Letter of certification from the local government indicating the building’s previous type of use
 - Water bill and a water testing report from your local government
 - Map of your business location with the location of the outdoor playing area

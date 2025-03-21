@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -45,7 +45,7 @@
     {
       "step": 3,
       "weight": 15,
-      "task": "get-insurance"
+      "task": null
     },
     {
       "step": 4,
@@ -58,10 +58,23 @@
       "licenseTask": "pharmacy-cds",
       "weight": 10,
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 12,
+      "task": "pharmacy-staff-licenses"
+    },
+    {
+      "step": 4,
+      "weight": 88,
+      "task": "community-right-to-know-survey"
     }
   ],
   "name": "Pharmacy",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "business-vehicle-title-reg"
+  ],
   "displayname": "pharmacy",
   "industryOnboardingQuestions": {},
   "isEnabled": true,

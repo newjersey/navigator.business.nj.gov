@@ -3,15 +3,15 @@ import { ReactElement, ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
-  secondaryText?: string;
+  secondaryText?: ReactNode;
 }
 
 export const MenuOptionSelected = (props: Props): ReactElement => {
   return (
     <>
-      <div className="flex flex-row">
-        <div className="padding-right-05">
-          <Icon>check</Icon>
+      <div className="flex flex-row padding-right-205">
+        <div className="padding-right-05 flex fac">
+          <Icon iconName="check" />
         </div>
         <div className="text-bold" data-testid="option">
           {props.children}

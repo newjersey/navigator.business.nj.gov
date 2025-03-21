@@ -1,10 +1,10 @@
-import { LicenseStatusResults } from "@api/types";
 import {
   determineLicenseStatus,
   WebserviceLicenseStatusProcessorClient,
 } from "@client/WebserviceLicenseStatusProcessorClient";
 import { LicenseStatusClient, NO_ADDRESS_MATCH_ERROR, SearchLicenseStatus } from "@domain/types";
 import { parseDateWithFormat } from "@shared/dateHelpers";
+import { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
 import { LicenseEntity } from "@shared/license";
 import { generateLicenseSearchNameAndAddress } from "@shared/test";
 import { generateLicenseEntity } from "@test/factories";
@@ -261,7 +261,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
         applicationNumber: "12345",
         checklistItem: "Item 1",
         checkoffStatus: "Completed",
-        licenseStatus: "ACTIVE",
+        licenseStatus: "Active",
         issueDate: undefined,
         dateThisStatus: undefined,
         expirationDate: "20210505 000000.000",
@@ -278,6 +278,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
     expect(result["Pharmacy-Pharmacy"]?.expirationDateISO).toEqual(
       parseDateWithFormat("20210505", "YYYYMMDD").toISOString()
     );
+    expect(result["Pharmacy-Pharmacy"]?.licenseStatus).toEqual("ACTIVE");
   });
 
   it("does not save the expirationDate if invalid", async () => {
@@ -287,7 +288,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
         applicationNumber: "12345",
         checklistItem: "Item 1",
         checkoffStatus: "Completed",
-        licenseStatus: "ACTIVE",
+        licenseStatus: "Active",
         issueDate: undefined,
         dateThisStatus: undefined,
         expirationDate: "20210",
@@ -302,6 +303,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
 
     const result = await searchLicenseStatus(nameAndAddress);
     expect(result["Pharmacy-Pharmacy"]?.expirationDateISO).toBeUndefined();
+    expect(result["Pharmacy-Pharmacy"]?.licenseStatus).toEqual("ACTIVE");
   });
 
   it("does not save the expirationDate if undefined", async () => {
@@ -311,7 +313,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
         applicationNumber: "12345",
         checklistItem: "Item 1",
         checkoffStatus: "Completed",
-        licenseStatus: "ACTIVE",
+        licenseStatus: "Active",
         issueDate: undefined,
         dateThisStatus: undefined,
         expirationDate: undefined,
@@ -326,6 +328,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
 
     const result = await searchLicenseStatus(nameAndAddress);
     expect(result["Pharmacy-Pharmacy"]?.expirationDateISO).toBeUndefined();
+    expect(result["Pharmacy-Pharmacy"]?.licenseStatus).toEqual("ACTIVE");
   });
 
   const queryWithAddress = async (address: string): Promise<LicenseStatusResults> => {
@@ -478,8 +481,34 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
       expect(determineLicenseStatus("Withdrawn")).toBe("WITHDRAWN");
     });
 
-    it("returns UNKNOWN when status is not valid", () => {
-      expect(determineLicenseStatus("fake status")).toBe("UNKNOWN");
+    it("returns UNKNOWN when status is any other status", () => {
+      expect(determineLicenseStatus("FakeStatus")).toBe("UNKNOWN");
     });
+  });
+
+  /*
+    Note: The HIC license applications have different names in the DCA test db than their production db.
+
+    Test - Home Improvement Contractors-Home Improvement Contractor
+    Prod - Home Improvement Contractors-Home Improvement Business Contr
+  */
+  it("renames the HIC license application used in test environment", async () => {
+    stubLicenseStatusClient.search.mockResolvedValue([
+      generateLicenseEntity({
+        addressLine1: "1234 Main St",
+        professionName: "Home Improvement Contractors",
+        licenseType: "Home Improvement Contractor",
+      }),
+    ]);
+
+    const nameAndAddress = generateLicenseSearchNameAndAddress({
+      addressLine1: "1234 Main St",
+    });
+
+    const result = await searchLicenseStatus(nameAndAddress);
+
+    const unTypedResult = result as Record<string, unknown>;
+    expect(unTypedResult["Home Improvement Contractors-Home Improvement Contractor"]).toBeUndefined();
+    expect(result["Home Improvement Contractors-Home Improvement Business Contr"]).toBeDefined();
   });
 });

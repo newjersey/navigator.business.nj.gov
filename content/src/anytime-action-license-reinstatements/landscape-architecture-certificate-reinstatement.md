@@ -12,6 +12,7 @@ issuingAgency: Division of Consumer Affairs
 callToActionText: Reinstate My Certificate of Authorization
 callToActionLink: https://www.njconsumeraffairs.gov/land/Pages/default.aspx
 ---
+You must reinstate your Certificate of Authorization to Provide or Offer Landscape Architectural Services if it is expired or inactive.
 
 ## Application Requirements
 

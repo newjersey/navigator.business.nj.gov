@@ -49,7 +49,9 @@ export const HideableTasks = (): ReactElement => {
             onClick={handleToggleClick}
           >
             <div className="fdr fac">
-              <Icon>{business?.preferences.isHideableRoadmapOpen ? "visibility_off" : "visibility"}</Icon>
+              <Icon
+                iconName={business?.preferences.isHideableRoadmapOpen ? "visibility_off" : "visibility"}
+              />
               <span className="margin-left-05 line-height-sans-2">
                 {business?.preferences.isHideableRoadmapOpen
                   ? Config.dashboardDefaults.hideTaskText

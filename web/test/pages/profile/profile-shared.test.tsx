@@ -99,7 +99,7 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
   ],
 }));
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
@@ -389,6 +389,23 @@ describe("profile - shared", () => {
         });
       });
     });
+
+    describe("tax pin", () => {
+      it.each(["STARTING", "OWNING"])(
+        "displays the tax pin field for %s businessPersona",
+        (businessPersona) => {
+          renderPage({
+            business: generateBusinessForProfile({
+              profileData: generateProfileData({
+                businessPersona: businessPersona as BusinessPersona,
+              }),
+            }),
+          });
+          chooseTab("numbers");
+          expect(screen.getByText(Config.profileDefaults.fields.taxPin.default.header)).toBeInTheDocument();
+        }
+      );
+    });
   });
 
   describe("profile opportunities alert", () => {
@@ -506,21 +523,24 @@ describe("profile - shared", () => {
   });
 
   describe("Special Note Alert for Businesses Formed outside the Navigator", () => {
-    it.each(businessPersonas)("shows the Note Alert for all personas when unauthenticated", (persona) => {
-      const business = generateBusinessForProfile({
-        formationData: generateFormationData({
-          completedFilingPayment: false,
-        }),
-        profileData: generateProfileData({
-          dateOfFormation: undefined,
-          businessPersona: persona,
-        }),
-      });
-      renderPage({ business, isAuthenticated: IsAuthenticated.FALSE });
-      expect(
-        screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
-      ).toBeInTheDocument();
-    });
+    it.each(businessPersonas)(
+      "shows the Note Alert for all personas when unauthenticated for %s",
+      (persona) => {
+        const business = generateBusinessForProfile({
+          formationData: generateFormationData({
+            completedFilingPayment: false,
+          }),
+          profileData: generateProfileData({
+            dateOfFormation: undefined,
+            businessPersona: persona,
+          }),
+        });
+        renderPage({ business, isAuthenticated: IsAuthenticated.FALSE });
+        expect(
+          screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+        ).toBeInTheDocument();
+      }
+    );
 
     it("shows the Note Alert for OWNING businesses and authenticated", () => {
       const business = generateBusinessForProfile({

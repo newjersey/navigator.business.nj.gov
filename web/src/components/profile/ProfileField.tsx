@@ -1,7 +1,7 @@
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { ProfileLockedField } from "@/components/profile/ProfileLockedField";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { ProfileContentField } from "@/lib/types/types";
 import { ReactElement, ReactNode } from "react";
@@ -16,10 +16,11 @@ interface Props {
   noLabel?: boolean;
   hideHeader?: boolean;
   boldAltDescription?: boolean;
+  boldDescription?: boolean;
 }
 
 export const ProfileField = (props: Props): ReactElement => {
-  const { isFormFieldInvalid } = useFormContextFieldHelpers(props.fieldName, ProfileFormContext);
+  const { isFormFieldInvalid } = useFormContextFieldHelpers(props.fieldName, DataFormErrorMapContext);
 
   if (props.isVisible === false) {
     return <></>;
@@ -40,6 +41,7 @@ export const ProfileField = (props: Props): ReactElement => {
                 isAltDescriptionDisplayed={props.displayAltDescription}
                 hideHeader={props.hideHeader}
                 boldAltDescription={props.boldAltDescription}
+                boldDescription={props.boldDescription}
               />
             )}
             <div className={props.noLabel ? "margin-bottom-05" : ""}>{props.children}</div>

@@ -1,5 +1,4 @@
 ---
-filename: nj-ignite
 name: NJ Ignite
 displayName: ignite
 urlSlug: nj-ignite
@@ -29,10 +28,8 @@ preferenceForOpportunityZone: yes
 county:
   - All
 sector:
-  - real-estate
   - technology
   - life-sciences
-  - other-services
 publishStageArchive: ""
 descriptionMd: NJ Ignite provides rent support for technology startups that are
   moving to an approved collaborative workspace.

@@ -1,9 +1,11 @@
 ---
 notesMd: ""
-filename: njstart-registration
+id: njstart-registration
 name: njstart-registration
+category:
+  - Only Show in Subtask
+description: Complete your NJSTART registration to bid on state contracts.
 sectorIds: []
-icon: file-purple.svg
 urlSlug: njstart-registration
 summaryDescriptionMd: >-
   ## Register Your Business with NJSTART

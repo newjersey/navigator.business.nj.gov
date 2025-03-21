@@ -1,8 +1,8 @@
 ---
 summaryDescriptionMd: >-
-  Now that you've written your bylaws and defined `board of
-  trustees|board-trustees` roles, it's time to appoint trustees to take on those
-  roles and responsibilities. This is a critical step to ensure your
+  Now that you've written your bylaws and defined the `board of
+  trustee's|board-trustees` roles, it's time to appoint trustees to take on
+  those roles and responsibilities. This is a critical step to ensure your
   organization is governed with the leadership and expertise to succeed.
 
 
@@ -14,9 +14,8 @@ summaryDescriptionMd: >-
 
   Check out [resources for appointing trustees](https://business.nj.gov/pages/business-support#section-4).
 urlSlug: nonprofit-business-trustees
-filename: nonprofit-business-trustees
 displayname: nonprofit-business-trustees
-name: "Appoint Trustees"
+name: Appoint Trustees
 id: nonprofit-business-trustees
 callToActionLink: ""
 callToActionText: ""

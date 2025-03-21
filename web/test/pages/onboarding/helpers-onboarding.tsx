@@ -5,38 +5,25 @@ import {
   EssentialQuestions,
   getEssentialQuestion,
   hasEssentialQuestion,
+  hasMultipleEssentialQuestions,
 } from "@/lib/domain-logic/essentialQuestions";
 import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
 import Onboarding from "@/pages/onboarding";
 import { withAuth } from "@/test/helpers/helpers-renderers";
-import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { WithStatefulUserData, currentBusiness } from "@/test/mock/withStatefulUserData";
+import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
-  BusinessPersona,
   DateObject,
   Municipality,
   UserData,
-  businessStructureTaskId,
-  createEmptyUser,
   createEmptyUserData,
   emptyIndustrySpecificData,
-  generateBusiness,
-  generateProfileData,
   generateUser,
-  generateUserDataForBusiness,
   getIndustries,
   industrySpecificDataChoices,
 } from "@businessnjgovnavigator/shared/";
 import { ThemeProvider, createTheme } from "@mui/material";
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-  waitForElementToBeRemoved,
-  within,
-} from "@testing-library/react";
+import { fireEvent, render, screen, waitForElementToBeRemoved, within } from "@testing-library/react";
 
 const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();
@@ -217,106 +204,6 @@ export const createPageHelpers = (): PageHelpers => {
   };
 };
 
-export const runNonprofitOnboardingTests = ({
-  businessPersona,
-  industryPage,
-  lastPage,
-}: {
-  businessPersona: BusinessPersona;
-  industryPage: number;
-  lastPage: number;
-}): void => {
-  const initialUserData = createEmptyUserData(createEmptyUser());
-  const userData: UserData = {
-    ...initialUserData,
-    businesses: {
-      [initialUserData.currentBusinessId]: {
-        ...initialUserData.businesses[initialUserData.currentBusinessId],
-        profileData: {
-          ...initialUserData.businesses[initialUserData.currentBusinessId].profileData,
-          businessPersona,
-          foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : [],
-        },
-      },
-    },
-  };
-
-  it("sets legal structure undefined if nonprofit is kept as default No", async () => {
-    useMockRouter({ isReady: true, query: { page: industryPage.toString() } });
-    const { page } = renderPage({ userData });
-    page.selectByValue("Industry", "e-commerce");
-    page.clickNext();
-    await waitFor(() => {
-      expect(mockPush).toHaveBeenCalled();
-    });
-    expect(currentBusiness().profileData.legalStructureId).toBeUndefined();
-    expect(currentBusiness().profileData.isNonprofitOnboardingRadio).toBe(false);
-  });
-
-  it("sets legal structure to nonprofit if nonprofit is selected Yes", async () => {
-    useMockRouter({ isReady: true, query: { page: industryPage.toString() } });
-    const { page } = renderPage({ userData });
-    page.selectByValue("Industry", "e-commerce");
-    page.chooseRadio("is-nonprofit-onboarding-radio-true");
-
-    page.clickNext();
-    await waitFor(() => {
-      expect(mockPush).toHaveBeenCalled();
-    });
-    expect(currentBusiness().profileData.legalStructureId).toEqual("nonprofit");
-    expect(currentBusiness().profileData.isNonprofitOnboardingRadio).toBe(true);
-  });
-
-  it("marks business structure task complete if nonprofit is Yes", async () => {
-    useMockRouter({ isReady: true, query: { page: lastPage.toString() } });
-    const filledInUserData = generateUserDataForBusiness(
-      generateBusiness({
-        onboardingFormProgress: "UNSTARTED",
-        taskProgress: {},
-        profileData: generateProfileData({
-          businessPersona,
-          foreignBusinessTypeIds:
-            businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
-          legalStructureId: "nonprofit",
-          isNonprofitOnboardingRadio: true,
-        }),
-      })
-    );
-    const { page } = renderPage({ userData: filledInUserData });
-
-    page.clickNext();
-    await waitFor(() => {
-      expect(mockPush).toHaveBeenCalled();
-    });
-    expect(currentBusiness().taskProgress).toEqual({ [businessStructureTaskId]: "COMPLETED" });
-  });
-
-  it("does not change business structure task if nonprofit is No", async () => {
-    useMockRouter({ isReady: true, query: { page: lastPage.toString() } });
-    const filledInUserData = generateUserDataForBusiness(
-      generateBusiness({
-        taskProgress: {},
-        onboardingFormProgress: "UNSTARTED",
-        profileData: generateProfileData({
-          businessPersona,
-          foreignBusinessTypeIds:
-            businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
-          legalStructureId: undefined,
-          isNonprofitOnboardingRadio: false,
-        }),
-      })
-    );
-    const { page } = renderPage({ userData: filledInUserData });
-
-    page.clickNext();
-
-    await waitFor(() => {
-      expect(mockPush).toHaveBeenCalled();
-    });
-    expect(currentBusiness().taskProgress).toEqual({});
-  });
-};
-
 export const mockEmptyApiSignups = (): void => {
   mockApi.postGetAnnualFilings.mockImplementation((request) => {
     return Promise.resolve(request);
@@ -330,7 +217,9 @@ export const mockSuccessfulApiSignups = (): void => {
 };
 
 export const industriesWithSingleEssentialQuestion = getIndustries().filter((industry) => {
-  return hasEssentialQuestion(industry.id) && industry.isEnabled && industry.id !== "employment-agency";
+  return (
+    hasEssentialQuestion(industry.id) && industry.isEnabled && !hasMultipleEssentialQuestions(industry.id)
+  );
 });
 
 export const industriesWithOutEssentialQuestion = getIndustries().filter((industry) => {

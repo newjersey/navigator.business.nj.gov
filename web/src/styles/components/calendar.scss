@@ -1,7 +1,9 @@
+@use "../sass-files/variables";
+
 .calendar-container {
   margin-top: 2.5rem;
-  background-color: $cool-extra-light;
-  border: 1px solid $base-lighter;
+  background-color: variables.$cool-extra-light;
+  border: 1px solid variables.$base-lighter;
   padding-top: 2em;
   padding-bottom: 2rem;
   padding-right: 2rem;
@@ -15,12 +17,12 @@
   justify-content: space-between;
   align-items: left;
   padding: 1em 1.75em;
-  border: 1px solid $base-lighter;
-  background-color: $white;
+  border: 1px solid variables.$base-lighter;
+  background-color: variables.$white;
   margin-bottom: 2em;
   border-radius: 0.25em;
 
-  @media all and (min-width: $xs) {
+  @media all and (min-width: variables.$xs) {
     flex-direction: row;
     align-items: center;
   }

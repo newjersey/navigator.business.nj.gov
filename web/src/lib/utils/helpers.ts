@@ -34,14 +34,22 @@ export const useOnWindowResize = (fun: () => void): void => {
   });
 };
 
-export const useMountEffectWhenDefined = (fun: () => void, thingToBeDefined: unknown | undefined): void => {
+export const useMountEffectWhenDefined = (
+  func: () => void,
+  thingToBeDefined: unknown | unknown[] | undefined
+): void => {
   const effectOccurred = useRef<boolean>(false);
   useEffect(() => {
-    if (thingToBeDefined && !effectOccurred.current) {
+    const isDefined = Array.isArray(thingToBeDefined)
+      ? thingToBeDefined.every((item) => item !== undefined)
+      : thingToBeDefined !== undefined;
+
+    if (isDefined && !effectOccurred.current) {
       effectOccurred.current = true;
-      fun();
+      func();
     }
-  }, [thingToBeDefined, fun]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [func, ...(Array.isArray(thingToBeDefined) ? thingToBeDefined : [thingToBeDefined])]);
 };
 
 export const useScrollToPathAnchor = (): void => {
@@ -65,10 +73,8 @@ export const getTaskStatusUpdatedMessage = (taskStatus: TaskProgress): string =>
   const taskUpdatedMessagePrefix = Config.taskDefaults.taskProgressSnackbarPrefix;
 
   switch (taskStatus) {
-    case "NOT_STARTED":
-      return `${taskUpdatedMessagePrefix} "${Config.taskProgress.NOT_STARTED}"`;
-    case "IN_PROGRESS":
-      return `${taskUpdatedMessagePrefix} "${Config.taskProgress.IN_PROGRESS}"`;
+    case "TO_DO":
+      return `${taskUpdatedMessagePrefix} "${Config.taskProgress.TO_DO}"`;
     case "COMPLETED":
       return `${taskUpdatedMessagePrefix} "${Config.taskProgress.COMPLETED}"`;
   }

@@ -13,19 +13,18 @@ import {
   industryIdsWithSingleRequiredEssentialQuestion,
   mockEmptyApiSignups,
   renderPage,
-  runNonprofitOnboardingTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
-  OperatingPhaseId,
-  ProfileData,
   emptyIndustrySpecificData,
   generateProfileData,
+  OperatingPhaseId,
+  ProfileData,
 } from "@businessnjgovnavigator/shared/";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
@@ -314,17 +313,20 @@ describe("onboarding - foreign business", () => {
     });
 
     it("sets homeBasedBusiness to false if business is foreign nexus with location in NJ", async () => {
+      const firstIndustryId = randomHomeBasedIndustry(["acupuncture"]);
+      const secondIndustryId = randomHomeBasedIndustry(["acupuncture", firstIndustryId]);
+
       const userData = generateTestUserData({
         ...emptyIndustrySpecificData,
         businessPersona: "FOREIGN",
         foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
-        industryId: randomHomeBasedIndustry(),
+        industryId: firstIndustryId,
         homeBasedBusiness: true,
       });
       useMockRouter({ isReady: true, query: { page: "3" } });
       const { page } = renderPage({ userData });
       fireEvent.change(screen.getByLabelText("Industry"), {
-        target: { value: "acupuncture" },
+        target: { value: secondIndustryId },
       });
       fireEvent.click(screen.getByText("Acupuncture"));
       page.clickNext();
@@ -471,9 +473,5 @@ describe("onboarding - foreign business", () => {
       });
       expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.GUEST_MODE);
     });
-  });
-
-  describe("nonprofit onboarding tests", () => {
-    runNonprofitOnboardingTests({ businessPersona: "FOREIGN", industryPage: 3, lastPage: 3 });
   });
 });

@@ -106,7 +106,8 @@ type Clicked =
   | "go_to_NavigatorAccount_setup"
   | "log_out"
   | "unlinked_myNJ_account"
-  | "get_unlinked_myNJ_account_modal";
+  | "get_unlinked_myNJ_account_modal"
+  | "link_your_myNJ_account";
 
 type OnSiteSection =
   | "landing_page"
@@ -216,7 +217,10 @@ type Item =
   | "hidden_opportunities_section"
   | "link_with_myNJ"
   | "landing_page"
-  | "skip_to_main_content";
+  | "skip_to_main_content"
+  | "show_funding_opportunities"
+  | "check_account_log_in"
+  | "link_your_myNJ_account_link";
 
 type BooleanResponseOption = "yes" | "no";
 
@@ -981,22 +985,13 @@ export default {
     },
     task_status_checkbox: {
       click: {
-        selected_not_started_status: () => {
+        selected_to_do_status: () => {
           eventRunner.track({
             event: "task_manual_status_change",
             legacy_event_action: "click",
             legacy_event_category: "task_status_checkbox",
             legacy_event_label: "selected_not_started_status",
             status_selected: "selected_not_started",
-          });
-        },
-        selected_in_progress_status: () => {
-          eventRunner.track({
-            event: "task_manual_status_change",
-            legacy_event_action: "click",
-            legacy_event_category: "task_status_checkbox",
-            legacy_event_label: "selected_in_progress_status",
-            status_selected: "selected_in_progress",
           });
         },
         selected_completed_status: () => {
@@ -2342,6 +2337,63 @@ export default {
             legacy_event_action: "click",
             legacy_event_label: "go_to_onboarding",
             event: "call_to_action_clicks",
+            clicked_to: "/onboarding",
+          });
+        },
+      },
+    },
+    show_me_funding_opportunities: {
+      click: {
+        show_me_funding_opportunities: () => {
+          eventRunner.track({
+            legacy_event_category: "show_me_funding_opportunities_button",
+            legacy_event_action: "click",
+            legacy_event_label: "show_calendar",
+            event: "link_clicks",
+            click_text: "show_calendar",
+            item: "show_funding_opportunities",
+          });
+        },
+      },
+    },
+    check_account_help_button: {
+      click: {
+        open_live_chat: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "check_account_help_button",
+            legacy_event_label: "open_live_chat",
+            click_text: "check_account_help_button",
+            clicked_to: "open_live_chat",
+          });
+        },
+      },
+    },
+    check_account_next_button: {
+      submit: {
+        go_to_myNJ_login: () => {
+          eventRunner.track({
+            event: "account_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "check_account_log_in",
+            legacy_event_label: "go_to_myNJ_login",
+            clicked: "go_to_myNJ_login",
+            item: "check_account_log_in",
+          });
+        },
+      },
+    },
+    check_account_link_account_button: {
+      click: {
+        link_account: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_category: "link_your_myNJ_account_link",
+            legacy_event_action: "click",
+            legacy_event_label: "unhide_card",
+            clicked: "link_your_myNJ_account",
+            item: "link_your_myNJ_account_link",
             clicked_to: "/onboarding",
           });
         },

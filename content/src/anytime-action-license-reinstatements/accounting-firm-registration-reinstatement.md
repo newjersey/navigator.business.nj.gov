@@ -1,8 +1,7 @@
 ---
-filename: accounting-firm-registration-reinstatement
+id: accounting-firm-registration-reinstatement
 name: Apply to Reinstate Your Accounting Firm Registration
 licenseName: Accountancy-Firm Registration
-icon: update-purple.svg
 urlSlug: accounting-firm-registration-reinstatement
 summaryDescriptionMd: Your accounting firm registration needs to be reinstated
   because it is expired or inactive.

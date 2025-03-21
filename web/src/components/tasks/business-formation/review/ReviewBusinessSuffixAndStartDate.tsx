@@ -1,4 +1,4 @@
-import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
+import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { defaultDisplayDateFormat } from "@/lib/types/types";
@@ -25,7 +25,7 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
 
   const formattLawResponse = (willPracticeLaw: boolean | undefined): string | undefined => {
     if (willPracticeLaw === true) {
-      return Config.formation.fields.willPracticeLaw.radioNoText;
+      return Config.formation.fields.willPracticeLaw.radioYesText;
     } else if (willPracticeLaw === false) {
       return Config.formation.fields.willPracticeLaw.radioNoText;
     }

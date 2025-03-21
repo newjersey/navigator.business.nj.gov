@@ -15,6 +15,7 @@ export const constructionOptions = ["RESIDENTIAL", "COMMERCIAL_OR_INDUSTRIAL", "
 export const residentialConstructionOptions = ["NEW_HOME_CONSTRUCTION", "HOME_RENOVATIONS", "BOTH"] as const;
 export const employmentPersonnelServiceOptions = ["JOB_SEEKERS", "EMPLOYERS"] as const;
 export const employmentPlacementOptions = ["TEMPORARY", "PERMANENT", "BOTH"] as const;
+export const propertyLeaseTypeOptions = ["SHORT_TERM_RENTAL", "LONG_TERM_RENTAL", "BOTH"] as const;
 
 export interface IndustrySpecificData {
   readonly liquorLicense: boolean;
@@ -38,6 +39,10 @@ export interface IndustrySpecificData {
   readonly employmentPersonnelServiceType: EmploymentAndPersonnelServicesType;
   readonly employmentPlacementType: EmploymentPlacementType;
   readonly carnivalRideOwningBusiness: boolean | undefined;
+  readonly propertyLeaseType: PropertyLeaseType;
+  readonly hasThreeOrMoreRentalUnits: boolean | undefined;
+  readonly travelingCircusOrCarnivalOwningBusiness: boolean | undefined;
+  readonly vacantPropertyOwner: boolean | undefined;
 }
 
 type IndustrySpecificDataChoices = {
@@ -66,6 +71,10 @@ export const industrySpecificDataChoices: IndustrySpecificDataChoices = {
   employmentPersonnelServiceType: [...employmentPersonnelServiceOptions],
   employmentPlacementType: [...employmentPlacementOptions],
   carnivalRideOwningBusiness: booleanChoice,
+  propertyLeaseType: [...propertyLeaseTypeOptions],
+  hasThreeOrMoreRentalUnits: booleanChoice,
+  travelingCircusOrCarnivalOwningBusiness: booleanChoice,
+  vacantPropertyOwner: booleanChoice,
 };
 
 export const emptyIndustrySpecificData: IndustrySpecificData = {
@@ -90,6 +99,10 @@ export const emptyIndustrySpecificData: IndustrySpecificData = {
   employmentPersonnelServiceType: undefined,
   employmentPlacementType: undefined,
   carnivalRideOwningBusiness: undefined,
+  propertyLeaseType: undefined,
+  hasThreeOrMoreRentalUnits: undefined,
+  travelingCircusOrCarnivalOwningBusiness: undefined,
+  vacantPropertyOwner: undefined,
 };
 
 export interface ProfileData extends IndustrySpecificData {
@@ -114,12 +127,12 @@ export interface ProfileData extends IndustrySpecificData {
   readonly naicsCode: string;
   readonly foreignBusinessTypeIds: ForeignBusinessTypeId[];
   readonly nexusDbaName: string;
-  readonly needsNexusDbaName: boolean;
   readonly operatingPhase: OperatingPhaseId;
-  readonly isNonprofitOnboardingRadio: boolean;
   readonly nonEssentialRadioAnswers: Record<string, boolean | undefined>;
   readonly elevatorOwningBusiness: boolean | undefined;
   readonly communityAffairsAddress?: CommunityAffairsAddress;
+  readonly raffleBingoGames: boolean | undefined;
+  readonly businessOpenMoreThanTwoYears: boolean | undefined;
 }
 
 export const emptyProfileData: ProfileData = {
@@ -144,12 +157,12 @@ export const emptyProfileData: ProfileData = {
   naicsCode: "",
   foreignBusinessTypeIds: [],
   nexusDbaName: "",
-  needsNexusDbaName: false,
   operatingPhase: OperatingPhaseId.GUEST_MODE,
-  isNonprofitOnboardingRadio: false,
   nonEssentialRadioAnswers: {},
   elevatorOwningBusiness: undefined,
   communityAffairsAddress: undefined,
+  raffleBingoGames: undefined,
+  businessOpenMoreThanTwoYears: undefined,
   ...emptyIndustrySpecificData,
 };
 
@@ -163,6 +176,7 @@ export type ConstructionType = "RESIDENTIAL" | "COMMERCIAL_OR_INDUSTRIAL" | "BOT
 export type ResidentialConstructionType = "NEW_HOME_CONSTRUCTION" | "HOME_RENOVATIONS" | "BOTH" | undefined;
 export type EmploymentAndPersonnelServicesType = "JOB_SEEKERS" | "EMPLOYERS" | undefined;
 export type EmploymentPlacementType = "TEMPORARY" | "PERMANENT" | "BOTH" | undefined;
+export type PropertyLeaseType = "SHORT_TERM_RENTAL" | "LONG_TERM_RENTAL" | "BOTH" | undefined;
 export const businessPersonas = ["STARTING", "OWNING", "FOREIGN"] as const;
 export type BusinessPersona = (typeof businessPersonas)[number] | undefined;
 

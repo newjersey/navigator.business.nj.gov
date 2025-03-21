@@ -6,10 +6,10 @@ notesMd: >-
 
   Note: Consider adding contextual info for the term "dumbwaiter" - can check with Don if that is something that would need to be explained.
 header: Elevator Device
-slug: elevator-device
+id: elevator-device
 displayname: elevator-device
 ---
-An elevator device is an elevator, escalator, moving walk, dumbwaiter, wheelchair lift, chair lift, or man lift. 
 
-If you own a space, such as a commercial, manufacturing, or rental space, with an elevator device, you must register the device with the Department of Community Affairs before you can use it or do any work to it. 
+An elevator device is an elevator, escalator, moving walk, dumbwaiter, wheelchair lift, chair lift, or man lift.
 
+If you own a space, such as a commercial, manufacturing, or rental space, with an elevator device, you must register the device with the Department of Community Affairs before you can use it or do any work to it.

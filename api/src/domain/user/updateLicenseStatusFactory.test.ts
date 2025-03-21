@@ -7,6 +7,7 @@ import {
 import { updateLicenseStatusFactory } from "@domain/user/updateLicenseStatusFactory";
 import * as getCurrentDateModule from "@shared/dateHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
 import {
   generateBusiness,
   generateLicenseData,
@@ -14,7 +15,6 @@ import {
   generateLicenseStatusItem,
   generateProfileData,
   generateUserDataForBusiness,
-  modifyCurrentBusiness,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
 
@@ -246,8 +246,8 @@ describe("updateLicenseStatus", () => {
 
   describe("error handling", () => {
     it("throws error when both webservice and rgb api call fails", async () => {
-      stubWebserviceLicenseStatusSearch.mockRejectedValue("fail");
-      stubRGBLicenseStatusSearch.mockRejectedValue("fail");
+      stubWebserviceLicenseStatusSearch.mockRejectedValue(new Error("fail"));
+      stubRGBLicenseStatusSearch.mockRejectedValue(new Error("fail"));
 
       userData = modifyCurrentBusiness(userData, (business) => ({
         ...business,
@@ -256,36 +256,26 @@ describe("updateLicenseStatus", () => {
 
       await expect(updateLicenseStatus(userData, nameAndAddress)).rejects.toThrow(
         JSON.stringify({
-          webserviceErrorMessage: "fail",
-          rgbErrorMessage: "fail",
+          webserviceErrorMessage: new Error("fail"),
+          rgbErrorMessage: new Error("fail"),
         })
       );
     });
 
-    it("updates license data of current task to have error license data when webservice receives NO_MATCH_ERROR and rgb also fails", async () => {
-      stubWebserviceLicenseStatusSearch.mockRejectedValue(NO_MATCH_ERROR);
-      stubRGBLicenseStatusSearch.mockRejectedValue("fail");
+    it("returns empty license object when data of current task to have error license data when webservice receives NO_MATCH_ERROR and rgb also fails", async () => {
+      stubWebserviceLicenseStatusSearch.mockRejectedValue(new Error(NO_MATCH_ERROR));
+      stubRGBLicenseStatusSearch.mockRejectedValue(new Error("fail"));
 
       userData = modifyCurrentBusiness(userData, (business) => ({
         ...business,
         licenseData: generateLicenseData({}),
       }));
 
-      const resultUserData = await updateLicenseStatus(userData, nameAndAddress, "pharmacy-license");
+      const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
       const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
       const resultLicenseData = resultCurrentBusiness.licenseData;
-      const licenseType1Expected = {
-        "Pharmacy-Pharmacy": {
-          licenseStatus: "UNKNOWN",
-          expirationDateISO: undefined,
-          hasError: true,
-
-          checklistItems: [],
-          nameAndAddress,
-          lastUpdatedISO: expectedCurrentDate,
-        },
-      };
+      const licenseType1Expected = {};
 
       expect(resultLicenseData).toEqual({
         lastUpdatedISO: expectedCurrentDate,
@@ -296,35 +286,21 @@ describe("updateLicenseStatus", () => {
     });
 
     it.each([NO_MATCH_ERROR, NO_MAIN_APPS_ERROR, NO_ADDRESS_MATCH_ERROR])(
-      "updates license data of current task to have error license data when rgb receives %s and webservice also fails",
+      "returns empty license task of current task to have error license data when rgb receives %s and webservice also fails",
       async (error) => {
-        stubWebserviceLicenseStatusSearch.mockRejectedValue("fails");
-        stubRGBLicenseStatusSearch.mockRejectedValue(error);
+        stubWebserviceLicenseStatusSearch.mockRejectedValue(new Error("fails"));
+        stubRGBLicenseStatusSearch.mockRejectedValue(new Error(error));
 
         userData = modifyCurrentBusiness(userData, (business) => ({
           ...business,
           licenseData: generateLicenseData({}),
         }));
 
-        const resultUserData = await updateLicenseStatus(
-          userData,
-          nameAndAddress,
-          "home-health-aide-license"
-        );
+        const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
         const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
         const resultLicenseData = resultCurrentBusiness.licenseData;
-        const licenseType1Expected = {
-          "Health Care Services": {
-            licenseStatus: "UNKNOWN",
-            expirationDateISO: undefined,
-            hasError: true,
-
-            checklistItems: [],
-            nameAndAddress,
-            lastUpdatedISO: expectedCurrentDate,
-          },
-        };
+        const licenseType1Expected = {};
 
         expect(resultLicenseData).toEqual({
           lastUpdatedISO: expectedCurrentDate,
@@ -338,7 +314,7 @@ describe("updateLicenseStatus", () => {
 
   describe("task progress", () => {});
 
-  it("defaults the license task status to NOT_STARTED", async () => {
+  it("defaults the license task status to TO_DO", async () => {
     const webserviceChecklistItems = [generateLicenseStatusItem({})];
     const licenseType1 = {
       "Pharmacy-Pharmacy": {
@@ -363,11 +339,11 @@ describe("updateLicenseStatus", () => {
 
     expect(resultCurrentBusiness.taskProgress).toEqual({
       ...initialTaskProgress,
-      "pharmacy-license": "NOT_STARTED",
+      "pharmacy-license": "TO_DO",
     });
   });
 
-  it("updates the license task status to IN_PROGRESS when license is pending", async () => {
+  it("the license task status remains TO_DO when license is pending", async () => {
     const webserviceChecklistItems = [generateLicenseStatusItem({})];
     const licenseType1 = {
       "Pharmacy-Pharmacy": {
@@ -392,7 +368,7 @@ describe("updateLicenseStatus", () => {
 
     expect(resultCurrentBusiness.taskProgress).toEqual({
       ...initialTaskProgress,
-      "pharmacy-license": "IN_PROGRESS",
+      "pharmacy-license": "TO_DO",
     });
   });
 
@@ -461,7 +437,7 @@ describe("updateLicenseStatus", () => {
     expect(resultCurrentBusiness.taskProgress).toEqual({
       ...initialTaskProgress,
       "pharmacy-license": "COMPLETED",
-      "home-health-aide-license": "IN_PROGRESS",
+      "home-health-aide-license": "TO_DO",
     });
   });
 
@@ -484,7 +460,7 @@ describe("updateLicenseStatus", () => {
       ...business,
       taskProgress: {
         ...business.taskProgress,
-        "health-club-registration": "IN_PROGRESS",
+        "health-club-registration": "TO_DO",
       },
       licenseData: generateLicenseData({}),
     }));

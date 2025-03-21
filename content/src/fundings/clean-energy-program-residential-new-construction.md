@@ -1,9 +1,8 @@
 ---
-filename: Clean Energy Program - Residential New Construction
 name: New Jersey’s Clean Energy Program - Residential New Construction
 displayName: rnc-clean-energy
 urlSlug: njcep-rnc
-id: njcep-rnc
+id: clean-energy-program-residential-new-construction
 sidebarCardBodyText: The Residential New Construction Program is set to increase
   energy efficiency and environmental performance of residential new
   construction buildings.
@@ -42,10 +41,11 @@ descriptionMd: The Residential New Construction (RNC) Program is designed to
   new construction buildings (single and multifamily) in New Jersey by offering
   technical support and incentives to builders that comply with these standards.
 ---
+
 ## Eligibility
 
-* Must use natural gas and/or electricity as the primary heating fuel supplied by a New Jersey investor‐owned utility
-* Must be newly constructed single family, multi‐single low‐rise, and high‐rise multifamily buildings
+- Must use natural gas and/or electricity as the primary heating fuel supplied by a New Jersey investor‐owned utility
+- Must be newly constructed single family, multi‐single low‐rise, and high‐rise multifamily buildings
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 

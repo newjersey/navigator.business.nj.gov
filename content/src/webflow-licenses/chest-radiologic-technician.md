@@ -1,5 +1,4 @@
 ---
-filename: chest-radiologic-technician
 displayname: chest-radiologic-technician
 id: "chest-radiologic-technician"
 webflowId: "5f7728fbe10dec0a6d024f11"

@@ -18,6 +18,9 @@ export const useAddressErrors = (): AddressErrorsResponse => {
     "addressMunicipality",
     "addressState",
     "addressZipCode",
+    "addressCity",
+    "addressCountry",
+    "addressProvince",
   ]);
 
   const doesFieldHaveError = (field: FieldsForAddressErrorHandling): boolean => {
@@ -26,7 +29,7 @@ export const useAddressErrors = (): AddressErrorsResponse => {
     }
     const addressFieldErrorState = getErrorStateForAddressField({
       field,
-      addressData: state.addressData,
+      formationAddressData: state.formationAddressData,
     });
     return addressFieldErrorState.hasError;
   };
@@ -44,7 +47,7 @@ export const useAddressErrors = (): AddressErrorsResponse => {
   const getFieldErrorLabel = (field: AddressFields): string => {
     const addressFieldErrorState = getErrorStateForAddressField({
       field,
-      addressData: state.addressData,
+      formationAddressData: state.formationAddressData,
     });
     return addressFieldErrorState.label;
   };

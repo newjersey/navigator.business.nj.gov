@@ -1,6 +1,5 @@
 ---
-slug: substantial-renovation
-filename: substantial-renovation
+id: substantial-renovation
 displayname: substantial-renovation
 header: Substantial Renovation
 ---

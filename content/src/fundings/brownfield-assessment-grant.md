@@ -1,5 +1,4 @@
 ---
-filename: brownfield-assessment-grant
 name: Brownfield Assessment Grant
 displayName: brownfield-assessment
 urlSlug: brownfield-assessment-grant
@@ -31,12 +30,13 @@ county:
 sector: []
 publishStageArchive: Do Not Publish
 ---
+
 ## Eligibility
 
-* Available for eligible brownfield sites in the state for the purpose of assessing known or suspected site contamination
+- Available for eligible brownfield sites in the state for the purpose of assessing known or suspected site contamination
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-Free environmental site assessment to evaluate contamination at brownfield sites.
+You receive a free environmental site assessment to evaluate contamination at brownfield sites.
 
 :::

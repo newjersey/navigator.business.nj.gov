@@ -1,7 +1,6 @@
 ---
 urlSlug: alcohol-plenary-retail-consumption
 webflowName: Alcohol Plenary Retail Consumption
-filename: alcohol-plenary-retail-consumption
 displayname: alcohol-plenary-retail-consumption
 agencyId: law-public-safety
 agencyAdditionalContext: Division of Alcoholic Beverage Control

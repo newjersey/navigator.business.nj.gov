@@ -30,7 +30,7 @@ export const AnytimeActionElement = (props: Props): ReactElement => {
         <>
           <HorizontalLine />
           <span className="h5-styling" data-testid="form-id-header">
-            {Config.filingDefaults.formText} &nbsp;
+            {Config.filingDefaults.issuingAgencyText} &nbsp;
           </span>
           <span className="h6-styling">{props.anytimeAction.issuingAgency}</span>
         </>

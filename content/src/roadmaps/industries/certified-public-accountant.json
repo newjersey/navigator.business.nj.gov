@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -54,7 +54,9 @@
     }
   ],
   "name": "Accounting, Bookkeeping, and Tax Preparation",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "certified-public-accountant",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

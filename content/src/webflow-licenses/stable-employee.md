@@ -1,5 +1,4 @@
 ---
-filename: stable-employee
 displayname: stable-employee
 id: "stable-employee"
 webflowId: "5f772965f278ccbf4fb0ce22"

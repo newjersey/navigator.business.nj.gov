@@ -1,5 +1,4 @@
 ---
-filename: direct-loans
 name: Direct Loans
 displayName: direct-loans
 urlSlug: direct-loans
@@ -28,13 +27,32 @@ certifications: []
 preferenceForOpportunityZone: ""
 county:
   - All
-sector: []
+sector:
+  - accommodation-and-food-services
+  - agriculture-forestry-fishing-and-hunting
+  - clean-energy
+  - administrative-and-employment-services
+  - arts-entertainment-and-recreation
+  - construction
+  - digital-and-print-media
+  - educational-services
+  - finance-and-insurance
+  - health-care-and-social-assistance
+  - life-sciences
+  - manufacturing
+  - mining-quarrying-and-oil-and-gas-extraction
+  - offshore-wind
+  - other-services
+  - organizational-or-financial-management
+  - professional-scientific-and-technical-services
+  - real-estate
+  - retail-trade-and-ecommerce
 publishStageArchive: ""
 ---
 
 ## Eligibility
 
-- Businesses must commit to creating or maintaining 1 job for every $65,000 of assistance. There is an application fee of $1,000
+- Businesses must commit to creating or maintaining 1 job for every $65,000 of assistance. There is an application fee of $1,000.
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 

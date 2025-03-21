@@ -6,7 +6,7 @@ import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { generateBusiness, generateUserData } from "@businessnjgovnavigator/shared";
 import { render, screen } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
 const Config = getMergedConfig();

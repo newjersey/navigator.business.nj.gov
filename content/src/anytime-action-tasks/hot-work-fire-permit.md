@@ -2,8 +2,11 @@
 notesMd: "[Muni
   draft](https://docs.google.com/document/d/1VopTcRXLEeQKLfHAPrv_eyv8cl5iewc7Li\
   U22qxSZf0/edit)"
-filename: hot-work-fire-permit
+id: hot-work-fire-permit
 name: Get a Fire Permit to Perform Hot Work
+category:
+  - Set Up at a Temporary Location
+description: Obtain a permit to conduct welding, cutting, or other hot work safely.
 industryIds:
   - commercial-construction
   - auto-body-repair
@@ -12,9 +15,8 @@ industryIds:
 sectorIds:
   - construction
   - professional-scientific-and-technical-services
-icon: file-purple.svg
 urlSlug: hot-work-fire-permit
-summaryDescriptionMd: >
+summaryDescriptionMd: >-
   You may need a fire permit to perform hot work such as:
 
   * Using a torch or flame-producing device to remove paint or seal membrane roofs on any building or structure
@@ -22,16 +24,26 @@ summaryDescriptionMd: >
   * Welding operations
 
   * Cutting operations
+
+
+  If you need a fire permit, you must apply for one and pass an inspection each time you do the activity.
+issuingAgency: NJ Division of Fire Safety or your local fire department
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 ---
+
 ## How to Apply
 
-Contact your town's `Local Enforcing Agency (LEA)|lea` to see if you need a permit or to get more information. The LEA can be the local fire department or the state Division of Fire Safety. 
+Contact your town's `Local Enforcing Agency (LEA)|lea` to see if you need a permit and how to apply. Your LEA can be your local fire department or the New Jersey Division of Fire Safety.
 
-If you need a permit, you must apply for one and pass the required inspection before you do the activity.
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
+This page does not list all business activities that require a fire permit. You may need to get other fire permits depending on your business activity, so check requirements with your LEA.
+
+:::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
 A fire permit.
+
+:::

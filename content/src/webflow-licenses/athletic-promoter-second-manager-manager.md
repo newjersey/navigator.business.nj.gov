@@ -1,5 +1,4 @@
 ---
-filename: athletic-promoter-second-manager-manager
 displayname: athletic-promoter-second-manager-manager
 id: "athletic-promoter-second-manager-manager"
 webflowId: "5f77295ddf77de3828e1a528"

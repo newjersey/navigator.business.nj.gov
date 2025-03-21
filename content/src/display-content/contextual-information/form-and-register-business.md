@@ -1,6 +1,5 @@
 ---
-slug: form-and-register-business
-filename: form-and-register-business
+id: form-and-register-business
 displayname: form-and-register-business
 header: Form and Register Your Business
 ---

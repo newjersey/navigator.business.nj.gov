@@ -42,14 +42,15 @@ extension.
 
 ### Software requirements
 
-- [Node.js 20.x "Iron" LTS](https://nodejs.org/en/download/) (We recommend using
+- [Node.js 20.18.1 "Iron" LTS](https://nodejs.org/en/download/) (We recommend using
   [nvm](https://github.com/nvm-sh/nvm#readme) for managing Node.js versions. If
   installing via package manager, we suggest installing `corepack` if available
   separately.)
 - [AWS CLI](https://aws.amazon.com/cli/)
-- [JRE/JDK 11.x or newer](https://jdk.java.net/21/) - Install the x64 version –
-  even on macOS – not the arm64 version (Latest OpenJDK version recommended)
-- [Python 3.11](https://www.python.org/downloads/)
+- [JRE/JDK 17.x or newer](https://jdk.java.net/)
+- [Python 3.13](https://www.python.org/downloads/)
+- [yarn](https://yarnpkg.com/)
+- [wget](https://www.gnu.org/software/wget/)
 
 **Windows (non-WSL) only**:
 
@@ -81,39 +82,52 @@ Before you can run locally, you will need to:
 - create a `./api/.env` that includes all the values laid out in the
   `./api/.env-template` file.
 - create a `.venv` virtual environment and install requirements if working on
-  Python:
-
-```shell
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
+  Python
+  ```shell
+  python3 -m venv .venv
+  source .venv/bin/activate
+  pip install -r requirements.txt
+  ```
+- do an initial build
+  ```shell
+  yarn build
+  ```
 
 ### Run tests
 
-We use Jest for our TypeScript-based unit tests across our projects. Run all
-tests with:
+We use Jest for our TypeScript-based unit tests across our projects.
 
 ```shell
+# Run all unit tests
 yarn test
+
+# Run a single unit test or file, rerunning if files change
+yarn test <path to test file> -t "<part of test name>" --watch
 ```
 
 We use Cypress for end-to-end (e2e) testing. You can run these tests locally
-with:
+as follows. Since some Cypress tests only run in the CI environment, they require
+running a local instance of the application to test against.
 
 ```shell
 ./scripts/local-feature-tests.sh
 ```
 
-To run all tests with code coverage (locally):
+Both unit and Cypress tests utilize random values in test setup. Should a test
+fail, the random values used can be reproduced by finding the log output line
+containing `RANDOM_SEED=`/`CYPRESS_RANDOM_SEED=` for the test that failed. Then,
+run the test with the indicated environment variable, as in:
+
+```shell
+RANDOM_SEED=<random seed from failure log> yarn test <path to test file> -t "<part of test name>"
+CYPRESS_RANDOM_SEED=<random seed from failure log> ./scripts/local-feature-tests.sh
+```
+
+To run all tests with code coverage:
 
 ```shell
 yarn test:coverage
 ```
-
-Some of the Cypress tests only run in the CI environment. When using the
-`local-feature-tests` script, make sure to have a locally running instance of
-the application.
 
 We use Python's `unittest` for our Python tests. Run all Python unit tests with:
 
@@ -261,7 +275,7 @@ account for and understand this.
 We solve this by using **document versioning** and running **migrations** on
 individual documents as we retrieve them from storage. The documents are stored
 with a schema version number (which is stripped before sending to the frontend).
-On a get request for a document, if its version is out-of-date with the most
+On a `GET` request for a document, if its version is out-of-date with the most
 recent, we run a series of migrations on it to map the data to the current
 structure. We then save that new document in the current version, and return it
 to the frontend.
@@ -281,27 +295,31 @@ Notes about this approach:
 
 #### Adding a new migration
 
-If you want to change the structure of the `UserData` object, here's how:
+If you want to change the structure of the `UserData` object, there is a helper script
+that creates and updates most of the relevant code at `./scripts/generate-new-migration.sh`.
+It takes the following actions:
 
-1. **Create a new file** in `./api/src/db/migrations` and name it
-   `v{X}_descriptionHere.ts` where `{X}` is replaced by the next successive
-   version.
+1. **Creates a new file** in `./api/src/db/migrations` and names it
+   `v{X}_{migration_description}.ts` where `{X}` is replaced by the next
+   successive version and `{migration_description}` is a snake-cased name
+   describing the data being changed in the migration. The`{migration_description}`
+   is prompted by the script and input by the user when running `generate-new-migration.sh`.
 
-2. **Create a new type** in the file and name it `v{X}UserData` that defines the
-   new structure of your new UserData type.
+2. **Creates a new type** in the file and names it `v{X}UserData`, which defines the
+   new structure of your new `UserData` type.
 
-3. **Create a migration function** in the file with type signature
-   `(v{X-1}UserData) => v{X}UserData` and in here, define the way that the
-   previous version of the object should be mapped to the new structure. Test
-   it.
+3. **Creates a migration function** in the file with type signature
+   `(v{X-1}UserData) => v{X}UserData`, which defines the way that the
+   previous version of the object should be mapped to the new structure.
 
-4. **Add the migration function to the list** of functions in
-   `./api/src/db/migrations/migrations.ts`. Make sure it's in order at its
-   proper index. Do **NOT** skip versions because the index of this array must
-   match the index that it is migrating from. ie, `migrate_v4_to_v5` must be at
-   index 4 of this array.
+   - **Note:** `generate-new-migration.sh` currently just copies the previous migration function.
+     _You must write your own updated migration function_. You should also test it to verify transformations
+     are executed properly.
 
-5. **Change the types** in `types.ts` for `UserData` (and `factories` and
+4. **Adds the migration function to the list** of functions in
+   `./api/src/db/migrations/migrations.ts`. This array should be ordered by ascending version number.
+
+5. **Changes the types** in `types.ts` for `UserData` (and `factories` and
    anywhere else needed) to reflect the newest version of the type to the rest
    of the code.
 

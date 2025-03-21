@@ -1,8 +1,18 @@
 import { randomElementFromArray } from "../arrayHelpers";
 import { BusinessUser } from "../businessUser";
+import { TaxFilingCalendarEvent } from "../calendarEvent";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
 import { createBusinessId } from "../domain-logic/createBusinessId";
+import {
+  AirData,
+  AirQuestionnaireData,
+  EnvironmentData,
+  LandData,
+  LandQuestionnaireData,
+  WasteData,
+  WasteQuestionnaireData,
+} from "../environment";
 import {
   createEmptyFormationFormData,
   FormationData,
@@ -29,7 +39,9 @@ import { MunicipalityDetail } from "../municipality";
 import { OperatingPhaseId } from "../operatingPhase";
 import { BusinessPersona, IndustrySpecificData, ProfileData } from "../profileData";
 import { arrayOfSectors, SectorType } from "../sector";
-import { TaxFilingCalendarEvent, TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
+import { StateObject, arrayOfStateObjects as states } from "../states";
+import { taxClearanceCertificateAgencies, TaxClearanceCertificateData } from "../taxClearanceCertificate";
+import { TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
 import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
 
@@ -92,6 +104,7 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
     isCalendarFullView: !(randomInt() % 2),
     isHideableRoadmapOpen: !(randomInt() % 2),
     phaseNewlyChanged: false,
+    isNonProfitFromFunding: false,
     ...overrides,
   };
 };
@@ -246,6 +259,10 @@ export const generateIndustrySpecificData = (
     employmentPersonnelServiceType: randomElementFromArray(["JOB_SEEKERS", "EMPLOYERS"]),
     employmentPlacementType: randomElementFromArray(["TEMPORARY", "PERMANENT", "BOTH"]),
     carnivalRideOwningBusiness: !(randomInt() % 2),
+    propertyLeaseType: randomElementFromArray(["SHORT_TERM_RENTAL", "LONG_TERM_RENTAL", "BOTH"]),
+    hasThreeOrMoreRentalUnits: !(randomInt() % 2),
+    travelingCircusOrCarnivalOwningBusiness: !(randomInt() % 2),
+    vacantPropertyOwner: !(randomInt() % 2),
     ...overrides,
   };
 };
@@ -257,7 +274,6 @@ export const generateProfileData = (
   const id = `some-id-${randomInt()}`;
   const persona: BusinessPersona = randomElementFromArray(["STARTING", "OWNING", "FOREIGN"]);
   const industry = randomIndustry(canHavePermanentLocation);
-  const legalStructure = randomLegalStructure().id;
 
   return {
     ...generateIndustrySpecificData({}),
@@ -286,12 +302,12 @@ export const generateProfileData = (
     naicsCode: randomInt(6).toString(),
     foreignBusinessTypeIds: [],
     nexusDbaName: "",
-    needsNexusDbaName: false,
     operatingPhase: OperatingPhaseId.NEEDS_TO_FORM,
-    isNonprofitOnboardingRadio: legalStructure === "nonprofit",
     nonEssentialRadioAnswers: {},
     elevatorOwningBusiness: undefined,
     carnivalRideOwningBusiness: undefined,
+    raffleBingoGames: undefined,
+    businessOpenMoreThanTwoYears: undefined,
     ...overrides,
   };
 };
@@ -339,6 +355,133 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
   };
 };
 
+export const generateUnitedStatesStateDropdownOption = ({
+  includeOutsideOfTheUSA,
+  excludeNJ,
+  excludeTerritories,
+}: {
+  includeOutsideOfTheUSA?: boolean;
+  excludeNJ?: boolean;
+  excludeTerritories?: boolean;
+}): StateObject => {
+  let filteredStates = states;
+  if (!includeOutsideOfTheUSA) {
+    filteredStates = filteredStates.filter((stateObject) => {
+      return stateObject.shortCode !== "Outside of the USA";
+    });
+  }
+  if (excludeNJ) {
+    filteredStates = filteredStates.filter((stateObject) => {
+      return stateObject.shortCode !== "NJ";
+    });
+  }
+
+  if (excludeTerritories) {
+    filteredStates = filteredStates.filter((stateObject) => {
+      return (
+        stateObject.shortCode !== "AS" && stateObject.shortCode !== "VI" && stateObject.shortCode !== "GU"
+      );
+    });
+  }
+
+  return randomElementFromArray(filteredStates);
+};
+
+export const generateTaxClearanceCertificateData = (
+  overrides: Partial<TaxClearanceCertificateData>
+): TaxClearanceCertificateData => {
+  return {
+    requestingAgencyId: randomElementFromArray(taxClearanceCertificateAgencies).id,
+    businessName: `some-business-name-${randomInt()}`,
+    entityId: randomInt(10).toString(),
+    addressLine1: `some-address-1-${randomInt()}`,
+    addressLine2: `some-address-2-${randomInt()}`,
+    addressCity: `some-city-${randomInt()}`,
+    addressState: generateUnitedStatesStateDropdownOption({}),
+    addressZipCode: randomInt(5).toString(),
+    taxId: `${randomInt(12)}`,
+    taxPin: randomInt(4).toString(),
+    ...overrides,
+  };
+};
+
+export const generateLandQuestionnaireData = (
+  overrides: Partial<LandQuestionnaireData>
+): LandQuestionnaireData => {
+  return {
+    takeOverExistingBiz: false,
+    propertyAssessment: false,
+    constructionActivities: false,
+    siteImprovementWasteLands: false,
+    noLand: false,
+    ...overrides,
+  };
+};
+
+export const generateLandData = (overrides: Partial<LandData>): LandData => {
+  return {
+    questionnaireData: generateLandQuestionnaireData({
+      ...overrides.questionnaireData,
+    }),
+    submitted: false,
+    ...overrides,
+  };
+};
+
+export const generateWasteQuestionnaireData = (
+  overrides: Partial<WasteQuestionnaireData>
+): WasteQuestionnaireData => {
+  return {
+    hazardousMedicalWaste: false,
+    constructionDebris: false,
+    compostWaste: false,
+    treatProcessWaste: false,
+    noWaste: false,
+    ...overrides,
+  };
+};
+
+export const generateWasteData = (overrides: Partial<WasteData>): WasteData => {
+  return {
+    questionnaireData: generateWasteQuestionnaireData({
+      ...overrides.questionnaireData,
+    }),
+    submitted: false,
+    ...overrides,
+  };
+};
+
+export const generateAirQuestionnaireData = (
+  overrides: Partial<AirQuestionnaireData>
+): AirQuestionnaireData => {
+  return {
+    emitEmissions: false,
+    emitPollutants: false,
+    constructionActivities: false,
+    noAir: false,
+    ...overrides,
+  };
+};
+
+export const generateAirData = (overrides: Partial<AirData>): AirData => {
+  return {
+    questionnaireData: generateAirQuestionnaireData({
+      ...overrides.questionnaireData,
+    }),
+    submitted: false,
+    ...overrides,
+  };
+};
+
+export const generateEnvironmentData = (overrides: Partial<EnvironmentData>): EnvironmentData => {
+  return {
+    waste: undefined,
+    land: undefined,
+    air: undefined,
+    ...overrides,
+  };
+};
+
 export const generateBusiness = (overrides: Partial<Business>): Business => {
   const profileData = overrides.profileData ?? generateProfileData({});
   const formationData: FormationData = publicFilingLegalTypes.includes(
@@ -365,6 +508,11 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
     licenseData: generateLicenseData({}),
     preferences: generatePreferences({}),
     taxFilingData: generateTaxFilingData({}),
+    taxClearanceCertificateData: generateTaxClearanceCertificateData({}),
+    environmentData: generateEnvironmentData({}),
+    version: CURRENT_VERSION,
+    userId: generateUser({}).id,
+    versionWhenCreated: CURRENT_VERSION,
     profileData,
     formationData,
     ...overrides,
@@ -394,7 +542,7 @@ export const generateUserDataForBusiness = (business: Business, overrides?: Part
     versionWhenCreated: -1,
     dateCreatedISO: getCurrentDateISOString(),
     lastUpdatedISO: getCurrentDateISOString(),
-    user: generateUser({}),
+    user: generateUser({ id: business.userId }),
     currentBusinessId: business.id,
     businesses: {
       [business.id]: business,

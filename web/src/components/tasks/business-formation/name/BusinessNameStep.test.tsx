@@ -7,13 +7,13 @@ import {
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import {
-  FormationLegalType,
-  NameAvailability,
   createEmptyFormationFormData,
   foreignLegalTypePrefix,
+  FormationLegalType,
   generateBusiness,
   generateBusinessNameAvailability,
   generateFormationFormData,
+  NameAvailability,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";
@@ -31,7 +31,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
@@ -279,7 +279,6 @@ describe("Formation - BusinessNameStep", () => {
           legalStructureId: legalStructureWithoutPrefix,
           businessPersona: "FOREIGN",
           businessName: "some name",
-          needsNexusDbaName: false,
         });
 
         preparePage({

@@ -1,9 +1,9 @@
 ---
-filename: angel-investor-tax
+notesMd: ""
 name: Angel Investor Tax Credit Program
 displayName: angel-investor-tax
 urlSlug: angel-investor-tax
-id: angel-investor-tax-credit-program
+id: angel-investor-tax
 sidebarCardBodyText: The New Jersey Angel Investor Tax Credit Program
   establishes refundable tax credits for qualified investments in New Jersey
   emerging technology businesses to stimulate investment in the innovation
@@ -35,18 +35,21 @@ sector:
   - technology
   - life-sciences
   - clean-energy
-  - other-services
+  - manufacturing
 publishStageArchive: ""
+minEmployeesRequired: 1
+maxEmployeesRequired: 225
 ---
+
 ## Eligibility
 
-* Investors in eligible emerging technology businesses or venture funds in New Jersey
-* Both the investor and the technology company must complete the application no later than 6 months from the date of investment
-* Fewer than 225 full-time employees, 75% of whom must work in NJ
-* Commercializes one or more of the following eligible technologies in the State: Advanced Computing, Advanced Materials, Biotechnology, Electronic Devices, Information Technology, Life Sciences, Medical Devices, Mobile Communications, Renewable Energy Technology, and Carbon Footprint Reduction Technology
+- Investors in eligible emerging technology businesses or venture funds in New Jersey
+- Both the investor and the technology company must complete the application no later than 6 months from the date of investment
+- Fewer than 225 full-time employees, 75% of whom must work in NJ
+- Commercializes one or more of the following eligible technologies in the State: Advanced Computing, Advanced Materials, Biotechnology, Electronic Devices, Information Technology, Life Sciences, Medical Devices, Mobile Communications, Renewable Energy Technology, and Carbon Footprint Reduction Technology
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-Tax credits equal to 20% of a qualified investment with a potential 5% bonus.
+Tax credits that equal up to 20% of a qualified investment with a potential 5% bonus.
 
 :::

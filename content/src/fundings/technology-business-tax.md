@@ -1,10 +1,9 @@
 ---
-filename: technology-business-tax
 name: Technology Business Tax Certificate Transfer (NOL) Program [formerly Net
   Operating Loss Program]
-displayName: technology-business-tax
+displayName: technology-business-tax-certificate-transfer-nol-program
 urlSlug: technology-business-tax
-id: technology-business-tax-certificate-transfer-nol-program
+id: technology-business-tax
 sidebarCardBodyText: The Technology Business Tax Certificate Program supports
   qualified, unprofitable New Jersey-based technology or biotechnology
   businesses.
@@ -14,7 +13,7 @@ summaryDescriptionMd: >+
   The Technology Business Tax Certificate Program enables you, as a qualified,
   unprofitable New Jersey-based technology or biotechnology business, to sell a
   percentage of your net operating losses (NOL) and unused research and
-  development (R&D) tax credits to unrelated profitable businesses. 
+  development (R&D) tax credits to unrelated profitable businesses.
 
 callToActionLink: https://www.njeda.com/nol/
 callToActionText: Learn more

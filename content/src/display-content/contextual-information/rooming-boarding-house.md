@@ -1,7 +1,7 @@
 ---
 notesMd: "[Muni draft](https://docs.google.com/document/d/1HGY1zqsfYYEV7bdimK5vBmXX9o9TpdkP8Yvh5TazgNI/edit)"
 header: Rooming or Boarding House
-slug: rooming-boarding-house
+id: rooming-boarding-house
 displayname: rooming-boarding-house
 ---
 

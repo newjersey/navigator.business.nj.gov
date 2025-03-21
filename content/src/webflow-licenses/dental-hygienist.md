@@ -1,5 +1,4 @@
 ---
-filename: dental-hygienist
 displayname: dental-hygienist
 id: "dental-hygienist"
 webflowId: "5f772984c8aaf5b9abc9b536"

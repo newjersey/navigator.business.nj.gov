@@ -1,4 +1,4 @@
-import { LicenseName } from "./license";
+import { TaxFilingCalendarEvent } from "./calendarEvent";
 
 export type TaxFilingLookupState = "SUCCESS" | "FAILED" | "API_ERROR" | "PENDING" | "UNREGISTERED";
 export type TaxFilingOnboardingState = "SUCCESS" | "FAILED" | "API_ERROR";
@@ -18,21 +18,3 @@ export type TaxFilingLookUpRequest = {
   readonly taxId: string;
   readonly encryptedTaxId: string;
 };
-
-export type CalendarEvent = {
-  readonly dueDate: string; // YYYY-MM-DD
-  readonly calendarEventType: "TAX-FILING" | "LICENSE";
-};
-
-export interface TaxFilingCalendarEvent extends CalendarEvent {
-  readonly identifier: string;
-  readonly calendarEventType: "TAX-FILING";
-}
-
-export type LicenseEventSubtype = "expiration" | "renewal";
-
-export interface LicenseCalendarEvent extends CalendarEvent {
-  readonly licenseEventSubtype: LicenseEventSubtype;
-  readonly calendarEventType: "LICENSE";
-  licenseName: LicenseName;
-}

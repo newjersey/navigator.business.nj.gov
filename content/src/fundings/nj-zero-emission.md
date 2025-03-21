@@ -1,9 +1,8 @@
 ---
-filename: nj-zero-emission
 name: NJ Zero Emission Incentive Program (NJZIP)
-displayName: njzip
+displayName: nj-zero-emission-incentive-program-njzip
 urlSlug: nj-zero-emission
-id: nj-zero-emission-incentive-program-njzip
+id: nj-zero-emission
 sidebarCardBodyText: NJ ZIP offers vouchers for zero-emission vehicles to
   commercial, industrial, and institutional businesses.
 openDate: ""
@@ -29,7 +28,26 @@ certifications: []
 preferenceForOpportunityZone: ""
 county:
   - All
-sector: []
+sector:
+  - accommodation-and-food-services
+  - administrative-and-employment-services
+  - agriculture-forestry-fishing-and-hunting
+  - arts-entertainment-and-recreation
+  - clean-energy
+  - construction
+  - digital-and-print-media
+  - educational-services
+  - health-care-and-social-assistance
+  - finance-and-insurance
+  - manufacturing
+  - life-sciences
+  - mining-quarrying-and-oil-and-gas-extraction
+  - offshore-wind
+  - organizational-or-financial-management
+  - other-services
+  - professional-scientific-and-technical-services
+  - real-estate
+  - retail-trade-and-ecommerce
 publishStageArchive: ""
 ---
 

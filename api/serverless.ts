@@ -4,6 +4,7 @@ import encryptTaxId from "@functions/encryptTaxId";
 import express from "@functions/express";
 import githubOauth2 from "@functions/githubOauth2";
 import healthCheck from "@functions/healthCheck";
+import migrateUsersVersion from "@functions/migrateUsersVersion";
 import updateExternalStatus from "@functions/updateExternalStatus";
 import type { AWS, AwsLambdaEnvironment } from "@serverless/typescript";
 import "dotenv/config";
@@ -55,6 +56,7 @@ const healthCheckLambda = `businessnjgov-api-${stage}-healthCheck`;
 const healthCheckEventRule = `health_check_lambda_event_rule`;
 
 const documentS3Bucket = `nj-bfs-user-documents-${stage}`;
+const serverlessDeploymentS3Bucket = process.env.BIZNJ_SLS_DEPLOYMENT_BUCKET_NAME || "default-bucket";
 const skipSaveDocumentsToS3 = process.env.SKIP_SAVE_DOCUMENTS_TO_S3 || "";
 
 const awsCryptoKey = process.env.AWS_CRYPTO_KEY || "";
@@ -82,18 +84,15 @@ const dynamicsElevatorSafetyURL = process.env.DYNAMICS_ELEVATOR_SAFETY_URL || ""
 const dynamicsElevatorSafetyClientId = process.env.DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID || "";
 const dynamicsElevatorSafetySecret = process.env.DYNAMICS_ELEVATOR_SAFETY_SECRET || "";
 const dynamicsElevatorSafetyTenantId = process.env.DYNAMICS_ELEVATOR_SAFETY_TENANT_ID || "";
+const useWireMockForFormationAndBusinessSearch =
+  process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH || "";
+const useWireMockForGetTaxCalendarSearch = process.env.USE_WIREMOCK_FOR_GET_TAX_CALENDAR_SEARCH || "";
 
 const serverlessConfiguration: AWS = {
   useDotenv: true,
   service: "businessnjgov-api",
-  frameworkVersion: "3",
+  frameworkVersion: "4",
   custom: {
-    webpack: {
-      webpackConfig: "./webpack.config.ts",
-      includeModules: {
-        nodeModulesRelativeDir: "../",
-      },
-    },
     "serverless-dynamodb": {
       port: dynamoOfflinePort,
       start: {
@@ -118,7 +117,6 @@ const serverlessConfiguration: AWS = {
     },
   },
   plugins: [
-    "serverless-webpack",
     ...(isDocker ? [] : ["serverless-dynamodb"]),
     "serverless-offline-ssm",
     "serverless-offline",
@@ -126,6 +124,7 @@ const serverlessConfiguration: AWS = {
   ],
   provider: {
     name: "aws",
+    deploymentBucket: serverlessDeploymentS3Bucket,
     runtime: "nodejs20.x",
     stage: stage,
     region: region,
@@ -241,6 +240,8 @@ const serverlessConfiguration: AWS = {
       USE_FAKE_SELF_REG: useFakeSelfReg,
       USERS_TABLE: usersTable,
       BUSINESSES_TABLE: businessesTable,
+      USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH: useWireMockForFormationAndBusinessSearch,
+      USE_WIREMOCK_FOR_GET_TAX_CALENDAR_SEARCH: useWireMockForGetTaxCalendarSearch,
     } as AwsLambdaEnvironment,
     logRetentionInDays: 180,
   },
@@ -292,6 +293,17 @@ serverlessConfiguration.functions = {
   ),
 
   encryptTaxId: encryptTaxId(
+    env.CI
+      ? {
+          securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
+          subnetIds: [
+            "${self:custom.config.infrastructure.SUBNET_01}",
+            "${self:custom.config.infrastructure.SUBNET_02}",
+          ],
+        }
+      : undefined
+  ),
+  migrateUsersVersion: migrateUsersVersion(
     env.CI
       ? {
           securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],

@@ -10,6 +10,7 @@ import * as CannabisLicenseEligibilityModal from "@businessnjgovnavigator/conten
 import * as CannabisLicenseTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-license-tab1.json";
 import * as CannabisPriorityStatusTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab1.json";
 import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab2.json";
+import * as CheckAccountEmailPage from "@businessnjgovnavigator/content/fieldConfig/check-account-email-page.json";
 import * as ConfigOriginal from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import * as DashboardCalendar from "@businessnjgovnavigator/content/fieldConfig/dashboard-calendar.json";
 import * as DashboardDefaults from "@businessnjgovnavigator/content/fieldConfig/dashboard-defaults.json";
@@ -19,19 +20,29 @@ import * as DashboardTabs from "@businessnjgovnavigator/content/fieldConfig/dash
 import * as DeferredLocation from "@businessnjgovnavigator/content/fieldConfig/deferred-location.json";
 import * as Ein from "@businessnjgovnavigator/content/fieldConfig/ein.json";
 import * as ElevatorRegistration from "@businessnjgovnavigator/content/fieldConfig/elevator-registration.json";
+import * as EnvQuestionnaire from "@businessnjgovnavigator/content/fieldConfig/env-questionnaire.json";
 import * as FormationInterimSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-interim-success-page.json";
 import * as FormationSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-success-page.json";
 import * as SiteWideErrorMessages from "@businessnjgovnavigator/content/fieldConfig/global-errors-defaults.json";
 import * as HousingRegistrationSearchTask from "@businessnjgovnavigator/content/fieldConfig/housing-registration.json";
+import * as LandingPageExperienceB from "@businessnjgovnavigator/content/fieldConfig/landing-page-experience-b.json";
+import * as LandingPage from "@businessnjgovnavigator/content/fieldConfig/landing-page.json";
+import * as LicenseSearchTask from "@businessnjgovnavigator/content/fieldConfig/license-search-task.json";
 import * as NaicsCode from "@businessnjgovnavigator/content/fieldConfig/naics-code.json";
 import * as NavigationDefaults from "@businessnjgovnavigator/content/fieldConfig/navigation-defaults.json";
 import * as NexusDbaFormation from "@businessnjgovnavigator/content/fieldConfig/nexus-dba-formation.json";
 import * as NexusNameSearch from "@businessnjgovnavigator/content/fieldConfig/nexus-name-search.json";
+import * as FundingsOnboarding from "@businessnjgovnavigator/content/fieldConfig/njeda-fundings-onboarding.json";
 import * as PageNotFoundError from "@businessnjgovnavigator/content/fieldConfig/page-not-found-error.json";
 import * as Profile from "@businessnjgovnavigator/content/fieldConfig/profile.json";
 import * as StarterKits from "@businessnjgovnavigator/content/fieldConfig/starter-kits.json";
 import * as TaxAccess from "@businessnjgovnavigator/content/fieldConfig/tax-access-modal.json";
+import * as TaxClearanceCertificateShared from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-shared.json";
+import * as TaxClearanceCertificateStep1 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step1.json";
+import * as TaxClearanceCertificateStep2 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step2.json";
+import * as TaxClearanceCertificateStep3 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step3.json";
 import * as Tax from "@businessnjgovnavigator/content/fieldConfig/tax.json";
+import * as CalloutAlerts from "@businessnjgovnavigator/content/mappings/callout-alerts.json";
 import * as PageMetadata from "@businessnjgovnavigator/content/page-metadata/page-metadata.json";
 
 import { merge } from "lodash";
@@ -76,7 +87,18 @@ const merged = JSON.parse(
       ElevatorRegistration,
       StarterKits,
       HousingRegistrationSearchTask,
-      anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults
+      anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
+      CalloutAlerts,
+      EnvQuestionnaire,
+      CheckAccountEmailPage,
+      LicenseSearchTask,
+      LandingPage,
+      FundingsOnboarding,
+      LandingPageExperienceB,
+      TaxClearanceCertificateStep1,
+      TaxClearanceCertificateStep2,
+      TaxClearanceCertificateStep3,
+      TaxClearanceCertificateShared
     )
   )
 );
@@ -117,7 +139,18 @@ export type ConfigType = typeof ConfigOriginal &
   typeof PageMetadata &
   typeof StarterKits &
   typeof HousingRegistrationSearchTask &
-  typeof anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults;
+  typeof anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults &
+  typeof CalloutAlerts &
+  typeof CheckAccountEmailPage &
+  typeof EnvQuestionnaire &
+  typeof LicenseSearchTask &
+  typeof LandingPage &
+  typeof LandingPageExperienceB &
+  typeof FundingsOnboarding &
+  typeof TaxClearanceCertificateStep1 &
+  typeof TaxClearanceCertificateStep2 &
+  typeof TaxClearanceCertificateStep3 &
+  typeof TaxClearanceCertificateShared;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -154,7 +187,18 @@ export const getMergedConfig = (): ConfigType => {
     ElevatorRegistration,
     StarterKits,
     HousingRegistrationSearchTask,
-    anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults
+    anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults,
+    CalloutAlerts,
+    EnvQuestionnaire,
+    CheckAccountEmailPage,
+    LicenseSearchTask,
+    LandingPage,
+    FundingsOnboarding,
+    LandingPageExperienceB,
+    TaxClearanceCertificateStep1,
+    TaxClearanceCertificateStep2,
+    TaxClearanceCertificateStep3,
+    TaxClearanceCertificateShared
   );
 };
 

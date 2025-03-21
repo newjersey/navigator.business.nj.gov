@@ -1,9 +1,8 @@
 ---
-filename: Angel Match Program
 name: Angel Match Program
 displayName: angel-match
 urlSlug: angel-match
-id: angel-match
+id: angel-match-program
 sidebarCardBodyText: The Angel Match Program provides funding from the State
   Small Business Credit Initiative (SSBCI) by matching angel investors’ direct
   investment in early-stage, product-based technology companies within targeted
@@ -35,14 +34,18 @@ county:
 sector:
   - clean-energy
   - life-sciences
-  - other-services
   - technology
+  - manufacturing
+  - finance-and-insurance
+  - professional-scientific-and-technical-services
 publishStageArchive: ""
+minEmployeesRequired: 1
+maxEmployeesRequired: 100
 ---
 
 ## Eligibility
 
-- Must have minimum revenues of $100,000 within the `trailing 12 months|trailing-12-months`. Trailing 12 Months (TTM) figures report metrics based on the last 12 months (or four quarters) to date on a rolling basis.
+- Must have minimum revenues of $100,000 within the `trailing 12 months|trailing-12-months` . Trailing 12 Months (TTM) figures report metrics based on the last 12 months (or four quarters) to date on a rolling basis.
 - Business must be able to demonstrate a minimum of $100,000 in investment interest from at least two investors independent from the company
 - Primary business is commercializing and marketing a product
 - Early stage within an [NJEDA targeted industry](https://www.njeda.gov/wp-content/uploads/2022/11/Appendix-C-Targeted-Industries-Definitions-12.6.22_v2.pdf)
@@ -54,6 +57,6 @@ publishStageArchive: ""
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-`Convertible note|convertible-note` from $100,000 to $500,000 with 10-year maturity, 3% interest rate, and no payments for the first seven years.
+Businesses receive a `convertible note|convertible-note` from $100,000 to $500,000 with a 10-year maturity, a 3% interest rate, and no payments for the first seven years.
 
 :::

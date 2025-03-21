@@ -2,7 +2,6 @@ import { ActiveUser } from "@/lib/auth/AuthContext";
 import {
   AllCounties,
   AnytimeActionLicenseReinstatement,
-  AnytimeActionLink,
   AnytimeActionTask,
   Certification,
   County,
@@ -30,7 +29,10 @@ import {
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import {
   arrayOfFundingAgencies,
+  BusinessPersona,
   createEmptyFormationFormData,
+  FormationAddress,
+  FormationData,
   FormationSubmitError,
   FundingAgency,
   generateProfileData,
@@ -39,8 +41,9 @@ import {
   InputFile,
   LegalStructure,
   LegalStructures,
-  LicenseTaskID,
+  LicenseTaskId,
   NameAvailability,
+  OperatingPhase,
   OperatingPhaseId,
   OperatingPhases,
   OwnershipType,
@@ -49,18 +52,10 @@ import {
   PublicFilingLegalType,
   publicFilingLegalTypes,
   randomInt,
-  SectionType,
-  StateObject,
-  arrayOfStateObjects as states,
-} from "@businessnjgovnavigator/shared";
-import {
-  Address,
-  OperatingPhase,
   randomIntFromInterval,
+  SectionType,
   taskIdLicenseNameMapping,
-} from "@businessnjgovnavigator/shared/";
-import { FormationData } from "@businessnjgovnavigator/shared/formationData";
-import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+} from "@businessnjgovnavigator/shared";
 import { filterRandomIndustry, randomIndustry, randomSector } from "@businessnjgovnavigator/shared/test";
 
 export const generateSectionType = (): SectionType => {
@@ -137,7 +132,7 @@ export const generateTask = (overrides: Partial<Task>): Task => {
 };
 
 export const generateLicenseTask = (overrides: Partial<TaskWithLicenseTaskId>): TaskWithLicenseTaskId => {
-  const licenseTaskId = randomElementFromArray(Object.keys(taskIdLicenseNameMapping)) as LicenseTaskID;
+  const licenseTaskId = randomElementFromArray(Object.keys(taskIdLicenseNameMapping)) as LicenseTaskId;
   return {
     ...generateTask({}),
     id: licenseTaskId,
@@ -204,10 +199,6 @@ export const generateSidebarCardContent = (overrides: Partial<SidebarCardContent
     hasCloseButton: !!(randomInt() % 2),
     ...overrides,
   };
-};
-
-export const generateStateItem = (): StateObject => {
-  return randomElementFromArray(states);
 };
 
 export const generateEmptyFormationData = (): FormationData => {
@@ -285,6 +276,9 @@ export const generateFunding = (overrides: Partial<Funding>): Funding => {
     programPurpose: `some-purpose-${randomInt()}`,
     agencyContact: `some-contact-${randomInt()}`,
     isNonprofitOnly: false,
+    priority: false,
+    minEmployeesRequired: undefined,
+    maxEmployeesRequired: undefined,
     ...overrides,
   };
 };
@@ -293,8 +287,8 @@ export const generateAnytimeActionTask = (overrides: Partial<AnytimeActionTask>)
   return {
     filename: `some-filename-${randomInt()}`,
     name: `some-name-${randomInt()}`,
+    category: [`Category ${randomInt()}`],
     urlSlug: `some-url-slug-${randomInt()}`,
-    icon: `some-icon-${randomInt()}`,
     callToActionLink: `some-cta-link-${randomInt()}`,
     callToActionText: `some-cta-text-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
@@ -314,26 +308,12 @@ export const generateAnytimeActionLicenseReinstatement = (
     filename: `some-filename-${randomInt()}`,
     name: `some-name-${randomInt()}`,
     urlSlug: `some-url-slug-${randomInt()}`,
-    icon: `some-icon-${randomInt()}`,
     callToActionLink: `some-cta-link-${randomInt()}`,
     callToActionText: `some-cta-text-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
     issuingAgency: `some-issusing-agency-${randomInt()}`,
     summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
     licenseName: randomElementFromArray(Object.values(taskIdLicenseNameMapping)),
-    ...overrides,
-  };
-};
-
-export const generateAnytimeActionLink = (overrides: Partial<AnytimeActionLink>): AnytimeActionLink => {
-  return {
-    filename: `some-filename-${randomInt()}`,
-    name: `some-name-${randomInt()}`,
-    icon: `some-icon-${randomInt()}`,
-    externalRoute: `some-external-route-${randomInt()}`,
-    industryIds: [`some-industry-id-${randomInt()}`],
-    sectorIds: [`some-sector-id-${randomInt()}`],
-    applyToAllUsers: false,
     ...overrides,
   };
 };
@@ -383,7 +363,6 @@ export const generateLicenseEvent = (overrides: Partial<LicenseEventType>): Lice
     disclaimerText: `some-disclaimer-text-${randomInt()}`,
     renewalEventDisplayName: `some-renewal-event-${id}`,
     expirationEventDisplayName: `some-expiration-event-${id}`,
-    previewType: id % 2 ? "renewal" : "expiration",
     summaryDescriptionMd: `some-summary-${id}`,
     filename: `some-filename-${id}`,
     urlSlug: `some-url-slug-${id}`,
@@ -413,13 +392,17 @@ export const generateActiveUser = (overrides: Partial<ActiveUser>): ActiveUser =
   };
 };
 
-export const generateAddress = (overrides: Partial<Address>): Address => {
+export const generateAddress = (overrides: Partial<FormationAddress>): FormationAddress => {
   return {
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
     addressMunicipality: undefined,
     addressState: undefined,
     addressZipCode: `0${randomIntFromInterval("7001", "8999")}`,
+    addressCity: `some-city-${randomInt()}`,
+    addressProvince: undefined,
+    addressCountry: undefined,
+    businessLocationType: undefined,
     ...overrides,
   };
 };
@@ -501,16 +484,19 @@ export const randomNegativeFilteredIndustry = (func: (industry: Industry) => boo
   });
 };
 
-export const randomHomeBasedIndustry = (): string => {
+export const randomHomeBasedIndustry = (excludedIndustryIds?: string[]): string => {
   const filter = (it: Industry): boolean => {
-    return !!it.industryOnboardingQuestions.canBeHomeBased && it.isEnabled;
+    const filterCriteria = !!it.industryOnboardingQuestions.canBeHomeBased && it.isEnabled;
+    return excludedIndustryIds ? filterCriteria && !excludedIndustryIds.includes(it.id) : filterCriteria;
   };
   return filterRandomIndustry(filter).id;
 };
 
-export const randomNonHomeBasedIndustry = (): string => {
+export const randomNonHomeBasedIndustry = (excludedIndustryIds?: string[]): string => {
   const filter = (it: Industry): boolean => {
-    return !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation && it.isEnabled;
+    const filterCriteria =
+      !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation && it.isEnabled;
+    return excludedIndustryIds ? filterCriteria && !excludedIndustryIds.includes(it.id) : filterCriteria;
   };
   return filterRandomIndustry(filter).id;
 };

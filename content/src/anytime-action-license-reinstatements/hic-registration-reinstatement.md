@@ -2,10 +2,9 @@
 notesMd: "Draft:
   https://docs.google.com/document/d/1zaZpaifJyX8bE7S-y-iEt8Zn_ssZHw4zIi_4QgjU5\
   RE/edit"
-filename: hic-registration-reinstatement
+id: hic-registration-reinstatement
 name: Apply to Reinstate Your Home Improvement Contractor Registration
-icon: update-purple.svg
-licenseName: Home Improvement Contractors-Home Improvement Contractor
+licenseName: Home Improvement Contractors-Home Improvement Business Contr
 urlSlug: hic-registration-reinstatement
 issuingAgency: "Division of Consumer Affairs"
 summaryDescriptionMd: Your home improvement contractor (HIC) registration has

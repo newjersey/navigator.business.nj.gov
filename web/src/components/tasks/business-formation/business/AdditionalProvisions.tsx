@@ -58,7 +58,7 @@ export const AdditionalProvisions = (): ReactElement => {
   };
 
   return (
-    <>
+    <div data-testid="additional-provisions">
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
         <Heading level={2} styleVariant="h3" className="margin-0-override">
           {Config.formation.fields.additionalProvisions.label}{" "}
@@ -108,9 +108,7 @@ export const AdditionalProvisions = (): ReactElement => {
                   onClick={(): void => removeProvision(index)}
                   className="display-flex flex-column flex-justify-center"
                 >
-                  <Icon className="font-body-lg" label="remove provision">
-                    delete
-                  </Icon>
+                  {Config.formation.general.removeSectionText}
                 </UnStyledButton>
               </div>
             </div>
@@ -124,10 +122,10 @@ export const AdditionalProvisions = (): ReactElement => {
         state.formationFormData.additionalProvisions &&
         state.formationFormData.additionalProvisions.length < 10 && (
           <UnStyledButton onClick={handleAddAnother} className="margin-top-2" dataTestid="add-new-provision">
-            <Icon>add</Icon>
+            <Icon iconName="add" />
             {Config.formation.fields.additionalProvisions.addAnotherButtonText}
           </UnStyledButton>
         )}
-    </>
+    </div>
   );
 };

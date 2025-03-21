@@ -9,7 +9,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -46,10 +46,9 @@
   "nonEssentialQuestionsIds": [
     "carnival-fire-licenses",
     "carnival-ride-permitting",
-    "weights-measures",
-    "entertainment-agency",
     "ticket-broker-resell",
-    "entertainment-agency-register"
+    "entertainment-agency-register",
+    "business-vehicle-title-reg"
   ],
   "displayname": "independent-artist",
   "industryOnboardingQuestions": {

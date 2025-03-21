@@ -3,13 +3,12 @@ import { Sectors } from "@/components/data-fields/Sectors";
 import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { FieldStateActionKind } from "@/contexts/formContext";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { createProfileFieldErrorMap } from "@/lib/types/types";
+import { FieldStateActionKind } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/";
 import { FormControl } from "@mui/material";
@@ -30,7 +29,7 @@ export const SectorModal = (props: Props): ReactElement => {
     FormFuncWrapper,
     onSubmit,
     state: formContextState,
-  } = useFormContextHelper(createProfileFieldErrorMap());
+  } = useFormContextHelper(createDataFormErrorMap());
 
   useMountEffectWhenDefined(() => {
     if (business) {
@@ -43,14 +42,15 @@ export const SectorModal = (props: Props): ReactElement => {
     formContextState.reducer({ type: FieldStateActionKind.RESET });
   };
 
-  FormFuncWrapper(() => {
+  FormFuncWrapper(async () => {
     if (!updateQueue) return;
     updateQueue.queueProfileData(profileData);
+    await updateQueue.update();
     props.onContinue();
   });
 
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFormErrorMapContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -83,6 +83,6 @@ export const SectorModal = (props: Props): ReactElement => {
           </div>
         </ModalTwoButton>
       </ProfileDataContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFormErrorMapContext.Provider>
   );
 };

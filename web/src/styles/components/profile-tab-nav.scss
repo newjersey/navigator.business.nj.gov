@@ -1,7 +1,9 @@
+@use "../sass-files/variables";
+
 .profile-tab-nav-button {
   width: 100%;
 
-  @media (min-width: $lg) {
+  @media (min-width: variables.$lg) {
     width: 17.5rem;
   }
 }

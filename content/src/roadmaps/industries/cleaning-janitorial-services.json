@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -44,7 +44,11 @@
     }
   ],
   "name": "Cleaning and Janitorial Services",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "business-vehicle-title-reg",
+    "pesticides-applicator-licensing"
+  ],
   "displayname": "cleaning-janitorial-services",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

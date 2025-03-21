@@ -1,9 +1,8 @@
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
-import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
+import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
 import { addToUserTestingBatch } from "@domain/user-testing/addToUserTestingBatch";
 import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFactory";
+import { DYNAMO_OFFLINE_PORT, IS_DOCKER, IS_OFFLINE, STAGE, USERS_TABLE } from "@functions/config";
 import { LogWriter } from "@libs/logWriter";
 import { GovDeliveryNewsletterClient } from "src/client/GovDeliveryNewsletterClient";
 import { DynamoUserDataClient } from "src/db/DynamoUserDataClient";
@@ -39,8 +38,8 @@ export default async function handler(): Promise<void> {
     );
   }
 
-  const dataLogger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
-
+  const dataLogger = LogWriter(`aws/${STAGE}`, "DataMigrationLogs");
+  const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
   const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, dataLogger);
   const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
 

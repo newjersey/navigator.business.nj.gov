@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -39,19 +39,21 @@
     },
     {
       "step": 3,
-      "weight": 15,
-      "task": "get-insurance",
-      "required": true
-    },
-    {
-      "step": 3,
       "weight": 16,
       "licenseTask": "electrical-business-license",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 90,
+      "task": "community-right-to-know-survey"
     }
   ],
   "name": "Electrical Contractor",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "business-vehicle-title-reg"
+  ],
   "displayname": "electrical-contractor",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

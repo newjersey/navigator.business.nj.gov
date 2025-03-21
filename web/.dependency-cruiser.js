@@ -4,11 +4,7 @@ module.exports = {
   allowed: [
     {
       from: {},
-      to: { path: "@aws-amplify/auth" },
-    },
-    {
-      from: {},
-      to: { path: "@aws-amplify/core" },
+      to: { path: "aws-amplify" },
     },
     {
       from: {},
@@ -140,7 +136,7 @@ module.exports = {
     },
     {
       from: {},
-      to: { path: "netlify-cms-app" },
+      to: { path: "decap-cms-app" },
     },
     {
       from: {},
@@ -350,10 +346,6 @@ module.exports = {
       from: { path: "src/scripts" },
       to: { path: "../shared" },
     },
-    {
-      from: {},
-      to: { path: "@aws-amplify/auth" },
-    },
   ],
   forbidden: [
     /* rules from the 'recommended' preset: */
@@ -444,7 +436,7 @@ module.exports = {
       from: {},
       to: {
         dependencyTypes: ["npm-no-pkg", "npm-unknown"],
-        pathNot: ["njwds"],
+        pathNot: ["njwds", "aws-amplify"],
       },
     },
     {

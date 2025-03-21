@@ -68,9 +68,10 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
               <ModifiedContent>{props.step.name}</ModifiedContent>
             </div>
             <div className="mla fdc fac">
-              <Icon className="usa-icon--size-3 text-base-light">
-                {isOpen ? "expand_less" : "expand_more"}
-              </Icon>
+              <Icon
+                className="usa-icon--size-3 text-base-light"
+                iconName={isOpen ? "expand_less" : "expand_more"}
+              />
             </div>
           </div>
         </button>

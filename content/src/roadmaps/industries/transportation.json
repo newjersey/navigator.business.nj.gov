@@ -1,9 +1,7 @@
 {
-  "displayname": "transportation",
   "naicsCodes": "485999, 485210, 485310, 485320, 485410, 485510",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -12,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -40,13 +38,34 @@
       "task": "bank-account"
     },
     {
-      "step": 3,
+      "task": "transportation-inspection",
       "weight": 15,
-      "task": "get-insurance",
+      "step": 4
+    },
+    {
+      "step": 4,
+      "weight": 16,
+      "task": "transportation-entity-id",
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 17,
+      "task": "mvc-title-task",
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 18,
+      "task": "mvc-registration-task",
       "required": true
     }
   ],
   "name": "Car Service (Large Capacity Vehicles)",
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
+  "displayname": "transportation",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "isTransportation": true

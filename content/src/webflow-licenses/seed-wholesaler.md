@@ -1,5 +1,4 @@
 ---
-filename: seed-wholesaler
 displayname: seed-wholesaler
 id: "seed-wholesaler"
 webflowId: "5f7728e6eb55585c5afeb56d"

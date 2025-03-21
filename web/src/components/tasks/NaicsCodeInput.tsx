@@ -20,8 +20,8 @@ interface Props {
   onSave: () => void;
   task: Task;
   isAuthenticated: IsAuthenticated;
-  CMS_ONLY_fakeBusiness?: Business; // for CMS only
-  CMS_ONLY_displayInput?: boolean; // for CMS only
+  CMS_ONLY_fakeBusiness?: Business;
+  CMS_ONLY_displayInput?: boolean;
 }
 
 type NaicsErrorTypes = "length" | "invalid";
@@ -127,7 +127,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
     if (!updateQueue) {
       return;
     }
-    updateQueue.queueTaskProgress({ [props.task.id]: "IN_PROGRESS" }).update();
+    updateQueue.queueTaskProgress({ [props.task.id]: "TO_DO" }).update();
   };
 
   useMountEffectWhenDefined(() => {

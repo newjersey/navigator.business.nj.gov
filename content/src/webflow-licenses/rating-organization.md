@@ -1,5 +1,4 @@
 ---
-filename: rating-organization
 displayname: rating-organization
 id: "rating-organization"
 webflowId: "5f77292cb4710f244c3c37b2"

@@ -1,7 +1,6 @@
 ---
 urlSlug: art-school
 webflowName: Art School
-filename: art-school
 displayname: art-school
 agencyId: education
 agencyAdditionalContext: ""

@@ -1,0 +1,18 @@
+{
+  "id": "residential-landlord-long-term-few-units",
+  "displayname": "residential-landlord-long-term-few-units",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 1,
+      "task": "landlord-registration",
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 2,
+      "task": "fire-safety-smoke-detectors",
+      "required": false
+    }
+  ]
+}

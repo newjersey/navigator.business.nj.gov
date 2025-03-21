@@ -7,7 +7,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import analytics from "@/lib/utils/analytics";
 import { useMediaQuery } from "@mui/material";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
 
 export const Hero = (): ReactElement => {
@@ -25,17 +25,17 @@ export const Hero = (): ReactElement => {
   }
 
   const routeToOnboarding = (): void => {
-    router.push(ROUTES.onboarding);
+    router && router.push(ROUTES.onboarding);
     analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
   };
 
   const section2CTAOnClick = (): void => {
-    router.push(ROUTES.onboarding);
+    router && router.push(ROUTES.onboarding);
     analytics.event.landing_page_second_get_started.click.go_to_onboarding();
   };
 
   const section3CTAOnClick = (): void => {
-    router.push(ROUTES.onboarding);
+    router && router.push(ROUTES.onboarding);
     analytics.event.landing_page_find_funding.click.go_to_onboarding();
   };
 

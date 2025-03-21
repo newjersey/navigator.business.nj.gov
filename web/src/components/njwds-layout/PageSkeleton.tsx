@@ -10,6 +10,7 @@ import React, { ReactElement } from "react";
 interface Props {
   children: React.ReactNode;
   landingPage?: boolean;
+  isLoginPage?: boolean;
   showNavBar?: boolean;
   task?: Task;
   showSidebar?: boolean;
@@ -29,6 +30,7 @@ export const PageSkeleton = (props: Props): ReactElement => {
         {props.showNavBar && (
           <NavBar
             landingPage={props.landingPage}
+            isLoginPage={props.isLoginPage}
             task={props.task}
             showSidebar={props.showSidebar}
             hideMiniRoadmap={props.hideMiniRoadmap}

@@ -1,6 +1,5 @@
 ---
 id: pharmacy-license
-filename: pharmacy-license
 displayname: pharmacy-permit
 urlSlug: pharmacy-license
 name: Apply for Your Pharmacy Permit

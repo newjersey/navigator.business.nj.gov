@@ -52,10 +52,16 @@ export const makePostBody = (
 
     if (isStartingBusinessPartiallyEmpty) return undefined;
 
+    let formationCity = formationFormData.addressMunicipality?.name;
+
+    if (!formationCity || formationCity.length === 0) {
+      formationCity = formationFormData.addressCity ?? "";
+    }
+
     return {
       Address1: formationFormData.addressLine1,
       Address2: formationFormData.addressLine2,
-      City: formationFormData.addressMunicipality?.name ?? formationFormData.addressCity ?? "",
+      City: formationCity,
       State: formationFormData.addressState?.name,
       Province: formationFormData.addressProvince,
       Zipcode: formationFormData.addressZipCode,
@@ -70,7 +76,8 @@ export const makePostBody = (
 
   const isCorp = businessType.shortDescription === "DP";
   const isForeignCorp = businessType.shortDescription === "FR";
-  const isDomesticNonProfit = businessType.shortDescription === ("NP" || "NV");
+  const isDomesticNonProfit =
+    businessType.shortDescription === "NP" || businessType.shortDescription === "NV";
 
   const isInFormAndTerms = (
     input: "IN_BYLAWS" | "IN_FORM" | undefined,

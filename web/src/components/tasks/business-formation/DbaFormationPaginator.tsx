@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
-import { FormationHelpButton } from "@/components/njwds-extended/FormationHelpButton";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
+import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
@@ -15,6 +15,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab, scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
+import { determineIfNexusDbaNameNeeded } from "@businessnjgovnavigator/shared/";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
@@ -60,7 +61,7 @@ export const DbaFormationPaginator = (): ReactElement => {
     moveToStep(state.stepIndex - 1);
   };
 
-  const isDba = business?.profileData.businessName && business.profileData.needsNexusDbaName;
+  const isDba = business?.profileData.businessName && determineIfNexusDbaNameNeeded(business);
 
   const onMoveToStep = async (
     stepIndex: number,
@@ -156,7 +157,7 @@ export const DbaFormationPaginator = (): ReactElement => {
       return (
         <CtaContainer>
           <ActionBarLayout>
-            <FormationHelpButton />
+            <LiveChatHelpButton />
             <ForwardButton />
           </ActionBarLayout>
         </CtaContainer>
@@ -165,7 +166,7 @@ export const DbaFormationPaginator = (): ReactElement => {
       return (
         <CtaContainer>
           <ActionBarLayout>
-            <FormationHelpButton />
+            <LiveChatHelpButton />
             <div className="margin-top-2 mobile-lg:margin-top-0">
               <BackButton />
             </div>
@@ -177,7 +178,7 @@ export const DbaFormationPaginator = (): ReactElement => {
       return (
         <CtaContainer>
           <ActionBarLayout>
-            <FormationHelpButton />
+            <LiveChatHelpButton />
             <div className="margin-top-2 mobile-lg:margin-top-0">
               <BackButton />
             </div>

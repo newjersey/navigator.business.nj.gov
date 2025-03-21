@@ -10,19 +10,19 @@ import {
 import { withMarkup } from "@/test/helpers/helpers-testing-library-selectors";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import {
-  FormationFormData,
-  FormationLegalType,
-  LegalStructures,
-  ProfileData,
-  PublicFilingLegalType,
   arrayOfCountriesObjects,
   castPublicFilingLegalTypeToFormationType,
   defaultDateFormat,
+  FormationFormData,
+  FormationLegalType,
   generateFormationFormData,
   generateFormationIncorporator,
   generateFormationMember,
   generateFormationSigner,
   generateMunicipality,
+  LegalStructures,
+  ProfileData,
+  PublicFilingLegalType,
   randomInt,
 } from "@businessnjgovnavigator/shared";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
@@ -42,7 +42,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
@@ -447,6 +447,14 @@ describe("Formation - ReviewStep", () => {
       expect(screen.getByText("Random place whatever", { exact: false })).toBeInTheDocument();
     });
 
+    it("displays province name label in address when intl", async () => {
+      await renderStep(
+        { businessPersona: "FOREIGN" },
+        { addressProvince: "Province", businessLocationType: "INTL" }
+      );
+      expect(screen.getByText(Config.formation.fields.addressProvince.label)).toBeInTheDocument();
+    });
+
     it("displays city name in address when non-nj", async () => {
       await renderStep(
         { businessPersona: "FOREIGN" },
@@ -690,7 +698,7 @@ describe("Formation - ReviewStep", () => {
       { radio: "nonprofitBoardMemberRightsSpecified", terms: "nonprofitBoardMemberRightsTerms" },
       { radio: "nonprofitTrusteesMethodSpecified", terms: "nonprofitTrusteesMethodTerms" },
       { radio: "nonprofitAssetDistributionSpecified", terms: "nonprofitAssetDistributionTerms" },
-    ])("provisions radio questions", (args) => {
+    ])("provisions $radio radio questions", (args) => {
       it(`does not display ${args.radio} when no board members`, async () => {
         await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: false, [args.radio]: "IN_FORM" });
         expect(

@@ -1,5 +1,4 @@
 ---
-filename: instructor-of-insurance-education
 displayname: instructor-of-insurance-education
 id: "instructor-of-insurance-education"
 webflowId: "5f7729262f04daea3758b5ed"

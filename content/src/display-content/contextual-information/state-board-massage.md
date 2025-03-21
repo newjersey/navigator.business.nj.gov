@@ -1,6 +1,5 @@
 ---
-slug: state-board-massage
-filename: state-board-massage
+id: state-board-massage
 displayname: state-board-massage
 header: Federation of State Massage Therapy Board (FSMTB)
 ---

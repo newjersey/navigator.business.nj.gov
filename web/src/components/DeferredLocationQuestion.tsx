@@ -13,7 +13,7 @@ import { ReactElement, ReactNode, useState } from "react";
 interface Props {
   innerContent: string;
   CMS_ONLY_showSuccessBanner?: boolean;
-  CMS_ONLY_fakeBusiness?: Business; // for CMS only
+  CMS_ONLY_fakeBusiness?: Business;
 }
 
 export const DeferredLocationQuestion = (props: Props): ReactElement => {

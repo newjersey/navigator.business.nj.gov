@@ -4,7 +4,7 @@
       "alertText": "We are unable to find your completed filing information at this time.",
       "bodyText": "If you completed the business formation steps and submitted payment, you can find your formation documents in your email. You can also come back at a later time to download your formation documents from this page.\n \nIf your business formation or payment information is incomplete, you can review and ~button~\n\n\n\n",
       "buttonText": "re-submit your formation.",
-      "modalTitle": "Please verify before proceeding",
+      "modalTitle": "Verify before proceeding",
       "modalCancel": "Cancel",
       "modalContinue": "I understand",
       "modalBody": "This action will return you to your formation form to review and re-submit. You will be required to enter your payment information again. If you have already paid your formation fees, do not perform this operation.\n\n**Only proceed if you are confident that your payment has not completed.**"

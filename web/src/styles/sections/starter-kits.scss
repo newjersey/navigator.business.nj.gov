@@ -1,11 +1,13 @@
-@media screen and (min-width: $lg) {
+@use "../sass-files/variables";
+
+@media screen and (min-width: variables.$lg) {
   .desktop\:text-left {
     text-align: left;
   }
 }
 
 .window-width-shadow-cool-extra-light {
-  box-shadow: 0 0 0 100vmax $cool-extra-light;
+  box-shadow: 0 0 0 100vmax variables.$cool-extra-light;
   clip-path: inset(0 -100vmax);
 }
 
@@ -18,7 +20,7 @@
     "title-section cards-section"
     "cta-button    cards-section";
 
-  @media (max-width: $md) {
+  @media (max-width: variables.$md) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,7 +38,7 @@
 .title-section {
   grid-area: title-section;
   margin-right: 7rem;
-  @media (max-width: $md) {
+  @media (max-width: variables.$md) {
     margin-right: 0;
   }
 }

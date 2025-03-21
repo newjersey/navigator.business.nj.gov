@@ -1,9 +1,8 @@
 ---
-filename: Clean Energy Program - Commercial and Industrial New Construction
 name: New Jersey’s Clean Energy Program – Commercial & Industrial New Construction
 displayName: cinc-clean-energy
 urlSlug: njcep-cinc
-id: njcep-cinc
+id: clean-energy-program-commercial-and-industrial-new-construction
 sidebarCardBodyText: New Jersey’s Clean Energy Program (NJCEP) encourages energy
   efficient new construction of commercial and industrial facilities in New
   Jersey by offering various financial incentives to adopt cost-effective,

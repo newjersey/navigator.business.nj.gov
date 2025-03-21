@@ -9,6 +9,8 @@ import {
   generateMunicipalityDetail,
   generateProfileData,
   getIndustries,
+  LegalStructures,
+  randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
 import * as fetchMunicipalityById from "@businessnjgovnavigator/shared/domain-logic/fetchMunicipalityById";
 import {
@@ -147,12 +149,21 @@ describe("buildUserRoadmap", () => {
       expect(roadmap.tasks).toHaveLength(0);
     });
 
-    it("adds scorp-ccorp-foreign for S-Corp/C-Corp legal structures", async () => {
+    it("adds nonprofit-and-corp-foreign for S-Corp/C-Corp/foreign nonprofit legal structures", async () => {
       await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "s-corporation" }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("scorp-ccorp-foreign");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("nonprofit-and-corp-foreign");
 
       await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "c-corporation" }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("scorp-ccorp-foreign");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("nonprofit-and-corp-foreign");
+
+      await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "nonprofit" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("nonprofit-and-corp-foreign");
+    });
+
+    it("adds oos-pharmacy add-on for out of state pharmacy", async () => {
+      const profileData = createEmptyNexusProfile({ industryId: "pharmacy" });
+      await buildUserRoadmap(profileData);
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("oos-pharmacy");
     });
   });
 
@@ -178,6 +189,23 @@ describe("buildUserRoadmap", () => {
       it("does not add permanent-location-business add-on if industry does not allow permanent location", async () => {
         await buildUserRoadmap(generateStartingProfile({ industryId: "food-truck" }));
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
+      });
+
+      it("does not add env-permitting add-on when industry is generic and if home-based business is true", async () => {
+        await buildUserRoadmap(generateStartingProfile({ industryId: "generic", homeBasedBusiness: true }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("env-permitting");
+      });
+
+      it("adds env-permitting add-on when industry is generic and if home-based business is false", async () => {
+        await buildUserRoadmap(generateStartingProfile({ industryId: "generic", homeBasedBusiness: false }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("env-permitting");
+      });
+
+      it("adds env-permitting add-on when industry is generic and if home-based business is undefined", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ industryId: "generic", homeBasedBusiness: undefined })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("env-permitting");
       });
     });
 
@@ -559,6 +587,63 @@ describe("buildUserRoadmap", () => {
       });
     });
 
+    describe("residential landlord", () => {
+      it("add short term rental registration task for short term rental landlords", async () => {
+        await buildUserRoadmap(generateStartingProfile({ propertyLeaseType: "SHORT_TERM_RENTAL" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("short-term-rental-registration");
+      });
+
+      it("add long term many units add on for long term rentals with three or more rental units", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ propertyLeaseType: "LONG_TERM_RENTAL", hasThreeOrMoreRentalUnits: true })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "residential-landlord-long-term-many-units"
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
+          "residential-landlord-long-term-few-units"
+        );
+      });
+
+      it("add long term few units add on for long term rentals with two or fewer rental units", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ propertyLeaseType: "LONG_TERM_RENTAL", hasThreeOrMoreRentalUnits: false })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
+          "residential-landlord-long-term-many-units"
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "residential-landlord-long-term-few-units"
+        );
+      });
+
+      it("adds long term many unit add on and short term rental add on for landlords owning both short and long term rentals", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ propertyLeaseType: "BOTH", hasThreeOrMoreRentalUnits: true })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "residential-landlord-long-term-many-units"
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("short-term-rental-registration");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
+          "residential-landlord-long-term-few-units"
+        );
+      });
+
+      it("adds long term few unit add on and short term rental add on for landlords owning both short and long term rentals", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ propertyLeaseType: "BOTH", hasThreeOrMoreRentalUnits: false })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
+          "residential-landlord-long-term-many-units"
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("short-term-rental-registration");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
+          "residential-landlord-long-term-few-units"
+        );
+      });
+    });
+
     describe("non essential questions", () => {
       it("adds addOn if nonEssentialQuestion value is true", async () => {
         mockGetNonEssentialQuestionAddOn.mockReturnValue("non-essential-add-on-1");
@@ -613,6 +698,13 @@ describe("buildUserRoadmap", () => {
         );
       });
     });
+
+    describe("all other industries", () => {
+      it("adds env permitting add on", () => {
+        buildUserRoadmap(generateStartingProfile({ industryId: "generic" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("env-permitting");
+      });
+    });
   });
 
   describe("municipality", () => {
@@ -633,11 +725,11 @@ describe("buildUserRoadmap", () => {
           tasks: [
             generateTask({
               callToActionLink: "${municipalityWebsite}",
-              callToActionText: "Visit the ${municipality} Website",
+              callToActionText: "Visit the ${municipalityName} Website",
               stepNumber: 1,
               contentMd:
                 "You can find your city or town clerk through either " +
-                "the [${municipality} website](${municipalityWebsite}) or by contacting " +
+                "the [${municipalityName} website](${municipalityWebsite}) or by contacting " +
                 "your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.",
             }),
           ],
@@ -663,10 +755,10 @@ describe("buildUserRoadmap", () => {
           tasks: [
             generateTask({
               callToActionLink: "${municipalityWebsite}",
-              callToActionText: "Visit the ${municipality} Website",
+              callToActionText: "Visit the ${municipalityName} Website",
               contentMd:
                 "You can find your city or town clerk through either " +
-                "the [${municipality} website](${municipalityWebsite}) or by contacting " +
+                "the [${municipalityName} website](${municipalityWebsite}) or by contacting " +
                 "your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.",
             }),
           ],
@@ -713,7 +805,7 @@ describe("buildUserRoadmap", () => {
         generateRoadmap({
           tasks: [
             generateTask({ contentMd: "NAICS code ${naicsCode}" }),
-            generateTask({ contentMd: "Visit the ${municipality} Website" }),
+            generateTask({ contentMd: "Visit the ${municipalityName} Website" }),
           ],
         })
       );
@@ -883,6 +975,42 @@ describe("buildUserRoadmap", () => {
         generateStartingProfile({ plannedRenovationQuestion: true, industryId: "domestic-employer" })
       );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toEqual([]);
+    });
+  });
+
+  describe("raffle-bingo games", () => {
+    it("adds raffle-bingo-games task if non-profit business conducts raffle or bingo games", () => {
+      const profileData = generateStartingProfile({
+        raffleBingoGames: true,
+        legalStructureId: "nonprofit",
+      });
+
+      buildUserRoadmap(profileData);
+
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("raffle-bingo-games");
+    });
+
+    it("does not add raffle-bingo-games task if non-profit business does not conduct raffle or bingo games", () => {
+      const profileData = generateStartingProfile({
+        raffleBingoGames: false,
+        legalStructureId: "nonprofit",
+      });
+
+      buildUserRoadmap(profileData);
+
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("raffle-bingo-games");
+    });
+
+    it("does not add raffle-bingo-games task if business is not a non-profit", () => {
+      const filterNonprofitOut = LegalStructures.filter((x) => x.id !== "nonprofit");
+      const randomLegalStructure = randomElementFromArray(filterNonprofitOut);
+      buildUserRoadmap(
+        generateStartingProfile({
+          raffleBingoGames: true,
+          legalStructureId: randomLegalStructure.id,
+        })
+      );
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("raffle-bingo-games");
     });
   });
 });

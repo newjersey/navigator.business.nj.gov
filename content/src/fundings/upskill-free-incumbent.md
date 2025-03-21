@@ -1,9 +1,8 @@
 ---
-filename: upskill-free-incumbent
 name: "Upskill: Free Incumbent Worker Training Programs"
 displayName: upskill-free-incumbent
 urlSlug: upskill-free-incumbent
-id: upskill-free-incumbent-worker-training-programs
+id: upskill-free-incumbent
 sidebarCardBodyText: Upskill offers grants to New Jersey businesses of any size
   to improve existing employees’ skills.
 openDate: ""

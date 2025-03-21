@@ -1,7 +1,6 @@
 ---
 urlSlug: alcohol-beverage-bulk-sale-bsp
 webflowName: Alcohol Beverage Bulk Sale (BSP)
-filename: alcohol-beverage-bulk-sale-bsp
 displayname: alcohol-beverage-bulk-sale-bsp
 agencyId: law-public-safety
 agencyAdditionalContext: Division of Alcoholic Beverage Control

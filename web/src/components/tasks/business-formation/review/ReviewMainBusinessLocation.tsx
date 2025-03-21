@@ -1,5 +1,5 @@
-import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
-import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
+import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
+import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getAddressCity, getAddressCountry, getAddressState } from "@/lib/utils/formation-helpers";
@@ -29,10 +29,19 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
           label={Config.formation.fields.addressCity.label}
           value={getAddressCity(state.formationFormData)}
         />
-        <ReviewLineItem
-          label={Config.formation.fields.addressState.label}
-          value={getAddressState(state.formationFormData)}
-        />
+
+        {businessLocationType === "INTL" ? (
+          <ReviewLineItem
+            label={Config.formation.fields.addressProvince.label}
+            value={getAddressState(state.formationFormData)}
+          />
+        ) : (
+          <ReviewLineItem
+            label={Config.formation.fields.addressState.label}
+            value={getAddressState(state.formationFormData)}
+          />
+        )}
+
         <ReviewLineItem
           label={Config.formation.fields.addressZipCode.label}
           value={state.formationFormData.addressZipCode}

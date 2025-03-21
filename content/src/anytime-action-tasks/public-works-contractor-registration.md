@@ -1,9 +1,10 @@
 ---
 notesMd: ""
-filename: public-works-contractor-registration
+id: public-works-contractor-registration
 name: public-works-contractor-registration
+category:
+  - Only Show in Subtask
 sectorIds: []
-icon: file-purple.svg
 urlSlug: public-works-contractor-registration
 summaryDescriptionMd: >-
   ## Register Your Business as a Public Works Contractor
@@ -36,7 +37,7 @@ callToActionLink: https://www.njportal.com/lwd/pwcr
 - Disclosure of responsible owner’s `interest|interest` in another firm that has applied for or obtained a `prevailing wage|prevailing-wage` CR certificate or has bid on or performed work on a project requiring payment of the prevailing wage
 - List of any other business interest
 - Registered apprenticeship certification statement
-- List any notice of violations received from NJDOL, USDOL, or any other state or federal labor law within the last five years
+- List any notice of violations received from NJDOL, USDOL, or any other state or federal labor law within the last 5 years
 - List of all `prevailing wage|prevailing-wage` `craft's|craft`
 - Applicable fees paid
 - `Registered agent|registered-agent` , if applicable

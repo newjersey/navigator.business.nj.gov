@@ -1,5 +1,4 @@
 ---
-filename: stuffed-products-pillows-mattresses-plush-toys-etc
 displayname: stuffed-products-pillows-mattresses-plush-toys-etc
 id: "stuffed-products-pillows-mattresses-plush-toys-etc"
 webflowId: "5f7729469a1bb85893b3b916"

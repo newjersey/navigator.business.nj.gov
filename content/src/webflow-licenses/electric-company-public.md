@@ -1,5 +1,4 @@
 ---
-filename: electric-company-public
 displayname: electric-company-public
 id: "electric-company-public"
 webflowId: "5f7728ead2749a39779cf7d3"

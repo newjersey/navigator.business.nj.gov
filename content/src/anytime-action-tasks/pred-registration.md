@@ -5,13 +5,15 @@ notesMd: >-
 
 
   Note: this one is an informational task screen. There is no application form -- it's a bunch of documents a lawyer essentially puts together. Our SME has told us PRED developers should be familiar with the industry terms here (like title search).
-filename: pred-registration
+id: pred-registration
 name: Register Your Condominium or Other Planned Real Estate Development
+category:
+  - Manage My Properties
+description: File your development plans to comply with state regulations.
 industryIds:
   - commercial-construction
 sectorIds:
   - construction
-icon: file-purple.svg
 urlSlug: pred-registration
 summaryDescriptionMd: >-
   You must register a `planned real estate
@@ -34,7 +36,7 @@ It’s best to hire a real estate or land use attorney to handle the legal paper
 - A copy of the land deed or similar document that proves you own the land where the development is
 - A copy of a title search report or certificate
 - A legal description and survey of the land
-- Copies of your `business formation documents|certificate-formation`, such as articles of incorporation
+- Copies of your `business formation documents|certificate-formation` , such as articles of incorporation
 - Audited financial statements for your company and related entities
 - Copies of property contracts or purchase agreements
 - A statement about any litigation, orders, or judgments that might affect the properties you will market and sell
@@ -46,7 +48,8 @@ Want to register without a lawyer or have questions about the process? Contact t
 
 - A registered development
 - An official `public offering statement|public-offering-statement` that you must share with all potential buyers
-  :::
+
+:::
 
 :::callout{ showHeader="true" headerText="What happens if I don't register?" showIcon="false" calloutType="conditional" }
 

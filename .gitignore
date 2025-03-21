@@ -9,7 +9,7 @@ web/node_modules
 
 # scripts
 get-user-location-output.csv
-results.csv
+report-industries-and-non-essential-questions.csv
 
 # testing
 /coverage

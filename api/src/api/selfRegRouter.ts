@@ -1,24 +1,31 @@
-import { SelfRegClient, UserDataClient } from "@domain/types";
+import { DatabaseClient, SelfRegClient } from "@domain/types";
 import { UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 import { createHmac } from "node:crypto";
 
+type Mutable<T> = {
+  -readonly [P in keyof T]: T[P] extends object ? Mutable<T[P]> : T[P];
+};
+
 export const selfRegRouterFactory = (
-  userDataClient: UserDataClient,
+  databaseClient: DatabaseClient,
   selfRegClient: SelfRegClient
 ): Router => {
   const router = Router();
 
   router.post("/self-reg", async (req, res) => {
     const userData = req.body as UserData;
+    const mutableClone = structuredClone(userData) as Mutable<UserData>;
+    mutableClone.user.email = mutableClone.user.email.toLowerCase().normalize();
+    const cleanedUserData: UserData = mutableClone as UserData;
 
     try {
-      const selfRegResponse = await (userData.user.myNJUserKey
-        ? selfRegClient.resume(userData.user.myNJUserKey)
-        : selfRegClient.grant(userData.user));
-      const updatedUserData = await updateMyNJKey(userData, selfRegResponse.myNJUserKey);
+      const selfRegResponse = await (cleanedUserData.user.myNJUserKey
+        ? selfRegClient.resume(cleanedUserData.user.myNJUserKey)
+        : selfRegClient.grant(cleanedUserData.user));
+      const updatedUserData = await updateMyNJKey(cleanedUserData, selfRegResponse.myNJUserKey);
       res.json({ authRedirectURL: selfRegResponse.authRedirectURL, userData: updatedUserData });
     } catch (error) {
       const message = (error as Error).message;
@@ -33,7 +40,7 @@ export const selfRegRouterFactory = (
   const updateMyNJKey = (userData: UserData, myNJUserKey: string): Promise<UserData> => {
     const hmac = createHmac("sha256", process.env.INTERCOM_HASH_SECRET || "");
     const hash = hmac.update(myNJUserKey).digest("hex");
-    return userDataClient.put({
+    return databaseClient.put({
       ...userData,
       user: {
         ...userData.user,

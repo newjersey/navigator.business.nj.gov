@@ -35,6 +35,8 @@ interface IndustryOnboardingQuestions {
   readonly isCannabisLicenseTypeApplicable?: boolean;
   readonly isConstructionTypeApplicable?: boolean;
   readonly isEmploymentAndPersonnelTypeApplicable?: boolean;
+  readonly whatIsPropertyLeaseType?: boolean;
+  readonly canHaveThreeOrMoreRentalUnits?: boolean;
 }
 
 export interface AddOn {

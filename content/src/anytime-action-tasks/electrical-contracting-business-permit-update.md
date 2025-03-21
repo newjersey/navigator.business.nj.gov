@@ -1,10 +1,11 @@
 ---
-filename: electrical-contracting-business-permit-update
+id: electrical-contracting-business-permit-update
 name: Update Your Electrical Contracting Business Permit
+category:
+  - Change My Business Information
 industryIds:
   - electrical-contractor
 sectorIds: []
-icon: update-purple.svg
 urlSlug: electrical-contracting-business-permit-update
 summaryDescriptionMd: >-
   You need to update your electrical contracting business permit if you are
@@ -50,7 +51,7 @@ If the business is a corporation, in addition to the above, provide the followin
 - Name and address of `registered agent|registered-agent`
 - Name of all officers and stakeholders who own at least 10% of stock
 - `Certificate of Formation|certificate-of-formation`
-- `Certificate of Good Standing|certificate-of-good-standing` , if the business formed over a year ago
+- `Certificate of Good Standing|good-standing` , if the business formed over a year ago
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 

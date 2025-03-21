@@ -3,7 +3,7 @@
     "warningText": "To view this task, you must first complete [Check if Your Business Name is Available in New Jersey](/tasks/form-business-entity)",
     "descriptionShownWithWarning": "You must register your business name and `authorize|certificate-formation` your `business structure|business-structure-learn-more` with the State.",
     "dbaCtaModalHeader": "Before You Start",
-    "dbaCtaModalBody": "This link will take you to a PDF.\n\nOnly pages 23 and 24 are relevant to your formation. Complete those pages and send them to Treasury, the address is on the top left of page 23.",
+    "dbaCtaModalBody": "This link will take you to a PDF to complete your registration with a Doing Business As (DBA) name.\n\nOnly pages 23 and 24 are relevant to your formation. After completing the document, you may mail or overnight it to the Division of Revenue and Enterprise Services. Both addresses are listed at the top of Page 23.",
     "dbaCtaModalContinueButtonText": "Authorize My Business",
     "dbaCtaModalCancelButtonText": "Cancel"
   }

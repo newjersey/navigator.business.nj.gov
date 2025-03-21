@@ -8,12 +8,12 @@ import { ModifiedContent } from "@/components/ModifiedContent";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { createEmptyDbaDisplayContent, createProfileFieldErrorMap } from "@/lib/types/types";
+import { createEmptyDbaDisplayContent } from "@/lib/types/types";
 import {
   generateFormationFormData,
   generateProfileData,
@@ -29,7 +29,7 @@ const Template = () => {
   const [profileData, setProfileData] = useState<ProfileData>(
     generateProfileData({ taxId: "2", naicsCode: "" })
   );
-  const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
+  const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
 
   return (
     <BusinessFormationContext.Provider
@@ -56,7 +56,7 @@ const Template = () => {
         setForeignGoodStandingFile: () => {},
       }}
     >
-      <ProfileFormContext.Provider value={formContextState}>
+      <DataFormErrorMapContext.Provider value={formContextState}>
         <NeedsAccountContext.Provider
           value={{
             isAuthenticated: IsAuthenticated.UNKNOWN,
@@ -142,7 +142,7 @@ const Template = () => {
             </ProfileDataContext.Provider>
           </ConfigContext.Provider>
         </NeedsAccountContext.Provider>
-      </ProfileFormContext.Provider>
+      </DataFormErrorMapContext.Provider>
     </BusinessFormationContext.Provider>
   );
 };

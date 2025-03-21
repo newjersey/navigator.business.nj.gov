@@ -37,7 +37,7 @@ function mockMaterialUI(): typeof materialUi {
 const Config = getMergedConfig();
 
 jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
@@ -216,19 +216,28 @@ describe("task page", () => {
 
   describe("License task", () => {
     const mockTaskIdsWithLicenseSearch = [
-      "home-health-aide-license",
       "apply-for-shop-license",
-      "register-home-contractor",
+      "appraiser-company-register",
+      "authorization-architect-firm",
+      "authorization-landscape-architect-firm",
+      "cemetery-certificate",
+      "consulting-firm-headhunter-reg",
+      "electrologist-office-license",
+      "entertainment-agency-reg",
+      "funeral-registration",
+      "health-club-registration",
+      "home-health-aide-license",
+      "license-massage-therapy",
+      "moving-company-license",
+      "oos-pharmacy-registration",
       "pharmacy-license",
       "register-accounting-firm",
-      "license-massage-therapy",
-      "appraiser-company-register",
+      "register-home-contractor",
+      "search-licenses-employment-agency",
       "telemarketing-license",
-      "health-club-registration",
       "ticket-broker-reseller-registration",
-      "authorization-landscape-architect-firm",
-      "authorization-architect-firm",
-      "entertainment-agency-reg",
+      "temp-help-consulting-firm-combined-reg",
+      "temporary-help-service-firm-reg",
     ];
 
     it("mockTaskIdsWithLicenseSearch matches taskIdsWithLicenseSearchEnabled", () => {
@@ -239,6 +248,8 @@ describe("task page", () => {
 
     it.each(mockTaskIdsWithLicenseSearch)("loads License task screen for %s", (licenseId) => {
       renderPage(generateTask({ id: licenseId }), generateBusiness({ licenseData: undefined }));
+      // TODO: Consider a better way to affirm that this is the correct task screen instead of just looking for
+      // "cta-secondary" id to be in the document.
       expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
     });
   });
@@ -420,7 +431,7 @@ describe("task page", () => {
           profileData: generateProfileData({
             operatingPhase,
           }),
-          taskProgress: { [businessStructureTaskId]: "NOT_STARTED" },
+          taskProgress: { [businessStructureTaskId]: "TO_DO" },
         })
       );
       expect(screen.queryByTestId("nextUrlSlugButton")).not.toBeInTheDocument();

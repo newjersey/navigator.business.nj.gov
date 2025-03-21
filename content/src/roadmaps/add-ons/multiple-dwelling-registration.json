@@ -6,7 +6,7 @@
       "step": 4,
       "weight": 1,
       "task": "multiple-dwelling-registration",
-      "required": true
+      "required": false
     }
   ]
 }

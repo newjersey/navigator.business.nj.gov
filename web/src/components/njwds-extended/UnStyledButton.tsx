@@ -11,6 +11,7 @@ interface Props {
   isIntercomEnabled?: boolean;
   ariaLabel?: string;
   isBgTransparent?: boolean;
+  isButtonALink?: boolean;
 }
 
 // eslint-disable-next-line react/display-name
@@ -52,6 +53,7 @@ export const UnStyledButton = forwardRef(
         type={"button"}
         ref={ref}
         onClick={props.onClick}
+        {...(props.isButtonALink ? { role: "link" } : {})}
         {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}
         {...(props.ariaLabel ? { "aria-label": props.ariaLabel } : {})}
       >

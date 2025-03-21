@@ -1,6 +1,7 @@
 ---
-notesMd: https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/4033
-filename: food-desert-relief
+notesMd: >+
+  https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/4033
+
 name: Food Desert Relief Supermarket Tax Credit Program
 displayName: food-desert-relief
 urlSlug: food-desert-relief

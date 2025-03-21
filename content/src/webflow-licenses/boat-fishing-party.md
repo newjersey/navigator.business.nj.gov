@@ -1,5 +1,4 @@
 ---
-filename: boat-fishing-party
 displayname: boat-fishing-party
 id: "boat-fishing-party"
 webflowId: "5f77295528e85553591958c3"

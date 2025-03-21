@@ -1,9 +1,7 @@
 {
-  "displayname": "moving-company",
   "naicsCodes": "484210",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -12,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -41,23 +39,45 @@
     },
     {
       "step": 3,
-      "weight": 15,
+      "weight": 11,
       "task": "moving-company-insurance",
       "required": true
     },
     {
       "step": 3,
-      "weight": 20,
+      "weight": 12,
       "licenseTask": "moving-company-license",
       "required": true
     },
     {
       "step": 3,
-      "weight": 22,
+      "weight": 13,
       "task": "trucking-cdl"
+    },
+    {
+      "step": 3,
+      "weight": 14,
+      "task": "transportation-entity-id",
+      "required": true
+    },
+    {
+      "weight": 15,
+      "step": 3,
+      "task": "mvc-title-task",
+      "required": true
+    },
+    {
+      "weight": 16,
+      "step": 3,
+      "task": "mvc-registration-task",
+      "required": true
     }
   ],
   "name": "Moving Company",
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
+  "displayname": "moving-company",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "isTransportation": true,
@@ -66,6 +86,6 @@
   "isEnabled": true,
   "additionalSearchTerms": "freight, trucking, movers, box truck company, transportation, truck driving, hauling, truck haul, logistics, trucking company, ",
   "id": "moving-company",
-  "description": "Transports personal belongings from on location to another",
+  "description": "Transports personal belongings from one location to another",
   "webflowId": "656a136257239e597fcb93da"
 }

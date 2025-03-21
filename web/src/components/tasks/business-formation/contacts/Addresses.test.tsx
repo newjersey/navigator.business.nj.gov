@@ -11,6 +11,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -25,7 +26,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
@@ -94,8 +95,17 @@ describe("Formation - Addresses", () => {
               { exact: false }
             )
           ).toBeInTheDocument();
+
           // eslint-disable-next-line testing-library/no-node-access
-          fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
+          const tr = nameTd.closest("tr");
+
+          if (tr !== null) {
+            const editButton = within(tr).getByRole("button", {
+              name: Config.formation.fields.signers.editLabel,
+            });
+            await userEvent.click(editButton);
+          }
+
           expect(page.getInputElementByLabel("Address name").value).toBe(incorporators[1].name);
           expect(page.getInputElementByLabel("Address line1").value).toBe(incorporators[1].addressLine1);
           expect(page.getInputElementByLabel("Address line2").value).toBe(incorporators[1].addressLine2);
@@ -144,8 +154,17 @@ describe("Formation - Addresses", () => {
           ];
           const page = await getPageHelper({ legalStructureId }, { incorporators });
           const nameTd = screen.getByText(incorporators[1].name, { exact: false });
+
           // eslint-disable-next-line testing-library/no-node-access
-          fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="delete"]') as Element);
+          const tr = nameTd.closest("tr");
+
+          if (tr !== null) {
+            const removeButton = within(tr).getByRole("button", {
+              name: Config.formation.fields.signers.deleteLabel,
+            });
+            await userEvent.click(removeButton);
+          }
+
           await page.submitContactsStep();
           expect(currentBusiness().formationData.formationFormData.incorporators).toEqual([incorporators[0]]);
         });
@@ -182,8 +201,16 @@ describe("Formation - Addresses", () => {
           };
           expect(signerErrorText()).toBeInTheDocument();
           const nameTd = screen.getByText(incorporators[0].addressLine1, { exact: false });
+
           // eslint-disable-next-line testing-library/no-node-access
-          fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
+          const tr = nameTd.closest("tr");
+
+          if (tr !== null) {
+            const editButton = within(tr).getByRole("button", {
+              name: Config.formation.fields.signers.editLabel,
+            });
+            await userEvent.click(editButton);
+          }
           page.fillText("Address name", "Elrond");
           page.clickAddressSubmit();
           expect(signerErrorText()).toBeInTheDocument();

@@ -5,13 +5,16 @@ notesMd: >-
 
 
   Note: this is also on the Landlord starter kit. This Anytime Action only appears to Oscars.
-filename: smoke-detector-certificate
+id: smoke-detector-certificate
 name: Get a New Smoke Detector, Carbon Monoxide Detector, and Fire Extinguisher
   Certificate
+category:
+  - Manage My Properties
+  - Purchase New Products or Equipment
+description: Apply for a certificate to ensure your property meets safety standards.
 industryIds: []
 sectorIds:
   - real-estate
-icon: govt-purple.svg
 urlSlug: smoke-detector-certificate
 summaryDescriptionMd: >-
   You need a new certificate for each one- or two-family home you are renting
@@ -27,6 +30,7 @@ summaryDescriptionMd: >-
 callToActionText: Contact My Local Enforcing Agency (LEA)
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 ---
+
 ## How to Apply
 
 You must pass an inspection before you can get the certificate. Contact your `Local Enforcing Agency (LEA)|lea` to schedule an inspection. Your LEA can be the local fire department or the state Division of Fire Safety.

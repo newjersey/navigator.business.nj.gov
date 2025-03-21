@@ -46,10 +46,6 @@
       "taskDependencies": ["sign-lease"]
     },
     {
-      "task": "logisticare",
-      "licenseTaskDependencies": ["register-vehicle"]
-    },
-    {
       "task": "apply-scorp-federal",
       "taskDependencies": ["register-for-taxes"]
     },
@@ -62,7 +58,7 @@
       "taskDependencies": ["site-safety-permits-cosmetology"]
     },
     {
-      "licenseTask": "Haul-Waste",
+      "licenseTask": "haul-waste-hic",
       "licenseTaskDependencies": ["register-home-contractor"]
     },
     {

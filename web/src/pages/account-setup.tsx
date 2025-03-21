@@ -5,8 +5,8 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { AuthContext } from "@/contexts/authContext";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { onSelfRegister } from "@/lib/auth/signinHelper";
@@ -15,11 +15,11 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import { createProfileFieldErrorMap, OnboardingErrors } from "@/lib/types/types";
+import { OnboardingErrors } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { BusinessUser, createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
 const AccountSetupPage = (): ReactElement => {
@@ -41,7 +41,7 @@ const AccountSetupPage = (): ReactElement => {
   useEffect(() => {
     (async (): Promise<void> => {
       if (state.isAuthenticated === IsAuthenticated.TRUE) {
-        await router.replace(ROUTES.dashboard);
+        router?.isReady && (await router.replace(ROUTES.dashboard));
       }
     })();
   }, [state.isAuthenticated, router]);
@@ -50,11 +50,11 @@ const AccountSetupPage = (): ReactElement => {
     FormFuncWrapper,
     onSubmit,
     state: formContextState,
-  } = useFormContextHelper(createProfileFieldErrorMap<OnboardingErrors>());
+  } = useFormContextHelper(createDataFormErrorMap<OnboardingErrors>());
 
   FormFuncWrapper(
     async (): Promise<void> => {
-      if (!updateQueue) return;
+      if (!updateQueue || !router) return;
 
       updateQueue.queueUser(user);
       let userDataWithUser = updateQueue.current();
@@ -81,7 +81,7 @@ const AccountSetupPage = (): ReactElement => {
   );
 
   useEffect(() => {
-    if (!router.isReady || queryAnalyticsOccurred.current) {
+    if (!router?.isReady || queryAnalyticsOccurred.current) {
       return;
     }
     if (router.query[QUERIES.source] !== undefined) {
@@ -117,7 +117,7 @@ const AccountSetupPage = (): ReactElement => {
           <h1>{getContent().header}</h1>
           {showAlert && <Alert variant="error">{Config.accountSetup.errorAlert}</Alert>}
           <Content>{getContent().body}</Content>
-          <ProfileFormContext.Provider value={formContextState}>
+          <DataFormErrorMapContext.Provider value={formContextState}>
             <AccountSetupForm user={user} setUser={setUser} />
 
             <hr className="margin-top-4 margin-bottom-2" />
@@ -132,7 +132,7 @@ const AccountSetupPage = (): ReactElement => {
                 {getContent().submitButton}
               </PrimaryButton>
             </div>
-          </ProfileFormContext.Provider>
+          </DataFormErrorMapContext.Provider>
         </SingleColumnContainer>
       </main>
     </PageSkeleton>

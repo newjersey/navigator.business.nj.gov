@@ -29,6 +29,7 @@ interface Props {
   showSidebar?: boolean;
   isSeoStarterKit?: boolean;
   isLanding?: boolean;
+  isLoginPage?: boolean;
   previousBusinessId?: string | undefined;
   logoOnlyType?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
   currentlyOnboarding: boolean;
@@ -64,6 +65,18 @@ export const NavBarMobile = (props: Props): ReactElement => {
   if (props.logoOnlyType) {
     return (
       <NavBarLogoOnlyMobile scrolled={scrolled} showMyNjLogo={props.logoOnlyType === "NAVIGATOR_MYNJ_LOGO"} />
+    );
+  } else if (props.isLoginPage) {
+    return (
+      <NavBarMobileWrapper scrolled={scrolled}>
+        <NavBarMobileHomeLogo
+          isLoginPage
+          scrolled={props.scrolled}
+          showSidebar={props.showSidebar}
+          previousBusinessId={props.previousBusinessId}
+          businessNavBarTitle={navBarBusinessTitle}
+        />
+      </NavBarMobileWrapper>
     );
   } else if (props.isSeoStarterKit) {
     return (

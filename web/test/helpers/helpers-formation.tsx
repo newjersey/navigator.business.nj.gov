@@ -424,15 +424,13 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   const getSignerBox = (index: number, type: "signers" | "incorporators"): boolean => {
     const additionalSigner = within(screen.getByTestId(`${type}-${index}`));
     return (
-      additionalSigner.getByLabelText(
-        `${Config.formation.fields.signers.signColumnLabel}*`
-      ) as HTMLInputElement
+      additionalSigner.getByLabelText(`${Config.formation.fields.signers.columnLabel}`) as HTMLInputElement
     ).checked;
   };
 
   const checkSignerBox = (index: number, type: "signers" | "incorporators"): void => {
     const additionalSigner = within(screen.getByTestId(`${type}-${index}`));
-    fireEvent.click(additionalSigner.getByLabelText(`${Config.formation.fields.signers.signColumnLabel}*`));
+    fireEvent.click(additionalSigner.getByLabelText(`${Config.formation.fields.signers.columnLabel}`));
   };
 
   const clickAddressSubmit = (): void => {

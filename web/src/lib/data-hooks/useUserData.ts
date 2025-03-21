@@ -6,11 +6,13 @@ import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import * as api from "@/lib/api-client/apiClient";
 import { postUserData } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { isLicenseDataFromDatabaseDataMoreRecent } from "@/lib/domain-logic/isLicenseDataFromDatabaseDataMoreRecent";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { UpdateQueue, UserDataError } from "@/lib/types/types";
 import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
-import { UserData } from "@businessnjgovnavigator/shared/";
+import { licenseDataModifyingFunction } from "@/lib/utils/licenseStatus";
+import { modifyCurrentBusiness, UserData } from "@businessnjgovnavigator/shared/";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { useContext, useEffect, useRef } from "react";
 import useSWR from "swr";
@@ -53,10 +55,36 @@ export const useUserData = (): UseUserDataResponse => {
 
   useEffect(() => {
     fetchedUserId.current = data?.user.id;
+
+    let licenseDataFromDatabaseDataMoreRecent = false;
+    const currBusinessIdFromUpdateQueue = updateQueue?.current()?.currentBusinessId;
+
+    if (
+      currBusinessIdFromUpdateQueue &&
+      data?.businesses[currBusinessIdFromUpdateQueue] &&
+      updateQueue?.currentBusiness()
+    ) {
+      licenseDataFromDatabaseDataMoreRecent = isLicenseDataFromDatabaseDataMoreRecent({
+        businessFromDb: data?.businesses[currBusinessIdFromUpdateQueue],
+        businessFromUpdateQueue: updateQueue?.currentBusiness(),
+      });
+    }
+
     if (updateQueue === undefined && data) {
       setUpdateQueue(new UpdateQueueFactory(data, update));
     } else if (updateQueue?.current() === undefined && data) {
       updateQueue?.queue(data);
+    } else if (
+      currBusinessIdFromUpdateQueue &&
+      licenseDataFromDatabaseDataMoreRecent &&
+      updateQueue &&
+      data
+    ) {
+      const mergedData = modifyCurrentBusiness(
+        updateQueue?.current(),
+        licenseDataModifyingFunction(data, currBusinessIdFromUpdateQueue)
+      );
+      updateQueue?.queue(mergedData);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, updateQueue]);

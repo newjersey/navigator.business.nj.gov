@@ -15,12 +15,12 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
 describe("<Header />", () => {
@@ -80,7 +80,7 @@ describe("<Header />", () => {
     describe("when in guest mode - other phases", () => {
       const personas: BusinessPersona[] = ["OWNING", "FOREIGN"];
 
-      it.each(personas)("displays greeting text", (persona) => {
+      it.each(personas)("displays greeting text for %s", (persona) => {
         const business = generateBusiness({
           profileData: generateProfileData({ industryId: "generic", businessPersona: persona }),
         });

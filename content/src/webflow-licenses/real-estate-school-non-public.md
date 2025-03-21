@@ -1,5 +1,4 @@
 ---
-filename: real-estate-school-non-public
 displayname: real-estate-school-non-public
 id: "real-estate-school-non-public"
 webflowId: "5f77292eef4962ad0546d0d8"

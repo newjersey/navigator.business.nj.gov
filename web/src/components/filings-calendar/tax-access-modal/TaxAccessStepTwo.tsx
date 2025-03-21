@@ -7,21 +7,20 @@ import { TaxAccessModalBody } from "@/components/filings-calendar/tax-access-mod
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { FieldStateActionKind } from "@/contexts/formContext";
+import { DataFormErrorMapContext, DataFormErrorMapFields } from "@/contexts/dataFormErrorMapContext";
+import { createReducedFieldStates } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
-import { postTaxFilingsOnboarding } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { createReducedFieldStates, ProfileFields } from "@/lib/types/types";
+import { gov2GovTaxFiling } from "@/lib/taxation/helpers";
+import { FieldStateActionKind } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   Business,
   createEmptyProfileData,
-  getCurrentBusiness,
   LookupLegalStructureById,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
@@ -34,8 +33,8 @@ interface Props {
   close: () => void;
   onSuccess: () => void;
   moveToPrevStep: () => void;
-  CMS_ONLY_fakeError?: "NONE" | "API" | "UNKNOWN"; // for CMS only
-  CMS_ONLY_fakeBusiness?: Business; // for CMS only
+  CMS_ONLY_fakeError?: "NONE" | "API" | "UNKNOWN";
+  CMS_ONLY_fakeBusiness?: Business;
 }
 
 export const TaxAccessStepTwo = (props: Props): ReactElement => {
@@ -48,7 +47,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [apiFailed, setOnAPIfailed] = useState<undefined | "FAILED" | "UNKNOWN">(undefined);
   const [onSubmitClicked, setOnSubmitClicked] = useState<boolean>(false);
-  const fields: ProfileFields[] = ["businessName", "taxId", "responsibleOwnerName"];
+  const fields: DataFormErrorMapFields[] = ["businessName", "taxId", "responsibleOwnerName"];
   const has_CMS_ONLY_fakeError = props.CMS_ONLY_fakeError && props.CMS_ONLY_fakeError !== "NONE";
 
   const {
@@ -80,7 +79,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
     }
   });
 
-  const errorMessages: Partial<Record<ProfileFields, string>> = {
+  const errorMessages: Partial<Record<DataFormErrorMapFields, string>> = {
     businessName: Config.taxAccess.modalBusinessFieldErrorName,
     responsibleOwnerName: Config.taxAccess.modalResponsibleOwnerFieldErrorName,
     taxId: Config.taxAccess.modalTaxFieldErrorName,
@@ -143,45 +142,19 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
 
       setIsLoading(true);
 
-      const encryptedTaxId =
-        profileData.taxId === business.profileData.taxId ? profileData.encryptedTaxId : undefined;
-
       try {
-        let businessNameToSubmitToTaxApi = "";
-
-        if (displayBusinessName()) {
-          businessNameToSubmitToTaxApi = profileData.businessName;
-        }
-        if (displayResponsibleOwnerName()) {
-          businessNameToSubmitToTaxApi = profileData.responsibleOwnerName;
-        }
-
-        const userDataToSet = await postTaxFilingsOnboarding({
-          taxId: profileData.taxId as string,
-          businessName: businessNameToSubmitToTaxApi,
-          encryptedTaxId: encryptedTaxId as string,
-        });
-
-        updateQueue.queue(userDataToSet).queueProfileData({
-          taxId: profileData.taxId,
-          encryptedTaxId: encryptedTaxId,
-        });
-
-        if (getCurrentBusiness(userDataToSet).taxFilingData.state === "SUCCESS") {
-          if (displayBusinessName()) {
-            updateQueue.queueProfileData({
-              businessName: profileData.businessName,
-            });
-          }
-
-          if (displayResponsibleOwnerName()) {
-            updateQueue.queueProfileData({
-              responsibleOwnerName: profileData.responsibleOwnerName,
-            });
-          }
-        }
-
+        await gov2GovTaxFiling({ updateQueue, stagedProfileData: profileData });
         await updateQueue.update();
+        if (profileData.businessName) {
+          updateQueue.queueProfileData({
+            businessName: profileData.businessName,
+          });
+        }
+        if (profileData.responsibleOwnerName) {
+          updateQueue.queueProfileData({
+            responsibleOwnerName: profileData.responsibleOwnerName,
+          });
+        }
       } catch {
         setOnAPIfailed("UNKNOWN");
         setIsLoading(false);
@@ -246,7 +219,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
   if (profileData.legalStructureId === undefined) return <></>;
 
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFormErrorMapContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -354,6 +327,6 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
           </WithErrorBar>
         </ModalTwoButton>
       </ProfileDataContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFormErrorMapContext.Provider>
   );
 };

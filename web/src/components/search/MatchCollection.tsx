@@ -46,7 +46,9 @@ export const MatchCollection = (props: Props): ReactElement => {
 
   return (
     <Accordion expanded={isOpen} onChange={(): void => setIsOpen((prev) => !prev)}>
-      <AccordionSummary expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}>
+      <AccordionSummary
+        expandIcon={<Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />}
+      >
         <Heading level={2} className="margin-y-2">
           {collectionTitle}
           <span style={{ fontWeight: 300 }} className="margin-left-1">

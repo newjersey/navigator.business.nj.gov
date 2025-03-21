@@ -15,6 +15,7 @@ interface Props {
   hideHeader?: boolean;
   boldAltDescription?: boolean;
   ignoreContextualInfo?: boolean;
+  boldDescription?: boolean;
 }
 
 export const FieldLabelProfile = (props: Props): ReactElement => {
@@ -66,7 +67,7 @@ export const FieldLabelProfile = (props: Props): ReactElement => {
               data-testid={`${props.fieldName}-locked-tooltip`}
             >
               <div className="fdr fac font-body-lg">
-                <Icon>help_outline</Icon>
+                <Icon iconName="help_outline" />
               </div>
             </ArrowTooltip>
           </div>
@@ -79,7 +80,9 @@ export const FieldLabelProfile = (props: Props): ReactElement => {
               <Content>{altDescription}</Content>
             </div>
           )}
-          {!props.isAltDescriptionDisplayed && description && <Content>{description}</Content>}
+          {!props.isAltDescriptionDisplayed && description && (
+            <Content className={props.boldDescription ? "text-bold" : ""}>{description}</Content>
+          )}
         </>
       )}
     </>

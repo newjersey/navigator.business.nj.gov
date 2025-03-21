@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -48,7 +48,9 @@
     }
   ],
   "name": "Acupuncture",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "acupuncture",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

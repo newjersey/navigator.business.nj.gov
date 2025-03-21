@@ -1,9 +1,8 @@
 ---
-filename: tax-credit-veterans
 name: Tax Credit for Hiring Veterans and Other Target Groups
-displayName: veterans-target-group
+displayName: tax-credit-for-hiring-veterans-and-other-target-groups
 urlSlug: tax-credit-veterans
-id: tax-credit-for-hiring-veterans-and-other-target-groups
+id: tax-credit-veterans
 sidebarCardBodyText: The Work Opportunity tax credit program is a Federal tax
   credit for businesses who hire and retain veterans and individuals from other
   target groups with significant barriers to employment such as qualified TANF

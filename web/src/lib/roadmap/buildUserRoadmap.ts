@@ -72,6 +72,9 @@ const getForeignAddOns = (profileData: ProfileData): string[] => {
 
   if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NEXUS") {
     addOns.push("foreign-nexus");
+    if (profileData.industryId === "pharmacy") {
+      addOns.push("oos-pharmacy");
+    }
   }
 
   return addOns;
@@ -223,6 +226,22 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("reseller");
   }
 
+  if (profileData.propertyLeaseType === "LONG_TERM_RENTAL" || profileData.propertyLeaseType === "BOTH") {
+    if (profileData.hasThreeOrMoreRentalUnits) {
+      addOns.push("residential-landlord-long-term-many-units");
+    } else {
+      addOns.push("residential-landlord-long-term-few-units");
+    }
+  }
+
+  if (profileData.propertyLeaseType === "SHORT_TERM_RENTAL" || profileData.propertyLeaseType === "BOTH") {
+    addOns.push("short-term-rental-registration");
+  }
+
+  if (industryId === "generic" && profileData.homeBasedBusiness !== true) {
+    addOns.push("env-permitting");
+  }
+
   if (industry.nonEssentialQuestionsIds) {
     for (const questionId in profileData.nonEssentialRadioAnswers) {
       const addOnToAdd = getNonEssentialQuestionAddOn(questionId);
@@ -252,9 +271,10 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
     }
     if (
       profileData.legalStructureId === "s-corporation" ||
-      profileData.legalStructureId === "c-corporation"
+      profileData.legalStructureId === "c-corporation" ||
+      profileData.legalStructureId === "nonprofit"
     ) {
-      addOns.push("scorp-ccorp-foreign");
+      addOns.push("nonprofit-and-corp-foreign");
     }
   } else {
     if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
@@ -270,6 +290,9 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
 
   if (profileData.legalStructureId === "nonprofit") {
     addOns.push("nonprofit");
+    if (profileData.raffleBingoGames) {
+      addOns.push("raffle-bingo-games");
+    }
   }
   return addOns;
 };
@@ -282,7 +305,7 @@ const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: str
 
   return applyTemplateEvalForAllTasks(roadmap, {
     municipalityWebsite: municipality.townWebsite,
-    municipality: municipality.townName,
+    municipalityName: municipality.townName,
     county: municipality.countyName,
     countyClerkPhone: municipality.countyClerkPhone,
     countyClerkWebsite: municipality.countyClerkWebsite,
@@ -297,7 +320,7 @@ const addNaicsCodeData = (roadmap: Roadmap, naicsCode: string): Roadmap => {
 const cleanupMunicipalitySpecificData = (roadmap: Roadmap): Roadmap => {
   return applyTemplateEvalForAllTasks(roadmap, {
     municipalityWebsite: "",
-    municipality: "",
+    municipalityName: "",
     county: "",
     countyClerkPhone: "",
     countyClerkWebsite: "",

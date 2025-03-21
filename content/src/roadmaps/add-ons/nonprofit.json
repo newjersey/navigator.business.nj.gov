@@ -1,10 +1,15 @@
 {
   "displayname": "nonprofit",
-  "filename": "nonprofit",
+  "id": "nonprofit",
   "roadmapSteps": [
     {
       "step": 1,
-      "weight": 3,
+      "weight": 9,
+      "task": "nonprofit-business-bylaws"
+    },
+    {
+      "step": 1,
+      "weight": 10,
       "task": "nonprofit-business-trustees"
     },
     {

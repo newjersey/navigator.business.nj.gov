@@ -17,15 +17,16 @@ import {
   mockSuccessfulApiSignups,
   renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
+import { arrayOfSectors as sectors } from "@businessnjgovnavigator/shared";
 import {
-  OperatingPhaseId,
   createEmptyProfileData,
   generateProfileData,
+  OperatingPhaseId,
 } from "@businessnjgovnavigator/shared/";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
@@ -99,7 +100,7 @@ describe("onboarding - shared", () => {
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
   });
 
-  it("routes to dashboard page when industry WITHOUT essential question is set by using industry query string", async () => {
+  it("autocompletes onboarding and routes to dashboard page when industry WITHOUT essential question is set by using industry query string", async () => {
     const industry = randomElementFromArray(industriesWithOutEssentialQuestion).id;
     useMockRouter({ isReady: true, query: { industry } });
     renderPage({});
@@ -112,6 +113,23 @@ describe("onboarding - shared", () => {
     expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
     expect(currentBusiness().profileData.industryId).toEqual(industry);
     expect(currentBusiness().onboardingFormProgress).toEqual("COMPLETED");
+    expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.GUEST_MODE);
+  });
+
+  it("autocompletes onboarding and routes to dashboard page when sector question is set by using sector query string", async () => {
+    const sector = randomElementFromArray(sectors).id;
+    useMockRouter({ isReady: true, query: { sector } });
+    renderPage({});
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalledWith({
+        pathname: ROUTES.dashboard,
+        query: { [QUERIES.fromOnboarding]: "true" },
+      });
+    });
+    expect(currentBusiness().profileData.businessPersona).toEqual("OWNING");
+    expect(currentBusiness().profileData.sectorId).toEqual(sector);
+    expect(currentBusiness().onboardingFormProgress).toEqual("COMPLETED");
+    expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.GUEST_MODE_OWNING);
   });
 
   it("routes to the onboarding industry page when industry WITH essential question is set by using industry query string", async () => {

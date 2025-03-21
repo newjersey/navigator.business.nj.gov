@@ -4,12 +4,11 @@ import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
 import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { createProfileFieldErrorMap } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
@@ -31,7 +30,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
     onSubmit,
     isValid,
     state: formContextState,
-  } = useFormContextHelper(createProfileFieldErrorMap());
+  } = useFormContextHelper(createDataFormErrorMap());
 
   useEffect(() => {
     if (!business) return;
@@ -59,7 +58,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
   });
 
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFormErrorMapContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -114,6 +113,6 @@ export const FormationDateModal = (props: Props): ReactElement => {
           )}
         </ModalTwoButton>
       </ProfileDataContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFormErrorMapContext.Provider>
   );
 };

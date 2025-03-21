@@ -1,7 +1,6 @@
 ---
 notesMd: Drafted in
   https://docs.google.com/document/d/1Wz_sMYY0t3ycS4rmiqeWrNafLwdBStGE_R_ivT3c57w/edit
-previewType: expiration
 licenseName: ""
 urlSlug: hvac-contractor
 expirationEventDisplayName: HVACR License Expiration

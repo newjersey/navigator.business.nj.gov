@@ -7,13 +7,16 @@ import {
   generateElevatorSafetyRegistration,
   generateElevatorSafetyRegistrationSummary,
 } from "@businessnjgovnavigator/shared/elevatorSafety";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/api-client/apiClient", () => ({
   checkElevatorRegistrationStatus: jest.fn(),
 }));
 const mockApi = api as jest.Mocked<typeof api>;
+
+window.open = jest.fn();
+const mockWindowOpen = window.open as jest.Mocked<typeof window.open>;
 
 jest.mock("@/lib/utils/analytics-base", () => ({
   sendEvent: jest.fn(),
@@ -59,6 +62,7 @@ describe("<ElevatorRegistrationTask />", () => {
           legacy_event_action: "click",
         })
       );
+      expect(mockWindowOpen).toHaveBeenCalledWith(task.callToActionLink, "_blank", "noopener noreferrer");
     });
 
     it("can get to second tab by clicking tab", () => {

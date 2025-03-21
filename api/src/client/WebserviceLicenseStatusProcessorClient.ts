@@ -1,6 +1,7 @@
 import { inputManipulator } from "@domain/inputManipulator";
 import { LicenseStatusClient, NO_ADDRESS_MATCH_ERROR, SearchLicenseStatus } from "@domain/types";
 import { parseDateWithFormat } from "@shared/dateHelpers";
+import { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
 import {
   LicenseEntity,
   LicenseName,
@@ -8,8 +9,6 @@ import {
   LicenseStatus,
   LicenseStatusItem,
 } from "@shared/license";
-
-import { LicenseStatusResults } from "@api/types";
 
 export const WebserviceLicenseStatusProcessorClient = (
   licenseStatusClient: LicenseStatusClient
@@ -34,6 +33,10 @@ export const WebserviceLicenseStatusProcessorClient = (
     const results: LicenseStatusResults = {};
 
     for (const checklistItem of allMatchingAddressesArray) {
+      if (checklistItem.licenseType === "Home Improvement Contractor") {
+        checklistItem.licenseType = "Home Improvement Business Contr";
+      }
+
       const licenseName = `${checklistItem.professionName}-${checklistItem.licenseType}` as LicenseName;
       if (licenseName in results) {
         results[licenseName]!.checklistItems = updateChecklist(

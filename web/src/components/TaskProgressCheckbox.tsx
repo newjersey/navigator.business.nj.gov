@@ -13,12 +13,12 @@ import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
-import { isRemoteWorkerOrSellerBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import { formationTaskId } from "@businessnjgovnavigator/shared/";
 import { isFormationTask, isTaxTask } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { TaskProgress } from "@businessnjgovnavigator/shared/userData";
-import { useRouter } from "next/router";
-import { ReactElement, ReactNode, useContext, useState } from "react";
+import { useRouter } from "next/compat/router";
+import { ReactElement, ReactNode, useContext, useEffect, useState } from "react";
 
 interface Props {
   taskId: string;
@@ -38,18 +38,30 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const router = useRouter();
   const { Config } = useConfig();
 
+  const updateTaskProgressDueToWiremockFormationCompletion =
+    process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH === "true" &&
+    business?.formationData?.completedFilingPayment &&
+    business?.formationData?.formationResponse?.success &&
+    isFormationTask(props.taskId) &&
+    business.taskProgress[formationTaskId] !== "COMPLETED";
+
+  useEffect(() => {
+    if (updateTaskProgressDueToWiremockFormationCompletion) {
+      updateQueue?.queueTaskProgress({ [formationTaskId]: "COMPLETED" });
+      updateQueue?.update();
+    }
+  }, [business, updateQueue, updateTaskProgressDueToWiremockFormationCompletion]);
+
   const currentTaskProgress: TaskProgress =
-    props.STORYBOOK_ONLY_currentTaskProgress ?? business?.taskProgress[props.taskId] ?? "NOT_STARTED";
+    props.STORYBOOK_ONLY_currentTaskProgress ?? business?.taskProgress[props.taskId] ?? "TO_DO";
   const isDisabled = !!props.disabledTooltipText;
 
   const getNextStatus = (): TaskProgress => {
     switch (currentTaskProgress) {
-      case "NOT_STARTED":
-        return "IN_PROGRESS";
-      case "IN_PROGRESS":
+      case "TO_DO":
         return "COMPLETED";
       case "COMPLETED":
-        return "NOT_STARTED";
+        return "TO_DO";
     }
   };
 
@@ -98,25 +110,21 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         if (!redirectOnSuccess) {
           return;
         }
-        routeWithQuery(router, {
-          path: ROUTES.dashboard,
-          queries: {
-            [QUERIES.fromFormBusinessEntity]: isFormationTask(props.taskId) ? "true" : "false",
-            [QUERIES.fromTaxRegistration]:
-              isTaxTask(props.taskId) && !isRemoteWorkerOrSellerBusiness(business) ? "true" : "false",
-          },
-        });
+        router &&
+          routeWithQuery(router, {
+            path: ROUTES.dashboard,
+            queries: {
+              [QUERIES.fromFormBusinessEntity]: isFormationTask(props.taskId) ? "true" : "false",
+            },
+          });
       })
       .catch(() => {});
   };
 
   const sendAnalytics = (nextStatus: TaskProgress): void => {
     switch (nextStatus) {
-      case "NOT_STARTED":
-        analytics.event.task_status_checkbox.click.selected_not_started_status();
-        break;
-      case "IN_PROGRESS":
-        analytics.event.task_status_checkbox.click.selected_in_progress_status();
+      case "TO_DO":
+        analytics.event.task_status_checkbox.click.selected_to_do_status();
         break;
       case "COMPLETED":
         analytics.event.task_status_checkbox.click.selected_completed_status();
@@ -126,7 +134,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
 
   const getStyles = (): { border: string; bg: string; textColor: string; hover: string } => {
     switch (currentTaskProgress) {
-      case "NOT_STARTED":
+      case "TO_DO":
         if (isDisabled) {
           return {
             border: "border-base-light",
@@ -140,22 +148,6 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
             bg: "bg-white",
             textColor: "",
             hover: "task-checkbox-base-lighter",
-          };
-        }
-      case "IN_PROGRESS":
-        if (isDisabled) {
-          return {
-            border: "border-accent-cool-light",
-            bg: "bg-accent-cool-lightest",
-            textColor: "text-accent-cool-dark",
-            hover: "",
-          };
-        } else {
-          return {
-            border: "border-accent-cool-dark",
-            bg: "bg-white",
-            textColor: "text-accent-cool-dark",
-            hover: "task-checkbox-accent-cool-lighter",
           };
         }
       case "COMPLETED":
@@ -179,10 +171,8 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
 
   const getIcon = (): string => {
     switch (currentTaskProgress) {
-      case "NOT_STARTED":
+      case "TO_DO":
         return "";
-      case "IN_PROGRESS":
-        return "more_horiz";
       case "COMPLETED":
         return "check";
     }
@@ -205,6 +195,8 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     return (
       <button
         data-testid="change-task-progress-checkbox"
+        role="checkbox"
+        aria-checked={currentTaskProgress === "COMPLETED"}
         aria-label={`update task status. ${getAdditionalAriaContext()}`}
         onClick={isDisabled ? undefined : (): void => setToNextStatus()}
         className={`cursor-pointer margin-neg-105 padding-105 usa-button--unstyled task-checkbox-base ${styles.hover}`}
@@ -218,7 +210,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
           }
           style={{ width: "22px", height: "22px" }}
         >
-          <Icon>{getIcon()}</Icon>
+          <Icon iconName={getIcon()} />
         </span>
       </button>
     );

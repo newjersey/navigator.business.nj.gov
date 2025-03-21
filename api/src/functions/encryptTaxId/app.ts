@@ -1,6 +1,15 @@
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
+import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
+import {
+  AWS_CRYPTO_CONTEXT_ORIGIN,
+  AWS_CRYPTO_CONTEXT_PURPOSE,
+  AWS_CRYPTO_CONTEXT_STAGE,
+  AWS_CRYPTO_KEY,
+  DYNAMO_OFFLINE_PORT,
+  IS_DOCKER,
+  IS_OFFLINE,
+  STAGE,
+  USERS_TABLE,
+} from "@functions/config";
 import { LogWriter } from "@libs/logWriter";
 import { AWSEncryptionDecryptionFactory } from "src/client/AwsEncryptionDecryptionFactory";
 import { DynamoUserDataClient } from "src/db/DynamoUserDataClient";
@@ -13,7 +22,7 @@ export default async function handler(): Promise<void> {
   const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
   const DYNAMO_OFFLINE_PORT = process.env.DYNAMO_PORT || 8000;
   const STAGE = process.env.STAGE || "local";
-  const dataLogger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
+  const dataLogger = LogWriter(`aws/${STAGE}`, "DataMigrationLogs");
 
   let dynamoDb: DynamoDBDocumentClient;
   if (IS_OFFLINE) {
@@ -37,12 +46,9 @@ export default async function handler(): Promise<void> {
     );
   }
 
-  const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, dataLogger);
 
-  const AWS_CRYPTO_KEY = process.env.AWS_CRYPTO_KEY || "";
-  const AWS_CRYPTO_CONTEXT_STAGE = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
-  const AWS_CRYPTO_CONTEXT_PURPOSE = process.env.AWS_CRYPTO_CONTEXT_PURPOSE || "";
-  const AWS_CRYPTO_CONTEXT_ORIGIN = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
+  const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
+  const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, dataLogger);
 
   const AWSEncryptionDecryptionClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_KEY, {
     stage: AWS_CRYPTO_CONTEXT_STAGE,

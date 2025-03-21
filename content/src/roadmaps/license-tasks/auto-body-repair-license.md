@@ -1,6 +1,6 @@
 ---
+licenseName: ""
 id: auto-body-repair-license
-filename: auto-body-repair-license
 displayname: auto-body-repair-license
 urlSlug: auto-body-repair-license
 name: Get Your Auto-Body Repair License
@@ -10,14 +10,13 @@ summaryDescriptionMd: |
 formName: BLC-25
 industryId:
   - auto-body-repair
-callToActionText: Apply for My Auto-Body Repair License
-callToActionLink: https://www.state.nj.us/mvcbiz/BusinessServices/AutoBodyRepair.htm
+callToActionText: Get My Auto-Body Repair License
+callToActionLink: https://www.nj.gov/mvc/business/autobodylic.htm
 webflowIndustry: Auto Body
 licenseCertificationClassification: LICENSE
 agencyId: nj-motor-vehicle
 divisionPhone: (609) 292-6500
 webflowType: business-license
-licenseName: ""
 webflowId: 5f7729541a08097ccbbb2ecb
 ---
 
@@ -42,3 +41,5 @@ webflowId: 5f7729541a08097ccbbb2ecb
 An auto-body repair license.
 
 :::
+
+**Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov

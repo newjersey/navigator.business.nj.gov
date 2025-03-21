@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -40,14 +40,16 @@
     {
       "step": 3,
       "weight": 15,
-      "task": "get-insurance"
+      "task": null
     }
   ],
   "name": "Pet Care",
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "petcare-cds-shelter",
-    "petcare-cds-trainer"
+    "petcare-cds-trainer",
+    "business-vehicle-title-reg",
+    "pesticides-applicator-licensing"
   ],
   "displayname": "petcare",
   "industryOnboardingQuestions": {

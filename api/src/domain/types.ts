@@ -1,6 +1,8 @@
-import { LicenseStatusResults } from "@api/types";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
+import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
+import { LicenseStatusResults } from "@shared/domain-logic/licenseStatusHelpers";
 import {
   ElevatorSafetyDeviceInspectionDetails,
   ElevatorSafetyRegistrationSummary,
@@ -12,17 +14,19 @@ import {
   HousingRegistrationRequestLookupResponse,
   PropertyInterestType,
 } from "@shared/housing";
-import {
-  enabledLicensesSources,
-  LicenseEntity,
-  LicenseSearchNameAndAddress,
-  LicenseTaskID,
-} from "@shared/license";
+import { enabledLicensesSources, LicenseEntity, LicenseSearchNameAndAddress } from "@shared/license";
 import { ProfileData } from "@shared/profileData";
-import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
+import { TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
 import { Business, UserData } from "@shared/userData";
 import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
+
+export interface DatabaseClient {
+  migrateOutdatedVersionUsers: () => Promise<{ success: boolean; migratedCount?: number; error?: string }>;
+  get: (userId: string) => Promise<UserData>;
+  put: (userData: UserData) => Promise<UserData>;
+  findByEmail: (email: string) => Promise<UserData | undefined>;
+}
 
 export interface UserDataClient {
   get: (userId: string) => Promise<UserData>;
@@ -31,6 +35,10 @@ export interface UserDataClient {
   getNeedNewsletterUsers: () => Promise<UserData[]>;
   getNeedToAddToUserTestingUsers: () => Promise<UserData[]>;
   getNeedTaxIdEncryptionUsers: () => Promise<UserData[]>;
+  getUsersWithOutdatedVersion: (
+    latestVersion: number,
+    nextToken?: string
+  ) => Promise<{ usersToMigrate: UserData[]; nextToken?: string }>;
 }
 
 export interface BusinessesDataClient {
@@ -40,6 +48,7 @@ export interface BusinessesDataClient {
   findByBusinessName: (businessName: string) => Promise<Business | undefined>;
   findAllByNAICSCode: (naicsCode: string) => Promise<Business[]>;
   findAllByIndustry: (industry: string) => Promise<Business[]>;
+  findAllByBusinessName: (businessName: string) => Promise<Business[]>;
   findByEncryptedTaxId: (encryptedTaxId: string) => Promise<Business | undefined>;
 }
 
@@ -134,8 +143,7 @@ export type SearchLicenseStatus = (
 
 export type UpdateLicenseStatus = (
   userData: UserData,
-  nameAndAddress: LicenseSearchNameAndAddress,
-  taskId?: LicenseTaskID
+  nameAndAddress: LicenseSearchNameAndAddress
 ) => Promise<UserData>;
 
 export type FireSafetyInspectionStatus = (address: string) => Promise<FireSafetyInspectionResult[]>;

@@ -1,6 +1,5 @@
 ---
-slug: context-test
-filename: context-test
+id: context-test
 displayname: context-test
 header: This is a Title
 ---

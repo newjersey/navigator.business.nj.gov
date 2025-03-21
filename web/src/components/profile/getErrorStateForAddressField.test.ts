@@ -19,14 +19,14 @@ describe("getErrorStateForAddressField", () => {
       expect(
         getErrorStateForAddressField({
           field: "addressLine1",
-          addressData: address,
+          formationAddressData: address,
         }).hasError
       ).toEqual(true);
 
       expect(
         getErrorStateForAddressField({
           field: "addressLine1",
-          addressData: address,
+          formationAddressData: address,
         }).label
       ).toEqual(
         templateEval(Config.formation.general.maximumLengthErrorText, {
@@ -43,7 +43,7 @@ describe("getErrorStateForAddressField", () => {
       expect(
         getErrorStateForAddressField({
           field: "addressLine1",
-          addressData: address,
+          formationAddressData: address,
         }).hasError
       ).toEqual(false);
     });
@@ -57,13 +57,13 @@ describe("getErrorStateForAddressField", () => {
       expect(
         getErrorStateForAddressField({
           field: "addressLine2",
-          addressData: address,
+          formationAddressData: address,
         }).hasError
       ).toEqual(true);
       expect(
         getErrorStateForAddressField({
           field: "addressLine2",
-          addressData: address,
+          formationAddressData: address,
         }).label
       ).toEqual(
         templateEval(Config.formation.general.maximumLengthErrorText, {
@@ -81,28 +81,31 @@ describe("getErrorStateForAddressField", () => {
       expect(
         getErrorStateForAddressField({
           field: "addressLine2",
-          addressData: address,
+          formationAddressData: address,
         }).hasError
       ).toEqual(false);
     });
   });
 
   describe("addressZipCode", () => {
-    it("has error if less than 5 digits", () => {
+    it("has error if NJ zip code is less than 5 digits", () => {
       const address = generateAddress({
         addressZipCode: "123",
+        addressState: {
+          name: "New Jersey",
+          shortCode: "NJ",
+        },
       });
       expect(
         getErrorStateForAddressField({
           field: "addressZipCode",
-          addressData: address,
+          formationAddressData: address,
         }).hasError
       ).toEqual(true);
-
       expect(
         getErrorStateForAddressField({
           field: "addressZipCode",
-          addressData: address,
+          formationAddressData: address,
         }).label
       ).toEqual(Config.formation.fields.addressZipCode.error);
     });
@@ -110,18 +113,22 @@ describe("getErrorStateForAddressField", () => {
     it("has error if not NJ zip code", () => {
       const address = generateAddress({
         addressZipCode: "12335",
+        addressState: {
+          name: "New Jersey",
+          shortCode: "NJ",
+        },
       });
       expect(
         getErrorStateForAddressField({
           field: "addressZipCode",
-          addressData: address,
+          formationAddressData: address,
         }).hasError
       ).toEqual(true);
 
       expect(
         getErrorStateForAddressField({
           field: "addressZipCode",
-          addressData: address,
+          formationAddressData: address,
         }).label
       ).toEqual(Config.formation.fields.addressZipCode.error);
     });
@@ -133,7 +140,7 @@ describe("getErrorStateForAddressField", () => {
       expect(
         getErrorStateForAddressField({
           field: "addressZipCode",
-          addressData: address,
+          formationAddressData: address,
         }).hasError
       ).toEqual(false);
     });
@@ -149,16 +156,109 @@ describe("getErrorStateForAddressField", () => {
       expect(
         getErrorStateForAddressField({
           field: "addressMunicipality",
-          addressData: address,
+          formationAddressData: address,
         }).hasError
       ).toEqual(true);
 
       expect(
         getErrorStateForAddressField({
           field: "addressMunicipality",
-          addressData: address,
+          formationAddressData: address,
         }).label
       ).toEqual(Config.formation.fields.addressMunicipality.error);
+    });
+  });
+
+  describe("addressCity", () => {
+    it("has error if address city is undefined", () => {
+      const address = generateAddress({
+        addressLine1: "123 Main Street",
+        addressCity: undefined,
+        addressZipCode: "10001",
+      });
+
+      expect(
+        getErrorStateForAddressField({
+          field: "addressCity",
+          formationAddressData: address,
+        }).hasError
+      ).toEqual(true);
+
+      expect(
+        getErrorStateForAddressField({
+          field: "addressCity",
+          formationAddressData: address,
+        }).label
+      ).toEqual(Config.formation.fields.addressCity.error);
+    });
+  });
+
+  describe("addressProvince", () => {
+    it("has error if address city is undefined", () => {
+      const address = generateAddress({
+        addressLine1: "1 London Way",
+        addressProvince: undefined,
+      });
+
+      expect(
+        getErrorStateForAddressField({
+          field: "addressProvince",
+          formationAddressData: address,
+        }).hasError
+      ).toEqual(true);
+
+      expect(
+        getErrorStateForAddressField({
+          field: "addressProvince",
+          formationAddressData: address,
+        }).label
+      ).toEqual(Config.formation.fields.addressProvince.error);
+    });
+  });
+
+  describe("addressCountry", () => {
+    it("has error if addressCountry is undefined", () => {
+      const address = generateAddress({
+        addressLine1: "1 London Way",
+        addressCountry: undefined,
+      });
+
+      expect(
+        getErrorStateForAddressField({
+          field: "addressCountry",
+          formationAddressData: address,
+        }).hasError
+      ).toEqual(true);
+
+      expect(
+        getErrorStateForAddressField({
+          field: "addressCountry",
+          formationAddressData: address,
+        }).label
+      ).toEqual(Config.formation.fields.addressCountry.error);
+    });
+  });
+
+  describe("addressState", () => {
+    it("has error if addressState is undefined", () => {
+      const address = generateAddress({
+        addressLine1: "123 Main Street",
+        addressState: undefined,
+      });
+
+      expect(
+        getErrorStateForAddressField({
+          field: "addressState",
+          formationAddressData: address,
+        }).hasError
+      ).toEqual(true);
+
+      expect(
+        getErrorStateForAddressField({
+          field: "addressState",
+          formationAddressData: address,
+        }).label
+      ).toEqual(Config.formation.fields.addressState.error);
     });
   });
 });

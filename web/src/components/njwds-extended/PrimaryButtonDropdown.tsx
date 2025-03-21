@@ -57,7 +57,7 @@ export const PrimaryButtonDropdown = (props: Props): ReactElement => {
       >
         <>
           {props.children}
-          <Icon className="usa-icon--size-3 margin-left-05 margin-right-neg-1">{"arrow_drop_down"}</Icon>
+          <Icon className="usa-icon--size-3 margin-left-05 margin-right-neg-1" iconName="arrow_drop_down" />
         </>
       </GenericButton>
       <Popper

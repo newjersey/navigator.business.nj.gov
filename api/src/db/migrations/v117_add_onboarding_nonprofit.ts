@@ -604,7 +604,7 @@ export const generateV117FormationData = (
 export const generateV117UserData = (overrides: Partial<v117UserData>): v117UserData => {
   const profileData = generateV117ProfileData({});
   return {
-    version: 102,
+    version: 117,
     dateCreatedISO: undefined,
     versionWhenCreated: -1,
     user: generateV117User({}),

@@ -1,5 +1,4 @@
 ---
-filename: fire-safety-inspection
 displayname: fire-safety-inspection
 urlSlug: fire-safety-inspection
 name: Ensure Your Site Gets Routine Fire Safety Inspections

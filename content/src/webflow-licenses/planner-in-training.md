@@ -1,5 +1,4 @@
 ---
-filename: planner-in-training
 displayname: planner-in-training
 id: "planner-in-training"
 webflowId: "5f7729c3a67e4a059f5c0f3a"

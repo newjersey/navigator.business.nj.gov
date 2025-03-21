@@ -1,0 +1,12 @@
+{
+  "displayname": "nonprofit-and-corp-foreign",
+  "id": "nonprofit-and-corp-foreign",
+  "roadmapSteps": [
+    {
+      "step": 2,
+      "weight": 1,
+      "task": "certificate-good-standing-foreign",
+      "required": true
+    }
+  ]
+}

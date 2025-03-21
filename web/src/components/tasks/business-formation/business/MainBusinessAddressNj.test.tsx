@@ -7,9 +7,9 @@ import {
 } from "@/test/helpers/helpers-formation";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
+  castPublicFilingLegalTypeToFormationType,
   FormationFormData,
   PublicFilingLegalType,
-  castPublicFilingLegalTypeToFormationType,
 } from "@businessnjgovnavigator/shared/formationData";
 import { generateBusiness, generateFormationFormData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
@@ -27,7 +27,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
@@ -129,14 +129,14 @@ describe("<MainBusinessAddressNj />", () => {
       ["addressLine1", ""],
       ["addressMunicipality", undefined],
       ["addressZipCode", ""],
-    ])("shows an error on submission when missing address field", async (field, initialValue) => {
+    ])("shows an error on submission when missing address field for %s", async (field, initialValue) => {
       const page = await getPageHelper({
         [field]: initialValue,
         legalType: "limited-liability-company",
       });
       await attemptApiSubmission(page);
 
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (Config.formation.fields as any)[field].label
       );

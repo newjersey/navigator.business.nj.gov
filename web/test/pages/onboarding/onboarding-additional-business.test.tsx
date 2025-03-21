@@ -18,10 +18,10 @@ import {
 } from "@/test/pages/onboarding/helpers-onboarding";
 import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
-import { UserData, createEmptyBusiness } from "@businessnjgovnavigator/shared/userData";
+import { createEmptyBusiness, UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
@@ -79,8 +79,9 @@ describe("onboarding - additional business", () => {
   });
 
   it("onboards and saves an additional empty business", async () => {
-    const emptyBusiness = createEmptyBusiness();
-    const initialBusiness = generateBusiness({});
+    const userId = "user-id";
+    const emptyBusiness = createEmptyBusiness({ userId: userId });
+    const initialBusiness = generateBusiness({ userId: userId });
     const initialData = generateUserDataForBusiness(initialBusiness);
     expect(Object.keys(initialData.businesses)).toHaveLength(1);
 
@@ -127,7 +128,6 @@ describe("onboarding - additional business", () => {
             sectorId: "retail-trade-and-ecommerce",
             homeBasedBusiness: undefined,
             municipality: undefined,
-            isNonprofitOnboardingRadio: false,
           },
         },
       },

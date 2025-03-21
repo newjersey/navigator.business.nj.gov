@@ -3,12 +3,14 @@ notesMd: >+
   ADO ticket:
   https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/4216
 
-filename: tax-clearance-certificate
-name: Obtain a Tax Clearance Certificate
+id: tax-clearance-certificate
+name: Get a Tax Clearance Certificate
+category:
+  - Apply for State Funding
+description: Apply for a certificate to verify your tax compliance status.
 applyToAllUsers: true
 industryIds: []
 sectorIds: []
-icon: file-purple.svg
 urlSlug: tax-clearance-certificate-apply
 summaryDescriptionMd: >
   If you are interested in receiving New Jersey state grants, incentives, and
@@ -19,7 +21,7 @@ callToActionText: Request My Tax Clearance Certificate
 callToActionLink: https://www.nj.gov/treasury/contract_compliance/documents/pdf/PBS-Introduction-Page.pdf
 ---
 
-You can request your tax clearance certificate through the [Premier Business Services Portal](https://www.nj.gov/treasury/contract_compliance/documents/pdf/PBS-Introduction-Page.pdf). There is no fee for requesting a certificate through the portal. You are usually only permitted to apply with a [paper application](https://www.nj.gov/treasury/taxation/pdf/busasstTaxClear.pdf) if your business is one of the following: trusts, banking institutions, insurance companies, individuals, and local governments such as school districts and counties. Most others are required to apply online.
+You can request your tax clearance certificate through the [Premier Business Services Portal](https://www.nj.gov/treasury/contract_compliance/documents/pdf/PBS-Introduction-Page.pdf). There is no fee for requesting a certificate through the portal. You are usually only permitted to apply with a [paper application](https://www.nj.gov/treasury/taxation/pdf/busasstTaxClear.pdf) if your business is 1 of the following: trusts, banking institutions, insurance companies, individuals, and local governments such as school districts and counties. Most others are required to apply online.
 
 ## Requirements for Requesting a Tax Clearance Certificate
 

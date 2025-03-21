@@ -1,5 +1,4 @@
 ---
-filename: race-regatta
 displayname: race-regatta
 id: "race-regatta"
 webflowId: "5f7729649491d5352b036b58"

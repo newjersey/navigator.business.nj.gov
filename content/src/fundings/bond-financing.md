@@ -1,5 +1,4 @@
 ---
-filename: bond-financing
 name: Bond Financing
 displayName: bond-financing
 urlSlug: bond-financing
@@ -30,7 +29,11 @@ certifications: []
 preferenceForOpportunityZone: ""
 county:
   - All
-sector: []
+sector:
+  - manufacturing
+  - waste-management-and-Remediation
+  - utilities
+  - other-services
 publishStageArchive: ""
 ---
 

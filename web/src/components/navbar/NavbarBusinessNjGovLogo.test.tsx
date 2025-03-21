@@ -4,7 +4,7 @@ import analytics from "@/lib/utils/analytics";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 function setupMockAnalytics(): typeof analytics {

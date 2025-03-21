@@ -15,6 +15,7 @@ import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab, templateEval, useMountEffect } from "@/lib/utils/helpers";
+import { determineIfNexusDbaNameNeeded } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext } from "react";
 
@@ -48,7 +49,7 @@ export const NexusFormationFlow = (): ReactElement => {
     moveToStep(state.stepIndex - 1);
   };
 
-  const isNotDba = business?.profileData.businessName && !business.profileData.needsNexusDbaName;
+  const isNotDba = business?.profileData.businessName && !determineIfNexusDbaNameNeeded(business);
 
   const onStepChangeAnalytics = (
     formationFormData: FormationFormData | undefined,

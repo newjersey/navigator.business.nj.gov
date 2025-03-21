@@ -1,5 +1,5 @@
 {
-  "naicsCodes": "621330, 621112, 621420, 812990, 622210, 621111, 621112, 621330, 621391, 621310, 621210, 621399, 621320, 812199621330, 621111, 621112,  621340, 623110, 623312",
+  "naicsCodes": "621330, 621112, 621420, 812990, 622210, 621111, 621112, 621330, 621391, 621310, 621210, 621399, 621320, 812199621330, 621111, 621112,  621340, 623110, 623312, 541940",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -51,6 +51,11 @@
       "step": 3,
       "weight": 28,
       "licenseTask": "cds-healthcare"
+    },
+    {
+      "step": 4,
+      "weight": 90,
+      "task": "community-right-to-know-survey"
     }
   ],
   "name": "Healthcare",
@@ -58,7 +63,11 @@
     "weights-measures",
     "dentist",
     "freestanding-residential-health-care-license",
-    "electrologist"
+    "electrologist",
+    "healthcare-xray-regis",
+    "healthcare-optometrist ",
+    "business-vehicle-title-reg",
+    "dental-hygienist"
   ],
   "displayname": "healthcare",
   "industryOnboardingQuestions": {
@@ -66,7 +75,7 @@
     "canBeReseller": false
   },
   "isEnabled": true,
-  "additionalSearchTerms": "doctors office, physician, medical examiners, nurses, nursing, advanced practice nurse, midwives, midwifery, certified nurse midwife, occupational therapy, physical therapy, therapist, optometrists, psychologist, psychoanalyst, family therapy, counseling, marriage counselor, speech therapy, audiologists, dietitian, nutritionist, mental health services, mental health care, mental healthcare, addiction services, behavioral health, physician assistant, dentist, osteopathy, optometrist, podiatrist, veterinarian, healthcare facility, healthcare center, nursing home, assisted living, electrolysis, electrologist",
+  "additionalSearchTerms": "doctors office, physician, medical examiners, nurses, nursing, advanced practice nurse, midwives, midwifery, certified nurse midwife, occupational therapy, physical therapy, therapist, optometrists, psychologist, psychoanalyst, family therapy, counseling, marriage counselor, speech therapy, audiologists, dietitian, nutritionist, mental health services, mental health care, mental healthcare, addiction services, behavioral health, physician assistant, dentist, osteopathy, optometrist, podiatrist, veterinarian, healthcare facility, healthcare center, nursing home, assisted living, electrolysis, electrologist, optometry, health care, dentist, dental, hygienist",
   "id": "healthcare",
   "description": "Provides licensed health-related services",
   "webflowId": "656a13622828697d87e05e99"

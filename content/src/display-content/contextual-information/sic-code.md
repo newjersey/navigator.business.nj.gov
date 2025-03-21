@@ -1,7 +1,7 @@
 ---
 notesMd: "[Muni planning doc](https://docs.google.com/document/d/1YQ4GRUpeYxFKxTNWvqW3Np3lWTYRnJoN_uPIEM4xbNQ/edit?usp=sharing)"
 header: Standard Industrial Classification (SIC) Code
-slug: sic-code
+id: sic-code
 displayname: sic-code
 ---
 

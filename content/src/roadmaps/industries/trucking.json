@@ -1,9 +1,7 @@
 {
-  "displayname": "trucking",
   "naicsCodes": "484110, 484121, 484122, 484220, 484230",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -12,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -41,12 +39,30 @@
     },
     {
       "step": 3,
-      "weight": 15,
+      "weight": 12,
       "task": "trucking-cdl"
     },
     {
       "step": 3,
+      "weight": 14,
+      "task": "transportation-entity-id",
+      "required": true
+    },
+    {
+      "step": 3,
+      "task": "mvc-title-task",
+      "weight": 15,
+      "required": true
+    },
+    {
+      "step": 3,
+      "task": "mvc-registration-task",
       "weight": 16,
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 17,
       "task": "trucking-insurance",
       "required": true
     },
@@ -67,9 +83,18 @@
       "weight": 30,
       "task": "trucking-irp",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 90,
+      "task": "community-right-to-know-survey"
     }
   ],
   "name": "Trucking",
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
+  "displayname": "trucking",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "isTransportation": true

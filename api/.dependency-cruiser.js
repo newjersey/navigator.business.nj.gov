@@ -3,6 +3,10 @@ module.exports = {
   allowedSeverity: "error",
   allowed: [
     {
+      from: { path: "aws-amplify" },
+      to: {},
+    },
+    {
       from: {},
       to: { path: "@serverless/typescript" },
     },
@@ -199,6 +203,10 @@ module.exports = {
     },
     {
       from: { path: "src/db" },
+      to: { path: "src/libs" },
+    },
+    {
+      from: { path: "src/api" },
       to: { path: "src/libs" },
     },
   ],

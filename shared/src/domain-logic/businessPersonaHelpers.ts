@@ -54,3 +54,10 @@ export const determineForeignBusinessType = (ids: ForeignBusinessTypeId[]): Fore
   if (intersection(ids, RemoteSellerBusinessTypeIds).length > 0) return "REMOTE_SELLER";
   return undefined;
 };
+
+export const determineIfNexusDbaNameNeeded = (business?: Business | undefined): boolean => {
+  if (!business) return false;
+  return (
+    isNexusBusiness(business) && business.formationData.businessNameAvailability?.status === "UNAVAILABLE"
+  );
+};

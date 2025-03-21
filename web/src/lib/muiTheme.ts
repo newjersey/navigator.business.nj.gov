@@ -1,3 +1,4 @@
+import "@mui/lab/themeAugmentation";
 import { createTheme } from "@mui/material";
 
 export default createTheme({
@@ -58,6 +59,13 @@ export default createTheme({
         },
       },
     },
+    MuiTabPanel: {
+      styleOverrides: {
+        root: {
+          padding: "0px !important",
+        },
+      },
+    },
     MuiAccordionSummary: {
       styleOverrides: {
         root: {
@@ -69,6 +77,35 @@ export default createTheme({
         },
         content: {
           margin: "0px !important",
+        },
+      },
+    },
+    MuiButtonBase: {
+      styleOverrides: {
+        root: {
+          "&.MuiTab-root": {
+            "&:focus": {
+              outline: ".25rem solid #38536f",
+            },
+          },
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          color: "#38536f !important",
+        },
+      },
+    },
+    MuiTabs: {
+      styleOverrides: {
+        root: {
+          margin: "0px !important",
+        },
+        indicator: {
+          height: "4px !important",
+          backgroundColor: "#38536f !important",
         },
       },
     },

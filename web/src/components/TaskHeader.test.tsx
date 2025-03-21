@@ -4,23 +4,23 @@ import { Task } from "@/lib/types/types";
 import { generateStep, generateTask } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { WithStatefulUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
+import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  TaskProgress,
   formationTaskId,
   generateBusiness,
   generateUserDataForBusiness,
+  TaskProgress,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
   generateGetFilingResponse,
   generateUserData,
 } from "@businessnjgovnavigator/shared/test";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 

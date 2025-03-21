@@ -1,20 +1,22 @@
 import { getAnnualFilings } from "@domain/annual-filings/getAnnualFilings";
 import {
+  DatabaseClient,
   EncryptionDecryptionClient,
   TimeStampBusinessSearch,
   UpdateLicenseStatus,
   UpdateOperatingPhase,
   UpdateSidebarCards,
-  UserDataClient,
 } from "@domain/types";
 import { encryptTaxIdFactory } from "@domain/user/encryptTaxIdFactory";
+import type { LogWriterType } from "@libs/logWriter";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
+import { determineIfNexusDbaNameNeeded } from "@shared/domain-logic/businessPersonaHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
-import { createEmptyFormationFormData } from "@shared/formationData";
+import { modifyCurrentBusiness } from "@shared/domain-logic/modifyCurrentBusiness";
+import { createEmptyFormationFormData, FormationAddress } from "@shared/formationData";
 import { LicenseName, LicenseSearchNameAndAddress } from "@shared/license";
-import { modifyCurrentBusiness } from "@shared/test";
 import { Business, createEmptyUserData, UserData } from "@shared/userData";
 import { Request, Response, Router } from "express";
 import { StatusCodes } from "http-status-codes";
@@ -57,11 +59,13 @@ const clearTaskItemChecklists = (userData: UserData): UserData => {
 
 const shouldCheckLicense = (currentBusiness: Business): boolean => {
   const formationFormData = currentBusiness.formationData.formationFormData;
-  const hasFormationAddress =
-    formationFormData.addressLine1.length > 0 && formationFormData.addressZipCode.length > 0;
+  const hasFormationAddressAndBusinessName =
+    formationFormData.addressLine1.length > 0 &&
+    formationFormData.addressZipCode.length > 0 &&
+    !!currentBusiness.profileData.businessName;
 
   const hasLicenseDataOrFormationAddress =
-    currentBusiness.licenseData?.licenses !== undefined || hasFormationAddress;
+    currentBusiness.licenseData?.licenses !== undefined || hasFormationAddressAndBusinessName;
   const licenseDataOlderThanOneHour =
     currentBusiness.licenseData === undefined
       ? true
@@ -89,10 +93,10 @@ const shouldUpdateBusinessNameSearch = (userData: UserData): boolean => {
     currentBusiness.formationData.businessNameAvailability !== undefined &&
     hasBeenMoreThanOneHour(currentBusiness.formationData.businessNameAvailability.lastUpdatedTimeStamp);
 
-  const isDba = currentBusiness.profileData.needsNexusDbaName;
+  const isDba = determineIfNexusDbaNameNeeded(currentBusiness);
   const shouldUpdateNameAvailability = isDba ? dbaNameIsOlderThanAnHour : businessNameIsOlderThanAnHour;
 
-  return shouldUpdateNameAvailability && currentBusiness.formationData.completedFilingPayment !== true;
+  return shouldUpdateNameAvailability && !currentBusiness.formationData.completedFilingPayment;
 };
 
 export const getSignedInUser = (req: Request): CognitoJWTPayload => {
@@ -119,15 +123,40 @@ const businessHasFormed = (userData: UserData): boolean => {
 };
 
 export const userRouterFactory = (
-  userDataClient: UserDataClient,
+  dynamoDataClient: DatabaseClient,
   updateLicenseStatus: UpdateLicenseStatus,
   updateRoadmapSidebarCards: UpdateSidebarCards,
   updateOperatingPhase: UpdateOperatingPhase,
   encryptionDecryptionClient: EncryptionDecryptionClient,
-  timeStampBusinessSearch: TimeStampBusinessSearch
+  timeStampBusinessSearch: TimeStampBusinessSearch,
+  logger: LogWriterType
 ): Router => {
   const router = Router();
   const encryptTaxId = encryptTaxIdFactory(encryptionDecryptionClient);
+
+  router.post("/users/emailCheck", async (req, res) => {
+    const { email } = req.body;
+
+    const logId = logger.GetId();
+    let status;
+
+    if (email === undefined) {
+      status = StatusCodes.BAD_REQUEST;
+      res.status(status).send({ error: "`email` property required." });
+    } else {
+      const userData = await dynamoDataClient.findByEmail(email.toLowerCase());
+
+      if (userData) {
+        status = StatusCodes.OK;
+        res.status(status).send({ email, found: true });
+      } else {
+        status = StatusCodes.NOT_FOUND;
+        res.status(status).send({ email, found: false });
+      }
+    }
+
+    logger.LogInfo(`Email Check, - Id: ${logId}, Status: ${status}, email: ${email}`);
+  });
 
   router.get("/users/:userId", (req, res) => {
     const signedInUserId = getSignedInUserId(req);
@@ -136,7 +165,7 @@ export const userRouterFactory = (
       return;
     }
 
-    userDataClient
+    dynamoDataClient
       .get(req.params.userId)
       .then(async (userData: UserData) => {
         let updatedUserData = userData;
@@ -145,7 +174,7 @@ export const userRouterFactory = (
           .then((userData) => updateRoadmapSidebarCards(userData))
           .then((userData) => asyncUpdateLicenseStatus(userData));
 
-        await userDataClient.put(updatedUserData);
+        await dynamoDataClient.put(updatedUserData);
         res.json(updatedUserData);
       })
       .catch((error: Error) => {
@@ -181,7 +210,7 @@ export const userRouterFactory = (
     const userDataWithEncryptedTaxId = await encryptTaxId(userDataWithUpdatedSidebarCards);
     const userDataWithUpdatedISO = setLastUpdatedISO(userDataWithEncryptedTaxId);
 
-    userDataClient
+    dynamoDataClient
       .put(userDataWithUpdatedISO)
       .then((result: UserData) => {
         res.json(result);
@@ -193,7 +222,7 @@ export const userRouterFactory = (
 
   const industryHasChanged = async (userData: UserData): Promise<boolean> => {
     try {
-      const oldUserData = await userDataClient.get(userData.user.id);
+      const oldUserData = await dynamoDataClient.get(userData.user.id);
       const oldBusinessData = getCurrentBusiness(oldUserData);
       const currentBusinessData = getCurrentBusiness(userData);
 
@@ -206,7 +235,7 @@ export const userRouterFactory = (
   const updateLegalStructureIfNeeded = async (userData: UserData): Promise<UserData> => {
     let oldUserData;
     try {
-      oldUserData = await userDataClient.get(userData.user.id);
+      oldUserData = await dynamoDataClient.get(userData.user.id);
     } catch {
       return userData;
     }
@@ -227,13 +256,19 @@ export const userRouterFactory = (
 
       const formationFormData =
         userData.businesses[userData.currentBusinessId].formationData.formationFormData;
-      const address = {
+
+      const address: FormationAddress = {
         addressLine1: formationFormData.addressLine1,
         addressLine2: formationFormData.addressLine2,
         addressCity: formationFormData.addressCity,
         addressMunicipality: formationFormData.addressMunicipality,
+        addressState: formationFormData.addressState,
+        addressCountry: formationFormData.addressCountry,
         addressZipCode: formationFormData.addressZipCode,
+        addressProvince: formationFormData.addressProvince,
+        businessLocationType: formationFormData.businessLocationType,
       };
+
       return modifyCurrentBusiness(userData, (business) => ({
         ...business,
         formationData: {
@@ -270,7 +305,7 @@ export const userRouterFactory = (
       contactSharingWithAccountCreationPartner: true,
     });
 
-    userDataClient
+    dynamoDataClient
       .put(emptyUserData)
       .then((result) => {
         res.json(result);
@@ -287,7 +322,7 @@ export const userRouterFactory = (
     try {
       const currentBusiness = getCurrentBusiness(userData);
       const isForeign = currentBusiness.profileData.businessPersona === "FOREIGN";
-      const needsDba = currentBusiness.profileData.needsNexusDbaName;
+      const needsDba = determineIfNexusDbaNameNeeded(currentBusiness);
       const nameToSearch = needsDba
         ? currentBusiness.profileData.nexusDbaName
         : currentBusiness.profileData.businessName;

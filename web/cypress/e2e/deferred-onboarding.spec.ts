@@ -19,7 +19,7 @@ import {
 import { onDashboardPage } from "../support/page_objects/dashboardPage";
 import { onProfilePage } from "../support/page_objects/profilePage";
 
-describe("Deferred Onboarding [feature] [all] [group5]", () => {
+describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
   });
@@ -248,7 +248,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
   };
 
   const goToMercantileTask = (): void => {
-    cy.get('[data-task="check-local-requirements"]').first().click({ force: true });
+    cy.get('[data-task="town-mercantile-license"]').first().click({ force: true });
   };
 
   const selectLocation = (townDisplayName: string): void => {

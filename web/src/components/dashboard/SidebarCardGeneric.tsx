@@ -57,7 +57,7 @@ export const SidebarCardGeneric = (props: Props): ReactElement => {
               </Heading>
               {props.card.hasCloseButton && (
                 <UnStyledButton onClick={closeSelf} ariaLabel="Close">
-                  <Icon className="font-sans-xl text-white">close</Icon>
+                  <Icon className="font-sans-xl text-white" iconName="close" />
                 </UnStyledButton>
               )}
             </div>

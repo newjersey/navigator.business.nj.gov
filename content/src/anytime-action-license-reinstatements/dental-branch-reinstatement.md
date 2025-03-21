@@ -1,10 +1,9 @@
 ---
-filename: dental-branch-reinstatement
+id: dental-branch-reinstatement
 name: Reinstate Your Dental Branch Office Registration, if Applicable
 industryIds:
   - healthcare
 sectorIds: []
-icon: update-purple.svg
 licenseName: ""
 issuingAgency: "Division of Consumer Affairs"
 urlSlug: dental-branch-reinstatement

@@ -4,15 +4,15 @@ import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Icon } from "@/components/njwds/Icon";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import { createProfileFieldErrorMap, Task } from "@/lib/types/types";
+import { Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";
@@ -35,7 +35,7 @@ export const TaxInput = (props: Props): ReactElement => {
     onSubmit,
     isValid,
     state: formContextState,
-  } = useFormContextHelper(createProfileFieldErrorMap());
+  } = useFormContextHelper(createDataFormErrorMap());
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
@@ -62,7 +62,7 @@ export const TaxInput = (props: Props): ReactElement => {
       business.profileData.taxId?.length > 0 &&
       business.profileData.taxId?.length < 12
     ) {
-      updateQueue.queueTaskProgress({ [props.task.id]: "IN_PROGRESS" }).update();
+      updateQueue.queueTaskProgress({ [props.task.id]: "TO_DO" }).update();
     }
   }, business);
 
@@ -98,7 +98,7 @@ export const TaxInput = (props: Props): ReactElement => {
       <div className={"text-wrap margin-bottom-1"}>
         <ArrowTooltip title={Config.profileDefaults.default.lockedFieldTooltipText}>
           <div className="fdr fac  font-body-lg">
-            <Icon>help_outline</Icon>
+            <Icon iconName="help_outline" />
           </div>
         </ArrowTooltip>
       </div>
@@ -124,7 +124,7 @@ export const TaxInput = (props: Props): ReactElement => {
   };
 
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFormErrorMapContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -162,6 +162,6 @@ export const TaxInput = (props: Props): ReactElement => {
           )}
         </div>
       </ProfileDataContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFormErrorMapContext.Provider>
   );
 };

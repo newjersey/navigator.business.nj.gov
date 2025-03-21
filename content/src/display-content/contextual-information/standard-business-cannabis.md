@@ -1,8 +1,7 @@
 ---
-slug: standard-business-cannabis
-filename: standard-business-cannabis
-displayname: standard-business-cannabis
+notesMd: ""
 header: Standard Business
+id: standard-business-cannabis
+displayname: standard-business-cannabis
 ---
-
-Content about standard business here
+A standard business is a cannabis business that does not qualify as a `microbusiness|microbusiness-cannabis`. Standard businesses don't have the same size and operation limits that microbusinesses do. 

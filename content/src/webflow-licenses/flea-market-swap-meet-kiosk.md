@@ -2,7 +2,6 @@
 urlSlug: flea-market-swap-meet-kiosk
 webflowName: Flea Market (Swap meet/Kiosk )
 agencyId: nj-taxation
-filename: flea-market-swap-meet-kiosk
 displayname: flea-market-swap-meet-kiosk
 callToActionText: ""
 callToActionLink: https://www.state.nj.us/treasury/taxation/pdf/pubs/sales/anj15.pdf

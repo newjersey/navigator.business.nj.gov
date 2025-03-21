@@ -1,6 +1,6 @@
 {
   "displayname": "sell-milk",
-  "filename": "sell-milk",
+  "id": "sell-milk",
   "roadmapSteps": [
     {
       "step": 3,

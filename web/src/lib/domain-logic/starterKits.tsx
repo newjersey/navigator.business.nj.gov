@@ -96,6 +96,18 @@ export const createStarterKitProfileData = (industry: Industry): ProfileData => 
           [essentialQuestion.fieldName]: "BOTH",
         };
       }
+      if (essentialQuestion.fieldName === "propertyLeaseType") {
+        newProfileData = {
+          ...newProfileData,
+          [essentialQuestion.fieldName]: "BOTH",
+        };
+      }
+      if (essentialQuestion.fieldName === "hasThreeOrMoreRentalUnits") {
+        newProfileData = {
+          ...newProfileData,
+          [essentialQuestion.fieldName]: true,
+        };
+      }
     }
   }
   return newProfileData;

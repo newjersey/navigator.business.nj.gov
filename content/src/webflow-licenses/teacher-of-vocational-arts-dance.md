@@ -1,5 +1,4 @@
 ---
-filename: teacher-of-vocational-arts-dance
 displayname: teacher-of-vocational-arts-dance
 id: "teacher-of-vocational-arts-dance"
 webflowId: "5f77293adf77de7f3ae1a4c4"

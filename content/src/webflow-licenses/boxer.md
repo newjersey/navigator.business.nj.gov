@@ -1,5 +1,4 @@
 ---
-filename: boxer
 displayname: boxer
 id: "boxer"
 webflowId: "5f77295e71c49e0678913b82"

@@ -1,5 +1,5 @@
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
-import { FormationHelpButton } from "@/components/njwds-extended/FormationHelpButton";
+import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
@@ -14,7 +14,7 @@ const Template = () => {
             <div className="display-flex mobile-lg:display-block flex-justify-center">Float Left</div>
           }
         >
-          <FormationHelpButton />
+          <LiveChatHelpButton />
           <div className="margin-top-2 mobile-lg:margin-top-0">
             <SecondaryButton isColor="primary" onClick={() => {}}>
               SecondaryButton

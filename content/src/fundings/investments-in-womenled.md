@@ -1,9 +1,8 @@
 ---
-filename: investments-in-women-led
 name: Investments in Women-Led Start-ups
-displayName: women-led-investments
+displayName: investments-in-women-led-startups
 urlSlug: investments-in-women-led
-id: investments-in-women-led-startups
+id: investments-in-womenled
 sidebarCardBodyText: Golden Seeds is a nationwide angel investor network
   dedicated to investing in women-led startups. The New Jersey chapter of Golden
   Seeds launched in 2021 to increase available capital for female-led

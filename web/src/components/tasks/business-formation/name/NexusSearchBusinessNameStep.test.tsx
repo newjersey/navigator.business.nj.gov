@@ -10,12 +10,12 @@ import {
 import { dbaInputField } from "@/test/helpers/helpersSearchBusinessName";
 import { currentBusiness, userDataWasNotUpdated } from "@/test/mock/withStatefulUserData";
 import {
-  FormationData,
-  ProfileData,
-  PublicFilingLegalType,
   castPublicFilingLegalTypeToFormationType,
+  FormationData,
   generateBusiness,
   generateFormationFormData,
+  ProfileData,
+  PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
 import { generateBusinessNameAvailability } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
@@ -34,7 +34,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
@@ -131,7 +131,6 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
     await page.searchBusinessName({ status: "AVAILABLE" });
 
     expect(currentBusiness().profileData.nexusDbaName).toEqual("");
-    expect(currentBusiness().profileData.needsNexusDbaName).toEqual(false);
     expect(currentBusiness().profileData.businessName).toEqual("My Cool Business");
   });
 
@@ -144,15 +143,6 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
     page.fillText("Search business name", "My Cool Business");
     await page.searchBusinessName({ status: "AVAILABLE" });
     expect(currentBusiness().formationData.formationFormData.businessName).toEqual("My Cool Business");
-  });
-
-  it("sets needsDbaName in profile to true when unavailable", async () => {
-    const page = await getPageHelper({});
-    page.fillText("Search business name", "My Cool Business");
-    await page.searchBusinessName({ status: "UNAVAILABLE" });
-    expect(currentBusiness().profileData.nexusDbaName).toEqual("");
-    expect(currentBusiness().profileData.needsNexusDbaName).toEqual(true);
-    expect(currentBusiness().profileData.businessName).toEqual("My Cool Business");
   });
 
   it("does not save business name if designator error", async () => {

@@ -1,9 +1,8 @@
 ---
-filename: digital-media-tax
 name: Digital Media Tax Credit
-displayName: digital-media
+displayName: digital-media-tax-credit
 urlSlug: digital-media-tax
-id: digital-media-tax-credit
+id: digital-media-tax
 sidebarCardBodyText: The Digital Media Tax Credit Program provides a
   transferable tax credit to incentivize companies to produce content in New
   Jersey.
@@ -36,7 +35,9 @@ county:
   - Mercer or Salem County
 sector:
   - arts-entertainment-and-recreation
+  - digital-and-print-media
 publishStageArchive: ""
+minEmployeesRequired: 1
 ---
 
 ## Eligibility

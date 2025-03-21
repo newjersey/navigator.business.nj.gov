@@ -2,7 +2,6 @@ import { DashboardOnMobile } from "@/components/dashboard/DashboardOnMobile";
 import { getMergedConfig } from "@/contexts/configContext";
 import {
   AnytimeActionLicenseReinstatement,
-  AnytimeActionLink,
   AnytimeActionTask,
   LicenseEventType,
   OperateReference,
@@ -10,7 +9,6 @@ import {
   SidebarCardContent,
 } from "@/lib/types/types";
 import {
-  generateAnytimeActionLink,
   generateAnytimeActionTask,
   generateBusinessPersona,
   generateSidebarCardContent,
@@ -58,7 +56,7 @@ function mockMaterialUI(): typeof materialUi {
 }
 
 jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
@@ -93,15 +91,13 @@ describe("<DashboardOnMobile />", () => {
   const renderDashboardComponent = ({
     sidebarDisplayContent,
     operateReferences,
-    anytimeActionLinks,
-    anytimeActionTask,
+    anytimeActionTasks,
     anytimeActionLicenseReinstatements,
     licenseEvents,
   }: {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     operateReferences?: Record<string, OperateReference>;
-    anytimeActionLinks?: AnytimeActionLink[];
-    anytimeActionTask?: AnytimeActionTask[];
+    anytimeActionTasks?: AnytimeActionTask[];
     anytimeActionLicenseReinstatements?: AnytimeActionLicenseReinstatement[];
     licenseEvents?: LicenseEventType[];
   }): void => {
@@ -112,8 +108,7 @@ describe("<DashboardOnMobile />", () => {
           displayContent={createDisplayContent(sidebarDisplayContent)}
           fundings={[]}
           certifications={[]}
-          anytimeActionLinks={anytimeActionLinks ?? []}
-          anytimeActionTasks={anytimeActionTask ?? []}
+          anytimeActionTasks={anytimeActionTasks ?? []}
           anytimeActionLicenseReinstatements={anytimeActionLicenseReinstatements ?? []}
           licenseEvents={licenseEvents ?? []}
         />
@@ -132,7 +127,6 @@ describe("<DashboardOnMobile />", () => {
             displayContent={createDisplayContent()}
             fundings={[]}
             certifications={[]}
-            anytimeActionLinks={[]}
             anytimeActionTasks={[]}
             anytimeActionLicenseReinstatements={[]}
             licenseEvents={[]}
@@ -179,20 +173,18 @@ describe("<DashboardOnMobile />", () => {
       tasks: [
         generateTask({ id: "task1", name: "task1", stepNumber: 1 }),
         generateTask({ id: "task2", name: "task2", stepNumber: 1 }),
-        generateTask({ id: "task3", name: "task3", stepNumber: 2 }),
       ],
     });
 
     useMockBusiness({
-      taskProgress: { task1: "IN_PROGRESS", task2: "COMPLETED" },
+      taskProgress: { task1: "TO_DO", task2: "COMPLETED" },
       onboardingFormProgress: "COMPLETED",
     });
 
     renderDashboardComponent({});
 
-    expect(screen.getByText("In progress")).toBeInTheDocument();
+    expect(screen.getByText("To do")).toBeInTheDocument();
     expect(screen.getByText("Completed")).toBeInTheDocument();
-    expect(screen.getByText("Not started")).toBeInTheDocument();
   });
 
   it("displays each step under associated section", () => {
@@ -453,8 +445,7 @@ describe("<DashboardOnMobile />", () => {
       (phase) => {
         useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
         renderDashboardComponent({
-          anytimeActionLinks: [generateAnytimeActionLink({})],
-          anytimeActionTask: [generateAnytimeActionTask({})],
+          anytimeActionTasks: [generateAnytimeActionTask({})],
         });
 
         expect(screen.queryByTestId("anytimeActionDropdown")).not.toBeInTheDocument();
@@ -464,8 +455,7 @@ describe("<DashboardOnMobile />", () => {
     it.each(operatingPhasesWithAnytimeActions)("displays anytime action section for %s", (phase) => {
       useMockBusiness(generateBusiness({ profileData: generateProfileData({ operatingPhase: phase }) }));
       renderDashboardComponent({
-        anytimeActionLinks: [generateAnytimeActionLink({})],
-        anytimeActionTask: [generateAnytimeActionTask({})],
+        anytimeActionTasks: [generateAnytimeActionTask({})],
       });
 
       expect(screen.getByTestId("anytimeActionDropdown")).toBeInTheDocument();

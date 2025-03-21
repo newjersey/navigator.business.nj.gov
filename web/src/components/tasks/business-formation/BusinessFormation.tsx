@@ -35,7 +35,7 @@ import {
   PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared/";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
 
 interface Props {
@@ -130,14 +130,15 @@ export const BusinessFormation = (props: Props): ReactElement => {
       setStepIndex(LookupStepIndexByName("Review"));
       router.replace({ pathname: `/tasks/${props.task?.urlSlug}` }, undefined, { shallow: true });
     }
-  }, [router, router?.isReady, props.task?.urlSlug]);
+  }, [router, props.task?.urlSlug]);
 
   useEffect(() => {
     const shouldFetchCompletedFiling = (): boolean => {
       if (!business || getCompletedFilingApiCallOccurred.current) {
         return false;
       }
-      const completeFilingQueryParamExists = checkQueryValue(router, QUERIES.completeFiling, "true");
+      const completeFilingQueryParamExists =
+        router && checkQueryValue(router, QUERIES.completeFiling, "true");
       const completedPayment = business.formationData.formationResponse?.success === true;
       const noCompletedFilingExists = !business.formationData.getFilingResponse?.success;
       return completeFilingQueryParamExists || (completedPayment && noCompletedFilingExists);
@@ -168,7 +169,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           });
       }
     })();
-  }, [router?.isReady, updateQueue, router, props.task?.urlSlug, business]);
+  }, [updateQueue, router, props.task?.urlSlug, business]);
 
   if (!props.task) return <></>;
 

@@ -1,4 +1,4 @@
-import { DataField, DataFieldProps } from "@/components/data-fields/DataField";
+import { ProfileDataField, ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { templateEval } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
@@ -8,7 +8,7 @@ interface NumericFieldProps {
   minLength?: number;
 }
 
-interface Props<T> extends Omit<DataFieldProps<T>, "numericProps">, NumericFieldProps {}
+interface Props<T> extends Omit<ProfileDataFieldProps<T>, "numericProps">, NumericFieldProps {}
 
 export const NumericField = <T,>({ minLength, maxLength, ...props }: Props<T>): ReactElement => {
   const { Config } = useConfig();
@@ -23,10 +23,11 @@ export const NumericField = <T,>({ minLength, maxLength, ...props }: Props<T>): 
           max: maxLength.toString(),
         });
   return (
-    <DataField
+    <ProfileDataField
       numericProps={{ minLength, maxLength }}
       {...props}
       validationText={props.validationText ?? validationText}
+      onChange={props.onChange}
     />
   );
 };

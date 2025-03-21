@@ -1,5 +1,4 @@
 ---
-previewType: renewal
 licenseName: ""
 urlSlug: generic
 expirationEventDisplayName: PWCR Registration Expiration
@@ -18,13 +17,14 @@ summaryDescriptionMd: >-
   You can apply online or by mail. However, the agency strongly recommends online applications. Effective August 15, 2024, applications can only be accepted online. If you cannot complete the online application, email pwcr@dol.nj.gov to notify the Public Works Contractor Registration (PWCR) section.
 
 
-  :::infoAlert 
+  :::infoAlert
 
-  If you are new to maintaining your payroll records outside of New Jersey, then you must submit the [MW-42 (R-6-13)](https://www.nj.gov/labor/wageandhour/assets/PDFs/mw-42-payroll.pdf) form. This form will be e-mailed to you after you register. :::
+  If you are new to maintaining your payroll records outside of New Jersey, then you must submit the [MW-42 (R-6-13)](https://www.nj.gov/labor/wageandhour/assets/PDFs/mw-42-payroll.pdf) form. This form will be e-mailed to you after you register.
 issuingAgency: Division of Consumer Affairs
 callToActionLink: https://www.njportal.com/lwd/pwcr
 callToActionText: Renew My PWCR Application
 ---
+
 ## Application Requirements
 
 - Current certificate number
@@ -37,16 +37,14 @@ callToActionText: Renew My PWCR Application
 - Disclosure of responsible owner’s `interest|interest` in another firm that has applied for or obtained a PWCR certificate or has bid on or performed work on a project requiring payment of the prevailing wage
 - List of any other business interest
 - Registered apprenticeship certification statement
-- List any notice of violations received from NJDOL, USDOL, or any other state or federal labor law within the last five years
+- List any notice of violations received from NJDOL, USDOL, or any other state or federal labor law within the last 5 years
 - List of all `prevailing wage|prevailing-wage` `crafts|craft`
 - Applicable fees paid
-- `Registered agent|registered-agent`, if applicable
+- `Registered agent|registered-agent` , if applicable
 - Permit to maintain payroll records outside of New Jersey, if applicable
 
 :::infoAlert
-
-You can renew for one year or two years. Two-year renewal is an option only if you have been continuously registered for the last two years and you have not violated any regulations.
-
+You can renew for 1 year or 2 years. Two-year renewal is an option only if you have been continuously registered for the last 2 years and you have not violated any regulations.
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }

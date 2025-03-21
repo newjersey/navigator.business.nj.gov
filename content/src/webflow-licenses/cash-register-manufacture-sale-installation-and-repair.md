@@ -1,5 +1,4 @@
 ---
-filename: cash-register-manufacture-sale-installation-and-repair
 displayname: cash-register-manufacture-sale-installation-and-repair
 id: "cash-register-manufacture-sale-installation-and-repair"
 webflowId: "5f77297f4bc7773649a6e23f"

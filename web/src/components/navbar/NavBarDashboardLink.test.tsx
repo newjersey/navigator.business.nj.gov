@@ -3,10 +3,10 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
-  WithStatefulUserData,
   currentUserData,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { Business } from "@businessnjgovnavigator/shared";
 import {
@@ -14,10 +14,10 @@ import {
   generateUser,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { UserData, createEmptyUserData } from "@businessnjgovnavigator/shared/userData";
+import { createEmptyUserData, UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

@@ -1,20 +1,17 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { ContextualInfo } from "@/contexts/contextualInfoContext";
 import {
-  Address,
   BusinessPersona,
   BusinessUser,
-  emptyAddressData,
-  emptyBusinessUser,
-  emptyProfileData,
   FieldsForErrorHandling,
+  FormationAddress,
   FormationData,
   FormationFormData,
   FormationMember,
   FormationSigner,
   IndustrySpecificData,
   LicenseName,
-  LicenseTaskID,
+  LicenseTaskId,
   Preferences,
   ProfileData,
   SectionType,
@@ -22,8 +19,9 @@ import {
   TaxFilingData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
-import { LicenseEventSubtype } from "@businessnjgovnavigator/shared/taxFiling";
+import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
 import { Business } from "@businessnjgovnavigator/shared/userData";
+import { Reducer } from "react";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types
@@ -84,57 +82,6 @@ export type FormationFieldErrorState = {
 
 export const profileFieldsFromConfig = getMergedConfig().profileDefaults.fields;
 
-export type ProfileContentField = Exclude<
-  (keyof ProfileData | keyof IndustrySpecificData) & keyof typeof profileFieldsFromConfig,
-  "businessPersona"
->;
-
-export type ProfileFields = keyof ProfileData | keyof BusinessUser | keyof Address;
-
-export type FieldErrorType = undefined | unknown;
-
-export type FormContextFieldProps<K = FieldErrorType> = { errorTypes?: K[] };
-
-export type FieldStatus<FieldError = FieldErrorType> = {
-  invalid: boolean;
-  updated?: boolean;
-  errorTypes?: FieldError[];
-};
-
-export type ReducedFieldStates<K extends string | number | symbol, FieldError = FieldErrorType> = Record<
-  K,
-  FieldStatus<FieldError>
->;
-
-export const createReducedFieldStates = <K extends string | number | symbol, FieldError = FieldErrorType>(
-  fields: K[]
-): ReducedFieldStates<K, FieldError> => {
-  return fields.reduce((p, c: K) => {
-    p[c] = { invalid: false };
-    return p;
-  }, {} as ReducedFieldStates<K, FieldError>);
-};
-
-const allProfileFields = Object.keys(profileFieldsFromConfig) as ProfileFields[];
-
-const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof BusinessUser)[];
-const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
-const formationAddressFields = Object.keys(emptyAddressData) as (keyof Address)[];
-
-const profileFields: ProfileFields[] = [
-  ...new Set([
-    ...allProfileFields,
-    ...onboardingDataFields,
-    ...businessUserDisplayFields,
-    ...formationAddressFields,
-  ]),
-] as ProfileFields[];
-
-export const createProfileFieldErrorMap = <FieldError>(): ReducedFieldStates<ProfileFields, FieldError> =>
-  createReducedFieldStates<(typeof profileFields)[number], FieldError>(profileFields);
-
-export type ProfileFieldErrorMap = ReducedFieldStates<ProfileFields>;
-
 export type RoadmapDisplayContent = {
   sidebarDisplayContent: Record<string, SidebarCardContent>;
 };
@@ -178,6 +125,9 @@ export type Funding = {
   programPurpose: string | null | undefined;
   agencyContact: string | null | undefined;
   isNonprofitOnly: boolean | undefined | null;
+  minEmployeesRequired: number | undefined;
+  maxEmployeesRequired: number | undefined;
+  priority: boolean | undefined;
 };
 
 export type Certification = {
@@ -207,30 +157,24 @@ export interface Opportunity {
 
 interface AnytimeAction {
   name: string;
-  icon: string;
   filename: string;
 }
 
 export interface AnytimeActionTask extends AnytimeAction {
+  filename: string;
   name: string;
+  category: string[];
   urlSlug: string;
   callToActionLink?: string;
   callToActionText?: string;
   issuingAgency?: string;
-  icon: string;
   industryIds: string[];
   sectorIds: string[];
   applyToAllUsers: boolean;
   summaryDescriptionMd: string;
   contentMd: string;
-  filename: string;
-}
-
-export interface AnytimeActionLink extends AnytimeAction {
-  externalRoute: string;
-  industryIds: string[];
-  sectorIds: string[];
-  applyToAllUsers: boolean;
+  description?: string;
+  searchMetaDataMatch?: string;
 }
 
 export interface AnytimeActionLicenseReinstatement extends AnytimeAction {
@@ -241,6 +185,8 @@ export interface AnytimeActionLicenseReinstatement extends AnytimeAction {
   callToActionText: string | undefined;
   issuingAgency: string;
   summaryDescriptionMd: string;
+  description?: string;
+  searchMetaDataMatch?: string;
 }
 
 export type FundingType =
@@ -361,10 +307,11 @@ export interface Task {
   hidden?: true;
   requiresLocation?: boolean;
   industryId?: string;
+  stepLabel?: string;
 }
 
 export interface TaskWithLicenseTaskId extends Task {
-  id: LicenseTaskID;
+  id: LicenseTaskId;
   licenseName?: LicenseName;
 }
 
@@ -442,7 +389,6 @@ export interface LicenseEventType {
   callToActionLink?: string;
   callToActionText?: string;
   contentMd: string;
-  previewType?: LicenseEventSubtype;
   summaryDescriptionMd?: string;
   licenseName: LicenseName;
 }
@@ -538,6 +484,7 @@ export interface UpdateQueue {
   queueFormationData: (formationData: Partial<FormationData>) => UpdateQueue;
   queueFormationFormData: (formatdionFormData: Partial<FormationFormData>) => UpdateQueue;
   queueTaskItemChecklist: (taskItemChecklist: Record<string, boolean>) => UpdateQueue;
+  queueEnvironmentData: (environmentData: Partial<EnvironmentData>) => UpdateQueue;
   update: (config?: { local?: boolean }) => Promise<void>;
   current: () => UserData;
   currentBusiness: () => Business;
@@ -603,12 +550,72 @@ export interface PageMetadata {
   featureFlagsTitle: string;
 }
 
-export type FieldsForAddressErrorHandling = keyof Address;
-export type AddressFields = keyof Address;
-export type AddressTextField = Exclude<keyof Address, "addressCity" | "addressState">;
+export type FieldsForAddressErrorHandling = keyof FormationAddress;
+export type AddressFields = keyof FormationAddress;
+export type AddressTextField = keyof FormationAddress;
 
 export type AddressFieldErrorState = {
   field: FieldsForAddressErrorHandling;
   hasError: boolean;
   label: string;
 };
+export type FieldErrorType = undefined | unknown;
+
+export enum FieldStateActionKind {
+  RESET = "RESET",
+  REGISTER = "REGISTER",
+  UNREGISTER = "UNREGISTER",
+  VALIDATION = "VALIDATION",
+}
+
+interface ValidationAction<T, FieldError = FieldErrorType> {
+  type: FieldStateActionKind.VALIDATION;
+  payload: { field: keyof T | (keyof T)[]; invalid: boolean; errorTypes?: FieldError[] };
+}
+
+interface RegisterAction<T> {
+  type: FieldStateActionKind.REGISTER;
+  payload: { field: keyof T };
+}
+
+interface UnRegisterAction<T> {
+  type: FieldStateActionKind.UNREGISTER;
+  payload: { field: keyof T };
+}
+
+interface ResetAction {
+  type: FieldStateActionKind.RESET;
+  payload?: undefined;
+}
+
+type FormContextReducerActions<T, FieldError = FieldErrorType> =
+  | ResetAction
+  | ValidationAction<T, FieldError>
+  | RegisterAction<T>
+  | UnRegisterAction<T>;
+export type FieldStatus<FieldError = FieldErrorType> = {
+  invalid: boolean;
+  updated?: boolean;
+  errorTypes?: FieldError[];
+};
+export type ReducedFieldStates<K extends string | number | symbol, FieldError = FieldErrorType> = Record<
+  K,
+  FieldStatus<FieldError>
+>;
+export type FormContextReducer<T, FieldError = FieldErrorType> = Reducer<
+  ReducedFieldStates<keyof T, FieldError>,
+  FormContextReducerActions<T, FieldError>
+>;
+
+export interface FormContextType<T, FieldError = FieldErrorType> {
+  fieldStates: ReducedFieldStates<keyof T, FieldError>;
+  runValidations: boolean;
+  reducer: React.Dispatch<FormContextReducerActions<ReducedFieldStates<keyof T, FieldError>, FieldError>>;
+}
+
+export type FormContextFieldProps<K = FieldErrorType> = { errorTypes?: K[] };
+
+export type ProfileContentField = Exclude<
+  (keyof ProfileData | keyof IndustrySpecificData) & keyof typeof profileFieldsFromConfig,
+  "businessPersona"
+>;

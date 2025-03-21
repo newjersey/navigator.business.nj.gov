@@ -39,6 +39,7 @@ export const SnackbarAlert = (props: Props): ReactElement => {
             noIcon={props.noIcon}
             rounded
             dataTestid={props.dataTestid}
+            noAlertRole
           >
             <div>{props.children}</div>
           </Alert>
@@ -54,7 +55,7 @@ export const SnackbarAlert = (props: Props): ReactElement => {
                 color: "#757575",
               }}
             >
-              <Icon className="usa-icon--size-3">close</Icon>
+              <Icon className="usa-icon--size-3" iconName="close" />
             </IconButton>
           )}
         </Paper>

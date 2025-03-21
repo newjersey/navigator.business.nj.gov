@@ -25,7 +25,7 @@ const priorityTypes = [
 interface Props {
   task: Task;
   onNextTab: () => void;
-  CMS_ONLY_tab?: string; // for CMS only
+  CMS_ONLY_tab?: string;
 }
 
 export const CannabisPriorityTypes = (props: Props): ReactElement => {

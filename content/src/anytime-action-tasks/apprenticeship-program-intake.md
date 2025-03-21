@@ -1,10 +1,12 @@
 ---
 notesMd: ""
-filename: apprenticeship-program-intake
+id: apprenticeship-program-intake
 name: apprenticeship-program-intake
+category:
+  - Only Show in Subtask
+description: To be a contractor, submit your intake form to begin an apprenticeship program.
 industryIds: []
 sectorIds: []
-icon: govt-purple.svg
 urlSlug: apprenticeship-program-intake
 summaryDescriptionMd: You can start a registered apprenticeship program within
   your business through the U.S. Department of Labor (USDOL). An apprenticeship

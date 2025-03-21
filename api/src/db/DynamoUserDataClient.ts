@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { ExecuteStatementCommand, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
@@ -24,35 +23,34 @@ const unmarshallOptions = {
 };
 
 export const dynamoDbTranslateConfig = { marshallOptions, unmarshallOptions };
-
-export const migrateUserData = (data: any, logger: LogWriterType): any => {
-  const logId = logger.GetId();
-  const dataVersion = data.version ?? CURRENT_VERSION;
-  const migrationsToRun = Migrations.slice(dataVersion);
-  const migratedData = migrationsToRun.reduce((prevData: any, migration: MigrationFunction) => {
-    try {
-      logger.LogInfo(
-        `Dynamo User Migration - Id:${logId} - Upgrading ${data.user.id} from ${prevData.version} to ${
-          Number(prevData.version) + 1
-        }`
-      );
-      return migration(prevData);
-    } catch (error) {
-      logger.LogError(
-        `Dynamo User Migration Error - Id:${logId} - Error: ${error} - Data: ${JSON.stringify(prevData)}`
-      );
-    }
-  }, data);
-  return { ...migratedData, version: CURRENT_VERSION };
-};
-
 export const DynamoUserDataClient = (
   db: DynamoDBDocumentClient,
   tableName: string,
   logger: LogWriterType
 ): UserDataClient => {
-  const doMigration = async (data: any): Promise<UserData> => {
-    const migratedData = migrateUserData(data, logger);
+  const migrateData = (data: UserData, logger: LogWriterType): any => {
+    const logId = logger.GetId();
+    const dataVersion = data.version ?? CURRENT_VERSION;
+    const migrationsToRun = Migrations.slice(dataVersion);
+    const migratedData = migrationsToRun.reduce((prevData: any, migration: MigrationFunction) => {
+      try {
+        logger.LogInfo(
+          `Database Migration - Id:${logId} - Upgrading ${data.user.id} from ${prevData.version} to ${
+            Number(prevData.version) + 1
+          }`
+        );
+        return migration(prevData);
+      } catch (error) {
+        logger.LogError(
+          `Database Migration Error - Id:${logId} - Error: ${error} - Data: ${JSON.stringify(prevData)}`
+        );
+      }
+    }, data);
+    return { ...migratedData, version: CURRENT_VERSION };
+  };
+
+  const doMigration = async (data: UserData): Promise<UserData> => {
+    const migratedData = migrateData(data, logger);
     await put(migratedData);
     return migratedData;
   };
@@ -69,7 +67,8 @@ export const DynamoUserDataClient = (
     return db
       .send(new QueryCommand(params))
       .then((result) => {
-        if (!result.Items || result.Items.length !== 1) {
+        // implicitly returns only the first match if multiple matches are found
+        if (!result.Items || result.Items.length === 0) {
           return;
         }
         return doMigration(unmarshall(result.Items[0], unmarshallOptions).data);
@@ -92,6 +91,7 @@ export const DynamoUserDataClient = (
 
       .then(async (result) => {
         if (!result.Item) {
+          logger.LogInfo(`User with ID ${userId} not found in table ${tableName}`);
           throw new Error("Not found");
         }
         return await doMigration(result.Item.data);
@@ -102,13 +102,14 @@ export const DynamoUserDataClient = (
   };
 
   const put = async (userData: UserData): Promise<UserData> => {
-    const migratedData = migrateUserData(userData, logger);
+    const migratedData = migrateData(userData, logger);
     const params = {
       TableName: tableName,
       Item: {
         userId: migratedData.user.id,
         email: migratedData.user.email,
         data: migratedData,
+        version: migratedData.version,
       },
     };
     return db
@@ -135,6 +136,31 @@ export const DynamoUserDataClient = (
     const statement = `SELECT data FROM "${tableName}" WHERE data["profileData"].encryptedTaxId IS MISSING AND data["profileData"].taxId IS NOT MISSING`;
     return search(statement);
   };
+  const getUsersWithOutdatedVersion = async (
+    latestVersion: number,
+    nextToken?: string
+  ): Promise<{ usersToMigrate: UserData[]; nextToken?: string }> => {
+    const statement = `SELECT data FROM "${tableName}" WHERE data["version"] < ${latestVersion}`;
+    return await searchWithPagination(statement, nextToken);
+  };
+
+  const searchWithPagination = async (
+    statement: string,
+    nextToken?: string
+  ): Promise<{ usersToMigrate: UserData[]; nextToken?: string }> => {
+    const { Items = [], NextToken } = await db.send(
+      new ExecuteStatementCommand({
+        Statement: statement,
+        NextToken: nextToken,
+      })
+    );
+
+    const usersToMigrate = Items.map((object: any): UserData => {
+      return unmarshall(object).data;
+    });
+
+    return { usersToMigrate, nextToken: NextToken };
+  };
 
   const search = async (statement: string): Promise<UserData[]> => {
     const { Items = [] } = await db.send(new ExecuteStatementCommand({ Statement: statement }));
@@ -153,5 +179,6 @@ export const DynamoUserDataClient = (
     getNeedNewsletterUsers,
     getNeedToAddToUserTestingUsers,
     getNeedTaxIdEncryptionUsers,
+    getUsersWithOutdatedVersion,
   };
 };

@@ -1,6 +1,5 @@
 ---
 notesMd: ""
-previewType: renewal
 licenseName: Health Care Services
 urlSlug: health-care-services-firm-renewal
 expirationEventDisplayName: Health Care Service Firm Expiration
@@ -29,7 +28,7 @@ If you are interested in continuing to employ, place, arrange for the placement 
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A certificate of registration and registration number, beginning with “HP” and followed by seven digits.
+A certificate of registration and registration number, beginning with “HP” and followed by 7 digits.
 
 :::
 

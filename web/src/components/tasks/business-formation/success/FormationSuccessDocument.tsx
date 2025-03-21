@@ -17,7 +17,7 @@ export const FormationSuccessDocument = (props: Props): ReactElement => {
         <Content>{props.label}</Content>
         {props.subLabel && <Content>{props.subLabel}</Content>}
       </div>
-      {props.downloadLink && <Icon className="mla font-body-xl text-green">file_download</Icon>}
+      {props.downloadLink && <Icon className="mla font-body-xl text-green" iconName="file_download" />}
     </div>
   );
 

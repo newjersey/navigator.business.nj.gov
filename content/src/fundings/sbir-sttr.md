@@ -1,9 +1,8 @@
 ---
-filename: sbir-sttr
 name: SBIR/STTR Direct Financial Assistance Program
-displayName: sbir-sttr
+displayName: sbir-sttr-financial-assistance
 urlSlug: sbir-sttr
-id: sbir-sttr-financial-assistance
+id: sbir-sttr
 sidebarCardBodyText: The Direct Assistance Program provides financial support to
   NJ small businesses seeking to or participating in the federal SBIR and STTR.
 openDate: ""

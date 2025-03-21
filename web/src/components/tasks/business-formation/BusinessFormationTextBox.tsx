@@ -1,13 +1,11 @@
 import { Content } from "@/components/Content";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { Icon } from "@/components/njwds/Icon";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext, useState } from "react";
 
@@ -44,7 +42,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
   };
 
   return (
-    <>
+    <div data-testid={`formation-text-box-${props.fieldName}`}>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
         <Heading level={2} styleVariant="h3" className="margin-0-override">
           {props.title}{" "}
@@ -96,12 +94,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
                   onClick={(): void => removeEntry()}
                   className="display-flex flex-column flex-justify-center"
                 >
-                  <Icon
-                    className="font-body-lg"
-                    label={`remove ${camelCaseToSentence(props.fieldName).toLowerCase()}`}
-                  >
-                    delete
-                  </Icon>
+                  {Config.formation.general.removeSectionText}
                 </UnStyledButton>
               </div>
             )}
@@ -112,6 +105,6 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
           </div>
         </WithErrorBar>
       )}
-    </>
+    </div>
   );
 };

@@ -151,6 +151,11 @@ describe("migrations", () => {
       expect(Migrations.length).toEqual(CURRENT_VERSION);
     });
 
+    it("ensures that the CURRENT_GENERATOR matches the CURRENT_VERSION of user data", () => {
+      const currentUser = CURRENT_GENERATOR({});
+      expect(currentUser.version).toBe(CURRENT_VERSION);
+    });
+
     it("ensures that a user who has been fully migrated has the same fields as a newly generated user on the current version", () => {
       const currentUser = CURRENT_GENERATOR({});
       let migratedUser: unknown = generateV0UserData({});

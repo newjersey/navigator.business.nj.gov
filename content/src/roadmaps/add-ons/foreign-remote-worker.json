@@ -1,6 +1,6 @@
 {
   "displayname": "foreign-remote-worker",
-  "filename": "foreign-remote-worker",
+  "id": "foreign-remote-worker",
   "roadmapSteps": [
     {
       "step": 1,

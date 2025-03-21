@@ -42,8 +42,9 @@ export const randomElementFromArray = (array: any[]) => {
 };
 
 export const completeBusinessStructureTask = ({ legalStructureId }: { legalStructureId: string }): void => {
+  cy.get('[data-task="business-structure"]').first().scrollIntoView();
   cy.get('[data-task="business-structure"]').first().click();
-  cy.get('[data-testid="business-structure-task"]');
+  cy.get('[data-testid="business-structure-task"]').should("be.visible");
 
   onBusinessStructurePage.selectLegalStructure(legalStructureId as string);
   onBusinessStructurePage.getLegalStructure(legalStructureId as string).should("be.checked");
@@ -67,6 +68,24 @@ export const randomTradeNameLegalStructure = (): string => {
 
 export const clickDeferredSaveButton = () => {
   return cy.get(`button[data-testid="deferred-question-save"]`).first().click();
+};
+
+export const clickModalSaveButton = (): void => {
+  cy.get('[data-testid="modal-button-primary"]').first().click();
+  cy.wait(1000);
+};
+
+export const selectDate = (monthYear: string): void => {
+  cy.chooseDatePicker('[name="dateOfFormation"]', monthYear);
+};
+
+export const selectLocation = (townDisplayName: string): void => {
+  cy.get('[data-testid="municipality"]').type(townDisplayName);
+  cy.get("#municipality-option-0").click({ force: true });
+};
+
+export const openFormationDateModal = (): void => {
+  cy.get('[data-testid="cta-formation-nudge"]').first().click();
 };
 
 //Cypress Mobile Viewport

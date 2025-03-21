@@ -1,7 +1,6 @@
 import { ContextualInfo } from "@/contexts/contextualInfoContext";
 import {
   AnytimeActionLicenseReinstatement,
-  AnytimeActionLink,
   AnytimeActionTask,
   Certification,
   County,
@@ -23,8 +22,7 @@ import {
   TaxFilingMethod,
   WebflowLicense,
 } from "@/lib/types/types";
-import { LicenseName } from "@businessnjgovnavigator/shared/license";
-import { LicenseEventSubtype } from "@businessnjgovnavigator/shared/taxFiling";
+import { LicenseName } from "@businessnjgovnavigator/shared/";
 import matter from "gray-matter";
 
 export const convertContextualInfoMd = (contentMdContents: string): ContextualInfo => {
@@ -87,18 +85,6 @@ export const convertAnytimeActionLicenseReinstatementMd = (
   const anytimeActionGrayMatter = matterResult.data as AnytimeActionLicenseReinsatementGrayMatter;
   return {
     contentMd: matterResult.content,
-    filename,
-    ...anytimeActionGrayMatter,
-  };
-};
-
-export const convertAnytimeActionLinkMd = (
-  anytimeActionLinkMdContents: string,
-  filename: string
-): AnytimeActionLink => {
-  const matterResult = matter(anytimeActionLinkMdContents);
-  const anytimeActionGrayMatter = matterResult.data as AnytimeActionLinkGrayMatter;
-  return {
     filename,
     ...anytimeActionGrayMatter,
   };
@@ -196,28 +182,18 @@ type LicenseGrayMatter = {
   urlSlug: string;
   callToActionLink?: string;
   callToActionText?: string;
-  previewType?: LicenseEventSubtype;
   summaryDescriptionMd: string;
   notesMd?: string;
   licenseName: string;
 };
 
-type AnytimeActionLinkGrayMatter = {
-  name: string;
-  icon: string;
-  externalRoute: string;
-  industryIds: string[];
-  sectorIds: string[];
-  applyToAllUsers: boolean;
-};
-
 type AnytimeActionTaskGrayMatter = {
   name: string;
+  category: string[];
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;
   issuingAgency?: string;
-  icon: string;
   industryIds: string[];
   sectorIds: string[];
   applyToAllUsers: boolean;
@@ -230,7 +206,6 @@ type AnytimeActionLicenseReinsatementGrayMatter = {
   callToActionLink: string;
   callToActionText: string;
   issuingAgency: string;
-  icon: string;
   licenseName: LicenseName;
   summaryDescriptionMd: string;
 };
@@ -277,6 +252,9 @@ type FundingGrayMatter = {
   sidebarCardBodyText: string;
   isNonprofitOnly: boolean | undefined | null;
   summaryDescriptionMd: string;
+  priority: boolean | undefined;
+  minEmployeesRequired: number | undefined;
+  maxEmployeesRequired: number | undefined;
 };
 
 type CertificationGrayMatter = {

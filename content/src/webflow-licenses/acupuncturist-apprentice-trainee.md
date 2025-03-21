@@ -1,5 +1,4 @@
 ---
-filename: acupuncturist-apprentice-trainee
 displayname: acupuncturist-apprentice-trainee
 id: "acupuncturist-apprentice-trainee"
 webflowId: "5f77296fdf77de48a9e1a52b"

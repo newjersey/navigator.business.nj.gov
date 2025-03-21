@@ -1,14 +1,7 @@
 {
-  "displayname": "management-consulting",
   "naicsCodes": "541611,541618",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "organizational-or-financial-management",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "isProvidesStaffingServicesApplicable": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -17,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -51,6 +44,15 @@
     }
   ],
   "name": "Management Consulting",
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
+  "displayname": "management-consulting",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "isProvidesStaffingServicesApplicable": true
+  },
+  "isEnabled": true,
   "additionalSearchTerms": "operations, consultant, manager consulting, business consulting, manager",
   "id": "management-consulting",
   "description": "Expert advice to improve the client's business operations",

@@ -473,7 +473,7 @@ type v123GetFilingResponse = {
 export const generateV123UserData = (overrides: Partial<v123UserData>): v123UserData => {
   return {
     user: generateV123BusinessUser({}),
-    version: 121,
+    version: 123,
     lastUpdatedISO: "",
     dateCreatedISO: "",
     versionWhenCreated: -1,

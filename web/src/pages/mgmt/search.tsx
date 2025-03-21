@@ -7,7 +7,6 @@ import { MatchCollection } from "@/components/search/MatchCollection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { searchAnytimeActionLicenseReinstatements } from "@/lib/search/searchAnytimeActionLicenseReinstatement";
-import { searchAnytimeActionLinks } from "@/lib/search/searchAnytimeActionLinks";
 import { searchAnytimeActionTasks } from "@/lib/search/searchAnytimeActionTasks";
 import { searchCertifications } from "@/lib/search/searchCertifications";
 import { searchConfig } from "@/lib/search/searchConfig";
@@ -24,7 +23,6 @@ import { searchWebflowLicenses } from "@/lib/search/searchWebflowLicenses";
 import { GroupedConfigMatch, Match } from "@/lib/search/typesForSearch";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
 import { loadAllAnytimeActionLicenseReinstatements } from "@/lib/static/loadAnytimeActionLicenseReinstatements";
-import { loadAllAnytimeActionLinks } from "@/lib/static/loadAnytimeActionLinks";
 import { loadAllAnytimeActionTasks } from "@/lib/static/loadAnytimeActionTasks";
 import { loadAllArchivedCertifications, loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadCmsConfig } from "@/lib/static/loadCmsConfig";
@@ -34,11 +32,16 @@ import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllLicenseCalendarEvents } from "@/lib/static/loadLicenseCalendarEvents";
 import { loadAllPageMetadata } from "@/lib/static/loadPageMetadata";
-import { loadAllLicenseTasks, loadAllMunicipalTasks, loadAllTasksOnly } from "@/lib/static/loadTasks";
+import {
+  loadAllEnvTasks,
+  loadAllLicenseTasks,
+  loadAllMunicipalTasks,
+  loadAllRaffleBingoSteps,
+  loadAllTasksOnly,
+} from "@/lib/static/loadTasks";
 import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
 import {
   AnytimeActionLicenseReinstatement,
-  AnytimeActionLink,
   AnytimeActionTask,
   Certification,
   ContextualInfoFile,
@@ -69,6 +72,8 @@ interface Props {
   tasks: Task[];
   licenseTasks: Task[];
   municipalTasks: Task[];
+  envTasks: Task[];
+  raffleBingoSteps: Task[];
   certifications: Certification[];
   archivedCertifications: Certification[];
   fundings: Funding[];
@@ -79,7 +84,6 @@ interface Props {
   archivedContextualInfo: ContextualInfoFile[];
   licenseCalendarEvents: LicenseEventType[];
   anytimeActionTasks: AnytimeActionTask[];
-  anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   pageMetaData: PageMetadata[];
   cmsConfig: any;
@@ -93,6 +97,8 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [taskMatches, setTaskMatches] = useState<Match[]>([]);
   const [licenseTaskMatches, setLicenseTaskMatches] = useState<Match[]>([]);
   const [municipalTaskMatches, setMunicipalTaskMatches] = useState<Match[]>([]);
+  const [raffleBingoStepMatches, setRaffleBingoStepMatches] = useState<Match[]>([]);
+  const [envTaskMatches, setEnvTaskMatches] = useState<Match[]>([]);
   const [certMatches, setCertMatches] = useState<Match[]>([]);
   const [certArchiveMatches, setCertArchiveMatches] = useState<Match[]>([]);
   const [fundingMatches, setFundingMatches] = useState<Match[]>([]);
@@ -105,7 +111,6 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [anytimeActionLicenseReinstatementMatches, setAnytimeActionLicenseReinstatementMatches] = useState<
     Match[]
   >([]);
-  const [anytimeActionLinkMatches, setAnytimeActionLinkMatches] = useState<Match[]>([]);
   const [sidebarCardMatches, setSidebarCardMatches] = useState<Match[]>([]);
   const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>([]);
   const [archivedContextualInfoMatches, setArchivedContextualInfoMatches] = useState<Match[]>([]);
@@ -134,13 +139,14 @@ const SearchContentPage = (props: Props): ReactElement => {
     setTaskMatches(searchTasks(props.tasks, lowercaseTerm));
     setLicenseTaskMatches(searchTasks(props.licenseTasks, lowercaseTerm));
     setMunicipalTaskMatches(searchTasks(props.municipalTasks, lowercaseTerm));
+    setRaffleBingoStepMatches(searchTasks(props.raffleBingoSteps, lowercaseTerm));
+    setEnvTaskMatches(searchTasks(props.envTasks, lowercaseTerm));
     setCertMatches(searchCertifications(props.certifications, lowercaseTerm));
     setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
     setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
     setIndustryMatches(
       searchIndustries(getIndustries({ overrideShowDisabledIndustries: true }), lowercaseTerm)
     );
-    setAnytimeActionLinkMatches(searchAnytimeActionLinks(props.anytimeActionLinks, lowercaseTerm));
     setAnytimeActionTaskMatches(searchAnytimeActionTasks(props.anytimeActionTasks, lowercaseTerm));
     setAnytimeActionLicenseReinstatementMatches(
       searchAnytimeActionLicenseReinstatements(props.anytimeActionLicenseReinstatements, lowercaseTerm)
@@ -178,6 +184,8 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...taskMatches,
         ...licenseTaskMatches,
         ...municipalTaskMatches,
+        ...raffleBingoStepMatches,
+        ...envTaskMatches,
         ...certMatches,
         ...certArchiveMatches,
         ...fundingMatches,
@@ -192,7 +200,6 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...contextualInfoMatches,
         ...groupedConfigMatches,
         ...anytimeActionTaskMatches,
-        ...anytimeActionLinkMatches,
         ...anytimeActionLicenseReinstatementMatches,
       ].length === 0
     );
@@ -203,6 +210,10 @@ const SearchContentPage = (props: Props): ReactElement => {
     "License Tasks (Navigator with Webflow mappings)": licenseTaskMatches,
     "Tasks - Municipal": municipalTaskMatches,
     "Webflow Licenses": webflowLicenseMatches,
+  };
+
+  const envCollection = {
+    "Env Comp - Config": envTaskMatches,
   };
 
   const certCollection = {
@@ -234,7 +245,6 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const anytimeActionCollection = {
     "Anytime Action Tasks": anytimeActionTaskMatches,
-    "Anytime Action Links": anytimeActionLinkMatches,
     "Anytime Action License Reinstatements": anytimeActionLicenseReinstatementMatches,
   };
 
@@ -259,6 +269,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         matchedCollections={{ "Biz Form - Config": [] }}
         groupedConfigMatches={groupedConfigMatches}
       />
+      <MatchCollection matchedCollections={envCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={certCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={fundingCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={roadmapsCollection} groupedConfigMatches={groupedConfigMatches} />
@@ -302,7 +313,9 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       noAuth: true,
       tasks: loadAllTasksOnly(),
       licenseTasks: loadAllLicenseTasks(),
+      raffleBingoSteps: loadAllRaffleBingoSteps(),
       municipalTasks: loadAllMunicipalTasks(),
+      envTasks: loadAllEnvTasks(),
       certifications: loadAllCertifications(),
       archivedCertifications: loadAllArchivedCertifications(),
       fundings: loadAllFundings(),
@@ -313,7 +326,6 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       archivedContextualInfo: loadAllArchivedContextualInfo(),
       licenseCalendarEvents: loadAllLicenseCalendarEvents(),
       anytimeActionTasks: loadAllAnytimeActionTasks(),
-      anytimeActionLinks: loadAllAnytimeActionLinks(),
       anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
       pageMetaData: loadAllPageMetadata(),
       cmsConfig: loadCmsConfig(),

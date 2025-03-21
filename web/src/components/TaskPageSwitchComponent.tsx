@@ -5,11 +5,13 @@ import { HotelMotelRegistrationTask } from "@/components/tasks/HotelMotelRegistr
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { MultipleDwellingRegistrationTask } from "@/components/tasks/MultipleDwellingRegistrationTask";
 import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
+import { RaffleBingoPaginator } from "@/components/tasks/RaffleBingoPaginator";
 import { TaxTask } from "@/components/tasks/TaxTask";
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
+import { EnvPermit } from "@/components/tasks/environment-questionnaire/EnvPermit";
 import { Roadmap, Task, TasksDisplayContent, TaskWithLicenseTaskId } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
@@ -26,19 +28,28 @@ interface Props {
 }
 
 export const taskIdsWithLicenseSearchEnabled = [
-  "home-health-aide-license",
   "apply-for-shop-license",
-  "register-home-contractor",
+  "appraiser-company-register",
+  "authorization-architect-firm",
+  "authorization-landscape-architect-firm",
+  "cemetery-certificate",
+  "consulting-firm-headhunter-reg",
+  "electrologist-office-license",
+  "entertainment-agency-reg",
+  "funeral-registration",
+  "health-club-registration",
+  "home-health-aide-license",
+  "license-massage-therapy",
+  "moving-company-license",
+  "oos-pharmacy-registration",
   "pharmacy-license",
   "register-accounting-firm",
-  "license-massage-therapy",
-  "appraiser-company-register",
+  "register-home-contractor",
+  "search-licenses-employment-agency",
   "telemarketing-license",
-  "health-club-registration",
   "ticket-broker-reseller-registration",
-  "authorization-landscape-architect-firm",
-  "authorization-architect-firm",
-  "entertainment-agency-reg",
+  "temp-help-consulting-firm-combined-reg",
+  "temporary-help-service-firm-reg",
 ];
 
 export const TaskPageSwitchComponent = ({
@@ -55,6 +66,9 @@ export const TaskPageSwitchComponent = ({
   }
 
   return rswitch(task.id, {
+    "waste-permitting": <EnvPermit task={task} />,
+    "land-permitting": <EnvPermit task={task} />,
+    "air-permitting": <EnvPermit task={task} />,
     "elevator-registration": (
       <ElevatorRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),
@@ -64,6 +78,7 @@ export const TaskPageSwitchComponent = ({
     "multiple-dwelling-registration": (
       <MultipleDwellingRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),
+    "raffle-bingo-games-license": <RaffleBingoPaginator task={task} />,
     "determine-naics-code": <NaicsCodeTask task={task} />,
     "priority-status-cannabis": <CannabisPriorityStatusTask task={task} />,
     "conditional-permit-cannabis": <CannabisApplyForLicenseTask task={task} />,

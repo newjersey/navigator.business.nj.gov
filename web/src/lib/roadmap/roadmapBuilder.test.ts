@@ -210,6 +210,32 @@ describe("roadmapBuilder", () => {
 
     expect(requiredTask?.id).toEqual("tea-task-2-required-id");
   });
+
+  it("removes duplicate tasks from task list from multiple addons", async () => {
+    const roadmap1 = await buildRoadmap({
+      industryId: "standard",
+      addOns: ["tea"],
+    });
+    const roadmap2 = await buildRoadmap({
+      industryId: "standard",
+      addOns: ["tea", "tea-2"],
+    });
+
+    expect(roadmap1.tasks.length).toEqual(roadmap2.tasks.length);
+  });
+
+  it("removes duplicate tasks from add ons and industries", async () => {
+    const roadmap = await buildRoadmap({
+      industryId: "standard",
+      addOns: ["tea-2"],
+    });
+
+    expect(
+      roadmap.tasks.filter((task) => {
+        return task.filename === "generic-task-1";
+      }).length
+    ).toEqual(1);
+  });
 });
 
 const expectedGenericRoadmap: Roadmap = {

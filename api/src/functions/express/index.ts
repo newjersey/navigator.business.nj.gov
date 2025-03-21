@@ -43,6 +43,13 @@ export default (cognitoArn: string, vpcConfig: FnType["vpc"]): FnType => {
       },
       {
         http: {
+          method: "POST",
+          path: "/api/users/emailCheck",
+          cors: true,
+        },
+      },
+      {
+        http: {
           method: "ANY",
           path: "/{proxy+}",
           authorizer: {

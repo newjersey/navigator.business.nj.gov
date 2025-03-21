@@ -1,5 +1,4 @@
 ---
-filename: black-seal
 displayname: black-seal
 id: "black-seal"
 webflowId: "5f77294f8e9f8735f86859bc"

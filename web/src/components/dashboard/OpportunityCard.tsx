@@ -9,13 +9,16 @@ import { Opportunity } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { capitalizeEachWord } from "@/lib/utils/cases-helpers";
 import { truncate } from "lodash";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
 
 interface Props {
   opportunity: Opportunity;
   urlPath: "funding" | "certification";
   isLast?: boolean;
+  removeHideButton?: boolean;
+  removeLabel?: boolean;
+  hideTopBorder?: boolean;
 }
 
 export const OPPORTUNITY_CARD_MAX_BODY_CHARS = 150;
@@ -77,39 +80,43 @@ export const OpportunityCard = (props: Props): ReactElement => {
   const routeToPage = (): void => {
     const url = `/${props.urlPath}/${props.opportunity.urlSlug}`;
     analytics.event.opportunity_card.click.go_to_opportunity_screen();
-    router.push(url);
+    router && router.push(url);
   };
 
   return (
     <>
-      <hr className="bg-cool-lighter" aria-hidden={true} />
+      {!props.hideTopBorder && <hr className="bg-cool-lighter" aria-hidden={true} />}
+
       <div
         data-testid={props.opportunity.id}
         className={`${props.isLast ? "" : " margin-bottom-205"} margin-top-3`}
       >
         <div className="fdr margin-bottom-105">
-          <div>{TYPE_TO_LABEL[props.urlPath]}</div>
+          {!props.removeLabel && <div>{TYPE_TO_LABEL[props.urlPath]}</div>}
+
           <div className="mla">
-            <SecondaryButton
-              size={"small"}
-              isColor={"border-base-light"}
-              onClick={(): void => {
-                isHidden() ? unhideSelf() : hideSelf();
-              }}
-            >
-              <div className="fdr fac">
-                <Icon>{isHidden() ? "visibility" : "visibility_off"}</Icon>
-                <span className="margin-left-05 line-height-sans-2">
-                  {isHidden()
-                    ? Config.dashboardDefaults.unHideOpportunityText
-                    : Config.dashboardDefaults.hideOpportunityText}
-                </span>
-              </div>
-            </SecondaryButton>
+            {!props.removeHideButton && (
+              <SecondaryButton
+                size={"small"}
+                isColor={"border-base-light"}
+                onClick={(): void => {
+                  isHidden() ? unhideSelf() : hideSelf();
+                }}
+              >
+                <div className="fdr fac">
+                  <Icon iconName={isHidden() ? "visibility" : "visibility_off"} />
+                  <span className="margin-left-05 line-height-sans-2">
+                    {isHidden()
+                      ? Config.dashboardDefaults.unHideOpportunityText
+                      : Config.dashboardDefaults.hideOpportunityText}
+                  </span>
+                </div>
+              </SecondaryButton>
+            )}
           </div>
         </div>
         <div className="text-normal font-body-md margin-bottom-105">
-          <UnStyledButton isUnderline onClick={routeToPage}>
+          <UnStyledButton isUnderline onClick={routeToPage} dataTestid={`${props.opportunity.id}-button`}>
             {props.opportunity.name}
           </UnStyledButton>
         </div>

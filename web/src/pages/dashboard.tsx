@@ -13,7 +13,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllAnytimeActionLicenseReinstatements } from "@/lib/static/loadAnytimeActionLicenseReinstatements";
-import { loadAllAnytimeActionLinks } from "@/lib/static/loadAnytimeActionLinks";
 import { loadAllAnytimeActionTasks } from "@/lib/static/loadAnytimeActionTasks";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
@@ -23,7 +22,6 @@ import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import {
   AnytimeActionLicenseReinstatement,
-  AnytimeActionLink,
   AnytimeActionTask,
   Certification,
   Funding,
@@ -37,7 +35,7 @@ import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useState } from "react";
 
 interface Props {
@@ -47,7 +45,6 @@ interface Props {
   certifications: Certification[];
   municipalities: Municipality[];
   anytimeActionTasks: AnytimeActionTask[];
-  anytimeActionLinks: AnytimeActionLink[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   licenseEvents: LicenseEventType[];
 }
@@ -93,7 +90,7 @@ const DashboardPage = (props: Props): ReactElement => {
       }
 
       if (business?.onboardingFormProgress !== "COMPLETED") {
-        await router.replace(ROUTES.onboarding);
+        router && (await router.replace(ROUTES.onboarding));
       }
 
       if (isDesktopAndUp && business?.preferences.phaseNewlyChanged) {
@@ -131,7 +128,6 @@ const DashboardPage = (props: Props): ReactElement => {
                 fundings={props.fundings}
                 operateReferences={props.operateReferences}
                 anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
-                anytimeActionLinks={props.anytimeActionLinks}
                 anytimeActionTasks={props.anytimeActionTasks}
                 elevatorViolations={hasElevatorViolations}
                 licenseEvents={props.licenseEvents}
@@ -142,7 +138,6 @@ const DashboardPage = (props: Props): ReactElement => {
                 fundings={props.fundings}
                 operateReferences={props.operateReferences}
                 anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
-                anytimeActionLinks={props.anytimeActionLinks}
                 anytimeActionTasks={props.anytimeActionTasks}
                 elevatorViolations={hasElevatorViolations}
                 licenseEvents={props.licenseEvents}
@@ -164,7 +159,6 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
       certifications: loadAllCertifications(),
       municipalities: loadAllMunicipalities(),
       anytimeActionTasks: loadAllAnytimeActionTasks(),
-      anytimeActionLinks: loadAllAnytimeActionLinks(),
       anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
       licenseEvents: loadAllLicenseCalendarEvents(),
     },

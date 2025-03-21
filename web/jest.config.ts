@@ -4,6 +4,8 @@ const esModules = ["rehype-react", "remark-gfm", "remark-parse", "remark-rehype"
 
 process.env = Object.assign(process.env, {
   FEATURE_BUSINESS_FLP: "true",
+  FEATURE_LOGIN_PAGE: "true",
+  FEATURE_TAX_CLEARANCE_CERTIFICATE: "true",
   WEBFLOW_API_TOKEN: 12345678910,
 });
 
@@ -11,8 +13,8 @@ process.env = Object.assign(process.env, {
 export default {
   ...sharedConfig,
   displayName: "web",
-  setupFilesAfterEnv: ["./setupTests.js"],
-  testEnvironment: "jsdom",
+  setupFilesAfterEnv: ["./setupTests.js", "<rootDir>/../shared/src/test/setupRandomSeed.ts"],
+  testEnvironment: "<rootDir>/test/customJsdomEnvironment.ts",
   testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/", "<rootDir>/cypress/"],
   rootDir: "./",
   moduleDirectories: ["node_modules", "<rootDir>"],

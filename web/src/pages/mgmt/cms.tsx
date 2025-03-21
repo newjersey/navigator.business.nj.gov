@@ -39,9 +39,11 @@ import { useMountEffect } from "@/lib/utils/helpers";
 import AccountSetupPreview from "@/lib/cms/previews/AccountSetupPreview";
 import AnytimeActionLicenseReinstatementPreview from "@/lib/cms/previews/AnytimeActionLicenseReinstatementPreview";
 import AnytimeActionTaskPreview from "@/lib/cms/previews/AnytimeActionTaskPreview";
+import AnytimeActionTaxClearancePreview from "@/lib/cms/previews/AnytimeActionTaxClearancePreview";
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
 import CalloutPreview from "@/lib/cms/previews/CalloutPreview";
 import NavBarPreview from "@/lib/cms/previews/NavBarPreview";
+import RaffleBingoPreview from "@/lib/cms/previews/RaffleBingoPreview";
 import TaxAccessModalPreview from "@/lib/cms/previews/TaxAccessModalPreview";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
@@ -58,7 +60,7 @@ const Loading = (): ReactElement => {
 const CMS = dynamic(
   // @ts-expect-error: No type definition available
   () => {
-    return import("netlify-cms-app").then((CMS) => {
+    return import("decap-cms-app").then((CMS) => {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       // @ts-expect-error: No type definition available
       CMS.init({ CMS_CONFIG });
@@ -97,9 +99,16 @@ const CMS = dynamic(
       // ----- Anytime Actions -----
       registerPreview(CMS, "anytime-action-tasks", AnytimeActionTaskPreview);
       registerPreview(CMS, "anytime-action-license-reinstatements", AnytimeActionLicenseReinstatementPreview);
+      registerPreview(CMS, "taxClearanceCertificate-step1", AnytimeActionTaxClearancePreview);
+      registerPreview(CMS, "taxClearanceCertificate-step2", AnytimeActionTaxClearancePreview);
+      registerPreview(CMS, "taxClearanceCertificate-step3", AnytimeActionTaxClearancePreview);
+      registerPreview(CMS, "taxClearanceCertificate-shared", AnytimeActionTaxClearancePreview);
 
       // ----- Roadmap Sidebar Card -----
       registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);
+
+      // ----- Steps -----
+      registerPreview(CMS, "raffle-bingo-steps", RaffleBingoPreview);
 
       // ----- Page Metadata -----
       registerPreview(CMS, "page-metadata", PageMetaDataPreview);
@@ -153,14 +162,14 @@ const CMS = dynamic(
   { ssr: false, loading: Loading }
 );
 
-const registerAsTask = (CMS: typeof import("netlify-cms-app"), names: string[]): void => {
+const registerAsTask = (CMS: typeof import("decap-cms-app"), names: string[]): void => {
   for (const name of names) {
     // @ts-expect-error: No type definition available
     CMS.registerPreviewTemplate(name, TaskPreview);
   }
 };
 
-const registerAsCannabisLicensePreview = (CMS: typeof import("netlify-cms-app"), names: string[]): void => {
+const registerAsCannabisLicensePreview = (CMS: typeof import("decap-cms-app"), names: string[]): void => {
   for (const name of names) {
     // @ts-expect-error: No type definition available
     CMS.registerPreviewTemplate(name, CannabisLicensePreview);
@@ -168,7 +177,7 @@ const registerAsCannabisLicensePreview = (CMS: typeof import("netlify-cms-app"),
 };
 
 const registerPreview = (
-  CMS: typeof import("netlify-cms-app"),
+  CMS: typeof import("decap-cms-app"),
   name: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   preview: (props: any) => JSX.Element

@@ -69,10 +69,13 @@ export type LicenseDetails = {
   expirationDateISO: string | undefined;
   lastUpdatedISO: string;
   checklistItems: LicenseStatusItem[];
-  hasError?: boolean;
 };
 
 export const enabledLicensesSources = {
+  "Consulting Firms/Temporary Help Services-Consulting Firm": "RGB",
+  "Public Movers and Warehousemen": "RGB",
+  "Consulting Firms/Temporary Help Services-Consulting Firm/Temporary Help Service": "RGB",
+  "Consulting Firms/Temporary Help Services-Temporary Help Service": "RGB",
   "Employment & Personnel Service-Career Counseling Service": "RGB",
   "Employment & Personnel Service-Employment Agency": "RGB",
   "Employment & Personnel Service-Entertainment/Booking Agency": "RGB",
@@ -88,24 +91,36 @@ export const taskIdLicenseNameMapping = {
   "apply-for-shop-license": "Cosmetology and Hairstyling-Shop",
   "appraiser-license": "Real Estate Appraisers-Appraisal Management Company",
   "architect-license": "Architecture-Certificate of Authorization",
+  "electrologist-office-license": "Electrologists-Premises",
   "health-club-registration": "Health Club Services",
   "home-health-aide-license": "Health Care Services",
   "hvac-license": "HVACR-HVACR CE Sponsor",
   "landscape-architect-license": "Landscape Architecture-Certificate of Authorization",
   "license-massage-therapy": "Massage and Bodywork Therapy-Massage and Bodywork Employer",
-  "moving-company-license": "Public Movers and Warehousemen-Public Mover and Warehouseman",
+  "moving-company-license": "Public Movers and Warehousemen",
   "pharmacy-license": "Pharmacy-Pharmacy",
-  "public-accountant-license": "Accountancy-Firm Registration",
   "register-accounting-firm": "Accountancy-Firm Registration",
-  "register-home-contractor": "Home Improvement Contractors-Home Improvement Contractor",
+  "register-home-contractor": "Home Improvement Contractors-Home Improvement Business Contr",
   "ticket-broker-reseller-registration": "Ticket Brokers",
   "telemarketing-license": "Telemarketers",
   "entertainment-agency-reg": "Employment & Personnel Service-Entertainment/Booking Agency",
+  "cemetery-certificate": "Cemetery-Cemetery",
+  "consulting-firm-headhunter-reg": "Consulting Firms/Temporary Help Services-Consulting Firm",
+  "temp-help-consulting-firm-combined-reg":
+    "Consulting Firms/Temporary Help Services-Consulting Firm/Temporary Help Service",
+  "temporary-help-service-firm-reg": "Consulting Firms/Temporary Help Services-Temporary Help Service",
+  "search-licenses-employment-agency": "Employment & Personnel Service-Employment Agency",
+  "funeral-registration": "Mortuary Science-Funeral Home",
+  "oos-pharmacy-registration": "Pharmacy-Out of State Pharmacy",
 } as const;
 
-export type LicenseTaskID = keyof typeof taskIdLicenseNameMapping;
+export const LicenseNameTaskIdMapping = Object.fromEntries(
+  Object.entries(taskIdLicenseNameMapping).map(([key, value]) => [value, key])
+);
 
-export type LicenseName = (typeof taskIdLicenseNameMapping)[LicenseTaskID];
+export type LicenseTaskId = keyof typeof taskIdLicenseNameMapping;
+
+export type LicenseName = (typeof taskIdLicenseNameMapping)[LicenseTaskId];
 
 export type Licenses = Partial<Record<LicenseName, LicenseDetails>>;
 

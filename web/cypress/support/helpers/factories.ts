@@ -3,9 +3,8 @@ import {
   randomFormationLegalType,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import {
-  arrayOfCountriesObjects as countries,
-  arrayOfStateObjects as states,
   BusinessSignerTypeMap,
+  arrayOfCountriesObjects as countries,
   FormationAddress,
   FormationLegalType,
   FormationMember,
@@ -13,6 +12,7 @@ import {
   Municipality,
   randomInt,
   randomIntFromInterval,
+  arrayOfStateObjects as states,
 } from "@businessnjgovnavigator/shared/";
 
 export const generateMunicipality = (overrides: Partial<Municipality>): Municipality => {

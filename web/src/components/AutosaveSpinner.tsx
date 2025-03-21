@@ -85,7 +85,7 @@ export const AutosaveSpinner = (props: Props): ReactElement => {
     case "SAVED":
       return (
         <>
-          <Icon>check</Icon>
+          <Icon iconName="check" />
           <span className="margin-left-1 text-base-dark">{Config.autosaveDefaults.savedText}</span>
         </>
       );

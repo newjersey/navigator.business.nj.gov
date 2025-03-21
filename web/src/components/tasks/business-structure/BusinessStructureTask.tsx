@@ -9,25 +9,25 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { LegalStructureRadio } from "@/components/tasks/business-structure/LegalStructureRadio";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import { createProfileFieldErrorMap, Task } from "@/lib/types/types";
-import { getFlow, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { Task } from "@/lib/types/types";
+import { getFlow, scrollToTopOfElement, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Business, hasCompletedFormation } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
   task: Task;
-  CMS_ONLY_fakeBusiness?: Business; // for CMS only
+  CMS_ONLY_fakeBusiness?: Business;
 }
 
 export const BusinessStructureTask = (props: Props): ReactElement => {
@@ -44,14 +44,16 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     FormFuncWrapper,
     onSubmit,
     state: formContextState,
-  } = useFormContextHelper(createProfileFieldErrorMap());
+  } = useFormContextHelper(createDataFormErrorMap());
+
+  const whenErrorScrollToRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     return (): void => {
       if (business?.profileData.legalStructureId) {
         queueUpdateTaskProgress(props.task.id, "COMPLETED");
       } else if (!business?.profileData.legalStructureId) {
-        queueUpdateTaskProgress(props.task.id, "NOT_STARTED");
+        queueUpdateTaskProgress(props.task.id, "TO_DO");
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -63,19 +65,26 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     setShowRadioQuestion(!business.profileData.legalStructureId);
   }, business);
 
-  FormFuncWrapper(async () => {
-    if (!updateQueue || !business) return;
+  FormFuncWrapper(
+    async () => {
+      if (!updateQueue || !business) return;
 
-    queueUpdateTaskProgress(props.task.id, "COMPLETED");
-    await updateQueue.queueProfileData(profileData).update();
-    setShowRadioQuestion(false);
-    setSuccessSnackbarIsOpen(true);
-  });
+      queueUpdateTaskProgress(props.task.id, "COMPLETED");
+      await updateQueue.queueProfileData(profileData).update();
+      setShowRadioQuestion(false);
+      setSuccessSnackbarIsOpen(true);
+    },
+    (isValid) => {
+      if (!isValid) {
+        scrollToTopOfElement(whenErrorScrollToRef.current, { focusElement: true });
+      }
+    }
+  );
 
   const setBackToEditing = (): void => {
     if (!business || !updateQueue) return;
     setShowRadioQuestion(true);
-    queueUpdateTaskProgress(props.task.id, "IN_PROGRESS");
+    queueUpdateTaskProgress(props.task.id, "TO_DO");
   };
 
   const removeTaskCompletion = async (): Promise<void> => {
@@ -89,7 +98,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
             ? OperatingPhaseId.GUEST_MODE
             : profileData.operatingPhase,
       })
-      .queueTaskProgress({ [props.task.id]: "NOT_STARTED" });
+      .queueTaskProgress({ [props.task.id]: "TO_DO" });
 
     setShowRadioQuestion(true);
     await updateQueue.update();
@@ -135,7 +144,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       <UnlockedBy task={props.task} />
       <Content>{preLookupContent}</Content>
       {showRadioQuestion && (
-        <ProfileFormContext.Provider value={formContextState}>
+        <DataFormErrorMapContext.Provider value={formContextState}>
           <ProfileDataContext.Provider
             value={{
               state: {
@@ -146,14 +155,14 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
               onBack: (): void => {},
             }}
           >
-            <LegalStructureRadio taskId={props.task.id} />
+            <LegalStructureRadio taskId={props.task.id} ref={whenErrorScrollToRef} />
             <div className="margin-top-4">
               <SecondaryButton isColor="primary" onClick={onSubmit} dataTestId={"save-business-structure"}>
                 {Config.businessStructureTask.saveButton}
               </SecondaryButton>
             </div>
           </ProfileDataContext.Provider>
-        </ProfileFormContext.Provider>
+        </DataFormErrorMapContext.Provider>
       )}
       {business && !showRadioQuestion && (
         <>
@@ -192,7 +201,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
                 <div className="margin-left-2 flex flex-row flex-align-center">
                   <ArrowTooltip title={Config.profileDefaults.default.lockedFieldTooltipText}>
                     <div className="fdr fac font-body-lg">
-                      <Icon>help_outline</Icon>
+                      <Icon iconName="help_outline" />
                     </div>
                   </ArrowTooltip>
                 </div>

@@ -1,5 +1,4 @@
 ---
-filename: agricultural-crew-leader-bringing-seasonal-farm-labor-into-nj-to-work
 displayname: agricultural-crew-leader-bringing-seasonal-farm-labor-into-nj-to-work
 id: "agricultural-crew-leader-bringing-seasonal-farm-labor-into-nj-to-work"
 webflowId: "5f77294ddd6a49eddc9b6064"

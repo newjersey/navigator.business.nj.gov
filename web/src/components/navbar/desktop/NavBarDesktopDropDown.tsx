@@ -49,7 +49,7 @@ export const NavBarDesktopDropDown = (props: Props): ReactElement => {
           <div className="text-base-darkest truncate-long-business-names_NavBarDesktop">
             {props.menuButtonTitle}
           </div>
-          {!props.disabled && <Icon className="usa-icon--size-3">arrow_drop_down</Icon>}
+          {!props.disabled && <Icon className="usa-icon--size-3" iconName="arrow_drop_down" />}
         </div>
       </button>
 

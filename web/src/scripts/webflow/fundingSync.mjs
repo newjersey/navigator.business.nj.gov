@@ -184,7 +184,7 @@ const getFundingFromMd = (i, sectors) => {
   })?.id;
   if (fundingType === undefined) {
     throw new Error(
-      `Funding Types for funding type ${i.fundingType} are mis-matched in ${i.filename}. Please check with Webflow.`
+      `Funding Types for funding type ${i.fundingType} are mis-matched in ${i.id}. Please check with Webflow.`
     );
   }
   const agency = agencyMap[i.agency[0]]?.id;
@@ -193,7 +193,7 @@ const getFundingFromMd = (i, sectors) => {
         You will have to create the agency in Webflow, then call the collection details endpoint
         with the fundingCollectionId to get the ID of the option, then adding it to agencyMap. */
     throw new Error(
-      `Agency Types for agency ${i.agency[0]} are mis-matched in ${i.filename}. Please check with Webflow.`
+      `Agency Types for agency ${i.agency[0]} are mis-matched in ${i.id}. Please check with Webflow.`
     );
   }
   const status = fundingStatusMap.find((v) => {
@@ -201,7 +201,7 @@ const getFundingFromMd = (i, sectors) => {
   })?.id;
   if (status === undefined) {
     throw new Error(
-      `Funding Status Types for funding status type ${i.status} are mis-matched in ${i.filename}. Please check with Webflow.`
+      `Funding Status Types for funding status type ${i.status} are mis-matched in ${i.id}. Please check with Webflow.`
     );
   }
 

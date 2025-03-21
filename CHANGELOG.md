@@ -1,700 +1,977 @@
-# [2024.30.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.29.0...v2024.30.0) (2024-10-01)
+## [2025.8.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.8.0...v2025.8.1) (2025-03-21)
+
+
+### Bug Fixes
+
+* hotfix update MVC-related content ([53fa179](https://github.com/newjersey/navigator.business.nj.gov/commit/53fa179ac1b79d9cfa4a7f784f2aa43898949f37))
+
+# [2025.8.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.7.0...v2025.8.0) (2025-03-19)
+
+
+### Bug Fixes
+
+* [[#0](https://github.com/newjersey/navigator.business.nj.gov/issues/0) | AB[#0](https://github.com/newjersey/navigator.business.nj.gov/issues/0)] disable flaky test ([f293d57](https://github.com/newjersey/navigator.business.nj.gov/commit/f293d57ed4faefb54cc6541f7c0f060f02f97fd1))
+* [[#188887754](https://github.com/newjersey/navigator.business.nj.gov/issues/188887754) | AB[#8670](https://github.com/newjersey/navigator.business.nj.gov/issues/8670)] Fix Anytime Actions Category Spelling ([08e6467](https://github.com/newjersey/navigator.business.nj.gov/commit/08e6467984f7466435e1c474c77a52190f61d831))
+* [[#188908973](https://github.com/newjersey/navigator.business.nj.gov/issues/188908973) | AB[#12673](https://github.com/newjersey/navigator.business.nj.gov/issues/12673)] convert email to lowercase for /self-reg and /users/emailCheck ([93770ce](https://github.com/newjersey/navigator.business.nj.gov/commit/93770ce961d67030731f4cf38fa353a3d48780cb))
+* [[#188924007](https://github.com/newjersey/navigator.business.nj.gov/issues/188924007) | AB[#12737](https://github.com/newjersey/navigator.business.nj.gov/issues/12737)] add space in Additional Provisions header ([9b41edb](https://github.com/newjersey/navigator.business.nj.gov/commit/9b41edbdfaf8a747580fabc71be12f1bc6b4f258))
+* [AB[#12799](https://github.com/newjersey/navigator.business.nj.gov/issues/12799)] fix user data migration ([aa01679](https://github.com/newjersey/navigator.business.nj.gov/commit/aa01679f1c2271d192b238f24c3da7adaf1195ee))
+* [AB[#13172](https://github.com/newjersey/navigator.business.nj.gov/issues/13172)] skip or update all flaky tests in CircleCI Insights ([275003f](https://github.com/newjersey/navigator.business.nj.gov/commit/275003f4a2fb1748d9c071fd5acefb2ac6c0bdd3))
+* [AB[#13379](https://github.com/newjersey/navigator.business.nj.gov/issues/13379)] resolve requestException in fetchAuthSession ([f475f19](https://github.com/newjersey/navigator.business.nj.gov/commit/f475f19f152688564b981daae4c3e67eb71c611a))
+* [AB[#4703](https://github.com/newjersey/navigator.business.nj.gov/issues/4703)] PR review comments fix ([eac4229](https://github.com/newjersey/navigator.business.nj.gov/commit/eac4229905babba1149ea0166fe53abc513c67fa))
+* **deps:** update dependency axios to v1.8.2 [security] ([0efb38c](https://github.com/newjersey/navigator.business.nj.gov/commit/0efb38c420898b3e9414fb75a11c9ad284a04fb6))
+* remove unintended whitespace from cannabis-license-tab1.json ([5b8e1da](https://github.com/newjersey/navigator.business.nj.gov/commit/5b8e1da4af69bb7b561dfa77503e9e2aac951cb2))
 
 
 ### Features
 
-* [[#186702387](https://github.com/newjersey/navigator.business.nj.gov/issues/186702387)] dialog close button isn't part of heading ([0864e3f](https://github.com/newjersey/navigator.business.nj.gov/commit/0864e3fdcf2e6afa6b0684c68049dd389e0a9210))
+* [[#188595636](https://github.com/newjersey/navigator.business.nj.gov/issues/188595636) | AB[#4703](https://github.com/newjersey/navigator.business.nj.gov/issues/4703)] add tax clearance certificate screens ([be2dc99](https://github.com/newjersey/navigator.business.nj.gov/commit/be2dc999a5377804e741633e472f741d385fbb45))
+* [[#188887754](https://github.com/newjersey/navigator.business.nj.gov/issues/188887754) #AB8670] Update anytime action categories ([2b544e2](https://github.com/newjersey/navigator.business.nj.gov/commit/2b544e2dd4c4a29feed43ecca01810dfd4530d7b)), closes [#AB8670](https://github.com/newjersey/navigator.business.nj.gov/issues/AB8670)
+* [[#188887754](https://github.com/newjersey/navigator.business.nj.gov/issues/188887754) | AB[#8670](https://github.com/newjersey/navigator.business.nj.gov/issues/8670)] Alphabetize anytime actions dropdown category order ([7be461c](https://github.com/newjersey/navigator.business.nj.gov/commit/7be461c2cb91ee279cf23458fc350d4fe4330ad9))
+* [[#188887754](https://github.com/newjersey/navigator.business.nj.gov/issues/188887754) | AB[#8670](https://github.com/newjersey/navigator.business.nj.gov/issues/8670)] Remove duplicate close business task and the anytime action link category ([d56aa98](https://github.com/newjersey/navigator.business.nj.gov/commit/d56aa98d8ed6f07c17ca128ee2407167a849ec22))
+* [AB[#8670](https://github.com/newjersey/navigator.business.nj.gov/issues/8670)] Fix anytime actions that were not moved over ([e494375](https://github.com/newjersey/navigator.business.nj.gov/commit/e494375d06f18d1eb342e5635e686359549f8bfa))
+
+# [2025.7.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.6.0...v2025.7.0) (2025-03-10)
+
+
+### Bug Fixes
+
+* remove unintended whitespace from cannabis-license-tab1.json ([c768e36](https://github.com/newjersey/navigator.business.nj.gov/commit/c768e36a04756a258967d654cf4318fdaa44b746))
+
+
+### Features
+
+* [[#188960391](https://github.com/newjersey/navigator.business.nj.gov/issues/188960391) | AB[#13170](https://github.com/newjersey/navigator.business.nj.gov/issues/13170)] add survey link behind a feature flag on formation success ([edf4d10](https://github.com/newjersey/navigator.business.nj.gov/commit/edf4d10d4304c4172b9d22fde292019e4768ecb3))
+
+# [2025.6.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.5.0...v2025.6.0) (2025-03-07)
+
+
+### Bug Fixes
+
+* [AB[#12799](https://github.com/newjersey/navigator.business.nj.gov/issues/12799)] update query to use current version dynamically ([b3b3c51](https://github.com/newjersey/navigator.business.nj.gov/commit/b3b3c516af6dfd9eba901a74d4cd8964b6280679))
+* add retry to first cypress test as workaround to race condition causing a failure ([d557f09](https://github.com/newjersey/navigator.business.nj.gov/commit/d557f09bca0bf20b4e9301f9f509230dadd249e9))
+* align add-on name with file anem for community-rtk-survey ([791bd97](https://github.com/newjersey/navigator.business.nj.gov/commit/791bd97b824c17b3396d533e4afdb9547f09ad16))
+* **deps:** update dependency remove-markdown to v0.6.0 ([5d55d95](https://github.com/newjersey/navigator.business.nj.gov/commit/5d55d95e0b84d8c87ab3dbe82ccfe1144f23d029))
+* filter out domestic employers for auto-tax-filing e2e tests ([779ac4b](https://github.com/newjersey/navigator.business.nj.gov/commit/779ac4b5be2f2f13d5e89fe02d9bdd6320081f1e))
+* remove roadmap steps without tasks from roadmap ([7c2a3e6](https://github.com/newjersey/navigator.business.nj.gov/commit/7c2a3e6386bcb57b150ae77d1da4f6d736f5c18a))
+* remove the pending license task for easier testing ([de8fe44](https://github.com/newjersey/navigator.business.nj.gov/commit/de8fe44ec09b9c26e3f6f0c69f07f700637c290c))
+
+
+### Features
+
+* [[#188814053](https://github.com/newjersey/navigator.business.nj.gov/issues/188814053)] add out of state pharmacy license task ([6d226e6](https://github.com/newjersey/navigator.business.nj.gov/commit/6d226e634536ed8d5733869a4fea3d019336e30c))
+* [[#188814053](https://github.com/newjersey/navigator.business.nj.gov/issues/188814053)] add out of state pharmacy license task ([64125de](https://github.com/newjersey/navigator.business.nj.gov/commit/64125deb354c06a0299b84db9ad6ff81c96c9521))
+* [[#188924188](https://github.com/newjersey/navigator.business.nj.gov/issues/188924188)] set options_length: 500 for all relation widgets in the CMS ([e73a6dc](https://github.com/newjersey/navigator.business.nj.gov/commit/e73a6dc3737a0c0e055198cb299726e66d102015))
+
+
+### Reverts
+
+* Revert "feat: [#188778935] consolidate AWS resources to two environments" ([7475f5f](https://github.com/newjersey/navigator.business.nj.gov/commit/7475f5fdd9d40dce8958822807bacde80a77d856)), closes [#188778935](https://github.com/newjersey/navigator.business.nj.gov/issues/188778935)
+
+# [2025.5.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.4.0...v2025.5.0) (2025-02-18)
+
+### Bug Fixes
+
+- [[#188832886](https://www.pivotaltracker.com/story/show/188832886)] update HIC license application name ([89f0aa0](https://github.com/newjersey/navigator.business.nj.gov/commit/89f0aa0c7db1f661c6c46767b37e4b9b1fbbeb65))
+- [[#188879179](https://www.pivotaltracker.com/story/show/188879179)] ensure funding sorting happens for njeda fundings page ([5ca0f7f](https://github.com/newjersey/navigator.business.nj.gov/commit/5ca0f7f78287c62b89f2dade6e1123406362bf25))
+- [[#188879179](https://www.pivotaltracker.com/story/show/188879179)] sync content with content-repo for njeda fundings ([d5ccbfe](https://github.com/newjersey/navigator.business.nj.gov/commit/d5ccbfe2fdc4625f686ec51f2986167a04eacfe5))
+- [[#188879179](https://www.pivotaltracker.com/story/show/188879179)] update funding test to not rely on generation ([cf1f753](https://github.com/newjersey/navigator.business.nj.gov/commit/cf1f753cb4beebec00ede26ae2bd57d9db51be47))
+- [[#188879179](https://www.pivotaltracker.com/story/show/188879179)] update njeda onboarding hyperlink and mark fundings program as priority ([6adf39a](https://github.com/newjersey/navigator.business.nj.gov/commit/6adf39ac435cd2514a8041f76faf4d523643a9c8))
+- ensure funding filtering on fundings that expire in the future ([7ffcbbd](https://github.com/newjersey/navigator.business.nj.gov/commit/7ffcbbd5435776c200206f2c9874bc192651f94e))
+- redeploy; skip staging deploy ([15ea0f1](https://github.com/newjersey/navigator.business.nj.gov/commit/15ea0f179e6fcc049539b5220da7f8e2d6ca7ae1))
+- update metadata for new license tasks ([e73952c](https://github.com/newjersey/navigator.business.nj.gov/commit/e73952c0d3749d0f23a71d31b93392baf79d83f6))
+- wording issue for icon formation accessibility issues ([b9c8d14](https://github.com/newjersey/navigator.business.nj.gov/commit/b9c8d14f0b4362a9f6703a3b1343ac01c8bd64ff))
+- wording issue for icon formation accessibility issues test for signers ([164fbec](https://github.com/newjersey/navigator.business.nj.gov/commit/164fbecf0c7939fde7b953432f0af8dc36eaa966))
+
+### Features
+
+- [[#188778935](https://www.pivotaltracker.com/story/show/188778935)] consolidate AWS resources to two environments ([f74a567](https://github.com/newjersey/navigator.business.nj.gov/commit/f74a5676da8e291a4dcd0ac71b210dec41abf6ff))
+- [[#188793304](https://www.pivotaltracker.com/story/show/188793304)] replaced trash and penicl icons with text ([7b58496](https://github.com/newjersey/navigator.business.nj.gov/commit/7b58496554efe77c31db9c3f465629463777ed3e))
+- [[#188853770](https://www.pivotaltracker.com/story/show/188853770)] env task filter home-based businesses ([fdf21f6](https://github.com/newjersey/navigator.business.nj.gov/commit/fdf21f6a2a7637cb45b1496635416a9ed9577af8))
+- [[#188862738](https://www.pivotaltracker.com/story/show/188862738)] add priority field to CMS Fundings ([e18651a](https://github.com/newjersey/navigator.business.nj.gov/commit/e18651a570ba10e05c0aaf1e5829e6520d438f78))
+- [[#188862738](https://www.pivotaltracker.com/story/show/188862738)] change url to /njeda from /fundings ([048d31b](https://github.com/newjersey/navigator.business.nj.gov/commit/048d31bd2df91f9e8cfed7718d666260f1fae256))
+- [[#188877973](https://www.pivotaltracker.com/story/show/188877973)] add employee count question to njeda onboarding page ([28c2edc](https://github.com/newjersey/navigator.business.nj.gov/commit/28c2edcf790f75840eb8b11ef2c4e1c659c9b38f))
+
+# [2025.4.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.3.0...v2025.4.0) (2025-02-07)
+
+### Bug Fixes
+
+- [[#188838885](https://www.pivotaltracker.com/story/show/188838885)] Login Page Design QA Follow-ups ([eff77a3](https://github.com/newjersey/navigator.business.nj.gov/commit/eff77a3f86a850e1d289a36a70f16dda019e6599))
+
+### Features
+
+- [[#188843468](https://www.pivotaltracker.com/story/show/188843468)] implement sector query in onboarding ([8336860](https://github.com/newjersey/navigator.business.nj.gov/commit/83368605059425a8d1f34e53a75403ca45a0cd45))
+
+# [2025.3.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.2.1...v2025.3.0) (2025-02-05)
+
+### Bug Fixes
+
+- [[#188838423](https://www.pivotaltracker.com/story/show/188838423)] from login page to onboarding working again ([56c9cb4](https://github.com/newjersey/navigator.business.nj.gov/commit/56c9cb4a9327c551d4d571208e39b4fdb04093f0))
+- [[#188838885](https://www.pivotaltracker.com/story/show/188838885)] Login Page Design QA ([f92d3cb](https://github.com/newjersey/navigator.business.nj.gov/commit/f92d3cb2e6506a817417e2b57b8eae7bd192ca67))
+- [[#188844549](https://www.pivotaltracker.com/story/show/188844549)] add userId, versionWhenCreated and version to business object ([5a182b7](https://github.com/newjersey/navigator.business.nj.gov/commit/5a182b7361d72179e24850b486ff9c8624e09876))
+- added spelling exception for Corpcode ([3461332](https://github.com/newjersey/navigator.business.nj.gov/commit/34613327ae952904a99ccfae864f74899afbf265))
+
+### Features
+
+- [[#188838885](https://www.pivotaltracker.com/story/show/188838885)] login page design review updates ([ad80076](https://github.com/newjersey/navigator.business.nj.gov/commit/ad800767ca65ffcc47084f6426875ed7167d728b))
+
+## [2025.2.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.2.0...v2025.2.1) (2025-01-31)
+
+### Bug Fixes
+
+- [[#188666282](https://www.pivotaltracker.com/story/show/188666282)] add url and additional filtering ([a2f342b](https://github.com/newjersey/navigator.business.nj.gov/commit/a2f342bab45bfb5b200629a075cea3be0d0a969d))
+- [[#188826997](https://www.pivotaltracker.com/story/show/188826997)] check router.isReady in onboarding ([4f7e5e3](https://github.com/newjersey/navigator.business.nj.gov/commit/4f7e5e31c51039f71d8dc917be8c546047d053b8))
+
+# [2025.2.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.1.0...v2025.2.0) (2025-01-29)
+
+### Bug Fixes
+
+- [[#188540268](https://www.pivotaltracker.com/story/show/188540268)] Fix routing logic for authenticated login ([d4c5dbe](https://github.com/newjersey/navigator.business.nj.gov/commit/d4c5dbe0af21786fd3efbe60b97aedfe7fb0f052))
+- [[#188623677](https://www.pivotaltracker.com/story/show/188623677)] air contact email ([064a59c](https://github.com/newjersey/navigator.business.nj.gov/commit/064a59c43e480b619f912739dbc10e9032d7f74e))
+- [[#188623677](https://www.pivotaltracker.com/story/show/188623677)] amend pollutants contextual info ([1aa9ed0](https://github.com/newjersey/navigator.business.nj.gov/commit/1aa9ed029d21e2381fbe391bc90384877dae79d1))
+- [[#188666282](https://www.pivotaltracker.com/story/show/188666282)] restore cms collections ([2ac5b8a](https://github.com/newjersey/navigator.business.nj.gov/commit/2ac5b8ac3cc5329a287cb3ecccecfe768728e082))
+- [[#188671705](https://www.pivotaltracker.com/story/show/188671705)] prevent license auto lookup with empty business name ([547d687](https://github.com/newjersey/navigator.business.nj.gov/commit/547d687b635167cb10a6a250d8ca59681555d966))
+
+### Features
+
+- [[#188666282](https://www.pivotaltracker.com/story/show/188666282)] add new onboarding page for fundings ([4be4ee3](https://github.com/newjersey/navigator.business.nj.gov/commit/4be4ee31bd8b22641c0656cb335ecb54d4e0fecd))
+- [[#188666282](https://www.pivotaltracker.com/story/show/188666282)] add new onboarding page for fundings ([1efd684](https://github.com/newjersey/navigator.business.nj.gov/commit/1efd684fb6d0d0dc8ba59185037dfb3b00f21d5b))
+- [[#188666282](https://www.pivotaltracker.com/story/show/188666282)] properly track current business sector in fundings onboarding ([ff78d95](https://github.com/newjersey/navigator.business.nj.gov/commit/ff78d9531ea4a4b0b51852aebe4137aae93d4168))
+- [[#188682502](https://www.pivotaltracker.com/story/show/188682502)] Funeral Home License Status Check ([0d8ec63](https://github.com/newjersey/navigator.business.nj.gov/commit/0d8ec63f276691c9d93884ea7df68cc62b80b029))
+- [[#188789999](https://www.pivotaltracker.com/story/show/188789999)] tax pin field in profile for everyone ([7ef704e](https://github.com/newjersey/navigator.business.nj.gov/commit/7ef704e160ec228cf8685d1ce18c5fb3004c1b29))
+- [188347496] landing page and license search config ([eab165f](https://github.com/newjersey/navigator.business.nj.gov/commit/eab165fb6886745f15d2090591e1f6ea585454f9))
+- [188623677] add environmental questionnaire for air ([48f6b24](https://github.com/newjersey/navigator.business.nj.gov/commit/48f6b24c9d15dda565e08385aa0684450de7ea37))
+
+# [2025.1.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.0.0...v2025.1.0) (2025-01-21)
+
+### Bug Fixes
+
+- [[#187166104](https://www.pivotaltracker.com/story/show/187166104)] add dependency for cypress accessibility feat ([eb906ea](https://github.com/newjersey/navigator.business.nj.gov/commit/eb906ea5a6a10d0f5c2ee58043cbf05f0c4259f7))
+- **deps:** update material-ui ([#9398](https://github.com/newjersey/navigator.business.nj.gov/issues/9398)) ([639fff4](https://github.com/newjersey/navigator.business.nj.gov/commit/639fff41d5f083067a4db05e32732634c11b23be))
+- resolve build error by setting empty task arrays to null ([19a0226](https://github.com/newjersey/navigator.business.nj.gov/commit/19a0226822291d1217337ab38200cf5972d2b2f0))
+
+### Features
+
+- [[#187166104](https://www.pivotaltracker.com/story/show/187166104)] Cypress Automated Accessibility added for onboarding ([bdd8f66](https://github.com/newjersey/navigator.business.nj.gov/commit/bdd8f669362b33845c13fc64e3457046a484748c))
+
+# [2025.0.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.39.1...v2025.0.0) (2025-01-14)
+
+### Bug Fixes
+
+- [[#188645598](https://www.pivotaltracker.com/story/show/188645598)] land env task phone number format and title ([b883899](https://github.com/newjersey/navigator.business.nj.gov/commit/b883899ecc86c8f2409c235f61c3bbf9229b496d))
+- [[#188684012](https://www.pivotaltracker.com/story/show/188684012)] waste env task phone number format ([6be4e8a](https://github.com/newjersey/navigator.business.nj.gov/commit/6be4e8a7a8600645a40fcb9cd62a89198e82c43c))
+- [[#188734302](https://www.pivotaltracker.com/story/show/188734302)] make city in formation more reliable ([1d8dd3d](https://github.com/newjersey/navigator.business.nj.gov/commit/1d8dd3db2721b5d75743a6ba59ac3a8c478cff19))
+- **deps:** update aws-sdk ([#8281](https://github.com/newjersey/navigator.business.nj.gov/issues/8281)) ([683ece7](https://github.com/newjersey/navigator.business.nj.gov/commit/683ece7e5fe619d5177688f1ca513a7bd9709fd0))
+- **deps:** update aws-sdk ([#9386](https://github.com/newjersey/navigator.business.nj.gov/issues/9386)) ([09b2210](https://github.com/newjersey/navigator.business.nj.gov/commit/09b2210d7f18ddc956f4d20e23530542e38e78f3))
+- **deps:** update aws-sdk to v3.721.0 ([#9336](https://github.com/newjersey/navigator.business.nj.gov/issues/9336)) ([aebaf5f](https://github.com/newjersey/navigator.business.nj.gov/commit/aebaf5fcc2fe7e5011a84539a4499d9c3576afa4))
+- **deps:** update dependency axios to v1.7.9 ([#9273](https://github.com/newjersey/navigator.business.nj.gov/issues/9273)) ([fed9efc](https://github.com/newjersey/navigator.business.nj.gov/commit/fed9efc9e84d2ae59e181c7569556b07a994a17f))
+- **deps:** update dependency express to v4.21.2 ([#9274](https://github.com/newjersey/navigator.business.nj.gov/issues/9274)) ([aba6047](https://github.com/newjersey/navigator.business.nj.gov/commit/aba6047f62e41b44a97e34d0714b47794b3b3a20))
+- **deps:** update dependency next-seo to v6.6.0 ([#9388](https://github.com/newjersey/navigator.business.nj.gov/issues/9388)) ([1cd9970](https://github.com/newjersey/navigator.business.nj.gov/commit/1cd997031ddda6592d7a3bc8d0462a7814279842))
+- **deps:** update dependency simple-oauth2 to v5.1.0 ([#9391](https://github.com/newjersey/navigator.business.nj.gov/issues/9391)) ([7da7700](https://github.com/newjersey/navigator.business.nj.gov/commit/7da7700df60b9300ce870d7a11175161eabf18bf))
+- **deps:** update dependency winston to v3.17.0 ([#9392](https://github.com/newjersey/navigator.business.nj.gov/issues/9392)) ([92a987e](https://github.com/newjersey/navigator.business.nj.gov/commit/92a987e4facd3a2b8ed5b7bc24250b0bb7e6e524))
+- **deps:** update dependency winston-cloudwatch to v6.3.0 ([#9394](https://github.com/newjersey/navigator.business.nj.gov/issues/9394)) ([ca2e680](https://github.com/newjersey/navigator.business.nj.gov/commit/ca2e680bc0e9bbb9952d11fb084963d1e6be0781))
+- **deps:** update emotion monorepo to v11.14.0 ([#9395](https://github.com/newjersey/navigator.business.nj.gov/issues/9395)) ([75389b1](https://github.com/newjersey/navigator.business.nj.gov/commit/75389b1a73eed4342bf0e1ab1cdceaf79c3bc1b6))
+- **deps:** update nextjs monorepo to v15.1.4 ([#9380](https://github.com/newjersey/navigator.business.nj.gov/issues/9380)) ([80818d9](https://github.com/newjersey/navigator.business.nj.gov/commit/80818d949a59e34761b97cb8a5431e41571f1820))
+- **deps:** update serverless-and-webpack ([#9275](https://github.com/newjersey/navigator.business.nj.gov/issues/9275)) ([4866acb](https://github.com/newjersey/navigator.business.nj.gov/commit/4866acbdcd9e26b96a986f8004eb6b46d2a283fb))
+- update yarn lock file ([4b9a227](https://github.com/newjersey/navigator.business.nj.gov/commit/4b9a227b33bb13e15fe91387ef6b7726639dcc3b))
+
+- chore!: major version bump to 2025 ([54fece8](https://github.com/newjersey/navigator.business.nj.gov/commit/54fece8684a26fa8c415c50adeecf8fa7cece259))
+
+### Features
+
+- [[#188347468](https://www.pivotaltracker.com/story/show/188347468)] unifying filename and ID in the cms ([534d541](https://github.com/newjersey/navigator.business.nj.gov/commit/534d541c4b1da7811cf9cd4b1acced12606c08de))
+- [[#188347468](https://www.pivotaltracker.com/story/show/188347468)] unifying filename and ID in the cms, changes from content repo ([93877a7](https://github.com/newjersey/navigator.business.nj.gov/commit/93877a73bdcc0c9c95d478f857cbcf6c4ecc1a67))
+- [[#188347489](https://www.pivotaltracker.com/story/show/188347489)] Add scripts to transfer production data to a dev user ([615e4f7](https://github.com/newjersey/navigator.business.nj.gov/commit/615e4f73363ef07c2cda4362b4d84cc5eba0f24a))
+- [[#188540268](https://www.pivotaltracker.com/story/show/188540268)] Implement new login navigation pattern ([0401a0c](https://github.com/newjersey/navigator.business.nj.gov/commit/0401a0c427a0e7f892b397691bb59587ef9293e5))
+- [[#188645598](https://www.pivotaltracker.com/story/show/188645598)] add environmental questionnaire for land ([f0c2f6e](https://github.com/newjersey/navigator.business.nj.gov/commit/f0c2f6e19df73e0f2446c1dafb13446b700aa184))
+
+### BREAKING CHANGES
+
+- Next.js v15 and calendar year increase
+
+## [2024.39.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.39.0...v2024.39.1) (2024-12-31)
+
+### Bug Fixes
+
+- [[#188734302](https://www.pivotaltracker.com/story/show/188734302)] make city in formation more reliable ([3dd399c](https://github.com/newjersey/navigator.business.nj.gov/commit/3dd399c8c4ae88748750ec415caf50bb13d3aa4b))
+
+# [2024.39.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.38.0...v2024.39.0) (2024-12-24)
+
+### Bug Fixes
+
+- [[#188172536](https://www.pivotaltracker.com/story/show/188172536)] add owningUser to v151 migration ([6e955a1](https://github.com/newjersey/navigator.business.nj.gov/commit/6e955a1290ee3afd3b7e34af4526b4b33e3e1b2f))
+- [[#188172536](https://www.pivotaltracker.com/story/show/188172536)] update DynamoUserDataClient 'Not found' error message ([3ce7d6d](https://github.com/newjersey/navigator.business.nj.gov/commit/3ce7d6d5bc44ef5d7c13cda7f74b6da94739bc23))
+- [[#188704018](https://www.pivotaltracker.com/story/show/188704018)] update randomHomeBasedIndustry to fix flakey home based industry test ([4688ba0](https://github.com/newjersey/navigator.business.nj.gov/commit/4688ba081c052ecae22faa595b70db76f08cb940))
+- [[#188704018](https://www.pivotaltracker.com/story/show/188704018)] update randomHomeBasedIndustry to fix flakey home based industry test ([f1d705d](https://github.com/newjersey/navigator.business.nj.gov/commit/f1d705d6a41a90ed1dafa33a33e528d1339b2437))
+- **deps:** update serverless-and-webpack ([#9055](https://github.com/newjersey/navigator.business.nj.gov/issues/9055)) ([a7c783a](https://github.com/newjersey/navigator.business.nj.gov/commit/a7c783a2f07142fa8a03c4fbc05e5acda0559501))
+
+### Features
+
+- [[#187194162](https://www.pivotaltracker.com/story/show/187194162)] add profile address to dakota persona ([b54b439](https://github.com/newjersey/navigator.business.nj.gov/commit/b54b43917048dc0a74dca6bfb72ce4ddd83c591f))
+- [[#187466951](https://www.pivotaltracker.com/story/show/187466951)] bussiness structure task, error is now auto scroll and screen reader accessible ([c896bd9](https://github.com/newjersey/navigator.business.nj.gov/commit/c896bd9757042db116ec3cc35dc32887c3b21077))
+- [[#188172536](https://www.pivotaltracker.com/story/show/188172536)] copy businesses data from users table and sync ([92d3e35](https://github.com/newjersey/navigator.business.nj.gov/commit/92d3e35eeaca9da9c115a7cd9714e14cf98160e6))
+- [[#188507862](https://www.pivotaltracker.com/story/show/188507862)] Automatic Tax Calendar Check ([5fc7a92](https://github.com/newjersey/navigator.business.nj.gov/commit/5fc7a92233933610aa038907be0afab6a9e754dd))
+
+# [2024.38.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.37.0...v2024.38.0) (2024-12-17)
+
+### Bug Fixes
+
+- [[#188464297](https://www.pivotaltracker.com/story/show/188464297)] update design and content ([587ead2](https://github.com/newjersey/navigator.business.nj.gov/commit/587ead2302d377decd830b5c036c2bf6d6a0a0ab))
+- [[#188464297](https://www.pivotaltracker.com/story/show/188464297)] update env content ([d61cecb](https://github.com/newjersey/navigator.business.nj.gov/commit/d61cecb5fe63756af7190efb40ec2d8ba24c825c))
+- [[#188540248](https://www.pivotaltracker.com/story/show/188540248)] add check email endpoint to serverless config ([30a9fc8](https://github.com/newjersey/navigator.business.nj.gov/commit/30a9fc8348cfc98856c8e7c4b9eb85dd7732026d))
+- [[#188599283](https://www.pivotaltracker.com/story/show/188599283)] Have vacant building question appear for signed in owning users ([bc0665c](https://github.com/newjersey/navigator.business.nj.gov/commit/bc0665cefabc5d40d3c580d99c4905be3eb1ef73))
+- [[#188599283](https://www.pivotaltracker.com/story/show/188599283)] Update styling for non-essential question ([9b2ac30](https://github.com/newjersey/navigator.business.nj.gov/commit/9b2ac30fe3edd3751eab35131de340fa8e1edf78))
+- **deps:** update dependency helmet to v7.2.0 ([#9184](https://github.com/newjersey/navigator.business.nj.gov/issues/9184)) ([f47e32a](https://github.com/newjersey/navigator.business.nj.gov/commit/f47e32a36eaba4da7a3e2349113cb58b7a71a372))
+- handle wiremock env variable consistently ([8f15c3c](https://github.com/newjersey/navigator.business.nj.gov/commit/8f15c3c2d2d17b279651e34cf66641ff031fdc1c))
+- will practice law reivew text, always no ([b28f5f7](https://github.com/newjersey/navigator.business.nj.gov/commit/b28f5f7b66e832cd3778275fd8dd1ab11c2ca4cb))
+
+### Features
+
+- [[#188464297](https://www.pivotaltracker.com/story/show/188464297)] add environmental questionnaire for waste ([0089e5c](https://github.com/newjersey/navigator.business.nj.gov/commit/0089e5cf9de737326fc940dc042594d4fd3d3b09))
+- [[#188489104](https://www.pivotaltracker.com/story/show/188489104)] anytime action dropdown categories are keyboard accessible ([53bcc98](https://github.com/newjersey/navigator.business.nj.gov/commit/53bcc985dc5c73b6a03340eeccdd2558464f20b8))
+- [[#188540248](https://www.pivotaltracker.com/story/show/188540248)] add check email endpoint ([#9159](https://github.com/newjersey/navigator.business.nj.gov/issues/9159)) ([dfc7a07](https://github.com/newjersey/navigator.business.nj.gov/commit/dfc7a07feb901417797a7465de6f0e0cc38ab892))
+- [[#188595618](https://www.pivotaltracker.com/story/show/188595618)] update Dakota c-corp formation alert on Name step ([094b816](https://github.com/newjersey/navigator.business.nj.gov/commit/094b8169a8088feeb24d993763a5c96e6646756a))
+- [[#188595628](https://www.pivotaltracker.com/story/show/188595628)] Dakota Corporations Formation Task - Certificate of Good Standing ([8757864](https://github.com/newjersey/navigator.business.nj.gov/commit/8757864f27b4c5695c428c6fef10b4ab314aab72))
+- [[#188601241](https://www.pivotaltracker.com/story/show/188601241)] Enabled License Status Check Tasks for Unmapped Supported License Types ([e8c7c56](https://github.com/newjersey/navigator.business.nj.gov/commit/e8c7c567c12f27a0fd0621981e3dbb219e640ace))
+- [[#188645454](https://www.pivotaltracker.com/story/show/188645454)] show me opportunities button analytics ([b89b991](https://github.com/newjersey/navigator.business.nj.gov/commit/b89b99144cc3c243052a24125940f56d059c6a43))
+- [[#188651554](https://www.pivotaltracker.com/story/show/188651554)] remove registration modal & amend button text ([8b40af4](https://github.com/newjersey/navigator.business.nj.gov/commit/8b40af405e78fbc92280d928c5a7d60d10f70631))
+- [[#188667769](https://www.pivotaltracker.com/story/show/188667769)] reshuffle roadmap tasks to maintain consistent order ([625daf9](https://github.com/newjersey/navigator.business.nj.gov/commit/625daf92b61d59625c395423662d352bebe7be38))
+- [[#188682553](https://www.pivotaltracker.com/story/show/188682553)] add certifiate of good standing to Dakota NP ([e945e90](https://github.com/newjersey/navigator.business.nj.gov/commit/e945e90b94b5be587d8bfef07b5f6d2aac8a5d9d))
+- add bylaws task to nonprofit roadmap add-on ([45a9f75](https://github.com/newjersey/navigator.business.nj.gov/commit/45a9f7581ac6bb241fac33f359af5c1ebf3c8dd7))
+
+### Reverts
+
+- Revert "chore: updating Anytime Actions (Licenses) code23-osow-30day-permit_1" ([853398e](https://github.com/newjersey/navigator.business.nj.gov/commit/853398ec977c7afac734b1e08c1be2be51ee8017))
+- Revert "chore(deps): update dependency cspell to v8.16.1 (#9183)" ([d7e8acd](https://github.com/newjersey/navigator.business.nj.gov/commit/d7e8acd936d79669a3b19aaf2433dc0d786cad25)), closes [#9183](https://github.com/newjersey/navigator.business.nj.gov/issues/9183)
+
+# [2024.37.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.36.0...v2024.37.0) (2024-12-10)
+
+### Bug Fixes
+
+- [[#188599283](https://www.pivotaltracker.com/story/show/188599283)] Correct anytime action dropdown categories ([370a811](https://github.com/newjersey/navigator.business.nj.gov/commit/370a81146727461cee1323f1934e14edfd9c57ed))
+- [[#188599283](https://www.pivotaltracker.com/story/show/188599283)] Enable vacant building question for up and running Poppies ([7c4158a](https://github.com/newjersey/navigator.business.nj.gov/commit/7c4158a72b9b24551dc9e34c734f7fd39af32a47))
+- **deps:** update dependency axios to v1.7.8 ([#9176](https://github.com/newjersey/navigator.business.nj.gov/issues/9176)) ([13e9dd8](https://github.com/newjersey/navigator.business.nj.gov/commit/13e9dd8be3fa7346d1266831332cdd3d778a3895))
+- **deps:** update dependency express to v4.21.1 ([#9182](https://github.com/newjersey/navigator.business.nj.gov/issues/9182)) ([d8fa1f8](https://github.com/newjersey/navigator.business.nj.gov/commit/d8fa1f88ca320a130a72f74c3f90e3785ca74023))
+
+### Features
+
+- [[#188489104](https://www.pivotaltracker.com/story/show/188489104)] anytime action dropdown categories ([431e868](https://github.com/newjersey/navigator.business.nj.gov/commit/431e8687c65fba46d26529ed0881bcca493d7da3))
+- [[#188599283](https://www.pivotaltracker.com/story/show/188599283)] Add vacant building non-essential question and anytime action connection ([9df1d46](https://github.com/newjersey/navigator.business.nj.gov/commit/9df1d4625abd5375d04221c4419d699ccea4972f))
+- script to update CMS branches ([fac79f9](https://github.com/newjersey/navigator.business.nj.gov/commit/fac79f97907fc595def45728f692680912835156))
+
+# [2024.36.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.35.0...v2024.36.0) (2024-12-02)
+
+### Features
+
+- [[#188595606](https://www.pivotaltracker.com/story/show/188595606)] Electrologist License Status Check, Renewal Events & Reinstatement Quick Actions (MLO) ([b6abf51](https://github.com/newjersey/navigator.business.nj.gov/commit/b6abf5199882cb06347290b19bb5d8e52038cb4f))
+
+# [2024.35.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.34.0...v2024.35.0) (2024-11-20)
+
+### Bug Fixes
+
+- [[#188574288](https://www.pivotaltracker.com/story/show/188574288)] Update hint for business stage ([2dfcfd4](https://github.com/newjersey/navigator.business.nj.gov/commit/2dfcfd4600eb8f9d66fa1aca457a330b75987960))
+- [[#188574288](https://www.pivotaltracker.com/story/show/188574288)] Update hint for business stage in funding opps ([0336dc3](https://github.com/newjersey/navigator.business.nj.gov/commit/0336dc3b1fa5389c89a471333c9ddb09914396dd))
+
+### Features
+
+- [[#187978144](https://www.pivotaltracker.com/story/show/187978144)] [[#188538877](https://www.pivotaltracker.com/story/show/188538877)] [[#188538893](https://www.pivotaltracker.com/story/show/188538893)] [[#188538912](https://www.pivotaltracker.com/story/show/188538912)]- Employment and Personnel Services License ([2369105](https://github.com/newjersey/navigator.business.nj.gov/commit/236910513c7033bebd2beab1842b9d57f2a21212))
+- [[#188443179](https://www.pivotaltracker.com/story/show/188443179)] Unsuccessful Business Address & Zipcode License Check ([7d48652](https://github.com/newjersey/navigator.business.nj.gov/commit/7d486522f2542a5009678600364c242770dff15e))
+- [[#188448107](https://www.pivotaltracker.com/story/show/188448107)] Update License task inputs to match rest of product" ([6d8d606](https://github.com/newjersey/navigator.business.nj.gov/commit/6d8d60636f3360b527868c909ed2370849521277))
+- [[#188489128](https://www.pivotaltracker.com/story/show/188489128)] non-profit question removal ([479472b](https://github.com/newjersey/navigator.business.nj.gov/commit/479472be03d99f8c53778ca9ac277a9c154510b4))
+- [[#188521509](https://www.pivotaltracker.com/story/show/188521509)] Filter Carnival fire permit anytime action by non-essential question ([3fd1da7](https://github.com/newjersey/navigator.business.nj.gov/commit/3fd1da7a3e39ce335ff98892634ec6513a3ed2bf))
+- [[#188563288](https://www.pivotaltracker.com/story/show/188563288)] Add offshore wind sector and investment funding type to funding opportunities ([9873823](https://github.com/newjersey/navigator.business.nj.gov/commit/98738233f279b3113d5d79ede92fa6db7a3bbd53))
+- [[#188574288](https://www.pivotaltracker.com/story/show/188574288)] Add offshore wind sector and investment funding type to funding opportunities ([fef06f6](https://github.com/newjersey/navigator.business.nj.gov/commit/fef06f6c3f8780f86cc3c8ac2886ef022941fce7))
+
+# [2024.34.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.33.0...v2024.34.0) (2024-11-12)
+
+### Bug Fixes
+
+- [[#188414550](https://www.pivotaltracker.com/story/show/188414550)] license data for correct business is updated when multiple businesses exist ([f95452c](https://github.com/newjersey/navigator.business.nj.gov/commit/f95452c9a2e917012aae53bcbdebb027181b987c))
+
+### Features
+
+- [[#186324885](https://www.pivotaltracker.com/story/show/186324885)] agent information checkbox missing proper notification ([278b75a](https://github.com/newjersey/navigator.business.nj.gov/commit/278b75ae6f79c9c9d7173979a73a01f19c5829ff))
+- [[#188414550](https://www.pivotaltracker.com/story/show/188414550)] update useUserData hook to account for license data discrepancies ([31da67a](https://github.com/newjersey/navigator.business.nj.gov/commit/31da67a84235acf68e7a50a344935eda31bee985))
+- [[#188503417](https://www.pivotaltracker.com/story/show/188503417)] update pbs url ([7437d68](https://github.com/newjersey/navigator.business.nj.gov/commit/7437d68566ef6a2458cea7b925a4176b88b3dff4))
+- [[#188507991](https://www.pivotaltracker.com/story/show/188507991)] License Task CTA Button Updates ([c2b0359](https://github.com/newjersey/navigator.business.nj.gov/commit/c2b035913b25570592ba29bac72cb7c9347d2908))
+- [[#188520392](https://www.pivotaltracker.com/story/show/188520392)] Offer multiple dwelling question to residential landlord industry ([dd4b6dc](https://github.com/newjersey/navigator.business.nj.gov/commit/dd4b6dc7445c94941c3ec6a094d7fe412480d2da))
+
+# [2024.33.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.32.0...v2024.33.0) (2024-10-29)
+
+### Bug Fixes
+
+- [[#188137268](https://www.pivotaltracker.com/story/show/188137268)] remove webflow home builder record from licensing & certification guide on webflow ([3946f24](https://github.com/newjersey/navigator.business.nj.gov/commit/3946f24be6cb07c383ea6567411890abf041d439))
+- [[#188456671](https://www.pivotaltracker.com/story/show/188456671)] renewal calendar event summary description field is now optional as desired ([4203eed](https://github.com/newjersey/navigator.business.nj.gov/commit/4203eed1e327964049cc8a7bfc93b8d4872cbe42))
+- [[#188462617](https://www.pivotaltracker.com/story/show/188462617)] 'Sorry' removed in Check name error ([077bf6f](https://github.com/newjersey/navigator.business.nj.gov/commit/077bf6fe2b8c18d7266f98d0cb7302ef616acd3f))
+- [[#188462617](https://www.pivotaltracker.com/story/show/188462617)] allowing content on certain CMS pages to be updated correctly ([5eac578](https://github.com/newjersey/navigator.business.nj.gov/commit/5eac5789c5707f4b9786d0fc52e23c647ca5b56b))
+- [[#188462617](https://www.pivotaltracker.com/story/show/188462617)] fixed CMS search ([f8296cb](https://github.com/newjersey/navigator.business.nj.gov/commit/f8296cb6e3d756e7ed28a6e2af57a7d11e23403c))
+- **deps:** update dependency @aws-crypto/client-node to v4.0.2 ([8dfc220](https://github.com/newjersey/navigator.business.nj.gov/commit/8dfc220593b3e2f5c0630ad2247549cee63f45e6))
+
+### Features
+
+- [[#187570392](https://www.pivotaltracker.com/story/show/187570392)] raffle-bingo-nonessential-ques-license-task ([2b6d050](https://github.com/newjersey/navigator.business.nj.gov/commit/2b6d0507476aa687bd01889daea110c630190ed9))
+- [[#188427382](https://www.pivotaltracker.com/story/show/188427382)] Add location dependant section to landlord and short term registration tasks ([b92d577](https://github.com/newjersey/navigator.business.nj.gov/commit/b92d577aa3eadec3b5386af49755b9d318e25f93))
+
+# [2024.32.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.31.0...v2024.32.0) (2024-10-23)
+
+### Bug Fixes
+
+- [[#188251182](https://www.pivotaltracker.com/story/show/188251182)] fix unique field names for landlord industry questions ([8a32b70](https://github.com/newjersey/navigator.business.nj.gov/commit/8a32b70c77f310e1f7ef2f1fa7523aae14bc998a))
+- update url reference ([6a79e99](https://github.com/newjersey/navigator.business.nj.gov/commit/6a79e99d703cfc018a2dac4a6c8bee910e5646e4))
+
+### Features
+
+- [[#186084688](https://www.pivotaltracker.com/story/show/186084688)] callout alerts are now aria groups ([5bf852c](https://github.com/newjersey/navigator.business.nj.gov/commit/5bf852c6c9d79f13e3fe7f628563c848f449b216))
+- [[#186702387](https://www.pivotaltracker.com/story/show/186702387)] close button revisions, reversion of previous functionality ([e1b66f6](https://github.com/newjersey/navigator.business.nj.gov/commit/e1b66f63b10cbd6f040d0b2fcc506efdae621a84))
+- [[#188057802](https://www.pivotaltracker.com/story/show/188057802)] updated footer and header to align with NJ gov ([453db3f](https://github.com/newjersey/navigator.business.nj.gov/commit/453db3f32d001bdfd45365fa8c34226804f2723e))
+- [[#188109500](https://www.pivotaltracker.com/story/show/188109500)] Update error message when no license results are found ([7bede1f](https://github.com/newjersey/navigator.business.nj.gov/commit/7bede1fae0db62edaa3144093461d29a9d85646b))
+- [[#188339189](https://www.pivotaltracker.com/story/show/188339189)] remove DUPLICATE_LICENSE_TYPE_ERROR logic ([d9bc270](https://github.com/newjersey/navigator.business.nj.gov/commit/d9bc27095b77c51a44cddca5cd45cd54896610b5))
+- [#[#188251182](https://www.pivotaltracker.com/story/show/188251182)] Add essential questions to landlord industry ([6731cc2](https://github.com/newjersey/navigator.business.nj.gov/commit/6731cc28ff0523ca307dd5bc460e653ae5f57283))
+
+# [2024.31.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.30.0...v2024.31.0) (2024-10-16)
+
+### Bug Fixes
+
+- [[#187578669](https://www.pivotaltracker.com/story/show/187578669)] disable auto test in content-repo ([5b78904](https://github.com/newjersey/navigator.business.nj.gov/commit/5b78904302a3e098a2f7e47051362b936355313a))
+- [[#187578669](https://www.pivotaltracker.com/story/show/187578669)] run scheduled daily test at 140 EST ([b7d538c](https://github.com/newjersey/navigator.business.nj.gov/commit/b7d538c26de384b2d72dc46a397ce427407c6b70))
+- [[#187578669](https://www.pivotaltracker.com/story/show/187578669)] update cron job for scheduled daily test workflow ([e57da8e](https://github.com/newjersey/navigator.business.nj.gov/commit/e57da8ef2827444c2657cb49b3ea0e0dc7053185))
+- [[#188333470](https://www.pivotaltracker.com/story/show/188333470)] fixes to Webflow licenseSync ([b7aa9c5](https://github.com/newjersey/navigator.business.nj.gov/commit/b7aa9c5362cd2916fe5ca3ca05ee3553a6357a86))
+- add missing displayname to license-tasks ([6b348f5](https://github.com/newjersey/navigator.business.nj.gov/commit/6b348f56e30bcef7d11ff230003033e3f50ec7da))
+- **deps:** update dependency rehype-format to v5.0.1 ([f7e04f0](https://github.com/newjersey/navigator.business.nj.gov/commit/f7e04f0c4e42446200d80a09f1e8eac3d263f514))
+- **deps:** update dependency remove-markdown to v0.5.5 ([75fa8b9](https://github.com/newjersey/navigator.business.nj.gov/commit/75fa8b94b28e1706386b69ccc484ca7e055f07af))
+- update missing metadata in cemetery-sales.md ([094be0d](https://github.com/newjersey/navigator.business.nj.gov/commit/094be0d1d66f22b7a6fb0b8c14ad913b75f51570))
+- update url reference ([191ca72](https://github.com/newjersey/navigator.business.nj.gov/commit/191ca72c34753d2fa397e940a6bdb65c648f551d))
+
+### Features
+
+- [[#186084688](https://www.pivotaltracker.com/story/show/186084688)] fixed formation heading structure ([abb46d7](https://github.com/newjersey/navigator.business.nj.gov/commit/abb46d794e7781e36bd1fdbdb06780eda4011022))
+- [[#186702387](https://www.pivotaltracker.com/story/show/186702387)] close button revisions ([db2be2d](https://github.com/newjersey/navigator.business.nj.gov/commit/db2be2d48e035c6e827c0c576cabfc7bca5ed124))
+- [[#188079116](https://www.pivotaltracker.com/story/show/188079116)] enable booking agency license search ([a62509a](https://github.com/newjersey/navigator.business.nj.gov/commit/a62509a13418a8f13a549d614e263abff1d8d29e))
+- [[#188172364](https://www.pivotaltracker.com/story/show/188172364)] connect businesses table with lambda ([1c89434](https://github.com/newjersey/navigator.business.nj.gov/commit/1c89434d598f077cdb8a8d1c4c99760ac11490a4))
+- [[#188332488](https://www.pivotaltracker.com/story/show/188332488)] Add disclaimer to billing step ([d736697](https://github.com/newjersey/navigator.business.nj.gov/commit/d7366977d500493124f0612ceec90623099d7200))
+
+# [2024.30.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.29.0...v2024.30.0) (2024-10-01)
+
+### Features
+
+- [[#186702387](https://www.pivotaltracker.com/story/show/186702387)] dialog close button isn't part of heading ([0864e3f](https://github.com/newjersey/navigator.business.nj.gov/commit/0864e3fdcf2e6afa6b0684c68049dd389e0a9210))
 
 # [2024.29.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.28.0...v2024.29.0) (2024-09-24)
 
-
 ### Bug Fixes
 
-* [[#187578669](https://github.com/newjersey/navigator.business.nj.gov/issues/187578669)] remove docker and build with image jobs ([dc02bab](https://github.com/newjersey/navigator.business.nj.gov/commit/dc02baba3d5f8f608eb7300e2597b1b284ea22f1))
-* **deps:** update dependency axios to v1.7.7 ([be036c5](https://github.com/newjersey/navigator.business.nj.gov/commit/be036c5d0871b27d430fac454faa03bc47a26dfe))
-* fix meta data in electrologist-office-license ([d990705](https://github.com/newjersey/navigator.business.nj.gov/commit/d990705b843ff97f289ae69fa86ff875c9363ff5))
-* redeploy as account instead of navigator ([810f70b](https://github.com/newjersey/navigator.business.nj.gov/commit/810f70b67be8ea9dd120842175275d0b77cf8273))
-
+- [[#187578669](https://www.pivotaltracker.com/story/show/187578669)] remove docker and build with image jobs ([dc02bab](https://github.com/newjersey/navigator.business.nj.gov/commit/dc02baba3d5f8f608eb7300e2597b1b284ea22f1))
+- **deps:** update dependency axios to v1.7.7 ([be036c5](https://github.com/newjersey/navigator.business.nj.gov/commit/be036c5d0871b27d430fac454faa03bc47a26dfe))
+- fix meta data in electrologist-office-license ([d990705](https://github.com/newjersey/navigator.business.nj.gov/commit/d990705b843ff97f289ae69fa86ff875c9363ff5))
+- redeploy as account instead of navigator ([810f70b](https://github.com/newjersey/navigator.business.nj.gov/commit/810f70b67be8ea9dd120842175275d0b77cf8273))
 
 ### Features
 
-* [[#186316380](https://github.com/newjersey/navigator.business.nj.gov/issues/186316380)] correct refocus behavior for formation stepper and errors ([c778661](https://github.com/newjersey/navigator.business.nj.gov/commit/c778661251a043ec7125d6feeb58ed4003213b36))
-* [[#188079116](https://github.com/newjersey/navigator.business.nj.gov/issues/188079116)] add license status to license calendar events ([f13ae69](https://github.com/newjersey/navigator.business.nj.gov/commit/f13ae696cd637c1e96aeb9bf82d1afa66a8bc140))
-* [[#188283234](https://github.com/newjersey/navigator.business.nj.gov/issues/188283234)] Enable contextual info in non essential questions ([1e7d8b9](https://github.com/newjersey/navigator.business.nj.gov/commit/1e7d8b9d1ef648266947b8395de5a57c5b49e58c))
-* [[#188285486](https://github.com/newjersey/navigator.business.nj.gov/issues/188285486)] Add permanent-location-business-landlord add-on to residential-landlord industry ([24a550c](https://github.com/newjersey/navigator.business.nj.gov/commit/24a550c8ab3f8fadd61d9b0e1d8ba161bba39797))
+- [[#186316380](https://www.pivotaltracker.com/story/show/186316380)] correct refocus behavior for formation stepper and errors ([c778661](https://github.com/newjersey/navigator.business.nj.gov/commit/c778661251a043ec7125d6feeb58ed4003213b36))
+- [[#188079116](https://www.pivotaltracker.com/story/show/188079116)] add license status to license calendar events ([f13ae69](https://github.com/newjersey/navigator.business.nj.gov/commit/f13ae696cd637c1e96aeb9bf82d1afa66a8bc140))
+- [[#188283234](https://www.pivotaltracker.com/story/show/188283234)] Enable contextual info in non essential questions ([1e7d8b9](https://github.com/newjersey/navigator.business.nj.gov/commit/1e7d8b9d1ef648266947b8395de5a57c5b49e58c))
+- [[#188285486](https://www.pivotaltracker.com/story/show/188285486)] Add permanent-location-business-landlord add-on to residential-landlord industry ([24a550c](https://github.com/newjersey/navigator.business.nj.gov/commit/24a550c8ab3f8fadd61d9b0e1d8ba161bba39797))
 
 ## [2024.28.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.28.0...v2024.28.1) (2024-09-20)
 
-
 ### Bug Fixes
 
-* redeploy as account instead of navigator ([810f70b](https://github.com/newjersey/navigator.business.nj.gov/commit/810f70b67be8ea9dd120842175275d0b77cf8273))
+- redeploy as account instead of navigator ([810f70b](https://github.com/newjersey/navigator.business.nj.gov/commit/810f70b67be8ea9dd120842175275d0b77cf8273))
 
 # [2024.28.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.27.0...v2024.28.0) (2024-09-18)
 
-
 ### Bug Fixes
 
-* [[#188122924](https://github.com/newjersey/navigator.business.nj.gov/issues/188122924)] Update CircleCI with EncryptTaxID Env Vars ([8d38944](https://github.com/newjersey/navigator.business.nj.gov/commit/8d38944e1cf561acf0e3b4a7f25d3ec53eb4e21d))
-* [[#188163509](https://github.com/newjersey/navigator.business.nj.gov/issues/188163509)] add fallback default to baseURL ([33109ba](https://github.com/newjersey/navigator.business.nj.gov/commit/33109ba4f148d0d3f3ca7f9356fb300d3a0847cb))
-* [[#188247287](https://github.com/newjersey/navigator.business.nj.gov/issues/188247287)] separate domestic-employer roadmap steps; resolve issues on starter kits ([db5409b](https://github.com/newjersey/navigator.business.nj.gov/commit/db5409b8b09194e1c00ebbe0ebbeb7f4089bd2e0))
-* **deps:** update dependency body-parser to v1.20.3 [security] ([1a15150](https://github.com/newjersey/navigator.business.nj.gov/commit/1a15150a4f2ca3d8edf1a9951c7860e769d22d73))
-* **deps:** update dependency express to v4.20.0 [security] ([eeaf669](https://github.com/newjersey/navigator.business.nj.gov/commit/eeaf6696f9bcf92ec10649373b0cc1ac2abd2405))
-
+- [[#188122924](https://www.pivotaltracker.com/story/show/188122924)] Update CircleCI with EncryptTaxID Env Vars ([8d38944](https://github.com/newjersey/navigator.business.nj.gov/commit/8d38944e1cf561acf0e3b4a7f25d3ec53eb4e21d))
+- [[#188163509](https://www.pivotaltracker.com/story/show/188163509)] add fallback default to baseURL ([33109ba](https://github.com/newjersey/navigator.business.nj.gov/commit/33109ba4f148d0d3f3ca7f9356fb300d3a0847cb))
+- [[#188247287](https://www.pivotaltracker.com/story/show/188247287)] separate domestic-employer roadmap steps; resolve issues on starter kits ([db5409b](https://github.com/newjersey/navigator.business.nj.gov/commit/db5409b8b09194e1c00ebbe0ebbeb7f4089bd2e0))
+- **deps:** update dependency body-parser to v1.20.3 [security] ([1a15150](https://github.com/newjersey/navigator.business.nj.gov/commit/1a15150a4f2ca3d8edf1a9951c7860e769d22d73))
+- **deps:** update dependency express to v4.20.0 [security] ([eeaf669](https://github.com/newjersey/navigator.business.nj.gov/commit/eeaf6696f9bcf92ec10649373b0cc1ac2abd2405))
 
 ### Features
 
-* [[#188163509](https://github.com/newjersey/navigator.business.nj.gov/issues/188163509)] added social media preview and SEO content ([41d7ecb](https://github.com/newjersey/navigator.business.nj.gov/commit/41d7ecb2c5473d686623c7fc10b321cc89b7c633))
+- [[#188163509](https://www.pivotaltracker.com/story/show/188163509)] added social media preview and SEO content ([41d7ecb](https://github.com/newjersey/navigator.business.nj.gov/commit/41d7ecb2c5473d686623c7fc10b321cc89b7c633))
 
 # [2024.27.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.26.1...v2024.27.0) (2024-09-10)
 
-
 ### Features
 
-* [[#185575919](https://github.com/newjersey/navigator.business.nj.gov/issues/185575919)] add WEB_BASE_URL env var, change favicon based on env ([40ba59d](https://github.com/newjersey/navigator.business.nj.gov/commit/40ba59d940c3ebebbf23c5bf538ac05878f01d97))
-* [[#188079164](https://github.com/newjersey/navigator.business.nj.gov/issues/188079164)] Show the License Status Check in Reinstatement Anytime Action ([f3794b8](https://github.com/newjersey/navigator.business.nj.gov/commit/f3794b89a80eaee51917015c5f54547555250b3f))
-* [[#188193453](https://github.com/newjersey/navigator.business.nj.gov/issues/188193453)] preserve domestic employer experience in guest mode ([9dfd102](https://github.com/newjersey/navigator.business.nj.gov/commit/9dfd102cb4838c7e381e4b75ef262b5aaecce203))
-* [[#188193453](https://github.com/newjersey/navigator.business.nj.gov/issues/188193453)] updates to Domestic Employer experience ([16093fd](https://github.com/newjersey/navigator.business.nj.gov/commit/16093fdfd2cb7745c25f14f0fa43f812e9e11a17))
+- [[#185575919](https://www.pivotaltracker.com/story/show/185575919)] add WEB_BASE_URL env var, change favicon based on env ([40ba59d](https://github.com/newjersey/navigator.business.nj.gov/commit/40ba59d940c3ebebbf23c5bf538ac05878f01d97))
+- [[#188079164](https://www.pivotaltracker.com/story/show/188079164)] Show the License Status Check in Reinstatement Anytime Action ([f3794b8](https://github.com/newjersey/navigator.business.nj.gov/commit/f3794b89a80eaee51917015c5f54547555250b3f))
+- [[#188193453](https://www.pivotaltracker.com/story/show/188193453)] preserve domestic employer experience in guest mode ([9dfd102](https://github.com/newjersey/navigator.business.nj.gov/commit/9dfd102cb4838c7e381e4b75ef262b5aaecce203))
+- [[#188193453](https://www.pivotaltracker.com/story/show/188193453)] updates to Domestic Employer experience ([16093fd](https://github.com/newjersey/navigator.business.nj.gov/commit/16093fdfd2cb7745c25f14f0fa43f812e9e11a17))
 
 ## [2024.26.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.26.0...v2024.26.1) (2024-09-04)
 
-
 ### Bug Fixes
 
-* [[#188214352](https://github.com/newjersey/navigator.business.nj.gov/issues/188214352)] add migration to solve relative import issue ([9d9483d](https://github.com/newjersey/navigator.business.nj.gov/commit/9d9483db5608ee2659477ea751131a0e99929d5f))
+- [[#188214352](https://www.pivotaltracker.com/story/show/188214352)] add migration to solve relative import issue ([9d9483d](https://github.com/newjersey/navigator.business.nj.gov/commit/9d9483db5608ee2659477ea751131a0e99929d5f))
 
 # [2024.26.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.25.1...v2024.26.0) (2024-09-03)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency axios to v1.7.5 ([291f8ec](https://github.com/newjersey/navigator.business.nj.gov/commit/291f8ec5dd4a3d2d4d4d139042562537b2b8f9c4))
-* **deps:** update dependency dayjs to v1.11.13 ([37a1fb9](https://github.com/newjersey/navigator.business.nj.gov/commit/37a1fb96c1d101b8ca578c7d332a23b7d4ae9e46))
-
+- **deps:** update dependency axios to v1.7.5 ([291f8ec](https://github.com/newjersey/navigator.business.nj.gov/commit/291f8ec5dd4a3d2d4d4d139042562537b2b8f9c4))
+- **deps:** update dependency dayjs to v1.11.13 ([37a1fb9](https://github.com/newjersey/navigator.business.nj.gov/commit/37a1fb96c1d101b8ca578c7d332a23b7d4ae9e46))
 
 ### Features
 
-* [[#186879778](https://github.com/newjersey/navigator.business.nj.gov/issues/186879778)] autocheck for license data ([af39fb1](https://github.com/newjersey/navigator.business.nj.gov/commit/af39fb167a251691726cc903797798ded50e8baf))
-* [[#187792208](https://github.com/newjersey/navigator.business.nj.gov/issues/187792208)] test for new unaccounted-for essential question, and step vs steps ([94ee389](https://github.com/newjersey/navigator.business.nj.gov/commit/94ee38970d29ab03ac1ef42fd028153de16a4b7b))
-* [[#188064481](https://github.com/newjersey/navigator.business.nj.gov/issues/188064481)] Add anytime action from carnival non-essential question ([c2938aa](https://github.com/newjersey/navigator.business.nj.gov/commit/c2938aafe4090daab22747f6a7f25fcf41953a49))
-* [[#188135142](https://github.com/newjersey/navigator.business.nj.gov/issues/188135142)] Add multiple dwelling registration status check ([135902d](https://github.com/newjersey/navigator.business.nj.gov/commit/135902dd733f385e6501ebf0d2a3dd3341d172a9))
-* [[#188150760](https://github.com/newjersey/navigator.business.nj.gov/issues/188150760)] Post-formation Business Address Profile Locked & Empty State ([277748b](https://github.com/newjersey/navigator.business.nj.gov/commit/277748b810e98a9c9ec2ca4aebedd54c05e5256b))
+- [[#186879778](https://www.pivotaltracker.com/story/show/186879778)] autocheck for license data ([af39fb1](https://github.com/newjersey/navigator.business.nj.gov/commit/af39fb167a251691726cc903797798ded50e8baf))
+- [[#187792208](https://www.pivotaltracker.com/story/show/187792208)] test for new unaccounted-for essential question, and step vs steps ([94ee389](https://github.com/newjersey/navigator.business.nj.gov/commit/94ee38970d29ab03ac1ef42fd028153de16a4b7b))
+- [[#188064481](https://www.pivotaltracker.com/story/show/188064481)] Add anytime action from carnival non-essential question ([c2938aa](https://github.com/newjersey/navigator.business.nj.gov/commit/c2938aafe4090daab22747f6a7f25fcf41953a49))
+- [[#188135142](https://www.pivotaltracker.com/story/show/188135142)] Add multiple dwelling registration status check ([135902d](https://github.com/newjersey/navigator.business.nj.gov/commit/135902dd733f385e6501ebf0d2a3dd3341d172a9))
+- [[#188150760](https://www.pivotaltracker.com/story/show/188150760)] Post-formation Business Address Profile Locked & Empty State ([277748b](https://github.com/newjersey/navigator.business.nj.gov/commit/277748b810e98a9c9ec2ca4aebedd54c05e5256b))
 
 ## [2024.25.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.25.0...v2024.25.1) (2024-08-29)
 
-
 ### Bug Fixes
 
-* [[#188193473](https://github.com/newjersey/navigator.business.nj.gov/issues/188193473)] updating register-home-contractor.md copy and metadata ([f0db0ad](https://github.com/newjersey/navigator.business.nj.gov/commit/f0db0ad51b4f8bc67602213a1b6711a6ec6abe51))
+- [[#188193473](https://www.pivotaltracker.com/story/show/188193473)] updating register-home-contractor.md copy and metadata ([f0db0ad](https://github.com/newjersey/navigator.business.nj.gov/commit/f0db0ad51b4f8bc67602213a1b6711a6ec6abe51))
 
 # [2024.25.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.24.0...v2024.25.0) (2024-08-27)
 
-
 ### Bug Fixes
 
-* [[#187003755](https://github.com/newjersey/navigator.business.nj.gov/issues/187003755)] spacing between state and muni for tablet ([b0866c5](https://github.com/newjersey/navigator.business.nj.gov/commit/b0866c5e5bee8b3a530c4cee7fa1637e4639a049))
-* [[#187809299](https://github.com/newjersey/navigator.business.nj.gov/issues/187809299)] deleted now unused webflow licenses ([3740035](https://github.com/newjersey/navigator.business.nj.gov/commit/374003525c512c2177e9c085a9b3d96975388ed8))
-* [[#188117562](https://github.com/newjersey/navigator.business.nj.gov/issues/188117562)] fix license sync serialization issue ([f73cfaa](https://github.com/newjersey/navigator.business.nj.gov/commit/f73cfaa70864f8c66f5f644cdc82aa7fc8e814a8))
-* [[#188129133](https://github.com/newjersey/navigator.business.nj.gov/issues/188129133)] update env variables in testing ([7a1d221](https://github.com/newjersey/navigator.business.nj.gov/commit/7a1d2215771dda1548c18664bce7e514d677f218))
-* **deps:** update dependency axios to v1.7.4 [security] ([89c5de7](https://github.com/newjersey/navigator.business.nj.gov/commit/89c5de7b86b81922332c6d4518794e8798c56e59))
-* **deps:** update dependency remove-markdown to v0.5.2 ([13d53bd](https://github.com/newjersey/navigator.business.nj.gov/commit/13d53bdc717d54fcc78a18df9315fb05de792ac1))
-
+- [[#187003755](https://www.pivotaltracker.com/story/show/187003755)] spacing between state and muni for tablet ([b0866c5](https://github.com/newjersey/navigator.business.nj.gov/commit/b0866c5e5bee8b3a530c4cee7fa1637e4639a049))
+- [[#187809299](https://www.pivotaltracker.com/story/show/187809299)] deleted now unused webflow licenses ([3740035](https://github.com/newjersey/navigator.business.nj.gov/commit/374003525c512c2177e9c085a9b3d96975388ed8))
+- [[#188117562](https://www.pivotaltracker.com/story/show/188117562)] fix license sync serialization issue ([f73cfaa](https://github.com/newjersey/navigator.business.nj.gov/commit/f73cfaa70864f8c66f5f644cdc82aa7fc8e814a8))
+- [[#188129133](https://www.pivotaltracker.com/story/show/188129133)] update env variables in testing ([7a1d221](https://github.com/newjersey/navigator.business.nj.gov/commit/7a1d2215771dda1548c18664bce7e514d677f218))
+- **deps:** update dependency axios to v1.7.4 [security] ([89c5de7](https://github.com/newjersey/navigator.business.nj.gov/commit/89c5de7b86b81922332c6d4518794e8798c56e59))
+- **deps:** update dependency remove-markdown to v0.5.2 ([13d53bd](https://github.com/newjersey/navigator.business.nj.gov/commit/13d53bdc717d54fcc78a18df9315fb05de792ac1))
 
 ### Features
 
-* [[#187003755](https://github.com/newjersey/navigator.business.nj.gov/issues/187003755)] add full address to poppy profile ([5d6b251](https://github.com/newjersey/navigator.business.nj.gov/commit/5d6b25146a4c0dbcfd7740b1ee69349a2f45b1a1))
-* [[#187345742](https://github.com/newjersey/navigator.business.nj.gov/issues/187345742)] enable multiple licenses ([8761842](https://github.com/newjersey/navigator.business.nj.gov/commit/8761842332b62269668bea038e9aa31c1daf696f))
-* [[#187476515](https://github.com/newjersey/navigator.business.nj.gov/issues/187476515)] Implement auto update of browser in builderImage ([600f110](https://github.com/newjersey/navigator.business.nj.gov/commit/600f110ce3b9e2aea3a6277d7e08961540fdc996))
-* [[#187792208](https://github.com/newjersey/navigator.business.nj.gov/issues/187792208)] added starterkitsite map and starterkits links that skip onboarding ([fc34baf](https://github.com/newjersey/navigator.business.nj.gov/commit/fc34baf50f5dc2f6e156439a169fbb92f31cee93))
-* [[#187792208](https://github.com/newjersey/navigator.business.nj.gov/issues/187792208)] create industry specific starter kits landing pages ([f984b02](https://github.com/newjersey/navigator.business.nj.gov/commit/f984b02a1d48cbabfd5f315764d009b7595d0926))
-* [[#188117010](https://github.com/newjersey/navigator.business.nj.gov/issues/188117010)] add above linense status field in cms for calendar events and reinstatements ([2b86274](https://github.com/newjersey/navigator.business.nj.gov/commit/2b86274bb2be8cd97eb1040a70db7e68afb0bd3d))
-* [[#188121854](https://github.com/newjersey/navigator.business.nj.gov/issues/188121854)] generate dynamic site map, includes starter kits ([d42c627](https://github.com/newjersey/navigator.business.nj.gov/commit/d42c627dbc054976a723c28e5a450130d443164d))
-* adapt fundings sync to unique "expenses" circumstance ([46bd7f4](https://github.com/newjersey/navigator.business.nj.gov/commit/46bd7f4b1a38bdda2e18da675493699791daefb6))
-* prevent disabled industries from syncing to webflow ([0c60302](https://github.com/newjersey/navigator.business.nj.gov/commit/0c6030237757e5178ce2d486614611cb45a6dd2c))
+- [[#187003755](https://www.pivotaltracker.com/story/show/187003755)] add full address to poppy profile ([5d6b251](https://github.com/newjersey/navigator.business.nj.gov/commit/5d6b25146a4c0dbcfd7740b1ee69349a2f45b1a1))
+- [[#187345742](https://www.pivotaltracker.com/story/show/187345742)] enable multiple licenses ([8761842](https://github.com/newjersey/navigator.business.nj.gov/commit/8761842332b62269668bea038e9aa31c1daf696f))
+- [[#187476515](https://www.pivotaltracker.com/story/show/187476515)] Implement auto update of browser in builderImage ([600f110](https://github.com/newjersey/navigator.business.nj.gov/commit/600f110ce3b9e2aea3a6277d7e08961540fdc996))
+- [[#187792208](https://www.pivotaltracker.com/story/show/187792208)] added starterkitsite map and starterkits links that skip onboarding ([fc34baf](https://github.com/newjersey/navigator.business.nj.gov/commit/fc34baf50f5dc2f6e156439a169fbb92f31cee93))
+- [[#187792208](https://www.pivotaltracker.com/story/show/187792208)] create industry specific starter kits landing pages ([f984b02](https://github.com/newjersey/navigator.business.nj.gov/commit/f984b02a1d48cbabfd5f315764d009b7595d0926))
+- [[#188117010](https://www.pivotaltracker.com/story/show/188117010)] add above linense status field in cms for calendar events and reinstatements ([2b86274](https://github.com/newjersey/navigator.business.nj.gov/commit/2b86274bb2be8cd97eb1040a70db7e68afb0bd3d))
+- [[#188121854](https://www.pivotaltracker.com/story/show/188121854)] generate dynamic site map, includes starter kits ([d42c627](https://github.com/newjersey/navigator.business.nj.gov/commit/d42c627dbc054976a723c28e5a450130d443164d))
+- adapt fundings sync to unique "expenses" circumstance ([46bd7f4](https://github.com/newjersey/navigator.business.nj.gov/commit/46bd7f4b1a38bdda2e18da675493699791daefb6))
+- prevent disabled industries from syncing to webflow ([0c60302](https://github.com/newjersey/navigator.business.nj.gov/commit/0c6030237757e5178ce2d486614611cb45a6dd2c))
 
 # [2024.24.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.23.0...v2024.24.0) (2024-08-13)
 
-
 ### Bug Fixes
 
-* [[#188073424](https://github.com/newjersey/navigator.business.nj.gov/issues/188073424)] industryOnboardingQuestions widget ([2d763a6](https://github.com/newjersey/navigator.business.nj.gov/commit/2d763a68f75601e1944744bebab8adf91d72afc6))
-* **deps:** update dependency axios to v1.7.3 ([f5181ae](https://github.com/newjersey/navigator.business.nj.gov/commit/f5181ae6cf7f30a34ec49aca830acc274030eb34))
-
+- [[#188073424](https://www.pivotaltracker.com/story/show/188073424)] industryOnboardingQuestions widget ([2d763a6](https://github.com/newjersey/navigator.business.nj.gov/commit/2d763a68f75601e1944744bebab8adf91d72afc6))
+- **deps:** update dependency axios to v1.7.3 ([f5181ae](https://github.com/newjersey/navigator.business.nj.gov/commit/f5181ae6cf7f30a34ec49aca830acc274030eb34))
 
 ### Features
 
-* [[#187432804](https://github.com/newjersey/navigator.business.nj.gov/issues/187432804)] add sitemap.xml ([65be529](https://github.com/newjersey/navigator.business.nj.gov/commit/65be52937fcad4c8f64f32bee3ea2d4ab4cd99f5))
-* [[#187861895](https://github.com/newjersey/navigator.business.nj.gov/issues/187861895)] unify address error states ([83f9970](https://github.com/newjersey/navigator.business.nj.gov/commit/83f99705ed987f81d1cfde52e4579b26d1e69b49))
-* [[#188108319](https://github.com/newjersey/navigator.business.nj.gov/issues/188108319)] Bubble NJEDA fundings to top of For You column ([7a8f430](https://github.com/newjersey/navigator.business.nj.gov/commit/7a8f430649f7da9f8afccc8163cccb63d1b833f2))
+- [[#187432804](https://www.pivotaltracker.com/story/show/187432804)] add sitemap.xml ([65be529](https://github.com/newjersey/navigator.business.nj.gov/commit/65be52937fcad4c8f64f32bee3ea2d4ab4cd99f5))
+- [[#187861895](https://www.pivotaltracker.com/story/show/187861895)] unify address error states ([83f9970](https://github.com/newjersey/navigator.business.nj.gov/commit/83f99705ed987f81d1cfde52e4579b26d1e69b49))
+- [[#188108319](https://www.pivotaltracker.com/story/show/188108319)] Bubble NJEDA fundings to top of For You column ([7a8f430](https://github.com/newjersey/navigator.business.nj.gov/commit/7a8f430649f7da9f8afccc8163cccb63d1b833f2))
 
 # [2024.23.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.22.1...v2024.23.0) (2024-08-07)
 
-
 ### Bug Fixes
 
-* [[#187809299](https://github.com/newjersey/navigator.business.nj.gov/issues/187809299)] license and sync certification delete issues ([9f9a428](https://github.com/newjersey/navigator.business.nj.gov/commit/9f9a4287fe1e1954065c8158fd506dcb730e75e3))
-* [[#187973765](https://github.com/newjersey/navigator.business.nj.gov/issues/187973765)] potential CMS bug with callouts ([debd562](https://github.com/newjersey/navigator.business.nj.gov/commit/debd562271d859f257634f7f88b7efe04221210b))
-* [[#187978546](https://github.com/newjersey/navigator.business.nj.gov/issues/187978546)] update styling for add'l onboarding questions ([0f6e67c](https://github.com/newjersey/navigator.business.nj.gov/commit/0f6e67c80a51b54074e39764f519b55daefe066d))
-* [[#187983571](https://github.com/newjersey/navigator.business.nj.gov/issues/187983571)] remove elevator owning non-essential questions for nexus and owning users ([cbc7b56](https://github.com/newjersey/navigator.business.nj.gov/commit/cbc7b563698c71911b15402c9d87ff6055d12700))
-* [[#188073076](https://github.com/newjersey/navigator.business.nj.gov/issues/188073076)] fix flakey agencyFundingSorting tests ([ed7c818](https://github.com/newjersey/navigator.business.nj.gov/commit/ed7c818cd3470f72dfcf5421d4261f9f9aa7ba29))
-* [[#188073424](https://github.com/newjersey/navigator.business.nj.gov/issues/188073424)] industryOnboardingQuestions widget ([7d5c030](https://github.com/newjersey/navigator.business.nj.gov/commit/7d5c03023e8108a2972829e9111bdc37e78d6c8e))
-* [#[#188051113](https://github.com/newjersey/navigator.business.nj.gov/issues/188051113)] Fix flaky onboarding test ([c95a234](https://github.com/newjersey/navigator.business.nj.gov/commit/c95a234b6ad1b232815941568594b46c4ca5f153))
-* update flakey failing profile test ([5dce53b](https://github.com/newjersey/navigator.business.nj.gov/commit/5dce53b3a11fd48e494b4b5e4e123ee55edb4dd3))
-* webflow sync tests updates ([1fcfe27](https://github.com/newjersey/navigator.business.nj.gov/commit/1fcfe27360af9264b39140d982c27f41d8cf9ba1))
-
+- [[#187809299](https://www.pivotaltracker.com/story/show/187809299)] license and sync certification delete issues ([9f9a428](https://github.com/newjersey/navigator.business.nj.gov/commit/9f9a4287fe1e1954065c8158fd506dcb730e75e3))
+- [[#187973765](https://www.pivotaltracker.com/story/show/187973765)] potential CMS bug with callouts ([debd562](https://github.com/newjersey/navigator.business.nj.gov/commit/debd562271d859f257634f7f88b7efe04221210b))
+- [[#187978546](https://www.pivotaltracker.com/story/show/187978546)] update styling for add'l onboarding questions ([0f6e67c](https://github.com/newjersey/navigator.business.nj.gov/commit/0f6e67c80a51b54074e39764f519b55daefe066d))
+- [[#187983571](https://www.pivotaltracker.com/story/show/187983571)] remove elevator owning non-essential questions for nexus and owning users ([cbc7b56](https://github.com/newjersey/navigator.business.nj.gov/commit/cbc7b563698c71911b15402c9d87ff6055d12700))
+- [[#188073076](https://www.pivotaltracker.com/story/show/188073076)] fix flakey agencyFundingSorting tests ([ed7c818](https://github.com/newjersey/navigator.business.nj.gov/commit/ed7c818cd3470f72dfcf5421d4261f9f9aa7ba29))
+- [[#188073424](https://www.pivotaltracker.com/story/show/188073424)] industryOnboardingQuestions widget ([7d5c030](https://github.com/newjersey/navigator.business.nj.gov/commit/7d5c03023e8108a2972829e9111bdc37e78d6c8e))
+- [#[#188051113](https://www.pivotaltracker.com/story/show/188051113)] Fix flaky onboarding test ([c95a234](https://github.com/newjersey/navigator.business.nj.gov/commit/c95a234b6ad1b232815941568594b46c4ca5f153))
+- update flakey failing profile test ([5dce53b](https://github.com/newjersey/navigator.business.nj.gov/commit/5dce53b3a11fd48e494b4b5e4e123ee55edb4dd3))
+- webflow sync tests updates ([1fcfe27](https://github.com/newjersey/navigator.business.nj.gov/commit/1fcfe27360af9264b39140d982c27f41d8cf9ba1))
 
 ### Features
 
-* [[#186092881](https://github.com/newjersey/navigator.business.nj.gov/issues/186092881)] header banner, text lost during reflow ([35d6e00](https://github.com/newjersey/navigator.business.nj.gov/commit/35d6e0074d5c3815fd11aa26a3b15839ab150174))
-* [[#187738760](https://github.com/newjersey/navigator.business.nj.gov/issues/187738760)] button width increased on mobile ([6d12680](https://github.com/newjersey/navigator.business.nj.gov/commit/6d12680f193437fcc24edacf179267268d212838))
-* [[#187738760](https://github.com/newjersey/navigator.business.nj.gov/issues/187738760)] included LLC as legal structure for general starter kit ([969ee7f](https://github.com/newjersey/navigator.business.nj.gov/commit/969ee7f67890b7ae99d4dc6fb3b49a404150149b))
-* [[#187901632](https://github.com/newjersey/navigator.business.nj.gov/issues/187901632)] update domestic employer experience ([2ee762b](https://github.com/newjersey/navigator.business.nj.gov/commit/2ee762b2503981779551d36f45f60e6cebd1e0d2))
-* [[#188006371](https://github.com/newjersey/navigator.business.nj.gov/issues/188006371)] add housing hotel motel license status check ([e96e1ab](https://github.com/newjersey/navigator.business.nj.gov/commit/e96e1abb42991f2d7e434c8fdc38d5e7d636162b))
-* [[#188008160](https://github.com/newjersey/navigator.business.nj.gov/issues/188008160)] add weights and measures non-essential question to all industries ([368eb66](https://github.com/newjersey/navigator.business.nj.gov/commit/368eb6600e68b3c4cbaba3a79e3ceb4ad1c5c91e))
-* [[#188008303](https://github.com/newjersey/navigator.business.nj.gov/issues/188008303)] add script for analyzing email index ([6e4e79c](https://github.com/newjersey/navigator.business.nj.gov/commit/6e4e79c29d3550d026f39f6453b1f5e469ed7053))
-* [[#188029270](https://github.com/newjersey/navigator.business.nj.gov/issues/188029270)] script to update Node.js version ([c4c4817](https://github.com/newjersey/navigator.business.nj.gov/commit/c4c48173ec2d119cda5a35ebdff16687f9fda730))
-* [[#188049417](https://github.com/newjersey/navigator.business.nj.gov/issues/188049417)] Bubble investNewark fundings to top of For You column ([d323d18](https://github.com/newjersey/navigator.business.nj.gov/commit/d323d18a35c941abdd10ad22f14f1d2d994df830))
-* implement general starter kit seo landing page ([29e0e85](https://github.com/newjersey/navigator.business.nj.gov/commit/29e0e850bbe0fcf515a53c9d36c7bc42ad46054e))
+- [[#186092881](https://www.pivotaltracker.com/story/show/186092881)] header banner, text lost during reflow ([35d6e00](https://github.com/newjersey/navigator.business.nj.gov/commit/35d6e0074d5c3815fd11aa26a3b15839ab150174))
+- [[#187738760](https://www.pivotaltracker.com/story/show/187738760)] button width increased on mobile ([6d12680](https://github.com/newjersey/navigator.business.nj.gov/commit/6d12680f193437fcc24edacf179267268d212838))
+- [[#187738760](https://www.pivotaltracker.com/story/show/187738760)] included LLC as legal structure for general starter kit ([969ee7f](https://github.com/newjersey/navigator.business.nj.gov/commit/969ee7f67890b7ae99d4dc6fb3b49a404150149b))
+- [[#187901632](https://www.pivotaltracker.com/story/show/187901632)] update domestic employer experience ([2ee762b](https://github.com/newjersey/navigator.business.nj.gov/commit/2ee762b2503981779551d36f45f60e6cebd1e0d2))
+- [[#188006371](https://www.pivotaltracker.com/story/show/188006371)] add housing hotel motel license status check ([e96e1ab](https://github.com/newjersey/navigator.business.nj.gov/commit/e96e1abb42991f2d7e434c8fdc38d5e7d636162b))
+- [[#188008160](https://www.pivotaltracker.com/story/show/188008160)] add weights and measures non-essential question to all industries ([368eb66](https://github.com/newjersey/navigator.business.nj.gov/commit/368eb6600e68b3c4cbaba3a79e3ceb4ad1c5c91e))
+- [[#188008303](https://www.pivotaltracker.com/story/show/188008303)] add script for analyzing email index ([6e4e79c](https://github.com/newjersey/navigator.business.nj.gov/commit/6e4e79c29d3550d026f39f6453b1f5e469ed7053))
+- [[#188029270](https://www.pivotaltracker.com/story/show/188029270)] script to update Node.js version ([c4c4817](https://github.com/newjersey/navigator.business.nj.gov/commit/c4c48173ec2d119cda5a35ebdff16687f9fda730))
+- [[#188049417](https://www.pivotaltracker.com/story/show/188049417)] Bubble investNewark fundings to top of For You column ([d323d18](https://github.com/newjersey/navigator.business.nj.gov/commit/d323d18a35c941abdd10ad22f14f1d2d994df830))
+- implement general starter kit seo landing page ([29e0e85](https://github.com/newjersey/navigator.business.nj.gov/commit/29e0e850bbe0fcf515a53c9d36c7bc42ad46054e))
 
 ## [2024.22.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.22.0...v2024.22.1) (2024-07-30)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency dayjs to v1.11.12 ([6bfce22](https://github.com/newjersey/navigator.business.nj.gov/commit/6bfce22d48b0ea0dc9ed07424f3b2941d2c8ee59))
+- **deps:** update dependency dayjs to v1.11.12 ([6bfce22](https://github.com/newjersey/navigator.business.nj.gov/commit/6bfce22d48b0ea0dc9ed07424f3b2941d2c8ee59))
 
 # [2024.22.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.21.1...v2024.22.0) (2024-07-19)
 
-
 ### Bug Fixes
 
-* [[#186334874](https://github.com/newjersey/navigator.business.nj.gov/issues/186334874)] Formation API responses inconsistently being received/saved ([2393dc7](https://github.com/newjersey/navigator.business.nj.gov/commit/2393dc76e68bd62bc8549516436a6cb9d1176af6))
-* **deps:** update dependency axios to v1.7.2 ([6cc174c](https://github.com/newjersey/navigator.business.nj.gov/commit/6cc174ce06d1a992c85a2d5384dbd0771f372163))
-* fixes for webflow sync tests ([4115e98](https://github.com/newjersey/navigator.business.nj.gov/commit/4115e980c878ce92c437f8525d9bf286b7f3730d))
-
+- [[#186334874](https://www.pivotaltracker.com/story/show/186334874)] Formation API responses inconsistently being received/saved ([2393dc7](https://github.com/newjersey/navigator.business.nj.gov/commit/2393dc76e68bd62bc8549516436a6cb9d1176af6))
+- **deps:** update dependency axios to v1.7.2 ([6cc174c](https://github.com/newjersey/navigator.business.nj.gov/commit/6cc174ce06d1a992c85a2d5384dbd0771f372163))
+- fixes for webflow sync tests ([4115e98](https://github.com/newjersey/navigator.business.nj.gov/commit/4115e980c878ce92c437f8525d9bf286b7f3730d))
 
 ### Features
 
-* [[#187977335](https://github.com/newjersey/navigator.business.nj.gov/issues/187977335)] add municipality field to fundings and investNewark as agency source ([c66831a](https://github.com/newjersey/navigator.business.nj.gov/commit/c66831adf98dbf177869cd6c22ef023e17707468))
+- [[#187977335](https://www.pivotaltracker.com/story/show/187977335)] add municipality field to fundings and investNewark as agency source ([c66831a](https://github.com/newjersey/navigator.business.nj.gov/commit/c66831adf98dbf177869cd6c22ef023e17707468))
 
 ## [2024.21.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.21.0...v2024.21.1) (2024-07-18)
 
-
 ### Bug Fixes
 
-* [[#186334874](https://github.com/newjersey/navigator.business.nj.gov/issues/186334874)] api responses inconsistently received ([2b9308d](https://github.com/newjersey/navigator.business.nj.gov/commit/2b9308d96c25ccc9022cff1657aab15245072dbb))
+- [[#186334874](https://www.pivotaltracker.com/story/show/186334874)] api responses inconsistently received ([2b9308d](https://github.com/newjersey/navigator.business.nj.gov/commit/2b9308d96c25ccc9022cff1657aab15245072dbb))
 
 # [2024.21.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.20.0...v2024.21.0) (2024-07-16)
 
-
 ### Bug Fixes
 
-* [[#187754524](https://github.com/newjersey/navigator.business.nj.gov/issues/187754524)] update anytime action horizontal line to be aria hidden ([4e50df8](https://github.com/newjersey/navigator.business.nj.gov/commit/4e50df83c054f9a4e8e3b3ffe74624305f6deaf8))
-* [[#187934580](https://github.com/newjersey/navigator.business.nj.gov/issues/187934580)] update investNewark consent copy ([803377c](https://github.com/newjersey/navigator.business.nj.gov/commit/803377c0094539497e9f02752218e14f612aa50c))
-* update alertText copy to eliminate typo ([3935998](https://github.com/newjersey/navigator.business.nj.gov/commit/3935998833b7bcf03ae7127d10b779f84999f6c1))
-
+- [[#187754524](https://www.pivotaltracker.com/story/show/187754524)] update anytime action horizontal line to be aria hidden ([4e50df8](https://github.com/newjersey/navigator.business.nj.gov/commit/4e50df83c054f9a4e8e3b3ffe74624305f6deaf8))
+- [[#187934580](https://www.pivotaltracker.com/story/show/187934580)] update investNewark consent copy ([803377c](https://github.com/newjersey/navigator.business.nj.gov/commit/803377c0094539497e9f02752218e14f612aa50c))
+- update alertText copy to eliminate typo ([3935998](https://github.com/newjersey/navigator.business.nj.gov/commit/3935998833b7bcf03ae7127d10b779f84999f6c1))
 
 ### Features
 
-* [[#186084933](https://github.com/newjersey/navigator.business.nj.gov/issues/186084933)] onboarding step header shoudl be read a single header on IOS mobile ([a6e7b5c](https://github.com/newjersey/navigator.business.nj.gov/commit/a6e7b5cc6cf39a32a0db767c1cd32258648cbc77))
-* [[#187871332](https://github.com/newjersey/navigator.business.nj.gov/issues/187871332)] update outage bar to be sticky; refactor logo only nav bar 🗺️ ([c626eb9](https://github.com/newjersey/navigator.business.nj.gov/commit/c626eb9b0b0d5d12fbb2f51ddab3b887cd55af08))
-* [[#187871332](https://github.com/newjersey/navigator.business.nj.gov/issues/187871332)] use error dark for outage alert background 💅 ([2b91976](https://github.com/newjersey/navigator.business.nj.gov/commit/2b919766d79bd6626e4dbb8effffc6494e22ea3f))
-
+- [[#186084933](https://www.pivotaltracker.com/story/show/186084933)] onboarding step header shoudl be read a single header on IOS mobile ([a6e7b5c](https://github.com/newjersey/navigator.business.nj.gov/commit/a6e7b5cc6cf39a32a0db767c1cd32258648cbc77))
+- [[#187871332](https://www.pivotaltracker.com/story/show/187871332)] update outage bar to be sticky; refactor logo only nav bar 🗺️ ([c626eb9](https://github.com/newjersey/navigator.business.nj.gov/commit/c626eb9b0b0d5d12fbb2f51ddab3b887cd55af08))
+- [[#187871332](https://www.pivotaltracker.com/story/show/187871332)] use error dark for outage alert background 💅 ([2b91976](https://github.com/newjersey/navigator.business.nj.gov/commit/2b919766d79bd6626e4dbb8effffc6494e22ea3f))
 
 ### Reverts
 
-* Revert "Reapply "chore: temporary builder fix"" ([58b0a14](https://github.com/newjersey/navigator.business.nj.gov/commit/58b0a14ef202bbccb10457d4bbf7743d6da94221))
+- Revert "Reapply "chore: temporary builder fix"" ([58b0a14](https://github.com/newjersey/navigator.business.nj.gov/commit/58b0a14ef202bbccb10457d4bbf7743d6da94221))
 
 # [2024.20.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.19.2...v2024.20.0) (2024-07-09)
 
-
 ### Bug Fixes
 
-* [[#187780715](https://github.com/newjersey/navigator.business.nj.gov/issues/187780715)] inline errors now announce to screen reader ([8b75ba9](https://github.com/newjersey/navigator.business.nj.gov/commit/8b75ba910f6dd61c54ef8c916a818eb8848bbb62))
-* [[#187790624](https://github.com/newjersey/navigator.business.nj.gov/issues/187790624)] update Health Club dynamics licenseType and add test for non-00 rgb number ([15fad34](https://github.com/newjersey/navigator.business.nj.gov/commit/15fad3484c6485bc87842af351010808fcbf7ee9))
-* [[#187870088](https://github.com/newjersey/navigator.business.nj.gov/issues/187870088)] poppy formation business address optional ([dca9449](https://github.com/newjersey/navigator.business.nj.gov/commit/dca9449bcf607cab60fdfd6c3e88d6e9d9578163))
-* [[#187920482](https://github.com/newjersey/navigator.business.nj.gov/issues/187920482)] requests to GetFiling should be text/plain ([ba8a841](https://github.com/newjersey/navigator.business.nj.gov/commit/ba8a8416191ec314bb98f05f99496982cd1a4ba1))
-* add ContactEmail to formation API POST body ([0ce6f37](https://github.com/newjersey/navigator.business.nj.gov/commit/0ce6f377e38bf4db5ba65066901e3b7cf8e6af8a))
-* add ContactEmail to formation API POST body ([6c6808c](https://github.com/newjersey/navigator.business.nj.gov/commit/6c6808ce843e099949aa1b3dde34d47cd119f1b5))
-* design QA for myNJ logo ([0d52008](https://github.com/newjersey/navigator.business.nj.gov/commit/0d5200849c8247dd36a72779cd7163ea0c8afd2b))
-* update logic in account-setup tests to reflect content changes ([9251d1d](https://github.com/newjersey/navigator.business.nj.gov/commit/9251d1dfab218ebf203ff71bc786aeaa3617a525))
-
+- [[#187780715](https://www.pivotaltracker.com/story/show/187780715)] inline errors now announce to screen reader ([8b75ba9](https://github.com/newjersey/navigator.business.nj.gov/commit/8b75ba910f6dd61c54ef8c916a818eb8848bbb62))
+- [[#187790624](https://www.pivotaltracker.com/story/show/187790624)] update Health Club dynamics licenseType and add test for non-00 rgb number ([15fad34](https://github.com/newjersey/navigator.business.nj.gov/commit/15fad3484c6485bc87842af351010808fcbf7ee9))
+- [[#187870088](https://www.pivotaltracker.com/story/show/187870088)] poppy formation business address optional ([dca9449](https://github.com/newjersey/navigator.business.nj.gov/commit/dca9449bcf607cab60fdfd6c3e88d6e9d9578163))
+- [[#187920482](https://www.pivotaltracker.com/story/show/187920482)] requests to GetFiling should be text/plain ([ba8a841](https://github.com/newjersey/navigator.business.nj.gov/commit/ba8a8416191ec314bb98f05f99496982cd1a4ba1))
+- add ContactEmail to formation API POST body ([0ce6f37](https://github.com/newjersey/navigator.business.nj.gov/commit/0ce6f377e38bf4db5ba65066901e3b7cf8e6af8a))
+- add ContactEmail to formation API POST body ([6c6808c](https://github.com/newjersey/navigator.business.nj.gov/commit/6c6808ce843e099949aa1b3dde34d47cd119f1b5))
+- design QA for myNJ logo ([0d52008](https://github.com/newjersey/navigator.business.nj.gov/commit/0d5200849c8247dd36a72779cd7163ea0c8afd2b))
+- update logic in account-setup tests to reflect content changes ([9251d1d](https://github.com/newjersey/navigator.business.nj.gov/commit/9251d1dfab218ebf203ff71bc786aeaa3617a525))
 
 ### Features
 
-* [[#186948523](https://github.com/newjersey/navigator.business.nj.gov/issues/186948523)] Employment and Personnel Services License Status Check ([94e3143](https://github.com/newjersey/navigator.business.nj.gov/commit/94e31436bb0a8abcfc85cec2bc99bbfdb57c0a91))
-* [[#187194184](https://github.com/newjersey/navigator.business.nj.gov/issues/187194184)] add business address to existing business in profile ([c49f025](https://github.com/newjersey/navigator.business.nj.gov/commit/c49f0252deb8d521dbf422ccbd80efeedeb5d31b))
-* [[#187415906](https://github.com/newjersey/navigator.business.nj.gov/issues/187415906)] keep hide/show button inline on mobile ([73ebaf0](https://github.com/newjersey/navigator.business.nj.gov/commit/73ebaf055c1f4899fbb51c3152d2fff2bbb755b4))
-* [[#187637099](https://github.com/newjersey/navigator.business.nj.gov/issues/187637099)] update myNJ logo ([4379197](https://github.com/newjersey/navigator.business.nj.gov/commit/4379197e2e2997ec18bddd1de58e48d4b526e271))
-* [[#187708192](https://github.com/newjersey/navigator.business.nj.gov/issues/187708192)] Telemarketing license check ([5c38ad6](https://github.com/newjersey/navigator.business.nj.gov/commit/5c38ad6d23205eefd103116e20b940ff90b9244c))
-* [[#187765182](https://github.com/newjersey/navigator.business.nj.gov/issues/187765182)] add ability to prefill business location and user source from query params ([7e3c1ea](https://github.com/newjersey/navigator.business.nj.gov/commit/7e3c1eaa73853e01a7cb0fc7b782fda643cdd05a))
-* [[#187790535](https://github.com/newjersey/navigator.business.nj.gov/issues/187790535)]  enable ticket brokers and resellers license status check ([b19a163](https://github.com/newjersey/navigator.business.nj.gov/commit/b19a163449d829a9bac7d7deb982985b1d5fcead))
-* [[#187790624](https://github.com/newjersey/navigator.business.nj.gov/issues/187790624)] enable health club license status check ([36946c3](https://github.com/newjersey/navigator.business.nj.gov/commit/36946c3effd3f4fb87e5938451d4d1542901ab09))
-
+- [[#186948523](https://www.pivotaltracker.com/story/show/186948523)] Employment and Personnel Services License Status Check ([94e3143](https://github.com/newjersey/navigator.business.nj.gov/commit/94e31436bb0a8abcfc85cec2bc99bbfdb57c0a91))
+- [[#187194184](https://www.pivotaltracker.com/story/show/187194184)] add business address to existing business in profile ([c49f025](https://github.com/newjersey/navigator.business.nj.gov/commit/c49f0252deb8d521dbf422ccbd80efeedeb5d31b))
+- [[#187415906](https://www.pivotaltracker.com/story/show/187415906)] keep hide/show button inline on mobile ([73ebaf0](https://github.com/newjersey/navigator.business.nj.gov/commit/73ebaf055c1f4899fbb51c3152d2fff2bbb755b4))
+- [[#187637099](https://www.pivotaltracker.com/story/show/187637099)] update myNJ logo ([4379197](https://github.com/newjersey/navigator.business.nj.gov/commit/4379197e2e2997ec18bddd1de58e48d4b526e271))
+- [[#187708192](https://www.pivotaltracker.com/story/show/187708192)] Telemarketing license check ([5c38ad6](https://github.com/newjersey/navigator.business.nj.gov/commit/5c38ad6d23205eefd103116e20b940ff90b9244c))
+- [[#187765182](https://www.pivotaltracker.com/story/show/187765182)] add ability to prefill business location and user source from query params ([7e3c1ea](https://github.com/newjersey/navigator.business.nj.gov/commit/7e3c1eaa73853e01a7cb0fc7b782fda643cdd05a))
+- [[#187790535](https://www.pivotaltracker.com/story/show/187790535)] enable ticket brokers and resellers license status check ([b19a163](https://github.com/newjersey/navigator.business.nj.gov/commit/b19a163449d829a9bac7d7deb982985b1d5fcead))
+- [[#187790624](https://www.pivotaltracker.com/story/show/187790624)] enable health club license status check ([36946c3](https://github.com/newjersey/navigator.business.nj.gov/commit/36946c3effd3f4fb87e5938451d4d1542901ab09))
 
 ### Reverts
 
-* Revert "feat: [#187754524] move anytime actions from tiles to dropdown" ([c50f814](https://github.com/newjersey/navigator.business.nj.gov/commit/c50f814b4fe7f140faafb6d1fd6109ead39069d6)), closes [#187754524](https://github.com/newjersey/navigator.business.nj.gov/issues/187754524)
-* Revert "fix(deps): update aws-sdk" ([400e627](https://github.com/newjersey/navigator.business.nj.gov/commit/400e6275f02654be2e0943851ac9cddd10fe775e))
-* Revert "feat: [#187637099] update myNJ logo" ([110d307](https://github.com/newjersey/navigator.business.nj.gov/commit/110d3075f65561352cc0a070a12eeaf5d580440a)), closes [#187637099](https://github.com/newjersey/navigator.business.nj.gov/issues/187637099)
+- Revert "feat: [#187754524] move anytime actions from tiles to dropdown" ([c50f814](https://github.com/newjersey/navigator.business.nj.gov/commit/c50f814b4fe7f140faafb6d1fd6109ead39069d6)), closes [#187754524](https://www.pivotaltracker.com/story/show/187754524)
+- Revert "fix(deps): update aws-sdk" ([400e627](https://github.com/newjersey/navigator.business.nj.gov/commit/400e6275f02654be2e0943851ac9cddd10fe775e))
+- Revert "feat: [#187637099] update myNJ logo" ([110d307](https://github.com/newjersey/navigator.business.nj.gov/commit/110d3075f65561352cc0a070a12eeaf5d580440a)), closes [#187637099](https://www.pivotaltracker.com/story/show/187637099)
 
 ## [2024.19.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.19.1...v2024.19.2) (2024-06-27)
 
-
 ### Bug Fixes
 
-* add ContactEmail to PrepareFiling POST body ([db04b8f](https://github.com/newjersey/navigator.business.nj.gov/commit/db04b8fc5ea55438a1176dcb3b63a493a753de21))
+- add ContactEmail to PrepareFiling POST body ([db04b8f](https://github.com/newjersey/navigator.business.nj.gov/commit/db04b8fc5ea55438a1176dcb3b63a493a753de21))
 
 ## [2024.19.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.19.0...v2024.19.1) (2024-06-27)
 
-
 ### Bug Fixes
 
-* redeploy for formation API content-type changes ([32409e3](https://github.com/newjersey/navigator.business.nj.gov/commit/32409e336b1b274bf43c4fb315fd072bd14ca6b8))
+- redeploy for formation API content-type changes ([32409e3](https://github.com/newjersey/navigator.business.nj.gov/commit/32409e336b1b274bf43c4fb315fd072bd14ca6b8))
 
 # [2024.19.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.18.0...v2024.19.0) (2024-06-18)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency @smithy/node-http-handler to v2.5.0 ([75c5725](https://github.com/newjersey/navigator.business.nj.gov/commit/75c572570561d9e02f4416f469d005ae03928002))
-* **deps:** update dependency simple-oauth2 to v5.0.1 ([ca3100d](https://github.com/newjersey/navigator.business.nj.gov/commit/ca3100d3fd54dea6cdae42a64949719123dcadbe))
-
+- **deps:** update dependency @smithy/node-http-handler to v2.5.0 ([75c5725](https://github.com/newjersey/navigator.business.nj.gov/commit/75c572570561d9e02f4416f469d005ae03928002))
+- **deps:** update dependency simple-oauth2 to v5.0.1 ([ca3100d](https://github.com/newjersey/navigator.business.nj.gov/commit/ca3100d3fd54dea6cdae42a64949719123dcadbe))
 
 ### Features
 
-* [[#187166154](https://github.com/newjersey/navigator.business.nj.gov/issues/187166154)][[#187166152](https://github.com/newjersey/navigator.business.nj.gov/issues/187166152)] Cypress Out of state None of the Above desktop and mobile Tests ([082aedf](https://github.com/newjersey/navigator.business.nj.gov/commit/082aedfcf93a561e48ec73ba9bb982e593d458f5))
+- [[#187166154](https://www.pivotaltracker.com/story/show/187166154)][[#187166152](https://www.pivotaltracker.com/story/show/187166152)] Cypress Out of state None of the Above desktop and mobile Tests ([082aedf](https://github.com/newjersey/navigator.business.nj.gov/commit/082aedfcf93a561e48ec73ba9bb982e593d458f5))
 
 # [2024.18.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.17.0...v2024.18.0) (2024-06-12)
 
-
 ### Bug Fixes
 
-* [[#187652148](https://github.com/newjersey/navigator.business.nj.gov/issues/187652148)] resolved issues with see your tax due dates modals ([0bb5f2f](https://github.com/newjersey/navigator.business.nj.gov/commit/0bb5f2fab2c625622245acac3567c168e853f1dc))
-* **deps:** update dependency @types/mdast to v4.0.4 ([125f08d](https://github.com/newjersey/navigator.business.nj.gov/commit/125f08d39f0db44f2e23123c68bf2854f2bffb11))
-* **deps:** update material-ui to v5.15.19 ([e83c063](https://github.com/newjersey/navigator.business.nj.gov/commit/e83c063f25b3efae4ed728bb123280014f46b299))
-* update lower env deploys to target correct ECS clusters ([d22126c](https://github.com/newjersey/navigator.business.nj.gov/commit/d22126c5f2871526438466862c0c40010cc19dd6))
-
+- [[#187652148](https://www.pivotaltracker.com/story/show/187652148)] resolved issues with see your tax due dates modals ([0bb5f2f](https://github.com/newjersey/navigator.business.nj.gov/commit/0bb5f2fab2c625622245acac3567c168e853f1dc))
+- **deps:** update dependency @types/mdast to v4.0.4 ([125f08d](https://github.com/newjersey/navigator.business.nj.gov/commit/125f08d39f0db44f2e23123c68bf2854f2bffb11))
+- **deps:** update material-ui to v5.15.19 ([e83c063](https://github.com/newjersey/navigator.business.nj.gov/commit/e83c063f25b3efae4ed728bb123280014f46b299))
+- update lower env deploys to target correct ECS clusters ([d22126c](https://github.com/newjersey/navigator.business.nj.gov/commit/d22126c5f2871526438466862c0c40010cc19dd6))
 
 ### Features
 
-* [[#186344213](https://github.com/newjersey/navigator.business.nj.gov/issues/186344213)] removed landing carousel ([f556bce](https://github.com/newjersey/navigator.business.nj.gov/commit/f556bce3856263a5f1b73f2d526e4d4356a988b7))
-* [[#187166158](https://github.com/newjersey/navigator.business.nj.gov/issues/187166158)][[#187166156](https://github.com/newjersey/navigator.business.nj.gov/issues/187166156)] Cypress Out of state remote seller desktop and mobile Tests ([fef7566](https://github.com/newjersey/navigator.business.nj.gov/commit/fef7566f0b1a3c1f8d652b00f562da27c36279ff))
-* [[#187414334](https://github.com/newjersey/navigator.business.nj.gov/issues/187414334)] remove white fill from for you column header ([e942d23](https://github.com/newjersey/navigator.business.nj.gov/commit/e942d23609b8f7ee23ea9ec2c8376ae640306657))
-* [[#187420711](https://github.com/newjersey/navigator.business.nj.gov/issues/187420711)]: Set up both testing and content apis ([36b8ced](https://github.com/newjersey/navigator.business.nj.gov/commit/36b8ced80dae99e4184a3c84abf62fa7ef45b7a6))
-* [[#187651449](https://github.com/newjersey/navigator.business.nj.gov/issues/187651449)] remove ada-compliant from CMS and consolidate to ada ([9d30e1d](https://github.com/newjersey/navigator.business.nj.gov/commit/9d30e1d1f092ee3fc42ab850860b7f35d3de7c3f))
-* [[#187652840](https://github.com/newjersey/navigator.business.nj.gov/issues/187652840)] add hover and active states to violation button ([e0ec65c](https://github.com/newjersey/navigator.business.nj.gov/commit/e0ec65cad1f506195674b3aba142256c522b59b9))
-* [[#187662060](https://github.com/newjersey/navigator.business.nj.gov/issues/187662060)] updated locked color info for business step formation ([4cee7f0](https://github.com/newjersey/navigator.business.nj.gov/commit/4cee7f0cc0c1daeab844cb04cd5e35dc1561cd8a))
-* [[#187662060](https://github.com/newjersey/navigator.business.nj.gov/issues/187662060)] updated locked color info for business step formation to black ([0f1df8a](https://github.com/newjersey/navigator.business.nj.gov/commit/0f1df8af4185fd58f348f2a19d3ccff20d2c081a))
-* [[#187708348](https://github.com/newjersey/navigator.business.nj.gov/issues/187708348)] script to find and print contextual info links ([da2919c](https://github.com/newjersey/navigator.business.nj.gov/commit/da2919c854a5ebccfab44f843e170088c6c14f48))
+- [[#186344213](https://www.pivotaltracker.com/story/show/186344213)] removed landing carousel ([f556bce](https://github.com/newjersey/navigator.business.nj.gov/commit/f556bce3856263a5f1b73f2d526e4d4356a988b7))
+- [[#187166158](https://www.pivotaltracker.com/story/show/187166158)][[#187166156](https://www.pivotaltracker.com/story/show/187166156)] Cypress Out of state remote seller desktop and mobile Tests ([fef7566](https://github.com/newjersey/navigator.business.nj.gov/commit/fef7566f0b1a3c1f8d652b00f562da27c36279ff))
+- [[#187414334](https://www.pivotaltracker.com/story/show/187414334)] remove white fill from for you column header ([e942d23](https://github.com/newjersey/navigator.business.nj.gov/commit/e942d23609b8f7ee23ea9ec2c8376ae640306657))
+- [[#187420711](https://www.pivotaltracker.com/story/show/187420711)]: Set up both testing and content apis ([36b8ced](https://github.com/newjersey/navigator.business.nj.gov/commit/36b8ced80dae99e4184a3c84abf62fa7ef45b7a6))
+- [[#187651449](https://www.pivotaltracker.com/story/show/187651449)] remove ada-compliant from CMS and consolidate to ada ([9d30e1d](https://github.com/newjersey/navigator.business.nj.gov/commit/9d30e1d1f092ee3fc42ab850860b7f35d3de7c3f))
+- [[#187652840](https://www.pivotaltracker.com/story/show/187652840)] add hover and active states to violation button ([e0ec65c](https://github.com/newjersey/navigator.business.nj.gov/commit/e0ec65cad1f506195674b3aba142256c522b59b9))
+- [[#187662060](https://www.pivotaltracker.com/story/show/187662060)] updated locked color info for business step formation ([4cee7f0](https://github.com/newjersey/navigator.business.nj.gov/commit/4cee7f0cc0c1daeab844cb04cd5e35dc1561cd8a))
+- [[#187662060](https://www.pivotaltracker.com/story/show/187662060)] updated locked color info for business step formation to black ([0f1df8a](https://github.com/newjersey/navigator.business.nj.gov/commit/0f1df8af4185fd58f348f2a19d3ccff20d2c081a))
+- [[#187708348](https://www.pivotaltracker.com/story/show/187708348)] script to find and print contextual info links ([da2919c](https://github.com/newjersey/navigator.business.nj.gov/commit/da2919c854a5ebccfab44f843e170088c6c14f48))
 
 # [2024.17.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.16.0...v2024.17.0) (2024-05-29)
 
-
 ### Bug Fixes
 
-* [[#187636181](https://github.com/newjersey/navigator.business.nj.gov/issues/187636181)] synchronize migration and userData for interstate moving and logistics ([e21e025](https://github.com/newjersey/navigator.business.nj.gov/commit/e21e0253f4a137fd2516ef45ab01251f0304cc46))
-* [[#187642582](https://github.com/newjersey/navigator.business.nj.gov/issues/187642582)] move multiple dwelling and ticket broker to license tasks ([2d641f3](https://github.com/newjersey/navigator.business.nj.gov/commit/2d641f378feefc63f41cfdb2e4a2e89f7ae027c2))
-* additional callout code fixes ([51bcd14](https://github.com/newjersey/navigator.business.nj.gov/commit/51bcd14c6c9f77e399c37a55ca5d78edff8e8a3b))
-* callout code cleanup [skip ci] ([370d972](https://github.com/newjersey/navigator.business.nj.gov/commit/370d972f7e3cfff2a84cf2196eb446be4ec20212))
-* hotfixes for callout content ([9786998](https://github.com/newjersey/navigator.business.nj.gov/commit/97869980ef036a9b145f97ad8e59681be2fc5abc))
-* hotfixes for callouts ([033e4b3](https://github.com/newjersey/navigator.business.nj.gov/commit/033e4b3f9a312e4885a01308d36b4ef19b070906))
-
+- [[#187636181](https://www.pivotaltracker.com/story/show/187636181)] synchronize migration and userData for interstate moving and logistics ([e21e025](https://github.com/newjersey/navigator.business.nj.gov/commit/e21e0253f4a137fd2516ef45ab01251f0304cc46))
+- [[#187642582](https://www.pivotaltracker.com/story/show/187642582)] move multiple dwelling and ticket broker to license tasks ([2d641f3](https://github.com/newjersey/navigator.business.nj.gov/commit/2d641f378feefc63f41cfdb2e4a2e89f7ae027c2))
+- additional callout code fixes ([51bcd14](https://github.com/newjersey/navigator.business.nj.gov/commit/51bcd14c6c9f77e399c37a55ca5d78edff8e8a3b))
+- callout code cleanup [skip ci] ([370d972](https://github.com/newjersey/navigator.business.nj.gov/commit/370d972f7e3cfff2a84cf2196eb446be4ec20212))
+- hotfixes for callout content ([9786998](https://github.com/newjersey/navigator.business.nj.gov/commit/97869980ef036a9b145f97ad8e59681be2fc5abc))
+- hotfixes for callouts ([033e4b3](https://github.com/newjersey/navigator.business.nj.gov/commit/033e4b3f9a312e4885a01308d36b4ef19b070906))
 
 ### Features
 
-* [[#185159231](https://github.com/newjersey/navigator.business.nj.gov/issues/185159231)] Renovation Task Conditional CTA display logic ([fdfc17b](https://github.com/newjersey/navigator.business.nj.gov/commit/fdfc17be6e58aebb8650b03fc42762a48cc4696f))
-* [[#187399321](https://github.com/newjersey/navigator.business.nj.gov/issues/187399321)] remove green box components ([78829a1](https://github.com/newjersey/navigator.business.nj.gov/commit/78829a1b00856f78649f4d2cc1486ec949a10c5a))
-* [[#187404989](https://github.com/newjersey/navigator.business.nj.gov/issues/187404989)] removed post onboarding ([1e5b65d](https://github.com/newjersey/navigator.business.nj.gov/commit/1e5b65d9cf89127759c4945770f8bdad70256466))
-* [[#187611792](https://github.com/newjersey/navigator.business.nj.gov/issues/187611792)] enable public accountant license ([4660485](https://github.com/newjersey/navigator.business.nj.gov/commit/46604856b68eb79d0bd3b24a322b07ed21fd85ff))
-* [[#187611847](https://github.com/newjersey/navigator.business.nj.gov/issues/187611847)] enable landscape architecture license ([e40d3e8](https://github.com/newjersey/navigator.business.nj.gov/commit/e40d3e8f84f7fb2eb713a4c1816e2270f7e50eef))
+- [[#185159231](https://www.pivotaltracker.com/story/show/185159231)] Renovation Task Conditional CTA display logic ([fdfc17b](https://github.com/newjersey/navigator.business.nj.gov/commit/fdfc17be6e58aebb8650b03fc42762a48cc4696f))
+- [[#187399321](https://www.pivotaltracker.com/story/show/187399321)] remove green box components ([78829a1](https://github.com/newjersey/navigator.business.nj.gov/commit/78829a1b00856f78649f4d2cc1486ec949a10c5a))
+- [[#187404989](https://www.pivotaltracker.com/story/show/187404989)] removed post onboarding ([1e5b65d](https://github.com/newjersey/navigator.business.nj.gov/commit/1e5b65d9cf89127759c4945770f8bdad70256466))
+- [[#187611792](https://www.pivotaltracker.com/story/show/187611792)] enable public accountant license ([4660485](https://github.com/newjersey/navigator.business.nj.gov/commit/46604856b68eb79d0bd3b24a322b07ed21fd85ff))
+- [[#187611847](https://www.pivotaltracker.com/story/show/187611847)] enable landscape architecture license ([e40d3e8](https://github.com/newjersey/navigator.business.nj.gov/commit/e40d3e8f84f7fb2eb713a4c1816e2270f7e50eef))
 
 # [2024.16.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.15.1...v2024.16.0) (2024-05-21)
 
-
 ### Bug Fixes
 
-* [[#187553558](https://github.com/newjersey/navigator.business.nj.gov/issues/187553558)] Remove elevator feature flag ([53d4352](https://github.com/newjersey/navigator.business.nj.gov/commit/53d4352550892f34d152b6e56d89f08b12dac150))
-* **deps:** update dependency dayjs to v1.11.11 ([ab56f9e](https://github.com/newjersey/navigator.business.nj.gov/commit/ab56f9e58d5982b84963329c05e2cea2263e56d9))
-* **deps:** update material-ui to v5.15.16 ([f432e65](https://github.com/newjersey/navigator.business.nj.gov/commit/f432e65a4fed1aadb9f07fc9eab14d9ea1588e2e))
-
+- [[#187553558](https://www.pivotaltracker.com/story/show/187553558)] Remove elevator feature flag ([53d4352](https://github.com/newjersey/navigator.business.nj.gov/commit/53d4352550892f34d152b6e56d89f08b12dac150))
+- **deps:** update dependency dayjs to v1.11.11 ([ab56f9e](https://github.com/newjersey/navigator.business.nj.gov/commit/ab56f9e58d5982b84963329c05e2cea2263e56d9))
+- **deps:** update material-ui to v5.15.16 ([f432e65](https://github.com/newjersey/navigator.business.nj.gov/commit/f432e65a4fed1aadb9f07fc9eab14d9ea1588e2e))
 
 ### Features
 
-* [[#186897265](https://github.com/newjersey/navigator.business.nj.gov/issues/186897265)]change registered agent office from dropdown to field text ([319bdd3](https://github.com/newjersey/navigator.business.nj.gov/commit/319bdd34425713e7b83dff2a0a55efb8433c59ae))
-* [[#187166165](https://github.com/newjersey/navigator.business.nj.gov/issues/187166165)][[#187166161](https://github.com/newjersey/navigator.business.nj.gov/issues/187166161)] Cypress Out of state remote worker desktop and mobile Tests ([b5bc20f](https://github.com/newjersey/navigator.business.nj.gov/commit/b5bc20f1ee44977282599d0f30620a7972ace2eb))
-* [[#187166172](https://github.com/newjersey/navigator.business.nj.gov/issues/187166172)] [[#187166170](https://github.com/newjersey/navigator.business.nj.gov/issues/187166170)] Desktop and Mobile onboarding Cypress tests for Nexus ([a346a83](https://github.com/newjersey/navigator.business.nj.gov/commit/a346a835a0b63e0efb7b93dba200bfc4f35b73bd))
-* [[#187414490](https://github.com/newjersey/navigator.business.nj.gov/issues/187414490)] fix spacing of step component in roadmap section of dashboard ([e643bbf](https://github.com/newjersey/navigator.business.nj.gov/commit/e643bbf30f283a1932a9eeef7b758bc2ca486930))
-* [[#187500691](https://github.com/newjersey/navigator.business.nj.gov/issues/187500691)] updated file/id, homemaker-home-health-aide/health-care-services-firm-renewal ([facf25e](https://github.com/newjersey/navigator.business.nj.gov/commit/facf25e85380eaa9b2588f601f0ee9aaf52d966b))
-* [[#187553558](https://github.com/newjersey/navigator.business.nj.gov/issues/187553558)] add elevator violations card to dashboard if needed ([d97bfb4](https://github.com/newjersey/navigator.business.nj.gov/commit/d97bfb4daa4b2b0684c4d9b57c7e0a761e0e5b2a))
+- [[#186897265](https://www.pivotaltracker.com/story/show/186897265)]change registered agent office from dropdown to field text ([319bdd3](https://github.com/newjersey/navigator.business.nj.gov/commit/319bdd34425713e7b83dff2a0a55efb8433c59ae))
+- [[#187166165](https://www.pivotaltracker.com/story/show/187166165)][[#187166161](https://www.pivotaltracker.com/story/show/187166161)] Cypress Out of state remote worker desktop and mobile Tests ([b5bc20f](https://github.com/newjersey/navigator.business.nj.gov/commit/b5bc20f1ee44977282599d0f30620a7972ace2eb))
+- [[#187166172](https://www.pivotaltracker.com/story/show/187166172)] [[#187166170](https://www.pivotaltracker.com/story/show/187166170)] Desktop and Mobile onboarding Cypress tests for Nexus ([a346a83](https://github.com/newjersey/navigator.business.nj.gov/commit/a346a835a0b63e0efb7b93dba200bfc4f35b73bd))
+- [[#187414490](https://www.pivotaltracker.com/story/show/187414490)] fix spacing of step component in roadmap section of dashboard ([e643bbf](https://github.com/newjersey/navigator.business.nj.gov/commit/e643bbf30f283a1932a9eeef7b758bc2ca486930))
+- [[#187500691](https://www.pivotaltracker.com/story/show/187500691)] updated file/id, homemaker-home-health-aide/health-care-services-firm-renewal ([facf25e](https://github.com/newjersey/navigator.business.nj.gov/commit/facf25e85380eaa9b2588f601f0ee9aaf52d966b))
+- [[#187553558](https://www.pivotaltracker.com/story/show/187553558)] add elevator violations card to dashboard if needed ([d97bfb4](https://github.com/newjersey/navigator.business.nj.gov/commit/d97bfb4daa4b2b0684c4d9b57c7e0a761e0e5b2a))
 
 ## [2024.15.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.15.0...v2024.15.1) (2024-05-06)
 
-
 ### Bug Fixes
 
-* [[#187554142](https://github.com/newjersey/navigator.business.nj.gov/issues/187554142)] extra close-bolding in json markdown ([220d515](https://github.com/newjersey/navigator.business.nj.gov/commit/220d5159cc4ec1732fff3b2b5c5210eb333d0d8f))
-* **deps:** update dependency @emotion/styled to v11.11.5 ([3cc73a2](https://github.com/newjersey/navigator.business.nj.gov/commit/3cc73a2c5761e8f4e314b9cebbe8e77bac75c64f))
+- [[#187554142](https://www.pivotaltracker.com/story/show/187554142)] extra close-bolding in json markdown ([220d515](https://github.com/newjersey/navigator.business.nj.gov/commit/220d5159cc4ec1732fff3b2b5c5210eb333d0d8f))
+- **deps:** update dependency @emotion/styled to v11.11.5 ([3cc73a2](https://github.com/newjersey/navigator.business.nj.gov/commit/3cc73a2c5761e8f4e314b9cebbe8e77bac75c64f))
 
 # [2024.15.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.14.0...v2024.15.0) (2024-05-01)
 
-
 ### Bug Fixes
 
-* [[#187263740](https://github.com/newjersey/navigator.business.nj.gov/issues/187263740)] display one notRegistered/notRegisteredExisting card in for you section ([8cec9a2](https://github.com/newjersey/navigator.business.nj.gov/commit/8cec9a28083b9d730b79691db39a6ac9efad3b86))
-* [[#187263740](https://github.com/newjersey/navigator.business.nj.gov/issues/187263740)] update dashboard URL in onboarding-as Cypress tests ([fb92a43](https://github.com/newjersey/navigator.business.nj.gov/commit/fb92a43518f3432186152166b9580e02f100bfac))
-* [[#187432057](https://github.com/newjersey/navigator.business.nj.gov/issues/187432057)] manually build industry sync industries and fix license sync filepath ([2ea0cf6](https://github.com/newjersey/navigator.business.nj.gov/commit/2ea0cf6311f87452098f18d223c5df2230061976))
-* [[#187532028](https://github.com/newjersey/navigator.business.nj.gov/issues/187532028)] restore new-home-builder-license to CMS ([76c8046](https://github.com/newjersey/navigator.business.nj.gov/commit/76c80461fdaef69d0e9c276a54e022ed4674041b))
-
+- [[#187263740](https://www.pivotaltracker.com/story/show/187263740)] display one notRegistered/notRegisteredExisting card in for you section ([8cec9a2](https://github.com/newjersey/navigator.business.nj.gov/commit/8cec9a28083b9d730b79691db39a6ac9efad3b86))
+- [[#187263740](https://www.pivotaltracker.com/story/show/187263740)] update dashboard URL in onboarding-as Cypress tests ([fb92a43](https://github.com/newjersey/navigator.business.nj.gov/commit/fb92a43518f3432186152166b9580e02f100bfac))
+- [[#187432057](https://www.pivotaltracker.com/story/show/187432057)] manually build industry sync industries and fix license sync filepath ([2ea0cf6](https://github.com/newjersey/navigator.business.nj.gov/commit/2ea0cf6311f87452098f18d223c5df2230061976))
+- [[#187532028](https://www.pivotaltracker.com/story/show/187532028)] restore new-home-builder-license to CMS ([76c8046](https://github.com/newjersey/navigator.business.nj.gov/commit/76c80461fdaef69d0e9c276a54e022ed4674041b))
 
 ### Features
 
-* [[#187263740](https://github.com/newjersey/navigator.business.nj.gov/issues/187263740)] save-your-progress-snackbar-link-update ([832728f](https://github.com/newjersey/navigator.business.nj.gov/commit/832728f3d6ed3943a3bf15fabc0c29ec32613894))
-* [[#187485886](https://github.com/newjersey/navigator.business.nj.gov/issues/187485886)] save and retrieve community affairs address on elevator registration task ([d47b47e](https://github.com/newjersey/navigator.business.nj.gov/commit/d47b47ef392e7e2a7b8ca50e59f817b9f3005eef))
+- [[#187263740](https://www.pivotaltracker.com/story/show/187263740)] save-your-progress-snackbar-link-update ([832728f](https://github.com/newjersey/navigator.business.nj.gov/commit/832728f3d6ed3943a3bf15fabc0c29ec32613894))
+- [[#187485886](https://www.pivotaltracker.com/story/show/187485886)] save and retrieve community affairs address on elevator registration task ([d47b47e](https://github.com/newjersey/navigator.business.nj.gov/commit/d47b47ef392e7e2a7b8ca50e59f817b9f3005eef))
 
 # [2024.14.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.13.0...v2024.14.0) (2024-04-25)
 
-
 ### Bug Fixes
 
-* [[#186665645](https://github.com/newjersey/navigator.business.nj.gov/issues/186665645)] revert health apis to normal ([a1b96f6](https://github.com/newjersey/navigator.business.nj.gov/commit/a1b96f61fc58642e782d3a6d65d70df64cd89cb5))
-* [[#187450950](https://github.com/newjersey/navigator.business.nj.gov/issues/187450950)] align calendar icon ([83d5f35](https://github.com/newjersey/navigator.business.nj.gov/commit/83d5f3549e5f2430f573ffe794ca28830391294a))
-* [[#187464224](https://github.com/newjersey/navigator.business.nj.gov/issues/187464224)] fix construction onboarding ([57fd21c](https://github.com/newjersey/navigator.business.nj.gov/commit/57fd21c0993db0281147fb37e43d12f58c4a7727))
-* **deps:** update dependency axios to v1.6.8 ([8337757](https://github.com/newjersey/navigator.business.nj.gov/commit/83377577cbc8ce4f2fdd56c66e030b1fe94a197d))
-* **deps:** update dependency dedent to v1.5.3 ([2dcaf22](https://github.com/newjersey/navigator.business.nj.gov/commit/2dcaf2269976ed23a0f0b85e125bb7ebb708c63e))
-* **deps:** update material-ui ([888f8a4](https://github.com/newjersey/navigator.business.nj.gov/commit/888f8a4ed95e0ed2cc3a2a7660812a092af698ae))
-
+- [[#186665645](https://www.pivotaltracker.com/story/show/186665645)] revert health apis to normal ([a1b96f6](https://github.com/newjersey/navigator.business.nj.gov/commit/a1b96f61fc58642e782d3a6d65d70df64cd89cb5))
+- [[#187450950](https://www.pivotaltracker.com/story/show/187450950)] align calendar icon ([83d5f35](https://github.com/newjersey/navigator.business.nj.gov/commit/83d5f3549e5f2430f573ffe794ca28830391294a))
+- [[#187464224](https://www.pivotaltracker.com/story/show/187464224)] fix construction onboarding ([57fd21c](https://github.com/newjersey/navigator.business.nj.gov/commit/57fd21c0993db0281147fb37e43d12f58c4a7727))
+- **deps:** update dependency axios to v1.6.8 ([8337757](https://github.com/newjersey/navigator.business.nj.gov/commit/83377577cbc8ce4f2fdd56c66e030b1fe94a197d))
+- **deps:** update dependency dedent to v1.5.3 ([2dcaf22](https://github.com/newjersey/navigator.business.nj.gov/commit/2dcaf2269976ed23a0f0b85e125bb7ebb708c63e))
+- **deps:** update material-ui ([888f8a4](https://github.com/newjersey/navigator.business.nj.gov/commit/888f8a4ed95e0ed2cc3a2a7660812a092af698ae))
 
 ### Features
 
-* [[#186001930](https://github.com/newjersey/navigator.business.nj.gov/issues/186001930)] fix profile page structure ([ebc2b09](https://github.com/newjersey/navigator.business.nj.gov/commit/ebc2b09f36b9771b9cc7a8834b9d7741fa9a46d9))
-* [[#186316063](https://github.com/newjersey/navigator.business.nj.gov/issues/186316063)] revisions to account for the csae where we want a snackbar after page redirect ([6c36523](https://github.com/newjersey/navigator.business.nj.gov/commit/6c3652318eb3aa28f8e9e32782c52d618d942928))
-* [[#187287420](https://github.com/newjersey/navigator.business.nj.gov/issues/187287420)] Unpublished the navigator/welcome page ([30b8a3c](https://github.com/newjersey/navigator.business.nj.gov/commit/30b8a3c4330dc59b36e76ca35816bac4261de455))
-* [[#187315911](https://github.com/newjersey/navigator.business.nj.gov/issues/187315911)] updated filenames / ID's of the public-accountant-license / license-accounting ([6a2bb01](https://github.com/newjersey/navigator.business.nj.gov/commit/6a2bb017fe4e58890e6353964452ef78878d4bb4))
-* [[#187423161](https://github.com/newjersey/navigator.business.nj.gov/issues/187423161)] return first matching license from Dynamics API ([dd77cd9](https://github.com/newjersey/navigator.business.nj.gov/commit/dd77cd9ac2b0260253468aca8053615b40acf4ee))
-* [[#187440151](https://github.com/newjersey/navigator.business.nj.gov/issues/187440151)] update elevator registration task to use municipality in search ([8d9c6ed](https://github.com/newjersey/navigator.business.nj.gov/commit/8d9c6ed53bc0d517534947c6c443b1305df8d93e))
-* [[#187458827](https://github.com/newjersey/navigator.business.nj.gov/issues/187458827)] update save NJ Tax ID error state ([2d651a6](https://github.com/newjersey/navigator.business.nj.gov/commit/2d651a6bb9ce28e960945c141c328c3825a59630))
-* [[#187464224](https://github.com/newjersey/navigator.business.nj.gov/issues/187464224)] add essential questions for construction onboarding ([68bfeca](https://github.com/newjersey/navigator.business.nj.gov/commit/68bfeca1b1b1c8c22f0b85a2141b45aeab8547dc))
-* [[#187476824](https://github.com/newjersey/navigator.business.nj.gov/issues/187476824)] profile side navigation doesn't shrink to wrap ([b41e689](https://github.com/newjersey/navigator.business.nj.gov/commit/b41e6897d15d190848dd96a22704dbd4b43a7747))
-* [[#187476824](https://github.com/newjersey/navigator.business.nj.gov/issues/187476824)] profile side navigation doesn't shrink when wrapped around ([f2a00ce](https://github.com/newjersey/navigator.business.nj.gov/commit/f2a00ce1458278589483eb7baada7df425713eb9))
-* [[#187476824](https://github.com/newjersey/navigator.business.nj.gov/issues/187476824)] profile side navigation wraps when bolded ([6c05edd](https://github.com/newjersey/navigator.business.nj.gov/commit/6c05edddf1c4bacf81759fd88c8d8b78094250ff))
+- [[#186001930](https://www.pivotaltracker.com/story/show/186001930)] fix profile page structure ([ebc2b09](https://github.com/newjersey/navigator.business.nj.gov/commit/ebc2b09f36b9771b9cc7a8834b9d7741fa9a46d9))
+- [[#186316063](https://www.pivotaltracker.com/story/show/186316063)] revisions to account for the csae where we want a snackbar after page redirect ([6c36523](https://github.com/newjersey/navigator.business.nj.gov/commit/6c3652318eb3aa28f8e9e32782c52d618d942928))
+- [[#187287420](https://www.pivotaltracker.com/story/show/187287420)] Unpublished the navigator/welcome page ([30b8a3c](https://github.com/newjersey/navigator.business.nj.gov/commit/30b8a3c4330dc59b36e76ca35816bac4261de455))
+- [[#187315911](https://www.pivotaltracker.com/story/show/187315911)] updated filenames / ID's of the public-accountant-license / license-accounting ([6a2bb01](https://github.com/newjersey/navigator.business.nj.gov/commit/6a2bb017fe4e58890e6353964452ef78878d4bb4))
+- [[#187423161](https://www.pivotaltracker.com/story/show/187423161)] return first matching license from Dynamics API ([dd77cd9](https://github.com/newjersey/navigator.business.nj.gov/commit/dd77cd9ac2b0260253468aca8053615b40acf4ee))
+- [[#187440151](https://www.pivotaltracker.com/story/show/187440151)] update elevator registration task to use municipality in search ([8d9c6ed](https://github.com/newjersey/navigator.business.nj.gov/commit/8d9c6ed53bc0d517534947c6c443b1305df8d93e))
+- [[#187458827](https://www.pivotaltracker.com/story/show/187458827)] update save NJ Tax ID error state ([2d651a6](https://github.com/newjersey/navigator.business.nj.gov/commit/2d651a6bb9ce28e960945c141c328c3825a59630))
+- [[#187464224](https://www.pivotaltracker.com/story/show/187464224)] add essential questions for construction onboarding ([68bfeca](https://github.com/newjersey/navigator.business.nj.gov/commit/68bfeca1b1b1c8c22f0b85a2141b45aeab8547dc))
+- [[#187476824](https://www.pivotaltracker.com/story/show/187476824)] profile side navigation doesn't shrink to wrap ([b41e689](https://github.com/newjersey/navigator.business.nj.gov/commit/b41e6897d15d190848dd96a22704dbd4b43a7747))
+- [[#187476824](https://www.pivotaltracker.com/story/show/187476824)] profile side navigation doesn't shrink when wrapped around ([f2a00ce](https://github.com/newjersey/navigator.business.nj.gov/commit/f2a00ce1458278589483eb7baada7df425713eb9))
+- [[#187476824](https://www.pivotaltracker.com/story/show/187476824)] profile side navigation wraps when bolded ([6c05edd](https://github.com/newjersey/navigator.business.nj.gov/commit/6c05edddf1c4bacf81759fd88c8d8b78094250ff))
 
 # [2024.13.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.12.0...v2024.13.0) (2024-04-12)
 
-
 ### Bug Fixes
 
-* [[#187354337](https://github.com/newjersey/navigator.business.nj.gov/issues/187354337)] add reference to CMS additions documentation in PR template ([0674ed1](https://github.com/newjersey/navigator.business.nj.gov/commit/0674ed101b82d725dbfb4261510a24293989dba7))
-* [[#187354337](https://github.com/newjersey/navigator.business.nj.gov/issues/187354337)] match content from elevator registration task ([f8bd3a8](https://github.com/newjersey/navigator.business.nj.gov/commit/f8bd3a8cdbc338d7f4026d45a95f06ea37a0fe35))
-* [[#187380461](https://github.com/newjersey/navigator.business.nj.gov/issues/187380461)] restore elevator registration task to cms ([c3d9a38](https://github.com/newjersey/navigator.business.nj.gov/commit/c3d9a3834f0f5081c6597e6f34269703ce8b96f3))
-* change formation test to reference current date in NJ ([f16711a](https://github.com/newjersey/navigator.business.nj.gov/commit/f16711ad64debf910433250942dc97abebb44827))
-* downgrading testing library ([8193b89](https://github.com/newjersey/navigator.business.nj.gov/commit/8193b89dd5c6d0650cc5befd7dabd6d838a0c7ae))
-* failing unit tests related to hardcoded formationDate ([f405b2c](https://github.com/newjersey/navigator.business.nj.gov/commit/f405b2c56c750da1b8f59c8fa4146344b94b77c5))
-* remove process.exit from healthCheck.ts ([045b080](https://github.com/newjersey/navigator.business.nj.gov/commit/045b0806726a00985bb9d31434604a804aa993cb))
-
+- [[#187354337](https://www.pivotaltracker.com/story/show/187354337)] add reference to CMS additions documentation in PR template ([0674ed1](https://github.com/newjersey/navigator.business.nj.gov/commit/0674ed101b82d725dbfb4261510a24293989dba7))
+- [[#187354337](https://www.pivotaltracker.com/story/show/187354337)] match content from elevator registration task ([f8bd3a8](https://github.com/newjersey/navigator.business.nj.gov/commit/f8bd3a8cdbc338d7f4026d45a95f06ea37a0fe35))
+- [[#187380461](https://www.pivotaltracker.com/story/show/187380461)] restore elevator registration task to cms ([c3d9a38](https://github.com/newjersey/navigator.business.nj.gov/commit/c3d9a3834f0f5081c6597e6f34269703ce8b96f3))
+- change formation test to reference current date in NJ ([f16711a](https://github.com/newjersey/navigator.business.nj.gov/commit/f16711ad64debf910433250942dc97abebb44827))
+- downgrading testing library ([8193b89](https://github.com/newjersey/navigator.business.nj.gov/commit/8193b89dd5c6d0650cc5befd7dabd6d838a0c7ae))
+- failing unit tests related to hardcoded formationDate ([f405b2c](https://github.com/newjersey/navigator.business.nj.gov/commit/f405b2c56c750da1b8f59c8fa4146344b94b77c5))
+- remove process.exit from healthCheck.ts ([045b080](https://github.com/newjersey/navigator.business.nj.gov/commit/045b0806726a00985bb9d31434604a804aa993cb))
 
 ### Features
 
-* [[#186003964](https://github.com/newjersey/navigator.business.nj.gov/issues/186003964)] fixed scss selectors selecting all h3's isntead of just particualr ones ([ffb3c53](https://github.com/newjersey/navigator.business.nj.gov/commit/ffb3c53cdd76e8f9e0167fb4a8365954e6f026f0))
-* [[#186003964](https://github.com/newjersey/navigator.business.nj.gov/issues/186003964)] home page support card headers are 1 header line ([92550ac](https://github.com/newjersey/navigator.business.nj.gov/commit/92550acc0eddc48c045144a52d8b5bab97efc253))
-* [[#186004286](https://github.com/newjersey/navigator.business.nj.gov/issues/186004286)] update heading structure on dashboard ([38aa18d](https://github.com/newjersey/navigator.business.nj.gov/commit/38aa18d734211e78481bb5051a911ac75af99194))
-* [[#186316063](https://github.com/newjersey/navigator.business.nj.gov/issues/186316063)] Task Status Checkbox Alert Announcement ([c430c69](https://github.com/newjersey/navigator.business.nj.gov/commit/c430c69e4971ecddd629128d8bd13ff09467c2ab))
-* [[#187166173](https://github.com/newjersey/navigator.business.nj.gov/issues/187166173)] Cypress Existing Business Mobile Tests ([9e500a8](https://github.com/newjersey/navigator.business.nj.gov/commit/9e500a8489c2408a334575ff4743db4c8b8336b8))
-* [[#187200130](https://github.com/newjersey/navigator.business.nj.gov/issues/187200130)] [[#187200069](https://github.com/newjersey/navigator.business.nj.gov/issues/187200069)] [[#187200176](https://github.com/newjersey/navigator.business.nj.gov/issues/187200176)] [[#187200152](https://github.com/newjersey/navigator.business.nj.gov/issues/187200152)] add callout widget ([bf780b6](https://github.com/newjersey/navigator.business.nj.gov/commit/bf780b6e66188707a947b88875a7ccfd42421b2f))
-* [[#187354337](https://github.com/newjersey/navigator.business.nj.gov/issues/187354337)] use cards for elevator registration task ([2a4a960](https://github.com/newjersey/navigator.business.nj.gov/commit/2a4a960fd66dedc6026c0772019142027228b28f))
+- [[#186003964](https://www.pivotaltracker.com/story/show/186003964)] fixed scss selectors selecting all h3's isntead of just particualr ones ([ffb3c53](https://github.com/newjersey/navigator.business.nj.gov/commit/ffb3c53cdd76e8f9e0167fb4a8365954e6f026f0))
+- [[#186003964](https://www.pivotaltracker.com/story/show/186003964)] home page support card headers are 1 header line ([92550ac](https://github.com/newjersey/navigator.business.nj.gov/commit/92550acc0eddc48c045144a52d8b5bab97efc253))
+- [[#186004286](https://www.pivotaltracker.com/story/show/186004286)] update heading structure on dashboard ([38aa18d](https://github.com/newjersey/navigator.business.nj.gov/commit/38aa18d734211e78481bb5051a911ac75af99194))
+- [[#186316063](https://www.pivotaltracker.com/story/show/186316063)] Task Status Checkbox Alert Announcement ([c430c69](https://github.com/newjersey/navigator.business.nj.gov/commit/c430c69e4971ecddd629128d8bd13ff09467c2ab))
+- [[#187166173](https://www.pivotaltracker.com/story/show/187166173)] Cypress Existing Business Mobile Tests ([9e500a8](https://github.com/newjersey/navigator.business.nj.gov/commit/9e500a8489c2408a334575ff4743db4c8b8336b8))
+- [[#187200130](https://www.pivotaltracker.com/story/show/187200130)] [[#187200069](https://www.pivotaltracker.com/story/show/187200069)] [[#187200176](https://www.pivotaltracker.com/story/show/187200176)] [[#187200152](https://www.pivotaltracker.com/story/show/187200152)] add callout widget ([bf780b6](https://github.com/newjersey/navigator.business.nj.gov/commit/bf780b6e66188707a947b88875a7ccfd42421b2f))
+- [[#187354337](https://www.pivotaltracker.com/story/show/187354337)] use cards for elevator registration task ([2a4a960](https://github.com/newjersey/navigator.business.nj.gov/commit/2a4a960fd66dedc6026c0772019142027228b28f))
 
 # [2024.12.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.11.0...v2024.12.0) (2024-04-03)
 
-
 ### Bug Fixes
 
-* [[#186665645](https://github.com/newjersey/navigator.business.nj.gov/issues/186665645)] aws healthcheck lambda policy ([e7ac693](https://github.com/newjersey/navigator.business.nj.gov/commit/e7ac69377358e6e2869fe84699ac699f7823d0b6))
-* [[#187315826](https://github.com/newjersey/navigator.business.nj.gov/issues/187315826)] fix duplicate acct tasks ([6f48494](https://github.com/newjersey/navigator.business.nj.gov/commit/6f48494e81d5050d10e5425b2705d30647afb36e))
-* [[#187357115](https://github.com/newjersey/navigator.business.nj.gov/issues/187357115)] update elevator copy ([7acdb64](https://github.com/newjersey/navigator.business.nj.gov/commit/7acdb647cc8cfe8650af368d4551c52c82947104))
-* **deps:** update dependency express to v4.19.2 [security] ([6642ece](https://github.com/newjersey/navigator.business.nj.gov/commit/6642ece428f2df11a27aa2173f642b0bb6ba8c84))
-
+- [[#186665645](https://www.pivotaltracker.com/story/show/186665645)] aws healthcheck lambda policy ([e7ac693](https://github.com/newjersey/navigator.business.nj.gov/commit/e7ac69377358e6e2869fe84699ac699f7823d0b6))
+- [[#187315826](https://www.pivotaltracker.com/story/show/187315826)] fix duplicate acct tasks ([6f48494](https://github.com/newjersey/navigator.business.nj.gov/commit/6f48494e81d5050d10e5425b2705d30647afb36e))
+- [[#187357115](https://www.pivotaltracker.com/story/show/187357115)] update elevator copy ([7acdb64](https://github.com/newjersey/navigator.business.nj.gov/commit/7acdb647cc8cfe8650af368d4551c52c82947104))
+- **deps:** update dependency express to v4.19.2 [security] ([6642ece](https://github.com/newjersey/navigator.business.nj.gov/commit/6642ece428f2df11a27aa2173f642b0bb6ba8c84))
 
 ### Features
 
-* [[#186827948](https://github.com/newjersey/navigator.business.nj.gov/issues/186827948)] home health aid license search ([c0b03a4](https://github.com/newjersey/navigator.business.nj.gov/commit/c0b03a4df00ea529554df8aeec5b3f3e91d1024b))
-* [[#186880077](https://github.com/newjersey/navigator.business.nj.gov/issues/186880077)] Expired Consumer Affairs (MLO) license reinstatement quick action ([a93e1b6](https://github.com/newjersey/navigator.business.nj.gov/commit/a93e1b67aadfa90f3a4b49eded9a034cc4579e3a))
-* [[#187097677](https://github.com/newjersey/navigator.business.nj.gov/issues/187097677)] Consistent title tags ([186050a](https://github.com/newjersey/navigator.business.nj.gov/commit/186050a224c03f7c655a58d7be25f137e86a5a79))
-* [[#187202751](https://github.com/newjersey/navigator.business.nj.gov/issues/187202751)] nav bar preview revisions ([c220b22](https://github.com/newjersey/navigator.business.nj.gov/commit/c220b22205866486f0260b383d893d058f851e36))
-* [[#187234214](https://github.com/newjersey/navigator.business.nj.gov/issues/187234214)] get started icon, color and size ([5dfac00](https://github.com/newjersey/navigator.business.nj.gov/commit/5dfac009409742e7d98f395c5b72a41f563914ec))
-
+- [[#186827948](https://www.pivotaltracker.com/story/show/186827948)] home health aid license search ([c0b03a4](https://github.com/newjersey/navigator.business.nj.gov/commit/c0b03a4df00ea529554df8aeec5b3f3e91d1024b))
+- [[#186880077](https://www.pivotaltracker.com/story/show/186880077)] Expired Consumer Affairs (MLO) license reinstatement quick action ([a93e1b6](https://github.com/newjersey/navigator.business.nj.gov/commit/a93e1b67aadfa90f3a4b49eded9a034cc4579e3a))
+- [[#187097677](https://www.pivotaltracker.com/story/show/187097677)] Consistent title tags ([186050a](https://github.com/newjersey/navigator.business.nj.gov/commit/186050a224c03f7c655a58d7be25f137e86a5a79))
+- [[#187202751](https://www.pivotaltracker.com/story/show/187202751)] nav bar preview revisions ([c220b22](https://github.com/newjersey/navigator.business.nj.gov/commit/c220b22205866486f0260b383d893d058f851e36))
+- [[#187234214](https://www.pivotaltracker.com/story/show/187234214)] get started icon, color and size ([5dfac00](https://github.com/newjersey/navigator.business.nj.gov/commit/5dfac009409742e7d98f395c5b72a41f563914ec))
 
 ### Reverts
 
-* Revert "chore: updating Roadmaps - Industries certified-public-accountant (#7…" ([cb0b763](https://github.com/newjersey/navigator.business.nj.gov/commit/cb0b7630f88635d85e94c33dce81c7b60ad33722)), closes [#7](https://github.com/newjersey/navigator.business.nj.gov/issues/7)
+- Revert "chore: updating Roadmaps - Industries certified-public-accountant (#7…" ([cb0b763](https://github.com/newjersey/navigator.business.nj.gov/commit/cb0b7630f88635d85e94c33dce81c7b60ad33722)), closes [#7](https://github.com/newjersey/navigator.business.nj.gov/issues/7)
 
 # [2024.11.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.10.0...v2024.11.0) (2024-03-22)
 
-
 ### Bug Fixes
 
-* [[#187133827](https://github.com/newjersey/navigator.business.nj.gov/issues/187133827)] add check to reroute user to the landing page if userData has not populated ([7f060b1](https://github.com/newjersey/navigator.business.nj.gov/commit/7f060b1d5fc2c0b87963a1db7ff5396d9880345a))
-
+- [[#187133827](https://www.pivotaltracker.com/story/show/187133827)] add check to reroute user to the landing page if userData has not populated ([7f060b1](https://github.com/newjersey/navigator.business.nj.gov/commit/7f060b1d5fc2c0b87963a1db7ff5396d9880345a))
 
 ### Features
 
-* [[#187166174](https://github.com/newjersey/navigator.business.nj.gov/issues/187166174)] Update Cypress Tests for Oscar Onboarding ([6c8892a](https://github.com/newjersey/navigator.business.nj.gov/commit/6c8892a112b1869125a21059c0a16d36620c7740))
-
+- [[#187166174](https://www.pivotaltracker.com/story/show/187166174)] Update Cypress Tests for Oscar Onboarding ([6c8892a](https://github.com/newjersey/navigator.business.nj.gov/commit/6c8892a112b1869125a21059c0a16d36620c7740))
 
 ### Reverts
 
-* Revert "feat: [#187097677] Consistent title tags" ([4197c20](https://github.com/newjersey/navigator.business.nj.gov/commit/4197c2081d9ac424dbafd484d382813e78b37573)), closes [#187097677](https://github.com/newjersey/navigator.business.nj.gov/issues/187097677)
+- Revert "feat: [#187097677] Consistent title tags" ([4197c20](https://github.com/newjersey/navigator.business.nj.gov/commit/4197c2081d9ac424dbafd484d382813e78b37573)), closes [#187097677](https://www.pivotaltracker.com/story/show/187097677)
 
 # [2024.10.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.9.0...v2024.10.0) (2024-03-19)
 
-
 ### Bug Fixes
 
-* [[#187004657](https://github.com/newjersey/navigator.business.nj.gov/issues/187004657)] Employment Agency Tasks are not rendering correctly ([07e2446](https://github.com/newjersey/navigator.business.nj.gov/commit/07e2446640c38bf7f6da8207200394e6ed08d889))
-* **deps:** update dependency @smithy/node-http-handler to v2.4.1 ([f293d4d](https://github.com/newjersey/navigator.business.nj.gov/commit/f293d4d5f64af2d795e36135a922d97ae4305827))
-* **deps:** update dependency @smithy/node-http-handler to v2.4.2 ([be2a665](https://github.com/newjersey/navigator.business.nj.gov/commit/be2a6656e38cb8a785cab84223c32b0aa67e7c00))
-* **deps:** update dependency @smithy/node-http-handler to v2.4.3 ([f62153a](https://github.com/newjersey/navigator.business.nj.gov/commit/f62153a772390628000484c973e9ef5c05c3a541))
-* **deps:** update dependency express to v4.18.3 ([d840e80](https://github.com/newjersey/navigator.business.nj.gov/commit/d840e807a2b85d26de19099e369c2b2e3082fbee))
-* **deps:** update dependency next-seo to v6.5.0 ([5056cbd](https://github.com/newjersey/navigator.business.nj.gov/commit/5056cbd6bf3834fbdd4e70922fa2155437727a78))
-* **deps:** update dependency winston to v3.12.0 ([e4c8a5d](https://github.com/newjersey/navigator.business.nj.gov/commit/e4c8a5d6205418015db2abbedb150f89edb74bf2))
-* **deps:** update material-ui ([c82762a](https://github.com/newjersey/navigator.business.nj.gov/commit/c82762a849282be50f8ef8b00e5878f853fab6a9))
-* **deps:** update material-ui ([859e4e9](https://github.com/newjersey/navigator.business.nj.gov/commit/859e4e97ece44fd3798c58dd1d5e41959543c72e))
-* **deps:** update material-ui ([c54d621](https://github.com/newjersey/navigator.business.nj.gov/commit/c54d621366e403762b284bfc7660366363190c32))
-
+- [[#187004657](https://www.pivotaltracker.com/story/show/187004657)] Employment Agency Tasks are not rendering correctly ([07e2446](https://github.com/newjersey/navigator.business.nj.gov/commit/07e2446640c38bf7f6da8207200394e6ed08d889))
+- **deps:** update dependency @smithy/node-http-handler to v2.4.1 ([f293d4d](https://github.com/newjersey/navigator.business.nj.gov/commit/f293d4d5f64af2d795e36135a922d97ae4305827))
+- **deps:** update dependency @smithy/node-http-handler to v2.4.2 ([be2a665](https://github.com/newjersey/navigator.business.nj.gov/commit/be2a6656e38cb8a785cab84223c32b0aa67e7c00))
+- **deps:** update dependency @smithy/node-http-handler to v2.4.3 ([f62153a](https://github.com/newjersey/navigator.business.nj.gov/commit/f62153a772390628000484c973e9ef5c05c3a541))
+- **deps:** update dependency express to v4.18.3 ([d840e80](https://github.com/newjersey/navigator.business.nj.gov/commit/d840e807a2b85d26de19099e369c2b2e3082fbee))
+- **deps:** update dependency next-seo to v6.5.0 ([5056cbd](https://github.com/newjersey/navigator.business.nj.gov/commit/5056cbd6bf3834fbdd4e70922fa2155437727a78))
+- **deps:** update dependency winston to v3.12.0 ([e4c8a5d](https://github.com/newjersey/navigator.business.nj.gov/commit/e4c8a5d6205418015db2abbedb150f89edb74bf2))
+- **deps:** update material-ui ([c82762a](https://github.com/newjersey/navigator.business.nj.gov/commit/c82762a849282be50f8ef8b00e5878f853fab6a9))
+- **deps:** update material-ui ([859e4e9](https://github.com/newjersey/navigator.business.nj.gov/commit/859e4e97ece44fd3798c58dd1d5e41959543c72e))
+- **deps:** update material-ui ([c54d621](https://github.com/newjersey/navigator.business.nj.gov/commit/c54d621366e403762b284bfc7660366363190c32))
 
 ### Features
 
-* [[#185158954](https://github.com/newjersey/navigator.business.nj.gov/issues/185158954)] Navigation CMS content moved from general Config ([fe70f28](https://github.com/newjersey/navigator.business.nj.gov/commit/fe70f28d81ecf99aeef4f1fdde218a8fd3c13b1f))
-* [[#186811252](https://github.com/newjersey/navigator.business.nj.gov/issues/186811252)] consistent navigation ([7b9e27a](https://github.com/newjersey/navigator.business.nj.gov/commit/7b9e27aaa58d1d75781a4a952fed047aff50ab91))
-* [[#186811252](https://github.com/newjersey/navigator.business.nj.gov/issues/186811252)] mobile nav menu title fix and mobile title bar fix ([46d7331](https://github.com/newjersey/navigator.business.nj.gov/commit/46d7331da93a832fca9653130d61576f46b69cb6))
-* [[#186811252](https://github.com/newjersey/navigator.business.nj.gov/issues/186811252)] userName as drop down / mobile title ([636b570](https://github.com/newjersey/navigator.business.nj.gov/commit/636b570e928340f1182513dd9f750b58a1c38468))
-* [[#187202751](https://github.com/newjersey/navigator.business.nj.gov/issues/187202751)] Nav bar preview ([be83d02](https://github.com/newjersey/navigator.business.nj.gov/commit/be83d02545313d28180d91ebdde252ee58728932))
-* [[#187234200](https://github.com/newjersey/navigator.business.nj.gov/issues/187234200)] mobile aria labels for menus updated ([e2ba8fa](https://github.com/newjersey/navigator.business.nj.gov/commit/e2ba8fa17f751ed9a396b179be8b4b513eebc4f2))
-* [[#187234224](https://github.com/newjersey/navigator.business.nj.gov/issues/187234224)] navbar hamburger color updated ([143b105](https://github.com/newjersey/navigator.business.nj.gov/commit/143b105db84824824ef2ee3d756900e9687eff88))
-* [[#187239241](https://github.com/newjersey/navigator.business.nj.gov/issues/187239241)] set minimum viewport size to 360px ([5fbca42](https://github.com/newjersey/navigator.business.nj.gov/commit/5fbca42c321a64183a35f5a74d5e6e3dadb94e0b))
+- [[#185158954](https://www.pivotaltracker.com/story/show/185158954)] Navigation CMS content moved from general Config ([fe70f28](https://github.com/newjersey/navigator.business.nj.gov/commit/fe70f28d81ecf99aeef4f1fdde218a8fd3c13b1f))
+- [[#186811252](https://www.pivotaltracker.com/story/show/186811252)] consistent navigation ([7b9e27a](https://github.com/newjersey/navigator.business.nj.gov/commit/7b9e27aaa58d1d75781a4a952fed047aff50ab91))
+- [[#186811252](https://www.pivotaltracker.com/story/show/186811252)] mobile nav menu title fix and mobile title bar fix ([46d7331](https://github.com/newjersey/navigator.business.nj.gov/commit/46d7331da93a832fca9653130d61576f46b69cb6))
+- [[#186811252](https://www.pivotaltracker.com/story/show/186811252)] userName as drop down / mobile title ([636b570](https://github.com/newjersey/navigator.business.nj.gov/commit/636b570e928340f1182513dd9f750b58a1c38468))
+- [[#187202751](https://www.pivotaltracker.com/story/show/187202751)] Nav bar preview ([be83d02](https://github.com/newjersey/navigator.business.nj.gov/commit/be83d02545313d28180d91ebdde252ee58728932))
+- [[#187234200](https://www.pivotaltracker.com/story/show/187234200)] mobile aria labels for menus updated ([e2ba8fa](https://github.com/newjersey/navigator.business.nj.gov/commit/e2ba8fa17f751ed9a396b179be8b4b513eebc4f2))
+- [[#187234224](https://www.pivotaltracker.com/story/show/187234224)] navbar hamburger color updated ([143b105](https://github.com/newjersey/navigator.business.nj.gov/commit/143b105db84824824ef2ee3d756900e9687eff88))
+- [[#187239241](https://www.pivotaltracker.com/story/show/187239241)] set minimum viewport size to 360px ([5fbca42](https://github.com/newjersey/navigator.business.nj.gov/commit/5fbca42c321a64183a35f5a74d5e6e3dadb94e0b))
 
 # [2024.9.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.8.0...v2024.9.0) (2024-03-08)
 
-
 ### Features
 
-* [[#186896489](https://github.com/newjersey/navigator.business.nj.gov/issues/186896489)] pre-populate license task check status business info ([0fbea9b](https://github.com/newjersey/navigator.business.nj.gov/commit/0fbea9b4b48288f379ec3323ca50fe2885f20882))
+- [[#186896489](https://www.pivotaltracker.com/story/show/186896489)] pre-populate license task check status business info ([0fbea9b](https://github.com/newjersey/navigator.business.nj.gov/commit/0fbea9b4b48288f379ec3323ca50fe2885f20882))
 
 # [2024.8.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.7.1...v2024.8.0) (2024-03-01)
 
-
 ### Bug Fixes
 
-* [[#185761403](https://github.com/newjersey/navigator.business.nj.gov/issues/185761403)] set initial business effective date relative to NJ local date ([2198218](https://github.com/newjersey/navigator.business.nj.gov/commit/2198218c6cbace705d437313a45ce926634ed886))
-* [[#186781958](https://github.com/newjersey/navigator.business.nj.gov/issues/186781958)] change homebasedBusiness value based on officeInNJ ([1bb3e2e](https://github.com/newjersey/navigator.business.nj.gov/commit/1bb3e2e8a0f953b6d1645e90e86e1b2bd5521636))
-* **deps:** update dependency @emotion/react to v11.11.4 ([40d9eba](https://github.com/newjersey/navigator.business.nj.gov/commit/40d9ebaa9f492de3602c46dddd239c6488c14fba))
-* **deps:** update dependency unist-util-visit to v5 ([0245677](https://github.com/newjersey/navigator.business.nj.gov/commit/0245677b956d91a5317e4b3e3aea89ab5abd65c5))
-* **deps:** update material-ui ([ea01bb0](https://github.com/newjersey/navigator.business.nj.gov/commit/ea01bb04c826209d73cd6ee46be4e434f06c497b))
-* update formationDate to account for leap year errors ([f908228](https://github.com/newjersey/navigator.business.nj.gov/commit/f9082286e50deb376d234adcd2468e9d6de6794a))
-
+- [[#185761403](https://www.pivotaltracker.com/story/show/185761403)] set initial business effective date relative to NJ local date ([2198218](https://github.com/newjersey/navigator.business.nj.gov/commit/2198218c6cbace705d437313a45ce926634ed886))
+- [[#186781958](https://www.pivotaltracker.com/story/show/186781958)] change homebasedBusiness value based on officeInNJ ([1bb3e2e](https://github.com/newjersey/navigator.business.nj.gov/commit/1bb3e2e8a0f953b6d1645e90e86e1b2bd5521636))
+- **deps:** update dependency @emotion/react to v11.11.4 ([40d9eba](https://github.com/newjersey/navigator.business.nj.gov/commit/40d9ebaa9f492de3602c46dddd239c6488c14fba))
+- **deps:** update dependency unist-util-visit to v5 ([0245677](https://github.com/newjersey/navigator.business.nj.gov/commit/0245677b956d91a5317e4b3e3aea89ab5abd65c5))
+- **deps:** update material-ui ([ea01bb0](https://github.com/newjersey/navigator.business.nj.gov/commit/ea01bb04c826209d73cd6ee46be4e434f06c497b))
+- update formationDate to account for leap year errors ([f908228](https://github.com/newjersey/navigator.business.nj.gov/commit/f9082286e50deb376d234adcd2468e9d6de6794a))
 
 ### Features
 
-* [[#186333254](https://github.com/newjersey/navigator.business.nj.gov/issues/186333254)] remove unnecessary props in sidabar cards ([9a470f7](https://github.com/newjersey/navigator.business.nj.gov/commit/9a470f76ac95d01c0663f6e0176dff8bce36a8ab))
-* [[#186781958](https://github.com/newjersey/navigator.business.nj.gov/issues/186781958)] remove step 4 from dakota nexus onboarding ([1949497](https://github.com/newjersey/navigator.business.nj.gov/commit/19494977f733a54a8c7152d448984b4163277c89))
-* [[#187010596](https://github.com/newjersey/navigator.business.nj.gov/issues/187010596)] Create License Reinstatement Quick Action CMS Content Collection ([5d7e5ad](https://github.com/newjersey/navigator.business.nj.gov/commit/5d7e5adddf4343adf6479e3ffa4ec7af7da8c082))
+- [[#186333254](https://www.pivotaltracker.com/story/show/186333254)] remove unnecessary props in sidabar cards ([9a470f7](https://github.com/newjersey/navigator.business.nj.gov/commit/9a470f76ac95d01c0663f6e0176dff8bce36a8ab))
+- [[#186781958](https://www.pivotaltracker.com/story/show/186781958)] remove step 4 from dakota nexus onboarding ([1949497](https://github.com/newjersey/navigator.business.nj.gov/commit/19494977f733a54a8c7152d448984b4163277c89))
+- [[#187010596](https://www.pivotaltracker.com/story/show/187010596)] Create License Reinstatement Quick Action CMS Content Collection ([5d7e5ad](https://github.com/newjersey/navigator.business.nj.gov/commit/5d7e5adddf4343adf6479e3ffa4ec7af7da8c082))
 
 ## [2024.7.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.7.0...v2024.7.1) (2024-02-27)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency axios to v1.6.7 ([393c2cd](https://github.com/newjersey/navigator.business.nj.gov/commit/393c2cdf80bb4f4aaae614dd78b95d737137710d))
-* **deps:** update material-ui ([d5924a4](https://github.com/newjersey/navigator.business.nj.gov/commit/d5924a47aa2c440139b52e554af0aed280c8602b))
-* **deps:** update material-ui ([1421665](https://github.com/newjersey/navigator.business.nj.gov/commit/14216656219c842528df735f894db7a248b431c2))
+- **deps:** update dependency axios to v1.6.7 ([393c2cd](https://github.com/newjersey/navigator.business.nj.gov/commit/393c2cdf80bb4f4aaae614dd78b95d737137710d))
+- **deps:** update material-ui ([d5924a4](https://github.com/newjersey/navigator.business.nj.gov/commit/d5924a47aa2c440139b52e554af0aed280c8602b))
+- **deps:** update material-ui ([1421665](https://github.com/newjersey/navigator.business.nj.gov/commit/14216656219c842528df735f894db7a248b431c2))
 
 # [2024.7.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.6.1...v2024.7.0) (2024-02-23)
 
-
 ### Bug Fixes
 
-* [[#187064247](https://github.com/newjersey/navigator.business.nj.gov/issues/187064247)] change sign-lease urlSlug so correct task renders for non-food truck industries ([1cd0bd3](https://github.com/newjersey/navigator.business.nj.gov/commit/1cd0bd388d7d4d5a0ccf968a78f5d03e80d9ecbe))
-* [[#187080169](https://github.com/newjersey/navigator.business.nj.gov/issues/187080169)] enable feature flag in serverless config ([ac132c5](https://github.com/newjersey/navigator.business.nj.gov/commit/ac132c5d8c2a7e67eb4a782710fc0609dde35f3e))
-
+- [[#187064247](https://www.pivotaltracker.com/story/show/187064247)] change sign-lease urlSlug so correct task renders for non-food truck industries ([1cd0bd3](https://github.com/newjersey/navigator.business.nj.gov/commit/1cd0bd388d7d4d5a0ccf968a78f5d03e80d9ecbe))
+- [[#187080169](https://www.pivotaltracker.com/story/show/187080169)] enable feature flag in serverless config ([ac132c5](https://github.com/newjersey/navigator.business.nj.gov/commit/ac132c5d8c2a7e67eb4a782710fc0609dde35f3e))
 
 ### Features
 
-* [[#186829051](https://github.com/newjersey/navigator.business.nj.gov/issues/186829051)] show error after business name validation when field is focused ([28af20f](https://github.com/newjersey/navigator.business.nj.gov/commit/28af20ffe61ef0f07d21cea34caf12ee89163640))
+- [[#186829051](https://www.pivotaltracker.com/story/show/186829051)] show error after business name validation when field is focused ([28af20f](https://github.com/newjersey/navigator.business.nj.gov/commit/28af20ffe61ef0f07d21cea34caf12ee89163640))
 
 ## [2024.6.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.6.0...v2024.6.1) (2024-02-16)
 
-
 ### Bug Fixes
 
-* [[#187064247](https://github.com/newjersey/navigator.business.nj.gov/issues/187064247)] change sign-lease urlSlug so correct task renders for non-food truck industries ([f2a52dd](https://github.com/newjersey/navigator.business.nj.gov/commit/f2a52dde83a9d8f69348772b987c6dff091a3f7f))
+- [[#187064247](https://www.pivotaltracker.com/story/show/187064247)] change sign-lease urlSlug so correct task renders for non-food truck industries ([f2a52dd](https://github.com/newjersey/navigator.business.nj.gov/commit/f2a52dde83a9d8f69348772b987c6dff091a3f7f))
 
 # [2024.6.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.5.0...v2024.6.0) (2024-02-16)
 
-
 ### Features
 
-* [[#186775240](https://github.com/newjersey/navigator.business.nj.gov/issues/186775240)] Add health checks to formation ([76f5c1a](https://github.com/newjersey/navigator.business.nj.gov/commit/76f5c1a9e4167129acec26ab150d097ff4690d69))
-* [[#186775240](https://github.com/newjersey/navigator.business.nj.gov/issues/186775240)] Add health checks to formation ([1275c97](https://github.com/newjersey/navigator.business.nj.gov/commit/1275c97709c4fe3c47548da00d9b3859f27d1a27))
+- [[#186775240](https://www.pivotaltracker.com/story/show/186775240)] Add health checks to formation ([76f5c1a](https://github.com/newjersey/navigator.business.nj.gov/commit/76f5c1a9e4167129acec26ab150d097ff4690d69))
+- [[#186775240](https://www.pivotaltracker.com/story/show/186775240)] Add health checks to formation ([1275c97](https://github.com/newjersey/navigator.business.nj.gov/commit/1275c97709c4fe3c47548da00d9b3859f27d1a27))
 
 # [2024.5.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.4.0...v2024.5.0) (2024-02-13)
 
-
 ### Features
 
-* [[#186775240](https://github.com/newjersey/navigator.business.nj.gov/issues/186775240)] Add health checks for Formation ([911688e](https://github.com/newjersey/navigator.business.nj.gov/commit/911688ec8381a816265ac26643d8ddf3f864730c))
+- [[#186775240](https://www.pivotaltracker.com/story/show/186775240)] Add health checks for Formation ([911688e](https://github.com/newjersey/navigator.business.nj.gov/commit/911688ec8381a816265ac26643d8ddf3f864730c))
 
 # [2024.4.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.3.1...v2024.4.0) (2024-02-09)
 
-
 ### Bug Fixes
 
-* [[#186444137](https://github.com/newjersey/navigator.business.nj.gov/issues/186444137)] [[#186444230](https://github.com/newjersey/navigator.business.nj.gov/issues/186444230)] navbar link to my new jersey styling and semi bold font-weight ([b4dc32b](https://github.com/newjersey/navigator.business.nj.gov/commit/b4dc32b6109398886efc67a12cd597ac068a8b76))
-* [[#186444137](https://github.com/newjersey/navigator.business.nj.gov/issues/186444137)] [[#186444230](https://github.com/newjersey/navigator.business.nj.gov/issues/186444230)] route to onboarding from landing page ([7f5ff75](https://github.com/newjersey/navigator.business.nj.gov/commit/7f5ff7569a8733292220c8a28aa3d0a9b826a80b))
-* increase operations per run in workflow ([1527181](https://github.com/newjersey/navigator.business.nj.gov/commit/1527181797eaa97f4032865d53d153821fd86350))
-* manually triggerable workflow ([9f0b128](https://github.com/newjersey/navigator.business.nj.gov/commit/9f0b128a846bc78494d59a65acf378f13d752032))
-
+- [[#186444137](https://www.pivotaltracker.com/story/show/186444137)] [[#186444230](https://www.pivotaltracker.com/story/show/186444230)] navbar link to my new jersey styling and semi bold font-weight ([b4dc32b](https://github.com/newjersey/navigator.business.nj.gov/commit/b4dc32b6109398886efc67a12cd597ac068a8b76))
+- [[#186444137](https://www.pivotaltracker.com/story/show/186444137)] [[#186444230](https://www.pivotaltracker.com/story/show/186444230)] route to onboarding from landing page ([7f5ff75](https://github.com/newjersey/navigator.business.nj.gov/commit/7f5ff7569a8733292220c8a28aa3d0a9b826a80b))
+- increase operations per run in workflow ([1527181](https://github.com/newjersey/navigator.business.nj.gov/commit/1527181797eaa97f4032865d53d153821fd86350))
+- manually triggerable workflow ([9f0b128](https://github.com/newjersey/navigator.business.nj.gov/commit/9f0b128a846bc78494d59a65acf378f13d752032))
 
 ### Features
 
-* [[#186444137](https://github.com/newjersey/navigator.business.nj.gov/issues/186444137)] [[#186444230](https://github.com/newjersey/navigator.business.nj.gov/issues/186444230)] navigation bar title updates ([cdffad8](https://github.com/newjersey/navigator.business.nj.gov/commit/cdffad8056a6084b4f1ba70573d427f14cdec9d8))
-* [[#186820573](https://github.com/newjersey/navigator.business.nj.gov/issues/186820573)] summaryDescriptionMd support for quick action tasks ([844d672](https://github.com/newjersey/navigator.business.nj.gov/commit/844d672ed3270034737d9c518b137bed23a32ae4))
-* [#[#184764052](https://github.com/newjersey/navigator.business.nj.gov/issues/184764052)] change business name error from alert to inline ([1cf1ddc](https://github.com/newjersey/navigator.business.nj.gov/commit/1cf1ddc44489a83e65730f90d96b9ded1bd00687))
-* [#[#184764052](https://github.com/newjersey/navigator.business.nj.gov/issues/184764052)] change business name error from alert to inline ([818cdbf](https://github.com/newjersey/navigator.business.nj.gov/commit/818cdbfcaac867fb9854dab5a95758e530a6dfca))
+- [[#186444137](https://www.pivotaltracker.com/story/show/186444137)] [[#186444230](https://www.pivotaltracker.com/story/show/186444230)] navigation bar title updates ([cdffad8](https://github.com/newjersey/navigator.business.nj.gov/commit/cdffad8056a6084b4f1ba70573d427f14cdec9d8))
+- [[#186820573](https://www.pivotaltracker.com/story/show/186820573)] summaryDescriptionMd support for quick action tasks ([844d672](https://github.com/newjersey/navigator.business.nj.gov/commit/844d672ed3270034737d9c518b137bed23a32ae4))
+- [#[#184764052](https://www.pivotaltracker.com/story/show/184764052)] change business name error from alert to inline ([1cf1ddc](https://github.com/newjersey/navigator.business.nj.gov/commit/1cf1ddc44489a83e65730f90d96b9ded1bd00687))
+- [#[#184764052](https://www.pivotaltracker.com/story/show/184764052)] change business name error from alert to inline ([818cdbf](https://github.com/newjersey/navigator.business.nj.gov/commit/818cdbfcaac867fb9854dab5a95758e530a6dfca))
 
 ## [2024.3.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.3.0...v2024.3.1) (2024-02-05)
 
-
 ### Bug Fixes
 
-* update webflowID for commercial construction industry ([55f6c2a](https://github.com/newjersey/navigator.business.nj.gov/commit/55f6c2a4ce34ac3169bd32f52571c8d07e97b41c))
+- update webflowID for commercial construction industry ([55f6c2a](https://github.com/newjersey/navigator.business.nj.gov/commit/55f6c2a4ce34ac3169bd32f52571c8d07e97b41c))
 
 # [2024.3.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.2.1...v2024.3.0) (2024-02-02)
 
-
 ### Bug Fixes
 
-* [[#186393520](https://github.com/newjersey/navigator.business.nj.gov/issues/186393520)] error state no longer occurring immediately after autofill ([e26d5e6](https://github.com/newjersey/navigator.business.nj.gov/commit/e26d5e67128d2935d5d4edf261e783523cd90c54))
-
+- [[#186393520](https://www.pivotaltracker.com/story/show/186393520)] error state no longer occurring immediately after autofill ([e26d5e6](https://github.com/newjersey/navigator.business.nj.gov/commit/e26d5e67128d2935d5d4edf261e783523cd90c54))
 
 ### Features
 
-* [[#186810702](https://github.com/newjersey/navigator.business.nj.gov/issues/186810702)] Tax Registration should not auto-complete from Find Funding Opportunities Card ([35d1181](https://github.com/newjersey/navigator.business.nj.gov/commit/35d118179614dcc3f28e4075c758e9d2e079a087))
+- [[#186810702](https://www.pivotaltracker.com/story/show/186810702)] Tax Registration should not auto-complete from Find Funding Opportunities Card ([35d1181](https://github.com/newjersey/navigator.business.nj.gov/commit/35d118179614dcc3f28e4075c758e9d2e079a087))
 
 ## [2024.2.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.2.0...v2024.2.1) (2024-01-30)
 
-
 ### Bug Fixes
 
-* [[#186915689](https://github.com/newjersey/navigator.business.nj.gov/issues/186915689)] resolved TypeError issue when adding funding opps to CMS ([b7b4233](https://github.com/newjersey/navigator.business.nj.gov/commit/b7b4233fdc882b82a2ebb3b2afd0986058482961))
+- [[#186915689](https://www.pivotaltracker.com/story/show/186915689)] resolved TypeError issue when adding funding opps to CMS ([b7b4233](https://github.com/newjersey/navigator.business.nj.gov/commit/b7b4233fdc882b82a2ebb3b2afd0986058482961))
 
 # [2024.2.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.1.1...v2024.2.0) (2024-01-26)
 
-
 ### Bug Fixes
 
-* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] link account card bug ([401deff](https://github.com/newjersey/navigator.business.nj.gov/commit/401deff2d194b9773bf8ac93718090f83eb1a648))
-* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] link account card bug ([9174a56](https://github.com/newjersey/navigator.business.nj.gov/commit/9174a56adfeab9043213537cb17555b0a5db9fd5))
-* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] link account card bug ([5481b71](https://github.com/newjersey/navigator.business.nj.gov/commit/5481b711afe8a58f4fb86973a188703d9a81899c))
-* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] link card bug fix ([9e90e87](https://github.com/newjersey/navigator.business.nj.gov/commit/9e90e870bc9a91099dcc1e40236b79015235e233))
-* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] link card bug fix ([e33f600](https://github.com/newjersey/navigator.business.nj.gov/commit/e33f6005b4e3a3560f5f954f6efae19b0fbe2a6b))
-* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] link card bug fix updateQueue ([404d2c8](https://github.com/newjersey/navigator.business.nj.gov/commit/404d2c86de86b2037147bae464fefaafe5f9801c))
-* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] update circle ci config ([80dfd47](https://github.com/newjersey/navigator.business.nj.gov/commit/80dfd47e2b5e036ee224b2aab7d126104b711c71))
-* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] window.location.assign debugging ([792a6f5](https://github.com/newjersey/navigator.business.nj.gov/commit/792a6f5d05bc380ad8bf2f2375d26753d4a7efe0))
-* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] window.location.assign debugging ([2856564](https://github.com/newjersey/navigator.business.nj.gov/commit/2856564ed33418245efe2e120fac0cd1c4771baf))
-* associate MUI form control with html label ([c43ec4e](https://github.com/newjersey/navigator.business.nj.gov/commit/c43ec4e1f249ba70d41ca9f63dc7e4ccda05fd1f))
-* change path for api self-check health check route ([11fffa9](https://github.com/newjersey/navigator.business.nj.gov/commit/11fffa96f2941ac288375c2e28f1edd7ece7caf6))
-* **deps:** update dependency @smithy/node-http-handler to v2.3.1 ([68679b1](https://github.com/newjersey/navigator.business.nj.gov/commit/68679b1dc9de9433352e9db3a8e6aabaf722324e))
-* **deps:** update dependency rehype-rewrite to v4 ([f97efa7](https://github.com/newjersey/navigator.business.nj.gov/commit/f97efa75c8bfe294ce2abdc84aeb614da0a526e7))
-* **deps:** update dependency serverless-offline to v13.3.3 ([5abe72c](https://github.com/newjersey/navigator.business.nj.gov/commit/5abe72cc03670a7879e2ed18d9468022753df5b1))
-* **deps:** update material-ui ([2e4bf30](https://github.com/newjersey/navigator.business.nj.gov/commit/2e4bf30acf548dfa7d32b9b443ed08ac2dbe9ff1))
-* **deps:** update material-ui ([f47990f](https://github.com/newjersey/navigator.business.nj.gov/commit/f47990f5865226d675d47b919e604e2d81895c79))
-
+- [[#185977080](https://www.pivotaltracker.com/story/show/185977080)] link account card bug ([401deff](https://github.com/newjersey/navigator.business.nj.gov/commit/401deff2d194b9773bf8ac93718090f83eb1a648))
+- [[#185977080](https://www.pivotaltracker.com/story/show/185977080)] link account card bug ([9174a56](https://github.com/newjersey/navigator.business.nj.gov/commit/9174a56adfeab9043213537cb17555b0a5db9fd5))
+- [[#185977080](https://www.pivotaltracker.com/story/show/185977080)] link account card bug ([5481b71](https://github.com/newjersey/navigator.business.nj.gov/commit/5481b711afe8a58f4fb86973a188703d9a81899c))
+- [[#185977080](https://www.pivotaltracker.com/story/show/185977080)] link card bug fix ([9e90e87](https://github.com/newjersey/navigator.business.nj.gov/commit/9e90e870bc9a91099dcc1e40236b79015235e233))
+- [[#185977080](https://www.pivotaltracker.com/story/show/185977080)] link card bug fix ([e33f600](https://github.com/newjersey/navigator.business.nj.gov/commit/e33f6005b4e3a3560f5f954f6efae19b0fbe2a6b))
+- [[#185977080](https://www.pivotaltracker.com/story/show/185977080)] link card bug fix updateQueue ([404d2c8](https://github.com/newjersey/navigator.business.nj.gov/commit/404d2c86de86b2037147bae464fefaafe5f9801c))
+- [[#185977080](https://www.pivotaltracker.com/story/show/185977080)] update circle ci config ([80dfd47](https://github.com/newjersey/navigator.business.nj.gov/commit/80dfd47e2b5e036ee224b2aab7d126104b711c71))
+- [[#185977080](https://www.pivotaltracker.com/story/show/185977080)] window.location.assign debugging ([792a6f5](https://github.com/newjersey/navigator.business.nj.gov/commit/792a6f5d05bc380ad8bf2f2375d26753d4a7efe0))
+- [[#185977080](https://www.pivotaltracker.com/story/show/185977080)] window.location.assign debugging ([2856564](https://github.com/newjersey/navigator.business.nj.gov/commit/2856564ed33418245efe2e120fac0cd1c4771baf))
+- associate MUI form control with html label ([c43ec4e](https://github.com/newjersey/navigator.business.nj.gov/commit/c43ec4e1f249ba70d41ca9f63dc7e4ccda05fd1f))
+- change path for api self-check health check route ([11fffa9](https://github.com/newjersey/navigator.business.nj.gov/commit/11fffa96f2941ac288375c2e28f1edd7ece7caf6))
+- **deps:** update dependency @smithy/node-http-handler to v2.3.1 ([68679b1](https://github.com/newjersey/navigator.business.nj.gov/commit/68679b1dc9de9433352e9db3a8e6aabaf722324e))
+- **deps:** update dependency rehype-rewrite to v4 ([f97efa7](https://github.com/newjersey/navigator.business.nj.gov/commit/f97efa75c8bfe294ce2abdc84aeb614da0a526e7))
+- **deps:** update dependency serverless-offline to v13.3.3 ([5abe72c](https://github.com/newjersey/navigator.business.nj.gov/commit/5abe72cc03670a7879e2ed18d9468022753df5b1))
+- **deps:** update material-ui ([2e4bf30](https://github.com/newjersey/navigator.business.nj.gov/commit/2e4bf30acf548dfa7d32b9b443ed08ac2dbe9ff1))
+- **deps:** update material-ui ([f47990f](https://github.com/newjersey/navigator.business.nj.gov/commit/f47990f5865226d675d47b919e604e2d81895c79))
 
 ### Features
 
-* [[#186316001](https://github.com/newjersey/navigator.business.nj.gov/issues/186316001)] Add mini roadmap task status for screen readers ([665607c](https://github.com/newjersey/navigator.business.nj.gov/commit/665607c32df304e6cfc07b92bf0283a68e6edc27))
-* [[#186352406](https://github.com/newjersey/navigator.business.nj.gov/issues/186352406)] enable content to map quick actions by industries and sectors ([7672dcc](https://github.com/newjersey/navigator.business.nj.gov/commit/7672dcce696bf5da0e133ab27100e0b69937eb1a))
-* [[#186352406](https://github.com/newjersey/navigator.business.nj.gov/issues/186352406)] quickaction find match refactor ([e864b02](https://github.com/newjersey/navigator.business.nj.gov/commit/e864b02b31c4f4d07a750cacdee61e74b9241174))
-* [[#186620631](https://github.com/newjersey/navigator.business.nj.gov/issues/186620631)] add display name for funding opps ([161df51](https://github.com/newjersey/navigator.business.nj.gov/commit/161df51c76f0ef1b9477f217339a0a2e2eae504f))
-* [[#186657856](https://github.com/newjersey/navigator.business.nj.gov/issues/186657856)] [[#186741011](https://github.com/newjersey/navigator.business.nj.gov/issues/186741011)] health check API routes ([3d1881c](https://github.com/newjersey/navigator.business.nj.gov/commit/3d1881c3b8efd73544ddda2986dd185a7d89eff5))
-
+- [[#186316001](https://www.pivotaltracker.com/story/show/186316001)] Add mini roadmap task status for screen readers ([665607c](https://github.com/newjersey/navigator.business.nj.gov/commit/665607c32df304e6cfc07b92bf0283a68e6edc27))
+- [[#186352406](https://www.pivotaltracker.com/story/show/186352406)] enable content to map quick actions by industries and sectors ([7672dcc](https://github.com/newjersey/navigator.business.nj.gov/commit/7672dcce696bf5da0e133ab27100e0b69937eb1a))
+- [[#186352406](https://www.pivotaltracker.com/story/show/186352406)] quickaction find match refactor ([e864b02](https://github.com/newjersey/navigator.business.nj.gov/commit/e864b02b31c4f4d07a750cacdee61e74b9241174))
+- [[#186620631](https://www.pivotaltracker.com/story/show/186620631)] add display name for funding opps ([161df51](https://github.com/newjersey/navigator.business.nj.gov/commit/161df51c76f0ef1b9477f217339a0a2e2eae504f))
+- [[#186657856](https://www.pivotaltracker.com/story/show/186657856)] [[#186741011](https://www.pivotaltracker.com/story/show/186741011)] health check API routes ([3d1881c](https://github.com/newjersey/navigator.business.nj.gov/commit/3d1881c3b8efd73544ddda2986dd185a7d89eff5))
 
 ### Reverts
 
-* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] ordering of userFactory api ([6da0269](https://github.com/newjersey/navigator.business.nj.gov/commit/6da02696d0b198664675b72bf92e061f3c97497a))
-* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] revert cypress tests ([fb53ca0](https://github.com/newjersey/navigator.business.nj.gov/commit/fb53ca0d520cec4e9ff54f37feec002934cb4026))
+- [[#185977080](https://www.pivotaltracker.com/story/show/185977080)] ordering of userFactory api ([6da0269](https://github.com/newjersey/navigator.business.nj.gov/commit/6da02696d0b198664675b72bf92e061f3c97497a))
+- [[#185977080](https://www.pivotaltracker.com/story/show/185977080)] revert cypress tests ([fb53ca0](https://github.com/newjersey/navigator.business.nj.gov/commit/fb53ca0d520cec4e9ff54f37feec002934cb4026))
 
 ## [2024.1.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.1.0...v2024.1.1) (2024-01-17)
 
-
 ### Bug Fixes
 
-* bring health checks to release early ([9d96461](https://github.com/newjersey/navigator.business.nj.gov/commit/9d96461068a7569d591ea17ec90ffbd03d76ea18))
-* updating License Tasks (Navigator with Webflow mappings) search-licenses-employment-agency ([#5462](https://github.com/newjersey/navigator.business.nj.gov/issues/5462)) ([5b9ed38](https://github.com/newjersey/navigator.business.nj.gov/commit/5b9ed38843db814be1f14b7575ab088b42dbec52))
-* updating Tasks - All taxi-authorization-local ([#5743](https://github.com/newjersey/navigator.business.nj.gov/issues/5743)) ([be3f652](https://github.com/newjersey/navigator.business.nj.gov/commit/be3f652973a7512f10f971125820504a696da33a))
-* updating Tasks - All transportation-cpcn ([#5749](https://github.com/newjersey/navigator.business.nj.gov/issues/5749)) ([e08d224](https://github.com/newjersey/navigator.business.nj.gov/commit/e08d22490a2e23c6db0b7269a6ff8ad2f71f54f4))
-* updating Tasks - All transportation-inspection ([#5752](https://github.com/newjersey/navigator.business.nj.gov/issues/5752)) ([fa49cb7](https://github.com/newjersey/navigator.business.nj.gov/commit/fa49cb701263e80876c673e77613e595e61f4331))
+- bring health checks to release early ([9d96461](https://github.com/newjersey/navigator.business.nj.gov/commit/9d96461068a7569d591ea17ec90ffbd03d76ea18))
+- updating License Tasks (Navigator with Webflow mappings) search-licenses-employment-agency ([#5462](https://github.com/newjersey/navigator.business.nj.gov/issues/5462)) ([5b9ed38](https://github.com/newjersey/navigator.business.nj.gov/commit/5b9ed38843db814be1f14b7575ab088b42dbec52))
+- updating Tasks - All taxi-authorization-local ([#5743](https://github.com/newjersey/navigator.business.nj.gov/issues/5743)) ([be3f652](https://github.com/newjersey/navigator.business.nj.gov/commit/be3f652973a7512f10f971125820504a696da33a))
+- updating Tasks - All transportation-cpcn ([#5749](https://github.com/newjersey/navigator.business.nj.gov/issues/5749)) ([e08d224](https://github.com/newjersey/navigator.business.nj.gov/commit/e08d22490a2e23c6db0b7269a6ff8ad2f71f54f4))
+- updating Tasks - All transportation-inspection ([#5752](https://github.com/newjersey/navigator.business.nj.gov/issues/5752)) ([fa49cb7](https://github.com/newjersey/navigator.business.nj.gov/commit/fa49cb701263e80876c673e77613e595e61f4331))
 
 # [2024.1.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.0.1...v2024.1.0) (2024-01-17)
 
-
 ### Bug Fixes
 
-* [[#186620499](https://github.com/newjersey/navigator.business.nj.gov/issues/186620499)] no nav menu for onboarding authenticated users ([376eb9f](https://github.com/newjersey/navigator.business.nj.gov/commit/376eb9faf710b4ef6f3c1dd37a1e31b18026de08))
-* [[#186682632](https://github.com/newjersey/navigator.business.nj.gov/issues/186682632)] update certifications snackbar to display after formation ([d7500e7](https://github.com/newjersey/navigator.business.nj.gov/commit/d7500e771c38ed6440bcd3cf1bf0aa1a6def1713))
-* [[#186765441](https://github.com/newjersey/navigator.business.nj.gov/issues/186765441)] prevent feb license renewals appearing in jan ([05248a7](https://github.com/newjersey/navigator.business.nj.gov/commit/05248a7d1c27f389b4ca48fe486d9b7748bfa6ff))
-* [[#186798269](https://github.com/newjersey/navigator.business.nj.gov/issues/186798269)] Industry search bold text ([789192d](https://github.com/newjersey/navigator.business.nj.gov/commit/789192d5381f064dd401d574129b16e8f9ad3cbb))
-* [[#186810093](https://github.com/newjersey/navigator.business.nj.gov/issues/186810093)] fix quick action tile width issue on mobile/tablet ([e10d8fb](https://github.com/newjersey/navigator.business.nj.gov/commit/e10d8fb25b60d1a05b8a519c3e30e6203ff19795))
-* [[#186810093](https://github.com/newjersey/navigator.business.nj.gov/issues/186810093)] make quick action tiles height consistent across all implementations ([7aa3ca5](https://github.com/newjersey/navigator.business.nj.gov/commit/7aa3ca5a503f307a714b1d6f7762a86af4c50259))
-* [[#186836788](https://github.com/newjersey/navigator.business.nj.gov/issues/186836788)]  Anne's Search Tool isn't searching the Quick Action Tasks ([d2be3b5](https://github.com/newjersey/navigator.business.nj.gov/commit/d2be3b55aec17d88c59cd03cb443767bb761891c))
-* **deps:** update dependency @emotion/react to v11.11.3 ([247f512](https://github.com/newjersey/navigator.business.nj.gov/commit/247f5122733116f76b4c910667971be6ed9442c2))
-* **deps:** update dependency @smithy/node-http-handler to v2.2.2 ([8253a07](https://github.com/newjersey/navigator.business.nj.gov/commit/8253a070f61c69937ac28d4abdf192994fe7cada))
-* **deps:** update dependency axios to v1.6.3 ([861c95a](https://github.com/newjersey/navigator.business.nj.gov/commit/861c95a6b8500ddc8c194cb7483528695b7da637))
-* **deps:** update dependency axios to v1.6.4 ([be6c042](https://github.com/newjersey/navigator.business.nj.gov/commit/be6c0423bd4248c14788dd28b17bb9eb9f151f30))
-* **deps:** update dependency axios to v1.6.5 ([fabf13c](https://github.com/newjersey/navigator.business.nj.gov/commit/fabf13c9ccd2bd0ac6ca2b3d76ab9899bd25dfcb))
-* **deps:** update dependency rehype-raw to v7 ([63aacb5](https://github.com/newjersey/navigator.business.nj.gov/commit/63aacb539c2d3077b62d579f5673a1711b2b2d32))
-* **deps:** update material-ui ([1230919](https://github.com/newjersey/navigator.business.nj.gov/commit/123091964ccecb6666c22ee4afe2e827d0717b71))
-* **deps:** update material-ui ([e30e34c](https://github.com/newjersey/navigator.business.nj.gov/commit/e30e34c8d9635066d1a05e05af84a7fb150b9d1e))
-* design-update-for-license-status-check-tab-[#186263393](https://github.com/newjersey/navigator.business.nj.gov/issues/186263393) ([efc098c](https://github.com/newjersey/navigator.business.nj.gov/commit/efc098c72d697f50df76064ee19dd68ce82b382d))
-* remove occurences of 2 spaces to fix unit tests ([1a459a7](https://github.com/newjersey/navigator.business.nj.gov/commit/1a459a708831f2b8680ff3958471292202f4e60e))
-
+- [[#186620499](https://www.pivotaltracker.com/story/show/186620499)] no nav menu for onboarding authenticated users ([376eb9f](https://github.com/newjersey/navigator.business.nj.gov/commit/376eb9faf710b4ef6f3c1dd37a1e31b18026de08))
+- [[#186682632](https://www.pivotaltracker.com/story/show/186682632)] update certifications snackbar to display after formation ([d7500e7](https://github.com/newjersey/navigator.business.nj.gov/commit/d7500e771c38ed6440bcd3cf1bf0aa1a6def1713))
+- [[#186765441](https://www.pivotaltracker.com/story/show/186765441)] prevent feb license renewals appearing in jan ([05248a7](https://github.com/newjersey/navigator.business.nj.gov/commit/05248a7d1c27f389b4ca48fe486d9b7748bfa6ff))
+- [[#186798269](https://www.pivotaltracker.com/story/show/186798269)] Industry search bold text ([789192d](https://github.com/newjersey/navigator.business.nj.gov/commit/789192d5381f064dd401d574129b16e8f9ad3cbb))
+- [[#186810093](https://www.pivotaltracker.com/story/show/186810093)] fix quick action tile width issue on mobile/tablet ([e10d8fb](https://github.com/newjersey/navigator.business.nj.gov/commit/e10d8fb25b60d1a05b8a519c3e30e6203ff19795))
+- [[#186810093](https://www.pivotaltracker.com/story/show/186810093)] make quick action tiles height consistent across all implementations ([7aa3ca5](https://github.com/newjersey/navigator.business.nj.gov/commit/7aa3ca5a503f307a714b1d6f7762a86af4c50259))
+- [[#186836788](https://www.pivotaltracker.com/story/show/186836788)] Anne's Search Tool isn't searching the Quick Action Tasks ([d2be3b5](https://github.com/newjersey/navigator.business.nj.gov/commit/d2be3b55aec17d88c59cd03cb443767bb761891c))
+- **deps:** update dependency @emotion/react to v11.11.3 ([247f512](https://github.com/newjersey/navigator.business.nj.gov/commit/247f5122733116f76b4c910667971be6ed9442c2))
+- **deps:** update dependency @smithy/node-http-handler to v2.2.2 ([8253a07](https://github.com/newjersey/navigator.business.nj.gov/commit/8253a070f61c69937ac28d4abdf192994fe7cada))
+- **deps:** update dependency axios to v1.6.3 ([861c95a](https://github.com/newjersey/navigator.business.nj.gov/commit/861c95a6b8500ddc8c194cb7483528695b7da637))
+- **deps:** update dependency axios to v1.6.4 ([be6c042](https://github.com/newjersey/navigator.business.nj.gov/commit/be6c0423bd4248c14788dd28b17bb9eb9f151f30))
+- **deps:** update dependency axios to v1.6.5 ([fabf13c](https://github.com/newjersey/navigator.business.nj.gov/commit/fabf13c9ccd2bd0ac6ca2b3d76ab9899bd25dfcb))
+- **deps:** update dependency rehype-raw to v7 ([63aacb5](https://github.com/newjersey/navigator.business.nj.gov/commit/63aacb539c2d3077b62d579f5673a1711b2b2d32))
+- **deps:** update material-ui ([1230919](https://github.com/newjersey/navigator.business.nj.gov/commit/123091964ccecb6666c22ee4afe2e827d0717b71))
+- **deps:** update material-ui ([e30e34c](https://github.com/newjersey/navigator.business.nj.gov/commit/e30e34c8d9635066d1a05e05af84a7fb150b9d1e))
+- design-update-for-license-status-check-tab-[#186263393](https://www.pivotaltracker.com/story/show/186263393) ([efc098c](https://github.com/newjersey/navigator.business.nj.gov/commit/efc098c72d697f50df76064ee19dd68ce82b382d))
+- remove occurences of 2 spaces to fix unit tests ([1a459a7](https://github.com/newjersey/navigator.business.nj.gov/commit/1a459a708831f2b8680ff3958471292202f4e60e))
 
 ### Features
 
-* [[#185001723](https://github.com/newjersey/navigator.business.nj.gov/issues/185001723)] dakota nexus remembers formation page ([14bb594](https://github.com/newjersey/navigator.business.nj.gov/commit/14bb59427e21e57a04bf4f523c9cabbaeb100dfc))
-* [[#185681159](https://github.com/newjersey/navigator.business.nj.gov/issues/185681159)] add business name field and note ([d465617](https://github.com/newjersey/navigator.business.nj.gov/commit/d4656177360c3301427dd64aba44a2f5cf354890))
-* [[#186006497](https://github.com/newjersey/navigator.business.nj.gov/issues/186006497)] upgrade appropriate headers to h2 with h3-styling ([b9c03dd](https://github.com/newjersey/navigator.business.nj.gov/commit/b9c03dd88ec97fadac45b07716502d29d4a102e6))
-* [[#186150128](https://github.com/newjersey/navigator.business.nj.gov/issues/186150128)] poppy and hic ([292e1f4](https://github.com/newjersey/navigator.business.nj.gov/commit/292e1f4fe3548360d998705e753cf7043da38b81))
-* [[#186150128](https://github.com/newjersey/navigator.business.nj.gov/issues/186150128)] poppy and hic ([6566fd6](https://github.com/newjersey/navigator.business.nj.gov/commit/6566fd63fa499e14cc57a449416c84d92318a770))
-* [[#186150128](https://github.com/newjersey/navigator.business.nj.gov/issues/186150128)] Poppy and Oscar HIC State Contracting ([8a73936](https://github.com/newjersey/navigator.business.nj.gov/commit/8a739366701493e1fd1d082940f81e0f8269a017))
-* [[#186150128](https://github.com/newjersey/navigator.business.nj.gov/issues/186150128)] Poppy and Oscar HIC State Contracting ([a86e3c5](https://github.com/newjersey/navigator.business.nj.gov/commit/a86e3c58a623b8a51889da34a0baea108740d2c6))
-* [[#186150128](https://github.com/newjersey/navigator.business.nj.gov/issues/186150128)] Poppy and Oscar HIC State Contracting ([723f766](https://github.com/newjersey/navigator.business.nj.gov/commit/723f766bc9790b8e9b20eaaa14b7010d605058fb))
-* [[#186150128](https://github.com/newjersey/navigator.business.nj.gov/issues/186150128)] Poppy and Oscar HIC State Contracting ([7c6ad35](https://github.com/newjersey/navigator.business.nj.gov/commit/7c6ad3580f9101dfe212a8eb86aceb73281f7259))
-* [[#186343273](https://github.com/newjersey/navigator.business.nj.gov/issues/186343273)] removed needs to register phase, added formed phase ([036e2c8](https://github.com/newjersey/navigator.business.nj.gov/commit/036e2c85fd76a8fdcba30b23e2716a4c60cb2f91))
-* [[#186494878](https://github.com/newjersey/navigator.business.nj.gov/issues/186494878)] remove twitter icon and add facebook icon in footer ([a0b308b](https://github.com/newjersey/navigator.business.nj.gov/commit/a0b308b7e1069eb1fb177590b5e97bd763fd46b7))
-* [[#186497109](https://github.com/newjersey/navigator.business.nj.gov/issues/186497109)] add return to previous business button on unsupported page ([d457c59](https://github.com/newjersey/navigator.business.nj.gov/commit/d457c5944b78f6d27aa1a2307620f7cfcb9798c6))
-* [[#186569119](https://github.com/newjersey/navigator.business.nj.gov/issues/186569119)] no certification alert for Snackbar for Dakota Remote Seller or Remote Woker ([991d14f](https://github.com/newjersey/navigator.business.nj.gov/commit/991d14f96d9761bc2fb17d5c56ca0a5f06dbff07))
-* [[#186569119](https://github.com/newjersey/navigator.business.nj.gov/issues/186569119)] Test no certification alert for foreign remote seller/worker ([68142d7](https://github.com/newjersey/navigator.business.nj.gov/commit/68142d77466015ad63d1d3c442796f021148883a))
-* [[#186569187](https://github.com/newjersey/navigator.business.nj.gov/issues/186569187)] remove insurance policy task for Remote Sellers ([fe04135](https://github.com/newjersey/navigator.business.nj.gov/commit/fe04135144dd422609e12cbd510d0caf020e5e8a))
-* [[#186638569](https://github.com/newjersey/navigator.business.nj.gov/issues/186638569)] Quick Action Icon Options Added ([1dac471](https://github.com/newjersey/navigator.business.nj.gov/commit/1dac47117f2a2a539d57918badf052e59f546869))
-* [[#186704006](https://github.com/newjersey/navigator.business.nj.gov/issues/186704006)] Formation Review Page Heading Structure for Will Practice law fixed ([e901781](https://github.com/newjersey/navigator.business.nj.gov/commit/e90178123ccd0d55bcd474e4660d8d3b416c1eef))
-* [[#186774562](https://github.com/newjersey/navigator.business.nj.gov/issues/186774562)] put text/plain for formation API behind feat flag ([9449cec](https://github.com/newjersey/navigator.business.nj.gov/commit/9449cec0598a52a45a8c6e0ae62a256e6965fe7a))
-* [[#186774562](https://github.com/newjersey/navigator.business.nj.gov/issues/186774562)] switch to text/plain for all formation requests ([c455a61](https://github.com/newjersey/navigator.business.nj.gov/commit/c455a613599e54ebfc98fb22716ade6c472d5a5f))
-* [[#186827102](https://github.com/newjersey/navigator.business.nj.gov/issues/186827102)] create a script to query for users with matching biz specs ([e8ef7a9](https://github.com/newjersey/navigator.business.nj.gov/commit/e8ef7a948bd559483636f38e54f5f7bef0c742e7))
+- [[#185001723](https://www.pivotaltracker.com/story/show/185001723)] dakota nexus remembers formation page ([14bb594](https://github.com/newjersey/navigator.business.nj.gov/commit/14bb59427e21e57a04bf4f523c9cabbaeb100dfc))
+- [[#185681159](https://www.pivotaltracker.com/story/show/185681159)] add business name field and note ([d465617](https://github.com/newjersey/navigator.business.nj.gov/commit/d4656177360c3301427dd64aba44a2f5cf354890))
+- [[#186006497](https://www.pivotaltracker.com/story/show/186006497)] upgrade appropriate headers to h2 with h3-styling ([b9c03dd](https://github.com/newjersey/navigator.business.nj.gov/commit/b9c03dd88ec97fadac45b07716502d29d4a102e6))
+- [[#186150128](https://www.pivotaltracker.com/story/show/186150128)] poppy and hic ([292e1f4](https://github.com/newjersey/navigator.business.nj.gov/commit/292e1f4fe3548360d998705e753cf7043da38b81))
+- [[#186150128](https://www.pivotaltracker.com/story/show/186150128)] poppy and hic ([6566fd6](https://github.com/newjersey/navigator.business.nj.gov/commit/6566fd63fa499e14cc57a449416c84d92318a770))
+- [[#186150128](https://www.pivotaltracker.com/story/show/186150128)] Poppy and Oscar HIC State Contracting ([8a73936](https://github.com/newjersey/navigator.business.nj.gov/commit/8a739366701493e1fd1d082940f81e0f8269a017))
+- [[#186150128](https://www.pivotaltracker.com/story/show/186150128)] Poppy and Oscar HIC State Contracting ([a86e3c5](https://github.com/newjersey/navigator.business.nj.gov/commit/a86e3c58a623b8a51889da34a0baea108740d2c6))
+- [[#186150128](https://www.pivotaltracker.com/story/show/186150128)] Poppy and Oscar HIC State Contracting ([723f766](https://github.com/newjersey/navigator.business.nj.gov/commit/723f766bc9790b8e9b20eaaa14b7010d605058fb))
+- [[#186150128](https://www.pivotaltracker.com/story/show/186150128)] Poppy and Oscar HIC State Contracting ([7c6ad35](https://github.com/newjersey/navigator.business.nj.gov/commit/7c6ad3580f9101dfe212a8eb86aceb73281f7259))
+- [[#186343273](https://www.pivotaltracker.com/story/show/186343273)] removed needs to register phase, added formed phase ([036e2c8](https://github.com/newjersey/navigator.business.nj.gov/commit/036e2c85fd76a8fdcba30b23e2716a4c60cb2f91))
+- [[#186494878](https://www.pivotaltracker.com/story/show/186494878)] remove twitter icon and add facebook icon in footer ([a0b308b](https://github.com/newjersey/navigator.business.nj.gov/commit/a0b308b7e1069eb1fb177590b5e97bd763fd46b7))
+- [[#186497109](https://www.pivotaltracker.com/story/show/186497109)] add return to previous business button on unsupported page ([d457c59](https://github.com/newjersey/navigator.business.nj.gov/commit/d457c5944b78f6d27aa1a2307620f7cfcb9798c6))
+- [[#186569119](https://www.pivotaltracker.com/story/show/186569119)] no certification alert for Snackbar for Dakota Remote Seller or Remote Woker ([991d14f](https://github.com/newjersey/navigator.business.nj.gov/commit/991d14f96d9761bc2fb17d5c56ca0a5f06dbff07))
+- [[#186569119](https://www.pivotaltracker.com/story/show/186569119)] Test no certification alert for foreign remote seller/worker ([68142d7](https://github.com/newjersey/navigator.business.nj.gov/commit/68142d77466015ad63d1d3c442796f021148883a))
+- [[#186569187](https://www.pivotaltracker.com/story/show/186569187)] remove insurance policy task for Remote Sellers ([fe04135](https://github.com/newjersey/navigator.business.nj.gov/commit/fe04135144dd422609e12cbd510d0caf020e5e8a))
+- [[#186638569](https://www.pivotaltracker.com/story/show/186638569)] Quick Action Icon Options Added ([1dac471](https://github.com/newjersey/navigator.business.nj.gov/commit/1dac47117f2a2a539d57918badf052e59f546869))
+- [[#186704006](https://www.pivotaltracker.com/story/show/186704006)] Formation Review Page Heading Structure for Will Practice law fixed ([e901781](https://github.com/newjersey/navigator.business.nj.gov/commit/e90178123ccd0d55bcd474e4660d8d3b416c1eef))
+- [[#186774562](https://www.pivotaltracker.com/story/show/186774562)] put text/plain for formation API behind feat flag ([9449cec](https://github.com/newjersey/navigator.business.nj.gov/commit/9449cec0598a52a45a8c6e0ae62a256e6965fe7a))
+- [[#186774562](https://www.pivotaltracker.com/story/show/186774562)] switch to text/plain for all formation requests ([c455a61](https://github.com/newjersey/navigator.business.nj.gov/commit/c455a613599e54ebfc98fb22716ade6c472d5a5f))
+- [[#186827102](https://www.pivotaltracker.com/story/show/186827102)] create a script to query for users with matching biz specs ([e8ef7a9](https://github.com/newjersey/navigator.business.nj.gov/commit/e8ef7a948bd559483636f38e54f5f7bef0c742e7))
 
 ## [2024.0.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.0.0...v2024.0.1) (2024-01-10)
 
-
 ### Bug Fixes
 
-* [[#186765441](https://github.com/newjersey/navigator.business.nj.gov/issues/186765441)] prevent feb license renewals appearing in jan ([e35864b](https://github.com/newjersey/navigator.business.nj.gov/commit/e35864bb73a051c3bd4deab730536f4c0a39d202))
-* [[#186818972](https://github.com/newjersey/navigator.business.nj.gov/issues/186818972)] update myNJ account link ([1b1aa6e](https://github.com/newjersey/navigator.business.nj.gov/commit/1b1aa6e39f7372a148e6018b489bd05a2cdda62a))
-* remove occurences of 2 spaces to fix unit tests ([1c1c364](https://github.com/newjersey/navigator.business.nj.gov/commit/1c1c3644c1561d5f6d62c0a338e3a0699635086b))
+- [[#186765441](https://www.pivotaltracker.com/story/show/186765441)] prevent feb license renewals appearing in jan ([e35864b](https://github.com/newjersey/navigator.business.nj.gov/commit/e35864bb73a051c3bd4deab730536f4c0a39d202))
+- [[#186818972](https://www.pivotaltracker.com/story/show/186818972)] update myNJ account link ([1b1aa6e](https://github.com/newjersey/navigator.business.nj.gov/commit/1b1aa6e39f7372a148e6018b489bd05a2cdda62a))
+- remove occurences of 2 spaces to fix unit tests ([1c1c364](https://github.com/newjersey/navigator.business.nj.gov/commit/1c1c3644c1561d5f6d62c0a338e3a0699635086b))
 
 # [2024.0.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.43.0...v2024.0.0) (2024-01-03)
 
 ### Bug Fixes
 
-- [[#186263393](https://github.com/newjersey/navigator.business.nj.gov/issues/186263393)] update license status check tab redesign ([2558a73](https://github.com/newjersey/navigator.business.nj.gov/commit/2558a73c8e33699eb769dfefef9106099c56e766))
+- [[#186263393](https://www.pivotaltracker.com/story/show/186263393)] update license status check tab redesign ([2558a73](https://github.com/newjersey/navigator.business.nj.gov/commit/2558a73c8e33699eb769dfefef9106099c56e766))
 - **deps:** update dependency @smithy/node-http-handler to v2.2.1 ([77f02c0](https://github.com/newjersey/navigator.business.nj.gov/commit/77f02c028ec5bd540f3d0115f2ec964bbcdfdd76))
 - **deps:** update material-ui ([22535ca](https://github.com/newjersey/navigator.business.nj.gov/commit/22535ca107e0f1bd25d724b08c194e9511e5f73c))
 - remove console log ([74ce2c9](https://github.com/newjersey/navigator.business.nj.gov/commit/74ce2c9c0d13ee3c4977b27993989e303ae7fcfc))
@@ -702,9 +979,9 @@
 
 ### Features
 
-- [[#185994565](https://github.com/newjersey/navigator.business.nj.gov/issues/185994565)] Foreign Corp Business Designators ([6d7c047](https://github.com/newjersey/navigator.business.nj.gov/commit/6d7c0476fabf21fa89374b6f6749c0b801a4d5e6))
-- [[#185994565](https://github.com/newjersey/navigator.business.nj.gov/issues/185994565)] revisions to foreign corp designator ([48baa48](https://github.com/newjersey/navigator.business.nj.gov/commit/48baa484fc1090a44963b12a7b55f5c36f6aaea9))
-- [[#186263393](https://github.com/newjersey/navigator.business.nj.gov/issues/186263393)] license status check tab redesign ([e783dc1](https://github.com/newjersey/navigator.business.nj.gov/commit/e783dc1a63a5cfa8992049baa8ed79b06b401eb6))
+- [[#185994565](https://www.pivotaltracker.com/story/show/185994565)] Foreign Corp Business Designators ([6d7c047](https://github.com/newjersey/navigator.business.nj.gov/commit/6d7c0476fabf21fa89374b6f6749c0b801a4d5e6))
+- [[#185994565](https://www.pivotaltracker.com/story/show/185994565)] revisions to foreign corp designator ([48baa48](https://github.com/newjersey/navigator.business.nj.gov/commit/48baa484fc1090a44963b12a7b55f5c36f6aaea9))
+- [[#186263393](https://www.pivotaltracker.com/story/show/186263393)] license status check tab redesign ([e783dc1](https://github.com/newjersey/navigator.business.nj.gov/commit/e783dc1a63a5cfa8992049baa8ed79b06b401eb6))
 
 # [5.43.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.42.1...v5.43.0) (2023-12-15)
 
@@ -715,11 +992,11 @@
 
 ### Features
 
-- [[#184606287](https://github.com/newjersey/navigator.business.nj.gov/issues/184606287)] storybook - action bar ([f2f0f23](https://github.com/newjersey/navigator.business.nj.gov/commit/f2f0f23c5862d28a1f8ddb45981790b74fb9391f))
-- [[#185606709](https://github.com/newjersey/navigator.business.nj.gov/issues/185606709)] storybook - quick action ([60fd3ce](https://github.com/newjersey/navigator.business.nj.gov/commit/60fd3ce5bbfba78f29075ef661f08a831c624f38))
-- [[#185698591](https://github.com/newjersey/navigator.business.nj.gov/issues/185698591)] create Webflow industry starter kit dropdown ([406fcfa](https://github.com/newjersey/navigator.business.nj.gov/commit/406fcfa72067c3e6d9d8ca3b8b09ea619b49b916))
-- [[#185698591](https://github.com/newjersey/navigator.business.nj.gov/issues/185698591)] create Webflow industrySync ([ac5aebc](https://github.com/newjersey/navigator.business.nj.gov/commit/ac5aebcd63d2100a1d424fc30f2bcbf2e79d75e4))
-- [[#186203974](https://github.com/newjersey/navigator.business.nj.gov/issues/186203974)] storybook - h2 unbolded ([eafbbec](https://github.com/newjersey/navigator.business.nj.gov/commit/eafbbec71eebad783c4bf4a8abfa849e6d9be428))
+- [[#184606287](https://www.pivotaltracker.com/story/show/184606287)] storybook - action bar ([f2f0f23](https://github.com/newjersey/navigator.business.nj.gov/commit/f2f0f23c5862d28a1f8ddb45981790b74fb9391f))
+- [[#185606709](https://www.pivotaltracker.com/story/show/185606709)] storybook - quick action ([60fd3ce](https://github.com/newjersey/navigator.business.nj.gov/commit/60fd3ce5bbfba78f29075ef661f08a831c624f38))
+- [[#185698591](https://www.pivotaltracker.com/story/show/185698591)] create Webflow industry starter kit dropdown ([406fcfa](https://github.com/newjersey/navigator.business.nj.gov/commit/406fcfa72067c3e6d9d8ca3b8b09ea619b49b916))
+- [[#185698591](https://www.pivotaltracker.com/story/show/185698591)] create Webflow industrySync ([ac5aebc](https://github.com/newjersey/navigator.business.nj.gov/commit/ac5aebcd63d2100a1d424fc30f2bcbf2e79d75e4))
+- [[#186203974](https://www.pivotaltracker.com/story/show/186203974)] storybook - h2 unbolded ([eafbbec](https://github.com/newjersey/navigator.business.nj.gov/commit/eafbbec71eebad783c4bf4a8abfa849e6d9be428))
 
 ## [5.42.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.42.0...v5.42.1) (2023-12-07)
 
@@ -731,13 +1008,13 @@
 
 ### Bug Fixes
 
-- [[#185757752](https://github.com/newjersey/navigator.business.nj.gov/issues/185757752)] fix scrolling behavior on alert with href routing ([d63557c](https://github.com/newjersey/navigator.business.nj.gov/commit/d63557cc7fa4ad3b1c4eab3659ca2882175fc5a9))
-- [[#186609639](https://github.com/newjersey/navigator.business.nj.gov/issues/186609639)] SidebarCard header margin fixed ([66172b8](https://github.com/newjersey/navigator.business.nj.gov/commit/66172b88b8db6af0a49eec8d1f112f27c47cc482))
-- [[#186612999](https://github.com/newjersey/navigator.business.nj.gov/issues/186612999)] fixed breaking calendar test and removal of smooth scroll ([688531c](https://github.com/newjersey/navigator.business.nj.gov/commit/688531c4b06985963505791a8251a19275647345))
+- [[#185757752](https://www.pivotaltracker.com/story/show/185757752)] fix scrolling behavior on alert with href routing ([d63557c](https://github.com/newjersey/navigator.business.nj.gov/commit/d63557cc7fa4ad3b1c4eab3659ca2882175fc5a9))
+- [[#186609639](https://www.pivotaltracker.com/story/show/186609639)] SidebarCard header margin fixed ([66172b8](https://github.com/newjersey/navigator.business.nj.gov/commit/66172b88b8db6af0a49eec8d1f112f27c47cc482))
+- [[#186612999](https://www.pivotaltracker.com/story/show/186612999)] fixed breaking calendar test and removal of smooth scroll ([688531c](https://github.com/newjersey/navigator.business.nj.gov/commit/688531c4b06985963505791a8251a19275647345))
 
 ### Features
 
-- [[#186569515](https://github.com/newjersey/navigator.business.nj.gov/issues/186569515)] consistent quick action heights ([5763f34](https://github.com/newjersey/navigator.business.nj.gov/commit/5763f3432d465473e3a689e5edb012495519763b))
+- [[#186569515](https://www.pivotaltracker.com/story/show/186569515)] consistent quick action heights ([5763f34](https://github.com/newjersey/navigator.business.nj.gov/commit/5763f3432d465473e3a689e5edb012495519763b))
 
 ### Reverts
 
@@ -748,41 +1025,41 @@
 
 ### Bug Fixes
 
-- [[#186478423](https://github.com/newjersey/navigator.business.nj.gov/issues/186478423)] fix header white colors on sidebar card ([5d603ac](https://github.com/newjersey/navigator.business.nj.gov/commit/5d603acde7f788d440a4ae516105876cdceb5527))
-- [[#186537095](https://github.com/newjersey/navigator.business.nj.gov/issues/186537095)] fix side bar card title to white ([b7958e7](https://github.com/newjersey/navigator.business.nj.gov/commit/b7958e7e7a3889e34ee2b58fda13855c7a411122))
-- [[#186561090](https://github.com/newjersey/navigator.business.nj.gov/issues/186561090)] Govt Contracting quick action showing for construction sector id ([ee39001](https://github.com/newjersey/navigator.business.nj.gov/commit/ee39001ac153684bf8cb640040cb38d8398c032a))
+- [[#186478423](https://www.pivotaltracker.com/story/show/186478423)] fix header white colors on sidebar card ([5d603ac](https://github.com/newjersey/navigator.business.nj.gov/commit/5d603acde7f788d440a4ae516105876cdceb5527))
+- [[#186537095](https://www.pivotaltracker.com/story/show/186537095)] fix side bar card title to white ([b7958e7](https://github.com/newjersey/navigator.business.nj.gov/commit/b7958e7e7a3889e34ee2b58fda13855c7a411122))
+- [[#186561090](https://www.pivotaltracker.com/story/show/186561090)] Govt Contracting quick action showing for construction sector id ([ee39001](https://github.com/newjersey/navigator.business.nj.gov/commit/ee39001ac153684bf8cb640040cb38d8398c032a))
 - **deps:** update dependency @aws-crypto/sha256-browser to v5 ([0b81064](https://github.com/newjersey/navigator.business.nj.gov/commit/0b81064ec179a6793f34a52c07b270eba484b899))
 - **deps:** update dependency @smithy/node-http-handler to v2.1.10 ([d753692](https://github.com/newjersey/navigator.business.nj.gov/commit/d7536924198c42345b0cf882f901a926a66982a7))
 - **deps:** update dependency helmet to v7 ([bc663e8](https://github.com/newjersey/navigator.business.nj.gov/commit/bc663e8dd7212f3a5d170d5c7ab2dd635f6c3bdd))
 
 ### Features
 
-- [[#184606162](https://github.com/newjersey/navigator.business.nj.gov/issues/184606162)] Storybook Maintenence: Tags ([77e34bc](https://github.com/newjersey/navigator.business.nj.gov/commit/77e34bcc6a679264987d76f4800ecc65c460e142))
-- [[#185757536](https://github.com/newjersey/navigator.business.nj.gov/issues/185757536)] create REMOTE_SELLER_WORKER operating phase ([4433acd](https://github.com/newjersey/navigator.business.nj.gov/commit/4433acd14fe31e261abcf850dac707ccdf077369))
-- [[#186363219](https://github.com/newjersey/navigator.business.nj.gov/issues/186363219)] guest disclaimer in profile margin revisions ([18964c0](https://github.com/newjersey/navigator.business.nj.gov/commit/18964c06c108d6f4e0e024d72901cecee0a2619d))
-- [[#186363219](https://github.com/newjersey/navigator.business.nj.gov/issues/186363219)] Note alert disclaimer in profile for guest mode ([eb0953d](https://github.com/newjersey/navigator.business.nj.gov/commit/eb0953d0bbdc6614a398d003c403f309689ab613))
-- [[#186374749](https://github.com/newjersey/navigator.business.nj.gov/issues/186374749)] remove aria labels from onboarding step one radios ([71a90d2](https://github.com/newjersey/navigator.business.nj.gov/commit/71a90d270e5e1c9cbe7708c309fa5c897d60f019))
-- [[#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)]: DCA Dynamics Fire Safety and Housing Setup ([e070135](https://github.com/newjersey/navigator.business.nj.gov/commit/e070135bc984e32cdd4a25c036b2cfa92181c1fb))
+- [[#184606162](https://www.pivotaltracker.com/story/show/184606162)] Storybook Maintenence: Tags ([77e34bc](https://github.com/newjersey/navigator.business.nj.gov/commit/77e34bcc6a679264987d76f4800ecc65c460e142))
+- [[#185757536](https://www.pivotaltracker.com/story/show/185757536)] create REMOTE_SELLER_WORKER operating phase ([4433acd](https://github.com/newjersey/navigator.business.nj.gov/commit/4433acd14fe31e261abcf850dac707ccdf077369))
+- [[#186363219](https://www.pivotaltracker.com/story/show/186363219)] guest disclaimer in profile margin revisions ([18964c0](https://github.com/newjersey/navigator.business.nj.gov/commit/18964c06c108d6f4e0e024d72901cecee0a2619d))
+- [[#186363219](https://www.pivotaltracker.com/story/show/186363219)] Note alert disclaimer in profile for guest mode ([eb0953d](https://github.com/newjersey/navigator.business.nj.gov/commit/eb0953d0bbdc6614a398d003c403f309689ab613))
+- [[#186374749](https://www.pivotaltracker.com/story/show/186374749)] remove aria labels from onboarding step one radios ([71a90d2](https://github.com/newjersey/navigator.business.nj.gov/commit/71a90d270e5e1c9cbe7708c309fa5c897d60f019))
+- [[#186519052](https://www.pivotaltracker.com/story/show/186519052)]: DCA Dynamics Fire Safety and Housing Setup ([e070135](https://github.com/newjersey/navigator.business.nj.gov/commit/e070135bc984e32cdd4a25c036b2cfa92181c1fb))
 
 ### Reverts
 
 - Revert "wip [skip ci]" ([348acce](https://github.com/newjersey/navigator.business.nj.gov/commit/348acce1c80f3d542a3a142824f0d9ed975a05f6))
-- Revert "feat: [#186519052] add fire safety and housing initial connections" ([cf1f223](https://github.com/newjersey/navigator.business.nj.gov/commit/cf1f2236de5b6cdf8097daa1ea02724eaf9ea03b)), closes [#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)
-- Revert "feat: [#186519052] update config files" ([ebffad0](https://github.com/newjersey/navigator.business.nj.gov/commit/ebffad07fdb1f2f4b869dc2d76638ae90be6df8e)), closes [#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)
-- Revert "feat: [#186519052] Add fire safety to api" ([612db28](https://github.com/newjersey/navigator.business.nj.gov/commit/612db28c4f11a8e1cd5d549d71568ed542b0c56a)), closes [#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)
-- Revert "feat: [#186519052] remove relative import" ([67130fd](https://github.com/newjersey/navigator.business.nj.gov/commit/67130fd66dfa40681a23fe3270db72716bdbd051)), closes [#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)
-- Revert "feat: [#186519052] add all values to circleci config" ([980c59c](https://github.com/newjersey/navigator.business.nj.gov/commit/980c59cd3ec7eff3ccaf7e4fac097bf599584047)), closes [#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)
+- Revert "feat: [#186519052] add fire safety and housing initial connections" ([cf1f223](https://github.com/newjersey/navigator.business.nj.gov/commit/cf1f2236de5b6cdf8097daa1ea02724eaf9ea03b)), closes [#186519052](https://www.pivotaltracker.com/story/show/186519052)
+- Revert "feat: [#186519052] update config files" ([ebffad0](https://github.com/newjersey/navigator.business.nj.gov/commit/ebffad07fdb1f2f4b869dc2d76638ae90be6df8e)), closes [#186519052](https://www.pivotaltracker.com/story/show/186519052)
+- Revert "feat: [#186519052] Add fire safety to api" ([612db28](https://github.com/newjersey/navigator.business.nj.gov/commit/612db28c4f11a8e1cd5d549d71568ed542b0c56a)), closes [#186519052](https://www.pivotaltracker.com/story/show/186519052)
+- Revert "feat: [#186519052] remove relative import" ([67130fd](https://github.com/newjersey/navigator.business.nj.gov/commit/67130fd66dfa40681a23fe3270db72716bdbd051)), closes [#186519052](https://www.pivotaltracker.com/story/show/186519052)
+- Revert "feat: [#186519052] add all values to circleci config" ([980c59c](https://github.com/newjersey/navigator.business.nj.gov/commit/980c59cd3ec7eff3ccaf7e4fac097bf599584047)), closes [#186519052](https://www.pivotaltracker.com/story/show/186519052)
 - Revert "feat: [#186519052] fix name overlap issue" ([bfcca51](https://github.com/newjersey/navigator.business.nj.gov/commit/bfcca51c76d8fc020ada767680cf04612a359996))
-- Revert "feat: [#186519052] restore quotes around address" ([444ed3e](https://github.com/newjersey/navigator.business.nj.gov/commit/444ed3e3f0401fc71a1f2780b587cc0c9b0b481f)), closes [#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)
-- Revert "feat: [#186519052] add housing connection to api" ([bc77216](https://github.com/newjersey/navigator.business.nj.gov/commit/bc7721658496e6c7bb3b74216c38a66fb5abd8db)), closes [#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)
+- Revert "feat: [#186519052] restore quotes around address" ([444ed3e](https://github.com/newjersey/navigator.business.nj.gov/commit/444ed3e3f0401fc71a1f2780b587cc0c9b0b481f)), closes [#186519052](https://www.pivotaltracker.com/story/show/186519052)
+- Revert "feat: [#186519052] add housing connection to api" ([bc77216](https://github.com/newjersey/navigator.business.nj.gov/commit/bc7721658496e6c7bb3b74216c38a66fb5abd8db)), closes [#186519052](https://www.pivotaltracker.com/story/show/186519052)
 - Revert "feat: [#186519052] fix param gathering" ([0b21522](https://github.com/newjersey/navigator.business.nj.gov/commit/0b21522cd1a0e0874a62510f19ae796d699e31f6))
-- Revert "feat: [#186519052] pull processing into separate function" ([cff6d25](https://github.com/newjersey/navigator.business.nj.gov/commit/cff6d25a58803fd5a905ef1227abe66fa202eed9)), closes [#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)
+- Revert "feat: [#186519052] pull processing into separate function" ([cff6d25](https://github.com/newjersey/navigator.business.nj.gov/commit/cff6d25a58803fd5a905ef1227abe66fa202eed9)), closes [#186519052](https://www.pivotaltracker.com/story/show/186519052)
 
 # [5.40.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.39.0...v5.40.0) (2023-11-22)
 
 ### Bug Fixes
 
-- [[#185932083](https://github.com/newjersey/navigator.business.nj.gov/issues/185932083)] update hidden opps to not pass navbar on scroll ([2fb04f2](https://github.com/newjersey/navigator.business.nj.gov/commit/2fb04f25268a968356589a6c4b70a8759905a445))
+- [[#185932083](https://www.pivotaltracker.com/story/show/185932083)] update hidden opps to not pass navbar on scroll ([2fb04f2](https://github.com/newjersey/navigator.business.nj.gov/commit/2fb04f25268a968356589a6c4b70a8759905a445))
 - **deps:** update dependency @smithy/node-http-handler to v2.1.9 ([9a3dc8b](https://github.com/newjersey/navigator.business.nj.gov/commit/9a3dc8b18dbc77840c7beebbad6a1c29b411359c))
 - **deps:** update dependency @types/mdast to v4 ([77c7947](https://github.com/newjersey/navigator.business.nj.gov/commit/77c7947194fe68bf818bc39ef0f984fe4231b515))
 - **deps:** update dependency axios to v1 [security] ([cc69a1b](https://github.com/newjersey/navigator.business.nj.gov/commit/cc69a1b38649d198872a58636bfaae857e3ad76c))
@@ -796,58 +1073,58 @@
 
 ### Features
 
-- [[#184606162](https://github.com/newjersey/navigator.business.nj.gov/issues/184606162)] Storybook tags ([6c283a9](https://github.com/newjersey/navigator.business.nj.gov/commit/6c283a907d9d572785713eaf49d2aa45ef30d4cf))
-- [[#186093257](https://github.com/newjersey/navigator.business.nj.gov/issues/186093257)] make made by love innovation footer accessible ([6401523](https://github.com/newjersey/navigator.business.nj.gov/commit/640152370a089da312dc433e6b64e69a167e1fca))
-- [[#186443496](https://github.com/newjersey/navigator.business.nj.gov/issues/186443496)] update favicon and page title ([14c3e81](https://github.com/newjersey/navigator.business.nj.gov/commit/14c3e814e2136e28a2f421fbee0a52361d453dc8))
+- [[#184606162](https://www.pivotaltracker.com/story/show/184606162)] Storybook tags ([6c283a9](https://github.com/newjersey/navigator.business.nj.gov/commit/6c283a907d9d572785713eaf49d2aa45ef30d4cf))
+- [[#186093257](https://www.pivotaltracker.com/story/show/186093257)] make made by love innovation footer accessible ([6401523](https://github.com/newjersey/navigator.business.nj.gov/commit/640152370a089da312dc433e6b64e69a167e1fca))
+- [[#186443496](https://www.pivotaltracker.com/story/show/186443496)] update favicon and page title ([14c3e81](https://github.com/newjersey/navigator.business.nj.gov/commit/14c3e814e2136e28a2f421fbee0a52361d453dc8))
 
 # [5.39.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.38.0...v5.39.0) (2023-11-17)
 
 ### Features
 
-- [[#185555573](https://github.com/newjersey/navigator.business.nj.gov/issues/185555573)] state contracting quick action ([726c63a](https://github.com/newjersey/navigator.business.nj.gov/commit/726c63a3f45a39aeb73229d9c2d2806e0f9dd100))
-- [[#185932019](https://github.com/newjersey/navigator.business.nj.gov/issues/185932019)] opportunity card styling ([d02ac44](https://github.com/newjersey/navigator.business.nj.gov/commit/d02ac449952c522425e08d7fa38aa3c84b1d9e55))
-- [[#186093180](https://github.com/newjersey/navigator.business.nj.gov/issues/186093180)] HTML Page Titles should reference page content ([9db0f16](https://github.com/newjersey/navigator.business.nj.gov/commit/9db0f167785e42578c8ead80d778b26be75f62c8))
+- [[#185555573](https://www.pivotaltracker.com/story/show/185555573)] state contracting quick action ([726c63a](https://github.com/newjersey/navigator.business.nj.gov/commit/726c63a3f45a39aeb73229d9c2d2806e0f9dd100))
+- [[#185932019](https://www.pivotaltracker.com/story/show/185932019)] opportunity card styling ([d02ac44](https://github.com/newjersey/navigator.business.nj.gov/commit/d02ac449952c522425e08d7fa38aa3c84b1d9e55))
+- [[#186093180](https://www.pivotaltracker.com/story/show/186093180)] HTML Page Titles should reference page content ([9db0f16](https://github.com/newjersey/navigator.business.nj.gov/commit/9db0f167785e42578c8ead80d778b26be75f62c8))
 
 # [5.38.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.37.0...v5.38.0) (2023-11-14)
 
 ### Bug Fixes
 
-- [[#186429361](https://github.com/newjersey/navigator.business.nj.gov/issues/186429361)] dynamics license status application id filtering to account for null ([e7f37cf](https://github.com/newjersey/navigator.business.nj.gov/commit/e7f37cfa1cf24023c367d38df28513d2b7f9e775))
+- [[#186429361](https://www.pivotaltracker.com/story/show/186429361)] dynamics license status application id filtering to account for null ([e7f37cf](https://github.com/newjersey/navigator.business.nj.gov/commit/e7f37cfa1cf24023c367d38df28513d2b7f9e775))
 
 ### Features
 
-- [[#186094556](https://github.com/newjersey/navigator.business.nj.gov/issues/186094556)] add more helpful aria-labels to EDIT buttons ([0a5ff73](https://github.com/newjersey/navigator.business.nj.gov/commit/0a5ff73d238fb895ae70a56a756fd59624189bf2))
-- [[#186448388](https://github.com/newjersey/navigator.business.nj.gov/issues/186448388)] add 8081 to clear ports script ([4cdb043](https://github.com/newjersey/navigator.business.nj.gov/commit/4cdb04314ac4982a54cf8bf97bf395815e87b8fe))
+- [[#186094556](https://www.pivotaltracker.com/story/show/186094556)] add more helpful aria-labels to EDIT buttons ([0a5ff73](https://github.com/newjersey/navigator.business.nj.gov/commit/0a5ff73d238fb895ae70a56a756fd59624189bf2))
+- [[#186448388](https://www.pivotaltracker.com/story/show/186448388)] add 8081 to clear ports script ([4cdb043](https://github.com/newjersey/navigator.business.nj.gov/commit/4cdb04314ac4982a54cf8bf97bf395815e87b8fe))
 
 # [5.37.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.36.0...v5.37.0) (2023-11-09)
 
 ### Bug Fixes
 
-- [[#185893614](https://github.com/newjersey/navigator.business.nj.gov/issues/185893614)] circle ci config env vars ([a04d085](https://github.com/newjersey/navigator.business.nj.gov/commit/a04d085409652aa382277c743c3c00d6415fd920))
-- [[#185893614](https://github.com/newjersey/navigator.business.nj.gov/issues/185893614)] remove duplicate field from licenseSearchTask in CMS ([a847a18](https://github.com/newjersey/navigator.business.nj.gov/commit/a847a183baa79feb6e5af20afc5beef74c3d46dc))
-- [[#186366473](https://github.com/newjersey/navigator.business.nj.gov/issues/186366473)] added Analytics for formation task help button ([f7efe5a](https://github.com/newjersey/navigator.business.nj.gov/commit/f7efe5ae32ac7faa995510ddde6096dd81a45b1c))
+- [[#185893614](https://www.pivotaltracker.com/story/show/185893614)] circle ci config env vars ([a04d085](https://github.com/newjersey/navigator.business.nj.gov/commit/a04d085409652aa382277c743c3c00d6415fd920))
+- [[#185893614](https://www.pivotaltracker.com/story/show/185893614)] remove duplicate field from licenseSearchTask in CMS ([a847a18](https://github.com/newjersey/navigator.business.nj.gov/commit/a847a183baa79feb6e5af20afc5beef74c3d46dc))
+- [[#186366473](https://www.pivotaltracker.com/story/show/186366473)] added Analytics for formation task help button ([f7efe5a](https://github.com/newjersey/navigator.business.nj.gov/commit/f7efe5ae32ac7faa995510ddde6096dd81a45b1c))
 
 ### Features
 
-- [[#185893614](https://github.com/newjersey/navigator.business.nj.gov/issues/185893614)] license status check migration - public movers ([247f8c4](https://github.com/newjersey/navigator.business.nj.gov/commit/247f8c4b4c9e37c69ffd5a575dc991f9801240d3))
-- [[#186084930](https://github.com/newjersey/navigator.business.nj.gov/issues/186084930)] hide landing page presentational images from screen readers ([5db7e43](https://github.com/newjersey/navigator.business.nj.gov/commit/5db7e4356848f1e77fb1deb671c1fba2889d9a73))
+- [[#185893614](https://www.pivotaltracker.com/story/show/185893614)] license status check migration - public movers ([247f8c4](https://github.com/newjersey/navigator.business.nj.gov/commit/247f8c4b4c9e37c69ffd5a575dc991f9801240d3))
+- [[#186084930](https://www.pivotaltracker.com/story/show/186084930)] hide landing page presentational images from screen readers ([5db7e43](https://github.com/newjersey/navigator.business.nj.gov/commit/5db7e4356848f1e77fb1deb671c1fba2889d9a73))
 - [185932083] view hidden items accordion scrolls to top when opened ([7510465](https://github.com/newjersey/navigator.business.nj.gov/commit/7510465901ecf44ec178b202ff3de081ba3ed8f5))
 
 # [5.36.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.35.0...v5.36.0) (2023-11-03)
 
 ### Features
 
-- [[#185931982](https://github.com/newjersey/navigator.business.nj.gov/issues/185931982)] action card styling updates ([5a7569b](https://github.com/newjersey/navigator.business.nj.gov/commit/5a7569b353ceb484f001e201b8359a28c2363cc9))
-- [[#185931982](https://github.com/newjersey/navigator.business.nj.gov/issues/185931982)] Action card styling updates ([fbde2fd](https://github.com/newjersey/navigator.business.nj.gov/commit/fbde2fd97a057a408813e8ec7423d3532954d37c))
+- [[#185931982](https://www.pivotaltracker.com/story/show/185931982)] action card styling updates ([5a7569b](https://github.com/newjersey/navigator.business.nj.gov/commit/5a7569b353ceb484f001e201b8359a28c2363cc9))
+- [[#185931982](https://www.pivotaltracker.com/story/show/185931982)] Action card styling updates ([fbde2fd](https://github.com/newjersey/navigator.business.nj.gov/commit/fbde2fd97a057a408813e8ec7423d3532954d37c))
 
 # [5.35.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.34.1...v5.35.0) (2023-10-31)
 
 ### Features
 
-- [[#185151322](https://github.com/newjersey/navigator.business.nj.gov/issues/185151322)] support CTA dropdowns as well as buttons for tasks with post-onboarding ([b3cd95e](https://github.com/newjersey/navigator.business.nj.gov/commit/b3cd95ed8bb192414956bea6937af47d49b2c055))
-- [[#185151322](https://github.com/newjersey/navigator.business.nj.gov/issues/185151322)] support CTA dropdowns as well as buttons for tasks with post-onboarding ([539f051](https://github.com/newjersey/navigator.business.nj.gov/commit/539f051e25297ffd4c1667b1fd168f78878d62a3))
-- [[#185681031](https://github.com/newjersey/navigator.business.nj.gov/issues/185681031)] added note alert when businesses formed outside the Navigator in profile ([2a5e425](https://github.com/newjersey/navigator.business.nj.gov/commit/2a5e425f03f8bd7d93315ce02a77a04803ef20fc))
-- [[#186352435](https://github.com/newjersey/navigator.business.nj.gov/issues/186352435)] Removed Note Alert's special smaller border and border right props ([5c7a3f0](https://github.com/newjersey/navigator.business.nj.gov/commit/5c7a3f0e776ba0003c8ea1ff1044c9751c769a96))
+- [[#185151322](https://www.pivotaltracker.com/story/show/185151322)] support CTA dropdowns as well as buttons for tasks with post-onboarding ([b3cd95e](https://github.com/newjersey/navigator.business.nj.gov/commit/b3cd95ed8bb192414956bea6937af47d49b2c055))
+- [[#185151322](https://www.pivotaltracker.com/story/show/185151322)] support CTA dropdowns as well as buttons for tasks with post-onboarding ([539f051](https://github.com/newjersey/navigator.business.nj.gov/commit/539f051e25297ffd4c1667b1fd168f78878d62a3))
+- [[#185681031](https://www.pivotaltracker.com/story/show/185681031)] added note alert when businesses formed outside the Navigator in profile ([2a5e425](https://github.com/newjersey/navigator.business.nj.gov/commit/2a5e425f03f8bd7d93315ce02a77a04803ef20fc))
+- [[#186352435](https://www.pivotaltracker.com/story/show/186352435)] Removed Note Alert's special smaller border and border right props ([5c7a3f0](https://github.com/newjersey/navigator.business.nj.gov/commit/5c7a3f0e776ba0003c8ea1ff1044c9751c769a96))
 
 ## [5.34.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.34.0...v5.34.1) (2023-10-26)
 
@@ -859,38 +1136,38 @@
 
 ### Features
 
-- [[#185931949](https://github.com/newjersey/navigator.business.nj.gov/issues/185931949)] For you header updates and counter ([da2cd04](https://github.com/newjersey/navigator.business.nj.gov/commit/da2cd048288e42878307344faf2c7b7f35c189b6))
-- [[#185943408](https://github.com/newjersey/navigator.business.nj.gov/issues/185943408)] add for you section empty message and image ([e62619e](https://github.com/newjersey/navigator.business.nj.gov/commit/e62619e10769bdd0078e3909aab5092e0c2068b5))
+- [[#185931949](https://www.pivotaltracker.com/story/show/185931949)] For you header updates and counter ([da2cd04](https://github.com/newjersey/navigator.business.nj.gov/commit/da2cd048288e42878307344faf2c7b7f35c189b6))
+- [[#185943408](https://www.pivotaltracker.com/story/show/185943408)] add for you section empty message and image ([e62619e](https://github.com/newjersey/navigator.business.nj.gov/commit/e62619e10769bdd0078e3909aab5092e0c2068b5))
 
 # [5.33.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.32.0...v5.33.0) (2023-10-17)
 
 ### Features
 
-- [[#184606376](https://github.com/newjersey/navigator.business.nj.gov/issues/184606376)] added alert variant for notes to storybook ([d3654ee](https://github.com/newjersey/navigator.business.nj.gov/commit/d3654ee5a2341cc67f8d3a030d42873c660472ba))
+- [[#184606376](https://www.pivotaltracker.com/story/show/184606376)] added alert variant for notes to storybook ([d3654ee](https://github.com/newjersey/navigator.business.nj.gov/commit/d3654ee5a2341cc67f8d3a030d42873c660472ba))
 
 # [5.32.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.31.0...v5.32.0) (2023-10-06)
 
 ### Bug Fixes
 
-- [[#186165401](https://github.com/newjersey/navigator.business.nj.gov/issues/186165401)] correctly show API error for state dropdown in formation ([f75474e](https://github.com/newjersey/navigator.business.nj.gov/commit/f75474e8f0a23d008cf110ce54caaee8dc6759fd))
+- [[#186165401](https://www.pivotaltracker.com/story/show/186165401)] correctly show API error for state dropdown in formation ([f75474e](https://github.com/newjersey/navigator.business.nj.gov/commit/f75474e8f0a23d008cf110ce54caaee8dc6759fd))
 
 ### Features
 
-- [[#184606443](https://github.com/newjersey/navigator.business.nj.gov/issues/184606443)] storybook updates for buttons ([956bcf4](https://github.com/newjersey/navigator.business.nj.gov/commit/956bcf468db525cfd650591017577c30945f6c7e))
-- [[#185932056](https://github.com/newjersey/navigator.business.nj.gov/issues/185932056)] padding evening ([eefb211](https://github.com/newjersey/navigator.business.nj.gov/commit/eefb211351287fb65ffa46972adcf6c28e6206f5))
-- [[#185932056](https://github.com/newjersey/navigator.business.nj.gov/issues/185932056)] updating find funding link to button ([a586180](https://github.com/newjersey/navigator.business.nj.gov/commit/a5861804d2a6bc19869630ee522f273ec5fab8a6))
+- [[#184606443](https://www.pivotaltracker.com/story/show/184606443)] storybook updates for buttons ([956bcf4](https://github.com/newjersey/navigator.business.nj.gov/commit/956bcf468db525cfd650591017577c30945f6c7e))
+- [[#185932056](https://www.pivotaltracker.com/story/show/185932056)] padding evening ([eefb211](https://github.com/newjersey/navigator.business.nj.gov/commit/eefb211351287fb65ffa46972adcf6c28e6206f5))
+- [[#185932056](https://www.pivotaltracker.com/story/show/185932056)] updating find funding link to button ([a586180](https://github.com/newjersey/navigator.business.nj.gov/commit/a5861804d2a6bc19869630ee522f273ec5fab8a6))
 
 # [5.31.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.30.0...v5.31.0) (2023-09-29)
 
 ### Features
 
-- [[#186136868](https://github.com/newjersey/navigator.business.nj.gov/issues/186136868)] remove esq from top banner ([2338b95](https://github.com/newjersey/navigator.business.nj.gov/commit/2338b9511ceaac2ac351d26f0df7ce40e1cc54c1))
+- [[#186136868](https://www.pivotaltracker.com/story/show/186136868)] remove esq from top banner ([2338b95](https://github.com/newjersey/navigator.business.nj.gov/commit/2338b9511ceaac2ac351d26f0df7ce40e1cc54c1))
 
 # [5.30.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.29.0...v5.30.0) (2023-09-26)
 
 ### Bug Fixes
 
-- [[#186092347](https://github.com/newjersey/navigator.business.nj.gov/issues/186092347)] Business Name and Number of Employees no longer required in profile ([f57118a](https://github.com/newjersey/navigator.business.nj.gov/commit/f57118a38f5d9ba80fa223330ca0f15a35feab75))
+- [[#186092347](https://www.pivotaltracker.com/story/show/186092347)] Business Name and Number of Employees no longer required in profile ([f57118a](https://github.com/newjersey/navigator.business.nj.gov/commit/f57118a38f5d9ba80fa223330ca0f15a35feab75))
 - **deps:** update aws-sdk to v3.413.0 ([2515207](https://github.com/newjersey/navigator.business.nj.gov/commit/2515207352abe01ce0d0f1838bbab8b3adabde63))
 - **deps:** update aws-sdk to v3.414.0 ([004c6f3](https://github.com/newjersey/navigator.business.nj.gov/commit/004c6f396a0395b73da574afa6b99de24de9efe2))
 - **deps:** update aws-sdk to v3.415.0 ([ae8cd9f](https://github.com/newjersey/navigator.business.nj.gov/commit/ae8cd9ff293039eed3eba375f7460388fb475db9))
@@ -905,16 +1182,16 @@
 
 ### Features
 
-- [[#184226156](https://github.com/newjersey/navigator.business.nj.gov/issues/184226156)] add analytics event to 'skip to main content' ([8228468](https://github.com/newjersey/navigator.business.nj.gov/commit/8228468160abb597e1ebf7456339ec9aa7240201))
-- [[#184376697](https://github.com/newjersey/navigator.business.nj.gov/issues/184376697)] Remove Header Text Field from Info Alert Block ([d385c1c](https://github.com/newjersey/navigator.business.nj.gov/commit/d385c1c54fb704c551ecf5efd6fe33a75cfc6eeb))
-- [[#185167013](https://github.com/newjersey/navigator.business.nj.gov/issues/185167013)] enable foreign nonprofit formation ([2f8d2f2](https://github.com/newjersey/navigator.business.nj.gov/commit/2f8d2f2112bfd577bdd550f062a9d77399211084))
-- [[#185481806](https://github.com/newjersey/navigator.business.nj.gov/issues/185481806)] add BRC quick action ([c468d41](https://github.com/newjersey/navigator.business.nj.gov/commit/c468d41b092118fe343c02f1c245ebdfbc69cdd2))
-- [[#185801876](https://github.com/newjersey/navigator.business.nj.gov/issues/185801876)] display modal on NAICS code task for guest mode users ([d238500](https://github.com/newjersey/navigator.business.nj.gov/commit/d238500568ef0fe6f7951f2205b52d7eb698e081))
-- [[#185801983](https://github.com/newjersey/navigator.business.nj.gov/issues/185801983)] register for taxes task should not allow edits or submition in guest mode ([2ee5683](https://github.com/newjersey/navigator.business.nj.gov/commit/2ee5683c763790c21105b753b21602b2311d3b09))
-- [[#185872113](https://github.com/newjersey/navigator.business.nj.gov/issues/185872113)] mini roadmap design updates ([fc528e2](https://github.com/newjersey/navigator.business.nj.gov/commit/fc528e2482f587f58068be59e11fa8d33f91023e))
-- [[#186025115](https://github.com/newjersey/navigator.business.nj.gov/issues/186025115)] skip onboarding for industry query strings without essential questions ([eefcc59](https://github.com/newjersey/navigator.business.nj.gov/commit/eefcc5924fb69ed490ae694f14dfba5e2d8fde5f))
-- [[#186052121](https://github.com/newjersey/navigator.business.nj.gov/issues/186052121)] cost of cert of good standing for domestic nonprofit ([d5ae4f4](https://github.com/newjersey/navigator.business.nj.gov/commit/d5ae4f4391696d7d0cc758e87b945894602b03c9))
-- [[#186099467](https://github.com/newjersey/navigator.business.nj.gov/issues/186099467)] display starter kit header text for guest mode users ([749f4e8](https://github.com/newjersey/navigator.business.nj.gov/commit/749f4e8ef6dba4fc8d29c14d605804deb32f4506))
+- [[#184226156](https://www.pivotaltracker.com/story/show/184226156)] add analytics event to 'skip to main content' ([8228468](https://github.com/newjersey/navigator.business.nj.gov/commit/8228468160abb597e1ebf7456339ec9aa7240201))
+- [[#184376697](https://www.pivotaltracker.com/story/show/184376697)] Remove Header Text Field from Info Alert Block ([d385c1c](https://github.com/newjersey/navigator.business.nj.gov/commit/d385c1c54fb704c551ecf5efd6fe33a75cfc6eeb))
+- [[#185167013](https://www.pivotaltracker.com/story/show/185167013)] enable foreign nonprofit formation ([2f8d2f2](https://github.com/newjersey/navigator.business.nj.gov/commit/2f8d2f2112bfd577bdd550f062a9d77399211084))
+- [[#185481806](https://www.pivotaltracker.com/story/show/185481806)] add BRC quick action ([c468d41](https://github.com/newjersey/navigator.business.nj.gov/commit/c468d41b092118fe343c02f1c245ebdfbc69cdd2))
+- [[#185801876](https://www.pivotaltracker.com/story/show/185801876)] display modal on NAICS code task for guest mode users ([d238500](https://github.com/newjersey/navigator.business.nj.gov/commit/d238500568ef0fe6f7951f2205b52d7eb698e081))
+- [[#185801983](https://www.pivotaltracker.com/story/show/185801983)] register for taxes task should not allow edits or submition in guest mode ([2ee5683](https://github.com/newjersey/navigator.business.nj.gov/commit/2ee5683c763790c21105b753b21602b2311d3b09))
+- [[#185872113](https://www.pivotaltracker.com/story/show/185872113)] mini roadmap design updates ([fc528e2](https://github.com/newjersey/navigator.business.nj.gov/commit/fc528e2482f587f58068be59e11fa8d33f91023e))
+- [[#186025115](https://www.pivotaltracker.com/story/show/186025115)] skip onboarding for industry query strings without essential questions ([eefcc59](https://github.com/newjersey/navigator.business.nj.gov/commit/eefcc5924fb69ed490ae694f14dfba5e2d8fde5f))
+- [[#186052121](https://www.pivotaltracker.com/story/show/186052121)] cost of cert of good standing for domestic nonprofit ([d5ae4f4](https://github.com/newjersey/navigator.business.nj.gov/commit/d5ae4f4391696d7d0cc758e87b945894602b03c9))
+- [[#186099467](https://www.pivotaltracker.com/story/show/186099467)] display starter kit header text for guest mode users ([749f4e8](https://github.com/newjersey/navigator.business.nj.gov/commit/749f4e8ef6dba4fc8d29c14d605804deb32f4506))
 
 # [5.29.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.28.0...v5.29.0) (2023-09-19)
 
@@ -925,60 +1202,60 @@
 
 ### Features
 
-- [[#184890110](https://github.com/newjersey/navigator.business.nj.gov/issues/184890110)] added displayname to MD files and made filename readonly in CMS ([585e319](https://github.com/newjersey/navigator.business.nj.gov/commit/585e319c1e165c35c51dd8c979a91c4c6c56cf5e))
-- [[#184890110](https://github.com/newjersey/navigator.business.nj.gov/issues/184890110)] renamed slug widget to be writeoncereadonly widget as its more descriptive ([86c5e17](https://github.com/newjersey/navigator.business.nj.gov/commit/86c5e170f98b1ddc1aeea1901e39e6e4d1af5bd9))
+- [[#184890110](https://www.pivotaltracker.com/story/show/184890110)] added displayname to MD files and made filename readonly in CMS ([585e319](https://github.com/newjersey/navigator.business.nj.gov/commit/585e319c1e165c35c51dd8c979a91c4c6c56cf5e))
+- [[#184890110](https://www.pivotaltracker.com/story/show/184890110)] renamed slug widget to be writeoncereadonly widget as its more descriptive ([86c5e17](https://github.com/newjersey/navigator.business.nj.gov/commit/86c5e170f98b1ddc1aeea1901e39e6e4d1af5bd9))
 
 # [5.28.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.27.0...v5.28.0) (2023-09-15)
 
 ### Bug Fixes
 
-- [[#183536833](https://github.com/newjersey/navigator.business.nj.gov/issues/183536833)] inline error for missing signature for dakota nexus ([6baf460](https://github.com/newjersey/navigator.business.nj.gov/commit/6baf460220e4b5732709ba4237aaf5039e0fc964))
-- [[#185834867](https://github.com/newjersey/navigator.business.nj.gov/issues/185834867)] add test coverage for change in persona and operating phase ([cc72856](https://github.com/newjersey/navigator.business.nj.gov/commit/cc72856cbf66ac75c340ab23d10eaec7d9a0b54d))
-- [[#185834867](https://github.com/newjersey/navigator.business.nj.gov/issues/185834867)] make sector required for Oscar personas ([99feb36](https://github.com/newjersey/navigator.business.nj.gov/commit/99feb3629407ed54bbf78e9ecaa902995bf94867))
-- [[#185940232](https://github.com/newjersey/navigator.business.nj.gov/issues/185940232)] differentiate foreign and domestic legal type labels for formation ([321e6c9](https://github.com/newjersey/navigator.business.nj.gov/commit/321e6c99397ffee7fd14637f4c173e7abeb7628d))
-- [[#185940288](https://github.com/newjersey/navigator.business.nj.gov/issues/185940288)] allow Outside of the USA selection for foreign state of formation ([deba953](https://github.com/newjersey/navigator.business.nj.gov/commit/deba9536ebf1daea3a6236efa75690ae4f09b11c))
-- [[#185940509](https://github.com/newjersey/navigator.business.nj.gov/issues/185940509)] navbar account link text routes to account-setup page ([2811d73](https://github.com/newjersey/navigator.business.nj.gov/commit/2811d73519fe6f5ef5053cf4453ad7368941c77b))
-- [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] prevent not-registered card from showing after registration ([57aa19a](https://github.com/newjersey/navigator.business.nj.gov/commit/57aa19abdf2d49addbd10485139a869b963c2db8))
+- [[#183536833](https://www.pivotaltracker.com/story/show/183536833)] inline error for missing signature for dakota nexus ([6baf460](https://github.com/newjersey/navigator.business.nj.gov/commit/6baf460220e4b5732709ba4237aaf5039e0fc964))
+- [[#185834867](https://www.pivotaltracker.com/story/show/185834867)] add test coverage for change in persona and operating phase ([cc72856](https://github.com/newjersey/navigator.business.nj.gov/commit/cc72856cbf66ac75c340ab23d10eaec7d9a0b54d))
+- [[#185834867](https://www.pivotaltracker.com/story/show/185834867)] make sector required for Oscar personas ([99feb36](https://github.com/newjersey/navigator.business.nj.gov/commit/99feb3629407ed54bbf78e9ecaa902995bf94867))
+- [[#185940232](https://www.pivotaltracker.com/story/show/185940232)] differentiate foreign and domestic legal type labels for formation ([321e6c9](https://github.com/newjersey/navigator.business.nj.gov/commit/321e6c99397ffee7fd14637f4c173e7abeb7628d))
+- [[#185940288](https://www.pivotaltracker.com/story/show/185940288)] allow Outside of the USA selection for foreign state of formation ([deba953](https://github.com/newjersey/navigator.business.nj.gov/commit/deba9536ebf1daea3a6236efa75690ae4f09b11c))
+- [[#185940509](https://www.pivotaltracker.com/story/show/185940509)] navbar account link text routes to account-setup page ([2811d73](https://github.com/newjersey/navigator.business.nj.gov/commit/2811d73519fe6f5ef5053cf4453ad7368941c77b))
+- [[#185977080](https://www.pivotaltracker.com/story/show/185977080)] prevent not-registered card from showing after registration ([57aa19a](https://github.com/newjersey/navigator.business.nj.gov/commit/57aa19abdf2d49addbd10485139a869b963c2db8))
 - **deps:** update dependency rehype-stringify to v9.0.4 ([fde6bb5](https://github.com/newjersey/navigator.business.nj.gov/commit/fde6bb574adca00df224a9fa7f097c7d7c7af46d))
 - remove flaky wait from dashboard test ([dcc2000](https://github.com/newjersey/navigator.business.nj.gov/commit/dcc2000fa92d0904a0f0e632439eb678cb4bfd3d))
 
 ### Features
 
-- [[#183536833](https://github.com/newjersey/navigator.business.nj.gov/issues/183536833)] signers and checkbox error message ([387b607](https://github.com/newjersey/navigator.business.nj.gov/commit/387b6072789b99e10c0eee18ed3f218593bd78b2))
-- [[#184415884](https://github.com/newjersey/navigator.business.nj.gov/issues/184415884)] analytics added to cert and funding cards ([1337a60](https://github.com/newjersey/navigator.business.nj.gov/commit/1337a607f2d9fd4652a1d973de66cb139046828f))
-- [[#184432488](https://github.com/newjersey/navigator.business.nj.gov/issues/184432488)] create FieldEntryAlert component ([6c583ee](https://github.com/newjersey/navigator.business.nj.gov/commit/6c583eeb5aca40b9daebbd200a13b195459c2f48))
-- [[#184432488](https://github.com/newjersey/navigator.business.nj.gov/issues/184432488)] use FieldEntryAlert in formation task ([3ccc1f6](https://github.com/newjersey/navigator.business.nj.gov/commit/3ccc1f64b61d5adeb88b78242333b272448f8d18))
-- [[#184432488](https://github.com/newjersey/navigator.business.nj.gov/issues/184432488)] use FieldEntryAlert in profile ([f4fdfed](https://github.com/newjersey/navigator.business.nj.gov/commit/f4fdfed1656c5b46bbc25dac86654e91afac0226))
-- [[#184432499](https://github.com/newjersey/navigator.business.nj.gov/issues/184432499)] add accent-cool-darkest to additional links and unstyled buttons ([2267b5c](https://github.com/newjersey/navigator.business.nj.gov/commit/2267b5c5377f2edf36ef2eb7d7cfebeeb1036ba3))
-- [[#184432499](https://github.com/newjersey/navigator.business.nj.gov/issues/184432499)] replace all links with blue accent-cool-darkest ([1e8b392](https://github.com/newjersey/navigator.business.nj.gov/commit/1e8b392dc37dcb926158d7ec3932a3a2a142cc0c))
-- [[#184432499](https://github.com/newjersey/navigator.business.nj.gov/issues/184432499)] update FieldEntryAlert component to take all Alert props ([6f58592](https://github.com/newjersey/navigator.business.nj.gov/commit/6f58592359622199956e9a02a829108f09e51361))
-- [[#184779281](https://github.com/newjersey/navigator.business.nj.gov/issues/184779281)] show modified content for users who encounter existing myNJ account issue ([65578ca](https://github.com/newjersey/navigator.business.nj.gov/commit/65578ca371e5d31c56cba1cfcdb90bac47ef59c7))
-- [[#185455538](https://github.com/newjersey/navigator.business.nj.gov/issues/185455538)] adjusted error alert when email is taken ([c76687d](https://github.com/newjersey/navigator.business.nj.gov/commit/c76687d79e5f83d57bd53fdcb00d41b9b360b0f8))
-- [[#185872551](https://github.com/newjersey/navigator.business.nj.gov/issues/185872551)] remove task-progress card ([8c2eafa](https://github.com/newjersey/navigator.business.nj.gov/commit/8c2eafa383b1e87afe30e6aeddcb9606511fc0da))
-- [[#186003099](https://github.com/newjersey/navigator.business.nj.gov/issues/186003099)] update Lt. Governor in banner ([c7f34f5](https://github.com/newjersey/navigator.business.nj.gov/commit/c7f34f5aa8f842a498938ffb548d36f914e07ddf))
-- [[#186003172](https://github.com/newjersey/navigator.business.nj.gov/issues/186003172)] added inline error for taken email on registration page ([b883ac4](https://github.com/newjersey/navigator.business.nj.gov/commit/b883ac4b2ab7ed19e476ee89ad92c9305b81f5d6))
-- [[#186003172](https://github.com/newjersey/navigator.business.nj.gov/issues/186003172)] revised email taken inline error with new renmaing from main ([6979feb](https://github.com/newjersey/navigator.business.nj.gov/commit/6979feb90ca170fb7526e36b96330f859259d8ec))
+- [[#183536833](https://www.pivotaltracker.com/story/show/183536833)] signers and checkbox error message ([387b607](https://github.com/newjersey/navigator.business.nj.gov/commit/387b6072789b99e10c0eee18ed3f218593bd78b2))
+- [[#184415884](https://www.pivotaltracker.com/story/show/184415884)] analytics added to cert and funding cards ([1337a60](https://github.com/newjersey/navigator.business.nj.gov/commit/1337a607f2d9fd4652a1d973de66cb139046828f))
+- [[#184432488](https://www.pivotaltracker.com/story/show/184432488)] create FieldEntryAlert component ([6c583ee](https://github.com/newjersey/navigator.business.nj.gov/commit/6c583eeb5aca40b9daebbd200a13b195459c2f48))
+- [[#184432488](https://www.pivotaltracker.com/story/show/184432488)] use FieldEntryAlert in formation task ([3ccc1f6](https://github.com/newjersey/navigator.business.nj.gov/commit/3ccc1f64b61d5adeb88b78242333b272448f8d18))
+- [[#184432488](https://www.pivotaltracker.com/story/show/184432488)] use FieldEntryAlert in profile ([f4fdfed](https://github.com/newjersey/navigator.business.nj.gov/commit/f4fdfed1656c5b46bbc25dac86654e91afac0226))
+- [[#184432499](https://www.pivotaltracker.com/story/show/184432499)] add accent-cool-darkest to additional links and unstyled buttons ([2267b5c](https://github.com/newjersey/navigator.business.nj.gov/commit/2267b5c5377f2edf36ef2eb7d7cfebeeb1036ba3))
+- [[#184432499](https://www.pivotaltracker.com/story/show/184432499)] replace all links with blue accent-cool-darkest ([1e8b392](https://github.com/newjersey/navigator.business.nj.gov/commit/1e8b392dc37dcb926158d7ec3932a3a2a142cc0c))
+- [[#184432499](https://www.pivotaltracker.com/story/show/184432499)] update FieldEntryAlert component to take all Alert props ([6f58592](https://github.com/newjersey/navigator.business.nj.gov/commit/6f58592359622199956e9a02a829108f09e51361))
+- [[#184779281](https://www.pivotaltracker.com/story/show/184779281)] show modified content for users who encounter existing myNJ account issue ([65578ca](https://github.com/newjersey/navigator.business.nj.gov/commit/65578ca371e5d31c56cba1cfcdb90bac47ef59c7))
+- [[#185455538](https://www.pivotaltracker.com/story/show/185455538)] adjusted error alert when email is taken ([c76687d](https://github.com/newjersey/navigator.business.nj.gov/commit/c76687d79e5f83d57bd53fdcb00d41b9b360b0f8))
+- [[#185872551](https://www.pivotaltracker.com/story/show/185872551)] remove task-progress card ([8c2eafa](https://github.com/newjersey/navigator.business.nj.gov/commit/8c2eafa383b1e87afe30e6aeddcb9606511fc0da))
+- [[#186003099](https://www.pivotaltracker.com/story/show/186003099)] update Lt. Governor in banner ([c7f34f5](https://github.com/newjersey/navigator.business.nj.gov/commit/c7f34f5aa8f842a498938ffb548d36f914e07ddf))
+- [[#186003172](https://www.pivotaltracker.com/story/show/186003172)] added inline error for taken email on registration page ([b883ac4](https://github.com/newjersey/navigator.business.nj.gov/commit/b883ac4b2ab7ed19e476ee89ad92c9305b81f5d6))
+- [[#186003172](https://www.pivotaltracker.com/story/show/186003172)] revised email taken inline error with new renmaing from main ([6979feb](https://github.com/newjersey/navigator.business.nj.gov/commit/6979feb90ca170fb7526e36b96330f859259d8ec))
 
 # [5.27.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.26.0...v5.27.0) (2023-09-11)
 
 ### Features
 
-- [[#186003099](https://github.com/newjersey/navigator.business.nj.gov/issues/186003099)] update Lt. Governor in banner ([9c3b72a](https://github.com/newjersey/navigator.business.nj.gov/commit/9c3b72ab7315737fa506a4596e81b224ae60cfed))
+- [[#186003099](https://www.pivotaltracker.com/story/show/186003099)] update Lt. Governor in banner ([9c3b72a](https://github.com/newjersey/navigator.business.nj.gov/commit/9c3b72ab7315737fa506a4596e81b224ae60cfed))
 
 # [5.26.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.25.0...v5.26.0) (2023-09-05)
 
 ### Bug Fixes
 
-- [[#184643298](https://github.com/newjersey/navigator.business.nj.gov/issues/184643298)] fix profile opportunities alert ([bfa4ea7](https://github.com/newjersey/navigator.business.nj.gov/commit/bfa4ea7b986cc21c4b94ff2d1d9a999abdc61f20))
-- [[#185403995](https://github.com/newjersey/navigator.business.nj.gov/issues/185403995)] wait for fetch before handling onboarding reroute ([588d72b](https://github.com/newjersey/navigator.business.nj.gov/commit/588d72b7f3ff576111191ca88b52091bb68c4280))
-- [[#185698190](https://github.com/newjersey/navigator.business.nj.gov/issues/185698190)] DBA name takes precident for dropdown and unnamed DBA state for DBA flow ([1f81a25](https://github.com/newjersey/navigator.business.nj.gov/commit/1f81a255a38c2d19ab4c01b636d44e73eaf8e732))
-- [[#185698190](https://github.com/newjersey/navigator.business.nj.gov/issues/185698190)] Formation name check for DBA is now info alert instead of error ([cf38a59](https://github.com/newjersey/navigator.business.nj.gov/commit/cf38a591fcf5632d7b4f5f5bf2e9aaede23eb0e4))
-- [[#185789032](https://github.com/newjersey/navigator.business.nj.gov/issues/185789032)] fix page onboarding page title string interpolation ([3c6c597](https://github.com/newjersey/navigator.business.nj.gov/commit/3c6c5977a42b2efbf42830020412c507c3c861fa))
-- [[#185834243](https://github.com/newjersey/navigator.business.nj.gov/issues/185834243)] add environment variables for staging and prod for FNP and NP feature flags ([48750fa](https://github.com/newjersey/navigator.business.nj.gov/commit/48750fa6904705c9b46ff4b8715e69de79a2a7f8))
-- [[#185853749](https://github.com/newjersey/navigator.business.nj.gov/issues/185853749)] close myNJ modal after link to account setup ([83f5b70](https://github.com/newjersey/navigator.business.nj.gov/commit/83f5b70b81fa144c59c94736a77e405e84e958fd))
-- [[#185863859](https://github.com/newjersey/navigator.business.nj.gov/issues/185863859)] remove materialUI default required asterisk from Radio components ([d0a10dc](https://github.com/newjersey/navigator.business.nj.gov/commit/d0a10dc4eb57b6ade75940b0f2a94b02b5187999))
-- [[#185885539](https://github.com/newjersey/navigator.business.nj.gov/issues/185885539)] fix margin issue to align locked icons on profile ([3ad502f](https://github.com/newjersey/navigator.business.nj.gov/commit/3ad502feafb35bb2a21a1fbffde53398253106d9))
-- [[#185902802](https://github.com/newjersey/navigator.business.nj.gov/issues/185902802)] wrote migration to deal with deleted successful-registration card ([fedf7c3](https://github.com/newjersey/navigator.business.nj.gov/commit/fedf7c3a9149d2b313fcfb72e0e52dda5414feb8))
+- [[#184643298](https://www.pivotaltracker.com/story/show/184643298)] fix profile opportunities alert ([bfa4ea7](https://github.com/newjersey/navigator.business.nj.gov/commit/bfa4ea7b986cc21c4b94ff2d1d9a999abdc61f20))
+- [[#185403995](https://www.pivotaltracker.com/story/show/185403995)] wait for fetch before handling onboarding reroute ([588d72b](https://github.com/newjersey/navigator.business.nj.gov/commit/588d72b7f3ff576111191ca88b52091bb68c4280))
+- [[#185698190](https://www.pivotaltracker.com/story/show/185698190)] DBA name takes precident for dropdown and unnamed DBA state for DBA flow ([1f81a25](https://github.com/newjersey/navigator.business.nj.gov/commit/1f81a255a38c2d19ab4c01b636d44e73eaf8e732))
+- [[#185698190](https://www.pivotaltracker.com/story/show/185698190)] Formation name check for DBA is now info alert instead of error ([cf38a59](https://github.com/newjersey/navigator.business.nj.gov/commit/cf38a591fcf5632d7b4f5f5bf2e9aaede23eb0e4))
+- [[#185789032](https://www.pivotaltracker.com/story/show/185789032)] fix page onboarding page title string interpolation ([3c6c597](https://github.com/newjersey/navigator.business.nj.gov/commit/3c6c5977a42b2efbf42830020412c507c3c861fa))
+- [[#185834243](https://www.pivotaltracker.com/story/show/185834243)] add environment variables for staging and prod for FNP and NP feature flags ([48750fa](https://github.com/newjersey/navigator.business.nj.gov/commit/48750fa6904705c9b46ff4b8715e69de79a2a7f8))
+- [[#185853749](https://www.pivotaltracker.com/story/show/185853749)] close myNJ modal after link to account setup ([83f5b70](https://github.com/newjersey/navigator.business.nj.gov/commit/83f5b70b81fa144c59c94736a77e405e84e958fd))
+- [[#185863859](https://www.pivotaltracker.com/story/show/185863859)] remove materialUI default required asterisk from Radio components ([d0a10dc](https://github.com/newjersey/navigator.business.nj.gov/commit/d0a10dc4eb57b6ade75940b0f2a94b02b5187999))
+- [[#185885539](https://www.pivotaltracker.com/story/show/185885539)] fix margin issue to align locked icons on profile ([3ad502f](https://github.com/newjersey/navigator.business.nj.gov/commit/3ad502feafb35bb2a21a1fbffde53398253106d9))
+- [[#185902802](https://www.pivotaltracker.com/story/show/185902802)] wrote migration to deal with deleted successful-registration card ([fedf7c3](https://github.com/newjersey/navigator.business.nj.gov/commit/fedf7c3a9149d2b313fcfb72e0e52dda5414feb8))
 - delete edd.md ([e0e09c7](https://github.com/newjersey/navigator.business.nj.gov/commit/e0e09c73f2454e2668a289f8c03447254e4b4e24))
 - **deps:** update aws-amplify ([afa5f85](https://github.com/newjersey/navigator.business.nj.gov/commit/afa5f8575d8905431cc16ba6cb8bb9b33756b9be))
 - **deps:** update aws-sdk ([4ba6592](https://github.com/newjersey/navigator.business.nj.gov/commit/4ba65928041946a0b2b50aa5fda691a11a193a1c))
@@ -989,17 +1266,17 @@
 
 ### Features
 
-- [[#184643298](https://github.com/newjersey/navigator.business.nj.gov/issues/184643298)] Add go to profile nudge for Dakota Nexus and poppy formation ([caaea02](https://github.com/newjersey/navigator.business.nj.gov/commit/caaea02f4375f724d1cc9a5a71a3111f510d6272))
-- [[#184662027](https://github.com/newjersey/navigator.business.nj.gov/issues/184662027)] profile error alert ([9f1503b](https://github.com/newjersey/navigator.business.nj.gov/commit/9f1503b52d7e5ed0e1890d624b80ceb07c2e7ec9))
-- [[#184702075](https://github.com/newjersey/navigator.business.nj.gov/issues/184702075)] remove mini-roadmap for filings page ([53909d0](https://github.com/newjersey/navigator.business.nj.gov/commit/53909d088e873af938a9e652cb5a206336426b37))
-- [[#184749103](https://github.com/newjersey/navigator.business.nj.gov/issues/184749103)] remove US Territories from formation state dropdown ([2f7fa38](https://github.com/newjersey/navigator.business.nj.gov/commit/2f7fa3813175a86f06bc3ebbab71f69b29b7dabf))
-- [[#184992602](https://github.com/newjersey/navigator.business.nj.gov/issues/184992602)] add cannabis location alert to biz formation ([c5cb0ca](https://github.com/newjersey/navigator.business.nj.gov/commit/c5cb0ca377a7cc54071bf7c234b1056ae10d304c))
-- [[#184992602](https://github.com/newjersey/navigator.business.nj.gov/issues/184992602)] create cannabis location alert CMS component ([685f02c](https://github.com/newjersey/navigator.business.nj.gov/commit/685f02c33e770f18523b6a2de875d7507216f71f))
-- [[#185167184](https://github.com/newjersey/navigator.business.nj.gov/issues/185167184)] add Note block to cms ([0bffa03](https://github.com/newjersey/navigator.business.nj.gov/commit/0bffa03813e30dcd8f4a8135d769065c33b42920))
-- [[#185424624](https://github.com/newjersey/navigator.business.nj.gov/issues/185424624)] add quick actions to cms ([7abe5b9](https://github.com/newjersey/navigator.business.nj.gov/commit/7abe5b904a32728ab941cea5f90c581a2786438f))
-- [[#185676804](https://github.com/newjersey/navigator.business.nj.gov/issues/185676804)] left-aligned side nav items in profile on small screens ([4b40ea8](https://github.com/newjersey/navigator.business.nj.gov/commit/4b40ea85b58398dea53d0e06e176d385c0a37951))
-- [[#185757071](https://github.com/newjersey/navigator.business.nj.gov/issues/185757071)] EIN task updated to trigger modal on edit ([5d97a05](https://github.com/newjersey/navigator.business.nj.gov/commit/5d97a05047b12c06d7a9513ab071ec3fa7977063))
-- remove-account-creation-card-[#185681589](https://github.com/newjersey/navigator.business.nj.gov/issues/185681589) ([1a4926e](https://github.com/newjersey/navigator.business.nj.gov/commit/1a4926e390ddb2ac241e318441f75ccb15f4eed8))
+- [[#184643298](https://www.pivotaltracker.com/story/show/184643298)] Add go to profile nudge for Dakota Nexus and poppy formation ([caaea02](https://github.com/newjersey/navigator.business.nj.gov/commit/caaea02f4375f724d1cc9a5a71a3111f510d6272))
+- [[#184662027](https://www.pivotaltracker.com/story/show/184662027)] profile error alert ([9f1503b](https://github.com/newjersey/navigator.business.nj.gov/commit/9f1503b52d7e5ed0e1890d624b80ceb07c2e7ec9))
+- [[#184702075](https://www.pivotaltracker.com/story/show/184702075)] remove mini-roadmap for filings page ([53909d0](https://github.com/newjersey/navigator.business.nj.gov/commit/53909d088e873af938a9e652cb5a206336426b37))
+- [[#184749103](https://www.pivotaltracker.com/story/show/184749103)] remove US Territories from formation state dropdown ([2f7fa38](https://github.com/newjersey/navigator.business.nj.gov/commit/2f7fa3813175a86f06bc3ebbab71f69b29b7dabf))
+- [[#184992602](https://www.pivotaltracker.com/story/show/184992602)] add cannabis location alert to biz formation ([c5cb0ca](https://github.com/newjersey/navigator.business.nj.gov/commit/c5cb0ca377a7cc54071bf7c234b1056ae10d304c))
+- [[#184992602](https://www.pivotaltracker.com/story/show/184992602)] create cannabis location alert CMS component ([685f02c](https://github.com/newjersey/navigator.business.nj.gov/commit/685f02c33e770f18523b6a2de875d7507216f71f))
+- [[#185167184](https://www.pivotaltracker.com/story/show/185167184)] add Note block to cms ([0bffa03](https://github.com/newjersey/navigator.business.nj.gov/commit/0bffa03813e30dcd8f4a8135d769065c33b42920))
+- [[#185424624](https://www.pivotaltracker.com/story/show/185424624)] add quick actions to cms ([7abe5b9](https://github.com/newjersey/navigator.business.nj.gov/commit/7abe5b904a32728ab941cea5f90c581a2786438f))
+- [[#185676804](https://www.pivotaltracker.com/story/show/185676804)] left-aligned side nav items in profile on small screens ([4b40ea8](https://github.com/newjersey/navigator.business.nj.gov/commit/4b40ea85b58398dea53d0e06e176d385c0a37951))
+- [[#185757071](https://www.pivotaltracker.com/story/show/185757071)] EIN task updated to trigger modal on edit ([5d97a05](https://github.com/newjersey/navigator.business.nj.gov/commit/5d97a05047b12c06d7a9513ab071ec3fa7977063))
+- remove-account-creation-card-[#185681589](https://www.pivotaltracker.com/story/show/185681589) ([1a4926e](https://github.com/newjersey/navigator.business.nj.gov/commit/1a4926e390ddb2ac241e318441f75ccb15f4eed8))
 
 ### Reverts
 
@@ -1011,12 +1288,12 @@
 
 ### Bug Fixes
 
-- [[#185153256](https://github.com/newjersey/navigator.business.nj.gov/issues/185153256)] config text for veteran ([67a9a92](https://github.com/newjersey/navigator.business.nj.gov/commit/67a9a92954e8cc564e1f6c18b038a6a8f4418bc8))
-- [[#185307864](https://github.com/newjersey/navigator.business.nj.gov/issues/185307864)] non essential question text styling ([47bdf83](https://github.com/newjersey/navigator.business.nj.gov/commit/47bdf83f315ae8b21cbe76ddd91a9ed6f7e8d48c))
-- [[#185307864](https://github.com/newjersey/navigator.business.nj.gov/issues/185307864)] only adds task if non essential question id is in industry file ([371f75f](https://github.com/newjersey/navigator.business.nj.gov/commit/371f75fdd43dfa48ba6d1f4d696e666ecea5ee8d))
-- [[#185307864](https://github.com/newjersey/navigator.business.nj.gov/issues/185307864)] test to check the optional suffix is being added to question text ([9266346](https://github.com/newjersey/navigator.business.nj.gov/commit/926634658add848542bbf752224dd9ffed90f49e))
-- [[#185362965](https://github.com/newjersey/navigator.business.nj.gov/issues/185362965)] green box bug fix ([2d14697](https://github.com/newjersey/navigator.business.nj.gov/commit/2d14697d8d1b050621b3db58550d471ee2bcc92d))
-- [[#185522114](https://github.com/newjersey/navigator.business.nj.gov/issues/185522114)] Board of Directors and Trustees incorrectly labeled as Members in error banner ([c4b94f7](https://github.com/newjersey/navigator.business.nj.gov/commit/c4b94f711afe9aefbe5f5064ec2a3adbc5390fd6))
+- [[#185153256](https://www.pivotaltracker.com/story/show/185153256)] config text for veteran ([67a9a92](https://github.com/newjersey/navigator.business.nj.gov/commit/67a9a92954e8cc564e1f6c18b038a6a8f4418bc8))
+- [[#185307864](https://www.pivotaltracker.com/story/show/185307864)] non essential question text styling ([47bdf83](https://github.com/newjersey/navigator.business.nj.gov/commit/47bdf83f315ae8b21cbe76ddd91a9ed6f7e8d48c))
+- [[#185307864](https://www.pivotaltracker.com/story/show/185307864)] only adds task if non essential question id is in industry file ([371f75f](https://github.com/newjersey/navigator.business.nj.gov/commit/371f75fdd43dfa48ba6d1f4d696e666ecea5ee8d))
+- [[#185307864](https://www.pivotaltracker.com/story/show/185307864)] test to check the optional suffix is being added to question text ([9266346](https://github.com/newjersey/navigator.business.nj.gov/commit/926634658add848542bbf752224dd9ffed90f49e))
+- [[#185362965](https://www.pivotaltracker.com/story/show/185362965)] green box bug fix ([2d14697](https://github.com/newjersey/navigator.business.nj.gov/commit/2d14697d8d1b050621b3db58550d471ee2bcc92d))
+- [[#185522114](https://www.pivotaltracker.com/story/show/185522114)] Board of Directors and Trustees incorrectly labeled as Members in error banner ([c4b94f7](https://github.com/newjersey/navigator.business.nj.gov/commit/c4b94f711afe9aefbe5f5064ec2a3adbc5390fd6))
 - 185681556 sidebar test removal ([6ff6014](https://github.com/newjersey/navigator.business.nj.gov/commit/6ff60146d11208d0ca348defcbfa766e64ef52b2))
 - date logic in getLicenseCalendarEvent tests should not depend on current date ([52c544f](https://github.com/newjersey/navigator.business.nj.gov/commit/52c544f4aecc248e12b84eccfac25557d3df1739))
 - flaky formation nonprofit api test ([4341e60](https://github.com/newjersey/navigator.business.nj.gov/commit/4341e60cbd49e47dd59c6665665885e9a4d235aa))
@@ -1025,21 +1302,21 @@
 
 ### Features
 
-- [[#184770173](https://github.com/newjersey/navigator.business.nj.gov/issues/184770173)] update postOnboarding to change task status with checkboxes ([5179715](https://github.com/newjersey/navigator.business.nj.gov/commit/517971563879abd1401f28aa737c1f1ed4afdf59))
-- [[#185153256](https://github.com/newjersey/navigator.business.nj.gov/issues/185153256)] non-profit formation ([6d0537c](https://github.com/newjersey/navigator.business.nj.gov/commit/6d0537cd825b92da0616f60535cd9cf745cc0a4b))
-- [[#185166887](https://github.com/newjersey/navigator.business.nj.gov/issues/185166887)] move name/email to deferred onboarding ([a4bd05e](https://github.com/newjersey/navigator.business.nj.gov/commit/a4bd05e6410208f08c060f3c787e0298db6dee4a))
-- [[#185307864](https://github.com/newjersey/navigator.business.nj.gov/issues/185307864)] non essential questions for poppy and dakota nexus ([8a7ac86](https://github.com/newjersey/navigator.business.nj.gov/commit/8a7ac8677ff82e3e1bf18ad8c41f0af3e1e132fb))
-- [[#185355762](https://github.com/newjersey/navigator.business.nj.gov/issues/185355762)] update broken link checker ([0d3bfd6](https://github.com/newjersey/navigator.business.nj.gov/commit/0d3bfd6a3dbeb43cb0d64f5967491992349ffe36))
-- [[#185355762](https://github.com/newjersey/navigator.business.nj.gov/issues/185355762)] update broken link checker to account for basic auth ([03f5bc9](https://github.com/newjersey/navigator.business.nj.gov/commit/03f5bc9b5032a08f40c641aff6910e179aa51d5e))
-- [[#185355762](https://github.com/newjersey/navigator.business.nj.gov/issues/185355762)] update broken link checker to account for basic auth accross all environments ([33220ff](https://github.com/newjersey/navigator.business.nj.gov/commit/33220ff68023acc18e941d0e6ebfeeee10b9333c))
-- [[#185355762](https://github.com/newjersey/navigator.business.nj.gov/issues/185355762)] update broken link checker to only run locally and allow for file download ([c20feb2](https://github.com/newjersey/navigator.business.nj.gov/commit/c20feb27ead42e3446797e8837d79c6cea7c5087))
-- [[#185617818](https://github.com/newjersey/navigator.business.nj.gov/issues/185617818)] left align description & text fields beneath nubered lists ([4a07129](https://github.com/newjersey/navigator.business.nj.gov/commit/4a07129678b2c1c1af5fcce985adcefe404842ed))
-- [[#185617818](https://github.com/newjersey/navigator.business.nj.gov/issues/185617818)] left align description text and fields beneath numbered lists ([3d8a859](https://github.com/newjersey/navigator.business.nj.gov/commit/3d8a859927df8894851a526c500c17b7a66510dd))
-- [[#185617852](https://github.com/newjersey/navigator.business.nj.gov/issues/185617852)] increase help button padding ([60eae91](https://github.com/newjersey/navigator.business.nj.gov/commit/60eae9108ecddd7aff495a8477024d67d46d766a))
-- [[#185617852](https://github.com/newjersey/navigator.business.nj.gov/issues/185617852)] increase help button padding mobile ([0e915da](https://github.com/newjersey/navigator.business.nj.gov/commit/0e915da5596fa06c825442fe6fc12e8261ef193f))
-- [[#185680966](https://github.com/newjersey/navigator.business.nj.gov/issues/185680966)] dakota remote worker/seller navbar text ([6cf51c7](https://github.com/newjersey/navigator.business.nj.gov/commit/6cf51c7697539efe5e219d5c5b7c558285edb64d))
-- [[#185681496](https://github.com/newjersey/navigator.business.nj.gov/issues/185681496)] remove home-based prompt for up-and-running ([9994ec0](https://github.com/newjersey/navigator.business.nj.gov/commit/9994ec00d65c1acf84cff253851edf688261a06a))
-- [[#185681556](https://github.com/newjersey/navigator.business.nj.gov/issues/185681556)] remove welecome card ([57759b1](https://github.com/newjersey/navigator.business.nj.gov/commit/57759b13012f2ba92492423f9facc1c1bf3cf8e9))
+- [[#184770173](https://www.pivotaltracker.com/story/show/184770173)] update postOnboarding to change task status with checkboxes ([5179715](https://github.com/newjersey/navigator.business.nj.gov/commit/517971563879abd1401f28aa737c1f1ed4afdf59))
+- [[#185153256](https://www.pivotaltracker.com/story/show/185153256)] non-profit formation ([6d0537c](https://github.com/newjersey/navigator.business.nj.gov/commit/6d0537cd825b92da0616f60535cd9cf745cc0a4b))
+- [[#185166887](https://www.pivotaltracker.com/story/show/185166887)] move name/email to deferred onboarding ([a4bd05e](https://github.com/newjersey/navigator.business.nj.gov/commit/a4bd05e6410208f08c060f3c787e0298db6dee4a))
+- [[#185307864](https://www.pivotaltracker.com/story/show/185307864)] non essential questions for poppy and dakota nexus ([8a7ac86](https://github.com/newjersey/navigator.business.nj.gov/commit/8a7ac8677ff82e3e1bf18ad8c41f0af3e1e132fb))
+- [[#185355762](https://www.pivotaltracker.com/story/show/185355762)] update broken link checker ([0d3bfd6](https://github.com/newjersey/navigator.business.nj.gov/commit/0d3bfd6a3dbeb43cb0d64f5967491992349ffe36))
+- [[#185355762](https://www.pivotaltracker.com/story/show/185355762)] update broken link checker to account for basic auth ([03f5bc9](https://github.com/newjersey/navigator.business.nj.gov/commit/03f5bc9b5032a08f40c641aff6910e179aa51d5e))
+- [[#185355762](https://www.pivotaltracker.com/story/show/185355762)] update broken link checker to account for basic auth accross all environments ([33220ff](https://github.com/newjersey/navigator.business.nj.gov/commit/33220ff68023acc18e941d0e6ebfeeee10b9333c))
+- [[#185355762](https://www.pivotaltracker.com/story/show/185355762)] update broken link checker to only run locally and allow for file download ([c20feb2](https://github.com/newjersey/navigator.business.nj.gov/commit/c20feb27ead42e3446797e8837d79c6cea7c5087))
+- [[#185617818](https://www.pivotaltracker.com/story/show/185617818)] left align description & text fields beneath nubered lists ([4a07129](https://github.com/newjersey/navigator.business.nj.gov/commit/4a07129678b2c1c1af5fcce985adcefe404842ed))
+- [[#185617818](https://www.pivotaltracker.com/story/show/185617818)] left align description text and fields beneath numbered lists ([3d8a859](https://github.com/newjersey/navigator.business.nj.gov/commit/3d8a859927df8894851a526c500c17b7a66510dd))
+- [[#185617852](https://www.pivotaltracker.com/story/show/185617852)] increase help button padding ([60eae91](https://github.com/newjersey/navigator.business.nj.gov/commit/60eae9108ecddd7aff495a8477024d67d46d766a))
+- [[#185617852](https://www.pivotaltracker.com/story/show/185617852)] increase help button padding mobile ([0e915da](https://github.com/newjersey/navigator.business.nj.gov/commit/0e915da5596fa06c825442fe6fc12e8261ef193f))
+- [[#185680966](https://www.pivotaltracker.com/story/show/185680966)] dakota remote worker/seller navbar text ([6cf51c7](https://github.com/newjersey/navigator.business.nj.gov/commit/6cf51c7697539efe5e219d5c5b7c558285edb64d))
+- [[#185681496](https://www.pivotaltracker.com/story/show/185681496)] remove home-based prompt for up-and-running ([9994ec0](https://github.com/newjersey/navigator.business.nj.gov/commit/9994ec00d65c1acf84cff253851edf688261a06a))
+- [[#185681556](https://www.pivotaltracker.com/story/show/185681556)] remove welecome card ([57759b1](https://github.com/newjersey/navigator.business.nj.gov/commit/57759b13012f2ba92492423f9facc1c1bf3cf8e9))
 - 185681556 remove sidebarcontainer tests for welcome ([dc07825](https://github.com/newjersey/navigator.business.nj.gov/commit/dc07825c2c2210ee7719268ad443e6e6a1a81b0d))
 - 185800334 bolder headers for non profit questions and alignment fix ([6d6e61f](https://github.com/newjersey/navigator.business.nj.gov/commit/6d6e61f64f887ee7ca3f6da6c04ba1b100679f2f))
 
@@ -1047,18 +1324,18 @@
 
 ### Bug Fixes
 
-- [[#185641143](https://github.com/newjersey/navigator.business.nj.gov/issues/185641143)] municipality field not full width in deferred question ([2275d86](https://github.com/newjersey/navigator.business.nj.gov/commit/2275d867f90203cf2a5d2263a578999f1f7ef3a1))
-- [[#185647571](https://github.com/newjersey/navigator.business.nj.gov/issues/185647571)] override default date of formation label in modal ([8c97515](https://github.com/newjersey/navigator.business.nj.gov/commit/8c97515e1ac26bccb2498e04487340d0c2c2e948))
+- [[#185641143](https://www.pivotaltracker.com/story/show/185641143)] municipality field not full width in deferred question ([2275d86](https://github.com/newjersey/navigator.business.nj.gov/commit/2275d867f90203cf2a5d2263a578999f1f7ef3a1))
+- [[#185647571](https://www.pivotaltracker.com/story/show/185647571)] override default date of formation label in modal ([8c97515](https://github.com/newjersey/navigator.business.nj.gov/commit/8c97515e1ac26bccb2498e04487340d0c2c2e948))
 - [185617245] fix tax id hide show on profile ([227f4dc](https://github.com/newjersey/navigator.business.nj.gov/commit/227f4dcf97e18f85e352c745f155b20f80f13bbf))
 
 ### Features
 
-- [[#184882700](https://github.com/newjersey/navigator.business.nj.gov/issues/184882700)] allow user to add multiple businesses ([990e2b0](https://github.com/newjersey/navigator.business.nj.gov/commit/990e2b0c80e289d658dbd48e81ee41b01962261d))
-- [[#184992392](https://github.com/newjersey/navigator.business.nj.gov/issues/184992392)] filter fundings by nonprofit legal structure ([94d0dc4](https://github.com/newjersey/navigator.business.nj.gov/commit/94d0dc417be0a315ac367d3379a92c3e6bb0e1e2))
-- [[#185513827](https://github.com/newjersey/navigator.business.nj.gov/issues/185513827)] remove content overflow from for you section ([1cb1061](https://github.com/newjersey/navigator.business.nj.gov/commit/1cb106107a176c8c15cdb2a3064c6836f0ed2363))
-- [[#185649292](https://github.com/newjersey/navigator.business.nj.gov/issues/185649292)] add navbar business name logic for OWNING businesses ([5198640](https://github.com/newjersey/navigator.business.nj.gov/commit/51986408e8a55b15a6d2b327820deb02f6055bfb))
-- [[#185659870](https://github.com/newjersey/navigator.business.nj.gov/issues/185659870)] move disclaimer text to top of licenses ([95eb08b](https://github.com/newjersey/navigator.business.nj.gov/commit/95eb08becd32f7489f605378780d5346e9a52a88))
-- [[#185678151](https://github.com/newjersey/navigator.business.nj.gov/issues/185678151)] change navbar name display for generic industry ([eb3b78d](https://github.com/newjersey/navigator.business.nj.gov/commit/eb3b78d0b35397c351c8a26ac5f4dece2910ae60))
+- [[#184882700](https://www.pivotaltracker.com/story/show/184882700)] allow user to add multiple businesses ([990e2b0](https://github.com/newjersey/navigator.business.nj.gov/commit/990e2b0c80e289d658dbd48e81ee41b01962261d))
+- [[#184992392](https://www.pivotaltracker.com/story/show/184992392)] filter fundings by nonprofit legal structure ([94d0dc4](https://github.com/newjersey/navigator.business.nj.gov/commit/94d0dc417be0a315ac367d3379a92c3e6bb0e1e2))
+- [[#185513827](https://www.pivotaltracker.com/story/show/185513827)] remove content overflow from for you section ([1cb1061](https://github.com/newjersey/navigator.business.nj.gov/commit/1cb106107a176c8c15cdb2a3064c6836f0ed2363))
+- [[#185649292](https://www.pivotaltracker.com/story/show/185649292)] add navbar business name logic for OWNING businesses ([5198640](https://github.com/newjersey/navigator.business.nj.gov/commit/51986408e8a55b15a6d2b327820deb02f6055bfb))
+- [[#185659870](https://www.pivotaltracker.com/story/show/185659870)] move disclaimer text to top of licenses ([95eb08b](https://github.com/newjersey/navigator.business.nj.gov/commit/95eb08becd32f7489f605378780d5346e9a52a88))
+- [[#185678151](https://www.pivotaltracker.com/story/show/185678151)] change navbar name display for generic industry ([eb3b78d](https://github.com/newjersey/navigator.business.nj.gov/commit/eb3b78d0b35397c351c8a26ac5f4dece2910ae60))
 
 ### Reverts
 
@@ -1068,10 +1345,10 @@
 
 ### Bug Fixes
 
-- [[#185355437](https://github.com/newjersey/navigator.business.nj.gov/issues/185355437)] license task not rendering in CMS roadmap steps ([0d28061](https://github.com/newjersey/navigator.business.nj.gov/commit/0d28061a1aa4a147df83ff791f5423c724175936))
-- [[#185355437](https://github.com/newjersey/navigator.business.nj.gov/issues/185355437)] license task not rendering in CMS, dependencies ([8137b5a](https://github.com/newjersey/navigator.business.nj.gov/commit/8137b5a16c2841e2af7e0b544919231e92fba4a0))
-- [[#185629976](https://github.com/newjersey/navigator.business.nj.gov/issues/185629976)] show Unnamed Industry when missing legal structure in NavBar ([0d49276](https://github.com/newjersey/navigator.business.nj.gov/commit/0d492765e31d902818adf0190269af9df37ff5c3))
-- [[#185641164](https://github.com/newjersey/navigator.business.nj.gov/issues/185641164)] use trade name in nav bar if exists for TradeName businesses ([b3fa511](https://github.com/newjersey/navigator.business.nj.gov/commit/b3fa5113521d84807f27564c20775c08a3a75363))
+- [[#185355437](https://www.pivotaltracker.com/story/show/185355437)] license task not rendering in CMS roadmap steps ([0d28061](https://github.com/newjersey/navigator.business.nj.gov/commit/0d28061a1aa4a147df83ff791f5423c724175936))
+- [[#185355437](https://www.pivotaltracker.com/story/show/185355437)] license task not rendering in CMS, dependencies ([8137b5a](https://github.com/newjersey/navigator.business.nj.gov/commit/8137b5a16c2841e2af7e0b544919231e92fba4a0))
+- [[#185629976](https://www.pivotaltracker.com/story/show/185629976)] show Unnamed Industry when missing legal structure in NavBar ([0d49276](https://github.com/newjersey/navigator.business.nj.gov/commit/0d492765e31d902818adf0190269af9df37ff5c3))
+- [[#185641164](https://www.pivotaltracker.com/story/show/185641164)] use trade name in nav bar if exists for TradeName businesses ([b3fa511](https://github.com/newjersey/navigator.business.nj.gov/commit/b3fa5113521d84807f27564c20775c08a3a75363))
 - **deps:** update aws-amplify ([f937d19](https://github.com/newjersey/navigator.business.nj.gov/commit/f937d199202919797a75d659b31e8e4a3995722b))
 - **deps:** update aws-sdk to v3.369.0 ([50b44ec](https://github.com/newjersey/navigator.business.nj.gov/commit/50b44ecba3e6bba4968ad7dc3ac53a0acd0d0726))
 - **deps:** update dependency @aws-crypto/client-node to v3.2.2 ([863e690](https://github.com/newjersey/navigator.business.nj.gov/commit/863e6904834d1ea06c02c5291e6750956dff2fc5))
@@ -1113,9 +1390,9 @@
 
 ### Bug Fixes
 
-- [[#185355437](https://github.com/newjersey/navigator.business.nj.gov/issues/185355437)] roadmap part of license tasks not rendering in the CMS ([dab9c99](https://github.com/newjersey/navigator.business.nj.gov/commit/dab9c99d00cc1d24cb46f1766e81dd4651e4b0da))
-- [[#185512025](https://github.com/newjersey/navigator.business.nj.gov/issues/185512025)] do not show biz structure prompt for foreign remote seller/worker ([fc3b08d](https://github.com/newjersey/navigator.business.nj.gov/commit/fc3b08d2382835453a2ab2d5e2a0b71ef8051326))
-- [[#185519654](https://github.com/newjersey/navigator.business.nj.gov/issues/185519654)] businessStartDate field correctly shows error bar in mobile ([35cbfc3](https://github.com/newjersey/navigator.business.nj.gov/commit/35cbfc3a763edf543b9ac3ba0ebfb27a9778a8cb))
+- [[#185355437](https://www.pivotaltracker.com/story/show/185355437)] roadmap part of license tasks not rendering in the CMS ([dab9c99](https://github.com/newjersey/navigator.business.nj.gov/commit/dab9c99d00cc1d24cb46f1766e81dd4651e4b0da))
+- [[#185512025](https://www.pivotaltracker.com/story/show/185512025)] do not show biz structure prompt for foreign remote seller/worker ([fc3b08d](https://github.com/newjersey/navigator.business.nj.gov/commit/fc3b08d2382835453a2ab2d5e2a0b71ef8051326))
+- [[#185519654](https://www.pivotaltracker.com/story/show/185519654)] businessStartDate field correctly shows error bar in mobile ([35cbfc3](https://github.com/newjersey/navigator.business.nj.gov/commit/35cbfc3a763edf543b9ac3ba0ebfb27a9778a8cb))
 - backdating CI docker image ([ee0f769](https://github.com/newjersey/navigator.business.nj.gov/commit/ee0f7698a072b6cfdfcf85fc1b18a457f5cce03e))
 - revert storybook-addon-pseudo-states back to v1 ([9f07a59](https://github.com/newjersey/navigator.business.nj.gov/commit/9f07a5915e0ff4bc37d987f77949cec639160cae))
 - updated to the latest dynamodb-serverless package that fixes the AWS key errors ([9573cfa](https://github.com/newjersey/navigator.business.nj.gov/commit/9573cfa66abd83e846cf825955b8a34dc7d72d2a))
@@ -1123,12 +1400,12 @@
 
 ### Features
 
-- [[#184822307](https://github.com/newjersey/navigator.business.nj.gov/issues/184822307)] add nonprofit onboarding and roadmap ([ac1e8a7](https://github.com/newjersey/navigator.business.nj.gov/commit/ac1e8a74ada1e1e0e530a247b1c37bdd6c3ff563))
-- [[#184822307](https://github.com/newjersey/navigator.business.nj.gov/issues/184822307)] remove business structure description overrides ([f7cd949](https://github.com/newjersey/navigator.business.nj.gov/commit/f7cd9498b05609ee97ab1181cd6fdf16ffe9bca6))
-- [[#185141979](https://github.com/newjersey/navigator.business.nj.gov/issues/185141979)] export roadmap to pdf ([5ea07a6](https://github.com/newjersey/navigator.business.nj.gov/commit/5ea07a64a69273bf7ed2fd3d745308f5d60b4abc))
-- [[#185396010](https://github.com/newjersey/navigator.business.nj.gov/issues/185396010)] create script to get user locations ([6421d67](https://github.com/newjersey/navigator.business.nj.gov/commit/6421d67b6a4780bad38efea0f219d0dd87fd67fb))
-- [[#185415302](https://github.com/newjersey/navigator.business.nj.gov/issues/185415302)] move license event content to the correct files ([534f0e0](https://github.com/newjersey/navigator.business.nj.gov/commit/534f0e04736ff161c5c2681f6510b957c9f3aca4))
-- [[#185543521](https://github.com/newjersey/navigator.business.nj.gov/issues/185543521)] remove landing page redirect to webflow ([d096f93](https://github.com/newjersey/navigator.business.nj.gov/commit/d096f93e59ecfec9019b922ed34ba5a92c6f2be0))
+- [[#184822307](https://www.pivotaltracker.com/story/show/184822307)] add nonprofit onboarding and roadmap ([ac1e8a7](https://github.com/newjersey/navigator.business.nj.gov/commit/ac1e8a74ada1e1e0e530a247b1c37bdd6c3ff563))
+- [[#184822307](https://www.pivotaltracker.com/story/show/184822307)] remove business structure description overrides ([f7cd949](https://github.com/newjersey/navigator.business.nj.gov/commit/f7cd9498b05609ee97ab1181cd6fdf16ffe9bca6))
+- [[#185141979](https://www.pivotaltracker.com/story/show/185141979)] export roadmap to pdf ([5ea07a6](https://github.com/newjersey/navigator.business.nj.gov/commit/5ea07a64a69273bf7ed2fd3d745308f5d60b4abc))
+- [[#185396010](https://www.pivotaltracker.com/story/show/185396010)] create script to get user locations ([6421d67](https://github.com/newjersey/navigator.business.nj.gov/commit/6421d67b6a4780bad38efea0f219d0dd87fd67fb))
+- [[#185415302](https://www.pivotaltracker.com/story/show/185415302)] move license event content to the correct files ([534f0e0](https://github.com/newjersey/navigator.business.nj.gov/commit/534f0e04736ff161c5c2681f6510b957c9f3aca4))
+- [[#185543521](https://www.pivotaltracker.com/story/show/185543521)] remove landing page redirect to webflow ([d096f93](https://github.com/newjersey/navigator.business.nj.gov/commit/d096f93e59ecfec9019b922ed34ba5a92c6f2be0))
 - create script to update records in Airtable ([80977eb](https://github.com/newjersey/navigator.business.nj.gov/commit/80977eb3e683d5fb7c2511aee5c86e266b263cb0))
 
 ## [5.22.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.22.0...v5.22.1) (2023-07-06)
@@ -1141,33 +1418,33 @@
 
 ### Bug Fixes
 
-- [[#184836745](https://github.com/newjersey/navigator.business.nj.gov/issues/184836745)] add check for location content to test ([749917a](https://github.com/newjersey/navigator.business.nj.gov/commit/749917ae58b7726e99285aaabe791bb4e2c364c4))
-- [[#184836745](https://github.com/newjersey/navigator.business.nj.gov/issues/184836745)] generate municipality data for cms preview ([fac5112](https://github.com/newjersey/navigator.business.nj.gov/commit/fac511278167a3bb7251686eacd46d100166be6b))
-- [[#185337472](https://github.com/newjersey/navigator.business.nj.gov/issues/185337472)] Fix anchor tags on Business Profile ([70b7615](https://github.com/newjersey/navigator.business.nj.gov/commit/70b7615f8a4a31653184b892f6f4e7603fe48b39))
-- [[#185337472](https://github.com/newjersey/navigator.business.nj.gov/issues/185337472)] Trade Name businesses should not have a Business Effective Date ([4f75d8b](https://github.com/newjersey/navigator.business.nj.gov/commit/4f75d8b53d20b379f35caac1f32370f044c71453))
-- [[#185453206](https://github.com/newjersey/navigator.business.nj.gov/issues/185453206)] remove lock on tradeName field after tax submission ([d9528de](https://github.com/newjersey/navigator.business.nj.gov/commit/d9528de71d496cf0e3364143c3dc470293f23837))
-- [[#185453206](https://github.com/newjersey/navigator.business.nj.gov/issues/185453206)] remove test for old behavior around trade name field locking ([4538142](https://github.com/newjersey/navigator.business.nj.gov/commit/4538142592c7974c277ce43954892dfdcba72bf1))
-- [[#185471630](https://github.com/newjersey/navigator.business.nj.gov/issues/185471630)] tax filing calendar lookup overwriting municipality ([5fd7d84](https://github.com/newjersey/navigator.business.nj.gov/commit/5fd7d8420841fad61f89a5ed8e39af920ad505a1))
-- [[#185473530](https://github.com/newjersey/navigator.business.nj.gov/issues/185473530)] business name saved in tax access modal ([91d6c0f](https://github.com/newjersey/navigator.business.nj.gov/commit/91d6c0fe3fb8dc64fd74e36859eecab4250bc971))
-- [[#185492036](https://github.com/newjersey/navigator.business.nj.gov/issues/185492036)] license tasks summary description syntax ([e32ece9](https://github.com/newjersey/navigator.business.nj.gov/commit/e32ece94364c38e1410724b1a9abc5118155811c))
+- [[#184836745](https://www.pivotaltracker.com/story/show/184836745)] add check for location content to test ([749917a](https://github.com/newjersey/navigator.business.nj.gov/commit/749917ae58b7726e99285aaabe791bb4e2c364c4))
+- [[#184836745](https://www.pivotaltracker.com/story/show/184836745)] generate municipality data for cms preview ([fac5112](https://github.com/newjersey/navigator.business.nj.gov/commit/fac511278167a3bb7251686eacd46d100166be6b))
+- [[#185337472](https://www.pivotaltracker.com/story/show/185337472)] Fix anchor tags on Business Profile ([70b7615](https://github.com/newjersey/navigator.business.nj.gov/commit/70b7615f8a4a31653184b892f6f4e7603fe48b39))
+- [[#185337472](https://www.pivotaltracker.com/story/show/185337472)] Trade Name businesses should not have a Business Effective Date ([4f75d8b](https://github.com/newjersey/navigator.business.nj.gov/commit/4f75d8b53d20b379f35caac1f32370f044c71453))
+- [[#185453206](https://www.pivotaltracker.com/story/show/185453206)] remove lock on tradeName field after tax submission ([d9528de](https://github.com/newjersey/navigator.business.nj.gov/commit/d9528de71d496cf0e3364143c3dc470293f23837))
+- [[#185453206](https://www.pivotaltracker.com/story/show/185453206)] remove test for old behavior around trade name field locking ([4538142](https://github.com/newjersey/navigator.business.nj.gov/commit/4538142592c7974c277ce43954892dfdcba72bf1))
+- [[#185471630](https://www.pivotaltracker.com/story/show/185471630)] tax filing calendar lookup overwriting municipality ([5fd7d84](https://github.com/newjersey/navigator.business.nj.gov/commit/5fd7d8420841fad61f89a5ed8e39af920ad505a1))
+- [[#185473530](https://www.pivotaltracker.com/story/show/185473530)] business name saved in tax access modal ([91d6c0f](https://github.com/newjersey/navigator.business.nj.gov/commit/91d6c0fe3fb8dc64fd74e36859eecab4250bc971))
+- [[#185492036](https://www.pivotaltracker.com/story/show/185492036)] license tasks summary description syntax ([e32ece9](https://github.com/newjersey/navigator.business.nj.gov/commit/e32ece94364c38e1410724b1a9abc5118155811c))
 
 ### Features
 
-- [[#184198991](https://github.com/newjersey/navigator.business.nj.gov/issues/184198991)] update error message for signers & BOD for LP & dom corp ([2866101](https://github.com/newjersey/navigator.business.nj.gov/commit/28661016dda62b76cf73f35c56cecd3ea57c491e))
-- [[#184643224](https://github.com/newjersey/navigator.business.nj.gov/issues/184643224)] remove tax registration modal from tax registration task ([d21f03e](https://github.com/newjersey/navigator.business.nj.gov/commit/d21f03eba2d0a4e1a7f830f6fa1788fda1c67a1f))
-- [[#184803759](https://github.com/newjersey/navigator.business.nj.gov/issues/184803759)] archive covest fund and historic property fundings ([bc02732](https://github.com/newjersey/navigator.business.nj.gov/commit/bc02732e4ab68f4b21337ea1fa8d0a4b8058a12a))
-- [[#184857807](https://github.com/newjersey/navigator.business.nj.gov/issues/184857807)] Moved mobile nav menu to right side ([111a725](https://github.com/newjersey/navigator.business.nj.gov/commit/111a7253eee32ade740790fca9c5c243e61fecf1))
-- [[#184857807](https://github.com/newjersey/navigator.business.nj.gov/issues/184857807)] revisions on padding, focus, background color, for etah nav updates ([8cdc3be](https://github.com/newjersey/navigator.business.nj.gov/commit/8cdc3be38cc34295933f19fe9dea61cee55856f7))
-- [[#184857807](https://github.com/newjersey/navigator.business.nj.gov/issues/184857807)] Update Nav to prepare for multiple businesses ([f861ca0](https://github.com/newjersey/navigator.business.nj.gov/commit/f861ca03ae737045ca190b6b6a2d1c07a3939751))
-- [[#184858078](https://github.com/newjersey/navigator.business.nj.gov/issues/184858078)] Nav Bar Updates Ethan Mobile ([fead7a9](https://github.com/newjersey/navigator.business.nj.gov/commit/fead7a9137bee4c38da056175ee5c398071a3775))
-- [[#184859520](https://github.com/newjersey/navigator.business.nj.gov/issues/184859520)] remove business structure from onboarding ([6fcb2f7](https://github.com/newjersey/navigator.business.nj.gov/commit/6fcb2f795b7951b3523f805c82130b13beb3e498))
-- [[#185141116](https://github.com/newjersey/navigator.business.nj.gov/issues/185141116)] naics code & location confirmed in tax access modal ([1620d9d](https://github.com/newjersey/navigator.business.nj.gov/commit/1620d9d37621c645725d7928c27ab88f303284cb))
-- [[#185211995](https://github.com/newjersey/navigator.business.nj.gov/issues/185211995)] adding LGBTQ cert and ownershipTypes ([e6e3e6d](https://github.com/newjersey/navigator.business.nj.gov/commit/e6e3e6dece2a39a20e8d524cb383425aa8f8b0ee))
-- [[#185212121](https://github.com/newjersey/navigator.business.nj.gov/issues/185212121)] internal notes for markdown files ([4904153](https://github.com/newjersey/navigator.business.nj.gov/commit/490415383bf9acbb4cdab4615150548aa3ce29b0))
-- [[#185214542](https://github.com/newjersey/navigator.business.nj.gov/issues/185214542)] blue profile page alert should be within the business info header ([54a8eda](https://github.com/newjersey/navigator.business.nj.gov/commit/54a8eda80630adaca2dc593e446976e2a6f392a6))
-- [[#185386798](https://github.com/newjersey/navigator.business.nj.gov/issues/185386798)] punctuation update for license expired ([9d002a6](https://github.com/newjersey/navigator.business.nj.gov/commit/9d002a639cdda3b1711161b7d710c6659fe30978))
-- [[#185461947](https://github.com/newjersey/navigator.business.nj.gov/issues/185461947)] adjust navigation dropdown focus and hover behavior ([8a82020](https://github.com/newjersey/navigator.business.nj.gov/commit/8a8202082732977f95668bbbb320dcd09e68869e))
-- [[#185461947](https://github.com/newjersey/navigator.business.nj.gov/issues/185461947)] adjust navigation dropdown hover states to not be bold for profile ([9ba92cc](https://github.com/newjersey/navigator.business.nj.gov/commit/9ba92ccb3ceebd6dec274bf2bb161a942b272ed2))
+- [[#184198991](https://www.pivotaltracker.com/story/show/184198991)] update error message for signers & BOD for LP & dom corp ([2866101](https://github.com/newjersey/navigator.business.nj.gov/commit/28661016dda62b76cf73f35c56cecd3ea57c491e))
+- [[#184643224](https://www.pivotaltracker.com/story/show/184643224)] remove tax registration modal from tax registration task ([d21f03e](https://github.com/newjersey/navigator.business.nj.gov/commit/d21f03eba2d0a4e1a7f830f6fa1788fda1c67a1f))
+- [[#184803759](https://www.pivotaltracker.com/story/show/184803759)] archive covest fund and historic property fundings ([bc02732](https://github.com/newjersey/navigator.business.nj.gov/commit/bc02732e4ab68f4b21337ea1fa8d0a4b8058a12a))
+- [[#184857807](https://www.pivotaltracker.com/story/show/184857807)] Moved mobile nav menu to right side ([111a725](https://github.com/newjersey/navigator.business.nj.gov/commit/111a7253eee32ade740790fca9c5c243e61fecf1))
+- [[#184857807](https://www.pivotaltracker.com/story/show/184857807)] revisions on padding, focus, background color, for etah nav updates ([8cdc3be](https://github.com/newjersey/navigator.business.nj.gov/commit/8cdc3be38cc34295933f19fe9dea61cee55856f7))
+- [[#184857807](https://www.pivotaltracker.com/story/show/184857807)] Update Nav to prepare for multiple businesses ([f861ca0](https://github.com/newjersey/navigator.business.nj.gov/commit/f861ca03ae737045ca190b6b6a2d1c07a3939751))
+- [[#184858078](https://www.pivotaltracker.com/story/show/184858078)] Nav Bar Updates Ethan Mobile ([fead7a9](https://github.com/newjersey/navigator.business.nj.gov/commit/fead7a9137bee4c38da056175ee5c398071a3775))
+- [[#184859520](https://www.pivotaltracker.com/story/show/184859520)] remove business structure from onboarding ([6fcb2f7](https://github.com/newjersey/navigator.business.nj.gov/commit/6fcb2f795b7951b3523f805c82130b13beb3e498))
+- [[#185141116](https://www.pivotaltracker.com/story/show/185141116)] naics code & location confirmed in tax access modal ([1620d9d](https://github.com/newjersey/navigator.business.nj.gov/commit/1620d9d37621c645725d7928c27ab88f303284cb))
+- [[#185211995](https://www.pivotaltracker.com/story/show/185211995)] adding LGBTQ cert and ownershipTypes ([e6e3e6d](https://github.com/newjersey/navigator.business.nj.gov/commit/e6e3e6dece2a39a20e8d524cb383425aa8f8b0ee))
+- [[#185212121](https://www.pivotaltracker.com/story/show/185212121)] internal notes for markdown files ([4904153](https://github.com/newjersey/navigator.business.nj.gov/commit/490415383bf9acbb4cdab4615150548aa3ce29b0))
+- [[#185214542](https://www.pivotaltracker.com/story/show/185214542)] blue profile page alert should be within the business info header ([54a8eda](https://github.com/newjersey/navigator.business.nj.gov/commit/54a8eda80630adaca2dc593e446976e2a6f392a6))
+- [[#185386798](https://www.pivotaltracker.com/story/show/185386798)] punctuation update for license expired ([9d002a6](https://github.com/newjersey/navigator.business.nj.gov/commit/9d002a639cdda3b1711161b7d710c6659fe30978))
+- [[#185461947](https://www.pivotaltracker.com/story/show/185461947)] adjust navigation dropdown focus and hover behavior ([8a82020](https://github.com/newjersey/navigator.business.nj.gov/commit/8a8202082732977f95668bbbb320dcd09e68869e))
+- [[#185461947](https://www.pivotaltracker.com/story/show/185461947)] adjust navigation dropdown hover states to not be bold for profile ([9ba92cc](https://github.com/newjersey/navigator.business.nj.gov/commit/9ba92ccb3ceebd6dec274bf2bb161a942b272ed2))
 
 ## [5.21.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.21.1...v5.21.2) (2023-06-28)
 
@@ -1186,16 +1463,16 @@
 
 ### Bug Fixes
 
-- [[#184726710](https://github.com/newjersey/navigator.business.nj.gov/issues/184726710)] add defaults for first half of licenses ([b485a65](https://github.com/newjersey/navigator.business.nj.gov/commit/b485a65d40ad2a50d510511aab766c28848063ca))
-- [[#184726710](https://github.com/newjersey/navigator.business.nj.gov/issues/184726710)] add preselected industry for cannabis license ([7c68b3d](https://github.com/newjersey/navigator.business.nj.gov/commit/7c68b3dfd06412aea91c8ede3b08be27789e45c0))
-- [[#184726710](https://github.com/newjersey/navigator.business.nj.gov/issues/184726710)] add preselected to multiselect for second half of licenses ([9b2ab0a](https://github.com/newjersey/navigator.business.nj.gov/commit/9b2ab0aea4f7e6ea0906645777137b23645f4649))
-- [[#184726710](https://github.com/newjersey/navigator.business.nj.gov/issues/184726710)] merge inconsistencies in industyID ([a3b10f5](https://github.com/newjersey/navigator.business.nj.gov/commit/a3b10f59a9bf735b707fb17932b0cf346091e73f))
-- [[#184726710](https://github.com/newjersey/navigator.business.nj.gov/issues/184726710)] restore home-health-aide-license industry type ([bc2712f](https://github.com/newjersey/navigator.business.nj.gov/commit/bc2712f84ee640793fdf6e41b2b26670f87a1e1d))
-- [[#184726710](https://github.com/newjersey/navigator.business.nj.gov/issues/184726710)] update license type to correct name for home health aide ([00638ec](https://github.com/newjersey/navigator.business.nj.gov/commit/00638ec0ad37a8573a7c05ddbd0a6b44f431f48c))
-- [[#185214380](https://github.com/newjersey/navigator.business.nj.gov/issues/185214380)] sector modal was not updating profile data ([c33d23c](https://github.com/newjersey/navigator.business.nj.gov/commit/c33d23c8954c1161c15af5c3679b66c541e26dd4))
-- [[#185214511](https://github.com/newjersey/navigator.business.nj.gov/issues/185214511)] do not require sector in profile until up-and-running ([03b6508](https://github.com/newjersey/navigator.business.nj.gov/commit/03b65087db21919d3e86bde1c2d6ff641f1e8451))
-- [[#185266819](https://github.com/newjersey/navigator.business.nj.gov/issues/185266819)] fix bug in Dakota onboarding flow ([e050349](https://github.com/newjersey/navigator.business.nj.gov/commit/e0503494c449e3e6e5e07472d4cfca852865dd17))
-- [[#185266819](https://github.com/newjersey/navigator.business.nj.gov/issues/185266819)] handle state to update businessPersona for oos ([f818657](https://github.com/newjersey/navigator.business.nj.gov/commit/f81865783e8263ef727fef3e99b8bcadb710242e))
+- [[#184726710](https://www.pivotaltracker.com/story/show/184726710)] add defaults for first half of licenses ([b485a65](https://github.com/newjersey/navigator.business.nj.gov/commit/b485a65d40ad2a50d510511aab766c28848063ca))
+- [[#184726710](https://www.pivotaltracker.com/story/show/184726710)] add preselected industry for cannabis license ([7c68b3d](https://github.com/newjersey/navigator.business.nj.gov/commit/7c68b3dfd06412aea91c8ede3b08be27789e45c0))
+- [[#184726710](https://www.pivotaltracker.com/story/show/184726710)] add preselected to multiselect for second half of licenses ([9b2ab0a](https://github.com/newjersey/navigator.business.nj.gov/commit/9b2ab0aea4f7e6ea0906645777137b23645f4649))
+- [[#184726710](https://www.pivotaltracker.com/story/show/184726710)] merge inconsistencies in industyID ([a3b10f5](https://github.com/newjersey/navigator.business.nj.gov/commit/a3b10f59a9bf735b707fb17932b0cf346091e73f))
+- [[#184726710](https://www.pivotaltracker.com/story/show/184726710)] restore home-health-aide-license industry type ([bc2712f](https://github.com/newjersey/navigator.business.nj.gov/commit/bc2712f84ee640793fdf6e41b2b26670f87a1e1d))
+- [[#184726710](https://www.pivotaltracker.com/story/show/184726710)] update license type to correct name for home health aide ([00638ec](https://github.com/newjersey/navigator.business.nj.gov/commit/00638ec0ad37a8573a7c05ddbd0a6b44f431f48c))
+- [[#185214380](https://www.pivotaltracker.com/story/show/185214380)] sector modal was not updating profile data ([c33d23c](https://github.com/newjersey/navigator.business.nj.gov/commit/c33d23c8954c1161c15af5c3679b66c541e26dd4))
+- [[#185214511](https://www.pivotaltracker.com/story/show/185214511)] do not require sector in profile until up-and-running ([03b6508](https://github.com/newjersey/navigator.business.nj.gov/commit/03b65087db21919d3e86bde1c2d6ff641f1e8451))
+- [[#185266819](https://www.pivotaltracker.com/story/show/185266819)] fix bug in Dakota onboarding flow ([e050349](https://github.com/newjersey/navigator.business.nj.gov/commit/e0503494c449e3e6e5e07472d4cfca852865dd17))
+- [[#185266819](https://www.pivotaltracker.com/story/show/185266819)] handle state to update businessPersona for oos ([f818657](https://github.com/newjersey/navigator.business.nj.gov/commit/f81865783e8263ef727fef3e99b8bcadb710242e))
 - check for business or trade name ([faa0f20](https://github.com/newjersey/navigator.business.nj.gov/commit/faa0f20d30e42136c2afe071b8a4c37ed945a6cf))
 - resolve merge conflict ([3bd41c2](https://github.com/newjersey/navigator.business.nj.gov/commit/3bd41c2295f5e0f860b0fa893f95f2a36e11e6e7))
 - submit legal structure for saving business name ([29feb51](https://github.com/newjersey/navigator.business.nj.gov/commit/29feb51b0d2c66613b6e41077729a184a686384b))
@@ -1205,14 +1482,14 @@
 
 ### Features
 
-- [[#184258256](https://github.com/newjersey/navigator.business.nj.gov/issues/184258256)] add trade name and responsible owner name to profile ([a8352a7](https://github.com/newjersey/navigator.business.nj.gov/commit/a8352a7d8134f9ac6250a82827c90f564d1fa96f))
-- [[#184258256](https://github.com/newjersey/navigator.business.nj.gov/issues/184258256)] remove business name from trade name businesses ([03f9f93](https://github.com/newjersey/navigator.business.nj.gov/commit/03f9f9302a3a31f5f7ee41f4c5f979e5e090c75d))
-- [[#184258256](https://github.com/newjersey/navigator.business.nj.gov/issues/184258256)] update tests to depend on non trade name businesses ([9cc2dcb](https://github.com/newjersey/navigator.business.nj.gov/commit/9cc2dcba185d6af66cf364c8f98ff6e52fd13963))
-- [[#184306224](https://github.com/newjersey/navigator.business.nj.gov/issues/184306224)] check if a business name or DBA name has become unavailable ([7ec5153](https://github.com/newjersey/navigator.business.nj.gov/commit/7ec515317f7e07449fbfc85d0ec5a9edf68b5237))
-- [[#184726710](https://github.com/newjersey/navigator.business.nj.gov/issues/184726710)] change select to multiselect for license tasks and webflow licenses ([faf2e23](https://github.com/newjersey/navigator.business.nj.gov/commit/faf2e23a12c3153d18bf144a0de133c59fd1232c))
-- [[#184999509](https://github.com/newjersey/navigator.business.nj.gov/issues/184999509)] add additional tasks from all folder to license folder in netlify ([14d4645](https://github.com/newjersey/navigator.business.nj.gov/commit/14d4645a70296893daf6700f0b8a65a67e556382))
-- [[#185183515](https://github.com/newjersey/navigator.business.nj.gov/issues/185183515)] add architect, HVACR, and RE appraisal license check integration ([6baabe7](https://github.com/newjersey/navigator.business.nj.gov/commit/6baabe7a5684edc1d33d4c2173f3d75a67ceb869))
-- [[#185212073](https://github.com/newjersey/navigator.business.nj.gov/issues/185212073)] adjust tooltip mobile behavior to stay open until clicked off ([e2364d1](https://github.com/newjersey/navigator.business.nj.gov/commit/e2364d1555d3e9e9180e8c495d8d333f92382753))
+- [[#184258256](https://www.pivotaltracker.com/story/show/184258256)] add trade name and responsible owner name to profile ([a8352a7](https://github.com/newjersey/navigator.business.nj.gov/commit/a8352a7d8134f9ac6250a82827c90f564d1fa96f))
+- [[#184258256](https://www.pivotaltracker.com/story/show/184258256)] remove business name from trade name businesses ([03f9f93](https://github.com/newjersey/navigator.business.nj.gov/commit/03f9f9302a3a31f5f7ee41f4c5f979e5e090c75d))
+- [[#184258256](https://www.pivotaltracker.com/story/show/184258256)] update tests to depend on non trade name businesses ([9cc2dcb](https://github.com/newjersey/navigator.business.nj.gov/commit/9cc2dcba185d6af66cf364c8f98ff6e52fd13963))
+- [[#184306224](https://www.pivotaltracker.com/story/show/184306224)] check if a business name or DBA name has become unavailable ([7ec5153](https://github.com/newjersey/navigator.business.nj.gov/commit/7ec515317f7e07449fbfc85d0ec5a9edf68b5237))
+- [[#184726710](https://www.pivotaltracker.com/story/show/184726710)] change select to multiselect for license tasks and webflow licenses ([faf2e23](https://github.com/newjersey/navigator.business.nj.gov/commit/faf2e23a12c3153d18bf144a0de133c59fd1232c))
+- [[#184999509](https://www.pivotaltracker.com/story/show/184999509)] add additional tasks from all folder to license folder in netlify ([14d4645](https://github.com/newjersey/navigator.business.nj.gov/commit/14d4645a70296893daf6700f0b8a65a67e556382))
+- [[#185183515](https://www.pivotaltracker.com/story/show/185183515)] add architect, HVACR, and RE appraisal license check integration ([6baabe7](https://github.com/newjersey/navigator.business.nj.gov/commit/6baabe7a5684edc1d33d4c2173f3d75a67ceb869))
+- [[#185212073](https://www.pivotaltracker.com/story/show/185212073)] adjust tooltip mobile behavior to stay open until clicked off ([e2364d1](https://github.com/newjersey/navigator.business.nj.gov/commit/e2364d1555d3e9e9180e8c495d8d333f92382753))
 - added license events to calendar ([010c53d](https://github.com/newjersey/navigator.business.nj.gov/commit/010c53dee68a889838bdb10914d50222e4cdddc0))
 
 ## [5.20.3](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.20.2...v5.20.3) (2023-05-24)
@@ -1237,7 +1514,7 @@
 
 ### Bug Fixes
 
-- [[#185191909](https://github.com/newjersey/navigator.business.nj.gov/issues/185191909)] no redirect to alt landing if on welcome landing ([37e2588](https://github.com/newjersey/navigator.business.nj.gov/commit/37e258801de218e41c1dc926d9181273458d607f))
+- [[#185191909](https://www.pivotaltracker.com/story/show/185191909)] no redirect to alt landing if on welcome landing ([37e2588](https://github.com/newjersey/navigator.business.nj.gov/commit/37e258801de218e41c1dc926d9181273458d607f))
 - broke linting and tests ([98fe27e](https://github.com/newjersey/navigator.business.nj.gov/commit/98fe27e7b26db674e4007050e902cb0cc7b2e09b))
 - update fundings sync with new agency mapping IDs ([ccb4eb4](https://github.com/newjersey/navigator.business.nj.gov/commit/ccb4eb4601d857d72ae16df40c4e16afd4fbe6ac))
 - updating Fund Opps - Content njeda-historic-property ([#5240](https://github.com/newjersey/navigator.business.nj.gov/issues/5240)) ([0fad60c](https://github.com/newjersey/navigator.business.nj.gov/commit/0fad60cdee4f407d1e9c02f3cefd846daf842ae7))
@@ -1248,24 +1525,24 @@
 
 ### Features
 
-- [[#184306538](https://github.com/newjersey/navigator.business.nj.gov/issues/184306538)] Make license checkbox editable ([ab6d7ac](https://github.com/newjersey/navigator.business.nj.gov/commit/ab6d7ac38e43a396d05f6aee6943222b79874af9))
-- [[#184833864](https://github.com/newjersey/navigator.business.nj.gov/issues/184833864)] merge agency fields into agencyId and agencyAdditionalContext ([f179f4d](https://github.com/newjersey/navigator.business.nj.gov/commit/f179f4df1d76e57c04cfb9d23a4d7ddf5fce660d))
-- [[#184870963](https://github.com/newjersey/navigator.business.nj.gov/issues/184870963)] desktop navbar updated to be sticky ([285098a](https://github.com/newjersey/navigator.business.nj.gov/commit/285098a8a1fd3fb34ca7399ec43b793252d2b07e))
-- [[#184870963](https://github.com/newjersey/navigator.business.nj.gov/issues/184870963)] updated desktop navbar to sticky ([c8dfdb2](https://github.com/newjersey/navigator.business.nj.gov/commit/c8dfdb22cba439755eab8aeffba0e423bd3a0105))
-- [[#185093892](https://github.com/newjersey/navigator.business.nj.gov/issues/185093892)] add two-step modal for tax access ([467ad7c](https://github.com/newjersey/navigator.business.nj.gov/commit/467ad7ce8c1b0ae7db5ab3fd44902390a5e63295))
-- [[#185191912](https://github.com/newjersey/navigator.business.nj.gov/issues/185191912)] updated landing page navbar to hamburger and sticky ([6d1eab5](https://github.com/newjersey/navigator.business.nj.gov/commit/6d1eab554830cf6a77e80d57f3d6ec9a0c375443))
+- [[#184306538](https://www.pivotaltracker.com/story/show/184306538)] Make license checkbox editable ([ab6d7ac](https://github.com/newjersey/navigator.business.nj.gov/commit/ab6d7ac38e43a396d05f6aee6943222b79874af9))
+- [[#184833864](https://www.pivotaltracker.com/story/show/184833864)] merge agency fields into agencyId and agencyAdditionalContext ([f179f4d](https://github.com/newjersey/navigator.business.nj.gov/commit/f179f4df1d76e57c04cfb9d23a4d7ddf5fce660d))
+- [[#184870963](https://www.pivotaltracker.com/story/show/184870963)] desktop navbar updated to be sticky ([285098a](https://github.com/newjersey/navigator.business.nj.gov/commit/285098a8a1fd3fb34ca7399ec43b793252d2b07e))
+- [[#184870963](https://www.pivotaltracker.com/story/show/184870963)] updated desktop navbar to sticky ([c8dfdb2](https://github.com/newjersey/navigator.business.nj.gov/commit/c8dfdb22cba439755eab8aeffba0e423bd3a0105))
+- [[#185093892](https://www.pivotaltracker.com/story/show/185093892)] add two-step modal for tax access ([467ad7c](https://github.com/newjersey/navigator.business.nj.gov/commit/467ad7ce8c1b0ae7db5ab3fd44902390a5e63295))
+- [[#185191912](https://www.pivotaltracker.com/story/show/185191912)] updated landing page navbar to hamburger and sticky ([6d1eab5](https://github.com/newjersey/navigator.business.nj.gov/commit/6d1eab554830cf6a77e80d57f3d6ec9a0c375443))
 
 # [5.19.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.18.0...v5.19.0) (2023-05-15)
 
 ### Bug Fixes
 
-- [[#184305929](https://github.com/newjersey/navigator.business.nj.gov/issues/184305929)] review page address section only appears when required ([2eb3a4b](https://github.com/newjersey/navigator.business.nj.gov/commit/2eb3a4baae7f8cac939280fa37b4246c88d549c9))
-- [[#184305929](https://github.com/newjersey/navigator.business.nj.gov/issues/184305929)] review page total business stock test fix ([09ba2f2](https://github.com/newjersey/navigator.business.nj.gov/commit/09ba2f2695a93d3484c76ffff2691c6a090f68b6))
-- [[#184478453](https://github.com/newjersey/navigator.business.nj.gov/issues/184478453)] get page_name from document.title ([0e94f85](https://github.com/newjersey/navigator.business.nj.gov/commit/0e94f85f6c7874794d552aa5f09cdff420ac2f6b))
-- [[#184478453](https://github.com/newjersey/navigator.business.nj.gov/issues/184478453)] get page_name from document.title [skip ci] ([1f8e673](https://github.com/newjersey/navigator.business.nj.gov/commit/1f8e6733b8875b12a7f8f755f302e1af1aeb2023))
-- [[#184847518](https://github.com/newjersey/navigator.business.nj.gov/issues/184847518)] update file path to add webflow sync for licenses ([260499d](https://github.com/newjersey/navigator.business.nj.gov/commit/260499d2da59cb18a4ffc8af8ee2a33f6f680ee1))
-- [[#185052255](https://github.com/newjersey/navigator.business.nj.gov/issues/185052255)] push 'type' and update fields for webflow l=icnese sync ([5182ea2](https://github.com/newjersey/navigator.business.nj.gov/commit/5182ea298f5e1f7da8f02726ea3a9bd565acb5f8))
-- [[#185157746](https://github.com/newjersey/navigator.business.nj.gov/issues/185157746)] industy name instead of industry id in webflow ([8f87292](https://github.com/newjersey/navigator.business.nj.gov/commit/8f87292f8acb7e51441fb8e92b2a9b6bec023fec))
+- [[#184305929](https://www.pivotaltracker.com/story/show/184305929)] review page address section only appears when required ([2eb3a4b](https://github.com/newjersey/navigator.business.nj.gov/commit/2eb3a4baae7f8cac939280fa37b4246c88d549c9))
+- [[#184305929](https://www.pivotaltracker.com/story/show/184305929)] review page total business stock test fix ([09ba2f2](https://github.com/newjersey/navigator.business.nj.gov/commit/09ba2f2695a93d3484c76ffff2691c6a090f68b6))
+- [[#184478453](https://www.pivotaltracker.com/story/show/184478453)] get page_name from document.title ([0e94f85](https://github.com/newjersey/navigator.business.nj.gov/commit/0e94f85f6c7874794d552aa5f09cdff420ac2f6b))
+- [[#184478453](https://www.pivotaltracker.com/story/show/184478453)] get page_name from document.title [skip ci] ([1f8e673](https://github.com/newjersey/navigator.business.nj.gov/commit/1f8e6733b8875b12a7f8f755f302e1af1aeb2023))
+- [[#184847518](https://www.pivotaltracker.com/story/show/184847518)] update file path to add webflow sync for licenses ([260499d](https://github.com/newjersey/navigator.business.nj.gov/commit/260499d2da59cb18a4ffc8af8ee2a33f6f680ee1))
+- [[#185052255](https://www.pivotaltracker.com/story/show/185052255)] push 'type' and update fields for webflow l=icnese sync ([5182ea2](https://github.com/newjersey/navigator.business.nj.gov/commit/5182ea298f5e1f7da8f02726ea3a9bd565acb5f8))
+- [[#185157746](https://www.pivotaltracker.com/story/show/185157746)] industy name instead of industry id in webflow ([8f87292](https://github.com/newjersey/navigator.business.nj.gov/commit/8f87292f8acb7e51441fb8e92b2a9b6bec023fec))
 - added content build to circleci sync flows ([1892ea1](https://github.com/newjersey/navigator.business.nj.gov/commit/1892ea1b9b7bf630be3900bf3f6caa36a3648f71))
 - added empty landingPageExperienceWelcome object to content json ([89858b7](https://github.com/newjersey/navigator.business.nj.gov/commit/89858b74f0750b37295ff1f2cb09273fcc3fb4da))
 - added shared build command to circleci sync flows ([5275659](https://github.com/newjersey/navigator.business.nj.gov/commit/52756597aea62ada2f51d3fcb0ecc224e6b7e573))
@@ -1380,29 +1657,29 @@
 
 ### Features
 
-- [[#183559406](https://github.com/newjersey/navigator.business.nj.gov/issues/183559406)] clear checkbox data when industry is changed in profile ([4912fef](https://github.com/newjersey/navigator.business.nj.gov/commit/4912fef73515589f07586e9eb310facd3e5e061f))
-- [[#184125120](https://github.com/newjersey/navigator.business.nj.gov/issues/184125120)] reset naics codes when changing Industry ([70a50fe](https://github.com/newjersey/navigator.business.nj.gov/commit/70a50fed7d4dc88fe146f6ecd820345f01971f8b))
-- [[#184305929](https://github.com/newjersey/navigator.business.nj.gov/issues/184305929)] review page highlighted empty fields ([a6cf398](https://github.com/newjersey/navigator.business.nj.gov/commit/a6cf39821161161542f94fc4dc77a393ffeb4447))
-- [[#184688179](https://github.com/newjersey/navigator.business.nj.gov/issues/184688179)] Added Help/intercom Button to Formation Pages ([ba6c0a8](https://github.com/newjersey/navigator.business.nj.gov/commit/ba6c0a8820b8bff8103fde466cb74837e3d900f5))
-- [[#184749150](https://github.com/newjersey/navigator.business.nj.gov/issues/184749150)] share calendar feedback link trigger live chat / remove airtable feedback ([b60d003](https://github.com/newjersey/navigator.business.nj.gov/commit/b60d0034070405a9ba9ae2f089ba21be1ae6b8e6))
-- [[#184834138](https://github.com/newjersey/navigator.business.nj.gov/issues/184834138)] split content into summary and detailed description fields ([77d560e](https://github.com/newjersey/navigator.business.nj.gov/commit/77d560e22013993e0e35408e9508954262573814))
-- [[#184858230](https://github.com/newjersey/navigator.business.nj.gov/issues/184858230)] add business structure task for all industries ([4ec52a4](https://github.com/newjersey/navigator.business.nj.gov/commit/4ec52a4d266be772a0b8985d130a1277be4b3230))
-- [[#184940023](https://github.com/newjersey/navigator.business.nj.gov/issues/184940023)] updated webflow liceses in cms to match license tasks ([5e715e9](https://github.com/newjersey/navigator.business.nj.gov/commit/5e715e94941d963cd9b62cd13e5f2f7c95b7ec3f))
-- [[#184940124](https://github.com/newjersey/navigator.business.nj.gov/issues/184940124)] update radio and checkbox hover to base-lighter bg color ([ccdf77c](https://github.com/newjersey/navigator.business.nj.gov/commit/ccdf77c16698c6834396c52a74d2bdc38c5d608d))
-- [[#184998185](https://github.com/newjersey/navigator.business.nj.gov/issues/184998185)] marketing-calendar-welcome-landing-page ([1e1764e](https://github.com/newjersey/navigator.business.nj.gov/commit/1e1764e2349d3bd3f76cdb2522f58cb0d60d4a34))
-- [[#185126593](https://github.com/newjersey/navigator.business.nj.gov/issues/185126593)] webflow Licenses Content Preview ([ff5d29f](https://github.com/newjersey/navigator.business.nj.gov/commit/ff5d29fd0a8cfcda5f135161f470925a35ce58cb))
-- [[#185148836](https://github.com/newjersey/navigator.business.nj.gov/issues/185148836)] tax filing home page - left align tiles ([fdff4aa](https://github.com/newjersey/navigator.business.nj.gov/commit/fdff4aa0c18f2ff70efb18efe4fa9f56461a4d85))
+- [[#183559406](https://www.pivotaltracker.com/story/show/183559406)] clear checkbox data when industry is changed in profile ([4912fef](https://github.com/newjersey/navigator.business.nj.gov/commit/4912fef73515589f07586e9eb310facd3e5e061f))
+- [[#184125120](https://www.pivotaltracker.com/story/show/184125120)] reset naics codes when changing Industry ([70a50fe](https://github.com/newjersey/navigator.business.nj.gov/commit/70a50fed7d4dc88fe146f6ecd820345f01971f8b))
+- [[#184305929](https://www.pivotaltracker.com/story/show/184305929)] review page highlighted empty fields ([a6cf398](https://github.com/newjersey/navigator.business.nj.gov/commit/a6cf39821161161542f94fc4dc77a393ffeb4447))
+- [[#184688179](https://www.pivotaltracker.com/story/show/184688179)] Added Help/intercom Button to Formation Pages ([ba6c0a8](https://github.com/newjersey/navigator.business.nj.gov/commit/ba6c0a8820b8bff8103fde466cb74837e3d900f5))
+- [[#184749150](https://www.pivotaltracker.com/story/show/184749150)] share calendar feedback link trigger live chat / remove airtable feedback ([b60d003](https://github.com/newjersey/navigator.business.nj.gov/commit/b60d0034070405a9ba9ae2f089ba21be1ae6b8e6))
+- [[#184834138](https://www.pivotaltracker.com/story/show/184834138)] split content into summary and detailed description fields ([77d560e](https://github.com/newjersey/navigator.business.nj.gov/commit/77d560e22013993e0e35408e9508954262573814))
+- [[#184858230](https://www.pivotaltracker.com/story/show/184858230)] add business structure task for all industries ([4ec52a4](https://github.com/newjersey/navigator.business.nj.gov/commit/4ec52a4d266be772a0b8985d130a1277be4b3230))
+- [[#184940023](https://www.pivotaltracker.com/story/show/184940023)] updated webflow liceses in cms to match license tasks ([5e715e9](https://github.com/newjersey/navigator.business.nj.gov/commit/5e715e94941d963cd9b62cd13e5f2f7c95b7ec3f))
+- [[#184940124](https://www.pivotaltracker.com/story/show/184940124)] update radio and checkbox hover to base-lighter bg color ([ccdf77c](https://github.com/newjersey/navigator.business.nj.gov/commit/ccdf77c16698c6834396c52a74d2bdc38c5d608d))
+- [[#184998185](https://www.pivotaltracker.com/story/show/184998185)] marketing-calendar-welcome-landing-page ([1e1764e](https://github.com/newjersey/navigator.business.nj.gov/commit/1e1764e2349d3bd3f76cdb2522f58cb0d60d4a34))
+- [[#185126593](https://www.pivotaltracker.com/story/show/185126593)] webflow Licenses Content Preview ([ff5d29f](https://github.com/newjersey/navigator.business.nj.gov/commit/ff5d29fd0a8cfcda5f135161f470925a35ce58cb))
+- [[#185148836](https://www.pivotaltracker.com/story/show/185148836)] tax filing home page - left align tiles ([fdff4aa](https://github.com/newjersey/navigator.business.nj.gov/commit/fdff4aa0c18f2ff70efb18efe4fa9f56461a4d85))
 - created a seperate welcome page content method ([ea6f0e3](https://github.com/newjersey/navigator.business.nj.gov/commit/ea6f0e3edf38b48973dad6c6fb5e892dd3dc7093))
 
 # [5.18.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.17.1...v5.18.0) (2023-04-26)
 
 ### Bug Fixes
 
-- [[#184305952](https://github.com/newjersey/navigator.business.nj.gov/issues/184305952)] review page address and label fixes ([25d319c](https://github.com/newjersey/navigator.business.nj.gov/commit/25d319ca326fb7222ba06832d60bf3e5ba6ccd43))
-- [[#184305952](https://github.com/newjersey/navigator.business.nj.gov/issues/184305952)] review page fields spacing ([5337906](https://github.com/newjersey/navigator.business.nj.gov/commit/53379069f303326dc64078a03ec44bd5161948e6))
-- [[#184305952](https://github.com/newjersey/navigator.business.nj.gov/issues/184305952)] update logic and test for signers ([789cf20](https://github.com/newjersey/navigator.business.nj.gov/commit/789cf20c7a2d33d535593a70085794a50d2a2291))
-- [[#184533765](https://github.com/newjersey/navigator.business.nj.gov/issues/184533765)] change variable declarations back to var b/c user data is not going to intercom ([dfdf64b](https://github.com/newjersey/navigator.business.nj.gov/commit/dfdf64b9c191cf19c0cc9584d7089543670364a0))
-- [[#184533765](https://github.com/newjersey/navigator.business.nj.gov/issues/184533765)] update getAttribute send legal structure, industry, & business persona to Intercom ([fc04a58](https://github.com/newjersey/navigator.business.nj.gov/commit/fc04a58b0db36dc3244c1751b360c937c60461c6))
+- [[#184305952](https://www.pivotaltracker.com/story/show/184305952)] review page address and label fixes ([25d319c](https://github.com/newjersey/navigator.business.nj.gov/commit/25d319ca326fb7222ba06832d60bf3e5ba6ccd43))
+- [[#184305952](https://www.pivotaltracker.com/story/show/184305952)] review page fields spacing ([5337906](https://github.com/newjersey/navigator.business.nj.gov/commit/53379069f303326dc64078a03ec44bd5161948e6))
+- [[#184305952](https://www.pivotaltracker.com/story/show/184305952)] update logic and test for signers ([789cf20](https://github.com/newjersey/navigator.business.nj.gov/commit/789cf20c7a2d33d535593a70085794a50d2a2291))
+- [[#184533765](https://www.pivotaltracker.com/story/show/184533765)] change variable declarations back to var b/c user data is not going to intercom ([dfdf64b](https://github.com/newjersey/navigator.business.nj.gov/commit/dfdf64b9c191cf19c0cc9584d7089543670364a0))
+- [[#184533765](https://www.pivotaltracker.com/story/show/184533765)] update getAttribute send legal structure, industry, & business persona to Intercom ([fc04a58](https://github.com/newjersey/navigator.business.nj.gov/commit/fc04a58b0db36dc3244c1751b360c937c60461c6))
 - [main] fix failing unit tests on main ([3f015f5](https://github.com/newjersey/navigator.business.nj.gov/commit/3f015f55fd0ca9710b1b47e55f7ae1adebea1f3f))
 - adjusting ga4 events ([30752c2](https://github.com/newjersey/navigator.business.nj.gov/commit/30752c22e50757897d53b4fc0026ec6793e4fb9f))
 - allow option description in cms for business name ([e2453ad](https://github.com/newjersey/navigator.business.nj.gov/commit/e2453ad289a2dd93a464aba6e49ff0fe9d33c2c0))
@@ -1460,13 +1737,13 @@
 
 ### Features
 
-- [[#183443674](https://github.com/newjersey/navigator.business.nj.gov/issues/183443674)] update c-corp formation ([565496f](https://github.com/newjersey/navigator.business.nj.gov/commit/565496fad31ab30b9cce1fe8dc96ee17049f10de))
-- [[#183443674](https://github.com/newjersey/navigator.business.nj.gov/issues/183443674)] update c-corp formation ([44aa543](https://github.com/newjersey/navigator.business.nj.gov/commit/44aa543c0a7489e3cbaa8d2b84f61cf3080ea6fe))
-- [[#183443674](https://github.com/newjersey/navigator.business.nj.gov/issues/183443674)] update c-corp formation ([3064faf](https://github.com/newjersey/navigator.business.nj.gov/commit/3064fafa738a8fe41baedbd2b860c47a0cf2460a))
-- [[#184305952](https://github.com/newjersey/navigator.business.nj.gov/issues/184305952)] formation review page section reorg ([f30a748](https://github.com/newjersey/navigator.business.nj.gov/commit/f30a74855bb97343059096cd42edfd1c1d1a18cf))
-- [[#184306248](https://github.com/newjersey/navigator.business.nj.gov/issues/184306248)] formation remembers last user visited page ([6909b7c](https://github.com/newjersey/navigator.business.nj.gov/commit/6909b7c2059707f67c6f7d4552e4cd8d52c123df))
-- [[#184999429](https://github.com/newjersey/navigator.business.nj.gov/issues/184999429)] control funding agency type as id/name combo ([b80a209](https://github.com/newjersey/navigator.business.nj.gov/commit/b80a209ecb6befeb40d6771210e06e0564c7a7f1))
-- [[#185008380](https://github.com/newjersey/navigator.business.nj.gov/issues/185008380)] update s-corp formation ([c999a86](https://github.com/newjersey/navigator.business.nj.gov/commit/c999a860238c0a76c963a44ca918f359c79c2a47))
+- [[#183443674](https://www.pivotaltracker.com/story/show/183443674)] update c-corp formation ([565496f](https://github.com/newjersey/navigator.business.nj.gov/commit/565496fad31ab30b9cce1fe8dc96ee17049f10de))
+- [[#183443674](https://www.pivotaltracker.com/story/show/183443674)] update c-corp formation ([44aa543](https://github.com/newjersey/navigator.business.nj.gov/commit/44aa543c0a7489e3cbaa8d2b84f61cf3080ea6fe))
+- [[#183443674](https://www.pivotaltracker.com/story/show/183443674)] update c-corp formation ([3064faf](https://github.com/newjersey/navigator.business.nj.gov/commit/3064fafa738a8fe41baedbd2b860c47a0cf2460a))
+- [[#184305952](https://www.pivotaltracker.com/story/show/184305952)] formation review page section reorg ([f30a748](https://github.com/newjersey/navigator.business.nj.gov/commit/f30a74855bb97343059096cd42edfd1c1d1a18cf))
+- [[#184306248](https://www.pivotaltracker.com/story/show/184306248)] formation remembers last user visited page ([6909b7c](https://github.com/newjersey/navigator.business.nj.gov/commit/6909b7c2059707f67c6f7d4552e4cd8d52c123df))
+- [[#184999429](https://www.pivotaltracker.com/story/show/184999429)] control funding agency type as id/name combo ([b80a209](https://github.com/newjersey/navigator.business.nj.gov/commit/b80a209ecb6befeb40d6771210e06e0564c7a7f1))
+- [[#185008380](https://www.pivotaltracker.com/story/show/185008380)] update s-corp formation ([c999a86](https://github.com/newjersey/navigator.business.nj.gov/commit/c999a860238c0a76c963a44ca918f359c79c2a47))
 - dropshadow storybook ([a5e430c](https://github.com/newjersey/navigator.business.nj.gov/commit/a5e430c0abe4150e2e205dba23f0ce8daeab7e1b))
 - ga4 migration ([8bf6c97](https://github.com/newjersey/navigator.business.nj.gov/commit/8bf6c97e1d228b1656e251a04aba856aa37feab5))
 - updated drop shadows to use scss loop and integrated drop shadow theme ([5359bc5](https://github.com/newjersey/navigator.business.nj.gov/commit/5359bc562923ac863726c86a441d3de01aff8f65))
@@ -1481,11 +1758,11 @@
 
 ### Bug Fixes
 
-- [[#184306179](https://github.com/newjersey/navigator.business.nj.gov/issues/184306179)] confirm availability in-line error on blur ([883285c](https://github.com/newjersey/navigator.business.nj.gov/commit/883285cb18c7f77438da779e81ff511ebe263004))
-- [[#184327505](https://github.com/newjersey/navigator.business.nj.gov/issues/184327505)] remove unneccessary petcare migration test for new user ([bbd1c38](https://github.com/newjersey/navigator.business.nj.gov/commit/bbd1c38a3fa10c34caff41ca25fc178743d8a5e6))
-- [[#184675379](https://github.com/newjersey/navigator.business.nj.gov/issues/184675379)] add logistics JSON inadvertently missed, fixes broken Cypress test ([c7d5b70](https://github.com/newjersey/navigator.business.nj.gov/commit/c7d5b70f97fa75a548da0a93af219639bb677254))
-- [[#184779495](https://github.com/newjersey/navigator.business.nj.gov/issues/184779495)] for you cards broken on mobile ([3801882](https://github.com/newjersey/navigator.business.nj.gov/commit/3801882c2babb5fe2cab858fcd8aa3d59579a3be))
-- [[#184821930](https://github.com/newjersey/navigator.business.nj.gov/issues/184821930)] remove subtitle from legal structure dropdown ([935d6b1](https://github.com/newjersey/navigator.business.nj.gov/commit/935d6b13dbd400d485f5a4dc443c9a13330d1e59))
+- [[#184306179](https://www.pivotaltracker.com/story/show/184306179)] confirm availability in-line error on blur ([883285c](https://github.com/newjersey/navigator.business.nj.gov/commit/883285cb18c7f77438da779e81ff511ebe263004))
+- [[#184327505](https://www.pivotaltracker.com/story/show/184327505)] remove unneccessary petcare migration test for new user ([bbd1c38](https://github.com/newjersey/navigator.business.nj.gov/commit/bbd1c38a3fa10c34caff41ca25fc178743d8a5e6))
+- [[#184675379](https://www.pivotaltracker.com/story/show/184675379)] add logistics JSON inadvertently missed, fixes broken Cypress test ([c7d5b70](https://github.com/newjersey/navigator.business.nj.gov/commit/c7d5b70f97fa75a548da0a93af219639bb677254))
+- [[#184779495](https://www.pivotaltracker.com/story/show/184779495)] for you cards broken on mobile ([3801882](https://github.com/newjersey/navigator.business.nj.gov/commit/3801882c2babb5fe2cab858fcd8aa3d59579a3be))
+- [[#184821930](https://www.pivotaltracker.com/story/show/184821930)] remove subtitle from legal structure dropdown ([935d6b1](https://github.com/newjersey/navigator.business.nj.gov/commit/935d6b13dbd400d485f5a4dc443c9a13330d1e59))
 - added a way to deploy release branches without a new commit ([1315e6d](https://github.com/newjersey/navigator.business.nj.gov/commit/1315e6db117223c2fc34d98003a4337f49374ea3))
 - allow license check to fail gracefully for userData autocheck ([e22c4d7](https://github.com/newjersey/navigator.business.nj.gov/commit/e22c4d76b29a73ff6be09951109541d3cf7ba508))
 - allow undefined for certification applicableOwnershipTypes ([379f4c8](https://github.com/newjersey/navigator.business.nj.gov/commit/379f4c8af88dd2a097c40969efa6d96b69386964))
@@ -1525,26 +1802,26 @@
 
 ### Features
 
-- [[#183455184](https://github.com/newjersey/navigator.business.nj.gov/issues/183455184)] license sync function & license task mappings ([68f7448](https://github.com/newjersey/navigator.business.nj.gov/commit/68f7448695e19b76f340f061ec26d2c618164901))
-- [[#183913408](https://github.com/newjersey/navigator.business.nj.gov/issues/183913408)] create header styling to support contextual links in the profiles ([f8944cb](https://github.com/newjersey/navigator.business.nj.gov/commit/f8944cb789e9cfcc9d2d798a2e4c15872ea28449))
-- [[#184306179](https://github.com/newjersey/navigator.business.nj.gov/issues/184306179)] display and persist error in stepper for unavailable name ([96a2fb2](https://github.com/newjersey/navigator.business.nj.gov/commit/96a2fb2655a1a7947ec1901975dfa3255b3ede25))
-- [[#184306179](https://github.com/newjersey/navigator.business.nj.gov/issues/184306179)] move businessNameAvailability from formationFormData to formationData ([951af85](https://github.com/newjersey/navigator.business.nj.gov/commit/951af853a9775c5623ef3c142cd70a54fbf6cd49))
-- [[#184306201](https://github.com/newjersey/navigator.business.nj.gov/issues/184306201)] add timestamp to users with saved business search data ([edfa807](https://github.com/newjersey/navigator.business.nj.gov/commit/edfa807ef561556f0b02f236d2fb33e8b0d39c08))
-- [[#184306201](https://github.com/newjersey/navigator.business.nj.gov/issues/184306201)] poppy auto-name check ([4712c87](https://github.com/newjersey/navigator.business.nj.gov/commit/4712c870f71faa76083af7afb378df2afe79ada5))
-- [[#184432275](https://github.com/newjersey/navigator.business.nj.gov/issues/184432275)] add formation date prompt to calendar ([80b52b4](https://github.com/newjersey/navigator.business.nj.gov/commit/80b52b4876490abc53f9b08df428ad2be78def2b))
-- [[#184432296](https://github.com/newjersey/navigator.business.nj.gov/issues/184432296)] add go-to-profile nudge for oscar ([3cb5783](https://github.com/newjersey/navigator.business.nj.gov/commit/3cb57838ef9b25228c6832ba98fc8e5554770aa6))
-- [[#184432315](https://github.com/newjersey/navigator.business.nj.gov/issues/184432315)] add opportunities alert to profile ([00be719](https://github.com/newjersey/navigator.business.nj.gov/commit/00be7194b8e02ccc7ad915b691f62de15f3c0af0))
-- [[#184439710](https://github.com/newjersey/navigator.business.nj.gov/issues/184439710)] move formation date to Info tab of profile ([166a9da](https://github.com/newjersey/navigator.business.nj.gov/commit/166a9da625a6514201e15e2a3601f4ae255945b3))
-- [[#184439900](https://github.com/newjersey/navigator.business.nj.gov/issues/184439900)] update Get Access button type and border color ([7009f3b](https://github.com/newjersey/navigator.business.nj.gov/commit/7009f3b43a55461de6e40d7b5220133eec95e82c))
-- [[#184597648](https://github.com/newjersey/navigator.business.nj.gov/issues/184597648)] api formation errors - business suffix, start date, main address ([323e6dd](https://github.com/newjersey/navigator.business.nj.gov/commit/323e6ddd26f67ec384b9d6219e9d0efd622a4edd))
-- [[#184597648](https://github.com/newjersey/navigator.business.nj.gov/issues/184597648)] expand mapping of known api formation errors - additional lp, stock ([0bd4133](https://github.com/newjersey/navigator.business.nj.gov/commit/0bd413303ee3a46ae114799c1f390e08f13e37c6))
-- [[#184597648](https://github.com/newjersey/navigator.business.nj.gov/issues/184597648)] expand mapping of known api formation errors - registered agent and contacts tab ([6dffeb6](https://github.com/newjersey/navigator.business.nj.gov/commit/6dffeb63711c6bb89527b47c14e8fc93a1019823))
-- [[#184597648](https://github.com/newjersey/navigator.business.nj.gov/issues/184597648)] formation api errors - business name ([47a49be](https://github.com/newjersey/navigator.business.nj.gov/commit/47a49bef9f6706fc0b50af589097396caf12e0d9))
-- [[#184606256](https://github.com/newjersey/navigator.business.nj.gov/issues/184606256)] storybook - accordion ([b465667](https://github.com/newjersey/navigator.business.nj.gov/commit/b46566721598b69fc0bd5022644f675be7ff6204))
-- [[#184702190](https://github.com/newjersey/navigator.business.nj.gov/issues/184702190)] revision for contextual links, content change for design ([68e90dc](https://github.com/newjersey/navigator.business.nj.gov/commit/68e90dc5a40fa51da7290a2f31233bf680654c28))
-- [[#184702190](https://github.com/newjersey/navigator.business.nj.gov/issues/184702190)] task screen has new dropdown field license type ([2f25b42](https://github.com/newjersey/navigator.business.nj.gov/commit/2f25b42c0e6b4495a0ecb8f438a5a24d50f5caf7))
-- [[#184780141](https://github.com/newjersey/navigator.business.nj.gov/issues/184780141)] update cms field order for licenses ([ade3c3d](https://github.com/newjersey/navigator.business.nj.gov/commit/ade3c3dea939f882d74e5a69941815a233965deb))
-- [[#184814344](https://github.com/newjersey/navigator.business.nj.gov/issues/184814344)] add dropdown options to agency field in Netlify ([53213fb](https://github.com/newjersey/navigator.business.nj.gov/commit/53213fba34cb6d4d4b05765ea10228cae6965b59))
+- [[#183455184](https://www.pivotaltracker.com/story/show/183455184)] license sync function & license task mappings ([68f7448](https://github.com/newjersey/navigator.business.nj.gov/commit/68f7448695e19b76f340f061ec26d2c618164901))
+- [[#183913408](https://www.pivotaltracker.com/story/show/183913408)] create header styling to support contextual links in the profiles ([f8944cb](https://github.com/newjersey/navigator.business.nj.gov/commit/f8944cb789e9cfcc9d2d798a2e4c15872ea28449))
+- [[#184306179](https://www.pivotaltracker.com/story/show/184306179)] display and persist error in stepper for unavailable name ([96a2fb2](https://github.com/newjersey/navigator.business.nj.gov/commit/96a2fb2655a1a7947ec1901975dfa3255b3ede25))
+- [[#184306179](https://www.pivotaltracker.com/story/show/184306179)] move businessNameAvailability from formationFormData to formationData ([951af85](https://github.com/newjersey/navigator.business.nj.gov/commit/951af853a9775c5623ef3c142cd70a54fbf6cd49))
+- [[#184306201](https://www.pivotaltracker.com/story/show/184306201)] add timestamp to users with saved business search data ([edfa807](https://github.com/newjersey/navigator.business.nj.gov/commit/edfa807ef561556f0b02f236d2fb33e8b0d39c08))
+- [[#184306201](https://www.pivotaltracker.com/story/show/184306201)] poppy auto-name check ([4712c87](https://github.com/newjersey/navigator.business.nj.gov/commit/4712c870f71faa76083af7afb378df2afe79ada5))
+- [[#184432275](https://www.pivotaltracker.com/story/show/184432275)] add formation date prompt to calendar ([80b52b4](https://github.com/newjersey/navigator.business.nj.gov/commit/80b52b4876490abc53f9b08df428ad2be78def2b))
+- [[#184432296](https://www.pivotaltracker.com/story/show/184432296)] add go-to-profile nudge for oscar ([3cb5783](https://github.com/newjersey/navigator.business.nj.gov/commit/3cb57838ef9b25228c6832ba98fc8e5554770aa6))
+- [[#184432315](https://www.pivotaltracker.com/story/show/184432315)] add opportunities alert to profile ([00be719](https://github.com/newjersey/navigator.business.nj.gov/commit/00be7194b8e02ccc7ad915b691f62de15f3c0af0))
+- [[#184439710](https://www.pivotaltracker.com/story/show/184439710)] move formation date to Info tab of profile ([166a9da](https://github.com/newjersey/navigator.business.nj.gov/commit/166a9da625a6514201e15e2a3601f4ae255945b3))
+- [[#184439900](https://www.pivotaltracker.com/story/show/184439900)] update Get Access button type and border color ([7009f3b](https://github.com/newjersey/navigator.business.nj.gov/commit/7009f3b43a55461de6e40d7b5220133eec95e82c))
+- [[#184597648](https://www.pivotaltracker.com/story/show/184597648)] api formation errors - business suffix, start date, main address ([323e6dd](https://github.com/newjersey/navigator.business.nj.gov/commit/323e6ddd26f67ec384b9d6219e9d0efd622a4edd))
+- [[#184597648](https://www.pivotaltracker.com/story/show/184597648)] expand mapping of known api formation errors - additional lp, stock ([0bd4133](https://github.com/newjersey/navigator.business.nj.gov/commit/0bd413303ee3a46ae114799c1f390e08f13e37c6))
+- [[#184597648](https://www.pivotaltracker.com/story/show/184597648)] expand mapping of known api formation errors - registered agent and contacts tab ([6dffeb6](https://github.com/newjersey/navigator.business.nj.gov/commit/6dffeb63711c6bb89527b47c14e8fc93a1019823))
+- [[#184597648](https://www.pivotaltracker.com/story/show/184597648)] formation api errors - business name ([47a49be](https://github.com/newjersey/navigator.business.nj.gov/commit/47a49bef9f6706fc0b50af589097396caf12e0d9))
+- [[#184606256](https://www.pivotaltracker.com/story/show/184606256)] storybook - accordion ([b465667](https://github.com/newjersey/navigator.business.nj.gov/commit/b46566721598b69fc0bd5022644f675be7ff6204))
+- [[#184702190](https://www.pivotaltracker.com/story/show/184702190)] revision for contextual links, content change for design ([68e90dc](https://github.com/newjersey/navigator.business.nj.gov/commit/68e90dc5a40fa51da7290a2f31233bf680654c28))
+- [[#184702190](https://www.pivotaltracker.com/story/show/184702190)] task screen has new dropdown field license type ([2f25b42](https://github.com/newjersey/navigator.business.nj.gov/commit/2f25b42c0e6b4495a0ecb8f438a5a24d50f5caf7))
+- [[#184780141](https://www.pivotaltracker.com/story/show/184780141)] update cms field order for licenses ([ade3c3d](https://github.com/newjersey/navigator.business.nj.gov/commit/ade3c3dea939f882d74e5a69941815a233965deb))
+- [[#184814344](https://www.pivotaltracker.com/story/show/184814344)] add dropdown options to agency field in Netlify ([53213fb](https://github.com/newjersey/navigator.business.nj.gov/commit/53213fba34cb6d4d4b05765ea10228cae6965b59))
 - [184533765] add legal structure, industry, and business persona to intercom ([fd96c37](https://github.com/newjersey/navigator.business.nj.gov/commit/fd96c3714878f6adf04e17e0716dbab0bf3666b4))
 - gtm initalization ([5e0d0e9](https://github.com/newjersey/navigator.business.nj.gov/commit/5e0d0e9956557f852414ec28ee3ebd6279fcdf07))
 
@@ -1552,8 +1829,8 @@
 
 ### Bug Fixes
 
-- [[#184700586](https://github.com/newjersey/navigator.business.nj.gov/issues/184700586)] increase option limit for netlify relations dropdowns ([6653e92](https://github.com/newjersey/navigator.business.nj.gov/commit/6653e92fa198ed4a87aa65f11b05400e1587b691))
-- [[#184718036](https://github.com/newjersey/navigator.business.nj.gov/issues/184718036)] welcome card now closes when the close button is hit ([84e9225](https://github.com/newjersey/navigator.business.nj.gov/commit/84e9225a3c2d01ed790f2260390e78f60f1ef930))
+- [[#184700586](https://www.pivotaltracker.com/story/show/184700586)] increase option limit for netlify relations dropdowns ([6653e92](https://github.com/newjersey/navigator.business.nj.gov/commit/6653e92fa198ed4a87aa65f11b05400e1587b691))
+- [[#184718036](https://www.pivotaltracker.com/story/show/184718036)] welcome card now closes when the close button is hit ([84e9225](https://github.com/newjersey/navigator.business.nj.gov/commit/84e9225a3c2d01ed790f2260390e78f60f1ef930))
 - added updated inline error validations on profile dakota nexus fields ([c2b570b](https://github.com/newjersey/navigator.business.nj.gov/commit/c2b570b466e15fb119845bf17c1b88f56059ded4))
 - adding missing apt package for chrome installation ([39ee8ee](https://github.com/newjersey/navigator.business.nj.gov/commit/39ee8ee2b06b14be6d5b3260a6740a791b27e5e9))
 - cms broken from mui theme and form context ([7e12d6d](https://github.com/newjersey/navigator.business.nj.gov/commit/7e12d6dfa44b80a7743a5e9483cece0dfd71efb2))
@@ -1591,27 +1868,27 @@
 
 ### Features
 
-- [[#183444690](https://github.com/newjersey/navigator.business.nj.gov/issues/183444690)] add confirmation modal for profile formation date deletion ([71e5945](https://github.com/newjersey/navigator.business.nj.gov/commit/71e59455c8cbaff695d22778d2056b0e010c470e))
-- [[#183444690](https://github.com/newjersey/navigator.business.nj.gov/issues/183444690)] update profile formation date field so user can delete the date ([2ee8735](https://github.com/newjersey/navigator.business.nj.gov/commit/2ee8735e855798d6a705d6b588ce406b5ed1cc0b))
-- [[#184125110](https://github.com/newjersey/navigator.business.nj.gov/issues/184125110)] make location optional in formation for NJ ([e0e914a](https://github.com/newjersey/navigator.business.nj.gov/commit/e0e914affe26effd67bce2840f823e2436ff9847))
-- [[#184533733](https://github.com/newjersey/navigator.business.nj.gov/issues/184533733)] share feedback & report something broken prompts live chat ([558b369](https://github.com/newjersey/navigator.business.nj.gov/commit/558b36993f3045ad73cf6e12330a58a35b6c6795))
+- [[#183444690](https://www.pivotaltracker.com/story/show/183444690)] add confirmation modal for profile formation date deletion ([71e5945](https://github.com/newjersey/navigator.business.nj.gov/commit/71e59455c8cbaff695d22778d2056b0e010c470e))
+- [[#183444690](https://www.pivotaltracker.com/story/show/183444690)] update profile formation date field so user can delete the date ([2ee8735](https://github.com/newjersey/navigator.business.nj.gov/commit/2ee8735e855798d6a705d6b588ce406b5ed1cc0b))
+- [[#184125110](https://www.pivotaltracker.com/story/show/184125110)] make location optional in formation for NJ ([e0e914a](https://github.com/newjersey/navigator.business.nj.gov/commit/e0e914affe26effd67bce2840f823e2436ff9847))
+- [[#184533733](https://www.pivotaltracker.com/story/show/184533733)] share feedback & report something broken prompts live chat ([558b369](https://github.com/newjersey/navigator.business.nj.gov/commit/558b36993f3045ad73cf6e12330a58a35b6c6795))
 - added new agency type to taxFilings ([2d5c52a](https://github.com/newjersey/navigator.business.nj.gov/commit/2d5c52a6aec424f927598e1c206fe37a12d05ec3))
 
 ## [5.15.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.15.0...v5.15.1) (2023-03-13)
 
 ### Bug Fixes
 
-- [[#184688502](https://github.com/newjersey/navigator.business.nj.gov/issues/184688502)] fix nexus formation date label ([2cc5d80](https://github.com/newjersey/navigator.business.nj.gov/commit/2cc5d80e9c34d31b17576994236308b5e3a9986b))
+- [[#184688502](https://www.pivotaltracker.com/story/show/184688502)] fix nexus formation date label ([2cc5d80](https://github.com/newjersey/navigator.business.nj.gov/commit/2cc5d80e9c34d31b17576994236308b5e3a9986b))
 
 # [5.15.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.14.1...v5.15.0) (2023-03-13)
 
 ### Bug Fixes
 
-- [[#183314453](https://github.com/newjersey/navigator.business.nj.gov/issues/183314453)] import fix to meet dependency check ([b17291f](https://github.com/newjersey/navigator.business.nj.gov/commit/b17291fac5a3d89ee12e31b0f0147c56c2ed6fd7))
-- [[#183314453](https://github.com/newjersey/navigator.business.nj.gov/issues/183314453)] welcome-up-and-running card close button ([7c51b3b](https://github.com/newjersey/navigator.business.nj.gov/commit/7c51b3b936439a63e811c9869d6a1fc51a206dff))
-- [[#184506340](https://github.com/newjersey/navigator.business.nj.gov/issues/184506340)] display LLC name NOT id in locked profile field ([c944814](https://github.com/newjersey/navigator.business.nj.gov/commit/c9448141ebeb0d5a3e27729924e773898f88aab4))
-- [[#184506447](https://github.com/newjersey/navigator.business.nj.gov/issues/184506447)] location is not asked for dakota nexus with no nj location ([b344be7](https://github.com/newjersey/navigator.business.nj.gov/commit/b344be755fcc00cbdd3e582bf76ace63fa24096a))
-- [[#184615373](https://github.com/newjersey/navigator.business.nj.gov/issues/184615373)] allow user to enter NJ as foreign business address ([df892ed](https://github.com/newjersey/navigator.business.nj.gov/commit/df892ed418f0d6da66b9b6a9ed93fe8cc6f91448))
+- [[#183314453](https://www.pivotaltracker.com/story/show/183314453)] import fix to meet dependency check ([b17291f](https://github.com/newjersey/navigator.business.nj.gov/commit/b17291fac5a3d89ee12e31b0f0147c56c2ed6fd7))
+- [[#183314453](https://www.pivotaltracker.com/story/show/183314453)] welcome-up-and-running card close button ([7c51b3b](https://github.com/newjersey/navigator.business.nj.gov/commit/7c51b3b936439a63e811c9869d6a1fc51a206dff))
+- [[#184506340](https://www.pivotaltracker.com/story/show/184506340)] display LLC name NOT id in locked profile field ([c944814](https://github.com/newjersey/navigator.business.nj.gov/commit/c9448141ebeb0d5a3e27729924e773898f88aab4))
+- [[#184506447](https://www.pivotaltracker.com/story/show/184506447)] location is not asked for dakota nexus with no nj location ([b344be7](https://github.com/newjersey/navigator.business.nj.gov/commit/b344be755fcc00cbdd3e582bf76ace63fa24096a))
+- [[#184615373](https://www.pivotaltracker.com/story/show/184615373)] allow user to enter NJ as foreign business address ([df892ed](https://github.com/newjersey/navigator.business.nj.gov/commit/df892ed418f0d6da66b9b6a9ed93fe8cc6f91448))
 - a manual installation script for the dynamodb-local breaking change ([b0782ce](https://github.com/newjersey/navigator.business.nj.gov/commit/b0782ce01cbb33d68783c6629f429d21eb74d01f))
 - added a way to deploy release branches without a new commit ([e998802](https://github.com/newjersey/navigator.business.nj.gov/commit/e99880249be871a77dede4f75d5f997c7c905303))
 - **deps:** update aws-amplify ([442b3a2](https://github.com/newjersey/navigator.business.nj.gov/commit/442b3a2a30f34582f152cea7ac9d2e2bc63d8e80))
@@ -1627,13 +1904,13 @@
 
 ### Features
 
-- [[#182664037](https://github.com/newjersey/navigator.business.nj.gov/issues/182664037)] remove placeholder text everywhere ([480109b](https://github.com/newjersey/navigator.business.nj.gov/commit/480109bbf2505ef254f8a20a678abb74a1df5f4a))
-- [[#183314453](https://github.com/newjersey/navigator.business.nj.gov/issues/183314453)] welcome card for up and running and oscar ([247a289](https://github.com/newjersey/navigator.business.nj.gov/commit/247a28963b2383d89951be749ced44c60d93a68c))
-- [[#183901725](https://github.com/newjersey/navigator.business.nj.gov/issues/183901725)] Calendar Empty States for Multi-year Calendar ([85c5267](https://github.com/newjersey/navigator.business.nj.gov/commit/85c526744b11ca6ee78f5b67480815d8d98ad82f))
-- [[#184327505](https://github.com/newjersey/navigator.business.nj.gov/issues/184327505)] petcare housing essential question ([b9a5bf5](https://github.com/newjersey/navigator.business.nj.gov/commit/b9a5bf547423866b8588a9cb453f56f121ebbcc3))
-- [[#184382766](https://github.com/newjersey/navigator.business.nj.gov/issues/184382766)] complete cms changes for formation ([4543ab1](https://github.com/newjersey/navigator.business.nj.gov/commit/4543ab1e52586dc491bb26b3e33322aa449d3803))
-- [[#184419815](https://github.com/newjersey/navigator.business.nj.gov/issues/184419815)] will sell pet care items essential question ([5ea5fb0](https://github.com/newjersey/navigator.business.nj.gov/commit/5ea5fb0a5832ae4adfc3e30f4897ed3b4e57cbde))
-- [[#184662184](https://github.com/newjersey/navigator.business.nj.gov/issues/184662184)] add content & reformat for unmapped formation api errors ([68ed56d](https://github.com/newjersey/navigator.business.nj.gov/commit/68ed56d68792d69fee04b4516aa514ff454b9cdb))
+- [[#182664037](https://www.pivotaltracker.com/story/show/182664037)] remove placeholder text everywhere ([480109b](https://github.com/newjersey/navigator.business.nj.gov/commit/480109bbf2505ef254f8a20a678abb74a1df5f4a))
+- [[#183314453](https://www.pivotaltracker.com/story/show/183314453)] welcome card for up and running and oscar ([247a289](https://github.com/newjersey/navigator.business.nj.gov/commit/247a28963b2383d89951be749ced44c60d93a68c))
+- [[#183901725](https://www.pivotaltracker.com/story/show/183901725)] Calendar Empty States for Multi-year Calendar ([85c5267](https://github.com/newjersey/navigator.business.nj.gov/commit/85c526744b11ca6ee78f5b67480815d8d98ad82f))
+- [[#184327505](https://www.pivotaltracker.com/story/show/184327505)] petcare housing essential question ([b9a5bf5](https://github.com/newjersey/navigator.business.nj.gov/commit/b9a5bf547423866b8588a9cb453f56f121ebbcc3))
+- [[#184382766](https://www.pivotaltracker.com/story/show/184382766)] complete cms changes for formation ([4543ab1](https://github.com/newjersey/navigator.business.nj.gov/commit/4543ab1e52586dc491bb26b3e33322aa449d3803))
+- [[#184419815](https://www.pivotaltracker.com/story/show/184419815)] will sell pet care items essential question ([5ea5fb0](https://github.com/newjersey/navigator.business.nj.gov/commit/5ea5fb0a5832ae4adfc3e30f4897ed3b4e57cbde))
+- [[#184662184](https://www.pivotaltracker.com/story/show/184662184)] add content & reformat for unmapped formation api errors ([68ed56d](https://github.com/newjersey/navigator.business.nj.gov/commit/68ed56d68792d69fee04b4516aa514ff454b9cdb))
 - **filings:** modify generateAnnualFilings helpfer func to be more deterministic ([65d2982](https://github.com/newjersey/navigator.business.nj.gov/commit/65d29829dfc81d6a11409dfb88183680052e22bb))
 - **filings:** update annual filings logic to return next 3 years ([bb64607](https://github.com/newjersey/navigator.business.nj.gov/commit/bb6460714ec13c1f4bf7e0cc20def250028ab9d5))
 - **filings:** update test descriptions ([66f0132](https://github.com/newjersey/navigator.business.nj.gov/commit/66f0132b26e8561366cf8a8fc9edcbc6e6520f5f))
@@ -1648,25 +1925,25 @@
 
 ### Bug Fixes
 
-- [[#183716181](https://github.com/newjersey/navigator.business.nj.gov/issues/183716181)] needs to register dbaName validation ([bc9fd4a](https://github.com/newjersey/navigator.business.nj.gov/commit/bc9fd4a70168ca2a759b0c812c618173ec32ca1e))
+- [[#183716181](https://www.pivotaltracker.com/story/show/183716181)] needs to register dbaName validation ([bc9fd4a](https://github.com/newjersey/navigator.business.nj.gov/commit/bc9fd4a70168ca2a759b0c812c618173ec32ca1e))
 - updating Profile Page profile-fields ([#5306](https://github.com/newjersey/navigator.business.nj.gov/issues/5306)) ([b6e701e](https://github.com/newjersey/navigator.business.nj.gov/commit/b6e701e5b8ba963ef6732121f2d3f1c04fb2850b))
 - updating Roadmaps - Industries generic ([#5304](https://github.com/newjersey/navigator.business.nj.gov/issues/5304)) ([0644dcb](https://github.com/newjersey/navigator.business.nj.gov/commit/0644dcb5538b16b6e9d46ea7e10887987bc86165))
 - updating Tasks - All detective-agency-license ([#5299](https://github.com/newjersey/navigator.business.nj.gov/issues/5299)) ([fbb85de](https://github.com/newjersey/navigator.business.nj.gov/commit/fbb85de097c74b864940c665bd41db27221f9b5a))
 
 ### Features
 
-- [[#183716181](https://github.com/newjersey/navigator.business.nj.gov/issues/183716181)] dakota nexus dba name in register modal ([b2bf0b6](https://github.com/newjersey/navigator.business.nj.gov/commit/b2bf0b684d5c71bdcbd6ea3355e1dcd03aba2ce0))
-- [[#183959967](https://github.com/newjersey/navigator.business.nj.gov/issues/183959967)] change select to multi select for fundings in cms ([afdea4f](https://github.com/newjersey/navigator.business.nj.gov/commit/afdea4fdcced25aa6d99d0cb521efcde53f6ceab))
-- [[#184382595](https://github.com/newjersey/navigator.business.nj.gov/issues/184382595)] add get-insurance required to electrical-contractor and transportation industries ([f8e2aad](https://github.com/newjersey/navigator.business.nj.gov/commit/f8e2aad8a4dd182c5b96d57d89698c5525dc33d3))
+- [[#183716181](https://www.pivotaltracker.com/story/show/183716181)] dakota nexus dba name in register modal ([b2bf0b6](https://github.com/newjersey/navigator.business.nj.gov/commit/b2bf0b684d5c71bdcbd6ea3355e1dcd03aba2ce0))
+- [[#183959967](https://www.pivotaltracker.com/story/show/183959967)] change select to multi select for fundings in cms ([afdea4f](https://github.com/newjersey/navigator.business.nj.gov/commit/afdea4fdcced25aa6d99d0cb521efcde53f6ceab))
+- [[#184382595](https://www.pivotaltracker.com/story/show/184382595)] add get-insurance required to electrical-contractor and transportation industries ([f8e2aad](https://github.com/newjersey/navigator.business.nj.gov/commit/f8e2aad8a4dd182c5b96d57d89698c5525dc33d3))
 
 # [5.13.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.12.0...v5.13.0) (2023-02-21)
 
 ### Bug Fixes
 
-- [[#183677932](https://github.com/newjersey/navigator.business.nj.gov/issues/183677932)] tax id show/hide hover and split field width in profile ([43a11d8](https://github.com/newjersey/navigator.business.nj.gov/commit/43a11d85f54ff139ed2bf198ee667188b8301934))
-- [[#183901658](https://github.com/newjersey/navigator.business.nj.gov/issues/183901658)] calendar year selector visual treatments ([e2c2bdd](https://github.com/newjersey/navigator.business.nj.gov/commit/e2c2bddfa2318734cd504c721ee6b21655238868))
-- [[#184162422](https://github.com/newjersey/navigator.business.nj.gov/issues/184162422)] add env vars to next.config for basic auth ([e851211](https://github.com/newjersey/navigator.business.nj.gov/commit/e851211e10b5dcce759f73dac0457bbd14f1154b))
-- [[#184417845](https://github.com/newjersey/navigator.business.nj.gov/issues/184417845)] update config reference for postal code error message ([e16d3e1](https://github.com/newjersey/navigator.business.nj.gov/commit/e16d3e1d3269508ca7c3054471e3d445fad47cbf))
+- [[#183677932](https://www.pivotaltracker.com/story/show/183677932)] tax id show/hide hover and split field width in profile ([43a11d8](https://github.com/newjersey/navigator.business.nj.gov/commit/43a11d85f54ff139ed2bf198ee667188b8301934))
+- [[#183901658](https://www.pivotaltracker.com/story/show/183901658)] calendar year selector visual treatments ([e2c2bdd](https://github.com/newjersey/navigator.business.nj.gov/commit/e2c2bddfa2318734cd504c721ee6b21655238868))
+- [[#184162422](https://www.pivotaltracker.com/story/show/184162422)] add env vars to next.config for basic auth ([e851211](https://github.com/newjersey/navigator.business.nj.gov/commit/e851211e10b5dcce759f73dac0457bbd14f1154b))
+- [[#184417845](https://www.pivotaltracker.com/story/show/184417845)] update config reference for postal code error message ([e16d3e1](https://github.com/newjersey/navigator.business.nj.gov/commit/e16d3e1d3269508ca7c3054471e3d445fad47cbf))
 - adding missing function for user_uuid field in intercom ([c4348e2](https://github.com/newjersey/navigator.business.nj.gov/commit/c4348e278ae842dc6d88153923051fb0a5ceab6f))
 - basic auth ecs breaking fix ([c09e36d](https://github.com/newjersey/navigator.business.nj.gov/commit/c09e36d9e38487d3d23894a7ad76f343bd007d3f))
 - **deps:** update aws-amplify ([90c4111](https://github.com/newjersey/navigator.business.nj.gov/commit/90c4111de85c31572e2a439d39789438470eda07))
@@ -1712,20 +1989,20 @@
 
 ### Features
 
-- [[#183448263](https://github.com/newjersey/navigator.business.nj.gov/issues/183448263)] add max length validation for address line 2 in modal ([e0eff4c](https://github.com/newjersey/navigator.business.nj.gov/commit/e0eff4cf3e14b8cc29b146179ae598e899d78951))
-- [[#183448263](https://github.com/newjersey/navigator.business.nj.gov/issues/183448263)] add max length validation for address modal ([e6eefcb](https://github.com/newjersey/navigator.business.nj.gov/commit/e6eefcb8f79a2631672cbb5a8865db9476f0e10f))
-- [[#183448263](https://github.com/newjersey/navigator.business.nj.gov/issues/183448263)] add max length validation for simple text fields ([3e82676](https://github.com/newjersey/navigator.business.nj.gov/commit/3e82676ebe68401ff7778945e713c0ca87070df9))
-- [[#183448263](https://github.com/newjersey/navigator.business.nj.gov/issues/183448263)] add validation for address2 in non-modal fields ([512741e](https://github.com/newjersey/navigator.business.nj.gov/commit/512741e3b73f287ca16e799bc12548fe0b210408))
-- [[#183448263](https://github.com/newjersey/navigator.business.nj.gov/issues/183448263)] max length validation for internation city/province ([a4b05af](https://github.com/newjersey/navigator.business.nj.gov/commit/a4b05af5feea7fb68b9d85e28ed02e4897ae62c1))
-- [[#183448263](https://github.com/newjersey/navigator.business.nj.gov/issues/183448263)] max length validation for signer name ([2e7f940](https://github.com/newjersey/navigator.business.nj.gov/commit/2e7f940bbf336c6d372c493168711eec93fe4f2a))
-- [[#183677932](https://github.com/newjersey/navigator.business.nj.gov/issues/183677932)] tax encryption v2 ([a96b763](https://github.com/newjersey/navigator.business.nj.gov/commit/a96b763e5f8f37d0d5cbea662fc02a86e2798f6c))
-- [[#183901987](https://github.com/newjersey/navigator.business.nj.gov/issues/183901987)] add add'l dakota business types for onboarding ([8462c8c](https://github.com/newjersey/navigator.business.nj.gov/commit/8462c8c8e4f93d736f7889e1f91d88d5d469bbc0))
-- [[#183959967](https://github.com/newjersey/navigator.business.nj.gov/issues/183959967)] Adding multi-select for m/wbe options in Funding Tasks ([81b0679](https://github.com/newjersey/navigator.business.nj.gov/commit/81b0679818dadaaba6ea0652c7aad8bc6a7da657))
-- [[#183959967](https://github.com/newjersey/navigator.business.nj.gov/issues/183959967)] change select to multi select for fundings in cms ([26e9679](https://github.com/newjersey/navigator.business.nj.gov/commit/26e9679a7797a016f9dc4c650f57210fa3d29f37))
-- [[#184170718](https://github.com/newjersey/navigator.business.nj.gov/issues/184170718)] lock taxId after calendar success ([4808ac7](https://github.com/newjersey/navigator.business.nj.gov/commit/4808ac7c624e674bc4aa76f8f5001c2364fc79db))
-- [[#184198507](https://github.com/newjersey/navigator.business.nj.gov/issues/184198507)] add industry and local task labels for task details ([35d1368](https://github.com/newjersey/navigator.business.nj.gov/commit/35d13689e9530fa786611ba2ebb1a2fedd1c6557))
-- [[#184371794](https://github.com/newjersey/navigator.business.nj.gov/issues/184371794)] hide formation date input in profile for trade name businesses ([f81d366](https://github.com/newjersey/navigator.business.nj.gov/commit/f81d366fe3b8e09347c3f44b5d9fc040230210ba))
-- [[#184442335](https://github.com/newjersey/navigator.business.nj.gov/issues/184442335)] Send userId to intercom ([15c9c6f](https://github.com/newjersey/navigator.business.nj.gov/commit/15c9c6f0e6763a071936faac732acec3e3d55227))
+- [[#183448263](https://www.pivotaltracker.com/story/show/183448263)] add max length validation for address line 2 in modal ([e0eff4c](https://github.com/newjersey/navigator.business.nj.gov/commit/e0eff4cf3e14b8cc29b146179ae598e899d78951))
+- [[#183448263](https://www.pivotaltracker.com/story/show/183448263)] add max length validation for address modal ([e6eefcb](https://github.com/newjersey/navigator.business.nj.gov/commit/e6eefcb8f79a2631672cbb5a8865db9476f0e10f))
+- [[#183448263](https://www.pivotaltracker.com/story/show/183448263)] add max length validation for simple text fields ([3e82676](https://github.com/newjersey/navigator.business.nj.gov/commit/3e82676ebe68401ff7778945e713c0ca87070df9))
+- [[#183448263](https://www.pivotaltracker.com/story/show/183448263)] add validation for address2 in non-modal fields ([512741e](https://github.com/newjersey/navigator.business.nj.gov/commit/512741e3b73f287ca16e799bc12548fe0b210408))
+- [[#183448263](https://www.pivotaltracker.com/story/show/183448263)] max length validation for internation city/province ([a4b05af](https://github.com/newjersey/navigator.business.nj.gov/commit/a4b05af5feea7fb68b9d85e28ed02e4897ae62c1))
+- [[#183448263](https://www.pivotaltracker.com/story/show/183448263)] max length validation for signer name ([2e7f940](https://github.com/newjersey/navigator.business.nj.gov/commit/2e7f940bbf336c6d372c493168711eec93fe4f2a))
+- [[#183677932](https://www.pivotaltracker.com/story/show/183677932)] tax encryption v2 ([a96b763](https://github.com/newjersey/navigator.business.nj.gov/commit/a96b763e5f8f37d0d5cbea662fc02a86e2798f6c))
+- [[#183901987](https://www.pivotaltracker.com/story/show/183901987)] add add'l dakota business types for onboarding ([8462c8c](https://github.com/newjersey/navigator.business.nj.gov/commit/8462c8c8e4f93d736f7889e1f91d88d5d469bbc0))
+- [[#183959967](https://www.pivotaltracker.com/story/show/183959967)] Adding multi-select for m/wbe options in Funding Tasks ([81b0679](https://github.com/newjersey/navigator.business.nj.gov/commit/81b0679818dadaaba6ea0652c7aad8bc6a7da657))
+- [[#183959967](https://www.pivotaltracker.com/story/show/183959967)] change select to multi select for fundings in cms ([26e9679](https://github.com/newjersey/navigator.business.nj.gov/commit/26e9679a7797a016f9dc4c650f57210fa3d29f37))
+- [[#184170718](https://www.pivotaltracker.com/story/show/184170718)] lock taxId after calendar success ([4808ac7](https://github.com/newjersey/navigator.business.nj.gov/commit/4808ac7c624e674bc4aa76f8f5001c2364fc79db))
+- [[#184198507](https://www.pivotaltracker.com/story/show/184198507)] add industry and local task labels for task details ([35d1368](https://github.com/newjersey/navigator.business.nj.gov/commit/35d13689e9530fa786611ba2ebb1a2fedd1c6557))
+- [[#184371794](https://www.pivotaltracker.com/story/show/184371794)] hide formation date input in profile for trade name businesses ([f81d366](https://github.com/newjersey/navigator.business.nj.gov/commit/f81d366fe3b8e09347c3f44b5d9fc040230210ba))
+- [[#184442335](https://www.pivotaltracker.com/story/show/184442335)] Send userId to intercom ([15c9c6f](https://github.com/newjersey/navigator.business.nj.gov/commit/15c9c6f0e6763a071936faac732acec3e3d55227))
 - calendar year picker ([21d5d9c](https://github.com/newjersey/navigator.business.nj.gov/commit/21d5d9c4373efca7590dfe4ae6cad2b4c81bccaa))
 - restricted name search error mode ([1f6a6cf](https://github.com/newjersey/navigator.business.nj.gov/commit/1f6a6cfc4f8f9123379b708aac3166950dd91172))
 
@@ -1738,9 +2015,9 @@
 
 ### Bug Fixes
 
-- [[#183874527](https://github.com/newjersey/navigator.business.nj.gov/issues/183874527)] split field on tax task ([a6310df](https://github.com/newjersey/navigator.business.nj.gov/commit/a6310df07bc681eef20795d01e6e06dff1f41ce2))
-- [[#184258348](https://github.com/newjersey/navigator.business.nj.gov/issues/184258348)] business name specific error on tax filing lookup modal ([813724c](https://github.com/newjersey/navigator.business.nj.gov/commit/813724cc13ccc06c38f0ea3ecc616057880ca358))
-- [[#184364900](https://github.com/newjersey/navigator.business.nj.gov/issues/184364900)] set registeredISO on successful lookup if it is undefined ([46e5b74](https://github.com/newjersey/navigator.business.nj.gov/commit/46e5b745035bc7807d200039bf2e5b2397e4c054))
+- [[#183874527](https://www.pivotaltracker.com/story/show/183874527)] split field on tax task ([a6310df](https://github.com/newjersey/navigator.business.nj.gov/commit/a6310df07bc681eef20795d01e6e06dff1f41ce2))
+- [[#184258348](https://www.pivotaltracker.com/story/show/184258348)] business name specific error on tax filing lookup modal ([813724c](https://github.com/newjersey/navigator.business.nj.gov/commit/813724cc13ccc06c38f0ea3ecc616057880ca358))
+- [[#184364900](https://www.pivotaltracker.com/story/show/184364900)] set registeredISO on successful lookup if it is undefined ([46e5b74](https://github.com/newjersey/navigator.business.nj.gov/commit/46e5b745035bc7807d200039bf2e5b2397e4c054))
 - add Form Name back into CMS ([f6f214e](https://github.com/newjersey/navigator.business.nj.gov/commit/f6f214ef62c36141280c9ca261662a6c9295b1ae))
 - added onBlur validation for foreign date of incorporation field ([33b4cdd](https://github.com/newjersey/navigator.business.nj.gov/commit/33b4cdd527464c41cdb6ea72cb1572dcc613fc87))
 - adjusting formation signature content for dakota ([a960a9b](https://github.com/newjersey/navigator.business.nj.gov/commit/a960a9b7a9f875bd39810646e7e5dcaf5f28ba31))
@@ -1808,20 +2085,20 @@
 
 ### Features
 
-- [[#183455184](https://github.com/newjersey/navigator.business.nj.gov/issues/183455184)] add all webflow licenses to navigator and netlify ([a35f8d9](https://github.com/newjersey/navigator.business.nj.gov/commit/a35f8d954823de20b7d460d675edcb79e26c188d))
-- [[#183677820](https://github.com/newjersey/navigator.business.nj.gov/issues/183677820)] out of state content differentiation ([c55f556](https://github.com/newjersey/navigator.business.nj.gov/commit/c55f556772b7c7d3555cf0ac05ce075509f292ef))
-- [[#183677932](https://github.com/newjersey/navigator.business.nj.gov/issues/183677932)] tax decryption router ([3193b82](https://github.com/newjersey/navigator.business.nj.gov/commit/3193b824bfca304cbd098b79266ef4909ac83dc7))
-- [[#183874527](https://github.com/newjersey/navigator.business.nj.gov/issues/183874527)] split tax id fields on register for taxes task ([423bffb](https://github.com/newjersey/navigator.business.nj.gov/commit/423bffba41b8d8e60cc079b1fbd76dd38561552f))
-- [[#183901552](https://github.com/newjersey/navigator.business.nj.gov/issues/183901552)] expand/ collapse tax filings in calendar ([11a8a28](https://github.com/newjersey/navigator.business.nj.gov/commit/11a8a282690a1a605999610c4d8180b032e6a707))
-- [[#183901788](https://github.com/newjersey/navigator.business.nj.gov/issues/183901788)] added view more button to calendar list view ([de46763](https://github.com/newjersey/navigator.business.nj.gov/commit/de4676323ed43dcdacce04f4c6e6b8ecd6c059e6))
-- [[#183901849](https://github.com/newjersey/navigator.business.nj.gov/issues/183901849)] Calendar List View Group List Items by Date ([dea2e5b](https://github.com/newjersey/navigator.business.nj.gov/commit/dea2e5b66ea73fef81e0ec20b8f9a6ffecead6a0))
-- [[#183934860](https://github.com/newjersey/navigator.business.nj.gov/issues/183934860)] calendar list view as default ([b433f02](https://github.com/newjersey/navigator.business.nj.gov/commit/b433f0283716111177ec8566d2d6ab9b637b38d5))
-- [[#183934860](https://github.com/newjersey/navigator.business.nj.gov/issues/183934860)] change to grid view default only when filing count exceeds 5 ([727a972](https://github.com/newjersey/navigator.business.nj.gov/commit/727a9726423d85a923dcb4504b387c7b1e1abb8b))
-- [[#183982666](https://github.com/newjersey/navigator.business.nj.gov/issues/183982666)] add tax id disclaimer for trade name legal structure ([5d8ca34](https://github.com/newjersey/navigator.business.nj.gov/commit/5d8ca348aac1e45250c6ad7570f22243b872bb69))
-- [[#184016454](https://github.com/newjersey/navigator.business.nj.gov/issues/184016454)] unlock tax access modal biz name after formation ([a3a6c43](https://github.com/newjersey/navigator.business.nj.gov/commit/a3a6c434d9723770958c41407dd6ff2dbc6e1dc4))
-- [[#184125138](https://github.com/newjersey/navigator.business.nj.gov/issues/184125138)] pass operating phase to intercom ([f39d972](https://github.com/newjersey/navigator.business.nj.gov/commit/f39d9725d912e1c559eb438480e1f61602d3712f))
-- [[#184215208](https://github.com/newjersey/navigator.business.nj.gov/issues/184215208)] remove date of formation from oscar onboarding ([35b2ee9](https://github.com/newjersey/navigator.business.nj.gov/commit/35b2ee9f78893c3dbb0d62479f3aa97a3006b4c5))
-- [[#184215268](https://github.com/newjersey/navigator.business.nj.gov/issues/184215268)] moved sector selection tofirst page for Oscar Onboarding ([f698f69](https://github.com/newjersey/navigator.business.nj.gov/commit/f698f69e9a7eea874bcf1c92c2ad90e076761280))
+- [[#183455184](https://www.pivotaltracker.com/story/show/183455184)] add all webflow licenses to navigator and netlify ([a35f8d9](https://github.com/newjersey/navigator.business.nj.gov/commit/a35f8d954823de20b7d460d675edcb79e26c188d))
+- [[#183677820](https://www.pivotaltracker.com/story/show/183677820)] out of state content differentiation ([c55f556](https://github.com/newjersey/navigator.business.nj.gov/commit/c55f556772b7c7d3555cf0ac05ce075509f292ef))
+- [[#183677932](https://www.pivotaltracker.com/story/show/183677932)] tax decryption router ([3193b82](https://github.com/newjersey/navigator.business.nj.gov/commit/3193b824bfca304cbd098b79266ef4909ac83dc7))
+- [[#183874527](https://www.pivotaltracker.com/story/show/183874527)] split tax id fields on register for taxes task ([423bffb](https://github.com/newjersey/navigator.business.nj.gov/commit/423bffba41b8d8e60cc079b1fbd76dd38561552f))
+- [[#183901552](https://www.pivotaltracker.com/story/show/183901552)] expand/ collapse tax filings in calendar ([11a8a28](https://github.com/newjersey/navigator.business.nj.gov/commit/11a8a282690a1a605999610c4d8180b032e6a707))
+- [[#183901788](https://www.pivotaltracker.com/story/show/183901788)] added view more button to calendar list view ([de46763](https://github.com/newjersey/navigator.business.nj.gov/commit/de4676323ed43dcdacce04f4c6e6b8ecd6c059e6))
+- [[#183901849](https://www.pivotaltracker.com/story/show/183901849)] Calendar List View Group List Items by Date ([dea2e5b](https://github.com/newjersey/navigator.business.nj.gov/commit/dea2e5b66ea73fef81e0ec20b8f9a6ffecead6a0))
+- [[#183934860](https://www.pivotaltracker.com/story/show/183934860)] calendar list view as default ([b433f02](https://github.com/newjersey/navigator.business.nj.gov/commit/b433f0283716111177ec8566d2d6ab9b637b38d5))
+- [[#183934860](https://www.pivotaltracker.com/story/show/183934860)] change to grid view default only when filing count exceeds 5 ([727a972](https://github.com/newjersey/navigator.business.nj.gov/commit/727a9726423d85a923dcb4504b387c7b1e1abb8b))
+- [[#183982666](https://www.pivotaltracker.com/story/show/183982666)] add tax id disclaimer for trade name legal structure ([5d8ca34](https://github.com/newjersey/navigator.business.nj.gov/commit/5d8ca348aac1e45250c6ad7570f22243b872bb69))
+- [[#184016454](https://www.pivotaltracker.com/story/show/184016454)] unlock tax access modal biz name after formation ([a3a6c43](https://github.com/newjersey/navigator.business.nj.gov/commit/a3a6c434d9723770958c41407dd6ff2dbc6e1dc4))
+- [[#184125138](https://www.pivotaltracker.com/story/show/184125138)] pass operating phase to intercom ([f39d972](https://github.com/newjersey/navigator.business.nj.gov/commit/f39d9725d912e1c559eb438480e1f61602d3712f))
+- [[#184215208](https://www.pivotaltracker.com/story/show/184215208)] remove date of formation from oscar onboarding ([35b2ee9](https://github.com/newjersey/navigator.business.nj.gov/commit/35b2ee9f78893c3dbb0d62479f3aa97a3006b4c5))
+- [[#184215268](https://www.pivotaltracker.com/story/show/184215268)] moved sector selection tofirst page for Oscar Onboarding ([f698f69](https://github.com/newjersey/navigator.business.nj.gov/commit/f698f69e9a7eea874bcf1c92c2ad90e076761280))
 - dakota llc formation ([34adc0e](https://github.com/newjersey/navigator.business.nj.gov/commit/34adc0ecfe908e2a8fd9640ca693f08e061a7c00))
 - dakota llp formation ([9949e48](https://github.com/newjersey/navigator.business.nj.gov/commit/9949e4832b61a854a176c31a7e1e520e7231a3d1))
 
@@ -1856,7 +2133,7 @@
 
 ### Features
 
-- [[#184016531](https://github.com/newjersey/navigator.business.nj.gov/issues/184016531)] remove location question from oscar onboarding ([21bee91](https://github.com/newjersey/navigator.business.nj.gov/commit/21bee912d211b7cb0f97e5b2d9d2ca872fc38c39))
+- [[#184016531](https://www.pivotaltracker.com/story/show/184016531)] remove location question from oscar onboarding ([21bee91](https://github.com/newjersey/navigator.business.nj.gov/commit/21bee912d211b7cb0f97e5b2d9d2ca872fc38c39))
 
 ## [5.10.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.10.0...v5.10.1) (2023-01-11)
 
@@ -1868,11 +2145,11 @@
 
 ### Bug Fixes
 
-- [[#183677756](https://github.com/newjersey/navigator.business.nj.gov/issues/183677756)] merge content issue ([b1b43fb](https://github.com/newjersey/navigator.business.nj.gov/commit/b1b43fbee26ebf06847f2d9617949cd5bd0b99e1))
-- [[#183677756](https://github.com/newjersey/navigator.business.nj.gov/issues/183677756)] tax filings modal errors ([df01433](https://github.com/newjersey/navigator.business.nj.gov/commit/df01433ebcbe2a43201e41e365142a3f241295fa))
-- [[#184066392](https://github.com/newjersey/navigator.business.nj.gov/issues/184066392)] taxFiling API errorField refactor ([9075899](https://github.com/newjersey/navigator.business.nj.gov/commit/9075899f47ded3af9179aa1462a74b2aba17a491))
-- [[#184137654](https://github.com/newjersey/navigator.business.nj.gov/issues/184137654)] contextual info focuses when opened from modal ([5ae3566](https://github.com/newjersey/navigator.business.nj.gov/commit/5ae3566bd8188175cf5ea7608219c0fcb3b20244))
-- [[#184154865](https://github.com/newjersey/navigator.business.nj.gov/issues/184154865)] incorrect input label for formation State ([d008216](https://github.com/newjersey/navigator.business.nj.gov/commit/d0082166b6b7dde1cd27210af4e58663a204b003))
+- [[#183677756](https://www.pivotaltracker.com/story/show/183677756)] merge content issue ([b1b43fb](https://github.com/newjersey/navigator.business.nj.gov/commit/b1b43fbee26ebf06847f2d9617949cd5bd0b99e1))
+- [[#183677756](https://www.pivotaltracker.com/story/show/183677756)] tax filings modal errors ([df01433](https://github.com/newjersey/navigator.business.nj.gov/commit/df01433ebcbe2a43201e41e365142a3f241295fa))
+- [[#184066392](https://www.pivotaltracker.com/story/show/184066392)] taxFiling API errorField refactor ([9075899](https://github.com/newjersey/navigator.business.nj.gov/commit/9075899f47ded3af9179aa1462a74b2aba17a491))
+- [[#184137654](https://www.pivotaltracker.com/story/show/184137654)] contextual info focuses when opened from modal ([5ae3566](https://github.com/newjersey/navigator.business.nj.gov/commit/5ae3566bd8188175cf5ea7608219c0fcb3b20244))
+- [[#184154865](https://www.pivotaltracker.com/story/show/184154865)] incorrect input label for formation State ([d008216](https://github.com/newjersey/navigator.business.nj.gov/commit/d0082166b6b7dde1cd27210af4e58663a204b003))
 - add NJCRC to cspell ([1e7d220](https://github.com/newjersey/navigator.business.nj.gov/commit/1e7d220597131aab0a627c3171adbdefec7688df))
 - broken test ([466535b](https://github.com/newjersey/navigator.business.nj.gov/commit/466535bf92132e23725a035cb6f083c987730556))
 - bug when adding new taxId field to tax access modal ([90c37dd](https://github.com/newjersey/navigator.business.nj.gov/commit/90c37ddcc06f037d9ecaa0d09ead4aff5ad0d866))
@@ -1952,25 +2229,25 @@
 
 ### Features
 
-- [[#183198021](https://github.com/newjersey/navigator.business.nj.gov/issues/183198021)] autosave on formation ([8f45dce](https://github.com/newjersey/navigator.business.nj.gov/commit/8f45dceccca55e4f988ea257f2bfca31ce05d1f4))
-- [[#183444029](https://github.com/newjersey/navigator.business.nj.gov/issues/183444029)] add operating and carousel to landing-page-redesign ([c55c98f](https://github.com/newjersey/navigator.business.nj.gov/commit/c55c98f4f243cb4237dae6a1e1edf8b44fa8b672))
-- [[#183444029](https://github.com/newjersey/navigator.business.nj.gov/issues/183444029)] update arrow styling on landing page redesign ([a88faae](https://github.com/newjersey/navigator.business.nj.gov/commit/a88faae98aa12d7e64551df09c12c6fb2fec67d8))
-- [[#183444029](https://github.com/newjersey/navigator.business.nj.gov/issues/183444029)] update arrow stylingon landing page redesign ([384bcb5](https://github.com/newjersey/navigator.business.nj.gov/commit/384bcb56a3798eb5a75d1e933629c4569a9a3c87))
-- [[#183524813](https://github.com/newjersey/navigator.business.nj.gov/issues/183524813)] re-order tasks in step 1 ([d9723f7](https://github.com/newjersey/navigator.business.nj.gov/commit/d9723f7e4dec70e9817d37b34e239fb9a25d79cd))
-- [[#183677691](https://github.com/newjersey/navigator.business.nj.gov/issues/183677691)] disabled field styling in profile ([9a2b5e7](https://github.com/newjersey/navigator.business.nj.gov/commit/9a2b5e701172268d0975ce51fd196dfb38ab300e))
-- [[#183677756](https://github.com/newjersey/navigator.business.nj.gov/issues/183677756)] tax calendar modal error and tax id differentiation ([ff48832](https://github.com/newjersey/navigator.business.nj.gov/commit/ff4883264b12de0b76ca485a5dedf5d369b6e761))
-- [[#183700912](https://github.com/newjersey/navigator.business.nj.gov/issues/183700912)] all essential questions are required ([51bba27](https://github.com/newjersey/navigator.business.nj.gov/commit/51bba27791d0e7886c8ff9f4df2b49a5698a1e83))
-- [[#183901513](https://github.com/newjersey/navigator.business.nj.gov/issues/183901513)] update calendar height ([d1fd185](https://github.com/newjersey/navigator.business.nj.gov/commit/d1fd1852eac4bc4abb42fbebd9886120053c5611))
-- [[#183901513](https://github.com/newjersey/navigator.business.nj.gov/issues/183901513)] update calendar to 3 columns and 4 rows ([59e855a](https://github.com/newjersey/navigator.business.nj.gov/commit/59e855a24b8135ad10633ccf6f84706813c75146))
-- [[#183901632](https://github.com/newjersey/navigator.business.nj.gov/issues/183901632)] past current months higlight update function names and fix broken tests ([984b761](https://github.com/newjersey/navigator.business.nj.gov/commit/984b7618246bf655a6c1114c56c8083cbc6c0871))
-- [[#183901632](https://github.com/newjersey/navigator.business.nj.gov/issues/183901632)] update calendar past and current months highlight ([04141bc](https://github.com/newjersey/navigator.business.nj.gov/commit/04141bc56947b4c44fe1b8e33c3c05aacdb5e1ab))
-- [[#183901632](https://github.com/newjersey/navigator.business.nj.gov/issues/183901632)] update calendar past months logic in list view ([33c1c34](https://github.com/newjersey/navigator.business.nj.gov/commit/33c1c344c316aba7645e3884a3d0b3200b19e3f4))
-- [[#184016535](https://github.com/newjersey/navigator.business.nj.gov/issues/184016535)] remove num of emp from oscar onboarding ([72526cf](https://github.com/newjersey/navigator.business.nj.gov/commit/72526cfb3b544633e205e544ebf8d70b2fcbf81e))
-- [[#184016554](https://github.com/newjersey/navigator.business.nj.gov/issues/184016554)] remove onboarding question from oscar onboarding ([efb2708](https://github.com/newjersey/navigator.business.nj.gov/commit/efb27085a2541f84a1c9203c8097e47983b422f6))
-- [[#184016565](https://github.com/newjersey/navigator.business.nj.gov/issues/184016565)] remove business-name from oscar onboarding ([b25b597](https://github.com/newjersey/navigator.business.nj.gov/commit/b25b5979c4d18acd2e14908f87e3d4bc6501898a))
-- [[#184016565](https://github.com/newjersey/navigator.business.nj.gov/issues/184016565)] remove entity-id from oscar onboarding ([ee1e9e5](https://github.com/newjersey/navigator.business.nj.gov/commit/ee1e9e56d2604700d211e5b5cb13e8b600365d15))
-- [[#184139570](https://github.com/newjersey/navigator.business.nj.gov/issues/184139570)] remove link to SIC-code ([55c7b5d](https://github.com/newjersey/navigator.business.nj.gov/commit/55c7b5d156c93537e9541bdeb671be71628c3776))
-- [[#184162599](https://github.com/newjersey/navigator.business.nj.gov/issues/184162599)] reorder cards on landing page ([8a990ca](https://github.com/newjersey/navigator.business.nj.gov/commit/8a990ca9017b85ae630e9e8220d67ab2ae4d3dab))
+- [[#183198021](https://www.pivotaltracker.com/story/show/183198021)] autosave on formation ([8f45dce](https://github.com/newjersey/navigator.business.nj.gov/commit/8f45dceccca55e4f988ea257f2bfca31ce05d1f4))
+- [[#183444029](https://www.pivotaltracker.com/story/show/183444029)] add operating and carousel to landing-page-redesign ([c55c98f](https://github.com/newjersey/navigator.business.nj.gov/commit/c55c98f4f243cb4237dae6a1e1edf8b44fa8b672))
+- [[#183444029](https://www.pivotaltracker.com/story/show/183444029)] update arrow styling on landing page redesign ([a88faae](https://github.com/newjersey/navigator.business.nj.gov/commit/a88faae98aa12d7e64551df09c12c6fb2fec67d8))
+- [[#183444029](https://www.pivotaltracker.com/story/show/183444029)] update arrow stylingon landing page redesign ([384bcb5](https://github.com/newjersey/navigator.business.nj.gov/commit/384bcb56a3798eb5a75d1e933629c4569a9a3c87))
+- [[#183524813](https://www.pivotaltracker.com/story/show/183524813)] re-order tasks in step 1 ([d9723f7](https://github.com/newjersey/navigator.business.nj.gov/commit/d9723f7e4dec70e9817d37b34e239fb9a25d79cd))
+- [[#183677691](https://www.pivotaltracker.com/story/show/183677691)] disabled field styling in profile ([9a2b5e7](https://github.com/newjersey/navigator.business.nj.gov/commit/9a2b5e701172268d0975ce51fd196dfb38ab300e))
+- [[#183677756](https://www.pivotaltracker.com/story/show/183677756)] tax calendar modal error and tax id differentiation ([ff48832](https://github.com/newjersey/navigator.business.nj.gov/commit/ff4883264b12de0b76ca485a5dedf5d369b6e761))
+- [[#183700912](https://www.pivotaltracker.com/story/show/183700912)] all essential questions are required ([51bba27](https://github.com/newjersey/navigator.business.nj.gov/commit/51bba27791d0e7886c8ff9f4df2b49a5698a1e83))
+- [[#183901513](https://www.pivotaltracker.com/story/show/183901513)] update calendar height ([d1fd185](https://github.com/newjersey/navigator.business.nj.gov/commit/d1fd1852eac4bc4abb42fbebd9886120053c5611))
+- [[#183901513](https://www.pivotaltracker.com/story/show/183901513)] update calendar to 3 columns and 4 rows ([59e855a](https://github.com/newjersey/navigator.business.nj.gov/commit/59e855a24b8135ad10633ccf6f84706813c75146))
+- [[#183901632](https://www.pivotaltracker.com/story/show/183901632)] past current months higlight update function names and fix broken tests ([984b761](https://github.com/newjersey/navigator.business.nj.gov/commit/984b7618246bf655a6c1114c56c8083cbc6c0871))
+- [[#183901632](https://www.pivotaltracker.com/story/show/183901632)] update calendar past and current months highlight ([04141bc](https://github.com/newjersey/navigator.business.nj.gov/commit/04141bc56947b4c44fe1b8e33c3c05aacdb5e1ab))
+- [[#183901632](https://www.pivotaltracker.com/story/show/183901632)] update calendar past months logic in list view ([33c1c34](https://github.com/newjersey/navigator.business.nj.gov/commit/33c1c344c316aba7645e3884a3d0b3200b19e3f4))
+- [[#184016535](https://www.pivotaltracker.com/story/show/184016535)] remove num of emp from oscar onboarding ([72526cf](https://github.com/newjersey/navigator.business.nj.gov/commit/72526cfb3b544633e205e544ebf8d70b2fcbf81e))
+- [[#184016554](https://www.pivotaltracker.com/story/show/184016554)] remove onboarding question from oscar onboarding ([efb2708](https://github.com/newjersey/navigator.business.nj.gov/commit/efb27085a2541f84a1c9203c8097e47983b422f6))
+- [[#184016565](https://www.pivotaltracker.com/story/show/184016565)] remove business-name from oscar onboarding ([b25b597](https://github.com/newjersey/navigator.business.nj.gov/commit/b25b5979c4d18acd2e14908f87e3d4bc6501898a))
+- [[#184016565](https://www.pivotaltracker.com/story/show/184016565)] remove entity-id from oscar onboarding ([ee1e9e5](https://github.com/newjersey/navigator.business.nj.gov/commit/ee1e9e56d2604700d211e5b5cb13e8b600365d15))
+- [[#184139570](https://www.pivotaltracker.com/story/show/184139570)] remove link to SIC-code ([55c7b5d](https://github.com/newjersey/navigator.business.nj.gov/commit/55c7b5d156c93537e9541bdeb671be71628c3776))
+- [[#184162599](https://www.pivotaltracker.com/story/show/184162599)] reorder cards on landing page ([8a990ca](https://github.com/newjersey/navigator.business.nj.gov/commit/8a990ca9017b85ae630e9e8220d67ab2ae4d3dab))
 - nexus formation flow ([0bf469f](https://github.com/newjersey/navigator.business.nj.gov/commit/0bf469f5d9cfa45d3ea0f123c55bf829b8cf0d00))
 
 ## [5.9.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.9.1...v5.9.2) (2022-12-14)
@@ -1983,22 +2260,22 @@
 
 ### Bug Fixes
 
-- [[#184035288](https://github.com/newjersey/navigator.business.nj.gov/issues/184035288)] send town name (not display name) for members in formation ([3e1ff9b](https://github.com/newjersey/navigator.business.nj.gov/commit/3e1ff9bdac8c70b8ff50d85332391a95cb2337a2))
+- [[#184035288](https://www.pivotaltracker.com/story/show/184035288)] send town name (not display name) for members in formation ([3e1ff9b](https://github.com/newjersey/navigator.business.nj.gov/commit/3e1ff9bdac8c70b8ff50d85332391a95cb2337a2))
 
 # [5.9.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.8.0...v5.9.0) (2022-12-12)
 
 ### Bug Fixes
 
-- [[#183443994](https://github.com/newjersey/navigator.business.nj.gov/issues/183443994)] complete code clean up ([#4773](https://github.com/newjersey/navigator.business.nj.gov/issues/4773)) ([5b27729](https://github.com/newjersey/navigator.business.nj.gov/commit/5b27729445ae748ab3bc44d48a7f1a11466c6133))
-- [[#183443994](https://github.com/newjersey/navigator.business.nj.gov/issues/183443994)] css cursor update ([8667070](https://github.com/newjersey/navigator.business.nj.gov/commit/8667070e93fd7a9cff018c135af12866bdae80d0))
-- [[#183443994](https://github.com/newjersey/navigator.business.nj.gov/issues/183443994)] css updates hover and shadow ([#4798](https://github.com/newjersey/navigator.business.nj.gov/issues/4798)) ([e4f8c2e](https://github.com/newjersey/navigator.business.nj.gov/commit/e4f8c2efcd74b54f872a3646a8ccd6d0763361e3))
-- [[#183443994](https://github.com/newjersey/navigator.business.nj.gov/issues/183443994)] landing redesign updates for copy, pic, and tiles ([#4811](https://github.com/newjersey/navigator.business.nj.gov/issues/4811)) ([74bb645](https://github.com/newjersey/navigator.business.nj.gov/commit/74bb645bb3b7f4ad8433d80b4d575b5078020e2f))
-- [[#183443994](https://github.com/newjersey/navigator.business.nj.gov/issues/183443994)] update padding and margin ([#4800](https://github.com/newjersey/navigator.business.nj.gov/issues/4800)) ([2db82ae](https://github.com/newjersey/navigator.business.nj.gov/commit/2db82aeadfa8e0f2db6685c7c3255eacdcc9470c))
-- [[#183443994](https://github.com/newjersey/navigator.business.nj.gov/issues/183443994)]update get started functionality, copy, and style ([#4817](https://github.com/newjersey/navigator.business.nj.gov/issues/4817)) ([0b32c74](https://github.com/newjersey/navigator.business.nj.gov/commit/0b32c748ac5aaabdb780e60f97255b93f89f7c7d))
-- [[#183512678](https://github.com/newjersey/navigator.business.nj.gov/issues/183512678)] update choose date picker command in cypress ([0e62861](https://github.com/newjersey/navigator.business.nj.gov/commit/0e62861be7065d8974005fefb0afb7a7e032dbbf))
-- [[#183807703](https://github.com/newjersey/navigator.business.nj.gov/issues/183807703)] added CTA to tax task ([24edb81](https://github.com/newjersey/navigator.business.nj.gov/commit/24edb810f66b5dc8e1b0a210278fde7cf825717c))
-- [[#183807703](https://github.com/newjersey/navigator.business.nj.gov/issues/183807703)] correct contextual link for entity id in markdown file ([0047d2e](https://github.com/newjersey/navigator.business.nj.gov/commit/0047d2e569af295f867011f80a4cc0c24a00b8a7))
-- [[#183927904](https://github.com/newjersey/navigator.business.nj.gov/issues/183927904)] correctly hide entity ID for trade name in profile ([03b6683](https://github.com/newjersey/navigator.business.nj.gov/commit/03b66838cf0a65250729c144dee42860727cc1fc))
+- [[#183443994](https://www.pivotaltracker.com/story/show/183443994)] complete code clean up ([#4773](https://github.com/newjersey/navigator.business.nj.gov/issues/4773)) ([5b27729](https://github.com/newjersey/navigator.business.nj.gov/commit/5b27729445ae748ab3bc44d48a7f1a11466c6133))
+- [[#183443994](https://www.pivotaltracker.com/story/show/183443994)] css cursor update ([8667070](https://github.com/newjersey/navigator.business.nj.gov/commit/8667070e93fd7a9cff018c135af12866bdae80d0))
+- [[#183443994](https://www.pivotaltracker.com/story/show/183443994)] css updates hover and shadow ([#4798](https://github.com/newjersey/navigator.business.nj.gov/issues/4798)) ([e4f8c2e](https://github.com/newjersey/navigator.business.nj.gov/commit/e4f8c2efcd74b54f872a3646a8ccd6d0763361e3))
+- [[#183443994](https://www.pivotaltracker.com/story/show/183443994)] landing redesign updates for copy, pic, and tiles ([#4811](https://github.com/newjersey/navigator.business.nj.gov/issues/4811)) ([74bb645](https://github.com/newjersey/navigator.business.nj.gov/commit/74bb645bb3b7f4ad8433d80b4d575b5078020e2f))
+- [[#183443994](https://www.pivotaltracker.com/story/show/183443994)] update padding and margin ([#4800](https://github.com/newjersey/navigator.business.nj.gov/issues/4800)) ([2db82ae](https://github.com/newjersey/navigator.business.nj.gov/commit/2db82aeadfa8e0f2db6685c7c3255eacdcc9470c))
+- [[#183443994](https://www.pivotaltracker.com/story/show/183443994)]update get started functionality, copy, and style ([#4817](https://github.com/newjersey/navigator.business.nj.gov/issues/4817)) ([0b32c74](https://github.com/newjersey/navigator.business.nj.gov/commit/0b32c748ac5aaabdb780e60f97255b93f89f7c7d))
+- [[#183512678](https://www.pivotaltracker.com/story/show/183512678)] update choose date picker command in cypress ([0e62861](https://github.com/newjersey/navigator.business.nj.gov/commit/0e62861be7065d8974005fefb0afb7a7e032dbbf))
+- [[#183807703](https://www.pivotaltracker.com/story/show/183807703)] added CTA to tax task ([24edb81](https://github.com/newjersey/navigator.business.nj.gov/commit/24edb810f66b5dc8e1b0a210278fde7cf825717c))
+- [[#183807703](https://www.pivotaltracker.com/story/show/183807703)] correct contextual link for entity id in markdown file ([0047d2e](https://github.com/newjersey/navigator.business.nj.gov/commit/0047d2e569af295f867011f80a4cc0c24a00b8a7))
+- [[#183927904](https://www.pivotaltracker.com/story/show/183927904)] correctly hide entity ID for trade name in profile ([03b6683](https://github.com/newjersey/navigator.business.nj.gov/commit/03b66838cf0a65250729c144dee42860727cc1fc))
 - added encryptTaxId lambada to serverless ([d1790a9](https://github.com/newjersey/navigator.business.nj.gov/commit/d1790a9588b2b31e098ed4f53393b7e2fadede37))
 - adding kms access to lambda role ([84161c5](https://github.com/newjersey/navigator.business.nj.gov/commit/84161c5c8cf2c059c809f9f20c67efdc3bccc0fe))
 - addresed flakey test in OnboardingIndustry widget ([f77fa31](https://github.com/newjersey/navigator.business.nj.gov/commit/f77fa31e55d6e3d366efe822adf47a46fb7ef1f6))
@@ -2083,19 +2360,19 @@
 
 ### Features
 
-- [[#182906423](https://github.com/newjersey/navigator.business.nj.gov/issues/182906423)] added info alert widget to cms ([e5e7edf](https://github.com/newjersey/navigator.business.nj.gov/commit/e5e7edf87b329423c2f917a66120db7018975205))
-- [[#183443994](https://github.com/newjersey/navigator.business.nj.gov/issues/183443994)]complete landing page get started ([#4746](https://github.com/newjersey/navigator.business.nj.gov/issues/4746)) ([5a92c5a](https://github.com/newjersey/navigator.business.nj.gov/commit/5a92c5a2108b81e681985be042180dbc49e093ee))
-- [[#183444050](https://github.com/newjersey/navigator.business.nj.gov/issues/183444050)] complete landing page out-of-state redesign ([#4803](https://github.com/newjersey/navigator.business.nj.gov/issues/4803)) ([31fa887](https://github.com/newjersey/navigator.business.nj.gov/commit/31fa88712bad1fd10c23dea0e3f1943ddc271755))
-- [[#183444249](https://github.com/newjersey/navigator.business.nj.gov/issues/183444249)] defer onboarding location question ([ad73c74](https://github.com/newjersey/navigator.business.nj.gov/commit/ad73c743989545b151ba9efcd1fa7f47a1f5f7f4))
-- [[#183444509](https://github.com/newjersey/navigator.business.nj.gov/issues/183444509)] control feedback survey based on operating phase ([c9b0469](https://github.com/newjersey/navigator.business.nj.gov/commit/c9b0469cf842a8c9748b6a7d6eec0543ca2990e3))
-- [[#183444623](https://github.com/newjersey/navigator.business.nj.gov/issues/183444623)] indicator dot on mobile For You tab when phase newly changed ([16bcc6f](https://github.com/newjersey/navigator.business.nj.gov/commit/16bcc6f8180af8a304f91067d72086a720895d73))
-- [[#183444661](https://github.com/newjersey/navigator.business.nj.gov/issues/183444661)] dynamic home based question field label ([999db2e](https://github.com/newjersey/navigator.business.nj.gov/commit/999db2ef38af6060bf500ef3166bba9007d0447c))
-- [[#183559302](https://github.com/newjersey/navigator.business.nj.gov/issues/183559302)] tax id encryption v1 ([5bcb22f](https://github.com/newjersey/navigator.business.nj.gov/commit/5bcb22f2f88776fc0bd2c272b77a83d23f1375eb))
-- [[#183652493](https://github.com/newjersey/navigator.business.nj.gov/issues/183652493)] change legal structure -> business structure in the content ([bee9fb1](https://github.com/newjersey/navigator.business.nj.gov/commit/bee9fb1263dc7a1aef8656bdfb3146f7dc11ffcc))
-- [[#183676648](https://github.com/newjersey/navigator.business.nj.gov/issues/183676648)] add tax calendar for TradeName businesses ([082d3a8](https://github.com/newjersey/navigator.business.nj.gov/commit/082d3a87325e2bd441acde387a4a3b3c1962322c))
-- [[#183677276](https://github.com/newjersey/navigator.business.nj.gov/issues/183677276)] redirect to alternate landing page ([1f5fff4](https://github.com/newjersey/navigator.business.nj.gov/commit/1f5fff43aa6451d5cea85fd50be927c3c018ac19))
-- [[#183855154](https://github.com/newjersey/navigator.business.nj.gov/issues/183855154)] lambda function for database tax id encryption ([a012af6](https://github.com/newjersey/navigator.business.nj.gov/commit/a012af6e418f0fe12b2a7df6a5b578dcbbf8221d))
-- [[#183985263](https://github.com/newjersey/navigator.business.nj.gov/issues/183985263)] add analytics for unlinked mynj account modal ([f347e55](https://github.com/newjersey/navigator.business.nj.gov/commit/f347e5572dee4c9cb335994c3890d3e2f4461df1))
+- [[#182906423](https://www.pivotaltracker.com/story/show/182906423)] added info alert widget to cms ([e5e7edf](https://github.com/newjersey/navigator.business.nj.gov/commit/e5e7edf87b329423c2f917a66120db7018975205))
+- [[#183443994](https://www.pivotaltracker.com/story/show/183443994)]complete landing page get started ([#4746](https://github.com/newjersey/navigator.business.nj.gov/issues/4746)) ([5a92c5a](https://github.com/newjersey/navigator.business.nj.gov/commit/5a92c5a2108b81e681985be042180dbc49e093ee))
+- [[#183444050](https://www.pivotaltracker.com/story/show/183444050)] complete landing page out-of-state redesign ([#4803](https://github.com/newjersey/navigator.business.nj.gov/issues/4803)) ([31fa887](https://github.com/newjersey/navigator.business.nj.gov/commit/31fa88712bad1fd10c23dea0e3f1943ddc271755))
+- [[#183444249](https://www.pivotaltracker.com/story/show/183444249)] defer onboarding location question ([ad73c74](https://github.com/newjersey/navigator.business.nj.gov/commit/ad73c743989545b151ba9efcd1fa7f47a1f5f7f4))
+- [[#183444509](https://www.pivotaltracker.com/story/show/183444509)] control feedback survey based on operating phase ([c9b0469](https://github.com/newjersey/navigator.business.nj.gov/commit/c9b0469cf842a8c9748b6a7d6eec0543ca2990e3))
+- [[#183444623](https://www.pivotaltracker.com/story/show/183444623)] indicator dot on mobile For You tab when phase newly changed ([16bcc6f](https://github.com/newjersey/navigator.business.nj.gov/commit/16bcc6f8180af8a304f91067d72086a720895d73))
+- [[#183444661](https://www.pivotaltracker.com/story/show/183444661)] dynamic home based question field label ([999db2e](https://github.com/newjersey/navigator.business.nj.gov/commit/999db2ef38af6060bf500ef3166bba9007d0447c))
+- [[#183559302](https://www.pivotaltracker.com/story/show/183559302)] tax id encryption v1 ([5bcb22f](https://github.com/newjersey/navigator.business.nj.gov/commit/5bcb22f2f88776fc0bd2c272b77a83d23f1375eb))
+- [[#183652493](https://www.pivotaltracker.com/story/show/183652493)] change legal structure -> business structure in the content ([bee9fb1](https://github.com/newjersey/navigator.business.nj.gov/commit/bee9fb1263dc7a1aef8656bdfb3146f7dc11ffcc))
+- [[#183676648](https://www.pivotaltracker.com/story/show/183676648)] add tax calendar for TradeName businesses ([082d3a8](https://github.com/newjersey/navigator.business.nj.gov/commit/082d3a87325e2bd441acde387a4a3b3c1962322c))
+- [[#183677276](https://www.pivotaltracker.com/story/show/183677276)] redirect to alternate landing page ([1f5fff4](https://github.com/newjersey/navigator.business.nj.gov/commit/1f5fff43aa6451d5cea85fd50be927c3c018ac19))
+- [[#183855154](https://www.pivotaltracker.com/story/show/183855154)] lambda function for database tax id encryption ([a012af6](https://github.com/newjersey/navigator.business.nj.gov/commit/a012af6e418f0fe12b2a7df6a5b578dcbbf8221d))
+- [[#183985263](https://www.pivotaltracker.com/story/show/183985263)] add analytics for unlinked mynj account modal ([f347e55](https://github.com/newjersey/navigator.business.nj.gov/commit/f347e5572dee4c9cb335994c3890d3e2f4461df1))
 - added New Jersey Business Action Center to Agency Types ([ad7617b](https://github.com/newjersey/navigator.business.nj.gov/commit/ad7617bd07e15bafbc1921de3e3978c3cf18abd6))
 - added NJDOT as possible agency option ([055368c](https://github.com/newjersey/navigator.business.nj.gov/commit/055368c9d93d6c4241cdeba7c5cd971fa9897586))
 - refactor to allow for dakota formations ([53f3a39](https://github.com/newjersey/navigator.business.nj.gov/commit/53f3a398463618230feb21ad3c78d0cdceb9485c))
@@ -2104,16 +2381,16 @@
 
 ### Bug Fixes
 
-- [[#183356354](https://github.com/newjersey/navigator.business.nj.gov/issues/183356354)] update config YAML for poppy industry-specific questions ([1d95c74](https://github.com/newjersey/navigator.business.nj.gov/commit/1d95c749ac3fe2d67da1f5d7446e9d324589c094))
-- [[#183545374](https://github.com/newjersey/navigator.business.nj.gov/issues/183545374)] add formation-nudge-button analytics ([c627d81](https://github.com/newjersey/navigator.business.nj.gov/commit/c627d81b8613d81ce166716cd46aecbf5597fd43))
-- [[#183546865](https://github.com/newjersey/navigator.business.nj.gov/issues/183546865)] always show business name that was entered in formation step 1 in review step ([f0bace1](https://github.com/newjersey/navigator.business.nj.gov/commit/f0bace1061f3a719801dac014262fe74549b133f))
-- [[#183559127](https://github.com/newjersey/navigator.business.nj.gov/issues/183559127)] display annual report date correctly ([386f884](https://github.com/newjersey/navigator.business.nj.gov/commit/386f88476ece389da00e9b1c660f4c8a994e14d5))
-- [[#183580715](https://github.com/newjersey/navigator.business.nj.gov/issues/183580715)] for you opportunities empty state ([0a72386](https://github.com/newjersey/navigator.business.nj.gov/commit/0a72386ad74c752a02cd877bea4ba9a56cba51c1))
-- [[#183617086](https://github.com/newjersey/navigator.business.nj.gov/issues/183617086)] correct hidden certifications and fundings count ([f1dc506](https://github.com/newjersey/navigator.business.nj.gov/commit/f1dc5062592c59c8fb76e088707e60eb6898bb61))
-- [[#183633952](https://github.com/newjersey/navigator.business.nj.gov/issues/183633952)] revert naics code profile label ([e8c6db4](https://github.com/newjersey/navigator.business.nj.gov/commit/e8c6db486aa77193be1104507ae24aa031ef85cd))
-- [[#183640880](https://github.com/newjersey/navigator.business.nj.gov/issues/183640880)] calendar toggle button displays on correct phases ([5caf25a](https://github.com/newjersey/navigator.business.nj.gov/commit/5caf25ae0860658863b99390aa55879111f86531))
-- [[#183679981](https://github.com/newjersey/navigator.business.nj.gov/issues/183679981)] refactoring essential questions with more comprehensive testing ([efe13d1](https://github.com/newjersey/navigator.business.nj.gov/commit/efe13d10d9ad88b98f004d26f8c27a48b29474df))
-- [[#183692051](https://github.com/newjersey/navigator.business.nj.gov/issues/183692051)] remove contextual info from error message ([4514828](https://github.com/newjersey/navigator.business.nj.gov/commit/45148289c558977ba2668b5667daee70e36f1e8f))
+- [[#183356354](https://www.pivotaltracker.com/story/show/183356354)] update config YAML for poppy industry-specific questions ([1d95c74](https://github.com/newjersey/navigator.business.nj.gov/commit/1d95c749ac3fe2d67da1f5d7446e9d324589c094))
+- [[#183545374](https://www.pivotaltracker.com/story/show/183545374)] add formation-nudge-button analytics ([c627d81](https://github.com/newjersey/navigator.business.nj.gov/commit/c627d81b8613d81ce166716cd46aecbf5597fd43))
+- [[#183546865](https://www.pivotaltracker.com/story/show/183546865)] always show business name that was entered in formation step 1 in review step ([f0bace1](https://github.com/newjersey/navigator.business.nj.gov/commit/f0bace1061f3a719801dac014262fe74549b133f))
+- [[#183559127](https://www.pivotaltracker.com/story/show/183559127)] display annual report date correctly ([386f884](https://github.com/newjersey/navigator.business.nj.gov/commit/386f88476ece389da00e9b1c660f4c8a994e14d5))
+- [[#183580715](https://www.pivotaltracker.com/story/show/183580715)] for you opportunities empty state ([0a72386](https://github.com/newjersey/navigator.business.nj.gov/commit/0a72386ad74c752a02cd877bea4ba9a56cba51c1))
+- [[#183617086](https://www.pivotaltracker.com/story/show/183617086)] correct hidden certifications and fundings count ([f1dc506](https://github.com/newjersey/navigator.business.nj.gov/commit/f1dc5062592c59c8fb76e088707e60eb6898bb61))
+- [[#183633952](https://www.pivotaltracker.com/story/show/183633952)] revert naics code profile label ([e8c6db4](https://github.com/newjersey/navigator.business.nj.gov/commit/e8c6db486aa77193be1104507ae24aa031ef85cd))
+- [[#183640880](https://www.pivotaltracker.com/story/show/183640880)] calendar toggle button displays on correct phases ([5caf25a](https://github.com/newjersey/navigator.business.nj.gov/commit/5caf25ae0860658863b99390aa55879111f86531))
+- [[#183679981](https://www.pivotaltracker.com/story/show/183679981)] refactoring essential questions with more comprehensive testing ([efe13d1](https://github.com/newjersey/navigator.business.nj.gov/commit/efe13d10d9ad88b98f004d26f8c27a48b29474df))
+- [[#183692051](https://www.pivotaltracker.com/story/show/183692051)] remove contextual info from error message ([4514828](https://github.com/newjersey/navigator.business.nj.gov/commit/45148289c558977ba2668b5667daee70e36f1e8f))
 - added missing formation types to migrations ([e42b61f](https://github.com/newjersey/navigator.business.nj.gov/commit/e42b61f2bc23a85245198c1280f595e14344799b))
 - api response error in formation was blocking user from resubmitting ([76e0c12](https://github.com/newjersey/navigator.business.nj.gov/commit/76e0c122a1f198ee7685e0dcce939629948e0a8e))
 - corrected erroneous character in limited-partners.md ([3c60070](https://github.com/newjersey/navigator.business.nj.gov/commit/3c6007050f0c415e85048a03a941e37f944ef5db))
@@ -2162,15 +2439,15 @@
 
 ### Features
 
-- [[#183159171](https://github.com/newjersey/navigator.business.nj.gov/issues/183159171)] add description field for funding/certification opportunities in cms ([936c6ea](https://github.com/newjersey/navigator.business.nj.gov/commit/936c6ea06b42e64ebe7ffd39b661e8e2238a2c08))
-- [[#183197943](https://github.com/newjersey/navigator.business.nj.gov/issues/183197943)] scroll analytics on landing page ([88bc345](https://github.com/newjersey/navigator.business.nj.gov/commit/88bc34527d57b27a00ace0f6876e2fba3f868496))
-- [[#183198168](https://github.com/newjersey/navigator.business.nj.gov/issues/183198168)] update-tax-input ([#4512](https://github.com/newjersey/navigator.business.nj.gov/issues/4512)) ([e3e0f0a](https://github.com/newjersey/navigator.business.nj.gov/commit/e3e0f0ac6293c1a9aaed321a816de271599d7e65))
-- [[#183198168](https://github.com/newjersey/navigator.business.nj.gov/issues/183198168)] updated tax task input field for 12 digit id's ([0ae6f30](https://github.com/newjersey/navigator.business.nj.gov/commit/0ae6f30c6ef020eb9aae90fdf2d492778c479184))
-- [[#183314914](https://github.com/newjersey/navigator.business.nj.gov/issues/183314914)] edit formation date in profile when manually entered ([4266453](https://github.com/newjersey/navigator.business.nj.gov/commit/42664530de82df4d5c373a184929573700a56bcc))
-- [[#183316444](https://github.com/newjersey/navigator.business.nj.gov/issues/183316444)] add functionality to skip industry if no essential… ([#4609](https://github.com/newjersey/navigator.business.nj.gov/issues/4609)) ([18b9944](https://github.com/newjersey/navigator.business.nj.gov/commit/18b99445218a486241b1a31e125880d197b6ccc3))
-- [[#183559078](https://github.com/newjersey/navigator.business.nj.gov/issues/183559078)] annual report tooltip ([3552e58](https://github.com/newjersey/navigator.business.nj.gov/commit/3552e58f02c39f402939512216640a52b8dc09aa))
-- [[#183559760](https://github.com/newjersey/navigator.business.nj.gov/issues/183559760)] updated empty tax calendar ([86d9dda](https://github.com/newjersey/navigator.business.nj.gov/commit/86d9dda334aae355313702676f13b0fdf1a1a5ab))
-- [[#183662721](https://github.com/newjersey/navigator.business.nj.gov/issues/183662721)] add additional pending state for the tax calendar ([fba6c04](https://github.com/newjersey/navigator.business.nj.gov/commit/fba6c0460f3b2d87c0dc7acfa02f5a2d5ae89015))
+- [[#183159171](https://www.pivotaltracker.com/story/show/183159171)] add description field for funding/certification opportunities in cms ([936c6ea](https://github.com/newjersey/navigator.business.nj.gov/commit/936c6ea06b42e64ebe7ffd39b661e8e2238a2c08))
+- [[#183197943](https://www.pivotaltracker.com/story/show/183197943)] scroll analytics on landing page ([88bc345](https://github.com/newjersey/navigator.business.nj.gov/commit/88bc34527d57b27a00ace0f6876e2fba3f868496))
+- [[#183198168](https://www.pivotaltracker.com/story/show/183198168)] update-tax-input ([#4512](https://github.com/newjersey/navigator.business.nj.gov/issues/4512)) ([e3e0f0a](https://github.com/newjersey/navigator.business.nj.gov/commit/e3e0f0ac6293c1a9aaed321a816de271599d7e65))
+- [[#183198168](https://www.pivotaltracker.com/story/show/183198168)] updated tax task input field for 12 digit id's ([0ae6f30](https://github.com/newjersey/navigator.business.nj.gov/commit/0ae6f30c6ef020eb9aae90fdf2d492778c479184))
+- [[#183314914](https://www.pivotaltracker.com/story/show/183314914)] edit formation date in profile when manually entered ([4266453](https://github.com/newjersey/navigator.business.nj.gov/commit/42664530de82df4d5c373a184929573700a56bcc))
+- [[#183316444](https://www.pivotaltracker.com/story/show/183316444)] add functionality to skip industry if no essential… ([#4609](https://github.com/newjersey/navigator.business.nj.gov/issues/4609)) ([18b9944](https://github.com/newjersey/navigator.business.nj.gov/commit/18b99445218a486241b1a31e125880d197b6ccc3))
+- [[#183559078](https://www.pivotaltracker.com/story/show/183559078)] annual report tooltip ([3552e58](https://github.com/newjersey/navigator.business.nj.gov/commit/3552e58f02c39f402939512216640a52b8dc09aa))
+- [[#183559760](https://www.pivotaltracker.com/story/show/183559760)] updated empty tax calendar ([86d9dda](https://github.com/newjersey/navigator.business.nj.gov/commit/86d9dda334aae355313702676f13b0fdf1a1a5ab))
+- [[#183662721](https://www.pivotaltracker.com/story/show/183662721)] add additional pending state for the tax calendar ([fba6c04](https://github.com/newjersey/navigator.business.nj.gov/commit/fba6c0460f3b2d87c0dc7acfa02f5a2d5ae89015))
 - updated content for business effective date ([dffb111](https://github.com/newjersey/navigator.business.nj.gov/commit/dffb1118bd7290c234cbdec28600ab3b11945c6a))
 - updated content for Tax ID to NJ Tax ID ([7fb7151](https://github.com/newjersey/navigator.business.nj.gov/commit/7fb715176c0d66381191577ae07355943f0a23e6))
 
@@ -2178,7 +2455,7 @@
 
 ### Bug Fixes
 
-- [[#183014824](https://github.com/newjersey/navigator.business.nj.gov/issues/183014824)] tax filings modal open after registration redirect ([7767d95](https://github.com/newjersey/navigator.business.nj.gov/commit/7767d9544486d11fdfbe7f653702972834d73f48))
+- [[#183014824](https://www.pivotaltracker.com/story/show/183014824)] tax filings modal open after registration redirect ([7767d95](https://github.com/newjersey/navigator.business.nj.gov/commit/7767d9544486d11fdfbe7f653702972834d73f48))
 - corrected spelling error ([caec846](https://github.com/newjersey/navigator.business.nj.gov/commit/caec846c6f2b3b588f0d25ff91a3a4f73324cd2f))
 - **deps:** update aws-amplify ([029ca08](https://github.com/newjersey/navigator.business.nj.gov/commit/029ca08b81eb13334874e8466f7cff4329cac1ec))
 - **deps:** update dependency next-seo to v5.6.0 ([56ee838](https://github.com/newjersey/navigator.business.nj.gov/commit/56ee83841f12cfad2c47e8f4be33297f420cc8db))
@@ -2206,17 +2483,17 @@
 
 ### Features
 
-- [[#182492643](https://github.com/newjersey/navigator.business.nj.gov/issues/182492643)] update display formatting of naics code ([3af82c6](https://github.com/newjersey/navigator.business.nj.gov/commit/3af82c619909c86b18af92ce09f826c28ee50788))
-- [[#183014824](https://github.com/newjersey/navigator.business.nj.gov/issues/183014824)] see taxes banner for up and running non sp/gp guests ([95dc7b6](https://github.com/newjersey/navigator.business.nj.gov/commit/95dc7b6d14aad20300b7e9eb6dd8cdd4d8afe265))
-- [[#183315372](https://github.com/newjersey/navigator.business.nj.gov/issues/183315372)] link naics codes descriptions to federal naics site ([6bd59f3](https://github.com/newjersey/navigator.business.nj.gov/commit/6bd59f38d07f600a21f221df588ddbbda2643516))
-- [[#183546596](https://github.com/newjersey/navigator.business.nj.gov/issues/183546596)] redirect user to review step if they cancel from payment ([0ba1803](https://github.com/newjersey/navigator.business.nj.gov/commit/0ba18033d35efeaf6baa85ed878e340f3065d8a4))
+- [[#182492643](https://www.pivotaltracker.com/story/show/182492643)] update display formatting of naics code ([3af82c6](https://github.com/newjersey/navigator.business.nj.gov/commit/3af82c619909c86b18af92ce09f826c28ee50788))
+- [[#183014824](https://www.pivotaltracker.com/story/show/183014824)] see taxes banner for up and running non sp/gp guests ([95dc7b6](https://github.com/newjersey/navigator.business.nj.gov/commit/95dc7b6d14aad20300b7e9eb6dd8cdd4d8afe265))
+- [[#183315372](https://www.pivotaltracker.com/story/show/183315372)] link naics codes descriptions to federal naics site ([6bd59f3](https://github.com/newjersey/navigator.business.nj.gov/commit/6bd59f38d07f600a21f221df588ddbbda2643516))
+- [[#183546596](https://www.pivotaltracker.com/story/show/183546596)] redirect user to review step if they cancel from payment ([0ba1803](https://github.com/newjersey/navigator.business.nj.gov/commit/0ba18033d35efeaf6baa85ed878e340f3065d8a4))
 
 # [5.6.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.5.0...v5.6.0) (2022-10-14)
 
 ### Bug Fixes
 
-- [[#183455204](https://github.com/newjersey/navigator.business.nj.gov/issues/183455204)] make profile tab nav accessible via keyboard ([3701783](https://github.com/newjersey/navigator.business.nj.gov/commit/370178316ba6c6e18490d165ebb89cd0651407fe))
-- [[#183476682](https://github.com/newjersey/navigator.business.nj.gov/issues/183476682)] linting issues ([0681faf](https://github.com/newjersey/navigator.business.nj.gov/commit/0681fafa3c108089ce768c03b4792f776a32a560))
+- [[#183455204](https://www.pivotaltracker.com/story/show/183455204)] make profile tab nav accessible via keyboard ([3701783](https://github.com/newjersey/navigator.business.nj.gov/commit/370178316ba6c6e18490d165ebb89cd0651407fe))
+- [[#183476682](https://www.pivotaltracker.com/story/show/183476682)] linting issues ([0681faf](https://github.com/newjersey/navigator.business.nj.gov/commit/0681fafa3c108089ce768c03b4792f776a32a560))
 - added the following words chpfc,cinc,LEUP ([c11376e](https://github.com/newjersey/navigator.business.nj.gov/commit/c11376e25142a700256395994866f9a9444ac4a6))
 - adjusting webflow funding sync parsing ([00de96c](https://github.com/newjersey/navigator.business.nj.gov/commit/00de96ceed4c2862dd4f0593dc8beb3f089420ca))
 - back-versioned kill-port package for non-degraded performance ([95866c8](https://github.com/newjersey/navigator.business.nj.gov/commit/95866c8a0acf11cbfc7905f21f77e081bbea8a18))
@@ -2270,18 +2547,18 @@
 
 ### Features
 
-- [[#182478361](https://github.com/newjersey/navigator.business.nj.gov/issues/182478361)] dashboard has tabs in mobile ([aa1132b](https://github.com/newjersey/navigator.business.nj.gov/commit/aa1132b9e40d38c9499db29839631bee45ea1b1b))
-- [[#182795506](https://github.com/newjersey/navigator.business.nj.gov/issues/182795506)] add more info to biz panel airtable ([#4390](https://github.com/newjersey/navigator.business.nj.gov/issues/4390)) ([251af3a](https://github.com/newjersey/navigator.business.nj.gov/commit/251af3a04a76c784fdde9c7a2acf229d7e10543d))
-- [[#183048279](https://github.com/newjersey/navigator.business.nj.gov/issues/183048279)] defer home-based business question out of onboarding into dashboard ([b230eb7](https://github.com/newjersey/navigator.business.nj.gov/commit/b230eb7b494cf10047d71e21f1928591045cdec7))
-- [[#183118371](https://github.com/newjersey/navigator.business.nj.gov/issues/183118371)] add logistics business essential question ([81184f1](https://github.com/newjersey/navigator.business.nj.gov/commit/81184f19ea0c56e13b54725c66eb0e2b5fcae3d0))
+- [[#182478361](https://www.pivotaltracker.com/story/show/182478361)] dashboard has tabs in mobile ([aa1132b](https://github.com/newjersey/navigator.business.nj.gov/commit/aa1132b9e40d38c9499db29839631bee45ea1b1b))
+- [[#182795506](https://www.pivotaltracker.com/story/show/182795506)] add more info to biz panel airtable ([#4390](https://github.com/newjersey/navigator.business.nj.gov/issues/4390)) ([251af3a](https://github.com/newjersey/navigator.business.nj.gov/commit/251af3a04a76c784fdde9c7a2acf229d7e10543d))
+- [[#183048279](https://www.pivotaltracker.com/story/show/183048279)] defer home-based business question out of onboarding into dashboard ([b230eb7](https://github.com/newjersey/navigator.business.nj.gov/commit/b230eb7b494cf10047d71e21f1928591045cdec7))
+- [[#183118371](https://www.pivotaltracker.com/story/show/183118371)] add logistics business essential question ([81184f1](https://github.com/newjersey/navigator.business.nj.gov/commit/81184f19ea0c56e13b54725c66eb0e2b5fcae3d0))
 
 # [5.5.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.4.0...v5.5.0) (2022-10-05)
 
 ### Bug Fixes
 
-- [[#183012004](https://github.com/newjersey/navigator.business.nj.gov/issues/183012004)] removed task, added aria labels for car service ([1b15c4c](https://github.com/newjersey/navigator.business.nj.gov/commit/1b15c4c4785a8cb3c656ea950db5726ca18d304d))
-- [[#183117206](https://github.com/newjersey/navigator.business.nj.gov/issues/183117206)] 404 page gradient background ([9146519](https://github.com/newjersey/navigator.business.nj.gov/commit/9146519dd6b1d3fdcb3dd4c159dc4d35f597e41c))
-- [[#183117206](https://github.com/newjersey/navigator.business.nj.gov/issues/183117206)] 404 page mobile styling ([f931236](https://github.com/newjersey/navigator.business.nj.gov/commit/f931236143e97c4a42ced6a1efcf860df1ec3eda))
+- [[#183012004](https://www.pivotaltracker.com/story/show/183012004)] removed task, added aria labels for car service ([1b15c4c](https://github.com/newjersey/navigator.business.nj.gov/commit/1b15c4c4785a8cb3c656ea950db5726ca18d304d))
+- [[#183117206](https://www.pivotaltracker.com/story/show/183117206)] 404 page gradient background ([9146519](https://github.com/newjersey/navigator.business.nj.gov/commit/9146519dd6b1d3fdcb3dd4c159dc4d35f597e41c))
+- [[#183117206](https://www.pivotaltracker.com/story/show/183117206)] 404 page mobile styling ([f931236](https://github.com/newjersey/navigator.business.nj.gov/commit/f931236143e97c4a42ced6a1efcf860df1ec3eda))
 - access button after taxId change on merged calendar ([c346d27](https://github.com/newjersey/navigator.business.nj.gov/commit/c346d2725424960af368dbd52c9c375c3a5cd6d5))
 - **deps:** update aws-amplify ([11d880f](https://github.com/newjersey/navigator.business.nj.gov/commit/11d880f0ee327b91c8faac848b70650d23285826))
 - **deps:** update material-ui ([fca46f5](https://github.com/newjersey/navigator.business.nj.gov/commit/fca46f5f2e70698b97de7916b33e4604b7c749a7))
@@ -2356,9 +2633,9 @@
 
 ### Features
 
-- [[#183012004](https://github.com/newjersey/navigator.business.nj.gov/issues/183012004)] car service essential question ([43f99ce](https://github.com/newjersey/navigator.business.nj.gov/commit/43f99ceaefc13886e913bb3dc6bc509d132c39a6))
-- [[#183012071](https://github.com/newjersey/navigator.business.nj.gov/issues/183012071)] add moving company essential question ([#4368](https://github.com/newjersey/navigator.business.nj.gov/issues/4368)) ([f1b1c39](https://github.com/newjersey/navigator.business.nj.gov/commit/f1b1c3981f15a1ec62d0253e1faac13aeb87ef7f))
-- [[#183117206](https://github.com/newjersey/navigator.business.nj.gov/issues/183117206)] updated 404 page ([f0609b8](https://github.com/newjersey/navigator.business.nj.gov/commit/f0609b82c3edc192ba0ea1708a46ec262c4bf4e0))
+- [[#183012004](https://www.pivotaltracker.com/story/show/183012004)] car service essential question ([43f99ce](https://github.com/newjersey/navigator.business.nj.gov/commit/43f99ceaefc13886e913bb3dc6bc509d132c39a6))
+- [[#183012071](https://www.pivotaltracker.com/story/show/183012071)] add moving company essential question ([#4368](https://github.com/newjersey/navigator.business.nj.gov/issues/4368)) ([f1b1c39](https://github.com/newjersey/navigator.business.nj.gov/commit/f1b1c3981f15a1ec62d0253e1faac13aeb87ef7f))
+- [[#183117206](https://www.pivotaltracker.com/story/show/183117206)] updated 404 page ([f0609b8](https://github.com/newjersey/navigator.business.nj.gov/commit/f0609b82c3edc192ba0ea1708a46ec262c4bf4e0))
 - updating tax calendar to poll everytime dashboard is loaded ([b6ade56](https://github.com/newjersey/navigator.business.nj.gov/commit/b6ade563ea25d69165296d250b6f58bd07a19e24))
 - webflow sync and fundings re-evaluation ([cfcf52d](https://github.com/newjersey/navigator.business.nj.gov/commit/cfcf52d67500aa590c917b0677de7d54515ab8c1))
 
@@ -2366,28 +2643,28 @@
 
 ### Bug Fixes
 
-- [[#182478483](https://github.com/newjersey/navigator.business.nj.gov/issues/182478483)] make sure dropdown button has z-index above next button ([7736912](https://github.com/newjersey/navigator.business.nj.gov/commit/7736912aa13a9944a9213d7d8ca42b66a86b68b1))
-- [[#182478483](https://github.com/newjersey/navigator.business.nj.gov/issues/182478483)] styling CTA buttons for cannabis priority status ([22d27ac](https://github.com/newjersey/navigator.business.nj.gov/commit/22d27aca753034066d32ec7841acb52430da7f41))
-- [[#182725942](https://github.com/newjersey/navigator.business.nj.gov/issues/182725942)] nexus profile location update ([3815944](https://github.com/newjersey/navigator.business.nj.gov/commit/38159442bd0515a23f3b414d991fc5cc864cdaf9))
-- [[#182831197](https://github.com/newjersey/navigator.business.nj.gov/issues/182831197)] event calendar border styling ([72dbc91](https://github.com/newjersey/navigator.business.nj.gov/commit/72dbc918d7a869b9dc0b76f40ffb4fafe4bf68ae))
-- [[#182962504](https://github.com/newjersey/navigator.business.nj.gov/issues/182962504)] fixing guest profile experience and cypress tests ([0097f19](https://github.com/newjersey/navigator.business.nj.gov/commit/0097f190abcecb1fd67b411c4b3cf42976156e28))
-- [[#182962504](https://github.com/newjersey/navigator.business.nj.gov/issues/182962504)] reverting serverless setting affecting Cypress ([97cf0c9](https://github.com/newjersey/navigator.business.nj.gov/commit/97cf0c93443dcf6060fa0ff19f96c972bdfea4fc))
-- [[#182962504](https://github.com/newjersey/navigator.business.nj.gov/issues/182962504)] spelling issue in import ([4e86960](https://github.com/newjersey/navigator.business.nj.gov/commit/4e869603a8d67abf79f0a7b6fe7a4af5d489c130))
-- [[#182962504](https://github.com/newjersey/navigator.business.nj.gov/issues/182962504)] tax calendar mvp ([c2223dc](https://github.com/newjersey/navigator.business.nj.gov/commit/c2223dc8dec4ae8ff785e947335a7ccce72e1ac4))
-- [[#182962504](https://github.com/newjersey/navigator.business.nj.gov/issues/182962504)] tax calendar MVP feedback changes and bugfixes ([083b89b](https://github.com/newjersey/navigator.business.nj.gov/commit/083b89bbf5f8461991158e6d72a4971384e57659))
-- [[#182962504](https://github.com/newjersey/navigator.business.nj.gov/issues/182962504)] tax calendar style feedback fixes ([48a5742](https://github.com/newjersey/navigator.business.nj.gov/commit/48a5742ba5ad6803e2b89cd24595ca57159f1399))
-- [[#182962504](https://github.com/newjersey/navigator.business.nj.gov/issues/182962504)] updated the cms for new taxfiling fields ([8dcafc4](https://github.com/newjersey/navigator.business.nj.gov/commit/8dcafc4be99c1f337e8754c3e2121fac2bbf61a1))
-- [[#182964112](https://github.com/newjersey/navigator.business.nj.gov/issues/182964112)] design fix for spacing on task header ([28d493a](https://github.com/newjersey/navigator.business.nj.gov/commit/28d493ab00890f6252bf1b98775ffbd00d2963fa))
-- [[#183060034](https://github.com/newjersey/navigator.business.nj.gov/issues/183060034)] future same year tax filing date ([4892a50](https://github.com/newjersey/navigator.business.nj.gov/commit/4892a5002f4ec51ff602bdeda5e4851d0661fe92))
-- [[#183060034](https://github.com/newjersey/navigator.business.nj.gov/issues/183060034)] tax calendar empty state ([4222a86](https://github.com/newjersey/navigator.business.nj.gov/commit/4222a8609bfc90f8ee28ee93b6e64b536df5c601))
-- [[#183060034](https://github.com/newjersey/navigator.business.nj.gov/issues/183060034)] tax calendar view reverted ([67d83c0](https://github.com/newjersey/navigator.business.nj.gov/commit/67d83c076e7821649b85463a2d6cdcebc0c37814))
-- [[#183060034](https://github.com/newjersey/navigator.business.nj.gov/issues/183060034)] tax-filing-calendar-view ([97a9949](https://github.com/newjersey/navigator.business.nj.gov/commit/97a9949515b449da9809a7596d974c2c7cffd3da))
-- [[#183117376](https://github.com/newjersey/navigator.business.nj.gov/issues/183117376)] content and design fixes for tax detail screen ([feaa8ac](https://github.com/newjersey/navigator.business.nj.gov/commit/feaa8acfe603f3d782453a703b0daa60c7a4583e))
-- [[#183117376](https://github.com/newjersey/navigator.business.nj.gov/issues/183117376)] design fixes for tax detail screen ([0bb91f2](https://github.com/newjersey/navigator.business.nj.gov/commit/0bb91f26906b7281d7d481e10dcb563819626534))
-- [[#183117376](https://github.com/newjersey/navigator.business.nj.gov/issues/183117376)] tax detail screens v2 ([23acbd8](https://github.com/newjersey/navigator.business.nj.gov/commit/23acbd8482b93586690326222f110c0760276edb))
-- [[#183213873](https://github.com/newjersey/navigator.business.nj.gov/issues/183213873)] address modal error messages ([88435e0](https://github.com/newjersey/navigator.business.nj.gov/commit/88435e00557b0d7628be6deec4ebd7c1a308bf87))
-- [[#183330425](https://github.com/newjersey/navigator.business.nj.gov/issues/183330425)] removing console log ([9cf6b5a](https://github.com/newjersey/navigator.business.nj.gov/commit/9cf6b5a125f069cc7d92b40723742d03d835abe7))
-- [[#183330425](https://github.com/newjersey/navigator.business.nj.gov/issues/183330425)] switch dakota feedback form to starting ([a89f795](https://github.com/newjersey/navigator.business.nj.gov/commit/a89f79561f577928c52b993e746afc1041b0414b))
+- [[#182478483](https://www.pivotaltracker.com/story/show/182478483)] make sure dropdown button has z-index above next button ([7736912](https://github.com/newjersey/navigator.business.nj.gov/commit/7736912aa13a9944a9213d7d8ca42b66a86b68b1))
+- [[#182478483](https://www.pivotaltracker.com/story/show/182478483)] styling CTA buttons for cannabis priority status ([22d27ac](https://github.com/newjersey/navigator.business.nj.gov/commit/22d27aca753034066d32ec7841acb52430da7f41))
+- [[#182725942](https://www.pivotaltracker.com/story/show/182725942)] nexus profile location update ([3815944](https://github.com/newjersey/navigator.business.nj.gov/commit/38159442bd0515a23f3b414d991fc5cc864cdaf9))
+- [[#182831197](https://www.pivotaltracker.com/story/show/182831197)] event calendar border styling ([72dbc91](https://github.com/newjersey/navigator.business.nj.gov/commit/72dbc918d7a869b9dc0b76f40ffb4fafe4bf68ae))
+- [[#182962504](https://www.pivotaltracker.com/story/show/182962504)] fixing guest profile experience and cypress tests ([0097f19](https://github.com/newjersey/navigator.business.nj.gov/commit/0097f190abcecb1fd67b411c4b3cf42976156e28))
+- [[#182962504](https://www.pivotaltracker.com/story/show/182962504)] reverting serverless setting affecting Cypress ([97cf0c9](https://github.com/newjersey/navigator.business.nj.gov/commit/97cf0c93443dcf6060fa0ff19f96c972bdfea4fc))
+- [[#182962504](https://www.pivotaltracker.com/story/show/182962504)] spelling issue in import ([4e86960](https://github.com/newjersey/navigator.business.nj.gov/commit/4e869603a8d67abf79f0a7b6fe7a4af5d489c130))
+- [[#182962504](https://www.pivotaltracker.com/story/show/182962504)] tax calendar mvp ([c2223dc](https://github.com/newjersey/navigator.business.nj.gov/commit/c2223dc8dec4ae8ff785e947335a7ccce72e1ac4))
+- [[#182962504](https://www.pivotaltracker.com/story/show/182962504)] tax calendar MVP feedback changes and bugfixes ([083b89b](https://github.com/newjersey/navigator.business.nj.gov/commit/083b89bbf5f8461991158e6d72a4971384e57659))
+- [[#182962504](https://www.pivotaltracker.com/story/show/182962504)] tax calendar style feedback fixes ([48a5742](https://github.com/newjersey/navigator.business.nj.gov/commit/48a5742ba5ad6803e2b89cd24595ca57159f1399))
+- [[#182962504](https://www.pivotaltracker.com/story/show/182962504)] updated the cms for new taxfiling fields ([8dcafc4](https://github.com/newjersey/navigator.business.nj.gov/commit/8dcafc4be99c1f337e8754c3e2121fac2bbf61a1))
+- [[#182964112](https://www.pivotaltracker.com/story/show/182964112)] design fix for spacing on task header ([28d493a](https://github.com/newjersey/navigator.business.nj.gov/commit/28d493ab00890f6252bf1b98775ffbd00d2963fa))
+- [[#183060034](https://www.pivotaltracker.com/story/show/183060034)] future same year tax filing date ([4892a50](https://github.com/newjersey/navigator.business.nj.gov/commit/4892a5002f4ec51ff602bdeda5e4851d0661fe92))
+- [[#183060034](https://www.pivotaltracker.com/story/show/183060034)] tax calendar empty state ([4222a86](https://github.com/newjersey/navigator.business.nj.gov/commit/4222a8609bfc90f8ee28ee93b6e64b536df5c601))
+- [[#183060034](https://www.pivotaltracker.com/story/show/183060034)] tax calendar view reverted ([67d83c0](https://github.com/newjersey/navigator.business.nj.gov/commit/67d83c076e7821649b85463a2d6cdcebc0c37814))
+- [[#183060034](https://www.pivotaltracker.com/story/show/183060034)] tax-filing-calendar-view ([97a9949](https://github.com/newjersey/navigator.business.nj.gov/commit/97a9949515b449da9809a7596d974c2c7cffd3da))
+- [[#183117376](https://www.pivotaltracker.com/story/show/183117376)] content and design fixes for tax detail screen ([feaa8ac](https://github.com/newjersey/navigator.business.nj.gov/commit/feaa8acfe603f3d782453a703b0daa60c7a4583e))
+- [[#183117376](https://www.pivotaltracker.com/story/show/183117376)] design fixes for tax detail screen ([0bb91f2](https://github.com/newjersey/navigator.business.nj.gov/commit/0bb91f26906b7281d7d481e10dcb563819626534))
+- [[#183117376](https://www.pivotaltracker.com/story/show/183117376)] tax detail screens v2 ([23acbd8](https://github.com/newjersey/navigator.business.nj.gov/commit/23acbd8482b93586690326222f110c0760276edb))
+- [[#183213873](https://www.pivotaltracker.com/story/show/183213873)] address modal error messages ([88435e0](https://github.com/newjersey/navigator.business.nj.gov/commit/88435e00557b0d7628be6deec4ebd7c1a308bf87))
+- [[#183330425](https://www.pivotaltracker.com/story/show/183330425)] removing console log ([9cf6b5a](https://github.com/newjersey/navigator.business.nj.gov/commit/9cf6b5a125f069cc7d92b40723742d03d835abe7))
+- [[#183330425](https://www.pivotaltracker.com/story/show/183330425)] switch dakota feedback form to starting ([a89f795](https://github.com/newjersey/navigator.business.nj.gov/commit/a89f79561f577928c52b993e746afc1041b0414b))
 - add evtp to spelling dictionary ([925fded](https://github.com/newjersey/navigator.business.nj.gov/commit/925fded5e4921ba9ce6b998306ee1e39765015b0))
 - branch for cms ([e309df5](https://github.com/newjersey/navigator.business.nj.gov/commit/e309df5c114d0c8dd0425c2991f38bb1f0cf230d))
 - **deps:** update aws-amplify ([e987621](https://github.com/newjersey/navigator.business.nj.gov/commit/e98762160ce4f5dbb581340ee4e589857ecf4aa7))
@@ -2535,34 +2812,34 @@
 
 ### Features
 
-- [[#182725942](https://github.com/newjersey/navigator.business.nj.gov/issues/182725942)] updated location question for nexus ([ce1b298](https://github.com/newjersey/navigator.business.nj.gov/commit/ce1b298ddee315672bc0afac9c7e3d911c284940))
-- [[#182831197](https://github.com/newjersey/navigator.business.nj.gov/issues/182831197)] event calendar styling update ([5f807eb](https://github.com/newjersey/navigator.business.nj.gov/commit/5f807eb126a063c50f6ab4e2856113e15097934c))
-- [[#182962504](https://github.com/newjersey/navigator.business.nj.gov/issues/182962504)] tax calendar mvp ([ce143c8](https://github.com/newjersey/navigator.business.nj.gov/commit/ce143c8e8853bd2ee8460e40a59d2fee1de91baf))
-- [[#182963868](https://github.com/newjersey/navigator.business.nj.gov/issues/182963868)] add formation nudge modal ([347f2d5](https://github.com/newjersey/navigator.business.nj.gov/commit/347f2d5b2f8f952c244a6dc50ca362e97cd7a1a1))
-- [[#182963868](https://github.com/newjersey/navigator.business.nj.gov/issues/182963868)] update styling and tests descriptions ([a0f333b](https://github.com/newjersey/navigator.business.nj.gov/commit/a0f333b2192e8d7fdfaddf7bab725a8c0518b047))
-- [[#182963883](https://github.com/newjersey/navigator.business.nj.gov/issues/182963883)] add tax registration nudge modal ([0f395f5](https://github.com/newjersey/navigator.business.nj.gov/commit/0f395f51457d16bc2c965d5c10c70f2d98b581ca))
-- [[#183001440](https://github.com/newjersey/navigator.business.nj.gov/issues/183001440)] add location info box to business step in formation ([4e6c15a](https://github.com/newjersey/navigator.business.nj.gov/commit/4e6c15a103c50320db8c0b82113b0b52f0fc0078))
-- [[#183197986](https://github.com/newjersey/navigator.business.nj.gov/issues/183197986)] formation amendment links ([4d2fcc3](https://github.com/newjersey/navigator.business.nj.gov/commit/4d2fcc386743072bdeeb37e6e3b3bb0122f5d94a))
-- [[#183197986](https://github.com/newjersey/navigator.business.nj.gov/issues/183197986)] info regarding amendments ([f02e14b](https://github.com/newjersey/navigator.business.nj.gov/commit/f02e14b2011e0ad3141f454d8e15801877550fe6))
-- [[#183406154](https://github.com/newjersey/navigator.business.nj.gov/issues/183406154)] allow users to resubmit formation form from interim success page ([b44f78c](https://github.com/newjersey/navigator.business.nj.gov/commit/b44f78c212c86901071fac5cf1ec8f886bbe58fb))
-- [#[#182726039](https://github.com/newjersey/navigator.business.nj.gov/issues/182726039)] updating height of mui input fields ([3b74a82](https://github.com/newjersey/navigator.business.nj.gov/commit/3b74a82be80355f17bb8a281a35b8bfee8d6ea40))
-- [#[#182872281](https://github.com/newjersey/navigator.business.nj.gov/issues/182872281)] update heigth of buttons ([9df8d3b](https://github.com/newjersey/navigator.business.nj.gov/commit/9df8d3b8759781ca350f791180b4d2d7ef3d740e))
-- [#182963868](https://github.com/newjersey/navigator.business.nj.gov/issues/182963868) update copy ([52f6d2f](https://github.com/newjersey/navigator.business.nj.gov/commit/52f6d2f2de7482034f1ec8629a4845199cacd3f1))
-- [Finishes [#182478483](https://github.com/newjersey/navigator.business.nj.gov/issues/182478483)] add dropdown button CTA to cannabis priority status ([02b2918](https://github.com/newjersey/navigator.business.nj.gov/commit/02b2918522a5a5bc5c3e7988ec4cb7108828616b))
-- [Finishes [#182964112](https://github.com/newjersey/navigator.business.nj.gov/issues/182964112)] redesign task header to use checkbox design for task progress ([19a85a4](https://github.com/newjersey/navigator.business.nj.gov/commit/19a85a45043312626f7ce1332e4f90cc8806255a))
+- [[#182725942](https://www.pivotaltracker.com/story/show/182725942)] updated location question for nexus ([ce1b298](https://github.com/newjersey/navigator.business.nj.gov/commit/ce1b298ddee315672bc0afac9c7e3d911c284940))
+- [[#182831197](https://www.pivotaltracker.com/story/show/182831197)] event calendar styling update ([5f807eb](https://github.com/newjersey/navigator.business.nj.gov/commit/5f807eb126a063c50f6ab4e2856113e15097934c))
+- [[#182962504](https://www.pivotaltracker.com/story/show/182962504)] tax calendar mvp ([ce143c8](https://github.com/newjersey/navigator.business.nj.gov/commit/ce143c8e8853bd2ee8460e40a59d2fee1de91baf))
+- [[#182963868](https://www.pivotaltracker.com/story/show/182963868)] add formation nudge modal ([347f2d5](https://github.com/newjersey/navigator.business.nj.gov/commit/347f2d5b2f8f952c244a6dc50ca362e97cd7a1a1))
+- [[#182963868](https://www.pivotaltracker.com/story/show/182963868)] update styling and tests descriptions ([a0f333b](https://github.com/newjersey/navigator.business.nj.gov/commit/a0f333b2192e8d7fdfaddf7bab725a8c0518b047))
+- [[#182963883](https://www.pivotaltracker.com/story/show/182963883)] add tax registration nudge modal ([0f395f5](https://github.com/newjersey/navigator.business.nj.gov/commit/0f395f51457d16bc2c965d5c10c70f2d98b581ca))
+- [[#183001440](https://www.pivotaltracker.com/story/show/183001440)] add location info box to business step in formation ([4e6c15a](https://github.com/newjersey/navigator.business.nj.gov/commit/4e6c15a103c50320db8c0b82113b0b52f0fc0078))
+- [[#183197986](https://www.pivotaltracker.com/story/show/183197986)] formation amendment links ([4d2fcc3](https://github.com/newjersey/navigator.business.nj.gov/commit/4d2fcc386743072bdeeb37e6e3b3bb0122f5d94a))
+- [[#183197986](https://www.pivotaltracker.com/story/show/183197986)] info regarding amendments ([f02e14b](https://github.com/newjersey/navigator.business.nj.gov/commit/f02e14b2011e0ad3141f454d8e15801877550fe6))
+- [[#183406154](https://www.pivotaltracker.com/story/show/183406154)] allow users to resubmit formation form from interim success page ([b44f78c](https://github.com/newjersey/navigator.business.nj.gov/commit/b44f78c212c86901071fac5cf1ec8f886bbe58fb))
+- [#[#182726039](https://www.pivotaltracker.com/story/show/182726039)] updating height of mui input fields ([3b74a82](https://github.com/newjersey/navigator.business.nj.gov/commit/3b74a82be80355f17bb8a281a35b8bfee8d6ea40))
+- [#[#182872281](https://www.pivotaltracker.com/story/show/182872281)] update heigth of buttons ([9df8d3b](https://github.com/newjersey/navigator.business.nj.gov/commit/9df8d3b8759781ca350f791180b4d2d7ef3d740e))
+- [#182963868](https://www.pivotaltracker.com/story/show/182963868) update copy ([52f6d2f](https://github.com/newjersey/navigator.business.nj.gov/commit/52f6d2f2de7482034f1ec8629a4845199cacd3f1))
+- [Finishes [#182478483](https://www.pivotaltracker.com/story/show/182478483)] add dropdown button CTA to cannabis priority status ([02b2918](https://github.com/newjersey/navigator.business.nj.gov/commit/02b2918522a5a5bc5c3e7988ec4cb7108828616b))
+- [Finishes [#182964112](https://www.pivotaltracker.com/story/show/182964112)] redesign task header to use checkbox design for task progress ([19a85a4](https://github.com/newjersey/navigator.business.nj.gov/commit/19a85a45043312626f7ce1332e4f90cc8806255a))
 
 # [5.3.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.2.1...v5.3.0) (2022-09-13)
 
 ### Bug Fixes
 
-- [[#182490288](https://github.com/newjersey/navigator.business.nj.gov/issues/182490288)] add billing to review page ([b687fdb](https://github.com/newjersey/navigator.business.nj.gov/commit/b687fdb2c2b8a3a9fd916b4ee929f773bd5fa26f))
-- [[#182490288](https://github.com/newjersey/navigator.business.nj.gov/issues/182490288)] formation stepper: switch blue/green colors for incomplete/complete state ([237aa24](https://github.com/newjersey/navigator.business.nj.gov/commit/237aa24372c41190f6b52eacdd49bb995e1e645a))
-- [[#182490288](https://github.com/newjersey/navigator.business.nj.gov/issues/182490288)] handle missing fields in use-default-address checkboxes ([953cff2](https://github.com/newjersey/navigator.business.nj.gov/commit/953cff22e2ce84a2132f32d1861f9da20bc6f227))
-- [[#182490288](https://github.com/newjersey/navigator.business.nj.gov/issues/182490288)] mobile styling for clickable stepper ([f4a62b4](https://github.com/newjersey/navigator.business.nj.gov/commit/f4a62b42bea478aba9f778e923b45e1744b46b80))
-- [[#182490288](https://github.com/newjersey/navigator.business.nj.gov/issues/182490288)] reset api errors in formation when switching legal structure ([fb43e4c](https://github.com/newjersey/navigator.business.nj.gov/commit/fb43e4c4f4a06793c2147a04e0b9c1ae0e52fab2))
-- [[#182490288](https://github.com/newjersey/navigator.business.nj.gov/issues/182490288)] scroll to top of stepper or error on formation step change ([75372c3](https://github.com/newjersey/navigator.business.nj.gov/commit/75372c3c6cedd4f897031c97351de54454e05b03))
-- [[#183036325](https://github.com/newjersey/navigator.business.nj.gov/issues/183036325)] validate full name in onboarding for special characters and length ([7f98ada](https://github.com/newjersey/navigator.business.nj.gov/commit/7f98adabf2ede6037da72ed24e459453e04b2f37))
-- [[#183060034](https://github.com/newjersey/navigator.business.nj.gov/issues/183060034)] annual report tax filing date ([deebf33](https://github.com/newjersey/navigator.business.nj.gov/commit/deebf33756358913451222208686518db0be7104))
+- [[#182490288](https://www.pivotaltracker.com/story/show/182490288)] add billing to review page ([b687fdb](https://github.com/newjersey/navigator.business.nj.gov/commit/b687fdb2c2b8a3a9fd916b4ee929f773bd5fa26f))
+- [[#182490288](https://www.pivotaltracker.com/story/show/182490288)] formation stepper: switch blue/green colors for incomplete/complete state ([237aa24](https://github.com/newjersey/navigator.business.nj.gov/commit/237aa24372c41190f6b52eacdd49bb995e1e645a))
+- [[#182490288](https://www.pivotaltracker.com/story/show/182490288)] handle missing fields in use-default-address checkboxes ([953cff2](https://github.com/newjersey/navigator.business.nj.gov/commit/953cff22e2ce84a2132f32d1861f9da20bc6f227))
+- [[#182490288](https://www.pivotaltracker.com/story/show/182490288)] mobile styling for clickable stepper ([f4a62b4](https://github.com/newjersey/navigator.business.nj.gov/commit/f4a62b42bea478aba9f778e923b45e1744b46b80))
+- [[#182490288](https://www.pivotaltracker.com/story/show/182490288)] reset api errors in formation when switching legal structure ([fb43e4c](https://github.com/newjersey/navigator.business.nj.gov/commit/fb43e4c4f4a06793c2147a04e0b9c1ae0e52fab2))
+- [[#182490288](https://www.pivotaltracker.com/story/show/182490288)] scroll to top of stepper or error on formation step change ([75372c3](https://github.com/newjersey/navigator.business.nj.gov/commit/75372c3c6cedd4f897031c97351de54454e05b03))
+- [[#183036325](https://www.pivotaltracker.com/story/show/183036325)] validate full name in onboarding for special characters and length ([7f98ada](https://github.com/newjersey/navigator.business.nj.gov/commit/7f98adabf2ede6037da72ed24e459453e04b2f37))
+- [[#183060034](https://www.pivotaltracker.com/story/show/183060034)] annual report tax filing date ([deebf33](https://github.com/newjersey/navigator.business.nj.gov/commit/deebf33756358913451222208686518db0be7104))
 - Added acronym DORES to cspell.json file ([3b306ea](https://github.com/newjersey/navigator.business.nj.gov/commit/3b306ead85c7eb139978160988e8543fa468efe2))
 - Added no timeout to correct the timeout errors ([8eaa2f7](https://github.com/newjersey/navigator.business.nj.gov/commit/8eaa2f7c7534c2a62c04808226a58fee6cf05901))
 - catch userRouter error causing failing cypress tests ([1590c2a](https://github.com/newjersey/navigator.business.nj.gov/commit/1590c2a043418fc81ab4d64db9d923c3f7d59572))
@@ -2608,9 +2885,9 @@
 
 ### Features
 
-- [[#182490288](https://github.com/newjersey/navigator.business.nj.gov/issues/182490288)] clickable stepper in business formation ([1051bb6](https://github.com/newjersey/navigator.business.nj.gov/commit/1051bb6c55c0e41c237cdc38d65cfac646817cfd)), closes [#182808842](https://github.com/newjersey/navigator.business.nj.gov/issues/182808842)
-- [[#182675113](https://github.com/newjersey/navigator.business.nj.gov/issues/182675113)] update homepage with new screenshots ([daf7bff](https://github.com/newjersey/navigator.business.nj.gov/commit/daf7bff724f7867e81b751def166cadb7c93656d))
-- [[#183046102](https://github.com/newjersey/navigator.business.nj.gov/issues/183046102)] remove operate mini roadmap ([bb7d0c7](https://github.com/newjersey/navigator.business.nj.gov/commit/bb7d0c76e6df0be433ad558167fc8e0de7192b79))
+- [[#182490288](https://www.pivotaltracker.com/story/show/182490288)] clickable stepper in business formation ([1051bb6](https://github.com/newjersey/navigator.business.nj.gov/commit/1051bb6c55c0e41c237cdc38d65cfac646817cfd)), closes [#182808842](https://www.pivotaltracker.com/story/show/182808842)
+- [[#182675113](https://www.pivotaltracker.com/story/show/182675113)] update homepage with new screenshots ([daf7bff](https://github.com/newjersey/navigator.business.nj.gov/commit/daf7bff724f7867e81b751def166cadb7c93656d))
+- [[#183046102](https://www.pivotaltracker.com/story/show/183046102)] remove operate mini roadmap ([bb7d0c7](https://github.com/newjersey/navigator.business.nj.gov/commit/bb7d0c76e6df0be433ad558167fc8e0de7192b79))
 
 ## [5.2.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.2.0...v5.2.1) (2022-09-07)
 
@@ -2622,9 +2899,9 @@
 
 ### Bug Fixes
 
-- [[#182664054](https://github.com/newjersey/navigator.business.nj.gov/issues/182664054)] API Formation error fix ([f37bdd5](https://github.com/newjersey/navigator.business.nj.gov/commit/f37bdd55961cf0fbc9ae984d9fe968a1c8accb5a))
-- [[#182664054](https://github.com/newjersey/navigator.business.nj.gov/issues/182664054)] Integrated API errors, renamed files ([62ec036](https://github.com/newjersey/navigator.business.nj.gov/commit/62ec0366d6fd84c89c821f6e72f8dbbefbef28dd))
-- [[#182664054](https://github.com/newjersey/navigator.business.nj.gov/issues/182664054)] Updated Formation Error Styling ([c68b8f8](https://github.com/newjersey/navigator.business.nj.gov/commit/c68b8f89e91eed626e6d1207d3c01d70043004e3))
+- [[#182664054](https://www.pivotaltracker.com/story/show/182664054)] API Formation error fix ([f37bdd5](https://github.com/newjersey/navigator.business.nj.gov/commit/f37bdd55961cf0fbc9ae984d9fe968a1c8accb5a))
+- [[#182664054](https://www.pivotaltracker.com/story/show/182664054)] Integrated API errors, renamed files ([62ec036](https://github.com/newjersey/navigator.business.nj.gov/commit/62ec0366d6fd84c89c821f6e72f8dbbefbef28dd))
+- [[#182664054](https://www.pivotaltracker.com/story/show/182664054)] Updated Formation Error Styling ([c68b8f8](https://github.com/newjersey/navigator.business.nj.gov/commit/c68b8f89e91eed626e6d1207d3c01d70043004e3))
 - added GWRS to cspell.json ([ac3fcab](https://github.com/newjersey/navigator.business.nj.gov/commit/ac3fcabf2eea7be1e24b70388a18fb2f617982bf))
 - adjusted the error bar on formation signers field ([8cb3144](https://github.com/newjersey/navigator.business.nj.gov/commit/8cb3144335bf3791123844df107a8bb7a2086da9))
 - Corrected the spelling error from Fulfilment to Fulfillment ([5ab6fc3](https://github.com/newjersey/navigator.business.nj.gov/commit/5ab6fc3c7b08b53ce8ac3e294d65b7c86a50e69a))
@@ -2687,10 +2964,10 @@
 
 ### Features
 
-- [[#182490185](https://github.com/newjersey/navigator.business.nj.gov/issues/182490185)] update next/previous buttons on task pages ([e542b5e](https://github.com/newjersey/navigator.business.nj.gov/commit/e542b5e21988eb1c7b0adf9bed2713b270d4f31c))
-- [[#182664054](https://github.com/newjersey/navigator.business.nj.gov/issues/182664054)] Updated Formation Error Styling ([ebbe272](https://github.com/newjersey/navigator.business.nj.gov/commit/ebbe2721b4bdd09de721af179de69f148592dce9))
-- [[#182955641](https://github.com/newjersey/navigator.business.nj.gov/issues/182955641)] display hideable roadmap ([48c0b79](https://github.com/newjersey/navigator.business.nj.gov/commit/48c0b79c451bf76ec231e260140284c7ff03ca87))
-- [Finishes [#182884673](https://github.com/newjersey/navigator.business.nj.gov/issues/182884673)] display message when getFilings API call fails ([965c899](https://github.com/newjersey/navigator.business.nj.gov/commit/965c8999d485e20bdf0a5f65126661f37335b698))
+- [[#182490185](https://www.pivotaltracker.com/story/show/182490185)] update next/previous buttons on task pages ([e542b5e](https://github.com/newjersey/navigator.business.nj.gov/commit/e542b5e21988eb1c7b0adf9bed2713b270d4f31c))
+- [[#182664054](https://www.pivotaltracker.com/story/show/182664054)] Updated Formation Error Styling ([ebbe272](https://github.com/newjersey/navigator.business.nj.gov/commit/ebbe2721b4bdd09de721af179de69f148592dce9))
+- [[#182955641](https://www.pivotaltracker.com/story/show/182955641)] display hideable roadmap ([48c0b79](https://github.com/newjersey/navigator.business.nj.gov/commit/48c0b79c451bf76ec231e260140284c7ff03ca87))
+- [Finishes [#182884673](https://www.pivotaltracker.com/story/show/182884673)] display message when getFilings API call fails ([965c899](https://github.com/newjersey/navigator.business.nj.gov/commit/965c8999d485e20bdf0a5f65126661f37335b698))
 
 ## [5.1.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.1.0...v5.1.1) (2022-08-19)
 
@@ -2702,9 +2979,9 @@
 
 ### Bug Fixes
 
-- [[#182918196](https://github.com/newjersey/navigator.business.nj.gov/issues/182918196)] trigger guest sign-in for myNJ login user bug ([e071b78](https://github.com/newjersey/navigator.business.nj.gov/commit/e071b78bb4fd56fdbd05add00760184e82dcad72))
-- [[#183002925](https://github.com/newjersey/navigator.business.nj.gov/issues/183002925)] broken nexus formation link ([8f4d7f6](https://github.com/newjersey/navigator.business.nj.gov/commit/8f4d7f6bd3d32e838558fbe92891a301f48425d5))
-- [Finishes [#183012790](https://github.com/newjersey/navigator.business.nj.gov/issues/183012790)] url-encoding for special characters in business name search ([1283194](https://github.com/newjersey/navigator.business.nj.gov/commit/12831944905bc77ebc6cc4265bce19cba9032e03))
+- [[#182918196](https://www.pivotaltracker.com/story/show/182918196)] trigger guest sign-in for myNJ login user bug ([e071b78](https://github.com/newjersey/navigator.business.nj.gov/commit/e071b78bb4fd56fdbd05add00760184e82dcad72))
+- [[#183002925](https://www.pivotaltracker.com/story/show/183002925)] broken nexus formation link ([8f4d7f6](https://github.com/newjersey/navigator.business.nj.gov/commit/8f4d7f6bd3d32e838558fbe92891a301f48425d5))
+- [Finishes [#183012790](https://www.pivotaltracker.com/story/show/183012790)] url-encoding for special characters in business name search ([1283194](https://github.com/newjersey/navigator.business.nj.gov/commit/12831944905bc77ebc6cc4265bce19cba9032e03))
 - **deps:** update aws-sdk to v3.145.0 ([8d7b7c9](https://github.com/newjersey/navigator.business.nj.gov/commit/8d7b7c913f00773a6f1aa779cdaf728f59f7378a))
 - **deps:** update serverless-and-webpack ([27913fe](https://github.com/newjersey/navigator.business.nj.gov/commit/27913fedf39fa6bf30668eb05d7b614844d8fa22))
 - failing test ([010c510](https://github.com/newjersey/navigator.business.nj.gov/commit/010c510238db36de62d4804cdce2624ce0217922))
@@ -2738,31 +3015,31 @@
 
 ### Features
 
-- [[#182490248](https://github.com/newjersey/navigator.business.nj.gov/issues/182490248)] add toggle calendar button ([9d75c6a](https://github.com/newjersey/navigator.business.nj.gov/commit/9d75c6a5f8f2d21dacd563b56b6ecb30eeac8e98))
-- [[#182490248](https://github.com/newjersey/navigator.business.nj.gov/issues/182490248)] add toggle calendar button ([294f0d8](https://github.com/newjersey/navigator.business.nj.gov/commit/294f0d82b897815124573079e0810c8088ce92b1))
-- [[#182490248](https://github.com/newjersey/navigator.business.nj.gov/issues/182490248)] update styling for calendar toggle button ([25b29d1](https://github.com/newjersey/navigator.business.nj.gov/commit/25b29d103e196dfb17c1ac9b42a289d0cb4c3a03))
-- [[#182918196](https://github.com/newjersey/navigator.business.nj.gov/issues/182918196)] display message to myNJ login error users ([ede4b42](https://github.com/newjersey/navigator.business.nj.gov/commit/ede4b42f7ef6d2dabc0b04bd1683bcb2e66d0c83))
+- [[#182490248](https://www.pivotaltracker.com/story/show/182490248)] add toggle calendar button ([9d75c6a](https://github.com/newjersey/navigator.business.nj.gov/commit/9d75c6a5f8f2d21dacd563b56b6ecb30eeac8e98))
+- [[#182490248](https://www.pivotaltracker.com/story/show/182490248)] add toggle calendar button ([294f0d8](https://github.com/newjersey/navigator.business.nj.gov/commit/294f0d82b897815124573079e0810c8088ce92b1))
+- [[#182490248](https://www.pivotaltracker.com/story/show/182490248)] update styling for calendar toggle button ([25b29d1](https://github.com/newjersey/navigator.business.nj.gov/commit/25b29d103e196dfb17c1ac9b42a289d0cb4c3a03))
+- [[#182918196](https://www.pivotaltracker.com/story/show/182918196)] display message to myNJ login error users ([ede4b42](https://github.com/newjersey/navigator.business.nj.gov/commit/ede4b42f7ef6d2dabc0b04bd1683bcb2e66d0c83))
 - [182832373] tax id on the taxes task ([26ad1f7](https://github.com/newjersey/navigator.business.nj.gov/commit/26ad1f7aed4ba7d0caebcda09eda0d067a152a10))
-- [Finishes [#182478340](https://github.com/newjersey/navigator.business.nj.gov/issues/182478340)] redirect user to the page they were on after myNJ self-reg ([c4dc600](https://github.com/newjersey/navigator.business.nj.gov/commit/c4dc600cecb7509da63fd3b2a4cf9a6b5e8d271d))
-- [finishes [#182621373](https://github.com/newjersey/navigator.business.nj.gov/issues/182621373)] gradual graduation google analytics ([2fed525](https://github.com/newjersey/navigator.business.nj.gov/commit/2fed525b15ea14b57bc569d3189c6fc4dbd7b5d8))
-- [finishes [#182653166](https://github.com/newjersey/navigator.business.nj.gov/issues/182653166)] google analytics for dakota sub-persona ([d58340d](https://github.com/newjersey/navigator.business.nj.gov/commit/d58340d4a4de13d4f49e5ca1eb544e962f051ee6))
+- [Finishes [#182478340](https://www.pivotaltracker.com/story/show/182478340)] redirect user to the page they were on after myNJ self-reg ([c4dc600](https://github.com/newjersey/navigator.business.nj.gov/commit/c4dc600cecb7509da63fd3b2a4cf9a6b5e8d271d))
+- [finishes [#182621373](https://www.pivotaltracker.com/story/show/182621373)] gradual graduation google analytics ([2fed525](https://github.com/newjersey/navigator.business.nj.gov/commit/2fed525b15ea14b57bc569d3189c6fc4dbd7b5d8))
+- [finishes [#182653166](https://www.pivotaltracker.com/story/show/182653166)] google analytics for dakota sub-persona ([d58340d](https://github.com/newjersey/navigator.business.nj.gov/commit/d58340d4a4de13d4f49e5ca1eb544e962f051ee6))
 
 # [5.0.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v4.5.0...v5.0.0) (2022-08-10)
 
 ### Bug Fixes
 
-- [[#182621057](https://github.com/newjersey/navigator.business.nj.gov/issues/182621057)] add styling to sectorModalBody ([e9746be](https://github.com/newjersey/navigator.business.nj.gov/commit/e9746be871b7172745545a628085b862d8a150bb))
-- [[#182621057](https://github.com/newjersey/navigator.business.nj.gov/issues/182621057)] move funding snackbars to roadmap file ([9310355](https://github.com/newjersey/navigator.business.nj.gov/commit/9310355400cbbba524e6d5d3af037a569646fb51))
-- [[#182771680](https://github.com/newjersey/navigator.business.nj.gov/issues/182771680)] add paragraph breaks to review page ([98ae27c](https://github.com/newjersey/navigator.business.nj.gov/commit/98ae27cf15ad47000e51b22c7fa79d69d31e2809))
-- [[#182868051](https://github.com/newjersey/navigator.business.nj.gov/issues/182868051)] add trade name task for nexus gp/sp companies ([ec97fbe](https://github.com/newjersey/navigator.business.nj.gov/commit/ec97fbe412dd0e3a13a00a653b9a387671af264e))
-- [[#182906682](https://github.com/newjersey/navigator.business.nj.gov/issues/182906682)] add error message for special character business name api error ([f1249f3](https://github.com/newjersey/navigator.business.nj.gov/commit/f1249f30db6002f0474e4fe86643f403877a7f7e))
-- [[#182945192](https://github.com/newjersey/navigator.business.nj.gov/issues/182945192)] correct formatting for list calendar, removing extra header ([6c7a7d8](https://github.com/newjersey/navigator.business.nj.gov/commit/6c7a7d80537d7d2e0ddfd05d08d6c77f3476ef6a))
+- [[#182621057](https://www.pivotaltracker.com/story/show/182621057)] add styling to sectorModalBody ([e9746be](https://github.com/newjersey/navigator.business.nj.gov/commit/e9746be871b7172745545a628085b862d8a150bb))
+- [[#182621057](https://www.pivotaltracker.com/story/show/182621057)] move funding snackbars to roadmap file ([9310355](https://github.com/newjersey/navigator.business.nj.gov/commit/9310355400cbbba524e6d5d3af037a569646fb51))
+- [[#182771680](https://www.pivotaltracker.com/story/show/182771680)] add paragraph breaks to review page ([98ae27c](https://github.com/newjersey/navigator.business.nj.gov/commit/98ae27cf15ad47000e51b22c7fa79d69d31e2809))
+- [[#182868051](https://www.pivotaltracker.com/story/show/182868051)] add trade name task for nexus gp/sp companies ([ec97fbe](https://github.com/newjersey/navigator.business.nj.gov/commit/ec97fbe412dd0e3a13a00a653b9a387671af264e))
+- [[#182906682](https://www.pivotaltracker.com/story/show/182906682)] add error message for special character business name api error ([f1249f3](https://github.com/newjersey/navigator.business.nj.gov/commit/f1249f30db6002f0474e4fe86643f403877a7f7e))
+- [[#182945192](https://www.pivotaltracker.com/story/show/182945192)] correct formatting for list calendar, removing extra header ([6c7a7d8](https://github.com/newjersey/navigator.business.nj.gov/commit/6c7a7d80537d7d2e0ddfd05d08d6c77f3476ef6a))
 - ein content typo ([3686668](https://github.com/newjersey/navigator.business.nj.gov/commit/36866687f405024df4885971674645c125b9def5))
 
 ### Features
 
-- [[#182621057](https://github.com/newjersey/navigator.business.nj.gov/issues/182621057)] add funding nudge ([5d5b56e](https://github.com/newjersey/navigator.business.nj.gov/commit/5d5b56edd3ad9ce1c5c46f4169303cf566485762))
-- [[#182785178](https://github.com/newjersey/navigator.business.nj.gov/issues/182785178)] migrate the existing roadmap to dashboard, and remove the existing dashboard page ([1ecf0d0](https://github.com/newjersey/navigator.business.nj.gov/commit/1ecf0d019a2908f65a90069c23daf79a0e09a57a))
+- [[#182621057](https://www.pivotaltracker.com/story/show/182621057)] add funding nudge ([5d5b56e](https://github.com/newjersey/navigator.business.nj.gov/commit/5d5b56edd3ad9ce1c5c46f4169303cf566485762))
+- [[#182785178](https://www.pivotaltracker.com/story/show/182785178)] migrate the existing roadmap to dashboard, and remove the existing dashboard page ([1ecf0d0](https://github.com/newjersey/navigator.business.nj.gov/commit/1ecf0d019a2908f65a90069c23daf79a0e09a57a))
 
 ### BREAKING CHANGES
 
@@ -2772,17 +3049,17 @@
 
 ### Bug Fixes
 
-- [[#182374942](https://github.com/newjersey/navigator.business.nj.gov/issues/182374942)] add padding to loading indicator ([d4c0167](https://github.com/newjersey/navigator.business.nj.gov/commit/d4c0167214ac4e3fb09d452a69cfed35296471d5))
-- [[#182374942](https://github.com/newjersey/navigator.business.nj.gov/issues/182374942)] trigger login on loading page ([d564f1a](https://github.com/newjersey/navigator.business.nj.gov/commit/d564f1a205227b1757b38f5bd38c5fc6056cca79))
-- [[#182470455](https://github.com/newjersey/navigator.business.nj.gov/issues/182470455)] tax registration modal and certifications ([9e49227](https://github.com/newjersey/navigator.business.nj.gov/commit/9e49227bd5f7d29ecbf56a541fb8d2bfbb36a264))
-- [[#182664562](https://github.com/newjersey/navigator.business.nj.gov/issues/182664562)] [[#182918223](https://github.com/newjersey/navigator.business.nj.gov/issues/182918223)] fix styling for edit/remove naics/ein buttons ([a1c0312](https://github.com/newjersey/navigator.business.nj.gov/commit/a1c03124f088b6fa9211ebd2b645a686d17e3bf8))
-- [[#182715002](https://github.com/newjersey/navigator.business.nj.gov/issues/182715002)] add tax type config section to netlify ([30e5c03](https://github.com/newjersey/navigator.business.nj.gov/commit/30e5c03dc3bbdeb138db89b93c42154faf9fba7a))
-- [[#182795501](https://github.com/newjersey/navigator.business.nj.gov/issues/182795501)] add new transportation flag for industry config ([dbbe107](https://github.com/newjersey/navigator.business.nj.gov/commit/dbbe107ef6f0655b3ba678aa276d5c56e11a9801))
-- [[#182845055](https://github.com/newjersey/navigator.business.nj.gov/issues/182845055)] formation async test issue ([837b80b](https://github.com/newjersey/navigator.business.nj.gov/commit/837b80b6a7de1eecc8faa347d367541ab4ed1619))
-- [[#182882232](https://github.com/newjersey/navigator.business.nj.gov/issues/182882232)] do not change state when changing task status to its existing value ([ef1c32e](https://github.com/newjersey/navigator.business.nj.gov/commit/ef1c32ea6d145b152d46aa336362f58a90038507))
-- [[#182882312](https://github.com/newjersey/navigator.business.nj.gov/issues/182882312)] contextual info refresh for foreign business types ([672d1f0](https://github.com/newjersey/navigator.business.nj.gov/commit/672d1f0214efb2be6fabc38260eac2ed0394dec9))
-- [[#182893884](https://github.com/newjersey/navigator.business.nj.gov/issues/182893884)] failing tests for formation nudge bug ([12e0d50](https://github.com/newjersey/navigator.business.nj.gov/commit/12e0d50489f3425ad79845cb048ce958916d8d48))
-- [[#182894012](https://github.com/newjersey/navigator.business.nj.gov/issues/182894012)] reset employment agency industry change selection ([5e0ae9f](https://github.com/newjersey/navigator.business.nj.gov/commit/5e0ae9fb42f595ca5dc1d4a40a0701fc0703e7e7))
+- [[#182374942](https://www.pivotaltracker.com/story/show/182374942)] add padding to loading indicator ([d4c0167](https://github.com/newjersey/navigator.business.nj.gov/commit/d4c0167214ac4e3fb09d452a69cfed35296471d5))
+- [[#182374942](https://www.pivotaltracker.com/story/show/182374942)] trigger login on loading page ([d564f1a](https://github.com/newjersey/navigator.business.nj.gov/commit/d564f1a205227b1757b38f5bd38c5fc6056cca79))
+- [[#182470455](https://www.pivotaltracker.com/story/show/182470455)] tax registration modal and certifications ([9e49227](https://github.com/newjersey/navigator.business.nj.gov/commit/9e49227bd5f7d29ecbf56a541fb8d2bfbb36a264))
+- [[#182664562](https://www.pivotaltracker.com/story/show/182664562)] [[#182918223](https://www.pivotaltracker.com/story/show/182918223)] fix styling for edit/remove naics/ein buttons ([a1c0312](https://github.com/newjersey/navigator.business.nj.gov/commit/a1c03124f088b6fa9211ebd2b645a686d17e3bf8))
+- [[#182715002](https://www.pivotaltracker.com/story/show/182715002)] add tax type config section to netlify ([30e5c03](https://github.com/newjersey/navigator.business.nj.gov/commit/30e5c03dc3bbdeb138db89b93c42154faf9fba7a))
+- [[#182795501](https://www.pivotaltracker.com/story/show/182795501)] add new transportation flag for industry config ([dbbe107](https://github.com/newjersey/navigator.business.nj.gov/commit/dbbe107ef6f0655b3ba678aa276d5c56e11a9801))
+- [[#182845055](https://www.pivotaltracker.com/story/show/182845055)] formation async test issue ([837b80b](https://github.com/newjersey/navigator.business.nj.gov/commit/837b80b6a7de1eecc8faa347d367541ab4ed1619))
+- [[#182882232](https://www.pivotaltracker.com/story/show/182882232)] do not change state when changing task status to its existing value ([ef1c32e](https://github.com/newjersey/navigator.business.nj.gov/commit/ef1c32ea6d145b152d46aa336362f58a90038507))
+- [[#182882312](https://www.pivotaltracker.com/story/show/182882312)] contextual info refresh for foreign business types ([672d1f0](https://github.com/newjersey/navigator.business.nj.gov/commit/672d1f0214efb2be6fabc38260eac2ed0394dec9))
+- [[#182893884](https://www.pivotaltracker.com/story/show/182893884)] failing tests for formation nudge bug ([12e0d50](https://github.com/newjersey/navigator.business.nj.gov/commit/12e0d50489f3425ad79845cb048ce958916d8d48))
+- [[#182894012](https://www.pivotaltracker.com/story/show/182894012)] reset employment agency industry change selection ([5e0ae9f](https://github.com/newjersey/navigator.business.nj.gov/commit/5e0ae9fb42f595ca5dc1d4a40a0701fc0703e7e7))
 - add filter option for dueDate ([1b3c60f](https://github.com/newjersey/navigator.business.nj.gov/commit/1b3c60fc68e631b326f7b23c20bcd09642f4ed02))
 - cms bullet fix ([7d95093](https://github.com/newjersey/navigator.business.nj.gov/commit/7d9509339ddeea2eec961ad1ba34bbd254b5950b))
 - **deps:** update aws-amplify to v4.6.1 ([b316de6](https://github.com/newjersey/navigator.business.nj.gov/commit/b316de6736b979fad443ee386482eea3362e98f5))
@@ -2844,17 +3121,17 @@
 
 ### Features
 
-- [[#182470455](https://github.com/newjersey/navigator.business.nj.gov/issues/182470455)] tax registration modal, certifications snackbar, certifications ([9c1c91d](https://github.com/newjersey/navigator.business.nj.gov/commit/9c1c91d4707ce15e90182fbafac24ac69ad38a2b))
-- [[#182664562](https://github.com/newjersey/navigator.business.nj.gov/issues/182664562)] add EIN field in the EIN task ([a921eb4](https://github.com/newjersey/navigator.business.nj.gov/commit/a921eb4b331a9d2da4d9c85c030b108d8bbf0ce2))
-- [[#182845055](https://github.com/newjersey/navigator.business.nj.gov/issues/182845055)] show loading indicator before formation success page ([0a4661d](https://github.com/newjersey/navigator.business.nj.gov/commit/0a4661da91a70215d120840a5033e7c8755c5a53))
-- [[#182918223](https://github.com/newjersey/navigator.business.nj.gov/issues/182918223)] add remove link to NAICS success message ([fdda7af](https://github.com/newjersey/navigator.business.nj.gov/commit/fdda7af3cb4c431fd35f583524153abb2fbfc1c5))
+- [[#182470455](https://www.pivotaltracker.com/story/show/182470455)] tax registration modal, certifications snackbar, certifications ([9c1c91d](https://github.com/newjersey/navigator.business.nj.gov/commit/9c1c91d4707ce15e90182fbafac24ac69ad38a2b))
+- [[#182664562](https://www.pivotaltracker.com/story/show/182664562)] add EIN field in the EIN task ([a921eb4](https://github.com/newjersey/navigator.business.nj.gov/commit/a921eb4b331a9d2da4d9c85c030b108d8bbf0ce2))
+- [[#182845055](https://www.pivotaltracker.com/story/show/182845055)] show loading indicator before formation success page ([0a4661d](https://github.com/newjersey/navigator.business.nj.gov/commit/0a4661da91a70215d120840a5033e7c8755c5a53))
+- [[#182918223](https://www.pivotaltracker.com/story/show/182918223)] add remove link to NAICS success message ([fdda7af](https://github.com/newjersey/navigator.business.nj.gov/commit/fdda7af3cb4c431fd35f583524153abb2fbfc1c5))
 - [182758778] display sector/industry fields on profile page ([4884b4d](https://github.com/newjersey/navigator.business.nj.gov/commit/4884b4d2c42e13f61a5b6ff196ca71b5b278aae5))
 
 ## [4.4.3](https://github.com/newjersey/navigator.business.nj.gov/compare/v4.4.2...v4.4.3) (2022-08-03)
 
 ### Bug Fixes
 
-- [[#182893884](https://github.com/newjersey/navigator.business.nj.gov/issues/182893884)] failing tests for formation nudge bug ([fd664d8](https://github.com/newjersey/navigator.business.nj.gov/commit/fd664d879caf3e1838e5da4e4520cce31ede700d))
+- [[#182893884](https://www.pivotaltracker.com/story/show/182893884)] failing tests for formation nudge bug ([fd664d8](https://github.com/newjersey/navigator.business.nj.gov/commit/fd664d879caf3e1838e5da4e4520cce31ede700d))
 - add missing migration script ([0b93dfd](https://github.com/newjersey/navigator.business.nj.gov/commit/0b93dfdb1eed23e11d378b72e0d68f844b760cfb))
 - correct roadmap bug ([aca3627](https://github.com/newjersey/navigator.business.nj.gov/commit/aca3627ff4f2a33254ed01bd9a6ff0c3814db2d4))
 
@@ -2874,10 +3151,10 @@
 
 ### Bug Fixes
 
-- [[#182374942](https://github.com/newjersey/navigator.business.nj.gov/issues/182374942)] only trigger sign-in from loading if no code provided ([82371ee](https://github.com/newjersey/navigator.business.nj.gov/commit/82371ee35660b82c1d55b0067fc0788b1f480e64))
-- [[#182795535](https://github.com/newjersey/navigator.business.nj.gov/issues/182795535)] remove business plan step from nexus roadmap ([0f762a4](https://github.com/newjersey/navigator.business.nj.gov/commit/0f762a4ebc74f6cde86a9b275d8ae7ea75eea154))
-- [[#182809081](https://github.com/newjersey/navigator.business.nj.gov/issues/182809081)] update how the naics code is dynamically rendered to add the title ([da9a6d3](https://github.com/newjersey/navigator.business.nj.gov/commit/da9a6d34200052eed3d6d6f2ad1dedebb975bc54))
-- [[#182849918](https://github.com/newjersey/navigator.business.nj.gov/issues/182849918)] change URL for register-for-taxes-foreign ([017e37f](https://github.com/newjersey/navigator.business.nj.gov/commit/017e37f10e644c156b62f74675584163293653db))
+- [[#182374942](https://www.pivotaltracker.com/story/show/182374942)] only trigger sign-in from loading if no code provided ([82371ee](https://github.com/newjersey/navigator.business.nj.gov/commit/82371ee35660b82c1d55b0067fc0788b1f480e64))
+- [[#182795535](https://www.pivotaltracker.com/story/show/182795535)] remove business plan step from nexus roadmap ([0f762a4](https://github.com/newjersey/navigator.business.nj.gov/commit/0f762a4ebc74f6cde86a9b275d8ae7ea75eea154))
+- [[#182809081](https://www.pivotaltracker.com/story/show/182809081)] update how the naics code is dynamically rendered to add the title ([da9a6d3](https://github.com/newjersey/navigator.business.nj.gov/commit/da9a6d34200052eed3d6d6f2ad1dedebb975bc54))
+- [[#182849918](https://www.pivotaltracker.com/story/show/182849918)] change URL for register-for-taxes-foreign ([017e37f](https://github.com/newjersey/navigator.business.nj.gov/commit/017e37f10e644c156b62f74675584163293653db))
 - **deps:** update aws-amplify to v4.6.0 ([5e3e3df](https://github.com/newjersey/navigator.business.nj.gov/commit/5e3e3df7b57f51ea9b3ffe77a51ee48f7a0d4269))
 - **deps:** update aws-sdk to v3.137.0 ([1bd6d64](https://github.com/newjersey/navigator.business.nj.gov/commit/1bd6d64d236577c4280d6750fad23513dd9ccb0b))
 - **deps:** update dependency helmet to v5.1.1 ([0f14008](https://github.com/newjersey/navigator.business.nj.gov/commit/0f14008ca7fdd11726cf9971d92597e07d1badf7))
@@ -2887,25 +3164,25 @@
 
 ### Features
 
-- [[#182374942](https://github.com/newjersey/navigator.business.nj.gov/issues/182374942)] myNJ splash loading page ([9416143](https://github.com/newjersey/navigator.business.nj.gov/commit/9416143fc0912f6f5a0065c7bac532a1bb2ce227))
-- [[#182682790](https://github.com/newjersey/navigator.business.nj.gov/issues/182682790)] certifications-nudge-tax-registration ([64dac06](https://github.com/newjersey/navigator.business.nj.gov/commit/64dac06dc132fb0650252883cbc1bddd7d95eb8f))
-- [[#182725994](https://github.com/newjersey/navigator.business.nj.gov/issues/182725994)] add naics code to nexus tasks ([3d775b4](https://github.com/newjersey/navigator.business.nj.gov/commit/3d775b47d10af4585cd2800632d1f48583cee752))
+- [[#182374942](https://www.pivotaltracker.com/story/show/182374942)] myNJ splash loading page ([9416143](https://github.com/newjersey/navigator.business.nj.gov/commit/9416143fc0912f6f5a0065c7bac532a1bb2ce227))
+- [[#182682790](https://www.pivotaltracker.com/story/show/182682790)] certifications-nudge-tax-registration ([64dac06](https://github.com/newjersey/navigator.business.nj.gov/commit/64dac06dc132fb0650252883cbc1bddd7d95eb8f))
+- [[#182725994](https://www.pivotaltracker.com/story/show/182725994)] add naics code to nexus tasks ([3d775b4](https://github.com/newjersey/navigator.business.nj.gov/commit/3d775b47d10af4585cd2800632d1f48583cee752))
 - [182663272] add ownership and existing employee fields to poppy profile ([3d4ab70](https://github.com/newjersey/navigator.business.nj.gov/commit/3d4ab70624f6ccada9af486d1bba6c7bf6e727a6))
 
 # [4.3.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v4.2.0...v4.3.0) (2022-07-25)
 
 ### Bug Fixes
 
-- [[#182470424](https://github.com/newjersey/navigator.business.nj.gov/issues/182470424)] update cards on redirect from formation task ([dd02c5b](https://github.com/newjersey/navigator.business.nj.gov/commit/dd02c5b83ce83c3c81b6a582a843135aacc04e22))
-- [[#182714968](https://github.com/newjersey/navigator.business.nj.gov/issues/182714968)] add interior designer onboarding question ([e144a94](https://github.com/newjersey/navigator.business.nj.gov/commit/e144a94cb60c1a986e7b1462831f37bd05912ee0))
-- [[#182714990](https://github.com/newjersey/navigator.business.nj.gov/issues/182714990)] add onboarding question for real estate appraisals ([4f0a1e5](https://github.com/newjersey/navigator.business.nj.gov/commit/4f0a1e553d2ab97c13899a353b47f30be77acffe))
-- [[#182723814](https://github.com/newjersey/navigator.business.nj.gov/issues/182723814)] update mwbe values ([cd1c01d](https://github.com/newjersey/navigator.business.nj.gov/commit/cd1c01d12520902b8a46b030a869d74cd0a2465d))
-- [[#182723816](https://github.com/newjersey/navigator.business.nj.gov/issues/182723816)] update program purpose values ([1fe15e0](https://github.com/newjersey/navigator.business.nj.gov/commit/1fe15e0cb3ad7afcba35344695578aa62daaa45a))
-- [[#182732446](https://github.com/newjersey/navigator.business.nj.gov/issues/182732446)] add onboarding question for it consulting companies ([1306526](https://github.com/newjersey/navigator.business.nj.gov/commit/1306526809cd05f6268c5bc941b183e87862865a))
-- [[#182737527](https://github.com/newjersey/navigator.business.nj.gov/issues/182737527)] nexus business profile cms ([3cc84d0](https://github.com/newjersey/navigator.business.nj.gov/commit/3cc84d0ccf0e638cb353f5fd4e99eaf5943d33c5))
-- [[#182749443](https://github.com/newjersey/navigator.business.nj.gov/issues/182749443)] do not display business name in profile for nexus sp/gp ([7568609](https://github.com/newjersey/navigator.business.nj.gov/commit/7568609081b64aa0e77a5ead00705b93c4035c23))
-- [[#182749960](https://github.com/newjersey/navigator.business.nj.gov/issues/182749960)] only apply certificate-good-standing-foreign to nexus scorp/ccorp ([51ba067](https://github.com/newjersey/navigator.business.nj.gov/commit/51ba06715887b410c54e292f06fde2cbe7b3377c))
-- [[#182771453](https://github.com/newjersey/navigator.business.nj.gov/issues/182771453)] make the staffing services question apply to any industry where its applicable ([ec7bd4a](https://github.com/newjersey/navigator.business.nj.gov/commit/ec7bd4ad385b18413148248d8577daf0fe589fed))
+- [[#182470424](https://www.pivotaltracker.com/story/show/182470424)] update cards on redirect from formation task ([dd02c5b](https://github.com/newjersey/navigator.business.nj.gov/commit/dd02c5b83ce83c3c81b6a582a843135aacc04e22))
+- [[#182714968](https://www.pivotaltracker.com/story/show/182714968)] add interior designer onboarding question ([e144a94](https://github.com/newjersey/navigator.business.nj.gov/commit/e144a94cb60c1a986e7b1462831f37bd05912ee0))
+- [[#182714990](https://www.pivotaltracker.com/story/show/182714990)] add onboarding question for real estate appraisals ([4f0a1e5](https://github.com/newjersey/navigator.business.nj.gov/commit/4f0a1e553d2ab97c13899a353b47f30be77acffe))
+- [[#182723814](https://www.pivotaltracker.com/story/show/182723814)] update mwbe values ([cd1c01d](https://github.com/newjersey/navigator.business.nj.gov/commit/cd1c01d12520902b8a46b030a869d74cd0a2465d))
+- [[#182723816](https://www.pivotaltracker.com/story/show/182723816)] update program purpose values ([1fe15e0](https://github.com/newjersey/navigator.business.nj.gov/commit/1fe15e0cb3ad7afcba35344695578aa62daaa45a))
+- [[#182732446](https://www.pivotaltracker.com/story/show/182732446)] add onboarding question for it consulting companies ([1306526](https://github.com/newjersey/navigator.business.nj.gov/commit/1306526809cd05f6268c5bc941b183e87862865a))
+- [[#182737527](https://www.pivotaltracker.com/story/show/182737527)] nexus business profile cms ([3cc84d0](https://github.com/newjersey/navigator.business.nj.gov/commit/3cc84d0ccf0e638cb353f5fd4e99eaf5943d33c5))
+- [[#182749443](https://www.pivotaltracker.com/story/show/182749443)] do not display business name in profile for nexus sp/gp ([7568609](https://github.com/newjersey/navigator.business.nj.gov/commit/7568609081b64aa0e77a5ead00705b93c4035c23))
+- [[#182749960](https://www.pivotaltracker.com/story/show/182749960)] only apply certificate-good-standing-foreign to nexus scorp/ccorp ([51ba067](https://github.com/newjersey/navigator.business.nj.gov/commit/51ba06715887b410c54e292f06fde2cbe7b3377c))
+- [[#182771453](https://www.pivotaltracker.com/story/show/182771453)] make the staffing services question apply to any industry where its applicable ([ec7bd4a](https://github.com/newjersey/navigator.business.nj.gov/commit/ec7bd4ad385b18413148248d8577daf0fe589fed))
 - **deps:** update aws-amplify to v4.5.10 ([1840f6b](https://github.com/newjersey/navigator.business.nj.gov/commit/1840f6b33101bc7fd70f81d2b83caf86c5b1c26b))
 - **deps:** update aws-sdk ([c7feda5](https://github.com/newjersey/navigator.business.nj.gov/commit/c7feda532be85af5c0c08e7788c72c2386aef183))
 - **deps:** update aws-sdk to v3.135.0 ([d3bee27](https://github.com/newjersey/navigator.business.nj.gov/commit/d3bee278a3f69965a8672721c9bbed14c0da2adf))
@@ -2963,10 +3240,10 @@
 
 ### Features
 
-- [[#182470424](https://github.com/newjersey/navigator.business.nj.gov/issues/182470424)] add formation nudge ([4c33061](https://github.com/newjersey/navigator.business.nj.gov/commit/4c33061e85925e2f555d7d08cf10aa51756eb139))
-- [[#182476292](https://github.com/newjersey/navigator.business.nj.gov/issues/182476292)] Adding LP to Formation ([4828cb4](https://github.com/newjersey/navigator.business.nj.gov/commit/4828cb4b5325eb9c0b4fe3a81213029df0ff8f6f))
-- [[#182641410](https://github.com/newjersey/navigator.business.nj.gov/issues/182641410)] add new search func industry dropdown ([b2741a2](https://github.com/newjersey/navigator.business.nj.gov/commit/b2741a2340a906b982b8cc22c07bf35c9f0f6e7e))
-- [[#182749443](https://github.com/newjersey/navigator.business.nj.gov/issues/182749443)] only show formation tasks for non-sp/gp nexus ([e3595db](https://github.com/newjersey/navigator.business.nj.gov/commit/e3595dbf5265df6f2d9bcd2f811cb564f6c0ed93))
+- [[#182470424](https://www.pivotaltracker.com/story/show/182470424)] add formation nudge ([4c33061](https://github.com/newjersey/navigator.business.nj.gov/commit/4c33061e85925e2f555d7d08cf10aa51756eb139))
+- [[#182476292](https://www.pivotaltracker.com/story/show/182476292)] Adding LP to Formation ([4828cb4](https://github.com/newjersey/navigator.business.nj.gov/commit/4828cb4b5325eb9c0b4fe3a81213029df0ff8f6f))
+- [[#182641410](https://www.pivotaltracker.com/story/show/182641410)] add new search func industry dropdown ([b2741a2](https://github.com/newjersey/navigator.business.nj.gov/commit/b2741a2340a906b982b8cc22c07bf35c9f0f6e7e))
+- [[#182749443](https://www.pivotaltracker.com/story/show/182749443)] only show formation tasks for non-sp/gp nexus ([e3595db](https://github.com/newjersey/navigator.business.nj.gov/commit/e3595dbf5265df6f2d9bcd2f811cb564f6c0ed93))
 - [182374978] update roadmap and mini roadmap styling ([f0c20a6](https://github.com/newjersey/navigator.business.nj.gov/commit/f0c20a62b4a408363d00083c4d6ff6cffdfaa302))
 - [182620730] filings calendar added to roadmap ([1fbd6ce](https://github.com/newjersey/navigator.business.nj.gov/commit/1fbd6ce3d2e9d926175441eb821a3061526e9b97))
 
@@ -2974,19 +3251,19 @@
 
 ### Features
 
-- [[#182374961](https://github.com/newjersey/navigator.business.nj.gov/issues/182374961)] nexus business profile ([933450a](https://github.com/newjersey/navigator.business.nj.gov/commit/933450addc922aa1a269270d58038122711073dd))
+- [[#182374961](https://www.pivotaltracker.com/story/show/182374961)] nexus business profile ([933450a](https://github.com/newjersey/navigator.business.nj.gov/commit/933450addc922aa1a269270d58038122711073dd))
 
 # [4.1.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v4.0.0...v4.1.0) (2022-07-12)
 
 ### Bug Fixes
 
-- [[#182374939](https://github.com/newjersey/navigator.business.nj.gov/issues/182374939)] render contextual info in tests without evaluating ([92a9127](https://github.com/newjersey/navigator.business.nj.gov/commit/92a9127779f6286a7dcf1ab78779d18106b8ee26))
-- [[#182645398](https://github.com/newjersey/navigator.business.nj.gov/issues/182645398)] add are-you-sure modal when changing formation status back ([d703cbb](https://github.com/newjersey/navigator.business.nj.gov/commit/d703cbbfd2f3eb945fc812ca85bd28ff6c3149f7))
-- [[#182645398](https://github.com/newjersey/navigator.business.nj.gov/issues/182645398)] break word in modal header ([5a6df30](https://github.com/newjersey/navigator.business.nj.gov/commit/5a6df303c39ed30a66614832fdc96ee9c2aa5753))
-- [[#182645398](https://github.com/newjersey/navigator.business.nj.gov/issues/182645398)] don't open formation date modal if status is unchanged ([492d334](https://github.com/newjersey/navigator.business.nj.gov/commit/492d334d9b445fa1bcd4cd3df51d3fee2a3c4767))
-- [[#182645398](https://github.com/newjersey/navigator.business.nj.gov/issues/182645398)] only open warning modal if switching out of completed state ([4896089](https://github.com/newjersey/navigator.business.nj.gov/commit/4896089bacf38c607050ab2dac4e85cbc1f78e03))
-- [[#182688906](https://github.com/newjersey/navigator.business.nj.gov/issues/182688906)] add spacing for formation date modal ([e5755f5](https://github.com/newjersey/navigator.business.nj.gov/commit/e5755f50bbaaa5e76b4bcda4ae322e839de4a321))
-- [[#182702315](https://github.com/newjersey/navigator.business.nj.gov/issues/182702315)] formation date modal accepts future dates ([3c7123a](https://github.com/newjersey/navigator.business.nj.gov/commit/3c7123a095bb773df3eceef888c3e604e91b3fb9))
+- [[#182374939](https://www.pivotaltracker.com/story/show/182374939)] render contextual info in tests without evaluating ([92a9127](https://github.com/newjersey/navigator.business.nj.gov/commit/92a9127779f6286a7dcf1ab78779d18106b8ee26))
+- [[#182645398](https://www.pivotaltracker.com/story/show/182645398)] add are-you-sure modal when changing formation status back ([d703cbb](https://github.com/newjersey/navigator.business.nj.gov/commit/d703cbbfd2f3eb945fc812ca85bd28ff6c3149f7))
+- [[#182645398](https://www.pivotaltracker.com/story/show/182645398)] break word in modal header ([5a6df30](https://github.com/newjersey/navigator.business.nj.gov/commit/5a6df303c39ed30a66614832fdc96ee9c2aa5753))
+- [[#182645398](https://www.pivotaltracker.com/story/show/182645398)] don't open formation date modal if status is unchanged ([492d334](https://github.com/newjersey/navigator.business.nj.gov/commit/492d334d9b445fa1bcd4cd3df51d3fee2a3c4767))
+- [[#182645398](https://www.pivotaltracker.com/story/show/182645398)] only open warning modal if switching out of completed state ([4896089](https://github.com/newjersey/navigator.business.nj.gov/commit/4896089bacf38c607050ab2dac4e85cbc1f78e03))
+- [[#182688906](https://www.pivotaltracker.com/story/show/182688906)] add spacing for formation date modal ([e5755f5](https://github.com/newjersey/navigator.business.nj.gov/commit/e5755f50bbaaa5e76b4bcda4ae322e839de4a321))
+- [[#182702315](https://www.pivotaltracker.com/story/show/182702315)] formation date modal accepts future dates ([3c7123a](https://github.com/newjersey/navigator.business.nj.gov/commit/3c7123a095bb773df3eceef888c3e604e91b3fb9))
 - [182645354] add formation date to the profile page for starting, when populated ([8f1c04a](https://github.com/newjersey/navigator.business.nj.gov/commit/8f1c04a44e09cd7b9c735fcb0d0b436b482466cc))
 - async testing cleanup for nexus formation ([048a53e](https://github.com/newjersey/navigator.business.nj.gov/commit/048a53ea701fc13ba095c98f0e11636f6c13e46c))
 - **deps:** update aws-amplify to v4.5.9 ([108ce92](https://github.com/newjersey/navigator.business.nj.gov/commit/108ce920cc8623ad9f4537ee9baa9b608b29c547))
@@ -3050,18 +3327,18 @@
 
 ### Features
 
-- [[#182374939](https://github.com/newjersey/navigator.business.nj.gov/issues/182374939)] add priority status feedback selection ([d49b5a3](https://github.com/newjersey/navigator.business.nj.gov/commit/d49b5a3033bb48367bfec0449afb801097021458))
-- [[#182645398](https://github.com/newjersey/navigator.business.nj.gov/issues/182645398)] ask user for formation date when manually completing task ([8332609](https://github.com/newjersey/navigator.business.nj.gov/commit/83326091f444c767f068d82dcf114657da1e3560))
-- [[#182676271](https://github.com/newjersey/navigator.business.nj.gov/issues/182676271)] lock formation task status after success from API ([87fa675](https://github.com/newjersey/navigator.business.nj.gov/commit/87fa675489a6bf1e8f3865bf5fe9e82444618ceb))
-- [[#182688906](https://github.com/newjersey/navigator.business.nj.gov/issues/182688906)] remove yellow box warning from formation date modal ([2e9d365](https://github.com/newjersey/navigator.business.nj.gov/commit/2e9d365d00702bea27d5b8d9470c5a85187c9a77))
+- [[#182374939](https://www.pivotaltracker.com/story/show/182374939)] add priority status feedback selection ([d49b5a3](https://github.com/newjersey/navigator.business.nj.gov/commit/d49b5a3033bb48367bfec0449afb801097021458))
+- [[#182645398](https://www.pivotaltracker.com/story/show/182645398)] ask user for formation date when manually completing task ([8332609](https://github.com/newjersey/navigator.business.nj.gov/commit/83326091f444c767f068d82dcf114657da1e3560))
+- [[#182676271](https://www.pivotaltracker.com/story/show/182676271)] lock formation task status after success from API ([87fa675](https://github.com/newjersey/navigator.business.nj.gov/commit/87fa675489a6bf1e8f3865bf5fe9e82444618ceb))
+- [[#182688906](https://www.pivotaltracker.com/story/show/182688906)] remove yellow box warning from formation date modal ([2e9d365](https://github.com/newjersey/navigator.business.nj.gov/commit/2e9d365d00702bea27d5b8d9470c5a85187c9a77))
 - add graduation card to side bar ([9685813](https://github.com/newjersey/navigator.business.nj.gov/commit/9685813a7556ee7ce9e9f37ae4779b9653850bd7))
 
 # [4.0.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.13.1...v4.0.0) (2022-07-06)
 
 ### Bug Fixes
 
-- [[#182374963](https://github.com/newjersey/navigator.business.nj.gov/issues/182374963)] display nexus formation task header always even when content changes ([3d335e4](https://github.com/newjersey/navigator.business.nj.gov/commit/3d335e46c1302942c19619fa4e4ff64dd8215e2f))
-- [[#182644770](https://github.com/newjersey/navigator.business.nj.gov/issues/182644770)] update checkmark display for nexus ([3d54675](https://github.com/newjersey/navigator.business.nj.gov/commit/3d54675cfe81686c55e9d1bb4b38e6afb74aa986))
+- [[#182374963](https://www.pivotaltracker.com/story/show/182374963)] display nexus formation task header always even when content changes ([3d335e4](https://github.com/newjersey/navigator.business.nj.gov/commit/3d335e46c1302942c19619fa4e4ff64dd8215e2f))
+- [[#182644770](https://www.pivotaltracker.com/story/show/182644770)] update checkmark display for nexus ([3d54675](https://github.com/newjersey/navigator.business.nj.gov/commit/3d54675cfe81686c55e9d1bb4b38e6afb74aa986))
 - [182478405] remove sidebar accordian for mobile view ([99cc547](https://github.com/newjersey/navigator.business.nj.gov/commit/99cc547663990cac346646214da0899b0b168bcc))
 - [182479519] add agency text to the funding task screens ([64a6a45](https://github.com/newjersey/navigator.business.nj.gov/commit/64a6a45c75fc97f259e969d0e6af4272908c931b))
 - [182600111] add custom not started and completed headers for the task completion sidebar ([a1aba68](https://github.com/newjersey/navigator.business.nj.gov/commit/a1aba689e18e8a9db0c42e483abf081f211c1a90))
@@ -3096,13 +3373,13 @@
 
 ### Features
 
-- [[#182374963](https://github.com/newjersey/navigator.business.nj.gov/issues/182374963)] add Dakota Nexus onboarding/roadmap ([84f322a](https://github.com/newjersey/navigator.business.nj.gov/commit/84f322a0e1905debdfd66487078a74279af289cc))
-- [[#182374966](https://github.com/newjersey/navigator.business.nj.gov/issues/182374966)] the dakota navigator unsupported page ([5572ea1](https://github.com/newjersey/navigator.business.nj.gov/commit/5572ea113158c64a1487681452e5c021c5607133))
-- [[#182476305](https://github.com/newjersey/navigator.business.nj.gov/issues/182476305)] navbar displays register and log in for guest ([ec798b5](https://github.com/newjersey/navigator.business.nj.gov/commit/ec798b5abf08753b84eaf2e3ab836ea259f34d93))
-- [[#182621954](https://github.com/newjersey/navigator.business.nj.gov/issues/182621954)] limit similar names from name-search to 10 (bugfix) ([51fb7e0](https://github.com/newjersey/navigator.business.nj.gov/commit/51fb7e0a553258b6fdcfb237bce66d6fd8f13078))
-- [[#182644749](https://github.com/newjersey/navigator.business.nj.gov/issues/182644749)] add description to nexus formation warning page ([51f44b5](https://github.com/newjersey/navigator.business.nj.gov/commit/51f44b5ea2a2ddc9d976d8d6cc3005555b21b997))
-- [[#182644770](https://github.com/newjersey/navigator.business.nj.gov/issues/182644770)] show nexus formation task when we know they are DBA ([52cde9b](https://github.com/newjersey/navigator.business.nj.gov/commit/52cde9ba75c069b9d2a9f4bdfcdcc52396c79a1c))
-- [#182476312](https://github.com/newjersey/navigator.business.nj.gov/issues/182476312) updated navbar for onboarding ([69d8fcc](https://github.com/newjersey/navigator.business.nj.gov/commit/69d8fcc3fa113b99ab9ad78b2e1aa9ee4d2bd6cb))
+- [[#182374963](https://www.pivotaltracker.com/story/show/182374963)] add Dakota Nexus onboarding/roadmap ([84f322a](https://github.com/newjersey/navigator.business.nj.gov/commit/84f322a0e1905debdfd66487078a74279af289cc))
+- [[#182374966](https://www.pivotaltracker.com/story/show/182374966)] the dakota navigator unsupported page ([5572ea1](https://github.com/newjersey/navigator.business.nj.gov/commit/5572ea113158c64a1487681452e5c021c5607133))
+- [[#182476305](https://www.pivotaltracker.com/story/show/182476305)] navbar displays register and log in for guest ([ec798b5](https://github.com/newjersey/navigator.business.nj.gov/commit/ec798b5abf08753b84eaf2e3ab836ea259f34d93))
+- [[#182621954](https://www.pivotaltracker.com/story/show/182621954)] limit similar names from name-search to 10 (bugfix) ([51fb7e0](https://github.com/newjersey/navigator.business.nj.gov/commit/51fb7e0a553258b6fdcfb237bce66d6fd8f13078))
+- [[#182644749](https://www.pivotaltracker.com/story/show/182644749)] add description to nexus formation warning page ([51f44b5](https://github.com/newjersey/navigator.business.nj.gov/commit/51f44b5ea2a2ddc9d976d8d6cc3005555b21b997))
+- [[#182644770](https://www.pivotaltracker.com/story/show/182644770)] show nexus formation task when we know they are DBA ([52cde9b](https://github.com/newjersey/navigator.business.nj.gov/commit/52cde9ba75c069b9d2a9f4bdfcdcc52396c79a1c))
+- [#182476312](https://www.pivotaltracker.com/story/show/182476312) updated navbar for onboarding ([69d8fcc](https://github.com/newjersey/navigator.business.nj.gov/commit/69d8fcc3fa113b99ab9ad78b2e1aa9ee4d2bd6cb))
 - implement functionality for out of state business owners to create NJ business ([e33ebcb](https://github.com/newjersey/navigator.business.nj.gov/commit/e33ebcbb576f6a4c662022736550ec45ab327891))
 
 ### BREAKING CHANGES
@@ -3119,7 +3396,7 @@
 
 ### Bug Fixes
 
-- [[#182374957](https://github.com/newjersey/navigator.business.nj.gov/issues/182374957)] design updates for task progress bar ([a3a3b20](https://github.com/newjersey/navigator.business.nj.gov/commit/a3a3b204a90606efa43b9a8ec8ad7e4770feae3e))
+- [[#182374957](https://www.pivotaltracker.com/story/show/182374957)] design updates for task progress bar ([a3a3b20](https://github.com/newjersey/navigator.business.nj.gov/commit/a3a3b204a90606efa43b9a8ec8ad7e4770feae3e))
 - [182476339] rebuid roadmap when saving naics code ([6ce24ef](https://github.com/newjersey/navigator.business.nj.gov/commit/6ce24efa9d84932e8dcf8e7cdb4a4e78c6aa5e5c))
 - **deps:** update aws-amplify to v4.5.8 ([d69dbd0](https://github.com/newjersey/navigator.business.nj.gov/commit/d69dbd09862d71e03eeaefa819a7fbabccdda9e1))
 - **deps:** update material-ui ([2dbdddf](https://github.com/newjersey/navigator.business.nj.gov/commit/2dbdddf2addd57fe25a413e8043aa81cc6ccc045))
@@ -3172,7 +3449,7 @@
 
 ### Features
 
-- [[#182374957](https://github.com/newjersey/navigator.business.nj.gov/issues/182374957)] add task progress card to roadmap sidebar ([b97f591](https://github.com/newjersey/navigator.business.nj.gov/commit/b97f591200b4d334d6b67f88fcefda1518402bb5))
+- [[#182374957](https://www.pivotaltracker.com/story/show/182374957)] add task progress card to roadmap sidebar ([b97f591](https://github.com/newjersey/navigator.business.nj.gov/commit/b97f591200b4d334d6b67f88fcefda1518402bb5))
 
 ## [3.12.3](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.12.2...v3.12.3) (2022-06-22)
 

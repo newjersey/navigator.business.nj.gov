@@ -1,9 +1,9 @@
-import { LicenseChecklistResponse } from "@api/types";
 import {
   ChecklistItemsForAllApplicationsClient,
   LicenseApplicationIdResponse,
 } from "@client/dynamics/license-status/regulatedBusinessDynamicsLicenseStatusTypes";
 import { LogWriterType } from "@libs/logWriter";
+import { LicenseChecklistResponse } from "@shared/domain-logic/licenseStatusHelpers";
 import { CheckoffStatus, LicenseStatusItem } from "@shared/license";
 import axios, { AxiosError } from "axios";
 

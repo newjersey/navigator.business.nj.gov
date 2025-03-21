@@ -1,6 +1,5 @@
 ---
-slug: board-member
-filename: board-member
+id: board-member
 displayname: board-member
 header: Board Member
 ---

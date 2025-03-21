@@ -465,7 +465,7 @@ export const v95TaxFilingDataGenerator = (overrides: Partial<v95TaxFilingData>):
 
 export const v95UserDataGenerator = (overrides: Partial<v95UserData>): v95UserData => {
   return {
-    version: 92,
+    version: 95,
     user: generatev95User({}),
     profileData: generatev95ProfileData({}),
     formProgress: "UNSTARTED",

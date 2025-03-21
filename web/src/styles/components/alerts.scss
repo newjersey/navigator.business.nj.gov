@@ -1,3 +1,5 @@
+@use "../sass-files/variables";
+
 .usa-alert--error::before {
   mask: url(/vendor/img/usa-icons/error.svg) no-repeat center !important;
 }
@@ -17,8 +19,8 @@
 }
 
 .usa-alert.usa-alert--note {
-  background-color: $base-lightest;
-  border-left-color: $secondary;
-  border-right-color: $secondary;
-  color: $base-darkest;
+  background-color: variables.$base-lightest;
+  border-left-color: variables.$secondary;
+  border-right-color: variables.$secondary;
+  color: variables.$base-darkest;
 }

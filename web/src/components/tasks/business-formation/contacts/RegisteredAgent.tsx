@@ -1,3 +1,4 @@
+import { Callout } from "@/components/Callout";
 import { Content } from "@/components/Content";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { Heading } from "@/components/njwds-extended/Heading";
@@ -127,6 +128,18 @@ export const RegisteredAgent = (): ReactElement => {
     }
   };
 
+  const getAriaLiveRegion = (): ReactElement | undefined => {
+    const interactedWithAgentCheckbox =
+      state.interactedFields.includes("agentEmail") && state.interactedFields.includes("agentName");
+    if (interactedWithAgentCheckbox && !state.formationFormData.agentUseAccountInfo) {
+      return <div>{`${Config.formation.registeredAgent.checkboxCheckedScreenReaderAnnouncement}`}</div>;
+    }
+
+    if (interactedWithAgentCheckbox && state.formationFormData.agentUseAccountInfo) {
+      return <div>{`${Config.formation.registeredAgent.checkboxUnCheckedScreenReaderAnnouncement}`}</div>;
+    }
+  };
+
   return (
     <>
       <Heading level={2} styleVariant={"h3"}>
@@ -177,6 +190,25 @@ export const RegisteredAgent = (): ReactElement => {
 
           {state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY" && (
             <div data-testid="agent-name">
+              <div
+                aria-hidden={
+                  state.interactedFields.includes("agentEmail") &&
+                  state.interactedFields.includes("agentName")
+                    ? "true"
+                    : "false"
+                }
+              >
+                <Callout
+                  calloutType="note"
+                  headerText={Config.formation.registeredAgent.noteTitle}
+                  showHeader={true}
+                >
+                  {Config.formation.registeredAgent.noteBody}
+                </Callout>
+              </div>
+              <div aria-live="polite" className="screen-reader-only">
+                {getAriaLiveRegion()}
+              </div>
               <div className="margin-top-3 margin-bottom-1">
                 <FormControlLabel
                   label={Config.formation.registeredAgent.sameContactCheckbox}
@@ -185,10 +217,12 @@ export const RegisteredAgent = (): ReactElement => {
                       checked={state.formationFormData.agentUseAccountInfo}
                       onChange={toggleUseAccountInfo}
                       id="same-agent-info-as-account-checkbox"
+                      inputProps={{ "aria-controls": "agent-name-id agent-email-id" }}
                     />
                   }
                 />
               </div>
+
               <WithErrorBar hasError={doSomeFieldsHaveError(["agentName", "agentEmail"])} type="DESKTOP-ONLY">
                 <div className="grid-row grid-gap-1 margin-bottom-2">
                   <div className="grid-col-12 tablet:grid-col-6">
@@ -199,7 +233,9 @@ export const RegisteredAgent = (): ReactElement => {
                         validationText={getFieldErrorLabel("agentName")}
                         errorBarType="MOBILE-ONLY"
                         fieldName="agentName"
-                        disabled={shouldBeDisabled("agentName", "ACCOUNT")}
+                        readOnly={shouldBeDisabled("agentName", "ACCOUNT")}
+                        type="text"
+                        inputProps={{ id: "agent-name-id" }}
                       />
                     </FormationField>
                   </div>
@@ -211,7 +247,9 @@ export const RegisteredAgent = (): ReactElement => {
                         errorBarType="MOBILE-ONLY"
                         required={true}
                         validationText={getFieldErrorLabel("agentEmail")}
-                        disabled={shouldBeDisabled("agentEmail", "ACCOUNT")}
+                        readOnly={shouldBeDisabled("agentEmail", "ACCOUNT")}
+                        type="text"
+                        inputProps={{ id: "agent-email-id" }}
                       />
                     </FormationField>
                   </div>

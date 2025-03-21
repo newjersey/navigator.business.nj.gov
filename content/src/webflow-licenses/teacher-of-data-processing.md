@@ -1,5 +1,4 @@
 ---
-filename: teacher-of-data-processing
 displayname: teacher-of-data-processing
 id: "teacher-of-data-processing"
 webflowId: "5f7729388e9f87feb06859b7"

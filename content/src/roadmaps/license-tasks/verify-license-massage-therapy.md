@@ -14,7 +14,6 @@ notesMd: >-
 
   After adding second CTA, remove the inline link: "verify your employees are licensed."
 id: verify-license-massage-therapy
-filename: verify-license-massage-therapy
 licenseName: ""
 displayname: verify-license-massage-therapy
 urlSlug: verify-license-massage-therapy

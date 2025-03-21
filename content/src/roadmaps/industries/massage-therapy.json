@@ -1,9 +1,7 @@
 {
-  "displayname": "massage-therapy",
   "naicsCodes": "621399",
   "defaultSectorId": "health-care-and-social-assistance",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -12,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -59,6 +57,10 @@
     }
   ],
   "name": "Massage Therapy",
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
+  "displayname": "massage-therapy",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true

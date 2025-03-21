@@ -1,7 +1,6 @@
 ---
 licenseName: ""
 id: appraiser-company-register
-filename: appraiser-company-register
 displayname: appraiser-company-registration
 urlSlug: appraiser-company-registration
 name: Register Your Appraisal Management Company
@@ -17,25 +16,26 @@ agencyId: nj-consumer-affairs
 agencyAdditionalContext: Real Estate Appraiser Board
 webflowId: 66aceed5a35295b74def2d5e
 ---
+
 ## Eligibility Criteria
 
-* Be a certified appraiser
-* Oversee an appraiser panel of more than 15 New Jersey-certified or licensed appraisers
-* Reside on a panel of 25 or more state-certified or state-licensed appraisers in 2 or more states
+- Be a certified appraiser
+- Oversee an appraiser panel of more than 15 New Jersey-certified or licensed appraisers
+- Reside on a panel of 25 or more state-certified or state-licensed appraisers in 2 or more states
 
 ## Application Requirements
 
 A completed application by the management company’s `compliance officer|compliance-officer` , to include:
 
-* The name, contact information, and license number of the compliance officer
-* The name and contact information for each `controlling person|controlling-person` 
-* A `Surety bond|surety-bond` in the amount of $25,000
-* Signed and notarized application
-* Criminal background check
-* Federal tax ID number
-* Disciplinary action history (if applicable)
-* Registered agent information (if applicable)
-* Applicable fees paid
+- The name, contact information, and license number of the compliance officer
+- The name and contact information for each `controlling person|controlling-person`
+- A `Surety bond|surety-bond` in the amount of $25,000
+- Signed and notarized application
+- Criminal background check
+- Federal tax ID number
+- Disciplinary action history (if applicable)
+- Registered agent information (if applicable)
+- Applicable fees paid
 
 :::callout{ showHeader="false" headerText="" showIcon="true" calloutType="informational" }
 

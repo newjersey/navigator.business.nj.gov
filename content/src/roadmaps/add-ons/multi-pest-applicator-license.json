@@ -1,0 +1,16 @@
+{
+  "id": "multi-pest-applicator-license",
+  "displayname": "multi-pest-applicator-license",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 50,
+      "licenseTask": "commercial-pest-applicator-license"
+    },
+    {
+      "step": 4,
+      "weight": 55,
+      "licenseTask": "pest-applicator-business-license"
+    }
+  ]
+}

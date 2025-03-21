@@ -34,15 +34,13 @@ export const UserSupportActionCard = (props: Props): ReactElement => {
         </div>
         <div>
           <Link href={props.buttonLink}>
-            <div>
-              <PrimaryButton
-                isColor={props.primaryButtonColor}
-                isRightMarginRemoved={true}
-                isIntercomEnabled={props.isIntercomEnabled}
-              >
-                {props.buttonText}
-              </PrimaryButton>
-            </div>
+            <PrimaryButton
+              isColor={props.primaryButtonColor}
+              isRightMarginRemoved={true}
+              isIntercomEnabled={props.isIntercomEnabled}
+            >
+              {props.buttonText}
+            </PrimaryButton>
           </Link>
         </div>
       </div>

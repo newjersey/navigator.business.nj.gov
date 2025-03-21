@@ -2,8 +2,8 @@ import { AutosaveSpinner } from "@/components/AutosaveSpinner";
 import { FieldEntryAlert } from "@/components/FieldEntryAlert";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
-import { FormationHelpButton } from "@/components/njwds-extended/FormationHelpButton";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
+import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
@@ -28,7 +28,7 @@ import { FormationStepNames, StepperStep } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getConfigFieldByLegalStructure, scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
 import { Business, FormationFormData, getCurrentBusiness } from "@businessnjgovnavigator/shared";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
 export const BusinessFormationPaginator = (): ReactElement => {
@@ -294,7 +294,8 @@ export const BusinessFormationPaginator = (): ReactElement => {
 
     if (
       newBusiness.formationData.formationResponse?.success &&
-      newBusiness.formationData.formationResponse?.redirect
+      newBusiness.formationData.formationResponse?.redirect &&
+      router
     ) {
       analytics.event.business_formation.submit.go_to_NIC_formation_processing();
       await router.replace(newBusiness.formationData.formationResponse.redirect);
@@ -357,7 +358,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
     return (
       <CtaContainer>
         <ActionBarLayout stackOnLeft={stackOnLeft}>
-          <FormationHelpButton />
+          <LiveChatHelpButton />
           {shouldDisplayPreviousButton() && (
             <div className="margin-top-2 mobile-lg:margin-top-0">
               <SecondaryButton isColor="primary" onClick={onPreviousButtonClick} dataTestId="previous-button">

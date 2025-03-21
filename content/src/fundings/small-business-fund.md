@@ -1,5 +1,4 @@
 ---
-filename: small-business-fund
 name: Small Business Fund
 displayName: small-business-fund
 urlSlug: small-business-fund
@@ -21,7 +20,7 @@ programPurpose: Both
 agency:
   - njeda
 agencyContact: ""
-businessStage: operating
+businessStage: both
 employeesRequired: n/a
 homeBased: yes
 certifications:
@@ -30,8 +29,30 @@ certifications:
 preferenceForOpportunityZone: no
 county:
   - All
-sector: []
+sector:
+  - accommodation-and-food-services
+  - administrative-and-employment-services
+  - agriculture-forestry-fishing-and-hunting
+  - arts-entertainment-and-recreation
+  - clean-energy
+  - construction
+  - digital-and-print-media
+  - educational-services
+  - finance-and-insurance
+  - health-care-and-social-assistance
+  - life-sciences
+  - manufacturing
+  - mining-quarrying-and-oil-and-gas-extraction
+  - offshore-wind
+  - organizational-or-financial-management
+  - other-services
+  - professional-scientific-and-technical-services
+  - real-estate
+  - retail-trade-and-ecommerce
 publishStageArchive: null
+minEmployeesRequired: 1
+maxEmployeesRequired: 50
+priority: true
 ---
 
 ## Eligibility

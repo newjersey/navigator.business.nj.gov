@@ -7,8 +7,6 @@ import { licenseStatusRouterFactory } from "@api/licenseStatusRouter";
 import { selfRegRouterFactory } from "@api/selfRegRouter";
 import { taxDecryptionRouterFactory } from "@api/taxDecryptionRouter";
 import { userRouterFactory } from "@api/userRouter";
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
@@ -39,7 +37,9 @@ import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
 import { WebserviceLicenseStatusClient } from "@client/WebserviceLicenseStatusClient";
 import { WebserviceLicenseStatusProcessorClient } from "@client/WebserviceLicenseStatusProcessorClient";
-import { dynamoDbTranslateConfig } from "@db/config/dynamoDbConfig";
+import { createDynamoDbClient } from "@db/config/dynamoDbConfig";
+import { DynamoBusinessDataClient } from "@db/DynamoBusinessDataClient";
+import { DynamoDataClient } from "@db/DynamoDataClient";
 import { DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import { HealthCheckMethod } from "@domain/types";
 import { updateSidebarCards } from "@domain/updateSidebarCards";
@@ -47,6 +47,7 @@ import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFa
 import { timeStampBusinessSearch } from "@domain/user/timeStampBusinessSearch";
 import { updateLicenseStatusFactory } from "@domain/user/updateLicenseStatusFactory";
 import { updateOperatingPhase } from "@domain/user/updateOperatingPhase";
+import { BUSINESSES_TABLE, DYNAMO_OFFLINE_PORT, IS_DOCKER, IS_OFFLINE, STAGE } from "@functions/config";
 import { setupExpress } from "@libs/express";
 import { LogWriter } from "@libs/logWriter";
 import bodyParser from "body-parser";
@@ -62,33 +63,6 @@ import { taxFilingsInterfaceFactory } from "src/domain/tax-filings/taxFilingsInt
 
 const app = setupExpress();
 
-const IS_OFFLINE = process.env.IS_OFFLINE === "true" || false; // set by serverless-offline
-const IS_DOCKER = process.env.IS_DOCKER === "true" || false; // set in docker-compose
-
-const DYNAMO_OFFLINE_PORT = process.env.DYNAMO_PORT || 8000;
-let dynamoDb: DynamoDBDocumentClient;
-if (IS_OFFLINE) {
-  let dynamoDbEndpoint = "localhost";
-  if (IS_DOCKER) {
-    dynamoDbEndpoint = "dynamodb-local";
-  }
-  dynamoDb = DynamoDBDocumentClient.from(
-    new DynamoDBClient({
-      region: "localhost",
-      endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`,
-    }),
-    dynamoDbTranslateConfig
-  );
-} else {
-  dynamoDb = DynamoDBDocumentClient.from(
-    new DynamoDBClient({
-      region: "us-east-1",
-    }),
-    dynamoDbTranslateConfig
-  );
-}
-
-const STAGE = process.env.STAGE || "local";
 const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
 const dataLogger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
 
@@ -235,7 +209,9 @@ const dynamicsHousingRegistrationStatusClient = DynamicsHousingRegistrationStatu
 });
 
 const BUSINESS_NAME_BASE_URL =
-  process.env.BUSINESS_NAME_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
+  process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
+    ? "http://localhost:9000"
+    : process.env.BUSINESS_NAME_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
 const businessNameClient = ApiBusinessNameClient(BUSINESS_NAME_BASE_URL, logger);
 
 const GOV_DELIVERY_BASE_URL =
@@ -254,10 +230,14 @@ const AIRTABLE_BASE_URL =
 const FORMATION_API_ACCOUNT = process.env.FORMATION_API_ACCOUNT || "";
 const FORMATION_API_KEY = process.env.FORMATION_API_KEY || "";
 const FORMATION_API_BASE_URL =
-  process.env.FORMATION_API_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
+  process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
+    ? "http://localhost:9000"
+    : process.env.FORMATION_API_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
 
 const GOV2GO_REGISTRATION_API_KEY = process.env.GOV2GO_REGISTRATION_API_KEY || "";
-const GOV2GO_REGISTRATION_BASE_URL = process.env.GOV2GO_REGISTRATION_BASE_URL || "";
+const GOV2GO_REGISTRATION_BASE_URL = IS_OFFLINE
+  ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`
+  : process.env.GOV2GO_REGISTRATION_BASE_URL || "";
 
 const AWS_CRYPTO_KEY = process.env.AWS_CRYPTO_KEY || "";
 const AWS_CRYPTO_CONTEXT_STAGE = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
@@ -295,9 +275,11 @@ const airtableUserTestingClient = AirtableUserTestingClient(
   },
   logger
 );
-
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
+const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
 const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, dataLogger);
+const businessesDataClient = DynamoBusinessDataClient(dynamoDb, BUSINESSES_TABLE, dataLogger);
+const dynamoDataClient = DynamoDataClient(userDataClient, businessesDataClient, dataLogger);
 
 const taxFilingInterface = taxFilingsInterfaceFactory(taxFilingClient);
 
@@ -339,21 +321,22 @@ app.use(bodyParser.json({ strict: false }));
 app.use(
   "/api",
   userRouterFactory(
-    userDataClient,
+    dynamoDataClient,
     updateLicenseStatus,
     updateSidebarCards,
     updateOperatingPhase,
     AWSEncryptionDecryptionClient,
-    timeStampToBusinessSearch
+    timeStampToBusinessSearch,
+    logger
   )
 );
 
 app.use(
   "/api/external",
-  externalEndpointRouterFactory(userDataClient, addGovDeliveryNewsletter, addToAirtableUserTesting)
+  externalEndpointRouterFactory(dynamoDataClient, addGovDeliveryNewsletter, addToAirtableUserTesting)
 );
 app.use("/api/guest", guestRouterFactory(timeStampToBusinessSearch));
-app.use("/api", licenseStatusRouterFactory(updateLicenseStatus, userDataClient));
+app.use("/api", licenseStatusRouterFactory(updateLicenseStatus, dynamoDataClient));
 app.use(
   "/api",
   elevatorSafetyRouterFactory(
@@ -364,14 +347,13 @@ app.use(
 );
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
 app.use("/api", housingRouterFactory(dynamicsHousingClient, dynamicsHousingRegistrationStatusClient));
-app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));
-app.use("/api", formationRouterFactory(apiFormationClient, userDataClient, { shouldSaveDocuments }));
+app.use("/api", selfRegRouterFactory(dynamoDataClient, selfRegClient));
+app.use("/api", formationRouterFactory(apiFormationClient, dynamoDataClient, { shouldSaveDocuments }));
 app.use(
   "/api/taxFilings",
-  taxFilingRouterFactory(userDataClient, taxFilingInterface, AWSEncryptionDecryptionClient)
+  taxFilingRouterFactory(dynamoDataClient, taxFilingInterface, AWSEncryptionDecryptionClient)
 );
 app.use("/api", taxDecryptionRouterFactory(AWSEncryptionDecryptionClient));
-
 app.use(
   "/health",
   healthCheckRouterFactory(

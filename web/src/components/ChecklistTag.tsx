@@ -56,9 +56,11 @@ export const ChecklistTag = (props: Props): ReactElement => {
     <div
       className={`${backgroundColor} flex flex-align-items-center padding-y-05 padding-left-1 padding-right-2 radius-md width-full tablet:width-auto`}
     >
-      <Icon className={`${iconColor} usa-icon--size-3`} data-testid={`${iconName}-checklist-tag-icon`}>
-        {iconName}
-      </Icon>
+      <Icon
+        className={`${iconColor} usa-icon--size-3`}
+        data-testid={`${iconName}-checklist-tag-icon`}
+        iconName={iconName}
+      />
       <div className="text-base-darkest margin-left-1">{statusText}</div>
     </div>
   );

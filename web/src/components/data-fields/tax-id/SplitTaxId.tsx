@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { DataFieldProps } from "@/components/data-fields/DataField";
-import { taxIdFormContext, taxIdFormContextErrorMap } from "@/components/data-fields/tax-id/TaxIdFormContext";
+import { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
+import { TaxIdFormContext, taxIdFormContextErrorMap } from "@/components/data-fields/tax-id/TaxIdFormContext";
 import { TaxIdDisplayStatus } from "@/components/data-fields/tax-id/TaxIdHelpers";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ConfigType } from "@/contexts/configContext";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
@@ -16,7 +16,8 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext, useRef, useState } from "react";
 
-interface Props extends Omit<DataFieldProps, "fieldName" | "handleChange" | "onValidation" | "inputWidth"> {
+interface Props
+  extends Omit<ProfileDataFieldProps, "fieldName" | "handleChange" | "onValidation" | "inputWidth"> {
   handleChangeOverride?: (value: string) => void;
   getShowHideToggleButton: (toggleFunc?: (taxId: string) => void) => ReactElement;
   taxIdDisplayStatus: TaxIdDisplayStatus;
@@ -40,7 +41,7 @@ export const SplitTaxId = ({
 
   const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     fieldName,
-    ProfileFormContext
+    DataFormErrorMapContext
   );
 
   RegisterForOnSubmit(
@@ -87,13 +88,13 @@ export const SplitTaxId = ({
   };
 
   return (
-    <taxIdFormContext.Provider value={formContextState}>
+    <TaxIdFormContext.Provider value={formContextState}>
       <div className="grid-row">
         <div className="grid-col-7 tablet:grid-col-7">
           <GenericTextField
             ref={taxIdBoxRef}
             value={taxIdValue}
-            formContext={taxIdFormContext}
+            formContext={TaxIdFormContext}
             fieldOptions={{
               FormHelperTextProps: { sx: { whiteSpace: "nowrap" } },
             }}
@@ -119,7 +120,7 @@ export const SplitTaxId = ({
             inputWidth={"full"}
             ref={locationBoxRef}
             value={locationValue}
-            formContext={taxIdFormContext}
+            formContext={TaxIdFormContext}
             className={"grid-col flex-fill"}
             error={isFormFieldInvalid}
             fieldName={"taxIdLocation"}
@@ -142,6 +143,6 @@ export const SplitTaxId = ({
           </div>
         </div>
       </div>
-    </taxIdFormContext.Provider>
+    </TaxIdFormContext.Provider>
   );
 };

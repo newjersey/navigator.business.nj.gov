@@ -1,6 +1,6 @@
 ---
+licenseName: ""
 id: cosmetology-school-license
-filename: cosmetology-school-license
 displayname: cosmetology-school-license
 urlSlug: cosmetology-school-license
 name: Get Your Cosmetology School License
@@ -13,7 +13,6 @@ callToActionLink: https://www.njconsumeraffairs.gov/cos/Applications/Initial-App
 licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Cosmetology and Hairstyling
-licenseName: ""
 divisionPhone: (973) 504-6400
 webflowId: 64ca743a83dad99752b4e0df
 ---
@@ -25,9 +24,9 @@ webflowId: 64ca743a83dad99752b4e0df
 
 ## Application Requirements
 
-- Letter of reference with the name and address of one person who can certify the school administrator's business experience
-- Supervising teacher with at least two years of experience as a licensed teacher
-- Copy of an employment contract between the school and the supervising teacher (one-year minimum)
+- Letter of reference with the name and address of 1 person who can certify the school administrator's business experience
+- Supervising teacher with at least 2 years of experience as a licensed teacher
+- Copy of an employment contract between the school and the supervising teacher (1-year minimum)
 - Current resume of the supervising teacher
 - Letter of reference for the supervising teacher
 - Applicable fees paid

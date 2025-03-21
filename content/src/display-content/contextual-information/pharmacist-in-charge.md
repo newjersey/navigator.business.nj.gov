@@ -1,6 +1,5 @@
 ---
-slug: pharmacist-in-charge
-filename: pharmacist-in-charge
+id: pharmacist-in-charge
 displayname: pharmacist-in-charge
 header: Pharmacist In Charge
 ---

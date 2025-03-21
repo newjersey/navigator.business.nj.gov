@@ -12,17 +12,17 @@ import { mockPush } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
-  FormationFormData,
-  ProfileData,
-  PublicFilingLegalType,
   businessStructureTaskId,
   castPublicFilingLegalTypeToFormationType,
   defaultDateFormat,
+  FormationFormData,
   generateBusiness,
   generateFormationFormData,
   generateMunicipality,
   getCurrentDate,
   getCurrentDateFormatted,
+  ProfileData,
+  PublicFilingLegalType,
   randomElementFromArray,
   randomPublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
@@ -45,7 +45,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
@@ -243,9 +243,19 @@ describe("Formation - BusinessStep", () => {
     it("keeps business purpose closed by default", async () => {
       await getPageHelper({}, { businessPurpose: "" });
       expect(screen.getByText(Config.formation.fields.businessPurpose.label)).toBeInTheDocument();
-      expect(screen.getByText(Config.formation.fields.businessPurpose.addButtonText)).toBeInTheDocument();
-      expect(screen.queryByLabelText("remove business purpose")).not.toBeInTheDocument();
-      expect(screen.queryByLabelText("Business purpose")).not.toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).getByText(
+          Config.formation.fields.businessPurpose.addButtonText
+        )
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).queryByText(
+          Config.formation.general.removeSectionText
+        )
+      ).not.toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).queryByLabelText("Business purpose")
+      ).not.toBeInTheDocument();
     });
 
     it("shows business purpose open if exists", async () => {
@@ -253,23 +263,45 @@ describe("Formation - BusinessStep", () => {
       expect(
         screen.queryByText(Config.formation.fields.businessPurpose.addButtonText)
       ).not.toBeInTheDocument();
-      expect(screen.getByLabelText("remove business purpose")).toBeInTheDocument();
-      expect(screen.getByLabelText("Business purpose")).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).getByText(
+          Config.formation.general.removeSectionText
+        )
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).getByLabelText("Business purpose")
+      ).toBeInTheDocument();
     });
 
     it("opens business purpose when Add button clicked", async () => {
       await getPageHelper({}, { businessPurpose: "" });
-      fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
+      fireEvent.click(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).getByText(
+          Config.formation.fields.businessPurpose.addButtonText
+        )
+      );
       expect(
-        screen.queryByText(Config.formation.fields.businessPurpose.addButtonText)
+        within(screen.getByTestId("formation-text-box-businessPurpose")).queryByText(
+          Config.formation.fields.businessPurpose.addButtonText
+        )
       ).not.toBeInTheDocument();
-      expect(screen.getByLabelText("remove business purpose")).toBeInTheDocument();
-      expect(screen.getByLabelText("Business purpose")).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).getByText(
+          Config.formation.general.removeSectionText
+        )
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).getByLabelText("Business purpose")
+      ).toBeInTheDocument();
     });
 
     it("removes business purpose when Remove button clicked", async () => {
       const page = await getPageHelper({}, { businessPurpose: "some purpose" });
-      fireEvent.click(screen.getByLabelText("remove business purpose"));
+      fireEvent.click(
+        within(screen.getByTestId("formation-text-box-businessPurpose")).getByText(
+          Config.formation.general.removeSectionText
+        )
+      );
       await page.submitBusinessStep();
       expect(currentBusiness().formationData.formationFormData.businessPurpose).toEqual("");
     });
@@ -304,49 +336,99 @@ describe("Formation - BusinessStep", () => {
         },
         { additionalProvisions: [] }
       );
-      expect(screen.getByText(Config.formation.fields.additionalProvisions.label)).toBeInTheDocument();
       expect(
-        screen.getByText(Config.formation.fields.additionalProvisions.addButtonText)
+        within(screen.getByTestId("additional-provisions")).getByText(
+          Config.formation.fields.additionalProvisions.label
+        )
       ).toBeInTheDocument();
-      expect(screen.queryByLabelText("remove provision")).not.toBeInTheDocument();
-      expect(screen.queryByLabelText("provision 0")).not.toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).getByText(
+          Config.formation.fields.additionalProvisions.addButtonText
+        )
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).queryByText(
+          Config.formation.general.removeSectionText
+        )
+      ).not.toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).queryByLabelText("provision 0")
+      ).not.toBeInTheDocument();
     });
 
     it("keeps provisions closed by default when page loads", async () => {
       await getPageHelper({}, { additionalProvisions: [] });
-      expect(screen.getByText(Config.formation.fields.additionalProvisions.label)).toBeInTheDocument();
       expect(
-        screen.getByText(Config.formation.fields.additionalProvisions.addButtonText)
+        within(screen.getByTestId("additional-provisions")).getByText(
+          Config.formation.fields.additionalProvisions.label
+        )
       ).toBeInTheDocument();
-      expect(screen.queryByLabelText("remove provision")).not.toBeInTheDocument();
-      expect(screen.queryByLabelText("provision 0")).not.toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).getByText(
+          Config.formation.fields.additionalProvisions.addButtonText
+        )
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).queryByText(
+          Config.formation.general.removeSectionText
+        )
+      ).not.toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).queryByLabelText("provision 0")
+      ).not.toBeInTheDocument();
     });
 
     it("shows provisions open if exists", async () => {
       await getPageHelper({}, { additionalProvisions: ["provision1", "provision2"] });
       expect(
-        screen.queryByText(Config.formation.fields.additionalProvisions.addButtonText)
+        within(screen.getByTestId("additional-provisions")).queryByText(
+          Config.formation.fields.additionalProvisions.addButtonText
+        )
       ).not.toBeInTheDocument();
-      expect(screen.queryAllByLabelText("remove provision")).toHaveLength(2);
-      expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
-      expect(screen.getByLabelText("Provisions 1")).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).queryAllByText(
+          Config.formation.general.removeSectionText
+        )
+      ).toHaveLength(2);
+      expect(
+        within(screen.getByTestId("additional-provisions")).getByLabelText("Provisions 0")
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).getByLabelText("Provisions 1")
+      ).toBeInTheDocument();
     });
 
     it("opens provisions when Add button clicked", async () => {
       await getPageHelper({}, { additionalProvisions: [] });
-      fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addButtonText));
+      fireEvent.click(
+        within(screen.getByTestId("additional-provisions")).getByText(
+          Config.formation.fields.additionalProvisions.addButtonText
+        )
+      );
       expect(
-        screen.queryByText(Config.formation.fields.additionalProvisions.addButtonText)
+        within(screen.getByTestId("additional-provisions")).queryByText(
+          Config.formation.fields.additionalProvisions.addButtonText
+        )
       ).not.toBeInTheDocument();
-      expect(screen.getByLabelText("remove provision")).toBeInTheDocument();
-      expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).getByText(
+          Config.formation.general.removeSectionText
+        )
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("additional-provisions")).getByLabelText("Provisions 0")
+      ).toBeInTheDocument();
     });
 
     it("adds more provisions when Add More button clicked", async () => {
       await getPageHelper({}, { additionalProvisions: [] });
       fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addButtonText));
       fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText));
-      expect(screen.queryAllByLabelText("remove provision")).toHaveLength(2);
+      expect(
+        within(screen.getByTestId("additional-provisions")).queryAllByText(
+          Config.formation.general.removeSectionText
+        )
+      ).toHaveLength(2);
       expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
       expect(screen.getByLabelText("Provisions 1")).toBeInTheDocument();
     });
@@ -358,9 +440,14 @@ describe("Formation - BusinessStep", () => {
           additionalProvisions: ["provision1", "provision2", "provision3"],
         }
       );
-      const removeProvision2Button = screen.getAllByLabelText("remove provision")[1];
+
+      const removeProvision2Button = within(screen.getByTestId("additional-provisions")).getAllByText(
+        Config.formation.general.removeSectionText
+      )[1];
+
       fireEvent.click(removeProvision2Button);
       await page.submitBusinessStep();
+
       expect(currentBusiness().formationData.formationFormData.additionalProvisions).toEqual([
         "provision1",
         "provision3",
@@ -489,77 +576,91 @@ describe("Formation - BusinessStep", () => {
       });
     }
 
-    describe("Business Designator Options based on Will Practice Law Answer", () => {
-      it.each(corpLegalStructures)(
-        "Shows PA and PC options for Business Designator when Will You Practice Law is Yes",
-        async (legalStructureId) => {
-          await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: true });
+    describe("Business Designator", () => {
+      describe("Business Designator secondary label foreign corporation", () => {
+        it.each(["c-corporation", "s-corporation", "nonprofit"])(
+          `Shows secondary label foreign corporation when persona is foreign and legal structure is %s`,
+          async (legalStructureId) => {
+            await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
+            expect(
+              screen.getByText(Config.formation.fields.businessSuffix.labelSecondaryTextForeignCorporation)
+            ).toBeInTheDocument();
+          }
+        );
+      });
 
-          expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
-          expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
+      describe("Business Designator Options based on Will Practice Law Answer", () => {
+        it.each(corpLegalStructures)(
+          "Shows PA and PC options for Business Designator when Will You Practice Law is Yes for %s",
+          async (legalStructureId) => {
+            await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: true });
 
-          await userEvent.click(screen.getByTestId("business-suffix-main"));
-          expect(screen.getByText("P.C.")).toBeInTheDocument();
-          expect(screen.getByText("P.A.")).toBeInTheDocument();
-        }
-      );
+            expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
+            expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
 
-      it.each(corpLegalStructures)(
-        "Does not show PA and PC options for Business Designator when Will You Practice Law is No",
-        async (legalStructureId) => {
-          await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: false });
-          expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
-          expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
+            await userEvent.click(screen.getByTestId("business-suffix-main"));
+            expect(screen.getByText("P.C.")).toBeInTheDocument();
+            expect(screen.getByText("P.A.")).toBeInTheDocument();
+          }
+        );
 
-          await userEvent.click(screen.getByTestId("business-suffix-main"));
+        it.each(corpLegalStructures)(
+          "Does not show PA and PC options for Business Designator when Will You Practice Law is No for %s",
+          async (legalStructureId) => {
+            await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: false });
+            expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
+            expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
 
-          expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
-          expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
-        }
-      );
+            await userEvent.click(screen.getByTestId("business-suffix-main"));
 
-      it.each(corpLegalStructures)(
-        "Does not show PA and PC options for Business Designator when Will You Practice Law is Undefined",
-        async (legalStructureId) => {
-          await getPageHelper(
-            { businessPersona: "FOREIGN", legalStructureId },
-            { willPracticeLaw: undefined }
-          );
-          expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
-          expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
+            expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
+            expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
+          }
+        );
 
-          await userEvent.click(screen.getByTestId("business-suffix-main"));
+        it.each(corpLegalStructures)(
+          "Does not show PA and PC options for Business Designator when Will You Practice Law is Undefined for %s",
+          async (legalStructureId) => {
+            await getPageHelper(
+              { businessPersona: "FOREIGN", legalStructureId },
+              { willPracticeLaw: undefined }
+            );
+            expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
+            expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
 
-          expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
-          expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
-        }
-      );
+            await userEvent.click(screen.getByTestId("business-suffix-main"));
 
-      it.each(corpLegalStructures)(
-        "Displays an Alert when selecting an option for the Will you practice law question to tell the user Business Designator options have changed",
-        async (legalStructureId) => {
-          await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
-          expect(
-            screen.queryByText(Config.formation.fields.businessSuffix.optionsUpdatedSnackbarAlert)
-          ).not.toBeInTheDocument();
-          fireEvent.click(screen.getByTestId("willPracticeLaw-true"));
-          expect(
-            screen.getByText(Config.formation.fields.businessSuffix.optionsUpdatedSnackbarAlert)
-          ).toBeInTheDocument();
-        }
-      );
+            expect(screen.queryByText("P.C.")).not.toBeInTheDocument();
+            expect(screen.queryByText("P.A.")).not.toBeInTheDocument();
+          }
+        );
 
-      it.each(corpLegalStructures)(
-        "clears Business Designator if Will you practice law question is changed and Business designator is selected",
-        async (legalStructureId) => {
-          await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: true });
-          await userEvent.click(screen.getByTestId("business-suffix-main"));
-          await userEvent.click(screen.getByText("P.C."));
-          expect(screen.getByTestId("business-suffix-main")).toHaveTextContent("P.C.");
-          fireEvent.click(screen.getByTestId("willPracticeLaw-false"));
-          expect(screen.getByTestId("business-suffix-main")).toBeEmptyDOMElement();
-        }
-      );
+        it.each(corpLegalStructures)(
+          "Displays an Alert when selecting an option for the Will you practice law question to tell the user Business Designator options have changed for %s",
+          async (legalStructureId) => {
+            await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
+            expect(
+              screen.queryByText(Config.formation.fields.businessSuffix.optionsUpdatedSnackbarAlert)
+            ).not.toBeInTheDocument();
+            fireEvent.click(screen.getByTestId("willPracticeLaw-true"));
+            expect(
+              screen.getByText(Config.formation.fields.businessSuffix.optionsUpdatedSnackbarAlert)
+            ).toBeInTheDocument();
+          }
+        );
+
+        it.each(corpLegalStructures)(
+          "clears Business Designator if Will you practice law question is changed and Business designator is selected for %s",
+          async (legalStructureId) => {
+            await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { willPracticeLaw: true });
+            await userEvent.click(screen.getByTestId("business-suffix-main"));
+            await userEvent.click(screen.getByText("P.C."));
+            expect(screen.getByTestId("business-suffix-main")).toHaveTextContent("P.C.");
+            fireEvent.click(screen.getByTestId("willPracticeLaw-false"));
+            expect(screen.getByTestId("business-suffix-main")).toBeEmptyDOMElement();
+          }
+        );
+      });
     });
   });
 
@@ -992,20 +1093,22 @@ describe("Formation - BusinessStep", () => {
     it("displays Business Suffix error label when Business Suffix is undefined", async () => {
       const page = await getPageHelper({}, { businessSuffix: undefined });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.businessSuffix.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.businessSuffix.label
+      );
     });
 
     it("displays Withdrawals error label when Withdrawals is empty", async () => {
       const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { withdrawals: "" });
       await attemptApiSubmission(page);
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.withdrawals.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.withdrawals.label);
     });
 
     it("displays Dissolution error label when Dissolution is empty", async () => {
       const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { dissolution: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.dissolution.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.dissolution.label);
     });
 
     it("displays Combined Investment error label when Combined Investment is empty", async () => {
@@ -1014,7 +1117,9 @@ describe("Formation - BusinessStep", () => {
         { combinedInvestment: "" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.combinedInvestment.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.combinedInvestment.label
+      );
     });
 
     it("displays error label when Partnership Rights can create Limited Partner is undefined", async () => {
@@ -1036,7 +1141,7 @@ describe("Formation - BusinessStep", () => {
       );
       fireEvent.click(screen.getByTestId("canCreateLimitedPartner-true"));
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.createLimitedPartnerTerms.label
       );
     });
@@ -1059,7 +1164,7 @@ describe("Formation - BusinessStep", () => {
       );
       fireEvent.click(screen.getByTestId("canMakeDistribution-true"));
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.makeDistributionTerms.label
       );
     });
@@ -1082,13 +1187,17 @@ describe("Formation - BusinessStep", () => {
       );
       fireEvent.click(screen.getByTestId("canGetDistribution-true"));
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.getDistributionTerms.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.getDistributionTerms.label
+      );
     });
 
     it("displays error label when Total Shares is empty", async () => {
       const page = await getPageHelper({ legalStructureId: "c-corporation" }, { businessTotalStock: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.businessTotalStock.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.businessTotalStock.label
+      );
       expect(screen.getByText(Config.formation.fields.businessTotalStock.error)).toBeInTheDocument();
     });
 
@@ -1098,7 +1207,7 @@ describe("Formation - BusinessStep", () => {
         { foreignDateOfFormation: undefined }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.foreignDateOfFormation.label
       );
       expect(screen.getByText(Config.formation.fields.foreignDateOfFormation.error)).toBeInTheDocument();
@@ -1110,7 +1219,7 @@ describe("Formation - BusinessStep", () => {
         { foreignStateOfFormation: undefined }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.foreignStateOfFormation.label
       );
       expect(screen.getByText(Config.formation.fields.foreignStateOfFormation.error)).toBeInTheDocument();
@@ -1119,13 +1228,15 @@ describe("Formation - BusinessStep", () => {
     it("displays error label when Address line1 is empty", async () => {
       const page = await getPageHelper({ businessPersona: "FOREIGN" }, { addressLine1: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressLine1.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.addressLine1.label);
     });
 
     it("displays error label when Address zip code is empty", async () => {
       const page = await getPageHelper({ businessPersona: "FOREIGN" }, { addressZipCode: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressZipCode.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.addressZipCode.label
+      );
     });
 
     it("displays error label when Address province is undefined", async () => {
@@ -1134,7 +1245,9 @@ describe("Formation - BusinessStep", () => {
         { addressProvince: undefined, businessLocationType: "INTL" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressProvince.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.addressProvince.label
+      );
     });
 
     it("displays error label when Address country is undefined", async () => {
@@ -1143,7 +1256,9 @@ describe("Formation - BusinessStep", () => {
         { addressCountry: undefined, businessLocationType: "INTL" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressCountry.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.addressCountry.label
+      );
     });
 
     it("displays error label when Address city is undefined", async () => {
@@ -1152,7 +1267,7 @@ describe("Formation - BusinessStep", () => {
         { addressCity: undefined, businessLocationType: "INTL" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressCity.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.addressCity.label);
     });
 
     it("displays error label when Address state is undefined", async () => {
@@ -1161,13 +1276,15 @@ describe("Formation - BusinessStep", () => {
         { addressState: undefined, businessLocationType: "US" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressState.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.addressState.label);
     });
 
     it("displays error label when isVeteranNonprofit is undefined", async () => {
       const page = await getPageHelper({ legalStructureId: "nonprofit" }, { isVeteranNonprofit: undefined });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.isVeteranNonprofit.label);
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
+        Config.formation.fields.isVeteranNonprofit.label
+      );
       expect(screen.getByText(Config.formation.fields.isVeteranNonprofit.error)).toBeInTheDocument();
     });
 
@@ -1177,7 +1294,7 @@ describe("Formation - BusinessStep", () => {
         { hasNonprofitBoardMembers: undefined, legalType: "nonprofit" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.hasNonprofitBoardMembers.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
@@ -1193,7 +1310,7 @@ describe("Formation - BusinessStep", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.nonprofitBoardMemberQualificationsSpecified.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
@@ -1210,7 +1327,7 @@ describe("Formation - BusinessStep", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.nonprofitBoardMemberQualificationsTerms.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
@@ -1226,7 +1343,7 @@ describe("Formation - BusinessStep", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.nonprofitBoardMemberRightsSpecified.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
@@ -1243,7 +1360,7 @@ describe("Formation - BusinessStep", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.nonprofitBoardMemberRightsSpecified.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
@@ -1259,7 +1376,7 @@ describe("Formation - BusinessStep", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.nonprofitTrusteesMethodSpecified.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
@@ -1276,7 +1393,7 @@ describe("Formation - BusinessStep", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.nonprofitTrusteesMethodTerms.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
@@ -1292,7 +1409,7 @@ describe("Formation - BusinessStep", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.nonprofitAssetDistributionSpecified.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
@@ -1309,7 +1426,7 @@ describe("Formation - BusinessStep", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
+      expect(screen.getByTestId("alert-error")).toHaveTextContent(
         Config.formation.fields.nonprofitAssetDistributionTerms.label
       );
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();

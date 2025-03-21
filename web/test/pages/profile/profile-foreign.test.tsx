@@ -11,6 +11,7 @@ import {
   defaultDateFormat,
   emptyAddressData,
   emptyIndustrySpecificData,
+  ForeignBusinessTypeId,
   FormationData,
   generateFormationFormData,
   generateMunicipality,
@@ -30,6 +31,7 @@ import {
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { industryIdsWithSingleRequiredEssentialQuestion } from "@/test/pages/onboarding/helpers-onboarding";
 import {
+  chooseTab,
   clickBack,
   clickSave,
   expectLocationNotSavedAndError,
@@ -43,7 +45,7 @@ import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -213,6 +215,12 @@ describe("profile-foreign", () => {
       ).toBeInTheDocument();
     });
 
+    it("displays the tax pin field", () => {
+      renderPage({ business: nexusForeignBusinessProfile({}) });
+      chooseTab("numbers");
+      expect(screen.getByText(Config.profileDefaults.fields.taxPin.default.header)).toBeInTheDocument();
+    });
+
     it("displays Not Entered when the user hasn't entered a business name yet", () => {
       renderPage({
         business: generateBusinessForProfile({
@@ -280,6 +288,59 @@ describe("profile-foreign", () => {
       expect(
         screen.queryByText(Config.profileDefaults.fields.nexusDbaName.default.header)
       ).not.toBeInTheDocument();
+    });
+
+    it("renders locked profile address fields when business has formed", () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+        }),
+        formationData: generateFormationData({
+          completedFilingPayment: true,
+          formationFormData: generateFormationFormData({
+            addressLine1: "123 Testing Road",
+            addressLine2: "",
+            addressCity: "New York",
+            addressState: {
+              name: "New York",
+              shortCode: "NY",
+            },
+            addressZipCode: "10030",
+            businessLocationType: "US",
+          }),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.getByTestId("locked-profileAddressLine1")).toBeInTheDocument();
+      expect(screen.getByTestId("locked-profileAddressCityStateZip")).toBeInTheDocument();
+    });
+
+    it("renders editable profile address fields when business has not been formed", () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+        }),
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+          formationFormData: generateFormationFormData({
+            addressLine1: "123 Testing Road",
+            addressLine2: "",
+            addressMunicipality: generateMunicipality({ displayName: "Allendale" }),
+            addressCity: "New York",
+            addressState: {
+              name: "New York",
+              shortCode: "NY",
+            },
+            addressZipCode: "10030",
+            businessLocationType: "US",
+          }),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.queryByTestId("locked-profileAddressLine1")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("locked-profileAddressCityStateZip")).not.toBeInTheDocument();
     });
 
     describe("location", () => {
@@ -496,32 +557,37 @@ describe("profile-foreign", () => {
     });
   });
 
-  describe("Remote Worker", () => {
-    const foreignRemoteWorkerProfile = generateBusinessForProfile({
-      profileData: generateProfileData({
-        businessPersona: "FOREIGN",
-        foreignBusinessTypeIds: ["employeesInNJ"],
-      }),
-    });
+  describe("Remote Worker and Seller", () => {
+    it.each(["employeesInNJ", "revenueInNJ", "transactionsInNJ"])(
+      "renders the business name field for %s",
+      (foreignBusinessTypeId) => {
+        renderPage({
+          business: generateBusinessForProfile({
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              foreignBusinessTypeIds: [foreignBusinessTypeId as ForeignBusinessTypeId],
+            }),
+          }),
+        });
+        expect(screen.getByTestId("businessName")).toBeInTheDocument();
+      }
+    );
 
-    it("renders the business name field for remote worker", () => {
-      renderPage({ business: foreignRemoteWorkerProfile });
-      expect(screen.getByTestId("businessName")).toBeInTheDocument();
-    });
-  });
-
-  describe("Remote Seller", () => {
-    const foreignRemoteSellerProfile = generateBusinessForProfile({
-      profileData: generateProfileData({
-        businessPersona: "FOREIGN",
-        foreignBusinessTypeIds: ["revenueInNJ", "transactionsInNJ"],
-      }),
-    });
-
-    it("renders the business name field for remote seller", () => {
-      renderPage({ business: foreignRemoteSellerProfile });
-      expect(screen.getByTestId("businessName")).toBeInTheDocument();
-    });
+    it.each(["employeesInNJ", "revenueInNJ", "transactionsInNJ"])(
+      "renders the tax pin field for %s",
+      (foreignBusinessTypeId) => {
+        renderPage({
+          business: generateBusinessForProfile({
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              foreignBusinessTypeIds: [foreignBusinessTypeId as ForeignBusinessTypeId],
+            }),
+          }),
+        });
+        chooseTab("numbers");
+        expect(screen.getByText(Config.profileDefaults.fields.taxPin.default.header)).toBeInTheDocument();
+      }
+    );
   });
 
   describe("non essential questions", () => {

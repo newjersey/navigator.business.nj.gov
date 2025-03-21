@@ -14,7 +14,6 @@ import {
   Updates,
 } from "@/components/navbar/shared-submenu-components";
 import { getMergedConfig } from "@/contexts/configContext";
-import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSignOut } from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
@@ -25,7 +24,7 @@ import { generateBusiness, generateProfileData, generateUserData } from "@busine
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { ReactNode } from "react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/auth/signinHelper", () => {
   const originalSigninHelper = jest.requireActual("@/lib/auth/signinHelper");
@@ -34,10 +33,7 @@ jest.mock("@/lib/auth/signinHelper", () => {
     onSignOut: jest.fn(),
   };
 });
-jest.mock("@/lib/auth/sessionHelper", () => ({
-  triggerSignIn: jest.fn(),
-}));
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
@@ -48,9 +44,6 @@ jest.mock(
       children
 );
 
-jest.mock("@/lib/auth/sessionHelper", () => ({
-  triggerSignIn: jest.fn(),
-}));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 function setupMockAnalytics(): typeof analytics {
@@ -107,7 +100,7 @@ describe("shared-submenu-components", () => {
     render(<LoginMenuItem />);
     expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.navigationDefaults.logInButton));
-    expect(triggerSignIn).toHaveBeenCalled();
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.login);
   });
 
   it("renders LogoutMenuItem and it navigates correclty onClick", () => {

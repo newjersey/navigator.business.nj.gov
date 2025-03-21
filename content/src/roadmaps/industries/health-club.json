@@ -51,7 +51,8 @@
   "name": "Health Club",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "electrologist"
+    "electrologist",
+    "business-vehicle-title-reg"
   ],
   "displayname": "health-club",
   "industryOnboardingQuestions": {
@@ -59,7 +60,7 @@
     "canBeReseller": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "health spa, strength training and conditioning, athletic club, boxing club, fitness center, gym, swim club, sports club, exercise",
+  "additionalSearchTerms": "health spa, strength training and conditioning, athletic club, boxing club, fitness center, gym, swim club, sports club, exercise, electrolysis, electrologist",
   "id": "health-club",
   "description": "A gym, spa, or similar business providing services or facilities for physical fitness or physical well-being",
   "webflowId": "660d922207f6969e35490f1a"

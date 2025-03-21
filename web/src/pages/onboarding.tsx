@@ -8,9 +8,9 @@ import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonG
 import { onboardingFlows as onboardingFlowObject } from "@/components/onboarding/OnboardingFlows";
 import { ReturnToPreviousBusinessBar } from "@/components/onboarding/ReturnToPreviousBusinessBar";
 import { AuthContext } from "@/contexts/authContext";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { MediaQueries } from "@/lib/PageSizes";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -30,7 +30,6 @@ import {
   Page,
   ProfileError,
   UpdateQueue,
-  createProfileFieldErrorMap,
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
@@ -38,7 +37,7 @@ import {
   setAnalyticsDimensions,
   setRegistrationDimension,
 } from "@/lib/utils/analytics-helpers";
-import { OnboardingStatusLookup, getFlow, scrollToTop } from "@/lib/utils/helpers";
+import { getFlow, OnboardingStatusLookup, scrollToTop } from "@/lib/utils/helpers";
 import {
   evalHeaderStepsTemplate,
   flowQueryParamIsValid,
@@ -47,29 +46,29 @@ import {
   industryQueryParamIsValid,
   mapFlowQueryToPersona,
   pageQueryParamisValid,
+  sectorQueryParamIsValid,
 } from "@/lib/utils/onboardingPageHelpers";
-import { determineForeignBusinessType } from "@businessnjgovnavigator/shared";
 import {
+  Business,
+  businessStructureTaskId,
+  createEmptyProfileData,
+  createEmptyUser,
+  createEmptyUserData,
+  determineForeignBusinessType,
+  emptyProfileData,
+  getCurrentBusiness,
+  isRemoteWorkerOrSellerBusiness,
   LookupMunicipalityByName,
   Municipality,
   OperatingPhaseId,
   ProfileData,
-  TaskProgress,
   UserData,
-  createEmptyProfileData,
-  createEmptyUserData,
-} from "@businessnjgovnavigator/shared/";
-import { createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
-import { isRemoteWorkerOrSellerBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
-import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
-import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
-import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { Business } from "@businessnjgovnavigator/shared/userData";
+} from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
+import { useRouter } from "next/compat/router";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { ReactElement, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 
@@ -106,7 +105,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     FormFuncWrapper,
     onSubmit,
     state: formContextState,
-  } = useFormContextHelper(createProfileFieldErrorMap<OnboardingErrors>());
+  } = useFormContextHelper(createDataFormErrorMap<OnboardingErrors>());
 
   const onboardingFlows = useMemo(() => {
     let onboardingFlows = onboardingFlowObject;
@@ -152,7 +151,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const routeToPage = useCallback(
     (page: number) => {
-      return routeShallowWithQuery(router, "page", page);
+      return router && routeShallowWithQuery(router, "page", page);
     },
     [router]
   );
@@ -172,7 +171,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   useEffect(() => {
     (async (): Promise<void> => {
       if (
-        !router.isReady ||
+        !router?.isReady ||
         hasHandledRouting.current ||
         !state.activeUser ||
         state.isAuthenticated === IsAuthenticated.UNKNOWN ||
@@ -217,11 +216,12 @@ const OnboardingPage = (props: Props): ReactElement => {
 
       const currentBusiness = currentUserData.businesses[currentUserData.currentBusinessId];
       if (currentBusiness.onboardingFormProgress === "COMPLETED") {
-        await router.replace(ROUTES.profile);
+        await router.replace(ROUTES.dashboard);
         return;
       } else {
         const queryPage = Number(router.query[QUERIES.page]);
         const queryIndustryId = router.query[QUERIES.industry] as string | undefined;
+        const querySectorId = router.query[QUERIES.sector] as string | undefined;
         const businessMunicipality = router.query[QUERIES.businessMunicipality] as string | undefined;
         const queryFlow = router.query[QUERIES.flow] as string;
         const utmSource = router.query[QUERIES.utmSource] as string | undefined;
@@ -261,6 +261,17 @@ const OnboardingPage = (props: Props): ReactElement => {
           } else {
             completeOnboarding(newProfileData, localUpdateQueue);
           }
+        } else if (querySectorId && sectorQueryParamIsValid(querySectorId)) {
+          const newProfileData: ProfileData = {
+            ...currentBusiness.profileData,
+            businessPersona: "OWNING",
+            sectorId: querySectorId,
+            operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
+          };
+
+          setProfileData(newProfileData);
+          localUpdateQueue?.queueProfileData(newProfileData);
+          completeOnboarding(newProfileData, localUpdateQueue);
         } else if (pageQueryParamisValid(onboardingFlows, currentBusiness, queryPage)) {
           setPage({ current: queryPage, previous: queryPage - 1 });
         } else if (flowQueryParamIsValid(queryFlow)) {
@@ -272,7 +283,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.isReady, state.activeUser, state.isAuthenticated, hasCompletedFetch]);
+  }, [router, state.activeUser, state.isAuthenticated, hasCompletedFetch]);
 
   const setBusinessPersonaAndRouteToPage = async (
     flow: string,
@@ -291,7 +302,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     } else {
       setPage({ current: 2, previous: 1 });
     }
-    await updateQueue?.queueProfileData(newProfileData);
+    updateQueue?.queueProfileData(newProfileData);
   };
 
   const completeOnboarding = async (
@@ -301,50 +312,36 @@ const OnboardingPage = (props: Props): ReactElement => {
     if (!updateQueue) return;
 
     setRegistrationDimension("Onboarded Guest");
-    if (isAdditionalBusiness) {
-      analytics.event.onboarding_last_step_save_additional_business_button.click.finish_additional_business_onboarding();
-    } else {
-      analytics.event.onboarding_last_step.submit.finish_onboarding();
-    }
 
-    const isRemoteSellerWorker = isRemoteWorkerOrSellerBusiness({
+    isAdditionalBusiness
+      ? analytics.event.onboarding_last_step_save_additional_business_button.click.finish_additional_business_onboarding()
+      : analytics.event.onboarding_last_step.submit.finish_onboarding();
+
+    updateQueue.queueBusiness({
       ...updateQueue.currentBusiness(),
       profileData: newProfileData,
+      onboardingFormProgress: "COMPLETED",
     });
 
-    let newUserData: UserData = {
-      ...updateQueue.current(),
-      businesses: {
-        ...updateQueue.current().businesses,
-        [updateQueue.current().currentBusinessId]: {
-          ...updateQueue.currentBusiness(),
-          profileData: {
-            ...newProfileData,
-            operatingPhase: isRemoteSellerWorker
-              ? OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE
-              : newProfileData.operatingPhase,
-          },
-          onboardingFormProgress: "COMPLETED",
-        },
-      },
-    };
-
-    newUserData = await api.postGetAnnualFilings(newUserData);
-    updateQueue.queue(newUserData);
-
-    if (newProfileData.legalStructureId) {
-      const completed: TaskProgress = "COMPLETED";
-      updateQueue.queueTaskProgress({ [businessStructureTaskId]: completed });
+    if (isRemoteWorkerOrSellerBusiness(updateQueue.currentBusiness()) && OperatingPhaseId.GUEST_MODE) {
+      updateQueue.queueProfileData({ operatingPhase: OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE });
     }
 
+    if (updateQueue.currentBusiness().profileData.legalStructureId) {
+      updateQueue.queueTaskProgress({ [businessStructureTaskId]: "COMPLETED" });
+    }
+
+    const newUserData = await api.postGetAnnualFilings(updateQueue.current());
+    updateQueue.queue(newUserData);
     await updateQueue.update();
 
-    await router.push({
-      pathname: ROUTES.dashboard,
-      query: isAdditionalBusiness
-        ? { [QUERIES.fromAdditionalBusiness]: "true" }
-        : { [QUERIES.fromOnboarding]: "true" },
-    });
+    router &&
+      (await router.push({
+        pathname: ROUTES.dashboard,
+        query: isAdditionalBusiness
+          ? { [QUERIES.fromAdditionalBusiness]: "true" }
+          : { [QUERIES.fromOnboarding]: "true" },
+      }));
   };
 
   FormFuncWrapper(
@@ -387,12 +384,13 @@ const OnboardingPage = (props: Props): ReactElement => {
       setAnalyticsDimensions(newProfileData);
 
       if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NONE") {
-        await router.push({
-          pathname: ROUTES.unsupported,
-          query: isAdditionalBusiness
-            ? { [QUERIES.additionalBusiness]: "true", [QUERIES.previousBusinessId]: previousBusiness?.id }
-            : {},
-        });
+        router &&
+          (await router.push({
+            pathname: ROUTES.unsupported,
+            query: isAdditionalBusiness
+              ? { [QUERIES.additionalBusiness]: "true", [QUERIES.previousBusinessId]: previousBusiness?.id }
+              : {},
+          }));
       } else if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
         updateQueue
           .queueProfileData(newProfileData)
@@ -463,7 +461,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   };
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
-      <ProfileFormContext.Provider value={formContextState}>
+      <DataFormErrorMapContext.Provider value={formContextState}>
         <ProfileDataContext.Provider
           value={{
             state: {
@@ -502,10 +500,8 @@ const OnboardingPage = (props: Props): ReactElement => {
                     <>
                       {OnboardingStatusLookup()[alert].body}
                       {OnboardingStatusLookup()[alert] && (
-                        <Link href={ROUTES.dashboard}>
-                          <a href={ROUTES.dashboard} data-testid={`snackbar-link`}>
-                            {OnboardingStatusLookup()[alert].link}
-                          </a>
+                        <Link href={ROUTES.dashboard} data-testid={`snackbar-link`}>
+                          {OnboardingStatusLookup()[alert].link}
                         </Link>
                       )}
                     </>
@@ -546,7 +542,7 @@ const OnboardingPage = (props: Props): ReactElement => {
             </main>
           </PageSkeleton>
         </ProfileDataContext.Provider>
-      </ProfileFormContext.Provider>
+      </DataFormErrorMapContext.Provider>
     </MunicipalitiesContext.Provider>
   );
 };

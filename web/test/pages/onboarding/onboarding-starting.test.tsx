@@ -12,23 +12,22 @@ import {
   industryIdsWithSingleRequiredEssentialQuestion,
   mockSuccessfulApiSignups,
   renderPage,
-  runNonprofitOnboardingTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
-  LookupIndustryById,
-  ProfileData,
-  UserData,
   createEmptyUser,
   createEmptyUserData,
   generateMunicipality,
   generateProfileData,
   generateUserData,
+  LookupIndustryById,
+  ProfileData,
+  UserData,
 } from "@businessnjgovnavigator/shared/";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { act, screen, waitFor, within } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
@@ -261,7 +260,6 @@ describe("onboarding - starting a business", () => {
             sectorId: "retail-trade-and-ecommerce",
             homeBasedBusiness: undefined,
             municipality: undefined,
-            isNonprofitOnboardingRadio: false,
           },
           preferences: {
             ...initialUserData.businesses[businessId].preferences,
@@ -292,10 +290,6 @@ describe("onboarding - starting a business", () => {
     expect(screen.getByTestId("banner-alert-REQUIRED_FOREIGN_BUSINESS_TYPE")).toBeInTheDocument();
     page.clickBack();
     expect(screen.queryByTestId("banner-alert-REQUIRED_FOREIGN_BUSINESS_TYPE")).not.toBeInTheDocument();
-  });
-
-  describe("nonprofit onboarding tests", () => {
-    runNonprofitOnboardingTests({ businessPersona: "STARTING", industryPage: 2, lastPage: 2 });
   });
 
   describe("domestic employer", () => {

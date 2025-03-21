@@ -7,9 +7,9 @@ import { AddressModal } from "@/components/tasks/business-formation/contacts/Add
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { MediaQueries } from "@/lib/PageSizes";
+import { formatAddress } from "@/lib/domain-logic/formatAddress";
 import { FormationFields, FormationIncorporator, FormationMember } from "@businessnjgovnavigator/shared/";
-import { Checkbox, IconButton, useMediaQuery } from "@mui/material";
+import { Checkbox } from "@mui/material";
 import React, { ChangeEvent, Fragment, ReactElement, ReactNode, useState } from "react";
 
 interface DisplayContent {
@@ -45,14 +45,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [editIndex, setEditIndex] = useState<number | undefined>(undefined);
   const [alert, setAlert] = useState<boolean | undefined>(undefined);
-  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { doesFieldHaveError } = useFormationErrors();
-
-  const formatAddress = (address: T): string => {
-    return `${address.addressLine1}, ${address.addressLine2 ? `${address.addressLine2},` : ""} ${
-      address.addressMunicipality?.displayName ?? address.addressCity
-    }, ${address.addressState?.name} ${address.addressZipCode}`;
-  };
 
   const handleSignerCheckbox = (event: ChangeEvent<HTMLInputElement>, index: number): void => {
     const addresses = [...props.addressData];
@@ -75,13 +68,12 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
     index?: number;
   }): ReactNode => {
     return (
-      <div className="grid-col-auto width-6 display-flex flex-column flex-align-center flex-justify-center">
+      <div className="grid-col-auto mobile-sign-wrapper flex-align-center flex-justify-center">
         <label
           htmlFor={index ? `signature-checkbox-${fieldName}-${index}` : `signature-checkbox-${fieldName}`}
-          className="text-bold"
-          style={{ display: "none" }}
+          className="text-bold display-only-mobile-and-tablet"
         >
-          {Config.formation.fields.signers.signColumnLabel}*
+          {Config.formation.fields.signers.columnLabel}
         </label>
         <div style={{ height: "56px" }} className="display-flex flex-column flex-justify-center">
           <Checkbox
@@ -101,22 +93,21 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
 
   const zebraOnOdd = (index: number): string => (index % 2 === 1 ? "bg-base-extra-light" : "");
 
-  const renderDesktopTable = (
-    <table className={`addresses margin-top-2 margin-bottom-3`}>
+  const rowStylesForNumberColumns = props.needSignature ? "four-columns" : "three-columns";
+
+  const renderTable = (
+    <table
+      data-testid={`addresses-${props.fieldName}-table`}
+      className={`margin-top-2 margin-bottom-3 table`}
+    >
       <thead>
-        <tr>
-          {Config.formation.fields.signers.tableHeader
-            .split(",")
-            .filter((_, index) => {
-              return props.needSignature ? true : index !== 2;
-            })
-            .map((value: string) => {
-              return (
-                <th className="margin-bottom-2" key={value.toLowerCase()}>
-                  {value}
-                </th>
-              );
-            })}
+        <tr className={rowStylesForNumberColumns}>
+          <th className="name tal">{Config.formation.fields.signers.tableHeaderName}</th>
+          <th className="address tal">{Config.formation.fields.signers.tableHeaderAddress}</th>
+          {props.needSignature && (
+            <th className="sign tac">{Config.formation.fields.signers.tableHeaderSign}</th>
+          )}
+          <th className="action tac">{Config.formation.fields.signers.tableHeaderActions}</th>
         </tr>
       </thead>
       <tbody>
@@ -125,14 +116,14 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
             return (
               <Fragment key={index}>
                 <tr
-                  className={`margin-bottom-1 ${zebraOnOdd(index)}`}
+                  className={`${zebraOnOdd(index)} ${rowStylesForNumberColumns}`}
                   key={index}
                   data-testid={`${props.fieldName}-${index}`}
                 >
-                  <td className="break-word">{it.name}</td>
-                  <td className="break-word">{formatAddress(it)}</td>
+                  <td className="break-word name">{it.name}</td>
+                  <td className="break-word address">{formatAddress(it)}</td>
                   {"signature" in it ? (
-                    <td className="padding-y-0">
+                    <td className="padding-y-0 display-inline-flex sign">
                       {renderSignatureColumn({
                         onChange: (event) => {
                           return handleSignerCheckbox(event, index);
@@ -145,28 +136,22 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                   ) : (
                     <></>
                   )}
-                  <td className="display-inline-flex">
+                  <td className="display-inline-flex action">
                     <div>
-                      <IconButton
-                        aria-label="edit"
+                      <UnStyledButton
                         onClick={(): void => {
                           setEditIndex(index);
                           setModalOpen(true);
                         }}
-                        className="usa-button usa-button--unstyled"
                       >
-                        <Icon className="usa-icon--size-3">edit</Icon>
-                      </IconButton>
+                        {Config.formation.fields.signers.editLabel}
+                      </UnStyledButton>
                     </div>
                     <div className="margin-x-1 border-1px border-base-light" />
                     <div>
-                      <IconButton
-                        aria-label="delete"
-                        onClick={(): void => deleteAddress(index)}
-                        className="usa-button usa-button--unstyled"
-                      >
-                        <Icon className="usa-icon--size-3">delete</Icon>
-                      </IconButton>
+                      <UnStyledButton onClick={(): void => deleteAddress(index)}>
+                        {Config.formation.fields.signers.deleteLabel}
+                      </UnStyledButton>
                     </div>
                   </td>
                 </tr>
@@ -202,102 +187,6 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
     </table>
   );
 
-  const renderMobileTable = (
-    <>
-      <table data-testid={`addresses-${props.fieldName}-table-mobile`} className="margin-y-2">
-        <tbody>
-          {props.addressData.length > 0 ? (
-            props.addressData.map((it, index) => {
-              return (
-                <Fragment key={index}>
-                  <tr className={`margin-bottom-1 ${zebraOnOdd(index)}`}>
-                    <td className="flex-column">
-                      <div className="flex-column">
-                        <div className="margin-bottom-2 break-word">{it.name}</div>
-                        <div className="break-word">{it.addressLine1}</div>
-                        <div className="break-word">{it.addressLine2}</div>
-                        <div className="margin-bottom-2">
-                          {it.addressCity}, {it.addressState?.name} {it.addressZipCode}
-                        </div>
-                      </div>
-                      <div className="flex flex-row fac fjb">
-                        <span className="flex fac">
-                          {"signature" in it ? (
-                            <>
-                              <Content>{`${Config.formation.fields.signers.signColumnLabel}*`}</Content>
-                              <div>
-                                {renderSignatureColumn({
-                                  onChange: (event) => {
-                                    return handleSignerCheckbox(event, index);
-                                  },
-                                  checked: it.signature,
-                                  fieldName: props.fieldName,
-                                  index,
-                                })}
-                              </div>
-                            </>
-                          ) : (
-                            <></>
-                          )}
-                        </span>
-                        <span>
-                          <span className="vertical-line border-base-light padding-y-05 padding-right-2 margin-right-2">
-                            <IconButton
-                              aria-label="edit"
-                              onClick={(): void => {
-                                setEditIndex(index);
-                                setModalOpen(true);
-                              }}
-                              className="usa-button usa-button--unstyled width-auto"
-                            >
-                              <Icon className="usa-icon--size-3">edit</Icon>
-                            </IconButton>
-                          </span>
-                          <IconButton
-                            aria-label="delete"
-                            onClick={(): void => deleteAddress(index)}
-                            className="usa-button usa-button--unstyled width-auto"
-                          >
-                            <Icon className="usa-icon--size-3">delete</Icon>
-                          </IconButton>
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                  {doesFieldHaveError(props.fieldName) && "signature" in it && !it.signature ? (
-                    <tr className={`margin-bottom-1 ${zebraOnOdd(index)}`} key={`error-${index}`}>
-                      <td className="flex-column text-error-dark text-bold">
-                        {Config.formation.fields.signers.errorBannerCheckbox}
-                      </td>
-                    </tr>
-                  ) : (
-                    <></>
-                  )}
-                </Fragment>
-              );
-            })
-          ) : (
-            <></>
-          )}
-        </tbody>
-        <tfoot>
-          {props.hasError ? (
-            <tr>
-              <td colSpan={3} className={"text-error-dark text-bold"}>
-                {props.displayContent.error}
-              </td>
-            </tr>
-          ) : props.addressData.length === 0 ? (
-            <tr>
-              <td colSpan={4}>{props.displayContent.placeholder}</td>
-            </tr>
-          ) : (
-            <></>
-          )}
-        </tfoot>
-      </table>
-    </>
-  );
   return (
     <>
       {alert && (
@@ -323,7 +212,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
         <Content className="margin-top-1">{props.displayContent.description}</Content>
         <div>
           <WithErrorBar hasError={doesFieldHaveError(props.fieldName)} type="ALWAYS">
-            {isTabletAndUp ? renderDesktopTable : renderMobileTable}
+            {renderTable}
           </WithErrorBar>
           {props.addressData.length <= 9 && (
             <UnStyledButton
@@ -332,7 +221,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                 setModalOpen(true);
               }}
             >
-              <Icon>add</Icon>
+              <Icon iconName="add" />
               <span
                 className="text-underline"
                 style={{ textUnderlinePosition: "under" }}

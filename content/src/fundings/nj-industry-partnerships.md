@@ -1,5 +1,4 @@
 ---
-filename: nj-industry-partnerships
 name: NJ Industry Partnerships
 displayName: industry-partnerships
 urlSlug: nj-industry-partnerships
@@ -41,7 +40,7 @@ publishStageArchive: ""
 
 ## Eligibility
 
-- Please speak to the regional coordinator listed on your industry's page by using the link in the title
+- Speak to the regional coordinator listed on your industry's page by using the link in the title
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 

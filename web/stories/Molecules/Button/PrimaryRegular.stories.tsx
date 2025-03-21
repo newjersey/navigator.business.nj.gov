@@ -36,7 +36,7 @@ export const IconRight: Story = {
     children: (
       <>
         <>Button</>
-        <Icon className="usa-icon--size-3 margin-left-05">arrow_drop_down</Icon>
+        <Icon className="usa-icon--size-3 margin-left-05" iconName="arrow_drop_down" />
       </>
     ),
   },

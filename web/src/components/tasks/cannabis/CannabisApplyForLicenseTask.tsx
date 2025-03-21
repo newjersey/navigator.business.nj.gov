@@ -14,10 +14,10 @@ import { ReactElement, useState } from "react";
 
 interface Props {
   task: Task;
-  CMS_ONLY_tab?: string; // for CMS only
-  CMS_ONLY_fakeBusiness?: Business; // for CMS only
-  CMS_ONLY_isAnnual?: boolean; // for CMS only
-  CMS_ONLY_isConditional?: boolean; // for CMS only
+  CMS_ONLY_tab?: string;
+  CMS_ONLY_fakeBusiness?: Business;
+  CMS_ONLY_isAnnual?: boolean;
+  CMS_ONLY_isConditional?: boolean;
 }
 
 export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
@@ -108,10 +108,10 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
     sendNextTabButtonAnalytics();
     if (
       business.taskProgress[props.task.id] === undefined ||
-      business.taskProgress[props.task.id] === "NOT_STARTED"
+      business.taskProgress[props.task.id] === "TO_DO"
     ) {
       setSuccessSnackbarIsOpen(true);
-      updateQueue.queueTaskProgress({ [props.task.id]: "IN_PROGRESS" }).update();
+      updateQueue.queueTaskProgress({ [props.task.id]: "TO_DO" }).update();
     }
   };
 
@@ -120,7 +120,7 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
       <TaskStatusChangeSnackbar
         isOpen={successSnackbarIsOpen}
         close={(): void => setSuccessSnackbarIsOpen(false)}
-        status={business?.taskProgress[props.task.id] ?? "NOT_STARTED"}
+        status={business?.taskProgress[props.task.id] ?? "TO_DO"}
       />
       <TaskHeader task={props.task} />
       {displayFirstTab ? (

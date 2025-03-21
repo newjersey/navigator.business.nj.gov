@@ -2,7 +2,6 @@
 notesMd: "[Muni planning
   doc](https://docs.google.com/document/d/15YyCOSRiUBsaYCvC99XM1EUdRZL2PAUlZ-2f\
   YuU5d-o/edit?usp=sharing)"
-filename: gnec-dreammaker-loan
 name: Greater Newark Enterprises Corporation (GNEC) DreamMaker Loan Program
 displayName: gnec-dreammaker-loan
 urlSlug: gnec-dreammaker-loan
@@ -39,20 +38,20 @@ sector: []
 publishStageArchive: ""
 municipality: Newark
 ---
+
 ## Eligibility
 
-* Have good credit history with a history of on-time payments
-* Have at least a 650 credit score
-* Pass a capacity test to show you can manage the loan payments
-* Submit a $100 application fee
-* Final approval is contingent on the credit committee
+- Have good credit history with a history of on-time payments
+- Have at least a 650 credit score
+- Pass a capacity test to show you can manage the loan payments
+- Submit a $100 application fee
+- Final approval is contingent on the credit committee
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 
-* Up to $30,000 in funding
-* No pre-payment penalties for this loan
-* Loan terms are typically amortized over four years
-* Fixed interest rate of 5.99% applies for businesses that qualify as minority and/or woman-owned (M/WBE), LGBTQ+-owned, located in a designated Opportunity Zone or operating in a designated trade (electricians, plumbers, carpenters, welders, brick masons, HVAC technicians, diesel mechanics, and elevator specialists)
-
+- Up to $30,000 in funding
+- No pre-payment penalties for this loan
+- Loan terms are typically amortized over four years
+- Fixed interest rate of 5.99% applies for businesses that qualify as minority and/or woman-owned (M/WBE), LGBTQ+-owned, located in a designated Opportunity Zone or operating in a designated trade (electricians, plumbers, carpenters, welders, brick masons, HVAC technicians, diesel mechanics, and elevator specialists)
 
 :::

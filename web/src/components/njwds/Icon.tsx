@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
 interface Props {
-  children: string;
+  iconName: string;
   className?: string;
   label?: string;
   "data-testid"?: string;
@@ -17,7 +17,7 @@ export const Icon = (props: Props): ReactElement => {
       role="img"
       data-testid={props["data-testid"]}
       dangerouslySetInnerHTML={{
-        __html: `<use xlink:href="/vendor/img/sprite.svg#${props.children}"></use>`,
+        __html: `<use xlink:href="/vendor/img/sprite.svg#${props.iconName}"></use>`,
       }}
     />
   );

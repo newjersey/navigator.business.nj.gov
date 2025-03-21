@@ -9,7 +9,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, useContext } from "react";
 
 export const NeedsAccountModal = (): ReactElement => {
@@ -18,6 +18,7 @@ export const NeedsAccountModal = (): ReactElement => {
   const { isAuthenticated, showNeedsAccountModal, setShowNeedsAccountModal } =
     useContext(NeedsAccountContext);
   const { Config } = useConfig();
+  const loginPageEnabled = process.env.FEATURE_LOGIN_PAGE === "true";
 
   useMountEffectWhenDefined(() => {
     if (isAuthenticated === IsAuthenticated.TRUE) {
@@ -36,7 +37,7 @@ export const NeedsAccountModal = (): ReactElement => {
       analytics.event.guest_modal.click.go_to_NavigatorAccount_setup();
     }
     setShowNeedsAccountModal(false);
-    router.push(ROUTES.accountSetup);
+    router && router.push(ROUTES.accountSetup);
   };
 
   return (
@@ -60,7 +61,11 @@ export const NeedsAccountModal = (): ReactElement => {
             <Content
               onClick={(): void => {
                 analytics.event.guest_modal.click.go_to_myNJ_login();
-                triggerSignIn();
+                if (loginPageEnabled) {
+                  router && router.push(ROUTES.login);
+                } else {
+                  triggerSignIn();
+                }
               }}
             >
               {Config.selfRegistration.needsAccountModalSubText}

@@ -5,22 +5,22 @@ import { randomPublicFilingLegalType } from "@/test/factories";
 import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
-  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
+  createEmptyFormationFormData,
   FormationData,
   FormationLegalType,
-  OperatingPhases,
-  UserData,
-  createEmptyFormationFormData,
   generateBusiness,
   generateUserDataForBusiness,
   getCurrentBusiness,
   getCurrentDateISOString,
+  OperatingPhases,
+  UserData,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
@@ -103,7 +103,6 @@ describe("<TaxAccessStepTwo />", () => {
         legalStructureId as FormationLegalType
       );
     }
-
     return generateUserDataForBusiness(
       generateBusiness({
         profileData: generateProfileData({
@@ -179,7 +178,6 @@ describe("<TaxAccessStepTwo />", () => {
     it("updates taxId but not businessName on submit", async () => {
       renderComponent(userDataWithPrefilledFields);
       const business = userDataWithPrefilledFields.businesses[userDataWithPrefilledFields.currentBusinessId];
-
       mockApiResponse(userDataWithPrefilledFields, {
         profileData: {
           ...business.profileData,
@@ -201,7 +199,7 @@ describe("<TaxAccessStepTwo />", () => {
         return expect(currentBusiness().profileData.businessName).not.toEqual("zoom");
       });
       expect(currentBusiness().profileData.taxId).toEqual("999888777666");
-      expect(currentBusiness().profileData.encryptedTaxId).toEqual(undefined);
+      expect(currentBusiness().profileData.encryptedTaxId).toEqual("");
     });
 
     it("updates businessName on submit if tax filing is success", async () => {

@@ -1,7 +1,7 @@
 ---
 notesMd: "[Muni planning doc](https://docs.google.com/document/d/1pZBqY3yS9y8Y3MMSHqwvTFtdlYvuxhWKK70fUqsXRSY/edit)"
 header: Certificate of Participation
-slug: certificate-participation
+id: certificate-participation
 displayname: certificate-participation
 ---
 

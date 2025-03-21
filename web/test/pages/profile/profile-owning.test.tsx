@@ -73,7 +73,7 @@ function setupMockAnalytics(): typeof analytics {
   };
 }
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -747,6 +747,44 @@ describe("profile - owning existing business", () => {
       renderPage({ business });
 
       expect(screen.queryByTestId("elevatorOwningBusiness-radio-group")).not.toBeInTheDocument();
+    });
+
+    it("shows vacant building question for owning guest mode users", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateOwningProfileData({
+          industryId: "real-estate-investor",
+          operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
+          businessPersona: "OWNING",
+          homeBasedBusiness: false,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
+    });
+
+    it("shows vacant building question for owning signed in users", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateOwningProfileData({
+          industryId: "real-estate-investor",
+          operatingPhase: OperatingPhaseId.UP_AND_RUNNING_OWNING,
+          businessPersona: "OWNING",
+          homeBasedBusiness: false,
+        }),
+        formationData: generateFormationData({
+          formationFormData: generateFormationFormData({
+            ...emptyAddressData,
+          }),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
     });
   });
 

@@ -13,11 +13,15 @@ const roadmapsDir = path.join(process.cwd(), "..", "content", "src", "roadmaps")
 const tasksDirectory = path.join(roadmapsDir, "tasks");
 const licenseDirectory = path.join(roadmapsDir, "license-tasks");
 const municipalDirectory = path.join(roadmapsDir, "municipal-tasks");
+const raffleBingoStepsDirectory = path.join(roadmapsDir, "raffle-bingo-steps");
+const envDirectory = path.join(roadmapsDir, "env-tasks");
 
 export const loadAllTaskUrlSlugs = (): PathParams<TaskUrlSlugParam>[] => {
   const taskFileNames = fs.readdirSync(tasksDirectory);
   const licenseFileNames = fs.readdirSync(licenseDirectory);
   const municipalFileNames = fs.readdirSync(municipalDirectory);
+  const raffleBingoFileNames = fs.readdirSync(raffleBingoStepsDirectory);
+  const envFileNames = fs.readdirSync(envDirectory);
 
   return [
     ...taskFileNames.map((fileName) => ({
@@ -35,6 +39,16 @@ export const loadAllTaskUrlSlugs = (): PathParams<TaskUrlSlugParam>[] => {
         taskUrlSlug: loadUrlSlugByFilename(fileName, municipalDirectory),
       },
     })),
+    ...raffleBingoFileNames.map((fileName) => ({
+      params: {
+        taskUrlSlug: loadUrlSlugByFilename(fileName, raffleBingoStepsDirectory),
+      },
+    })),
+    ...envFileNames.map((fileName) => ({
+      params: {
+        taskUrlSlug: loadUrlSlugByFilename(fileName, envDirectory),
+      },
+    })),
   ];
 };
 
@@ -42,11 +56,15 @@ export const loadAllTasks = (): Task[] => {
   const taskFileNames = fs.readdirSync(tasksDirectory);
   const licenseFileNames = fs.readdirSync(licenseDirectory);
   const municipalFileNames = fs.readdirSync(municipalDirectory);
+  const raffleBingoFileNames = fs.readdirSync(raffleBingoStepsDirectory);
+  const envFileNames = fs.readdirSync(envDirectory);
 
   return [
     ...taskFileNames.map((fileName) => loadTaskByFileName(fileName, tasksDirectory)),
     ...licenseFileNames.map((fileName) => loadTaskByFileName(fileName, licenseDirectory)),
     ...municipalFileNames.map((fileName) => loadTaskByFileName(fileName, municipalDirectory)),
+    ...raffleBingoFileNames.map((fileName) => loadTaskByFileName(fileName, raffleBingoStepsDirectory)),
+    ...envFileNames.map((fileName) => loadTaskByFileName(fileName, envDirectory)),
   ];
 };
 
@@ -55,9 +73,19 @@ export const loadAllLicenseTasks = (): Task[] => {
   return licenseFileNames.map((fileName) => loadTaskByFileName(fileName, licenseDirectory));
 };
 
+export const loadAllRaffleBingoSteps = (): Task[] => {
+  const licenseFileNames = fs.readdirSync(licenseDirectory);
+  return licenseFileNames.map((fileName) => loadTaskByFileName(fileName, licenseDirectory));
+};
+
 export const loadAllMunicipalTasks = (): Task[] => {
   const municipalFileNames = fs.readdirSync(municipalDirectory);
   return municipalFileNames.map((fileName) => loadTaskByFileName(fileName, municipalDirectory));
+};
+
+export const loadAllEnvTasks = (): Task[] => {
+  const envFileNames = fs.readdirSync(envDirectory);
+  return envFileNames.map((fileName) => loadTaskByFileName(fileName, envDirectory));
 };
 
 export const loadAllTasksOnly = (): Task[] => {
@@ -74,8 +102,18 @@ export const loadTaskByUrlSlug = (urlSlug: string): Task => {
       const fileAsLicense = getFileNameByUrlSlug(licenseDirectory, urlSlug);
       return loadTaskByFileName(fileAsLicense, licenseDirectory);
     } catch {
-      const fileAsMunicipal = getFileNameByUrlSlug(municipalDirectory, urlSlug);
-      return loadTaskByFileName(fileAsMunicipal, municipalDirectory);
+      try {
+        const fileAsMunicipal = getFileNameByUrlSlug(municipalDirectory, urlSlug);
+        return loadTaskByFileName(fileAsMunicipal, municipalDirectory);
+      } catch {
+        try {
+          const fileAsRaffleBingo = getFileNameByUrlSlug(raffleBingoStepsDirectory, urlSlug);
+          return loadTaskByFileName(fileAsRaffleBingo, raffleBingoStepsDirectory);
+        } catch {
+          const fileAsEnv = getFileNameByUrlSlug(envDirectory, urlSlug);
+          return loadTaskByFileName(fileAsEnv, envDirectory);
+        }
+      }
     }
   }
 };
@@ -115,7 +153,15 @@ const loadTaskLinkByFilename = (fileName: string): TaskLink => {
     try {
       fileContents = fs.readFileSync(path.join(licenseDirectory, `${fileName}.md`), "utf8");
     } catch {
-      fileContents = fs.readFileSync(path.join(municipalDirectory, `${fileName}.md`), "utf8");
+      try {
+        fileContents = fs.readFileSync(path.join(municipalDirectory, `${fileName}.md`), "utf8");
+      } catch {
+        try {
+          fileContents = fs.readFileSync(path.join(raffleBingoStepsDirectory, `${fileName}.md`), "utf8");
+        } catch {
+          fileContents = fs.readFileSync(path.join(envDirectory, `${fileName}.md`), "utf8");
+        }
+      }
     }
   }
 

@@ -31,6 +31,6 @@ isSbe: false
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-Veteran-Owned Business certificate.
+A Veteran-Owned Business certificate.
 
 :::

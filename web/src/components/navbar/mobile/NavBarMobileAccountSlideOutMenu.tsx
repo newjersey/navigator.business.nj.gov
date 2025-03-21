@@ -31,7 +31,7 @@ export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement => {
           props.openSideBar();
         }}
       >
-        <Icon className="text-accent-cool-darker font-sans-lg">account_circle</Icon>
+        <Icon className="text-accent-cool-darker font-sans-lg" iconName="account_circle" />
       </button>
 
       <FocusTrappedSidebar
@@ -68,7 +68,7 @@ export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement => {
               }}
               tabIndex={0}
             >
-              <Icon className="font-sans-xl">close</Icon>
+              <Icon className="font-sans-xl" iconName="close" />
             </button>
 
             {props.subMenuElement}

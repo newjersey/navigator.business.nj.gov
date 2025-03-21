@@ -11,6 +11,7 @@ export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"
   label?: string;
   secondaryLabel?: string;
   errorBarType: "ALWAYS" | "MOBILE-ONLY" | "DESKTOP-ONLY" | "NEVER";
+  readOnly?: boolean;
 }
 
 export const BusinessFormationTextField = ({ className, ...props }: Props): ReactElement => {
@@ -40,6 +41,7 @@ export const BusinessFormationTextField = ({ className, ...props }: Props): Reac
         value={state.formationFormData[props.fieldName]}
         onValidation={onValidation}
         {...props}
+        readOnly={props.readOnly}
         handleChange={handleChange}
         error={hasError}
       />

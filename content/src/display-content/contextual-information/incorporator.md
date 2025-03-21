@@ -1,6 +1,5 @@
 ---
-slug: incorporator
-filename: incorporator
+id: incorporator
 displayname: incorporator
 header: Incorporator
 ---

@@ -1,0 +1,11 @@
+{
+  "id": "healthcare-tpa",
+  "displayname": "healthcare-tpa",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "licenseTask": "tpa-certification",
+      "weight": 20
+    }
+  ]
+}

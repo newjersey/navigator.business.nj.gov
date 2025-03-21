@@ -1,5 +1,4 @@
 ---
-filename: dep-emobility-grant
 name: eMobility Rolling Grant Program
 displayName: dep-emobility-grant
 urlSlug: dep-emobility-grant
@@ -30,14 +29,15 @@ county:
 sector: []
 publishStageArchive: ""
 ---
+
 ## Eligible Expenses
 
-* Electric vehicles and EV charging stations
-* Program development and operation
-* Property purchase or lease (headquarters for vehicles and charging equipment)
-* Education and outreach
-* Methods to ensure equity
-* Technology (hardware, software, data collection, etc.)
+- Electric vehicles and EV charging stations
+- Program development and operation
+- Property purchase or lease (headquarters for vehicles and charging equipment)
+- Education and outreach
+- Methods to ensure equity
+- Technology (hardware, software, data collection, etc.)
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 

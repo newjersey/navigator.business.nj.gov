@@ -30,8 +30,8 @@ collections:
     label: "Biz Form - DBA Tasks"
     folder: "content/src/display-content/business-formation/nexus"
     summary: "{{displayname}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
     sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
     create: true
@@ -42,16 +42,9 @@ collections:
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
-      - { label: "Filename", name: "filename", widget: "write-once-read-only-no-space", required: true }
       - { label: "Display Name", name: "displayname", widget: "no-space", required: true }
       - { label: "Name", name: "name", widget: "string" }
-      - {
-          label: "Id",
-          name: "id",
-          required: true,
-          widget: "write-once-read-only-no-space",
-          hint: "This is should be the same as the filename.",
-        }
+      - { label: "Id", name: "id", required: true, widget: "write-once-read-only-no-space" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - label: Agency
@@ -62,6 +55,7 @@ collections:
         search_fields: ["arrayOfTaskAgencies.*.name"]
         value_field: "arrayOfTaskAgencies.*.id"
         display_fields: ["arrayOfTaskAgencies.*.name"]
+        options_length: 500
   - name: "business-formation-config"
     label: "Biz Form - Config"
     delete: false
@@ -274,7 +268,7 @@ collections:
                           collection: "contextual-information",
                           search_fields: ["{{displayname}}"],
                           options_length: 500,
-                          value_field: "{{filename}}",
+                          value_field: "{{fields.id}}",
                           display_fields: ["{{displayname}}"],
                         }
                       - { label: "Inline error - future", name: "errorFuture", widget: "string" }
@@ -295,8 +289,13 @@ collections:
                           collection: "contextual-information",
                           search_fields: ["{{displayname}}"],
                           options_length: 500,
-                          value_field: "{{filename}}",
+                          value_field: "{{fields.id}}",
                           display_fields: ["{{displayname}}"],
+                        }
+                      - {
+                          label: "Secondary Text Foreign Corporation",
+                          name: "labelSecondaryTextForeignCorporation",
+                          widget: "string",
                         }
                       - { label: "Inline error", name: "error", widget: "string" }
                       - {
@@ -370,7 +369,7 @@ collections:
                           collection: "contextual-information",
                           search_fields: ["{{displayname}}"],
                           options_length: 500,
-                          value_field: "{{filename}}",
+                          value_field: "{{fields.id}}",
                           display_fields: ["{{displayname}}"],
                         }
                       - { label: "Cost", name: "cost", widget: "string" }
@@ -388,7 +387,7 @@ collections:
                           collection: "contextual-information",
                           search_fields: ["{{displayname}}"],
                           options_length: 500,
-                          value_field: "{{filename}}",
+                          value_field: "{{fields.id}}",
                           display_fields: ["{{displayname}}"],
                         }
                       - { label: "Cost", name: "cost", widget: "string" }
@@ -406,7 +405,7 @@ collections:
                           collection: "contextual-information",
                           search_fields: ["{{displayname}}"],
                           options_length: 500,
-                          value_field: "{{filename}}",
+                          value_field: "{{fields.id}}",
                           display_fields: ["{{displayname}}"],
                         }
                       - { label: "Cost", name: "cost", widget: "string" }
@@ -736,11 +735,15 @@ collections:
                         }
                       - { label: "Name column label", name: "nameLabel", widget: "string" }
                       - { label: "Title column label", name: "titleLabel", widget: "string" }
-                      - { label: "Sign column label", name: "signColumnLabel", widget: "string" }
-                      - { label: "Table headers", name: "tableHeader", widget: "string" }
+                      - { label: "Sign column label", name: "columnLabel", widget: "string" }
+                      - { label: "Sign delete label", name: "deleteLabel", widget: "string" }
+                      - { label: "Sign edit label", name: "editLabel", widget: "string" }
+                      - { label: "Table headers Name", name: "tableHeaderName", widget: "string" }
+                      - { label: "Table headers Address", name: "tableHeaderAddress", widget: "string" }
+                      - { label: "Table headers Sign", name: "tableHeaderSign", widget: "string" }
+                      - { label: "Table headers Actions", name: "tableHeaderActions", widget: "string" }
                       - { label: "Add button text", name: "addButtonText", widget: "string" }
                       - { label: "Signature aid text", name: "aidText", widget: "string" }
-                      - { label: "Delete text (mobile)", name: "deleteTextMobile", widget: "string" }
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                       - label: Overrides
@@ -894,6 +897,18 @@ collections:
                       name: "sameContactCheckbox",
                       widget: "string",
                     }
+                  - { label: "Note Title", name: "noteTitle", widget: "string" }
+                  - { label: "Note Body", name: "noteBody", widget: "markdown" }
+                  - {
+                      label: "Checkbox Unchecked Screen Reader Announcement",
+                      name: "checkboxUnCheckedScreenReaderAnnouncement",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Checkbox Checked Screen Reader Announcement",
+                      name: "checkboxCheckedScreenReaderAnnouncement",
+                      widget: "string",
+                    }
               - label: Sections
                 name: sections
                 collapsed: true
@@ -971,7 +986,7 @@ collections:
                       collection: "contextual-information",
                       search_fields: ["{{displayname}}"],
                       options_length: 500,
-                      value_field: "{{filename}}",
+                      value_field: "{{fields.id}}",
                       display_fields: ["{{displayname}}"],
                     }
                   - {
@@ -1014,6 +1029,7 @@ collections:
                   - { label: "Read less button text", name: "viewLessButtonText", widget: "string" }
                   - { label: "Radio no text", name: "radioNoText", widget: "string" }
                   - { label: "Radio yes text", name: "radioYesText", widget: "string" }
+                  - { label: "Remove Section Text", name: "removeSectionText", widget: "string" }
                   - {
                       label: "Aria Context - Will Need to Provide Business date for checking formation task",
                       name: "ariaContextWillNeedToProvideBusinessDate",
@@ -1058,6 +1074,12 @@ collections:
                 collapsed: true
                 widget: object
                 fields:
+                  - label: Foreign Corporation Alert
+                    name: certificateOfGoodStandingAlert
+                    widget: object
+                    fields:
+                      - { label: "Beginning", name: "beginning", widget: "string" }
+                      - { label: "End", name: "end", widget: "string" }
                   - { label: "Default / in-state intro", name: "default", widget: "markdown" }
                   - { label: "Foreign intro", name: "foreign", widget: "markdown" }
       - label: "Interim Success Page"
@@ -1124,6 +1146,7 @@ collections:
                       name: "confirmationNumberLabel",
                       widget: "markdown",
                     }
+                  - { label: "Survey link", name: "surveyLinkText", widget: "markdown" }
   - name: nexus
     label: "Nexus"
     delete: false
@@ -1171,6 +1194,184 @@ collections:
               - { label: CTA Modal Body, name: dbaCtaModalBody, widget: markdown }
               - { label: CTA Modal Continue Button, name: dbaCtaModalContinueButtonText, widget: string }
               - { label: CTA Modal Cancel Button, name: dbaCtaModalCancelButtonText, widget: string }
+
+  - name: "environmental-compliance-label"
+    label: "🌲 ENVIRONMENTAL COMPLIANCE"
+    folder: "content/src"
+    fields:
+      - { name: "" }
+
+  - name: "environmental-compliance-section"
+    label: "Env Comp - Config"
+    files:
+      - label: "Environment Questionnaire Tasks"
+        name: "env-questionnaire-task"
+        file: content/src/fieldConfig/env-questionnaire.json
+        editor:
+          preview: false
+        fields:
+          - label: Questionnaire Page Config
+            name: envQuestionPage
+            collapsed: false
+            widget: object
+            fields:
+              - label: Generic
+                name: generic
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Title, name: title, widget: text }
+                  - { label: Question, name: question, widget: string }
+                  - { label: Button Text, name: buttonText, widget: string }
+                  - { label: Error Text, name: errorText, widget: string }
+                  - { label: Footer, name: footerText, widget: markdown }
+              - label: Waste
+                name: waste
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Media Area Text, name: mediaAreaText, widget: string }
+                  - { label: Media Area Link, name: mediaAreaLink, widget: markdown }
+                  - label: Waste Questionnaire Options
+                    name: questionnaireOptions
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Hazardous Medical Waste Option, name: hazardousMedicalWaste, widget: text }
+                      - { label: Compost Waste Option, name: compostWaste, widget: text }
+                      - { label: Treat Process Waste Option, name: treatProcessWaste, widget: text }
+                      - { label: Construction Debris Option, name: constructionDebris, widget: text }
+                      - { label: No Waste Option, name: noWaste, widget: text }
+              - label: Land
+                name: land
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Media Area Text, name: mediaAreaText, widget: string }
+                  - { label: Media Area Link, name: mediaAreaLink, widget: markdown }
+                  - label: Land Questionnaire Options
+                    name: questionnaireOptions
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Take Over Existing Business, name: takeOverExistingBiz, widget: text }
+                      - { label: Property Assessment, name: propertyAssessment, widget: text }
+                      - { label: Construction Activities, name: constructionActivities, widget: text }
+                      - { label: Site Improvement Waste Land, name: siteImprovementWasteLands, widget: text }
+                      - { label: No Land Option, name: noLand, widget: text }
+              - label: Air
+                name: air
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Media Area Text, name: mediaAreaText, widget: string }
+                  - { label: Media Area Link, name: mediaAreaLink, widget: markdown }
+                  - label: Air Questionnaire Options
+                    name: questionnaireOptions
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Emit Pollutants, name: emitPollutants, widget: text }
+                      - { label: Emit Emissions, name: emitEmissions, widget: text }
+                      - { label: Construction Activities, name: constructionActivities, widget: text }
+                      - { label: No Air Option, name: noAir, widget: text }
+          - label: Results Page Config
+            name: envResultsPage
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: text }
+              - { label: Edit Info, name: editInfo, widget: string }
+              - { label: Edit Text, name: editText, widget: string }
+              - label: Summary
+                name: summary
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Summary Text Pt.1, name: partOne, widget: string }
+                  - { label: Summary Text Pt.2, name: partTwo, widget: string }
+                  - label: Media Area Texts
+                    name: mediaAreaText
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Waste Media Area Text, name: waste, widget: string }
+                      - { label: Watershed and Land Media Area Text, name: land, widget: string }
+                      - { label: Air Media Area Text, name: air, widget: string }
+              - label: Personalized Support
+                name: personalizedSupport
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Title, name: title, widget: text }
+                  - { label: Body, name: body, widget: markdown }
+                  - { label: Contact, name: contact, widget: text }
+              - label: Contact DEP
+                name: contactDep
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Title, name: title, widget: text }
+                  - { label: Body, name: body, widget: text }
+                  - label: Waste Details
+                    name: waste
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Heading, name: heading, widget: text }
+                      - { label: Link in Body, name: bodyLink, widget: text }
+                      - label: Contact
+                        name: contact
+                        collapsed: true
+                        widget: object
+                        fields:
+                          - { label: Phone Number, name: phone, widget: text }
+                          - { label: Form, name: form, widget: text }
+                  - label: Land Details
+                    name: land
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Heading, name: heading, widget: text }
+                      - { label: Link in Body, name: bodyLink, widget: text }
+                      - label: Contact
+                        name: contact
+                        collapsed: true
+                        widget: object
+                        fields:
+                          - { label: Phone Number, name: phone, widget: text }
+                          - { label: Form, name: form, widget: text }
+                  - label: Air Details
+                    name: air
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: Heading, name: heading, widget: text }
+                      - { label: Link in Body, name: bodyLink, widget: text }
+                      - label: Contact
+                        name: contact
+                        collapsed: true
+                        widget: object
+                        fields:
+                          - { label: Phone Number Info, name: phoneInfo, widget: text }
+                          - { label: Phone Number, name: phone, widget: text }
+                          - { label: Email, name: email, widget: text }
+              - label: See Your Responses
+                name: seeYourResponses
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Title, name: title, widget: text }
+              - label: Low Applicability
+                name: lowApplicability
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: Summary Line 1, name: summaryLineOne, widget: text }
+                  - { label: Summary Line 2, name: summaryLineTwo, widget: markdown }
+                  - { label: Callout, name: callout, widget: text }
+                  - { label: Callout Redo Prompt, name: calloutRedo, widget: text }
+
   - name: "certification-label"
     label: "🟧 CERTIFICATION OPPS"
     folder: "content/src"
@@ -1181,8 +1382,8 @@ collections:
     label: "Cert Opps - Content"
     folder: "content/src/certifications"
     summary: "/{{urlSlug}} - {{name}}"
-    identifier_field: "{{urlSlug}}"
-    slug: "{{urlSlug}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
     delete: true
     create: true
     editor:
@@ -1197,12 +1398,7 @@ collections:
         }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - {
-          label: "Url Slug / Filename",
-          name: "urlSlug",
-          widget: "write-once-read-only-no-space",
-          required: true,
-        }
+      - { label: "Url Slug", name: "urlSlug", widget: "write-once-read-only-no-space", required: true }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -1217,6 +1413,7 @@ collections:
         search_fields: ["arrayOfFundingAgencies.*.name"]
         value_field: "arrayOfFundingAgencies.*.id"
         display_fields: ["arrayOfFundingAgencies.*.name"]
+        options_length: 500
       - label: "Applicable Ownership Types"
         name: applicableOwnershipTypes
         widget: "select"
@@ -1232,9 +1429,9 @@ collections:
   - name: "archived-certification-opportunities"
     label: "Cert Opps - Archived"
     folder: "content/src/archived-certifications"
-    summary: "/{{urlSlug}} - {{name}}"
-    identifier_field: "{{urlSlug}}"
-    slug: "{{urlSlug}}"
+    summary: "/{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
     delete: true
     create: true
     editor:
@@ -1248,12 +1445,7 @@ collections:
           hint: "This appears only in My Account, in the For You column, max char is 150 including spaces, plain text only",
         }
       - { label: "Content", name: "body", widget: "markdown" }
-      - {
-          label: "Url Slug / Filename",
-          name: "urlSlug",
-          widget: "write-once-read-only-no-space",
-          required: true,
-        }
+      - { label: "Url Slug", name: "urlSlug", widget: "write-once-read-only-no-space", required: true }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -1268,6 +1460,7 @@ collections:
         search_fields: ["arrayOfFundingAgencies.*.name"]
         value_field: "arrayOfFundingAgencies.*.id"
         display_fields: ["arrayOfFundingAgencies.*.name"]
+        options_length: 500
       - label: "Applicable Ownership Types"
         name: applicableOwnershipTypes
         widget: "select"
@@ -1290,8 +1483,8 @@ collections:
     label: "Fund Opps - Content"
     folder: "content/src/fundings"
     summary: "[{{agency[0]}}] - {{displayName}}"
-    identifier_field: "{{filename}}"
-    slug: "{{filename}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
     delete: true
     sortable_fields: ["displayName", "agency"]
     create: true
@@ -1299,7 +1492,6 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "File Name", name: "filename", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Name",
           name: "name",
@@ -1310,16 +1502,10 @@ collections:
           label: "Display Name",
           name: "displayName",
           widget: "string",
-          hint: "This the name displayed internally in CMS list",
+          hint: "This is the name displayed internally in CMS list",
         }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          hint: "This is should be the same as the filename.",
-          required: true,
-        }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
@@ -1373,6 +1559,7 @@ collections:
             "technical assistance",
             "hiring and employee training support",
             "tax exemption",
+            "investment",
           ]
         hint: "Incentive Type"
       - label: "Program Frequency"
@@ -1398,6 +1585,7 @@ collections:
         search_fields: ["arrayOfFundingAgencies.*.name"]
         value_field: "arrayOfFundingAgencies.*.id"
         display_fields: ["arrayOfFundingAgencies.*.name"]
+        options_length: 500
       - {
           label: "Agency Contact",
           name: "agencyContact",
@@ -1409,12 +1597,12 @@ collections:
         name: "businessStage"
         widget: "select"
         options: ["early-stage", "operating", "both"]
-        hint: "Established businesses (open 5+ years) in JotForm = 'operating' - - 'New business (not open yet or less than 5 years)' in JotForm = 'early-stage'"
+        hint: "Early stage business = not yet open or open less than 2 years; Established business = open 2 years or more"
       - { label: "Employees Required", name: "employeesRequired", widget: "select", options: ["yes", "n/a"] }
       - label: "Home Based"
         name: "homeBased"
         widget: "select"
-        options: ["yes", "no", "unknown"]
+        options: ["yes", "no", "unknown", "n/a"]
         default: "unknown"
       - label: "Is nonprofit only"
         name: "isNonprofitOnly"
@@ -1478,33 +1666,50 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
+        options_length: 500
       - label: "Publish/Stage/Archive"
         name: "publishStageArchive"
         widget: "select"
         options: ["Do Not Publish"]
         default: ""
         required: false
-
       - label: "Municipality"
         name: "municipality"
         widget: "select"
         multiple: false
         required: false
         options: ["All", "Newark"]
+      - label: "Funding Amount"
+        name: "fundingAmount"
+        widget: "select"
+        required: false
+        multiple: true
+        options: ["Less than $50,000", "$50,000 to $500,000", "More than $500,000"]
+      - label: "Min Employees Required"
+        name: "minEmployeesRequired"
+        required: false
+        widget: number
+      - label: "Max Employees Required"
+        name: "maxEmployeesRequired"
+        required: false
+        widget: number
+      - label: "Priority"
+        name: "priority"
+        widget: "boolean"
+        required: false
 
   - name: "archived-funding-opportunities"
     label: "Fund Opps - Archived"
     folder: "content/src/archived-fundings"
-    summary: "/{{urlSlug}} - {{name}}"
-    identifier_field: "{{urlSlug}}"
-    slug: "{{urlSlug}}"
+    summary: "/{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
     delete: true
     create: true
     editor:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "File Name", name: "filename", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Name",
           name: "name",
@@ -1515,16 +1720,10 @@ collections:
           label: "Display Name",
           name: "displayName",
           widget: "string",
-          hint: "This the name displayed internally in CMS list",
+          hint: "This is the name displayed internally in CMS list",
         }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          hint: "This is should be the same as the filename.",
-          required: true,
-        }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
@@ -1603,6 +1802,7 @@ collections:
         search_fields: ["arrayOfFundingAgencies.*.name"]
         value_field: "arrayOfFundingAgencies.*.id"
         display_fields: ["arrayOfFundingAgencies.*.name"]
+        options_length: 500
       - {
           label: "Agency Contact",
           name: "agencyContact",
@@ -1614,7 +1814,7 @@ collections:
         name: "businessStage"
         widget: "select"
         options: ["early-stage", "operating", "both"]
-        hint: "Established businesses (open 5+ years) in JotForm = 'operating' - - 'New business (not open yet or less than 5 years)' in JotForm = 'early-stage'"
+        hint: "Early stage business = not yet open or open less than 2 years; Established business = open 2 years or more"
       - { label: "Employees Required", name: "employeesRequired", widget: "select", options: ["yes", "n/a"] }
       - label: "Home Based"
         name: "homeBased"
@@ -1683,6 +1883,7 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
+        options_length: 500
       - label: "Publish/Stage/Archive"
         name: "publishStageArchive"
         widget: "select"
@@ -1737,11 +1938,12 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
+        options_length: 500
       - label: NAICS Codes
         name: naicsCodes
         widget: string
         required: false
-      - label: Id / Filename
+      - label: Id
         name: id
         widget: write-once-read-only-no-space
       - label: "Display Name"
@@ -1836,6 +2038,7 @@ collections:
         search_fields: ["nonEssentialQuestionsArray.*.id"]
         value_field: "nonEssentialQuestionsArray.*.id"
         display_fields: ["nonEssentialQuestionsArray.*.id"]
+        options_length: 500
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
@@ -1848,6 +2051,7 @@ collections:
             search_fields: ["steps.*.name"]
             value_field: "steps.*.stepNumber"
             display_fields: ["steps.*.name"]
+            options_length: 500
           - label: Weight
             name: weight
             widget: number
@@ -1856,7 +2060,7 @@ collections:
             widget: "relation"
             collection: "tasks"
             search_fields: ["{{displayname}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
+            value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             required: false
             options_length: 500
@@ -1865,7 +2069,7 @@ collections:
             widget: "relation"
             collection: "license-tasks"
             search_fields: ["{{displayname}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
+            value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             required: false
             options_length: 500
@@ -1883,7 +2087,7 @@ collections:
             widget: "relation"
             collection: "tasks"
             search_fields: ["{{displayname}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
+            value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             options_length: 500
           - label: Modified Task
@@ -1891,7 +2095,7 @@ collections:
             widget: "relation"
             collection: "tasks"
             search_fields: ["{{displayname}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
+            value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             options_length: 500
   - name: addons
@@ -1907,7 +2111,7 @@ collections:
     editor:
       preview: false
     fields:
-      - label: Filename
+      - label: Id
         name: id
         widget: write-once-read-only-no-space
       - label: Displayname
@@ -1925,6 +2129,7 @@ collections:
             search_fields: ["steps.*.name"]
             value_field: "steps.*.stepNumber"
             display_fields: ["steps.*.name"]
+            options_length: 500
           - label: Weight
             name: weight
             widget: number
@@ -1933,7 +2138,7 @@ collections:
             widget: "relation"
             collection: "tasks"
             search_fields: ["{{displayname}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
+            value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             required: false
             options_length: 500
@@ -1942,7 +2147,7 @@ collections:
             widget: "relation"
             collection: "license-tasks"
             search_fields: ["{{displayname}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
+            value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             required: false
             options_length: 500
@@ -1960,7 +2165,7 @@ collections:
             widget: "relation"
             collection: "tasks"
             search_fields: ["{{displayname}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
+            value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             options_length: 500
           - label: Modified Task
@@ -1968,7 +2173,7 @@ collections:
             widget: "relation"
             collection: "tasks"
             search_fields: ["{{displayname}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
+            value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             options_length: 500
   - name: "nonEssentialQuestionsCollection"
@@ -1997,7 +2202,7 @@ collections:
                 widget: "relation"
                 collection: "addons"
                 search_fields: ["{{displayname}}"]
-                value_field: "{{filename}}"
+                value_field: "{{fields.id}}"
                 display_fields: ["{{displayname}}"]
                 options_length: 500
 
@@ -2101,7 +2306,7 @@ collections:
                 widget: "relation"
                 collection: "tasks"
                 search_fields: ["{{displayname}}", "name", "urlSlug"]
-                value_field: "{{filename}}"
+                value_field: "{{fields.id}}"
                 display_fields: ["{{displayname}}"]
                 required: false
                 options_length: 500
@@ -2110,7 +2315,7 @@ collections:
                 widget: "relation"
                 collection: "license-tasks"
                 search_fields: ["{{displayname}}", "name", "urlSlug"]
-                value_field: "{{filename}}"
+                value_field: "{{fields.id}}"
                 display_fields: ["{{displayname}}"]
                 required: false
                 options_length: 500
@@ -2119,7 +2324,7 @@ collections:
                 widget: "relation"
                 collection: "tasks"
                 search_fields: ["{{displayname}}", "name", "urlSlug"]
-                value_field: "{{filename}}"
+                value_field: "{{fields.id}}"
                 display_fields: ["{{displayname}}"]
                 multiple: true
                 required: false
@@ -2129,7 +2334,7 @@ collections:
                 widget: "relation"
                 collection: "license-tasks"
                 search_fields: ["{{displayname}}", "name", "urlSlug"]
-                value_field: "{{filename}}"
+                value_field: "{{fields.id}}"
                 display_fields: ["{{displayname}}"]
                 multiple: true
                 required: false
@@ -2247,7 +2452,7 @@ collections:
             fields:
               - { label: Violation Notice Message Text, name: violationNoticeMessage, widget: string }
               - { label: Violation Notice CTA Text, name: violationNoticeCTA, widget: string }
-              - { label: Violation Notice CTA Link, name: violationNoticeCTALink, widget: nospace }
+              - { label: Violation Notice CTA Link, name: violationNoticeCTALink, widget: no-space }
       - label: "Housing"
         name: "housing-registration-config"
         file: "content/src/fieldConfig/housing-registration.json"
@@ -2346,16 +2551,31 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: Violation Notice Message Text, name: violationNoticeMessage, widget: string }
-              - { label: Violation Notice CTA Text, name: violationNoticeCTA, widget: string }
-              - { label: Violation Notice CTA Link, name: violationNoticeCTALink, widget: nospace }
+              - {
+                  label: Violation Notice Message Text,
+                  name: violationNoticeMessage,
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  label: Violation Notice CTA Text,
+                  name: violationNoticeCTA,
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  label: Violation Notice CTA Link,
+                  name: violationNoticeCTALink,
+                  widget: no-space,
+                  required: false,
+                }
 
   - name: "tasks"
     label: "Tasks - All"
     folder: "content/src/roadmaps/tasks"
     summary: "{{displayname}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
     sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
     create: true
@@ -2366,16 +2586,9 @@ collections:
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
-      - { label: "Filename", name: "filename", widget: "write-once-read-only-no-space", required: true }
       - { label: "Display Name", name: "displayname", widget: "no-space", required: true }
       - { label: "Name", name: "name", widget: "string" }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          hint: "This is should be the same as the filename.",
-          required: true,
-        }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - {
@@ -2401,6 +2614,7 @@ collections:
         search_fields: ["arrayOfTaskAgencies.*.name"]
         value_field: "arrayOfTaskAgencies.*.id"
         display_fields: ["arrayOfTaskAgencies.*.name"]
+        options_length: 500
       - {
           label: "Additional Agency Context",
           name: "agencyAdditionalContext",
@@ -2422,8 +2636,8 @@ collections:
     label: "License Tasks (Navigator with Webflow mappings)"
     folder: "content/src/roadmaps/license-tasks"
     summary: "{{displayname}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
     sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
     create: true
@@ -2432,26 +2646,13 @@ collections:
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          required: true,
-          hint: "This is should be the same as the filename.",
-        }
-      - {
-          label: "Filename",
-          name: "filename",
-          widget: "write-once-read-only-no-space",
-          hint: "This is the name of the file in the code only.",
-          required: true,
-        }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - {
           label: "Display Name",
           name: "displayname",
           widget: "no-space",
           required: true,
-          hint: "This the name displayed internally in CMS list.",
+          hint: "This is the name displayed internally in CMS list.",
         }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
       - { label: "Title (Navigator)", name: "name", widget: "string" }
@@ -2499,6 +2700,7 @@ collections:
         search_fields: ["arrayOfTaskAgencies.*.name"]
         value_field: "arrayOfTaskAgencies.*.id"
         display_fields: ["arrayOfTaskAgencies.*.name"]
+        options_length: 500
       - {
           label: "Agency additional context (Webflow & Navigator)",
           name: "agencyAdditionalContext",
@@ -2516,12 +2718,45 @@ collections:
           - { label: "school/course", value: "school-course" }
           - { label: "object or vehicle", value: "object-vehicle" }
 
+  - name: "raffle-bingo-steps"
+    label: "Raffle Bingo Steps"
+    folder: "content/src/roadmaps/raffle-bingo-steps"
+    summary: "{{displayname}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
+    delete: true
+    sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
+      - {
+          label: "Display Name",
+          name: "displayname",
+          widget: "no-space",
+          required: true,
+          hint: "This is the name displayed internally in CMS list.",
+        }
+      - {
+          label: "Url Slug",
+          name: "urlSlug",
+          widget: "no-space",
+          hint: "Lowercase, no spaces, add hyphens between words.",
+        }
+      - { label: "Title", name: "name", widget: "string" }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+
   - name: "webflow-licenses"
     label: "Webflow Licenses"
     folder: "content/src/webflow-licenses"
     summary: "{{displayname}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: false
     sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
     create: false
@@ -2529,7 +2764,7 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Filename", name: "filename", widget: "write-once-read-only-no-space", required: true }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Display Name", name: "displayname", widget: "no-space", required: true }
       - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
       - { label: "Title (Navigator)", name: "name", widget: "string", required: false }
@@ -2548,6 +2783,7 @@ collections:
         search_fields: ["arrayOfTaskAgencies.*.name"]
         value_field: "arrayOfTaskAgencies.*.id"
         display_fields: ["arrayOfTaskAgencies.*.name"]
+        options_length: 500
       - {
           label: "Agency additional context (Webflow & Navigator)",
           name: "agencyAdditionalContext",
@@ -2892,15 +3128,16 @@ collections:
     folder: "content/src/roadmaps/municipal-tasks"
     delete: false
     create: false
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    summary: "{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
+    editor:
+      preview: false
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Name", name: "name", widget: "string", required: false }
       - { label: "ID", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Webflow Name", name: "webflowName", widget: "string", required: false }
-      - { label: "File name", name: "filename", widget: "write-once-read-only-no-space", required: true }
       - { label: "Call to Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call to Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Agency ID", name: "agencyId", widget: "string", required: false }
@@ -3144,22 +3381,28 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - {
-          label: "Preview Type (CMS Only)",
-          name: "previewType",
-          widget: "select",
-          default: "expiration",
-          options: ["expiration", "renewal"],
-        }
       - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
-      - { label: "URL Slug", name: "urlSlug", widget: "write-once-read-only-no-space", required: true }
+      - {
+          label: "URL Slug",
+          name: "urlSlug",
+          widget: "no-space",
+          required: true,
+          hint: "The suffix '-renewal' and '-expiration' are automatically appended to the url slug.",
+        }
       - {
           label: "Expiration Event Label",
           name: "expirationEventDisplayName",
           widget: "string",
           required: true,
+          hint: "This field updates the label on the calendar in the dashboard and header text on the expiration details page",
         }
-      - { label: "Renewal Event Label", name: "renewalEventDisplayName", widget: "string", required: true }
+      - {
+          label: "Renewal Event Label",
+          name: "renewalEventDisplayName",
+          widget: "string",
+          required: true,
+          hint: "This field updates the label on the calendar in the dashboard and header text on the renewal details page",
+        }
       - {
           label: "Disclaimer Text",
           name: "disclaimerText",
@@ -3167,7 +3410,7 @@ collections:
           required: true,
           default: "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services.",
         }
-      - { label: "Summary Description (Optional)", name: "summaryDescriptionMd", widget: "markdown" }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown", required: false }
       - { label: "Below License Status Content", name: "body", widget: "markdown", required: true }
       - {
           label: "Issuing Agency",
@@ -3229,7 +3472,7 @@ collections:
           label: "Form Id",
           name: "id",
           widget: "write-once-read-only-no-space",
-          hint: "This is should be the same as the filename. Content will appear on the filings page.",
+          hint: "This should be the same as the filename. Content will appear on the filings page.",
           required: true,
         }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -3504,25 +3747,57 @@ collections:
       - { name: "" }
 
   - name: "anytime-action-tasks"
-    label: "Anytime Action With Details Page"
+    label: "Anytime Actions Tasks"
     folder: "content/src/anytime-action-tasks"
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    summary: "{{name}} - {{category[0]}} - {{category[1]}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
-    sortable_fields: ["name", "filename"]
+    sortable_fields: ["name", "id", "category"]
     create: true
     editor:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - {
-          label: "Filename (disabled after file creation)",
-          name: "filename",
+          label: "Id",
+          name: "id",
           widget: "write-once-read-only-no-space",
+          hint: "disabled after file creation",
           required: true,
         }
       - { label: "Name/Title", name: "name", widget: "string" }
+      - {
+          label: "Category",
+          name: "category",
+          widget: "select",
+          hint: "only the first category will be used",
+          required: true,
+          multiple: true,
+          options:
+            [
+              "Contract With NJ State Government",
+              "Sell or Close My Business",
+              "Change My Business Information",
+              "Hire New Employees",
+              "Reactivate My Expired Permit, License or Registration",
+              "Apply for State Funding",
+              "Offer new Products or Services",
+              "Transport My Products or Equipment",
+              "Manage My Properties",
+              "Set Up at a Temporary Location",
+              "Purchase New Products or Equipment",
+              "Only Show in Subtask",
+            ],
+        }
+      # This is implemented but needs follow up in a future ticket for content before going live (Also same code for anytime action license reinstatements)
+      # - {
+      #     label: "Meta Data for Dropdown Search (searching will match this text but it will never appear)",
+      #     name: "searchMetaDataMatch",
+      #     widget: "string",
+      #     required: false,
+      #   }
+      - { label: "Dropdown Description", name: "description", widget: "string", required: false }
       - {
           label: "Apply to all - overrides industry and sector dropdown",
           name: "applyToAllUsers",
@@ -3551,15 +3826,6 @@ collections:
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
         options_length: 500
-      - label: "Icon"
-        name: icon
-        widget: "relation"
-        multiple: false
-        required: true
-        collection: "mappings"
-        search_fields: ["anytimeActionIcons.*.name"]
-        value_field: "anytimeActionIcons.*.filename"
-        display_fields: ["anytimeActionIcons.*.name"]
       - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "no-space", required: true }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown", required: true }
@@ -3570,35 +3836,35 @@ collections:
   - name: "anytime-action-license-reinstatements"
     label: "Anytime Action With Consumer Affairs License Integrations (Reinstatements)"
     folder: "content/src/anytime-action-license-reinstatements"
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
+    summary: "{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
     delete: true
-    sortable_fields: ["name", "filename"]
+    sortable_fields: ["name", "id"]
     create: true
     editor:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - {
-          label: "Filename (disabled after file creation)",
-          name: "filename",
+          label: "Id",
+          name: "id",
           widget: "write-once-read-only-no-space",
+          hint: "disabled after file creation",
           required: true,
         }
       - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
       - { label: "Name/Title", name: "name", widget: "string" }
-      - label: "Icon"
-        name: icon
-        widget: "relation"
-        multiple: false
-        required: true
-        collection: "mappings"
-        search_fields: ["anytimeActionIcons.*.name"]
-        value_field: "anytimeActionIcons.*.filename"
-        display_fields: ["anytimeActionIcons.*.name"]
       - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "no-space", required: true }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+      # This is implemented but needs follow up in a future ticket for content before going live (Also same code for anytime action license tasks)
+      # - {
+      #     label: "Meta Data for Dropdown Search (searching will match this text but it will never appear)",
+      #     name: "searchMetaDataMatch",
+      #     widget: "string",
+      #     required: false,
+      #   }
+      - { label: "Dropdown Description", name: "description", widget: "string", required: false }
       - { label: "Below License Status Content", name: "body", widget: "markdown", required: true }
       - {
           label: "Issuing Agency",
@@ -3609,66 +3875,129 @@ collections:
         }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-
-  - name: "anytime-action-links"
-    label: "Anytime Action External Link Only"
-    folder: "content/src/anytime-action-links"
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
-    delete: true
-    sortable_fields: ["name", "filename"]
-    create: true
-    editor:
-      preview: false
-    fields:
-      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - {
-          label: "Filename (disabled after file creation)",
-          name: "filename",
-          widget: "write-once-read-only-no-space",
-          required: true,
-        }
-      - { label: "Name/Title", name: "name", widget: "string" }
-      - {
-          label: "Apply to all - overrides industry and sector dropdown",
-          name: "applyToAllUsers",
-          widget: "boolean",
-          required: false,
-        }
-      - label: Apply to industries
-        name: industryIds
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "roadmaps"
-        search_fields: ["name"]
-        value_field: "{{id}}"
-        display_fields: ["{{name}}"]
-        options_length: 500
-      - label: Apply to sectors
-        name: sectorIds
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "mappings"
-        search_fields: ["arrayOfSectors.*.name"]
-        value_field: "arrayOfSectors.*.id"
-        display_fields: ["arrayOfSectors.*.name"]
-        options_length: 500
-      - label: "Icon"
-        name: icon
-        widget: "relation"
-        multiple: false
-        required: true
-        collection: "mappings"
-        search_fields: ["anytimeActionIcons.*.name"]
-        value_field: "anytimeActionIcons.*.filename"
-        display_fields: ["anytimeActionIcons.*.name"]
-      - { label: "External Link", name: "externalRoute", widget: "no-space", required: true }
-
+  - name: "tax-clearance-certificate-anytime-action"
+    label: "Tax Clearance Anytime Action"
+    delete: false
+    create: false
+    files:
+      - label: "Tax Clearance Step 1"
+        name: "taxClearanceCertificate-step1"
+        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step1.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Step 1
+            name: taxClearanceCertificateStep1
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Content Body", name: "content", widget: "markdown", required: true }
+              - {
+                  label: "Issuing Agency Label Text",
+                  name: "issuingAgencyLabelText",
+                  widget: "string",
+                  required: true,
+                }
+              - { label: "Issuing Agency Text", name: "issuingAgencyText", widget: "string", required: true }
+              - { label: "Next Button Text", name: "continueButtonText", widget: "string", required: true }
+      - label: "Tax Clearance Step 2"
+        name: "taxClearanceCertificate-step2"
+        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step2.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Step 2
+            name: taxClearanceCertificateStep2
+            collapsed: false
+            widget: object
+            fields:
+              - {
+                  label: "Requesting Agency Section Header",
+                  name: "requestingAgencySectionHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Requesting Agency Label",
+                  name: "requestingAgencyLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Business Information Section Header",
+                  name: "businessInformationSectionHeader",
+                  widget: "string",
+                  required: true,
+                }
+      - label: "Tax Clearance Step 3"
+        name: "taxClearanceCertificate-step3"
+        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step3.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Step 3
+            name: taxClearanceCertificateStep3
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Main Title Header", name: "mainTitleHeader", widget: "string", required: true }
+              - { label: "Edit Button Text", name: "editButtonText", widget: "string", required: true }
+              - {
+                  label: "First Section Header",
+                  name: "firstSectionHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Certification Reason Label",
+                  name: "certificationReasonLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Second Section Header",
+                  name: "secondSectionHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - { label: "Business Name Label", name: "businessNameLabel", widget: "string", required: true }
+              - { label: "Entity Id Label", name: "entityIdLabel", widget: "string", required: true }
+              - { label: "Address Label", name: "addressLabel", widget: "string", required: true }
+              - { label: "State Tax Id Label", name: "stateTaxIdLabel", widget: "string", required: true }
+              - { label: "Tax Pin Label", name: "taxPinLabel", widget: "string", required: true }
+      - label: "Tax Clearance Shared"
+        name: "taxClearanceCertificate-shared"
+        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-shared.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Shared
+            name: taxClearanceCertificateShared
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Stepper One Tab Text", name: "stepperOneLabel", widget: "string", required: true }
+              - { label: "Stepper Two Tab Text", name: "stepperTwoLabel", widget: "string", required: true }
+              - {
+                  label: "Stepper Three Tab Text",
+                  name: "stepperThreeLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Save Button Text",
+                  name: "saveButtonText",
+                  widget: "string",
+                  required: true,
+                  hint: Only applies to tab 2 and 3,
+                }
+              - {
+                  label: "Back Button Text",
+                  name: "backButtonText",
+                  widget: "string",
+                  required: true,
+                  hint: Only applies to tab 2 and 3,
+                }
   - name: "page-metadata"
     label: "🟨 PAGE METADATA"
     folder: "content/src"
@@ -3692,7 +4021,6 @@ collections:
             widget: object
             summary: "{{pagesMetadata}}"
             fields:
-              - { label: "filename", name: "filename", widget: "hidden" }
               - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
               - { label: "Title Postfix", name: "titlePostfix", widget: "string", required: true }
               - { label: "Site Description", name: "siteDescription", widget: "string", required: true }
@@ -3709,7 +4037,7 @@ collections:
                 }
 
   - name: "misc-label"
-    label: "🟩 MISC"
+    label: "🟦 MISC"
     folder: "content/src"
     fields:
       - { name: "" }
@@ -3900,22 +4228,6 @@ collections:
       preview: false
     delete: false
     files:
-      - label: "Anytime Action Icons"
-        name: "anytimeActionIcons"
-        file: "content/src/mappings/anytimeActionIcons.json"
-        fields:
-          - label: Anytime Action Icons
-            name: anytimeActionIcons
-            widget: list
-            allow_add: false
-            summary: "{{name}}"
-            fields:
-              - label: Name
-                name: name
-                widget: string
-              - label: Filename
-                name: filename
-                widget: hidden
       - label: "Funding Agencies"
         name: "arrayOfFundingAgencies"
         file: "content/src/mappings/fundingAgency.json"
@@ -3938,6 +4250,22 @@ collections:
         fields:
           - label: Sectors
             name: arrayOfSectors
+            widget: list
+            allow_add: false
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Id
+                name: id
+                widget: hidden
+      - label: "Tax Clearance Certificate Issuing Agencies"
+        name: "arrayOfTaxClearanceCertificateIssuingAgencies"
+        file: "content/src/mappings/taxClearanceCertificateIssuingAgencies.json"
+        fields:
+          - label: Issuing Agencies
+            name: arrayOfTaxClearanceCertificateIssuingAgencies
             widget: list
             allow_add: false
             summary: "{{name}}"
@@ -4108,79 +4436,6 @@ collections:
             fields:
               - { label: Issuing Agency Label, name: issuingAgencyText, widget: string }
 
-          - label: Landing Page
-            name: landingPage
-            collapsed: true
-            widget: object
-            summary: "{{landingPage}}"
-            fields:
-              - { label: Hero - First Line, name: heroCallOutFirstLineText, widget: string }
-              - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
-              - { label: Tile Title Text, name: tileTitleText, widget: string }
-              - { label: Section 2 - Header, name: section2HeaderText, widget: string }
-              - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: text }
-              - { label: Section 2 - Call to Action, name: section2CallToActionText, widget: string }
-              - { label: Section 3 - Header, name: section3HeaderText, widget: string }
-              - { label: Section 3 - Supporting Text, name: section3SupportingText, widget: string }
-              - { label: Section 3 - Call to Action, name: section3CallToActionText, widget: string }
-              - { label: Section 4 - Header Text, name: section4HeaderText, widget: string }
-              - { label: Section 4 - First Icon Text, name: section4FirstIconText, widget: string }
-              - { label: Section 4 - Second Icon Text, name: section4SecondIconText, widget: string }
-              - { label: Section 4 - Third Icon Text, name: section4ThirdIconText, widget: string }
-              - { label: Section 5 - First Header Text, name: section5FirstHeaderText, widget: string }
-              - { label: Section 5 - First Supporting Text, name: section5FirstSupportingText, widget: text }
-              - { label: Section 5 - Second Header Text, name: section5SecondHeaderText, widget: string }
-              - {
-                  label: Section 5 - Second Supporting Text,
-                  name: section5SecondSupportingText,
-                  widget: text,
-                }
-              - { label: Section 5 - Third Header Text, name: section5ThirdHeaderText, widget: string }
-              - { label: Section 5 - Third Supporting Text, name: section5ThirdSupportingText, widget: text }
-              - { label: Section 6 - Header Text, name: section6Header, widget: string }
-              - { label: Card 1 - Header Line 1, name: card1Header, widget: string }
-              - { label: Card 1 - Supporting Text, name: card1SupportingText, widget: string }
-              - { label: Card 1 - Button Text, name: card1Button, widget: string }
-              - { label: Card 1 - Button Link, name: card1ButtonLink, widget: string }
-              - { label: Card 2 - Header Line 2, name: card2Header, widget: string }
-              - { label: Card 2 - Supporting Text, name: card2SupportingText, widget: text }
-              - { label: Card 2 - Button Text, name: card2Button, widget: string }
-              - { label: Card 2 - Button Link, name: card2ButtonLink, widget: string }
-              - { label: Card 3 - Header Line 3, name: card3Header, widget: string }
-              - { label: Card 3 - Supporting Text, name: card3SupportingText, widget: text }
-              - { label: Card 3 - Button Text, name: card3Button, widget: string }
-              - {
-                  label: Landing Page - Get Started Tile Line 1,
-                  name: landingPageGetStartedTileLine1,
-                  widget: string,
-                }
-              - {
-                  label: Landing Page - Get Started Tile Line 2,
-                  name: landingPageGetStartedTileLine2,
-                  widget: string,
-                }
-              - { label: Landing Page - Register Biz Tile, name: landingPageRegisterBizTile, widget: string }
-              - { label: Landing Page - Taxes Tile, name: landingPageTaxesTile, widget: string }
-              - { label: Landing Page - Out Of State Tile, name: landingPageOutOfStateTile, widget: string }
-              - { label: Landing Page - Funding Tile, name: landingPageFundingTile, widget: string }
-              - { label: Landing Page - Start Biz Tile, name: landingPageStartBizTile, widget: string }
-              - { label: Landing Page - Run Biz Tile, name: landingPageTileRunBizTile, widget: string }
-          - label: Landing Page Experience B
-            name: landingPageExperienceB
-            collapsed: true
-            widget: object
-            summary: "{{landingPageExperienceB}}"
-            fields:
-              - { label: Hero - First Line, name: heroCallOutFirstLineText, widget: string }
-              - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
-              - { label: Section 2 - Header, name: section2HeaderText, widget: string }
-              - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: text }
-              - { label: Section 2 - Call to Action, name: section2CallToActionText, widget: string }
-              - { label: Section 3 - Call to Action, name: section3CallToActionText, widget: string }
-              - { label: Section 4 - Second Icon Text, name: section4SecondIconText, widget: string }
-              - { label: Section 5 - First Supporting Text, name: section5FirstSupportingText, widget: text }
-              - { label: Section 5 - Third Supporting Text, name: section5ThirdSupportingText, widget: text }
-              - { label: Section 5 - First Header Text, name: section5FirstHeaderText, widget: string }
           - label: Legal Messages
             name: legalMessageDefaults
             collapsed: true
@@ -4228,8 +4483,6 @@ collections:
               - { label: Link One, name: linkOne, widget: string }
               - { label: Link Two Text, name: linkTwoText, widget: string }
               - { label: Link Two, name: linkTwo, widget: string }
-              - { label: Link Three Text, name: linkThreeText, widget: string }
-              - { label: Link Three, name: linkThree, widget: string }
               - { label: Made With Text, name: madeWithText, widget: string }
               - { label: By The Office of Innovation Text, name: byTheOfficeOfInnovationText, widget: string }
               - {
@@ -4346,6 +4599,7 @@ collections:
               - { label: Remove Text, name: removeText, widget: string }
               - { label: Back, name: backButtonText, widget: string }
               - { label: Continue Text, name: continueButtonText, widget: string }
+              - { label: Mark As Complete, name: "markAsCompleteButtonText", widget: string }
           - label: Task - Business Name Search
             name: searchBusinessNameTask
             collapsed: true
@@ -4365,91 +4619,13 @@ collections:
               - { label: Name has been Updated Message, name: nameHasBeenUpdatedText, widget: string }
               - { label: Error - Bad Input, name: errorTextBadInput, widget: string }
               - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
-          - label: Task - License Search
-            name: licenseSearchTask
-            collapsed: true
-            widget: object
-            summary: "{{licenseSearchTask}}"
-            fields:
-              - { label: Primary CTA - Line 1, name: primaryCTAFirstLineText, widget: string }
-              - { label: Primary CTA - Line 2, name: primaryCTASecondLineText, widget: string }
-              - { label: Secondary CTA - Line 1, name: secondaryCTAFirstLineText, widget: string }
-              - { label: Secondary CTA - Line 2, name: secondaryCTASecondLineText, widget: string }
-              - { label: Tab 1 Label, name: tab1Text, widget: string }
-              - { label: Tab 2 Label, name: tab2Text, widget: string }
-              - { label: Check Status Text, name: checkStatusText, widget: text }
-              - { label: Business Name Label, name: businessNameLabel, widget: string }
-              - { label: Address 1 Label, name: address1Label, widget: string }
-              - { label: Address 2 Label, name: address2Label, widget: string }
-              - { label: Zip Code Label, name: zipCodeLabel, widget: string }
-              - { label: State Label, name: stateLabel, widget: string }
-              - { label: Submit Button Text, name: submitText, widget: string }
-              - { label: Error - Not Found, name: errorTextNotFound, widget: string }
-              - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
-              - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
-              - { label: Found Text, name: foundText, widget: string }
-              - { label: Permit Status Label, name: permitStatusText, widget: string }
-              - {
-                  label: Application Checklist Items Label,
-                  name: applicationChecklistItemsText,
-                  widget: string,
-                }
-              - { label: Edit Button Text, name: editButtonText, widget: string }
-              - { label: Status - Pending, name: pendingPermitStatusText, widget: string }
-              - { label: Status - Active, name: activePermitStatusText, widget: string }
-              - { label: Status - Expired, name: expiredPermitStatusText, widget: string }
-              - { label: Status - Barred, name: barredPermitStatusText, widget: string }
-              - { label: Status - Out of State, name: outOfBusinessPermitStatusText, widget: string }
-              - {
-                  label: Status - Reinstatement Pending,
-                  name: reinstatementPendingPermitStatusText,
-                  widget: string,
-                }
-              - { label: Status - Closed, name: closedPermitStatusText, widget: string }
-              - { label: Status - Deleted, name: deletedPermitStatusText, widget: string }
-              - { label: Status - Denied, name: deniedPermitStatusText, widget: string }
-              - {
-                  label: Status - Voluntary Surrender,
-                  name: voluntarySurrenderPermitStatusText,
-                  widget: string,
-                }
-              - { label: Status - Withdrawn, name: withdrawnPermitStatusText, widget: string }
-              - { label: Status - Draft, name: draftStatusText, widget: string }
-              - { label: Status - Submitted, name: submittedStatusText, widget: string }
-              - { label: Status - Under Internal Review, name: underInternalReviewStatusText, widget: string }
-              - { label: Status - Special Review, name: specialReviewStatusText, widget: string }
-              - { label: Status - Pending Deficiencies, name: pendingDeficienciesStatusText, widget: string }
-              - {
-                  label: Status - Deficiencies Submitted,
-                  name: deficienciesSubmittedStatusText,
-                  widget: string,
-                }
-              - { label: Status - Checklist Completed, name: checklistCompletedStatusText, widget: string }
-              - { label: Status - Approved, name: approvedStatusText, widget: string }
-              - { label: Status - Pending Renewal, name: pendingRenewalStatusText, widget: string }
-              - {
-                  label: Status - Pending Reinstatement,
-                  name: pendingReinstatementStatusText,
-                  widget: string,
-                }
-              - { label: Status - Inactive, name: inactiveStatusText, widget: string }
-              - { label: Status - Abandoned, name: abandonedStatusText, widget: string }
-              - { label: Status - Suspended, name: suspendedStatusText, widget: string }
-              - { label: Status - Revoked, name: revokedStatusText, widget: string }
-              - { label: Tooltip Text, name: tooltipText, widget: text }
-              - { label: Status - Completed, name: completedStatusText, widget: string }
-              - { label: Status - Incomplete, name: incompleteStatusText, widget: string }
-              - { label: Status - Scheduled, name: scheduledStatusText, widget: string }
-              - { label: Status - Not Applicable, name: notApplicableStatusText, widget: text }
-              - { label: Issuing Agency Name, name: issuingAgencyNameText, widget: text }
           - label: Task Progress
             name: taskProgress
             collapsed: true
             widget: object
             summary: "{{taskProgress}}"
             fields:
-              - { label: Not Started Text, name: NOT_STARTED, widget: string }
-              - { label: In Progress Text, name: IN_PROGRESS, widget: string }
+              - { label: To Do Text, name: TO_DO, widget: string }
               - { label: Completed Text, name: COMPLETED, widget: string }
           - label: Task Progress Card
             name: taskProgressCard
@@ -4478,6 +4654,183 @@ collections:
               - { label: Saving Text, name: savingText, widget: string }
               - { label: Saved Text, name: savedText, widget: string }
 
+  - name: "landing-pages"
+    label: "Landing Pages"
+    delete: false
+    create: false
+    files:
+      - label: "Landing Page"
+        name: "landing-page"
+        file: "content/src/fieldConfig/landing-page.json"
+        editor:
+          preview: false
+        fields:
+          - label: "Landing Page"
+            name: landingPage
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Card 1 - Button Text, name: card1Button, widget: string }
+              - { label: Card 1 - Button Link, name: card1ButtonLink, widget: string }
+              - { label: Card 1 - Header Line 1, name: card1Header, widget: string }
+              - { label: Card 1 - Supporting Text, name: card1SupportingText, widget: string }
+              - { label: Card 2 - Button Text, name: card2Button, widget: string }
+              - { label: Card 2 - Button Link, name: card2ButtonLink, widget: string }
+              - { label: Card 2 - Header Line 2, name: card2Header, widget: string }
+              - { label: Card 2 - Supporting Text, name: card2SupportingText, widget: text }
+              - { label: Card 3 - Button Text, name: card3Button, widget: string }
+              - { label: Card 3 - Header Line 3, name: card3Header, widget: string }
+              - { label: Card 3 - Supporting Text, name: card3SupportingText, widget: text }
+              - { label: Hero - First Line, name: heroCallOutFirstLineText, widget: string }
+              - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
+              - { label: Landing Page - Funding Tile, name: landingPageFundingTile, widget: string }
+              - {
+                  label: Landing Page - Get Started Tile Line 1,
+                  name: landingPageGetStartedTileLine1,
+                  widget: string,
+                }
+              - {
+                  label: Landing Page - Get Started Tile Line 2,
+                  name: landingPageGetStartedTileLine2,
+                  widget: string,
+                }
+              - { label: Landing Page - Out Of State Tile, name: landingPageOutOfStateTile, widget: string }
+              - { label: Landing Page - Register Biz Tile, name: landingPageRegisterBizTile, widget: string }
+              - { label: Landing Page - Run Biz Tile, name: landingPageRunBizTile, widget: string }
+              - { label: Landing Page - Start Biz Tile, name: landingPageStartBizTile, widget: string }
+              - { label: Landing Page - Taxes Tile, name: landingPageTaxesTile, widget: string }
+              - { label: Section 2 - Call to Action, name: section2CallToActionText, widget: string }
+              - { label: Section 2 - Header, name: section2HeaderText, widget: string }
+              - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: text }
+              - { label: Section 3 - Call to Action, name: section3CallToActionText, widget: string }
+              - { label: Section 3 - Header, name: section3HeaderText, widget: string }
+              - { label: Section 3 - Supporting Text, name: section3SupportingText, widget: string }
+              - { label: Section 4 - First Icon Text, name: section4FirstIconText, widget: string }
+              - { label: Section 4 - Header Text, name: section4HeaderText, widget: string }
+              - { label: Section 4 - Second Icon Text, name: section4SecondIconText, widget: string }
+              - { label: Section 4 - Third Icon Text, name: section4ThirdIconText, widget: string }
+              - { label: Section 5 - First Header Text, name: section5FirstHeaderText, widget: string }
+              - { label: Section 5 - First Supporting Text, name: section5FirstSupportingText, widget: text }
+              - { label: Section 5 - Second Header Text, name: section5SecondHeaderText, widget: string }
+              - {
+                  label: Section 5 - Second Supporting Text,
+                  name: section5SecondSupportingText,
+                  widget: text,
+                }
+              - { label: Section 5 - Third Header Text, name: section5ThirdHeaderText, widget: string }
+              - { label: Section 5 - Third Supporting Text, name: section5ThirdSupportingText, widget: text }
+              - { label: Section 6 - Header Text, name: section6Header, widget: string }
+              - { label: Tile Title Text, name: tileTitleText, widget: string }
+      - label: "Landing Page Experience B"
+        name: "landing-page-experience-b"
+        file: "content/src/fieldConfig/landing-page-experience-b.json"
+        editor:
+          preview: false
+        fields:
+          - label: "Landing Page Experience B"
+            name: landingPageExperienceB
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Hero - First Line, name: heroCallOutFirstLineText, widget: string }
+              - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
+              - { label: Section 2 - Call to Action, name: section2CallToActionText, widget: string }
+              - { label: Section 2 - Header, name: section2HeaderText, widget: string }
+              - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: text }
+              - { label: Section 3 - Call to Action, name: section3CallToActionText, widget: string }
+              - { label: Section 4 - Second Icon Text, name: section4SecondIconText, widget: string }
+              - { label: Section 5 - First Header Text, name: section5FirstHeaderText, widget: string }
+              - { label: Section 5 - First Supporting Text, name: section5FirstSupportingText, widget: text }
+              - { label: Section 5 - Third Supporting Text, name: section5ThirdSupportingText, widget: text }
+
+  - name: "license-search-task"
+    label: "License Search Task"
+    delete: false
+    create: false
+    files:
+      - label: "License Search Task"
+        name: "licenseSearchTask"
+        file: "content/src/fieldConfig/license-search-task.json"
+        editor:
+          preview: false
+        fields:
+          - label: "License Search Task"
+            name: "licenseSearchTask"
+            collapsed: false
+            widget: object
+            fields:
+              - { labeL: Status - Abandoned, name: abandonedStatusText, widget: string }
+              - { labeL: Status - Active, name: activePermitStatusText, widget: string }
+              - { label: Address 1 - Label, name: address1Label, widget: string }
+              - { label: Address 2 - Label, name: address2Label, widget: string }
+              - {
+                  label: Application Checklist Items Text,
+                  name: applicationChecklistItemsText,
+                  widget: string,
+                }
+              - { label: Status - Approved, name: approvedStatusText, widget: string }
+              - { label: Status - Barred, name: barredPermitStatusText, widget: string }
+              - { label: Business Name Label, name: businessNameLabel, widget: string }
+              - { label: Check Status Text, name: checkStatusText, widget: string }
+              - { label: Status - Checklist Completed, name: checklistCompletedStatusText, widget: string }
+              - { label: Status - Closed, name: closedPermitStatusText, widget: string }
+              - { label: Status - Completed, name: completedStatusText, widget: string }
+              - {
+                  label: Status - Deficiencies Submitted,
+                  name: deficienciesSubmittedStatusText,
+                  widget: string,
+                }
+              - { label: Status - Deleted, name: deletedPermitStatusText, widget: string }
+              - { label: Status - Denied, name: deniedPermitStatusText, widget: string }
+              - { label: Status - Draft, name: draftStatusText, widget: string }
+              - { label: Edit Button Text, name: editButtonText, widget: string }
+              - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
+              - { label: Error - Not Found, name: errorTextNotFound, widget: string }
+              - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
+              - { label: Status - Expired, name: expiredPermitStatusText, widget: string }
+              - { label: Found Text, name: foundText, widget: string }
+              - { label: Status - Inactive, name: inactiveStatusText, widget: string }
+              - { label: Status - Incomplete, name: incompleteStatusText, widget: string }
+              - { label: Issuing Agency Name, name: issuingAgencyNameText, widget: string }
+              - { label: Status - Not Applicable, name: notApplicableStatusText, widget: string }
+              - { label: Status - Out of Business, name: outOfBusinessPermitStatusText, widget: string }
+              - { label: Status - Pending Deficiencies, name: pendingDeficienciesStatusText, widget: string }
+              - { label: Status - Pending, name: pendingPermitStatusText, widget: string }
+              - {
+                  label: Status - Pending Reinstatement,
+                  name: pendingReinstatementStatusText,
+                  widget: string,
+                }
+              - { label: Status - Pending Renewal, name: pendingRenewalStatusText, widget: string }
+              - { label: Permit Status Label, name: permitStatusText, widget: string }
+              - { label: Primary CTA - Line 1, name: primaryCTAFirstLineText, widget: string }
+              - { label: Primary CTA - Line 2, name: primaryCTASecondLineText, widget: string }
+              - {
+                  label: Status - Reinstatement Pending,
+                  name: reinstatementPendingPermitStatusText,
+                  widget: string,
+                }
+              - { label: Status - Revoked, name: revokedStatusText, widget: string }
+              - { label: Status - Scheduled, name: scheduledStatusText, widget: string }
+              - { label: Secondary CTA - Line 1, name: secondaryCTAFirstLineText, widget: string }
+              - { label: Secondary CTA - Line 2, name: secondaryCTASecondLineText, widget: string }
+              - { label: Status - Special Review, name: specialReviewStatusText, widget: string }
+              - { label: State Label, name: stateLabel, widget: string }
+              - { label: Submit Button Text, name: submitText, widget: string }
+              - { label: Status - Submitted, name: submittedStatusText, widget: string }
+              - { label: Status - Suspended, name: suspendedStatusText, widget: string }
+              - { label: Tab 1 Label, name: tab1Text, widget: string }
+              - { label: Tab 2 Label, name: tab2Text, widget: string }
+              - { label: Tooltip Text, name: tooltipText, widget: string }
+              - { label: Status - Under Internal Review, name: underInternalReviewStatusText, widget: string }
+              - {
+                  label: Status - Voluntary Surrender,
+                  name: voluntarySurrenderPermitStatusText,
+                  widget: string,
+                }
+              - { label: Status - Withdrawn, name: withdrawnPermitStatusText, widget: string }
+              - { label: Zip Code Label, name: zipCodeLabel, widget: string }
+
   - name: "profile-onboarding"
     label: "Profile Page"
     delete: false
@@ -4499,6 +4852,18 @@ collections:
                 collapsed: false
                 widget: object
                 fields:
+                  - label: Trade Name
+                    name: tradeName
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Error Text Required", name: "errorTextRequired", widget: "string" }
                   - label: Business Persona
                     name: businessPersona
                     collapsed: true
@@ -4542,6 +4907,8 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - { label: "U.S. Address", name: "usAddress", widget: "string" }
+                          - { label: "International Address", name: "intlAddress", widget: "string" }
                   - label: Business Name
                     name: "businessName"
                     collapsed: true
@@ -4561,7 +4928,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
@@ -4616,7 +4983,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - {
@@ -4661,7 +5028,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
@@ -4706,20 +5073,6 @@ collections:
                                   name: "limited-partnership",
                                   widget: "markdown",
                                 }
-                  - label: Onboarding Nonprofit Radio
-                    name: isNonprofitOnboardingRadio
-                    collapsed: true
-                    widget: object
-                    fields:
-                      - label: Default
-                        name: "default"
-                        collapsed: false
-                        widget: object
-                        fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
-                          - { label: "Radio Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio No Text", name: "radioButtonFalseText", widget: "string" }
                   - label: Municipality
                     name: "municipality"
                     collapsed: true
@@ -4739,7 +5092,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - {
@@ -4784,7 +5137,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - {
@@ -4840,7 +5193,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - {
@@ -4886,7 +5239,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
@@ -4921,7 +5274,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - {
@@ -4996,7 +5349,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Description", name: "description", widget: "string", required: false }
@@ -5020,7 +5373,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
@@ -5059,7 +5412,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
@@ -5082,7 +5435,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - {
@@ -5111,7 +5464,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Edit Text", name: "editText", widget: "string" }
@@ -5141,7 +5494,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Error Text", name: "errorTextRequired", widget: "string" }
@@ -5165,7 +5518,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Error Text", name: "errorTextRequired", widget: "string" }
@@ -5318,7 +5671,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
@@ -5344,7 +5697,7 @@ collections:
                               collection: "contextual-information",
                               search_fields: ["{{displayname}}"],
                               options_length: 500,
-                              value_field: "{{filename}}",
+                              value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
                           - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
@@ -5364,6 +5717,21 @@ collections:
                           - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
                           - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
+                  - label: Raffle & Bingo Games
+                    name: raffleBingoGames
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - { label: "Alt Description", name: "altDescription", widget: "markdown" }
                   - label: Home Contractor
                     name: homeContractor
                     collapsed: true
@@ -5598,6 +5966,47 @@ collections:
                             }
                           - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Property Lease Type
+                    name: propertyLeaseType
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Radio Button Short Term Rental Text",
+                              name: "radioButtonShortTermRentalText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button Long Term Rental Text",
+                              name: "radioButtonLongTermRentalText",
+                              widget: "string",
+                            }
+                          - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
+                          - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Has Three or More Rental Units
+                    name: hasThreeOrMoreRentalUnits
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Radio Button True Text", name: "radioButtonTrueText", widget: "string" }
+                          - {
+                              label: "Radio Button False Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - { label: "Description", name: "description", widget: "markdown" }
 
               - label: Profile / Onboarding Defaults
                 name: default
@@ -5652,12 +6061,67 @@ collections:
                       widget: string,
                     }
 
+  - label: "Fundings Onboarding Page"
+    name: "business-fundings-onboarding-page"
+    files:
+      - label: "Funding Onboarding Modal Config"
+        name: "funding-onboarding-modal-config"
+        file: "content/src/fieldConfig/njeda-fundings-onboarding.json"
+        editor:
+          preview: false
+        fields:
+          - label: Fundings Onboarding Modal
+            name: fundingsOnboardingModal
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Header Tooltip, name: headerTooltip, widget: string }
+              - { label: Modal Header, name: modalHeader, widget: string }
+              - {
+                  label: Incomplete Warning Singular Text,
+                  name: incompleteWarningSingularText,
+                  widget: string,
+                }
+              - {
+                  label: Incomplete Warning Multiple Text,
+                  name: incompleteWarningMultipleText,
+                  widget: string,
+                }
+              - { label: Save Button Text, name: saveButtonText, widget: string }
+              - label: "Non Profit Question"
+                name: "nonProfitQuestion"
+                widget: object
+                fields:
+                  - { label: Question Text, name: questionText, widget: string }
+                  - { label: Select an Answer Text, name: selectAnAnswerText, widget: string }
+                  - label: Responses
+                    name: responses
+                    widget: object
+                    fields:
+                      - { label: no, name: no, widget: string }
+                      - { label: yes, name: yes, widget: string }
+              - label: "Number of Employees Question"
+                name: "numberOfEmployeesQuestion"
+                widget: object
+                fields:
+                  - { label: Question Text, name: questionText, widget: string }
+                  - { label: Select an Answer Text, name: selectAnAnswerText, widget: string }
+              - label: "Page header"
+                name: "pageHeader"
+                widget: object
+                fields:
+                  - { label: Header Text, name: headerText, widget: string }
+                  - { label: Subheader Text, name: subHeaderText, widget: string }
+                  - { label: Button Text, name: buttonText, widget: string }
+                  - { label: Logo link, name: logoLink, widget: string }
+                  - { label: Logo Aria Text, name: logoAriaText, widget: string }
+
   - name: "contextual-information"
     label: "Contextual Information"
     folder: "content/src/display-content/contextual-information"
     summary: "{{displayname}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
+    identifier_field: "{{fields.id}}"
+    slug: "{{fields.id}}"
     delete: true
     create: true
     editor:
@@ -5666,7 +6130,7 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Header", name: "header", widget: "string" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "write-once-read-only-no-space", required: true }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
       - { label: "Display Name", name: "displayname", widget: "no-space" }
 
   - name: "page-not-found-error"
@@ -5689,6 +6153,61 @@ collections:
               - { label: "Error Description 1", name: "errorDescriptionPt1", widget: "markdown" }
               - { label: "Error Description 2", name: "errorDescriptionPt2", widget: "markdown" }
               - { label: "Chat with Expert", name: "errorChatWithExpert", widget: "markdown" }
+
+  - name: "check-account-email-page"
+    label: "Check Account Email Page"
+    delete: false
+    create: false
+    files:
+      - label: "Check Account Email Page Text"
+        name: "check-account-email-page"
+        file: "content/src/fieldConfig/check-account-email-page.json"
+        editor:
+          preview: true
+        fields:
+          - label: "Check Account Email Page Text"
+            name: checkAccountEmailPage
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Header", name: "header", widget: "string" }
+              - { label: "Input label", name: "inputLabel", widget: "string" }
+              - { label: "Invalid Email text", name: "invalidEmailError", widget: "string" }
+              - { label: "Email Not Found Error Text", name: "emailNotFoundError", widget: "string" }
+              - {
+                  label: "Service Unavailable Error Text",
+                  name: "serviceNotAvailableError",
+                  widget: "string",
+                }
+              - { label: "Default Error Message Text", name: "defaultErrorMessage", widget: "string" }
+              - { label: "Input button", name: "inputButton", widget: "string" }
+              - { label: "No Account Text", name: "noAccountText", widget: "string" }
+              - { label: "Link Account Link Text", name: "linkAccountLinkText", widget: "string" }
+              - { label: "Need help text", name: "needHelpText", widget: "string" }
+              - { label: "Intercom chat text", name: "intercomChatText", widget: "string" }
+
+  - name: "component-accessibility"
+    label: "Component Accessibility"
+    delete: false
+    create: false
+    files:
+      - label: "Callout Alerts"
+        name: "callout-alerts"
+        file: "content/src/mappings/callout-alerts.json"
+        editor:
+          preview: true
+        fields:
+          - label: "Callout Alerts"
+            name: calloutAlerts
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Callout Alert Group Title", name: "calloutAlertGroupTitle", widget: "string" }
+              - { label: "Info (Blue)", name: "info", widget: "string" }
+              - { label: "Success (Green)", name: "success", widget: "string" }
+              - { label: "Error (Red)", name: "error", widget: "string" }
+              - { label: "Warning (Yellow)", name: "warning", widget: "string" }
+              - { label: "Note (Gray)", name: "note", widget: "string" }
 
   - name: "global-error-messages"
     label: "Global Error Messages"
@@ -5719,20 +6238,18 @@ collections:
 
   - name: "navigation-config"
     label: "Navigation Config"
-    summary: "{{filename}}"
+    summary: "Navigation Config"
     delete: false
     create: false
     files:
       - label: "Navigation Defaults"
         name: "navigation-defaults"
-        summary: "{{filename}}"
         file: "content/src/fieldConfig/navigation-defaults.json"
         editor:
           preview: true
         fields:
           - label: "Navigation Defaults"
             name: "navigationDefaults"
-            summary: "{{filename}}"
             widget: object
             fields:
               - { label: Login Button, name: logInButton, widget: string }
@@ -5777,18 +6294,17 @@ collections:
           - label: "Navigation Quick Links"
             name: "navigationQuickLinks"
             widget: object
-            summary: "{{filename}}"
             fields:
               - { label: Mobile Title, name: navBarMobileQuickLinksTitle, widget: string }
               - { label: Plan, name: navBarPlanText, widget: string }
-              - { label: Plan Link, name: navBarPlanLink, widget: nospace }
+              - { label: Plan Link, name: navBarPlanLink, widget: no-space }
               - { label: Start, name: navBarStartText, widget: string }
-              - { label: Start Link, name: navBarStartLink, widget: nospace }
+              - { label: Start Link, name: navBarStartLink, widget: no-space }
               - { label: Operate, name: navBarOperateText, widget: string }
-              - { label: Operate Link, name: navBarOperateLink, widget: nospace }
+              - { label: Operate Link, name: navBarOperateLink, widget: no-space }
               - { label: Grow, name: navBarGrowText, widget: string }
-              - { label: Grow Link, name: navBarGrowLink, widget: nospace }
+              - { label: Grow Link, name: navBarGrowLink, widget: no-space }
               - { label: Updates, name: navBarUpdatesText, widget: string }
-              - { label: Updates Link, name: navBarUpdatesLink, widget: nospace }
+              - { label: Updates Link, name: navBarUpdatesLink, widget: no-space }
               - { label: Search, name: navBarSearchText, widget: string }
-              - { label: Search Link, name: navBarSearchLink, widget: nospace }
+              - { label: Search Link, name: navBarSearchLink, widget: no-space }

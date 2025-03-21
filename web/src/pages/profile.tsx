@@ -17,6 +17,7 @@ import { NonEssentialQuestionsSection } from "@/components/data-fields/non-essen
 import { Notes } from "@/components/data-fields/Notes";
 import { Ownership } from "@/components/data-fields/Ownership";
 import { RadioQuestion } from "@/components/data-fields/RadioQuestion";
+import { RaffleBingoGamesQuestion } from "@/components/data-fields/RaffleBingoGamesQuestion";
 import { RenovationQuestion } from "@/components/data-fields/RenovationQuestion";
 import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
 import { Sectors } from "@/components/data-fields/Sectors";
@@ -34,12 +35,12 @@ import { SidebarPageLayout } from "@/components/njwds-layout/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
+import { ProfileAddress } from "@/components/profile/ProfileAddress";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
-import { ProfileNewJerseyAddress } from "@/components/profile/ProfileNewJerseyAddress";
 import { ProfileNoteDisclaimerForSubmittingData } from "@/components/profile/ProfileNoteForBusinessesFormedOutsideNavigator";
 import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
@@ -49,10 +50,10 @@ import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AddressContext } from "@/contexts/addressContext";
 import { getMergedConfig } from "@/contexts/configContext";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -62,7 +63,7 @@ import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import { createProfileFieldErrorMap, OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
+import { OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getFlow, useMountEffectWhenDefined, useScrollToPathAnchor } from "@/lib/utils/helpers";
 import {
@@ -71,8 +72,9 @@ import {
   createEmptyProfileData,
   determineForeignBusinessType,
   einTaskId,
-  emptyAddressData,
+  emptyFormationAddressData,
   ForeignBusinessType,
+  FormationAddress,
   formationTaskId,
   hasCompletedFormation,
   LookupLegalStructureById,
@@ -90,14 +92,14 @@ import dayjs from "dayjs";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 import { ReactElement, ReactNode, useContext, useState } from "react";
 
 interface Props {
   municipalities: Municipality[];
-  CMS_ONLY_businessPersona?: BusinessPersona; // for CMS only
-  CMS_ONLY_tab?: ProfileTabs; // for CMS only
-  CMS_ONLY_fakeBusiness?: Business; // for CMS only
+  CMS_ONLY_businessPersona?: BusinessPersona;
+  CMS_ONLY_tab?: ProfileTabs;
+  CMS_ONLY_fakeBusiness?: Business;
 }
 
 const ProfilePage = (props: Props): ReactElement => {
@@ -118,7 +120,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const foreignBusinessType: ForeignBusinessType = determineForeignBusinessType(
     profileData.foreignBusinessTypeIds
   );
-  const [addressData, setAddressData] = useState(emptyAddressData);
+  const [formationAddressData, setAddressData] = useState<FormationAddress>(emptyFormationAddressData);
   const {
     FormFuncWrapper,
     onSubmit,
@@ -126,10 +128,10 @@ const ProfilePage = (props: Props): ReactElement => {
     onTabChange: setProfileTab,
     state: formContextState,
     getInvalidFieldIds,
-  } = useFormContextHelper(createProfileFieldErrorMap(), props.CMS_ONLY_tab ?? profileTabs[0]);
+  } = useFormContextHelper(createDataFormErrorMap(), props.CMS_ONLY_tab ?? profileTabs[0]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const redirect = (params?: { [key: string]: any }, routerType = router.push): Promise<boolean> => {
+  const redirect = (params?: { [key: string]: any }, routerType = router!.push): Promise<boolean> => {
     const urlParams = params ? `?${new URLSearchParams(params).toString()}` : "";
     return routerType(`${ROUTES.dashboard}${urlParams}`);
   };
@@ -163,7 +165,7 @@ const ProfilePage = (props: Props): ReactElement => {
       analytics.event.profile_back_to_roadmap.click.view_roadmap();
     }
     if (deepEqual(profileData, business.profileData)) {
-      await redirect(undefined, router.replace);
+      router && (await redirect(undefined, router.replace));
     } else {
       setEscapeModal(true);
     }
@@ -191,7 +193,7 @@ const ProfilePage = (props: Props): ReactElement => {
       if (dateOfFormationHasBeenDeleted) {
         if (isFormationDateDeletionModalOpen) {
           setFormationDateDeletionModalOpen(false);
-          updateQueue.queueTaskProgress({ [formationTaskId]: "IN_PROGRESS" });
+          updateQueue.queueTaskProgress({ [formationTaskId]: "TO_DO" });
         } else {
           setFormationDateDeletionModalOpen(true);
           return;
@@ -215,13 +217,11 @@ const ProfilePage = (props: Props): ReactElement => {
       if (business.profileData.industryId !== profileData.industryId) {
         updateQueue
           .queueBusiness({ ...updateQueue.currentBusiness(), taskItemChecklist: {} })
-          .queueTaskProgress({ [naicsCodeTaskId]: "NOT_STARTED" });
+          .queueTaskProgress({ [naicsCodeTaskId]: "TO_DO" });
       }
 
       updateQueue.queueProfileData(profileData);
-
-      updateQueue.queueFormationFormData(addressData);
-
+      updateQueue.queueFormationFormData(formationAddressData);
       (async (): Promise<void> => {
         updateQueue
           .queue(await postGetAnnualFilings(updateQueue.current()))
@@ -324,6 +324,19 @@ const ProfilePage = (props: Props): ReactElement => {
     );
   };
 
+  const displayVacantBuildingOwnerQuestion = (): boolean => {
+    if (!business) return false;
+    return (
+      (profileData.industryId === "real-estate-investor" || profileData.sectorId === "real-estate") &&
+      (profileData.operatingPhase === "UP_AND_RUNNING" || profileData.businessPersona === "OWNING")
+    );
+  };
+
+  const displayRaffleBingoGameQuestion = (): boolean => {
+    if (!business) return false;
+    return profileData.legalStructureId === "nonprofit";
+  };
+
   const hasSubmittedTaxData =
     business?.taxFilingData.state === "SUCCESS" || business?.taxFilingData.state === "PENDING";
 
@@ -354,6 +367,8 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <NexusDBANameField />
         </ProfileField>
+
+        <ProfileAddress />
 
         <ProfileField fieldName="industryId">
           <Industry />
@@ -442,6 +457,10 @@ const ProfilePage = (props: Props): ReactElement => {
             </div>
           )}
         </ProfileField>
+
+        <ProfileField fieldName="taxPin">
+          <TaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
+        </ProfileField>
       </>
     ),
   };
@@ -457,6 +476,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField fieldName="businessName">
           <BusinessName />
         </ProfileField>
+        <ProfileAddress />
         <ProfileField fieldName="foreignBusinessTypeIds">
           <ForeignBusinessTypeField required />
         </ProfileField>
@@ -488,6 +508,10 @@ const ProfilePage = (props: Props): ReactElement => {
               <TaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
+        </ProfileField>
+
+        <ProfileField fieldName="taxPin">
+          <TaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
       </>
     ),
@@ -536,7 +560,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <BusinessName />
         </ProfileField>
 
-        <ProfileNewJerseyAddress />
+        <ProfileAddress />
 
         <ProfileField
           fieldName="responsibleOwnerName"
@@ -552,6 +576,20 @@ const ProfilePage = (props: Props): ReactElement => {
           <Industry />
           <NonEssentialQuestionsSection />
         </ProfileField>
+
+        <ProfileField
+          fieldName="vacantPropertyOwner"
+          isVisible={displayVacantBuildingOwnerQuestion()}
+          hideHeader={true}
+          boldAltDescription={true}
+          boldDescription={true}
+        >
+          <span className={"margin-left-05"}>
+            {Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText}
+          </span>
+          <RadioQuestion<boolean> fieldName={"vacantPropertyOwner"} choices={[true, false]} />
+        </ProfileField>
+
         <ProfileField
           fieldName="sectorId"
           isVisible={profileData.industryId === "generic" || !!props.CMS_ONLY_fakeBusiness}
@@ -575,6 +613,15 @@ const ProfilePage = (props: Props): ReactElement => {
           <BusinessStructure />
         </ProfileField>
 
+        <ProfileField
+          fieldName="raffleBingoGames"
+          isVisible={displayRaffleBingoGameQuestion()}
+          hideHeader={true}
+          displayAltDescription={true}
+          boldAltDescription={true}
+        >
+          <RaffleBingoGamesQuestion />
+        </ProfileField>
         <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
           <CannabisLocationAlert industryId={business?.profileData.industryId} />
           <MunicipalityField />
@@ -663,6 +710,10 @@ const ProfilePage = (props: Props): ReactElement => {
             )}
           </div>
         </ProfileField>
+
+        <ProfileField fieldName="taxPin">
+          <TaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
+        </ProfileField>
       </>
     ),
   };
@@ -690,7 +741,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <BusinessName />
         </ProfileField>
 
-        <ProfileNewJerseyAddress />
+        <ProfileAddress />
 
         <ProfileField
           fieldName="responsibleOwnerName"
@@ -715,6 +766,31 @@ const ProfilePage = (props: Props): ReactElement => {
           boldAltDescription={true}
         >
           <RadioQuestion<boolean> fieldName={"carnivalRideOwningBusiness"} choices={[true, false]} />
+        </ProfileField>
+
+        <ProfileField
+          fieldName="travelingCircusOrCarnivalOwningBusiness"
+          isVisible={displayCarnivalRidesQuestion()}
+          hideHeader={true}
+          boldAltDescription={true}
+        >
+          <RadioQuestion<boolean>
+            fieldName={"travelingCircusOrCarnivalOwningBusiness"}
+            choices={[true, false]}
+          />
+        </ProfileField>
+
+        <ProfileField
+          fieldName="vacantPropertyOwner"
+          isVisible={displayVacantBuildingOwnerQuestion()}
+          hideHeader={true}
+          boldAltDescription={true}
+          boldDescription={true}
+        >
+          <span className={"margin-left-05"}>
+            {Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText}
+          </span>
+          <RadioQuestion<boolean> fieldName={"vacantPropertyOwner"} choices={[true, false]} />
         </ProfileField>
 
         <ProfileField
@@ -848,7 +924,7 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFormErrorMapContext.Provider value={formContextState}>
       <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
         <ProfileDataContext.Provider
           value={{
@@ -860,10 +936,9 @@ const ProfilePage = (props: Props): ReactElement => {
             onBack,
           }}
         >
-          {" "}
           <AddressContext.Provider
             value={{
-              state: { addressData },
+              state: { formationAddressData },
               setAddressData,
             }}
           >
@@ -952,7 +1027,7 @@ const ProfilePage = (props: Props): ReactElement => {
           </AddressContext.Provider>
         </ProfileDataContext.Provider>
       </MunicipalitiesContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFormErrorMapContext.Provider>
   );
 };
 

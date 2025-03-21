@@ -2,19 +2,18 @@
 notesMd: "Drafted here:
   https://docs.google.com/document/d/1XzmtCU0qJ_DtH5K-j_dLONQsJPeYz6iCyJumQLKDu\
   FY/edit"
-filename: dep-child-care-facility-grant
 name: Child Care Facility Grant
-displayName: child-care-facility-grant
+displayName: dep-child-care-facility-grant
 urlSlug: child-care-facility-grant
-id: child-care-facility-grant
+id: dep-child-care-facility-grant
 sidebarCardBodyText: The Hazardous Discharge Site Remediation Fund (HDSRF) Child
   Care Facility Grant can help your child care center to pay for the cleanup of
   contaminated sites.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: >+
-  :::infoAlert 
-   You need to hire an environmental consultant or Licensed Site Remediation Professional to complete a [Preliminary Assessment Report](https://dep.nj.gov/wp-content/uploads/srp/preliminary_assessment_report_ins_online.pdf?version_1_3). 
+  :::infoAlert
+   You need to hire an environmental consultant or Licensed Site Remediation Professional to complete a [Preliminary Assessment Report](https://dep.nj.gov/wp-content/uploads/srp/preliminary_assessment_report_ins_online.pdf?version_1_3).
   :::
 
 
@@ -37,9 +36,10 @@ sector:
   - other-services
 publishStageArchive: ""
 ---
+
 ## Eligibility
 
-* Owners or operators of licensed child care centers or child care centers applying for a license through the Department of Children and Families (DCF)
+- Owners or operators of licensed child care centers or child care centers applying for a license through the Department of Children and Families (DCF)
 
 :::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
 

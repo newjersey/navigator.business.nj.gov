@@ -5,7 +5,8 @@
     {
       "step": 3,
       "weight": 20,
-      "licenseTask": "lab-research-cds"
+      "licenseTask": "lab-research-cds",
+      "required": true
     }
   ]
 }

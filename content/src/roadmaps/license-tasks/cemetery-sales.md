@@ -1,6 +1,5 @@
 ---
 id: cemetery-sales
-filename: cemetery-sales
 displayname: cemetery-sales
 urlSlug: cemetery-sales
 name: Apply for Your Cemetery Salesperson License

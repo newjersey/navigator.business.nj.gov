@@ -1,5 +1,5 @@
 {
-  "naicsCodes": "541310",
+  "naicsCodes": "541310, 925120",
   "defaultSectorId": "construction",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -10,7 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 50,
       "task": "determine-naics-code",
       "required": true
     },
@@ -59,17 +59,24 @@
       "weight": 30,
       "licenseTask": "authorization-architect-firm",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 1,
+      "licenseTask": "professional-planner-license"
     }
   ],
-  "name": "Architecture",
-  "nonEssentialQuestionsIds": [],
+  "name": "Architecture and Urban Planning ",
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "architecture",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "architect, engineer, consulting, architectural services",
+  "additionalSearchTerms": "architect, engineer, consulting, architectural services, planning, firm, professional services, urban planning, land use, landscape architect, regional planning",
   "id": "architecture",
-  "description": "Plans, designs, and oversees the construction of buildings",
+  "description": "Plans, designs, and manages the development of buildings, cities, and regions",
   "webflowId": "656a13629e1c371e9fc59cbd"
 }

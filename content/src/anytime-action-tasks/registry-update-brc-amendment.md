@@ -2,10 +2,13 @@
 notesMd: "Draft:
   https://docs.google.com/document/d/1WrduHkRAUP5nvXrz7Q7A0nV5NUXGDJdaWO423D2R7\
   ic/edit"
-filename: registry-update-brc-amendment
+id: registry-update-brc-amendment
 name: Update Your Business Registration Certificate and/or Registry Account
+category:
+  - Change My Business Information
+  - Hire New Employees
+description: Make changes to your business registration to keep it up to date.
 applyToAllUsers: true
-icon: update-purple.svg
 urlSlug: registry-update-brc-amendment
 summaryDescriptionMd: >-
   If your business registration information has changed since you last updated
@@ -14,7 +17,7 @@ summaryDescriptionMd: >-
   and Enterprise Services (DORES).
 
 
-  Depending on the type of changes, this may include updating your business charter or obtaining a new `Business Registration Certificate (BRC)|business-reg-certificate`.
+  Depending on the type of changes, this may include updating your business charter or obtaining a new `Business Registration Certificate (BRC)|business-reg-certificate` .
 ---
 
 ## Update Your Tax and Employer Information
@@ -51,7 +54,6 @@ Use the amended [Business Registration Application](https://www.nj.gov/treasury/
 - Town code
 - `NAICS code|naics`
 - `Standard Industrial Classification (SIC) code|sic-code`
-
 - Date of incorporation
 
 ## Update Your Business Charter

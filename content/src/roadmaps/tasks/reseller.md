@@ -9,7 +9,6 @@ summaryDescriptionMd: A reseller is a business that chooses to sell items or
   filing the sales tax. You will be asked about this when you register for
   taxes.
 urlSlug: reseller
-filename: reseller
 displayname: reseller
 name: Decide if You Will Be a Reseller
 id: reseller
@@ -17,9 +16,10 @@ callToActionLink: ""
 callToActionText: ""
 formName: ""
 ---
+
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-* A decision on if your business will resell goods or services
-* A resale certificate shared with applicable businesses
+- A decision on if your business will resell goods or services
+- A resale certificate shared with applicable businesses
 
 :::
