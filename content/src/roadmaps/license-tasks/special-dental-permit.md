@@ -1,7 +1,10 @@
 ---
-notesMd: "Doc:
-  https://docs.google.com/document/d/10vd6krt_fRDyTxGIe12O48gvQh5cOEN8ykcGuBQkv\
-  IM/edit?tab=t.0"
+notesMd: >-
+  Doc:
+  https://docs.google.com/document/d/10vd6krt_fRDyTxGIe12O48gvQh5cOEN8ykcGuBQkvIM/edit?tab=t.0
+
+
+  Note: there is no fee for this permit
 licenseName: ""
 id: special-dental-permit
 displayname: special-dental-permit
