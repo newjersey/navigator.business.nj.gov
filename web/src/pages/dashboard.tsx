@@ -2,6 +2,7 @@ import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { Dashboard } from "@/components/dashboard/Dashboard";
 import { DashboardAlerts } from "@/components/dashboard/DashboardAlerts";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
+import { AuthContext } from "@/contexts/authContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { MediaQueries } from "@/lib/PageSizes";
 import * as api from "@/lib/api-client/apiClient";
@@ -40,7 +41,7 @@ import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
-import { ReactElement, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -56,6 +57,7 @@ interface Props {
 
 const DashboardPage = (props: Props): ReactElement => {
   usePageWithNeedsAccountSnackbar();
+  const { state } = useContext(AuthContext);
   const { business, updateQueue } = useUserData();
   const router = useRouter();
   const { roadmap } = useRoadmap();
@@ -94,7 +96,10 @@ const DashboardPage = (props: Props): ReactElement => {
           .update();
       }
 
-      if (business?.onboardingFormProgress !== "COMPLETED") {
+      if (
+        business?.onboardingFormProgress !== "COMPLETED" &&
+        state.activeUser?.id !== state.activeUser?.email
+      ) {
         router && (await router.replace(ROUTES.onboarding));
       }
 
@@ -116,7 +121,7 @@ const DashboardPage = (props: Props): ReactElement => {
         setHasElevatorViolations(hasViolations);
       }
     })();
-  }, [business, updateQueue]);
+  }, [business, updateQueue, state.activeUser?.id, state.activeUser?.email]);
 
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>

@@ -1,24 +1,27 @@
 /* eslint-disable @next/next/next-script-for-ga */
 // organize-imports-ignore
+import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { IntercomScript } from "@/components/IntercomScript";
-import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
 
 import { RegistrationStatusSnackbar } from "@/components/auth/RegistrationStatusSnackbar";
+import { RemoveBusinessModal } from "@/components/dashboard/RemoveBusinessModal";
 import { AuthContext, initialState } from "@/contexts/authContext";
 import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { IntercomContext } from "@/contexts/intercomContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
+import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
-import { UpdateQueue } from "@/lib/UpdateQueue";
 import { AuthReducer, authReducer } from "@/lib/auth/AuthContext";
 import { getActiveUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
 import MuiTheme from "@/lib/muiTheme";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
+import { UpdateQueue } from "@/lib/UpdateQueue";
 import analytics, { GTM_ID } from "@/lib/utils/analytics";
 import { setOnLoadDimensions } from "@/lib/utils/analytics-helpers";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -40,8 +43,6 @@ import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
 import "../styles/main.scss";
-import { RemoveBusinessContext } from "@/contexts/removeBusinessContext";
-import { RemoveBusinessModal } from "@/components/dashboard/RemoveBusinessModal";
 
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
@@ -144,16 +145,22 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     if (!pageProps.noAuth) {
       getActiveUser()
         .then((activeUser) => {
-          dispatch({
-            type: "LOGIN",
-            activeUser: activeUser,
-          });
+          dispatch({ type: "LOGIN", activeUser: activeUser });
         })
         .catch(() => {
           router && onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
         });
     }
   });
+
+  useEffect(() => {
+    if (!router?.isReady || !state.activeUser || router.pathname === ROUTES.unlinkedAccount) return;
+
+    const myNJisUnlinked = state.activeUser.id === state.activeUser.email;
+    if (myNJisUnlinked) {
+      router.push(ROUTES.unlinkedAccount);
+    }
+  }, [state.activeUser, router]);
 
   const isSeoPage = router && router.pathname.includes("/starter-kits");
 

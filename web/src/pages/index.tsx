@@ -72,8 +72,15 @@ const Home = (): ReactElement => {
     }
   }
   useEffect(() => {
-    if (state.isAuthenticated === IsAuthenticated.TRUE && router?.isReady) {
-      if (business?.onboardingFormProgress === "COMPLETED") {
+    if (state.isAuthenticated === IsAuthenticated.TRUE && state.activeUser && router?.isReady) {
+      const myNJisUnlinked = state.activeUser.id === state.activeUser.email;
+      if (myNJisUnlinked) {
+        // Note: While the same conditional check and redirect is in _app.tsx,
+        // there is a race condition between that redirect and the other redirects in this useEffect.
+        // To ensure that, when appropriate, ROUTES.unlinkedAccount is consistently linked to first,
+        // that same redirect is added as a top-level check here.
+        router.push(ROUTES.unlinkedAccount);
+      } else if (business?.onboardingFormProgress === "COMPLETED") {
         router.replace(ROUTES.dashboard);
       } else if (business?.onboardingFormProgress === "UNSTARTED") {
         router.replace(ROUTES.onboarding);
@@ -81,7 +88,7 @@ const Home = (): ReactElement => {
         router.replace(`${ROUTES.dashboard}?error=true`);
       }
     }
-  }, [business, userData, error, router, state.isAuthenticated]);
+  }, [business, userData, error, router, state.isAuthenticated, state.activeUser]);
 
   useEffect(() => {
     if (!router?.isReady || !router.query[QUERIES.signUp]) {

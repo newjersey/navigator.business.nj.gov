@@ -3116,6 +3116,26 @@ collections:
               - { label: "Error Description 2", name: "errorDescriptionPt2", widget: "markdown" }
               - { label: "Chat with Expert", name: "errorChatWithExpert", widget: "markdown" }
 
+  - name: "unlinked-account-error-page"
+    label: "Unlinked Account Error Page"
+    delete: false
+    create: false
+    files:
+      - label: "Unlinked Account Error Page Text"
+        name: "unlinked-account-error"
+        file: "content/src/fieldConfig/unlinked-account-error-page.json"
+        editor:
+          preview: true
+        fields:
+          - label: "404 Error Page Text"
+            name: unlinkedAccountErrorPage
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Header", name: "unlinkedErrorHeader", widget: "string" }
+              - { label: "Error Description", name: "unlinkedErrorDescription", widget: "string" }
+              - { label: "Chat with Expert", name: "errorChatWithExpert", widget: "string" }
+
   - name: "check-account-email-page"
     label: "Check Account Email Page"
     delete: false

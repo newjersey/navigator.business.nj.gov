@@ -28,6 +28,7 @@ import * as DashboardTabs from "../../../content/src/fieldConfig/dashboard-tabs.
 import * as DeferredLocation from "../../../content/src/fieldConfig/deferred-location.json";
 import * as Ein from "../../../content/src/fieldConfig/ein.json";
 import * as ElevatorRegistration from "../../../content/src/fieldConfig/elevator-registration.json";
+import * as EmployerRates from "../../../content/src/fieldConfig/employer-rates.json";
 import * as EnvironmentQuestionnaire from "../../../content/src/fieldConfig/env-questionnaire.json";
 import * as FilingDefaults from "../../../content/src/fieldConfig/filing-defaults.json";
 import * as Footer from "../../../content/src/fieldConfig/footer.json";
@@ -73,12 +74,12 @@ import * as TaxClearanceCertificateStep1 from "../../../content/src/fieldConfig/
 import * as TaxClearanceCertificateStep2 from "../../../content/src/fieldConfig/tax-clearance-certificate-step2.json";
 import * as TaxClearanceCertificateStep3 from "../../../content/src/fieldConfig/tax-clearance-certificate-step3.json";
 import * as TaxId from "../../../content/src/fieldConfig/tax-id.json";
+import * as UnlinkedAccountErrorPage from "../../../content/src/fieldConfig/unlinked-account-error-page.json";
 import * as UnsupportedNavigatorUserPage from "../../../content/src/fieldConfig/unsupported-navigator-user-page.json";
 import * as XrayRegistration from "../../../content/src/fieldConfig/xray-registration.json";
 import * as XrayRenewal from "../../../content/src/fieldConfig/xray-renewal.json";
 import * as CalloutAlerts from "../../../content/src/mappings/callout-alerts.json";
 import * as PageMetadata from "../../../content/src/page-metadata/page-metadata.json";
-import * as EmployerRates from "../../../content/src/fieldConfig/employer-rates.json";
 
 import { merge } from "lodash";
 import { createContext } from "react";
@@ -170,6 +171,7 @@ const merged = JSON.parse(
       FormationDataDeletionModal,
       EmployerRates,
       RemoveBusinessModal,
+      UnlinkedAccountErrorPage,
     ),
   ),
 );
@@ -254,7 +256,8 @@ export type ConfigType = typeof LegalMessageDefaults &
   typeof FilingDefaults &
   typeof FormationDataDeletionModal &
   typeof EmployerRates &
-  typeof RemoveBusinessModal;
+  typeof RemoveBusinessModal &
+  typeof UnlinkedAccountErrorPage;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -338,6 +341,7 @@ export const getMergedConfig = (): ConfigType => {
     FilingDefaults,
     FormationDataDeletionModal,
     RemoveBusinessModal,
+    UnlinkedAccountErrorPage,
   );
 };
 

@@ -42,7 +42,11 @@ export const RegistrationStatusSnackbar = (): ReactElement => {
       : Config.selfRegistration.accountSuccessSnackbarTitle;
   };
 
-  if (!registrationStatus || registrationStatus === "IN_PROGRESS") {
+  if (
+    !registrationStatus ||
+    registrationStatus === "IN_PROGRESS" ||
+    state.activeUser?.id === state.activeUser?.email
+  ) {
     return <></>;
   }
 
