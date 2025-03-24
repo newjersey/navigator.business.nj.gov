@@ -17,7 +17,7 @@ import { encryptTaxIdBatch } from "src/domain/user/encryptTaxIdBatch";
 import { encryptTaxIdFactory } from "src/domain/user/encryptTaxIdFactory";
 
 export default async function handler(): Promise<void> {
-  const logger = LogWriter(`aws/${STAGE}`, "DataMigrationLogs");
+  const logger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
 
   const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
   const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, logger);

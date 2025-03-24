@@ -16,7 +16,7 @@ export const DynamoDataClient = (
     try {
       let nextToken: string | undefined = undefined;
       let migratedCount = 0;
-      const batchSize = 100;
+      const batchSize = 25;
 
       do {
         const { usersToMigrate, nextToken: newNextToken } = await userDataClient.getUsersWithOutdatedVersion(
@@ -43,9 +43,18 @@ export const DynamoDataClient = (
   };
 
   const processBatch = async (usersToMigrate: UserData[]): Promise<void> => {
-    for (const user of usersToMigrate) {
-      await updateUserAndBusinesses(user);
-      logger.LogInfo(`Migrated user ${user.user.id} to version ${CURRENT_VERSION}`);
+    const results = await Promise.allSettled(
+      usersToMigrate.map(async (user) => {
+        await updateUserAndBusinesses(user);
+        logger.LogInfo(`Migrated user ${user.user.id} to version ${CURRENT_VERSION}`);
+      })
+    );
+
+    for (const [index, result] of results.entries()) {
+      const user = usersToMigrate[index];
+      if (result.status === "rejected") {
+        logger.LogError(`Failed to migrate user ${user.user.id}: ${result.reason}`);
+      }
     }
   };
 
