@@ -149,6 +149,11 @@
       "id": "pesticides-applicator-licensing",
       "questionText": "Will your business be using pesticides or offering pesticide application services? \n",
       "addOn": "multi-pest-applicator-license"
+    },
+    {
+      "id": "special-permit-dentistry",
+      "questionText": "Do you specialize in any area of dentistry, such as orthodontics or oral surgery?",
+      "addOn": "healthcare-dental-specialty"
     }
   ]
 }
