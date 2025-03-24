@@ -23,19 +23,34 @@ describe("HomePage", () => {
       onboardingFormProgress: "COMPLETED",
       profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
-    render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.TRUE }));
+    render(
+      withAuth(<Home />, {
+        isAuthenticated: IsAuthenticated.TRUE,
+        activeUser: { id: "user-123", email: "person@test.com" },
+      }),
+    );
     expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
   });
 
   it("redirects to onboarding page when user has not completed onboarding flow", () => {
     useMockBusiness({ onboardingFormProgress: "UNSTARTED" });
-    render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.TRUE }));
+    render(
+      withAuth(<Home />, {
+        isAuthenticated: IsAuthenticated.TRUE,
+        activeUser: { id: "user-123", email: "person@test.com" },
+      }),
+    );
     expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
   });
 
   it("redirects to dashboard page when it is unknown if user has completed onboarding flow or not", () => {
     setMockUserDataResponse({ error: "NO_DATA", userData: undefined });
-    render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.TRUE }));
+    render(
+      withAuth(<Home />, {
+        isAuthenticated: IsAuthenticated.TRUE,
+        activeUser: { id: "user-123", email: "person@test.com" },
+      }),
+    );
     expect(mockPush).toHaveBeenCalledWith(`${ROUTES.dashboard}?error=true`);
   });
 
@@ -51,5 +66,15 @@ describe("HomePage", () => {
     setMockUserDataResponse({ error: undefined, userData: undefined });
     render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.FALSE }));
     expect(mockPush).not.toHaveBeenCalled();
+  });
+
+  it("redirects to the unlinked account landing page when an authenticated user is not linked to myNJ", () => {
+    render(
+      withAuth(<Home />, {
+        isAuthenticated: IsAuthenticated.TRUE,
+        activeUser: { id: "person@test.com", email: "person@test.com" },
+      }),
+    );
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.unlinkedAccount);
   });
 });
