@@ -10,7 +10,7 @@ name: Get Your Dental Specialty Permit
 webflowName: "Healthcare: Dental Specialty Permit"
 summaryDescriptionMd: >-
   If you are a licensed dentist offering specialized services, you need a permit
-  for each specialty. You also need this permit to advertise your specialty. 
+  for each specialty. You also need this permit to advertise your specialty. \
 
   \
 
