@@ -6,7 +6,7 @@ licenseName: ""
 id: land-surveyor
 displayname: land-surveyor
 urlSlug: land-surveyor
-name: Apply for Your Land Surveyor License
+name: Apply for Your Land Surveyor License, if Applicable
 webflowName: "Engineering and Land Surveying: Land Surveyor License "
 summaryDescriptionMd: You need a land surveyor license if you offer professional
   land surveying services in New Jersey.
