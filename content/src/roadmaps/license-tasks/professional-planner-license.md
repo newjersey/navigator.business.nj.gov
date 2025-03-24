@@ -1,18 +1,19 @@
 ---
 id: professional-planner-license
-webflowId: 6761e5278bbf7849854e3228
+displayname: professional-planner-license
 urlSlug: professional-planner-license
 name: Apply for Your Professional Planner License
-displayname: professional-planner-license
-webflowName: >-
-  Architecture and Urban Planning: Professional Planner License
-callToActionLink: https://www.njconsumeraffairs.gov/plan/Pages/applications.aspx
+webflowName: "Architecture and Urban Planning: Professional Planner License"
+summaryDescriptionMd: You need a professional planner license if you're a
+  licensed engineer, land surveyor, architect, or landscape architect offering
+  master plans or planning services.
+industryId: architecture
 callToActionText: Apply for My Professional Planner License
+callToActionLink: https://www.njconsumeraffairs.gov/plan/Pages/applications.aspx
+licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: State Board of Professional Planners
-industryId: architecture
-licenseCertificationClassification: undefined
-summaryDescriptionMd: "You need a professional planner license if you're a licensed engineer, architect, or landscape architect offering master plans or planning services."
+webflowId: 6761e5278bbf7849854e3228
 ---
 
 ## Eligibility Requirements
