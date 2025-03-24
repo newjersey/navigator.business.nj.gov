@@ -46,6 +46,11 @@
       "id": "dentist"
     },
     {
+      "id": "special-permit-dentistry",
+      "questionText": "Do you specialize in any area of dentistry, such as orthodontics or oral surgery?",
+      "addOn": "healthcare-dental-specialty"
+    },
+    {
       "id": "freestanding-residential-health-care-license",
       "questionText": "Do you plan to own and/or operate a `free-standing residential health care facility?|residential-health-care-facility`",
       "addOn": "healthcare-freestanding-facility-license"
@@ -149,11 +154,6 @@
       "id": "pesticides-applicator-licensing",
       "questionText": "Will your business be using pesticides or offering pesticide application services? \n",
       "addOn": "multi-pest-applicator-license"
-    },
-    {
-      "id": "special-permit-dentistry",
-      "questionText": "Do you specialize in any area of dentistry, such as orthodontics or oral surgery?",
-      "addOn": "healthcare-dental-specialty"
     }
   ]
 }
