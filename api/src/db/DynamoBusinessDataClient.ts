@@ -1,6 +1,7 @@
 import { AttributeValue, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
 import { DeleteCommand, DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
+import { batchWrite } from "@db/config/dynamoDbConfig";
 import { BusinessesDataClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { Business } from "@shared/userData";
@@ -144,6 +145,11 @@ export const DynamoBusinessDataClient = (
         throw new Error("Failed to delete business");
       });
   };
+
+  const batchWriteToTable = async (chunkedItems: Business[]): Promise<void> => {
+    await batchWrite(db, tableName, chunkedItems, logger);
+  };
+
   return {
     get,
     put,
@@ -153,5 +159,6 @@ export const DynamoBusinessDataClient = (
     findAllByIndustry,
     findAllByNAICSCode,
     findAllByBusinessName,
+    batchWriteToTable,
   };
 };

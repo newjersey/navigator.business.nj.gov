@@ -3,6 +3,7 @@
 import { ExecuteStatementCommand, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
+import { batchWrite } from "@db/config/dynamoDbConfig";
 import { MigrationFunction, Migrations } from "@db/migrations/migrations";
 import { UserDataClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
@@ -23,6 +24,7 @@ const unmarshallOptions = {
 };
 
 export const dynamoDbTranslateConfig = { marshallOptions, unmarshallOptions };
+
 export const DynamoUserDataClient = (
   db: DynamoDBDocumentClient,
   tableName: string,
@@ -172,6 +174,9 @@ export const DynamoUserDataClient = (
     );
   };
 
+  const batchWriteToTable = async (chunkedItems: UserData[]): Promise<void> => {
+    await batchWrite(db, tableName, chunkedItems, logger);
+  };
   return {
     get,
     put,
@@ -180,5 +185,6 @@ export const DynamoUserDataClient = (
     getNeedToAddToUserTestingUsers,
     getNeedTaxIdEncryptionUsers,
     getUsersWithOutdatedVersion,
+    batchWriteToTable,
   };
 };
