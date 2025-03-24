@@ -29,7 +29,7 @@ type CognitoIdPayload = {
   iss: string;
   sub: string;
   token_use: string;
-  "custom:myNJUserKey": string;
+  "custom:myNJUserKey"?: string; // This doesn't exist on accounts that haven't been linked
   "custom:identityId": string | undefined;
   identities: CognitoIdentityPayload[] | undefined;
 };

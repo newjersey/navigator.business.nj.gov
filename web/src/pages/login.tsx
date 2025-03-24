@@ -28,7 +28,11 @@ const LoginEmailCheckPage = (): ReactElement => {
   });
 
   useEffect(() => {
-    if (authState.isAuthenticated === IsAuthenticated.TRUE && authState.activeUser) {
+    if (
+      authState.isAuthenticated === IsAuthenticated.TRUE &&
+      authState.activeUser &&
+      authState.activeUser.id !== authState.activeUser.email
+    ) {
       router?.isReady && router.push(ROUTES.dashboard);
     }
   }, [authState.isAuthenticated, authState.activeUser, router]);

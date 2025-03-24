@@ -42,6 +42,7 @@ import * as TaxClearanceCertificateStep1 from "@businessnjgovnavigator/content/f
 import * as TaxClearanceCertificateStep2 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step2.json";
 import * as TaxClearanceCertificateStep3 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step3.json";
 import * as Tax from "@businessnjgovnavigator/content/fieldConfig/tax.json";
+import * as UnlinkedAccountErrorPage from "@businessnjgovnavigator/content/fieldConfig/unlinked-account-error-page.json";
 import * as CalloutAlerts from "@businessnjgovnavigator/content/mappings/callout-alerts.json";
 import * as PageMetadata from "@businessnjgovnavigator/content/page-metadata/page-metadata.json";
 
@@ -98,7 +99,8 @@ const merged = JSON.parse(
       TaxClearanceCertificateStep1,
       TaxClearanceCertificateStep2,
       TaxClearanceCertificateStep3,
-      TaxClearanceCertificateShared
+      TaxClearanceCertificateShared,
+      UnlinkedAccountErrorPage
     )
   )
 );
@@ -150,7 +152,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof TaxClearanceCertificateStep1 &
   typeof TaxClearanceCertificateStep2 &
   typeof TaxClearanceCertificateStep3 &
-  typeof TaxClearanceCertificateShared;
+  typeof TaxClearanceCertificateShared &
+  typeof UnlinkedAccountErrorPage;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -198,7 +201,8 @@ export const getMergedConfig = (): ConfigType => {
     TaxClearanceCertificateStep1,
     TaxClearanceCertificateStep2,
     TaxClearanceCertificateStep3,
-    TaxClearanceCertificateShared
+    TaxClearanceCertificateShared,
+    UnlinkedAccountErrorPage
   );
 };
 
