@@ -64,7 +64,7 @@ import { taxFilingsInterfaceFactory } from "src/domain/tax-filings/taxFilingsInt
 const app = setupExpress();
 
 const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
-const dataLogger = LogWriter(`aws/${STAGE}`, "DataMigrationLogs");
+const dataLogger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
 
 const LICENSE_STATUS_BASE_URL =
   process.env.LICENSE_STATUS_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
