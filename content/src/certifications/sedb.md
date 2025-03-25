@@ -1,7 +1,10 @@
 ---
-notesMd: "Working doc:
-  https://docs.google.com/document/d/1kYWaQ59euqzmUGyvdRUU5UOZu9AnU9s3lwsXZZLvJ\
-  PA/edit?tab=t.0"
+notesMd: >-
+  Working doc:
+  https://docs.google.com/document/d/1kYWaQ59euqzmUGyvdRUU5UOZu9AnU9s3lwsXZZLvJPA/edit?tab=t.0
+
+
+  3.25: In the process of making updates per the SME
 sidebarCardBodyText: "A Socially and Economically Disadvantaged Business
   Enterprise (SEDB) certification may provide an advantage for State and federal
   contracts. "
@@ -40,17 +43,19 @@ isSbe: true
 * The articles of incorporation, bylaws, partnership agreements, or joint venture agreements, as applicable
 * Copy of the `Certificate of Formation|certificate-formation` 
 * Organizational charts
-* An owner's birth certificate, driver's license, passport, or other acceptable form of identification
+* All owner's birth certificate, driver's license, passport, or other acceptable form of identification
 * An affidavit, signed by the individual seeking certification, stating that the applicant is a disadvantaged business enterprise
 * A completed [personal net worth statement](https://www.nj.gov/treasury/revenue/pdf/PNWStatement.pdf) for each socially and economically disadvantaged owner
 
 **The following information may be requested:**
 
-* Names, addresses, and capital amounts of investors
+* Names, addresses, and capital amount for all investors
 * Business bonding history and activity
 * Any connections the business or its owners have with other businesses
 * A full list of the business's major property holdings
 * A complete list of banks the business works with
+* List of all certifications awarded to the business(es)
+* List of any certifications denied to the business(es)
 * A list of past certifications and any legal entities that denied certification
 * Copies of office/warehouse leases, rental agreements, deeds, or mortgages ,if home-based
 * Proof that the owner(s) have lived long-term in an isolated area or one with high unemployment
