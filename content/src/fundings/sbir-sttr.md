@@ -31,7 +31,31 @@ certifications: []
 preferenceForOpportunityZone: no
 county:
   - All
-sector: []
+sector:
+  - accommodation-and-food-services
+  - agriculture-forestry-fishing-and-hunting
+  - administrative-and-employment-services
+  - arts-entertainment-and-recreation
+  - clean-energy
+  - construction
+  - digital-and-print-media
+  - educational-services
+  - finance-and-insurance
+  - health-care-and-social-assistance
+  - life-sciences
+  - manufacturing
+  - mining-quarrying-and-oil-and-gas-extraction
+  - offshore-wind
+  - organizational-or-financial-management
+  - other-services
+  - professional-scientific-and-technical-services
+  - real-estate
+  - retail-trade-and-ecommerce
+  - technology
+  - transportation-and-warehousing
+  - utilities
+  - waste-management-and-Remediation
+  - wholesale-trade
 publishStageArchive: ""
 ---
 
