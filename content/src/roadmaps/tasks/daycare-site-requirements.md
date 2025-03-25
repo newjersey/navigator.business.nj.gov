@@ -1,7 +1,11 @@
 ---
-summaryDescriptionMd: Before opening your daycare, New Jersey Department of
-  Children and Families (DCF) and your local government require your building
-  and property to be inspected.
+summaryDescriptionMd: >-
+  Before opening your daycare, New Jersey Department of Children and Families
+  (DCF) and your local government require your building and property to be
+  inspected.
+
+
+  You can schedule a free preliminary inspection with DCF's Office of Licensing at 1-877-667-9845.
 urlSlug: daycare-site-requirements
 displayname: daycare-site-requirements
 name: Prepare for State and Local Site Requirements
@@ -20,7 +24,7 @@ id: daycare-site-requirements
 * **Construction permits**: Check with your local government's building/construction department for any permit requirements prior to starting renovations. Find out the requirements for a construction permit at your site
 * ** `Life Hazard Use|life-hazard-use` registration**: Register as a Life Hazard Use and pay the registration fee on the state [Division of Fire Safety online service portal](https://firesolutions.dca.nj.gov/ultra-fire-home/). Your business use determines when and how often your routine fire inspections will occur once your business is up and running.
 
-You can schedule a free preliminary inspection with DCF's Office of Licensing at 1-877-667-9845.
+ 
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
