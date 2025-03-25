@@ -16,6 +16,7 @@ id: daycare-site-requirements
 * [DCF’s licensing manual](https://www.nj.gov/dcf/providers/licensing/laws/CCCmanual.pdf) has site requirements based on the number of children and their ages
 
 ## Building Requirements
+
 * **Fire protection permits**: Talk to your fire department to make sure your space meets requirements, like working sprinklers, extinguishers, and signage
 * **Signage**: Speak to your local zoning office and building/construction department to make sure the signage you're proposing is permitted
 * **Construction permits**: Check with your local government's building/construction department for any permit requirements prior to starting renovations. Find out the requirements for a construction permit at your site
@@ -24,6 +25,7 @@ id: daycare-site-requirements
 
 ## Environmental Requirements
 
+* 'Response Action Outcome (RAO)|response-action-outcome':  An RAO shows that a site is environmentally safe. To get an RAO, hire a 'Licensed Site Remediation Professional (LSRP)|licensed-site-remediation-professional'. Ask them to do a Preliminary Assessment (PA) of your site so that you can get an RAO    
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
