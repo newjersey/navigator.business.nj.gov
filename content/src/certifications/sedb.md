@@ -36,14 +36,16 @@ isSbe: true
 
 * 12-digit `NJ tax ID,|tax-id` `Employer Identification Number,|ein` or Social Security number (SSN)
 * Business name or trade name
-* Names and addresses of the owner, partners, or shareholders, and their representative shares of ownership
-* Names and addresses of members of the board of directors (if a corporation)
-* Names and addresses of the business officers
-* Number of shares of stock issued and outstanding (if a corporation)
+* Names and addresses of the owner, partners, or officers 
+
+**For Corporations Only:**
+
+* Names and addresses of all shareholders and their ownership percentage 
+* Number of shares of stock issued and outstanding 
 * The articles of incorporation, bylaws, partnership agreements, or joint venture agreements, as applicable
 * Copy of the `Certificate of Formation|certificate-formation` 
-* Organizational charts
-* All owner's birth certificate, driver's license, passport, or other acceptable form of identification
+* Organizational chart
+* All owners must provide a birth certificate, driver's license, passport, or other acceptable form of identification
 * An affidavit, signed by the individual seeking certification, stating that the applicant is a disadvantaged business enterprise ([example affidavit](https://www.nj.gov/treasury/revenue/pdf/UCS_Sample_Affidavits.pdf))
 * A completed [personal net worth statement](https://www.nj.gov/treasury/revenue/pdf/PNWStatement.pdf) for each socially and economically disadvantaged owner
 
@@ -56,7 +58,6 @@ isSbe: true
 * A complete list of banks the business works with
 * List of all certifications awarded to the business(es)
 * List of any certifications denied to the business(es)
-
 * Copies of office/warehouse leases, rental agreements, deeds, or mortgages, if home-based
 * Proof that the owner(s) have lived long-term in an isolated area or one with high unemployment
 * Information showing the business is located in an area with a [poverty rate of 20% or more,](https://www.nj.gov/labor/wioa/documents/resources/high_poverty_areas.pdf) or in an area where the [median family income](https://mtgis-portal.geo.census.gov/arcgis/apps/experiencebuilder/experience/?id=ad8ad0751e474f938fc98345462cdfbf#data_s=id%3Awidget_61_output_config_0%3A0) is 80% or less of the higher of the statewide median or the median income of the area
