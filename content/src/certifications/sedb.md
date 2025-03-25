@@ -57,9 +57,10 @@ isSbe: true
 * List of all certifications awarded to the business(es)
 * List of any certifications denied to the business(es)
 * A list of past certifications and any legal entities that denied certification
-* Copies of office/warehouse leases, rental agreements, deeds, or mortgages ,if home-based
+* Copies of office/warehouse leases, rental agreements, deeds, or mortgages, if home-based
 * Proof that the owner(s) have lived long-term in an isolated area or one with high unemployment
-* Information showing the business is located in an area with a poverty rate of 20% or more, or in an area where the median family income is 80% or less of the higher of the statewide median or the median income of the area
+* Information showing the business is located in an area with a [poverty rate of 20% or more,](https://www.nj.gov/labor/wioa/documents/resources/high_poverty_areas.pdf) or in an area where the [median family income](https://mtgis-portal.geo.census.gov/arcgis/apps/experiencebuilder/experience/?id=ad8ad0751e474f938fc98345462cdfbf#data_s=id%3Awidget_61_output_config_0%3A0) is 80% or less of the higher of the statewide median or the median income of the area
+* Operational agreement which provides an understanding of how the business is run
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
