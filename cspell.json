@@ -226,7 +226,10 @@
     "NJMVC",
     "recert",
     "Recertification",
-    "XRSY"
+    "XRSY",
+    "LSRP",
+    "pedodontics",
+    "maxillofacial"
   ],
   "ignorePaths": [
     "node_modules/**",

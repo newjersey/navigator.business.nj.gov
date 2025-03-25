@@ -67,7 +67,8 @@
     "healthcare-xray-regis",
     "healthcare-optometrist ",
     "business-vehicle-title-reg",
-    "dental-hygienist"
+    "dental-hygienist",
+    "special-permit-dentistry"
   ],
   "displayname": "healthcare",
   "industryOnboardingQuestions": {
@@ -75,7 +76,7 @@
     "canBeReseller": false
   },
   "isEnabled": true,
-  "additionalSearchTerms": "doctors office, physician, medical examiners, nurses, nursing, advanced practice nurse, midwives, midwifery, certified nurse midwife, occupational therapy, physical therapy, therapist, optometrists, psychologist, psychoanalyst, family therapy, counseling, marriage counselor, speech therapy, audiologists, dietitian, nutritionist, mental health services, mental health care, mental healthcare, addiction services, behavioral health, physician assistant, dentist, osteopathy, optometrist, podiatrist, veterinarian, healthcare facility, healthcare center, nursing home, assisted living, electrolysis, electrologist, optometry, health care, dentist, dental, hygienist",
+  "additionalSearchTerms": "doctors office, physician, medical examiners, nurses, nursing, advanced practice nurse, midwives, midwifery, certified nurse midwife, occupational therapy, physical therapy, therapist, optometrists, psychologist, psychoanalyst, family therapy, counseling, marriage counselor, speech therapy, audiologists, dietitian, nutritionist, mental health services, mental health care, mental healthcare, addiction services, behavioral health, physician assistant, dentist, osteopathy, optometrist, podiatrist, veterinarian, healthcare facility, healthcare center, nursing home, assisted living, electrolysis, electrologist, optometry, health care, dentist, dental, hygienist, endodontics, oral or maxillofacial surgery, oral or maxillofacial radiology, oral pathology, orthodontics, pediatric dentistry, pedodontics, periodontics, prosthodontics, public health",
   "id": "healthcare",
   "description": "Provides licensed health-related services",
   "webflowId": "656a13622828697d87e05e99"

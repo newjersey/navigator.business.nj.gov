@@ -79,6 +79,7 @@ webflowType: business-license
 * 12-digit `New Jersey tax ID number|tax-id` 
 * Business address
 *  `Business type/structure|business-structure-learn-more`
+* Date cigarette sales will begin, if applicable
 * Applicable fees paid
 ### Owner
 * Name, address, and email of each owner
