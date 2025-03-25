@@ -1,7 +1,7 @@
 ---
 summaryDescriptionMd: >-
   :::infoAlert 
-   These requirements are for a child care facility with 6 or more children. Go to your profile to change this selection.
+   These requirements are for a child care facility with 6 or more children. Go to your profile to change this selection if necessary.
   :::
 
 
