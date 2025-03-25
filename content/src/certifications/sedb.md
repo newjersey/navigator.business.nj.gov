@@ -44,7 +44,7 @@ isSbe: true
 * Copy of the `Certificate of Formation|certificate-formation` 
 * Organizational charts
 * All owner's birth certificate, driver's license, passport, or other acceptable form of identification
-* An affidavit, signed by the individual seeking certification, stating that the applicant is a disadvantaged business enterprise
+* An affidavit, signed by the individual seeking certification, stating that the applicant is a disadvantaged business enterprise ([example affidavit](https://www.nj.gov/treasury/revenue/pdf/UCS_Sample_Affidavits.pdf))
 * A completed [personal net worth statement](https://www.nj.gov/treasury/revenue/pdf/PNWStatement.pdf) for each socially and economically disadvantaged owner
 
 **The following information may be requested:**
