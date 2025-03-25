@@ -1,55 +1,44 @@
 ---
-notesMd: >-
-  Doc:
-  https://docs.google.com/document/d/10vd6krt_fRDyTxGIe12O48gvQh5cOEN8ykcGuBQkvIM/edit?tab=t.0
-
-
-  Note: there is no fee for this permit
-licenseName: ""
 id: special-dental-permit
-displayname: special-dental-permit
+webflowId: 67e313f9afa2f07c01154598
 urlSlug: special-dental-permit
 name: Get Your Dental Specialty Permit
+displayname: special-dental-permit
 webflowName: "Healthcare: Dental Specialty Permit"
-summaryDescriptionMd: >-
-  If you are a licensed dentist offering specialized services, you need a permit
-  for each specialty. You also need this permit to advertise your specialty. \
-
-  \
-
-  Get a specialty permit application by writing to the New Jersey State Board of Dentistry at:
-
-
-  124 Halsey Street
-
-
-  P.O. Box 45005
-
-
-  Newark, NJ 07101
-industryId:
-  - healthcare
+filename: special-dental-permit
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: New Jersey State Board of Dentistry
 divisionPhone: (973) 504-6405
+industryId: healthcare
+licenseCertificationClassification: undefined
+summaryDescriptionMd: "If you are a licensed dentist offering specialized services, you need a permit for each specialty. You also need this permit to advertise your specialty. \
+\
+Get a specialty permit application by writing to the New Jersey State Board of Dentistry at:
+
+124 Halsey Street
+
+P.O. Box 45005
+
+Newark, NJ 07101"
 ---
+
 ## Eligibility Requirements
 
 For a specialty permit to be issued, you must have a valid dentist or branch license for each location. You must also meet 1 of these requirements:
 
-* Be certified or eligible for certification by an American Dental Association (ADA)-approved specialty board in the specialty area, or
-* Have completed 2 years of advanced education in 1 or more of the specialty areas, in an ADA-accredited program
+- Be certified or eligible for certification by an American Dental Association (ADA)-approved specialty board in the specialty area, or
+- Have completed 2 years of advanced education in 1 or more of the specialty areas, in an ADA-accredited program
 
 ## Application Requirements
 
-* If you are certified or eligible for certification by an ADA-approved specialty board, provide a sealed letter from the board confirming your certification or eligibility
-* If you completed the educational requirements for a specialty program recognized by an ADA-approved specialty board, provide a sealed letter from the program director confirming training dates and completion
-* If you qualified for a specialty permit more than 6 months ago, include a letter explaining the specific types of work you've been doing since, including any changes 
-* Main dental office address 
-* Branch office address(es)
-* New Jersey dental license number and issue date
-* Area(s) of specialty
-* **For oral surgery applicants only**: written verification of good standing of clinical privileges at each facility you performed oral surgery in the past 5 years
+- If you are certified or eligible for certification by an ADA-approved specialty board, provide a sealed letter from the board confirming your certification or eligibility
+- If you completed the educational requirements for a specialty program recognized by an ADA-approved specialty board, provide a sealed letter from the program director confirming training dates and completion
+- If you qualified for a specialty permit more than 6 months ago, include a letter explaining the specific types of work you've been doing since, including any changes
+- Main dental office address
+- Branch office address(es)
+- New Jersey dental license number and issue date
+- Area(s) of specialty
+- **For oral surgery applicants only**: written verification of good standing of clinical privileges at each facility you performed oral surgery in the past 5 years
 
 Your application must be signed in front of and by a notary public. \
 \
