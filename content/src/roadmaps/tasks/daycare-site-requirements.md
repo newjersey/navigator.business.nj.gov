@@ -29,8 +29,10 @@ id: daycare-site-requirements
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-- A Certificate of Occupancy
-- A Life Hazard Use registration certificate
-- Any permits your local government requires
+* A Certificate of Occupancy
+* A Life Hazard Use registration certificate
+* Preliminary Assessment (PA)
+* Response Action Outcome (RAO)
+* Any permits your local government requires
 
 :::
