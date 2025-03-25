@@ -1,7 +1,7 @@
 {
   "fundingsOnboardingModal": {
-    "headerTooltip": "This tool shows NJEDA programs for in-state businesses. If you’re an out-of-state business, see more NJEDA programs and other funding you may be eligible for at [Business.NJ.gov](https://business.nj.gov/funding).",
-    "modalHeader": "Tell Us About Your Business",
+    "headerTooltip": "This tool shows NJEDA programs for NJ businesses. If you're an out-of-state business, see more NJEDA programs and other funding you may be eligible for at [Business.NJ.gov](https://business.nj.gov/funding).",
+    "modalHeader": "Tell Us About Your New Jersey Business",
     "incompleteWarningSingularText": "Complete the field below.",
     "incompleteWarningMultipleText": "Complete the fields below.",
     "saveButtonText": "Save",
@@ -23,9 +23,6 @@
       "buttonText": "See More Funding & Resources",
       "logoLink": "https://www.njeda.gov/financing-and-incentives/",
       "logoAriaText": "Visit NJEDA home"
-    },
-    "page": {
-      "noResultsFoundAlertText": "We couldn’t find NJEDA programs matching your criteria, but you may still be eligible for others. Explore more funding options at [Business.NJ.gov](https://business.nj.gov/funding)."
     }
   }
 }
