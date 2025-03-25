@@ -1,8 +1,13 @@
 ---
 summaryDescriptionMd: >-
-  Before opening your daycare, New Jersey Department of Children and Families
-  (DCF) and your local government require your building and property to be
-  inspected.
+  :::infoAlert 
+   These requirements are for a child care facility with 6 or more children. Go to your profile to change this selection.
+  :::
+
+
+
+
+  Before opening your daycare, New Jersey Department of Children and Families (DCF) and your local government require your building and property to be inspected.
 
 
   You can schedule a free preliminary inspection with DCF's Office of Licensing at 1-877-667-9845.
@@ -25,7 +30,7 @@ id: daycare-site-requirements
 
 ## Environmental Requirements
 
-* **'Response Action Outcome (RAO)|response-action-outcome'**:  An RAO shows that a site is environmentally safe. To get an RAO, hire a `Licensed Site Remediation Professional (LSRP)| licensed-site-remediation-professional`. Ask them to do a Preliminary Assessment (PA) of your site so that you can get an RAO    
+***'Response Action Outcome (RAO)|response-action-outcome'**:  An RAO shows that a site is environmentally safe. To get an RAO, hire a `Licensed Site Remediation Professional (LSRP)| licensed-site-remediation-professional` . Ask them to do a Preliminary Assessment (PA) of your site so that you can get an RAO
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
