@@ -65,6 +65,12 @@ isSbe: true
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-A Socially and Economically Disadvantaged Business Enterprise (SEDB) certification.
+A Socially and Economically Disadvantaged Business Enterprise (SEDB) certification. You must verify your information every year and renew your application every 5 years.
+
+:::
+
+:::callout{ showHeader="true" headerText="What if I don't verify or renew my certification?" showIcon="false" calloutType="warning" }
+
+If you don't verify your information every year or renew your application every 5 years, your certification will be revoked and you will need to apply again.
 
 :::
