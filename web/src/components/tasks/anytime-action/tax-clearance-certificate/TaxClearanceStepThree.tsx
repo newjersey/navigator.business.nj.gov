@@ -9,15 +9,17 @@ import { ReviewSubSection } from "@/components/tasks/review-screen-components/Re
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { formatAddress } from "@/lib/domain-logic/formatAddress";
+import { scrollToTop } from "@/lib/utils/helpers";
 import { LookupTaxClearanceCertificateAgenciesById } from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
+  setCertificatePdfArray: (certificatePdfArray: number[]) => void;
 }
 export const TaxClearanceStepThree = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { business } = useUserData();
+  const { userData, business } = useUserData();
 
   const requestingAgencyName = LookupTaxClearanceCertificateAgenciesById(
     business?.taxClearanceCertificateData?.requestingAgencyId
@@ -41,6 +43,14 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
       addressZipCode: business?.taxClearanceCertificateData.addressZipCode,
     });
   }
+
+  const handleButtonClick = async (): Promise<void> => {
+    if (!userData) return;
+    // const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
+    props.setCertificatePdfArray([22, 22]);
+    scrollToTop();
+    // console.log(taxClearanceResponse);
+  };
 
   return (
     <>
@@ -107,7 +117,7 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
               </div>
               <PrimaryButton
                 isColor="primary"
-                onClick={() => {}}
+                onClick={handleButtonClick}
                 isRightMarginRemoved={true}
                 dataTestId="next-button"
               >
