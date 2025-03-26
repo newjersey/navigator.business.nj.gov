@@ -30,7 +30,7 @@ webflowId: 5f7728f5e8bf507c5e317899
 *  `Business registration certificate (BRC)|business-reg-certificate` 
 *  `Certificate of Formation|certificate-formation` 
 * Letter of certification from the local government indicating the building’s previous type of use
-* `Response Action Outcome (RAO)|response-action-outcome`
+*  `Response Action Outcome (RAO)|response-action-outcome` 
 * Water bill and a water testing report from your local government
 * Map of your business location with the location of the outdoor playing area
 * Applicable fees paid
