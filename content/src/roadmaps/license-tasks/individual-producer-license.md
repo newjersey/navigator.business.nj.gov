@@ -31,7 +31,7 @@ NJ resident applicants:
 * Business name, address, phone number, and email
 * Social Security number
 * National Producer Number (NPN), if assigned
-  Firm Central Registration Depository (FINRA) number, if applicable
+* Firm Central Registration Depository (FINRA) number, if applicable
 * Any other assumed, fictitious, alias, or trade names under which you are currently doing business or intend to do business, if applicable
 * Insurance agency affiliation, if applicable 
 * Employment history
