@@ -95,11 +95,16 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
   const isAnytimeActionFromNonEssentialQuestions = (action: AnytimeActionTask): boolean => {
     switch (action.filename) {
       case "carnival-ride-supplemental-modification":
-        return !!business?.profileData.carnivalRideOwningBusiness;
+        return (
+          !!business?.profileData.carnivalRideOwningBusiness ||
+          !!business?.profileData.nonEssentialRadioAnswers["carnival-ride-permitting"]
+        );
       case "operating-carnival-fire-permit":
         return (
           !!business?.profileData.carnivalRideOwningBusiness ||
-          !!business?.profileData.travelingCircusOrCarnivalOwningBusiness
+          !!business?.profileData.travelingCircusOrCarnivalOwningBusiness ||
+          !!business?.profileData.nonEssentialRadioAnswers["carnival-ride-permitting"] ||
+          !!business?.profileData.nonEssentialRadioAnswers["carnival-fire-licenses"]
         );
       case "vacant-building-fire-permit":
         return !!business?.profileData.vacantPropertyOwner;
