@@ -5,7 +5,7 @@ notesMd: "[Muni planning
 id: carnival-ride-supplemental-modification
 name: Modify Your Carnival or Amusement Ride
 category:
-  - Offer new Products or Services
+  - Offer New Products or Services
 industryIds: []
 urlSlug: carnival-ride-supplemental-modification
 summaryDescriptionMd: If you want to make major changes to your `carnival or
