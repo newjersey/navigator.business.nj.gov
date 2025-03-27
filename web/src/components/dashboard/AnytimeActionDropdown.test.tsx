@@ -495,7 +495,10 @@ describe("<AnytimeActionDropdown />", () => {
         profileData: generateProfileData({
           nonEssentialRadioAnswers: {
             "carnival-fire-licenses": false,
+            "carnival-ride-permitting": false,
           },
+          carnivalRideOwningBusiness: false,
+          travelingCircusOrCarnivalOwningBusiness: false,
         }),
       });
       renderAnytimeActionDropdown();
@@ -506,7 +509,10 @@ describe("<AnytimeActionDropdown />", () => {
         profileData: generateProfileData({
           nonEssentialRadioAnswers: {
             "carnival-fire-licenses": true,
+            "carnival-ride-permitting": false,
           },
+          carnivalRideOwningBusiness: false,
+          travelingCircusOrCarnivalOwningBusiness: false,
         }),
       });
       renderAnytimeActionDropdown();
@@ -523,7 +529,10 @@ describe("<AnytimeActionDropdown />", () => {
         profileData: generateProfileData({
           nonEssentialRadioAnswers: {
             "carnival-ride-permitting": false,
+            "carnival-fire-licenses": false,
           },
+          carnivalRideOwningBusiness: false,
+          travelingCircusOrCarnivalOwningBusiness: false,
         }),
       });
       renderAnytimeActionDropdown();
@@ -534,7 +543,10 @@ describe("<AnytimeActionDropdown />", () => {
         profileData: generateProfileData({
           nonEssentialRadioAnswers: {
             "carnival-ride-permitting": true,
+            "carnival-fire-licenses": false,
           },
+          carnivalRideOwningBusiness: false,
+          travelingCircusOrCarnivalOwningBusiness: false,
         }),
       });
       renderAnytimeActionDropdown();
