@@ -9,8 +9,8 @@ import { ReactElement } from "react";
 
 const StarterKitsRootPage = (): ReactElement => {
   return (
-    <PageSkeleton landingPage={true}>
-      <NavBar isSeoStarterKit={true} />
+    <PageSkeleton pageType="LANDING_PAGE">
+      <NavBar pageType="IS_SEO_STARTER_KIT" />
       <main className="desktop:grid-container-widescreen desktop:padding-x-7">
         <SingleColumnContainer>
           <PageCircularIndicator />

@@ -53,8 +53,8 @@ const StarterKitsPage = (props: Props): ReactElement => {
   );
 
   return (
-    <PageSkeleton landingPage={true}>
-      <NavBar isSeoStarterKit={true} />
+    <PageSkeleton pageType="LANDING_PAGE">
+      <NavBar pageType="IS_SEO_STARTER_KIT" />
       <main className="desktop:grid-container-widescreen desktop:padding-x-7">
         <section className="bg-cool-extra-light window-width-shadow-cool-extra-light flex flex-justify padding-y-4 desktop:padding-y-8 padding-x-2 desktop:padding-x-0">
           <div className={"text-center desktop:text-left desktop:grid-col-5"}>

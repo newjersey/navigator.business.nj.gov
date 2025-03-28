@@ -111,7 +111,7 @@ const AccountSetupPage = (): ReactElement => {
   };
 
   return (
-    <PageSkeleton showNavBar logoOnly="NAVIGATOR_MYNJ_LOGO">
+    <PageSkeleton showNavBar pageType="NAVIGATOR_MYNJ_LOGO">
       <main id="main" className="padding-top-4 desktop:padding-top-8">
         <SingleColumnContainer isSmallerWidth>
           <h1>{getContent().header}</h1>

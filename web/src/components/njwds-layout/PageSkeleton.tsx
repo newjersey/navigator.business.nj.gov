@@ -4,44 +4,42 @@ import { PageFooter } from "@/components/PageFooter";
 import { SkipToMainContent } from "@/components/SkipToMainContent";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Banner } from "@/components/njwds/Banner";
-import { Task } from "@/lib/types/types";
+import { NavPageTypeEnums, Task } from "@/lib/types/types";
 import React, { ReactElement } from "react";
 
 interface Props {
+  pageType?: NavPageTypeEnums;
   children: React.ReactNode;
-  landingPage?: boolean;
-  isLoginPage?: boolean;
   showNavBar?: boolean;
   task?: Task;
   showSidebar?: boolean;
   hideMiniRoadmap?: boolean;
-  logoOnly?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
   previousBusinessId?: string | undefined;
 }
 
 export const PageSkeleton = (props: Props): ReactElement => {
+  const landingPage = props.pageType === "LANDING_PAGE";
+
   return (
     <>
       <section aria-label="Official government website">
-        {!props.landingPage && <SkipToMainContent />}
+        {!landingPage && <SkipToMainContent />}
         <Banner />
       </section>
       <div className="fit-screen-content">
         {props.showNavBar && (
           <NavBar
-            landingPage={props.landingPage}
-            isLoginPage={props.isLoginPage}
+            pageType={props.pageType}
             task={props.task}
             showSidebar={props.showSidebar}
             hideMiniRoadmap={props.hideMiniRoadmap}
-            logoOnly={props.logoOnly}
             previousBusinessId={props.previousBusinessId}
           />
         )}
         {props.children}
       </div>
       <footer>
-        {!props.landingPage && (
+        {!landingPage && (
           <>
             <BetaBar />
             <LegalMessage />

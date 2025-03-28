@@ -61,48 +61,24 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
         <hr className="padding-y-10" />
 
         <div>Landing</div>
-        <NavBarDesktop
-          isLanding={true}
-          currentlyOnboarding={undefined}
-          isAuthenticated={false}
-          CMS_PREVIEW_ONLY_SHOW_MENU={true}
-        />
+        <NavBarDesktop pageType="LANDING_PAGE" isAuthenticated={false} CMS_PREVIEW_ONLY_SHOW_MENU={true} />
         <hr className="padding-y-10" />
 
         <div>Onboarding</div>
-        <NavBarDesktop
-          isLanding={undefined}
-          currentlyOnboarding={true}
-          isAuthenticated={false}
-          CMS_PREVIEW_ONLY_SHOW_MENU={false}
-        />
+        <NavBarDesktop pageType="ONBOARDING" isAuthenticated={false} CMS_PREVIEW_ONLY_SHOW_MENU={false} />
         <hr className="padding-y-10" />
 
         <div>Guest</div>
-        <NavBarDesktop
-          isLanding={undefined}
-          currentlyOnboarding={undefined}
-          isAuthenticated={false}
-          CMS_PREVIEW_ONLY_SHOW_MENU={true}
-          userData={userData}
-        />
+        <NavBarDesktop isAuthenticated={false} CMS_PREVIEW_ONLY_SHOW_MENU={true} userData={userData} />
         <hr className="padding-y-10" />
 
         <div>Authed with business name</div>
-        <NavBarDesktop
-          isLanding={undefined}
-          currentlyOnboarding={undefined}
-          isAuthenticated={true}
-          CMS_PREVIEW_ONLY_SHOW_MENU={true}
-          userData={userData}
-        />
+        <NavBarDesktop isAuthenticated={true} CMS_PREVIEW_ONLY_SHOW_MENU={true} userData={userData} />
         <div className="padding-y-10" />
         <div className="padding-y-10" />
 
         <div>Authed with nexus no business name</div>
         <NavBarDesktop
-          isLanding={undefined}
-          currentlyOnboarding={undefined}
           isAuthenticated={true}
           CMS_PREVIEW_ONLY_SHOW_MENU={true}
           userData={userDataRemoteSellerWorkerNoName}
@@ -112,8 +88,6 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
 
         <div>Authed with owning no business name</div>
         <NavBarDesktop
-          isLanding={undefined}
-          currentlyOnboarding={undefined}
           isAuthenticated={true}
           CMS_PREVIEW_ONLY_SHOW_MENU={true}
           userData={userDataOwningNoName}
@@ -123,8 +97,6 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
 
         <div>Authed with DBA no business name</div>
         <NavBarDesktop
-          isLanding={undefined}
-          currentlyOnboarding={undefined}
           isAuthenticated={true}
           CMS_PREVIEW_ONLY_SHOW_MENU={true}
           userData={userDataDBANoName}
@@ -136,9 +108,8 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
           <div>Landing</div>
           <NavBarMobile
             scrolled={false}
-            currentlyOnboarding={false}
             isAuthenticated={false}
-            isLanding={true}
+            pageType="LANDING_PAGE"
             CMS_PREVIEW_ONLY_SHOW_MENU={true}
           />
           <div className="padding-y-10" />
@@ -148,7 +119,7 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
           <div>Onboarding</div>
           <NavBarMobile
             scrolled={false}
-            currentlyOnboarding={true}
+            pageType="ONBOARDING"
             isAuthenticated={false}
             CMS_PREVIEW_ONLY_SHOW_MENU={true}
           />
@@ -159,7 +130,6 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
           <div>Guest</div>
           <NavBarMobile
             scrolled={false}
-            currentlyOnboarding={false}
             isAuthenticated={false}
             userData={userData}
             CMS_PREVIEW_ONLY_SHOW_MENU={true}
@@ -171,7 +141,6 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
           <div>Authed with business name</div>
           <NavBarMobile
             scrolled={false}
-            currentlyOnboarding={false}
             isAuthenticated={true}
             userData={userData}
             CMS_PREVIEW_ONLY_SHOW_MENU={true}
@@ -182,7 +151,6 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
           <div>Authed with nexus no business name</div>
           <NavBarMobile
             scrolled={false}
-            currentlyOnboarding={false}
             isAuthenticated={true}
             userData={userDataRemoteSellerWorkerNoName}
             CMS_PREVIEW_ONLY_SHOW_MENU={true}
@@ -193,7 +161,6 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
           <div>Authed with business name</div>
           <NavBarMobile
             scrolled={false}
-            currentlyOnboarding={false}
             isAuthenticated={true}
             userData={userData}
             CMS_PREVIEW_ONLY_SHOW_MENU={true}
@@ -204,7 +171,6 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
           <div>Authed with owning no business name</div>
           <NavBarMobile
             scrolled={false}
-            currentlyOnboarding={false}
             isAuthenticated={true}
             userData={userDataOwningNoName}
             CMS_PREVIEW_ONLY_SHOW_MENU={true}

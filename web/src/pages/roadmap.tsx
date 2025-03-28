@@ -24,7 +24,7 @@ const RoadmapPage = (): ReactElement => {
   }, [router, state.isAuthenticated]);
 
   return (
-    <PageSkeleton showNavBar logoOnly="NAVIGATOR_LOGO">
+    <PageSkeleton showNavBar pageType="NAVIGATOR_LOGO">
       <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
         <SingleColumnContainer>
           <PageCircularIndicator />

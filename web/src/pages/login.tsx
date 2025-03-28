@@ -34,7 +34,7 @@ const LoginEmailCheckPage = (): ReactElement => {
   }, [authState.isAuthenticated, authState.activeUser, router]);
 
   return (
-    <PageSkeleton showNavBar isLoginPage>
+    <PageSkeleton showNavBar pageType="IS_LOGIN_PAGE">
       <main className="grid-container-widescreen padding-y-4 email-check-main" id="main">
         <LoginEmailCheck />
       </main>

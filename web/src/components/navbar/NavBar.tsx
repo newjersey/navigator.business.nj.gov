@@ -3,18 +3,15 @@ import { NavBarMobile } from "@/components/navbar/mobile/NavBarMobile";
 import { AuthContext } from "@/contexts/authContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { Task } from "@/lib/types/types";
+import { NavPageTypeEnums, Task } from "@/lib/types/types";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
 type Props = {
-  landingPage?: boolean;
-  isLoginPage?: boolean;
-  isSeoStarterKit?: boolean;
+  pageType?: NavPageTypeEnums;
   task?: Task;
   showSidebar?: boolean;
   hideMiniRoadmap?: boolean;
-  logoOnly?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
   previousBusinessId?: string | undefined;
 };
 
@@ -54,28 +51,20 @@ export const NavBar = (props: Props): ReactElement => {
     <>
       <div className="display-none desktop:display-inline">
         <NavBarDesktop
-          isSeoStarterKit={props.isSeoStarterKit}
-          isLanding={props.landingPage}
-          isLoginPage={props.isLoginPage}
-          logoOnlyType={props.logoOnly}
+          pageType={currentlyOnboarding() ? "ONBOARDING" : props.pageType}
           previousBusinessId={props.previousBusinessId}
-          currentlyOnboarding={currentlyOnboarding()}
           isAuthenticated={isAuthenticated}
           userData={userData}
         />
       </div>
       <div className="display-inline desktop:display-none">
         <NavBarMobile
-          isSeoStarterKit={props.isSeoStarterKit}
-          isLanding={props.landingPage}
-          isLoginPage={props.isLoginPage}
+          pageType={currentlyOnboarding() ? "ONBOARDING" : props.pageType}
           scrolled={scrolled}
           task={props.task}
           showSidebar={props.showSidebar}
           hideMiniRoadmap={props.hideMiniRoadmap}
           previousBusinessId={props.previousBusinessId}
-          logoOnlyType={props.logoOnly}
-          currentlyOnboarding={currentlyOnboarding()}
           isAuthenticated={isAuthenticated}
           userData={userData}
         />

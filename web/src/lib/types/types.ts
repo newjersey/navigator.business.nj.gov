@@ -619,3 +619,11 @@ export type ProfileContentField = Exclude<
   (keyof ProfileData | keyof IndustrySpecificData) & keyof typeof profileFieldsFromConfig,
   "businessPersona"
 >;
+
+export type NavPageTypeEnums =
+  | "NAVIGATOR_LOGO"
+  | "NAVIGATOR_MYNJ_LOGO"
+  | "LANDING_PAGE"
+  | "IS_LOGIN_PAGE"
+  | "IS_SEO_STARTER_KIT"
+  | "ONBOARDING";

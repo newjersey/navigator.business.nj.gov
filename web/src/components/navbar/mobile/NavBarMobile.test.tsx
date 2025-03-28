@@ -67,9 +67,8 @@ describe("<NavBarMobile />", () => {
     it("shows quick link and account icons", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
           isAuthenticated={false}
-          isLanding={true}
+          pageType="LANDING_PAGE"
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -85,9 +84,8 @@ describe("<NavBarMobile />", () => {
     it("renders getStarted and Login in account dropdown", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
           isAuthenticated={false}
-          isLanding={true}
+          pageType="LANDING_PAGE"
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -109,10 +107,8 @@ describe("<NavBarMobile />", () => {
     it("shows my account text and login button", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
           isAuthenticated={false}
-          isLanding={false}
-          isSeoStarterKit={true}
+          pageType="IS_SEO_STARTER_KIT"
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -130,9 +126,8 @@ describe("<NavBarMobile />", () => {
     it("shows account icon and not quick link icon", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={true}
+          pageType="ONBOARDING"
           isAuthenticated={false}
-          isLanding={false}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -148,9 +143,8 @@ describe("<NavBarMobile />", () => {
     it("renders login in account dropdown", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={true}
+          pageType="ONBOARDING"
           isAuthenticated={false}
-          isLanding={false}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -170,9 +164,7 @@ describe("<NavBarMobile />", () => {
     it("shows quick link and account icons", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
           isAuthenticated={true}
-          isLanding={false}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -189,9 +181,7 @@ describe("<NavBarMobile />", () => {
       const userData = generateUserData({});
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
           isAuthenticated={true}
-          isLanding={false}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -218,9 +208,7 @@ describe("<NavBarMobile />", () => {
     it("shows quick link and account icons", () => {
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
           isAuthenticated={false}
-          isLanding={false}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -237,9 +225,7 @@ describe("<NavBarMobile />", () => {
       const userData = generateUserData({});
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
           isAuthenticated={false}
-          isLanding={false}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -268,9 +254,7 @@ describe("<NavBarMobile />", () => {
       useMockRoadmap(generateRoadmap({ steps: [generateStep({ name: "step1" })] }));
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
           isAuthenticated={true}
-          isLanding={false}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={true}
@@ -295,9 +279,7 @@ describe("<NavBarMobile />", () => {
       );
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
           isAuthenticated={true}
-          isLanding={false}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={false}
@@ -325,9 +307,7 @@ describe("<NavBarMobile />", () => {
       );
       render(
         <NavBarMobile
-          currentlyOnboarding={false}
           isAuthenticated={true}
-          isLanding={false}
           scrolled={false}
           task={undefined}
           hideMiniRoadmap={false}

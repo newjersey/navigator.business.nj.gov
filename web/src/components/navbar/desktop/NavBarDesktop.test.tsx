@@ -56,14 +56,14 @@ describe("<NavBarDesktop />", () => {
 
   describe("landing configuration", () => {
     it("shows quick links, login and dropdown", () => {
-      render(<NavBarDesktop isLanding={true} currentlyOnboarding={false} isAuthenticated={false} />);
+      render(<NavBarDesktop pageType="LANDING_PAGE" isAuthenticated={false} />);
       quickLinksExist();
       expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
       expect(screen.getByTestId("nav-bar-desktop-dropdown-button")).toBeInTheDocument();
     });
 
     it("shows get started within the dropdown", () => {
-      render(<NavBarDesktop isLanding={true} currentlyOnboarding={false} isAuthenticated={false} />);
+      render(<NavBarDesktop pageType="LANDING_PAGE" isAuthenticated={false} />);
       expect(screen.queryByText(Config.navigationDefaults.getStartedText)).not.toBeInTheDocument();
       fireEvent.click(screen.getByTestId("nav-bar-desktop-dropdown-button"));
       expect(screen.getByText(Config.navigationDefaults.getStartedText)).toBeInTheDocument();
@@ -72,14 +72,7 @@ describe("<NavBarDesktop />", () => {
 
   describe("seo starter kits configuration", () => {
     it("shows logo and login", () => {
-      render(
-        <NavBarDesktop
-          isLanding={false}
-          currentlyOnboarding={false}
-          isAuthenticated={false}
-          isSeoStarterKit={true}
-        />
-      );
+      render(<NavBarDesktop isAuthenticated={false} pageType="IS_SEO_STARTER_KIT" />);
 
       quickLinksDoNotExist();
       expect(screen.getByText(Config.navigationDefaults.navBarMyAccountText)).toBeInTheDocument();
@@ -89,7 +82,7 @@ describe("<NavBarDesktop />", () => {
 
   describe("onboarding configuration", () => {
     it("shows login and dropdown", () => {
-      render(<NavBarDesktop isLanding={false} currentlyOnboarding={true} isAuthenticated={false} />);
+      render(<NavBarDesktop pageType="ONBOARDING" isAuthenticated={false} />);
 
       quickLinksDoNotExist();
       expect(screen.getByTestId("nav-bar-desktop-dropdown-button")).toBeInTheDocument();
@@ -98,7 +91,7 @@ describe("<NavBarDesktop />", () => {
 
   describe("authenticated configuration", () => {
     it("shows quicklinks and dropdown", () => {
-      render(<NavBarDesktop isLanding={false} currentlyOnboarding={false} isAuthenticated={true} />);
+      render(<NavBarDesktop isAuthenticated={true} />);
       quickLinksExist();
       expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
       expect(screen.getByTestId("nav-bar-desktop-dropdown-button")).toBeInTheDocument();
@@ -117,14 +110,7 @@ describe("<NavBarDesktop />", () => {
           [firstBusiness.id]: firstBusiness,
         },
       });
-      render(
-        <NavBarDesktop
-          isLanding={false}
-          currentlyOnboarding={false}
-          isAuthenticated={true}
-          userData={userData}
-        />
-      );
+      render(<NavBarDesktop isAuthenticated={true} userData={userData} />);
 
       expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
       expect(screen.queryByTestId("business-title-0")).not.toBeInTheDocument();
@@ -142,7 +128,7 @@ describe("<NavBarDesktop />", () => {
 
   describe("guest configuration", () => {
     it("shows quicklinks, login and dropdown", () => {
-      render(<NavBarDesktop isLanding={false} currentlyOnboarding={false} isAuthenticated={false} />);
+      render(<NavBarDesktop isAuthenticated={false} />);
       quickLinksExist();
       expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
       expect(screen.getByTestId("nav-bar-desktop-dropdown-button")).toBeInTheDocument();
@@ -150,14 +136,7 @@ describe("<NavBarDesktop />", () => {
 
     it("shows profile and regsiter in dropdown", () => {
       const userData = generateUserData({});
-      render(
-        <NavBarDesktop
-          isLanding={false}
-          currentlyOnboarding={false}
-          isAuthenticated={false}
-          userData={userData}
-        />
-      );
+      render(<NavBarDesktop isAuthenticated={false} userData={userData} />);
 
       expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
       expect(screen.getByText(Config.navigationDefaults.navBarGuestBusinessText)).toBeInTheDocument();

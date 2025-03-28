@@ -477,7 +477,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           <PageSkeleton
             showNavBar
             previousBusinessId={previousBusiness?.id}
-            logoOnly={previousBusiness ? "NAVIGATOR_LOGO" : undefined}
+            pageType={previousBusiness ? "NAVIGATOR_LOGO" : undefined}
           >
             <ReturnToPreviousBusinessBar previousBusiness={previousBusiness} />
             <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">

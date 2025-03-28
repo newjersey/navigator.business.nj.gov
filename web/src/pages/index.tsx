@@ -151,7 +151,7 @@ const Home = (): ReactElement => {
   return (
     <>
       <NextSeo title={getNextSeoTitle(config.pagesMetadata.homeTitle)} />
-      <PageSkeleton showNavBar landingPage>
+      <PageSkeleton showNavBar pageType="LANDING_PAGE">
         <main data-testid="main">
           <Hero />
           <section ref={sectionHowItWorks} aria-label={landingPageConfig.section4HeaderText}>

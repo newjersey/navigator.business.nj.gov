@@ -10,7 +10,7 @@ describe("<PageSkeleton />", () => {
 
   it("does not render the beta bar, legal message, and skip main content when landingPage prop is true", () => {
     render(
-      <PageSkeleton landingPage={true}>
+      <PageSkeleton pageType={"LANDING_PAGE"}>
         <></>
       </PageSkeleton>
     );
@@ -22,7 +22,7 @@ describe("<PageSkeleton />", () => {
 
   it("renders the beta bar, legal message, and skip main content when landingPage prop is false", () => {
     render(
-      <PageSkeleton landingPage={false}>
+      <PageSkeleton pageType={"IS_LOGIN_PAGE"}>
         <></>
       </PageSkeleton>
     );

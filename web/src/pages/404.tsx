@@ -9,7 +9,7 @@ const PageNotFound = (): ReactElement => {
   const { Config } = useConfig();
 
   return (
-    <PageSkeleton>
+    <PageSkeleton showNavBar={false}>
       <main className="page-not-found usa-section padding-top-8 desktop:padding-top-15" id="main">
         <SingleColumnContainer>
           <div className="flex flex-column flex-align-center">
