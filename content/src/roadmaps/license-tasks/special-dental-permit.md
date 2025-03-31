@@ -11,15 +11,20 @@ agencyAdditionalContext: New Jersey State Board of Dentistry
 divisionPhone: (973) 504-6405
 industryId: healthcare
 licenseCertificationClassification: undefined
-summaryDescriptionMd: "If you are a licensed dentist offering specialized services, you need a permit for each specialty. You also need this permit to advertise your specialty. \
-\
-Get a specialty permit application by writing to the New Jersey State Board of Dentistry at:
+summaryDescriptionMd: >-
+  If you are a licensed dentist offering specialized services, you need a permit for each specialty. You also need this permit to advertise your specialty.
 
-124 Halsey Street
 
-P.O. Box 45005
+  Get a specialty permit application by writing to the New Jersey State Board of Dentistry at:
 
-Newark, NJ 07101"
+
+  124 Halsey Street
+
+
+  P.O. Box 45005
+
+
+  Newark, NJ 07101
 ---
 
 ## Eligibility Requirements
