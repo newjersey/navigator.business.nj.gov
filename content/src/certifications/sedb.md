@@ -37,11 +37,8 @@ isSbe: true
 * 12-digit `NJ tax ID,|tax-id` `Employer Identification Number,|ein` or Social Security number (SSN)
 * Business name or trade name
 * Names and addresses of the owner, partners, or officers 
-
-**For Corporations only:**
-
-* Names and addresses of all shareholders and their ownership percentage 
-* Number of shares of stock issued and outstanding 
+* Names and addresses of all shareholders and their ownership percentage (Corporations only)
+* Number of shares of stock issued and outstanding (Corporations only)
 * The articles of incorporation, bylaws, partnership agreements, or joint venture agreements, as applicable
 * Copy of the `Certificate of Formation|certificate-formation` 
 * Organizational chart
