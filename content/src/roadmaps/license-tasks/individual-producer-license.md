@@ -16,15 +16,19 @@ agencyId: nj-banking-insurance
 agencyAdditionalContext: "Department of Banking and Insurance (NJDOBI) "
 divisionPhone: "(609)292-7272 "
 ---
+:::infoAlert 
+ The requirements below apply to all New Jersey resident and non-resident applicants, unless noted.
+:::
+
 ## Eligibility Criteria
 
 * Be at least 18 years old
 
-**NJ resident applicants:**
+**NJ resident applicants only :**
 
 * [Criminal background check](https://www.nj.gov/dobi/insliced/livescan.htm) 
-* Completion of the [education requirements](https://www.nj.gov/dobi/insliced/prodfaqs.htm#prelicense)  for the insurance producer lines you are applying for, or a [waiver](https://www.nj.gov/dobi/insliced/30daywai.pdf)
-* Passing scores on the [NJ licensing exam](https://test-takers.psiexams.com/njins/test) for each line you are applying for
+* Completion of the [education requirements](https://www.nj.gov/dobi/insliced/prodfaqs.htm#prelicense)  for the insurance producer lines you are applying for, or a [waiver](https://www.nj.gov/dobi/insliced/30daywai.pdf), if applicable
+* Passing scores on the [NJ licensing exam](https://test-takers.psiexams.com/njins/test) for each line you are applying for, if applicable
 
 ## Application Requirements
 
