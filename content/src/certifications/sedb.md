@@ -38,7 +38,7 @@ isSbe: true
 * Business name or trade name
 * Names and addresses of the owner, partners, or officers 
 
-**For Corporations Only:**
+**For Corporations only:**
 
 * Names and addresses of all shareholders and their ownership percentage 
 * Number of shares of stock issued and outstanding 
@@ -49,7 +49,7 @@ isSbe: true
 * An affidavit, signed by the individual seeking certification, stating that the applicant is a disadvantaged business enterprise ([example affidavit](https://www.nj.gov/treasury/revenue/pdf/UCS_Sample_Affidavits.pdf))
 * A completed [personal net worth statement](https://www.nj.gov/treasury/revenue/pdf/PNWStatement.pdf) for each socially and economically disadvantaged owner
 
-**The following information may be requested:**
+**The following information may be requested for all applicants:**
 
 * Names, addresses, and capital amount for all investors
 * Business bonding history and activity
