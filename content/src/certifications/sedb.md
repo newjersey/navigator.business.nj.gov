@@ -37,8 +37,8 @@ isSbe: true
 * 12-digit `NJ tax ID,|tax-id` `Employer Identification Number,|ein` or Social Security number (SSN)
 * Business name or trade name
 * Names and addresses of the owner, partners, or officers 
-* Names and addresses of all shareholders and their ownership percentage (Corporations only)
-* Number of shares of stock issued and outstanding (Corporations only)
+* Names and addresses of all shareholders and their ownership percentage (corporations only)
+* Number of shares of stock issued and outstanding (corporations only)
 * The articles of incorporation, bylaws, partnership agreements, or joint venture agreements, as applicable
 * Copy of the `Certificate of Formation|certificate-formation` 
 * Organizational chart
@@ -46,7 +46,7 @@ isSbe: true
 * An affidavit, signed by the individual seeking certification, stating that the applicant is a disadvantaged business enterprise ([example affidavit](https://www.nj.gov/treasury/revenue/pdf/UCS_Sample_Affidavits.pdf))
 * A completed [personal net worth statement](https://www.nj.gov/treasury/revenue/pdf/PNWStatement.pdf) for each socially and economically disadvantaged owner
 
-**The following information may be requested for all applicants:**
+**The following information may be requested:**
 
 * Names, addresses, and capital amount for all investors
 * Business bonding history and activity
