@@ -5,11 +5,13 @@ import { healthCheckRouterFactory } from "@api/healthCheckRouter";
 import { housingRouterFactory } from "@api/housingRouter";
 import { licenseStatusRouterFactory } from "@api/licenseStatusRouter";
 import { selfRegRouterFactory } from "@api/selfRegRouter";
+import { taxClearanceCertificateRouterFactory } from "@api/taxClearanceCertificateRouter";
 import { taxDecryptionRouterFactory } from "@api/taxDecryptionRouter";
 import { userRouterFactory } from "@api/userRouter";
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
+import { ApiTaxClearanceCertificateClient } from "@client/ApiTaxClearanceCertificateClient";
 import { DynamicsAccessTokenClient } from "@client/dynamics/DynamicsAccessTokenClient";
 import { DynamicsElevatorSafetyHealthCheckClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyHealthCheckClient";
 import { DynamicsElevatorSafetyInspectionClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyInspectionClient";
@@ -208,6 +210,12 @@ const dynamicsHousingRegistrationStatusClient = DynamicsHousingRegistrationStatu
   housingPropertyInterestClient: dynamicsHousingPropertyInterestClient,
 });
 
+const taxClearanceCertificateClient = ApiTaxClearanceCertificateClient(logger, {
+  orgUrl: process.env.TAX_CLEARANCE_CERTIFICATE_URL || "",
+  userName: process.env.TAX_CLEARANCE_CERTIFICATE_USER_NAME || "",
+  password: process.env.TAX_CLEARANCE_CERTIFICATE_PASSWORD || "",
+});
+
 const BUSINESS_NAME_BASE_URL =
   process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH?.toLowerCase() === "true"
     ? "http://localhost:9000"
@@ -345,6 +353,7 @@ app.use(
     dynamicsElevatorSafetyViolationsStatusClient
   )
 );
+app.use("/api", taxClearanceCertificateRouterFactory(taxClearanceCertificateClient));
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
 app.use("/api", housingRouterFactory(dynamicsHousingClient, dynamicsHousingRegistrationStatusClient));
 app.use("/api", selfRegRouterFactory(dynamoDataClient, selfRegClient));

@@ -1,8 +1,6 @@
 import { Heading } from "@/components/njwds-extended/Heading";
-import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
-import { TaxClearanceStepOne } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceStepOne";
-import { TaxClearanceStepThree } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceStepThree";
-import { TaxClearanceStepTwo } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceStepTwo";
+import { TaxClearanceDownload } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceDownload";
+import { TaxClearanceSteps } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceSteps";
 import { AddressContext } from "@/contexts/addressContext";
 import { getMergedConfig } from "@/contexts/configContext";
 import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
@@ -20,6 +18,7 @@ import { ReactElement, useEffect, useState } from "react";
 interface Props {
   anytimeAction: AnytimeActionLicenseReinstatement | AnytimeActionTask;
   CMS_ONLY_stepIndex?: number;
+  CMS_ONLY_certificatePdfArray?: [];
 }
 
 const Config = getMergedConfig();
@@ -42,6 +41,9 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
   );
   const [formationAddressData, setAddressData] = useState<FormationAddress>(emptyFormationAddressData);
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
+  const [certificatePdfArray, setCertificatePdfArray] = useState<number[] | undefined>(
+    props.CMS_ONLY_certificatePdfArray || undefined
+  );
 
   const saveTaxClearanceCertificateData = (): void => {
     const newTaxClearanceCertificateData = {
@@ -177,24 +179,18 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
                   <Heading level={1}>{props.anytimeAction.name}</Heading>
                 </div>
               </div>
-              <HorizontalStepper
-                steps={stateTaxClearanceCertificateSteps}
-                currentStep={stepIndex}
-                onStepClicked={(step: number): void => {
-                  if (step === 2 && stepIndex === 1) {
-                    saveTaxClearanceCertificateData();
-                  }
-                  setStepIndex(step);
-                }}
-              />
-              {stepIndex === 0 && <TaxClearanceStepOne setStepIndex={setStepIndex} />}
-              {stepIndex === 1 && (
-                <TaxClearanceStepTwo
-                  setStepIndex={setStepIndex}
+              {certificatePdfArray ? (
+                <TaxClearanceDownload />
+              ) : (
+                <TaxClearanceSteps
+                  steps={stateTaxClearanceCertificateSteps}
+                  currentStep={stepIndex}
+                  stepIndex={setStepIndex}
                   saveTaxClearanceCertificateData={saveTaxClearanceCertificateData}
+                  certificatePdfArray={setCertificatePdfArray}
+                  setStepIndex={setStepIndex}
                 />
               )}
-              {stepIndex === 2 && <TaxClearanceStepThree setStepIndex={setStepIndex} />}
             </div>
           </ProfileDataContext.Provider>
         </TaxClearanceCertificateDataContext.Provider>
