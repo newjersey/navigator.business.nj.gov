@@ -44,7 +44,7 @@ type CognitoIdentityPayload = {
 };
 
 export const getCredentialsAndIdentity = async (): Promise<CredentialsAndIdentityId> => {
-  const session = await fetchAuthSession();
+  const session = await fetchAuthSession({ forceRefresh: true });
   const credentials = session?.credentials;
   const identityId = session?.identityId;
   if (!credentials || !identityId) {
@@ -108,7 +108,7 @@ export const getSignedS3Link = async (value: string, expires?: number): Promise<
 };
 
 export const getCurrentToken = async (): Promise<JWT> => {
-  const session = await fetchAuthSession();
+  const session = await fetchAuthSession({ forceRefresh: true });
   if (!session.tokens || !session.tokens.idToken) {
     throw new Error("Unable to retrieve access token. Ensure the session is valid.");
   }
