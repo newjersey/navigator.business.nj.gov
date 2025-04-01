@@ -1,5 +1,6 @@
 import { AnytimeActionTaxClearanceCertificateElement } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateElement";
 import { getMergedConfig } from "@/contexts/configContext";
+import * as api from "@/lib/api-client/apiClient";
 import { formatAddress } from "@/lib/domain-logic/formatAddress";
 import { generateAnytimeActionTask } from "@/test/factories";
 import {
@@ -8,7 +9,6 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
-  Business,
   createEmptyFormationFormData,
   emptyProfileData,
   generateBusiness,
@@ -23,13 +23,17 @@ import {
   LookupTaxClearanceCertificateAgenciesById,
   randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
+import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
+jest.mock("@/lib/api-client/apiClient", () => ({ postTaxClearanceCertificate: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+
+const mockApi = api as jest.Mocked<typeof api>;
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -51,40 +55,42 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     name: "header",
   });
 
-  const renderComponent = (business?: Business): void => {
+  const renderComponent = ({ business, userData }: { business?: Business; userData?: UserData }): void => {
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business || generateBusiness({}))}>
+      <WithStatefulUserData
+        initialUserData={userData || generateUserDataForBusiness(business || generateBusiness({}))}
+      >
         <AnytimeActionTaxClearanceCertificateElement anytimeAction={anytimeAction} />
       </WithStatefulUserData>
     );
   };
 
   it("renders header", () => {
-    renderComponent();
+    renderComponent({});
     const mainHeader = screen.getByText("header");
     expect(mainHeader).toBeInTheDocument();
   });
 
   describe("navigation", () => {
     it("renders the requirements tab on load", () => {
-      renderComponent();
+      renderComponent({});
       expect(screen.getByTestId("requirements-tab")).toBeInTheDocument();
     });
 
     it("renders the eligibility tab on click", () => {
-      renderComponent();
+      renderComponent({});
       fireEvent.click(screen.getByTestId("stepper-1"));
       expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
     });
 
     it("renders the review tab on click", () => {
-      renderComponent();
+      renderComponent({});
       fireEvent.click(screen.getByTestId("stepper-2"));
       expect(screen.getByTestId("review-tab")).toBeInTheDocument();
     });
 
     it("renders back to tab one when the back button is clicked on tab 2", () => {
-      renderComponent();
+      renderComponent({});
       fireEvent.click(screen.getByTestId("stepper-1"));
       expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.taxClearanceCertificateShared.backButtonText));
@@ -92,7 +98,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     });
 
     it("renders tab three when the save button is clicked on tab two", () => {
-      renderComponent();
+      renderComponent({});
       fireEvent.click(screen.getByTestId("stepper-1"));
       expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.taxClearanceCertificateShared.saveButtonText));
@@ -100,7 +106,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     });
 
     it("renders back to tab two when the back button is clicked on tab three", () => {
-      renderComponent();
+      renderComponent({});
       fireEvent.click(screen.getByTestId("stepper-2"));
       expect(screen.getByTestId("review-tab")).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.taxClearanceCertificateShared.backButtonText));
@@ -108,7 +114,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     });
 
     it("renders back to tab two when the back edit button is clicked on tab three", () => {
-      renderComponent();
+      renderComponent({});
       fireEvent.click(screen.getByTestId("stepper-2"));
       expect(screen.getByTestId("review-tab")).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.taxClearanceCertificateStep3.editButtonText));
@@ -125,7 +131,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
             requestingAgencyId: agencyId.id,
           }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(screen.getByText(agencyId.name)).toBeInTheDocument();
       });
@@ -136,7 +142,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
             businessName: "business name in taxClearanceCertificateData",
           }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Business name").value).toEqual(
           "business name in taxClearanceCertificateData"
@@ -149,7 +155,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
             entityId: "1234567890",
           }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Entity id").value).toEqual("1234567890");
       });
@@ -160,7 +166,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
             addressLine1: "1010 Main Street",
           }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Address line1").value).toEqual("1010 Main Street");
       });
@@ -171,7 +177,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
             addressLine2: "1010 Main Street",
           }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Address line2").value).toEqual("1010 Main Street");
       });
@@ -182,7 +188,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
             addressCity: "1010 Main Street",
           }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Address city").value).toEqual("1010 Main Street");
       });
@@ -194,7 +200,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
             addressState: addressState,
           }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Address state").value).toEqual(addressState.shortCode);
       });
@@ -205,7 +211,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
             addressZipCode: "12345",
           }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Address zip code").value).toEqual("12345");
       });
@@ -216,7 +222,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
             taxId: "123456789123",
           }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Tax id").value).toEqual("123-456-789/123");
       });
@@ -227,7 +233,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
             taxPin: "1234",
           }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Tax pin").value).toEqual("1234");
       });
@@ -239,7 +245,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           profileData: generateProfileData({ businessName: "business name in profile data" }),
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ businessName: "" }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Business name").value).toEqual("business name in profile data");
       });
@@ -249,7 +255,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           profileData: generateProfileData({ entityId: "1234567890" }),
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ entityId: "" }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Entity id").value).toEqual("1234567890");
       });
@@ -263,7 +269,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressLine1: "" }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Address line1").value).toEqual("1010 Main Street");
       });
@@ -277,7 +283,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressLine2: "" }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Address line2").value).toEqual("1010 Main Street");
       });
@@ -292,7 +298,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressCity: "" }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Address city").value).toEqual("1010 Main Street");
       });
@@ -307,7 +313,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressCity: "" }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Address city").value).toEqual("1010 Main Street");
       });
@@ -326,7 +332,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressCity: "" }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Address city").value).toEqual("Newark");
       });
@@ -343,7 +349,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
             addressState: undefined,
           }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Address state").value).toEqual(addressState.shortCode);
       });
@@ -357,7 +363,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressZipCode: "" }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Address zip code").value).toEqual("12345");
       });
@@ -369,7 +375,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
             taxId: "",
           }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Tax id").value).toEqual("123-456-789/123");
       });
@@ -381,7 +387,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
             taxPin: "",
           }),
         });
-        renderComponent(business);
+        renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Tax pin").value).toEqual("1234");
       });
@@ -394,7 +400,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       profileData: emptyProfileData,
       formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
     });
-    renderComponent(business);
+    renderComponent({ business });
     fireEvent.click(screen.getByTestId("stepper-1"));
     expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
 
@@ -431,7 +437,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       profileData: emptyProfileData,
       formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
     });
-    renderComponent(business);
+    renderComponent({ business });
     fireEvent.click(screen.getByTestId("stepper-1"));
     expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
 
@@ -469,7 +475,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       profileData: emptyProfileData,
       formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
     });
-    renderComponent(business);
+    renderComponent({ business });
     fireEvent.click(screen.getByTestId("stepper-2"));
     expect(screen.getByTestId("review-tab")).toBeInTheDocument();
     expect(
@@ -485,7 +491,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         profileData: emptyProfileData,
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
-      renderComponent(business);
+      renderComponent({ business });
       fireEvent.click(screen.getByTestId("stepper-1"));
       expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
       fireEvent.click(screen.getByTestId("stepper-2"));
@@ -506,7 +512,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         profileData: emptyProfileData,
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
-      renderComponent(business);
+      renderComponent({ business });
       fireEvent.click(screen.getByTestId("stepper-1"));
       expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
 
@@ -529,7 +535,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         profileData: emptyProfileData,
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
-      renderComponent(business);
+      renderComponent({ business });
       fireEvent.click(screen.getByTestId("stepper-1"));
       expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
 
@@ -552,7 +558,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         profileData: emptyProfileData,
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
-      renderComponent(business);
+      renderComponent({ business });
       fireEvent.click(screen.getByTestId("stepper-1"));
       expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
 
@@ -574,7 +580,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         profileData: emptyProfileData,
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
-      renderComponent(business);
+      renderComponent({ business });
       fireEvent.click(screen.getByTestId("stepper-1"));
       expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
 
@@ -595,7 +601,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         profileData: emptyProfileData,
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
-      renderComponent(business);
+      renderComponent({ business });
       fireEvent.click(screen.getByTestId("stepper-1"));
       expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
 
@@ -626,7 +632,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         profileData: emptyProfileData,
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
-      renderComponent(business);
+      renderComponent({ business });
       fireEvent.click(screen.getByTestId("stepper-1"));
       expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
 
@@ -666,6 +672,34 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     });
 
     describe("renders data when input is provided", () => {});
+  });
+
+  it("makes the api post request", async () => {
+    mockApi.postTaxClearanceCertificate.mockResolvedValue({
+      certificatePdfArray: [],
+    });
+    const business = generateBusiness({ id: "Faraz" });
+    const userData = generateUserDataForBusiness(business);
+    renderComponent({ userData });
+    fireEvent.click(screen.getByTestId("stepper-2"));
+    expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("next-button"));
+    await waitFor(() => {
+      expect(mockApi.postTaxClearanceCertificate).toHaveBeenCalledWith(userData);
+    });
+  });
+
+  it("renders the download page when the api post request is successful", async () => {
+    mockApi.postTaxClearanceCertificate.mockResolvedValue({
+      certificatePdfArray: [],
+    });
+    renderComponent({});
+    fireEvent.click(screen.getByTestId("stepper-2"));
+    fireEvent.click(screen.getByTestId("next-button"));
+
+    await waitFor(() => {
+      expect(screen.getByTestId("download-page")).toBeInTheDocument();
+    });
   });
 
   const getInputElementByLabel = (label: string): HTMLInputElement => {

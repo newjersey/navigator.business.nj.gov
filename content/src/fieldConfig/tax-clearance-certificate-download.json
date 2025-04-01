@@ -1,0 +1,7 @@
+{
+  "taxClearanceCertificateDownload": {
+    "headerTwoLabel": "Your Certificate is Ready!",
+    "calloutText": "Download your certificate now, or you’ll have to request it again.",
+    "buttonText": "Tax Clearance Certificate (PDF)"
+  }
+}
