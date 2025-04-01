@@ -3883,7 +3883,7 @@ collections:
     files:
       - label: "Tax Clearance Step 1"
         name: "taxClearanceCertificate-step1"
-        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step1.json"
+        file: "content/src/fieldConfig/tax-clearance-certificate-step1.json"
         editor:
           preview: true
         fields:
@@ -3903,7 +3903,7 @@ collections:
               - { label: "Next Button Text", name: "continueButtonText", widget: "string", required: true }
       - label: "Tax Clearance Step 2"
         name: "taxClearanceCertificate-step2"
-        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step2.json"
+        file: "content/src/fieldConfig/tax-clearance-certificate-step2.json"
         editor:
           preview: true
         fields:
@@ -3932,7 +3932,7 @@ collections:
                 }
       - label: "Tax Clearance Step 3"
         name: "taxClearanceCertificate-step3"
-        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step3.json"
+        file: "content/src/fieldConfig/tax-clearance-certificate-step3.json"
         editor:
           preview: true
         fields:
@@ -3968,7 +3968,7 @@ collections:
               - { label: "Tax Pin Label", name: "taxPinLabel", widget: "string", required: true }
       - label: "Tax Clearance Shared"
         name: "taxClearanceCertificate-shared"
-        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-shared.json"
+        file: "content/src/fieldConfig/tax-clearance-certificate-shared.json"
         editor:
           preview: true
         fields:
@@ -3999,6 +3999,20 @@ collections:
                   required: true,
                   hint: Only applies to tab 2 and 3,
                 }
+      - label: "Tax Clearance Download Page"
+        name: "taxClearanceCertificate-download"
+        file: "content/src/fieldConfig/tax-clearance-certificate-download.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Download Page
+            name: taxClearanceCertificateDownload
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Header Two Text", name: "headerTwoLabel", widget: "string", required: true }
+              - { label: "Callout Text", name: "calloutText", widget: "string", required: true }
+              - { label: "Download Button Text", name: "buttonText", widget: "string", required: true }
   - name: "page-metadata"
     label: "🟨 PAGE METADATA"
     folder: "content/src"

@@ -12,6 +12,7 @@ interface Props {
   ariaLabel?: string;
   isBgTransparent?: boolean;
   isButtonALink?: boolean;
+  isWidthFull?: boolean;
 }
 
 // eslint-disable-next-line react/display-name
@@ -37,8 +38,9 @@ export const UnStyledButton = forwardRef(
     const smallText = props.isSmallerText ? "font-body-2xs" : "";
     const textBold = props.isTextBold ? "text-bold" : "";
     const intercomButton = props.isIntercomEnabled ? "intercom-button" : "";
+    const isWidthFull = props.isWidthFull ? "width-100-override" : "";
 
-    const className = [style, props.className, underline, smallText, textBold, intercomButton]
+    const className = [style, props.className, underline, smallText, textBold, intercomButton, isWidthFull]
       .map((i) => {
         return i?.trim();
       })
