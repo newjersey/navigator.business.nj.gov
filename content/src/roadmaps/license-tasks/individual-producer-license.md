@@ -24,7 +24,7 @@ divisionPhone: "(609)292-7272 "
 
 * Be at least 18 years old
 
-**NJ resident applicants only :**
+NJ resident applicants only:
 
 * [Criminal background check](https://www.nj.gov/dobi/insliced/livescan.htm) 
 * Completion of the [education requirements](https://www.nj.gov/dobi/insliced/prodfaqs.htm#prelicense)  for the insurance producer lines you are applying for, or a [waiver](https://www.nj.gov/dobi/insliced/30daywai.pdf), if applicable
