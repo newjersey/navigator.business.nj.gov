@@ -2,6 +2,18 @@ import { orderBy } from "lodash";
 import taxClearanceCertificateAgenciesJSON from "../../content/src/mappings/taxClearanceCertificateIssuingAgencies.json";
 import { StateObject } from "./states";
 
+export type TaxClearanceCertificateResponse = {
+  error?: {
+    type:
+      | "INELIGIBLE_TAX_CLEARANCE_FORM"
+      | "FAILED_TAX_ID_AND_PIN_VALIDATION"
+      | "MISSING_FIELD"
+      | "SYSTEM_ERROR";
+    message: string;
+  };
+  certificatePdfArray?: number[];
+};
+
 export const taxClearanceCertificateAgencies: TaxClearanceCertificateAgency[] =
   taxClearanceCertificateAgenciesJSON.arrayOfTaxClearanceCertificateIssuingAgencies;
 

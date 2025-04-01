@@ -6,18 +6,21 @@ import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
 import { ReviewSection } from "@/components/tasks/review-screen-components/ReviewSection";
 import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
+import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { formatAddress } from "@/lib/domain-logic/formatAddress";
+import { scrollToTop } from "@/lib/utils/helpers";
 import { LookupTaxClearanceCertificateAgenciesById } from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
+  setCertificatePdfArray: (certificatePdfArray: number[]) => void;
 }
 export const TaxClearanceStepThree = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { business } = useUserData();
+  const { userData, business } = useUserData();
 
   const requestingAgencyName = LookupTaxClearanceCertificateAgenciesById(
     business?.taxClearanceCertificateData?.requestingAgencyId
@@ -41,6 +44,18 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
       addressZipCode: business?.taxClearanceCertificateData.addressZipCode,
     });
   }
+
+  const handleButtonClick = async (): Promise<void> => {
+    if (!userData) return;
+    const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
+    if (taxClearanceResponse.certificatePdfArray)
+      props.setCertificatePdfArray(taxClearanceResponse.certificatePdfArray);
+
+    // TODO: Error Response will be addressed in a separate ticket
+    // Note: if there is a server error, we may return a 500 status code, or
+    // return the error object with type = SYSTEM_ERROR
+    scrollToTop();
+  };
 
   return (
     <>
@@ -107,7 +122,7 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
               </div>
               <PrimaryButton
                 isColor="primary"
-                onClick={() => {}}
+                onClick={handleButtonClick}
                 isRightMarginRemoved={true}
                 dataTestId="next-button"
               >
