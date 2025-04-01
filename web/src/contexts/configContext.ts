@@ -37,6 +37,7 @@ import * as PageNotFoundError from "@businessnjgovnavigator/content/fieldConfig/
 import * as Profile from "@businessnjgovnavigator/content/fieldConfig/profile.json";
 import * as StarterKits from "@businessnjgovnavigator/content/fieldConfig/starter-kits.json";
 import * as TaxAccess from "@businessnjgovnavigator/content/fieldConfig/tax-access-modal.json";
+import * as TaxClearanceCertificateDownload from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-download.json";
 import * as TaxClearanceCertificateShared from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-shared.json";
 import * as TaxClearanceCertificateStep1 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step1.json";
 import * as TaxClearanceCertificateStep2 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step2.json";
@@ -98,7 +99,8 @@ const merged = JSON.parse(
       TaxClearanceCertificateStep1,
       TaxClearanceCertificateStep2,
       TaxClearanceCertificateStep3,
-      TaxClearanceCertificateShared
+      TaxClearanceCertificateShared,
+      TaxClearanceCertificateDownload
     )
   )
 );
@@ -150,7 +152,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof TaxClearanceCertificateStep1 &
   typeof TaxClearanceCertificateStep2 &
   typeof TaxClearanceCertificateStep3 &
-  typeof TaxClearanceCertificateShared;
+  typeof TaxClearanceCertificateShared &
+  typeof TaxClearanceCertificateDownload;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -198,7 +201,8 @@ export const getMergedConfig = (): ConfigType => {
     TaxClearanceCertificateStep1,
     TaxClearanceCertificateStep2,
     TaxClearanceCertificateStep3,
-    TaxClearanceCertificateShared
+    TaxClearanceCertificateShared,
+    TaxClearanceCertificateDownload
   );
 };
 
