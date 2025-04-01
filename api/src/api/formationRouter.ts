@@ -47,6 +47,8 @@ export const formationRouterFactory = (
   });
 
   router.get("/completed-filing", async (req, res) => {
+    console.log({ req });
+
     const signedInUser = getSignedInUser(req);
     const signedInUserId = getSignedInUserId(req);
     const userData = await databaseClient.get(signedInUserId);
@@ -69,8 +71,6 @@ export const formationRouterFactory = (
           formationDoc: "",
           standingDoc: "",
         };
-
-        console.log({ documents });
 
         console.log({ signedInUser });
 
