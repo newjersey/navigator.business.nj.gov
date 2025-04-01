@@ -70,15 +70,22 @@ export const formationRouterFactory = (
           standingDoc: "",
         };
 
+        console.log({ documents });
+
+        console.log({ signedInUser });
+
         if (getFilingResponse.success && config.shouldSaveDocuments) {
           taskProgress[formationTaskId] = "COMPLETED";
           entityId = getFilingResponse.entityId;
           dateOfFormation = currentBusiness.formationData.formationFormData.businessStartDate;
           businessName = currentBusiness.formationData.formationFormData.businessName;
 
+          const urlToSave = `${signedInUser["custom:identityId"]}/formationDoc-${Date.now()}.pdf`;
+          console.log({ urlToSave });
+
           const formationDoc = await saveFileFromUrl(
             getFilingResponse.formationDoc,
-            `${signedInUser["custom:identityId"]}/formationDoc-${Date.now()}.pdf`,
+            urlToSave,
             process.env.DOCUMENT_S3_BUCKET as string
           );
 

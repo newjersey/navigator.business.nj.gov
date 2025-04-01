@@ -4,7 +4,7 @@
   "EntityId": "12345",
   "TransactionDate": "2022-10-05T14:48:00.000Z",
   "ConfirmationNumber": "22262000889",
-  "FormationDoc": "formation doc 123",
+  "FormationDoc": "http://localhost:9000/files/fake-formationDoc-1743450121100.pdf",
   "StandingDoc": "StandingDoc doc 123",
   "CertifiedDoc": "CertifiedDoc doc 123"
 }
