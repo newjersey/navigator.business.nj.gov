@@ -1,3 +1,18 @@
+# [2025.10.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.9.0...v2025.10.0) (2025-04-02)
+
+
+### Bug Fixes
+
+* [AB[#13557](https://github.com/newjersey/navigator.business.nj.gov/issues/13557)] fix flaky carnival test ([44bcea8](https://github.com/newjersey/navigator.business.nj.gov/commit/44bcea86b29a53133b3277085fa9355a41a94d03))
+* [AB[#13557](https://github.com/newjersey/navigator.business.nj.gov/issues/13557)] update case for anytime action category ([a6b3193](https://github.com/newjersey/navigator.business.nj.gov/commit/a6b3193ce56a7804d692152141267fd48bc6ebbd))
+* [AB[#13673](https://github.com/newjersey/navigator.business.nj.gov/issues/13673)] forceRefresh auth fixes ([02d870b](https://github.com/newjersey/navigator.business.nj.gov/commit/02d870b1fa73f68643777b45cda1700cbb61c4e8))
+* special dental permit summaryDescriptioMd ([e573681](https://github.com/newjersey/navigator.business.nj.gov/commit/e57368156efd832c93976776a039367b80093100))
+
+
+### Features
+
+* [AB[#6768](https://github.com/newjersey/navigator.business.nj.gov/issues/6768)] add carnival permits for up and running poppies ([db76164](https://github.com/newjersey/navigator.business.nj.gov/commit/db76164eece581c9da6e9590838bac68baa40645))
+
 # [2025.9.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.8.1...v2025.9.0) (2025-03-25)
 
 
