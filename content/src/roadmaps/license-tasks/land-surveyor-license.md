@@ -1,11 +1,11 @@
 ---
-id: land-surveyor
+id: land-surveyor-license
 webflowId: 67e313f8d35f956ca96e3b96
-urlSlug: land-surveyor
+urlSlug: land-surveyor-license
 name: Apply for Your Land Surveyor License, if Applicable
-displayname: land-surveyor
+displayname: land-surveyor-license
 webflowName: "Engineering and Land Surveying: Land Surveyor License"
-filename: land-surveyor
+filename: land-surveyor-license
 callToActionLink: https://www.njconsumeraffairs.gov/pels/Pages/applications.aspx
 callToActionText: Apply for My Land Surveyor License
 agencyId: nj-consumer-affairs
