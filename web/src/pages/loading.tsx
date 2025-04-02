@@ -43,7 +43,7 @@ const LoadingPage = (): ReactElement => {
       });
     } else {
       if (loginPageEnabled) {
-        router && router.push(ROUTES.login);
+        router.push(ROUTES.login);
       } else {
         triggerSignIn();
       }

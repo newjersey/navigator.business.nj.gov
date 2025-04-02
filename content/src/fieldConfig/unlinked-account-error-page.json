@@ -1,0 +1,7 @@
+{
+  "unlinkedAccountErrorPage": {
+    "unlinkedErrorDescription": "It looks like you've logged in with a myNJ account that hasn't been linked with Business.NJ.gov yet.",
+    "unlinkedErrorHeader": "An Error Occurred",
+    "errorChatWithExpert": "Chat with an expert if you need more guidance."
+  }
+}
