@@ -2,6 +2,7 @@ import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTex
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { AddressContext } from "@/contexts/addressContext";
+import { TaxClearanceCertificateDataContext } from "@/contexts/taxClearanceCertificateDataContext";
 import { useAddressErrors } from "@/lib/data-hooks/useAddressErrors";
 import { FormationAddress } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext } from "react";
@@ -17,10 +18,19 @@ export interface Props extends Omit<GenericTextFieldProps, "value" | "error" | "
 export const AddressTextField = ({ className, ...props }: Props): ReactElement => {
   const { state, setAddressData } = useContext(AddressContext);
   const { doesFieldHaveError } = useAddressErrors();
+  const { state: taxClearanceCertificateData, setTaxClearanceCertificateData } = useContext(
+    TaxClearanceCertificateDataContext
+  );
 
   const handleChange = (value: string): void => {
     props.handleChange && props.handleChange(value);
     setAddressData((prevAddressData) => ({ ...prevAddressData, [props.fieldName]: value }));
+    if (taxClearanceCertificateData !== undefined) {
+      setTaxClearanceCertificateData({
+        ...taxClearanceCertificateData,
+        [props.fieldName]: value,
+      });
+    }
   };
 
   const hasError = doesFieldHaveError(props.fieldName);

@@ -6,6 +6,7 @@ import { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField
 import { TaxIdDisplayStatus } from "@/components/data-fields/tax-id/TaxIdHelpers";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { TaxClearanceCertificateDataContext } from "@/contexts/taxClearanceCertificateDataContext";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
@@ -25,6 +26,9 @@ export const SingleTaxId = ({ handleChangeOverride, validationText, ...props }: 
 
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { isFormFieldInvalid } = useFormContextFieldHelpers(fieldName, DataFormErrorMapContext);
+  const { state: taxClearanceCertificateData, setTaxClearanceCertificateData } = useContext(
+    TaxClearanceCertificateDataContext
+  );
 
   const handleChange = (value: string): void => {
     if (handleChangeOverride) {
@@ -35,6 +39,13 @@ export const SingleTaxId = ({ handleChangeOverride, validationText, ...props }: 
       ...state.profileData,
       [fieldName]: value,
     });
+
+    if (taxClearanceCertificateData !== undefined) {
+      setTaxClearanceCertificateData({
+        ...taxClearanceCertificateData,
+        [fieldName]: value,
+      });
+    }
   };
 
   return (

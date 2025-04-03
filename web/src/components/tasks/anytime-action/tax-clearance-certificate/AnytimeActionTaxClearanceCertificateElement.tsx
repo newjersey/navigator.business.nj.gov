@@ -37,12 +37,21 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
   const [stateTaxClearanceCertificateSteps, setStateTaxClearanceCertificateSteps] = useState(
     initialTaxClearanceCertificateSteps()
   );
-
   const [taxClearanceCertificateData, setTaxClearanceCertificateData] = useState(
     emptyTaxClearanceCertificateData
   );
   const [formationAddressData, setAddressData] = useState<FormationAddress>(emptyFormationAddressData);
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
+
+  const updateStepTwoComplete = (): void => {
+    const steps = stateTaxClearanceCertificateSteps.map((step) => ({ ...step }));
+    if (isValid() && allFieldsNonEmpty()) {
+      steps[1].isComplete = true;
+    } else {
+      steps[1].isComplete = false;
+    }
+    setStateTaxClearanceCertificateSteps(steps);
+  };
 
   const saveTaxClearanceCertificateData = (): void => {
     const newTaxClearanceCertificateData = {
@@ -98,6 +107,14 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
       setTaxClearanceCertificateData({
         ...taxClearanceCertificateData,
         requestingAgencyId: newRequestingAgencyId,
+        businessName: newBusinessName,
+        taxId: newTaxId,
+        taxPin: newTaxPin,
+        addressLine1: newAddressLine1,
+        addressLine2: newAddressLine2,
+        addressCity: newAddressCity,
+        addressState: newAddressState,
+        addressZipCode: newAddressZipCode,
       });
 
       setProfileData({
@@ -131,7 +148,6 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
   } = useFormContextHelper(createDataFormErrorMap());
 
   console.log(getInvalidFieldIds());
-  console.log(formContextState);
   FormFuncWrapper(
     async (): Promise<void> => {
       if (!business || !isValid()) {
@@ -145,25 +161,39 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
     }
   );
 
-  const updateSteps = (step: number): void => {
-    const steps = initialTaxClearanceCertificateSteps();
-    step === 0 ? (steps[0].isComplete = false) : (steps[0].isComplete = true);
-    step === 2 ? (steps[1].isComplete = true) : (steps[1].isComplete = false);
-
-    setStateTaxClearanceCertificateSteps(steps);
-  };
-
   const saveButton = (): void => {
     saveTaxClearanceCertificateData();
-
+    updateStepTwoComplete();
     if (isValid()) {
       setStepIndex(2);
     }
   };
 
+  const allFieldsNonEmpty = (): boolean => {
+    return (
+      taxClearanceCertificateData.requestingAgencyId.trim() !== "" &&
+      taxClearanceCertificateData.businessName.trim() !== "" &&
+      taxClearanceCertificateData.addressLine1.trim() !== "" &&
+      taxClearanceCertificateData.addressCity.trim() !== "" &&
+      taxClearanceCertificateData.addressState !== undefined &&
+      taxClearanceCertificateData.addressZipCode.trim() !== "" &&
+      taxClearanceCertificateData.taxId.trim() !== "" &&
+      taxClearanceCertificateData.taxPin.trim() !== ""
+    );
+  };
+
   useEffect(() => {
-    updateSteps(stepIndex);
-  }, [stepIndex]);
+    const steps = stateTaxClearanceCertificateSteps.map((step) => ({ ...step }));
+
+    // If user is past step one, mark it as complete
+    if (stepIndex === 0) {
+      steps[0].isComplete = false;
+    } else {
+      steps[0].isComplete = true;
+    }
+
+    setStateTaxClearanceCertificateSteps(steps);
+  }, [stepIndex, stateTaxClearanceCertificateSteps]);
 
   return (
     <DataFormErrorMapContext.Provider value={formContextState}>

@@ -1,6 +1,7 @@
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { TaxClearanceCertificateDataContext } from "@/contexts/taxClearanceCertificateDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileContentField } from "@/lib/types/types";
@@ -22,6 +23,9 @@ export const ProfileDataField = <T,>({
   ...props
 }: ProfileDataFieldProps<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
+  const { state: taxClearanceCertificateData, setTaxClearanceCertificateData } = useContext(
+    TaxClearanceCertificateDataContext
+  );
 
   const { Config } = useConfig();
 
@@ -41,6 +45,13 @@ export const ProfileDataField = <T,>({
       ...state.profileData,
       [fieldName]: value,
     });
+
+    if (taxClearanceCertificateData !== undefined) {
+      setTaxClearanceCertificateData({
+        ...taxClearanceCertificateData,
+        [fieldName]: value,
+      });
+    }
   };
 
   return (
