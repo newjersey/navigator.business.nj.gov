@@ -156,16 +156,18 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
       }
       scrollToTop();
     },
-    () => {
-
-    }
+    () => {}
   );
 
   const saveButton = (): void => {
     saveTaxClearanceCertificateData();
     updateStepTwoComplete();
-    if (isValid()) {
+    if (isValid() && allFieldsNonEmpty()) {
       setStepIndex(2);
+    } else {
+      const steps = stateTaxClearanceCertificateSteps.map((step) => ({ ...step }));
+      steps[1].isComplete = false;
+      setStateTaxClearanceCertificateSteps(steps);
     }
   };
 
@@ -229,6 +231,11 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
                 steps={stateTaxClearanceCertificateSteps}
                 currentStep={stepIndex}
                 onStepClicked={(step: number): void => {
+                  if (!isValid() || !allFieldsNonEmpty()) {
+                    const steps = stateTaxClearanceCertificateSteps.map((step) => ({ ...step }));
+                    steps[1].isComplete = false;
+                    setStateTaxClearanceCertificateSteps(steps);
+                  }
                   if (step === 2 && stepIndex === 1) {
                     saveTaxClearanceCertificateData();
                   }
