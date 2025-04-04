@@ -76,7 +76,7 @@ export const getCompletedFiling = (): Promise<UserData> => {
 };
 
 export const postTaxClearanceCertificate = (userData: UserData): Promise<TaxClearanceCertificateResponse> => {
-  return post(`/postTaxClearanceCertificate`, userData, false);
+  return post(`/postTaxClearanceCertificate`, userData);
 };
 
 export const postTaxFilingsOnboarding = (props: {
