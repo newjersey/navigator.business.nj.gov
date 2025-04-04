@@ -40,12 +40,12 @@ export const ApiTaxClearanceCertificateClient = (
     logWriter.LogInfo(
       `Tax Clearance Certificate Client - Id:${logId} - Request Sent to ${
         config.orgUrl
-      }//TYTR_ACE_App/ProcessCertificate/businessClearance data: ${JSON.stringify(postBody)}`
+      }/TYTR_ACE_App/ProcessCertificate/businessClearance data: ${JSON.stringify(postBody)}`
     );
 
     try {
       const response = await axios.post(
-        `${config.orgUrl}//TYTR_ACE_App/ProcessCertificate/businessClearance`,
+        `${config.orgUrl}/TYTR_ACE_App/ProcessCertificate/businessClearance`,
         postBody,
         {
           auth: {
@@ -56,7 +56,10 @@ export const ApiTaxClearanceCertificateClient = (
       );
 
       logWriter.LogInfo(
-        `Tax Clearance Certificate Client - Id:${logId} - Response received: ${JSON.stringify(response.data)}`
+        `Tax Clearance Certificate Client - Id:${logId} - Response received: ${JSON.stringify({
+          ...response.data,
+          certificate: "Succussful Response - PDF data omitted",
+        })}`
       );
       return { certificatePdfArray: response.data.certificate };
     } catch {
