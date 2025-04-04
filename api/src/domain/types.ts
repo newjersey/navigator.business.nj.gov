@@ -7,6 +7,10 @@ import {
   ElevatorSafetyDeviceInspectionDetails,
   ElevatorSafetyRegistrationSummary,
 } from "@shared/elevatorSafety";
+import {
+  EmergencyTripPermitApplicationInfo,
+  EmergencyTripPermitSubmitResponse,
+} from "@shared/emergencyTripPermit";
 import { FireSafetyInspectionResult } from "@shared/fireSafety";
 import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
 import {
@@ -68,6 +72,10 @@ export interface FormationClient {
   ) => Promise<FormationSubmitResponse>;
   getCompletedFiling: (formationId: string) => Promise<GetFilingResponse>;
   health: HealthCheckMethod;
+}
+
+export interface EmergencyTripPermitClient {
+  apply: (applicationInfo: EmergencyTripPermitApplicationInfo) => Promise<EmergencyTripPermitSubmitResponse>;
 }
 
 export interface TaxFilingClient {
