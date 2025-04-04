@@ -119,9 +119,11 @@ describe("apiClient", () => {
   });
 
   it("posts tax clearance certificate request", async () => {
-    const userData = generateUserData({ user: generateUser({ id: "456" }) });
+    const userData = generateUserData({ user: generateUser({}) });
     mockAxios.post.mockResolvedValue({ data: userData });
     expect(await postTaxClearanceCertificate(userData)).toEqual(userData);
-    expect(mockAxios.post).toHaveBeenCalledWith("/api/postTaxClearanceCertificate", userData, {});
+    expect(mockAxios.post).toHaveBeenCalledWith("/api/postTaxClearanceCertificate", userData, {
+      headers: { Authorization: "Bearer some-token" },
+    });
   });
 });
