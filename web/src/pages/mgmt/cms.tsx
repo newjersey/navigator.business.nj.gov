@@ -103,6 +103,7 @@ const CMS = dynamic(
       registerPreview(CMS, "taxClearanceCertificate-step2", AnytimeActionTaxClearancePreview);
       registerPreview(CMS, "taxClearanceCertificate-step3", AnytimeActionTaxClearancePreview);
       registerPreview(CMS, "taxClearanceCertificate-shared", AnytimeActionTaxClearancePreview);
+      registerPreview(CMS, "taxClearanceCertificate-download", AnytimeActionTaxClearancePreview);
 
       // ----- Roadmap Sidebar Card -----
       registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);

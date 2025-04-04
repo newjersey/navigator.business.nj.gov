@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
+import { DocumentTile } from "@/components/DocumentTile";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { FormationSuccessDocument } from "@/components/tasks/business-formation/success/FormationSuccessDocument";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
 import analytics from "@/lib/utils/analytics";
@@ -31,32 +31,48 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
         <p className="text-center">{Config.formation.successPage.subheader}</p>
         <p className="text-center">{Config.formation.successPage.body}</p>
       </div>
-      <div className="fdr fww">
-        <FormationSuccessDocument
-          label={Config.formation.successPage.formationDocLabel}
-          downloadLink={documents?.formationDoc ?? "#"}
-          icon="formation-icon-blue"
-        />
+      <div className="flex flex-wrap">
+        <div className="flex-half-tablet">
+          <div className="margin-1">
+            <DocumentTile
+              label={Config.formation.successPage.formationDocLabel}
+              icon="formation-icon-blue"
+              downloadLink={documents?.formationDoc ?? "#"}
+            />
+          </div>
+        </div>
         {props.business.profileData.documents.standingDoc && (
-          <FormationSuccessDocument
-            label={Config.formation.successPage.standingDocLabel}
-            downloadLink={documents?.standingDoc ?? "#"}
-            icon="certificate-icon"
-          />
+          <div className="flex-half-tablet">
+            <div className="margin-1">
+              <DocumentTile
+                label={Config.formation.successPage.standingDocLabel}
+                downloadLink={documents?.standingDoc ?? "#"}
+                icon="certificate-icon"
+              />
+            </div>
+          </div>
         )}
         {props.business.profileData.documents.certifiedDoc && (
-          <FormationSuccessDocument
-            label={Config.formation.successPage.certifiedDocLabel}
-            downloadLink={documents?.certifiedDoc ?? "#"}
-            icon="formation-icon-purple"
-          />
+          <div className="flex-half-tablet">
+            <div className="margin-1">
+              <DocumentTile
+                label={Config.formation.successPage.certifiedDocLabel}
+                downloadLink={documents?.certifiedDoc ?? "#"}
+                icon="formation-icon-purple"
+              />
+            </div>
+          </div>
         )}
-        <FormationSuccessDocument
-          label={Config.formation.successPage.entityIdLabel}
-          downloadLink=""
-          subLabel={props.business.formationData.getFilingResponse?.entityId}
-          icon="id-icon"
-        />
+        <div className="flex-half-tablet">
+          <div className="margin-1">
+            <DocumentTile
+              label={Config.formation.successPage.entityIdLabel}
+              downloadLink=""
+              subLabel={props.business.formationData.getFilingResponse?.entityId}
+              icon="id-icon"
+            />
+          </div>
+        </div>
       </div>
 
       <p className="text-center font-body-2xs margin-bottom-2">

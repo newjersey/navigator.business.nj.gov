@@ -2,6 +2,12 @@ import { orderBy } from "lodash";
 import taxClearanceCertificateAgenciesJSON from "../../content/src/mappings/taxClearanceCertificateIssuingAgencies.json";
 import { StateObject } from "./states";
 
+// TODO: Server Error, Validation Error, Missing Field
+export type TaxClearanceCertificateResponse = {
+  errorType?: "SERVER_ERROR" | "VALIDATION_ERROR";
+  certificatePdfArray?: number[];
+};
+
 export const taxClearanceCertificateAgencies: TaxClearanceCertificateAgency[] =
   taxClearanceCertificateAgenciesJSON.arrayOfTaxClearanceCertificateIssuingAgencies;
 

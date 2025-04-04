@@ -290,7 +290,7 @@ export const userRouterFactory = (
   };
 
   const saveEmptyUserData = (req: Request, res: Response, signedInUserId: string): void => {
-    const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
+    const signedInUser = getSignedInUser(req);
 
     const emptyUserData = createEmptyUserData({
       myNJUserKey: signedInUserId,
