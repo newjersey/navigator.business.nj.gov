@@ -166,7 +166,6 @@ export type ElevatorSafetyRegistrationStatus = (
 ) => Promise<ElevatorSafetyRegistrationSummary>;
 
 export type ElevatorSafetyViolationsStatus = (address: string, municipalityId: string) => Promise<boolean>;
-
 export interface SuccessfulHealthCheckMetadata {
   success: true;
   data?: {

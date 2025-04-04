@@ -38,6 +38,7 @@ import * as Profile from "@businessnjgovnavigator/content/fieldConfig/profile.js
 import * as StarterKits from "@businessnjgovnavigator/content/fieldConfig/starter-kits.json";
 import * as TaxAccess from "@businessnjgovnavigator/content/fieldConfig/tax-access-modal.json";
 import * as Tax from "@businessnjgovnavigator/content/fieldConfig/tax.json";
+import * as XrayRegistration from "@businessnjgovnavigator/content/fieldConfig/x-ray-registration.json";
 import * as CalloutAlerts from "@businessnjgovnavigator/content/mappings/callout-alerts.json";
 import * as PageMetadata from "@businessnjgovnavigator/content/page-metadata/page-metadata.json";
 
@@ -90,7 +91,8 @@ const merged = JSON.parse(
       LicenseSearchTask,
       LandingPage,
       LandingPageExperienceB,
-      FundingsOnboarding
+      FundingsOnboarding,
+      XrayRegistration
     )
   )
 );
@@ -138,7 +140,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof LicenseSearchTask &
   typeof LandingPage &
   typeof LandingPageExperienceB &
-  typeof FundingsOnboarding;
+  typeof FundingsOnboarding &
+  typeof XrayRegistration;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -182,7 +185,8 @@ export const getMergedConfig = (): ConfigType => {
     LicenseSearchTask,
     LandingPage,
     LandingPageExperienceB,
-    FundingsOnboarding
+    FundingsOnboarding,
+    XrayRegistration
   );
 };
 

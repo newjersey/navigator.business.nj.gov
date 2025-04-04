@@ -53,7 +53,7 @@
       }
     },
     {
-      "files": ["src/client/*", "src/db/*", "src/client/dynamics/**"],
+      "files": ["src/client/*", "src/db/*", "src/client/dynamics/**", "src/client/dep/**"],
       "extends": ["plugin:unicorn/recommended"],
       "rules": {
         "unicorn/filename-case": [

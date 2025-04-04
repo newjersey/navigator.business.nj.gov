@@ -30,6 +30,7 @@ import {
   randomPublicFilingLegalType,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
+import { XrayRegistrationEntry } from "@shared/xray";
 import {
   getRandomDateInBetween,
   randomElementFromArray,
@@ -207,6 +208,29 @@ export const generateLicenseApplicationIdResponseValue = (
     expirationDateISO: getCurrentDateISOString(),
     applicationId: `some-applicationId-${randomInt()}`,
     licenseStatus: "ACTIVE",
+    ...overrides,
+  };
+};
+
+export const generateXrayRegistrationEntry = (overrides: Partial<XrayRegistrationEntry>) => {
+  return {
+    businessName: "Test LLC",
+    streetAddress: "123 Main Street",
+    city: "PARAMUS",
+    state: "NJ",
+    zipCode: "07652",
+    status: "Active",
+    contactType: "OWNER",
+    expirationDate: "08/31/2025",
+    roomId: "01",
+    registrationCategory: "DENTIST",
+    disposalDate: undefined,
+    name: "GENDEX CORP.",
+    registrationNumber: "330061",
+    serialNumber: "770-1676141DP",
+    modelNumber: "46-404600G",
+    deactivationDate: undefined,
+    annualFee: 92,
     ...overrides,
   };
 };

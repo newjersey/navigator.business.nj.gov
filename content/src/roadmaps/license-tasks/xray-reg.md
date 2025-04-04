@@ -15,8 +15,6 @@ summaryDescriptionMd: >-
 industryId: healthcare
 callToActionText: Register My X-Ray Machine
 callToActionLink: https://www.nj.gov/dep/rpp/reg/index.htm
-agencyId: njdep
-agencyAdditionalContext: Radiation Protection Element, Bureau of X-Ray Compliance
 divisionPhone: (609) 984-5463
 webflowId: 676af48d3cee0bce2f93edd8
 licenseCertificationClassification: undefined

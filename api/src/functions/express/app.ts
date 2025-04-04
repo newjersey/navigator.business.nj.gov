@@ -7,9 +7,12 @@ import { licenseStatusRouterFactory } from "@api/licenseStatusRouter";
 import { selfRegRouterFactory } from "@api/selfRegRouter";
 import { taxDecryptionRouterFactory } from "@api/taxDecryptionRouter";
 import { userRouterFactory } from "@api/userRouter";
+import { xrayRegistrationRouterFactory } from "@api/xrayRegistrationRouter";
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
+import { XrayRegistrationLookupClient } from "@client/dep/xrayRegistrationLookupClient";
+import { XrayRegistrationSearchClient } from "@client/dep/XrayRegistrationSearchClient";
 import { DynamicsAccessTokenClient } from "@client/dynamics/DynamicsAccessTokenClient";
 import { DynamicsElevatorSafetyHealthCheckClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyHealthCheckClient";
 import { DynamicsElevatorSafetyInspectionClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyInspectionClient";
@@ -47,6 +50,7 @@ import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFa
 import { timeStampBusinessSearch } from "@domain/user/timeStampBusinessSearch";
 import { updateLicenseStatusFactory } from "@domain/user/updateLicenseStatusFactory";
 import { updateOperatingPhase } from "@domain/user/updateOperatingPhase";
+import { updateXrayRegistrationStatusFactory } from "@domain/user/updateXrayRegistrationStatusFactory";
 import { BUSINESSES_TABLE, DYNAMO_OFFLINE_PORT, IS_DOCKER, IS_OFFLINE, STAGE } from "@functions/config";
 import { setupExpress } from "@libs/express";
 import { LogWriter } from "@libs/logWriter";
@@ -290,6 +294,13 @@ const updateLicenseStatus = updateLicenseStatusFactory(
   webserviceLicenseStatusProcessorClient,
   rgbLicenseStatusClient
 );
+
+const xrayRegistrationSearch = XrayRegistrationSearchClient("URL");
+
+const xrayRegistrationLookup = XrayRegistrationLookupClient(loggerxrayRegistrationSearch);
+
+const updateXrayStatus = updateXrayRegistrationStatusFactory(xrayRegistrationLookup);
+
 const timeStampToBusinessSearch = timeStampBusinessSearch(businessNameClient);
 
 const myNJSelfRegClient = MyNJSelfRegClientFactory(
@@ -367,6 +378,8 @@ app.use(
     ])
   )
 );
+
+app.use("/api", xrayRegistrationRouterFactory(updateXrayStatus, dynamoDataClient));
 
 app.post("/api/mgmt/auth", (req, res) => {
   if (req.body.password === process.env.ADMIN_PASSWORD) {

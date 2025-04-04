@@ -5,6 +5,7 @@ import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";
 import { createEmptyProfileData, ProfileData } from "./profileData";
 import { TaxFilingData } from "./taxFiling";
+import { XrayData } from "./xray";
 
 export interface UserData {
   readonly user: BusinessUser;
@@ -29,6 +30,7 @@ export interface Business {
   readonly taxFilingData: TaxFilingData;
   readonly formationData: FormationData;
   readonly environmentData: EnvironmentData | undefined;
+  readonly xrayRegistrationData: XrayData | undefined;
   readonly versionWhenCreated: number;
   readonly version: number;
   readonly userId: string;
@@ -79,6 +81,7 @@ export const createEmptyBusiness = ({
       dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     },
+    xrayRegistrationData: undefined,
     environmentData: undefined,
     version: CURRENT_VERSION,
     versionWhenCreated: CURRENT_VERSION,
