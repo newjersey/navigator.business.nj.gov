@@ -4417,7 +4417,7 @@ __metadata:
     prettier: 2.8.8
     prettier-plugin-organize-imports: 3.2.4
     rimraf: 5.0.10
-    serverless: 4.4.18
+    serverless: 4.11.1
     serverless-dynamodb: 0.2.56
     serverless-http: 3.2.0
     serverless-offline: 14.4.0
@@ -4619,7 +4619,7 @@ __metadata:
     sass-loader: 14.2.1
     seedrandom: ^3.0.5
     semantic-release: 19.0.5
-    serverless: 4.4.18
+    serverless: 4.11.1
     serverless-dynamodb: 0.2.56
     serverless-http: 3.2.0
     serverless-offline: 14.4.0
@@ -14629,7 +14629,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.8.3, axios@npm:^1.7.4":
+"axios@npm:1.8.3":
   version: 1.8.3
   resolution: "axios@npm:1.8.3"
   dependencies:
@@ -14637,6 +14637,17 @@ __metadata:
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
   checksum: 85fc8ad7d968e43ea9da5513310637d29654b181411012ee14cc0a4b3662782e6c81ac25eea40b5684f86ed2d8a01fa6fc20b9b48c4da14ef4eaee848fea43bc
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.8.3":
+  version: 1.8.4
+  resolution: "axios@npm:1.8.4"
+  dependencies:
+    follow-redirects: ^1.15.6
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: e901dc1730bdcd769839b3d93ae6d6457a53d79b19a0eb623ebfea333441259ab51e63ca118baa47a5156567401466ac739f31087b4ee5e6770ab2e227484538
   languageName: node
   linkType: hard
 
@@ -32187,18 +32198,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless@npm:4.4.18":
-  version: 4.4.18
-  resolution: "serverless@npm:4.4.18"
+"serverless@npm:4.11.1":
+  version: 4.11.1
+  resolution: "serverless@npm:4.11.1"
   dependencies:
-    axios: ^1.7.4
+    axios: ^1.8.3
     axios-proxy-builder: ^0.1.2
     rimraf: ^5.0.5
     xml2js: 0.6.2
   bin:
     serverless: run.js
     sls: run.js
-  checksum: c8d8c2b97ea66c0cf77ecb234886bc558465a48bc406655ef49817679b9538feb4862dd07df30d2820e07f54231600cb6de6e77c9f1185d51aed9a9ca3575197
+  checksum: c933dc198ed0fd7c7bee541b29dbd225431c321a7d5d71c81dc0315f7c84ea16a0dbc1ba21d11ef623fc144a185b382b89ce9199a5ec9529433788bd4bf3682c
   languageName: node
   linkType: hard
 
