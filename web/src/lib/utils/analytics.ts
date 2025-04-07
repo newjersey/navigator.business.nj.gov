@@ -28,7 +28,8 @@ type EventType =
   | "task_search_interactions"
   | "navigation_clicks"
   | "site_return_callback"
-  | "account_clicks";
+  | "account_clicks"
+  | "arrive_calendar_access_v2";
 
 const eventMap: Record<EventType, string> = {
   contextual_link_clicks: "contextual_link_clicks",
@@ -51,6 +52,7 @@ const eventMap: Record<EventType, string> = {
   task_search_interactions: "task_search_interactions",
   navigation_clicks: "navigation_clicks",
   account_clicks: "account_clicks",
+  arrive_calendar_access_v2: "arrive_calendar_access_v2",
 };
 
 type ParameterType =
@@ -134,7 +136,9 @@ type Action =
   | "go_to_filing_detail_screen"
   | "go_to_profile_screen"
   | "go_to_NavigatorAccount_setup"
-  | "return_from_myNJ_registration";
+  | "return_from_myNJ_registration"
+  | "arrive_calendar_v2"
+  | "arrive";
 
 type ClickText =
   | "hero_get_started"
@@ -143,7 +147,7 @@ type ClickText =
   | "navbar_register"
   | "close_contextual_sidebar"
   | "live_chat"
-  | "show_tax_calendar_modal"
+  | "show_tax_calendar"
   | "show_myNJ_registration_prompt_modal"
   | "profile_save"
   | "i_already_submitted"
@@ -160,7 +164,7 @@ type FormName =
   | "finish_additional_business_onboarding"
   | "business_formation"
   | "profile"
-  | "tax_calendar_modal"
+  | "tax_calendar"
   | "cannabis_license"
   | "industry_essential_questions"
   | "name_search"
@@ -220,7 +224,8 @@ type Item =
   | "skip_to_main_content"
   | "show_funding_opportunities"
   | "check_account_log_in"
-  | "link_your_myNJ_account_link";
+  | "link_your_myNJ_account_link"
+  | "calendar_access_v2";
 
 type BooleanResponseOption = "yes" | "no";
 
@@ -1914,14 +1919,14 @@ export default {
 
     tax_calendar_banner_button: {
       click: {
-        show_tax_calendar_modal: () => {
+        show_tax_calendar: () => {
           eventRunner.track({
             event: "link_clicks",
             legacy_event_action: "click",
             legacy_event_category: "tax_calendar_banner_button",
-            legacy_event_label: "show_tax_calendar_modal",
-            click_text: "show_tax_calendar_modal",
-            clicked_to: "tax_calendar_modal",
+            legacy_event_label: "show_tax_calendar",
+            click_text: "show_tax_calendar",
+            clicked_to: "tax_calendar",
           });
         },
         show_myNJ_registration_prompt_modal: () => {
@@ -1988,7 +1993,7 @@ export default {
             legacy_event_action: "arrive",
             legacy_event_category: "calendar_access_v2",
             legacy_event_label: "arrive_calendar_v2",
-            action: "arrive_calendar_access_v2",
+            action: "arrive",
             item: "calendar_access_v2",
           });
         },
