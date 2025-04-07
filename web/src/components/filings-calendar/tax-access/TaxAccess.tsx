@@ -4,8 +4,9 @@ import { TaxAccessStepTwo } from "@/components/filings-calendar/tax-access/TaxAc
 import { Heading } from "@/components/njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   onSuccess: () => void;
@@ -23,6 +24,10 @@ export const TaxAccess = (props: Props): ReactElement => {
       setHadLegalStructureOnMount(true);
     }
   }, business);
+
+  useEffect(() => {
+    analytics.event.tax_calendar.arrive.arrive_calendar_access_v2();
+  }, []);
 
   return (
     <>

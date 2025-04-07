@@ -29,7 +29,9 @@ type EventType =
   | "navigation_clicks"
   | "site_return_callback"
   | "account_clicks"
-  | "arrive_calendar_access_v2";
+  | "arrive_calendar_access_v2"
+  | "tax_calendar_arrive_v2"
+  | "tax_calendar_click_v2";
 
 const eventMap: Record<EventType, string> = {
   contextual_link_clicks: "contextual_link_clicks",
@@ -52,6 +54,8 @@ const eventMap: Record<EventType, string> = {
   task_search_interactions: "task_search_interactions",
   navigation_clicks: "navigation_clicks",
   account_clicks: "account_clicks",
+  tax_calendar_arrive_v2: "tax_calendar_arrive_v2",
+  tax_calendar_click_v2: "tax_calendar_click_v2",
   arrive_calendar_access_v2: "arrive_calendar_access_v2",
 };
 
@@ -147,7 +151,6 @@ type ClickText =
   | "navbar_register"
   | "close_contextual_sidebar"
   | "live_chat"
-  | "show_tax_calendar"
   | "show_myNJ_registration_prompt_modal"
   | "profile_save"
   | "i_already_submitted"
@@ -225,6 +228,7 @@ type Item =
   | "show_funding_opportunities"
   | "check_account_log_in"
   | "link_your_myNJ_account_link"
+  | "tax_calendar_v2_cta"
   | "calendar_access_v2";
 
 type BooleanResponseOption = "yes" | "no";
@@ -1917,23 +1921,13 @@ export default {
       },
     },
 
-    tax_calendar_banner_button: {
+    tax_calendar_register_button: {
       click: {
-        show_tax_calendar: () => {
-          eventRunner.track({
-            event: "link_clicks",
-            legacy_event_action: "click",
-            legacy_event_category: "tax_calendar_banner_button",
-            legacy_event_label: "show_tax_calendar",
-            click_text: "show_tax_calendar",
-            clicked_to: "tax_calendar",
-          });
-        },
         show_myNJ_registration_prompt_modal: () => {
           eventRunner.track({
             event: "link_clicks",
             legacy_event_action: "click",
-            legacy_event_category: "tax_calendar_banner_button",
+            legacy_event_category: "tax_calendar_register_button",
             legacy_event_label: "show_myNJ_registration_prompt_modal",
             click_text: "show_myNJ_registration_prompt_modal",
             clicked_to: "myNJ_registration_prompt_modal",
@@ -1981,6 +1975,29 @@ export default {
             legacy_event_category: "tax_calendar",
             legacy_event_label: "tax_deadlines_added_to_calendar",
             server_response: "success",
+          });
+        },
+      },
+      arrive: {
+        arrive_calendar_access_v2: () => {
+          eventRunner.track({
+            event: "tax_calendar_arrive_v2",
+            legacy_event_action: "arrive",
+            legacy_event_category: "tax_calendar_v2",
+            legacy_event_label: "arrive_calendar_access_v2",
+            action: "arrive",
+            item: "calendar_access_v2",
+          });
+        },
+      },
+      click: {
+        click_calendar_access_v2: () => {
+          eventRunner.track({
+            event: "tax_calendar_click_v2",
+            legacy_event_action: "click",
+            legacy_event_category: "tax_calendar_v2_cta",
+            legacy_event_label: "tax_calendar_click_calendar_v2",
+            item: "tax_calendar_v2_cta",
           });
         },
       },

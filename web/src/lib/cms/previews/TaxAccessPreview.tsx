@@ -17,9 +17,9 @@ const TaxAccessPreview = (props: PreviewProps): ReactElement => {
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div>
-        <button className="margin-2" onClick={(): void => {}}>
+        {/* <button className="margin-2" onClick={(): void => setStep1ModalOpen(true)}>
           Open Tax Modal Step 1 (Business structure)
-        </button>
+        </button> */}
       </div>
 
       <fieldset>
@@ -63,15 +63,15 @@ const TaxAccessPreview = (props: PreviewProps): ReactElement => {
       </fieldset>
 
       <div>
-        <button className="margin-2" onClick={(): void => {}}>
+        {/* <button className="margin-2" onClick={(): void => setStep2PublicFilingModalOpen(true)}>
           Open Tax Modal Step 2 (with Business Name)
-        </button>
+        </button> */}
       </div>
 
       <div>
-        <button className="margin-2" onClick={(): void => {}}>
+        {/* <button className="margin-2" onClick={(): void => setStep2TradeNameModalOpen(true)}>
           Open Tax Modal Step 2 (with Responsible Owner Name)
-        </button>
+        </button> */}
       </div>
 
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
