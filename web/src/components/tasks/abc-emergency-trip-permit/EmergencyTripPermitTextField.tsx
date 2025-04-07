@@ -1,8 +1,8 @@
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { WithErrorBar } from "@/components/WithErrorBar";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { ReactElement, useContext } from "react";
 import { EmergencyTripPermitFieldNames } from "../../../../../shared/src/emergencyTripPermit";
@@ -17,59 +17,59 @@ export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"
 
 export const EmergencyTripPermitTextFieldEntry = ({ className, ...props }: Props): ReactElement => {
   const context = useContext(EmergencyTripPermitContext);
-  const { isFormFieldInvalid } = useFormContextFieldHelpers(props.fieldName, ProfileFormContext);
+  const { isFormFieldInvalid } = useFormContextFieldHelpers(props.fieldName, DataFormErrorMapContext);
 
-  const setValueForField = (fieldName: EmergencyTripPermitFieldNames, value: string) => {
+  const setValueForField = (fieldName: EmergencyTripPermitFieldNames, value: string): void => {
     context.setApplicationInfo({
       ...context.state.applicationInfo,
       [fieldName]: value,
     });
   };
 
-  const prePopulateFieldsForBillingPage = (value: string) => {
+  const prePopulateFieldsForBillingPage = (value: string): void => {
     switch (props.fieldName) {
       case "requestorFirstName":
-        if (context.state.applicationInfo.payerFirstName == "") {
+        if (context.state.applicationInfo.payerFirstName === "") {
           setValueForField("payerFirstName", value);
         }
         break;
       case "requestorLastName":
-        if (context.state.applicationInfo.payerLastName == "") {
+        if (context.state.applicationInfo.payerLastName === "") {
           setValueForField("payerLastName", value);
         }
         break;
       case "requestorEmail":
-        if (context.state.applicationInfo.payerEmail == "") {
+        if (context.state.applicationInfo.payerEmail === "") {
           setValueForField("payerEmail", value);
         }
         break;
       case "requestorPhone":
-        if (context.state.applicationInfo.payerPhoneNumber == "") {
+        if (context.state.applicationInfo.payerPhoneNumber === "") {
           setValueForField("payerPhoneNumber", value);
         }
         break;
       case "requestorCountry":
-        if (context.state.applicationInfo.payerCountry == "") {
+        if (context.state.applicationInfo.payerCountry === "") {
           setValueForField("payerCountry", value);
         }
         break;
       case "requestorAddress1":
-        if (context.state.applicationInfo.payerAddress1 == "") {
+        if (context.state.applicationInfo.payerAddress1 === "") {
           setValueForField("payerAddress1", value);
         }
         break;
       case "requestorAddress2":
-        if (context.state.applicationInfo.payerAddress2 == "") {
+        if (context.state.applicationInfo.payerAddress2 === "") {
           setValueForField("payerCountry", value);
         }
         break;
       case "requestorCity":
-        if (context.state.applicationInfo.payerCity == "") {
+        if (context.state.applicationInfo.payerCity === "") {
           setValueForField("payerCity", value);
         }
         break;
       case "requestorStateProvince":
-        if (context.state.applicationInfo.payerStateAbbreviation != "NJ") {
+        if (context.state.applicationInfo.payerStateAbbreviation !== "NJ") {
           setValueForField("payerStateAbbreviation", value);
         }
         break;
@@ -96,11 +96,11 @@ export const EmergencyTripPermitTextFieldEntry = ({ className, ...props }: Props
         {...props}
         readOnly={props.readOnly}
         handleChange={handleChange}
-        formContext={ProfileFormContext}
+        formContext={DataFormErrorMapContext}
         value={context.state.applicationInfo[props.fieldName]}
         error={isFormFieldInvalid}
         additionalValidationIsValid={(value) => {
-          return value != "";
+          return value !== "";
         }}
       />
     </WithErrorBar>

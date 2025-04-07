@@ -1,4 +1,4 @@
-import { EmergencyTripPermitErrorState } from "@/lib/types/types";
+import { EmergencyTripPermitFieldErrorState } from "@/lib/types/types";
 import {
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitFieldNames,
@@ -7,8 +7,8 @@ import {
 export const getErrorStateForEmergencyTripPermitField = (
   fieldName: EmergencyTripPermitFieldNames,
   state: EmergencyTripPermitApplicationInfo
-): EmergencyTripPermitErrorState => {
-  if (state[fieldName] == "") {
+): EmergencyTripPermitFieldErrorState => {
+  if (state[fieldName] === "") {
     return {
       field: fieldName,
       hasError: true,

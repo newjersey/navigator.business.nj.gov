@@ -1,11 +1,10 @@
-import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { StateDropdown } from "@/components/StateDropdown";
 import { EmergencyTripPermitCountryDropdown } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitCountryDropdown";
 import { generateEmptyErrorMap } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitStepsConfiguration";
 import { EmergencyTripPermitTextFieldEntry } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitTextField";
 import { RequestorTextFieldEntry } from "@/components/tasks/abc-emergency-trip-permit/steps/requestor/RequestorTextFieldEntry";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
-import { createProfileFieldErrorMap } from "@/contexts/profileFormContext";
+import { createDataFormErrorMap } from "@/contexts/dataFormErrorMapContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { EmergencyTripPermitFieldNames } from "@businessnjgovnavigator/shared/emergencyTripPermit";
 import { ReactElement, useContext } from "react";
@@ -14,7 +13,7 @@ export const RequestorStep = (): ReactElement => {
   const context = useContext(EmergencyTripPermitContext);
   const errorMap: Record<EmergencyTripPermitFieldNames, boolean> = generateEmptyErrorMap();
 
-  const { onSubmit } = useFormContextHelper(createProfileFieldErrorMap());
+  const { onSubmit } = useFormContextHelper(createDataFormErrorMap());
 
   return (
     <>
@@ -76,7 +75,7 @@ export const RequestorStep = (): ReactElement => {
           <StateDropdown
             fieldName={"requestorState"}
             onSelect={(state) => {
-              if (state && state.shortCode != "Outside of the USA") {
+              if (state && state.shortCode !== "Outside of the USA") {
                 context.setApplicationInfo({
                   ...context.state.applicationInfo,
                   requestorStateProvince: state?.shortCode,
@@ -90,17 +89,6 @@ export const RequestorStep = (): ReactElement => {
             label={"Zip Code"}
             hasError={errorMap["requestorZipPostalCode"]}
           />
-          <div className={"float-right"}>
-            <PrimaryButton
-              isColor={"primary"}
-              onClick={() => {
-                onSubmit();
-                //context.setStepIndex(context.state.stepIndex + 1);
-              }}
-            >
-              {"Continue"}
-            </PrimaryButton>
-          </div>
         </div>
       </form>
     </>
