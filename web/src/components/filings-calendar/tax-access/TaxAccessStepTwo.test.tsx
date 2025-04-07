@@ -1,6 +1,7 @@
-import { TaxAccessStepTwo } from "@/components/filings-calendar/tax-access-modal/TaxAccessStepTwo";
+import { TaxAccessStepTwo } from "@/components/filings-calendar/tax-access/TaxAccessStepTwo";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
+import analytics from "@/lib/utils/analytics";
 import { randomPublicFilingLegalType } from "@/test/factories";
 import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
@@ -37,6 +38,31 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   postTaxFilingsOnboarding: jest.fn(),
   postTaxFilingsLookup: jest.fn(),
 }));
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      tax_calendar: {
+        arrive: {
+          arrive_calendar_access_v2: jest.fn(),
+        },
+        click: {
+          click_calendar_access_v2: jest.fn(),
+        },
+        submit: {
+          tax_calendar_validation_error: jest.fn(),
+          business_exists_but_not_in_Gov2Go: jest.fn(),
+          tax_calendar_business_does_not_exist: jest.fn(),
+          tax_deadlines_added_to_calendar: jest.fn(),
+        },
+      },
+    },
+  };
+}
 const mockApi = api as jest.Mocked<typeof api>;
 
 const Config = getMergedConfig();
@@ -44,12 +70,7 @@ const Config = getMergedConfig();
 const renderComponent = (initialUserData?: UserData): void => {
   render(
     <WithStatefulUserData initialUserData={initialUserData}>
-      <TaxAccessStepTwo
-        isOpen={true}
-        close={(): void => {}}
-        onSuccess={(): void => {}}
-        moveToPrevStep={(): void => {}}
-      />
+      <TaxAccessStepTwo onSuccess={(): void => {}} moveToPrevStep={(): void => {}} />
     </WithStatefulUserData>
   );
 };
@@ -171,7 +192,7 @@ describe("<TaxAccessStepTwo />", () => {
 
       renderComponent(userDataWithNavigatorFormation);
 
-      expect(screen.getByText(markdownToText(Config.taxAccess.modalBusinessFieldHeader))).toBeInTheDocument();
+      expect(screen.getByText(markdownToText(Config.taxAccess.businessFieldHeader))).toBeInTheDocument();
       fireEvent.change(screen.getByTestId("businessName"), { target: { value: "MrFakesHotDogBonanza" } });
     });
 
@@ -225,10 +246,10 @@ describe("<TaxAccessStepTwo />", () => {
       });
       clickSave();
       await waitFor(() => {
-        return expect(currentBusiness().profileData.businessName).toEqual("zoom");
+        expect(currentBusiness().profileData.businessName).toEqual("zoom");
       });
-      return expect(currentBusiness().profileData.taxId).toEqual("999888777666");
-      return expect(currentBusiness().profileData.encryptedTaxId).toEqual(undefined);
+      expect(currentBusiness().profileData.taxId).toEqual("999888777666");
+      expect(currentBusiness().profileData.encryptedTaxId).toEqual("");
     });
 
     it("displays in-line error and alert when businessName field is empty and save button is clicked", async () => {
@@ -238,10 +259,10 @@ describe("<TaxAccessStepTwo />", () => {
         return expect(userDataWasNotUpdated()).toEqual(true);
       });
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.stepTwoErrorBanner);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.modalBusinessFieldErrorName);
-      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.modalTaxFieldErrorName);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.businessFieldErrorName);
+      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.taxFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(
-        Config.taxAccess.modalResponsibleOwnerFieldErrorName
+        Config.taxAccess.responsibleOwnerFieldErrorName
       );
       expect(screen.getByText(Config.taxAccess.failedBusinessFieldHelper)).toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.failedTaxIdHelper)).not.toBeInTheDocument();
@@ -255,10 +276,10 @@ describe("<TaxAccessStepTwo />", () => {
         return expect(userDataWasNotUpdated()).toEqual(true);
       });
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.stepTwoErrorBanner);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.modalTaxFieldErrorName);
-      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.modalBusinessFieldErrorName);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.taxFieldErrorName);
+      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.businessFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(
-        Config.taxAccess.modalResponsibleOwnerFieldErrorName
+        Config.taxAccess.responsibleOwnerFieldErrorName
       );
       expect(screen.queryByText(Config.taxAccess.failedBusinessFieldHelper)).not.toBeInTheDocument();
       expect(screen.getByText(Config.taxAccess.failedTaxIdHelper)).toBeInTheDocument();
@@ -278,10 +299,10 @@ describe("<TaxAccessStepTwo />", () => {
         return expect(userDataWasNotUpdated()).toEqual(true);
       });
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.stepTwoErrorBanner);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.modalBusinessFieldErrorName);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.modalTaxFieldErrorName);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.businessFieldErrorName);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.taxFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(
-        Config.taxAccess.modalResponsibleOwnerFieldErrorName
+        Config.taxAccess.responsibleOwnerFieldErrorName
       );
       expect(screen.getByText(Config.taxAccess.failedBusinessFieldHelper)).toBeInTheDocument();
       expect(screen.getByText(Config.taxAccess.failedTaxIdHelper)).toBeInTheDocument();
@@ -304,7 +325,7 @@ describe("<TaxAccessStepTwo />", () => {
       });
       await screen.findByRole("alert");
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.failedErrorMessageHeader);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.modalBusinessFieldErrorName);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.businessFieldErrorName);
       expect(screen.getByText(Config.taxAccess.failedTaxIdHelper)).toBeInTheDocument();
       expect(screen.getByText(Config.taxAccess.failedBusinessFieldHelper)).toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.failedResponsibleOwnerFieldHelper)).not.toBeInTheDocument();
@@ -322,7 +343,7 @@ describe("<TaxAccessStepTwo />", () => {
       clickSave();
       await screen.findByRole("alert");
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.failedErrorMessageHeader);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.modalBusinessFieldErrorName);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.businessFieldErrorName);
       expect(screen.getByText(Config.taxAccess.failedBusinessFieldHelper)).toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.failedResponsibleOwnerFieldHelper)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.failedTaxIdHelper)).not.toBeInTheDocument();
@@ -419,9 +440,8 @@ describe("<TaxAccessStepTwo />", () => {
 
     it("shows disclaimer text for TaxId", () => {
       renderComponent(userDataWithPrefilledFields);
-      expect(screen.getByText(Config.taxAccess.modalHeader)).toBeInTheDocument();
-
       const taxInput = screen.getByTestId("taxIdInput");
+      expect(within(taxInput).getByText("`New Jersey Tax ID|tax-id`")).toBeInTheDocument();
       expect(within(taxInput).getByTestId("description")).toBeInTheDocument();
       expect(within(taxInput).getByTestId("postDescription")).toBeInTheDocument();
     });
@@ -455,11 +475,9 @@ describe("<TaxAccessStepTwo />", () => {
       clickSave();
 
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.stepTwoErrorBanner);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.taxAccess.modalResponsibleOwnerFieldErrorName
-      );
-      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.modalTaxFieldErrorName);
-      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.modalBusinessFieldErrorName);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.responsibleOwnerFieldErrorName);
+      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.taxFieldErrorName);
+      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.businessFieldErrorName);
 
       expect(screen.getByText(Config.taxAccess.failedResponsibleOwnerFieldHelper)).toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.failedTaxIdHelper)).not.toBeInTheDocument();
@@ -472,10 +490,10 @@ describe("<TaxAccessStepTwo />", () => {
       renderComponent(userDataMissingTaxId);
       clickSave();
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.stepTwoErrorBanner);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.modalTaxFieldErrorName);
-      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.modalBusinessFieldErrorName);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.taxFieldErrorName);
+      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.businessFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(
-        Config.taxAccess.modalResponsibleOwnerFieldErrorName
+        Config.taxAccess.responsibleOwnerFieldErrorName
       );
       expect(screen.queryByText(Config.taxAccess.failedBusinessFieldHelper)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.failedResponsibleOwnerFieldHelper)).not.toBeInTheDocument();
@@ -493,11 +511,9 @@ describe("<TaxAccessStepTwo />", () => {
       renderComponent(userDataMissingBoth);
       clickSave();
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.stepTwoErrorBanner);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.taxAccess.modalResponsibleOwnerFieldErrorName
-      );
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.modalTaxFieldErrorName);
-      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.modalBusinessFieldErrorName);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.responsibleOwnerFieldErrorName);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.taxFieldErrorName);
+      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.businessFieldErrorName);
 
       expect(screen.getByText(Config.taxAccess.failedResponsibleOwnerFieldHelper)).toBeInTheDocument();
       expect(screen.getByText(Config.taxAccess.failedTaxIdHelper)).toBeInTheDocument();
@@ -529,10 +545,8 @@ describe("<TaxAccessStepTwo />", () => {
       expect(screen.getByRole("alert")).toHaveTextContent(
         markdownToText(Config.taxAccess.failedErrorMessageHeader)
       );
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.taxAccess.modalResponsibleOwnerFieldErrorName
-      );
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.modalTaxFieldErrorName);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.responsibleOwnerFieldErrorName);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.taxFieldErrorName);
       expect(screen.getByText(Config.taxAccess.failedTaxIdHelper)).toBeInTheDocument();
       expect(screen.getByText(Config.taxAccess.failedResponsibleOwnerFieldHelper)).toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.failedBusinessFieldHelper)).not.toBeInTheDocument();
@@ -550,9 +564,7 @@ describe("<TaxAccessStepTwo />", () => {
       clickSave();
       await screen.findByRole("alert");
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.failedErrorMessageHeader);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.taxAccess.modalResponsibleOwnerFieldErrorName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.responsibleOwnerFieldErrorName);
       expect(screen.getByText(Config.taxAccess.failedResponsibleOwnerFieldHelper)).toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.failedBusinessFieldHelper)).not.toBeInTheDocument();
     });
@@ -645,11 +657,13 @@ describe("<TaxAccessStepTwo />", () => {
   });
 
   function sharedTestsWhenAllFieldsPrefilled(userData: UserData): void {
-    it("displays error when the taxId field is empty on blur", () => {
+    it("displays error when the taxId field is empty on blur", async () => {
       renderComponent(userData);
       fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "" } });
       fireEvent.blur(screen.getByLabelText("Tax id"));
-      expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+      await waitFor(() => {
+        expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+      });
       expect(screen.getByText(Config.taxAccess.failedTaxIdHelper)).toBeInTheDocument();
     });
 
@@ -722,7 +736,79 @@ describe("<TaxAccessStepTwo />", () => {
     });
   }
 
+  describe("tax calendar step two analytics", () => {
+    const userDataWithPrefilledFields = generateTaxFilingUserData({
+      publicFiling: true,
+      taxId: "123456789123",
+      businessName: "MrFakesHotDogBonanza",
+    });
+
+    it("tracks click analytics when submit button is clicked", async () => {
+      renderComponent(userDataWithPrefilledFields);
+      const business = getCurrentBusiness(userDataWithPrefilledFields);
+      mockApiResponse(userDataWithPrefilledFields, {
+        profileData: {
+          ...business.profileData,
+        },
+        taxFilingData: generateTaxFilingData({ state: "SUCCESS", errorField: undefined }),
+      });
+
+      clickSave();
+      await waitFor(() => {
+        expect(mockAnalytics.event.tax_calendar.click.click_calendar_access_v2).toHaveBeenCalled();
+      });
+    });
+
+    it("tracks error analytics when failing data is submitted", async () => {
+      renderComponent(userDataWithPrefilledFields);
+      const business = getCurrentBusiness(userDataWithPrefilledFields);
+      mockApiResponse(userDataWithPrefilledFields, {
+        profileData: {
+          ...business.profileData,
+        },
+        taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: undefined }),
+      });
+
+      clickSave();
+      await waitFor(() => {
+        expect(mockAnalytics.event.tax_calendar.submit.tax_calendar_validation_error).toHaveBeenCalled();
+      });
+    });
+
+    it("tracks success analytics when successful data is submitted", async () => {
+      renderComponent(userDataWithPrefilledFields);
+      const business = getCurrentBusiness(userDataWithPrefilledFields);
+      mockApiResponse(userDataWithPrefilledFields, {
+        profileData: {
+          ...business.profileData,
+        },
+        taxFilingData: generateTaxFilingData({ state: "SUCCESS", errorField: undefined }),
+      });
+
+      clickSave();
+      await waitFor(() => {
+        expect(mockAnalytics.event.tax_calendar.submit.tax_deadlines_added_to_calendar).toHaveBeenCalled();
+      });
+    });
+
+    it("tracks pending analytics when pending data is submitted", async () => {
+      renderComponent(userDataWithPrefilledFields);
+      const business = getCurrentBusiness(userDataWithPrefilledFields);
+      mockApiResponse(userDataWithPrefilledFields, {
+        profileData: {
+          ...business.profileData,
+        },
+        taxFilingData: generateTaxFilingData({ state: "PENDING", errorField: undefined }),
+      });
+
+      clickSave();
+      await waitFor(() => {
+        expect(mockAnalytics.event.tax_calendar.submit.business_exists_but_not_in_Gov2Go).toHaveBeenCalled();
+      });
+    });
+  });
+
   const clickSave = (): void => {
-    fireEvent.click(screen.getByTestId("modal-button-primary"));
+    fireEvent.click(screen.getByTestId("tax-calendar-access-submit-button"));
   };
 });
