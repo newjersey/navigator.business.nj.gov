@@ -3,10 +3,10 @@ import { LiveChatHelpButton } from "@/components/njwds-extended/LiveChatHelpButt
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
+import { certificate } from "@/components/tasks/anytime-action/tax-clearance-certificate/data";
 import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
 import { ReviewSection } from "@/components/tasks/review-screen-components/ReviewSection";
 import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
-import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { formatAddress } from "@/lib/domain-logic/formatAddress";
@@ -47,9 +47,10 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
 
   const handleButtonClick = async (): Promise<void> => {
     if (!userData) return;
-    const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
-    if (taxClearanceResponse.certificatePdfArray)
-      props.setCertificatePdfArray(taxClearanceResponse.certificatePdfArray);
+    // const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
+    // if (taxClearanceResponse.certificatePdfArray)
+    // props.setCertificatePdfArray(taxClearanceResponse.certificatePdfArray);
+    props.setCertificatePdfArray(certificate);
 
     // TODO: Error Response will be addressed in a separate ticket
     scrollToTop();
