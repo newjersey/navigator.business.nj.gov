@@ -53,7 +53,6 @@ export enum QUERIES {
   industry = "industry",
   sector = "sector",
   code = "code",
-  openTaxFilingsModal = "openTaxFilingsModal",
   flow = "flow",
   source = "source",
   businessMunicipality = "businessMunicipality",

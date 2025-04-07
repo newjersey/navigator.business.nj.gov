@@ -1,4 +1,4 @@
-import { TaxAccess } from "@/components/filings-calendar/tax-access-modal/TaxAccess";
+import { TaxAccess } from "@/components/filings-calendar/tax-access/TaxAccess";
 import { getMergedConfig } from "@/contexts/configContext";
 import { selectDropdownByValue } from "@/test/helpers/helpers-testing-library-selectors";
 import {
