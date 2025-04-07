@@ -19,6 +19,7 @@ import {
   TaxFilingData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { EmergencyTripPermitApplicationInfo } from "@businessnjgovnavigator/shared/emergencyTripPermit";
 import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { Reducer } from "react";
@@ -73,6 +74,7 @@ export type OnboardingStatus = "SUCCESS" | "ERROR";
 
 export type FormationStepNames = "Name" | "Business" | "Contacts" | "Billing" | "Review";
 export type DbaStepNames = "Business Name" | "DBA Resolution" | "Authorize Business";
+export type AbcEmergencyTripPermitStepNames = "Instructions" | "Requestor" | "Trip" | "Billing" | "Review";
 
 export type FormationFieldErrorState = {
   field: FieldsForErrorHandling;
@@ -560,6 +562,13 @@ export type AddressFieldErrorState = {
   label: string;
 };
 export type FieldErrorType = undefined | unknown;
+
+export type FieldsForEmergencyTripPermitErrorHandling = keyof EmergencyTripPermitApplicationInfo;
+export type EmergencyTripPermitFieldErrorState = {
+  field: FieldsForEmergencyTripPermitErrorHandling;
+  hasError: boolean;
+  label: string;
+};
 
 export enum FieldStateActionKind {
   RESET = "RESET",
