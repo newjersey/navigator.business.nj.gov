@@ -18,7 +18,7 @@ import { ReactElement, useEffect, useState } from "react";
 interface Props {
   anytimeAction: AnytimeActionLicenseReinstatement | AnytimeActionTask;
   CMS_ONLY_stepIndex?: number;
-  CMS_ONLY_certificatePdfArray?: [];
+  CMS_ONLY_certificatePdfArray?: number[];
 }
 
 const Config = getMergedConfig();
@@ -180,7 +180,7 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
                 </div>
               </div>
               {certificatePdfArray ? (
-                <TaxClearanceDownload />
+                <TaxClearanceDownload certificatePdfArray={certificatePdfArray} downloadFilename="test.pdf" />
               ) : (
                 <TaxClearanceSteps
                   steps={stateTaxClearanceCertificateSteps}
