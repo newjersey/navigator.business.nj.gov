@@ -1936,15 +1936,15 @@ export default {
         },
       },
     },
-    tax_calendar_modal: {
+    tax_calendar: {
       submit: {
-        tax_calendar_modal_validation_error: () => {
+        tax_calendar_validation_error: () => {
           eventRunner.track({
             event: "form_validation",
             legacy_event_action: "submit",
-            legacy_event_category: "tax_calendar_modal",
-            legacy_event_label: "tax_calendar_modal_validation_error",
-            form_name: "tax_calendar_modal",
+            legacy_event_category: "tax_calendar",
+            legacy_event_label: "tax_calendar_validation_error",
+            form_name: "tax_calendar",
             server_response: "error",
           });
         },
@@ -1952,9 +1952,9 @@ export default {
           eventRunner.track({
             event: "form_validation",
             legacy_event_action: "submit",
-            legacy_event_category: "tax_calendar_modal",
+            legacy_event_category: "tax_calendar",
             legacy_event_label: "tax_calendar_business_does_not_exist",
-            form_name: "tax_calendar_modal",
+            form_name: "tax_calendar",
             server_response: "not_found",
           });
         },
@@ -1962,20 +1962,34 @@ export default {
           eventRunner.track({
             event: "form_validation",
             legacy_event_action: "submit",
-            legacy_event_category: "tax_calendar_modal",
+            legacy_event_category: "tax_calendar",
             legacy_event_label: "business_exists_but_not_in_Gov2Go",
-            form_name: "tax_calendar_modal",
+            form_name: "tax_calendar",
             server_response: "found",
           });
         },
         tax_deadlines_added_to_calendar: () => {
           eventRunner.track({
             event: "form_submits",
-            form_name: "tax_calendar_modal",
+            form_name: "tax_calendar",
             legacy_event_action: "submit",
-            legacy_event_category: "tax_calendar_modal",
+            legacy_event_category: "tax_calendar",
             legacy_event_label: "tax_deadlines_added_to_calendar",
             server_response: "success",
+          });
+        },
+      },
+    },
+    tax_calendar_v2: {
+      click: {
+        arrive_calendar_access_v2: () => {
+          eventRunner.track({
+            event: "arrive_calendar_access_v2",
+            legacy_event_action: "arrive",
+            legacy_event_category: "calendar_access_v2",
+            legacy_event_label: "arrive_calendar_v2",
+            action: "arrive_calendar_access_v2",
+            item: "calendar_access_v2",
           });
         },
       },

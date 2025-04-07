@@ -1,5 +1,5 @@
-import { TaxAccessStepOne } from "@/components/filings-calendar/tax-access-modal/TaxAccessStepOne";
-import { TaxAccessStepTwo } from "@/components/filings-calendar/tax-access-modal/TaxAccessStepTwo";
+import { TaxAccessStepOne } from "@/components/filings-calendar/tax-access/TaxAccessStepOne";
+import { TaxAccessStepTwo } from "@/components/filings-calendar/tax-access/TaxAccessStepTwo";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
@@ -8,7 +8,7 @@ import { randomPublicFilingLegalStructure, randomTradeNameLegalStructure } from 
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { ReactElement, useState } from "react";
 
-const TaxAccessModalPreview = (props: PreviewProps): ReactElement => {
+const TaxAccessPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
@@ -116,4 +116,4 @@ const TaxAccessModalPreview = (props: PreviewProps): ReactElement => {
   );
 };
 
-export default TaxAccessModalPreview;
+export default TaxAccessPreview;
