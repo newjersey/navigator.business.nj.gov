@@ -1,9 +1,9 @@
 import { Content } from "@/components/Content";
 import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
-import { TaxAccessModalBody } from "@/components/filings-calendar/tax-access-modal/TaxAccessModalBody";
+import { TaxAccessBody } from "@/components/filings-calendar/tax-access/TaxAccessBody";
 import { LegalStructureDropDown } from "@/components/LegalStructureDropDown";
-import { ModalOneButton } from "@/components/ModalOneButton";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { DataFormErrorMapContext, DataFormErrorMapFields } from "@/contexts/dataFormErrorMapContext";
 import { createReducedFieldStates } from "@/contexts/formContext";
@@ -11,14 +11,11 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { FieldStateActionKind } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, useState } from "react";
 
 interface Props {
-  isOpen: boolean;
-  close: () => void;
   moveToNextStep: () => void;
 }
 
@@ -46,24 +43,11 @@ export const TaxAccessStepOne = (props: Props): ReactElement => {
     props.moveToNextStep();
   });
 
-  const onClose = (): void => {
-    props.close();
-    if (!business) return;
-    setProfileData(business.profileData);
-    formContextState.reducer({ type: FieldStateActionKind.RESET });
-  };
-
   return (
-    <ModalOneButton
-      isOpen={props.isOpen}
-      close={onClose}
-      title={Config.taxAccess.modalHeader}
-      primaryButtonText={Config.taxAccess.stepOneNextButton}
-      primaryButtonOnClick={onSubmit}
-    >
+    <div className="width-full">
       {!isValid() && <Alert variant="error">{Config.taxAccess.stepOneErrorBanner}</Alert>}
 
-      <TaxAccessModalBody isStepOne={true} showHeader={true} />
+      <TaxAccessBody isStepOne={true} showHeader={true} />
 
       <DataFormErrorMapContext.Provider value={formContextState}>
         <ProfileDataContext.Provider
@@ -77,12 +61,25 @@ export const TaxAccessStepOne = (props: Props): ReactElement => {
           }}
         >
           <WithErrorBar hasError={!isValid()} type="ALWAYS">
-            <FieldLabelDescriptionOnly fieldName="legalStructureId" bold={true} />
-            <Content>{Config.taxAccess.legalStructureDropDownHeader}</Content>
+            <div className="margin-bottom-2">
+              <FieldLabelDescriptionOnly fieldName="legalStructureId" bold={true} />
+              <Content>{Config.taxAccess.legalStructureDropDownHeader}</Content>
+            </div>
             <LegalStructureDropDown />
           </WithErrorBar>
         </ProfileDataContext.Provider>
       </DataFormErrorMapContext.Provider>
-    </ModalOneButton>
+
+      <div className="padding-y-3 flex flex-column flex-align-end">
+        <PrimaryButton
+          isColor="primary"
+          isRightMarginRemoved={true}
+          onClick={onSubmit}
+          dataTestId="tax-calendar-access-next-button"
+        >
+          {Config.taxAccess.stepOneNextButton}
+        </PrimaryButton>
+      </div>
+    </div>
   );
 };

@@ -36,7 +36,7 @@ import * as FundingsOnboarding from "@businessnjgovnavigator/content/fieldConfig
 import * as PageNotFoundError from "@businessnjgovnavigator/content/fieldConfig/page-not-found-error.json";
 import * as Profile from "@businessnjgovnavigator/content/fieldConfig/profile.json";
 import * as StarterKits from "@businessnjgovnavigator/content/fieldConfig/starter-kits.json";
-import * as TaxAccess from "@businessnjgovnavigator/content/fieldConfig/tax-access-modal.json";
+import * as TaxAccess from "@businessnjgovnavigator/content/fieldConfig/tax-access.json";
 import * as TaxClearanceCertificateDownload from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-download.json";
 import * as TaxClearanceCertificateShared from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-shared.json";
 import * as TaxClearanceCertificateStep1 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step1.json";

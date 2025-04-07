@@ -1,4 +1,4 @@
-import { TaxAccessModal } from "@/components/filings-calendar/tax-access-modal/TaxAccessModal";
+import { TaxAccess } from "@/components/filings-calendar/tax-access/TaxAccess";
 import { getMergedConfig } from "@/contexts/configContext";
 import { selectDropdownByValue } from "@/test/helpers/helpers-testing-library-selectors";
 import {
@@ -28,7 +28,7 @@ describe("<TaxAccessModal />", () => {
       <WithStatefulUserData
         initialUserData={business ? generateUserDataForBusiness(business) : generateUserData({})}
       >
-        <TaxAccessModal isOpen={true} close={(): void => {}} onSuccess={(): void => {}} />
+        <TaxAccess isOpen={true} close={(): void => {}} onSuccess={(): void => {}} />
       </WithStatefulUserData>
     );
   };
