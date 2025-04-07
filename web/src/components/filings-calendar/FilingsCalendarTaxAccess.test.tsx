@@ -2,11 +2,11 @@ import { FilingsCalendarTaxAccess } from "@/components/filings-calendar/FilingsC
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { randomPublicFilingLegalType } from "@/test/factories";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
-import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -49,11 +49,15 @@ let setShowNeedsAccountModal: jest.Mock;
 
 const renderFilingsCalendarTaxAccess = (initialUserData?: UserData): void => {
   render(
-    <ThemeProvider theme={createTheme()}>
-      <WithStatefulUserData initialUserData={initialUserData}>
-        <FilingsCalendarTaxAccess />
-      </WithStatefulUserData>
-    </ThemeProvider>
+    withNeedsAccountContext(
+      <ThemeProvider theme={createTheme()}>
+        <WithStatefulUserData initialUserData={initialUserData}>
+          <FilingsCalendarTaxAccess />
+        </WithStatefulUserData>
+      </ThemeProvider>,
+      IsAuthenticated.TRUE,
+      { showNeedsAccountModal: false, setShowNeedsAccountModal }
+    )
   );
 };
 
@@ -158,7 +162,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       });
 
       renderUnauthenticatedFilingsCalendarTaxAccess(business);
-      openModal();
+      openAuthenticationModal();
       expect(screen.queryByTestId("modal-content")).not.toBeInTheDocument();
       await waitFor(() => {
         return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
@@ -172,26 +176,10 @@ describe("<FilingsCalendarTaxAccess />", () => {
         }),
       });
       renderUnauthenticatedFilingsCalendarTaxAccess(business);
-      openModal();
+      openAuthenticationModal();
       await waitFor(() => {
-        return expect(currentBusiness().preferences.returnToLink).toEqual(
-          `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true`
-        );
+        return expect(currentBusiness().preferences.returnToLink).toEqual(`${ROUTES.dashboard}`);
       });
-    });
-
-    it("opens tax modal if the query parameter openTaxFilingsModal is true and shallow reloads", async () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: OperatingPhaseId.GUEST_MODE_OWNING,
-          }),
-        })
-      );
-      useMockRouter({ query: { openTaxFilingsModal: "true" }, isReady: true });
-      renderFilingsCalendarTaxAccess(userData);
-      await screen.findByTestId("modal-content");
-      expect(mockPush).toHaveBeenCalledWith({ pathname: ROUTES.dashboard }, undefined, { shallow: true });
     });
   });
 
@@ -208,24 +196,18 @@ describe("<FilingsCalendarTaxAccess />", () => {
     }),
   });
 
-  it("opens tax access modal when on button click", () => {
-    renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
-    fireEvent.click(screen.getByTestId("get-tax-access"));
-    expect(screen.getByTestId("modal-content")).toBeInTheDocument();
-  });
-
   it("displays alert on success", async () => {
     mockApi.postTaxFilingsOnboarding.mockResolvedValue(
       modifyUserData(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({
-          state: "SUCCESS",
           registeredISO: getCurrentDateISOString(),
+          state: "SUCCESS",
         }),
       })
     );
 
     renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
-    openModal();
+
     clickSave();
     await waitFor(() => {
       return expect(currentBusiness().taxFilingData.state).toEqual("SUCCESS");
@@ -245,7 +227,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
     );
 
     renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
-    openModal();
+
     clickSave();
     await waitFor(() => {
       return expect(currentBusiness().taxFilingData.state).toEqual("SUCCESS");
@@ -287,7 +269,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       });
     });
 
-    it("shows button component when state is FAILED and unregistered", async () => {
+    it("shows tax access component when state is FAILED and unregistered", async () => {
       renderFilingsCalendarTaxAccess(
         modifyUserData(userDataWithPrefilledFields, {
           taxFilingData: generateTaxFilingData({
@@ -299,10 +281,10 @@ describe("<FilingsCalendarTaxAccess />", () => {
       );
       expect(mockApi.postTaxFilingsLookup).not.toHaveBeenCalled();
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
-      expect(screen.getByTestId("button-container")).toBeInTheDocument();
+      expect(screen.getByTestId("tax-access-container")).toBeInTheDocument();
     });
 
-    it("shows button component when state is undefined and unregistered", async () => {
+    it("shows tax access component when state is undefined and unregistered", async () => {
       renderFilingsCalendarTaxAccess(
         modifyUserData(userDataWithPrefilledFields, {
           taxFilingData: generateTaxFilingData({
@@ -313,7 +295,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       );
       expect(mockApi.postTaxFilingsLookup).not.toHaveBeenCalled();
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
-      expect(screen.getByTestId("button-container")).toBeInTheDocument();
+      expect(screen.getByTestId("tax-access-container")).toBeInTheDocument();
     });
 
     it("hides pending and button components when state is SUCCESS", async () => {
@@ -334,7 +316,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
         return expect(currentBusiness().taxFilingData.state).toEqual("SUCCESS");
       });
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("tax-access-container")).not.toBeInTheDocument();
     });
 
     it("hides pending and button components when state is API_ERROR but registered", async () => {
@@ -355,13 +337,12 @@ describe("<FilingsCalendarTaxAccess />", () => {
         return expect(currentBusiness().taxFilingData.state).toEqual("API_ERROR");
       });
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("tax-access-container")).not.toBeInTheDocument();
     });
 
     it("shows registration followup component when state is SUCCESS but it's before the Saturday after registration", async () => {
       mockApiResponse(pendingStateUserData, {
         taxFilingData: generateTaxFilingData({
-          state: "SUCCESS",
           registeredISO: getCurrentDateISOString(),
         }),
       });
@@ -372,7 +353,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       });
       expect(screen.queryByTestId("get-tax-access")).not.toBeInTheDocument();
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("tax-access-container")).not.toBeInTheDocument();
       expect(screen.getByTestId("alert-content-container")).toBeInTheDocument();
     });
 
@@ -388,16 +369,16 @@ describe("<FilingsCalendarTaxAccess />", () => {
         return expect(currentBusiness().taxFilingData.state).toEqual("PENDING");
       });
       expect(screen.getByTestId("pending-container")).toBeInTheDocument();
-      expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("tax-access-container")).not.toBeInTheDocument();
       expect(screen.queryByTestId("alert-content-container")).not.toBeInTheDocument();
     });
   });
 
-  const openModal = (): void => {
+  const openAuthenticationModal = (): void => {
     fireEvent.click(screen.getByTestId("get-tax-access"));
   };
 
   const clickSave = (): void => {
-    fireEvent.click(screen.getByTestId("modal-button-primary"));
+    fireEvent.click(screen.getByTestId("tax-calendar-access-submit-button"));
   };
 });

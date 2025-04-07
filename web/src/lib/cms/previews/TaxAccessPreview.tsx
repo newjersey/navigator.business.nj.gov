@@ -1,5 +1,5 @@
-import { TaxAccessStepOne } from "@/components/filings-calendar/tax-access-modal/TaxAccessStepOne";
-import { TaxAccessStepTwo } from "@/components/filings-calendar/tax-access-modal/TaxAccessStepTwo";
+import { TaxAccessStepOne } from "@/components/filings-calendar/tax-access/TaxAccessStepOne";
+import { TaxAccessStepTwo } from "@/components/filings-calendar/tax-access/TaxAccessStepTwo";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
@@ -8,23 +8,14 @@ import { randomPublicFilingLegalStructure, randomTradeNameLegalStructure } from 
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { ReactElement, useState } from "react";
 
-const TaxAccessModalPreview = (props: PreviewProps): ReactElement => {
+const TaxAccessPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
-  const [step1ModalOpen, setStep1ModalOpen] = useState(false);
-  const [step2PublicFilingModalOpen, setStep2PublicFilingModalOpen] = useState(false);
-  const [step2TradeNameModalOpen, setStep2TradeNameModalOpen] = useState(false);
   const [errorPreview, setErrorPreview] = useState<"NONE" | "API" | "UNKNOWN">("NONE");
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <div>
-        <button className="margin-2" onClick={(): void => setStep1ModalOpen(true)}>
-          Open Tax Modal Step 1 (Business structure)
-        </button>
-      </div>
-
       <fieldset>
         <legend>Select an error type to preview:</legend>
 
@@ -65,28 +56,15 @@ const TaxAccessModalPreview = (props: PreviewProps): ReactElement => {
         </div>
       </fieldset>
 
-      <div>
-        <button className="margin-2" onClick={(): void => setStep2PublicFilingModalOpen(true)}>
-          Open Tax Modal Step 2 (with Business Name)
-        </button>
-      </div>
-
-      <div>
-        <button className="margin-2" onClick={(): void => setStep2TradeNameModalOpen(true)}>
-          Open Tax Modal Step 2 (with Responsible Owner Name)
-        </button>
-      </div>
-
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <TaxAccessStepOne
-          isOpen={step1ModalOpen}
-          close={(): void => setStep1ModalOpen(false)}
-          moveToNextStep={(): void => {}}
-        />
+        <TaxAccessStepOne moveToNextStep={(): void => {}} />
+
+        <div>
+          This is a preview of Step Two with a <span className="text-bold">public filing</span> legal
+          structure:
+        </div>
 
         <TaxAccessStepTwo
-          isOpen={step2PublicFilingModalOpen}
-          close={(): void => setStep2PublicFilingModalOpen(false)}
           moveToPrevStep={(): void => {}}
           onSuccess={(): void => {}}
           CMS_ONLY_fakeError={errorPreview}
@@ -98,9 +76,11 @@ const TaxAccessModalPreview = (props: PreviewProps): ReactElement => {
           })}
         />
 
+        <div>
+          This is a preview of Step Two with a <span className="text-bold">trade name</span> legal structure:
+        </div>
+
         <TaxAccessStepTwo
-          isOpen={step2TradeNameModalOpen}
-          close={(): void => setStep2TradeNameModalOpen(false)}
           moveToPrevStep={(): void => {}}
           onSuccess={(): void => {}}
           CMS_ONLY_fakeError={errorPreview}
@@ -116,4 +96,4 @@ const TaxAccessModalPreview = (props: PreviewProps): ReactElement => {
   );
 };
 
-export default TaxAccessModalPreview;
+export default TaxAccessPreview;
