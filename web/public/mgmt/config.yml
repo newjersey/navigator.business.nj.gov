@@ -3788,6 +3788,7 @@ collections:
               "Set Up at a Temporary Location",
               "Purchase New Products or Equipment",
               "Only Show in Subtask",
+              "Manage My Business Vehicles",
             ],
         }
       # This is implemented but needs follow up in a future ticket for content before going live (Also same code for anytime action license reinstatements)
