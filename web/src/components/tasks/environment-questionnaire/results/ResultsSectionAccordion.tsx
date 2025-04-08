@@ -6,6 +6,9 @@ import { ReactElement, ReactNode, useState } from "react";
 
 interface Props {
   title: string;
+  titleIcon?: ReactNode;
+  headingStyleOverride?: string;
+  summaryClass?: string;
   children: ReactNode;
 }
 
@@ -18,15 +21,20 @@ export const ResultsSectionAccordion = (props: Props): ReactElement => {
       <SectionAccordionContext.Provider value={{ isOpen }}>
         <Accordion expanded={isOpen} onChange={() => setIsOpen(!isOpen)}>
           <AccordionSummary
+            className={props.summaryClass}
             expandIcon={<Icon className={"usa-icon--size-5 margin-left-1"} iconName={"expand_more"} />}
             aria-controls={`${sectionName}-content`}
             id={`${sectionName}-header`}
             data-testid={`${sectionName}-header`}
           >
-            <div>
+            <div className="fdr">
+              {props.titleIcon && props.titleIcon}
               <Heading
-                level={3}
-                className={`flex flex-align-center margin-0-override margin-top-3 tablet:margin-left-3`}
+                level={props.headingStyleOverride ? 0 : 3}
+                className={
+                  props.headingStyleOverride ??
+                  `flex flex-align-center margin-0-override margin-top-3 tablet:margin-left-3`
+                }
               >
                 <div className="inline">{props.title}</div>
               </Heading>
