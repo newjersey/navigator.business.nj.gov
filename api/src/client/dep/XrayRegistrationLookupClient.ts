@@ -38,10 +38,6 @@ export const XrayRegistrationLookupClient = (
     let addressResults = await xrayRegistrationSearchClient.searchByAddress(addressLine1, addressZipCode);
     let businessNameResults = await xrayRegistrationSearchClient.searchByBusinessName(businessName);
 
-    // filter by disposal date
-    addressResults = filterByDisposalDate(addressResults);
-    businessNameResults = filterByDisposalDate(businessNameResults);
-
     // filter by owner type
     addressResults = filterByOwnerType(addressResults);
     businessNameResults = filterByOwnerType(businessNameResults);
@@ -57,6 +53,12 @@ export const XrayRegistrationLookupClient = (
     const status = consolidatedEntriesResults[0].status;
     const expirationDate = consolidatedEntriesResults[0].expirationDate ?? undefined;
     const deactivationDate = consolidatedEntriesResults[0].deactivationDate ?? undefined;
+
+    // filter by disposal date if not expired
+    if (status !== "Inactive") {
+      addressResults = filterByDisposalDate(addressResults);
+      businessNameResults = filterByDisposalDate(businessNameResults);
+    }
 
     for (const entry in consolidatedEntriesResults) {
       if (status !== consolidatedEntriesResults[entry].status) {

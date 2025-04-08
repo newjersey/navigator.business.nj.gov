@@ -11,7 +11,7 @@ import { xrayRegistrationRouterFactory } from "@api/xrayRegistrationRouter";
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
-import { XrayRegistrationLookupClient } from "@client/dep/xrayRegistrationLookupClient";
+import { XrayRegistrationLookupClient } from "@client/dep/XrayRegistrationLookupClient";
 import { XrayRegistrationSearchClient } from "@client/dep/XrayRegistrationSearchClient";
 import { DynamicsAccessTokenClient } from "@client/dynamics/DynamicsAccessTokenClient";
 import { DynamicsElevatorSafetyHealthCheckClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyHealthCheckClient";
@@ -70,8 +70,7 @@ const app = setupExpress();
 const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
 const dataLogger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
 
-const XRAY_REGISTRATION_STATUS_BASE_URL =
-  process.env.XRAY_REGISTRATION_STATUS_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
+const XRAY_REGISTRATION_STATUS_BASE_URL = process.env.XRAY_REGISTRATION_STATUS_BASE_URL || "";
 
 const LICENSE_STATUS_BASE_URL =
   process.env.LICENSE_STATUS_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
