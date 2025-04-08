@@ -38,15 +38,15 @@ export const ApiTaxClearanceCertificateClient = (
     const postBody = {
       repId: userData.user.id,
       repName: userData.user.name,
-      taxpayerId: currTaxClearanceData.taxId,
-      taxpayerPin: currTaxClearanceData.taxPin,
-      taxpayerName: currTaxClearanceData.businessName,
-      addressLine1: currTaxClearanceData.addressLine1,
-      addressLine2: currTaxClearanceData.addressLine2,
-      city: currTaxClearanceData.addressCity,
-      state: currTaxClearanceData.addressState?.shortCode,
-      zip: currTaxClearanceData.addressZipCode,
-      agencyName: LookupTaxClearanceCertificateAgenciesById(currTaxClearanceData.requestingAgencyId).name,
+      taxpayerId: currTaxClearanceData?.taxId,
+      taxpayerPin: currTaxClearanceData?.taxPin,
+      taxpayerName: currTaxClearanceData?.businessName,
+      addressLine1: currTaxClearanceData?.addressLine1,
+      addressLine2: currTaxClearanceData?.addressLine2,
+      city: currTaxClearanceData?.addressCity,
+      state: currTaxClearanceData?.addressState?.shortCode,
+      zip: currTaxClearanceData?.addressZipCode,
+      agencyName: LookupTaxClearanceCertificateAgenciesById(currTaxClearanceData?.requestingAgencyId).name,
     };
 
     logWriter.LogInfo(

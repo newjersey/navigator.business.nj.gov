@@ -149,17 +149,6 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         );
       });
 
-      it("renders entityId", () => {
-        const business = generateBusiness({
-          taxClearanceCertificateData: generateTaxClearanceCertificateData({
-            entityId: "1234567890",
-          }),
-        });
-        renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
-        expect(getInputElementByLabel("Entity id").value).toEqual("1234567890");
-      });
-
       it("renders addressLine1", () => {
         const business = generateBusiness({
           taxClearanceCertificateData: generateTaxClearanceCertificateData({
@@ -248,16 +237,6 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         renderComponent({ business });
         fireEvent.click(screen.getByTestId("stepper-1"));
         expect(getInputElementByLabel("Business name").value).toEqual("business name in profile data");
-      });
-
-      it("renders entityId from profile data", () => {
-        const business = generateBusiness({
-          profileData: generateProfileData({ entityId: "1234567890" }),
-          taxClearanceCertificateData: generateTaxClearanceCertificateData({ entityId: "" }),
-        });
-        renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
-        expect(getInputElementByLabel("Entity id").value).toEqual("1234567890");
       });
 
       it("renders addressLine1 from formation form data", () => {
@@ -406,7 +385,6 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
 
     selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
     fillText("Business name", "Test Name");
-    fillText("Entity id", "1234567890");
     fillText("Address line1", "123 Test Road");
     fillText("Address line2", "Test Line 2");
     fillText("Address city", "Baltimore");
@@ -420,7 +398,6 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     expect(currentBusiness().taxClearanceCertificateData).toEqual({
       requestingAgencyId: "newJerseyBoardOfPublicUtilities",
       businessName: "Test Name",
-      entityId: "1234567890",
       addressLine1: "123 Test Road",
       addressLine2: "Test Line 2",
       addressCity: "Baltimore",
@@ -443,7 +420,6 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
 
     selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
     fillText("Business name", "Test Name");
-    fillText("Entity id", "1234567890");
     fillText("Address line1", "123 Test Road");
     fillText("Address line2", "Test Line 2");
     fillText("Address city", "Baltimore");
@@ -458,7 +434,6 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     expect(currentBusiness().taxClearanceCertificateData).toEqual({
       requestingAgencyId: "newJerseyBoardOfPublicUtilities",
       businessName: "Test Name",
-      entityId: "1234567890",
       addressLine1: "123 Test Road",
       addressLine2: "Test Line 2",
       addressCity: "Baltimore",
@@ -499,7 +474,6 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
 
       expect(within(screen.getByTestId("requestingAgencyId")).getByText(notStartedText)).toBeInTheDocument();
       expect(within(screen.getByTestId("businessName")).getByText(notStartedText)).toBeInTheDocument();
-      expect(within(screen.getByTestId("entityId")).getByText(notStartedText)).toBeInTheDocument();
       expect(within(screen.getByTestId("addressLabel")).getByText(notStartedText)).toBeInTheDocument();
       expect(within(screen.getByTestId("stateTaxIdLabel")).getByText(notStartedText)).toBeInTheDocument();
       expect(within(screen.getByTestId("taxPinLabel")).getByText(notStartedText)).toBeInTheDocument();
@@ -665,7 +639,6 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         )
       ).toBeInTheDocument();
       expect(within(screen.getByTestId("businessName")).getByText("Test Name")).toBeInTheDocument();
-      expect(within(screen.getByTestId("entityId")).getByText("1234567890")).toBeInTheDocument();
       expect(within(screen.getByTestId("addressLabel")).getByText(address)).toBeInTheDocument();
       expect(within(screen.getByTestId("stateTaxIdLabel")).getByText("012345678901")).toBeInTheDocument();
       expect(within(screen.getByTestId("taxPinLabel")).getByText("1234")).toBeInTheDocument();

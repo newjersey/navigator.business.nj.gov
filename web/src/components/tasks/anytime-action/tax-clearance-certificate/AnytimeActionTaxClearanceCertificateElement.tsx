@@ -49,7 +49,6 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
     const newTaxClearanceCertificateData = {
       requestingAgencyId: taxClearanceCertificateData.requestingAgencyId,
       businessName: profileData.businessName,
-      entityId: profileData.entityId || "",
       addressLine1: formationAddressData.addressLine1,
       addressLine2: formationAddressData.addressLine2,
       addressCity: formationAddressData.addressCity || "",
@@ -72,8 +71,6 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
       const newRequestingAgencyId = business.taxClearanceCertificateData?.requestingAgencyId || "";
       const newBusinessName =
         business?.taxClearanceCertificateData?.businessName || business?.profileData.businessName || "";
-      const newEntityId =
-        business?.taxClearanceCertificateData?.entityId || business?.profileData.entityId || "";
       const newAddressLine1 =
         business?.taxClearanceCertificateData?.addressLine1 ||
         business.formationData.formationFormData.addressLine1 ||
@@ -107,7 +104,6 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
       setProfileData({
         ...profileData,
         businessName: newBusinessName,
-        entityId: newEntityId,
         taxId: newTaxId,
         taxPin: newTaxPin,
       });

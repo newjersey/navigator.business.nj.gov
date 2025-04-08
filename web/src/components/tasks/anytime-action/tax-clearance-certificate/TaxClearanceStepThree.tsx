@@ -37,11 +37,11 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
 
   if (isAddressComplete) {
     addressValue = formatAddress({
-      addressLine1: business?.taxClearanceCertificateData.addressLine1,
-      addressLine2: business?.taxClearanceCertificateData.addressLine2,
-      addressCity: business?.taxClearanceCertificateData.addressCity,
-      addressState: business?.taxClearanceCertificateData.addressState,
-      addressZipCode: business?.taxClearanceCertificateData.addressZipCode,
+      addressLine1: business?.taxClearanceCertificateData?.addressLine1,
+      addressLine2: business?.taxClearanceCertificateData?.addressLine2,
+      addressCity: business?.taxClearanceCertificateData?.addressCity,
+      addressState: business?.taxClearanceCertificateData?.addressState,
+      addressZipCode: business?.taxClearanceCertificateData?.addressZipCode,
     });
   }
 
@@ -85,11 +85,6 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
               label={Config.taxClearanceCertificateStep3.businessNameLabel}
               value={business?.taxClearanceCertificateData?.businessName}
               dataTestId={"businessName"}
-            />
-            <ReviewLineItem
-              label={Config.taxClearanceCertificateStep3.entityIdLabel}
-              value={business?.taxClearanceCertificateData?.entityId}
-              dataTestId={"entityId"}
             />
             <ReviewLineItem
               label={Config.taxClearanceCertificateStep3.addressLabel}
