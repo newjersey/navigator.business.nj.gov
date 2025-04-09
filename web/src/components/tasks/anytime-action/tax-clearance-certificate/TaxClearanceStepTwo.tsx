@@ -22,6 +22,7 @@ interface Props {
   saveTaxClearanceCertificateData: () => void;
   onSave: (event?: FormEvent<HTMLFormElement>) => void;
   onSubmit: (event?: FormEvent<HTMLFormElement>) => void;
+  updateStepTwoComplete: () => void;
 }
 
 export const TaxClearanceStepTwo = (props: Props): ReactElement => {
@@ -42,8 +43,6 @@ export const TaxClearanceStepTwo = (props: Props): ReactElement => {
     "addressZipCode",
     DataFormErrorMapContext
   );
-
-
 
   const onValidation = (): void => {
     setIsValidAddressLine1(!doesFieldHaveError("addressLine1"));
@@ -76,6 +75,8 @@ export const TaxClearanceStepTwo = (props: Props): ReactElement => {
         <div className="margin-y-2">
           <ProfileField fieldName={"businessName"} hideLine={true} hideTopSpace={true} isFullWidth={true}>
             <BusinessName
+              onChange={props.updateStepTwoComplete}
+              onValidation={props.updateStepTwoComplete}
               inputWidth="full"
               required={true}
               validationText={Config.taxClearanceCertificateShared.businessNameErrorText}
@@ -87,7 +88,7 @@ export const TaxClearanceStepTwo = (props: Props): ReactElement => {
         </div>
         <div className="margin-y-2">
           <ProfileField fieldName="taxId" hideLine={true} hideTopSpace={true} isFullWidth={true}>
-            <TaxId inputWidth="full" required={true} />
+            <TaxId inputWidth="full" required={true} onChange={props.updateStepTwoComplete} />
           </ProfileField>
         </div>
         <div>

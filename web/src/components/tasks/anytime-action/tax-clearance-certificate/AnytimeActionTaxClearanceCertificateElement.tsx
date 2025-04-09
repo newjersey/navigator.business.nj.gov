@@ -44,6 +44,7 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
 
   const updateStepTwoComplete = (): void => {
+    console.log("isvalid", isValid(), "all fields non empty", allFieldsNonEmpty());
     const steps = stateTaxClearanceCertificateSteps.map((step) => ({ ...step }));
     if (isValid() && allFieldsNonEmpty()) {
       steps[1].isComplete = true;
@@ -147,7 +148,6 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
     onSubmit,
   } = useFormContextHelper(createDataFormErrorMap());
 
-  console.log(getInvalidFieldIds());
   FormFuncWrapper(
     async (): Promise<void> => {
       if (!business || !isValid()) {
@@ -195,7 +195,8 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
     }
 
     setStateTaxClearanceCertificateSteps(steps);
-  }, [stepIndex, stateTaxClearanceCertificateSteps]);
+    updateStepTwoComplete();
+  }, [stepIndex, taxClearanceCertificateData]);
 
   return (
     <DataFormErrorMapContext.Provider value={formContextState}>
@@ -247,6 +248,7 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
                 <>
                   <AnytimeActionTaxClearanceCertificateElementAlert fieldErrors={getInvalidFieldIds()} />
                   <TaxClearanceStepTwo
+                    updateStepTwoComplete={updateStepTwoComplete}
                     setStepIndex={setStepIndex}
                     saveTaxClearanceCertificateData={saveTaxClearanceCertificateData}
                     onSave={saveButton}

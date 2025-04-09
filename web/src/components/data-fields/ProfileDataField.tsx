@@ -36,6 +36,13 @@ export const ProfileDataField = <T,>({
   });
 
   const handleChange = (value: string): void => {
+    if (taxClearanceCertificateData !== undefined) {
+      setTaxClearanceCertificateData({
+        ...taxClearanceCertificateData,
+        [fieldName]: value,
+      });
+    }
+
     if (props.handleChange) {
       props.handleChange(value);
       return;
@@ -45,13 +52,6 @@ export const ProfileDataField = <T,>({
       ...state.profileData,
       [fieldName]: value,
     });
-
-    if (taxClearanceCertificateData !== undefined) {
-      setTaxClearanceCertificateData({
-        ...taxClearanceCertificateData,
-        [fieldName]: value,
-      });
-    }
   };
 
   return (
