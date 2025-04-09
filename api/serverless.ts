@@ -88,6 +88,10 @@ const useWireMockForFormationAndBusinessSearch =
   process.env.USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH || "";
 const useWireMockForGetTaxCalendarSearch = process.env.USE_WIREMOCK_FOR_GET_TAX_CALENDAR_SEARCH || "";
 
+const taxClearanceCertificateUrl = process.env.TAX_CLEARANCE_CERTIFICATE_URL || "";
+const taxClearanceCertificateUserName = process.env.TAX_CLEARANCE_CERTIFICATE_USER_NAME || "";
+const taxClearanceCertificatePassword = process.env.TAX_CLEARANCE_CERTIFICATE_PASSWORD || "";
+
 const serverlessConfiguration: AWS = {
   useDotenv: true,
   service: "businessnjgov-api",
@@ -242,6 +246,9 @@ const serverlessConfiguration: AWS = {
       BUSINESSES_TABLE: businessesTable,
       USE_WIREMOCK_FOR_FORMATION_AND_BUSINESS_SEARCH: useWireMockForFormationAndBusinessSearch,
       USE_WIREMOCK_FOR_GET_TAX_CALENDAR_SEARCH: useWireMockForGetTaxCalendarSearch,
+      TAX_CLEARANCE_CERTIFICATE_URL: taxClearanceCertificateUrl,
+      TAX_CLEARANCE_CERTIFICATE_USER_NAME: taxClearanceCertificateUserName,
+      TAX_CLEARANCE_CERTIFICATE_PASSWORD: taxClearanceCertificatePassword,
     } as AwsLambdaEnvironment,
     logRetentionInDays: 180,
   },
