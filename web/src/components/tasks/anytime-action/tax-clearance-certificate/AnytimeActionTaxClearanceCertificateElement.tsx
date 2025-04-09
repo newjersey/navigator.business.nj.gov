@@ -13,9 +13,14 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { AnytimeActionLicenseReinstatement, AnytimeActionTask, StepperStep } from "@/lib/types/types";
 import { getFlow, scrollToTop, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { emptyTaxClearanceCertificateData, LookupMunicipalityByName } from "@businessnjgovnavigator/shared";
+import {
+  emptyTaxClearanceCertificateData,
+  LookupMunicipalityByName,
+  TaxClearanceCertificateData,
+} from "@businessnjgovnavigator/shared";
 import { emptyFormationAddressData, FormationAddress } from "@businessnjgovnavigator/shared/formationData";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { isEqual } from "lodash";
 import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
@@ -25,17 +30,30 @@ interface Props {
 
 const Config = getMergedConfig();
 
-const initialTaxClearanceCertificateSteps = (): StepperStep[] => [
+const initialTaxClearanceCertificateSteps: StepperStep[] = [
   { name: Config.taxClearanceCertificateShared.stepperOneLabel, hasError: false, isComplete: false },
   { name: Config.taxClearanceCertificateShared.stepperTwoLabel, hasError: false, isComplete: false },
   { name: Config.taxClearanceCertificateShared.stepperThreeLabel, hasError: false, isComplete: false },
 ];
 
+const allFieldsNonEmpty = (certificateData: TaxClearanceCertificateData): boolean => {
+  return (
+    certificateData.requestingAgencyId.trim() !== "" &&
+    certificateData.businessName.trim() !== "" &&
+    certificateData.addressLine1.trim() !== "" &&
+    certificateData.addressCity.trim() !== "" &&
+    certificateData.addressState !== undefined &&
+    certificateData.addressZipCode.trim() !== "" &&
+    certificateData.taxId.trim() !== "" &&
+    certificateData.taxPin.trim() !== ""
+  );
+};
+
 export const AnytimeActionTaxClearanceCertificateElement = (props: Props): ReactElement => {
   const { business, updateQueue } = useUserData();
   const [stepIndex, setStepIndex] = useState(props.CMS_ONLY_stepIndex ?? 0);
   const [stateTaxClearanceCertificateSteps, setStateTaxClearanceCertificateSteps] = useState(
-    initialTaxClearanceCertificateSteps()
+    initialTaxClearanceCertificateSteps
   );
   const [taxClearanceCertificateData, setTaxClearanceCertificateData] = useState(
     emptyTaxClearanceCertificateData
@@ -43,16 +61,7 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
   const [formationAddressData, setAddressData] = useState<FormationAddress>(emptyFormationAddressData);
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
 
-  const updateStepTwoComplete = (): void => {
-    console.log("isvalid", isValid(), "all fields non empty", allFieldsNonEmpty());
-    const steps = stateTaxClearanceCertificateSteps.map((step) => ({ ...step }));
-    if (isValid() && allFieldsNonEmpty()) {
-      steps[1].isComplete = true;
-    } else {
-      steps[1].isComplete = false;
-    }
-    setStateTaxClearanceCertificateSteps(steps);
-  };
+  const updateStepTwoComplete = (): void => {};
 
   const saveTaxClearanceCertificateData = (): void => {
     const newTaxClearanceCertificateData = {
@@ -162,7 +171,7 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
   const saveButton = (): void => {
     saveTaxClearanceCertificateData();
     updateStepTwoComplete();
-    if (isValid() && allFieldsNonEmpty()) {
+    if (isValid() && allFieldsNonEmpty(taxClearanceCertificateData)) {
       setStepIndex(2);
     } else {
       const steps = stateTaxClearanceCertificateSteps.map((step) => ({ ...step }));
@@ -171,32 +180,37 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
     }
   };
 
-  const allFieldsNonEmpty = (): boolean => {
-    return (
-      taxClearanceCertificateData.requestingAgencyId.trim() !== "" &&
-      taxClearanceCertificateData.businessName.trim() !== "" &&
-      taxClearanceCertificateData.addressLine1.trim() !== "" &&
-      taxClearanceCertificateData.addressCity.trim() !== "" &&
-      taxClearanceCertificateData.addressState !== undefined &&
-      taxClearanceCertificateData.addressZipCode.trim() !== "" &&
-      taxClearanceCertificateData.taxId.trim() !== "" &&
-      taxClearanceCertificateData.taxPin.trim() !== ""
-    );
-  };
-
   useEffect(() => {
+    const updateStepOne = (steps: StepperStep[]): void => {
+      if (stepIndex === 0) {
+        steps[0].isComplete = false;
+      } else {
+        steps[0].isComplete = true;
+      }
+    };
+
+    const updateStepTwo = (steps: StepperStep[]): void => {
+      console.log(
+        "isvalid",
+        isValid(),
+        "all fields non empty",
+        allFieldsNonEmpty(taxClearanceCertificateData)
+      );
+      if (isValid() && allFieldsNonEmpty(taxClearanceCertificateData)) {
+        steps[1].isComplete = true;
+      } else {
+        steps[1].isComplete = false;
+      }
+    };
+
     const steps = stateTaxClearanceCertificateSteps.map((step) => ({ ...step }));
+    updateStepOne(steps);
+    updateStepTwo(steps);
 
-    // If user is past step one, mark it as complete
-    if (stepIndex === 0) {
-      steps[0].isComplete = false;
-    } else {
-      steps[0].isComplete = true;
+    if (!isEqual(steps, stateTaxClearanceCertificateSteps)) {
+      setStateTaxClearanceCertificateSteps(steps);
     }
-
-    setStateTaxClearanceCertificateSteps(steps);
-    updateStepTwoComplete();
-  }, [stepIndex, taxClearanceCertificateData]);
+  }, [stepIndex, stateTaxClearanceCertificateSteps, taxClearanceCertificateData, isValid]);
 
   return (
     <DataFormErrorMapContext.Provider value={formContextState}>
@@ -232,7 +246,7 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
                 steps={stateTaxClearanceCertificateSteps}
                 currentStep={stepIndex}
                 onStepClicked={(step: number): void => {
-                  if (!isValid() || !allFieldsNonEmpty()) {
+                  if (!isValid() || !allFieldsNonEmpty(taxClearanceCertificateData)) {
                     const steps = stateTaxClearanceCertificateSteps.map((step) => ({ ...step }));
                     steps[1].isComplete = false;
                     setStateTaxClearanceCertificateSteps(steps);
