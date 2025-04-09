@@ -9,7 +9,7 @@ summaryDescriptionMd: >-
   Before opening your daycare, New Jersey Department of Children and Families (DCF) and your local government require your building and property to be inspected.
 
 
-  You can schedule a free preliminary inspection with DCF's Office of Licensing at 1-877-667-9845.
+  You can schedule a free preliminary inspection with DCF's Office of Licensing at (877) 667-9845.
 urlSlug: daycare-site-requirements
 displayname: daycare-site-requirements
 name: Prepare for State and Local Site Requirements
