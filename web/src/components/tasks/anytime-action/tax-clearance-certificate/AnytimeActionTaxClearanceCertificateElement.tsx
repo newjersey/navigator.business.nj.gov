@@ -21,7 +21,7 @@ import {
 import { emptyFormationAddressData, FormationAddress } from "@businessnjgovnavigator/shared/formationData";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { isEqual } from "lodash";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 
 interface Props {
   anytimeAction: AnytimeActionLicenseReinstatement | AnytimeActionTask;
@@ -180,16 +180,8 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
     }
   };
 
-  useEffect(() => {
-    const updateStepOne = (steps: StepperStep[]): void => {
-      if (stepIndex === 0) {
-        steps[0].isComplete = false;
-      } else {
-        steps[0].isComplete = true;
-      }
-    };
-
-    const updateStepTwo = (steps: StepperStep[]): void => {
+  const updateStepTwo = useCallback(
+    (steps: StepperStep[]): void => {
       console.log(
         "isvalid",
         isValid(),
@@ -201,16 +193,38 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
       } else {
         steps[1].isComplete = false;
       }
-    };
+    },
+    [isValid, taxClearanceCertificateData]
+  );
 
+  const updateStepOne = useCallback(
+    (steps: StepperStep[]): void => {
+      if (stepIndex === 0) {
+        steps[0].isComplete = false;
+      } else {
+        steps[0].isComplete = true;
+      }
+    },
+    [stepIndex]
+  );
+
+  useEffect(() => {
     const steps = stateTaxClearanceCertificateSteps.map((step) => ({ ...step }));
+
     updateStepOne(steps);
     updateStepTwo(steps);
 
     if (!isEqual(steps, stateTaxClearanceCertificateSteps)) {
       setStateTaxClearanceCertificateSteps(steps);
     }
-  }, [stepIndex, stateTaxClearanceCertificateSteps, taxClearanceCertificateData, isValid]);
+  }, [
+    stepIndex,
+    stateTaxClearanceCertificateSteps,
+    taxClearanceCertificateData,
+    isValid,
+    updateStepOne,
+    updateStepTwo,
+  ]);
 
   return (
     <DataFormErrorMapContext.Provider value={formContextState}>
