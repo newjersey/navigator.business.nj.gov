@@ -10,7 +10,11 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { AnytimeActionLicenseReinstatement, AnytimeActionTask, StepperStep } from "@/lib/types/types";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { emptyTaxClearanceCertificateData, LookupMunicipalityByName } from "@businessnjgovnavigator/shared";
+import {
+  emptyTaxClearanceCertificateData,
+  LookupMunicipalityByName,
+  LookupTaxClearanceCertificateAgenciesById,
+} from "@businessnjgovnavigator/shared";
 import { emptyFormationAddressData, FormationAddress } from "@businessnjgovnavigator/shared/formationData";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, useEffect, useState } from "react";
@@ -18,7 +22,7 @@ import { ReactElement, useEffect, useState } from "react";
 interface Props {
   anytimeAction: AnytimeActionLicenseReinstatement | AnytimeActionTask;
   CMS_ONLY_stepIndex?: number;
-  CMS_ONLY_certificatePdfArray?: [];
+  CMS_ONLY_certificatePdfArray?: number[];
 }
 
 const Config = getMergedConfig();
@@ -180,7 +184,13 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
                 </div>
               </div>
               {certificatePdfArray ? (
-                <TaxClearanceDownload />
+                <TaxClearanceDownload
+                  certificatePdfArray={certificatePdfArray}
+                  downloadFilename={`Tax Clearance Certificate - ${profileData.businessName} - ${
+                    LookupTaxClearanceCertificateAgenciesById(taxClearanceCertificateData.requestingAgencyId)
+                      .name
+                  } - <timestamp>`}
+                />
               ) : (
                 <TaxClearanceSteps
                   steps={stateTaxClearanceCertificateSteps}
