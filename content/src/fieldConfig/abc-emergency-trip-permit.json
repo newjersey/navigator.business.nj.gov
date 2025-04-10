@@ -9,8 +9,52 @@
         "buttonText": "Start"
       },
       "requestor": {
-
+        "vehicleSection": "Vehicle Information",
+        "requestorSection": "Requestor Information",
+        "requestorSectionSubHeading": "Enter the following information for your business or a contracted driver or trucking company."
+      },
+      "trip": {
+        "subHeader": "Trip Information",
+        "pickupSiteSection": "Pickup Site",
+        "deliverySiteSection": "Delivery Site"
       }
+    },
+    "fields": {
+      "carrier": "Carrier Name (Business Name)",
+      "requestorFirstName": "Requestor First Name",
+      "requestorLastName": "Requestor Last Name",
+      "requestorEmail": "Email Address",
+      "requestorPhone": "Phone Number",
+      "requestorCountry": "Country",
+      "requestorAddress1": "Business Address Line 1",
+      "requestorAddress2": "Business Address Line 2",
+      "requestorCity": "City",
+      "requestorStateProvince": "State",
+      "requestorZipPostalCode": "Zip Code",
+      "vehicleCountry": "Country of Registration",
+      "vehicleLicensePlateNum": "License Plate Number",
+      "vehicleMake": "Vehicle Make",
+      "vehicleStateProvince": "State of Registration",
+      "vehicleVinSerial": "VIN/Serial Number",
+      "vehicleYear": "Vehicle Year",
+      "permitDate": "Trip Start Date",
+      "permitStartTime": "Trip Start Time",
+      "pickupSiteName": "Location Name",
+      "pickupCountry": "Country",
+      "pickupAddress": "Address",
+      "pickupCity": "City",
+      "pickupStateProvince": "State",
+      "pickupZipPostalCode": "Zip Code",
+      "deliverySiteName": "Location Name",
+      "deliveryCountry": "Country",
+      "deliveryAddress": "Address",
+      "deliveryCity": "City",
+      "deliveryStateProvince": "State",
+      "deliveryZipPostalCode": "Zip Code"
+    },
+    "errors": {
+      "noValue": "Enter a ${fieldName}.",
+      "inputOverMaxLength": "${fieldName} must be ${maxLen} characters or fewer"
     },
     "taskName": "Apply for Your Emergency Trip Permit for Last-Minute Alcohol Pickups or Deliveries",
     "nextStepText": "Save & Continue",

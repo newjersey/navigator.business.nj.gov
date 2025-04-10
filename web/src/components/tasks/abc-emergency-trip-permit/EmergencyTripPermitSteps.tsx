@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { EmergencyTripPermitStepsConfiguration } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitStepsConfiguration";
 import { InstructionsStep } from "@/components/tasks/abc-emergency-trip-permit/steps/InstructionsStep";
-import { RequestorStep } from "@/components/tasks/abc-emergency-trip-permit/steps/requestor/RequestorStep";
+import { RequestorStep } from "@/components/tasks/abc-emergency-trip-permit/steps/RequestorStep";
 import { TripStep } from "@/components/tasks/abc-emergency-trip-permit/steps/TripStep";
 import { AbcEmergencyTripPermitStepNames } from "@/lib/types/types";
 import { ReactElement } from "react";

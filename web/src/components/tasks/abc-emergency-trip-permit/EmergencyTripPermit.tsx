@@ -43,8 +43,8 @@ export const EmergencyTripPermit = (): ReactElement => {
           stepIndex,
           applicationInfo,
         },
-        setStepIndex: setStepIndex,
-        setApplicationInfo: setApplicationInfo,
+        setStepIndex,
+        setApplicationInfo,
       }}
     >
       <DataFormErrorMapContext.Provider value={formContextState}>
