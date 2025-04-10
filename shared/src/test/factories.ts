@@ -510,6 +510,7 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
     taxFilingData: generateTaxFilingData({}),
     taxClearanceCertificateData: generateTaxClearanceCertificateData({}),
     environmentData: generateEnvironmentData({}),
+    xrayRegistrationData: undefined,
     version: CURRENT_VERSION,
     userId: generateUser({}).id,
     versionWhenCreated: CURRENT_VERSION,

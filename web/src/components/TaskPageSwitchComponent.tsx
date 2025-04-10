@@ -7,11 +7,13 @@ import { MultipleDwellingRegistrationTask } from "@/components/tasks/MultipleDwe
 import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
 import { RaffleBingoPaginator } from "@/components/tasks/RaffleBingoPaginator";
 import { TaxTask } from "@/components/tasks/TaxTask";
+
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { EnvPermit } from "@/components/tasks/environment-questionnaire/EnvPermit";
+import { XrayRegistrationTask } from "@/components/tasks/xray-registration/XrayRegistrationTask";
 import { Roadmap, Task, TasksDisplayContent, TaskWithLicenseTaskId } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
@@ -69,6 +71,7 @@ export const TaskPageSwitchComponent = ({
     "waste-permitting": <EnvPermit task={task} />,
     "land-permitting": <EnvPermit task={task} />,
     "air-permitting": <EnvPermit task={task} />,
+    "xray-reg": <XrayRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />,
     "elevator-registration": (
       <ElevatorRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
     ),

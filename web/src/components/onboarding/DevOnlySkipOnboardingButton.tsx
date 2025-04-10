@@ -18,8 +18,11 @@ export const DevOnlySkipOnboardingButton = (props: Props): ReactElement => {
     setProfileData({
       ...emptyProfileData,
       businessPersona: "STARTING",
-      industryId: "generic",
+      industryId: "healthcare",
       legalStructureId: "c-corporation",
+      nonEssentialRadioAnswers: {
+        "healthcare-xray-regis": true,
+      },
     });
     props.setPage({ current: 2, previous: 1 });
     props.routeToPage(2);
