@@ -159,6 +159,7 @@ import { migrate_v155_to_v156 } from "@db/migrations/v156_remove_in_progress_tas
 import { migrate_v156_to_v157 } from "@db/migrations/v157_add_tax_clearance_data";
 import { migrate_v157_to_v158 } from "@db/migrations/v158_login_email_to_lowercase";
 import { migrate_v158_to_v159 } from "@db/migrations/v159_remove_entity_id";
+import { migrate_v159_to_v160 } from "@db/migrations/v160_add_xray_registration_data";
 
 export type MigrationFunction = (data: any) => any;
 
@@ -322,6 +323,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v156_to_v157,
   migrate_v157_to_v158,
   migrate_v158_to_v159,
+  migrate_v159_to_v160,
 ];
 
-export { generatev159UserData as CURRENT_GENERATOR } from "@db/migrations/v159_remove_entity_id";
+export { generatev160UserData as CURRENT_GENERATOR } from "@db/migrations/v160_add_xray_registration_data";

@@ -7,6 +7,7 @@ import {
   TaskProgress,
   TaxFilingData,
   UserData,
+  XrayData,
 } from "@businessnjgovnavigator/shared";
 import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
 import { FormationData, FormationFormData } from "@businessnjgovnavigator/shared/formationData";
@@ -182,6 +183,23 @@ export class UpdateQueueFactory implements UpdateQueue {
       },
     };
 
+    return this;
+  }
+
+  queueXrayRegistrationData(xrayRegistrationData: Partial<XrayData>): UpdateQueue {
+    this.internalQueue = {
+      ...this.internalQueue,
+      businesses: {
+        ...this.internalQueue.businesses,
+        [this.internalQueue.currentBusinessId]: {
+          ...this.currentBusiness(),
+          xrayRegistrationData: {
+            ...this.currentBusiness().xrayRegistrationData,
+            ...xrayRegistrationData,
+          },
+        },
+      },
+    };
     return this;
   }
 

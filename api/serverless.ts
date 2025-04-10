@@ -16,6 +16,7 @@ const dynamoOfflinePort = process.env.DYNAMO_PORT || 8000;
 const offlinePort = process.env.API_PORT || 5002;
 const offlineLambdaPort = process.env.LAMBDA_PORT || 5050;
 const licenseStatusBaseUrl = process.env.LICENSE_STATUS_BASE_URL || "";
+const xrayRegistrationStatusBaseUrl = process.env.XRAY_REGISTRATION_STATUS_BASE_URL || "";
 const businessNameBaseUrl = process.env.BUSINESS_NAME_BASE_URL || "";
 const govDeliveryBaseUrl = process.env.GOV_DELIVERY_BASE_URL || "";
 const govDeliveryTopic = process.env.GOV_DELIVERY_TOPIC || "";
@@ -240,6 +241,7 @@ const serverlessConfiguration: AWS = {
       GOV2GO_REGISTRATION_BASE_URL: gov2goRegBaseUrl,
       INTERCOM_HASH_SECRET: intercomHashSecret,
       LICENSE_STATUS_BASE_URL: licenseStatusBaseUrl,
+      XRAY_REGISTRATION_STATUS_BASE_URL: xrayRegistrationStatusBaseUrl,
       MYNJ_ROLE_NAME: myNJRoleName,
       MYNJ_SERVICE_TOKEN: myNJServiceToken,
       MYNJ_SERVICE_URL: myNJServiceUrl,
