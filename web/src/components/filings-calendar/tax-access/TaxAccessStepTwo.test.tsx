@@ -1,4 +1,4 @@
-import { TaxAccessStepTwo } from "@/components/filings-calendar/tax-access-modal/TaxAccessStepTwo";
+import { TaxAccessStepTwo } from "@/components/filings-calendar/tax-access/TaxAccessStepTwo";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { randomPublicFilingLegalType } from "@/test/factories";
@@ -44,12 +44,7 @@ const Config = getMergedConfig();
 const renderComponent = (initialUserData?: UserData): void => {
   render(
     <WithStatefulUserData initialUserData={initialUserData}>
-      <TaxAccessStepTwo
-        isOpen={true}
-        close={(): void => {}}
-        onSuccess={(): void => {}}
-        moveToPrevStep={(): void => {}}
-      />
+      <TaxAccessStepTwo onSuccess={(): void => {}} moveToPrevStep={(): void => {}} />
     </WithStatefulUserData>
   );
 };

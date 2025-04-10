@@ -150,6 +150,7 @@ describe("<DeferredLocationQuestion />", () => {
 
     it("sends analytics when municipality entered for first time", async () => {
       await selectNewarkAndSave();
+      console.log(mockAnalytics.event.task_location_question.submit.location_entered_for_first_time);
       expect(
         mockAnalytics.event.task_location_question.submit.location_entered_for_first_time
       ).toHaveBeenCalled();

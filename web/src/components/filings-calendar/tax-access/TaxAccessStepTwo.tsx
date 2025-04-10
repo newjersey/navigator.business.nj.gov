@@ -329,6 +329,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                   onClick={(): void => {
                     onSubmit();
                     setOnSubmitClicked(true);
+                    analytics.event.tax_calendar.click.click_calendar_access_v2();
                   }}
                   dataTestId="tax-calendar-access-submit-button"
                 >

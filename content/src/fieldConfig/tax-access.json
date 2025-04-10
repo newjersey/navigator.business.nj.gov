@@ -1,6 +1,5 @@
 {
   "taxAccess": {
-    "stepTwoBody": "To access your tax records, we must register you with the New Jersey Department of Treasury's `Gov2Go|gov2go` service. Verify some of your business information below.",
     "responsibleOwnerFieldErrorName": "Responsible Owner Name",
     "stepTwoNextButton": "Access My Calendar",
     "taxIdHeader": " `New Jersey Tax ID|tax-id`",
