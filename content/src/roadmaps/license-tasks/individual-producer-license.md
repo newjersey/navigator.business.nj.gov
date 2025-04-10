@@ -37,7 +37,6 @@ NJ resident applicants only:
 * National Producer Number (NPN), if assigned
 * Firm Central Registration Depository (FINRA) number, if applicable
 * Any other assumed, fictitious, alias, or trade names under which you are currently doing business or intend to do business, if applicable
-* Insurance agency affiliation, if applicable 
 * Employment history
 * Completed background questionnaire and documentation, if applicable
 * Applicable fees paid
