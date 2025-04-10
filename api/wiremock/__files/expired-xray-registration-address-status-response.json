@@ -1,0 +1,42 @@
+{
+  "data": [
+    {
+      "Registration Category": "MEDICAL",
+      "Disposal Date": "10/04/2024",
+      "Registration Expiration Date": "09/30/2023",
+      "NAME": "OEC MEDICAL SYSTEMS",
+      "Room ID": "C-ARM",
+      "REGISTRATION_NUMBER": "207990",
+      "CONSOLE_SERIAL#": "69-1412",
+      "CONSOLE_MODEL#": "9600",
+      "Street Address": "123 Second Street",
+      "CITY": "EAST BRUNSWICK",
+      "STATE": "NJ",
+      "Zip Code": "12345",
+      "Status": "Inactive",
+      "BUSINESS_NAME": "Test Business Two",
+      "Contact Type": "OWNER",
+      "Deactivation Date": "10/04/2024",
+      "ANNUAL_FEE": 118
+    },
+    {
+      "Registration Category": "MEDICAL",
+      "Disposal Date": "10/04/2024",
+      "Registration Expiration Date": "09/30/2023",
+      "NAME": "OEC MEDICAL SYSTEMS",
+      "Room ID": "C-ARM",
+      "REGISTRATION_NUMBER": "207990",
+      "CONSOLE_SERIAL#": "69-1412",
+      "CONSOLE_MODEL#": "9600",
+      "Street Address": "123 Second Street",
+      "CITY": "EAST BRUNSWICK",
+      "STATE": "NJ",
+      "Zip Code": "12345",
+      "Status": "Inactive",
+      "BUSINESS_NAME": "Test Business Two",
+      "Contact Type": "STAFF",
+      "Deactivation Date": "10/04/2024",
+      "ANNUAL_FEE": 118
+    }
+  ]
+}
