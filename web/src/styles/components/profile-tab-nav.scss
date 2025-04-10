@@ -17,14 +17,13 @@
   border: none;
   border-left: 4px solid variables.$white;
 
-  @media (min-width: variables.$lg) {
-    width: 17.5rem;
+  img {
+    height: 20px;
+    filter: invert(39%) sepia(0%) saturate(0%) hue-rotate(187deg) brightness(94%) contrast(86%);
   }
 
-  .left-content {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
+  @media (min-width: variables.$lg) {
+    width: 17.5rem;
   }
 
   &:hover {
@@ -37,9 +36,19 @@
     background-color: variables.$accent-cool-lightest;
     color: variables.$secondary-dark;
     font-weight: 600;
-  }
 
-  .profile-tab-text {
-    margin-left: 0.75rem;
+    img {
+      filter: invert(19%) sepia(97%) saturate(5599%) hue-rotate(215deg) brightness(98%) contrast(101%);
+    }
   }
+}
+
+.profile-tab-left-content {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.profile-tab-text {
+  margin-left: 0.75rem;
 }

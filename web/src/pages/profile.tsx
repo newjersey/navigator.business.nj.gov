@@ -347,7 +347,6 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
-        <ProfileNoteDisclaimerForSubmittingData business={business} isAuthenticated={isAuthenticated} />
 
         <ProfileField fieldName="foreignBusinessTypeIds">
           <ForeignBusinessTypeField required />
@@ -472,7 +471,6 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
-        <ProfileNoteDisclaimerForSubmittingData business={business} isAuthenticated={isAuthenticated} />
         <ProfileField fieldName="businessName">
           <BusinessName />
         </ProfileField>
@@ -550,7 +548,6 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
-        <ProfileNoteDisclaimerForSubmittingData business={business} isAuthenticated={isAuthenticated} />
 
         <ProfileField
           fieldName="businessName"
@@ -735,7 +732,6 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
-        <ProfileNoteDisclaimerForSubmittingData business={business} isAuthenticated={isAuthenticated} />
 
         <ProfileField fieldName="businessName" isVisible={!shouldShowTradeNameElements()}>
           <BusinessName />
@@ -882,7 +878,6 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="info" />
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
-        <ProfileNoteDisclaimerForSubmittingData business={business} isAuthenticated={isAuthenticated} />
         <ProfileField
           fieldName="businessName"
           locked={shouldLockFormationFields}
@@ -972,7 +967,13 @@ const ProfilePage = (props: Props): ReactElement => {
                         stackNav={true}
                         nonWrappingLeftColumn={true}
                         titleOverColumns={
-                          <ProfileHeader business={business} isAuthenticated={isAuthenticated === "TRUE"} />
+                          <>
+                            <ProfileHeader business={business} isAuthenticated={isAuthenticated === "TRUE"} />
+                            <ProfileNoteDisclaimerForSubmittingData
+                              business={business}
+                              isAuthenticated={isAuthenticated}
+                            />
+                          </>
                         }
                         navChildren={
                           <ProfileTabNav
