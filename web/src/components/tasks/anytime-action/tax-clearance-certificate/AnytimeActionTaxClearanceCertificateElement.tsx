@@ -48,6 +48,7 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
   const [certificatePdfArray, setCertificatePdfArray] = useState<number[] | undefined>(
     props.CMS_ONLY_certificatePdfArray || undefined
   );
+  console.log("certificatePdfArray", certificatePdfArray === undefined);
 
   const saveTaxClearanceCertificateData = (): void => {
     const newTaxClearanceCertificateData = {
