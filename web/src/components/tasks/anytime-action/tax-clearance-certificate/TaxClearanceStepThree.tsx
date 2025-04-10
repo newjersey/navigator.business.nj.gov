@@ -73,6 +73,7 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
               label={Config.taxClearanceCertificateStep3.certificationReasonLabel}
               value={requestingAgencyName}
               dataTestId={"requestingAgencyId"}
+              noColonAfterLabel
             />
           </ReviewSubSection>
           <hr className={"margin-y-3-override"} />
