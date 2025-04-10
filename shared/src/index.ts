@@ -36,3 +36,4 @@ export * from "./taxClearanceCertificate";
 export * from "./taxFiling";
 export * from "./test";
 export * from "./userData";
+export * from "./xray";

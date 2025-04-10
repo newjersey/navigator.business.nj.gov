@@ -31,6 +31,7 @@ echo "🚀 starting api"
 export API_PORT=${API_PORT}
 export DYNAMO_PORT=${DYNAMO_PORT}
 export LAMBDA_PORT=${LAMBDA_PORT}
+export XRAY_REGISTRATION_STATUS_BASE_URL=http://localhost:${WIREMOCK_PORT}
 export LICENSE_STATUS_BASE_URL=http://localhost:${WIREMOCK_PORT}
 export BUSINESS_NAME_BASE_URL=http://localhost:${WIREMOCK_PORT}
 export GOV_DELIVERY_BASE_URL=http://localhost:${WIREMOCK_PORT}

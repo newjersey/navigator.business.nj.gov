@@ -43,6 +43,7 @@ import { StateObject, arrayOfStateObjects as states } from "../states";
 import { taxClearanceCertificateAgencies, TaxClearanceCertificateData } from "../taxClearanceCertificate";
 import { TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
 import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
+import { XrayData, XrayRegistrationStatus } from "../xray";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
 
 export const generateFormationSubmitResponse = (
@@ -481,6 +482,32 @@ export const generateEnvironmentData = (overrides: Partial<EnvironmentData>): En
   };
 };
 
+export const generateXrayRegistrationData = (overrides: Partial<XrayData>): XrayData => {
+  return {
+    facilityDetails: {
+      businessName: "Some Business LLC",
+      addressLine1: "123 Main Street",
+      addressLine2: "Apt 1",
+      addressZipCode: "12345",
+    },
+    status: "ACTIVE" as XrayRegistrationStatus,
+    deactivationDate: undefined,
+    expirationDate: "08/31/2025",
+    machines: [
+      {
+        registrationNumber: "registrationNumber-123",
+        roomId: "01",
+        registrationCategory: "DENTIST",
+        name: "CORP",
+        modelNumber: "modelNumber-123",
+        serialNumber: "serialNumber-123",
+        annualFee: 92,
+      },
+    ],
+    ...overrides,
+  };
+};
+
 export const generateBusiness = (overrides: Partial<Business>): Business => {
   const profileData = overrides.profileData ?? generateProfileData({});
   const formationData: FormationData = publicFilingLegalTypes.includes(
@@ -509,6 +536,7 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
     taxFilingData: generateTaxFilingData({}),
     taxClearanceCertificateData: generateTaxClearanceCertificateData({}),
     environmentData: generateEnvironmentData({}),
+    xrayRegistrationData: undefined,
     version: CURRENT_VERSION,
     userId: generateUser({}).id,
     versionWhenCreated: CURRENT_VERSION,

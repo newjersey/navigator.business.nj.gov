@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
-import { ResultsSectionAccordion } from "@/components/tasks/environment-questionnaire/results/ResultsSectionAccordion";
+import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
 import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { MediaArea } from "@businessnjgovnavigator/shared/environment";

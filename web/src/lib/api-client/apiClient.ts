@@ -14,6 +14,7 @@ import {
   HousingRegistrationRequestLookupResponse,
   PropertyInterestType,
 } from "@businessnjgovnavigator/shared/housing";
+import { FacilityDetails } from "@businessnjgovnavigator/shared/xray";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
@@ -61,6 +62,10 @@ export const checkHousingRegistrationStatus = (
   propertyInterestType: PropertyInterestType
 ): Promise<HousingRegistrationRequestLookupResponse> => {
   return post(`/housing/registrations/`, { address, municipalityId, propertyInterestType });
+};
+
+export const checkXrayRegistrationStatus = (facilityDetails: FacilityDetails): Promise<UserData> => {
+  return post(`/xray-registration`, { facilityDetails });
 };
 
 export const postBusinessFormation = (

@@ -1,0 +1,61 @@
+{
+  "data": [
+    {
+      "Registration Category": "MEDICAL",
+      "Disposal Date": "06/16/2015",
+      "Registration Expiration Date": "08/31/2015",
+      "NAME": "GENERAL ELECTRIC CO.",
+      "Room ID": "OR Z",
+      "REGISTRATION_NUMBER": "A06979",
+      "CONSOLE_SERIAL#": "89-1733",
+      "CONSOLE_MODEL#": "9800",
+      "Street Address": "123 Second Street",
+      "CITY": "HILLSBOROUGH",
+      "STATE": "NJ",
+      "Zip Code": "12345",
+      "Status": "Inactive",
+      "BUSINESS_NAME": "Test Business Three",
+      "Contact Type": "OWNER",
+      "Deactivation Date": "06/16/2015",
+      "ANNUAL_FEE": 118
+    },
+    {
+      "Registration Category": "MEDICAL",
+      "Disposal Date": "10/04/2024",
+      "Registration Expiration Date": "09/30/2023",
+      "NAME": "OEC MEDICAL SYSTEMS",
+      "Room ID": "C-ARM",
+      "REGISTRATION_NUMBER": "207990",
+      "CONSOLE_SERIAL#": "69-1412",
+      "CONSOLE_MODEL#": "9600",
+      "Street Address": "123 Second Street",
+      "CITY": "EAST BRUNSWICK",
+      "STATE": "NJ",
+      "Zip Code": "12345",
+      "Status": "Inactive",
+      "BUSINESS_NAME": "Test Business Two",
+      "Contact Type": "OWNER",
+      "Deactivation Date": "10/04/2024",
+      "ANNUAL_FEE": 118
+    },
+    {
+      "Registration Category": "MEDICAL",
+      "Disposal Date": "10/04/2024",
+      "Registration Expiration Date": "09/30/2023",
+      "NAME": "OEC MEDICAL SYSTEMS",
+      "Room ID": "C-ARM",
+      "REGISTRATION_NUMBER": "207990",
+      "CONSOLE_SERIAL#": "69-1412",
+      "CONSOLE_MODEL#": "9600",
+      "Street Address": "123 Second Street",
+      "CITY": "EAST BRUNSWICK",
+      "STATE": "NJ",
+      "Zip Code": "12345",
+      "Status": "Inactive",
+      "BUSINESS_NAME": "Test Business Two",
+      "Contact Type": "STAFF",
+      "Deactivation Date": "10/04/2024",
+      "ANNUAL_FEE": 118
+    }
+  ]
+}

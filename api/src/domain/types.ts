@@ -1,4 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  FacilityDetails,
+  TaxClearanceCertificateResponse,
+  XrayRegistrationEntry,
+  XrayRegistrationStatusResponse,
+} from "@businessnjgovnavigator/shared";
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
@@ -20,7 +26,6 @@ import {
 } from "@shared/housing";
 import { enabledLicensesSources, LicenseEntity, LicenseSearchNameAndAddress } from "@shared/license";
 import { ProfileData } from "@shared/profileData";
-import { TaxClearanceCertificateResponse } from "@shared/taxClearanceCertificate";
 import { TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
 import { Business, UserData } from "@shared/userData";
 import { ReasonPhrases } from "http-status-codes";
@@ -178,7 +183,6 @@ export type ElevatorSafetyRegistrationStatus = (
 ) => Promise<ElevatorSafetyRegistrationSummary>;
 
 export type ElevatorSafetyViolationsStatus = (address: string, municipalityId: string) => Promise<boolean>;
-
 export interface SuccessfulHealthCheckMetadata {
   success: true;
   data?: {
@@ -222,3 +226,21 @@ export const NO_MAIN_APPS_ERROR = "NO_MAIN_APPS";
 export interface TaxClearanceCertificateClient {
   postTaxClearanceCertificate: (userData: UserData) => Promise<TaxClearanceCertificateResponse>;
 }
+
+export interface XrayRegistrationStatusLookup {
+  getStatus: (
+    businessName: string,
+    addressLine1: string,
+    addressZipCode: string
+  ) => Promise<XrayRegistrationStatusResponse>;
+}
+
+export interface XrayRegistrationSearch {
+  searchByAddress: (addressLine1: string, addressZipCode: string) => Promise<XrayRegistrationEntry[]>;
+  searchByBusinessName: (businessName: string) => Promise<XrayRegistrationEntry[]>;
+}
+
+export type UpdateXrayRegistration = (
+  userData: UserData,
+  facilityDetails: FacilityDetails
+) => Promise<UserData>;
