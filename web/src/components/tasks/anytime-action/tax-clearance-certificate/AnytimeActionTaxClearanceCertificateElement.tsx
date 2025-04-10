@@ -22,7 +22,7 @@ import { ReactElement, useEffect, useState } from "react";
 interface Props {
   anytimeAction: AnytimeActionLicenseReinstatement | AnytimeActionTask;
   CMS_ONLY_stepIndex?: number;
-  CMS_ONLY_certificatePdfArray?: Blob;
+  CMS_ONLY_certificatePdfBlob?: Blob;
 }
 
 const Config = getMergedConfig();
@@ -45,10 +45,10 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
   );
   const [formationAddressData, setAddressData] = useState<FormationAddress>(emptyFormationAddressData);
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
-  const [certificatePdfArray, setCertificatePdfArray] = useState<Blob | undefined>(
-    props.CMS_ONLY_certificatePdfArray || undefined
+  const [certificatePdfBlob, setCertificatePdfBlob] = useState<Blob | undefined>(
+    props.CMS_ONLY_certificatePdfBlob || undefined
   );
-  console.log("certificatePdfArray", certificatePdfArray === undefined);
+  console.log("certificatePdfBlob === undefined", certificatePdfBlob === undefined);
 
   const saveTaxClearanceCertificateData = (): void => {
     const newTaxClearanceCertificateData = {
@@ -184,9 +184,9 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
                   <Heading level={1}>{props.anytimeAction.name}</Heading>
                 </div>
               </div>
-              {certificatePdfArray ? (
+              {certificatePdfBlob ? (
                 <TaxClearanceDownload
-                  certificatePdfArray={certificatePdfArray}
+                  certificatePdfBlob={certificatePdfBlob}
                   downloadFilename={`Tax Clearance Certificate - ${profileData.businessName} - ${
                     LookupTaxClearanceCertificateAgenciesById(taxClearanceCertificateData.requestingAgencyId)
                       .name
@@ -198,7 +198,7 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
                   currentStep={stepIndex}
                   stepIndex={setStepIndex}
                   saveTaxClearanceCertificateData={saveTaxClearanceCertificateData}
-                  setCertificatePdfArray={setCertificatePdfArray}
+                  setCertificatePdfBlob={setCertificatePdfBlob}
                   setStepIndex={setStepIndex}
                 />
               )}

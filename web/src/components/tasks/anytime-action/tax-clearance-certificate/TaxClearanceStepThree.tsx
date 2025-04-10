@@ -16,7 +16,7 @@ import { ReactElement } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
-  setCertificatePdfArray: (certificatePdfArray: Blob) => void;
+  setCertificatePdfBlob: (certificatePdfBlob: Blob) => void;
 }
 export const TaxClearanceStepThree = (props: Props): ReactElement => {
   const { Config } = useConfig();
@@ -47,13 +47,10 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
 
   const handleButtonClick = async (): Promise<void> => {
     if (!userData) return;
-    // const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
-    // if (taxClearanceResponse.certificatePdfArray)
-    // props.setCertificatePdfArray(taxClearanceResponse.certificatePdfArray);
     const blob = new Blob([new Uint8Array(certificate.map((signedByte) => signedByte & 0xff))], {
       type: "application/pdf",
     });
-    props.setCertificatePdfArray(blob);
+    props.setCertificatePdfBlob(blob);
 
     // TODO: Error Response will be addressed in a separate ticket
     // Note: if there is a server error, we may return a 500 status code, or

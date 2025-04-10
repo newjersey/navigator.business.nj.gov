@@ -5,7 +5,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement } from "react";
 
 interface Props {
-  certificatePdfArray: Blob;
+  certificatePdfBlob: Blob;
   downloadFilename: string;
 }
 
@@ -18,7 +18,7 @@ export const TaxClearanceDownload = (props: Props): ReactElement => {
     const URL = window.URL || window.webkitURL;
     console.log("URL", URL); // createObjectURL is not available in jest
     console.log("Object.getOwnPropertyNames(URL)", Object.getOwnPropertyNames(URL));
-    downloadLink = URL.createObjectURL(props.certificatePdfArray);
+    downloadLink = URL.createObjectURL(props.certificatePdfBlob);
   }
 
   return (
