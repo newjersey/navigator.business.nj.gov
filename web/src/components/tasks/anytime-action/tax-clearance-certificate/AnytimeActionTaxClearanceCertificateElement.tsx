@@ -10,7 +10,11 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { AnytimeActionLicenseReinstatement, AnytimeActionTask, StepperStep } from "@/lib/types/types";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { emptyTaxClearanceCertificateData, LookupMunicipalityByName } from "@businessnjgovnavigator/shared";
+import {
+  emptyTaxClearanceCertificateData,
+  LookupMunicipalityByName,
+  LookupTaxClearanceCertificateAgenciesById,
+} from "@businessnjgovnavigator/shared";
 import { emptyFormationAddressData, FormationAddress } from "@businessnjgovnavigator/shared/formationData";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, useEffect, useState } from "react";
@@ -18,7 +22,7 @@ import { ReactElement, useEffect, useState } from "react";
 interface Props {
   anytimeAction: AnytimeActionLicenseReinstatement | AnytimeActionTask;
   CMS_ONLY_stepIndex?: number;
-  CMS_ONLY_certificatePdfArray?: [];
+  CMS_ONLY_certificatePdfBlob?: Blob;
 }
 
 const Config = getMergedConfig();
@@ -41,9 +45,10 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
   );
   const [formationAddressData, setAddressData] = useState<FormationAddress>(emptyFormationAddressData);
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
-  const [certificatePdfArray, setCertificatePdfArray] = useState<number[] | undefined>(
-    props.CMS_ONLY_certificatePdfArray || undefined
+  const [certificatePdfBlob, setCertificatePdfBlob] = useState<Blob | undefined>(
+    props.CMS_ONLY_certificatePdfBlob || undefined
   );
+  console.log("certificatePdfBlob === undefined", certificatePdfBlob === undefined);
 
   const saveTaxClearanceCertificateData = (): void => {
     const newTaxClearanceCertificateData = {
@@ -179,15 +184,21 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
                   <Heading level={1}>{props.anytimeAction.name}</Heading>
                 </div>
               </div>
-              {certificatePdfArray ? (
-                <TaxClearanceDownload />
+              {certificatePdfBlob ? (
+                <TaxClearanceDownload
+                  certificatePdfBlob={certificatePdfBlob}
+                  downloadFilename={`Tax Clearance Certificate - ${profileData.businessName} - ${
+                    LookupTaxClearanceCertificateAgenciesById(taxClearanceCertificateData.requestingAgencyId)
+                      .name
+                  } - <timestamp>`}
+                />
               ) : (
                 <TaxClearanceSteps
                   steps={stateTaxClearanceCertificateSteps}
                   currentStep={stepIndex}
                   stepIndex={setStepIndex}
                   saveTaxClearanceCertificateData={saveTaxClearanceCertificateData}
-                  certificatePdfArray={setCertificatePdfArray}
+                  setCertificatePdfBlob={setCertificatePdfBlob}
                   setStepIndex={setStepIndex}
                 />
               )}

@@ -689,7 +689,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     });
   });
 
-  it("renders the download page when the api post request is successful", async () => {
+  it("renders the page to download the certificate when the api post request is successful", async () => {
     mockApi.postTaxClearanceCertificate.mockResolvedValue({
       certificatePdfArray: [],
     });
@@ -700,6 +700,8 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     await waitFor(() => {
       expect(screen.getByTestId("download-page")).toBeInTheDocument();
     });
+    expect(screen.getByText("Tax Clearance Certificate (PDF)")).toBeInTheDocument();
+    // test clicking the button
   });
 
   const getInputElementByLabel = (label: string): HTMLInputElement => {

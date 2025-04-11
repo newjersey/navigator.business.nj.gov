@@ -1,37 +1,10 @@
 {
   "request": {
     "method": "POST",
-    "url": "/tax-clearance",
+    "urlPattern": ".*/TYTR_ACE_App/ProcessCertificate/businessClearance",
     "bodyPatterns": [
       {
-        "matchesJsonPath": "$.taxpayerId"
-      },
-      {
-        "matchesJsonPath": "$.busName"
-      },
-      {
-        "matchesJsonPath": "$.repName"
-      },
-      {
-        "matchesJsonPath": "$.repId"
-      },
-      {
-        "matchesJsonPath": "$.agencyName"
-      },
-      {
-        "matchesJsonPath": "$.corporateNbr"
-      },
-      {
-        "matchesJsonPath": "$.addressLine1"
-      },
-      {
-        "matchesJsonPath": "$.city"
-      },
-      {
-        "matchesJsonPath": "$.state"
-      },
-      {
-        "matchesJsonPath": "$.zip"
+        "equalToJson": "{}"
       }
     ]
   },

@@ -8,6 +8,7 @@ interface Props {
   icon: string;
   subLabel?: string;
   downloadLink?: string;
+  downloadFilename?: string;
   isCentered?: boolean;
   isRounded?: boolean;
   hasExtraPadding?: boolean;
@@ -57,6 +58,7 @@ export const DocumentTile = (props: Props): ReactElement => {
         data-testid={props.label}
         className="no-link-style text-base-darkest"
         href={props.downloadLink}
+        download={props.downloadFilename}
         target="_blank"
         rel="noreferrer noopener"
       >

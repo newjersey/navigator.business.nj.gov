@@ -58,7 +58,7 @@ const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => 
           <>
             <AnytimeActionTaxClearanceCertificateElement
               anytimeAction={taxClearanceAnytimeAction}
-              CMS_ONLY_certificatePdfArray={[]}
+              CMS_ONLY_certificatePdfBlob={new Blob()}
             />
           </>
         )}
