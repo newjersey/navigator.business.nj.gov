@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { TaxClearanceCertificateResponse } from "@businessnjgovnavigator/shared";
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
@@ -209,3 +210,7 @@ export type GetCertHttpsAgent = () => Promise<https.Agent>;
 export const NO_MATCH_ERROR = "NO_MATCH";
 export const NO_ADDRESS_MATCH_ERROR = "NO_ADDRESS_MATCH";
 export const NO_MAIN_APPS_ERROR = "NO_MAIN_APPS";
+
+export interface TaxClearanceCertificateClient {
+  postTaxClearanceCertificate: (userData: UserData) => Promise<TaxClearanceCertificateResponse>;
+}

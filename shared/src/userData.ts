@@ -4,7 +4,7 @@ import { EnvironmentData } from "./environment";
 import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";
 import { createEmptyProfileData, ProfileData } from "./profileData";
-import { emptyTaxClearanceCertificateData, TaxClearanceCertificateData } from "./taxClearanceCertificate";
+import { TaxClearanceCertificateData } from "./taxClearanceCertificate";
 import { TaxFilingData } from "./taxFiling";
 
 export interface UserData {
@@ -28,7 +28,7 @@ export interface Business {
   readonly licenseData: LicenseData | undefined;
   readonly preferences: Preferences;
   readonly taxFilingData: TaxFilingData;
-  readonly taxClearanceCertificateData: TaxClearanceCertificateData;
+  readonly taxClearanceCertificateData: TaxClearanceCertificateData | undefined;
   readonly formationData: FormationData;
   readonly environmentData: EnvironmentData | undefined;
   readonly versionWhenCreated: number;
@@ -36,7 +36,7 @@ export interface Business {
   readonly userId: string;
 }
 
-export const CURRENT_VERSION = 158;
+export const CURRENT_VERSION = 159;
 
 export const createEmptyBusiness = ({
   userId,
@@ -72,7 +72,7 @@ export const createEmptyBusiness = ({
       registeredISO: undefined,
       filings: [],
     },
-    taxClearanceCertificateData: emptyTaxClearanceCertificateData,
+    taxClearanceCertificateData: undefined,
     formationData: {
       formationFormData: createEmptyFormationFormData(),
       formationResponse: undefined,
