@@ -4385,9 +4385,9 @@ __metadata:
     "@types/dedent": 0.7.2
     "@types/express": 5.0.0
     "@types/jest": 29.5.14
-    "@types/jsonwebtoken": 9.0.7
+    "@types/jsonwebtoken": 9.0.9
     "@types/lodash": 4.17.14
-    "@types/node": 20.17.24
+    "@types/node": 20.17.30
     "@types/simple-oauth2": 5.0.7
     "@types/supertest": 6.0.3
     "@types/xml2js": 0.4.14
@@ -4442,7 +4442,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
-    "@types/node": 20.17.24
+    "@types/node": 20.17.30
     cross-env: 7.0.3
     cspell: 8.17.5
     prettier: 2.8.8
@@ -4518,10 +4518,10 @@ __metadata:
     "@types/express": 5.0.0
     "@types/jest": 29.5.14
     "@types/js-yaml": 4.0.9
-    "@types/jsonwebtoken": 9.0.7
+    "@types/jsonwebtoken": 9.0.9
     "@types/lodash": 4.17.14
     "@types/mdast": 4.0.4
-    "@types/node": 20.17.24
+    "@types/node": 20.17.30
     "@types/react": 18.2.79
     "@types/react-dom": 18.2.25
     "@types/react-slick": 0.23.13
@@ -4655,7 +4655,7 @@ __metadata:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 29.6.3
     "@types/jest": 29.5.14
-    "@types/node": 20.17.24
+    "@types/node": 20.17.30
     "@types/uuid": 9.0.8
     "@typescript-eslint/eslint-plugin": 7.18.0
     "@typescript-eslint/parser": 7.18.0
@@ -4730,7 +4730,7 @@ __metadata:
     "@types/js-yaml": 4.0.9
     "@types/lodash": 4.17.14
     "@types/mdast": 4.0.4
-    "@types/node": 20.17.24
+    "@types/node": 20.17.30
     "@types/react": 18.2.79
     "@types/react-dom": 18.2.25
     "@types/react-slick": 0.23.13
@@ -12565,12 +12565,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jsonwebtoken@npm:9.0.7":
-  version: 9.0.7
-  resolution: "@types/jsonwebtoken@npm:9.0.7"
+"@types/jsonwebtoken@npm:9.0.9":
+  version: 9.0.9
+  resolution: "@types/jsonwebtoken@npm:9.0.9"
   dependencies:
+    "@types/ms": "*"
     "@types/node": "*"
-  checksum: 872b62e2a50ec399d695402ccddfeb5cd66a6c3d28511f27453b932b6b67eb82c2d0ecaa864939848b88b3a8276c2492647bf5707bc82a6ac7e420d3412b9047
+  checksum: 9d564fc09fc83f66e319754dee0b039ae23f28fc38a9227c35283e69311ddf5a7493a060c7f956df8cd856416747c515b51fec20b8656865eacebf23b3c6bc62
   languageName: node
   linkType: hard
 
@@ -12672,12 +12673,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:20.17.24, @types/node@npm:>=6":
-  version: 20.17.24
-  resolution: "@types/node@npm:20.17.24"
+"@types/node@npm:*, @types/node@npm:20.17.30, @types/node@npm:>=6":
+  version: 20.17.30
+  resolution: "@types/node@npm:20.17.30"
   dependencies:
     undici-types: ~6.19.2
-  checksum: 05d3ca5d8741d10368edeff01318e4e615a7654b0c6bd05415f8cd0a2f851ac8e04c2cac319442c20fe372d1bdba9dd1f40dda014e97902516f82058b68ef6c4
+  checksum: 40253bc4a3f6adc5dc286824c1fc72a398280a7f6e76cfc22a9d68e42c70edb04c4af53c5709030b90d439bb4bbb29ad62e937d0b04ce2019b3297698bad55ef
   languageName: node
   linkType: hard
 
@@ -27426,12 +27427,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.3.1, nanoid@npm:^3.3.7":
-  version: 3.3.7
-  resolution: "nanoid@npm:3.3.7"
+"nanoid@npm:^3.3.1, nanoid@npm:^3.3.8":
+  version: 3.3.11
+  resolution: "nanoid@npm:3.3.11"
   bin:
     nanoid: bin/nanoid.cjs
-  checksum: d36c427e530713e4ac6567d488b489a36582ef89da1d6d4e3b87eded11eb10d7042a877958c6f104929809b2ab0bafa17652b076cdf84324aa75b30b722204f2
+  checksum: 3be20d8866a57a6b6d218e82549711c8352ed969f9ab3c45379da28f405363ad4c9aeb0b39e9abc101a529ca65a72ff9502b00bf74a912c4b64a9d62dfd26c29
   languageName: node
   linkType: hard
 
@@ -29436,14 +29437,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:8.4.49":
-  version: 8.4.49
-  resolution: "postcss@npm:8.4.49"
+"postcss@npm:8.5.3":
+  version: 8.5.3
+  resolution: "postcss@npm:8.5.3"
   dependencies:
-    nanoid: ^3.3.7
+    nanoid: ^3.3.8
     picocolors: ^1.1.1
     source-map-js: ^1.2.1
-  checksum: eb5d6cbdca24f50399aafa5d2bea489e4caee4c563ea1edd5a2485bc5f84e9ceef3febf170272bc83a99c31d23a316ad179213e853f34c2a7a8ffa534559d63a
+  checksum: da574620eb84ff60e65e1d8fc6bd5ad87a19101a23d0aba113c653434161543918229a0f673d89efb3b6d4906287eb04b957310dbcf4cbebacad9d1312711461
   languageName: node
   linkType: hard
 
