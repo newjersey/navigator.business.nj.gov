@@ -2,14 +2,16 @@ import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
+import { getCurrentDateInNewJersey } from "@businessnjgovnavigator/shared/dateHelpers";
 import { EmergencyTripPermitFieldNames } from "@businessnjgovnavigator/shared/emergencyTripPermit";
 import { Autocomplete, TextField } from "@mui/material";
 import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
 import { ChangeEvent, ReactElement, useContext, useState } from "react";
 
 interface Props {
   fieldName: EmergencyTripPermitFieldNames;
-  fromNow?: boolean;
+  allDay?: boolean;
 }
 
 interface FormattedTime {
@@ -17,14 +19,19 @@ interface FormattedTime {
   internalTime: string;
 }
 
-const generateAllTimesWithHalfHourIncrement = (): FormattedTime[] => {
+const generateAllTimesWithHalfHourIncrement = (
+  startHour: number,
+  startAtZeroMinutes: boolean
+): FormattedTime[] => {
   const times: FormattedTime[] = [];
-  for (let hour = 0; hour < 24; hour++) {
-    const dateTime = dayjs().hour(hour).minute(0);
-    times.push({
-      displayTime: dateTime.format("hh:mm a"),
-      internalTime: dateTime.format("HH:mm"),
-    });
+  for (let hour = startHour; hour < 24; hour++) {
+    if (startAtZeroMinutes) {
+      const dateTime = dayjs().hour(hour).minute(0);
+      times.push({
+        displayTime: dateTime.format("hh:mm a"),
+        internalTime: dateTime.format("HH:mm"),
+      });
+    }
     const dateTimeThirty = dayjs().hour(hour).minute(30);
     times.push({
       displayTime: dateTimeThirty.format("hh:mm a"),
@@ -48,7 +55,20 @@ const getFormattedTimeFromInternalTime = (value: string): FormattedTime | null =
 export const EmergencyTripPermitTimePicker = (props: Props): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
   const context = useContext(EmergencyTripPermitContext);
-  const options = generateAllTimesWithHalfHourIncrement();
+  dayjs.extend(timezone);
+
+  const getStartHour = (): number => {
+    if (props.allDay) {
+      return 0;
+    }
+    return getCurrentDateInNewJersey().hour();
+  };
+
+  const shouldStartMinutesAtZero = (): boolean => {
+    return getCurrentDateInNewJersey().minute() < 30;
+  };
+
+  const options = generateAllTimesWithHalfHourIncrement(getStartHour(), shouldStartMinutesAtZero());
   const handleChange = (event: ChangeEvent<unknown>, value: FormattedTime | null): void => {
     context.setApplicationInfo({
       ...context.state.applicationInfo,

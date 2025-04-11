@@ -1,12 +1,11 @@
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import {
-  DateObject,
-  getCurrentDateInNewJersey,
-  parseDateWithFormat,
-} from "@businessnjgovnavigator/shared/dateHelpers";
+import { DateObject, parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
-import { EmergencyTripPermitFieldNames } from "@businessnjgovnavigator/shared/emergencyTripPermit";
+import {
+  EmergencyTripPermitFieldNames,
+  getEarliestPermitDate,
+} from "@businessnjgovnavigator/shared/emergencyTripPermit";
 import { TextField } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -21,9 +20,8 @@ export const EmergencyTripPermitDatePicker = (props: Props): ReactElement => {
   const dateFormat = "MM/DD/YYYY";
   const context = useContext(EmergencyTripPermitContext);
 
-  const getMinDate = (): dayjs.Dayjs | undefined => {
-    const startDate = dayjs(getCurrentDateInNewJersey().format(dateFormat));
-    return startDate;
+  const getMinDate = (): dayjs.Dayjs => {
+    return getEarliestPermitDate();
   };
 
   const Picker =
@@ -40,6 +38,7 @@ export const EmergencyTripPermitDatePicker = (props: Props): ReactElement => {
         }
         inputFormat={dateFormat}
         onChange={(newValue: DateObject | null): void => {
+          console.log(newValue);
           if (newValue) {
             context.setApplicationInfo({
               ...context.state.applicationInfo,

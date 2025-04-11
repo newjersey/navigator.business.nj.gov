@@ -1,3 +1,6 @@
+import { Dayjs } from "dayjs";
+import { getCurrentDateInNewJersey } from "./dateHelpers";
+import { defaultDateFormat } from "./defaultConstants";
 import { StateShortCodesDomestic } from "./states";
 
 export interface EmergencyTripPermitApplicationInfo {
@@ -102,6 +105,13 @@ export const emptyEmergencyTripPermitData = {
   vehicleYear: "",
 };
 
+export const getEarliestPermitDate = (): Dayjs => {
+  const currentDateInNewJersey = getCurrentDateInNewJersey();
+  return currentDateInNewJersey.hour() === 23 && currentDateInNewJersey.minute() >= 45
+    ? currentDateInNewJersey.add(1, "day")
+    : currentDateInNewJersey;
+};
+
 export const generateNewEmergencyTripPermitData = (): EmergencyTripPermitApplicationInfo => {
   return {
     additionalConfirmemail: "",
@@ -116,7 +126,7 @@ export const generateNewEmergencyTripPermitData = (): EmergencyTripPermitApplica
     payerCountry: "US",
     payerStateAbbreviation: "NJ",
     pdfAttach: "",
-    permitDate: "",
+    permitDate: getEarliestPermitDate().format(defaultDateFormat),
     permitStartTime: "",
     pickupAddress: "",
     pickupCity: "",
