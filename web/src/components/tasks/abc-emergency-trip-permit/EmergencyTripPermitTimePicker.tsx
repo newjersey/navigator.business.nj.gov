@@ -9,6 +9,7 @@ import { ChangeEvent, ReactElement, useContext, useState } from "react";
 
 interface Props {
   fieldName: EmergencyTripPermitFieldNames;
+  fromNow?: boolean;
 }
 
 interface FormattedTime {
@@ -34,7 +35,7 @@ const generateAllTimesWithHalfHourIncrement = (): FormattedTime[] => {
 };
 
 const getFormattedTimeFromInternalTime = (value: string): FormattedTime | null => {
-  if (value == "") {
+  if (value === "") {
     return null;
   }
   const timeParts = value.split(":");
@@ -48,7 +49,7 @@ export const EmergencyTripPermitTimePicker = (props: Props): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
   const context = useContext(EmergencyTripPermitContext);
   const options = generateAllTimesWithHalfHourIncrement();
-  const handleChange = (event: ChangeEvent<unknown>, value: FormattedTime | null) => {
+  const handleChange = (event: ChangeEvent<unknown>, value: FormattedTime | null): void => {
     context.setApplicationInfo({
       ...context.state.applicationInfo,
       [props.fieldName]: value?.internalTime,

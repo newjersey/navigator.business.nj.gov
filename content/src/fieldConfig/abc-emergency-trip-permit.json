@@ -17,6 +17,16 @@
         "subHeader": "Trip Information",
         "pickupSiteSection": "Pickup Site",
         "deliverySiteSection": "Delivery Site"
+      },
+      "billing": {
+        "servicesSection": "Services and Payment",
+        "billingSection": "Billing Contact Information",
+        "permitSection": "Getting Your Permit",
+        "permitSubheader": "A confirmation email with a link to download your permit will be sent to ${requestorEmail}. Please specify additional preferences below.",
+        "pdfAttachCheckboxLabel": "Attach the permit document to my confirmation email",
+        "textMessageDownloadLinkCheckboxLabel": "Send the permit download link via text message",
+        "additionalEmailDownloadLinkCheckboxLabel": "Send the permit download link to another email address"
+
       }
     },
     "fields": {
@@ -50,7 +60,20 @@
       "deliveryAddress": "Address",
       "deliveryCity": "City",
       "deliveryStateProvince": "State",
-      "deliveryZipPostalCode": "Zip Code"
+      "deliveryZipPostalCode": "Zip Code",
+      "payerFirstName": "First Name",
+      "payerLastName": "Last Name",
+      "payerEmail": "Email Address",
+      "payerPhoneNumber": "Phone Number",
+      "payerCountry": "Country",
+      "payerAddress1": "Business Address Line 1",
+      "payerAddress2": "Business Address Line 2",
+      "payerCity": "City",
+      "payerStateAbbreviation": "State",
+      "payerZipCode": "Zip Code",
+      "payerCompanyName": "Company Name (Business Name)",
+      "textMsgMobile": "Phone Number",
+      "additionalEmail": "Email Address"
     },
     "errors": {
       "noValue": "Enter a ${fieldName}.",

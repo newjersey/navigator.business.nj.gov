@@ -11,6 +11,7 @@ export interface EmergencyTripPermitApplicationInfo {
   payerPhoneNumber?: string;
   payerEmail?: string;
   payerCountry?: string;
+  payerZipCode?: string;
   requestorFirstName: string;
   requestorLastName: string;
   requestorEmail: string;
@@ -50,7 +51,58 @@ export interface EmergencyTripPermitApplicationInfo {
   pdfAttach: string;
 }
 
-export const generateEmptyEmergencyTripPermitData = (): EmergencyTripPermitApplicationInfo => {
+export const emptyEmergencyTripPermitData = {
+  additionalConfirmemail: "",
+  additionalEmail: "",
+  carrier: "",
+  deliveryAddress: "",
+  deliveryCity: "",
+  deliveryCountry: "US",
+  deliverySiteName: "",
+  deliveryStateProvince: "NJ",
+  deliveryZipPostalCode: "",
+  payerAddress1: "",
+  payerAddress2: "",
+  payerCity: "",
+  payerCompanyName: "",
+  payerCountry: "US",
+  payerZipCode: "",
+  payerEmail: "",
+  payerFirstName: "",
+  payerLastName: "",
+  payerPhoneNumber: "",
+  payerStateAbbreviation: "NJ",
+  pdfAttach: "",
+  permitDate: "",
+  permitStartTime: "",
+  pickupAddress: "",
+  pickupCity: "",
+  pickupCountry: "US",
+  pickupSiteName: "",
+  pickupStateProvince: "NJ",
+  pickupZipPostalCode: "",
+  requestorAddress2: "",
+  requestorAddress1: "",
+  requestorCity: "",
+  requestorConfirmemail: "",
+  requestorCountry: "US",
+  requestorEmail: "",
+  requestorFirstName: "",
+  requestorLastName: "",
+  requestorPhone: "",
+  requestorStateProvince: "NJ",
+  requestorZipPostalCode: "",
+  textMsg: "",
+  textMsgMobile: "",
+  vehicleCountry: "US",
+  vehicleLicensePlateNum: "",
+  vehicleMake: "",
+  vehicleStateProvince: "NJ",
+  vehicleVinSerial: "",
+  vehicleYear: "",
+};
+
+export const generateNewEmergencyTripPermitData = (): EmergencyTripPermitApplicationInfo => {
   return {
     additionalConfirmemail: "",
     additionalEmail: "",
@@ -61,15 +113,7 @@ export const generateEmptyEmergencyTripPermitData = (): EmergencyTripPermitAppli
     deliverySiteName: "",
     deliveryStateProvince: "NJ",
     deliveryZipPostalCode: "",
-    payerAddress1: "",
-    payerAddress2: "",
-    payerCity: "",
-    payerCompanyName: "",
     payerCountry: "US",
-    payerEmail: "",
-    payerFirstName: "",
-    payerLastName: "",
-    payerPhoneNumber: "",
     payerStateAbbreviation: "NJ",
     pdfAttach: "",
     permitDate: "",
