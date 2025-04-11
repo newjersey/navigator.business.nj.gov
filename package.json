@@ -5,7 +5,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "build": "yarn verify:node && yarn workspaces foreach -ptvi run build",
+    "decap:build-config": "node scripts/mergeDecapConfig.mjs",
+    "build": "yarn verify:node && yarn decap:build-config && yarn workspaces foreach -ptvi run build",
     "build:clean": "yarn clean && yarn build",
     "clean": "yarn workspaces foreach -v run clean",
     "cms:proxy": "yarn dlx decap-server",
