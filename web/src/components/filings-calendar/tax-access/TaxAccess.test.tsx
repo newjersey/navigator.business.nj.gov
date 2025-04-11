@@ -1,5 +1,6 @@
 import { TaxAccess } from "@/components/filings-calendar/tax-access/TaxAccess";
 import { getMergedConfig } from "@/contexts/configContext";
+import analytics from "@/lib/utils/analytics";
 import { selectDropdownByValue } from "@/test/helpers/helpers-testing-library-selectors";
 import {
   currentBusiness,
@@ -18,9 +19,28 @@ import {
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      tax_calendar: {
+        arrive: {
+          arrive_calendar_access_v2: jest.fn(),
+        },
+        click: {
+          click_calendar_access_v2: jest.fn(),
+        },
+      },
+    },
+  };
+}
+
 const Config = getMergedConfig();
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 describe("<TaxAccess />", () => {
   const renderComponent = (business?: Business) => {
@@ -64,6 +84,11 @@ describe("<TaxAccess />", () => {
           legalStructureId: undefined,
         }),
       });
+    });
+
+    it("tracks tax calendar access analytics", () => {
+      renderComponent(undefinedLegalStructureBusiness);
+      expect(mockAnalytics.event.tax_calendar.arrive.arrive_calendar_access_v2).toHaveBeenCalled();
     });
 
     it("shows step 1 question to choose a legal structure", () => {

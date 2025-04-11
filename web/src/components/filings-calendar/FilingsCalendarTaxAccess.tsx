@@ -68,7 +68,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
                 returnToLink: `${ROUTES.dashboard}`,
               })
               .update();
-            analytics.event.tax_calendar.tax_calendar_register_button.click.show_myNJ_registration_prompt_modal();
+            analytics.event.tax_calendar_register_button.click.show_myNJ_registration_prompt_modal();
             setShowNeedsAccountModal(true);
           }}
         >
