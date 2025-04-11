@@ -6,7 +6,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { useRouter } from "next/compat/router";
@@ -31,7 +31,7 @@ export const NeedsAccountModal = (): ReactElement => {
   }
 
   const linkToAccountSetup = (): void => {
-    if (business?.preferences.returnToLink === `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true`) {
+    if (business?.preferences.returnToLink === `${ROUTES.dashboard}`) {
       analytics.event.myNJ_prompt_modal_complete_button.click.go_to_NavigatorAccount_setup();
     } else {
       analytics.event.guest_modal.click.go_to_NavigatorAccount_setup();
