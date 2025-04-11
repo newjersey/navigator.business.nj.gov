@@ -18,8 +18,6 @@ const isBeforeTheFollowingSaturday = (registeredISO: string | undefined): boolea
   return getCurrentDate().isBefore(sundayAfterRegisteredDate);
 };
 
-export const UnauthenticatedCalendarTaxAccess = (): ReactElement => {};
-
 export const FilingsCalendarTaxAccess = (): ReactElement => {
   const { updateQueue, business } = useUserData();
   const { Config } = useConfig();

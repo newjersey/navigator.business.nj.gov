@@ -17,7 +17,7 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, RenderResult, screen, waitFor } from "@testing-library/react";
 
 function setupMockAnalytics(): typeof analytics {
   return {
@@ -43,7 +43,7 @@ jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 describe("<TaxAccess />", () => {
-  const renderComponent = (business?: Business) => {
+  const renderComponent = (business?: Business): RenderResult => {
     return render(
       <WithStatefulUserData
         initialUserData={business ? generateUserDataForBusiness(business) : generateUserData({})}

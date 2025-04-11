@@ -12,17 +12,14 @@ const TaxAccessPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
-  const [step1ModalOpen, setStep1ModalOpen] = useState(false);
-  const [step2PublicFilingModalOpen, setStep2PublicFilingModalOpen] = useState(false);
-  const [step2TradeNameModalOpen, setStep2TradeNameModalOpen] = useState(false);
   const [errorPreview, setErrorPreview] = useState<"NONE" | "API" | "UNKNOWN">("NONE");
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div>
-        <button className="margin-2" onClick={(): void => setStep1ModalOpen(true)}>
+        {/* <button className="margin-2" onClick={(): void => setStep1ModalOpen(true)}>
           Open Tax Modal Step 1 (Business structure)
-        </button>
+        </button> */}
       </div>
 
       <fieldset>
@@ -66,27 +63,23 @@ const TaxAccessPreview = (props: PreviewProps): ReactElement => {
       </fieldset>
 
       <div>
-        <button className="margin-2" onClick={(): void => setStep2PublicFilingModalOpen(true)}>
+        {/* <button className="margin-2" onClick={(): void => setStep2PublicFilingModalOpen(true)}>
           Open Tax Modal Step 2 (with Business Name)
-        </button>
+        </button> */}
       </div>
 
       <div>
-        <button className="margin-2" onClick={(): void => setStep2TradeNameModalOpen(true)}>
+        {/* <button className="margin-2" onClick={(): void => setStep2TradeNameModalOpen(true)}>
           Open Tax Modal Step 2 (with Responsible Owner Name)
-        </button>
+        </button> */}
       </div>
 
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <TaxAccessStepOne
-          isOpen={step1ModalOpen}
-          close={(): void => setStep1ModalOpen(false)}
           moveToNextStep={(): void => {}}
         />
 
         <TaxAccessStepTwo
-          isOpen={step2PublicFilingModalOpen}
-          close={(): void => setStep2PublicFilingModalOpen(false)}
           moveToPrevStep={(): void => {}}
           onSuccess={(): void => {}}
           CMS_ONLY_fakeError={errorPreview}
@@ -99,8 +92,6 @@ const TaxAccessPreview = (props: PreviewProps): ReactElement => {
         />
 
         <TaxAccessStepTwo
-          isOpen={step2TradeNameModalOpen}
-          close={(): void => setStep2TradeNameModalOpen(false)}
           moveToPrevStep={(): void => {}}
           onSuccess={(): void => {}}
           CMS_ONLY_fakeError={errorPreview}
