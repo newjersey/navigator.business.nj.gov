@@ -1,12 +1,7 @@
 {
   "request": {
     "method": "POST",
-    "urlPattern": ".*/TYTR_ACE_App/ProcessCertificate/businessClearance",
-    "bodyPatterns": [
-      {
-        "equalToJson": "{}"
-      }
-    ]
+    "urlPattern": "/TYTR_ACE_App/ProcessCertificate/businessClearance"
   },
   "response": {
     "status": 200,

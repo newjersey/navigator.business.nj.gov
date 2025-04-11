@@ -704,6 +704,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     // test clicking the button
   });
 
+  f;
   const getInputElementByLabel = (label: string): HTMLInputElement => {
     return screen.getByLabelText(label) as HTMLInputElement;
   };
