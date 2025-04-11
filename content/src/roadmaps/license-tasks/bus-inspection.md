@@ -4,7 +4,7 @@ licenseName: ""
 id: bus-inspection
 displayname: bus-inspection
 urlSlug: bus-inspection
-name: Get Your School Transportation Vehicle(s) Inspected
+name: Schedule Your Initial Bus Inspection
 webflowName: "School Bus: School Bus Inspection"
 summaryDescriptionMd: >
   :::infoAlert
