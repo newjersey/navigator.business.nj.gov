@@ -4,11 +4,15 @@ import { EmergencyTripPermitDatePicker } from "@/components/tasks/abc-emergency-
 import { EmergencyTripPermitStateDropdown } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitStateDropdown";
 import { EmergencyTripPermitTextFieldEntry } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitTextField";
 import { EmergencyTripPermitTimePicker } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitTimePicker";
+import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "react";
+import { getCurrentDateInNewJersey } from "@businessnjgovnavigator/shared/dateHelpers";
+import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
+import { ReactElement, useContext } from "react";
 
 export const TripStep = (): ReactElement => {
   const { Config } = useConfig();
+  const context = useContext(EmergencyTripPermitContext);
 
   return (
     <form className={`usa-prose onboarding-form margin-top-2`}>
@@ -23,7 +27,13 @@ export const TripStep = (): ReactElement => {
           </div>
           <div className={"grid-col-6"}>
             <strong>{Config.abcEmergencyTripPermit.fields.permitStartTime}</strong>
-            <EmergencyTripPermitTimePicker fieldName={"permitStartTime"} />
+            <EmergencyTripPermitTimePicker
+              fieldName={"permitStartTime"}
+              allDay={
+                context.state.applicationInfo.permitDate !==
+                getCurrentDateInNewJersey().format(defaultDateFormat)
+              }
+            />
           </div>
         </div>
         <div className={"padding-top-3"}>
