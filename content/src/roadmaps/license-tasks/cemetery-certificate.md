@@ -2,7 +2,7 @@
 notesMd: "* h2 and h3 still look the same, using h3 per Spencer but ideally we
   want the h3's to be visually differentiated from the h2. Will need to update
   this task once this is remedied."
-licenseName: "Cemetery-Cemetery"
+licenseName: Cemetery-Cemetery
 id: cemetery-certificate
 displayname: cemetery-certificate
 urlSlug: cemetery-certificate
@@ -13,10 +13,10 @@ summaryDescriptionMd: To own and operate a cemetery business in New Jersey, you
 industryId: cemetery
 callToActionText: Apply for My Certificate of Authority
 callToActionLink: https://www.njconsumeraffairs.gov/cem/Applications/Cemetery-Application-and-Information-Sheet-for-Certificate-of-Authority.pdf
+licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: New Jersey Cemetery Board
 webflowId: 66be3c52407e8f104a12114a
-licenseCertificationClassification: undefined
 ---
 
 ## Application Requirements
@@ -56,7 +56,7 @@ New Jersey Cemetery Board
 
 P.O. Box 45036
 
-Newark, New Jersey 07101
+Newark, NJ 07101
 
 :::callout{ showHeader="true" headerText="What if I don't get this certificate?" showIcon="false" calloutType="conditional" }
 

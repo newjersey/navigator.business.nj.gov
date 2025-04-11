@@ -1,5 +1,5 @@
 {
-  "naicsCodes": "541330",
+  "naicsCodes": "541330, 541370 ",
   "defaultSectorId": "construction",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -44,12 +44,17 @@
     },
     {
       "step": 3,
-      "weight": 22,
+      "weight": 25,
       "licenseTask": "firm-engineer",
       "required": true
+    },
+    {
+      "weight": 23,
+      "step": 3,
+      "licenseTask": "land-surveyor-license"
     }
   ],
-  "name": "Engineering",
+  "name": "Engineering and Land Surveying",
   "nonEssentialQuestionsIds": [
     "weights-measures",
     "planning-services",
@@ -62,6 +67,6 @@
   "isEnabled": true,
   "additionalSearchTerms": "engineering consulting, firm, professional services, land surveyor, land surveying",
   "id": "engineering",
-  "description": "Designs and plans the building of systems and structures",
+  "description": "Designs and plans the building of systems and structures or maps land for site accuracy",
   "webflowId": "656a13621861f431fc9765d2"
 }

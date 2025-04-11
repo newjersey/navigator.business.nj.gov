@@ -24,7 +24,6 @@ export const migrate_v157Business_to_v158Business = (
   return {
     ...business,
     version: 158,
-    versionWhenCreated: 157,
     userId: userData.user.id,
   } as v158Business;
 };
@@ -87,6 +86,7 @@ export interface v158Business {
   taxFilingData: v158TaxFilingData;
   formationData: v158FormationData;
   environmentData: v158EnvironmentData | undefined;
+  taxClearanceCertificateData: v158TaxClearanceCertificateData;
   version: number;
   versionWhenCreated: number;
   userId: string;
@@ -613,6 +613,19 @@ export type v158AirQuestionnaireFieldIds =
 
 export type v158AirQuestionnaireData = Record<v158AirQuestionnaireFieldIds, boolean>;
 
+export type v158TaxClearanceCertificateData = {
+  requestingAgencyId: string;
+  businessName: string;
+  entityId: string;
+  addressLine1: string;
+  addressLine2: string;
+  addressCity: string;
+  addressState?: v158StateObject;
+  addressZipCode: string;
+  taxId: string;
+  taxPin: string;
+};
+
 // ---------------- v158 generators ----------------
 
 export const generatev158UserData = (overrides: Partial<v158UserData>): v158UserData => {
@@ -663,6 +676,7 @@ export const generatev158Business = (overrides: Partial<v158Business>): v158Busi
     preferences: generatev158Preferences({}),
     formationData: generatev158FormationData({}, profileData.legalStructureId ?? ""),
     onboardingFormProgress: "UNSTARTED",
+    taxClearanceCertificateData: generatev158TaxClearanceCertificateData({}),
     taskProgress: {
       "business-structure": "TO_DO",
     },
@@ -927,4 +941,22 @@ const generatev158LicenseStatusItem = (): v158LicenseStatusItem => {
 export const getRandomv158LicenseStatus = (): v158LicenseStatus => {
   const randomIndex = Math.floor(Math.random() * v158LicenseStatuses.length);
   return v158LicenseStatuses[randomIndex];
+};
+
+export const generatev158TaxClearanceCertificateData = (
+  overrides: Partial<v158TaxClearanceCertificateData>
+): v158TaxClearanceCertificateData => {
+  return {
+    requestingAgencyId: "",
+    businessName: `some-business-name-${randomInt()}`,
+    entityId: randomInt(10).toString(),
+    addressLine1: `some-address-1-${randomInt()}`,
+    addressLine2: `some-address-2-${randomInt()}`,
+    addressCity: `some-city-${randomInt()}`,
+    addressState: undefined,
+    addressZipCode: randomInt(5).toString(),
+    taxId: `${randomInt(12)}`,
+    taxPin: randomInt(4).toString(),
+    ...overrides,
+  };
 };

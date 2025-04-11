@@ -238,6 +238,9 @@ commands:
             echo 'export NEXT_PUBLIC_WEB_BASE_URL=$WEB_BASE_URL_DEV' >> $BASH_ENV
             echo 'export FEATURE_LOGIN_PAGE=$FEATURE_LOGIN_PAGE_DEV' >> $BASH_ENV
             echo 'export FEATURE_TAX_CLEARANCE_CERTIFICATE=$FEATURE_TAX_CLEARANCE_CERTIFICATE_DEV' >> $BASH_ENV
+            echo 'export TAX_CLEARANCE_CERTIFICATE_URL=$TAX_CLEARANCE_CERTIFICATE_URL_DEV' >> $BASH_ENV
+            echo 'export TAX_CLEARANCE_CERTIFICATE_USER_NAME=$TAX_CLEARANCE_CERTIFICATE_USER_NAME_DEV' >> $BASH_ENV
+            echo 'export TAX_CLEARANCE_CERTIFICATE_PASSWORD=$TAX_CLEARANCE_CERTIFICATE_PASSWORD_DEV' >> $BASH_ENV
             echo 'export FEATURE_FORMATION_SURVEY=$FEATURE_FORMATION_SURVEY_DEV' >> $BASH_ENV
 
   set-cypress-env-vars:
@@ -255,7 +258,9 @@ commands:
             echo 'export FEATURE_BUSINESS_FLP=false' >> $BASH_ENV
             echo 'export FEATURE_LOGIN_PAGE=true' >> $BASH_ENV
             echo 'export FEATURE_TAX_CLEARANCE_CERTIFICATE=$FEATURE_TAX_CLEARANCE_CERTIFICATE_DEV' >> $BASH_ENV
-
+            echo 'export TAX_CLEARANCE_CERTIFICATE_URL=$TAX_CLEARANCE_CERTIFICATE_URL_DEV' >> $BASH_ENV
+            echo 'export TAX_CLEARANCE_CERTIFICATE_USER_NAME=$TAX_CLEARANCE_CERTIFICATE_USER_NAME_DEV' >> $BASH_ENV
+            echo 'export TAX_CLEARANCE_CERTIFICATE_PASSWORD=$TAX_CLEARANCE_CERTIFICATE_PASSWORD_DEV' >> $BASH_ENV
             echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_DEV' >> $BASH_ENV
             echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_DEV' >> $BASH_ENV
             echo 'export CYPRESS_COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_DEV' >> $BASH_ENV
@@ -314,7 +319,9 @@ commands:
             echo 'export FEATURE_LOGIN_PAGE=$FEATURE_LOGIN_PAGE_STAGING' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLP=$FEATURE_BUSINESS_FLP_STAGING' >> $BASH_ENV
             echo 'export FEATURE_TAX_CLEARANCE_CERTIFICATE=$FEATURE_TAX_CLEARANCE_CERTIFICATE_STAGING' >> $BASH_ENV
-
+            echo 'export TAX_CLEARANCE_CERTIFICATE_URL=$TAX_CLEARANCE_CERTIFICATE_URL_STAGING' >> $BASH_ENV
+            echo 'export TAX_CLEARANCE_CERTIFICATE_USER_NAME=$TAX_CLEARANCE_CERTIFICATE_USER_NAME_STAGING' >> $BASH_ENV
+            echo 'export TAX_CLEARANCE_CERTIFICATE_PASSWORD=$TAX_CLEARANCE_CERTIFICATE_PASSWORD_STAGING' >> $BASH_ENV
             echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_STAGING' >> $BASH_ENV
             echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_STAGING' >> $BASH_ENV
             echo 'export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID_STAGING' >> $BASH_ENV
@@ -377,6 +384,9 @@ commands:
             echo 'export FEATURE_LOGIN_PAGE=$FEATURE_LOGIN_PAGE_PROD' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLP=$FEATURE_BUSINESS_FLP_PROD' >> $BASH_ENV
             echo 'export FEATURE_TAX_CLEARANCE_CERTIFICATE=$FEATURE_TAX_CLEARANCE_CERTIFICATE_PROD' >> $BASH_ENV
+            echo 'export TAX_CLEARANCE_CERTIFICATE_URL=$TAX_CLEARANCE_CERTIFICATE_URL_PROD' >> $BASH_ENV
+            echo 'export TAX_CLEARANCE_CERTIFICATE_USER_NAME=$TAX_CLEARANCE_CERTIFICATE_USER_NAME_PROD' >> $BASH_ENV
+            echo 'export TAX_CLEARANCE_CERTIFICATE_PASSWORD=$TAX_CLEARANCE_CERTIFICATE_PASSWORD_PROD' >> $BASH_ENV
 
             echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_NEWPROD' >> $BASH_ENV
             echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_NEWPROD' >> $BASH_ENV
@@ -794,50 +804,6 @@ jobs:
       - set-dev-env-vars
       - docker-setup-navigator-builder-image
 
-  sync-fundings:
-    docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_18_1
-        aws_auth:
-          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
-          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
-    steps:
-      - bootstrap-code
-      - run:
-          name: Node Funding Sync
-          command: |
-            echo 'export WEBFLOW_API_TOKEN=$WEBFLOW_API_TOKEN' >> $BASH_ENV
-            yarn workspace @businessnjgovnavigator/web webflow:fundings-ci-sync-full
-
-  sync-licenses:
-    docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_18_1
-        aws_auth:
-          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
-          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
-    steps:
-      - bootstrap-code
-      - run:
-          name: Node License Sync
-          command: |
-            echo 'export WEBFLOW_API_TOKEN=$WEBFLOW_API_TOKEN' >> $BASH_ENV
-            yarn workspace @businessnjgovnavigator/content build
-            yarn workspace @businessnjgovnavigator/web webflow:licenses-ci-sync
-
-  sync-industries:
-    docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_18_1
-        aws_auth:
-          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
-          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
-    steps:
-      - bootstrap-code
-      - run:
-          name: Node Industry Sync
-          command: |
-            echo 'export WEBFLOW_API_TOKEN=$WEBFLOW_API_TOKEN' >> $BASH_ENV
-            yarn workspace @businessnjgovnavigator/content build
-            yarn workspace @businessnjgovnavigator/web webflow:industries-ci-sync
-
 parameters:
   run_workflow_builder:
     default: false
@@ -870,60 +836,6 @@ workflows:
           name: production-deploy
           requires:
             - prepare-release
-      - sync-fundings:
-          name: webflow-fundings-sync
-          requires:
-            - production-deploy
-      - sync-licenses:
-          name: webflow-licenses-sync
-          requires:
-            - webflow-fundings-sync
-      - sync-industries:
-          name: webflow-industries-sync
-          requires:
-            - webflow-licenses-sync
-
-  #  webflow-sync:
-  #    jobs:
-  #      - sync-fundings:
-  #          name: webflow-fundings-sync
-  #          filters:
-  #            branches:
-  #              only:
-  #                - /^webflow-sync-.*/
-  #      - sync-licenses:
-  #          name: webflow-licenses-sync
-  #          requires:
-  #            - webflow-fundings-sync
-  #      - sync-industries:
-  #          name: webflow-industries-sync
-  #          requires:
-  #            - webflow-licenses-sync
-
-  webflow-fundings-sync:
-    jobs:
-      - sync-fundings:
-          filters:
-            branches:
-              only:
-                - /^webflow-fundings-sync-.*/
-
-  webflow-licenses-sync:
-    jobs:
-      - sync-licenses:
-          filters:
-            branches:
-              only:
-                - /^webflow-licenses-sync-.*/
-
-  webflow-industries-sync:
-    jobs:
-      - sync-industries:
-          filters:
-            branches:
-              only:
-                - /^webflow-industries-sync-.*/
-
   deploy-testing-environment:
     jobs:
       - deploy-testing:

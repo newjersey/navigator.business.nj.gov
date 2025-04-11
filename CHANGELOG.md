@@ -1,3 +1,42 @@
+# [2025.10.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.9.0...v2025.10.0) (2025-04-02)
+
+
+### Bug Fixes
+
+* [AB[#13557](https://github.com/newjersey/navigator.business.nj.gov/issues/13557)] fix flaky carnival test ([44bcea8](https://github.com/newjersey/navigator.business.nj.gov/commit/44bcea86b29a53133b3277085fa9355a41a94d03))
+* [AB[#13557](https://github.com/newjersey/navigator.business.nj.gov/issues/13557)] update case for anytime action category ([a6b3193](https://github.com/newjersey/navigator.business.nj.gov/commit/a6b3193ce56a7804d692152141267fd48bc6ebbd))
+* [AB[#13673](https://github.com/newjersey/navigator.business.nj.gov/issues/13673)] forceRefresh auth fixes ([02d870b](https://github.com/newjersey/navigator.business.nj.gov/commit/02d870b1fa73f68643777b45cda1700cbb61c4e8))
+* special dental permit summaryDescriptioMd ([e573681](https://github.com/newjersey/navigator.business.nj.gov/commit/e57368156efd832c93976776a039367b80093100))
+
+
+### Features
+
+* [AB[#6768](https://github.com/newjersey/navigator.business.nj.gov/issues/6768)] add carnival permits for up and running poppies ([db76164](https://github.com/newjersey/navigator.business.nj.gov/commit/db76164eece581c9da6e9590838bac68baa40645))
+
+# [2025.9.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.8.1...v2025.9.0) (2025-03-25)
+
+
+### Bug Fixes
+
+* [AB[#0000](https://github.com/newjersey/navigator.business.nj.gov/issues/0000)] fix conflict issue with pharmacy ([984f855](https://github.com/newjersey/navigator.business.nj.gov/commit/984f855085708a3f4dafb564df50ba59632474f6))
+* [AB[#12799](https://github.com/newjersey/navigator.business.nj.gov/issues/12799)] update invocation freq in prod for migrateusersVersion ([6b0e18f](https://github.com/newjersey/navigator.business.nj.gov/commit/6b0e18f39e51a24cfc80f4480b7d574b172c5820))
+* [AB[#12799](https://github.com/newjersey/navigator.business.nj.gov/issues/12799)] update invocation freq in prod for migrateusersVersion ([31cafb3](https://github.com/newjersey/navigator.business.nj.gov/commit/31cafb3bbdcb12e555b16d3962fa3739c9f90dd5))
+* [AB[#13172](https://github.com/newjersey/navigator.business.nj.gov/issues/13172)] skip flaky tests ([6e3a2d1](https://github.com/newjersey/navigator.business.nj.gov/commit/6e3a2d11d057129b76d1dcda3ec382cba88e21f7))
+* [AB[#13227](https://github.com/newjersey/navigator.business.nj.gov/issues/13227)] update header copy and ability to update copy in cms ([c54bcc1](https://github.com/newjersey/navigator.business.nj.gov/commit/c54bcc12fce87d94333dd5fab2bd2b229abd5ea4))
+* [AB[#13427](https://github.com/newjersey/navigator.business.nj.gov/issues/13427)] update routing from login to account-setup when onboarding is complete ([42ef18c](https://github.com/newjersey/navigator.business.nj.gov/commit/42ef18c7291103a0b54628e758f933e20087de85))
+* **deps:** update dependency axios to v1.8.3 ([4e479b3](https://github.com/newjersey/navigator.business.nj.gov/commit/4e479b3af4c661789b79fd2994b20dd3db42e705))
+* **deps:** update dependency next to v15.2.3 [security] ([fb78df9](https://github.com/newjersey/navigator.business.nj.gov/commit/fb78df965163a1e6f8495abea3ba648d3fa69f6b))
+
+
+### Features
+
+* [[#187531990](https://github.com/newjersey/navigator.business.nj.gov/issues/187531990) | AB[#4988](https://github.com/newjersey/navigator.business.nj.gov/issues/4988)] enable status check for public movers license ([#9925](https://github.com/newjersey/navigator.business.nj.gov/issues/9925)) ([fa6e2ee](https://github.com/newjersey/navigator.business.nj.gov/commit/fa6e2eeedc65cda35c85249592249fc66b3909b6))
+* [AB[#12716](https://github.com/newjersey/navigator.business.nj.gov/issues/12716)] Enable reproducing test randomness in `api/` ([1f5da6d](https://github.com/newjersey/navigator.business.nj.gov/commit/1f5da6d4300076cdb867b28d5b5907a6b5412636)), closes [/github.com/jestjs/jest/issues/7421#issuecomment-442438684](https://github.com//github.com/jestjs/jest/issues/7421/issues/issuecomment-442438684)
+* [AB[#12716](https://github.com/newjersey/navigator.business.nj.gov/issues/12716)] Enable reproducing test randomness in `web/` ([0963278](https://github.com/newjersey/navigator.business.nj.gov/commit/09632785dbd01fa02cf6a305500821e76eac52d5))
+* [AB[#12716](https://github.com/newjersey/navigator.business.nj.gov/issues/12716)] Enable reproducing test randomness in Cypress ([45a6e5b](https://github.com/newjersey/navigator.business.nj.gov/commit/45a6e5bcab045085144dfbb1b83b3057875da1d0))
+* [AB[#13166](https://github.com/newjersey/navigator.business.nj.gov/issues/13166)] add alert when no fundings are applicable on njeda fundings page ([9c4e313](https://github.com/newjersey/navigator.business.nj.gov/commit/9c4e313436400ae864447120e60f47f60d10a4bd))
+* [AB[#7865](https://github.com/newjersey/navigator.business.nj.gov/issues/7865)] implement anytime action descriptions ([fdf09e0](https://github.com/newjersey/navigator.business.nj.gov/commit/fdf09e04cdfe9d2dd51a476f0d0d47b2ab2c715b))
+
 ## [2025.8.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.8.0...v2025.8.1) (2025-03-21)
 
 
