@@ -10,11 +10,7 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { AnytimeActionLicenseReinstatement, AnytimeActionTask, StepperStep } from "@/lib/types/types";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import {
-  emptyTaxClearanceCertificateData,
-  LookupMunicipalityByName,
-  LookupTaxClearanceCertificateAgenciesById,
-} from "@businessnjgovnavigator/shared";
+import { emptyTaxClearanceCertificateData, LookupMunicipalityByName } from "@businessnjgovnavigator/shared";
 import { emptyFormationAddressData, FormationAddress } from "@businessnjgovnavigator/shared/formationData";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, useEffect, useState } from "react";
@@ -187,10 +183,7 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
               {certificatePdfBlob ? (
                 <TaxClearanceDownload
                   certificatePdfBlob={certificatePdfBlob}
-                  downloadFilename={`Tax Clearance Certificate - ${profileData.businessName} - ${
-                    LookupTaxClearanceCertificateAgenciesById(taxClearanceCertificateData.requestingAgencyId)
-                      .name
-                  } - ${Date.now()}`}
+                  downloadFilename={`Tax Clearance Certificate - ${Date.now()}`}
                 />
               ) : (
                 <TaxClearanceSteps
