@@ -10,12 +10,6 @@
     },
     {
       "step": 3,
-      "weight": 20,
-      "task": "transportation-entity-id",
-      "required": true
-    },
-    {
-      "step": 3,
       "weight": 25,
       "task": "transportation-inspection",
       "required": true

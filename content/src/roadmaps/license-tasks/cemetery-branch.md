@@ -13,10 +13,10 @@ summaryDescriptionMd: You need a Cemetery Salesperson Branch license to sell at
 industryId: cemetery
 callToActionText: Get My Cemetery Salesperson Branch License
 callToActionLink: https://www.njconsumeraffairs.gov/cem/Applications/Cemetery-Application-for-Cemetery-Salespersons-Branch-License.pdf
+licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: New Jersey Cemetery Board
 webflowId: 66be3be5b744538ece672248
-licenseCertificationClassification: undefined
 ---
 
 ## Application Requirements
@@ -33,7 +33,7 @@ New Jersey Cemetery Board
 
 P.O. Box 45036
 
-Newark, New Jersey 07101
+Newark, NJ 07101
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="conditional" }
 

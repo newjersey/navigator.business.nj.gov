@@ -157,15 +157,6 @@
   }
 }
 
-.btn-profile-hoverstate {
-  &:hover,
-  & .selected {
-    color: variables.$primary-dark;
-    font-weight: bold;
-    opacity: 0.8;
-  }
-}
-
 .slider-button {
   position: absolute;
   top: 50%;

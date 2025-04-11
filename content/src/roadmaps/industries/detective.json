@@ -56,7 +56,9 @@
     }
   ],
   "name": "Detective Agency",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "detective",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

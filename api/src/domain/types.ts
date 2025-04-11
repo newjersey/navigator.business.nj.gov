@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { TaxClearanceCertificateResponse } from "@businessnjgovnavigator/shared";
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
@@ -22,7 +23,7 @@ import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
 
 export interface DatabaseClient {
-  migrateData: () => Promise<{ success: boolean; migratedCount?: number; error?: string }>;
+  migrateOutdatedVersionUsers: () => Promise<{ success: boolean; migratedCount?: number; error?: string }>;
   get: (userId: string) => Promise<UserData>;
   put: (userData: UserData) => Promise<UserData>;
   findByEmail: (email: string) => Promise<UserData | undefined>;
@@ -35,7 +36,10 @@ export interface UserDataClient {
   getNeedNewsletterUsers: () => Promise<UserData[]>;
   getNeedToAddToUserTestingUsers: () => Promise<UserData[]>;
   getNeedTaxIdEncryptionUsers: () => Promise<UserData[]>;
-  getUsersWithOutdatedVersion: (latestVersion: number) => Promise<UserData[]>;
+  getUsersWithOutdatedVersion: (
+    latestVersion: number,
+    nextToken?: string
+  ) => Promise<{ usersToMigrate: UserData[]; nextToken?: string }>;
 }
 
 export interface BusinessesDataClient {
@@ -207,6 +211,6 @@ export const NO_MATCH_ERROR = "NO_MATCH";
 export const NO_ADDRESS_MATCH_ERROR = "NO_ADDRESS_MATCH";
 export const NO_MAIN_APPS_ERROR = "NO_MAIN_APPS";
 
-export interface EvaluationKey {
-  userId: string;
+export interface TaxClearanceCertificateClient {
+  postTaxClearanceCertificate: (userData: UserData) => Promise<TaxClearanceCertificateResponse>;
 }

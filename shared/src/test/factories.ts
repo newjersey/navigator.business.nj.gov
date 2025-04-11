@@ -39,6 +39,8 @@ import { MunicipalityDetail } from "../municipality";
 import { OperatingPhaseId } from "../operatingPhase";
 import { BusinessPersona, IndustrySpecificData, ProfileData } from "../profileData";
 import { arrayOfSectors, SectorType } from "../sector";
+import { StateObject, arrayOfStateObjects as states } from "../states";
+import { taxClearanceCertificateAgencies, TaxClearanceCertificateData } from "../taxClearanceCertificate";
 import { TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
 import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
@@ -353,6 +355,55 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
   };
 };
 
+export const generateUnitedStatesStateDropdownOption = ({
+  includeOutsideOfTheUSA,
+  excludeNJ,
+  excludeTerritories,
+}: {
+  includeOutsideOfTheUSA?: boolean;
+  excludeNJ?: boolean;
+  excludeTerritories?: boolean;
+}): StateObject => {
+  let filteredStates = states;
+  if (!includeOutsideOfTheUSA) {
+    filteredStates = filteredStates.filter((stateObject) => {
+      return stateObject.shortCode !== "Outside of the USA";
+    });
+  }
+  if (excludeNJ) {
+    filteredStates = filteredStates.filter((stateObject) => {
+      return stateObject.shortCode !== "NJ";
+    });
+  }
+
+  if (excludeTerritories) {
+    filteredStates = filteredStates.filter((stateObject) => {
+      return (
+        stateObject.shortCode !== "AS" && stateObject.shortCode !== "VI" && stateObject.shortCode !== "GU"
+      );
+    });
+  }
+
+  return randomElementFromArray(filteredStates);
+};
+
+export const generateTaxClearanceCertificateData = (
+  overrides: Partial<TaxClearanceCertificateData>
+): TaxClearanceCertificateData => {
+  return {
+    requestingAgencyId: randomElementFromArray(taxClearanceCertificateAgencies).id,
+    businessName: `some-business-name-${randomInt()}`,
+    addressLine1: `some-address-1-${randomInt()}`,
+    addressLine2: `some-address-2-${randomInt()}`,
+    addressCity: `some-city-${randomInt()}`,
+    addressState: generateUnitedStatesStateDropdownOption({}),
+    addressZipCode: randomInt(5).toString(),
+    taxId: `${randomInt(12)}`,
+    taxPin: randomInt(4).toString(),
+    ...overrides,
+  };
+};
+
 export const generateLandQuestionnaireData = (
   overrides: Partial<LandQuestionnaireData>
 ): LandQuestionnaireData => {
@@ -456,6 +507,7 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
     licenseData: generateLicenseData({}),
     preferences: generatePreferences({}),
     taxFilingData: generateTaxFilingData({}),
+    taxClearanceCertificateData: generateTaxClearanceCertificateData({}),
     environmentData: generateEnvironmentData({}),
     version: CURRENT_VERSION,
     userId: generateUser({}).id,

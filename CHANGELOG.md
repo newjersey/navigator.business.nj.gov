@@ -1,3 +1,111 @@
+# [2025.10.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.9.0...v2025.10.0) (2025-04-02)
+
+
+### Bug Fixes
+
+* [AB[#13557](https://github.com/newjersey/navigator.business.nj.gov/issues/13557)] fix flaky carnival test ([44bcea8](https://github.com/newjersey/navigator.business.nj.gov/commit/44bcea86b29a53133b3277085fa9355a41a94d03))
+* [AB[#13557](https://github.com/newjersey/navigator.business.nj.gov/issues/13557)] update case for anytime action category ([a6b3193](https://github.com/newjersey/navigator.business.nj.gov/commit/a6b3193ce56a7804d692152141267fd48bc6ebbd))
+* [AB[#13673](https://github.com/newjersey/navigator.business.nj.gov/issues/13673)] forceRefresh auth fixes ([02d870b](https://github.com/newjersey/navigator.business.nj.gov/commit/02d870b1fa73f68643777b45cda1700cbb61c4e8))
+* special dental permit summaryDescriptioMd ([e573681](https://github.com/newjersey/navigator.business.nj.gov/commit/e57368156efd832c93976776a039367b80093100))
+
+
+### Features
+
+* [AB[#6768](https://github.com/newjersey/navigator.business.nj.gov/issues/6768)] add carnival permits for up and running poppies ([db76164](https://github.com/newjersey/navigator.business.nj.gov/commit/db76164eece581c9da6e9590838bac68baa40645))
+
+# [2025.9.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.8.1...v2025.9.0) (2025-03-25)
+
+
+### Bug Fixes
+
+* [AB[#0000](https://github.com/newjersey/navigator.business.nj.gov/issues/0000)] fix conflict issue with pharmacy ([984f855](https://github.com/newjersey/navigator.business.nj.gov/commit/984f855085708a3f4dafb564df50ba59632474f6))
+* [AB[#12799](https://github.com/newjersey/navigator.business.nj.gov/issues/12799)] update invocation freq in prod for migrateusersVersion ([6b0e18f](https://github.com/newjersey/navigator.business.nj.gov/commit/6b0e18f39e51a24cfc80f4480b7d574b172c5820))
+* [AB[#12799](https://github.com/newjersey/navigator.business.nj.gov/issues/12799)] update invocation freq in prod for migrateusersVersion ([31cafb3](https://github.com/newjersey/navigator.business.nj.gov/commit/31cafb3bbdcb12e555b16d3962fa3739c9f90dd5))
+* [AB[#13172](https://github.com/newjersey/navigator.business.nj.gov/issues/13172)] skip flaky tests ([6e3a2d1](https://github.com/newjersey/navigator.business.nj.gov/commit/6e3a2d11d057129b76d1dcda3ec382cba88e21f7))
+* [AB[#13227](https://github.com/newjersey/navigator.business.nj.gov/issues/13227)] update header copy and ability to update copy in cms ([c54bcc1](https://github.com/newjersey/navigator.business.nj.gov/commit/c54bcc12fce87d94333dd5fab2bd2b229abd5ea4))
+* [AB[#13427](https://github.com/newjersey/navigator.business.nj.gov/issues/13427)] update routing from login to account-setup when onboarding is complete ([42ef18c](https://github.com/newjersey/navigator.business.nj.gov/commit/42ef18c7291103a0b54628e758f933e20087de85))
+* **deps:** update dependency axios to v1.8.3 ([4e479b3](https://github.com/newjersey/navigator.business.nj.gov/commit/4e479b3af4c661789b79fd2994b20dd3db42e705))
+* **deps:** update dependency next to v15.2.3 [security] ([fb78df9](https://github.com/newjersey/navigator.business.nj.gov/commit/fb78df965163a1e6f8495abea3ba648d3fa69f6b))
+
+
+### Features
+
+* [[#187531990](https://github.com/newjersey/navigator.business.nj.gov/issues/187531990) | AB[#4988](https://github.com/newjersey/navigator.business.nj.gov/issues/4988)] enable status check for public movers license ([#9925](https://github.com/newjersey/navigator.business.nj.gov/issues/9925)) ([fa6e2ee](https://github.com/newjersey/navigator.business.nj.gov/commit/fa6e2eeedc65cda35c85249592249fc66b3909b6))
+* [AB[#12716](https://github.com/newjersey/navigator.business.nj.gov/issues/12716)] Enable reproducing test randomness in `api/` ([1f5da6d](https://github.com/newjersey/navigator.business.nj.gov/commit/1f5da6d4300076cdb867b28d5b5907a6b5412636)), closes [/github.com/jestjs/jest/issues/7421#issuecomment-442438684](https://github.com//github.com/jestjs/jest/issues/7421/issues/issuecomment-442438684)
+* [AB[#12716](https://github.com/newjersey/navigator.business.nj.gov/issues/12716)] Enable reproducing test randomness in `web/` ([0963278](https://github.com/newjersey/navigator.business.nj.gov/commit/09632785dbd01fa02cf6a305500821e76eac52d5))
+* [AB[#12716](https://github.com/newjersey/navigator.business.nj.gov/issues/12716)] Enable reproducing test randomness in Cypress ([45a6e5b](https://github.com/newjersey/navigator.business.nj.gov/commit/45a6e5bcab045085144dfbb1b83b3057875da1d0))
+* [AB[#13166](https://github.com/newjersey/navigator.business.nj.gov/issues/13166)] add alert when no fundings are applicable on njeda fundings page ([9c4e313](https://github.com/newjersey/navigator.business.nj.gov/commit/9c4e313436400ae864447120e60f47f60d10a4bd))
+* [AB[#7865](https://github.com/newjersey/navigator.business.nj.gov/issues/7865)] implement anytime action descriptions ([fdf09e0](https://github.com/newjersey/navigator.business.nj.gov/commit/fdf09e04cdfe9d2dd51a476f0d0d47b2ab2c715b))
+
+## [2025.8.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.8.0...v2025.8.1) (2025-03-21)
+
+
+### Bug Fixes
+
+* hotfix update MVC-related content ([53fa179](https://github.com/newjersey/navigator.business.nj.gov/commit/53fa179ac1b79d9cfa4a7f784f2aa43898949f37))
+
+# [2025.8.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.7.0...v2025.8.0) (2025-03-19)
+
+
+### Bug Fixes
+
+* [[#0](https://github.com/newjersey/navigator.business.nj.gov/issues/0) | AB[#0](https://github.com/newjersey/navigator.business.nj.gov/issues/0)] disable flaky test ([f293d57](https://github.com/newjersey/navigator.business.nj.gov/commit/f293d57ed4faefb54cc6541f7c0f060f02f97fd1))
+* [[#188887754](https://github.com/newjersey/navigator.business.nj.gov/issues/188887754) | AB[#8670](https://github.com/newjersey/navigator.business.nj.gov/issues/8670)] Fix Anytime Actions Category Spelling ([08e6467](https://github.com/newjersey/navigator.business.nj.gov/commit/08e6467984f7466435e1c474c77a52190f61d831))
+* [[#188908973](https://github.com/newjersey/navigator.business.nj.gov/issues/188908973) | AB[#12673](https://github.com/newjersey/navigator.business.nj.gov/issues/12673)] convert email to lowercase for /self-reg and /users/emailCheck ([93770ce](https://github.com/newjersey/navigator.business.nj.gov/commit/93770ce961d67030731f4cf38fa353a3d48780cb))
+* [[#188924007](https://github.com/newjersey/navigator.business.nj.gov/issues/188924007) | AB[#12737](https://github.com/newjersey/navigator.business.nj.gov/issues/12737)] add space in Additional Provisions header ([9b41edb](https://github.com/newjersey/navigator.business.nj.gov/commit/9b41edbdfaf8a747580fabc71be12f1bc6b4f258))
+* [AB[#12799](https://github.com/newjersey/navigator.business.nj.gov/issues/12799)] fix user data migration ([aa01679](https://github.com/newjersey/navigator.business.nj.gov/commit/aa01679f1c2271d192b238f24c3da7adaf1195ee))
+* [AB[#13172](https://github.com/newjersey/navigator.business.nj.gov/issues/13172)] skip or update all flaky tests in CircleCI Insights ([275003f](https://github.com/newjersey/navigator.business.nj.gov/commit/275003f4a2fb1748d9c071fd5acefb2ac6c0bdd3))
+* [AB[#13379](https://github.com/newjersey/navigator.business.nj.gov/issues/13379)] resolve requestException in fetchAuthSession ([f475f19](https://github.com/newjersey/navigator.business.nj.gov/commit/f475f19f152688564b981daae4c3e67eb71c611a))
+* [AB[#4703](https://github.com/newjersey/navigator.business.nj.gov/issues/4703)] PR review comments fix ([eac4229](https://github.com/newjersey/navigator.business.nj.gov/commit/eac4229905babba1149ea0166fe53abc513c67fa))
+* **deps:** update dependency axios to v1.8.2 [security] ([0efb38c](https://github.com/newjersey/navigator.business.nj.gov/commit/0efb38c420898b3e9414fb75a11c9ad284a04fb6))
+* remove unintended whitespace from cannabis-license-tab1.json ([5b8e1da](https://github.com/newjersey/navigator.business.nj.gov/commit/5b8e1da4af69bb7b561dfa77503e9e2aac951cb2))
+
+
+### Features
+
+* [[#188595636](https://github.com/newjersey/navigator.business.nj.gov/issues/188595636) | AB[#4703](https://github.com/newjersey/navigator.business.nj.gov/issues/4703)] add tax clearance certificate screens ([be2dc99](https://github.com/newjersey/navigator.business.nj.gov/commit/be2dc999a5377804e741633e472f741d385fbb45))
+* [[#188887754](https://github.com/newjersey/navigator.business.nj.gov/issues/188887754) #AB8670] Update anytime action categories ([2b544e2](https://github.com/newjersey/navigator.business.nj.gov/commit/2b544e2dd4c4a29feed43ecca01810dfd4530d7b)), closes [#AB8670](https://github.com/newjersey/navigator.business.nj.gov/issues/AB8670)
+* [[#188887754](https://github.com/newjersey/navigator.business.nj.gov/issues/188887754) | AB[#8670](https://github.com/newjersey/navigator.business.nj.gov/issues/8670)] Alphabetize anytime actions dropdown category order ([7be461c](https://github.com/newjersey/navigator.business.nj.gov/commit/7be461c2cb91ee279cf23458fc350d4fe4330ad9))
+* [[#188887754](https://github.com/newjersey/navigator.business.nj.gov/issues/188887754) | AB[#8670](https://github.com/newjersey/navigator.business.nj.gov/issues/8670)] Remove duplicate close business task and the anytime action link category ([d56aa98](https://github.com/newjersey/navigator.business.nj.gov/commit/d56aa98d8ed6f07c17ca128ee2407167a849ec22))
+* [AB[#8670](https://github.com/newjersey/navigator.business.nj.gov/issues/8670)] Fix anytime actions that were not moved over ([e494375](https://github.com/newjersey/navigator.business.nj.gov/commit/e494375d06f18d1eb342e5635e686359549f8bfa))
+
+# [2025.7.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.6.0...v2025.7.0) (2025-03-10)
+
+
+### Bug Fixes
+
+* remove unintended whitespace from cannabis-license-tab1.json ([c768e36](https://github.com/newjersey/navigator.business.nj.gov/commit/c768e36a04756a258967d654cf4318fdaa44b746))
+
+
+### Features
+
+* [[#188960391](https://github.com/newjersey/navigator.business.nj.gov/issues/188960391) | AB[#13170](https://github.com/newjersey/navigator.business.nj.gov/issues/13170)] add survey link behind a feature flag on formation success ([edf4d10](https://github.com/newjersey/navigator.business.nj.gov/commit/edf4d10d4304c4172b9d22fde292019e4768ecb3))
+
+# [2025.6.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.5.0...v2025.6.0) (2025-03-07)
+
+
+### Bug Fixes
+
+* [AB[#12799](https://github.com/newjersey/navigator.business.nj.gov/issues/12799)] update query to use current version dynamically ([b3b3c51](https://github.com/newjersey/navigator.business.nj.gov/commit/b3b3c516af6dfd9eba901a74d4cd8964b6280679))
+* add retry to first cypress test as workaround to race condition causing a failure ([d557f09](https://github.com/newjersey/navigator.business.nj.gov/commit/d557f09bca0bf20b4e9301f9f509230dadd249e9))
+* align add-on name with file anem for community-rtk-survey ([791bd97](https://github.com/newjersey/navigator.business.nj.gov/commit/791bd97b824c17b3396d533e4afdb9547f09ad16))
+* **deps:** update dependency remove-markdown to v0.6.0 ([5d55d95](https://github.com/newjersey/navigator.business.nj.gov/commit/5d55d95e0b84d8c87ab3dbe82ccfe1144f23d029))
+* filter out domestic employers for auto-tax-filing e2e tests ([779ac4b](https://github.com/newjersey/navigator.business.nj.gov/commit/779ac4b5be2f2f13d5e89fe02d9bdd6320081f1e))
+* remove roadmap steps without tasks from roadmap ([7c2a3e6](https://github.com/newjersey/navigator.business.nj.gov/commit/7c2a3e6386bcb57b150ae77d1da4f6d736f5c18a))
+* remove the pending license task for easier testing ([de8fe44](https://github.com/newjersey/navigator.business.nj.gov/commit/de8fe44ec09b9c26e3f6f0c69f07f700637c290c))
+
+
+### Features
+
+* [[#188814053](https://github.com/newjersey/navigator.business.nj.gov/issues/188814053)] add out of state pharmacy license task ([6d226e6](https://github.com/newjersey/navigator.business.nj.gov/commit/6d226e634536ed8d5733869a4fea3d019336e30c))
+* [[#188814053](https://github.com/newjersey/navigator.business.nj.gov/issues/188814053)] add out of state pharmacy license task ([64125de](https://github.com/newjersey/navigator.business.nj.gov/commit/64125deb354c06a0299b84db9ad6ff81c96c9521))
+* [[#188924188](https://github.com/newjersey/navigator.business.nj.gov/issues/188924188)] set options_length: 500 for all relation widgets in the CMS ([e73a6dc](https://github.com/newjersey/navigator.business.nj.gov/commit/e73a6dc3737a0c0e055198cb299726e66d102015))
+
+
+### Reverts
+
+* Revert "feat: [#188778935] consolidate AWS resources to two environments" ([7475f5f](https://github.com/newjersey/navigator.business.nj.gov/commit/7475f5fdd9d40dce8958822807bacde80a77d856)), closes [#188778935](https://github.com/newjersey/navigator.business.nj.gov/issues/188778935)
+
 # [2025.5.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2025.4.0...v2025.5.0) (2025-02-18)
 
 ### Bug Fixes

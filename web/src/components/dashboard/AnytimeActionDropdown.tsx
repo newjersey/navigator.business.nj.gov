@@ -7,22 +7,38 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { AnytimeActionLicenseReinstatement, AnytimeActionLink, AnytimeActionTask } from "@/lib/types/types";
+import { AnytimeActionLicenseReinstatement, AnytimeActionTask } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { Autocomplete, TextField, useMediaQuery } from "@mui/material";
+import { orderBy } from "lodash";
 import { useRouter } from "next/compat/router";
-import { ChangeEvent, type ReactElement, useState } from "react";
+import { ChangeEvent, type ReactElement, ReactNode, useState } from "react";
 
 interface Props {
-  anytimeActionLicensesTasks: AnytimeActionTask[];
-  anytimeActionAdminTasks: AnytimeActionTask[];
-  anytimeActionReinstatementsTasks: AnytimeActionTask[];
-  anytimeActionLinks: AnytimeActionLink[];
+  anytimeActionTasks: AnytimeActionTask[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
 }
 
-type AnytimeAction = AnytimeActionTask | AnytimeActionLink | AnytimeActionLicenseReinstatement;
-type AnytimeActionWithTypeAndCategory = AnytimeAction & { type: string; category: string };
+type AnytimeAction = AnytimeActionTask | AnytimeActionLicenseReinstatement;
+type AnytimeActionWithTypeAndCategory = AnytimeAction & { type: string; category: string[] };
+
+const getBoldedTextComponent = (searchValue: string, textToBold: string): ReactNode => {
+  const matches = textToBold.toLowerCase().indexOf(searchValue.toLowerCase());
+  if (matches >= 0) {
+    const beforeMatch = textToBold.slice(0, matches);
+    const match = textToBold.slice(matches, matches + searchValue.length);
+    const afterMatch = textToBold.slice(matches + searchValue.length);
+
+    return (
+      <>
+        {beforeMatch}
+        <span className="text-bold">{match}</span>
+        {afterMatch}
+      </>
+    );
+  }
+  return <>{textToBold}</>;
+};
 
 export const AnytimeActionDropdown = (props: Props): ReactElement => {
   const { Config } = useConfig();
@@ -35,126 +51,60 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
   const industryId = business?.profileData.industryId;
   const sectorId = business?.profileData.sectorId;
 
-  const alphabetizeByName = (
-    anytimeActions: AnytimeActionWithTypeAndCategory[]
-  ): AnytimeActionWithTypeAndCategory[] => {
-    return anytimeActions.sort((a, b) => {
-      if (a.name < b.name) {
-        return -1;
-      }
-      if (a.name > b.name) {
-        return 1;
-      }
-      return 0;
-    });
-  };
-
-  const reverseAlphabetizeByCategory = (
-    anytimeActions: AnytimeActionWithTypeAndCategory[]
-  ): AnytimeActionWithTypeAndCategory[] => {
-    return anytimeActions.sort((a, b) => {
-      if (a.category < b.category) {
-        return 1;
-      }
-      if (a.category > b.category) {
-        return -1;
-      }
-      return 0;
-    });
-  };
-
   const getApplicableAnytimeActions = (): AnytimeActionWithTypeAndCategory[] => {
-    const anytimeActionLinkWithType = props.anytimeActionLinks
-      .filter((action) => findMatch(action))
-      .map((action) => {
-        return {
-          ...action,
-          type: "link",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryAdmin,
-        };
-      });
-
-    const anytimeActionAdminTaskWithType = props.anytimeActionAdminTasks
+    let anytimeActionTasksWithType = props.anytimeActionTasks
       .filter((action) => findMatch(action))
       .map((action) => {
         return {
           ...action,
           type: "task",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryAdmin,
+          category: action.category,
         };
       });
+    anytimeActionTasksWithType = orderBy(anytimeActionTasksWithType, ["name"]);
 
-    const anytimeActionAdminOrLink = [...anytimeActionLinkWithType, ...anytimeActionAdminTaskWithType];
-    alphabetizeByName(anytimeActionAdminOrLink);
-
-    const anytimeActionLicensesTaskWithType = props.anytimeActionLicensesTasks
-      .filter((action) => findMatch(action))
-      .map((action) => {
-        return {
-          ...action,
-          type: "task",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryLicenses,
-        };
-      });
-
-    alphabetizeByName(anytimeActionLicensesTaskWithType);
-
-    const anytimeActionLicenseReinstatementsWithType = props.anytimeActionLicenseReinstatements
+    let anytimeActionLicenseReinstatementsWithType = props.anytimeActionLicenseReinstatements
       .filter((action) => licenseReinstatementMatch(action))
       .map((action) => {
         return {
           ...action,
           type: "license-reinstatement",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryReinstatements,
+          category: ["Reactivate My Expired Permit, License or Registration"],
         };
       });
+    anytimeActionLicenseReinstatementsWithType = orderBy(anytimeActionLicenseReinstatementsWithType, [
+      "name",
+    ]);
 
-    const anytimeActionReinstatementsWithType = props.anytimeActionReinstatementsTasks
-      .filter((action) => findMatch(action))
-      .map((action) => {
-        return {
-          ...action,
-          type: "task",
-          category: Config.dashboardAnytimeActionDefaults.anytimeActionDropdownCategoryReinstatements,
-        };
-      });
-
-    const anytimeActionAllReinstatments = [
-      ...anytimeActionReinstatementsWithType,
-      ...anytimeActionLicenseReinstatementsWithType,
-    ];
-
-    alphabetizeByName(anytimeActionAllReinstatments);
-
-    const applicableAnytimeActions: AnytimeActionWithTypeAndCategory[] = [];
-
-    applicableAnytimeActions.push(...anytimeActionLicensesTaskWithType);
-    applicableAnytimeActions.push(...anytimeActionAdminOrLink);
-    applicableAnytimeActions.push(...anytimeActionAllReinstatments);
-
-    reverseAlphabetizeByCategory(applicableAnytimeActions);
+    let applicableAnytimeActions: AnytimeActionWithTypeAndCategory[] = [];
+    applicableAnytimeActions.push(...anytimeActionTasksWithType);
+    applicableAnytimeActions.push(...anytimeActionLicenseReinstatementsWithType);
+    applicableAnytimeActions = orderBy(applicableAnytimeActions, ["category"]);
 
     return applicableAnytimeActions;
   };
 
-  const findMatch = (action: AnytimeActionTask | AnytimeActionLink): boolean => {
+  const findMatch = (action: AnytimeActionTask): boolean => {
+    if ("category" in action && action.category[0] === "Only Show in Subtask") return false;
     if (action.applyToAllUsers) return true;
     if (action.industryIds && industryId && action.industryIds.includes(industryId)) return true;
     if (isAnytimeActionFromNonEssentialQuestions(action)) return true;
-
     return !!(action.sectorIds && sectorId && action.sectorIds.includes(sectorId));
   };
 
-  const isAnytimeActionFromNonEssentialQuestions = (
-    action: AnytimeActionTask | AnytimeActionLink
-  ): boolean => {
+  const isAnytimeActionFromNonEssentialQuestions = (action: AnytimeActionTask): boolean => {
     switch (action.filename) {
       case "carnival-ride-supplemental-modification":
-        return !!business?.profileData.carnivalRideOwningBusiness;
+        return (
+          !!business?.profileData.carnivalRideOwningBusiness ||
+          !!business?.profileData.nonEssentialRadioAnswers["carnival-ride-permitting"]
+        );
       case "operating-carnival-fire-permit":
         return (
           !!business?.profileData.carnivalRideOwningBusiness ||
-          !!business?.profileData.travelingCircusOrCarnivalOwningBusiness
+          !!business?.profileData.travelingCircusOrCarnivalOwningBusiness ||
+          !!business?.profileData.nonEssentialRadioAnswers["carnival-ride-permitting"] ||
+          !!business?.profileData.nonEssentialRadioAnswers["carnival-fire-licenses"]
         );
       case "vacant-building-fire-permit":
         return !!business?.profileData.vacantPropertyOwner;
@@ -220,7 +170,7 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
           isOptionEqualToValue={(option, value) => {
             return option.name === value.name && option.filename === value.filename;
           }}
-          groupBy={(option) => option.category}
+          groupBy={(option) => option.category[0]} // Currently just showing the first category
           renderGroup={(params) => (
             <li key={params.key} className="anytime-action-header-group">
               <div className="text-secondary-vivid text-bold padding-left-2 ">{params.group}</div>
@@ -228,31 +178,30 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
             </li>
           )}
           options={getApplicableAnytimeActions()}
+          filterOptions={(options, state) => {
+            const searchValue = state.inputValue.toLowerCase();
+            if (searchValue === "") {
+              return options;
+            }
+            return options.filter((option) => {
+              return (
+                option.name.toLowerCase().includes(searchValue) ||
+                option.description?.toLowerCase().includes(searchValue) ||
+                option.searchMetaDataMatch?.toLowerCase().includes(searchValue)
+              );
+            });
+          }}
           renderOption={(
             _props,
             option: AnytimeActionWithTypeAndCategory,
             { selected, inputValue }
           ): ReactElement => {
-            let textComponent = <>{option.name}</>;
-
-            const matches = option.name.toLowerCase().indexOf(inputValue.toLowerCase());
-            if (matches >= 0) {
-              const beforeMatch = option.name.slice(0, matches);
-              const match = option.name.slice(matches, matches + inputValue.length);
-              const afterMatch = option.name.slice(matches + inputValue.length);
-
-              textComponent = (
-                <>
-                  {beforeMatch}
-                  <span className="text-bold">{match}</span>
-                  {afterMatch}
-                </>
-              );
-            }
+            const titleText = getBoldedTextComponent(inputValue, option.name);
+            const descriptionText = getBoldedTextComponent(inputValue, option.description ?? "");
 
             const newClassName = `${_props.className} anytime-action-dropdown-option ${
               selected ? "bg-accent-cool-lightest" : ""
-            } `;
+            } fdc`;
 
             return (
               <li
@@ -262,9 +211,9 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
                 key={option.filename}
               >
                 {selected ? (
-                  <MenuOptionSelected>{textComponent}</MenuOptionSelected>
+                  <MenuOptionSelected secondaryText={descriptionText}>{titleText}</MenuOptionSelected>
                 ) : (
-                  <MenuOptionUnselected>{textComponent}</MenuOptionUnselected>
+                  <MenuOptionUnselected secondaryText={descriptionText}>{titleText}</MenuOptionUnselected>
                 )}
               </li>
             );
@@ -302,9 +251,6 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
                       (selectedAnytimeAction as AnytimeActionLicenseReinstatement).urlSlug
                     }`
                   );
-                }
-                if (selectedAnytimeAction?.type === "link") {
-                  router.push((selectedAnytimeAction as AnytimeActionLink).externalRoute);
                 }
               }}
             >

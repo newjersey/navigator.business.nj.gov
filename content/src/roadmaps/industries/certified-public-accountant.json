@@ -54,7 +54,9 @@
     }
   ],
   "name": "Accounting, Bookkeeping, and Tax Preparation",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "certified-public-accountant",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

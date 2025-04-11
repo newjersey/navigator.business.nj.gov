@@ -1,10 +1,10 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
-import { FormContextFieldProps } from "@/contexts/formContext";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { FormContextFieldProps } from "@/lib/types/types";
 import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 import { FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { orderBy } from "lodash";
@@ -20,7 +20,7 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
 
   const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     "legalStructureId",
-    ProfileFormContext,
+    DataFormErrorMapContext,
     props.errorTypes
   );
 

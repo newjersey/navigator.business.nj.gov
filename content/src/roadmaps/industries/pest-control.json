@@ -44,7 +44,7 @@
     },
     {
       "step": 4,
-      "weight": 1,
+      "weight": 50,
       "task": "search-licenses"
     },
     {
@@ -62,7 +62,10 @@
     }
   ],
   "name": "Pest Control",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "pest-pesticide-dealer-licensing",
+    "business-vehicle-title-reg"
+  ],
   "displayname": "pest-control",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

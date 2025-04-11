@@ -1440,7 +1440,9 @@ describe("<BusinessFormationPaginator />", () => {
             if (formationStepName === "Billing") await page.stepperClickToBillingStep();
             expect(screen.getByTestId("alert-error")).toBeInTheDocument();
             page.fillText(fieldLabel as string as string, newTextInput as string);
-            expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
+            await waitFor(() => {
+              expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
+            });
             expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
             expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
               "COMPLETE-ACTIVE"
@@ -1791,7 +1793,7 @@ describe("<BusinessFormationPaginator />", () => {
             },
           ];
           const foreignIntlMainAddressZipCode: MockApiErrorJestArray = [
-            "foreignUsMainAddressZipCode",
+            "foreignIntlMainAddressZipCode",
             {
               formationFormData: generateFormationFormData(
                 {

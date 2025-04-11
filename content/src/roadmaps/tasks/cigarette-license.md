@@ -58,7 +58,7 @@ summaryDescriptionMd: >-
   &nbsp;
 
 
-  If you are a manufacturer (not a manufacturer representative), you must [submit an application with the NJ Division of Taxation] (https://www.nj.gov/treasury/taxation/prnttobacco.shtml).
+  If you are a manufacturer (not a manufacturer representative), contact the Cigarette Tax Hotline at (609) 633-9000.
 urlSlug: cigarette-license
 displayname: cigarette-license
 name: Apply for Your Cigarette License
@@ -79,6 +79,7 @@ webflowType: business-license
 * 12-digit `New Jersey tax ID number|tax-id` 
 * Business address
 *  `Business type/structure|business-structure-learn-more`
+* Date cigarette sales will begin, if applicable
 * Applicable fees paid
 ### Owner
 * Name, address, and email of each owner

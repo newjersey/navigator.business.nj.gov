@@ -6,6 +6,7 @@ import {
   InputFile,
   LicenseSearchNameAndAddress,
   NameAvailability,
+  TaxClearanceCertificateResponse,
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { ElevatorSafetyRegistrationSummary } from "@businessnjgovnavigator/shared/elevatorSafety";
@@ -72,6 +73,10 @@ export const postBusinessFormation = (
 
 export const getCompletedFiling = (): Promise<UserData> => {
   return get(`/completed-filing`);
+};
+
+export const postTaxClearanceCertificate = (userData: UserData): Promise<TaxClearanceCertificateResponse> => {
+  return post(`/postTaxClearanceCertificate`, userData);
 };
 
 export const postTaxFilingsOnboarding = (props: {

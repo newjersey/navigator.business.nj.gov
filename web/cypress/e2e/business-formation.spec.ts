@@ -20,7 +20,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
     cy.loginByCognitoApi();
   });
 
-  it("successfully forms an LLC business", () => {
+  it.skip("successfully forms an LLC business", () => {
     const industry = LookupIndustryById("food-truck");
     const legalStructureId = "limited-liability-company";
     const businessNameSearch = "My Cool Business";

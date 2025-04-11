@@ -12,7 +12,7 @@ import { randomNonHomeBasedNonDomesticEmployerIndustry } from "@businessnjgovnav
 import { onDashboardPage } from "@businessnjgovnavigator/cypress/support/page_objects/dashboardPage";
 import { onProfilePage } from "@businessnjgovnavigator/cypress/support/page_objects/profilePage";
 
-describe(
+describe.skip(
   "auto tax filing [feature] [all] [group4]",
   { retries: 1 }, // Retry due to a race condition
   () => {

@@ -44,7 +44,9 @@
     }
   ],
   "name": "Childcare Center",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "daycare",
   "industryOnboardingQuestions": {
     "canBeReseller": true,

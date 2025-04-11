@@ -229,7 +229,7 @@ describe("profile - starting business", () => {
         expect(userDataWasNotUpdated()).toBe(true);
       });
 
-      it("allows user to delete formation date and sets task progress to IN_PROGRESS", async () => {
+      it("allows user to delete formation date and sets task progress to TO_DO", async () => {
         const initialBusiness = generateBusinessForProfile({
           profileData: generateProfileData({
             businessPersona: "STARTING",
@@ -247,7 +247,7 @@ describe("profile - starting business", () => {
         );
 
         await waitFor(() => {
-          expect(currentBusiness().taskProgress[formationTaskId]).toEqual("IN_PROGRESS");
+          expect(currentBusiness().taskProgress[formationTaskId]).toEqual("TO_DO");
         });
         expect(currentBusiness().profileData.dateOfFormation).toEqual(undefined);
       });
@@ -344,7 +344,7 @@ describe("profile - starting business", () => {
       },
       taskProgress: {
         [einTaskId]: "COMPLETED",
-        [naicsCodeTaskId]: "NOT_STARTED",
+        [naicsCodeTaskId]: "TO_DO",
       },
       taskItemChecklist: {},
     });
@@ -975,7 +975,7 @@ describe("profile - starting business", () => {
           },
           taskProgress: {
             ...business.taskProgress,
-            [naicsCodeTaskId]: "NOT_STARTED",
+            [naicsCodeTaskId]: "TO_DO",
           },
           taskItemChecklist: {},
         })
@@ -1100,7 +1100,7 @@ describe("profile - starting business", () => {
     clickSave();
 
     await waitFor(() => {
-      expect(currentBusiness().taskProgress[naicsCodeTaskId]).toEqual("NOT_STARTED");
+      expect(currentBusiness().taskProgress[naicsCodeTaskId]).toEqual("TO_DO");
     });
     expect(currentBusiness().profileData.naicsCode).toEqual("");
   });

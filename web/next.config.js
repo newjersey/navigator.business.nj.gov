@@ -6,6 +6,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 module.exports = withBundleAnalyzer({
+  productionBrowserSourceMaps: ["testing", "dev"].includes(process.env.STAGE),
   env: {
     API_BASE_URL: process.env.API_BASE_URL,
     AUTH_DOMAIN: process.env.AUTH_DOMAIN,
@@ -13,6 +14,8 @@ module.exports = withBundleAnalyzer({
     GOOGLE_TAG_MANAGER_ID: process.env.GOOGLE_TAG_MANAGER_ID,
     FEATURE_BUSINESS_FLP: process.env.FEATURE_BUSINESS_FLP ?? "false",
     FEATURE_LOGIN_PAGE: process.env.FEATURE_LOGIN_PAGE ?? "false",
+    FEATURE_TAX_CLEARANCE_CERTIFICATE: process.env.FEATURE_TAX_CLEARANCE_CERTIFICATE ?? "false",
+    FEATURE_FORMATION_SURVEY: process.env.FEATURE_FORMATION_SURVEY ?? "false",
     FEATURE_LANDING_PAGE_REDIRECT: process.env.FEATURE_LANDING_PAGE_REDIRECT ?? "false",
     ALTERNATE_LANDING_PAGE_URL: process.env.ALTERNATE_LANDING_PAGE_URL ?? "",
     COGNITO_WEB_CLIENT_ID: process.env.COGNITO_WEB_CLIENT_ID,

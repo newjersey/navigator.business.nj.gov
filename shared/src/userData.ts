@@ -4,6 +4,7 @@ import { EnvironmentData } from "./environment";
 import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";
 import { createEmptyProfileData, ProfileData } from "./profileData";
+import { TaxClearanceCertificateData } from "./taxClearanceCertificate";
 import { TaxFilingData } from "./taxFiling";
 
 export interface UserData {
@@ -27,6 +28,7 @@ export interface Business {
   readonly licenseData: LicenseData | undefined;
   readonly preferences: Preferences;
   readonly taxFilingData: TaxFilingData;
+  readonly taxClearanceCertificateData: TaxClearanceCertificateData | undefined;
   readonly formationData: FormationData;
   readonly environmentData: EnvironmentData | undefined;
   readonly versionWhenCreated: number;
@@ -34,7 +36,7 @@ export interface Business {
   readonly userId: string;
 }
 
-export const CURRENT_VERSION = 155;
+export const CURRENT_VERSION = 159;
 
 export const createEmptyBusiness = ({
   userId,
@@ -70,6 +72,7 @@ export const createEmptyBusiness = ({
       registeredISO: undefined,
       filings: [],
     },
+    taxClearanceCertificateData: undefined,
     formationData: {
       formationFormData: createEmptyFormationFormData(),
       formationResponse: undefined,
@@ -104,7 +107,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
 export const sectionNames = ["PLAN", "START", "DOMESTIC_EMPLOYER_SECTION"] as const;
 export type SectionType = (typeof sectionNames)[number];
 
-export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+export type TaskProgress = "TO_DO" | "COMPLETED";
 
 export interface Preferences {
   roadmapOpenSections: SectionType[];

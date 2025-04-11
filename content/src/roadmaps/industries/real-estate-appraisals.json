@@ -53,7 +53,10 @@
     }
   ],
   "name": "Real Estate Appraisals",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "business-vehicle-title-reg"
+  ],
   "displayname": "real-estate-appraisals",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

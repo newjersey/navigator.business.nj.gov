@@ -10,7 +10,7 @@ import { addNewsletterBatch } from "src/domain/newsletter/addNewsletterBatch";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 
 export default async function handler(): Promise<void> {
-  const dataLogger = LogWriter(`aws/${STAGE}`, "DataMigrationLogs");
+  const dataLogger = LogWriter(`NavigatorDBClient/${STAGE}`, "DataMigrationLogs");
   const dynamoDb = createDynamoDbClient(IS_OFFLINE, IS_DOCKER, DYNAMO_OFFLINE_PORT);
   const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE, dataLogger);
   const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");

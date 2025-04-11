@@ -3,7 +3,6 @@ import { getPageHelper } from "@/components/tasks/business-formation/contacts/te
 
 import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
-import { generateStateItem } from "@/test/factories";
 import {
   FormationPageHelpers,
   setDesktopScreen,
@@ -16,6 +15,7 @@ import {
   generateFormationMember,
   generateFormationUSAddress,
   generateMunicipality,
+  generateUnitedStatesStateDropdownOption,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
@@ -180,7 +180,7 @@ describe("Formation - Members Field", () => {
             addressLine1: Array(36).fill("A").join(""),
             addressLine2: Array(36).fill("A").join(""),
             addressCity: Array(31).fill("A").join(""),
-            addressState: generateStateItem(),
+            addressState: generateUnitedStatesStateDropdownOption({}),
             addressZipCode: "08100",
           });
           page.clickAddressSubmit();
@@ -202,7 +202,7 @@ describe("Formation - Members Field", () => {
             addressLine1: Array(35).fill("A").join(""),
             addressLine2: Array(35).fill("A").join(""),
             addressCity: Array(30).fill("A").join(""),
-            addressState: generateStateItem(),
+            addressState: generateUnitedStatesStateDropdownOption({}),
             addressZipCode: "08100",
           });
           expect(screen.queryByText(maxLengthMessage("addressLine1", "35"))).not.toBeInTheDocument();

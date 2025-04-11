@@ -23,16 +23,13 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { LegalStructureRadio } from "@/components/tasks/business-structure/LegalStructureRadio";
 import { ConfigContext } from "@/contexts/configContext";
-import {
-  createProfileFieldErrorMap,
-  ProfileContentField,
-  ProfileFormContext,
-} from "@/contexts/profileFormContext";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
+import { ProfileContentField } from "@/lib/types/types";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/";
 import {
   IndustrySpecificData,
@@ -44,10 +41,10 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
-  const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
+  const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <ProfileFormContext.Provider value={formContextState}>
+      <DataFormErrorMapContext.Provider value={formContextState}>
         <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
           <BusinessPersonaQuestion />
           <hr className="margin-y-4" />
@@ -193,7 +190,7 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
             );
           })}
         </div>
-      </ProfileFormContext.Provider>
+      </DataFormErrorMapContext.Provider>
     </ConfigContext.Provider>
   );
 };

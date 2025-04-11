@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
+import { DocumentTile } from "@/components/DocumentTile";
 import { Heading } from "@/components/njwds-extended/Heading";
-import { FormationSuccessDocument } from "@/components/tasks/business-formation/success/FormationSuccessDocument";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
 import analytics from "@/lib/utils/analytics";
@@ -15,6 +15,7 @@ interface Props {
 export const FormationSuccessPage = (props: Props): ReactElement => {
   const { documents } = useDocuments();
   const { Config } = useConfig();
+  const showSurveyLink = process.env.FEATURE_FORMATION_SURVEY === "true";
 
   useMountEffect(() => {
     analytics.event.business_formation_success_screen.arrive.arrive_from_NIC_formation_processing();
@@ -30,42 +31,57 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
         <p className="text-center">{Config.formation.successPage.subheader}</p>
         <p className="text-center">{Config.formation.successPage.body}</p>
       </div>
-
-      <div className="fdr fww">
-        <FormationSuccessDocument
-          label={Config.formation.successPage.formationDocLabel}
-          downloadLink={documents?.formationDoc ?? "#"}
-          icon="formation-icon-blue"
-        />
+      <div className="flex flex-wrap">
+        <div className="flex-half-tablet">
+          <div className="margin-1">
+            <DocumentTile
+              label={Config.formation.successPage.formationDocLabel}
+              icon="formation-icon-blue"
+              downloadLink={documents?.formationDoc ?? "#"}
+            />
+          </div>
+        </div>
         {props.business.profileData.documents.standingDoc && (
-          <FormationSuccessDocument
-            label={Config.formation.successPage.standingDocLabel}
-            downloadLink={documents?.standingDoc ?? "#"}
-            icon="certificate-icon"
-          />
+          <div className="flex-half-tablet">
+            <div className="margin-1">
+              <DocumentTile
+                label={Config.formation.successPage.standingDocLabel}
+                downloadLink={documents?.standingDoc ?? "#"}
+                icon="certificate-icon"
+              />
+            </div>
+          </div>
         )}
         {props.business.profileData.documents.certifiedDoc && (
-          <FormationSuccessDocument
-            label={Config.formation.successPage.certifiedDocLabel}
-            downloadLink={documents?.certifiedDoc ?? "#"}
-            icon="formation-icon-purple"
-          />
+          <div className="flex-half-tablet">
+            <div className="margin-1">
+              <DocumentTile
+                label={Config.formation.successPage.certifiedDocLabel}
+                downloadLink={documents?.certifiedDoc ?? "#"}
+                icon="formation-icon-purple"
+              />
+            </div>
+          </div>
         )}
-        <FormationSuccessDocument
-          label={Config.formation.successPage.entityIdLabel}
-          downloadLink=""
-          subLabel={props.business.formationData.getFilingResponse?.entityId}
-          icon="id-icon"
-        />
+        <div className="flex-half-tablet">
+          <div className="margin-1">
+            <DocumentTile
+              label={Config.formation.successPage.entityIdLabel}
+              downloadLink=""
+              subLabel={props.business.formationData.getFilingResponse?.entityId}
+              icon="id-icon"
+            />
+          </div>
+        </div>
       </div>
 
-      <p className="text-center font-body-2xs">
+      <p className="text-center font-body-2xs margin-bottom-2">
         {Config.formation.successPage.confirmationNumberLabel}
         <span className="margin-left-05">
           {props.business.formationData.getFilingResponse?.confirmationNumber}
         </span>
       </p>
-      <div className="text-center">
+      <div className="text-center margin-bottom-2">
         <Content
           onClick={
             analytics.event.business_formation_success_amendments_external_link.click
@@ -75,6 +91,11 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
           {Config.formation.successPage.amendmentText}
         </Content>
       </div>
+      {showSurveyLink && (
+        <div className="text-center" data-testid="survey-link">
+          <Content>{Config.formation.successPage.surveyLinkText}</Content>
+        </div>
+      )}
     </>
   );
 };

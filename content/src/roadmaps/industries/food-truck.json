@@ -55,18 +55,36 @@
     },
     {
       "step": 3,
+      "weight": 3,
+      "task": "sign-lease-food-truck"
+    },
+    {
+      "step": 3,
       "weight": 4,
+      "task": "transportation-entity-id",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 5,
+      "task": "mvc-title-task",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 6,
+      "task": "mvc-registration-task",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 7,
       "task": "get-insurance"
     },
     {
       "step": 4,
       "weight": 100,
       "licenseTask": "food-safety-course"
-    },
-    {
-      "step": 3,
-      "weight": 3,
-      "task": "sign-lease-food-truck"
     },
     {
       "step": 4,
@@ -81,7 +99,9 @@
     }
   ],
   "name": "Food Truck",
-  "nonEssentialQuestionsIds": ["weights-measures"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
   "displayname": "food-truck",
   "industryOnboardingQuestions": {
     "canBeReseller": true

@@ -67,7 +67,9 @@
     }
   ],
   "name": "Architecture and Urban Planning ",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "architecture",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true

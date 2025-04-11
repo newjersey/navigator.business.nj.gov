@@ -228,6 +228,8 @@ describe("task page", () => {
       "health-club-registration",
       "home-health-aide-license",
       "license-massage-therapy",
+      "moving-company-license",
+      "oos-pharmacy-registration",
       "pharmacy-license",
       "register-accounting-firm",
       "register-home-contractor",
@@ -246,6 +248,8 @@ describe("task page", () => {
 
     it.each(mockTaskIdsWithLicenseSearch)("loads License task screen for %s", (licenseId) => {
       renderPage(generateTask({ id: licenseId }), generateBusiness({ licenseData: undefined }));
+      // TODO: Consider a better way to affirm that this is the correct task screen instead of just looking for
+      // "cta-secondary" id to be in the document.
       expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
     });
   });
@@ -427,7 +431,7 @@ describe("task page", () => {
           profileData: generateProfileData({
             operatingPhase,
           }),
-          taskProgress: { [businessStructureTaskId]: "NOT_STARTED" },
+          taskProgress: { [businessStructureTaskId]: "TO_DO" },
         })
       );
       expect(screen.queryByTestId("nextUrlSlugButton")).not.toBeInTheDocument();

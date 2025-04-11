@@ -13,7 +13,7 @@ describe("modify business page", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockRouter({});
+    useMockRouter({ isReady: true });
     useMockBusiness({});
   });
 

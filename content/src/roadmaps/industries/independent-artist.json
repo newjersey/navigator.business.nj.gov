@@ -47,7 +47,8 @@
     "carnival-fire-licenses",
     "carnival-ride-permitting",
     "ticket-broker-resell",
-    "entertainment-agency-register"
+    "entertainment-agency-register",
+    "business-vehicle-title-reg"
   ],
   "displayname": "independent-artist",
   "industryOnboardingQuestions": {

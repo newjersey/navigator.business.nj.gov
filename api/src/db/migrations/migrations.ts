@@ -155,6 +155,10 @@ import { migrate_v151_to_v152 } from "@db/migrations/v152_add_land_to_environmen
 import { migrate_v152_to_v153 } from "@db/migrations/v153_add_air_to_environment_data";
 import { migrate_v153_to_v154 } from "@db/migrations/v154_add_business_operating_length_and_nonprofit_status";
 import { migrate_v154_to_v155 } from "@db/migrations/v155_add_user_id_and_version_to_business";
+import { migrate_v155_to_v156 } from "@db/migrations/v156_remove_in_progress_task_status";
+import { migrate_v156_to_v157 } from "@db/migrations/v157_add_tax_clearance_data";
+import { migrate_v157_to_v158 } from "@db/migrations/v158_login_email_to_lowercase";
+import { migrate_v158_to_v159 } from "@db/migrations/v159_remove_entity_id";
 
 export type MigrationFunction = (data: any) => any;
 
@@ -314,6 +318,10 @@ export const Migrations: MigrationFunction[] = [
   migrate_v152_to_v153,
   migrate_v153_to_v154,
   migrate_v154_to_v155,
+  migrate_v155_to_v156,
+  migrate_v156_to_v157,
+  migrate_v157_to_v158,
+  migrate_v158_to_v159,
 ];
 
-export { generatev155UserData as CURRENT_GENERATOR } from "@db/migrations/v155_add_user_id_and_version_to_business";
+export { generatev159UserData as CURRENT_GENERATOR } from "@db/migrations/v159_remove_entity_id";

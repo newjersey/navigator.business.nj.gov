@@ -1,9 +1,7 @@
 {
-  "displayname": "school-bus",
   "naicsCodes": "485999, 485210, 485310, 485320, 485410, 485510",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": ["weights-measures"],
   "roadmapSteps": [
     {
       "step": 1,
@@ -40,10 +38,29 @@
       "task": "bank-account"
     },
     {
-      "weight": 15,
       "step": 3,
-      "licenseTask": "school-bus-license",
+      "weight": 13,
+      "task": "transportation-entity-id",
       "required": true
+    },
+    {
+      "step": 3,
+      "weight": 14,
+      "task": "mvc-title-task",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "mvc-registration-task",
+      "required": true
+    },
+    {
+      "weight": 16,
+      "step": 3,
+      "licenseTask": "",
+      "required": true,
+      "task": "trucking-cdl"
     },
     {
       "step": 3,
@@ -61,9 +78,18 @@
       "step": 4,
       "weight": 10,
       "task": "trucking-parking"
+    },
+    {
+      "step": 4,
+      "weight": 90,
+      "task": "community-right-to-know-survey"
     }
   ],
   "name": "School Bus",
+  "nonEssentialQuestionsIds": [
+    "weights-measures"
+  ],
+  "displayname": "school-bus",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "isTransportation": true

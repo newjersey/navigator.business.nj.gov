@@ -44,7 +44,9 @@
     }
   ],
   "name": "Photography",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "photography",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

@@ -103,7 +103,7 @@ describe("v138_multi_license_support", () => {
       licenseName: "Ticket Brokers",
       taskId: "ticket-broker-reseller-registration",
     },
-  ])("correctly updates the license data by saving license details", (args) => {
+  ])("correctly updates the license data by saving license details for $industryId", (args) => {
     const initialBusiness = generatev137Business({
       taskProgress: initialTaskProgress,
       licenseData: initialLicenseData,
@@ -147,7 +147,7 @@ describe("v138_multi_license_support", () => {
       taskId: "landscape-architect-license",
     },
   ])(
-    "correctly updates the license data by removing license detail for tasks where license search is removed",
+    "correctly updates the license data for $industryId by removing license detail for tasks where license search is removed",
     (args) => {
       const initialBusiness = generatev137Business({
         taskProgress: initialTaskProgress,

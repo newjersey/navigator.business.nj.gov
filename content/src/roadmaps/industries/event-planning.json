@@ -44,7 +44,9 @@
     }
   ],
   "name": "Event Planning",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "business-vehicle-title-reg"
+  ],
   "displayname": "event-planning",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

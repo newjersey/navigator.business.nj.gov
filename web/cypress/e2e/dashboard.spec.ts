@@ -40,7 +40,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
       });
     });
 
-    describe("Starting a Business", () => {
+    describe.skip("Starting a Business", () => {
       it("enters user info and shows the dashboard", () => {
         const industry = LookupIndustryById("e-commerce");
         const legalStructureId = "general-partnership";

@@ -1,4 +1,5 @@
 ---
+notesMd: ""
 name: Urban Enterprise Zone Manufacturers Energy Sales Tax Exemption
 displayName: uze-energy-sales
 urlSlug: urban-enterprise-zone
@@ -32,6 +33,7 @@ county:
 sector:
   - manufacturing
 publishStageArchive: ""
+minEmployeesRequired: 250
 ---
 
 ## Eligibility

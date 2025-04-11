@@ -29,7 +29,10 @@ certifications: []
 preferenceForOpportunityZone: ""
 county:
   - All
-sector: []
+sector:
+  - waste-management-and-Remediation
+  - construction
+  - real-estate
 publishStageArchive: ""
 ---
 

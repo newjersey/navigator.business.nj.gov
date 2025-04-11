@@ -7,9 +7,10 @@ import { ModalOneButton } from "@/components/ModalOneButton";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -98,19 +99,25 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
       });
       await updateQueue?.update();
       setShouldCloseModal(true);
-      setFilteredFundings(
-        sortFundingsForUser(
-          filterFundings({ fundings: filteredFundings, business: updateQueue?.currentBusiness() }).filter(
-            (it) => {
-              return it.agency?.includes("njeda");
-            }
-          ),
-          updateQueue?.current()
-        )
-      );
+      setFilteredFundings(getFilteredAndSortedFundings());
     } else {
       setShouldShowErrorAlert(true);
     }
+  };
+
+  const getFilteredAndSortedFundings = (): Funding[] => {
+    if (updateQueue?.currentBusiness().profileData.sectorId === "cannabis") {
+      return [];
+    }
+
+    return sortFundingsForUser(
+      filterFundings({ fundings: filteredFundings, business: updateQueue?.currentBusiness() }).filter(
+        (it) => {
+          return it.agency?.includes("njeda");
+        }
+      ),
+      updateQueue?.current()
+    );
   };
 
   const shouldShowEmployeeCountError = (): boolean => {
@@ -121,12 +128,28 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
     return shouldShowErrorAlert && isNonProfit === undefined;
   };
 
-  const { onSubmit, state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
+  const { onSubmit, state: formContextState } = useFormContextHelper(createDataFormErrorMap());
 
   const FundingsHeader = (): ReactElement => {
     return (
-      <div className={"bg-accent-cool-lightest padding-bottom-4 border-bottom border-accent-cool-light"}>
+      <div
+        className={
+          "bg-accent-cool-lightest padding-bottom-4 padding-top-3 border-bottom border-accent-cool-light"
+        }
+      >
         <div className={"margin-left-3ch"}>
+          <div className="desktop:grid-col-6 display-block padding-bottom-3">
+            <UnStyledButton
+              dataTestid={"njeda-logo-button"}
+              isButtonALink={true}
+              ariaLabel={Config.fundingsOnboardingModal.pageHeader.logoAriaText}
+              onClick={() => {
+                router && router.push(Config.fundingsOnboardingModal.pageHeader.logoLink);
+              }}
+            >
+              <img src="/img/njeda-logo.webp" alt="" />
+            </UnStyledButton>
+          </div>
           <Heading
             level={1}
             styleVariant="h1"
@@ -183,7 +206,7 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
   };
 
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFormErrorMapContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -281,12 +304,17 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
             </div>
           </ModalOneButton>
           <FundingsHeader />
+          {filteredFundings.length === 0 && (
+            <Alert variant={"info"} dataTestid={"alert-no-results"}>
+              <Content>{Config.fundingsOnboardingModal.page.noResultsFoundAlertText}</Content>
+            </Alert>
+          )}
           {filteredFundings.map((funding, index) => {
             return fundingEntry(funding, index === 0);
           })}
         </>
       </ProfileDataContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFormErrorMapContext.Provider>
   );
 };
 

@@ -130,7 +130,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
       setStepIndex(LookupStepIndexByName("Review"));
       router.replace({ pathname: `/tasks/${props.task?.urlSlug}` }, undefined, { shallow: true });
     }
-  }, [router, router?.isReady, props.task?.urlSlug]);
+  }, [router, props.task?.urlSlug]);
 
   useEffect(() => {
     const shouldFetchCompletedFiling = (): boolean => {
@@ -169,7 +169,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           });
       }
     })();
-  }, [router?.isReady, updateQueue, router, props.task?.urlSlug, business]);
+  }, [updateQueue, router, props.task?.urlSlug, business]);
 
   if (!props.task) return <></>;
 

@@ -11,7 +11,7 @@ import {
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { WithStatefulProfileFormContext } from "@/test/mock/withStatefulProfileData";
+import { WithStatefulDataFieldFormContext } from "@/test/mock/withStatefulProfileData";
 import {
   WithStatefulUserData,
   currentBusiness,
@@ -42,11 +42,11 @@ const WithStatefulBusiness = ({
   children: ReactNode;
   initialBusiness: Business;
 }): ReactElement => (
-  <WithStatefulProfileFormContext>
+  <WithStatefulDataFieldFormContext>
     <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
       {children}
     </WithStatefulUserData>
-  </WithStatefulProfileFormContext>
+  </WithStatefulDataFieldFormContext>
 );
 
 describe("<TaxTask />", () => {
@@ -118,7 +118,7 @@ describe("<TaxTask />", () => {
     beforeEach(() => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ taxId: "" }),
-        taskProgress: { [taskId]: "NOT_STARTED" },
+        taskProgress: { [taskId]: "TO_DO" },
       });
     });
 
@@ -127,14 +127,14 @@ describe("<TaxTask />", () => {
       expect(screen.getByText(Config.tax.saveButtonText)).toBeInTheDocument();
     });
 
-    it("updates the progress of the task to IN_PROGRESS if there is a pre-existing 9 digit tax id", async () => {
+    it("updates the progress of the task to TO_DO if there is a pre-existing 9 digit tax id", async () => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ taxId: "123456789" }),
         taskProgress: { [taskId]: "COMPLETED" },
       });
       renderPage();
       await waitFor(() => {
-        expect(currentBusiness().taskProgress[taskId]).toEqual("IN_PROGRESS");
+        expect(currentBusiness().taskProgress[taskId]).toEqual("TO_DO");
       });
     });
 
@@ -228,7 +228,7 @@ describe("<TaxTask />", () => {
     beforeEach(() => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ taxId: "" }),
-        taskProgress: { [taskId]: "NOT_STARTED" },
+        taskProgress: { [taskId]: "TO_DO" },
       });
     });
 

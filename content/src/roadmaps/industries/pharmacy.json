@@ -63,11 +63,17 @@
       "step": 4,
       "weight": 12,
       "task": "pharmacy-staff-licenses"
+    },
+    {
+      "step": 4,
+      "weight": 88,
+      "task": "community-right-to-know-survey"
     }
   ],
   "name": "Pharmacy",
   "nonEssentialQuestionsIds": [
-    "weights-measures"
+    "weights-measures",
+    "business-vehicle-title-reg"
   ],
   "displayname": "pharmacy",
   "industryOnboardingQuestions": {},

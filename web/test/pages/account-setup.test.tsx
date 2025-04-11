@@ -58,7 +58,7 @@ const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 describe("Account Setup page", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockRouter({});
+    useMockRouter({ isReady: true });
     setupStatefulUserDataContext();
 
     mockApi.postNewsletter.mockImplementation((request) => {

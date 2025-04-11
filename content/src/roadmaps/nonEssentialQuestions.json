@@ -46,6 +46,16 @@
       "id": "dentist"
     },
     {
+      "id": "special-permit-dentistry",
+      "questionText": "Do you specialize in any area of dentistry, such as orthodontics or oral surgery?",
+      "addOn": "healthcare-dental-specialty"
+    },
+    {
+      "id": "dental-hygienist",
+      "questionText": "Are you a dental hygienist?",
+      "addOn": "healthcare-dental-hygienist"
+    },
+    {
       "id": "freestanding-residential-health-care-license",
       "questionText": "Do you plan to own and/or operate a `free-standing residential health care facility?|residential-health-care-facility`",
       "addOn": "healthcare-freestanding-facility-license"
@@ -104,6 +114,46 @@
       "questionText": "Are you an optometrist?",
       "id": "healthcare-optometrist ",
       "addOn": "healthcare-tpa"
+    },
+    {
+      "questionText": "Will you deliver packages by air (for example by airplane or helicopter)?",
+      "id": "courier-CRTK-survey",
+      "addOn": "community-rtk-survey"
+    },
+    {
+      "questionText": "Will your business fall under [one of these industries](https://www.nj.gov/dep/enforcement/opppc/reports/rtknaics.pdf)?",
+      "id": "other-businesses-CRTK-survey",
+      "addOn": "community-rtk-survey"
+    },
+    {
+      "questionText": "\nWill you sell lawn and garden supplies, flowers, or florists’ supplies?",
+      "id": "lawn-businesses-CRTK-survey",
+      "addOn": "community-rtk-survey"
+    },
+    {
+      "questionText": "Will you do management consulting services (not including manufacturing management, physical distribution, and site location consulting)?",
+      "id": "logistics-CRTK-survey",
+      "addOn": "community-rtk-survey"
+    },
+    {
+      "id": "pest-pesticide-dealer-licensing",
+      "questionText": "Will your business be selling pesticides? ",
+      "addOn": "pest-pesticide-dealer-license"
+    },
+    {
+      "id": "business-vehicle-title-reg",
+      "addOn": "business-vehicle",
+      "questionText": "Do you plan to either own or operate business vehicles in NJ? "
+    },
+    {
+      "id": "retail-pesticide-dealer-licensing",
+      "questionText": "Will your business be selling pesticides? ",
+      "addOn": "retail-pesticide-dealer-license"
+    },
+    {
+      "id": "pesticides-applicator-licensing",
+      "questionText": "Will your business be using pesticides or offering pesticide application services? \n",
+      "addOn": "multi-pest-applicator-license"
     }
   ]
 }

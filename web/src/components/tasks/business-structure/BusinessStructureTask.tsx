@@ -9,8 +9,8 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { LegalStructureRadio } from "@/components/tasks/business-structure/LegalStructureRadio";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
@@ -44,7 +44,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     FormFuncWrapper,
     onSubmit,
     state: formContextState,
-  } = useFormContextHelper(createProfileFieldErrorMap());
+  } = useFormContextHelper(createDataFormErrorMap());
 
   const whenErrorScrollToRef = useRef<HTMLDivElement>(null);
 
@@ -53,7 +53,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       if (business?.profileData.legalStructureId) {
         queueUpdateTaskProgress(props.task.id, "COMPLETED");
       } else if (!business?.profileData.legalStructureId) {
-        queueUpdateTaskProgress(props.task.id, "NOT_STARTED");
+        queueUpdateTaskProgress(props.task.id, "TO_DO");
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -84,7 +84,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   const setBackToEditing = (): void => {
     if (!business || !updateQueue) return;
     setShowRadioQuestion(true);
-    queueUpdateTaskProgress(props.task.id, "IN_PROGRESS");
+    queueUpdateTaskProgress(props.task.id, "TO_DO");
   };
 
   const removeTaskCompletion = async (): Promise<void> => {
@@ -98,7 +98,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
             ? OperatingPhaseId.GUEST_MODE
             : profileData.operatingPhase,
       })
-      .queueTaskProgress({ [props.task.id]: "NOT_STARTED" });
+      .queueTaskProgress({ [props.task.id]: "TO_DO" });
 
     setShowRadioQuestion(true);
     await updateQueue.update();
@@ -144,7 +144,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       <UnlockedBy task={props.task} />
       <Content>{preLookupContent}</Content>
       {showRadioQuestion && (
-        <ProfileFormContext.Provider value={formContextState}>
+        <DataFormErrorMapContext.Provider value={formContextState}>
           <ProfileDataContext.Provider
             value={{
               state: {
@@ -162,7 +162,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
               </SecondaryButton>
             </div>
           </ProfileDataContext.Provider>
-        </ProfileFormContext.Provider>
+        </DataFormErrorMapContext.Provider>
       )}
       {business && !showRadioQuestion && (
         <>

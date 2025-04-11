@@ -3,8 +3,8 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { ConfigType } from "@/contexts/configContext";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
@@ -33,7 +33,7 @@ const LegalStructureRadio = forwardRef((props: Props, ref: ForwardedRef<HTMLDivE
 
   const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     "legalStructureId",
-    ProfileFormContext,
+    DataFormErrorMapContext,
     undefined
   );
 
@@ -48,7 +48,7 @@ const LegalStructureRadio = forwardRef((props: Props, ref: ForwardedRef<HTMLDivE
 
   const handleLegalStructure = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
     setIsValid(true);
-    queueUpdateTaskProgress(props.taskId, "IN_PROGRESS");
+    queueUpdateTaskProgress(props.taskId, "TO_DO");
     setProfileData({
       ...state.profileData,
       legalStructureId: event.target.value as string,

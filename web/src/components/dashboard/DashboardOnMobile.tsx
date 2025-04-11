@@ -15,7 +15,6 @@ import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBus
 import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import {
   AnytimeActionLicenseReinstatement,
-  AnytimeActionLink,
   AnytimeActionTask,
   Certification,
   Funding,
@@ -28,10 +27,7 @@ import { useRouter } from "next/compat/router";
 import { ReactElement } from "react";
 
 interface Props {
-  anytimeActionLicensesTasks: AnytimeActionTask[];
-  anytimeActionAdminTasks: AnytimeActionTask[];
-  anytimeActionReinstatementsTasks: AnytimeActionTask[];
-  anytimeActionLinks: AnytimeActionLink[];
+  anytimeActionTasks: AnytimeActionTask[];
   anytimeActionLicenseReinstatements: AnytimeActionLicenseReinstatement[];
   displayContent: RoadmapDisplayContent;
   operateReferences: Record<string, OperateReference>;
@@ -71,10 +67,7 @@ export const DashboardOnMobile = (props: Props): ReactElement => {
 
               {operatingPhase.displayAnytimeActions && (
                 <AnytimeActionDropdown
-                  anytimeActionLicensesTasks={props.anytimeActionLicensesTasks}
-                  anytimeActionAdminTasks={props.anytimeActionAdminTasks}
-                  anytimeActionReinstatementsTasks={props.anytimeActionReinstatementsTasks}
-                  anytimeActionLinks={props.anytimeActionLinks}
+                  anytimeActionTasks={props.anytimeActionTasks}
                   anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
                 />
               )}

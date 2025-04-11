@@ -705,7 +705,7 @@ describe("ApiFormationClient", () => {
         });
 
         for (const legalStructureId of ["c-corporation", "s-corporation"]) {
-          it("is undefined if not provided", async () => {
+          it(`is undefined if not provided for ${legalStructureId}`, async () => {
             const formationFormData = generateFormationFormData(
               {},
               { legalStructureId: `foreign-${legalStructureId}` as FormationLegalType }
@@ -723,7 +723,7 @@ describe("ApiFormationClient", () => {
             expect(payload.Formation.BusinessInformation.PracticesLaw).toBe(undefined);
           });
 
-          it("is 'Yes' if willPracticeLaw is true", async () => {
+          it(`is 'Yes' if willPracticeLaw is true for ${legalStructureId}`, async () => {
             const formationFormData = generateFormationFormData(
               { willPracticeLaw: true },
               { legalStructureId: `foreign-${legalStructureId}` as FormationLegalType }
@@ -741,7 +741,7 @@ describe("ApiFormationClient", () => {
             expect(payload.Formation.BusinessInformation.PracticesLaw).toBe("Yes");
           });
 
-          it("is 'No' if willPracticeLaw is false", async () => {
+          it(`is 'No' if willPracticeLaw is false for ${legalStructureId}`, async () => {
             const formationFormData = generateFormationFormData(
               { willPracticeLaw: false },
               { legalStructureId: `foreign-${legalStructureId}` as FormationLegalType }
@@ -759,7 +759,7 @@ describe("ApiFormationClient", () => {
             expect(payload.Formation.BusinessInformation.PracticesLaw).toBe("No");
           });
 
-          it("is undefined if not foreign corp", async () => {
+          it(`is undefined if not foreign corp for ${legalStructureId}`, async () => {
             const formationFormData = generateFormationFormData(
               { willPracticeLaw: true },
               { legalStructureId: `${legalStructureId}` as FormationLegalType }

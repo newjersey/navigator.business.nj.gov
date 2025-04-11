@@ -37,6 +37,11 @@ import * as PageNotFoundError from "@businessnjgovnavigator/content/fieldConfig/
 import * as Profile from "@businessnjgovnavigator/content/fieldConfig/profile.json";
 import * as StarterKits from "@businessnjgovnavigator/content/fieldConfig/starter-kits.json";
 import * as TaxAccess from "@businessnjgovnavigator/content/fieldConfig/tax-access-modal.json";
+import * as TaxClearanceCertificateDownload from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-download.json";
+import * as TaxClearanceCertificateShared from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-shared.json";
+import * as TaxClearanceCertificateStep1 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step1.json";
+import * as TaxClearanceCertificateStep2 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step2.json";
+import * as TaxClearanceCertificateStep3 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step3.json";
 import * as Tax from "@businessnjgovnavigator/content/fieldConfig/tax.json";
 import * as CalloutAlerts from "@businessnjgovnavigator/content/mappings/callout-alerts.json";
 import * as PageMetadata from "@businessnjgovnavigator/content/page-metadata/page-metadata.json";
@@ -89,8 +94,13 @@ const merged = JSON.parse(
       CheckAccountEmailPage,
       LicenseSearchTask,
       LandingPage,
+      FundingsOnboarding,
       LandingPageExperienceB,
-      FundingsOnboarding
+      TaxClearanceCertificateStep1,
+      TaxClearanceCertificateStep2,
+      TaxClearanceCertificateStep3,
+      TaxClearanceCertificateShared,
+      TaxClearanceCertificateDownload
     )
   )
 );
@@ -138,7 +148,12 @@ export type ConfigType = typeof ConfigOriginal &
   typeof LicenseSearchTask &
   typeof LandingPage &
   typeof LandingPageExperienceB &
-  typeof FundingsOnboarding;
+  typeof FundingsOnboarding &
+  typeof TaxClearanceCertificateStep1 &
+  typeof TaxClearanceCertificateStep2 &
+  typeof TaxClearanceCertificateStep3 &
+  typeof TaxClearanceCertificateShared &
+  typeof TaxClearanceCertificateDownload;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -181,8 +196,13 @@ export const getMergedConfig = (): ConfigType => {
     CheckAccountEmailPage,
     LicenseSearchTask,
     LandingPage,
+    FundingsOnboarding,
     LandingPageExperienceB,
-    FundingsOnboarding
+    TaxClearanceCertificateStep1,
+    TaxClearanceCertificateStep2,
+    TaxClearanceCertificateStep3,
+    TaxClearanceCertificateShared,
+    TaxClearanceCertificateDownload
   );
 };
 

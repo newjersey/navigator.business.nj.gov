@@ -1,0 +1,12 @@
+{
+  "id": "healthcare-dental-specialty",
+  "displayname": "healthcare-dental-specialty",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 30,
+      "licenseTask": "special-dental-permit",
+      "required": true
+    }
+  ]
+}

@@ -55,6 +55,7 @@ collections:
         search_fields: ["arrayOfTaskAgencies.*.name"]
         value_field: "arrayOfTaskAgencies.*.id"
         display_fields: ["arrayOfTaskAgencies.*.name"]
+        options_length: 500
   - name: "business-formation-config"
     label: "Biz Form - Config"
     delete: false
@@ -1145,6 +1146,7 @@ collections:
                       name: "confirmationNumberLabel",
                       widget: "markdown",
                     }
+                  - { label: "Survey link", name: "surveyLinkText", widget: "markdown" }
   - name: nexus
     label: "Nexus"
     delete: false
@@ -1411,6 +1413,7 @@ collections:
         search_fields: ["arrayOfFundingAgencies.*.name"]
         value_field: "arrayOfFundingAgencies.*.id"
         display_fields: ["arrayOfFundingAgencies.*.name"]
+        options_length: 500
       - label: "Applicable Ownership Types"
         name: applicableOwnershipTypes
         widget: "select"
@@ -1457,6 +1460,7 @@ collections:
         search_fields: ["arrayOfFundingAgencies.*.name"]
         value_field: "arrayOfFundingAgencies.*.id"
         display_fields: ["arrayOfFundingAgencies.*.name"]
+        options_length: 500
       - label: "Applicable Ownership Types"
         name: applicableOwnershipTypes
         widget: "select"
@@ -1581,6 +1585,7 @@ collections:
         search_fields: ["arrayOfFundingAgencies.*.name"]
         value_field: "arrayOfFundingAgencies.*.id"
         display_fields: ["arrayOfFundingAgencies.*.name"]
+        options_length: 500
       - {
           label: "Agency Contact",
           name: "agencyContact",
@@ -1661,6 +1666,7 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
+        options_length: 500
       - label: "Publish/Stage/Archive"
         name: "publishStageArchive"
         widget: "select"
@@ -1796,6 +1802,7 @@ collections:
         search_fields: ["arrayOfFundingAgencies.*.name"]
         value_field: "arrayOfFundingAgencies.*.id"
         display_fields: ["arrayOfFundingAgencies.*.name"]
+        options_length: 500
       - {
           label: "Agency Contact",
           name: "agencyContact",
@@ -1876,6 +1883,7 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
+        options_length: 500
       - label: "Publish/Stage/Archive"
         name: "publishStageArchive"
         widget: "select"
@@ -1930,6 +1938,7 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
+        options_length: 500
       - label: NAICS Codes
         name: naicsCodes
         widget: string
@@ -2029,6 +2038,7 @@ collections:
         search_fields: ["nonEssentialQuestionsArray.*.id"]
         value_field: "nonEssentialQuestionsArray.*.id"
         display_fields: ["nonEssentialQuestionsArray.*.id"]
+        options_length: 500
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
@@ -2041,6 +2051,7 @@ collections:
             search_fields: ["steps.*.name"]
             value_field: "steps.*.stepNumber"
             display_fields: ["steps.*.name"]
+            options_length: 500
           - label: Weight
             name: weight
             widget: number
@@ -2118,6 +2129,7 @@ collections:
             search_fields: ["steps.*.name"]
             value_field: "steps.*.stepNumber"
             display_fields: ["steps.*.name"]
+            options_length: 500
           - label: Weight
             name: weight
             widget: number
@@ -2602,6 +2614,7 @@ collections:
         search_fields: ["arrayOfTaskAgencies.*.name"]
         value_field: "arrayOfTaskAgencies.*.id"
         display_fields: ["arrayOfTaskAgencies.*.name"]
+        options_length: 500
       - {
           label: "Additional Agency Context",
           name: "agencyAdditionalContext",
@@ -2687,6 +2700,7 @@ collections:
         search_fields: ["arrayOfTaskAgencies.*.name"]
         value_field: "arrayOfTaskAgencies.*.id"
         display_fields: ["arrayOfTaskAgencies.*.name"]
+        options_length: 500
       - {
           label: "Agency additional context (Webflow & Navigator)",
           name: "agencyAdditionalContext",
@@ -2769,6 +2783,7 @@ collections:
         search_fields: ["arrayOfTaskAgencies.*.name"]
         value_field: "arrayOfTaskAgencies.*.id"
         display_fields: ["arrayOfTaskAgencies.*.name"]
+        options_length: 500
       - {
           label: "Agency additional context (Webflow & Navigator)",
           name: "agencyAdditionalContext",
@@ -3519,21 +3534,6 @@ collections:
                   widget: string,
                 }
               - { label: Anytime Action Page Button Text, name: anytimeActionPageButtonText, widget: string }
-              - {
-                  label: Anytime Action Dropdown Category - Admin,
-                  name: anytimeActionDropdownCategoryAdmin,
-                  widget: string,
-                }
-              - {
-                  label: Anytime Action Dropdown Category - Licenses,
-                  name: anytimeActionDropdownCategoryLicenses,
-                  widget: string,
-                }
-              - {
-                  label: Anytime Action Dropdown Category - Reinstatements,
-                  name: anytimeActionDropdownCategoryReinstatements,
-                  widget: string,
-                }
       - label: "Snackbars"
         name: "dashboard-config-snackbars"
         file: "content/src/fieldConfig/dashboard-snackbars.json"
@@ -3746,14 +3746,14 @@ collections:
     fields:
       - { name: "" }
 
-  - name: "anytime-action-tasks-licenses"
-    label: "Anytime Actions (Licenses)"
-    folder: "content/src/anytime-action-tasks-licenses"
-    summary: "{{id}} - {{name}}"
+  - name: "anytime-action-tasks"
+    label: "Anytime Actions Tasks"
+    folder: "content/src/anytime-action-tasks"
+    summary: "{{name}} - {{category[0]}} - {{category[1]}}"
     identifier_field: "{{id}}"
     slug: "{{fields.id}}"
     delete: true
-    sortable_fields: ["name", "id"]
+    sortable_fields: ["name", "id", "category"]
     create: true
     editor:
       preview: true
@@ -3768,117 +3768,37 @@ collections:
         }
       - { label: "Name/Title", name: "name", widget: "string" }
       - {
-          label: "Apply to all - overrides industry and sector dropdown",
-          name: "applyToAllUsers",
-          widget: "boolean",
-          required: false,
-        }
-      - label: Apply to industries
-        name: industryIds
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "roadmaps"
-        search_fields: ["name"]
-        value_field: "{{id}}"
-        display_fields: ["{{name}}"]
-        options_length: 500
-      - label: Apply to sectors
-        name: sectorIds
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "mappings"
-        search_fields: ["arrayOfSectors.*.name"]
-        value_field: "arrayOfSectors.*.id"
-        display_fields: ["arrayOfSectors.*.name"]
-        options_length: 500
-      - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "no-space", required: true }
-      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
-      - { label: "Content", name: "body", widget: "markdown", required: true }
-      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-
-  - name: "anytime-action-tasks-reinstatements"
-    label: "Anytime Actions (Reinstatements)"
-    folder: "content/src/anytime-action-tasks-reinstatements"
-    summary: "{{id}} - {{name}}"
-    identifier_field: "{{id}}"
-    slug: "{{fields.id}}"
-    delete: true
-    sortable_fields: ["name", "id"]
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          hint: "disabled after file creation",
+          label: "Category",
+          name: "category",
+          widget: "select",
+          hint: "only the first category will be used",
           required: true,
+          multiple: true,
+          options:
+            [
+              "Contract With NJ State Government",
+              "Sell or Close My Business",
+              "Change My Business Information",
+              "Hire New Employees",
+              "Reactivate My Expired Permit, License or Registration",
+              "Apply for State Funding",
+              "Offer New Products or Services",
+              "Transport My Products or Equipment",
+              "Manage My Properties",
+              "Set Up at a Temporary Location",
+              "Purchase New Products or Equipment",
+              "Only Show in Subtask",
+              "Manage My Business Vehicles",
+            ],
         }
-      - { label: "Name/Title", name: "name", widget: "string" }
-      - {
-          label: "Apply to all - overrides industry and sector dropdown",
-          name: "applyToAllUsers",
-          widget: "boolean",
-          required: false,
-        }
-      - label: Apply to industries
-        name: industryIds
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "roadmaps"
-        search_fields: ["name"]
-        value_field: "{{id}}"
-        display_fields: ["{{name}}"]
-        options_length: 500
-      - label: Apply to sectors
-        name: sectorIds
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "mappings"
-        search_fields: ["arrayOfSectors.*.name"]
-        value_field: "arrayOfSectors.*.id"
-        display_fields: ["arrayOfSectors.*.name"]
-        options_length: 500
-      - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "no-space", required: true }
-      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
-      - { label: "Content", name: "body", widget: "markdown", required: true }
-      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-
-  - name: "anytime-action-tasks-admin"
-    label: "Anytime Actions (Admin)"
-    folder: "content/src/anytime-action-tasks-admin"
-    summary: "{{id}} - {{name}}"
-    identifier_field: "{{id}}"
-    slug: "{{fields.id}}"
-    delete: true
-    sortable_fields: ["name", "id"]
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          hint: "disabled after file creation",
-          required: true,
-        }
-      - { label: "Name/Title", name: "name", widget: "string" }
+      # This is implemented but needs follow up in a future ticket for content before going live (Also same code for anytime action license reinstatements)
+      # - {
+      #     label: "Meta Data for Dropdown Search (searching will match this text but it will never appear)",
+      #     name: "searchMetaDataMatch",
+      #     widget: "string",
+      #     required: false,
+      #   }
+      - { label: "Dropdown Description", name: "description", widget: "string", required: false }
       - {
           label: "Apply to all - overrides industry and sector dropdown",
           name: "applyToAllUsers",
@@ -3938,6 +3858,14 @@ collections:
       - { label: "Name/Title", name: "name", widget: "string" }
       - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "no-space", required: true }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+      # This is implemented but needs follow up in a future ticket for content before going live (Also same code for anytime action license tasks)
+      # - {
+      #     label: "Meta Data for Dropdown Search (searching will match this text but it will never appear)",
+      #     name: "searchMetaDataMatch",
+      #     widget: "string",
+      #     required: false,
+      #   }
+      - { label: "Dropdown Description", name: "description", widget: "string", required: false }
       - { label: "Below License Status Content", name: "body", widget: "markdown", required: true }
       - {
           label: "Issuing Agency",
@@ -3948,58 +3876,142 @@ collections:
         }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-
-  - name: "anytime-action-links"
-    label: "Anytime Action External Link Only"
-    folder: "content/src/anytime-action-links"
-    summary: "{{id}} - {{name}}"
-    identifier_field: "{{id}}"
-    slug: "{{fields.id}}"
-    delete: true
-    sortable_fields: ["name", "id"]
-    create: true
-    editor:
-      preview: false
-    fields:
-      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - {
-          label: "Id",
-          name: "id",
-          widget: "write-once-read-only-no-space",
-          hint: "disabled after file creation",
-          required: true,
-        }
-      - { label: "Name/Title", name: "name", widget: "string" }
-      - {
-          label: "Apply to all - overrides industry and sector dropdown",
-          name: "applyToAllUsers",
-          widget: "boolean",
-          required: false,
-        }
-      - label: Apply to industries
-        name: industryIds
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "roadmaps"
-        search_fields: ["name"]
-        value_field: "{{id}}"
-        display_fields: ["{{name}}"]
-        options_length: 500
-      - label: Apply to sectors
-        name: sectorIds
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "mappings"
-        search_fields: ["arrayOfSectors.*.name"]
-        value_field: "arrayOfSectors.*.id"
-        display_fields: ["arrayOfSectors.*.name"]
-        options_length: 500
-      - { label: "External Link", name: "externalRoute", widget: "no-space", required: true }
-
+  - name: "tax-clearance-certificate-anytime-action"
+    label: "Tax Clearance Anytime Action"
+    delete: false
+    create: false
+    files:
+      - label: "Tax Clearance Step 1"
+        name: "taxClearanceCertificate-step1"
+        file: "content/src/fieldConfig/tax-clearance-certificate-step1.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Step 1
+            name: taxClearanceCertificateStep1
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Content Body", name: "content", widget: "markdown", required: true }
+              - {
+                  label: "Issuing Agency Label Text",
+                  name: "issuingAgencyLabelText",
+                  widget: "string",
+                  required: true,
+                }
+              - { label: "Issuing Agency Text", name: "issuingAgencyText", widget: "string", required: true }
+              - { label: "Next Button Text", name: "continueButtonText", widget: "string", required: true }
+      - label: "Tax Clearance Step 2"
+        name: "taxClearanceCertificate-step2"
+        file: "content/src/fieldConfig/tax-clearance-certificate-step2.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Step 2
+            name: taxClearanceCertificateStep2
+            collapsed: false
+            widget: object
+            fields:
+              - {
+                  label: "Requesting Agency Section Header",
+                  name: "requestingAgencySectionHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Requesting Agency Label",
+                  name: "requestingAgencyLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Business Information Section Header",
+                  name: "businessInformationSectionHeader",
+                  widget: "string",
+                  required: true,
+                }
+      - label: "Tax Clearance Step 3"
+        name: "taxClearanceCertificate-step3"
+        file: "content/src/fieldConfig/tax-clearance-certificate-step3.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Step 3
+            name: taxClearanceCertificateStep3
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Main Title Header", name: "mainTitleHeader", widget: "string", required: true }
+              - { label: "Edit Button Text", name: "editButtonText", widget: "string", required: true }
+              - {
+                  label: "First Section Header",
+                  name: "firstSectionHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Certification Reason Label",
+                  name: "certificationReasonLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Second Section Header",
+                  name: "secondSectionHeader",
+                  widget: "string",
+                  required: true,
+                }
+              - { label: "Business Name Label", name: "businessNameLabel", widget: "string", required: true }
+              - { label: "Address Label", name: "addressLabel", widget: "string", required: true }
+              - { label: "State Tax Id Label", name: "stateTaxIdLabel", widget: "string", required: true }
+              - { label: "Tax Pin Label", name: "taxPinLabel", widget: "string", required: true }
+      - label: "Tax Clearance Shared"
+        name: "taxClearanceCertificate-shared"
+        file: "content/src/fieldConfig/tax-clearance-certificate-shared.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Shared
+            name: taxClearanceCertificateShared
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Stepper One Tab Text", name: "stepperOneLabel", widget: "string", required: true }
+              - { label: "Stepper Two Tab Text", name: "stepperTwoLabel", widget: "string", required: true }
+              - {
+                  label: "Stepper Three Tab Text",
+                  name: "stepperThreeLabel",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Save Button Text",
+                  name: "saveButtonText",
+                  widget: "string",
+                  required: true,
+                  hint: Only applies to tab 2 and 3,
+                }
+              - {
+                  label: "Back Button Text",
+                  name: "backButtonText",
+                  widget: "string",
+                  required: true,
+                  hint: Only applies to tab 2 and 3,
+                }
+      - label: "Tax Clearance Download Page"
+        name: "taxClearanceCertificate-download"
+        file: "content/src/fieldConfig/tax-clearance-certificate-download.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Download Page
+            name: taxClearanceCertificateDownload
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Header Two Text", name: "headerTwoLabel", widget: "string", required: true }
+              - { label: "Callout Text", name: "calloutText", widget: "string", required: true }
+              - { label: "Download Button Text", name: "buttonText", widget: "string", required: true }
   - name: "page-metadata"
     label: "🟨 PAGE METADATA"
     folder: "content/src"
@@ -4252,6 +4264,22 @@ collections:
         fields:
           - label: Sectors
             name: arrayOfSectors
+            widget: list
+            allow_add: false
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Id
+                name: id
+                widget: hidden
+      - label: "Tax Clearance Certificate Issuing Agencies"
+        name: "arrayOfTaxClearanceCertificateIssuingAgencies"
+        file: "content/src/mappings/taxClearanceCertificateIssuingAgencies.json"
+        fields:
+          - label: Issuing Agencies
+            name: arrayOfTaxClearanceCertificateIssuingAgencies
             widget: list
             allow_add: false
             summary: "{{name}}"
@@ -4611,8 +4639,7 @@ collections:
             widget: object
             summary: "{{taskProgress}}"
             fields:
-              - { label: Not Started Text, name: NOT_STARTED, widget: string }
-              - { label: In Progress Text, name: IN_PROGRESS, widget: string }
+              - { label: To Do Text, name: TO_DO, widget: string }
               - { label: Completed Text, name: COMPLETED, widget: string }
           - label: Task Progress Card
             name: taskProgressCard
@@ -6087,18 +6114,12 @@ collections:
                     fields:
                       - { label: no, name: no, widget: string }
                       - { label: yes, name: yes, widget: string }
-              - label: "Business Operating Length Question"
-                name: "businessOperatingLengthQuestion"
+              - label: "Number of Employees Question"
+                name: "numberOfEmployeesQuestion"
                 widget: object
                 fields:
                   - { label: Question Text, name: questionText, widget: string }
                   - { label: Select an Answer Text, name: selectAnAnswerText, widget: string }
-                  - label: Responses
-                    name: responses
-                    widget: object
-                    fields:
-                      - { label: short, name: short, widget: string }
-                      - { label: long, name: long, widget: string }
               - label: "Page header"
                 name: "pageHeader"
                 widget: object
@@ -6106,6 +6127,13 @@ collections:
                   - { label: Header Text, name: headerText, widget: string }
                   - { label: Subheader Text, name: subHeaderText, widget: string }
                   - { label: Button Text, name: buttonText, widget: string }
+                  - { label: Logo link, name: logoLink, widget: string }
+                  - { label: Logo Aria Text, name: logoAriaText, widget: string }
+              - label: "Page"
+                name: "page"
+                widget: object
+                fields:
+                  - { label: No Results Found Alert Text, name: noResultsFoundAlertText, widget: string }
 
   - name: "contextual-information"
     label: "Contextual Information"

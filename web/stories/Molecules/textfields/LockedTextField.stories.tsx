@@ -1,10 +1,10 @@
 import { ExpandCollapseString } from "@/components/ExpandCollapseString";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ProfileField } from "@/components/profile/ProfileField";
-import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
+import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
@@ -18,13 +18,13 @@ const Template = () => {
   const [profileData, setProfileData] = useState<ProfileData>(
     generateProfileData({ businessName: "displayed text" })
   );
-  const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
+  const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
 
   const text =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam gravida mattis magna et placerat.";
   const fieldName = "businessName";
   return (
-    <ProfileFormContext.Provider value={formContextState}>
+    <DataFormErrorMapContext.Provider value={formContextState}>
       <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
         <ProfileDataContext.Provider
           value={{
@@ -51,7 +51,7 @@ const Template = () => {
           </ReviewSubSection>
         </ProfileDataContext.Provider>
       </ConfigContext.Provider>
-    </ProfileFormContext.Provider>
+    </DataFormErrorMapContext.Provider>
   );
 };
 

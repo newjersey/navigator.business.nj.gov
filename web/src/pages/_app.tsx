@@ -73,7 +73,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const showGtm = !(process.env.DISABLE_GTM === "true");
 
   useEffect(() => {
-    if (router) {
+    if (router?.isReady) {
       router.events.on("routeChangeComplete", analytics.pageview);
       return (): void => {
         router.events.off("routeChangeComplete", analytics.pageview);

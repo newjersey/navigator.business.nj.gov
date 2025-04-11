@@ -29,7 +29,7 @@ const LoginEmailCheckPage = (): ReactElement => {
 
   useEffect(() => {
     if (authState.isAuthenticated === IsAuthenticated.TRUE && authState.activeUser) {
-      router && router.push(ROUTES.dashboard);
+      router?.isReady && router.push(ROUTES.dashboard);
     }
   }, [authState.isAuthenticated, authState.activeUser, router]);
 

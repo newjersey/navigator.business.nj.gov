@@ -41,7 +41,7 @@ describe("njeda fundings onboarding", () => {
     useMockRouter({});
   });
 
-  it("closes the modal when all questions are answered", async () => {
+  it("closes the modal when all questions are answered and routes to dashboard", async () => {
     const user = userEvent.setup();
     const business = generateBusiness({});
     renderStatefulFundingsPageComponent(business, []);
@@ -56,6 +56,23 @@ describe("njeda fundings onboarding", () => {
     await user.click(screen.getByText(Config.fundingsOnboardingModal.saveButtonText));
     await user.click(screen.getByText(Config.fundingsOnboardingModal.pageHeader.buttonText));
     expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
+  });
+
+  it("closes the modal when all questions are answered and routes to njeda when logo is clicked", async () => {
+    const user = userEvent.setup();
+    const business = generateBusiness({});
+    renderStatefulFundingsPageComponent(business, []);
+    expect(
+      screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.questionText)
+    ).toBeInTheDocument();
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "35");
+    await waitFor(() => {
+      selectByValue("Sector", "clean-energy");
+    });
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.saveButtonText));
+    await user.click(screen.getByTestId("njeda-logo-button"));
+    expect(mockPush).toHaveBeenCalledWith(Config.fundingsOnboardingModal.pageHeader.logoLink);
   });
 
   it("triggers validation when questions are unanswered and Save is pressed", async () => {
@@ -205,5 +222,69 @@ describe("njeda fundings onboarding", () => {
     expect(screen.getByText("funding-2").compareDocumentPosition(screen.getByText("funding-1"))).toBe(
       Node.DOCUMENT_POSITION_PRECEDING
     );
+  });
+
+  it("displays alert when no fundings provided", async () => {
+    const user = userEvent.setup();
+    const profileData = generateProfileData({ sectorId: "" });
+    const business = generateBusiness({ profileData: profileData });
+    const fundings: Funding[] = [];
+    renderStatefulFundingsPageComponent(business, fundings);
+
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "2");
+
+    await waitFor(() => {
+      selectByValue("Sector", "cannabis");
+    });
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.saveButtonText));
+
+    expect(screen.getByTestId("alert-no-results")).toBeInTheDocument();
+  });
+
+  it("filters out all njeda fundings for cannabis sector and displays alert", async () => {
+    const user = userEvent.setup();
+    const profileData = generateProfileData({ sectorId: "" });
+    const business = generateBusiness({ profileData: profileData });
+    const fundings = [
+      generateFunding({
+        isNonprofitOnly: false,
+        sector: ["clean-energy"],
+        employeesRequired: "n/a",
+        county: ["All"],
+        homeBased: "yes",
+        publishStageArchive: null,
+        dueDate: undefined,
+        status: "rolling application",
+        certifications: null,
+        agency: ["njeda"],
+        name: "funding-1",
+      }),
+      generateFunding({
+        isNonprofitOnly: false,
+        sector: ["cannabis"],
+        employeesRequired: "n/a",
+        county: ["All"],
+        homeBased: "yes",
+        publishStageArchive: null,
+        dueDate: undefined,
+        status: "rolling application",
+        certifications: null,
+        agency: ["njeda"],
+        name: "funding-2",
+      }),
+    ];
+    renderStatefulFundingsPageComponent(business, fundings);
+
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes));
+    await user.type(screen.getByRole("textbox", { name: "Existing employees" }), "2");
+
+    await waitFor(() => {
+      selectByValue("Sector", "cannabis");
+    });
+    await user.click(screen.getByText(Config.fundingsOnboardingModal.saveButtonText));
+
+    expect(screen.queryByTestId(`${fundings[0].id}-button`)).not.toBeInTheDocument();
+    expect(screen.getByTestId("alert-no-results")).toBeInTheDocument();
   });
 });

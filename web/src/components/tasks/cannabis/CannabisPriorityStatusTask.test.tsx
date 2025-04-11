@@ -140,7 +140,7 @@ describe("<CannabisPriorityStatusTask />", () => {
     expect(currentBusiness().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(false);
   });
 
-  it("updates task progress from not started to in progress when user navigates to the second tab", async () => {
+  it("task progress remains to-do when user navigates to the second tab", async () => {
     const randomPriorityType = randomElementFromArray([...allPriorityTypes, noneOfTheAbovePriorityId]);
 
     const task = generateTask({
@@ -154,9 +154,9 @@ describe("<CannabisPriorityStatusTask />", () => {
     fireEvent.click(screen.getByText(C.nextButtonText));
 
     await waitFor(() => {
-      expect(within(screen.getByTestId("taskProgress")).getByTestId("IN_PROGRESS")).toBeInTheDocument();
+      expect(within(screen.getByTestId("taskProgress")).getByTestId("TO_DO")).toBeInTheDocument();
     });
-    expect(screen.getByText(getTaskStatusUpdatedMessage("IN_PROGRESS"))).toBeInTheDocument();
+    expect(screen.getByText(getTaskStatusUpdatedMessage("TO_DO"))).toBeInTheDocument();
   });
 
   it("navigates to and from second tab", async () => {

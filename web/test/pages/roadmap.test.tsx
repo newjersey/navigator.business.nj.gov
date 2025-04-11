@@ -10,7 +10,7 @@ jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 describe("roadmap", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockRouter({});
+    useMockRouter({ isReady: true });
   });
 
   it("redirects signed-in users to the dashboard page", () => {

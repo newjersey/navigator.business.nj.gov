@@ -5,12 +5,13 @@ import { LegalStructureDropDown } from "@/components/LegalStructureDropDown";
 import { ModalOneButton } from "@/components/ModalOneButton";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { createReducedFieldStates, FieldStateActionKind } from "@/contexts/formContext";
+import { DataFormErrorMapContext, DataFormErrorMapFields } from "@/contexts/dataFormErrorMapContext";
+import { createReducedFieldStates } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { ProfileFields, ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { FieldStateActionKind } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, useState } from "react";
@@ -22,7 +23,7 @@ interface Props {
 }
 
 export const TaxAccessStepOne = (props: Props): ReactElement => {
-  const fields: ProfileFields[] = ["legalStructureId"];
+  const fields: DataFormErrorMapFields[] = ["legalStructureId"];
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const { business, updateQueue } = useUserData();
   const { Config } = useConfig();
@@ -64,7 +65,7 @@ export const TaxAccessStepOne = (props: Props): ReactElement => {
 
       <TaxAccessModalBody isStepOne={true} showHeader={true} />
 
-      <ProfileFormContext.Provider value={formContextState}>
+      <DataFormErrorMapContext.Provider value={formContextState}>
         <ProfileDataContext.Provider
           value={{
             state: {
@@ -81,7 +82,7 @@ export const TaxAccessStepOne = (props: Props): ReactElement => {
             <LegalStructureDropDown />
           </WithErrorBar>
         </ProfileDataContext.Provider>
-      </ProfileFormContext.Provider>
+      </DataFormErrorMapContext.Provider>
     </ModalOneButton>
   );
 };

@@ -54,3 +54,4 @@ Without an MVC EIN, you cannot register or title vehicles under your business's 
 :::callout{ showHeader="true" headerText="Once completed, you will have:" showIcon="false" calloutType="conditional" }
 A 15-digit EIN by mail or email, depending on how you applied and the contact information you provided.
 :::
+**Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov

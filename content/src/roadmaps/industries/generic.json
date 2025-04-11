@@ -48,7 +48,13 @@
     }
   ],
   "name": "All Other Businesses",
-  "nonEssentialQuestionsIds": ["weights-measures", "cds-lab-research ", "cds-supply"],
+  "nonEssentialQuestionsIds": [
+    "weights-measures",
+    "cds-lab-research ",
+    "cds-supply",
+    "other-businesses-CRTK-survey",
+    "business-vehicle-title-reg"
+  ],
   "displayname": "generic",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,

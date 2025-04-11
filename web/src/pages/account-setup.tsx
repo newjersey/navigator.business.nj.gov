@@ -5,8 +5,8 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { AuthContext } from "@/contexts/authContext";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
-import { createProfileFieldErrorMap, ProfileFormContext } from "@/contexts/profileFormContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { onSelfRegister } from "@/lib/auth/signinHelper";
@@ -41,7 +41,7 @@ const AccountSetupPage = (): ReactElement => {
   useEffect(() => {
     (async (): Promise<void> => {
       if (state.isAuthenticated === IsAuthenticated.TRUE) {
-        router && (await router.replace(ROUTES.dashboard));
+        router?.isReady && (await router.replace(ROUTES.dashboard));
       }
     })();
   }, [state.isAuthenticated, router]);
@@ -50,7 +50,7 @@ const AccountSetupPage = (): ReactElement => {
     FormFuncWrapper,
     onSubmit,
     state: formContextState,
-  } = useFormContextHelper(createProfileFieldErrorMap<OnboardingErrors>());
+  } = useFormContextHelper(createDataFormErrorMap<OnboardingErrors>());
 
   FormFuncWrapper(
     async (): Promise<void> => {
@@ -81,7 +81,7 @@ const AccountSetupPage = (): ReactElement => {
   );
 
   useEffect(() => {
-    if (!router || !router.isReady || queryAnalyticsOccurred.current) {
+    if (!router?.isReady || queryAnalyticsOccurred.current) {
       return;
     }
     if (router.query[QUERIES.source] !== undefined) {
@@ -117,7 +117,7 @@ const AccountSetupPage = (): ReactElement => {
           <h1>{getContent().header}</h1>
           {showAlert && <Alert variant="error">{Config.accountSetup.errorAlert}</Alert>}
           <Content>{getContent().body}</Content>
-          <ProfileFormContext.Provider value={formContextState}>
+          <DataFormErrorMapContext.Provider value={formContextState}>
             <AccountSetupForm user={user} setUser={setUser} />
 
             <hr className="margin-top-4 margin-bottom-2" />
@@ -132,7 +132,7 @@ const AccountSetupPage = (): ReactElement => {
                 {getContent().submitButton}
               </PrimaryButton>
             </div>
-          </ProfileFormContext.Provider>
+          </DataFormErrorMapContext.Provider>
         </SingleColumnContainer>
       </main>
     </PageSkeleton>
