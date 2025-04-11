@@ -4,7 +4,11 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { EmergencyTripPermitSteps } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitSteps";
-import { EmergencyTripPermitStepsConfiguration } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitStepsConfiguration";
+import {
+  doesStepHaveError,
+  EmergencyTripPermitStepsConfiguration,
+  isStepComplete,
+} from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitStepsConfiguration";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -12,20 +16,44 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { StepperStep } from "@/lib/types/types";
 import {
   EmergencyTripPermitApplicationInfo,
-  generateEmptyEmergencyTripPermitData,
+  EmergencyTripPermitFieldNames,
+  generateNewEmergencyTripPermitData,
 } from "@businessnjgovnavigator/shared/emergencyTripPermit";
 import { ReactElement, useState } from "react";
 export const EmergencyTripPermit = (): ReactElement => {
   const { Config } = useConfig();
   const [stepIndex, setStepIndex] = useState<number>(0);
   const [applicationInfo, setApplicationInfo] = useState<EmergencyTripPermitApplicationInfo>(
-    generateEmptyEmergencyTripPermitData()
+    generateNewEmergencyTripPermitData()
   );
+  const { state: formContextState, getInvalidFieldIds } = useFormContextHelper(createDataFormErrorMap());
+
+  const invalidFieldIds = getInvalidFieldIds() as EmergencyTripPermitFieldNames[];
   const steps: StepperStep[] = EmergencyTripPermitStepsConfiguration.map((step) => {
-    return { name: step.name, hasError: false };
+    return {
+      name: step.name,
+      hasError: doesStepHaveError(step.name, invalidFieldIds),
+      isComplete: isStepComplete(step.name, invalidFieldIds),
+    };
   });
 
-  const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
+  const prePopulateFormFieldsForBillingPage = (): void => {
+    setApplicationInfo({
+      ...applicationInfo,
+      payerFirstName: applicationInfo.payerFirstName ?? applicationInfo.requestorFirstName,
+      payerLastName: applicationInfo.payerLastName ?? applicationInfo.requestorLastName,
+      payerEmail: applicationInfo.payerEmail ?? applicationInfo.requestorEmail,
+      payerPhoneNumber: applicationInfo.payerPhoneNumber ?? applicationInfo.requestorPhone,
+      payerCountry: applicationInfo.payerCountry ?? applicationInfo.requestorCountry,
+      payerAddress1: applicationInfo.payerAddress1 ?? applicationInfo.requestorAddress1,
+      payerAddress2: applicationInfo.payerAddress2 ?? applicationInfo.requestorAddress2,
+      payerCity: applicationInfo.payerCity ?? applicationInfo.requestorCity,
+      payerStateAbbreviation:
+        applicationInfo.payerStateAbbreviation ?? applicationInfo.requestorStateProvince,
+      payerZipCode: applicationInfo.payerZipCode ?? applicationInfo.requestorZipPostalCode,
+      payerCompanyName: applicationInfo.payerCompanyName ?? applicationInfo.payerCompanyName,
+    });
+  };
 
   const getNextStepText = (): string => {
     switch (stepIndex) {
@@ -56,6 +84,9 @@ export const EmergencyTripPermit = (): ReactElement => {
         <HorizontalStepper
           currentStep={stepIndex}
           onStepClicked={(newStep) => {
+            if (stepIndex === 1) {
+              prePopulateFormFieldsForBillingPage();
+            }
             setStepIndex(newStep);
           }}
           steps={steps}
@@ -77,6 +108,9 @@ export const EmergencyTripPermit = (): ReactElement => {
             <PrimaryButton
               isColor="primary"
               onClick={(): void => {
+                if (stepIndex === 1) {
+                  prePopulateFormFieldsForBillingPage();
+                }
                 if (stepIndex < 4) {
                   setStepIndex(stepIndex + 1);
                 }

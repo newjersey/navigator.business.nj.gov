@@ -4,17 +4,14 @@ import { EmergencyTripPermitDatePicker } from "@/components/tasks/abc-emergency-
 import { EmergencyTripPermitStateDropdown } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitStateDropdown";
 import { EmergencyTripPermitTextFieldEntry } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitTextField";
 import { EmergencyTripPermitTimePicker } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitTimePicker";
-import { createDataFormErrorMap } from "@/contexts/dataFormErrorMapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { ReactElement } from "react";
 
 export const TripStep = (): ReactElement => {
   const { Config } = useConfig();
 
-  const { onSubmit } = useFormContextHelper(createDataFormErrorMap());
   return (
-    <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
+    <form className={`usa-prose onboarding-form margin-top-2`}>
       <div className={"padding-top-1 padding-bottom-3"}>
         <Heading level={3}>{Config.abcEmergencyTripPermit.steps.trip.subHeader}</Heading>
       </div>

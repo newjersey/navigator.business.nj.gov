@@ -30,65 +30,9 @@ export const EmergencyTripPermitTextFieldEntry = ({ className, ...props }: Props
       [fieldName]: value,
     });
   };
-
-  const prePopulateFieldsForBillingPage = (value: string): void => {
-    switch (props.fieldName) {
-      case "requestorFirstName":
-        if (context.state.applicationInfo.payerFirstName === "") {
-          setValueForField("payerFirstName", value);
-        }
-        break;
-      case "requestorLastName":
-        if (context.state.applicationInfo.payerLastName === "") {
-          setValueForField("payerLastName", value);
-        }
-        break;
-      case "requestorEmail":
-        if (context.state.applicationInfo.payerEmail === "") {
-          setValueForField("payerEmail", value);
-        }
-        break;
-      case "requestorPhone":
-        if (context.state.applicationInfo.payerPhoneNumber === "") {
-          setValueForField("payerPhoneNumber", value);
-        }
-        break;
-      case "requestorCountry":
-        if (context.state.applicationInfo.payerCountry === "") {
-          setValueForField("payerCountry", value);
-        }
-        break;
-      case "requestorAddress1":
-        if (context.state.applicationInfo.payerAddress1 === "") {
-          setValueForField("payerAddress1", value);
-        }
-        break;
-      case "requestorAddress2":
-        if (context.state.applicationInfo.payerAddress2 === "") {
-          setValueForField("payerAddress2", value);
-        }
-        break;
-      case "requestorCity":
-        if (context.state.applicationInfo.payerCity === "") {
-          setValueForField("payerCity", value);
-        }
-        break;
-      case "requestorStateProvince":
-        if (context.state.applicationInfo.payerStateAbbreviation !== "NJ") {
-          setValueForField("payerStateAbbreviation", value);
-        }
-        break;
-      default:
-        return;
-    }
-  };
   const handleChange = (value: string): void => {
     props.handleChange && props.handleChange(value);
-    console.log(props.fieldName);
     setValueForField(props.fieldName, value);
-    console.log("BOB");
-    console.log(props.fieldName);
-    prePopulateFieldsForBillingPage(value);
   };
 
   const fieldNameLabels = Config.abcEmergencyTripPermit.fields as Record<
@@ -129,9 +73,11 @@ export const EmergencyTripPermitTextFieldEntry = ({ className, ...props }: Props
           props.numeric
             ? {
                 maxLength: props.maxLength ?? undefined,
+                minLength: 1,
               }
             : undefined
         }
+        preventRefreshWhenUnmounted
       />
     </WithErrorBar>
   );

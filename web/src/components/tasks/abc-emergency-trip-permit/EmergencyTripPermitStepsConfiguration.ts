@@ -46,6 +46,7 @@ export const generateEmptyErrorMap = (): Record<EmergencyTripPermitFieldNames, b
     payerCity: false,
     payerCompanyName: false,
     payerCountry: false,
+    payerZipCode: false,
     payerEmail: false,
     payerFirstName: false,
     payerLastName: false,
@@ -82,31 +83,80 @@ export const generateEmptyErrorMap = (): Record<EmergencyTripPermitFieldNames, b
   };
 };
 
-export const getRequiredFieldsByStep = (
-  step: AbcEmergencyTripPermitStepNames
-): EmergencyTripPermitFieldNames[] => {
-  switch (step) {
-    case "Requestor":
-      return [
-        "requestorFirstName",
-        "requestorLastName",
-        "carrier",
-        "requestorEmail",
-        "requestorPhone",
-        "requestorCountry",
-        "requestorAddress1",
-        "requestorCity",
-        "requestorStateProvince",
-        "requestorZipPostalCode",
-        "vehicleMake",
-        "vehicleYear",
-        "vehicleVinSerial",
-        "vehicleLicensePlateNum",
-        "vehicleStateProvince",
-        "vehicleCountry",
-      ];
-      break;
+export const getStepFromFieldName = (
+  fieldName: EmergencyTripPermitFieldNames
+): AbcEmergencyTripPermitStepNames => {
+  switch (fieldName) {
+    case "carrier":
+    case "requestorFirstName":
+    case "requestorLastName":
+    case "requestorEmail":
+    case "requestorPhone":
+    case "requestorCountry":
+    case "requestorAddress1":
+    case "requestorAddress2":
+    case "requestorCity":
+    case "requestorStateProvince":
+    case "requestorZipPostalCode":
+    case "vehicleMake":
+    case "vehicleYear":
+    case "vehicleVinSerial":
+    case "vehicleLicensePlateNum":
+    case "vehicleStateProvince":
+    case "vehicleCountry":
+      return "Requestor";
+    case "permitDate":
+    case "permitStartTime":
+    case "pickupSiteName":
+    case "pickupCountry":
+    case "pickupAddress":
+    case "pickupCity":
+    case "pickupZipPostalCode":
+    case "deliverySiteName":
+    case "deliveryCountry":
+    case "deliveryAddress":
+    case "deliveryCity":
+    case "deliveryStateProvince":
+    case "deliveryZipPostalCode":
+      return "Trip";
+    case "payerFirstName":
+    case "payerLastName":
+    case "payerCompanyName":
+    case "payerEmail":
+    case "payerPhoneNumber":
+    case "payerCountry":
+    case "payerAddress1":
+    case "payerAddress2":
+    case "payerCity":
+    case "payerStateAbbreviation":
+    case "payerZipCode":
+    case "additionalEmail":
+    case "additionalConfirmemail":
+    case "textMsgMobile":
+      return "Billing";
     default:
-      return [];
+      return "Review";
   }
+};
+
+export const doesStepHaveError = (
+  stepName: AbcEmergencyTripPermitStepNames,
+  invalidFieldIds: EmergencyTripPermitFieldNames[]
+): boolean => {
+  if (stepName === "Review" && invalidFieldIds.length > 0) {
+    return true;
+  }
+  for (const fieldName of invalidFieldIds) {
+    if (getStepFromFieldName(fieldName) === stepName) {
+      return true;
+    }
+  }
+  return false;
+};
+
+export const isStepComplete = (
+  stepName: AbcEmergencyTripPermitStepNames,
+  invalidFieldIds: EmergencyTripPermitFieldNames[]
+): boolean => {
+  return !doesStepHaveError(stepName, invalidFieldIds);
 };

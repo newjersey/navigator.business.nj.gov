@@ -12,7 +12,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import {
   EmergencyTripPermitApplicationInfo,
-  generateEmptyEmergencyTripPermitData,
+  emptyEmergencyTripPermitData,
 } from "@businessnjgovnavigator/shared/emergencyTripPermit";
 
 export type DataFormErrorMapFields =
@@ -30,7 +30,7 @@ const taxClearanceCertificateFields = Object.keys(
   emptyTaxClearanceCertificateData
 ) as (keyof TaxClearanceCertificateData)[];
 const emergencyTripPermitFields = Object.keys(
-  generateEmptyEmergencyTripPermitData()
+  emptyEmergencyTripPermitData
 ) as (keyof EmergencyTripPermitApplicationInfo)[];
 
 const dataFormErrorMapFields: DataFormErrorMapFields[] = [

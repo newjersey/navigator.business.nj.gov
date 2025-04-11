@@ -38,6 +38,7 @@ export const getErrorStateForEmergencyTripPermitField = (
       break;
     case "requestorEmail":
     case "additionalEmail":
+    case "additionalConfirmemail":
       maxLen = 60;
       break;
     case "vehicleVinSerial":
@@ -52,6 +53,11 @@ export const getErrorStateForEmergencyTripPermitField = (
     case "pickupSiteName":
     case "deliverySiteName":
       maxLen = 100;
+      break;
+    case "requestorPhone":
+    case "payerPhoneNumber":
+    case "textMsgMobile":
+      maxLen = 15;
       break;
   }
   if (maxLen !== -1 && value && value?.length > maxLen) {

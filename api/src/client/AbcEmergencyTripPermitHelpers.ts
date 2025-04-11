@@ -23,6 +23,7 @@ export interface Payer {
   PhoneNumber: string | null;
   Email: string | null;
   Country: string;
+  ZipCode: string | null;
 }
 
 export interface PermitApplication {
@@ -90,6 +91,7 @@ export const getApiSubmissionBody = (
       PhoneNumber: applicationInfo.payerPhoneNumber ?? "",
       Email: applicationInfo.payerEmail ?? "",
       Country: applicationInfo.payerCountry ?? "",
+      ZipCode: applicationInfo.payerZipCode ?? "",
     },
     PermitApplication: {
       RequestorFirstName: applicationInfo.requestorFirstName,

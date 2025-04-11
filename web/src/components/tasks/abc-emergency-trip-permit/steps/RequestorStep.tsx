@@ -2,18 +2,16 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { EmergencyTripPermitCountryDropdown } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitCountryDropdown";
 import { EmergencyTripPermitStateDropdown } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitStateDropdown";
 import { EmergencyTripPermitTextFieldEntry } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitTextField";
-import { createDataFormErrorMap } from "@/contexts/dataFormErrorMapContext";
+import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 
 export const RequestorStep = (): ReactElement => {
   const { Config } = useConfig();
-
-  const { onSubmit } = useFormContextHelper(createDataFormErrorMap());
+  const context = useContext(EmergencyTripPermitContext);
 
   return (
-    <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
+    <form onSubmit={context.onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
       <div className={"padding-top-1 padding-bottom-3"}>
         <Heading level={3}>{Config.abcEmergencyTripPermit.steps.requestor.requestorSection}</Heading>
         {Config.abcEmergencyTripPermit.steps.requestor.requestorSectionSubHeading}
@@ -30,7 +28,7 @@ export const RequestorStep = (): ReactElement => {
           </span>
         </div>
         <EmergencyTripPermitTextFieldEntry fieldName={"requestorEmail"} required />
-        <EmergencyTripPermitTextFieldEntry fieldName={"requestorPhone"} numeric maxLength={15} required />
+        <EmergencyTripPermitTextFieldEntry fieldName={"requestorPhone"} maxLength={15} required />
         <EmergencyTripPermitCountryDropdown fieldName={"requestorCountry"} />
         <EmergencyTripPermitTextFieldEntry fieldName={"requestorAddress1"} maxLength={35} required />
         <EmergencyTripPermitTextFieldEntry
