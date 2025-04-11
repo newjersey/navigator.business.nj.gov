@@ -38,7 +38,7 @@
     {
       "addOn": "weights-measures-add",
       "id": "weights-measures",
-      "questionText": "Will you be using a weighing or measuring device, such as a scale or meter, for your business? "
+      "questionText": "Do you plan to use a weighing or measuring device, such as a scale or meter, for your business?"
     },
     {
       "questionText": "Are you a dentist?",
@@ -68,21 +68,21 @@
     {
       "addOn": "entertainment-agency-registration",
       "id": "entertainment-agency-register",
-      "questionText": "Will you provide entertainment booking services in New Jersey?"
+      "questionText": "Do you plan to provide entertainment booking services in New Jersey?"
     },
     {
-      "questionText": "Will you be offering electrologist/electrolysis services?",
+      "questionText": "Do you plan to offer electrologist/electrolysis services?",
       "addOn": "cosmetology-electrologist-license",
       "id": "electrologist"
     },
     {
       "id": "petcare-cds-shelter",
-      "questionText": "Will you store sodium pentobarbital for animal euthanasia?",
+      "questionText": "Do you plan to store sodium pentobarbital for animal euthanasia?",
       "addOn": "petcare-shelter"
     },
     {
       "id": "petcare-cds-trainer",
-      "questionText": "Will you train dogs to detect illegal substances?",
+      "questionText": "Do you plan to train dogs to detect illegal substances?",
       "addOn": "petcare-trainer"
     },
     {
@@ -91,24 +91,24 @@
       "addOn": "other-lab-research"
     },
     {
-      "questionText": "Does your business make, buy, or sell products that contain Controlled Dangerous Substances (CDS)?",
+      "questionText": "Do you plan to make, buy, or sell products that contain Controlled Dangerous Substances (CDS)?",
       "addOn": "other-cds-supply",
       "id": "cds-supply"
     },
     {
-      "questionText": "Will you sell cigarettes, have a cigarette vending machine, or be a cigarette manufacturer sales representative?",
+      "questionText": "Do you plan to sell cigarettes, have a cigarette vending machine, or be a cigarette manufacturer sales representative?",
       "id": "cigarette-manufacture-sell",
       "addOn": "cigarettes-add"
     },
     {
       "addOn": "planner",
       "id": "planning-services",
-      "questionText": "Will you offer professional planning services?"
+      "questionText": "Do you plan to offer professional planning services?"
     },
     {
       "addOn": "healthcare-xray-reg",
       "id": "healthcare-xray-regis",
-      "questionText": "Will you be using x-ray machines?"
+      "questionText": "Do you plan to be using x-ray machines?"
     },
     {
       "questionText": "Are you an optometrist?",
@@ -116,28 +116,28 @@
       "addOn": "healthcare-tpa"
     },
     {
-      "questionText": "Will you deliver packages by air (for example by airplane or helicopter)?",
+      "questionText": "Do you plan to deliver packages by air (for example, by airplane or helicopter)?",
       "id": "courier-CRTK-survey",
       "addOn": "community-rtk-survey"
     },
     {
-      "questionText": "Will your business fall under [one of these industries](https://www.nj.gov/dep/enforcement/opppc/reports/rtknaics.pdf)?",
+      "questionText": "Do you plan to fall under [one of these industries](https://www.nj.gov/dep/enforcement/opppc/reports/rtknaics.pdf)?",
       "id": "other-businesses-CRTK-survey",
       "addOn": "community-rtk-survey"
     },
     {
-      "questionText": "\nWill you sell lawn and garden supplies, flowers, or florists’ supplies?",
+      "questionText": "Do you plan to sell lawn and garden supplies, flowers, or florists’ supplies?",
       "id": "lawn-businesses-CRTK-survey",
       "addOn": "community-rtk-survey"
     },
     {
-      "questionText": "Will you do management consulting services (not including manufacturing management, physical distribution, and site location consulting)?",
+      "questionText": "Do you plan to do management consulting services (not including manufacturing management, physical distribution, and site location consulting)?",
       "id": "logistics-CRTK-survey",
       "addOn": "community-rtk-survey"
     },
     {
       "id": "pest-pesticide-dealer-licensing",
-      "questionText": "Will your business be selling pesticides? ",
+      "questionText": "Do you plan to sell pesticides?",
       "addOn": "pest-pesticide-dealer-license"
     },
     {
@@ -147,12 +147,12 @@
     },
     {
       "id": "retail-pesticide-dealer-licensing",
-      "questionText": "Will your business be selling pesticides? ",
+      "questionText": "Do you plan to sell pesticides?",
       "addOn": "retail-pesticide-dealer-license"
     },
     {
       "id": "pesticides-applicator-licensing",
-      "questionText": "Will your business be using pesticides or offering pesticide application services? \n",
+      "questionText": "Do you plan to use pesticides or offer pesticide application services?",
       "addOn": "multi-pest-applicator-license"
     }
   ]
