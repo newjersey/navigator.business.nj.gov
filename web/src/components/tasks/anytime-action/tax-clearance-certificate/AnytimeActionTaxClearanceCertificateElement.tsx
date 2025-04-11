@@ -190,7 +190,7 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
                   downloadFilename={`Tax Clearance Certificate - ${profileData.businessName} - ${
                     LookupTaxClearanceCertificateAgenciesById(taxClearanceCertificateData.requestingAgencyId)
                       .name
-                  } - <timestamp>`}
+                  } - ${Date.now()}`}
                 />
               ) : (
                 <TaxClearanceSteps

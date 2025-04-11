@@ -1,7 +1,15 @@
 {
   "request": {
     "method": "POST",
-    "urlPattern": "/TYTR_ACE_App/ProcessCertificate/businessClearance"
+    "url": "/TYTR_ACE_App/ProcessCertificate/businessClearance",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$[?(@.taxpayerId == '777777777771')]"
+      },
+      {
+        "matchesJsonPath": "$[?(@.taxpayerPin == '3889')]"
+      }
+    ]
   },
   "response": {
     "status": 200,
