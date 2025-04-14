@@ -4425,11 +4425,11 @@ __metadata:
     serverless-prune-plugin: 2.1.0
     simple-oauth2: 5.1.0
     supertest: 6.3.4
-    ts-jest: 29.2.6
+    ts-jest: 29.3.1
     ts-loader: 9.5.2
     ts-node: 10.9.2
     tsconfig-paths: 4.2.0
-    typescript: 5.7.3
+    typescript: 5.8.3
     uuid: 9.0.1
     winston: 3.17.0
     winston-cloudwatch: 6.3.0
@@ -4631,11 +4631,11 @@ __metadata:
     style-loader: 3.3.4
     supertest: 6.3.4
     swr: 1.3.0
-    ts-jest: 29.2.6
+    ts-jest: 29.3.1
     ts-loader: 9.5.2
     ts-node: 10.9.2
     tsconfig-paths: 4.2.0
-    typescript: 5.7.3
+    typescript: 5.8.3
     unified: 10.1.2
     unist-util-visit: 5.0.0
     uuid: 9.0.1
@@ -4671,10 +4671,10 @@ __metadata:
     lodash: 4.17.21
     prettier: 2.8.8
     rimraf: 5.0.10
-    ts-jest: 29.2.6
+    ts-jest: 29.3.1
     ts-node: 10.9.2
     tsconfig-paths: 4.2.0
-    typescript: 5.7.3
+    typescript: 5.8.3
     uuid: 9.0.1
   languageName: unknown
   linkType: soft
@@ -4809,10 +4809,10 @@ __metadata:
     storybook: 7.6.20
     style-loader: 3.3.4
     swr: 1.3.0
-    ts-jest: 29.2.6
+    ts-jest: 29.3.1
     ts-loader: 9.5.2
     ts-node: 10.9.2
-    typescript: 5.7.3
+    typescript: 5.8.3
     unified: 10.1.2
     unist-util-visit: 5.0.0
     webpack: 5.97.1
@@ -34198,9 +34198,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:29.2.6":
-  version: 29.2.6
-  resolution: "ts-jest@npm:29.2.6"
+"ts-jest@npm:29.3.1":
+  version: 29.3.1
+  resolution: "ts-jest@npm:29.3.1"
   dependencies:
     bs-logger: ^0.2.6
     ejs: ^3.1.10
@@ -34210,6 +34210,7 @@ __metadata:
     lodash.memoize: ^4.1.2
     make-error: ^1.3.6
     semver: ^7.7.1
+    type-fest: ^4.38.0
     yargs-parser: ^21.1.1
   peerDependencies:
     "@babel/core": ">=7.0.0-beta.0 <8"
@@ -34231,7 +34232,7 @@ __metadata:
       optional: true
   bin:
     ts-jest: cli.js
-  checksum: ff71b27e997e4c5e6bcf2d38804b188eb1c7eec78570329f058f434ba1bd112a4806cdc4e7baac0e0e834bd20ca3be16e03d5c546304aa28e5cfeaccca82139e
+  checksum: 7320bbfab2e2cc7d5308fadcfe486d24ffc0018f92bf05946cd3ac75888977ec52887b2beaa99ec5ee3d67b8636b56a1688db447fd2794eeefc498862e850f77
   languageName: node
   linkType: hard
 
@@ -34477,6 +34478,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"type-fest@npm:^4.38.0":
+  version: 4.39.1
+  resolution: "type-fest@npm:4.39.1"
+  checksum: 71ce0e25822d5d984c8882e3243c42c741f089c003d89222dc361a133698d8ac021c18a9139ba3baf0fee2f523383422b8c5aaa390b1b3a98140f23dd0f44795
+  languageName: node
+  linkType: hard
+
 "type-is@npm:~1.6.18":
   version: 1.6.18
   resolution: "type-is@npm:1.6.18"
@@ -34563,23 +34571,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.7.3":
-  version: 5.7.3
-  resolution: "typescript@npm:5.7.3"
+"typescript@npm:5.8.3":
+  version: 5.8.3
+  resolution: "typescript@npm:5.8.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 6c38b1e989918e576f0307e6ee013522ea480dfce5f3ca85c9b2d8adb1edeffd37f4f30cd68de0c38a44563d12ba922bdb7e36aa2dac9c51de5d561e6e9a2e9c
+  checksum: cb1d081c889a288b962d3c8ae18d337ad6ee88a8e81ae0103fa1fecbe923737f3ba1dbdb3e6d8b776c72bc73bfa6d8d850c0306eed1a51377d2fccdfd75d92c4
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@5.7.3#~builtin<compat/typescript>":
-  version: 5.7.3
-  resolution: "typescript@patch:typescript@npm%3A5.7.3#~builtin<compat/typescript>::version=5.7.3&hash=5786d5"
+"typescript@patch:typescript@5.8.3#~builtin<compat/typescript>":
+  version: 5.8.3
+  resolution: "typescript@patch:typescript@npm%3A5.8.3#~builtin<compat/typescript>::version=5.8.3&hash=5786d5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 081eb086b0247a54cd8d61e34c10c3325037b0fdf00e135738d923e4e79f492e128be31ed03980039874ef1aa2e6fded8067f7be0cd92790efd2576e1d70e723
+  checksum: f1743b6850976b3debf7cbd53d2bc0b67e75d47eb6410db564c8bb475e92a8a48f8a3fcd14d89cf93426835281c31a8f8a94dad90be4dc899279a898532ba97f
   languageName: node
   linkType: hard
 
