@@ -1,10 +1,10 @@
 ---
 requiresLocation: true
 summaryDescriptionMd: >-
-
+  
 
   :::note
-   This screen guides your next steps. It does not submit your information for registration purposes.
+   This screen guides your next steps. It does not submit your information for registration.
   :::
 
 
