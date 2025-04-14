@@ -1,6 +1,6 @@
 ---
 summaryDescriptionMd: >-
-
+  
 
   :::infoAlert
    If you registered online, you will receive an email confirmation where you can download your BRC. It may take up to 72 hours before you can download your BRC on a public site. Your PIN may take longer to receive because it is sent through the mail.
@@ -11,7 +11,7 @@ summaryDescriptionMd: >-
 
 
   :::note
-   This screen guides your next steps. It does not submit your information for registration purposes.
+   This screen guides your next steps. It does not submit your information for registration.
   :::
 urlSlug: tax-registration
 displayname: tax-registration
