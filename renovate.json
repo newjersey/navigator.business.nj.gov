@@ -87,6 +87,20 @@
     {
       "matchPackagePrefixes": ["@aws-sdk"],
       "groupName": "aws-sdk"
+    },
+    {
+      "matchPackageNames": [
+        "unified",
+        "remark",
+        "remark-*",
+        "rehype",
+        "rehype-*"
+      ],
+      "groupName": "unified"
+    },
+    {
+      "matchManagers": ["pip_requirements"],
+      "automerge": true
     }
   ]
 }
