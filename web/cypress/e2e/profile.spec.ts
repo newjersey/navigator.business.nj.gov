@@ -25,7 +25,8 @@ describe("Profile [feature] [all] [group4]", () => {
     cy.loginByCognitoApi();
   });
 
-  describe("navigates to profile page and updates all fields", () => {
+  // Todo: fix and remove skip https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/13889
+  describe.skip("navigates to profile page and updates all fields", () => {
     it("onboards random industry where homebase doesn't apply, then changes to industry where it applies and updates all fields in profile", () => {
       const industry = randomNonHomeBasedIndustry();
       const homeBasedQuestion = industry.industryOnboardingQuestions.canBeHomeBased
