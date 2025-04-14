@@ -64,20 +64,6 @@
           "description": "Do you own and/or operate a `carnival or amusement ride|carnival-amusement-ride` ?"
         }
       },
-      "travelingCircusOrCarnivalOwningBusiness": {
-        "default": {
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Do you own and/or operate a traveling carnival or circus?"
-        }
-      },
-      "vacantPropertyOwner": {
-        "default": {
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Do you own a vacant or unoccupied property in New Jersey with a total floor space of 2,500 square feet or more?"
-        }
-      },
       "taxId": {
         "default": {
           "header": "New Jersey Tax ID",
@@ -198,10 +184,24 @@
           "description": "Will you house animals?"
         }
       },
+      "travelingCircusOrCarnivalOwningBusiness": {
+        "default": {
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Do you own and/or operate a traveling carnival or circus?"
+        }
+      },
       "tradeName": {
         "default": {
           "header": "Trade Name",
           "errorTextRequired": "Enter your trade name."
+        }
+      },
+      "vacantPropertyOwner": {
+        "default": {
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Do you own a vacant or unoccupied property in New Jersey with a total floor space of 2,500 square feet or more?"
         }
       },
       "ownershipTypeIds": {
@@ -476,7 +476,7 @@
       "escapeModalHeader": "Are you sure you want to continue?",
       "profileTabNumbersTitle": "Reference Numbers",
       "profileTabNoteTitle": "Notes",
-      "noteForBusinessesFormedOutsideNavigator": "Your profile helps us recommend requirements and opportunities unique to your business. It does not submit your information for registration purposes.",
+      "noteForBusinessesFormedOutsideNavigator": "Your profile helps us make recommendations for your business. We do not submit information for registration.",
       "saveButtonText": "Save",
       "escapeModalReturn": "Continue without saving",
       "successTextHeader": "Business Profile Saved",
