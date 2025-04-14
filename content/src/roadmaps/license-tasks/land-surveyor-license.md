@@ -44,7 +44,6 @@ licenseCertificationClassification: undefined
 * NCEES record number, if applicable
 * Applicable fees paid
 
-
 **If you have a current and complete NCEES record, the State Board of Professional Engineers and Land Surveyors will accept it in place of the following**:
 
 * Official transcripts
@@ -54,7 +53,7 @@ licenseCertificationClassification: undefined
 * License verification
 * Work experience
 
-Email your current and complete NCEES record to pels@dca.njoag.gov after submitting your land surveyor license application.
+Have your current and complete NCEES record transmitted to the NJ State Board of Professional Engineers and Land Surveyors after submitting your land surveyor license application. 
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
 
