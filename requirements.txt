@@ -34,7 +34,7 @@ pycparser==2.22
 Pygments==2.19.1
 pyparsing==3.2.3
 python-dateutil==2.9.0.post0
-python-dotenv==1.0.1
+python-dotenv==1.1.0
 PyYAML==6.0.2
 requests==2.32.3
 six==1.17.0
