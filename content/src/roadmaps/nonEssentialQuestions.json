@@ -154,6 +154,11 @@
       "id": "pesticides-applicator-licensing",
       "questionText": "Do you plan to use pesticides or offer pesticide application services?",
       "addOn": "multi-pest-applicator-license"
+    },
+    {
+      "id": "crematory",
+      "questionText": "Will you be constructing and/or operating a crematory?",
+      "addOn": "crematory-application-funeral"
     }
   ]
 }
