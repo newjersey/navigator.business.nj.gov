@@ -16,7 +16,7 @@ ipdb==0.13.13
 ipython==8.35.0
 jedi==0.19.2
 kiwisolver==1.4.8
-Markdown==3.7
+Markdown==3.8
 matplotlib-inline==0.1.7
 matplotlib==3.10.1
 mypy-extensions==1.0.0
