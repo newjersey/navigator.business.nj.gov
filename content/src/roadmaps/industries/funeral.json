@@ -58,7 +58,8 @@
   "name": "Funeral Services",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "crematory"
   ],
   "displayname": "funeral",
   "industryOnboardingQuestions": {
