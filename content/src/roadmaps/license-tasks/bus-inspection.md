@@ -6,7 +6,7 @@ displayname: bus-inspection
 urlSlug: bus-inspection
 name: Schedule Your Initial Bus Inspection
 webflowName: "School Bus: School Bus Inspection"
-summaryDescriptionMd: >
+summaryDescriptionMd: >+
   :::infoAlert
 
   After passing initial inspection, buses must continue to be inspected **every 6 months.** The NJ MVC inspector assigned to your area will schedule these for you.
@@ -14,7 +14,17 @@ summaryDescriptionMd: >
   :::
 
 
-  To comply with federal and New Jersey safety standards, all buses must pass a initial inspection before you register them for Omnibus (code 54) or s1/s2 plates.
+  The NJ MVC defines a “bus” as a vehicle designed or used to **transport 16 or more passengers,** including the driver, or any vehicle used to transport passengers for hire, such as:
+
+  * School buses
+
+  * Shuttles
+
+  * Charter services.
+
+
+  To comply with federal and New Jersey safety standards, all buses must pass an initial inspection before you register them for Omnibus (code 54) or s1/s2 plates.
+
 industryId: school-bus
 callToActionText: ""
 callToActionLink: ""
@@ -29,8 +39,7 @@ webflowId: 648b6ec5ff1d0d38af2f5a57
 
 Before scheduling, make sure that:
 * The bus is titled or in the process of being titled in the state of NJ
-* The bus, if commercial, is configured for passenger service and meets federal safety standards (seating, mirrors, signage, etc)
-* The bus, if being used as a school transportation vehicle, has proper equipment installed(flashing lights, stop arms, seat belts, etc.)
+* The bus is configured for passenger service and meets federal safety standards (seating, mirrors, signage, flashing lights, etc)
 * Your business is registered as a valid entity
 * Any modifications or retrofits are completed
 
