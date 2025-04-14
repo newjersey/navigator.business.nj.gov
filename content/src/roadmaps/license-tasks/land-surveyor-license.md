@@ -37,7 +37,6 @@ licenseCertificationClassification: undefined
 * [Five professional references](https://www.njconsumeraffairs.gov/pels/Applications/Land-Surveyor-Reference-Form.pdf) with license number, address, email, and years known. 3 must be NJ-licensed land surveyors. At least 1 must be a licensed supervisor who confirms 36 months of supervision (you can list more than 1 supervisor to reach 36 months, but the time can't overlap)
 * The completed [Detailed Breakdown of Surveying Experience form](https://www.njconsumeraffairs.gov/pels/Applications/Detailed-Breakdown-of-Surveying-Experience-Form.pdf), if you do not have a National Council of Examiners for Engineering and Surveying (NCEES) record
 * The completed [Report of Professional Experience form](https://www.njconsumeraffairs.gov/poly/Applications/Report-of-Professional-Experience-Form.pdf), if you do not have an NCEES record
-* College or university where you got your bachelor's or graduate degree in land surveying and dates attended
 * Month and year of fingerprinting for any New Jersey Consumer Affairs’ board or committee, if applicable
 * Details of any license denial, revocation, suspension, or surrender, if applicable
 * Written explanation of criminal history, if applicable
@@ -45,15 +44,14 @@ licenseCertificationClassification: undefined
 * NCEES record number, if applicable
 * Applicable fees paid
 
-Provide each reference with a [reference form](https://www.njconsumeraffairs.gov/pels/Applications/Land-Surveyor-Reference-Form.pdf). 
 
 **If you have a current and complete NCEES record, the State Board of Professional Engineers and Land Surveyors will accept it in place of the following**:
 
 * Official transcripts
+* Professional references
 * Education evaluation (if needed)
 * Fundamentals of Land Surveying and Principles and Practices of Land Surveying exam scores
 * License verification
-* Professional references
 * Work experience
 
 Email your current and complete NCEES record to pels@dca.njoag.gov after submitting your land surveyor license application.
