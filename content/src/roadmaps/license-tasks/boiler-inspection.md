@@ -13,7 +13,7 @@ summaryDescriptionMd: Your boilers may need to be inspected regularly to ensure
   **it must be registered and inspected within 30 days.**
 industryId:
   - generic
-callToActionText: Visit the MIBBPVC for More Information
+callToActionText: Visit the Bureau’s Page for More Information
 callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/b\
   oiler-pressure-vessel-compliance/index.shtml "
 agencyId: njdol
