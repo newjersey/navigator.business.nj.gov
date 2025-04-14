@@ -1,51 +1,59 @@
 ---
-id: land-surveyor-license
-webflowId: 67e313f8d35f956ca96e3b96
-urlSlug: land-surveyor-license
-name: Apply for Your Land Surveyor License, if Applicable
+notesMd: >-
+  Working doc:
+  https://docs.google.com/document/d/13XvJgeSbRhayRdlGQJ5rPxp0EgE2YUDQT74mN5aW1WU/edit?tab=t.0
+
+
+  4.14.25: Updated with SME revisions 
 displayname: land-surveyor-license
-webflowName: "Engineering and Land Surveying: Land Surveyor License"
-filename: land-surveyor-license
-callToActionLink: https://www.njconsumeraffairs.gov/pels/Pages/applications.aspx
-callToActionText: Apply for My Land Surveyor License
+urlSlug: land-surveyor-license
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: State Board of Professional Engineers and Land Surveyors
+filename: land-surveyor-license
+id: land-surveyor-license
+name: Apply for Your Land Surveyor License, if Applicable
+webflowName: "Engineering and Land Surveying: Land Surveyor License"
+summaryDescriptionMd: You need a land surveyor license if you offer professional
+  land surveying services in New Jersey.
 industryId: engineering
+callToActionText: Apply for My Land Surveyor License
+callToActionLink: https://www.njconsumeraffairs.gov/pels/Pages/applications.aspx
+webflowId: 67e313f8d35f956ca96e3b96
 licenseCertificationClassification: undefined
-summaryDescriptionMd: "You need a land surveyor license if you offer professional land surveying services in New Jersey."
 ---
-
 ## Eligibility Requirements
 
-- Be at least 18 years old
-- Have passed the Fundamentals of Land Surveying and Principles and Practices of Land Surveying exams
-- Have a bachelor's degree in Land Surveying from an Accreditation Board for Engineering and Technology (ABET) accredited school
-- Have 3 years of professional surveying experience, with at least 2 years completed in the United States
+* Be at least 18 years old
+* Have passed the Fundamentals of Land Surveying and Principles and Practices of Land Surveying exams
+* Have a bachelor's degree in Land Surveying from an Accreditation Board for Engineering and Technology (ABET) accredited school. If the degree is not ABET accredited, provide an evaluation from a [board-approved evaluation provider](https://www.njconsumeraffairs.gov/pels/Pages/FAQ.aspx)
+* Have 3 years of professional surveying experience, with at least 2 years completed in the United States under the regular supervision of a US-licensed land surveyor
 
 ## Application Requirements
 
-- Social Security number (SSN) or `Individual Taxpayer Identification number (ITIN)|ITIN`
-- A 2x2 inch photo of your head and shoulders taken in the last 6 months
-- Date and state where you passed the Fundamentals of Land Surveying and Principles and Practices of Land Surveying exams
-- Official transcripts mailed to the State Board of Professional Engineers and Land Surveyors
-- Five professional references, including their license number, address, email, and years known (3 must be New Jersey-licensed professional land surveyors and 1 former supervisor)
-- The completed [Detailed Breakdown of Surveying Experience form](https://www.njconsumeraffairs.gov/pels/Applications/Detailed-Breakdown-of-Surveying-Experience-Form.pdf), if you do not have a National Council of Examiners for Engineering and Surveying (NCEES) record
-- The completed [Report of Professional Experience form](https://www.njconsumeraffairs.gov/poly/Applications/Report-of-Professional-Experience-Form.pdf), if you do not have an NCEES record
-- College or university where you got your bachelor's or graduate degree in land surveying and dates attended
-- Month and year of fingerprinting for any New Jersey Consumer Affairs’ board or committee, if applicable
-- Details of any license denial, revocation, suspension, or surrender, if applicable
-- Written explanation of criminal history, if applicable
-- Name change documentation, if applicable
-- NCEES record number, if applicable
-- Applicable fees paid
+* Social Security number (SSN), `Individual Taxpayer Identification number (ITIN),|ITIN` or Division Issued Identification number (DIIN)
+* A 2x2 inch photo of your head and shoulders taken in the last 6 months
+* Date and state where you passed the Fundamentals of Land Surveying and Principles and Practices of Land Surveying exams
+* Official transcripts emailed directly to the State Board of Professional Engineers and Land Surveyors at pels@dca.njoag.gov
+* [Five professional references](https://www.njconsumeraffairs.gov/pels/Applications/Land-Surveyor-Reference-Form.pdf) with license number, address, email, and years known. 3 must be NJ-licensed land surveyors. At least 1 must be a licensed supervisor who confirms 36 months of supervision (you can list more than 1 supervisor to reach 36 months, but the time can't overlap)
+* The completed [Detailed Breakdown of Surveying Experience form](https://www.njconsumeraffairs.gov/pels/Applications/Detailed-Breakdown-of-Surveying-Experience-Form.pdf), if you do not have a National Council of Examiners for Engineering and Surveying (NCEES) record
+* The completed [Report of Professional Experience form](https://www.njconsumeraffairs.gov/poly/Applications/Report-of-Professional-Experience-Form.pdf), if you do not have an NCEES record
+* Month and year of fingerprinting for any New Jersey Consumer Affairs’ board or committee, if applicable
+* Details of any license denial, revocation, suspension, or surrender, if applicable
+* Written explanation of criminal history, if applicable
+* Name change documentation, if applicable
+* NCEES record number, if applicable
+* Applicable fees paid
 
-Provide each reference with a [reference form](https://www.njconsumeraffairs.gov/pels/Applications/Land-Surveyor-Reference-Form.pdf). Your official transcripts can be mailed to:
+**If you have a current and complete NCEES record, the State Board of Professional Engineers and Land Surveyors will accept it in place of the following**:
 
-State Board of Professional Engineers and Land Surveyors
+* Official transcripts
+* Professional references
+* Education evaluation (if needed)
+* Fundamentals of Land Surveying and Principles and Practices of Land Surveying exam scores
+* License verification
+* Work experience
 
-P.O. Box 45015
-
-Newark, NJ 07101
+Have your current and complete NCEES record transmitted to the NJ State Board of Professional Engineers and Land Surveyors after submitting your land surveyor license application. 
 
 :::callout{ showHeader="true" headerText="What if I don't get this license?" showIcon="false" calloutType="warning" }
 
