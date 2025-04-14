@@ -26,7 +26,7 @@ licenseCertificationClassification: undefined
 * Be at least 18 years old
 * Have passed the Fundamentals of Land Surveying and Principles and Practices of Land Surveying exams
 * Have a bachelor's degree in Land Surveying from an Accreditation Board for Engineering and Technology (ABET) accredited school. If the degree is not ABET accredited, provide an evaluation from a [board-approved evaluation provider](https://www.njconsumeraffairs.gov/pels/Pages/FAQ.aspx)
-* Have 3 years of professional surveying experience, with at least 2 years completed in the United States, under the regular supervision of a US-licensed land surveyor
+* Have 3 years of professional surveying experience, with at least 2 years completed in the United States under the regular supervision of a US-licensed land surveyor
 
 ## Application Requirements
 
