@@ -10,6 +10,7 @@
     "clean": "yarn workspaces foreach -v run clean",
     "cms:proxy": "yarn dlx decap-server",
     "decap:build-config": "yarn dlx tsx scripts/merge-decap-config.ts",
+    "decap:enforce-yaml-quotes": "yarn dlx tsx scripts/enforce-yaml-quotes.ts",
     "dependency-check": "yarn workspaces foreach -v run dependency-check",
     "dynamo": "DYNAMO_ENDPOINT=http://localhost:8000 dynamodb-admin",
     "invokeNewsletter": "yarn workspace @businessnjgovnavigator/api invokeNewsletter",

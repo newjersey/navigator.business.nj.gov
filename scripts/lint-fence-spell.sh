@@ -4,6 +4,9 @@ cd "$(git rev-parse --show-toplevel)"
 
 set -e
 
+# format yaml files before building consolidated cms yaml config
+yarn decap:enforce-yaml-quotes
+
 yarn build
 yarn typecheck
 yarn workspace @businessnjgovnavigator/web typecheck:cypress

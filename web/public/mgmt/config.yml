@@ -5226,6 +5226,10 @@ collections:
                 name: "businessNameLabel"
                 widget: "string"
                 required: true
+              - label: "Entity Id Label"
+                name: "entityIdLabel"
+                widget: "string"
+                required: true
               - label: "Address Label"
                 name: "addressLabel"
                 widget: "string"
