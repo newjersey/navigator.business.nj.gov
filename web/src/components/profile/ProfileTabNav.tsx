@@ -35,20 +35,20 @@ export const ProfileTabNav = (props: Props): ReactElement => {
       <ProfileTab
         {...props}
         tab={infoTab}
-        tabIcon="info_outline"
+        tabIcon="info-outline"
         tabText={Config.profileDefaults.default.profileTabInfoTitle}
       />
       <ProfileTab
         {...props}
         tab={numbersTab}
-        tabIcon="assessment"
+        tabIcon="bar-chart"
         tabText={Config.profileDefaults.default.profileTabNumbersTitle}
       />
       {shouldShowDocuments && (
         <ProfileTab
           {...props}
           tab={documentsTab}
-          tabIcon="folder_open"
+          tabIcon="folder-open"
           tabText={Config.profileDefaults.default.profileTabDocsTitle}
         />
       )}

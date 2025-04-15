@@ -6,7 +6,7 @@ interface Props {
   tab: ProfileTabs;
   activeTab: ProfileTabs;
   setProfileTab: (profileTab: ProfileTabs) => void;
-  tabIcon: string;
+  tabIcon: "info-outline" | "bar-chart" | "folder-open" | "edit";
   tabText: string;
 }
 
@@ -17,8 +17,8 @@ export const ProfileTab = (props: Props): ReactElement => {
       data-testid={props.tab}
       onClick={(): void => props.setProfileTab(props.tab)}
     >
-      <div className="left-content">
-        <Icon className="usa-icon--size-3" iconName={props.tabIcon} />
+      <div className="profile-tab-left-content">
+        <img src={`/img/${props.tabIcon}.svg`} alt="" role="presentation" />
         <div className="profile-tab-text">{props.tabText}</div>
       </div>
       <Icon className="usa-icon--size-3" iconName="navigate_next" />
