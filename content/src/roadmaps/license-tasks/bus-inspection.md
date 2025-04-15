@@ -43,7 +43,9 @@ Before scheduling, make sure that:
 * Your business is registered as a valid entity
 * Any modifications or retrofits are completed
 
-## How to Schedule Your Inspection - School Buses
+## How to Schedule Your Inspection
+
+**School Buses:**
 
 Call the **NJ MVC School Bus Inspection Unit** at **(609) 633-9473** to schedule an initial inspection
 
@@ -53,10 +55,14 @@ In addition to proof of the above, you'll be asked to provide information about 
 
 &nbsp;
 
-## How to Schedule Your Inspection - Commercial Buses
+**Commercial Buses:**
 
 
-Call the **NJ MVC Commercial Bus Inspection Unit** at **(609) 777-4196** to schedule an initial inspection. In addition to proof of the above, you'll be asked to provide information about the bus(es), location, and facility, particularly if you want the inspection to be performed on-site. 
+Call the **NJ MVC Commercial Bus Inspection Unit** at **(609) 777-4196** to schedule an initial inspection. 
+
+&nbsp;
+
+In addition to proof of the above, you'll be asked to provide information about the bus(es), location, and facility, particularly if you want the inspection to be performed on-site. 
 
 &nbsp;
 
