@@ -4483,8 +4483,8 @@ __metadata:
     "@mui/system": 5.16.14
     "@mui/x-date-pickers": 5.0.20
     "@newjersey/njwds": 0.3.0
-    "@next/bundle-analyzer": 15.1.4
-    "@next/eslint-plugin-next": 15.1.4
+    "@next/bundle-analyzer": 15.3.0
+    "@next/eslint-plugin-next": 15.3.0
     "@semantic-release/changelog": 6.0.3
     "@semantic-release/git": 10.0.1
     "@serverless/typescript": 3.38.0
@@ -4702,8 +4702,8 @@ __metadata:
     "@mui/system": 5.16.14
     "@mui/x-date-pickers": 5.0.20
     "@newjersey/njwds": 0.3.0
-    "@next/bundle-analyzer": 15.1.4
-    "@next/eslint-plugin-next": 15.1.4
+    "@next/bundle-analyzer": 15.3.0
+    "@next/eslint-plugin-next": 15.3.0
     "@storybook/addon-actions": 7.6.20
     "@storybook/addon-designs": 7.0.9
     "@storybook/addon-docs": 7.6.20
@@ -7507,12 +7507,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:15.1.4":
-  version: 15.1.4
-  resolution: "@next/bundle-analyzer@npm:15.1.4"
+"@next/bundle-analyzer@npm:15.3.0":
+  version: 15.3.0
+  resolution: "@next/bundle-analyzer@npm:15.3.0"
   dependencies:
     webpack-bundle-analyzer: 4.10.1
-  checksum: 9077c64282003f39d33bcab0458a69a3e412f94f84c77ee0f057d31ca3ed79e50f201ecdd4ba9769c2eef504c2da1a753da90c6bad4bf2738dca3cea904c79dd
+  checksum: 0a2e305d0f445ad5aefa411f3c6668f9b2e4b8857e37837ded410c79acde399581176a9d33151104c95d9c15bb94ecb1dc9e397816f87024ca62577fb9bb9c82
   languageName: node
   linkType: hard
 
@@ -7529,6 +7529,15 @@ __metadata:
   dependencies:
     fast-glob: 3.3.1
   checksum: f09cfb50cf26672df5cbeac9594ff4ce2196eeb3a3192f7f53b2b88770d7e40c5bd4a39e4129a7cae5d623d65c7f5f4d1580ba289a2922438073bae7326cae40
+  languageName: node
+  linkType: hard
+
+"@next/eslint-plugin-next@npm:15.3.0":
+  version: 15.3.0
+  resolution: "@next/eslint-plugin-next@npm:15.3.0"
+  dependencies:
+    fast-glob: 3.3.1
+  checksum: 045f71ec39e7c83e3bd85269fa8a205f064a37fa7c376310b38e2c7e79fc0e6120e053803f807d1dfbabdb754f23cf137db94ab83942761d2b3a6622b9e4235e
   languageName: node
   linkType: hard
 
