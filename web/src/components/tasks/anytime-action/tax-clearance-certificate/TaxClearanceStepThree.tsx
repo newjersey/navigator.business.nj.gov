@@ -53,7 +53,7 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
 
     // TODO: Error Response will be addressed in a separate ticket
     // Note: if there is a server error, we may return a 500 status code, or
-    // return the error object with type = SYSTEM_ERROR
+    // return the error object with type = NATURAL_PROGRAM_ERROR
     scrollToTop();
   };
 
