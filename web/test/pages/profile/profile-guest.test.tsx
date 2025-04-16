@@ -138,7 +138,9 @@ describe("profile - guest mode", () => {
         setShowNeedsAccountModal,
       });
       chooseTab("notes");
-      fireEvent.change(screen.getByLabelText("Notes"), { target: { value: "some note" } });
+      fireEvent.change(screen.getByLabelText("Notes", { selector: "textarea" }), {
+        target: { value: "some note" },
+      });
       expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
   }
