@@ -144,7 +144,8 @@ export type LegacyEventCategory =
   | "show_me_funding_opportunities_button"
   | "check_account_help_button"
   | "check_account_log_in"
-  | "link_your_myNJ_account_link";
+  | "link_your_myNJ_account_link"
+  | "user_indicated_industry";
 
 export type LegacyEventAction =
   | "click"
@@ -272,4 +273,5 @@ export type LegacyEventLabel =
   | "skip_to_main_content"
   | "go_to_dashboard"
   | "go_to_business.nj.gov"
-  | "show_calendar";
+  | "show_calendar"
+  | "user_indicated_industry";

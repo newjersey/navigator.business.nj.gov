@@ -28,7 +28,8 @@ type EventType =
   | "task_search_interactions"
   | "navigation_clicks"
   | "site_return_callback"
-  | "account_clicks";
+  | "account_clicks"
+  | "industry_chosen";
 
 const eventMap: Record<EventType, string> = {
   contextual_link_clicks: "contextual_link_clicks",
@@ -51,6 +52,7 @@ const eventMap: Record<EventType, string> = {
   task_search_interactions: "task_search_interactions",
   navigation_clicks: "navigation_clicks",
   account_clicks: "account_clicks",
+  industry_chosen: "industry_chosen",
 };
 
 type ParameterType =
@@ -2395,6 +2397,19 @@ export default {
             clicked: "link_your_myNJ_account",
             item: "link_your_myNJ_account_link",
             clicked_to: "/onboarding",
+          });
+        },
+      },
+    },
+    industry_chosen: {
+      click: {
+        industry_chosen: (industry: string) => {
+          eventRunner.track({
+            event: "industry_chosen",
+            legacy_event_category: "user_indicated_industry",
+            legacy_event_label: "user_indicated_industry",
+            legacy_event_action: "click",
+            click_text: industry,
           });
         },
       },

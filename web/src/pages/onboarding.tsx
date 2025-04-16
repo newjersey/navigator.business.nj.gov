@@ -259,6 +259,10 @@ const OnboardingPage = (props: Props): ReactElement => {
           if (hasEssentialQuestion(queryIndustryId)) {
             setPage({ current: 2, previous: 1 });
           } else {
+            // delete log
+            console.log({ queryIndustryId });
+            // starter kits and the webflow redirect
+            analytics.event.industry_chosen.click.industry_chosen(queryIndustryId ?? "unset");
             completeOnboarding(newProfileData, localUpdateQueue);
           }
         } else if (querySectorId && sectorQueryParamIsValid(querySectorId)) {
@@ -310,6 +314,8 @@ const OnboardingPage = (props: Props): ReactElement => {
     updateQueue: UpdateQueue | undefined
   ): Promise<void> => {
     if (!updateQueue) return;
+
+    console.log("in complete onboarding");
 
     setRegistrationDimension("Onboarded Guest");
 

@@ -10,6 +10,7 @@ import {
 } from "@/lib/domain-logic/essentialQuestions";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
+import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import { splitAndBoldSearchText } from "@/lib/utils/splitAndBoldSearchText";
 import {
@@ -62,6 +63,13 @@ export const IndustryDropdown = (props: Props): ReactElement => {
     }
 
     const newSector = LookupIndustryById(industryId).defaultSectorId;
+
+    // so this is a bit incorrect on further reflection,
+    // I need to track the submit of the save for the form for the page (whether that's during onboarding or on the profile)
+    // check if industry ID is different in the case of the profile and check that the industry ID is valid / set during onboarding
+
+    console.log("industry dropdown");
+    analytics.event.industry_chosen.click.industry_chosen(industryId ?? "unset");
 
     setProfileData({
       ...state.profileData,

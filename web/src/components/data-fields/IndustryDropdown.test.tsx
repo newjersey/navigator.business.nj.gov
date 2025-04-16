@@ -1,8 +1,27 @@
 import { IndustryDropdown } from "@/components/data-fields/IndustryDropdown";
+import analytics from "@/lib/utils/analytics";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, within } from "@testing-library/react";
+
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      industry_chosen: {
+        click: {
+          industry_chosen: jest.fn(),
+        },
+      },
+    },
+  };
+}
+
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 describe("Industry Dropdown", () => {
   it("displays the Generic Industry as the first item in the dropdown list", () => {
@@ -71,5 +90,24 @@ describe("Industry Dropdown", () => {
       fireEvent.mouseDown(screen.getByLabelText("Industry"));
       expect(screen.getByTestId("domestic-employer")).toBeInTheDocument();
     });
+  });
+
+  it("calls analytics correctly", () => {
+    render(
+      <WithStatefulProfileData
+        initialData={generateProfileData({
+          businessPersona: "STARTING",
+        })}
+      >
+        <IndustryDropdown />
+      </WithStatefulProfileData>
+    );
+
+    fireEvent.click(screen.getByLabelText("Industry"));
+    const items = within(screen.getByRole("listbox")).getAllByRole("option");
+
+    fireEvent.click(within(items[0]).getByTestId("generic"));
+
+    expect(mockAnalytics.event.industry_chosen.click.industry_chosen).toHaveBeenCalledWith("generic");
   });
 });
