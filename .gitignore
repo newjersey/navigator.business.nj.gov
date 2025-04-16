@@ -90,3 +90,6 @@ web/fundings.csv
 # Python
 .venv/
 **/__pycache__/
+
+# yaml file generated from yarn build
+web/public/mgmt/config.yml
