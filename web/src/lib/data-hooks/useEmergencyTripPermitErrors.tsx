@@ -1,4 +1,4 @@
-import { getErrorStateForEmergencyTripPermitField } from "@/components/tasks/abc-emergency-trip-permit/getErrorStateForEmergencyTripPermitField";
+import { getErrorStateForEmergencyTripPermitField } from "@/components/tasks/abc-emergency-trip-permit/fields/getErrorStateForEmergencyTripPermitField";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { templateEval } from "@/lib/utils/helpers";

@@ -1,14 +1,17 @@
 import { Heading } from "@/components/njwds-extended/Heading";
-import { EmergencyTripPermitCountryDropdown } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitCountryDropdown";
-import { EmergencyTripPermitStateDropdown } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitStateDropdown";
-import { EmergencyTripPermitTextFieldEntry } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitTextField";
+import { EmergencyTripPermitCountryDropdown } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitCountryDropdown";
+import { EmergencyTripPermitStateDropdown } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitStateDropdown";
+import { EmergencyTripPermitTextFieldEntry } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitTextField";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { MediaQueries } from "@/lib/PageSizes";
+import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export const RequestorStep = (): ReactElement => {
   const { Config } = useConfig();
   const context = useContext(EmergencyTripPermitContext);
+  const isMobile = useMediaQuery(MediaQueries.isMobile);
 
   return (
     <form onSubmit={context.onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
@@ -20,10 +23,10 @@ export const RequestorStep = (): ReactElement => {
       <div>
         <EmergencyTripPermitTextFieldEntry fieldName={"carrier"} required />
         <div className={"grid-row grid-gap"}>
-          <span className={"grid-col-6"}>
+          <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
             <EmergencyTripPermitTextFieldEntry fieldName={"requestorFirstName"} maxLength={35} required />
           </span>
-          <span className={"grid-col-6"}>
+          <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
             <EmergencyTripPermitTextFieldEntry fieldName={"requestorLastName"} maxLength={35} required />
           </span>
         </div>
@@ -38,11 +41,14 @@ export const RequestorStep = (): ReactElement => {
           maxLength={35}
         />
         <div className={"grid-row grid-gap"}>
-          <span className={"grid-col-6"}>
+          <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
             <EmergencyTripPermitTextFieldEntry fieldName={"requestorCity"} maxLength={35} required />
           </span>
-          <EmergencyTripPermitStateDropdown fieldName={"requestorStateProvince"} />
-          <span className={"grid-col-4"}>
+          <EmergencyTripPermitStateDropdown
+            className={`${isMobile ? "grid-col-6" : ""}`}
+            fieldName={"requestorStateProvince"}
+          />
+          <span className={`${isMobile ? "grid-col-6" : "grid-col-4"}`}>
             <EmergencyTripPermitTextFieldEntry fieldName={"requestorZipPostalCode"} maxLength={10} required />
           </span>
         </div>
@@ -50,26 +56,26 @@ export const RequestorStep = (): ReactElement => {
           {Config.abcEmergencyTripPermit.steps.requestor.vehicleSection}
         </Heading>
         <div className={"grid-row grid-gap"}>
-          <span className={"grid-col-6"}>
+          <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
             <EmergencyTripPermitTextFieldEntry fieldName={"vehicleMake"} maxLength={35} required />
           </span>
-          <span className={"grid-col-6"}>
+          <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
             <EmergencyTripPermitTextFieldEntry fieldName={"vehicleYear"} numeric maxLength={4} required />
           </span>
         </div>
         <div className={"grid-row grid-gap"}>
-          <span className={"grid-col-6"}>
+          <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
             <EmergencyTripPermitTextFieldEntry fieldName={"vehicleVinSerial"} maxLength={17} required />
           </span>
-          <span className={"grid-col-6"}>
+          <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
             <EmergencyTripPermitTextFieldEntry fieldName={"vehicleLicensePlateNum"} maxLength={8} required />
           </span>
         </div>
         <div className={"grid-row grid-gap"}>
-          <div className={"grid-col-6 padding-top-1"}>
+          <div className={`${isMobile ? "width-100" : "grid-col-6"}`}>
             <EmergencyTripPermitStateDropdown fieldName={"vehicleStateProvince"} />
           </div>
-          <div className={"grid-col-6 padding-top-1"}>
+          <div className={`${isMobile ? "width-100" : "grid-col-6"}`}>
             <EmergencyTripPermitCountryDropdown fieldName={"vehicleCountry"} />
           </div>
         </div>

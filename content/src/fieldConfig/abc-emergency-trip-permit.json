@@ -25,8 +25,18 @@
         "permitSubheader": "A confirmation email with a link to download your permit will be sent to ${requestorEmail}. Please specify additional preferences below.",
         "pdfAttachCheckboxLabel": "Attach the permit document to my confirmation email",
         "textMessageDownloadLinkCheckboxLabel": "Send the permit download link via text message",
-        "additionalEmailDownloadLinkCheckboxLabel": "Send the permit download link to another email address"
-
+        "additionalEmailDownloadLinkCheckboxLabel": "Send the permit download link to another email address",
+        "tripPermitFeeLineItem": "Emergency Trip Permit Statutory Fee",
+        "tripPermitFeeInfo": "This is the cost of an emergency trip permit for a single trip",
+        "onlineProcessFeeLineItem": "Online Service Processing Fee",
+        "totalFeeLineItem": "Total"
+      },
+      "review": {
+        "infoAlertText": "Review your information before submitting to the New Jersey Division of Alcoholic Beverage Control (ABC). You will then be directed to a secure payment platform operated by New Jersey's partner NICUSA Inc.",
+        "confirmationEmail": "Confirmation Email Sent To:",
+        "permitAttach": "Attach Permit Document to Email:",
+        "permitTextMessage": "Text Permit Link To:",
+        "alternateEmail": "Send Permit Link to Alternative Email:"
       }
     },
     "fields": {

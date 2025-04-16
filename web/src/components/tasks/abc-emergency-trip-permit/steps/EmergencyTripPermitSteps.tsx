@@ -1,8 +1,8 @@
-import { Content } from "@/components/Content";
-import { EmergencyTripPermitStepsConfiguration } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitStepsConfiguration";
 import { BillingStep } from "@/components/tasks/abc-emergency-trip-permit/steps/BillingStep";
+import { EmergencyTripPermitStepsConfiguration } from "@/components/tasks/abc-emergency-trip-permit/steps/EmergencyTripPermitStepsConfiguration";
 import { InstructionsStep } from "@/components/tasks/abc-emergency-trip-permit/steps/InstructionsStep";
 import { RequestorStep } from "@/components/tasks/abc-emergency-trip-permit/steps/RequestorStep";
+import { ReviewStep } from "@/components/tasks/abc-emergency-trip-permit/steps/ReviewStep";
 import { TripStep } from "@/components/tasks/abc-emergency-trip-permit/steps/TripStep";
 import { AbcEmergencyTripPermitStepNames } from "@/lib/types/types";
 import { ReactElement } from "react";
@@ -26,7 +26,7 @@ export const EmergencyTripPermitSteps: { component: ReactElement; step: AbcEmerg
       step: EmergencyTripPermitStepsConfiguration[3].name,
     },
     {
-      component: <Content>EmergencyTripPermitStepsConfiguration[4].name</Content>,
+      component: <ReviewStep />,
       step: EmergencyTripPermitStepsConfiguration[4].name,
     },
   ];

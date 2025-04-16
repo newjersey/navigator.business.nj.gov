@@ -3,12 +3,12 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
-import { EmergencyTripPermitSteps } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitSteps";
+import { EmergencyTripPermitSteps } from "@/components/tasks/abc-emergency-trip-permit/steps/EmergencyTripPermitSteps";
 import {
   doesStepHaveError,
   EmergencyTripPermitStepsConfiguration,
   isStepComplete,
-} from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitStepsConfiguration";
+} from "@/components/tasks/abc-emergency-trip-permit/steps/EmergencyTripPermitStepsConfiguration";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -26,32 +26,56 @@ export const EmergencyTripPermit = (): ReactElement => {
   const [applicationInfo, setApplicationInfo] = useState<EmergencyTripPermitApplicationInfo>(
     generateNewEmergencyTripPermitData()
   );
+  const [submitted, setSubmitted] = useState(false);
   const { state: formContextState, getInvalidFieldIds } = useFormContextHelper(createDataFormErrorMap());
 
   const invalidFieldIds = getInvalidFieldIds() as EmergencyTripPermitFieldNames[];
   const steps: StepperStep[] = EmergencyTripPermitStepsConfiguration.map((step) => {
     return {
       name: step.name,
-      hasError: doesStepHaveError(step.name, invalidFieldIds),
-      isComplete: isStepComplete(step.name, invalidFieldIds),
+      hasError: submitted ? doesStepHaveError(step.name, invalidFieldIds) : undefined,
+      isComplete: submitted ? isStepComplete(step.name, invalidFieldIds) : undefined,
     };
   });
 
   const prePopulateFormFieldsForBillingPage = (): void => {
     setApplicationInfo({
       ...applicationInfo,
-      payerFirstName: applicationInfo.payerFirstName ?? applicationInfo.requestorFirstName,
-      payerLastName: applicationInfo.payerLastName ?? applicationInfo.requestorLastName,
-      payerEmail: applicationInfo.payerEmail ?? applicationInfo.requestorEmail,
-      payerPhoneNumber: applicationInfo.payerPhoneNumber ?? applicationInfo.requestorPhone,
-      payerCountry: applicationInfo.payerCountry ?? applicationInfo.requestorCountry,
-      payerAddress1: applicationInfo.payerAddress1 ?? applicationInfo.requestorAddress1,
-      payerAddress2: applicationInfo.payerAddress2 ?? applicationInfo.requestorAddress2,
-      payerCity: applicationInfo.payerCity ?? applicationInfo.requestorCity,
+      payerFirstName:
+        applicationInfo.payerFirstName === ""
+          ? applicationInfo.requestorFirstName
+          : applicationInfo.payerFirstName,
+      payerLastName:
+        applicationInfo.payerLastName === ""
+          ? applicationInfo.requestorLastName
+          : applicationInfo.payerLastName,
+      payerEmail:
+        applicationInfo.payerEmail === "" ? applicationInfo.requestorEmail : applicationInfo.payerEmail,
+      payerPhoneNumber:
+        applicationInfo.payerPhoneNumber === ""
+          ? applicationInfo.requestorPhone
+          : applicationInfo.payerPhoneNumber,
+      payerCountry:
+        applicationInfo.payerCountry === "" ? applicationInfo.requestorCountry : applicationInfo.payerCountry,
+      payerAddress1:
+        applicationInfo.payerAddress1 === ""
+          ? applicationInfo.requestorAddress1
+          : applicationInfo.payerAddress1,
+      payerAddress2:
+        applicationInfo.payerAddress2 === ""
+          ? applicationInfo.requestorAddress2
+          : applicationInfo.payerAddress2,
+      payerCity: applicationInfo.payerCity === "" ? applicationInfo.requestorCity : applicationInfo.payerCity,
       payerStateAbbreviation:
-        applicationInfo.payerStateAbbreviation ?? applicationInfo.requestorStateProvince,
-      payerZipCode: applicationInfo.payerZipCode ?? applicationInfo.requestorZipPostalCode,
-      payerCompanyName: applicationInfo.payerCompanyName ?? applicationInfo.payerCompanyName,
+        applicationInfo.payerZipCode === ""
+          ? applicationInfo.requestorStateProvince
+          : applicationInfo.payerStateAbbreviation,
+      payerZipCode:
+        applicationInfo.payerZipCode === ""
+          ? applicationInfo.requestorZipPostalCode
+          : applicationInfo.payerZipCode,
+      payerCompanyName:
+        applicationInfo.payerCompanyName === "" ? applicationInfo.carrier : applicationInfo.payerCompanyName,
     });
   };
 
@@ -70,9 +94,11 @@ export const EmergencyTripPermit = (): ReactElement => {
         state: {
           stepIndex,
           applicationInfo,
+          submitted,
         },
         setStepIndex,
         setApplicationInfo,
+        setSubmitted,
       }}
     >
       <DataFormErrorMapContext.Provider value={formContextState}>
@@ -113,6 +139,9 @@ export const EmergencyTripPermit = (): ReactElement => {
                 }
                 if (stepIndex < 4) {
                   setStepIndex(stepIndex + 1);
+                }
+                if (stepIndex === 4) {
+                  setSubmitted(true);
                 }
               }}
               isRightMarginRemoved={true}

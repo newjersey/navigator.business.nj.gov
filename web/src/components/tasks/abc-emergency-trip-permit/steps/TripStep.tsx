@@ -1,18 +1,17 @@
 import { Heading } from "@/components/njwds-extended/Heading";
-import { EmergencyTripPermitCountryDropdown } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitCountryDropdown";
-import { EmergencyTripPermitDatePicker } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitDatePicker";
-import { EmergencyTripPermitStateDropdown } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitStateDropdown";
-import { EmergencyTripPermitTextFieldEntry } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitTextField";
-import { EmergencyTripPermitTimePicker } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitTimePicker";
-import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
+import { EmergencyTripPermitCountryDropdown } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitCountryDropdown";
+import { EmergencyTripPermitDatePicker } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitDatePicker";
+import { EmergencyTripPermitStateDropdown } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitStateDropdown";
+import { EmergencyTripPermitTextFieldEntry } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitTextField";
+import { EmergencyTripPermitTimePicker } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitTimePicker";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { getCurrentDateInNewJersey } from "@businessnjgovnavigator/shared/dateHelpers";
-import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
-import { ReactElement, useContext } from "react";
+import { MediaQueries } from "@/lib/PageSizes";
+import { useMediaQuery } from "@mui/material";
+import { ReactElement } from "react";
 
 export const TripStep = (): ReactElement => {
   const { Config } = useConfig();
-  const context = useContext(EmergencyTripPermitContext);
+  const isMobile = useMediaQuery(MediaQueries.isMobile);
 
   return (
     <form className={`usa-prose onboarding-form margin-top-2`}>
@@ -21,19 +20,13 @@ export const TripStep = (): ReactElement => {
       </div>
       <div>
         <div className={"grid-row grid-gap padding-bottom-1"}>
-          <div className={"grid-col-6"}>
+          <div className={`${isMobile ? "width-100" : "grid-col-6"}`}>
             <strong>{Config.abcEmergencyTripPermit.fields.permitDate}</strong>
             <EmergencyTripPermitDatePicker fieldName={"permitDate"} />
           </div>
-          <div className={"grid-col-6"}>
+          <div className={`${isMobile ? "width-100 padding-top-1" : "grid-col-6"}`}>
             <strong>{Config.abcEmergencyTripPermit.fields.permitStartTime}</strong>
-            <EmergencyTripPermitTimePicker
-              fieldName={"permitStartTime"}
-              allDay={
-                context.state.applicationInfo.permitDate !==
-                getCurrentDateInNewJersey().format(defaultDateFormat)
-              }
-            />
+            <EmergencyTripPermitTimePicker fieldName={"permitStartTime"} allDay />
           </div>
         </div>
         <div className={"padding-top-3"}>
@@ -42,11 +35,14 @@ export const TripStep = (): ReactElement => {
           <EmergencyTripPermitCountryDropdown fieldName={"pickupCountry"} />
           <EmergencyTripPermitTextFieldEntry fieldName={"pickupAddress"} maxLength={35} required />
           <div className={"grid-row grid-gap"}>
-            <span className={"grid-col-6"}>
+            <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
               <EmergencyTripPermitTextFieldEntry fieldName={"pickupCity"} maxLength={35} required />
             </span>
-            <EmergencyTripPermitStateDropdown fieldName={"pickupStateProvince"} />
-            <span className={"grid-col-4"}>
+            <EmergencyTripPermitStateDropdown
+              className={isMobile ? "grid-col-6" : ""}
+              fieldName={"pickupStateProvince"}
+            />
+            <span className={`${isMobile ? "grid-col-6" : "grid-col-4"}`}>
               <EmergencyTripPermitTextFieldEntry fieldName={"pickupZipPostalCode"} maxLength={10} required />
             </span>
           </div>
@@ -57,11 +53,14 @@ export const TripStep = (): ReactElement => {
           <EmergencyTripPermitCountryDropdown fieldName={"deliveryCountry"} />
           <EmergencyTripPermitTextFieldEntry fieldName={"deliveryAddress"} maxLength={35} required />
           <div className={"grid-row grid-gap"}>
-            <span className={"grid-col-6"}>
+            <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
               <EmergencyTripPermitTextFieldEntry fieldName={"deliveryCity"} maxLength={35} required />
             </span>
-            <EmergencyTripPermitStateDropdown fieldName={"deliveryStateProvince"} />
-            <span className={"grid-col-4"}>
+            <EmergencyTripPermitStateDropdown
+              className={isMobile ? "grid-col-6" : ""}
+              fieldName={"deliveryStateProvince"}
+            />
+            <span className={`${isMobile ? "grid-col-6" : "grid-col-4"}`}>
               <EmergencyTripPermitTextFieldEntry
                 fieldName={"deliveryZipPostalCode"}
                 maxLength={10}

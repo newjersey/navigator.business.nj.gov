@@ -9,6 +9,7 @@ import { ReactElement, useContext } from "react";
 
 interface Props {
   fieldName: EmergencyTripPermitFieldNames;
+  className?: string;
 }
 
 export const EmergencyTripPermitStateDropdown = (props: Props): ReactElement => {
@@ -21,7 +22,7 @@ export const EmergencyTripPermitStateDropdown = (props: Props): ReactElement => 
   const hasError = context.state.applicationInfo[props.fieldName] === "";
   const { getFieldErrorLabel } = useEmergencyTripPermitErrors();
   return (
-    <div className={"padding-top-1"}>
+    <div className={`padding-top-1 ${props.className}`}>
       <WithErrorBar className={"padding-bottom-1"} hasError={hasError} type={"ALWAYS"}>
         <strong>
           <ModifiedContent>{fieldNameLabels[props.fieldName]}</ModifiedContent>
