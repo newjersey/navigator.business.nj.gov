@@ -4,8 +4,20 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement } from "react";
 
-export const TaxClearanceDownload = (): ReactElement => {
+interface Props {
+  certificatePdfBlob: Blob;
+  downloadFilename: string;
+}
+
+export const TaxClearanceDownload = (props: Props): ReactElement => {
   const { Config } = useConfig();
+
+  let downloadLink = undefined;
+  // window is only available on client side
+  if (typeof window !== "undefined") {
+    const URL = window.URL || window.webkitURL;
+    downloadLink = URL.createObjectURL(props.certificatePdfBlob);
+  }
 
   return (
     <>
@@ -27,8 +39,8 @@ export const TaxClearanceDownload = (): ReactElement => {
           isCentered
           isRounded
           hasExtraPadding
-          // TODO: downloading of PDF will be handled in a separate ticket
-          onClick={() => {}}
+          downloadLink={downloadLink}
+          downloadFilename={props.downloadFilename}
           isWidthFull
           hasDownloadIcon
         />
