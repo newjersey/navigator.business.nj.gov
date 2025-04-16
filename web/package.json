@@ -41,7 +41,18 @@
   },
   "prettier": {
     "printWidth": 110,
-    "endOfLine": "auto"
+    "endOfLine": "auto",
+    "overrides": [
+      {
+        "files": [
+          "*.yml",
+          "*.yaml"
+        ],
+        "options": {
+          "singleQuote": false
+        }
+      }
+    ]
   },
   "dependencies": {
     "@aws-crypto/sha256-browser": "5.2.0",
