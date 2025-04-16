@@ -31,7 +31,6 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { SidebarPageLayout } from "@/components/njwds-layout/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
@@ -40,12 +39,11 @@ import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
 import { ProfileField } from "@/components/profile/ProfileField";
-import { ProfileHeader } from "@/components/profile/ProfileHeader";
-import { ProfileNoteDisclaimerForSubmittingData } from "@/components/profile/ProfileNoteForBusinessesFormedOutsideNavigator";
 import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { ProfileTabNav } from "@/components/profile/ProfileTabNav";
+import { ProfileTabPanel } from "@/components/profile/ProfileTabPanel";
 import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AddressContext } from "@/contexts/addressContext";
@@ -342,7 +340,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const nexusBusinessElements: Record<ProfileTabs, ReactNode> = {
     info: (
-      <>
+      <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
@@ -420,20 +418,20 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <RenovationQuestion />
         </ProfileField>
-      </>
+      </div>
     ),
     documents: <></>,
     notes: (
-      <>
+      <div id="tabpanel-notes" role="tabpanel" aria-labelledby="tab-notes">
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
           <Notes handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
-      </>
+      </div>
     ),
     numbers: (
-      <>
+      <div id="tabpanel-numbers" role="tabpanel" aria-labelledby="tab-numbers">
         <ProfileTabHeader tab="numbers" />
 
         <ProfileField fieldName="taxId" noLabel={true}>
@@ -460,13 +458,13 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField fieldName="taxPin">
           <TaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
-      </>
+      </div>
     ),
   };
 
   const foreignBusinessElements: Record<ProfileTabs, ReactNode> = {
     info: (
-      <>
+      <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
@@ -478,20 +476,20 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField fieldName="foreignBusinessTypeIds">
           <ForeignBusinessTypeField required />
         </ProfileField>
-      </>
+      </div>
     ),
     documents: <></>,
     notes: (
-      <>
+      <div id="tabpanel-notes" role="tabpanel" aria-labelledby="tab-notes">
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
           <Notes handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
-      </>
+      </div>
     ),
     numbers: (
-      <>
+      <div id="tabpanel-numbers" role="tabpanel" aria-labelledby="tab-numbers">
         <ProfileTabHeader tab="numbers" />
 
         <ProfileField fieldName="taxId" noLabel={true}>
@@ -511,7 +509,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField fieldName="taxPin">
           <TaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
-      </>
+      </div>
     ),
   };
 
@@ -520,16 +518,16 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const startingNewBusinessElements: Record<ProfileTabs, ReactNode> = {
     notes: (
-      <>
+      <div id="tabpanel-notes" role="tabpanel" aria-labelledby="tab-notes">
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
           <Notes handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
-      </>
+      </div>
     ),
     documents: (
-      <>
+      <div id="tabpanel-documents" role="tabpanel" aria-labelledby="tab-documents">
         <ProfileTabHeader tab="documents" />
 
         <ProfileField
@@ -540,10 +538,10 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileDocuments />
         </ProfileField>
-      </>
+      </div>
     ),
     info: (
-      <>
+      <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
@@ -670,10 +668,10 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ExistingEmployees />
         </ProfileField>
-      </>
+      </div>
     ),
     numbers: (
-      <>
+      <div id="tabpanel-numbers" role="tabpanel" aria-labelledby="tab-numbers">
         <ProfileTabHeader tab="numbers" />
 
         <ProfileField fieldName="naicsCode" noLabel={true}>
@@ -711,23 +709,23 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField fieldName="taxPin">
           <TaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
-      </>
+      </div>
     ),
   };
 
   const owningBusinessElements: Record<ProfileTabs, ReactNode> = {
     notes: (
-      <>
+      <div id="tabpanel-notes" role="tabpanel" aria-labelledby="tab-notes">
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
           <Notes handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
-      </>
+      </div>
     ),
     documents: <></>,
     info: (
-      <>
+      <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
@@ -819,10 +817,10 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField fieldName="ownershipTypeIds">
           <Ownership />
         </ProfileField>
-      </>
+      </div>
     ),
     numbers: (
-      <>
+      <div id="tabpanel-numbers" role="tabpanel" aria-labelledby="tab-numbers">
         <ProfileTabHeader tab="numbers" />
 
         {business?.profileData.naicsCode && (
@@ -858,23 +856,23 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField fieldName="taxPin">
           <TaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
-      </>
+      </div>
     ),
   };
 
   const domesticEmployerBusinessElements: Record<ProfileTabs, ReactNode> = {
     notes: (
-      <>
+      <div id="tabpanel-notes" role="tabpanel" aria-labelledby="tab-notes">
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
           <Notes handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
-      </>
+      </div>
     ),
     documents: <></>,
     info: (
-      <>
+      <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
@@ -889,10 +887,10 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField fieldName="industryId">
           <Industry />
         </ProfileField>
-      </>
+      </div>
     ),
     numbers: (
-      <>
+      <div id="tabpanel-numbers" role="tabpanel" aria-labelledby="tab-numbers">
         <ProfileTabHeader tab="numbers" />
 
         <ProfileField fieldName="naicsCode" noLabel={true}>
@@ -914,7 +912,7 @@ const ProfilePage = (props: Props): ReactElement => {
             )}
           </div>
         </ProfileField>
-      </>
+      </div>
     ),
   };
 
@@ -961,20 +959,7 @@ const ProfilePage = (props: Props): ReactElement => {
                     {business === undefined ? (
                       <PageCircularIndicator />
                     ) : (
-                      <SidebarPageLayout
-                        divider={false}
-                        outlineBox={false}
-                        stackNav={true}
-                        nonWrappingLeftColumn={true}
-                        titleOverColumns={
-                          <>
-                            <ProfileHeader business={business} isAuthenticated={isAuthenticated === "TRUE"} />
-                            <ProfileNoteDisclaimerForSubmittingData
-                              business={business}
-                              isAuthenticated={isAuthenticated}
-                            />
-                          </>
-                        }
+                      <ProfileTabPanel
                         navChildren={
                           <ProfileTabNav
                             business={business}
@@ -1019,7 +1004,7 @@ const ProfilePage = (props: Props): ReactElement => {
                             <DevOnlyResetUserDataButton />
                           </form>
                         </>
-                      </SidebarPageLayout>
+                      </ProfileTabPanel>
                     )}
                   </div>
                 </div>
