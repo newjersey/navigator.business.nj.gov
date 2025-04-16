@@ -1,3 +1,4 @@
+import { getFormattedTimeFromInternalTime } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitTimePicker";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -22,6 +23,12 @@ export const EmergencyTripPermitReviewField = (props: Props): ReactElement => {
   const getFilledOutValue = (): ReactElement => {
     if (context.state.applicationInfo[props.fieldName] === "") {
       return <span className={"text-italic bg-warning-light"}>Not Entered</span>;
+    } else if (props.fieldName === "permitStartTime") {
+      return (
+        <span>
+          {getFormattedTimeFromInternalTime(context.state.applicationInfo[props.fieldName])?.displayTime}
+        </span>
+      );
     } else {
       return <span>{context.state.applicationInfo[props.fieldName]}</span>;
     }

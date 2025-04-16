@@ -34,7 +34,7 @@ export interface EmergencyTripPermitApplicationInfo {
   vehicleStateProvince: string;
   vehicleLicensePlateNum: string;
   permitDate: string;
-  permitStartTime: string;
+  permitStartTime?: string;
   deliverySiteName: string;
   deliveryAddress: string;
   deliveryCity: string;

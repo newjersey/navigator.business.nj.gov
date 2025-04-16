@@ -1,10 +1,14 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
+import { WithErrorBar } from "@/components/WithErrorBar";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useEmergencyTripPermitErrors } from "@/lib/data-hooks/useEmergencyTripPermitErrors";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import { getCurrentDateInNewJersey } from "@businessnjgovnavigator/shared/dateHelpers";
 import { EmergencyTripPermitFieldNames } from "@businessnjgovnavigator/shared/emergencyTripPermit";
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, FormHelperText, TextField } from "@mui/material";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import { ChangeEvent, ReactElement, useContext, useState } from "react";
@@ -41,8 +45,8 @@ const generateAllTimesWithHalfHourIncrement = (
   return times;
 };
 
-const getFormattedTimeFromInternalTime = (value: string): FormattedTime | null => {
-  if (value === "") {
+export const getFormattedTimeFromInternalTime = (value?: string): FormattedTime | null => {
+  if (!value || value === "") {
     return null;
   }
   const timeParts = value.split(":");
@@ -53,78 +57,91 @@ const getFormattedTimeFromInternalTime = (value: string): FormattedTime | null =
 };
 
 export const EmergencyTripPermitTimePicker = (props: Props): ReactElement => {
+  const { Config } = useConfig();
   const [open, setOpen] = useState<boolean>(false);
   const context = useContext(EmergencyTripPermitContext);
+  const { isFormFieldInvalid, setIsValid } = useFormContextFieldHelpers(
+    props.fieldName,
+    DataFormErrorMapContext
+  );
+  const { getFieldErrorLabel, doesFieldHaveError } = useEmergencyTripPermitErrors();
   dayjs.extend(timezone);
 
-  const getStartHour = (): number => {
-    if (props.allDay) {
-      return 0;
-    }
-    return getCurrentDateInNewJersey().hour();
-  };
-
-  const shouldStartMinutesAtZero = (): boolean => {
-    return getCurrentDateInNewJersey().minute() < 30;
-  };
-
-  const options = generateAllTimesWithHalfHourIncrement(getStartHour(), shouldStartMinutesAtZero());
+  const options = generateAllTimesWithHalfHourIncrement(0, true);
   const handleChange = (event: ChangeEvent<unknown>, value: FormattedTime | null): void => {
     context.setApplicationInfo({
       ...context.state.applicationInfo,
-      [props.fieldName]: value?.internalTime,
+      [props.fieldName]: value?.internalTime || "",
     });
+    if (value?.internalTime !== "") {
+      setIsValid(true);
+    }
   };
 
   return (
-    <Autocomplete
-      options={options}
-      value={getFormattedTimeFromInternalTime(context.state.applicationInfo.permitStartTime)}
-      getOptionLabel={(option: FormattedTime): string => {
-        return option.displayTime;
-      }}
-      isOptionEqualToValue={(option: FormattedTime, value: FormattedTime): boolean => {
-        return option.internalTime === value.internalTime;
-      }}
-      open={open}
-      onClose={(): void => setOpen(false)}
-      onChange={handleChange}
-      renderOption={(_props, option, { selected }): JSX.Element => {
-        return (
-          <li {..._props}>
-            {selected ? (
-              <MenuOptionSelected>{option.displayTime}</MenuOptionSelected>
-            ) : (
-              <MenuOptionUnselected>{option.displayTime}</MenuOptionUnselected>
-            )}
-          </li>
-        );
-      }}
-      renderInput={(params): JSX.Element => {
-        return (
-          <TextField
-            {...params}
-            fullWidth
-            id={props.fieldName}
-            name={props.fieldName}
-            inputProps={{
-              "aria-label": camelCaseToSentence(props.fieldName),
-              "data-testid": props.fieldName,
-              ...params.inputProps,
-            }}
-            autoComplete={"true"}
-            variant="outlined"
-            onClick={(): void => {
-              setOpen(true);
-            }}
-            error={false}
-            helperText={false}
-          />
-        );
-      }}
-      openOnFocus
-      clearOnEscape
-      autoHighlight
-    />
+    <WithErrorBar hasError={isFormFieldInvalid} type={"ALWAYS"}>
+      <strong>{Config.abcEmergencyTripPermit.fields.permitDate}</strong>
+      <Autocomplete
+        options={options}
+        value={getFormattedTimeFromInternalTime(context.state.applicationInfo.permitStartTime)}
+        getOptionLabel={(option: FormattedTime): string => {
+          return option.displayTime;
+        }}
+        isOptionEqualToValue={(option: FormattedTime, value: FormattedTime): boolean => {
+          return option.internalTime === value.internalTime;
+        }}
+        open={open}
+        onClose={(): void => {
+          setOpen(false);
+        }}
+        onChange={handleChange}
+        renderOption={(_props, option, { selected }): JSX.Element => {
+          return (
+            <li {..._props}>
+              {selected ? (
+                <MenuOptionSelected>{option.displayTime}</MenuOptionSelected>
+              ) : (
+                <MenuOptionUnselected>{option.displayTime}</MenuOptionUnselected>
+              )}
+            </li>
+          );
+        }}
+        renderInput={(params): JSX.Element => {
+          return (
+            <TextField
+              {...params}
+              fullWidth
+              id={props.fieldName}
+              name={props.fieldName}
+              inputProps={{
+                "aria-label": camelCaseToSentence(props.fieldName),
+                "data-testid": props.fieldName,
+                ...params.inputProps,
+              }}
+              autoComplete={"true"}
+              variant="outlined"
+              onClick={(): void => {
+                setOpen(true);
+              }}
+              error={false}
+              helperText={false}
+            />
+          );
+        }}
+        openOnFocus
+        clearOnEscape
+        autoHighlight
+      />
+      <div>
+        {isFormFieldInvalid && doesFieldHaveError(props.fieldName) && (
+          <>
+            <FormHelperText error>{`${getFieldErrorLabel(props.fieldName)}`}</FormHelperText>
+            <div aria-live="polite" className="screen-reader-only">{`${
+              Config.siteWideErrorMessages.errorScreenReaderInlinePrefix
+            } ${camelCaseToSentence(props.fieldName)}, ${getFieldErrorLabel(props.fieldName)}`}</div>
+          </>
+        )}
+      </div>
+    </WithErrorBar>
   );
 };

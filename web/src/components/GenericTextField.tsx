@@ -133,9 +133,7 @@ export const GenericTextField = forwardRef(
       return isValidAdditional && isValidRequired;
     };
 
-    if (!props.preventRefreshWhenUnmounted) {
-      RegisterForOnSubmit(() => isFieldValid(value));
-    }
+    RegisterForOnSubmit(() => isFieldValid(value), props.preventRefreshWhenUnmounted);
 
     const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
       const isValid = isFieldValid(event.target.value);
@@ -172,6 +170,7 @@ export const GenericTextField = forwardRef(
             className: `${props.readOnly ? "bg-base-lightest" : ""}`,
             ...fieldOptions?.inputProps,
             "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
+            "data-testid": `${props.fieldName}-input`,
           }}
           InputProps={{
             readOnly: props.readOnly,

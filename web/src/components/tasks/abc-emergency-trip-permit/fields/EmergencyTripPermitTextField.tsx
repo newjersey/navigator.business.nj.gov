@@ -1,5 +1,6 @@
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
+import { getMaximumLengthForFieldName } from "@/components/tasks/abc-emergency-trip-permit/fields/getErrorStateForEmergencyTripPermitField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
@@ -41,44 +42,46 @@ export const EmergencyTripPermitTextFieldEntry = ({ className, ...props }: Props
   >;
 
   return (
-    <WithErrorBar
-      className={className ?? "padding-bottom-1 padding-top-1"}
-      hasError={isFormFieldInvalid}
-      type={"ALWAYS"}
-    >
-      <strong>
-        <ModifiedContent>{fieldNameLabels[props.fieldName]}</ModifiedContent>
-      </strong>
-      {props.secondaryLabel && <span className="margin-left-1">{props.secondaryLabel}</span>}
-      <GenericTextField
-        inputWidth={"full"}
-        {...props}
-        readOnly={props.readOnly}
-        handleChange={handleChange}
-        formContext={DataFormErrorMapContext}
-        value={context.state.applicationInfo[props.fieldName]}
-        error={isFormFieldInvalid}
-        additionalValidationIsValid={(value) => {
-          let isValid = true;
-          if (props.required && value === "") {
-            isValid = isValid && false;
+    <span data-testid={`${props.fieldName}-field`}>
+      <WithErrorBar
+        className={className ?? "padding-bottom-1 padding-top-1"}
+        hasError={isFormFieldInvalid}
+        type={"ALWAYS"}
+      >
+        <strong>
+          <ModifiedContent>{fieldNameLabels[props.fieldName]}</ModifiedContent>
+        </strong>
+        {props.secondaryLabel && <span className="margin-left-1">{props.secondaryLabel}</span>}
+        <GenericTextField
+          inputWidth={"full"}
+          {...props}
+          readOnly={props.readOnly}
+          handleChange={handleChange}
+          formContext={DataFormErrorMapContext}
+          value={context.state.applicationInfo[props.fieldName]}
+          error={isFormFieldInvalid}
+          additionalValidationIsValid={(value) => {
+            let isValid = true;
+            if (props.required && value === "") {
+              isValid = isValid && false;
+            }
+            if (props.maxLength && value.length > props.maxLength) {
+              isValid = isValid && false;
+            }
+            return isValid;
+          }}
+          validationText={getFieldErrorLabel(props.fieldName)}
+          numericProps={
+            props.numeric
+              ? {
+                  maxLength: getMaximumLengthForFieldName(props.fieldName) ?? undefined,
+                  minLength: 1,
+                }
+              : undefined
           }
-          if (props.maxLength && value.length > props.maxLength) {
-            isValid = isValid && false;
-          }
-          return isValid;
-        }}
-        validationText={getFieldErrorLabel(props.fieldName)}
-        numericProps={
-          props.numeric
-            ? {
-                maxLength: props.maxLength ?? undefined,
-                minLength: 1,
-              }
-            : undefined
-        }
-        preventRefreshWhenUnmounted
-      />
-    </WithErrorBar>
+          preventRefreshWhenUnmounted
+        />
+      </WithErrorBar>
+    </span>
   );
 };

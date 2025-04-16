@@ -30,7 +30,7 @@ export const RequestorStep = (): ReactElement => {
             <EmergencyTripPermitTextFieldEntry fieldName={"requestorLastName"} maxLength={35} required />
           </span>
         </div>
-        <EmergencyTripPermitTextFieldEntry fieldName={"requestorEmail"} required />
+        <EmergencyTripPermitTextFieldEntry fieldName={"requestorEmail"} maxLength={60} required />
         <EmergencyTripPermitTextFieldEntry fieldName={"requestorPhone"} maxLength={15} required />
         <EmergencyTripPermitCountryDropdown fieldName={"requestorCountry"} />
         <EmergencyTripPermitTextFieldEntry fieldName={"requestorAddress1"} maxLength={35} required />

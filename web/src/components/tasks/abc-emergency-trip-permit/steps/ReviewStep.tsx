@@ -1,10 +1,25 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { EmergencyTripPermitReviewField } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitReviewField";
 import { EmergencyTripPermitReviewSection } from "@/components/tasks/abc-emergency-trip-permit/fields/EmergencyTripPermitReviewSection";
+import {
+  doesStepHaveError,
+  LookupStepIndexByName,
+} from "@/components/tasks/abc-emergency-trip-permit/steps/EmergencyTripPermitStepsConfiguration";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import {
+  AbcEmergencyTripPermitStepNames,
+  EmergencyTripPermitFieldErrorState,
+  ReducedFieldStates,
+} from "@/lib/types/types";
+import {
+  EmergencyTripPermitApplicationInfo,
+  EmergencyTripPermitFieldNames,
+} from "@businessnjgovnavigator/shared/emergencyTripPermit";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
@@ -12,6 +27,18 @@ export const ReviewStep = (): ReactElement => {
   const { Config } = useConfig();
   const context = useContext(EmergencyTripPermitContext);
   const isMobile = useMediaQuery(MediaQueries.isMobile);
+  const dataFormErrorMapContext = useContext(DataFormErrorMapContext);
+  const getInvalidFieldIds = (): string[] => {
+    return Object.keys(dataFormErrorMapContext.fieldStates).filter((field: string) => {
+      const fieldName = field as keyof EmergencyTripPermitApplicationInfo;
+      const fieldStates = dataFormErrorMapContext.fieldStates as ReducedFieldStates<
+        EmergencyTripPermitFieldNames,
+        EmergencyTripPermitFieldErrorState
+      >;
+      return fieldStates[fieldName].invalid;
+    });
+  };
+  const invalidFieldIds = getInvalidFieldIds() as EmergencyTripPermitFieldNames[];
 
   const getPermitSection = (): ReactElement => {
     return (
@@ -56,12 +83,38 @@ export const ReviewStep = (): ReactElement => {
     );
   };
 
+  const getStepsWithErrors = (stepName: AbcEmergencyTripPermitStepNames): ReactElement => {
+    return (
+      <li>
+        <UnStyledButton
+          isButtonALink
+          isUnderline
+          onClick={() => {
+            context.setStepIndex(LookupStepIndexByName(stepName));
+          }}
+        >
+          {stepName}{" "}
+        </UnStyledButton>
+      </li>
+    );
+  };
+
   return (
     <>
       {!context.state.submitted && (
         <Alert variant={"info"}>{Config.abcEmergencyTripPermit.steps.review.infoAlertText}</Alert>
       )}
-      <EmergencyTripPermitReviewSection stepName={"Requestor"}>
+      {context.state.submitted && invalidFieldIds.length > 0 && (
+        <Alert variant={"error"}>
+          {Config.abcEmergencyTripPermit.steps.review.errorSubmitText}
+          <ul>
+            {doesStepHaveError("Requestor", invalidFieldIds) && getStepsWithErrors("Requestor")}
+            {doesStepHaveError("Trip", invalidFieldIds) && getStepsWithErrors("Trip")}
+            {doesStepHaveError("Billing", invalidFieldIds) && getStepsWithErrors("Billing")}
+          </ul>
+        </Alert>
+      )}
+      <EmergencyTripPermitReviewSection stepName={"Requestor"} dataTestId={"requestor-review-section"}>
         <EmergencyTripPermitReviewField fieldName={"carrier"} />
         <EmergencyTripPermitReviewField fieldName={"requestorFirstName"} />
         <EmergencyTripPermitReviewField fieldName={"requestorLastName"} />
@@ -73,7 +126,7 @@ export const ReviewStep = (): ReactElement => {
         <EmergencyTripPermitReviewField fieldName={"requestorCity"} />
         <EmergencyTripPermitReviewField fieldName={"requestorStateProvince"} />
         <EmergencyTripPermitReviewField fieldName={"requestorZipPostalCode"} />
-        <Heading className={"padding-top-"} level={3}>
+        <Heading className={"padding-top-1"} level={3}>
           {Config.abcEmergencyTripPermit.steps.requestor.vehicleSection}
         </Heading>
         <EmergencyTripPermitReviewField fieldName={"vehicleMake"} />
@@ -126,9 +179,7 @@ export const ReviewStep = (): ReactElement => {
         <Heading className={"padding-top-1"} level={3}>
           {Config.abcEmergencyTripPermit.steps.billing.permitSection}
         </Heading>
-        <table className={"emergency-trip-permit-review"}>
-          <tbody>{getPermitSection()}</tbody>
-        </table>
+        {getPermitSection()}
       </EmergencyTripPermitReviewSection>
     </>
   );

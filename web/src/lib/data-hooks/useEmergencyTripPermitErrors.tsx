@@ -5,27 +5,33 @@ import { templateEval } from "@/lib/utils/helpers";
 import { EmergencyTripPermitFieldNames } from "@businessnjgovnavigator/shared/emergencyTripPermit";
 import { useContext } from "react";
 
-type AddressErrorsResponse = {
+type EmergencyTripPermitErrorsResponse = {
   doesFieldHaveError: (field: EmergencyTripPermitFieldNames) => boolean;
   getFieldErrorLabel: (field: EmergencyTripPermitFieldNames) => string;
 };
 
-export const useEmergencyTripPermitErrors = (): AddressErrorsResponse => {
+export const useEmergencyTripPermitErrors = (): EmergencyTripPermitErrorsResponse => {
   const { state } = useContext(EmergencyTripPermitContext);
   const { Config } = useConfig();
 
   const doesFieldHaveError = (field: EmergencyTripPermitFieldNames): boolean => {
-    const addressFieldErrorState = getErrorStateForEmergencyTripPermitField(field, state.applicationInfo);
-    return addressFieldErrorState.hasError;
+    const emergencyTripPermitFieldErrorState = getErrorStateForEmergencyTripPermitField(
+      field,
+      state.applicationInfo
+    );
+    return emergencyTripPermitFieldErrorState.hasError;
   };
 
   const getFieldErrorLabel = (field: EmergencyTripPermitFieldNames): string => {
-    const addressFieldErrorState = getErrorStateForEmergencyTripPermitField(field, state.applicationInfo);
+    const emergencyTripPermitFieldErrorState = getErrorStateForEmergencyTripPermitField(
+      field,
+      state.applicationInfo
+    );
     const fieldLabelNames = Config.abcEmergencyTripPermit.fields as Record<
       EmergencyTripPermitFieldNames,
       string
     >;
-    return templateEval(addressFieldErrorState.label, { fieldName: fieldLabelNames[field] });
+    return templateEval(emergencyTripPermitFieldErrorState.label, { fieldName: fieldLabelNames[field] });
   };
 
   return {

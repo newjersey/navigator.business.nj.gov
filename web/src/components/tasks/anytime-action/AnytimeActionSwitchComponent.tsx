@@ -1,4 +1,4 @@
-import { EmergencyTripPermit } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermit";
+import { EmergencyTripPermitWrapper } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermitWrapper";
 import { AnytimeActionElement } from "@/components/tasks/anytime-action/AnytimeActionElement";
 import { AnytimeActionGovernmentContractingElement } from "@/components/tasks/anytime-action/AnytimeActionGovernmentContractingElement";
 import { AnytimeActionTaxClearanceCertificateElement } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateElement";
@@ -22,7 +22,7 @@ export const AnytimeActionSwitchComponent = (props: Props): ReactElement => {
     "government-contracting": (
       <AnytimeActionGovernmentContractingElement anytimeAction={props.anytimeActionTask} />
     ),
-    "emergency-trip-permit": <EmergencyTripPermit />,
+    "emergency-trip-permit": <EmergencyTripPermitWrapper />,
     default: <AnytimeActionElement anytimeAction={props.anytimeActionTask} />,
   });
 };

@@ -33,6 +33,7 @@
       },
       "review": {
         "infoAlertText": "Review your information before submitting to the New Jersey Division of Alcoholic Beverage Control (ABC). You will then be directed to a secure payment platform operated by New Jersey's partner NICUSA Inc.",
+        "errorSubmitText": "Check the steps below for missing information or errors:",
         "confirmationEmail": "Confirmation Email Sent To:",
         "permitAttach": "Attach Permit Document to Email:",
         "permitTextMessage": "Text Permit Link To:",

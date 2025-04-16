@@ -27,7 +27,7 @@ export const BillingStep = (): ReactElement => {
 
       <div className={"padding-top-1 padding-bottom-3"}>
         <Heading level={3}>{Config.abcEmergencyTripPermit.steps.billing.billingSection}</Heading>
-        <EmergencyTripPermitTextFieldEntry fieldName={"payerCompanyName"} required />
+        <EmergencyTripPermitTextFieldEntry fieldName={"payerCompanyName"} required maxLength={50} />
         <div className={"grid-row grid-gap"}>
           <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
             <EmergencyTripPermitTextFieldEntry fieldName={"payerFirstName"} maxLength={35} required />
@@ -36,7 +36,7 @@ export const BillingStep = (): ReactElement => {
             <EmergencyTripPermitTextFieldEntry fieldName={"payerLastName"} maxLength={35} required />
           </span>
         </div>
-        <EmergencyTripPermitTextFieldEntry fieldName={"payerEmail"} required />
+        <EmergencyTripPermitTextFieldEntry fieldName={"payerEmail"} required maxLength={60} />
         <EmergencyTripPermitTextFieldEntry fieldName={"payerPhoneNumber"} maxLength={15} required />
         <EmergencyTripPermitCountryDropdown fieldName={"payerCountry"} />
         <EmergencyTripPermitTextFieldEntry fieldName={"payerAddress1"} maxLength={35} required />

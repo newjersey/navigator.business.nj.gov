@@ -24,8 +24,7 @@ export const TripStep = (): ReactElement => {
             <strong>{Config.abcEmergencyTripPermit.fields.permitDate}</strong>
             <EmergencyTripPermitDatePicker fieldName={"permitDate"} />
           </div>
-          <div className={`${isMobile ? "width-100 padding-top-1" : "grid-col-6"}`}>
-            <strong>{Config.abcEmergencyTripPermit.fields.permitStartTime}</strong>
+          <div className={`${isMobile ? "width-100" : "grid-col-6"}`}>
             <EmergencyTripPermitTimePicker fieldName={"permitStartTime"} allDay />
           </div>
         </div>
