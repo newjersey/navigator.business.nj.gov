@@ -13,6 +13,7 @@ interface Props {
   onValidation: () => void;
   isFullWidth?: boolean;
   excludeNJ?: boolean | true;
+  required?: boolean | false;
 }
 
 export const UnitesStatesAddress = (props: Props): ReactElement => {
@@ -22,7 +23,11 @@ export const UnitesStatesAddress = (props: Props): ReactElement => {
 
   return (
     <>
-      <AddressLines1And2 onValidation={props.onValidation} isFullWidth={props.isFullWidth} />
+      <AddressLines1And2
+        onValidation={props.onValidation}
+        isFullWidth={props.isFullWidth}
+        required={props.required}
+      />
       <div className={`${props.isFullWidth ? "" : "text-field-width-default"}`}>
         <WithErrorBar
           hasError={doSomeFieldsHaveError(["addressCity", "addressState", "addressZipCode"])}
@@ -37,6 +42,7 @@ export const UnitesStatesAddress = (props: Props): ReactElement => {
                   validationText={getFieldErrorLabel("addressCity")}
                   errorBarType="ALWAYS"
                   onValidation={props.onValidation}
+                  required={props.required}
                 />
               </WithErrorBar>
             </div>
@@ -64,6 +70,7 @@ export const UnitesStatesAddress = (props: Props): ReactElement => {
                           });
                         }}
                         error={doesFieldHaveError("addressState")}
+                        required={props.required}
                         disabled={false}
                         onValidation={props.onValidation}
                         excludeNJ={props.excludeNJ}
@@ -82,6 +89,7 @@ export const UnitesStatesAddress = (props: Props): ReactElement => {
                         validationText={getFieldErrorLabel("addressZipCode")}
                         fieldName={"addressZipCode"}
                         onValidation={props.onValidation}
+                        required={props.required}
                       />
                     </div>
                   </div>

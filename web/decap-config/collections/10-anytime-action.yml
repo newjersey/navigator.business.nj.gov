@@ -257,6 +257,41 @@ collections:
                   required: true,
                   hint: Only applies to tab 2 and 3,
                 }
+              - {
+                  label: "Requesting Agency Error Text",
+                  name: "requestingAgencyErrorText",
+                  widget: "string",
+                  required: true,
+                  hint: Only applies to tab 2 and 3,
+                }
+              - {
+                  label: "Business Name Error Text",
+                  name: " businessNameErrorText",
+                  widget: "string",
+                  required: true,
+                  hint: Only applies to tab 2 and 3,
+                }
+              - {
+                  label: "Pre Header Error Text",
+                  name: "preHeaderErrorText",
+                  widget: "string",
+                  required: true,
+                  hint: Only applies to tab 2 and 3,
+                }
+              - {
+                  label: "Singular Error Text",
+                  name: "singularErrorText",
+                  widget: "string",
+                  required: true,
+                  hint: Only applies to tab 2 and 3,
+                }
+              - {
+                  label: "Plural Error Text",
+                  name: "pluralErrorText",
+                  widget: "string",
+                  required: true,
+                  hint: Only applies to tab 2 and 3,
+                }
       - label: "Tax Clearance Download Page"
         name: "taxClearanceCertificate-download"
         file: "content/src/fieldConfig/tax-clearance-certificate-download.json"
