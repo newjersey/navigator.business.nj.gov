@@ -6,8 +6,8 @@ urlSlug: new-producer-license
 name: Apply for an Insurance Business Entity Producer License
 webflowName: Insurance Company
 summaryDescriptionMd: >+
-  You must have a business producer license for your company to legally sell,
-  solicit, or negotiate insurance products.
+  You must have a business `producer|insurance-producer` license for your
+  company to legally sell, solicit, or negotiate insurance products.
 
 industryId:
   - retail
@@ -28,9 +28,9 @@ divisionPhone: " 609-292-7272"
 ## Application Requirements
 
 * Business name, address, and phone number
-*  Certificate of Formation **(only for NJ resident applicants)**
-*  EIN
-*  National Producer Number, if assigned
+* `Certificate of Formation|certificate-formation` **(only for NJ resident applicants)**
+* `EIN|ein
+* `National Producer Number|national-producer-number`, if assigned
 * FINRA Firm Central Registration Depository (CRD) number, if applicable
 * Designated responsible licensed producers name, Social Security number, and National Producer Number (NPN)
 * Name, Social Security number, and title of all officers, partners, directors, and owners with at least 10% ownership of the business entity
