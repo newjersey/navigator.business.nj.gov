@@ -5,6 +5,9 @@ notesMd: >-
 
 
   \* Will re-confirm the updated summary description with SME but includes a specific date per the SME
+
+
+  4.17: making SME revisions, will need another SME review
 id: moving-warehouse
 licenseName: ""
 name: Reinstate Your Public Movers and/or Warehousemen License
@@ -19,24 +22,26 @@ issuingAgency: "Division of Consumer Affairs, Regulated Business Section, Public
 callToActionText: Reinstate My License
 callToActionLink: "https://rgbportal.dca.njoag.gov/ "
 ---
-## Application Requirements 
+## Application Requirements
 
 * User ID and password for the Regulated Business Online Registration Portal
-* License number
-* ACORD (Association for Cooperative Operations Research and Development) Certificate of Insurance (or ACORD 25), including the policy number, effective date, and expiration date
+*  `Certificate of Formation|certificate-formation` if a corporation or limited liability company
+* A copy of your current tarrif (rates and policies)
+* A copy of your vehicle registration or the lease (the vehicle must be registered under the name of your business) 
+* [ACORD Certificate of Insurance](https://www.acord.org/docs/default-source/forms/acordcertificatesfaq) (or ACORD 25), including the policy number, effective date, and expiration date
 * Insurance documentation: Form E and Form H, with a policy number that matches the ACORD form
+* Current workers compensation insurance certificate
+* Warehouse legal liability insurance, if applicable 
 * Applicable fees paid
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
 When applying for reinstatement through the Regulated Business Online Registration Portal, choose “Renew a License or Registration.”
 
-
 :::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
 The same public movers license and/or warehousemen license number.
-
 
 :::
