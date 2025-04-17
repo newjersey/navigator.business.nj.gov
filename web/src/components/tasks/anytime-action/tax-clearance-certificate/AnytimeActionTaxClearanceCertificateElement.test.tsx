@@ -11,6 +11,7 @@ import {
 import {
   createEmptyFormationFormData,
   emptyProfileData,
+  emptyTaxClearanceCertificateData,
   generateBusiness,
   generateFormationData,
   generateFormationFormData,
@@ -63,6 +64,14 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         <AnytimeActionTaxClearanceCertificateElement anytimeAction={anytimeAction} />
       </WithStatefulUserData>
     );
+  };
+
+  const generateBusinessWithEmptyTaxClearanceData = (): Business => {
+    return generateBusiness({
+      profileData: generateProfileData({ businessName: "", taxId: undefined, taxPin: undefined }),
+      taxClearanceCertificateData: emptyTaxClearanceCertificateData,
+      formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
+    });
   };
 
   it("renders header", () => {
@@ -119,6 +128,115 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       expect(screen.getByTestId("review-tab")).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.taxClearanceCertificateStep3.editButtonText));
       expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+    });
+
+    it("renders the first step as complete only when on the eligibility or review tab", () => {
+      renderComponent({});
+      expect(screen.getByTestId(`stepper-0`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
+      fireEvent.click(screen.getByTestId("stepper-1"));
+
+      expect(screen.getByTestId(`stepper-0`).dataset.state).toEqual("COMPLETE");
+
+      fireEvent.click(screen.getByTestId("stepper-2"));
+      expect(screen.getByTestId(`stepper-0`).dataset.state).toEqual("COMPLETE");
+
+      fireEvent.click(screen.getByTestId("stepper-0"));
+      expect(screen.getByTestId(`stepper-0`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
+    });
+
+    it("renders the second step as incomplete until all required fields are non empty and valid", () => {
+      renderComponent({ business: generateBusinessWithEmptyTaxClearanceData() });
+      expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE");
+
+      fireEvent.click(screen.getByTestId("stepper-1"));
+
+      selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+      expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
+
+      fillText("Business name", "Test Name");
+      expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
+
+      fillText("Address line1", "123 Test Road");
+      expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
+
+      fillText("Address city", "Baltimore");
+      expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
+
+      selectValueByTestId("addressState", "MD");
+      expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
+
+      fillText("Address zip code", "21210");
+      expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
+
+      fillText("Tax id", "012345678901");
+      expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
+
+      fillText("Tax pin", "1234");
+      expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("COMPLETE-ACTIVE");
+    });
+
+    it.each(["Zip Code", "Tax ID", "Tax PIN"])(
+      "renders the second step as incomplete when all fields are non empty but the %s field does not have enough digits",
+      (incompleteField) => {
+        renderComponent({ business: generateBusinessWithEmptyTaxClearanceData() });
+        expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE");
+
+        fireEvent.click(screen.getByTestId("stepper-1"));
+
+        selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+        fillText("Business name", "Test Name");
+        fillText("Address line1", "123 Test Road");
+        fillText("Address city", "Baltimore");
+        selectValueByTestId("addressState", "MD");
+        fillText("Address zip code", incompleteField === "Zip Code" ? "0" : "21210");
+        fillText("Tax id", incompleteField === "Tax ID" ? "0" : "012345678901");
+        fillText("Tax pin", incompleteField === "Tax PIN" ? "0" : "1234");
+
+        expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
+      }
+    );
+
+    it.each([
+      "Requesting Agency",
+      "Business Name",
+      "Address Line 1",
+      "Address City",
+      "Address State",
+      "Zip Code",
+      "Tax ID",
+      "Tax PIN",
+    ])("renders the second step as incomplete when all fields are non empty except for %s", (emptyField) => {
+      renderComponent({ business: generateBusinessWithEmptyTaxClearanceData() });
+      expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE");
+
+      fireEvent.click(screen.getByTestId("stepper-1"));
+
+      if (emptyField !== "Requesting Agency") {
+        selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+      }
+      if (emptyField !== "Business Name") {
+        fillText("Business name", "Test Name");
+      }
+      if (emptyField !== "Address Line 1") {
+        fillText("Address line1", "123 Test Road");
+      }
+      if (emptyField !== "Address City") {
+        fillText("Address city", "Baltimore");
+      }
+
+      if (emptyField !== "Address State") {
+        selectValueByTestId("addressState", "MD");
+      }
+      if (emptyField !== "Zip Code") {
+        fillText("Address zip code", "21210");
+      }
+      if (emptyField !== "Tax ID") {
+        fillText("Tax id", "012345678901");
+      }
+      if (emptyField !== "Tax PIN") {
+        fillText("Tax pin", "1234");
+      }
+      expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
     });
   });
 
@@ -612,7 +730,6 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
 
       selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
       fillText("Business name", "Test Name");
-      fillText("Entity id", "1234567890");
       fillText("Address line1", "123 Test Road");
       fillText("Address line2", "Test Line 2");
       fillText("Address city", "Baltimore");
@@ -645,6 +762,127 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     });
 
     describe("renders data when input is provided", () => {});
+
+    describe("renders errors on tax clearance step 2", () => {
+      // it("renders all errors when no input and on click of submit", () => {
+      //   const business = generateBusiness({
+      //     taxClearanceCertificateData: undefined,
+      //     profileData: emptyProfileData,
+      //     formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
+      //   });
+      //   renderComponent(business);
+      //   fireEvent.click(screen.getByTestId("stepper-1"));
+      //   expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+      //   //fireEvent.blur(screen.getByLabelText("Business name"));
+      //   fireEvent.click(screen.getByTestId("next-button"));
+      //   expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+      //
+      //   expect(
+      //     within(screen.getByTestId("tax-clearance-error-alert")).getByText("Requesting Agency")
+      //   ).toBeInTheDocument();
+      //   expect(
+      //     within(screen.getByTestId("tax-clearance-error-alert")).getByText("Business Name")
+      //   ).toBeInTheDocument();
+      //   expect(
+      //     within(screen.getByTestId("tax-clearance-error-alert")).getByText("New Jersey Tax ID")
+      //   ).toBeInTheDocument();
+      //   expect(
+      //     within(screen.getByTestId("tax-clearance-error-alert")).getByText("Tax PIN")
+      //   ).toBeInTheDocument();
+      // });
+
+      // it("renders error for addressLine1 onBlur", () => {
+      //   const business = generateBusiness({
+      //     taxClearanceCertificateData: undefined,
+      //     profileData: emptyProfileData,
+      //     formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
+      //   });
+      //   renderComponent(business);
+      //   fireEvent.click(screen.getByTestId("stepper-1"));
+      //   expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+      //   fillText("Address line1", "");
+      //   fireEvent.blur(screen.getByLabelText("Address line1"));
+      //   expect(screen.getByText(Config.formation.fields.addressLine1.error)).toBeInTheDocument();
+      //   expect(
+      //     within(screen.getByTestId("tax-clearance-error-alert")).getByText("Address Line 1")
+      //   ).toBeInTheDocument();
+      // });
+
+      it("renders error for requestingAgency when empty and onBlur", () => {
+        const business = generateBusiness({
+          taxClearanceCertificateData: undefined,
+          profileData: emptyProfileData,
+          formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
+        });
+        renderComponent({ business });
+        fireEvent.click(screen.getByTestId("stepper-1"));
+        expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+        fireEvent.blur(screen.getByLabelText("Tax clearance certificate requesting agency"));
+        expect(
+          screen.getByText(Config.taxClearanceCertificateShared.requestingAgencyErrorText)
+        ).toBeInTheDocument();
+        expect(
+          within(screen.getByTestId("tax-clearance-error-alert")).getByText("Requesting Agency")
+        ).toBeInTheDocument();
+      });
+
+      it("renders error for businessName when empty and onBlur", () => {
+        const business = generateBusiness({
+          taxClearanceCertificateData: undefined,
+          profileData: emptyProfileData,
+          formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
+        });
+        renderComponent({ business });
+        fireEvent.click(screen.getByTestId("stepper-1"));
+        expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+        fillText("Business name", "");
+        fireEvent.blur(screen.getByLabelText("Business name"));
+        expect(
+          screen.getByText(Config.taxClearanceCertificateShared.businessNameErrorText)
+        ).toBeInTheDocument();
+        expect(
+          within(screen.getByTestId("tax-clearance-error-alert")).getByText("Business Name")
+        ).toBeInTheDocument();
+      });
+
+      it("renders error for taxId when empty and onBlur", () => {
+        const business = generateBusiness({
+          taxClearanceCertificateData: undefined,
+          profileData: emptyProfileData,
+          formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
+        });
+        renderComponent({ business });
+        fireEvent.click(screen.getByTestId("stepper-1"));
+        expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+        fillText("Tax id", "");
+        fireEvent.blur(screen.getByLabelText("Tax id"));
+        expect(
+          screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+        ).toBeInTheDocument();
+        expect(
+          within(screen.getByTestId("tax-clearance-error-alert")).getByText("New Jersey Tax ID")
+        ).toBeInTheDocument();
+      });
+
+      it("renders error for taxPin when empty and onBlur", () => {
+        const business = generateBusiness({
+          taxClearanceCertificateData: undefined,
+          profileData: emptyProfileData,
+          formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
+        });
+        renderComponent({ business });
+        fireEvent.click(screen.getByTestId("stepper-1"));
+        expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+        fillText("Tax pin", "");
+        fireEvent.blur(screen.getByLabelText("Tax pin"));
+        expect(
+          screen.getByText(Config.profileDefaults.fields.taxPin.default.errorTextRequired)
+        ).toBeInTheDocument();
+        expect(
+          within(screen.getByTestId("tax-clearance-error-alert")).getByText("Tax PIN")
+        ).toBeInTheDocument();
+      });
+    });
   });
 
   it("makes the api post request", async () => {

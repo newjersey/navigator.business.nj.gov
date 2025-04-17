@@ -10,6 +10,8 @@ export const BusinessName = (props: Omit<ProfileDataFieldProps, "fieldName">): R
       {...props}
       fieldName="businessName"
       inputWidth={props.inputWidth ?? "default"}
+      validationText={props.validationText}
+      required={props.required}
     />
   );
 };
