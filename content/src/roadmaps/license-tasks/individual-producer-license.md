@@ -5,8 +5,8 @@ displayname: individual-producer-license
 urlSlug: individual-producer-license
 name: Apply for an Insurance Individual Producer License
 webflowName: x
-summaryDescriptionMd: You must have an individual producer license to legally
-  sell, solicit, or negotiate insurance products.
+summaryDescriptionMd: You must have an individual `producer|insurance-producer`
+  license to legally sell, solicit, or negotiate insurance products.
 industryId:
   - generic
 callToActionText: Apply for My Individual Producer License
@@ -34,7 +34,7 @@ NJ resident applicants only:
 
 * Business name, address, phone number, and email
 * Social Security number
-* National Producer Number (NPN), if assigned
+* `National Producer Number|national-producer-number` (NPN), if assigned
 * Firm Central Registration Depository (FINRA) number, if applicable
 * Any other assumed, fictitious, alias, or trade names under which you are currently doing business or intend to do business, if applicable
 * Employment history
