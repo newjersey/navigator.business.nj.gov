@@ -11,7 +11,7 @@ interface Props {
   suppressRefocusBehavior?: boolean;
 }
 
-type StepperState =
+export type StepperState =
   | "ERROR"
   | "ERROR-ACTIVE"
   | "COMPLETE"
@@ -203,7 +203,9 @@ export const HorizontalStepper = (props: Props): ReactElement => {
                   data-num={getIcon(index)}
                   data-state={determineState(index)}
                   data-testid={`stepper-${index}`}
-                  onClick={(): void => props.onStepClicked(index)}
+                  onClick={(): void => {
+                    props.onStepClicked(index);
+                  }}
                   onKeyDown={(e) => handleKeyDown(e, index)}
                   role="tab"
                   tabIndex={index === props.currentStep ? 0 : -1}

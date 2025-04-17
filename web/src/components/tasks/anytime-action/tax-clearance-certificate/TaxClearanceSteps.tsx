@@ -1,9 +1,10 @@
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
+import { AnytimeActionTaxClearanceCertificateElementAlert } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateElementAlert";
 import { TaxClearanceStepOne } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceStepOne";
 import { TaxClearanceStepThree } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceStepThree";
 import { TaxClearanceStepTwo } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceStepTwo";
 import { StepperStep } from "@/lib/types/types";
-import { ReactElement } from "react";
+import { FormEvent, ReactElement } from "react";
 
 interface Props {
   steps: StepperStep[];
@@ -14,6 +15,9 @@ interface Props {
   setCertificatePdfBlob: (
     value: ((prevState: Blob | undefined) => Blob | undefined) | Blob | undefined
   ) => void;
+  isValid: () => boolean;
+  getInvalidFieldIds: () => string[];
+  onSubmit: (event?: FormEvent<HTMLFormElement>) => void;
 }
 
 export const TaxClearanceSteps = (props: Props): ReactElement => {
@@ -24,21 +28,36 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
     props.setStepIndex(step);
   };
 
+  const onSave = (): void => {
+    props.saveTaxClearanceCertificateData();
+    if (props.isValid()) {
+      props.setStepIndex(2);
+    }
+  };
+
   return (
     <>
       <HorizontalStepper steps={props.steps} currentStep={props.currentStep} onStepClicked={onStepClick} />
       {props.currentStep === 0 && <TaxClearanceStepOne setStepIndex={props.stepIndex} />}
       {props.currentStep === 1 && (
-        <TaxClearanceStepTwo
-          setStepIndex={props.stepIndex}
-          saveTaxClearanceCertificateData={props.saveTaxClearanceCertificateData}
-        />
+        <>
+          <AnytimeActionTaxClearanceCertificateElementAlert fieldErrors={props.getInvalidFieldIds()} />
+          <TaxClearanceStepTwo
+            setStepIndex={props.stepIndex}
+            onSave={onSave}
+            onSubmit={props.onSubmit}
+            saveTaxClearanceCertificateData={props.saveTaxClearanceCertificateData}
+          />
+        </>
       )}
       {props.currentStep === 2 && (
-        <TaxClearanceStepThree
-          setStepIndex={props.stepIndex}
-          setCertificatePdfBlob={props.setCertificatePdfBlob}
-        />
+        <>
+          <AnytimeActionTaxClearanceCertificateElementAlert fieldErrors={props.getInvalidFieldIds()} />
+          <TaxClearanceStepThree
+            setStepIndex={props.stepIndex}
+            setCertificatePdfBlob={props.setCertificatePdfBlob}
+          />
+        </>
       )}
     </>
   );
