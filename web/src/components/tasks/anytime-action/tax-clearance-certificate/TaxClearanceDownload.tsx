@@ -11,13 +11,7 @@ interface Props {
 
 export const TaxClearanceDownload = (props: Props): ReactElement => {
   const { Config } = useConfig();
-
-  let downloadLink = undefined;
-  // window is only available on client side
-  if (typeof window !== "undefined") {
-    const URL = window.URL || window.webkitURL;
-    downloadLink = URL.createObjectURL(props.certificatePdfBlob);
-  }
+  const downloadLink = URL.createObjectURL(props.certificatePdfBlob);
 
   return (
     <>

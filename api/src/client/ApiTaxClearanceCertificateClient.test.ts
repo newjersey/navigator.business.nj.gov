@@ -36,7 +36,7 @@ describe("TaxClearanceCertificateClient", () => {
     jest.resetAllMocks();
     client = ApiTaxClearanceCertificateClient(DummyLogWriter, config);
     userData = generateUserData({});
-    mockAxios.post.mockResolvedValue({ data: {} });
+    mockAxios.post.mockResolvedValue({ data: { certificate: [1] } });
   });
 
   it("makes a post request to correct url with basic auth and data", () => {
