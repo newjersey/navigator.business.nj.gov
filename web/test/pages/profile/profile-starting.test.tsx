@@ -308,7 +308,7 @@ describe("profile - starting business", () => {
     fillText("Tax id", "023456790123");
     fillText("Employer id", "02-3456780");
     chooseTab("notes");
-    fillText("Notes", "whats appppppp");
+    fillText("Notes", "whats appppppp", "textarea");
     clickSave();
 
     await waitFor(() => {

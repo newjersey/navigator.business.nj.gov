@@ -1,30 +1,30 @@
 import { BackButtonForLayout } from "@/components/njwds-layout/BackButtonForLayout";
+import { ProfileHeader } from "@/components/profile/ProfileHeader";
+import { ProfileNoteDisclaimerForSubmittingData } from "@/components/profile/ProfileNoteForBusinessesFormedOutsideNavigator";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useContext } from "react";
 
-export interface SidebarPageLayoutProps {
+export interface ProfileTabPanelProps {
   children: React.ReactNode;
   navChildren?: React.ReactNode;
-  stackNav?: boolean;
-  divider?: boolean;
-  outlineBox?: boolean;
-  belowBoxComponent?: React.ReactNode;
-  titleOverColumns?: React.ReactNode;
-  nonWrappingLeftColumn?: boolean;
 }
 
-export const SidebarPageLayout = ({
-  children,
-  navChildren,
-  divider = true,
-  outlineBox = true,
-  stackNav,
-  belowBoxComponent,
-  titleOverColumns,
-  nonWrappingLeftColumn,
-}: SidebarPageLayoutProps): ReactElement => {
+export const ProfileTabPanel = ({ children, navChildren }: ProfileTabPanelProps): ReactElement => {
+  const userDataFromHook = useUserData();
+  const business = userDataFromHook.business;
+  const { isAuthenticated } = useContext(NeedsAccountContext);
+
+  const titleOverColumns: React.ReactNode = (
+    <>
+      <ProfileHeader business={business} isAuthenticated={isAuthenticated === "TRUE"} />
+      <ProfileNoteDisclaimerForSubmittingData business={business} isAuthenticated={isAuthenticated} />
+    </>
+  );
+
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const { Config } = useConfig();
 
@@ -41,32 +41,19 @@ export const SidebarPageLayout = ({
 
           <div className="grid-row grid-gap flex-no-wrap">
             {isLargeScreen && (
-              <nav
-                aria-label="Secondary"
-                className={`${nonWrappingLeftColumn ? "" : "desktop:grid-col-3"}  order-first`}
-              >
-                {divider && <hr className="margin-bottom-1 margin-top-0" aria-hidden={true} />}
+              <nav aria-label="Secondary" className="order-first">
                 {navChildren}
               </nav>
             )}
-            <div className={nonWrappingLeftColumn ? "fg1" : "desktop:grid-col-9"}>
+            <div className="fg1">
               {!isLargeScreen && (
                 <div>
                   <BackButtonForLayout backButtonText={Config.taskDefaults.backToRoadmapText} />
                   {titleOverColumns}
-                  {stackNav && navChildren}
+                  {navChildren}
                 </div>
               )}
-              <div
-                className={
-                  outlineBox
-                    ? "border-1px border-base-light usa-prose min-height-40rem padding-4 radius-lg"
-                    : "min-height-40rem"
-                }
-              >
-                {children}
-              </div>
-              {belowBoxComponent}
+              <div className="min-height-40rem">{children}</div>
             </div>
           </div>
         </div>
