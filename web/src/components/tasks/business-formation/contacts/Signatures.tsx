@@ -33,6 +33,7 @@ export const Signatures = (): ReactElement => {
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { doesFieldHaveError } = useFormationErrors();
 
+  // const needsSignerType = true;
   const needsSignerType = useMemo(
     () => needsSignerTypeFunc(state.formationFormData.legalType),
     [state.formationFormData.legalType]
@@ -134,9 +135,7 @@ export const Signatures = (): ReactElement => {
     const checked = state.formationFormData.signers[index].signature;
     return (
       <div
-        className={`mobile-sign-wrapper grid-col-auto width-6 display-flex flex-column flex-align-center ${
-          index === 0 ? "flex-justify-center" : "tablet:flex-justify-start margin-top-4 tablet:margin-top-0"
-        }`}
+        className={`mobile-sign-wrapper grid-col-auto width-6 display-flex flex-column flex-align-center flex-justify-center }`}
       >
         <label
           htmlFor={index ? `signature-checkbox-signers-${index}` : `signature-checkbox-signers`}
@@ -145,10 +144,7 @@ export const Signatures = (): ReactElement => {
         >
           {Config.formation.fields.signers.columnLabel}
         </label>
-        <div
-          style={{ height: `${index === 0 ? "44px" : "60px"}` }}
-          className="display-flex flex-column flex-justify-center"
-        >
+        <div style={{ height: "44px" }} className="display-flex flex-column flex-justify-center">
           <Checkbox
             id={index ? `signature-checkbox-signers-${index}` : `signature-checkbox-signers`}
             onChange={(event): void => {
@@ -162,29 +158,15 @@ export const Signatures = (): ReactElement => {
     );
   };
 
-  const renderDeleteColumn = ({
-    visible,
-    onClick,
-  }: {
-    visible: boolean;
-    onClick?: () => void;
-  }): ReactNode => {
+  const renderDeleteColumn = ({ onClick }: { onClick?: () => void }): ReactNode => {
     return (
-      <div className="grid-col-auto padding-left-1 flex-column flex-align-center flex-justify-center">
-        <div style={{ height: "56px" }} className="display-flex flex-column flex-justify-center">
-          {visible ? (
-            <UnStyledButton
-              onClick={onClick}
-              isUnderline
-              className="display-flex flex-column flex-justify-center"
-            >
-              {Config.formation.general.removeSectionText}
-            </UnStyledButton>
-          ) : (
-            <></>
-          )}
-        </div>
-      </div>
+      <UnStyledButton
+        onClick={onClick}
+        isUnderline
+        className={`${isTabletAndUp ? "margin-top-2" : "margin-y-1"}`}
+      >
+        {Config.formation.general.removeSectionText}
+      </UnStyledButton>
     );
   };
 
@@ -194,14 +176,6 @@ export const Signatures = (): ReactElement => {
     if (!state.formationFormData.signers) return;
     return (
       <>
-        {!isTabletAndUp && (
-          <div className="margin-bottom-1">
-            <strong>
-              <ModifiedContent>{Config.formation.fields.signers.titleLabel}</ModifiedContent>
-            </strong>
-          </div>
-        )}
-
         <Select
           fullWidth
           error={hasError && !state.formationFormData.signers[index]?.title}
@@ -288,13 +262,6 @@ export const Signatures = (): ReactElement => {
 
     return (
       <>
-        {!isTabletAndUp && index !== 0 && (
-          <div className="margin-bottom-1">
-            <strong>
-              <ModifiedContent>{Config.formation.fields.signers.nameLabel}</ModifiedContent>
-            </strong>
-          </div>
-        )}
         <FormationField fieldName="signers">
           <GenericTextField
             inputWidth="full"
@@ -357,8 +324,12 @@ export const Signatures = (): ReactElement => {
                       {getSignatureField(0)}
                     </div>
                     {needsSignerType && (
-                      <div className="grid-col-12 tablet:grid-col-5 tablet:margin-left-1 margin-top-1 tablet:margin-top-0">
-                        {isTabletAndUp && <Content>{Config.formation.fields.signers.titleLabel}</Content>}
+                      <div
+                        className={`${isTabletAndUp ? "grid-col-6 padding-x-2" : "grid-col-12 margin-y-2"}`}
+                      >
+                        <strong>
+                          <Content>{Config.formation.fields.signers.titleLabel}</Content>
+                        </strong>
                         {getTypeField(0)}
                       </div>
                     )}
@@ -375,7 +346,6 @@ export const Signatures = (): ReactElement => {
               </WithErrorBar>
             )}
           </div>
-          {isTabletAndUp && renderDeleteColumn({ visible: false })}
         </div>
 
         {(state.formationFormData.signers ?? []).slice(1).map((it: FormationSigner, _index: number) => {
@@ -386,45 +356,51 @@ export const Signatures = (): ReactElement => {
               <WithErrorBar
                 hasError={doesRowHaveError(index)}
                 type="ALWAYS"
-                className="grid-row margin-bottom-2"
+                className="grid-row margin-bottom-1"
               >
                 <div className="grid-col">
-                  <div className="grid-row margin-bottom-1 fac" data-testid={`signers-${index}`}>
-                    <div className="grid-col flex-align-self-center margin-top-1">
-                      <div className="grid-row">
-                        <div
-                          className={`grid-col-12 ${
-                            needsSignerType ? "tablet:grid-col-6" : ""
-                          } margin-bottom-1 tablet:margin-bottom-0`}
-                        >
+                  <div className="grid-row flex-align-start" data-testid={`signers-${index}`}>
+                    <div className="grid-col">
+                      <div className="grid-row margin-top-1">
+                        <div className={`grid-col-12 ${needsSignerType ? "tablet:grid-col-6" : ""}`}>
+                          <strong>
+                            <ModifiedContent>{Config.formation.fields.signers.nameLabel}</ModifiedContent>
+                          </strong>
                           {getSignatureField(index)}
                         </div>
                         {needsSignerType && (
-                          <div className="grid-col-12 tablet:grid-col-5 tablet:margin-left-1">
+                          <div
+                            className={`${
+                              isTabletAndUp ? "grid-col-6 padding-x-2" : "grid-col-12 margin-y-2"
+                            }`}
+                          >
+                            <strong>
+                              <Content>{Config.formation.fields.signers.titleLabel}</Content>
+                            </strong>
                             {getTypeField(index)}
                           </div>
                         )}
                       </div>
                     </div>
-
-                    {renderSignatureColumn({
-                      index: index,
-                    })}
-                    {isTabletAndUp &&
-                      renderDeleteColumn({
-                        visible: true,
-                        onClick: (): void => removeSigner(index),
-                      })}
+                    <div className="grid-row margin-top-1" style={{ marginBottom: "1em" }}>
+                      <div>
+                        <strong>
+                          <ModifiedContent>{`${Config.formation.fields.signers.columnLabel}`}</ModifiedContent>
+                        </strong>
+                        {renderSignatureColumn({
+                          index: index,
+                        })}
+                      </div>
+                      {isTabletAndUp &&
+                        renderDeleteColumn({
+                          onClick: (): void => removeSigner(index),
+                        })}
+                    </div>
                   </div>
-                  {!isTabletAndUp && (
-                    <UnStyledButton
-                      className="margin-y-1"
-                      isUnderline
-                      onClick={(): void => removeSigner(index)}
-                    >
-                      {Config.formation.general.removeSectionText}
-                    </UnStyledButton>
-                  )}
+                  {!isTabletAndUp &&
+                    renderDeleteColumn({
+                      onClick: (): void => removeSigner(index),
+                    })}
                 </div>
               </WithErrorBar>
             </div>
