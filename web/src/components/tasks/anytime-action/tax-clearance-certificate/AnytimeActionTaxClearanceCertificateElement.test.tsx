@@ -651,6 +651,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     mockApi.postTaxClearanceCertificate.mockResolvedValue({
       certificatePdfArray: [],
     });
+    window.URL.createObjectURL = jest.fn();
     const business = generateBusiness({ id: "Faraz" });
     const userData = generateUserDataForBusiness(business);
     renderComponent({ userData });
@@ -662,7 +663,11 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     });
   });
 
-  it("renders the download page when the api post request is successful", async () => {
+  it("renders the page to download the certificate when the API post request is successful", async () => {
+    const pdfUrl = "blob:http://test-url";
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const mockCreateObjectURL = jest.fn((_) => pdfUrl); // `_` is mean to be unused
+    window.URL.createObjectURL = mockCreateObjectURL;
     mockApi.postTaxClearanceCertificate.mockResolvedValue({
       certificatePdfArray: [],
     });
@@ -673,6 +678,11 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     await waitFor(() => {
       expect(screen.getByTestId("download-page")).toBeInTheDocument();
     });
+    expect(mockCreateObjectURL).toHaveBeenLastCalledWith(expect.any(Blob));
+    expect(screen.getByRole("link", { name: "Tax Clearance Certificate (PDF)" })).toHaveAttribute(
+      "href",
+      pdfUrl
+    );
   });
 
   const getInputElementByLabel = (label: string): HTMLInputElement => {

@@ -8,7 +8,7 @@ export type TaxClearanceCertificateResponse = {
       | "INELIGIBLE_TAX_CLEARANCE_FORM"
       | "FAILED_TAX_ID_AND_PIN_VALIDATION"
       | "MISSING_FIELD"
-      | "SYSTEM_ERROR";
+      | "NATURAL_PROGRAM_ERROR";
     message: string;
   };
   certificatePdfArray?: number[];
