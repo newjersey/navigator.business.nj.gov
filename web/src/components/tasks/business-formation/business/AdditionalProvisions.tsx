@@ -66,7 +66,7 @@ export const AdditionalProvisions = (): ReactElement => {
         </Heading>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
-            <UnStyledButton onClick={handleAddButtonClick} dataTestid="show-provisions">
+            <UnStyledButton onClick={handleAddButtonClick} dataTestid="show-provisions" isUnderline>
               {Config.formation.fields.additionalProvisions.addButtonText}
             </UnStyledButton>
           )}
@@ -121,7 +121,12 @@ export const AdditionalProvisions = (): ReactElement => {
       {isExpanded &&
         state.formationFormData.additionalProvisions &&
         state.formationFormData.additionalProvisions.length < 10 && (
-          <UnStyledButton onClick={handleAddAnother} className="margin-top-2" dataTestid="add-new-provision">
+          <UnStyledButton
+            onClick={handleAddAnother}
+            className="margin-top-2"
+            dataTestid="add-new-provision"
+            isUnderline
+          >
             <Icon iconName="add" />
             {Config.formation.fields.additionalProvisions.addAnotherButtonText}
           </UnStyledButton>
