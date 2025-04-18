@@ -61,24 +61,28 @@ export const ReviewStep = (): ReactElement => {
             {context.state.applicationInfo.pdfAttach === "1" ? "Yes" : "No"}
           </span>
         </div>
-        <div className={"grid-row grid-gap"}>
-          <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-            <span className={"text-bold"}>
-              {Config.abcEmergencyTripPermit.steps.review.permitTextMessage}
+        {context.state.applicationInfo.textMsg === "1" && (
+          <div className={"grid-row grid-gap"}>
+            <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
+              <span className={"text-bold"}>
+                {Config.abcEmergencyTripPermit.steps.review.permitTextMessage}
+              </span>
             </span>
-          </span>
-          <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-            {context.state.applicationInfo.textMsgMobile}
-          </span>
-        </div>
-        <div className={"grid-row grid-gap"}>
-          <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-            <span className={"text-bold"}>{Config.abcEmergencyTripPermit.steps.review.alternateEmail}</span>
-          </span>
-          <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-            {context.state.applicationInfo.additionalEmail}
-          </span>
-        </div>
+            <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
+              {context.state.applicationInfo.textMsgMobile}
+            </span>
+          </div>
+        )}
+        {context.state.applicationInfo.additionalEmail !== "" && (
+          <div className={"grid-row grid-gap"}>
+            <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
+              <span className={"text-bold"}>{Config.abcEmergencyTripPermit.steps.review.alternateEmail}</span>
+            </span>
+            <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
+              {context.state.applicationInfo.additionalEmail}
+            </span>
+          </div>
+        )}
       </>
     );
   };

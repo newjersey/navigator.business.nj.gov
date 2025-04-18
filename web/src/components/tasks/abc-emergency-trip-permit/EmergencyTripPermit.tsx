@@ -19,6 +19,7 @@ import {
   ReducedFieldStates,
   StepperStep,
 } from "@/lib/types/types";
+import { scrollToTop } from "@/lib/utils/helpers";
 import {
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitFieldNames,
@@ -67,44 +68,43 @@ export const EmergencyTripPermit = (): ReactElement => {
   };
 
   const prePopulateFormFieldsForBillingPage = (): void => {
-    setApplicationInfo({
-      ...applicationInfo,
-      payerFirstName:
-        applicationInfo.payerFirstName === ""
-          ? applicationInfo.requestorFirstName
-          : applicationInfo.payerFirstName,
-      payerLastName:
-        applicationInfo.payerLastName === ""
-          ? applicationInfo.requestorLastName
-          : applicationInfo.payerLastName,
-      payerEmail:
-        applicationInfo.payerEmail === "" ? applicationInfo.requestorEmail : applicationInfo.payerEmail,
-      payerPhoneNumber:
-        applicationInfo.payerPhoneNumber === ""
-          ? applicationInfo.requestorPhone
-          : applicationInfo.payerPhoneNumber,
-      payerCountry:
-        applicationInfo.payerCountry === "" ? applicationInfo.requestorCountry : applicationInfo.payerCountry,
-      payerAddress1:
-        applicationInfo.payerAddress1 === ""
-          ? applicationInfo.requestorAddress1
-          : applicationInfo.payerAddress1,
-      payerAddress2:
-        applicationInfo.payerAddress2 === ""
-          ? applicationInfo.requestorAddress2
-          : applicationInfo.payerAddress2,
-      payerCity: applicationInfo.payerCity === "" ? applicationInfo.requestorCity : applicationInfo.payerCity,
-      payerStateAbbreviation:
-        applicationInfo.payerZipCode === ""
-          ? applicationInfo.requestorStateProvince
-          : applicationInfo.payerStateAbbreviation,
-      payerZipCode:
-        applicationInfo.payerZipCode === ""
-          ? applicationInfo.requestorZipPostalCode
-          : applicationInfo.payerZipCode,
-      payerCompanyName:
-        applicationInfo.payerCompanyName === "" ? applicationInfo.carrier : applicationInfo.payerCompanyName,
-    });
+    const billingFieldsToValidate: {
+      payerFieldName: EmergencyTripPermitFieldNames;
+      requestorFieldName: EmergencyTripPermitFieldNames;
+    }[] = [
+      { payerFieldName: "payerFirstName", requestorFieldName: "requestorFirstName" },
+      { payerFieldName: "payerLastName", requestorFieldName: "requestorLastName" },
+      { payerFieldName: "payerEmail", requestorFieldName: "requestorEmail" },
+      { payerFieldName: "payerPhoneNumber", requestorFieldName: "requestorPhone" },
+      { payerFieldName: "payerCountry", requestorFieldName: "requestorCountry" },
+      { payerFieldName: "payerAddress1", requestorFieldName: "requestorAddress1" },
+      { payerFieldName: "payerAddress2", requestorFieldName: "requestorAddress2" },
+      { payerFieldName: "payerCity", requestorFieldName: "requestorCity" },
+      { payerFieldName: "payerStateAbbreviation", requestorFieldName: "requestorStateProvince" },
+      { payerFieldName: "payerZipCode", requestorFieldName: "requestorZipPostalCode" },
+      { payerFieldName: "payerCompanyName", requestorFieldName: "carrier" },
+    ];
+    let newApplicationInfo = { ...applicationInfo };
+    for (const fields of billingFieldsToValidate) {
+      if (newApplicationInfo[fields.payerFieldName] === "") {
+        newApplicationInfo = {
+          ...newApplicationInfo,
+          [fields.payerFieldName]: newApplicationInfo[fields.requestorFieldName],
+        };
+
+        if (newApplicationInfo[fields.requestorFieldName] !== "") {
+          dataFormErrorMapContext.reducer({
+            type: FieldStateActionKind.VALIDATION,
+            payload: {
+              field: fields.payerFieldName,
+              invalid: getErrorStateForEmergencyTripPermitField(fields.payerFieldName, newApplicationInfo)
+                .hasError,
+            },
+          });
+        }
+      }
+    }
+    setApplicationInfo(newApplicationInfo);
   };
 
   const getNextStepText = (): string => {
@@ -171,6 +171,9 @@ export const EmergencyTripPermit = (): ReactElement => {
               if (stepIndex === 4) {
                 setSubmitted(true);
                 validateAllRequiredFields();
+                if (getInvalidFieldIds().length > 0) {
+                  scrollToTop({ smooth: true });
+                }
               }
             }}
             isRightMarginRemoved={true}

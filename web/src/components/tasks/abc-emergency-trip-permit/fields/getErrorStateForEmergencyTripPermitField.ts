@@ -3,6 +3,8 @@ import {
   EmergencyTripPermitApplicationInfo,
   EmergencyTripPermitFieldNames,
 } from "@businessnjgovnavigator/shared/emergencyTripPermit";
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
 
 export const getErrorStateForEmergencyTripPermitField = (
   fieldName: EmergencyTripPermitFieldNames,
@@ -35,6 +37,25 @@ export const getErrorStateForEmergencyTripPermitField = (
       hasError: true,
       label: `$\{fieldName} must be ${maxLength} characters or fewer.`,
     };
+  }
+
+  if (fieldName === "permitStartTime" && value && value !== "") {
+    dayjs.extend(timezone);
+    const permitDate = dayjs(state["permitDate"]);
+    const timeParts = value.split(":");
+    const permitDateTime = permitDate
+      .tz("America/New_York")
+      .hour(Number(timeParts[0]))
+      .minute(Number(timeParts[1]));
+    const fifteenMinutesAgoInNJ = dayjs().tz("America/New_York").subtract(15, "minutes");
+    const isPermitDateEarlierThanFifteenMinutesAgoInNJ = permitDateTime.isBefore(fifteenMinutesAgoInNJ);
+    if (isPermitDateEarlierThanFifteenMinutesAgoInNJ) {
+      return {
+        field: fieldName,
+        hasError: true,
+        label: "${fieldName} must be no more than 15 minutes ago.",
+      };
+    }
   }
 
   return {
@@ -79,6 +100,8 @@ export const getMaximumLengthForFieldName = (
     case "pickupCity":
     case "payerAddress1":
     case "payerAddress2":
+    case "payerFirstName":
+    case "payerLastName":
       return 35;
     case "payerCompanyName":
     case "payerEmail":

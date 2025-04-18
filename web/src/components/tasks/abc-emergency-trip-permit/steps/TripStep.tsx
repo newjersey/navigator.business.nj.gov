@@ -25,46 +25,42 @@ export const TripStep = (): ReactElement => {
             <EmergencyTripPermitDatePicker fieldName={"permitDate"} />
           </div>
           <div className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-            <EmergencyTripPermitTimePicker fieldName={"permitStartTime"} allDay />
+            <EmergencyTripPermitTimePicker fieldName={"permitStartTime"} />
           </div>
         </div>
         <div className={"padding-top-3"}>
           <Heading level={4}>{Config.abcEmergencyTripPermit.steps.trip.pickupSiteSection}</Heading>
-          <EmergencyTripPermitTextFieldEntry fieldName={"pickupSiteName"} maxLength={100} required />
+          <EmergencyTripPermitTextFieldEntry fieldName={"pickupSiteName"} required />
           <EmergencyTripPermitCountryDropdown fieldName={"pickupCountry"} />
-          <EmergencyTripPermitTextFieldEntry fieldName={"pickupAddress"} maxLength={35} required />
+          <EmergencyTripPermitTextFieldEntry fieldName={"pickupAddress"} required />
           <div className={"grid-row grid-gap"}>
             <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-              <EmergencyTripPermitTextFieldEntry fieldName={"pickupCity"} maxLength={35} required />
+              <EmergencyTripPermitTextFieldEntry fieldName={"pickupCity"} required />
             </span>
             <EmergencyTripPermitStateDropdown
               className={isMobile ? "grid-col-6" : ""}
               fieldName={"pickupStateProvince"}
             />
             <span className={`${isMobile ? "grid-col-6" : "grid-col-4"}`}>
-              <EmergencyTripPermitTextFieldEntry fieldName={"pickupZipPostalCode"} maxLength={10} required />
+              <EmergencyTripPermitTextFieldEntry fieldName={"pickupZipPostalCode"} required />
             </span>
           </div>
         </div>
         <div className={"padding-top-3"}>
           <Heading level={4}>{Config.abcEmergencyTripPermit.steps.trip.deliverySiteSection}</Heading>
-          <EmergencyTripPermitTextFieldEntry fieldName={"deliverySiteName"} maxLength={100} required />
+          <EmergencyTripPermitTextFieldEntry fieldName={"deliverySiteName"} required />
           <EmergencyTripPermitCountryDropdown fieldName={"deliveryCountry"} />
-          <EmergencyTripPermitTextFieldEntry fieldName={"deliveryAddress"} maxLength={35} required />
+          <EmergencyTripPermitTextFieldEntry fieldName={"deliveryAddress"} required />
           <div className={"grid-row grid-gap"}>
             <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-              <EmergencyTripPermitTextFieldEntry fieldName={"deliveryCity"} maxLength={35} required />
+              <EmergencyTripPermitTextFieldEntry fieldName={"deliveryCity"} required />
             </span>
             <EmergencyTripPermitStateDropdown
               className={isMobile ? "grid-col-6" : ""}
               fieldName={"deliveryStateProvince"}
             />
             <span className={`${isMobile ? "grid-col-6" : "grid-col-4"}`}>
-              <EmergencyTripPermitTextFieldEntry
-                fieldName={"deliveryZipPostalCode"}
-                maxLength={10}
-                required
-              />
+              <EmergencyTripPermitTextFieldEntry fieldName={"deliveryZipPostalCode"} required />
             </span>
           </div>
         </div>

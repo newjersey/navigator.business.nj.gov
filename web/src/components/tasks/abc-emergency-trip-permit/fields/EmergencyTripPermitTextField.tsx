@@ -15,7 +15,6 @@ export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"
   secondaryLabel?: string;
   readOnly?: boolean;
   validationText?: string;
-  maxLength?: number;
   numeric?: boolean;
 }
 
@@ -65,7 +64,8 @@ export const EmergencyTripPermitTextFieldEntry = ({ className, ...props }: Props
             if (props.required && value === "") {
               isValid = isValid && false;
             }
-            if (props.maxLength && value.length > props.maxLength) {
+            const maxLength = getMaximumLengthForFieldName(props.fieldName);
+            if (maxLength && value.length > maxLength) {
               isValid = isValid && false;
             }
             return isValid;

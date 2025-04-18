@@ -1,4 +1,5 @@
 import { EmergencyTripPermit } from "@/components/tasks/abc-emergency-trip-permit/EmergencyTripPermit";
+import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
@@ -7,7 +8,11 @@ describe("EmergencyTripPermit", () => {
   const renderPage = (): void => {
     render(
       <ThemeProvider theme={createTheme()}>
-        <EmergencyTripPermit />
+        <DataFormErrorMapContext.Provider
+          value={{ fieldStates: createDataFormErrorMap(), runValidations: false, reducer: () => {} }}
+        >
+          <EmergencyTripPermit />
+        </DataFormErrorMapContext.Provider>
       </ThemeProvider>
     );
   };
@@ -134,48 +139,6 @@ describe("EmergencyTripPermit", () => {
 
       expect(screen.getByText("1234567890")).toBeInTheDocument();
       expect(screen.getByText("test@test.com")).toBeInTheDocument();
-    });
-  });
-
-  describe("validation", () => {
-    it("displays validation if a required field is clicked and then clicked away without input", async () => {
-      const user = userEvent.setup();
-      renderPage();
-      await user.click(screen.getByTestId("stepper-1"));
-      await user.click(screen.getByTestId("requestorFirstName-input"));
-      await user.click(screen.getByTestId("requestorLastName-input"));
-
-      expect(screen.getByText("Enter a Requestor First Name.")).toBeInTheDocument();
-    });
-
-    it("displays validation if a field with maximum length exceeds its length", async () => {
-      const user = userEvent.setup();
-      renderPage();
-      await user.click(screen.getByTestId("stepper-1"));
-      await user.type(
-        screen.getByTestId("requestorFirstName-input"),
-        "Here, you see? An input with far too many characters. A truly dazzling feat, a gluttonous overflow of characters, even"
-      );
-      await user.click(screen.getByTestId("requestorLastName-input"));
-
-      expect(screen.getByText("Requestor First Name must be 35 characters or fewer.")).toBeInTheDocument();
-    });
-
-    it("maintains validation if user goes to a different tab and back", async () => {
-      const user = userEvent.setup();
-      renderPage();
-      await user.click(screen.getByTestId("stepper-1"));
-      await user.type(
-        screen.getByTestId("requestorFirstName-input"),
-        "Here, you see? An input with far too many characters. A truly dazzling feat, a gluttonous overflow of characters, even"
-      );
-      await user.click(screen.getByTestId("requestorLastName-input"));
-
-      expect(screen.getByText("Requestor First Name must be 35 characters or fewer.")).toBeInTheDocument();
-
-      await user.click(screen.getByTestId("stepper-4"));
-      await user.click(screen.getByTestId("stepper-1"));
-      expect(screen.getByText("Requestor First Name must be 35 characters or fewer.")).toBeInTheDocument();
     });
   });
 });

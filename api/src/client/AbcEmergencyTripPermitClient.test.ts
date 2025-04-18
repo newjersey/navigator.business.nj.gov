@@ -39,7 +39,7 @@ const generateApplicationInfo = (
     pickupSiteName: "Bobs",
     pickupStateProvince: "NJ",
     pickupZipPostalCode: "12345",
-    requestAddress2: "",
+    requestorAddress2: "",
     requestorAddress1: "Another Street",
     requestorCity: "Fiji",
     requestorConfirmemail: "email98989@email.com",

@@ -15,7 +15,6 @@ import { ChangeEvent, ReactElement, useContext, useState } from "react";
 
 interface Props {
   fieldName: EmergencyTripPermitFieldNames;
-  allDay?: boolean;
 }
 
 interface FormattedTime {
@@ -80,7 +79,7 @@ export const EmergencyTripPermitTimePicker = (props: Props): ReactElement => {
 
   return (
     <WithErrorBar hasError={isFormFieldInvalid} type={"ALWAYS"}>
-      <strong>{Config.abcEmergencyTripPermit.fields.permitDate}</strong>
+      <strong>{Config.abcEmergencyTripPermit.fields.permitStartTime}</strong>
       <Autocomplete
         options={options}
         value={getFormattedTimeFromInternalTime(context.state.applicationInfo.permitStartTime)}

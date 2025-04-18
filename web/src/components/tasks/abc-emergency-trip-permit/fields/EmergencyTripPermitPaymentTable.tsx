@@ -16,7 +16,7 @@ export const EmergencyTripPermitPaymentTable = (): ReactElement => {
         </tr>
       </thead>
       <tbody>
-        <tr className={""}>
+        <tr>
           <td colSpan={1}>
             <span>
               <span className={"padding-right-1"}>
@@ -37,7 +37,7 @@ export const EmergencyTripPermitPaymentTable = (): ReactElement => {
             {getDollarValue(25)}
           </td>
         </tr>
-        <tr className={""}>
+        <tr>
           <td colSpan={1}>{Config.abcEmergencyTripPermit.steps.billing.onlineProcessFeeLineItem}</td>
           <td colSpan={1} className={"text-bold text-secondary-vivid-dark"}>
             {getDollarValue(5)}

@@ -24,32 +24,31 @@ export const RequestorStep = (): ReactElement => {
         <EmergencyTripPermitTextFieldEntry fieldName={"carrier"} required />
         <div className={"grid-row grid-gap"}>
           <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-            <EmergencyTripPermitTextFieldEntry fieldName={"requestorFirstName"} maxLength={35} required />
+            <EmergencyTripPermitTextFieldEntry fieldName={"requestorFirstName"} required />
           </span>
           <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-            <EmergencyTripPermitTextFieldEntry fieldName={"requestorLastName"} maxLength={35} required />
+            <EmergencyTripPermitTextFieldEntry fieldName={"requestorLastName"} required />
           </span>
         </div>
-        <EmergencyTripPermitTextFieldEntry fieldName={"requestorEmail"} maxLength={60} required />
-        <EmergencyTripPermitTextFieldEntry fieldName={"requestorPhone"} maxLength={15} required />
+        <EmergencyTripPermitTextFieldEntry fieldName={"requestorEmail"} required />
+        <EmergencyTripPermitTextFieldEntry fieldName={"requestorPhone"} required />
         <EmergencyTripPermitCountryDropdown fieldName={"requestorCountry"} />
-        <EmergencyTripPermitTextFieldEntry fieldName={"requestorAddress1"} maxLength={35} required />
+        <EmergencyTripPermitTextFieldEntry fieldName={"requestorAddress1"} required />
         <EmergencyTripPermitTextFieldEntry
           fieldName={"requestorAddress2"}
           secondaryLabel={"(Optional)"}
           required={false}
-          maxLength={35}
         />
         <div className={"grid-row grid-gap"}>
           <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-            <EmergencyTripPermitTextFieldEntry fieldName={"requestorCity"} maxLength={35} required />
+            <EmergencyTripPermitTextFieldEntry fieldName={"requestorCity"} required />
           </span>
           <EmergencyTripPermitStateDropdown
             className={`${isMobile ? "grid-col-6" : ""}`}
             fieldName={"requestorStateProvince"}
           />
           <span className={`${isMobile ? "grid-col-6" : "grid-col-4"}`}>
-            <EmergencyTripPermitTextFieldEntry fieldName={"requestorZipPostalCode"} maxLength={10} required />
+            <EmergencyTripPermitTextFieldEntry fieldName={"requestorZipPostalCode"} required />
           </span>
         </div>
         <Heading level={3} className={"padding-top-5 padding-bottom-3"}>
@@ -57,18 +56,18 @@ export const RequestorStep = (): ReactElement => {
         </Heading>
         <div className={"grid-row grid-gap"}>
           <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-            <EmergencyTripPermitTextFieldEntry fieldName={"vehicleMake"} maxLength={35} required />
+            <EmergencyTripPermitTextFieldEntry fieldName={"vehicleMake"} required />
           </span>
           <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-            <EmergencyTripPermitTextFieldEntry fieldName={"vehicleYear"} numeric maxLength={4} required />
+            <EmergencyTripPermitTextFieldEntry fieldName={"vehicleYear"} numeric required />
           </span>
         </div>
         <div className={"grid-row grid-gap"}>
           <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-            <EmergencyTripPermitTextFieldEntry fieldName={"vehicleVinSerial"} maxLength={17} required />
+            <EmergencyTripPermitTextFieldEntry fieldName={"vehicleVinSerial"} required />
           </span>
           <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-            <EmergencyTripPermitTextFieldEntry fieldName={"vehicleLicensePlateNum"} maxLength={8} required />
+            <EmergencyTripPermitTextFieldEntry fieldName={"vehicleLicensePlateNum"} required />
           </span>
         </div>
         <div className={"grid-row grid-gap"}>

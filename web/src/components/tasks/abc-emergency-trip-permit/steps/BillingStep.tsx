@@ -27,35 +27,34 @@ export const BillingStep = (): ReactElement => {
 
       <div className={"padding-top-1 padding-bottom-3"}>
         <Heading level={3}>{Config.abcEmergencyTripPermit.steps.billing.billingSection}</Heading>
-        <EmergencyTripPermitTextFieldEntry fieldName={"payerCompanyName"} required maxLength={50} />
+        <EmergencyTripPermitTextFieldEntry fieldName={"payerCompanyName"} required />
         <div className={"grid-row grid-gap"}>
           <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-            <EmergencyTripPermitTextFieldEntry fieldName={"payerFirstName"} maxLength={35} required />
+            <EmergencyTripPermitTextFieldEntry fieldName={"payerFirstName"} required />
           </span>
           <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-            <EmergencyTripPermitTextFieldEntry fieldName={"payerLastName"} maxLength={35} required />
+            <EmergencyTripPermitTextFieldEntry fieldName={"payerLastName"} required />
           </span>
         </div>
-        <EmergencyTripPermitTextFieldEntry fieldName={"payerEmail"} required maxLength={60} />
-        <EmergencyTripPermitTextFieldEntry fieldName={"payerPhoneNumber"} maxLength={15} required />
+        <EmergencyTripPermitTextFieldEntry fieldName={"payerEmail"} required />
+        <EmergencyTripPermitTextFieldEntry fieldName={"payerPhoneNumber"} required />
         <EmergencyTripPermitCountryDropdown fieldName={"payerCountry"} />
-        <EmergencyTripPermitTextFieldEntry fieldName={"payerAddress1"} maxLength={35} required />
+        <EmergencyTripPermitTextFieldEntry fieldName={"payerAddress1"} required />
         <EmergencyTripPermitTextFieldEntry
           fieldName={"payerAddress2"}
           secondaryLabel={"(Optional)"}
           required={false}
-          maxLength={35}
         />
         <div className={"grid-row grid-gap"}>
           <span className={`${isMobile ? "width-100" : "grid-col-6"}`}>
-            <EmergencyTripPermitTextFieldEntry fieldName={"payerCity"} maxLength={35} required />
+            <EmergencyTripPermitTextFieldEntry fieldName={"payerCity"} required />
           </span>
           <EmergencyTripPermitStateDropdown
             className={isMobile ? "grid-col-6" : ""}
             fieldName={"payerStateAbbreviation"}
           />
           <span className={`${isMobile ? "grid-col-6" : "grid-col-4"}`}>
-            <EmergencyTripPermitTextFieldEntry fieldName={"payerZipCode"} maxLength={10} required />
+            <EmergencyTripPermitTextFieldEntry fieldName={"payerZipCode"} required />
           </span>
         </div>
       </div>
@@ -98,7 +97,7 @@ export const BillingStep = (): ReactElement => {
               }
             />
             {context.state.applicationInfo.textMsg === "1" && (
-              <EmergencyTripPermitTextFieldEntry fieldName={"textMsgMobile"} required maxLength={15} />
+              <EmergencyTripPermitTextFieldEntry fieldName={"textMsgMobile"} required />
             )}
             <FormControlLabel
               label={Config.abcEmergencyTripPermit.steps.billing.additionalEmailDownloadLinkCheckboxLabel}
@@ -111,7 +110,7 @@ export const BillingStep = (): ReactElement => {
               }
             />
             {additionalEmailDownloadLink && (
-              <EmergencyTripPermitTextFieldEntry fieldName={"additionalEmail"} required maxLength={60} />
+              <EmergencyTripPermitTextFieldEntry fieldName={"additionalEmail"} required />
             )}
           </FormGroup>
         </div>

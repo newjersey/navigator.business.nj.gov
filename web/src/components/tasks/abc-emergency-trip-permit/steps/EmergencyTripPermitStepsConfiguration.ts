@@ -148,9 +148,6 @@ export const doesStepHaveError = (
   }
   for (const fieldName of invalidFieldIds) {
     if (getStepFromFieldName(fieldName) === stepName) {
-      if (stepName === "Billing") {
-        console.log(fieldName);
-      }
       return true;
     }
   }

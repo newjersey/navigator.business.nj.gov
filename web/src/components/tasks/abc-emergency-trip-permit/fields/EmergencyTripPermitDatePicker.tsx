@@ -1,4 +1,7 @@
+import { getErrorStateForEmergencyTripPermitField } from "@/components/tasks/abc-emergency-trip-permit/fields/getErrorStateForEmergencyTripPermitField";
+import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContext";
+import { FieldStateActionKind } from "@/lib/types/types";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { DateObject, parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
@@ -19,6 +22,7 @@ interface Props {
 export const EmergencyTripPermitDatePicker = (props: Props): ReactElement => {
   const dateFormat = "MM/DD/YYYY";
   const context = useContext(EmergencyTripPermitContext);
+  const dataFormErrorContext = useContext(DataFormErrorMapContext);
 
   const getMinDate = (): dayjs.Dayjs => {
     return getEarliestPermitDate();
@@ -33,17 +37,31 @@ export const EmergencyTripPermitDatePicker = (props: Props): ReactElement => {
         maxDate={getMinDate()?.add(5, "days")}
         value={
           context.state.applicationInfo.permitDate
-            ? parseDateWithFormat(context.state.applicationInfo.permitDate ?? getMinDate(), defaultDateFormat)
+            ? parseDateWithFormat(context.state.applicationInfo.permitDate, defaultDateFormat)
             : getMinDate()
         }
         inputFormat={dateFormat}
         onChange={(newValue: DateObject | null): void => {
-          console.log(newValue);
           if (newValue) {
-            context.setApplicationInfo({
+            const newApplicationInfo = {
               ...context.state.applicationInfo,
               [props.fieldName]: newValue.format(defaultDateFormat),
-            });
+            };
+            context.setApplicationInfo(newApplicationInfo);
+
+            if (
+              context.state.applicationInfo.permitStartTime &&
+              context.state.applicationInfo.permitStartTime !== ""
+            ) {
+              dataFormErrorContext.reducer({
+                type: FieldStateActionKind.VALIDATION,
+                payload: {
+                  field: "permitStartTime",
+                  invalid: getErrorStateForEmergencyTripPermitField("permitStartTime", newApplicationInfo)
+                    .hasError,
+                },
+              });
+            }
           }
           if (newValue === null) {
             context.setApplicationInfo({

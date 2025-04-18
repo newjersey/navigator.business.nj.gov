@@ -113,7 +113,7 @@ export const getApiSubmissionBody = (
       VehicleStateProvince: applicationInfo.vehicleStateProvince,
       VehicleLicensePlateNum: applicationInfo.vehicleLicensePlateNum,
       PermitDate: applicationInfo.permitDate,
-      PermitStartTime: applicationInfo.permitStartTime,
+      PermitStartTime: applicationInfo.permitStartTime ?? "",
       DeliverySiteName: applicationInfo.deliverySiteName,
       DeliveryAddress: applicationInfo.deliveryAddress,
       DeliveryCity: applicationInfo.deliveryCity,
