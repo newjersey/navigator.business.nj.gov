@@ -46,7 +46,7 @@ A steam or hot water boiler is exempt and does not need to be inspected if it **
 * Has less than 10 square feet of heating surface
 * Has less than 10 kilowatts of incoming power, or produces less than 40,000 BTU per hour of heat output
 * Is under the control of the United States government and is regulated by a federal agency
-* Is used only for motor vehicle propulsion and is regulated by the Motor Vehicle Act, Title 39 of the Revised Statutes ... add more here (links, CI?) CI is most user friendly 
+* Is used only for motor vehicle propulsion and is regulated by the [Motor Vehicle Act, Title 39 of the Revised Statutes](https://www.nj.gov/mvc/about/regs.htm)
 
 If the boiler **meets any** of the following and serves a building with less than 6 housing units or less than 25 people, it also does not need inspection:
 
