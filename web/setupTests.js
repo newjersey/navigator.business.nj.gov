@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 require("@testing-library/jest-dom");
 import { TextDecoder, TextEncoder } from "util";
+import { restoreConsoleMethods, throwErrorOnConsoleMethods } from "../consoleMethodsSetupAndBreakdown";
 
 process.env.API_BASE_URL = "";
 process.env.REDIRECT_URL = "http://www.example.com";
@@ -34,3 +35,11 @@ window.matchMedia =
 jest.setTimeout(10000);
 
 jest.mock("next/router", () => require("next-router-mock"));
+
+beforeEach(() => {
+  throwErrorOnConsoleMethods();
+});
+
+afterEach(() => {
+  restoreConsoleMethods();
+});

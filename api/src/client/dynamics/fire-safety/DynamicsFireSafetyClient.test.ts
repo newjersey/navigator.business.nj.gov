@@ -1,7 +1,9 @@
 import { DynamicsFireSafetyClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyClient";
 import { FireSafetyInfo, FireSafetyInspectionClient } from "@client/dynamics/fire-safety/types";
 import { AccessTokenClient } from "@client/dynamics/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
+
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 describe("DynamicsFireSafetyClient", () => {
   let client: FireSafetyInfo;
@@ -22,7 +24,7 @@ describe("DynamicsFireSafetyClient", () => {
       getFireSafetyInspections: jest.fn(),
     };
 
-    client = DynamicsFireSafetyClient(logger, {
+    client = DynamicsFireSafetyClient(DEBUG ? logger : DummyLogWriter, {
       accessTokenClient: stubAccessTokenClient,
       fireSafetyInspectionClient: stubFireSafetyInspectionClient,
     });
