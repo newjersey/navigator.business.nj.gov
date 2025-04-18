@@ -27,7 +27,7 @@ A steam or hot water boiler must be inspected if it meets the following conditio
 
 * Has 10+ square feet of heating surface
 
-If the boiler has 1 of the following and serves a building with 6+ housing units or 25+ people, it also requires inspection:
+If the boiler has 1 of the following *and* serves a building with 6+ housing units or 25+ people, it also requires inspection:
 
 * 10 kilowatts of incoming power, or
 * A heat output of 40,000 BTU per hour
@@ -48,7 +48,7 @@ A steam or hot water boiler is exempt and does not need to be inspected if it **
 * Is under the control of the United States government and is regulated by a federal agency
 * Is used only for motor vehicle propulsion and is regulated by the [Motor Vehicle Act, Title 39 of the Revised Statutes](https://www.nj.gov/mvc/about/regs.htm)
 
-If the boiler **meets any** of the following and serves a building with less than 6 housing units or less than 25 people, it also does not need inspection:
+If the boiler **meets any** of the following *and* serves a building with less than 6 housing units or less than 25 people, it also does not need inspection:
 
 * It is a steam boiler with a relief valve set to discharge at 15 psig or lower
 * It is a hot water boiler with a relief valve set to discharge at 160 PSI or lower *and* operates reliably at temperatures below or up to 250 degrees Fahrenheit 
