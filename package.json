@@ -5,10 +5,11 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "build": "yarn verify:node && yarn workspaces foreach -ptvi run build",
+    "build": "yarn verify:node && yarn decap:build-config && yarn workspaces foreach -ptvi run build",
     "build:clean": "yarn clean && yarn build",
     "clean": "yarn workspaces foreach -v run clean",
     "cms:proxy": "yarn dlx decap-server",
+    "decap:build-config": "yarn prettier:yamlInput && yarn dlx tsx scripts/merge-decap-config.ts && yarn prettier:yamlOutput",
     "dependency-check": "yarn workspaces foreach -v run dependency-check",
     "dynamo": "DYNAMO_ENDPOINT=http://localhost:8000 dynamodb-admin",
     "invokeNewsletter": "yarn workspace @businessnjgovnavigator/api invokeNewsletter",
@@ -17,6 +18,8 @@
     "lint:staged": "lint-staged",
     "prepare": "husky",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
+    "prettier:yamlInput": "prettier -w \"web/decap-config/**/*.{yml,yaml}\"",
+    "prettier:yamlOutput": "prettier -w web/public/mgmt/config.yml",
     "prettier:check": "prettier --check . --ignore-path=./.eslintignore",
     "spellcheck": "yarn workspaces foreach -v run spellcheck",
     "start:dev": "yarn workspaces foreach -ptvi run dev",
@@ -252,7 +255,7 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "*.{css,md,scss,yml}": "prettier --write"
+    "*.{css,md,scss,yml,yaml}": "prettier --write"
   },
   "release": {
     "baseBranch": "main",
