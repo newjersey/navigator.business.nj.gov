@@ -14,14 +14,15 @@ describe("AnytimeActionSwitchComponent", () => {
       process.env.FEATURE_TAX_CLEARANCE_CERTIFICATE = "true";
       const task = generateAnytimeActionTask({ filename: "tax-clearance-certificate" });
       render(<AnytimeActionSwitchComponent anytimeActionTask={task} />);
-      expect(screen.getByTestId("AnytimeActionTaxClearanceCertificateElement")).toBeInTheDocument();
+      const firstTab = screen.getAllByRole("tab")[0];
+      expect(firstTab).toHaveAttribute("aria-selected", "true");
     });
 
     it("does not render tax clearance certificate element", () => {
       process.env.FEATURE_TAX_CLEARANCE_CERTIFICATE = "some random string";
       const task = generateAnytimeActionTask({ filename: "tax-clearance-certificate" });
       render(<AnytimeActionSwitchComponent anytimeActionTask={task} />);
-      expect(screen.queryByTestId("AnytimeActionTaxClearanceCertificateElement")).not.toBeInTheDocument();
+      expect(screen.queryByRole("tab")).not.toBeInTheDocument();
     });
   });
 });

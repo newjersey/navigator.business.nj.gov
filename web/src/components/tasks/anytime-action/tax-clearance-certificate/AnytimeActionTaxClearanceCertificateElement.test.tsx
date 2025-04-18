@@ -74,51 +74,54 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
   describe("navigation", () => {
     it("renders the requirements tab on load", () => {
       renderComponent({});
-      expect(screen.getByTestId("requirements-tab")).toBeInTheDocument();
+      const firstTab = screen.getAllByRole("tab")[0];
+      expect(firstTab).toHaveAttribute("aria-selected", "true");
     });
 
     it("renders the eligibility tab on click", () => {
       renderComponent({});
-      fireEvent.click(screen.getByTestId("stepper-1"));
-      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+      const secondTab = screen.getAllByRole("tab")[1];
+      fireEvent.click(secondTab);
+      expect(secondTab).toHaveAttribute("aria-selected", "true");
     });
 
     it("renders the review tab on click", () => {
       renderComponent({});
-      fireEvent.click(screen.getByTestId("stepper-2"));
-      expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+      const thirdTab = screen.getAllByRole("tab")[2];
+      fireEvent.click(thirdTab);
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
     });
 
     it("renders back to tab one when the back button is clicked on tab 2", () => {
       renderComponent({});
-      fireEvent.click(screen.getByTestId("stepper-1"));
-      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+      fireEvent.click(screen.getAllByRole("tab")[1]);
+      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
       fireEvent.click(screen.getByText(Config.taxClearanceCertificateShared.backButtonText));
-      expect(screen.getByTestId("requirements-tab")).toBeInTheDocument();
+      expect(screen.getAllByRole("tab")[0]).toBeInTheDocument();
     });
 
     it("renders tab three when the save button is clicked on tab two", () => {
       renderComponent({});
-      fireEvent.click(screen.getByTestId("stepper-1"));
-      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+      fireEvent.click(screen.getAllByRole("tab")[1]);
+      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
       fireEvent.click(screen.getByText(Config.taxClearanceCertificateShared.saveButtonText));
-      expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
     });
 
     it("renders back to tab two when the back button is clicked on tab three", () => {
       renderComponent({});
-      fireEvent.click(screen.getByTestId("stepper-2"));
-      expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+      fireEvent.click(screen.getAllByRole("tab")[2]);
+      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
       fireEvent.click(screen.getByText(Config.taxClearanceCertificateShared.backButtonText));
-      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
     });
 
     it("renders back to tab two when the back edit button is clicked on tab three", () => {
       renderComponent({});
-      fireEvent.click(screen.getByTestId("stepper-2"));
-      expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+      fireEvent.click(screen.getAllByRole("tab")[2]);
+      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
       fireEvent.click(screen.getByText(Config.taxClearanceCertificateStep3.editButtonText));
-      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
     });
   });
 
@@ -132,7 +135,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(screen.getByText(agencyId.name)).toBeInTheDocument();
       });
 
@@ -143,7 +146,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Business name").value).toEqual(
           "business name in taxClearanceCertificateData"
         );
@@ -156,7 +159,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Address line1").value).toEqual("1010 Main Street");
       });
 
@@ -167,7 +170,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Address line2").value).toEqual("1010 Main Street");
       });
 
@@ -178,7 +181,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Address city").value).toEqual("1010 Main Street");
       });
 
@@ -190,7 +193,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Address state").value).toEqual(addressState.shortCode);
       });
 
@@ -201,7 +204,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Address zip code").value).toEqual("12345");
       });
 
@@ -212,7 +215,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Tax id").value).toEqual("123-456-789/123");
       });
 
@@ -223,7 +226,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Tax pin").value).toEqual("1234");
       });
     });
@@ -235,7 +238,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ businessName: "" }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Business name").value).toEqual("business name in profile data");
       });
 
@@ -249,7 +252,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressLine1: "" }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Address line1").value).toEqual("1010 Main Street");
       });
 
@@ -263,7 +266,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressLine2: "" }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Address line2").value).toEqual("1010 Main Street");
       });
 
@@ -278,7 +281,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressCity: "" }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Address city").value).toEqual("1010 Main Street");
       });
 
@@ -293,7 +296,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressCity: "" }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Address city").value).toEqual("1010 Main Street");
       });
 
@@ -312,7 +315,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressCity: "" }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Address city").value).toEqual("Newark");
       });
 
@@ -329,7 +332,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Address state").value).toEqual(addressState.shortCode);
       });
 
@@ -343,7 +346,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           taxClearanceCertificateData: generateTaxClearanceCertificateData({ addressZipCode: "" }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Address zip code").value).toEqual("12345");
       });
 
@@ -355,7 +358,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Tax id").value).toEqual("123-456-789/123");
       });
 
@@ -367,7 +370,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getAllByRole("tab")[1]);
         expect(getInputElementByLabel("Tax pin").value).toEqual("1234");
       });
     });
@@ -380,16 +383,19 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
     });
     renderComponent({ business });
-    fireEvent.click(screen.getByTestId("stepper-1"));
-    expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByRole("tab")[1]);
+    expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-    selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+    selectListBoxValueByLabel(
+      "Tax clearance certificate requesting agency",
+      LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+    );
     fillText("Business name", "Test Name");
     fillText("Address line1", "123 Test Road");
     fillText("Address line2", "Test Line 2");
     fillText("Address city", "Baltimore");
 
-    selectValueByTestId("addressState", "MD");
+    selectComboBoxValueByText("Address state", "MD");
     fillText("Address zip code", "21210");
     fillText("Tax id", "012345678901");
     fillText("Tax pin", "1234");
@@ -415,22 +421,25 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
     });
     renderComponent({ business });
-    fireEvent.click(screen.getByTestId("stepper-1"));
-    expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByRole("tab")[1]);
+    expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-    selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+    selectListBoxValueByLabel(
+      "Tax clearance certificate requesting agency",
+      LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+    );
     fillText("Business name", "Test Name");
     fillText("Address line1", "123 Test Road");
     fillText("Address line2", "Test Line 2");
     fillText("Address city", "Baltimore");
 
-    selectValueByTestId("addressState", "MD");
+    selectComboBoxValueByText("Address state", "MD");
     fillText("Address zip code", "21210");
     fillText("Tax id", "012345678901");
     fillText("Tax pin", "1234");
 
-    fireEvent.click(screen.getByTestId("stepper-2"));
-    expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByRole("tab")[2]);
+    expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
     expect(currentBusiness().taxClearanceCertificateData).toEqual({
       requestingAgencyId: "newJerseyBoardOfPublicUtilities",
       businessName: "Test Name",
@@ -451,11 +460,12 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
     });
     renderComponent({ business });
-    fireEvent.click(screen.getByTestId("stepper-2"));
-    expect(screen.getByTestId("review-tab")).toBeInTheDocument();
-    expect(
-      within(screen.getByTestId("review-tab")).getByText(Config.taxClearanceCertificateStep3.mainTitleHeader)
-    ).toBeInTheDocument();
+    const reviewTab = screen.getAllByRole("tab")[2];
+    fireEvent.click(reviewTab);
+    expect(reviewTab).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
+      Config.taxClearanceCertificateStep3.mainTitleHeader
+    );
   });
 
   describe("renders user selected data on review tab", () => {
@@ -467,10 +477,10 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
       renderComponent({ business });
-      fireEvent.click(screen.getByTestId("stepper-1"));
-      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
-      fireEvent.click(screen.getByTestId("stepper-2"));
-      expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+      fireEvent.click(screen.getAllByRole("tab")[1]);
+      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
+      fireEvent.click(screen.getAllByRole("tab")[2]);
+      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
 
       expect(within(screen.getByTestId("requestingAgencyId")).getByText(notStartedText)).toBeInTheDocument();
       expect(within(screen.getByTestId("businessName")).getByText(notStartedText)).toBeInTheDocument();
@@ -487,17 +497,20 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
       renderComponent({ business });
-      fireEvent.click(screen.getByTestId("stepper-1"));
-      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+      fireEvent.click(screen.getAllByRole("tab")[1]);
+      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+      selectListBoxValueByLabel(
+        "Tax clearance certificate requesting agency",
+        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+      );
       fillText("Address line2", "Test Line 2");
       fillText("Address city", "Baltimore");
 
-      selectValueByTestId("addressState", "MD");
+      selectComboBoxValueByText("Address state", "MD");
       fillText("Address zip code", "21210");
-      fireEvent.click(screen.getByTestId("stepper-2"));
-      expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+      fireEvent.click(screen.getAllByRole("tab")[2]);
+      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
 
       expect(within(screen.getByTestId("addressLabel")).getByText(notStartedText)).toBeInTheDocument();
     });
@@ -510,17 +523,20 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
       renderComponent({ business });
-      fireEvent.click(screen.getByTestId("stepper-1"));
-      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+      fireEvent.click(screen.getAllByRole("tab")[1]);
+      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+      selectListBoxValueByLabel(
+        "Tax clearance certificate requesting agency",
+        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+      );
       fillText("Address line1", "123 Test Road");
       fillText("Address line2", "Test Line 2");
 
-      selectValueByTestId("addressState", "MD");
+      selectComboBoxValueByText("Address state", "MD");
       fillText("Address zip code", "21210");
-      fireEvent.click(screen.getByTestId("stepper-2"));
-      expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+      fireEvent.click(screen.getAllByRole("tab")[2]);
+      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
 
       expect(within(screen.getByTestId("addressLabel")).getByText(notStartedText)).toBeInTheDocument();
     });
@@ -533,16 +549,19 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
       renderComponent({ business });
-      fireEvent.click(screen.getByTestId("stepper-1"));
-      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+      fireEvent.click(screen.getAllByRole("tab")[1]);
+      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+      selectListBoxValueByLabel(
+        "Tax clearance certificate requesting agency",
+        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+      );
       fillText("Address line1", "123 Test Road");
       fillText("Address line2", "Test Line 2");
       fillText("Address city", "Baltimore");
       fillText("Address zip code", "21210");
-      fireEvent.click(screen.getByTestId("stepper-2"));
-      expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+      fireEvent.click(screen.getAllByRole("tab")[2]);
+      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
 
       expect(within(screen.getByTestId("addressLabel")).getByText(notStartedText)).toBeInTheDocument();
     });
@@ -555,16 +574,19 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
       renderComponent({ business });
-      fireEvent.click(screen.getByTestId("stepper-1"));
-      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+      fireEvent.click(screen.getAllByRole("tab")[1]);
+      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+      selectListBoxValueByLabel(
+        "Tax clearance certificate requesting agency",
+        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+      );
       fillText("Address line1", "123 Test Road");
       fillText("Address line2", "Test Line 2");
       fillText("Address city", "Baltimore");
-      selectValueByTestId("addressState", "MD");
-      fireEvent.click(screen.getByTestId("stepper-2"));
-      expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+      selectComboBoxValueByText("Address state", "MD");
+      fireEvent.click(screen.getAllByRole("tab")[2]);
+      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
 
       expect(within(screen.getByTestId("addressLabel")).getByText(notStartedText)).toBeInTheDocument();
     });
@@ -576,17 +598,20 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
       renderComponent({ business });
-      fireEvent.click(screen.getByTestId("stepper-1"));
-      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+      fireEvent.click(screen.getAllByRole("tab")[1]);
+      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+      selectListBoxValueByLabel(
+        "Tax clearance certificate requesting agency",
+        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+      );
       fillText("Address line1", "123 Test Road");
       fillText("Address city", "Baltimore");
 
-      selectValueByTestId("addressState", "MD");
+      selectComboBoxValueByText("Address state", "MD");
       fillText("Address zip code", "21210");
-      fireEvent.click(screen.getByTestId("stepper-2"));
-      expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+      fireEvent.click(screen.getAllByRole("tab")[2]);
+      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
 
       const address = formatAddress({
         addressLine1: "123 Test Road",
@@ -607,17 +632,20 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
       });
       renderComponent({ business });
-      fireEvent.click(screen.getByTestId("stepper-1"));
-      expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+      fireEvent.click(screen.getAllByRole("tab")[1]);
+      expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+      selectListBoxValueByLabel(
+        "Tax clearance certificate requesting agency",
+        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+      );
       fillText("Business name", "Test Name");
       fillText("Entity id", "1234567890");
       fillText("Address line1", "123 Test Road");
       fillText("Address line2", "Test Line 2");
       fillText("Address city", "Baltimore");
 
-      selectValueByTestId("addressState", "MD");
+      selectComboBoxValueByText("Address state", "MD");
       fillText("Address zip code", "21210");
       fillText("Tax id", "012345678901");
       fillText("Tax pin", "1234");
@@ -630,8 +658,8 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         addressZipCode: "21210",
       });
 
-      fireEvent.click(screen.getByTestId("stepper-2"));
-      expect(screen.getByTestId("review-tab")).toBeInTheDocument();
+      fireEvent.click(screen.getAllByRole("tab")[2]);
+      expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
 
       expect(
         within(screen.getByTestId("requestingAgencyId")).getByText(
@@ -655,9 +683,12 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     const business = generateBusiness({ id: "Faraz" });
     const userData = generateUserDataForBusiness(business);
     renderComponent({ userData });
-    fireEvent.click(screen.getByTestId("stepper-2"));
-    expect(screen.getByTestId("review-tab")).toBeInTheDocument();
-    fireEvent.click(screen.getByTestId("next-button"));
+    fireEvent.click(screen.getAllByRole("tab")[2]);
+    expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
+
+    fireEvent.click(
+      screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText })
+    );
     await waitFor(() => {
       expect(mockApi.postTaxClearanceCertificate).toHaveBeenCalledWith(userData);
     });
@@ -672,11 +703,14 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       certificatePdfArray: [],
     });
     renderComponent({});
-    fireEvent.click(screen.getByTestId("stepper-2"));
-    fireEvent.click(screen.getByTestId("next-button"));
-
+    fireEvent.click(screen.getAllByRole("tab")[2]);
+    fireEvent.click(
+      screen.getByRole("button", { name: Config.taxClearanceCertificateShared.saveButtonText })
+    );
     await waitFor(() => {
-      expect(screen.getByTestId("download-page")).toBeInTheDocument();
+      expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
+        Config.taxClearanceCertificateDownload.headerTwoLabel
+      );
     });
     expect(mockCreateObjectURL).toHaveBeenLastCalledWith(expect.any(Blob));
     expect(screen.getByRole("link", { name: "Tax Clearance Certificate (PDF)" })).toHaveAttribute(
@@ -694,18 +728,18 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     fireEvent.blur(screen.getByLabelText(label));
   };
 
-  const selectValueByTestId = (dataTestId: string, value: string): void => {
-    fireEvent.click(screen.getByTestId(dataTestId));
+  const selectComboBoxValueByText = (inputAriaLabel: string, value: string): void => {
+    fireEvent.click(screen.getByRole("combobox", { name: inputAriaLabel }));
     expect(screen.getByRole("listbox")).toBeInTheDocument();
     const listbox = within(screen.getByRole("listbox"));
-    fireEvent.click(listbox.getByTestId(value));
+    fireEvent.click(listbox.getByText(value));
   };
 
-  const selectValueByLabel = (label: string, value: string): void => {
+  const selectListBoxValueByLabel = (label: string, value: string): void => {
     expect(screen.getByLabelText(label)).toBeInTheDocument();
     fireEvent.mouseDown(screen.getByLabelText(label));
     expect(screen.getByRole("listbox")).toBeInTheDocument();
     const listbox = within(screen.getByRole("listbox"));
-    fireEvent.click(listbox.getByTestId(value));
+    fireEvent.click(listbox.getByText(value));
   };
 });
