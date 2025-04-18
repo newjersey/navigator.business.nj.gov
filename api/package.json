@@ -24,7 +24,7 @@
     "typecheck": "tsc --noemit"
   },
   "engines": {
-    "node": ">=20.18.1"
+    "node": ">=22.16.0"
   },
   "dependencies": {
     "@aws-crypto/client-node": "4.2.1",

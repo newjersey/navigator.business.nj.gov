@@ -1,4 +1,4 @@
-FROM cimg/node:20.18.1-browsers
+FROM cimg/node:22.16.0-browsers
 
 USER root
 
@@ -37,10 +37,10 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
 
 # Install Browsers.
 # Firefox
-  RUN wget --no-verbose -O /tmp/firefox.tar.bz2 'https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US' \
-      && tar -C /opt -xjf /tmp/firefox.tar.bz2 \
-      && rm /tmp/firefox.tar.bz2 \
-      && chmod +x /opt/firefox \
-      && mv /opt/firefox /opt/firefox-latest \
-      && ln -fs /opt/firefox-latest/firefox /usr/bin/firefox
+RUN wget --no-verbose -O /tmp/firefox.tar.xz 'https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US' \
+    && tar -C /opt -xf /tmp/firefox.tar.xz \
+    && rm /tmp/firefox.tar.xz \
+    && chmod +x /opt/firefox \
+    && mv /opt/firefox /opt/firefox-latest \
+    && ln -fs /opt/firefox-latest/firefox /usr/bin/firefox
 USER circleci
