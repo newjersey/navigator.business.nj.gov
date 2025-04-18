@@ -1,7 +1,10 @@
 ---
-notesMd: "Working doc:
-  https://docs.google.com/document/d/1mZQvvMxjPCvBEzL7c7G2jVkKSlWkQ-OWwBXE0SlvZ\
-  Z0/edit?pli=1&tab=t.ndgv526k6eks"
+notesMd: >-
+  Working doc:
+  https://docs.google.com/document/d/1mZQvvMxjPCvBEzL7c7G2jVkKSlWkQ-OWwBXE0SlvZZ0/edit?pli=1&tab=t.ndgv526k6eks
+
+
+  4.18: Revisions made with guidance from Jess
 licenseName: ""
 id: boiler-inspection
 displayname: boiler-inspection
