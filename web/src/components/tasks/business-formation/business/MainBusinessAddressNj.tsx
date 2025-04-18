@@ -57,7 +57,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
             <div data-testid={"add-address-button"}>
-              <UnStyledButton onClick={(): void => setIsExpanded(true)}>
+              <UnStyledButton onClick={(): void => setIsExpanded(true)} isUnderline>
                 {Config.formation.sections.addressAddButtonText}
               </UnStyledButton>
             </div>

@@ -75,6 +75,7 @@ export const BusinessStep = (): ReactElement => {
           addButtonText={Config.formation.fields.businessPurpose.addButtonText}
           title={Config.formation.fields.businessPurpose.label}
           contentMd={Config.formation.fields.businessPurpose.body}
+          isUnderline
         />
       </FormationField>
       <hr className="margin-y-3" aria-hidden={true} key={"business-line-3"} />
