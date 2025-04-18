@@ -7,8 +7,8 @@ import { EmergencyTripPermitContext } from "@/contexts/EmergencyTripPermitContex
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useEmergencyTripPermitErrors } from "@/lib/data-hooks/useEmergencyTripPermitErrors";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { EmergencyTripPermitFieldNames } from "@businessnjgovnavigator/shared/emergencyTripPermit";
 import { ReactElement, useContext } from "react";
-import { EmergencyTripPermitFieldNames } from "../../../../../../shared/src/emergencyTripPermit";
 
 export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName" | "error" | "inputWidth"> {
   fieldName: EmergencyTripPermitFieldNames;
