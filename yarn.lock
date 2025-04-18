@@ -4364,7 +4364,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 7.18.0
     "@typescript-eslint/parser": 7.18.0
     airtable: 0.12.2
-    axios: 1.8.3
+    axios: 1.8.4
     body-parser: 1.20.3
     cors: 2.8.5
     cross-env: 7.0.3
@@ -4508,7 +4508,7 @@ __metadata:
     "@typescript-eslint/parser": 7.18.0
     airtable: 0.12.2
     aws-amplify: 6.11.0
-    axios: 1.8.3
+    axios: 1.8.4
     babel-jest: 29.7.0
     babel-loader: 9.2.1
     body-parser: 1.20.3
@@ -4712,7 +4712,7 @@ __metadata:
     "@typescript-eslint/parser": 7.18.0
     airtable: 0.12.2
     aws-amplify: 6.11.0
-    axios: 1.8.3
+    axios: 1.8.4
     babel-jest: 29.7.0
     babel-loader: 9.2.1
     broken-link-checker: 0.7.8
@@ -14618,18 +14618,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.8.3":
-  version: 1.8.3
-  resolution: "axios@npm:1.8.3"
-  dependencies:
-    follow-redirects: ^1.15.6
-    form-data: ^4.0.0
-    proxy-from-env: ^1.1.0
-  checksum: 85fc8ad7d968e43ea9da5513310637d29654b181411012ee14cc0a4b3662782e6c81ac25eea40b5684f86ed2d8a01fa6fc20b9b48c4da14ef4eaee848fea43bc
-  languageName: node
-  linkType: hard
-
-"axios@npm:^1.8.3":
+"axios@npm:1.8.4, axios@npm:^1.8.3":
   version: 1.8.4
   resolution: "axios@npm:1.8.4"
   dependencies:
