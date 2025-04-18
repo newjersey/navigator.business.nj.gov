@@ -15,7 +15,7 @@ export const TaxClearanceDownload = (props: Props): ReactElement => {
 
   return (
     <>
-      <div className="margin-y-3 margin-x-6" data-testid="download-page">
+      <div className="margin-y-3 margin-x-6">
         <div className="fdc fac ">
           <div className={"margin-top-3 margin-bottom-5"}>
             <img src={`/img/trophy-illustration.svg`} alt="" />

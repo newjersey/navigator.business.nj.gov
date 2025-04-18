@@ -15,27 +15,25 @@ export const TaxClearanceStepOne = (props: Props): ReactElement => {
 
   return (
     <>
-      <div data-testid={"requirements-tab"}>
-        <Content>{Config.taxClearanceCertificateStep1.content}</Content>
-        <HorizontalLine />
-        <span className="h5-styling">{Config.taxClearanceCertificateStep1.issuingAgencyLabelText}: </span>
-        <span className="h6-styling">{Config.taxClearanceCertificateStep1.issuingAgencyText}</span>
-        <CtaContainer>
-          <ActionBarLayout>
-            <LiveChatHelpButton />
-            <PrimaryButton
-              isColor="primary"
-              onClick={(): void => {
-                props.setStepIndex(1);
-              }}
-              dataTestId="cta-primary-1"
-              isRightMarginRemoved={true}
-            >
-              {Config.taxClearanceCertificateStep1.continueButtonText}
-            </PrimaryButton>
-          </ActionBarLayout>
-        </CtaContainer>
-      </div>
+      <Content>{Config.taxClearanceCertificateStep1.content}</Content>
+      <HorizontalLine />
+      <span className="h5-styling">{Config.taxClearanceCertificateStep1.issuingAgencyLabelText}: </span>
+      <span className="h6-styling">{Config.taxClearanceCertificateStep1.issuingAgencyText}</span>
+      <CtaContainer>
+        <ActionBarLayout>
+          <LiveChatHelpButton />
+          <PrimaryButton
+            isColor="primary"
+            onClick={(): void => {
+              props.setStepIndex(1);
+            }}
+            dataTestId="cta-primary-1"
+            isRightMarginRemoved={true}
+          >
+            {Config.taxClearanceCertificateStep1.continueButtonText}
+          </PrimaryButton>
+        </ActionBarLayout>
+      </CtaContainer>
     </>
   );
 };

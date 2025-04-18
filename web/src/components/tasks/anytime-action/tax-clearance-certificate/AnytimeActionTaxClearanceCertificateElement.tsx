@@ -169,7 +169,7 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
               onBack: (): void => {},
             }}
           >
-            <div className="min-height-38rem" data-testid="AnytimeActionTaxClearanceCertificateElement">
+            <div className="min-height-38rem">
               <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 radius-top-lg">
                 <div className="padding-y-4 margin-x-4 margin-bottom-2">
                   <Heading level={1}>{props.anytimeAction.name}</Heading>

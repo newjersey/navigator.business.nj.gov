@@ -31,7 +31,7 @@ export const TaxClearanceStepTwo = (props: Props): ReactElement => {
 
   return (
     <>
-      <div data-testid={"eligibility-tab"}>
+      <div>
         <Heading level={2} styleVariant={"h3"}>
           {Config.taxClearanceCertificateStep2.requestingAgencySectionHeader}
         </Heading>
@@ -67,20 +67,11 @@ export const TaxClearanceStepTwo = (props: Props): ReactElement => {
         <ActionBarLayout>
           <LiveChatHelpButton />
           <div className="margin-top-2 mobile-lg:margin-top-0">
-            <SecondaryButton
-              isColor="primary"
-              onClick={() => props.setStepIndex(0)}
-              dataTestId="previous-button"
-            >
+            <SecondaryButton isColor="primary" onClick={() => props.setStepIndex(0)}>
               {Config.taxClearanceCertificateShared.backButtonText}
             </SecondaryButton>
           </div>
-          <PrimaryButton
-            isColor="primary"
-            onClick={handleSaveButtonClick}
-            isRightMarginRemoved={true}
-            dataTestId="next-button"
-          >
+          <PrimaryButton isColor="primary" onClick={handleSaveButtonClick} isRightMarginRemoved={true}>
             {Config.taxClearanceCertificateShared.saveButtonText}
           </PrimaryButton>
         </ActionBarLayout>
