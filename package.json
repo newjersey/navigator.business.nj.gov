@@ -31,7 +31,7 @@
     "wipit": "git add -A && git commit -m 'wip [skip ci]' --no-verify"
   },
   "dependencies": {
-    "@aws-crypto/client-node": "4.0.2",
+    "@aws-crypto/client-node": "4.2.1",
     "@aws-crypto/sha256-browser": "5.2.0",
     "@aws-sdk/client-cloudwatch-logs": "3.726.1",
     "@aws-sdk/client-dynamodb": "3.726.1",
@@ -217,7 +217,7 @@
     "storybook": "7.6.20",
     "style-loader": "3.3.4",
     "supertest": "6.3.4",
-    "ts-jest": "29.3.1",
+    "ts-jest": "29.3.2",
     "ts-loader": "9.5.2",
     "ts-node": "10.9.2",
     "tsconfig-paths": "4.2.0",
