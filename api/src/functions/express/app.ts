@@ -1,4 +1,5 @@
 import { elevatorSafetyRouterFactory } from "@api/elevatorSafetyRouter";
+import { emergencyTripPermitRouterFactory } from "@api/emergencyTripPermitRouter";
 import { fireSafetyRouterFactory } from "@api/fireSafetyRouter";
 import { formationRouterFactory } from "@api/formationRouter";
 import { healthCheckRouterFactory } from "@api/healthCheckRouter";
@@ -8,6 +9,7 @@ import { selfRegRouterFactory } from "@api/selfRegRouter";
 import { taxClearanceCertificateRouterFactory } from "@api/taxClearanceCertificateRouter";
 import { taxDecryptionRouterFactory } from "@api/taxDecryptionRouter";
 import { userRouterFactory } from "@api/userRouter";
+import { AbcEmergencyTripPermitClient } from "@client/AbcEmergencyTripPermitClient";
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
@@ -252,6 +254,10 @@ const AWS_CRYPTO_CONTEXT_STAGE = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
 const AWS_CRYPTO_CONTEXT_PURPOSE = process.env.AWS_CRYPTO_CONTEXT_PURPOSE || "";
 const AWS_CRYPTO_CONTEXT_ORIGIN = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
 
+const ABC_ETP_API_ACCOUNT = process.env.ABC_ETP_API_ACCOUNT || "";
+const ABC_ETP_API_KEY = process.env.ABC_ETP_API_KEY || "";
+const ABC_ETP_API_BASE_URL = process.env.ABC_ETP_API_BASE_URL || "";
+
 const AWSEncryptionDecryptionClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_KEY, {
   stage: AWS_CRYPTO_CONTEXT_STAGE,
   purpose: AWS_CRYPTO_CONTEXT_PURPOSE,
@@ -324,6 +330,15 @@ const formationHealthCheckClient = apiFormationClient.health;
 
 const shouldSaveDocuments = !(process.env.SKIP_SAVE_DOCUMENTS_TO_S3 === "true");
 
+const emergencyTripPermitClient = AbcEmergencyTripPermitClient(
+  {
+    account: ABC_ETP_API_ACCOUNT,
+    key: ABC_ETP_API_KEY,
+    baseUrl: ABC_ETP_API_BASE_URL,
+  },
+  logger
+);
+
 app.use(bodyParser.json({ strict: false }));
 
 app.use(
@@ -358,6 +373,7 @@ app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
 app.use("/api", housingRouterFactory(dynamicsHousingClient, dynamicsHousingRegistrationStatusClient));
 app.use("/api", selfRegRouterFactory(dynamoDataClient, selfRegClient));
 app.use("/api", formationRouterFactory(apiFormationClient, dynamoDataClient, { shouldSaveDocuments }));
+app.use("/api", emergencyTripPermitRouterFactory(emergencyTripPermitClient));
 app.use(
   "/api/taxFilings",
   taxFilingRouterFactory(dynamoDataClient, taxFilingInterface, AWSEncryptionDecryptionClient)
