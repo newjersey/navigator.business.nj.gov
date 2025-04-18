@@ -792,50 +792,6 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     describe("renders data when input is provided", () => {});
 
     describe("renders errors on tax clearance step 2", () => {
-      // it("renders all errors when no input and on click of submit", () => {
-      //   const business = generateBusiness({
-      //     taxClearanceCertificateData: undefined,
-      //     profileData: emptyProfileData,
-      //     formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
-      //   });
-      //   renderComponent(business);
-      //   fireEvent.click(screen.getByTestId("stepper-1"));
-      //   expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
-      //   //fireEvent.blur(screen.getByLabelText("Business name"));
-      //   fireEvent.click(screen.getByTestId("next-button"));
-      //   expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
-      //
-      //   expect(
-      //     within(screen.getByTestId("tax-clearance-error-alert")).getByText("Requesting Agency")
-      //   ).toBeInTheDocument();
-      //   expect(
-      //     within(screen.getByTestId("tax-clearance-error-alert")).getByText("Business Name")
-      //   ).toBeInTheDocument();
-      //   expect(
-      //     within(screen.getByTestId("tax-clearance-error-alert")).getByText("New Jersey Tax ID")
-      //   ).toBeInTheDocument();
-      //   expect(
-      //     within(screen.getByTestId("tax-clearance-error-alert")).getByText("Tax PIN")
-      //   ).toBeInTheDocument();
-      // });
-
-      // it("renders error for addressLine1 onBlur", () => {
-      //   const business = generateBusiness({
-      //     taxClearanceCertificateData: undefined,
-      //     profileData: emptyProfileData,
-      //     formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
-      //   });
-      //   renderComponent(business);
-      //   fireEvent.click(screen.getByTestId("stepper-1"));
-      //   expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
-      //   fillText("Address line1", "");
-      //   fireEvent.blur(screen.getByLabelText("Address line1"));
-      //   expect(screen.getByText(Config.formation.fields.addressLine1.error)).toBeInTheDocument();
-      //   expect(
-      //     within(screen.getByTestId("tax-clearance-error-alert")).getByText("Address Line 1")
-      //   ).toBeInTheDocument();
-      // });
-
       it("renders error for requestingAgency when empty and onBlur", () => {
         const business = generateBusiness({
           taxClearanceCertificateData: undefined,
