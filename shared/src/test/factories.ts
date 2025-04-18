@@ -393,7 +393,6 @@ export const generateTaxClearanceCertificateData = (
   return {
     requestingAgencyId: randomElementFromArray(taxClearanceCertificateAgencies).id,
     businessName: `some-business-name-${randomInt()}`,
-    entityId: randomInt(10).toString(),
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
     addressCity: `some-city-${randomInt()}`,

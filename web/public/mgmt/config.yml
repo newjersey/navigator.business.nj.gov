@@ -3308,55 +3308,50 @@ collections:
     fields:
       - { name: "" }
 
-  - name: "tax-access-modal-config"
-    label: "Tax Access Modal Config"
+  - name: "tax-access-config"
+    label: "Tax Access Config"
     delete: false
     create: false
     files:
-      - label: "Tax Access Modal Config"
-        name: "tax-access-modal"
-        file: "content/src/fieldConfig/tax-access-modal.json"
+      - label: "Tax Access Config"
+        name: "tax-access"
+        file: "content/src/fieldConfig/tax-access.json"
         editor:
           preview: true
         fields:
-          - label: "Tax Access Modal"
+          - label: "Tax Access Section"
             name: taxAccess
             collapsed: false
             widget: object
             fields:
-              - { label: Modal Header, name: modalHeader, widget: text }
+              - { label: Tax Access Header, name: taxAccessHeader, widget: text }
               - {
                   label: Legal Structure Drop Down Header,
                   name: legalStructureDropDownHeader,
                   widget: markdown,
                 }
               - { label: Step 1 Header, name: stepOneHeader, widget: text }
-              - { label: Step 1 Body, name: stepOneBody, widget: markdown }
               - { label: Step 1 Next Button, name: stepOneNextButton, widget: text }
               - { label: Step 1 Error Banner, name: stepOneErrorBanner, widget: text }
               - { label: Step 2 Header, name: stepTwoHeader, widget: text }
-              - { label: Step 2 Body, name: stepTwoBody, widget: markdown }
+              - { label: Tax Calendar Access Body, name: taxCalendarAccessBody, widget: markdown }
               - { label: Step 2 Next Button, name: stepTwoNextButton, widget: text }
               - { label: Step 2 Back Button, name: stepTwoBackButton, widget: text }
               - { label: Step 2 Cancel Button, name: stepTwoCancelButton, widget: text }
               - { label: Step 2 Error Banner, name: stepTwoErrorBanner, widget: text }
-              - { label: BusinessName Field Header, name: modalBusinessFieldHeader, widget: markdown }
-              - {
-                  label: BusinessName Field Error Alert Text,
-                  name: modalBusinessFieldErrorName,
-                  widget: text,
-                }
-              - { label: BusinessName Field Text, name: modalBusinessFieldMarkdown, widget: markdown }
+              - { label: BusinessName Field Header, name: businessFieldHeader, widget: markdown }
+              - { label: BusinessName Field Error Alert Text, name: businessFieldErrorName, widget: text }
+              - { label: BusinessName Field Text, name: businessFieldMarkdown, widget: markdown }
               - { label: BusinessName API Failed Helper Text, name: failedBusinessFieldHelper, widget: text }
-              - { label: TaxId Field Header, name: modalTaxIdHeader, widget: markdown }
-              - { label: TaxId Field Text, name: modalTaxIdMarkdown, widget: markdown }
-              - { label: TaxId Field Error Alert Text, name: modalTaxFieldErrorName, widget: text }
+              - { label: TaxId Field Header, name: taxIdHeader, widget: markdown }
+              - { label: TaxId Field Text, name: taxIdMarkdown, widget: markdown }
+              - { label: TaxId Field Error Alert Text, name: taxFieldErrorName, widget: text }
               - { label: TaxId API Failed Helper Text, name: failedTaxIdHelper, widget: text }
-              - { label: Responsible Owner Header, name: modalBusinessOwnerName, widget: text }
-              - { label: Responsible Owner Description, name: modalBusinessOwnerDescription, widget: text }
+              - { label: Responsible Owner Header, name: businessOwnerName, widget: text }
+              - { label: Responsible Owner Description, name: businessOwnerDescription, widget: text }
               - {
                   label: Responsible Owner Field Error Alert Text,
-                  name: modalResponsibleOwnerFieldErrorName,
+                  name: responsibleOwnerFieldErrorName,
                   widget: text,
                 }
               - {
@@ -3788,6 +3783,7 @@ collections:
               "Set Up at a Temporary Location",
               "Purchase New Products or Equipment",
               "Only Show in Subtask",
+              "Manage My Business Vehicles",
             ],
         }
       # This is implemented but needs follow up in a future ticket for content before going live (Also same code for anytime action license reinstatements)
@@ -3882,7 +3878,7 @@ collections:
     files:
       - label: "Tax Clearance Step 1"
         name: "taxClearanceCertificate-step1"
-        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step1.json"
+        file: "content/src/fieldConfig/tax-clearance-certificate-step1.json"
         editor:
           preview: true
         fields:
@@ -3902,7 +3898,7 @@ collections:
               - { label: "Next Button Text", name: "continueButtonText", widget: "string", required: true }
       - label: "Tax Clearance Step 2"
         name: "taxClearanceCertificate-step2"
-        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step2.json"
+        file: "content/src/fieldConfig/tax-clearance-certificate-step2.json"
         editor:
           preview: true
         fields:
@@ -3931,7 +3927,7 @@ collections:
                 }
       - label: "Tax Clearance Step 3"
         name: "taxClearanceCertificate-step3"
-        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-step3.json"
+        file: "content/src/fieldConfig/tax-clearance-certificate-step3.json"
         editor:
           preview: true
         fields:
@@ -3961,13 +3957,12 @@ collections:
                   required: true,
                 }
               - { label: "Business Name Label", name: "businessNameLabel", widget: "string", required: true }
-              - { label: "Entity Id Label", name: "entityIdLabel", widget: "string", required: true }
               - { label: "Address Label", name: "addressLabel", widget: "string", required: true }
               - { label: "State Tax Id Label", name: "stateTaxIdLabel", widget: "string", required: true }
               - { label: "Tax Pin Label", name: "taxPinLabel", widget: "string", required: true }
       - label: "Tax Clearance Shared"
         name: "taxClearanceCertificate-shared"
-        file: "content/src/fieldConfig/tax-clearance-certificate-anytime-action/tax-clearance-certificate-shared.json"
+        file: "content/src/fieldConfig/tax-clearance-certificate-shared.json"
         editor:
           preview: true
         fields:
@@ -3998,6 +3993,20 @@ collections:
                   required: true,
                   hint: Only applies to tab 2 and 3,
                 }
+      - label: "Tax Clearance Download Page"
+        name: "taxClearanceCertificate-download"
+        file: "content/src/fieldConfig/tax-clearance-certificate-download.json"
+        editor:
+          preview: true
+        fields:
+          - label: Tax Clearance Download Page
+            name: taxClearanceCertificateDownload
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Header Two Text", name: "headerTwoLabel", widget: "string", required: true }
+              - { label: "Callout Text", name: "calloutText", widget: "string", required: true }
+              - { label: "Download Button Text", name: "buttonText", widget: "string", required: true }
   - name: "page-metadata"
     label: "🟨 PAGE METADATA"
     folder: "content/src"

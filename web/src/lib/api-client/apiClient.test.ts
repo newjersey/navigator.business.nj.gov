@@ -12,6 +12,7 @@ import {
   getUserData,
   postBusinessFormation,
   postNewsletter,
+  postTaxClearanceCertificate,
   postTaxFilingsLookup,
   postTaxFilingsOnboarding,
   postUserData,
@@ -115,5 +116,14 @@ describe("apiClient", () => {
       { userData: inputUserData, returnUrl, foreignGoodStandingFile: inputFile },
       { headers: { Authorization: "Bearer some-token" } }
     );
+  });
+
+  it("posts tax clearance certificate request", async () => {
+    const userData = generateUserData({ user: generateUser({}) });
+    mockAxios.post.mockResolvedValue({ data: userData });
+    expect(await postTaxClearanceCertificate(userData)).toEqual(userData);
+    expect(mockAxios.post).toHaveBeenCalledWith("/api/postTaxClearanceCertificate", userData, {
+      headers: { Authorization: "Bearer some-token" },
+    });
   });
 });

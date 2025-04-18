@@ -81,9 +81,12 @@ export const renderPage = ({
   );
 };
 
-export const fillText = (label: string, value: string): void => {
-  fireEvent.change(screen.getByLabelText(label), { target: { value: value } });
-  fireEvent.blur(screen.getByLabelText(label));
+export const fillText = (label: string, value: string, selector?: string): void => {
+  const options = selector ? { selector } : undefined;
+  const element = screen.getByLabelText(label, options);
+
+  fireEvent.change(element, { target: { value: value } });
+  fireEvent.blur(element);
 };
 
 export const selectByValue = (label: string, value: string): void => {
@@ -128,7 +131,7 @@ export const getDateOfFormation = (): string => {
 };
 
 export const getNotesValue = (): string => {
-  return (screen.queryByLabelText("Notes") as HTMLInputElement)?.value;
+  return (screen.queryByLabelText("Notes", { selector: "textarea" }) as HTMLInputElement)?.value;
 };
 
 export const getTaxIdValue = (): string => {

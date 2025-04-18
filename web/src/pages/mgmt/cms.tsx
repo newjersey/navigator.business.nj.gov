@@ -44,7 +44,7 @@ import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePrevie
 import CalloutPreview from "@/lib/cms/previews/CalloutPreview";
 import NavBarPreview from "@/lib/cms/previews/NavBarPreview";
 import RaffleBingoPreview from "@/lib/cms/previews/RaffleBingoPreview";
-import TaxAccessModalPreview from "@/lib/cms/previews/TaxAccessModalPreview";
+import TaxAccessPreview from "@/lib/cms/previews/TaxAccessPreview";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
 import { ReactElement } from "react";
@@ -103,6 +103,7 @@ const CMS = dynamic(
       registerPreview(CMS, "taxClearanceCertificate-step2", AnytimeActionTaxClearancePreview);
       registerPreview(CMS, "taxClearanceCertificate-step3", AnytimeActionTaxClearancePreview);
       registerPreview(CMS, "taxClearanceCertificate-shared", AnytimeActionTaxClearancePreview);
+      registerPreview(CMS, "taxClearanceCertificate-download", AnytimeActionTaxClearancePreview);
 
       // ----- Roadmap Sidebar Card -----
       registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);
@@ -153,7 +154,7 @@ const CMS = dynamic(
 
       registerPreview(CMS, "deferred-location-config", DeferredLocationPreview);
 
-      registerPreview(CMS, "tax-access-modal", TaxAccessModalPreview);
+      registerPreview(CMS, "tax-access", TaxAccessPreview);
       registerPreview(CMS, "navigation-defaults", NavBarPreview);
 
       registerPreview(CMS, "calloutDefaults", CalloutPreview);

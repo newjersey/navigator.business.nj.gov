@@ -54,6 +54,14 @@ const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => 
             />
           </>
         )}
+        {tab === "download" && (
+          <>
+            <AnytimeActionTaxClearanceCertificateElement
+              anytimeAction={taxClearanceAnytimeAction}
+              CMS_ONLY_certificatePdfBlob={new Blob()}
+            />
+          </>
+        )}
       </div>
     </ConfigContext.Provider>
   );

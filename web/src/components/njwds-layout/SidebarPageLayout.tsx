@@ -32,10 +32,23 @@ export const SidebarPageLayout = ({
     <>
       <div className={`usa-section padding-top-0 desktop:padding-top-6`}>
         <div className="grid-container-widescreen desktop:padding-x-7">
-          {isLargeScreen && <BackButtonForLayout backButtonText={Config.taskDefaults.backToRoadmapText} />}
+          {isLargeScreen && (
+            <>
+              <BackButtonForLayout backButtonText={Config.taskDefaults.backToRoadmapText} />
+              {titleOverColumns}
+            </>
+          )}
 
-          {isLargeScreen && titleOverColumns}
           <div className="grid-row grid-gap flex-no-wrap">
+            {isLargeScreen && (
+              <nav
+                aria-label="Secondary"
+                className={`${nonWrappingLeftColumn ? "" : "desktop:grid-col-3"}  order-first`}
+              >
+                {divider && <hr className="margin-bottom-1 margin-top-0" aria-hidden={true} />}
+                {navChildren}
+              </nav>
+            )}
             <div className={nonWrappingLeftColumn ? "fg1" : "desktop:grid-col-9"}>
               {!isLargeScreen && (
                 <div>
@@ -55,16 +68,6 @@ export const SidebarPageLayout = ({
               </div>
               {belowBoxComponent}
             </div>
-
-            {isLargeScreen && (
-              <nav
-                aria-label="Secondary"
-                className={`${nonWrappingLeftColumn ? "" : "desktop:grid-col-3"}  order-first`}
-              >
-                {divider && <hr className="margin-bottom-1 margin-top-0" aria-hidden={true} />}
-                {navChildren}
-              </nav>
-            )}
           </div>
         </div>
       </div>

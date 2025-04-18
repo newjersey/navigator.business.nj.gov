@@ -6,18 +6,22 @@ import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { ReviewLineItem } from "@/components/tasks/review-screen-components/ReviewLineItem";
 import { ReviewSection } from "@/components/tasks/review-screen-components/ReviewSection";
 import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
+import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { formatAddress } from "@/lib/domain-logic/formatAddress";
+import { scrollToTop } from "@/lib/utils/helpers";
 import { LookupTaxClearanceCertificateAgenciesById } from "@businessnjgovnavigator/shared";
+import { convertSignedByteArrayToUnsigned } from "@businessnjgovnavigator/shared/intHelpers";
 import { ReactElement } from "react";
 
 interface Props {
   setStepIndex: (step: number) => void;
+  setCertificatePdfBlob: (certificatePdfBlob: Blob) => void;
 }
 export const TaxClearanceStepThree = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { business } = useUserData();
+  const { userData, business } = useUserData();
 
   const requestingAgencyName = LookupTaxClearanceCertificateAgenciesById(
     business?.taxClearanceCertificateData?.requestingAgencyId
@@ -34,13 +38,32 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
 
   if (isAddressComplete) {
     addressValue = formatAddress({
-      addressLine1: business?.taxClearanceCertificateData.addressLine1,
-      addressLine2: business?.taxClearanceCertificateData.addressLine2,
-      addressCity: business?.taxClearanceCertificateData.addressCity,
-      addressState: business?.taxClearanceCertificateData.addressState,
-      addressZipCode: business?.taxClearanceCertificateData.addressZipCode,
+      addressLine1: business?.taxClearanceCertificateData?.addressLine1,
+      addressLine2: business?.taxClearanceCertificateData?.addressLine2,
+      addressCity: business?.taxClearanceCertificateData?.addressCity,
+      addressState: business?.taxClearanceCertificateData?.addressState,
+      addressZipCode: business?.taxClearanceCertificateData?.addressZipCode,
     });
   }
+
+  const handleButtonClick = async (): Promise<void> => {
+    if (!userData) return;
+    const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
+    if (taxClearanceResponse.certificatePdfArray) {
+      const blob = new Blob(
+        [new Uint8Array(convertSignedByteArrayToUnsigned(taxClearanceResponse.certificatePdfArray))],
+        {
+          type: "application/pdf",
+        }
+      );
+      props.setCertificatePdfBlob(blob);
+    }
+
+    // TODO: Error Response will be addressed in a separate ticket
+    // Note: if there is a server error, we may return a 500 status code, or
+    // return the error object with type = NATURAL_PROGRAM_ERROR
+    scrollToTop();
+  };
 
   return (
     <>
@@ -58,6 +81,7 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
               label={Config.taxClearanceCertificateStep3.certificationReasonLabel}
               value={requestingAgencyName}
               dataTestId={"requestingAgencyId"}
+              noColonAfterLabel
             />
           </ReviewSubSection>
           <hr className={"margin-y-3-override"} />
@@ -69,11 +93,6 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
               label={Config.taxClearanceCertificateStep3.businessNameLabel}
               value={business?.taxClearanceCertificateData?.businessName}
               dataTestId={"businessName"}
-            />
-            <ReviewLineItem
-              label={Config.taxClearanceCertificateStep3.entityIdLabel}
-              value={business?.taxClearanceCertificateData?.entityId}
-              dataTestId={"entityId"}
             />
             <ReviewLineItem
               label={Config.taxClearanceCertificateStep3.addressLabel}
@@ -107,7 +126,7 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
               </div>
               <PrimaryButton
                 isColor="primary"
-                onClick={() => {}}
+                onClick={handleButtonClick}
                 isRightMarginRemoved={true}
                 dataTestId="next-button"
               >

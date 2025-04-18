@@ -1,9 +1,54 @@
 @use "../sass-files/variables";
 
-.profile-tab-nav-button {
+.profile-tab {
+  display: flex;
+  align-items: center;
   width: 100%;
+  height: 54px;
+  margin: 2px 0;
+  padding: 0 1rem;
+  cursor: pointer;
+  color: variables.$base-dark;
+
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 300;
+  background-color: variables.$base-extra-light;
+  border: none;
+  border-left: 4px solid variables.$white;
+
+  img {
+    height: 20px;
+    filter: invert(39%) sepia(0%) saturate(0%) hue-rotate(187deg) brightness(94%) contrast(86%);
+  }
 
   @media (min-width: variables.$lg) {
     width: 17.5rem;
   }
+
+  &:hover {
+    background-color: variables.$base-lighter;
+    font-weight: 600;
+  }
+
+  &.selected {
+    border-left: 4px solid variables.$secondary-dark;
+    background-color: variables.$accent-cool-lightest;
+    color: variables.$secondary-dark;
+    font-weight: 600;
+
+    img {
+      filter: invert(19%) sepia(97%) saturate(5599%) hue-rotate(215deg) brightness(98%) contrast(101%);
+    }
+  }
+}
+
+.profile-tab-left-content {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.profile-tab-text {
+  margin-left: 0.75rem;
 }

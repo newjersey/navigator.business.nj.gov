@@ -31,7 +31,6 @@ export interface QUERY_PARAMS_VALUES {
   signUp: "true";
   industry: string;
   code: string;
-  openTaxFilingsModal: "true";
   flow: "starting" | "out-of-state" | "up-and-running";
   source: "guest_snackbar";
 }
@@ -53,7 +52,6 @@ export enum QUERIES {
   industry = "industry",
   sector = "sector",
   code = "code",
-  openTaxFilingsModal = "openTaxFilingsModal",
   flow = "flow",
   source = "source",
   businessMunicipality = "businessMunicipality",
