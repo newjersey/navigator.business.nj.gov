@@ -18,6 +18,7 @@ import {
   TaskProgress,
   TaxFilingData,
   UserData,
+  XrayData,
 } from "@businessnjgovnavigator/shared/";
 import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
 import { Business } from "@businessnjgovnavigator/shared/userData";
@@ -485,6 +486,7 @@ export interface UpdateQueue {
   queueFormationFormData: (formatdionFormData: Partial<FormationFormData>) => UpdateQueue;
   queueTaskItemChecklist: (taskItemChecklist: Record<string, boolean>) => UpdateQueue;
   queueEnvironmentData: (environmentData: Partial<EnvironmentData>) => UpdateQueue;
+  queueXrayRegistrationData: (xrayRegistrationData: Partial<XrayData>) => UpdateQueue;
   update: (config?: { local?: boolean }) => Promise<void>;
   current: () => UserData;
   currentBusiness: () => Business;

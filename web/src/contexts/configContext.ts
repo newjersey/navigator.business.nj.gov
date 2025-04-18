@@ -43,6 +43,7 @@ import * as TaxClearanceCertificateStep1 from "@businessnjgovnavigator/content/f
 import * as TaxClearanceCertificateStep2 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step2.json";
 import * as TaxClearanceCertificateStep3 from "@businessnjgovnavigator/content/fieldConfig/tax-clearance-certificate-step3.json";
 import * as Tax from "@businessnjgovnavigator/content/fieldConfig/tax.json";
+import * as XrayRegistration from "@businessnjgovnavigator/content/fieldConfig/x-ray-registration.json";
 import * as CalloutAlerts from "@businessnjgovnavigator/content/mappings/callout-alerts.json";
 import * as PageMetadata from "@businessnjgovnavigator/content/page-metadata/page-metadata.json";
 
@@ -100,7 +101,9 @@ const merged = JSON.parse(
       TaxClearanceCertificateStep2,
       TaxClearanceCertificateStep3,
       TaxClearanceCertificateShared,
-      TaxClearanceCertificateDownload
+      TaxClearanceCertificateDownload,
+      FundingsOnboarding,
+      XrayRegistration
     )
   )
 );
@@ -153,6 +156,7 @@ export type ConfigType = typeof ConfigOriginal &
   typeof TaxClearanceCertificateStep2 &
   typeof TaxClearanceCertificateStep3 &
   typeof TaxClearanceCertificateShared &
+  typeof XrayRegistration &
   typeof TaxClearanceCertificateDownload;
 
 export const getMergedConfig = (): ConfigType => {
@@ -198,11 +202,13 @@ export const getMergedConfig = (): ConfigType => {
     LandingPage,
     FundingsOnboarding,
     LandingPageExperienceB,
+    FundingsOnboarding,
     TaxClearanceCertificateStep1,
     TaxClearanceCertificateStep2,
     TaxClearanceCertificateStep3,
     TaxClearanceCertificateShared,
-    TaxClearanceCertificateDownload
+    TaxClearanceCertificateDownload,
+    XrayRegistration
   );
 };
 
