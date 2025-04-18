@@ -43,12 +43,15 @@ During the inspection, a hydrostatic test (a type of pressure test) may be requi
 
 A boiler is exempt and does not need to be inspected if it **meets any** of the following conditions:
 
-* Has a relief valve set to discharge at 15 psig or lower and serves less than 6 housing units or less than 25 people
-* Has a relief valve set to discharge at 160 PSI or lower and also operates reliably at temperatures below 250 degrees Fahrenheit and serves  less than ...
 * Has less than 10 square feet of heating surface
 * Has less than 10 kilowatts of incoming power, or produces less than 40,000 BTU per hour of heat output
-* Is under the control of the U.S. government and regulated by a federal agency
+* Is under the control of the United States government and is regulated by a federal agency
 * Is used for motor vehicle propulsion ... add more here (links, CI?) CI is most user friendly 
+
+If the boiler has 1 of the following and serves a building with less than 6 housing units or 25 people, it does not need inspection:
+
+* Is a steam boiler and has a relief valve set to discharge at 15 psig or lower 
+* Is a hot water boiler and has a relief valve set to discharge at 160 PSI or lower and also operates reliably at temperatures below 250 degrees Fahrenheit and serves
 
 ## How Inspections Work
 
