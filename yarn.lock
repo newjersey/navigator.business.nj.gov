@@ -4433,7 +4433,7 @@ __metadata:
     uuid: 9.0.1
     winston: 3.17.0
     winston-cloudwatch: 6.3.0
-    wiremock: 3.10.0
+    wiremock: 3.12.1
     xml2js: 0.6.2
   languageName: unknown
   linkType: soft
@@ -4642,7 +4642,7 @@ __metadata:
     webpack: 5.97.1
     winston: 3.17.0
     winston-cloudwatch: 6.3.0
-    wiremock: 3.10.0
+    wiremock: 3.12.1
     xml2js: 0.6.2
     yarn-workspace-sync-deps: 0.3.3
   languageName: unknown
@@ -35956,14 +35956,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wiremock@npm:3.10.0":
-  version: 3.10.0
-  resolution: "wiremock@npm:3.10.0"
+"wiremock@npm:3.12.1":
+  version: 3.12.1
+  resolution: "wiremock@npm:3.12.1"
   dependencies:
     npm-java-runner: ^1.0.2
   bin:
     wiremock: index.js
-  checksum: 0e3a2bf71044d21f5ae661abcd165840338736742d8e1923d3dec835fed509fd0c72bc559c81f5fc6566bab84b77b2df9adc115586cb0045f1901a546f8bb7ff
+  checksum: 7bfbbec73b5b69774a327fde3c3cbfc1a2fcdbbc6d7d348689837ec4af53a03636bda350a4816366a8a9ea4c4b720f02b3c3aa23c37fad2b315c1461b0dd282a
   languageName: node
   linkType: hard
 
