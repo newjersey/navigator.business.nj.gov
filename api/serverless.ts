@@ -92,6 +92,10 @@ const taxClearanceCertificateUrl = process.env.TAX_CLEARANCE_CERTIFICATE_URL || 
 const taxClearanceCertificateUserName = process.env.TAX_CLEARANCE_CERTIFICATE_USER_NAME || "";
 const taxClearanceCertificatePassword = process.env.TAX_CLEARANCE_CERTIFICATE_PASSWORD || "";
 
+const etpApiAccount = process.env.ABC_ETP_API_ACCOUNT || "";
+const etpApiKey = process.env.ABC_ETP_API_KEY || "";
+const etpApiBaseUrl = process.env.ABC_ETP_API_BASE_URL || "";
+
 const serverlessConfiguration: AWS = {
   useDotenv: true,
   service: "businessnjgov-api",
@@ -249,6 +253,9 @@ const serverlessConfiguration: AWS = {
       TAX_CLEARANCE_CERTIFICATE_URL: taxClearanceCertificateUrl,
       TAX_CLEARANCE_CERTIFICATE_USER_NAME: taxClearanceCertificateUserName,
       TAX_CLEARANCE_CERTIFICATE_PASSWORD: taxClearanceCertificatePassword,
+      ABC_ETP_API_ACCOUNT: etpApiAccount,
+      ABC_ETP_API_KEY: etpApiKey,
+      ABC_ETP_API_BASE_URL: etpApiBaseUrl,
     } as AwsLambdaEnvironment,
     logRetentionInDays: 180,
   },
