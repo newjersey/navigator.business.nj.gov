@@ -17,6 +17,9 @@ interface Props {
   hideHeader?: boolean;
   boldAltDescription?: boolean;
   boldDescription?: boolean;
+  hideLine?: boolean | false;
+  hideTopSpace?: boolean | false;
+  isFullWidth?: boolean | false;
 }
 
 export const ProfileField = (props: Props): ReactElement => {
@@ -28,7 +31,9 @@ export const ProfileField = (props: Props): ReactElement => {
   return (
     <>
       <div
-        className="margin-y-4 text-field-width-default add-spacing-on-ele-scroll"
+        className={`add-spacing-on-ele-scroll ${props.isFullWidth ? `` : `text-field-width-default `} ${
+          props.hideTopSpace ? `` : `margin-y-4`
+        }`}
         id={`question-${props.fieldName}`}
       >
         {props.locked ? (
@@ -49,7 +54,7 @@ export const ProfileField = (props: Props): ReactElement => {
         )}
       </div>
 
-      <hr aria-hidden={true} />
+      {!props.hideLine && <hr aria-hidden={true} />}
     </>
   );
 };

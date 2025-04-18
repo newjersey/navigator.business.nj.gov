@@ -21,6 +21,7 @@ interface Props
   handleChangeOverride?: (value: string) => void;
   getShowHideToggleButton: (toggleFunc?: (taxId: string) => void) => ReactElement;
   taxIdDisplayStatus: TaxIdDisplayStatus;
+  required?: boolean | false;
 }
 export const SplitTaxId = ({
   handleChangeOverride,
@@ -111,6 +112,7 @@ export const SplitTaxId = ({
             type={props.taxIdDisplayStatus === "text-view" ? "text" : "password"}
             allowMasking={true}
             inputWidth={"reduced"}
+            required={props.required}
             {...props}
           />
         </div>
@@ -132,6 +134,7 @@ export const SplitTaxId = ({
             disabled={props.taxIdDisplayStatus === "password-view"}
             type={props.taxIdDisplayStatus === "text-view" ? "text" : "password"}
             allowMasking={true}
+            required={props.required}
             {...props}
           />
         </div>
