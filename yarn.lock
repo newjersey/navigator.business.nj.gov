@@ -4387,7 +4387,7 @@ __metadata:
     prettier: 2.8.8
     prettier-plugin-organize-imports: 3.2.4
     rimraf: 5.0.10
-    serverless: 4.12.0
+    serverless: 4.13.0
     serverless-dynamodb: 0.2.56
     serverless-http: 3.2.0
     serverless-offline: 14.4.0
@@ -4589,7 +4589,7 @@ __metadata:
     sass-loader: 14.2.1
     seedrandom: ^3.0.5
     semantic-release: 19.0.5
-    serverless: 4.12.0
+    serverless: 4.13.0
     serverless-dynamodb: 0.2.56
     serverless-http: 3.2.0
     serverless-offline: 14.4.0
@@ -32177,9 +32177,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless@npm:4.12.0":
-  version: 4.12.0
-  resolution: "serverless@npm:4.12.0"
+"serverless@npm:4.13.0":
+  version: 4.13.0
+  resolution: "serverless@npm:4.13.0"
   dependencies:
     axios: ^1.8.3
     axios-proxy-builder: ^0.1.2
@@ -32188,7 +32188,7 @@ __metadata:
   bin:
     serverless: run.js
     sls: run.js
-  checksum: cb5d67c2204cf7939707726cd8c7240c05e937f4b4116da69e1db1e01fad027950c41a0c4a58d9b038d1580458ca4ac27034d6ad851e0c5815bbb60da6a3555d
+  checksum: 50a3969199cc1d85a938cfc66c318145a985f2a5f5f42959febd6b0a3c6209b67756489cdad778360d7197b7bd88f1406ee7616684a6c595a2fa7d0723d64a03
   languageName: node
   linkType: hard
 
