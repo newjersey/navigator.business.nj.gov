@@ -51,7 +51,7 @@ A steam or hot water boiler is exempt and does not need to be inspected if it **
 If the boiler **meets any** of the following and serves a building with less than 6 housing units or less than 25 people, it also does not need inspection:
 
 * It is a steam boiler with a relief valve set to discharge at 15 psig or lower
-* It is a hot water boiler with a relief valve set to discharge at 160 PSI or lower **and** operates reliably at temperatures below or up to 250 degrees Fahrenheit 
+* It is a hot water boiler with a relief valve set to discharge at 160 PSI or lower *and* operates reliably at temperatures below or up to 250 degrees Fahrenheit 
 
 ## How Inspections Work
 
