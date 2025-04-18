@@ -19,6 +19,7 @@ interface Props {
   addButtonText?: string;
   title: string;
   contentMd: string;
+  isUnderline?: boolean;
 }
 
 export const BusinessFormationTextBox = (props: Props): ReactElement => {
@@ -56,7 +57,11 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
         </Heading>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
-            <UnStyledButton onClick={handleAddButtonClick} dataTestid={`show-${props.fieldName}`}>
+            <UnStyledButton
+              onClick={handleAddButtonClick}
+              dataTestid={`show-${props.fieldName}`}
+              isUnderline={props.isUnderline}
+            >
               {props.addButtonText}
             </UnStyledButton>
           )}
