@@ -1,3 +1,4 @@
+import * as AbcEmergencyTripPermit from "@businessnjgovnavigator/content/fieldConfig/abc-emergency-trip-permit.json";
 import * as AccountSetup from "@businessnjgovnavigator/content/fieldConfig/account-setup-page.json";
 import * as anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults from "@businessnjgovnavigator/content/fieldConfig/anytime-action-reinstatement-and-license-calendar-event-status-defaults.json";
 import * as BusinessFormation from "@businessnjgovnavigator/content/fieldConfig/business-formation.json";
@@ -100,7 +101,8 @@ const merged = JSON.parse(
       TaxClearanceCertificateStep2,
       TaxClearanceCertificateStep3,
       TaxClearanceCertificateShared,
-      TaxClearanceCertificateDownload
+      TaxClearanceCertificateDownload,
+      AbcEmergencyTripPermit
     )
   )
 );
@@ -153,7 +155,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof TaxClearanceCertificateStep2 &
   typeof TaxClearanceCertificateStep3 &
   typeof TaxClearanceCertificateShared &
-  typeof TaxClearanceCertificateDownload;
+  typeof TaxClearanceCertificateDownload &
+  typeof AbcEmergencyTripPermit;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -202,7 +205,8 @@ export const getMergedConfig = (): ConfigType => {
     TaxClearanceCertificateStep2,
     TaxClearanceCertificateStep3,
     TaxClearanceCertificateShared,
-    TaxClearanceCertificateDownload
+    TaxClearanceCertificateDownload,
+    AbcEmergencyTripPermit
   );
 };
 

@@ -129,3 +129,70 @@ table.business-formation-payment {
     height: 10rem !important;
   }
 }
+
+table.emergency-trip-permit-billing {
+  border: 0 solid #f0f0f0;
+
+  thead {
+    tr {
+      th:nth-child(2) {
+        text-align: right;
+        padding-right: 1em;
+        width: 50%;
+        padding-bottom: 2em;
+      }
+      th {
+        width: 50%;
+        padding-left: 1em;
+        text-align: left;
+        white-space: nowrap;
+        height: 1rem;
+        border: 0;
+        border-bottom: 1px solid variables.$base-light;
+      }
+    }
+  }
+
+  tbody {
+    border-y: 1px solid #f0f0f0;
+    tr:nth-child(2) {
+      background: #f7f7f7;
+    }
+
+    tr {
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 1px solid variables.$base-lighter;
+
+      td:nth-child(2) {
+        text-align: right;
+      }
+      td {
+        height: 1rem;
+        border: 0;
+      }
+    }
+  }
+
+  tfoot tr {
+    border: 1px solid #f0f0f0;
+    background: #ecf3ec;
+
+    td:nth-child(2) {
+      text-align: right;
+    }
+    td {
+      height: 1rem;
+      border: 0;
+    }
+  }
+}
+
+table.emergency-trip-permit-review {
+  border: 0;
+  tbody td {
+    border: 0;
+    height: 1rem;
+    padding: 0;
+  }
+}

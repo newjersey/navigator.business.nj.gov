@@ -23,6 +23,7 @@ export interface Payer {
   PhoneNumber: string | null;
   Email: string | null;
   Country: string;
+  ZipCode: string | null;
 }
 
 export interface PermitApplication {
@@ -90,6 +91,7 @@ export const getApiSubmissionBody = (
       PhoneNumber: applicationInfo.payerPhoneNumber ?? "",
       Email: applicationInfo.payerEmail ?? "",
       Country: applicationInfo.payerCountry ?? "",
+      ZipCode: applicationInfo.payerZipCode ?? "",
     },
     PermitApplication: {
       RequestorFirstName: applicationInfo.requestorFirstName,
@@ -99,7 +101,7 @@ export const getApiSubmissionBody = (
       RequestorPhone: applicationInfo.requestorPhone,
       Carrier: applicationInfo.carrier,
       RequestorAddress1: applicationInfo.requestorAddress1,
-      RequestAddress2: applicationInfo.requestAddress2 ?? null,
+      RequestAddress2: applicationInfo.requestorAddress2 ?? null,
       RequestorCity: applicationInfo.requestorCity,
       RequestorCountry: applicationInfo.requestorCountry,
       RequestorStateProvince: applicationInfo.requestorStateProvince,
@@ -111,7 +113,7 @@ export const getApiSubmissionBody = (
       VehicleStateProvince: applicationInfo.vehicleStateProvince,
       VehicleLicensePlateNum: applicationInfo.vehicleLicensePlateNum,
       PermitDate: applicationInfo.permitDate,
-      PermitStartTime: applicationInfo.permitStartTime,
+      PermitStartTime: applicationInfo.permitStartTime ?? "",
       DeliverySiteName: applicationInfo.deliverySiteName,
       DeliveryAddress: applicationInfo.deliveryAddress,
       DeliveryCity: applicationInfo.deliveryCity,
