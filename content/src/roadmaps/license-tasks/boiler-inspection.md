@@ -23,7 +23,7 @@ divisionPhone: (609) 292-2921
 ---
 ## Boilers That Need Inspection
 
-A boiler must be inspected if it meets the following condition:
+A steam or hot water boiler must be inspected if it meets the following condition:
 
 * Has 10+ square feet of heating surface
 
