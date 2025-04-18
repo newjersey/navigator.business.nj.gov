@@ -159,7 +159,7 @@ describe("profile - owning existing business", () => {
     fillText("Tax id location", "123");
     fillText("Tax pin", "6666");
     chooseTab("notes");
-    fillText("Notes", "whats appppppp");
+    fillText("Notes", "whats appppppp", "textarea");
     clickSave();
 
     await waitFor(() => {
