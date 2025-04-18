@@ -285,6 +285,84 @@ collections:
             value_field: "{{fields.id}}"
             display_fields: ["{{displayname}}"]
             options_length: 500
+  - name: foreignAddons
+    label: "Roadmaps - Foreign-Add-ons"
+    folder: "content/src/roadmaps/foreign-add-ons"
+    slug: "{{id}}"
+    identifier_field: "{{id}}"
+    extension: "json"
+    create: true
+    delete: true
+    format: "json"
+    summary: "{{displayname}}"
+    editor:
+      preview: false
+    fields:
+      - label: Id
+        name: id
+        widget: write-once-read-only-no-space
+      - label: Displayname
+        name: displayname
+        widget: string
+      - label: Roadmap Steps
+        name: roadmapSteps
+        widget: list
+        summary: "Step {{step}} - {{task}} {{licenseTask}}"
+        fields:
+          - label: Roadmap Step
+            name: step
+            widget: relation
+            collection: "settings"
+            search_fields: ["steps.*.name"]
+            value_field: "steps.*.stepNumber"
+            display_fields: ["steps.*.name"]
+            options_length: 500
+          - label: Weight
+            name: weight
+            widget: number
+          - label: Task (this or License Task is required)
+            name: task
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
+            value_field: "{{fields.id}}"
+            display_fields: ["{{displayname}}"]
+            required: false
+            options_length: 500
+          - label: License Task (this or Task is required)
+            name: licenseTask
+            widget: "relation"
+            collection: "license-tasks"
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
+            value_field: "{{fields.id}}"
+            display_fields: ["{{displayname}}"]
+            required: false
+            options_length: 500
+          - label: "Required"
+            name: "required"
+            widget: "boolean"
+            required: false
+      - label: Task Overrides
+        name: modifications
+        widget: list
+        summary: "{{taskToReplaceFilename}}"
+        fields:
+          - label: Task To Replace
+            name: taskToReplaceFilename
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
+            value_field: "{{fields.id}}"
+            display_fields: ["{{displayname}}"]
+            options_length: 500
+          - label: Modified Task
+            name: replaceWithFilename
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
+            value_field: "{{fields.id}}"
+            display_fields: ["{{displayname}}"]
+            options_length: 500
   - name: "nonEssentialQuestionsCollection"
     label: "Roadmaps - Non Essential Questions"
     editor:
