@@ -1,4 +1,4 @@
-import { randomInt, randomIntFromInterval } from "./intHelpers";
+import { convertSignedByteArrayToUnsigned, randomInt, randomIntFromInterval } from "./intHelpers";
 
 describe("intHelpers", () => {
   describe("randomInt", () => {
@@ -32,6 +32,25 @@ describe("intHelpers", () => {
     it("returns a number", () => {
       const value = randomIntFromInterval("1", "10");
       expect(value).toStrictEqual(expect.any(Number));
+    });
+  });
+
+  describe("convertSignedByteArrayToUnsigned", () => {
+    it("converts valid signed bytes to unsigned", () => {
+      const validBytes = [0, 1, -1, 37, -37, -128, 127];
+      expect(convertSignedByteArrayToUnsigned(validBytes)).toEqual([0, 1, 255, 37, 219, 128, 127]);
+    });
+
+    it("throws an error if a signed byte is invalid", () => {
+      const lessThanValidByte = [0, 1, -129, 127];
+      expect(() => convertSignedByteArrayToUnsigned(lessThanValidByte)).toThrow(
+        "Invalid signedByte -129, expected -128 <= signedByte <= 127"
+      );
+
+      const greaterThanValidByte = [0, 1, -128, 128];
+      expect(() => convertSignedByteArrayToUnsigned(greaterThanValidByte)).toThrow(
+        "Invalid signedByte 128, expected -128 <= signedByte <= 127"
+      );
     });
   });
 });

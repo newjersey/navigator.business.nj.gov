@@ -4551,7 +4551,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 8.18.1
     css-loader: 6.11.0
-    cypress: 13.17.0
+    cypress: 14.3.0
     cypress-axe: 1.5.0
     cypress-dotenv: 2.0.2
     cypress-wait-until: 3.0.2
@@ -4751,7 +4751,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 8.18.1
     css-loader: 6.11.0
-    cypress: 13.17.0
+    cypress: 14.3.0
     cypress-axe: 1.5.0
     cypress-dotenv: 2.0.2
     cypress-wait-until: 3.0.2
@@ -5411,9 +5411,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/request@npm:^3.0.6":
-  version: 3.0.6
-  resolution: "@cypress/request@npm:3.0.6"
+"@cypress/request@npm:^3.0.8":
+  version: 3.0.8
+  resolution: "@cypress/request@npm:3.0.8"
   dependencies:
     aws-sign2: ~0.7.0
     aws4: ^1.8.0
@@ -5428,12 +5428,12 @@ __metadata:
     json-stringify-safe: ~5.0.1
     mime-types: ~2.1.19
     performance-now: ^2.1.0
-    qs: 6.13.0
+    qs: 6.14.0
     safe-buffer: ^5.1.2
     tough-cookie: ^5.0.0
     tunnel-agent: ^0.6.0
     uuid: ^8.3.2
-  checksum: 017e1898123eca7af4b95b89fa5a03ed6cb5e841b8ed926cb709b5ad88b5f55b713436e74bce6f13752f80d0399c01cd5b0b3212aaa972e064967f5c78237ebb
+  checksum: 0a80d5872c6a82b74ed639be773ea68f5047aea63e9e6a10e64eda73ebab9c0ee0a7435df4b11ededc49a7e186884aa7997143effd21ef6321e233489764668b
   languageName: node
   linkType: hard
 
@@ -15909,6 +15909,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ci-info@npm:^4.1.0":
+  version: 4.2.0
+  resolution: "ci-info@npm:4.2.0"
+  checksum: 0e3726721526f54c5b17cf44ab2ed69b842c756bcb4d2b26ce279e595a80a856aec9fb38a2986a2baca3de73d15895f3a01d2771c4aad93c898aae7e3ca0ceb1
+  languageName: node
+  linkType: hard
+
 "cidr-regex@npm:^3.1.1":
   version: 3.1.1
   resolution: "cidr-regex@npm:3.1.1"
@@ -16068,7 +16075,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cli-table3@npm:^0.6.1, cli-table3@npm:^0.6.2, cli-table3@npm:^0.6.3, cli-table3@npm:~0.6.1":
+"cli-table3@npm:^0.6.1, cli-table3@npm:^0.6.2, cli-table3@npm:^0.6.3":
   version: 0.6.3
   resolution: "cli-table3@npm:0.6.3"
   dependencies:
@@ -16078,6 +16085,19 @@ __metadata:
     "@colors/colors":
       optional: true
   checksum: 09897f68467973f827c04e7eaadf13b55f8aec49ecd6647cc276386ea660059322e2dd8020a8b6b84d422dbdd619597046fa89cbbbdc95b2cea149a2df7c096c
+  languageName: node
+  linkType: hard
+
+"cli-table3@npm:~0.6.5":
+  version: 0.6.5
+  resolution: "cli-table3@npm:0.6.5"
+  dependencies:
+    "@colors/colors": 1.5.0
+    string-width: ^4.2.0
+  dependenciesMeta:
+    "@colors/colors":
+      optional: true
+  checksum: ab7afbf4f8597f1c631f3ee6bb3481d0bfeac8a3b81cffb5a578f145df5c88003b6cfff46046a7acae86596fdd03db382bfa67f20973b6b57425505abc47e42c
   languageName: node
   linkType: hard
 
@@ -17236,11 +17256,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:13.17.0":
-  version: 13.17.0
-  resolution: "cypress@npm:13.17.0"
+"cypress@npm:14.3.0":
+  version: 14.3.0
+  resolution: "cypress@npm:14.3.0"
   dependencies:
-    "@cypress/request": ^3.0.6
+    "@cypress/request": ^3.0.8
     "@cypress/xvfb": ^1.2.4
     "@types/sinonjs__fake-timers": 8.1.1
     "@types/sizzle": ^2.3.2
@@ -17251,9 +17271,9 @@ __metadata:
     cachedir: ^2.3.0
     chalk: ^4.1.0
     check-more-types: ^2.24.0
-    ci-info: ^4.0.0
+    ci-info: ^4.1.0
     cli-cursor: ^3.1.0
-    cli-table3: ~0.6.1
+    cli-table3: ~0.6.5
     commander: ^6.2.1
     common-tags: ^1.8.0
     dayjs: ^1.10.4
@@ -17277,7 +17297,7 @@ __metadata:
     process: ^0.11.10
     proxy-from-env: 1.0.0
     request-progress: ^3.0.0
-    semver: ^7.5.3
+    semver: ^7.7.1
     supports-color: ^8.1.1
     tmp: ~0.2.3
     tree-kill: 1.2.2
@@ -17285,7 +17305,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: c1d87358e8b92e19e3bf5246a8787dcdd5083e27fa7b816d26c28b4678ecd87b5b3b8661fb812bc993845ca30a482d3f18837af1ac6d9e142e41049dccbc51e0
+  checksum: 3c21a9864bb6fd2614e7e551fec2c520b673a48af0071a3a29b4df9b309c5e586c6dfd55eb28cbc1a3cc4f9d5400dc6c63d91a3bebe7c2b71dce494b88c0d99e
   languageName: node
   linkType: hard
 
@@ -29928,6 +29948,15 @@ __metadata:
   dependencies:
     side-channel: ^1.0.6
   checksum: e9404dc0fc2849245107108ce9ec2766cde3be1b271de0bf1021d049dc5b98d1a2901e67b431ac5509f865420a7ed80b7acb3980099fe1c118a1c5d2e1432ad8
+  languageName: node
+  linkType: hard
+
+"qs@npm:6.14.0":
+  version: 6.14.0
+  resolution: "qs@npm:6.14.0"
+  dependencies:
+    side-channel: ^1.1.0
+  checksum: 189b52ad4e9a0da1a16aff4c58b2a554a8dad9bd7e287c7da7446059b49ca2e33a49e570480e8be406b87fccebf134f51c373cbce36c8c83859efa0c9b71d635
   languageName: node
   linkType: hard
 

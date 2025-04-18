@@ -3,7 +3,7 @@ import {
   FAILED_TAX_ID_AND_PIN_VALIDATION,
   INELIGIBLE_TAX_CLEARANCE_FORM,
   MISSING_FIELD,
-  SYSTEM_ERROR,
+  NATURAL_PROGRAM_ERROR,
   TAX_ID_MISSING_FIELD,
   TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE,
 } from "@client/ApiTaxClearanceCertificateClient";
@@ -36,7 +36,7 @@ describe("TaxClearanceCertificateClient", () => {
     jest.resetAllMocks();
     client = ApiTaxClearanceCertificateClient(DummyLogWriter, config);
     userData = generateUserData({});
-    mockAxios.post.mockResolvedValue({ data: {} });
+    mockAxios.post.mockResolvedValue({ data: { certificate: [1] } });
   });
 
   it("makes a post request to correct url with basic auth and data", () => {
@@ -192,15 +192,15 @@ describe("TaxClearanceCertificateClient", () => {
     });
   });
 
-  it("returns SYSTEM_ERROR error", async () => {
+  it("returns NATURAL_PROGRAM_ERROR error", async () => {
     const userData = generateUserData({});
     mockAxios.post.mockRejectedValue({
-      response: { status: StatusCodes.BAD_REQUEST, data: SYSTEM_ERROR },
+      response: { status: StatusCodes.BAD_REQUEST, data: NATURAL_PROGRAM_ERROR },
     });
     expect(await client.postTaxClearanceCertificate(userData)).toEqual({
       error: {
-        message: SYSTEM_ERROR,
-        type: "SYSTEM_ERROR",
+        message: NATURAL_PROGRAM_ERROR,
+        type: "NATURAL_PROGRAM_ERROR",
       },
     });
   });

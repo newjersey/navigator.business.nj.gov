@@ -21,7 +21,7 @@ export const FAILED_TAX_ID_AND_PIN_VALIDATION =
   "ADABase validation failed. Please verify the data submitted and retry.";
 export const MISSING_FIELD =
   "Mandatory Field Missing. TaxpayerId, TaxpayerName, AddressLine1, City, State, Zip, Agency name, Rep Id and RepName are required.";
-export const SYSTEM_ERROR = "Error calling Natural Program. Please try again later.";
+export const NATURAL_PROGRAM_ERROR = "Error calling Natural Program. Please try again later.";
 
 export const ApiTaxClearanceCertificateClient = (
   logWriter: LogWriterType,
@@ -69,6 +69,13 @@ export const ApiTaxClearanceCertificateClient = (
             certificate: "Succussful Response - PDF data omitted",
           })}`
         );
+        if (!Array.isArray(response.data.certificate) || response.data.certificate.length === 0) {
+          const errorMessage = `Tax Clearance Certificate Client - Id:${logId} - Error: Certificate is empty or not an array ${JSON.stringify(
+            response.data.certificate
+          )}`;
+          logWriter.LogError(errorMessage);
+          throw errorMessage;
+        }
         return { certificatePdfArray: response.data.certificate };
       })
       .catch((error: AxiosError) => {
@@ -104,10 +111,10 @@ export const ApiTaxClearanceCertificateClient = (
               },
             };
           }
-          if (errorMessage === SYSTEM_ERROR) {
+          if (errorMessage === NATURAL_PROGRAM_ERROR) {
             return {
               error: {
-                type: "SYSTEM_ERROR",
+                type: "NATURAL_PROGRAM_ERROR",
                 message: errorMessage,
               },
             };
