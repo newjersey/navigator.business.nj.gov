@@ -27,7 +27,7 @@ pathspec==0.12.1
 pexpect==4.9.0
 pillow==11.1.0
 platformdirs==4.3.7
-prompt_toolkit==3.0.50
+prompt_toolkit==3.0.51
 ptyprocess==0.7.0
 pure_eval==0.2.3
 pycparser==2.22
@@ -41,5 +41,5 @@ six==1.17.0
 stack-data==0.6.3
 traitlets==5.14.3
 typing_extensions==4.13.2
-urllib3==2.3.0
+urllib3==2.4.0
 wcwidth==0.2.13
