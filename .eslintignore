@@ -43,3 +43,6 @@ scripts/
 .yarn
 .vscode
 coverage
+
+# Large file with binary/hex contents
+api/wiremock/__files/tax-clearance-success.json

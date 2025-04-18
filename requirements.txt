@@ -16,7 +16,7 @@ ipdb==0.13.13
 ipython==8.35.0
 jedi==0.19.2
 kiwisolver==1.4.8
-Markdown==3.7
+Markdown==3.8
 matplotlib-inline==0.1.7
 matplotlib==3.10.1
 mypy-extensions==1.0.0
@@ -40,6 +40,6 @@ requests==2.32.3
 six==1.17.0
 stack-data==0.6.3
 traitlets==5.14.3
-typing_extensions==4.12.2
-urllib3==2.3.0
+typing_extensions==4.13.2
+urllib3==2.4.0
 wcwidth==0.2.13

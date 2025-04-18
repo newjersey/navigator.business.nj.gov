@@ -28,7 +28,9 @@ type EventType =
   | "task_search_interactions"
   | "navigation_clicks"
   | "site_return_callback"
-  | "account_clicks";
+  | "account_clicks"
+  | "tax_calendar_arrive_v2"
+  | "tax_calendar_click_v2";
 
 const eventMap: Record<EventType, string> = {
   contextual_link_clicks: "contextual_link_clicks",
@@ -51,6 +53,8 @@ const eventMap: Record<EventType, string> = {
   task_search_interactions: "task_search_interactions",
   navigation_clicks: "navigation_clicks",
   account_clicks: "account_clicks",
+  tax_calendar_arrive_v2: "tax_calendar_arrive_v2",
+  tax_calendar_click_v2: "tax_calendar_click_v2",
 };
 
 type ParameterType =
@@ -134,7 +138,8 @@ type Action =
   | "go_to_filing_detail_screen"
   | "go_to_profile_screen"
   | "go_to_NavigatorAccount_setup"
-  | "return_from_myNJ_registration";
+  | "return_from_myNJ_registration"
+  | "arrive";
 
 type ClickText =
   | "hero_get_started"
@@ -143,7 +148,6 @@ type ClickText =
   | "navbar_register"
   | "close_contextual_sidebar"
   | "live_chat"
-  | "show_tax_calendar_modal"
   | "show_myNJ_registration_prompt_modal"
   | "profile_save"
   | "i_already_submitted"
@@ -160,7 +164,7 @@ type FormName =
   | "finish_additional_business_onboarding"
   | "business_formation"
   | "profile"
-  | "tax_calendar_modal"
+  | "tax_calendar"
   | "cannabis_license"
   | "industry_essential_questions"
   | "name_search"
@@ -220,7 +224,9 @@ type Item =
   | "skip_to_main_content"
   | "show_funding_opportunities"
   | "check_account_log_in"
-  | "link_your_myNJ_account_link";
+  | "link_your_myNJ_account_link"
+  | "tax_calendar_v2_cta"
+  | "calendar_access_v2";
 
 type BooleanResponseOption = "yes" | "no";
 
@@ -1912,23 +1918,13 @@ export default {
       },
     },
 
-    tax_calendar_banner_button: {
+    tax_calendar_register_button: {
       click: {
-        show_tax_calendar_modal: () => {
-          eventRunner.track({
-            event: "link_clicks",
-            legacy_event_action: "click",
-            legacy_event_category: "tax_calendar_banner_button",
-            legacy_event_label: "show_tax_calendar_modal",
-            click_text: "show_tax_calendar_modal",
-            clicked_to: "tax_calendar_modal",
-          });
-        },
         show_myNJ_registration_prompt_modal: () => {
           eventRunner.track({
             event: "link_clicks",
             legacy_event_action: "click",
-            legacy_event_category: "tax_calendar_banner_button",
+            legacy_event_category: "tax_calendar_register_button",
             legacy_event_label: "show_myNJ_registration_prompt_modal",
             click_text: "show_myNJ_registration_prompt_modal",
             clicked_to: "myNJ_registration_prompt_modal",
@@ -1936,15 +1932,15 @@ export default {
         },
       },
     },
-    tax_calendar_modal: {
+    tax_calendar: {
       submit: {
-        tax_calendar_modal_validation_error: () => {
+        tax_calendar_validation_error: () => {
           eventRunner.track({
             event: "form_validation",
             legacy_event_action: "submit",
-            legacy_event_category: "tax_calendar_modal",
-            legacy_event_label: "tax_calendar_modal_validation_error",
-            form_name: "tax_calendar_modal",
+            legacy_event_category: "tax_calendar",
+            legacy_event_label: "tax_calendar_validation_error",
+            form_name: "tax_calendar",
             server_response: "error",
           });
         },
@@ -1952,9 +1948,9 @@ export default {
           eventRunner.track({
             event: "form_validation",
             legacy_event_action: "submit",
-            legacy_event_category: "tax_calendar_modal",
+            legacy_event_category: "tax_calendar",
             legacy_event_label: "tax_calendar_business_does_not_exist",
-            form_name: "tax_calendar_modal",
+            form_name: "tax_calendar",
             server_response: "not_found",
           });
         },
@@ -1962,20 +1958,43 @@ export default {
           eventRunner.track({
             event: "form_validation",
             legacy_event_action: "submit",
-            legacy_event_category: "tax_calendar_modal",
+            legacy_event_category: "tax_calendar",
             legacy_event_label: "business_exists_but_not_in_Gov2Go",
-            form_name: "tax_calendar_modal",
+            form_name: "tax_calendar",
             server_response: "found",
           });
         },
         tax_deadlines_added_to_calendar: () => {
           eventRunner.track({
             event: "form_submits",
-            form_name: "tax_calendar_modal",
+            form_name: "tax_calendar",
             legacy_event_action: "submit",
-            legacy_event_category: "tax_calendar_modal",
+            legacy_event_category: "tax_calendar",
             legacy_event_label: "tax_deadlines_added_to_calendar",
             server_response: "success",
+          });
+        },
+      },
+      arrive: {
+        arrive_calendar_access_v2: () => {
+          eventRunner.track({
+            event: "tax_calendar_arrive_v2",
+            legacy_event_action: "arrive",
+            legacy_event_category: "tax_calendar_v2",
+            legacy_event_label: "arrive_calendar_access_v2",
+            action: "arrive",
+            item: "calendar_access_v2",
+          });
+        },
+      },
+      click: {
+        click_calendar_access_v2: () => {
+          eventRunner.track({
+            event: "tax_calendar_click_v2",
+            legacy_event_action: "click",
+            legacy_event_category: "tax_calendar_v2_cta",
+            legacy_event_label: "tax_calendar_click_calendar_v2",
+            item: "tax_calendar_v2_cta",
           });
         },
       },
