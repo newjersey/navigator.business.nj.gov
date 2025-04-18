@@ -4567,7 +4567,7 @@ __metadata:
     aws-amplify: 6.14.2
     axios: 1.8.4
     babel-jest: 29.7.0
-    babel-loader: 9.2.1
+    babel-loader: 10.0.0
     body-parser: 1.20.3
     broken-link-checker: 0.7.8
     cat: 0.2.0
@@ -4771,7 +4771,7 @@ __metadata:
     aws-amplify: 6.14.2
     axios: 1.8.4
     babel-jest: 29.7.0
-    babel-loader: 9.2.1
+    babel-loader: 10.0.0
     broken-link-checker: 0.7.8
     clean-webpack-plugin: 4.0.0
     copy-webpack-plugin: 13.0.0
@@ -14726,7 +14726,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-loader@npm:9.2.1, babel-loader@npm:^9.0.0":
+"babel-loader@npm:10.0.0":
+  version: 10.0.0
+  resolution: "babel-loader@npm:10.0.0"
+  dependencies:
+    find-up: ^5.0.0
+  peerDependencies:
+    "@babel/core": ^7.12.0
+    webpack: ">=5.61.0"
+  checksum: 8a9dbb8a93cd342832cc99f024f07a6fda67b29aa907fbc3087de17e7f7ff705cf17fa9aed9103b1de9dfff24427afe200ec99213d24f801a0b1f4fd94783f51
+  languageName: node
+  linkType: hard
+
+"babel-loader@npm:^9.0.0":
   version: 9.2.1
   resolution: "babel-loader@npm:9.2.1"
   dependencies:
