@@ -4502,7 +4502,7 @@ __metadata:
     "@types/simple-oauth2": 5.0.7
     "@types/supertest": 6.0.3
     "@types/testing-library__jest-dom": 5.14.9
-    "@types/uuid": 9.0.8
+    "@types/uuid": 10.0.0
     "@types/xml2js": 0.4.14
     "@typescript-eslint/eslint-plugin": 7.18.0
     "@typescript-eslint/parser": 7.18.0
@@ -4626,7 +4626,7 @@ __metadata:
     "@jest/types": 29.6.3
     "@types/jest": 29.5.14
     "@types/node": 20.17.30
-    "@types/uuid": 9.0.8
+    "@types/uuid": 10.0.0
     "@typescript-eslint/eslint-plugin": 7.18.0
     "@typescript-eslint/parser": 7.18.0
     cross-env: 7.0.3
@@ -7490,15 +7490,6 @@ __metadata:
   version: 15.3.0
   resolution: "@next/env@npm:15.3.0"
   checksum: 7d8d49d5ba102f3bf85c7d1b13890e5af21b4ee2c6995fb0c0ebcb7cdd0b133ab6385b9db08644acdef7b9586ae3342fa326ada9f51988bf5fefa61778fa1da1
-  languageName: node
-  linkType: hard
-
-"@next/eslint-plugin-next@npm:15.1.4":
-  version: 15.1.4
-  resolution: "@next/eslint-plugin-next@npm:15.1.4"
-  dependencies:
-    fast-glob: 3.3.1
-  checksum: f09cfb50cf26672df5cbeac9594ff4ce2196eeb3a3192f7f53b2b88770d7e40c5bd4a39e4129a7cae5d623d65c7f5f4d1580ba289a2922438073bae7326cae40
   languageName: node
   linkType: hard
 
@@ -12935,7 +12926,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/uuid@npm:9.0.8, @types/uuid@npm:^9.0.0, @types/uuid@npm:^9.0.1":
+"@types/uuid@npm:10.0.0":
+  version: 10.0.0
+  resolution: "@types/uuid@npm:10.0.0"
+  checksum: e3958f8b0fe551c86c14431f5940c3470127293280830684154b91dc7eb3514aeb79fe3216968833cf79d4d1c67f580f054b5be2cd562bebf4f728913e73e944
+  languageName: node
+  linkType: hard
+
+"@types/uuid@npm:^9.0.0, @types/uuid@npm:^9.0.1":
   version: 9.0.8
   resolution: "@types/uuid@npm:9.0.8"
   checksum: b8c60b7ba8250356b5088302583d1704a4e1a13558d143c549c408bf8920535602ffc12394ede77f8a8083511b023704bc66d1345792714002bfa261b17c5275
