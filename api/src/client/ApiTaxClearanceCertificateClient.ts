@@ -69,6 +69,13 @@ export const ApiTaxClearanceCertificateClient = (
             certificate: "Succussful Response - PDF data omitted",
           })}`
         );
+        if (!Array.isArray(response.data.certificate) || response.data.certificate.length === 0) {
+          const errorMessage = `Tax Clearance Certificate Client - Id:${logId} - Error: Certificate is empty or not an array ${JSON.stringify(
+            response.data.certificate
+          )}`;
+          logWriter.LogError(errorMessage);
+          throw errorMessage;
+        }
         return { certificatePdfArray: response.data.certificate };
       })
       .catch((error: AxiosError) => {
