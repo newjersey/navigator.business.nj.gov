@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { TaxClearanceCertificateResponse } from "@businessnjgovnavigator/shared";
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { TaxFilingCalendarEvent } from "@shared/calendarEvent";
@@ -8,6 +7,10 @@ import {
   ElevatorSafetyDeviceInspectionDetails,
   ElevatorSafetyRegistrationSummary,
 } from "@shared/elevatorSafety";
+import {
+  EmergencyTripPermitApplicationInfo,
+  EmergencyTripPermitSubmitResponse,
+} from "@shared/emergencyTripPermit";
 import { FireSafetyInspectionResult } from "@shared/fireSafety";
 import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
 import {
@@ -17,6 +20,7 @@ import {
 } from "@shared/housing";
 import { enabledLicensesSources, LicenseEntity, LicenseSearchNameAndAddress } from "@shared/license";
 import { ProfileData } from "@shared/profileData";
+import { TaxClearanceCertificateResponse } from "@shared/taxClearanceCertificate";
 import { TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
 import { Business, UserData } from "@shared/userData";
 import { ReasonPhrases } from "http-status-codes";
@@ -69,6 +73,10 @@ export interface FormationClient {
   ) => Promise<FormationSubmitResponse>;
   getCompletedFiling: (formationId: string) => Promise<GetFilingResponse>;
   health: HealthCheckMethod;
+}
+
+export interface EmergencyTripPermitClient {
+  apply: (applicationInfo: EmergencyTripPermitApplicationInfo) => Promise<EmergencyTripPermitSubmitResponse>;
 }
 
 export interface TaxFilingClient {
