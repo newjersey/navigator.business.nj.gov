@@ -1,5 +1,5 @@
 asttokens==3.0.0
-black==24.10.0
+black==25.1.0
 cachetools==5.5.2
 certifi==2024.12.14
 cffi==1.17.1
