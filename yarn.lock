@@ -4529,8 +4529,8 @@ __metadata:
     cross-env: 7.0.3
     cspell: 8.19.0
     css-loader: 6.11.0
-    cypress: 14.3.0
-    cypress-axe: 1.5.0
+    cypress: 14.3.1
+    cypress-axe: 1.6.0
     cypress-dotenv: 2.0.2
     cypress-wait-until: 3.0.2
     dayjs: 1.11.13
@@ -4729,8 +4729,8 @@ __metadata:
     cross-env: 7.0.3
     cspell: 8.19.0
     css-loader: 6.11.0
-    cypress: 14.3.0
-    cypress-axe: 1.5.0
+    cypress: 14.3.1
+    cypress-axe: 1.6.0
     cypress-dotenv: 2.0.2
     cypress-wait-until: 3.0.2
     dayjs: 1.11.13
@@ -17172,13 +17172,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress-axe@npm:1.5.0":
-  version: 1.5.0
-  resolution: "cypress-axe@npm:1.5.0"
+"cypress-axe@npm:1.6.0":
+  version: 1.6.0
+  resolution: "cypress-axe@npm:1.6.0"
   peerDependencies:
     axe-core: ^3 || ^4
-    cypress: ^10 || ^11 || ^12 || ^13
-  checksum: 7b5574da4ea2c1a1141f79cb4465a4f30879e30b9ac08da4aca935dfc7662d3fa170254be8c4eff26841bc065e6115bf6e6b8a8eee5ff7cb9812bbcbeb863ff2
+    cypress: ^10 || ^11 || ^12 || ^13 || ^14
+  checksum: 6f4d1a25f2f9fd8bfa080bbb24e27a09e5fccc970f099b109ae402b78a8be066155c1e42c819aac932308230b720e1efbb56c8730f444faa8a9197895418d434
   languageName: node
   linkType: hard
 
@@ -17203,9 +17203,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:14.3.0":
-  version: 14.3.0
-  resolution: "cypress@npm:14.3.0"
+"cypress@npm:14.3.1":
+  version: 14.3.1
+  resolution: "cypress@npm:14.3.1"
   dependencies:
     "@cypress/request": ^3.0.8
     "@cypress/xvfb": ^1.2.4
@@ -17252,7 +17252,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 3c21a9864bb6fd2614e7e551fec2c520b673a48af0071a3a29b4df9b309c5e586c6dfd55eb28cbc1a3cc4f9d5400dc6c63d91a3bebe7c2b71dce494b88c0d99e
+  checksum: 2d996fd758efe6b4d421778bf91651499912e30f472fc5e2a7a5dae82c52f8c2e69eadf67a2bd5e33d62151cc47423038d9ff20707c7e19345ea1a396990cc21
   languageName: node
   linkType: hard
 
