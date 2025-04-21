@@ -15,7 +15,7 @@ summaryDescriptionMd: >-
 
   * Are designed to transport persons or property for hire
 
-  * Have 2 axels and weigh more than 26,000 pounds
+  * Have 2 axels and weigh more than 26,001 pounds
 
   * Have 3 or more axels, regardless of weight
 urlSlug: trucking-irp
