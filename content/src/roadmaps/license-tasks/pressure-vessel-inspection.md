@@ -43,3 +43,15 @@ If the pressure vessel **meets any** of the following conditions, it does not ne
 * Is used as a hot water tank heated by steam/indirectly and serves a building with fewer less than 6 housing units or 25 people, and does not exceed 120 gallons of capacity, 200,000 BTU of heat input, or 200 degrees Fahrenheit
 * Is under the control of the United States government and is regulated by a federal agency
 * Is used only for motor vehicle propulsion and is regulated by the  Motor Vehicle Act, Title 39 of the Revised Statutes \[ADD LINK]
+
+## How Inspections Work
+
+After your pressure vessel is registered and passes the first inspection, a State inspector or your insurance company will contact you to set up future inspections. 
+
+Even though they keep track of the due dates, it’s your responsibility to make sure all required equipment gets inspected. 
+
+:::callout{ showHeader="false" headerText="" showIcon="false" calloutType="informational" }
+
+**To register a pressure vessel and schedule the first inspection**: Call the NJ Bureau of Boiler and Pressure Vessel Compliance at (609) 292-2921.
+
+:::
