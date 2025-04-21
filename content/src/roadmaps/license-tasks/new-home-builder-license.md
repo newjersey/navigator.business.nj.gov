@@ -1,7 +1,6 @@
 ---
 notesMd: "[Muni planning
-  doc/draft](https://docs.google.com/document/d/1GKtYlOLZQNeCHWQ4SvyIzEqNmYDECE\
-  USLahp8_yC4T4/edit)"
+  doc/draft](https://docs.google.com/document/d/1GKtYlOLZQNeCHWQ4SvyIzEqNmYDECEUSLahp8_yC4T4/edit)"
 licenseName: ""
 id: new-home-builder-license
 displayname: new-home-builder-license
