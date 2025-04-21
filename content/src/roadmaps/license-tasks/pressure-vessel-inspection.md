@@ -55,3 +55,20 @@ Even though they keep track of the due dates, it’s your responsibility to make
 **To register a pressure vessel and schedule the first inspection**: Call the NJ Bureau of Boiler and Pressure Vessel Compliance at (609) 292-2921.
 
 :::
+
+* New or replaced equipment inspections can only be done by the New Jersey Mechanical Inspection Bureau of Boiler and Pressure Vessel Compliance (MIBBPVC)
+* Three-year inspections can be done by a certified insurance inspector or the State (MIBBPVC)
+
+If you have questions, email bpvrcompliance@dol.nj.gov or write to:
+
+
+
+NJ Department of Labor & Workforce Development
+
+Division of Public Safety & Occupational Safety & Health
+
+Bureau of Boiler & Pressure Vessel Compliance
+
+P.O. Box 392
+
+Trenton, NJ 08625-0392
