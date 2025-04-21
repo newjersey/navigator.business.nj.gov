@@ -19,6 +19,10 @@ industryId:
 callToActionText: Visit the Bureau’s Page for More Information
 callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/b\
   oiler-pressure-vessel-compliance/index.shtml "
+agencyId: njdol
+agencyAdditionalContext: "Division of Public Safety and Occupational Safety and
+  Health, Bureau of Boiler and Pressure Vessel Compliance "
+divisionPhone: (609) 292-2921
 ---
 ## Pressure Vessels That Need Inspection
 
@@ -72,3 +76,16 @@ Bureau of Boiler & Pressure Vessel Compliance
 P.O. Box 392
 
 Trenton, NJ 08625-0392
+
+:::callout{ showHeader="true" headerText=" What if I don't get my pressure vessel inspected?" showIcon="false" calloutType="warning" }
+
+* If your equipment is not inspected as required, it could pose serious safety risks. You could face fines or legal penalties for non-compliance
+* For new pressure vessels, you may not be able to get an official `Certificate of Occupancy|certificate-occupancy` for your building until your inspection is passed
+
+:::
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+
+A Certificate of Inspection with a jurisdiction number mailed to the address the business owner provides after a satisfactory inspection. This certificate must be framed and posted where equipment is located or in a facility or plant office.
+
+:::
