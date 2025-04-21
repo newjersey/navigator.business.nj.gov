@@ -42,4 +42,4 @@ If the pressure vessel **meets any** of the following conditions, it does not ne
 * Can handle up to 300 psi of pressure and temperatures up to 210 degrees Fahrenheit, and holds water with air under pressure (where the air only acts as a cushion)
 * Is used as a hot water tank heated by steam/indirectly and serves a building with fewer less than 6 housing units or 25 people, and does not exceed 120 gallons of capacity, 200,000 BTU of heat input, or 200 degrees Fahrenheit
 * Is under the control of the United States government and is regulated by a federal agency
-* Is used only for motor vehicle propulsion and is regulated by the
+* Is used only for motor vehicle propulsion and is regulated by the  Motor Vehicle Act, Title 39 of the Revised Statutes \[ADD LINK]
