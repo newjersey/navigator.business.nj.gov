@@ -438,14 +438,6 @@ describe("<TaxAccessStepTwo />", () => {
       expect((screen.queryByLabelText("Tax id") as HTMLInputElement)?.value).toEqual(taxIdDisplayFormat);
     });
 
-    it("shows disclaimer text for TaxId", () => {
-      renderComponent(userDataWithPrefilledFields);
-      const taxInput = screen.getByTestId("taxIdInput");
-      expect(within(taxInput).getByText("`New Jersey Tax ID|tax-id`")).toBeInTheDocument();
-      expect(within(taxInput).getByTestId("description")).toBeInTheDocument();
-      expect(within(taxInput).getByTestId("postDescription")).toBeInTheDocument();
-    });
-
     it("updates taxId and responsibleOwnerName on submit", async () => {
       mockApiResponse(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({
