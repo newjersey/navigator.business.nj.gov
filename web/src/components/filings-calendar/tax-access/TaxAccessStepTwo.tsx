@@ -298,11 +298,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                   header: Config.taxAccess.taxIdHeader,
                   description: Config.taxAccess.taxIdMarkdown,
                   headerNotBolded: "",
-                  postDescription: LookupLegalStructureById(
-                    business?.profileData.legalStructureId
-                  ).elementsToDisplay.has("taxIdDisclaimer")
-                    ? Config.profileDefaults.fields.taxId.default.disclaimerMd
-                    : undefined,
+                  postDescription: "",
                 }}
               />
             </div>
