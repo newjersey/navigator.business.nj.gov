@@ -13,6 +13,7 @@ describe("cms", () => {
         "utf8"
       );
 
+      // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       const mergedConfig = getMergedConfig().default;

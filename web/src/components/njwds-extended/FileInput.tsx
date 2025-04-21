@@ -149,6 +149,7 @@ export const FileInput = ({
       if (fileInputElement) {
         dT.items.add(file);
         fileInputElement.files = dT.files;
+        // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         fileInputElement.dispatchEvent(new Event("change", { target: { files: [file] } }));

@@ -91,6 +91,7 @@ const AccountSetupPage = (): ReactElement => {
     }
   }, [router]);
 
+  // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
   /* eslint-disable @typescript-eslint/ban-ts-comment */
   const parseAndSendAnalyticsEvent = (source: string): void => {
     const possibleAnalyticsEvents = Object.keys(analytics.event);
