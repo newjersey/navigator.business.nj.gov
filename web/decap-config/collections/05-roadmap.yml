@@ -1,0 +1,450 @@
+collections:
+  - name: "roadmaps-label"
+    label: "🟩 ROADMAPS"
+    folder: "content/src"
+    fields:
+      - { name: "" }
+
+  - name: "roadmaps"
+    label: "Roadmaps - Industries"
+    folder: "content/src/roadmaps/industries"
+    slug: "{{id}}"
+    identifier_field: "{{id}}"
+    extension: "json"
+    create: true
+    delete: true
+    format: "json"
+    summary: "{{displayname}}"
+    editor:
+      preview: false
+    fields:
+      - label: Name
+        name: name
+        widget: string
+      - label: Description
+        name: description
+        widget: string
+        required: false
+      - label: Enabled
+        name: isEnabled
+        widget: boolean
+        default: false
+        hint: This field should not be changed if already set to true
+      - label: Can Have Permanent Location
+        name: canHavePermanentLocation
+        widget: boolean
+        default: true
+        hint: Enable this field if the business can have a permanent location
+      - label: Additional Search Teams
+        name: additionalSearchTerms
+        widget: string
+        required: false
+      - label: Default Sector
+        name: defaultSectorId
+        widget: relation
+        required: true
+        collection: "mappings"
+        search_fields: ["arrayOfSectors.*.name"]
+        value_field: "arrayOfSectors.*.id"
+        display_fields: ["arrayOfSectors.*.name"]
+        options_length: 500
+      - label: NAICS Codes
+        name: naicsCodes
+        widget: string
+        required: false
+      - label: Id
+        name: id
+        widget: write-once-read-only-no-space
+      - label: "Display Name"
+        name: "displayname"
+        widget: "string"
+      - label: Onboarding Questions
+        name: industryOnboardingQuestions
+        widget: object
+        fields:
+          - label: Home Based
+            name: canBeHomeBased
+            widget: boolean
+            default: false
+            required: false
+          - label: Liquor License
+            name: isLiquorLicenseApplicable
+            widget: boolean
+            default: false
+            required: false
+          - label: CPA Required
+            name: isCpaRequiredApplicable
+            widget: boolean
+            default: false
+            required: false
+          - label: Staffing Service
+            name: isProvidesStaffingServicesApplicable
+            widget: boolean
+            default: false
+            required: false
+          - label: Certified Interior Designer
+            name: isCertifiedInteriorDesignerApplicable
+            widget: boolean
+            default: false
+            required: false
+          - label: Real Estate Appraisal Management
+            name: isRealEstateAppraisalManagementApplicable
+            widget: boolean
+            default: false
+            required: false
+          - label: Reseller
+            name: canBeReseller
+            widget: boolean
+            default: false
+            required: false
+          - label: Transportation
+            name: isTransportation
+            widget: boolean
+            default: false
+            required: false
+          - label: Car Service
+            widget: boolean
+            name: isCarServiceApplicable
+            default: false
+            required: false
+          - label: Logistics
+            name: isInterstateLogisticsApplicable
+            widget: boolean
+            default: false
+            required: false
+          - label: Moving Company
+            name: isInterstateMovingApplicable
+            widget: boolean
+            default: false
+            required: false
+          - label: Childcare Services
+            name: isChildcareForSixOrMore
+            widget: boolean
+            default: false
+            required: false
+          - label: Will Sell Petcare Items
+            name: willSellPetCareItems
+            widget: boolean
+            default: false
+            required: false
+          - label: Pet Care Housing
+            name: petCareHousing
+            widget: boolean
+            default: false
+            required: false
+          - label: Cannabis License
+            name: isCannabisLicenseTypeApplicable
+            widget: boolean
+            default: false
+            required: false
+      - label: Non Essential Questions
+        name: nonEssentialQuestionsIds
+        widget: relation
+        multiple: true
+        required: false
+        default: ["weights-measures"]
+        collection: "nonEssentialQuestionsCollection"
+        search_fields: ["nonEssentialQuestionsArray.*.id"]
+        value_field: "nonEssentialQuestionsArray.*.id"
+        display_fields: ["nonEssentialQuestionsArray.*.id"]
+        options_length: 500
+      - label: Roadmap Steps
+        name: roadmapSteps
+        widget: list
+        summary: "Step {{step}} - {{task}} {{licenseTask}}"
+        fields:
+          - label: Roadmap Step
+            name: step
+            widget: relation
+            collection: "settings"
+            search_fields: ["steps.*.name"]
+            value_field: "steps.*.stepNumber"
+            display_fields: ["steps.*.name"]
+            options_length: 500
+          - label: Weight
+            name: weight
+            widget: number
+          - label: Task (this or License Task is required)
+            name: task
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
+            value_field: "{{fields.id}}"
+            display_fields: ["{{displayname}}"]
+            required: false
+            options_length: 500
+          - label: License Task (this or Task is required)
+            name: licenseTask
+            widget: "relation"
+            collection: "license-tasks"
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
+            value_field: "{{fields.id}}"
+            display_fields: ["{{displayname}}"]
+            required: false
+            options_length: 500
+          - label: "Required"
+            name: "required"
+            widget: "boolean"
+            required: false
+      - label: Task Overrides
+        name: modifications
+        widget: list
+        summary: "{{taskToReplaceFilename}}"
+        fields:
+          - label: Task To Replace
+            name: taskToReplaceFilename
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
+            value_field: "{{fields.id}}"
+            display_fields: ["{{displayname}}"]
+            options_length: 500
+          - label: Modified Task
+            name: replaceWithFilename
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
+            value_field: "{{fields.id}}"
+            display_fields: ["{{displayname}}"]
+            options_length: 500
+  - name: addons
+    label: "Roadmaps - Add-ons"
+    folder: "content/src/roadmaps/add-ons"
+    slug: "{{id}}"
+    identifier_field: "{{id}}"
+    extension: "json"
+    create: true
+    delete: true
+    format: "json"
+    summary: "{{displayname}}"
+    editor:
+      preview: false
+    fields:
+      - label: Id
+        name: id
+        widget: write-once-read-only-no-space
+      - label: Displayname
+        name: displayname
+        widget: string
+      - label: Roadmap Steps
+        name: roadmapSteps
+        widget: list
+        summary: "Step {{step}} - {{task}} {{licenseTask}}"
+        fields:
+          - label: Roadmap Step
+            name: step
+            widget: relation
+            collection: "settings"
+            search_fields: ["steps.*.name"]
+            value_field: "steps.*.stepNumber"
+            display_fields: ["steps.*.name"]
+            options_length: 500
+          - label: Weight
+            name: weight
+            widget: number
+          - label: Task (this or License Task is required)
+            name: task
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
+            value_field: "{{fields.id}}"
+            display_fields: ["{{displayname}}"]
+            required: false
+            options_length: 500
+          - label: License Task (this or Task is required)
+            name: licenseTask
+            widget: "relation"
+            collection: "license-tasks"
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
+            value_field: "{{fields.id}}"
+            display_fields: ["{{displayname}}"]
+            required: false
+            options_length: 500
+          - label: "Required"
+            name: "required"
+            widget: "boolean"
+            required: false
+      - label: Task Overrides
+        name: modifications
+        widget: list
+        summary: "{{taskToReplaceFilename}}"
+        fields:
+          - label: Task To Replace
+            name: taskToReplaceFilename
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
+            value_field: "{{fields.id}}"
+            display_fields: ["{{displayname}}"]
+            options_length: 500
+          - label: Modified Task
+            name: replaceWithFilename
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
+            value_field: "{{fields.id}}"
+            display_fields: ["{{displayname}}"]
+            options_length: 500
+  - name: "nonEssentialQuestionsCollection"
+    label: "Roadmaps - Non Essential Questions"
+    editor:
+      preview: false
+    files:
+      - label: "Non Essential Questions"
+        name: "nonEssentialQuestionsArray"
+        file: "content/src/roadmaps/nonEssentialQuestions.json"
+        fields:
+          - label: Non Essential Questions
+            name: nonEssentialQuestionsArray
+            widget: list
+            create: true
+            summary: "{{id}}"
+            fields:
+              - label: ID
+                name: id
+                widget: string
+              - label: Question
+                name: questionText
+                widget: markdown
+              - label: Add On
+                name: addOn
+                widget: "relation"
+                collection: "addons"
+                search_fields: ["{{displayname}}"]
+                value_field: "{{fields.id}}"
+                display_fields: ["{{displayname}}"]
+                options_length: 500
+
+  - name: "settings"
+    label: "Roadmaps - Settings"
+    editor:
+      preview: false
+    files:
+      - label: "Steps"
+        name: "steps"
+        file: "content/src/roadmaps/steps.json"
+        fields:
+          - label: steps
+            name: steps
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Section
+                name: section
+                widget: select
+                options: ["PLAN", "START"]
+              - label: Time Estimate
+                name: timeEstimate
+                widget: string
+              - label: Description
+                name: description
+                widget: string
+              - label: Number
+                name: stepNumber
+                widget: number
+                min: 0
+                value_type: int
+      - label: "Steps - Domestic Employer"
+        name: "steps-domestic-employer"
+        file: "content/src/roadmaps/steps-domestic-employer.json"
+        fields:
+          - label: steps
+            name: steps
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Section
+                name: section
+                widget: select
+                options: ["DOMESTIC_EMPLOYER_SECTION"]
+              - label: Time Estimate
+                name: timeEstimate
+                widget: string
+              - label: Description
+                name: description
+                widget: string
+              - label: Number
+                name: stepNumber
+                widget: number
+                min: 0
+                value_type: int
+      - label: "Steps - Dakota Remote Seller / Remote Worker"
+        name: "steps-foreign"
+        file: "content/src/roadmaps/steps-foreign.json"
+        fields:
+          - label: steps
+            name: steps
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Section
+                name: section
+                widget: select
+                options: ["PLAN", "START"]
+              - label: Time Estimate
+                name: timeEstimate
+                widget: string
+              - label: Description
+                name: description
+                widget: string
+              - label: Number
+                name: stepNumber
+                widget: number
+                min: 0
+                value_type: int
+      - label: "Task Dependencies"
+        name: "task-dependencies"
+        file: "content/src/roadmaps/task-dependencies.json"
+        fields:
+          - label: Tasks
+            name: dependencies
+            widget: list
+            summary: "{{task}} {{licenseTask}}"
+            fields:
+              - label: Task (this or License Task is required)
+                name: task
+                widget: "relation"
+                collection: "tasks"
+                search_fields: ["{{displayname}}", "name", "urlSlug"]
+                value_field: "{{fields.id}}"
+                display_fields: ["{{displayname}}"]
+                required: false
+                options_length: 500
+              - label: License Task (this or Task is required)
+                name: licenseTask
+                widget: "relation"
+                collection: "license-tasks"
+                search_fields: ["{{displayname}}", "name", "urlSlug"]
+                value_field: "{{fields.id}}"
+                display_fields: ["{{displayname}}"]
+                required: false
+                options_length: 500
+              - label: Task Dependencies
+                name: taskDependencies
+                widget: "relation"
+                collection: "tasks"
+                search_fields: ["{{displayname}}", "name", "urlSlug"]
+                value_field: "{{fields.id}}"
+                display_fields: ["{{displayname}}"]
+                multiple: true
+                required: false
+                options_length: 500
+              - label: License Task Dependencies
+                name: licenseTaskDependencies
+                widget: "relation"
+                collection: "license-tasks"
+                search_fields: ["{{displayname}}", "name", "urlSlug"]
+                value_field: "{{fields.id}}"
+                display_fields: ["{{displayname}}"]
+                multiple: true
+                required: false
+                options_length: 500

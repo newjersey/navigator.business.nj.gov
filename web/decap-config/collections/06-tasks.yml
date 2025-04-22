@@ -1,0 +1,962 @@
+collections:
+  - name: "tasks-label"
+    label: "🟦 TASKS"
+    folder: "content/src"
+    fields:
+      - { name: "" }
+
+  - name: "tasks-config"
+    label: "Tasks - Config"
+    delete: false
+    create: false
+    files:
+      - label: "Deferred Location"
+        name: "deferred-location-config"
+        file: "content/src/fieldConfig/deferred-location.json"
+        editor:
+          preview: true
+        fields:
+          - label: Deferred Location
+            name: deferredLocation
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Header, name: header, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Success Text, name: successText, widget: string }
+              - { label: Edit Text, name: editText, widget: string }
+              - { label: Remove Text, name: removeText, widget: string }
+              - {
+                  label: Deferred Onboarding Save Button Text,
+                  name: deferredOnboardingSaveButtonText,
+                  widget: string,
+                }
+      - label: "Elevator Safety"
+        name: "elevator-registration-config"
+        file: "content/src/fieldConfig/elevator-registration.json"
+        editor:
+          preview: false
+        fields:
+          - label: Elevator Registration
+            name: elevatorRegistrationSearchTask
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Registration Request Date Text, name: registrationRequestDateText, widget: string }
+              - { label: Registration Status Text, name: registrationStatusText, widget: string }
+              - { label: Registration Device Count Text, name: registrationDeviceCountText, widget: string }
+              - {
+                  label: Registration Application Found Text,
+                  name: registrationApplicationFoundText,
+                  widget: string,
+                }
+              - {
+                  label: Registration Found In Review Text,
+                  name: registrationFoundInReviewText,
+                  widget: string,
+                }
+              - {
+                  label: Registration Found Incomplete/Returned Ext,
+                  name: registrationFoundIncompleteReturnedText,
+                  widget: string,
+                }
+              - {
+                  label: Registration Call to Action Primary,
+                  name: registrationCallToActionPrimaryText,
+                  widget: string,
+                }
+              - {
+                  label: Registration Call to Action Secondary,
+                  name: registrationCallToActionSecondaryText,
+                  widget: string,
+                }
+              - { label: Registration Tab 1 Text, name: registrationTab1Text, widget: string }
+              - { label: Registration Tab 2 Text, name: registrationTab2Text, widget: string }
+              - {
+                  label: Registration In Review Message Text,
+                  name: registrationInReviewMessage,
+                  widget: string,
+                }
+              - {
+                  label: Registration Rejected or Returned Message,
+                  name: registrationRejectedOrReturnedMessage,
+                  widget: string,
+                }
+              - { label: Registration Search Prompt Text, name: registrationSearchPrompt, widget: string }
+              - { label: Address 1 Label, name: address1Label, widget: string }
+              - { label: Address 2 Label, name: address2Label, widget: string }
+              - { label: Municipality Label, name: municipalityLabel, widget: string }
+              - { label: State label, name: stateLabel, widget: string }
+              - { label: Submit Text, name: submitText, widget: string }
+              - {
+                  label: Error - No Property Interest Found,
+                  name: errorTextNoPropertyInterestFound,
+                  widget: string,
+                }
+              - {
+                  label: Error - No Elevator Registrations Found,
+                  name: errorTextNoElevatorRegistrations,
+                  widget: string,
+                }
+              - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
+              - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
+              - { label: Informational Message - In Review, name: informationalInReview, widget: string }
+              - { label: Informational Message - Returned, name: informationalReturned, widget: string }
+              - { label: Informational Message - Rejected, name: informationalRejected, widget: string }
+              - { label: Informational Message - Incomplete, name: informationalIncomplete, widget: string }
+          - label: Elevator Violations Card
+            name: elevatorViolationsCard
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Violation Notice Message Text, name: violationNoticeMessage, widget: string }
+              - { label: Violation Notice CTA Text, name: violationNoticeCTA, widget: string }
+              - { label: Violation Notice CTA Link, name: violationNoticeCTALink, widget: no-space }
+      - label: "Housing"
+        name: "housing-registration-config"
+        file: "content/src/fieldConfig/housing-registration.json"
+        editor:
+          preview: false
+        fields:
+          - label: Housing Registration
+            name: housingRegistrationSearchTask
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Registration Start Date Text, name: registrationStartDateText, widget: string }
+              - { label: Registration Status Text, name: registrationStatusText, widget: string }
+              - {
+                  label: Registration Building Count Text,
+                  name: registrationBuildingCountText,
+                  widget: string,
+                }
+              - {
+                  label: Registration Application Found Header,
+                  name: applicationsFoundHeader,
+                  widget: string,
+                }
+              - {
+                  label: Registration Found In Review Text,
+                  name: registrationFoundInReviewText,
+                  widget: string,
+                }
+              - {
+                  label: Registration Found Incomplete/Returned Text,
+                  name: registrationFoundIncompleteReturnedText,
+                  widget: string,
+                }
+              - {
+                  label: Registration Call to Action Primary Text,
+                  name: registrationCallToActionPrimaryText,
+                  widget: string,
+                }
+              - {
+                  label: Registration Call to Action Secondary Text,
+                  name: registrationCallToActionSecondaryText,
+                  widget: string,
+                }
+              - { label: Registration Tab 1 Text, name: registrationTab1Text, widget: string }
+              - { label: Registration Tab 2 Text, name: registrationTab2Text, widget: string }
+              - {
+                  label: Registration In Review Message Text,
+                  name: registrationInReviewMessage,
+                  widget: string,
+                }
+              - {
+                  label: Registration Rejected or Returned Message,
+                  name: registrationRejectedOrReturnedMessage,
+                  widget: string,
+                }
+              - { label: Registration Search Prompt Text, name: registrationSearchPrompt, widget: string }
+              - { label: Address 1 Label, name: address1Label, widget: string }
+              - { label: Address 2 Label, name: address2Label, widget: string }
+              - { label: Municipality Label, name: municipalityLabel, widget: string }
+              - { label: State label, name: stateLabel, widget: string }
+              - { label: Submit Text, name: submitText, widget: string }
+              - {
+                  label: Error - No Property Interest Found,
+                  name: errorTextNoPropertyInterestFound,
+                  widget: string,
+                }
+              - {
+                  label: Error - No Hotel/Motel Registrations Found,
+                  name: errorTextNoHotelMotelRegistrations,
+                  widget: string,
+                }
+              - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
+              - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
+              - { label: Informational Message - In Review, name: informationalInReview, widget: string }
+              - { label: Informational Message - Returned, name: informationalReturned, widget: string }
+              - { label: Informational Message - Rejected, name: informationalRejected, widget: string }
+              - { label: Informational Message - Incomplete, name: informationalIncomplete, widget: string }
+              - {
+                  label: Error - No Multiple Dwelling Registrations Found,
+                  name: errorTextNoMultipleDwellingRegistrations,
+                  widget: string,
+                }
+              - {
+                  label: Review My Application Call to Action,
+                  name: reviewMyApplicationCallToAction,
+                  widget: string,
+                }
+              - {
+                  label: Review My Application Call to Action Link,
+                  name: reviewApplicationCallToActionLink,
+                  widget: string,
+                }
+              - { label: Renew Registration Message, name: renewRegistrationMessage, widget: string }
+          - label: Elevator Violations Card
+            name: elevatorViolationsCard
+            collapsed: false
+            widget: object
+            fields:
+              - {
+                  label: Violation Notice Message Text,
+                  name: violationNoticeMessage,
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  label: Violation Notice CTA Text,
+                  name: violationNoticeCTA,
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  label: Violation Notice CTA Link,
+                  name: violationNoticeCTALink,
+                  widget: no-space,
+                  required: false,
+                }
+
+  - name: "tasks"
+    label: "Tasks - All"
+    folder: "content/src/roadmaps/tasks"
+    summary: "{{displayname}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
+    delete: true
+    sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
+      - { label: "Display Name", name: "displayname", widget: "no-space", required: true }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - {
+          label: "Webflow Name (not being synced, only for reference and future expansion)",
+          name: "webflowName",
+          widget: "string",
+          required: false,
+        }
+      - label: Industry
+        name: industryId
+        widget: "relation"
+        collection: "roadmaps"
+        search_fields: ["id"]
+        value_field: "{{id}}"
+        display_fields: ["{{id}}"]
+        required: false
+        options_length: 500
+      - label: Agency
+        name: agencyId
+        widget: relation
+        required: false
+        collection: "mappings"
+        search_fields: ["arrayOfTaskAgencies.*.name"]
+        value_field: "arrayOfTaskAgencies.*.id"
+        display_fields: ["arrayOfTaskAgencies.*.name"]
+        options_length: 500
+      - {
+          label: "Additional Agency Context",
+          name: "agencyAdditionalContext",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Form Name", name: "formName", widget: "string", required: false }
+      - label: "Type (Webflow)"
+        name: "webflowType"
+        widget: "select"
+        required: false
+        options:
+          - { label: "business license", value: "business-license" }
+          - { label: "individual license", value: "individual-license" }
+          - { label: "school/course", value: "school-course" }
+          - { label: "object or vehicle", value: "object-vehicle" }
+
+  - name: "license-tasks"
+    label: "License Tasks (Navigator with Webflow mappings)"
+    folder: "content/src/roadmaps/license-tasks"
+    summary: "{{displayname}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
+    delete: true
+    sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
+      - {
+          label: "Display Name",
+          name: "displayname",
+          widget: "no-space",
+          required: true,
+          hint: "This is the name displayed internally in CMS list.",
+        }
+      - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
+      - { label: "Title (Navigator)", name: "name", widget: "string" }
+      - { label: "Title (Webflow)", name: "webflowName", widget: "string" }
+      - {
+          label: "Summary Description (Webflow and Navigator)",
+          name: "summaryDescriptionMd",
+          widget: "markdown",
+        }
+      - { label: "Detailed Description (Navigator)", name: "body", widget: "markdown" }
+      - { label: "Form Name (Webflow & Navigator)", name: "formName", widget: "string", required: false }
+      - label: "Industry (Webflow & Navigator)"
+        name: industryId
+        widget: "relation"
+        multiple: true
+        collection: "roadmaps"
+        search_fields: ["id"]
+        value_field: "{{id}}"
+        display_fields: ["{{name}}"]
+        options_length: 500
+      - {
+          label: "Call To Action Text (Webflow & Navigator)",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Call To Action Link (Webflow & Navigator)",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Industry (Webflow - archive)", name: "webflowIndustry", widget: "string", required: false }
+      - {
+          label: "License Classification (Webflow - archive)",
+          name: "licenseCertificationClassification",
+          widget: "string",
+          required: false,
+        }
+      - label: Licensing Agency (Webflow & Navigator)
+        name: agencyId
+        widget: relation
+        required: false
+        collection: "mappings"
+        search_fields: ["arrayOfTaskAgencies.*.name"]
+        value_field: "arrayOfTaskAgencies.*.id"
+        display_fields: ["arrayOfTaskAgencies.*.name"]
+        options_length: 500
+      - {
+          label: "Agency additional context (Webflow & Navigator)",
+          name: "agencyAdditionalContext",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Division Phone", name: "divisionPhone", widget: "string", required: false }
+      - label: "Type (Webflow)"
+        name: "webflowType"
+        widget: "select"
+        required: false
+        options:
+          - { label: "business license", value: "business-license" }
+          - { label: "individual license", value: "individual-license" }
+          - { label: "school/course", value: "school-course" }
+          - { label: "object or vehicle", value: "object-vehicle" }
+
+  - name: "raffle-bingo-steps"
+    label: "Raffle Bingo Steps"
+    folder: "content/src/roadmaps/raffle-bingo-steps"
+    summary: "{{displayname}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
+    delete: true
+    sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
+      - {
+          label: "Display Name",
+          name: "displayname",
+          widget: "no-space",
+          required: true,
+          hint: "This is the name displayed internally in CMS list.",
+        }
+      - {
+          label: "Url Slug",
+          name: "urlSlug",
+          widget: "no-space",
+          hint: "Lowercase, no spaces, add hyphens between words.",
+        }
+      - { label: "Title", name: "name", widget: "string" }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+
+  - name: "webflow-licenses"
+    label: "Webflow Licenses"
+    folder: "content/src/webflow-licenses"
+    summary: "{{displayname}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
+    delete: false
+    sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
+    create: false
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
+      - { label: "Display Name", name: "displayname", widget: "no-space", required: true }
+      - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
+      - { label: "Title (Navigator)", name: "name", widget: "string", required: false }
+      - { label: "Title (Webflow)", name: "webflowName", widget: "string", required: false }
+      - {
+          label: "Summary Description (Webflow and Navigator)",
+          name: "summaryDescriptionMd",
+          widget: "markdown",
+        }
+      - { label: "Detailed Description (Navigator)", name: "body", widget: "markdown", required: false }
+      - label: Licensing Agency (Webflow & Navigator)
+        name: agencyId
+        widget: relation
+        required: false
+        collection: "mappings"
+        search_fields: ["arrayOfTaskAgencies.*.name"]
+        value_field: "arrayOfTaskAgencies.*.id"
+        display_fields: ["arrayOfTaskAgencies.*.name"]
+        options_length: 500
+      - {
+          label: "Agency additional context (Webflow & Navigator)",
+          name: "agencyAdditionalContext",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Form Name (Webflow & Navigator)", name: "formName", widget: "string", required: false }
+      - label: "Industry (Webflow & Navigator)"
+        name: industryId
+        widget: "relation"
+        multiple: true
+        collection: "roadmaps"
+        search_fields: ["{{id}}"]
+        value_field: "{{id}}"
+        display_fields: ["{{name}}"]
+        options_length: 500
+        required: false
+      - {
+          label: "Call To Action Text (Webflow & Navigator)",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Call To Action Link (Webflow & Navigator)",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Industry (Webflow - archive)", name: "webflowIndustry", widget: "string" }
+      - {
+          label: "License Classification (Webflow - archive)",
+          name: "licenseCertificationClassification",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Division Phone", name: "divisionPhone", widget: "string", required: false }
+      - label: "Type (Webflow)"
+        name: "webflowType"
+        widget: "select"
+        required: false
+        options:
+          - { label: "business license", value: "business-license" }
+          - { label: "individual license", value: "individual-license" }
+          - { label: "school/course", value: "school-course" }
+          - { label: "object or vehicle", value: "object-vehicle" }
+
+  - name: "cannabis-license"
+    label: "Tasks - Cannabis License"
+    delete: false
+    create: false
+    files:
+      - label: Cannabis Eligibility Modal
+        name: cannabis-eligibility-modal
+        file: content/src/fieldConfig/cannabis-license-eligibility-modal.json
+        editor:
+          preview: true
+        fields:
+          - label: Cannabis Eligibility Modal
+            name: cannabisEligibilityModal
+            collapsed: false
+            widget: object
+            summary: "{{cannabisEligibilityModal}}"
+            fields:
+              - { label: Eligible Modal Title, name: eligibleModalTitle, widget: string }
+              - {
+                  label: Eligible Modal Body,
+                  name: eligibleModalBody,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - { label: Eligible Modal Continue Button, name: eligibleModalContinueButton, widget: string }
+              - { label: Eligible Modal Cancel Button, name: eligibleModalCancelButton, widget: string }
+
+      - label: "Tab 1 (Business Size and Priority Status)"
+        name: "cannabisLicense-1"
+        file: "content/src/fieldConfig/cannabis-license-tab1.json"
+        editor:
+          preview: true
+        fields:
+          - label: Business Size and Priority Status
+            name: cannabisApplyForLicense
+            collapsed: false
+            widget: object
+            summary: "{{cannabisApplyForLicense}}"
+            fields:
+              - {
+                  label: Priority Status None Selected Text,
+                  name: priorityStatusNoneSelectedText,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Application Questions Text,
+                  name: applicationQuestionsText,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - { label: Business Size Header, name: businessSizeHeader, widget: string }
+              - {
+                  label: Microbusiness Radio Question,
+                  name: microbusinessRadioQuestion,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Microbusiness Radio Yes,
+                  name: microbusinessRadioYes,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Microbusiness Radio No,
+                  name: microbusinessRadioNo,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - { label: Priority Status Header, name: priorityStatusHeader, widget: string }
+              - {
+                  label: Priority Status Text,
+                  name: priorityStatusText,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Diversely Owned Label,
+                  name: diverselyOwnedLabel,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Impact Zone Label,
+                  name: impactZoneLabel,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - { label: SBE Label, name: sbeLabel, widget: markdown, hint: This field supports Markdown }
+              - { label: View Requirements Button, name: viewRequirementsButton, widget: string }
+
+      - label: "Tab 2 Annual (Defaults + Requirements)"
+        name: "cannabisLicenseAnnual-2"
+        file: "content/src/fieldConfig/cannabis-license-annual-tab2.json"
+        editor:
+          preview: true
+        fields:
+          - label: Annual Requirements
+            name: cannabisApplyForLicense
+            collapsed: false
+            widget: object
+            summary: "{{cannabisApplyForLicense}}"
+            fields:
+              - { label: Application Page Helper Text, name: applicationPageHelperText, widget: string }
+              - { label: General Application Needs, name: generalApplicationNeeds, widget: string }
+              - { label: General Annual Requirements, name: annualGeneralRequirements, widget: markdown }
+              - {
+                  label: Microbusiness Application Needs,
+                  name: microbusinessApplicationNeeds,
+                  widget: string,
+                }
+              - { label: Microbusiness Requirements, name: microbusinessRequirements, widget: markdown }
+              - {
+                  label: Priority Status Application Needs,
+                  name: priorityStatusApplicationNeeds,
+                  widget: string,
+                }
+              - { label: Diversely Owned Requirements, name: diverselyOwnedRequirements, widget: markdown }
+              - { label: Impact Zone Requirements, name: impactZoneRequirements, widget: markdown }
+              - { label: Social Equity Requirements, name: socialEquityRequirements, widget: markdown }
+              - { label: Back To First Tab Button, name: backToFirstTabButton, widget: string }
+              - { label: Annual - After Requirements, name: annualBottomOfTask, widget: markdown }
+
+      - label: "Tab 2 Conditional (Conditional Specific Requirements)"
+        name: "cannabisLicenseConditional-2"
+        file: "content/src/fieldConfig/cannabis-license-conditional-tab2.json"
+        editor:
+          preview: true
+        fields:
+          - label: Conditional Requirements
+            name: cannabisApplyForLicense
+            collapsed: false
+            widget: object
+            summary: "{{cannabisApplyForLicense}}"
+            fields:
+              - {
+                  label: General Conditional Requirements,
+                  name: conditionalGeneralRequirements,
+                  widget: markdown,
+                }
+              - { label: Conditional - After Requirements, name: conditionalBottomOfTask, widget: markdown }
+  - name: "cannabis-priority-status"
+    label: "Tasks - Cannabis Priority Status"
+    delete: false
+    create: false
+    files:
+      - label: "Tab 1 (Statuses)"
+        name: "cannabisPriority-1"
+        file: "content/src/fieldConfig/cannabis-priority-status-tab1.json"
+        editor:
+          preview: true
+        fields:
+          - label: Cannabis Priority Status
+            name: cannabisPriorityStatus
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Next Button Text, name: nextButtonText, widget: string }
+              - {
+                  label: None Of The Above Checkbox Label,
+                  name: noPriorityStatusCheckboxText,
+                  widget: string,
+                }
+              - { label: Content Body, name: tab1Content, widget: markdown }
+              - { label: Phrase With One Priority Type, name: phrase1, widget: string }
+              - { label: Phrase With Two Priority Types, name: phrase2, widget: string }
+              - { label: Phrase With Three Priority Types, name: phrase3, widget: string }
+              - {
+                  label: Priority Type - Minority Women Or Veteran,
+                  name: minorityWomenOrVeteran,
+                  widget: markdown,
+                }
+              - { label: Priority Type - Impact Zone, name: impactZone, widget: markdown }
+              - { label: Priority Type - Social Equity, name: socialEquity, widget: markdown }
+
+      - label: "Tab 2 (Requirements)"
+        name: "cannabisPriority-2"
+        file: "content/src/fieldConfig/cannabis-priority-status-tab2.json"
+        editor:
+          preview: true
+        fields:
+          - label: Cannabis Priority Status
+            name: cannabisPriorityStatus
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Text Before Header, name: secondTabDescriptionText, widget: text }
+              - { label: Header Text, name: secondTabHeaderText, widget: string }
+              - { label: Minority / Women Header Text, name: minorityOrWomenHeaderText, widget: string }
+              - {
+                  label: Minority / Women Requirements,
+                  name: minorityWomenOwnedRequirements,
+                  widget: markdown,
+                }
+              - { label: Veteran Header Text, name: veteranHeaderText, widget: string }
+              - { label: Veteran Owned Requirements, name: veteranOwnedRequirements, widget: markdown }
+              - { label: Social Equity Header Text, name: socialEquityHeaderText, widget: string }
+              - { label: Social Equity Requirements, name: socialEquityRequirements, widget: markdown }
+              - { label: Impact Zone Header Text, name: impactZoneHeaderText, widget: string }
+              - { label: Impact Zone Text, name: impactZoneText, widget: string }
+
+              - { label: Conditional Callout Heading Text, name: greenBoxHeadingText, widget: string }
+              - {
+                  label: Conditional Callout Minority Or Women Text,
+                  name: greenBoxMinorityOrWomenText,
+                  widget: string,
+                }
+              - { label: Conditional Callout Veteran Text, name: greenBoxVeteranText, widget: string }
+              - {
+                  label: Conditional Callout Social Equity Text,
+                  name: greenBoxSocialEquityText,
+                  widget: string,
+                }
+              - { label: Back Button Text, name: backButtonText, widget: string }
+              - { label: Dropdown CTA Button Text, name: dropdownCTAButtonText, widget: string }
+              - { label: Social Equity Button Text, name: socialEquityButtonText, widget: string }
+              - { label: Social Equity Button Link, name: socialEquityButtonLink, widget: string }
+              - {
+                  label: Veteran Minority Or Women Button Text,
+                  name: certificationButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Veteran Minority Or Women Button Link,
+                  name: certificationButtonLink,
+                  widget: string,
+                }
+              - {
+                  label: Text For None Of The Above Checkbox Selection,
+                  name: noPriorityStatusText,
+                  widget: text,
+                }
+              - {
+                  label: Complete Task Progress Button Text,
+                  name: completeTaskProgressButtonText,
+                  widget: string,
+                }
+  - name: "ein-task"
+    label: "Tasks - EIN"
+    delete: false
+    create: false
+    files:
+      - label: "EIN Input Section"
+        name: "ein-input-section"
+        file: content/src/fieldConfig/ein.json
+        editor:
+          preview: true
+        fields:
+          - label: EIN
+            name: ein
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Description Text, name: descriptionText, widget: markdown }
+              - { label: Save Button Text, name: saveButtonText, widget: string }
+              - {
+                  label: Success Message Text,
+                  name: successText,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Aria Label Text,
+                  name: ariaLabelText,
+                  widget: string,
+                  hint: This is the text that is populates the Edit/Remove button aria label. It is prepended by "Edit" or "Remove".,
+                }
+  - name: "tax-task"
+    label: "Tasks - Tax ID"
+    delete: false
+    create: false
+    files:
+      - label: "Tax ID Input Section"
+        name: "tax-input-section"
+        file: content/src/fieldConfig/tax.json
+        editor:
+          preview: true
+        fields:
+          - label: Tax ID
+            name: tax
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Description Text, name: descriptionText, widget: markdown }
+              - { label: Save Button Text, name: saveButtonText, widget: string }
+              - { label: Show Button Text, name: showButtonText, widget: string }
+              - { label: Hide Button Text, name: hideButtonText, widget: string }
+              - { label: Show Button Text Mobile, name: showButtonTextMobile, widget: string }
+              - { label: Hide Button Text Mobile, name: hideButtonTextMobile, widget: string }
+              - { label: Locked Pre-TaxId Text, name: lockedPostText, widget: string }
+              - { label: Locked Post-TaxId Text, name: lockedPreText, widget: string }
+  - name: "municipal-tasks"
+    label: "Tasks - Municipal"
+    folder: "content/src/roadmaps/municipal-tasks"
+    delete: false
+    create: false
+    summary: "{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{fields.id}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - { label: "Name", name: "name", widget: "string", required: false }
+      - { label: "ID", name: "id", widget: "write-once-read-only-no-space", required: true }
+      - { label: "Webflow Name", name: "webflowName", widget: "string", required: false }
+      - { label: "Call to Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call to Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Agency ID", name: "agencyId", widget: "string", required: false }
+      - {
+          label: "Agency Additional Context",
+          name: "agencyAdditionalContext",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Division Phone", name: "divisionPhone", widget: "string", required: false }
+      - { label: "industry ID", name: "industryId", widget: "string", required: false }
+      - { label: "WebflowType", name: "webflowType", widget: "string", required: false }
+      - {
+          label: "License Certification Classification",
+          name: "licenseCertificationClassification",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Summary Description MD", name: "summaryDescriptionMd", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
+
+  - name: "naics-code"
+    label: "Tasks - NAICS Code"
+    delete: false
+    create: false
+    files:
+      - label: "NAICS Code Lookup Section"
+        name: naics-code-lookup
+        file: content/src/fieldConfig/naics-code.json
+        editor:
+          preview: true
+        fields:
+          - label: Determine NAICS Code
+            name: determineNaicsCode
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Find Code Header, name: findCodeHeader, widget: string }
+              - {
+                  label: Find Code Body Text,
+                  name: findCodeBodyText,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Suggested Code Body Text,
+                  name: suggestedCodeBodyText,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - { label: naics.com Link, name: naicsLink, widget: string, hint: This field supports Markdown }
+              - { label: Save Button Text, name: saveButtonText, widget: string }
+              - { label: Invalid Validation Error Text, name: invalidValidationErrorText, widget: string }
+              - { label: Length Validation Error Text, name: lengthValidationErrorText, widget: string }
+              - { label: Has Saved Code Header, name: hasSavedCodeHeader, widget: string }
+              - {
+                  label: Aria Label Text,
+                  name: ariaLabelText,
+                  widget: string,
+                  hint: This is the text that is populates the Edit/Remove button aria label. It is prepended by "Edit" or "Remove".,
+                }
+              - {
+                  label: Success Message,
+                  name: successMessage,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Placeholder Text (in Tasks) When NAICS Missing,
+                  name: missingNAICSCodePlaceholder,
+                  widget: string,
+                }
+              - { label: NAICS Description External URL, name: naicsDescriptionURL, widget: string }
+
+      - label: "NAICS Code Input"
+        name: "naics-code-input"
+        file: "content/src/fieldConfig/profile.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: "profileDefaults"
+            collapsed: false
+            widget: object
+            fields:
+              - label: Fields
+                name: "fields"
+                collapsed: false
+                widget: object
+                fields:
+                  - label: NAICS Code
+                    name: naicsCode
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header (shared on profile/task)", name: "header", widget: "string" }
+                          - {
+                              label: "Alt Description Text - Renders On Task Page",
+                              name: "altDescription",
+                              widget: "string",
+                            }
+
+  - name: "business-structure-section"
+    label: "Tasks - Business Structure"
+    delete: false
+    create: false
+    files:
+      - label: "Business Structure Selection Component"
+        name: "business-structure-selection"
+        file: content/src/fieldConfig/business-structure-task.json
+        editor:
+          preview: true
+        fields:
+          - label: Business Structure Config
+            name: businessStructureTask
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Tooltip - Not Complete, name: uncompletedTooltip, widget: text }
+              - { label: Header - Not Complete, name: radioQuestionHeader, widget: string }
+              - { label: Tooltip - Completed, name: completedTooltip, widget: text }
+              - { label: Header - Complete, name: completedHeader, widget: string }
+              - { label: Save Button, name: saveButton, widget: string }
+              - { label: SuccessMessage, name: successMessage, widget: string }
+              - {
+                  label: Aria Label Text,
+                  name: ariaLabelText,
+                  widget: string,
+                  hint: This is the text that is populates the Edit/Remove button aria label. It is prepended by "Edit" or "Remove".,
+                }
+      - label: "Business Structure Prompt Component"
+        name: "business-structure-prompt"
+        file: content/src/fieldConfig/business-structure-prompt.json
+        editor:
+          preview: true
+        fields:
+          - label: Business Structure Prompt Config
+            name: businessStructurePrompt
+            collapsed: false
+            widget: object
+            summary: "{{businessStructurePrompt}}"
+            fields:
+              - {
+                  label: Not Completed Task Prompt Text On Any Task,
+                  name: notCompletedTaskPromptAnyTask,
+                  widget: markdown,
+                }
+              - {
+                  label: Not Completed Task Prompt Text On Business Structure Task,
+                  name: notCompletedTaskPromptBusinessStructureTask,
+                  widget: markdown,
+                }
+              - { label: Button Text, name: buttonText, widget: string }
+              - {
+                  label: Select Business Structure To Save Alert Text,
+                  name: businessStructureNotSelectedAlertText,
+                  widget: string,
+                }
