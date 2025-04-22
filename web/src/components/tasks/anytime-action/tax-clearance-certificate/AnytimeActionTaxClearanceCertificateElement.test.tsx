@@ -133,27 +133,38 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
     });
 
-    it("renders the first step as complete only when on the eligibility or review tab", () => {
+    it("renders the first step as complete when on the eligibility tab", () => {
       renderComponent({});
-      expect(screen.getByTestId(`stepper-0`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
-      fireEvent.click(screen.getByTestId("stepper-1"));
+      const firstTab = screen.getAllByRole("tab")[0];
+      const secondTab = screen.getAllByRole("tab")[1];
+      expect(firstTab.dataset.state).toEqual("INCOMPLETE-ACTIVE");
 
-      expect(screen.getByTestId(`stepper-0`).dataset.state).toEqual("COMPLETE");
-
-      fireEvent.click(screen.getByTestId("stepper-2"));
-      expect(screen.getByTestId(`stepper-0`).dataset.state).toEqual("COMPLETE");
-
-      fireEvent.click(screen.getByTestId("stepper-0"));
-      expect(screen.getByTestId(`stepper-0`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
+      fireEvent.click(secondTab);
+      expect(secondTab).toHaveAttribute("aria-selected", "true");
+      expect(firstTab.dataset.state).toEqual("COMPLETE");
     });
 
-    it("renders the second step as incomplete until all required fields are non empty and valid", () => {
+    it("renders the first step as complete when on the review tab", () => {
+      renderComponent({});
+      const firstTab = screen.getAllByRole("tab")[0];
+      const thirdTab = screen.getAllByRole("tab")[2];
+      expect(firstTab.dataset.state).toEqual("INCOMPLETE-ACTIVE");
+
+      fireEvent.click(thirdTab);
+      expect(thirdTab).toHaveAttribute("aria-selected", "true");
+      expect(firstTab.dataset.state).toEqual("COMPLETE");
+    });
+
+    it("renders the second step as incomplete until all required fields are non empty and valid", async () => {
       renderComponent({ business: generateBusinessWithEmptyTaxClearanceData() });
       expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE");
 
       fireEvent.click(screen.getByTestId("stepper-1"));
 
-      selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+      await selectListBoxValueByLabel(
+        "Tax clearance certificate requesting agency",
+        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+      );
       expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
 
       fillText("Business name", "Test Name");
@@ -165,7 +176,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       fillText("Address city", "Baltimore");
       expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
 
-      selectValueByTestId("addressState", "MD");
+      selectComboBoxValueByText("Address state", "MD");
       expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
 
       fillText("Address zip code", "21210");
@@ -180,17 +191,20 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
 
     it.each(["Zip Code", "Tax ID", "Tax PIN"])(
       "renders the second step as incomplete when all fields are non empty but the %s field does not have enough digits",
-      (incompleteField) => {
+      async (incompleteField) => {
         renderComponent({ business: generateBusinessWithEmptyTaxClearanceData() });
         expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE");
 
         fireEvent.click(screen.getByTestId("stepper-1"));
 
-        selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
+        await selectListBoxValueByLabel(
+          "Tax clearance certificate requesting agency",
+          LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+        );
         fillText("Business name", "Test Name");
         fillText("Address line1", "123 Test Road");
         fillText("Address city", "Baltimore");
-        selectValueByTestId("addressState", "MD");
+        selectComboBoxValueByText("Address state", "MD");
         fillText("Address zip code", incompleteField === "Zip Code" ? "0" : "21210");
         fillText("Tax id", incompleteField === "Tax ID" ? "0" : "012345678901");
         fillText("Tax pin", incompleteField === "Tax PIN" ? "0" : "1234");
@@ -208,39 +222,46 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       "Zip Code",
       "Tax ID",
       "Tax PIN",
-    ])("renders the second step as incomplete when all fields are non empty except for %s", (emptyField) => {
-      renderComponent({ business: generateBusinessWithEmptyTaxClearanceData() });
-      expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE");
+    ])(
+      "renders the second step as incomplete when all fields are non empty except for %s",
+      async (emptyField) => {
+        renderComponent({ business: generateBusinessWithEmptyTaxClearanceData() });
+        expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE");
 
-      fireEvent.click(screen.getByTestId("stepper-1"));
+        fireEvent.click(screen.getByTestId("stepper-1"));
 
-      if (emptyField !== "Requesting Agency") {
-        selectValueByLabel("Tax clearance certificate requesting agency", "newJerseyBoardOfPublicUtilities");
-      }
-      if (emptyField !== "Business Name") {
-        fillText("Business name", "Test Name");
-      }
-      if (emptyField !== "Address Line 1") {
-        fillText("Address line1", "123 Test Road");
-      }
-      if (emptyField !== "Address City") {
-        fillText("Address city", "Baltimore");
-      }
+        if (emptyField !== "Requesting Agency") {
+          await selectListBoxValueByLabel(
+            "Tax clearance certificate requesting agency",
+            LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+          );
+        }
 
-      if (emptyField !== "Address State") {
-        selectValueByTestId("addressState", "MD");
+        if (emptyField !== "Business Name") {
+          fillText("Business name", "Test Name");
+        }
+        if (emptyField !== "Address Line 1") {
+          fillText("Address line1", "123 Test Road");
+        }
+        if (emptyField !== "Address City") {
+          fillText("Address city", "Baltimore");
+        }
+
+        if (emptyField !== "Address State") {
+          selectComboBoxValueByText("Address state", "MD");
+        }
+        if (emptyField !== "Zip Code") {
+          fillText("Address zip code", "21210");
+        }
+        if (emptyField !== "Tax ID") {
+          fillText("Tax id", "012345678901");
+        }
+        if (emptyField !== "Tax PIN") {
+          fillText("Tax pin", "1234");
+        }
+        expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
       }
-      if (emptyField !== "Zip Code") {
-        fillText("Address zip code", "21210");
-      }
-      if (emptyField !== "Tax ID") {
-        fillText("Tax id", "012345678901");
-      }
-      if (emptyField !== "Tax PIN") {
-        fillText("Tax pin", "1234");
-      }
-      expect(screen.getByTestId(`stepper-1`).dataset.state).toEqual("INCOMPLETE-ACTIVE");
-    });
+    );
   });
 
   describe("renders data from userData", () => {
@@ -799,8 +820,11 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
-        expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+        const secondTab = screen.getAllByRole("tab")[1];
+        fireEvent.click(secondTab);
+        expect(secondTab).toHaveAttribute("aria-selected", "true");
+
+        // TODO: use get by role
         fireEvent.blur(screen.getByLabelText("Tax clearance certificate requesting agency"));
         expect(
           screen.getByText(Config.taxClearanceCertificateShared.requestingAgencyErrorText)
@@ -817,8 +841,10 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
-        expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+        const secondTab = screen.getAllByRole("tab")[1];
+        fireEvent.click(secondTab);
+        expect(secondTab).toHaveAttribute("aria-selected", "true");
+
         fillText("Business name", "");
         fireEvent.blur(screen.getByLabelText("Business name"));
         expect(
@@ -836,8 +862,9 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
-        expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+        const secondTab = screen.getAllByRole("tab")[1];
+        fireEvent.click(secondTab);
+        expect(secondTab).toHaveAttribute("aria-selected", "true");
         fillText("Tax id", "");
         fireEvent.blur(screen.getByLabelText("Tax id"));
         expect(
@@ -855,8 +882,9 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
           formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
         });
         renderComponent({ business });
-        fireEvent.click(screen.getByTestId("stepper-1"));
-        expect(screen.getByTestId("eligibility-tab")).toBeInTheDocument();
+        const secondTab = screen.getAllByRole("tab")[1];
+        fireEvent.click(secondTab);
+        expect(secondTab).toHaveAttribute("aria-selected", "true");
         fillText("Tax pin", "");
         fireEvent.blur(screen.getByLabelText("Tax pin"));
         expect(
