@@ -25,7 +25,9 @@ interface Props {
 export const BusinessFormationTextBox = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
-  const [isExpanded, setIsExpanded] = useState(props.required || !!state.formationFormData[props.fieldName]);
+  const [isExpanded, setIsExpanded] = useState(
+    props.required || !!state.formationFormData[props.fieldName]
+  );
   const { doesFieldHaveError } = useFormationErrors();
 
   const handleAddButtonClick = (): void => {
@@ -68,7 +70,10 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
         </div>
       </div>
       {isExpanded && (
-        <WithErrorBar hasError={doesFieldHaveError(props.fieldName)} type="ALWAYS">
+        <WithErrorBar
+          hasError={doesFieldHaveError(props.fieldName)}
+          type="ALWAYS"
+        >
           <Content className="margin-bottom-2">{props.contentMd}</Content>
           <div className="grid-row">
             <div className="grid-col">
@@ -105,8 +110,8 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
             )}
           </div>
           <div className="text-base-dark margin-top-1 margin-bottom-2">
-            {(state.formationFormData[props.fieldName] as string)?.length ?? 0} / {props.maxChars}{" "}
-            {Config.formation.general.charactersLabel}
+            {(state.formationFormData[props.fieldName] as string)?.length ?? 0}{" "}
+            / {props.maxChars} {Config.formation.general.charactersLabel}
           </div>
         </WithErrorBar>
       )}

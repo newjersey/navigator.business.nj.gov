@@ -6,7 +6,9 @@ import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateAnytimeActionTask } from "@/test/factories";
 import { ReactElement } from "react";
 
-const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => {
+const AnytimeActionTaxClearancePreview = (
+  props: PreviewProps
+): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
   const taxClearanceAnytimeAction = generateAnytimeActionTask({
@@ -17,10 +19,14 @@ const AnytimeActionTaxClearancePreview = (props: PreviewProps): ReactElement => 
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+      <div
+        className="cms"
+        ref={ref}
+        style={{ margin: 40, pointerEvents: "none" }}
+      >
         <div className={"margin-bottom-4"}>
-          The H1 can only be updated in the tax clearance file located within the anytime action tasks admin
-          collection
+          The H1 can only be updated in the tax clearance file located within
+          the anytime action tasks admin collection
         </div>
         {tab === "step1" && (
           <>

@@ -24,9 +24,9 @@ export const getProfileConfig = (props: {
   onboarding?: boolean;
   persona?: BusinessPersona;
 }): any => {
-  const configForField: ProfileFieldContent = (props.config.profileDefaults as any)["fields"][
-    props.fieldName
-  ];
+  const configForField: ProfileFieldContent = (
+    props.config.profileDefaults as any
+  )["fields"][props.fieldName];
 
   let mergedConfig = configForField.default;
 
@@ -38,7 +38,10 @@ export const getProfileConfig = (props: {
     mergedConfig = merge(mergedConfig, configForField.onboarding?.default);
 
     if (props.persona && configForField.onboarding?.overrides) {
-      mergedConfig = merge(mergedConfig, configForField.onboarding.overrides[props.persona]);
+      mergedConfig = merge(
+        mergedConfig,
+        configForField.onboarding.overrides[props.persona]
+      );
     }
   }
 

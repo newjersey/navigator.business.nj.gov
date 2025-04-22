@@ -9,10 +9,18 @@ import { getMarkdown } from "@/lib/utils/markdownReader";
 import fs from "fs";
 import path from "path";
 
-const displayContentDir = path.join(process.cwd(), "..", "content", "src", "display-content");
+const displayContentDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "display-content"
+);
 
 export const loadRoadmapSideBarDisplayContent = (): RoadmapDisplayContent => {
-  const fileNames = fs.readdirSync(path.join(displayContentDir, "roadmap-sidebar-cards"));
+  const fileNames = fs.readdirSync(
+    path.join(displayContentDir, "roadmap-sidebar-cards")
+  );
 
   const sideBarDisplayContent = fileNames.reduce((acc, cur) => {
     const fileContents: string = fs.readFileSync(
@@ -34,7 +42,12 @@ export const loadRoadmapSideBarDisplayContent = (): RoadmapDisplayContent => {
 
 const getDbaTasks = (): FormationDbaContent => {
   const getPath = (filename: string): string => {
-    return path.join(displayContentDir, "business-formation", "nexus", filename);
+    return path.join(
+      displayContentDir,
+      "business-formation",
+      "nexus",
+      filename
+    );
   };
 
   const loadFile = (filename: string): string => {

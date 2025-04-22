@@ -13,9 +13,11 @@ export const isMunicipalityRequired = (params: {
   }
 
   if (LookupLegalStructureById(params.legalStructureId).requiresPublicFiling) {
-    return LookupOperatingPhaseById(params.operatingPhase).municipalityRequiredForPublicFiling;
+    return LookupOperatingPhaseById(params.operatingPhase)
+      .municipalityRequiredForPublicFiling;
   } else if (LookupLegalStructureById(params.legalStructureId).hasTradeName) {
-    return LookupOperatingPhaseById(params.operatingPhase).municipalityRequiredForTradeName;
+    return LookupOperatingPhaseById(params.operatingPhase)
+      .municipalityRequiredForTradeName;
   } else {
     return true;
   }

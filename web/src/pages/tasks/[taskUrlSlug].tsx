@@ -14,7 +14,11 @@ import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllHousingMunicipalities } from "@/lib/static/loadHousingMunicipalities";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
+import {
+  loadAllTaskUrlSlugs,
+  loadTaskByUrlSlug,
+  TaskUrlSlugParam,
+} from "@/lib/static/loadTasks";
 import { Task, TasksDisplayContent } from "@/lib/types/types";
 import { getUrlSlugs } from "@/lib/utils/roadmap-helpers";
 import {
@@ -61,11 +65,14 @@ const TaskPage = (props: Props): ReactElement => {
     }
 
     const hideNextUrlSlug =
-      props.task.id === businessStructureTaskId && !hasCompletedBusinessStructure(business);
+      props.task.id === businessStructureTaskId &&
+      !hasCompletedBusinessStructure(business);
 
     return (
       <div
-        className={`flex flex-row ${previousUrlSlug ? "flex-justify" : "flex-justify-end"} margin-top-2 `}
+        className={`flex flex-row ${
+          previousUrlSlug ? "flex-justify" : "flex-justify-end"
+        } margin-top-2 `}
         data-testid="nextAndPreviousButtons"
       >
         {previousUrlSlug && (
@@ -75,7 +82,10 @@ const TaskPage = (props: Props): ReactElement => {
             }}
           >
             <Icon className="usa-icon--size-4" iconName="navigate_before" />
-            <span className="margin-left-2"> {Config.taskDefaults.previousTaskButtonText}</span>
+            <span className="margin-left-2">
+              {" "}
+              {Config.taskDefaults.previousTaskButtonText}
+            </span>
           </UnStyledButton>
         )}
         {nextUrlSlug && !hideNextUrlSlug && (
@@ -85,7 +95,9 @@ const TaskPage = (props: Props): ReactElement => {
               router && router.push(`/tasks/${nextUrlSlug}`);
             }}
           >
-            <span className="margin-right-2">{Config.taskDefaults.nextTaskButtonText}</span>
+            <span className="margin-right-2">
+              {Config.taskDefaults.nextTaskButtonText}
+            </span>
             <Icon className="usa-icon--size-4" iconName="navigate_next" />
           </UnStyledButton>
         )}
@@ -94,11 +106,18 @@ const TaskPage = (props: Props): ReactElement => {
   };
 
   return (
-    <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
-      <HousingMunicipalitiesContext.Provider value={{ municipalities: props.housingMunicipalities }}>
+    <MunicipalitiesContext.Provider
+      value={{ municipalities: props.municipalities }}
+    >
+      <HousingMunicipalitiesContext.Provider
+        value={{ municipalities: props.housingMunicipalities }}
+      >
         <NextSeo title={getNextSeoTitle(props.task.name)} />
         <PageSkeleton showNavBar showSidebar task={props.task}>
-          <TaskSidebarPageLayout task={props.task} belowBoxComponent={renderNextAndPreviousButtons()}>
+          <TaskSidebarPageLayout
+            task={props.task}
+            belowBoxComponent={renderNextAndPreviousButtons()}
+          >
             {renderLoadingState && <PageCircularIndicator />}
             {!renderLoadingState && (
               <TaskPageSwitchComponent
@@ -123,7 +142,11 @@ export const getStaticPaths = (): GetStaticPathsResult<TaskUrlSlugParam> => {
   };
 };
 
-export const getStaticProps = ({ params }: { params: TaskUrlSlugParam }): GetStaticPropsResult<Props> => {
+export const getStaticProps = ({
+  params,
+}: {
+  params: TaskUrlSlugParam;
+}): GetStaticPropsResult<Props> => {
   return {
     props: {
       task: loadTaskByUrlSlug(params.taskUrlSlug),

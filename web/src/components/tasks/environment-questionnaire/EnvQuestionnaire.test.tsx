@@ -1,9 +1,19 @@
 import { EnvQuestionnaire } from "@/components/tasks/environment-questionnaire/EnvQuestionnaire";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as helpers from "@/lib/utils/helpers";
-import { currentBusiness, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { generateEnvironmentData, generateLandData, generateWasteData } from "@businessnjgovnavigator/shared";
-import { MediaArea, QuestionnaireFieldIds } from "@businessnjgovnavigator/shared/environment";
+import {
+  currentBusiness,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
+import {
+  generateEnvironmentData,
+  generateLandData,
+  generateWasteData,
+} from "@businessnjgovnavigator/shared";
+import {
+  MediaArea,
+  QuestionnaireFieldIds,
+} from "@businessnjgovnavigator/shared/environment";
 import { Business } from "@businessnjgovnavigator/shared/index";
 import {
   generateAirData,
@@ -28,10 +38,20 @@ describe("<EnvQuestionnaire />", () => {
   let mediaArea: MediaArea;
   let noSelectionOption: QuestionnaireFieldIds;
 
-  const renderQuestionnaireAndSetupUser = (business?: Business): { user: UserEvent } => {
+  const renderQuestionnaireAndSetupUser = (
+    business?: Business
+  ): { user: UserEvent } => {
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
-        <EnvQuestionnaire taskId={taskId} mediaArea={mediaArea} noSelectionOption={noSelectionOption} />
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(
+          business ?? generateBusiness({})
+        )}
+      >
+        <EnvQuestionnaire
+          taskId={taskId}
+          mediaArea={mediaArea}
+          noSelectionOption={noSelectionOption}
+        />
       </WithStatefulUserData>
     );
     const user: UserEvent = userEvent.setup();
@@ -49,9 +69,16 @@ describe("<EnvQuestionnaire />", () => {
     it("clears all choices if the user selects none of the above", async () => {
       const { user } = renderQuestionnaireAndSetupUser();
       await user.click(
-        screen.getByLabelText(Config.envQuestionPage.waste.questionnaireOptions.hazardousMedicalWaste)
+        screen.getByLabelText(
+          Config.envQuestionPage.waste.questionnaireOptions
+            .hazardousMedicalWaste
+        )
       );
-      await user.click(screen.getByText(Config.envQuestionPage.waste.questionnaireOptions.noWaste));
+      await user.click(
+        screen.getByText(
+          Config.envQuestionPage.waste.questionnaireOptions.noWaste
+        )
+      );
       const generateHazardousWaste: HTMLInputElement = screen.getByLabelText(
         Config.envQuestionPage.waste.questionnaireOptions.hazardousMedicalWaste
       );
@@ -60,9 +87,16 @@ describe("<EnvQuestionnaire />", () => {
 
     it("clears none of the above if another selection is made", async () => {
       const { user } = renderQuestionnaireAndSetupUser();
-      await user.click(screen.getByLabelText(Config.envQuestionPage.waste.questionnaireOptions.noWaste));
       await user.click(
-        screen.getByLabelText(Config.envQuestionPage.waste.questionnaireOptions.hazardousMedicalWaste)
+        screen.getByLabelText(
+          Config.envQuestionPage.waste.questionnaireOptions.noWaste
+        )
+      );
+      await user.click(
+        screen.getByLabelText(
+          Config.envQuestionPage.waste.questionnaireOptions
+            .hazardousMedicalWaste
+        )
       );
       const noWaste: HTMLInputElement = screen.getByLabelText(
         Config.envQuestionPage.waste.questionnaireOptions.noWaste
@@ -87,25 +121,42 @@ describe("<EnvQuestionnaire />", () => {
           }),
         })
       );
-      await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
-      expect(screen.getByText(Config.envQuestionPage.generic.errorText)).toBeInTheDocument();
+      await user.click(
+        screen.getByText(Config.envQuestionPage.generic.buttonText)
+      );
+      expect(
+        screen.getByText(Config.envQuestionPage.generic.errorText)
+      ).toBeInTheDocument();
     });
 
     it("updates user data with the user's selections when saved", async () => {
       const { user } = renderQuestionnaireAndSetupUser();
       await user.click(
-        screen.getByLabelText(Config.envQuestionPage.waste.questionnaireOptions.hazardousMedicalWaste)
+        screen.getByLabelText(
+          Config.envQuestionPage.waste.questionnaireOptions
+            .hazardousMedicalWaste
+        )
       );
-      await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
-      expect(currentBusiness().environmentData?.waste?.questionnaireData?.hazardousMedicalWaste).toBe(true);
+      await user.click(
+        screen.getByText(Config.envQuestionPage.generic.buttonText)
+      );
+      expect(
+        currentBusiness().environmentData?.waste?.questionnaireData
+          ?.hazardousMedicalWaste
+      ).toBe(true);
     });
 
     it("updates the task progress to COMPLETED when saved", async () => {
       const { user } = renderQuestionnaireAndSetupUser();
       await user.click(
-        screen.getByLabelText(Config.envQuestionPage.waste.questionnaireOptions.hazardousMedicalWaste)
+        screen.getByLabelText(
+          Config.envQuestionPage.waste.questionnaireOptions
+            .hazardousMedicalWaste
+        )
       );
-      await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
+      await user.click(
+        screen.getByText(Config.envQuestionPage.generic.buttonText)
+      );
       expect(currentBusiness().taskProgress[taskId]).toEqual("COMPLETED");
     });
   });
@@ -121,9 +172,15 @@ describe("<EnvQuestionnaire />", () => {
     it("clears all choices if the user selects none of the above", async () => {
       const { user } = renderQuestionnaireAndSetupUser();
       await user.click(
-        screen.getByLabelText(Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz)
+        screen.getByLabelText(
+          Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz
+        )
       );
-      await user.click(screen.getByText(Config.envQuestionPage.land.questionnaireOptions.noLand));
+      await user.click(
+        screen.getByText(
+          Config.envQuestionPage.land.questionnaireOptions.noLand
+        )
+      );
       const generateHazardousWaste: HTMLInputElement = screen.getByLabelText(
         Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz
       );
@@ -132,9 +189,15 @@ describe("<EnvQuestionnaire />", () => {
 
     it("clears none of the above if another selection is made", async () => {
       const { user } = renderQuestionnaireAndSetupUser();
-      await user.click(screen.getByLabelText(Config.envQuestionPage.land.questionnaireOptions.noLand));
       await user.click(
-        screen.getByLabelText(Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz)
+        screen.getByLabelText(
+          Config.envQuestionPage.land.questionnaireOptions.noLand
+        )
+      );
+      await user.click(
+        screen.getByLabelText(
+          Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz
+        )
       );
       const noWaste: HTMLInputElement = screen.getByLabelText(
         Config.envQuestionPage.land.questionnaireOptions.noLand
@@ -159,25 +222,40 @@ describe("<EnvQuestionnaire />", () => {
           }),
         })
       );
-      await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
-      expect(screen.getByText(Config.envQuestionPage.generic.errorText)).toBeInTheDocument();
+      await user.click(
+        screen.getByText(Config.envQuestionPage.generic.buttonText)
+      );
+      expect(
+        screen.getByText(Config.envQuestionPage.generic.errorText)
+      ).toBeInTheDocument();
     });
 
     it("updates user data with the user's selections when saved", async () => {
       const { user } = renderQuestionnaireAndSetupUser();
       await user.click(
-        screen.getByLabelText(Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz)
+        screen.getByLabelText(
+          Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz
+        )
       );
-      await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
-      expect(currentBusiness().environmentData?.land?.questionnaireData?.takeOverExistingBiz).toBe(true);
+      await user.click(
+        screen.getByText(Config.envQuestionPage.generic.buttonText)
+      );
+      expect(
+        currentBusiness().environmentData?.land?.questionnaireData
+          ?.takeOverExistingBiz
+      ).toBe(true);
     });
 
     it("updates the task progress to COMPLETED when saved", async () => {
       const { user } = renderQuestionnaireAndSetupUser();
       await user.click(
-        screen.getByLabelText(Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz)
+        screen.getByLabelText(
+          Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz
+        )
       );
-      await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
+      await user.click(
+        screen.getByText(Config.envQuestionPage.generic.buttonText)
+      );
       expect(currentBusiness().taskProgress[taskId]).toEqual("COMPLETED");
     });
   });
@@ -192,8 +270,14 @@ describe("<EnvQuestionnaire />", () => {
 
     it("clears all choices if the user selects none of the above", async () => {
       const { user } = renderQuestionnaireAndSetupUser();
-      await user.click(screen.getByLabelText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions));
-      await user.click(screen.getByText(Config.envQuestionPage.air.questionnaireOptions.noAir));
+      await user.click(
+        screen.getByLabelText(
+          Config.envQuestionPage.air.questionnaireOptions.emitEmissions
+        )
+      );
+      await user.click(
+        screen.getByText(Config.envQuestionPage.air.questionnaireOptions.noAir)
+      );
       const emitEmissions: HTMLInputElement = screen.getByLabelText(
         Config.envQuestionPage.air.questionnaireOptions.emitEmissions
       );
@@ -202,8 +286,16 @@ describe("<EnvQuestionnaire />", () => {
 
     it("clears none of the above if another selection is made", async () => {
       const { user } = renderQuestionnaireAndSetupUser();
-      await user.click(screen.getByLabelText(Config.envQuestionPage.air.questionnaireOptions.noAir));
-      await user.click(screen.getByLabelText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions));
+      await user.click(
+        screen.getByLabelText(
+          Config.envQuestionPage.air.questionnaireOptions.noAir
+        )
+      );
+      await user.click(
+        screen.getByLabelText(
+          Config.envQuestionPage.air.questionnaireOptions.emitEmissions
+        )
+      );
       const noAir: HTMLInputElement = screen.getByLabelText(
         Config.envQuestionPage.air.questionnaireOptions.noAir
       );
@@ -226,21 +318,39 @@ describe("<EnvQuestionnaire />", () => {
           }),
         })
       );
-      await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
-      expect(screen.getByText(Config.envQuestionPage.generic.errorText)).toBeInTheDocument();
+      await user.click(
+        screen.getByText(Config.envQuestionPage.generic.buttonText)
+      );
+      expect(
+        screen.getByText(Config.envQuestionPage.generic.errorText)
+      ).toBeInTheDocument();
     });
 
     it("updates user data with the user's selections when saved", async () => {
       const { user } = renderQuestionnaireAndSetupUser();
-      await user.click(screen.getByLabelText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions));
-      await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
-      expect(currentBusiness().environmentData?.air?.questionnaireData?.emitEmissions).toBe(true);
+      await user.click(
+        screen.getByLabelText(
+          Config.envQuestionPage.air.questionnaireOptions.emitEmissions
+        )
+      );
+      await user.click(
+        screen.getByText(Config.envQuestionPage.generic.buttonText)
+      );
+      expect(
+        currentBusiness().environmentData?.air?.questionnaireData?.emitEmissions
+      ).toBe(true);
     });
 
     it("updates the task progress to COMPLETED when saved", async () => {
       const { user } = renderQuestionnaireAndSetupUser();
-      await user.click(screen.getByLabelText(Config.envQuestionPage.air.questionnaireOptions.emitEmissions));
-      await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
+      await user.click(
+        screen.getByLabelText(
+          Config.envQuestionPage.air.questionnaireOptions.emitEmissions
+        )
+      );
+      await user.click(
+        screen.getByText(Config.envQuestionPage.generic.buttonText)
+      );
       expect(currentBusiness().taskProgress[taskId]).toEqual("COMPLETED");
     });
   });
@@ -251,9 +361,13 @@ describe("<EnvQuestionnaire />", () => {
     });
 
     const getOptionText = (mediaArea: string): string => {
-      if (mediaArea === "land") return Config.envQuestionPage.land.questionnaireOptions.takeOverExistingBiz;
-      if (mediaArea === "waste") return Config.envQuestionPage.waste.questionnaireOptions.compostWaste;
-      if (mediaArea === "air") return Config.envQuestionPage.air.questionnaireOptions.emitEmissions;
+      if (mediaArea === "land")
+        return Config.envQuestionPage.land.questionnaireOptions
+          .takeOverExistingBiz;
+      if (mediaArea === "waste")
+        return Config.envQuestionPage.waste.questionnaireOptions.compostWaste;
+      if (mediaArea === "air")
+        return Config.envQuestionPage.air.questionnaireOptions.emitEmissions;
       return "";
     };
 
@@ -286,7 +400,9 @@ describe("<EnvQuestionnaire />", () => {
 
       const { user } = renderQuestionnaireAndSetupUser();
       await user.click(screen.getByText(getOptionText(mediaArea)));
-      await user.click(screen.getByText(Config.envQuestionPage.generic.buttonText));
+      await user.click(
+        screen.getByText(Config.envQuestionPage.generic.buttonText)
+      );
       expect(mockHelpers.scrollToTop).toHaveBeenCalledTimes(1);
     });
   });

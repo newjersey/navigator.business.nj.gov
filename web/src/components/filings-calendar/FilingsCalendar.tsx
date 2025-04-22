@@ -32,7 +32,8 @@ interface Props {
 export const FilingsCalendar = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { updateQueue } = useUserData();
-  const business = props.CMS_ONLY_fakeBusiness ?? updateQueue?.currentBusiness();
+  const business =
+    props.CMS_ONLY_fakeBusiness ?? updateQueue?.currentBusiness();
 
   const currentDate = getCurrentDate();
   const currentYear = getCurrentDate().year().toString();
@@ -40,22 +41,28 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
   const isLargeScreen = useMediaQuery(MediaQueries.tabletAndUp);
 
-  const shouldRenderFilingsCalendarTaxAccess = (business?: Business): boolean => {
+  const shouldRenderFilingsCalendarTaxAccess = (
+    business?: Business
+  ): boolean => {
     if (!business) return false;
-    return LookupOperatingPhaseById(business.profileData.operatingPhase).displayTaxAccessButton;
+    return LookupOperatingPhaseById(business.profileData.operatingPhase)
+      .displayTaxAccessButton;
   };
 
   const showFormationDatePrompt = (): boolean => {
     if (!business) return false;
     return (
-      LookupLegalStructureById(business.profileData.legalStructureId).elementsToDisplay.has(
-        "formationDate"
-      ) && !business.profileData.dateOfFormation
+      LookupLegalStructureById(
+        business.profileData.legalStructureId
+      ).elementsToDisplay.has("formationDate") &&
+      !business.profileData.dateOfFormation
     );
   };
 
   const renderCalendar = (): ReactElement => {
-    const type = LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCalendarType;
+    const type = LookupOperatingPhaseById(
+      business?.profileData.operatingPhase
+    ).displayCalendarType;
     if (type === "LIST")
       return (
         <FilingsCalendarAsList
@@ -91,7 +98,8 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     const displayToggleButton =
       business?.taxFilingData?.filings &&
       business?.taxFilingData?.filings.length > 0 &&
-      LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCalendarToggleButton &&
+      LookupOperatingPhaseById(business?.profileData.operatingPhase)
+        .displayCalendarToggleButton &&
       isLargeScreen;
 
     const handleCalendarOnClick = (): void => {
@@ -114,12 +122,18 @@ export const FilingsCalendar = (props: Props): ReactElement => {
         >
           {business?.preferences.isCalendarFullView ? (
             <>
-              <Icon className="usa-icon--size-3 margin-right-05" iconName="list" />
+              <Icon
+                className="usa-icon--size-3 margin-right-05"
+                iconName="list"
+              />
               {Config.dashboardDefaults.calendarListViewButton}
             </>
           ) : (
             <>
-              <Icon className="usa-icon--size-3 margin-right-05" iconName="grid_view" />
+              <Icon
+                className="usa-icon--size-3 margin-right-05"
+                iconName="grid_view"
+              />
               {Config.dashboardDefaults.calendarGridViewButton}
             </>
           )}
@@ -144,14 +158,18 @@ export const FilingsCalendar = (props: Props): ReactElement => {
               }`}
             >
               <ArrowTooltip title={Config.dashboardDefaults.calendarTooltip}>
-                <div className="fdr fac font-body-lg text-green" data-testid="calendar-tooltip">
+                <div
+                  className="fdr fac font-body-lg text-green"
+                  data-testid="calendar-tooltip"
+                >
                   <Icon iconName="help_outline" />
                 </div>
               </ArrowTooltip>
             </div>
           </div>
           <div className="flex flex-row flex-align-end flex-justify-center mobile-lg:flex-justify">
-            {business?.taxFilingData?.filings && business?.taxFilingData.filings.length > 0 ? (
+            {business?.taxFilingData?.filings &&
+            business?.taxFilingData.filings.length > 0 ? (
               <ThreeYearSelector
                 className="tablet:margin-right-2"
                 activeYear={activeYear}
@@ -168,9 +186,15 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             {renderToggleButton()}
           </div>
         </div>
-        <hr className="bg-base-lighter margin-top-2 margin-bottom-4" aria-hidden={true} />
-        {shouldRenderFilingsCalendarTaxAccess(business) && <FilingsCalendarTaxAccess />}
-        {business?.taxFilingData?.filings && business?.taxFilingData.filings.length > 0 ? (
+        <hr
+          className="bg-base-lighter margin-top-2 margin-bottom-4"
+          aria-hidden={true}
+        />
+        {shouldRenderFilingsCalendarTaxAccess(business) && (
+          <FilingsCalendarTaxAccess />
+        )}
+        {business?.taxFilingData?.filings &&
+        business?.taxFilingData.filings.length > 0 ? (
           <>
             {renderCalendar()}
             {showFormationDatePrompt() && (
@@ -180,7 +204,9 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             )}
             <div className="margin-top-2">
               <div className="h6-styling">
-                <span className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</span>{" "}
+                <span className="text-base-dark">
+                  {Config.dashboardDefaults.calendarLegalText}
+                </span>{" "}
                 <UnStyledButton
                   isUnderline
                   isIntercomEnabled
@@ -188,7 +214,9 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                     analytics.event.share_calendar_feedback.click.open_live_chat();
                   }}
                 >
-                  <span>{Config.dashboardDefaults.calendarFeedbackButtonText}</span>
+                  <span>
+                    {Config.dashboardDefaults.calendarFeedbackButtonText}
+                  </span>
                 </UnStyledButton>
               </div>
             </div>

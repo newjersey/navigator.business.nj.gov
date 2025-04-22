@@ -15,7 +15,9 @@ export const LiveChatHelpButton = (): ReactElement => {
         isTextBold
         isIntercomEnabled
         dataTestid={"help-button"}
-        onClick={(): void => analytics.event.business_formation_help_button.click.open_live_chat()}
+        onClick={(): void =>
+          analytics.event.business_formation_help_button.click.open_live_chat()
+        }
       >
         <ButtonIcon svgFilename="help-circle-blue" sizePx="25px" />
         {Config.formation.general.helpButtonText}

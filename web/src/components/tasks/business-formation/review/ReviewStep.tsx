@@ -29,10 +29,13 @@ export const ReviewStep = (): ReactElement => {
   const { Config } = useConfig();
 
   const isLP = state.formationFormData.legalType === "limited-partnership";
-  const hasProvisions = (state.formationFormData.additionalProvisions?.length ?? 0) > 0;
+  const hasProvisions =
+    (state.formationFormData.additionalProvisions?.length ?? 0) > 0;
   const hasPurpose = !!state.formationFormData.businessPurpose;
   const hasMembers = (state.formationFormData.members?.length ?? 0) > 0;
-  const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
+  const isCorp = corpLegalStructures.includes(
+    state.formationFormData.legalType
+  );
   const isNonProfit = state.formationFormData.legalType === "nonprofit";
 
   const getProvisionsAndPurposeSections = (): ReactElement => {
@@ -40,8 +43,13 @@ export const ReviewStep = (): ReactElement => {
       <>
         {hasProvisions && <ReviewAdditionalProvisions />}
         {hasPurpose && (
-          <ReviewSubSection header={Config.formation.fields.businessPurpose.label}>
-            <BusinessFormationReviewText fieldName={"businessPurpose"} isExpandable={true} />
+          <ReviewSubSection
+            header={Config.formation.fields.businessPurpose.label}
+          >
+            <BusinessFormationReviewText
+              fieldName={"businessPurpose"}
+              isExpandable={true}
+            />
           </ReviewSubSection>
         )}
       </>
@@ -51,14 +59,25 @@ export const ReviewStep = (): ReactElement => {
   return (
     <>
       <div data-testid="review-step">
-        <BusinessFormationReviewSection stepName={"Business"} dataTestId="edit-business-name-step">
+        <BusinessFormationReviewSection
+          stepName={"Business"}
+          dataTestId="edit-business-name-step"
+        >
           <BusinessNameAndLegalStructure isReviewStep />
           <ReviewBusinessSuffixAndStartDate />
-          {isNonProfit && <ReviewIsVeteranNonprofit value={state.formationFormData.isVeteranNonprofit} />}
-          {isForeignCorporationOrNonprofit(state.formationFormData.legalType) && (
+          {isNonProfit && (
+            <ReviewIsVeteranNonprofit
+              value={state.formationFormData.isVeteranNonprofit}
+            />
+          )}
+          {isForeignCorporationOrNonprofit(
+            state.formationFormData.legalType
+          ) && (
             <>
               <hr className="margin-y-205" />
-              <ReviewForeignCertificate foreignGoodStandingFile={state.foreignGoodStandingFile} />
+              <ReviewForeignCertificate
+                foreignGoodStandingFile={state.foreignGoodStandingFile}
+              />
             </>
           )}
           {isNonProfit && (
@@ -67,29 +86,45 @@ export const ReviewStep = (): ReactElement => {
               {getProvisionsAndPurposeSections()}
             </>
           )}
-          {shouldDisplayAddressSection(state.formationFormData) && <ReviewMainBusinessLocation />}
+          {shouldDisplayAddressSection(state.formationFormData) && (
+            <ReviewMainBusinessLocation />
+          )}
           {isLP && (
             <>
-              <ReviewSubSection header={Config.formation.fields.combinedInvestment.label}>
+              <ReviewSubSection
+                header={Config.formation.fields.combinedInvestment.label}
+              >
                 <BusinessFormationReviewText fieldName={"combinedInvestment"} />
               </ReviewSubSection>
-              <ReviewSubSection header={Config.formation.fields.withdrawals.label}>
+              <ReviewSubSection
+                header={Config.formation.fields.withdrawals.label}
+              >
                 <BusinessFormationReviewText fieldName={"withdrawals"} />
               </ReviewSubSection>
               <ReviewPartnership />
-              <ReviewSubSection header={Config.formation.fields.dissolution.label}>
+              <ReviewSubSection
+                header={Config.formation.fields.dissolution.label}
+              >
                 <BusinessFormationReviewText fieldName={"dissolution"} />
               </ReviewSubSection>
             </>
           )}
           {!isNonProfit && getProvisionsAndPurposeSections()}
         </BusinessFormationReviewSection>
-        <BusinessFormationReviewSection stepName={"Contacts"} dataTestId="edit-contacts-step">
+        <BusinessFormationReviewSection
+          stepName={"Contacts"}
+          dataTestId="edit-contacts-step"
+        >
           <ReviewRegisteredAgent />
-          {(isNonProfit || isCorp || (!isLP && hasMembers)) && <ReviewMembers />}
+          {(isNonProfit || isCorp || (!isLP && hasMembers)) && (
+            <ReviewMembers />
+          )}
           <ReviewSignatures />
         </BusinessFormationReviewSection>
-        <BusinessFormationReviewSection stepName={"Billing"} dataTestId="edit-billing-step">
+        <BusinessFormationReviewSection
+          stepName={"Billing"}
+          dataTestId="edit-billing-step"
+        >
           <ReviewBillingContact />
           <ReviewBillingServices />
         </BusinessFormationReviewSection>

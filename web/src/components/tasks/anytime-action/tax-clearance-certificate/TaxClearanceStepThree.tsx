@@ -48,10 +48,18 @@ export const TaxClearanceStepThree = (props: Props): ReactElement => {
 
   const handleButtonClick = async (): Promise<void> => {
     if (!userData) return;
-    const taxClearanceResponse = await api.postTaxClearanceCertificate(userData);
+    const taxClearanceResponse = await api.postTaxClearanceCertificate(
+      userData
+    );
     if (taxClearanceResponse.certificatePdfArray) {
       const blob = new Blob(
-        [new Uint8Array(convertSignedByteArrayToUnsigned(taxClearanceResponse.certificatePdfArray))],
+        [
+          new Uint8Array(
+            convertSignedByteArrayToUnsigned(
+              taxClearanceResponse.certificatePdfArray
+            )
+          ),
+        ],
         {
           type: "application/pdf",
         }

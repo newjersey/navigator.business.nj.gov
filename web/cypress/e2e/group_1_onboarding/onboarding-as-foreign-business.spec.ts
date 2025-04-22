@@ -34,64 +34,98 @@ describe("Onboarding for all industries when out of state nexus business [featur
       it.skip(`Onboarding for ${industry.name}`, () => {
         cy.url().should("include", "onboarding?page=1");
         onOnboardingPageNexusBusiness.selectBusinessPersonaRadio("FOREIGN");
-        onOnboardingPageNexusBusiness.getBusinessPersonaRadio("FOREIGN").should("be.checked");
+        onOnboardingPageNexusBusiness
+          .getBusinessPersonaRadio("FOREIGN")
+          .should("be.checked");
         onOnboardingPageNexusBusiness.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
         onOnboardingPageNexusBusiness.selectEmployeeOrContractorInNJCheckBox();
-        onOnboardingPageNexusBusiness.getEmployeeOrContractorInNJCheckbox().should("be.checked");
+        onOnboardingPageNexusBusiness
+          .getEmployeeOrContractorInNJCheckbox()
+          .should("be.checked");
         onOnboardingPageNexusBusiness.clickNext();
 
         cy.url().should("include", "onboarding?page=3");
         onOnboardingPageNexusBusiness.selectIndustryDropdown(industry.id);
 
-        const carService = industry.industryOnboardingQuestions.isCarServiceApplicable
+        const carService = industry.industryOnboardingQuestions
+          .isCarServiceApplicable
           ? randomElementFromArray([...carServiceOptions])
           : undefined;
 
         if (carService === undefined) {
-          onOnboardingPageNexusBusiness.getCarServiceRadio().should("not.exist");
+          onOnboardingPageNexusBusiness
+            .getCarServiceRadio()
+            .should("not.exist");
         } else {
           onOnboardingPageNexusBusiness.selectCarServiceRadio(carService);
-          onOnboardingPageNexusBusiness.getCarServiceRadio(carService).should("be.checked");
+          onOnboardingPageNexusBusiness
+            .getCarServiceRadio(carService)
+            .should("be.checked");
 
-          const otherValues = carServiceOptions.filter((value: CarServiceType) => value !== carService);
+          const otherValues = carServiceOptions.filter(
+            (value: CarServiceType) => value !== carService
+          );
           for (const value of otherValues) {
-            onOnboardingPageNexusBusiness.getCarServiceRadio(value).should("not.be.checked");
+            onOnboardingPageNexusBusiness
+              .getCarServiceRadio(value)
+              .should("not.be.checked");
           }
         }
-        const isChildcareForSixOrMore = industry.industryOnboardingQuestions.isChildcareForSixOrMore
+        const isChildcareForSixOrMore = industry.industryOnboardingQuestions
+          .isChildcareForSixOrMore
           ? Boolean(randomInt() % 2)
           : undefined;
 
         if (isChildcareForSixOrMore === undefined) {
           onOnboardingPageNexusBusiness.getChildcareRadio().should("not.exist");
         } else {
-          onOnboardingPageNexusBusiness.selectChildcareRadio(isChildcareForSixOrMore);
-          onOnboardingPageNexusBusiness.getChildcareRadio(isChildcareForSixOrMore).should("be.checked");
-          onOnboardingPageNexusBusiness.getChildcareRadio(!isChildcareForSixOrMore).should("not.be.checked");
+          onOnboardingPageNexusBusiness.selectChildcareRadio(
+            isChildcareForSixOrMore
+          );
+          onOnboardingPageNexusBusiness
+            .getChildcareRadio(isChildcareForSixOrMore)
+            .should("be.checked");
+          onOnboardingPageNexusBusiness
+            .getChildcareRadio(!isChildcareForSixOrMore)
+            .should("not.be.checked");
         }
 
-        const petCareHousing = industry.industryOnboardingQuestions.isPetCareHousingApplicable
+        const petCareHousing = industry.industryOnboardingQuestions
+          .isPetCareHousingApplicable
           ? Boolean(randomInt() % 2)
           : undefined;
 
         if (petCareHousing === undefined) {
-          onOnboardingPageNexusBusiness.getPetCareHousingRadio().should("not.exist");
+          onOnboardingPageNexusBusiness
+            .getPetCareHousingRadio()
+            .should("not.exist");
         } else {
-          onOnboardingPageNexusBusiness.selectPetCareHousingRadio(petCareHousing);
-          onOnboardingPageNexusBusiness.getPetCareHousingRadio(petCareHousing).should("be.checked");
-          onOnboardingPageNexusBusiness.getPetCareHousingRadio(!petCareHousing).should("not.be.checked");
+          onOnboardingPageNexusBusiness.selectPetCareHousingRadio(
+            petCareHousing
+          );
+          onOnboardingPageNexusBusiness
+            .getPetCareHousingRadio(petCareHousing)
+            .should("be.checked");
+          onOnboardingPageNexusBusiness
+            .getPetCareHousingRadio(!petCareHousing)
+            .should("not.be.checked");
         }
 
-        const willSellPetCareItems = industry.industryOnboardingQuestions.willSellPetCareItems
+        const willSellPetCareItems = industry.industryOnboardingQuestions
+          .willSellPetCareItems
           ? Boolean(randomInt() % 2)
           : undefined;
 
         if (willSellPetCareItems === undefined) {
-          onOnboardingPageNexusBusiness.getWillSellPetcareItemsRadio().should("not.exist");
+          onOnboardingPageNexusBusiness
+            .getWillSellPetcareItemsRadio()
+            .should("not.exist");
         } else {
-          onOnboardingPageNexusBusiness.selectWillSellPetcareItemsRadio(willSellPetCareItems);
+          onOnboardingPageNexusBusiness.selectWillSellPetcareItemsRadio(
+            willSellPetCareItems
+          );
           onOnboardingPageNexusBusiness
             .getWillSellPetcareItemsRadio(willSellPetCareItems)
             .should("be.checked");
@@ -100,37 +134,50 @@ describe("Onboarding for all industries when out of state nexus business [featur
             .should("not.be.checked");
         }
 
-        const residentialConstructionTypeApplicable = industry.industryOnboardingQuestions
-          .isConstructionTypeApplicable
+        const residentialConstructionTypeApplicable = industry
+          .industryOnboardingQuestions.isConstructionTypeApplicable
           ? Boolean(randomInt() % 2)
           : undefined;
 
         if (residentialConstructionTypeApplicable === undefined) {
-          onOnboardingPageNexusBusiness.getConstructionTypeItemsRadio().should("not.exist");
+          onOnboardingPageNexusBusiness
+            .getConstructionTypeItemsRadio()
+            .should("not.exist");
         } else {
           const constructionType = residentialConstructionTypeApplicable
             ? "RESIDENTIAL"
             : "COMMERCIAL_OR_INDUSTRIAL";
-          onOnboardingPageNexusBusiness.selectConstructionTypeRadio(constructionType);
-          onOnboardingPageNexusBusiness.getConstructionTypeItemsRadio(constructionType).should("be.checked");
+          onOnboardingPageNexusBusiness.selectConstructionTypeRadio(
+            constructionType
+          );
+          onOnboardingPageNexusBusiness
+            .getConstructionTypeItemsRadio(constructionType)
+            .should("be.checked");
           if (residentialConstructionTypeApplicable) {
-            onOnboardingPageNexusBusiness.getResidentialConstructionTypeRadio().should("exist");
+            onOnboardingPageNexusBusiness
+              .getResidentialConstructionTypeRadio()
+              .should("exist");
             const residentialConstructionChoices = [
               "NEW_HOME_CONSTRUCTION",
               "HOME_RENOVATIONS",
               "BOTH",
             ] as ResidentialConstructionType[];
             const randomAnswerIndex = Math.floor(Math.random() * 3);
-            const residentialConstructionTypeOption = residentialConstructionChoices[randomAnswerIndex];
+            const residentialConstructionTypeOption =
+              residentialConstructionChoices[randomAnswerIndex];
 
             onOnboardingPageNexusBusiness.selectResidentialConstructionTypeRadio(
               residentialConstructionTypeOption
             );
             onOnboardingPageNexusBusiness
-              .getResidentialConstructionTypeItemsRadio(residentialConstructionTypeOption)
+              .getResidentialConstructionTypeItemsRadio(
+                residentialConstructionTypeOption
+              )
               .should("be.checked");
           } else {
-            onOnboardingPageNexusBusiness.getResidentialConstructionTypeRadio().should("not.exist");
+            onOnboardingPageNexusBusiness
+              .getResidentialConstructionTypeRadio()
+              .should("not.exist");
           }
         }
 
@@ -140,14 +187,19 @@ describe("Onboarding for all industries when out of state nexus business [featur
           "BOTH",
         ] as PropertyLeaseType[];
 
-        const propertyLeaseTypeApplicable = industry.industryOnboardingQuestions.whatIsPropertyLeaseType
+        const propertyLeaseTypeApplicable = industry.industryOnboardingQuestions
+          .whatIsPropertyLeaseType
           ? propertyLeaseTypeChoices[Math.floor(Math.random() * 3)]
           : undefined;
 
         if (propertyLeaseTypeApplicable === undefined) {
-          onOnboardingPageStartingBusiness.getPropertyLeaseTypeRadio().should("not.exist");
+          onOnboardingPageStartingBusiness
+            .getPropertyLeaseTypeRadio()
+            .should("not.exist");
         } else {
-          onOnboardingPageStartingBusiness.selectLongTermPropertyLeaseTypeRadio(propertyLeaseTypeApplicable);
+          onOnboardingPageStartingBusiness.selectLongTermPropertyLeaseTypeRadio(
+            propertyLeaseTypeApplicable
+          );
           onOnboardingPageStartingBusiness
             .getPropertyLeaseTypeRadio(propertyLeaseTypeApplicable)
             .should("be.checked");
@@ -157,9 +209,13 @@ describe("Onboarding for all industries when out of state nexus business [featur
               .getHasThreeOrMoreRentalUnitsRadio(randomAnswer)
               .should("not.exist");
           } else {
-            onOnboardingPageStartingBusiness.getHasThreeOrMoreRentalUnitsRadio(randomAnswer).should("exist");
+            onOnboardingPageStartingBusiness
+              .getHasThreeOrMoreRentalUnitsRadio(randomAnswer)
+              .should("exist");
 
-            onOnboardingPageStartingBusiness.selectThreeOrMoreRentalUnitsRadio(randomAnswer);
+            onOnboardingPageStartingBusiness.selectThreeOrMoreRentalUnitsRadio(
+              randomAnswer
+            );
             onOnboardingPageStartingBusiness
               .getHasThreeOrMoreRentalUnitsRadio(randomAnswer)
               .should("be.checked");
@@ -184,12 +240,16 @@ describe("Onboarding for all industries when out of state nexus business [featur
     it("Onboarding for All Other Businesses", () => {
       cy.url().should("include", "onboarding?page=1");
       onOnboardingPageNexusBusiness.selectBusinessPersonaRadio("FOREIGN");
-      onOnboardingPageNexusBusiness.getBusinessPersonaRadio("FOREIGN").should("be.checked");
+      onOnboardingPageNexusBusiness
+        .getBusinessPersonaRadio("FOREIGN")
+        .should("be.checked");
       onOnboardingPageNexusBusiness.clickNext();
 
       cy.url().should("include", "onboarding?page=2");
       onOnboardingPageNexusBusiness.selectEmployeeOrContractorInNJCheckBox();
-      onOnboardingPageNexusBusiness.getEmployeeOrContractorInNJCheckbox().should("be.checked");
+      onOnboardingPageNexusBusiness
+        .getEmployeeOrContractorInNJCheckbox()
+        .should("be.checked");
       onOnboardingPageNexusBusiness.clickNext();
 
       cy.url().should("include", "onboarding?page=3");
@@ -209,13 +269,19 @@ describe("Onboarding for all industries when out of state nexus business [featur
 
       it("Onboarding for Out of State Remote Worker", () => {
         cy.url().should("include", "onboarding?page=1");
-        onOnboardingPageRemoteWorkerBusiness.selectBusinessPersonaRadio("FOREIGN");
-        onOnboardingPageRemoteWorkerBusiness.getBusinessPersonaRadio("FOREIGN").should("be.checked");
+        onOnboardingPageRemoteWorkerBusiness.selectBusinessPersonaRadio(
+          "FOREIGN"
+        );
+        onOnboardingPageRemoteWorkerBusiness
+          .getBusinessPersonaRadio("FOREIGN")
+          .should("be.checked");
         onOnboardingPageRemoteWorkerBusiness.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
         onOnboardingPageRemoteWorkerBusiness.selectEmployeesInNJCheckBox();
-        onOnboardingPageRemoteWorkerBusiness.getEmployeesInNJCheckbox().should("be.checked");
+        onOnboardingPageRemoteWorkerBusiness
+          .getEmployeesInNJCheckbox()
+          .should("be.checked");
         onOnboardingPageRemoteWorkerBusiness.clickShowMyGuide();
 
         cy.url().should("include", "dashboard");
@@ -231,13 +297,19 @@ describe("Onboarding for all industries when out of state nexus business [featur
 
       it("Onboarding for Out of State Remote Worker", () => {
         cy.url().should("include", "onboarding?page=1");
-        onOnboardingPageRemoteWorkerBusiness.selectBusinessPersonaRadio("FOREIGN");
-        onOnboardingPageRemoteWorkerBusiness.getBusinessPersonaRadio("FOREIGN").should("be.checked");
+        onOnboardingPageRemoteWorkerBusiness.selectBusinessPersonaRadio(
+          "FOREIGN"
+        );
+        onOnboardingPageRemoteWorkerBusiness
+          .getBusinessPersonaRadio("FOREIGN")
+          .should("be.checked");
         onOnboardingPageRemoteWorkerBusiness.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
         onOnboardingPageRemoteWorkerBusiness.selectEmployeesInNJCheckBox();
-        onOnboardingPageRemoteWorkerBusiness.getEmployeesInNJCheckbox().should("be.checked");
+        onOnboardingPageRemoteWorkerBusiness
+          .getEmployeesInNJCheckbox()
+          .should("be.checked");
         onOnboardingPageRemoteWorkerBusiness.clickShowMyGuide();
 
         cy.url().should("include", "dashboard");
@@ -254,13 +326,19 @@ describe("Onboarding for all industries when out of state nexus business [featur
 
       it("Onboarding for Out of State Remote Seller Worker", () => {
         cy.url().should("include", "onboarding?page=1");
-        onOnboardingPageRemoteSellerBusiness.selectBusinessPersonaRadio("FOREIGN");
-        onOnboardingPageRemoteSellerBusiness.getBusinessPersonaRadio("FOREIGN").should("be.checked");
+        onOnboardingPageRemoteSellerBusiness.selectBusinessPersonaRadio(
+          "FOREIGN"
+        );
+        onOnboardingPageRemoteSellerBusiness
+          .getBusinessPersonaRadio("FOREIGN")
+          .should("be.checked");
         onOnboardingPageRemoteSellerBusiness.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
         onOnboardingPageRemoteSellerBusiness.selectRevenueInNJCheckBox();
-        onOnboardingPageRemoteSellerBusiness.getRevenueInNJCheckbox().should("be.checked");
+        onOnboardingPageRemoteSellerBusiness
+          .getRevenueInNJCheckbox()
+          .should("be.checked");
         onOnboardingPageRemoteSellerBusiness.clickShowMyGuide();
 
         cy.url().should("include", "dashboard");
@@ -276,13 +354,19 @@ describe("Onboarding for all industries when out of state nexus business [featur
 
       it("Onboarding for Out of State Remote Seller Worker", () => {
         cy.url().should("include", "onboarding?page=1");
-        onOnboardingPageRemoteWorkerBusiness.selectBusinessPersonaRadio("FOREIGN");
-        onOnboardingPageRemoteWorkerBusiness.getBusinessPersonaRadio("FOREIGN").should("be.checked");
+        onOnboardingPageRemoteWorkerBusiness.selectBusinessPersonaRadio(
+          "FOREIGN"
+        );
+        onOnboardingPageRemoteWorkerBusiness
+          .getBusinessPersonaRadio("FOREIGN")
+          .should("be.checked");
         onOnboardingPageRemoteWorkerBusiness.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
         onOnboardingPageRemoteWorkerBusiness.selectEmployeesInNJCheckBox();
-        onOnboardingPageRemoteWorkerBusiness.getEmployeesInNJCheckbox().should("be.checked");
+        onOnboardingPageRemoteWorkerBusiness
+          .getEmployeesInNJCheckbox()
+          .should("be.checked");
         onOnboardingPageRemoteWorkerBusiness.clickShowMyGuide();
 
         cy.url().should("include", "dashboard");
@@ -300,7 +384,9 @@ describe("Onboarding for all industries when out of state nexus business [featur
       it("Onboarding for Out of State - None of the Above", () => {
         cy.url().should("include", "onboarding?page=1");
         onOnboardingPageNoneOfTheAbove.selectBusinessPersonaRadio("FOREIGN");
-        onOnboardingPageNoneOfTheAbove.getBusinessPersonaRadio("FOREIGN").should("be.checked");
+        onOnboardingPageNoneOfTheAbove
+          .getBusinessPersonaRadio("FOREIGN")
+          .should("be.checked");
         onOnboardingPageNoneOfTheAbove.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
@@ -321,7 +407,9 @@ describe("Onboarding for all industries when out of state nexus business [featur
       it("Onboarding for Out of State - None of the Above", () => {
         cy.url().should("include", "onboarding?page=1");
         onOnboardingPageNoneOfTheAbove.selectBusinessPersonaRadio("FOREIGN");
-        onOnboardingPageNoneOfTheAbove.getBusinessPersonaRadio("FOREIGN").should("be.checked");
+        onOnboardingPageNoneOfTheAbove
+          .getBusinessPersonaRadio("FOREIGN")
+          .should("be.checked");
         onOnboardingPageNoneOfTheAbove.clickNext();
 
         cy.url().should("include", "onboarding?page=2");

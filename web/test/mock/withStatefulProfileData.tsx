@@ -1,4 +1,7 @@
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { getFlow } from "@/lib/utils/helpers";
@@ -18,10 +21,18 @@ export const profileDataWasNotUpdated = helpers.dataWasNotUpdated;
 
 export const profileDataUpdatedNTimes = helpers.dataUpdatedNTimes;
 
-export const WithStatefulDataFieldFormContext = ({ children }: { children: ReactNode }): ReactElement => {
-  const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
+export const WithStatefulDataFieldFormContext = ({
+  children,
+}: {
+  children: ReactNode;
+}): ReactElement => {
+  const { state: formContextState } = useFormContextHelper(
+    createDataFormErrorMap()
+  );
   return (
-    <DataFormErrorMapContext.Provider value={formContextState}>{children}</DataFormErrorMapContext.Provider>
+    <DataFormErrorMapContext.Provider value={formContextState}>
+      {children}
+    </DataFormErrorMapContext.Provider>
   );
 };
 

@@ -19,14 +19,22 @@ const CannabisEligibilityModalPreview = (props: PreviewProps): ReactElement => {
       <button className="margin-2" onClick={(): void => setModalOpen(true)}>
         Open Modal
       </button>
-      <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+      <div
+        className="cms"
+        ref={ref}
+        style={{ margin: 40, pointerEvents: "none" }}
+      >
         <ModalTwoButton
           isOpen={modalOpen}
           close={(): void => setModalOpen(false)}
           title={config.cannabisEligibilityModal.eligibleModalTitle}
-          primaryButtonText={config.cannabisEligibilityModal.eligibleModalContinueButton}
+          primaryButtonText={
+            config.cannabisEligibilityModal.eligibleModalContinueButton
+          }
           primaryButtonOnClick={(): void => setModalOpen(false)}
-          secondaryButtonText={config.cannabisEligibilityModal.eligibleModalCancelButton}
+          secondaryButtonText={
+            config.cannabisEligibilityModal.eligibleModalCancelButton
+          }
         >
           <Content>{config.cannabisEligibilityModal.eligibleModalBody}</Content>
         </ModalTwoButton>

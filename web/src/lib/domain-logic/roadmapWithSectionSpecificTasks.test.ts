@@ -11,11 +11,20 @@ describe("roadmapWithSectionSpecificTasks", () => {
     generateStep({ section: undefined, stepNumber: 6 }),
   ];
 
-  const planTasks = [generateTask({ stepNumber: 1 }), generateTask({ stepNumber: 2 })];
+  const planTasks = [
+    generateTask({ stepNumber: 1 }),
+    generateTask({ stepNumber: 2 }),
+  ];
 
-  const startTasks = [generateTask({ stepNumber: 3 }), generateTask({ stepNumber: 4 })];
+  const startTasks = [
+    generateTask({ stepNumber: 3 }),
+    generateTask({ stepNumber: 4 }),
+  ];
 
-  const otherTasks = [generateTask({ stepNumber: 5 }), generateTask({ stepNumber: 6 })];
+  const otherTasks = [
+    generateTask({ stepNumber: 5 }),
+    generateTask({ stepNumber: 6 }),
+  ];
 
   it("returns roadmap with tasks in plan section", () => {
     const roadmap = {

@@ -1,6 +1,9 @@
 /* eslint-disable unicorn/filename-case */
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
-import { PrimaryButton, PrimaryButtonColors } from "@/components/njwds-extended/PrimaryButton";
+import {
+  PrimaryButton,
+  PrimaryButtonColors,
+} from "@/components/njwds-extended/PrimaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -22,7 +25,10 @@ export const SingleCtaLink = (props: Props): ReactElement => {
 
   return (
     <CtaContainer noBackgroundColor={props?.noBackgroundColor || false}>
-      <ActionBarLayout disableReverseOrderInMobile alignLeft={props?.alignLeft || false}>
+      <ActionBarLayout
+        disableReverseOrderInMobile
+        alignLeft={props?.alignLeft || false}
+      >
         <PrimaryButton
           isColor={props?.buttonColor || "primary"}
           isRightMarginRemoved={true}

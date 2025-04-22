@@ -17,7 +17,12 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "Internal Notes",
+          name: "notesMd",
+          widget: "markdown",
+          required: false,
+        }
       - {
           label: "Name",
           name: "name",
@@ -30,8 +35,18 @@ collections:
           widget: "string",
           hint: "This is the name displayed internally in CMS list",
         }
-      - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
-      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
+      - {
+          label: "Url Slug",
+          name: "urlSlug",
+          widget: "no-space",
+          required: true,
+        }
+      - {
+          label: "Id",
+          name: "id",
+          widget: "write-once-read-only-no-space",
+          required: true,
+        }
       - {
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
@@ -66,7 +81,12 @@ collections:
           widget: "markdown",
           hint: "Eligibility Requirements for Business, Benefit to Participating Businesses",
         }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - {
+          label: "Call To Action Link",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
       - {
           label: "Call To Action Text",
           name: "callToActionText",
@@ -91,11 +111,19 @@ collections:
       - label: "Program Frequency"
         name: "programFrequency"
         widget: "select"
-        options: ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"]
+        options:
+          ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"]
       - label: "Status"
         name: "status"
         widget: "select"
-        options: ["rolling application", "opening soon", "deadline", "first come, first serve", "closed"]
+        options:
+          [
+            "rolling application",
+            "opening soon",
+            "deadline",
+            "first come, first serve",
+            "closed",
+          ]
       - label: "In-State/Out-of-State"
         name: "programPurpose"
         widget: "select"
@@ -124,7 +152,12 @@ collections:
         widget: "select"
         options: ["early-stage", "operating", "both"]
         hint: "Early stage business = not yet open or open less than 2 years; Established business = open 2 years or more"
-      - { label: "Employees Required", name: "employeesRequired", widget: "select", options: ["yes", "n/a"] }
+      - {
+          label: "Employees Required",
+          name: "employeesRequired",
+          widget: "select",
+          options: ["yes", "n/a"],
+        }
       - label: "Home Based"
         name: "homeBased"
         widget: "select"
@@ -145,9 +178,18 @@ collections:
           - { label: "Minority Owned", value: "minority-owned" }
           - { label: "Veteran Owned", value: "veteran-owned" }
           - { label: "Disabled Veteran Owned", value: "disabled-veteran" }
-          - { label: "Small Business Enterprise", value: "small-business-enterprise" }
-          - { label: "Disadvantaged Business Enterprise", value: "disadvantaged-business-enterprise" }
-          - { label: "Emerging Small Business Enterprise", value: "emerging-small-business-enterprise" }
+          - {
+              label: "Small Business Enterprise",
+              value: "small-business-enterprise",
+            }
+          - {
+              label: "Disadvantaged Business Enterprise",
+              value: "disadvantaged-business-enterprise",
+            }
+          - {
+              label: "Emerging Small Business Enterprise",
+              value: "emerging-small-business-enterprise",
+            }
       - label: "Preference for Opportunity Zone"
         name: "preferenceForOpportunityZone"
         widget: "select"
@@ -210,7 +252,8 @@ collections:
         widget: "select"
         required: false
         multiple: true
-        options: ["Less than $50,000", "$50,000 to $500,000", "More than $500,000"]
+        options:
+          ["Less than $50,000", "$50,000 to $500,000", "More than $500,000"]
       - label: "Min Employees Required"
         name: "minEmployeesRequired"
         required: false
@@ -235,7 +278,12 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "Internal Notes",
+          name: "notesMd",
+          widget: "markdown",
+          required: false,
+        }
       - {
           label: "Name",
           name: "name",
@@ -248,8 +296,18 @@ collections:
           widget: "string",
           hint: "This is the name displayed internally in CMS list",
         }
-      - { label: "Url Slug", name: "urlSlug", widget: "no-space", required: true }
-      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
+      - {
+          label: "Url Slug",
+          name: "urlSlug",
+          widget: "no-space",
+          required: true,
+        }
+      - {
+          label: "Id",
+          name: "id",
+          widget: "write-once-read-only-no-space",
+          required: true,
+        }
       - {
           label: "Description for card in For You",
           name: "sidebarCardBodyText",
@@ -284,7 +342,12 @@ collections:
           widget: "markdown",
           hint: "Eligibility Requirements for Business, Benefit to Participating Businesses",
         }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - {
+          label: "Call To Action Link",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
       - {
           label: "Call To Action Text",
           name: "callToActionText",
@@ -308,11 +371,19 @@ collections:
       - label: "Program Frequency"
         name: "programFrequency"
         widget: "select"
-        options: ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"]
+        options:
+          ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"]
       - label: "Status"
         name: "status"
         widget: "select"
-        options: ["rolling application", "opening soon", "deadline", "first come, first serve", "closed"]
+        options:
+          [
+            "rolling application",
+            "opening soon",
+            "deadline",
+            "first come, first serve",
+            "closed",
+          ]
       - label: "In-State/Out-of-State"
         name: "programPurpose"
         widget: "select"
@@ -341,7 +412,12 @@ collections:
         widget: "select"
         options: ["early-stage", "operating", "both"]
         hint: "Early stage business = not yet open or open less than 2 years; Established business = open 2 years or more"
-      - { label: "Employees Required", name: "employeesRequired", widget: "select", options: ["yes", "n/a"] }
+      - {
+          label: "Employees Required",
+          name: "employeesRequired",
+          widget: "select",
+          options: ["yes", "n/a"],
+        }
       - label: "Home Based"
         name: "homeBased"
         widget: "select"
@@ -362,9 +438,18 @@ collections:
           - { label: "Minority Owned", value: "minority-owned" }
           - { label: "Veteran Owned", value: "veteran-owned" }
           - { label: "Disabled Veteran Owned", value: "disabled-veteran" }
-          - { label: "Small Business Enterprise", value: "small-business-enterprise" }
-          - { label: "Disadvantaged Business Enterprise", value: "disadvantaged-business-enterprise" }
-          - { label: "Emerging Small Business Enterprise", value: "emerging-small-business-enterprise" }
+          - {
+              label: "Small Business Enterprise",
+              value: "small-business-enterprise",
+            }
+          - {
+              label: "Disadvantaged Business Enterprise",
+              value: "disadvantaged-business-enterprise",
+            }
+          - {
+              label: "Emerging Small Business Enterprise",
+              value: "emerging-small-business-enterprise",
+            }
       - label: "Preference for Opportunity Zone"
         name: "preferenceForOpportunityZone"
         widget: "select"

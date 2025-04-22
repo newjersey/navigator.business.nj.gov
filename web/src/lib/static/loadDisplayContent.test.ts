@@ -1,6 +1,9 @@
 import { mockReadDirReturn } from "@/lib/static/mockHelpers";
 import fs from "fs";
-import { loadRoadmapSideBarDisplayContent, loadTasksDisplayContent } from "./loadDisplayContent";
+import {
+  loadRoadmapSideBarDisplayContent,
+  loadTasksDisplayContent,
+} from "./loadDisplayContent";
 
 jest.mock("fs");
 jest.mock("process", () => ({
@@ -32,7 +35,9 @@ describe("loadDisplayContent", () => {
       mockReadDirReturn({ value: ["welcome.md"], mockedFs });
       mockedFs.readFileSync.mockReturnValue(welcomeCard);
 
-      expect(loadRoadmapSideBarDisplayContent().sidebarDisplayContent["welcome-id"]).toEqual({
+      expect(
+        loadRoadmapSideBarDisplayContent().sidebarDisplayContent["welcome-id"]
+      ).toEqual({
         id: "welcome-id",
         header: "Welcome!",
         imgPath: "/img/congratulations-purple.svg",
@@ -49,9 +54,9 @@ describe("loadDisplayContent", () => {
     it("returns formationDbaContent from markdown", () => {
       const introParagraph = "### I am a header\n\nI am a description";
       mockedFs.readFileSync.mockReturnValue(introParagraph);
-      expect(loadTasksDisplayContent().formationDbaContent.Authorize.contentMd).toEqual(
-        "### I am a header\n\nI am a description"
-      );
+      expect(
+        loadTasksDisplayContent().formationDbaContent.Authorize.contentMd
+      ).toEqual("### I am a header\n\nI am a description");
     });
   });
 });

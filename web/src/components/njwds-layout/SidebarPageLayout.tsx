@@ -34,7 +34,9 @@ export const SidebarPageLayout = ({
         <div className="grid-container-widescreen desktop:padding-x-7">
           {isLargeScreen && (
             <>
-              <BackButtonForLayout backButtonText={Config.taskDefaults.backToRoadmapText} />
+              <BackButtonForLayout
+                backButtonText={Config.taskDefaults.backToRoadmapText}
+              />
               {titleOverColumns}
             </>
           )}
@@ -43,16 +45,27 @@ export const SidebarPageLayout = ({
             {isLargeScreen && (
               <nav
                 aria-label="Secondary"
-                className={`${nonWrappingLeftColumn ? "" : "desktop:grid-col-3"}  order-first`}
+                className={`${
+                  nonWrappingLeftColumn ? "" : "desktop:grid-col-3"
+                }  order-first`}
               >
-                {divider && <hr className="margin-bottom-1 margin-top-0" aria-hidden={true} />}
+                {divider && (
+                  <hr
+                    className="margin-bottom-1 margin-top-0"
+                    aria-hidden={true}
+                  />
+                )}
                 {navChildren}
               </nav>
             )}
-            <div className={nonWrappingLeftColumn ? "fg1" : "desktop:grid-col-9"}>
+            <div
+              className={nonWrappingLeftColumn ? "fg1" : "desktop:grid-col-9"}
+            >
               {!isLargeScreen && (
                 <div>
-                  <BackButtonForLayout backButtonText={Config.taskDefaults.backToRoadmapText} />
+                  <BackButtonForLayout
+                    backButtonText={Config.taskDefaults.backToRoadmapText}
+                  />
                   {titleOverColumns}
                   {stackNav && navChildren}
                 </div>

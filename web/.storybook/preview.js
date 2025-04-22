@@ -15,4 +15,6 @@ export const parameters = {
   },
 };
 
-export const decorators = [(Story) => <ThemeProvider theme={muiTheme}>{Story()}</ThemeProvider>];
+export const decorators = [
+  (Story) => <ThemeProvider theme={muiTheme}>{Story()}</ThemeProvider>,
+];

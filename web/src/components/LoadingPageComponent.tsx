@@ -6,7 +6,10 @@ import { ReactElement } from "react";
 export const LoadingPageComponent = (): ReactElement => {
   return (
     <PageSkeleton showNavBar logoOnly="NAVIGATOR_LOGO">
-      <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
+      <main
+        className="usa-section padding-top-0 desktop:padding-top-8"
+        id="main"
+      >
         <SingleColumnContainer>
           <PageCircularIndicator />
         </SingleColumnContainer>

@@ -1,4 +1,7 @@
-import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
+import {
+  GenericTextField,
+  GenericTextFieldProps,
+} from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -6,7 +9,11 @@ import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { FormationTextField } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
 
-export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName" | "error" | "inputWidth"> {
+export interface Props
+  extends Omit<
+    GenericTextFieldProps,
+    "value" | "fieldName" | "error" | "inputWidth"
+  > {
   fieldName: FormationTextField;
   label?: string;
   secondaryLabel?: string;
@@ -14,13 +21,21 @@ export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"
   readOnly?: boolean;
 }
 
-export const BusinessFormationTextField = ({ className, ...props }: Props): ReactElement => {
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+export const BusinessFormationTextField = ({
+  className,
+  ...props
+}: Props): ReactElement => {
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(
+    BusinessFormationContext
+  );
   const { doesFieldHaveError } = useFormationErrors();
 
   const handleChange = (value: string): void => {
     props.handleChange && props.handleChange(value);
-    setFormationFormData((formationFormData) => ({ ...formationFormData, [props.fieldName]: value }));
+    setFormationFormData((formationFormData) => ({
+      ...formationFormData,
+      [props.fieldName]: value,
+    }));
   };
 
   const onValidation = (): void => {
@@ -29,13 +44,19 @@ export const BusinessFormationTextField = ({ className, ...props }: Props): Reac
 
   const hasError = doesFieldHaveError(props.fieldName);
   return (
-    <WithErrorBar className={className ?? ""} hasError={hasError} type={props.errorBarType}>
+    <WithErrorBar
+      className={className ?? ""}
+      hasError={hasError}
+      type={props.errorBarType}
+    >
       {props.label && (
         <strong>
           <ModifiedContent>{props.label}</ModifiedContent>
         </strong>
       )}
-      {props.secondaryLabel && <span className="margin-left-1">{props.secondaryLabel}</span>}
+      {props.secondaryLabel && (
+        <span className="margin-left-1">{props.secondaryLabel}</span>
+      )}
       <GenericTextField
         inputWidth={"full"}
         value={state.formationFormData[props.fieldName]}

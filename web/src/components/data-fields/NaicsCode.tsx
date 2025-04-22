@@ -18,27 +18,31 @@ export const NaicsCode = (): ReactElement => {
   const { Config } = useConfig();
   const { roadmap } = useRoadmap();
 
-  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["naicsCode"]["default"] = getProfileConfig(
-    {
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["naicsCode"]["default"] =
+    getProfileConfig({
       config: Config,
       persona: state.flow,
       fieldName: "naicsCode",
-    }
-  );
+    });
 
   const naicsTaskUrl = useMemo(() => {
-    const urlSlug = getTaskFromRoadmap(roadmap, "determine-naics-code")?.urlSlug ?? "";
+    const urlSlug =
+      getTaskFromRoadmap(roadmap, "determine-naics-code")?.urlSlug ?? "";
     return `/tasks/${urlSlug}`;
   }, [roadmap]);
 
   const shouldLockFieldForStartingAndNexus = (): boolean => {
-    return state.profileData.naicsCode !== "" && business?.taxFilingData.state === "SUCCESS";
+    return (
+      state.profileData.naicsCode !== "" &&
+      business?.taxFilingData.state === "SUCCESS"
+    );
   };
 
   const shouldLockFieldForOwning = (): boolean => {
     return (
       state.profileData.naicsCode !== "" &&
-      state.profileData.operatingPhase === OperatingPhaseId.UP_AND_RUNNING_OWNING
+      state.profileData.operatingPhase ===
+        OperatingPhaseId.UP_AND_RUNNING_OWNING
     );
   };
 
@@ -47,7 +51,9 @@ export const NaicsCode = (): ReactElement => {
   };
 
   const getAddOrEdit = (): string => {
-    return state.profileData.naicsCode ? contentFromConfig.editText : contentFromConfig.addText;
+    return state.profileData.naicsCode
+      ? contentFromConfig.editText
+      : contentFromConfig.addText;
   };
 
   const ariaLabel = `${getAddOrEdit()} ${contentFromConfig.header}`;
@@ -68,14 +74,20 @@ export const NaicsCode = (): ReactElement => {
             </ArrowTooltip>
           </div>
         ) : (
-          <a className="text-accent-cool-darker margin-left-2" href={naicsTaskUrl} aria-label={ariaLabel}>
+          <a
+            className="text-accent-cool-darker margin-left-2"
+            href={naicsTaskUrl}
+            aria-label={ariaLabel}
+          >
             {getAddOrEdit()}
           </a>
         )}
       </div>
       {state.profileData.naicsCode && (
         <>
-          <span className="text-bold margin-right-">{state.profileData.naicsCode}</span>
+          <span className="text-bold margin-right-">
+            {state.profileData.naicsCode}
+          </span>
           {" - "}
           <span className="margin-left-">
             {lookupNaicsCode(state.profileData.naicsCode)?.SixDigitDescription}

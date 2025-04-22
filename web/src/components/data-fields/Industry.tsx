@@ -7,7 +7,10 @@ import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import { EssentialQuestion, EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
+import {
+  EssentialQuestion,
+  EssentialQuestions,
+} from "@/lib/domain-logic/essentialQuestions";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { FormContextFieldProps } from "@/lib/types/types";
 import { ReactElement, ReactNode, useContext } from "react";
@@ -20,11 +23,12 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
   const { state } = useContext(ProfileDataContext);
   const fieldName = "industryId";
 
-  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
-    fieldName,
-    DataFormErrorMapContext,
-    props.errorTypes
-  );
+  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } =
+    useFormContextFieldHelpers(
+      fieldName,
+      DataFormErrorMapContext,
+      props.errorTypes
+    );
 
   const { Config } = useConfig();
 
@@ -35,11 +39,14 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
       fieldName: fieldName,
     });
 
-  const isValid = (value: string | undefined): boolean => !!value && value.length > 0;
+  const isValid = (value: string | undefined): boolean =>
+    !!value && value.length > 0;
 
   RegisterForOnSubmit(() => isValid(state.profileData.industryId));
 
-  const shouldEssentialQuestionAppearBasedOnProfileData = (essentialQuestion: EssentialQuestion): boolean => {
+  const shouldEssentialQuestionAppearBasedOnProfileData = (
+    essentialQuestion: EssentialQuestion
+  ): boolean => {
     switch (essentialQuestion.fieldName) {
       case "residentialConstructionType":
         return (
@@ -58,10 +65,13 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
     }
   };
 
-  const getEssentialQuestions = (industryId: string | undefined): ReactNode[] => {
+  const getEssentialQuestions = (
+    industryId: string | undefined
+  ): ReactNode[] => {
     return EssentialQuestions.filter((i) => {
       return (
-        i.isQuestionApplicableToIndustryId(industryId) && shouldEssentialQuestionAppearBasedOnProfileData(i)
+        i.isQuestionApplicableToIndustryId(industryId) &&
+        shouldEssentialQuestionAppearBasedOnProfileData(i)
       );
     }).map((obj) => (
       <EssentialQuestionField<T>

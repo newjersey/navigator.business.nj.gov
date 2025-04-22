@@ -28,16 +28,24 @@ export const FilingsCalendarGrid = (props: Props): ReactElement => {
 
   return (
     <div>
-      {sortFilterCalendarEventsWithinAYear(props.business.taxFilingData.filings, props.activeYear).length ===
-        0 && (
+      {sortFilterCalendarEventsWithinAYear(
+        props.business.taxFilingData.filings,
+        props.activeYear
+      ).length === 0 && (
         <Content className="text-base margin-bottom-3">
           {Config.dashboardDefaults.calendarEmptyDescriptionMarkdown}
         </Content>
       )}
-      <table className="filingsCalendarTable" data-testid="filings-calendar-as-table">
+      <table
+        className="filingsCalendarTable"
+        data-testid="filings-calendar-as-table"
+      >
         <tbody>
           {rowIndices.map((rowIndex) => {
-            const monthIndicesForRow = monthIndices.slice(rowIndex, rowIndex + monthsPerRow);
+            const monthIndicesForRow = monthIndices.slice(
+              rowIndex,
+              rowIndex + monthsPerRow
+            );
             return (
               <tr key={rowIndex}>
                 {monthIndicesForRow.map((month) => {

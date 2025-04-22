@@ -38,12 +38,17 @@ export const ReviewBillingServices = (): ReactElement => {
   };
 
   return (
-    <ReviewSubSection header={Config.formation.fields.paymentType.reviewStepServicesHeader}>
+    <ReviewSubSection
+      header={Config.formation.fields.paymentType.reviewStepServicesHeader}
+    >
       <ReviewLineItem
         label={Config.formation.fields.paymentType.reviewStepsServicesSelected}
         value={getDocumentsList()}
       />
-      <ReviewLineItem label={Config.formation.fields.paymentType.label} value={getPaymentTypeLabel()} />
+      <ReviewLineItem
+        label={Config.formation.fields.paymentType.label}
+        value={getPaymentTypeLabel()}
+      />
     </ReviewSubSection>
   );
 };

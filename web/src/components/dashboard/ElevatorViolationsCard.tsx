@@ -17,14 +17,19 @@ export const ElevatorViolationsCard = (): ReactElement => {
 
   return (
     <div className="radius-md padding-2 border-2px border-error padding-2">
-      <ActionBarLayout disableReverseOrderInMobile stackOnLeft={violationMessage}>
+      <ActionBarLayout
+        disableReverseOrderInMobile
+        stackOnLeft={violationMessage}
+      >
         <div className="flex-shrink-0 flex-align-self-center">
           <PrimaryButton
             isColor="error"
             isRightMarginRemoved
             onClick={() => {
               analytics.event.task_elevator_registration.click.view_my_violation_note_button_click();
-              openInNewTab(config.elevatorViolationsCard.violationNoticeCTALink);
+              openInNewTab(
+                config.elevatorViolationsCard.violationNoticeCTALink
+              );
             }}
           >
             <span>{config.elevatorViolationsCard.violationNoticeCTA}</span>

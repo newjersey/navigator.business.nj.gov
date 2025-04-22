@@ -1,9 +1,18 @@
-import React, { forwardRef, ReactElement, useEffect, useRef, useState } from "react";
+import React, {
+  forwardRef,
+  ReactElement,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 interface Props {
   className?: string;
   children: React.ReactNode;
-  onClick?: (() => void) | ((event: React.MouseEvent) => Promise<void>) | ((event: React.MouseEvent) => void);
+  onClick?:
+    | (() => void)
+    | ((event: React.MouseEvent) => Promise<void>)
+    | ((event: React.MouseEvent) => void);
   dataTestid?: string;
   isUnderline?: boolean;
   isSmallerText?: boolean;
@@ -40,7 +49,15 @@ export const UnStyledButton = forwardRef(
     const intercomButton = props.isIntercomEnabled ? "intercom-button" : "";
     const isWidthFull = props.isWidthFull ? "width-100-override" : "";
 
-    const className = [style, props.className, underline, smallText, textBold, intercomButton, isWidthFull]
+    const className = [
+      style,
+      props.className,
+      underline,
+      smallText,
+      textBold,
+      intercomButton,
+      isWidthFull,
+    ]
       .map((i) => {
         return i?.trim();
       })

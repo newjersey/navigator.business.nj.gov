@@ -20,7 +20,9 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
     router && router.push(ROUTES.dashboard);
   };
 
-  const publicName = props.nextSectionType ? Config.sectionHeaders[props.nextSectionType] : "";
+  const publicName = props.nextSectionType
+    ? Config.sectionHeaders[props.nextSectionType]
+    : "";
   const hideLink = !props.nextSectionType;
 
   return (
@@ -54,9 +56,16 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
           <img
             src={`/img/congratulations.svg`}
             alt="section"
-            style={{ marginTop: "33px", marginBottom: "33px", width: "98px", height: "99px" }}
+            style={{
+              marginTop: "33px",
+              marginBottom: "33px",
+              width: "98px",
+              height: "99px",
+            }}
           />
-          <div style={{ fontWeight: 700, fontSize: "26px", lineHeight: "30.55px" }}>
+          <div
+            style={{ fontWeight: 700, fontSize: "26px", lineHeight: "30.55px" }}
+          >
             {Config.dashboardDefaults.congratulatoryModalTitle}
           </div>
           <div
@@ -87,7 +96,8 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
                     cursor: "pointer",
                   }}
                 >
-                  {publicName} {Config.dashboardDefaults.congratulatoryModalLinkText}
+                  {publicName}{" "}
+                  {Config.dashboardDefaults.congratulatoryModalLinkText}
                 </span>
               </>
             )}

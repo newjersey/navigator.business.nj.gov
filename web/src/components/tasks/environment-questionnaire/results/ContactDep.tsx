@@ -26,16 +26,23 @@ export const ContactDep = (props: Props): ReactElement => {
           <div className="flex flex-align-center flex-wrap">
             <Icon className={"margin-right-1"} iconName={"phone"} />
             {contactConfig.contact.phoneInfo && (
-              <span className="margin-right-05">{contactConfig.contact.phoneInfo}</span>
+              <span className="margin-right-05">
+                {contactConfig.contact.phoneInfo}
+              </span>
             )}
-            <a className={"text-base-darkest"} href={`tel:${contactConfig.contact.phone}`}>
+            <a
+              className={"text-base-darkest"}
+              href={`tel:${contactConfig.contact.phone}`}
+            >
               {contactConfig.contact.phone}
             </a>
           </div>
           {contactConfig.contact.form && (
             <div className="flex flex-align-center margin-top-05">
               <Icon className={"margin-right-1"} iconName={"language"} />
-              <Content className={"text-underline text-base-darkest"}>{contactConfig.contact.form}</Content>
+              <Content className={"text-underline text-base-darkest"}>
+                {contactConfig.contact.form}
+              </Content>
             </div>
           )}
           {contactConfig.contact.email && (

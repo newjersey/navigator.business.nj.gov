@@ -8,19 +8,31 @@ import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
 import { generateRoadmap } from "@/test/factories";
 import { withAuth, withUserDataError } from "@/test/helpers/helpers-renderers";
 import { generateUseUserDataResponse } from "@/test/mock/mockUseUserData";
-import { BusinessUser, generateUser, generateUserData } from "@businessnjgovnavigator/shared/";
+import {
+  BusinessUser,
+  generateUser,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, render, waitFor } from "@testing-library/react";
 import { SWRConfig } from "swr";
 
-jest.mock("@/lib/utils/analytics-helpers", () => ({ setAnalyticsDimensions: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+jest.mock("@/lib/utils/analytics-helpers", () => ({
+  setAnalyticsDimensions: jest.fn(),
+}));
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({
+  buildUserRoadmap: jest.fn(),
+}));
 jest.mock("@/lib/api-client/apiClient", () => ({
   getUserData: jest.fn(),
   postUserData: jest.fn(),
 }));
-const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
-const mockAnalyticsHelpers = analyticsHelpers as jest.Mocked<typeof analyticsHelpers>;
+const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<
+  typeof buildUserRoadmap
+>;
+const mockAnalyticsHelpers = analyticsHelpers as jest.Mocked<
+  typeof analyticsHelpers
+>;
 const mockApi = api as jest.Mocked<typeof api>;
 
 const userDataStorage = UserDataStorageFactory();
@@ -47,9 +59,11 @@ describe("useUserData", () => {
 
     function TestComponent(): null {
       Object.assign(returnVal, useUserData());
-      returnVal.createUpdateQueue(returnVal.userData as UserData).then((createdQueue) => {
-        returnVal.updateQueue = createdQueue;
-      });
+      returnVal
+        .createUpdateQueue(returnVal.userData as UserData)
+        .then((createdQueue) => {
+          returnVal.updateQueue = createdQueue;
+        });
       return null;
     }
 
@@ -142,7 +156,9 @@ describe("useUserData", () => {
       });
 
       await act(() => {
-        return updateQueue?.queueProfileData({ businessName: "some new name" }).update();
+        return updateQueue
+          ?.queueProfileData({ businessName: "some new name" })
+          .update();
       });
 
       const expectedProfileData = {
@@ -151,10 +167,14 @@ describe("useUserData", () => {
       };
 
       await waitFor(() => {
-        return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith(expectedProfileData);
+        return expect(
+          mockBuildUserRoadmap.buildUserRoadmap
+        ).toHaveBeenCalledWith(expectedProfileData);
       });
       expect(mockSetRoadmap).toHaveBeenCalledWith(returnedRoadmap);
-      expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith(expectedProfileData);
+      expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith(
+        expectedProfileData
+      );
     });
 
     it("updates data from api when calling refresh", async () => {
@@ -216,7 +236,10 @@ describe("useUserData", () => {
 
     it("saves new user data to cache when calling update", async () => {
       const currentUser = generateUser({});
-      const { updateQueue } = await setupHook(currentUser, IsAuthenticated.FALSE);
+      const { updateQueue } = await setupHook(
+        currentUser,
+        IsAuthenticated.FALSE
+      );
       expect(userDataStorage.getCurrentUserData()).toBeUndefined();
       const currentUserData = generateUserData({ user: currentUser });
       await act(() => {

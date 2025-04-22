@@ -17,18 +17,27 @@ describe("<BusinessStructurePrompt />", () => {
     jest.resetAllMocks();
     useMockRouter({});
     useMockRoadmap({
-      tasks: [generateTask({ id: businessStructureTaskId, urlSlug: "business-structure-url-slug" })],
+      tasks: [
+        generateTask({
+          id: businessStructureTaskId,
+          urlSlug: "business-structure-url-slug",
+        }),
+      ],
     });
   });
 
   it("hides business structure prompt button when isCTAButtonHidden is true", () => {
     render(<BusinessStructurePrompt isCTAButtonHidden={true} />);
-    expect(screen.queryByTestId("business-structure-prompt-button")).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("business-structure-prompt-button")
+    ).not.toBeInTheDocument();
   });
 
   it("shows business structure prompt button when isCTAButtonHidden is false or not included", () => {
     render(<BusinessStructurePrompt />);
-    expect(screen.getByTestId("business-structure-prompt-button")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("business-structure-prompt-button")
+    ).toBeInTheDocument();
   });
 
   it("renders general content from config when on any task/url", () => {
@@ -36,8 +45,12 @@ describe("<BusinessStructurePrompt />", () => {
       asPath: "/tasks/other-slug",
     });
     render(<BusinessStructurePrompt />);
-    expect(screen.getByTestId("content-when-not-on-business-structure-task")).toBeInTheDocument();
-    expect(screen.queryByTestId("content-when-on-business-structure-task")).not.toBeInTheDocument();
+    expect(
+      screen.getByTestId("content-when-not-on-business-structure-task")
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByTestId("content-when-on-business-structure-task")
+    ).not.toBeInTheDocument();
   });
 
   it("renders specific content from config when on business structure task/url", () => {
@@ -45,13 +58,21 @@ describe("<BusinessStructurePrompt />", () => {
       asPath: "/tasks/business-structure-url-slug",
     });
     render(<BusinessStructurePrompt />);
-    expect(screen.getByTestId("content-when-on-business-structure-task")).toBeInTheDocument();
-    expect(screen.queryByTestId("content-when-not-on-business-structure-task")).not.toBeInTheDocument();
+    expect(
+      screen.getByTestId("content-when-on-business-structure-task")
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByTestId("content-when-not-on-business-structure-task")
+    ).not.toBeInTheDocument();
   });
 
   it("routes user to business structure task page on button click", () => {
     render(<BusinessStructurePrompt />);
-    fireEvent.click(screen.getByText(Config.businessStructurePrompt.buttonText));
-    expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/business-structure-url-slug");
+    fireEvent.click(
+      screen.getByText(Config.businessStructurePrompt.buttonText)
+    );
+    expect(mockRouter.mockPush).toHaveBeenCalledWith(
+      "/tasks/business-structure-url-slug"
+    );
   });
 });

@@ -6,8 +6,11 @@ import { useRouter } from "next/compat/router";
 import { useContext, useEffect } from "react";
 
 export const usePageWithNeedsAccountSnackbar = (): void => {
-  const { isAuthenticated, setShowNeedsAccountSnackbar, showNeedsAccountModal } =
-    useContext(NeedsAccountContext);
+  const {
+    isAuthenticated,
+    setShowNeedsAccountSnackbar,
+    showNeedsAccountModal,
+  } = useContext(NeedsAccountContext);
   const router = useRouter();
   useMountEffectWhenDefined(() => {
     if (

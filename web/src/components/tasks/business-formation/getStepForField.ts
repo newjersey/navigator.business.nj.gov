@@ -1,7 +1,9 @@
 import { FormationStepNames } from "@/lib/types/types";
 import { FieldsForErrorHandling } from "@businessnjgovnavigator/shared";
 
-export const getStepForField = (field: FieldsForErrorHandling): FormationStepNames => {
+export const getStepForField = (
+  field: FieldsForErrorHandling
+): FormationStepNames => {
   switch (field) {
     case "businessName":
       return "Name";

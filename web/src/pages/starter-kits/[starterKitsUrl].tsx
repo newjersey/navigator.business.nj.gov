@@ -13,7 +13,11 @@ import {
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { STARTER_KITS_GENERIC_SLUG, StarterKitsUrl, getAllStarterKitUrls } from "@/lib/utils/starterKits";
+import {
+  STARTER_KITS_GENERIC_SLUG,
+  StarterKitsUrl,
+  getAllStarterKitUrls,
+} from "@/lib/utils/starterKits";
 import type { Industry } from "@businessnjgovnavigator/shared";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/index";
 import type { GetStaticPathsResult } from "next";
@@ -48,7 +52,11 @@ const StarterKitsPage = (props: Props): ReactElement => {
   );
 
   const stepsTitle = insertRoadmapSteps(
-    insertIndustryContent(Config.starterKits.steps.title, props.industry.id, props.industry.name),
+    insertIndustryContent(
+      Config.starterKits.steps.title,
+      props.industry.id,
+      props.industry.name
+    ),
     props.roadmap.steps.length
   );
 
@@ -58,7 +66,11 @@ const StarterKitsPage = (props: Props): ReactElement => {
       <main className="desktop:grid-container-widescreen desktop:padding-x-7">
         <section className="bg-cool-extra-light window-width-shadow-cool-extra-light flex flex-justify padding-y-4 desktop:padding-y-8 padding-x-2 desktop:padding-x-0">
           <div className={"text-center desktop:text-left desktop:grid-col-5"}>
-            <Heading level={1} styleVariant="h1Large" className="display-only-desktop">
+            <Heading
+              level={1}
+              styleVariant="h1Large"
+              className="display-only-desktop"
+            >
               {heroTitle}
               <br />
             </Heading>
@@ -83,7 +95,12 @@ const StarterKitsPage = (props: Props): ReactElement => {
           </div>
 
           <div className="desktop:grid-col-6 desktop:display-block display-none">
-            <img className="width-100" src="/img/seo-img-main.webp" alt="" role="presentation" />
+            <img
+              className="width-100"
+              src="/img/seo-img-main.webp"
+              alt=""
+              role="presentation"
+            />
           </div>
         </section>
         <section
@@ -93,7 +110,9 @@ const StarterKitsPage = (props: Props): ReactElement => {
         >
           <div className="title-section">
             <Heading level={2}>{solutionsTitle}</Heading>
-            <p className="font-sans-md">{Config.starterKits.solutions.subtitle}</p>
+            <p className="font-sans-md">
+              {Config.starterKits.solutions.subtitle}
+            </p>
           </div>
           <div className="display-flex flex-column gap-2 cards-section">
             <Card
@@ -149,7 +168,11 @@ export const getStaticPaths = (): GetStaticPathsResult<StarterKitsUrl> => {
   };
 };
 
-export const getStaticProps = async ({ params }: { params: StarterKitsUrl }): Promise<{ props: Props }> => {
+export const getStaticProps = async ({
+  params,
+}: {
+  params: StarterKitsUrl;
+}): Promise<{ props: Props }> => {
   let industry;
   if (params.starterKitsUrl === STARTER_KITS_GENERIC_SLUG) {
     industry = LookupIndustryById("generic");

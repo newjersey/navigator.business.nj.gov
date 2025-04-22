@@ -30,10 +30,16 @@ export const OutageAlertBar = (): ReactElement => {
   });
 
   if (!isEnabled || !alertType || !message) return <></>;
-  if (alertType === "LOGGED_IN_ONLY" && state.isAuthenticated !== IsAuthenticated.TRUE) {
+  if (
+    alertType === "LOGGED_IN_ONLY" &&
+    state.isAuthenticated !== IsAuthenticated.TRUE
+  ) {
     return <></>;
   }
-  if (alertType === "UNREGISTERED_ONLY" && state.isAuthenticated !== IsAuthenticated.FALSE) {
+  if (
+    alertType === "UNREGISTERED_ONLY" &&
+    state.isAuthenticated !== IsAuthenticated.FALSE
+  ) {
     return <></>;
   }
 

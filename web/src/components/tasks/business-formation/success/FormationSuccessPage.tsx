@@ -23,7 +23,10 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
 
   return (
     <>
-      <div className="fdc fac margin-bottom-2" data-testid="formation-success-page">
+      <div
+        className="fdc fac margin-bottom-2"
+        data-testid="formation-success-page"
+      >
         <img src={`/img/trophy-illustration.svg`} alt="" />
         <Heading level={2} className="margin-bottom-0">
           {Config.formation.successPage.header}
@@ -68,7 +71,9 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
             <DocumentTile
               label={Config.formation.successPage.entityIdLabel}
               downloadLink=""
-              subLabel={props.business.formationData.getFilingResponse?.entityId}
+              subLabel={
+                props.business.formationData.getFilingResponse?.entityId
+              }
               icon="id-icon"
             />
           </div>
@@ -84,8 +89,8 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
       <div className="text-center margin-bottom-2">
         <Content
           onClick={
-            analytics.event.business_formation_success_amendments_external_link.click
-              .go_to_Treasury_amendments_page
+            analytics.event.business_formation_success_amendments_external_link
+              .click.go_to_Treasury_amendments_page
           }
         >
           {Config.formation.successPage.amendmentText}

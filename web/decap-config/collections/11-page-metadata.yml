@@ -22,14 +22,54 @@ collections:
             widget: object
             summary: "{{pagesMetadata}}"
             fields:
-              - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-              - { label: "Title Postfix", name: "titlePostfix", widget: "string", required: true }
-              - { label: "Site Description", name: "siteDescription", widget: "string", required: true }
-              - { label: "Home Page Title", name: "homeTitle", widget: "string", required: true }
-              - { label: "Dashboard Page Title", name: "dashboardTitle", widget: "string", required: true }
-              - { label: "Account Page Title", name: "profileTitle", widget: "string", required: true }
-              - { label: "Dead Links Page Title", name: "deadLinksTitle", widget: "string", required: true }
-              - { label: "Dead Urls Page Title", name: "deadUrlsTitle", widget: "string", required: true }
+              - {
+                  label: "Internal Notes",
+                  name: "notesMd",
+                  widget: "markdown",
+                  required: false,
+                }
+              - {
+                  label: "Title Postfix",
+                  name: "titlePostfix",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Site Description",
+                  name: "siteDescription",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Home Page Title",
+                  name: "homeTitle",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Dashboard Page Title",
+                  name: "dashboardTitle",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Account Page Title",
+                  name: "profileTitle",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Dead Links Page Title",
+                  name: "deadLinksTitle",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Dead Urls Page Title",
+                  name: "deadUrlsTitle",
+                  widget: "string",
+                  required: true,
+                }
               - {
                   label: "Feature Flags Page Title",
                   name: "featureFlagsTitle",

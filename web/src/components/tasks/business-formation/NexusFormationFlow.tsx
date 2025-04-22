@@ -14,7 +14,11 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import analytics from "@/lib/utils/analytics";
-import { openInNewTab, templateEval, useMountEffect } from "@/lib/utils/helpers";
+import {
+  openInNewTab,
+  templateEval,
+  useMountEffect,
+} from "@/lib/utils/helpers";
 import { determineIfNexusDbaNameNeeded } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext } from "react";
@@ -27,8 +31,12 @@ export const NexusFormationFlow = (): ReactElement => {
   useMountEffect(() => {
     if (!business) return;
     const { lastVisitedPageIndex } = business.formationData;
-    const largestValidPageIndex = BusinessFormationStepsConfiguration.length - 1;
-    if (lastVisitedPageIndex > largestValidPageIndex || lastVisitedPageIndex < 0) {
+    const largestValidPageIndex =
+      BusinessFormationStepsConfiguration.length - 1;
+    if (
+      lastVisitedPageIndex > largestValidPageIndex ||
+      lastVisitedPageIndex < 0
+    ) {
       setStepIndex(0);
     } else {
       setStepIndex(lastVisitedPageIndex);
@@ -49,7 +57,9 @@ export const NexusFormationFlow = (): ReactElement => {
     moveToStep(state.stepIndex - 1);
   };
 
-  const isNotDba = business?.profileData.businessName && !determineIfNexusDbaNameNeeded(business);
+  const isNotDba =
+    business?.profileData.businessName &&
+    !determineIfNexusDbaNameNeeded(business);
 
   const onStepChangeAnalytics = (
     formationFormData: FormationFormData | undefined,
@@ -69,12 +79,21 @@ export const NexusFormationFlow = (): ReactElement => {
     stepIndex: number,
     config: { moveType: "NEXT_BUTTON" | "STEPPER" }
   ): Promise<void> => {
-    onStepChangeAnalytics(business?.formationData.formationFormData, stepIndex, config.moveType);
+    onStepChangeAnalytics(
+      business?.formationData.formationFormData,
+      stepIndex,
+      config.moveType
+    );
     moveToStep(stepIndex);
   };
 
   if (state.stepIndex > 0 && isNotDba) {
-    if (allowFormation(business.profileData.legalStructureId, business.profileData.businessPersona)) {
+    if (
+      allowFormation(
+        business.profileData.legalStructureId,
+        business.profileData.businessPersona
+      )
+    ) {
       return <BusinessFormationPaginator />;
     } else {
       return (
@@ -96,13 +115,21 @@ export const NexusFormationFlow = (): ReactElement => {
               />
             </div>
           </div>
-          <div data-testid="formation-nexus-task" className="fg1 flex flex-column space-between">
-            <Content>{addNaicsCodeData(state.dbaContent.Formation.contentMd ?? "")}</Content>
+          <div
+            data-testid="formation-nexus-task"
+            className="fg1 flex flex-column space-between"
+          >
+            <Content>
+              {addNaicsCodeData(state.dbaContent.Formation.contentMd ?? "")}
+            </Content>
 
             <CtaContainer>
               <ActionBarLayout>
                 <div className="margin-top-2 mobile-lg:margin-top-0">
-                  <SecondaryButton isColor="primary" onClick={onPreviousButtonClick}>
+                  <SecondaryButton
+                    isColor="primary"
+                    onClick={onPreviousButtonClick}
+                  >
                     {Config.formation.general.previousButtonText}
                   </SecondaryButton>
                 </div>
@@ -118,7 +145,8 @@ export const NexusFormationFlow = (): ReactElement => {
                     openInNewTab(state.dbaContent.Formation.callToActionLink);
                   }}
                 >
-                  {state.dbaContent.Formation.callToActionText || Config.taskDefaults.defaultCallToActionText}
+                  {state.dbaContent.Formation.callToActionText ||
+                    Config.taskDefaults.defaultCallToActionText}
                 </PrimaryButton>
               </ActionBarLayout>
             </CtaContainer>

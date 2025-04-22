@@ -52,7 +52,8 @@ export const ProfileErrorAlert = (props: Props): ReactElement | null => {
           fieldText: Config.profileDefaults.default.profileErrorAlertOneField,
         })
       : templateEval(Config.profileDefaults.default.profileErrorAlert, {
-          fieldText: Config.profileDefaults.default.profileErrorAlertMultipleFields,
+          fieldText:
+            Config.profileDefaults.default.profileErrorAlertMultipleFields,
         });
 
   if (!displayProfileErrorAlert()) return null;

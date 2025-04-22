@@ -7,7 +7,9 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-jest.mock("@/lib/api-client/apiClient", () => ({ postUserEmailCheck: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  postUserEmailCheck: jest.fn(),
+}));
 jest.mock("@/lib/auth/sessionHelper", () => ({
   triggerSignIn: jest.fn(),
 }));
@@ -20,12 +22,16 @@ describe("<LoginEmailCheck />", () => {
 
   it("calls triggerSignIn when a matching user is found", async () => {
     const email = "test@example.com";
-    mockApi.postUserEmailCheck.mockReturnValue(Promise.resolve({ email, found: true }));
+    mockApi.postUserEmailCheck.mockReturnValue(
+      Promise.resolve({ email, found: true })
+    );
     render(<LoginEmailCheck />);
 
     const emailField = screen.getByLabelText("Email");
     fireEvent.change(emailField, { target: { value: email } });
-    const submitButton = screen.getByRole("button", { name: Config.checkAccountEmailPage.inputButton });
+    const submitButton = screen.getByRole("button", {
+      name: Config.checkAccountEmailPage.inputButton,
+    });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
@@ -40,10 +46,14 @@ describe("<LoginEmailCheck />", () => {
 
     const emailField = screen.getByLabelText("Email");
     fireEvent.change(emailField, { target: { value: email } });
-    const submitButton = screen.getByRole("button", { name: Config.checkAccountEmailPage.inputButton });
+    const submitButton = screen.getByRole("button", {
+      name: Config.checkAccountEmailPage.inputButton,
+    });
     fireEvent.click(submitButton);
 
-    expect(await screen.findByText(Config.checkAccountEmailPage.emailNotFoundError)).toBeInTheDocument();
+    expect(
+      await screen.findByText(Config.checkAccountEmailPage.emailNotFoundError)
+    ).toBeInTheDocument();
     await waitFor(() => {
       expect(triggerSignIn).not.toHaveBeenCalled();
     });
@@ -55,10 +65,14 @@ describe("<LoginEmailCheck />", () => {
 
     const emailField = screen.getByLabelText("Email");
     fireEvent.change(emailField, { target: { value: invalidEmail } });
-    const submitButton = screen.getByRole("button", { name: Config.checkAccountEmailPage.inputButton });
+    const submitButton = screen.getByRole("button", {
+      name: Config.checkAccountEmailPage.inputButton,
+    });
     fireEvent.click(submitButton);
 
-    expect(await screen.findByText(Config.checkAccountEmailPage.invalidEmailError)).toBeInTheDocument();
+    expect(
+      await screen.findByText(Config.checkAccountEmailPage.invalidEmailError)
+    ).toBeInTheDocument();
     await waitFor(() => {
       expect(triggerSignIn).not.toHaveBeenCalled();
     });
@@ -73,10 +87,14 @@ describe("<LoginEmailCheck />", () => {
 
     const emailField = screen.getByLabelText("Email");
     fireEvent.change(emailField, { target: { value: email } });
-    const submitButton = screen.getByRole("button", { name: Config.checkAccountEmailPage.inputButton });
+    const submitButton = screen.getByRole("button", {
+      name: Config.checkAccountEmailPage.inputButton,
+    });
     fireEvent.click(submitButton);
 
-    expect(await screen.findByText(Config.checkAccountEmailPage.defaultErrorMessage)).toBeInTheDocument();
+    expect(
+      await screen.findByText(Config.checkAccountEmailPage.defaultErrorMessage)
+    ).toBeInTheDocument();
     await waitFor(() => {
       expect(triggerSignIn).not.toHaveBeenCalled();
     });
@@ -84,7 +102,9 @@ describe("<LoginEmailCheck />", () => {
 
   it("submits the form when the user presses enter", async () => {
     const email = "test@example.com";
-    mockApi.postUserEmailCheck.mockReturnValue(Promise.resolve({ email, found: true }));
+    mockApi.postUserEmailCheck.mockReturnValue(
+      Promise.resolve({ email, found: true })
+    );
 
     render(<LoginEmailCheck />);
 

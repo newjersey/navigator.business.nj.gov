@@ -16,7 +16,9 @@ interface Props {
 export const Members = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
-  const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
+  const isCorp = corpLegalStructures.includes(
+    state.formationFormData.legalType
+  );
 
   const defaultAddress = isCorp
     ? undefined
@@ -25,14 +27,18 @@ export const Members = (props: Props): ReactElement => {
           state.formationFormData.members?.length === 0
             ? `${state.formationFormData.contactFirstName.trim()} ${state.formationFormData.contactLastName.trim()}`
             : "",
-        addressCity: state.formationFormData.addressMunicipality?.name ?? state.formationFormData.addressCity,
+        addressCity:
+          state.formationFormData.addressMunicipality?.name ??
+          state.formationFormData.addressCity,
         addressLine1: state.formationFormData.addressLine1,
         addressLine2: state.formationFormData.addressLine2,
         addressState: state.formationFormData.addressState,
         addressZipCode: state.formationFormData.addressZipCode,
       };
 
-  const configField = getConfigFieldByLegalStructure(state.formationFormData.legalType);
+  const configField = getConfigFieldByLegalStructure(
+    state.formationFormData.legalType
+  );
 
   const displayContent = {
     header: Config.formation.fields[configField].label,
@@ -43,7 +49,9 @@ export const Members = (props: Props): ReactElement => {
     snackbarBody: Config.formation.fields[configField].successSnackbarBody,
     modalTitle: Config.formation.fields[configField].modalTitle,
     modalSaveButton: Config.formation.fields[configField].modalSaveButton,
-    defaultCheckbox: isCorp ? undefined : Config.formation.fields.members.addressCheckboxText,
+    defaultCheckbox: isCorp
+      ? undefined
+      : Config.formation.fields.members.addressCheckboxText,
     placeholder: Config.formation.fields[configField].placeholder ?? "",
     error: Config.formation.fields[configField].error ?? "",
   };

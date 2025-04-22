@@ -42,33 +42,51 @@ export default {
   summary: "{{fields.title}}",
   fromBlock: (
     match: RegExpMatchArray
-  ): { showHeader: boolean; headerText: string; body: string; calloutType: string; showIcon: boolean } => {
+  ): {
+    showHeader: boolean;
+    headerText: string;
+    body: string;
+    calloutType: string;
+    showIcon: boolean;
+  } => {
     // We can safely assume there will be a single match; else we wouldn't be inside this function.
     const [calloutBlock] = match;
 
     // Everything inside the first {} we see we consider callout parameters; everything after is the body.
-    // eslint-disable-next-line unicorn/better-regex
-    const calloutParseMatcher = /{(?<parameters>[^}]+)}[^\n]*\n(?<body>[^:::{}]*)/gms;
+    const calloutParseMatcher =
+      // eslint-disable-next-line unicorn/better-regex
+      /{(?<parameters>[^}]+)}[^\n]*\n(?<body>[^:::{}]*)/gms;
     const calloutMatch = calloutParseMatcher.exec(calloutBlock);
 
     // If we just have :::callout {}\n:::, then we need to return some default values instead.
     const defaultCalloutContents =
       'showHeader="false" headerText="" showIcon="false" calloutType="conditional"';
 
-    const calloutParameters = calloutMatch?.groups?.parameters ?? defaultCalloutContents;
+    const calloutParameters =
+      calloutMatch?.groups?.parameters ?? defaultCalloutContents;
     const calloutBody = calloutMatch?.groups?.body.trim() ?? "";
 
-    const showHeaderMatch = calloutParameters.match(/showHeader="(?<showHeader>[^"]+)"/);
-    const showHeaderValue = showHeaderMatch?.groups?.showHeader.trim() === "true";
+    const showHeaderMatch = calloutParameters.match(
+      /showHeader="(?<showHeader>[^"]+)"/
+    );
+    const showHeaderValue =
+      showHeaderMatch?.groups?.showHeader.trim() === "true";
 
-    const headerTextMatch = calloutParameters.match(/headerText="(?<headerText>[^"]+)"/);
+    const headerTextMatch = calloutParameters.match(
+      /headerText="(?<headerText>[^"]+)"/
+    );
     const headerTextValue = headerTextMatch?.groups?.headerText.trim() ?? "";
 
-    const showIconMatch = calloutParameters.match(/showIcon="(?<showIcon>[^"]+)"/);
+    const showIconMatch = calloutParameters.match(
+      /showIcon="(?<showIcon>[^"]+)"/
+    );
     const showIconValue = showIconMatch?.groups?.showIcon.trim() === "true";
 
-    const calloutTypeMatch = calloutParameters.match(/calloutType="(?<calloutType>[^"]+)"/);
-    const calloutTypeValue = calloutTypeMatch?.groups?.calloutType.trim() ?? "conditional";
+    const calloutTypeMatch = calloutParameters.match(
+      /calloutType="(?<calloutType>[^"]+)"/
+    );
+    const calloutTypeValue =
+      calloutTypeMatch?.groups?.calloutType.trim() ?? "conditional";
 
     return {
       calloutType: calloutTypeValue,

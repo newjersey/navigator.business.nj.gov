@@ -8,7 +8,8 @@ import { render, screen } from "@testing-library/react";
 
 jest.mock("../../../../../shared/lib/content/lib/industry.json", () => ({
   industries: [
-    ...jest.requireActual("../../../../../shared/lib/content/lib/industry.json").industries,
+    ...jest.requireActual("../../../../../shared/lib/content/lib/industry.json")
+      .industries,
     {
       id: "test-industry-with-non-essential-questions",
       name: "test-industry-with-non-essential-questions",
@@ -39,7 +40,9 @@ jest.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
 }));
 
 const mockGetNonEssentialQuestionText = (
-  GetNonEssentialQuestionTextModule as jest.Mocked<typeof GetNonEssentialQuestionTextModule>
+  GetNonEssentialQuestionTextModule as jest.Mocked<
+    typeof GetNonEssentialQuestionTextModule
+  >
 ).getNonEssentialQuestionText;
 
 describe("ProfileNonEssentialQuestionsSection", () => {
@@ -58,9 +61,13 @@ describe("ProfileNonEssentialQuestionsSection", () => {
   };
 
   it("doesn't display section if industry doesn't have any non essential questions", () => {
-    renderComponent({ industryId: "test-industry-with-no-non-essential-questions" });
+    renderComponent({
+      industryId: "test-industry-with-no-non-essential-questions",
+    });
     expect(
-      screen.queryByText(Config.profileDefaults.fields.nonEssentialQuestions.default.header)
+      screen.queryByText(
+        Config.profileDefaults.fields.nonEssentialQuestions.default.header
+      )
     ).not.toBeInTheDocument();
   });
 
@@ -74,7 +81,9 @@ describe("ProfileNonEssentialQuestionsSection", () => {
     });
 
     expect(
-      screen.getByText(Config.profileDefaults.fields.nonEssentialQuestions.default.header)
+      screen.getByText(
+        Config.profileDefaults.fields.nonEssentialQuestions.default.header
+      )
     ).toBeInTheDocument();
     expect(screen.getByText("Non Essential Question 1?")).toBeInTheDocument();
     expect(screen.getByText("Non Essential Question 2?")).toBeInTheDocument();

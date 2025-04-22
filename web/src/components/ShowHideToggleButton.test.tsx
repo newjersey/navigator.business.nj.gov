@@ -29,7 +29,12 @@ const renderButton = ({
     );
   } else {
     render(
-      <ShowHideToggleButton status={status} toggle={toggleMock} hideText={hideText} showText={showText} />
+      <ShowHideToggleButton
+        status={status}
+        toggle={toggleMock}
+        hideText={hideText}
+        showText={showText}
+      />
     );
   }
 };

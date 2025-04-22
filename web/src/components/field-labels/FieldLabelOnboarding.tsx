@@ -30,9 +30,16 @@ export const FieldLabelOnboarding = (props: Props): ReactElement => {
 
   return (
     <>
-      <Heading level={2} styleVariant="h3" className="margin-bottom-05-override">
+      <Heading
+        level={2}
+        styleVariant="h3"
+        className="margin-bottom-05-override"
+      >
         {contentFromConfig.headerContextualInfo ? (
-          <ContextualInfoButton text={contentFromConfig.header} id={contentFromConfig.headerContextualInfo} />
+          <ContextualInfoButton
+            text={contentFromConfig.header}
+            id={contentFromConfig.headerContextualInfo}
+          />
         ) : (
           contentFromConfig.header
         )}
@@ -43,8 +50,12 @@ export const FieldLabelOnboarding = (props: Props): ReactElement => {
           </>
         )}
       </Heading>
-      {props.isAltDescriptionDisplayed && altDescription && <Content>{altDescription}</Content>}
-      {!props.isAltDescriptionDisplayed && description && <Content>{description}</Content>}
+      {props.isAltDescriptionDisplayed && altDescription && (
+        <Content>{altDescription}</Content>
+      )}
+      {!props.isAltDescriptionDisplayed && description && (
+        <Content>{description}</Content>
+      )}
     </>
   );
 };

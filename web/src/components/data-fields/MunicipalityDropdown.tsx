@@ -29,7 +29,10 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
     setSearchText(event.target.value);
   };
 
-  const handleMunicipality = (event: ChangeEvent<unknown>, value: Municipality | null): void => {
+  const handleMunicipality = (
+    event: ChangeEvent<unknown>,
+    value: Municipality | null
+  ): void => {
     props.handleChange && props.handleChange();
     setSearchText(value ? value.displayName : "");
     props.onSelect(value || undefined);
@@ -57,7 +60,10 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
       getOptionLabel={(municipality: Municipality): string => {
         return municipality.displayName;
       }}
-      isOptionEqualToValue={(option: Municipality, value: Municipality): boolean => {
+      isOptionEqualToValue={(
+        option: Municipality,
+        value: Municipality
+      ): boolean => {
         return option.id === value.id;
       }}
       value={props.value || null}
@@ -84,7 +90,8 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
             <TextField
               {...params}
               inputProps={{
-                "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
+                "aria-label":
+                  props.ariaLabel ?? camelCaseToSentence(props.fieldName),
                 "data-testid": props.fieldName,
                 ...params.inputProps,
               }}

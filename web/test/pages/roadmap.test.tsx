@@ -14,17 +14,23 @@ describe("roadmap", () => {
   });
 
   it("redirects signed-in users to the dashboard page", () => {
-    render(withAuth(<RoadmapPage />, { isAuthenticated: IsAuthenticated.TRUE }));
+    render(
+      withAuth(<RoadmapPage />, { isAuthenticated: IsAuthenticated.TRUE })
+    );
     expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
   });
 
   it("redirects non-signed-in users to the landing page", () => {
-    render(withAuth(<RoadmapPage />, { isAuthenticated: IsAuthenticated.FALSE }));
+    render(
+      withAuth(<RoadmapPage />, { isAuthenticated: IsAuthenticated.FALSE })
+    );
     expect(mockPush).toHaveBeenCalledWith(ROUTES.landing);
   });
 
   it("does not redirect for unknown auth users", () => {
-    render(withAuth(<RoadmapPage />, { isAuthenticated: IsAuthenticated.UNKNOWN }));
+    render(
+      withAuth(<RoadmapPage />, { isAuthenticated: IsAuthenticated.UNKNOWN })
+    );
     expect(mockPush).not.toHaveBeenCalled();
   });
 });

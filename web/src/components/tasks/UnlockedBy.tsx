@@ -25,7 +25,9 @@ export const UnlockedBy = (props: Props): ReactElement => {
 
   const isDakotaFormation =
     props.task.id === "form-business-entity" &&
-    unlockedByTaskLinks.some((task) => task.id === "certificate-good-standing-foreign");
+    unlockedByTaskLinks.some(
+      (task) => task.id === "certificate-good-standing-foreign"
+    );
 
   return isDakotaFormation ? (
     <UnlockingAlertDakotaFormation

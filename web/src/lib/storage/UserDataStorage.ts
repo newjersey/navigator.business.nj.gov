@@ -59,12 +59,16 @@ export const UserDataStorageFactory = (): UserDataStorage => {
     browserStorage.clear();
   };
 
-  const setRegistrationStatus = (value: RegistrationStatus | undefined): void => {
+  const setRegistrationStatus = (
+    value: RegistrationStatus | undefined
+  ): void => {
     browserStorage.set(registrationStatusKey, value ?? "");
   };
 
   const getRegistrationStatus = (): RegistrationStatus | undefined => {
-    return browserStorage.get(registrationStatusKey) as RegistrationStatus | undefined;
+    return browserStorage.get(registrationStatusKey) as
+      | RegistrationStatus
+      | undefined;
   };
 
   const getCurrentUserId = (): string | undefined => {
@@ -98,7 +102,11 @@ export const UserDataStorageFactory = (): UserDataStorage => {
   };
 
   const prefix = (key: string): string => {
-    return key.includes(swrPrefixToIgnore) ? "" : key.includes(userDataPrefix) ? "" : userDataPrefix;
+    return key.includes(swrPrefixToIgnore)
+      ? ""
+      : key.includes(userDataPrefix)
+      ? ""
+      : userDataPrefix;
   };
 
   return {

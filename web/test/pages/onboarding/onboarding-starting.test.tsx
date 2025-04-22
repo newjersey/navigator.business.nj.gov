@@ -24,7 +24,10 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
 import { act, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
@@ -93,8 +96,12 @@ describe("onboarding - starting a business", () => {
 
         page.clickNext();
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
-        expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
-        expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
+        expect(
+          screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")
+        ).toBeInTheDocument();
+        expect(
+          screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]
+        ).toBeInTheDocument();
       }
     );
 
@@ -131,9 +138,13 @@ describe("onboarding - starting a business", () => {
 
         page.clickNext();
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
-        expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
+        expect(
+          screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]
+        ).toBeInTheDocument();
         page.chooseEssentialQuestionRadio(industryId, 0);
-        expect(screen.queryByText(Config.siteWideErrorMessages.errorRadioButton)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.siteWideErrorMessages.errorRadioButton)
+        ).not.toBeInTheDocument();
       }
     );
 
@@ -149,8 +160,12 @@ describe("onboarding - starting a business", () => {
 
       page.clickNext();
       expect(screen.getByTestId("step-2")).toBeInTheDocument();
-      expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
-      expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
+      expect(
+        screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")
+      ).toBeInTheDocument();
+      expect(
+        screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]
+      ).toBeInTheDocument();
     });
 
     it("allows user to move past Step 2 when you have selected an industry employment agency and answered the essential question", async () => {
@@ -181,9 +196,13 @@ describe("onboarding - starting a business", () => {
 
       page.clickNext();
       expect(screen.getByTestId("step-2")).toBeInTheDocument();
-      expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
+      expect(
+        screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]
+      ).toBeInTheDocument();
       page.chooseEssentialQuestionRadio(employmentAgencyIndustryId, 1);
-      expect(screen.queryByText(Config.siteWideErrorMessages.errorRadioButton)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.siteWideErrorMessages.errorRadioButton)
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -193,7 +212,11 @@ describe("onboarding - starting a business", () => {
     page.chooseRadio("business-persona-starting");
 
     await page.visitStep(2);
-    expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 2 } }, undefined, { shallow: true });
+    expect(mockRouter.mockPush).toHaveBeenCalledWith(
+      { query: { page: 2 } },
+      undefined,
+      { shallow: true }
+    );
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
   });
 
@@ -202,13 +225,21 @@ describe("onboarding - starting a business", () => {
     const { page } = renderPage({ municipalities: [newark] });
     page.chooseRadio("business-persona-starting");
     const page1 = within(screen.getByTestId("page-1-form"));
-    expect(page1.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page1.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+    expect(
+      page1.getByText(Config.onboardingDefaults.nextButtonText)
+    ).toBeInTheDocument();
+    expect(
+      page1.queryByText(Config.onboardingDefaults.finalNextButtonText)
+    ).not.toBeInTheDocument();
 
     await page.visitStep(2);
     const page2 = within(screen.getByTestId("page-2-form"));
-    expect(page2.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
-    expect(page2.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
+    expect(
+      page2.queryByText(Config.onboardingDefaults.nextButtonText)
+    ).not.toBeInTheDocument();
+    expect(
+      page2.getByText(Config.onboardingDefaults.finalNextButtonText)
+    ).toBeInTheDocument();
   });
 
   it("prefills form from existing user data", async () => {
@@ -227,11 +258,16 @@ describe("onboarding - starting a business", () => {
 
     const { page } = renderPage({ userData });
     expect(
-      page.getRadioButton(Config.profileDefaults.fields.businessPersona.default.radioButtonStartingText)
+      page.getRadioButton(
+        Config.profileDefaults.fields.businessPersona.default
+          .radioButtonStartingText
+      )
     ).toBeChecked();
 
     await page.visitStep(2);
-    expect(page.getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);
+    expect(page.getIndustryValue()).toEqual(
+      LookupIndustryById("cosmetology").name
+    );
   });
 
   it("updates the user data after each form page", async () => {
@@ -287,9 +323,13 @@ describe("onboarding - starting a business", () => {
       return page.clickNext();
     });
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
-    expect(screen.getByTestId("banner-alert-REQUIRED_FOREIGN_BUSINESS_TYPE")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("banner-alert-REQUIRED_FOREIGN_BUSINESS_TYPE")
+    ).toBeInTheDocument();
     page.clickBack();
-    expect(screen.queryByTestId("banner-alert-REQUIRED_FOREIGN_BUSINESS_TYPE")).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("banner-alert-REQUIRED_FOREIGN_BUSINESS_TYPE")
+    ).not.toBeInTheDocument();
   });
 
   describe("domestic employer", () => {
@@ -302,9 +342,10 @@ describe("onboarding - starting a business", () => {
           }),
         })
       );
-      const industryPageWithoutNonprofitQuestion = onboardingFlows.STARTING.pages.find(
-        (page) => page.name === "industry-page-without-nonprofit"
-      );
+      const industryPageWithoutNonprofitQuestion =
+        onboardingFlows.STARTING.pages.find(
+          (page) => page.name === "industry-page-without-nonprofit"
+        );
       expect(industryPageWithoutNonprofitQuestion).toBeDefined();
     });
   });

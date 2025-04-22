@@ -4,7 +4,10 @@ import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Icon } from "@/components/njwds/Icon";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -14,9 +17,18 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import {
+  createEmptyProfileData,
+  ProfileData,
+} from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";
-import { ReactElement, ReactNode, useContext, useEffect, useState } from "react";
+import {
+  ReactElement,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface Props {
   task: Task;
@@ -24,7 +36,8 @@ interface Props {
 
 export const TaxInput = (props: Props): ReactElement => {
   const { business, updateQueue } = useUserData();
-  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+  const { isAuthenticated, setShowNeedsAccountModal } =
+    useContext(NeedsAccountContext);
   const { Config } = useConfig();
   const [profileData, setProfileData] = useState<ProfileData>(
     business?.profileData ?? createEmptyProfileData()
@@ -40,7 +53,8 @@ export const TaxInput = (props: Props): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const shouldLockTaxId =
-    business?.taxFilingData.state === "SUCCESS" || business?.taxFilingData.state === "PENDING";
+    business?.taxFilingData.state === "SUCCESS" ||
+    business?.taxFilingData.state === "PENDING";
 
   const saveButtonText =
     isAuthenticated === IsAuthenticated.FALSE
@@ -75,7 +89,12 @@ export const TaxInput = (props: Props): ReactElement => {
 
     let { taxFilingData } = business;
     if (business.profileData.taxId !== profileData.taxId) {
-      taxFilingData = { ...taxFilingData, state: undefined, registeredISO: undefined, filings: [] };
+      taxFilingData = {
+        ...taxFilingData,
+        state: undefined,
+        registeredISO: undefined,
+        filings: [],
+      };
     }
 
     updateQueue
@@ -89,14 +108,24 @@ export const TaxInput = (props: Props): ReactElement => {
   });
 
   const DisabledElement = (props: { children: ReactNode }): ReactElement => (
-    <div className={`flex ${isTabletAndUp ? "flex-row" : "flex-column margin-right-2"} no-wrap`}>
-      <div className={`${isTabletAndUp ? "padding-right-1" : ""}`}>{Config.tax.lockedPreText}</div>
+    <div
+      className={`flex ${
+        isTabletAndUp ? "flex-row" : "flex-column margin-right-2"
+      } no-wrap`}
+    >
+      <div className={`${isTabletAndUp ? "padding-right-1" : ""}`}>
+        {Config.tax.lockedPreText}
+      </div>
       <div>{props.children}</div>
-      <div className={`${isTabletAndUp ? "padding-left-1" : ""} margin-right-1`}>
+      <div
+        className={`${isTabletAndUp ? "padding-left-1" : ""} margin-right-1`}
+      >
         {Config.tax.lockedPostText}
       </div>
       <div className={"text-wrap margin-bottom-1"}>
-        <ArrowTooltip title={Config.profileDefaults.default.lockedFieldTooltipText}>
+        <ArrowTooltip
+          title={Config.profileDefaults.default.lockedFieldTooltipText}
+        >
           <div className="fdr fac  font-body-lg">
             <Icon iconName="help_outline" />
           </div>

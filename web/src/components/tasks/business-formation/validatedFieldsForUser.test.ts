@@ -32,9 +32,15 @@ describe("validatedFieldsForUser", () => {
         { legalStructureId: "foreign-limited-liability-company" }
       );
 
-      const expected: FormationFields[] = [...foreignValidatedFields, "addressProvince", "addressCountry"];
+      const expected: FormationFields[] = [
+        ...foreignValidatedFields,
+        "addressProvince",
+        "addressCountry",
+      ];
 
-      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(
+        expect.arrayContaining(expected)
+      );
     });
 
     it("requires US address fields for foreign legal structure", () => {
@@ -43,9 +49,14 @@ describe("validatedFieldsForUser", () => {
         { legalStructureId: "foreign-limited-liability-company" }
       );
 
-      const expected: FormationFields[] = [...foreignValidatedFields, "addressState"];
+      const expected: FormationFields[] = [
+        ...foreignValidatedFields,
+        "addressState",
+      ];
 
-      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(
+        expect.arrayContaining(expected)
+      );
     });
   });
 
@@ -66,7 +77,9 @@ describe("validatedFieldsForUser", () => {
         "agentOfficeAddressZipCode",
       ];
 
-      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(
+        expect.arrayContaining(expected)
+      );
     });
 
     it("requires registered agent fields for NUMBER for all legal structures", () => {
@@ -78,36 +91,57 @@ describe("validatedFieldsForUser", () => {
 
       const expected: FormationFields[] = ["agentNumber"];
 
-      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(
+        expect.arrayContaining(expected)
+      );
     });
   });
 
   describe("LLC", () => {
     it("requires shared fields", () => {
       const legalStructureId = "limited-liability-company";
-      const formationFormData = generateFormationFormData({}, { legalStructureId });
+      const formationFormData = generateFormationFormData(
+        {},
+        { legalStructureId }
+      );
 
-      const expected: FormationFields[] = [...validatedFieldsForAllLegalStructures, "signers"];
+      const expected: FormationFields[] = [
+        ...validatedFieldsForAllLegalStructures,
+        "signers",
+      ];
 
-      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(
+        expect.arrayContaining(expected)
+      );
     });
   });
 
   describe("LLP", () => {
     it("requires shared fields", () => {
       const legalStructureId = "limited-liability-partnership";
-      const formationFormData = generateFormationFormData({}, { legalStructureId });
+      const formationFormData = generateFormationFormData(
+        {},
+        { legalStructureId }
+      );
 
-      const expected: FormationFields[] = [...validatedFieldsForAllLegalStructures, "signers"];
+      const expected: FormationFields[] = [
+        ...validatedFieldsForAllLegalStructures,
+        "signers",
+      ];
 
-      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(
+        expect.arrayContaining(expected)
+      );
     });
   });
 
   describe("s-corporation", () => {
     it("also requires businessTotalStock, members", () => {
       const legalStructureId = "s-corporation";
-      const formationFormData = generateFormationFormData({}, { legalStructureId });
+      const formationFormData = generateFormationFormData(
+        {},
+        { legalStructureId }
+      );
 
       const expected: FormationFields[] = [
         ...validatedFieldsForAllLegalStructures,
@@ -115,14 +149,19 @@ describe("validatedFieldsForUser", () => {
         "members",
         "incorporators",
       ];
-      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(
+        expect.arrayContaining(expected)
+      );
     });
   });
 
   describe("c-corporation", () => {
     it("also requires businessTotalStock, members", () => {
       const legalStructureId = "c-corporation";
-      const formationFormData = generateFormationFormData({}, { legalStructureId });
+      const formationFormData = generateFormationFormData(
+        {},
+        { legalStructureId }
+      );
 
       const expected: FormationFields[] = [
         ...validatedFieldsForAllLegalStructures,
@@ -130,7 +169,9 @@ describe("validatedFieldsForUser", () => {
         "members",
         "incorporators",
       ];
-      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(
+        expect.arrayContaining(expected)
+      );
     });
   });
 
@@ -157,7 +198,9 @@ describe("validatedFieldsForUser", () => {
         "canMakeDistribution",
         "incorporators",
       ];
-      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(
+        expect.arrayContaining(expected)
+      );
     });
 
     it("also terms fields for YES answer to canCreateLimitedPartner", () => {
@@ -171,9 +214,15 @@ describe("validatedFieldsForUser", () => {
         { legalStructureId }
       );
 
-      expect(validatedFieldsForUser(formationFormData)).toContain("createLimitedPartnerTerms");
-      expect(validatedFieldsForUser(formationFormData)).not.toContain("getDistributionTerms");
-      expect(validatedFieldsForUser(formationFormData)).not.toContain("makeDistributionTerms");
+      expect(validatedFieldsForUser(formationFormData)).toContain(
+        "createLimitedPartnerTerms"
+      );
+      expect(validatedFieldsForUser(formationFormData)).not.toContain(
+        "getDistributionTerms"
+      );
+      expect(validatedFieldsForUser(formationFormData)).not.toContain(
+        "makeDistributionTerms"
+      );
     });
 
     it("also terms fields for YES answer to canGetDistribution", () => {
@@ -186,9 +235,15 @@ describe("validatedFieldsForUser", () => {
         { legalStructureId }
       );
 
-      expect(validatedFieldsForUser(formationFormData)).toContain("createLimitedPartnerTerms");
-      expect(validatedFieldsForUser(formationFormData)).toContain("getDistributionTerms");
-      expect(validatedFieldsForUser(formationFormData)).not.toContain("makeDistributionTerms");
+      expect(validatedFieldsForUser(formationFormData)).toContain(
+        "createLimitedPartnerTerms"
+      );
+      expect(validatedFieldsForUser(formationFormData)).toContain(
+        "getDistributionTerms"
+      );
+      expect(validatedFieldsForUser(formationFormData)).not.toContain(
+        "makeDistributionTerms"
+      );
     });
 
     it("also terms fields for YES answer to canMakeDistribution", () => {
@@ -201,9 +256,15 @@ describe("validatedFieldsForUser", () => {
         { legalStructureId }
       );
 
-      expect(validatedFieldsForUser(formationFormData)).toContain("createLimitedPartnerTerms");
-      expect(validatedFieldsForUser(formationFormData)).toContain("getDistributionTerms");
-      expect(validatedFieldsForUser(formationFormData)).toContain("makeDistributionTerms");
+      expect(validatedFieldsForUser(formationFormData)).toContain(
+        "createLimitedPartnerTerms"
+      );
+      expect(validatedFieldsForUser(formationFormData)).toContain(
+        "getDistributionTerms"
+      );
+      expect(validatedFieldsForUser(formationFormData)).toContain(
+        "makeDistributionTerms"
+      );
     });
   });
 
@@ -226,10 +287,18 @@ describe("validatedFieldsForUser", () => {
 
       const validatedFieldsArray = validatedFieldsForUser(formationFormData);
       expect(validatedFieldsArray).toEqual(expect.arrayContaining(expected));
-      expect(validatedFieldsArray).not.toContain("nonprofitBoardMemberQualificationsSpecified");
-      expect(validatedFieldsArray).not.toContain("nonprofitBoardMemberRightsSpecified");
-      expect(validatedFieldsArray).not.toContain("nonprofitTrusteesMethodSpecified");
-      expect(validatedFieldsArray).not.toContain("nonprofitAssetDistributionSpecified");
+      expect(validatedFieldsArray).not.toContain(
+        "nonprofitBoardMemberQualificationsSpecified"
+      );
+      expect(validatedFieldsArray).not.toContain(
+        "nonprofitBoardMemberRightsSpecified"
+      );
+      expect(validatedFieldsArray).not.toContain(
+        "nonprofitTrusteesMethodSpecified"
+      );
+      expect(validatedFieldsArray).not.toContain(
+        "nonprofitAssetDistributionSpecified"
+      );
     });
 
     it("isVeteranNonprofit and hasNonprofitBoardMembers radio questions are no", () => {
@@ -248,10 +317,18 @@ describe("validatedFieldsForUser", () => {
 
       const validatedFieldsArray = validatedFieldsForUser(formationFormData);
       expect(validatedFieldsArray).toEqual(expect.arrayContaining(expected));
-      expect(validatedFieldsArray).not.toContain("nonprofitBoardMemberQualificationsSpecified");
-      expect(validatedFieldsArray).not.toContain("nonprofitBoardMemberRightsSpecified");
-      expect(validatedFieldsArray).not.toContain("nonprofitTrusteesMethodSpecified");
-      expect(validatedFieldsArray).not.toContain("nonprofitAssetDistributionSpecified");
+      expect(validatedFieldsArray).not.toContain(
+        "nonprofitBoardMemberQualificationsSpecified"
+      );
+      expect(validatedFieldsArray).not.toContain(
+        "nonprofitBoardMemberRightsSpecified"
+      );
+      expect(validatedFieldsArray).not.toContain(
+        "nonprofitTrusteesMethodSpecified"
+      );
+      expect(validatedFieldsArray).not.toContain(
+        "nonprofitAssetDistributionSpecified"
+      );
     });
 
     it("displays hasNonprofitBoardMembers questions when hasNonprofitBoardMembers is true", () => {
@@ -287,10 +364,18 @@ describe("validatedFieldsForUser", () => {
         { legalStructureId }
       );
 
-      expect(validatedFieldsForUser(formationFormData)).toContain("nonprofitBoardMemberQualificationsTerms");
-      expect(validatedFieldsForUser(formationFormData)).toContain("nonprofitBoardMemberRightsTerms");
-      expect(validatedFieldsForUser(formationFormData)).toContain("nonprofitTrusteesMethodTerms");
-      expect(validatedFieldsForUser(formationFormData)).toContain("nonprofitAssetDistributionTerms");
+      expect(validatedFieldsForUser(formationFormData)).toContain(
+        "nonprofitBoardMemberQualificationsTerms"
+      );
+      expect(validatedFieldsForUser(formationFormData)).toContain(
+        "nonprofitBoardMemberRightsTerms"
+      );
+      expect(validatedFieldsForUser(formationFormData)).toContain(
+        "nonprofitTrusteesMethodTerms"
+      );
+      expect(validatedFieldsForUser(formationFormData)).toContain(
+        "nonprofitAssetDistributionTerms"
+      );
     });
 
     it("does not require terms when radio question is false / IN_BYLAWS", () => {
@@ -308,25 +393,45 @@ describe("validatedFieldsForUser", () => {
       expect(validatedFieldsForUser(formationFormData)).not.toContain(
         "nonprofitBoardMemberQualificationsTerms"
       );
-      expect(validatedFieldsForUser(formationFormData)).not.toContain("nonprofitBoardMemberRightsTerms");
-      expect(validatedFieldsForUser(formationFormData)).not.toContain("nonprofitTrusteesMethodTerms");
-      expect(validatedFieldsForUser(formationFormData)).not.toContain("nonprofitAssetDistributionTerms");
+      expect(validatedFieldsForUser(formationFormData)).not.toContain(
+        "nonprofitBoardMemberRightsTerms"
+      );
+      expect(validatedFieldsForUser(formationFormData)).not.toContain(
+        "nonprofitTrusteesMethodTerms"
+      );
+      expect(validatedFieldsForUser(formationFormData)).not.toContain(
+        "nonprofitAssetDistributionTerms"
+      );
     });
   });
 
   describe("foreign c-corp", () => {
     it("requires 'practice law' and 'certificate of good standing' fields", () => {
-      const formationFormData = generateFormationFormData({}, { legalStructureId: "foreign-c-corporation" });
-      expect(validatedFieldsForUser(formationFormData)).toContain("willPracticeLaw");
-      expect(validatedFieldsForUser(formationFormData)).toContain("foreignGoodStandingFile");
+      const formationFormData = generateFormationFormData(
+        {},
+        { legalStructureId: "foreign-c-corporation" }
+      );
+      expect(validatedFieldsForUser(formationFormData)).toContain(
+        "willPracticeLaw"
+      );
+      expect(validatedFieldsForUser(formationFormData)).toContain(
+        "foreignGoodStandingFile"
+      );
     });
   });
 
   describe("foreign nonprofit", () => {
     it("requires 'certificate of good standing' field", () => {
-      const formationFormData = generateFormationFormData({}, { legalStructureId: "foreign-nonprofit" });
-      expect(validatedFieldsForUser(formationFormData)).toContain("foreignGoodStandingFile");
-      expect(validatedFieldsForUser(formationFormData)).not.toContain("willPracticeLaw");
+      const formationFormData = generateFormationFormData(
+        {},
+        { legalStructureId: "foreign-nonprofit" }
+      );
+      expect(validatedFieldsForUser(formationFormData)).toContain(
+        "foreignGoodStandingFile"
+      );
+      expect(validatedFieldsForUser(formationFormData)).not.toContain(
+        "willPracticeLaw"
+      );
     });
   });
 });

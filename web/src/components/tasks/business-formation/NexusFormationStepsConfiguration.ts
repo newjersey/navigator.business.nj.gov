@@ -9,13 +9,17 @@ export const NexusFormationStepsConfiguration: {
   { name: "Authorize Business", stepIndex: 1 },
 ];
 
-export const LookupNexusStepIndexByName = (name: DbaStepNames): number | undefined => {
+export const LookupNexusStepIndexByName = (
+  name: DbaStepNames
+): number | undefined => {
   return NexusFormationStepsConfiguration.find((x) => {
     return x.name === name;
   })?.stepIndex;
 };
 
-export const LookupNexusNameByStepIndex = (index: number): DbaStepNames | undefined => {
+export const LookupNexusNameByStepIndex = (
+  index: number
+): DbaStepNames | undefined => {
   const foundName = NexusFormationStepsConfiguration.find((x) => {
     return x.stepIndex === index;
   })?.name;

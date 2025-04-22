@@ -2,7 +2,11 @@ import { ProfileAddressLockedFields } from "@/components/profile/ProfileAddressL
 import { generateAddress } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { WithStatefulAddressData } from "@/test/mock/withStatefulAddressData";
-import { emptyFormationAddressData, FormationAddress, Municipality } from "@businessnjgovnavigator/shared/";
+import {
+  emptyFormationAddressData,
+  FormationAddress,
+  Municipality,
+} from "@businessnjgovnavigator/shared/";
 import {
   generateFormationData,
   generateFormationFormData,
@@ -64,12 +68,22 @@ describe("ProfileAddressLockedFields", () => {
       });
       renderComponent({ address });
 
-      expect(screen.getByTestId("locked-profileBusinessAddressTooltip")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("locked-profileBusinessAddressTooltip")
+      ).toBeInTheDocument();
       const addressLine1 = screen.getByTestId("locked-profileAddressLine1");
-      expect(within(addressLine1).getByText("1111 Home Alone")).toBeInTheDocument();
-      const addressMuniStateZip = screen.getByTestId("locked-profileAddressMuniStateZip");
-      expect(within(addressMuniStateZip).getByText("Allendale, NJ 00893")).toBeInTheDocument();
-      expect(screen.queryByTestId("locked-profileAddressLine2")).not.toBeInTheDocument();
+      expect(
+        within(addressLine1).getByText("1111 Home Alone")
+      ).toBeInTheDocument();
+      const addressMuniStateZip = screen.getByTestId(
+        "locked-profileAddressMuniStateZip"
+      );
+      expect(
+        within(addressMuniStateZip).getByText("Allendale, NJ 00893")
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByTestId("locked-profileAddressLine2")
+      ).not.toBeInTheDocument();
     });
 
     it("renders profile address locked fields with Address Line 2", () => {
@@ -90,13 +104,21 @@ describe("ProfileAddressLockedFields", () => {
       });
       renderComponent({ address });
 
-      expect(screen.getByTestId("locked-profileBusinessAddressTooltip")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("locked-profileBusinessAddressTooltip")
+      ).toBeInTheDocument();
       const addressLine1 = screen.getByTestId("locked-profileAddressLine1");
-      expect(within(addressLine1).getByText("1111 Home Alone")).toBeInTheDocument();
+      expect(
+        within(addressLine1).getByText("1111 Home Alone")
+      ).toBeInTheDocument();
       const addressLine2 = screen.getByTestId("locked-profileAddressLine2");
       expect(within(addressLine2).getByText("Suite 10")).toBeInTheDocument();
-      const addressMuniStateZip = screen.getByTestId("locked-profileAddressMuniStateZip");
-      expect(within(addressMuniStateZip).getByText("Allendale, NJ 00893")).toBeInTheDocument();
+      const addressMuniStateZip = screen.getByTestId(
+        "locked-profileAddressMuniStateZip"
+      );
+      expect(
+        within(addressMuniStateZip).getByText("Allendale, NJ 00893")
+      ).toBeInTheDocument();
     });
 
     it("does not render address fields when address fields are empty", () => {
@@ -116,11 +138,21 @@ describe("ProfileAddressLockedFields", () => {
       });
       renderComponent({ address });
 
-      expect(screen.getByTestId("locked-profileBusinessAddressTooltip")).toBeInTheDocument();
-      expect(screen.getByTestId("locked-profileAddressNotProvided")).toBeInTheDocument();
-      expect(screen.queryByTestId("locked-profileAddressLine1")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("locked-profileAddressLine2")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("locked-profileAddressMuniStateZip")).not.toBeInTheDocument();
+      expect(
+        screen.getByTestId("locked-profileBusinessAddressTooltip")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId("locked-profileAddressNotProvided")
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByTestId("locked-profileAddressLine1")
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("locked-profileAddressLine2")
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("locked-profileAddressMuniStateZip")
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -142,12 +174,22 @@ describe("ProfileAddressLockedFields", () => {
       });
       renderComponent({ address });
 
-      expect(screen.getByTestId("locked-profileBusinessAddressTooltip")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("locked-profileBusinessAddressTooltip")
+      ).toBeInTheDocument();
       const addressLine1 = screen.getByTestId("locked-profileAddressLine1");
-      expect(within(addressLine1).getByText("1111 Home Alone")).toBeInTheDocument();
-      const addressCityStateZip = screen.getByTestId("locked-profileAddressCityStateZip");
-      expect(within(addressCityStateZip).getByText("New York, NY 11429")).toBeInTheDocument();
-      expect(screen.queryByTestId("locked-profileAddressLine2")).not.toBeInTheDocument();
+      expect(
+        within(addressLine1).getByText("1111 Home Alone")
+      ).toBeInTheDocument();
+      const addressCityStateZip = screen.getByTestId(
+        "locked-profileAddressCityStateZip"
+      );
+      expect(
+        within(addressCityStateZip).getByText("New York, NY 11429")
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByTestId("locked-profileAddressLine2")
+      ).not.toBeInTheDocument();
     });
 
     it("renders profile address locked fields with Address Line 2", () => {
@@ -168,13 +210,21 @@ describe("ProfileAddressLockedFields", () => {
       });
       renderComponent({ address });
 
-      expect(screen.getByTestId("locked-profileBusinessAddressTooltip")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("locked-profileBusinessAddressTooltip")
+      ).toBeInTheDocument();
       const addressLine1 = screen.getByTestId("locked-profileAddressLine1");
-      expect(within(addressLine1).getByText("1111 Home Alone")).toBeInTheDocument();
+      expect(
+        within(addressLine1).getByText("1111 Home Alone")
+      ).toBeInTheDocument();
       const addressLine2 = screen.getByTestId("locked-profileAddressLine2");
       expect(within(addressLine2).getByText("Suite 10")).toBeInTheDocument();
-      const addressCityStateZip = screen.getByTestId("locked-profileAddressCityStateZip");
-      expect(within(addressCityStateZip).getByText("New York, NY 11429")).toBeInTheDocument();
+      const addressCityStateZip = screen.getByTestId(
+        "locked-profileAddressCityStateZip"
+      );
+      expect(
+        within(addressCityStateZip).getByText("New York, NY 11429")
+      ).toBeInTheDocument();
     });
 
     it("does not render address fields when address fields are empty", () => {
@@ -194,11 +244,21 @@ describe("ProfileAddressLockedFields", () => {
       });
       renderComponent({ address });
 
-      expect(screen.getByTestId("locked-profileBusinessAddressTooltip")).toBeInTheDocument();
-      expect(screen.getByTestId("locked-profileAddressNotProvided")).toBeInTheDocument();
-      expect(screen.queryByTestId("locked-profileAddressLine1")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("locked-profileAddressLine2")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("locked-profileAddressCityStateZip")).not.toBeInTheDocument();
+      expect(
+        screen.getByTestId("locked-profileBusinessAddressTooltip")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId("locked-profileAddressNotProvided")
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByTestId("locked-profileAddressLine1")
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("locked-profileAddressLine2")
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("locked-profileAddressCityStateZip")
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -220,12 +280,22 @@ describe("ProfileAddressLockedFields", () => {
       });
       renderComponent({ address });
 
-      expect(screen.getByTestId("locked-profileBusinessAddressTooltip")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("locked-profileBusinessAddressTooltip")
+      ).toBeInTheDocument();
       const addressLine1 = screen.getByTestId("locked-profileAddressLine1");
-      expect(within(addressLine1).getByText("1111 Home Alone")).toBeInTheDocument();
-      const addressCityProvZip = screen.getByTestId("locked-profileAddressCityProvZip");
-      expect(within(addressCityProvZip).getByText("London, some-Province ERT45")).toBeInTheDocument();
-      expect(screen.queryByTestId("locked-profileAddressLine2")).not.toBeInTheDocument();
+      expect(
+        within(addressLine1).getByText("1111 Home Alone")
+      ).toBeInTheDocument();
+      const addressCityProvZip = screen.getByTestId(
+        "locked-profileAddressCityProvZip"
+      );
+      expect(
+        within(addressCityProvZip).getByText("London, some-Province ERT45")
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByTestId("locked-profileAddressLine2")
+      ).not.toBeInTheDocument();
     });
 
     it("renders profile address locked fields with Address Line 2", () => {
@@ -246,13 +316,21 @@ describe("ProfileAddressLockedFields", () => {
       });
       renderComponent({ address });
 
-      expect(screen.getByTestId("locked-profileBusinessAddressTooltip")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("locked-profileBusinessAddressTooltip")
+      ).toBeInTheDocument();
       const addressLine1 = screen.getByTestId("locked-profileAddressLine1");
-      expect(within(addressLine1).getByText("1111 Home Alone")).toBeInTheDocument();
+      expect(
+        within(addressLine1).getByText("1111 Home Alone")
+      ).toBeInTheDocument();
       const addressLine2 = screen.getByTestId("locked-profileAddressLine2");
       expect(within(addressLine2).getByText("Suite 10")).toBeInTheDocument();
-      const addressCityProvZip = screen.getByTestId("locked-profileAddressCityProvZip");
-      expect(within(addressCityProvZip).getByText("London, some-Province ERT45")).toBeInTheDocument();
+      const addressCityProvZip = screen.getByTestId(
+        "locked-profileAddressCityProvZip"
+      );
+      expect(
+        within(addressCityProvZip).getByText("London, some-Province ERT45")
+      ).toBeInTheDocument();
     });
 
     it("does not render address fields when address fields are empty", () => {
@@ -272,11 +350,21 @@ describe("ProfileAddressLockedFields", () => {
       });
       renderComponent({ address });
 
-      expect(screen.getByTestId("locked-profileBusinessAddressTooltip")).toBeInTheDocument();
-      expect(screen.getByTestId("locked-profileAddressNotProvided")).toBeInTheDocument();
-      expect(screen.queryByTestId("locked-profileAddressLine1")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("locked-profileAddressLine2")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("locked-profileAddressCityProvZip")).not.toBeInTheDocument();
+      expect(
+        screen.getByTestId("locked-profileBusinessAddressTooltip")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId("locked-profileAddressNotProvided")
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByTestId("locked-profileAddressLine1")
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("locked-profileAddressLine2")
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("locked-profileAddressCityProvZip")
+      ).not.toBeInTheDocument();
     });
   });
 });

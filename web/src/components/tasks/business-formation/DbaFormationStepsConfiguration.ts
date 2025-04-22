@@ -10,13 +10,17 @@ export const DbaFormationStepsConfiguration: {
   { name: "Authorize Business", stepIndex: 2 },
 ];
 
-export const LookupDbaStepIndexByName = (name: DbaStepNames): number | undefined => {
+export const LookupDbaStepIndexByName = (
+  name: DbaStepNames
+): number | undefined => {
   return DbaFormationStepsConfiguration.find((x) => {
     return x.name === name;
   })?.stepIndex;
 };
 
-export const LookupDbaNameByStepIndex = (index: number): DbaStepNames | undefined => {
+export const LookupDbaNameByStepIndex = (
+  index: number
+): DbaStepNames | undefined => {
   const foundName = DbaFormationStepsConfiguration.find((x) => {
     return x.stepIndex === index;
   })?.name;

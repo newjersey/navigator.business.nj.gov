@@ -63,7 +63,9 @@ describe("<NavBarMobileAccountSlideOutMenu />", () => {
 
     expect(openSideBar).toHaveBeenCalled();
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_hamburger_icon.click.open_mobile_menu).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_hamburger_icon.click.open_mobile_menu
+      ).toHaveBeenCalled();
     });
   });
 
@@ -88,7 +90,9 @@ describe("<NavBarMobileAccountSlideOutMenu />", () => {
     expect(closeSideBar).toHaveBeenCalled();
 
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_menu_close_button.click.close_mobile_menu).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_menu_close_button.click.close_mobile_menu
+      ).toHaveBeenCalled();
     });
   });
 
@@ -106,14 +110,18 @@ describe("<NavBarMobileAccountSlideOutMenu />", () => {
     expect(screen.getByText(innerMenuTitle)).toBeInTheDocument();
     expect(screen.getByText(subMenuText)).toBeInTheDocument();
 
-    const closeMenuIcon = screen.getByTestId("nav-menu-mobile-account-close-click-outside");
+    const closeMenuIcon = screen.getByTestId(
+      "nav-menu-mobile-account-close-click-outside"
+    );
     expect(closeMenuIcon).toBeInTheDocument();
     fireEvent.click(closeMenuIcon);
 
     expect(closeSideBar).toHaveBeenCalled();
 
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_menu.click_outside.close_mobile_menu).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_menu.click_outside.close_mobile_menu
+      ).toHaveBeenCalled();
     });
   });
 

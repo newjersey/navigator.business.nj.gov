@@ -12,7 +12,10 @@ import {
   generateUserDataForBusiness,
   TaxFilingState,
 } from "@businessnjgovnavigator/shared";
-import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import {
+  generateOwningProfileData,
+  OperatingPhaseId,
+} from "@businessnjgovnavigator/shared/";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
 
@@ -37,7 +40,9 @@ const renderComponent = (businessOverrides: Partial<Business>): void => {
         }}
       >
         <WithStatefulUserData
-          initialUserData={generateUserDataForBusiness(generateBusiness(businessOverrides))}
+          initialUserData={generateUserDataForBusiness(
+            generateBusiness(businessOverrides)
+          )}
         >
           <NaicsCode />
         </WithStatefulUserData>
@@ -55,19 +60,29 @@ describe("<NaicsCode />", () => {
   });
 
   it("routes to naics code URL", () => {
-    useMockRoadmapTask({ id: "determine-naics-code", urlSlug: "some-naics-url" });
+    useMockRoadmapTask({
+      id: "determine-naics-code",
+      urlSlug: "some-naics-url",
+    });
     renderComponent({});
-    expect(screen.getByText(configForField.editText)).toHaveAttribute("href", "/tasks/some-naics-url");
+    expect(screen.getByText(configForField.editText)).toHaveAttribute(
+      "href",
+      "/tasks/some-naics-url"
+    );
   });
 
   it("displays NAICS code when exists", () => {
-    renderComponent({ profileData: generateProfileData({ naicsCode: "123456" }) });
+    renderComponent({
+      profileData: generateProfileData({ naicsCode: "123456" }),
+    });
     expect(screen.queryByTestId("not-entered")).not.toBeInTheDocument();
     expect(screen.getByText("123456")).toBeInTheDocument();
   });
 
   it("display Edit when there is naics code", () => {
-    renderComponent({ profileData: generateProfileData({ naicsCode: "123456" }) });
+    renderComponent({
+      profileData: generateProfileData({ naicsCode: "123456" }),
+    });
     expect(screen.getByText(configForField.editText)).toBeInTheDocument();
     expect(screen.queryByText(configForField.addText)).not.toBeInTheDocument();
   });
@@ -91,22 +106,33 @@ describe("<NaicsCode />", () => {
         }),
         taxFilingData: generateTaxFilingData({ state: "SUCCESS" }),
       });
-      expect(screen.queryByText(configForField.editText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(configForField.editText)
+      ).not.toBeInTheDocument();
       expect(screen.getByTestId("naics-code-tooltip")).toBeInTheDocument();
     });
 
     describe("tax filing states other than success", () => {
-      const taxFilingStates = ["FAILED", "API_ERROR", "PENDING", "UNREGISTERED"];
+      const taxFilingStates = [
+        "FAILED",
+        "API_ERROR",
+        "PENDING",
+        "UNREGISTERED",
+      ];
       for (const state of taxFilingStates) {
         it(`displays Edit text and doesn't display tooltip when tax filing state is ${state}`, () => {
           renderComponent({
             profileData: generateProfileData({
               naicsCode: "624410",
             }),
-            taxFilingData: generateTaxFilingData({ state: state as TaxFilingState }),
+            taxFilingData: generateTaxFilingData({
+              state: state as TaxFilingState,
+            }),
           });
           expect(screen.getByText(configForField.editText)).toBeInTheDocument();
-          expect(screen.queryByTestId("naics-code-tooltip")).not.toBeInTheDocument();
+          expect(
+            screen.queryByTestId("naics-code-tooltip")
+          ).not.toBeInTheDocument();
         });
       }
     });

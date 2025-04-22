@@ -40,7 +40,9 @@ export const TaskCtaLinks = (props: Props): ReactElement => {
 
   if (ctaButtons.length === 1) {
     const [ctaHyperlink] = ctaButtons;
-    return <SingleCtaLink link={ctaHyperlink.destination} text={ctaHyperlink.text} />;
+    return (
+      <SingleCtaLink link={ctaHyperlink.destination} text={ctaHyperlink.text} />
+    );
   }
 
   return <></>;

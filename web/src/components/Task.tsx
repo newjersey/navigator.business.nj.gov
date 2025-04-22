@@ -17,14 +17,18 @@ export const Task = (props: Props): ReactElement => {
   const { business } = useUserData();
   const { Config } = useConfig();
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-  const taskProgress = (business?.taskProgress && business.taskProgress[props.task.id]) || "TO_DO";
+  const taskProgress =
+    (business?.taskProgress && business.taskProgress[props.task.id]) || "TO_DO";
 
   const renderRequiredLabel = (): ReactNode => {
     if (!props.task.required) {
       return <></>;
     }
     return (
-      <span className="text-base text-no-underline display-inline-block" data-testid="required task">
+      <span
+        className="text-base text-no-underline display-inline-block"
+        data-testid="required task"
+      >
         <Content>{Config.taskDefaults.requiredLabelText}</Content>
       </span>
     );
@@ -46,8 +50,14 @@ export const Task = (props: Props): ReactElement => {
           <Link
             href={`/tasks/${props.task.urlSlug}`}
             passHref
-            onClick={(): void => analytics.event.roadmap_task_title.click.go_to_task(props.task.urlSlug)}
-            className={`usa-link margin-right-105 ${props.task.required ? "text-bold" : ""}`}
+            onClick={(): void =>
+              analytics.event.roadmap_task_title.click.go_to_task(
+                props.task.urlSlug
+              )
+            }
+            className={`usa-link margin-right-105 ${
+              props.task.required ? "text-bold" : ""
+            }`}
             data-task={props.task.id}
             data-testid={props.task.id}
           >
@@ -59,7 +69,8 @@ export const Task = (props: Props): ReactElement => {
       </div>
       {!isTabletAndUp && (
         <div className="margin-bottom-2">
-          {TaskProgressTagLookup[taskProgress]} <span className="margin-left-1">{renderRequiredLabel()}</span>
+          {TaskProgressTagLookup[taskProgress]}{" "}
+          <span className="margin-left-1">{renderRequiredLabel()}</span>
         </div>
       )}
     </li>

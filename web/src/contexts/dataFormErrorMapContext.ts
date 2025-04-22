@@ -1,4 +1,7 @@
-import { createFormContext, createReducedFieldStates } from "@/contexts/formContext";
+import {
+  createFormContext,
+  createReducedFieldStates,
+} from "@/contexts/formContext";
 import { profileFieldsFromConfig, ReducedFieldStates } from "@/lib/types/types";
 import {
   BusinessUser,
@@ -17,10 +20,18 @@ export type DataFormErrorMapFields =
   | keyof FormationAddress
   | keyof TaxClearanceCertificateData;
 
-const allProfileFields = Object.keys(profileFieldsFromConfig) as (keyof ProfileData)[];
-const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof BusinessUser)[];
-const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
-const formationAddressFields = Object.keys(emptyFormationAddressData) as (keyof FormationAddress)[];
+const allProfileFields = Object.keys(
+  profileFieldsFromConfig
+) as (keyof ProfileData)[];
+const businessUserDisplayFields = Object.keys(
+  emptyBusinessUser
+) as (keyof BusinessUser)[];
+const onboardingDataFields = Object.keys(
+  emptyProfileData
+) as (keyof ProfileData)[];
+const formationAddressFields = Object.keys(
+  emptyFormationAddressData
+) as (keyof FormationAddress)[];
 const taxClearanceCertificateFields = Object.keys(
   emptyTaxClearanceCertificateData
 ) as (keyof TaxClearanceCertificateData)[];
@@ -42,4 +53,7 @@ export const DataFormErrorMapContext = createFormContext<DataFormErrorMap>();
 export const createDataFormErrorMap = <FieldError>(): ReducedFieldStates<
   DataFormErrorMapFields,
   FieldError
-> => createReducedFieldStates<(typeof dataFormErrorMapFields)[number], FieldError>(dataFormErrorMapFields);
+> =>
+  createReducedFieldStates<(typeof dataFormErrorMapFields)[number], FieldError>(
+    dataFormErrorMapFields
+  );

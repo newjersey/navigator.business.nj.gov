@@ -20,7 +20,10 @@ const FeatureFlagsPage = (props: Props): ReactElement => {
   const envVars = JSON.parse(props.envVars);
 
   const featuresWithSuffixes = Object.keys(envVars).filter((it) => {
-    return it.startsWith("FEATURE_") && (it.endsWith("_STAGING") || it.endsWith("_PROD"));
+    return (
+      it.startsWith("FEATURE_") &&
+      (it.endsWith("_STAGING") || it.endsWith("_PROD"))
+    );
   });
 
   const features = [
@@ -47,10 +50,22 @@ const FeatureFlagsPage = (props: Props): ReactElement => {
             return (
               <tr key={it}>
                 <td>{it}</td>
-                <td className={envVars[`FEATURE_${it}_STAGING`]?.includes("true") ? "enabled" : "disabled"}>
+                <td
+                  className={
+                    envVars[`FEATURE_${it}_STAGING`]?.includes("true")
+                      ? "enabled"
+                      : "disabled"
+                  }
+                >
                   {envVars[`FEATURE_${it}_STAGING`] || "false"}
                 </td>
-                <td className={envVars[`FEATURE_${it}_PROD`]?.includes("true") ? "enabled" : "disabled"}>
+                <td
+                  className={
+                    envVars[`FEATURE_${it}_PROD`]?.includes("true")
+                      ? "enabled"
+                      : "disabled"
+                  }
+                >
                   {envVars[`FEATURE_${it}_PROD`] || "false"}
                 </td>
               </tr>
@@ -63,13 +78,20 @@ const FeatureFlagsPage = (props: Props): ReactElement => {
 
   return (
     <PageSkeleton>
-      <NextSeo title={getNextSeoTitle(config.pagesMetadata.featureFlagsTitle)} noindex={true} />
+      <NextSeo
+        title={getNextSeoTitle(config.pagesMetadata.featureFlagsTitle)}
+        noindex={true}
+      />
       <main>
         <SingleColumnContainer>
           {isAuthed ? (
             authedView
           ) : (
-            <MgmtAuth password={password} setIsAuthed={setIsAuthed} setPassword={setPassword} />
+            <MgmtAuth
+              password={password}
+              setIsAuthed={setIsAuthed}
+              setPassword={setPassword}
+            />
           )}
         </SingleColumnContainer>
       </main>
@@ -77,7 +99,9 @@ const FeatureFlagsPage = (props: Props): ReactElement => {
   );
 };
 
-export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
+export const getStaticProps = async (): Promise<
+  GetStaticPropsResult<Props>
+> => {
   return {
     props: {
       envVars: JSON.stringify(process.env),

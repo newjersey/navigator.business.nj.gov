@@ -22,9 +22,12 @@ interface Props extends FormContextFieldProps {
 
 export const AccountSetupForm = (props: Props): ReactElement => {
   const [email, setEmail] = useState<string>(props.user.email || "");
-  const [confirmEmail, setConfirmEmail] = useState<string | undefined>(props.user.email || undefined);
+  const [confirmEmail, setConfirmEmail] = useState<string | undefined>(
+    props.user.email || undefined
+  );
   const { Config } = useConfig();
-  const { registrationStatus, setRegistrationStatus } = useContext(NeedsAccountContext);
+  const { registrationStatus, setRegistrationStatus } =
+    useContext(NeedsAccountContext);
 
   const emailFormContextHelpers = useFormContextFieldHelpers(
     "email",
@@ -41,13 +44,17 @@ export const AccountSetupForm = (props: Props): ReactElement => {
   emailFormContextHelpers.RegisterForOnSubmit(() =>
     props.user.email ? validateEmail(props.user.email) : false
   );
-  nameFormContextHelpers.RegisterForOnSubmit(() => getFullNameErrorVariant(props.user.name) === "NO_ERROR");
+  nameFormContextHelpers.RegisterForOnSubmit(
+    () => getFullNameErrorVariant(props.user.name) === "NO_ERROR"
+  );
 
   const FullNameErrorMessageLookup: Record<FullNameErrorVariant, string> = {
     MISSING: Config.selfRegistration.errorTextFullName,
     TOO_LONG: Config.selfRegistration.errorTextFullNameLength,
-    MUST_START_WITH_LETTER: Config.selfRegistration.errorTextFullNameStartWithLetter,
-    CONTAINS_ILLEGAL_CHAR: Config.selfRegistration.errorTextFullNameSpecialCharacter,
+    MUST_START_WITH_LETTER:
+      Config.selfRegistration.errorTextFullNameStartWithLetter,
+    CONTAINS_ILLEGAL_CHAR:
+      Config.selfRegistration.errorTextFullNameSpecialCharacter,
     NO_ERROR: "",
   };
 
@@ -63,8 +70,13 @@ export const AccountSetupForm = (props: Props): ReactElement => {
     props.setUser({ ...props.user, receiveNewsletter: value });
   };
 
-  const handleContactSharingWithAccountCreationPartner = (value: boolean): void => {
-    props.setUser({ ...props.user, contactSharingWithAccountCreationPartner: value });
+  const handleContactSharingWithAccountCreationPartner = (
+    value: boolean
+  ): void => {
+    props.setUser({
+      ...props.user,
+      contactSharingWithAccountCreationPartner: value,
+    });
   };
 
   const handleName = (value: string): void => {
@@ -75,19 +87,28 @@ export const AccountSetupForm = (props: Props): ReactElement => {
     return (value: string): void => {
       if (confirm) {
         setConfirmEmail(value);
-        email === value && email.length > 0 ? updateEmailState(email) : updateEmailState("");
+        email === value && email.length > 0
+          ? updateEmailState(email)
+          : updateEmailState("");
       } else {
         setEmail(value);
-        confirmEmail === value && value.length > 0 ? updateEmailState(value) : updateEmailState("");
+        confirmEmail === value && value.length > 0
+          ? updateEmailState(value)
+          : updateEmailState("");
       }
     };
   };
 
   const getEmailError = (): boolean => {
-    return emailFormContextHelpers.isFormFieldInvalid || registrationStatus === "DUPLICATE_ERROR";
+    return (
+      emailFormContextHelpers.isFormFieldInvalid ||
+      registrationStatus === "DUPLICATE_ERROR"
+    );
   };
 
-  const getEmailValidationText = (emailInput: { isConfirmEmail: boolean }): string => {
+  const getEmailValidationText = (emailInput: {
+    isConfirmEmail: boolean;
+  }): string => {
     if (registrationStatus === "DUPLICATE_ERROR") {
       if (emailInput.isConfirmEmail) {
         return Config.selfRegistration.errorTextDuplicateSignUp;
@@ -105,9 +126,14 @@ export const AccountSetupForm = (props: Props): ReactElement => {
 
   return (
     <div className="tablet:padding-y-2">
-      <p className="padding-bottom-1">{Config.selfRegistration.signUpDescriptionText}</p>
+      <p className="padding-bottom-1">
+        {Config.selfRegistration.signUpDescriptionText}
+      </p>
       <div className="margin-top-2">
-        <WithErrorBar hasError={nameFormContextHelpers.isFormFieldInvalid} type="ALWAYS">
+        <WithErrorBar
+          hasError={nameFormContextHelpers.isFormFieldInvalid}
+          type="ALWAYS"
+        >
           <label htmlFor="name" className="text-bold">
             {Config.selfRegistration.nameFieldLabel}
           </label>
@@ -116,7 +142,11 @@ export const AccountSetupForm = (props: Props): ReactElement => {
             formContext={DataFormErrorMapContext}
             fieldName={"name"}
             error={nameFormContextHelpers.isFormFieldInvalid}
-            validationText={FullNameErrorMessageLookup[getFullNameErrorVariant(props.user.name)]}
+            validationText={
+              FullNameErrorMessageLookup[
+                getFullNameErrorVariant(props.user.name)
+              ]
+            }
             required={true}
             handleChange={handleName}
             additionalValidationIsValid={isFullNameValid}
@@ -125,7 +155,10 @@ export const AccountSetupForm = (props: Props): ReactElement => {
           />
         </WithErrorBar>
       </div>
-      <WithErrorBar hasError={registrationStatus === "DUPLICATE_ERROR"} type="ALWAYS">
+      <WithErrorBar
+        hasError={registrationStatus === "DUPLICATE_ERROR"}
+        type="ALWAYS"
+      >
         <div className="margin-top-2">
           <WithErrorBar hasError={getEmailError()} type="ALWAYS">
             <label htmlFor="email" className="text-bold">
@@ -136,11 +169,15 @@ export const AccountSetupForm = (props: Props): ReactElement => {
               fieldName={"email"}
               error={getEmailError()}
               handleChange={handleEmail()}
-              onValidation={(_, invalid): void => emailFormContextHelpers.setIsValid(!invalid)}
+              onValidation={(_, invalid): void =>
+                emailFormContextHelpers.setIsValid(!invalid)
+              }
               validationText={getEmailValidationText({ isConfirmEmail: false })}
               required={true}
               additionalValidationIsValid={(value): boolean => {
-                return confirmEmail ? value === confirmEmail : validateEmail(value);
+                return confirmEmail
+                  ? value === confirmEmail
+                  : validateEmail(value);
               }}
               inputWidth="default"
               onFocus={resetRegistrationErrorOnFocus}
@@ -156,7 +193,9 @@ export const AccountSetupForm = (props: Props): ReactElement => {
               value={confirmEmail}
               error={getEmailError()}
               handleChange={handleEmail(true)}
-              onValidation={(_, invalid): void => emailFormContextHelpers.setIsValid(!invalid)}
+              onValidation={(_, invalid): void =>
+                emailFormContextHelpers.setIsValid(!invalid)
+              }
               required={true}
               additionalValidationIsValid={(value): boolean => {
                 return value === email && validateEmail(value);
@@ -184,7 +223,9 @@ export const AccountSetupForm = (props: Props): ReactElement => {
           control={
             <Checkbox
               checked={props.user.userTesting}
-              onChange={(event): void => handleUserTesting(event.target.checked)}
+              onChange={(event): void =>
+                handleUserTesting(event.target.checked)
+              }
               id="contactMeCheckbox"
             />
           }
@@ -192,12 +233,16 @@ export const AccountSetupForm = (props: Props): ReactElement => {
 
         {props.user.accountCreationSource === "investNewark" && (
           <FormControlLabel
-            label={Config.selfRegistration.investNewarkContactSharingCheckboxLabel}
+            label={
+              Config.selfRegistration.investNewarkContactSharingCheckboxLabel
+            }
             control={
               <Checkbox
                 checked={props.user.contactSharingWithAccountCreationPartner}
                 onChange={(event): void =>
-                  handleContactSharingWithAccountCreationPartner(event.target.checked)
+                  handleContactSharingWithAccountCreationPartner(
+                    event.target.checked
+                  )
                 }
                 id="investNewarkCheckbox"
               />

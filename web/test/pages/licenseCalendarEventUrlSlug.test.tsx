@@ -22,17 +22,25 @@ describe("license page", () => {
     jest.resetAllMocks();
   });
 
-  const renderLicensePage = (license: LicenseEventType, licenseEventType: LicenseEventSubtype): void => {
+  const renderLicensePage = (
+    license: LicenseEventType,
+    licenseEventType: LicenseEventSubtype
+  ): void => {
     render(
       <ThemeProvider theme={createTheme()}>
-        <LicenseCalendarEventPage license={license} licenseEventType={licenseEventType} />
+        <LicenseCalendarEventPage
+          license={license}
+          licenseEventType={licenseEventType}
+        />
       </ThemeProvider>
     );
   };
 
   it("shows the basic expiration details and expiration date", () => {
     const expirationDate = currentDate.add(4, "days");
-    const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
+    const licenseName = randomElementFromArray(
+      Object.values(taskIdLicenseNameMapping)
+    );
     const license = generateLicenseEvent({
       licenseName,
       urlSlug: "license-url-slug-1",
@@ -57,20 +65,28 @@ describe("license page", () => {
 
     renderLicensePage(license, "expiration");
 
-    expect(screen.getByText(license.expirationEventDisplayName)).toBeInTheDocument();
-    expect(screen.getByTestId("license-current-status-component")).toBeInTheDocument();
+    expect(
+      screen.getByText(license.expirationEventDisplayName)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId("license-current-status-component")
+    ).toBeInTheDocument();
 
     expect(screen.getByText("cta-text-1")).toBeInTheDocument();
     expect(screen.getByText("content-1")).toBeInTheDocument();
     expect(screen.getByText("summary-description-1")).toBeInTheDocument();
     expect(screen.getByText("disclaimer-text-1")).toBeInTheDocument();
-    expect(screen.getByText(expirationDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
+    expect(
+      screen.getByText(expirationDate.format("MMMM D, YYYY"), { exact: false })
+    ).toBeInTheDocument();
   });
 
   it("shows the basic renewal details and renewal date", () => {
     const expirationDate = currentDate.add(4, "days");
 
-    const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
+    const licenseName = randomElementFromArray(
+      Object.values(taskIdLicenseNameMapping)
+    );
     const license = generateLicenseEvent({
       licenseName,
       urlSlug: "license-url-slug-1",
@@ -96,8 +112,12 @@ describe("license page", () => {
 
     renderLicensePage(license, "renewal");
 
-    expect(screen.getByText(license.renewalEventDisplayName)).toBeInTheDocument();
-    expect(screen.getByTestId("license-current-status-component")).toBeInTheDocument();
+    expect(
+      screen.getByText(license.renewalEventDisplayName)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId("license-current-status-component")
+    ).toBeInTheDocument();
 
     expect(screen.getByText("cta-text-1")).toBeInTheDocument();
     expect(screen.getByText("content-1")).toBeInTheDocument();

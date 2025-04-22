@@ -14,11 +14,20 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { formationTaskId } from "@businessnjgovnavigator/shared/";
-import { isFormationTask, isTaxTask } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
+import {
+  isFormationTask,
+  isTaxTask,
+} from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { useRouter } from "next/compat/router";
-import { ReactElement, ReactNode, useContext, useEffect, useState } from "react";
+import {
+  ReactElement,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface Props {
   taskId: string;
@@ -26,15 +35,24 @@ interface Props {
   STORYBOOK_ONLY_currentTaskProgress?: TaskProgress;
 }
 
-type ModalTypes = "formation" | "formation-unset" | "registered-for-taxes-unset";
+type ModalTypes =
+  | "formation"
+  | "formation-unset"
+  | "registered-for-taxes-unset";
 
 export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const { business, updateQueue } = useUserData();
-  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
-  const { queueUpdateTaskProgress, congratulatoryModal } = useUpdateTaskProgress();
-  const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState<boolean>(false);
-  const [currentOpenModal, setCurrentOpenModal] = useState<ModalTypes | undefined>(undefined);
-  const [taxRegistrationSnackbarIsOpen, setTaxRegistrationSnackbarIsOpen] = useState<boolean>(false);
+  const { isAuthenticated, setShowNeedsAccountModal } =
+    useContext(NeedsAccountContext);
+  const { queueUpdateTaskProgress, congratulatoryModal } =
+    useUpdateTaskProgress();
+  const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] =
+    useState<boolean>(false);
+  const [currentOpenModal, setCurrentOpenModal] = useState<
+    ModalTypes | undefined
+  >(undefined);
+  const [taxRegistrationSnackbarIsOpen, setTaxRegistrationSnackbarIsOpen] =
+    useState<boolean>(false);
   const router = useRouter();
   const { Config } = useConfig();
 
@@ -50,10 +68,16 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
       updateQueue?.queueTaskProgress({ [formationTaskId]: "COMPLETED" });
       updateQueue?.update();
     }
-  }, [business, updateQueue, updateTaskProgressDueToWiremockFormationCompletion]);
+  }, [
+    business,
+    updateQueue,
+    updateTaskProgressDueToWiremockFormationCompletion,
+  ]);
 
   const currentTaskProgress: TaskProgress =
-    props.STORYBOOK_ONLY_currentTaskProgress ?? business?.taskProgress[props.taskId] ?? "TO_DO";
+    props.STORYBOOK_ONLY_currentTaskProgress ??
+    business?.taskProgress[props.taskId] ??
+    "TO_DO";
   const isDisabled = !!props.disabledTooltipText;
 
   const getNextStatus = (): TaskProgress => {
@@ -80,12 +104,17 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         analytics.event.task_status_checkbox.click_completed.show_formation_date_modal();
         return;
       }
-      if (currentTaskProgress === "COMPLETED" && currentOpenModal === undefined) {
+      if (
+        currentTaskProgress === "COMPLETED" &&
+        currentOpenModal === undefined
+      ) {
         setCurrentOpenModal("formation-unset");
         return;
       }
       if (currentOpenModal === "formation-unset") {
-        updateQueue.queueProfileData({ dateOfFormation: emptyProfileData.dateOfFormation });
+        updateQueue.queueProfileData({
+          dateOfFormation: emptyProfileData.dateOfFormation,
+        });
       }
     }
 
@@ -94,7 +123,10 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         redirectOnSuccess = true;
         analytics.event.tax_registration_snackbar.submit.show_tax_registration_success_snackbar();
       }
-      if (currentTaskProgress === "COMPLETED" && currentOpenModal === undefined) {
+      if (
+        currentTaskProgress === "COMPLETED" &&
+        currentOpenModal === undefined
+      ) {
         setCurrentOpenModal("registered-for-taxes-unset");
         return;
       }
@@ -106,7 +138,8 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     updateQueue
       .update()
       .then(() => {
-        if (!(isFormationTask(props.taskId) && nextStatus === "COMPLETED")) setSuccessSnackbarIsOpen(true);
+        if (!(isFormationTask(props.taskId) && nextStatus === "COMPLETED"))
+          setSuccessSnackbarIsOpen(true);
         if (!redirectOnSuccess) {
           return;
         }
@@ -114,7 +147,9 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
           routeWithQuery(router, {
             path: ROUTES.dashboard,
             queries: {
-              [QUERIES.fromFormBusinessEntity]: isFormationTask(props.taskId) ? "true" : "false",
+              [QUERIES.fromFormBusinessEntity]: isFormationTask(props.taskId)
+                ? "true"
+                : "false",
             },
           });
       })
@@ -132,7 +167,12 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     }
   };
 
-  const getStyles = (): { border: string; bg: string; textColor: string; hover: string } => {
+  const getStyles = (): {
+    border: string;
+    bg: string;
+    textColor: string;
+    hover: string;
+  } => {
     switch (currentTaskProgress) {
       case "TO_DO":
         if (isDisabled) {
@@ -181,10 +221,12 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const getAdditionalAriaContext = (): string => {
     if (isFormationTask(props.taskId)) {
       if (getNextStatus() === "COMPLETED") {
-        return Config.formation.general.ariaContextWillNeedToProvideBusinessDate;
+        return Config.formation.general
+          .ariaContextWillNeedToProvideBusinessDate;
       }
       if (currentTaskProgress === "COMPLETED") {
-        return Config.formation.general.ariaContextWillLooseCalendarAndCertificationAccess;
+        return Config.formation.general
+          .ariaContextWillLooseCalendarAndCertificationAccess;
       }
     }
     return "";
@@ -223,7 +265,10 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
       <div className="margin-right-2">
         {isDisabled ? (
           <ArrowTooltip title={props.disabledTooltipText || ""}>
-            <div data-testid="status-info-tooltip" className={"line-height-100"}>
+            <div
+              data-testid="status-info-tooltip"
+              className={"line-height-100"}
+            >
               {Checkbox()}
             </div>
           </ArrowTooltip>
@@ -232,7 +277,9 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         )}
       </div>
 
-      <span className="flex flex-align-center">{TaskProgressTagLookup[currentTaskProgress]}</span>
+      <span className="flex flex-align-center">
+        {TaskProgressTagLookup[currentTaskProgress]}
+      </span>
 
       <TaskStatusChangeSnackbar
         isOpen={successSnackbarIsOpen}
@@ -255,9 +302,13 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         isOpen={currentOpenModal === "registered-for-taxes-unset"}
         close={(): void => setCurrentOpenModal(undefined)}
         title={Config.registeredForTaxesModal.areYouSureTaxTitle}
-        primaryButtonText={Config.registeredForTaxesModal.areYouSureTaxContinueButton}
+        primaryButtonText={
+          Config.registeredForTaxesModal.areYouSureTaxContinueButton
+        }
         primaryButtonOnClick={(): void => setToNextStatus()}
-        secondaryButtonText={Config.registeredForTaxesModal.areYouSureTaxCancelButton}
+        secondaryButtonText={
+          Config.registeredForTaxesModal.areYouSureTaxCancelButton
+        }
       >
         <Content>{Config.registeredForTaxesModal.areYouSureTaxBody}</Content>
       </ModalTwoButton>
@@ -266,9 +317,13 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         isOpen={currentOpenModal === "formation-unset"}
         close={(): void => setCurrentOpenModal(undefined)}
         title={Config.formationDateModal.areYouSureModalHeader}
-        primaryButtonText={Config.formationDateModal.areYouSureModalContinueButtonText}
+        primaryButtonText={
+          Config.formationDateModal.areYouSureModalContinueButtonText
+        }
         primaryButtonOnClick={(): void => setToNextStatus()}
-        secondaryButtonText={Config.formationDateModal.areYouSureModalCancelButtonText}
+        secondaryButtonText={
+          Config.formationDateModal.areYouSureModalCancelButtonText
+        }
       >
         <Content>{Config.formationDateModal.areYouSureModalBody}</Content>
       </ModalTwoButton>

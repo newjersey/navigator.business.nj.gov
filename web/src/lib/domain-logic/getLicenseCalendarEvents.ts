@@ -5,7 +5,10 @@ import {
   Licenses,
   parseDate,
 } from "@businessnjgovnavigator/shared";
-import { LicenseName, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
+import {
+  LicenseName,
+  taskIdLicenseNameMapping,
+} from "@businessnjgovnavigator/shared/";
 
 export const getLicenseCalendarEvents = (
   licenseData: LicenseData | undefined,
@@ -23,7 +26,9 @@ export const getLicenseCalendarEvents = (
     return events;
   }
 
-  for (const [licenseName, licenseDetail] of Object.entries(licenseData.licenses as Licenses)) {
+  for (const [licenseName, licenseDetail] of Object.entries(
+    licenseData.licenses as Licenses
+  )) {
     if (licenseDetail.expirationDateISO === undefined) {
       continue;
     }
@@ -35,7 +40,10 @@ export const getLicenseCalendarEvents = (
     }
 
     const expirationDate = parseDate(licenseDetail.expirationDateISO);
-    if (expirationDate.year() === year && (isMonthDefined ? expirationDate.month() === month : true)) {
+    if (
+      expirationDate.year() === year &&
+      (isMonthDefined ? expirationDate.month() === month : true)
+    ) {
       events.push({
         dueDate: expirationDate.format(defaultDateFormat),
         licenseEventSubtype: "expiration",
@@ -44,7 +52,10 @@ export const getLicenseCalendarEvents = (
       });
     }
     const renewalDate = expirationDate.add(30, "days");
-    if (renewalDate.year() === year && (isMonthDefined ? renewalDate.month() === month : true)) {
+    if (
+      renewalDate.year() === year &&
+      (isMonthDefined ? renewalDate.month() === month : true)
+    ) {
       events.push({
         dueDate: renewalDate.format(defaultDateFormat),
         licenseEventSubtype: "renewal",

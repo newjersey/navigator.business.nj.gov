@@ -56,7 +56,9 @@ describe("<NavBarDesktopDropDown/>", () => {
 
     expect(setOpen).toHaveBeenCalled();
     await waitFor(() => {
-      expect(mockAnalytics.event.account_name.click.expand_account_menu).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.account_name.click.expand_account_menu
+      ).toHaveBeenCalled();
     });
   });
 

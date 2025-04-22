@@ -37,10 +37,16 @@ const STATUS_TAB_INDEX = 1;
 
 export const LicenseTask = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
-  const callToActionLink = getModifiedTaskContent(roadmap, props.task, "callToActionLink");
+  const callToActionLink = getModifiedTaskContent(
+    roadmap,
+    props.task,
+    "callToActionLink"
+  );
   const [tabIndex, setTabIndex] = useState(APPLICATION_TAB_INDEX);
   const [error, setError] = useState<LicenseSearchError | undefined>(undefined);
-  const [licenseDetails, setLicenseDetails] = useState<LicenseDetails | undefined>(undefined);
+  const [licenseDetails, setLicenseDetails] = useState<
+    LicenseDetails | undefined
+  >(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { business, refresh } = useUserData();
   const { Config } = useConfig();
@@ -48,13 +54,20 @@ export const LicenseTask = (props: Props): ReactElement => {
   const licenseNameForTask = taskIdLicenseNameMapping[props.task.id];
   const hasCompletedSearch = !!licenseDetails?.lastUpdatedISO;
 
-  const allFieldsHaveValues = (nameAndAddress: LicenseSearchNameAndAddress): boolean => {
-    return !!(nameAndAddress.name && nameAndAddress.addressLine1 && nameAndAddress.zipCode);
+  const allFieldsHaveValues = (
+    nameAndAddress: LicenseSearchNameAndAddress
+  ): boolean => {
+    return !!(
+      nameAndAddress.name &&
+      nameAndAddress.addressLine1 &&
+      nameAndAddress.zipCode
+    );
   };
 
   useEffect(() => {
     if (!business) return;
-    const licenseDetailsReceived = business.licenseData?.licenses?.[licenseNameForTask]?.lastUpdatedISO;
+    const licenseDetailsReceived =
+      business.licenseData?.licenses?.[licenseNameForTask]?.lastUpdatedISO;
 
     if (!licenseDetailsReceived && business.licenseData?.lastUpdatedISO) {
       setError("NOT_FOUND");
@@ -95,7 +108,9 @@ export const LicenseTask = (props: Props): ReactElement => {
       .checkLicenseStatus(nameAndAddress)
       .then((result: UserData) => {
         const resultLicenseData =
-          result.businesses[result.currentBusinessId]?.licenseData?.licenses?.[licenseNameForTask];
+          result.businesses[result.currentBusinessId]?.licenseData?.licenses?.[
+            licenseNameForTask
+          ];
 
         if (!resultLicenseData) {
           analytics.event.task_address_form.response.fail_application_not_found();
@@ -125,11 +140,17 @@ export const LicenseTask = (props: Props): ReactElement => {
   };
 
   return (
-    <NeedsAccountModalWrapper CMS_ONLY_disable_overlay={props.CMS_ONLY_disable_overlay}>
+    <NeedsAccountModalWrapper
+      CMS_ONLY_disable_overlay={props.CMS_ONLY_disable_overlay}
+    >
       <div className="flex flex-column">
         <TaskHeader
           task={props.task}
-          tooltipText={hasCompletedSearch ? Config.licenseSearchTask.tooltipText : undefined}
+          tooltipText={
+            hasCompletedSearch
+              ? Config.licenseSearchTask.tooltipText
+              : undefined
+          }
         />
         <Box sx={{ width: "100%" }}>
           <TabContext value={tabIndex.toString()}>
@@ -137,17 +158,32 @@ export const LicenseTask = (props: Props): ReactElement => {
               <TabList
                 onChange={onSelectTab}
                 aria-label="License task"
-                sx={{ borderBottom: 1, borderColor: "divider", marginTop: ".25rem", marginLeft: ".5rem" }}
+                sx={{
+                  borderBottom: 1,
+                  borderColor: "divider",
+                  marginTop: ".25rem",
+                  marginLeft: ".5rem",
+                }}
               >
-                <Tab value="0" sx={tabStyle} label={Config.licenseSearchTask.tab1Text} />
-                <Tab value="1" sx={tabStyle} label={Config.licenseSearchTask.tab2Text} />
+                <Tab
+                  value="0"
+                  sx={tabStyle}
+                  label={Config.licenseSearchTask.tab1Text}
+                />
+                <Tab
+                  value="1"
+                  sx={tabStyle}
+                  label={Config.licenseSearchTask.tab2Text}
+                />
               </TabList>
             </Box>
             <TabPanel value="0">
               <div className="margin-top-3">
                 <UnlockedBy task={props.task} />
                 <Content>{props.task.summaryDescriptionMd || ""}</Content>
-                <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
+                <Content>
+                  {getModifiedTaskContent(roadmap, props.task, "contentMd")}
+                </Content>
               </div>
               <CtaContainer>
                 <ActionBarLayout>
@@ -180,7 +216,10 @@ export const LicenseTask = (props: Props): ReactElement => {
                     dataTestId="cta-primary"
                   >
                     {Config.licenseSearchTask.primaryCTAFirstLineText}
-                    <Icon iconName="launch" className="usa-icon-button-margin" />
+                    <Icon
+                      iconName="launch"
+                      className="usa-icon-button-margin"
+                    />
                   </PrimaryButton>
                 </ActionBarLayout>
               </CtaContainer>

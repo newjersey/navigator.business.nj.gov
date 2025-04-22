@@ -24,9 +24,17 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import { ThemeProvider, createTheme } from "@mui/material";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({
+  buildUserRoadmap: jest.fn(),
+}));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
@@ -37,18 +45,25 @@ jest.mock("@/lib/static/records/naics2022.json", () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { LookupIndustryById } = require("@businessnjgovnavigator/shared");
   const naicsCodes = LookupIndustryById(industryId).naicsCodes?.split(",");
-  const thing = generateNaicsObject({ SixDigitDescription: "test1234" }, naicsCodes[0]);
+  const thing = generateNaicsObject(
+    { SixDigitDescription: "test1234" },
+    naicsCodes[0]
+  );
   return [thing];
 });
 
 const validIndustryId = "auto-body-repair";
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const validNaicsCode = LookupIndustryById(validIndustryId).naicsCodes!.split(",")[0];
+const validNaicsCode =
+  LookupIndustryById(validIndustryId).naicsCodes!.split(",")[0];
 const Config = getMergedConfig();
 
 describe("<NaicsCodeTask />", () => {
   let task: Task;
-  const content = "some content here\n\n" + "${naicsCodeLookupComponent}\n\n" + "more content";
+  const content =
+    "some content here\n\n" +
+    "${naicsCodeLookupComponent}\n\n" +
+    "more content";
   const taskId = "12345";
 
   beforeEach(() => {
@@ -62,8 +77,12 @@ describe("<NaicsCodeTask />", () => {
     render(<NaicsCodeTask task={task} />);
     expect(screen.getByText("some content here")).toBeInTheDocument();
     expect(screen.getByText("more content")).toBeInTheDocument();
-    expect(screen.queryByText("${naicsCodeLookupComponent}")).not.toBeInTheDocument();
-    expect(screen.getByText(Config.determineNaicsCode.findCodeHeader)).toBeInTheDocument();
+    expect(
+      screen.queryByText("${naicsCodeLookupComponent}")
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByText(Config.determineNaicsCode.findCodeHeader)
+    ).toBeInTheDocument();
   });
 
   describe("NAICS code radio buttons", () => {
@@ -72,7 +91,9 @@ describe("<NaicsCodeTask />", () => {
     const renderPage = (): void => {
       render(
         withNeedsAccountContext(
-          <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(initialBusiness)}
+          >
             <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.TRUE
@@ -82,7 +103,10 @@ describe("<NaicsCodeTask />", () => {
 
     beforeEach(() => {
       initialBusiness = generateBusiness({
-        profileData: generateProfileData({ naicsCode: "", industryId: validIndustryId }),
+        profileData: generateProfileData({
+          naicsCode: "",
+          industryId: validIndustryId,
+        }),
         taskProgress: { [taskId]: "TO_DO" },
       });
     });
@@ -90,8 +114,12 @@ describe("<NaicsCodeTask />", () => {
     it("shows the radio buttons when an industry has a recommended NAICS code", () => {
       renderPage();
       expect(screen.getByTestId("naics-radio-input")).toBeInTheDocument();
-      expect(screen.getByLabelText("Recommended NAICS codes")).toBeInTheDocument();
-      expect(screen.getByTestId(`naics-radio-${validNaicsCode}`)).toBeInTheDocument();
+      expect(
+        screen.getByLabelText("Recommended NAICS codes")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId(`naics-radio-${validNaicsCode}`)
+      ).toBeInTheDocument();
     });
 
     it("links description to NAICS code website", () => {
@@ -102,16 +130,24 @@ describe("<NaicsCodeTask />", () => {
         return element.SixDigitCode?.toString() === validNaicsCode;
       })!.SixDigitDescription!;
 
-      const expectedUrl = templateEval(Config.determineNaicsCode.naicsDescriptionURL, {
-        code: validNaicsCode,
-      });
+      const expectedUrl = templateEval(
+        Config.determineNaicsCode.naicsDescriptionURL,
+        {
+          code: validNaicsCode,
+        }
+      );
 
-      expect(screen.getByText(description)).toHaveAttribute("href", expectedUrl);
+      expect(screen.getByText(description)).toHaveAttribute(
+        "href",
+        expectedUrl
+      );
     });
 
     it("hides input field by default", () => {
       renderPage();
-      expect(screen.queryByLabelText("Save NAICS Code")).not.toBeInTheDocument();
+      expect(
+        screen.queryByLabelText("Save NAICS Code")
+      ).not.toBeInTheDocument();
     });
 
     it("task progress remains to-do when radio button is pressed", async () => {
@@ -126,7 +162,9 @@ describe("<NaicsCodeTask />", () => {
       renderPage();
       fireEvent.click(screen.getByTestId(`naics-radio-${validNaicsCode}`));
 
-      fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
+      fireEvent.click(
+        screen.getByText(Config.determineNaicsCode.saveButtonText)
+      );
       await waitFor(() => {
         expect(currentBusiness().profileData.naicsCode).toEqual(validNaicsCode);
       });
@@ -143,16 +181,22 @@ describe("<NaicsCodeTask />", () => {
       fireEvent.click(screen.getByTestId(`naics-radio-input`));
       expect(screen.getByLabelText("Save NAICS Code")).toBeInTheDocument();
       fireEvent.click(screen.getByTestId(`naics-radio-${validNaicsCode}`));
-      expect(screen.queryByLabelText("Save NAICS Code")).not.toBeInTheDocument();
+      expect(
+        screen.queryByLabelText("Save NAICS Code")
+      ).not.toBeInTheDocument();
     });
 
     it("displays code with success message on save", async () => {
       renderPage();
       fireEvent.click(screen.getByTestId(`naics-radio-${validNaicsCode}`));
 
-      fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
+      fireEvent.click(
+        screen.getByText(Config.determineNaicsCode.saveButtonText)
+      );
       await waitFor(() => {
-        expect(screen.getByText(Config.determineNaicsCode.hasSavedCodeHeader)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.determineNaicsCode.hasSavedCodeHeader)
+        ).toBeInTheDocument();
       });
     });
 
@@ -160,7 +204,9 @@ describe("<NaicsCodeTask />", () => {
       renderPage();
       fireEvent.click(screen.getByTestId(`naics-radio-${validNaicsCode}`));
 
-      fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
+      fireEvent.click(
+        screen.getByText(Config.determineNaicsCode.saveButtonText)
+      );
       await waitFor(() => {
         expect(currentBusiness().taskProgress[taskId]).toEqual("COMPLETED");
       });
@@ -173,7 +219,9 @@ describe("<NaicsCodeTask />", () => {
     const renderPage = (): void => {
       render(
         withNeedsAccountContext(
-          <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(initialBusiness)}
+          >
             <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.TRUE
@@ -191,7 +239,9 @@ describe("<NaicsCodeTask />", () => {
     it("does not show the radio button on generic industry", () => {
       renderPage();
       expect(screen.queryByTestId("naics-radio-input")).not.toBeInTheDocument();
-      expect(screen.queryByLabelText("Recommended NAICS codes")).not.toBeInTheDocument();
+      expect(
+        screen.queryByLabelText("Recommended NAICS codes")
+      ).not.toBeInTheDocument();
     });
 
     it("shows the correct save button text", async () => {
@@ -200,7 +250,9 @@ describe("<NaicsCodeTask />", () => {
         target: { value: "12345" },
       });
 
-      expect(screen.getByText(`${Config.determineNaicsCode.saveButtonText}`)).toBeInTheDocument();
+      expect(
+        screen.getByText(`${Config.determineNaicsCode.saveButtonText}`)
+      ).toBeInTheDocument();
     });
 
     it("enters and saves NAICS code", async () => {
@@ -208,7 +260,9 @@ describe("<NaicsCodeTask />", () => {
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: validNaicsCode },
       });
-      fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
+      fireEvent.click(
+        screen.getByText(Config.determineNaicsCode.saveButtonText)
+      );
       await waitFor(() => {
         expect(currentBusiness().profileData.naicsCode).toEqual(validNaicsCode);
       });
@@ -219,8 +273,12 @@ describe("<NaicsCodeTask />", () => {
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: "12345" },
       });
-      fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
-      expect(screen.getByText(Config.determineNaicsCode.lengthValidationErrorText)).toBeInTheDocument();
+      fireEvent.click(
+        screen.getByText(Config.determineNaicsCode.saveButtonText)
+      );
+      expect(
+        screen.getByText(Config.determineNaicsCode.lengthValidationErrorText)
+      ).toBeInTheDocument();
       expect(userDataWasNotUpdated()).toBe(true);
     });
 
@@ -229,9 +287,15 @@ describe("<NaicsCodeTask />", () => {
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: "123457" },
       });
-      expect(screen.getByText(Config.determineNaicsCode.invalidValidationErrorText)).toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
-      expect(screen.getByText(Config.determineNaicsCode.invalidValidationErrorText)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.determineNaicsCode.invalidValidationErrorText)
+      ).toBeInTheDocument();
+      fireEvent.click(
+        screen.getByText(Config.determineNaicsCode.saveButtonText)
+      );
+      expect(
+        screen.getByText(Config.determineNaicsCode.invalidValidationErrorText)
+      ).toBeInTheDocument();
       expect(userDataWasNotUpdated()).toBe(true);
     });
 
@@ -240,7 +304,9 @@ describe("<NaicsCodeTask />", () => {
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: "123457" },
       });
-      expect(screen.getByText(Config.determineNaicsCode.invalidValidationErrorText)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.determineNaicsCode.invalidValidationErrorText)
+      ).toBeInTheDocument();
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: "12345" },
       });
@@ -254,11 +320,17 @@ describe("<NaicsCodeTask />", () => {
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: validNaicsCode },
       });
-      fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
+      fireEvent.click(
+        screen.getByText(Config.determineNaicsCode.saveButtonText)
+      );
       await waitFor(() => {
-        expect(screen.getByText(Config.determineNaicsCode.hasSavedCodeHeader)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.determineNaicsCode.hasSavedCodeHeader)
+        ).toBeInTheDocument();
       });
-      expect(screen.queryByLabelText("Save NAICS Code")).not.toBeInTheDocument();
+      expect(
+        screen.queryByLabelText("Save NAICS Code")
+      ).not.toBeInTheDocument();
     });
 
     it("sets task status to COMPLETED on save", async () => {
@@ -266,7 +338,9 @@ describe("<NaicsCodeTask />", () => {
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: validNaicsCode },
       });
-      fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
+      fireEvent.click(
+        screen.getByText(Config.determineNaicsCode.saveButtonText)
+      );
       await waitFor(() => {
         expect(currentBusiness().taskProgress[taskId]).toEqual("COMPLETED");
       });
@@ -285,8 +359,12 @@ describe("<NaicsCodeTask />", () => {
         ...initialBusiness,
         profileData: {
           ...initialBusiness.profileData,
-          operatingPhase: params?.operatingPhaseId ?? initialBusiness.profileData.operatingPhase,
-          businessPersona: params?.businessPersona ?? initialBusiness.profileData.businessPersona,
+          operatingPhase:
+            params?.operatingPhaseId ??
+            initialBusiness.profileData.operatingPhase,
+          businessPersona:
+            params?.businessPersona ??
+            initialBusiness.profileData.businessPersona,
         },
         taxFilingData: {
           ...initialBusiness.taxFilingData,
@@ -296,7 +374,9 @@ describe("<NaicsCodeTask />", () => {
       render(
         withNeedsAccountContext(
           <ThemeProvider theme={createTheme()}>
-            <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
+            <WithStatefulUserData
+              initialUserData={generateUserDataForBusiness(business)}
+            >
               <NaicsCodeTask task={task} />
             </WithStatefulUserData>
           </ThemeProvider>,
@@ -314,8 +394,12 @@ describe("<NaicsCodeTask />", () => {
 
     it("displays code when NAICS code exists in data", () => {
       renderPage();
-      expect(screen.queryByLabelText("Save NAICS Code")).not.toBeInTheDocument();
-      expect(screen.getByText(Config.determineNaicsCode.hasSavedCodeHeader)).toBeInTheDocument();
+      expect(
+        screen.queryByLabelText("Save NAICS Code")
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.determineNaicsCode.hasSavedCodeHeader)
+      ).toBeInTheDocument();
     });
 
     it("displays description when NAICS code exists in data", () => {
@@ -326,18 +410,30 @@ describe("<NaicsCodeTask />", () => {
     it("navigates back to input and sets on edit button click", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.editText));
-      expect(screen.getByText(Config.determineNaicsCode.findCodeHeader)).toBeInTheDocument();
-      expect((screen.getByLabelText("Save NAICS Code") as HTMLInputElement).value).toEqual(validNaicsCode);
-      expect(screen.queryByText(Config.determineNaicsCode.hasSavedCodeHeader)).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.determineNaicsCode.findCodeHeader)
+      ).toBeInTheDocument();
+      expect(
+        (screen.getByLabelText("Save NAICS Code") as HTMLInputElement).value
+      ).toEqual(validNaicsCode);
+      expect(
+        screen.queryByText(Config.determineNaicsCode.hasSavedCodeHeader)
+      ).not.toBeInTheDocument();
     });
 
     it("navigates back to empty input on remove button click", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
-      expect(screen.getByText(Config.determineNaicsCode.findCodeHeader)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.determineNaicsCode.findCodeHeader)
+      ).toBeInTheDocument();
       fireEvent.click(screen.getByTestId(`naics-radio-input`));
-      expect((screen.getByLabelText("Save NAICS Code") as HTMLInputElement).value).toEqual("");
-      expect(screen.queryByText(Config.determineNaicsCode.hasSavedCodeHeader)).not.toBeInTheDocument();
+      expect(
+        (screen.getByLabelText("Save NAICS Code") as HTMLInputElement).value
+      ).toEqual("");
+      expect(
+        screen.queryByText(Config.determineNaicsCode.hasSavedCodeHeader)
+      ).not.toBeInTheDocument();
       expect(currentBusiness().profileData.naicsCode).toEqual("");
     });
 
@@ -356,32 +452,55 @@ describe("<NaicsCodeTask />", () => {
     describe("when the naics code is present", () => {
       it("doesn't display the edit and remove button when the tax filing state is success", () => {
         renderPage({ taxFilingState: "SUCCESS" });
-        expect(screen.queryByText(Config.taskDefaults.editText)).not.toBeInTheDocument();
-        expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.taskDefaults.editText)
+        ).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.taskDefaults.removeText)
+        ).not.toBeInTheDocument();
         expect(screen.getByTestId("naics-code-tooltip")).toBeInTheDocument();
       });
 
       it("displays the tooltip when the tax filing state is success", () => {
         renderPage({ taxFilingState: "SUCCESS" });
-        expect(screen.queryByText(Config.taskDefaults.editText)).not.toBeInTheDocument();
-        expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.taskDefaults.editText)
+        ).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.taskDefaults.removeText)
+        ).not.toBeInTheDocument();
         expect(screen.getByTestId("naics-code-tooltip")).toBeInTheDocument();
       });
 
       describe("for tax filing states other than success", () => {
-        const taxFilingStates = ["FAILED", "API_ERROR", "PENDING", "UNREGISTERED"];
+        const taxFilingStates = [
+          "FAILED",
+          "API_ERROR",
+          "PENDING",
+          "UNREGISTERED",
+        ];
         for (const state of taxFilingStates) {
           it(`displays the edit and remove button when the tax filing state is ${state}`, () => {
             renderPage({ taxFilingState: state as TaxFilingState });
-            expect(screen.getByText(Config.taskDefaults.editText)).toBeInTheDocument();
-            expect(screen.getByText(Config.taskDefaults.removeText)).toBeInTheDocument();
+            expect(
+              screen.getByText(Config.taskDefaults.editText)
+            ).toBeInTheDocument();
+            expect(
+              screen.getByText(Config.taskDefaults.removeText)
+            ).toBeInTheDocument();
           });
 
           it(`doesn't display the tooltip when the tax filing state is ${state}`, () => {
             renderPage({ taxFilingState: state as TaxFilingState });
-            expect(screen.getByText(Config.taskDefaults.editText)).toBeInTheDocument();
-            expect(screen.getByText(Config.taskDefaults.removeText)).toBeInTheDocument();
-            expect(screen.queryByTestId("naics-code-tooltip")).not.toBeInTheDocument();
+            expect(
+              screen.getByText(Config.taskDefaults.editText)
+            ).toBeInTheDocument();
+            expect(
+              screen.getByText(Config.taskDefaults.removeText)
+            ).toBeInTheDocument();
+            expect(
+              screen.queryByTestId("naics-code-tooltip")
+            ).not.toBeInTheDocument();
           });
         }
       });
@@ -395,7 +514,9 @@ describe("<NaicsCodeTask />", () => {
     const renderPage = (): void => {
       render(
         withNeedsAccountContext(
-          <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(initialBusiness)}
+          >
             <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
@@ -414,42 +535,63 @@ describe("<NaicsCodeTask />", () => {
 
     it("prepends register to the next button", async () => {
       renderPage();
-      expect(screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`)).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          `Register & ${Config.determineNaicsCode.saveButtonText}`
+        )
+      ).toBeInTheDocument();
     });
 
     it("opens Needs Account modal on save button click", () => {
       renderPage();
-      fireEvent.click(screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`));
+      fireEvent.click(
+        screen.getByText(
+          `Register & ${Config.determineNaicsCode.saveButtonText}`
+        )
+      );
       expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
 
     it("opens Needs Account modal on NAICS Code radio button click", () => {
       initialBusiness = generateBusiness({
-        profileData: generateProfileData({ naicsCode: "", industryId: "acupuncture" }),
+        profileData: generateProfileData({
+          naicsCode: "",
+          industryId: "acupuncture",
+        }),
       });
       renderPage();
 
       fireEvent.click(screen.getByTestId("naics-radio-621399"));
 
       expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
-      expect(within(screen.getByTestId("naics-radio-621399")).getByRole("radio")).not.toBeChecked();
+      expect(
+        within(screen.getByTestId("naics-radio-621399")).getByRole("radio")
+      ).not.toBeChecked();
     });
 
     it("opens Needs Account modal on NAICS Code input radio button click", () => {
       initialBusiness = generateBusiness({
-        profileData: generateProfileData({ naicsCode: "", industryId: "acupuncture" }),
+        profileData: generateProfileData({
+          naicsCode: "",
+          industryId: "acupuncture",
+        }),
       });
       renderPage();
 
       fireEvent.click(screen.getByTestId("naics-radio-input"));
 
       expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
-      expect(within(screen.getByTestId("naics-radio-input")).getByRole("radio")).not.toBeChecked();
+      expect(
+        within(screen.getByTestId("naics-radio-input")).getByRole("radio")
+      ).not.toBeChecked();
     });
 
     it("keeps task progress as TO_DO when radio button is clicked", () => {
       initialBusiness = generateBusiness({
-        profileData: generateProfileData({ naicsCode: "", industryId: "acupuncture" }),
+        profileData: generateProfileData({
+          naicsCode: "",
+          industryId: "acupuncture",
+        }),
       });
       renderPage();
       fireEvent.click(screen.getByTestId("naics-radio-621399"));
@@ -459,11 +601,16 @@ describe("<NaicsCodeTask />", () => {
     describe("guest mode - generic industry", () => {
       it("opens modal when a user types in NAICS code input field", () => {
         initialBusiness = generateBusiness({
-          profileData: generateProfileData({ naicsCode: "", industryId: "generic" }),
+          profileData: generateProfileData({
+            naicsCode: "",
+            industryId: "generic",
+          }),
         });
         renderPage();
 
-        fireEvent.change(screen.getByLabelText("Save NAICS Code"), { target: { value: "123456" } });
+        fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
+          target: { value: "123456" },
+        });
 
         expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
         expect(screen.getByLabelText("Save NAICS Code")).toHaveValue("");

@@ -17,5 +17,7 @@ export const SidebarCardGoToProfileNudge = (props: Props): ReactElement => {
     router && router.push(ROUTES.profile);
   };
 
-  return <SidebarCardGeneric card={props.card} preBodyButtonOnClick={onClick} />;
+  return (
+    <SidebarCardGeneric card={props.card} preBodyButtonOnClick={onClick} />
+  );
 };

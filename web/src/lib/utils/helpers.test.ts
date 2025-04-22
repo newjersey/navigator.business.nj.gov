@@ -45,9 +45,12 @@ describe("useMountEffectWhenDefined", () => {
 
   it("calls function just once after all array dependencies become defined", () => {
     const mockFn = jest.fn();
-    const { rerender } = renderHook((props: Props) => useMountEffectWhenDefined(mockFn, props.value), {
-      initialProps: { value: [undefined, undefined] } as Props,
-    });
+    const { rerender } = renderHook(
+      (props: Props) => useMountEffectWhenDefined(mockFn, props.value),
+      {
+        initialProps: { value: [undefined, undefined] } as Props,
+      }
+    );
 
     expect(mockFn).not.toHaveBeenCalled();
 

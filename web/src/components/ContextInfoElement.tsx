@@ -7,7 +7,12 @@ import React, { forwardRef, ReactElement } from "react";
 // eslint-disable-next-line react/display-name
 export const ContextInfoElement = forwardRef(
   (
-    props: { isVisible: boolean; header: string; markdown: string; close?: () => void },
+    props: {
+      isVisible: boolean;
+      header: string;
+      markdown: string;
+      close?: () => void;
+    },
     ref?: React.LegacyRef<any>
   ): ReactElement => {
     return (

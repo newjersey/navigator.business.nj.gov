@@ -70,7 +70,9 @@ describe("<TwoTabDashboardLayout />", () => {
       });
 
       useMockBusiness({
-        preferences: generatePreferences({ visibleSidebarCards: [SIDEBAR_CARDS.notRegistered] }),
+        preferences: generatePreferences({
+          visibleSidebarCards: [SIDEBAR_CARDS.notRegistered],
+        }),
         profileData: {
           ...getProfileDataForUnfilteredOpportunities(),
           operatingPhase: randomElementFromArray(operatingPhases).id,
@@ -94,7 +96,9 @@ describe("<TwoTabDashboardLayout />", () => {
       });
 
       useMockBusiness({
-        preferences: generatePreferences({ visibleSidebarCards: [SIDEBAR_CARDS.notRegistered] }),
+        preferences: generatePreferences({
+          visibleSidebarCards: [SIDEBAR_CARDS.notRegistered],
+        }),
         profileData: {
           ...getProfileDataForUnfilteredOpportunities(),
           operatingPhase: randomElementFromArray(operatingPhases).id,
@@ -119,7 +123,9 @@ describe("<TwoTabDashboardLayout />", () => {
       });
 
       useMockBusiness({
-        preferences: generatePreferences({ visibleSidebarCards: [SIDEBAR_CARDS.notRegistered] }),
+        preferences: generatePreferences({
+          visibleSidebarCards: [SIDEBAR_CARDS.notRegistered],
+        }),
         profileData: {
           ...getProfileDataForUnfilteredOpportunities(),
 

@@ -42,26 +42,53 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
   it("opens when the icon is clicked", async () => {
     render(<NavBarMobileQuickLinksSlideOutMenu />);
 
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarSearchText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarPlanText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarStartText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarOperateText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarGrowText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarUpdatesText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarSearchText)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarPlanText)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarStartText)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarOperateText)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarGrowText)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarUpdatesText)
+    ).not.toBeInTheDocument();
 
     const openMenuIcon = screen.getByTestId("nav-menu-mobile-quick-link-open");
     expect(openMenuIcon).toBeInTheDocument();
     fireEvent.click(openMenuIcon);
 
-    expect(screen.getByText(Config.navigationQuickLinks.navBarSearchText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarPlanText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarStartText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarOperateText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarGrowText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarSearchText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarPlanText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarStartText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarOperateText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarGrowText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)
+    ).toBeInTheDocument();
 
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_hamburger_icon_quick_links.click.open_mobile_menu).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_hamburger_icon_quick_links.click
+          .open_mobile_menu
+      ).toHaveBeenCalled();
     });
   });
 
@@ -72,30 +99,57 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
     expect(openMenuIcon).toBeInTheDocument();
     fireEvent.click(openMenuIcon);
 
-    expect(screen.getByText(Config.navigationQuickLinks.navBarSearchText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarPlanText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarStartText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarOperateText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarGrowText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarSearchText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarPlanText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarStartText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarOperateText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarGrowText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)
+    ).toBeInTheDocument();
 
-    const closeMenuIcon = screen.getByTestId("nav-menu-mobile-quick-link-close");
+    const closeMenuIcon = screen.getByTestId(
+      "nav-menu-mobile-quick-link-close"
+    );
     expect(closeMenuIcon).toBeInTheDocument();
     fireEvent.click(closeMenuIcon);
 
     await waitFor(() => {
-      expect(screen.queryByText(Config.navigationQuickLinks.navBarSearchText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationQuickLinks.navBarSearchText)
+      ).not.toBeInTheDocument();
     });
 
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarPlanText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarStartText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarOperateText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarGrowText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarUpdatesText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarPlanText)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarStartText)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarOperateText)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarGrowText)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarUpdatesText)
+    ).not.toBeInTheDocument();
 
     await waitFor(() => {
       expect(
-        mockAnalytics.event.mobile_menu_close_button_quick_links.click.close_mobile_menu
+        mockAnalytics.event.mobile_menu_close_button_quick_links.click
+          .close_mobile_menu
       ).toHaveBeenCalled();
     });
   });
@@ -107,29 +161,58 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
     expect(openMenuIcon).toBeInTheDocument();
     fireEvent.click(openMenuIcon);
 
-    expect(screen.getByText(Config.navigationQuickLinks.navBarSearchText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarPlanText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarStartText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarOperateText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarGrowText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarSearchText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarPlanText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarStartText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarOperateText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarGrowText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)
+    ).toBeInTheDocument();
 
-    const closeMenuIcon = screen.getByTestId("nav-menu-mobile-quick-link-close-click-outside");
+    const closeMenuIcon = screen.getByTestId(
+      "nav-menu-mobile-quick-link-close-click-outside"
+    );
     expect(closeMenuIcon).toBeInTheDocument();
     fireEvent.click(closeMenuIcon);
 
     await waitFor(() => {
-      expect(screen.queryByText(Config.navigationQuickLinks.navBarSearchText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationQuickLinks.navBarSearchText)
+      ).not.toBeInTheDocument();
     });
 
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarPlanText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarStartText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarOperateText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarGrowText)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationQuickLinks.navBarUpdatesText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarPlanText)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarStartText)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarOperateText)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarGrowText)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationQuickLinks.navBarUpdatesText)
+    ).not.toBeInTheDocument();
 
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_menu_quick_links.click_outside.close_mobile_menu).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_menu_quick_links.click_outside
+          .close_mobile_menu
+      ).toHaveBeenCalled();
     });
   });
 
@@ -137,7 +220,9 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
     render(<NavBarMobileQuickLinksSlideOutMenu />);
     const openMenuIcon = screen.getByTestId("nav-menu-mobile-quick-link-open");
     fireEvent.click(openMenuIcon);
-    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarPlanText));
+    fireEvent.click(
+      screen.getByText(Config.navigationQuickLinks.navBarPlanText)
+    );
 
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarPlanLink,
@@ -150,7 +235,9 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
     render(<NavBarMobileQuickLinksSlideOutMenu />);
     const openMenuIcon = screen.getByTestId("nav-menu-mobile-quick-link-open");
     fireEvent.click(openMenuIcon);
-    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarOperateText));
+    fireEvent.click(
+      screen.getByText(Config.navigationQuickLinks.navBarOperateText)
+    );
 
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarOperateLink,
@@ -163,7 +250,9 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
     render(<NavBarMobileQuickLinksSlideOutMenu />);
     const openMenuIcon = screen.getByTestId("nav-menu-mobile-quick-link-open");
     fireEvent.click(openMenuIcon);
-    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarGrowText));
+    fireEvent.click(
+      screen.getByText(Config.navigationQuickLinks.navBarGrowText)
+    );
 
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarGrowLink,
@@ -176,7 +265,9 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
     render(<NavBarMobileQuickLinksSlideOutMenu />);
     const openMenuIcon = screen.getByTestId("nav-menu-mobile-quick-link-open");
     fireEvent.click(openMenuIcon);
-    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarUpdatesText));
+    fireEvent.click(
+      screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)
+    );
 
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarUpdatesLink,
@@ -189,7 +280,9 @@ describe("<NavBarMobileQuickLinksSlideOutMenu />", () => {
     render(<NavBarMobileQuickLinksSlideOutMenu />);
     const openMenuIcon = screen.getByTestId("nav-menu-mobile-quick-link-open");
     fireEvent.click(openMenuIcon);
-    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarSearchText));
+    fireEvent.click(
+      screen.getByText(Config.navigationQuickLinks.navBarSearchText)
+    );
 
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarSearchLink,

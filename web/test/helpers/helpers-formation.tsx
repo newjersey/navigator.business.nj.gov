@@ -16,7 +16,10 @@ import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import {
   Business,
   BusinessUser,
@@ -43,7 +46,14 @@ import {
   generateUserData,
 } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 const Config = getMergedConfig();
@@ -54,7 +64,9 @@ export function flushPromises(): Promise<void> {
   });
 }
 
-export const generateFormationProfileData = (data: Partial<ProfileData>): ProfileData => {
+export const generateFormationProfileData = (
+  data: Partial<ProfileData>
+): ProfileData => {
   return generateProfileData({
     legalStructureId: randomPublicFilingLegalType(),
     businessPersona: "STARTING",
@@ -91,7 +103,9 @@ export const preparePage = ({
   user,
 }: PreparePageParams): FormationPageHelpers => {
   const profileData = generateFormationProfileData({ ...business.profileData });
-  const isValid = publicFilingLegalTypes.includes(profileData.legalStructureId as PublicFilingLegalType);
+  const isValid = publicFilingLegalTypes.includes(
+    profileData.legalStructureId as PublicFilingLegalType
+  );
   const initialBusiness = generateBusiness({
     ...business,
     profileData,
@@ -110,11 +124,14 @@ export const preparePage = ({
   });
 
   const internalMunicipalities = [
-    profileData?.municipality ?? generateMunicipality({ displayName: "GenericTown" }),
+    profileData?.municipality ??
+      generateMunicipality({ displayName: "GenericTown" }),
     ...(municipalities ?? []),
   ];
   initialBusiness.formationData.formationFormData.addressMunicipality &&
-    internalMunicipalities.push(initialBusiness.formationData.formationFormData.addressMunicipality);
+    internalMunicipalities.push(
+      initialBusiness.formationData.formationFormData.addressMunicipality
+    );
 
   const userData = generateUserData({
     user: generateUser(user ?? {}),
@@ -126,10 +143,15 @@ export const preparePage = ({
 
   render(
     withNeedsAccountContext(
-      <MunicipalitiesContext.Provider value={{ municipalities: internalMunicipalities }}>
+      <MunicipalitiesContext.Provider
+        value={{ municipalities: internalMunicipalities }}
+      >
         <WithStatefulUserData initialUserData={userData}>
           <ThemeProvider theme={createTheme()}>
-            <BusinessFormation task={task ?? generateTask({})} displayContent={displayContent} />
+            <BusinessFormation
+              task={task ?? generateTask({})}
+              displayContent={displayContent}
+            />
           </ThemeProvider>
         </WithStatefulUserData>
       </MunicipalitiesContext.Provider>,
@@ -184,21 +206,32 @@ export type FormationPageHelpers = {
   submitBillingStep: () => Promise<void>;
   submitReviewStep: () => Promise<void>;
   clickSubmitAndGetError: (business: Business) => Promise<void>;
-  stepperClickToBusinessNameStep: (eventConfig?: OptionUserEvent) => Promise<void>;
-  stepperClickToNexusBusinessNameStep: (eventConfig?: OptionUserEvent) => Promise<void>;
+  stepperClickToBusinessNameStep: (
+    eventConfig?: OptionUserEvent
+  ) => Promise<void>;
+  stepperClickToNexusBusinessNameStep: (
+    eventConfig?: OptionUserEvent
+  ) => Promise<void>;
   stepperClickToBusinessStep: (eventConfig?: OptionUserEvent) => Promise<void>;
   stepperClickToContactsStep: (eventConfig?: OptionUserEvent) => Promise<void>;
   stepperClickToBillingStep: (eventConfig?: OptionUserEvent) => Promise<void>;
   stepperClickToReviewStep: (eventConfig?: OptionUserEvent) => Promise<void>;
   getStepStateInStepper: (index: number | undefined) => string;
-  searchBusinessName: (nameAvailability: Partial<NameAvailability>) => Promise<void>;
+  searchBusinessName: (
+    nameAvailability: Partial<NameAvailability>
+  ) => Promise<void>;
   fillAndBlurBusinessName: (businessName?: string) => Promise<void>;
   searchBusinessNameAndGetError: (errorCode?: number) => Promise<void>;
   chooseRadio: (value: string) => void;
   getInputElementByLabel: (label: string) => HTMLInputElement;
   getInputElementByTestId: (testId: string) => HTMLInputElement;
-  getInputElementByParentTestId: (testId: string, params: { type: string }) => HTMLInputElement;
-  getListBoxForInputElementByTestId: (testId: string) => Promise<HTMLInputElement>;
+  getInputElementByParentTestId: (
+    testId: string,
+    params: { type: string }
+  ) => HTMLInputElement;
+  getListBoxForInputElementByTestId: (
+    testId: string
+  ) => Promise<HTMLInputElement>;
   selectByText: (label: string, value: string) => void;
   selectCheckbox: (label: string) => void;
   selectCheckboxByTestId: (testId: string) => void;
@@ -208,10 +241,18 @@ export type FormationPageHelpers = {
   checkSignerBox: (index: number, type: "signers" | "incorporators") => void;
   clickAddressSubmit: () => void;
   openAddressModal: (fieldName: string) => Promise<void>;
-  fillAddressModal: (overrides: Partial<FormationSignedAddress>) => Promise<void>;
-  fillAndSubmitAddressModal: (overrides: Partial<FormationSignedAddress>, fieldName: string) => Promise<void>;
+  fillAddressModal: (
+    overrides: Partial<FormationSignedAddress>
+  ) => Promise<void>;
+  fillAndSubmitAddressModal: (
+    overrides: Partial<FormationSignedAddress>,
+    fieldName: string
+  ) => Promise<void>;
   clickSubmit: () => Promise<void>;
-  selectDate: (value: DateObject, fieldType: "Business start date" | "Foreign date of formation") => void;
+  selectDate: (
+    value: DateObject,
+    fieldType: "Business start date" | "Foreign date of formation"
+  ) => void;
   uploadFile: (file: File) => void;
   completeWillPracticeLaw: (response?: boolean) => void;
 };
@@ -225,18 +266,24 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fireEvent.blur(item);
   };
 
-  const fillAndSubmitBusinessNameStep = async (businessName = "Default Test Name"): Promise<void> => {
+  const fillAndSubmitBusinessNameStep = async (
+    businessName = "Default Test Name"
+  ): Promise<void> => {
     fillText("Search business name", businessName);
     await searchBusinessName({ status: "AVAILABLE" });
 
-    fireEvent.click(screen.getByText(Config.formation.general.initialNextButtonText));
+    fireEvent.click(
+      screen.getByText(Config.formation.general.initialNextButtonText)
+    );
 
     await waitFor(() => {
       expect(screen.queryByTestId("business-step")).toBeInTheDocument();
     });
   };
 
-  const fillAndBlurBusinessName = async (businessName = "Default Test Name"): Promise<void> => {
+  const fillAndBlurBusinessName = async (
+    businessName = "Default Test Name"
+  ): Promise<void> => {
     fillText("Search business name", businessName);
     fireEvent.blur(screen.getByLabelText("Search business name"));
   };
@@ -244,64 +291,102 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   const submitNexusBusinessNameStep = async (): Promise<void> => {
     await searchBusinessName({ status: "AVAILABLE" });
 
-    fireEvent.click(screen.getByText(Config.formation.general.initialNextNexusButtonText));
+    fireEvent.click(
+      screen.getByText(Config.formation.general.initialNextNexusButtonText)
+    );
 
     await waitFor(() => {
       expect(screen.queryByTestId("business-step")).toBeInTheDocument();
     });
   };
-  const fillAndSubmitNexusBusinessNameStep = async (businessName = "Default Test Name"): Promise<void> => {
+  const fillAndSubmitNexusBusinessNameStep = async (
+    businessName = "Default Test Name"
+  ): Promise<void> => {
     fillText("Search business name", businessName);
     await submitNexusBusinessNameStep();
   };
 
   const stepperClickToNexusBusinessNameStep = async (): Promise<void> => {
-    fireEvent.click(screen.getByTestId(`stepper-${LookupNexusStepIndexByName("Business Name")}`));
+    fireEvent.click(
+      screen.getByTestId(
+        `stepper-${LookupNexusStepIndexByName("Business Name")}`
+      )
+    );
     await waitFor(() => {
       expect(screen.queryByTestId("nexus-name-step")).toBeInTheDocument();
     });
   };
 
-  const stepperClickToBusinessNameStep = async (eventConfig?: OptionUserEvent): Promise<void> => {
+  const stepperClickToBusinessNameStep = async (
+    eventConfig?: OptionUserEvent
+  ): Promise<void> => {
     eventConfig?.useUserEvent
-      ? userEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`))
-      : fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`));
+      ? userEvent.click(
+          screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`)
+        )
+      : fireEvent.click(
+          screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`)
+        );
     await waitFor(() => {
       expect(screen.queryByTestId("business-name-step")).toBeInTheDocument();
     });
   };
 
-  const stepperClickToBusinessStep = async (eventConfig?: OptionUserEvent): Promise<void> => {
+  const stepperClickToBusinessStep = async (
+    eventConfig?: OptionUserEvent
+  ): Promise<void> => {
     eventConfig?.useUserEvent
-      ? userEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`))
-      : fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`));
+      ? userEvent.click(
+          screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`)
+        )
+      : fireEvent.click(
+          screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`)
+        );
     await waitFor(() => {
       expect(screen.queryByTestId("business-step")).toBeInTheDocument();
     });
   };
 
-  const stepperClickToContactsStep = async (eventConfig?: OptionUserEvent): Promise<void> => {
+  const stepperClickToContactsStep = async (
+    eventConfig?: OptionUserEvent
+  ): Promise<void> => {
     eventConfig?.useUserEvent
-      ? userEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Contacts")}`))
-      : fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Contacts")}`));
+      ? userEvent.click(
+          screen.getByTestId(`stepper-${LookupStepIndexByName("Contacts")}`)
+        )
+      : fireEvent.click(
+          screen.getByTestId(`stepper-${LookupStepIndexByName("Contacts")}`)
+        );
     await waitFor(() => {
       expect(screen.queryByTestId("contacts-step")).toBeInTheDocument();
     });
   };
 
-  const stepperClickToBillingStep = async (eventConfig?: OptionUserEvent): Promise<void> => {
+  const stepperClickToBillingStep = async (
+    eventConfig?: OptionUserEvent
+  ): Promise<void> => {
     eventConfig?.useUserEvent
-      ? userEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Billing")}`))
-      : fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Billing")}`));
+      ? userEvent.click(
+          screen.getByTestId(`stepper-${LookupStepIndexByName("Billing")}`)
+        )
+      : fireEvent.click(
+          screen.getByTestId(`stepper-${LookupStepIndexByName("Billing")}`)
+        );
     await waitFor(() => {
       expect(screen.queryByTestId("billing-step")).toBeInTheDocument();
     });
   };
 
-  const stepperClickToReviewStep = async (eventConfig?: OptionUserEvent): Promise<void> => {
+  const stepperClickToReviewStep = async (
+    eventConfig?: OptionUserEvent
+  ): Promise<void> => {
     eventConfig?.useUserEvent
-      ? userEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`))
-      : fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`));
+      ? userEvent.click(
+          screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`)
+        )
+      : fireEvent.click(
+          screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`)
+        );
     await waitFor(() => {
       expect(screen.queryByTestId("review-step")).toBeInTheDocument();
     });
@@ -312,7 +397,9 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   };
 
   const submitBusinessNameStep = async (): Promise<void> => {
-    fireEvent.click(screen.getByText(Config.formation.general.initialNextButtonText));
+    fireEvent.click(
+      screen.getByText(Config.formation.general.initialNextButtonText)
+    );
     await waitFor(() => {
       expect(screen.queryByTestId("business-step")).toBeInTheDocument();
     });
@@ -349,34 +436,50 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   };
 
   const submitReviewStep = async (): Promise<void> => {
-    fireEvent.click(screen.getByText(Config.formation.general.submitButtonText));
+    fireEvent.click(
+      screen.getByText(Config.formation.general.submitButtonText)
+    );
     await act(async () => {
       await flushPromises();
     });
   };
 
   const clickSubmitAndGetError = async (business: Business): Promise<void> => {
-    const returnedPromise = Promise.resolve(generateUserDataForBusiness(business));
+    const returnedPromise = Promise.resolve(
+      generateUserDataForBusiness(business)
+    );
     mockApi.postBusinessFormation.mockReturnValue(returnedPromise);
-    fireEvent.click(screen.getByText(Config.formation.general.submitButtonText));
+    fireEvent.click(
+      screen.getByText(Config.formation.general.submitButtonText)
+    );
     await act(async () => {
       await returnedPromise.then();
     });
   };
 
-  const searchBusinessName = async (nameAvailability: Partial<NameAvailability>): Promise<void> => {
-    const returnedPromise = Promise.resolve(generateBusinessNameAvailability(nameAvailability));
+  const searchBusinessName = async (
+    nameAvailability: Partial<NameAvailability>
+  ): Promise<void> => {
+    const returnedPromise = Promise.resolve(
+      generateBusinessNameAvailability(nameAvailability)
+    );
     mockApi.searchBusinessName.mockReturnValue(returnedPromise);
-    fireEvent.click(screen.getByText(Config.searchBusinessNameTask.searchButtonText));
+    fireEvent.click(
+      screen.getByText(Config.searchBusinessNameTask.searchButtonText)
+    );
     await act(() => {
       return returnedPromise.then();
     });
   };
 
-  const searchBusinessNameAndGetError = async (errorCode = 500): Promise<void> => {
+  const searchBusinessNameAndGetError = async (
+    errorCode = 500
+  ): Promise<void> => {
     const returnedPromise = Promise.reject(errorCode);
     mockApi.searchBusinessName.mockReturnValue(returnedPromise);
-    fireEvent.click(screen.getByText(Config.searchBusinessNameTask.searchButtonText));
+    fireEvent.click(
+      screen.getByText(Config.searchBusinessNameTask.searchButtonText)
+    );
     await act(() => {
       return returnedPromise.catch(() => {});
     });
@@ -394,9 +497,14 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     return screen.getByTestId(testId) as HTMLInputElement;
   };
 
-  const getInputElementByParentTestId = (testId: string, params: { type: string }): HTMLInputElement => {
+  const getInputElementByParentTestId = (
+    testId: string,
+    params: { type: string }
+  ): HTMLInputElement => {
     // eslint-disable-next-line testing-library/no-node-access
-    return screen.getByTestId(testId).querySelector(`input[type="${params.type}"]`) as HTMLInputElement;
+    return screen
+      .getByTestId(testId)
+      .querySelector(`input[type="${params.type}"]`) as HTMLInputElement;
   };
 
   const selectByText = (label: string, value: string): void => {
@@ -414,23 +522,39 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   };
 
   const clickAddNewSigner = (): void => {
-    fireEvent.click(screen.getByText(Config.formation.fields.signers.addButtonText));
+    fireEvent.click(
+      screen.getByText(Config.formation.fields.signers.addButtonText)
+    );
   };
 
   const clickAddNewIncorporator = (): void => {
-    fireEvent.click(screen.getByText(Config.formation.fields.incorporators.addButtonText));
+    fireEvent.click(
+      screen.getByText(Config.formation.fields.incorporators.addButtonText)
+    );
   };
 
-  const getSignerBox = (index: number, type: "signers" | "incorporators"): boolean => {
+  const getSignerBox = (
+    index: number,
+    type: "signers" | "incorporators"
+  ): boolean => {
     const additionalSigner = within(screen.getByTestId(`${type}-${index}`));
     return (
-      additionalSigner.getByLabelText(`${Config.formation.fields.signers.columnLabel}`) as HTMLInputElement
+      additionalSigner.getByLabelText(
+        `${Config.formation.fields.signers.columnLabel}`
+      ) as HTMLInputElement
     ).checked;
   };
 
-  const checkSignerBox = (index: number, type: "signers" | "incorporators"): void => {
+  const checkSignerBox = (
+    index: number,
+    type: "signers" | "incorporators"
+  ): void => {
     const additionalSigner = within(screen.getByTestId(`${type}-${index}`));
-    fireEvent.click(additionalSigner.getByLabelText(`${Config.formation.fields.signers.columnLabel}`));
+    fireEvent.click(
+      additionalSigner.getByLabelText(
+        `${Config.formation.fields.signers.columnLabel}`
+      )
+    );
   };
 
   const clickAddressSubmit = (): void => {
@@ -440,7 +564,9 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   const openAddressModal = async (fieldName = "members"): Promise<void> => {
     fireEvent.click(screen.getByTestId(`addresses-${fieldName}-newButtonText`));
     await waitFor(() => {
-      expect(screen.getByTestId(`${fieldName}-address-modal`)).toBeInTheDocument();
+      expect(
+        screen.getByTestId(`${fieldName}-address-modal`)
+      ).toBeInTheDocument();
     });
   };
 
@@ -452,23 +578,32 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     await fillAddressModal(overrides);
     clickAddressSubmit();
     await waitFor(() => {
-      expect(screen.queryByTestId(`${fieldName}-address-modal`)).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId(`${fieldName}-address-modal`)
+      ).not.toBeInTheDocument();
     });
   };
 
-  const fillAddressModal = async (overrides: Partial<FormationSignedAddress>): Promise<void> => {
+  const fillAddressModal = async (
+    overrides: Partial<FormationSignedAddress>
+  ): Promise<void> => {
     const member = generateFormationIncorporator({ ...overrides });
     fillText("Address name", member.name);
     fillText("Address line1", member.addressLine1);
     fillText("Address line2", member.addressLine2);
     member.addressCity && fillText("Address city", member.addressCity);
     member.addressState &&
-      fillText("Address state", member.addressState[randomInt() % 2 ? "name" : "shortCode"]);
+      fillText(
+        "Address state",
+        member.addressState[randomInt() % 2 ? "name" : "shortCode"]
+      );
     fillText("Address zip code", member.addressZipCode);
   };
 
   const clickSubmit = async (): Promise<void> => {
-    fireEvent.click(screen.getByText(Config.formation.general.submitButtonText));
+    fireEvent.click(
+      screen.getByText(Config.formation.general.submitButtonText)
+    );
     await act(async () => {
       await flushPromises();
     });
@@ -483,7 +618,9 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   };
 
   const completeRequiredBillingFields = (): void => {
-    fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel));
+    fireEvent.click(
+      screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel)
+    );
     fillText("Contact first name", "John");
     fillText("Contact last name", "Smith");
     fillText("Contact phone number", "1234567890");
@@ -505,7 +642,9 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     }
   };
 
-  const getListBoxForInputElementByTestId = async (testId: string): Promise<HTMLInputElement> => {
+  const getListBoxForInputElementByTestId = async (
+    testId: string
+  ): Promise<HTMLInputElement> => {
     fireEvent.click(screen.getByTestId(testId));
     await waitFor(() => {
       expect(screen.getByRole("listbox")).toBeInTheDocument();

@@ -2,7 +2,11 @@ import { ReviewLineItem } from "@/components/tasks/review-screen-components/Revi
 import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { getAddressCity, getAddressCountry, getAddressState } from "@/lib/utils/formation-helpers";
+import {
+  getAddressCity,
+  getAddressCountry,
+  getAddressState,
+} from "@/lib/utils/formation-helpers";
 import { ReactElement, useContext } from "react";
 
 export const ReviewMainBusinessLocation = (): ReactElement => {
@@ -13,7 +17,10 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
   return (
     <>
       <hr className="margin-y-205" />
-      <ReviewSubSection header={Config.formation.sections.addressHeader} marginOverride="margin-top-0">
+      <ReviewSubSection
+        header={Config.formation.sections.addressHeader}
+        marginOverride="margin-top-0"
+      >
         <ReviewLineItem
           label={Config.formation.fields.addressLine1.label}
           value={state.formationFormData.addressLine1}

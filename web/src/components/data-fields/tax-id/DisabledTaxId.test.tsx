@@ -2,7 +2,10 @@ import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { generateProfileData, ProfileData } from "@businessnjgovnavigator/shared";
+import {
+  generateProfileData,
+  ProfileData,
+} from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -58,9 +61,13 @@ describe("<DisabledTaxId />", () => {
       encryptedTaxId: "some-encrypted-value",
     });
     fireEvent.click(screen.getByText(Config.tax.showButtonText));
-    expect(mockApi.decryptTaxId).toHaveBeenCalledWith({ encryptedTaxId: "some-encrypted-value" });
+    expect(mockApi.decryptTaxId).toHaveBeenCalledWith({
+      encryptedTaxId: "some-encrypted-value",
+    });
     await waitFor(() => {
-      expect(screen.getByTestId("disabled-taxid")).toHaveTextContent("123-456-789/000");
+      expect(screen.getByTestId("disabled-taxid")).toHaveTextContent(
+        "123-456-789/000"
+      );
     });
   });
 
@@ -71,13 +78,19 @@ describe("<DisabledTaxId />", () => {
       taxId: "********9000",
       encryptedTaxId: "some-encrypted-value",
     });
-    expect(screen.queryByText(Config.tax.hideButtonText)).not.toBeInTheDocument();
-    expect(screen.getByTestId("disabled-tax-id-value")).toHaveTextContent("****-****-****");
+    expect(
+      screen.queryByText(Config.tax.hideButtonText)
+    ).not.toBeInTheDocument();
+    expect(screen.getByTestId("disabled-tax-id-value")).toHaveTextContent(
+      "****-****-****"
+    );
     fireEvent.click(screen.getByText(Config.tax.showButtonText));
     await waitFor(() => {
       expect(screen.getByText(Config.tax.hideButtonText)).toBeInTheDocument();
     });
-    expect(screen.queryByText(Config.tax.showButtonText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.tax.showButtonText)
+    ).not.toBeInTheDocument();
   });
 
   it("toggles between mobile hide and show text", async () => {
@@ -88,11 +101,17 @@ describe("<DisabledTaxId />", () => {
       taxId: "********9000",
       encryptedTaxId: "some-encrypted-value",
     });
-    expect(screen.queryByText(Config.tax.hideButtonTextMobile)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.tax.hideButtonTextMobile)
+    ).not.toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.tax.showButtonTextMobile));
     await waitFor(() => {
-      expect(screen.getByText(Config.tax.hideButtonTextMobile)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.tax.hideButtonTextMobile)
+      ).toBeInTheDocument();
     });
-    expect(screen.queryByText(Config.tax.showButtonTextMobile)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.tax.showButtonTextMobile)
+    ).not.toBeInTheDocument();
   });
 });

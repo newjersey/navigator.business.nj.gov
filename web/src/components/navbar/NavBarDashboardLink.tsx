@@ -45,7 +45,11 @@ export const NavBarDashboardLink = (props: Props): ReactNode => {
             : "My Account Home"
         }
       >
-        <span className={`text-primary text-semibold font-body-sm ${props.className ?? ""}`}>
+        <span
+          className={`text-primary text-semibold font-body-sm ${
+            props.className ?? ""
+          }`}
+        >
           {props.linkText}
         </span>
       </UnStyledButton>

@@ -1,5 +1,8 @@
 import { Heading } from "@/components/njwds-extended/Heading";
-import { PrimaryButton, PrimaryButtonColors } from "@/components/njwds-extended/PrimaryButton";
+import {
+  PrimaryButton,
+  PrimaryButtonColors,
+} from "@/components/njwds-extended/PrimaryButton";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
@@ -27,7 +30,10 @@ export const UserSupportActionCard = (props: Props): ReactElement => {
     >
       <div className="flex flex-column fac space-between padding-x-2 padding-y-6 height-full">
         <div className="text-center flex flex-column fac">
-          <Heading level={3} className={"margin-0 width-card-lg support-action-card"}>
+          <Heading
+            level={3}
+            className={"margin-0 width-card-lg support-action-card"}
+          >
             {props.header}
           </Heading>
           <div>{props.supportingText}</div>

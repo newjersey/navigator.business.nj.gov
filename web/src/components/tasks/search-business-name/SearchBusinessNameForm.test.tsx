@@ -54,7 +54,9 @@ describe("SearchBusinessNameForm", () => {
     useSetupInitialMocks();
   });
 
-  const getPageHelper = async (initialProfileData?: Partial<ProfileData>): Promise<FormationPageHelpers> => {
+  const getPageHelper = async (
+    initialProfileData?: Partial<ProfileData>
+  ): Promise<FormationPageHelpers> => {
     const profileData = generateFormationProfileData({
       ...initialProfileData,
       legalStructureId: "limited-liability-company",
@@ -77,7 +79,10 @@ describe("SearchBusinessNameForm", () => {
       dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     };
-    return preparePage({ business: generateBusiness({ profileData, formationData }), displayContent });
+    return preparePage({
+      business: generateBusiness({ profileData, formationData }),
+      displayContent,
+    });
   };
 
   it("displays modal when legal structure Edit button clicked", async () => {
@@ -167,14 +172,20 @@ describe("SearchBusinessNameForm", () => {
   it("shows restricted word error text if name includes a restricted word", async () => {
     await getPageHelper();
     fillText("Pizza Joint LLC");
-    await searchAndGetValue({ status: "RESTRICTED_ERROR", invalidWord: "JOINT" });
+    await searchAndGetValue({
+      status: "RESTRICTED_ERROR",
+      invalidWord: "JOINT",
+    });
     expect(availableTextExists()).toBe(false);
     expect(unavailableTextExists()).toBe(false);
     expect(designatorErrorTextExists()).toBe(false);
     expect(specialCharacterErrorTextExists()).toBe(false);
     expect(restrictedWordErrorTextExists()).toBe(true);
     expect(
-      within(screen.getByTestId("restricted-word-error-text")).getByText("JOINT", { exact: false })
+      within(screen.getByTestId("restricted-word-error-text")).getByText(
+        "JOINT",
+        { exact: false }
+      )
     ).toBeInTheDocument();
   });
 
@@ -192,7 +203,9 @@ describe("SearchBusinessNameForm", () => {
     expect(screen.getByTestId("error-alert-BAD_INPUT")).toBeInTheDocument();
     fillText("anything");
     await searchAndGetValue({ status: "AVAILABLE", similarNames: [] });
-    expect(screen.queryByTestId("error-alert-BAD_INPUT")).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("error-alert-BAD_INPUT")
+    ).not.toBeInTheDocument();
   });
 
   it("shows error if search fails", async () => {
@@ -202,7 +215,9 @@ describe("SearchBusinessNameForm", () => {
     expect(screen.getByTestId("error-alert-SEARCH_FAILED")).toBeInTheDocument();
     fillText("anything");
     await searchAndGetValue({ status: "AVAILABLE", similarNames: [] });
-    expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("error-alert-SEARCH_FAILED")
+    ).not.toBeInTheDocument();
   });
 
   const availableTextExists = (): boolean => {

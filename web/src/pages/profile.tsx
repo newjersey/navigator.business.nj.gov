@@ -48,7 +48,10 @@ import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AddressContext } from "@/contexts/addressContext";
 import { getMergedConfig } from "@/contexts/configContext";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -63,7 +66,11 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { getFlow, useMountEffectWhenDefined, useScrollToPathAnchor } from "@/lib/utils/helpers";
+import {
+  getFlow,
+  useMountEffectWhenDefined,
+  useScrollToPathAnchor,
+} from "@/lib/utils/helpers";
 import {
   Business,
   BusinessPersona,
@@ -101,24 +108,32 @@ interface Props {
 }
 
 const ProfilePage = (props: Props): ReactElement => {
-  const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
+  const [profileData, setProfileData] = useState<ProfileData>(
+    createEmptyProfileData()
+  );
   const router = useRouter();
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
   const [escapeModal, setEscapeModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [shouldLockFormationFields, setShouldLockFormationFields] = useState<boolean>(false);
-  const [isFormationDateDeletionModalOpen, setFormationDateDeletionModalOpen] = useState<boolean>(false);
+  const [shouldLockFormationFields, setShouldLockFormationFields] =
+    useState<boolean>(false);
+  const [isFormationDateDeletionModalOpen, setFormationDateDeletionModalOpen] =
+    useState<boolean>(false);
   const config = getMergedConfig();
   const userDataFromHook = useUserData();
   const updateQueue = userDataFromHook.updateQueue;
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
-  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+  const { isAuthenticated, setShowNeedsAccountModal } =
+    useContext(NeedsAccountContext);
   const { Config } = useConfig();
-  const businessPersona: BusinessPersona = props.CMS_ONLY_businessPersona ?? profileData.businessPersona;
+  const businessPersona: BusinessPersona =
+    props.CMS_ONLY_businessPersona ?? profileData.businessPersona;
   const foreignBusinessType: ForeignBusinessType = determineForeignBusinessType(
     profileData.foreignBusinessTypeIds
   );
-  const [formationAddressData, setAddressData] = useState<FormationAddress>(emptyFormationAddressData);
+  const [formationAddressData, setAddressData] = useState<FormationAddress>(
+    emptyFormationAddressData
+  );
   const {
     FormFuncWrapper,
     onSubmit,
@@ -126,11 +141,19 @@ const ProfilePage = (props: Props): ReactElement => {
     onTabChange: setProfileTab,
     state: formContextState,
     getInvalidFieldIds,
-  } = useFormContextHelper(createDataFormErrorMap(), props.CMS_ONLY_tab ?? profileTabs[0]);
+  } = useFormContextHelper(
+    createDataFormErrorMap(),
+    props.CMS_ONLY_tab ?? profileTabs[0]
+  );
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const redirect = (params?: { [key: string]: any }, routerType = router!.push): Promise<boolean> => {
-    const urlParams = params ? `?${new URLSearchParams(params).toString()}` : "";
+  const redirect = (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    params?: { [key: string]: any },
+    routerType = router!.push
+  ): Promise<boolean> => {
+    const urlParams = params
+      ? `?${new URLSearchParams(params).toString()}`
+      : "";
     return routerType(`${ROUTES.dashboard}${urlParams}`);
   };
 
@@ -209,12 +232,19 @@ const ProfilePage = (props: Props): ReactElement => {
       }
 
       if (business.profileData.taxId !== profileData.taxId) {
-        updateQueue.queueTaxFilingData({ state: undefined, registeredISO: undefined, filings: [] });
+        updateQueue.queueTaxFilingData({
+          state: undefined,
+          registeredISO: undefined,
+          filings: [],
+        });
       }
 
       if (business.profileData.industryId !== profileData.industryId) {
         updateQueue
-          .queueBusiness({ ...updateQueue.currentBusiness(), taskItemChecklist: {} })
+          .queueBusiness({
+            ...updateQueue.currentBusiness(),
+            taskItemChecklist: {},
+          })
           .queueTaskProgress({ [naicsCodeTaskId]: "TO_DO" });
       }
 
@@ -236,13 +266,17 @@ const ProfilePage = (props: Props): ReactElement => {
     }
   );
 
-  const sendOnSaveAnalytics = (prevProfileData: ProfileData, newProfileData: ProfileData): void => {
+  const sendOnSaveAnalytics = (
+    prevProfileData: ProfileData,
+    newProfileData: ProfileData
+  ): void => {
     if (prevProfileData.dateOfFormation !== newProfileData.dateOfFormation) {
       analytics.event.profile_formation_date.submit.formation_date_changed();
     }
 
     const municipalityEnteredForFirstTime =
-      prevProfileData.municipality === undefined && newProfileData.municipality !== undefined;
+      prevProfileData.municipality === undefined &&
+      newProfileData.municipality !== undefined;
 
     if (municipalityEnteredForFirstTime) {
       analytics.event.profile_location_question.submit.location_entered_for_first_time();
@@ -270,14 +304,15 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const shouldShowNexusBusinessNameElements = (): boolean => {
     if (!business) return false;
-    return LookupLegalStructureById(business.profileData.legalStructureId).elementsToDisplay.has(
-      "nexusBusinessElements"
-    );
+    return LookupLegalStructureById(
+      business.profileData.legalStructureId
+    ).elementsToDisplay.has("nexusBusinessElements");
   };
 
   const shouldShowTradeNameElements = (): boolean => {
     if (!business) return false;
-    return LookupLegalStructureById(business.profileData.legalStructureId).hasTradeName;
+    return LookupLegalStructureById(business.profileData.legalStructureId)
+      .hasTradeName;
   };
 
   const displayOpportunityAlert = LookupOperatingPhaseById(
@@ -285,7 +320,9 @@ const ProfilePage = (props: Props): ReactElement => {
   ).displayProfileOpportunityAlert;
 
   const shouldLockMunicipality = (): boolean => {
-    return !!profileData.municipality && business?.taxFilingData.state === "SUCCESS";
+    return (
+      !!profileData.municipality && business?.taxFilingData.state === "SUCCESS"
+    );
   };
 
   const displayAltHomeBasedBusinessDescription = LookupOperatingPhaseById(
@@ -312,21 +349,27 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const displayElevatorQuestion = (): boolean => {
     if (!business) return false;
-    return profileData.homeBasedBusiness === false && profileData.businessPersona === "STARTING";
+    return (
+      profileData.homeBasedBusiness === false &&
+      profileData.businessPersona === "STARTING"
+    );
   };
 
   const displayCarnivalRidesQuestion = (): boolean => {
     if (!business) return false;
     return (
-      profileData.sectorId === "arts-entertainment-and-recreation" && profileData.businessPersona === "OWNING"
+      profileData.sectorId === "arts-entertainment-and-recreation" &&
+      profileData.businessPersona === "OWNING"
     );
   };
 
   const displayVacantBuildingOwnerQuestion = (): boolean => {
     if (!business) return false;
     return (
-      (profileData.industryId === "real-estate-investor" || profileData.sectorId === "real-estate") &&
-      (profileData.operatingPhase === "UP_AND_RUNNING" || profileData.businessPersona === "OWNING")
+      (profileData.industryId === "real-estate-investor" ||
+        profileData.sectorId === "real-estate") &&
+      (profileData.operatingPhase === "UP_AND_RUNNING" ||
+        profileData.businessPersona === "OWNING")
     );
   };
 
@@ -336,7 +379,8 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   const hasSubmittedTaxData =
-    business?.taxFilingData.state === "SUCCESS" || business?.taxFilingData.state === "PENDING";
+    business?.taxFilingData.state === "SUCCESS" ||
+    business?.taxFilingData.state === "PENDING";
 
   const nexusBusinessElements: Record<ProfileTabs, ReactNode> = {
     info: (
@@ -360,7 +404,9 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField
           fieldName="nexusDbaName"
-          isVisible={shouldShowNexusBusinessNameElements() && !!profileData.nexusDbaName}
+          isVisible={
+            shouldShowNexusBusinessNameElements() && !!profileData.nexusDbaName
+          }
         >
           <NexusDBANameField />
         </ProfileField>
@@ -385,7 +431,9 @@ const ProfilePage = (props: Props): ReactElement => {
           fieldName="legalStructureId"
           noLabel={true}
           locked={shouldLockFormationFields}
-          lockedValueFormatter={(legalStructureId): string => LookupLegalStructureById(legalStructureId).name}
+          lockedValueFormatter={(legalStructureId): string =>
+            LookupLegalStructureById(legalStructureId).name
+          }
         >
           <BusinessStructure />
         </ProfileField>
@@ -395,7 +443,9 @@ const ProfilePage = (props: Props): ReactElement => {
           isVisible={nexusLocationInNewJersey(profileData)}
           locked={shouldLockMunicipality()}
         >
-          <CannabisLocationAlert industryId={business?.profileData.industryId} />
+          <CannabisLocationAlert
+            industryId={business?.profileData.industryId}
+          />
           <MunicipalityField />
         </ProfileField>
 
@@ -437,7 +487,9 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField fieldName="taxId" noLabel={true}>
           <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
           {!hasSubmittedTaxData && (
-            <TaxDisclaimer legalStructureId={business?.profileData.legalStructureId} />
+            <TaxDisclaimer
+              legalStructureId={business?.profileData.legalStructureId}
+            />
           )}
           <div className={"max-width-38rem"}>
             {hasSubmittedTaxData ? (
@@ -495,7 +547,9 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField fieldName="taxId" noLabel={true}>
           <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
           {!hasSubmittedTaxData && (
-            <TaxDisclaimer legalStructureId={business?.profileData.legalStructureId} />
+            <TaxDisclaimer
+              legalStructureId={business?.profileData.legalStructureId}
+            />
           )}
           <div className={"max-width-38rem"}>
             {hasSubmittedTaxData ? (
@@ -514,7 +568,8 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   const isDomesticEmployer =
-    profileData.businessPersona === "STARTING" && profileData.industryId === "domestic-employer";
+    profileData.businessPersona === "STARTING" &&
+    profileData.industryId === "domestic-employer";
 
   const startingNewBusinessElements: Record<ProfileTabs, ReactNode> = {
     notes: (
@@ -527,14 +582,18 @@ const ProfilePage = (props: Props): ReactElement => {
       </div>
     ),
     documents: (
-      <div id="tabpanel-documents" role="tabpanel" aria-labelledby="tab-documents">
+      <div
+        id="tabpanel-documents"
+        role="tabpanel"
+        aria-labelledby="tab-documents"
+      >
         <ProfileTabHeader tab="documents" />
 
         <ProfileField
           fieldName="documents"
-          isVisible={LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
-            "formationDocuments"
-          )}
+          isVisible={LookupLegalStructureById(
+            business?.profileData.legalStructureId
+          ).elementsToDisplay.has("formationDocuments")}
         >
           <ProfileDocuments />
         </ProfileField>
@@ -564,7 +623,10 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ResponsibleOwnerName />
         </ProfileField>
-        <ProfileField fieldName="tradeName" isVisible={shouldShowTradeNameElements()}>
+        <ProfileField
+          fieldName="tradeName"
+          isVisible={shouldShowTradeNameElements()}
+        >
           <TradeName />
         </ProfileField>
         <ProfileField fieldName="industryId">
@@ -580,14 +642,23 @@ const ProfilePage = (props: Props): ReactElement => {
           boldDescription={true}
         >
           <span className={"margin-left-05"}>
-            {Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText}
+            {
+              Config.profileDefaults.fields.nonEssentialQuestions.default
+                .optionalText
+            }
           </span>
-          <RadioQuestion<boolean> fieldName={"vacantPropertyOwner"} choices={[true, false]} />
+          <RadioQuestion<boolean>
+            fieldName={"vacantPropertyOwner"}
+            choices={[true, false]}
+          />
         </ProfileField>
 
         <ProfileField
           fieldName="sectorId"
-          isVisible={profileData.industryId === "generic" || !!props.CMS_ONLY_fakeBusiness}
+          isVisible={
+            profileData.industryId === "generic" ||
+            !!props.CMS_ONLY_fakeBusiness
+          }
         >
           <Sectors />
         </ProfileField>
@@ -603,7 +674,9 @@ const ProfilePage = (props: Props): ReactElement => {
           fieldName="legalStructureId"
           noLabel={true}
           locked={shouldLockFormationFields}
-          lockedValueFormatter={(legalStructureId): string => LookupLegalStructureById(legalStructureId).name}
+          lockedValueFormatter={(legalStructureId): string =>
+            LookupLegalStructureById(legalStructureId).name
+          }
         >
           <BusinessStructure />
         </ProfileField>
@@ -617,8 +690,13 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <RaffleBingoGamesQuestion />
         </ProfileField>
-        <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
-          <CannabisLocationAlert industryId={business?.profileData.industryId} />
+        <ProfileField
+          fieldName="municipality"
+          locked={shouldLockMunicipality()}
+        >
+          <CannabisLocationAlert
+            industryId={business?.profileData.industryId}
+          />
           <MunicipalityField />
         </ProfileField>
         <ProfileField
@@ -680,9 +758,9 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField
           fieldName="entityId"
-          isVisible={LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
-            "entityId"
-          )}
+          isVisible={LookupLegalStructureById(
+            business?.profileData.legalStructureId
+          ).elementsToDisplay.has("entityId")}
           locked={shouldLockFormationFields}
         >
           <EntityId handleChangeOverride={showNeedsAccountModalForGuest()} />
@@ -695,7 +773,9 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField fieldName="taxId" noLabel={true}>
           <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
           {!hasSubmittedTaxData && (
-            <TaxDisclaimer legalStructureId={business?.profileData.legalStructureId} />
+            <TaxDisclaimer
+              legalStructureId={business?.profileData.legalStructureId}
+            />
           )}
           <div className="max-width-38rem">
             {hasSubmittedTaxData ? (
@@ -731,7 +811,10 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
-        <ProfileField fieldName="businessName" isVisible={!shouldShowTradeNameElements()}>
+        <ProfileField
+          fieldName="businessName"
+          isVisible={!shouldShowTradeNameElements()}
+        >
           <BusinessName />
         </ProfileField>
 
@@ -745,7 +828,10 @@ const ProfilePage = (props: Props): ReactElement => {
           <ResponsibleOwnerName />
         </ProfileField>
 
-        <ProfileField fieldName="tradeName" isVisible={shouldShowTradeNameElements()}>
+        <ProfileField
+          fieldName="tradeName"
+          isVisible={shouldShowTradeNameElements()}
+        >
           <TradeName />
         </ProfileField>
 
@@ -759,7 +845,10 @@ const ProfilePage = (props: Props): ReactElement => {
           hideHeader={true}
           boldAltDescription={true}
         >
-          <RadioQuestion<boolean> fieldName={"carnivalRideOwningBusiness"} choices={[true, false]} />
+          <RadioQuestion<boolean>
+            fieldName={"carnivalRideOwningBusiness"}
+            choices={[true, false]}
+          />
         </ProfileField>
 
         <ProfileField
@@ -782,16 +871,22 @@ const ProfilePage = (props: Props): ReactElement => {
           boldDescription={true}
         >
           <span className={"margin-left-05"}>
-            {Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText}
+            {
+              Config.profileDefaults.fields.nonEssentialQuestions.default
+                .optionalText
+            }
           </span>
-          <RadioQuestion<boolean> fieldName={"vacantPropertyOwner"} choices={[true, false]} />
+          <RadioQuestion<boolean>
+            fieldName={"vacantPropertyOwner"}
+            choices={[true, false]}
+          />
         </ProfileField>
 
         <ProfileField
           fieldName="dateOfFormation"
-          isVisible={LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
-            "formationDate"
-          )}
+          isVisible={LookupLegalStructureById(
+            business?.profileData.legalStructureId
+          ).elementsToDisplay.has("formationDate")}
         >
           <DateOfFormation futureAllowed={false} />
         </ProfileField>
@@ -800,7 +895,10 @@ const ProfilePage = (props: Props): ReactElement => {
           <ExistingEmployees />
         </ProfileField>
 
-        <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
+        <ProfileField
+          fieldName="municipality"
+          locked={shouldLockMunicipality()}
+        >
           <MunicipalityField />
         </ProfileField>
 
@@ -842,7 +940,9 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField fieldName="taxId" noLabel={true}>
           <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
           {!hasSubmittedTaxData && (
-            <TaxDisclaimer legalStructureId={business?.profileData.legalStructureId} />
+            <TaxDisclaimer
+              legalStructureId={business?.profileData.legalStructureId}
+            />
           )}
           <div className={"max-width-38rem"}>
             {hasSubmittedTaxData ? (
@@ -902,7 +1002,9 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField fieldName="taxId" noLabel={true}>
           <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
           {!hasSubmittedTaxData && (
-            <TaxDisclaimer legalStructureId={business?.profileData.legalStructureId} />
+            <TaxDisclaimer
+              legalStructureId={business?.profileData.legalStructureId}
+            />
           )}
           <div className="max-width-38rem">
             {hasSubmittedTaxData ? (
@@ -918,7 +1020,9 @@ const ProfilePage = (props: Props): ReactElement => {
 
   return (
     <DataFormErrorMapContext.Provider value={formContextState}>
-      <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
+      <MunicipalitiesContext.Provider
+        value={{ municipalities: props.municipalities }}
+      >
         <ProfileDataContext.Provider
           value={{
             state: {
@@ -935,7 +1039,9 @@ const ProfilePage = (props: Props): ReactElement => {
               setAddressData,
             }}
           >
-            <NextSeo title={getNextSeoTitle(config.pagesMetadata.profileTitle)} />
+            <NextSeo
+              title={getNextSeoTitle(config.pagesMetadata.profileTitle)}
+            />
             <PageSkeleton showNavBar showSidebar hideMiniRoadmap>
               <main id="main" data-testid={"main"}>
                 <div className="padding-top-0 desktop:padding-top-3">
@@ -948,11 +1054,18 @@ const ProfilePage = (props: Props): ReactElement => {
                   />
                   <FormationDateDeletionModal
                     isOpen={isFormationDateDeletionModalOpen}
-                    handleCancel={(): void => setFormationDateDeletionModalOpen(false)}
+                    handleCancel={(): void =>
+                      setFormationDateDeletionModalOpen(false)
+                    }
                     handleDelete={onSubmit}
                   />
                   <SingleColumnContainer>
-                    {alert && <ProfileSnackbarAlert alert={alert} close={(): void => setAlert(undefined)} />}
+                    {alert && (
+                      <ProfileSnackbarAlert
+                        alert={alert}
+                        close={(): void => setAlert(undefined)}
+                      />
+                    )}
                     <UserDataErrorAlert />
                   </SingleColumnContainer>
                   <div className="margin-top-1 desktop:margin-top-0">
@@ -972,7 +1085,10 @@ const ProfilePage = (props: Props): ReactElement => {
                         }
                       >
                         <>
-                          <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
+                          <form
+                            onSubmit={onSubmit}
+                            className={`usa-prose onboarding-form margin-top-2`}
+                          >
                             {getElements()}
                             <div className="margin-top-2">
                               <ActionBarLayout>
@@ -982,7 +1098,10 @@ const ProfilePage = (props: Props): ReactElement => {
                                     onClick={(): Promise<void> => onBack()}
                                     dataTestId="back"
                                   >
-                                    {Config.profileDefaults.default.backButtonText}
+                                    {
+                                      Config.profileDefaults.default
+                                        .backButtonText
+                                    }
                                   </SecondaryButton>
                                 </div>
                                 <div>
@@ -995,7 +1114,10 @@ const ProfilePage = (props: Props): ReactElement => {
                                       dataTestId="save"
                                       isLoading={isLoading}
                                     >
-                                      {Config.profileDefaults.default.saveButtonText}
+                                      {
+                                        Config.profileDefaults.default
+                                          .saveButtonText
+                                      }
                                     </PrimaryButton>
                                   </div>
                                 </div>

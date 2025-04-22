@@ -37,18 +37,25 @@ export const useBusinessNameSearch = ({
   } = useContext(BusinessFormationContext);
   const [currentName, setCurrentName] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<SearchBusinessNameError | undefined>(undefined);
-  const [updateButtonClicked, setUpdateButtonClicked] = useState<boolean>(false);
+  const [error, setError] = useState<SearchBusinessNameError | undefined>(
+    undefined
+  );
+  const [updateButtonClicked, setUpdateButtonClicked] =
+    useState<boolean>(false);
 
   const businessNameHasBeenSearched = (): boolean => {
     return business?.formationData.businessNameAvailability !== undefined;
   };
 
   const businessNameIsNotAvailable = (): boolean => {
-    return business?.formationData.businessNameAvailability?.status !== "AVAILABLE";
+    return (
+      business?.formationData.businessNameAvailability?.status !== "AVAILABLE"
+    );
   };
 
-  const setNameAvailability = isDba ? setDbaBusinessNameAvailability : setBusinessNameAvailability;
+  const setNameAvailability = isDba
+    ? setDbaBusinessNameAvailability
+    : setBusinessNameAvailability;
 
   const emptyNameAvailability: NameAvailability = {
     similarNames: [],
@@ -58,7 +65,11 @@ export const useBusinessNameSearch = ({
 
   useMountEffectWhenDefined(() => {
     if (!business) return;
-    setCurrentName(isDba ? business.profileData.nexusDbaName || "" : business.profileData.businessName);
+    setCurrentName(
+      isDba
+        ? business.profileData.nexusDbaName || ""
+        : business.profileData.businessName
+    );
     if (businessNameIsNotAvailable() && businessNameHasBeenSearched()) {
       setFieldsInteracted(["businessName"]);
     }

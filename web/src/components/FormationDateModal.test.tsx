@@ -1,7 +1,10 @@
 import { FormationDateModal } from "@/components/FormationDateModal";
 import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
-import { selectDate, selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
+import {
+  selectDate,
+  selectLocationByText,
+} from "@/test/helpers/helpers-testing-library-selectors";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -40,14 +43,27 @@ describe("<FormationDateModal />", () => {
       ...business,
       profileData: {
         ...business.profileData,
-        municipality: business.profileData.municipality === undefined ? undefined : municipality,
+        municipality:
+          business.profileData.municipality === undefined
+            ? undefined
+            : municipality,
       },
     };
 
     render(
-      <MunicipalitiesContext.Provider value={{ municipalities: [municipality] }}>
-        <WithStatefulUserData initialUserData={generateUserDataForBusiness(businessWithMunicipality)}>
-          <FormationDateModal isOpen={true} close={(): void => {}} onSave={(): void => {}} />
+      <MunicipalitiesContext.Provider
+        value={{ municipalities: [municipality] }}
+      >
+        <WithStatefulUserData
+          initialUserData={generateUserDataForBusiness(
+            businessWithMunicipality
+          )}
+        >
+          <FormationDateModal
+            isOpen={true}
+            close={(): void => {}}
+            onSave={(): void => {}}
+          />
         </WithStatefulUserData>
       </MunicipalitiesContext.Provider>
     );
@@ -59,7 +75,9 @@ describe("<FormationDateModal />", () => {
     selectDate(date);
     fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
     triggerQueueUpdate();
-    expect(currentBusiness().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
+    expect(currentBusiness().profileData.dateOfFormation).toEqual(
+      date.format(defaultDateFormat)
+    );
   });
 
   it("allows a date in the future", () => {
@@ -68,14 +86,24 @@ describe("<FormationDateModal />", () => {
     selectDate(date);
     fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
     triggerQueueUpdate();
-    expect(currentBusiness().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
+    expect(currentBusiness().profileData.dateOfFormation).toEqual(
+      date.format(defaultDateFormat)
+    );
   });
 
   it("shows error when user saves without entering date", () => {
-    renderComponent(generateBusiness({ profileData: generateProfileData({ dateOfFormation: undefined }) }));
-    expect(screen.queryByText(Config.formationDateModal.dateOfFormationErrorText)).not.toBeInTheDocument();
+    renderComponent(
+      generateBusiness({
+        profileData: generateProfileData({ dateOfFormation: undefined }),
+      })
+    );
+    expect(
+      screen.queryByText(Config.formationDateModal.dateOfFormationErrorText)
+    ).not.toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
-    expect(screen.getByText(Config.formationDateModal.dateOfFormationErrorText)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.formationDateModal.dateOfFormationErrorText)
+    ).toBeInTheDocument();
   });
 
   it("does not update dateOfFormation if user cancels", () => {
@@ -83,7 +111,9 @@ describe("<FormationDateModal />", () => {
     renderComponent(initialBusiness);
     const date = getCurrentDate().subtract(1, "month").date(1);
     selectDate(date);
-    fireEvent.click(screen.getByText(Config.formationDateModal.cancelButtonText));
+    fireEvent.click(
+      screen.getByText(Config.formationDateModal.cancelButtonText)
+    );
     triggerQueueUpdate();
     expect(currentBusiness().profileData.dateOfFormation).toEqual(
       initialBusiness.profileData.dateOfFormation
@@ -94,7 +124,10 @@ describe("<FormationDateModal />", () => {
     const startingOrForeign: Partial<ProfileData> =
       randomInt() % 2
         ? { businessPersona: "STARTING" }
-        : { businessPersona: "FOREIGN", foreignBusinessTypeIds: ["officeInNJ"] };
+        : {
+            businessPersona: "FOREIGN",
+            foreignBusinessTypeIds: ["officeInNJ"],
+          };
 
     renderComponent(
       generateBusiness({
@@ -149,19 +182,29 @@ describe("<FormationDateModal />", () => {
     const startingOrForeign: Partial<ProfileData> =
       randomInt() % 2
         ? { businessPersona: "STARTING" }
-        : { businessPersona: "FOREIGN", foreignBusinessTypeIds: ["officeInNJ"] };
+        : {
+            businessPersona: "FOREIGN",
+            foreignBusinessTypeIds: ["officeInNJ"],
+          };
 
     renderComponent(
       generateBusiness({
-        profileData: generateProfileData({ municipality: undefined, ...startingOrForeign }),
+        profileData: generateProfileData({
+          municipality: undefined,
+          ...startingOrForeign,
+        }),
       })
     );
     expect(
-      screen.queryByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
+      screen.queryByText(
+        Config.profileDefaults.fields.municipality.default.errorTextRequired
+      )
     ).not.toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
     expect(
-      screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
+      screen.getByText(
+        Config.profileDefaults.fields.municipality.default.errorTextRequired
+      )
     ).toBeInTheDocument();
   });
 });

@@ -4,7 +4,10 @@ import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { UpdateQueue } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
-import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import {
+  setMockRoadmapResponse,
+  useMockRoadmap,
+} from "@/test/mock/mockUseRoadmap";
 import {
   WithStatefulUserData,
   currentBusiness,
@@ -15,7 +18,10 @@ import {
   generatePreferences,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { Business, TaskProgress } from "@businessnjgovnavigator/shared/userData";
+import {
+  Business,
+  TaskProgress,
+} from "@businessnjgovnavigator/shared/userData";
 import { act, render } from "@testing-library/react";
 import { ReactNode } from "react";
 
@@ -49,7 +55,9 @@ describe("useUpdateTaskProgress", () => {
     }
 
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business)}
+      >
         <TestComponent />
       </WithStatefulUserData>
     );
@@ -129,7 +137,9 @@ describe("useUpdateTaskProgress", () => {
           [planTaskId]: "TO_DO",
           [startTaskId]: "TO_DO",
         },
-        preferences: generatePreferences({ roadmapOpenSections: ["PLAN", "START"] }),
+        preferences: generatePreferences({
+          roadmapOpenSections: ["PLAN", "START"],
+        }),
       });
 
       setMockRoadmapResponse({
@@ -154,7 +164,9 @@ describe("useUpdateTaskProgress", () => {
         [startTaskId]: "TO_DO",
       });
 
-      expect(currentBusiness().preferences.roadmapOpenSections).toEqual(["START"]);
+      expect(currentBusiness().preferences.roadmapOpenSections).toEqual([
+        "START",
+      ]);
     });
   });
 });

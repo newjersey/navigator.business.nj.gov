@@ -22,18 +22,25 @@ export const ContactsStep = (): ReactElement => {
 
   const shouldShowMembers = (): boolean => {
     return (
-      [...corpLegalStructures, "limited-liability-company", "nonprofit"].includes(
-        state.formationFormData.legalType
-      ) && state.formationFormData.businessLocationType === "NJ"
+      [
+        ...corpLegalStructures,
+        "limited-liability-company",
+        "nonprofit",
+      ].includes(state.formationFormData.legalType) &&
+      state.formationFormData.businessLocationType === "NJ"
     );
   };
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const getDescription = (field: string): string => {
     const legalType = state.formationFormData.legalType;
-    const overriddenLegalTypes = Object.keys((Config.formation.fields as any)[field].overrides ?? {});
+    const overriddenLegalTypes = Object.keys(
+      (Config.formation.fields as any)[field].overrides ?? {}
+    );
     if (overriddenLegalTypes.includes(legalType)) {
-      return ((Config.formation.fields as any)[field].overrides as any)[legalType].description;
+      return ((Config.formation.fields as any)[field].overrides as any)[
+        legalType
+      ].description;
     }
     return (Config.formation.fields as any)[field].description;
   };
@@ -51,7 +58,9 @@ export const ContactsStep = (): ReactElement => {
           </>
         )}
         <hr className="margin-y-3" />
-        {incorporationLegalStructures.includes(state.formationFormData.legalType) ? (
+        {incorporationLegalStructures.includes(
+          state.formationFormData.legalType
+        ) ? (
           <FormationField fieldName="incorporators">
             <Addresses<FormationIncorporator>
               createEmptyAddress={(): FormationIncorporator => {
@@ -87,16 +96,24 @@ export const ContactsStep = (): ReactElement => {
               displayContent={{
                 description: getDescription("incorporators"),
                 header: Config.formation.fields.incorporators.label,
-                placeholder: Config.formation.fields.incorporators.placeholder ?? "",
-                newButtonText: Config.formation.fields.incorporators.addButtonText,
-                snackbarHeader: Config.formation.fields.incorporators.successSnackbarHeader,
-                snackbarBody: Config.formation.fields.incorporators.successSnackbarBody,
+                placeholder:
+                  Config.formation.fields.incorporators.placeholder ?? "",
+                newButtonText:
+                  Config.formation.fields.incorporators.addButtonText,
+                snackbarHeader:
+                  Config.formation.fields.incorporators.successSnackbarHeader,
+                snackbarBody:
+                  Config.formation.fields.incorporators.successSnackbarBody,
                 modalTitle: Config.formation.fields.incorporators.modalTitle,
-                modalSaveButton: Config.formation.fields.incorporators.addButtonText,
+                modalSaveButton:
+                  Config.formation.fields.incorporators.addButtonText,
                 error: Config.formation.fields.incorporators.error,
               }}
               legalType={state.formationFormData.legalType}
-              hasError={doesFieldHaveError("signers") || doesFieldHaveError("incorporators")}
+              hasError={
+                doesFieldHaveError("signers") ||
+                doesFieldHaveError("incorporators")
+              }
             />
           </FormationField>
         ) : (

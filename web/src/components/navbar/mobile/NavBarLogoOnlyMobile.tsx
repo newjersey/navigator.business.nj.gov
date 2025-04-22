@@ -19,10 +19,18 @@ export const NavBarLogoOnlyMobile = (props: Props): ReactElement => {
         <div className="margin-x-105">
           <NavBarVerticalLine />
         </div>
-        <NavBarDashboardLink linkText={Config.navigationDefaults.navBarMyAccountText} />
+        <NavBarDashboardLink
+          linkText={Config.navigationDefaults.navBarMyAccountText}
+        />
         {props.showMyNjLogo && (
-          <div className={`display-flex flex-col flex-align-center margin-left-2`}>
-            <img className="height-4" src="/img/mynj-logo.png" alt="myNewJersey" />
+          <div
+            className={`display-flex flex-col flex-align-center margin-left-2`}
+          >
+            <img
+              className="height-4"
+              src="/img/mynj-logo.png"
+              alt="myNewJersey"
+            />
           </div>
         )}
       </div>

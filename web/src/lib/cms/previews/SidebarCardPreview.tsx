@@ -10,7 +10,11 @@ const RoadmapSidebarCardPreview = (props: PreviewProps): ReactElement => {
   const card = usePageData<SidebarCardContent>(props);
 
   return (
-    <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+    <div
+      className="cms"
+      ref={ref}
+      style={{ margin: 40, pointerEvents: "none" }}
+    >
       <SidebarCard card={card} />
     </div>
   );

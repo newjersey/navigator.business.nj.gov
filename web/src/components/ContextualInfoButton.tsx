@@ -1,6 +1,9 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { PureMarkdownContent } from "@/components/PureMarkdownContent";
-import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
+import {
+  ContextualInfo,
+  ContextualInfoContext,
+} from "@/contexts/contextualInfoContext";
 import { fetchContextualInfo } from "@/lib/async-content-fetchers/fetchContextualInfo";
 import analytics from "@/lib/utils/analytics";
 import React, { ReactElement, useContext, useState } from "react";
@@ -11,7 +14,9 @@ interface Props {
 }
 
 export const ContextualInfoButton = (props: Props): ReactElement => {
-  const { contextualInfo, setContextualInfo } = useContext(ContextualInfoContext);
+  const { contextualInfo, setContextualInfo } = useContext(
+    ContextualInfoContext
+  );
   const [cachedContent, setCachedContent] = useState<ContextualInfo>();
   const [currentId, setId] = useState<string>();
 

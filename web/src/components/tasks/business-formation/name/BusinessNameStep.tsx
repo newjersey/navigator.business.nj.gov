@@ -13,12 +13,21 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SearchBusinessNameError } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { TextField, useMediaQuery } from "@mui/material";
-import { FocusEvent, FormEvent, ReactElement, useContext, useEffect, useRef } from "react";
+import {
+  FocusEvent,
+  FormEvent,
+  ReactElement,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 
 export const BusinessNameStep = (): ReactElement => {
   const FIELD_NAME = "businessName";
   const { Config } = useConfig();
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(
+    BusinessFormationContext
+  );
   const { business } = useUserData();
   const {
     currentName,
@@ -34,8 +43,10 @@ export const BusinessNameStep = (): ReactElement => {
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   useEffect(() => {
-    if (!business || !state.hasSetStateFirstTime || mountEffectOccurred.current) return;
-    const nameToSet = state.formationFormData.businessName || business.profileData.businessName;
+    if (!business || !state.hasSetStateFirstTime || mountEffectOccurred.current)
+      return;
+    const nameToSet =
+      state.formationFormData.businessName || business.profileData.businessName;
     updateCurrentName(nameToSet);
 
     setFormationFormData((prev) => ({ ...prev, businessName: nameToSet }));
@@ -49,10 +60,11 @@ export const BusinessNameStep = (): ReactElement => {
     setFormationFormData,
   ]);
 
-  const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
-    BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
-    SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
-  };
+  const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> =
+    {
+      BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
+      SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
+    };
 
   const doSearch = (event: FormEvent<HTMLFormElement>): void => {
     searchBusinessName(event).catch(() => {});
@@ -68,8 +80,14 @@ export const BusinessNameStep = (): ReactElement => {
         </Heading>
         <Content>{Config.formation.fields.businessName.description}</Content>
         <WithErrorBar hasError={hasError} type="DESKTOP-ONLY">
-          <div className="text-bold margin-top-1">{Config.formation.fields.businessName.label}</div>
-          <div className={isTabletAndUp ? "grid-row grid-gap-2" : "display-flex flex-column"}>
+          <div className="text-bold margin-top-1">
+            {Config.formation.fields.businessName.label}
+          </div>
+          <div
+            className={
+              isTabletAndUp ? "grid-row grid-gap-2" : "display-flex flex-column"
+            }
+          >
             <div className={isTabletAndUp ? "grid-col-8" : ""}>
               <WithErrorBar hasError={hasError} type="MOBILE-ONLY">
                 <TextField
@@ -77,7 +95,10 @@ export const BusinessNameStep = (): ReactElement => {
                   value={currentName}
                   onChange={(event): void => {
                     onChangeNameField(event.target.value);
-                    setFormationFormData({ ...state.formationFormData, businessName: event.target.value });
+                    setFormationFormData({
+                      ...state.formationFormData,
+                      businessName: event.target.value,
+                    });
                   }}
                   variant="outlined"
                   inputProps={{
@@ -89,7 +110,8 @@ export const BusinessNameStep = (): ReactElement => {
                       ? getErrorStateForFormationField({
                           field: "businessName",
                           formationFormData: state.formationFormData,
-                          businessNameAvailability: state.businessNameAvailability,
+                          businessNameAvailability:
+                            state.businessNameAvailability,
                         }).label
                       : undefined
                   }
@@ -99,25 +121,39 @@ export const BusinessNameStep = (): ReactElement => {
                   }}
                 />
                 {state.businessNameAvailability?.status === "UNAVAILABLE" && (
-                  <div className="text-error-dark text-bold margin-y-2" data-testid="unavailable-text">
+                  <div
+                    className="text-error-dark text-bold margin-y-2"
+                    data-testid="unavailable-text"
+                  >
                     <p>
-                      {templateEval(Config.formation.fields.businessName.alertUnavailable, {
-                        name: state.formationFormData.businessName,
-                      })}
+                      {templateEval(
+                        Config.formation.fields.businessName.alertUnavailable,
+                        {
+                          name: state.formationFormData.businessName,
+                        }
+                      )}
                     </p>
                     {state.businessNameAvailability.similarNames.length > 0 && (
                       <>
                         <p className="margin-bottom-1">
-                          {Config.searchBusinessNameTask.similarUnavailableNamesText}
+                          {
+                            Config.searchBusinessNameTask
+                              .similarUnavailableNamesText
+                          }
                         </p>
                         <ul className="usa-list">
-                          {state.businessNameAvailability.similarNames.map((otherName) => {
-                            return (
-                              <li className="text-uppercase text-bold margin-y-0" key={otherName}>
-                                {otherName}
-                              </li>
-                            );
-                          })}
+                          {state.businessNameAvailability.similarNames.map(
+                            (otherName) => {
+                              return (
+                                <li
+                                  className="text-uppercase text-bold margin-y-0"
+                                  key={otherName}
+                                >
+                                  {otherName}
+                                </li>
+                              );
+                            }
+                          )}
                         </ul>
                       </>
                     )}
@@ -148,25 +184,33 @@ export const BusinessNameStep = (): ReactElement => {
       )}
       {state.businessNameAvailability?.status === "DESIGNATOR_ERROR" && (
         <Alert variant="error" dataTestid="designator-error-text">
-          <p className="font-sans-xs">{Config.formation.fields.businessName.alertDesignator}</p>
+          <p className="font-sans-xs">
+            {Config.formation.fields.businessName.alertDesignator}
+          </p>
         </Alert>
       )}
       {state.businessNameAvailability?.status === "SPECIAL_CHARACTER_ERROR" && (
         <Alert variant="error" dataTestid="special-character-error-text">
           <Content className="font-sans-xs">
-            {templateEval(Config.formation.fields.businessName.alertSpecialCharacters, {
-              name: state.formationFormData.businessName,
-            })}
+            {templateEval(
+              Config.formation.fields.businessName.alertSpecialCharacters,
+              {
+                name: state.formationFormData.businessName,
+              }
+            )}
           </Content>
         </Alert>
       )}
       {state.businessNameAvailability?.status === "RESTRICTED_ERROR" && (
         <Alert variant="error" dataTestid="restricted-word-error-text">
           <Content className="font-sans-xs">
-            {templateEval(Config.formation.fields.businessName.alertRestrictedWord, {
-              name: state.formationFormData.businessName,
-              word: state.businessNameAvailability.invalidWord ?? "*unknown*",
-            })}
+            {templateEval(
+              Config.formation.fields.businessName.alertRestrictedWord,
+              {
+                name: state.formationFormData.businessName,
+                word: state.businessNameAvailability.invalidWord ?? "*unknown*",
+              }
+            )}
           </Content>
         </Alert>
       )}

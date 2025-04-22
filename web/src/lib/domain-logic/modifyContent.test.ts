@@ -6,7 +6,9 @@ describe("modifyContent", () => {
     const condition = (): boolean => true;
     const modificationMap = { oos: "out-of-state" };
 
-    expect(modifyContent({ content, condition, modificationMap })).toEqual("I am out-of-state business");
+    expect(modifyContent({ content, condition, modificationMap })).toEqual(
+      "I am out-of-state business"
+    );
   });
 
   it("removes modifier when condition is false", () => {
@@ -14,7 +16,9 @@ describe("modifyContent", () => {
     const condition = (): boolean => false;
     const modificationMap = { oos: "out-of-state" };
 
-    expect(modifyContent({ content, condition, modificationMap })).toEqual("I am business");
+    expect(modifyContent({ content, condition, modificationMap })).toEqual(
+      "I am business"
+    );
   });
 
   it("does not change if no modification map in string", () => {
@@ -22,6 +26,8 @@ describe("modifyContent", () => {
     const condition = (): boolean => false;
     const modificationMap = { something: "random" };
 
-    expect(modifyContent({ content, condition, modificationMap })).toEqual("I am ${oos} business");
+    expect(modifyContent({ content, condition, modificationMap })).toEqual(
+      "I am ${oos} business"
+    );
   });
 });

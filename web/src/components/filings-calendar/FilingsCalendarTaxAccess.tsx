@@ -13,7 +13,9 @@ import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { getCurrentDate, parseDate } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext, useState } from "react";
 
-const isBeforeTheFollowingSaturday = (registeredISO: string | undefined): boolean => {
+const isBeforeTheFollowingSaturday = (
+  registeredISO: string | undefined
+): boolean => {
   const sundayAfterRegisteredDate = parseDate(registeredISO).day(7);
   return getCurrentDate().isBefore(sundayAfterRegisteredDate);
 };
@@ -21,7 +23,8 @@ const isBeforeTheFollowingSaturday = (registeredISO: string | undefined): boolea
 export const FilingsCalendarTaxAccess = (): ReactElement => {
   const { updateQueue, business } = useUserData();
   const { Config } = useConfig();
-  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+  const { isAuthenticated, setShowNeedsAccountModal } =
+    useContext(NeedsAccountContext);
   const [showAlert, setShowAlert] = useState(false);
 
   useMountEffectWhenDefined(() => {
@@ -69,17 +72,27 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
     if (business?.taxFilingData.registeredISO) {
       if (business?.taxFilingData.state === "PENDING") {
         return (
-          <div className="tax-calendar-upper-widget-container" data-testid="pending-container">
+          <div
+            className="tax-calendar-upper-widget-container"
+            data-testid="pending-container"
+          >
             <div className="margin-bottom-2 tablet:margin-bottom-0 margin-right-2">
               <Content>{Config.taxCalendar.pendingCopyMarkdown}</Content>
             </div>
           </div>
         );
-      } else if (isBeforeTheFollowingSaturday(business.taxFilingData.registeredISO)) {
+      } else if (
+        isBeforeTheFollowingSaturday(business.taxFilingData.registeredISO)
+      ) {
         return (
-          <div className="tax-calendar-upper-widget-container" data-testid="alert-content-container">
+          <div
+            className="tax-calendar-upper-widget-container"
+            data-testid="alert-content-container"
+          >
             <div className="margin-bottom-2 tablet:margin-bottom-0 margin-right-2">
-              <Content>{Config.taxCalendar.registrationFollowUpCopyMarkdown}</Content>
+              <Content>
+                {Config.taxCalendar.registrationFollowUpCopyMarkdown}
+              </Content>
             </div>
           </div>
         );

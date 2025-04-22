@@ -18,7 +18,9 @@ const Config = getMergedConfig();
 describe("<ProfileOpportunitiesAlert />", () => {
   const renderComponent = (profileData?: ProfileData): void => {
     render(
-      <WithStatefulProfileData initialData={profileData || createEmptyProfileData()}>
+      <WithStatefulProfileData
+        initialData={profileData || createEmptyProfileData()}
+      >
         <ProfileOpportunitiesAlert />
       </WithStatefulProfileData>
     );

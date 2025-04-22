@@ -9,14 +9,21 @@ export const NonEssentialQuestionsSection = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);
 
   const doesIndustryHaveNonEssentialQuestions = (): boolean => {
-    return LookupIndustryById(state.profileData.industryId).nonEssentialQuestionsIds.length > 0;
+    return (
+      LookupIndustryById(state.profileData.industryId).nonEssentialQuestionsIds
+        .length > 0
+    );
   };
 
   const nonEssentialQuestions = (): ReactElement[] => {
     const nonEssentialQuestionsArray: ReactElement[] = [];
-    const questionIds = LookupIndustryById(state.profileData.industryId).nonEssentialQuestionsIds;
+    const questionIds = LookupIndustryById(
+      state.profileData.industryId
+    ).nonEssentialQuestionsIds;
     for (const question of questionIds) {
-      nonEssentialQuestionsArray.push(<NonEssentialQuestion key={question} essentialQuestionId={question} />);
+      nonEssentialQuestionsArray.push(
+        <NonEssentialQuestion key={question} essentialQuestionId={question} />
+      );
     }
 
     return nonEssentialQuestionsArray;

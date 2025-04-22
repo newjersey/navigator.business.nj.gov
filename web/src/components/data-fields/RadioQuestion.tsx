@@ -3,7 +3,10 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileContentField, profileFieldsFromConfig } from "@/lib/types/types";
+import {
+  ProfileContentField,
+  profileFieldsFromConfig,
+} from "@/lib/types/types";
 import {
   camelCaseToKebabCase,
   camelCaseToSentence,
@@ -11,7 +14,12 @@ import {
   kebabSnakeSentenceToCamelCase,
 } from "@/lib/utils/cases-helpers";
 import { ProfileData } from "@businessnjgovnavigator/shared/index";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import {
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
 type ProfileDataTypes = ProfileData[keyof ProfileData];
@@ -26,7 +34,9 @@ type Props<T> = {
   onChange?: (value: T) => void;
 };
 
-export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): ReactElement => {
+export const RadioQuestion = <T extends ProfileDataTypes>(
+  props: Props<T>
+): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
   const fieldName = props.contentFieldName ?? props.fieldName;
@@ -42,9 +52,12 @@ export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): Reac
     fieldName: fieldName as keyof typeof profileFieldsFromConfig,
   });
 
-  props.required && RegisterForOnSubmit(() => state.profileData[props.fieldName] !== undefined);
+  props.required &&
+    RegisterForOnSubmit(() => state.profileData[props.fieldName] !== undefined);
 
-  const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
+  const handleChange = (
+    event: React.ChangeEvent<{ name?: string; value: unknown }>
+  ): void => {
     const value = props.choices.find((val) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return val.toString() === (event.target.value as any).toString();
@@ -75,9 +88,9 @@ export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): Reac
                   key={val.toString()}
                   style={{ alignItems: "center" }}
                   labelPlacement="end"
-                  data-testid={`${camelCaseToKebabCase(props.fieldName)}-radio-${val
-                    .toString()
-                    .toLowerCase()}`}
+                  data-testid={`${camelCaseToKebabCase(
+                    props.fieldName
+                  )}-radio-${val.toString().toLowerCase()}`}
                   value={val.toString()}
                   control={<Radio color="primary" />}
                   label={

@@ -20,11 +20,15 @@ interface Props {
   CMS_ONLY_fakeLicenseName?: LicenseName;
 }
 
-export const AnytimeActionLicenseReinstatementElement = (props: Props): ReactElement => {
+export const AnytimeActionLicenseReinstatementElement = (
+  props: Props
+): ReactElement => {
   const { Config } = useConfig();
   const userDataFromHook = useUserData();
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
-  const licenseName = props.CMS_ONLY_fakeLicenseName ?? props.anytimeActionLicenseReinstatement.licenseName;
+  const licenseName =
+    props.CMS_ONLY_fakeLicenseName ??
+    props.anytimeActionLicenseReinstatement.licenseName;
   const licenseDetails = business?.licenseData?.licenses?.[licenseName];
 
   return (
@@ -35,24 +39,31 @@ export const AnytimeActionLicenseReinstatementElement = (props: Props): ReactEle
           <div>
             <span className="text-bold">
               {
-                Config.anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults
+                Config
+                  .anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults
                   .licenseExpirationHeaderText
               }
             </span>{" "}
             {licenseDetails?.expirationDateISO &&
-              parseDateWithFormat(licenseDetails.expirationDateISO, defaultDateFormat).format(
-                licenseSearchDateFormat
-              )}
+              parseDateWithFormat(
+                licenseDetails.expirationDateISO,
+                defaultDateFormat
+              ).format(licenseSearchDateFormat)}
           </div>
         </div>
       </div>
 
       <div className="margin-top-3">
-        <Content>{props.anytimeActionLicenseReinstatement.summaryDescriptionMd}</Content>
+        <Content>
+          {props.anytimeActionLicenseReinstatement.summaryDescriptionMd}
+        </Content>
       </div>
       <HorizontalLine />
 
-      <LicenseCurrentStatusComponent licenseData={business?.licenseData} licenseName={licenseName} />
+      <LicenseCurrentStatusComponent
+        licenseData={business?.licenseData}
+        licenseName={licenseName}
+      />
 
       <Content>{props.anytimeActionLicenseReinstatement.contentMd}</Content>
 
@@ -60,7 +71,9 @@ export const AnytimeActionLicenseReinstatementElement = (props: Props): ReactEle
       <span className="h5-styling" data-testid="form-id-header">
         {Config.filingDefaults.issuingAgencyText} &nbsp;
       </span>
-      <span className="h6-styling">{props.anytimeActionLicenseReinstatement.issuingAgency}</span>
+      <span className="h6-styling">
+        {props.anytimeActionLicenseReinstatement.issuingAgency}
+      </span>
 
       {props.anytimeActionLicenseReinstatement.callToActionLink &&
         props.anytimeActionLicenseReinstatement.callToActionText && (

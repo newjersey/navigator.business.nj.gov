@@ -27,9 +27,9 @@ export const WithErrorBar = (props: Props): ReactElement => {
 
   return (
     <div
-      className={`${props.className ?? ""} ${shouldShowBar ? "input-error-bar" : ""} ${
-        props.hasError ? "error" : ""
-      }`}
+      className={`${props.className ?? ""} ${
+        shouldShowBar ? "input-error-bar" : ""
+      } ${props.hasError ? "error" : ""}`}
     >
       {props.children}
     </div>

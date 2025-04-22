@@ -11,7 +11,14 @@ import {
   QuestionnaireConfig,
   QuestionnaireFieldIds,
 } from "@businessnjgovnavigator/shared/environment";
-import { Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, useMediaQuery } from "@mui/material";
+import {
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormLabel,
+  useMediaQuery,
+} from "@mui/material";
 import { ChangeEvent, ReactElement, useState } from "react";
 
 interface Props {
@@ -48,7 +55,9 @@ export const EnvQuestionnaire = (props: Props): ReactElement => {
     return questionnaire;
   };
 
-  const [questionnaireData, setQuestionnaireData] = useState<Questionnaire>(setUpQuestionnaireData());
+  const [questionnaireData, setQuestionnaireData] = useState<Questionnaire>(
+    setUpQuestionnaireData()
+  );
   const [showError, setShowError] = useState<boolean>(false);
 
   const noSelectionMade = (): boolean => {
@@ -81,10 +90,14 @@ export const EnvQuestionnaire = (props: Props): ReactElement => {
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const value: QuestionnaireFieldIds = event.target.id as QuestionnaireFieldIds;
+    const value: QuestionnaireFieldIds = event.target
+      .id as QuestionnaireFieldIds;
     if (value === props.noSelectionOption) {
       const emptyQuestionnaire = emptyQuestionnaireData();
-      setQuestionnaireData({ ...emptyQuestionnaire, [props.noSelectionOption]: true });
+      setQuestionnaireData({
+        ...emptyQuestionnaire,
+        [props.noSelectionOption]: true,
+      });
     } else {
       setQuestionnaireData({
         ...questionnaireData,
@@ -99,24 +112,36 @@ export const EnvQuestionnaire = (props: Props): ReactElement => {
   return (
     <div className={"bg-accent-cooler-50 padding-2 radius-lg"}>
       {!isMobile && <h3>{Config.envQuestionPage.generic.title}</h3>}
-      {showError && <Alert variant={"error"}>{Config.envQuestionPage.generic.errorText}</Alert>}
+      {showError && (
+        <Alert variant={"error"}>
+          {Config.envQuestionPage.generic.errorText}
+        </Alert>
+      )}
       <FormControl component="fieldset" variant="standard" fullWidth={true}>
         <FormLabel component="legend" className="text-base-darkest text-bold">
           {Config.envQuestionPage.generic.question}
         </FormLabel>
-        <FormGroup className={`margin-y-1 ${isMobile ? "" : "margin-left-105"}`}>
+        <FormGroup
+          className={`margin-y-1 ${isMobile ? "" : "margin-left-105"}`}
+        >
           {questionnaireFieldIds.map((fieldId) => {
             return (
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={questionnaireData[fieldId as QuestionnaireFieldIds]}
+                    checked={
+                      questionnaireData[fieldId as QuestionnaireFieldIds]
+                    }
                     onChange={handleChange}
                     name={fieldId}
                     id={fieldId}
                   />
                 }
-                label={<Content>{optionsTextConfig?.[fieldId as QuestionnaireFieldIds]}</Content>}
+                label={
+                  <Content>
+                    {optionsTextConfig?.[fieldId as QuestionnaireFieldIds]}
+                  </Content>
+                }
                 key={fieldId}
               />
             );
@@ -126,8 +151,10 @@ export const EnvQuestionnaire = (props: Props): ReactElement => {
       <div className={"margin-bottom-1"}>
         <Content>
           {templateEval(Config.envQuestionPage.generic.footerText, {
-            mediaAreaText: Config.envQuestionPage[props.mediaArea].mediaAreaText,
-            mediaAreaLink: Config.envQuestionPage[props.mediaArea].mediaAreaLink,
+            mediaAreaText:
+              Config.envQuestionPage[props.mediaArea].mediaAreaText,
+            mediaAreaLink:
+              Config.envQuestionPage[props.mediaArea].mediaAreaLink,
           })}
         </Content>
       </div>

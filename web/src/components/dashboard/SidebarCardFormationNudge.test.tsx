@@ -10,17 +10,27 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { formationTaskId, generateProfileData } from "@businessnjgovnavigator/shared/";
+import {
+  formationTaskId,
+  generateProfileData,
+} from "@businessnjgovnavigator/shared/";
 import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
-import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
+import {
+  generatePreferences,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({
+  buildUserRoadmap: jest.fn(),
+}));
+const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<
+  typeof buildUserRoadmap
+>;
 
 const Config = getMergedConfig();
 
@@ -41,7 +51,9 @@ describe("<SidebarCardFormationNudge />", () => {
       useMockRouter({});
       setupStatefulUserDataContext();
       card = generateSidebarCardContent({ id: SIDEBAR_CARDS.formationNudge });
-      mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(generateRoadmap({}));
+      mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(
+        generateRoadmap({})
+      );
     });
 
     it("opens the modal when the user clicks the formation nudge", () => {
@@ -49,12 +61,16 @@ describe("<SidebarCardFormationNudge />", () => {
         profileData: generateProfileData({
           businessPersona: "STARTING",
         }),
-        preferences: generatePreferences({ visibleSidebarCards: [SIDEBAR_CARDS.formationNudge] }),
+        preferences: generatePreferences({
+          visibleSidebarCards: [SIDEBAR_CARDS.formationNudge],
+        }),
       });
 
       fireEvent.click(screen.getByTestId("cta-formation-nudge"));
 
-      expect(screen.getByText(Config.formationDateModal.header)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formationDateModal.header)
+      ).toBeInTheDocument();
     });
 
     it("saves formation date and updates user data with completed formation task", async () => {
@@ -70,15 +86,25 @@ describe("<SidebarCardFormationNudge />", () => {
       fireEvent.click(screen.getByTestId("modal-button-primary"));
 
       await waitFor(() => {
-        expect(currentBusiness().profileData.dateOfFormation).toEqual("2021-05-01");
+        expect(currentBusiness().profileData.dateOfFormation).toEqual(
+          "2021-05-01"
+        );
       });
-      expect(currentBusiness().taskProgress[formationTaskId]).toEqual("COMPLETED");
+      expect(currentBusiness().taskProgress[formationTaskId]).toEqual(
+        "COMPLETED"
+      );
 
-      expect(screen.queryByTestId(Config.formationDateModal.header)).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId(Config.formationDateModal.header)
+      ).not.toBeInTheDocument();
       await waitFor(() => {
-        return expect(mockPush).toHaveBeenCalledWith({ query: { fromForming: "true" } }, undefined, {
-          shallow: true,
-        });
+        return expect(mockPush).toHaveBeenCalledWith(
+          { query: { fromForming: "true" } },
+          undefined,
+          {
+            shallow: true,
+          }
+        );
       });
     });
 
@@ -94,7 +120,9 @@ describe("<SidebarCardFormationNudge />", () => {
 
       fireEvent.click(screen.getByTestId("modal-button-secondary"));
 
-      expect(screen.queryByTestId(Config.formationDateModal.header)).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId(Config.formationDateModal.header)
+      ).not.toBeInTheDocument();
 
       expect(userDataWasNotUpdated()).toEqual(true);
     });

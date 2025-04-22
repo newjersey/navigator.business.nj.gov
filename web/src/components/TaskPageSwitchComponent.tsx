@@ -12,7 +12,12 @@ import { BusinessStructureTask } from "@/components/tasks/business-structure/Bus
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { EnvPermit } from "@/components/tasks/environment-questionnaire/EnvPermit";
-import { Roadmap, Task, TasksDisplayContent, TaskWithLicenseTaskId } from "@/lib/types/types";
+import {
+  Roadmap,
+  Task,
+  TasksDisplayContent,
+  TaskWithLicenseTaskId,
+} from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
 import { formationTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
@@ -61,7 +66,10 @@ export const TaskPageSwitchComponent = ({
 }: Props): ReactElement => {
   if (taskIdsWithLicenseSearchEnabled.includes(task.id)) {
     return (
-      <LicenseTask task={task as TaskWithLicenseTaskId} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
+      <LicenseTask
+        task={task as TaskWithLicenseTaskId}
+        CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay}
+      />
     );
   }
 
@@ -70,13 +78,22 @@ export const TaskPageSwitchComponent = ({
     "land-permitting": <EnvPermit task={task} />,
     "air-permitting": <EnvPermit task={task} />,
     "elevator-registration": (
-      <ElevatorRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
+      <ElevatorRegistrationTask
+        task={task}
+        CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay}
+      />
     ),
     "hotel-motel-registration": (
-      <HotelMotelRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
+      <HotelMotelRegistrationTask
+        task={task}
+        CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay}
+      />
     ),
     "multiple-dwelling-registration": (
-      <MultipleDwellingRegistrationTask task={task} CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay} />
+      <MultipleDwellingRegistrationTask
+        task={task}
+        CMS_ONLY_disable_overlay={CMS_ONLY_disable_overlay}
+      />
     ),
     "raffle-bingo-games-license": <RaffleBingoPaginator task={task} />,
     "determine-naics-code": <NaicsCodeTask task={task} />,
@@ -84,13 +101,25 @@ export const TaskPageSwitchComponent = ({
     "conditional-permit-cannabis": <CannabisApplyForLicenseTask task={task} />,
     "annual-license-cannabis": <CannabisApplyForLicenseTask task={task} />,
     "register-for-ein": <EinTask task={task} />,
-    "register-for-taxes": <TaxTask task={getTaskFromRoadmap(roadmap, task.id) ?? task} />,
-    "business-structure": <BusinessStructureTask task={getTaskFromRoadmap(roadmap, task.id) ?? task} />,
+    "register-for-taxes": (
+      <TaxTask task={getTaskFromRoadmap(roadmap, task.id) ?? task} />
+    ),
+    "business-structure": (
+      <BusinessStructureTask
+        task={getTaskFromRoadmap(roadmap, task.id) ?? task}
+      />
+    ),
     "search-business-name": (
-      <BusinessFormation task={getTaskFromRoadmap(roadmap, task.id)} displayContent={displayContent} />
+      <BusinessFormation
+        task={getTaskFromRoadmap(roadmap, task.id)}
+        displayContent={displayContent}
+      />
     ),
     [formationTaskId]: (
-      <BusinessFormation task={getTaskFromRoadmap(roadmap, task.id)} displayContent={displayContent} />
+      <BusinessFormation
+        task={getTaskFromRoadmap(roadmap, task.id)}
+        displayContent={displayContent}
+      />
     ),
     default: <TaskBody task={task} business={business} roadmap={roadmap} />,
   });

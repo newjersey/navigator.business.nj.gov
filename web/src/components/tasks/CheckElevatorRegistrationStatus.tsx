@@ -10,7 +10,13 @@ import { ElevatorSafetyAddress } from "@businessnjgovnavigator/shared/elevatorSa
 import { HousingMunicipality } from "@businessnjgovnavigator/shared/housing";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import { TextField } from "@mui/material";
-import { ChangeEvent, FormEvent, ReactElement, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  ReactElement,
+  useEffect,
+  useState,
+} from "react";
 
 interface Props {
   onSubmit: (address: ElevatorSafetyAddress) => void;
@@ -20,16 +26,26 @@ interface Props {
 }
 
 const Config = getMergedConfig();
-const ElevatorSearchErrorLookup: Record<ElevatorRegistrationSearchError, string> = {
-  NO_PROPERTY_INTEREST_FOUND: Config.elevatorRegistrationSearchTask.errorTextNoPropertyInterestFound,
-  NO_ELEVATOR_REGISTRATIONS_FOUND: Config.elevatorRegistrationSearchTask.errorTextNoElevatorRegistrations,
-  FIELDS_REQUIRED: Config.elevatorRegistrationSearchTask.errorTextFieldsRequired,
+const ElevatorSearchErrorLookup: Record<
+  ElevatorRegistrationSearchError,
+  string
+> = {
+  NO_PROPERTY_INTEREST_FOUND:
+    Config.elevatorRegistrationSearchTask.errorTextNoPropertyInterestFound,
+  NO_ELEVATOR_REGISTRATIONS_FOUND:
+    Config.elevatorRegistrationSearchTask.errorTextNoElevatorRegistrations,
+  FIELDS_REQUIRED:
+    Config.elevatorRegistrationSearchTask.errorTextFieldsRequired,
   SEARCH_FAILED: Config.elevatorRegistrationSearchTask.errorTextSearchFailed,
 };
 
 export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
-  const [formValues, setFormValues] = useState<ElevatorSafetyAddress>({ address1: "" });
-  const [selectedMunicipality, setSelectedMunicipality] = useState<Municipality | undefined>(undefined);
+  const [formValues, setFormValues] = useState<ElevatorSafetyAddress>({
+    address1: "",
+  });
+  const [selectedMunicipality, setSelectedMunicipality] = useState<
+    Municipality | undefined
+  >(undefined);
   const { business, updateQueue } = useUserData();
 
   const formattedMunicipalities = props.municipalities.map((municipality) => {
@@ -42,7 +58,8 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
   });
 
   useEffect(() => {
-    const communityAffairsAddress = business?.profileData.communityAffairsAddress;
+    const communityAffairsAddress =
+      business?.profileData.communityAffairsAddress;
 
     if (communityAffairsAddress) {
       if (communityAffairsAddress.streetAddress1) {
@@ -127,7 +144,9 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
       {Config.elevatorRegistrationSearchTask.registrationSearchPrompt}
       <form onSubmit={onSubmit} className={"padding-top-1"}>
         <div className="margin-bottom-2">
-          <label htmlFor="address-1">{Config.elevatorRegistrationSearchTask.address1Label}</label>
+          <label htmlFor="address-1">
+            {Config.elevatorRegistrationSearchTask.address1Label}
+          </label>
           <TextField
             value={formValues.address1}
             onChange={handleChangeForKey("address1")}
@@ -139,7 +158,9 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
           />
         </div>
         <div className="margin-bottom-2">
-          <label htmlFor="address-2">{Config.elevatorRegistrationSearchTask.address2Label}</label>
+          <label htmlFor="address-2">
+            {Config.elevatorRegistrationSearchTask.address2Label}
+          </label>
           <TextField
             value={formValues.address2}
             onChange={handleChangeForKey("address2")}
@@ -152,7 +173,9 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
         </div>
         <div className="fdr flex-half">
           <div className="flex-half padding-right-1">
-            <label htmlFor="municipality">{Config.elevatorRegistrationSearchTask.municipalityLabel}</label>
+            <label htmlFor="municipality">
+              {Config.elevatorRegistrationSearchTask.municipalityLabel}
+            </label>
             <MunicipalityDropdown
               fieldName={"municipalities"}
               municipalities={formattedMunicipalities}
@@ -165,7 +188,9 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
             />
           </div>
           <div className="flex-half padding-left-1">
-            <label htmlFor="state">{Config.elevatorRegistrationSearchTask.stateLabel}</label>
+            <label htmlFor="state">
+              {Config.elevatorRegistrationSearchTask.stateLabel}
+            </label>
             <TextField
               value={"New Jersey"}
               onChange={(): void => {}}

@@ -24,7 +24,11 @@ const CannabisPriorityStatusPreview = (props: PreviewProps): ReactElement => {
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+      <div
+        className="cms"
+        ref={ref}
+        style={{ margin: 40, pointerEvents: "none" }}
+      >
         <CannabisPriorityStatusTask
           task={generateTask({ name: "Name is controlled by Task Metadata" })}
           CMS_ONLY_tab={tab}
@@ -36,15 +40,30 @@ const CannabisPriorityStatusPreview = (props: PreviewProps): ReactElement => {
             <Heading level={2}>Priority Status Types</Heading>
 
             <Alert variant="info">
-              <Content>{templateEval(config.cannabisPriorityStatus.phrase1, priorityStatusTypes)}</Content>
+              <Content>
+                {templateEval(
+                  config.cannabisPriorityStatus.phrase1,
+                  priorityStatusTypes
+                )}
+              </Content>
             </Alert>
 
             <Alert variant="info">
-              <Content>{templateEval(config.cannabisPriorityStatus.phrase2, priorityStatusTypes)}</Content>
+              <Content>
+                {templateEval(
+                  config.cannabisPriorityStatus.phrase2,
+                  priorityStatusTypes
+                )}
+              </Content>
             </Alert>
 
             <Alert variant="info">
-              <Content>{templateEval(config.cannabisPriorityStatus.phrase3, priorityStatusTypes)}</Content>
+              <Content>
+                {templateEval(
+                  config.cannabisPriorityStatus.phrase3,
+                  priorityStatusTypes
+                )}
+              </Content>
             </Alert>
           </>
         )}

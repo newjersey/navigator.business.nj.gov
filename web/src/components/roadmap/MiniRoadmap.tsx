@@ -24,7 +24,11 @@ export const MiniRoadmap = (props: Props): ReactElement => {
   const completedBusinessStructure = hasCompletedBusinessStructure(business);
 
   const onToggleStep = useCallback(
-    async (stepNumber: number, setOpen: boolean, click: boolean): Promise<void> => {
+    async (
+      stepNumber: number,
+      setOpen: boolean,
+      click: boolean
+    ): Promise<void> => {
       if (!business || !updateQueue) return;
 
       const openSteps = business.preferences.roadmapOpenSteps;
@@ -57,7 +61,9 @@ export const MiniRoadmap = (props: Props): ReactElement => {
       {sectionNamesInRoadmap.map((section) => {
         return (
           <SectionAccordion key={section} sectionType={section} mini={true}>
-            {section === "START" && !completedBusinessStructure && displayBusinessStructurePrompt ? (
+            {section === "START" &&
+            !completedBusinessStructure &&
+            displayBusinessStructurePrompt ? (
               <BusinessStructurePrompt isCTAButtonHidden={true} />
             ) : (
               roadmap?.steps
@@ -71,7 +77,9 @@ export const MiniRoadmap = (props: Props): ReactElement => {
                       isLast={index === array.length - 1}
                       activeTaskId={props.activeTaskId}
                       completed={isStepCompleted(roadmap, step, business)}
-                      isOpen={business?.preferences.roadmapOpenSteps.includes(step.stepNumber)}
+                      isOpen={business?.preferences.roadmapOpenSteps.includes(
+                        step.stepNumber
+                      )}
                       toggleStep={onToggleStep}
                       onTaskClick={props.onTaskClick}
                       key={step.stepNumber}

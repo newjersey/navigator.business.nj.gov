@@ -57,7 +57,8 @@ class NoSpaceControl extends Component<NoSpaceProps, NoSpaceState> {
   };
 
   render(): ReactElement {
-    const { forID, value, classNameWrapper, setActiveStyle, setInactiveStyle } = this.props;
+    const { forID, value, classNameWrapper, setActiveStyle, setInactiveStyle } =
+      this.props;
     return (
       <input
         ref={this.el}

@@ -3,7 +3,11 @@
 import { makeSnippet } from "@/lib/search/helpers";
 import { ConfigMatch, GroupedConfigMatch } from "@/lib/search/typesForSearch";
 
-export const searchConfig = (obj: any, term: string, cmsConfig: any): GroupedConfigMatch[] => {
+export const searchConfig = (
+  obj: any,
+  term: string,
+  cmsConfig: any
+): GroupedConfigMatch[] => {
   const configMatches = searchObj(obj.default, term, [], []).map((it) => {
     const cmsPath = findCmsConfigPath(cmsConfig, it.keyPath);
     return {
@@ -35,7 +39,12 @@ const groupByCMSFile = (configMatches: ConfigMatch[]): GroupedConfigMatch[] => {
   }));
 };
 
-const searchObj = (obj: any, term: string, matches: JsonMatch[], keyPaths: string[]): JsonMatch[] => {
+const searchObj = (
+  obj: any,
+  term: string,
+  matches: JsonMatch[],
+  keyPaths: string[]
+): JsonMatch[] => {
   if (typeof obj === "object" && obj !== null && !Array.isArray(obj)) {
     for (const key of Object.keys(obj)) {
       const value = obj[key];
@@ -49,7 +58,11 @@ const searchObj = (obj: any, term: string, matches: JsonMatch[], keyPaths: strin
             },
           ];
         }
-      } else if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+      } else if (
+        typeof value === "object" &&
+        value !== null &&
+        !Array.isArray(value)
+      ) {
         matches = searchObj(value, term, matches, [...keyPaths, key]);
       }
     }
@@ -101,12 +114,18 @@ const findFilesInCmsConfig = (cmsConfig: any, key: string): FileMatch[] => {
   return matchingFiles;
 };
 
-const buildCmsConfigPath = (cmsConfigFile: any, keyPath: string[], cmsLabelPath: string[]): string[] => {
+const buildCmsConfigPath = (
+  cmsConfigFile: any,
+  keyPath: string[],
+  cmsLabelPath: string[]
+): string[] => {
   if (keyPath.length === 0) {
     return cmsLabelPath;
   }
 
-  const foundField = cmsConfigFile.fields.find((it: any) => it.name === keyPath[0]);
+  const foundField = cmsConfigFile.fields.find(
+    (it: any) => it.name === keyPath[0]
+  );
   if (!foundField) {
     return cmsLabelPath;
   }

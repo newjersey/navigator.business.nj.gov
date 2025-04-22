@@ -5,7 +5,10 @@ import { CannabisApplicationRequirementsTab } from "@/components/tasks/cannabis/
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { PriorityApplicationType, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
+import {
+  PriorityApplicationType,
+  priorityTypesObj,
+} from "@/lib/domain-logic/cannabisPriorityTypes";
 import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -27,7 +30,9 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
 
   const [displayFirstTab, setDisplayFirstTab] = useState<boolean>(true);
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState(false);
-  const [priorityStatusState, setPriorityStatusState] = useState<Record<PriorityApplicationType, boolean>>({
+  const [priorityStatusState, setPriorityStatusState] = useState<
+    Record<PriorityApplicationType, boolean>
+  >({
     diverselyOwned: false,
     socialEquity: false,
     impactZone: false,
@@ -44,24 +49,30 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
 
     if (!business) return;
 
-    const minorityOrWomenPriorityTypeSelected = priorityTypesObj.minorityOrWomen.some((key) => {
-      return business.taskItemChecklist[key];
-    });
+    const minorityOrWomenPriorityTypeSelected =
+      priorityTypesObj.minorityOrWomen.some((key) => {
+        return business.taskItemChecklist[key];
+      });
 
     const veteranPriorityTypeSelected = priorityTypesObj.veteran.some((key) => {
       return business.taskItemChecklist[key];
     });
 
-    const impactZonePriorityTypeSelected = priorityTypesObj.impactZone.some((key) => {
-      return business.taskItemChecklist[key];
-    });
+    const impactZonePriorityTypeSelected = priorityTypesObj.impactZone.some(
+      (key) => {
+        return business.taskItemChecklist[key];
+      }
+    );
 
-    const socialEquityPriorityTypeSelected = priorityTypesObj.socialEquity.some((key) => {
-      return business.taskItemChecklist[key];
-    });
+    const socialEquityPriorityTypeSelected = priorityTypesObj.socialEquity.some(
+      (key) => {
+        return business.taskItemChecklist[key];
+      }
+    );
 
     setPriorityStatusState({
-      diverselyOwned: minorityOrWomenPriorityTypeSelected || veteranPriorityTypeSelected,
+      diverselyOwned:
+        minorityOrWomenPriorityTypeSelected || veteranPriorityTypeSelected,
       impactZone: impactZonePriorityTypeSelected,
       socialEquity: socialEquityPriorityTypeSelected,
     });
@@ -73,7 +84,10 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
     );
   }, business);
 
-  const onCheckboxChange = (type: PriorityApplicationType, checked: boolean): void => {
+  const onCheckboxChange = (
+    type: PriorityApplicationType,
+    checked: boolean
+  ): void => {
     setPriorityStatusState((current) => {
       return {
         ...current,
@@ -89,7 +103,9 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
   };
 
   const sendNextTabButtonAnalytics = (): void => {
-    analytics.event.cannabis_license_form.click.view_requirements("requirements");
+    analytics.event.cannabis_license_form.click.view_requirements(
+      "requirements"
+    );
     if (priorityStatusState.impactZone) {
       analytics.event.cannabis_license_form_priority_status_impact_checkbox.submit.impact_zone_business();
     }
@@ -126,7 +142,9 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
       {displayFirstTab ? (
         <>
           <UnlockedBy task={props.task} />
-          <Content className="margin-bottom-2">{props.task.summaryDescriptionMd || ""}</Content>
+          <Content className="margin-bottom-2">
+            {props.task.summaryDescriptionMd || ""}
+          </Content>
           <CannabisApplicationQuestionsTab
             onNextTab={handleNextTabButtonClick}
             priorityStatusState={priorityStatusState}

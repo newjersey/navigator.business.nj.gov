@@ -30,7 +30,9 @@ export const HorizontalStepper = (props: Props): ReactElement => {
 
   useEffect(() => {
     if (divRefs.current[props.currentStep] && !props.suppressRefocusBehavior) {
-      scrollToTopOfElement(divRefs.current[props.currentStep], { focusElement: true });
+      scrollToTopOfElement(divRefs.current[props.currentStep], {
+        focusElement: true,
+      });
     }
   }, [props.currentStep, props.suppressRefocusBehavior]);
 
@@ -129,7 +131,10 @@ export const HorizontalStepper = (props: Props): ReactElement => {
     }
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>, index: number): void => {
+  const handleKeyDown = (
+    event: React.KeyboardEvent<HTMLDivElement>,
+    index: number
+  ): void => {
     if (event.key === "Enter" || event.key === " ") {
       setFocusStep(props.currentStep);
       divRefs.current[props.currentStep]?.focus();
@@ -181,7 +186,11 @@ export const HorizontalStepper = (props: Props): ReactElement => {
     });
   };
 
-  const composeFormationTabAriaLabel = (content: string, stepName: string, stepState: string): string => {
+  const composeFormationTabAriaLabel = (
+    content: string,
+    stepName: string,
+    stepState: string
+  ): string => {
     return insertStepState(insertStepName(content, stepName), stepState);
   };
 
@@ -191,14 +200,21 @@ export const HorizontalStepper = (props: Props): ReactElement => {
     <>
       <div className="horizontal-step-indicator display-block">
         <div className="usa-step-indicator usa-step-indicator--counters-sm">
-          <div className={`usa-step-indicator__segments stepper-wrapper`} role={"tablist"}>
+          <div
+            className={`usa-step-indicator__segments stepper-wrapper`}
+            role={"tablist"}
+          >
             {props.steps.map((step: StepperStep, index: number) => {
               return (
                 <div
                   key={`${step.name}-${index}`}
                   className={
-                    `border-bottom-2px ${getBorderColor(index)} cursor-pointer ` +
-                    `usa-step-indicator__segment usa-step-indicator__segment${getCSSClassColor(index)}`
+                    `border-bottom-2px ${getBorderColor(
+                      index
+                    )} cursor-pointer ` +
+                    `usa-step-indicator__segment usa-step-indicator__segment${getCSSClassColor(
+                      index
+                    )}`
                   }
                   data-num={getIcon(index)}
                   data-state={determineState(index)}
@@ -217,7 +233,11 @@ export const HorizontalStepper = (props: Props): ReactElement => {
                     divRefs.current[index] = el;
                   }}
                 >
-                  <div className={`usa-step-indicator__segment-label ${getBoldClass(index)}`}>
+                  <div
+                    className={`usa-step-indicator__segment-label ${getBoldClass(
+                      index
+                    )}`}
+                  >
                     <span>{step.name}</span>
                   </div>
                 </div>
@@ -226,8 +246,14 @@ export const HorizontalStepper = (props: Props): ReactElement => {
           </div>
         </div>
       </div>
-      <div className={"display-only-mobile-and-tablet margin-top-1 margin-bottom-2"}>
-        <strong>{`Step ${props.currentStep + 1} of ${props.steps.length}:`}</strong>
+      <div
+        className={
+          "display-only-mobile-and-tablet margin-top-1 margin-bottom-2"
+        }
+      >
+        <strong>{`Step ${props.currentStep + 1} of ${
+          props.steps.length
+        }:`}</strong>
         {` ${props.steps[props.currentStep].name}`}
       </div>
     </>

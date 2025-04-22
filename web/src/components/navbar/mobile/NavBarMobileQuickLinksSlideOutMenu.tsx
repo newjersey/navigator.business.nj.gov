@@ -1,5 +1,12 @@
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
-import { Grow, Operate, Plan, Search, Start, Updates } from "@/components/navbar/shared-submenu-components";
+import {
+  Grow,
+  Operate,
+  Plan,
+  Search,
+  Start,
+  Updates,
+} from "@/components/navbar/shared-submenu-components";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
@@ -31,7 +38,10 @@ export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement => {
           open();
         }}
       >
-        <Icon className="text-accent-cool-more-dark font-sans-lg" iconName="menu" />
+        <Icon
+          className="text-accent-cool-more-dark font-sans-lg"
+          iconName="menu"
+        />
       </button>
 
       <FocusTrappedSidebar close={close} isOpen={sidebarIsOpen}>
@@ -47,8 +57,13 @@ export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement => {
             data-testid={"nav-bar-popup-menu"}
             className="padding-bottom-0"
           >
-            <MenuItem className={"display-flex padding-y-205 menu-item-title"} disabled={true}>
-              <div className="text-bold">{Config.navigationQuickLinks.navBarMobileQuickLinksTitle}</div>
+            <MenuItem
+              className={"display-flex padding-y-205 menu-item-title"}
+              disabled={true}
+            >
+              <div className="text-bold">
+                {Config.navigationQuickLinks.navBarMobileQuickLinksTitle}
+              </div>
             </MenuItem>
             <hr className="margin-0 hr-2px" key="name-break" />
 

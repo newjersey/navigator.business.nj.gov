@@ -71,9 +71,11 @@ export default {
     postContext: string;
     postFormat: string;
   }): string => {
-    return `${obj.preFormat || ""}${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${
-      obj.contextId || ""
-    }\` ${(obj.postContext || "").trim()}${obj.postFormat || ""}`;
+    return `${obj.preFormat || ""}${(obj.preContext || "").trim()} \`${(
+      obj.title || ""
+    ).trim()}|${obj.contextId || ""}\` ${(obj.postContext || "").trim()}${
+      obj.postFormat || ""
+    }`;
   },
 
   toPreview: (obj: {
@@ -84,8 +86,8 @@ export default {
     postContext: string;
     postFormat: string;
   }): string => {
-    return `${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${obj.contextId || ""}\` ${(
-      obj.postContext || ""
-    ).trim()}`;
+    return `${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${
+      obj.contextId || ""
+    }\` ${(obj.postContext || "").trim()}`;
   },
 };

@@ -25,7 +25,9 @@ import { Reducer } from "react";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types
-export type KeysOfType<T, V> = { [K in keyof T]-?: T[K] extends V ? K : never }[keyof T];
+export type KeysOfType<T, V> = {
+  [K in keyof T]-?: T[K] extends V ? K : never;
+}[keyof T];
 
 export type UserDataError = "NO_DATA" | "CACHED_ONLY" | "UPDATE_FAILED";
 
@@ -71,8 +73,16 @@ export const createEmptyTaskDisplayContent = (): TasksDisplayContent => {
 
 export type OnboardingStatus = "SUCCESS" | "ERROR";
 
-export type FormationStepNames = "Name" | "Business" | "Contacts" | "Billing" | "Review";
-export type DbaStepNames = "Business Name" | "DBA Resolution" | "Authorize Business";
+export type FormationStepNames =
+  | "Name"
+  | "Business"
+  | "Contacts"
+  | "Billing"
+  | "Review";
+export type DbaStepNames =
+  | "Business Name"
+  | "DBA Resolution"
+  | "Authorize Business";
 
 export type FormationFieldErrorState = {
   field: FieldsForErrorHandling;
@@ -210,7 +220,13 @@ export const FundingStatusOrder: Record<FundingStatus, number> = {
   closed: 4,
   "opening soon": 4,
 };
-export type FundingProgramFrequency = "annual" | "ongoing" | "reoccuring" | "one-time" | "pilot" | "other";
+export type FundingProgramFrequency =
+  | "annual"
+  | "ongoing"
+  | "reoccuring"
+  | "one-time"
+  | "pilot"
+  | "other";
 export type FundingBusinessStage = "early-stage" | "operating" | "both";
 export type FundingHomeBased = "yes" | "no" | "unknown";
 export type FundingpreferenceForOpportunityZone = "yes" | "no";
@@ -264,7 +280,9 @@ export type County =
   | "Union"
   | "Warren";
 
-export interface FormationSignedAddress extends FormationMember, Partial<Omit<FormationSigner, "name">> {}
+export interface FormationSignedAddress
+  extends FormationMember,
+    Partial<Omit<FormationSigner, "name">> {}
 
 export type FormationDbaContent = {
   DbaResolution: TaskWithoutLinks;
@@ -446,9 +464,14 @@ export type NaicsCodeObject = {
   industryIds?: string[];
 };
 
-export type LicenseSearchError = "NOT_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
+export type LicenseSearchError =
+  | "NOT_FOUND"
+  | "FIELDS_REQUIRED"
+  | "SEARCH_FAILED";
 
-export type ElevatorRegistrationSearchError = CommunityAffairsSearchError | "NO_ELEVATOR_REGISTRATIONS_FOUND";
+export type ElevatorRegistrationSearchError =
+  | CommunityAffairsSearchError
+  | "NO_ELEVATOR_REGISTRATIONS_FOUND";
 
 export type HotelMotelRegistrationSearchError =
   | CommunityAffairsSearchError
@@ -458,7 +481,10 @@ export type MultipleDwellingSearchError =
   | CommunityAffairsSearchError
   | "NO_MULTIPLE_DWELLINGS_REGISTRATIONS_FOUND";
 
-export type CommunityAffairsSearchError = "NO_PROPERTY_INTEREST_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
+export type CommunityAffairsSearchError =
+  | "NO_PROPERTY_INTEREST_FOUND"
+  | "FIELDS_REQUIRED"
+  | "SEARCH_FAILED";
 
 export type FeedbackRequestModalNames =
   | "Select Feedback"
@@ -476,15 +502,23 @@ export interface UpdateQueue {
   queue: (userData: Partial<UserData>) => UpdateQueue;
   queueBusiness: (business: Business) => UpdateQueue;
   queueSwitchBusiness: (id: string) => UpdateQueue;
-  queueTaskProgress: (taskProgress: Record<string, TaskProgress>) => UpdateQueue;
+  queueTaskProgress: (
+    taskProgress: Record<string, TaskProgress>
+  ) => UpdateQueue;
   queueUser: (user: Partial<BusinessUser>) => UpdateQueue;
   queueProfileData: (profileData: Partial<ProfileData>) => UpdateQueue;
   queuePreferences: (preferences: Partial<Preferences>) => UpdateQueue;
   queueTaxFilingData: (taxFilingData: Partial<TaxFilingData>) => UpdateQueue;
   queueFormationData: (formationData: Partial<FormationData>) => UpdateQueue;
-  queueFormationFormData: (formatdionFormData: Partial<FormationFormData>) => UpdateQueue;
-  queueTaskItemChecklist: (taskItemChecklist: Record<string, boolean>) => UpdateQueue;
-  queueEnvironmentData: (environmentData: Partial<EnvironmentData>) => UpdateQueue;
+  queueFormationFormData: (
+    formatdionFormData: Partial<FormationFormData>
+  ) => UpdateQueue;
+  queueTaskItemChecklist: (
+    taskItemChecklist: Record<string, boolean>
+  ) => UpdateQueue;
+  queueEnvironmentData: (
+    environmentData: Partial<EnvironmentData>
+  ) => UpdateQueue;
   update: (config?: { local?: boolean }) => Promise<void>;
   current: () => UserData;
   currentBusiness: () => Business;
@@ -510,7 +544,11 @@ export type TaskWithoutLinks = {
 };
 export type Page = { current: number; previous: number };
 
-export type StepperStep = { name: string; hasError?: boolean; isComplete?: boolean };
+export type StepperStep = {
+  name: string;
+  hasError?: boolean;
+  isComplete?: boolean;
+};
 
 export interface ContextualInfoFile extends ContextualInfo {
   filename: string;
@@ -524,7 +562,11 @@ export interface ActionTile {
   isPrimary?: boolean;
 }
 
-export type OutageAlertType = "ALL" | "UNREGISTERED_ONLY" | "LOGGED_IN_ONLY" | undefined;
+export type OutageAlertType =
+  | "ALL"
+  | "UNREGISTERED_ONLY"
+  | "LOGGED_IN_ONLY"
+  | undefined;
 
 export type OutageConfig = {
   FEATURE_ENABLE_OUTAGE_ALERT_BAR: boolean;
@@ -570,7 +612,11 @@ export enum FieldStateActionKind {
 
 interface ValidationAction<T, FieldError = FieldErrorType> {
   type: FieldStateActionKind.VALIDATION;
-  payload: { field: keyof T | (keyof T)[]; invalid: boolean; errorTypes?: FieldError[] };
+  payload: {
+    field: keyof T | (keyof T)[];
+    invalid: boolean;
+    errorTypes?: FieldError[];
+  };
 }
 
 interface RegisterAction<T> {
@@ -598,10 +644,10 @@ export type FieldStatus<FieldError = FieldErrorType> = {
   updated?: boolean;
   errorTypes?: FieldError[];
 };
-export type ReducedFieldStates<K extends string | number | symbol, FieldError = FieldErrorType> = Record<
-  K,
-  FieldStatus<FieldError>
->;
+export type ReducedFieldStates<
+  K extends string | number | symbol,
+  FieldError = FieldErrorType
+> = Record<K, FieldStatus<FieldError>>;
 export type FormContextReducer<T, FieldError = FieldErrorType> = Reducer<
   ReducedFieldStates<keyof T, FieldError>,
   FormContextReducerActions<T, FieldError>
@@ -610,12 +656,18 @@ export type FormContextReducer<T, FieldError = FieldErrorType> = Reducer<
 export interface FormContextType<T, FieldError = FieldErrorType> {
   fieldStates: ReducedFieldStates<keyof T, FieldError>;
   runValidations: boolean;
-  reducer: React.Dispatch<FormContextReducerActions<ReducedFieldStates<keyof T, FieldError>, FieldError>>;
+  reducer: React.Dispatch<
+    FormContextReducerActions<
+      ReducedFieldStates<keyof T, FieldError>,
+      FieldError
+    >
+  >;
 }
 
 export type FormContextFieldProps<K = FieldErrorType> = { errorTypes?: K[] };
 
 export type ProfileContentField = Exclude<
-  (keyof ProfileData | keyof IndustrySpecificData) & keyof typeof profileFieldsFromConfig,
+  (keyof ProfileData | keyof IndustrySpecificData) &
+    keyof typeof profileFieldsFromConfig,
   "businessPersona"
 >;

@@ -7115,7 +7115,12 @@
     "FourDigitCode": 6213,
     "TwoDigitDescription": "Health Care and Social Assistance",
     "TwoDigitCode": [62],
-    "industryIds": ["Massage Therapy", "Acupuncture", "Alternative Medicine", "Healthcare"]
+    "industryIds": [
+      "Massage Therapy",
+      "Acupuncture",
+      "Alternative Medicine",
+      "Healthcare"
+    ]
   },
   {
     "SixDigitDescription": "Family Planning Centers",

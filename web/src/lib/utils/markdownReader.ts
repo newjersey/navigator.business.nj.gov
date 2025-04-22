@@ -25,7 +25,9 @@ import {
 import { LicenseName } from "@businessnjgovnavigator/shared/";
 import matter from "gray-matter";
 
-export const convertContextualInfoMd = (contentMdContents: string): ContextualInfo => {
+export const convertContextualInfoMd = (
+  contentMdContents: string
+): ContextualInfo => {
   const matterResult = matter(contentMdContents);
   const contentGrayMatter = matterResult.data as ContextualInfoGrayMatter;
 
@@ -69,7 +71,8 @@ export const convertAnytimeActionTaskMd = (
   filename: string
 ): AnytimeActionTask => {
   const matterResult = matter(anytimeActionTaskMdContents);
-  const anytimeActionGrayMatter = matterResult.data as AnytimeActionTaskGrayMatter;
+  const anytimeActionGrayMatter =
+    matterResult.data as AnytimeActionTaskGrayMatter;
   return {
     contentMd: matterResult.content,
     filename,
@@ -82,7 +85,8 @@ export const convertAnytimeActionLicenseReinstatementMd = (
   filename: string
 ): AnytimeActionLicenseReinstatement => {
   const matterResult = matter(anytimeActionLicenseReinstatementMdContents);
-  const anytimeActionGrayMatter = matterResult.data as AnytimeActionLicenseReinsatementGrayMatter;
+  const anytimeActionGrayMatter =
+    matterResult.data as AnytimeActionLicenseReinsatementGrayMatter;
   return {
     contentMd: matterResult.content,
     filename,
@@ -90,7 +94,10 @@ export const convertAnytimeActionLicenseReinstatementMd = (
   };
 };
 
-export const convertFilingMd = (taskMdContents: string, filename: string): Filing => {
+export const convertFilingMd = (
+  taskMdContents: string,
+  filename: string
+): Filing => {
   const matterResult = matter(taskMdContents);
   const taskGrayMatter = matterResult.data as FilingGrayMatter;
   return {
@@ -100,7 +107,10 @@ export const convertFilingMd = (taskMdContents: string, filename: string): Filin
   };
 };
 
-export const convertFundingMd = (oppMdContents: string, filename: string): Funding => {
+export const convertFundingMd = (
+  oppMdContents: string,
+  filename: string
+): Funding => {
   const matterResult = matter(oppMdContents);
   const oppGrayMatter = matterResult.data as FundingGrayMatter;
 
@@ -112,7 +122,10 @@ export const convertFundingMd = (oppMdContents: string, filename: string): Fundi
   };
 };
 
-export const convertCertificationMd = (mdContents: string, filename: string): Certification => {
+export const convertCertificationMd = (
+  mdContents: string,
+  filename: string
+): Certification => {
   const matterResult = matter(mdContents);
   const grayMatter = matterResult.data as CertificationGrayMatter;
 
@@ -124,7 +137,10 @@ export const convertCertificationMd = (mdContents: string, filename: string): Ce
   };
 };
 
-export const convertWebflowLicenseMd = (mdContents: string, filename: string): WebflowLicense => {
+export const convertWebflowLicenseMd = (
+  mdContents: string,
+  filename: string
+): WebflowLicense => {
   const matterResult = matter(mdContents);
   const grayMatter = matterResult.data as WebflowLicenseGrayMatter;
 
@@ -135,7 +151,10 @@ export const convertWebflowLicenseMd = (mdContents: string, filename: string): W
   };
 };
 
-export const convertPageMetadataMd = (pageMetadataMdContents: string, filename: string): PageMetadata => {
+export const convertPageMetadataMd = (
+  pageMetadataMdContents: string,
+  filename: string
+): PageMetadata => {
   const matterResult = matter(pageMetadataMdContents);
   const pageMetadataGrayMatter = matterResult.data as PageMetadataGrayMatter;
   return {

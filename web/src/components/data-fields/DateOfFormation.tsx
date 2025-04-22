@@ -14,7 +14,11 @@ import {
   parseDate,
 } from "@businessnjgovnavigator/shared";
 import { TextFieldProps } from "@mui/material";
-import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import {
+  DatePicker,
+  DesktopDatePicker,
+  LocalizationProvider,
+} from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, { ReactElement, useContext } from "react";
 
@@ -35,10 +39,8 @@ export const DateOfFormation = (props: Props): ReactElement => {
   const [dateValue, setDateValue] = React.useState<DateObject | null>(null);
   const [dateError, setDateError] = React.useState<boolean>(false);
 
-  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
-    fieldName,
-    DataFormErrorMapContext
-  );
+  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } =
+    useFormContextFieldHelpers(fieldName, DataFormErrorMapContext);
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["dateOfFormation"]["default"] =
     getProfileConfig({
@@ -47,14 +49,17 @@ export const DateOfFormation = (props: Props): ReactElement => {
       fieldName: fieldName,
     });
 
-  const errorText = props.errorTextOverride || contentFromConfig.errorTextRequired;
+  const errorText =
+    props.errorTextOverride || contentFromConfig.errorTextRequired;
 
   useMountEffectWhenDefined(() => {
     setDateValue(parseDate(state.profileData.dateOfFormation));
   }, state.profileData.dateOfFormation);
 
   const isValid = (): boolean =>
-    ((dateValue === null && !props.required) || (dateValue?.isValid() && !dateError)) ?? false;
+    ((dateValue === null && !props.required) ||
+      (dateValue?.isValid() && !dateError)) ??
+    false;
 
   RegisterForOnSubmit(isValid);
   const onValidation = (): void => setIsValid(isValid());
@@ -63,12 +68,16 @@ export const DateOfFormation = (props: Props): ReactElement => {
     setDateValue(date);
     setProfileData({
       ...state.profileData,
-      [fieldName]: date?.isValid() ? date?.date(1).format(defaultDateFormat) : undefined,
+      [fieldName]: date?.isValid()
+        ? date?.date(1).format(defaultDateFormat)
+        : undefined,
     });
   };
 
   const Picker =
-    process.env.NODE_ENV === "test" || process.env.CI === "true" ? DesktopDatePicker : DatePicker;
+    process.env.NODE_ENV === "test" || process.env.CI === "true"
+      ? DesktopDatePicker
+      : DatePicker;
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -80,7 +89,11 @@ export const DateOfFormation = (props: Props): ReactElement => {
         disableFuture={!props.futureAllowed}
         openTo="year"
         disabled={props.disabled}
-        maxDate={props.futureAllowed ? getCurrentDate().add(100, "years") : getCurrentDate()}
+        maxDate={
+          props.futureAllowed
+            ? getCurrentDate().add(100, "years")
+            : getCurrentDate()
+        }
         value={dateValue}
         onClose={onValidation}
         onChange={handleChange}

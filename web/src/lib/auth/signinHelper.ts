@@ -14,12 +14,18 @@ import {
   setRegistrationDimension,
   setUserId,
 } from "@/lib/utils/analytics-helpers";
-import { UserData, createEmptyUser, getCurrentBusiness } from "@businessnjgovnavigator/shared/";
+import {
+  UserData,
+  createEmptyUser,
+  getCurrentBusiness,
+} from "@businessnjgovnavigator/shared/";
 import { Dispatch } from "react";
 import * as session from "./sessionHelper";
 import { triggerSignOut } from "./sessionHelper";
 
-export const onSignIn = async (dispatch: Dispatch<AuthAction>): Promise<void> => {
+export const onSignIn = async (
+  dispatch: Dispatch<AuthAction>
+): Promise<void> => {
   const user = await session.getActiveUser();
   dispatch({
     type: "LOGIN",
@@ -54,7 +60,9 @@ export const onSelfRegister = ({
 
   const route = router.asPath?.includes(ROUTES.accountSetup)
     ? ""
-    : getCurrentBusiness(userData).preferences.returnToLink || router.asPath || "";
+    : getCurrentBusiness(userData).preferences.returnToLink ||
+      router.asPath ||
+      "";
 
   api
     .postSelfReg({
@@ -109,21 +117,28 @@ export const onGuestSignIn = async ({
         email: userData.user.email,
         id: userData.user.id,
         encounteredMyNjLinkingError:
-          encounteredMyNjLinkingError ?? accountLinkingErrorStorage.getEncounteredMyNjLinkingError(),
+          encounteredMyNjLinkingError ??
+          accountLinkingErrorStorage.getEncounteredMyNjLinkingError(),
       }
     : {
         email: emptyUser.email,
         id: emptyUser.id,
         encounteredMyNjLinkingError:
-          encounteredMyNjLinkingError ?? accountLinkingErrorStorage.getEncounteredMyNjLinkingError(),
+          encounteredMyNjLinkingError ??
+          accountLinkingErrorStorage.getEncounteredMyNjLinkingError(),
       };
   dispatch({
     type: "LOGIN_GUEST",
     activeUser: activeUser,
   });
-  setABExperienceDimension(abStorage.getExperience() || emptyUser.abExperience, true);
+  setABExperienceDimension(
+    abStorage.getExperience() || emptyUser.abExperience,
+    true
+  );
   if (encounteredMyNjLinkingError) {
-    accountLinkingErrorStorage.setEncounteredMyNjLinkingError(encounteredMyNjLinkingError);
+    accountLinkingErrorStorage.setEncounteredMyNjLinkingError(
+      encounteredMyNjLinkingError
+    );
   }
   setUserId(activeUser.id, true);
   if (userData) {

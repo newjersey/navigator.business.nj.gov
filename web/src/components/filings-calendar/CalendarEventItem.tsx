@@ -22,8 +22,16 @@ export const CalendarEventItem = (props: Props): ReactElement => {
 
   if (props.index !== undefined) {
     return (
-      <div className={`margin-bottom-05 ${props.index === 0 ? "margin-top-05" : ""}`}>
-        <Link href={props.urlSlug} onClick={onClick} data-testid="calendar-event-anchor">
+      <div
+        className={`margin-bottom-05 ${
+          props.index === 0 ? "margin-top-05" : ""
+        }`}
+      >
+        <Link
+          href={props.urlSlug}
+          onClick={onClick}
+          data-testid="calendar-event-anchor"
+        >
           {props.title}
         </Link>
       </div>
@@ -32,7 +40,12 @@ export const CalendarEventItem = (props: Props): ReactElement => {
 
   return (
     <div className="line-height-1 margin-bottom-1">
-      <Tag backgroundColor="accent-warm-extra-light" isHover isRadiusMd isWrappingText>
+      <Tag
+        backgroundColor="accent-warm-extra-light"
+        isHover
+        isRadiusMd
+        isWrappingText
+      >
         <Link
           data-testid="calendar-event-anchor"
           href={props.urlSlug}
@@ -41,9 +54,13 @@ export const CalendarEventItem = (props: Props): ReactElement => {
         >
           <span className="text-bold text-uppercase text-base-dark">
             {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
-            {parseDateWithFormat(props.dueDate, defaultDateFormat).format("M/D")}
+            {parseDateWithFormat(props.dueDate, defaultDateFormat).format(
+              "M/D"
+            )}
           </span>{" "}
-          <span className="text-no-uppercase text-underline text-base-dark">{props.title}</span>
+          <span className="text-no-uppercase text-underline text-base-dark">
+            {props.title}
+          </span>
         </Link>
       </Tag>
     </div>

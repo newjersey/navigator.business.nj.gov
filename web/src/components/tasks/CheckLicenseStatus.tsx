@@ -55,7 +55,10 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
     const licenseDetails = business.licenseData?.licenses?.[licenseNameForTask];
     const nameAndAddress = licenseDetails?.nameAndAddress;
 
-    const hasNameAndAddress = nameAndAddress?.name && nameAndAddress?.addressLine1 && nameAndAddress?.zipCode;
+    const hasNameAndAddress =
+      nameAndAddress?.name &&
+      nameAndAddress?.addressLine1 &&
+      nameAndAddress?.zipCode;
 
     if (nameAndAddress && hasNameAndAddress) {
       setFormValues(licenseDetails.nameAndAddress);
@@ -65,7 +68,8 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
           ...prevValues,
           name: business.formationData.formationFormData.businessName,
           addressLine1: business.formationData.formationFormData.addressLine1,
-          addressLine2: business.formationData.formationFormData.addressLine2 || "",
+          addressLine2:
+            business.formationData.formationFormData.addressLine2 || "",
           zipCode: business.formationData.formationFormData.addressZipCode,
         };
       });
@@ -75,7 +79,8 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
           ...prevValues,
           name: business.profileData.businessName,
           addressLine1: business.formationData.formationFormData.addressLine1,
-          addressLine2: business.formationData.formationFormData.addressLine2 || "",
+          addressLine2:
+            business.formationData.formationFormData.addressLine2 || "",
           zipCode: business.formationData.formationFormData.addressZipCode,
         };
       });
@@ -122,7 +127,9 @@ export const CheckLicenseStatus = (props: Props): ReactElement => {
   return (
     <>
       {getErrorAlert()}
-      <p className="margin-bottom-4 margin-top-3">{Config.licenseSearchTask.checkStatusText}</p>
+      <p className="margin-bottom-4 margin-top-3">
+        {Config.licenseSearchTask.checkStatusText}
+      </p>
       <form onSubmit={onSubmit}>
         <div className="margin-bottom-2">
           <label className="text-bold" htmlFor="business-name">

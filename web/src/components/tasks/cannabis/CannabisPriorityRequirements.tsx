@@ -9,9 +9,16 @@ import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
+import {
+  noneOfTheAbovePriorityId,
+  priorityTypesObj,
+} from "@/lib/domain-logic/cannabisPriorityTypes";
 import { CallToActionHyperlink } from "@/lib/types/types";
-import { openInNewTab, useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import {
+  openInNewTab,
+  useMountEffect,
+  useMountEffectWhenDefined,
+} from "@/lib/utils/helpers";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, ReactNode, useState } from "react";
 
@@ -23,9 +30,12 @@ interface Props {
 
 export const CannabisPriorityRequirements = (props: Props): ReactElement => {
   const [displayMWPriorityType, setDisplayMWPriorityType] = useState(false);
-  const [displayVeteranPriorityType, setDisplayVeteranPriorityType] = useState(false);
-  const [displayImpactZonePriorityType, setDisplayImpactZonePriorityType] = useState(false);
-  const [displaySocialEquityPriorityType, setDisplaySocialEquityPriorityType] = useState(false);
+  const [displayVeteranPriorityType, setDisplayVeteranPriorityType] =
+    useState(false);
+  const [displayImpactZonePriorityType, setDisplayImpactZonePriorityType] =
+    useState(false);
+  const [displaySocialEquityPriorityType, setDisplaySocialEquityPriorityType] =
+    useState(false);
   const [displayNoPriorityType, setDisplayNoPriorityType] = useState(false);
   const { business } = useUserData();
   const { Config } = useConfig();
@@ -41,26 +51,33 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
 
   useMountEffectWhenDefined(() => {
     if (!business) return;
-    const minorityOrWomenPriorityTypeSelected = priorityTypesObj.minorityOrWomen.some((key) => {
-      return business.taskItemChecklist[key];
-    });
+    const minorityOrWomenPriorityTypeSelected =
+      priorityTypesObj.minorityOrWomen.some((key) => {
+        return business.taskItemChecklist[key];
+      });
     const veteranPriorityTypeSelected = priorityTypesObj.veteran.some((key) => {
       return business.taskItemChecklist[key];
     });
 
-    const impactZonePriorityTypeSelected = priorityTypesObj.impactZone.some((key) => {
-      return business.taskItemChecklist[key];
-    });
+    const impactZonePriorityTypeSelected = priorityTypesObj.impactZone.some(
+      (key) => {
+        return business.taskItemChecklist[key];
+      }
+    );
 
-    const socialEquityPriorityTypeSelected = priorityTypesObj.socialEquity.some((key) => {
-      return business.taskItemChecklist[key];
-    });
+    const socialEquityPriorityTypeSelected = priorityTypesObj.socialEquity.some(
+      (key) => {
+        return business.taskItemChecklist[key];
+      }
+    );
 
     setDisplayMWPriorityType(minorityOrWomenPriorityTypeSelected);
     setDisplayVeteranPriorityType(veteranPriorityTypeSelected);
     setDisplayImpactZonePriorityType(impactZonePriorityTypeSelected);
     setDisplaySocialEquityPriorityType(socialEquityPriorityTypeSelected);
-    setDisplayNoPriorityType(!!business.taskItemChecklist[noneOfTheAbovePriorityId]);
+    setDisplayNoPriorityType(
+      !!business.taskItemChecklist[noneOfTheAbovePriorityId]
+    );
   }, [business]);
 
   const showTaskCompleteButton = (): boolean => {
@@ -83,7 +100,9 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         text: Config.cannabisPriorityStatus.socialEquityButtonText,
         destination: Config.cannabisPriorityStatus.socialEquityButtonLink,
         onClick: () => {
-          return openInNewTab(Config.cannabisPriorityStatus.socialEquityButtonLink);
+          return openInNewTab(
+            Config.cannabisPriorityStatus.socialEquityButtonLink
+          );
         },
       });
     }
@@ -92,25 +111,38 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         text: Config.cannabisPriorityStatus.certificationButtonText,
         destination: Config.cannabisPriorityStatus.certificationButtonLink,
         onClick: () => {
-          return openInNewTab(Config.cannabisPriorityStatus.certificationButtonLink);
+          return openInNewTab(
+            Config.cannabisPriorityStatus.certificationButtonLink
+          );
         },
       });
     }
     if (showTaskCompleteButton()) {
       return (
-        <PrimaryButton isColor="primary" isRightMarginRemoved={true} onClick={props.onComplete}>
+        <PrimaryButton
+          isColor="primary"
+          isRightMarginRemoved={true}
+          onClick={props.onComplete}
+        >
           {Config.cannabisPriorityStatus.completeTaskProgressButtonText}
         </PrimaryButton>
       );
     } else if (ctaButtons.length === 1) {
       return (
-        <PrimaryButton isColor="primary" isRightMarginRemoved={true} onClick={ctaButtons[0].onClick}>
+        <PrimaryButton
+          isColor="primary"
+          isRightMarginRemoved={true}
+          onClick={ctaButtons[0].onClick}
+        >
           {ctaButtons[0].text}
         </PrimaryButton>
       );
     } else if (ctaButtons.length > 1) {
       return (
-        <PrimaryButtonDropdown dropdownOptions={ctaButtons} isRightMarginRemoved={true}>
+        <PrimaryButtonDropdown
+          dropdownOptions={ctaButtons}
+          isRightMarginRemoved={true}
+        >
           {Config.cannabisPriorityStatus.dropdownCTAButtonText}
         </PrimaryButtonDropdown>
       );
@@ -120,7 +152,9 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
   };
 
   const expandMoreIcon = (): ReactElement => {
-    return <Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />;
+    return (
+      <Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />
+    );
   };
 
   return (
@@ -128,8 +162,12 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
       <div className="margin-bottom-4">
         {!displayNoPriorityType && (
           <>
-            <div className="margin-bottom-3">{Config.cannabisPriorityStatus.secondTabDescriptionText}</div>
-            <Heading level={2}>{Config.cannabisPriorityStatus.secondTabHeaderText}</Heading>
+            <div className="margin-bottom-3">
+              {Config.cannabisPriorityStatus.secondTabDescriptionText}
+            </div>
+            <Heading level={2}>
+              {Config.cannabisPriorityStatus.secondTabHeaderText}
+            </Heading>
           </>
         )}
         {displayMWPriorityType && (
@@ -145,7 +183,9 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 </Heading>
               </AccordionSummary>
               <AccordionDetails>
-                <Content>{Config.cannabisPriorityStatus.minorityWomenOwnedRequirements}</Content>
+                <Content>
+                  {Config.cannabisPriorityStatus.minorityWomenOwnedRequirements}
+                </Content>
               </AccordionDetails>
             </Accordion>
           </>
@@ -163,7 +203,9 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 </Heading>
               </AccordionSummary>
               <AccordionDetails>
-                <Content>{Config.cannabisPriorityStatus.veteranOwnedRequirements}</Content>
+                <Content>
+                  {Config.cannabisPriorityStatus.veteranOwnedRequirements}
+                </Content>
               </AccordionDetails>
             </Accordion>
           </>
@@ -181,7 +223,9 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 </Heading>
               </AccordionSummary>
               <AccordionDetails>
-                <Content>{Config.cannabisPriorityStatus.socialEquityRequirements}</Content>
+                <Content>
+                  {Config.cannabisPriorityStatus.socialEquityRequirements}
+                </Content>
               </AccordionDetails>
             </Accordion>
           </>
@@ -198,13 +242,19 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 </Heading>
               </AccordionSummary>
               <AccordionDetails>
-                <Content>{Config.cannabisPriorityStatus.impactZoneText}</Content>
+                <Content>
+                  {Config.cannabisPriorityStatus.impactZoneText}
+                </Content>
               </AccordionDetails>
             </Accordion>
           </>
         )}
-        {displayNoPriorityType && <div>{Config.cannabisPriorityStatus.noPriorityStatusText}</div>}
-        {(displayMWPriorityType || displayVeteranPriorityType || displaySocialEquityPriorityType) && (
+        {displayNoPriorityType && (
+          <div>{Config.cannabisPriorityStatus.noPriorityStatusText}</div>
+        )}
+        {(displayMWPriorityType ||
+          displayVeteranPriorityType ||
+          displaySocialEquityPriorityType) && (
           <>
             <hr />
             <Callout
@@ -214,11 +264,17 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
             >
               <ul>
                 {displayMWPriorityType && (
-                  <li>{Config.cannabisPriorityStatus.greenBoxMinorityOrWomenText}</li>
+                  <li>
+                    {Config.cannabisPriorityStatus.greenBoxMinorityOrWomenText}
+                  </li>
                 )}
-                {displayVeteranPriorityType && <li>{Config.cannabisPriorityStatus.greenBoxVeteranText}</li>}
+                {displayVeteranPriorityType && (
+                  <li>{Config.cannabisPriorityStatus.greenBoxVeteranText}</li>
+                )}
                 {displaySocialEquityPriorityType && (
-                  <li>{Config.cannabisPriorityStatus.greenBoxSocialEquityText}</li>
+                  <li>
+                    {Config.cannabisPriorityStatus.greenBoxSocialEquityText}
+                  </li>
                 )}
               </ul>
             </Callout>
@@ -228,7 +284,11 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
       <CtaContainer>
         <ActionBarLayout>
           <div className="margin-top-2 mobile-lg:margin-top-0">
-            <SecondaryButton isColor="primary" dataTestId="backButton" onClick={props.onBack}>
+            <SecondaryButton
+              isColor="primary"
+              dataTestId="backButton"
+              onClick={props.onBack}
+            >
               {Config.cannabisPriorityStatus.backButtonText}
             </SecondaryButton>
           </div>

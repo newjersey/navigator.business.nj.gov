@@ -27,15 +27,22 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
       <IconButton
         data-testid="year-selector-left"
         aria-label="previous year"
-        className={`${props.years.indexOf(props.activeYear) === 0 ? "visibility-hidden" : ""}`}
+        className={`${
+          props.years.indexOf(props.activeYear) === 0 ? "visibility-hidden" : ""
+        }`}
         disableFocusRipple={props.years.indexOf(props.activeYear) === 0}
         disabled={props.years.indexOf(props.activeYear) === 0}
         disableTouchRipple={props.years.indexOf(props.activeYear) === 0}
         onClick={(): void => {
-          props.onChange(props.years[props.years.indexOf(props.activeYear) - 1]);
+          props.onChange(
+            props.years[props.years.indexOf(props.activeYear) - 1]
+          );
         }}
       >
-        <Icon className={`usa-icon--size-3 vam text-base`} iconName="navigate_before" />
+        <Icon
+          className={`usa-icon--size-3 vam text-base`}
+          iconName="navigate_before"
+        />
       </IconButton>
       <CalendarButtonDropdown
         dropdownOptions={props.years.map((year) => {
@@ -49,8 +56,12 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
         hideDivider
         name="year-selector"
         dropdownClassName="padding-x-05 bg-transparent"
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        wrapper={(props: { children: ReactNode; className?: string; [key: string]: any }): JSX.Element => (
+        wrapper={(props: {
+          children: ReactNode;
+          className?: string;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          [key: string]: any;
+        }): JSX.Element => (
           <div
             {...props}
             className={`radius-lg font-body-2xs text-normal margin-x-05 usa-button padding-05 ${props.className}`}
@@ -62,17 +73,23 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
       <IconButton
         data-testid="year-selector-right"
         aria-label="next year"
-        className={`${props.years.indexOf(props.activeYear) === 2 ? "visibility-hidden" : ""}`}
+        className={`${
+          props.years.indexOf(props.activeYear) === 2 ? "visibility-hidden" : ""
+        }`}
         disableFocusRipple={props.years.indexOf(props.activeYear) === 2}
         disabled={props.years.indexOf(props.activeYear) === 2}
         disableTouchRipple={props.years.indexOf(props.activeYear) === 2}
         onClick={(): void => {
-          props.onChange(props.years[props.years.indexOf(props.activeYear) + 1]);
+          props.onChange(
+            props.years[props.years.indexOf(props.activeYear) + 1]
+          );
         }}
       >
         <Icon
           className={`usa-icon--size-3 vam text-base ${
-            props.years.indexOf(props.activeYear) === 2 ? "visibility-hidden" : ""
+            props.years.indexOf(props.activeYear) === 2
+              ? "visibility-hidden"
+              : ""
           }`}
           iconName="navigate_next"
         />

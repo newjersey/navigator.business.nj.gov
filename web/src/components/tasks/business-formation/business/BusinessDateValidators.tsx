@@ -35,7 +35,10 @@ export const isBusinessStartDateValid = (
         date.isBefore(getCurrentDateInNewJersey().add(30, "day"), "day")
       );
     case "Future":
-      return date.isAfter(getCurrentDateInNewJersey().subtract(1, "day"), "day");
+      return date.isAfter(
+        getCurrentDateInNewJersey().subtract(1, "day"),
+        "day"
+      );
     case "Today":
       return date.isSame(getCurrentDateInNewJersey(), "day");
   }
@@ -43,7 +46,9 @@ export const isBusinessStartDateValid = (
 
 type StartDateError = "90" | "30" | "Future" | "Today";
 
-export const getBusinessStartDateRule = (legalType: FormationLegalType): StartDateError => {
+export const getBusinessStartDateRule = (
+  legalType: FormationLegalType
+): StartDateError => {
   switch (legalType) {
     case "c-corporation":
     case "s-corporation":
@@ -64,7 +69,9 @@ export const getBusinessStartDateRule = (legalType: FormationLegalType): StartDa
   }
 };
 
-export const getBusinessStartDateMaxDate = (legalType: FormationLegalType): dayjs.Dayjs => {
+export const getBusinessStartDateMaxDate = (
+  legalType: FormationLegalType
+): dayjs.Dayjs => {
   const rule = getBusinessStartDateRule(legalType);
   switch (rule) {
     case "90":
@@ -78,7 +85,9 @@ export const getBusinessStartDateMaxDate = (legalType: FormationLegalType): dayj
   }
 };
 
-export const getBusinessStartDateHelperText = (legalType: FormationLegalType): string => {
+export const getBusinessStartDateHelperText = (
+  legalType: FormationLegalType
+): string => {
   const rule = getBusinessStartDateRule(legalType);
   switch (rule) {
     case "90":

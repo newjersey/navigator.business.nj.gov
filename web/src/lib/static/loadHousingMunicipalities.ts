@@ -14,7 +14,9 @@ export const loadAllHousingMunicipalities = (): HousingMunicipality[] => {
   }
 
   try {
-    const records = JSON.parse(fs.readFileSync(fullPath, "utf8")) as HousingMunicipalityRecords;
+    const records = JSON.parse(
+      fs.readFileSync(fullPath, "utf8")
+    ) as HousingMunicipalityRecords;
 
     return Object.values(records).sort((a, b) => {
       return a.name > b.name ? 1 : -1;

@@ -1,6 +1,10 @@
 import { mockReadDirReturnOnce } from "@/lib/static/mockHelpers";
 import fs from "fs";
-import { loadAllTaskUrlSlugs, loadTaskByFileName, loadTaskByUrlSlug } from "./loadTasks";
+import {
+  loadAllTaskUrlSlugs,
+  loadTaskByFileName,
+  loadTaskByUrlSlug,
+} from "./loadTasks";
 
 jest.mock("fs");
 jest.mock("process", () => ({
@@ -60,12 +64,19 @@ describe("loadTasks", () => {
 
       const dependencyFile = JSON.stringify({
         dependencies: [
-          { licenseTask: "license1", licenseTaskDependencies: ["license2"], taskDependencies: ["taskMd"] },
+          {
+            licenseTask: "license1",
+            licenseTaskDependencies: ["license2"],
+            taskDependencies: ["taskMd"],
+          },
         ],
       });
 
       mockReadDirReturnOnce({ value: ["task1.md"], mockedFs });
-      mockReadDirReturnOnce({ value: ["license1.md", "license2.md"], mockedFs });
+      mockReadDirReturnOnce({
+        value: ["license1.md", "license2.md"],
+        mockedFs,
+      });
       mockReadDirReturnOnce({ value: [], mockedFs });
 
       mockedFs.readFileSync
@@ -84,8 +95,18 @@ describe("loadTasks", () => {
         requiresLocation: true,
         contentMd: "\n# I am a header1\n\nI am a text content1",
         unlockedBy: [
-          { name: "Some Task Name", urlSlug: "some-url-slug", filename: "taskMd", id: "some-id" },
-          { name: "Some License Name2", urlSlug: "some-url-slug-2", filename: "license2", id: "some-id-2" },
+          {
+            name: "Some Task Name",
+            urlSlug: "some-url-slug",
+            filename: "taskMd",
+            id: "some-id",
+          },
+          {
+            name: "Some License Name2",
+            urlSlug: "some-url-slug-2",
+            filename: "license2",
+            id: "some-id-2",
+          },
         ],
       });
     });
@@ -200,7 +221,10 @@ describe("loadTasks", () => {
         ],
       });
 
-      mockReadDirReturnOnce({ value: ["task1.md", "task2.md", "task3.md"], mockedFs });
+      mockReadDirReturnOnce({
+        value: ["task1.md", "task2.md", "task3.md"],
+        mockedFs,
+      });
 
       mockedFs.readFileSync
         .mockReturnValueOnce(taskMd1) // read first file in list
@@ -219,7 +243,12 @@ describe("loadTasks", () => {
         requiresLocation: true,
         contentMd: "\n# I am a header2\n\nI am a text content2",
         unlockedBy: [
-          { name: "Some Task Name3", urlSlug: "some-url-slug-3", filename: "task3", id: "some-id-3" },
+          {
+            name: "Some Task Name3",
+            urlSlug: "some-url-slug-3",
+            filename: "task3",
+            id: "some-id-3",
+          },
         ],
       });
     });
@@ -267,11 +296,16 @@ describe("loadTasks", () => {
         "I am a text content2";
 
       const dependencyFile = JSON.stringify({
-        dependencies: [{ licenseTask: "license1", licenseTaskDependencies: ["license2"] }],
+        dependencies: [
+          { licenseTask: "license1", licenseTaskDependencies: ["license2"] },
+        ],
       });
 
       mockReadDirReturnOnce({ value: ["task1.md"], mockedFs });
-      mockReadDirReturnOnce({ value: ["license1.md", "license2.md"], mockedFs });
+      mockReadDirReturnOnce({
+        value: ["license1.md", "license2.md"],
+        mockedFs,
+      });
 
       mockedFs.readFileSync
         .mockReturnValueOnce(taskMd) // read first file in list
@@ -290,7 +324,12 @@ describe("loadTasks", () => {
         requiresLocation: true,
         contentMd: "\n# I am a header1\n\nI am a text content1",
         unlockedBy: [
-          { name: "Some License Name2", urlSlug: "some-url-slug-2", filename: "license2", id: "some-id-2" },
+          {
+            name: "Some License Name2",
+            urlSlug: "some-url-slug-2",
+            filename: "license2",
+            id: "some-id-2",
+          },
         ],
       });
     });

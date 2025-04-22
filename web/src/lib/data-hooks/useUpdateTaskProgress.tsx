@@ -8,12 +8,18 @@ export const useUpdateTaskProgress = (): {
   queueUpdateTaskProgress: (taskId: string, newValue: TaskProgress) => void;
   congratulatoryModal: ReactNode;
 } => {
-  const [nextSection, setNextSection] = useState<SectionType | undefined>(undefined);
+  const [nextSection, setNextSection] = useState<SectionType | undefined>(
+    undefined
+  );
   const { roadmap, isSectionCompleted, currentAndNextSection } = useRoadmap();
   const { business, updateQueue } = useUserData();
-  const [congratulatoryModalIsOpen, setCongratulatoryModalIsOpen] = useState<boolean>(false);
+  const [congratulatoryModalIsOpen, setCongratulatoryModalIsOpen] =
+    useState<boolean>(false);
 
-  const queueUpdateTaskProgress = (taskId: string, newValue: TaskProgress): void => {
+  const queueUpdateTaskProgress = (
+    taskId: string,
+    newValue: TaskProgress
+  ): void => {
     if (!roadmap || !updateQueue || !business) {
       return;
     }
@@ -21,15 +27,20 @@ export const useUpdateTaskProgress = (): {
     updateQueue.queueTaskProgress({ [taskId]: newValue });
     const { current, next } = currentAndNextSection(taskId);
     const wasSectionPreviouslyCompleted = isSectionCompleted(current);
-    const isSectionNowCompleted = isSectionCompleted(current, updateQueue.currentBusiness().taskProgress);
+    const isSectionNowCompleted = isSectionCompleted(
+      current,
+      updateQueue.currentBusiness().taskProgress
+    );
 
     if (!wasSectionPreviouslyCompleted && isSectionNowCompleted) {
       setNextSection(next);
       setCongratulatoryModalIsOpen(true);
       updateQueue.queuePreferences({
-        roadmapOpenSections: business.preferences.roadmapOpenSections.filter((section) => {
-          return section !== current;
-        }),
+        roadmapOpenSections: business.preferences.roadmapOpenSections.filter(
+          (section) => {
+            return section !== current;
+          }
+        ),
       });
     }
   };

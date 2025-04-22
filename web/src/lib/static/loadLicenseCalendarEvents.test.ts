@@ -34,7 +34,9 @@ describe("loadLicenseCalendarEvents", () => {
         'callToActionText: ""\n' +
         "---\n";
 
-      mockedFs.readFileSync.mockReturnValueOnce(taskMd1).mockReturnValueOnce(taskMd2);
+      mockedFs.readFileSync
+        .mockReturnValueOnce(taskMd1)
+        .mockReturnValueOnce(taskMd2);
 
       mockReadDirReturn({ value: ["task1.md", "task2.md"], mockedFs });
       const allLicenseUrlSlugs = loadAllLicenseCalendarEventUrlSlugs();
@@ -42,10 +44,22 @@ describe("loadLicenseCalendarEvents", () => {
       expect(allLicenseUrlSlugs).toHaveLength(4);
       expect(allLicenseUrlSlugs).toEqual(
         expect.arrayContaining([
-          { params: { licenseCalendarEventUrlSlug: "some-url-slug-1-expiration" } },
-          { params: { licenseCalendarEventUrlSlug: "some-url-slug-1-renewal" } },
-          { params: { licenseCalendarEventUrlSlug: "some-url-slug-2-expiration" } },
-          { params: { licenseCalendarEventUrlSlug: "some-url-slug-2-renewal" } },
+          {
+            params: {
+              licenseCalendarEventUrlSlug: "some-url-slug-1-expiration",
+            },
+          },
+          {
+            params: { licenseCalendarEventUrlSlug: "some-url-slug-1-renewal" },
+          },
+          {
+            params: {
+              licenseCalendarEventUrlSlug: "some-url-slug-2-expiration",
+            },
+          },
+          {
+            params: { licenseCalendarEventUrlSlug: "some-url-slug-2-renewal" },
+          },
         ])
       );
     });
@@ -75,13 +89,18 @@ describe("loadLicenseCalendarEvents", () => {
         "\n" +
         "I am a text content2";
 
-      mockReadDirReturn({ value: ["task1.md", "task2.md", "task3.md"], mockedFs });
+      mockReadDirReturn({
+        value: ["task1.md", "task2.md", "task3.md"],
+        mockedFs,
+      });
       mockedFs.readFileSync
         .mockReturnValueOnce(taskMd1) // read first file in list
         .mockReturnValueOnce(taskMd2) // read second file in list
         .mockReturnValueOnce(taskMd2); // read file once we found the match
 
-      expect(loadLicenseCalendarEventByUrlSlug("some-url-slug-2-expiration")).toEqual({
+      expect(
+        loadLicenseCalendarEventByUrlSlug("some-url-slug-2-expiration")
+      ).toEqual({
         filename: "task2",
         urlSlug: "some-url-slug-2",
         callToActionLink: "www.example2.com",

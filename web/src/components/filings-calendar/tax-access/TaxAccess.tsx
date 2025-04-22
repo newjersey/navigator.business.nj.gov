@@ -14,7 +14,8 @@ interface Props {
 
 export const TaxAccess = (props: Props): ReactElement => {
   const [isStepOne, setIsStepOne] = useState<boolean>(true);
-  const [hadLegalStructureOnMount, setHadLegalStructureOnMount] = useState<boolean>(false);
+  const [hadLegalStructureOnMount, setHadLegalStructureOnMount] =
+    useState<boolean>(false);
   const { business } = useUserData();
   const { Config } = useConfig();
 
@@ -37,7 +38,10 @@ export const TaxAccess = (props: Props): ReactElement => {
         </div>
       </div>
       {isStepOne ? (
-        <TaxAccessStepOne {...props} moveToNextStep={(): void => setIsStepOne(false)} />
+        <TaxAccessStepOne
+          {...props}
+          moveToNextStep={(): void => setIsStepOne(false)}
+        />
       ) : (
         <TaxAccessStepTwo
           {...props}

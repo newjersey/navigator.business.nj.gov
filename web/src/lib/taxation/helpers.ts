@@ -4,9 +4,9 @@ import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalSt
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 
 const displayBusinessName = (profileData: ProfileData): boolean => {
-  const hasBusinessName = LookupLegalStructureById(profileData.legalStructureId).elementsToDisplay.has(
-    "businessName"
-  );
+  const hasBusinessName = LookupLegalStructureById(
+    profileData.legalStructureId
+  ).elementsToDisplay.has("businessName");
   const notEmptyString = profileData.businessName !== "";
   return hasBusinessName && notEmptyString;
 };
@@ -30,13 +30,15 @@ export const gov2GovTaxFiling = async (props: Props): Promise<void> => {
   const updateQueue = props.updateQueue;
   const profileData = props.stagedProfileData || currentBusiness.profileData;
   const displayBusinessNameValue = displayBusinessName(profileData);
-  const displayResponsibleOwnerNameValue = displayResponsibleOwnerName(profileData);
+  const displayResponsibleOwnerNameValue =
+    displayResponsibleOwnerName(profileData);
 
   if (!displayBusinessNameValue && !displayResponsibleOwnerNameValue) return;
   if (!profileData.taxId) return;
 
   const encryptedTaxIdToSubmitToTaxApi =
-    profileData.taxId === currentBusiness.profileData.taxId && profileData.encryptedTaxId
+    profileData.taxId === currentBusiness.profileData.taxId &&
+    profileData.encryptedTaxId
       ? profileData.encryptedTaxId
       : "";
 

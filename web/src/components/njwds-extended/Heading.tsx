@@ -1,7 +1,15 @@
 import { ReactElement } from "react";
 
 type HeadingLevel = 0 | 1 | 2 | 3 | 4;
-type HeadingStyleVariant = "h1" | "h1Large" | "h2" | "h3" | "h4" | "h5" | "h6" | "rawElement";
+type HeadingStyleVariant =
+  | "h1"
+  | "h1Large"
+  | "h2"
+  | "h3"
+  | "h4"
+  | "h5"
+  | "h6"
+  | "rawElement";
 
 type HeadingStyles = {
   [variant in HeadingStyleVariant]: string;

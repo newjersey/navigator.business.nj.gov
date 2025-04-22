@@ -15,13 +15,18 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 
-export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
+export const buildUserRoadmap = async (
+  profileData: ProfileData
+): Promise<Roadmap> => {
   let industryId = profileData.industryId;
   if (profileData.providesStaffingService) {
     industryId = "employment-agency";
   }
 
-  if (industryId === "interior-designer" && !profileData.certifiedInteriorDesigner) {
+  if (
+    industryId === "interior-designer" &&
+    !profileData.certifiedInteriorDesigner
+  ) {
     industryId = "generic";
   }
 
@@ -31,7 +36,9 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     ...getLegalStructureAddOns(profileData),
   ];
 
-  const isDomesticEmployer = profileData.businessPersona === "STARTING" && industryId === "domestic-employer";
+  const isDomesticEmployer =
+    profileData.businessPersona === "STARTING" &&
+    industryId === "domestic-employer";
   if (isDomesticEmployer) {
     addOns = [];
   }
@@ -52,7 +59,10 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     roadmap = removeTask(roadmap, "register-for-ein");
   }
 
-  if (getIsApplicableToFunctionByFieldName("carService")(industryId) && profileData.carService === "BOTH") {
+  if (
+    getIsApplicableToFunctionByFieldName("carService")(industryId) &&
+    profileData.carService === "BOTH"
+  ) {
     roadmap = removeTask(roadmap, "taxi-insurance");
   }
 
@@ -62,15 +72,23 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
 const getForeignAddOns = (profileData: ProfileData): string[] => {
   const addOns = [];
 
-  if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "REMOTE_WORKER") {
+  if (
+    determineForeignBusinessType(profileData.foreignBusinessTypeIds) ===
+    "REMOTE_WORKER"
+  ) {
     addOns.push("foreign-remote-worker");
   }
 
-  if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "REMOTE_SELLER") {
+  if (
+    determineForeignBusinessType(profileData.foreignBusinessTypeIds) ===
+    "REMOTE_SELLER"
+  ) {
     addOns.push("foreign-remote-seller");
   }
 
-  if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NEXUS") {
+  if (
+    determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NEXUS"
+  ) {
     addOns.push("foreign-nexus");
     if (profileData.industryId === "pharmacy") {
       addOns.push("oos-pharmacy");
@@ -80,7 +98,10 @@ const getForeignAddOns = (profileData: ProfileData): string[] => {
   return addOns;
 };
 
-const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | undefined): string[] => {
+const getIndustryBasedAddOns = (
+  profileData: ProfileData,
+  industryId: string | undefined
+): string[] => {
   const industry = LookupIndustryById(industryId);
   if (industry.id === "") {
     return [];
@@ -107,11 +128,17 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("petcare-license");
   }
 
-  if (profileData.homeBasedBusiness && industry.industryOnboardingQuestions.isTransportation) {
+  if (
+    profileData.homeBasedBusiness &&
+    industry.industryOnboardingQuestions.isTransportation
+  ) {
     addOns.push("home-based-transportation");
   }
 
-  if (!profileData.homeBasedBusiness && profileData.plannedRenovationQuestion === true) {
+  if (
+    !profileData.homeBasedBusiness &&
+    profileData.plannedRenovationQuestion === true
+  ) {
     addOns.push("planned-renovation");
   }
 
@@ -123,7 +150,11 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("cannabis-conditional");
   }
 
-  if (getIsApplicableToFunctionByFieldName("realEstateAppraisalManagement")(industryId)) {
+  if (
+    getIsApplicableToFunctionByFieldName("realEstateAppraisalManagement")(
+      industryId
+    )
+  ) {
     if (profileData.realEstateAppraisalManagement) {
       addOns.push("real-estate-appraisal-management");
     } else {
@@ -149,7 +180,11 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     }
   }
 
-  if (getIsApplicableToFunctionByFieldName("residentialConstructionType")(industryId)) {
+  if (
+    getIsApplicableToFunctionByFieldName("residentialConstructionType")(
+      industryId
+    )
+  ) {
     switch (profileData.residentialConstructionType) {
       case "HOME_RENOVATIONS": {
         addOns.push("construction-home-renovation");
@@ -190,11 +225,17 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     }
   }
 
-  if (isInterstateLogisticsApplicable(industryId) && profileData.interstateLogistics) {
+  if (
+    isInterstateLogisticsApplicable(industryId) &&
+    profileData.interstateLogistics
+  ) {
     addOns.push("interstate-logistics");
   }
 
-  if (isInterstateMovingApplicable(industryId) && profileData.interstateMoving) {
+  if (
+    isInterstateMovingApplicable(industryId) &&
+    profileData.interstateMoving
+  ) {
     addOns.push("interstate-moving");
   }
 
@@ -210,7 +251,9 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("elevator-owning-business");
   }
 
-  if (getIsApplicableToFunctionByFieldName("isChildcareForSixOrMore")(industryId)) {
+  if (
+    getIsApplicableToFunctionByFieldName("isChildcareForSixOrMore")(industryId)
+  ) {
     if (profileData.isChildcareForSixOrMore) {
       addOns.push("daycare");
     } else {
@@ -226,7 +269,10 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("reseller");
   }
 
-  if (profileData.propertyLeaseType === "LONG_TERM_RENTAL" || profileData.propertyLeaseType === "BOTH") {
+  if (
+    profileData.propertyLeaseType === "LONG_TERM_RENTAL" ||
+    profileData.propertyLeaseType === "BOTH"
+  ) {
     if (profileData.hasThreeOrMoreRentalUnits) {
       addOns.push("residential-landlord-long-term-many-units");
     } else {
@@ -234,7 +280,10 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     }
   }
 
-  if (profileData.propertyLeaseType === "SHORT_TERM_RENTAL" || profileData.propertyLeaseType === "BOTH") {
+  if (
+    profileData.propertyLeaseType === "SHORT_TERM_RENTAL" ||
+    profileData.propertyLeaseType === "BOTH"
+  ) {
     addOns.push("short-term-rental-registration");
   }
 
@@ -264,9 +313,14 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
   }
   const addOns = [];
   if (profileData.businessPersona === "FOREIGN") {
-    if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
+    if (
+      LookupLegalStructureById(profileData.legalStructureId)
+        .requiresPublicFiling
+    ) {
       addOns.push("public-record-filing-foreign");
-    } else if (LookupLegalStructureById(profileData.legalStructureId).hasTradeName) {
+    } else if (
+      LookupLegalStructureById(profileData.legalStructureId).hasTradeName
+    ) {
       addOns.push("trade-name");
     }
     if (
@@ -277,9 +331,14 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
       addOns.push("nonprofit-and-corp-foreign");
     }
   } else {
-    if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
+    if (
+      LookupLegalStructureById(profileData.legalStructureId)
+        .requiresPublicFiling
+    ) {
       addOns.push("public-record-filing");
-    } else if (LookupLegalStructureById(profileData.legalStructureId).hasTradeName) {
+    } else if (
+      LookupLegalStructureById(profileData.legalStructureId).hasTradeName
+    ) {
       addOns.push("trade-name");
     }
   }
@@ -297,7 +356,10 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
   return addOns;
 };
 
-const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: string): Promise<Roadmap> => {
+const addMunicipalitySpecificData = async (
+  roadmap: Roadmap,
+  municipalityId: string
+): Promise<Roadmap> => {
   const municipality = await fetchMunicipalityById(municipalityId);
   if (!municipality) {
     return roadmap;
@@ -314,7 +376,9 @@ const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: str
 
 const addNaicsCodeData = (roadmap: Roadmap, naicsCode: string): Roadmap => {
   const naicsTemplateValue = getNaicsDisplayMd(naicsCode);
-  return applyTemplateEvalForAllTasks(roadmap, { naicsCode: naicsTemplateValue });
+  return applyTemplateEvalForAllTasks(roadmap, {
+    naicsCode: naicsTemplateValue,
+  });
 };
 
 const cleanupMunicipalitySpecificData = (roadmap: Roadmap): Roadmap => {
@@ -336,7 +400,10 @@ const removeTask = (roadmap: Roadmap, taskId: string): Roadmap => {
   };
 };
 
-const applyTemplateEvalForAllTasks = (roadmap: Roadmap, evalValues: Record<string, string>): Roadmap => {
+const applyTemplateEvalForAllTasks = (
+  roadmap: Roadmap,
+  evalValues: Record<string, string>
+): Roadmap => {
   for (const task of roadmap.tasks) {
     if (task.callToActionLink) {
       task.callToActionLink = templateEval(task.callToActionLink, evalValues);

@@ -1,16 +1,29 @@
-import { Callout, CalloutTypes, getStylingForCalloutType } from "@/components/Callout";
+import {
+  Callout,
+  CalloutTypes,
+  getStylingForCalloutType,
+} from "@/components/Callout";
 import { getMergedConfig } from "@/contexts/configContext";
 import { render, screen } from "@testing-library/react";
 
-const calloutTypes: CalloutTypes[] = ["informational", "conditional", "warning", "note"];
+const calloutTypes: CalloutTypes[] = [
+  "informational",
+  "conditional",
+  "warning",
+  "note",
+];
 
 const Config = getMergedConfig();
 
 const getHeaderText = (calloutType: CalloutTypes): string => {
-  if (calloutType === "informational") return Config.calloutDefaults.informationalHeadingDefaultText;
-  if (calloutType === "note") return Config.calloutDefaults.noteHeadingDefaultText;
-  if (calloutType === "conditional") return Config.calloutDefaults.conditionalHeadingDefaultText;
-  if (calloutType === "warning") return Config.calloutDefaults.warningHeadingDefaultText;
+  if (calloutType === "informational")
+    return Config.calloutDefaults.informationalHeadingDefaultText;
+  if (calloutType === "note")
+    return Config.calloutDefaults.noteHeadingDefaultText;
+  if (calloutType === "conditional")
+    return Config.calloutDefaults.conditionalHeadingDefaultText;
+  if (calloutType === "warning")
+    return Config.calloutDefaults.warningHeadingDefaultText;
   return "";
 };
 
@@ -30,7 +43,9 @@ describe.each(calloutTypes)("<Callout />", (calloutType) => {
         Some Body Text
       </Callout>
     );
-    expect(screen.queryByText(getHeaderText(calloutType))).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(getHeaderText(calloutType))
+    ).not.toBeInTheDocument();
   });
 
   it(`does not render default header text for ${calloutType} callout`, () => {
@@ -39,7 +54,9 @@ describe.each(calloutTypes)("<Callout />", (calloutType) => {
         Some Body Text
       </Callout>
     );
-    expect(screen.queryByText(getHeaderText(calloutType))).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(getHeaderText(calloutType))
+    ).not.toBeInTheDocument();
     expect(screen.getByText("header text")).toBeInTheDocument();
   });
 
@@ -49,7 +66,9 @@ describe.each(calloutTypes)("<Callout />", (calloutType) => {
         Some Body Text
       </Callout>
     );
-    expect(screen.getByTestId(`${getStylingForCalloutType(calloutType).iconStyling}`)).toBeInTheDocument();
+    expect(
+      screen.getByTestId(`${getStylingForCalloutType(calloutType).iconStyling}`)
+    ).toBeInTheDocument();
   });
 
   it(`does not render header icon for ${calloutType} callout`, () => {

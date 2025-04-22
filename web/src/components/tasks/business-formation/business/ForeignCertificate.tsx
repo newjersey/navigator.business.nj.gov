@@ -13,7 +13,9 @@ interface Props {
 export const ForeignCertificate = (props: Props): ReactElement => {
   const { hasError } = props;
   const { Config } = useConfig();
-  const { state, setForeignGoodStandingFile } = useContext(BusinessFormationContext);
+  const { state, setForeignGoodStandingFile } = useContext(
+    BusinessFormationContext
+  );
 
   return (
     <>
@@ -29,15 +31,23 @@ export const ForeignCertificate = (props: Props): ReactElement => {
         </Heading>
         <FileInput
           acceptedFileTypes={{
-            errorMessage: Config.formation.fields.foreignGoodStandingFile.errorMessageFileType,
+            errorMessage:
+              Config.formation.fields.foreignGoodStandingFile
+                .errorMessageFileType,
             fileTypes: ["PNG", "PDF"],
           }}
           onChange={setForeignGoodStandingFile}
           hasError={hasError}
-          helperText={Config.formation.fields.foreignGoodStandingFile.helperText}
-          errorMessageRequired={Config.formation.fields.foreignGoodStandingFile.errorMessageRequired}
+          helperText={
+            Config.formation.fields.foreignGoodStandingFile.helperText
+          }
+          errorMessageRequired={
+            Config.formation.fields.foreignGoodStandingFile.errorMessageRequired
+          }
           maxFileSize={{
-            errorMessage: Config.formation.fields.foreignGoodStandingFile.errorMessageFileSize,
+            errorMessage:
+              Config.formation.fields.foreignGoodStandingFile
+                .errorMessageFileSize,
             maxSizeInMegabytes: 3,
           }}
           value={state.foreignGoodStandingFile}

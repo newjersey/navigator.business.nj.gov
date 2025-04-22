@@ -7,7 +7,10 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { AnytimeActionLicenseReinstatement, AnytimeActionTask } from "@/lib/types/types";
+import {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionTask,
+} from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { Autocomplete, TextField, useMediaQuery } from "@mui/material";
 import { orderBy } from "lodash";
@@ -20,9 +23,15 @@ interface Props {
 }
 
 type AnytimeAction = AnytimeActionTask | AnytimeActionLicenseReinstatement;
-type AnytimeActionWithTypeAndCategory = AnytimeAction & { type: string; category: string[] };
+type AnytimeActionWithTypeAndCategory = AnytimeAction & {
+  type: string;
+  category: string[];
+};
 
-const getBoldedTextComponent = (searchValue: string, textToBold: string): ReactNode => {
+const getBoldedTextComponent = (
+  searchValue: string,
+  textToBold: string
+): ReactNode => {
   const matches = textToBold.toLowerCase().indexOf(searchValue.toLowerCase());
   if (matches >= 0) {
     const beforeMatch = textToBold.slice(0, matches);
@@ -51,60 +60,89 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
   const industryId = business?.profileData.industryId;
   const sectorId = business?.profileData.sectorId;
 
-  const getApplicableAnytimeActions = (): AnytimeActionWithTypeAndCategory[] => {
-    let anytimeActionTasksWithType = props.anytimeActionTasks
-      .filter((action) => findMatch(action))
-      .map((action) => {
-        return {
-          ...action,
-          type: "task",
-          category: action.category,
-        };
-      });
-    anytimeActionTasksWithType = orderBy(anytimeActionTasksWithType, ["name"]);
+  const getApplicableAnytimeActions =
+    (): AnytimeActionWithTypeAndCategory[] => {
+      let anytimeActionTasksWithType = props.anytimeActionTasks
+        .filter((action) => findMatch(action))
+        .map((action) => {
+          return {
+            ...action,
+            type: "task",
+            category: action.category,
+          };
+        });
+      anytimeActionTasksWithType = orderBy(anytimeActionTasksWithType, [
+        "name",
+      ]);
 
-    let anytimeActionLicenseReinstatementsWithType = props.anytimeActionLicenseReinstatements
-      .filter((action) => licenseReinstatementMatch(action))
-      .map((action) => {
-        return {
-          ...action,
-          type: "license-reinstatement",
-          category: ["Reactivate My Expired Permit, License or Registration"],
-        };
-      });
-    anytimeActionLicenseReinstatementsWithType = orderBy(anytimeActionLicenseReinstatementsWithType, [
-      "name",
-    ]);
+      let anytimeActionLicenseReinstatementsWithType =
+        props.anytimeActionLicenseReinstatements
+          .filter((action) => licenseReinstatementMatch(action))
+          .map((action) => {
+            return {
+              ...action,
+              type: "license-reinstatement",
+              category: [
+                "Reactivate My Expired Permit, License or Registration",
+              ],
+            };
+          });
+      anytimeActionLicenseReinstatementsWithType = orderBy(
+        anytimeActionLicenseReinstatementsWithType,
+        ["name"]
+      );
 
-    let applicableAnytimeActions: AnytimeActionWithTypeAndCategory[] = [];
-    applicableAnytimeActions.push(...anytimeActionTasksWithType);
-    applicableAnytimeActions.push(...anytimeActionLicenseReinstatementsWithType);
-    applicableAnytimeActions = orderBy(applicableAnytimeActions, ["category"]);
+      let applicableAnytimeActions: AnytimeActionWithTypeAndCategory[] = [];
+      applicableAnytimeActions.push(...anytimeActionTasksWithType);
+      applicableAnytimeActions.push(
+        ...anytimeActionLicenseReinstatementsWithType
+      );
+      applicableAnytimeActions = orderBy(applicableAnytimeActions, [
+        "category",
+      ]);
 
-    return applicableAnytimeActions;
-  };
+      return applicableAnytimeActions;
+    };
 
   const findMatch = (action: AnytimeActionTask): boolean => {
-    if ("category" in action && action.category[0] === "Only Show in Subtask") return false;
+    if ("category" in action && action.category[0] === "Only Show in Subtask")
+      return false;
     if (action.applyToAllUsers) return true;
-    if (action.industryIds && industryId && action.industryIds.includes(industryId)) return true;
+    if (
+      action.industryIds &&
+      industryId &&
+      action.industryIds.includes(industryId)
+    )
+      return true;
     if (isAnytimeActionFromNonEssentialQuestions(action)) return true;
-    return !!(action.sectorIds && sectorId && action.sectorIds.includes(sectorId));
+    return !!(
+      action.sectorIds &&
+      sectorId &&
+      action.sectorIds.includes(sectorId)
+    );
   };
 
-  const isAnytimeActionFromNonEssentialQuestions = (action: AnytimeActionTask): boolean => {
+  const isAnytimeActionFromNonEssentialQuestions = (
+    action: AnytimeActionTask
+  ): boolean => {
     switch (action.filename) {
       case "carnival-ride-supplemental-modification":
         return (
           !!business?.profileData.carnivalRideOwningBusiness ||
-          !!business?.profileData.nonEssentialRadioAnswers["carnival-ride-permitting"]
+          !!business?.profileData.nonEssentialRadioAnswers[
+            "carnival-ride-permitting"
+          ]
         );
       case "operating-carnival-fire-permit":
         return (
           !!business?.profileData.carnivalRideOwningBusiness ||
           !!business?.profileData.travelingCircusOrCarnivalOwningBusiness ||
-          !!business?.profileData.nonEssentialRadioAnswers["carnival-ride-permitting"] ||
-          !!business?.profileData.nonEssentialRadioAnswers["carnival-fire-licenses"]
+          !!business?.profileData.nonEssentialRadioAnswers[
+            "carnival-ride-permitting"
+          ] ||
+          !!business?.profileData.nonEssentialRadioAnswers[
+            "carnival-fire-licenses"
+          ]
         );
       case "vacant-building-fire-permit":
         return !!business?.profileData.vacantPropertyOwner;
@@ -113,9 +151,13 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
     }
   };
 
-  const licenseReinstatementMatch = (action: AnytimeActionLicenseReinstatement): boolean => {
+  const licenseReinstatementMatch = (
+    action: AnytimeActionLicenseReinstatement
+  ): boolean => {
     const licenseNameFromAnytimeAction = action.licenseName;
-    const licenseStatus = business?.licenseData?.licenses?.[licenseNameFromAnytimeAction]?.licenseStatus;
+    const licenseStatus =
+      business?.licenseData?.licenses?.[licenseNameFromAnytimeAction]
+        ?.licenseStatus;
 
     return licenseStatus === "EXPIRED";
   };
@@ -137,7 +179,9 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
         {Config.dashboardAnytimeActionDefaults.defaultHeaderText}
       </Heading>
       <HorizontalLine ariaHidden={true} />
-      <div className="text-bold">{Config.dashboardAnytimeActionDefaults.defaultAutocompleteHeaderText}</div>
+      <div className="text-bold">
+        {Config.dashboardAnytimeActionDefaults.defaultAutocompleteHeaderText}
+      </div>
       <span className={isDesktopAndUp ? "flex" : "flex-column"}>
         <Autocomplete
           renderInput={(params): ReactElement => {
@@ -168,13 +212,19 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
             return option.name;
           }}
           isOptionEqualToValue={(option, value) => {
-            return option.name === value.name && option.filename === value.filename;
+            return (
+              option.name === value.name && option.filename === value.filename
+            );
           }}
           groupBy={(option) => option.category[0]} // Currently just showing the first category
           renderGroup={(params) => (
             <li key={params.key} className="anytime-action-header-group">
-              <div className="text-secondary-vivid text-bold padding-left-2 ">{params.group}</div>
-              <ul className="anytime-action-dropdown-ul-list-container">{params.children}</ul>
+              <div className="text-secondary-vivid text-bold padding-left-2 ">
+                {params.group}
+              </div>
+              <ul className="anytime-action-dropdown-ul-list-container">
+                {params.children}
+              </ul>
             </li>
           )}
           options={getApplicableAnytimeActions()}
@@ -197,9 +247,14 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
             { selected, inputValue }
           ): ReactElement => {
             const titleText = getBoldedTextComponent(inputValue, option.name);
-            const descriptionText = getBoldedTextComponent(inputValue, option.description ?? "");
+            const descriptionText = getBoldedTextComponent(
+              inputValue,
+              option.description ?? ""
+            );
 
-            const newClassName = `${_props.className} anytime-action-dropdown-option ${
+            const newClassName = `${
+              _props.className
+            } anytime-action-dropdown-option ${
               selected ? "bg-accent-cool-lightest" : ""
             } fdc`;
 
@@ -211,9 +266,13 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
                 key={option.filename}
               >
                 {selected ? (
-                  <MenuOptionSelected secondaryText={descriptionText}>{titleText}</MenuOptionSelected>
+                  <MenuOptionSelected secondaryText={descriptionText}>
+                    {titleText}
+                  </MenuOptionSelected>
                 ) : (
-                  <MenuOptionUnselected secondaryText={descriptionText}>{titleText}</MenuOptionUnselected>
+                  <MenuOptionUnselected secondaryText={descriptionText}>
+                    {titleText}
+                  </MenuOptionUnselected>
                 )}
               </li>
             );
@@ -221,14 +280,18 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
           onChange={handleChange}
           className={
             selectedAnytimeAction
-              ? `fg1 anytime-action-dropdown ${!isDesktopAndUp && "margin-bottom-1"}`
+              ? `fg1 anytime-action-dropdown ${
+                  !isDesktopAndUp && "margin-bottom-1"
+                }`
               : " anytime-action-dropdown width-100"
           }
         />
         {selectedAnytimeAction && (
           <span
             className={
-              isDesktopAndUp ? "anytime-action-primary-button" : "anytime-action-primary-button-mobile"
+              isDesktopAndUp
+                ? "anytime-action-primary-button"
+                : "anytime-action-primary-button-mobile"
             }
           >
             {" "}
@@ -242,19 +305,26 @@ export const AnytimeActionDropdown = (props: Props): ReactElement => {
                 );
                 if (selectedAnytimeAction.type === "task") {
                   router.push(
-                    `${ROUTES.anytimeActions}/${(selectedAnytimeAction as AnytimeActionTask).urlSlug}`
+                    `${ROUTES.anytimeActions}/${
+                      (selectedAnytimeAction as AnytimeActionTask).urlSlug
+                    }`
                   );
                 }
                 if (selectedAnytimeAction.type === "license-reinstatement") {
                   router.push(
                     `${ROUTES.licenseReinstatement}/${
-                      (selectedAnytimeAction as AnytimeActionLicenseReinstatement).urlSlug
+                      (
+                        selectedAnytimeAction as AnytimeActionLicenseReinstatement
+                      ).urlSlug
                     }`
                   );
                 }
               }}
             >
-              {Config.dashboardAnytimeActionDefaults.anytimeActionPageButtonText}
+              {
+                Config.dashboardAnytimeActionDefaults
+                  .anytimeActionPageButtonText
+              }
             </PrimaryButton>
           </span>
         )}

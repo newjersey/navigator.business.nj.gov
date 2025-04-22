@@ -19,7 +19,8 @@
 
   img {
     height: 20px;
-    filter: invert(39%) sepia(0%) saturate(0%) hue-rotate(187deg) brightness(94%) contrast(86%);
+    filter: invert(39%) sepia(0%) saturate(0%) hue-rotate(187deg)
+      brightness(94%) contrast(86%);
   }
 
   @media (min-width: variables.$lg) {
@@ -38,7 +39,8 @@
     font-weight: 600;
 
     img {
-      filter: invert(19%) sepia(97%) saturate(5599%) hue-rotate(215deg) brightness(98%) contrast(101%);
+      filter: invert(19%) sepia(97%) saturate(5599%) hue-rotate(215deg)
+        brightness(98%) contrast(101%);
     }
   }
 }

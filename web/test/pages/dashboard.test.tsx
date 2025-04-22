@@ -4,14 +4,20 @@ import DashboardPage from "@/pages/dashboard";
 import { generateSidebarCardContent } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { setMockUserDataResponse, useMockBusiness } from "@/test/mock/mockUseUserData";
+import {
+  setMockUserDataResponse,
+  useMockBusiness,
+} from "@/test/mock/mockUseUserData";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import {
+  generateOwningProfileData,
+  OperatingPhaseId,
+} from "@businessnjgovnavigator/shared/";
 import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import {
   generateBusiness,
@@ -40,9 +46,13 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({
+  buildUserRoadmap: jest.fn(),
+}));
 
-const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>): RoadmapDisplayContent => {
+const createDisplayContent = (
+  sidebar?: Record<string, SidebarCardContent>
+): RoadmapDisplayContent => {
   return {
     sidebarDisplayContent: sidebar ?? {
       welcome: generateSidebarCardContent({}),
@@ -80,7 +90,11 @@ describe("dashboard page", () => {
     setupStatefulUserDataContext();
 
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business ?? generateBusiness({}))}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(
+          business ?? generateBusiness({})
+        )}
+      >
         <ThemeProvider theme={createTheme()}>
           <DashboardPage
             operateReferences={{}}
@@ -116,7 +130,10 @@ describe("dashboard page", () => {
   });
 
   it("renders the DashboardAlert element", () => {
-    useMockRouter({ isReady: true, query: { [QUERIES.fromFormBusinessEntity]: "true" } });
+    useMockRouter({
+      isReady: true,
+      query: { [QUERIES.fromFormBusinessEntity]: "true" },
+    });
     renderDashboardPage();
     expect(screen.getByTestId("dashboard-alerts")).toBeInTheDocument();
   });
@@ -132,7 +149,9 @@ describe("dashboard page", () => {
       }),
     });
     renderStatefulDashboardComponent(business);
-    expect(currentBusiness().preferences.visibleSidebarCards).toContain(SIDEBAR_CARDS.notRegistered);
+    expect(currentBusiness().preferences.visibleSidebarCards).toContain(
+      SIDEBAR_CARDS.notRegistered
+    );
   });
 
   it("renders not-registered card when operatingPhase is GUEST_MODE and businessPersona is FOREIGN", () => {
@@ -147,7 +166,9 @@ describe("dashboard page", () => {
     });
     renderStatefulDashboardComponent(business);
 
-    expect(currentBusiness().preferences.visibleSidebarCards).toContain(SIDEBAR_CARDS.notRegistered);
+    expect(currentBusiness().preferences.visibleSidebarCards).toContain(
+      SIDEBAR_CARDS.notRegistered
+    );
   });
 
   it("renders not-registered-up-and-running card when operatingPhase is GUEST_MODE_OWNING and businessPersona is OWNING", () => {
@@ -167,7 +188,9 @@ describe("dashboard page", () => {
 
   describe("phase newly changed indicator", () => {
     it("shows no indicator on desktop", () => {
-      const business = generateBusiness({ preferences: generatePreferences({ phaseNewlyChanged: true }) });
+      const business = generateBusiness({
+        preferences: generatePreferences({ phaseNewlyChanged: true }),
+      });
       useMockBusiness(business);
       renderDashboardPage();
       expect(screen.queryByTestId("for-you-indicator")).not.toBeInTheDocument();
@@ -182,12 +205,16 @@ describe("dashboard page", () => {
 
       renderStatefulDashboardComponent(business);
       await waitFor(() => {
-        return expect(currentBusiness().preferences.phaseNewlyChanged).toBe(false);
+        return expect(currentBusiness().preferences.phaseNewlyChanged).toBe(
+          false
+        );
       });
     });
 
     it("does not update userData when phaseNewlyChanged is false in desktop mode", async () => {
-      const business = generateBusiness({ preferences: generatePreferences({ phaseNewlyChanged: false }) });
+      const business = generateBusiness({
+        preferences: generatePreferences({ phaseNewlyChanged: false }),
+      });
       useMockBusiness(business);
       renderDashboardPage();
       expect(userDataWasNotUpdated()).toBe(true);

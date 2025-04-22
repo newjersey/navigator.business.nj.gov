@@ -1,7 +1,13 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
-import { ClickAwayListener, Theme, Tooltip, TooltipProps, useMediaQuery } from "@mui/material";
+import {
+  ClickAwayListener,
+  Theme,
+  Tooltip,
+  TooltipProps,
+  useMediaQuery,
+} from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import { ReactElement, useState } from "react";
 
@@ -46,7 +52,9 @@ export const ArrowTooltip = (props: TooltipProps): ReactElement => {
               {...props}
             >
               <div>
-                <UnStyledButton onClick={(): void => setOpen(true)}>{props.children}</UnStyledButton>
+                <UnStyledButton onClick={(): void => setOpen(true)}>
+                  {props.children}
+                </UnStyledButton>
               </div>
             </Tooltip>
           </div>

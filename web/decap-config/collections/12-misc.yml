@@ -291,7 +291,11 @@ collections:
             summary: "{{betaBar}}"
             fields:
               - { label: Beta Main Text, name: betaMainText, widget: string }
-              - { label: Beta Modal Button Text, name: betaModalButtonText, widget: string }
+              - {
+                  label: Beta Modal Button Text,
+                  name: betaModalButtonText,
+                  widget: string,
+                }
           - label: Tax Calendar Defaults
             name: taxCalendar
             collapsed: true
@@ -299,15 +303,31 @@ collections:
             summary: "{{taxCalendar}}"
             fields:
               - { label: Access Body, name: accessBody, widget: markdown }
-              - { label: Pending Body, name: pendingCopyMarkdown, widget: markdown }
+              - {
+                  label: Pending Body,
+                  name: pendingCopyMarkdown,
+                  widget: markdown,
+                }
               - {
                   label: Registration Follow Up Body,
                   name: registrationFollowUpCopyMarkdown,
                   widget: markdown,
                 }
-              - { label: Success Alert Header, name: snackbarSuccessHeader, widget: text }
-              - { label: Success Alert Body, name: snackbarSuccessBody, widget: text }
-              - { label: Access Open Modal Button, name: accessButton, widget: text }
+              - {
+                  label: Success Alert Header,
+                  name: snackbarSuccessHeader,
+                  widget: text,
+                }
+              - {
+                  label: Success Alert Body,
+                  name: snackbarSuccessBody,
+                  widget: text,
+                }
+              - {
+                  label: Access Open Modal Button,
+                  name: accessButton,
+                  widget: text,
+                }
 
           - label: Filing Defaults
             name: filingDefaults
@@ -315,26 +335,74 @@ collections:
             widget: object
             summary: "{{filingDefaults}}"
             fields:
-              - { label: Due Date Header, name: beforeDueDateText, widget: string }
+              - {
+                  label: Due Date Header,
+                  name: beforeDueDateText,
+                  widget: string,
+                }
               - { label: Due Date Tool Tip, name: dueDateToolTip, widget: text }
-              - { label: Issuing Agency Header, name: issuingAgencyText, widget: string }
+              - {
+                  label: Issuing Agency Header,
+                  name: issuingAgencyText,
+                  widget: string,
+                }
               - { label: Form Id Header, name: formText, widget: string }
-              - { label: Extension Tag Text, name: extensionTagText, widget: string }
+              - {
+                  label: Extension Tag Text,
+                  name: extensionTagText,
+                  widget: string,
+                }
               - { label: Tax Rate Header, name: taxRateTitle, widget: string }
-              - { label: Filing Method Header, name: filingMethod, widget: string }
-              - { label: Filing Frequency Header, name: filingFrequency, widget: markdown }
-              - { label: Late Filing Header, name: lateFilingsTitle, widget: string }
-              - { label: Late Filing Markdown, name: lateFilingsMarkdown, widget: markdown }
-              - { label: Treasury Link Text, name: treasuryLinkText, widget: string }
-              - { label: Additional Info Header, name: additionalInfo, widget: markdown }
-              - { label: Online Method Text, name: onlineTaxFilingMethod, widget: string }
-              - { label: Only Required Method Text, name: onlineRequiredTaxFilingMethod, widget: string }
+              - {
+                  label: Filing Method Header,
+                  name: filingMethod,
+                  widget: string,
+                }
+              - {
+                  label: Filing Frequency Header,
+                  name: filingFrequency,
+                  widget: markdown,
+                }
+              - {
+                  label: Late Filing Header,
+                  name: lateFilingsTitle,
+                  widget: string,
+                }
+              - {
+                  label: Late Filing Markdown,
+                  name: lateFilingsMarkdown,
+                  widget: markdown,
+                }
+              - {
+                  label: Treasury Link Text,
+                  name: treasuryLinkText,
+                  widget: string,
+                }
+              - {
+                  label: Additional Info Header,
+                  name: additionalInfo,
+                  widget: markdown,
+                }
+              - {
+                  label: Online Method Text,
+                  name: onlineTaxFilingMethod,
+                  widget: string,
+                }
+              - {
+                  label: Only Required Method Text,
+                  name: onlineRequiredTaxFilingMethod,
+                  widget: string,
+                }
               - {
                   label: Paper or Mail Only Method Text,
                   name: paperOrMailOnlyTaxFilingMethod,
                   widget: string,
                 }
-              - { label: Online or Phone Method Text, name: onlineOrPhoneTaxFilingMethod, widget: string }
+              - {
+                  label: Online or Phone Method Text,
+                  name: onlineOrPhoneTaxFilingMethod,
+                  widget: string,
+                }
 
           - label: Formation Task - Date of Formation Modal
             name: formationDateModal
@@ -345,16 +413,36 @@ collections:
               - { label: Header, name: header, widget: string }
               - { label: Description, name: description, widget: markdown }
               - { label: Date field - label, name: fieldLabel, widget: text }
-              - { label: Date field - description, name: fieldDescription, widget: markdown }
+              - {
+                  label: Date field - description,
+                  name: fieldDescription,
+                  widget: markdown,
+                }
               - {
                   label: Date of Formation Error text (when not entered),
                   name: dateOfFormationErrorText,
                   widget: string,
                 }
-              - { label: Save button text, name: saveButtonText, widget: string }
-              - { label: Cancel button text, name: cancelButtonText, widget: string }
-              - { label: Are-You-Sure Modal Header, name: areYouSureModalHeader, widget: string }
-              - { label: Are-You-Sure Modal Body, name: areYouSureModalBody, widget: markdown }
+              - {
+                  label: Save button text,
+                  name: saveButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Cancel button text,
+                  name: cancelButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Are-You-Sure Modal Header,
+                  name: areYouSureModalHeader,
+                  widget: string,
+                }
+              - {
+                  label: Are-You-Sure Modal Body,
+                  name: areYouSureModalBody,
+                  widget: markdown,
+                }
               - {
                   label: Are-You-Sure Modal Continue Button,
                   name: areYouSureModalContinueButtonText,
@@ -376,10 +464,26 @@ collections:
             widget: object
             summary: "{{registeredForTaxesModal}}"
             fields:
-              - { label: Are-You-Sure Tax Title, name: areYouSureTaxTitle, widget: string }
-              - { label: Are-You-Sure Tax Body, name: areYouSureTaxBody, widget: markdown }
-              - { label: Are-You-Sure Tax Continue Button, name: areYouSureTaxContinueButton, widget: string }
-              - { label: Are-You-Sure Tax Cancel Button, name: areYouSureTaxCancelButton, widget: string }
+              - {
+                  label: Are-You-Sure Tax Title,
+                  name: areYouSureTaxTitle,
+                  widget: string,
+                }
+              - {
+                  label: Are-You-Sure Tax Body,
+                  name: areYouSureTaxBody,
+                  widget: markdown,
+                }
+              - {
+                  label: Are-You-Sure Tax Continue Button,
+                  name: areYouSureTaxContinueButton,
+                  widget: string,
+                }
+              - {
+                  label: Are-You-Sure Tax Cancel Button,
+                  name: areYouSureTaxCancelButton,
+                  widget: string,
+                }
           - label: Formation Date Deletion Modal
             name: formationDateDeletionModal
             collapsed: true
@@ -388,16 +492,32 @@ collections:
             fields:
               - { label: Header, name: header, widget: string }
               - { label: Description, name: description, widget: markdown }
-              - { label: Are-You-Sure Modal Body, name: areYouSureModalBody, widget: markdown }
-              - { label: Cancel Button Text, name: cancelButtonText, widget: string }
-              - { label: Delete Button Text, name: deleteButtonText, widget: string }
+              - {
+                  label: Are-You-Sure Modal Body,
+                  name: areYouSureModalBody,
+                  widget: markdown,
+                }
+              - {
+                  label: Cancel Button Text,
+                  name: cancelButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Delete Button Text,
+                  name: deleteButtonText,
+                  widget: string,
+                }
           - label: Funding Defaults
             name: fundingDefaults
             collapsed: true
             widget: object
             summary: "{{fundingDefaults}}"
             fields:
-              - { label: Issuing Agency Label, name: issuingAgencyText, widget: string }
+              - {
+                  label: Issuing Agency Label,
+                  name: issuingAgencyText,
+                  widget: string,
+                }
 
           - label: Legal Messages
             name: legalMessageDefaults
@@ -406,7 +526,11 @@ collections:
             summary: "{{legalMessageDefaults}}"
             fields:
               - { label: Line 1, name: legalMessageTextOne, widget: text }
-              - { label: Chat Label, name: legalMessageLegalChat, widget: string }
+              - {
+                  label: Chat Label,
+                  name: legalMessageLegalChat,
+                  widget: string,
+                }
               - { label: Line 2, name: legalMessageTextTwo, widget: string }
 
           - label: Onboarding Defaults
@@ -416,15 +540,31 @@ collections:
             summary: "{{onboardingDefaults}}"
             fields:
               - { label: Page Title, name: pageTitle, widget: string }
-              - { label: Return to Previous Business, name: returnToPreviousBusiness, widget: string }
-              - { label: Next Button Text, name: nextButtonText, widget: string }
-              - { label: Final Next Button Text, name: finalNextButtonText, widget: string }
+              - {
+                  label: Return to Previous Business,
+                  name: returnToPreviousBusiness,
+                  widget: string,
+                }
+              - {
+                  label: Next Button Text,
+                  name: nextButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Final Next Button Text,
+                  name: finalNextButtonText,
+                  widget: string,
+                }
               - {
                   label: Addition Business - Final Next Button Text,
                   name: additionalBusinessFinalNextButtonText,
                   widget: string,
                 }
-              - { label: Back Button Test, name: backButtonText, widget: string }
+              - {
+                  label: Back Button Test,
+                  name: backButtonText,
+                  widget: string,
+                }
               - { label: Step X Template, name: stepXTemplate, widget: string }
               - {
                   label: Error Text - Minimum Numeric Field,
@@ -447,7 +587,11 @@ collections:
               - { label: Link Two Text, name: linkTwoText, widget: string }
               - { label: Link Two, name: linkTwo, widget: string }
               - { label: Made With Text, name: madeWithText, widget: string }
-              - { label: By The Office of Innovation Text, name: byTheOfficeOfInnovationText, widget: string }
+              - {
+                  label: By The Office of Innovation Text,
+                  name: byTheOfficeOfInnovationText,
+                  widget: string,
+                }
               - {
                   label: Made With Love By The Office of Innovation Aria Label,
                   name: madeWithLoveByTheOfficeOfInnovationAriaLabel,
@@ -455,9 +599,17 @@ collections:
                 }
               - { label: Office Link, name: officeLink, widget: string }
               - { label: Credit Text, name: creditText, widget: string }
-              - { label: Credit Link Text, name: creditLinkText, widget: string }
+              - {
+                  label: Credit Link Text,
+                  name: creditLinkText,
+                  widget: string,
+                }
               - { label: Credit Link, name: creditLink, widget: string }
-              - { label: Office External Text, name: officeExternalText, widget: string }
+              - {
+                  label: Office External Text,
+                  name: officeExternalText,
+                  widget: string,
+                }
               - { label: Github Link, name: gitHubLink, widget: string }
               - { label: Facebook Link, name: facebookLink, widget: string }
           - label: Section Headers
@@ -468,7 +620,11 @@ collections:
             fields:
               - { label: Plan Label, name: PLAN, widget: string }
               - { label: Start Label, name: START, widget: string }
-              - { label: Domestic Employer Roadmap Section, name: DOMESTIC_EMPLOYER_SECTION, widget: string }
+              - {
+                  label: Domestic Employer Roadmap Section,
+                  name: DOMESTIC_EMPLOYER_SECTION,
+                  widget: string,
+                }
           - label: Self Registration
             name: selfRegistration
             collapsed: true
@@ -476,13 +632,33 @@ collections:
             summary: "{{selfRegistration}}"
             fields:
               - { label: Sign-up Header, name: signUpTitleText, widget: string }
-              - { label: Sign-up Description, name: signUpDescriptionText, widget: string }
+              - {
+                  label: Sign-up Description,
+                  name: signUpDescriptionText,
+                  widget: string,
+                }
               - { label: Name Label, name: nameFieldLabel, widget: string }
               - { label: Email Label, name: emailFieldLabel, widget: string }
-              - { label: Confirm Email Label, name: confirmEmailFieldLabel, widget: string }
-              - { label: Submit Button Text, name: submitButtonText, widget: string }
-              - { label: Close Button Text, name: closeButtonText, widget: string }
-              - { label: Error - Full name is required, name: errorTextFullName, widget: string }
+              - {
+                  label: Confirm Email Label,
+                  name: confirmEmailFieldLabel,
+                  widget: string,
+                }
+              - {
+                  label: Submit Button Text,
+                  name: submitButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Close Button Text,
+                  name: closeButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Error - Full name is required,
+                  name: errorTextFullName,
+                  widget: string,
+                }
               - {
                   label: Error - Full name contains special characters,
                   name: errorTextFullNameSpecialCharacter,
@@ -498,46 +674,118 @@ collections:
                   name: errorTextFullNameLength,
                   widget: string,
                 }
-              - { label: Error - Emails not matching, name: errorTextEmailsNotMatching, widget: string }
-              - { label: Error - Required Fields, name: errorTextRequiredFields, widget: string }
-              - { label: Error - Duplicate Sign-up, name: errorTextDuplicateSignUp, widget: string }
-              - { label: Error - Generic, name: errorTextGeneric, widget: string }
-              - { label: Newsletter Label, name: newsletterCheckboxLabel, widget: string }
-              - { label: User Testing Label, name: userTestingCheckboxLabel, widget: string }
+              - {
+                  label: Error - Emails not matching,
+                  name: errorTextEmailsNotMatching,
+                  widget: string,
+                }
+              - {
+                  label: Error - Required Fields,
+                  name: errorTextRequiredFields,
+                  widget: string,
+                }
+              - {
+                  label: Error - Duplicate Sign-up,
+                  name: errorTextDuplicateSignUp,
+                  widget: string,
+                }
+              - {
+                  label: Error - Generic,
+                  name: errorTextGeneric,
+                  widget: string,
+                }
+              - {
+                  label: Newsletter Label,
+                  name: newsletterCheckboxLabel,
+                  widget: string,
+                }
+              - {
+                  label: User Testing Label,
+                  name: userTestingCheckboxLabel,
+                  widget: string,
+                }
               - {
                   label: Contact Sharing Consent - InvestNewark,
                   name: investNewarkContactSharingCheckboxLabel,
                   widget: string,
                 }
 
-              - { label: Account Success Snackbar Title, name: accountSuccessSnackbarTitle, widget: string }
-              - { label: Account Success Snackbar Body, name: accountSuccessSnackbarBody, widget: string }
+              - {
+                  label: Account Success Snackbar Title,
+                  name: accountSuccessSnackbarTitle,
+                  widget: string,
+                }
+              - {
+                  label: Account Success Snackbar Body,
+                  name: accountSuccessSnackbarBody,
+                  widget: string,
+                }
               - {
                   label: Existing Account Success Snackbar Title,
                   name: accountSuccessSnackbarTitleExistingAccount,
                   widget: string,
                 }
-              - { label: Needs Account Modal Title, name: needsAccountModalTitle, widget: string }
-              - { label: Needs Account Modal Body, name: needsAccountModalBody, widget: text }
-              - { label: Needs Account Modal Button, name: needsAccountModalButtonText, widget: string }
-              - { label: Needs Account Modal Sub Button text, name: needsAccountModalSubText, widget: string }
+              - {
+                  label: Needs Account Modal Title,
+                  name: needsAccountModalTitle,
+                  widget: string,
+                }
+              - {
+                  label: Needs Account Modal Body,
+                  name: needsAccountModalBody,
+                  widget: text,
+                }
+              - {
+                  label: Needs Account Modal Button,
+                  name: needsAccountModalButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Needs Account Modal Sub Button text,
+                  name: needsAccountModalSubText,
+                  widget: string,
+                }
           - label: Shared Header Defaults
             name: headerDefaults
             collapsed: true
             widget: object
             summary: "{{headerDefaults}}"
             fields:
-              - { label: Header - No User Name, name: noUserNameHeaderText, widget: string }
-              - { label: Header - with User Name, name: defaultHeaderText, widget: string }
-              - { label: Starter Kit Header - Generic Industry, name: genericStarterKitText, widget: string }
-              - { label: Starter Kit Header - Other Industries, name: starterKitText, widget: string }
-              - { label: NJ Date Text, name: newJerseyDateBodyText, widget: string }
+              - {
+                  label: Header - No User Name,
+                  name: noUserNameHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Header - with User Name,
+                  name: defaultHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Starter Kit Header - Generic Industry,
+                  name: genericStarterKitText,
+                  widget: string,
+                }
+              - {
+                  label: Starter Kit Header - Other Industries,
+                  name: starterKitText,
+                  widget: string,
+                }
+              - {
+                  label: NJ Date Text,
+                  name: newJerseyDateBodyText,
+                  widget: string,
+                }
               - {
                   label: Guest Mode - To Profile Button Text,
                   name: guestModeToProfileButtonText,
                   widget: string,
                 }
-              - { label: Generic - To Profile Button Text, name: genericToProfileButtonText, widget: string }
+              - {
+                  label: Generic - To Profile Button Text,
+                  name: genericToProfileButtonText,
+                  widget: string,
+                }
           - label: Task Defaults
             name: taskDefaults
             collapsed: true
@@ -545,43 +793,131 @@ collections:
             summary: "{{taskDefaults}}"
             fields:
               - { label: Page Title, name: pageTitle, widget: string }
-              - { label: Back Button Text, name: backToRoadmapText, widget: string }
-              - { label: Secondary Navigation Aria Label, name: secondaryNavigationAriaLabel, widget: string }
-              - { label: Default Call to Action Test, name: defaultCallToActionText, widget: string }
-              - { label: Task Progress Alert - Body Prefix, name: taskProgressSnackbarPrefix, widget: string }
-              - { label: Task Progress Alert - Heading, name: taskProgressSnackbarHeading, widget: string }
-              - { label: Next Task Button Text, name: nextTaskButtonText, widget: string }
-              - { label: Previous Task Button Text, name: previousTaskButtonText, widget: string }
-              - { label: Unlocked By - Singular, name: unlockedBySingular, widget: string }
-              - { label: Unlocked By - Plural, name: unlockedByPlural, widget: string }
-              - { label: Loading Tasks Text, name: loadingTaskDependencies, widget: string }
-              - { label: Required Label Text, name: requiredLabelText, widget: string }
-              - { label: Issuing Agency Label, name: issuingAgencyText, widget: string }
+              - {
+                  label: Back Button Text,
+                  name: backToRoadmapText,
+                  widget: string,
+                }
+              - {
+                  label: Secondary Navigation Aria Label,
+                  name: secondaryNavigationAriaLabel,
+                  widget: string,
+                }
+              - {
+                  label: Default Call to Action Test,
+                  name: defaultCallToActionText,
+                  widget: string,
+                }
+              - {
+                  label: Task Progress Alert - Body Prefix,
+                  name: taskProgressSnackbarPrefix,
+                  widget: string,
+                }
+              - {
+                  label: Task Progress Alert - Heading,
+                  name: taskProgressSnackbarHeading,
+                  widget: string,
+                }
+              - {
+                  label: Next Task Button Text,
+                  name: nextTaskButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Previous Task Button Text,
+                  name: previousTaskButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Unlocked By - Singular,
+                  name: unlockedBySingular,
+                  widget: string,
+                }
+              - {
+                  label: Unlocked By - Plural,
+                  name: unlockedByPlural,
+                  widget: string,
+                }
+              - {
+                  label: Loading Tasks Text,
+                  name: loadingTaskDependencies,
+                  widget: string,
+                }
+              - {
+                  label: Required Label Text,
+                  name: requiredLabelText,
+                  widget: string,
+                }
+              - {
+                  label: Issuing Agency Label,
+                  name: issuingAgencyText,
+                  widget: string,
+                }
               - { label: Form Label, name: formNameText, widget: string }
               - { label: Edit Text, name: editText, widget: string }
               - { label: Remove Text, name: removeText, widget: string }
               - { label: Back, name: backButtonText, widget: string }
-              - { label: Continue Text, name: continueButtonText, widget: string }
-              - { label: Mark As Complete, name: "markAsCompleteButtonText", widget: string }
+              - {
+                  label: Continue Text,
+                  name: continueButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Mark As Complete,
+                  name: "markAsCompleteButtonText",
+                  widget: string,
+                }
           - label: Task - Business Name Search
             name: searchBusinessNameTask
             collapsed: true
             widget: object
             summary: "{{searchBusinessNameTask}}"
             fields:
-              - { label: Search Button Label, name: searchButtonText, widget: string }
-              - { label: Unavailable Name Message, name: unavailableText, widget: string }
+              - {
+                  label: Search Button Label,
+                  name: searchButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Unavailable Name Message,
+                  name: unavailableText,
+                  widget: string,
+                }
               - {
                   label: Similar Unavailable Names Message,
                   name: similarUnavailableNamesText,
                   widget: string,
                 }
-              - { label: Available Name Message, name: availableText, widget: text }
-              - { label: Designator Name Message, name: designatorText, widget: text }
-              - { label: Update Button Text, name: updateButtonText, widget: string }
-              - { label: Name has been Updated Message, name: nameHasBeenUpdatedText, widget: string }
-              - { label: Error - Bad Input, name: errorTextBadInput, widget: string }
-              - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
+              - {
+                  label: Available Name Message,
+                  name: availableText,
+                  widget: text,
+                }
+              - {
+                  label: Designator Name Message,
+                  name: designatorText,
+                  widget: text,
+                }
+              - {
+                  label: Update Button Text,
+                  name: updateButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Name has been Updated Message,
+                  name: nameHasBeenUpdatedText,
+                  widget: string,
+                }
+              - {
+                  label: Error - Bad Input,
+                  name: errorTextBadInput,
+                  widget: string,
+                }
+              - {
+                  label: Error - Search Failed,
+                  name: errorTextSearchFailed,
+                  widget: string,
+                }
           - label: Task Progress
             name: taskProgress
             collapsed: true
@@ -596,10 +932,26 @@ collections:
             widget: object
             summary: "{{taskProgressCard}}"
             fields:
-              - { label: Optional Tasks Remaining (singular), name: optionalTasksSingular, widget: string }
-              - { label: Optional Tasks Remaining (plural), name: optionalTasksPlural, widget: string }
-              - { label: Required Tasks Remaining (singular), name: requiredTasksSingular, widget: string }
-              - { label: Required Tasks Remaining (plural), name: requiredTasksPlural, widget: string }
+              - {
+                  label: Optional Tasks Remaining (singular),
+                  name: optionalTasksSingular,
+                  widget: string,
+                }
+              - {
+                  label: Optional Tasks Remaining (plural),
+                  name: optionalTasksPlural,
+                  widget: string,
+                }
+              - {
+                  label: Required Tasks Remaining (singular),
+                  name: requiredTasksSingular,
+                  widget: string,
+                }
+              - {
+                  label: Required Tasks Remaining (plural),
+                  name: requiredTasksPlural,
+                  widget: string,
+                }
           - label: Navigator Unsupported User Page
             name: unsupportedNavigatorUserPage
             collapsed: true
@@ -633,20 +985,76 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: Card 1 - Button Text, name: card1Button, widget: string }
-              - { label: Card 1 - Button Link, name: card1ButtonLink, widget: string }
-              - { label: Card 1 - Header Line 1, name: card1Header, widget: string }
-              - { label: Card 1 - Supporting Text, name: card1SupportingText, widget: string }
-              - { label: Card 2 - Button Text, name: card2Button, widget: string }
-              - { label: Card 2 - Button Link, name: card2ButtonLink, widget: string }
-              - { label: Card 2 - Header Line 2, name: card2Header, widget: string }
-              - { label: Card 2 - Supporting Text, name: card2SupportingText, widget: text }
-              - { label: Card 3 - Button Text, name: card3Button, widget: string }
-              - { label: Card 3 - Header Line 3, name: card3Header, widget: string }
-              - { label: Card 3 - Supporting Text, name: card3SupportingText, widget: text }
-              - { label: Hero - First Line, name: heroCallOutFirstLineText, widget: string }
-              - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
-              - { label: Landing Page - Funding Tile, name: landingPageFundingTile, widget: string }
+              - {
+                  label: Card 1 - Button Text,
+                  name: card1Button,
+                  widget: string,
+                }
+              - {
+                  label: Card 1 - Button Link,
+                  name: card1ButtonLink,
+                  widget: string,
+                }
+              - {
+                  label: Card 1 - Header Line 1,
+                  name: card1Header,
+                  widget: string,
+                }
+              - {
+                  label: Card 1 - Supporting Text,
+                  name: card1SupportingText,
+                  widget: string,
+                }
+              - {
+                  label: Card 2 - Button Text,
+                  name: card2Button,
+                  widget: string,
+                }
+              - {
+                  label: Card 2 - Button Link,
+                  name: card2ButtonLink,
+                  widget: string,
+                }
+              - {
+                  label: Card 2 - Header Line 2,
+                  name: card2Header,
+                  widget: string,
+                }
+              - {
+                  label: Card 2 - Supporting Text,
+                  name: card2SupportingText,
+                  widget: text,
+                }
+              - {
+                  label: Card 3 - Button Text,
+                  name: card3Button,
+                  widget: string,
+                }
+              - {
+                  label: Card 3 - Header Line 3,
+                  name: card3Header,
+                  widget: string,
+                }
+              - {
+                  label: Card 3 - Supporting Text,
+                  name: card3SupportingText,
+                  widget: text,
+                }
+              - {
+                  label: Hero - First Line,
+                  name: heroCallOutFirstLineText,
+                  widget: string,
+                }
+              - {
+                  label: Hero - Supporting Text,
+                  name: heroSupportingText,
+                  widget: string,
+                }
+              - {
+                  label: Landing Page - Funding Tile,
+                  name: landingPageFundingTile,
+                  widget: string,
+                }
               - {
                   label: Landing Page - Get Started Tile Line 1,
                   name: landingPageGetStartedTileLine1,
@@ -657,32 +1065,116 @@ collections:
                   name: landingPageGetStartedTileLine2,
                   widget: string,
                 }
-              - { label: Landing Page - Out Of State Tile, name: landingPageOutOfStateTile, widget: string }
-              - { label: Landing Page - Register Biz Tile, name: landingPageRegisterBizTile, widget: string }
-              - { label: Landing Page - Run Biz Tile, name: landingPageRunBizTile, widget: string }
-              - { label: Landing Page - Start Biz Tile, name: landingPageStartBizTile, widget: string }
-              - { label: Landing Page - Taxes Tile, name: landingPageTaxesTile, widget: string }
-              - { label: Section 2 - Call to Action, name: section2CallToActionText, widget: string }
-              - { label: Section 2 - Header, name: section2HeaderText, widget: string }
-              - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: text }
-              - { label: Section 3 - Call to Action, name: section3CallToActionText, widget: string }
-              - { label: Section 3 - Header, name: section3HeaderText, widget: string }
-              - { label: Section 3 - Supporting Text, name: section3SupportingText, widget: string }
-              - { label: Section 4 - First Icon Text, name: section4FirstIconText, widget: string }
-              - { label: Section 4 - Header Text, name: section4HeaderText, widget: string }
-              - { label: Section 4 - Second Icon Text, name: section4SecondIconText, widget: string }
-              - { label: Section 4 - Third Icon Text, name: section4ThirdIconText, widget: string }
-              - { label: Section 5 - First Header Text, name: section5FirstHeaderText, widget: string }
-              - { label: Section 5 - First Supporting Text, name: section5FirstSupportingText, widget: text }
-              - { label: Section 5 - Second Header Text, name: section5SecondHeaderText, widget: string }
+              - {
+                  label: Landing Page - Out Of State Tile,
+                  name: landingPageOutOfStateTile,
+                  widget: string,
+                }
+              - {
+                  label: Landing Page - Register Biz Tile,
+                  name: landingPageRegisterBizTile,
+                  widget: string,
+                }
+              - {
+                  label: Landing Page - Run Biz Tile,
+                  name: landingPageRunBizTile,
+                  widget: string,
+                }
+              - {
+                  label: Landing Page - Start Biz Tile,
+                  name: landingPageStartBizTile,
+                  widget: string,
+                }
+              - {
+                  label: Landing Page - Taxes Tile,
+                  name: landingPageTaxesTile,
+                  widget: string,
+                }
+              - {
+                  label: Section 2 - Call to Action,
+                  name: section2CallToActionText,
+                  widget: string,
+                }
+              - {
+                  label: Section 2 - Header,
+                  name: section2HeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Section 2 - Supporting Text,
+                  name: section2SupportingText,
+                  widget: text,
+                }
+              - {
+                  label: Section 3 - Call to Action,
+                  name: section3CallToActionText,
+                  widget: string,
+                }
+              - {
+                  label: Section 3 - Header,
+                  name: section3HeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Section 3 - Supporting Text,
+                  name: section3SupportingText,
+                  widget: string,
+                }
+              - {
+                  label: Section 4 - First Icon Text,
+                  name: section4FirstIconText,
+                  widget: string,
+                }
+              - {
+                  label: Section 4 - Header Text,
+                  name: section4HeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Section 4 - Second Icon Text,
+                  name: section4SecondIconText,
+                  widget: string,
+                }
+              - {
+                  label: Section 4 - Third Icon Text,
+                  name: section4ThirdIconText,
+                  widget: string,
+                }
+              - {
+                  label: Section 5 - First Header Text,
+                  name: section5FirstHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Section 5 - First Supporting Text,
+                  name: section5FirstSupportingText,
+                  widget: text,
+                }
+              - {
+                  label: Section 5 - Second Header Text,
+                  name: section5SecondHeaderText,
+                  widget: string,
+                }
               - {
                   label: Section 5 - Second Supporting Text,
                   name: section5SecondSupportingText,
                   widget: text,
                 }
-              - { label: Section 5 - Third Header Text, name: section5ThirdHeaderText, widget: string }
-              - { label: Section 5 - Third Supporting Text, name: section5ThirdSupportingText, widget: text }
-              - { label: Section 6 - Header Text, name: section6Header, widget: string }
+              - {
+                  label: Section 5 - Third Header Text,
+                  name: section5ThirdHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Section 5 - Third Supporting Text,
+                  name: section5ThirdSupportingText,
+                  widget: text,
+                }
+              - {
+                  label: Section 6 - Header Text,
+                  name: section6Header,
+                  widget: string,
+                }
               - { label: Tile Title Text, name: tileTitleText, widget: string }
       - label: "Landing Page Experience B"
         name: "landing-page-experience-b"
@@ -695,16 +1187,56 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: Hero - First Line, name: heroCallOutFirstLineText, widget: string }
-              - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
-              - { label: Section 2 - Call to Action, name: section2CallToActionText, widget: string }
-              - { label: Section 2 - Header, name: section2HeaderText, widget: string }
-              - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: text }
-              - { label: Section 3 - Call to Action, name: section3CallToActionText, widget: string }
-              - { label: Section 4 - Second Icon Text, name: section4SecondIconText, widget: string }
-              - { label: Section 5 - First Header Text, name: section5FirstHeaderText, widget: string }
-              - { label: Section 5 - First Supporting Text, name: section5FirstSupportingText, widget: text }
-              - { label: Section 5 - Third Supporting Text, name: section5ThirdSupportingText, widget: text }
+              - {
+                  label: Hero - First Line,
+                  name: heroCallOutFirstLineText,
+                  widget: string,
+                }
+              - {
+                  label: Hero - Supporting Text,
+                  name: heroSupportingText,
+                  widget: string,
+                }
+              - {
+                  label: Section 2 - Call to Action,
+                  name: section2CallToActionText,
+                  widget: string,
+                }
+              - {
+                  label: Section 2 - Header,
+                  name: section2HeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Section 2 - Supporting Text,
+                  name: section2SupportingText,
+                  widget: text,
+                }
+              - {
+                  label: Section 3 - Call to Action,
+                  name: section3CallToActionText,
+                  widget: string,
+                }
+              - {
+                  label: Section 4 - Second Icon Text,
+                  name: section4SecondIconText,
+                  widget: string,
+                }
+              - {
+                  label: Section 5 - First Header Text,
+                  name: section5FirstHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Section 5 - First Supporting Text,
+                  name: section5FirstSupportingText,
+                  widget: text,
+                }
+              - {
+                  label: Section 5 - Third Supporting Text,
+                  name: section5ThirdSupportingText,
+                  widget: text,
+                }
 
   - name: "license-search-task"
     label: "License Search Task"
@@ -722,76 +1254,228 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { labeL: Status - Abandoned, name: abandonedStatusText, widget: string }
-              - { labeL: Status - Active, name: activePermitStatusText, widget: string }
-              - { label: Address 1 - Label, name: address1Label, widget: string }
-              - { label: Address 2 - Label, name: address2Label, widget: string }
+              - {
+                  labeL: Status - Abandoned,
+                  name: abandonedStatusText,
+                  widget: string,
+                }
+              - {
+                  labeL: Status - Active,
+                  name: activePermitStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Address 1 - Label,
+                  name: address1Label,
+                  widget: string,
+                }
+              - {
+                  label: Address 2 - Label,
+                  name: address2Label,
+                  widget: string,
+                }
               - {
                   label: Application Checklist Items Text,
                   name: applicationChecklistItemsText,
                   widget: string,
                 }
-              - { label: Status - Approved, name: approvedStatusText, widget: string }
-              - { label: Status - Barred, name: barredPermitStatusText, widget: string }
-              - { label: Business Name Label, name: businessNameLabel, widget: string }
-              - { label: Check Status Text, name: checkStatusText, widget: string }
-              - { label: Status - Checklist Completed, name: checklistCompletedStatusText, widget: string }
-              - { label: Status - Closed, name: closedPermitStatusText, widget: string }
-              - { label: Status - Completed, name: completedStatusText, widget: string }
+              - {
+                  label: Status - Approved,
+                  name: approvedStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Status - Barred,
+                  name: barredPermitStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Business Name Label,
+                  name: businessNameLabel,
+                  widget: string,
+                }
+              - {
+                  label: Check Status Text,
+                  name: checkStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Status - Checklist Completed,
+                  name: checklistCompletedStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Status - Closed,
+                  name: closedPermitStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Status - Completed,
+                  name: completedStatusText,
+                  widget: string,
+                }
               - {
                   label: Status - Deficiencies Submitted,
                   name: deficienciesSubmittedStatusText,
                   widget: string,
                 }
-              - { label: Status - Deleted, name: deletedPermitStatusText, widget: string }
-              - { label: Status - Denied, name: deniedPermitStatusText, widget: string }
+              - {
+                  label: Status - Deleted,
+                  name: deletedPermitStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Status - Denied,
+                  name: deniedPermitStatusText,
+                  widget: string,
+                }
               - { label: Status - Draft, name: draftStatusText, widget: string }
-              - { label: Edit Button Text, name: editButtonText, widget: string }
-              - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
-              - { label: Error - Not Found, name: errorTextNotFound, widget: string }
-              - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
-              - { label: Status - Expired, name: expiredPermitStatusText, widget: string }
+              - {
+                  label: Edit Button Text,
+                  name: editButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Error - Missing Required Fields,
+                  name: errorTextFieldsRequired,
+                  widget: string,
+                }
+              - {
+                  label: Error - Not Found,
+                  name: errorTextNotFound,
+                  widget: string,
+                }
+              - {
+                  label: Error - Search Failed,
+                  name: errorTextSearchFailed,
+                  widget: string,
+                }
+              - {
+                  label: Status - Expired,
+                  name: expiredPermitStatusText,
+                  widget: string,
+                }
               - { label: Found Text, name: foundText, widget: string }
-              - { label: Status - Inactive, name: inactiveStatusText, widget: string }
-              - { label: Status - Incomplete, name: incompleteStatusText, widget: string }
-              - { label: Issuing Agency Name, name: issuingAgencyNameText, widget: string }
-              - { label: Status - Not Applicable, name: notApplicableStatusText, widget: string }
-              - { label: Status - Out of Business, name: outOfBusinessPermitStatusText, widget: string }
-              - { label: Status - Pending Deficiencies, name: pendingDeficienciesStatusText, widget: string }
-              - { label: Status - Pending, name: pendingPermitStatusText, widget: string }
+              - {
+                  label: Status - Inactive,
+                  name: inactiveStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Status - Incomplete,
+                  name: incompleteStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Issuing Agency Name,
+                  name: issuingAgencyNameText,
+                  widget: string,
+                }
+              - {
+                  label: Status - Not Applicable,
+                  name: notApplicableStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Status - Out of Business,
+                  name: outOfBusinessPermitStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Status - Pending Deficiencies,
+                  name: pendingDeficienciesStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Status - Pending,
+                  name: pendingPermitStatusText,
+                  widget: string,
+                }
               - {
                   label: Status - Pending Reinstatement,
                   name: pendingReinstatementStatusText,
                   widget: string,
                 }
-              - { label: Status - Pending Renewal, name: pendingRenewalStatusText, widget: string }
-              - { label: Permit Status Label, name: permitStatusText, widget: string }
-              - { label: Primary CTA - Line 1, name: primaryCTAFirstLineText, widget: string }
-              - { label: Primary CTA - Line 2, name: primaryCTASecondLineText, widget: string }
+              - {
+                  label: Status - Pending Renewal,
+                  name: pendingRenewalStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Permit Status Label,
+                  name: permitStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Primary CTA - Line 1,
+                  name: primaryCTAFirstLineText,
+                  widget: string,
+                }
+              - {
+                  label: Primary CTA - Line 2,
+                  name: primaryCTASecondLineText,
+                  widget: string,
+                }
               - {
                   label: Status - Reinstatement Pending,
                   name: reinstatementPendingPermitStatusText,
                   widget: string,
                 }
-              - { label: Status - Revoked, name: revokedStatusText, widget: string }
-              - { label: Status - Scheduled, name: scheduledStatusText, widget: string }
-              - { label: Secondary CTA - Line 1, name: secondaryCTAFirstLineText, widget: string }
-              - { label: Secondary CTA - Line 2, name: secondaryCTASecondLineText, widget: string }
-              - { label: Status - Special Review, name: specialReviewStatusText, widget: string }
+              - {
+                  label: Status - Revoked,
+                  name: revokedStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Status - Scheduled,
+                  name: scheduledStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Secondary CTA - Line 1,
+                  name: secondaryCTAFirstLineText,
+                  widget: string,
+                }
+              - {
+                  label: Secondary CTA - Line 2,
+                  name: secondaryCTASecondLineText,
+                  widget: string,
+                }
+              - {
+                  label: Status - Special Review,
+                  name: specialReviewStatusText,
+                  widget: string,
+                }
               - { label: State Label, name: stateLabel, widget: string }
               - { label: Submit Button Text, name: submitText, widget: string }
-              - { label: Status - Submitted, name: submittedStatusText, widget: string }
-              - { label: Status - Suspended, name: suspendedStatusText, widget: string }
+              - {
+                  label: Status - Submitted,
+                  name: submittedStatusText,
+                  widget: string,
+                }
+              - {
+                  label: Status - Suspended,
+                  name: suspendedStatusText,
+                  widget: string,
+                }
               - { label: Tab 1 Label, name: tab1Text, widget: string }
               - { label: Tab 2 Label, name: tab2Text, widget: string }
               - { label: Tooltip Text, name: tooltipText, widget: string }
-              - { label: Status - Under Internal Review, name: underInternalReviewStatusText, widget: string }
+              - {
+                  label: Status - Under Internal Review,
+                  name: underInternalReviewStatusText,
+                  widget: string,
+                }
               - {
                   label: Status - Voluntary Surrender,
                   name: voluntarySurrenderPermitStatusText,
                   widget: string,
                 }
-              - { label: Status - Withdrawn, name: withdrawnPermitStatusText, widget: string }
+              - {
+                  label: Status - Withdrawn,
+                  name: withdrawnPermitStatusText,
+                  widget: string,
+                }
               - { label: Zip Code Label, name: zipCodeLabel, widget: string }
 
   - name: "profile-onboarding"
@@ -825,8 +1509,16 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Error Text Required", name: "errorTextRequired", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Error Text Required",
+                              name: "errorTextRequired",
+                              widget: "string",
+                            }
                   - label: Business Persona
                     name: businessPersona
                     collapsed: true
@@ -837,7 +1529,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Radio Button Starting Text",
                               name: "radioButtonStartingText",
@@ -858,7 +1554,11 @@ collections:
                               name: "errorTextRequired",
                               widget: "string",
                             }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Business Address
                     name: "businessAddress"
                     collapsed: true
@@ -869,9 +1569,21 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "U.S. Address", name: "usAddress", widget: "string" }
-                          - { label: "International Address", name: "intlAddress", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
+                          - {
+                              label: "U.S. Address",
+                              name: "usAddress",
+                              widget: "string",
+                            }
+                          - {
+                              label: "International Address",
+                              name: "intlAddress",
+                              widget: "string",
+                            }
                   - label: Business Name
                     name: "businessName"
                     collapsed: true
@@ -882,7 +1594,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Contextual Info for Header",
                               name: "headerContextualInfo",
@@ -894,7 +1610,12 @@ collections:
                               value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
                       - label: Onboarding Specific
                         name: "onboarding"
                         collapsed: false
@@ -937,7 +1658,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Contextual Info for Header",
                               name: "headerContextualInfo",
@@ -954,8 +1679,17 @@ collections:
                               name: "errorTextRequired",
                               widget: "string",
                             }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
-                          - { label: "Search Affirmation", name: "searchAffirmation", widget: "markdown" }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
+                          - {
+                              label: "Search Affirmation",
+                              name: "searchAffirmation",
+                              widget: "markdown",
+                            }
                       - label: Onboarding Specific
                         name: "onboarding"
                         collapsed: false
@@ -982,7 +1716,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Contextual Info for Header",
                               name: "headerContextualInfo",
@@ -994,15 +1732,32 @@ collections:
                               value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
                           - {
                               label: "Error Text (when not selected)",
                               name: "errorTextRequired",
                               widget: "string",
                             }
-                          - { label: "Edit Text", name: "editText", widget: "string" }
-                          - { label: "Add Text", name: "addText", widget: "string" }
-                          - { label: "Not Entered Text", name: "notEnteredText", widget: "string" }
+                          - {
+                              label: "Edit Text",
+                              name: "editText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Add Text",
+                              name: "addText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Not Entered Text",
+                              name: "notEnteredText",
+                              widget: "string",
+                            }
                           - label: Option Content
                             name: optionContent
                             collapsed: false
@@ -1023,9 +1778,21 @@ collections:
                                   name: "sole-proprietorship",
                                   widget: "markdown",
                                 }
-                              - { label: "c-corporation", name: "c-corporation", widget: "markdown" }
-                              - { label: "nonprofit", name: "nonprofit", widget: "markdown" }
-                              - { label: "s-corporation", name: "s-corporation", widget: "markdown" }
+                              - {
+                                  label: "c-corporation",
+                                  name: "c-corporation",
+                                  widget: "markdown",
+                                }
+                              - {
+                                  label: "nonprofit",
+                                  name: "nonprofit",
+                                  widget: "markdown",
+                                }
+                              - {
+                                  label: "s-corporation",
+                                  name: "s-corporation",
+                                  widget: "markdown",
+                                }
                               - {
                                   label: "limited-liability-partnership",
                                   name: "limited-liability-partnership",
@@ -1046,7 +1813,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Contextual Info for Header",
                               name: "headerContextualInfo",
@@ -1063,7 +1834,12 @@ collections:
                               name: "errorTextRequired",
                               widget: "string",
                             }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
                       - label: Overrides
                         name: "overrides"
                         collapsed: true
@@ -1074,13 +1850,21 @@ collections:
                             collapsed: true
                             widget: object
                             fields:
-                              - { label: "Description", name: "description", widget: "markdown" }
+                              - {
+                                  label: "Description",
+                                  name: "description",
+                                  widget: "markdown",
+                                }
                           - label: FOREIGN
                             name: "FOREIGN"
                             collapsed: true
                             widget: object
                             fields:
-                              - { label: "Description", name: "description", widget: "markdown" }
+                              - {
+                                  label: "Description",
+                                  name: "description",
+                                  widget: "markdown",
+                                }
                   - label: Sector ID
                     name: sectorId
                     collapsed: true
@@ -1091,7 +1875,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Contextual Info for Header",
                               name: "headerContextualInfo",
@@ -1108,7 +1896,12 @@ collections:
                               name: "errorTextRequired",
                               widget: "string",
                             }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
                       - label: Onboarding Specific
                         name: "onboarding"
                         collapsed: false
@@ -1135,7 +1928,11 @@ collections:
                                 collapsed: true
                                 widget: object
                                 fields:
-                                  - { label: "Description", name: "description", widget: "string" }
+                                  - {
+                                      label: "Description",
+                                      name: "description",
+                                      widget: "string",
+                                    }
 
                   - label: Business Ownership
                     name: "ownershipTypeIds"
@@ -1147,7 +1944,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Contextual Info for Header",
                               name: "headerContextualInfo",
@@ -1165,7 +1966,12 @@ collections:
                               widget: "string",
                               required: false,
                             }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
                       - label: Overrides
                         name: "overrides"
                         collapsed: true
@@ -1176,7 +1982,11 @@ collections:
                             collapsed: true
                             widget: object
                             fields:
-                              - { label: "Header", name: "header", widget: "string" }
+                              - {
+                                  label: "Header",
+                                  name: "header",
+                                  widget: "string",
+                                }
                               - {
                                   label: "Header Not Bolded",
                                   name: "headerNotBolded",
@@ -1193,7 +2003,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Contextual Info for Header",
                               name: "headerContextualInfo",
@@ -1205,7 +2019,12 @@ collections:
                               value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
                       - label: Overrides
                         name: "overrides"
                         collapsed: true
@@ -1216,8 +2035,16 @@ collections:
                             collapsed: true
                             widget: object
                             fields:
-                              - { label: "Header", name: "header", widget: "string" }
-                              - { label: "Description", name: "description", widget: "markdown" }
+                              - {
+                                  label: "Header",
+                                  name: "header",
+                                  widget: "string",
+                                }
+                              - {
+                                  label: "Description",
+                                  name: "description",
+                                  widget: "markdown",
+                                }
                   - label: Foreign Business Type
                     name: foreignBusinessTypeIds
                     collapsed: true
@@ -1228,7 +2055,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Contextual Info for Header",
                               name: "headerContextualInfo",
@@ -1245,7 +2076,12 @@ collections:
                               name: "errorTextRequired",
                               widget: "string",
                             }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
                           - label: Option Content
                             name: optionContent
                             collapsed: false
@@ -1256,20 +2092,56 @@ collections:
                                   name: "employeeOrContractorInNJ",
                                   widget: "string",
                                 }
-                              - { label: "officeInNJ", name: "officeInNJ", widget: "string" }
-                              - { label: "propertyInNJ", name: "propertyInNJ", widget: "string" }
+                              - {
+                                  label: "officeInNJ",
+                                  name: "officeInNJ",
+                                  widget: "string",
+                                }
+                              - {
+                                  label: "propertyInNJ",
+                                  name: "propertyInNJ",
+                                  widget: "string",
+                                }
                               - {
                                   label: "companyOperatedVehiclesInNJ",
                                   name: "companyOperatedVehiclesInNJ",
                                   widget: "string",
                                 }
-                              - { label: "employeesInNJ", name: "employeesInNJ", widget: "string" }
-                              - { label: "transactionsInNJ", name: "transactionsInNJ", widget: "string" }
-                              - { label: "revenueInNJ", name: "revenueInNJ", widget: "string" }
-                              - { label: "none", name: "none", widget: "string" }
-                          - { label: "Remote Seller Alert", name: "REMOTE_SELLER", widget: "markdown" }
-                          - { label: "Remote Worker Alert", name: "REMOTE_WORKER", widget: "markdown" }
-                          - { label: "Nexus Alert", name: "NEXUS", widget: "markdown" }
+                              - {
+                                  label: "employeesInNJ",
+                                  name: "employeesInNJ",
+                                  widget: "string",
+                                }
+                              - {
+                                  label: "transactionsInNJ",
+                                  name: "transactionsInNJ",
+                                  widget: "string",
+                                }
+                              - {
+                                  label: "revenueInNJ",
+                                  name: "revenueInNJ",
+                                  widget: "string",
+                                }
+                              - {
+                                  label: "none",
+                                  name: "none",
+                                  widget: "string",
+                                }
+                          - {
+                              label: "Remote Seller Alert",
+                              name: "REMOTE_SELLER",
+                              widget: "markdown",
+                            }
+                          - {
+                              label: "Remote Worker Alert",
+                              name: "REMOTE_WORKER",
+                              widget: "markdown",
+                            }
+                          - {
+                              label: "Nexus Alert",
+                              name: "NEXUS",
+                              widget: "markdown",
+                            }
                   - label: Nexus Profile Text
                     name: nexusBusinessName
                     collapsed: true
@@ -1280,8 +2152,16 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Edit Button Text", name: "editButton", widget: "string" }
-                          - { label: "Add Button Text", name: "addButton", widget: "string" }
+                          - {
+                              label: "Edit Button Text",
+                              name: "editButton",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Add Button Text",
+                              name: "addButton",
+                              widget: "string",
+                            }
                           - {
                               label: "Out of State Name Header",
                               name: "outOfStateNameHeader",
@@ -1303,7 +2183,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Contextual Info for Header",
                               name: "headerContextualInfo",
@@ -1315,8 +2199,17 @@ collections:
                               value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
-                          - { label: "Description", name: "description", widget: "string", required: false }
-                          - { label: "Error Text", name: "errorTextRequired", widget: "string" }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "string",
+                              required: false,
+                            }
+                          - {
+                              label: "Error Text",
+                              name: "errorTextRequired",
+                              widget: "string",
+                            }
                   - label: Tax ID
                     name: taxId
                     collapsed: true
@@ -1327,7 +2220,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Contextual Info for Header",
                               name: "headerContextualInfo",
@@ -1339,7 +2236,12 @@ collections:
                               value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
                           - {
                               label: "Error Text (when not entered)",
                               name: "errorTextRequired",
@@ -1360,7 +2262,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Header (not bolded)",
                               name: "headerNotBolded",
@@ -1378,7 +2284,12 @@ collections:
                               value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
                   - label: Employer ID
                     name: employerId
                     collapsed: true
@@ -1389,7 +2300,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Contextual Info for Header",
                               name: "headerContextualInfo",
@@ -1407,7 +2322,12 @@ collections:
                               widget: "string",
                               required: false,
                             }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
                   - label: NAICS Code
                     name: naicsCode
                     collapsed: true
@@ -1418,7 +2338,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Contextual Info for Header",
                               name: "headerContextualInfo",
@@ -1430,9 +2354,21 @@ collections:
                               value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
-                          - { label: "Edit Text", name: "editText", widget: "string" }
-                          - { label: "Add Text", name: "addText", widget: "string" }
-                          - { label: "Not Entered Text", name: "notEnteredText", widget: "string" }
+                          - {
+                              label: "Edit Text",
+                              name: "editText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Add Text",
+                              name: "addText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Not Entered Text",
+                              name: "notEnteredText",
+                              widget: "string",
+                            }
                           - {
                               label: "Alt Description Text - Renders On Task Page",
                               name: "altDescription",
@@ -1448,7 +2384,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Contextual Info for Header",
                               name: "headerContextualInfo",
@@ -1460,8 +2400,17 @@ collections:
                               value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
-                          - { label: "Error Text", name: "errorTextRequired", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - {
+                              label: "Error Text",
+                              name: "errorTextRequired",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
                   - label: Tax PIN
                     name: taxPin
                     collapsed: true
@@ -1472,7 +2421,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Contextual Info for Header",
                               name: "headerContextualInfo",
@@ -1484,8 +2437,17 @@ collections:
                               value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
-                          - { label: "Error Text", name: "errorTextRequired", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - {
+                              label: "Error Text",
+                              name: "errorTextRequired",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
                   - label: Documents
                     name: documents
                     collapsed: true
@@ -1496,7 +2458,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Placeholder", name: "placeholder", widget: "markdown" }
+                          - {
+                              label: "Placeholder",
+                              name: "placeholder",
+                              widget: "markdown",
+                            }
                   - label: Notes
                     name: notes
                     collapsed: true
@@ -1507,7 +2473,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Non Essential Questions
                     name: nonEssentialQuestions
                     collapsed: true
@@ -1518,10 +2488,26 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Radio Button - Yes", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio Button - No", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Optional Suffix", name: "optionalText", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button - Yes",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button - No",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Optional Suffix",
+                              name: "optionalText",
+                              widget: "string",
+                            }
                   - label: Responsible Owner Name
                     name: responsibleOwnerName
                     collapsed: true
@@ -1532,9 +2518,21 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Error Text", name: "errorTextRequired", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Error Text",
+                              name: "errorTextRequired",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Cannabis License
                     name: cannabisLicenseType
                     collapsed: true
@@ -1545,7 +2543,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Radio Button Annual Text",
                               name: "radioButtonAnnualText",
@@ -1556,7 +2558,11 @@ collections:
                               name: "radioButtonConditionalText",
                               widget: "string",
                             }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Certified Interior Designer
                     name: certifiedInteriorDesigner
                     collapsed: true
@@ -1567,10 +2573,26 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: CPA
                     name: requiresCpa
                     collapsed: true
@@ -1581,10 +2603,26 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Employment Agency
                     name: employmentAgency
                     collapsed: true
@@ -1595,7 +2633,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Deferred Planned Renovation Question
                     name: "plannedRenovationQuestion"
                     collapsed: true
@@ -1612,9 +2654,22 @@ collections:
                               widget: "string",
                               hint: "This question appears in the business profile",
                             }
-                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
                   - label: Home-Based Business
                     name: "homeBasedBusiness"
                     collapsed: true
@@ -1625,7 +2680,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Contextual Info for Header",
                               name: "headerContextualInfo",
@@ -1637,10 +2696,27 @@ collections:
                               value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
-                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
-                          - { label: "Alt Description", name: "altDescription", widget: "markdown" }
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
+                          - {
+                              label: "Alt Description",
+                              name: "altDescription",
+                              widget: "markdown",
+                            }
                   - label: Elevator Owning Business
                     name: elevatorOwningBusiness
                     collapsed: true
@@ -1651,7 +2727,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Contextual Info for Header",
                               name: "headerContextualInfo",
@@ -1663,10 +2743,27 @@ collections:
                               value_field: "{{fields.id}}",
                               display_fields: ["{{displayname}}"],
                             }
-                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
-                          - { label: "Alt Description", name: "altDescription", widget: "markdown" }
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
+                          - {
+                              label: "Alt Description",
+                              name: "altDescription",
+                              widget: "markdown",
+                            }
                   - label: Carnival Ride Owning Business
                     name: carnivalRideOwningBusiness
                     collapsed: true
@@ -1677,9 +2774,22 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
                   - label: Raffle & Bingo Games
                     name: raffleBingoGames
                     collapsed: true
@@ -1690,11 +2800,32 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown", required: false }
-                          - { label: "Alt Description", name: "altDescription", widget: "markdown" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                              required: false,
+                            }
+                          - {
+                              label: "Alt Description",
+                              name: "altDescription",
+                              widget: "markdown",
+                            }
                   - label: Home Contractor
                     name: homeContractor
                     collapsed: true
@@ -1705,7 +2836,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Liquor License
                     name: liquorLicense
                     collapsed: true
@@ -1716,10 +2851,26 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Real Estate Appraisal Management
                     name: realEstateAppraisalManagement
                     collapsed: true
@@ -1730,10 +2881,26 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Car Service
                     name: carService
                     collapsed: true
@@ -1744,7 +2911,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Radio Button Standard Text",
                               name: "radioButtonStandardText",
@@ -1755,8 +2926,16 @@ collections:
                               name: "radioButtonHighCapacityText",
                               widget: "string",
                             }
-                          - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Radio Button Both Text",
+                              name: "radioButtonBothText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Staffing Service
                     name: providesStaffingService
                     collapsed: true
@@ -1767,10 +2946,26 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Moving Company
                     name: interstateMoving
                     collapsed: true
@@ -1781,10 +2976,26 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Logistics Company
                     name: interstateLogistics
                     collapsed: true
@@ -1795,10 +3006,26 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Childcare Services
                     name: isChildcareForSixOrMore
                     collapsed: true
@@ -1809,10 +3036,26 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Pet Care Housing
                     name: petCareHousing
                     collapsed: true
@@ -1823,10 +3066,26 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Will Sell Pet Care Items
                     name: willSellPetCareItems
                     collapsed: true
@@ -1837,9 +3096,21 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
-                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Radio Button Yes Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button No Text",
+                              name: "radioButtonFalseText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Construction Type
                     name: constructionType
                     collapsed: true
@@ -1850,7 +3121,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Radio Button Residential Text",
                               name: "radioButtonResidentialText",
@@ -1861,8 +3136,16 @@ collections:
                               name: "radioButtonCommercialOrIndustrialText",
                               widget: "string",
                             }
-                          - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Radio Button Both Text",
+                              name: "radioButtonBothText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Residential Construction Type
                     name: residentialConstructionType
                     collapsed: true
@@ -1883,8 +3166,16 @@ collections:
                               name: "radioButtonHomeRenovationsText",
                               widget: "string",
                             }
-                          - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Radio Button Both Text",
+                              name: "radioButtonBothText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Employment and Personnel Service Type
                     name: employmentPersonnelServiceType
                     collapsed: true
@@ -1895,7 +3186,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Radio Button Job Seekers Text",
                               name: "radioButtonJobSeekersText",
@@ -1906,7 +3201,11 @@ collections:
                               name: "radioButtonEmployersText",
                               widget: "string",
                             }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Employment Placement Type
                     name: employmentPlacementType
                     collapsed: true
@@ -1927,8 +3226,16 @@ collections:
                               name: "radioButtonPermanentText",
                               widget: "string",
                             }
-                          - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Radio Button Both Text",
+                              name: "radioButtonBothText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Property Lease Type
                     name: propertyLeaseType
                     collapsed: true
@@ -1939,7 +3246,11 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
                           - {
                               label: "Radio Button Short Term Rental Text",
                               name: "radioButtonShortTermRentalText",
@@ -1950,8 +3261,16 @@ collections:
                               name: "radioButtonLongTermRentalText",
                               widget: "string",
                             }
-                          - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Radio Button Both Text",
+                              name: "radioButtonBothText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
                   - label: Has Three or More Rental Units
                     name: hasThreeOrMoreRentalUnits
                     collapsed: true
@@ -1962,57 +3281,157 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Radio Button True Text", name: "radioButtonTrueText", widget: "string" }
+                          - {
+                              label: "Header",
+                              name: "header",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button True Text",
+                              name: "radioButtonTrueText",
+                              widget: "string",
+                            }
                           - {
                               label: "Radio Button False Text",
                               name: "radioButtonFalseText",
                               widget: "string",
                             }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Description",
+                              name: "description",
+                              widget: "markdown",
+                            }
 
               - label: Profile / Onboarding Defaults
                 name: default
                 collapsed: false
                 widget: object
                 fields:
-                  - { label: Escape Modal - Header, name: escapeModalHeader, widget: string }
-                  - { label: Escape Model - Body, name: escapeModalBody, widget: string }
-                  - { label: Escape Modal - Return, name: escapeModalReturn, widget: string }
-                  - { label: Escape Modal - Escape, name: escapeModalEscape, widget: string }
-                  - { label: Success Alert - Header, name: successTextHeader, widget: string }
-                  - { label: Success Alert - Body, name: successTextBody, widget: string }
-                  - { label: Error Alert - Header, name: errorTextHeader, widget: string }
-                  - { label: Error Alert - Body, name: errorTextBody, widget: string }
+                  - {
+                      label: Escape Modal - Header,
+                      name: escapeModalHeader,
+                      widget: string,
+                    }
+                  - {
+                      label: Escape Model - Body,
+                      name: escapeModalBody,
+                      widget: string,
+                    }
+                  - {
+                      label: Escape Modal - Return,
+                      name: escapeModalReturn,
+                      widget: string,
+                    }
+                  - {
+                      label: Escape Modal - Escape,
+                      name: escapeModalEscape,
+                      widget: string,
+                    }
+                  - {
+                      label: Success Alert - Header,
+                      name: successTextHeader,
+                      widget: string,
+                    }
+                  - {
+                      label: Success Alert - Body,
+                      name: successTextBody,
+                      widget: string,
+                    }
+                  - {
+                      label: Error Alert - Header,
+                      name: errorTextHeader,
+                      widget: string,
+                    }
+                  - {
+                      label: Error Alert - Body,
+                      name: errorTextBody,
+                      widget: string,
+                    }
                   - {
                       label: Essential Question Alert - Body,
                       name: essentialQuestionAlertText,
                       widget: string,
                     }
-                  - { label: Save Button Text, name: saveButtonText, widget: string }
-                  - { label: Back Button Text, name: backButtonText, widget: string }
-                  - { label: Info Tab Title, name: profileTabInfoTitle, widget: string }
-                  - { label: Address Not Provided Text, name: profileAddressNotProvided, widget: string }
+                  - {
+                      label: Save Button Text,
+                      name: saveButtonText,
+                      widget: string,
+                    }
+                  - {
+                      label: Back Button Text,
+                      name: backButtonText,
+                      widget: string,
+                    }
+                  - {
+                      label: Info Tab Title,
+                      name: profileTabInfoTitle,
+                      widget: string,
+                    }
+                  - {
+                      label: Address Not Provided Text,
+                      name: profileAddressNotProvided,
+                      widget: string,
+                    }
                   - {
                       label: Note for Businesses Formed Outside Navigator,
                       name: noteForBusinessesFormedOutsideNavigator,
                       widget: string,
                     }
-                  - { label: Profile Page Title - Prefix, name: profilePageTitlePrefix, widget: string }
-                  - { label: Reference Numbers Tab Title, name: profileTabNumbersTitle, widget: string }
-                  - { label: Docs Tab Title, name: profileTabDocsTitle, widget: string }
-                  - { label: Notes Tab Title, name: profileTabNoteTitle, widget: string }
-                  - { label: Formation Doc Label, name: formationDocFileTitle, widget: string }
-                  - { label: Good Standing Doc Label, name: standingDocFileTitle, widget: string }
+                  - {
+                      label: Profile Page Title - Prefix,
+                      name: profilePageTitlePrefix,
+                      widget: string,
+                    }
+                  - {
+                      label: Reference Numbers Tab Title,
+                      name: profileTabNumbersTitle,
+                      widget: string,
+                    }
+                  - {
+                      label: Docs Tab Title,
+                      name: profileTabDocsTitle,
+                      widget: string,
+                    }
+                  - {
+                      label: Notes Tab Title,
+                      name: profileTabNoteTitle,
+                      widget: string,
+                    }
+                  - {
+                      label: Formation Doc Label,
+                      name: formationDocFileTitle,
+                      widget: string,
+                    }
+                  - {
+                      label: Good Standing Doc Label,
+                      name: standingDocFileTitle,
+                      widget: string,
+                    }
                   - {
                       label: Certified Copy of Formation Doc Label,
                       name: certificationDocFileTitle,
                       widget: string,
                     }
-                  - { label: Locked Field Tooltip Text, name: lockedFieldTooltipText, widget: string }
-                  - { label: Profile Completion Alert, name: profileCompletionAlert, widget: markdown }
-                  - { label: Cannabis Location Alert, name: cannabisLocationAlert, widget: string }
-                  - { label: Profile Error Alert Title, name: profileErrorAlert, widget: string }
+                  - {
+                      label: Locked Field Tooltip Text,
+                      name: lockedFieldTooltipText,
+                      widget: string,
+                    }
+                  - {
+                      label: Profile Completion Alert,
+                      name: profileCompletionAlert,
+                      widget: markdown,
+                    }
+                  - {
+                      label: Cannabis Location Alert,
+                      name: cannabisLocationAlert,
+                      widget: string,
+                    }
+                  - {
+                      label: Profile Error Alert Title,
+                      name: profileErrorAlert,
+                      widget: string,
+                    }
                   - {
                       label: Profile Error Alert Single Field Text,
                       name: profileErrorAlertOneField,
@@ -2050,13 +3469,21 @@ collections:
                   name: incompleteWarningMultipleText,
                   widget: string,
                 }
-              - { label: Save Button Text, name: saveButtonText, widget: string }
+              - {
+                  label: Save Button Text,
+                  name: saveButtonText,
+                  widget: string,
+                }
               - label: "Non Profit Question"
                 name: "nonProfitQuestion"
                 widget: object
                 fields:
                   - { label: Question Text, name: questionText, widget: string }
-                  - { label: Select an Answer Text, name: selectAnAnswerText, widget: string }
+                  - {
+                      label: Select an Answer Text,
+                      name: selectAnAnswerText,
+                      widget: string,
+                    }
                   - label: Responses
                     name: responses
                     widget: object
@@ -2068,21 +3495,37 @@ collections:
                 widget: object
                 fields:
                   - { label: Question Text, name: questionText, widget: string }
-                  - { label: Select an Answer Text, name: selectAnAnswerText, widget: string }
+                  - {
+                      label: Select an Answer Text,
+                      name: selectAnAnswerText,
+                      widget: string,
+                    }
               - label: "Page header"
                 name: "pageHeader"
                 widget: object
                 fields:
                   - { label: Header Text, name: headerText, widget: string }
-                  - { label: Subheader Text, name: subHeaderText, widget: string }
+                  - {
+                      label: Subheader Text,
+                      name: subHeaderText,
+                      widget: string,
+                    }
                   - { label: Button Text, name: buttonText, widget: string }
                   - { label: Logo link, name: logoLink, widget: string }
-                  - { label: Logo Aria Text, name: logoAriaText, widget: string }
+                  - {
+                      label: Logo Aria Text,
+                      name: logoAriaText,
+                      widget: string,
+                    }
               - label: "Page"
                 name: "page"
                 widget: object
                 fields:
-                  - { label: No Results Found Alert Text, name: noResultsFoundAlertText, widget: string }
+                  - {
+                      label: No Results Found Alert Text,
+                      name: noResultsFoundAlertText,
+                      widget: string,
+                    }
 
   - name: "contextual-information"
     label: "Contextual Information"
@@ -2095,10 +3538,20 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "Internal Notes",
+          name: "notesMd",
+          widget: "markdown",
+          required: false,
+        }
       - { label: "Header", name: "header", widget: "string" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
+      - {
+          label: "Id",
+          name: "id",
+          widget: "write-once-read-only-no-space",
+          required: true,
+        }
       - { label: "Display Name", name: "displayname", widget: "no-space" }
 
   - name: "page-not-found-error"
@@ -2118,9 +3571,21 @@ collections:
             widget: object
             fields:
               - { label: "Header", name: "errorHeader", widget: "string" }
-              - { label: "Error Description 1", name: "errorDescriptionPt1", widget: "markdown" }
-              - { label: "Error Description 2", name: "errorDescriptionPt2", widget: "markdown" }
-              - { label: "Chat with Expert", name: "errorChatWithExpert", widget: "markdown" }
+              - {
+                  label: "Error Description 1",
+                  name: "errorDescriptionPt1",
+                  widget: "markdown",
+                }
+              - {
+                  label: "Error Description 2",
+                  name: "errorDescriptionPt2",
+                  widget: "markdown",
+                }
+              - {
+                  label: "Chat with Expert",
+                  name: "errorChatWithExpert",
+                  widget: "markdown",
+                }
 
   - name: "check-account-email-page"
     label: "Check Account Email Page"
@@ -2140,19 +3605,47 @@ collections:
             fields:
               - { label: "Header", name: "header", widget: "string" }
               - { label: "Input label", name: "inputLabel", widget: "string" }
-              - { label: "Invalid Email text", name: "invalidEmailError", widget: "string" }
-              - { label: "Email Not Found Error Text", name: "emailNotFoundError", widget: "string" }
+              - {
+                  label: "Invalid Email text",
+                  name: "invalidEmailError",
+                  widget: "string",
+                }
+              - {
+                  label: "Email Not Found Error Text",
+                  name: "emailNotFoundError",
+                  widget: "string",
+                }
               - {
                   label: "Service Unavailable Error Text",
                   name: "serviceNotAvailableError",
                   widget: "string",
                 }
-              - { label: "Default Error Message Text", name: "defaultErrorMessage", widget: "string" }
+              - {
+                  label: "Default Error Message Text",
+                  name: "defaultErrorMessage",
+                  widget: "string",
+                }
               - { label: "Input button", name: "inputButton", widget: "string" }
-              - { label: "No Account Text", name: "noAccountText", widget: "string" }
-              - { label: "Link Account Link Text", name: "linkAccountLinkText", widget: "string" }
-              - { label: "Need help text", name: "needHelpText", widget: "string" }
-              - { label: "Intercom chat text", name: "intercomChatText", widget: "string" }
+              - {
+                  label: "No Account Text",
+                  name: "noAccountText",
+                  widget: "string",
+                }
+              - {
+                  label: "Link Account Link Text",
+                  name: "linkAccountLinkText",
+                  widget: "string",
+                }
+              - {
+                  label: "Need help text",
+                  name: "needHelpText",
+                  widget: "string",
+                }
+              - {
+                  label: "Intercom chat text",
+                  name: "intercomChatText",
+                  widget: "string",
+                }
 
   - name: "component-accessibility"
     label: "Component Accessibility"
@@ -2170,7 +3663,11 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: "Callout Alert Group Title", name: "calloutAlertGroupTitle", widget: "string" }
+              - {
+                  label: "Callout Alert Group Title",
+                  name: "calloutAlertGroupTitle",
+                  widget: "string",
+                }
               - { label: "Info (Blue)", name: "info", widget: "string" }
               - { label: "Success (Green)", name: "success", widget: "string" }
               - { label: "Error (Red)", name: "error", widget: "string" }
@@ -2194,10 +3691,26 @@ collections:
             widget: object
             summary: "{{siteWideErrorMessages}}"
             fields:
-              - { label: Error - No Data, name: errorTextNoData, widget: string }
-              - { label: Error - Cached Only, name: errorTextCachedOnly, widget: string }
-              - { label: Error - Update Failed, name: errorTextUpdateFailed, widget: string }
-              - { label: Error - Radio Button, name: errorRadioButton, widget: string }
+              - {
+                  label: Error - No Data,
+                  name: errorTextNoData,
+                  widget: string,
+                }
+              - {
+                  label: Error - Cached Only,
+                  name: errorTextCachedOnly,
+                  widget: string,
+                }
+              - {
+                  label: Error - Update Failed,
+                  name: errorTextUpdateFailed,
+                  widget: string,
+                }
+              - {
+                  label: Error - Radio Button,
+                  name: errorRadioButton,
+                  widget: string,
+                }
               - {
                   label: Error - Screen Reader Inline Error Prefix,
                   name: errorScreenReaderInlinePrefix,
@@ -2221,13 +3734,37 @@ collections:
             widget: object
             fields:
               - { label: Login Button, name: logInButton, widget: string }
-              - { label: Registration Button, name: getStartedText, widget: string }
+              - {
+                  label: Registration Button,
+                  name: getStartedText,
+                  widget: string,
+                }
               - { label: Logout Button, name: logoutButton, widget: string }
-              - { label: MyNJ Account Text, name: myNJAccountText, widget: string }
-              - { label: Landing Page Drop Down Title, name: landingPageDropDownTitle, widget: string }
-              - { label: Profile Link Text, name: profileLinkText, widget: string }
-              - { label: NavBar Guest Business text, name: navBarGuestBusinessText, widget: string }
-              - { label: NavBar Guest Account text, name: navBarGuestAccountText, widget: string }
+              - {
+                  label: MyNJ Account Text,
+                  name: myNJAccountText,
+                  widget: string,
+                }
+              - {
+                  label: Landing Page Drop Down Title,
+                  name: landingPageDropDownTitle,
+                  widget: string,
+                }
+              - {
+                  label: Profile Link Text,
+                  name: profileLinkText,
+                  widget: string,
+                }
+              - {
+                  label: NavBar Guest Business text,
+                  name: navBarGuestBusinessText,
+                  widget: string,
+                }
+              - {
+                  label: NavBar Guest Account text,
+                  name: navBarGuestAccountText,
+                  widget: string,
+                }
               - {
                   label: Navbar Guest dropdown registration text,
                   name: navBarGuestRegistrationText,
@@ -2253,26 +3790,58 @@ collections:
                   name: navBarUnnamedDbaBusinessText,
                   widget: string,
                 }
-              - { label: Add Business Button, name: addBusinessButton, widget: string }
-              - { label: My Account Text, name: navBarMyAccountText, widget: string }
-              - { label: Business.nj.gov Logo Link, name: navBarBusinessNJGovLink, widget: string }
-              - { label: Business.nj.gov Logo Alt Text, name: navBarBusinessNJGovAltText, widget: string }
-              - { label: Business.nj.gov Logo Aria Label, name: navBarBusinessNJGovAriaLabel, widget: string }
+              - {
+                  label: Add Business Button,
+                  name: addBusinessButton,
+                  widget: string,
+                }
+              - {
+                  label: My Account Text,
+                  name: navBarMyAccountText,
+                  widget: string,
+                }
+              - {
+                  label: Business.nj.gov Logo Link,
+                  name: navBarBusinessNJGovLink,
+                  widget: string,
+                }
+              - {
+                  label: Business.nj.gov Logo Alt Text,
+                  name: navBarBusinessNJGovAltText,
+                  widget: string,
+                }
+              - {
+                  label: Business.nj.gov Logo Aria Label,
+                  name: navBarBusinessNJGovAriaLabel,
+                  widget: string,
+                }
 
           - label: "Navigation Quick Links"
             name: "navigationQuickLinks"
             widget: object
             fields:
-              - { label: Mobile Title, name: navBarMobileQuickLinksTitle, widget: string }
+              - {
+                  label: Mobile Title,
+                  name: navBarMobileQuickLinksTitle,
+                  widget: string,
+                }
               - { label: Plan, name: navBarPlanText, widget: string }
               - { label: Plan Link, name: navBarPlanLink, widget: no-space }
               - { label: Start, name: navBarStartText, widget: string }
               - { label: Start Link, name: navBarStartLink, widget: no-space }
               - { label: Operate, name: navBarOperateText, widget: string }
-              - { label: Operate Link, name: navBarOperateLink, widget: no-space }
+              - {
+                  label: Operate Link,
+                  name: navBarOperateLink,
+                  widget: no-space,
+                }
               - { label: Grow, name: navBarGrowText, widget: string }
               - { label: Grow Link, name: navBarGrowLink, widget: no-space }
               - { label: Updates, name: navBarUpdatesText, widget: string }
-              - { label: Updates Link, name: navBarUpdatesLink, widget: no-space }
+              - {
+                  label: Updates Link,
+                  name: navBarUpdatesLink,
+                  widget: no-space,
+                }
               - { label: Search, name: navBarSearchText, widget: string }
               - { label: Search Link, name: navBarSearchLink, widget: no-space }

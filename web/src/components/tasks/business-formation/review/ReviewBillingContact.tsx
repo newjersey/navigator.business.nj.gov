@@ -26,7 +26,11 @@ export const ReviewBillingContact = (): ReactElement => {
         label={Config.formation.fields.contactPhoneNumber.label}
         value={state.formationFormData.contactPhoneNumber}
         dataTestId="contact-phone-number-field"
-        formatter={state.formationFormData.contactPhoneNumber ? getPhoneNumberFormat : undefined}
+        formatter={
+          state.formationFormData.contactPhoneNumber
+            ? getPhoneNumberFormat
+            : undefined
+        }
       />
     </ReviewSubSection>
   );

@@ -19,11 +19,15 @@ interface Props {
 const AnytimeActionLicenseReinstatementPage = (props: Props): ReactElement => {
   return (
     <>
-      <NextSeo title={getNextSeoTitle(props.anytimeActionLicenseReinstatement.name)} />
+      <NextSeo
+        title={getNextSeoTitle(props.anytimeActionLicenseReinstatement.name)}
+      />
       <PageSkeleton showNavBar showSidebar hideMiniRoadmap>
         <TaskSidebarPageLayout hideMiniRoadmap={true}>
           <AnytimeActionLicenseReinstatementElement
-            anytimeActionLicenseReinstatement={props.anytimeActionLicenseReinstatement}
+            anytimeActionLicenseReinstatement={
+              props.anytimeActionLicenseReinstatement
+            }
           />
         </TaskSidebarPageLayout>
       </PageSkeleton>
@@ -31,13 +35,14 @@ const AnytimeActionLicenseReinstatementPage = (props: Props): ReactElement => {
   );
 };
 
-export const getStaticPaths = (): GetStaticPathsResult<AnytimeActionLicenseReinstatementUrlSlugParam> => {
-  const paths = loadAllAnytimeActionLicenseReinstatementsUrlSlugs();
-  return {
-    paths,
-    fallback: false,
+export const getStaticPaths =
+  (): GetStaticPathsResult<AnytimeActionLicenseReinstatementUrlSlugParam> => {
+    const paths = loadAllAnytimeActionLicenseReinstatementsUrlSlugs();
+    return {
+      paths,
+      fallback: false,
+    };
   };
-};
 
 export const getStaticProps = ({
   params,
@@ -46,9 +51,10 @@ export const getStaticProps = ({
 }): GetStaticPropsResult<Props> => {
   return {
     props: {
-      anytimeActionLicenseReinstatement: loadAnytimeActionLicenseReinstatementsByUrlSlug(
-        params.anytimeActionLicenseReinstatementUrlSlug
-      ),
+      anytimeActionLicenseReinstatement:
+        loadAnytimeActionLicenseReinstatementsByUrlSlug(
+          params.anytimeActionLicenseReinstatementUrlSlug
+        ),
     },
   };
 };

@@ -31,7 +31,9 @@ export const TaskElement = (props: Props): ReactElement => {
       props.task.contentMd.includes("${beginLocationDependentSection}") &&
       props.task.contentMd.includes("${endLocationDependentSection}");
 
-    const [beforeDeferredLocation, rest] = props.task.contentMd.split("${beginLocationDependentSection}");
+    const [beforeDeferredLocation, rest] = props.task.contentMd.split(
+      "${beginLocationDependentSection}"
+    );
     deferredLocationQuestion.before = beforeDeferredLocation;
     deferredLocationQuestion.after = rest;
     if (rest) {
@@ -44,7 +46,9 @@ export const TaskElement = (props: Props): ReactElement => {
   }
 
   const getAgencyText = (): string => {
-    const agency = props.task.agencyId ? LookupTaskAgencyById(props.task.agencyId).name : "";
+    const agency = props.task.agencyId
+      ? LookupTaskAgencyById(props.task.agencyId).name
+      : "";
     const context = props.task.agencyAdditionalContext ?? "";
     if (agency && context) {
       return `${agency}, ${context}`;
@@ -57,7 +61,10 @@ export const TaskElement = (props: Props): ReactElement => {
   };
 
   return (
-    <div id="taskElement" className="flex flex-column space-between min-height-38rem">
+    <div
+      id="taskElement"
+      className="flex flex-column space-between min-height-38rem"
+    >
       <div>
         <TaskHeader task={props.task} />
         {props.children}
@@ -82,9 +89,9 @@ export const TaskElement = (props: Props): ReactElement => {
           </>
         )}
 
-        {(props.task.agencyId || props.task.formName || props.task.agencyAdditionalContext) && (
-          <HorizontalLine />
-        )}
+        {(props.task.agencyId ||
+          props.task.formName ||
+          props.task.agencyAdditionalContext) && <HorizontalLine />}
 
         {(props.task.agencyId || props.task.agencyAdditionalContext) && (
           <div>
@@ -99,7 +106,10 @@ export const TaskElement = (props: Props): ReactElement => {
           </div>
         )}
       </div>
-      <TaskCtaLinks task={props.task} onboardingKey="constructionRenovationPlan" />
+      <TaskCtaLinks
+        task={props.task}
+        onboardingKey="constructionRenovationPlan"
+      />
     </div>
   );
 };

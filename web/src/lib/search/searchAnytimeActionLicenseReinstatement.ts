@@ -1,4 +1,7 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
+import {
+  findMatchInBlock,
+  findMatchInLabelledText,
+} from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
 import { AnytimeActionLicenseReinstatement } from "@/lib/types/types";
 
@@ -15,13 +18,17 @@ export const searchAnytimeActionLicenseReinstatements = (
     };
 
     const content = anytimeActionLicenseReinstatement.contentMd.toLowerCase();
-    const summary = anytimeActionLicenseReinstatement.summaryDescriptionMd?.toLowerCase();
+    const summary =
+      anytimeActionLicenseReinstatement.summaryDescriptionMd?.toLowerCase();
     const name = anytimeActionLicenseReinstatement.name.toLowerCase();
-    const cta = anytimeActionLicenseReinstatement.callToActionText?.toLowerCase();
-    const ctaLink = anytimeActionLicenseReinstatement.callToActionLink?.toLowerCase();
+    const cta =
+      anytimeActionLicenseReinstatement.callToActionText?.toLowerCase();
+    const ctaLink =
+      anytimeActionLicenseReinstatement.callToActionLink?.toLowerCase();
     const filename = anytimeActionLicenseReinstatement.filename.toLowerCase();
     const urlSlug = anytimeActionLicenseReinstatement.urlSlug.toLowerCase();
-    const issuingAgency = anytimeActionLicenseReinstatement.issuingAgency?.toLowerCase();
+    const issuingAgency =
+      anytimeActionLicenseReinstatement.issuingAgency?.toLowerCase();
 
     const blockTexts = [summary, content];
     const labelledTexts = [

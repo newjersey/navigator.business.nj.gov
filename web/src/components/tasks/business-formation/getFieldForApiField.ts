@@ -29,16 +29,20 @@ const fieldToApiFieldMapping: Record<string, string> = {
   businessTotalStock: "Business Information - Total Shares",
   combinedInvestment: "Limited Partnership - Aggregate Amount",
   canCreateLimitedPartner: "Limited Partnership - Limited Can Create Limited",
-  createLimitedPartnerTerms: "Limited Partnership - Limited Can Create Limited Terms",
+  createLimitedPartnerTerms:
+    "Limited Partnership - Limited Can Create Limited Terms",
   canGetDistribution: "Limited Partnership - Limited Can Get Distribution",
-  getDistributionTerms: "Limited Partnership - Limited Can Get Distribution Terms",
+  getDistributionTerms:
+    "Limited Partnership - Limited Can Get Distribution Terms",
   canMakeDistribution: "Limited Partnership - Limited Can Make Distribution",
-  makeDistributionTerms: "Limited Partnership - Limited Can Make Distribution Terms",
+  makeDistributionTerms:
+    "Limited Partnership - Limited Can Make Distribution Terms",
   withdrawals: "Limited Partnership - General Partner Withdrawal",
   dissolution: "Limited Partnership - Dissolution Plan",
   businessName: "Business Information - Business Name",
   willPracticeLaw: "Business Information - Will Practice Law",
-  foreignGoodStandingFile: "Business Information - Foreign Certificate of Good Standing",
+  foreignGoodStandingFile:
+    "Business Information - Foreign Certificate of Good Standing",
 };
 
 const apiFieldToFieldMapping = invert(fieldToApiFieldMapping);

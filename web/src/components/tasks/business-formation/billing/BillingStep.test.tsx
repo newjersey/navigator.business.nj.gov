@@ -102,37 +102,67 @@ describe("Formation - BillingStep", () => {
       }
     );
 
-    expect(screen.getByText(Config.formation.fields.paymentType.creditCardLabel)).toBeInTheDocument();
-    expect(page.getInputElementByLabel("Contact first name").value).toBe("John");
-    expect(page.getInputElementByLabel("Contact last name").value).toBe("Smith");
-    expect(page.getInputElementByLabel("Contact phone number").value).toBe("(602) 415-3214");
     expect(
-      page.getInputElementByLabel(Config.formation.fields.annualReportNotification.checkboxText).checked
+      screen.getByText(Config.formation.fields.paymentType.creditCardLabel)
+    ).toBeInTheDocument();
+    expect(page.getInputElementByLabel("Contact first name").value).toBe(
+      "John"
+    );
+    expect(page.getInputElementByLabel("Contact last name").value).toBe(
+      "Smith"
+    );
+    expect(page.getInputElementByLabel("Contact phone number").value).toBe(
+      "(602) 415-3214"
+    );
+    expect(
+      page.getInputElementByLabel(
+        Config.formation.fields.annualReportNotification.checkboxText
+      ).checked
     ).toBe(true);
     expect(
-      page.getInputElementByLabel(Config.formation.fields.corpWatchNotification.checkboxText).checked
+      page.getInputElementByLabel(
+        Config.formation.fields.corpWatchNotification.checkboxText
+      ).checked
     ).toBe(true);
 
     expect(
-      page.getInputElementByParentTestId("officialFormationDocument-checkbox", { type: "checkbox" }).checked
+      page.getInputElementByParentTestId("officialFormationDocument-checkbox", {
+        type: "checkbox",
+      }).checked
     ).toBe(true);
     expect(
-      page.getInputElementByParentTestId("certificateOfStanding-checkbox", { type: "checkbox" }).checked
+      page.getInputElementByParentTestId("certificateOfStanding-checkbox", {
+        type: "checkbox",
+      }).checked
     ).toBe(false);
     expect(
-      page.getInputElementByParentTestId("certifiedCopyOfFormationDocument-checkbox", { type: "checkbox" })
-        .checked
+      page.getInputElementByParentTestId(
+        "certifiedCopyOfFormationDocument-checkbox",
+        { type: "checkbox" }
+      ).checked
     ).toBe(true);
 
-    expect(page.getInputElementByLabel(Config.formation.fields.paymentType.creditCardLabel).checked).toBe(
-      true
-    );
-    expect(page.getInputElementByLabel(Config.formation.fields.paymentType.achLabel).checked).toBe(false);
+    expect(
+      page.getInputElementByLabel(
+        Config.formation.fields.paymentType.creditCardLabel
+      ).checked
+    ).toBe(true);
+    expect(
+      page.getInputElementByLabel(Config.formation.fields.paymentType.achLabel)
+        .checked
+    ).toBe(false);
   });
 
   describe("certificateOfStanding", () => {
-    const defaultCostIds = ["limited-liability-company", "limited-liability-partnership"];
-    const overriddenCostIds = ["s-corporation", "c-corporation", "limited-partnership"];
+    const defaultCostIds = [
+      "limited-liability-company",
+      "limited-liability-partnership",
+    ];
+    const overriddenCostIds = [
+      "s-corporation",
+      "c-corporation",
+      "limited-partnership",
+    ];
 
     for (const legalStructureId of defaultCostIds) {
       it(`uses default cost for ${legalStructureId}`, async () => {
@@ -145,12 +175,20 @@ describe("Formation - BillingStep", () => {
             certifiedCopyOfFormationDocument: false,
           }
         );
-        const officialFormationCost = Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
-        const standingCost = Number.parseInt(Config.formation.fields.certificateOfStanding.cost);
+        const officialFormationCost = Number.parseInt(
+          Config.formation.fields.officialFormationDocument.cost
+        );
+        const standingCost = Number.parseInt(
+          Config.formation.fields.certificateOfStanding.cost
+        );
         const expectedTotal = officialFormationCost + standingCost;
 
-        expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(expectedTotal.toString());
-        expect(screen.getByLabelText(totalLabel)).toHaveTextContent(expectedTotal.toString());
+        expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(
+          expectedTotal.toString()
+        );
+        expect(screen.getByLabelText(totalLabel)).toHaveTextContent(
+          expectedTotal.toString()
+        );
       });
     }
 
@@ -166,28 +204,46 @@ describe("Formation - BillingStep", () => {
           }
         );
 
-        const officialFormationCost = Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
+        const officialFormationCost = Number.parseInt(
+          Config.formation.fields.officialFormationDocument.cost
+        );
         const standingCost = Number.parseInt(
-          (Config.formation.fields.certificateOfStanding.overrides as any)[legalStructureId].cost
+          (Config.formation.fields.certificateOfStanding.overrides as any)[
+            legalStructureId
+          ].cost
         );
         const expectedTotal = officialFormationCost + standingCost;
 
-        expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(expectedTotal.toString());
-        expect(screen.getByLabelText(totalLabel)).toHaveTextContent(expectedTotal.toString());
+        expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(
+          expectedTotal.toString()
+        );
+        expect(screen.getByLabelText(totalLabel)).toHaveTextContent(
+          expectedTotal.toString()
+        );
       });
     }
   });
 
   it("updates total and subtotals correctly", async () => {
-    const officialFormationCost = Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
-    const certifiedCopyCost = Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost);
-    const certificateStandingCost = Number.parseInt(Config.formation.fields.certificateOfStanding.cost);
+    const officialFormationCost = Number.parseInt(
+      Config.formation.fields.officialFormationDocument.cost
+    );
+    const certifiedCopyCost = Number.parseInt(
+      Config.formation.fields.certifiedCopyOfFormationDocument.cost
+    );
+    const certificateStandingCost = Number.parseInt(
+      Config.formation.fields.certificateOfStanding.cost
+    );
 
     const ccInitialCost = Number.parseFloat(
       Config.formation.fields.paymentType.paymentCosts.creditCardInitial
     );
-    const ccExtraCost = Number.parseFloat(Config.formation.fields.paymentType.paymentCosts.creditCardExtra);
-    const achCost = Number.parseFloat(Config.formation.fields.paymentType.paymentCosts.ach);
+    const ccExtraCost = Number.parseFloat(
+      Config.formation.fields.paymentType.paymentCosts.creditCardExtra
+    );
+    const achCost = Number.parseFloat(
+      Config.formation.fields.paymentType.paymentCosts.ach
+    );
 
     const page = await getPageHelper(
       { legalStructureId: "limited-liability-company" },
@@ -199,29 +255,47 @@ describe("Formation - BillingStep", () => {
       }
     );
 
-    expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(officialFormationCost.toString());
+    expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(
+      officialFormationCost.toString()
+    );
     page.selectCheckboxByTestId("certificateOfStanding");
     expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(
       (officialFormationCost + certificateStandingCost).toString()
     );
     page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
     expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(
-      (officialFormationCost + certificateStandingCost + certifiedCopyCost).toString()
+      (
+        officialFormationCost +
+        certificateStandingCost +
+        certifiedCopyCost
+      ).toString()
     );
     expect(screen.getByLabelText(totalLabel)).toHaveTextContent(
-      (officialFormationCost + certificateStandingCost + certifiedCopyCost).toString()
+      (
+        officialFormationCost +
+        certificateStandingCost +
+        certifiedCopyCost
+      ).toString()
     );
     page.selectCheckboxByTestId("certificateOfStanding");
     const finalTotal = officialFormationCost + certifiedCopyCost;
 
-    expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(finalTotal.toString());
-    expect(screen.getByLabelText(totalLabel)).toHaveTextContent(finalTotal.toString());
+    expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(
+      finalTotal.toString()
+    );
+    expect(screen.getByLabelText(totalLabel)).toHaveTextContent(
+      finalTotal.toString()
+    );
 
-    fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel));
+    fireEvent.click(
+      screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel)
+    );
     expect(screen.getByLabelText(totalLabel)).toHaveTextContent(
       (finalTotal + ccInitialCost + ccExtraCost).toString()
     );
-    fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.achLabel));
+    fireEvent.click(
+      screen.getByLabelText(Config.formation.fields.paymentType.achLabel)
+    );
     const numberOfDocuments = 2;
     expect(screen.getByLabelText(totalLabel)).toHaveTextContent(
       (finalTotal + achCost * numberOfDocuments).toString()
@@ -238,8 +312,12 @@ describe("Formation - BillingStep", () => {
       { name: "Mike Jones" }
     );
 
-    expect(page.getInputElementByLabel("Contact first name").value).toEqual("Mike");
-    expect(page.getInputElementByLabel("Contact last name").value).toEqual("Jones");
+    expect(page.getInputElementByLabel("Contact first name").value).toEqual(
+      "Mike"
+    );
+    expect(page.getInputElementByLabel("Contact last name").value).toEqual(
+      "Jones"
+    );
   });
 
   it("uses name from formation data when it exists", async () => {
@@ -252,40 +330,68 @@ describe("Formation - BillingStep", () => {
       { name: "Some Wrong Name" }
     );
 
-    expect(page.getInputElementByLabel("Contact first name").value).toEqual("Actual");
-    expect(page.getInputElementByLabel("Contact last name").value).toEqual("Name");
+    expect(page.getInputElementByLabel("Contact first name").value).toEqual(
+      "Actual"
+    );
+    expect(page.getInputElementByLabel("Contact last name").value).toEqual(
+      "Name"
+    );
   });
 
   describe("required fields", () => {
     it("Contact first name", async () => {
-      const page = await getPageHelper({}, { contactFirstName: "" }, { name: "" });
+      const page = await getPageHelper(
+        {},
+        { contactFirstName: "" },
+        { name: "" }
+      );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.contactFirstName.label);
-      expect(screen.getByText(Config.formation.fields.contactFirstName.error)).toBeInTheDocument();
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.contactFirstName.label
+      );
+      expect(
+        screen.getByText(Config.formation.fields.contactFirstName.error)
+      ).toBeInTheDocument();
     });
 
     it("Contact last name", async () => {
-      const page = await getPageHelper({}, { contactLastName: "" }, { name: "" });
+      const page = await getPageHelper(
+        {},
+        { contactLastName: "" },
+        { name: "" }
+      );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.contactLastName.label);
-      expect(screen.getByText(Config.formation.fields.contactLastName.error)).toBeInTheDocument();
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.contactLastName.label
+      );
+      expect(
+        screen.getByText(Config.formation.fields.contactLastName.error)
+      ).toBeInTheDocument();
     });
 
     it("Contact phone number", async () => {
       const page = await getPageHelper({}, { contactPhoneNumber: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.contactPhoneNumber.label);
-      expect(screen.getByText(Config.formation.fields.contactPhoneNumber.error)).toBeInTheDocument();
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.contactPhoneNumber.label
+      );
+      expect(
+        screen.getByText(Config.formation.fields.contactPhoneNumber.error)
+      ).toBeInTheDocument();
     });
 
     it("Payment type", async () => {
       const page = await getPageHelper({}, { paymentType: undefined });
       await attemptApiSubmission(page);
-      expect(screen.getAllByRole("alert")[0]).toHaveTextContent(Config.formation.fields.paymentType.label);
+      expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
+        Config.formation.fields.paymentType.label
+      );
     });
   });
 
-  const attemptApiSubmission = async (page: FormationPageHelpers): Promise<void> => {
+  const attemptApiSubmission = async (
+    page: FormationPageHelpers
+  ): Promise<void> => {
     await page.stepperClickToReviewStep();
     await page.clickSubmit();
     await page.stepperClickToBillingStep();

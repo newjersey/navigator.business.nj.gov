@@ -5,7 +5,10 @@ import { ReviewNotEntered } from "@/components/tasks/review-screen-components/Re
 import { ReviewSubSection } from "@/components/tasks/review-screen-components/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { FormationFields, InFormInBylaws } from "@businessnjgovnavigator/shared";
+import {
+  FormationFields,
+  InFormInBylaws,
+} from "@businessnjgovnavigator/shared";
 import { Fragment, ReactElement, useContext } from "react";
 
 export const ReviewNonprofitProvisions = (): ReactElement => {
@@ -49,14 +52,26 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
     );
   };
 
-  const provisionsToDisplay: Array<{ radioField: FormationFields; termsField: FormationFields }> = [
+  const provisionsToDisplay: Array<{
+    radioField: FormationFields;
+    termsField: FormationFields;
+  }> = [
     {
       radioField: "nonprofitBoardMemberQualificationsSpecified",
       termsField: "nonprofitBoardMemberQualificationsTerms",
     },
-    { radioField: "nonprofitBoardMemberRightsSpecified", termsField: "nonprofitBoardMemberRightsTerms" },
-    { radioField: "nonprofitTrusteesMethodSpecified", termsField: "nonprofitTrusteesMethodTerms" },
-    { radioField: "nonprofitAssetDistributionSpecified", termsField: "nonprofitAssetDistributionTerms" },
+    {
+      radioField: "nonprofitBoardMemberRightsSpecified",
+      termsField: "nonprofitBoardMemberRightsTerms",
+    },
+    {
+      radioField: "nonprofitTrusteesMethodSpecified",
+      termsField: "nonprofitTrusteesMethodTerms",
+    },
+    {
+      radioField: "nonprofitAssetDistributionSpecified",
+      termsField: "nonprofitAssetDistributionTerms",
+    },
   ];
 
   return (
@@ -65,18 +80,29 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
       <ReviewSubSection header={"Provisions"}>
         <div className="margin-top-2" data-testid="hasNonprofitBoardMembers">
           {hasNonprofitBoardMembers === true && (
-            <Content>{Config.formation.fields.hasNonprofitBoardMembers.yesReviewText}</Content>
+            <Content>
+              {Config.formation.fields.hasNonprofitBoardMembers.yesReviewText}
+            </Content>
           )}
           {hasNonprofitBoardMembers === false && (
-            <Content>{Config.formation.fields.hasNonprofitBoardMembers.noReviewText}</Content>
+            <Content>
+              {Config.formation.fields.hasNonprofitBoardMembers.noReviewText}
+            </Content>
           )}
           {hasNonprofitBoardMembers === undefined && (
-            <ReviewLineItem label={Config.formation.fields.hasNonprofitBoardMembers.reviewLabel} value="" />
+            <ReviewLineItem
+              label={
+                Config.formation.fields.hasNonprofitBoardMembers.reviewLabel
+              }
+              value=""
+            />
           )}
         </div>
 
         {provisionsToDisplay.map(({ radioField, termsField }) => {
-          const radioValue = state.formationFormData[radioField] as InFormInBylaws;
+          const radioValue = state.formationFormData[
+            radioField
+          ] as InFormInBylaws;
           const termsValue = state.formationFormData[termsField] as string;
 
           return (
@@ -90,7 +116,10 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
               </div>
 
               {radioValue === "IN_FORM" && (
-                <div className="margin-top-2 margin-left-3" data-testid={`${radioField}-terms`}>
+                <div
+                  className="margin-top-2 margin-left-3"
+                  data-testid={`${radioField}-terms`}
+                >
                   {termsValue ? (
                     <ExpandCollapseString
                       text={termsValue}
@@ -101,7 +130,9 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
                   ) : (
                     <div className="display-flex flex-row">
                       <span className="margin-right-1">
-                        <strong>{Config.formation.nonprofitProvisions.description}:</strong>
+                        <strong>
+                          {Config.formation.nonprofitProvisions.description}:
+                        </strong>
                       </span>
                       <ReviewNotEntered />
                     </div>

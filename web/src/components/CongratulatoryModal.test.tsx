@@ -15,7 +15,13 @@ describe("<CongratulatoryModal />", () => {
   });
 
   it("shows link when next section is passed", () => {
-    render(<CongratulatoryModal nextSectionType="START" open={true} handleClose={(): void => {}} />);
+    render(
+      <CongratulatoryModal
+        nextSectionType="START"
+        open={true}
+        handleClose={(): void => {}}
+      />
+    );
 
     const link = screen.queryByText(
       `${Config.sectionHeaders["START"]} ${Config.dashboardDefaults.congratulatoryModalLinkText}`
@@ -26,7 +32,13 @@ describe("<CongratulatoryModal />", () => {
   });
 
   it("hides link when no next section is passed", () => {
-    render(<CongratulatoryModal nextSectionType={undefined} open={true} handleClose={(): void => {}} />);
+    render(
+      <CongratulatoryModal
+        nextSectionType={undefined}
+        open={true}
+        handleClose={(): void => {}}
+      />
+    );
 
     const link = screen.queryByText(
       `${Config.sectionHeaders["START"]} ${Config.dashboardDefaults.congratulatoryModalLinkText}`

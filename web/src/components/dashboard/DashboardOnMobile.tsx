@@ -40,10 +40,13 @@ interface Props {
 export const DashboardOnMobile = (props: Props): ReactElement => {
   const { business } = useUserData();
   const router = useRouter();
-  const operatingPhase = LookupOperatingPhaseById(business?.profileData.operatingPhase);
+  const operatingPhase = LookupOperatingPhaseById(
+    business?.profileData.operatingPhase
+  );
 
   const deferredHomeBasedOnSaveButtonClick = (): void => {
-    router && routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true");
+    router &&
+      routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true");
   };
 
   const renderDeferredHomeBasedQuestion =
@@ -62,20 +65,27 @@ export const DashboardOnMobile = (props: Props): ReactElement => {
               {props.elevatorViolations && <ElevatorViolationsCard />}
 
               {renderDeferredHomeBasedQuestion && (
-                <DeferredHomeBasedQuestion business={business} onSave={deferredHomeBasedOnSaveButtonClick} />
+                <DeferredHomeBasedQuestion
+                  business={business}
+                  onSave={deferredHomeBasedOnSaveButtonClick}
+                />
               )}
 
               {operatingPhase.displayAnytimeActions && (
                 <AnytimeActionDropdown
                   anytimeActionTasks={props.anytimeActionTasks}
-                  anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
+                  anytimeActionLicenseReinstatements={
+                    props.anytimeActionLicenseReinstatements
+                  }
                 />
               )}
 
               {operatingPhase.displayRoadmapTasks && (
                 <>
                   <hr className="margin-bottom-3" />
-                  <Heading level={2}>{getRoadmapHeadingText(business?.profileData.industryId)}</Heading>
+                  <Heading level={2}>
+                    {getRoadmapHeadingText(business?.profileData.industryId)}
+                  </Heading>
                   <Roadmap />
                 </>
               )}

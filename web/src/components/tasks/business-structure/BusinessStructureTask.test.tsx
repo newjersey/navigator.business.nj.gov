@@ -31,7 +31,10 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("<BusinessStructureTask />", () => {
-  const content = "some content here\n\n" + "${businessStructureSelectionComponent}\n\n" + "more content";
+  const content =
+    "some content here\n\n" +
+    "${businessStructureSelectionComponent}\n\n" +
+    "more content";
   const taskId = "12345";
 
   beforeEach(() => {
@@ -44,7 +47,9 @@ describe("<BusinessStructureTask />", () => {
     const task = generateTask({ contentMd: content, id: taskId });
     render(
       <ThemeProvider theme={createTheme()}>
-        <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
+        <WithStatefulUserData
+          initialUserData={generateUserDataForBusiness(business)}
+        >
           <BusinessStructureTask task={task} />
         </WithStatefulUserData>
       </ThemeProvider>
@@ -54,11 +59,17 @@ describe("<BusinessStructureTask />", () => {
   it("shows tooltip text on task progress checkbox", async () => {
     const business = generateBusiness({ taskProgress: { [taskId]: "TO_DO" } });
     renderTask(business);
-    expect(screen.queryByText(Config.businessStructureTask.uncompletedTooltip)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.uncompletedTooltip)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.completedTooltip)
+    ).not.toBeInTheDocument();
 
     fireEvent.mouseOver(screen.getByTestId("status-info-tooltip"));
-    expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.completedTooltip)
+    ).not.toBeInTheDocument();
     await screen.findByText(Config.businessStructureTask.uncompletedTooltip);
   });
 
@@ -68,24 +79,44 @@ describe("<BusinessStructureTask />", () => {
       formationData: generateFormationData({ completedFilingPayment: true }),
     });
     renderTask(business);
-    expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.businessStructureTask.uncompletedTooltip)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.profileDefaults.default.lockedFieldTooltipText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.completedTooltip)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.uncompletedTooltip)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.profileDefaults.default.lockedFieldTooltipText)
+    ).not.toBeInTheDocument();
 
     fireEvent.mouseOver(screen.getByTestId("status-info-tooltip"));
-    expect(screen.queryByText(Config.businessStructureTask.uncompletedTooltip)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
-    await screen.findByText(Config.profileDefaults.default.lockedFieldTooltipText);
+    expect(
+      screen.queryByText(Config.businessStructureTask.uncompletedTooltip)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.completedTooltip)
+    ).not.toBeInTheDocument();
+    await screen.findByText(
+      Config.profileDefaults.default.lockedFieldTooltipText
+    );
   });
 
   it("shows locked formation tooltip text on task progress checkbox when formation is completed", async () => {
-    const business = generateBusiness({ taskProgress: { [taskId]: "COMPLETED" } });
+    const business = generateBusiness({
+      taskProgress: { [taskId]: "COMPLETED" },
+    });
     renderTask(business);
-    expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.businessStructureTask.uncompletedTooltip)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.completedTooltip)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.uncompletedTooltip)
+    ).not.toBeInTheDocument();
 
     fireEvent.mouseOver(screen.getByTestId("status-info-tooltip"));
-    expect(screen.queryByText(Config.businessStructureTask.uncompletedTooltip)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.uncompletedTooltip)
+    ).not.toBeInTheDocument();
     await screen.findByText(Config.businessStructureTask.completedTooltip);
   });
 
@@ -95,9 +126,12 @@ describe("<BusinessStructureTask />", () => {
       profileData: generateProfileData({ legalStructureId: legalStructure.id }),
     });
     renderTask(business);
-    const successMessage = templateEval(Config.businessStructureTask.successMessage, {
-      legalStructure: legalStructure.name,
-    });
+    const successMessage = templateEval(
+      Config.businessStructureTask.successMessage,
+      {
+        legalStructure: legalStructure.name,
+      }
+    );
     useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
     expect(screen.getByTestId("success-alert")).toContainHTML(
       renderToStaticMarkup(Content({ children: successMessage }))
@@ -111,7 +145,9 @@ describe("<BusinessStructureTask />", () => {
     });
     renderTask(business);
     fireEvent.click(screen.getByText(Config.taskDefaults.editText));
-    expect(screen.queryByText(Config.taskDefaults.editText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.taskDefaults.editText)
+    ).not.toBeInTheDocument();
     expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
   });
 
@@ -122,29 +158,47 @@ describe("<BusinessStructureTask />", () => {
       formationData: generateFormationData({ completedFilingPayment: true }),
     });
     renderTask(business);
-    expect(screen.queryByText(Config.taskDefaults.editText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.taskDefaults.editText)
+    ).not.toBeInTheDocument();
   });
 
   it("saves and shows success banner when save button clicked", async () => {
-    const business = generateBusiness({ profileData: generateProfileData({ legalStructureId: undefined }) });
+    const business = generateBusiness({
+      profileData: generateProfileData({ legalStructureId: undefined }),
+    });
     renderTask(business);
     expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
-    expect(screen.getByText(Config.businessStructureTask.radioQuestionHeader)).toBeInTheDocument();
-    expect(screen.queryByText(Config.businessStructureTask.completedHeader)).not.toBeInTheDocument();
+    expect(
+      screen.getByText(Config.businessStructureTask.radioQuestionHeader)
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.completedHeader)
+    ).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByLabelText("limited-liability-company"));
     fireEvent.click(screen.getByText(Config.businessStructureTask.saveButton));
 
-    expect(currentBusiness().profileData.legalStructureId).toEqual("limited-liability-company");
+    expect(currentBusiness().profileData.legalStructureId).toEqual(
+      "limited-liability-company"
+    );
     const name = LookupLegalStructureById("limited-liability-company").name;
     await waitFor(() => {
       expect(screen.getByTestId("success-alert")).toHaveTextContent(name);
     });
-    expect(screen.queryByLabelText("Business structure")).not.toBeInTheDocument();
-    expect(screen.getByText(Config.businessStructureTask.completedHeader)).toBeInTheDocument();
-    expect(screen.queryByText(Config.businessStructureTask.radioQuestionHeader)).not.toBeInTheDocument();
+    expect(
+      screen.queryByLabelText("Business structure")
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByText(Config.businessStructureTask.completedHeader)
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.radioQuestionHeader)
+    ).not.toBeInTheDocument();
 
-    expect(currentBusiness().profileData.legalStructureId).toEqual("limited-liability-company");
+    expect(currentBusiness().profileData.legalStructureId).toEqual(
+      "limited-liability-company"
+    );
   });
 
   it("allows saving without changes", async () => {
@@ -158,9 +212,13 @@ describe("<BusinessStructureTask />", () => {
     fireEvent.click(screen.getByText(Config.businessStructureTask.saveButton));
 
     await waitFor(() => {
-      expect(screen.getByTestId("success-alert")).toHaveTextContent(legalStructure.name);
+      expect(screen.getByTestId("success-alert")).toHaveTextContent(
+        legalStructure.name
+      );
     });
-    expect(currentBusiness().profileData.legalStructureId).toEqual(legalStructure.id);
+    expect(currentBusiness().profileData.legalStructureId).toEqual(
+      legalStructure.id
+    );
   });
 
   it("task progress remains to-do when editing", async () => {
@@ -178,7 +236,9 @@ describe("<BusinessStructureTask />", () => {
     });
 
     fireEvent.mouseOver(screen.getByTestId("status-info-tooltip"));
-    expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.businessStructureTask.completedTooltip)
+    ).not.toBeInTheDocument();
     await screen.findByText(Config.businessStructureTask.uncompletedTooltip);
   });
 
@@ -239,7 +299,9 @@ describe("<BusinessStructureTask />", () => {
     fireEvent.click(screen.getByLabelText("limited-liability-company"));
     triggerQueueUpdate();
     await waitFor(() => {
-      expect(screen.getByTestId("taskProgress")).toHaveTextContent(Config.taskProgress.TO_DO);
+      expect(screen.getByTestId("taskProgress")).toHaveTextContent(
+        Config.taskProgress.TO_DO
+      );
     });
     await waitFor(() => {
       expect(currentBusiness().taskProgress[taskId]).toEqual("TO_DO");
@@ -253,19 +315,29 @@ describe("<BusinessStructureTask />", () => {
     });
     renderTask(business);
 
-    expect(screen.queryByTestId("business-structure-error")).not.toBeInTheDocument();
-    expect(screen.queryByTestId("business-structure-alert")).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("business-structure-error")
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("business-structure-alert")
+    ).not.toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.businessStructureTask.saveButton));
     await waitFor(() => {
-      expect(screen.getByTestId("business-structure-error")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("business-structure-error")
+      ).toBeInTheDocument();
     });
     expect(screen.getByTestId("business-structure-alert")).toBeInTheDocument();
 
     fireEvent.click(screen.getByLabelText("limited-liability-company"));
     await waitFor(() => {
-      expect(screen.queryByTestId("business-structure-error")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("business-structure-error")
+      ).not.toBeInTheDocument();
     });
-    expect(screen.queryByTestId("business-structure-alert")).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("business-structure-alert")
+    ).not.toBeInTheDocument();
   });
 
   it("updates task to TO_DO when remove button is clicked", async () => {
@@ -279,7 +351,9 @@ describe("<BusinessStructureTask />", () => {
     fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
 
     await waitFor(() => {
-      expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.taskDefaults.removeText)
+      ).not.toBeInTheDocument();
     });
     expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
     expect(currentBusiness().taskProgress[taskId]).toEqual("TO_DO");
@@ -301,7 +375,9 @@ describe("<BusinessStructureTask />", () => {
     fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
 
     await waitFor(() => {
-      expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.taskDefaults.removeText)
+      ).not.toBeInTheDocument();
     });
     expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
     expect(currentBusiness().taskProgress[taskId]).toEqual("TO_DO");

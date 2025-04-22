@@ -8,7 +8,9 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared/";
 
-export const getLicenseStatusResultsFromLicenses = (licenses: Licenses): LicenseStatusResults => {
+export const getLicenseStatusResultsFromLicenses = (
+  licenses: Licenses
+): LicenseStatusResults => {
   const result: LicenseStatusResults = {};
 
   for (const [licenseName, details] of Object.entries(licenses)) {
@@ -22,9 +24,13 @@ export const getLicenseStatusResultsFromLicenses = (licenses: Licenses): License
   return result;
 };
 
-export const licenseDataModifyingFunction = (dbUserData: UserData, currBusinessId: string) => {
+export const licenseDataModifyingFunction = (
+  dbUserData: UserData,
+  currBusinessId: string
+) => {
   return (business: Business): Business => {
-    const licenses = dbUserData?.businesses[currBusinessId]?.licenseData?.licenses || {};
+    const licenses =
+      dbUserData?.businesses[currBusinessId]?.licenseData?.licenses || {};
     const licenseStatusResults = getLicenseStatusResultsFromLicenses(licenses);
 
     return {

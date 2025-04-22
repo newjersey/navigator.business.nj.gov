@@ -11,8 +11,11 @@ import { ReactElement, useContext } from "react";
 
 export const MainBusinessAddressIntl = (): ReactElement => {
   const { Config } = useConfig();
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
-  const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useFormationErrors();
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(
+    BusinessFormationContext
+  );
+  const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } =
+    useFormationErrors();
 
   return (
     <>
@@ -66,9 +69,14 @@ export const MainBusinessAddressIntl = (): ReactElement => {
           </div>
         </div>
       </WithErrorBar>
-      <WithErrorBar hasError={doSomeFieldsHaveError(["addressCountry"])} type="ALWAYS">
+      <WithErrorBar
+        hasError={doSomeFieldsHaveError(["addressCountry"])}
+        type="ALWAYS"
+      >
         <strong>
-          <ModifiedContent>{Config.formation.fields.addressCountry.label}</ModifiedContent>
+          <ModifiedContent>
+            {Config.formation.fields.addressCountry.label}
+          </ModifiedContent>
         </strong>
         <FormationField fieldName="addressCountry">
           <CountryDropdown
@@ -102,7 +110,9 @@ export const MainBusinessAddressIntl = (): ReactElement => {
               errorBarType="ALWAYS"
               required={true}
               fieldName="addressZipCode"
-              validationText={Config.formation.fields.addressZipCode.foreign.errorIntl}
+              validationText={
+                Config.formation.fields.addressZipCode.foreign.errorIntl
+              }
             />
           </FormationField>
         </div>

@@ -15,7 +15,10 @@ import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import analytics from "@/lib/utils/analytics";
 import { setABExperienceDimension } from "@/lib/utils/analytics-helpers";
 import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
-import { ABExperience, decideABExperience } from "@businessnjgovnavigator/shared/";
+import {
+  ABExperience,
+  decideABExperience,
+} from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
@@ -28,12 +31,23 @@ const Home = (): ReactElement => {
   const router = useRouter();
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const sectionHowItWorks = useRef(null);
-  const [fireAnalyticsForSectionHowItWorks, setFireAnalyticsForSectionHowItWorks] = useState(true);
-  const sectionHowItWorksInViewport = useIntersectionOnElement(sectionHowItWorks, "-150px");
+  const [
+    fireAnalyticsForSectionHowItWorks,
+    setFireAnalyticsForSectionHowItWorks,
+  ] = useState(true);
+  const sectionHowItWorksInViewport = useIntersectionOnElement(
+    sectionHowItWorks,
+    "-150px"
+  );
   const sectionLookingForSupport = useRef(null);
-  const [fireAnalyticsForSectionLookingForSupport, setFireAnalyticsForSectionLookingForSupport] =
-    useState(true);
-  const sectionLookingForSupportInViewport = useIntersectionOnElement(sectionLookingForSupport, "-150px");
+  const [
+    fireAnalyticsForSectionLookingForSupport,
+    setFireAnalyticsForSectionLookingForSupport,
+  ] = useState(true);
+  const sectionLookingForSupportInViewport = useIntersectionOnElement(
+    sectionLookingForSupport,
+    "-150px"
+  );
   const config = getMergedConfig();
 
   if (sectionHowItWorksInViewport && fireAnalyticsForSectionHowItWorks) {
@@ -41,7 +55,10 @@ const Home = (): ReactElement => {
     setFireAnalyticsForSectionHowItWorks(false);
   }
 
-  if (sectionLookingForSupportInViewport && fireAnalyticsForSectionLookingForSupport) {
+  if (
+    sectionLookingForSupportInViewport &&
+    fireAnalyticsForSectionLookingForSupport
+  ) {
     analytics.event.landing_page_more_support.scroll.more_support_seen();
     setFireAnalyticsForSectionLookingForSupport(false);
   }
@@ -97,11 +114,19 @@ const Home = (): ReactElement => {
     reverseOrder?: boolean
   ): ReactElement => {
     return (
-      <div className={`${isDesktopAndUp ? "landing-two-column-row" : "landing-one-column-row"}`}>
+      <div
+        className={`${
+          isDesktopAndUp ? "landing-two-column-row" : "landing-one-column-row"
+        }`}
+      >
         <div className="grid-row margin-x-05">
           <div
-            className={`desktop:grid-col ${isDesktopAndUp ? "" : "text-center"} ${
-              reverseOrder && isDesktopAndUp ? "order-last desktop:margin-left-8" : "desktop:margin-right-3"
+            className={`desktop:grid-col ${
+              isDesktopAndUp ? "" : "text-center"
+            } ${
+              reverseOrder && isDesktopAndUp
+                ? "order-last desktop:margin-left-8"
+                : "desktop:margin-right-3"
             }`}
           >
             {isDesktopAndUp ? (
@@ -136,7 +161,11 @@ const Home = (): ReactElement => {
             } margin-top-3 desktop:margin-top-0`}
           >
             {isDesktopAndUp ? (
-              <img src={imageSrc} alt={imageAlt} className="landing-feature-img" />
+              <img
+                src={imageSrc}
+                alt={imageAlt}
+                className="landing-feature-img"
+              />
             ) : (
               <div className="text-base-dark margin-right-2 margin-left-2 margin-bottom-2">
                 {supportingText}
@@ -154,7 +183,10 @@ const Home = (): ReactElement => {
       <PageSkeleton showNavBar landingPage>
         <main data-testid="main">
           <Hero />
-          <section ref={sectionHowItWorks} aria-label={landingPageConfig.section4HeaderText}>
+          <section
+            ref={sectionHowItWorks}
+            aria-label={landingPageConfig.section4HeaderText}
+          >
             <div className="minh-mobile margin-top-2 desktop:margin-top-neg-205  padding-bottom-6 text-center bg-base-extra-light">
               <Heading
                 level={2}
@@ -165,33 +197,54 @@ const Home = (): ReactElement => {
               </Heading>
               <div
                 className={`flex ${
-                  isDesktopAndUp ? "flex-row flex-justify-center" : "flex-column flex-align-center"
+                  isDesktopAndUp
+                    ? "flex-row flex-justify-center"
+                    : "flex-column flex-align-center"
                 } text-accent-cool-darker`}
               >
                 <div className="margin-x-3">
-                  <img className="" src="/img/Landing-documents.svg" alt="" role="presentation" />
+                  <img
+                    className=""
+                    src="/img/Landing-documents.svg"
+                    alt=""
+                    role="presentation"
+                  />
                   <div className="text-accent-cool-darker width-card margin-top-2">
                     {landingPageConfig.section4FirstIconText}
                   </div>
                 </div>
                 <div
                   className={`how-it-works-section-arrow ${
-                    isDesktopAndUp ? "right width-15 height-10" : "down height-5 margin-y-3"
+                    isDesktopAndUp
+                      ? "right width-15 height-10"
+                      : "down height-5 margin-y-3"
                   }`}
                 />
                 <div className="margin-x-3">
-                  <img className="" src="/img/Landing-checkmarks.svg" alt="" role="presentation" />
+                  <img
+                    className=""
+                    src="/img/Landing-checkmarks.svg"
+                    alt=""
+                    role="presentation"
+                  />
                   <div className="text-accent-cool-darker width-card margin-top-2">
                     {landingPageConfig.section4SecondIconText}
                   </div>
                 </div>
                 <div
                   className={`how-it-works-section-arrow ${
-                    isDesktopAndUp ? "left width-15 height-10" : "up height-5 margin-y-3"
+                    isDesktopAndUp
+                      ? "left width-15 height-10"
+                      : "up height-5 margin-y-3"
                   } `}
                 />{" "}
                 <div className="margin-x-3">
-                  <img className="" src="/img/Landing-building.svg" alt="" role="presentation" />
+                  <img
+                    className=""
+                    src="/img/Landing-building.svg"
+                    alt=""
+                    role="presentation"
+                  />
                   <div className="text-accent-cool-darker width-card margin-top-2">
                     {landingPageConfig.section4ThirdIconText}
                   </div>

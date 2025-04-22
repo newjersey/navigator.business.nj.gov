@@ -21,31 +21,103 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: Tax Access Header, name: taxAccessHeader, widget: text }
+              - {
+                  label: Tax Access Header,
+                  name: taxAccessHeader,
+                  widget: text,
+                }
               - {
                   label: Legal Structure Drop Down Header,
                   name: legalStructureDropDownHeader,
                   widget: markdown,
                 }
               - { label: Step 1 Header, name: stepOneHeader, widget: text }
-              - { label: Step 1 Next Button, name: stepOneNextButton, widget: text }
-              - { label: Step 1 Error Banner, name: stepOneErrorBanner, widget: text }
+              - {
+                  label: Step 1 Next Button,
+                  name: stepOneNextButton,
+                  widget: text,
+                }
+              - {
+                  label: Step 1 Error Banner,
+                  name: stepOneErrorBanner,
+                  widget: text,
+                }
               - { label: Step 2 Header, name: stepTwoHeader, widget: text }
-              - { label: Tax Calendar Access Body, name: taxCalendarAccessBody, widget: markdown }
-              - { label: Step 2 Next Button, name: stepTwoNextButton, widget: text }
-              - { label: Step 2 Back Button, name: stepTwoBackButton, widget: text }
-              - { label: Step 2 Cancel Button, name: stepTwoCancelButton, widget: text }
-              - { label: Step 2 Error Banner, name: stepTwoErrorBanner, widget: text }
-              - { label: BusinessName Field Header, name: businessFieldHeader, widget: markdown }
-              - { label: BusinessName Field Error Alert Text, name: businessFieldErrorName, widget: text }
-              - { label: BusinessName Field Text, name: businessFieldMarkdown, widget: markdown }
-              - { label: BusinessName API Failed Helper Text, name: failedBusinessFieldHelper, widget: text }
-              - { label: TaxId Field Header, name: taxIdHeader, widget: markdown }
-              - { label: TaxId Field Text, name: taxIdMarkdown, widget: markdown }
-              - { label: TaxId Field Error Alert Text, name: taxFieldErrorName, widget: text }
-              - { label: TaxId API Failed Helper Text, name: failedTaxIdHelper, widget: text }
-              - { label: Responsible Owner Header, name: businessOwnerName, widget: text }
-              - { label: Responsible Owner Description, name: businessOwnerDescription, widget: text }
+              - {
+                  label: Tax Calendar Access Body,
+                  name: taxCalendarAccessBody,
+                  widget: markdown,
+                }
+              - {
+                  label: Step 2 Next Button,
+                  name: stepTwoNextButton,
+                  widget: text,
+                }
+              - {
+                  label: Step 2 Back Button,
+                  name: stepTwoBackButton,
+                  widget: text,
+                }
+              - {
+                  label: Step 2 Cancel Button,
+                  name: stepTwoCancelButton,
+                  widget: text,
+                }
+              - {
+                  label: Step 2 Error Banner,
+                  name: stepTwoErrorBanner,
+                  widget: text,
+                }
+              - {
+                  label: BusinessName Field Header,
+                  name: businessFieldHeader,
+                  widget: markdown,
+                }
+              - {
+                  label: BusinessName Field Error Alert Text,
+                  name: businessFieldErrorName,
+                  widget: text,
+                }
+              - {
+                  label: BusinessName Field Text,
+                  name: businessFieldMarkdown,
+                  widget: markdown,
+                }
+              - {
+                  label: BusinessName API Failed Helper Text,
+                  name: failedBusinessFieldHelper,
+                  widget: text,
+                }
+              - {
+                  label: TaxId Field Header,
+                  name: taxIdHeader,
+                  widget: markdown,
+                }
+              - {
+                  label: TaxId Field Text,
+                  name: taxIdMarkdown,
+                  widget: markdown,
+                }
+              - {
+                  label: TaxId Field Error Alert Text,
+                  name: taxFieldErrorName,
+                  widget: text,
+                }
+              - {
+                  label: TaxId API Failed Helper Text,
+                  name: failedTaxIdHelper,
+                  widget: text,
+                }
+              - {
+                  label: Responsible Owner Header,
+                  name: businessOwnerName,
+                  widget: text,
+                }
+              - {
+                  label: Responsible Owner Description,
+                  name: businessOwnerDescription,
+                  widget: text,
+                }
               - {
                   label: Responsible Owner Field Error Alert Text,
                   name: responsibleOwnerFieldErrorName,
@@ -56,8 +128,16 @@ collections:
                   name: failedResponsibleOwnerFieldHelper,
                   widget: text,
                 }
-              - { label: Failed Alert Text, name: failedErrorMessageHeader, widget: text }
-              - { label: Unknown Failure Alert Text, name: failedUnknownMarkdown, widget: markdown }
+              - {
+                  label: Failed Alert Text,
+                  name: failedErrorMessageHeader,
+                  widget: text,
+                }
+              - {
+                  label: Unknown Failure Alert Text,
+                  name: failedUnknownMarkdown,
+                  widget: markdown,
+                }
 
   - name: "license-calendar-events"
     label: "Consumer Affairs License Expiration / Renewal Events"
@@ -72,8 +152,18 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "License Name", name: "licenseName", widget: hidden, default: "" }
+      - {
+          label: "Internal Notes",
+          name: "notesMd",
+          widget: "markdown",
+          required: false,
+        }
+      - {
+          label: "License Name",
+          name: "licenseName",
+          widget: hidden,
+          default: "",
+        }
       - {
           label: "URL Slug",
           name: "urlSlug",
@@ -102,8 +192,18 @@ collections:
           required: true,
           default: "You can renew your license 60 days before it expires and up to 30 days after expiration. If you fail to renew your license at this point, your license will be suspended and you won't be able to provide your licensed services.",
         }
-      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown", required: false }
-      - { label: "Below License Status Content", name: "body", widget: "markdown", required: true }
+      - {
+          label: "Summary Description",
+          name: "summaryDescriptionMd",
+          widget: "markdown",
+          required: false,
+        }
+      - {
+          label: "Below License Status Content",
+          name: "body",
+          widget: "markdown",
+          required: true,
+        }
       - {
           label: "Issuing Agency",
           name: "issuingAgency",
@@ -111,8 +211,18 @@ collections:
           required: true,
           default: "Division of Consumer Affairs",
         }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - {
+          label: "Call To Action Link",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Call To Action Text",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+        }
   - name: "filings"
     label: "Taxes Filings - All"
     folder: "content/src/filings"
@@ -124,7 +234,12 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "Internal Notes",
+          name: "notesMd",
+          widget: "markdown",
+          required: false,
+        }
       - {
           label: "Url Slug / Filename",
           name: "urlSlug",
@@ -132,21 +247,61 @@ collections:
           required: true,
         }
       - { label: "Name", name: "name", widget: "string" }
-      - { label: "Extension", name: "extension", widget: "boolean", required: false }
-      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+      - {
+          label: "Extension",
+          name: "extension",
+          widget: "boolean",
+          required: false,
+        }
+      - {
+          label: "Summary Description",
+          name: "summaryDescriptionMd",
+          widget: "markdown",
+        }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Learn More Link", name: "treasuryLink", widget: "string", required: false }
-      - { label: "Tax Rates", name: "taxRates", widget: "markdown", required: false }
+      - {
+          label: "Learn More Link",
+          name: "treasuryLink",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Tax Rates",
+          name: "taxRates",
+          widget: "markdown",
+          required: false,
+        }
       - {
           label: "Filing Method",
           name: "filingMethod",
           widget: "select",
           required: false,
-          options: ["online", "paper-or-by-mail-only", "online-required", "online-or-phone"],
+          options:
+            [
+              "online",
+              "paper-or-by-mail-only",
+              "online-required",
+              "online-or-phone",
+            ],
         }
-      - { label: "Filing Details", name: "filingDetails", widget: "markdown", required: false }
-      - { label: "Frequency", name: "frequency", widget: "markdown", required: false }
-      - { label: "Disposition Content", name: "additionalInfo", widget: "markdown", required: false }
+      - {
+          label: "Filing Details",
+          name: "filingDetails",
+          widget: "markdown",
+          required: false,
+        }
+      - {
+          label: "Frequency",
+          name: "frequency",
+          widget: "markdown",
+          required: false,
+        }
+      - {
+          label: "Disposition Content",
+          name: "additionalInfo",
+          widget: "markdown",
+          required: false,
+        }
       - {
           label: "Agency",
           name: "agency",
@@ -167,5 +322,15 @@ collections:
           hint: "This should be the same as the filename. Content will appear on the filings page.",
           required: true,
         }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - {
+          label: "Call To Action Link",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Call To Action Text",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+        }

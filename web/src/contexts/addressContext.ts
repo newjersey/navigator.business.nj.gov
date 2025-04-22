@@ -1,4 +1,7 @@
-import { emptyFormationAddressData, FormationAddress } from "@businessnjgovnavigator/shared/";
+import {
+  emptyFormationAddressData,
+  FormationAddress,
+} from "@businessnjgovnavigator/shared/";
 import { createContext, Dispatch, SetStateAction } from "react";
 
 interface AddressState {

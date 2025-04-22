@@ -62,7 +62,12 @@ export const getErrorStateForFormationField = (inputParams: {
   foreignGoodStandingFile?: InputFile | undefined;
 }): FormationFieldErrorState => {
   const Config = getMergedConfig();
-  const { field, formationFormData, businessNameAvailability, foreignGoodStandingFile } = inputParams;
+  const {
+    field,
+    formationFormData,
+    businessNameAvailability,
+    foreignGoodStandingFile,
+  } = inputParams;
 
   const errorState = {
     field: field,
@@ -73,14 +78,19 @@ export const getErrorStateForFormationField = (inputParams: {
   if (field === "foreignGoodStandingFile") {
     return {
       ...errorState,
-      label: Config.formation.fields.foreignGoodStandingFile.errorMessageRequired,
+      label:
+        Config.formation.fields.foreignGoodStandingFile.errorMessageRequired,
       hasError: !foreignGoodStandingFile,
     };
   }
 
-  const fieldWithMaxLength = (params: { required: boolean; maxLen: number }): FormationFieldErrorState => {
+  const fieldWithMaxLength = (params: {
+    required: boolean;
+    maxLen: number;
+  }): FormationFieldErrorState => {
     const exists = !!formationFormData[field];
-    const isTooLong = (formationFormData[field] as string)?.length > params.maxLen;
+    const isTooLong =
+      (formationFormData[field] as string)?.length > params.maxLen;
     let label = errorState.label;
     const isValid = params.required ? exists && !isTooLong : !isTooLong;
     if (params.required && !exists) {
@@ -99,7 +109,9 @@ export const getErrorStateForFormationField = (inputParams: {
     label: string;
   }): FormationFieldErrorState => {
     const exists = !!formationFormData[field];
-    const anAssociatedFieldExists = params.associatedFields.some((it) => !!formationFormData[it]);
+    const anAssociatedFieldExists = params.associatedFields.some(
+      (it) => !!formationFormData[it]
+    );
 
     let label = errorState.label;
     let isValid = true;
@@ -116,7 +128,10 @@ export const getErrorStateForFormationField = (inputParams: {
     firstPriority: FormationFieldErrorState;
     secondPriority: FormationFieldErrorState;
   }): FormationFieldErrorState => {
-    let finalState: FormationFieldErrorState = { ...errorState, hasError: false };
+    let finalState: FormationFieldErrorState = {
+      ...errorState,
+      hasError: false,
+    };
 
     if (params.secondPriority.hasError) {
       finalState = params.secondPriority;
@@ -168,7 +183,10 @@ export const getErrorStateForFormationField = (inputParams: {
   if (field === "businessStartDate") {
     return {
       ...errorState,
-      hasError: !isBusinessStartDateValid(formationFormData.businessStartDate, formationFormData.legalType),
+      hasError: !isBusinessStartDateValid(
+        formationFormData.businessStartDate,
+        formationFormData.legalType
+      ),
     };
   }
 
@@ -183,30 +201,43 @@ export const getErrorStateForFormationField = (inputParams: {
   if (["signers", "incorporators"].includes(field)) {
     const newField = field as "signers" | "incorporators";
     const SIGNER_NAME_MAX_LEN = 50;
-    const someSignersMissingName = formationFormData[newField]?.some((signer) => {
-      return !signer.name.trim();
-    });
+    const someSignersMissingName = formationFormData[newField]?.some(
+      (signer) => {
+        return !signer.name.trim();
+      }
+    );
 
-    const someSignersMissingCheckbox = formationFormData[newField]?.some((signer) => {
-      return !signer.signature;
-    });
+    const someSignersMissingCheckbox = formationFormData[newField]?.some(
+      (signer) => {
+        return !signer.signature;
+      }
+    );
 
-    const someSignersMissingTitle = formationFormData[newField]?.some((signer) => {
-      return !signer.title;
-    });
+    const someSignersMissingTitle = formationFormData[newField]?.some(
+      (signer) => {
+        return !signer.title;
+      }
+    );
 
     const someSignersTooLong = formationFormData[newField]?.some((signer) => {
       return signer.name.length > SIGNER_NAME_MAX_LEN;
     });
 
-    if (!formationFormData[newField] || formationFormData[newField]?.length === 0) {
+    if (
+      !formationFormData[newField] ||
+      formationFormData[newField]?.length === 0
+    ) {
       return {
         ...errorState,
         hasError: true,
         label: Config.formation.fields.signers.errorBannerMinimum,
       };
     } else if (someSignersMissingName) {
-      return { ...errorState, hasError: true, label: Config.formation.fields.signers.errorBannerSignerName };
+      return {
+        ...errorState,
+        hasError: true,
+        label: Config.formation.fields.signers.errorBannerSignerName,
+      };
     } else if (someSignersMissingTitle) {
       return {
         ...errorState,
@@ -233,7 +264,10 @@ export const getErrorStateForFormationField = (inputParams: {
 
   if (field === "members") {
     const minimumLength = formationFormData.legalType === "nonprofit" ? 3 : 1;
-    if (!formationFormData.members || formationFormData.members?.length < minimumLength) {
+    if (
+      !formationFormData.members ||
+      formationFormData.members?.length < minimumLength
+    ) {
       return {
         ...errorState,
         hasError: true,
@@ -279,7 +313,11 @@ export const getErrorStateForFormationField = (inputParams: {
           break;
       }
       const isValid = exists && inRange;
-      return { ...errorState, hasError: !isValid, label: Config.formation.fields.addressZipCode.error };
+      return {
+        ...errorState,
+        hasError: !isValid,
+        label: Config.formation.fields.addressZipCode.error,
+      };
     }
 
     const partialAddressError = fieldWithAssociatedFields({
@@ -294,21 +332,37 @@ export const getErrorStateForFormationField = (inputParams: {
       hasError: hasError,
       label: Config.formation.fields.addressZipCode.error,
     };
-    return combineErrorStates({ firstPriority: inRangeError, secondPriority: partialAddressError });
+    return combineErrorStates({
+      firstPriority: inRangeError,
+      secondPriority: partialAddressError,
+    });
   }
 
   if (field === "addressLine1") {
     if (isForeignUser()) {
-      return fieldWithMaxLength({ required: true, maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR });
+      return fieldWithMaxLength({
+        required: true,
+        maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+      });
     }
 
-    const maxLengthError = fieldWithMaxLength({ required: false, maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR });
+    const maxLengthError = fieldWithMaxLength({
+      required: false,
+      maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+    });
     const partialAddressError = fieldWithAssociatedFields({
-      associatedFields: ["addressMunicipality", "addressZipCode", "addressLine2"],
+      associatedFields: [
+        "addressMunicipality",
+        "addressZipCode",
+        "addressLine2",
+      ],
       label: (Config.formation.fields as any)[field].error,
     });
 
-    return combineErrorStates({ firstPriority: maxLengthError, secondPriority: partialAddressError });
+    return combineErrorStates({
+      firstPriority: maxLengthError,
+      secondPriority: partialAddressError,
+    });
   }
 
   if (field === "addressMunicipality") {
@@ -343,7 +397,10 @@ export const getErrorStateForFormationField = (inputParams: {
   }
 
   if (field === "addressLine2") {
-    return fieldWithMaxLength({ required: false, maxLen: BUSINESS_ADDRESS_LINE_2_MAX_CHAR });
+    return fieldWithMaxLength({
+      required: false,
+      maxLen: BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
+    });
   }
 
   if (field === "agentOfficeAddressLine2") {

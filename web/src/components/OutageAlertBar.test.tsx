@@ -95,7 +95,9 @@ describe("<OutageAlertBar />", () => {
       });
       render(<OutageAlertBar />);
       await waitFor(() => {
-        expect(screen.queryByTestId("outage-alert-bar")).not.toBeInTheDocument();
+        expect(
+          screen.queryByTestId("outage-alert-bar")
+        ).not.toBeInTheDocument();
       });
     });
 
@@ -110,21 +112,33 @@ describe("<OutageAlertBar />", () => {
       });
 
       it("shows alert bar for logged-in users", async () => {
-        render(withAuth(<OutageAlertBar />, { isAuthenticated: IsAuthenticated.TRUE }));
+        render(
+          withAuth(<OutageAlertBar />, {
+            isAuthenticated: IsAuthenticated.TRUE,
+          })
+        );
         await waitFor(() => {
           expect(screen.getByTestId("outage-alert-bar")).toBeInTheDocument();
         });
       });
 
       it("shows alert bar for non-logged-in users", async () => {
-        render(withAuth(<OutageAlertBar />, { isAuthenticated: IsAuthenticated.FALSE }));
+        render(
+          withAuth(<OutageAlertBar />, {
+            isAuthenticated: IsAuthenticated.FALSE,
+          })
+        );
         await waitFor(() => {
           expect(screen.getByTestId("outage-alert-bar")).toBeInTheDocument();
         });
       });
 
       it("shows alert bar for unknown-logged-in users", async () => {
-        render(withAuth(<OutageAlertBar />, { isAuthenticated: IsAuthenticated.UNKNOWN }));
+        render(
+          withAuth(<OutageAlertBar />, {
+            isAuthenticated: IsAuthenticated.UNKNOWN,
+          })
+        );
         await waitFor(() => {
           expect(screen.getByTestId("outage-alert-bar")).toBeInTheDocument();
         });
@@ -142,23 +156,39 @@ describe("<OutageAlertBar />", () => {
       });
 
       it("shows alert bar for logged-in users", async () => {
-        render(withAuth(<OutageAlertBar />, { isAuthenticated: IsAuthenticated.TRUE }));
+        render(
+          withAuth(<OutageAlertBar />, {
+            isAuthenticated: IsAuthenticated.TRUE,
+          })
+        );
         await waitFor(() => {
           expect(screen.getByTestId("outage-alert-bar")).toBeInTheDocument();
         });
       });
 
       it("does not show alert bar for non-logged-in users", async () => {
-        render(withAuth(<OutageAlertBar />, { isAuthenticated: IsAuthenticated.FALSE }));
+        render(
+          withAuth(<OutageAlertBar />, {
+            isAuthenticated: IsAuthenticated.FALSE,
+          })
+        );
         await waitFor(() => {
-          expect(screen.queryByTestId("outage-alert-bar")).not.toBeInTheDocument();
+          expect(
+            screen.queryByTestId("outage-alert-bar")
+          ).not.toBeInTheDocument();
         });
       });
 
       it("does not show alert bar for unknown-logged-in users", async () => {
-        render(withAuth(<OutageAlertBar />, { isAuthenticated: IsAuthenticated.UNKNOWN }));
+        render(
+          withAuth(<OutageAlertBar />, {
+            isAuthenticated: IsAuthenticated.UNKNOWN,
+          })
+        );
         await waitFor(() => {
-          expect(screen.queryByTestId("outage-alert-bar")).not.toBeInTheDocument();
+          expect(
+            screen.queryByTestId("outage-alert-bar")
+          ).not.toBeInTheDocument();
         });
       });
     });
@@ -174,23 +204,39 @@ describe("<OutageAlertBar />", () => {
       });
 
       it("does not show alert bar for logged-in users", async () => {
-        render(withAuth(<OutageAlertBar />, { isAuthenticated: IsAuthenticated.TRUE }));
+        render(
+          withAuth(<OutageAlertBar />, {
+            isAuthenticated: IsAuthenticated.TRUE,
+          })
+        );
         await waitFor(() => {
-          expect(screen.queryByTestId("outage-alert-bar")).not.toBeInTheDocument();
+          expect(
+            screen.queryByTestId("outage-alert-bar")
+          ).not.toBeInTheDocument();
         });
       });
 
       it("shows alert bar for non-logged-in users", async () => {
-        render(withAuth(<OutageAlertBar />, { isAuthenticated: IsAuthenticated.FALSE }));
+        render(
+          withAuth(<OutageAlertBar />, {
+            isAuthenticated: IsAuthenticated.FALSE,
+          })
+        );
         await waitFor(() => {
           expect(screen.getByTestId("outage-alert-bar")).toBeInTheDocument();
         });
       });
 
       it("does not show alert bar for unknown-logged-in users", async () => {
-        render(withAuth(<OutageAlertBar />, { isAuthenticated: IsAuthenticated.UNKNOWN }));
+        render(
+          withAuth(<OutageAlertBar />, {
+            isAuthenticated: IsAuthenticated.UNKNOWN,
+          })
+        );
         await waitFor(() => {
-          expect(screen.queryByTestId("outage-alert-bar")).not.toBeInTheDocument();
+          expect(
+            screen.queryByTestId("outage-alert-bar")
+          ).not.toBeInTheDocument();
         });
       });
     });

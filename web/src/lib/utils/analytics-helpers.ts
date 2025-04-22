@@ -1,6 +1,9 @@
 /* eslint-disable no-prototype-builtins */
 import { getEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
-import analytics, { DimensionQueueFactory, Questions } from "@/lib/utils/analytics";
+import analytics, {
+  DimensionQueueFactory,
+  Questions,
+} from "@/lib/utils/analytics";
 import { camelCaseToSnakeCase } from "@/lib/utils/cases-helpers";
 import {
   ABExperience,
@@ -15,7 +18,11 @@ import {
   getCurrentBusiness,
 } from "@businessnjgovnavigator/shared";
 
-type RegistrationProgress = "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";
+type RegistrationProgress =
+  | "Not Started"
+  | "Began Onboarding"
+  | "Onboarded Guest"
+  | "Fully Registered";
 
 export const setOnLoadDimensions = (userData: UserData): void => {
   setAnalyticsDimensions(getCurrentBusiness(userData).profileData, true);
@@ -32,20 +39,32 @@ export const setRegistrationDimension = (
   return updateQueue;
 };
 
-export const setABExperienceDimension = (value: ABExperience, queue = false): DimensionQueueFactory => {
+export const setABExperienceDimension = (
+  value: ABExperience,
+  queue = false
+): DimensionQueueFactory => {
   const updateQueue = analytics.dimensions.abExperience(value);
   !queue && updateQueue.update();
   return updateQueue;
 };
 
-export const setPhaseDimension = (value: OperatingPhaseId, queue = false): DimensionQueueFactory => {
+export const setPhaseDimension = (
+  value: OperatingPhaseId,
+  queue = false
+): DimensionQueueFactory => {
   const phase = LookupOperatingPhaseById(value);
-  const updateQueue = analytics.dimensions.phase(getPhaseDimension(value), phase.displayCalendarType);
+  const updateQueue = analytics.dimensions.phase(
+    getPhaseDimension(value),
+    phase.displayCalendarType
+  );
   !queue && updateQueue.update();
   return updateQueue;
 };
 
-export const setUserId = (user_id: string, queue = false): DimensionQueueFactory => {
+export const setUserId = (
+  user_id: string,
+  queue = false
+): DimensionQueueFactory => {
   const updateQueue = analytics.dimensions.userId(user_id);
   !queue && updateQueue.update();
   return updateQueue;
@@ -64,7 +83,8 @@ export const phaseChangeAnalytics = ({
     return;
   } else if (
     (oldProfileData.operatingPhase === OperatingPhaseId.NEEDS_TO_FORM ||
-      oldProfileData.operatingPhase === OperatingPhaseId.NEEDS_BUSINESS_STRUCTURE) &&
+      oldProfileData.operatingPhase ===
+        OperatingPhaseId.NEEDS_BUSINESS_STRUCTURE) &&
     newProfileData.operatingPhase === OperatingPhaseId.FORMED
   ) {
     analytics.event.roadmap_dashboard.arrive.progress_to_formed_phase();
@@ -76,16 +96,23 @@ export const phaseChangeAnalytics = ({
   }
 };
 
-export const setAnalyticsDimensions = (profileData: ProfileData, queue = false): void => {
+export const setAnalyticsDimensions = (
+  profileData: ProfileData,
+  queue = false
+): void => {
   analytics.dimensions.industry(profileData.industryId);
   analytics.dimensions.municipality(profileData.municipality?.displayName);
   analytics.dimensions.legalStructure(profileData.legalStructureId);
   analytics.dimensions.homeBasedBusiness(profileData.homeBasedBusiness);
-  analytics.dimensions.persona(getPersonaDimension(profileData.businessPersona));
+  analytics.dimensions.persona(
+    getPersonaDimension(profileData.businessPersona)
+  );
   analytics.dimensions.naicsCode(profileData.naicsCode);
   setPhaseDimension(profileData.operatingPhase, true);
   analytics.dimensions.subPersona(
-    getSubPersonaDimension(determineForeignBusinessType(profileData.foreignBusinessTypeIds))
+    getSubPersonaDimension(
+      determineForeignBusinessType(profileData.foreignBusinessTypeIds)
+    )
   );
   !queue && analytics.dimensions.update();
 };
@@ -138,7 +165,9 @@ const getSubPersonaDimension = (type: ForeignBusinessType): string => {
 };
 const sendEssentialQuestionEvents = (newProfileData: ProfileData): void => {
   const questions = getEssentialQuestion(newProfileData.industryId);
-  const questionResponseMap: Partial<Record<keyof IndustrySpecificData, keyof Questions>> = {
+  const questionResponseMap: Partial<
+    Record<keyof IndustrySpecificData, keyof Questions>
+  > = {
     cannabisLicenseType: "cannabis_license_type",
     liquorLicense: "require_liquor_license",
     carService: "car_service_size",
@@ -171,7 +200,10 @@ const sendEssentialQuestionEvents = (newProfileData: ProfileData): void => {
     } else if (question.fieldName === "cannabisLicenseType") {
       eventQuestions = {
         ...eventQuestions,
-        [questionName]: newProfileData[question.fieldName] === "CONDITIONAL" ? "conditional" : "annual",
+        [questionName]:
+          newProfileData[question.fieldName] === "CONDITIONAL"
+            ? "conditional"
+            : "annual",
       };
     } else if (question.fieldName === "carService") {
       eventQuestions = {
@@ -193,7 +225,10 @@ const sendEssentialQuestionEvents = (newProfileData: ProfileData): void => {
   });
 };
 
-export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageName?: string): void => {
+export const sendOnboardingOnSubmitEvents = (
+  newProfileData: ProfileData,
+  pageName?: string
+): void => {
   if (pageName === "industry-page" && newProfileData.industryId) {
     sendEssentialQuestionEvents(newProfileData);
   }

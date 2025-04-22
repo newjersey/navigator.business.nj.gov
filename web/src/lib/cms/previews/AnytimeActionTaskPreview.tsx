@@ -10,7 +10,11 @@ const AnytimeActionTaskPreview = (props: PreviewProps): ReactElement => {
   const anytimeAction = usePageData<AnytimeActionTask>(props);
 
   return (
-    <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+    <div
+      className="cms"
+      ref={ref}
+      style={{ margin: 40, pointerEvents: "none" }}
+    >
       <AnytimeActionSwitchComponent anytimeActionTask={anytimeAction} />
     </div>
   );

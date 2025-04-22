@@ -16,7 +16,14 @@ import {
   NameAvailability,
 } from "@businessnjgovnavigator/shared/";
 import { TextField } from "@mui/material";
-import { FormEvent, ReactElement, useCallback, useContext, useEffect, useRef } from "react";
+import {
+  FormEvent,
+  ReactElement,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 
 type SearchBusinessNameFormConfig = {
   searchButtonText: string;
@@ -60,13 +67,16 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     setFieldsInteracted,
   } = useContext(BusinessFormationContext);
 
-  const setNameAvailability = props.isDba ? setDbaBusinessNameAvailability : setBusinessNameAvailability;
+  const setNameAvailability = props.isDba
+    ? setDbaBusinessNameAvailability
+    : setBusinessNameAvailability;
 
   const FIELD_NAME = "businessName";
-  const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
-    BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
-    SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
-  };
+  const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> =
+    {
+      BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
+      SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
+    };
 
   const emptyNameAvailability: NameAvailability = {
     similarNames: [],
@@ -81,7 +91,9 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     nameAvailability: NameAvailability,
     submittedName: string
   ): void => {
-    const validName = ["AVAILABLE", "UNAVAILABLE"].includes(nameAvailability.status ?? "");
+    const validName = ["AVAILABLE", "UNAVAILABLE"].includes(
+      nameAvailability.status ?? ""
+    );
     if (!updateQueue || !validName) return;
 
     setFieldsInteracted([FIELD_NAME]);
@@ -167,7 +179,8 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     (function showBusinessNameSearchResultsIfDBANameExists(): void {
       if (!business) return;
       if (props.isDba) return;
-      const shouldDoInitialSearch = currentName.length > 0 && determineIfNexusDbaNameNeeded(business);
+      const shouldDoInitialSearch =
+        currentName.length > 0 && determineIfNexusDbaNameNeeded(business);
       if (shouldDoInitialSearch && !didInitialSearch.current) {
         didInitialSearch.current = true;
         doSearch(undefined, { isInitialSubmit: true });
@@ -209,7 +222,8 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
                     }}
                     variant="outlined"
                     inputProps={{
-                      "aria-label": props.config.inputLabel ?? "Search business name",
+                      "aria-label":
+                        props.config.inputLabel ?? "Search business name",
                     }}
                   />
                 </div>
@@ -231,7 +245,10 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
             </div>
           </form>
           {error === "BAD_INPUT" && (
-            <div data-testid={`error-alert-${error}`} className="text-error-dark">
+            <div
+              data-testid={`error-alert-${error}`}
+              className="text-error-dark"
+            >
               {SearchBusinessNameErrorLookup[error]}
             </div>
           )}
@@ -239,29 +256,40 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
       )}
       <div className="margin-top-2">
         {props.nameAvailability?.status === "AVAILABLE" && (
-          <Available submittedName={props.businessName} updateButtonClicked={updateButtonClicked} />
+          <Available
+            submittedName={props.businessName}
+            updateButtonClicked={updateButtonClicked}
+          />
         )}
         {props.nameAvailability?.status === "DESIGNATOR_ERROR" && (
           <Alert variant="error" dataTestid="designator-error-text">
-            <p className="font-sans-xs">{Config.searchBusinessNameTask.designatorText}</p>
+            <p className="font-sans-xs">
+              {Config.searchBusinessNameTask.designatorText}
+            </p>
           </Alert>
         )}
         {props.nameAvailability?.status === "SPECIAL_CHARACTER_ERROR" && (
           <Alert variant="error" dataTestid="special-character-error-text">
             <Content className="font-sans-xs">
-              {templateEval(Config.formation.fields.businessName.alertSpecialCharacters, {
-                name: props.businessName,
-              })}
+              {templateEval(
+                Config.formation.fields.businessName.alertSpecialCharacters,
+                {
+                  name: props.businessName,
+                }
+              )}
             </Content>
           </Alert>
         )}
         {props.nameAvailability?.status === "RESTRICTED_ERROR" && (
           <Alert variant="error" dataTestid="restricted-word-error-text">
             <Content className="font-sans-xs">
-              {templateEval(Config.formation.fields.businessName.alertRestrictedWord, {
-                name: currentName,
-                word: props.nameAvailability.invalidWord ?? "*unknown*",
-              })}
+              {templateEval(
+                Config.formation.fields.businessName.alertRestrictedWord,
+                {
+                  name: currentName,
+                  word: props.nameAvailability.invalidWord ?? "*unknown*",
+                }
+              )}
             </Content>
           </Alert>
         )}

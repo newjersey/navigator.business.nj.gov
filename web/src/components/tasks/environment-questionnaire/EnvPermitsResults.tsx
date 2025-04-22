@@ -25,7 +25,8 @@ export const EnvPermitsResults = (props: Props): ReactElement => {
 
   const Config = getMergedConfig();
 
-  const questionnaireData = business?.environmentData?.[props.mediaArea]?.questionnaireData;
+  const questionnaireData =
+    business?.environmentData?.[props.mediaArea]?.questionnaireData;
 
   const responseTexts = (): string[] => {
     if (!questionnaireData) return [];
@@ -58,7 +59,11 @@ export const EnvPermitsResults = (props: Props): ReactElement => {
   };
 
   const isLowApplicability = (): boolean => {
-    return questionnaireData?.[props.noSelectionOption as keyof typeof questionnaireData] ?? false;
+    return (
+      questionnaireData?.[
+        props.noSelectionOption as keyof typeof questionnaireData
+      ] ?? false
+    );
   };
 
   const highApplicability = (): ReactElement => {
@@ -86,13 +91,24 @@ export const EnvPermitsResults = (props: Props): ReactElement => {
             <span className={"text-bold margin-bottom-1"}>
               {Config.envResultsPage.lowApplicability.summaryLineOne}
             </span>
-            <Content>{Config.envResultsPage.lowApplicability.summaryLineTwo}</Content>
+            <Content>
+              {Config.envResultsPage.lowApplicability.summaryLineTwo}
+            </Content>
           </div>
         </div>
-        <Callout calloutType={"note"} showIcon showHeader={false} showIconInBody={true}>
+        <Callout
+          calloutType={"note"}
+          showIcon
+          showHeader={false}
+          showIconInBody={true}
+        >
           <span>
             {Config.envResultsPage.lowApplicability.callout}
-            <UnStyledButton className={"margin-left-05"} isUnderline onClick={onClick}>
+            <UnStyledButton
+              className={"margin-left-05"}
+              isUnderline
+              onClick={onClick}
+            >
               {Config.envResultsPage.lowApplicability.calloutRedo}
             </UnStyledButton>
           </span>
@@ -105,7 +121,9 @@ export const EnvPermitsResults = (props: Props): ReactElement => {
     <>
       <h2>{Config.envResultsPage.title}</h2>
       <Alert variant={"success"}>
-        <span className={"margin-right-05"}>{Config.envResultsPage.editInfo}</span>
+        <span className={"margin-right-05"}>
+          {Config.envResultsPage.editInfo}
+        </span>
         <UnStyledButton isUnderline onClick={onClick}>
           {Config.envResultsPage.editText}
         </UnStyledButton>

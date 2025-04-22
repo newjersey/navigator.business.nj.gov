@@ -1,4 +1,7 @@
-import { GenericButton, GenericButtonProps } from "@/components/njwds-extended/GenericButton";
+import {
+  GenericButton,
+  GenericButtonProps,
+} from "@/components/njwds-extended/GenericButton";
 import { ReactElement } from "react";
 
 type OmitGenericButtonProps = Omit<
@@ -30,6 +33,10 @@ const colors = {
 export const SecondaryButton = (props: Props): ReactElement => {
   const classNames = `${colors[props.isColor]} ${props.className}`;
   return (
-    <GenericButton {...props} isVerticalPaddingRemoved={props.size === "small"} className={classNames} />
+    <GenericButton
+      {...props}
+      isVerticalPaddingRemoved={props.size === "small"}
+      className={classNames}
+    />
   );
 };

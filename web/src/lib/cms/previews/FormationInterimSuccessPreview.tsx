@@ -13,7 +13,10 @@ const FormationInterimSuccessPreview = (props: PreviewProps): ReactElement => {
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40 }}>
         <div className="flex flex-column min-height-38rem">
-          <FormationInterimSuccessPage taskUrlSlug="" setStepIndex={(): void => {}} />
+          <FormationInterimSuccessPage
+            taskUrlSlug=""
+            setStepIndex={(): void => {}}
+          />
         </div>
       </div>
     </ConfigContext.Provider>

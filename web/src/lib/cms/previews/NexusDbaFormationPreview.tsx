@@ -15,19 +15,29 @@ const NexusDbaFormationPreview = (props: PreviewProps): ReactElement => {
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+      <div
+        className="cms"
+        ref={ref}
+        style={{ margin: 40, pointerEvents: "none" }}
+      >
         <div ref={ref} style={{ pointerEvents: "all" }}>
           <Heading level={2}>CTA Modal</Heading>
-          <button onClick={(): void => setModalOpen(true)}>Open CTA Modal</button>
+          <button onClick={(): void => setModalOpen(true)}>
+            Open CTA Modal
+          </button>
         </div>
 
         <ModalTwoButton
           isOpen={modalOpen}
           close={(): void => setModalOpen(false)}
           title={config.DbaFormationTask.dbaCtaModalHeader}
-          primaryButtonText={config.DbaFormationTask.dbaCtaModalContinueButtonText}
+          primaryButtonText={
+            config.DbaFormationTask.dbaCtaModalContinueButtonText
+          }
           primaryButtonOnClick={(): void => setModalOpen(false)}
-          secondaryButtonText={config.DbaFormationTask.dbaCtaModalCancelButtonText}
+          secondaryButtonText={
+            config.DbaFormationTask.dbaCtaModalCancelButtonText
+          }
         >
           <Content>{config.DbaFormationTask.dbaCtaModalBody}</Content>
         </ModalTwoButton>

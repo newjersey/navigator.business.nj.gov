@@ -19,7 +19,9 @@ describe("Automated Accessibilty Testing [feature] [all] [group1]", () => {
         },
       });
 
-      onOnboardingPageStartingBusiness.getBusinessPersonaRadio("STARTING").should("be.checked");
+      onOnboardingPageStartingBusiness
+        .getBusinessPersonaRadio("STARTING")
+        .should("be.checked");
       onOnboardingPageStartingBusiness.clickNext();
 
       cy.url().should("include", "onboarding?page=2");
@@ -60,7 +62,9 @@ describe("Automated Accessibilty Testing [feature] [all] [group1]", () => {
         },
       });
 
-      onOnboardingPageStartingBusiness.getBusinessPersonaRadio("STARTING").should("be.checked");
+      onOnboardingPageStartingBusiness
+        .getBusinessPersonaRadio("STARTING")
+        .should("be.checked");
       onOnboardingPageStartingBusiness.clickNext();
 
       cy.url().should("include", "onboarding?page=2");

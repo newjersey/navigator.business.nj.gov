@@ -27,7 +27,9 @@ export const UnlockingAlert = (props: Props): ReactElement => {
           <>{Config.taskDefaults.loadingTaskDependencies}</>
         ) : (
           <>
-            {props.taskLinks.length === 1 ? props.singularText : props.pluralText}{" "}
+            {props.taskLinks.length === 1
+              ? props.singularText
+              : props.pluralText}{" "}
             {props.taskLinks.map((taskLink, index) => {
               return (
                 <span key={taskLink.urlSlug}>

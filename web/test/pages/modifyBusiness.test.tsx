@@ -9,7 +9,8 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("modify business page", () => {
-  const ORIGINAL_FEATURE_MODIFY_BUSINESS_PAGE = process.env.FEATURE_MODIFY_BUSINESS_PAGE;
+  const ORIGINAL_FEATURE_MODIFY_BUSINESS_PAGE =
+    process.env.FEATURE_MODIFY_BUSINESS_PAGE;
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -18,7 +19,8 @@ describe("modify business page", () => {
   });
 
   afterEach(() => {
-    process.env.FEATURE_MODIFY_BUSINESS_PAGE = ORIGINAL_FEATURE_MODIFY_BUSINESS_PAGE;
+    process.env.FEATURE_MODIFY_BUSINESS_PAGE =
+      ORIGINAL_FEATURE_MODIFY_BUSINESS_PAGE;
   });
 
   it("redirects to dashbaord when FEATURE_MODIFY_BUSINESS_PAGE is false", async () => {

@@ -34,13 +34,22 @@ const STATUS_TAB_INDEX = 1;
 
 export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
-  const callToActionLink = getModifiedTaskContent(roadmap, props.task, "callToActionLink");
+  const callToActionLink = getModifiedTaskContent(
+    roadmap,
+    props.task,
+    "callToActionLink"
+  );
   const [tabIndex, setTabIndex] = useState(APPLICATION_TAB_INDEX);
-  const [error, setError] = useState<HotelMotelRegistrationSearchError | undefined>(undefined);
-  const [housingAddress, setHousingAddress] = useState<HousingAddress | undefined>(undefined);
-  const [housingRegistrationLookupSummary, setHousingRegistrationLookupSummary] = useState<
-    HousingRegistrationRequestLookupResponse | undefined
+  const [error, setError] = useState<
+    HotelMotelRegistrationSearchError | undefined
   >(undefined);
+  const [housingAddress, setHousingAddress] = useState<
+    HousingAddress | undefined
+  >(undefined);
+  const [
+    housingRegistrationLookupSummary,
+    setHousingRegistrationLookupSummary,
+  ] = useState<HousingRegistrationRequestLookupResponse | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { municipalities } = useContext(HousingMunicipalitiesContext);
   const { Config } = useConfig();
@@ -63,7 +72,11 @@ export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
     if (address?.address1 && address?.municipalityExternalId) {
       setIsLoading(true);
       api
-        .checkHousingRegistrationStatus(address.address1, address.municipalityExternalId, "hotelMotel")
+        .checkHousingRegistrationStatus(
+          address.address1,
+          address.municipalityExternalId,
+          "hotelMotel"
+        )
         .then((result) => {
           if (result.lookupStatus === "NO PROPERTY INTERESTS FOUND") {
             setError("NO_PROPERTY_INTEREST_FOUND");
@@ -97,7 +110,9 @@ export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
   };
 
   return (
-    <NeedsAccountModalWrapper CMS_ONLY_disable_overlay={props.CMS_ONLY_disable_overlay}>
+    <NeedsAccountModalWrapper
+      CMS_ONLY_disable_overlay={props.CMS_ONLY_disable_overlay}
+    >
       <div className="flex flex-column">
         <TaskHeader task={props.task} />
         <Box sx={{ width: "100%" }}>
@@ -106,18 +121,27 @@ export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
               <TabList
                 onChange={onSelectTab}
                 aria-label="Hotel, Motel, and Guest House Registration task"
-                sx={{ borderBottom: 1, borderColor: "divider", marginTop: ".25rem", marginLeft: ".5rem" }}
+                sx={{
+                  borderBottom: 1,
+                  borderColor: "divider",
+                  marginTop: ".25rem",
+                  marginLeft: ".5rem",
+                }}
               >
                 <Tab
                   value="0"
                   sx={tabStyle}
-                  label={Config.housingRegistrationSearchTask.registrationTab1Text}
+                  label={
+                    Config.housingRegistrationSearchTask.registrationTab1Text
+                  }
                   data-testid={"start-application-tab"}
                 />
                 <Tab
                   value="1"
                   sx={tabStyle}
-                  label={Config.housingRegistrationSearchTask.registrationTab2Text}
+                  label={
+                    Config.housingRegistrationSearchTask.registrationTab2Text
+                  }
                   data-testid={"check-status-tab"}
                 />
               </TabList>
@@ -126,7 +150,9 @@ export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
               <div className="margin-top-3">
                 <UnlockedBy task={props.task} />
                 <Content>{props.task.summaryDescriptionMd || ""}</Content>
-                <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
+                <Content>
+                  {getModifiedTaskContent(roadmap, props.task, "contentMd")}
+                </Content>
               </div>
 
               <CtaContainer>
@@ -139,7 +165,10 @@ export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
                       }}
                       dataTestId="cta-secondary"
                     >
-                      {Config.housingRegistrationSearchTask.registrationCallToActionSecondaryText}
+                      {
+                        Config.housingRegistrationSearchTask
+                          .registrationCallToActionSecondaryText
+                      }
                     </SecondaryButton>
                   </div>
                   <PrimaryButton
@@ -149,8 +178,14 @@ export const HotelMotelRegistrationTask = (props: Props): ReactElement => {
                     }}
                     isRightMarginRemoved
                   >
-                    {Config.housingRegistrationSearchTask.registrationCallToActionPrimaryText}
-                    <Icon iconName="launch" className="usa-icon-button-margin" />
+                    {
+                      Config.housingRegistrationSearchTask
+                        .registrationCallToActionPrimaryText
+                    }
+                    <Icon
+                      iconName="launch"
+                      className="usa-icon-button-margin"
+                    />
                   </PrimaryButton>
                 </ActionBarLayout>
               </CtaContainer>

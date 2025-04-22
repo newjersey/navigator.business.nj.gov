@@ -7,14 +7,17 @@ import { ReactElement, useContext } from "react";
 
 export const FormationChooseNotifications = (): ReactElement => {
   const { Config } = useConfig();
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(
+    BusinessFormationContext
+  );
 
   const handleAnnualReportClick = (): void => {
     setFieldsInteracted(["annualReportNotification"]);
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        annualReportNotification: !state.formationFormData.annualReportNotification,
+        annualReportNotification:
+          !state.formationFormData.annualReportNotification,
       };
     });
   };
@@ -43,7 +46,11 @@ export const FormationChooseNotifications = (): ReactElement => {
               checked={state.formationFormData.annualReportNotification}
             />
           }
-          label={<Content>{Config.formation.fields.annualReportNotification.checkboxText}</Content>}
+          label={
+            <Content>
+              {Config.formation.fields.annualReportNotification.checkboxText}
+            </Content>
+          }
         />
         <FormControlLabel
           control={
@@ -52,7 +59,11 @@ export const FormationChooseNotifications = (): ReactElement => {
               checked={state.formationFormData.corpWatchNotification}
             />
           }
-          label={<Content>{Config.formation.fields.corpWatchNotification.checkboxText}</Content>}
+          label={
+            <Content>
+              {Config.formation.fields.corpWatchNotification.checkboxText}
+            </Content>
+          }
         />
       </FormGroup>
     </div>

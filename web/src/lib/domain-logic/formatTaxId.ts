@@ -12,5 +12,8 @@ export const formatTaxId = (taxId: string): string => {
   if (length < 10) {
     return `${taxId.slice(0, 3)}-${taxId.slice(3, 6)}-${taxId.slice(6)}`;
   }
-  return `${taxId.slice(0, 3)}-${taxId.slice(3, 6)}-${taxId.slice(6, 9)}/${taxId.slice(9)}`;
+  return `${taxId.slice(0, 3)}-${taxId.slice(3, 6)}-${taxId.slice(
+    6,
+    9
+  )}/${taxId.slice(9)}`;
 };

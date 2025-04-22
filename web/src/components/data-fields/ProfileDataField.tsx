@@ -1,4 +1,7 @@
-import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
+import {
+  GenericTextField,
+  GenericTextFieldProps,
+} from "@/components/GenericTextField";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -7,7 +10,8 @@ import { ProfileContentField } from "@/lib/types/types";
 import { OutlinedInputProps, TextFieldProps } from "@mui/material";
 import { HTMLInputTypeAttribute, ReactElement, useContext } from "react";
 
-export interface ProfileDataFieldProps<T = unknown> extends Omit<GenericTextFieldProps<T>, "fieldName"> {
+export interface ProfileDataFieldProps<T = unknown>
+  extends Omit<GenericTextFieldProps<T>, "fieldName"> {
   fieldName: ProfileContentField;
   fieldOptions?: TextFieldProps;
   inputProps?: OutlinedInputProps;
@@ -49,7 +53,9 @@ export const ProfileDataField = <T,>({
         formContext={DataFormErrorMapContext}
         fieldName={fieldName as string}
         {...props}
-        validationText={props.validationText ?? contentFromConfig.errorTextRequired ?? ""}
+        validationText={
+          props.validationText ?? contentFromConfig.errorTextRequired ?? ""
+        }
         handleChange={handleChange}
       />
     </div>

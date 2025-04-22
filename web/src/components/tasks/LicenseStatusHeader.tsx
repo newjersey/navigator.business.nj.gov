@@ -84,23 +84,29 @@ export const LicenseStatusHeader = (props: Props): ReactElement => {
     EXPIRED: Config.licenseSearchTask.expiredPermitStatusText,
     BARRED: Config.licenseSearchTask.barredPermitStatusText,
     OUT_OF_BUSINESS: Config.licenseSearchTask.outOfBusinessPermitStatusText,
-    REINSTATEMENT_PENDING: Config.licenseSearchTask.reinstatementPendingPermitStatusText,
+    REINSTATEMENT_PENDING:
+      Config.licenseSearchTask.reinstatementPendingPermitStatusText,
     CLOSED: Config.licenseSearchTask.closedPermitStatusText,
     DELETED: Config.licenseSearchTask.deletedPermitStatusText,
     DENIED: Config.licenseSearchTask.deniedPermitStatusText,
-    VOLUNTARY_SURRENDER: Config.licenseSearchTask.voluntarySurrenderPermitStatusText,
+    VOLUNTARY_SURRENDER:
+      Config.licenseSearchTask.voluntarySurrenderPermitStatusText,
     WITHDRAWN: Config.licenseSearchTask.withdrawnPermitStatusText,
     UNKNOWN: "",
     DRAFT: Config.licenseSearchTask.draftStatusText,
     SUBMITTED: Config.licenseSearchTask.submittedStatusText,
-    UNDER_INTERNAL_REVIEW: Config.licenseSearchTask.underInternalReviewStatusText,
+    UNDER_INTERNAL_REVIEW:
+      Config.licenseSearchTask.underInternalReviewStatusText,
     SPECIAL_REVIEW: Config.licenseSearchTask.specialReviewStatusText,
-    PENDING_DEFICIENCIES: Config.licenseSearchTask.pendingDeficienciesStatusText,
-    DEFICIENCIES_SUBMITTED: Config.licenseSearchTask.deficienciesSubmittedStatusText,
+    PENDING_DEFICIENCIES:
+      Config.licenseSearchTask.pendingDeficienciesStatusText,
+    DEFICIENCIES_SUBMITTED:
+      Config.licenseSearchTask.deficienciesSubmittedStatusText,
     CHECKLIST_COMPLETED: Config.licenseSearchTask.checklistCompletedStatusText,
     APPROVED: Config.licenseSearchTask.approvedStatusText,
     PENDING_RENEWAL: Config.licenseSearchTask.pendingRenewalStatusText,
-    PENDING_REINSTATEMENT: Config.licenseSearchTask.pendingReinstatementStatusText,
+    PENDING_REINSTATEMENT:
+      Config.licenseSearchTask.pendingReinstatementStatusText,
     INACTIVE: Config.licenseSearchTask.inactiveStatusText,
     ABANDONED: Config.licenseSearchTask.abandonedStatusText,
     SUSPENDED: Config.licenseSearchTask.suspendedStatusText,
@@ -109,7 +115,9 @@ export const LicenseStatusHeader = (props: Props): ReactElement => {
 
   return (
     <div
-      className={`text-bold fdc fac radius-lg ${getPermitColorScheme().bgSubHdrColor}`}
+      className={`text-bold fdc fac radius-lg ${
+        getPermitColorScheme().bgSubHdrColor
+      }`}
       data-testid={`permit-${props.licenseStatus}`}
     >
       <div

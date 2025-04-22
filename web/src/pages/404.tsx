@@ -10,7 +10,10 @@ const PageNotFound = (): ReactElement => {
 
   return (
     <PageSkeleton>
-      <main className="page-not-found usa-section padding-top-8 desktop:padding-top-15" id="main">
+      <main
+        className="page-not-found usa-section padding-top-8 desktop:padding-top-15"
+        id="main"
+      >
         <SingleColumnContainer>
           <div className="flex flex-column flex-align-center">
             <img src="./img/page-not-found-icon.svg" alt="404 icon" />
@@ -20,9 +23,17 @@ const PageNotFound = (): ReactElement => {
             <div className="text-align-center">
               <Content>{Config.pageNotFoundError.errorDescriptionPt1}</Content>
               <div className="tablet:display-flex">
-                <Content>{Config.pageNotFoundError.errorDescriptionPt2}</Content>
-                <UnStyledButton className="margin-left-05" isUnderline isIntercomEnabled>
-                  <Content>{Config.pageNotFoundError.errorChatWithExpert}</Content>
+                <Content>
+                  {Config.pageNotFoundError.errorDescriptionPt2}
+                </Content>
+                <UnStyledButton
+                  className="margin-left-05"
+                  isUnderline
+                  isIntercomEnabled
+                >
+                  <Content>
+                    {Config.pageNotFoundError.errorChatWithExpert}
+                  </Content>
                 </UnStyledButton>
               </div>
             </div>

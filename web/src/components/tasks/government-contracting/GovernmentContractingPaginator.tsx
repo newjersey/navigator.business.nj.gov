@@ -18,7 +18,8 @@ import { ReactElement, ReactNode, useEffect, useRef, useState } from "react";
 export const GovernmentContractorPaginator = (): ReactElement => {
   const stepperRef = useRef<HTMLDivElement>(null);
   const [stepIndex, setStepIndex] = useState(0);
-  const [anytimeActionTask, setAnytimeActionTask] = useState<AnytimeActionTask>();
+  const [anytimeActionTask, setAnytimeActionTask] =
+    useState<AnytimeActionTask>();
   const { Config } = useConfig();
   const isMounted = useRef(false);
 

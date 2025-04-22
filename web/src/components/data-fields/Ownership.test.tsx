@@ -13,7 +13,9 @@ describe("<Ownership />", () => {
     );
     selectDropdownByValue("Ownership", "woman-owned");
     selectDropdownByValue("Ownership", "veteran-owned");
-    expect(screen.getByTestId("ownership")).toHaveValue("woman-owned,veteran-owned");
+    expect(screen.getByTestId("ownership")).toHaveValue(
+      "woman-owned,veteran-owned"
+    );
     selectDropdownByValue("Ownership", "none");
     expect(screen.getByTestId("ownership")).toHaveValue("none");
   });

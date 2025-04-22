@@ -6,7 +6,9 @@ import { ReactElement, useContext, useState } from "react";
 
 export const WillPracticeLaw = (): ReactElement => {
   const { Config } = useConfig();
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(
+    BusinessFormationContext
+  );
   const fieldName = "willPracticeLaw";
   const [alert, setAlert] = useState<boolean>(false);
 
@@ -25,7 +27,9 @@ export const WillPracticeLaw = (): ReactElement => {
           };
           if (state.formationFormData.businessSuffix) {
             newFormationObject.businessSuffix = undefined;
-            setFieldsInteracted(["businessSuffix"], { setToUninteracted: true });
+            setFieldsInteracted(["businessSuffix"], {
+              setToUninteracted: true,
+            });
           }
           setFormationFormData(newFormationObject);
           setFieldsInteracted([fieldName]);
@@ -34,7 +38,11 @@ export const WillPracticeLaw = (): ReactElement => {
         errorMessage={Config.formation.fields.willPracticeLaw.error}
       />
       {alert && (
-        <SnackbarAlert variant={"info"} close={(): void => setAlert(false)} isOpen={alert}>
+        <SnackbarAlert
+          variant={"info"}
+          close={(): void => setAlert(false)}
+          isOpen={alert}
+        >
           {Config.formation.fields.businessSuffix.optionsUpdatedSnackbarAlert}
         </SnackbarAlert>
       )}

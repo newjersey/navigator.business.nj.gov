@@ -17,8 +17,12 @@ export const GovernmentContractingSteps: {
   { name: "Prevailing Wages", fileName: "prevailing-wage" },
 ];
 
-export const getAnytimeActionTaskObj = async (stepIndex: number): Promise<AnytimeActionTask> => {
-  return await fetchAnytimeActionByFilename(GovernmentContractingSteps[stepIndex].fileName);
+export const getAnytimeActionTaskObj = async (
+  stepIndex: number
+): Promise<AnytimeActionTask> => {
+  return await fetchAnytimeActionByFilename(
+    GovernmentContractingSteps[stepIndex].fileName
+  );
 };
 
 export const shouldDisplayPreviousButton = (stepIndex: number): boolean => {

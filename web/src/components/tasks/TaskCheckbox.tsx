@@ -11,9 +11,11 @@ interface Props {
 
 export const TaskCheckbox = (props: Props): ReactElement => {
   const { updateQueue, business } = useUserData();
-  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+  const { isAuthenticated, setShowNeedsAccountModal } =
+    useContext(NeedsAccountContext);
 
-  const checklistItemStatus = business?.taskItemChecklist[props.checklistItemId] ?? false;
+  const checklistItemStatus =
+    business?.taskItemChecklist[props.checklistItemId] ?? false;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (!updateQueue) {
@@ -33,6 +35,10 @@ export const TaskCheckbox = (props: Props): ReactElement => {
   };
 
   return (
-    <Checkbox onChange={handleChange} checked={checklistItemStatus} data-testid={props.checklistItemId} />
+    <Checkbox
+      onChange={handleChange}
+      checked={checklistItemStatus}
+      data-testid={props.checklistItemId}
+    />
   );
 };

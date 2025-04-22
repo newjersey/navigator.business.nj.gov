@@ -1,5 +1,8 @@
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
-import { loadAllFundingUrlSlugs, loadFundingByUrlSlug } from "@/lib/static/loadFundings";
+import {
+  loadAllFundingUrlSlugs,
+  loadFundingByUrlSlug,
+} from "@/lib/static/loadFundings";
 import { mockReadDirReturn } from "@/lib/static/mockHelpers";
 import fs from "fs";
 
@@ -43,7 +46,9 @@ describe("loadFundings", () => {
         "Some content description 2";
 
       mockReadDirReturn({ value: ["cert1.md", "cert2.md"], mockedFs });
-      mockedFs.readFileSync.mockReturnValueOnce(certMd1).mockReturnValueOnce(certMd2);
+      mockedFs.readFileSync
+        .mockReturnValueOnce(certMd1)
+        .mockReturnValueOnce(certMd2);
       const all = loadAllCertifications();
 
       expect(all).toHaveLength(2);
@@ -98,7 +103,9 @@ describe("loadFundings", () => {
         "Some content description 2";
 
       mockReadDirReturn({ value: ["cert1.md", "cert2.md"], mockedFs });
-      mockedFs.readFileSync.mockReturnValueOnce(certMd1).mockReturnValueOnce(certMd2);
+      mockedFs.readFileSync
+        .mockReturnValueOnce(certMd1)
+        .mockReturnValueOnce(certMd2);
       const allUrlSlugs = loadAllFundingUrlSlugs();
 
       expect(allUrlSlugs).toHaveLength(2);

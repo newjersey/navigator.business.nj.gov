@@ -53,7 +53,11 @@ export const MgmtAuth = (props: Props): ReactElement => {
           "data-testid": "mgmt-password-field",
         }}
       />
-      <button onClick={onSubmit} className="usa-button margin-top-2" data-testid="mgmt-submit-bttn">
+      <button
+        onClick={onSubmit}
+        className="usa-button margin-top-2"
+        data-testid="mgmt-submit-bttn"
+      >
         Submit
       </button>
     </>

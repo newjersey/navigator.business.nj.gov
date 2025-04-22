@@ -7,7 +7,10 @@ import { ReviewStep } from "@/components/tasks/business-formation/review/ReviewS
 import { FormationStepNames } from "@/lib/types/types";
 import { ReactElement } from "react";
 
-export const BusinessFormationSteps: { component: ReactElement; step: FormationStepNames }[] = [
+export const BusinessFormationSteps: {
+  component: ReactElement;
+  step: FormationStepNames;
+}[] = [
   {
     component: <BusinessNameStep />,
     step: BusinessFormationStepsConfiguration[0].name,
@@ -20,6 +23,12 @@ export const BusinessFormationSteps: { component: ReactElement; step: FormationS
     component: <ContactsStep />,
     step: BusinessFormationStepsConfiguration[2].name,
   },
-  { component: <BillingStep />, step: BusinessFormationStepsConfiguration[3].name },
-  { component: <ReviewStep />, step: BusinessFormationStepsConfiguration[4].name },
+  {
+    component: <BillingStep />,
+    step: BusinessFormationStepsConfiguration[3].name,
+  },
+  {
+    component: <ReviewStep />,
+    step: BusinessFormationStepsConfiguration[4].name,
+  },
 ];

@@ -75,8 +75,14 @@ describe("loadOperateReferences", () => {
       "---\n" +
       "Some content description 1";
 
-    mockReadDirReturnOnce({ value: ["filingMd1.md", "filingMd2.md"], mockedFs }); // read filing dir
-    mockReadDirReturnOnce({ value: ["fundingMd1.md", "fundingMd2.md"], mockedFs }); // read funding dir
+    mockReadDirReturnOnce({
+      value: ["filingMd1.md", "filingMd2.md"],
+      mockedFs,
+    }); // read filing dir
+    mockReadDirReturnOnce({
+      value: ["fundingMd1.md", "fundingMd2.md"],
+      mockedFs,
+    }); // read funding dir
     mockReadDirReturnOnce({ value: ["certMd1.md"], mockedFs }); // read certification dir
 
     mockedFs.readFileSync

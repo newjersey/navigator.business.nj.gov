@@ -23,7 +23,9 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
     return `${name} ${suffix}`;
   };
 
-  const formattLawResponse = (willPracticeLaw: boolean | undefined): string | undefined => {
+  const formattLawResponse = (
+    willPracticeLaw: boolean | undefined
+  ): string | undefined => {
     if (willPracticeLaw === true) {
       return Config.formation.fields.willPracticeLaw.radioYesText;
     } else if (willPracticeLaw === false) {
@@ -36,15 +38,20 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
     <div className="margin-top-2" data-testid="review-suffix-and-start-date">
       <ReviewLineItem
         label={Config.formation.fields.businessSuffix.label}
-        labelContextualInfo={Config.formation.fields.businessSuffix.labelContextualInfo}
+        labelContextualInfo={
+          Config.formation.fields.businessSuffix.labelContextualInfo
+        }
         value={getBusinessNameDisplay()}
       />
       <ReviewLineItem
         label={Config.formation.fields.businessStartDate.label}
-        labelContextualInfo={Config.formation.fields.businessStartDate.labelContextualInfo}
-        value={parseDateWithFormat(state.formationFormData.businessStartDate, defaultDateFormat).format(
-          defaultDisplayDateFormat
-        )}
+        labelContextualInfo={
+          Config.formation.fields.businessStartDate.labelContextualInfo
+        }
+        value={parseDateWithFormat(
+          state.formationFormData.businessStartDate,
+          defaultDateFormat
+        ).format(defaultDisplayDateFormat)}
       />
       {state.formationFormData.businessLocationType !== "NJ" && (
         <>

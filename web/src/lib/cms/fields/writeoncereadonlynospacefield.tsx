@@ -56,7 +56,8 @@ class WriteOnceReadOnlyNoSpaceControl extends Component<
   };
 
   render(): ReactElement {
-    const { forID, value, classNameWrapper, setActiveStyle, setInactiveStyle } = this.props;
+    const { forID, value, classNameWrapper, setActiveStyle, setInactiveStyle } =
+      this.props;
     return (
       <input
         ref={this.el}

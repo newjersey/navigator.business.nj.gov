@@ -3,13 +3,18 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import Home from "@/pages/index";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { setMockUserDataResponse, useMockBusiness } from "@/test/mock/mockUseUserData";
+import {
+  setMockUserDataResponse,
+  useMockBusiness,
+} from "@/test/mock/mockUseUserData";
 import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { render } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/utils/useIntersectionOnElement", () => ({ useIntersectionOnElement: jest.fn() }));
+jest.mock("@/lib/utils/useIntersectionOnElement", () => ({
+  useIntersectionOnElement: jest.fn(),
+}));
 
 describe("HomePage", () => {
   beforeEach(() => {

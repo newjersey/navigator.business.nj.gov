@@ -106,8 +106,10 @@
     background-color: variables.$base-light;
   }
 
-  .usa-step-indicator--counters-sm.usa-step-indicator .usa-step-indicator__segment:last-child:after,
-  .usa-step-indicator--counters.usa-step-indicator .usa-step-indicator__segment:last-child:after {
+  .usa-step-indicator--counters-sm.usa-step-indicator
+    .usa-step-indicator__segment:last-child:after,
+  .usa-step-indicator--counters.usa-step-indicator
+    .usa-step-indicator__segment:last-child:after {
     display: block;
     right: 50%;
     width: auto;

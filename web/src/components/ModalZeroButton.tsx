@@ -30,7 +30,11 @@ export const ModalZeroButton = (props: Props): ReactElement => {
           id="dialog-modal"
           className="display-flex flex-row flex-align-center break-word flex-fill"
         >
-          <Heading level={0} styleVariant="h2" className="padding-x-1 margin-0-override">
+          <Heading
+            level={0}
+            styleVariant="h2"
+            className="padding-x-1 margin-0-override"
+          >
             {props.title}
           </Heading>
         </DialogTitle>
@@ -48,7 +52,10 @@ export const ModalZeroButton = (props: Props): ReactElement => {
         )}
       </div>
       <DialogContent sx={{ padding: 0 }} dividers>
-        <div className="padding-x-4 margin-bottom-4 margin-top-2" data-testid="modal-body">
+        <div
+          className="padding-x-4 margin-bottom-4 margin-top-2"
+          data-testid="modal-body"
+        >
           {props.children}
         </div>
         {props.unpaddedChildren && <>{props.unpaddedChildren}</>}

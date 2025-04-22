@@ -22,7 +22,11 @@ export const Banner = (): ReactElement => {
                 Governor Phil Murphy &bull; Lt. Governor Tahesha Way
               </div>
               <div className="margin-y-05">
-                <a href="https://nj.gov/subscribe/" target="_blank" rel="noreferrer">
+                <a
+                  href="https://nj.gov/subscribe/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <svg
                     className="usa-icon bottom-neg-2px margin-right-05"
                     aria-hidden="true"

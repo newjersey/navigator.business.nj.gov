@@ -23,7 +23,10 @@ import {
   generateProfileData,
   OperatingPhaseId,
 } from "@businessnjgovnavigator/shared/";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
@@ -101,7 +104,9 @@ describe("onboarding - shared", () => {
   });
 
   it("autocompletes onboarding and routes to dashboard page when industry WITHOUT essential question is set by using industry query string", async () => {
-    const industry = randomElementFromArray(industriesWithOutEssentialQuestion).id;
+    const industry = randomElementFromArray(
+      industriesWithOutEssentialQuestion
+    ).id;
     useMockRouter({ isReady: true, query: { industry } });
     renderPage({});
     await waitFor(() => {
@@ -113,7 +118,9 @@ describe("onboarding - shared", () => {
     expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
     expect(currentBusiness().profileData.industryId).toEqual(industry);
     expect(currentBusiness().onboardingFormProgress).toEqual("COMPLETED");
-    expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.GUEST_MODE);
+    expect(currentBusiness().profileData.operatingPhase).toEqual(
+      OperatingPhaseId.GUEST_MODE
+    );
   });
 
   it("autocompletes onboarding and routes to dashboard page when sector question is set by using sector query string", async () => {
@@ -129,11 +136,15 @@ describe("onboarding - shared", () => {
     expect(currentBusiness().profileData.businessPersona).toEqual("OWNING");
     expect(currentBusiness().profileData.sectorId).toEqual(sector);
     expect(currentBusiness().onboardingFormProgress).toEqual("COMPLETED");
-    expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.GUEST_MODE_OWNING);
+    expect(currentBusiness().profileData.operatingPhase).toEqual(
+      OperatingPhaseId.GUEST_MODE_OWNING
+    );
   });
 
   it("routes to the onboarding industry page when industry WITH essential question is set by using industry query string", async () => {
-    const industry = randomElementFromArray(industriesWithSingleEssentialQuestion).id;
+    const industry = randomElementFromArray(
+      industriesWithSingleEssentialQuestion
+    ).id;
     useMockRouter({ isReady: true, query: { industry } });
     const { page } = renderPage({});
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
@@ -146,14 +157,21 @@ describe("onboarding - shared", () => {
   });
 
   it("routes to the first page when using industry query string is invalid", async () => {
-    useMockRouter({ isReady: true, query: { industry: "something-nonexistent" } });
+    useMockRouter({
+      isReady: true,
+      query: { industry: "something-nonexistent" },
+    });
     renderPage({});
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
   });
 
   it("updates locally for each step", async () => {
-    const business = generateBusiness({ profileData: generateProfileData({ businessPersona: "STARTING" }) });
-    const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
+    const business = generateBusiness({
+      profileData: generateProfileData({ businessPersona: "STARTING" }),
+    });
+    const { page } = renderPage({
+      userData: generateUserDataForBusiness(business),
+    });
     const numberOfPages = onboardingFlows.STARTING.pages.length;
 
     for (let pageNumber = 2; pageNumber < numberOfPages; pageNumber += 1) {
@@ -166,7 +184,9 @@ describe("onboarding - shared", () => {
     const { page } = renderPage({});
     page.clickNext();
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
-    expect(screen.getByTestId("banner-alert-REQUIRED_EXISTING_BUSINESS")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("banner-alert-REQUIRED_EXISTING_BUSINESS")
+    ).toBeInTheDocument();
   });
 
   it("allows user to move past Step 1 if you have selected whether you own a business", async () => {
@@ -190,14 +210,18 @@ describe("onboarding - shared", () => {
       onboardingFormProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
-    const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
+    const { page } = renderPage({
+      userData: generateUserDataForBusiness(business),
+    });
 
     page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
     page.selectByValue("Industry", "e-commerce");
     page.clickBack();
 
-    const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" });
+    const step = templateEval(Config.onboardingDefaults.stepXTemplate, {
+      currentPage: "1",
+    });
 
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
     expect(screen.getByTestId("business-persona-owning")).toBeInTheDocument();
@@ -229,7 +253,9 @@ describe("onboarding - shared", () => {
       onboardingFormProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
-    const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
+    const { page } = renderPage({
+      userData: generateUserDataForBusiness(business),
+    });
 
     page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
@@ -261,7 +287,8 @@ describe("onboarding - shared", () => {
 
       expect(screen.getByTestId("step-2")).toBeInTheDocument();
       const { employeeOrContractorInNJ } =
-        Config.profileDefaults.fields.foreignBusinessTypeIds.default.optionContent;
+        Config.profileDefaults.fields.foreignBusinessTypeIds.default
+          .optionContent;
 
       page.checkByLabelText(employeeOrContractorInNJ);
       await page.visitStep(3);

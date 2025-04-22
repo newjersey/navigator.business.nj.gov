@@ -12,8 +12,14 @@ const DashboardTabsPreview = (props: PreviewProps): ReactElement => {
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <div className="h3-styling margin-y-2">----- When Certs/Fundings Are Not Displayed -----</div>
+      <div
+        className="cms"
+        ref={ref}
+        style={{ margin: 40, pointerEvents: "none" }}
+      >
+        <div className="h3-styling margin-y-2">
+          ----- When Certs/Fundings Are Not Displayed -----
+        </div>
         <SidebarCardsList
           sideBarCards={[]}
           fundings={[]}
@@ -22,7 +28,9 @@ const DashboardTabsPreview = (props: PreviewProps): ReactElement => {
           hiddenCertifications={[]}
           cardCount={0}
         />
-        <div className="h3-styling margin-y-2">----- When Certs/Fundings Are Displayed -----</div>
+        <div className="h3-styling margin-y-2">
+          ----- When Certs/Fundings Are Displayed -----
+        </div>
         <SidebarCardsList
           sideBarCards={[]}
           fundings={[]}
@@ -34,7 +42,9 @@ const DashboardTabsPreview = (props: PreviewProps): ReactElement => {
           cardCount={0}
         />
 
-        <div className="h3-styling margin-y-2">----- When Remote Seller / Worker -----</div>
+        <div className="h3-styling margin-y-2">
+          ----- When Remote Seller / Worker -----
+        </div>
         <SidebarCardsList
           sideBarCards={[]}
           fundings={[]}
@@ -45,7 +55,9 @@ const DashboardTabsPreview = (props: PreviewProps): ReactElement => {
           cardCount={0}
         />
 
-        <div className="h3-styling margin-y-2">----- When Certs/Fundings Are Displayed -----</div>
+        <div className="h3-styling margin-y-2">
+          ----- When Certs/Fundings Are Displayed -----
+        </div>
         <SidebarCardsList
           sideBarCards={[]}
           fundings={[generateFunding({})]}

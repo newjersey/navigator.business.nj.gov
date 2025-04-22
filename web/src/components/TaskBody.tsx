@@ -21,10 +21,24 @@ export const TaskBody = (props: Props): ReactElement => {
 
   const updatedTask = {
     ...props.task,
-    contentMd: addNaicsCodeData(getModifiedTaskContent(props.roadmap, props.task, "contentMd")),
-    callToActionLink: getModifiedTaskContent(props.roadmap, props.task, "callToActionLink"),
-    callToActionText: getModifiedTaskContent(props.roadmap, props.task, "callToActionText"),
+    contentMd: addNaicsCodeData(
+      getModifiedTaskContent(props.roadmap, props.task, "contentMd")
+    ),
+    callToActionLink: getModifiedTaskContent(
+      props.roadmap,
+      props.task,
+      "callToActionLink"
+    ),
+    callToActionText: getModifiedTaskContent(
+      props.roadmap,
+      props.task,
+      "callToActionText"
+    ),
   };
 
-  return <TaskElement task={updatedTask}>{<UnlockedBy task={props.task} />}</TaskElement>;
+  return (
+    <TaskElement task={updatedTask}>
+      {<UnlockedBy task={props.task} />}
+    </TaskElement>
+  );
 };

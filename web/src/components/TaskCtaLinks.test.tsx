@@ -40,7 +40,11 @@ describe("<TaskFooterCtas />", () => {
 
   describe("when task does not have post-onboarding question", () => {
     it("displays nothing when CTA link and text from task are not defined", () => {
-      render(<TaskCtaLinks task={generateTask({ callToActionLink: "", callToActionText: "" })} />);
+      render(
+        <TaskCtaLinks
+          task={generateTask({ callToActionLink: "", callToActionText: "" })}
+        />
+      );
 
       expect(screen.queryByTestId("cta-area")).not.toBeInTheDocument();
     });
@@ -71,7 +75,8 @@ describe("<TaskFooterCtas />", () => {
 
       fireEvent.click(screen.getByText("CTA Link"));
       expect(
-        mockAnalytics.event.task_primary_call_to_action.click.open_external_website
+        mockAnalytics.event.task_primary_call_to_action.click
+          .open_external_website
       ).toHaveBeenCalledWith("CTA Link", "https://www.example.com/0");
     });
 

@@ -62,7 +62,11 @@ describe("apiClient", () => {
     mockAxios.post.mockResolvedValue({ data: { email, found: true } });
     const response = await postUserEmailCheck(email);
     expect(response).toEqual({ email, found: true });
-    expect(mockAxios.post).toHaveBeenCalledWith("/api/users/emailCheck", { email }, {});
+    expect(mockAxios.post).toHaveBeenCalledWith(
+      "/api/users/emailCheck",
+      { email },
+      {}
+    );
   });
 
   it("posts license status", async () => {
@@ -82,25 +86,37 @@ describe("apiClient", () => {
     mockAxios.post.mockResolvedValue({ data: {} });
     const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
     await postTaxFilingsOnboarding(taxIdAndBusinessName);
-    expect(mockAxios.post).toHaveBeenCalledWith("/api/taxFilings/onboarding", taxIdAndBusinessName, {
-      headers: { Authorization: "Bearer some-token" },
-    });
+    expect(mockAxios.post).toHaveBeenCalledWith(
+      "/api/taxFilings/onboarding",
+      taxIdAndBusinessName,
+      {
+        headers: { Authorization: "Bearer some-token" },
+      }
+    );
   });
 
   it("posts taxFilings lookup request", async () => {
     mockAxios.post.mockResolvedValue({ data: {} });
     const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
     await postTaxFilingsLookup(taxIdAndBusinessName);
-    expect(mockAxios.post).toHaveBeenCalledWith("/api/taxFilings/lookup", taxIdAndBusinessName, {
-      headers: { Authorization: "Bearer some-token" },
-    });
+    expect(mockAxios.post).toHaveBeenCalledWith(
+      "/api/taxFilings/lookup",
+      taxIdAndBusinessName,
+      {
+        headers: { Authorization: "Bearer some-token" },
+      }
+    );
   });
 
   it("posts user data without token", async () => {
     const userData = generateUserData({ user: generateUser({ id: "456" }) });
     mockAxios.post.mockResolvedValue({ data: userData });
     expect(await postNewsletter(userData)).toEqual(userData);
-    expect(mockAxios.post).toHaveBeenCalledWith("/api/external/newsletter", userData, {});
+    expect(mockAxios.post).toHaveBeenCalledWith(
+      "/api/external/newsletter",
+      userData,
+      {}
+    );
   });
 
   it("posts business formation request", async () => {
@@ -110,10 +126,16 @@ describe("apiClient", () => {
     const inputFile = generateInputFile({});
 
     mockAxios.post.mockResolvedValue({ data: responseUserData });
-    expect(await postBusinessFormation(inputUserData, returnUrl, inputFile)).toEqual(responseUserData);
+    expect(
+      await postBusinessFormation(inputUserData, returnUrl, inputFile)
+    ).toEqual(responseUserData);
     expect(mockAxios.post).toHaveBeenCalledWith(
       "/api/formation",
-      { userData: inputUserData, returnUrl, foreignGoodStandingFile: inputFile },
+      {
+        userData: inputUserData,
+        returnUrl,
+        foreignGoodStandingFile: inputFile,
+      },
       { headers: { Authorization: "Bearer some-token" } }
     );
   });
@@ -122,8 +144,12 @@ describe("apiClient", () => {
     const userData = generateUserData({ user: generateUser({}) });
     mockAxios.post.mockResolvedValue({ data: userData });
     expect(await postTaxClearanceCertificate(userData)).toEqual(userData);
-    expect(mockAxios.post).toHaveBeenCalledWith("/api/postTaxClearanceCertificate", userData, {
-      headers: { Authorization: "Bearer some-token" },
-    });
+    expect(mockAxios.post).toHaveBeenCalledWith(
+      "/api/postTaxClearanceCertificate",
+      userData,
+      {
+        headers: { Authorization: "Bearer some-token" },
+      }
+    );
   });
 });

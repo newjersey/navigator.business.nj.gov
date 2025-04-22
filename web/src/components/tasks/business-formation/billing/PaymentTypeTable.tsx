@@ -12,9 +12,13 @@ import React, { ReactElement, useContext, useEffect, useState } from "react";
 export const PaymentTypeTable = (): ReactElement => {
   const fieldName = "paymentType";
   const { Config } = useConfig();
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(
+    BusinessFormationContext
+  );
 
-  const achPaymentCost = Number.parseFloat(Config.formation.fields.paymentType.paymentCosts.ach);
+  const achPaymentCost = Number.parseFloat(
+    Config.formation.fields.paymentType.paymentCosts.ach
+  );
   const ccPaymentCostExtra = Number.parseFloat(
     Config.formation.fields.paymentType.paymentCosts.creditCardExtra
   );
@@ -22,22 +26,35 @@ export const PaymentTypeTable = (): ReactElement => {
     Config.formation.fields.paymentType.paymentCosts.creditCardInitial
   );
 
-  const officialFormationCost = getCost("officialFormationDocument", state.formationFormData.legalType);
-  const certifiedCopyCost = getCost("certifiedCopyOfFormationDocument", state.formationFormData.legalType);
-  const certificateStandingCost = getCost("certificateOfStanding", state.formationFormData.legalType);
+  const officialFormationCost = getCost(
+    "officialFormationDocument",
+    state.formationFormData.legalType
+  );
+  const certifiedCopyCost = getCost(
+    "certifiedCopyOfFormationDocument",
+    state.formationFormData.legalType
+  );
+  const certificateStandingCost = getCost(
+    "certificateOfStanding",
+    state.formationFormData.legalType
+  );
 
   const [totalCost, setTotalCost] = useState<number>(officialFormationCost);
-  const [creditCardCost, setCreditCardCost] = useState<number>(ccPaymentCostInitial);
+  const [creditCardCost, setCreditCardCost] =
+    useState<number>(ccPaymentCostInitial);
   const [achCost, setAchCost] = useState<number>(achPaymentCost);
   const { doesFieldHaveError } = useFormationErrors();
 
   useEffect(() => {
     const costs: number[] = [officialFormationCost];
-    state.formationFormData.certificateOfStanding && costs.push(certificateStandingCost);
-    state.formationFormData.certifiedCopyOfFormationDocument && costs.push(certifiedCopyCost);
+    state.formationFormData.certificateOfStanding &&
+      costs.push(certificateStandingCost);
+    state.formationFormData.certifiedCopyOfFormationDocument &&
+      costs.push(certifiedCopyCost);
 
     const achCost = costs.length * achPaymentCost;
-    const creditCardCost = ccPaymentCostInitial + (costs.length - 1) * ccPaymentCostExtra;
+    const creditCardCost =
+      ccPaymentCostInitial + (costs.length - 1) * ccPaymentCostExtra;
 
     state.formationFormData.paymentType === "ACH" && costs.push(achCost);
 
@@ -75,7 +92,9 @@ export const PaymentTypeTable = (): ReactElement => {
         <table className="business-formation-table business-formation-payment">
           <thead>
             <tr>
-              <th className="text-bold">{Config.formation.fields.paymentType.label}</th>
+              <th className="text-bold">
+                {Config.formation.fields.paymentType.label}
+              </th>
               <th></th>
               <th></th>
             </tr>
@@ -120,7 +139,11 @@ export const PaymentTypeTable = (): ReactElement => {
                 </label>
               </td>
               <td
-                className={state.formationFormData.paymentType === "CC" ? "text-primary-dark text-bold" : ""}
+                className={
+                  state.formationFormData.paymentType === "CC"
+                    ? "text-primary-dark text-bold"
+                    : ""
+                }
               >
                 {getDollarValue(creditCardCost)}
               </td>
@@ -153,7 +176,11 @@ export const PaymentTypeTable = (): ReactElement => {
                 </label>
               </td>
               <td
-                className={state.formationFormData.paymentType === "ACH" ? "text-primary-dark text-bold" : ""}
+                className={
+                  state.formationFormData.paymentType === "ACH"
+                    ? "text-primary-dark text-bold"
+                    : ""
+                }
               >
                 {getDollarValue(achCost)}
               </td>
@@ -163,11 +190,16 @@ export const PaymentTypeTable = (): ReactElement => {
             <tr>
               <td colSpan={2}>
                 <div className="text-align-left">
-                  <span className="text-bold r">{Config.formation.fields.paymentType.costTotalLabel}</span>
+                  <span className="text-bold r">
+                    {Config.formation.fields.paymentType.costTotalLabel}
+                  </span>
                 </div>
               </td>
               <td colSpan={1}>
-                <div className="text-align-right text-bold" aria-label={"Total"}>
+                <div
+                  className="text-align-right text-bold"
+                  aria-label={"Total"}
+                >
                   {getDollarValue(totalCost)}
                 </div>
               </td>

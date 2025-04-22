@@ -20,7 +20,9 @@ interface Props {
 export const DocumentTile = (props: Props): ReactElement => {
   const showDownloadIcon = props.downloadLink || props.hasDownloadIcon;
   const hasExtraPadding = props.hasExtraPadding ? "padding-205" : "padding-1";
-  const hasExtraSpacing = props.hasExtraPadding ? "margin-x-2" : "margin-left-1";
+  const hasExtraSpacing = props.hasExtraPadding
+    ? "margin-x-2"
+    : "margin-left-1";
   const isRounded = props.isRounded ? "radius-md" : "";
   const isWidthFull = props.isWidthFull ? "width-100-override" : "";
 
@@ -31,7 +33,9 @@ export const DocumentTile = (props: Props): ReactElement => {
       ${props.isCentered ? "flex-justify-center" : ""}`}
     >
       <img src={`/img/${props.icon}.svg`} alt="" />
-      <div className={`${hasExtraSpacing} line-height-body-2 text-base-darkest`}>
+      <div
+        className={`${hasExtraSpacing} line-height-body-2 text-base-darkest`}
+      >
         <Content>{props.label}</Content>
         {props.subLabel && <Content>{props.subLabel}</Content>}
       </div>

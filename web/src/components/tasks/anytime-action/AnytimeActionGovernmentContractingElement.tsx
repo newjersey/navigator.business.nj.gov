@@ -1,6 +1,9 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { GovernmentContractorPaginator } from "@/components/tasks/government-contracting/GovernmentContractingPaginator";
-import { AnytimeActionLicenseReinstatement, AnytimeActionTask } from "@/lib/types/types";
+import {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionTask,
+} from "@/lib/types/types";
 import Link from "next/link";
 import { ReactElement } from "react";
 
@@ -8,7 +11,9 @@ interface Props {
   anytimeAction: AnytimeActionLicenseReinstatement | AnytimeActionTask;
 }
 
-export const AnytimeActionGovernmentContractingElement = (props: Props): ReactElement => {
+export const AnytimeActionGovernmentContractingElement = (
+  props: Props
+): ReactElement => {
   return (
     <div className="min-height-38rem">
       <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 radius-top-lg">

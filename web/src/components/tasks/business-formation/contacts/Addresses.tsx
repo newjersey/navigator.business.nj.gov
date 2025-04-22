@@ -8,9 +8,19 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { formatAddress } from "@/lib/domain-logic/formatAddress";
-import { FormationFields, FormationIncorporator, FormationMember } from "@businessnjgovnavigator/shared/";
+import {
+  FormationFields,
+  FormationIncorporator,
+  FormationMember,
+} from "@businessnjgovnavigator/shared/";
 import { Checkbox } from "@mui/material";
-import React, { ChangeEvent, Fragment, ReactElement, ReactNode, useState } from "react";
+import React, {
+  ChangeEvent,
+  Fragment,
+  ReactElement,
+  ReactNode,
+  useState,
+} from "react";
 
 interface DisplayContent {
   header: string;
@@ -47,7 +57,10 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
   const [alert, setAlert] = useState<boolean | undefined>(undefined);
   const { doesFieldHaveError } = useFormationErrors();
 
-  const handleSignerCheckbox = (event: ChangeEvent<HTMLInputElement>, index: number): void => {
+  const handleSignerCheckbox = (
+    event: ChangeEvent<HTMLInputElement>,
+    index: number
+  ): void => {
     const addresses = [...props.addressData];
     addresses[index] = {
       ...addresses[index],
@@ -70,17 +83,30 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
     return (
       <div className="grid-col-auto mobile-sign-wrapper flex-align-center flex-justify-center">
         <label
-          htmlFor={index ? `signature-checkbox-${fieldName}-${index}` : `signature-checkbox-${fieldName}`}
+          htmlFor={
+            index
+              ? `signature-checkbox-${fieldName}-${index}`
+              : `signature-checkbox-${fieldName}`
+          }
           className="text-bold display-only-mobile-and-tablet"
         >
           {Config.formation.fields.signers.columnLabel}
         </label>
-        <div style={{ height: "56px" }} className="display-flex flex-column flex-justify-center">
+        <div
+          style={{ height: "56px" }}
+          className="display-flex flex-column flex-justify-center"
+        >
           <Checkbox
-            id={index ? `signature-checkbox-${fieldName}-${index}` : `signature-checkbox-${fieldName}`}
+            id={
+              index
+                ? `signature-checkbox-${fieldName}-${index}`
+                : `signature-checkbox-${fieldName}`
+            }
             onChange={onChange}
             checked={checked}
-            {...(doesFieldHaveError(fieldName) && !checked ? { color: "error" } : {})}
+            {...(doesFieldHaveError(fieldName) && !checked
+              ? { color: "error" }
+              : {})}
           />
         </div>
       </div>
@@ -88,12 +114,18 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
   };
 
   const deleteAddress = (index: number): void => {
-    props.setData([...[...props.addressData].slice(0, index), ...[...props.addressData].slice(index + 1)]);
+    props.setData([
+      ...[...props.addressData].slice(0, index),
+      ...[...props.addressData].slice(index + 1),
+    ]);
   };
 
-  const zebraOnOdd = (index: number): string => (index % 2 === 1 ? "bg-base-extra-light" : "");
+  const zebraOnOdd = (index: number): string =>
+    index % 2 === 1 ? "bg-base-extra-light" : "";
 
-  const rowStylesForNumberColumns = props.needSignature ? "four-columns" : "three-columns";
+  const rowStylesForNumberColumns = props.needSignature
+    ? "four-columns"
+    : "three-columns";
 
   const renderTable = (
     <table
@@ -102,12 +134,20 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
     >
       <thead>
         <tr className={rowStylesForNumberColumns}>
-          <th className="name tal">{Config.formation.fields.signers.tableHeaderName}</th>
-          <th className="address tal">{Config.formation.fields.signers.tableHeaderAddress}</th>
+          <th className="name tal">
+            {Config.formation.fields.signers.tableHeaderName}
+          </th>
+          <th className="address tal">
+            {Config.formation.fields.signers.tableHeaderAddress}
+          </th>
           {props.needSignature && (
-            <th className="sign tac">{Config.formation.fields.signers.tableHeaderSign}</th>
+            <th className="sign tac">
+              {Config.formation.fields.signers.tableHeaderSign}
+            </th>
           )}
-          <th className="action tac">{Config.formation.fields.signers.tableHeaderActions}</th>
+          <th className="action tac">
+            {Config.formation.fields.signers.tableHeaderActions}
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -116,7 +156,9 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
             return (
               <Fragment key={index}>
                 <tr
-                  className={`${zebraOnOdd(index)} ${rowStylesForNumberColumns}`}
+                  className={`${zebraOnOdd(
+                    index
+                  )} ${rowStylesForNumberColumns}`}
                   key={index}
                   data-testid={`${props.fieldName}-${index}`}
                 >
@@ -149,19 +191,23 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                     </div>
                     <div className="margin-x-1 border-1px border-base-light" />
                     <div>
-                      <UnStyledButton onClick={(): void => deleteAddress(index)}>
+                      <UnStyledButton
+                        onClick={(): void => deleteAddress(index)}
+                      >
                         {Config.formation.fields.signers.deleteLabel}
                       </UnStyledButton>
                     </div>
                   </td>
                 </tr>
-                {doesFieldHaveError(props.fieldName) && "signature" in it && !it.signature && (
-                  <tr className={zebraOnOdd(index)} key={`error-${index}`}>
-                    <td colSpan={4} className="text-error-dark text-bold">
-                      {Config.formation.fields.signers.errorBannerCheckbox}
-                    </td>
-                  </tr>
-                )}
+                {doesFieldHaveError(props.fieldName) &&
+                  "signature" in it &&
+                  !it.signature && (
+                    <tr className={zebraOnOdd(index)} key={`error-${index}`}>
+                      <td colSpan={4} className="text-error-dark text-bold">
+                        {Config.formation.fields.signers.errorBannerCheckbox}
+                      </td>
+                    </tr>
+                  )}
               </Fragment>
             );
           })
@@ -200,7 +246,10 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
           {props.displayContent.snackbarBody}
         </SnackbarAlert>
       )}
-      <div className="margin-bottom-3 members-table" data-testid={`addresses-${props.fieldName}`}>
+      <div
+        className="margin-bottom-3 members-table"
+        data-testid={`addresses-${props.fieldName}`}
+      >
         <Heading level={2} styleVariant={"h3"} style={{ display: "inline" }}>
           {props.displayContent.header}
         </Heading>
@@ -209,9 +258,14 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
             <span className="h6-styling">{props.displayContent.subheader}</span>
           </span>
         )}
-        <Content className="margin-top-1">{props.displayContent.description}</Content>
+        <Content className="margin-top-1">
+          {props.displayContent.description}
+        </Content>
         <div>
-          <WithErrorBar hasError={doesFieldHaveError(props.fieldName)} type="ALWAYS">
+          <WithErrorBar
+            hasError={doesFieldHaveError(props.fieldName)}
+            type="ALWAYS"
+          >
             {renderTable}
           </WithErrorBar>
           {props.addressData.length <= 9 && (

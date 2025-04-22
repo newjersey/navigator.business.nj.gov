@@ -23,7 +23,9 @@ export const SectionAccordion = (props: Props): ReactElement => {
   const headerClasses = props.mini ? "" : "margin-top-3 tablet:margin-left-3";
   const dividerClasses = props.mini ? "margin-y-2" : "margin-y-3";
   const sectionName = props.sectionType.toLowerCase();
-  const isOpen = business?.preferences.roadmapOpenSections.includes(props.sectionType) ?? false;
+  const isOpen =
+    business?.preferences.roadmapOpenSections.includes(props.sectionType) ??
+    false;
   const { Config } = useConfig();
 
   const handleAccordionStateChange = async (): Promise<void> => {
@@ -35,9 +37,11 @@ export const SectionAccordion = (props: Props): ReactElement => {
     if (isOpen) {
       await updateQueue
         ?.queuePreferences({
-          roadmapOpenSections: roadmapOpenSections?.filter((roadmapOpenSection) => {
-            return roadmapOpenSection !== props.sectionType;
-          }),
+          roadmapOpenSections: roadmapOpenSections?.filter(
+            (roadmapOpenSection) => {
+              return roadmapOpenSection !== props.sectionType;
+            }
+          ),
         })
         .update();
     } else {
@@ -54,14 +58,21 @@ export const SectionAccordion = (props: Props): ReactElement => {
       <SectionAccordionContext.Provider value={{ isOpen }}>
         <Accordion expanded={isOpen} onChange={handleAccordionStateChange}>
           <AccordionSummary
-            expandIcon={<Icon className={dropdownIconClasses} iconName="expand_more" />}
+            expandIcon={
+              <Icon className={dropdownIconClasses} iconName="expand_more" />
+            }
             aria-controls={`${sectionName}-content`}
             id={`${sectionName}-header`}
             data-testid={`${sectionName}-header`}
           >
             <div className="margin-y-05">
-              <Heading level={3} className={`flex flex-align-center margin-0-override ${headerClasses}`}>
-                <div className="inline">{Config.sectionHeaders[props.sectionType]}</div>
+              <Heading
+                level={3}
+                className={`flex flex-align-center margin-0-override ${headerClasses}`}
+              >
+                <div className="inline">
+                  {Config.sectionHeaders[props.sectionType]}
+                </div>
               </Heading>
             </div>
           </AccordionSummary>

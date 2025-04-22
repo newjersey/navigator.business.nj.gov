@@ -1,8 +1,14 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
+import {
+  findMatchInBlock,
+  findMatchInLabelledText,
+} from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
 import { AnytimeActionTask } from "@/lib/types/types";
 
-export const searchAnytimeActionTasks = (anytimeActionTasks: AnytimeActionTask[], term: string): Match[] => {
+export const searchAnytimeActionTasks = (
+  anytimeActionTasks: AnytimeActionTask[],
+  term: string
+): Match[] => {
   const matches: Match[] = [];
 
   for (const anytimeAction of anytimeActionTasks) {

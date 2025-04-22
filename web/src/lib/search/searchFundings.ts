@@ -1,4 +1,8 @@
-import { findMatchInBlock, findMatchInLabelledText, findMatchInListText } from "@/lib/search/helpers";
+import {
+  findMatchInBlock,
+  findMatchInLabelledText,
+  findMatchInListText,
+} from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
 import { Funding } from "@/lib/types/types";
 import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";
@@ -18,19 +22,29 @@ export const searchFundings = (fundings: Funding[], term: string): Match[] => {
     const summary = funding.summaryDescriptionMd.toLowerCase();
     const cta = funding.callToActionText?.toLowerCase();
     const ctaLink = funding.callToActionLink?.toLowerCase();
-    const agencyIDs = funding.agency ? funding.agency.map((it) => it.toLowerCase()) : [];
+    const agencyIDs = funding.agency
+      ? funding.agency.map((it) => it.toLowerCase())
+      : [];
     const agencyNames = funding.agency
-      ? funding.agency.map((it) => LookupFundingAgencyById(it).name.toLowerCase())
+      ? funding.agency.map((it) =>
+          LookupFundingAgencyById(it).name.toLowerCase()
+        )
       : [];
     const fundingType = funding.fundingType.toLowerCase();
     const status = funding.status.toLowerCase();
     const frequency = funding.programFrequency.toLowerCase();
     const stage = funding.businessStage.toLowerCase();
-    const certs = funding.certifications ? funding.certifications.map((it) => it.toLowerCase()) : [];
-    const counties = funding.county ? funding.county.map((it) => it.toLowerCase()) : [];
+    const certs = funding.certifications
+      ? funding.certifications.map((it) => it.toLowerCase())
+      : [];
+    const counties = funding.county
+      ? funding.county.map((it) => it.toLowerCase())
+      : [];
     const purpose = funding.programPurpose?.toLowerCase();
     const contact = funding.agencyContact?.toLowerCase();
-    const sectors = funding.sector ? funding.sector.map((it) => it.toLowerCase()) : [];
+    const sectors = funding.sector
+      ? funding.sector.map((it) => it.toLowerCase())
+      : [];
     const filename = funding.filename.toLowerCase();
     const urlSlug = funding.urlSlug.toLowerCase();
 

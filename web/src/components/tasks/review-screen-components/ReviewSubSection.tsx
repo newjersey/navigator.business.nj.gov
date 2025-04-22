@@ -13,7 +13,9 @@ export const ReviewSubSection = (props: Props): ReactElement => {
     <>
       <div
         data-testid={props.testId}
-        className={`flex space-between ${props.marginOverride ?? "margin-top-4"}`}
+        className={`flex space-between ${
+          props.marginOverride ?? "margin-top-4"
+        }`}
       >
         <div className={"maxw-mobile-lg"}>
           <Heading level={3}>{props.header}</Heading>

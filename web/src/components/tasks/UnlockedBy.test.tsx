@@ -6,7 +6,9 @@ import { render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-jest.mock("@/lib/data-hooks/useTaskFromRoadmap", () => ({ useTaskFromRoadmap: jest.fn() }));
+jest.mock("@/lib/data-hooks/useTaskFromRoadmap", () => ({
+  useTaskFromRoadmap: jest.fn(),
+}));
 
 const fakeTaskFromRoadmap = useTaskFromRoadmap as jest.Mock;
 
@@ -20,7 +22,9 @@ describe("<UnlockedBy />", () => {
     fakeTaskFromRoadmap.mockReturnValue(task);
     render(<UnlockedBy task={task} />);
 
-    expect(screen.getByText(Config.taskDefaults.unlockedBySingular)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.taskDefaults.unlockedBySingular)
+    ).toBeInTheDocument();
   });
 
   it("renders <UnlockingAlertDakotaFormation /> if current taskId is form-business-entity and the task is blocked by certificate-good-standing-foreign", () => {
@@ -32,11 +36,15 @@ describe("<UnlockedBy />", () => {
     render(<UnlockedBy task={task} />);
 
     const alertMatchedWithStartingText = screen.getByText((content) =>
-      content.includes(Config.formation.intro.certificateOfGoodStandingAlert.beginning)
+      content.includes(
+        Config.formation.intro.certificateOfGoodStandingAlert.beginning
+      )
     );
 
     const alertMatchedWithEndingText = screen.getByText((content) =>
-      content.includes(Config.formation.intro.certificateOfGoodStandingAlert.end)
+      content.includes(
+        Config.formation.intro.certificateOfGoodStandingAlert.end
+      )
     );
 
     expect(alertMatchedWithStartingText).toBeInTheDocument();

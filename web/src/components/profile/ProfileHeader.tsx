@@ -15,7 +15,9 @@ export const ProfileHeader = (props: Props): ReactElement => {
   return (
     <div data-testid="profile-header">
       <Heading level={1}>
-        {`${Config.profileDefaults.default.profilePageTitlePrefix} ${getNavBarBusinessTitle(
+        {`${
+          Config.profileDefaults.default.profilePageTitlePrefix
+        } ${getNavBarBusinessTitle(
           props.business,
           props.isAuthenticated ?? false
         )}`}

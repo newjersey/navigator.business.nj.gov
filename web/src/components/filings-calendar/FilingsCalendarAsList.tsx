@@ -7,7 +7,10 @@ import { sortFilterCalendarEventsWithinAYear } from "@/lib/domain-logic/filterCa
 import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
 import { LicenseEventType, OperateReference } from "@/lib/types/types";
 import { groupBy } from "@/lib/utils/helpers";
-import { LicenseCalendarEvent, TaxFilingCalendarEvent } from "@businessnjgovnavigator/shared";
+import {
+  LicenseCalendarEvent,
+  TaxFilingCalendarEvent,
+} from "@businessnjgovnavigator/shared";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
 import { Business } from "@businessnjgovnavigator/shared/userData";
@@ -38,8 +41,12 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
 
   const taxFilings = props.business.taxFilingData.filings ?? [];
 
-  const sortedFilteredEventsWithinAYear: Array<TaxFilingCalendarEvent | LicenseCalendarEvent> =
-    sortFilterCalendarEventsWithinAYear([...licenseCalendarEvents, ...taxFilings], props.activeYear);
+  const sortedFilteredEventsWithinAYear: Array<
+    TaxFilingCalendarEvent | LicenseCalendarEvent
+  > = sortFilterCalendarEventsWithinAYear(
+    [...licenseCalendarEvents, ...taxFilings],
+    props.activeYear
+  );
 
   const eventsGroupedByDate = groupBy(
     sortedFilteredEventsWithinAYear.filter((event) => {
@@ -51,7 +58,10 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
     (value) => value.dueDate
   );
 
-  const visibleEvents = eventsGroupedByDate.slice(0, numberOfVisibleCalendarEntries);
+  const visibleEvents = eventsGroupedByDate.slice(
+    0,
+    numberOfVisibleCalendarEntries
+  );
 
   if (sortedFilteredEventsWithinAYear.length === 0) {
     return (
@@ -60,7 +70,11 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
           {Config.dashboardDefaults.calendarEmptyDescriptionMarkdown}
         </Content>
         <div className="flex flex-column space-between fac text-align-center flex-desktop:grid-col usa-prose padding-x-3">
-          <img className="padding-y-2" src={`/img/empty-trophy-illustration.png`} alt="empty calendar" />
+          <img
+            className="padding-y-2"
+            src={`/img/empty-trophy-illustration.png`}
+            alt="empty calendar"
+          />
         </div>
       </>
     );
@@ -77,7 +91,10 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
             <div className="width-05 bg-primary minw-05" />
             <div className="margin-left-205">
               <div className="text-bold">
-                {parseDateWithFormat(events[0].dueDate, defaultDateFormat).format("MMMM D, YYYY")}
+                {parseDateWithFormat(
+                  events[0].dueDate,
+                  defaultDateFormat
+                ).format("MMMM D, YYYY")}
               </div>
               {events.map((event, index) => {
                 if (event.calendarEventType === "TAX-FILING") {
@@ -86,7 +103,9 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
                       key={event.identifier}
                       title={props.operateReferences[event.identifier].name}
                       dueDate={event.dueDate}
-                      urlSlug={`filings/${props.operateReferences[event.identifier].urlSlug}`}
+                      urlSlug={`filings/${
+                        props.operateReferences[event.identifier].urlSlug
+                      }`}
                       index={index}
                     />
                   );
@@ -111,7 +130,9 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
         <UnStyledButton
           isUnderline
           onClick={(): void => {
-            setNumberOfVisibleCalendarEntries((previous) => previous + LIST_VIEW_MORE_INCREMENT);
+            setNumberOfVisibleCalendarEntries(
+              (previous) => previous + LIST_VIEW_MORE_INCREMENT
+            );
           }}
         >
           {Config.dashboardDefaults.calendarListViewMoreButton}

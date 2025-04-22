@@ -14,32 +14,49 @@ interface Props {
 
 export const NewJerseyAddress = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useAddressErrors();
+  const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } =
+    useAddressErrors();
 
   return (
     <>
       <AddressLines1And2 onValidation={props.onValidation} />
       <div className="text-field-width-default">
         <WithErrorBar
-          hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressMunicipality"])}
+          hasError={doSomeFieldsHaveError([
+            "addressState",
+            "addressZipCode",
+            "addressMunicipality",
+          ])}
           type="DESKTOP-ONLY"
         >
           <div className="grid-row tablet:grid-gap-2">
             <div className="grid-col-12 tablet:grid-col-6">
-              <WithErrorBar hasError={doesFieldHaveError("addressMunicipality")} type="MOBILE-ONLY">
-                <span className="text-bold">{Config.formation.fields.addressCity.label}</span>
-                <AddressMunicipalityDropdown onValidation={props.onValidation} />
+              <WithErrorBar
+                hasError={doesFieldHaveError("addressMunicipality")}
+                type="MOBILE-ONLY"
+              >
+                <span className="text-bold">
+                  {Config.formation.fields.addressCity.label}
+                </span>
+                <AddressMunicipalityDropdown
+                  onValidation={props.onValidation}
+                />
               </WithErrorBar>
             </div>
             <div className="grid-col-12 tablet:grid-col-6 margin-top-2 tablet:margin-top-0">
               <WithErrorBar
-                hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
+                hasError={doSomeFieldsHaveError([
+                  "addressState",
+                  "addressZipCode",
+                ])}
                 type="MOBILE-ONLY"
               >
                 <div className="grid-row grid-gap tablet:grid-gap-2">
                   <div className="grid-col-6">
                     <strong>
-                      <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
+                      <ModifiedContent>
+                        {Config.formation.fields.addressState.label}
+                      </ModifiedContent>
                     </strong>
                     <div
                       id={`question-addressState`}
@@ -48,7 +65,9 @@ export const NewJerseyAddress = (props: Props): ReactElement => {
                       <StateDropdown
                         fieldName="addressState"
                         value={"New Jersey"}
-                        validationText={Config.formation.fields.addressState.error}
+                        validationText={
+                          Config.formation.fields.addressState.error
+                        }
                         disabled={true}
                         onSelect={(): void => {}}
                       />

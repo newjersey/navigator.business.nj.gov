@@ -18,7 +18,9 @@ export const ProfileLockedField = (props: Props): ReactElement => {
   }
 
   if (props.valueFormatter) {
-    valueToDisplay = props.valueFormatter(state.profileData[props.fieldName] as string);
+    valueToDisplay = props.valueFormatter(
+      state.profileData[props.fieldName] as string
+    );
   }
 
   return (

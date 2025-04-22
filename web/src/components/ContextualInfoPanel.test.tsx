@@ -5,7 +5,11 @@ import { render, screen } from "@testing-library/react";
 describe("<ContextualInfoPanel />", () => {
   it("is closed when contextual info is empty", () => {
     render(
-      withContextualInfo(<ContextualInfoPanel />, { isVisible: false, header: "", markdown: "" }, jest.fn())
+      withContextualInfo(
+        <ContextualInfoPanel />,
+        { isVisible: false, header: "", markdown: "" },
+        jest.fn()
+      )
     );
     expect(screen.getByTestId("overlay")).not.toHaveClass("is-visible");
     expect(screen.queryByTestId("info-panel")).not.toBeInTheDocument();

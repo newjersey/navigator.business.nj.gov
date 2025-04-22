@@ -50,7 +50,11 @@ export const NeedsAccountModal = (): ReactElement => {
         <div data-testid="self-reg-modal">
           <Content>{Config.selfRegistration.needsAccountModalBody}</Content>
           <div className="margin-top-3">
-            <PrimaryButton isColor="primary" isFullWidthOnDesktop onClick={linkToAccountSetup}>
+            <PrimaryButton
+              isColor="primary"
+              isFullWidthOnDesktop
+              onClick={linkToAccountSetup}
+            >
               {Config.selfRegistration.needsAccountModalButtonText}
             </PrimaryButton>
           </div>

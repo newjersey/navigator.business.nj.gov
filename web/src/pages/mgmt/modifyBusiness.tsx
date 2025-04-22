@@ -31,7 +31,8 @@ const ModifyBusinessPage = (): ReactElement => {
 
   const sortedLicenseNames = Object.keys(LicenseNameTaskIdMapping).sort();
   const sortedLicenseStatuses = licenseStatuses.sort();
-  const isModifyBusinessPageDisabled = process.env.FEATURE_MODIFY_BUSINESS_PAGE !== "true";
+  const isModifyBusinessPageDisabled =
+    process.env.FEATURE_MODIFY_BUSINESS_PAGE !== "true";
 
   useEffect(() => {
     if (isModifyBusinessPageDisabled) {
@@ -45,26 +46,49 @@ const ModifyBusinessPage = (): ReactElement => {
 
   return (
     <PageSkeleton showNavBar>
-      <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
+      <main
+        className="usa-section padding-top-0 desktop:padding-top-8"
+        id="main"
+      >
         <SingleColumnContainer>
-          <div className="padding-top-5 desktop:padding-top-0" data-testid={"modifyBusinessPage"}>
-            <Heading level={1}>This page will allow you to modify license data</Heading>
-            {isLicenseDataUndefined && <div>There is no existing license data for this business</div>}
+          <div
+            className="padding-top-5 desktop:padding-top-0"
+            data-testid={"modifyBusinessPage"}
+          >
+            <Heading level={1}>
+              This page will allow you to modify license data
+            </Heading>
+            {isLicenseDataUndefined && (
+              <div>There is no existing license data for this business</div>
+            )}
             {!isLicenseDataUndefined && (
               <div>
-                <div className="">The current business contains the following license data:</div>
+                <div className="">
+                  The current business contains the following license data:
+                </div>
                 <div className="flex margin-top-1">
-                  <div className="text-underline width-tablet">License Name</div>
-                  <div className="text-underline width-card-lg">License Status</div>
+                  <div className="text-underline width-tablet">
+                    License Name
+                  </div>
+                  <div className="text-underline width-card-lg">
+                    License Status
+                  </div>
                   <div className="text-underline width-mobile">Task ID</div>
                 </div>
                 {business?.licenseData?.licenses &&
                   Object.entries(business?.licenseData?.licenses).map(
                     ([licenseName, licenseDetails], index) => (
-                      <div className="flex margin-bottom-05" key={`${licenseName}-${index}`}>
+                      <div
+                        className="flex margin-bottom-05"
+                        key={`${licenseName}-${index}`}
+                      >
                         <div className="width-tablet">{licenseName}</div>
-                        <div className="width-card-lg">{licenseDetails.licenseStatus}</div>
-                        <div className="width-mobile">{LicenseNameTaskIdMapping[licenseName]}</div>
+                        <div className="width-card-lg">
+                          {licenseDetails.licenseStatus}
+                        </div>
+                        <div className="width-mobile">
+                          {LicenseNameTaskIdMapping[licenseName]}
+                        </div>
                       </div>
                     )
                   )}
@@ -72,14 +96,16 @@ const ModifyBusinessPage = (): ReactElement => {
             )}
 
             <div className="margin-top-6">
-              Note 1: to view an anytime actions reinstatement, the license status must be set to expired.
+              Note 1: to view an anytime actions reinstatement, the license
+              status must be set to expired.
             </div>
             <div>
-              Note 2: deleting the license data will reset all license search enabled task statuses to TO_DO
+              Note 2: deleting the license data will reset all license search
+              enabled task statuses to TO_DO
             </div>
             <div>
-              Note 3: to view the license details in the task, you must select an industry that has the task
-              on the roadmap
+              Note 3: to view the license details in the task, you must select
+              an industry that has the task on the roadmap
             </div>
 
             <div className="flex margin-top-2">
@@ -93,7 +119,11 @@ const ModifyBusinessPage = (): ReactElement => {
                     label="License Name"
                     variant="outlined"
                     onChange={(event) => {
-                      setTaskId(LicenseNameTaskIdMapping[event.target.value as LicenseTaskId]);
+                      setTaskId(
+                        LicenseNameTaskIdMapping[
+                          event.target.value as LicenseTaskId
+                        ]
+                      );
                       setLicenseName(event.target.value);
                     }}
                   >
@@ -143,7 +173,9 @@ const ModifyBusinessPage = (): ReactElement => {
                         licenses: {
                           ...business?.licenseData?.licenses,
                           [licenseName]: generateLicenseDetails({
-                            expirationDateISO: getCurrentDate().add(1, "month").toISOString(),
+                            expirationDateISO: getCurrentDate()
+                              .add(1, "month")
+                              .toISOString(),
                             licenseStatus: licenseStatus as LicenseStatus,
                           }),
                         },
@@ -165,7 +197,10 @@ const ModifyBusinessPage = (): ReactElement => {
                 onClick={() => {
                   if (business?.licenseData) {
                     const taskProgress = sortedLicenseNames.reduce(
-                      (acc: Record<string, TaskProgress>, curr: string): Record<string, TaskProgress> => {
+                      (
+                        acc: Record<string, TaskProgress>,
+                        curr: string
+                      ): Record<string, TaskProgress> => {
                         acc[curr] = "TO_DO";
                         return acc;
                       },

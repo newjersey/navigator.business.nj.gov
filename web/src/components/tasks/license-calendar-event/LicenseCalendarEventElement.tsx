@@ -6,9 +6,15 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LicenseEventType } from "@/lib/types/types";
 import { LicenseEventSubtype } from "@businessnjgovnavigator/shared/";
-import { parseDate, parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
+import {
+  parseDate,
+  parseDateWithFormat,
+} from "@businessnjgovnavigator/shared/dateHelpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
-import { LicenseName, licenseSearchDateFormat } from "@businessnjgovnavigator/shared/license";
+import {
+  LicenseName,
+  licenseSearchDateFormat,
+} from "@businessnjgovnavigator/shared/license";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
 
@@ -25,7 +31,8 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const { Config } = useConfig();
 
-  const licenseName = props.CMS_ONLY_fakeLicenseName ?? props.license.licenseName;
+  const licenseName =
+    props.CMS_ONLY_fakeLicenseName ?? props.license.licenseName;
   const licenseDetails = business?.licenseData?.licenses?.[licenseName];
   const expirationDateISO = licenseDetails?.expirationDateISO;
 
@@ -46,14 +53,16 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
           <div>
             <span className="text-bold">
               {
-                Config.anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults
+                Config
+                  .anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults
                   .licenseExpirationHeaderText
               }
             </span>{" "}
             {licenseDetails?.expirationDateISO &&
-              parseDateWithFormat(date.format(defaultDateFormat), defaultDateFormat).format(
-                licenseSearchDateFormat
-              )}
+              parseDateWithFormat(
+                date.format(defaultDateFormat),
+                defaultDateFormat
+              ).format(licenseSearchDateFormat)}
           </div>
         </div>
       </div>
@@ -71,7 +80,10 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
         </>
       )}
 
-      <LicenseCurrentStatusComponent licenseData={business?.licenseData} licenseName={licenseName} />
+      <LicenseCurrentStatusComponent
+        licenseData={business?.licenseData}
+        licenseName={licenseName}
+      />
 
       <Content>{props.license.contentMd}</Content>
 
@@ -82,7 +94,10 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
       <span className="h6-styling">{props.license.issuingAgency}</span>
 
       {props.license.callToActionLink && props.license.callToActionText && (
-        <SingleCtaLink link={props.license.callToActionLink} text={props.license.callToActionText} />
+        <SingleCtaLink
+          link={props.license.callToActionLink}
+          text={props.license.callToActionText}
+        />
       )}
     </div>
   );

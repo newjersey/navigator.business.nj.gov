@@ -8,7 +8,10 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { EssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { FormContextFieldProps, ProfileContentField } from "@/lib/types/types";
-import { IndustrySpecificData, industrySpecificDataChoices } from "@businessnjgovnavigator/shared";
+import {
+  IndustrySpecificData,
+  industrySpecificDataChoices,
+} from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
 interface Props<T> extends FormContextFieldProps<T> {
@@ -18,33 +21,50 @@ interface Props<T> extends FormContextFieldProps<T> {
 export const EssentialQuestionField = <T,>(props: Props<T>): ReactElement => {
   const { state } = useContext(ProfileDataContext);
 
-  const { RegisterForOnSubmit, isFormFieldInvalid } = useFormContextFieldHelpers(
-    props.essentialQuestion.fieldName,
-    DataFormErrorMapContext,
-    props.errorTypes
-  );
+  const { RegisterForOnSubmit, isFormFieldInvalid } =
+    useFormContextFieldHelpers(
+      props.essentialQuestion.fieldName,
+      DataFormErrorMapContext,
+      props.errorTypes
+    );
 
   const { Config } = useConfig();
-  RegisterForOnSubmit(() => state.profileData[props.essentialQuestion.fieldName] !== undefined);
+  RegisterForOnSubmit(
+    () => state.profileData[props.essentialQuestion.fieldName] !== undefined
+  );
 
   return (
     <div
       data-testid={`industry-specific-${state.profileData.industryId}-${props.essentialQuestion.fieldName}`}
     >
-      <WithErrorBar hasError={isFormFieldInvalid} type="ALWAYS" className="margin-top-4">
+      <WithErrorBar
+        hasError={isFormFieldInvalid}
+        type="ALWAYS"
+        className="margin-top-4"
+      >
         {props.onboardingFieldLabel ? (
           <div data-testid={"FieldLabelOnboarding"}>
-            <FieldLabelOnboarding fieldName={props.essentialQuestion.fieldName as ProfileContentField} />
+            <FieldLabelOnboarding
+              fieldName={
+                props.essentialQuestion.fieldName as ProfileContentField
+              }
+            />
           </div>
         ) : (
           <div data-testid={"FieldLabelProfile"}>
-            <FieldLabelProfile fieldName={props.essentialQuestion.fieldName as ProfileContentField} />
+            <FieldLabelProfile
+              fieldName={
+                props.essentialQuestion.fieldName as ProfileContentField
+              }
+            />
           </div>
         )}
 
         <RadioQuestion<IndustrySpecificData[keyof IndustrySpecificData]>
           {...props.essentialQuestion}
-          choices={industrySpecificDataChoices[props.essentialQuestion.fieldName]}
+          choices={
+            industrySpecificDataChoices[props.essentialQuestion.fieldName]
+          }
         />
         {isFormFieldInvalid && (
           <div className="text-error-dark text-bold margin-top-05">

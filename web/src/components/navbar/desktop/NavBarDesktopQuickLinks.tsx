@@ -12,38 +12,60 @@ export const NavBarDesktopQuickLinks = (): ReactElement => {
   return (
     <div className={"display-flex flex-row flex-align-center"}>
       <div className={sharedMargins}>
-        <UnStyledButton onClick={(): void => openInNewTab(Config.navigationQuickLinks.navBarPlanLink)}>
+        <UnStyledButton
+          onClick={(): void =>
+            openInNewTab(Config.navigationQuickLinks.navBarPlanLink)
+          }
+        >
           {Config.navigationQuickLinks.navBarPlanText}
         </UnStyledButton>
       </div>
 
       <div className={sharedMargins}>
-        <UnStyledButton onClick={(): void => openInNewTab(Config.navigationQuickLinks.navBarStartLink)}>
+        <UnStyledButton
+          onClick={(): void =>
+            openInNewTab(Config.navigationQuickLinks.navBarStartLink)
+          }
+        >
           {Config.navigationQuickLinks.navBarStartText}
         </UnStyledButton>
       </div>
 
       <div className={sharedMargins}>
-        <UnStyledButton onClick={(): void => openInNewTab(Config.navigationQuickLinks.navBarOperateLink)}>
+        <UnStyledButton
+          onClick={(): void =>
+            openInNewTab(Config.navigationQuickLinks.navBarOperateLink)
+          }
+        >
           {Config.navigationQuickLinks.navBarOperateText}
         </UnStyledButton>
       </div>
 
       <div className={sharedMargins}>
-        <UnStyledButton onClick={(): void => openInNewTab(Config.navigationQuickLinks.navBarGrowLink)}>
+        <UnStyledButton
+          onClick={(): void =>
+            openInNewTab(Config.navigationQuickLinks.navBarGrowLink)
+          }
+        >
           {Config.navigationQuickLinks.navBarGrowText}
         </UnStyledButton>
       </div>
 
       <div className={sharedMargins}>
-        <UnStyledButton onClick={(): void => openInNewTab(Config.navigationQuickLinks.navBarUpdatesLink)}>
+        <UnStyledButton
+          onClick={(): void =>
+            openInNewTab(Config.navigationQuickLinks.navBarUpdatesLink)
+          }
+        >
           {Config.navigationQuickLinks.navBarUpdatesText}
         </UnStyledButton>
       </div>
 
       <div className={`${sharedMargins} nav-bar-icon-search-outline`}>
         <UnStyledButton
-          onClick={(): void => openInNewTab(Config.navigationQuickLinks.navBarSearchLink)}
+          onClick={(): void =>
+            openInNewTab(Config.navigationQuickLinks.navBarSearchLink)
+          }
           dataTestid={"navbar-search-icon"}
           ariaLabel={"search-icon"}
         >

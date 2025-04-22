@@ -55,7 +55,8 @@ const DashboardPage = (props: Props): ReactElement => {
   const router = useRouter();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
-  const isLoading = !business || business?.onboardingFormProgress !== "COMPLETED" || !roadmap;
+  const isLoading =
+    !business || business?.onboardingFormProgress !== "COMPLETED" || !roadmap;
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const [hasElevatorViolations, setHasElevatorViolations] = useState(false);
 
@@ -69,15 +70,21 @@ const DashboardPage = (props: Props): ReactElement => {
       ) {
         await updateQueue
           ?.queuePreferences({
-            visibleSidebarCards: [...business.preferences.visibleSidebarCards, "not-registered"],
+            visibleSidebarCards: [
+              ...business.preferences.visibleSidebarCards,
+              "not-registered",
+            ],
           })
           .update();
       }
 
       if (
-        business?.profileData.operatingPhase === OperatingPhaseId.GUEST_MODE_OWNING &&
+        business?.profileData.operatingPhase ===
+          OperatingPhaseId.GUEST_MODE_OWNING &&
         business?.profileData.businessPersona === "OWNING" &&
-        !business.preferences.visibleSidebarCards.includes("not-registered-up-and-running")
+        !business.preferences.visibleSidebarCards.includes(
+          "not-registered-up-and-running"
+        )
       ) {
         await updateQueue
           ?.queuePreferences({
@@ -97,7 +104,9 @@ const DashboardPage = (props: Props): ReactElement => {
         if (!updateQueue || business?.onboardingFormProgress !== "COMPLETED") {
           return;
         }
-        await updateQueue.queuePreferences({ phaseNewlyChanged: false }).update();
+        await updateQueue
+          .queuePreferences({ phaseNewlyChanged: false })
+          .update();
       }
 
       if (
@@ -114,7 +123,9 @@ const DashboardPage = (props: Props): ReactElement => {
   }, [business, updateQueue]);
 
   return (
-    <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
+    <MunicipalitiesContext.Provider
+      value={{ municipalities: props.municipalities }}
+    >
       <NextSeo title={getNextSeoTitle(Config.pagesMetadata.dashboardTitle)} />
       <PageSkeleton showNavBar>
         <main id="main">
@@ -127,7 +138,9 @@ const DashboardPage = (props: Props): ReactElement => {
                 displayContent={props.displayContent}
                 fundings={props.fundings}
                 operateReferences={props.operateReferences}
-                anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
+                anytimeActionLicenseReinstatements={
+                  props.anytimeActionLicenseReinstatements
+                }
                 anytimeActionTasks={props.anytimeActionTasks}
                 elevatorViolations={hasElevatorViolations}
                 licenseEvents={props.licenseEvents}
@@ -137,7 +150,9 @@ const DashboardPage = (props: Props): ReactElement => {
                 displayContent={props.displayContent}
                 fundings={props.fundings}
                 operateReferences={props.operateReferences}
-                anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
+                anytimeActionLicenseReinstatements={
+                  props.anytimeActionLicenseReinstatements
+                }
                 anytimeActionTasks={props.anytimeActionTasks}
                 elevatorViolations={hasElevatorViolations}
                 licenseEvents={props.licenseEvents}
@@ -159,7 +174,8 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
       certifications: loadAllCertifications(),
       municipalities: loadAllMunicipalities(),
       anytimeActionTasks: loadAllAnytimeActionTasks(),
-      anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
+      anytimeActionLicenseReinstatements:
+        loadAllAnytimeActionLicenseReinstatements(),
       licenseEvents: loadAllLicenseCalendarEvents(),
     },
   };

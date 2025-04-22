@@ -23,7 +23,10 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { LegalStructureRadio } from "@/components/tasks/business-structure/LegalStructureRadio";
 import { ConfigContext } from "@/contexts/configContext";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
@@ -41,11 +44,17 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
-  const { state: formContextState } = useFormContextHelper(createDataFormErrorMap());
+  const { state: formContextState } = useFormContextHelper(
+    createDataFormErrorMap()
+  );
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <DataFormErrorMapContext.Provider value={formContextState}>
-        <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+        <div
+          className="cms"
+          ref={ref}
+          style={{ margin: 40, pointerEvents: "none" }}
+        >
           <BusinessPersonaQuestion />
           <hr className="margin-y-4" />
 
@@ -55,7 +64,10 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
 
             <div className="margin-y-2" />
 
-            <FieldLabelOnboarding fieldName="businessName" CMS_ONLY_flow="OWNING" />
+            <FieldLabelOnboarding
+              fieldName="businessName"
+              CMS_ONLY_flow="OWNING"
+            />
             <BusinessName />
           </div>
           <hr className="margin-y-4" />
@@ -70,7 +82,10 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
 
             <div className="margin-y-2" />
 
-            <FieldLabelOnboarding fieldName="legalStructureId" CMS_ONLY_flow="FOREIGN" />
+            <FieldLabelOnboarding
+              fieldName="legalStructureId"
+              CMS_ONLY_flow="FOREIGN"
+            />
             <LegalStructureRadio taskId={businessStructureTaskId} />
           </div>
 
@@ -84,14 +99,20 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
 
             <div className="margin-y-2" />
 
-            <FieldLabelOnboarding fieldName="municipality" CMS_ONLY_flow="OWNING" />
+            <FieldLabelOnboarding
+              fieldName="municipality"
+              CMS_ONLY_flow="OWNING"
+            />
             <div className="margin-top-2">
               <MunicipalityField />
             </div>
 
             <div className="margin-y-2" />
 
-            <FieldLabelOnboarding fieldName="municipality" CMS_ONLY_flow="FOREIGN" />
+            <FieldLabelOnboarding
+              fieldName="municipality"
+              CMS_ONLY_flow="FOREIGN"
+            />
             <div className="margin-top-2">
               <MunicipalityField />
             </div>
@@ -109,7 +130,10 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
 
             <div className="margin-y-2" />
 
-            <FieldLabelOnboarding fieldName="ownershipTypeIds" CMS_ONLY_flow="OWNING" />
+            <FieldLabelOnboarding
+              fieldName="ownershipTypeIds"
+              CMS_ONLY_flow="OWNING"
+            />
             <Ownership />
           </div>
 
@@ -121,7 +145,10 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
 
             <div className="margin-y-2" />
 
-            <FieldLabelOnboarding fieldName="existingEmployees" CMS_ONLY_flow="OWNING" />
+            <FieldLabelOnboarding
+              fieldName="existingEmployees"
+              CMS_ONLY_flow="OWNING"
+            />
             <ExistingEmployees />
           </div>
 
@@ -156,7 +183,11 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
 
           <div className="margin-top-3">
             <Heading level={4}>----Input Label On Naics Code Task----</Heading>
-            <FieldLabelProfile fieldName={"naicsCode"} isAltDescriptionDisplayed ignoreContextualInfo />
+            <FieldLabelProfile
+              fieldName={"naicsCode"}
+              isAltDescriptionDisplayed
+              ignoreContextualInfo
+            />
           </div>
 
           <hr className="margin-y-4" />
@@ -181,7 +212,9 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
           {EssentialQuestions.map((props, index) => {
             return (
               <div className="margin-top-4" key={props.fieldName + index}>
-                <FieldLabelProfile fieldName={props.fieldName as ProfileContentField} />
+                <FieldLabelProfile
+                  fieldName={props.fieldName as ProfileContentField}
+                />
                 <RadioQuestion<IndustrySpecificData[keyof IndustrySpecificData]>
                   {...props}
                   choices={industrySpecificDataChoices[props.fieldName]}

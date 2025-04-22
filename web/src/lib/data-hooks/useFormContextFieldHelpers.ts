@@ -1,4 +1,8 @@
-import { FieldErrorType, FieldStateActionKind, FormContextType } from "@/lib/types/types";
+import {
+  FieldErrorType,
+  FieldStateActionKind,
+  FormContextType,
+} from "@/lib/types/types";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { Context, useContext, useEffect, useMemo } from "react";
 
@@ -30,12 +34,18 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
     useMountEffect(() => {
       debug && console.log("mounted");
       debug && console.log(fieldName);
-      reducer({ type: FieldStateActionKind.REGISTER, payload: { field: fieldName } });
+      reducer({
+        type: FieldStateActionKind.REGISTER,
+        payload: { field: fieldName },
+      });
 
       return (): void => {
         debug && console.log("unmounted");
         debug && console.log(fieldName);
-        reducer({ type: FieldStateActionKind.UNREGISTER, payload: { field: fieldName } });
+        reducer({
+          type: FieldStateActionKind.UNREGISTER,
+          payload: { field: fieldName },
+        });
       };
     });
 

@@ -7,7 +7,11 @@ import {
 import { completeBusinessStructureTask } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import { AdditionalFormation } from "@businessnjgovnavigator/cypress/support/types";
-import { FormationFormData, LookupIndustryById, randomInt } from "@businessnjgovnavigator/shared/";
+import {
+  FormationFormData,
+  LookupIndustryById,
+  randomInt,
+} from "@businessnjgovnavigator/shared/";
 import { onAddressModal } from "cypress/support/page_objects/addressModal";
 import { onBusinessFormationPage } from "cypress/support/page_objects/businessFormationPage";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
@@ -28,14 +32,17 @@ describe("Business Formation [feature] [all] [group2]", () => {
     const businessSuffix = "LIMITED LIABILITY CO";
     const addressLine1 = `some-business-address-1-${randomInt()}`;
     const addressLine2 = `some-business-address-2-${randomInt()}`;
-    const addressMunicipality = generateMunicipality({ displayName: "Allendale" });
+    const addressMunicipality = generateMunicipality({
+      displayName: "Allendale",
+    });
     const addressZipCode = "07005";
     const businessPurpose = "My Business Purpose...";
     const additionalProvisions: FormationFormData["additionalProvisions"] = [
       "My Provision 1",
       "My Provision 2",
     ];
-    const agentNumberOrManual: FormationFormData["agentNumberOrManual"] = "MANUAL_ENTRY";
+    const agentNumberOrManual: FormationFormData["agentNumberOrManual"] =
+      "MANUAL_ENTRY";
     const registeredAgentSameAsAccountCheckbox = false;
     const agentName = "John Doe";
     const agentEmail = "John.Doe@gmail.com";
@@ -102,7 +109,11 @@ describe("Business Formation [feature] [all] [group2]", () => {
       contactLastName,
       contactPhoneNumber,
     });
-    selectServices({ certificateOfStanding, certifiedCopyOfFormationDocument, paymentType });
+    selectServices({
+      certificateOfStanding,
+      certifiedCopyOfFormationDocument,
+      paymentType,
+    });
     onBusinessFormationPage.clickContinueToNextTab();
     onBusinessFormationPage.clickContinueToNextTab();
     onBusinessFormationPage.getFormationSuccessPage().should("be.visible");
@@ -112,7 +123,10 @@ describe("Business Formation [feature] [all] [group2]", () => {
 const submitBusinessNameSearchAndContinue = (name: string): void => {
   cy.url().should("include", "form-business-entity");
   onBusinessFormationPage.typeBusinessNameSearch(name);
-  onBusinessFormationPage.getBusinessNameSearch().invoke("prop", "value").should("contain", name);
+  onBusinessFormationPage
+    .getBusinessNameSearch()
+    .invoke("prop", "value")
+    .should("contain", name);
   onBusinessFormationPage.submitBusinessNameSearch();
   onBusinessFormationPage.getAvailableBusinessNameAlert().should("be.visible");
   onBusinessFormationPage.clickContinueToNextTab();
@@ -124,7 +138,10 @@ const typeDesignatorAndStartDate = ({
 }: Partial<FormationFormData>): void => {
   if (businessSuffix) {
     onBusinessFormationPage.selectBusinessDesignator(businessSuffix);
-    onBusinessFormationPage.getBusinessDesignator().invoke("prop", "value").should("contain", businessSuffix);
+    onBusinessFormationPage
+      .getBusinessDesignator()
+      .invoke("prop", "value")
+      .should("contain", businessSuffix);
   }
   if (businessStartDate) {
     onBusinessFormationPage.typeBusinessStartDate(businessStartDate as string);
@@ -143,14 +160,22 @@ const typeBusinessAddress = ({
 }: Partial<FormationFormData>): void => {
   if (addressLine1) {
     onBusinessFormationPage.typeBusinessAddressLine1(addressLine1 as string);
-    onBusinessFormationPage.getBusinessAddressLine1().invoke("prop", "value").should("contain", addressLine1);
+    onBusinessFormationPage
+      .getBusinessAddressLine1()
+      .invoke("prop", "value")
+      .should("contain", addressLine1);
   }
   if (addressLine2) {
     onBusinessFormationPage.typeBusinessAddressLine2(addressLine2 as string);
-    onBusinessFormationPage.getBusinessAddressLine2().invoke("prop", "value").should("contain", addressLine2);
+    onBusinessFormationPage
+      .getBusinessAddressLine2()
+      .invoke("prop", "value")
+      .should("contain", addressLine2);
   }
   if (addressMunicipality) {
-    onBusinessFormationPage.selectBusinessAddressMunicipality(addressMunicipality.displayName);
+    onBusinessFormationPage.selectBusinessAddressMunicipality(
+      addressMunicipality.displayName
+    );
     onBusinessFormationPage
       .getBusinessAddressMunicipality()
       .invoke("prop", "value")
@@ -169,20 +194,30 @@ const openAddressSection = (): void => {
   cy.get('[data-testid="add-address-button"]').click();
 };
 
-const typeBusinessPurpose = (businessPurpose: FormationFormData["businessPurpose"]): void => {
+const typeBusinessPurpose = (
+  businessPurpose: FormationFormData["businessPurpose"]
+): void => {
   onBusinessFormationPage.clickAddBusinessPurpose();
   onBusinessFormationPage.typeBusinessPurpose(businessPurpose as string);
-  onBusinessFormationPage.getBusinessPurpose().invoke("prop", "value").should("contain", businessPurpose);
+  onBusinessFormationPage
+    .getBusinessPurpose()
+    .invoke("prop", "value")
+    .should("contain", businessPurpose);
 };
 
-const typeProvisions = (provisions: FormationFormData["additionalProvisions"]): void => {
+const typeProvisions = (
+  provisions: FormationFormData["additionalProvisions"]
+): void => {
   if (!provisions) {
     return;
   }
   onBusinessFormationPage.clickAddProvisions();
   for (const [index, provision] of provisions.entries()) {
     onBusinessFormationPage.typeProvision(provision, index);
-    onBusinessFormationPage.getProvision(index).invoke("prop", "value").should("contain", provisions[index]);
+    onBusinessFormationPage
+      .getProvision(index)
+      .invoke("prop", "value")
+      .should("contain", provisions[index]);
     if (index + 1 < provisions.length) {
       onBusinessFormationPage.clickAddNewProvision();
     }
@@ -203,7 +238,9 @@ const selectAndTypeRegisteredAgent = ({
 }: Partial<AdditionalFormation>): void => {
   if (agentNumberOrManual === "NUMBER") {
     onBusinessFormationPage.getRegisteredAgentNumberRadio().check();
-    onBusinessFormationPage.getRegisteredAgentNumberRadio().should("be.checked");
+    onBusinessFormationPage
+      .getRegisteredAgentNumberRadio()
+      .should("be.checked");
 
     if (agentNumber) {
       onBusinessFormationPage.typeRegisteredAgentIdNumber(agentNumber);
@@ -215,39 +252,61 @@ const selectAndTypeRegisteredAgent = ({
   }
   if (agentNumberOrManual === "MANUAL_ENTRY") {
     onBusinessFormationPage.getRegisteredAgentManualRadio().check();
-    onBusinessFormationPage.getRegisteredAgentManualRadio().should("be.checked");
+    onBusinessFormationPage
+      .getRegisteredAgentManualRadio()
+      .should("be.checked");
 
     if (registeredAgentSameAsAccountCheckbox) {
       onBusinessFormationPage.getRegisteredAgentSameAsAccountCheckbox().check();
-      onBusinessFormationPage.getRegisteredAgentManualRadio().should("be.checked");
+      onBusinessFormationPage
+        .getRegisteredAgentManualRadio()
+        .should("be.checked");
       onBusinessFormationPage.getRegisteredAgentName().should("be.disabled");
       onBusinessFormationPage.getRegisteredAgentEmail().should("be.disabled");
     }
     if (agentName) {
       onBusinessFormationPage.typeRegisteredAgentName(agentName);
-      onBusinessFormationPage.getRegisteredAgentName().invoke("prop", "value").should("contain", agentName);
+      onBusinessFormationPage
+        .getRegisteredAgentName()
+        .invoke("prop", "value")
+        .should("contain", agentName);
     }
     if (agentEmail) {
       onBusinessFormationPage.typeRegisteredAgentEmail(agentEmail);
-      onBusinessFormationPage.getRegisteredAgentEmail().invoke("prop", "value").should("contain", agentEmail);
+      onBusinessFormationPage
+        .getRegisteredAgentEmail()
+        .invoke("prop", "value")
+        .should("contain", agentEmail);
     }
     if (getRegisteredAgentSameAsBusinessAddressCheckbox) {
-      onBusinessFormationPage.getRegisteredAgentSameAsBusinessAddressCheckbox().check();
-      onBusinessFormationPage.getRegisteredAgentManualRadio().should("be.checked");
-      onBusinessFormationPage.getRegisteredAgentAddressLine1().should("be.disabled");
-      onBusinessFormationPage.getRegisteredAgentAddressLine2().should("be.disabled");
+      onBusinessFormationPage
+        .getRegisteredAgentSameAsBusinessAddressCheckbox()
+        .check();
+      onBusinessFormationPage
+        .getRegisteredAgentManualRadio()
+        .should("be.checked");
+      onBusinessFormationPage
+        .getRegisteredAgentAddressLine1()
+        .should("be.disabled");
+      onBusinessFormationPage
+        .getRegisteredAgentAddressLine2()
+        .should("be.disabled");
       onBusinessFormationPage.getRegisteredAgentCity().should("be.disabled");
       onBusinessFormationPage.getRegisteredAgentZipCode().should("be.disabled");
     }
     if (agentOfficeAddressLine1) {
-      onBusinessFormationPage.typeRegisteredAgentAddressLine1(agentOfficeAddressLine1);
+      onBusinessFormationPage.typeRegisteredAgentAddressLine1(
+        agentOfficeAddressLine1
+      );
       onBusinessFormationPage
         .getRegisteredAgentAddressLine1()
         .invoke("prop", "value")
         .should("contain", agentOfficeAddressLine1);
     }
     if (agentOfficeAddressLine2) {
-      onBusinessFormationPage.typeRegisteredAgentAddressLine2(agentOfficeAddressLine2);
+      onBusinessFormationPage.typeRegisteredAgentAddressLine2(
+        agentOfficeAddressLine2
+      );
       onBusinessFormationPage
         .getRegisteredAgentAddressLine2()
         .invoke("prop", "value")
@@ -262,7 +321,9 @@ const selectAndTypeRegisteredAgent = ({
         .should("contain", agentOfficeAddressCity);
     }
     if (agentOfficeAddressZipCode) {
-      onBusinessFormationPage.typeRegisteredAgentZipCode(agentOfficeAddressZipCode);
+      onBusinessFormationPage.typeRegisteredAgentZipCode(
+        agentOfficeAddressZipCode
+      );
       onBusinessFormationPage
         .getRegisteredAgentZipCode()
         .invoke("prop", "value")
@@ -271,29 +332,51 @@ const selectAndTypeRegisteredAgent = ({
   }
 };
 
-const addMembersToFormation = (members: FormationFormData["members"] = []): void => {
+const addMembersToFormation = (
+  members: FormationFormData["members"] = []
+): void => {
   for (const membersObj of members) {
     onBusinessFormationPage.clickAddNewMembers();
     onAddressModal.typeFullName(membersObj.name);
-    onAddressModal.getFullName().invoke("prop", "value").should("contain", membersObj.name);
+    onAddressModal
+      .getFullName()
+      .invoke("prop", "value")
+      .should("contain", membersObj.name);
 
     onAddressModal.typeAddressLine1(membersObj.addressLine1);
-    onAddressModal.getAddressLine1().invoke("prop", "value").should("contain", membersObj.addressLine1);
+    onAddressModal
+      .getAddressLine1()
+      .invoke("prop", "value")
+      .should("contain", membersObj.addressLine1);
 
     onAddressModal.typeAddressLine2(membersObj.addressLine2);
-    onAddressModal.getAddressLine2().invoke("prop", "value").should("contain", membersObj.addressLine2);
+    onAddressModal
+      .getAddressLine2()
+      .invoke("prop", "value")
+      .should("contain", membersObj.addressLine2);
 
     onAddressModal.typeCity(membersObj.addressCity);
-    onAddressModal.getCity().invoke("prop", "value").should("contain", membersObj.addressCity);
+    onAddressModal
+      .getCity()
+      .invoke("prop", "value")
+      .should("contain", membersObj.addressCity);
 
-    onAddressModal.selectState(membersObj.addressState ? membersObj.addressState.shortCode : "");
+    onAddressModal.selectState(
+      membersObj.addressState ? membersObj.addressState.shortCode : ""
+    );
     onAddressModal
       .getState()
       .invoke("prop", "value")
-      .should("contain", membersObj.addressState ? membersObj.addressState.shortCode : "");
+      .should(
+        "contain",
+        membersObj.addressState ? membersObj.addressState.shortCode : ""
+      );
 
     onAddressModal.typeZipCode(membersObj.addressZipCode);
-    onAddressModal.getZipCode().invoke("prop", "value").should("contain", membersObj.addressZipCode);
+    onAddressModal
+      .getZipCode()
+      .invoke("prop", "value")
+      .should("contain", membersObj.addressZipCode);
 
     onAddressModal.clickAddMemberButton();
   }
@@ -302,9 +385,14 @@ const addMembersToFormation = (members: FormationFormData["members"] = []): void
 const addSigners = (signers: FormationFormData["signers"] = []): void => {
   for (const [index, signer] of signers.entries()) {
     onBusinessFormationPage.typeSigner(signer.name, index);
-    onBusinessFormationPage.getSigner(index).invoke("prop", "value").should("contain", signer.name);
+    onBusinessFormationPage
+      .getSigner(index)
+      .invoke("prop", "value")
+      .should("contain", signer.name);
     onBusinessFormationPage.getSignerSignatureCheckbox(index).check();
-    onBusinessFormationPage.getSignerSignatureCheckbox(index).should("be.checked");
+    onBusinessFormationPage
+      .getSignerSignatureCheckbox(index)
+      .should("be.checked");
 
     if (index + 1 < signers.length) {
       onBusinessFormationPage.clickAddNewSigner();
@@ -319,11 +407,17 @@ const typeBillingContactInfo = ({
 }: Partial<FormationFormData>): void => {
   if (contactFirstName) {
     onBusinessFormationPage.typeContactFirstName(contactFirstName);
-    onBusinessFormationPage.getContactFirstName().invoke("prop", "value").should("contain", contactFirstName);
+    onBusinessFormationPage
+      .getContactFirstName()
+      .invoke("prop", "value")
+      .should("contain", contactFirstName);
   }
   if (contactLastName) {
     onBusinessFormationPage.typeContactLastName(contactLastName);
-    onBusinessFormationPage.getContactLastName().invoke("prop", "value").should("contain", contactLastName);
+    onBusinessFormationPage
+      .getContactLastName()
+      .invoke("prop", "value")
+      .should("contain", contactLastName);
   }
   if (contactPhoneNumber) {
     onBusinessFormationPage.typeContactPhoneNumber(contactPhoneNumber);
@@ -332,10 +426,10 @@ const typeBillingContactInfo = ({
       .invoke("prop", "value")
       .should(
         "contain",
-        `(${contactPhoneNumber.slice(0, 3)}) ${contactPhoneNumber.slice(3, 6)}-${contactPhoneNumber.slice(
-          6,
-          10
-        )}`
+        `(${contactPhoneNumber.slice(0, 3)}) ${contactPhoneNumber.slice(
+          3,
+          6
+        )}-${contactPhoneNumber.slice(6, 10)}`
       );
   }
 };
@@ -351,7 +445,9 @@ const selectServices = ({
   }
   if (certifiedCopyOfFormationDocument) {
     onBusinessFormationPage.getCertifiedCopyOfFormationDocument().check();
-    onBusinessFormationPage.getCertifiedCopyOfFormationDocument().should("be.checked");
+    onBusinessFormationPage
+      .getCertifiedCopyOfFormationDocument()
+      .should("be.checked");
   }
   if (paymentType === "CC") {
     onBusinessFormationPage.getPaymenTypeCreditCardRadio().check();

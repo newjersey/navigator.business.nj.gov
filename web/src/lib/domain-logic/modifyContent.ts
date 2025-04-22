@@ -1,4 +1,7 @@
-import { templateEval, templateEvalWithExtraSpaceRemoval } from "@/lib/utils/helpers";
+import {
+  templateEval,
+  templateEvalWithExtraSpaceRemoval,
+} from "@/lib/utils/helpers";
 
 export const modifyContent = ({
   content,

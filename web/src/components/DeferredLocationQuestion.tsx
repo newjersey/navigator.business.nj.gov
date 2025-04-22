@@ -29,12 +29,15 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
 
   const label = (
     <>
-      <div className="text-bold margin-bottom-2">{Config.deferredLocation.header}</div>
+      <div className="text-bold margin-bottom-2">
+        {Config.deferredLocation.header}
+      </div>
       <Content>{Config.deferredLocation.description}</Content>
     </>
   );
 
-  const shouldShowQuestion = business?.profileData.municipality === undefined || showEditLocation;
+  const shouldShowQuestion =
+    business?.profileData.municipality === undefined || showEditLocation;
 
   const onSaveNewLocation = (): void => {
     setShowSuccessBanner(true);
@@ -65,7 +68,10 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
               })}
             </Content>
           </div>
-          <UnStyledButton isUnderline onClick={(): void => setShowEditLocation(true)}>
+          <UnStyledButton
+            isUnderline
+            onClick={(): void => setShowEditLocation(true)}
+          >
             {Config.deferredLocation.editText}
           </UnStyledButton>
           <span className="margin-x-105">|</span>
@@ -78,9 +84,16 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="bg-base-extra-light margin-top-2" data-testid="deferred-location-task">
+    <div
+      className="bg-base-extra-light margin-top-2"
+      data-testid="deferred-location-task"
+    >
       {shouldShowQuestion ? (
-        <DeferredOnboardingQuestion label={label} onSave={onSaveNewLocation} isTaskPage>
+        <DeferredOnboardingQuestion
+          label={label}
+          onSave={onSaveNewLocation}
+          isTaskPage
+        >
           <MunicipalityField hideErrorLabel={true} />
         </DeferredOnboardingQuestion>
       ) : (

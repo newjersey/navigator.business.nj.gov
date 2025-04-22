@@ -22,7 +22,8 @@ export const EinInput = (props: Props): ReactElement => {
   const [isInvalid, setIsInvalid] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [employerId, setEmployerId] = useState<string>("");
-  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+  const { isAuthenticated, setShowNeedsAccountModal } =
+    useContext(NeedsAccountContext);
   const { business, updateQueue } = useUserData();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
 
@@ -73,9 +74,12 @@ export const EinInput = (props: Props): ReactElement => {
       <GenericTextField
         fieldName="employerId"
         error={isInvalid}
-        validationText={templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
-          length: LENGTH.toString(),
-        })}
+        validationText={templateEval(
+          Config.onboardingDefaults.errorTextMinimumNumericField,
+          {
+            length: LENGTH.toString(),
+          }
+        )}
         numericProps={{ minLength: LENGTH, maxLength: LENGTH }}
         visualFilter={displayAsEin}
         handleChange={handleChange}
@@ -91,7 +95,9 @@ export const EinInput = (props: Props): ReactElement => {
           isSubmitButton={true}
           isRightMarginRemoved={true}
         >
-          <span className="padding-x-3 no-wrap">{Config.ein.saveButtonText}</span>
+          <span className="padding-x-3 no-wrap">
+            {Config.ein.saveButtonText}
+          </span>
         </SecondaryButton>
       </div>
     </div>

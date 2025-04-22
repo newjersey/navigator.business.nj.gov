@@ -12,7 +12,13 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -26,7 +32,9 @@ describe("<SectionAccordion />", () => {
 
   const statefulRender = (type: SectionType, business: Business): void => {
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business)}
+      >
         <SectionAccordion sectionType={type}>BODY CONTENT</SectionAccordion>
       </WithStatefulUserData>
     );
@@ -42,16 +50,22 @@ describe("<SectionAccordion />", () => {
       })
     );
 
-    expect(within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")).not.toBeVisible();
+    expect(
+      within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")
+    ).not.toBeVisible();
 
     fireEvent.click(screen.getByTestId("plan-header"));
     await waitFor(() => {
-      return expect(within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")).toBeVisible();
+      return expect(
+        within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")
+      ).toBeVisible();
     });
 
     fireEvent.click(screen.getByTestId("plan-header"));
     await waitFor(() => {
-      return expect(within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")).not.toBeVisible();
+      return expect(
+        within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")
+      ).not.toBeVisible();
     });
   });
 
@@ -69,7 +83,9 @@ describe("<SectionAccordion />", () => {
 
     expect(sectionPlan).toBeInTheDocument();
     fireEvent.click(sectionPlan);
-    expect(currentBusiness().preferences.roadmapOpenSections).toEqual(["START"]);
+    expect(currentBusiness().preferences.roadmapOpenSections).toEqual([
+      "START",
+    ]);
     fireEvent.click(sectionPlan);
     expect(currentBusiness().preferences.roadmapOpenSections).toEqual(
       expect.arrayContaining(["PLAN", "START"])

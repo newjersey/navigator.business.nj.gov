@@ -11,13 +11,20 @@ import {
   FormationAddress,
   FormationBusinessLocationType,
 } from "@businessnjgovnavigator/shared/";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import {
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export const MainBusinessForeignAddressFlow = (): ReactElement => {
   type FlowBusinessLocationType = Exclude<FormationBusinessLocationType, "NJ">;
   const { Config } = useConfig();
-  const { state, setFieldsInteracted, setFormationFormData } = useContext(BusinessFormationContext);
+  const { state, setFieldsInteracted, setFormationFormData } = useContext(
+    BusinessFormationContext
+  );
   const { business } = useUserData();
 
   useMountEffect(() => {
@@ -33,9 +40,12 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
 
   const onChange = (value: FlowBusinessLocationType): void => {
     let resetAddress = createEmptyFormationAddress();
-    setFieldsInteracted(Object.keys(createEmptyFormationAddress()) as (keyof FormationAddress)[], {
-      setToUninteracted: true,
-    });
+    setFieldsInteracted(
+      Object.keys(createEmptyFormationAddress()) as (keyof FormationAddress)[],
+      {
+        setToUninteracted: true,
+      }
+    );
 
     if (value === "US") {
       resetAddress = { ...resetAddress, addressCountry: "US" };
@@ -52,7 +62,11 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
 
   return (
     <>
-      <Heading level={3} className="margin-bottom-3" data-testid="main-business-address-container-header">
+      <Heading
+        level={3}
+        className="margin-bottom-3"
+        data-testid="main-business-address-container-header"
+      >
         {Config.formation.sections.addressHeader}
       </Heading>
       <CannabisLocationAlert industryId={business?.profileData.industryId} />
@@ -61,7 +75,9 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
           aria-label={"Foreign address type"}
           key={`${state.formationFormData.businessLocationType}-key`}
           value={state.formationFormData.businessLocationType}
-          onChange={(event): void => onChange(event.target.value as FlowBusinessLocationType)}
+          onChange={(event): void =>
+            onChange(event.target.value as FlowBusinessLocationType)
+          }
           row
         >
           <>

@@ -36,7 +36,10 @@ export const SidebarCardFundingNudge = (props: Props): ReactElement => {
   const onClick = async (): Promise<void> => {
     if (!business) return;
     analytics.event.show_me_funding_opportunities.click.show_me_funding_opportunities();
-    if (business.profileData.industryId === "generic" || !business.profileData.industryId) {
+    if (
+      business.profileData.industryId === "generic" ||
+      !business.profileData.industryId
+    ) {
       setModalOpen(true);
     } else {
       await updateToUpAndRunningAndCompleteTaxTask();

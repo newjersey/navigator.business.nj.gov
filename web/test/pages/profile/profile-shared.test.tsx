@@ -8,7 +8,10 @@ import {
   randomPublicFilingLegalStructure,
   randomTradeNameLegalStructure,
 } from "@/test/factories";
-import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
+import {
+  markdownToText,
+  randomElementFromArray,
+} from "@/test/helpers/helpers-utilities";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -51,8 +54,17 @@ import {
   selectByText,
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
-import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import {
+  generateOwningProfileData,
+  OperatingPhaseId,
+} from "@businessnjgovnavigator/shared/";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 
 const Config = getMergedConfig();
 const mockApi = api as jest.Mocked<typeof api>;
@@ -73,7 +85,8 @@ function setupMockAnalytics(): typeof analytics {
 
 jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
   industries: [
-    ...jest.requireActual("../../../../shared/lib/content/lib/industry.json").industries,
+    ...jest.requireActual("../../../../shared/lib/content/lib/industry.json")
+      .industries,
     {
       id: "test-industry-with-non-essential-questions",
       name: "test-industry-with-non-essential-questions",
@@ -102,7 +115,9 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  postGetAnnualFilings: jest.fn(),
+}));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
@@ -129,13 +144,17 @@ describe("profile - shared", () => {
     );
 
     expect(screen.getByText("Loading", { exact: false })).toBeInTheDocument();
-    expect(screen.queryByText(Config.profileDefaults.default.profileTabInfoTitle)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.profileDefaults.default.profileTabInfoTitle)
+    ).not.toBeInTheDocument();
   });
 
   it("shows home-based business question with default description when applicable to industry", () => {
-    const defaultDescOperatingPhases = OperatingPhases.filter((phase: OperatingPhase) => {
-      return !phase.displayAltHomeBasedBusinessDescription;
-    });
+    const defaultDescOperatingPhases = OperatingPhases.filter(
+      (phase: OperatingPhase) => {
+        return !phase.displayAltHomeBasedBusinessDescription;
+      }
+    );
 
     const persona: Partial<ProfileData> = randomElementFromArray([
       { businessPersona: "STARTING" },
@@ -146,7 +165,9 @@ describe("profile - shared", () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
         industryId: randomHomeBasedIndustry(),
-        operatingPhase: randomElementFromArray(defaultDescOperatingPhases as OperatingPhase[]).id,
+        operatingPhase: randomElementFromArray(
+          defaultDescOperatingPhases as OperatingPhase[]
+        ).id,
         ...persona,
       }),
     });
@@ -154,17 +175,23 @@ describe("profile - shared", () => {
     renderPage({ business });
 
     expect(
-      screen.getByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
+      screen.getByText(
+        Config.profileDefaults.fields.homeBasedBusiness.default.description
+      )
     ).toBeInTheDocument();
     expect(
-      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
+      screen.queryByText(
+        Config.profileDefaults.fields.homeBasedBusiness.default.altDescription
+      )
     ).not.toBeInTheDocument();
   });
 
   it("shows home-based business question with alt description when applicable to industry", () => {
-    const altDescOperatingPhases = OperatingPhases.filter((phase: OperatingPhase) => {
-      return phase.displayAltHomeBasedBusinessDescription;
-    });
+    const altDescOperatingPhases = OperatingPhases.filter(
+      (phase: OperatingPhase) => {
+        return phase.displayAltHomeBasedBusinessDescription;
+      }
+    );
 
     const persona: Partial<ProfileData> = randomElementFromArray([
       { businessPersona: "STARTING" },
@@ -175,7 +202,9 @@ describe("profile - shared", () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
         industryId: randomHomeBasedIndustry(),
-        operatingPhase: randomElementFromArray(altDescOperatingPhases as OperatingPhase[]).id,
+        operatingPhase: randomElementFromArray(
+          altDescOperatingPhases as OperatingPhase[]
+        ).id,
         ...persona,
       }),
     });
@@ -183,10 +212,14 @@ describe("profile - shared", () => {
     renderPage({ business });
 
     expect(
-      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
+      screen.queryByText(
+        Config.profileDefaults.fields.homeBasedBusiness.default.description
+      )
     ).not.toBeInTheDocument();
     expect(
-      screen.getByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
+      screen.getByText(
+        Config.profileDefaults.fields.homeBasedBusiness.default.altDescription
+      )
     ).toBeInTheDocument();
   });
 
@@ -202,7 +235,10 @@ describe("profile - shared", () => {
     renderPage({ business });
 
     expect(
-      screen.queryByText(Config.profileDefaults.fields.plannedRenovationQuestion.default.description)
+      screen.queryByText(
+        Config.profileDefaults.fields.plannedRenovationQuestion.default
+          .description
+      )
     ).not.toBeInTheDocument();
   });
 
@@ -216,14 +252,19 @@ describe("profile - shared", () => {
           businessPersona: businessPersona,
           homeBasedBusiness: false,
           foreignBusinessTypeIds:
-            businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
+            businessPersona === "FOREIGN"
+              ? ["employeeOrContractorInNJ", "officeInNJ"]
+              : [],
         }),
       });
 
       renderPage({ business });
 
       expect(
-        screen.getByText(Config.profileDefaults.fields.plannedRenovationQuestion.default.description)
+        screen.getByText(
+          Config.profileDefaults.fields.plannedRenovationQuestion.default
+            .description
+        )
       ).toBeInTheDocument();
     }
   );
@@ -238,14 +279,19 @@ describe("profile - shared", () => {
           businessPersona: businessPersona,
           homeBasedBusiness: true,
           foreignBusinessTypeIds:
-            businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
+            businessPersona === "FOREIGN"
+              ? ["employeeOrContractorInNJ", "officeInNJ"]
+              : [],
         }),
       });
 
       renderPage({ business });
 
       expect(
-        screen.queryByText(Config.profileDefaults.fields.plannedRenovationQuestion.default.description)
+        screen.queryByText(
+          Config.profileDefaults.fields.plannedRenovationQuestion.default
+            .description
+        )
       ).not.toBeInTheDocument();
     }
   );
@@ -260,14 +306,19 @@ describe("profile - shared", () => {
           businessPersona: businessPersona,
           homeBasedBusiness: undefined,
           foreignBusinessTypeIds:
-            businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
+            businessPersona === "FOREIGN"
+              ? ["employeeOrContractorInNJ", "officeInNJ"]
+              : [],
         }),
       });
 
       renderPage({ business });
 
       expect(
-        screen.queryByText(Config.profileDefaults.fields.plannedRenovationQuestion.default.description)
+        screen.queryByText(
+          Config.profileDefaults.fields.plannedRenovationQuestion.default
+            .description
+        )
       ).not.toBeInTheDocument();
     }
   );
@@ -287,16 +338,24 @@ describe("profile - shared", () => {
     });
 
     const randomMunicipality = generateMunicipality({});
-    renderPage({ business: initialBusiness, municipalities: [randomMunicipality] });
+    renderPage({
+      business: initialBusiness,
+      municipalities: [randomMunicipality],
+    });
     selectByText("Location", randomMunicipality.displayName);
-    expect(screen.getByLabelText("Location")).toHaveValue(randomMunicipality.displayName);
+    expect(screen.getByLabelText("Location")).toHaveValue(
+      randomMunicipality.displayName
+    );
     fireEvent.blur(screen.getByLabelText("Location"));
     clickSave();
     await waitFor(() => {
-      return expect(currentBusiness().profileData.municipality).toEqual(randomMunicipality);
+      return expect(currentBusiness().profileData.municipality).toEqual(
+        randomMunicipality
+      );
     });
     expect(
-      mockAnalytics.event.profile_location_question.submit.location_entered_for_first_time
+      mockAnalytics.event.profile_location_question.submit
+        .location_entered_for_first_time
     ).toHaveBeenCalled();
   });
 
@@ -311,19 +370,27 @@ describe("profile - shared", () => {
 
     const initialBusiness = generateBusinessForProfile({
       profileData: generateProfileData({
-        municipality: generateMunicipality({ displayName: "Some Display Name" }),
+        municipality: generateMunicipality({
+          displayName: "Some Display Name",
+        }),
         ...persona,
       }),
     });
 
-    renderPage({ business: initialBusiness, municipalities: [randomMunicipality] });
+    renderPage({
+      business: initialBusiness,
+      municipalities: [randomMunicipality],
+    });
     selectByText("Location", randomMunicipality.displayName);
     clickSave();
     await waitFor(() => {
-      return expect(currentBusiness().profileData.municipality).toEqual(randomMunicipality);
+      return expect(currentBusiness().profileData.municipality).toEqual(
+        randomMunicipality
+      );
     });
     expect(
-      mockAnalytics.event.profile_location_question.submit.location_entered_for_first_time
+      mockAnalytics.event.profile_location_question.submit
+        .location_entered_for_first_time
     ).not.toHaveBeenCalled();
   });
 
@@ -337,16 +404,23 @@ describe("profile - shared", () => {
                 taxId: "*******89123",
                 encryptedTaxId: "some-encrypted-value",
                 businessPersona,
-                foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["none"] : [],
+                foreignBusinessTypeIds:
+                  businessPersona === "FOREIGN" ? ["none"] : [],
               }),
-              taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
+              taxFilingData: generateTaxFilingData({
+                state: randomInt() % 2 ? "SUCCESS" : "PENDING",
+              }),
             });
 
             renderPage({ business });
             chooseTab("numbers");
             expect(screen.queryByLabelText("Tax id")).not.toBeInTheDocument();
-            expect(screen.getByTestId("disabled-tax-id-value")).toHaveTextContent("****-****-****");
-            expect(screen.queryByTestId("tax-disclaimer")).not.toBeInTheDocument();
+            expect(
+              screen.getByTestId("disabled-tax-id-value")
+            ).toHaveTextContent("****-****-****");
+            expect(
+              screen.queryByTestId("tax-disclaimer")
+            ).not.toBeInTheDocument();
           });
         });
       });
@@ -355,7 +429,10 @@ describe("profile - shared", () => {
         businessPersonas.map((businessPersona) => {
           const foreignBusinessTypeIds: ForeignBusinessTypeId[] = [];
           if (businessPersona === "FOREIGN")
-            foreignBusinessTypeIds.push("employeeOrContractorInNJ", "officeInNJ");
+            foreignBusinessTypeIds.push(
+              "employeeOrContractorInNJ",
+              "officeInNJ"
+            );
           foreignBusinessTypeIds.map((foreignBusinessTypeId) => {
             it(`shows disclaimer for trade name legal structure for ${businessPersona} ${
               foreignBusinessTypeId ?? ""
@@ -370,7 +447,9 @@ describe("profile - shared", () => {
               renderPage({ business });
               chooseTab("numbers");
               expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
-                markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
+                markdownToText(
+                  Config.profileDefaults.fields.taxId.default.disclaimerMd
+                )
               );
             });
           });
@@ -385,7 +464,9 @@ describe("profile - shared", () => {
           renderPage({ business });
           chooseTab("numbers");
 
-          expect(screen.queryByTestId("tax-disclaimer")).not.toBeInTheDocument();
+          expect(
+            screen.queryByTestId("tax-disclaimer")
+          ).not.toBeInTheDocument();
         });
       });
     });
@@ -402,36 +483,46 @@ describe("profile - shared", () => {
             }),
           });
           chooseTab("numbers");
-          expect(screen.getByText(Config.profileDefaults.fields.taxPin.default.header)).toBeInTheDocument();
+          expect(
+            screen.getByText(
+              Config.profileDefaults.fields.taxPin.default.header
+            )
+          ).toBeInTheDocument();
         }
       );
     });
   });
 
   describe("profile opportunities alert", () => {
-    it.each(phasesWhereGoToProfileShows)("displays alert for %s", (operatingPhase) => {
-      const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          operatingPhase,
-          dateOfFormation: undefined,
-        }),
-      });
-      renderPage({ business });
+    it.each(phasesWhereGoToProfileShows)(
+      "displays alert for %s",
+      (operatingPhase) => {
+        const business = generateBusinessForProfile({
+          profileData: generateProfileData({
+            operatingPhase,
+            dateOfFormation: undefined,
+          }),
+        });
+        renderPage({ business });
 
-      expect(screen.getByTestId("opp-alert")).toBeInTheDocument();
-    });
+        expect(screen.getByTestId("opp-alert")).toBeInTheDocument();
+      }
+    );
 
-    it.each(phasesWhereGoToProfileDoesNotShow)("does not display alert for %s", (operatingPhase) => {
-      const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          operatingPhase,
-          dateOfFormation: undefined,
-        }),
-      });
-      renderPage({ business });
+    it.each(phasesWhereGoToProfileDoesNotShow)(
+      "does not display alert for %s",
+      (operatingPhase) => {
+        const business = generateBusinessForProfile({
+          profileData: generateProfileData({
+            operatingPhase,
+            dateOfFormation: undefined,
+          }),
+        });
+        renderPage({ business });
 
-      expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
-    });
+        expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
+      }
+    );
 
     it("does display date of formation question when legal structure is undefined", () => {
       const business = generateBusinessForProfile({
@@ -465,7 +556,9 @@ describe("profile - shared", () => {
       });
       renderPage({ business });
       expect(
-        screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.header)
+        screen.queryByText(
+          Config.profileDefaults.fields.dateOfFormation.default.header
+        )
       ).not.toBeInTheDocument();
       expect(screen.queryByTestId("effective-date")).not.toBeInTheDocument();
     });
@@ -537,7 +630,10 @@ describe("profile - shared", () => {
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.FALSE });
         expect(
-          screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+          screen.getByText(
+            Config.profileDefaults.default
+              .noteForBusinessesFormedOutsideNavigator
+          )
         ).toBeInTheDocument();
       }
     );
@@ -553,7 +649,9 @@ describe("profile - shared", () => {
       });
       renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
       expect(
-        screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+        screen.getByText(
+          Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator
+        )
       ).toBeInTheDocument();
     });
 
@@ -571,7 +669,10 @@ describe("profile - shared", () => {
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
         expect(
-          screen.queryByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+          screen.queryByText(
+            Config.profileDefaults.default
+              .noteForBusinessesFormedOutsideNavigator
+          )
         ).not.toBeInTheDocument();
       }
     );
@@ -590,7 +691,10 @@ describe("profile - shared", () => {
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
         expect(
-          screen.queryByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+          screen.queryByText(
+            Config.profileDefaults.default
+              .noteForBusinessesFormedOutsideNavigator
+          )
         ).not.toBeInTheDocument();
       }
     );
@@ -609,19 +713,26 @@ describe("profile - shared", () => {
         });
         renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
         expect(
-          screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+          screen.getByText(
+            Config.profileDefaults.default
+              .noteForBusinessesFormedOutsideNavigator
+          )
         ).toBeInTheDocument();
       }
     );
   });
 
   describe("non essential questions", () => {
-    const generateBusinessForNonEssentialQuestionTest = (profileData: Partial<ProfileData>): Business => {
+    const generateBusinessForNonEssentialQuestionTest = (
+      profileData: Partial<ProfileData>
+    ): Business => {
       return generateBusiness({
         profileData: generateProfileData({
           ...profileData,
           foreignBusinessTypeIds:
-            profileData.businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : [],
+            profileData.businessPersona === "FOREIGN"
+              ? ["employeeOrContractorInNJ"]
+              : [],
         }),
       });
     };
@@ -638,10 +749,15 @@ describe("profile - shared", () => {
           },
         });
         renderPage({ business });
-        selectByValue("Industry", "test-industry-with-no-non-essential-questions");
+        selectByValue(
+          "Industry",
+          "test-industry-with-no-non-essential-questions"
+        );
         clickSave();
         await waitFor(() => {
-          expect(currentBusiness().profileData.nonEssentialRadioAnswers).toStrictEqual({});
+          expect(
+            currentBusiness().profileData.nonEssentialRadioAnswers
+          ).toStrictEqual({});
         });
       }
     );
@@ -661,14 +777,17 @@ describe("profile - shared", () => {
             }),
           }),
         });
-        expect(screen.getByText(Config.profileDefaults.default.cannabisLocationAlert)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.profileDefaults.default.cannabisLocationAlert)
+        ).toBeInTheDocument();
       }
     );
 
     it.each(nonOwningPersonas)(
       "should NOT display a warning alert for non-cannabis businesses when %s",
       async (businessPersona: BusinessPersona) => {
-        const filter = (industry: Industry): boolean => industry.id !== "cannabis";
+        const filter = (industry: Industry): boolean =>
+          industry.id !== "cannabis";
         const industry = filterRandomIndustry(filter);
 
         renderPage({
@@ -681,7 +800,9 @@ describe("profile - shared", () => {
           }),
         });
         expect(
-          screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)
+          screen.queryByText(
+            Config.profileDefaults.default.cannabisLocationAlert
+          )
         ).not.toBeInTheDocument();
       }
     );
@@ -707,7 +828,9 @@ describe("profile - shared", () => {
             businessPersona: businessPersona as BusinessPersona,
             industryId: undefined,
             foreignBusinessTypeIds:
-              businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
+              businessPersona === "FOREIGN"
+                ? ["employeeOrContractorInNJ", "officeInNJ"]
+                : [],
           }),
         });
         renderPage({ business });
@@ -717,7 +840,9 @@ describe("profile - shared", () => {
           expect(profileAlert).toBeInTheDocument();
         });
         expect(
-          within(profileAlert).getByText(Config.profileDefaults.fields.industryId.default.header)
+          within(profileAlert).getByText(
+            Config.profileDefaults.fields.industryId.default.header
+          )
         ).toBeInTheDocument();
       }
     );

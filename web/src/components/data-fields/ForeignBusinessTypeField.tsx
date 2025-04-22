@@ -66,8 +66,13 @@ export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
 
     setProfileData({
       ...state.profileData,
-      industryId: determineForeignBusinessType(ids) === "NEXUS" ? state.profileData.industryId : undefined,
-      homeBasedBusiness: ids.includes("officeInNJ") ? false : state.profileData.homeBasedBusiness,
+      industryId:
+        determineForeignBusinessType(ids) === "NEXUS"
+          ? state.profileData.industryId
+          : undefined,
+      homeBasedBusiness: ids.includes("officeInNJ")
+        ? false
+        : state.profileData.homeBasedBusiness,
       foreignBusinessTypeIds: ids,
     });
   };
@@ -77,7 +82,8 @@ export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
   );
 
   if (
-    determineForeignBusinessType(state.profileData.foreignBusinessTypeIds) === undefined ||
+    determineForeignBusinessType(state.profileData.foreignBusinessTypeIds) ===
+      undefined ||
     renderAlertForValidForeignBusiness === "NONE"
   ) {
     renderAlertForValidForeignBusiness = undefined;
@@ -86,7 +92,11 @@ export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
   return (
     <>
       <div className="margin-top-3">
-        <FormControl variant="outlined" fullWidth aria-label="Out of state business">
+        <FormControl
+          variant="outlined"
+          fullWidth
+          aria-label="Out of state business"
+        >
           {(
             allForeignBusinessTypeIdsOrdered as unknown as (typeof allForeignBusinessTypeIdsOrdered)[number][]
           )
@@ -100,10 +110,23 @@ export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
                       name="foreign-business-type"
                       value={id}
                       onChange={handleChange}
-                      checked={state.profileData.foreignBusinessTypeIds.includes(id)}
+                      checked={state.profileData.foreignBusinessTypeIds.includes(
+                        id
+                      )}
                     />
                   }
-                  label={<Content>{(contentFromConfig.optionContent as Record<string, string>)[id]}</Content>}
+                  label={
+                    <Content>
+                      {
+                        (
+                          contentFromConfig.optionContent as Record<
+                            string,
+                            string
+                          >
+                        )[id]
+                      }
+                    </Content>
+                  }
                 />
               );
             })}
@@ -112,7 +135,11 @@ export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
 
       {!!renderAlertForValidForeignBusiness && (
         <Alert variant="info">
-          <Content key={determineForeignBusinessType(state.profileData.foreignBusinessTypeIds)}>
+          <Content
+            key={determineForeignBusinessType(
+              state.profileData.foreignBusinessTypeIds
+            )}
+          >
             {contentFromConfig[renderAlertForValidForeignBusiness]}
           </Content>
         </Alert>

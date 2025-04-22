@@ -3,17 +3,25 @@ import { FormationRadio } from "@/components/tasks/business-formation/business/F
 import { FormationTextArea } from "@/components/tasks/business-formation/business/FormationTextArea";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { FormationFields, FormationTextField } from "@businessnjgovnavigator/shared";
+import {
+  FormationFields,
+  FormationTextField,
+} from "@businessnjgovnavigator/shared";
 import { ChangeEvent, ReactElement, ReactNode, useContext } from "react";
 
 export const NonprofitProvisions = (): ReactElement => {
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(
+    BusinessFormationContext
+  );
   const { Config } = useConfig();
 
   const hasBoardMembers = state.formationFormData.hasNonprofitBoardMembers;
 
   const isInForm = (fieldName: FormationFields): boolean => {
-    return hasBoardMembers === true && state.formationFormData[fieldName] === "IN_FORM";
+    return (
+      hasBoardMembers === true &&
+      state.formationFormData[fieldName] === "IN_FORM"
+    );
   };
 
   const getTextArea = (fieldName: FormationTextField): ReactNode => {
@@ -90,18 +98,25 @@ export const NonprofitProvisions = (): ReactElement => {
         onChange={onChangeBoardMembers}
       />
 
-      {hasBoardMembers && getFormBylawsRadio("nonprofitBoardMemberQualificationsSpecified")}
+      {hasBoardMembers &&
+        getFormBylawsRadio("nonprofitBoardMemberQualificationsSpecified")}
       {isInForm("nonprofitBoardMemberQualificationsSpecified") &&
         getTextArea("nonprofitBoardMemberQualificationsTerms")}
 
-      {hasBoardMembers && getFormBylawsRadio("nonprofitBoardMemberRightsSpecified")}
-      {isInForm("nonprofitBoardMemberRightsSpecified") && getTextArea("nonprofitBoardMemberRightsTerms")}
+      {hasBoardMembers &&
+        getFormBylawsRadio("nonprofitBoardMemberRightsSpecified")}
+      {isInForm("nonprofitBoardMemberRightsSpecified") &&
+        getTextArea("nonprofitBoardMemberRightsTerms")}
 
-      {hasBoardMembers && getFormBylawsRadio("nonprofitTrusteesMethodSpecified")}
-      {isInForm("nonprofitTrusteesMethodSpecified") && getTextArea("nonprofitTrusteesMethodTerms")}
+      {hasBoardMembers &&
+        getFormBylawsRadio("nonprofitTrusteesMethodSpecified")}
+      {isInForm("nonprofitTrusteesMethodSpecified") &&
+        getTextArea("nonprofitTrusteesMethodTerms")}
 
-      {hasBoardMembers && getFormBylawsRadio("nonprofitAssetDistributionSpecified")}
-      {isInForm("nonprofitAssetDistributionSpecified") && getTextArea("nonprofitAssetDistributionTerms")}
+      {hasBoardMembers &&
+        getFormBylawsRadio("nonprofitAssetDistributionSpecified")}
+      {isInForm("nonprofitAssetDistributionSpecified") &&
+        getTextArea("nonprofitAssetDistributionTerms")}
     </>
   );
 };

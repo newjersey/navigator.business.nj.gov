@@ -59,7 +59,9 @@ export const PageFooter = (): ReactElement => {
                   className="text-white"
                   target="_blank"
                   rel="noreferrer noopener"
-                  aria-label={Config.footer.madeWithLoveByTheOfficeOfInnovationAriaLabel}
+                  aria-label={
+                    Config.footer.madeWithLoveByTheOfficeOfInnovationAriaLabel
+                  }
                 >
                   {Config.footer.madeWithText}
                   &nbsp;
@@ -73,7 +75,12 @@ export const PageFooter = (): ReactElement => {
             <li className="padding-left-0 desktop:padding-left-1 tablet:display-inline">
               <div>
                 {Config.footer.creditText}
-                <a href={Config.footer.creditLink} target="_blank" className="text-white" rel="noreferrer">
+                <a
+                  href={Config.footer.creditLink}
+                  target="_blank"
+                  className="text-white"
+                  rel="noreferrer"
+                >
                   {Config.footer.creditLinkText}
                 </a>
               </div>
@@ -95,14 +102,25 @@ export const PageFooter = (): ReactElement => {
                     aria-label="GitHub"
                     className="margin-right-105"
                   >
-                    <Icon className="footer-social-media-icon margin-top-1" iconName="github" />
+                    <Icon
+                      className="footer-social-media-icon margin-top-1"
+                      iconName="github"
+                    />
                   </a>
                 </div>
               </li>
               <li>
                 <div>
-                  <a href={Config.footer.facebookLink} target="_blank" rel="noreferrer" aria-label="Facebook">
-                    <Icon className="footer-social-media-icon margin-top-1" iconName="facebook" />
+                  <a
+                    href={Config.footer.facebookLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Facebook"
+                  >
+                    <Icon
+                      className="footer-social-media-icon margin-top-1"
+                      iconName="facebook"
+                    />
                   </a>
                 </div>
               </li>

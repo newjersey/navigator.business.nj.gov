@@ -42,13 +42,21 @@ jest.mock("broken-link-checker", () => {
 
 describe("Deadlinks page", () => {
   it("displays content when password is successful", async () => {
-    render(<DeadLinksPage deadTasks={["task1"]} deadContextualInfo={["info1"]} noAuth={true} />);
+    render(
+      <DeadLinksPage
+        deadTasks={["task1"]}
+        deadContextualInfo={["info1"]}
+        noAuth={true}
+      />
+    );
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
     expect(screen.queryByText("info1")).not.toBeInTheDocument();
 
     mockApi.post.mockResolvedValue({});
 
-    fireEvent.change(screen.getByLabelText("Password"), { target: { value: "ADMIN_PASSWORD" } });
+    fireEvent.change(screen.getByLabelText("Password"), {
+      target: { value: "ADMIN_PASSWORD" },
+    });
     fireEvent.click(screen.getByText("Submit"));
 
     await screen.findByText("task1");
@@ -57,17 +65,27 @@ describe("Deadlinks page", () => {
   });
 
   it("hides content when password is unsuccessful", async () => {
-    render(<DeadLinksPage deadTasks={["task1"]} deadContextualInfo={["info1"]} noAuth={true} />);
+    render(
+      <DeadLinksPage
+        deadTasks={["task1"]}
+        deadContextualInfo={["info1"]}
+        noAuth={true}
+      />
+    );
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
     expect(screen.queryByText("info1")).not.toBeInTheDocument();
 
     mockApi.post.mockRejectedValue({});
 
-    fireEvent.change(screen.getByLabelText("Password"), { target: { value: "bad password" } });
+    fireEvent.change(screen.getByLabelText("Password"), {
+      target: { value: "bad password" },
+    });
     fireEvent.click(screen.getByText("Submit"));
 
     await waitFor(() => {
-      return expect(screen.getByText("Authentication failed")).toBeInTheDocument();
+      return expect(
+        screen.getByText("Authentication failed")
+      ).toBeInTheDocument();
     });
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
     expect(screen.queryByText("info1")).not.toBeInTheDocument();

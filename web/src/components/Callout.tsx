@@ -18,7 +18,9 @@ interface CalloutMappingObj {
   iconStyling: string;
 }
 
-export const getStylingForCalloutType = (calloutType: string): CalloutMappingObj => {
+export const getStylingForCalloutType = (
+  calloutType: string
+): CalloutMappingObj => {
   if (calloutType === "informational")
     return {
       containerStyling: "bg-accent-cool-lightest",
@@ -50,11 +52,18 @@ export const getStylingForCalloutType = (calloutType: string): CalloutMappingObj
   };
 };
 
-const getDefaultHeadingTextForCalloutType = (config: ConfigType, calloutType: string): string => {
-  if (calloutType === "informational") return config.calloutDefaults.informationalHeadingDefaultText;
-  if (calloutType === "note") return config.calloutDefaults.noteHeadingDefaultText;
-  if (calloutType === "conditional") return config.calloutDefaults.conditionalHeadingDefaultText;
-  if (calloutType === "warning") return config.calloutDefaults.warningHeadingDefaultText;
+const getDefaultHeadingTextForCalloutType = (
+  config: ConfigType,
+  calloutType: string
+): string => {
+  if (calloutType === "informational")
+    return config.calloutDefaults.informationalHeadingDefaultText;
+  if (calloutType === "note")
+    return config.calloutDefaults.noteHeadingDefaultText;
+  if (calloutType === "conditional")
+    return config.calloutDefaults.conditionalHeadingDefaultText;
+  if (calloutType === "warning")
+    return config.calloutDefaults.warningHeadingDefaultText;
   return "";
 };
 
@@ -68,7 +77,10 @@ export const Callout = (props: PropsWithChildren<Props>): ReactNode => {
   if (typeof props.headerText === "string" && props.headerText.length > 0) {
     headingText = props.headerText;
   } else {
-    headingText = getDefaultHeadingTextForCalloutType(Config, props.calloutType);
+    headingText = getDefaultHeadingTextForCalloutType(
+      Config,
+      props.calloutType
+    );
   }
 
   return (
@@ -82,23 +94,39 @@ export const Callout = (props: PropsWithChildren<Props>): ReactNode => {
           <div className="flex">
             {showIcon && (
               <div
-                data-testid={getStylingForCalloutType(props.calloutType).iconStyling}
-                className={getStylingForCalloutType(props.calloutType).iconStyling}
+                data-testid={
+                  getStylingForCalloutType(props.calloutType).iconStyling
+                }
+                className={
+                  getStylingForCalloutType(props.calloutType).iconStyling
+                }
                 aria-hidden="true"
               />
             )}
-            <span className={`text-bold ${getStylingForCalloutType(props.calloutType).headingStyling}`}>
+            <span
+              className={`text-bold ${
+                getStylingForCalloutType(props.calloutType).headingStyling
+              }`}
+            >
               {headingText}
             </span>
           </div>
-          {props.children && <div className="margin-top-105 text-primary-darker">{props.children}</div>}
+          {props.children && (
+            <div className="margin-top-105 text-primary-darker">
+              {props.children}
+            </div>
+          )}
         </>
       ) : (
         <div className="text-primary-darker flex">
           {showIconInBody && (
             <div
-              data-testid={getStylingForCalloutType(props.calloutType).iconStyling}
-              className={getStylingForCalloutType(props.calloutType).iconStyling}
+              data-testid={
+                getStylingForCalloutType(props.calloutType).iconStyling
+              }
+              className={
+                getStylingForCalloutType(props.calloutType).iconStyling
+              }
               aria-hidden="true"
             />
           )}

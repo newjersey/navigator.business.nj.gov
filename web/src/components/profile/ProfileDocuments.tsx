@@ -19,13 +19,12 @@ export const ProfileDocuments = (props: Props): ReactElement => {
   const { documents } = useDocuments();
   const { state } = useContext(ProfileDataContext);
 
-  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["documents"]["default"] = getProfileConfig(
-    {
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["documents"]["default"] =
+    getProfileConfig({
       config: Config,
       persona: state.flow,
       fieldName: "documents",
-    }
-  );
+    });
 
   const listOfDocuments = useMemo(() => {
     return Object.values(business?.profileData.documents ?? {});
@@ -39,7 +38,11 @@ export const ProfileDocuments = (props: Props): ReactElement => {
         <ol className="padding-left-3 padding-top-1">
           {business?.profileData.documents.formationDoc ? (
             <li>
-              <a href={documents?.formationDoc ?? "#"} target="_blank" rel="noreferrer noopener">
+              <a
+                href={documents?.formationDoc ?? "#"}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 {Config.profileDefaults.default.formationDocFileTitle}
               </a>{" "}
               (PDF)
@@ -49,7 +52,11 @@ export const ProfileDocuments = (props: Props): ReactElement => {
           )}
           {business?.profileData.documents.certifiedDoc ? (
             <li>
-              <a href={documents?.certifiedDoc ?? "#"} target="_blank" rel="noreferrer noopener">
+              <a
+                href={documents?.certifiedDoc ?? "#"}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 {" "}
                 {Config.profileDefaults.default.certificationDocFileTitle}
               </a>{" "}
@@ -60,7 +67,11 @@ export const ProfileDocuments = (props: Props): ReactElement => {
           )}
           {business?.profileData.documents.standingDoc ? (
             <li>
-              <a href={documents?.standingDoc ?? "#"} target="_blank" rel="noreferrer noopener">
+              <a
+                href={documents?.standingDoc ?? "#"}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 {" "}
                 {Config.profileDefaults.default.standingDocFileTitle}
               </a>{" "}

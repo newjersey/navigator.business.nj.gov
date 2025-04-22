@@ -37,23 +37,28 @@ const LicenseCalendarEventPage = (props: Props): ReactElement => {
   );
 };
 
-export const getStaticPaths = (): GetStaticPathsResult<LicenseCalendarEventUrlSlugParam> => {
-  const paths = loadAllLicenseCalendarEventUrlSlugs();
-  return {
-    paths,
-    fallback: false,
+export const getStaticPaths =
+  (): GetStaticPathsResult<LicenseCalendarEventUrlSlugParam> => {
+    const paths = loadAllLicenseCalendarEventUrlSlugs();
+    return {
+      paths,
+      fallback: false,
+    };
   };
-};
 
 export const getStaticProps = ({
   params,
 }: {
   params: LicenseCalendarEventUrlSlugParam;
 }): GetStaticPropsResult<Props> => {
-  const licenseEventType = params.licenseCalendarEventUrlSlug.split("-").pop() as LicenseEventSubtype;
+  const licenseEventType = params.licenseCalendarEventUrlSlug
+    .split("-")
+    .pop() as LicenseEventSubtype;
   return {
     props: {
-      license: loadLicenseCalendarEventByUrlSlug(params.licenseCalendarEventUrlSlug),
+      license: loadLicenseCalendarEventByUrlSlug(
+        params.licenseCalendarEventUrlSlug
+      ),
       licenseEventType,
     },
   };

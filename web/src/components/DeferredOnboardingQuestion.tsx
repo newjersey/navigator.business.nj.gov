@@ -1,11 +1,17 @@
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getFlow } from "@/lib/utils/helpers";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import {
+  createEmptyProfileData,
+  ProfileData,
+} from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, ReactNode, useEffect, useState } from "react";
 
 interface Props {
@@ -16,7 +22,9 @@ interface Props {
 }
 
 export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
-  const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
+  const [profileData, setProfileData] = useState<ProfileData>(
+    createEmptyProfileData()
+  );
   const { business, updateQueue } = useUserData();
   const { Config } = useConfig();
 
@@ -33,7 +41,8 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
 
   FormFuncWrapper(async () => {
     if (!updateQueue || !business) return;
-    const profileDataHasNotChanged = JSON.stringify(profileData) === JSON.stringify(business.profileData);
+    const profileDataHasNotChanged =
+      JSON.stringify(profileData) === JSON.stringify(business.profileData);
     if (profileDataHasNotChanged) {
       return;
     }
@@ -50,7 +59,11 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
         <div className="margin-right-1 width-100 text-field-width-default margin-bottom-05">
           {props.children}
         </div>
-        <SecondaryButton isColor="primary" onClick={onSubmit} dataTestId="deferred-question-save">
+        <SecondaryButton
+          isColor="primary"
+          onClick={onSubmit}
+          dataTestId="deferred-question-save"
+        >
           {Config.deferredLocation.deferredOnboardingSaveButtonText}
         </SecondaryButton>
       </div>

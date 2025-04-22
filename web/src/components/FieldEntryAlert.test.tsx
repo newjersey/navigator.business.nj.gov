@@ -2,7 +2,13 @@ import { FieldEntryAlert } from "@/components/FieldEntryAlert";
 import { AlertVariants } from "@/components/njwds-extended/Alert";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 
@@ -40,19 +46,24 @@ describe("<FieldEntryAlert/>", () => {
     expect(screen.queryByText(alertMessage)).not.toBeInTheDocument();
   });
 
-  it.each(AlertVariants)("sets Alert variant accordingly when provided variant is %s", (variant) => {
-    render(
-      <FieldEntryAlert
-        alertMessage={alertMessage}
-        alertProps={{
-          dataTestid: "field-entry-alert",
-          variant,
-        }}
-        fields={[{ name: "field-name", label: "Field Name" }]}
-      />
-    );
-    expect(screen.getByTestId("field-entry-alert")).toHaveClass(`usa-alert--${variant}`);
-  });
+  it.each(AlertVariants)(
+    "sets Alert variant accordingly when provided variant is %s",
+    (variant) => {
+      render(
+        <FieldEntryAlert
+          alertMessage={alertMessage}
+          alertProps={{
+            dataTestid: "field-entry-alert",
+            variant,
+          }}
+          fields={[{ name: "field-name", label: "Field Name" }]}
+        />
+      );
+      expect(screen.getByTestId("field-entry-alert")).toHaveClass(
+        `usa-alert--${variant}`
+      );
+    }
+  );
 
   it("displays each provided field in alert body", () => {
     const fields = [
@@ -84,7 +95,10 @@ describe("<FieldEntryAlert/>", () => {
     for (const field of fields) {
       const item = screen.getByTestId(`question-${field.name}-alert-text`);
       expect(within(item).getByText(field.label)).toBeInTheDocument();
-      expect(within(item).getByRole("link")).toHaveAttribute("href", `#question-${field.name}`);
+      expect(within(item).getByRole("link")).toHaveAttribute(
+        "href",
+        `#question-${field.name}`
+      );
     }
   });
 
@@ -103,7 +117,9 @@ describe("<FieldEntryAlert/>", () => {
     fireEvent.click(screen.getByText("Field Name"));
 
     await waitFor(() => {
-      expect(mockPush).toHaveBeenCalledWith("welcome/2", undefined, { shallow: true });
+      expect(mockPush).toHaveBeenCalledWith("welcome/2", undefined, {
+        shallow: true,
+      });
     });
   });
 });

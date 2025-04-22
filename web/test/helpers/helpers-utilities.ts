@@ -3,7 +3,9 @@ export const getLastCalledWith = <T, R>(fn: jest.MockInstance<T, R[]>): R[] => {
   return fn.mock.calls[lastIndex];
 };
 
-export const getNumberOfMockCalls = <T, R>(fn: jest.MockInstance<T, R[]>): number => {
+export const getNumberOfMockCalls = <T, R>(
+  fn: jest.MockInstance<T, R[]>
+): number => {
   return fn.mock.calls.length;
 };
 

@@ -9,10 +9,11 @@ export const Authorization = (): ReactElement => {
   const { Config } = useConfig();
 
   const getFormattedBody = (): ReactElement => {
-    const [beforeIndentation, after] = state.dbaContent.Authorize.contentMd.split(
-      "${beginIndentationSection}"
+    const [beforeIndentation, after] =
+      state.dbaContent.Authorize.contentMd.split("${beginIndentationSection}");
+    const [indentedSection, afterIndentation] = after.split(
+      "${endIndentationSection}"
     );
-    const [indentedSection, afterIndentation] = after.split("${endIndentationSection}");
 
     return (
       <>
@@ -30,21 +31,29 @@ export const Authorization = (): ReactElement => {
   };
 
   return (
-    <div data-testid={"authorization-step"} className="flex flex-column space-between min-height-38rem">
+    <div
+      data-testid={"authorization-step"}
+      className="flex flex-column space-between min-height-38rem"
+    >
       <div>
         <>
           {getFormattedBody()}
-          {(state.dbaContent.Authorize.agencyId || state.dbaContent.Authorize.formName) && <HorizontalLine />}
+          {(state.dbaContent.Authorize.agencyId ||
+            state.dbaContent.Authorize.formName) && <HorizontalLine />}
           {state.dbaContent.Authorize.agencyId && (
             <div>
               <span className="h5-styling">{`${Config.taskDefaults.issuingAgencyText}: `}</span>
-              <span className="h6-styling">{state.dbaContent.Authorize.agencyId}</span>
+              <span className="h6-styling">
+                {state.dbaContent.Authorize.agencyId}
+              </span>
             </div>
           )}
           {state.dbaContent.Authorize.formName && (
             <div>
               <span className="h5-styling">{`${Config.taskDefaults.formNameText}: `}</span>
-              <span className="h6-styling">{state.dbaContent.Authorize.formName}</span>
+              <span className="h6-styling">
+                {state.dbaContent.Authorize.formName}
+              </span>
             </div>
           )}
         </>

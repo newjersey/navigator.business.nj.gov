@@ -51,7 +51,13 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 interface MockApiErrorTestData {
@@ -128,26 +134,46 @@ describe("<BusinessFormationPaginator />", () => {
   describe("button text", () => {
     it("shows unique text on button on first step", () => {
       preparePage({ business, displayContent });
-      expect(screen.getByText(Config.formation.general.initialNextButtonText)).toBeInTheDocument();
-      expect(screen.queryByText(Config.formation.general.nextButtonText)).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.general.initialNextButtonText)
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.formation.general.nextButtonText)
+      ).not.toBeInTheDocument();
 
-      fireEvent.click(screen.getByText(Config.formation.general.initialNextButtonText));
-      expect(screen.queryByText(Config.formation.general.initialNextButtonText)).not.toBeInTheDocument();
-      expect(screen.getByText(Config.formation.general.nextButtonText)).toBeInTheDocument();
+      fireEvent.click(
+        screen.getByText(Config.formation.general.initialNextButtonText)
+      );
+      expect(
+        screen.queryByText(Config.formation.general.initialNextButtonText)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.general.nextButtonText)
+      ).toBeInTheDocument();
     });
 
     it("does not show previous button on first step", () => {
       preparePage({ business, displayContent });
-      expect(screen.queryByText(Config.formation.general.previousButtonText)).not.toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.formation.general.initialNextButtonText));
-      expect(screen.getByText(Config.formation.general.previousButtonText)).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.formation.general.previousButtonText)
+      ).not.toBeInTheDocument();
+      fireEvent.click(
+        screen.getByText(Config.formation.general.initialNextButtonText)
+      );
+      expect(
+        screen.getByText(Config.formation.general.previousButtonText)
+      ).toBeInTheDocument();
     });
 
     it("shows unique text on last step button", () => {
       const page = preparePage({ business, displayContent });
       page.stepperClickToReviewStep();
-      expect(screen.getByText(Config.formation.general.submitButtonText)).toBeInTheDocument();
-      expect(screen.queryByText(Config.formation.general.nextButtonText)).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.general.submitButtonText)
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.formation.general.nextButtonText)
+      ).not.toBeInTheDocument();
     });
 
     it("shows the help button on every formation page", async () => {
@@ -176,9 +202,14 @@ describe("<BusinessFormationPaginator />", () => {
     const renderAsGuest = (): void => {
       render(
         withNeedsAccountContext(
-          <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(business)}
+          >
             <MunicipalitiesContext.Provider value={{ municipalities: [] }}>
-              <BusinessFormation task={generateTask({})} displayContent={displayContent} />
+              <BusinessFormation
+                task={generateTask({})}
+                displayContent={displayContent}
+              />
             </MunicipalitiesContext.Provider>
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
@@ -237,7 +268,9 @@ describe("<BusinessFormationPaginator />", () => {
       await page.submitBusinessStep();
       await page.submitContactsStep();
       await page.submitBillingStep();
-      fireEvent.click(screen.getByText(Config.formation.general.previousButtonText));
+      fireEvent.click(
+        screen.getByText(Config.formation.general.previousButtonText)
+      );
       await waitFor(() => {
         expect(screen.getByTestId("billing-step")).toBeInTheDocument();
       });
@@ -247,33 +280,45 @@ describe("<BusinessFormationPaginator />", () => {
       const page = preparePage({ business, displayContent });
       page.fillText("Search business name", "Pizza Joint");
       await page.searchBusinessName({ status: "UNAVAILABLE" });
-      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
+      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual(
+        "ERROR-ACTIVE"
+      );
       await page.stepperClickToBusinessStep();
-      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
+      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual(
+        "ERROR"
+      );
     });
 
     it("maintains the unavailable business name search error, even after switching steps and returning", async () => {
       const page = preparePage({ business, displayContent });
       page.fillText("Search business name", "Pizza Joint");
       await page.searchBusinessName({ status: "UNAVAILABLE" });
-      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
+      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual(
+        "ERROR-ACTIVE"
+      );
       expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
       await page.stepperClickToBusinessStep();
       await page.stepperClickToBusinessNameStep();
       expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
-      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
+      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual(
+        "ERROR-ACTIVE"
+      );
     });
 
     it("maintains the confirm business name error, even after switching steps and returning", async () => {
       const page = preparePage({ business, displayContent });
       await page.fillAndBlurBusinessName("Pizza Joint");
       expect(
-        screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch)
+        screen.getByText(
+          Config.formation.fields.businessName.errorInlineNeedsToSearch
+        )
       ).toBeInTheDocument();
       await page.stepperClickToBusinessStep();
       await page.stepperClickToBusinessNameStep();
       expect(
-        screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch)
+        screen.getByText(
+          Config.formation.fields.businessName.errorInlineNeedsToSearch
+        )
       ).toBeInTheDocument();
     });
 
@@ -282,16 +327,30 @@ describe("<BusinessFormationPaginator />", () => {
         const page = preparePage({ business, displayContent });
         await page.stepperClickToBusinessStep();
 
-        fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addButtonText));
-        fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText));
-        fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText));
+        fireEvent.click(
+          screen.getByText(
+            Config.formation.fields.additionalProvisions.addButtonText
+          )
+        );
+        fireEvent.click(
+          screen.getByText(
+            Config.formation.fields.additionalProvisions.addAnotherButtonText
+          )
+        );
+        fireEvent.click(
+          screen.getByText(
+            Config.formation.fields.additionalProvisions.addAnotherButtonText
+          )
+        );
         page.fillText("Provisions 2", "provision2");
         switchStepFunction();
-        expect(currentBusiness().formationData.formationFormData.additionalProvisions).toEqual([
-          "provision2",
-        ]);
+        expect(
+          currentBusiness().formationData.formationFormData.additionalProvisions
+        ).toEqual(["provision2"]);
         await page.stepperClickToBusinessStep();
-        expect(screen.getByText(Config.formation.general.removeSectionText)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.formation.general.removeSectionText)
+        ).toBeInTheDocument();
       });
 
       describe("business name step", () => {
@@ -300,12 +359,15 @@ describe("<BusinessFormationPaginator />", () => {
           await page.stepperClickToBusinessNameStep();
           page.fillText("Search business name", "Pizza Joint");
           switchStepFunction();
-          expect(currentBusiness().formationData.formationFormData.businessName).toEqual("Pizza Joint");
+          expect(
+            currentBusiness().formationData.formationFormData.businessName
+          ).toEqual("Pizza Joint");
 
           await page.stepperClickToBusinessNameStep();
-          expect((screen.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
-            "Pizza Joint"
-          );
+          expect(
+            (screen.getByLabelText("Search business name") as HTMLInputElement)
+              .value
+          ).toEqual("Pizza Joint");
         });
 
         it("saves availability state when switching back to step", async () => {
@@ -326,7 +388,9 @@ describe("<BusinessFormationPaginator />", () => {
           page.fillText("Search business name", "Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           switchStepFunction();
-          expect(currentBusiness().profileData.businessName).toEqual("Pizza Joint");
+          expect(currentBusiness().profileData.businessName).toEqual(
+            "Pizza Joint"
+          );
         });
 
         it("does not save name to profile when unavailable", async () => {
@@ -335,7 +399,9 @@ describe("<BusinessFormationPaginator />", () => {
           page.fillText("Search business name", "Pizza Joint");
           await page.searchBusinessName({ status: "UNAVAILABLE" });
           switchStepFunction();
-          expect(currentBusiness().profileData.businessName).toEqual(business.profileData.businessName);
+          expect(currentBusiness().profileData.businessName).toEqual(
+            business.profileData.businessName
+          );
         });
 
         it("does not save name to profile when error", async () => {
@@ -344,7 +410,9 @@ describe("<BusinessFormationPaginator />", () => {
           page.fillText("Search business name", "Pizza Joint LLC");
           await page.searchBusinessName({ status: "DESIGNATOR_ERROR" });
           switchStepFunction();
-          expect(currentBusiness().profileData.businessName).toEqual(business.profileData.businessName);
+          expect(currentBusiness().profileData.businessName).toEqual(
+            business.profileData.businessName
+          );
         });
       });
 
@@ -356,7 +424,10 @@ describe("<BusinessFormationPaginator />", () => {
               ...business.formationData,
               formationFormData: {
                 ...business.formationData.formationFormData,
-                addressMunicipality: generateMunicipality({ displayName: "New Town", name: "New Town" }),
+                addressMunicipality: generateMunicipality({
+                  displayName: "New Town",
+                  name: "New Town",
+                }),
               },
             },
           };
@@ -367,20 +438,26 @@ describe("<BusinessFormationPaginator />", () => {
           await page.stepperClickToBusinessStep();
 
           page.selectByText("Address municipality", "New Town");
-          expect((screen.getByLabelText("Address municipality") as HTMLInputElement).value).toEqual(
-            "New Town"
-          );
+          expect(
+            (screen.getByLabelText("Address municipality") as HTMLInputElement)
+              .value
+          ).toEqual("New Town");
           switchStepFunction();
           await waitFor(() => {
-            expect(currentBusiness().profileData.municipality?.displayName).toEqual("New Town");
+            expect(
+              currentBusiness().profileData.municipality?.displayName
+            ).toEqual("New Town");
           });
-          expect(currentBusiness().formationData.formationFormData.addressMunicipality?.displayName).toEqual(
-            "New Town"
-          );
+          expect(
+            currentBusiness().formationData.formationFormData
+              .addressMunicipality?.displayName
+          ).toEqual("New Town");
         });
 
         it("send analytics when municipality entered for first time", async () => {
-          const newTownMuncipality = generateMunicipality({ displayName: "New Town" });
+          const newTownMuncipality = generateMunicipality({
+            displayName: "New Town",
+          });
 
           const businessWithMunicipality = {
             ...business,
@@ -396,16 +473,21 @@ describe("<BusinessFormationPaginator />", () => {
             municipalities: [newTownMuncipality],
           });
           await page.stepperClickToBusinessStep();
-          fireEvent.click(screen.getByText(Config.formation.sections.addressAddButtonText));
+          fireEvent.click(
+            screen.getByText(Config.formation.sections.addressAddButtonText)
+          );
           page.selectByText("Address municipality", "New Town");
 
           switchStepFunction();
           await waitFor(() => {
-            expect(currentBusiness().profileData.municipality?.displayName).toEqual("New Town");
+            expect(
+              currentBusiness().profileData.municipality?.displayName
+            ).toEqual("New Town");
           });
 
           expect(
-            mockAnalytics.event.business_formation_location_question.submit.location_entered_for_first_time
+            mockAnalytics.event.business_formation_location_question.submit
+              .location_entered_for_first_time
           ).toHaveBeenCalled();
         });
 
@@ -416,7 +498,9 @@ describe("<BusinessFormationPaginator />", () => {
               ...business.formationData,
               formationFormData: {
                 ...business.formationData.formationFormData,
-                addressMunicipality: generateMunicipality({ displayName: "New Town" }),
+                addressMunicipality: generateMunicipality({
+                  displayName: "New Town",
+                }),
               },
             },
           };
@@ -431,12 +515,14 @@ describe("<BusinessFormationPaginator />", () => {
           switchStepFunction();
           await waitFor(() => {
             expect(
-              currentBusiness().formationData.formationFormData.addressMunicipality?.displayName
+              currentBusiness().formationData.formationFormData
+                .addressMunicipality?.displayName
             ).toEqual("New Town");
           });
 
           expect(
-            mockAnalytics.event.business_formation_location_question.submit.location_entered_for_first_time
+            mockAnalytics.event.business_formation_location_question.submit
+              .location_entered_for_first_time
           ).not.toHaveBeenCalled();
         });
       });
@@ -445,7 +531,9 @@ describe("<BusinessFormationPaginator />", () => {
         const page = preparePage({ business, displayContent });
         await page.stepperClickToBillingStep();
         switchStepFunction();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("INCOMPLETE");
+        expect(
+          page.getStepStateInStepper(LookupStepIndexByName("Billing"))
+        ).toEqual("INCOMPLETE");
       });
 
       it("marks a step as complete in the stepper if all required fields completed", async () => {
@@ -455,7 +543,9 @@ describe("<BusinessFormationPaginator />", () => {
 
         switchStepFunction();
         await waitFor(() => {
-          expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("COMPLETE");
+          expect(
+            page.getStepStateInStepper(LookupStepIndexByName("Billing"))
+          ).toEqual("COMPLETE");
         });
       });
 
@@ -464,7 +554,9 @@ describe("<BusinessFormationPaginator />", () => {
         page.fillText("Search business name", "Pizza Joint");
         await page.searchBusinessName({ status: "AVAILABLE" });
         switchStepFunction();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("COMPLETE");
+        expect(
+          page.getStepStateInStepper(LookupStepIndexByName("Name"))
+        ).toEqual("COMPLETE");
       });
 
       it("marks step one as error if business name is unavailable", async () => {
@@ -472,7 +564,9 @@ describe("<BusinessFormationPaginator />", () => {
         page.fillText("Search business name", "Pizza Joint");
         await page.searchBusinessName({ status: "UNAVAILABLE" });
         switchStepFunction();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
+        expect(
+          page.getStepStateInStepper(LookupStepIndexByName("Name"))
+        ).toEqual("ERROR");
       });
 
       it("marks step one as error if business name search is error", async () => {
@@ -480,7 +574,9 @@ describe("<BusinessFormationPaginator />", () => {
         page.fillText("Search business name", "Pizza Joint LLC");
         await page.searchBusinessName({ status: "DESIGNATOR_ERROR" });
         switchStepFunction();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
+        expect(
+          page.getStepStateInStepper(LookupStepIndexByName("Name"))
+        ).toEqual("ERROR");
       });
 
       it("shows existing inline errors when visiting an INCOMPLETE step with inline errors", async () => {
@@ -490,21 +586,35 @@ describe("<BusinessFormationPaginator />", () => {
             ...business.formationData,
             formationFormData: {
               ...business.formationData.formationFormData,
-              addressMunicipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
+              addressMunicipality: generateMunicipality({
+                displayName: "Newark",
+                name: "Newark",
+              }),
             },
           },
         };
 
-        const page = preparePage({ business: businessWithMunicipality, displayContent });
+        const page = preparePage({
+          business: businessWithMunicipality,
+          displayContent,
+        });
         await page.stepperClickToBusinessStep();
         page.fillText("Address zip code", "22222");
-        expect(screen.getByText(Config.formation.fields.addressZipCode.error)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.formation.fields.addressZipCode.error)
+        ).toBeInTheDocument();
         switchStepFunction();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Business"))).toEqual("INCOMPLETE");
+        expect(
+          page.getStepStateInStepper(LookupStepIndexByName("Business"))
+        ).toEqual("INCOMPLETE");
 
         await page.stepperClickToBusinessStep();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Business"))).toEqual("INCOMPLETE-ACTIVE");
-        expect(screen.getByText(Config.formation.fields.addressZipCode.error)).toBeInTheDocument();
+        expect(
+          page.getStepStateInStepper(LookupStepIndexByName("Business"))
+        ).toEqual("INCOMPLETE-ACTIVE");
+        expect(
+          screen.getByText(Config.formation.fields.addressZipCode.error)
+        ).toBeInTheDocument();
       });
     };
 
@@ -516,7 +626,9 @@ describe("<BusinessFormationPaginator />", () => {
 
     describe("via clickable stepper", () => {
       switchingStepTests(() => {
-        fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`));
+        fireEvent.click(
+          screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`)
+        );
       });
     });
   });
@@ -529,16 +641,30 @@ describe("<BusinessFormationPaginator />", () => {
         page.completeRequiredBillingFields();
         await page.stepperClickToReviewStep();
 
-        expect(screen.queryByText(Config.formation.errorBanner.incompleteStepsError)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.formation.errorBanner.incompleteStepsError)
+        ).not.toBeInTheDocument();
         await page.clickSubmit();
 
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Business"))).toEqual("ERROR");
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Contacts"))).toEqual("ERROR");
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("COMPLETE");
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Review"))).toEqual("INCOMPLETE-ACTIVE");
+        expect(
+          page.getStepStateInStepper(LookupStepIndexByName("Name"))
+        ).toEqual("ERROR");
+        expect(
+          page.getStepStateInStepper(LookupStepIndexByName("Business"))
+        ).toEqual("ERROR");
+        expect(
+          page.getStepStateInStepper(LookupStepIndexByName("Contacts"))
+        ).toEqual("ERROR");
+        expect(
+          page.getStepStateInStepper(LookupStepIndexByName("Billing"))
+        ).toEqual("COMPLETE");
+        expect(
+          page.getStepStateInStepper(LookupStepIndexByName("Review"))
+        ).toEqual("INCOMPLETE-ACTIVE");
 
-        expect(screen.getByText(Config.formation.errorBanner.incompleteStepsError)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.formation.errorBanner.incompleteStepsError)
+        ).toBeInTheDocument();
       });
 
       it("shows error field states for each step with error except for businessName field", async () => {
@@ -548,11 +674,17 @@ describe("<BusinessFormationPaginator />", () => {
         await page.stepperClickToReviewStep();
         await page.clickSubmit();
         await page.stepperClickToBusinessStep();
-        expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.formation.errorBanner.errorOnStep)
+        ).toBeInTheDocument();
         await page.stepperClickToContactsStep();
-        expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.formation.errorBanner.errorOnStep)
+        ).toBeInTheDocument();
         await page.stepperClickToBillingStep();
-        expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.formation.errorBanner.errorOnStep)
+        ).not.toBeInTheDocument();
       });
 
       it("updates stepper to show error state if user changes a COMPLETE step", async () => {
@@ -564,11 +696,17 @@ describe("<BusinessFormationPaginator />", () => {
 
         await page.stepperClickToBillingStep();
 
-        expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.formation.errorBanner.errorOnStep)
+        ).not.toBeInTheDocument();
         page.fillText("Contact first name", "");
 
-        expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("ERROR-ACTIVE");
+        expect(
+          screen.getByText(Config.formation.errorBanner.errorOnStep)
+        ).toBeInTheDocument();
+        expect(
+          page.getStepStateInStepper(LookupStepIndexByName("Billing"))
+        ).toEqual("ERROR-ACTIVE");
       });
 
       it("updates stepper to show COMPLETE if user changes an ERROR step", async () => {
@@ -577,11 +715,17 @@ describe("<BusinessFormationPaginator />", () => {
         await page.clickSubmit();
 
         await page.stepperClickToBillingStep();
-        expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.formation.errorBanner.errorOnStep)
+        ).toBeInTheDocument();
 
         page.completeRequiredBillingFields();
-        expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("COMPLETE-ACTIVE");
+        expect(
+          screen.queryByText(Config.formation.errorBanner.errorOnStep)
+        ).not.toBeInTheDocument();
+        expect(
+          page.getStepStateInStepper(LookupStepIndexByName("Billing"))
+        ).toEqual("COMPLETE-ACTIVE");
       });
 
       it("shows the Trustees label when members' field has an error and legalType is nonprofit", async () => {
@@ -591,7 +735,9 @@ describe("<BusinessFormationPaginator />", () => {
               members: undefined,
             }),
           }),
-          profileData: generateStartingProfileData({ legalStructureId: "nonprofit" }),
+          profileData: generateStartingProfileData({
+            legalStructureId: "nonprofit",
+          }),
         });
         const page = preparePage({ business: nonprofit, displayContent });
 
@@ -599,11 +745,15 @@ describe("<BusinessFormationPaginator />", () => {
         await page.submitReviewStep();
 
         await page.stepperClickToContactsStep();
-        expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.errorBanner.errorOnStep);
+        expect(screen.getByTestId("alert-error")).toHaveTextContent(
+          Config.formation.errorBanner.errorOnStep
+        );
         expect(screen.queryByTestId("alert-error")).not.toHaveTextContent(
           Config.formation.fields.members.label
         );
-        expect(screen.getByTestId("alert-error")).toHaveTextContent(Config.formation.fields.trustees.label);
+        expect(screen.getByTestId("alert-error")).toHaveTextContent(
+          Config.formation.fields.trustees.label
+        );
       });
 
       it.each(corpLegalStructures)(
@@ -611,7 +761,9 @@ describe("<BusinessFormationPaginator />", () => {
         async (corpLegalStructure) => {
           const corporation = generateBusiness({
             formationData: generateFormationData({
-              formationFormData: generateFormationFormData({ members: undefined }),
+              formationFormData: generateFormationFormData({
+                members: undefined,
+              }),
             }),
             profileData: generateStartingProfileData({
               legalStructureId: corpLegalStructure,
@@ -661,7 +813,10 @@ describe("<BusinessFormationPaginator />", () => {
           })
         );
 
-        const page = preparePage({ business: filledInBusiness, displayContent });
+        const page = preparePage({
+          business: filledInBusiness,
+          displayContent,
+        });
         await page.fillAndSubmitBusinessNameStep();
         await page.stepperClickToReviewStep();
         await page.clickSubmit();
@@ -694,7 +849,8 @@ describe("<BusinessFormationPaginator />", () => {
           };
 
           it("shows error alert and error state on step associated with businessName API error", async () => {
-            const { formationFormData, formationResponse, formationStepName } = businessName;
+            const { formationFormData, formationResponse, formationStepName } =
+              businessName;
 
             filledInBusiness = {
               ...business,
@@ -712,14 +868,29 @@ describe("<BusinessFormationPaginator />", () => {
               },
             };
 
-            const page = preparePage({ business: filledInBusiness, displayContent });
+            const page = preparePage({
+              business: filledInBusiness,
+              displayContent,
+            });
             await page.fillAndSubmitBusinessNameStep();
-            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual("COMPLETE");
+            expect(
+              page.getStepStateInStepper(
+                LookupStepIndexByName(formationStepName)
+              )
+            ).toEqual("COMPLETE");
 
             await page.stepperClickToReviewStep();
             await page.clickSubmitAndGetError(filledInBusinessWithApiResponse);
-            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual("ERROR");
-            expect(screen.getByText(Config.formation.errorBanner.incompleteStepsError)).toBeInTheDocument();
+            expect(
+              page.getStepStateInStepper(
+                LookupStepIndexByName(formationStepName)
+              )
+            ).toEqual("ERROR");
+            expect(
+              screen.getByText(
+                Config.formation.errorBanner.incompleteStepsError
+              )
+            ).toBeInTheDocument();
           });
         });
 
@@ -777,7 +948,9 @@ describe("<BusinessFormationPaginator />", () => {
             "businessStartDate",
             {
               formationFormData: generateFormationFormData(
-                { businessStartDate: getCurrentDate().format(defaultDateFormat) },
+                {
+                  businessStartDate: getCurrentDate().format(defaultDateFormat),
+                },
                 { legalStructureId: "limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
@@ -870,7 +1043,10 @@ describe("<BusinessFormationPaginator />", () => {
             "agentOfficeAddressLine1",
             {
               formationFormData: generateFormationFormData(
-                { agentNumberOrManual: "MANUAL_ENTRY", agentOfficeAddressLine1: "1111111" },
+                {
+                  agentNumberOrManual: "MANUAL_ENTRY",
+                  agentOfficeAddressLine1: "1111111",
+                },
                 { legalStructureId: "limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
@@ -893,7 +1069,10 @@ describe("<BusinessFormationPaginator />", () => {
             "agentOfficeAddressLine2",
             {
               formationFormData: generateFormationFormData(
-                { agentNumberOrManual: "MANUAL_ENTRY", agentOfficeAddressLine2: "1111111" },
+                {
+                  agentNumberOrManual: "MANUAL_ENTRY",
+                  agentOfficeAddressLine2: "1111111",
+                },
                 { legalStructureId: "limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
@@ -942,7 +1121,10 @@ describe("<BusinessFormationPaginator />", () => {
             "agentOfficeAddressZipCode",
             {
               formationFormData: generateFormationFormData(
-                { agentNumberOrManual: "MANUAL_ENTRY", agentOfficeAddressZipCode: "07004" },
+                {
+                  agentNumberOrManual: "MANUAL_ENTRY",
+                  agentOfficeAddressZipCode: "07004",
+                },
                 { legalStructureId: "limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
@@ -1088,14 +1270,18 @@ describe("<BusinessFormationPaginator />", () => {
               }),
 
               formationFormData: generateFormationFormData(
-                { createLimitedPartnerTerms: "1111111", canCreateLimitedPartner: true },
+                {
+                  createLimitedPartnerTerms: "1111111",
+                  canCreateLimitedPartner: true,
+                },
                 { legalStructureId: "limited-partnership" }
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
                 errors: [
                   generateFormationSubmitError({
-                    field: "Limited Partnership - Limited Can Create Limited Terms",
+                    field:
+                      "Limited Partnership - Limited Can Create Limited Terms",
                     message: "very bad input",
                     type: "RESPONSE",
                   }),
@@ -1122,7 +1308,8 @@ describe("<BusinessFormationPaginator />", () => {
                 success: false,
                 errors: [
                   generateFormationSubmitError({
-                    field: "Limited Partnership - Limited Can Get Distribution Terms",
+                    field:
+                      "Limited Partnership - Limited Can Get Distribution Terms",
                     message: "very bad input",
                     type: "RESPONSE",
                   }),
@@ -1149,7 +1336,8 @@ describe("<BusinessFormationPaginator />", () => {
                 success: false,
                 errors: [
                   generateFormationSubmitError({
-                    field: "Limited Partnership - Limited Can Make Distribution Terms",
+                    field:
+                      "Limited Partnership - Limited Can Make Distribution Terms",
                     message: "very bad input",
                     type: "RESPONSE",
                   }),
@@ -1283,7 +1471,8 @@ describe("<BusinessFormationPaginator />", () => {
                 success: false,
                 errors: [
                   generateFormationSubmitError({
-                    field: "Limited Partnership - Limited Can Make Distribution",
+                    field:
+                      "Limited Partnership - Limited Can Make Distribution",
                     message: "very bad input",
                     type: "RESPONSE",
                   }),
@@ -1322,23 +1511,41 @@ describe("<BusinessFormationPaginator />", () => {
           ])(
             "shows error alert and error state on step associated with %o API error",
             async (testTitle, data) => {
-              const { formationFormData, formationResponse, formationStepName, profileData } = data;
+              const {
+                formationFormData,
+                formationResponse,
+                formationStepName,
+                profileData,
+              } = data;
 
               filledInBusiness = {
                 ...business,
-                profileData: profileData ? { ...profileData } : { ...business.profileData },
+                profileData: profileData
+                  ? { ...profileData }
+                  : { ...business.profileData },
                 formationData: {
                   ...business.formationData,
                   formationFormData: formationFormData,
                   formationResponse: formationResponse,
                 },
               };
-              const page = preparePage({ business: filledInBusiness, displayContent });
+              const page = preparePage({
+                business: filledInBusiness,
+                displayContent,
+              });
               await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
-              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual("ERROR");
-              expect(screen.getByText(Config.formation.errorBanner.incompleteStepsError)).toBeInTheDocument();
+              expect(
+                page.getStepStateInStepper(
+                  LookupStepIndexByName(formationStepName)
+                )
+              ).toEqual("ERROR");
+              expect(
+                screen.getByText(
+                  Config.formation.errorBanner.incompleteStepsError
+                )
+              ).toBeInTheDocument();
             }
           );
 
@@ -1366,34 +1573,53 @@ describe("<BusinessFormationPaginator />", () => {
             contactLastName,
             contactPhoneNumber,
             paymentType,
-          ])("shows API error message on step for %o API error", async (testTitle, data) => {
-            const { formationFormData, formationResponse, formationStepName, fieldName, profileData } = data;
-            filledInBusiness = {
-              ...business,
-              profileData: profileData ? { ...profileData } : { ...business.profileData },
-              formationData: {
-                ...business.formationData,
+          ])(
+            "shows API error message on step for %o API error",
+            async (testTitle, data) => {
+              const {
                 formationFormData,
                 formationResponse,
-              },
-            };
-            const page = preparePage({ business: filledInBusiness, displayContent });
-            await page.fillAndSubmitBusinessNameStep();
-            await page.stepperClickToReviewStep();
-            await page.clickSubmit();
-            if (formationStepName === "Business") await page.stepperClickToBusinessStep();
-            if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
-            if (formationStepName === "Billing") await page.stepperClickToBillingStep();
+                formationStepName,
+                fieldName,
+                profileData,
+              } = data;
+              filledInBusiness = {
+                ...business,
+                profileData: profileData
+                  ? { ...profileData }
+                  : { ...business.profileData },
+                formationData: {
+                  ...business.formationData,
+                  formationFormData,
+                  formationResponse,
+                },
+              };
+              const page = preparePage({
+                business: filledInBusiness,
+                displayContent,
+              });
+              await page.fillAndSubmitBusinessNameStep();
+              await page.stepperClickToReviewStep();
+              await page.clickSubmit();
+              if (formationStepName === "Business")
+                await page.stepperClickToBusinessStep();
+              if (formationStepName === "Contacts")
+                await page.stepperClickToContactsStep();
+              if (formationStepName === "Billing")
+                await page.stepperClickToBillingStep();
 
-            expect(screen.getByTestId("alert-error")).toHaveTextContent(
-              Config.formation.errorBanner.errorOnStep
-            );
-            expect(screen.getByTestId("alert-error")).toHaveTextContent(
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (Config.formation.fields as any)[fieldName as string].label
-            );
-            expect(screen.getByTestId("alert-error")).toHaveTextContent("very bad input");
-          });
+              expect(screen.getByTestId("alert-error")).toHaveTextContent(
+                Config.formation.errorBanner.errorOnStep
+              );
+              expect(screen.getByTestId("alert-error")).toHaveTextContent(
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                (Config.formation.fields as any)[fieldName as string].label
+              );
+              expect(screen.getByTestId("alert-error")).toHaveTextContent(
+                "very bad input"
+              );
+            }
+          );
 
           it.each([
             businessTotalStock,
@@ -1413,70 +1639,114 @@ describe("<BusinessFormationPaginator />", () => {
             contactFirstName,
             contactLastName,
             contactPhoneNumber,
-          ])("removes %o API error on blur when user changes text field", async (testTitle, data) => {
-            const {
-              formationFormData,
-              formationResponse,
-              formationStepName,
-              fieldLabel,
-              newTextInput,
-              profileData,
-            } = data;
-            filledInBusiness = {
-              ...business,
-              profileData: profileData ? { ...profileData } : { ...business.profileData },
-              formationData: {
-                ...business.formationData,
+          ])(
+            "removes %o API error on blur when user changes text field",
+            async (testTitle, data) => {
+              const {
                 formationFormData,
                 formationResponse,
-              },
-            };
-            const page = preparePage({ business: filledInBusiness, displayContent });
-            await page.fillAndSubmitBusinessNameStep();
-            await page.stepperClickToReviewStep();
-            await page.clickSubmit();
-            if (formationStepName === "Business") await page.stepperClickToBusinessStep();
-            if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
-            if (formationStepName === "Billing") await page.stepperClickToBillingStep();
-            expect(screen.getByTestId("alert-error")).toBeInTheDocument();
-            page.fillText(fieldLabel as string as string, newTextInput as string);
-            await waitFor(() => {
-              expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
-            });
-            expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
-            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-              "COMPLETE-ACTIVE"
-            );
-          });
-
-          it.each([paymentType, canCreateLimitedPartner, canGetDistribution, canMakeDistribution])(
-            "removes %o API error when user selects radio button",
-            async (testTitle, data) => {
-              const { formationFormData, formationResponse, formationStepName, radioBtnTestId, profileData } =
-                data;
+                formationStepName,
+                fieldLabel,
+                newTextInput,
+                profileData,
+              } = data;
               filledInBusiness = {
                 ...business,
-                profileData: profileData ? { ...profileData } : { ...business.profileData },
+                profileData: profileData
+                  ? { ...profileData }
+                  : { ...business.profileData },
                 formationData: {
                   ...business.formationData,
                   formationFormData,
                   formationResponse,
                 },
               };
-              const page = preparePage({ business: filledInBusiness, displayContent });
+              const page = preparePage({
+                business: filledInBusiness,
+                displayContent,
+              });
               await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
-              if (formationStepName === "Business") await page.stepperClickToBusinessStep();
-              if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
-              if (formationStepName === "Billing") await page.stepperClickToBillingStep();
+              if (formationStepName === "Business")
+                await page.stepperClickToBusinessStep();
+              if (formationStepName === "Contacts")
+                await page.stepperClickToContactsStep();
+              if (formationStepName === "Billing")
+                await page.stepperClickToBillingStep();
+              expect(screen.getByTestId("alert-error")).toBeInTheDocument();
+              page.fillText(
+                fieldLabel as string as string,
+                newTextInput as string
+              );
+              await waitFor(() => {
+                expect(
+                  screen.queryByTestId("alert-error")
+                ).not.toBeInTheDocument();
+              });
+              expect(
+                screen.queryByText(Config.formation.errorBanner.errorOnStep)
+              ).not.toBeInTheDocument();
+              expect(
+                page.getStepStateInStepper(
+                  LookupStepIndexByName(formationStepName)
+                )
+              ).toEqual("COMPLETE-ACTIVE");
+            }
+          );
+
+          it.each([
+            paymentType,
+            canCreateLimitedPartner,
+            canGetDistribution,
+            canMakeDistribution,
+          ])(
+            "removes %o API error when user selects radio button",
+            async (testTitle, data) => {
+              const {
+                formationFormData,
+                formationResponse,
+                formationStepName,
+                radioBtnTestId,
+                profileData,
+              } = data;
+              filledInBusiness = {
+                ...business,
+                profileData: profileData
+                  ? { ...profileData }
+                  : { ...business.profileData },
+                formationData: {
+                  ...business.formationData,
+                  formationFormData,
+                  formationResponse,
+                },
+              };
+              const page = preparePage({
+                business: filledInBusiness,
+                displayContent,
+              });
+              await page.fillAndSubmitBusinessNameStep();
+              await page.stepperClickToReviewStep();
+              await page.clickSubmit();
+              if (formationStepName === "Business")
+                await page.stepperClickToBusinessStep();
+              if (formationStepName === "Contacts")
+                await page.stepperClickToContactsStep();
+              if (formationStepName === "Billing")
+                await page.stepperClickToBillingStep();
               expect(screen.getByTestId("alert-error")).toBeInTheDocument();
               fireEvent.click(screen.getByTestId(radioBtnTestId as string));
-              expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
-              expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
-              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-                "COMPLETE-ACTIVE"
-              );
+              expect(
+                screen.queryByTestId("alert-error")
+              ).not.toBeInTheDocument();
+              expect(
+                screen.queryByText(Config.formation.errorBanner.errorOnStep)
+              ).not.toBeInTheDocument();
+              expect(
+                page.getStepStateInStepper(
+                  LookupStepIndexByName(formationStepName)
+                )
+              ).toEqual("COMPLETE-ACTIVE");
             }
           );
 
@@ -1498,21 +1768,36 @@ describe("<BusinessFormationPaginator />", () => {
                   formationResponse,
                 },
               };
-              const page = preparePage({ business: filledInBusiness, displayContent });
+              const page = preparePage({
+                business: filledInBusiness,
+                displayContent,
+              });
               await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
-              if (formationStepName === "Business") await page.stepperClickToBusinessStep();
+              if (formationStepName === "Business")
+                await page.stepperClickToBusinessStep();
               expect(screen.getByTestId("alert-error")).toBeInTheDocument();
 
-              page.selectByText(dropDownLabel as string, dropDownValue as string);
-              fireEvent.focusOut(screen.getAllByLabelText(dropDownLabel as string)[0]);
-
-              expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
-              expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
-              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-                "COMPLETE-ACTIVE"
+              page.selectByText(
+                dropDownLabel as string,
+                dropDownValue as string
               );
+              fireEvent.focusOut(
+                screen.getAllByLabelText(dropDownLabel as string)[0]
+              );
+
+              expect(
+                screen.queryByTestId("alert-error")
+              ).not.toBeInTheDocument();
+              expect(
+                screen.queryByText(Config.formation.errorBanner.errorOnStep)
+              ).not.toBeInTheDocument();
+              expect(
+                page.getStepStateInStepper(
+                  LookupStepIndexByName(formationStepName)
+                )
+              ).toEqual("COMPLETE-ACTIVE");
             }
           );
 
@@ -1534,23 +1819,35 @@ describe("<BusinessFormationPaginator />", () => {
                   formationResponse,
                 },
               };
-              const page = preparePage({ business: filledInBusiness, displayContent });
+              const page = preparePage({
+                business: filledInBusiness,
+                displayContent,
+              });
               await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
-              if (formationStepName === "Business") await page.stepperClickToBusinessStep();
+              if (formationStepName === "Business")
+                await page.stepperClickToBusinessStep();
               expect(screen.getByTestId("alert-error")).toBeInTheDocument();
 
               page.selectDate(
                 newDate as DateObject,
-                datePickerFieldType as "Business start date" | "Foreign date of formation"
+                datePickerFieldType as
+                  | "Business start date"
+                  | "Foreign date of formation"
               );
 
-              expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
-              expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
-              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-                "COMPLETE-ACTIVE"
-              );
+              expect(
+                screen.queryByTestId("alert-error")
+              ).not.toBeInTheDocument();
+              expect(
+                screen.queryByText(Config.formation.errorBanner.errorOnStep)
+              ).not.toBeInTheDocument();
+              expect(
+                page.getStepStateInStepper(
+                  LookupStepIndexByName(formationStepName)
+                )
+              ).toEqual("COMPLETE-ACTIVE");
             }
           );
         });
@@ -1824,7 +2121,9 @@ describe("<BusinessFormationPaginator />", () => {
               formationFormData: generateFormationFormData(
                 {
                   businessSuffix: "LLC",
-                  ...generateFormationForeignAddress({ addressCountry: undefined }),
+                  ...generateFormationForeignAddress({
+                    addressCountry: undefined,
+                  }),
                 },
                 { legalStructureId: "foreign-limited-partnership" }
               ),
@@ -1920,23 +2219,41 @@ describe("<BusinessFormationPaginator />", () => {
           ])(
             "shows error alert and error state on step associated with %o API error",
             async (testTitle, data) => {
-              const { formationFormData, formationResponse, formationStepName } = data;
+              const {
+                formationFormData,
+                formationResponse,
+                formationStepName,
+              } = data;
 
               filledInBusiness = {
                 ...business,
-                profileData: { ...business.profileData, businessPersona: "FOREIGN" },
+                profileData: {
+                  ...business.profileData,
+                  businessPersona: "FOREIGN",
+                },
                 formationData: {
                   ...business.formationData,
                   formationFormData: formationFormData,
                   formationResponse: formationResponse,
                 },
               };
-              const page = preparePage({ business: filledInBusiness, displayContent });
+              const page = preparePage({
+                business: filledInBusiness,
+                displayContent,
+              });
               await page.fillAndSubmitNexusBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
-              expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual("ERROR");
-              expect(screen.getByText(Config.formation.errorBanner.incompleteStepsError)).toBeInTheDocument();
+              expect(
+                page.getStepStateInStepper(
+                  LookupStepIndexByName(formationStepName)
+                )
+              ).toEqual("ERROR");
+              expect(
+                screen.getByText(
+                  Config.formation.errorBanner.incompleteStepsError
+                )
+              ).toBeInTheDocument();
             }
           );
 
@@ -1954,33 +2271,52 @@ describe("<BusinessFormationPaginator />", () => {
             foreignIntlMainAddressCountry,
             foreignStateOfFormation,
             foreignDateOfFormation,
-          ])("shows API error message on step for %o API error", async (testTitle, data) => {
-            const { formationFormData, formationResponse, formationStepName, fieldName } = data;
-            filledInBusiness = {
-              ...business,
-              profileData: { ...business.profileData, businessPersona: "FOREIGN" },
-              formationData: {
-                ...business.formationData,
+          ])(
+            "shows API error message on step for %o API error",
+            async (testTitle, data) => {
+              const {
                 formationFormData,
                 formationResponse,
-              },
-            };
-            const page = preparePage({ business: filledInBusiness, displayContent });
-            await page.fillAndSubmitNexusBusinessNameStep();
-            await page.stepperClickToReviewStep();
-            await page.clickSubmit();
-            if (formationStepName === "Business") await page.stepperClickToBusinessStep();
-            if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
-            if (formationStepName === "Billing") await page.stepperClickToBillingStep();
-            expect(screen.getByTestId("alert-error")).toHaveTextContent(
-              Config.formation.errorBanner.errorOnStep
-            );
-            expect(screen.getByTestId("alert-error")).toHaveTextContent(
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (Config.formation.fields as any)[fieldName as string].label
-            );
-            expect(screen.getByTestId("alert-error")).toHaveTextContent("very bad input");
-          });
+                formationStepName,
+                fieldName,
+              } = data;
+              filledInBusiness = {
+                ...business,
+                profileData: {
+                  ...business.profileData,
+                  businessPersona: "FOREIGN",
+                },
+                formationData: {
+                  ...business.formationData,
+                  formationFormData,
+                  formationResponse,
+                },
+              };
+              const page = preparePage({
+                business: filledInBusiness,
+                displayContent,
+              });
+              await page.fillAndSubmitNexusBusinessNameStep();
+              await page.stepperClickToReviewStep();
+              await page.clickSubmit();
+              if (formationStepName === "Business")
+                await page.stepperClickToBusinessStep();
+              if (formationStepName === "Contacts")
+                await page.stepperClickToContactsStep();
+              if (formationStepName === "Billing")
+                await page.stepperClickToBillingStep();
+              expect(screen.getByTestId("alert-error")).toHaveTextContent(
+                Config.formation.errorBanner.errorOnStep
+              );
+              expect(screen.getByTestId("alert-error")).toHaveTextContent(
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                (Config.formation.fields as any)[fieldName as string].label
+              );
+              expect(screen.getByTestId("alert-error")).toHaveTextContent(
+                "very bad input"
+              );
+            }
+          );
 
           it.each([
             foreignUsMainAddressLine1,
@@ -1996,36 +2332,62 @@ describe("<BusinessFormationPaginator />", () => {
             foreignIntlMainAddressCountry,
             foreignStateOfFormation,
             foreignDateOfFormation,
-          ])("removes %o API error on blur when user changes text field", async (testTitle, data) => {
-            const { formationFormData, formationResponse, formationStepName, fieldLabel, newTextInput } =
-              data;
-            filledInBusiness = {
-              ...filledInBusiness,
-              profileData: { ...filledInBusiness.profileData, businessPersona: "FOREIGN" },
-              formationData: {
-                ...filledInBusiness.formationData,
+          ])(
+            "removes %o API error on blur when user changes text field",
+            async (testTitle, data) => {
+              const {
                 formationFormData,
                 formationResponse,
-              },
-            };
-            const page = preparePage({ business: filledInBusiness, displayContent });
-            await page.fillAndSubmitNexusBusinessNameStep();
-            await page.stepperClickToReviewStep();
-            await page.clickSubmit();
-            if (formationStepName === "Business") await page.stepperClickToBusinessStep();
-            if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
-            if (formationStepName === "Billing") await page.stepperClickToBillingStep();
-            expect(screen.getByTestId("alert-error")).toBeInTheDocument();
+                formationStepName,
+                fieldLabel,
+                newTextInput,
+              } = data;
+              filledInBusiness = {
+                ...filledInBusiness,
+                profileData: {
+                  ...filledInBusiness.profileData,
+                  businessPersona: "FOREIGN",
+                },
+                formationData: {
+                  ...filledInBusiness.formationData,
+                  formationFormData,
+                  formationResponse,
+                },
+              };
+              const page = preparePage({
+                business: filledInBusiness,
+                displayContent,
+              });
+              await page.fillAndSubmitNexusBusinessNameStep();
+              await page.stepperClickToReviewStep();
+              await page.clickSubmit();
+              if (formationStepName === "Business")
+                await page.stepperClickToBusinessStep();
+              if (formationStepName === "Contacts")
+                await page.stepperClickToContactsStep();
+              if (formationStepName === "Billing")
+                await page.stepperClickToBillingStep();
+              expect(screen.getByTestId("alert-error")).toBeInTheDocument();
 
-            page.fillText(fieldLabel as string as string, newTextInput as string);
-            await waitFor(() => {
-              expect(screen.queryByTestId("alert-error")).not.toBeInTheDocument();
-            });
-            expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
-            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
-              "COMPLETE-ACTIVE"
-            );
-          });
+              page.fillText(
+                fieldLabel as string as string,
+                newTextInput as string
+              );
+              await waitFor(() => {
+                expect(
+                  screen.queryByTestId("alert-error")
+                ).not.toBeInTheDocument();
+              });
+              expect(
+                screen.queryByText(Config.formation.errorBanner.errorOnStep)
+              ).not.toBeInTheDocument();
+              expect(
+                page.getStepStateInStepper(
+                  LookupStepIndexByName(formationStepName)
+                )
+              ).toEqual("COMPLETE-ACTIVE");
+            }
+          );
         });
       });
 
@@ -2059,7 +2421,10 @@ describe("<BusinessFormationPaginator />", () => {
         });
 
         it("displays generic messages on API error on all steps", async () => {
-          const page = preparePage({ business: filledInBusiness, displayContent });
+          const page = preparePage({
+            business: filledInBusiness,
+            displayContent,
+          });
           await page.stepperClickToReviewStep();
 
           expect(screen.getByText("some field 1")).toBeInTheDocument();
@@ -2075,15 +2440,28 @@ describe("<BusinessFormationPaginator />", () => {
         });
 
         it("still shows all steps as complete", async () => {
-          const page = preparePage({ business: filledInBusiness, displayContent });
+          const page = preparePage({
+            business: filledInBusiness,
+            displayContent,
+          });
           await page.fillAndSubmitBusinessNameStep();
           await page.stepperClickToReviewStep();
 
-          expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("COMPLETE");
-          expect(page.getStepStateInStepper(LookupStepIndexByName("Business"))).toEqual("COMPLETE");
-          expect(page.getStepStateInStepper(LookupStepIndexByName("Contacts"))).toEqual("COMPLETE");
-          expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("COMPLETE");
-          expect(page.getStepStateInStepper(LookupStepIndexByName("Review"))).toEqual("INCOMPLETE-ACTIVE");
+          expect(
+            page.getStepStateInStepper(LookupStepIndexByName("Name"))
+          ).toEqual("COMPLETE");
+          expect(
+            page.getStepStateInStepper(LookupStepIndexByName("Business"))
+          ).toEqual("COMPLETE");
+          expect(
+            page.getStepStateInStepper(LookupStepIndexByName("Contacts"))
+          ).toEqual("COMPLETE");
+          expect(
+            page.getStepStateInStepper(LookupStepIndexByName("Billing"))
+          ).toEqual("COMPLETE");
+          expect(
+            page.getStepStateInStepper(LookupStepIndexByName("Review"))
+          ).toEqual("INCOMPLETE-ACTIVE");
         });
       });
     });
@@ -2105,7 +2483,9 @@ describe("<BusinessFormationPaginator />", () => {
       });
       page.fillText("Search business name", "Pizza Joint");
       await waitFor(() =>
-        expect(currentBusiness().formationData.formationFormData.businessName).toEqual("Pizza Joint")
+        expect(
+          currentBusiness().formationData.formationFormData.businessName
+        ).toEqual("Pizza Joint")
       );
     });
 
@@ -2130,7 +2510,9 @@ describe("<BusinessFormationPaginator />", () => {
       await page.searchBusinessName({ status: "UNAVAILABLE" });
       expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
       await waitFor(() => {
-        expect(currentBusiness().formationData.businessNameAvailability?.status).toEqual("UNAVAILABLE");
+        expect(
+          currentBusiness().formationData.businessNameAvailability?.status
+        ).toEqual("UNAVAILABLE");
       });
     });
 
@@ -2151,14 +2533,22 @@ describe("<BusinessFormationPaginator />", () => {
         jest.advanceTimersByTime(1000);
       });
 
-      fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addButtonText));
+      fireEvent.click(
+        screen.getByText(
+          Config.formation.fields.additionalProvisions.addButtonText
+        )
+      );
 
       await waitFor(() =>
-        expect(currentBusiness().formationData.formationFormData.additionalProvisions).toEqual([""])
+        expect(
+          currentBusiness().formationData.formationFormData.additionalProvisions
+        ).toEqual([""])
       );
       await page.stepperClickToContactsStep();
       await page.stepperClickToBusinessStep();
-      expect(currentBusiness().formationData.formationFormData.additionalProvisions).toEqual([]);
+      expect(
+        currentBusiness().formationData.formationFormData.additionalProvisions
+      ).toEqual([]);
     });
 
     it("does not autosave if a field has changed but less than 1 second has passed", () => {
@@ -2173,34 +2563,54 @@ describe("<BusinessFormationPaginator />", () => {
 
     it("displays the saving spinner every 1 min, for 2.5 seconds at a time", async () => {
       const page = preparePage({ business, displayContent });
-      expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.autosaveDefaults.savingText)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.autosaveDefaults.savedText)
+      ).not.toBeInTheDocument();
 
       act(() => {
         jest.advanceTimersByTime(1000);
       });
       makeChangeToForm(page);
       await waitFor(() =>
-        expect(currentBusiness().formationData.formationFormData.businessName).toEqual("Pizza Joint")
+        expect(
+          currentBusiness().formationData.formationFormData.businessName
+        ).toEqual("Pizza Joint")
       );
 
-      expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.autosaveDefaults.savingText)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.autosaveDefaults.savedText)
+      ).not.toBeInTheDocument();
 
       act(() => {
         jest.advanceTimersByTime(59000);
       });
 
-      expect(screen.getByText(Config.autosaveDefaults.savingText)).toBeInTheDocument();
-      expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.autosaveDefaults.savingText)
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.autosaveDefaults.savedText)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.autosaveDefaults.savedText)
+      ).not.toBeInTheDocument();
 
       act(() => {
         jest.advanceTimersByTime(2500);
       });
 
-      expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
-      expect(screen.getByText(Config.autosaveDefaults.savedText)).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.autosaveDefaults.savingText)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.autosaveDefaults.savedText)
+      ).toBeInTheDocument();
     });
 
     it("does not display the saving spinner if no saves occurred in that 1 min", async () => {
@@ -2217,15 +2627,23 @@ describe("<BusinessFormationPaginator />", () => {
         jest.advanceTimersByTime(2500);
       });
 
-      expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
-      expect(screen.getByText(Config.autosaveDefaults.savedText)).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.autosaveDefaults.savingText)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.autosaveDefaults.savedText)
+      ).toBeInTheDocument();
 
       act(() => {
         jest.runOnlyPendingTimers();
       });
 
-      expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.autosaveDefaults.savingText)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.autosaveDefaults.savedText)
+      ).not.toBeInTheDocument();
     });
 
     const makeChangeToForm = (page: FormationPageHelpers): void => {
@@ -2342,45 +2760,60 @@ describe("<BusinessFormationPaginator />", () => {
 
     it("has correctly composed aria labels", () => {
       preparePage({ business, displayContent });
-      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`)).toHaveAttribute(
+      expect(
+        screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`)
+      ).toHaveAttribute("aria-label", expect.stringContaining("Name"));
+      expect(
+        screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`)
+      ).toHaveAttribute(
         "aria-label",
-        expect.stringContaining("Name")
+        expect.stringContaining(
+          Config.formation.general.ariaContextStepperStateIncomplete
+        )
       );
-      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`)).toHaveAttribute(
+      expect(
+        screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`)
+      ).toHaveAttribute("aria-label", expect.stringContaining("Business"));
+      expect(
+        screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`)
+      ).toHaveAttribute(
         "aria-label",
-        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete)
+        expect.stringContaining(
+          Config.formation.general.ariaContextStepperStateIncomplete
+        )
       );
-      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`)).toHaveAttribute(
+      expect(
+        screen.getByTestId(`stepper-${LookupStepIndexByName("Contacts")}`)
+      ).toHaveAttribute("aria-label", expect.stringContaining("Contacts"));
+      expect(
+        screen.getByTestId(`stepper-${LookupStepIndexByName("Contacts")}`)
+      ).toHaveAttribute(
         "aria-label",
-        expect.stringContaining("Business")
+        expect.stringContaining(
+          Config.formation.general.ariaContextStepperStateIncomplete
+        )
       );
-      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`)).toHaveAttribute(
+      expect(
+        screen.getByTestId(`stepper-${LookupStepIndexByName("Billing")}`)
+      ).toHaveAttribute("aria-label", expect.stringContaining("Billing"));
+      expect(
+        screen.getByTestId(`stepper-${LookupStepIndexByName("Billing")}`)
+      ).toHaveAttribute(
         "aria-label",
-        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete)
+        expect.stringContaining(
+          Config.formation.general.ariaContextStepperStateIncomplete
+        )
       );
-      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Contacts")}`)).toHaveAttribute(
+      expect(
+        screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`)
+      ).toHaveAttribute("aria-label", expect.stringContaining("Review"));
+      expect(
+        screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`)
+      ).toHaveAttribute(
         "aria-label",
-        expect.stringContaining("Contacts")
-      );
-      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Contacts")}`)).toHaveAttribute(
-        "aria-label",
-        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete)
-      );
-      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Billing")}`)).toHaveAttribute(
-        "aria-label",
-        expect.stringContaining("Billing")
-      );
-      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Billing")}`)).toHaveAttribute(
-        "aria-label",
-        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete)
-      );
-      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`)).toHaveAttribute(
-        "aria-label",
-        expect.stringContaining("Review")
-      );
-      expect(screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`)).toHaveAttribute(
-        "aria-label",
-        expect.stringContaining(Config.formation.general.ariaContextStepperStateIncomplete)
+        expect.stringContaining(
+          Config.formation.general.ariaContextStepperStateIncomplete
+        )
       );
     });
   });

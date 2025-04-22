@@ -9,15 +9,21 @@ import {
 describe("cases-helpers", () => {
   describe("kebabSnakeSentenceToCamelCase", () => {
     it("converts kebab-case to camelCase", () => {
-      expect(kebabSnakeSentenceToCamelCase("food-truck-whatever")).toEqual("foodTruckWhatever");
+      expect(kebabSnakeSentenceToCamelCase("food-truck-whatever")).toEqual(
+        "foodTruckWhatever"
+      );
     });
 
     it("converts sentence case to camelCase", () => {
-      expect(kebabSnakeSentenceToCamelCase("food truck whatever")).toEqual("foodTruckWhatever");
+      expect(kebabSnakeSentenceToCamelCase("food truck whatever")).toEqual(
+        "foodTruckWhatever"
+      );
     });
 
     it("converts snake_case to camelCase", () => {
-      expect(kebabSnakeSentenceToCamelCase("FOOD_TRUCK_WHATEVER")).toEqual("foodTruckWhatever");
+      expect(kebabSnakeSentenceToCamelCase("FOOD_TRUCK_WHATEVER")).toEqual(
+        "foodTruckWhatever"
+      );
     });
   });
 
@@ -33,22 +39,34 @@ describe("cases-helpers", () => {
 
   describe("camelCaseToSentence", () => {
     it("converts camelCase to Sentence case", () => {
-      expect(camelCaseToSentence("businessAddressLine1")).toEqual("Business address line1");
+      expect(camelCaseToSentence("businessAddressLine1")).toEqual(
+        "Business address line1"
+      );
     });
   });
 
   describe("camelCaseToKebabCase", () => {
     it("converts camelCase to kebab-case", () => {
-      expect(camelCaseToKebabCase("businessAddressLine1")).toEqual("business-address-line1");
+      expect(camelCaseToKebabCase("businessAddressLine1")).toEqual(
+        "business-address-line1"
+      );
     });
   });
 
   describe("capitalizeEachWord", () => {
     it("capitalizes first letter of each word", () => {
-      expect(capitalizeEachWord("business address")).toEqual("Business Address");
-      expect(capitalizeEachWord("business Address")).toEqual("Business Address");
-      expect(capitalizeEachWord("Business address")).toEqual("Business Address");
-      expect(capitalizeEachWord("Business Address")).toEqual("Business Address");
+      expect(capitalizeEachWord("business address")).toEqual(
+        "Business Address"
+      );
+      expect(capitalizeEachWord("business Address")).toEqual(
+        "Business Address"
+      );
+      expect(capitalizeEachWord("Business address")).toEqual(
+        "Business Address"
+      );
+      expect(capitalizeEachWord("Business Address")).toEqual(
+        "Business Address"
+      );
     });
   });
 });

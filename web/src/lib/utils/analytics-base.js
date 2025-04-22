@@ -14,4 +14,9 @@ const updateContext = (analytics_context) => {
   analyticsContext = { ...analyticsContext, ...analytics_context };
 };
 
-export default { sendEvent, userUpdate, updateContext, context: analyticsContext };
+export default {
+  sendEvent,
+  userUpdate,
+  updateContext,
+  context: analyticsContext,
+};

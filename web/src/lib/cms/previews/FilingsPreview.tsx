@@ -10,7 +10,11 @@ const FilingsPreview = (props: PreviewProps): ReactElement => {
   const filing = usePageData<Filing>(props);
 
   return (
-    <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+    <div
+      className="cms"
+      ref={ref}
+      style={{ margin: 40, pointerEvents: "none" }}
+    >
       <FilingElement filing={filing} dueDate={"2024-01-01"} preview />
     </div>
   );

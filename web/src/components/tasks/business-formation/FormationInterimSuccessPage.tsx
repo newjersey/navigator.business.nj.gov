@@ -14,7 +14,8 @@ interface Props {
 }
 
 export const FormationInterimSuccessPage = (props: Props): ReactElement => {
-  const [showConfirmResubmitModal, setShowConfirmResubmitModal] = useState<boolean>(false);
+  const [showConfirmResubmitModal, setShowConfirmResubmitModal] =
+    useState<boolean>(false);
   const { Config } = useConfig();
   const { updateQueue } = useUserData();
   const router = useRouter();
@@ -29,7 +30,12 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
       .update()
       .then(() => {
         props.setStepIndex(LookupStepIndexByName("Review"));
-        router && router.replace({ pathname: `/tasks/${props.taskUrlSlug}` }, undefined, { shallow: true });
+        router &&
+          router.replace(
+            { pathname: `/tasks/${props.taskUrlSlug}` },
+            undefined,
+            { shallow: true }
+          );
       });
   };
 
@@ -41,7 +47,10 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
       <Content
         customComponents={{
           button: (
-            <UnStyledButton isUnderline onClick={(): void => setShowConfirmResubmitModal(true)}>
+            <UnStyledButton
+              isUnderline
+              onClick={(): void => setShowConfirmResubmitModal(true)}
+            >
               {Config.formation.interimSuccessPage.buttonText}
             </UnStyledButton>
           ),
@@ -49,7 +58,11 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
       >
         {Config.formation.interimSuccessPage.bodyText}
       </Content>
-      <img className="maxh-card-lg margin-top-6" src={`/img/signpost.svg`} alt="" />
+      <img
+        className="maxh-card-lg margin-top-6"
+        src={`/img/signpost.svg`}
+        alt=""
+      />
       <ModalTwoButton
         isOpen={showConfirmResubmitModal}
         close={(): void => setShowConfirmResubmitModal(false)}

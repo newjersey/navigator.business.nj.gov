@@ -4,13 +4,19 @@ import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
 import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared";
+import {
+  createEmptyProfileData,
+  ProfileData,
+} from "@businessnjgovnavigator/shared";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 import { ReactElement, useEffect, useState } from "react";
 
@@ -23,7 +29,9 @@ interface Props {
 export const FormationDateModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { business, updateQueue } = useUserData();
-  const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
+  const [profileData, setProfileData] = useState<ProfileData>(
+    createEmptyProfileData()
+  );
 
   const {
     FormFuncWrapper,
@@ -81,7 +89,10 @@ export const FormationDateModal = (props: Props): ReactElement => {
             <Content>{Config.formationDateModal.description}</Content>
           </div>
           <hr className="margin-y-4" />
-          <WithErrorBar hasError={formContextState.fieldStates.dateOfFormation.invalid} type="ALWAYS">
+          <WithErrorBar
+            hasError={formContextState.fieldStates.dateOfFormation.invalid}
+            type="ALWAYS"
+          >
             <FieldLabelModal
               fieldName="dateOfFormation"
               overrides={{
@@ -96,7 +107,9 @@ export const FormationDateModal = (props: Props): ReactElement => {
               required={true}
               disabled={false}
               futureAllowed={true}
-              errorTextOverride={Config.formationDateModal.dateOfFormationErrorText}
+              errorTextOverride={
+                Config.formationDateModal.dateOfFormationErrorText
+              }
               inputWidth="full"
             />
           </WithErrorBar>

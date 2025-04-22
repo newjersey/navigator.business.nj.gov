@@ -13,15 +13,24 @@ export interface ProfileTabPanelProps {
   navChildren?: React.ReactNode;
 }
 
-export const ProfileTabPanel = ({ children, navChildren }: ProfileTabPanelProps): ReactElement => {
+export const ProfileTabPanel = ({
+  children,
+  navChildren,
+}: ProfileTabPanelProps): ReactElement => {
   const userDataFromHook = useUserData();
   const business = userDataFromHook.business;
   const { isAuthenticated } = useContext(NeedsAccountContext);
 
   const titleOverColumns: React.ReactNode = (
     <>
-      <ProfileHeader business={business} isAuthenticated={isAuthenticated === "TRUE"} />
-      <ProfileNoteDisclaimerForSubmittingData business={business} isAuthenticated={isAuthenticated} />
+      <ProfileHeader
+        business={business}
+        isAuthenticated={isAuthenticated === "TRUE"}
+      />
+      <ProfileNoteDisclaimerForSubmittingData
+        business={business}
+        isAuthenticated={isAuthenticated}
+      />
     </>
   );
 
@@ -34,7 +43,9 @@ export const ProfileTabPanel = ({ children, navChildren }: ProfileTabPanelProps)
         <div className="grid-container-widescreen desktop:padding-x-7">
           {isLargeScreen && (
             <>
-              <BackButtonForLayout backButtonText={Config.taskDefaults.backToRoadmapText} />
+              <BackButtonForLayout
+                backButtonText={Config.taskDefaults.backToRoadmapText}
+              />
               {titleOverColumns}
             </>
           )}
@@ -48,7 +59,9 @@ export const ProfileTabPanel = ({ children, navChildren }: ProfileTabPanelProps)
             <div className="fg1">
               {!isLargeScreen && (
                 <div>
-                  <BackButtonForLayout backButtonText={Config.taskDefaults.backToRoadmapText} />
+                  <BackButtonForLayout
+                    backButtonText={Config.taskDefaults.backToRoadmapText}
+                  />
                   {titleOverColumns}
                   {navChildren}
                 </div>

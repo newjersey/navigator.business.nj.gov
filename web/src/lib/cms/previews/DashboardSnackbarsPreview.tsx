@@ -13,7 +13,11 @@ const DashboardSnackbarsPreview = (props: PreviewProps): ReactElement => {
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+      <div
+        className="cms"
+        ref={ref}
+        style={{ margin: 40, pointerEvents: "none" }}
+      >
         <Heading level={2}>Calendar Snackbar</Heading>
         <SnackbarAlert
           variant="success"
@@ -31,7 +35,9 @@ const DashboardSnackbarsPreview = (props: PreviewProps): ReactElement => {
           close={(): void => {}}
           heading={config.dashboardDefaults.certificationsSnackbarHeading}
         >
-          <Content>{config.dashboardDefaults.certificationsSnackbarBody}</Content>
+          <Content>
+            {config.dashboardDefaults.certificationsSnackbarBody}
+          </Content>
         </SnackbarAlert>
 
         <Heading level={2}>Deferred Onboarding Snackbar</Heading>
@@ -41,7 +47,9 @@ const DashboardSnackbarsPreview = (props: PreviewProps): ReactElement => {
           close={(): void => {}}
           heading={config.dashboardDefaults.deferredOnboardingSnackbarHeader}
         >
-          <Content>{config.dashboardDefaults.deferredOnboardingSnackbarBody}</Content>
+          <Content>
+            {config.dashboardDefaults.deferredOnboardingSnackbarBody}
+          </Content>
         </SnackbarAlert>
 
         <Heading level={2}>Tax Registration Snackbar</Heading>
@@ -51,7 +59,9 @@ const DashboardSnackbarsPreview = (props: PreviewProps): ReactElement => {
           close={(): void => {}}
           heading={config.dashboardDefaults.taxRegistrationSnackbarHeading}
         >
-          <Content>{config.dashboardDefaults.taxRegistrationSnackbarBody}</Content>
+          <Content>
+            {config.dashboardDefaults.taxRegistrationSnackbarBody}
+          </Content>
         </SnackbarAlert>
 
         <Heading level={2}>Funding Snackbar</Heading>

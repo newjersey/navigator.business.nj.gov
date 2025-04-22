@@ -2,8 +2,23 @@ import { GenericButton } from "@/components/njwds-extended/GenericButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { CallToActionHyperlink } from "@/lib/types/types";
-import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
-import { KeyboardEvent, ReactElement, ReactNode, SyntheticEvent, useEffect, useRef, useState } from "react";
+import {
+  ClickAwayListener,
+  Grow,
+  MenuItem,
+  MenuList,
+  Paper,
+  Popper,
+} from "@mui/material";
+import {
+  KeyboardEvent,
+  ReactElement,
+  ReactNode,
+  SyntheticEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 interface Props {
   children: ReactNode;
@@ -20,7 +35,10 @@ export const PrimaryButtonDropdown = (props: Props): ReactElement => {
   };
 
   const handleClose = (event: Event | SyntheticEvent): void => {
-    if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
+    if (
+      anchorRef.current &&
+      anchorRef.current.contains(event.target as HTMLElement)
+    ) {
       return;
     }
     setOpen(false);
@@ -57,7 +75,10 @@ export const PrimaryButtonDropdown = (props: Props): ReactElement => {
       >
         <>
           {props.children}
-          <Icon className="usa-icon--size-3 margin-left-05 margin-right-neg-1" iconName="arrow_drop_down" />
+          <Icon
+            className="usa-icon--size-3 margin-left-05 margin-right-neg-1"
+            iconName="arrow_drop_down"
+          />
         </>
       </GenericButton>
       <Popper

@@ -20,7 +20,11 @@ import analytics from "@/lib/utils/analytics";
 import { randomPublicFilingLegalStructure } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { generateBusiness, generateProfileData, generateUserData } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generateProfileData,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { ReactNode } from "react";
 
@@ -98,35 +102,51 @@ describe("shared-submenu-components", () => {
 
   it("renders LoginMenuItem and it navigates correclty onClick", () => {
     render(<LoginMenuItem />);
-    expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationDefaults.logInButton)
+    ).toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.navigationDefaults.logInButton));
     expect(mockPush).toHaveBeenCalledWith(ROUTES.login);
   });
 
   it("renders LogoutMenuItem and it navigates correclty onClick", () => {
     render(<LogoutMenuItem handleClose={() => null} />);
-    expect(screen.getByText(Config.navigationDefaults.logoutButton)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationDefaults.logoutButton)
+    ).toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.navigationDefaults.logoutButton));
     expect(onSignOut).toHaveBeenCalled();
   });
 
   it("renders MyNjMenuItem and it navigates correclty onClick", () => {
     render(<MyNjMenuItem handleClose={() => null} />);
-    expect(screen.getByText(Config.navigationDefaults.myNJAccountText)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationDefaults.myNJAccountText)
+    ).toBeInTheDocument();
     const openMock = jest.fn();
     global.open = openMock;
 
     const profileLink = "www.njprofilelink.com";
     process.env.MYNJ_PROFILE_LINK = profileLink;
 
-    fireEvent.click(screen.getByText(Config.navigationDefaults.myNJAccountText));
-    expect(openMock).toHaveBeenCalledWith(profileLink, "_blank", "noopener noreferrer");
+    fireEvent.click(
+      screen.getByText(Config.navigationDefaults.myNJAccountText)
+    );
+    expect(openMock).toHaveBeenCalledWith(
+      profileLink,
+      "_blank",
+      "noopener noreferrer"
+    );
   });
 
   it("renders AddBusinessItem and it navigates correclty onClick", () => {
     render(<AddBusinessItem handleClose={() => null} />);
-    expect(screen.getByText(Config.navigationDefaults.addBusinessButton)).toBeInTheDocument();
-    fireEvent.click(screen.getByText(Config.navigationDefaults.addBusinessButton));
+    expect(
+      screen.getByText(Config.navigationDefaults.addBusinessButton)
+    ).toBeInTheDocument();
+    fireEvent.click(
+      screen.getByText(Config.navigationDefaults.addBusinessButton)
+    );
     expect(mockPush).toHaveBeenCalledWith({
       pathname: ROUTES.onboarding,
       query: { additionalBusiness: "true" },
@@ -135,14 +155,20 @@ describe("shared-submenu-components", () => {
 
   it("renders RegisterMenuItem and navigates correclty onClick", () => {
     render(<RegisterMenuItem />);
-    expect(screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText)).toBeInTheDocument();
-    fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText));
+    expect(
+      screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText)
+    ).toBeInTheDocument();
+    fireEvent.click(
+      screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText)
+    );
     expect(mockPush).toHaveBeenCalledWith(ROUTES.accountSetup);
   });
 
   it("renders GetStartedMenuItem and navigates correclty onClick", () => {
     render(<GetStartedMenuItem />);
-    expect(screen.getByText(Config.navigationDefaults.getStartedText)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationDefaults.getStartedText)
+    ).toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.navigationDefaults.getStartedText));
     expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
   });
@@ -150,17 +176,37 @@ describe("shared-submenu-components", () => {
   describe("ProfileMenuItem", () => {
     it("renders ProfileMenuItem and navigates to dashbaord correclty onClick", () => {
       const userData = generateUserData({});
-      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />);
-      expect(screen.getByText(Config.navigationDefaults.navBarGuestBusinessText)).toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestBusinessText));
+      render(
+        <ProfileMenuItem
+          handleClose={() => null}
+          isAuthenticated={false}
+          userData={userData}
+        />
+      );
+      expect(
+        screen.getByText(Config.navigationDefaults.navBarGuestBusinessText)
+      ).toBeInTheDocument();
+      fireEvent.click(
+        screen.getByText(Config.navigationDefaults.navBarGuestBusinessText)
+      );
       expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
     });
 
     it("renders ProfileMenuItem and navigates correclty onClick", () => {
       const userData = generateUserData({});
-      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />);
-      expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.navigationDefaults.profileLinkText));
+      render(
+        <ProfileMenuItem
+          handleClose={() => null}
+          isAuthenticated={false}
+          userData={userData}
+        />
+      );
+      expect(
+        screen.getByText(Config.navigationDefaults.profileLinkText)
+      ).toBeInTheDocument();
+      fireEvent.click(
+        screen.getByText(Config.navigationDefaults.profileLinkText)
+      );
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
     });
 
@@ -185,7 +231,13 @@ describe("shared-submenu-components", () => {
         },
       });
 
-      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={true} userData={userData} />);
+      render(
+        <ProfileMenuItem
+          handleClose={() => null}
+          isAuthenticated={true}
+          userData={userData}
+        />
+      );
 
       expect(screen.getByText("first-biz")).toBeInTheDocument();
       expect(screen.getByText("second-biz")).toBeInTheDocument();
@@ -205,15 +257,25 @@ describe("shared-submenu-components", () => {
           [secondBusiness.id]: secondBusiness,
         },
       });
-      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={true} userData={userData} />);
+      render(
+        <ProfileMenuItem
+          handleClose={() => null}
+          isAuthenticated={true}
+          userData={userData}
+        />
+      );
 
-      expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.navigationDefaults.profileLinkText)
+      ).toBeInTheDocument();
     });
   });
 
   it("renders the Plan MenuItem redirects", async () => {
     render(<Plan />);
-    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarPlanText));
+    fireEvent.click(
+      screen.getByText(Config.navigationQuickLinks.navBarPlanText)
+    );
 
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarPlanLink,
@@ -222,13 +284,17 @@ describe("shared-submenu-components", () => {
     );
 
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_hamburger_quick_links_plan.click.plan_page).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_hamburger_quick_links_plan.click.plan_page
+      ).toHaveBeenCalled();
     });
   });
 
   it("renders the Operate MenuItem redirects", async () => {
     render(<Operate />);
-    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarOperateText));
+    fireEvent.click(
+      screen.getByText(Config.navigationQuickLinks.navBarOperateText)
+    );
 
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarOperateLink,
@@ -237,13 +303,18 @@ describe("shared-submenu-components", () => {
     );
 
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_hamburger_quick_links_operate.click.operate_page).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_hamburger_quick_links_operate.click
+          .operate_page
+      ).toHaveBeenCalled();
     });
   });
 
   it("renders the Grow MenuItem redirects", async () => {
     render(<Grow />);
-    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarGrowText));
+    fireEvent.click(
+      screen.getByText(Config.navigationQuickLinks.navBarGrowText)
+    );
 
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarGrowLink,
@@ -252,13 +323,17 @@ describe("shared-submenu-components", () => {
     );
 
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_hamburger_quick_links_grow.click.grow_page).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_hamburger_quick_links_grow.click.grow_page
+      ).toHaveBeenCalled();
     });
   });
 
   it("renders the Updates MenuItem redirects", async () => {
     render(<Updates />);
-    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarUpdatesText));
+    fireEvent.click(
+      screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)
+    );
 
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarUpdatesLink,
@@ -267,13 +342,18 @@ describe("shared-submenu-components", () => {
     );
 
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_hamburger_quick_links_updates.click.updates_page).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_hamburger_quick_links_updates.click
+          .updates_page
+      ).toHaveBeenCalled();
     });
   });
 
   it("renders the Search MenuItem redirects", async () => {
     render(<Search />);
-    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarSearchText));
+    fireEvent.click(
+      screen.getByText(Config.navigationQuickLinks.navBarSearchText)
+    );
 
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarSearchLink,
@@ -281,13 +361,18 @@ describe("shared-submenu-components", () => {
       "noopener noreferrer"
     );
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_hamburger_quick_links_search.click.search_page).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_hamburger_quick_links_search.click
+          .search_page
+      ).toHaveBeenCalled();
     });
   });
 
   it("renders the Start MenuItem redirects", async () => {
     render(<Start />);
-    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarStartText));
+    fireEvent.click(
+      screen.getByText(Config.navigationQuickLinks.navBarStartText)
+    );
 
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarStartLink,
@@ -295,7 +380,9 @@ describe("shared-submenu-components", () => {
       "noopener noreferrer"
     );
     await waitFor(() => {
-      expect(mockAnalytics.event.mobile_hamburger_quick_links_start.click.start_page).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.mobile_hamburger_quick_links_start.click.start_page
+      ).toHaveBeenCalled();
     });
   });
 });

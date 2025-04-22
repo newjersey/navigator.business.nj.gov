@@ -26,7 +26,9 @@ describe("Industry Dropdown", () => {
     fireEvent.click(screen.getByLabelText("Industry"));
     expect(screen.getByTestId("generic")).toBeInTheDocument();
     expect(screen.getAllByText(searchTerm).length).toEqual(1);
-    expect(screen.queryByTestId("certified-public-accountant")).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("certified-public-accountant")
+    ).not.toBeInTheDocument();
   });
 
   it("displays search affirmation when there is an input", () => {

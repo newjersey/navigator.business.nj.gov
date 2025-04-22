@@ -12,7 +12,12 @@ import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { FormationBusinessLocationType } from "@businessnjgovnavigator/shared";
 import { emptyFormationAddressData } from "@businessnjgovnavigator/shared/formationData";
 import { StateObject } from "@businessnjgovnavigator/shared/states";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import {
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export const ProfileAddress = (): ReactElement => {
@@ -28,7 +33,10 @@ export const ProfileAddress = (): ReactElement => {
     "addressLine2",
     DataFormErrorMapContext
   );
-  const { setIsValid: setIsValidCity } = useFormContextFieldHelpers("addressCity", DataFormErrorMapContext);
+  const { setIsValid: setIsValidCity } = useFormContextFieldHelpers(
+    "addressCity",
+    DataFormErrorMapContext
+  );
   const { setIsValid: setIsValidMunicipality } = useFormContextFieldHelpers(
     "addressMunicipality",
     DataFormErrorMapContext
@@ -37,7 +45,10 @@ export const ProfileAddress = (): ReactElement => {
     "addressProvince",
     DataFormErrorMapContext
   );
-  const { setIsValid: setIsValidState } = useFormContextFieldHelpers("addressState", DataFormErrorMapContext);
+  const { setIsValid: setIsValidState } = useFormContextFieldHelpers(
+    "addressState",
+    DataFormErrorMapContext
+  );
   const { setIsValid: setIsValidCountry } = useFormContextFieldHelpers(
     "addressCountry",
     DataFormErrorMapContext
@@ -47,12 +58,19 @@ export const ProfileAddress = (): ReactElement => {
     DataFormErrorMapContext
   );
 
-  const handleAddressTypeChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const businessLocationTypeValue = event.target.value as FormationBusinessLocationType;
-    setAddressData({ ...emptyFormationAddressData, businessLocationType: businessLocationTypeValue });
+  const handleAddressTypeChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    const businessLocationTypeValue = event.target
+      .value as FormationBusinessLocationType;
+    setAddressData({
+      ...emptyFormationAddressData,
+      businessLocationType: businessLocationTypeValue,
+    });
   };
 
-  const isAddressFieldsDisabled = business?.formationData.completedFilingPayment;
+  const isAddressFieldsDisabled =
+    business?.formationData.completedFilingPayment;
 
   const onValidation = (): void => {
     setIsValidAddressLine1(!doesFieldHaveError("addressLine1"));
@@ -83,16 +101,21 @@ export const ProfileAddress = (): ReactElement => {
           : business.formationData.formationFormData.addressState;
 
       const businessLocationType =
-        isStarting || isOwning ? "NJ" : business.formationData.formationFormData.businessLocationType ?? "US";
+        isStarting || isOwning
+          ? "NJ"
+          : business.formationData.formationFormData.businessLocationType ??
+            "US";
       setAddressData({
         addressLine1: business.formationData.formationFormData.addressLine1,
         addressLine2: business.formationData.formationFormData.addressLine2,
         addressCity: business.formationData.formationFormData.addressCity,
-        addressMunicipality: business.formationData.formationFormData.addressMunicipality,
+        addressMunicipality:
+          business.formationData.formationFormData.addressMunicipality,
         addressState,
         addressZipCode: business.formationData.formationFormData.addressZipCode,
         addressCountry: business.formationData.formationFormData.addressCountry,
-        addressProvince: business.formationData.formationFormData.addressProvince,
+        addressProvince:
+          business.formationData.formationFormData.addressProvince,
         businessLocationType: businessLocationType,
       });
     }
@@ -120,7 +143,10 @@ export const ProfileAddress = (): ReactElement => {
                   data-testid="profile-us-address"
                   value="US"
                   control={<Radio color="primary" />}
-                  label={Config.profileDefaults.fields.businessAddress.default.usAddress}
+                  label={
+                    Config.profileDefaults.fields.businessAddress.default
+                      .usAddress
+                  }
                 />
                 <FormControlLabel
                   labelPlacement="end"
@@ -128,7 +154,10 @@ export const ProfileAddress = (): ReactElement => {
                   data-testid="profile-intl-address"
                   value="INTL"
                   control={<Radio color="primary" />}
-                  label={Config.profileDefaults.fields.businessAddress.default.intlAddress}
+                  label={
+                    Config.profileDefaults.fields.businessAddress.default
+                      .intlAddress
+                  }
                 />
               </RadioGroup>
             </FormControl>

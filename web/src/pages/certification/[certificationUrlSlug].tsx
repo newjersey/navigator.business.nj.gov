@@ -22,7 +22,9 @@ interface Props {
   certification: Certification;
 }
 
-export const CertificationElement = (props: { certification: Certification }): ReactElement => {
+export const CertificationElement = (props: {
+  certification: Certification;
+}): ReactElement => {
   const { business } = useUserData();
 
   const addNaicsCodeData = (contentMd: string): string => {
@@ -35,7 +37,9 @@ export const CertificationElement = (props: { certification: Certification }): R
     <>
       <div className="min-height-38rem">
         <div className="margin-bottom-2">
-          {props.certification.name && <Heading level={1}>{props.certification.name}</Heading>}
+          {props.certification.name && (
+            <Heading level={1}>{props.certification.name}</Heading>
+          )}
         </div>
         {props.certification.summaryDescriptionMd && (
           <Content>{props.certification.summaryDescriptionMd}</Content>
@@ -45,12 +49,13 @@ export const CertificationElement = (props: { certification: Certification }): R
           <Content>{addNaicsCodeData(props.certification.contentMd)}</Content>
         )}
       </div>
-      {props.certification.callToActionLink && props.certification.callToActionText && (
-        <SingleCtaLink
-          link={props.certification.callToActionLink}
-          text={props.certification.callToActionText}
-        />
-      )}
+      {props.certification.callToActionLink &&
+        props.certification.callToActionText && (
+          <SingleCtaLink
+            link={props.certification.callToActionLink}
+            text={props.certification.callToActionText}
+          />
+        )}
     </>
   );
 };
@@ -58,7 +63,9 @@ export const CertificationElement = (props: { certification: Certification }): R
 const CertificationPage = (props: Props): ReactElement => {
   return (
     <>
-      {props.certification.name && <NextSeo title={getNextSeoTitle(props.certification.name)} />}
+      {props.certification.name && (
+        <NextSeo title={getNextSeoTitle(props.certification.name)} />
+      )}
       <PageSkeleton showNavBar showSidebar hideMiniRoadmap>
         <TaskSidebarPageLayout hideMiniRoadmap={true}>
           <CertificationElement certification={props.certification} />
@@ -68,13 +75,14 @@ const CertificationPage = (props: Props): ReactElement => {
   );
 };
 
-export const getStaticPaths = (): GetStaticPathsResult<CertificationUrlSlugParam> => {
-  const paths = loadAllCertificationUrlSlugs();
-  return {
-    paths,
-    fallback: false,
+export const getStaticPaths =
+  (): GetStaticPathsResult<CertificationUrlSlugParam> => {
+    const paths = loadAllCertificationUrlSlugs();
+    return {
+      paths,
+      fallback: false,
+    };
   };
-};
 
 export const getStaticProps = ({
   params,

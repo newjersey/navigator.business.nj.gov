@@ -1,9 +1,17 @@
 import { AuthContext } from "@/contexts/authContext";
-import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
+import {
+  ContextualInfo,
+  ContextualInfoContext,
+} from "@/contexts/contextualInfoContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
-import { ActiveUser, AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
+import {
+  ActiveUser,
+  AuthAction,
+  AuthState,
+  IsAuthenticated,
+} from "@/lib/auth/AuthContext";
 import { Roadmap, UserDataError } from "@/lib/types/types";
 import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { Dispatch, ReactElement, SetStateAction } from "react";
@@ -17,10 +25,15 @@ export const withAuth = (
   }
 ): ReactElement => {
   const isAuthenticated =
-    context.isAuthenticated || (context.activeUser ? IsAuthenticated.TRUE : IsAuthenticated.FALSE);
+    context.isAuthenticated ||
+    (context.activeUser ? IsAuthenticated.TRUE : IsAuthenticated.FALSE);
   const dispatch = context.dispatch || jest.fn();
   const state: AuthState = { isAuthenticated, activeUser: context.activeUser };
-  return <AuthContext.Provider value={{ state, dispatch }}>{subject}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ state, dispatch }}>
+      {subject}
+    </AuthContext.Provider>
+  );
 };
 
 export const withContextualInfo = (
@@ -29,7 +42,9 @@ export const withContextualInfo = (
   setContextualInfo: Dispatch<SetStateAction<ContextualInfo>>
 ): ReactElement => {
   return (
-    <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
+    <ContextualInfoContext.Provider
+      value={{ contextualInfo, setContextualInfo }}
+    >
       {subject}
     </ContextualInfoContext.Provider>
   );
@@ -55,8 +70,10 @@ export const withNeedsAccountContext = (
         showNeedsAccountModal: context?.showNeedsAccountModal ?? false,
         registrationStatus: context?.registrationStatus ?? undefined,
         setRegistrationStatus: context?.setRegistrationStatus || jest.fn(),
-        setShowNeedsAccountSnackbar: context?.setShowNeedsAccountSnackbar || jest.fn(),
-        setShowNeedsAccountModal: context?.setShowNeedsAccountModal || jest.fn(),
+        setShowNeedsAccountSnackbar:
+          context?.setShowNeedsAccountSnackbar || jest.fn(),
+        setShowNeedsAccountModal:
+          context?.setShowNeedsAccountModal || jest.fn(),
       }}
     >
       {subject}
@@ -70,7 +87,9 @@ export const withUserDataError = (
   setUserDataError?: (userDataError: UserDataError | undefined) => void
 ): ReactElement => {
   return (
-    <UserDataErrorContext.Provider value={{ userDataError, setUserDataError: setUserDataError || jest.fn() }}>
+    <UserDataErrorContext.Provider
+      value={{ userDataError, setUserDataError: setUserDataError || jest.fn() }}
+    >
       {subject}
     </UserDataErrorContext.Provider>
   );

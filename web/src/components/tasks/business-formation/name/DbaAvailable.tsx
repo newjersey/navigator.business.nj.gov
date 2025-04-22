@@ -11,7 +11,9 @@ export const DbaAvailable = (props: AvailableProps): ReactElement => {
     <div data-testid="available-text" className="margin-bottom-2">
       <Alert variant="success">
         <Content>
-          {templateEval(Config.nexusNameSearch.dbaAvailableText, { name: props.submittedName })}
+          {templateEval(Config.nexusNameSearch.dbaAvailableText, {
+            name: props.submittedName,
+          })}
         </Content>
       </Alert>
     </div>

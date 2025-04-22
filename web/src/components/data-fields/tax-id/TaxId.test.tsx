@@ -1,8 +1,14 @@
 import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
-import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { generateProfileData, ProfileData } from "@businessnjgovnavigator/shared";
+import {
+  currentProfileData,
+  WithStatefulProfileData,
+} from "@/test/mock/withStatefulProfileData";
+import {
+  generateProfileData,
+  ProfileData,
+} from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -80,7 +86,9 @@ describe("<TaxId />", () => {
         ...profileData,
         taxId: "*******89000",
       });
-      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("***-***-*89/000");
+      expect(
+        (screen.getByLabelText("Tax id") as HTMLInputElement).value
+      ).toEqual("***-***-*89/000");
     });
 
     it("successfully saves to profileData", () => {
@@ -94,7 +102,9 @@ describe("<TaxId />", () => {
       });
       fireEvent.blur(screen.getByLabelText("Tax id"));
       expect(currentProfileData().taxId).toEqual("123456789000");
-      expect(screen.queryByText(configForField.errorTextRequired)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(configForField.errorTextRequired)
+      ).not.toBeInTheDocument();
     });
 
     it("fires validation for less than 12 characters", () => {
@@ -107,7 +117,9 @@ describe("<TaxId />", () => {
         target: { value: "1234" },
       });
       fireEvent.blur(screen.getByLabelText("Tax id"));
-      expect(screen.getByText(configForField.errorTextRequired)).toBeInTheDocument();
+      expect(
+        screen.getByText(configForField.errorTextRequired)
+      ).toBeInTheDocument();
     });
 
     it("retains initial field type", () => {
@@ -120,7 +132,9 @@ describe("<TaxId />", () => {
         target: { value: "123456789" },
       });
       fireEvent.blur(screen.getByLabelText("Tax id"));
-      expect(screen.queryByLabelText("Tax id location")).not.toBeInTheDocument();
+      expect(
+        screen.queryByLabelText("Tax id location")
+      ).not.toBeInTheDocument();
     });
 
     it("renders the hide button initially if the tax id is empty", () => {
@@ -148,9 +162,13 @@ describe("<TaxId />", () => {
         encryptedTaxId: "some-encrypted-value",
       });
       fireEvent.click(screen.getByText(Config.tax.showButtonText));
-      expect(mockApi.decryptTaxId).toHaveBeenCalledWith({ encryptedTaxId: "some-encrypted-value" });
+      expect(mockApi.decryptTaxId).toHaveBeenCalledWith({
+        encryptedTaxId: "some-encrypted-value",
+      });
       await waitFor(() => {
-        expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("123-456-789/000");
+        expect(
+          (screen.getByLabelText("Tax id") as HTMLInputElement).value
+        ).toEqual("123-456-789/000");
       });
     });
 
@@ -163,7 +181,9 @@ describe("<TaxId />", () => {
       });
       fireEvent.click(screen.getByText(Config.tax.showButtonText));
       await waitFor(() => {
-        expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("123-456-789/000");
+        expect(
+          (screen.getByLabelText("Tax id") as HTMLInputElement).value
+        ).toEqual("123-456-789/000");
       });
       fireEvent.click(screen.getByText(Config.tax.hideButtonText));
       await waitFor(() => {
@@ -180,10 +200,14 @@ describe("<TaxId />", () => {
         taxId: "********9000",
         encryptedTaxId: "some-encrypted-value",
       });
-      expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("password");
+      expect(
+        (screen.getByLabelText("Tax id") as HTMLInputElement).type
+      ).toEqual("password");
       fireEvent.click(screen.getByText(Config.tax.showButtonText));
       await waitFor(() => {
-        expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("text");
+        expect(
+          (screen.getByLabelText("Tax id") as HTMLInputElement).type
+        ).toEqual("text");
       });
     });
 
@@ -192,9 +216,13 @@ describe("<TaxId />", () => {
         ...profileData,
         taxId: "1233456789000",
       });
-      expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("text");
+      expect(
+        (screen.getByLabelText("Tax id") as HTMLInputElement).type
+      ).toEqual("text");
       fireEvent.click(screen.getByText(Config.tax.hideButtonText));
-      expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("password");
+      expect(
+        (screen.getByLabelText("Tax id") as HTMLInputElement).type
+      ).toEqual("password");
     });
 
     it("toggles between hide and show text", async () => {
@@ -204,12 +232,16 @@ describe("<TaxId />", () => {
         taxId: "********9000",
         encryptedTaxId: "some-encrypted-value",
       });
-      expect(screen.queryByText(Config.tax.hideButtonText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.tax.hideButtonText)
+      ).not.toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.tax.showButtonText));
       await waitFor(() => {
         expect(screen.getByText(Config.tax.hideButtonText)).toBeInTheDocument();
       });
-      expect(screen.queryByText(Config.tax.showButtonText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.tax.showButtonText)
+      ).not.toBeInTheDocument();
     });
 
     it("toggles between mobile hide and show text", async () => {
@@ -220,12 +252,18 @@ describe("<TaxId />", () => {
         taxId: "********9000",
         encryptedTaxId: "some-encrypted-value",
       });
-      expect(screen.queryByText(Config.tax.hideButtonTextMobile)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.tax.hideButtonTextMobile)
+      ).not.toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.tax.showButtonTextMobile));
       await waitFor(() => {
-        expect(screen.getByText(Config.tax.hideButtonTextMobile)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.tax.hideButtonTextMobile)
+        ).toBeInTheDocument();
       });
-      expect(screen.queryByText(Config.tax.showButtonTextMobile)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.tax.showButtonTextMobile)
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -235,8 +273,12 @@ describe("<TaxId />", () => {
         ...profileData,
         taxId: "*******8912",
       });
-      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("***-***-*89");
-      expect((screen.getByLabelText("Tax id location") as HTMLInputElement).value).toEqual("12");
+      expect(
+        (screen.getByLabelText("Tax id") as HTMLInputElement).value
+      ).toEqual("***-***-*89");
+      expect(
+        (screen.getByLabelText("Tax id location") as HTMLInputElement).value
+      ).toEqual("12");
     });
 
     it("does not fire validation on blur of Tax id when at 9 digits", () => {
@@ -249,7 +291,9 @@ describe("<TaxId />", () => {
         target: { value: "123456789" },
       });
       fireEvent.blur(screen.getByLabelText("Tax id"));
-      expect(screen.queryByText(configForField.errorTextRequired)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(configForField.errorTextRequired)
+      ).not.toBeInTheDocument();
     });
 
     it("fires validation on blur of Tax id", () => {
@@ -262,7 +306,9 @@ describe("<TaxId />", () => {
         target: { value: "123456" },
       });
       fireEvent.blur(screen.getByLabelText("Tax id"));
-      expect(screen.getByText(configForField.errorTextRequired)).toBeInTheDocument();
+      expect(
+        screen.getByText(configForField.errorTextRequired)
+      ).toBeInTheDocument();
     });
 
     it("fires validation on blur of Tax id location", () => {
@@ -275,7 +321,9 @@ describe("<TaxId />", () => {
         target: { value: "12" },
       });
       fireEvent.blur(screen.getByLabelText("Tax id location"));
-      expect(screen.getByText(configForField.errorTextRequired)).toBeInTheDocument();
+      expect(
+        screen.getByText(configForField.errorTextRequired)
+      ).toBeInTheDocument();
     });
 
     it("fires validation on blur of empty Tax id location", () => {
@@ -288,7 +336,9 @@ describe("<TaxId />", () => {
       );
       fireEvent.click(screen.getByLabelText("Tax id location"));
       fireEvent.blur(screen.getByLabelText("Tax id location"));
-      expect(screen.getByText(configForField.errorTextRequired)).toBeInTheDocument();
+      expect(
+        screen.getByText(configForField.errorTextRequired)
+      ).toBeInTheDocument();
     });
 
     it("shifts focus from Tax id to Tax id location fields", () => {
@@ -301,7 +351,9 @@ describe("<TaxId />", () => {
         target: { value: "123456789" },
       });
       expect(screen.getByLabelText("Tax id location")).toHaveFocus();
-      expect(screen.queryByText(configForField.errorTextRequired)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(configForField.errorTextRequired)
+      ).not.toBeInTheDocument();
     });
 
     it("does not shift focus back from Tax id location to Tax id field", () => {
@@ -323,7 +375,9 @@ describe("<TaxId />", () => {
         target: { value: "" },
       });
       expect(screen.getByLabelText("Tax id location")).toHaveFocus();
-      expect(screen.queryByText(configForField.errorTextRequired)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(configForField.errorTextRequired)
+      ).not.toBeInTheDocument();
     });
 
     it("updates profileData", () => {
@@ -362,9 +416,13 @@ describe("<TaxId />", () => {
         encryptedTaxId: "some-encrypted-value",
       });
       fireEvent.click(screen.getByText(Config.tax.showButtonText));
-      expect(mockApi.decryptTaxId).toHaveBeenCalledWith({ encryptedTaxId: "some-encrypted-value" });
+      expect(mockApi.decryptTaxId).toHaveBeenCalledWith({
+        encryptedTaxId: "some-encrypted-value",
+      });
       await waitFor(() => {
-        expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("123-456-789");
+        expect(
+          (screen.getByLabelText("Tax id") as HTMLInputElement).value
+        ).toEqual("123-456-789");
       });
     });
 
@@ -377,7 +435,9 @@ describe("<TaxId />", () => {
       });
       fireEvent.click(screen.getByText(Config.tax.showButtonText));
       await waitFor(() => {
-        expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("123-456-789");
+        expect(
+          (screen.getByLabelText("Tax id") as HTMLInputElement).value
+        ).toEqual("123-456-789");
       });
       fireEvent.click(screen.getByText(Config.tax.hideButtonText));
       await waitFor(() => {
@@ -394,10 +454,14 @@ describe("<TaxId />", () => {
         taxId: "*****6789",
         encryptedTaxId: "some-encrypted-value",
       });
-      expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("password");
+      expect(
+        (screen.getByLabelText("Tax id") as HTMLInputElement).type
+      ).toEqual("password");
       fireEvent.click(screen.getByText(Config.tax.showButtonText));
       await waitFor(() => {
-        expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("text");
+        expect(
+          (screen.getByLabelText("Tax id") as HTMLInputElement).type
+        ).toEqual("text");
       });
     });
 
@@ -406,9 +470,13 @@ describe("<TaxId />", () => {
         ...profileData,
         taxId: "123456789",
       });
-      expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("text");
+      expect(
+        (screen.getByLabelText("Tax id") as HTMLInputElement).type
+      ).toEqual("text");
       fireEvent.click(screen.getByText(Config.tax.hideButtonText));
-      expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("password");
+      expect(
+        (screen.getByLabelText("Tax id") as HTMLInputElement).type
+      ).toEqual("password");
     });
 
     it("toggles between hide and show text", async () => {
@@ -418,12 +486,16 @@ describe("<TaxId />", () => {
         taxId: "*****6789",
         encryptedTaxId: "some-encrypted-value",
       });
-      expect(screen.queryByText(Config.tax.hideButtonText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.tax.hideButtonText)
+      ).not.toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.tax.showButtonText));
       await waitFor(() => {
         expect(screen.getByText(Config.tax.hideButtonText)).toBeInTheDocument();
       });
-      expect(screen.queryByText(Config.tax.showButtonText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.tax.showButtonText)
+      ).not.toBeInTheDocument();
     });
 
     it("toggles between mobile hide and show text", async () => {
@@ -434,12 +506,18 @@ describe("<TaxId />", () => {
         taxId: "*****6789",
         encryptedTaxId: "some-encrypted-value",
       });
-      expect(screen.queryByText(Config.tax.hideButtonTextMobile)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.tax.hideButtonTextMobile)
+      ).not.toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.tax.showButtonTextMobile));
       await waitFor(() => {
-        expect(screen.getByText(Config.tax.hideButtonTextMobile)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.tax.hideButtonTextMobile)
+        ).toBeInTheDocument();
       });
-      expect(screen.queryByText(Config.tax.showButtonTextMobile)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.tax.showButtonTextMobile)
+      ).not.toBeInTheDocument();
     });
   });
 });

@@ -10,8 +10,11 @@ import { ReactElement, useContext } from "react";
 
 export const MainBusinessAddressUs = (): ReactElement => {
   const { Config } = useConfig();
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
-  const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useFormationErrors();
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(
+    BusinessFormationContext
+  );
+  const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } =
+    useFormationErrors();
 
   return (
     <>
@@ -36,7 +39,11 @@ export const MainBusinessAddressUs = (): ReactElement => {
         />
       </FormationField>
       <WithErrorBar
-        hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressCity"])}
+        hasError={doSomeFieldsHaveError([
+          "addressState",
+          "addressZipCode",
+          "addressCity",
+        ])}
         type="DESKTOP-ONLY"
       >
         <div className="grid-row grid-gap-1">
@@ -53,22 +60,31 @@ export const MainBusinessAddressUs = (): ReactElement => {
           </div>
           <div className="grid-col-12 tablet:grid-col-6 margin-top-2 tablet:margin-top-0">
             <WithErrorBar
-              hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
+              hasError={doSomeFieldsHaveError([
+                "addressState",
+                "addressZipCode",
+              ])}
               type="MOBILE-ONLY"
             >
               <div className="grid-row grid-gap-1">
                 <div className="grid-col-5">
                   <strong>
-                    <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
+                    <ModifiedContent>
+                      {Config.formation.fields.addressState.label}
+                    </ModifiedContent>
                   </strong>
                   <FormationField fieldName="addressState">
                     <StateDropdown
                       fieldName="addressState"
                       value={state.formationFormData.addressState?.name}
                       error={doesFieldHaveError("addressState")}
-                      validationText={Config.formation.fields.addressState.error}
+                      validationText={
+                        Config.formation.fields.addressState.error
+                      }
                       required
-                      onValidation={(): void => setFieldsInteracted(["addressState"])}
+                      onValidation={(): void =>
+                        setFieldsInteracted(["addressState"])
+                      }
                       onSelect={(stateObject): void => {
                         setFormationFormData((previousFormationData) => {
                           return {
@@ -88,7 +104,9 @@ export const MainBusinessAddressUs = (): ReactElement => {
                       required={true}
                       errorBarType="NEVER"
                       fieldName="addressZipCode"
-                      validationText={Config.formation.fields.addressZipCode.foreign.errorUS}
+                      validationText={
+                        Config.formation.fields.addressZipCode.foreign.errorUS
+                      }
                     />
                   </FormationField>
                 </div>

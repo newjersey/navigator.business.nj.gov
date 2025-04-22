@@ -20,23 +20,27 @@ export const MatchCollection = (props: Props): ReactElement => {
   }, [props]);
 
   const firstLabel = Object.keys(props.matchedCollections)[0];
-  const collectionTitle = cmsCollections.find((it) => it.children.includes(firstLabel))?.label;
+  const collectionTitle = cmsCollections.find((it) =>
+    it.children.includes(firstLabel)
+  )?.label;
 
-  const configMatchesInThisCollection = props.groupedConfigMatches.filter((configMatch) => {
-    const cmsHeaderForMatch = cmsCollections.find((it) =>
-      it.children.includes(configMatch.cmsCollectionName)
-    )?.label;
-    return cmsHeaderForMatch === collectionTitle;
-  });
-
-  const countAllMatchesInCollections = Object.values(props.matchedCollections).reduce(
-    (acc: number, curr: Match[]) => {
-      return acc + curr.length;
-    },
-    0
+  const configMatchesInThisCollection = props.groupedConfigMatches.filter(
+    (configMatch) => {
+      const cmsHeaderForMatch = cmsCollections.find((it) =>
+        it.children.includes(configMatch.cmsCollectionName)
+      )?.label;
+      return cmsHeaderForMatch === collectionTitle;
+    }
   );
 
-  const totalMatches = countAllMatchesInCollections + configMatchesInThisCollection.length;
+  const countAllMatchesInCollections = Object.values(
+    props.matchedCollections
+  ).reduce((acc: number, curr: Match[]) => {
+    return acc + curr.length;
+  }, 0);
+
+  const totalMatches =
+    countAllMatchesInCollections + configMatchesInThisCollection.length;
 
   const hasNoMatches = totalMatches === 0;
 
@@ -45,9 +49,17 @@ export const MatchCollection = (props: Props): ReactElement => {
   }
 
   return (
-    <Accordion expanded={isOpen} onChange={(): void => setIsOpen((prev) => !prev)}>
+    <Accordion
+      expanded={isOpen}
+      onChange={(): void => setIsOpen((prev) => !prev)}
+    >
       <AccordionSummary
-        expandIcon={<Icon className="usa-icon--size-5 margin-left-1" iconName="expand_more" />}
+        expandIcon={
+          <Icon
+            className="usa-icon--size-5 margin-left-1"
+            iconName="expand_more"
+          />
+        }
       >
         <Heading level={2} className="margin-y-2">
           {collectionTitle}
@@ -58,7 +70,11 @@ export const MatchCollection = (props: Props): ReactElement => {
       </AccordionSummary>
       <AccordionDetails>
         {Object.keys(props.matchedCollections).map((it) => (
-          <MatchList key={it} matches={props.matchedCollections[it]} collectionLabel={it} />
+          <MatchList
+            key={it}
+            matches={props.matchedCollections[it]}
+            collectionLabel={it}
+          />
         ))}
 
         {configMatchesInThisCollection.map((it: GroupedConfigMatch) => (

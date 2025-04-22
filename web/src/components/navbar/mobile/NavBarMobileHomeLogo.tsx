@@ -26,12 +26,20 @@ export const NavBarMobileHomeLogo = (props: Props): ReactElement => {
         </div>
         <div>
           {props.isLoginPage ? (
-            <span className="my-account-login-text font-body-sm">My Account</span>
+            <span className="my-account-login-text font-body-sm">
+              My Account
+            </span>
           ) : (
             <NavBarDashboardLink
-              className={props.showSidebar ? "truncate-long-business-names_NavBarMobile" : ""}
+              className={
+                props.showSidebar
+                  ? "truncate-long-business-names_NavBarMobile"
+                  : ""
+              }
               linkText={
-                props.showSidebar ? props.businessNavBarTitle : Config.navigationDefaults.navBarMyAccountText
+                props.showSidebar
+                  ? props.businessNavBarTitle
+                  : Config.navigationDefaults.navBarMyAccountText
               }
               previousBusinessId={props.previousBusinessId}
             />

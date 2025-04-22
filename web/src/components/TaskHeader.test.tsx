@@ -4,7 +4,10 @@ import { Task } from "@/lib/types/types";
 import { generateStep, generateTask } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import {
   Business,
   formationTaskId,
@@ -28,7 +31,11 @@ const renderTaskHeader = (task: Task, business?: Business): void => {
   render(
     <ThemeProvider theme={createTheme()}>
       <WithStatefulUserData
-        initialUserData={business ? generateUserDataForBusiness(business) : generateUserData({})}
+        initialUserData={
+          business
+            ? generateUserDataForBusiness(business)
+            : generateUserData({})
+        }
       >
         <TaskHeader task={task} />
       </WithStatefulUserData>
@@ -48,12 +55,16 @@ describe("<TaskHeader />", () => {
 
   it("displays required tag in header if task is required", () => {
     renderTaskHeader(generateTask({ required: true }));
-    expect(screen.getByText(Config.taskDefaults.requiredLabelText)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.taskDefaults.requiredLabelText)
+    ).toBeInTheDocument();
   });
 
   it("does not display required tag in header if task is not required", () => {
     renderTaskHeader(generateTask({ required: false }));
-    expect(screen.queryByText(Config.taskDefaults.requiredLabelText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.taskDefaults.requiredLabelText)
+    ).not.toBeInTheDocument();
   });
 
   it("overrides required tag in header from task in roadmap", () => {
@@ -65,12 +76,16 @@ describe("<TaskHeader />", () => {
       tasks: [taskInRoadmap],
     });
     renderTaskHeader(taskStaticGeneration);
-    expect(screen.queryByText(Config.taskDefaults.requiredLabelText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.taskDefaults.requiredLabelText)
+    ).not.toBeInTheDocument();
   });
 
   it("locks task status if formation was completed through API", () => {
     const task = generateTask({ id: formationTaskId });
-    const taskProgress: Record<string, TaskProgress> = { [formationTaskId]: "COMPLETED" };
+    const taskProgress: Record<string, TaskProgress> = {
+      [formationTaskId]: "COMPLETED",
+    };
     const formationData = generateFormationData({
       getFilingResponse: generateGetFilingResponse({ success: true }),
     });

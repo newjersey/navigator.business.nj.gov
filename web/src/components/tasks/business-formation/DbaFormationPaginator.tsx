@@ -14,15 +14,27 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import { openInNewTab, scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
+import {
+  openInNewTab,
+  scrollToTopOfElement,
+  useMountEffect,
+} from "@/lib/utils/helpers";
 import { determineIfNexusDbaNameNeeded } from "@businessnjgovnavigator/shared/";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
-import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
+import {
+  ReactElement,
+  ReactNode,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 export const DbaFormationPaginator = (): ReactElement => {
   const { business, updateQueue } = useUserData();
   const { state, setStepIndex } = useContext(BusinessFormationContext);
-  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+  const { isAuthenticated, setShowNeedsAccountModal } =
+    useContext(NeedsAccountContext);
   const { Config } = useConfig();
 
   const stepperRef = useRef<HTMLDivElement>(null);
@@ -61,14 +73,20 @@ export const DbaFormationPaginator = (): ReactElement => {
     moveToStep(state.stepIndex - 1);
   };
 
-  const isDba = business?.profileData.businessName && determineIfNexusDbaNameNeeded(business);
+  const isDba =
+    business?.profileData.businessName &&
+    determineIfNexusDbaNameNeeded(business);
 
   const onMoveToStep = async (
     stepIndex: number,
     config: { moveType: "NEXT_BUTTON" | "STEPPER" }
   ): Promise<void> => {
     if (!updateQueue) return;
-    onStepChangeAnalytics(business?.formationData.formationFormData, stepIndex, config.moveType);
+    onStepChangeAnalytics(
+      business?.formationData.formationFormData,
+      stepIndex,
+      config.moveType
+    );
     if (
       config.moveType === "NEXT_BUTTON" &&
       stepIndex === 1 &&
@@ -82,7 +100,9 @@ export const DbaFormationPaginator = (): ReactElement => {
       stepperState[1].isComplete = stepIndex === 2;
       return stepperState;
     });
-    updateQueue.queueFormationData({ lastVisitedPageIndex: stepIndex }).update();
+    updateQueue
+      .queueFormationData({ lastVisitedPageIndex: stepIndex })
+      .update();
     moveToStep(stepIndex);
   };
 
@@ -121,7 +141,11 @@ export const DbaFormationPaginator = (): ReactElement => {
     };
 
     return (
-      <div className={"mobile-lg:margin-top-0 margin-top-1 width-full mobile-lg:width-auto"}>
+      <div
+        className={
+          "mobile-lg:margin-top-0 margin-top-1 width-full mobile-lg:width-auto"
+        }
+      >
         <PrimaryButton
           isColor="primary"
           onClick={(): void => {
@@ -142,7 +166,11 @@ export const DbaFormationPaginator = (): ReactElement => {
         " margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-105 width-full mobile-lg:width-auto"
       }
     >
-      <SecondaryButton isColor="primary" onClick={onPreviousButtonClick} isRightMarginRemoved={true}>
+      <SecondaryButton
+        isColor="primary"
+        onClick={onPreviousButtonClick}
+        isRightMarginRemoved={true}
+      >
         {Config.formation.general.previousButtonText}
       </SecondaryButton>
     </div>
@@ -182,7 +210,11 @@ export const DbaFormationPaginator = (): ReactElement => {
             <div className="margin-top-2 mobile-lg:margin-top-0">
               <BackButton />
             </div>
-            <a href={state.dbaContent.Authorize.callToActionLink} target="_blank" rel="noreferrer noopener">
+            <a
+              href={state.dbaContent.Authorize.callToActionLink}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
               <PrimaryButton
                 isColor="primary"
                 isRightMarginRemoved={true}
@@ -195,7 +227,8 @@ export const DbaFormationPaginator = (): ReactElement => {
                   setShowCtaModal(true);
                 }}
               >
-                {state.dbaContent.Authorize.callToActionText || Config.taskDefaults.defaultCallToActionText}
+                {state.dbaContent.Authorize.callToActionText ||
+                  Config.taskDefaults.defaultCallToActionText}
               </PrimaryButton>
             </a>
           </ActionBarLayout>
@@ -211,11 +244,15 @@ export const DbaFormationPaginator = (): ReactElement => {
           isOpen={showCtaModal}
           close={(): void => setShowCtaModal(false)}
           title={Config.DbaFormationTask.dbaCtaModalHeader}
-          primaryButtonText={Config.DbaFormationTask.dbaCtaModalContinueButtonText}
+          primaryButtonText={
+            Config.DbaFormationTask.dbaCtaModalContinueButtonText
+          }
           primaryButtonOnClick={(): void => {
             openInNewTab(state.dbaContent.Authorize.callToActionLink);
           }}
-          secondaryButtonText={Config.DbaFormationTask.dbaCtaModalCancelButtonText}
+          secondaryButtonText={
+            Config.DbaFormationTask.dbaCtaModalCancelButtonText
+          }
         >
           <Content>{Config.DbaFormationTask.dbaCtaModalBody}</Content>
         </ModalTwoButton>
@@ -233,7 +270,10 @@ export const DbaFormationPaginator = (): ReactElement => {
           </div>
         )}
       </div>
-      <div data-testid="formation-dba-form" className="fg1 flex flex-column space-between">
+      <div
+        data-testid="formation-dba-form"
+        className="fg1 flex flex-column space-between"
+      >
         {DbaFormationSteps[state.stepIndex].component}
         {displayButtons()}
       </div>

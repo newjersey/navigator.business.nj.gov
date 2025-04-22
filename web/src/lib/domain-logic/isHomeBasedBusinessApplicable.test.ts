@@ -14,6 +14,8 @@ describe("isHomeBasedBusinessApplicable", () => {
   });
 
   it("returns true when industry has a home based option", () => {
-    expect(isHomeBasedBusinessApplicable("cleaning-janitorial-services")).toEqual(true);
+    expect(
+      isHomeBasedBusinessApplicable("cleaning-janitorial-services")
+    ).toEqual(true);
   });
 });

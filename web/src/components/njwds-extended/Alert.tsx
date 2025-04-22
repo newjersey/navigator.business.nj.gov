@@ -17,11 +17,20 @@ interface Props extends AlertProps {
   children: ReactNode;
 }
 
-export const AlertVariants = ["info", "success", "warning", "error", "note"] as const;
+export const AlertVariants = [
+  "info",
+  "success",
+  "warning",
+  "error",
+  "note",
+] as const;
 
 export type AlertVariant = (typeof AlertVariants)[number];
 
-const composeAriaGroupLabel = (content: string, alertMappedName: string): string => {
+const composeAriaGroupLabel = (
+  content: string,
+  alertMappedName: string
+): string => {
   return modifyContent({
     content,
     condition: () => true,
@@ -31,55 +40,65 @@ const composeAriaGroupLabel = (content: string, alertMappedName: string): string
   });
 };
 
-const Alert = forwardRef((props: Props, ref: ForwardedRef<HTMLDivElement>): ReactElement => {
-  const { variant, children, noIcon, heading, rounded, dataTestid } = props;
-  const variantClass = variant ? `usa-alert--${variant}` : "";
-  const noIconClass = noIcon ? " usa-alert--no-icon" : "";
-  const roundedClass = rounded ? " radius-md" : "";
-  const alertRole = props.noAlertRole ? {} : { role: "alert" };
-  const defaultClassNames = "usa-alert margin-y-2 usa-alert--slim";
-  const className = [defaultClassNames, roundedClass, variantClass, noIconClass, props.className ?? ""]
-    .map((i) => {
-      return i?.trim();
-    })
-    .filter((value: string | undefined) => {
-      return value && value.length > 0;
-    })
-    .join(" ");
+const Alert = forwardRef(
+  (props: Props, ref: ForwardedRef<HTMLDivElement>): ReactElement => {
+    const { variant, children, noIcon, heading, rounded, dataTestid } = props;
+    const variantClass = variant ? `usa-alert--${variant}` : "";
+    const noIconClass = noIcon ? " usa-alert--no-icon" : "";
+    const roundedClass = rounded ? " radius-md" : "";
+    const alertRole = props.noAlertRole ? {} : { role: "alert" };
+    const defaultClassNames = "usa-alert margin-y-2 usa-alert--slim";
+    const className = [
+      defaultClassNames,
+      roundedClass,
+      variantClass,
+      noIconClass,
+      props.className ?? "",
+    ]
+      .map((i) => {
+        return i?.trim();
+      })
+      .filter((value: string | undefined) => {
+        return value && value.length > 0;
+      })
+      .join(" ");
 
-  const { Config } = useConfig();
+    const { Config } = useConfig();
 
-  const AlertVariantsAriaMapping = {
-    info: Config.calloutAlerts.info,
-    success: Config.calloutAlerts.success,
-    warning: Config.calloutAlerts.warning,
-    error: Config.calloutAlerts.error,
-    note: Config.calloutAlerts.note,
-  };
+    const AlertVariantsAriaMapping = {
+      info: Config.calloutAlerts.info,
+      success: Config.calloutAlerts.success,
+      warning: Config.calloutAlerts.warning,
+      error: Config.calloutAlerts.error,
+      note: Config.calloutAlerts.note,
+    };
 
-  return (
-    <div
-      className={className}
-      {...(dataTestid ? { "data-testid": dataTestid } : { "data-testid": `alert-${props.variant}` })}
-      aria-label={composeAriaGroupLabel(
-        Config.calloutAlerts.calloutAlertGroupTitle,
-        AlertVariantsAriaMapping[props.variant]
-      )}
-      {...alertRole}
-      ref={ref}
-      tabIndex={-1}
-    >
-      <div className="usa-alert__body">
-        {heading && (
-          <Heading level={3} className="margin-bottom-0">
-            {heading}
-          </Heading>
+    return (
+      <div
+        className={className}
+        {...(dataTestid
+          ? { "data-testid": dataTestid }
+          : { "data-testid": `alert-${props.variant}` })}
+        aria-label={composeAriaGroupLabel(
+          Config.calloutAlerts.calloutAlertGroupTitle,
+          AlertVariantsAriaMapping[props.variant]
         )}
-        <div className="usa-alert__text">{children}</div>
+        {...alertRole}
+        ref={ref}
+        tabIndex={-1}
+      >
+        <div className="usa-alert__body">
+          {heading && (
+            <Heading level={3} className="margin-bottom-0">
+              {heading}
+            </Heading>
+          )}
+          <div className="usa-alert__text">{children}</div>
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 Alert.displayName = "Alert";
 

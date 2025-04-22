@@ -57,7 +57,9 @@ describe("funding page", () => {
 
     render(<FundingPage funding={funding} />);
 
-    expect(screen.queryByTestId("funding-agency-header")).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("funding-agency-header")
+    ).not.toBeInTheDocument();
   });
 
   describe("status", () => {

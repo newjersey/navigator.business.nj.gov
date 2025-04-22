@@ -1,18 +1,31 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import { Business, LookupIndustryById, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
+import {
+  Business,
+  LookupIndustryById,
+  LookupLegalStructureById,
+} from "@businessnjgovnavigator/shared";
 import { determineIfNexusDbaNameNeeded } from "@businessnjgovnavigator/shared/";
 import {
   isOwningBusiness,
   isRemoteWorkerOrSellerBusiness,
 } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 
-export const getNavBarBusinessTitle = (business: Business | undefined, isAuthenticated: boolean): string => {
+export const getNavBarBusinessTitle = (
+  business: Business | undefined,
+  isAuthenticated: boolean
+): string => {
   const Config = getMergedConfig();
   if (!business || !isAuthenticated) {
     return Config.navigationDefaults.navBarGuestBusinessText;
   }
 
-  const { businessName, tradeName, legalStructureId, industryId, nexusDbaName } = business.profileData;
+  const {
+    businessName,
+    tradeName,
+    legalStructureId,
+    industryId,
+    nexusDbaName,
+  } = business.profileData;
 
   const determineName = (): string => {
     if (determineIfNexusDbaNameNeeded(business)) {
@@ -25,7 +38,9 @@ export const getNavBarBusinessTitle = (business: Business | undefined, isAuthent
     }
 
     if (legalStructureId) {
-      return LookupLegalStructureById(legalStructureId).hasTradeName ? tradeName : businessName;
+      return LookupLegalStructureById(legalStructureId).hasTradeName
+        ? tradeName
+        : businessName;
     }
 
     return businessName || tradeName || "";
@@ -37,7 +52,8 @@ export const getNavBarBusinessTitle = (business: Business | undefined, isAuthent
   if (isOwningBusiness(business)) {
     if (legalStructureId) {
       return `${Config.navigationDefaults.navBarUnnamedOwnedBusinessText} ${
-        LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation
+        LookupLegalStructureById(business?.profileData?.legalStructureId)
+          .abbreviation
       }`;
     } else {
       return Config.navigationDefaults.navBarUnnamedOwnedBusinessText;
@@ -51,13 +67,17 @@ export const getNavBarBusinessTitle = (business: Business | undefined, isAuthent
   if (legalStructureId && industryId) {
     if (industryId === "generic") {
       return `${Config.navigationDefaults.navBarUnnamedOwnedBusinessText} ${
-        LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation
+        LookupLegalStructureById(business?.profileData?.legalStructureId)
+          .abbreviation
       }`;
     }
 
     return `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
       LookupIndustryById(business?.profileData?.industryId).name
-    } ${LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation}`;
+    } ${
+      LookupLegalStructureById(business?.profileData?.legalStructureId)
+        .abbreviation
+    }`;
   }
 
   if (!legalStructureId && industryId) {

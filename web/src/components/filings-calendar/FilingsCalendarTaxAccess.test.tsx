@@ -61,10 +61,14 @@ const renderFilingsCalendarTaxAccess = (initialUserData?: UserData): void => {
   );
 };
 
-const renderUnauthenticatedFilingsCalendarTaxAccess = (business: Business): void => {
+const renderUnauthenticatedFilingsCalendarTaxAccess = (
+  business: Business
+): void => {
   render(
     withNeedsAccountContext(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business)}
+      >
         <FilingsCalendarTaxAccess />
       </WithStatefulUserData>,
       IsAuthenticated.FALSE,
@@ -73,7 +77,10 @@ const renderUnauthenticatedFilingsCalendarTaxAccess = (business: Business): void
   );
 };
 
-const modifyUserData = (userData: UserData, overrides: Partial<Business>): UserData => {
+const modifyUserData = (
+  userData: UserData,
+  overrides: Partial<Business>
+): UserData => {
   return {
     ...userData,
     businesses: {
@@ -86,8 +93,13 @@ const modifyUserData = (userData: UserData, overrides: Partial<Business>): UserD
   };
 };
 
-const mockApiResponse = (userData: UserData, overrides: Partial<Business>): void => {
-  mockApi.postTaxFilingsLookup.mockResolvedValue(modifyUserData(userData, overrides));
+const mockApiResponse = (
+  userData: UserData,
+  overrides: Partial<Business>
+): void => {
+  mockApi.postTaxFilingsLookup.mockResolvedValue(
+    modifyUserData(userData, overrides)
+  );
 };
 
 describe("<FilingsCalendarTaxAccess />", () => {
@@ -124,7 +136,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
       formationData = generateFormationData(
         {
           completedFilingPayment: !!params.formedInNavigator,
-          getFilingResponse: generateGetFilingResponse({ success: params.formedInNavigator }),
+          getFilingResponse: generateGetFilingResponse({
+            success: params.formedInNavigator,
+          }),
         },
         legalStructureId as FormationLegalType
       );
@@ -144,7 +158,12 @@ describe("<FilingsCalendarTaxAccess />", () => {
           businessName: params.businessName || "",
           responsibleOwnerName: params.responsibleOwnerName || "",
           municipality: params.municipalityName
-            ? { name: params.municipalityName, county: "", id: "", displayName: "" }
+            ? {
+                name: params.municipalityName,
+                county: "",
+                id: "",
+                displayName: "",
+              }
             : undefined,
         }),
         formationData: formationData,
@@ -178,7 +197,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
       renderUnauthenticatedFilingsCalendarTaxAccess(business);
       openAuthenticationModal();
       await waitFor(() => {
-        return expect(currentBusiness().preferences.returnToLink).toEqual(`${ROUTES.dashboard}`);
+        return expect(currentBusiness().preferences.returnToLink).toEqual(
+          `${ROUTES.dashboard}`
+        );
       });
     });
   });
@@ -189,12 +210,15 @@ describe("<FilingsCalendarTaxAccess />", () => {
     businessName: "MrFakesHotDogBonanza",
   });
 
-  const pendingStateUserData: UserData = modifyUserData(userDataWithPrefilledFields, {
-    taxFilingData: generateTaxFilingData({
-      registeredISO: getCurrentDateISOString(),
-      state: "PENDING",
-    }),
-  });
+  const pendingStateUserData: UserData = modifyUserData(
+    userDataWithPrefilledFields,
+    {
+      taxFilingData: generateTaxFilingData({
+        registeredISO: getCurrentDateISOString(),
+        state: "PENDING",
+      }),
+    }
+  );
 
   it("displays alert on success", async () => {
     mockApi.postTaxFilingsOnboarding.mockResolvedValue(
@@ -213,7 +237,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
       return expect(currentBusiness().taxFilingData.state).toEqual("SUCCESS");
     });
     await screen.findByTestId("tax-success");
-    expect(screen.getByText(Config.taxCalendar.snackbarSuccessHeader)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.taxCalendar.snackbarSuccessHeader)
+    ).toBeInTheDocument();
   });
 
   it("closes the success alert when the close button is clicked", async () => {
@@ -233,11 +259,15 @@ describe("<FilingsCalendarTaxAccess />", () => {
       return expect(currentBusiness().taxFilingData.state).toEqual("SUCCESS");
     });
     await screen.findByTestId("tax-success");
-    expect(screen.getByText(Config.taxCalendar.snackbarSuccessHeader)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.taxCalendar.snackbarSuccessHeader)
+    ).toBeInTheDocument();
     expect(screen.getByTestId("close-icon-button")).toBeInTheDocument();
     fireEvent.click(screen.getByTestId("close-icon-button"));
     await waitFor(() => {
-      expect(screen.queryByText(Config.taxCalendar.snackbarSuccessHeader)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.taxCalendar.snackbarSuccessHeader)
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -254,7 +284,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
 
     it("does taxFiling lookup on page load if registered", async () => {
-      mockApi.postTaxFilingsLookup.mockResolvedValue(userDataWithPrefilledFields);
+      mockApi.postTaxFilingsLookup.mockResolvedValue(
+        userDataWithPrefilledFields
+      );
       renderFilingsCalendarTaxAccess(
         modifyUserData(userDataWithPrefilledFields, {
           taxFilingData: generateTaxFilingData({
@@ -316,7 +348,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
         return expect(currentBusiness().taxFilingData.state).toEqual("SUCCESS");
       });
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("tax-access-container")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("tax-access-container")
+      ).not.toBeInTheDocument();
     });
 
     it("hides pending and button components when state is API_ERROR but registered", async () => {
@@ -334,10 +368,14 @@ describe("<FilingsCalendarTaxAccess />", () => {
         return expect(userDataUpdatedNTimes()).toEqual(1);
       });
       await waitFor(() => {
-        return expect(currentBusiness().taxFilingData.state).toEqual("API_ERROR");
+        return expect(currentBusiness().taxFilingData.state).toEqual(
+          "API_ERROR"
+        );
       });
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("tax-access-container")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("tax-access-container")
+      ).not.toBeInTheDocument();
     });
 
     it("shows registration followup component when state is SUCCESS but it's before the Saturday after registration", async () => {
@@ -353,7 +391,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
       });
       expect(screen.queryByTestId("get-tax-access")).not.toBeInTheDocument();
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("tax-access-container")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("tax-access-container")
+      ).not.toBeInTheDocument();
       expect(screen.getByTestId("alert-content-container")).toBeInTheDocument();
     });
 
@@ -369,8 +409,12 @@ describe("<FilingsCalendarTaxAccess />", () => {
         return expect(currentBusiness().taxFilingData.state).toEqual("PENDING");
       });
       expect(screen.getByTestId("pending-container")).toBeInTheDocument();
-      expect(screen.queryByTestId("tax-access-container")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("alert-content-container")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("tax-access-container")
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("alert-content-container")
+      ).not.toBeInTheDocument();
     });
   });
 

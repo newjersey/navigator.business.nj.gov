@@ -1,9 +1,15 @@
 import { isLicenseDataFromDatabaseDataMoreRecent } from "@/lib/domain-logic/isLicenseDataFromDatabaseDataMoreRecent";
-import { generateBusiness, generateLicenseData, getCurrentDate } from "@businessnjgovnavigator/shared/";
+import {
+  generateBusiness,
+  generateLicenseData,
+  getCurrentDate,
+} from "@businessnjgovnavigator/shared/";
 
 const currentDate = getCurrentDate();
 const currentDateISOString = currentDate.toISOString();
-const currentDatePlusOneHourISOString = currentDate.add(1, "hour").toISOString();
+const currentDatePlusOneHourISOString = currentDate
+  .add(1, "hour")
+  .toISOString();
 
 describe("isLicenseDataFromDatabaseDataMoreRecent", () => {
   it("returns true when license data is undefined in businessFromDb but defined in businessFromUpdateQueue", () => {

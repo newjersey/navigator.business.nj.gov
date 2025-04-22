@@ -57,7 +57,9 @@ export const LoginEmailCheck = (): ReactElement => {
     setEmail(value);
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+  const handleKeyDown = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ): void => {
     if (event.key === "Enter") {
       const email = (event.target as HTMLInputElement).value;
       handleSubmit(email);
@@ -92,13 +94,19 @@ export const LoginEmailCheck = (): ReactElement => {
       <hr className="margin-y-3" aria-hidden="true" />
       <div className="help-text-container">
         <p>
-          <span className="margin-right-05">{Config.checkAccountEmailPage.noAccountText}</span>
+          <span className="margin-right-05">
+            {Config.checkAccountEmailPage.noAccountText}
+          </span>
           <UnStyledButton
             className="margin-0-override"
             isUnderline
             onClick={() => {
               if (!router) return;
-              onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
+              onGuestSignIn({
+                push: router.push,
+                pathname: router.pathname,
+                dispatch,
+              });
             }}
             isButtonALink
           >
@@ -110,7 +118,9 @@ export const LoginEmailCheck = (): ReactElement => {
           <UnStyledButton
             isUnderline
             isIntercomEnabled
-            onClick={analytics.event.check_account_help_button.click.open_live_chat}
+            onClick={
+              analytics.event.check_account_help_button.click.open_live_chat
+            }
             className="margin-left-05"
           >
             {Config.checkAccountEmailPage.intercomChatText}

@@ -8,10 +8,13 @@ import { ReactElement, useContext } from "react";
 export const ReviewSignatures = (): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
-  const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
+  const isCorp = corpLegalStructures.includes(
+    state.formationFormData.legalType
+  );
   const isNonprofit = state.formationFormData.legalType === "nonprofit";
   const hasSigners = (state.formationFormData.signers?.length ?? 0) > 0;
-  const hasIncorporators = (state.formationFormData.incorporators?.length ?? 0) > 0;
+  const hasIncorporators =
+    (state.formationFormData.incorporators?.length ?? 0) > 0;
   const areSignersApplicable = !isCorp && !isNonprofit;
   const areIncorporatorsApplicable = isCorp || isNonprofit;
 
@@ -55,7 +58,11 @@ export const ReviewSignatures = (): ReactElement => {
   const displayEmptySigners = (): ReactElement => {
     return (
       <div data-testid="review-signers-not-entered" className={"margin-top-2"}>
-        <ReviewLineItem label={getConfig().label} value={undefined} marginOverride={"margin-top-0"} />
+        <ReviewLineItem
+          label={getConfig().label}
+          value={undefined}
+          marginOverride={"margin-top-0"}
+        />
         {state.formationFormData.businessLocationType !== "NJ" && (
           <ReviewLineItem
             label={Config.formation.fields.signers.titleLabel}
@@ -72,7 +79,10 @@ export const ReviewSignatures = (): ReactElement => {
       <>
         {state.formationFormData.incorporators?.map((signer, index) => {
           return (
-            <div key={`${signer}-${index}`} className={index === 0 ? "" : "margin-top-2"}>
+            <div
+              key={`${signer}-${index}`}
+              className={index === 0 ? "" : "margin-top-2"}
+            >
               <ReviewLineItem
                 label={getConfig().label}
                 value={signer.name}
@@ -109,8 +119,15 @@ export const ReviewSignatures = (): ReactElement => {
 
   const displayEmptyIncorporators = (): ReactElement => {
     return (
-      <div data-testid="review-incorporators-not-entered" className={"margin-top-2"}>
-        <ReviewLineItem label={getConfig().label} value={undefined} marginOverride={"margin-top-0"} />
+      <div
+        data-testid="review-incorporators-not-entered"
+        className={"margin-top-2"}
+      >
+        <ReviewLineItem
+          label={getConfig().label}
+          value={undefined}
+          marginOverride={"margin-top-0"}
+        />
         {state.formationFormData.businessLocationType !== "NJ" && (
           <ReviewLineItem
             label={Config.formation.fields.signers.titleLabel}

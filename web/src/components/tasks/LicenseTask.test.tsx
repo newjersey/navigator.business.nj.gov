@@ -4,7 +4,10 @@ import * as api from "@/lib/api-client/apiClient";
 import { generateLicenseTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import {
   Business,
   createEmptyLicenseSearchNameAndAddress,
@@ -14,7 +17,10 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
-import { generateLicenseDetails, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
+import {
+  generateLicenseDetails,
+  taskIdLicenseNameMapping,
+} from "@businessnjgovnavigator/shared/";
 import {
   generateFormationData,
   generateFormationFormData,
@@ -27,7 +33,10 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 window.open = jest.fn();
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ checkLicenseStatus: jest.fn(), getUserData: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  checkLicenseStatus: jest.fn(),
+  getUserData: jest.fn(),
+}));
 const mockApi = api as jest.Mocked<typeof api>;
 const mockWindowOpen = window.open as jest.Mocked<typeof window.open>;
 const Config = getMergedConfig();
@@ -46,7 +55,9 @@ describe("<LicenseTask />", () => {
   const renderTaskWithStatefulData = (business: Business): void => {
     render(
       <ThemeProvider theme={createTheme()}>
-        <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
+        <WithStatefulUserData
+          initialUserData={generateUserDataForBusiness(business)}
+        >
           <LicenseTask task={task} />
         </WithStatefulUserData>
       </ThemeProvider>
@@ -67,7 +78,11 @@ describe("<LicenseTask />", () => {
         taskProgress: { [task.id]: "TO_DO" },
         licenseData: generateLicenseData(
           {},
-          { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({ lastUpdatedISO: "" }) }
+          {
+            [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+              lastUpdatedISO: "",
+            }),
+          }
         ),
       });
       renderTaskWithStatefulData(business);
@@ -76,7 +91,9 @@ describe("<LicenseTask />", () => {
         expect(screen.getByTestId("COMPLETED")).toBeInTheDocument();
       });
       expect(screen.queryByTestId("TO_DO")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("status-info-tooltip")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("status-info-tooltip")
+      ).not.toBeInTheDocument();
     });
 
     it("task status checkbox is not editable when lastUpdatedISO has a value", () => {
@@ -108,7 +125,11 @@ describe("<LicenseTask />", () => {
       useMockBusiness({
         licenseData: generateLicenseData(
           {},
-          { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({ lastUpdatedISO: "" }) }
+          {
+            [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+              lastUpdatedISO: "",
+            }),
+          }
         ),
       });
       renderTask();
@@ -173,7 +194,11 @@ describe("<LicenseTask />", () => {
       useMockBusiness({ licenseData: undefined });
       renderTask();
       fireEvent.click(screen.getByTestId("cta-primary"));
-      expect(mockWindowOpen).toHaveBeenCalledWith(task.callToActionLink, "_blank", "noopener noreferrer");
+      expect(mockWindowOpen).toHaveBeenCalledWith(
+        task.callToActionLink,
+        "_blank",
+        "noopener noreferrer"
+      );
     });
   });
 
@@ -373,7 +398,11 @@ describe("<LicenseTask />", () => {
           taskProgress: { [task.id]: "TO_DO" },
           licenseData: generateLicenseData(
             {},
-            { [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({ lastUpdatedISO: "" }) }
+            {
+              [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
+                lastUpdatedISO: "",
+              }),
+            }
           ),
         });
         renderTaskWithStatefulData(business);
@@ -444,12 +473,20 @@ describe("<LicenseTask />", () => {
         fillText("zipcode", "12345");
         fireEvent.submit(screen.getByTestId("check-status-submit"));
         await waitFor(() => {
-          expect(screen.getByTestId("licenseDetailReceipt")).toBeInTheDocument();
+          expect(
+            screen.getByTestId("licenseDetailReceipt")
+          ).toBeInTheDocument();
         });
         expect(screen.getByText("Pending")).toBeInTheDocument();
-        expect(screen.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
-        expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
-        expect(screen.queryByTestId("error-alert-FIELDS_REQUIRED")).not.toBeInTheDocument();
+        expect(
+          screen.queryByTestId("error-alert-NOT_FOUND")
+        ).not.toBeInTheDocument();
+        expect(
+          screen.queryByTestId("error-alert-SEARCH_FAILED")
+        ).not.toBeInTheDocument();
+        expect(
+          screen.queryByTestId("error-alert-FIELDS_REQUIRED")
+        ).not.toBeInTheDocument();
       });
 
       it("displays NOT_FOUND error alert when check status submit and license status cannot be found", async () => {
@@ -472,7 +509,9 @@ describe("<LicenseTask />", () => {
         });
         renderTask();
         fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
-        expect(screen.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
+        expect(
+          screen.queryByTestId("error-alert-NOT_FOUND")
+        ).not.toBeInTheDocument();
         const userData = generateUserDataForBusiness(
           generateBusiness({
             lastUpdatedISO: "last-updated",
@@ -485,7 +524,9 @@ describe("<LicenseTask />", () => {
         mockApi.checkLicenseStatus.mockResolvedValue(userData);
         fireEvent.submit(screen.getByTestId("check-status-submit"));
         await waitFor(() => {
-          expect(screen.getByTestId("error-alert-NOT_FOUND")).toBeInTheDocument();
+          expect(
+            screen.getByTestId("error-alert-NOT_FOUND")
+          ).toBeInTheDocument();
         });
       });
 
@@ -500,7 +541,9 @@ describe("<LicenseTask />", () => {
         renderTask();
         fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
         await waitFor(() => {
-          expect(screen.getByTestId("error-alert-NOT_FOUND")).toBeInTheDocument();
+          expect(
+            screen.getByTestId("error-alert-NOT_FOUND")
+          ).toBeInTheDocument();
         });
       });
 
@@ -518,10 +561,14 @@ describe("<LicenseTask />", () => {
         renderTask();
         fireEvent.click(screen.getByTestId("cta-secondary"));
         mockApi.checkLicenseStatus.mockRejectedValue(500);
-        expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
+        expect(
+          screen.queryByTestId("error-alert-SEARCH_FAILED")
+        ).not.toBeInTheDocument();
         fireEvent.submit(screen.getByTestId("check-status-submit"));
         await waitFor(() => {
-          expect(screen.getByTestId("error-alert-SEARCH_FAILED")).toBeInTheDocument();
+          expect(
+            screen.getByTestId("error-alert-SEARCH_FAILED")
+          ).toBeInTheDocument();
         });
       });
 
@@ -546,10 +593,14 @@ describe("<LicenseTask />", () => {
         });
         renderTask();
         fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
-        expect(screen.queryByTestId("error-alert-FIELDS_REQUIRED")).not.toBeInTheDocument();
+        expect(
+          screen.queryByTestId("error-alert-FIELDS_REQUIRED")
+        ).not.toBeInTheDocument();
         fireEvent.submit(screen.getByTestId("check-status-submit"));
         await waitFor(() => {
-          expect(screen.getByTestId("error-alert-FIELDS_REQUIRED")).toBeInTheDocument();
+          expect(
+            screen.getByTestId("error-alert-FIELDS_REQUIRED")
+          ).toBeInTheDocument();
         });
         expect(mockApi.checkLicenseStatus).not.toHaveBeenCalled();
       });
@@ -576,8 +627,14 @@ describe("<LicenseTask />", () => {
                   [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
                     licenseStatus: "PENDING",
                     checklistItems: [
-                      generateLicenseStatusItem({ title: "application fee", status: "PENDING" }),
-                      generateLicenseStatusItem({ title: "board approval", status: "ACTIVE" }),
+                      generateLicenseStatusItem({
+                        title: "application fee",
+                        status: "PENDING",
+                      }),
+                      generateLicenseStatusItem({
+                        title: "board approval",
+                        status: "ACTIVE",
+                      }),
                     ],
                   }),
                 }
@@ -618,8 +675,12 @@ describe("<LicenseTask />", () => {
         });
         renderTask();
         fireEvent.click(screen.getByText(Config.licenseSearchTask.tab2Text));
-        expect(screen.getByText("My Cool Nail Salon".toUpperCase())).toBeInTheDocument();
-        expect(screen.getByText("123 Main St Suite 1, 12345 NJ")).toBeInTheDocument();
+        expect(
+          screen.getByText("My Cool Nail Salon".toUpperCase())
+        ).toBeInTheDocument();
+        expect(
+          screen.getByText("123 Main St Suite 1, 12345 NJ")
+        ).toBeInTheDocument();
       });
     });
 
@@ -648,7 +709,12 @@ describe("<LicenseTask />", () => {
             {
               [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
                 licenseStatus: "ACTIVE",
-                checklistItems: [generateLicenseStatusItem({ title: "application fee", status: "ACTIVE" })],
+                checklistItems: [
+                  generateLicenseStatusItem({
+                    title: "application fee",
+                    status: "ACTIVE",
+                  }),
+                ],
               }),
             }
           ),
@@ -666,7 +732,12 @@ describe("<LicenseTask />", () => {
             {
               [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
                 licenseStatus: "PENDING",
-                checklistItems: [generateLicenseStatusItem({ title: "Application", status: "PENDING" })],
+                checklistItems: [
+                  generateLicenseStatusItem({
+                    title: "Application",
+                    status: "PENDING",
+                  }),
+                ],
               }),
             }
           ),
@@ -676,7 +747,9 @@ describe("<LicenseTask />", () => {
         expect(screen.getByText("Application")).toBeInTheDocument();
         expect(screen.getByTestId("item-PENDING")).toBeInTheDocument();
 
-        const permitStatusElement = screen.getAllByText("Pending")[0] as HTMLElement;
+        const permitStatusElement = screen.getAllByText(
+          "Pending"
+        )[0] as HTMLElement;
         expect(permitStatusElement).toHaveTextContent("Pending");
       });
 
@@ -687,7 +760,12 @@ describe("<LicenseTask />", () => {
             {
               [taskIdLicenseNameMapping[task.id]]: generateLicenseDetails({
                 licenseStatus: "EXPIRED",
-                checklistItems: [generateLicenseStatusItem({ title: "application fee", status: "ACTIVE" })],
+                checklistItems: [
+                  generateLicenseStatusItem({
+                    title: "application fee",
+                    status: "ACTIVE",
+                  }),
+                ],
               }),
             }
           ),

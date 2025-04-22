@@ -7,7 +7,10 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { generateUserData } from "@businessnjgovnavigator/shared/";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen } from "@testing-library/react";
 
@@ -36,7 +39,9 @@ describe("<TaskCheckbox />", () => {
       withNeedsAccountContext(
         <WithStatefulUserData
           initialUserData={
-            initialBusiness ? generateUserDataForBusiness(initialBusiness) : generateUserData({})
+            initialBusiness
+              ? generateUserDataForBusiness(initialBusiness)
+              : generateUserData({})
           }
         >
           <TaskCheckbox checklistItemId={checklistItemId} />

@@ -1,13 +1,16 @@
 import { getNonEssentialQuestionText } from "@/lib/domain-logic/getNonEssentialQuestionText";
 
-jest.mock("../../../../content/src/roadmaps/nonEssentialQuestions.json", () => ({
-  nonEssentialQuestionsArray: [
-    {
-      id: "test-non-essential",
-      questionText: "Test Question?",
-    },
-  ],
-}));
+jest.mock(
+  "../../../../content/src/roadmaps/nonEssentialQuestions.json",
+  () => ({
+    nonEssentialQuestionsArray: [
+      {
+        id: "test-non-essential",
+        questionText: "Test Question?",
+      },
+    ],
+  })
+);
 
 describe("getNonEssentialQuestionText", () => {
   beforeEach(() => {
@@ -15,10 +18,14 @@ describe("getNonEssentialQuestionText", () => {
   });
 
   it("returns the question text if essential question exists", () => {
-    expect(getNonEssentialQuestionText("test-non-essential")).toEqual("Test Question?");
+    expect(getNonEssentialQuestionText("test-non-essential")).toEqual(
+      "Test Question?"
+    );
   });
 
   it("returns undefined if essential question doesn't exist", () => {
-    expect(getNonEssentialQuestionText("test-non-essential1")).toEqual(undefined);
+    expect(getNonEssentialQuestionText("test-non-essential1")).toEqual(
+      undefined
+    );
   });
 });

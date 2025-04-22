@@ -8,7 +8,10 @@ import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { Task } from "@/lib/types/types";
-import { MediaArea, QuestionnaireFieldIds } from "@businessnjgovnavigator/shared/environment";
+import {
+  MediaArea,
+  QuestionnaireFieldIds,
+} from "@businessnjgovnavigator/shared/environment";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
 import { EnvPermitsResults } from "./EnvPermitsResults";
@@ -19,7 +22,9 @@ interface Props {
 
 export const EnvPermit = (props: Props): ReactElement => {
   const { business } = useUserData();
-  const mediaArea = taskIdToMediaArea[props.task.id as keyof typeof taskIdToMediaArea] as MediaArea;
+  const mediaArea = taskIdToMediaArea[
+    props.task.id as keyof typeof taskIdToMediaArea
+  ] as MediaArea;
   const noSelectionOption = taskIdToNotApplicableOption[
     props.task.id as keyof typeof taskIdToNotApplicableOption
   ] as QuestionnaireFieldIds;
@@ -38,7 +43,11 @@ export const EnvPermit = (props: Props): ReactElement => {
         />
       ) : (
         <>
-          {isMobile && <div className="margin-bottom-105">{props.task.summaryDescriptionMd}</div>}
+          {isMobile && (
+            <div className="margin-bottom-105">
+              {props.task.summaryDescriptionMd}
+            </div>
+          )}
           <EnvQuestionnaire
             taskId={props.task.id}
             mediaArea={mediaArea}

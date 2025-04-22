@@ -10,7 +10,9 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { ReactElement } from "react";
 
-const AnytimeActionLicenseReinstatementPreview = (props: PreviewProps): ReactElement => {
+const AnytimeActionLicenseReinstatementPreview = (
+  props: PreviewProps
+): ReactElement => {
   const ref = usePreviewRef(props);
   const anytimeAction = usePageData<AnytimeActionLicenseReinstatement>(props);
   const licenseName = anytimeAction.licenseName || "Health Care Services";
@@ -34,9 +36,17 @@ const AnytimeActionLicenseReinstatementPreview = (props: PreviewProps): ReactEle
   });
 
   return (
-    <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-      <div>This file is mapped to the following license (not enabled if blank):</div>
-      <div className="margin-bottom-10 text-bold">{anytimeAction.licenseName}</div>
+    <div
+      className="cms"
+      ref={ref}
+      style={{ margin: 40, pointerEvents: "none" }}
+    >
+      <div>
+        This file is mapped to the following license (not enabled if blank):
+      </div>
+      <div className="margin-bottom-10 text-bold">
+        {anytimeAction.licenseName}
+      </div>
       <AnytimeActionLicenseReinstatementElement
         anytimeActionLicenseReinstatement={anytimeAction}
         CMS_ONLY_fakeBusiness={business}

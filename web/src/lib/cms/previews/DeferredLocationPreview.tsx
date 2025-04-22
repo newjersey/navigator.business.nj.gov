@@ -3,7 +3,11 @@ import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { generateBusiness, generateMunicipality, generateProfileData } from "@businessnjgovnavigator/shared";
+import {
+  generateBusiness,
+  generateMunicipality,
+  generateProfileData,
+} from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
 const DeferredLocationPreview = (props: PreviewProps): ReactElement => {
@@ -12,7 +16,11 @@ const DeferredLocationPreview = (props: PreviewProps): ReactElement => {
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+      <div
+        className="cms"
+        ref={ref}
+        style={{ margin: 40, pointerEvents: "none" }}
+      >
         <DeferredLocationQuestion innerContent="" />
         <DeferredLocationQuestion
           innerContent=""

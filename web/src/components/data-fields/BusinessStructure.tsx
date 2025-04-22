@@ -29,12 +29,15 @@ export const BusinessStructure = (): ReactElement => {
     });
 
   const businessStructureTaskUrl = useMemo(() => {
-    const urlSlug = getTaskFromRoadmap(roadmap, "business-structure")?.urlSlug ?? "";
+    const urlSlug =
+      getTaskFromRoadmap(roadmap, "business-structure")?.urlSlug ?? "";
     return `/tasks/${urlSlug}`;
   }, [roadmap]);
 
   const getAddOrEdit = (): string => {
-    return state.profileData.legalStructureId ? contentFromConfig.editText : contentFromConfig.addText;
+    return state.profileData.legalStructureId
+      ? contentFromConfig.editText
+      : contentFromConfig.addText;
   };
 
   const ariaLabel = `${getAddOrEdit()} ${contentFromConfig.header}`;

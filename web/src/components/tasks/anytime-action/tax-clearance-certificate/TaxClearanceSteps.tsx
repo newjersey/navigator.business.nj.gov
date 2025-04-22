@@ -12,7 +12,10 @@ interface Props {
   saveTaxClearanceCertificateData: () => void;
   setStepIndex: (step: number) => void;
   setCertificatePdfBlob: (
-    value: ((prevState: Blob | undefined) => Blob | undefined) | Blob | undefined
+    value:
+      | ((prevState: Blob | undefined) => Blob | undefined)
+      | Blob
+      | undefined
   ) => void;
 }
 
@@ -26,12 +29,20 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
 
   return (
     <>
-      <HorizontalStepper steps={props.steps} currentStep={props.currentStep} onStepClicked={onStepClick} />
-      {props.currentStep === 0 && <TaxClearanceStepOne setStepIndex={props.stepIndex} />}
+      <HorizontalStepper
+        steps={props.steps}
+        currentStep={props.currentStep}
+        onStepClicked={onStepClick}
+      />
+      {props.currentStep === 0 && (
+        <TaxClearanceStepOne setStepIndex={props.stepIndex} />
+      )}
       {props.currentStep === 1 && (
         <TaxClearanceStepTwo
           setStepIndex={props.stepIndex}
-          saveTaxClearanceCertificateData={props.saveTaxClearanceCertificateData}
+          saveTaxClearanceCertificateData={
+            props.saveTaxClearanceCertificateData
+          }
         />
       )}
       {props.currentStep === 2 && (

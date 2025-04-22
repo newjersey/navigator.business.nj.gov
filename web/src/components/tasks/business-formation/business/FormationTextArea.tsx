@@ -38,8 +38,8 @@ export const FormationTextArea = (props: Props): ReactElement => {
         />
       </FormationField>
       <div className="text-base-dark margin-top-1 margin-bottom-2">
-        {(state.formationFormData[props.fieldName] as string)?.length ?? 0} / {props.maxChars}{" "}
-        {Config.formation.general.charactersLabel}
+        {(state.formationFormData[props.fieldName] as string)?.length ?? 0} /{" "}
+        {props.maxChars} {Config.formation.general.charactersLabel}
       </div>
     </div>
   );

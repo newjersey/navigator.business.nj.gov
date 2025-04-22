@@ -18,7 +18,9 @@ export const TaxTask = (props: Props): ReactElement => {
   const { business } = useUserData();
 
   const preInputContent = props.task.contentMd.split("${taxInputComponent}")[0];
-  const postInputContent = props.task.contentMd.split("${taxInputComponent}")[1];
+  const postInputContent = props.task.contentMd.split(
+    "${taxInputComponent}"
+  )[1];
 
   return (
     <div className="min-height-38rem">
@@ -27,12 +29,17 @@ export const TaxTask = (props: Props): ReactElement => {
       <Content>{preInputContent}</Content>
       <div className="margin-left-3ch margin-top-1">
         <Content>{Config.tax.descriptionText}</Content>
-        <TaxDisclaimer legalStructureId={business?.profileData.legalStructureId} />
+        <TaxDisclaimer
+          legalStructureId={business?.profileData.legalStructureId}
+        />
         <TaxInput task={props.task} />
       </div>
       <Content>{postInputContent}</Content>
       {props.task.callToActionLink && props.task.callToActionText && (
-        <SingleCtaLink link={props.task.callToActionLink} text={props.task.callToActionText} />
+        <SingleCtaLink
+          link={props.task.callToActionLink}
+          text={props.task.callToActionText}
+        />
       )}
     </div>
   );

@@ -9,7 +9,9 @@ export const useDocuments = (): {
   checkData: () => Promise<void>;
 } => {
   const { business } = useUserData();
-  const [documents, setDocuments] = useState<ProfileDocuments | undefined>(undefined);
+  const [documents, setDocuments] = useState<ProfileDocuments | undefined>(
+    undefined
+  );
 
   const checkData = async (): Promise<void> => {
     const formationDoc = business?.profileData.documents.formationDoc

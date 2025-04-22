@@ -17,7 +17,10 @@ export const useMountEffect = (fun: () => void): void => {
   return useEffect(fun, []);
 };
 
-export const groupBy = <T>(array: T[], predicate: (value: T, index: number, array: T[]) => string): T[][] =>
+export const groupBy = <T>(
+  array: T[],
+  predicate: (value: T, index: number, array: T[]) => string
+): T[][] =>
   Object.values(
     array.reduce((acc, value, index, array) => {
       (acc[predicate(value, index, array)] ||= []).push(value);
@@ -48,9 +51,15 @@ export const useMountEffectWhenDefined = (
       effectOccurred.current = true;
       func();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [func, ...(Array.isArray(thingToBeDefined) ? thingToBeDefined : [thingToBeDefined])]);
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [
+    func,
+    ...(Array.isArray(thingToBeDefined)
+      ? thingToBeDefined
+      : [thingToBeDefined]),
+  ]);
 };
+/* eslint-enable react-hooks/exhaustive-deps */
 
 export const useScrollToPathAnchor = (): void => {
   useEffect(() => {
@@ -67,10 +76,13 @@ export const useScrollToPathAnchor = (): void => {
   });
 };
 
-export const getTaskStatusUpdatedMessage = (taskStatus: TaskProgress): string => {
+export const getTaskStatusUpdatedMessage = (
+  taskStatus: TaskProgress
+): string => {
   const Config = getMergedConfig();
 
-  const taskUpdatedMessagePrefix = Config.taskDefaults.taskProgressSnackbarPrefix;
+  const taskUpdatedMessagePrefix =
+    Config.taskDefaults.taskProgressSnackbarPrefix;
 
   switch (taskStatus) {
     case "TO_DO":
@@ -87,7 +99,10 @@ export const onEscape = (e: KeyboardEvent, handler: () => void): void => {
   }
 };
 
-export const templateEval = (template: string, args: Record<string, string>): string => {
+export const templateEval = (
+  template: string,
+  args: Record<string, string>
+): string => {
   let newTemplate = template;
   for (const key of Object.keys(args)) {
     const pattern = `\\\${${key}}`;
@@ -96,7 +111,10 @@ export const templateEval = (template: string, args: Record<string, string>): st
   return newTemplate;
 };
 
-export const templateEvalWithExtraSpaceRemoval = (template: string, args: Record<string, string>): string => {
+export const templateEvalWithExtraSpaceRemoval = (
+  template: string,
+  args: Record<string, string>
+): string => {
   let newTemplate = template;
   for (const key of Object.keys(args)) {
     const pattern = `\\\${${key}} `;
@@ -105,7 +123,10 @@ export const templateEvalWithExtraSpaceRemoval = (template: string, args: Record
   return newTemplate;
 };
 
-export const rswitch = <T>(param: string, cases: { default: T; [k: string]: T }): T => {
+export const rswitch = <T>(
+  param: string,
+  cases: { default: T; [k: string]: T }
+): T => {
   return cases[param] ?? cases.default;
 };
 
@@ -125,7 +146,9 @@ const getNavBarHeight = (): number | undefined => {
   const navbarDesktop = document.querySelector(`#${NAVBAR_WRAPPER_DESKTOP_ID}`);
 
   if (navbarDesktop && navbarMobile) {
-    const heightDesktop = Number.parseInt(getComputedStyle(navbarDesktop).height);
+    const heightDesktop = Number.parseInt(
+      getComputedStyle(navbarDesktop).height
+    );
     const heightMobile = Number.parseInt(getComputedStyle(navbarMobile).height);
     if (!Number.isNaN(heightDesktop)) {
       return heightDesktop;
@@ -138,7 +161,10 @@ const getNavBarHeight = (): number | undefined => {
 
 export const scrollToTopOfElement = (
   element: HTMLDivElement | null,
-  { waitTime = 100, focusElement = false }: { waitTime?: number; focusElement?: boolean }
+  {
+    waitTime = 100,
+    focusElement = false,
+  }: { waitTime?: number; focusElement?: boolean }
 ): void => {
   if (element === null) {
     return;
@@ -221,7 +247,9 @@ export const validateEmail = (email: string): boolean => {
   );
 };
 
-export const flipObject = <T extends string | number | symbol>(obj: Record<string, T>): Record<T, string> => {
+export const flipObject = <T extends string | number | symbol>(
+  obj: Record<string, T>
+): Record<T, string> => {
   return Object.keys(obj).reduce((acc, key) => {
     acc[obj[key]] = key;
     return acc;
@@ -239,7 +267,10 @@ export const getPhoneNumberFormat = (phoneNumber: string): string => {
   if (length < 7) {
     return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
   }
-  return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+  return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+    3,
+    6
+  )}-${phoneNumber.slice(6, 10)}`;
 };
 
 export const getFlow = (data: UserData | ProfileData): FlowType => {
@@ -263,7 +294,11 @@ export const flattenObject = (obj: any): any => {
     for (const key of Object.keys(obj)) {
       const value = obj[key];
 
-      if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+      if (
+        typeof value === "object" &&
+        value !== null &&
+        !Array.isArray(value)
+      ) {
         Object.assign(flattened, flattenObject(value));
       } else {
         flattened[key] = value;
@@ -276,7 +311,9 @@ export const flattenObject = (obj: any): any => {
   }
 };
 
-export const mapMunicipalityDetailToMunicipality = (municipalityDetail: MunicipalityDetail): Municipality => {
+export const mapMunicipalityDetailToMunicipality = (
+  municipalityDetail: MunicipalityDetail
+): Municipality => {
   return {
     displayName: municipalityDetail.townDisplayName,
     id: municipalityDetail.id,
@@ -285,12 +322,22 @@ export const mapMunicipalityDetailToMunicipality = (municipalityDetail: Municipa
   };
 };
 
-export const isForeignCorporation = (legalStructure: FormationLegalType): boolean => {
-  return ["foreign-c-corporation", "foreign-s-corporation"].includes(legalStructure);
+export const isForeignCorporation = (
+  legalStructure: FormationLegalType
+): boolean => {
+  return ["foreign-c-corporation", "foreign-s-corporation"].includes(
+    legalStructure
+  );
 };
 
-export const isForeignCorporationOrNonprofit = (legalStructure: FormationLegalType): boolean => {
-  return ["foreign-c-corporation", "foreign-s-corporation", "foreign-nonprofit"].includes(legalStructure);
+export const isForeignCorporationOrNonprofit = (
+  legalStructure: FormationLegalType
+): boolean => {
+  return [
+    "foreign-c-corporation",
+    "foreign-s-corporation",
+    "foreign-nonprofit",
+  ].includes(legalStructure);
 };
 
 export const getConfigFieldByLegalStructure = (

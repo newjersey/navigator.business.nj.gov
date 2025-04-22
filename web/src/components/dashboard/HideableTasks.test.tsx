@@ -3,7 +3,10 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateStep, generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { WithStatefulUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
+import {
+  WithStatefulUserData,
+  setupStatefulUserDataContext,
+} from "@/test/mock/withStatefulUserData";
 import {
   generateBusiness,
   generatePreferences,
@@ -26,7 +29,9 @@ describe("<HideableTasks />", () => {
 
   const renderHideableTask = (business: Business): void => {
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business)}
+      >
         <HideableTasks />
       </WithStatefulUserData>
     );
@@ -53,9 +58,12 @@ describe("<HideableTasks />", () => {
 
   it("displays roadmap tasks when show toggle is clicked", async () => {
     const tasks = [generateTask({}), generateTask({})];
-    const hiddenTasksContent = templateEval(Config.dashboardDefaults.hiddenTasksText, {
-      count: String(tasks.length),
-    });
+    const hiddenTasksContent = templateEval(
+      Config.dashboardDefaults.hiddenTasksText,
+      {
+        count: String(tasks.length),
+      }
+    );
 
     const business = generateBusiness({
       preferences: generatePreferences({ isHideableRoadmapOpen: false }),

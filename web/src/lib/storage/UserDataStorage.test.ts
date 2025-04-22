@@ -1,4 +1,8 @@
-import { swrPrefixToIgnore, userDataPrefix, UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
+import {
+  swrPrefixToIgnore,
+  userDataPrefix,
+  UserDataStorageFactory,
+} from "@/lib/storage/UserDataStorage";
 import { generateUserData } from "@businessnjgovnavigator/shared";
 
 describe("userDataStorage", () => {
@@ -36,12 +40,18 @@ describe("userDataStorage", () => {
 
   it("sets a prefix key during normal use", async () => {
     storage.set("whatever", user);
-    expect(setItemSpy).toHaveBeenCalledWith(`${userDataPrefix}whatever`, JSON.stringify(user));
+    expect(setItemSpy).toHaveBeenCalledWith(
+      `${userDataPrefix}whatever`,
+      JSON.stringify(user)
+    );
   });
 
   it("ignores useSWR internal prefix values", async () => {
     storage.set(`${swrPrefixToIgnore}whatever`, user);
-    expect(setItemSpy).toHaveBeenCalledWith(`${swrPrefixToIgnore}whatever`, JSON.stringify(user));
+    expect(setItemSpy).toHaveBeenCalledWith(
+      `${swrPrefixToIgnore}whatever`,
+      JSON.stringify(user)
+    );
   });
 
   it("returns stored userData from memory cache after being set", async () => {

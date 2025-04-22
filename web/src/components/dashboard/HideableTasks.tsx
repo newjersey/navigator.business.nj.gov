@@ -50,7 +50,11 @@ export const HideableTasks = (): ReactElement => {
           >
             <div className="fdr fac">
               <Icon
-                iconName={business?.preferences.isHideableRoadmapOpen ? "visibility_off" : "visibility"}
+                iconName={
+                  business?.preferences.isHideableRoadmapOpen
+                    ? "visibility_off"
+                    : "visibility"
+                }
               />
               <span className="margin-left-05 line-height-sans-2">
                 {business?.preferences.isHideableRoadmapOpen

@@ -20,10 +20,17 @@ export const NexusBusinessNameField = (): ReactElement => {
     return (
       <div>
         <div className="flex">
-          <div role="heading" aria-level={3} className="text-bold margin-bottom-05">
+          <div
+            role="heading"
+            aria-level={3}
+            className="text-bold margin-bottom-05"
+          >
             {contentFromConfig.outOfStateNameHeader}
           </div>
-          <a href={`/tasks/${formationTaskId}`} className="margin-left-2 margin-top-2px">
+          <a
+            href={`/tasks/${formationTaskId}`}
+            className="margin-left-2 margin-top-2px"
+          >
             {contentFromConfig.addButton}{" "}
           </a>
         </div>
@@ -38,7 +45,11 @@ export const NexusBusinessNameField = (): ReactElement => {
     return (
       <div>
         <div className="flex flex-row flex-align-center">
-          <div role="heading" aria-level={3} className="text-bold margin-bottom-05">
+          <div
+            role="heading"
+            aria-level={3}
+            className="text-bold margin-bottom-05"
+          >
             {contentFromConfig.outOfStateNameHeader}
           </div>
           <a
@@ -56,7 +67,8 @@ export const NexusBusinessNameField = (): ReactElement => {
 
   return (
     <>
-      {!state?.profileData.businessName || state?.profileData.businessName === ""
+      {!state?.profileData.businessName ||
+      state?.profileData.businessName === ""
         ? renderUserEmptyBusinessName()
         : renderUserBusinessName()}
     </>

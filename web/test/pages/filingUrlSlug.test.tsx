@@ -93,7 +93,9 @@ describe("filing page", () => {
     expect(screen.getByText("cta-text-1")).toBeInTheDocument();
     expect(screen.getByText("content-1")).toBeInTheDocument();
     expect(screen.getByText("filing-identifier-1")).toBeInTheDocument();
-    expect(screen.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
+    expect(
+      screen.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })
+    ).toBeInTheDocument();
     expect(screen.queryByTestId("filing-method")).not.toBeInTheDocument();
     expect(screen.queryByTestId("filing-details")).not.toBeInTheDocument();
     expect(screen.queryByTestId("extension")).not.toBeInTheDocument();
@@ -122,7 +124,9 @@ describe("filing page", () => {
     renderFilingPage(filing);
 
     expect(screen.getByText("filing id")).toBeInTheDocument();
-    expect(screen.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
+    expect(
+      screen.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })
+    ).toBeInTheDocument();
   });
 
   it("shows the full filing details and correct due date", () => {
@@ -150,16 +154,24 @@ describe("filing page", () => {
 
     renderFilingPage(filing);
 
-    expect(screen.getByText(Config.filingDefaults.paperOrMailOnlyTaxFilingMethod)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.filingDefaults.paperOrMailOnlyTaxFilingMethod)
+    ).toBeInTheDocument();
     expect(screen.getByText("every day, all day")).toBeInTheDocument();
     expect(screen.getByText("please file this way")).toBeInTheDocument();
-    expect(screen.getByText(Config.filingDefaults.extensionTagText)).toBeInTheDocument();
-    expect(screen.getByTestId("treasury-link")).toHaveTextContent(Config.filingDefaults.treasuryLinkText);
+    expect(
+      screen.getByText(Config.filingDefaults.extensionTagText)
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("treasury-link")).toHaveTextContent(
+      Config.filingDefaults.treasuryLinkText
+    );
     expect(screen.getByText("tax rate stuff")).toBeInTheDocument();
     expect(screen.getByText("additional info stuff")).not.toBeVisible();
     fireEvent.click(screen.getByText(Config.filingDefaults.additionalInfo));
     expect(screen.getByText("additional info stuff")).toBeVisible();
-    expect(screen.getByText("New Jersey Division of Taxation")).toBeInTheDocument();
+    expect(
+      screen.getByText("New Jersey Division of Taxation")
+    ).toBeInTheDocument();
     expect(screen.getByTestId("late-filing")).toBeInTheDocument();
   });
 
@@ -240,7 +252,9 @@ describe("filing page", () => {
   it("contains a tooltip with a note regarding filing date in the annual report", async () => {
     useMockBusiness({
       taxFilingData: generateTaxFilingData({
-        filings: [generateTaxFilingCalendarEvent({ identifier: "annual-report" })],
+        filings: [
+          generateTaxFilingCalendarEvent({ identifier: "annual-report" }),
+        ],
       }),
     });
 

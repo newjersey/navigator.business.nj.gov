@@ -26,7 +26,10 @@ export const DashboardHeader = (): ReactElement => {
   };
 
   const getHeader = (): string => {
-    if (state.isAuthenticated === IsAuthenticated.FALSE && isStartingBusiness(business)) {
+    if (
+      state.isAuthenticated === IsAuthenticated.FALSE &&
+      isStartingBusiness(business)
+    ) {
       return business?.profileData.industryId === "generic"
         ? Config.dashboardHeaderDefaults.genericStarterKitText
         : templateEval(Config.dashboardHeaderDefaults.starterKitText, {
@@ -42,11 +45,16 @@ export const DashboardHeader = (): ReactElement => {
   };
 
   const getButtonText = (): string | undefined => {
-    if (state.isAuthenticated === "FALSE" || state.isAuthenticated === "UNKNOWN") {
+    if (
+      state.isAuthenticated === "FALSE" ||
+      state.isAuthenticated === "UNKNOWN"
+    ) {
       return Config.dashboardHeaderDefaults.guestModeToProfileButtonText;
     }
 
-    const businessName = LookupLegalStructureById(business?.profileData.legalStructureId).requiresPublicFiling
+    const businessName = LookupLegalStructureById(
+      business?.profileData.legalStructureId
+    ).requiresPublicFiling
       ? business?.profileData.businessName
       : business?.profileData.tradeName;
 
@@ -74,8 +82,12 @@ export const DashboardHeader = (): ReactElement => {
           {getButtonText()}
         </UnStyledButton>
         <span className="vertical-line margin-x-105 border-right-base" />
-        <span className="text-base">{getCurrentDateInNewJersey().format("MMMM DD, YYYY")}</span>{" "}
-        <span className="text-base">{Config.dashboardHeaderDefaults.newJerseyDateBodyText}</span>
+        <span className="text-base">
+          {getCurrentDateInNewJersey().format("MMMM DD, YYYY")}
+        </span>{" "}
+        <span className="text-base">
+          {Config.dashboardHeaderDefaults.newJerseyDateBodyText}
+        </span>
       </div>
     </>
   );

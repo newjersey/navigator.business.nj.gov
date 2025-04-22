@@ -8,7 +8,10 @@ import {
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import { dbaInputField } from "@/test/helpers/helpersSearchBusinessName";
-import { currentBusiness, userDataWasNotUpdated } from "@/test/mock/withStatefulUserData";
+import {
+  currentBusiness,
+  userDataWasNotUpdated,
+} from "@/test/mock/withStatefulUserData";
 import {
   castPublicFilingLegalTypeToFormationType,
   FormationData,
@@ -99,7 +102,10 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
       lastVisitedPageIndex: 0,
       ...initialFormationData,
     };
-    const page = preparePage({ business: generateBusiness({ profileData, formationData }), displayContent });
+    const page = preparePage({
+      business: generateBusiness({ profileData, formationData }),
+      displayContent,
+    });
     return page;
   };
 
@@ -113,10 +119,15 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
   it("lets you click to search again when unavailable", async () => {
     const page = await getPageHelper({});
     await page.searchBusinessName({ status: "UNAVAILABLE" });
-    expect(screen.queryByLabelText("Search business name")).not.toBeInTheDocument();
-    fireEvent.click(screen.getByText(Config.nexusNameSearch.searchAgainButtonText));
     expect(
-      mockAnalytics.event.business_formation_search_existing_name_again.click.refresh_name_search_field
+      screen.queryByLabelText("Search business name")
+    ).not.toBeInTheDocument();
+    fireEvent.click(
+      screen.getByText(Config.nexusNameSearch.searchAgainButtonText)
+    );
+    expect(
+      mockAnalytics.event.business_formation_search_existing_name_again.click
+        .refresh_name_search_field
     ).toHaveBeenCalled();
     expect(screen.getByLabelText("Search business name")).toBeInTheDocument();
   });
@@ -126,12 +137,16 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
     page.fillText("Search business name", "some unavailable name");
     await page.searchBusinessName({ status: "UNAVAILABLE" });
 
-    fireEvent.click(screen.getByText(Config.nexusNameSearch.searchAgainButtonText));
+    fireEvent.click(
+      screen.getByText(Config.nexusNameSearch.searchAgainButtonText)
+    );
     page.fillText("Search business name", "My Cool Business");
     await page.searchBusinessName({ status: "AVAILABLE" });
 
     expect(currentBusiness().profileData.nexusDbaName).toEqual("");
-    expect(currentBusiness().profileData.businessName).toEqual("My Cool Business");
+    expect(currentBusiness().profileData.businessName).toEqual(
+      "My Cool Business"
+    );
   });
 
   it("sets businessName in formationFormData on submit", async () => {
@@ -139,10 +154,14 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
     page.fillText("Search business name", "some unavailable name");
     await page.searchBusinessName({ status: "UNAVAILABLE" });
 
-    fireEvent.click(screen.getByText(Config.nexusNameSearch.searchAgainButtonText));
+    fireEvent.click(
+      screen.getByText(Config.nexusNameSearch.searchAgainButtonText)
+    );
     page.fillText("Search business name", "My Cool Business");
     await page.searchBusinessName({ status: "AVAILABLE" });
-    expect(currentBusiness().formationData.formationFormData.businessName).toEqual("My Cool Business");
+    expect(
+      currentBusiness().formationData.formationFormData.businessName
+    ).toEqual("My Cool Business");
   });
 
   it("does not save business name if designator error", async () => {
@@ -156,32 +175,49 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
     const page = await getPageHelper({});
     page.fillText("Search business name", "My Cool Business");
     await page.searchBusinessName({ status: "UNAVAILABLE" });
-    expect(screen.getByText(Config.nexusNameSearch.dbaNameHeader)).toBeInTheDocument();
-    expect(screen.getByText(Config.nexusNameSearch.dbaNameSearchSubmitButton)).toBeInTheDocument();
     expect(
-      mockAnalytics.event.business_formation_dba_name_search_field.appears.dba_name_search_field_appears
+      screen.getByText(Config.nexusNameSearch.dbaNameHeader)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.nexusNameSearch.dbaNameSearchSubmitButton)
+    ).toBeInTheDocument();
+    expect(
+      mockAnalytics.event.business_formation_dba_name_search_field.appears
+        .dba_name_search_field_appears
     ).toHaveBeenCalled();
   });
 
   it("shows DBA search immediately if businessNameAvailability status is 'UNAVAILABLE'", async () => {
     const page = await getPageHelper(
       { businessName: "some cool name" },
-      { businessNameAvailability: generateBusinessNameAvailability({ status: "UNAVAILABLE" }) }
+      {
+        businessNameAvailability: generateBusinessNameAvailability({
+          status: "UNAVAILABLE",
+        }),
+      }
     );
 
     await page.searchBusinessName({ status: "UNAVAILABLE" });
     await waitFor(() => {
-      expect(screen.getByText(Config.nexusNameSearch.dbaNameHeader)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.nexusNameSearch.dbaNameHeader)
+      ).toBeInTheDocument();
     });
   });
 
   it("does not show DBA search immediately if businessNameAvailability status is 'AVAILABLE'", async () => {
     await getPageHelper(
       { businessName: "some cool name" },
-      { businessNameAvailability: generateBusinessNameAvailability({ status: "AVAILABLE" }) }
+      {
+        businessNameAvailability: generateBusinessNameAvailability({
+          status: "AVAILABLE",
+        }),
+      }
     );
 
-    expect(screen.queryByText(Config.nexusNameSearch.dbaNameHeader)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.nexusNameSearch.dbaNameHeader)
+    ).not.toBeInTheDocument();
   });
 
   it("does not overwrite existing DBA name when doing initial search", async () => {
@@ -191,7 +227,9 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
     });
     await page.searchBusinessName({ status: "UNAVAILABLE" });
     await waitFor(() => {
-      expect((dbaInputField() as HTMLInputElement).value).toEqual("existing dba name");
+      expect((dbaInputField() as HTMLInputElement).value).toEqual(
+        "existing dba name"
+      );
     });
   });
 
@@ -207,7 +245,9 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
       const page = await setupForDBA();
       page.fillText("DBA Name Search", "My Cool DBA Name");
       await page.searchBusinessName({ status: "AVAILABLE" });
-      expect(currentBusiness().profileData.nexusDbaName).toEqual("My Cool DBA Name");
+      expect(currentBusiness().profileData.nexusDbaName).toEqual(
+        "My Cool DBA Name"
+      );
     });
 
     it("does not save DBA name to profile on unsuccessful search", async () => {
@@ -223,9 +263,13 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
       await page.searchBusinessName({ status: "AVAILABLE" });
       page.fillText("DBA Name Search", "Another DBA Name");
       await page.searchBusinessName({ status: "UNAVAILABLE" });
-      expect(currentBusiness().profileData.nexusDbaName).toEqual("My Cool DBA Name");
+      expect(currentBusiness().profileData.nexusDbaName).toEqual(
+        "My Cool DBA Name"
+      );
       expect(
-        screen.getAllByTestId("unavailable-text")[1].innerHTML.includes("Another DBA Name")
+        screen
+          .getAllByTestId("unavailable-text")[1]
+          .innerHTML.includes("Another DBA Name")
       ).toBeTruthy();
     });
   });

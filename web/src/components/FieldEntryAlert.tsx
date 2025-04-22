@@ -29,8 +29,14 @@ export const FieldEntryAlert = (props: Props): ReactElement => {
       <Content>{props.alertMessage}</Content>
       <ul>
         {props.fields.map((field) => (
-          <li key={field.name} data-testid={`question-${field.name}-alert-text`}>
-            <a href={`#question-${field.name}`} onClick={(): void => onAnchorClick()}>
+          <li
+            key={field.name}
+            data-testid={`question-${field.name}-alert-text`}
+          >
+            <a
+              href={`#question-${field.name}`}
+              onClick={(): void => onAnchorClick()}
+            >
               {field.label}
             </a>
             {field.children}

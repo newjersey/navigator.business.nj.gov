@@ -25,7 +25,11 @@ export const NaicsCodeDisplay = (props: Props): ReactElement => {
         {Config.determineNaicsCode.hasSavedCodeHeader}
       </Heading>
       <Alert variant="success">
-        <Content>{templateEval(Config.determineNaicsCode.successMessage, { code: props.code })}</Content>
+        <Content>
+          {templateEval(Config.determineNaicsCode.successMessage, {
+            code: props.code,
+          })}
+        </Content>
       </Alert>
       <div className="margin-left-3 flex">
         <span className="text-bold margin-right-05">{props.code}</span>

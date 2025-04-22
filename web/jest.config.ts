@@ -1,6 +1,12 @@
 import sharedConfig from "../jest.shared";
 
-const esModules = ["rehype-react", "remark-gfm", "remark-parse", "remark-rehype", "unified"];
+const esModules = [
+  "rehype-react",
+  "remark-gfm",
+  "remark-parse",
+  "remark-rehype",
+  "unified",
+];
 
 process.env = Object.assign(process.env, {
   FEATURE_BUSINESS_FLP: "true",
@@ -13,9 +19,16 @@ process.env = Object.assign(process.env, {
 export default {
   ...sharedConfig,
   displayName: "web",
-  setupFilesAfterEnv: ["./setupTests.js", "<rootDir>/../shared/src/test/setupRandomSeed.ts"],
+  setupFilesAfterEnv: [
+    "./setupTests.js",
+    "<rootDir>/../shared/src/test/setupRandomSeed.ts",
+  ],
   testEnvironment: "<rootDir>/test/customJsdomEnvironment.ts",
-  testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/", "<rootDir>/cypress/"],
+  testPathIgnorePatterns: [
+    "<rootDir>/.next/",
+    "<rootDir>/node_modules/",
+    "<rootDir>/cypress/",
+  ],
   rootDir: "./",
   moduleDirectories: ["node_modules", "<rootDir>"],
   moduleNameMapper: {
@@ -26,11 +39,14 @@ export default {
     "@/test/(.*)": "<rootDir>/test/$1",
     "@/pages/(.*)": "<rootDir>/src/pages/$1",
     "@/styles/(.*)": "<rootDir>/src/styles/$1",
-    "@businessnjgovnavigator/shared/(.*)": "<rootDir>/../shared/lib/shared/src/$1",
+    "@businessnjgovnavigator/shared/(.*)":
+      "<rootDir>/../shared/lib/shared/src/$1",
     "@businessnjgovnavigator/content/(.*)": "<rootDir>/../content/src/$1",
   },
   resolver: `${__dirname}/test/resolver.js`,
-  transformIgnorePatterns: [`<rootDir>/node_modules/(?!(${esModules.join("|")}))`],
+  transformIgnorePatterns: [
+    `<rootDir>/node_modules/(?!(${esModules.join("|")}))`,
+  ],
   transform: {
     "\\.md$": "<rootDir>/test/jest-raw-loader.js",
     "\\.m?[jt]sx?$": [

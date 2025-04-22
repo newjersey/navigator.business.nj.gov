@@ -5,8 +5,18 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { FormContextFieldProps } from "@/lib/types/types";
-import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
-import { FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import {
+  LegalStructure,
+  LegalStructures,
+  LookupLegalStructureById,
+} from "@businessnjgovnavigator/shared";
+import {
+  FormControl,
+  FormHelperText,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import { orderBy } from "lodash";
 import { ReactElement, ReactNode, useContext } from "react";
 
@@ -18,13 +28,15 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
-  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
-    "legalStructureId",
-    DataFormErrorMapContext,
-    props.errorTypes
-  );
+  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } =
+    useFormContextFieldHelpers(
+      "legalStructureId",
+      DataFormErrorMapContext,
+      props.errorTypes
+    );
 
-  const isValid = (): boolean => state.profileData.legalStructureId !== undefined;
+  const isValid = (): boolean =>
+    state.profileData.legalStructureId !== undefined;
 
   const performValidation = (): void => {
     setIsValid(isValid());
@@ -53,9 +65,13 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
     return (
       <div className="padding-top-1 padding-bottom-1">
         {state.profileData.legalStructureId === legalStructureId ? (
-          <MenuOptionSelected>{LookupLegalStructureById(legalStructureId).name}</MenuOptionSelected>
+          <MenuOptionSelected>
+            {LookupLegalStructureById(legalStructureId).name}
+          </MenuOptionSelected>
         ) : (
-          <MenuOptionUnselected>{LookupLegalStructureById(legalStructureId).name}</MenuOptionUnselected>
+          <MenuOptionUnselected>
+            {LookupLegalStructureById(legalStructureId).name}
+          </MenuOptionUnselected>
         )}
       </div>
     );
@@ -89,7 +105,11 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
           >
             {LegalStructuresOrdered.map((legalStructure) => {
               return (
-                <MenuItem key={legalStructure.id} value={legalStructure.id} data-testid={legalStructure.id}>
+                <MenuItem
+                  key={legalStructure.id}
+                  value={legalStructure.id}
+                  data-testid={legalStructure.id}
+                >
                   {renderOption(legalStructure.id)}
                 </MenuItem>
               );
@@ -97,7 +117,9 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
           </Select>
         </FormControl>
         <FormHelperText className={"text-error-dark"}>
-          {isFormFieldInvalid && Config.profileDefaults.fields.legalStructureId.default.errorTextRequired}
+          {isFormFieldInvalid &&
+            Config.profileDefaults.fields.legalStructureId.default
+              .errorTextRequired}
         </FormHelperText>
       </div>
     </>

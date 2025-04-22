@@ -26,14 +26,28 @@ interface Props {
 export const SidebarCardsContainer = (props: Props): ReactElement => {
   const { business, userData } = useUserData();
 
-  const visibleSidebarCards = getVisibleSideBarCards(business, props.sidebarDisplayContent);
+  const visibleSidebarCards = getVisibleSideBarCards(
+    business,
+    props.sidebarDisplayContent
+  );
   const visibleSortedFundings = getVisibleFundings(
-    sortFundingsForUser(filterFundings({ fundings: props.fundings, business: business }), userData),
+    sortFundingsForUser(
+      filterFundings({ fundings: props.fundings, business: business }),
+      userData
+    ),
     business
   );
-  const hiddenSortedFundings = sortFundingsForUser(getHiddenFundings(business, props.fundings), userData);
+  const hiddenSortedFundings = sortFundingsForUser(
+    getHiddenFundings(business, props.fundings),
+    userData
+  );
   const visibleSortedCertifications = getVisibleCertifications(
-    sortCertifications(filterCertifications({ certifications: props.certifications, business: business })),
+    sortCertifications(
+      filterCertifications({
+        certifications: props.certifications,
+        business: business,
+      })
+    ),
     business
   );
   const hiddenSortedCertifications = sortCertifications(
@@ -50,11 +64,19 @@ export const SidebarCardsContainer = (props: Props): ReactElement => {
       certifications={visibleSortedCertifications}
       hiddenCertifications={hiddenSortedCertifications}
       isRemoteSellerWorker={remoteSellerWorker}
-      displayFundingCards={LookupOperatingPhaseById(business?.profileData.operatingPhase).displayFundings}
-      displayCertificationsCards={
-        LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCertifications
+      displayFundingCards={
+        LookupOperatingPhaseById(business?.profileData.operatingPhase)
+          .displayFundings
       }
-      cardCount={getForYouCardCount(business, props.certifications, props.fundings)}
+      displayCertificationsCards={
+        LookupOperatingPhaseById(business?.profileData.operatingPhase)
+          .displayCertifications
+      }
+      cardCount={getForYouCardCount(
+        business,
+        props.certifications,
+        props.fundings
+      )}
     />
   );
 };

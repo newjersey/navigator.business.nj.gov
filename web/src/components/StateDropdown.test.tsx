@@ -6,7 +6,12 @@ describe("<StateDropdown />", () => {
 
   it("renders list with NJ and US Territories", () => {
     render(
-      <StateDropdown value={undefined} fieldName={"test"} onSelect={(): void => {}} excludeNJ={false} />
+      <StateDropdown
+        value={undefined}
+        fieldName={"test"}
+        onSelect={(): void => {}}
+        excludeNJ={false}
+      />
     );
     fireEvent.click(screen.getByTestId("test"));
     expect(screen.getByText("NJ")).toBeInTheDocument();
@@ -16,7 +21,14 @@ describe("<StateDropdown />", () => {
   });
 
   it("renders list without NJ", () => {
-    render(<StateDropdown value={undefined} fieldName={"test"} onSelect={(): void => {}} excludeNJ={true} />);
+    render(
+      <StateDropdown
+        value={undefined}
+        fieldName={"test"}
+        onSelect={(): void => {}}
+        excludeNJ={true}
+      />
+    );
     fireEvent.click(screen.getByTestId("test"));
     expect(screen.queryByText("NJ")).not.toBeInTheDocument();
   });

@@ -22,7 +22,9 @@ describe("<GovernmentContractorPaginator />", () => {
     render(<GovernmentContractorPaginator />);
     fireEvent.click(screen.getByTestId("stepper-1"));
     await waitFor(() => {
-      expect(screen.getByTestId("apprenticeship-program-intake")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("apprenticeship-program-intake")
+      ).toBeInTheDocument();
     });
   });
 
@@ -33,7 +35,9 @@ describe("<GovernmentContractorPaginator />", () => {
     });
     fireEvent.click(screen.getByTestId("stepper-2"));
     await waitFor(() => {
-      expect(screen.getByTestId("public-works-contractor-registration")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("public-works-contractor-registration")
+      ).toBeInTheDocument();
     });
   });
 

@@ -9,11 +9,22 @@ import { ReactElement, useContext, useEffect, useState } from "react";
 export const FormationChooseDocuments = (): ReactElement => {
   const { Config } = useConfig();
 
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(
+    BusinessFormationContext
+  );
 
-  const officialFormationCost = getCost("officialFormationDocument", state.formationFormData.legalType);
-  const certifiedCopyCost = getCost("certifiedCopyOfFormationDocument", state.formationFormData.legalType);
-  const certificateStandingCost = getCost("certificateOfStanding", state.formationFormData.legalType);
+  const officialFormationCost = getCost(
+    "officialFormationDocument",
+    state.formationFormData.legalType
+  );
+  const certifiedCopyCost = getCost(
+    "certifiedCopyOfFormationDocument",
+    state.formationFormData.legalType
+  );
+  const certificateStandingCost = getCost(
+    "certificateOfStanding",
+    state.formationFormData.legalType
+  );
 
   const [totalCost, setTotalCost] = useState<number>(officialFormationCost);
 
@@ -47,7 +58,8 @@ export const FormationChooseDocuments = (): ReactElement => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        certifiedCopyOfFormationDocument: !state.formationFormData.certifiedCopyOfFormationDocument,
+        certifiedCopyOfFormationDocument:
+          !state.formationFormData.certifiedCopyOfFormationDocument,
       };
     });
   };
@@ -57,16 +69,24 @@ export const FormationChooseDocuments = (): ReactElement => {
       <table className="business-formation-table business-formation-document">
         <thead>
           <tr>
-            <th className="text-bold">{Config.formation.fields.paymentType.serviceColumnLabel}</th>
+            <th className="text-bold">
+              {Config.formation.fields.paymentType.serviceColumnLabel}
+            </th>
             <th></th>
-            <th className="text-bold">{Config.formation.fields.paymentType.costColumnLabel}</th>
+            <th className="text-bold">
+              {Config.formation.fields.paymentType.costColumnLabel}
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td className={"padding-1"}>
               <div data-testid="officialFormationDocument-checkbox">
-                <Checkbox disabled defaultChecked id="officialFormationDocument" />
+                <Checkbox
+                  disabled
+                  defaultChecked
+                  id="officialFormationDocument"
+                />
               </div>
             </td>
             <td>
@@ -77,11 +97,16 @@ export const FormationChooseDocuments = (): ReactElement => {
               >
                 <ContextualInfoButton
                   text={Config.formation.fields.officialFormationDocument.label}
-                  id={Config.formation.fields.officialFormationDocument.labelContextualInfo}
+                  id={
+                    Config.formation.fields.officialFormationDocument
+                      .labelContextualInfo
+                  }
                 />
               </label>
             </td>
-            <td className={"text-primary-dark text-bold"}>{getDollarValue(officialFormationCost)}</td>
+            <td className={"text-primary-dark text-bold"}>
+              {getDollarValue(officialFormationCost)}
+            </td>
           </tr>
           <tr>
             <td className={"padding-1"}>
@@ -101,19 +126,30 @@ export const FormationChooseDocuments = (): ReactElement => {
               >
                 <div
                   className={
-                    state.formationFormData.certificateOfStanding ? "text-primary-dark text-bold" : ""
+                    state.formationFormData.certificateOfStanding
+                      ? "text-primary-dark text-bold"
+                      : ""
                   }
                 >
                   <ContextualInfoButton
                     text={Config.formation.fields.certificateOfStanding.label}
-                    id={Config.formation.fields.certificateOfStanding.labelContextualInfo}
+                    id={
+                      Config.formation.fields.certificateOfStanding
+                        .labelContextualInfo
+                    }
                   />
                 </div>
-                <span className="margin-left-05">{Config.formation.general.optionalLabel}</span>
+                <span className="margin-left-05">
+                  {Config.formation.general.optionalLabel}
+                </span>
               </label>
             </td>
             <td
-              className={state.formationFormData.certificateOfStanding ? "text-primary-dark text-bold" : ""}
+              className={
+                state.formationFormData.certificateOfStanding
+                  ? "text-primary-dark text-bold"
+                  : ""
+              }
             >
               {getDollarValue(certificateStandingCost)}
             </td>
@@ -124,7 +160,9 @@ export const FormationChooseDocuments = (): ReactElement => {
                 <Checkbox
                   onChange={handleCertifiedFormationDocumentClick}
                   id="certifiedCopyOfFormationDocument"
-                  checked={state.formationFormData.certifiedCopyOfFormationDocument}
+                  checked={
+                    state.formationFormData.certifiedCopyOfFormationDocument
+                  }
                 />
               </div>
             </td>
@@ -142,16 +180,26 @@ export const FormationChooseDocuments = (): ReactElement => {
                   }
                 >
                   <ContextualInfoButton
-                    text={Config.formation.fields.certifiedCopyOfFormationDocument.label}
-                    id={Config.formation.fields.certifiedCopyOfFormationDocument.labelContextualInfo}
+                    text={
+                      Config.formation.fields.certifiedCopyOfFormationDocument
+                        .label
+                    }
+                    id={
+                      Config.formation.fields.certifiedCopyOfFormationDocument
+                        .labelContextualInfo
+                    }
                   />
                 </div>
-                <span className="margin-left-05">{Config.formation.general.optionalLabel}</span>
+                <span className="margin-left-05">
+                  {Config.formation.general.optionalLabel}
+                </span>
               </label>
             </td>
             <td
               className={
-                state.formationFormData.certifiedCopyOfFormationDocument ? "text-primary-dark text-bold" : ""
+                state.formationFormData.certifiedCopyOfFormationDocument
+                  ? "text-primary-dark text-bold"
+                  : ""
               }
             >
               {getDollarValue(certifiedCopyCost)}
@@ -162,7 +210,9 @@ export const FormationChooseDocuments = (): ReactElement => {
           <tr>
             <td colSpan={1}>
               <div className="text-align-left">
-                <span className="text-bold">{Config.formation.fields.paymentType.costSubtotalLabel}</span>{" "}
+                <span className="text-bold">
+                  {Config.formation.fields.paymentType.costSubtotalLabel}
+                </span>{" "}
               </div>
             </td>
             <td colSpan={1}></td>

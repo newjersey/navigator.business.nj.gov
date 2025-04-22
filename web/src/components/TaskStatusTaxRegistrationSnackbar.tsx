@@ -8,12 +8,16 @@ interface Props {
   close: () => void;
 }
 
-export const TaskStatusTaxRegistrationSnackbar = (props: Props): ReactElement => {
+export const TaskStatusTaxRegistrationSnackbar = (
+  props: Props
+): ReactElement => {
   const { Config } = useConfig();
 
   return (
     <SnackbarAlert variant="success" isOpen={props.isOpen} close={props.close}>
-      <Heading level={2}>{Config.dashboardDefaults.taxRegistrationSnackbarHeading}</Heading>
+      <Heading level={2}>
+        {Config.dashboardDefaults.taxRegistrationSnackbarHeading}
+      </Heading>
       <p>{Config.dashboardDefaults.taxRegistrationSnackbarBody}</p>
     </SnackbarAlert>
   );

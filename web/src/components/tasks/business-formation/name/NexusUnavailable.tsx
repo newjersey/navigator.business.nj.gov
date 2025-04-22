@@ -17,9 +17,12 @@ export const NexusUnavailable = (props: UnavailableProps): ReactElement => {
     props.resetSearch();
   };
 
-  const [textBeforeButton, textAfterButton] = templateEval(Config.nexusNameSearch.unavailableText, {
-    name: props.submittedName,
-  }).split("${searchAgainButton}");
+  const [textBeforeButton, textAfterButton] = templateEval(
+    Config.nexusNameSearch.unavailableText,
+    {
+      name: props.submittedName,
+    }
+  ).split("${searchAgainButton}");
 
   const inlineParagraphComponent = {
     p: (props: { children: string[] }): ReactElement => {
@@ -31,11 +34,19 @@ export const NexusUnavailable = (props: UnavailableProps): ReactElement => {
     <>
       <div data-testid="unavailable-text">
         <Alert variant="info">
-          <PureMarkdownContent components={inlineParagraphComponent}>{textBeforeButton}</PureMarkdownContent>{" "}
-          <UnStyledButton onClick={onClick} className="display-inline" dataTestid="search-again">
+          <PureMarkdownContent components={inlineParagraphComponent}>
+            {textBeforeButton}
+          </PureMarkdownContent>{" "}
+          <UnStyledButton
+            onClick={onClick}
+            className="display-inline"
+            dataTestid="search-again"
+          >
             {Config.nexusNameSearch.searchAgainButtonText}
           </UnStyledButton>
-          <PureMarkdownContent components={inlineParagraphComponent}>{textAfterButton}</PureMarkdownContent>
+          <PureMarkdownContent components={inlineParagraphComponent}>
+            {textAfterButton}
+          </PureMarkdownContent>
         </Alert>
       </div>
 

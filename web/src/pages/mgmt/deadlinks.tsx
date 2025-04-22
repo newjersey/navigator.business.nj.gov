@@ -2,7 +2,10 @@ import { MgmtAuth } from "@/components/auth/MgmtAuth";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { findDeadContextualInfo, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
+import {
+  findDeadContextualInfo,
+  findDeadTasks,
+} from "@/lib/static/admin/findDeadLinks";
 
 import { getMergedConfig } from "@/contexts/configContext";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
@@ -43,13 +46,20 @@ const DeadLinksPage = (props: Props): ReactElement => {
 
   return (
     <PageSkeleton>
-      <NextSeo title={getNextSeoTitle(config.pagesMetadata.deadLinksTitle)} noindex={true} />
+      <NextSeo
+        title={getNextSeoTitle(config.pagesMetadata.deadLinksTitle)}
+        noindex={true}
+      />
       <main>
         <SingleColumnContainer>
           {isAuthed ? (
             authedView
           ) : (
-            <MgmtAuth password={password} setIsAuthed={setIsAuthed} setPassword={setPassword} />
+            <MgmtAuth
+              password={password}
+              setIsAuthed={setIsAuthed}
+              setPassword={setPassword}
+            />
           )}
         </SingleColumnContainer>
       </main>
@@ -57,9 +67,12 @@ const DeadLinksPage = (props: Props): ReactElement => {
   );
 };
 
-export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Props>> => {
+export const getServerSideProps = async (): Promise<
+  GetServerSidePropsResult<Props>
+> => {
   const buildCheckDeadPages =
-    (process.env.CHECK_DEAD_LINKS && process.env.CHECK_DEAD_LINKS === "true") || false;
+    (process.env.CHECK_DEAD_LINKS && process.env.CHECK_DEAD_LINKS === "true") ||
+    false;
   return buildCheckDeadPages
     ? {
         props: {

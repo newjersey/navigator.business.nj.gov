@@ -1,7 +1,11 @@
 import { AddressTextField } from "@/components/data-fields/address/AddressTextField";
 import { generateAddress } from "@/test/factories";
 import { WithStatefulAddressData } from "@/test/mock/withStatefulAddressData";
-import { emptyFormationAddressData, FormationAddress, Municipality } from "@businessnjgovnavigator/shared/";
+import {
+  emptyFormationAddressData,
+  FormationAddress,
+  Municipality,
+} from "@businessnjgovnavigator/shared/";
 import { generateMunicipality } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
 

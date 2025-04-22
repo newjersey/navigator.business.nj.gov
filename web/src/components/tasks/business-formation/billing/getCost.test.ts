@@ -2,7 +2,10 @@
 
 import { getCost } from "@/components/tasks/business-formation/billing/getCost";
 import { getMergedConfig } from "@/contexts/configContext";
-import { allFormationLegalTypes, FormationLegalType } from "@businessnjgovnavigator/shared/formationData";
+import {
+  allFormationLegalTypes,
+  FormationLegalType,
+} from "@businessnjgovnavigator/shared/formationData";
 
 const Config = getMergedConfig();
 
@@ -13,28 +16,40 @@ describe("getCost", () => {
         const certifiedCopyCost = Number.parseInt(
           Config.formation.fields.certifiedCopyOfFormationDocument.cost
         );
-        expect(getCost("certifiedCopyOfFormationDocument", legalStructureId)).toEqual(certifiedCopyCost);
+        expect(
+          getCost("certifiedCopyOfFormationDocument", legalStructureId)
+        ).toEqual(certifiedCopyCost);
       });
     });
   }
 
   describe("official formation document", () => {
     const overriddenCostIds: FormationLegalType[] = ["nonprofit"];
-    const defaultCostIds = allFormationLegalTypes.filter((it) => !overriddenCostIds.includes(it));
+    const defaultCostIds = allFormationLegalTypes.filter(
+      (it) => !overriddenCostIds.includes(it)
+    );
 
     for (const legalStructureId of defaultCostIds) {
       it(`uses default cost for ${legalStructureId}`, async () => {
-        const officialFormationCost = Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
-        expect(getCost("officialFormationDocument", legalStructureId)).toEqual(officialFormationCost);
+        const officialFormationCost = Number.parseInt(
+          Config.formation.fields.officialFormationDocument.cost
+        );
+        expect(getCost("officialFormationDocument", legalStructureId)).toEqual(
+          officialFormationCost
+        );
       });
     }
 
     for (const legalStructureId of overriddenCostIds) {
       it(`uses override cost for ${legalStructureId}`, async () => {
         const standingCost = Number.parseInt(
-          (Config.formation.fields.officialFormationDocument.overrides as any)[legalStructureId].cost
+          (Config.formation.fields.officialFormationDocument.overrides as any)[
+            legalStructureId
+          ].cost
         );
-        expect(getCost("officialFormationDocument", legalStructureId)).toEqual(standingCost);
+        expect(getCost("officialFormationDocument", legalStructureId)).toEqual(
+          standingCost
+        );
       });
     }
   });
@@ -47,21 +62,31 @@ describe("getCost", () => {
       "foreign-nonprofit",
       "nonprofit",
     ];
-    const defaultCostIds = allFormationLegalTypes.filter((it) => !overriddenCostIds.includes(it));
+    const defaultCostIds = allFormationLegalTypes.filter(
+      (it) => !overriddenCostIds.includes(it)
+    );
 
     for (const legalStructureId of defaultCostIds) {
       it(`uses default cost for ${legalStructureId}`, async () => {
-        const standingCost = Number.parseInt(Config.formation.fields.certificateOfStanding.cost);
-        expect(getCost("certificateOfStanding", legalStructureId)).toEqual(standingCost);
+        const standingCost = Number.parseInt(
+          Config.formation.fields.certificateOfStanding.cost
+        );
+        expect(getCost("certificateOfStanding", legalStructureId)).toEqual(
+          standingCost
+        );
       });
     }
 
     for (const legalStructureId of overriddenCostIds) {
       it(`uses override cost for ${legalStructureId}`, async () => {
         const standingCost = Number.parseInt(
-          (Config.formation.fields.certificateOfStanding.overrides as any)[legalStructureId].cost
+          (Config.formation.fields.certificateOfStanding.overrides as any)[
+            legalStructureId
+          ].cost
         );
-        expect(getCost("certificateOfStanding", legalStructureId)).toEqual(standingCost);
+        expect(getCost("certificateOfStanding", legalStructureId)).toEqual(
+          standingCost
+        );
       });
     }
   });

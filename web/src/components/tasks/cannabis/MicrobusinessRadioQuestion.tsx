@@ -2,7 +2,12 @@ import { Content } from "@/components/Content";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import {
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import React, { ReactElement } from "react";
 
 export const MicrobusinessRadioQuestion = (): ReactElement => {
@@ -29,7 +34,9 @@ export const MicrobusinessRadioQuestion = (): ReactElement => {
 
   return (
     <>
-      <Content>{Config.cannabisApplyForLicense.microbusinessRadioQuestion}</Content>
+      <Content>
+        {Config.cannabisApplyForLicense.microbusinessRadioQuestion}
+      </Content>
       <FormControl variant="outlined" fullWidth>
         <RadioGroup
           aria-label={Config.cannabisApplyForLicense.microbusinessRadioQuestion}
@@ -44,7 +51,11 @@ export const MicrobusinessRadioQuestion = (): ReactElement => {
             data-testid="microbusiness-radio-true"
             value={true}
             control={<Radio color="primary" />}
-            label={<Content>{Config.cannabisApplyForLicense.microbusinessRadioYes}</Content>}
+            label={
+              <Content>
+                {Config.cannabisApplyForLicense.microbusinessRadioYes}
+              </Content>
+            }
           />
           <FormControlLabel
             style={{ alignItems: "center" }}
@@ -52,7 +63,11 @@ export const MicrobusinessRadioQuestion = (): ReactElement => {
             data-testid="microbusiness-radio-false"
             value={false}
             control={<Radio color="primary" />}
-            label={<Content>{Config.cannabisApplyForLicense.microbusinessRadioNo}</Content>}
+            label={
+              <Content>
+                {Config.cannabisApplyForLicense.microbusinessRadioNo}
+              </Content>
+            }
           />
         </RadioGroup>
       </FormControl>

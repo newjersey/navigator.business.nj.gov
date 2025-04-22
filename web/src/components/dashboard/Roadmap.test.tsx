@@ -34,23 +34,38 @@ describe("<Roadmap />", () => {
     (operatingPhase) => {
       beforeEach(() => {
         useMockBusiness(
-          generateBusiness({ profileData: generateProfileData({ operatingPhase: operatingPhase }) })
+          generateBusiness({
+            profileData: generateProfileData({
+              operatingPhase: operatingPhase,
+            }),
+          })
         );
       });
 
       describe(`${operatingPhase}`, () => {
         it("renders the roadmap with the business structure prompt", () => {
           render(<Roadmap />);
-          expect(screen.getByTestId("business-structure-prompt")).toBeInTheDocument();
+          expect(
+            screen.getByTestId("business-structure-prompt")
+          ).toBeInTheDocument();
         });
 
         it("routes user to task page on button click", () => {
           useMockRoadmap({
-            tasks: [generateTask({ id: businessStructureTaskId, urlSlug: "business-structure-url-slug" })],
+            tasks: [
+              generateTask({
+                id: businessStructureTaskId,
+                urlSlug: "business-structure-url-slug",
+              }),
+            ],
           });
           render(<Roadmap />);
-          fireEvent.click(screen.getByText(Config.businessStructurePrompt.buttonText));
-          expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/business-structure-url-slug");
+          fireEvent.click(
+            screen.getByText(Config.businessStructurePrompt.buttonText)
+          );
+          expect(mockRouter.mockPush).toHaveBeenCalledWith(
+            "/tasks/business-structure-url-slug"
+          );
         });
       });
     }
@@ -60,10 +75,14 @@ describe("<Roadmap />", () => {
     "does not render the roadmap with the business structure prompt for %p",
     (operatingPhase) => {
       useMockBusiness(
-        generateBusiness({ profileData: generateProfileData({ operatingPhase: operatingPhase }) })
+        generateBusiness({
+          profileData: generateProfileData({ operatingPhase: operatingPhase }),
+        })
       );
       render(<Roadmap />);
-      expect(screen.queryByTestId("business-structure-prompt")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("business-structure-prompt")
+      ).not.toBeInTheDocument();
     }
   );
 });

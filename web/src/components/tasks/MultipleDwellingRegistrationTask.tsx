@@ -32,15 +32,26 @@ interface Props {
 const APPLICATION_TAB_INDEX = 0;
 const STATUS_TAB_INDEX = 1;
 
-export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => {
+export const MultipleDwellingRegistrationTask = (
+  props: Props
+): ReactElement => {
   const { roadmap } = useRoadmap();
-  const callToActionLink = getModifiedTaskContent(roadmap, props.task, "callToActionLink");
+  const callToActionLink = getModifiedTaskContent(
+    roadmap,
+    props.task,
+    "callToActionLink"
+  );
   const [tabIndex, setTabIndex] = useState(APPLICATION_TAB_INDEX);
-  const [error, setError] = useState<MultipleDwellingSearchError | undefined>(undefined);
-  const [housingAddress, setHousingAddress] = useState<HousingAddress | undefined>(undefined);
-  const [housingRegistrationLookupSummary, setHousingRegistrationLookupSummary] = useState<
-    HousingRegistrationRequestLookupResponse | undefined
+  const [error, setError] = useState<MultipleDwellingSearchError | undefined>(
+    undefined
+  );
+  const [housingAddress, setHousingAddress] = useState<
+    HousingAddress | undefined
   >(undefined);
+  const [
+    housingRegistrationLookupSummary,
+    setHousingRegistrationLookupSummary,
+  ] = useState<HousingRegistrationRequestLookupResponse | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { municipalities } = useContext(HousingMunicipalitiesContext);
   const { Config } = useConfig();
@@ -66,7 +77,11 @@ export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => 
     }
     setIsLoading(true);
     api
-      .checkHousingRegistrationStatus(address.address1, address.municipalityExternalId, "multipleDwelling")
+      .checkHousingRegistrationStatus(
+        address.address1,
+        address.municipalityExternalId,
+        "multipleDwelling"
+      )
       .then((result) => {
         if (result.lookupStatus === "NO PROPERTY INTERESTS FOUND") {
           setError("NO_PROPERTY_INTEREST_FOUND");
@@ -96,7 +111,9 @@ export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => 
   };
 
   return (
-    <NeedsAccountModalWrapper CMS_ONLY_disable_overlay={props.CMS_ONLY_disable_overlay}>
+    <NeedsAccountModalWrapper
+      CMS_ONLY_disable_overlay={props.CMS_ONLY_disable_overlay}
+    >
       <div className="flex flex-column">
         <TaskHeader task={props.task} />
         <Box sx={{ width: "100%" }}>
@@ -105,18 +122,27 @@ export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => 
               <TabList
                 onChange={onSelectTab}
                 aria-label="Multiple Dwelling Registration task"
-                sx={{ borderBottom: 1, borderColor: "divider", marginTop: ".25rem", marginLeft: ".5rem" }}
+                sx={{
+                  borderBottom: 1,
+                  borderColor: "divider",
+                  marginTop: ".25rem",
+                  marginLeft: ".5rem",
+                }}
               >
                 <Tab
                   value="0"
                   sx={tabStyle}
-                  label={Config.housingRegistrationSearchTask.registrationTab1Text}
+                  label={
+                    Config.housingRegistrationSearchTask.registrationTab1Text
+                  }
                   data-testid={"start-application-tab"}
                 />
                 <Tab
                   value="1"
                   sx={tabStyle}
-                  label={Config.housingRegistrationSearchTask.registrationTab2Text}
+                  label={
+                    Config.housingRegistrationSearchTask.registrationTab2Text
+                  }
                   data-testid={"check-status-tab"}
                 />
               </TabList>
@@ -125,7 +151,9 @@ export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => 
               <div className="margin-top-3">
                 <UnlockedBy task={props.task} />
                 <Content>{props.task.summaryDescriptionMd || ""}</Content>
-                <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
+                <Content>
+                  {getModifiedTaskContent(roadmap, props.task, "contentMd")}
+                </Content>
               </div>
               <CtaContainer>
                 <ActionBarLayout>
@@ -136,7 +164,12 @@ export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => 
                         setTabIndex(STATUS_TAB_INDEX);
                       }}
                     >
-                      <div>{Config.housingRegistrationSearchTask.registrationCallToActionSecondaryText}</div>
+                      <div>
+                        {
+                          Config.housingRegistrationSearchTask
+                            .registrationCallToActionSecondaryText
+                        }
+                      </div>
                     </SecondaryButton>
                   </div>
                   <PrimaryButton
@@ -146,8 +179,16 @@ export const MultipleDwellingRegistrationTask = (props: Props): ReactElement => 
                       openInNewTab(callToActionLink);
                     }}
                   >
-                    <div>{Config.housingRegistrationSearchTask.registrationCallToActionPrimaryText}</div>
-                    <Icon iconName="launch" className="usa-icon-button-margin" />
+                    <div>
+                      {
+                        Config.housingRegistrationSearchTask
+                          .registrationCallToActionPrimaryText
+                      }
+                    </div>
+                    <Icon
+                      iconName="launch"
+                      className="usa-icon-button-margin"
+                    />
                   </PrimaryButton>
                 </ActionBarLayout>
               </CtaContainer>

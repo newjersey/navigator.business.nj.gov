@@ -46,14 +46,22 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
       return business.taskItemChecklist[key];
     });
 
-    if (priorityTypeSelected || business.taskItemChecklist[noneOfTheAbovePriorityId]) {
+    if (
+      priorityTypeSelected ||
+      business.taskItemChecklist[noneOfTheAbovePriorityId]
+    ) {
       setDisplayNextTabButton(true);
     } else {
       setDisplayNextTabButton(false);
     }
 
-    if (priorityTypeSelected && business.taskItemChecklist[noneOfTheAbovePriorityId]) {
-      updateQueue.queueTaskItemChecklist({ [noneOfTheAbovePriorityId]: false }).update();
+    if (
+      priorityTypeSelected &&
+      business.taskItemChecklist[noneOfTheAbovePriorityId]
+    ) {
+      updateQueue
+        .queueTaskItemChecklist({ [noneOfTheAbovePriorityId]: false })
+        .update();
     }
   }, [business, updateQueue]);
 
@@ -68,8 +76,13 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
 
     const priorityStatusArray: Array<string> = [];
 
-    if (isCheckboxesSelected("minorityOrWomen") || isCheckboxesSelected("veteran")) {
-      priorityStatusArray.push(Config.cannabisPriorityStatus.minorityWomenOrVeteran);
+    if (
+      isCheckboxesSelected("minorityOrWomen") ||
+      isCheckboxesSelected("veteran")
+    ) {
+      priorityStatusArray.push(
+        Config.cannabisPriorityStatus.minorityWomenOrVeteran
+      );
     }
     if (isCheckboxesSelected("impactZone")) {
       priorityStatusArray.push(Config.cannabisPriorityStatus.impactZone);
@@ -83,17 +96,25 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
       priorityStatusesAsIndexMap[`type${i + 1}`] = val;
     }
 
-    const configLocation = `phrase${priorityStatusArray.length}` as "phrase1" | "phrase2" | "phrase3";
+    const configLocation = `phrase${priorityStatusArray.length}` as
+      | "phrase1"
+      | "phrase2"
+      | "phrase3";
     if (priorityStatusArray.length > 0 && priorityStatusArray.length < 4) {
       setEligibiltyPhrase(
-        templateEval(Config.cannabisPriorityStatus[configLocation], priorityStatusesAsIndexMap)
+        templateEval(
+          Config.cannabisPriorityStatus[configLocation],
+          priorityStatusesAsIndexMap
+        )
       );
     } else {
       setEligibiltyPhrase("");
     }
   }, [business, Config.cannabisPriorityStatus]);
 
-  const handleNoneOfTheAboveCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleNoneOfTheAboveCheckboxChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     if (!business || !updateQueue) return;
 
     if (event.target.checked) {
@@ -128,7 +149,9 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
               control={
                 <Checkbox
                   onChange={handleNoneOfTheAboveCheckboxChange}
-                  checked={!!business?.taskItemChecklist[noneOfTheAbovePriorityId]}
+                  checked={
+                    !!business?.taskItemChecklist[noneOfTheAbovePriorityId]
+                  }
                   data-testid="cannabis-priority-status-none"
                 />
               }

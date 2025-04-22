@@ -9,7 +9,10 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { LegalStructureRadio } from "@/components/tasks/business-structure/LegalStructureRadio";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
@@ -17,11 +20,22 @@ import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { Task } from "@/lib/types/types";
-import { getFlow, scrollToTopOfElement, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { Business, hasCompletedFormation } from "@businessnjgovnavigator/shared";
+import {
+  getFlow,
+  scrollToTopOfElement,
+  templateEval,
+  useMountEffectWhenDefined,
+} from "@/lib/utils/helpers";
+import {
+  Business,
+  hasCompletedFormation,
+} from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import {
+  createEmptyProfileData,
+  ProfileData,
+} from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useEffect, useRef, useState } from "react";
 
@@ -31,9 +45,12 @@ interface Props {
 }
 
 export const BusinessStructureTask = (props: Props): ReactElement => {
-  const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
+  const [profileData, setProfileData] = useState<ProfileData>(
+    createEmptyProfileData()
+  );
   const [showRadioQuestion, setShowRadioQuestion] = useState<boolean>(true);
-  const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState<boolean>(false);
+  const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] =
+    useState<boolean>(false);
   const { Config } = useConfig();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
   const userDataFromHook = useUserData();
@@ -76,7 +93,9 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     },
     (isValid) => {
       if (!isValid) {
-        scrollToTopOfElement(whenErrorScrollToRef.current, { focusElement: true });
+        scrollToTopOfElement(whenErrorScrollToRef.current, {
+          focusElement: true,
+        });
       }
     }
   );
@@ -94,7 +113,8 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       .queueProfileData({
         legalStructureId: undefined,
         operatingPhase:
-          profileData.operatingPhase === OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE
+          profileData.operatingPhase ===
+          OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE
             ? OperatingPhaseId.GUEST_MODE
             : profileData.operatingPhase,
       })
@@ -107,19 +127,26 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       ...profileData,
       legalStructureId: undefined,
       operatingPhase:
-        profileData.operatingPhase === OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE
+        profileData.operatingPhase ===
+        OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE
           ? OperatingPhaseId.GUEST_MODE
           : profileData.operatingPhase,
     };
     setProfileData(updatedProfileState);
   };
 
-  const preLookupContent = props.task.contentMd.split("${businessStructureSelectionComponent}")[0];
-  const postLookupContent = props.task.contentMd.split("${businessStructureSelectionComponent}")[1];
+  const preLookupContent = props.task.contentMd.split(
+    "${businessStructureSelectionComponent}"
+  )[0];
+  const postLookupContent = props.task.contentMd.split(
+    "${businessStructureSelectionComponent}"
+  )[1];
 
   const isCompleted = (): boolean => {
     if (!updateQueue) return false;
-    return updateQueue.currentBusiness().taskProgress[props.task.id] === "COMPLETED";
+    return (
+      updateQueue.currentBusiness().taskProgress[props.task.id] === "COMPLETED"
+    );
   };
 
   const canEdit = (): boolean => {
@@ -155,9 +182,16 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
               onBack: (): void => {},
             }}
           >
-            <LegalStructureRadio taskId={props.task.id} ref={whenErrorScrollToRef} />
+            <LegalStructureRadio
+              taskId={props.task.id}
+              ref={whenErrorScrollToRef}
+            />
             <div className="margin-top-4">
-              <SecondaryButton isColor="primary" onClick={onSubmit} dataTestId={"save-business-structure"}>
+              <SecondaryButton
+                isColor="primary"
+                onClick={onSubmit}
+                dataTestId={"save-business-structure"}
+              >
                 {Config.businessStructureTask.saveButton}
               </SecondaryButton>
             </div>
@@ -170,10 +204,15 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
             {Config.businessStructureTask.completedHeader}
           </Heading>
           <Alert variant="success">
-            <div className={`flex ${isLargeScreen ? "flex-row" : "flex-column"}`} data-testid="success-alert">
+            <div
+              className={`flex ${isLargeScreen ? "flex-row" : "flex-column"}`}
+              data-testid="success-alert"
+            >
               <Content>
                 {templateEval(Config.businessStructureTask.successMessage, {
-                  legalStructure: LookupLegalStructureById(business.profileData.legalStructureId).name,
+                  legalStructure: LookupLegalStructureById(
+                    business.profileData.legalStructureId
+                  ).name,
                 })}
               </Content>
               {canEdit() ? (
@@ -199,7 +238,11 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
                 </div>
               ) : (
                 <div className="margin-left-2 flex flex-row flex-align-center">
-                  <ArrowTooltip title={Config.profileDefaults.default.lockedFieldTooltipText}>
+                  <ArrowTooltip
+                    title={
+                      Config.profileDefaults.default.lockedFieldTooltipText
+                    }
+                  >
                     <div className="fdr fac font-body-lg">
                       <Icon iconName="help_outline" />
                     </div>

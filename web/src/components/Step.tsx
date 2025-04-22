@@ -17,7 +17,9 @@ export const Step = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   return (
     <div
-      className={`margin-top-3 ${props.last ? "margin-bottom-1" : "padding-bottom-105"}`}
+      className={`margin-top-3 ${
+        props.last ? "margin-bottom-1" : "padding-bottom-105"
+      }`}
       id={`vertical-content-${props.step.stepNumber}`}
     >
       <div className="tablet:margin-right-4 minh-4">
@@ -38,7 +40,9 @@ export const Step = (props: Props): ReactElement => {
               >
                 <ModifiedContent>{props.step.name}</ModifiedContent>
               </span>
-              {props.step.timeEstimate && <span className="text-base">({props.step.timeEstimate})</span>}
+              {props.step.timeEstimate && (
+                <span className="text-base">({props.step.timeEstimate})</span>
+              )}
             </div>
           </div>
         </div>

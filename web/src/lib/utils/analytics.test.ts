@@ -35,7 +35,10 @@ describe("analytics", () => {
         analytics.eventRunner.track({
           event: "form_submits",
           form_name: "industry_essential_questions",
-          questions: { car_service_size: "large_size", certifiedInteriorDesigner: "yes" },
+          questions: {
+            car_service_size: "large_size",
+            certifiedInteriorDesigner: "yes",
+          },
         });
 
         expect(mockAnalyticsBase.sendEvent).toHaveBeenNthCalledWith(1, {
@@ -122,7 +125,8 @@ describe("analytics", () => {
       });
 
       it("should be cannabis_task", () => {
-        window.location.href = "https://localhost/tasks/conditional-permit-cannabis";
+        window.location.href =
+          "https://localhost/tasks/conditional-permit-cannabis";
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
           event: "account_clicks",
@@ -143,7 +147,8 @@ describe("analytics", () => {
       });
 
       it("should hide querystring for on_task_tab parsing", () => {
-        window.location.href = "https://localhost/tasks/conditional-permit-cannabis?foo=bar";
+        window.location.href =
+          "https://localhost/tasks/conditional-permit-cannabis?foo=bar";
         analytics.eventRunner.track({ event: "account_clicks" });
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
           event: "account_clicks",

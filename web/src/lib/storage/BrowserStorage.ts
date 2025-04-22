@@ -9,14 +9,18 @@ export type BrowserStorage = {
 };
 
 export const BrowserStorageFactory = (type?: StorageType): BrowserStorage => {
-  const storageType: "localStorage" | "sessionStorage" = `${type ?? "session"}Storage`;
+  const storageType: "localStorage" | "sessionStorage" = `${
+    type ?? "session"
+  }Storage`;
 
   const isBrowser: boolean = ((): boolean => {
     return typeof window !== "undefined";
   })();
 
   const get = (key: string): string | undefined => {
-    return isBrowser ? window[storageType].getItem(key) ?? undefined : undefined;
+    return isBrowser
+      ? window[storageType].getItem(key) ?? undefined
+      : undefined;
   };
 
   const set = (key: string, value: string): boolean => {

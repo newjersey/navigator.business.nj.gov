@@ -1,10 +1,19 @@
 import { GTM_ID } from "@/lib/utils/analytics";
-import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from "next/document";
+import Document, {
+  DocumentContext,
+  DocumentInitialProps,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from "next/document";
 import Script from "next/script";
 import { ReactElement } from "react";
 
 function getFaviconPath(): string {
-  const baseURL = new URL(process.env.NEXT_PUBLIC_WEB_BASE_URL ?? "http://localhost:3000");
+  const baseURL = new URL(
+    process.env.NEXT_PUBLIC_WEB_BASE_URL ?? "http://localhost:3000"
+  );
 
   if (baseURL.hostname.includes("dev")) {
     return "/favicon-dev";
@@ -22,7 +31,9 @@ function getFaviconPath(): string {
 }
 
 class CustomDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
+  static async getInitialProps(
+    ctx: DocumentContext
+  ): Promise<DocumentInitialProps> {
     const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps };
   }
@@ -31,9 +42,16 @@ class CustomDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <Script src="/vendor/js/uswds-init.min.js" strategy="beforeInteractive" />
+          <Script
+            src="/vendor/js/uswds-init.min.js"
+            strategy="beforeInteractive"
+          />
           <link rel="icon" href={`${getFaviconPath()}.ico`} sizes="32x32" />
-          <link rel="icon" href={`${getFaviconPath()}.svg`} type="image/svg+xml" />
+          <link
+            rel="icon"
+            href={`${getFaviconPath()}.svg`}
+            type="image/svg+xml"
+          />
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         </Head>
         <body>

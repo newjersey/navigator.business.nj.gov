@@ -1,17 +1,27 @@
-import { CurrentAndNextSection, useRoadmap, UseRoadmapReturnValue } from "@/lib/data-hooks/useRoadmap";
+import {
+  CurrentAndNextSection,
+  useRoadmap,
+  UseRoadmapReturnValue,
+} from "@/lib/data-hooks/useRoadmap";
 import * as buildUserRoadmapModule from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { withRoadmap } from "@/test/helpers/helpers-renderers";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generateProfileData } from "@businessnjgovnavigator/shared";
-import { SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
+import {
+  SectionType,
+  TaskProgress,
+} from "@businessnjgovnavigator/shared/userData";
 import { render } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-const mockBuildUserRoadmap = (buildUserRoadmapModule as jest.Mocked<typeof buildUserRoadmapModule>)
-  .buildUserRoadmap;
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({
+  buildUserRoadmap: jest.fn(),
+}));
+const mockBuildUserRoadmap = (
+  buildUserRoadmapModule as jest.Mocked<typeof buildUserRoadmapModule>
+).buildUserRoadmap;
 
 describe("useRoadmap", () => {
   beforeEach(() => {
@@ -54,7 +64,9 @@ describe("useRoadmap", () => {
     const profileData = generateProfileData({});
     useMockBusiness({ profileData, onboardingFormProgress: "COMPLETED" });
 
-    setupHook(generateRoadmap({ steps: [generateStep({})], tasks: [generateTask({})] }));
+    setupHook(
+      generateRoadmap({ steps: [generateStep({})], tasks: [generateTask({})] })
+    );
     expect(mockBuildUserRoadmap).not.toHaveBeenCalled();
   });
 

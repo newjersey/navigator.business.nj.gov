@@ -3,7 +3,10 @@
 import { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
 import { SingleTaxId } from "@/components/data-fields/tax-id/SingleTaxId";
 import { SplitTaxId } from "@/components/data-fields/tax-id/SplitTaxId";
-import { EncryptionStatus, TaxIdDisplayStatus } from "@/components/data-fields/tax-id/TaxIdHelpers";
+import {
+  EncryptionStatus,
+  TaxIdDisplayStatus,
+} from "@/components/data-fields/tax-id/TaxIdHelpers";
 import { ShowHideToggleButton } from "@/components/ShowHideToggleButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { decryptTaxId } from "@/lib/api-client/apiClient";
@@ -15,7 +18,10 @@ import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
 interface Props
-  extends Omit<ProfileDataFieldProps, "fieldName" | "handleChange" | "onValidation" | "inputWidth"> {
+  extends Omit<
+    ProfileDataFieldProps,
+    "fieldName" | "handleChange" | "onValidation" | "inputWidth"
+  > {
   handleChangeOverride?: (value: string) => void;
   inputWidth?: "full" | "default" | "reduced";
 }
@@ -50,7 +56,8 @@ export const TaxId = (props: Props): ReactElement => {
     }
   };
 
-  const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<TaxIdDisplayStatus>(taxIdInitialDisplay());
+  const [taxIdDisplayStatus, setTaxIdDisplayStatus] =
+    useState<TaxIdDisplayStatus>(taxIdInitialDisplay());
 
   useEffect(() => {
     if (business?.profileData.taxId?.includes(maskingCharacter)) {
@@ -58,7 +65,9 @@ export const TaxId = (props: Props): ReactElement => {
     }
   }, [business?.profileData.taxId]);
 
-  const getShowHideToggleButton = (toggleFunc?: (taxId: string) => void): ReactElement => {
+  const getShowHideToggleButton = (
+    toggleFunc?: (taxId: string) => void
+  ): ReactElement => {
     return ShowHideToggleButton({
       status: taxIdDisplayStatus,
       toggle: taxIdToggle(toggleFunc),
@@ -74,9 +83,15 @@ export const TaxId = (props: Props): ReactElement => {
     if (!state.profileData.taxId) {
       return;
     }
-    if (!state.profileData.taxId.includes(maskingCharacter) && state.profileData.encryptedTaxId) {
+    if (
+      !state.profileData.taxId.includes(maskingCharacter) &&
+      state.profileData.encryptedTaxId
+    ) {
       return "decrypted";
-    } else if (state.profileData.taxId.includes(maskingCharacter) && state.profileData.encryptedTaxId) {
+    } else if (
+      state.profileData.taxId.includes(maskingCharacter) &&
+      state.profileData.encryptedTaxId
+    ) {
       return "encrypted";
     }
   };
@@ -93,23 +108,24 @@ export const TaxId = (props: Props): ReactElement => {
       : setTaxIdDisplayStatus("password-view");
   };
 
-  const taxIdToggle = (toggleFunc?: (taxId: string) => void) => async (): Promise<void> => {
-    if (!state.profileData.taxId) {
-      return;
-    }
-    const encryptionStatus = getTaxIdEncryptionStatus();
-    if (taxIdDisplayStatus === "password-view") {
-      if (encryptionStatus === "encrypted") {
-        await getDecryptedTaxId().then((decryptedTaxId) => {
-          setProfileData({ ...state.profileData, taxId: decryptedTaxId });
-          toggleFunc && toggleFunc(decryptedTaxId);
-        });
-      } else {
-        toggleFunc && toggleFunc(state.profileData.taxId);
+  const taxIdToggle =
+    (toggleFunc?: (taxId: string) => void) => async (): Promise<void> => {
+      if (!state.profileData.taxId) {
+        return;
       }
-    }
-    toggleTaxIdDisplay();
-  };
+      const encryptionStatus = getTaxIdEncryptionStatus();
+      if (taxIdDisplayStatus === "password-view") {
+        if (encryptionStatus === "encrypted") {
+          await getDecryptedTaxId().then((decryptedTaxId) => {
+            setProfileData({ ...state.profileData, taxId: decryptedTaxId });
+            toggleFunc && toggleFunc(decryptedTaxId);
+          });
+        } else {
+          toggleFunc && toggleFunc(state.profileData.taxId);
+        }
+      }
+      toggleTaxIdDisplay();
+    };
 
   const additionalValidationIsValid = (value: string): boolean => {
     if (!business) return true;
@@ -129,7 +145,9 @@ export const TaxId = (props: Props): ReactElement => {
         getShowHideToggleButton={getShowHideToggleButton}
         taxIdDisplayStatus={taxIdDisplayStatus}
         additionalValidationIsValid={additionalValidationIsValid}
-        validationText={Config.profileDefaults.fields.taxId.default.errorTextRequired}
+        validationText={
+          Config.profileDefaults.fields.taxId.default.errorTextRequired
+        }
         {...props}
       />
     );

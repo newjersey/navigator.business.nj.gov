@@ -7,7 +7,8 @@ import { ReactElement } from "react";
 export const DashboardAlerts = (): ReactElement => {
   const { Config } = useConfig();
 
-  const secondSnackbarTimeDelay = Config.dashboardDefaults.timeDelayBetweenMultipleSnackbars;
+  const secondSnackbarTimeDelay =
+    Config.dashboardDefaults.timeDelayBetweenMultipleSnackbars;
 
   const ProfileUpdatedAlert = useQueryControlledAlert({
     queryKey: QUERIES.success,

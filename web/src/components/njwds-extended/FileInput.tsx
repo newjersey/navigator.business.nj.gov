@@ -1,6 +1,12 @@
 import { flipObject, templateEval } from "@/lib/utils/helpers";
 import { AcceptedFileType, InputFile } from "@businessnjgovnavigator/shared";
-import { ReactElement, useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  ReactElement,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
 interface Props {
   acceptedFileTypes?: {
@@ -23,11 +29,18 @@ const FileTypeToInputString: Record<AcceptedFileType, string> = {
   PNG: "image/png",
 };
 
-const InputStringToFileType = flipObject(FileTypeToInputString) as Record<string, AcceptedFileType>;
+const InputStringToFileType = flipObject(FileTypeToInputString) as Record<
+  string,
+  AcceptedFileType
+>;
 
 const BYTES_IN_A_MB = 1048576;
 
-const base64ToFile = (params: { base64Contents: string; type: string; filename: string }): File => {
+const base64ToFile = (params: {
+  base64Contents: string;
+  type: string;
+  filename: string;
+}): File => {
   const imageContent = atob(params.base64Contents);
   const buffer = new ArrayBuffer(imageContent.length);
   const view = new Uint8Array(buffer);
@@ -55,14 +68,21 @@ export const FileInput = ({
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const fileInput = require("../../../../node_modules/@uswds/uswds/packages/usa-file-input/src");
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const size = maxFileSize?.maxSizeInMegabytes ? maxFileSize.maxSizeInMegabytes * BYTES_IN_A_MB : undefined;
+  const size = maxFileSize?.maxSizeInMegabytes
+    ? maxFileSize.maxSizeInMegabytes * BYTES_IN_A_MB
+    : undefined;
 
   const [hasFileBeenRead, setHasFileBeenRead] = useState<boolean>(false);
-  const [fileUploadError, setFileUploadError] = useState({ hasError: false, errorMessage: "" });
+  const [fileUploadError, setFileUploadError] = useState({
+    hasError: false,
+    errorMessage: "",
+  });
 
   const createAcceptedFileString = (): string | undefined => {
     if (!acceptedFileTypes) return undefined;
-    return acceptedFileTypes.fileTypes.map((it) => FileTypeToInputString[it]).join(",");
+    return acceptedFileTypes.fileTypes
+      .map((it) => FileTypeToInputString[it])
+      .join(",");
   };
 
   const getErrorMessage = (): string => {
@@ -107,12 +127,16 @@ export const FileInput = ({
         const selectedFile = eventTarget.files[0];
         if (
           acceptedFileTypes &&
-          !acceptedFileTypes.fileTypes.includes(InputStringToFileType[selectedFile.type])
+          !acceptedFileTypes.fileTypes.includes(
+            InputStringToFileType[selectedFile.type]
+          )
         ) {
           e.stopImmediatePropagation();
           setFileUploadError({
             hasError: true,
-            errorMessage: templateEval(acceptedFileTypes.errorMessage, { fileName: selectedFile.name }),
+            errorMessage: templateEval(acceptedFileTypes.errorMessage, {
+              fileName: selectedFile.name,
+            }),
           });
         } else if (maxFileSize && size && selectedFile.size > size) {
           e.stopImmediatePropagation();
@@ -131,7 +155,10 @@ export const FileInput = ({
     fileInputElement?.addEventListener("change", (e: Event) => {
       preventInvalidFileSelection(e);
     });
-    if (typeof fileInput.on === "function" && typeof fileInput.off === "function") {
+    if (
+      typeof fileInput.on === "function" &&
+      typeof fileInput.off === "function"
+    ) {
       fileInput.on(fileInputElement); // initialize USWDS fileInput component
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -151,7 +178,8 @@ export const FileInput = ({
         fileInputElement.files = dT.files;
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        fileInputElement.dispatchEvent(new Event("change", { target: { files: [file] } }));
+        const event = new Event("change", { target: { files: [file] } });
+        fileInputElement.dispatchEvent(event);
       }
     }
   };
@@ -162,7 +190,11 @@ export const FileInput = ({
 
   return (
     <>
-      <div className={`usa-form-group${hasError || (fileUploadError.hasError && " usa-form-group--error")}`}>
+      <div
+        className={`usa-form-group${
+          hasError || (fileUploadError.hasError && " usa-form-group--error")
+        }`}
+      >
         <label className="usa-label" htmlFor="file-input-single">
           {helperText}
         </label>
@@ -181,7 +213,10 @@ export const FileInput = ({
           type="file"
         />
       </div>
-      <div aria-hidden="true" data-testid={hasFileBeenRead ? "file-is-read" : ""} />
+      <div
+        aria-hidden="true"
+        data-testid={hasFileBeenRead ? "file-is-read" : ""}
+      />
     </>
   );
 };

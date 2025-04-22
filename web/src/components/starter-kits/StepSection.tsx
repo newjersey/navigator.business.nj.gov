@@ -14,7 +14,9 @@ interface Props {
 
 export const StepSection = (props: Props): ReactElement => {
   const getTaskNamesForStep = (tasks: Task[], step: number): string[] => {
-    return tasks.filter((task) => task.stepNumber === step).map((task) => task.name);
+    return tasks
+      .filter((task) => task.stepNumber === step)
+      .map((task) => task.name);
   };
 
   return (
@@ -27,7 +29,10 @@ export const StepSection = (props: Props): ReactElement => {
         {props.roadmap.steps.map((step) => (
           <StepInfo
             step={step}
-            taskNames={getTaskNamesForStep(props.roadmap.tasks, step.stepNumber)}
+            taskNames={getTaskNamesForStep(
+              props.roadmap.tasks,
+              step.stepNumber
+            )}
             key={step.stepNumber}
           />
         ))}

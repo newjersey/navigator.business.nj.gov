@@ -53,35 +53,56 @@ export const BusinessFormation = (props: Props): ReactElement => {
     createEmptyFormationFormData()
   );
   const [stepIndex, setStepIndex] = useState(0);
-  const [interactedFields, setInteractedFields] = useState<FieldsForErrorHandling[]>([]);
+  const [interactedFields, setInteractedFields] = useState<
+    FieldsForErrorHandling[]
+  >([]);
   const [showResponseAlert, setShowResponseAlert] = useState<boolean>(false);
   const [isLoadingGetFiling, setIsLoadingGetFiling] = useState<boolean>(false);
   const [hasBeenSubmitted, setHasBeenSubmitted] = useState<boolean>(false);
-  const [hasSetStateFirstTime, setHasSetStateFirstTime] = useState<boolean>(false);
+  const [hasSetStateFirstTime, setHasSetStateFirstTime] =
+    useState<boolean>(false);
   const getCompletedFilingApiCallOccurred = useRef<boolean>(false);
-  const [businessNameAvailability, setBusinessNameAvailability] = useState<NameAvailability | undefined>(
-    undefined
-  );
-  const [dbaBusinessNameAvailability, setDbaBusinessNameAvailability] = useState<
+  const [businessNameAvailability, setBusinessNameAvailability] = useState<
     NameAvailability | undefined
   >(undefined);
-  const [foreignGoodStandingFile, setForeignGoodStandingFile] = useState<InputFile | undefined>(undefined);
+  const [dbaBusinessNameAvailability, setDbaBusinessNameAvailability] =
+    useState<NameAvailability | undefined>(undefined);
+  const [foreignGoodStandingFile, setForeignGoodStandingFile] = useState<
+    InputFile | undefined
+  >(undefined);
 
   const legalStructureId: FormationLegalType = useMemo(() => {
     return castPublicFilingLegalTypeToFormationType(
-      (business?.profileData.legalStructureId ?? defaultFormationLegalType) as PublicFilingLegalType,
+      (business?.profileData.legalStructureId ??
+        defaultFormationLegalType) as PublicFilingLegalType,
       business?.profileData.businessPersona
     );
-  }, [business?.profileData.businessPersona, business?.profileData.legalStructureId]);
+  }, [
+    business?.profileData.businessPersona,
+    business?.profileData.legalStructureId,
+  ]);
 
-  const isForeign = useMemo(() => legalStructureId.includes(foreignLegalTypePrefix), [legalStructureId]);
-
-  const isValidLegalStructure = useMemo(
-    () => allowFormation(business?.profileData.legalStructureId, business?.profileData.businessPersona),
-    [business?.profileData.legalStructureId, business?.profileData.businessPersona]
+  const isForeign = useMemo(
+    () => legalStructureId.includes(foreignLegalTypePrefix),
+    [legalStructureId]
   );
 
-  const getBusinessStartDate = (date: string | undefined, legalType: FormationLegalType): string => {
+  const isValidLegalStructure = useMemo(
+    () =>
+      allowFormation(
+        business?.profileData.legalStructureId,
+        business?.profileData.businessPersona
+      ),
+    [
+      business?.profileData.legalStructureId,
+      business?.profileData.businessPersona,
+    ]
+  );
+
+  const getBusinessStartDate = (
+    date: string | undefined,
+    legalType: FormationLegalType
+  ): string => {
     return !date || !isBusinessStartDateValid(date, legalType)
       ? getCurrentDateInNewJerseyFormatted(defaultDateFormat)
       : date;
@@ -95,15 +116,21 @@ export const BusinessFormation = (props: Props): ReactElement => {
     setFormationFormData({
       ...business.formationData.formationFormData,
       businessName:
-        business.formationData.formationFormData.businessName ?? business.profileData.businessName,
+        business.formationData.formationFormData.businessName ??
+        business.profileData.businessName,
       businessStartDate: getBusinessStartDate(
         business.formationData.formationFormData.businessStartDate,
         legalStructureId
       ),
-      addressMunicipality: business.formationData.formationFormData.addressMunicipality,
+      addressMunicipality:
+        business.formationData.formationFormData.addressMunicipality,
       legalType: legalStructureId,
-      contactFirstName: business.formationData.formationFormData.contactFirstName || splitName.firstName,
-      contactLastName: business.formationData.formationFormData.contactLastName || splitName.lastName,
+      contactFirstName:
+        business.formationData.formationFormData.contactFirstName ||
+        splitName.firstName,
+      contactLastName:
+        business.formationData.formationFormData.contactLastName ||
+        splitName.lastName,
       businessLocationType: isForeign
         ? business.formationData.formationFormData.businessLocationType ?? "US"
         : "NJ",
@@ -128,7 +155,9 @@ export const BusinessFormation = (props: Props): ReactElement => {
     }
     if (checkQueryValue(router, QUERIES.completeFiling, "false")) {
       setStepIndex(LookupStepIndexByName("Review"));
-      router.replace({ pathname: `/tasks/${props.task?.urlSlug}` }, undefined, { shallow: true });
+      router.replace({ pathname: `/tasks/${props.task?.urlSlug}` }, undefined, {
+        shallow: true,
+      });
     }
   }, [router, props.task?.urlSlug]);
 
@@ -139,9 +168,14 @@ export const BusinessFormation = (props: Props): ReactElement => {
       }
       const completeFilingQueryParamExists =
         router && checkQueryValue(router, QUERIES.completeFiling, "true");
-      const completedPayment = business.formationData.formationResponse?.success === true;
-      const noCompletedFilingExists = !business.formationData.getFilingResponse?.success;
-      return completeFilingQueryParamExists || (completedPayment && noCompletedFilingExists);
+      const completedPayment =
+        business.formationData.formationResponse?.success === true;
+      const noCompletedFilingExists =
+        !business.formationData.getFilingResponse?.success;
+      return (
+        completeFilingQueryParamExists ||
+        (completedPayment && noCompletedFilingExists)
+      );
     };
 
     (async function fetchCompletedFiling(): Promise<void> {
@@ -165,7 +199,11 @@ export const BusinessFormation = (props: Props): ReactElement => {
           .update()
           .then(() => {
             setIsLoadingGetFiling(false);
-            router.replace({ pathname: `/tasks/${props.task?.urlSlug}` }, undefined, { shallow: true });
+            router.replace(
+              { pathname: `/tasks/${props.task?.urlSlug}` },
+              undefined,
+              { shallow: true }
+            );
           });
       }
     })();
@@ -188,19 +226,32 @@ export const BusinessFormation = (props: Props): ReactElement => {
     });
   };
 
-  if (!isValidLegalStructure && business?.profileData.businessPersona !== "FOREIGN") {
+  if (
+    !isValidLegalStructure &&
+    business?.profileData.businessPersona !== "FOREIGN"
+  ) {
     return (
       <div className="flex flex-column space-between min-height-38rem">
         <div>
           <TaskHeader task={props.task} />
           <UnlockedBy task={props.task} />
-          <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
+          <Content>
+            {getModifiedTaskContent(roadmap, props.task, "contentMd")}
+          </Content>
         </div>
         {getModifiedTaskContent(roadmap, props.task, "callToActionLink") &&
           getModifiedTaskContent(roadmap, props.task, "callToActionText") && (
             <SingleCtaLink
-              link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
-              text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}
+              link={getModifiedTaskContent(
+                roadmap,
+                props.task,
+                "callToActionLink"
+              )}
+              text={getModifiedTaskContent(
+                roadmap,
+                props.task,
+                "callToActionText"
+              )}
             />
           )}
       </div>
@@ -217,7 +268,10 @@ export const BusinessFormation = (props: Props): ReactElement => {
     return (
       <div className="flex flex-column min-height-38rem">
         <TaskHeader task={props.task} />
-        <FormationInterimSuccessPage taskUrlSlug={props.task.urlSlug} setStepIndex={setStepIndex} />
+        <FormationInterimSuccessPage
+          taskUrlSlug={props.task.urlSlug}
+          setStepIndex={setStepIndex}
+        />
       </div>
     );
   }
@@ -272,7 +326,10 @@ export const BusinessFormation = (props: Props): ReactElement => {
         setForeignGoodStandingFile,
       }}
     >
-      <div className="flex flex-column min-height-38rem" data-testid="formation-form">
+      <div
+        className="flex flex-column min-height-38rem"
+        data-testid="formation-form"
+      >
         <>
           <div>
             <TaskHeader task={props.task} />

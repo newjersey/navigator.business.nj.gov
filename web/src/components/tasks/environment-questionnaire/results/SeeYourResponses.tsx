@@ -10,7 +10,9 @@ interface Props {
 export const SeeYourResponses = (props: Props): ReactElement => {
   const Config = getMergedConfig();
   return (
-    <ResultsSectionAccordion title={Config.envResultsPage.seeYourResponses.title}>
+    <ResultsSectionAccordion
+      title={Config.envResultsPage.seeYourResponses.title}
+    >
       <div>
         <ul>
           {props.responseTexts.map((value, i) => {

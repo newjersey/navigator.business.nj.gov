@@ -27,7 +27,9 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  postGetAnnualFilings: jest.fn(),
+}));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("profile - guest mode", () => {
@@ -78,7 +80,9 @@ describe("profile - guest mode", () => {
         setShowNeedsAccountModal,
       });
       chooseTab("numbers");
-      fireEvent.change(screen.getByLabelText("Tax pin"), { target: { value: "123456789" } });
+      fireEvent.change(screen.getByLabelText("Tax pin"), {
+        target: { value: "123456789" },
+      });
       expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
   });
@@ -105,7 +109,9 @@ describe("profile - guest mode", () => {
         setShowNeedsAccountModal,
       });
       chooseTab("numbers");
-      fireEvent.change(screen.getByLabelText("Employer id"), { target: { value: "123456789" } });
+      fireEvent.change(screen.getByLabelText("Employer id"), {
+        target: { value: "123456789" },
+      });
       expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
 
@@ -116,7 +122,9 @@ describe("profile - guest mode", () => {
         setShowNeedsAccountModal,
       });
       chooseTab("numbers");
-      fireEvent.change(screen.getByLabelText("Entity id"), { target: { value: "123456789" } });
+      fireEvent.change(screen.getByLabelText("Entity id"), {
+        target: { value: "123456789" },
+      });
       expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
 
@@ -127,7 +135,9 @@ describe("profile - guest mode", () => {
         setShowNeedsAccountModal,
       });
       chooseTab("numbers");
-      fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789" } });
+      fireEvent.change(screen.getByLabelText("Tax id"), {
+        target: { value: "123456789" },
+      });
       expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
 
@@ -138,9 +148,12 @@ describe("profile - guest mode", () => {
         setShowNeedsAccountModal,
       });
       chooseTab("notes");
-      fireEvent.change(screen.getByLabelText("Notes", { selector: "textarea" }), {
-        target: { value: "some note" },
-      });
+      fireEvent.change(
+        screen.getByLabelText("Notes", { selector: "textarea" }),
+        {
+          target: { value: "some note" },
+        }
+      );
       expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
   }

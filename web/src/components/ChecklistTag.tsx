@@ -50,7 +50,8 @@ export const statusObj: Record<CheckoffStatus, LicenseStatusMetadata> = {
 };
 
 export const ChecklistTag = (props: Props): ReactElement => {
-  const { iconName, iconColor, statusText, backgroundColor } = statusObj[props.status];
+  const { iconName, iconColor, statusText, backgroundColor } =
+    statusObj[props.status];
 
   return (
     <div

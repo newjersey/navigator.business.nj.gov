@@ -20,7 +20,11 @@ export const useFormContextHelper = <
 ): {
   FormFuncWrapper: (
     onSubmitFunc: () => void | Promise<void>,
-    onChangeFunc?: (isValid: boolean, errors: FieldError[], pageChange: boolean) => void | Promise<void>
+    onChangeFunc?: (
+      isValid: boolean,
+      errors: FieldError[],
+      pageChange: boolean
+    ) => void | Promise<void>
   ) => void;
   onSubmit: (event?: FormEvent<HTMLFormElement>) => void;
   onTabChange: (tab: Tab) => void;
@@ -64,10 +68,13 @@ export const useFormContextHelper = <
           },
         };
       case FieldStateActionKind.RESET:
-        return (Object.keys(prevState) as (keyof T)[]).reduce((reducer, field) => {
-          reducer[field] = { ...reducer[field], updated: undefined };
-          return reducer;
-        }, prevState);
+        return (Object.keys(prevState) as (keyof T)[]).reduce(
+          (reducer, field) => {
+            reducer[field] = { ...reducer[field], updated: undefined };
+            return reducer;
+          },
+          prevState
+        );
       case FieldStateActionKind.REGISTER:
         return {
           ...prevState,
@@ -86,12 +93,19 @@ export const useFormContextHelper = <
     }
   };
 
-  const [fieldStates, fieldStateDispatch] = useReducer<FormContextReducer<T>>(fieldStatesReducer, initState);
+  const [fieldStates, fieldStateDispatch] = useReducer<FormContextReducer<T>>(
+    fieldStatesReducer,
+    initState
+  );
   debug && console.log(fieldStates);
 
   const getErrors = (): FieldError[] =>
     Object.values(fieldStates)
-      .filter((k) => (k as FieldStatus<FieldError>).invalid && (k as FieldStatus<FieldError>).updated)
+      .filter(
+        (k) =>
+          (k as FieldStatus<FieldError>).invalid &&
+          (k as FieldStatus<FieldError>).updated
+      )
       .flatMap((k) => (k as FieldStatus<FieldError>).errorTypes ?? []);
 
   const getInvalidFieldIds = (): string[] => {
@@ -102,7 +116,11 @@ export const useFormContextHelper = <
 
   const FormFuncWrapper: (
     onSubmitFunc: () => void | Promise<void>,
-    onChangeFunc?: (isValid: boolean, errors: FieldError[], pageChange: boolean) => void | Promise<void>
+    onChangeFunc?: (
+      isValid: boolean,
+      errors: FieldError[],
+      pageChange: boolean
+    ) => void | Promise<void>
   ) => void = (onSubmitFunc, onChangeFunc) => {
     debug && console.log("wrapper");
 
@@ -124,7 +142,12 @@ export const useFormContextHelper = <
 
       if (onChangeFunc) {
         debug && console.log("change func");
-        onChangeFunc && onChangeFunc(valid, getErrors(), submitted || stagingTab !== undefined);
+        onChangeFunc &&
+          onChangeFunc(
+            valid,
+            getErrors(),
+            submitted || stagingTab !== undefined
+          );
       }
 
       if (!stillNeedsUpdates) {
@@ -168,7 +191,9 @@ export const useFormContextHelper = <
   const isValid = (): boolean => {
     debug && console.log("form is valid");
     const thing = !Object.values(fieldStates).some(
-      (k) => (k as FieldStatus<FieldErrorType>).invalid && (k as FieldStatus<FieldErrorType>).updated
+      (k) =>
+        (k as FieldStatus<FieldErrorType>).invalid &&
+        (k as FieldStatus<FieldErrorType>).updated
     );
     return thing;
   };

@@ -1,4 +1,7 @@
-import { isForeignCorporation, isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
+import {
+  isForeignCorporation,
+  isForeignCorporationOrNonprofit,
+} from "@/lib/utils/helpers";
 import {
   FieldsForErrorHandling,
   FormationFields,
@@ -7,7 +10,9 @@ import {
   incorporationLegalStructures,
 } from "@businessnjgovnavigator/shared/formationData";
 
-export const validatedFieldsForUser = (formationFormData: FormationFormData): FieldsForErrorHandling[] => {
+export const validatedFieldsForUser = (
+  formationFormData: FormationFormData
+): FieldsForErrorHandling[] => {
   let validatedFields: FieldsForErrorHandling[] = [
     "businessName",
     "businessSuffix",
@@ -29,10 +34,19 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fi
 
   switch (formationFormData.businessLocationType) {
     case "US":
-      validatedFields = [...validatedFields, ...foreignValidatedFields, "addressState"];
+      validatedFields = [
+        ...validatedFields,
+        ...foreignValidatedFields,
+        "addressState",
+      ];
       break;
     case "INTL":
-      validatedFields = [...validatedFields, ...foreignValidatedFields, "addressProvince", "addressCountry"];
+      validatedFields = [
+        ...validatedFields,
+        ...foreignValidatedFields,
+        "addressProvince",
+        "addressCountry",
+      ];
       break;
     case "NJ":
       validatedFields.push("addressMunicipality");
@@ -88,7 +102,10 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fi
       validatedFields.push("nonprofitAssetDistributionSpecified");
     }
 
-    if (formationFormData.nonprofitBoardMemberQualificationsSpecified === "IN_FORM") {
+    if (
+      formationFormData.nonprofitBoardMemberQualificationsSpecified ===
+      "IN_FORM"
+    ) {
       validatedFields.push("nonprofitBoardMemberQualificationsTerms");
     }
 

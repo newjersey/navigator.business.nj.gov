@@ -51,7 +51,8 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
         .mockReturnValueOnce(anytimeActionLicenseReinstatement1)
         .mockReturnValueOnce(anytimeActionLicenseReinstatement2);
 
-      const anytimeActionTasks = await loadAllAnytimeActionLicenseReinstatements();
+      const anytimeActionTasks =
+        await loadAllAnytimeActionLicenseReinstatements();
       expect(anytimeActionTasks).toHaveLength(2);
       expect(anytimeActionTasks).toEqual(
         expect.arrayContaining([
@@ -112,7 +113,8 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
         .mockReturnValueOnce(anytimeActionLicenseReinstatement2) // read second file in list
         .mockReturnValueOnce(anytimeActionLicenseReinstatement2); // read file once we found the match
 
-      const anytimeActionTask = loadAnytimeActionLicenseReinstatementsByUrlSlug("urlslug2");
+      const anytimeActionTask =
+        loadAnytimeActionLicenseReinstatementsByUrlSlug("urlslug2");
       expect(anytimeActionTask).toEqual({
         name: "anytime action license reinstatement name2",
         icon: "test2.svg",
@@ -171,7 +173,8 @@ describe("loadAnytimeActionLicenseReinstatements", () => {
 
       mockReadDirReturn({ value: ["qa1.md", "qa2.md", "qa3.md"], mockedFs });
 
-      const anytimeActionsByUrlSlug = loadAllAnytimeActionLicenseReinstatementsUrlSlugs();
+      const anytimeActionsByUrlSlug =
+        loadAllAnytimeActionLicenseReinstatementsUrlSlugs();
       expect(anytimeActionsByUrlSlug).toHaveLength(3);
       expect(anytimeActionsByUrlSlug).toEqual(
         expect.arrayContaining([

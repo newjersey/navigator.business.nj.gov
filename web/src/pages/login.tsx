@@ -28,14 +28,20 @@ const LoginEmailCheckPage = (): ReactElement => {
   });
 
   useEffect(() => {
-    if (authState.isAuthenticated === IsAuthenticated.TRUE && authState.activeUser) {
+    if (
+      authState.isAuthenticated === IsAuthenticated.TRUE &&
+      authState.activeUser
+    ) {
       router?.isReady && router.push(ROUTES.dashboard);
     }
   }, [authState.isAuthenticated, authState.activeUser, router]);
 
   return (
     <PageSkeleton showNavBar isLoginPage>
-      <main className="grid-container-widescreen padding-y-4 email-check-main" id="main">
+      <main
+        className="grid-container-widescreen padding-y-4 email-check-main"
+        id="main"
+      >
         <LoginEmailCheck />
       </main>
     </PageSkeleton>

@@ -47,7 +47,9 @@ describe("loadAnytimeActionTasks", () => {
         "Some content description 2";
 
       mockReadDirReturn({ value: ["opp1.md", "opp2.md"], mockedFs });
-      mockedFs.readFileSync.mockReturnValueOnce(anytimeActionTask1).mockReturnValueOnce(anytimeActionTask2);
+      mockedFs.readFileSync
+        .mockReturnValueOnce(anytimeActionTask1)
+        .mockReturnValueOnce(anytimeActionTask2);
 
       const anytimeActionTasks = await loadAllAnytimeActionTasks();
       expect(anytimeActionTasks).toHaveLength(2);

@@ -1,6 +1,9 @@
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { usePageWithNeedsAccountSnackbar } from "@/lib/auth/usePageWithNeedsAccountSnackbar";
-import { withAuth, withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
+import {
+  withAuth,
+  withNeedsAccountContext,
+} from "@/test/helpers/helpers-renderers";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { render } from "@testing-library/react";
 
@@ -11,7 +14,11 @@ describe("usePageWithNeedsAccountSnackbar", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockRouter({ isReady: true, asPath: "", query: { fromOnboarding: "true" } });
+    useMockRouter({
+      isReady: true,
+      asPath: "",
+      query: { fromOnboarding: "true" },
+    });
     setShowNeedsAccountSnackbar = jest.fn();
   });
 
@@ -31,10 +38,14 @@ describe("usePageWithNeedsAccountSnackbar", () => {
 
     render(
       withAuth(
-        withNeedsAccountContext(<TestComponent />, isAuth ?? IsAuthenticated.TRUE, {
-          showNeedsAccountModal: showNeedsAccountModal ?? false,
-          setShowNeedsAccountSnackbar,
-        }),
+        withNeedsAccountContext(
+          <TestComponent />,
+          isAuth ?? IsAuthenticated.TRUE,
+          {
+            showNeedsAccountModal: showNeedsAccountModal ?? false,
+            setShowNeedsAccountSnackbar,
+          }
+        ),
         { isAuthenticated: isAuth }
       )
     );

@@ -21,7 +21,10 @@ export const BillingStep = (): ReactElement => {
         {Config.formation.sections.contactInfoHeader}
       </Heading>
       <WithErrorBar
-        hasError={doSomeFieldsHaveError(["contactFirstName", "contactLastName"])}
+        hasError={doSomeFieldsHaveError([
+          "contactFirstName",
+          "contactLastName",
+        ])}
         type="DESKTOP-ONLY"
       >
         <div className="grid-row grid-gap-1">
@@ -73,7 +76,9 @@ export const BillingStep = (): ReactElement => {
       <FormationChooseDocuments />
       <PaymentTypeTable />
       <div className="padding-top-2">
-        <em className="padding-left-2">{Config.formation.fields.paymentType.costTotalPaymentDisclaimer}</em>
+        <em className="padding-left-2">
+          {Config.formation.fields.paymentType.costTotalPaymentDisclaimer}
+        </em>
       </div>
       <hr className="margin-y-3" />
       <FormationChooseNotifications />

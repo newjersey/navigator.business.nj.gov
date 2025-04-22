@@ -9,13 +9,19 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { filterFundings, sortFundingsForUser } from "@/lib/domain-logic/sidebarCardsHelpers";
+import {
+  filterFundings,
+  sortFundingsForUser,
+} from "@/lib/domain-logic/sidebarCardsHelpers";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { Funding } from "@/lib/types/types";
 import {
@@ -24,7 +30,12 @@ import {
   OperatingPhaseId,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import {
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useEffect, useState } from "react";
@@ -40,15 +51,21 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
   const currentUserData = createEmptyUserData(createEmptyUser());
   const { business, updateQueue, createUpdateQueue } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(
-    business?.profileData || currentUserData.businesses[currentUserData.currentBusinessId].profileData
+    business?.profileData ||
+      currentUserData.businesses[currentUserData.currentBusinessId].profileData
   );
-  const [isNonProfit, setIsNonProfit] = useState<boolean | undefined>(undefined);
+  const [isNonProfit, setIsNonProfit] = useState<boolean | undefined>(
+    undefined
+  );
   const [numberOfEmployees, setNumberofEmployees] = useState<string>(
     business?.profileData.existingEmployees ?? ""
   );
   const [shouldCloseModal, setShouldCloseModal] = useState<boolean>(false);
-  const [filteredFundings, setFilteredFundings] = useState<Funding[]>(props.fundings);
-  const [shouldShowErrorAlert, setShouldShowErrorAlert] = useState<boolean>(false);
+  const [filteredFundings, setFilteredFundings] = useState<Funding[]>(
+    props.fundings
+  );
+  const [shouldShowErrorAlert, setShouldShowErrorAlert] =
+    useState<boolean>(false);
 
   const getQuestionsAnsweredCount = (): number => {
     let count = 0;
@@ -111,11 +128,12 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
     }
 
     return sortFundingsForUser(
-      filterFundings({ fundings: filteredFundings, business: updateQueue?.currentBusiness() }).filter(
-        (it) => {
-          return it.agency?.includes("njeda");
-        }
-      ),
+      filterFundings({
+        fundings: filteredFundings,
+        business: updateQueue?.currentBusiness(),
+      }).filter((it) => {
+        return it.agency?.includes("njeda");
+      }),
       updateQueue?.current()
     );
   };
@@ -128,7 +146,9 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
     return shouldShowErrorAlert && isNonProfit === undefined;
   };
 
-  const { onSubmit, state: formContextState } = useFormContextHelper(createDataFormErrorMap());
+  const { onSubmit, state: formContextState } = useFormContextHelper(
+    createDataFormErrorMap()
+  );
 
   const FundingsHeader = (): ReactElement => {
     return (
@@ -144,7 +164,10 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
               isButtonALink={true}
               ariaLabel={Config.fundingsOnboardingModal.pageHeader.logoAriaText}
               onClick={() => {
-                router && router.push(Config.fundingsOnboardingModal.pageHeader.logoLink);
+                router &&
+                  router.push(
+                    Config.fundingsOnboardingModal.pageHeader.logoLink
+                  );
               }}
             >
               <img src="/img/njeda-logo.webp" alt="" />
@@ -157,7 +180,11 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
           >
             {Config.fundingsOnboardingModal.pageHeader.headerText}
           </Heading>
-          <div className={"text-lg-left text-accent-cool-dark-medium margin-bottom-1"}>
+          <div
+            className={
+              "text-lg-left text-accent-cool-dark-medium margin-bottom-1"
+            }
+          >
             {Config.fundingsOnboardingModal.pageHeader.subHeaderText}
           </div>
           <PrimaryButton
@@ -173,7 +200,10 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
     );
   };
 
-  const fundingEntry = (funding: Funding, hideTopBorder: boolean): ReactElement => {
+  const fundingEntry = (
+    funding: Funding,
+    hideTopBorder: boolean
+  ): ReactElement => {
     return (
       <div className={"margin-left-3ch"} key={funding.id}>
         <OpportunityCard
@@ -232,13 +262,17 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
                 {shouldShowErrorAlert && (
                   <Alert variant={"error"}>
                     {getQuestionsAnsweredCount() === 2
-                      ? Config.fundingsOnboardingModal.incompleteWarningSingularText
-                      : Config.fundingsOnboardingModal.incompleteWarningMultipleText}
+                      ? Config.fundingsOnboardingModal
+                          .incompleteWarningSingularText
+                      : Config.fundingsOnboardingModal
+                          .incompleteWarningMultipleText}
                   </Alert>
                 )}
                 {!shouldShowErrorAlert && (
                   <Alert variant={"info"}>
-                    <Content>{Config.fundingsOnboardingModal.headerTooltip}</Content>
+                    <Content>
+                      {Config.fundingsOnboardingModal.headerTooltip}
+                    </Content>
                   </Alert>
                 )}
               </div>
@@ -248,10 +282,16 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
               </div>
 
               <div className={"padding-top-1 border-error error-side-border"}>
-                <WithErrorBar hasError={shouldShowEmployeeCountError()} type={"ALWAYS"}>
+                <WithErrorBar
+                  hasError={shouldShowEmployeeCountError()}
+                  type={"ALWAYS"}
+                >
                   <div>
                     <div className={"text-bold"}>
-                      {Config.fundingsOnboardingModal.numberOfEmployeesQuestion.questionText}
+                      {
+                        Config.fundingsOnboardingModal.numberOfEmployeesQuestion
+                          .questionText
+                      }
                     </div>
                     <ExistingEmployees
                       onChange={(val) => {
@@ -260,17 +300,29 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
                     />
                   </div>
                   {shouldShowEmployeeCountError() && (
-                    <div className="text-error-dark text-bold" data-testid="business-structure-error">
-                      {Config.fundingsOnboardingModal.numberOfEmployeesQuestion.selectAnAnswerText}
+                    <div
+                      className="text-error-dark text-bold"
+                      data-testid="business-structure-error"
+                    >
+                      {
+                        Config.fundingsOnboardingModal.numberOfEmployeesQuestion
+                          .selectAnAnswerText
+                      }
                     </div>
                   )}
                 </WithErrorBar>
               </div>
 
               <div className={"padding-top-1"}>
-                <WithErrorBar hasError={shouldShowNonProfitError()} type={"ALWAYS"}>
+                <WithErrorBar
+                  hasError={shouldShowNonProfitError()}
+                  type={"ALWAYS"}
+                >
                   <div className={"text-bold"}>
-                    {Config.fundingsOnboardingModal.nonProfitQuestion.questionText}
+                    {
+                      Config.fundingsOnboardingModal.nonProfitQuestion
+                        .questionText
+                    }
                   </div>
                   <FormControl variant="outlined" fullWidth>
                     <RadioGroup
@@ -279,24 +331,33 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
                       onChange={(event) => {
                         setIsNonProfit(
                           (event.target.value as string) ===
-                            Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes
+                            Config.fundingsOnboardingModal.nonProfitQuestion
+                              .responses.yes
                         );
                       }}
                       row={true}
                     >
                       {radioButtonOption(
-                        Config.fundingsOnboardingModal.nonProfitQuestion.responses.yes,
+                        Config.fundingsOnboardingModal.nonProfitQuestion
+                          .responses.yes,
                         shouldShowNonProfitError()
                       )}
                       {radioButtonOption(
-                        Config.fundingsOnboardingModal.nonProfitQuestion.responses.no,
+                        Config.fundingsOnboardingModal.nonProfitQuestion
+                          .responses.no,
                         shouldShowNonProfitError()
                       )}
                     </RadioGroup>
                   </FormControl>
                   {shouldShowNonProfitError() && (
-                    <div className="text-error-dark text-bold" data-testid="business-structure-error">
-                      {Config.fundingsOnboardingModal.nonProfitQuestion.selectAnAnswerText}
+                    <div
+                      className="text-error-dark text-bold"
+                      data-testid="business-structure-error"
+                    >
+                      {
+                        Config.fundingsOnboardingModal.nonProfitQuestion
+                          .selectAnAnswerText
+                      }
                     </div>
                   )}
                 </WithErrorBar>
@@ -306,7 +367,9 @@ const NJEDAFundingsOnboardingPaage = (props: Props): ReactElement => {
           <FundingsHeader />
           {filteredFundings.length === 0 && (
             <Alert variant={"info"} dataTestid={"alert-no-results"}>
-              <Content>{Config.fundingsOnboardingModal.page.noResultsFoundAlertText}</Content>
+              <Content>
+                {Config.fundingsOnboardingModal.page.noResultsFoundAlertText}
+              </Content>
             </Alert>
           )}
           {filteredFundings.map((funding, index) => {

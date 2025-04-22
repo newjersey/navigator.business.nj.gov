@@ -1,7 +1,10 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import { StateObject, arrayOfStateObjects as states } from "@businessnjgovnavigator/shared/";
+import {
+  StateObject,
+  arrayOfStateObjects as states,
+} from "@businessnjgovnavigator/shared/";
 import { Autocomplete, TextField, createFilterOptions } from "@mui/material";
 import { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
 
@@ -25,18 +28,26 @@ interface Props {
 export const StateDropdown = (props: Props): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const handleOnChange = (event: ChangeEvent<unknown>, value: StateObject | null): void => {
+  const handleOnChange = (
+    event: ChangeEvent<unknown>,
+    value: StateObject | null
+  ): void => {
     props.onSelect(value || undefined);
   };
 
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
     const value = event.target.value;
-    const invalid = props.required ? !value.trim() || getState(value) === undefined : false;
+    const invalid = props.required
+      ? !value.trim() || getState(value) === undefined
+      : false;
 
     props.onValidation && props.onValidation(props.fieldName, invalid);
   };
 
-  const handleInputChange = (event: ChangeEvent<unknown>, value: string | null): void => {
+  const handleInputChange = (
+    event: ChangeEvent<unknown>,
+    value: string | null
+  ): void => {
     if (value === null || value === "") {
       props.onSelect(undefined);
     } else {
@@ -70,7 +81,9 @@ export const StateDropdown = (props: Props): ReactElement => {
     if (props.excludeTerritories) {
       result = result.filter((stateObject) => {
         return (
-          stateObject.shortCode !== "AS" && stateObject.shortCode !== "VI" && stateObject.shortCode !== "GU"
+          stateObject.shortCode !== "AS" &&
+          stateObject.shortCode !== "VI" &&
+          stateObject.shortCode !== "GU"
         );
       });
     }
@@ -91,8 +104,13 @@ export const StateDropdown = (props: Props): ReactElement => {
       getOptionLabel={(option: StateObject): string => {
         return props.useFullName ? option.name : option.shortCode;
       }}
-      isOptionEqualToValue={(option: StateObject, value: StateObject): boolean => {
-        return option.shortCode === value.shortCode || option.name === value.name;
+      isOptionEqualToValue={(
+        option: StateObject,
+        value: StateObject
+      ): boolean => {
+        return (
+          option.shortCode === value.shortCode || option.name === value.name
+        );
       }}
       open={open}
       disabled={props.disabled}
@@ -105,7 +123,9 @@ export const StateDropdown = (props: Props): ReactElement => {
         return (
           <li {..._props} data-testid={option.shortCode}>
             {selected ? (
-              <MenuOptionSelected>{props.useFullName ? option.name : option.shortCode}</MenuOptionSelected>
+              <MenuOptionSelected>
+                {props.useFullName ? option.name : option.shortCode}
+              </MenuOptionSelected>
             ) : (
               <MenuOptionUnselected>
                 {props.useFullName ? option.name : option.shortCode}

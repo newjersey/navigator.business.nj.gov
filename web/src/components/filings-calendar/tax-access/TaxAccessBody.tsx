@@ -11,7 +11,9 @@ export const TaxAccessBody = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const getHeader = (): string => {
-    return props.isStepOne ? Config.taxAccess.stepOneHeader : Config.taxAccess.stepTwoHeader;
+    return props.isStepOne
+      ? Config.taxAccess.stepOneHeader
+      : Config.taxAccess.stepTwoHeader;
   };
 
   return (

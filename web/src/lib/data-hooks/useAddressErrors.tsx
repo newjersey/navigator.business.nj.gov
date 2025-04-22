@@ -1,6 +1,9 @@
 import { getErrorStateForAddressField } from "@/components/profile/getErrorStateForAddressField";
 import { AddressContext } from "@/contexts/addressContext";
-import { AddressFields, FieldsForAddressErrorHandling } from "@/lib/types/types";
+import {
+  AddressFields,
+  FieldsForAddressErrorHandling,
+} from "@/lib/types/types";
 import { useContext } from "react";
 
 type AddressErrorsResponse = {
@@ -23,7 +26,9 @@ export const useAddressErrors = (): AddressErrorsResponse => {
     "addressProvince",
   ]);
 
-  const doesFieldHaveError = (field: FieldsForAddressErrorHandling): boolean => {
+  const doesFieldHaveError = (
+    field: FieldsForAddressErrorHandling
+  ): boolean => {
     if (!validatedFields.has(field)) {
       return false;
     }

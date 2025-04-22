@@ -22,13 +22,18 @@ const UnsupportedPage = (): ReactElement => {
         <ReturnToPreviousBusinessBar
           previousBusiness={getBusinessById({
             userData,
-            previousBusinessId: router.query[QUERIES.previousBusinessId] as string,
+            previousBusinessId: router.query[
+              QUERIES.previousBusinessId
+            ] as string,
           })}
         />
       ) : (
         <></>
       )}
-      <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
+      <main
+        className="usa-section padding-top-0 desktop:padding-top-8"
+        id="main"
+      >
         <SingleColumnContainer>
           <div className="padding-top-5 desktop:padding-top-0">
             <Heading level={2} className="base-darkest text-left">

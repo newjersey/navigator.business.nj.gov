@@ -4,7 +4,9 @@ import { generateBusiness } from "@businessnjgovnavigator/shared";
 
 describe("isStepCompleted", () => {
   it("returns false if roadmap is undefined", () => {
-    expect(isStepCompleted(undefined, generateStep({}), generateBusiness({}))).toEqual(false);
+    expect(
+      isStepCompleted(undefined, generateStep({}), generateBusiness({}))
+    ).toEqual(false);
   });
 
   it("returns true if every task in roadmap associated with the step is completed", () => {

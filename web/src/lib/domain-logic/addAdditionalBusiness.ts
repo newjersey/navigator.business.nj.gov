@@ -1,4 +1,7 @@
-import { createEmptyBusiness, UserData } from "@businessnjgovnavigator/shared/userData";
+import {
+  createEmptyBusiness,
+  UserData,
+} from "@businessnjgovnavigator/shared/userData";
 
 export const addAdditionalBusiness = (userData: UserData): UserData => {
   const additionalBusiness = createEmptyBusiness({

@@ -1,4 +1,7 @@
-import { SidebarPageLayout, SidebarPageLayoutProps } from "@/components/njwds-layout/SidebarPageLayout";
+import {
+  SidebarPageLayout,
+  SidebarPageLayoutProps,
+} from "@/components/njwds-layout/SidebarPageLayout";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { Task } from "@/lib/types/types";
 import { ReactElement } from "react";
@@ -8,11 +11,21 @@ interface Props extends Omit<SidebarPageLayoutProps, "navChildren"> {
   hideMiniRoadmap?: boolean;
 }
 
-export const TaskSidebarPageLayout = ({ children, task, ...props }: Props): ReactElement => {
+export const TaskSidebarPageLayout = ({
+  children,
+  task,
+  ...props
+}: Props): ReactElement => {
   return (
     <main id="main">
       <SidebarPageLayout
-        navChildren={props.hideMiniRoadmap ? <></> : <MiniRoadmap activeTaskId={task?.id} />}
+        navChildren={
+          props.hideMiniRoadmap ? (
+            <></>
+          ) : (
+            <MiniRoadmap activeTaskId={task?.id} />
+          )
+        }
         {...props}
       >
         {children}

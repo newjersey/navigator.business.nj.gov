@@ -13,17 +13,29 @@ describe("<NavBarDesktopQuickLinks />", () => {
 
   it("renders the quick links as expected", () => {
     render(<NavBarDesktopQuickLinks />);
-    expect(screen.getByText(Config.navigationQuickLinks.navBarPlanText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarStartText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarOperateText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarGrowText)).toBeInTheDocument();
-    expect(screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarPlanText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarStartText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarOperateText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarGrowText)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)
+    ).toBeInTheDocument();
     expect(screen.getByTestId("navbar-search-icon")).toBeInTheDocument();
   });
 
   it("renders the plan quick link and redirects correctly", async () => {
     render(<NavBarDesktopQuickLinks />);
-    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarPlanText));
+    fireEvent.click(
+      screen.getByText(Config.navigationQuickLinks.navBarPlanText)
+    );
 
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarPlanLink,
@@ -34,7 +46,9 @@ describe("<NavBarDesktopQuickLinks />", () => {
 
   it("renders the operate quick link and redirects correctly", async () => {
     render(<NavBarDesktopQuickLinks />);
-    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarOperateText));
+    fireEvent.click(
+      screen.getByText(Config.navigationQuickLinks.navBarOperateText)
+    );
 
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarOperateLink,
@@ -45,7 +59,9 @@ describe("<NavBarDesktopQuickLinks />", () => {
 
   it("renders the grow quick link and redirects correctly", async () => {
     render(<NavBarDesktopQuickLinks />);
-    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarGrowText));
+    fireEvent.click(
+      screen.getByText(Config.navigationQuickLinks.navBarGrowText)
+    );
 
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarGrowLink,
@@ -56,7 +72,9 @@ describe("<NavBarDesktopQuickLinks />", () => {
 
   it("renders the updates quick link and redirects correctly", async () => {
     render(<NavBarDesktopQuickLinks />);
-    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarUpdatesText));
+    fireEvent.click(
+      screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)
+    );
 
     expect(window.open).toHaveBeenCalledWith(
       Config.navigationQuickLinks.navBarUpdatesLink,

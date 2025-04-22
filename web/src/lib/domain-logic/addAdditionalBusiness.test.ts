@@ -2,7 +2,10 @@
 
 import { addAdditionalBusiness } from "@/lib/domain-logic/addAdditionalBusiness";
 import { createEmptyProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
 import { CURRENT_VERSION } from "@businessnjgovnavigator/shared/userData";
 
 describe("addAdditionalBusiness", () => {
@@ -12,13 +15,17 @@ describe("addAdditionalBusiness", () => {
     const newUserData = addAdditionalBusiness(userData);
 
     expect(Object.keys(newUserData.businesses)).toHaveLength(2);
-    const newBusinessId = Object.keys(newUserData.businesses).find((id) => id !== firstBusiness.id)!;
+    const newBusinessId = Object.keys(newUserData.businesses).find(
+      (id) => id !== firstBusiness.id
+    )!;
 
     expect(newUserData.currentBusinessId).toBeDefined();
     expect(newUserData.currentBusinessId).not.toEqual(firstBusiness.id);
     expect(newUserData.currentBusinessId).toEqual(newBusinessId);
 
-    expect(newUserData.businesses[newBusinessId].profileData).toEqual(createEmptyProfileData());
+    expect(newUserData.businesses[newBusinessId].profileData).toEqual(
+      createEmptyProfileData()
+    );
   });
 
   it("adds a new empty business with matching userId", () => {
@@ -28,7 +35,9 @@ describe("addAdditionalBusiness", () => {
     const newUserData = addAdditionalBusiness(userData);
 
     expect(Object.keys(newUserData.businesses)).toHaveLength(2);
-    const newBusinessId = Object.keys(newUserData.businesses).find((id) => id !== firstBusiness.id)!;
+    const newBusinessId = Object.keys(newUserData.businesses).find(
+      (id) => id !== firstBusiness.id
+    )!;
 
     expect(newUserData.businesses[newBusinessId].userId).toEqual(userId);
   });
@@ -47,8 +56,12 @@ describe("addAdditionalBusiness", () => {
     const newUserData = addAdditionalBusiness(userData);
 
     expect(Object.keys(newUserData.businesses)).toHaveLength(2);
-    const newBusinessId = Object.keys(newUserData.businesses).find((id) => id !== firstBusiness.id)!;
+    const newBusinessId = Object.keys(newUserData.businesses).find(
+      (id) => id !== firstBusiness.id
+    )!;
 
-    expect(newUserData.businesses[newBusinessId].versionWhenCreated).toEqual(CURRENT_VERSION);
+    expect(newUserData.businesses[newBusinessId].versionWhenCreated).toEqual(
+      CURRENT_VERSION
+    );
   });
 });

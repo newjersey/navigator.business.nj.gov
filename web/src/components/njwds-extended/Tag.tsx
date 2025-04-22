@@ -35,10 +35,12 @@ export const Tag = (props: Props): ReactElement => {
       styling = "bg-base-lighter text-base-dark";
       break;
     case "accent-cool-lighter-border-darktext":
-      styling = "bg-accent-cool-lighter text-base-darkest border border-accent-cool";
+      styling =
+        "bg-accent-cool-lighter text-base-darkest border border-accent-cool";
       break;
     case "accent-cool-lighter-lighttext":
-      styling = "bg-accent-cool-lighter text-base-darkest text-accent-cool-darker";
+      styling =
+        "bg-accent-cool-lighter text-base-darkest text-accent-cool-darker";
       break;
     case "accent-warm-lighter":
       styling = "bg-accent-warm-lighter text-accent-warm-darker";
@@ -50,13 +52,15 @@ export const Tag = (props: Props): ReactElement => {
       styling = "bg-white text-base-darkest bg-accent-cool-light";
       break;
     case "accent-semi-cool-light":
-      styling = "bg-white text-base-darkest bg-accent-semi-cool-light border border-accent-semi-cool-500";
+      styling =
+        "bg-white text-base-darkest bg-accent-semi-cool-light border border-accent-semi-cool-500";
       break;
     case "accent-warm-extra-light":
       styling = "bg-accent-warm-extra-light text-base-dark";
       break;
     case "accent-cooler-lightest":
-      styling = "bg-accent-cooler-lightest text-base-darkest border border-accent-cooler-200";
+      styling =
+        "bg-accent-cooler-lightest text-base-darkest border border-accent-cooler-200";
       break;
   }
 
@@ -68,7 +72,9 @@ export const Tag = (props: Props): ReactElement => {
 
   const defaultStyle =
     "flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px";
-  const textWrap = props.isWrappingText ? "text-wrap display-block" : "text-no-wrap";
+  const textWrap = props.isWrappingText
+    ? "text-wrap display-block"
+    : "text-no-wrap";
   const fixedWidth = props.isFixedWidth ? "tag-fixed-width" : "";
   const disableUppercase = props.isLowerCase ? "text-no-uppercase" : "";
   const radius = props.isRadiusMd ? "radius-md" : "";
@@ -91,7 +97,10 @@ export const Tag = (props: Props): ReactElement => {
   }, "");
 
   return (
-    <span className={className} {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}>
+    <span
+      className={className}
+      {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}
+    >
       {props.children}
     </span>
   );

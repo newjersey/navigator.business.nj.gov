@@ -5,10 +5,19 @@ import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { UpdateQueue } from "@/lib/types/types";
 import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { isUserData } from "@/lib/utils/helpers";
-import { getLastCalledWith, getNumberOfMockCalls } from "@/test/helpers/helpers-utilities";
+import {
+  getLastCalledWith,
+  getNumberOfMockCalls,
+} from "@/test/helpers/helpers-utilities";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { createContext, ReactElement, ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useState,
+} from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type GenericData = Record<string, any>;
@@ -42,11 +51,19 @@ type StatefulDataProps = {
   initialData: GenericData | undefined;
 };
 
-export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) => ReactElement) => {
-  type UpdateFn = (newData: GenericData | undefined, config?: { local?: boolean }) => Promise<void>;
+export const WithStatefulData = (
+  spy: jest.Mock
+): ((props: StatefulDataProps) => ReactElement) => {
+  type UpdateFn = (
+    newData: GenericData | undefined,
+    config?: { local?: boolean }
+  ) => Promise<void>;
 
   return ({ children, initialData }: StatefulDataProps): ReactElement => {
-    const update = (newData: GenericData | undefined, config?: { local?: boolean }): Promise<void> => {
+    const update = (
+      newData: GenericData | undefined,
+      config?: { local?: boolean }
+    ): Promise<void> => {
       spy(newData, config);
       setGenericData(newData);
       return Promise.resolve();
@@ -58,8 +75,12 @@ export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) =>
       }
     };
 
-    const [genericData, setGenericData] = useState<GenericData | undefined>(initialData);
-    const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(getUpdateQueue(update));
+    const [genericData, setGenericData] = useState<GenericData | undefined>(
+      initialData
+    );
+    const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(
+      getUpdateQueue(update)
+    );
 
     useEffect(() => {
       if (genericData && isUserData(genericData as UserData | ProfileData)) {
@@ -87,7 +108,10 @@ export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) =>
 
 interface StatefulDataContextType {
   genericData: GenericData | undefined;
-  update: (genericData: GenericData | undefined, config?: { local?: boolean }) => Promise<void>;
+  update: (
+    genericData: GenericData | undefined,
+    config?: { local?: boolean }
+  ) => Promise<void>;
 }
 
 export const StatefulDataContext = createContext<StatefulDataContextType>({

@@ -18,7 +18,9 @@ describe("<CannabisLocationAlert />", () => {
     const business = generateBusiness({ profileData });
 
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business)}
+      >
         <CannabisLocationAlert industryId={industryId} />
       </WithStatefulUserData>
     );
@@ -30,7 +32,9 @@ describe("<CannabisLocationAlert />", () => {
 
   it("is displayed for cannabis businesses", () => {
     renderWithBusiness("cannabis");
-    expect(screen.getByText(Config.profileDefaults.default.cannabisLocationAlert)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.profileDefaults.default.cannabisLocationAlert)
+    ).toBeInTheDocument();
   });
 
   it("is NOT displayed for non-cannabis businesses", () => {
@@ -38,11 +42,15 @@ describe("<CannabisLocationAlert />", () => {
     const industry = filterRandomIndustry(filter);
 
     renderWithBusiness(industry.id);
-    expect(screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)
+    ).not.toBeInTheDocument();
   });
 
   it("is NOT displayed when industry is undefined", () => {
     renderWithBusiness();
-    expect(screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)
+    ).not.toBeInTheDocument();
   });
 });

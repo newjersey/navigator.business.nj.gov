@@ -1,7 +1,12 @@
-import { ProfileDataField, ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
+import {
+  ProfileDataField,
+  ProfileDataFieldProps,
+} from "@/components/data-fields/ProfileDataField";
 import { ReactElement } from "react";
 
-export const BusinessName = (props: Omit<ProfileDataFieldProps, "fieldName">): ReactElement => {
+export const BusinessName = (
+  props: Omit<ProfileDataFieldProps, "fieldName">
+): ReactElement => {
   return (
     <ProfileDataField
       fieldOptions={{

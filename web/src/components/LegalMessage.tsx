@@ -15,7 +15,9 @@ export const LegalMessage = (): ReactElement => {
           <UnStyledButton
             isUnderline
             isIntercomEnabled
-            onClick={analytics.event.roadmap_footer_live_chat_link.click.open_live_chat}
+            onClick={
+              analytics.event.roadmap_footer_live_chat_link.click.open_live_chat
+            }
           >
             {Config.legalMessageDefaults.legalMessageLegalChat}
           </UnStyledButton>

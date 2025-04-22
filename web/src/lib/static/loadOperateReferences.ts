@@ -6,8 +6,20 @@ import fs from "fs";
 import path from "path";
 
 const filingsDir = path.join(process.cwd(), "..", "content", "src", "filings");
-const fundingsDir = path.join(process.cwd(), "..", "content", "src", "fundings");
-const certificationsDir = path.join(process.cwd(), "..", "content", "src", "certifications");
+const fundingsDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "fundings"
+);
+const certificationsDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "certifications"
+);
 
 export const loadOperateReferences = (): Record<string, OperateReference> => {
   const filingFilenames = fs.readdirSync(filingsDir);
@@ -38,14 +50,17 @@ export const loadOperateReferences = (): Record<string, OperateReference> => {
     ...certificationFileContents,
   ];
 
-  return allContents.reduce((acc: Record<string, OperateReference>, curr: FileProperties) => {
-    acc[curr.id] = {
-      name: curr.name,
-      urlSlug: curr.urlSlug,
-      urlPath: `/${curr.origin}/${curr.urlSlug}`,
-    };
-    return acc;
-  }, {} as Record<string, OperateReference>);
+  return allContents.reduce(
+    (acc: Record<string, OperateReference>, curr: FileProperties) => {
+      acc[curr.id] = {
+        name: curr.name,
+        urlSlug: curr.urlSlug,
+        urlPath: `/${curr.origin}/${curr.urlSlug}`,
+      };
+      return acc;
+    },
+    {} as Record<string, OperateReference>
+  );
 };
 
 type FileProperties = {

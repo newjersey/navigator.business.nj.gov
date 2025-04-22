@@ -12,7 +12,9 @@ describe("Onboarding for all sectors as an existing business [feature] [all] [gr
       it(`Onboarding for ${sector.name}`, () => {
         cy.url().should("include", "onboarding?page=1");
         onOnboardingPageExistingBusiness.selectBusinessPersonaRadio("OWNING");
-        onOnboardingPageExistingBusiness.getBusinessPersonaRadio("OWNING").should("be.checked");
+        onOnboardingPageExistingBusiness
+          .getBusinessPersonaRadio("OWNING")
+          .should("be.checked");
 
         cy.url().should("include", "onboarding?page=1");
         onOnboardingPageExistingBusiness.selectIndustrySector(sector.id);
@@ -32,7 +34,9 @@ describe("Onboarding for all sectors as an existing business [feature] [all] [gr
     it("Onboarding for Other Services", () => {
       cy.url().should("include", "onboarding?page=1");
       onOnboardingPageExistingBusiness.selectBusinessPersonaRadio("OWNING");
-      onOnboardingPageExistingBusiness.getBusinessPersonaRadio("OWNING").should("be.checked");
+      onOnboardingPageExistingBusiness
+        .getBusinessPersonaRadio("OWNING")
+        .should("be.checked");
 
       cy.url().should("include", "onboarding?page=1");
       onOnboardingPageExistingBusiness.selectIndustrySector("other-services");

@@ -1,12 +1,20 @@
 import { SectorModal } from "@/components/dashboard/SectorModal";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
-import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared";
+import {
+  createPageHelpers,
+  PageHelpers,
+} from "@/test/pages/onboarding/helpers-onboarding";
+import {
+  generateBusiness,
+  generateProfileData,
+} from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const submitSectorModal = (): void => {
-  fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalSaveButton));
+  fireEvent.click(
+    screen.getByText(Config.dashboardDefaults.sectorModalSaveButton)
+  );
 };
 
 const Config = getMergedConfig();
@@ -21,7 +29,11 @@ describe("<SectorModal />", () => {
 
   const renderSectorModal = (onContinue?: jest.Mock): { page: PageHelpers } => {
     render(
-      <SectorModal open={true} handleClose={(): void => {}} onContinue={onContinue ?? ((): void => {})} />
+      <SectorModal
+        open={true}
+        handleClose={(): void => {}}
+        onContinue={onContinue ?? ((): void => {})}
+      />
     );
     const page = createPageHelpers();
     return { page };
@@ -39,7 +51,9 @@ describe("<SectorModal />", () => {
     useMockBusiness(business);
     renderSectorModal();
 
-    expect((screen.getByLabelText("Sector") as HTMLInputElement)?.value).toEqual("");
+    expect(
+      (screen.getByLabelText("Sector") as HTMLInputElement)?.value
+    ).toEqual("");
   });
 
   it("fires validations when clicking submit", () => {
@@ -61,7 +75,9 @@ describe("<SectorModal />", () => {
     submitSectorModal();
     expect(onContinue).not.toHaveBeenCalled();
     expect(
-      screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+      screen.getByText(
+        Config.profileDefaults.fields.sectorId.default.errorTextRequired
+      )
     ).toBeInTheDocument();
   });
 

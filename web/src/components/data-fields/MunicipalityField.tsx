@@ -22,11 +22,12 @@ export const MunicipalityField = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const fieldName = "municipality";
 
-  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
-    fieldName,
-    DataFormErrorMapContext,
-    props.errorTypes
-  );
+  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } =
+    useFormContextFieldHelpers(
+      fieldName,
+      DataFormErrorMapContext,
+      props.errorTypes
+    );
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["municipality"]["default"] =
     getProfileConfig({

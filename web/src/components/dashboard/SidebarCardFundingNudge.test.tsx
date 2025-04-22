@@ -51,7 +51,10 @@ jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 
 const Config = getMergedConfig();
 
-const mockApiResponse = (userData: UserData, overrides: Partial<Business>): void => {
+const mockApiResponse = (
+  userData: UserData,
+  overrides: Partial<Business>
+): void => {
   mockApi.postTaxFilingsOnboarding.mockResolvedValue({
     ...userData,
     businesses: {
@@ -70,7 +73,11 @@ describe("<SidebarCardFundingNudge />", () => {
 
   const renderWithBusiness = (business: Partial<Business>): void => {
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(generateBusiness(business))}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(
+          generateBusiness(business)
+        )}
+      >
         <SidebarCardFundingNudge card={card} />
       </WithStatefulUserData>
     );
@@ -100,7 +107,9 @@ describe("<SidebarCardFundingNudge />", () => {
       formationData = generateFormationData(
         {
           completedFilingPayment: !!params.formedInNavigator,
-          getFilingResponse: generateGetFilingResponse({ success: params.formedInNavigator }),
+          getFilingResponse: generateGetFilingResponse({
+            success: params.formedInNavigator,
+          }),
         },
         legalStructureId as FormationLegalType
       );
@@ -170,12 +179,16 @@ describe("<SidebarCardFundingNudge />", () => {
           ...business.profileData,
           businessPersona: "STARTING",
         }),
-        preferences: generatePreferences({ visibleSidebarCards: [fundingNudge] }),
+        preferences: generatePreferences({
+          visibleSidebarCards: [fundingNudge],
+        }),
       });
 
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));
       await waitFor(() => {
-        expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.UP_AND_RUNNING);
+        expect(currentBusiness().profileData.operatingPhase).toEqual(
+          OperatingPhaseId.UP_AND_RUNNING
+        );
       });
 
       await waitFor(() => {
@@ -193,16 +206,24 @@ describe("<SidebarCardFundingNudge />", () => {
           ...business.profileData,
           businessPersona: "STARTING",
         }),
-        preferences: generatePreferences({ visibleSidebarCards: [fundingNudge] }),
+        preferences: generatePreferences({
+          visibleSidebarCards: [fundingNudge],
+        }),
       });
 
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));
 
-      expect(screen.getByText(Config.dashboardDefaults.sectorModalTitle)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.dashboardDefaults.sectorModalTitle)
+      ).toBeInTheDocument();
       selectDropdownByValue("Sector", "clean-energy");
-      fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalSaveButton));
+      fireEvent.click(
+        screen.getByText(Config.dashboardDefaults.sectorModalSaveButton)
+      );
       await waitFor(() => {
-        expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.UP_AND_RUNNING);
+        expect(currentBusiness().profileData.operatingPhase).toEqual(
+          OperatingPhaseId.UP_AND_RUNNING
+        );
       });
 
       expect(currentBusiness().profileData.sectorId).toEqual("clean-energy");
@@ -214,14 +235,20 @@ describe("<SidebarCardFundingNudge />", () => {
           businessPersona: "STARTING",
           industryId: "generic",
         }),
-        preferences: generatePreferences({ visibleSidebarCards: [fundingNudge] }),
+        preferences: generatePreferences({
+          visibleSidebarCards: [fundingNudge],
+        }),
       });
 
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));
 
-      expect(screen.getByText(Config.dashboardDefaults.sectorModalTitle)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.dashboardDefaults.sectorModalTitle)
+      ).toBeInTheDocument();
       selectDropdownByValue("Sector", "clean-energy");
-      fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalCancelButton));
+      fireEvent.click(
+        screen.getByText(Config.dashboardDefaults.sectorModalCancelButton)
+      );
       expect(userDataWasNotUpdated()).toEqual(true);
     });
   });
@@ -240,12 +267,16 @@ describe("<SidebarCardFundingNudge />", () => {
           ...business.profileData,
           businessPersona: "STARTING",
         }),
-        preferences: generatePreferences({ visibleSidebarCards: [fundingNudge] }),
+        preferences: generatePreferences({
+          visibleSidebarCards: [fundingNudge],
+        }),
       });
 
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));
       await waitFor(() => {
-        expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.UP_AND_RUNNING);
+        expect(currentBusiness().profileData.operatingPhase).toEqual(
+          OperatingPhaseId.UP_AND_RUNNING
+        );
       });
     });
 
@@ -262,12 +293,16 @@ describe("<SidebarCardFundingNudge />", () => {
           ...business.profileData,
           businessPersona: "STARTING",
         }),
-        preferences: generatePreferences({ visibleSidebarCards: [fundingNudge] }),
+        preferences: generatePreferences({
+          visibleSidebarCards: [fundingNudge],
+        }),
       });
 
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));
       await waitFor(() => {
-        expect(currentBusiness().profileData.operatingPhase).toEqual(OperatingPhaseId.UP_AND_RUNNING);
+        expect(currentBusiness().profileData.operatingPhase).toEqual(
+          OperatingPhaseId.UP_AND_RUNNING
+        );
       });
     });
   });

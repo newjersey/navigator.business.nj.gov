@@ -19,7 +19,11 @@ export const BusinessFormationReviewSection = (props: Props): ReactElement => {
   };
 
   return (
-    <ReviewSection headingText={props.stepName} editHandleButtonClick={onClick} dataTestId={props.dataTestId}>
+    <ReviewSection
+      headingText={props.stepName}
+      editHandleButtonClick={onClick}
+      dataTestId={props.dataTestId}
+    >
       {props.children}
     </ReviewSection>
   );

@@ -1,7 +1,10 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import { arrayOfCountriesObjects as countries, CountriesObject } from "@businessnjgovnavigator/shared/";
+import {
+  arrayOfCountriesObjects as countries,
+  CountriesObject,
+} from "@businessnjgovnavigator/shared/";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 import { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
 
@@ -23,18 +26,26 @@ interface Props {
 export const CountryDropdown = (props: Props): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const handleOnChange = (event: ChangeEvent<unknown>, value: CountriesObject | null): void => {
+  const handleOnChange = (
+    event: ChangeEvent<unknown>,
+    value: CountriesObject | null
+  ): void => {
     props.onSelect(value || undefined);
   };
 
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
     const value = event.target.value;
-    const invalid = props.required ? !value.trim() || getCountry(value) === undefined : false;
+    const invalid = props.required
+      ? !value.trim() || getCountry(value) === undefined
+      : false;
 
     props.onValidation && props.onValidation(props.fieldName, invalid);
   };
 
-  const handleInputChange = (event: ChangeEvent<unknown>, value: string | null): void => {
+  const handleInputChange = (
+    event: ChangeEvent<unknown>,
+    value: string | null
+  ): void => {
     if (value === null || value === "") {
       props.onSelect(undefined);
     } else {
@@ -58,9 +69,13 @@ export const CountryDropdown = (props: Props): ReactElement => {
         })
       : countries;
 
-  const getCountry = (value: string | undefined): CountriesObject | undefined => {
+  const getCountry = (
+    value: string | undefined
+  ): CountriesObject | undefined => {
     return filteredCountries().find((country: CountriesObject) => {
-      return country.name === value || country.shortCode === value?.toUpperCase();
+      return (
+        country.name === value || country.shortCode === value?.toUpperCase()
+      );
     });
   };
 
@@ -72,8 +87,13 @@ export const CountryDropdown = (props: Props): ReactElement => {
       getOptionLabel={(option: CountriesObject): string => {
         return props.useFullName ? option.name : option.shortCode;
       }}
-      isOptionEqualToValue={(option: CountriesObject, value: CountriesObject): boolean => {
-        return option.shortCode === value.shortCode || option.name === value.name;
+      isOptionEqualToValue={(
+        option: CountriesObject,
+        value: CountriesObject
+      ): boolean => {
+        return (
+          option.shortCode === value.shortCode || option.name === value.name
+        );
       }}
       open={open}
       disabled={props.disabled}
@@ -86,7 +106,9 @@ export const CountryDropdown = (props: Props): ReactElement => {
         return (
           <li {..._props}>
             {selected ? (
-              <MenuOptionSelected>{props.useFullName ? option.name : option.shortCode}</MenuOptionSelected>
+              <MenuOptionSelected>
+                {props.useFullName ? option.name : option.shortCode}
+              </MenuOptionSelected>
             ) : (
               <MenuOptionUnselected>
                 {props.useFullName ? option.name : option.shortCode}

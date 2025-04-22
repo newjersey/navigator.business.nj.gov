@@ -35,15 +35,20 @@ const STATUS_TAB_INDEX = 1;
 
 export const ElevatorRegistrationTask = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
-  const callToActionLink = getModifiedTaskContent(roadmap, props.task, "callToActionLink");
-  const [tabIndex, setTabIndex] = useState(APPLICATION_TAB_INDEX);
-  const [error, setError] = useState<ElevatorRegistrationSearchError | undefined>(undefined);
-  const [elevatorRegistrationSummary, setElevatorRegistrationSummary] = useState<
-    ElevatorSafetyRegistrationSummary | undefined
-  >(undefined);
-  const [elevatorSafetyAddress, setElevatorSafetyAddress] = useState<ElevatorSafetyAddress | undefined>(
-    undefined
+  const callToActionLink = getModifiedTaskContent(
+    roadmap,
+    props.task,
+    "callToActionLink"
   );
+  const [tabIndex, setTabIndex] = useState(APPLICATION_TAB_INDEX);
+  const [error, setError] = useState<
+    ElevatorRegistrationSearchError | undefined
+  >(undefined);
+  const [elevatorRegistrationSummary, setElevatorRegistrationSummary] =
+    useState<ElevatorSafetyRegistrationSummary | undefined>(undefined);
+  const [elevatorSafetyAddress, setElevatorSafetyAddress] = useState<
+    ElevatorSafetyAddress | undefined
+  >(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { municipalities } = useContext(HousingMunicipalitiesContext);
   const { Config } = useConfig();
@@ -67,7 +72,10 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
     if (address?.address1 && address?.municipalityExternalId) {
       setIsLoading(true);
       api
-        .checkElevatorRegistrationStatus(address.address1, address.municipalityExternalId)
+        .checkElevatorRegistrationStatus(
+          address.address1,
+          address.municipalityExternalId
+        )
         .then((result: ElevatorSafetyRegistrationSummary) => {
           if (result.lookupStatus === "NO PROPERTY INTERESTS FOUND") {
             setError("NO_PROPERTY_INTEREST_FOUND");
@@ -102,7 +110,9 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
   };
 
   return (
-    <NeedsAccountModalWrapper CMS_ONLY_disable_overlay={props.CMS_ONLY_disable_overlay}>
+    <NeedsAccountModalWrapper
+      CMS_ONLY_disable_overlay={props.CMS_ONLY_disable_overlay}
+    >
       <div className="flex flex-column">
         <TaskHeader task={props.task} />
         <Box sx={{ width: "100%" }}>
@@ -111,18 +121,27 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
               <TabList
                 onChange={onSelectTab}
                 aria-label="Elevator Registration task"
-                sx={{ borderBottom: 1, borderColor: "divider", marginTop: ".25rem", marginLeft: ".5rem" }}
+                sx={{
+                  borderBottom: 1,
+                  borderColor: "divider",
+                  marginTop: ".25rem",
+                  marginLeft: ".5rem",
+                }}
               >
                 <Tab
                   value="0"
                   sx={tabStyle}
-                  label={Config.elevatorRegistrationSearchTask.registrationTab1Text}
+                  label={
+                    Config.elevatorRegistrationSearchTask.registrationTab1Text
+                  }
                   data-testid={"start-application-tab"}
                 />
                 <Tab
                   value="1"
                   sx={tabStyle}
-                  label={Config.elevatorRegistrationSearchTask.registrationTab2Text}
+                  label={
+                    Config.elevatorRegistrationSearchTask.registrationTab2Text
+                  }
                   data-testid={"check-status-tab"}
                 />
               </TabList>
@@ -131,7 +150,9 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
               <div className="margin-top-3">
                 <UnlockedBy task={props.task} />
                 <Content>{props.task.summaryDescriptionMd || ""}</Content>
-                <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
+                <Content>
+                  {getModifiedTaskContent(roadmap, props.task, "contentMd")}
+                </Content>
               </div>
               <CtaContainer>
                 <ActionBarLayout>
@@ -144,7 +165,10 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
                       }}
                       dataTestId="cta-secondary"
                     >
-                      {Config.elevatorRegistrationSearchTask.registrationCallToActionSecondaryText}
+                      {
+                        Config.elevatorRegistrationSearchTask
+                          .registrationCallToActionSecondaryText
+                      }
                     </SecondaryButton>
                   </div>
                   <PrimaryButton
@@ -156,8 +180,14 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
                     isRightMarginRemoved
                     dataTestId="cta-primary"
                   >
-                    {Config.elevatorRegistrationSearchTask.registrationCallToActionPrimaryText}
-                    <Icon iconName="launch" className="usa-icon-button-margin" />
+                    {
+                      Config.elevatorRegistrationSearchTask
+                        .registrationCallToActionPrimaryText
+                    }
+                    <Icon
+                      iconName="launch"
+                      className="usa-icon-button-margin"
+                    />
                   </PrimaryButton>
                 </ActionBarLayout>
               </CtaContainer>

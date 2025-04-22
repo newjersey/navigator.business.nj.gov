@@ -13,17 +13,27 @@ import { InputAdornment, useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 interface Props
-  extends Omit<ProfileDataFieldProps, "fieldName" | "handleChange" | "onValidation" | "inputWidth"> {
+  extends Omit<
+    ProfileDataFieldProps,
+    "fieldName" | "handleChange" | "onValidation" | "inputWidth"
+  > {
   handleChangeOverride?: (value: string) => void;
   getShowHideToggleButton: () => ReactElement;
   taxIdDisplayStatus: TaxIdDisplayStatus;
 }
-export const SingleTaxId = ({ handleChangeOverride, validationText, ...props }: Props): ReactElement => {
+export const SingleTaxId = ({
+  handleChangeOverride,
+  validationText,
+  ...props
+}: Props): ReactElement => {
   const fieldName = "taxId";
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   const { state, setProfileData } = useContext(ProfileDataContext);
-  const { isFormFieldInvalid } = useFormContextFieldHelpers(fieldName, DataFormErrorMapContext);
+  const { isFormFieldInvalid } = useFormContextFieldHelpers(
+    fieldName,
+    DataFormErrorMapContext
+  );
 
   const handleChange = (value: string): void => {
     if (handleChangeOverride) {
@@ -63,7 +73,9 @@ export const SingleTaxId = ({ handleChangeOverride, validationText, ...props }: 
       </WithErrorBar>
 
       {!isTabletAndUp && (
-        <div className="flex flex-justify-center margin-bottom-3">{props.getShowHideToggleButton()}</div>
+        <div className="flex flex-justify-center margin-bottom-3">
+          {props.getShowHideToggleButton()}
+        </div>
       )}
     </div>
   );

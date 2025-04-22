@@ -5,7 +5,9 @@ export type FullNameErrorVariant =
   | "MUST_START_WITH_LETTER"
   | "CONTAINS_ILLEGAL_CHAR";
 
-export const getFullNameErrorVariant = (name: string | undefined): FullNameErrorVariant => {
+export const getFullNameErrorVariant = (
+  name: string | undefined
+): FullNameErrorVariant => {
   if (!name || name.length === 0) {
     return "MISSING";
   }

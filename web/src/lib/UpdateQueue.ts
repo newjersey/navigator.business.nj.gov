@@ -9,13 +9,22 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { EnvironmentData } from "@businessnjgovnavigator/shared/environment";
-import { FormationData, FormationFormData } from "@businessnjgovnavigator/shared/formationData";
+import {
+  FormationData,
+  FormationFormData,
+} from "@businessnjgovnavigator/shared/formationData";
 
 export class UpdateQueueFactory implements UpdateQueue {
   private internalQueue: UserData;
-  private updateFunction: (userData: UserData | undefined, config?: { local?: boolean }) => Promise<void>;
+  private updateFunction: (
+    userData: UserData | undefined,
+    config?: { local?: boolean }
+  ) => Promise<void>;
 
-  constructor(userData: UserData, update: (userData: UserData | undefined) => Promise<void>) {
+  constructor(
+    userData: UserData,
+    update: (userData: UserData | undefined) => Promise<void>
+  ) {
     this.internalQueue = userData;
     this.updateFunction = update;
   }
@@ -95,7 +104,9 @@ export class UpdateQueueFactory implements UpdateQueue {
     return this;
   }
 
-  queueFormationFormData(formationFormData: Partial<FormationFormData>): UpdateQueue {
+  queueFormationFormData(
+    formationFormData: Partial<FormationFormData>
+  ): UpdateQueue {
     this.internalQueue = {
       ...this.internalQueue,
       businesses: {
@@ -185,7 +196,9 @@ export class UpdateQueueFactory implements UpdateQueue {
     return this;
   }
 
-  queueTaskItemChecklist(taskItemChecklist: Record<string, boolean>): UpdateQueue {
+  queueTaskItemChecklist(
+    taskItemChecklist: Record<string, boolean>
+  ): UpdateQueue {
     this.internalQueue = {
       ...this.internalQueue,
       businesses: {

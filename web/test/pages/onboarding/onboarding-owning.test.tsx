@@ -2,7 +2,10 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { templateEval } from "@/lib/utils/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { currentBusiness, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
+import {
+  currentBusiness,
+  setupStatefulUserDataContext,
+} from "@/test/mock/withStatefulUserData";
 import {
   composeOnBoardingTitle,
   mockEmptyApiSignups,
@@ -28,7 +31,9 @@ import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({
+  buildUserRoadmap: jest.fn(),
+}));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postGetAnnualFilings: jest.fn(),
 }));
@@ -61,9 +66,13 @@ describe("onboarding - owning a business", () => {
   describe("page 1", () => {
     it("uses standard template eval for step label", () => {
       renderPage({});
-      const step = templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" });
+      const step = templateEval(Config.onboardingDefaults.stepXTemplate, {
+        currentPage: "1",
+      });
 
-      expect(screen.getByText(composeOnBoardingTitle(step))).toBeInTheDocument();
+      expect(
+        screen.getByText(composeOnBoardingTitle(step))
+      ).toBeInTheDocument();
     });
 
     it("displays the sector dropdown after radio selected", () => {
@@ -79,10 +88,14 @@ describe("onboarding - owning a business", () => {
       fireEvent.click(screen.getByTestId("next"));
       await waitFor(() => {
         expect(
-          screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+          screen.getByText(
+            Config.profileDefaults.fields.sectorId.default.errorTextRequired
+          )
         ).toBeInTheDocument();
       });
-      expect(screen.getByTestId("banner-alert-REQUIRED_REVIEW_INFO_BELOW")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("banner-alert-REQUIRED_REVIEW_INFO_BELOW")
+      ).toBeInTheDocument();
       expect(screen.getByTestId("step-1")).toBeInTheDocument();
     });
 
@@ -94,12 +107,16 @@ describe("onboarding - owning a business", () => {
         }),
       });
 
-      const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
+      const { page } = renderPage({
+        userData: generateUserDataForBusiness(business),
+      });
       page.chooseRadio("business-persona-owning");
       page.chooseRadio("business-persona-starting");
       page.clickNext();
       await waitFor(() => {
-        expect(currentBusiness().profileData.operatingPhase).toBe(OperatingPhaseId.GUEST_MODE);
+        expect(currentBusiness().profileData.operatingPhase).toBe(
+          OperatingPhaseId.GUEST_MODE
+        );
       });
     });
 
@@ -114,9 +131,13 @@ describe("onboarding - owning a business", () => {
       });
 
       expect(
-        screen.queryByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+        screen.queryByText(
+          Config.profileDefaults.fields.sectorId.default.errorTextRequired
+        )
       ).not.toBeInTheDocument();
-      expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("snackbar-alert-ERROR")
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -126,13 +147,18 @@ describe("onboarding - owning a business", () => {
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Sector", "clean-energy");
     const page1 = within(screen.getByTestId("page-1-form"));
-    expect(page1.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
-    expect(page1.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
+    expect(
+      page1.queryByText(Config.onboardingDefaults.nextButtonText)
+    ).not.toBeInTheDocument();
+    expect(
+      page1.getByText(Config.onboardingDefaults.finalNextButtonText)
+    ).toBeInTheDocument();
   });
 
   it("updates the user data after each form page", async () => {
     const initialUserData = createEmptyUserData(generateUser({}));
-    const initialBusiness = initialUserData.businesses[initialUserData.currentBusinessId];
+    const initialBusiness =
+      initialUserData.businesses[initialUserData.currentBusinessId];
     const { page } = renderPage({ userData: initialUserData });
 
     page.chooseRadio("business-persona-owning");
@@ -168,9 +194,14 @@ describe("onboarding - owning a business", () => {
       }),
     });
 
-    const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
+    const { page } = renderPage({
+      userData: generateUserDataForBusiness(business),
+    });
     expect(
-      page.getRadioButton(Config.profileDefaults.fields.businessPersona.default.radioButtonOwningText)
+      page.getRadioButton(
+        Config.profileDefaults.fields.businessPersona.default
+          .radioButtonOwningText
+      )
     ).toBeChecked();
     expect(page.getSectorIDValue()).toEqual("Clean Energy");
   });
@@ -178,17 +209,19 @@ describe("onboarding - owning a business", () => {
   it("updates tax filing data on save", async () => {
     const taxData = generateTaxFilingData({});
 
-    mockApi.postGetAnnualFilings.mockImplementation((userData): Promise<UserData> => {
-      return Promise.resolve({
-        ...userData,
-        businesses: {
-          [userData.currentBusinessId]: {
-            ...userData.businesses[userData.currentBusinessId],
-            taxFilingData: { ...taxData, filings: [] },
+    mockApi.postGetAnnualFilings.mockImplementation(
+      (userData): Promise<UserData> => {
+        return Promise.resolve({
+          ...userData,
+          businesses: {
+            [userData.currentBusinessId]: {
+              ...userData.businesses[userData.currentBusinessId],
+              taxFilingData: { ...taxData, filings: [] },
+            },
           },
-        },
-      });
-    });
+        });
+      }
+    );
 
     const initialBusiness = generateBusiness({
       taxFilingData: taxData,
@@ -198,9 +231,14 @@ describe("onboarding - owning a business", () => {
       onboardingFormProgress: "COMPLETED",
     });
 
-    const { page } = renderPage({ userData: generateUserDataForBusiness(initialBusiness) });
+    const { page } = renderPage({
+      userData: generateUserDataForBusiness(initialBusiness),
+    });
     expect(
-      page.getRadioButton(Config.profileDefaults.fields.businessPersona.default.radioButtonOwningText)
+      page.getRadioButton(
+        Config.profileDefaults.fields.businessPersona.default
+          .radioButtonOwningText
+      )
     ).toBeChecked();
     page.clickNext();
     await waitFor(() => {

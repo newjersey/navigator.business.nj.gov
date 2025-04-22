@@ -65,7 +65,9 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
           completeNewBusinessOnboarding({
             industry: randomNonHomeBasedIndustry(),
           });
-          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
+          completeBusinessStructureTask({
+            legalStructureId: randomPublicFilingLegalStructure(),
+          });
         });
 
         testLocationInThreePlaces();
@@ -76,7 +78,9 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
           completeNewBusinessOnboarding({
             industry: randomHomeBasedIndustry(),
           });
-          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
+          completeBusinessStructureTask({
+            legalStructureId: randomPublicFilingLegalStructure(),
+          });
           selectHomeBased(false);
         });
 
@@ -88,7 +92,9 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
           completeNewBusinessOnboarding({
             industry: randomHomeBasedIndustry(),
           });
-          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
+          completeBusinessStructureTask({
+            legalStructureId: randomPublicFilingLegalStructure(),
+          });
         });
 
         it("can provide location in Formation Date Modal", () => {
@@ -125,15 +131,21 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
     describe("onboarded as STARTING - applicable industry", () => {
       it("shows and answers home-based-business deferred question", () => {
         completeNewBusinessOnboarding({ industry: randomHomeBasedIndustry() });
-        completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
+        completeBusinessStructureTask({
+          legalStructureId: randomPublicFilingLegalStructure(),
+        });
         showsAndAnswersHomeBasedBusinessQuestionOnDashboard();
       });
     });
 
     describe("onboarded as STARTING - non-applicable industry", () => {
       it("does not show pre-answered home-based-business deferred question", () => {
-        completeNewBusinessOnboarding({ industry: randomNonHomeBasedIndustry() });
-        completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
+        completeNewBusinessOnboarding({
+          industry: randomNonHomeBasedIndustry(),
+        });
+        completeBusinessStructureTask({
+          legalStructureId: randomPublicFilingLegalStructure(),
+        });
         hasNonHomeBasedTasks();
         doesNotShowHomeBasedBusinessQuestionAtAll();
       });
@@ -142,7 +154,9 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
     describe("onboarded as FOREIGN", () => {
       describe("remote seller / remote worker", () => {
         it("does not show pre-answered home-based-business deferred question", () => {
-          completeForeignBusinessOnboarding({ foreignBusinessTypeIds: ["employeesInNJ"] });
+          completeForeignBusinessOnboarding({
+            foreignBusinessTypeIds: ["employeesInNJ"],
+          });
           doesNotShowHomeBasedBusinessQuestionAtAll();
         });
       });
@@ -153,7 +167,9 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
             industry: randomHomeBasedIndustry(),
             locationInNewJersey: true,
           });
-          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
+          completeBusinessStructureTask({
+            legalStructureId: randomPublicFilingLegalStructure(),
+          });
           hasNonHomeBasedTasks();
           doesNotShowHomeBasedBusinessQuestionAtAll();
         });
@@ -165,7 +181,9 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
             industry: randomHomeBasedIndustry(),
             locationInNewJersey: false,
           });
-          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
+          completeBusinessStructureTask({
+            legalStructureId: randomPublicFilingLegalStructure(),
+          });
 
           showsAndAnswersHomeBasedBusinessQuestionOnDashboard();
         });
@@ -177,7 +195,9 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
             industry: randomNonHomeBasedIndustry(),
             locationInNewJersey: true,
           });
-          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
+          completeBusinessStructureTask({
+            legalStructureId: randomPublicFilingLegalStructure(),
+          });
 
           hasNonHomeBasedTasks();
           doesNotShowHomeBasedBusinessQuestionAtAll();
@@ -190,7 +210,9 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
             industry: randomNonHomeBasedIndustry(),
             locationInNewJersey: false,
           });
-          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
+          completeBusinessStructureTask({
+            legalStructureId: randomPublicFilingLegalStructure(),
+          });
 
           hasHomeBasedTasks();
           doesNotShowHomeBasedBusinessQuestionAtAll();
@@ -242,13 +264,20 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
     cy.wait(1000);
   };
 
-  const expectLocationQuestionIsCompletedInProfile = (townDisplayName: string): void => {
+  const expectLocationQuestionIsCompletedInProfile = (
+    townDisplayName: string
+  ): void => {
     goToProfile();
-    onProfilePage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
+    onProfilePage
+      .getLocationDropdown()
+      .invoke("prop", "value")
+      .should("contain", townDisplayName);
   };
 
   const goToMercantileTask = (): void => {
-    cy.get('[data-task="town-mercantile-license"]').first().click({ force: true });
+    cy.get('[data-task="town-mercantile-license"]')
+      .first()
+      .click({ force: true });
   };
 
   const selectLocation = (townDisplayName: string): void => {
@@ -257,12 +286,21 @@ describe.skip("Deferred Onboarding [feature] [all] [group5]", () => {
   };
 
   const expectLocationSuccessBanner = (townDisplayName: string): void => {
-    cy.get(`[data-testid="city-success-banner"]`).should("contain", townDisplayName);
+    cy.get(`[data-testid="city-success-banner"]`).should(
+      "contain",
+      townDisplayName
+    );
   };
 
-  const expectLocationSpecificContentInTask = (townDisplayName: string): void => {
-    cy.get('[data-testid="deferred-location-task"]').find(".usa-link").should("have.length", 2);
-    cy.get('[data-testid="deferred-location-task"] .usa-link').first().should("contain", townDisplayName);
+  const expectLocationSpecificContentInTask = (
+    townDisplayName: string
+  ): void => {
+    cy.get('[data-testid="deferred-location-task"]')
+      .find(".usa-link")
+      .should("have.length", 2);
+    cy.get('[data-testid="deferred-location-task"] .usa-link')
+      .first()
+      .should("contain", townDisplayName);
   };
 
   const navigateBackToDashboard = (): void => {

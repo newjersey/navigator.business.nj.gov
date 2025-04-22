@@ -2,14 +2,20 @@ import { convertTaskMd } from "@/lib/utils/markdownReader";
 import fs from "fs";
 import path from "path";
 
-export const loadUrlSlugByFilename = (fileName: string, filingsDir: string): string => {
+export const loadUrlSlugByFilename = (
+  fileName: string,
+  filingsDir: string
+): string => {
   const fullPath = path.join(filingsDir, `${fileName}`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const content = convertTaskMd(fileContents);
   return content.urlSlug;
 };
 
-export const getFileNameByUrlSlug = (currPath: string, urlSlug: string): string => {
+export const getFileNameByUrlSlug = (
+  currPath: string,
+  urlSlug: string
+): string => {
   const fileNames = fs.readdirSync(currPath);
   const matchingFileName = fileNames.find((fileName) => {
     return urlSlug === loadUrlSlugByFilename(fileName, currPath);

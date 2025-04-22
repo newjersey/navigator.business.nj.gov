@@ -8,7 +8,11 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import { FundingUrlSlugParam, loadAllFundingUrlSlugs, loadFundingByUrlSlug } from "@/lib/static/loadFundings";
+import {
+  FundingUrlSlugParam,
+  loadAllFundingUrlSlugs,
+  loadFundingByUrlSlug,
+} from "@/lib/static/loadFundings";
 import { Funding } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";
@@ -46,9 +50,13 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
             {!props.funding.dueDate && props.funding.status && (
               <>
                 {isLargeScreen ? (
-                  <span className="text-base">{props.funding.status.toUpperCase()}</span>
+                  <span className="text-base">
+                    {props.funding.status.toUpperCase()}
+                  </span>
                 ) : (
-                  <div className="text-base margin-top-1">{props.funding.status.toUpperCase()}</div>
+                  <div className="text-base margin-top-1">
+                    {props.funding.status.toUpperCase()}
+                  </div>
                 )}
               </>
             )}
@@ -56,7 +64,9 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
         </div>
         <Content>{props.funding.summaryDescriptionMd}</Content>
         <HorizontalLine />
-        {props.funding.contentMd && <Content>{addNaicsCodeData(props.funding.contentMd)}</Content>}
+        {props.funding.contentMd && (
+          <Content>{addNaicsCodeData(props.funding.contentMd)}</Content>
+        )}
         {props.funding.agency && props.funding.agency.length > 0 ? (
           <>
             <HorizontalLine />
@@ -76,7 +86,10 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
         ) : null}
       </div>
       {props.funding.callToActionLink && props.funding.callToActionText && (
-        <SingleCtaLink link={props.funding.callToActionLink} text={props.funding.callToActionText} />
+        <SingleCtaLink
+          link={props.funding.callToActionLink}
+          text={props.funding.callToActionText}
+        />
       )}
     </>
   );
@@ -103,7 +116,11 @@ export const getStaticPaths = (): GetStaticPathsResult<FundingUrlSlugParam> => {
   };
 };
 
-export const getStaticProps = ({ params }: { params: FundingUrlSlugParam }): GetStaticPropsResult<Props> => {
+export const getStaticProps = ({
+  params,
+}: {
+  params: FundingUrlSlugParam;
+}): GetStaticPropsResult<Props> => {
   return {
     props: {
       funding: loadFundingByUrlSlug(params.fundingUrlSlug),

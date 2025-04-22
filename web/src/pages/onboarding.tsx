@@ -8,7 +8,10 @@ import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonG
 import { onboardingFlows as onboardingFlowObject } from "@/components/onboarding/OnboardingFlows";
 import { ReturnToPreviousBusinessBar } from "@/components/onboarding/ReturnToPreviousBusinessBar";
 import { AuthContext } from "@/contexts/authContext";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -21,7 +24,12 @@ import { addAdditionalBusiness } from "@/lib/domain-logic/addAdditionalBusiness"
 import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { modifyContent } from "@/lib/domain-logic/modifyContent";
-import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
+import {
+  QUERIES,
+  QUERY_PARAMS_VALUES,
+  ROUTES,
+  routeShallowWithQuery,
+} from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import {
   FlowType,
@@ -37,7 +45,11 @@ import {
   setAnalyticsDimensions,
   setRegistrationDimension,
 } from "@/lib/utils/analytics-helpers";
-import { getFlow, OnboardingStatusLookup, scrollToTop } from "@/lib/utils/helpers";
+import {
+  getFlow,
+  OnboardingStatusLookup,
+  scrollToTop,
+} from "@/lib/utils/helpers";
 import {
   evalHeaderStepsTemplate,
   flowQueryParamIsValid,
@@ -69,7 +81,15 @@ import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
 import Link from "next/link";
-import { ReactElement, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import {
+  ReactElement,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { CSSTransition } from "react-transition-group";
 
 interface Props {
@@ -81,7 +101,9 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const router = useRouter();
   const [page, setPage] = useState<Page>({ current: 1, previous: 1 });
-  const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
+  const [profileData, setProfileData] = useState<ProfileData>(
+    createEmptyProfileData()
+  );
   const [error, setError] = useState<ProfileError | undefined>(undefined);
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
   const { updateQueue, createUpdateQueue, hasCompletedFetch } = useUserData();
@@ -90,14 +112,20 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
   const hasHandledRouting = useRef<boolean>(false);
   const { Config } = useConfig();
-  const [isAdditionalBusiness, setIsAdditionalBusiness] = useState<boolean>(false);
-  const [previousBusiness, setPreviousBusiness] = useState<Business | undefined>(undefined);
+  const [isAdditionalBusiness, setIsAdditionalBusiness] =
+    useState<boolean>(false);
+  const [previousBusiness, setPreviousBusiness] = useState<
+    Business | undefined
+  >(undefined);
 
   const configFields = Config.profileDefaults.fields;
   const OnboardingErrorLookup: Record<ProfileError, string> = {
-    REQUIRED_ESSENTIAL_QUESTION: Config.profileDefaults.default.essentialQuestionAlertText,
-    REQUIRED_EXISTING_BUSINESS: configFields.businessPersona.default.errorTextRequired,
-    REQUIRED_FOREIGN_BUSINESS_TYPE: configFields.foreignBusinessTypeIds.default.errorTextRequired,
+    REQUIRED_ESSENTIAL_QUESTION:
+      Config.profileDefaults.default.essentialQuestionAlertText,
+    REQUIRED_EXISTING_BUSINESS:
+      configFields.businessPersona.default.errorTextRequired,
+    REQUIRED_FOREIGN_BUSINESS_TYPE:
+      configFields.foreignBusinessTypeIds.default.errorTextRequired,
     REQUIRED_REVIEW_INFO_BELOW: Config.profileDefaults.default.errorTextBody,
   };
 
@@ -125,7 +153,8 @@ const OnboardingPage = (props: Props): ReactElement => {
     const removeNexusSpecificPages = (): void => {
       if (
         profileData.businessPersona === "FOREIGN" &&
-        determineForeignBusinessType(profileData.foreignBusinessTypeIds) !== "NEXUS"
+        determineForeignBusinessType(profileData.foreignBusinessTypeIds) !==
+          "NEXUS"
       ) {
         removePageFromFlow("industry-page", "FOREIGN");
         removePageFromFlow("municipality-page", "FOREIGN");
@@ -134,7 +163,8 @@ const OnboardingPage = (props: Props): ReactElement => {
 
     const removeNonProfitForDomesticEmployer = (): void => {
       const isDomesticEmployer =
-        profileData.businessPersona === "STARTING" && profileData.industryId === "domestic-employer";
+        profileData.businessPersona === "STARTING" &&
+        profileData.industryId === "domestic-employer";
       if (profileData.businessPersona !== "STARTING") return;
       if (isDomesticEmployer) {
         removePageFromFlow("industry-page", "STARTING");
@@ -160,12 +190,17 @@ const OnboardingPage = (props: Props): ReactElement => {
     setCurrentFlow(getFlow(profileData));
   }, [profileData]);
 
-  const protectUpdateQueueAgainstRaceCondition = (currentUserData: UserData | undefined): boolean => {
+  const protectUpdateQueueAgainstRaceCondition = (
+    currentUserData: UserData | undefined
+  ): boolean => {
     /*
     A user cannot be authenticated and have empty userData. In order to preserve any data that may
     have not yet returned, redirect the user to the landing page and out of the onboarding flow.
     */
-    return state.isAuthenticated === IsAuthenticated.TRUE && currentUserData === undefined;
+    return (
+      state.isAuthenticated === IsAuthenticated.TRUE &&
+      currentUserData === undefined
+    );
   };
 
   useEffect(() => {
@@ -191,16 +226,24 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
 
       if (currentUserData) {
-        const queryAdditionalBusiness = router.query[QUERIES.additionalBusiness] as string;
+        const queryAdditionalBusiness = router.query[
+          QUERIES.additionalBusiness
+        ] as string;
         if (queryAdditionalBusiness === "true") {
           setIsAdditionalBusiness(true);
           setPreviousBusiness(getCurrentBusiness(currentUserData));
-          const userDataWithAdditionalBusiness = addAdditionalBusiness(currentUserData);
-          await updateQueue?.queue(userDataWithAdditionalBusiness).update({ local: true });
+          const userDataWithAdditionalBusiness =
+            addAdditionalBusiness(currentUserData);
+          await updateQueue
+            ?.queue(userDataWithAdditionalBusiness)
+            .update({ local: true });
           currentUserData = userDataWithAdditionalBusiness;
         }
 
-        setProfileData(currentUserData.businesses[currentUserData.currentBusinessId].profileData);
+        setProfileData(
+          currentUserData.businesses[currentUserData.currentBusinessId]
+            .profileData
+        );
         setCurrentFlow(getFlow(currentUserData));
       } else {
         const emptyUser = {
@@ -211,23 +254,34 @@ const OnboardingPage = (props: Props): ReactElement => {
         currentUserData = createEmptyUserData(emptyUser);
         setRegistrationDimension("Began Onboarding");
         localUpdateQueue = await createUpdateQueue(currentUserData);
-        setProfileData(currentUserData.businesses[currentUserData.currentBusinessId].profileData);
+        setProfileData(
+          currentUserData.businesses[currentUserData.currentBusinessId]
+            .profileData
+        );
       }
 
-      const currentBusiness = currentUserData.businesses[currentUserData.currentBusinessId];
+      const currentBusiness =
+        currentUserData.businesses[currentUserData.currentBusinessId];
       if (currentBusiness.onboardingFormProgress === "COMPLETED") {
         await router.replace(ROUTES.dashboard);
         return;
       } else {
         const queryPage = Number(router.query[QUERIES.page]);
-        const queryIndustryId = router.query[QUERIES.industry] as string | undefined;
-        const querySectorId = router.query[QUERIES.sector] as string | undefined;
-        const businessMunicipality = router.query[QUERIES.businessMunicipality] as string | undefined;
+        const queryIndustryId = router.query[QUERIES.industry] as
+          | string
+          | undefined;
+        const querySectorId = router.query[QUERIES.sector] as
+          | string
+          | undefined;
+        const businessMunicipality = router.query[
+          QUERIES.businessMunicipality
+        ] as string | undefined;
         const queryFlow = router.query[QUERIES.flow] as string;
         const utmSource = router.query[QUERIES.utmSource] as string | undefined;
 
         if (businessMunicipality) {
-          const municipalityResult = LookupMunicipalityByName(businessMunicipality);
+          const municipalityResult =
+            LookupMunicipalityByName(businessMunicipality);
           if (municipalityResult.name) {
             const newProfileData: ProfileData = {
               ...currentBusiness.profileData,
@@ -272,7 +326,9 @@ const OnboardingPage = (props: Props): ReactElement => {
           setProfileData(newProfileData);
           localUpdateQueue?.queueProfileData(newProfileData);
           completeOnboarding(newProfileData, localUpdateQueue);
-        } else if (pageQueryParamisValid(onboardingFlows, currentBusiness, queryPage)) {
+        } else if (
+          pageQueryParamisValid(onboardingFlows, currentBusiness, queryPage)
+        ) {
           setPage({ current: queryPage, previous: queryPage - 1 });
         } else if (flowQueryParamIsValid(queryFlow)) {
           await setBusinessPersonaAndRouteToPage(queryFlow, localUpdateQueue);
@@ -323,8 +379,13 @@ const OnboardingPage = (props: Props): ReactElement => {
       onboardingFormProgress: "COMPLETED",
     });
 
-    if (isRemoteWorkerOrSellerBusiness(updateQueue.currentBusiness()) && OperatingPhaseId.GUEST_MODE) {
-      updateQueue.queueProfileData({ operatingPhase: OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE });
+    if (
+      isRemoteWorkerOrSellerBusiness(updateQueue.currentBusiness()) &&
+      OperatingPhaseId.GUEST_MODE
+    ) {
+      updateQueue.queueProfileData({
+        operatingPhase: OperatingPhaseId.GUEST_MODE_WITH_BUSINESS_STRUCTURE,
+      });
     }
 
     if (updateQueue.currentBusiness().profileData.legalStructureId) {
@@ -351,13 +412,15 @@ const OnboardingPage = (props: Props): ReactElement => {
       let newProfileData = profileData;
 
       const hasBusinessPersonaChanged =
-        profileData.businessPersona !== updateQueue.currentBusiness().profileData.businessPersona;
+        profileData.businessPersona !==
+        updateQueue.currentBusiness().profileData.businessPersona;
 
       if (page.current === 1 && hasBusinessPersonaChanged) {
         newProfileData = {
           ...emptyProfileData,
           businessName: profileData.businessName,
-          industryId: profileData.businessPersona === "OWNING" ? "generic" : undefined,
+          industryId:
+            profileData.businessPersona === "OWNING" ? "generic" : undefined,
           homeBasedBusiness: profileData.homeBasedBusiness,
           liquorLicense: profileData.liquorLicense,
           municipality: profileData.municipality,
@@ -365,7 +428,8 @@ const OnboardingPage = (props: Props): ReactElement => {
           requiresCpa: profileData.requiresCpa,
           providesStaffingService: profileData.providesStaffingService,
           certifiedInteriorDesigner: profileData.certifiedInteriorDesigner,
-          realEstateAppraisalManagement: profileData.realEstateAppraisalManagement,
+          realEstateAppraisalManagement:
+            profileData.realEstateAppraisalManagement,
           operatingPhase:
             profileData.businessPersona === "OWNING"
               ? OperatingPhaseId.GUEST_MODE_OWNING
@@ -383,15 +447,24 @@ const OnboardingPage = (props: Props): ReactElement => {
       sendOnboardingOnSubmitEvents(newProfileData, currentPage?.name);
       setAnalyticsDimensions(newProfileData);
 
-      if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NONE") {
+      if (
+        determineForeignBusinessType(profileData.foreignBusinessTypeIds) ===
+        "NONE"
+      ) {
         router &&
           (await router.push({
             pathname: ROUTES.unsupported,
             query: isAdditionalBusiness
-              ? { [QUERIES.additionalBusiness]: "true", [QUERIES.previousBusinessId]: previousBusiness?.id }
+              ? {
+                  [QUERIES.additionalBusiness]: "true",
+                  [QUERIES.previousBusinessId]: previousBusiness?.id,
+                }
               : {},
           }));
-      } else if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
+      } else if (
+        page.current + 1 <=
+        onboardingFlows[currentFlow].pages.length
+      ) {
         updateQueue
           .queueProfileData(newProfileData)
           .update({ local: true })
@@ -414,7 +487,9 @@ const OnboardingPage = (props: Props): ReactElement => {
         if (errors.includes("ALERT_BAR")) {
           setAlert("ERROR");
         }
-        const banner = errors.filter((error) => error !== "ALERT_BAR") as ProfileError[];
+        const banner = errors.filter(
+          (error) => error !== "ALERT_BAR"
+        ) as ProfileError[];
         if (banner.length > 0) {
           setError(banner[0]);
         }
@@ -455,12 +530,16 @@ const OnboardingPage = (props: Props): ReactElement => {
         className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-1"
         data-testid={`step-${page.current.toString()}`}
       >
-        <h1 ref={headerRef}>{`${[pageTitle, evalHeaderStepsTemplate(page)].join(" ")}`}</h1>
+        <h1 ref={headerRef}>{`${[pageTitle, evalHeaderStepsTemplate(page)].join(
+          " "
+        )}`}</h1>
       </div>
     );
   };
   return (
-    <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
+    <MunicipalitiesContext.Provider
+      value={{ municipalities: props.municipalities }}
+    >
       <DataFormErrorMapContext.Provider value={formContextState}>
         <ProfileDataContext.Provider
           value={{
@@ -473,14 +552,21 @@ const OnboardingPage = (props: Props): ReactElement => {
             onBack,
           }}
         >
-          <NextSeo title={getNextSeoTitle(`${pageTitle} ${evalHeaderStepsTemplate(page)}`)} />
+          <NextSeo
+            title={getNextSeoTitle(
+              `${pageTitle} ${evalHeaderStepsTemplate(page)}`
+            )}
+          />
           <PageSkeleton
             showNavBar
             previousBusinessId={previousBusiness?.id}
             logoOnly={previousBusiness ? "NAVIGATOR_LOGO" : undefined}
           >
             <ReturnToPreviousBusinessBar previousBusiness={previousBusiness} />
-            <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
+            <main
+              className="usa-section padding-top-0 desktop:padding-top-8"
+              id="main"
+            >
               <SingleColumnContainer isSmallerWidth>
                 {header()}
                 {!isLargeScreen && <hr />}
@@ -500,7 +586,10 @@ const OnboardingPage = (props: Props): ReactElement => {
                     <>
                       {OnboardingStatusLookup()[alert].body}
                       {OnboardingStatusLookup()[alert] && (
-                        <Link href={ROUTES.dashboard} data-testid={`snackbar-link`}>
+                        <Link
+                          href={ROUTES.dashboard}
+                          data-testid={`snackbar-link`}
+                        >
                           {OnboardingStatusLookup()[alert].link}
                         </Link>
                       )}
@@ -511,33 +600,41 @@ const OnboardingPage = (props: Props): ReactElement => {
                 <UserDataErrorAlert />
               </SingleColumnContainer>
               <div className="slide-container">
-                {onboardingFlows[currentFlow].pages.map((onboardingPage, index) => {
-                  return (
-                    <CSSTransition
-                      key={index}
-                      in={page.current === index + 1}
-                      unmountOnExit
-                      timeout={getTimeout(page, index + 1)}
-                      classNames={`width-100 ${getAnimation(page)}`}
-                    >
-                      <SingleColumnContainer isSmallerWidth>
-                        <form
-                          onSubmit={onSubmit}
-                          className={`usa-prose onboarding-form margin-top-2`}
-                          data-testid={`page-${index + 1}-form`}
-                        >
-                          {onboardingPage.component}
-                          <hr className="margin-top-6 margin-bottom-2" />
-                          <OnboardingButtonGroup
-                            isAdditionalBusiness={isAdditionalBusiness}
-                            isFinal={page.current === onboardingFlows[currentFlow].pages.length}
-                          />
-                          <DevOnlySkipOnboardingButton setPage={setPage} routeToPage={routeToPage} />
-                        </form>
-                      </SingleColumnContainer>
-                    </CSSTransition>
-                  );
-                })}
+                {onboardingFlows[currentFlow].pages.map(
+                  (onboardingPage, index) => {
+                    return (
+                      <CSSTransition
+                        key={index}
+                        in={page.current === index + 1}
+                        unmountOnExit
+                        timeout={getTimeout(page, index + 1)}
+                        classNames={`width-100 ${getAnimation(page)}`}
+                      >
+                        <SingleColumnContainer isSmallerWidth>
+                          <form
+                            onSubmit={onSubmit}
+                            className={`usa-prose onboarding-form margin-top-2`}
+                            data-testid={`page-${index + 1}-form`}
+                          >
+                            {onboardingPage.component}
+                            <hr className="margin-top-6 margin-bottom-2" />
+                            <OnboardingButtonGroup
+                              isAdditionalBusiness={isAdditionalBusiness}
+                              isFinal={
+                                page.current ===
+                                onboardingFlows[currentFlow].pages.length
+                              }
+                            />
+                            <DevOnlySkipOnboardingButton
+                              setPage={setPage}
+                              routeToPage={routeToPage}
+                            />
+                          </form>
+                        </SingleColumnContainer>
+                      </CSSTransition>
+                    );
+                  }
+                )}
               </div>
             </main>
           </PageSkeleton>

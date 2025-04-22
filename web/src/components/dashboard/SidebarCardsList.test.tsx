@@ -1,14 +1,28 @@
-import { SidebarCardsList, SidebarCardsListProps } from "@/components/dashboard/SidebarCardsList";
+import {
+  SidebarCardsList,
+  SidebarCardsListProps,
+} from "@/components/dashboard/SidebarCardsList";
 import { getMergedConfig } from "@/contexts/configContext";
 import { getForYouCardCount } from "@/lib/domain-logic/sidebarCardsHelpers";
 import analytics from "@/lib/utils/analytics";
 import * as helpers from "@/lib/utils/helpers";
 import { removeMarkdownFormatting } from "@/lib/utils/helpers";
-import { generateCertification, generateFunding, generateSidebarCardContent } from "@/test/factories";
+import {
+  generateCertification,
+  generateFunding,
+  generateSidebarCardContent,
+} from "@/test/factories";
 import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
-import { OperatingPhaseId, OperatingPhases, generateUser } from "@businessnjgovnavigator/shared/";
+import {
+  OperatingPhaseId,
+  OperatingPhases,
+  generateUser,
+} from "@businessnjgovnavigator/shared/";
 import { ForeignBusinessTypeId } from "@businessnjgovnavigator/shared/profileData";
-import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generateProfileData,
+} from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -59,20 +73,26 @@ const getOnlyDisplayCertificationOperatingPhase = (): OperatingPhaseId => {
   return phase.id;
 };
 
-const getDisplayCertificationAndFundingOperatingPhase = (): OperatingPhaseId => {
-  const phase = OperatingPhases.find((op): boolean => {
-    return op.displayFundings && op.displayCertifications;
-  });
-  if (!phase)
-    throw new Error("Can't find operating phase with Display Certification and Display Funding as true");
-  return phase.id;
-};
+const getDisplayCertificationAndFundingOperatingPhase =
+  (): OperatingPhaseId => {
+    const phase = OperatingPhases.find((op): boolean => {
+      return op.displayFundings && op.displayCertifications;
+    });
+    if (!phase)
+      throw new Error(
+        "Can't find operating phase with Display Certification and Display Funding as true"
+      );
+    return phase.id;
+  };
 
 const getDisplayCertificationOperatingPhase = (): OperatingPhaseId => {
   const phase = OperatingPhases.find((op): boolean => {
     return op.displayCertifications;
   });
-  if (!phase) throw new Error("Can't find operating phase with Display Certification as true");
+  if (!phase)
+    throw new Error(
+      "Can't find operating phase with Display Certification as true"
+    );
   return phase.id;
 };
 
@@ -80,18 +100,22 @@ const getDisplayFundingOperatingPhase = (): OperatingPhaseId => {
   const phase = OperatingPhases.find((op): boolean => {
     return op.displayFundings;
   });
-  if (!phase) throw new Error("Can't find operating phase with Display Funding as true");
+  if (!phase)
+    throw new Error("Can't find operating phase with Display Funding as true");
   return phase.id;
 };
 
-const getDontDisplayCertificationAndFundingOperatingPhase = (): OperatingPhaseId => {
-  const phase = OperatingPhases.find((op): boolean => {
-    return !op.displayFundings && op.displayCertifications;
-  });
-  if (!phase)
-    throw new Error("Can't find operating phase with Display Certification and Display Funding as false");
-  return phase.id;
-};
+const getDontDisplayCertificationAndFundingOperatingPhase =
+  (): OperatingPhaseId => {
+    const phase = OperatingPhases.find((op): boolean => {
+      return !op.displayFundings && op.displayCertifications;
+    });
+    if (!phase)
+      throw new Error(
+        "Can't find operating phase with Display Certification and Display Funding as false"
+      );
+    return phase.id;
+  };
 
 describe("<SidebarCardsList />", () => {
   beforeEach(() => {
@@ -128,7 +152,9 @@ describe("<SidebarCardsList />", () => {
     renderComponent({ displayFundingCards: true });
     fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
     fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
-    expect(mockAnalytics.event.for_you_card_unhide_button.click.unhide_cards).toHaveBeenCalledTimes(1);
+    expect(
+      mockAnalytics.event.for_you_card_unhide_button.click.unhide_cards
+    ).toHaveBeenCalledTimes(1);
   });
 
   it("fires unhide_cards analytics when accordion is opened when displayCertifications is true", () => {
@@ -142,7 +168,9 @@ describe("<SidebarCardsList />", () => {
     renderComponent({ displayCertificationsCards: true });
     fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
     fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
-    expect(mockAnalytics.event.for_you_card_unhide_button.click.unhide_cards).toHaveBeenCalledTimes(1);
+    expect(
+      mockAnalytics.event.for_you_card_unhide_button.click.unhide_cards
+    ).toHaveBeenCalledTimes(1);
   });
 
   describe("Empty State Messages", () => {
@@ -167,7 +195,9 @@ describe("<SidebarCardsList />", () => {
 
           renderComponent({ isRemoteSellerWorker: true });
           expect(
-            screen.getAllByText(Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText)[0]
+            screen.getAllByText(
+              Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText
+            )[0]
           ).toBeInTheDocument();
         }
       );
@@ -186,7 +216,9 @@ describe("<SidebarCardsList />", () => {
 
           renderComponent({ isRemoteSellerWorker: true });
           expect(
-            screen.getAllByText(Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText)[0]
+            screen.getAllByText(
+              Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText
+            )[0]
           ).toBeInTheDocument();
         }
       );
@@ -210,7 +242,9 @@ describe("<SidebarCardsList />", () => {
         });
 
         const emptyMessage = screen.getByTestId("empty-for-you-message");
-        const sanitizedString = removeMarkdownFormatting(Config.dashboardDefaults.emptyOpportunitiesHeader);
+        const sanitizedString = removeMarkdownFormatting(
+          Config.dashboardDefaults.emptyOpportunitiesHeader
+        );
         const combinedMessage = `${sanitizedString}${Config.dashboardDefaults.emptyOpportunitiesText}`;
         expect(emptyMessage).toHaveTextContent(combinedMessage);
       });
@@ -230,7 +264,9 @@ describe("<SidebarCardsList />", () => {
           displayCertificationsCards: true,
         });
 
-        expect(screen.queryByTestId("empty-for-you-message")).not.toBeInTheDocument();
+        expect(
+          screen.queryByTestId("empty-for-you-message")
+        ).not.toBeInTheDocument();
       });
     });
 
@@ -239,14 +275,17 @@ describe("<SidebarCardsList />", () => {
         useMockBusiness({
           profileData: {
             ...generateProfileData({
-              operatingPhase: getDontDisplayCertificationAndFundingOperatingPhase(),
+              operatingPhase:
+                getDontDisplayCertificationAndFundingOperatingPhase(),
             }),
           },
         });
 
         renderComponent({});
         const emptyMessage = screen.getByTestId("empty-for-you-message");
-        const sanitizedString = removeMarkdownFormatting(Config.dashboardDefaults.completeRequiredTasksText);
+        const sanitizedString = removeMarkdownFormatting(
+          Config.dashboardDefaults.completeRequiredTasksText
+        );
         expect(emptyMessage).toHaveTextContent(sanitizedString);
       });
 
@@ -259,7 +298,9 @@ describe("<SidebarCardsList />", () => {
           },
         });
         renderComponent({ displayFundingCards: true });
-        expect(screen.queryByTestId("empty-for-you-message")).not.toBeInTheDocument();
+        expect(
+          screen.queryByTestId("empty-for-you-message")
+        ).not.toBeInTheDocument();
       });
 
       it("does not display when displayCertifications is true", () => {
@@ -271,7 +312,9 @@ describe("<SidebarCardsList />", () => {
           },
         });
         renderComponent({ displayCertificationsCards: true });
-        expect(screen.queryByTestId("empty-for-you-message")).not.toBeInTheDocument();
+        expect(
+          screen.queryByTestId("empty-for-you-message")
+        ).not.toBeInTheDocument();
       });
 
       it("does not display when there are side bar cards", () => {
@@ -281,7 +324,9 @@ describe("<SidebarCardsList />", () => {
           }),
         ];
         renderComponent({ sideBarCards });
-        expect(screen.queryByTestId("empty-for-you-message")).not.toBeInTheDocument();
+        expect(
+          screen.queryByTestId("empty-for-you-message")
+        ).not.toBeInTheDocument();
       });
     });
   });
@@ -364,7 +409,11 @@ describe("<SidebarCardsList />", () => {
       renderComponent({
         fundings: [genericFunding],
         certifications: [genericCertification],
-        cardCount: getForYouCardCount(mockBusiness, [genericCertification], [genericFunding]),
+        cardCount: getForYouCardCount(
+          mockBusiness,
+          [genericCertification],
+          [genericFunding]
+        ),
       });
       const forYouCounter = screen.getByTestId("for-you-counter").textContent;
       expect(forYouCounter).toEqual("(2)");

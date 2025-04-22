@@ -32,7 +32,9 @@ describe("<ElevatorRegistrationTask />", () => {
 
   const renderTask = (): void => {
     render(
-      <HousingMunicipalitiesContext.Provider value={{ municipalities: [municipality] }}>
+      <HousingMunicipalitiesContext.Provider
+        value={{ municipalities: [municipality] }}
+      >
         <ThemeProvider theme={createTheme()}>
           <ElevatorRegistrationTask task={task} />
         </ThemeProvider>
@@ -62,7 +64,11 @@ describe("<ElevatorRegistrationTask />", () => {
           legacy_event_action: "click",
         })
       );
-      expect(mockWindowOpen).toHaveBeenCalledWith(task.callToActionLink, "_blank", "noopener noreferrer");
+      expect(mockWindowOpen).toHaveBeenCalledWith(
+        task.callToActionLink,
+        "_blank",
+        "noopener noreferrer"
+      );
     });
 
     it("can get to second tab by clicking tab", () => {
@@ -73,7 +79,8 @@ describe("<ElevatorRegistrationTask />", () => {
       expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith(
         expect.objectContaining({
           event: "task_tab_clicked",
-          legacy_event_category: "check_my_elevator_application_status_tab_click",
+          legacy_event_category:
+            "check_my_elevator_application_status_tab_click",
           legacy_event_action: "click",
         })
       );
@@ -102,7 +109,9 @@ describe("<ElevatorRegistrationTask />", () => {
     it("displays error alert when non-optional fields are left blank", async () => {
       renderTask();
       fireEvent.click(screen.getByTestId("cta-secondary"));
-      expect(screen.queryByTestId("error-alert-FIELDS_REQUIRED")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("error-alert-FIELDS_REQUIRED")
+      ).not.toBeInTheDocument();
       fireEvent.submit(screen.getByTestId("check-status-submit"));
 
       expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith(
@@ -121,7 +130,9 @@ describe("<ElevatorRegistrationTask />", () => {
       );
 
       await waitFor(() => {
-        expect(screen.getByTestId("error-alert-FIELDS_REQUIRED")).toBeInTheDocument();
+        expect(
+          screen.getByTestId("error-alert-FIELDS_REQUIRED")
+        ).toBeInTheDocument();
       });
     });
 
@@ -130,11 +141,16 @@ describe("<ElevatorRegistrationTask />", () => {
       await getToSearchTab();
       fillOutSearchTab("123 street", "Town Name");
 
-      expect(screen.queryByTestId("error-alert-NO_PROPERTY_INTEREST_FOUND")).not.toBeInTheDocument();
-      const noPropertyInterestResponse = generateElevatorSafetyRegistrationSummary({
-        lookupStatus: "NO PROPERTY INTERESTS FOUND",
-      });
-      mockApi.checkElevatorRegistrationStatus.mockResolvedValue(noPropertyInterestResponse);
+      expect(
+        screen.queryByTestId("error-alert-NO_PROPERTY_INTEREST_FOUND")
+      ).not.toBeInTheDocument();
+      const noPropertyInterestResponse =
+        generateElevatorSafetyRegistrationSummary({
+          lookupStatus: "NO PROPERTY INTERESTS FOUND",
+        });
+      mockApi.checkElevatorRegistrationStatus.mockResolvedValue(
+        noPropertyInterestResponse
+      );
       fireEvent.submit(screen.getByTestId("check-status-submit"));
 
       expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith(
@@ -146,7 +162,9 @@ describe("<ElevatorRegistrationTask />", () => {
       );
 
       await waitFor(() => {
-        expect(screen.getByTestId("error-alert-NO_PROPERTY_INTEREST_FOUND")).toBeInTheDocument();
+        expect(
+          screen.getByTestId("error-alert-NO_PROPERTY_INTEREST_FOUND")
+        ).toBeInTheDocument();
       });
     });
 
@@ -155,14 +173,20 @@ describe("<ElevatorRegistrationTask />", () => {
       await getToSearchTab();
       fillOutSearchTab("123 street", "Town Name");
 
-      expect(screen.queryByTestId("error-alert-NO_ELEVATOR_REGISTRATIONS_FOUND")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("error-alert-NO_ELEVATOR_REGISTRATIONS_FOUND")
+      ).not.toBeInTheDocument();
       const noRegistrationResponse = generateElevatorSafetyRegistrationSummary({
         lookupStatus: "NO REGISTRATIONS FOUND",
       });
-      mockApi.checkElevatorRegistrationStatus.mockResolvedValue(noRegistrationResponse);
+      mockApi.checkElevatorRegistrationStatus.mockResolvedValue(
+        noRegistrationResponse
+      );
       fireEvent.submit(screen.getByTestId("check-status-submit"));
       await waitFor(() => {
-        expect(screen.getByTestId("error-alert-NO_ELEVATOR_REGISTRATIONS_FOUND")).toBeInTheDocument();
+        expect(
+          screen.getByTestId("error-alert-NO_ELEVATOR_REGISTRATIONS_FOUND")
+        ).toBeInTheDocument();
       });
     });
   });
@@ -196,7 +220,9 @@ describe("<ElevatorRegistrationTask />", () => {
       });
 
       expect(screen.getByTestId("registration-0-date")).toBeInTheDocument();
-      expect(screen.getByTestId("registration-0-device-count")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("registration-0-device-count")
+      ).toBeInTheDocument();
       expect(screen.getByTestId("registration-0-status")).toBeInTheDocument();
     });
 
@@ -224,7 +250,9 @@ describe("<ElevatorRegistrationTask />", () => {
       await getToSearchTab();
       fillOutSearchTab("123 street", "Town Name");
 
-      const incompleteResponse = generateElevatorSafetyRegistration({ status: "Incomplete" });
+      const incompleteResponse = generateElevatorSafetyRegistration({
+        status: "Incomplete",
+      });
       const response = generateElevatorSafetyRegistrationSummary({
         registrations: [incompleteResponse],
       });
@@ -233,7 +261,9 @@ describe("<ElevatorRegistrationTask />", () => {
       await waitFor(() => {
         expect(screen.getByTestId("registration-0")).toBeInTheDocument();
       });
-      expect(screen.getByTestId("registration-0-informational-message")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("registration-0-informational-message")
+      ).toBeInTheDocument();
     });
 
     it("shows informational message for in review status", async () => {
@@ -241,7 +271,9 @@ describe("<ElevatorRegistrationTask />", () => {
       await getToSearchTab();
       fillOutSearchTab("123 street", "Town Name");
 
-      const inReviewResponse = generateElevatorSafetyRegistration({ status: "In Review" });
+      const inReviewResponse = generateElevatorSafetyRegistration({
+        status: "In Review",
+      });
       const response = generateElevatorSafetyRegistrationSummary({
         registrations: [inReviewResponse],
       });
@@ -250,7 +282,9 @@ describe("<ElevatorRegistrationTask />", () => {
       await waitFor(() => {
         expect(screen.getByTestId("registration-0")).toBeInTheDocument();
       });
-      expect(screen.getByTestId("registration-0-informational-message")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("registration-0-informational-message")
+      ).toBeInTheDocument();
     });
 
     it("shows informational message for rejected status", async () => {
@@ -258,7 +292,9 @@ describe("<ElevatorRegistrationTask />", () => {
       await getToSearchTab();
       fillOutSearchTab("123 street", "Town Name");
 
-      const rejectedResponse = generateElevatorSafetyRegistration({ status: "Rejected" });
+      const rejectedResponse = generateElevatorSafetyRegistration({
+        status: "Rejected",
+      });
       const response = generateElevatorSafetyRegistrationSummary({
         registrations: [rejectedResponse],
       });
@@ -267,7 +303,9 @@ describe("<ElevatorRegistrationTask />", () => {
       await waitFor(() => {
         expect(screen.getByTestId("registration-0")).toBeInTheDocument();
       });
-      expect(screen.getByTestId("registration-0-informational-message")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("registration-0-informational-message")
+      ).toBeInTheDocument();
     });
 
     it("shows informational message for returned status", async () => {
@@ -275,7 +313,9 @@ describe("<ElevatorRegistrationTask />", () => {
       await getToSearchTab();
       fillOutSearchTab("123 street", "Town Name");
 
-      const returnedResponse = generateElevatorSafetyRegistration({ status: "Returned" });
+      const returnedResponse = generateElevatorSafetyRegistration({
+        status: "Returned",
+      });
       const response = generateElevatorSafetyRegistrationSummary({
         registrations: [returnedResponse],
       });
@@ -284,7 +324,9 @@ describe("<ElevatorRegistrationTask />", () => {
       await waitFor(() => {
         expect(screen.getByTestId("registration-0")).toBeInTheDocument();
       });
-      expect(screen.getByTestId("registration-0-informational-message")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("registration-0-informational-message")
+      ).toBeInTheDocument();
     });
 
     it("does not show informational message for approved status", async () => {
@@ -301,7 +343,9 @@ describe("<ElevatorRegistrationTask />", () => {
       await waitFor(() => {
         expect(screen.getByTestId("registration-0")).toBeInTheDocument();
       });
-      expect(screen.queryByTestId("registration-0-informational-message")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("registration-0-informational-message")
+      ).not.toBeInTheDocument();
     });
   });
 

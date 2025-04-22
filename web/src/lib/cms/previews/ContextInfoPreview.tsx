@@ -7,7 +7,9 @@ import { ReactElement } from "react";
 const ContextInfoPreview = (props: PreviewProps): ReactElement => {
   const ref = usePreviewRef(props);
 
-  const { body, ...data } = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));
+  const { body, ...data } = JSON.parse(
+    JSON.stringify(props.entry.getIn(["data"]))
+  );
   const contextualInfo: ContextualInfo = { markdown: body ?? "", ...data };
 
   return (

@@ -2,7 +2,10 @@ import { TaskPageSwitchComponent } from "@/components/TaskPageSwitchComponent";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { createEmptyTaskDisplayContent, TaskWithLicenseTaskId } from "@/lib/types/types";
+import {
+  createEmptyTaskDisplayContent,
+  TaskWithLicenseTaskId,
+} from "@/lib/types/types";
 import { generateRoadmap } from "@/test/factories";
 import {
   generateBusiness,
@@ -26,9 +29,15 @@ const TaskPreview = (props: PreviewProps): ReactElement => {
   const roadmap = generateRoadmap({});
 
   return (
-    <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+    <div
+      className="cms"
+      ref={ref}
+      style={{ margin: 40, pointerEvents: "none" }}
+    >
       <div>
-        <div>This file is mapped to the following license (not enabled if blank):</div>
+        <div>
+          This file is mapped to the following license (not enabled if blank):
+        </div>
         <div className="margin-bottom-10 text-bold">{task?.licenseName}</div>
       </div>
 

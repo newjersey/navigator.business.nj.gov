@@ -15,15 +15,25 @@ const DashboardModalsPreview = (props: PreviewProps): ReactElement => {
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <button className="margin-2" onClick={(): void => setCongratsModalOpen(true)}>
+      <button
+        className="margin-2"
+        onClick={(): void => setCongratsModalOpen(true)}
+      >
         Open Congratulatory Modal
       </button>
 
-      <button className="margin-2" onClick={(): void => setSectorModalOpen(true)}>
+      <button
+        className="margin-2"
+        onClick={(): void => setSectorModalOpen(true)}
+      >
         Open Sector Modal
       </button>
 
-      <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+      <div
+        className="cms"
+        ref={ref}
+        style={{ margin: 40, pointerEvents: "none" }}
+      >
         <CongratulatoryModal
           nextSectionType="START"
           open={congratsModalOpen}

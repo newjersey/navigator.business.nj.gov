@@ -1,7 +1,12 @@
-import { ProfileDataField, ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
+import {
+  ProfileDataField,
+  ProfileDataFieldProps,
+} from "@/components/data-fields/ProfileDataField";
 import { ReactElement } from "react";
 
-export const TradeName = (props: Omit<ProfileDataFieldProps, "fieldName" | "inputWidth">): ReactElement => {
+export const TradeName = (
+  props: Omit<ProfileDataFieldProps, "fieldName" | "inputWidth">
+): ReactElement => {
   return (
     <ProfileDataField
       fieldName="tradeName"

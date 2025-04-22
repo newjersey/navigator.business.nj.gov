@@ -1,4 +1,7 @@
-import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "@/lib/static/helpers";
+import {
+  getFileNameByUrlSlug,
+  loadUrlSlugByFilename,
+} from "@/lib/static/helpers";
 import { AnytimeActionLicenseReinstatement } from "@/lib/types/types";
 import { convertAnytimeActionLicenseReinstatementMd } from "@/lib/utils/markdownReader";
 import fs from "fs";
@@ -17,13 +20,14 @@ export type AnytimeActionLicenseReinstatementUrlSlugParam = {
   anytimeActionLicenseReinstatementUrlSlug: string;
 };
 
-export const loadAllAnytimeActionLicenseReinstatements = (): AnytimeActionLicenseReinstatement[] => {
-  const fileNames = fs.readdirSync(anytimeActionsLicenseReinstatementsDir);
+export const loadAllAnytimeActionLicenseReinstatements =
+  (): AnytimeActionLicenseReinstatement[] => {
+    const fileNames = fs.readdirSync(anytimeActionsLicenseReinstatementsDir);
 
-  return fileNames.map((fileName) => {
-    return loadAnytimeActionLicenseReinstatementsByFileName(fileName);
-  });
-};
+    return fileNames.map((fileName) => {
+      return loadAnytimeActionLicenseReinstatementsByFileName(fileName);
+    });
+  };
 
 export const loadAllAnytimeActionLicenseReinstatementsUrlSlugs =
   (): PathParams<AnytimeActionLicenseReinstatementUrlSlugParam>[] => {
@@ -43,16 +47,25 @@ export const loadAllAnytimeActionLicenseReinstatementsUrlSlugs =
 export const loadAnytimeActionLicenseReinstatementsByUrlSlug = (
   urlSlug: string
 ): AnytimeActionLicenseReinstatement => {
-  const matchingFileName = getFileNameByUrlSlug(anytimeActionsLicenseReinstatementsDir, urlSlug);
+  const matchingFileName = getFileNameByUrlSlug(
+    anytimeActionsLicenseReinstatementsDir,
+    urlSlug
+  );
   return loadAnytimeActionLicenseReinstatementsByFileName(matchingFileName);
 };
 
 const loadAnytimeActionLicenseReinstatementsByFileName = (
   fileName: string
 ): AnytimeActionLicenseReinstatement => {
-  const fullPath = path.join(anytimeActionsLicenseReinstatementsDir, `${fileName}`);
+  const fullPath = path.join(
+    anytimeActionsLicenseReinstatementsDir,
+    `${fileName}`
+  );
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
   const fileNameWithoutMd = fileName.split(".md")[0];
-  return convertAnytimeActionLicenseReinstatementMd(fileContents, fileNameWithoutMd);
+  return convertAnytimeActionLicenseReinstatementMd(
+    fileContents,
+    fileNameWithoutMd
+  );
 };

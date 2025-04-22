@@ -12,7 +12,9 @@ export const LandingPageTiles = (): ReactElement => {
 
   const landingPageConfig = Config.landingPage;
 
-  const setFlowAndRouteUser = (flow: "starting" | "out-of-state" | "up-and-running"): void => {
+  const setFlowAndRouteUser = (
+    flow: "starting" | "out-of-state" | "up-and-running"
+  ): void => {
     router &&
       routeWithQuery(router, {
         path: ROUTES.onboarding,
@@ -79,13 +81,19 @@ export const LandingPageTiles = (): ReactElement => {
 
   return (
     <div className="display-flex fjc fac padding-top-2 dekstop:padding-bottom-4 padding-bottom-10">
-      <div className={"landing-grid-container padding-x-6 desktop:grid-container-widescreen"}>
+      <div
+        className={
+          "landing-grid-container padding-x-6 desktop:grid-container-widescreen"
+        }
+      >
         {actionTiles.map((actionTile, index) => {
           const actionTileObj = {
             ...actionTile,
             key: `landing-page-tiles-key-${index}`,
           };
-          return <LandingPageActionTile {...actionTileObj} key={actionTileObj.key} />;
+          return (
+            <LandingPageActionTile {...actionTileObj} key={actionTileObj.key} />
+          );
         })}
       </div>
     </div>

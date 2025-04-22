@@ -9,7 +9,10 @@ export const ReviewRegisteredAgent = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
 
   return (
-    <ReviewSubSection header={Config.formation.registeredAgent.label} marginOverride="margin-top-0">
+    <ReviewSubSection
+      header={Config.formation.registeredAgent.label}
+      marginOverride="margin-top-0"
+    >
       {state.formationFormData.agentNumberOrManual === "NUMBER" && (
         <ReviewLineItem
           label={Config.formation.fields.agentNumber.label}
@@ -45,7 +48,10 @@ export const ReviewRegisteredAgent = (): ReactElement => {
             label={Config.formation.fields.agentOfficeAddressCity.label}
             value={state.formationFormData.agentOfficeAddressCity}
           />
-          <ReviewLineItem label={Config.formation.fields.agentOfficeAddressState.label} value={"NJ"} />
+          <ReviewLineItem
+            label={Config.formation.fields.agentOfficeAddressState.label}
+            value={"NJ"}
+          />
           <ReviewLineItem
             label={Config.formation.fields.agentOfficeAddressZipCode.label}
             value={state.formationFormData.agentOfficeAddressZipCode}

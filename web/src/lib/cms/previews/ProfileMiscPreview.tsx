@@ -7,7 +7,10 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import Profile from "@/pages/profile";
-import { createEmptyProfileData, generateBusiness } from "@businessnjgovnavigator/shared";
+import {
+  createEmptyProfileData,
+  generateBusiness,
+} from "@businessnjgovnavigator/shared";
 import { ReactElement, useState } from "react";
 
 const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
@@ -25,7 +28,11 @@ const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+      <div
+        className="cms"
+        ref={ref}
+        style={{ margin: 40, pointerEvents: "none" }}
+      >
         <Heading level={2}>Escape Modal:</Heading>
         <div ref={ref} style={{ pointerEvents: "all" }}>
           <button onClick={(): void => setModalOpen(true)}>Open Modal</button>
@@ -46,7 +53,9 @@ const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
         <hr className="margin-y-4" />
 
         <Heading level={2}>Essential Question Alert Banner</Heading>
-        <Alert variant="error">{config.profileDefaults.default.essentialQuestionAlertText}</Alert>
+        <Alert variant="error">
+          {config.profileDefaults.default.essentialQuestionAlertText}
+        </Alert>
 
         <hr className="margin-y-4" />
         <Heading level={2}>Essential Question Inline Error Text</Heading>
@@ -65,7 +74,9 @@ const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
         <hr className="margin-y-4" />
 
         <Heading level={2}>Cannabis Location Alert: </Heading>
-        <Alert variant="warning">{config.profileDefaults.default.cannabisLocationAlert}</Alert>
+        <Alert variant="warning">
+          {config.profileDefaults.default.cannabisLocationAlert}
+        </Alert>
       </div>
     </ConfigContext.Provider>
   );

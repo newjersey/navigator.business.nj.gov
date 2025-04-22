@@ -12,14 +12,18 @@ export const getSearchValue = (): string => {
 };
 
 export const fillText = (value: string, dba?: { dba: boolean }): void => {
-  fireEvent.change(dba?.dba ? dbaInputField() : inputField(), { target: { value: value } });
+  fireEvent.change(dba?.dba ? dbaInputField() : inputField(), {
+    target: { value: value },
+  });
 };
 
 export const searchAndGetValue = async (
   nameAvailability: Partial<NameAvailability>,
   dba?: { dba: boolean }
 ): Promise<void> => {
-  const returnedPromise = Promise.resolve(generateBusinessNameAvailability(nameAvailability));
+  const returnedPromise = Promise.resolve(
+    generateBusinessNameAvailability(nameAvailability)
+  );
   mockApi.searchBusinessName.mockReturnValue(returnedPromise);
   fireEvent.click(dba?.dba ? dbaSearchButton() : searchButton());
   await act(() => {
@@ -27,12 +31,18 @@ export const searchAndGetValue = async (
   });
 };
 
-export const mockSearchReturnValue = (nameAvailability: Partial<NameAvailability>): void => {
-  const returnedPromise = Promise.resolve(generateBusinessNameAvailability(nameAvailability));
+export const mockSearchReturnValue = (
+  nameAvailability: Partial<NameAvailability>
+): void => {
+  const returnedPromise = Promise.resolve(
+    generateBusinessNameAvailability(nameAvailability)
+  );
   mockApi.searchBusinessName.mockReturnValue(returnedPromise);
 };
 
-export const searchAndReject = async (dba?: { dba: boolean }): Promise<void> => {
+export const searchAndReject = async (dba?: {
+  dba: boolean;
+}): Promise<void> => {
   const returnedPromise = Promise.reject(400);
   mockApi.searchBusinessName.mockReturnValue(returnedPromise);
   fireEvent.click(dba?.dba ? dbaSearchButton() : searchButton());

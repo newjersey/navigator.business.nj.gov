@@ -20,7 +20,10 @@ interface Props {
 }
 
 export const ProfileField = (props: Props): ReactElement => {
-  const { isFormFieldInvalid } = useFormContextFieldHelpers(props.fieldName, DataFormErrorMapContext);
+  const { isFormFieldInvalid } = useFormContextFieldHelpers(
+    props.fieldName,
+    DataFormErrorMapContext
+  );
 
   if (props.isVisible === false) {
     return <></>;
@@ -32,7 +35,10 @@ export const ProfileField = (props: Props): ReactElement => {
         id={`question-${props.fieldName}`}
       >
         {props.locked ? (
-          <ProfileLockedField fieldName={props.fieldName} valueFormatter={props.lockedValueFormatter} />
+          <ProfileLockedField
+            fieldName={props.fieldName}
+            valueFormatter={props.lockedValueFormatter}
+          />
         ) : (
           <WithErrorBar hasError={isFormFieldInvalid} type={"ALWAYS"}>
             {!props.noLabel && (
@@ -44,7 +50,9 @@ export const ProfileField = (props: Props): ReactElement => {
                 boldDescription={props.boldDescription}
               />
             )}
-            <div className={props.noLabel ? "margin-bottom-05" : ""}>{props.children}</div>
+            <div className={props.noLabel ? "margin-bottom-05" : ""}>
+              {props.children}
+            </div>
           </WithErrorBar>
         )}
       </div>

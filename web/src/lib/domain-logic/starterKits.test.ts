@@ -1,9 +1,16 @@
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
 import { createStarterKitProfileData } from "@/lib/domain-logic/starterKits";
-import { emptyProfileData, getIndustries, type ProfileData } from "@businessnjgovnavigator/shared";
+import {
+  emptyProfileData,
+  getIndustries,
+  type ProfileData,
+} from "@businessnjgovnavigator/shared";
 
 describe("starter Kits", () => {
-  const combineObjectsKeepingTruthyValues = (obj1: ProfileData, obj2: ProfileData): ProfileData => {
+  const combineObjectsKeepingTruthyValues = (
+    obj1: ProfileData,
+    obj2: ProfileData
+  ): ProfileData => {
     let result: ProfileData = { ...obj1 };
     for (const key in obj2) {
       const typedKey = key as keyof ProfileData;
@@ -21,7 +28,10 @@ describe("starter Kits", () => {
     let result: Partial<ProfileData> = {};
     for (const key in obj) {
       const typedKey = key as keyof ProfileData;
-      if (Object.prototype.hasOwnProperty.call(obj, typedKey) && obj[typedKey]) {
+      if (
+        Object.prototype.hasOwnProperty.call(obj, typedKey) &&
+        obj[typedKey]
+      ) {
         result = {
           ...result,
           [typedKey]: obj[typedKey],
@@ -46,12 +56,17 @@ describe("starter Kits", () => {
   };
 
   it("fails if a new essential question is added to the code base without being explicitly handled in starter kits", () => {
-    const onlyStarterKitEssentialQuestions = createCombinedObjectWithAllEssentialQuestions();
+    const onlyStarterKitEssentialQuestions =
+      createCombinedObjectWithAllEssentialQuestions();
 
-    const mainAppEssentialQuestions = EssentialQuestions.map((question) => question.fieldName);
+    const mainAppEssentialQuestions = EssentialQuestions.map(
+      (question) => question.fieldName
+    );
 
     for (const mainAppEssentialQuestion of mainAppEssentialQuestions) {
-      const essentialQuestionInBoth = onlyStarterKitEssentialQuestions.includes(mainAppEssentialQuestion);
+      const essentialQuestionInBoth = onlyStarterKitEssentialQuestions.includes(
+        mainAppEssentialQuestion
+      );
       if (!essentialQuestionInBoth) {
         console.error(
           "The new essential question should have a value set in createStarterKitProfileData() function",

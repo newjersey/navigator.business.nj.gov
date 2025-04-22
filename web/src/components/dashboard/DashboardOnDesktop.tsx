@@ -39,9 +39,12 @@ interface Props {
 export const DashboardOnDesktop = (props: Props): ReactElement => {
   const { business } = useUserData();
   const router = useRouter();
-  const operatingPhase = LookupOperatingPhaseById(business?.profileData.operatingPhase);
+  const operatingPhase = LookupOperatingPhaseById(
+    business?.profileData.operatingPhase
+  );
   const deferredHomeBasedOnSaveButtonClick = (): void => {
-    router && routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true");
+    router &&
+      routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true");
   };
 
   const renderDeferredHomeBasedQuestion =
@@ -51,7 +54,10 @@ export const DashboardOnDesktop = (props: Props): ReactElement => {
 
   return (
     <div className="display-none desktop:display-block" data-testid="desktop">
-      <div className="margin-top-0 blueRightGutter" data-testid="rightSidebarPageLayout">
+      <div
+        className="margin-top-0 blueRightGutter"
+        data-testid="rightSidebarPageLayout"
+      >
         <div className="grid-container-widescreen padding-x-7 width-100">
           <div className="grid-row">
             <div className="grid-col-7 margin-top-6 padding-bottom-15 padding-right-5">
@@ -70,14 +76,18 @@ export const DashboardOnDesktop = (props: Props): ReactElement => {
                 {operatingPhase.displayAnytimeActions && (
                   <AnytimeActionDropdown
                     anytimeActionTasks={props.anytimeActionTasks}
-                    anytimeActionLicenseReinstatements={props.anytimeActionLicenseReinstatements}
+                    anytimeActionLicenseReinstatements={
+                      props.anytimeActionLicenseReinstatements
+                    }
                   />
                 )}
 
                 {operatingPhase.displayRoadmapTasks && (
                   <>
                     <hr className="margin-bottom-3" />
-                    <Heading level={2}>{getRoadmapHeadingText(business?.profileData.industryId)}</Heading>
+                    <Heading level={2}>
+                      {getRoadmapHeadingText(business?.profileData.industryId)}
+                    </Heading>
                     <Roadmap />
                   </>
                 )}
@@ -87,12 +97,16 @@ export const DashboardOnDesktop = (props: Props): ReactElement => {
                     licenseEvents={props.licenseEvents}
                   />
                 )}
-                {operatingPhase.displayHideableRoadmapTasks && <HideableTasks />}
+                {operatingPhase.displayHideableRoadmapTasks && (
+                  <HideableTasks />
+                )}
               </div>
             </div>
             <div className="grid-col-5 border-cool-lighter bg-cool-extra-light border-left-1px padding-top-6 padding-bottom-15 padding-left-5">
               <SidebarCardsContainer
-                sidebarDisplayContent={props.displayContent.sidebarDisplayContent}
+                sidebarDisplayContent={
+                  props.displayContent.sidebarDisplayContent
+                }
                 certifications={props.certifications}
                 fundings={props.fundings}
               />

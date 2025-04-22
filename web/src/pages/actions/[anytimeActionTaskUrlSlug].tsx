@@ -22,20 +22,23 @@ const AnytimeActionTaskPage = (props: Props): ReactElement => {
       <NextSeo title={getNextSeoTitle(props.anytimeActionTask.name)} />
       <PageSkeleton showNavBar showSidebar hideMiniRoadmap>
         <TaskSidebarPageLayout hideMiniRoadmap={true}>
-          <AnytimeActionSwitchComponent anytimeActionTask={props.anytimeActionTask} />
+          <AnytimeActionSwitchComponent
+            anytimeActionTask={props.anytimeActionTask}
+          />
         </TaskSidebarPageLayout>
       </PageSkeleton>
     </>
   );
 };
 
-export const getStaticPaths = (): GetStaticPathsResult<AnytimeActionTaskUrlSlugParam> => {
-  const paths = loadAllAnytimeActionTaskUrlSlugs();
-  return {
-    paths,
-    fallback: false,
+export const getStaticPaths =
+  (): GetStaticPathsResult<AnytimeActionTaskUrlSlugParam> => {
+    const paths = loadAllAnytimeActionTaskUrlSlugs();
+    return {
+      paths,
+      fallback: false,
+    };
   };
-};
 
 export const getStaticProps = ({
   params,
@@ -44,7 +47,9 @@ export const getStaticProps = ({
 }): GetStaticPropsResult<Props> => {
   return {
     props: {
-      anytimeActionTask: loadAnytimeActionTaskByUrlSlug(params.anytimeActionTaskUrlSlug),
+      anytimeActionTask: loadAnytimeActionTaskByUrlSlug(
+        params.anytimeActionTaskUrlSlug
+      ),
     },
   };
 };

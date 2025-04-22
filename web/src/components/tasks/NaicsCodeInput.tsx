@@ -13,7 +13,12 @@ import NaicsCodes from "@/lib/static/records/naics2022.json";
 import { NaicsCodeObject, Task } from "@/lib/types/types";
 import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Business, LookupIndustryById } from "@businessnjgovnavigator/shared";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import {
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 
 interface Props {
@@ -42,10 +47,13 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
 
   const [naicsCode, setNaicsCode] = useState<string>("");
   const [industryCodes, setIndustryCodes] = useState<string[]>([]);
-  const [isInvalid, setIsInvalid] = useState<NaicsErrorTypes | undefined>(undefined);
+  const [isInvalid, setIsInvalid] = useState<NaicsErrorTypes | undefined>(
+    undefined
+  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [displayInputState, setDisplayInput] = useState<boolean>(false);
-  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+  const { isAuthenticated, setShowNeedsAccountModal } =
+    useContext(NeedsAccountContext);
   const displayInput = props.CMS_ONLY_displayInput ?? displayInputState;
   const saveButtonText =
     props.isAuthenticated === IsAuthenticated.FALSE
@@ -138,7 +146,9 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
     if (
       getIndustryNaicsCodes(business.profileData.industryId).length === 0 ||
       (business.profileData.naicsCode.length > 0 &&
-        !getIndustryNaicsCodes(business.profileData.industryId).includes(business.profileData.naicsCode))
+        !getIndustryNaicsCodes(business.profileData.industryId).includes(
+          business.profileData.naicsCode
+        ))
     ) {
       setDisplayInput(true);
     }
@@ -152,12 +162,18 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
       {industryCodes.length > 0 && (
         <>
           <Content>{Config.determineNaicsCode.suggestedCodeBodyText}</Content>
-          <FormControl variant="outlined" fullWidth className="tablet:margin-left-205 margin-top-2">
+          <FormControl
+            variant="outlined"
+            fullWidth
+            className="tablet:margin-left-205 margin-top-2"
+          >
             <RadioGroup
               aria-label={"Recommended NAICS codes"}
               name={"naics-radio-group"}
               value={naicsCode}
-              onChange={(event: React.ChangeEvent<{ name?: string; value: string }>): void => {
+              onChange={(
+                event: React.ChangeEvent<{ name?: string; value: string }>
+              ): void => {
                 if (displayInput) setDisplayInput(false);
                 if (isAuthenticated !== IsAuthenticated.TRUE) {
                   setShowNeedsAccountModal(true);
@@ -180,10 +196,15 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
                     control={<Radio color="primary" />}
                     label={
                       <>
-                        <span className="text-bold margin-right-05">{code}</span>
+                        <span className="text-bold margin-right-05">
+                          {code}
+                        </span>
                         <span className="margin-right-05">- </span>
                         <ExternalLink
-                          href={templateEval(Config.determineNaicsCode.naicsDescriptionURL, { code: code })}
+                          href={templateEval(
+                            Config.determineNaicsCode.naicsDescriptionURL,
+                            { code: code }
+                          )}
                         >
                           {descriptions.find((obj) => {
                             return obj.SixDigitCode?.toString() === code;
@@ -226,7 +247,11 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
           </ul>
           <div>
             <WithErrorBar hasError={!!isInvalid} type={"ALWAYS"}>
-              <FieldLabelProfile fieldName={"naicsCode"} isAltDescriptionDisplayed ignoreContextualInfo />
+              <FieldLabelProfile
+                fieldName={"naicsCode"}
+                isAltDescriptionDisplayed
+                ignoreContextualInfo
+              />
               <GenericTextField
                 inputWidth="reduced"
                 fieldName="naicsCode"
@@ -248,7 +273,11 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
         <>
           <hr className="margin-y-2" />
           <div className="flex flex-row margin-left-auto">
-            <SecondaryButton isColor="primary" onClick={saveNaicsCode} isLoading={isLoading}>
+            <SecondaryButton
+              isColor="primary"
+              onClick={saveNaicsCode}
+              isLoading={isLoading}
+            >
               {saveButtonText}
             </SecondaryButton>
           </div>

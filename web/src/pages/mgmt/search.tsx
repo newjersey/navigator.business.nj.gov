@@ -24,9 +24,15 @@ import { GroupedConfigMatch, Match } from "@/lib/search/typesForSearch";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
 import { loadAllAnytimeActionLicenseReinstatements } from "@/lib/static/loadAnytimeActionLicenseReinstatements";
 import { loadAllAnytimeActionTasks } from "@/lib/static/loadAnytimeActionTasks";
-import { loadAllArchivedCertifications, loadAllCertifications } from "@/lib/static/loadCertifications";
+import {
+  loadAllArchivedCertifications,
+  loadAllCertifications,
+} from "@/lib/static/loadCertifications";
 import { loadCmsConfig } from "@/lib/static/loadCmsConfig";
-import { loadAllArchivedContextualInfo, loadAllContextualInfo } from "@/lib/static/loadContextualInfo";
+import {
+  loadAllArchivedContextualInfo,
+  loadAllContextualInfo,
+} from "@/lib/static/loadContextualInfo";
 import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
@@ -97,31 +103,50 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [taskMatches, setTaskMatches] = useState<Match[]>([]);
   const [licenseTaskMatches, setLicenseTaskMatches] = useState<Match[]>([]);
   const [municipalTaskMatches, setMunicipalTaskMatches] = useState<Match[]>([]);
-  const [raffleBingoStepMatches, setRaffleBingoStepMatches] = useState<Match[]>([]);
+  const [raffleBingoStepMatches, setRaffleBingoStepMatches] = useState<Match[]>(
+    []
+  );
   const [envTaskMatches, setEnvTaskMatches] = useState<Match[]>([]);
   const [certMatches, setCertMatches] = useState<Match[]>([]);
   const [certArchiveMatches, setCertArchiveMatches] = useState<Match[]>([]);
   const [fundingMatches, setFundingMatches] = useState<Match[]>([]);
   const [industryMatches, setIndustryMatches] = useState<Match[]>([]);
   const [stepsMatches, setStepsMatches] = useState<Match[]>([]);
-  const [nonEssentialQuestionsMatches, setNonEssentialQuestionsMatches] = useState<Match[]>([]);
-  const [webflowLicenseMatches, setWebflowLicenseMatches] = useState<Match[]>([]);
+  const [nonEssentialQuestionsMatches, setNonEssentialQuestionsMatches] =
+    useState<Match[]>([]);
+  const [webflowLicenseMatches, setWebflowLicenseMatches] = useState<Match[]>(
+    []
+  );
   const [filingMatches, setFilingMatches] = useState<Match[]>([]);
-  const [anytimeActionTaskMatches, setAnytimeActionTaskMatches] = useState<Match[]>([]);
-  const [anytimeActionLicenseReinstatementMatches, setAnytimeActionLicenseReinstatementMatches] = useState<
+  const [anytimeActionTaskMatches, setAnytimeActionTaskMatches] = useState<
     Match[]
   >([]);
+  const [
+    anytimeActionLicenseReinstatementMatches,
+    setAnytimeActionLicenseReinstatementMatches,
+  ] = useState<Match[]>([]);
   const [sidebarCardMatches, setSidebarCardMatches] = useState<Match[]>([]);
-  const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>([]);
-  const [archivedContextualInfoMatches, setArchivedContextualInfoMatches] = useState<Match[]>([]);
-  const [licenseCalendarEventMatches, setLicenseCalendarEventMatches] = useState<Match[]>([]);
-  const [groupedConfigMatches, setGroupedConfigMatches] = useState<GroupedConfigMatch[]>([]);
+  const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>(
+    []
+  );
+  const [archivedContextualInfoMatches, setArchivedContextualInfoMatches] =
+    useState<Match[]>([]);
+  const [licenseCalendarEventMatches, setLicenseCalendarEventMatches] =
+    useState<Match[]>([]);
+  const [groupedConfigMatches, setGroupedConfigMatches] = useState<
+    GroupedConfigMatch[]
+  >([]);
 
   const { Config } = useConfig();
 
-  const sidebarCards: SidebarCardContent[] = Object.values(props.roadmapDisplayContent.sidebarDisplayContent);
+  const sidebarCards: SidebarCardContent[] = Object.values(
+    props.roadmapDisplayContent.sidebarDisplayContent
+  );
 
-  const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>, submit: () => void): void => {
+  const handleKeyPress = (
+    event: KeyboardEvent<HTMLDivElement>,
+    submit: () => void
+  ): void => {
     if (event.code === "Enter") {
       submit();
     }
@@ -134,32 +159,62 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const onSearchSubmit = (): void => {
     const lowercaseTerm = searchTerm.toLowerCase();
-    setGroupedConfigMatches(searchConfig(Config, lowercaseTerm, props.cmsConfig));
+    setGroupedConfigMatches(
+      searchConfig(Config, lowercaseTerm, props.cmsConfig)
+    );
 
     setTaskMatches(searchTasks(props.tasks, lowercaseTerm));
     setLicenseTaskMatches(searchTasks(props.licenseTasks, lowercaseTerm));
     setMunicipalTaskMatches(searchTasks(props.municipalTasks, lowercaseTerm));
-    setRaffleBingoStepMatches(searchTasks(props.raffleBingoSteps, lowercaseTerm));
+    setRaffleBingoStepMatches(
+      searchTasks(props.raffleBingoSteps, lowercaseTerm)
+    );
     setEnvTaskMatches(searchTasks(props.envTasks, lowercaseTerm));
     setCertMatches(searchCertifications(props.certifications, lowercaseTerm));
-    setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
+    setCertArchiveMatches(
+      searchCertifications(props.archivedCertifications, lowercaseTerm)
+    );
     setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
     setIndustryMatches(
-      searchIndustries(getIndustries({ overrideShowDisabledIndustries: true }), lowercaseTerm)
+      searchIndustries(
+        getIndustries({ overrideShowDisabledIndustries: true }),
+        lowercaseTerm
+      )
     );
-    setAnytimeActionTaskMatches(searchAnytimeActionTasks(props.anytimeActionTasks, lowercaseTerm));
+    setAnytimeActionTaskMatches(
+      searchAnytimeActionTasks(props.anytimeActionTasks, lowercaseTerm)
+    );
     setAnytimeActionLicenseReinstatementMatches(
-      searchAnytimeActionLicenseReinstatements(props.anytimeActionLicenseReinstatements, lowercaseTerm)
+      searchAnytimeActionLicenseReinstatements(
+        props.anytimeActionLicenseReinstatements,
+        lowercaseTerm
+      )
     );
 
-    const defaultStepsMatches = searchSteps(Steps.steps as Step[], lowercaseTerm, { filename: "Steps" });
-    const domesticEmployerStepsMatches = searchSteps(DomesticEmployerSteps.steps as Step[], lowercaseTerm, {
-      filename: "Steps - Domestic Employer",
-    });
-    const foreignStepsMatches = searchSteps(ForeignSteps.steps as Step[], lowercaseTerm, {
-      filename: "Steps - Dakota",
-    });
-    setStepsMatches([...defaultStepsMatches, ...domesticEmployerStepsMatches, ...foreignStepsMatches]);
+    const defaultStepsMatches = searchSteps(
+      Steps.steps as Step[],
+      lowercaseTerm,
+      { filename: "Steps" }
+    );
+    const domesticEmployerStepsMatches = searchSteps(
+      DomesticEmployerSteps.steps as Step[],
+      lowercaseTerm,
+      {
+        filename: "Steps - Domestic Employer",
+      }
+    );
+    const foreignStepsMatches = searchSteps(
+      ForeignSteps.steps as Step[],
+      lowercaseTerm,
+      {
+        filename: "Steps - Dakota",
+      }
+    );
+    setStepsMatches([
+      ...defaultStepsMatches,
+      ...domesticEmployerStepsMatches,
+      ...foreignStepsMatches,
+    ]);
 
     setNonEssentialQuestionsMatches(
       searchNonEssentialQuestions(
@@ -168,12 +223,20 @@ const SearchContentPage = (props: Props): ReactElement => {
       )
     );
 
-    setWebflowLicenseMatches(searchWebflowLicenses(props.webflowLicenses, lowercaseTerm));
+    setWebflowLicenseMatches(
+      searchWebflowLicenses(props.webflowLicenses, lowercaseTerm)
+    );
     setFilingMatches(searchTaxFilings(props.filings, lowercaseTerm));
     setSidebarCardMatches(searchSidebarCards(sidebarCards, lowercaseTerm));
-    setContextualInfoMatches(searchContextualInfo(props.contextualInfo, lowercaseTerm));
-    setArchivedContextualInfoMatches(searchContextualInfo(props.archivedContextualInfo, lowercaseTerm));
-    setLicenseCalendarEventMatches(searchLicenseEvents(props.licenseCalendarEvents, lowercaseTerm));
+    setContextualInfoMatches(
+      searchContextualInfo(props.contextualInfo, lowercaseTerm)
+    );
+    setArchivedContextualInfoMatches(
+      searchContextualInfo(props.archivedContextualInfo, lowercaseTerm)
+    );
+    setLicenseCalendarEventMatches(
+      searchLicenseEvents(props.licenseCalendarEvents, lowercaseTerm)
+    );
     setHasSearched(true);
   };
 
@@ -232,7 +295,8 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const calendarCollection = {
     "Taxes Filings - All": filingMatches,
-    "Consumer Affairs License Expiration / Renewal Events": licenseCalendarEventMatches,
+    "Consumer Affairs License Expiration / Renewal Events":
+      licenseCalendarEventMatches,
   };
 
   const dashboardCollection = {
@@ -245,7 +309,8 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const anytimeActionCollection = {
     "Anytime Action Tasks": anytimeActionTaskMatches,
-    "Anytime Action License Reinstatements": anytimeActionLicenseReinstatementMatches,
+    "Anytime Action License Reinstatements":
+      anytimeActionLicenseReinstatementMatches,
   };
 
   const authedView = (
@@ -261,7 +326,10 @@ const SearchContentPage = (props: Props): ReactElement => {
         onKeyDown={(event): void => handleKeyPress(event, onSearchSubmit)}
         inputProps={{ id: "search" }}
       />
-      <button onClick={onSearchSubmit} className="usa-button margin-top-2 margin-bottom-4">
+      <button
+        onClick={onSearchSubmit}
+        className="usa-button margin-top-2 margin-bottom-4"
+      >
         Submit
       </button>
       {noMatches() && <div>No matches.</div>}
@@ -269,14 +337,38 @@ const SearchContentPage = (props: Props): ReactElement => {
         matchedCollections={{ "Biz Form - Config": [] }}
         groupedConfigMatches={groupedConfigMatches}
       />
-      <MatchCollection matchedCollections={envCollection} groupedConfigMatches={groupedConfigMatches} />
-      <MatchCollection matchedCollections={certCollection} groupedConfigMatches={groupedConfigMatches} />
-      <MatchCollection matchedCollections={fundingCollection} groupedConfigMatches={groupedConfigMatches} />
-      <MatchCollection matchedCollections={roadmapsCollection} groupedConfigMatches={groupedConfigMatches} />
-      <MatchCollection matchedCollections={taskCollection} groupedConfigMatches={groupedConfigMatches} />
-      <MatchCollection matchedCollections={calendarCollection} groupedConfigMatches={groupedConfigMatches} />
-      <MatchCollection matchedCollections={dashboardCollection} groupedConfigMatches={groupedConfigMatches} />
-      <MatchCollection matchedCollections={miscCollection} groupedConfigMatches={groupedConfigMatches} />
+      <MatchCollection
+        matchedCollections={envCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection
+        matchedCollections={certCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection
+        matchedCollections={fundingCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection
+        matchedCollections={roadmapsCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection
+        matchedCollections={taskCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection
+        matchedCollections={calendarCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection
+        matchedCollections={dashboardCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection
+        matchedCollections={miscCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
       <MatchCollection
         matchedCollections={anytimeActionCollection}
         groupedConfigMatches={groupedConfigMatches}
@@ -297,7 +389,11 @@ const SearchContentPage = (props: Props): ReactElement => {
             {isAuthed ? (
               authedView
             ) : (
-              <MgmtAuth password={password} setIsAuthed={setIsAuthed} setPassword={setPassword} />
+              <MgmtAuth
+                password={password}
+                setIsAuthed={setIsAuthed}
+                setPassword={setPassword}
+              />
             )}
           </div>
         </SingleColumnContainer>
@@ -306,7 +402,9 @@ const SearchContentPage = (props: Props): ReactElement => {
   );
 };
 
-export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
+export const getStaticProps = async (): Promise<
+  GetStaticPropsResult<Props>
+> => {
   return {
     props: {
       netlifyConfig: getNetlifyConfig(),
@@ -326,7 +424,8 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       archivedContextualInfo: loadAllArchivedContextualInfo(),
       licenseCalendarEvents: loadAllLicenseCalendarEvents(),
       anytimeActionTasks: loadAllAnytimeActionTasks(),
-      anytimeActionLicenseReinstatements: loadAllAnytimeActionLicenseReinstatements(),
+      anytimeActionLicenseReinstatements:
+        loadAllAnytimeActionLicenseReinstatements(),
       pageMetaData: loadAllPageMetadata(),
       cmsConfig: loadCmsConfig(),
     },

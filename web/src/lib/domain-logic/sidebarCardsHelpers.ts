@@ -7,7 +7,10 @@ import {
   FundingStatusOrder,
   SidebarCardContent,
 } from "@/lib/types/types";
-import { getCurrentDate, parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
+import {
+  getCurrentDate,
+  parseDateWithFormat,
+} from "@businessnjgovnavigator/shared/dateHelpers";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
 import { arrayOfOwnershipTypes } from "@businessnjgovnavigator/shared/ownership";
 import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
@@ -22,7 +25,9 @@ export const getHiddenCertifications = (
     return business.preferences.hiddenCertificationIds.includes(it.id);
   });
 };
-export const sortCertifications = (certifications: Certification[]): Certification[] => {
+export const sortCertifications = (
+  certifications: Certification[]
+): Certification[] => {
   return certifications.sort((a, b) => {
     const nameA = a.name.toUpperCase(); // ignore upper and lowercase
     const nameB = b.name.toUpperCase();
@@ -44,7 +49,10 @@ export const getVisibleCertifications = (
     return !business?.preferences.hiddenCertificationIds.includes(it.id);
   });
 };
-export const sortFundingsForUser = (fundings: Funding[], userData?: UserData): Funding[] => {
+export const sortFundingsForUser = (
+  fundings: Funding[],
+  userData?: UserData
+): Funding[] => {
   const statusSortedFundings = fundings.sort((a, b) => {
     const nameA = a.name.toUpperCase(); // ignore upper and lowercase
     const nameB = b.name.toUpperCase();
@@ -57,14 +65,21 @@ export const sortFundingsForUser = (fundings: Funding[], userData?: UserData): F
     return nameA.localeCompare(nameB);
   });
   if (userData?.user.accountCreationSource) {
-    const agencySource = mapAccountCreationSourceToAgencySource(userData.user.accountCreationSource);
-    const agencySortedFundings = prioritizeFundingByAgencySource(statusSortedFundings, agencySource);
+    const agencySource = mapAccountCreationSourceToAgencySource(
+      userData.user.accountCreationSource
+    );
+    const agencySortedFundings = prioritizeFundingByAgencySource(
+      statusSortedFundings,
+      agencySource
+    );
     return sortFundingsByPrioritization(agencySortedFundings);
   }
   return sortFundingsByPrioritization(statusSortedFundings);
 };
 
-const mapAccountCreationSourceToAgencySource = (accountCreationSource: string): string => {
+const mapAccountCreationSourceToAgencySource = (
+  accountCreationSource: string
+): string => {
   switch (accountCreationSource) {
     case "investNewark":
       return "invest-newark";
@@ -75,7 +90,10 @@ const mapAccountCreationSourceToAgencySource = (accountCreationSource: string): 
   }
 };
 
-const prioritizeFundingByAgencySource = (fundings: Funding[], agencyName: string): Funding[] => {
+const prioritizeFundingByAgencySource = (
+  fundings: Funding[],
+  agencyName: string
+): Funding[] => {
   if (agencyName === "") {
     return fundings;
   }
@@ -113,13 +131,19 @@ export const getVisibleSideBarCards = (
     return sidebarDisplayContent[id];
   });
 };
-export const getVisibleFundings = (fundings: Funding[], business: Business | undefined): Funding[] => {
+export const getVisibleFundings = (
+  fundings: Funding[],
+  business: Business | undefined
+): Funding[] => {
   if (!business) return [];
   return fundings.filter((it) => {
     return !business?.preferences.hiddenFundingIds.includes(it.id);
   });
 };
-export const getHiddenFundings = (business: Business | undefined, fundings: Funding[]): Funding[] => {
+export const getHiddenFundings = (
+  business: Business | undefined,
+  fundings: Funding[]
+): Funding[] => {
   if (!business) return [];
   return fundings.filter((it: Funding) => {
     return business.preferences.hiddenFundingIds.includes(it.id);
@@ -141,11 +165,20 @@ export const filterFundings = ({
       return false;
     }
 
-    if (it.dueDate && parseDateWithFormat(it.dueDate, defaultMarkdownDateFormat).isBefore(getCurrentDate())) {
+    if (
+      it.dueDate &&
+      parseDateWithFormat(it.dueDate, defaultMarkdownDateFormat).isBefore(
+        getCurrentDate()
+      )
+    ) {
       return false;
     }
 
-    if (business.profileData.homeBasedBusiness && it.homeBased !== "yes" && it.homeBased !== "unknown") {
+    if (
+      business.profileData.homeBasedBusiness &&
+      it.homeBased !== "yes" &&
+      it.homeBased !== "unknown"
+    ) {
       return false;
     }
 
@@ -187,13 +220,22 @@ export const filterFundings = ({
     }
 
     if (it.certifications) {
-      if (it.certifications.length > 0 && business.profileData.ownershipTypeIds.length > 0) {
-        const ownershipTypeIds = new Set(arrayOfOwnershipTypes.map((ownershipType) => ownershipType.id));
-        const ownershipTypeCerts = it.certifications.filter((cert) => ownershipTypeIds.has(cert));
+      if (
+        it.certifications.length > 0 &&
+        business.profileData.ownershipTypeIds.length > 0
+      ) {
+        const ownershipTypeIds = new Set(
+          arrayOfOwnershipTypes.map((ownershipType) => ownershipType.id)
+        );
+        const ownershipTypeCerts = it.certifications.filter((cert) =>
+          ownershipTypeIds.has(cert)
+        );
 
         if (ownershipTypeCerts.length > 0) {
           const ownershipType = it.certifications.some((ownershipType) => {
-            return business.profileData.ownershipTypeIds.includes(ownershipType);
+            return business.profileData.ownershipTypeIds.includes(
+              ownershipType
+            );
           });
           if (!ownershipType) {
             return false;
@@ -202,7 +244,9 @@ export const filterFundings = ({
       }
 
       if (it.certifications.includes("small-business-enterprise")) {
-        const employeeCount = Number(business.profileData.existingEmployees as string);
+        const employeeCount = Number(
+          business.profileData.existingEmployees as string
+        );
         if (employeeCount >= SMALL_BUSINESS_MAX_EMPLOYEE_COUNT) {
           return false;
         }
@@ -211,7 +255,8 @@ export const filterFundings = ({
       if (
         it.maxEmployeesRequired &&
         business.profileData.existingEmployees &&
-        Number.parseInt(business.profileData.existingEmployees) > it.maxEmployeesRequired
+        Number.parseInt(business.profileData.existingEmployees) >
+          it.maxEmployeesRequired
       ) {
         return false;
       }
@@ -219,7 +264,8 @@ export const filterFundings = ({
       if (
         it.minEmployeesRequired &&
         business.profileData.existingEmployees &&
-        Number.parseInt(business.profileData.existingEmployees) < it.minEmployeesRequired
+        Number.parseInt(business.profileData.existingEmployees) <
+          it.minEmployeesRequired
       ) {
         return false;
       }
@@ -256,7 +302,9 @@ export const filterCertifications = ({
     }
 
     if (it.isSbe) {
-      const employeeCount = Number(business.profileData.existingEmployees as string);
+      const employeeCount = Number(
+        business.profileData.existingEmployees as string
+      );
       if (employeeCount >= SMALL_BUSINESS_MAX_EMPLOYEE_COUNT) {
         allowedCertification = false;
       }
@@ -276,12 +324,24 @@ export const getForYouCardCount = (
     return count;
   }
 
-  if (LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCertifications) {
-    count += getVisibleCertifications(filterCertifications({ certifications, business }), business).length;
+  if (
+    LookupOperatingPhaseById(business?.profileData.operatingPhase)
+      .displayCertifications
+  ) {
+    count += getVisibleCertifications(
+      filterCertifications({ certifications, business }),
+      business
+    ).length;
   }
 
-  if (LookupOperatingPhaseById(business?.profileData.operatingPhase).displayFundings) {
-    count += getVisibleFundings(filterFundings({ fundings, business }), business).length;
+  if (
+    LookupOperatingPhaseById(business?.profileData.operatingPhase)
+      .displayFundings
+  ) {
+    count += getVisibleFundings(
+      filterFundings({ fundings, business }),
+      business
+    ).length;
   }
 
   if (business?.preferences.visibleSidebarCards.length) {

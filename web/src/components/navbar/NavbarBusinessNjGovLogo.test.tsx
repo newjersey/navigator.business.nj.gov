@@ -31,12 +31,16 @@ describe("<NavbarBusinessNjGovLogo />", () => {
   it("navigates to business.nj.gov when clicked by the user", async () => {
     render(<NavbarBusinessNjGovLogo />);
     fireEvent.click(screen.getByTestId("business-nj-gov-logo"));
-    expect(mockPush).toHaveBeenCalledWith(Config.navigationDefaults.navBarBusinessNJGovLink);
+    expect(mockPush).toHaveBeenCalledWith(
+      Config.navigationDefaults.navBarBusinessNJGovLink
+    );
   });
 
   it("fires business.nj.gov home analytics event when clicked by the user", async () => {
     render(<NavbarBusinessNjGovLogo />);
     fireEvent.click(screen.getByTestId("business-nj-gov-logo"));
-    expect(mockAnalytics.event.business_nj_gov_logo.click.business_nj_gov_logo).toHaveBeenCalled();
+    expect(
+      mockAnalytics.event.business_nj_gov_logo.click.business_nj_gov_logo
+    ).toHaveBeenCalled();
   });
 });

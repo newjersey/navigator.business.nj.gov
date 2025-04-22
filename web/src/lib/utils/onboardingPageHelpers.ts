@@ -1,19 +1,28 @@
 import { OnboardingFlow } from "@/components/onboarding/OnboardingFlows";
 import { getMergedConfig } from "@/contexts/configContext";
-import { Business, LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared";
+import {
+  Business,
+  LookupIndustryById,
+  LookupSectorTypeById,
+} from "@businessnjgovnavigator/shared";
 import { QUERY_PARAMS_VALUES } from "../domain-logic/routes";
 import { FlowType, Page } from "../types/types";
 import { getFlow, templateEval } from "./helpers";
 
 const Config = getMergedConfig();
 
-export const mapFlowQueryToPersona: Record<QUERY_PARAMS_VALUES["flow"], FlowType> = {
+export const mapFlowQueryToPersona: Record<
+  QUERY_PARAMS_VALUES["flow"],
+  FlowType
+> = {
   starting: "STARTING",
   "out-of-state": "FOREIGN",
   "up-and-running": "OWNING",
 };
 
-export const industryQueryParamIsValid = (industryId: string | undefined): boolean => {
+export const industryQueryParamIsValid = (
+  industryId: string | undefined
+): boolean => {
   return !!LookupIndustryById(industryId).id;
 };
 
@@ -30,9 +39,11 @@ export const pageQueryParamisValid = (
   business: Business,
   page: number
 ): boolean => {
-  const hasAnsweredBusinessPersona = business?.profileData.businessPersona !== undefined;
+  const hasAnsweredBusinessPersona =
+    business?.profileData.businessPersona !== undefined;
   const flow = getFlow(business.profileData);
-  const requestedPageIsInRange = page <= onboardingFlows[flow].pages.length && page > 0;
+  const requestedPageIsInRange =
+    page <= onboardingFlows[flow].pages.length && page > 0;
 
   return hasAnsweredBusinessPersona && requestedPageIsInRange;
 };

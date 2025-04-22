@@ -35,7 +35,10 @@ export const OpportunityCard = (props: Props): ReactElement => {
       </Tag>
     ),
     certification: (
-      <Tag isLowerCase={true} backgroundColor="accent-cool-lighter-border-darktext">
+      <Tag
+        isLowerCase={true}
+        backgroundColor="accent-cool-lighter-border-darktext"
+      >
         {capitalizeEachWord(Config.dashboardDefaults.certificationTagText)}
       </Tag>
     ),
@@ -45,7 +48,10 @@ export const OpportunityCard = (props: Props): ReactElement => {
     if (!business) {
       return false;
     }
-    const property = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
+    const property =
+      props.urlPath === "funding"
+        ? "hiddenFundingIds"
+        : "hiddenCertificationIds";
     return business.preferences[property].includes(props.opportunity.id);
   };
 
@@ -53,11 +59,17 @@ export const OpportunityCard = (props: Props): ReactElement => {
     if (!business || !updateQueue) {
       return;
     }
-    const propertyToUpdate = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
+    const propertyToUpdate =
+      props.urlPath === "funding"
+        ? "hiddenFundingIds"
+        : "hiddenCertificationIds";
     analytics.event.for_you_card_hide_button.click.hide_card();
     await updateQueue
       .queuePreferences({
-        [propertyToUpdate]: [...business.preferences[propertyToUpdate], props.opportunity.id],
+        [propertyToUpdate]: [
+          ...business.preferences[propertyToUpdate],
+          props.opportunity.id,
+        ],
       })
       .update();
   };
@@ -66,13 +78,18 @@ export const OpportunityCard = (props: Props): ReactElement => {
     if (!business || !updateQueue) {
       return;
     }
-    const propertyToUpdate = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
+    const propertyToUpdate =
+      props.urlPath === "funding"
+        ? "hiddenFundingIds"
+        : "hiddenCertificationIds";
     analytics.event.for_you_card_unhide_button.click.unhide_card();
     await updateQueue
       .queuePreferences({
-        [propertyToUpdate]: business.preferences[propertyToUpdate].filter((it: string) => {
-          return it !== props.opportunity.id;
-        }),
+        [propertyToUpdate]: business.preferences[propertyToUpdate].filter(
+          (it: string) => {
+            return it !== props.opportunity.id;
+          }
+        ),
       })
       .update();
   };
@@ -85,7 +102,9 @@ export const OpportunityCard = (props: Props): ReactElement => {
 
   return (
     <>
-      {!props.hideTopBorder && <hr className="bg-cool-lighter" aria-hidden={true} />}
+      {!props.hideTopBorder && (
+        <hr className="bg-cool-lighter" aria-hidden={true} />
+      )}
 
       <div
         data-testid={props.opportunity.id}
@@ -104,7 +123,9 @@ export const OpportunityCard = (props: Props): ReactElement => {
                 }}
               >
                 <div className="fdr fac">
-                  <Icon iconName={isHidden() ? "visibility" : "visibility_off"} />
+                  <Icon
+                    iconName={isHidden() ? "visibility" : "visibility_off"}
+                  />
                   <span className="margin-left-05 line-height-sans-2">
                     {isHidden()
                       ? Config.dashboardDefaults.unHideOpportunityText
@@ -116,13 +137,22 @@ export const OpportunityCard = (props: Props): ReactElement => {
           </div>
         </div>
         <div className="text-normal font-body-md margin-bottom-105">
-          <UnStyledButton isUnderline onClick={routeToPage} dataTestid={`${props.opportunity.id}-button`}>
+          <UnStyledButton
+            isUnderline
+            onClick={routeToPage}
+            dataTestid={`${props.opportunity.id}-button`}
+          >
             {props.opportunity.name}
           </UnStyledButton>
         </div>
-        <OpportunityCardStatus dueDate={props.opportunity.dueDate} status={props.opportunity.status} />
+        <OpportunityCardStatus
+          dueDate={props.opportunity.dueDate}
+          status={props.opportunity.status}
+        />
         <div className="override-p-2xs text-base-dark">
-          {truncate(props.opportunity.sidebarCardBodyText, { length: OPPORTUNITY_CARD_MAX_BODY_CHARS })}
+          {truncate(props.opportunity.sidebarCardBodyText, {
+            length: OPPORTUNITY_CARD_MAX_BODY_CHARS,
+          })}
         </div>
       </div>
     </>

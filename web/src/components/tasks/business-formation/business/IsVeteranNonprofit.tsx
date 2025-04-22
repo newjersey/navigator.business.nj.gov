@@ -5,7 +5,9 @@ import { ReactElement, useContext } from "react";
 
 export const IsVeteranNonprofit = (): ReactElement => {
   const { Config } = useConfig();
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(
+    BusinessFormationContext
+  );
   const fieldName = "isVeteranNonprofit";
 
   return (

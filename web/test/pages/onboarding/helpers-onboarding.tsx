@@ -23,7 +23,13 @@ import {
   industrySpecificDataChoices,
 } from "@businessnjgovnavigator/shared/";
 import { ThemeProvider, createTheme } from "@mui/material";
-import { fireEvent, render, screen, waitForElementToBeRemoved, within } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitForElementToBeRemoved,
+  within,
+} from "@testing-library/react";
 
 const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();
@@ -42,14 +48,21 @@ export const renderPage = ({
     withAuth(
       <WithStatefulUserData
         initialUserData={
-          userData === undefined ? createEmptyUserData(currentUser) : userData === null ? undefined : userData
+          userData === undefined
+            ? createEmptyUserData(currentUser)
+            : userData === null
+            ? undefined
+            : userData
         }
       >
         <ThemeProvider theme={createTheme()}>
           <Onboarding municipalities={municipalities || []} />
         </ThemeProvider>
       </WithStatefulUserData>,
-      { activeUser: { ...currentUser, encounteredMyNjLinkingError: false }, isAuthenticated }
+      {
+        activeUser: { ...currentUser, encounteredMyNjLinkingError: false },
+        isAuthenticated,
+      }
     )
   );
   const page = createPageHelpers();
@@ -75,7 +88,10 @@ export type PageHelpers = {
   getEmailValue: () => string;
   getConfirmEmailValue: () => string;
   visitStep: (step: number) => Promise<void>;
-  chooseEssentialQuestionRadio: (industryId: string, indexOfDataChoice: number) => void;
+  chooseEssentialQuestionRadio: (
+    industryId: string,
+    indexOfDataChoice: number
+  ) => void;
 };
 
 export const createPageHelpers = (): PageHelpers => {
@@ -115,7 +131,8 @@ export const createPageHelpers = (): PageHelpers => {
   };
 
   const getDateOfFormationValue = (): string => {
-    return (screen.queryByLabelText("Date of formation") as HTMLInputElement)?.value;
+    return (screen.queryByLabelText("Date of formation") as HTMLInputElement)
+      ?.value;
   };
 
   const getSectorIDValue = (): string => {
@@ -139,16 +156,27 @@ export const createPageHelpers = (): PageHelpers => {
   };
 
   const getFullNameValue = (): string => {
-    return (screen.queryByLabelText(Config.selfRegistration.nameFieldLabel) as HTMLInputElement)?.value;
+    return (
+      screen.queryByLabelText(
+        Config.selfRegistration.nameFieldLabel
+      ) as HTMLInputElement
+    )?.value;
   };
 
   const getEmailValue = (): string => {
-    return (screen.queryByLabelText(Config.selfRegistration.emailFieldLabel) as HTMLInputElement)?.value;
+    return (
+      screen.queryByLabelText(
+        Config.selfRegistration.emailFieldLabel
+      ) as HTMLInputElement
+    )?.value;
   };
 
   const getConfirmEmailValue = (): string => {
-    return (screen.queryByLabelText(Config.selfRegistration.confirmEmailFieldLabel) as HTMLInputElement)
-      ?.value;
+    return (
+      screen.queryByLabelText(
+        Config.selfRegistration.confirmEmailFieldLabel
+      ) as HTMLInputElement
+    )?.value;
   };
 
   const visitStep = async (step: number): Promise<void> => {
@@ -172,10 +200,14 @@ export const createPageHelpers = (): PageHelpers => {
 
     for (const essentialQuestion of essentialQuestions) {
       const value =
-        industrySpecificDataChoices[essentialQuestion.fieldName][indexOfIndustrySpecificDataChoices];
+        industrySpecificDataChoices[essentialQuestion.fieldName][
+          indexOfIndustrySpecificDataChoices
+        ];
       fireEvent.click(
         screen.getByTestId(
-          `${camelCaseToKebabCase(essentialQuestion.fieldName)}-radio-${value.toString().toLowerCase()}`
+          `${camelCaseToKebabCase(essentialQuestion.fieldName)}-radio-${value
+            .toString()
+            .toLowerCase()}`
         )
       );
     }
@@ -216,37 +248,47 @@ export const mockSuccessfulApiSignups = (): void => {
   });
 };
 
-export const industriesWithSingleEssentialQuestion = getIndustries().filter((industry) => {
-  return (
-    hasEssentialQuestion(industry.id) && industry.isEnabled && !hasMultipleEssentialQuestions(industry.id)
-  );
-});
-
-export const industriesWithOutEssentialQuestion = getIndustries().filter((industry) => {
-  return !hasEssentialQuestion(industry.id) && industry.isEnabled;
-});
-
-export const industryIdsWithOutEssentialQuestion = industriesWithOutEssentialQuestion.map(
-  (industry) => industry.id
-);
-
-export const industryIdsWithSingleEssentialQuestion = industriesWithSingleEssentialQuestion.map(
-  (industry) => industry.id
-);
-
-export const industryIdsWithSingleRequiredEssentialQuestion = industryIdsWithSingleEssentialQuestion.filter(
+export const industriesWithSingleEssentialQuestion = getIndustries().filter(
   (industry) => {
-    const applicableQuestions = EssentialQuestions.filter(
-      (question) => question.isQuestionApplicableToIndustryId(industry) && industry !== "employment-agency"
+    return (
+      hasEssentialQuestion(industry.id) &&
+      industry.isEnabled &&
+      !hasMultipleEssentialQuestions(industry.id)
     );
-    const someQuestionsStartAsUndefined = applicableQuestions.some((question) => {
-      return emptyIndustrySpecificData[question.fieldName] === undefined;
-    });
-    return someQuestionsStartAsUndefined;
   }
 );
 
-export const composeOnBoardingTitle = (step: string, pageTitle?: string): string => {
+export const industriesWithOutEssentialQuestion = getIndustries().filter(
+  (industry) => {
+    return !hasEssentialQuestion(industry.id) && industry.isEnabled;
+  }
+);
+
+export const industryIdsWithOutEssentialQuestion =
+  industriesWithOutEssentialQuestion.map((industry) => industry.id);
+
+export const industryIdsWithSingleEssentialQuestion =
+  industriesWithSingleEssentialQuestion.map((industry) => industry.id);
+
+export const industryIdsWithSingleRequiredEssentialQuestion =
+  industryIdsWithSingleEssentialQuestion.filter((industry) => {
+    const applicableQuestions = EssentialQuestions.filter(
+      (question) =>
+        question.isQuestionApplicableToIndustryId(industry) &&
+        industry !== "employment-agency"
+    );
+    const someQuestionsStartAsUndefined = applicableQuestions.some(
+      (question) => {
+        return emptyIndustrySpecificData[question.fieldName] === undefined;
+      }
+    );
+    return someQuestionsStartAsUndefined;
+  });
+
+export const composeOnBoardingTitle = (
+  step: string,
+  pageTitle?: string
+): string => {
   const Config = getMergedConfig();
   if (pageTitle === undefined) {
     const pageTitleDefault = modifyContent({

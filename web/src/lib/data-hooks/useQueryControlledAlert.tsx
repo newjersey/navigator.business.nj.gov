@@ -15,13 +15,18 @@ interface QueryControlledAlertConfig {
   delayInMilliseconds?: number;
 }
 
-export const useQueryControlledAlert = (config: QueryControlledAlertConfig): ReactElement => {
+export const useQueryControlledAlert = (
+  config: QueryControlledAlertConfig
+): ReactElement => {
   const router = useRouter();
   const [alertIsVisible, setAlertIsVisible] = useState<boolean>(false);
   const effectOccurred = useRef<boolean>(false);
 
   const redirect = useCallback(() => {
-    router && router.replace({ pathname: config.pagePath }, undefined, { shallow: true });
+    router &&
+      router.replace({ pathname: config.pagePath }, undefined, {
+        shallow: true,
+      });
   }, [router, config.pagePath]);
 
   useEffect(() => {
@@ -39,7 +44,13 @@ export const useQueryControlledAlert = (config: QueryControlledAlertConfig): Rea
       redirect();
       effectOccurred.current = true;
     }
-  }, [router, setAlertIsVisible, config.queryKey, config.delayInMilliseconds, redirect]);
+  }, [
+    router,
+    setAlertIsVisible,
+    config.queryKey,
+    config.delayInMilliseconds,
+    redirect,
+  ]);
 
   return (
     <SnackbarAlert

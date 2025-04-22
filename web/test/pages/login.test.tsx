@@ -15,9 +15,17 @@ jest.mock("@/lib/auth/sessionHelper", () => ({
 
 const mockSession = session as jest.Mocked<typeof session>;
 
-const AuthContextWrapper = ({ children }: { children: ReactNode }): ReactNode => {
+const AuthContextWrapper = ({
+  children,
+}: {
+  children: ReactNode;
+}): ReactNode => {
   const [state, dispatch] = useReducer(authReducer, initialState);
-  return <AuthContext.Provider value={{ state, dispatch }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ state, dispatch }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 describe("login page", () => {
@@ -42,7 +50,9 @@ describe("login page", () => {
   });
 
   it("renders the login form for any unauthenticated users", () => {
-    mockSession.getActiveUser.mockResolvedValue(Promise.reject("No current user"));
+    mockSession.getActiveUser.mockResolvedValue(
+      Promise.reject("No current user")
+    );
 
     render(
       <AuthContextWrapper>

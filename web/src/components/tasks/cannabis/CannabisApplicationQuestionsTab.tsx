@@ -13,7 +13,10 @@ import { ReactElement } from "react";
 interface Props {
   onNextTab: () => void;
   priorityStatusState: Record<PriorityApplicationType, boolean>;
-  onCheckboxChange: (checkbox: PriorityApplicationType, checked: boolean) => void;
+  onCheckboxChange: (
+    checkbox: PriorityApplicationType,
+    checked: boolean
+  ) => void;
   noPriorityStatus: boolean;
 }
 
@@ -22,21 +25,33 @@ export const CannabisApplicationQuestionsTab = (props: Props): ReactElement => {
 
   return (
     <div className="flex flex-column">
-      <Content>{Config.cannabisApplyForLicense.applicationQuestionsText}</Content>
+      <Content>
+        {Config.cannabisApplyForLicense.applicationQuestionsText}
+      </Content>
       <HorizontalLine />
       <div className="margin-top-2">
-        <Heading level={2} styleVariant="h3" className="margin-bottom-2 text-normal">
+        <Heading
+          level={2}
+          styleVariant="h3"
+          className="margin-bottom-2 text-normal"
+        >
           {Config.cannabisApplyForLicense.businessSizeHeader}
         </Heading>
         <MicrobusinessRadioQuestion />
       </div>
       <div className="margin-top-4 margin-bottom-2">
-        <Heading level={2} styleVariant="h3" className="margin-bottom-2 text-normal">
+        <Heading
+          level={2}
+          styleVariant="h3"
+          className="margin-bottom-2 text-normal"
+        >
           {Config.cannabisApplyForLicense.priorityStatusHeader}
         </Heading>
         {!props.noPriorityStatus && (
           <>
-            <Content>{Config.cannabisApplyForLicense.priorityStatusText}</Content>
+            <Content>
+              {Config.cannabisApplyForLicense.priorityStatusText}
+            </Content>
             <PriorityStatusCheckboxes
               onCheckboxChange={props.onCheckboxChange}
               priorityStatusState={props.priorityStatusState}
@@ -45,13 +60,19 @@ export const CannabisApplicationQuestionsTab = (props: Props): ReactElement => {
         )}
         {props.noPriorityStatus && (
           <div className="margin-bottom-3">
-            <Content>{Config.cannabisApplyForLicense.priorityStatusNoneSelectedText}</Content>
+            <Content>
+              {Config.cannabisApplyForLicense.priorityStatusNoneSelectedText}
+            </Content>
           </div>
         )}
       </div>
       <CtaContainer>
         <ActionBarLayout disableReverseOrderInMobile>
-          <PrimaryButton isColor="primary" isRightMarginRemoved={true} onClick={props.onNextTab}>
+          <PrimaryButton
+            isColor="primary"
+            isRightMarginRemoved={true}
+            onClick={props.onNextTab}
+          >
             {Config.cannabisApplyForLicense.viewRequirementsButton}
           </PrimaryButton>
         </ActionBarLayout>

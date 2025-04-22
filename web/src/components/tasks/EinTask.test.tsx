@@ -27,7 +27,8 @@ const Config = getMergedConfig();
 
 describe("<EinTask />", () => {
   let task: Task;
-  const content = "some content here\n\n" + "${einInputComponent}\n\n" + "more content";
+  const content =
+    "some content here\n\n" + "${einInputComponent}\n\n" + "more content";
   const taskId = "12345";
 
   beforeEach(() => {
@@ -51,7 +52,9 @@ describe("<EinTask />", () => {
     const renderPage = (): void => {
       render(
         withNeedsAccountContext(
-          <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(initialBusiness)}
+          >
             <EinTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.TRUE
@@ -68,7 +71,9 @@ describe("<EinTask />", () => {
 
     it("shows the save button text for an authenticated user", async () => {
       renderPage();
-      expect(screen.getByText(`${Config.ein.saveButtonText}`)).toBeInTheDocument();
+      expect(
+        screen.getByText(`${Config.ein.saveButtonText}`)
+      ).toBeInTheDocument();
     });
 
     it("enters and saves EIN", async () => {
@@ -84,9 +89,12 @@ describe("<EinTask />", () => {
 
     it("shows error on length validation failure", () => {
       renderPage();
-      const expectedErrorMessage = templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
-        length: "9",
-      });
+      const expectedErrorMessage = templateEval(
+        Config.onboardingDefaults.errorTextMinimumNumericField,
+        {
+          length: "9",
+        }
+      );
       fireEvent.change(screen.getByLabelText("Save your EIN"), {
         target: { value: "12345" },
       });
@@ -102,7 +110,9 @@ describe("<EinTask />", () => {
       });
       fireEvent.click(screen.getByText(Config.ein.saveButtonText));
       await waitFor(() => {
-        expect(screen.getByText(Config.taskDefaults.editText)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.taskDefaults.editText)
+        ).toBeInTheDocument();
       });
     });
 
@@ -124,7 +134,9 @@ describe("<EinTask />", () => {
     const renderPage = (): void => {
       render(
         withNeedsAccountContext(
-          <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(initialBusiness)}
+          >
             <EinTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.TRUE
@@ -141,23 +153,33 @@ describe("<EinTask />", () => {
 
     it("displays EIN when it exists in data", () => {
       renderPage();
-      expect(screen.getByText("12-3456789", { exact: false })).toBeInTheDocument();
+      expect(
+        screen.getByText("12-3456789", { exact: false })
+      ).toBeInTheDocument();
     });
 
     it("navigates back to input on edit button click", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.editText));
       expect(screen.getByText(Config.ein.saveButtonText)).toBeInTheDocument();
-      expect((screen.getByLabelText("Save your EIN") as HTMLInputElement).value).toEqual("12-3456789");
-      expect(screen.queryByText(Config.taskDefaults.editText)).not.toBeInTheDocument();
+      expect(
+        (screen.getByLabelText("Save your EIN") as HTMLInputElement).value
+      ).toEqual("12-3456789");
+      expect(
+        screen.queryByText(Config.taskDefaults.editText)
+      ).not.toBeInTheDocument();
     });
 
     it("navigates back to empty input on remove button click", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
       expect(screen.getByText(Config.ein.saveButtonText)).toBeInTheDocument();
-      expect((screen.getByLabelText("Save your EIN") as HTMLInputElement).value).toEqual("");
-      expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
+      expect(
+        (screen.getByLabelText("Save your EIN") as HTMLInputElement).value
+      ).toEqual("");
+      expect(
+        screen.queryByText(Config.taskDefaults.removeText)
+      ).not.toBeInTheDocument();
       expect(currentBusiness().profileData.employerId).toEqual(undefined);
     });
 
@@ -181,7 +203,9 @@ describe("<EinTask />", () => {
     const renderPage = (): void => {
       render(
         withNeedsAccountContext(
-          <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(initialBusiness)}
+          >
             <EinTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,

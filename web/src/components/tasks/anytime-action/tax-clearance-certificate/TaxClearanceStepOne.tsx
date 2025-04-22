@@ -17,8 +17,12 @@ export const TaxClearanceStepOne = (props: Props): ReactElement => {
     <>
       <Content>{Config.taxClearanceCertificateStep1.content}</Content>
       <HorizontalLine />
-      <span className="h5-styling">{Config.taxClearanceCertificateStep1.issuingAgencyLabelText}: </span>
-      <span className="h6-styling">{Config.taxClearanceCertificateStep1.issuingAgencyText}</span>
+      <span className="h5-styling">
+        {Config.taxClearanceCertificateStep1.issuingAgencyLabelText}:{" "}
+      </span>
+      <span className="h6-styling">
+        {Config.taxClearanceCertificateStep1.issuingAgencyText}
+      </span>
       <CtaContainer>
         <ActionBarLayout>
           <LiveChatHelpButton />

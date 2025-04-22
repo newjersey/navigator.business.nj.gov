@@ -19,8 +19,19 @@ import {
   getIndustries,
 } from "@businessnjgovnavigator/shared";
 import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
-import { Autocomplete, FilterOptionsState, TextField, createFilterOptions } from "@mui/material";
-import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
+import {
+  Autocomplete,
+  FilterOptionsState,
+  TextField,
+  createFilterOptions,
+} from "@mui/material";
+import {
+  ChangeEvent,
+  FocusEvent,
+  ReactElement,
+  useContext,
+  useState,
+} from "react";
 
 interface Props {
   handleChange?: () => void;
@@ -48,14 +59,18 @@ export const IndustryDropdown = (props: Props): ReactElement => {
     let cannabisLicenseType = undefined;
 
     const homeBasedBusiness: boolean | undefined =
-      !isHomeBasedBusinessApplicable(industryId) || nexusLocationInNewJersey(state.profileData)
+      !isHomeBasedBusinessApplicable(industryId) ||
+      nexusLocationInNewJersey(state.profileData)
         ? false
         : undefined;
 
-    if (getIsApplicableToFunctionByFieldName("cannabisLicenseType")(industryId)) {
-      const wasCannabisPreviouslyApplicable = getIsApplicableToFunctionByFieldName("cannabisLicenseType")(
-        state.profileData.industryId
-      );
+    if (
+      getIsApplicableToFunctionByFieldName("cannabisLicenseType")(industryId)
+    ) {
+      const wasCannabisPreviouslyApplicable =
+        getIsApplicableToFunctionByFieldName("cannabisLicenseType")(
+          state.profileData.industryId
+        );
       cannabisLicenseType = wasCannabisPreviouslyApplicable
         ? state.profileData.cannabisLicenseType
         : ("CONDITIONAL" as CannabisLicenseType);
@@ -71,24 +86,35 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       nonEssentialRadioAnswers: {},
       industryId: industryId,
       sectorId: newSector,
-      naicsCode: state.profileData.industryId === industryId ? state.profileData.naicsCode : "",
+      naicsCode:
+        state.profileData.industryId === industryId
+          ? state.profileData.naicsCode
+          : "",
     });
   };
 
   const isForeignBusiness = state.profileData.businessPersona === "FOREIGN";
 
-  const handleSearchBoxChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  const handleSearchBoxChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ): void => {
     props.handleChange && props.handleChange();
     setSearchText(event.target.value.trimEnd());
   };
 
-  const handleIndustry = (event: ChangeEvent<unknown>, value: Industry | null): void => {
+  const handleIndustry = (
+    event: ChangeEvent<unknown>,
+    value: Industry | null
+  ): void => {
     props.handleChange && props.handleChange();
     onIndustryIdChange(value?.id);
     setSearchText(value ? value.name : "");
   };
 
-  const getFilterOptions = (options: Industry[], state: FilterOptionsState<Industry>): Industry[] => {
+  const getFilterOptions = (
+    options: Industry[],
+    state: FilterOptionsState<Industry>
+  ): Industry[] => {
     const filterOptions = createFilterOptions({
       matchFrom: "any",
       stringify: (option: Industry) => {
@@ -102,7 +128,9 @@ export const IndustryDropdown = (props: Props): ReactElement => {
     }
 
     if (isForeignBusiness) {
-      return industriesList.filter((industry) => industry.id !== "domestic-employer");
+      return industriesList.filter(
+        (industry) => industry.id !== "domestic-employer"
+      );
     }
 
     return industriesList;
@@ -121,7 +149,9 @@ export const IndustryDropdown = (props: Props): ReactElement => {
             {searchText.length > 0 && (
               <div className="padding-2" data-testid="search-affirmation">
                 <Content>
-                  {templateEval(contentFromConfig.searchAffirmation, { searchText: searchText })}
+                  {templateEval(contentFromConfig.searchAffirmation, {
+                    searchText: searchText,
+                  })}
                 </Content>
               </div>
             )}
@@ -135,7 +165,11 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       isOptionEqualToValue={(option: Industry, value: Industry): boolean => {
         return option.id === value.id;
       }}
-      value={state.profileData.industryId ? LookupIndustryById(state.profileData.industryId) : null}
+      value={
+        state.profileData.industryId
+          ? LookupIndustryById(state.profileData.industryId)
+          : null
+      }
       onChange={handleIndustry}
       onBlur={props.onValidation}
       onSubmit={props.onValidation}
@@ -143,12 +177,25 @@ export const IndustryDropdown = (props: Props): ReactElement => {
         return (
           <li {...props}>
             {selected ? (
-              <div className="padding-top-1 padding-bottom-1" data-testid={option.id}>
-                <MenuOptionSelected secondaryText={option.description}>{option.name}</MenuOptionSelected>
+              <div
+                className="padding-top-1 padding-bottom-1"
+                data-testid={option.id}
+              >
+                <MenuOptionSelected secondaryText={option.description}>
+                  {option.name}
+                </MenuOptionSelected>
               </div>
             ) : (
-              <div className="padding-top-1 padding-bottom-1" data-testid={option.id}>
-                <MenuOptionUnselected secondaryText={splitAndBoldSearchText(option.description, searchText)}>
+              <div
+                className="padding-top-1 padding-bottom-1"
+                data-testid={option.id}
+              >
+                <MenuOptionUnselected
+                  secondaryText={splitAndBoldSearchText(
+                    option.description,
+                    searchText
+                  )}
+                >
                   {splitAndBoldSearchText(option.name, searchText)}
                 </MenuOptionUnselected>
               </div>

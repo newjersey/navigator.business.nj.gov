@@ -33,7 +33,9 @@ type CardDisplayDetails = {
   iconTextColor: string;
 };
 
-export const HousingRegistrationStatusSummary = (props: Props): ReactElement => {
+export const HousingRegistrationStatusSummary = (
+  props: Props
+): ReactElement => {
   const { Config } = useConfig();
   const rejectedOrIncompleteApplication =
     props.summary.registrations[0].status === "Returned" ||
@@ -41,7 +43,9 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
 
   const { business } = useUserData();
 
-  const getDetailsForRegistrationCard = (status: string): CardDisplayDetails => {
+  const getDetailsForRegistrationCard = (
+    status: string
+  ): CardDisplayDetails => {
     switch (status) {
       case "Approved":
         return {
@@ -100,11 +104,20 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
     const getIconForRegistrationCard = (): ReactElement => {
       switch (status) {
         case "In Review":
-          return <img src={`/img/access_time_filled.svg`} alt="" style={{ width: "17px", height: "17px" }} />;
+          return (
+            <img
+              src={`/img/access_time_filled.svg`}
+              alt=""
+              style={{ width: "17px", height: "17px" }}
+            />
+          );
         default:
           return (
             <>
-              <Icon className={`inline-icon ${details.iconTextColor}`} iconName={details.icon} />
+              <Icon
+                className={`inline-icon ${details.iconTextColor}`}
+                iconName={details.icon}
+              />
             </>
           );
       }
@@ -114,16 +127,28 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
       <div
         data-testid={`registration-${index}`}
         key={index}
-        className={"bg-white margin-y-4 padding-x-4 padding-y-4 radius-lg drop-shadow-xs"}
+        className={
+          "bg-white margin-y-4 padding-x-4 padding-y-4 radius-lg drop-shadow-xs"
+        }
       >
         <span className={"text-bold"}>
-          <span>{Config.housingRegistrationSearchTask.registrationStartDateText}</span>
-          <span data-testid={`registration-${index}-date`}>{`${formattedDate}`}</span>
+          <span>
+            {Config.housingRegistrationSearchTask.registrationStartDateText}
+          </span>
+          <span
+            data-testid={`registration-${index}-date`}
+          >{`${formattedDate}`}</span>
         </span>
         <HorizontalLine />
-        <Box className={`${details.headerColor} fdc fg1 radius-lg margin-top-2 drop-shadow-xs`}>
-          <span className={"padding-left-2 padding-y-1 text-white"}>Application Status:</span>
-          <Box className={`${details.bodyColor} radius-bottom-lg padding-left-2 padding-y-2 `}>
+        <Box
+          className={`${details.headerColor} fdc fg1 radius-lg margin-top-2 drop-shadow-xs`}
+        >
+          <span className={"padding-left-2 padding-y-1 text-white"}>
+            Application Status:
+          </span>
+          <Box
+            className={`${details.bodyColor} radius-bottom-lg padding-left-2 padding-y-2 `}
+          >
             {getIconForRegistrationCard()}
             <span
               data-testid={`registration-${index}-status`}
@@ -132,22 +157,32 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
               {status}
             </span>
             {informationalMessage && (
-              <div data-testid={`registration-${index}-informational-message`}>{informationalMessage}</div>
+              <div data-testid={`registration-${index}-informational-message`}>
+                {informationalMessage}
+              </div>
             )}
           </Box>
         </Box>
-        {status === "Approved" && renewalMessage && <div className={"padding-top-4"}>{renewalMessage}</div>}
+        {status === "Approved" && renewalMessage && (
+          <div className={"padding-top-4"}>{renewalMessage}</div>
+        )}
       </div>
     );
   };
 
   return (
     <>
-      <div className={`${rejectedOrIncompleteApplication ? "padding-bottom-2" : ""}`}>
+      <div
+        className={`${
+          rejectedOrIncompleteApplication ? "padding-bottom-2" : ""
+        }`}
+      >
         <Box className="bg-base-extra-light  fdc fg1 padding-y-2 radius-lg drop-shadow-xs">
           <div className={"margin-x-4"}>
             {business?.profileData?.businessName && (
-              <span className={"text-bold"}>{business?.profileData?.businessName}</span>
+              <span className={"text-bold"}>
+                {business?.profileData?.businessName}
+              </span>
             )}
             <br />
             {props.address && (
@@ -155,7 +190,8 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
                 <div className={"padding-bottom-1 text-bold"}>
                   {Config.housingRegistrationSearchTask.applicationsFoundHeader}
                 </div>
-                {props.address.address1}, {toProperCase(props.address.municipalityName)} NJ
+                {props.address.address1},{" "}
+                {toProperCase(props.address.municipalityName)} NJ
                 <UnStyledButton
                   dataTestid={"address-edit"}
                   isUnderline
@@ -169,13 +205,18 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
 
             <div>
               {props.summary.registrations.map((registration, index) => {
-                return housingRegistrationStatusCard(registration.date, registration.status, index);
+                return housingRegistrationStatusCard(
+                  registration.date,
+                  registration.status,
+                  index
+                );
               })}
             </div>
 
             <HorizontalLine />
             <div className={"padding-bottom-1"}>
-              <span className={"text-bold"}>Issuing Agency:</span> Department of Community Affairs
+              <span className={"text-bold"}>Issuing Agency:</span> Department of
+              Community Affairs
             </div>
           </div>
         </Box>
@@ -188,10 +229,16 @@ export const HousingRegistrationStatusSummary = (props: Props): ReactElement => 
               isColor={"primary"}
               isRightMarginRemoved
               onClick={() => {
-                openInNewTab(Config.housingRegistrationSearchTask.reviewApplicationCallToActionLink);
+                openInNewTab(
+                  Config.housingRegistrationSearchTask
+                    .reviewApplicationCallToActionLink
+                );
               }}
             >
-              {Config.housingRegistrationSearchTask.reviewMyApplicationCallToAction}
+              {
+                Config.housingRegistrationSearchTask
+                  .reviewMyApplicationCallToAction
+              }
             </PrimaryButton>
           </ActionBarLayout>
         </CtaContainer>

@@ -39,10 +39,10 @@ describe("<TaskFooterCtas />", () => {
   it("opens link in new tab on click", () => {
     render(<SingleCtaLink link="https://www.example.com/" text="Click Me" />);
     fireEvent.click(screen.getByText("Click Me"));
-    expect(mockAnalytics.event.task_primary_call_to_action.click.open_external_website).toHaveBeenCalledWith(
-      "Click Me",
-      "https://www.example.com/"
-    );
+    expect(
+      mockAnalytics.event.task_primary_call_to_action.click
+        .open_external_website
+    ).toHaveBeenCalledWith("Click Me", "https://www.example.com/");
   });
 
   it("fires analytics on click", () => {

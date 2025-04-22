@@ -1,6 +1,9 @@
 import { ReactElement } from "react";
 
-export const splitAndBoldSearchText = (displayText: string, searchText: string): ReactElement => {
+export const splitAndBoldSearchText = (
+  displayText: string,
+  searchText: string
+): ReactElement => {
   const index = displayText.toLowerCase().indexOf(searchText.toLowerCase());
   if (index >= 0) {
     const prefixText = displayText.slice(0, Math.max(0, index));

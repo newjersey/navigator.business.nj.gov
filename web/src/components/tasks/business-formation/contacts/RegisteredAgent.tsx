@@ -11,14 +11,23 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFields } from "@businessnjgovnavigator/shared/formationData";
-import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import {
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import React, { ReactElement, useContext, useEffect } from "react";
 
 export const RegisteredAgent = (): ReactElement => {
   const { Config } = useConfig();
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(
+    BusinessFormationContext
+  );
   const { userData } = useUserData();
-  const { doesFieldHaveError, getFieldErrorLabel, doSomeFieldsHaveError } = useFormationErrors();
+  const { doesFieldHaveError, getFieldErrorLabel, doSomeFieldsHaveError } =
+    useFormationErrors();
   useEffect(
     function setAgentCheckboxFalseWhenAddressChanged() {
       const {
@@ -65,7 +74,9 @@ export const RegisteredAgent = (): ReactElement => {
     );
   };
 
-  const handleRadioSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
+  const handleRadioSelection = (
+    event: React.ChangeEvent<{ name?: string; value: unknown }>
+  ): void => {
     resetAgentFieldsInteraction();
     setFormationFormData((previousFormationData) => {
       return {
@@ -75,7 +86,9 @@ export const RegisteredAgent = (): ReactElement => {
     });
   };
 
-  const toggleUseAccountInfo = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const toggleUseAccountInfo = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     const checked = event.target.checked;
     if (checked) {
       setFormationFormData({
@@ -94,7 +107,10 @@ export const RegisteredAgent = (): ReactElement => {
     }
   };
 
-  const shouldBeDisabled = (field: FormationFields, type: "ACCOUNT" | "ADDRESS"): boolean => {
+  const shouldBeDisabled = (
+    field: FormationFields,
+    type: "ACCOUNT" | "ADDRESS"
+  ): boolean => {
     const isCorrespondingCheckboxChecked =
       type === "ACCOUNT"
         ? state.formationFormData.agentUseAccountInfo
@@ -103,14 +119,17 @@ export const RegisteredAgent = (): ReactElement => {
     return isCorrespondingCheckboxChecked && hasValue;
   };
 
-  const toggleUseBusinessAddress = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const toggleUseBusinessAddress = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     const checked = event.target.checked;
     if (checked) {
       setFormationFormData({
         ...state.formationFormData,
         agentOfficeAddressLine1: state.formationFormData.addressLine1,
         agentOfficeAddressLine2: state.formationFormData.addressLine2,
-        agentOfficeAddressCity: state.formationFormData.addressMunicipality?.displayName || "",
+        agentOfficeAddressCity:
+          state.formationFormData.addressMunicipality?.displayName || "",
         agentOfficeAddressZipCode: state.formationFormData.addressZipCode,
         agentUseBusinessAddress: checked,
       });
@@ -130,13 +149,24 @@ export const RegisteredAgent = (): ReactElement => {
 
   const getAriaLiveRegion = (): ReactElement | undefined => {
     const interactedWithAgentCheckbox =
-      state.interactedFields.includes("agentEmail") && state.interactedFields.includes("agentName");
-    if (interactedWithAgentCheckbox && !state.formationFormData.agentUseAccountInfo) {
-      return <div>{`${Config.formation.registeredAgent.checkboxCheckedScreenReaderAnnouncement}`}</div>;
+      state.interactedFields.includes("agentEmail") &&
+      state.interactedFields.includes("agentName");
+    if (
+      interactedWithAgentCheckbox &&
+      !state.formationFormData.agentUseAccountInfo
+    ) {
+      return (
+        <div>{`${Config.formation.registeredAgent.checkboxCheckedScreenReaderAnnouncement}`}</div>
+      );
     }
 
-    if (interactedWithAgentCheckbox && state.formationFormData.agentUseAccountInfo) {
-      return <div>{`${Config.formation.registeredAgent.checkboxUnCheckedScreenReaderAnnouncement}`}</div>;
+    if (
+      interactedWithAgentCheckbox &&
+      state.formationFormData.agentUseAccountInfo
+    ) {
+      return (
+        <div>{`${Config.formation.registeredAgent.checkboxUnCheckedScreenReaderAnnouncement}`}</div>
+      );
     }
   };
 
@@ -217,13 +247,18 @@ export const RegisteredAgent = (): ReactElement => {
                       checked={state.formationFormData.agentUseAccountInfo}
                       onChange={toggleUseAccountInfo}
                       id="same-agent-info-as-account-checkbox"
-                      inputProps={{ "aria-controls": "agent-name-id agent-email-id" }}
+                      inputProps={{
+                        "aria-controls": "agent-name-id agent-email-id",
+                      }}
                     />
                   }
                 />
               </div>
 
-              <WithErrorBar hasError={doSomeFieldsHaveError(["agentName", "agentEmail"])} type="DESKTOP-ONLY">
+              <WithErrorBar
+                hasError={doSomeFieldsHaveError(["agentName", "agentEmail"])}
+                type="DESKTOP-ONLY"
+              >
                 <div className="grid-row grid-gap-1 margin-bottom-2">
                   <div className="grid-col-12 tablet:grid-col-6">
                     <FormationField fieldName="agentName">
@@ -261,7 +296,9 @@ export const RegisteredAgent = (): ReactElement => {
                     label={Config.formation.registeredAgent.sameAddressCheckbox}
                     control={
                       <Checkbox
-                        checked={state.formationFormData.agentUseBusinessAddress}
+                        checked={
+                          state.formationFormData.agentUseBusinessAddress
+                        }
                         onChange={toggleUseBusinessAddress}
                         id="same-agent-address-as-business-checkbox"
                       />
@@ -275,7 +312,10 @@ export const RegisteredAgent = (): ReactElement => {
                   fieldName="agentOfficeAddressLine1"
                   required={true}
                   validationText={getFieldErrorLabel("agentOfficeAddressLine1")}
-                  disabled={shouldBeDisabled("agentOfficeAddressLine1", "ADDRESS")}
+                  disabled={shouldBeDisabled(
+                    "agentOfficeAddressLine1",
+                    "ADDRESS"
+                  )}
                   errorBarType="ALWAYS"
                 />
               </FormationField>
@@ -291,18 +331,31 @@ export const RegisteredAgent = (): ReactElement => {
               </FormationField>
               <WithErrorBar
                 type="DESKTOP-ONLY"
-                hasError={doSomeFieldsHaveError(["agentOfficeAddressCity", "agentOfficeAddressZipCode"])}
+                hasError={doSomeFieldsHaveError([
+                  "agentOfficeAddressCity",
+                  "agentOfficeAddressZipCode",
+                ])}
               >
                 <div className="grid-row grid-gap-1 margin-top-2">
                   <div className="grid-col-12 tablet:grid-col-6">
-                    <WithErrorBar hasError={doesFieldHaveError("agentOfficeAddressCity")} type="MOBILE-ONLY">
+                    <WithErrorBar
+                      hasError={doesFieldHaveError("agentOfficeAddressCity")}
+                      type="MOBILE-ONLY"
+                    >
                       <FormationField fieldName="agentOfficeAddressCity">
                         <BusinessFormationTextField
-                          label={Config.formation.fields.agentOfficeAddressCity.label}
+                          label={
+                            Config.formation.fields.agentOfficeAddressCity.label
+                          }
                           fieldName="agentOfficeAddressCity"
                           required={true}
-                          validationText={getFieldErrorLabel("agentOfficeAddressCity")}
-                          disabled={shouldBeDisabled("agentOfficeAddressCity", "ADDRESS")}
+                          validationText={getFieldErrorLabel(
+                            "agentOfficeAddressCity"
+                          )}
+                          disabled={shouldBeDisabled(
+                            "agentOfficeAddressCity",
+                            "ADDRESS"
+                          )}
                           errorBarType="NEVER"
                         />
                       </FormationField>
@@ -317,14 +370,20 @@ export const RegisteredAgent = (): ReactElement => {
                         <div className="grid-col-5">
                           <strong>
                             <ModifiedContent>
-                              {Config.formation.fields.agentOfficeAddressState.label}
+                              {
+                                Config.formation.fields.agentOfficeAddressState
+                                  .label
+                              }
                             </ModifiedContent>
                           </strong>
                           <FormationField fieldName="agentOfficeAddressState">
                             <StateDropdown
                               fieldName="agentOfficeAddressState"
                               value="New Jersey"
-                              validationText={Config.formation.fields.agentOfficeAddressState.error}
+                              validationText={
+                                Config.formation.fields.agentOfficeAddressState
+                                  .error
+                              }
                               disabled={true}
                               onSelect={(): void => {}}
                             />
@@ -336,10 +395,19 @@ export const RegisteredAgent = (): ReactElement => {
                               errorBarType="NEVER"
                               numericProps={{ maxLength: 5 }}
                               fieldName="agentOfficeAddressZipCode"
-                              label={Config.formation.fields.agentOfficeAddressZipCode.label}
-                              validationText={Config.formation.fields.agentOfficeAddressZipCode.error}
+                              label={
+                                Config.formation.fields
+                                  .agentOfficeAddressZipCode.label
+                              }
+                              validationText={
+                                Config.formation.fields
+                                  .agentOfficeAddressZipCode.error
+                              }
                               required={true}
-                              disabled={shouldBeDisabled("agentOfficeAddressZipCode", "ADDRESS")}
+                              disabled={shouldBeDisabled(
+                                "agentOfficeAddressZipCode",
+                                "ADDRESS"
+                              )}
                             />
                           </FormationField>
                         </div>

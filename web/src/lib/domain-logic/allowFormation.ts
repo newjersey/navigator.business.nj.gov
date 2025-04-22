@@ -14,10 +14,15 @@ export const allowFormation = (
     "foreign-limited-partnership": process.env.FEATURE_BUSINESS_FLP === "true",
   };
 
-  if (publicFilingLegalTypes.includes(legalStructureId as PublicFilingLegalType)) {
+  if (
+    publicFilingLegalTypes.includes(legalStructureId as PublicFilingLegalType)
+  ) {
     return (
       featureFlagMap[
-        castPublicFilingLegalTypeToFormationType(legalStructureId as PublicFilingLegalType, persona)
+        castPublicFilingLegalTypeToFormationType(
+          legalStructureId as PublicFilingLegalType,
+          persona
+        )
       ] ?? true
     );
   }

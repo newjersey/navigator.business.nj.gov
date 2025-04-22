@@ -2,7 +2,11 @@
   "dependencies": [
     {
       "task": "blocked-task",
-      "taskDependencies": ["blocking-task-1", "blocking-task-2", "blocking-task-1-duplicate"]
+      "taskDependencies": [
+        "blocking-task-1",
+        "blocking-task-2",
+        "blocking-task-1-duplicate"
+      ]
     }
   ]
 }

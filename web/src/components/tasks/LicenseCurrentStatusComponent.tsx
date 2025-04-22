@@ -31,20 +31,29 @@ export const LicenseCurrentStatusComponent = (props: Props): ReactElement => {
     if (!nameAndAddress) {
       return "";
     }
-    const secondLineAddress = nameAndAddress.addressLine2 ? ` ${nameAndAddress.addressLine2}` : "";
+    const secondLineAddress = nameAndAddress.addressLine2
+      ? ` ${nameAndAddress.addressLine2}`
+      : "";
     return `${nameAndAddress.addressLine1}${secondLineAddress}, ${nameAndAddress.zipCode} NJ`.toUpperCase();
   };
 
-  const receiptItem = (item: LicenseStatusItem, index: number): ReactElement => {
+  const receiptItem = (
+    item: LicenseStatusItem,
+    index: number
+  ): ReactElement => {
     return (
       <div key={index} data-testid={`item-${item.status}`}>
         <div
           className={`flex flex-column fac tablet-flex-row width-full ${
-            index === 0 ? "" : "border-top-1px padding-top-2 tablet:padding-top-05"
+            index === 0
+              ? ""
+              : "border-top-1px padding-top-2 tablet:padding-top-05"
           }  border-base-lightest padding-bottom-2 tablet:padding-bottom-05`}
         >
           <ChecklistTag status={item.status} />
-          <span className="tablet:margin-left-2 text-left width-full">{item.title}</span>
+          <span className="tablet:margin-left-2 text-left width-full">
+            {item.title}
+          </span>
         </div>
       </div>
     );
@@ -53,7 +62,10 @@ export const LicenseCurrentStatusComponent = (props: Props): ReactElement => {
   return (
     <div data-testid="license-current-status-component">
       <Heading level={2} styleVariant={"h3"}>
-        {Config.anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults.licenseStatusHeaderText}
+        {
+          Config.anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults
+            .licenseStatusHeaderText
+        }
       </Heading>
 
       <div className="drop-shadow-xs padding-3 radius-lg">
@@ -64,18 +76,33 @@ export const LicenseCurrentStatusComponent = (props: Props): ReactElement => {
         <Accordion onChange={() => {}}>
           <AccordionSummary
             aria-controls=""
-            expandIcon={<Icon className={"usa-icon--size-3 text-base-light"} iconName="expand_more" />}
+            expandIcon={
+              <Icon
+                className={"usa-icon--size-3 text-base-light"}
+                iconName="expand_more"
+              />
+            }
           >
-            <Heading level={3} styleVariant={"h4"} className="margin-0-override">
+            <Heading
+              level={3}
+              styleVariant={"h4"}
+              className="margin-0-override"
+            >
               {Config.licenseSearchTask.applicationChecklistItemsText}
             </Heading>
           </AccordionSummary>
-          <AccordionDetails>{licenseDetails?.checklistItems.map(receiptItem)}</AccordionDetails>
+          <AccordionDetails>
+            {licenseDetails?.checklistItems.map(receiptItem)}
+          </AccordionDetails>
         </Accordion>
         <hr className="margin-2-override" />
         <div className="flex flex-column tablet-flex-row tablet-flex-alignItems-end padding-top-2">
-          <div data-testid={`license-name-${licenseDetails?.nameAndAddress.name.toUpperCase()}`}>
-            <div className="text-bold">{licenseDetails?.nameAndAddress.name.toUpperCase()}</div>
+          <div
+            data-testid={`license-name-${licenseDetails?.nameAndAddress.name.toUpperCase()}`}
+          >
+            <div className="text-bold">
+              {licenseDetails?.nameAndAddress.name.toUpperCase()}
+            </div>
             {getOneLineAddress()}
           </div>
         </div>
@@ -84,13 +111,18 @@ export const LicenseCurrentStatusComponent = (props: Props): ReactElement => {
       <div>
         <div className="flex padding-2 flex-justify-end">
           <div className="padding-right-05 h6-styling text-italic text-base">
-            {Config.anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults.licenseLastUpdatedText}
+            {
+              Config
+                .anytimeActionReinstatementAndLicenseCalendarEventStatusDefaults
+                .licenseLastUpdatedText
+            }
           </div>
           <div className="h6-styling text-italic text-base">
             {licenseDetails?.lastUpdatedISO &&
-              parseDateWithFormat(licenseDetails.lastUpdatedISO, defaultDateFormat).format(
-                licenseSearchDateFormat
-              )}
+              parseDateWithFormat(
+                licenseDetails.lastUpdatedISO,
+                defaultDateFormat
+              ).format(licenseSearchDateFormat)}
           </div>
         </div>
       </div>

@@ -20,7 +20,9 @@ interface ContentProps {
   children: string;
   className?: string;
   style?: CSSProperties;
-  overrides?: { [key: string]: { ({ children }: { children: string[] }): ReactElement } };
+  overrides?: {
+    [key: string]: { ({ children }: { children: string[] }): ReactElement };
+  };
   onClick?: (url?: string) => void;
   customComponents?: Record<string, ReactElement>;
 }
@@ -84,14 +86,18 @@ export const Content = (props: ContentProps): ReactNode => {
     td: Unformatted,
     tbody: Unformatted,
     del: (delProps: any): ReactElement => {
-      return props.customComponents ? props.customComponents[delProps.children] : delProps.children;
+      return props.customComponents
+        ? props.customComponents[delProps.children]
+        : delProps.children;
     },
     ...props.overrides,
   };
 
   return (
     <div className={`usa-prose ${props.className ?? ""}`} style={props.style}>
-      <PureMarkdownContent components={components}>{updatedContent}</PureMarkdownContent>
+      <PureMarkdownContent components={components}>
+        {updatedContent}
+      </PureMarkdownContent>
     </div>
   );
 };
@@ -101,7 +107,10 @@ const Link = (onClick?: (url?: string) => void): any => {
     (props: any): ReactElement => {
       if (/^https?:\/\/(.*)/.test(props.href)) {
         return (
-          <ExternalLink href={props.href} onClick={(): void => onClick && onClick(props.href)}>
+          <ExternalLink
+            href={props.href}
+            onClick={(): void => onClick && onClick(props.href)}
+          >
             {props.children[0]}
           </ExternalLink>
         );
@@ -136,7 +145,12 @@ export const ExternalLink = ({
       target="_blank"
       rel="noreferrer noopener"
       onClick={(): void => {
-        onClick ? onClick(href) : analytics.event.external_link.click.open_external_website(children, href);
+        onClick
+          ? onClick(href)
+          : analytics.event.external_link.click.open_external_website(
+              children,
+              href
+            );
       }}
     >
       {children}
@@ -158,9 +172,19 @@ const OutlineBox = (props: any): ReactElement => {
 };
 
 const ListOrCheckbox = (props: any): ReactElement => {
-  if (props.children && typeof props.children[0] === "string" && props.children[0].startsWith("[]")) {
-    const checklistItemId = props.children[0].slice("[]".length).split("{")[1].split("}")[0];
-    const checklistItemBody = [props.children[0].split("}")[1], ...props.children.slice(1)];
+  if (
+    props.children &&
+    typeof props.children[0] === "string" &&
+    props.children[0].startsWith("[]")
+  ) {
+    const checklistItemId = props.children[0]
+      .slice("[]".length)
+      .split("{")[1]
+      .split("}")[0];
+    const checklistItemBody = [
+      props.children[0].split("}")[1],
+      ...props.children.slice(1),
+    ];
 
     return (
       <div>
@@ -178,7 +202,9 @@ const InlineIcon = (props: any): ReactElement => {
   const getIconByType = (): ReactElement => {
     switch (props.type as InlineIconType) {
       case "green checkmark":
-        return <Icon className="inline-icon text-green" iconName="check_circle" />;
+        return (
+          <Icon className="inline-icon text-green" iconName="check_circle" />
+        );
       case "red x mark":
         return <Icon className="inline-icon text-red" iconName="cancel" />;
       default:

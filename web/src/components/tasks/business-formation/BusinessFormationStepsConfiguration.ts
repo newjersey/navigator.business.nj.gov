@@ -1,6 +1,9 @@
 import { FormationStepNames } from "@/lib/types/types";
 
-export const BusinessFormationStepsConfiguration: { name: FormationStepNames; stepIndex: number }[] = [
+export const BusinessFormationStepsConfiguration: {
+  name: FormationStepNames;
+  stepIndex: number;
+}[] = [
   { name: "Name", stepIndex: 0 },
   { name: "Business", stepIndex: 1 },
   { name: "Contacts", stepIndex: 2 },

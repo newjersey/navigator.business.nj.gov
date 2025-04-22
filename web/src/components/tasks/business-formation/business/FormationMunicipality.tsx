@@ -6,7 +6,9 @@ import { Municipality } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
 
 export const FormationMunicipality = (): ReactElement => {
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(
+    BusinessFormationContext
+  );
   const { municipalities } = useContext(MunicipalitiesContext);
   const { doesFieldHaveError, getFieldErrorLabel } = useFormationErrors();
 

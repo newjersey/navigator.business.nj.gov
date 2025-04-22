@@ -36,11 +36,15 @@ module.exports = {
     },
     {
       from: {},
-      to: { path: "@businessnjgovnavigator/content/roadmaps/steps-domestic-employer.json" },
+      to: {
+        path: "@businessnjgovnavigator/content/roadmaps/steps-domestic-employer.json",
+      },
     },
     {
       from: {},
-      to: { path: "@businessnjgovnavigator/content/roadmaps/task-dependencies.json" },
+      to: {
+        path: "@businessnjgovnavigator/content/roadmaps/task-dependencies.json",
+      },
     },
     {
       from: {},
@@ -491,7 +495,8 @@ module.exports = {
         "from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration",
       from: {
         path: "^(src)",
-        pathNot: "\\.(spec|test)\\.(js|mjs|cjs|ts|tsx|ls|coffee|litcoffee|coffee\\.md)$",
+        pathNot:
+          "\\.(spec|test)\\.(js|mjs|cjs|ts|tsx|ls|coffee|litcoffee|coffee\\.md)$",
       },
       to: {
         dependencyTypes: ["npm-dev"],
@@ -528,7 +533,14 @@ module.exports = {
   options: {
     doNotFollow: {
       path: "node_modules",
-      dependencyTypes: ["npm", "npm-dev", "npm-optional", "npm-peer", "npm-bundled", "npm-no-pkg"],
+      dependencyTypes: [
+        "npm",
+        "npm-dev",
+        "npm-optional",
+        "npm-peer",
+        "npm-bundled",
+        "npm-no-pkg",
+      ],
     },
     tsPreCompilationDeps: true,
     tsConfig: {
@@ -543,7 +555,8 @@ module.exports = {
         collapsePattern: "node_modules/[^/]+",
       },
       archi: {
-        collapsePattern: "^(packages|src|lib|app|bin|test(s?)|spec(s?))/[^/]+|node_modules/[^/]+",
+        collapsePattern:
+          "^(packages|src|lib|app|bin|test(s?)|spec(s?))/[^/]+|node_modules/[^/]+",
       },
     },
   },

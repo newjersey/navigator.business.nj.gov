@@ -1,13 +1,22 @@
 import * as api from "@/lib/api-client/apiClient";
 import { AuthAction } from "@/lib/auth/AuthContext";
 import * as session from "@/lib/auth/sessionHelper";
-import { onGuestSignIn, onSelfRegister, onSignIn, onSignOut, SelfRegRouter } from "@/lib/auth/signinHelper";
+import {
+  onGuestSignIn,
+  onSelfRegister,
+  onSignIn,
+  onSignOut,
+  SelfRegRouter,
+} from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import * as AccountLinkingErrorStorage from "@/lib/storage/AccountLinkingErrorStorage";
 import * as UserDataStorage from "@/lib/storage/UserDataStorage";
 import { generateActiveUser } from "@/test/factories";
 import { getLastCalledWith } from "@/test/helpers/helpers-utilities";
-import { generateUser, generateUserData } from "@businessnjgovnavigator/shared/";
+import {
+  generateUser,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,
   generatePreferences,
@@ -22,10 +31,11 @@ const mockGetCurrentUserData = jest.fn();
 const mockDelete = jest.fn();
 jest.mock("@/lib/storage/UserDataStorage");
 jest.mock("@/lib/storage/AccountLinkingErrorStorage");
-const mockUserDataStorage = UserDataStorage as jest.Mocked<typeof UserDataStorage>;
-const mockAccountLinkingErrorStorage = AccountLinkingErrorStorage as jest.Mocked<
-  typeof AccountLinkingErrorStorage
+const mockUserDataStorage = UserDataStorage as jest.Mocked<
+  typeof UserDataStorage
 >;
+const mockAccountLinkingErrorStorage =
+  AccountLinkingErrorStorage as jest.Mocked<typeof AccountLinkingErrorStorage>;
 const originalModule = jest.requireActual("@/lib/storage/UserDataStorage");
 
 jest.mock("@/lib/auth/sessionHelper", () => ({
@@ -56,10 +66,12 @@ describe("SigninHelper", () => {
       delete: mockDelete,
     }));
 
-    mockAccountLinkingErrorStorage.AccountLinkingErrorStorageFactory.mockImplementation(() => ({
-      setEncounteredMyNjLinkingError: jest.fn(),
-      getEncounteredMyNjLinkingError: jest.fn(),
-    }));
+    mockAccountLinkingErrorStorage.AccountLinkingErrorStorageFactory.mockImplementation(
+      () => ({
+        setEncounteredMyNjLinkingError: jest.fn(),
+        getEncounteredMyNjLinkingError: jest.fn(),
+      })
+    );
   });
 
   describe("onSignIn", () => {
@@ -93,7 +105,10 @@ describe("SigninHelper", () => {
     });
 
     it("sets registration status to IN_PROGRESS", async () => {
-      mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
+      mockApi.postSelfReg.mockResolvedValue({
+        userData: userData,
+        authRedirectURL: "",
+      });
       onSelfRegister({
         router: fakeRouter,
         updateQueue,
@@ -110,7 +125,10 @@ describe("SigninHelper", () => {
       userData = generateUserDataForBusiness(business);
       updateQueue = new UpdateQueueFactory(userData, update);
 
-      mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
+      mockApi.postSelfReg.mockResolvedValue({
+        userData: userData,
+        authRedirectURL: "",
+      });
       onSelfRegister({
         router: fakeRouter,
         updateQueue,
@@ -140,7 +158,10 @@ describe("SigninHelper", () => {
       userData = generateUserDataForBusiness(business);
       updateQueue = new UpdateQueueFactory(userData, update);
 
-      mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
+      mockApi.postSelfReg.mockResolvedValue({
+        userData: userData,
+        authRedirectURL: "",
+      });
       onSelfRegister({
         router: fakeRouter,
         updateQueue,
@@ -164,11 +185,16 @@ describe("SigninHelper", () => {
 
     it("posts userData to api self-reg with the returnToLink if exists", async () => {
       const business = generateBusiness({
-        preferences: generatePreferences({ returnToLink: "/pathname?query=true" }),
+        preferences: generatePreferences({
+          returnToLink: "/pathname?query=true",
+        }),
       });
       userData = generateUserDataForBusiness(business);
       updateQueue = new UpdateQueueFactory(userData, update);
-      mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
+      mockApi.postSelfReg.mockResolvedValue({
+        userData: userData,
+        authRedirectURL: "",
+      });
       onSelfRegister({
         router: fakeRouter,
         updateQueue,
@@ -216,7 +242,9 @@ describe("SigninHelper", () => {
         setRegistrationStatus: mockSetRegistrationStatus,
       });
       await waitFor(() => {
-        return expect(mockSetRegistrationStatus).toHaveBeenCalledWith("DUPLICATE_ERROR");
+        return expect(mockSetRegistrationStatus).toHaveBeenCalledWith(
+          "DUPLICATE_ERROR"
+        );
       });
       expect(update).not.toHaveBeenCalled();
       expect(mockPush).not.toHaveBeenCalled();
@@ -231,7 +259,9 @@ describe("SigninHelper", () => {
         setRegistrationStatus: mockSetRegistrationStatus,
       });
       await waitFor(() => {
-        return expect(mockSetRegistrationStatus).toHaveBeenCalledWith("RESPONSE_ERROR");
+        return expect(mockSetRegistrationStatus).toHaveBeenCalledWith(
+          "RESPONSE_ERROR"
+        );
       });
       expect(update).not.toHaveBeenCalled();
       expect(mockPush).not.toHaveBeenCalled();
@@ -245,7 +275,11 @@ describe("SigninHelper", () => {
       const userStorageMock = mockGetCurrentUserData.mockImplementation(() => {
         return userData;
       });
-      await onGuestSignIn({ push: mockPush, pathname: ROUTES.landing, dispatch: mockDispatch });
+      await onGuestSignIn({
+        push: mockPush,
+        pathname: ROUTES.landing,
+        dispatch: mockDispatch,
+      });
       expect(userStorageMock).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalledWith({
         type: "LOGIN_GUEST",
@@ -267,7 +301,8 @@ describe("SigninHelper", () => {
         encounteredMyNjLinkingError: true,
       });
       expect(
-        getLastCalledWith<unknown, AuthAction>(mockDispatch)[0].activeUser?.encounteredMyNjLinkingError
+        getLastCalledWith<unknown, AuthAction>(mockDispatch)[0].activeUser
+          ?.encounteredMyNjLinkingError
       ).toEqual(true);
     });
 
@@ -278,15 +313,22 @@ describe("SigninHelper", () => {
 
       const mockGetFn = jest.fn().mockReturnValue(true);
 
-      mockAccountLinkingErrorStorage.AccountLinkingErrorStorageFactory.mockImplementation(() => ({
-        setEncounteredMyNjLinkingError: jest.fn(),
-        getEncounteredMyNjLinkingError: mockGetFn,
-      }));
+      mockAccountLinkingErrorStorage.AccountLinkingErrorStorageFactory.mockImplementation(
+        () => ({
+          setEncounteredMyNjLinkingError: jest.fn(),
+          getEncounteredMyNjLinkingError: mockGetFn,
+        })
+      );
 
-      await onGuestSignIn({ push: mockPush, pathname: ROUTES.landing, dispatch: mockDispatch });
+      await onGuestSignIn({
+        push: mockPush,
+        pathname: ROUTES.landing,
+        dispatch: mockDispatch,
+      });
       expect(mockGetFn).toHaveBeenCalled();
       expect(
-        getLastCalledWith<unknown, AuthAction>(mockDispatch)[0].activeUser?.encounteredMyNjLinkingError
+        getLastCalledWith<unknown, AuthAction>(mockDispatch)[0].activeUser
+          ?.encounteredMyNjLinkingError
       ).toEqual(true);
     });
 
@@ -296,10 +338,12 @@ describe("SigninHelper", () => {
       });
       const mockSetFn = jest.fn();
 
-      mockAccountLinkingErrorStorage.AccountLinkingErrorStorageFactory.mockImplementation(() => ({
-        setEncounteredMyNjLinkingError: mockSetFn,
-        getEncounteredMyNjLinkingError: jest.fn(),
-      }));
+      mockAccountLinkingErrorStorage.AccountLinkingErrorStorageFactory.mockImplementation(
+        () => ({
+          setEncounteredMyNjLinkingError: mockSetFn,
+          getEncounteredMyNjLinkingError: jest.fn(),
+        })
+      );
 
       await onGuestSignIn({
         push: mockPush,
@@ -311,14 +355,20 @@ describe("SigninHelper", () => {
     });
 
     it("redirect user to onboarding if still in progress", async () => {
-      const userData = generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: "UNSTARTED" }));
+      const userData = generateUserDataForBusiness(
+        generateBusiness({ onboardingFormProgress: "UNSTARTED" })
+      );
       mockGetCurrentUserData.mockImplementation(() => {
         return userData;
       });
       mockSession.getActiveUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn({ push: mockPush, pathname: ROUTES.landing, dispatch: mockDispatch });
+      await onGuestSignIn({
+        push: mockPush,
+        pathname: ROUTES.landing,
+        dispatch: mockDispatch,
+      });
       expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
     });
 
@@ -329,7 +379,11 @@ describe("SigninHelper", () => {
       mockSession.getActiveUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn({ push: mockPush, pathname: ROUTES.dashboard, dispatch: mockDispatch });
+      await onGuestSignIn({
+        push: mockPush,
+        pathname: ROUTES.dashboard,
+        dispatch: mockDispatch,
+      });
       expect(mockPush).toHaveBeenCalledWith(ROUTES.landing);
     });
 
@@ -340,7 +394,11 @@ describe("SigninHelper", () => {
       mockSession.getActiveUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn({ push: mockPush, pathname: ROUTES.onboarding, dispatch: mockDispatch });
+      await onGuestSignIn({
+        push: mockPush,
+        pathname: ROUTES.onboarding,
+        dispatch: mockDispatch,
+      });
       expect(mockPush).not.toHaveBeenCalledWith(ROUTES.landing);
     });
 
@@ -351,31 +409,47 @@ describe("SigninHelper", () => {
       mockSession.getActiveUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn({ push: mockPush, pathname: ROUTES.welcome, dispatch: mockDispatch });
+      await onGuestSignIn({
+        push: mockPush,
+        pathname: ROUTES.welcome,
+        dispatch: mockDispatch,
+      });
       expect(mockPush).not.toHaveBeenCalledWith(ROUTES.landing);
     });
 
     it("redirects user to /account-setup from /login when onboarding has been completed", async () => {
-      const userData = generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: "COMPLETED" }));
+      const userData = generateUserDataForBusiness(
+        generateBusiness({ onboardingFormProgress: "COMPLETED" })
+      );
       mockGetCurrentUserData.mockImplementation(() => {
         return userData;
       });
       mockSession.getActiveUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn({ push: mockPush, pathname: ROUTES.login, dispatch: mockDispatch });
+      await onGuestSignIn({
+        push: mockPush,
+        pathname: ROUTES.login,
+        dispatch: mockDispatch,
+      });
       expect(mockPush).toHaveBeenCalledWith(ROUTES.accountSetup);
     });
 
     it("redirects user to /onboarding from /login when onboarding has not been completed", async () => {
-      const userData = generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: "UNSTARTED" }));
+      const userData = generateUserDataForBusiness(
+        generateBusiness({ onboardingFormProgress: "UNSTARTED" })
+      );
       mockGetCurrentUserData.mockImplementation(() => {
         return userData;
       });
       mockSession.getActiveUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn({ push: mockPush, pathname: ROUTES.login, dispatch: mockDispatch });
+      await onGuestSignIn({
+        push: mockPush,
+        pathname: ROUTES.login,
+        dispatch: mockDispatch,
+      });
       expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
     });
 
@@ -386,7 +460,11 @@ describe("SigninHelper", () => {
       mockSession.getActiveUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn({ push: mockPush, pathname: ROUTES.login, dispatch: mockDispatch });
+      await onGuestSignIn({
+        push: mockPush,
+        pathname: ROUTES.login,
+        dispatch: mockDispatch,
+      });
       expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
     });
   });

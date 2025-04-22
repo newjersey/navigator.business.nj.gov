@@ -1,14 +1,20 @@
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
 import { getMergedConfig } from "@/contexts/configContext";
 import { generateFormationProfileData } from "@/test/helpers/helpers-formation";
-import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
+import {
+  setMockDocumentsResponse,
+  useMockDocuments,
+} from "@/test/mock/mockUseDocuments";
 import {
   FormationLegalType,
   GetFilingResponse,
   ProfileData,
   generateBusiness,
 } from "@businessnjgovnavigator/shared";
-import { generateFormationData, generateGetFilingResponse } from "@businessnjgovnavigator/shared/test";
+import {
+  generateFormationData,
+  generateGetFilingResponse,
+} from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useDocuments");
@@ -32,7 +38,10 @@ describe("Formation - <FormationSuccessPage />", () => {
     overrides: Partial<GetFilingResponse>,
     profileOverrides: Partial<ProfileData> = {}
   ): void => {
-    getFilingResponse = generateGetFilingResponse({ success: true, ...overrides });
+    getFilingResponse = generateGetFilingResponse({
+      success: true,
+      ...overrides,
+    });
     const profileData = generateFormationProfileData(profileOverrides);
 
     const business = generateBusiness({
@@ -52,22 +61,25 @@ describe("Formation - <FormationSuccessPage />", () => {
       standingDoc: "testStand.pdf",
     });
     renderSuccessPage({});
-    expect(screen.getByText(Config.formation.successPage.header)).toBeInTheDocument();
-    expect(screen.getByText(Config.formation.successPage.subheader)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.formation.successPage.header)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.formation.successPage.subheader)
+    ).toBeInTheDocument();
     expect(screen.getByText(getFilingResponse.entityId)).toBeInTheDocument();
-    expect(screen.getByText(getFilingResponse.confirmationNumber)).toBeInTheDocument();
-    expect(screen.getByTestId(Config.formation.successPage.formationDocLabel)).toHaveAttribute(
-      "href",
-      "testForm.pdf"
-    );
-    expect(screen.getByTestId(Config.formation.successPage.standingDocLabel)).toHaveAttribute(
-      "href",
-      "testStand.pdf"
-    );
-    expect(screen.getByTestId(Config.formation.successPage.certifiedDocLabel)).toHaveAttribute(
-      "href",
-      "testCert.pdf"
-    );
+    expect(
+      screen.getByText(getFilingResponse.confirmationNumber)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(Config.formation.successPage.formationDocLabel)
+    ).toHaveAttribute("href", "testForm.pdf");
+    expect(
+      screen.getByTestId(Config.formation.successPage.standingDocLabel)
+    ).toHaveAttribute("href", "testStand.pdf");
+    expect(
+      screen.getByTestId(Config.formation.successPage.certifiedDocLabel)
+    ).toHaveAttribute("href", "testCert.pdf");
   });
 
   it("does not display documents when they are not present", () => {
@@ -75,7 +87,9 @@ describe("Formation - <FormationSuccessPage />", () => {
       { certifiedDoc: "" },
       { documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" } }
     );
-    expect(screen.queryByTestId(Config.formation.successPage.certifiedDocLabel)).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId(Config.formation.successPage.certifiedDocLabel)
+    ).not.toBeInTheDocument();
   });
 
   it("shows the survey link", () => {

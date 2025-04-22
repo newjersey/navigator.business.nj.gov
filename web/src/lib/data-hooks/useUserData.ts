@@ -12,7 +12,10 @@ import { UpdateQueue, UserDataError } from "@/lib/types/types";
 import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { licenseDataModifyingFunction } from "@/lib/utils/licenseStatus";
-import { modifyCurrentBusiness, UserData } from "@businessnjgovnavigator/shared/";
+import {
+  modifyCurrentBusiness,
+  UserData,
+} from "@businessnjgovnavigator/shared/";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { useContext, useEffect, useRef } from "react";
 import useSWR from "swr";
@@ -35,8 +38,12 @@ export const useUserData = (): UseUserDataResponse => {
     }
   );
   const dataExists = !!data;
-  const { setOperatingPhaseId, setLegalStructureId, setIndustryId, setBusinessPersona } =
-    useContext(IntercomContext);
+  const {
+    setOperatingPhaseId,
+    setLegalStructureId,
+    setIndustryId,
+    setBusinessPersona,
+  } = useContext(IntercomContext);
 
   useEffect(() => {
     const profileData = data?.businesses[data?.currentBusinessId].profileData;
@@ -57,17 +64,19 @@ export const useUserData = (): UseUserDataResponse => {
     fetchedUserId.current = data?.user.id;
 
     let licenseDataFromDatabaseDataMoreRecent = false;
-    const currBusinessIdFromUpdateQueue = updateQueue?.current()?.currentBusinessId;
+    const currBusinessIdFromUpdateQueue =
+      updateQueue?.current()?.currentBusinessId;
 
     if (
       currBusinessIdFromUpdateQueue &&
       data?.businesses[currBusinessIdFromUpdateQueue] &&
       updateQueue?.currentBusiness()
     ) {
-      licenseDataFromDatabaseDataMoreRecent = isLicenseDataFromDatabaseDataMoreRecent({
-        businessFromDb: data?.businesses[currBusinessIdFromUpdateQueue],
-        businessFromUpdateQueue: updateQueue?.currentBusiness(),
-      });
+      licenseDataFromDatabaseDataMoreRecent =
+        isLicenseDataFromDatabaseDataMoreRecent({
+          businessFromDb: data?.businesses[currBusinessIdFromUpdateQueue],
+          businessFromUpdateQueue: updateQueue?.currentBusiness(),
+        });
     }
 
     if (updateQueue === undefined && data) {
@@ -97,25 +106,41 @@ export const useUserData = (): UseUserDataResponse => {
     } else if (!error && userDataError !== "UPDATE_FAILED") {
       setUserDataError(undefined);
     }
-  }, [userDataError, dataExists, error, setUserDataError, state.isAuthenticated]);
+  }, [
+    userDataError,
+    dataExists,
+    error,
+    setUserDataError,
+    state.isAuthenticated,
+  ]);
 
-  const profileDataHasChanged = (oldUserData: UserData | undefined, newUserData: UserData): boolean => {
-    const oldProfileData = oldUserData?.businesses[oldUserData?.currentBusinessId].profileData;
-    const newProfileData = newUserData.businesses[newUserData.currentBusinessId].profileData;
+  const profileDataHasChanged = (
+    oldUserData: UserData | undefined,
+    newUserData: UserData
+  ): boolean => {
+    const oldProfileData =
+      oldUserData?.businesses[oldUserData?.currentBusinessId].profileData;
+    const newProfileData =
+      newUserData.businesses[newUserData.currentBusinessId].profileData;
 
     return JSON.stringify(oldProfileData) !== JSON.stringify(newProfileData);
   };
 
   const onProfileDataChange = async (newUserData: UserData): Promise<void> => {
-    const newProfileData = newUserData.businesses[newUserData.currentBusinessId].profileData;
+    const newProfileData =
+      newUserData.businesses[newUserData.currentBusinessId].profileData;
     setAnalyticsDimensions(newProfileData);
     const newRoadmap = await buildUserRoadmap(newProfileData);
     setRoadmap(newRoadmap);
   };
 
-  const update = async (newUserData: UserData | undefined, config?: { local?: boolean }): Promise<void> => {
+  const update = async (
+    newUserData: UserData | undefined,
+    config?: { local?: boolean }
+  ): Promise<void> => {
     if (newUserData) {
-      const localUpdateQueue = updateQueue ?? new UpdateQueueFactory(newUserData, update);
+      const localUpdateQueue =
+        updateQueue ?? new UpdateQueueFactory(newUserData, update);
       if (!updateQueue) {
         setUpdateQueue(localUpdateQueue);
       }
@@ -145,7 +170,9 @@ export const useUserData = (): UseUserDataResponse => {
     }
   };
 
-  const createUpdateQueue = async (userData: UserData): Promise<UpdateQueue> => {
+  const createUpdateQueue = async (
+    userData: UserData
+  ): Promise<UpdateQueue> => {
     const createdQueue = new UpdateQueueFactory(userData, update);
     setUpdateQueue(createdQueue);
     await update(userData, { local: true });
@@ -155,7 +182,8 @@ export const useUserData = (): UseUserDataResponse => {
   const refresh = async (): Promise<void> => {
     const updatedUserData = await mutate();
     if (updatedUserData) {
-      const localUpdateQueue = updateQueue ?? new UpdateQueueFactory(updatedUserData, update);
+      const localUpdateQueue =
+        updateQueue ?? new UpdateQueueFactory(updatedUserData, update);
       if (!updateQueue) {
         setUpdateQueue(localUpdateQueue);
       }

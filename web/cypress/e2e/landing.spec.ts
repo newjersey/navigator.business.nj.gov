@@ -9,7 +9,9 @@ describe("Landing [feature] [all] [group2]", () => {
     cy.window()
       .its("dataLayer")
       .wait(5000)
-      .then((list) => Cypress._.map(list, (o) => Cypress._.pick(o, ["event", "scroll_depth"])))
+      .then((list) =>
+        Cypress._.map(list, (o) => Cypress._.pick(o, ["event", "scroll_depth"]))
+      )
       .and("deep.include", {
         event: "scroll_tracking",
         scroll_depth: "how_it_works",
@@ -23,7 +25,9 @@ describe("Landing [feature] [all] [group2]", () => {
     cy.window()
       .its("dataLayer")
       .wait(5000)
-      .then((list) => Cypress._.map(list, (o) => Cypress._.pick(o, ["event", "scroll_depth"])))
+      .then((list) =>
+        Cypress._.map(list, (o) => Cypress._.pick(o, ["event", "scroll_depth"]))
+      )
       .and("deep.include", {
         event: "scroll_tracking",
         scroll_depth: "more_support_seen",

@@ -14,7 +14,9 @@ const uswdsFileImagePreview =
 export const ReviewForeignCertificate = (props: Props): ReactElement => {
   const { Config } = useConfig();
   return (
-    <ReviewSubSection header={Config.formation.fields.foreignGoodStandingFile.label}>
+    <ReviewSubSection
+      header={Config.formation.fields.foreignGoodStandingFile.label}
+    >
       {props.foreignGoodStandingFile?.filename ? (
         <div className="fac margin-bottom-4">
           <img

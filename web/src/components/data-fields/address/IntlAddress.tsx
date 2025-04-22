@@ -15,7 +15,8 @@ interface Props {
 
 export const IntlAddress = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useAddressErrors();
+  const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } =
+    useAddressErrors();
   const { state, setAddressData } = useContext(AddressContext);
 
   return (
@@ -23,12 +24,19 @@ export const IntlAddress = (props: Props): ReactElement => {
       <AddressLines1And2 onValidation={props.onValidation} />
       <div className="text-field-width-default">
         <WithErrorBar
-          hasError={doSomeFieldsHaveError(["addressCity", "addressProvince", "addressZipCode"])}
+          hasError={doSomeFieldsHaveError([
+            "addressCity",
+            "addressProvince",
+            "addressZipCode",
+          ])}
           type="DESKTOP-ONLY"
         >
           <div className="grid-row tablet:grid-gap-1">
             <div className="grid-col-12 tablet:grid-col-6">
-              <WithErrorBar hasError={doesFieldHaveError("addressCity")} type="MOBILE-ONLY">
+              <WithErrorBar
+                hasError={doesFieldHaveError("addressCity")}
+                type="MOBILE-ONLY"
+              >
                 <AddressTextField
                   fieldName="addressCity"
                   label={Config.formation.fields.addressCity.label}
@@ -50,9 +58,14 @@ export const IntlAddress = (props: Props): ReactElement => {
             </div>
           </div>
         </WithErrorBar>
-        <WithErrorBar hasError={doSomeFieldsHaveError(["addressCountry"])} type="ALWAYS">
+        <WithErrorBar
+          hasError={doSomeFieldsHaveError(["addressCountry"])}
+          type="ALWAYS"
+        >
           <strong>
-            <ModifiedContent>{Config.formation.fields.addressCountry.label}</ModifiedContent>
+            <ModifiedContent>
+              {Config.formation.fields.addressCountry.label}
+            </ModifiedContent>
           </strong>
           <CountryDropdown
             fieldName="addressCountry"
@@ -79,7 +92,9 @@ export const IntlAddress = (props: Props): ReactElement => {
               fieldName="addressZipCode"
               label={Config.formation.fields.addressZipCode.foreign.label}
               valueFilter={formatIntlPostalCode}
-              validationText={Config.formation.fields.addressZipCode.foreign.errorIntl}
+              validationText={
+                Config.formation.fields.addressZipCode.foreign.errorIntl
+              }
               errorBarType="ALWAYS"
               onValidation={props.onValidation}
               required

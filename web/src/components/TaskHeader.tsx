@@ -5,7 +5,10 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
-import { getModifiedTaskBooleanUndefined, getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
+import {
+  getModifiedTaskBooleanUndefined,
+  getModifiedTaskContent,
+} from "@/lib/utils/roadmap-helpers";
 import { TaskProgress, isFormationTask } from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
@@ -18,7 +21,8 @@ export const TaskHeader = (props: Props): ReactElement => {
   const { business } = useUserData();
   const { roadmap } = useRoadmap();
 
-  const currentTaskProgress: TaskProgress = business?.taskProgress[props.task.id] ?? "TO_DO";
+  const currentTaskProgress: TaskProgress =
+    business?.taskProgress[props.task.id] ?? "TO_DO";
 
   const { Config } = useConfig();
 
@@ -62,15 +66,23 @@ export const TaskHeader = (props: Props): ReactElement => {
           data-testid="taskProgress"
         >
           <div className="margin-right-105 margin-bottom-1">
-            <TaskProgressCheckbox taskId={props.task.id} disabledTooltipText={getDisabledText()} />
+            <TaskProgressCheckbox
+              taskId={props.task.id}
+              disabledTooltipText={getDisabledText()}
+            />
           </div>
-          {getModifiedTaskBooleanUndefined(roadmap, props.task, "required") === true && (
-            <span className={`${getTextColorClass()} display-inline-block margin-bottom-1`}>
+          {getModifiedTaskBooleanUndefined(roadmap, props.task, "required") ===
+            true && (
+            <span
+              className={`${getTextColorClass()} display-inline-block margin-bottom-1`}
+            >
               <Content>{Config.taskDefaults.requiredLabelText}</Content>
             </span>
           )}
         </div>
-        <h1 data-task-id={props.task.id}>{getModifiedTaskContent(roadmap, props.task, "name")}</h1>
+        <h1 data-task-id={props.task.id}>
+          {getModifiedTaskContent(roadmap, props.task, "name")}
+        </h1>
       </div>
 
       <UserDataErrorAlert />

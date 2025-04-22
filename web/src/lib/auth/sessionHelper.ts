@@ -43,18 +43,19 @@ type CognitoIdentityPayload = {
   userId: string;
 };
 
-export const getCredentialsAndIdentity = async (): Promise<CredentialsAndIdentityId> => {
-  const session = await fetchAuthSession();
-  const credentials = session?.credentials;
-  const identityId = session?.identityId;
-  if (!credentials || !identityId) {
-    throw new Error("Missing AWS credentials or IdentityId");
-  }
-  return {
-    credentials,
-    identityId,
+export const getCredentialsAndIdentity =
+  async (): Promise<CredentialsAndIdentityId> => {
+    const session = await fetchAuthSession();
+    const credentials = session?.credentials;
+    const identityId = session?.identityId;
+    if (!credentials || !identityId) {
+      throw new Error("Missing AWS credentials or IdentityId");
+    }
+    return {
+      credentials,
+      identityId,
+    };
   };
-};
 
 export const configureAmplify = (): void => {
   const responseType: "code" | "token" = "code";
@@ -67,7 +68,12 @@ export const configureAmplify = (): void => {
         loginWith: {
           oauth: {
             domain: process.env.AUTH_DOMAIN,
-            scopes: ["email", "profile", "openid", "aws.cognito.signin.user.admin"],
+            scopes: [
+              "email",
+              "profile",
+              "openid",
+              "aws.cognito.signin.user.admin",
+            ],
             redirectSignIn: [process.env.REDIRECT_URL],
             redirectSignOut: [process.env.REDIRECT_URL],
             responseType,
@@ -94,7 +100,10 @@ export const triggerSignIn = async (): Promise<void> => {
   });
 };
 
-export const getSignedS3Link = async (value: string, expires?: number): Promise<string> => {
+export const getSignedS3Link = async (
+  value: string,
+  expires?: number
+): Promise<string> => {
   const credentialsAndIdentityId = await getCredentialsAndIdentity();
   const credentials = credentialsAndIdentityId.credentials;
   const presigner = new S3RequestPresigner({
@@ -103,14 +112,18 @@ export const getSignedS3Link = async (value: string, expires?: number): Promise<
     sha256: Sha256,
   });
 
-  const url = await presigner.presign(new HttpRequest(parseUrl(value)), { expiresIn: expires ?? 900 });
+  const url = await presigner.presign(new HttpRequest(parseUrl(value)), {
+    expiresIn: expires ?? 900,
+  });
   return formatUrl(url);
 };
 
 export const getCurrentToken = async (): Promise<JWT> => {
   const session = await fetchAuthSession();
   if (!session.tokens || !session.tokens.idToken) {
-    throw new Error("Unable to retrieve access token. Ensure the session is valid.");
+    throw new Error(
+      "Unable to retrieve access token. Ensure the session is valid."
+    );
   }
   return session.tokens.idToken;
 };
@@ -122,8 +135,12 @@ export const getActiveUser = async (): Promise<ActiveUser> => {
   if (!cognitoPayload["custom:identityId"]) {
     cognitoPayload = await addCustomFieldToCognito();
   }
-  const encounteredMyNjLinkingError = AccountLinkingErrorStorageFactory().getEncounteredMyNjLinkingError();
-  return cognitoPayloadToActiveUser({ cognitoPayload, encounteredMyNjLinkingError });
+  const encounteredMyNjLinkingError =
+    AccountLinkingErrorStorageFactory().getEncounteredMyNjLinkingError();
+  return cognitoPayloadToActiveUser({
+    cognitoPayload,
+    encounteredMyNjLinkingError,
+  });
 };
 
 const addCustomFieldToCognito = async (): Promise<CognitoIdPayload> => {

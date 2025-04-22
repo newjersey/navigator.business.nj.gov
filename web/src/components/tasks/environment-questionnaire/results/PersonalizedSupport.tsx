@@ -6,9 +6,17 @@ import { ReactElement } from "react";
 export const PersonalizedSupport = (): ReactElement => {
   const Config = getMergedConfig();
   return (
-    <ResultsSectionAccordion title={Config.envResultsPage.personalizedSupport.title}>
-      <div className={"padding-205 margin-y-2 bg-base-extra-light text-body radius-lg"}>
-        <div className={"padding-bottom-1"}>{Config.envResultsPage.personalizedSupport.body}</div>
+    <ResultsSectionAccordion
+      title={Config.envResultsPage.personalizedSupport.title}
+    >
+      <div
+        className={
+          "padding-205 margin-y-2 bg-base-extra-light text-body radius-lg"
+        }
+      >
+        <div className={"padding-bottom-1"}>
+          {Config.envResultsPage.personalizedSupport.body}
+        </div>
         <div className="flex flex-align-center">
           <Icon className={"margin-right-1"} iconName={"alternate_email"} />
           <a

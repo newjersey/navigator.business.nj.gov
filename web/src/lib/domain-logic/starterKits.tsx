@@ -1,19 +1,34 @@
-import { getEssentialQuestion, hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
+import {
+  getEssentialQuestion,
+  hasEssentialQuestion,
+} from "@/lib/domain-logic/essentialQuestions";
 import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { Industry } from "@businessnjgovnavigator/shared/industry";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import {
+  createEmptyProfileData,
+  ProfileData,
+} from "@businessnjgovnavigator/shared/profileData";
 
-export const insertRoadmapSteps = (content: string, roadMapsStepsLength: number): string => {
+export const insertRoadmapSteps = (
+  content: string,
+  roadMapsStepsLength: number
+): string => {
   return modifyContent({
     content,
     condition: () => true,
     modificationMap: {
-      numberRoadMapEasySteps: `${roadMapsStepsLength} Easy Step${roadMapsStepsLength > 1 ? "s" : ""}`,
+      numberRoadMapEasySteps: `${roadMapsStepsLength} Easy Step${
+        roadMapsStepsLength > 1 ? "s" : ""
+      }`,
     },
   });
 };
 
-export const insertIndustryContent = (content: string, industryId: string, industryName: string): string => {
+export const insertIndustryContent = (
+  content: string,
+  industryId: string,
+  industryName: string
+): string => {
   return modifyContent({
     content,
     condition: () => industryId !== "generic",
@@ -23,7 +38,9 @@ export const insertIndustryContent = (content: string, industryId: string, indus
   });
 };
 
-export const createStarterKitProfileData = (industry: Industry): ProfileData => {
+export const createStarterKitProfileData = (
+  industry: Industry
+): ProfileData => {
   const emptyProfileData = createEmptyProfileData();
   let newProfileData: ProfileData = {
     ...emptyProfileData,

@@ -19,7 +19,11 @@ export const EinDisplay = (props: Props): ReactElement => {
     <Alert variant="success">
       <div className="desktop:display-flex flex-row">
         <div className="margin-right-1">
-          <Content>{templateEval(Config.ein.successText, { ein: displayAsEin(props.employerId) })}</Content>
+          <Content>
+            {templateEval(Config.ein.successText, {
+              ein: displayAsEin(props.employerId),
+            })}
+          </Content>
         </div>
         <UnStyledButton
           isUnderline

@@ -5,7 +5,10 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { AuthContext } from "@/contexts/authContext";
-import { createDataFormErrorMap, DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
+import {
+  createDataFormErrorMap,
+  DataFormErrorMapContext,
+} from "@/contexts/dataFormErrorMapContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -18,7 +21,10 @@ import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { OnboardingErrors } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { BusinessUser, createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
+import {
+  BusinessUser,
+  createEmptyUser,
+} from "@businessnjgovnavigator/shared/businessUser";
 import { useRouter } from "next/compat/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
@@ -69,7 +75,12 @@ const AccountSetupPage = (): ReactElement => {
 
       await updateQueue.queue(userDataWithUser).update();
       analytics.event.finish_setup_on_myNewJersey_button.submit.go_to_myNJ_registration();
-      onSelfRegister({ router, updateQueue, userData: userDataWithUser, setRegistrationStatus });
+      onSelfRegister({
+        router,
+        updateQueue,
+        userData: userDataWithUser,
+        setRegistrationStatus,
+      });
     },
     (isValid) => {
       if (isValid) {
@@ -86,7 +97,9 @@ const AccountSetupPage = (): ReactElement => {
     }
     if (router.query[QUERIES.source] !== undefined) {
       parseAndSendAnalyticsEvent(router.query[QUERIES.source] as string);
-      router.replace({ pathname: ROUTES.accountSetup }, undefined, { shallow: true });
+      router.replace({ pathname: ROUTES.accountSetup }, undefined, {
+        shallow: true,
+      });
       queryAnalyticsOccurred.current = true;
     }
   }, [router]);
@@ -98,7 +111,9 @@ const AccountSetupPage = (): ReactElement => {
     if (
       possibleAnalyticsEvents.includes(source) && // @ts-ignore
       Object.keys(analytics.event[source]).includes("click") && // @ts-ignore
-      Object.keys(analytics.event[source].click).includes("go_to_NavigatorAccount_setup")
+      Object.keys(analytics.event[source].click).includes(
+        "go_to_NavigatorAccount_setup"
+      )
     ) {
       // @ts-ignore
       analytics.event[source].click.go_to_NavigatorAccount_setup();
@@ -106,7 +121,8 @@ const AccountSetupPage = (): ReactElement => {
   };
 
   const getContent = (): typeof Config.accountSetup.default => {
-    if (state.activeUser?.encounteredMyNjLinkingError) return Config.accountSetup.existingAccount;
+    if (state.activeUser?.encounteredMyNjLinkingError)
+      return Config.accountSetup.existingAccount;
     return Config.accountSetup.default;
   };
 
@@ -115,7 +131,9 @@ const AccountSetupPage = (): ReactElement => {
       <main id="main" className="padding-top-4 desktop:padding-top-8">
         <SingleColumnContainer isSmallerWidth>
           <h1>{getContent().header}</h1>
-          {showAlert && <Alert variant="error">{Config.accountSetup.errorAlert}</Alert>}
+          {showAlert && (
+            <Alert variant="error">{Config.accountSetup.errorAlert}</Alert>
+          )}
           <Content>{getContent().body}</Content>
           <DataFormErrorMapContext.Provider value={formContextState}>
             <AccountSetupForm user={user} setUser={setUser} />

@@ -3,16 +3,31 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { HotelMotelRegistrationSearchError, MultipleDwellingSearchError } from "@/lib/types/types";
+import {
+  HotelMotelRegistrationSearchError,
+  MultipleDwellingSearchError,
+} from "@/lib/types/types";
 import { toProperCase } from "@businessnjgovnavigator/shared";
-import { HousingAddress, HousingMunicipality } from "@businessnjgovnavigator/shared/housing";
+import {
+  HousingAddress,
+  HousingMunicipality,
+} from "@businessnjgovnavigator/shared/housing";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import { TextField } from "@mui/material";
-import { ChangeEvent, FormEvent, ReactElement, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  ReactElement,
+  useEffect,
+  useState,
+} from "react";
 
 interface Props {
   onSubmit: (address: HousingAddress) => void;
-  error: HotelMotelRegistrationSearchError | MultipleDwellingSearchError | undefined;
+  error:
+    | HotelMotelRegistrationSearchError
+    | MultipleDwellingSearchError
+    | undefined;
   isLoading: boolean;
   municipalities: HousingMunicipality[];
 }
@@ -22,17 +37,24 @@ const HousingRegistrationSearchErrorLookup: Record<
   HotelMotelRegistrationSearchError | MultipleDwellingSearchError,
   string
 > = {
-  NO_PROPERTY_INTEREST_FOUND: Config.housingRegistrationSearchTask.errorTextNoPropertyInterestFound,
-  NO_HOTEL_MOTEL_REGISTRATIONS_FOUND: Config.housingRegistrationSearchTask.errorTextNoHotelMotelRegistrations,
+  NO_PROPERTY_INTEREST_FOUND:
+    Config.housingRegistrationSearchTask.errorTextNoPropertyInterestFound,
+  NO_HOTEL_MOTEL_REGISTRATIONS_FOUND:
+    Config.housingRegistrationSearchTask.errorTextNoHotelMotelRegistrations,
   FIELDS_REQUIRED: Config.housingRegistrationSearchTask.errorTextFieldsRequired,
   SEARCH_FAILED: Config.housingRegistrationSearchTask.errorTextSearchFailed,
   NO_MULTIPLE_DWELLINGS_REGISTRATIONS_FOUND:
-    Config.housingRegistrationSearchTask.errorTextNoMultipleDwellingRegistrations,
+    Config.housingRegistrationSearchTask
+      .errorTextNoMultipleDwellingRegistrations,
 };
 
 export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
-  const [formValues, setFormValues] = useState<HousingAddress>({ address1: "" });
-  const [selectedMunicipality, setSelectedMunicipality] = useState<Municipality | undefined>(undefined);
+  const [formValues, setFormValues] = useState<HousingAddress>({
+    address1: "",
+  });
+  const [selectedMunicipality, setSelectedMunicipality] = useState<
+    Municipality | undefined
+  >(undefined);
   const { business, updateQueue } = useUserData();
 
   const formattedMunicipalities = props.municipalities.map((municipality) => {
@@ -45,12 +67,14 @@ export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
   });
 
   useEffect(() => {
-    const communityAffairsAddress = business?.profileData.communityAffairsAddress;
+    const communityAffairsAddress =
+      business?.profileData.communityAffairsAddress;
 
     setFormValues((prevValues) => {
       return {
         ...prevValues,
-        address1: communityAffairsAddress?.streetAddress1 || prevValues.address1,
+        address1:
+          communityAffairsAddress?.streetAddress1 || prevValues.address1,
         address2: communityAffairsAddress?.streetAddress2,
       };
     });
@@ -119,7 +143,9 @@ export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
       {Config.housingRegistrationSearchTask.registrationSearchPrompt}
       <form onSubmit={onSubmit} className={"padding-top-1"}>
         <div className="margin-bottom-2">
-          <label htmlFor="address-1">{Config.housingRegistrationSearchTask.address1Label}</label>
+          <label htmlFor="address-1">
+            {Config.housingRegistrationSearchTask.address1Label}
+          </label>
           <TextField
             value={formValues.address1}
             onChange={handleChangeForKey("address1")}
@@ -131,7 +157,9 @@ export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
           />
         </div>
         <div className="margin-bottom-2">
-          <label htmlFor="address-2">{Config.housingRegistrationSearchTask.address2Label}</label>
+          <label htmlFor="address-2">
+            {Config.housingRegistrationSearchTask.address2Label}
+          </label>
           <TextField
             value={formValues.address2}
             onChange={handleChangeForKey("address2")}
@@ -144,7 +172,9 @@ export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
         </div>
         <div className="fdr flex-half">
           <div className="flex-half padding-right-1">
-            <label htmlFor="municipality">{Config.housingRegistrationSearchTask.municipalityLabel}</label>
+            <label htmlFor="municipality">
+              {Config.housingRegistrationSearchTask.municipalityLabel}
+            </label>
             <MunicipalityDropdown
               fieldName={"municipalities"}
               municipalities={formattedMunicipalities}
@@ -157,7 +187,9 @@ export const CheckHousingRegistrationStatus = (props: Props): ReactElement => {
             />
           </div>
           <div className="flex-half padding-left-1">
-            <label htmlFor="state">{Config.housingRegistrationSearchTask.stateLabel}</label>
+            <label htmlFor="state">
+              {Config.housingRegistrationSearchTask.stateLabel}
+            </label>
             <TextField
               value={"New Jersey"}
               onChange={(): void => {}}

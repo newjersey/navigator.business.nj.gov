@@ -18,7 +18,8 @@ interface Props {
 export const NaicsCodeTask = (props: Props): ReactElement => {
   const [showInput, setShowInput] = useState<boolean>(true);
   const { business, updateQueue } = useUserData();
-  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+  const { isAuthenticated, setShowNeedsAccountModal } =
+    useContext(NeedsAccountContext);
 
   useMountEffectWhenDefined(() => {
     if (!business) return;
@@ -29,13 +30,18 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
   }, business);
 
   const shouldLockField = (): boolean => {
-    return business?.profileData.naicsCode !== "" && business?.taxFilingData.state === "SUCCESS";
+    return (
+      business?.profileData.naicsCode !== "" &&
+      business?.taxFilingData.state === "SUCCESS"
+    );
   };
 
   const setBackToEditing = ({ remove }: { remove: boolean }): void => {
     if (!business || !updateQueue) return;
     setShowInput(true);
-    const newNaicsValue = remove ? emptyProfileData.naicsCode : business.profileData.naicsCode;
+    const newNaicsValue = remove
+      ? emptyProfileData.naicsCode
+      : business.profileData.naicsCode;
     updateQueue
       .queueTaskProgress({ [props.task.id]: "TO_DO" })
       .queueProfileData({ naicsCode: newNaicsValue })
@@ -58,8 +64,12 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
     setShowInput(false);
   };
 
-  const preLookupContent = props.task.contentMd.split("${naicsCodeLookupComponent}")[0];
-  const postLookupContent = props.task.contentMd.split("${naicsCodeLookupComponent}")[1];
+  const preLookupContent = props.task.contentMd.split(
+    "${naicsCodeLookupComponent}"
+  )[0];
+  const postLookupContent = props.task.contentMd.split(
+    "${naicsCodeLookupComponent}"
+  )[1];
 
   return (
     <div className="min-height-38rem">
@@ -68,7 +78,11 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
       <Content>{preLookupContent}</Content>
       <div className="margin-y-4 bg-base-extra-light padding-3 radius-lg">
         {showInput ? (
-          <NaicsCodeInput onSave={onSave} task={props.task} isAuthenticated={isAuthenticated} />
+          <NaicsCodeInput
+            onSave={onSave}
+            task={props.task}
+            isAuthenticated={isAuthenticated}
+          />
         ) : (
           <NaicsCodeDisplay
             onEdit={onEdit}

@@ -43,7 +43,9 @@ const WithStatefulBusiness = ({
   initialBusiness: Business;
 }): ReactElement => (
   <WithStatefulDataFieldFormContext>
-    <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
+    <WithStatefulUserData
+      initialUserData={generateUserDataForBusiness(initialBusiness)}
+    >
       {children}
     </WithStatefulUserData>
   </WithStatefulDataFieldFormContext>
@@ -51,7 +53,8 @@ const WithStatefulBusiness = ({
 
 describe("<TaxTask />", () => {
   let task: Task;
-  const content = "some content here\n\n" + "${taxInputComponent}\n\n" + "more content";
+  const content =
+    "some content here\n\n" + "${taxInputComponent}\n\n" + "more content";
   const taskId = "12345";
   const ctaText = "some-CTA-Text";
 
@@ -59,7 +62,11 @@ describe("<TaxTask />", () => {
     jest.resetAllMocks();
     useMockRoadmap({});
     setupStatefulUserDataContext();
-    task = generateTask({ contentMd: content, id: taskId, callToActionText: ctaText });
+    task = generateTask({
+      contentMd: content,
+      id: taskId,
+      callToActionText: ctaText,
+    });
   });
 
   it("replaces ${taxInputComponent} with taxInput component", () => {
@@ -85,8 +92,13 @@ describe("<TaxTask />", () => {
 
   it("shows disabled taxId when taxCalendar is PENDING or SUCCESS", () => {
     const business = generateBusiness({
-      profileData: generateProfileData({ taxId: "*******89123", encryptedTaxId: "some-encrypted-value" }),
-      taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
+      profileData: generateProfileData({
+        taxId: "*******89123",
+        encryptedTaxId: "some-encrypted-value",
+      }),
+      taxFilingData: generateTaxFilingData({
+        state: randomInt() % 2 ? "SUCCESS" : "PENDING",
+      }),
     });
     render(
       <WithStatefulBusiness initialBusiness={business}>
@@ -96,9 +108,15 @@ describe("<TaxTask />", () => {
       </WithStatefulBusiness>
     );
     expect(screen.queryByLabelText("Tax id")).not.toBeInTheDocument();
-    expect(screen.getByTestId("disabled-taxid")).toHaveTextContent(Config.tax.lockedPostText);
-    expect(screen.getByTestId("disabled-taxid")).toHaveTextContent(Config.tax.lockedPreText);
-    expect(screen.getByTestId("disabled-tax-id-value")).toHaveTextContent("****-****-****");
+    expect(screen.getByTestId("disabled-taxid")).toHaveTextContent(
+      Config.tax.lockedPostText
+    );
+    expect(screen.getByTestId("disabled-taxid")).toHaveTextContent(
+      Config.tax.lockedPreText
+    );
+    expect(screen.getByTestId("disabled-tax-id-value")).toHaveTextContent(
+      "****-****-****"
+    );
   });
 
   describe("inputting Tax ID", () => {
@@ -151,7 +169,9 @@ describe("<TaxTask />", () => {
 
     it("enters and saves Tax ID", async () => {
       renderPage();
-      fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
+      fireEvent.change(screen.getByLabelText("Tax id"), {
+        target: { value: "123456789123" },
+      });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
       await waitFor(() => {
         expect(currentBusiness().profileData.taxId).toEqual("123456789123");
@@ -166,7 +186,9 @@ describe("<TaxTask />", () => {
           length: "12",
         }
       );
-      fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123123123" } });
+      fireEvent.change(screen.getByLabelText("Tax id"), {
+        target: { value: "123123123" },
+      });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
       expect(screen.getByText(expectedErrorMessage)).toBeInTheDocument();
       expect(userDataWasNotUpdated()).toBe(true);
@@ -174,7 +196,9 @@ describe("<TaxTask />", () => {
 
     it("sets task status to COMPLETED on save", async () => {
       renderPage();
-      fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
+      fireEvent.change(screen.getByLabelText("Tax id"), {
+        target: { value: "123456789123" },
+      });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
       await waitFor(() => {
         expect(currentBusiness().taskProgress[taskId]).toEqual("COMPLETED");
@@ -198,14 +222,19 @@ describe("<TaxTask />", () => {
 
     beforeEach(() => {
       initialBusiness = generateBusiness({
-        profileData: generateProfileData({ taxId: "*******89123", encryptedTaxId: "some-encrypted-value" }),
+        profileData: generateProfileData({
+          taxId: "*******89123",
+          encryptedTaxId: "some-encrypted-value",
+        }),
         taskProgress: { [taskId]: "COMPLETED" },
       });
     });
 
     it("displays Tax ID and success message when it exists in data and is 12 digits in length", () => {
       renderPage();
-      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("***-***-*89/123");
+      expect(
+        (screen.getByLabelText("Tax id") as HTMLInputElement).value
+      ).toEqual("***-***-*89/123");
     });
   });
 
@@ -234,31 +263,41 @@ describe("<TaxTask />", () => {
 
     it("prepends register to the Save button", async () => {
       renderPage();
-      expect(screen.getByText(`Register & ${Config.tax.saveButtonText}`)).toBeInTheDocument();
+      expect(
+        screen.getByText(`Register & ${Config.tax.saveButtonText}`)
+      ).toBeInTheDocument();
     });
 
     it("opens Needs Account modal on save button click", async () => {
       renderPage();
-      fireEvent.click(screen.getByText(`Register & ${Config.tax.saveButtonText}`));
+      fireEvent.click(
+        screen.getByText(`Register & ${Config.tax.saveButtonText}`)
+      );
       await waitFor(() => {
         return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
       });
       expect(userDataWasNotUpdated()).toBe(true);
       expect(
-        screen.queryByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+        screen.queryByText(
+          Config.profileDefaults.fields.taxId.default.errorTextRequired
+        )
       ).not.toBeInTheDocument();
     });
 
     it("opens Needs Account modal when trying to enter tax input data, and does not show inline errors or update userData", async () => {
       renderPage();
-      fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "1" } });
+      fireEvent.change(screen.getByLabelText("Tax id"), {
+        target: { value: "1" },
+      });
       fireEvent.blur(screen.getByLabelText("Tax id"));
       await waitFor(() => {
         return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
       });
       expect(userDataWasNotUpdated()).toBe(true);
       expect(
-        screen.queryByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+        screen.queryByText(
+          Config.profileDefaults.fields.taxId.default.errorTextRequired
+        )
       ).not.toBeInTheDocument();
       expect(screen.getByLabelText("Tax id")).toHaveValue("");
     });

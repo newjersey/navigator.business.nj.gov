@@ -13,10 +13,15 @@ interface Props {
 }
 
 export const AutosaveSpinner = (props: Props): ReactElement => {
-  const [savingSpinnerClock, setSavingSpinnerClock] = useState<"HIDDEN" | "SAVING" | "SAVED">("HIDDEN");
-  const [savingSpinnerState, setSavingSpinnerState] = useState<"HIDDEN" | "SAVING" | "SAVED">("HIDDEN");
+  const [savingSpinnerClock, setSavingSpinnerClock] = useState<
+    "HIDDEN" | "SAVING" | "SAVED"
+  >("HIDDEN");
+  const [savingSpinnerState, setSavingSpinnerState] = useState<
+    "HIDDEN" | "SAVING" | "SAVED"
+  >("HIDDEN");
   const [timestampOfLastSave, setTimestampOfLastSave] = useState<number>(0);
-  const [timestampOfLastSpinAnimation, setTimestampOfLastSpinAnimation] = useState<number>(0);
+  const [timestampOfLastSpinAnimation, setTimestampOfLastSpinAnimation] =
+    useState<number>(0);
   const { Config } = useConfig();
 
   useEffect(() => {
@@ -42,7 +47,8 @@ export const AutosaveSpinner = (props: Props): ReactElement => {
       if (savingSpinnerClock === "SAVING") {
         const hasSavedDuringLastInterval =
           timestampOfLastSave > 0 &&
-          dayjs().valueOf() - timestampOfLastSave <= props.secondsBetweenSpinAnimations * 1000;
+          dayjs().valueOf() - timestampOfLastSave <=
+            props.secondsBetweenSpinAnimations * 1000;
         if (hasSavedDuringLastInterval) {
           setTimestampOfLastSpinAnimation(dayjs().valueOf());
           setSavingSpinnerState("SAVING");
@@ -52,8 +58,11 @@ export const AutosaveSpinner = (props: Props): ReactElement => {
       } else if (savingSpinnerClock === "SAVED") {
         const didSpinAnimationThisInterval =
           timestampOfLastSpinAnimation > 0 &&
-          dayjs().valueOf() - timestampOfLastSpinAnimation <= props.secondsBetweenSpinAnimations * 1000;
-        setSavingSpinnerState(didSpinAnimationThisInterval ? "SAVED" : "HIDDEN");
+          dayjs().valueOf() - timestampOfLastSpinAnimation <=
+            props.secondsBetweenSpinAnimations * 1000;
+        setSavingSpinnerState(
+          didSpinAnimationThisInterval ? "SAVED" : "HIDDEN"
+        );
       } else {
         setSavingSpinnerState("HIDDEN");
       }
@@ -64,7 +73,8 @@ export const AutosaveSpinner = (props: Props): ReactElement => {
   useEffect(() => {
     (function autoSaveOnFieldChangeWithInterval(): void {
       const hasSaveIntervalElapsed =
-        dayjs().valueOf() - timestampOfLastSave >= props.saveEveryXSeconds * 1000;
+        dayjs().valueOf() - timestampOfLastSave >=
+        props.saveEveryXSeconds * 1000;
 
       if (props.hasDataChanged && hasSaveIntervalElapsed) {
         setTimestampOfLastSave(dayjs().valueOf());
@@ -79,14 +89,18 @@ export const AutosaveSpinner = (props: Props): ReactElement => {
       return (
         <>
           <CircularProgress size="1.5rem" />
-          <span className="margin-left-1 text-base-dark">{Config.autosaveDefaults.savingText}</span>
+          <span className="margin-left-1 text-base-dark">
+            {Config.autosaveDefaults.savingText}
+          </span>
         </>
       );
     case "SAVED":
       return (
         <>
           <Icon iconName="check" />
-          <span className="margin-left-1 text-base-dark">{Config.autosaveDefaults.savedText}</span>
+          <span className="margin-left-1 text-base-dark">
+            {Config.autosaveDefaults.savedText}
+          </span>
         </>
       );
     case "HIDDEN":

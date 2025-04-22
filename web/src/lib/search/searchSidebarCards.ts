@@ -1,8 +1,14 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
+import {
+  findMatchInBlock,
+  findMatchInLabelledText,
+} from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
 import { SidebarCardContent } from "@/lib/types/types";
 
-export const searchSidebarCards = (sidebarCards: SidebarCardContent[], term: string): Match[] => {
+export const searchSidebarCards = (
+  sidebarCards: SidebarCardContent[],
+  term: string
+): Match[] => {
   const matches: Match[] = [];
 
   for (const card of sidebarCards) {

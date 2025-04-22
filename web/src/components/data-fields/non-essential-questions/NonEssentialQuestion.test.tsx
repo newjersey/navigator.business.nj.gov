@@ -1,8 +1,15 @@
 import { NonEssentialQuestion } from "@/components/data-fields/non-essential-questions/NonEssentialQuestion";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as GetNonEssentialQuestionTextModule from "@/lib/domain-logic/getNonEssentialQuestionText";
-import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { createEmptyProfileData, generateProfileData, ProfileData } from "@businessnjgovnavigator/shared";
+import {
+  currentProfileData,
+  WithStatefulProfileData,
+} from "@/test/mock/withStatefulProfileData";
+import {
+  createEmptyProfileData,
+  generateProfileData,
+  ProfileData,
+} from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
@@ -10,7 +17,9 @@ jest.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
 }));
 
 const mockGetNonEssentialQuestionText = (
-  GetNonEssentialQuestionTextModule as jest.Mocked<typeof GetNonEssentialQuestionTextModule>
+  GetNonEssentialQuestionTextModule as jest.Mocked<
+    typeof GetNonEssentialQuestionTextModule
+  >
 ).getNonEssentialQuestionText;
 
 const questionText = "Cool Test Question?";
@@ -31,7 +40,9 @@ describe("ProfileNonEssentialQuestion", () => {
   }): void => {
     render(
       <WithStatefulProfileData
-        initialData={generateProfileData({ ...profileData }) ?? createEmptyProfileData()}
+        initialData={
+          generateProfileData({ ...profileData }) ?? createEmptyProfileData()
+        }
       >
         <NonEssentialQuestion essentialQuestionId={essentialQuestionId} />
       </WithStatefulProfileData>
@@ -42,17 +53,23 @@ describe("ProfileNonEssentialQuestion", () => {
     renderEssentialQuestion({ essentialQuestionId: "cool-test-id" });
     expect(screen.getByText(questionText)).toBeInTheDocument();
     expect(
-      screen.getByText(Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText)
+      screen.getByText(
+        Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText
+      )
     ).toBeInTheDocument();
   });
 
   it("doesn't have an option pre-filled if user hasn't selected anything", () => {
     renderEssentialQuestion({ essentialQuestionId: "cool-test-id" });
     expect(
-      within(screen.getByTestId("cool-test-id-radio-no") as HTMLInputElement).getByRole("radio")
+      within(
+        screen.getByTestId("cool-test-id-radio-no") as HTMLInputElement
+      ).getByRole("radio")
     ).not.toBeChecked();
     expect(
-      within(screen.getByTestId("cool-test-id-radio-yes") as HTMLInputElement).getByRole("radio")
+      within(
+        screen.getByTestId("cool-test-id-radio-yes") as HTMLInputElement
+      ).getByRole("radio")
     ).not.toBeChecked();
   });
 
@@ -62,7 +79,9 @@ describe("ProfileNonEssentialQuestion", () => {
       profileData: { nonEssentialRadioAnswers: { "cool-test-id": false } },
     });
     fireEvent.click(screen.getByTestId("cool-test-id-radio-yes"));
-    expect(currentProfileData().nonEssentialRadioAnswers).toEqual({ "cool-test-id": true });
+    expect(currentProfileData().nonEssentialRadioAnswers).toEqual({
+      "cool-test-id": true,
+    });
   });
 
   it("updates profile data with false if answered no", () => {
@@ -71,6 +90,8 @@ describe("ProfileNonEssentialQuestion", () => {
       profileData: { nonEssentialRadioAnswers: { "cool-test-id": true } },
     });
     fireEvent.click(screen.getByTestId("cool-test-id-radio-no"));
-    expect(currentProfileData().nonEssentialRadioAnswers).toEqual({ "cool-test-id": false });
+    expect(currentProfileData().nonEssentialRadioAnswers).toEqual({
+      "cool-test-id": false,
+    });
   });
 });

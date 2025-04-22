@@ -4,15 +4,23 @@ import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { randomPublicFilingLegalStructure, randomTradeNameLegalStructure } from "@/test/factories";
-import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
+import {
+  randomPublicFilingLegalStructure,
+  randomTradeNameLegalStructure,
+} from "@/test/factories";
+import {
+  generateBusiness,
+  generateProfileData,
+} from "@businessnjgovnavigator/shared/test";
 import { ReactElement, useState } from "react";
 
 const TaxAccessPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
-  const [errorPreview, setErrorPreview] = useState<"NONE" | "API" | "UNKNOWN">("NONE");
+  const [errorPreview, setErrorPreview] = useState<"NONE" | "API" | "UNKNOWN">(
+    "NONE"
+  );
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
@@ -56,12 +64,16 @@ const TaxAccessPreview = (props: PreviewProps): ReactElement => {
         </div>
       </fieldset>
 
-      <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+      <div
+        className="cms"
+        ref={ref}
+        style={{ margin: 40, pointerEvents: "none" }}
+      >
         <TaxAccessStepOne moveToNextStep={(): void => {}} />
 
         <div>
-          This is a preview of Step Two with a <span className="text-bold">public filing</span> legal
-          structure:
+          This is a preview of Step Two with a{" "}
+          <span className="text-bold">public filing</span> legal structure:
         </div>
 
         <TaxAccessStepTwo
@@ -77,7 +89,8 @@ const TaxAccessPreview = (props: PreviewProps): ReactElement => {
         />
 
         <div>
-          This is a preview of Step Two with a <span className="text-bold">trade name</span> legal structure:
+          This is a preview of Step Two with a{" "}
+          <span className="text-bold">trade name</span> legal structure:
         </div>
 
         <TaxAccessStepTwo

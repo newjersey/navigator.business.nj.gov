@@ -12,11 +12,24 @@ export const ReviewIsVeteranNonprofit = (props: Props): ReactElement => {
 
   const displayResponse = (): ReactElement => {
     if (props.value) {
-      return <Content>{Config.formation.fields.isVeteranNonprofit.reviewTextYes}</Content>;
+      return (
+        <Content>
+          {Config.formation.fields.isVeteranNonprofit.reviewTextYes}
+        </Content>
+      );
     } else if (props.value === false) {
-      return <Content>{Config.formation.fields.isVeteranNonprofit.reviewTextNo}</Content>;
+      return (
+        <Content>
+          {Config.formation.fields.isVeteranNonprofit.reviewTextNo}
+        </Content>
+      );
     } else {
-      return <ReviewLineItem label={Config.formation.fields.isVeteranNonprofit.label} value={""} />;
+      return (
+        <ReviewLineItem
+          label={Config.formation.fields.isVeteranNonprofit.label}
+          value={""}
+        />
+      );
     }
   };
   return (

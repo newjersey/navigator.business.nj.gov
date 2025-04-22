@@ -100,7 +100,9 @@ describe("loading page", () => {
     });
     setupStatefulUserDataContext();
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business)}
+      >
         <LoadingPage />
       </WithStatefulUserData>
     );
@@ -111,13 +113,19 @@ describe("loading page", () => {
   });
 
   it("triggers onGuestSignIn with encounteredMyNjLinkingError param when user has signin error", async () => {
-    setMockUserDataResponse(generateUseUserDataResponse({ userData: undefined }));
+    setMockUserDataResponse(
+      generateUseUserDataResponse({ userData: undefined })
+    );
     useMockRouter({ isReady: true, asPath: signInSamlError });
     mockSigninHelper.onGuestSignIn.mockResolvedValue();
 
-    render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
+    render(
+      withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE })
+    );
 
-    expect(mockAnalytics.event.landing_page.arrive.get_unlinked_myNJ_account).toHaveBeenCalled();
+    expect(
+      mockAnalytics.event.landing_page.arrive.get_unlinked_myNJ_account
+    ).toHaveBeenCalled();
     return expect(mockSigninHelper.onGuestSignIn).toHaveBeenCalledWith({
       push: expect.anything(),
       pathname: expect.anything(),
@@ -127,19 +135,27 @@ describe("loading page", () => {
   });
 
   it("redirects to the email check login page as a fallback if other conditions aren't met and the login page is enabled", async () => {
-    setMockUserDataResponse(generateUseUserDataResponse({ userData: undefined }));
+    setMockUserDataResponse(
+      generateUseUserDataResponse({ userData: undefined })
+    );
     useMockRouter({ isReady: true, asPath: "not-a-saml-error" });
 
-    render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
+    render(
+      withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE })
+    );
     expect(mockPush).toHaveBeenCalledWith(ROUTES.login);
   });
 
   it("attempts to trigger sign in as a fallback if other conditions aren't met and the login page is disabled", async () => {
     process.env.FEATURE_LOGIN_PAGE = "false";
-    setMockUserDataResponse(generateUseUserDataResponse({ userData: undefined }));
+    setMockUserDataResponse(
+      generateUseUserDataResponse({ userData: undefined })
+    );
     useMockRouter({ isReady: true, asPath: "not-a-saml-error" });
 
-    render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
+    render(
+      withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE })
+    );
     expect(triggerSignIn).toHaveBeenCalled();
   });
 });

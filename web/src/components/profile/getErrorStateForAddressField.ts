@@ -4,7 +4,11 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
-import { AddressFieldErrorState, AddressFields, FieldsForAddressErrorHandling } from "@/lib/types/types";
+import {
+  AddressFieldErrorState,
+  AddressFields,
+  FieldsForAddressErrorHandling,
+} from "@/lib/types/types";
 import {
   BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
   BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
@@ -25,9 +29,13 @@ export const getErrorStateForAddressField = ({
     label: (Config.formation.fields as any)[field].label,
   };
 
-  const fieldWithMaxLength = (params: { required: boolean; maxLen: number }): AddressFieldErrorState => {
+  const fieldWithMaxLength = (params: {
+    required: boolean;
+    maxLen: number;
+  }): AddressFieldErrorState => {
     const exists = !!formationAddressData[field];
-    const isTooLong = (formationAddressData[field] as string)?.length > params.maxLen;
+    const isTooLong =
+      (formationAddressData[field] as string)?.length > params.maxLen;
     let label = errorState.label;
     const isValid = params.required ? exists && !isTooLong : !isTooLong;
     if (params.required && !exists) {
@@ -46,7 +54,9 @@ export const getErrorStateForAddressField = ({
     label: string;
   }): AddressFieldErrorState => {
     const exists = !!formationAddressData[field];
-    const anAssociatedFieldExists = params.associatedFields.some((it) => !!formationAddressData[it]);
+    const anAssociatedFieldExists = params.associatedFields.some(
+      (it) => !!formationAddressData[it]
+    );
 
     let label = errorState.label;
     let isValid = true;
@@ -77,7 +87,10 @@ export const getErrorStateForAddressField = ({
   };
 
   if (field === "addressLine1") {
-    const maxLengthError = fieldWithMaxLength({ required: false, maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR });
+    const maxLengthError = fieldWithMaxLength({
+      required: false,
+      maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
+    });
 
     const partialAddressError = fieldWithAssociatedFields({
       associatedFields: [
@@ -91,11 +104,17 @@ export const getErrorStateForAddressField = ({
       label: (Config.formation.fields as any)[field].error,
     });
 
-    return combineErrorStates({ firstPriority: maxLengthError, secondPriority: partialAddressError });
+    return combineErrorStates({
+      firstPriority: maxLengthError,
+      secondPriority: partialAddressError,
+    });
   }
 
   if (field === "addressLine2") {
-    return fieldWithMaxLength({ required: false, maxLen: BUSINESS_ADDRESS_LINE_2_MAX_CHAR });
+    return fieldWithMaxLength({
+      required: false,
+      maxLen: BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
+    });
   }
 
   if (field === "addressMunicipality") {
@@ -133,14 +152,26 @@ export const getErrorStateForAddressField = ({
 
   if (field === "addressProvince") {
     return fieldWithAssociatedFields({
-      associatedFields: ["addressLine1", "addressCity", "addressCountry", "addressZipCode", "addressLine2"],
+      associatedFields: [
+        "addressLine1",
+        "addressCity",
+        "addressCountry",
+        "addressZipCode",
+        "addressLine2",
+      ],
       label: (Config.formation.fields as any)[field].error,
     });
   }
 
   if (field === "addressCountry") {
     return fieldWithAssociatedFields({
-      associatedFields: ["addressLine1", "addressCity", "addressProvince", "addressZipCode", "addressLine2"],
+      associatedFields: [
+        "addressLine1",
+        "addressCity",
+        "addressProvince",
+        "addressZipCode",
+        "addressLine2",
+      ],
       label: (Config.formation.fields as any)[field].error,
     });
   }
@@ -178,7 +209,10 @@ export const getErrorStateForAddressField = ({
       label: zipCodeErrorLabel,
     };
 
-    return combineErrorStates({ firstPriority: inRangeError, secondPriority: partialAddressError });
+    return combineErrorStates({
+      firstPriority: inRangeError,
+      secondPriority: partialAddressError,
+    });
   }
   return { ...errorState, hasError: false };
 };

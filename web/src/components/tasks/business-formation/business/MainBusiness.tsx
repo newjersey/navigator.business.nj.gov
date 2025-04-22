@@ -12,7 +12,10 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { isForeignCorporation, isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
+import {
+  isForeignCorporation,
+  isForeignCorporationOrNonprofit,
+} from "@/lib/utils/helpers";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext, useMemo } from "react";
 
@@ -29,26 +32,38 @@ export const MainBusiness = (): ReactElement => {
     <div>
       <BusinessNameAndLegalStructure />
       {isForeignCorporation(state.formationFormData.legalType) && (
-        <WithErrorBar hasError={doesFieldHaveError("willPracticeLaw")} type="ALWAYS">
+        <WithErrorBar
+          hasError={doesFieldHaveError("willPracticeLaw")}
+          type="ALWAYS"
+        >
           <FormationField fieldName="willPracticeLaw">
             <WillPracticeLaw />
           </FormationField>
         </WithErrorBar>
       )}
       <WithErrorBar
-        hasError={doSomeFieldsHaveError(["businessSuffix", "businessStartDate"])}
+        hasError={doSomeFieldsHaveError([
+          "businessSuffix",
+          "businessStartDate",
+        ])}
         type="DESKTOP-ONLY"
       >
         <div className="grid-row grid-gap-1">
           <div className="margin-top-2 tablet:grid-col-6">
-            <WithErrorBar hasError={doesFieldHaveError("businessSuffix")} type="MOBILE-ONLY">
+            <WithErrorBar
+              hasError={doesFieldHaveError("businessSuffix")}
+              type="MOBILE-ONLY"
+            >
               <FormationField fieldName="businessSuffix">
                 <SuffixDropdown />
               </FormationField>
             </WithErrorBar>
           </div>
           <div className="margin-top-2 tablet:grid-col-6">
-            <WithErrorBar hasError={doesFieldHaveError("businessStartDate")} type="MOBILE-ONLY">
+            <WithErrorBar
+              hasError={doesFieldHaveError("businessStartDate")}
+              type="MOBILE-ONLY"
+            >
               <FormationField fieldName="businessStartDate">
                 <FormationDate fieldName="businessStartDate" />
               </FormationField>
@@ -59,19 +74,28 @@ export const MainBusiness = (): ReactElement => {
       {isForeign && (
         <>
           <WithErrorBar
-            hasError={doSomeFieldsHaveError(["foreignStateOfFormation", "foreignDateOfFormation"])}
+            hasError={doSomeFieldsHaveError([
+              "foreignStateOfFormation",
+              "foreignDateOfFormation",
+            ])}
             type="DESKTOP-ONLY"
           >
             <div className="grid-row grid-gap-1">
               <div className="margin-top-2 tablet:grid-col-6">
-                <WithErrorBar hasError={doesFieldHaveError("foreignStateOfFormation")} type="MOBILE-ONLY">
+                <WithErrorBar
+                  hasError={doesFieldHaveError("foreignStateOfFormation")}
+                  type="MOBILE-ONLY"
+                >
                   <FormationField fieldName="foreignStateOfFormation">
                     <ForeignStateOfFormation />
                   </FormationField>
                 </WithErrorBar>
               </div>
               <div className="margin-top-2 tablet:grid-col-6">
-                <WithErrorBar hasError={doesFieldHaveError("foreignDateOfFormation")} type="MOBILE-ONLY">
+                <WithErrorBar
+                  hasError={doesFieldHaveError("foreignDateOfFormation")}
+                  type="MOBILE-ONLY"
+                >
                   <FormationField fieldName="foreignDateOfFormation">
                     <FormationDate fieldName="foreignDateOfFormation" />
                   </FormationField>
@@ -80,10 +104,14 @@ export const MainBusiness = (): ReactElement => {
             </div>
           </WithErrorBar>
 
-          {isForeignCorporationOrNonprofit(state.formationFormData.legalType) && (
+          {isForeignCorporationOrNonprofit(
+            state.formationFormData.legalType
+          ) && (
             <FormationField fieldName="foreignGoodStandingFile">
               <hr className="margin-bottom-2 margin-top-3" aria-hidden={true} />
-              <ForeignCertificate hasError={doesFieldHaveError("foreignGoodStandingFile")} />
+              <ForeignCertificate
+                hasError={doesFieldHaveError("foreignGoodStandingFile")}
+              />
             </FormationField>
           )}
         </>
@@ -111,7 +139,9 @@ export const MainBusiness = (): ReactElement => {
                 }}
                 required={true}
                 fieldName={"businessTotalStock"}
-                validationText={Config.formation.fields.businessTotalStock.error}
+                validationText={
+                  Config.formation.fields.businessTotalStock.error
+                }
               />
             </FormationField>
           </div>

@@ -18,7 +18,12 @@ export const ResultsSectionAccordion = (props: Props): ReactElement => {
       <SectionAccordionContext.Provider value={{ isOpen }}>
         <Accordion expanded={isOpen} onChange={() => setIsOpen(!isOpen)}>
           <AccordionSummary
-            expandIcon={<Icon className={"usa-icon--size-5 margin-left-1"} iconName={"expand_more"} />}
+            expandIcon={
+              <Icon
+                className={"usa-icon--size-5 margin-left-1"}
+                iconName={"expand_more"}
+              />
+            }
             aria-controls={`${sectionName}-content`}
             id={`${sectionName}-header`}
             data-testid={`${sectionName}-header`}

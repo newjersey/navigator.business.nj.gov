@@ -13,12 +13,16 @@ import { IconButton } from "@mui/material";
 import { ReactElement, useContext, useEffect } from "react";
 
 export const RegistrationStatusSnackbar = (): ReactElement => {
-  const { isAuthenticated, registrationStatus, setRegistrationStatus } = useContext(NeedsAccountContext);
+  const { isAuthenticated, registrationStatus, setRegistrationStatus } =
+    useContext(NeedsAccountContext);
   const { state } = useContext(AuthContext);
   const { Config } = useConfig();
 
   useEffect(() => {
-    if (registrationStatus === "IN_PROGRESS" && isAuthenticated === IsAuthenticated.TRUE) {
+    if (
+      registrationStatus === "IN_PROGRESS" &&
+      isAuthenticated === IsAuthenticated.TRUE
+    ) {
       analytics.event.roadmap_dashboard.arrive.arrive_from_myNJ_registration();
       setRegistrationStatus("SUCCESS");
     }

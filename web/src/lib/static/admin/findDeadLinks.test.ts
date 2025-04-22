@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { findDeadContextualInfo, findDeadLinks, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
+import {
+  findDeadContextualInfo,
+  findDeadLinks,
+  findDeadTasks,
+} from "@/lib/static/admin/findDeadLinks";
 import { Options } from "broken-link-checker";
 import fs from "fs";
 
@@ -24,12 +28,27 @@ describe("findDeadLinks", () => {
       .mockReturnValueOnce(["filing1.md"])
       // @ts-ignore
       .mockReturnValueOnce(["addon1.json", "addon2.json"])
-      // @ts-ignore
-      .mockReturnValueOnce(["info1.md", "info2.md", "info3", "info4", "dead-info.md"])
+      .mockReturnValueOnce([
+        // @ts-ignore
+        "info1.md",
+        // @ts-ignore
+        "info2.md",
+        // @ts-ignore
+        "info3",
+        // @ts-ignore
+        "info4",
+        // @ts-ignore
+        "dead-info.md",
+      ])
       // @ts-ignore
       .mockReturnValueOnce(["display-subfolder", "display1.md", "display2.ts"])
       // @ts-ignore
-      .mockReturnValueOnce(["display-subfolder-item1.md", "display-subfolder-item2.ts"])
+      .mockReturnValueOnce([
+        // @ts-ignore
+        "display-subfolder-item1.md",
+        // @ts-ignore
+        "display-subfolder-item2.ts",
+      ])
       // @ts-ignore
       .mockReturnValueOnce(["config.json"])
       // @ts-ignore
@@ -49,7 +68,8 @@ describe("findDeadLinks", () => {
     const task2 = "Task 2 contents with `contextual info|info1` in it";
     const deadTask = "Dead task contents";
     const industry1 = '{"roadmapSteps":[],"modifications":[]}';
-    const addOn1 = '{"roadmapSteps":[{"step": 1, "weight": 1, "task": "task1"}],"modifications":[]}';
+    const addOn1 =
+      '{"roadmapSteps":[{"step": 1, "weight": 1, "task": "task1"}],"modifications":[]}';
     const addOn2 =
       '{"roadmapSteps":[],"modifications":[{"step": 1, "taskToReplaceFilename": "something","replaceWithFilename": "task2"}]}';
     const info1 = "Info 1 contents with `contextual info|info2` in it";
@@ -58,14 +78,16 @@ describe("findDeadLinks", () => {
     const info4 = "Info 4 contents";
     const deadInfo = "dead info contents";
     const display1 = "Display contents with `contextual info|info3` in it";
-    const displaySubfolderItem1 = "Display contents with `contextual info|info4` in it";
+    const displaySubfolderItem1 =
+      "Display contents with `contextual info|info4` in it";
     const config = '{"testheader":"test"}';
     const fundings = "Funding Content";
     const certifications = "Certification Content";
     const licenses = "License Content";
     const licenseTasks = "LicenseTask Content";
     const anytimeActionTasks = "AnytimeActionTask Content";
-    const anytimeActionLicenseReinstatements = "AnytimeActionLicenseReinstatement Content";
+    const anytimeActionLicenseReinstatements =
+      "AnytimeActionLicenseReinstatement Content";
 
     mockedFs.readFileSync
       .mockReturnValueOnce(industry1)
@@ -122,7 +144,8 @@ describe("findDeadLinks", () => {
         "/funding/fundings": [],
         "/certification/certifications": [],
         "/anytime-action-tasks/anytimeActionTasks": [],
-        "/anytime-action-license-reinstatements/anytimeActionLicenseReinstatements": [],
+        "/anytime-action-license-reinstatements/anytimeActionLicenseReinstatements":
+          [],
       });
     });
   });

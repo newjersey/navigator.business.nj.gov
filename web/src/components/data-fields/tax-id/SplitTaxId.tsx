@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { ProfileDataFieldProps } from "@/components/data-fields/ProfileDataField";
-import { TaxIdFormContext, taxIdFormContextErrorMap } from "@/components/data-fields/tax-id/TaxIdFormContext";
+import {
+  TaxIdFormContext,
+  taxIdFormContextErrorMap,
+} from "@/components/data-fields/tax-id/TaxIdFormContext";
 import { TaxIdDisplayStatus } from "@/components/data-fields/tax-id/TaxIdHelpers";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ConfigType } from "@/contexts/configContext";
@@ -17,9 +20,14 @@ import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext, useRef, useState } from "react";
 
 interface Props
-  extends Omit<ProfileDataFieldProps, "fieldName" | "handleChange" | "onValidation" | "inputWidth"> {
+  extends Omit<
+    ProfileDataFieldProps,
+    "fieldName" | "handleChange" | "onValidation" | "inputWidth"
+  > {
   handleChangeOverride?: (value: string) => void;
-  getShowHideToggleButton: (toggleFunc?: (taxId: string) => void) => ReactElement;
+  getShowHideToggleButton: (
+    toggleFunc?: (taxId: string) => void
+  ) => ReactElement;
   taxIdDisplayStatus: TaxIdDisplayStatus;
 }
 export const SplitTaxId = ({
@@ -34,15 +42,19 @@ export const SplitTaxId = ({
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
-  const [locationValue, setLocationValue] = useState(state.profileData[fieldName]?.trim().slice(9, 12) ?? "");
-  const [taxIdValue, setTaxIdValue] = useState(state.profileData[fieldName]?.trim().slice(0, 9) ?? "");
-
-  const { isValid, state: formContextState } = useFormContextHelper(taxIdFormContextErrorMap);
-
-  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
-    fieldName,
-    DataFormErrorMapContext
+  const [locationValue, setLocationValue] = useState(
+    state.profileData[fieldName]?.trim().slice(9, 12) ?? ""
   );
+  const [taxIdValue, setTaxIdValue] = useState(
+    state.profileData[fieldName]?.trim().slice(0, 9) ?? ""
+  );
+
+  const { isValid, state: formContextState } = useFormContextHelper(
+    taxIdFormContextErrorMap
+  );
+
+  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } =
+    useFormContextFieldHelpers(fieldName, DataFormErrorMapContext);
 
   RegisterForOnSubmit(
     () =>
@@ -55,18 +67,22 @@ export const SplitTaxId = ({
   const locationBoxRef = useRef<HTMLDivElement>(null);
   const taxIdBoxRef = useRef<HTMLDivElement>(null);
 
-  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["taxId"]["default"] = getProfileConfig({
-    config: Config,
-    persona: state.flow,
-    fieldName: "taxId",
-  });
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["taxId"]["default"] =
+    getProfileConfig({
+      config: Config,
+      persona: state.flow,
+      fieldName: "taxId",
+    });
 
   const updateSplitTaxId = (taxId: string): void => {
     setTaxIdValue(taxId.trim().slice(0, 9));
     setLocationValue(taxId.trim().slice(9, 12));
   };
 
-  const handleChange = (value: string, type: "taxId" | "taxIdLocation"): void => {
+  const handleChange = (
+    value: string,
+    type: "taxId" | "taxIdLocation"
+  ): void => {
     let resolvedValue: string;
 
     if (type === "taxId") {
@@ -84,7 +100,10 @@ export const SplitTaxId = ({
       handleChangeOverride(resolvedValue);
       return;
     }
-    setProfileData((profileData) => ({ ...profileData, [fieldName]: resolvedValue }));
+    setProfileData((profileData) => ({
+      ...profileData,
+      [fieldName]: resolvedValue,
+    }));
   };
 
   return (
@@ -102,13 +121,19 @@ export const SplitTaxId = ({
             error={isFormFieldInvalid}
             visualFilter={formatTaxId}
             numericProps={{ minLength: 9, maxLength: 9 }}
-            validationText={validationText ?? contentFromConfig.errorTextRequired ?? ""}
+            validationText={
+              validationText ?? contentFromConfig.errorTextRequired ?? ""
+            }
             handleChange={(value): void => {
               handleChange(value, "taxId");
             }}
-            onValidation={(fieldName: string, invalid: boolean): void => setIsValid(!invalid)}
+            onValidation={(fieldName: string, invalid: boolean): void =>
+              setIsValid(!invalid)
+            }
             disabled={props.taxIdDisplayStatus === "password-view"}
-            type={props.taxIdDisplayStatus === "text-view" ? "text" : "password"}
+            type={
+              props.taxIdDisplayStatus === "text-view" ? "text" : "password"
+            }
             allowMasking={true}
             inputWidth={"reduced"}
             {...props}
@@ -128,16 +153,24 @@ export const SplitTaxId = ({
             handleChange={(value): void => {
               handleChange(value, "taxIdLocation");
             }}
-            onValidation={(fieldName: string, invalid: boolean): void => setIsValid(!invalid)}
+            onValidation={(fieldName: string, invalid: boolean): void =>
+              setIsValid(!invalid)
+            }
             disabled={props.taxIdDisplayStatus === "password-view"}
-            type={props.taxIdDisplayStatus === "text-view" ? "text" : "password"}
+            type={
+              props.taxIdDisplayStatus === "text-view" ? "text" : "password"
+            }
             allowMasking={true}
             {...props}
           />
         </div>
         <div className="grid-col-12 tablet:grid-col-2">
           <div
-            className={isTabletAndUp ? "margin-top-2 margin-left-3" : "flex flex-justify-center margin-y-2"}
+            className={
+              isTabletAndUp
+                ? "margin-top-2 margin-left-3"
+                : "flex flex-justify-center margin-y-2"
+            }
           >
             {props.getShowHideToggleButton(updateSplitTaxId)}
           </div>

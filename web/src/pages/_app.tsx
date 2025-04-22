@@ -7,7 +7,10 @@ import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
 import { RegistrationStatusSnackbar } from "@/components/auth/RegistrationStatusSnackbar";
 import { AuthContext, initialState } from "@/contexts/authContext";
 import { getMergedConfig } from "@/contexts/configContext";
-import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
+import {
+  ContextualInfo,
+  ContextualInfoContext,
+} from "@/contexts/contextualInfoContext";
 import { IntercomContext } from "@/contexts/intercomContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
@@ -22,7 +25,11 @@ import { Roadmap, UpdateQueue, UserDataError } from "@/lib/types/types";
 import analytics, { GTM_ID } from "@/lib/utils/analytics";
 import { setOnLoadDimensions } from "@/lib/utils/analytics-helpers";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { BusinessPersona, OperatingPhaseId, RegistrationStatus } from "@businessnjgovnavigator/shared";
+import {
+  BusinessPersona,
+  OperatingPhaseId,
+  RegistrationStatus,
+} from "@businessnjgovnavigator/shared";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import "@newjersey/njwds/dist/css/styles.css";
 import { DefaultSeo } from "next-seo";
@@ -45,30 +52,44 @@ UserDataErrorContext.displayName = "User Data Error";
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
-  const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(undefined);
-  const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);
-  const [registrationStatus, setRegistrationStatus] = useState<RegistrationStatus | undefined>(
-    UserDataStorageFactory().getRegistrationStatus()
+  const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(
+    undefined
   );
+  const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);
+  const [registrationStatus, setRegistrationStatus] = useState<
+    RegistrationStatus | undefined
+  >(UserDataStorageFactory().getRegistrationStatus());
 
-  const setRegistrationStatusInStateAndStorage = (value: RegistrationStatus | undefined): void => {
+  const setRegistrationStatusInStateAndStorage = (
+    value: RegistrationStatus | undefined
+  ): void => {
     setRegistrationStatus(value);
     UserDataStorageFactory().setRegistrationStatus(value);
   };
 
-  const [showNeedsAccountSnackbar, setShowNeedsAccountSnackbar] = useState<boolean>(false);
-  const [showNeedsAccountModal, setShowNeedsAccountModal] = useState<boolean>(false);
+  const [showNeedsAccountSnackbar, setShowNeedsAccountSnackbar] =
+    useState<boolean>(false);
+  const [showNeedsAccountModal, setShowNeedsAccountModal] =
+    useState<boolean>(false);
   const [contextualInfo, setContextualInfo] = useState<ContextualInfo>({
     isVisible: false,
     header: "",
     markdown: "",
   });
-  const [userDataError, setUserDataError] = useState<UserDataError | undefined>(undefined);
+  const [userDataError, setUserDataError] = useState<UserDataError | undefined>(
+    undefined
+  );
   const router = useRouter();
-  const [operatingPhaseId, setOperatingPhaseId] = useState<OperatingPhaseId | undefined>(undefined);
-  const [legalStructureId, setLegalStructureId] = useState<string | undefined>(undefined);
+  const [operatingPhaseId, setOperatingPhaseId] = useState<
+    OperatingPhaseId | undefined
+  >(undefined);
+  const [legalStructureId, setLegalStructureId] = useState<string | undefined>(
+    undefined
+  );
   const [industryId, setIndustryId] = useState<string | undefined>(undefined);
-  const [businessPersona, setBusinessPersona] = useState<BusinessPersona | undefined>(undefined);
+  const [businessPersona, setBusinessPersona] = useState<
+    BusinessPersona | undefined
+  >(undefined);
   const config = getMergedConfig();
   const showGtm = !(process.env.DISABLE_GTM === "true");
 
@@ -135,7 +156,12 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           });
         })
         .catch(() => {
-          router && onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
+          router &&
+            onGuestSignIn({
+              push: router.push,
+              pathname: router.pathname,
+              dispatch,
+            });
         });
     }
   });
@@ -217,7 +243,12 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         description={config.pagesMetadata.siteDescription}
       />
       <IntercomContext.Provider
-        value={{ setOperatingPhaseId, setLegalStructureId, setIndustryId, setBusinessPersona }}
+        value={{
+          setOperatingPhaseId,
+          setLegalStructureId,
+          setIndustryId,
+          setBusinessPersona,
+        }}
       >
         <StyledEngineProvider injectFirst>
           <ThemeProvider theme={MuiTheme}>
@@ -226,17 +257,26 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
             ) : (
               <SWRConfig value={{ provider: UserDataStorageFactory }}>
                 <AuthContext.Provider value={{ state, dispatch }}>
-                  <UpdateQueueContext.Provider value={{ updateQueue, setUpdateQueue }}>
-                    <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
-                      <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
-                        <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
+                  <UpdateQueueContext.Provider
+                    value={{ updateQueue, setUpdateQueue }}
+                  >
+                    <UserDataErrorContext.Provider
+                      value={{ userDataError, setUserDataError }}
+                    >
+                      <ContextualInfoContext.Provider
+                        value={{ contextualInfo, setContextualInfo }}
+                      >
+                        <RoadmapContext.Provider
+                          value={{ roadmap, setRoadmap }}
+                        >
                           <NeedsAccountContext.Provider
                             value={{
                               isAuthenticated: state.isAuthenticated,
                               showNeedsAccountSnackbar,
                               showNeedsAccountModal,
                               registrationStatus: registrationStatus,
-                              setRegistrationStatus: setRegistrationStatusInStateAndStorage,
+                              setRegistrationStatus:
+                                setRegistrationStatusInStateAndStorage,
                               setShowNeedsAccountSnackbar,
                               setShowNeedsAccountModal,
                             }}

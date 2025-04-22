@@ -56,7 +56,11 @@ import {
   SectionType,
   taskIdLicenseNameMapping,
 } from "@businessnjgovnavigator/shared";
-import { filterRandomIndustry, randomIndustry, randomSector } from "@businessnjgovnavigator/shared/test";
+import {
+  filterRandomIndustry,
+  randomIndustry,
+  randomSector,
+} from "@businessnjgovnavigator/shared/test";
 
 export const generateSectionType = (): SectionType => {
   const num = randomInt();
@@ -131,8 +135,12 @@ export const generateTask = (overrides: Partial<Task>): Task => {
   };
 };
 
-export const generateLicenseTask = (overrides: Partial<TaskWithLicenseTaskId>): TaskWithLicenseTaskId => {
-  const licenseTaskId = randomElementFromArray(Object.keys(taskIdLicenseNameMapping)) as LicenseTaskId;
+export const generateLicenseTask = (
+  overrides: Partial<TaskWithLicenseTaskId>
+): TaskWithLicenseTaskId => {
+  const licenseTaskId = randomElementFromArray(
+    Object.keys(taskIdLicenseNameMapping)
+  ) as LicenseTaskId;
   return {
     ...generateTask({}),
     id: licenseTaskId,
@@ -140,7 +148,9 @@ export const generateLicenseTask = (overrides: Partial<TaskWithLicenseTaskId>): 
   };
 };
 
-export const generateTaskWithoutLinks = (overrides: Partial<TaskWithoutLinks>): TaskWithoutLinks => {
+export const generateTaskWithoutLinks = (
+  overrides: Partial<TaskWithoutLinks>
+): TaskWithoutLinks => {
   return {
     id: `some-id-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -167,7 +177,9 @@ export const generateTaskLink = (overrides: Partial<TaskLink>): TaskLink => {
   };
 };
 
-export const generateNameAvailability = (overrides: Partial<NameAvailability>): NameAvailability => {
+export const generateNameAvailability = (
+  overrides: Partial<NameAvailability>
+): NameAvailability => {
   return {
     status: "UNAVAILABLE",
     similarNames: [`some-name-${randomInt()}`],
@@ -180,14 +192,17 @@ export const generateFormationDbaContent = (
   overrides: Partial<FormationDbaContent>
 ): FormationDbaContent => ({
   Authorize: generateTaskWithoutLinks({
-    contentMd: "start ${beginIndentationSection} middle ${endIndentationSection} after",
+    contentMd:
+      "start ${beginIndentationSection} middle ${endIndentationSection} after",
   }),
   DbaResolution: generateTaskWithoutLinks({}),
   Formation: generateTaskWithoutLinks({}),
   ...overrides,
 });
 
-export const generateSidebarCardContent = (overrides: Partial<SidebarCardContent>): SidebarCardContent => {
+export const generateSidebarCardContent = (
+  overrides: Partial<SidebarCardContent>
+): SidebarCardContent => {
   return {
     contentMd: `some-content-${randomInt()}`,
     id: `some-id-${randomInt()}`,
@@ -260,7 +275,9 @@ export const generateFunding = (overrides: Partial<Funding>): Funding => {
     contentMd: `some-content-${randomInt()}`,
     sidebarCardBodyText: `some-sidebar-card-body-text-${randomInt()}`,
     fundingType: randomFundingType(),
-    agency: [randomElementFromArray(arrayOfFundingAgencies as FundingAgency[]).id],
+    agency: [
+      randomElementFromArray(arrayOfFundingAgencies as FundingAgency[]).id,
+    ],
     publishStageArchive: null,
     openDate: getCurrentDateISOString(),
     dueDate: "",
@@ -283,7 +300,9 @@ export const generateFunding = (overrides: Partial<Funding>): Funding => {
   };
 };
 
-export const generateAnytimeActionTask = (overrides: Partial<AnytimeActionTask>): AnytimeActionTask => {
+export const generateAnytimeActionTask = (
+  overrides: Partial<AnytimeActionTask>
+): AnytimeActionTask => {
   return {
     filename: `some-filename-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -313,12 +332,16 @@ export const generateAnytimeActionLicenseReinstatement = (
     contentMd: `some-content-${randomInt()}`,
     issuingAgency: `some-issusing-agency-${randomInt()}`,
     summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
-    licenseName: randomElementFromArray(Object.values(taskIdLicenseNameMapping)),
+    licenseName: randomElementFromArray(
+      Object.values(taskIdLicenseNameMapping)
+    ),
     ...overrides,
   };
 };
 
-export const generateCertification = (overrides: Partial<Certification>): Certification => {
+export const generateCertification = (
+  overrides: Partial<Certification>
+): Certification => {
   return {
     id: `some-id-${randomInt()}`,
     filename: `some-filename-${randomInt()}`,
@@ -329,14 +352,18 @@ export const generateCertification = (overrides: Partial<Certification>): Certif
     summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
     sidebarCardBodyText: `some-sidebar-card-body-text-${randomInt()}`,
-    agency: [randomElementFromArray(arrayOfFundingAgencies as FundingAgency[]).id],
+    agency: [
+      randomElementFromArray(arrayOfFundingAgencies as FundingAgency[]).id,
+    ],
     applicableOwnershipTypes: [randomOwnershipType().id],
     isSbe: false,
     ...overrides,
   };
 };
 
-export const generateOpportunity = (overrides: Partial<Opportunity>): Opportunity => {
+export const generateOpportunity = (
+  overrides: Partial<Opportunity>
+): Opportunity => {
   return {
     id: `some-id-${randomInt()}`,
     name: `some-name-${randomInt()}`,
@@ -347,7 +374,9 @@ export const generateOpportunity = (overrides: Partial<Opportunity>): Opportunit
   };
 };
 
-export const generateOperateReference = (overrides: Partial<OperateReference>): OperateReference => {
+export const generateOperateReference = (
+  overrides: Partial<OperateReference>
+): OperateReference => {
   return {
     name: `some-name-${randomInt()}`,
     urlSlug: `some-url-slug-${randomInt()}`,
@@ -356,7 +385,9 @@ export const generateOperateReference = (overrides: Partial<OperateReference>): 
   };
 };
 
-export const generateLicenseEvent = (overrides: Partial<LicenseEventType>): LicenseEventType => {
+export const generateLicenseEvent = (
+  overrides: Partial<LicenseEventType>
+): LicenseEventType => {
   const id = randomInt(4);
   return {
     issuingAgency: `some-issusing-agency-${randomInt()}`,
@@ -369,21 +400,31 @@ export const generateLicenseEvent = (overrides: Partial<LicenseEventType>): Lice
     callToActionLink: `some-cta-link-${id}`,
     callToActionText: `some-cta-text-${id}`,
     contentMd: `some-content-${id}`,
-    licenseName: randomElementFromArray(Object.values(taskIdLicenseNameMapping)),
+    licenseName: randomElementFromArray(
+      Object.values(taskIdLicenseNameMapping)
+    ),
     ...overrides,
   };
 };
 
-export const generateOutageConfig = (overrides: Partial<OutageConfig>): OutageConfig => {
+export const generateOutageConfig = (
+  overrides: Partial<OutageConfig>
+): OutageConfig => {
   return {
     FEATURE_ENABLE_OUTAGE_ALERT_BAR: randomInt() % 2 === 0,
     OUTAGE_ALERT_MESSAGE: `some-message-${randomInt()}`,
-    OUTAGE_ALERT_TYPE: randomElementFromArray(["ALL", "LOGGED_IN_ONLY", "UNREGISTERED_ONLY"]),
+    OUTAGE_ALERT_TYPE: randomElementFromArray([
+      "ALL",
+      "LOGGED_IN_ONLY",
+      "UNREGISTERED_ONLY",
+    ]),
     ...overrides,
   };
 };
 
-export const generateActiveUser = (overrides: Partial<ActiveUser>): ActiveUser => {
+export const generateActiveUser = (
+  overrides: Partial<ActiveUser>
+): ActiveUser => {
   return {
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
@@ -392,7 +433,9 @@ export const generateActiveUser = (overrides: Partial<ActiveUser>): ActiveUser =
   };
 };
 
-export const generateAddress = (overrides: Partial<FormationAddress>): FormationAddress => {
+export const generateAddress = (
+  overrides: Partial<FormationAddress>
+): FormationAddress => {
   return {
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
@@ -408,11 +451,18 @@ export const generateAddress = (overrides: Partial<FormationAddress>): Formation
 };
 
 export const randomPublicFilingLegalType = (): PublicFilingLegalType => {
-  return randomElementFromArray(publicFilingLegalTypes as unknown as string[]) as PublicFilingLegalType;
+  return randomElementFromArray(
+    publicFilingLegalTypes as unknown as string[]
+  ) as PublicFilingLegalType;
 };
 
 export const randomFundingStatus = (): FundingStatus => {
-  const all = ["rolling application", "deadline", "first come, first serve", "closed"];
+  const all = [
+    "rolling application",
+    "deadline",
+    "first come, first serve",
+    "closed",
+  ];
   const randomIndex = Math.floor(Math.random() * all.length);
   return all[randomIndex] as FundingStatus;
 };
@@ -478,75 +528,103 @@ export const randomOwnershipType = (): OwnershipType => {
   return ownershipTypes[randomIndex];
 };
 
-export const randomNegativeFilteredIndustry = (func: (industry: Industry) => boolean): Industry => {
+export const randomNegativeFilteredIndustry = (
+  func: (industry: Industry) => boolean
+): Industry => {
   return filterRandomIndustry((industry: Industry) => {
     return !func(industry);
   });
 };
 
-export const randomHomeBasedIndustry = (excludedIndustryIds?: string[]): string => {
-  const filter = (it: Industry): boolean => {
-    const filterCriteria = !!it.industryOnboardingQuestions.canBeHomeBased && it.isEnabled;
-    return excludedIndustryIds ? filterCriteria && !excludedIndustryIds.includes(it.id) : filterCriteria;
-  };
-  return filterRandomIndustry(filter).id;
-};
-
-export const randomNonHomeBasedIndustry = (excludedIndustryIds?: string[]): string => {
+export const randomHomeBasedIndustry = (
+  excludedIndustryIds?: string[]
+): string => {
   const filter = (it: Industry): boolean => {
     const filterCriteria =
-      !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation && it.isEnabled;
-    return excludedIndustryIds ? filterCriteria && !excludedIndustryIds.includes(it.id) : filterCriteria;
+      !!it.industryOnboardingQuestions.canBeHomeBased && it.isEnabled;
+    return excludedIndustryIds
+      ? filterCriteria && !excludedIndustryIds.includes(it.id)
+      : filterCriteria;
   };
   return filterRandomIndustry(filter).id;
 };
 
-export const generateBusinessPersona = (): Exclude<BusinessPersona, undefined> => {
+export const randomNonHomeBasedIndustry = (
+  excludedIndustryIds?: string[]
+): string => {
+  const filter = (it: Industry): boolean => {
+    const filterCriteria =
+      !it.industryOnboardingQuestions.canBeHomeBased &&
+      it.canHavePermanentLocation &&
+      it.isEnabled;
+    return excludedIndustryIds
+      ? filterCriteria && !excludedIndustryIds.includes(it.id)
+      : filterCriteria;
+  };
+  return filterRandomIndustry(filter).id;
+};
+
+export const generateBusinessPersona = (): Exclude<
+  BusinessPersona,
+  undefined
+> => {
   const all = ["STARTING", "OWNING", "FOREIGN"];
   const randomIndex = Math.floor(Math.random() * all.length);
   return all[randomIndex] as Exclude<BusinessPersona, undefined>;
 };
 
 export const randomPublicFilingLegalStructure = (): string => {
-  return randomElementFromArray(LegalStructures.filter((x) => x.requiresPublicFiling)).id;
+  return randomElementFromArray(
+    LegalStructures.filter((x) => x.requiresPublicFiling)
+  ).id;
 };
 
 export const randomTradeNameLegalStructure = (): string => {
-  return randomElementFromArray(LegalStructures.filter((x) => x.hasTradeName)).id;
+  return randomElementFromArray(LegalStructures.filter((x) => x.hasTradeName))
+    .id;
 };
 
 export const publicFilingLegalStructures: string[] = LegalStructures.filter(
   (x) => x.requiresPublicFiling
 ).map((it) => it.id);
 
-export const tradeNameLegalStructures: string[] = LegalStructures.filter((x) => x.hasTradeName).map(
-  (it) => it.id
-);
+export const tradeNameLegalStructures: string[] = LegalStructures.filter(
+  (x) => x.hasTradeName
+).map((it) => it.id);
 
-export const operatingPhasesDisplayingHomeBasedPrompt = OperatingPhases.filter((phase: OperatingPhase) => {
-  return phase.displayHomeBasedPrompt;
-}).map((phase) => phase.id);
-
-export const operatingPhasesNotDisplayingHomeBasedPrompt = OperatingPhases.filter((phase: OperatingPhase) => {
-  return !phase.displayHomeBasedPrompt;
-}).map((phase) => phase.id);
-
-export const operatingPhasesNotDisplayingAltHomeBasedBusinessDescription = OperatingPhases.filter(
+export const operatingPhasesDisplayingHomeBasedPrompt = OperatingPhases.filter(
   (phase: OperatingPhase) => {
-    return !phase.displayAltHomeBasedBusinessDescription && phase.displayHomeBasedPrompt;
+    return phase.displayHomeBasedPrompt;
   }
 ).map((phase) => phase.id);
 
-export const operatingPhasesDisplayingAltHomeBasedBusinessDescription = OperatingPhases.filter(
-  (phase: OperatingPhase) => {
-    return phase.displayAltHomeBasedBusinessDescription && phase.displayHomeBasedPrompt;
-  }
-).map((phase) => phase.id);
+export const operatingPhasesNotDisplayingHomeBasedPrompt =
+  OperatingPhases.filter((phase: OperatingPhase) => {
+    return !phase.displayHomeBasedPrompt;
+  }).map((phase) => phase.id);
 
-export const operatingPhasesDisplayingBusinessStructurePrompt = OperatingPhases.filter(
-  (phase) => phase.displayBusinessStructurePrompt
-).map((phase) => phase.id);
+export const operatingPhasesNotDisplayingAltHomeBasedBusinessDescription =
+  OperatingPhases.filter((phase: OperatingPhase) => {
+    return (
+      !phase.displayAltHomeBasedBusinessDescription &&
+      phase.displayHomeBasedPrompt
+    );
+  }).map((phase) => phase.id);
 
-export const operatingPhasesNotDisplayingBusinessStructurePrompt = OperatingPhases.filter(
-  (phase) => !phase.displayBusinessStructurePrompt
-).map((phase) => phase.id);
+export const operatingPhasesDisplayingAltHomeBasedBusinessDescription =
+  OperatingPhases.filter((phase: OperatingPhase) => {
+    return (
+      phase.displayAltHomeBasedBusinessDescription &&
+      phase.displayHomeBasedPrompt
+    );
+  }).map((phase) => phase.id);
+
+export const operatingPhasesDisplayingBusinessStructurePrompt =
+  OperatingPhases.filter((phase) => phase.displayBusinessStructurePrompt).map(
+    (phase) => phase.id
+  );
+
+export const operatingPhasesNotDisplayingBusinessStructurePrompt =
+  OperatingPhases.filter((phase) => !phase.displayBusinessStructurePrompt).map(
+    (phase) => phase.id
+  );

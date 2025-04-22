@@ -33,7 +33,11 @@ const LoadingPage = (): ReactElement => {
       getActiveUser().then((currentUser) => {
         dispatch({ type: "LOGIN", activeUser: currentUser });
       });
-    } else if (router && router.asPath && router.asPath.includes(signInSamlError)) {
+    } else if (
+      router &&
+      router.asPath &&
+      router.asPath.includes(signInSamlError)
+    ) {
       analytics.event.landing_page.arrive.get_unlinked_myNJ_account();
       onGuestSignIn({
         push: router.push,

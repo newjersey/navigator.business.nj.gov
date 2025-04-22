@@ -3,7 +3,10 @@ import { dirname, join } from "path";
 const path = require("path");
 
 module.exports = {
-  stories: ["../stories/**/*.stories.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
+  stories: [
+    "../stories/**/*.stories.mdx",
+    "../stories/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+  ],
   addons: [
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-essentials"),
@@ -35,8 +38,14 @@ module.exports = {
       "@/contexts": path.resolve(__dirname, "../src/contexts"),
       "@/styles": path.resolve(__dirname, "../src/styles"),
       "@/pages": path.resolve(__dirname, "../src/pages"),
-      "@businessnjgovnavigator/content": path.resolve(__dirname, "../../content/src"),
-      "@businessnjgovnavigator/shared": path.resolve(__dirname, "../../shared/lib/shared/src"),
+      "@businessnjgovnavigator/content": path.resolve(
+        __dirname,
+        "../../content/src"
+      ),
+      "@businessnjgovnavigator/shared": path.resolve(
+        __dirname,
+        "../../shared/lib/shared/src"
+      ),
       "@/test": path.resolve(__dirname, "../test"),
     };
     return config;

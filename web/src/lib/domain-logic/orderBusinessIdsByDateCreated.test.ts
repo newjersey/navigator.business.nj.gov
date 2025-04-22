@@ -1,5 +1,8 @@
 import { orderBusinessIdsByDateCreated } from "@/lib/domain-logic/orderBusinessIdsByDateCreated";
-import { generateBusiness, generateUserData } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 
 describe("orderBusinessIdsByDateCreated", () => {
   it("returns list of businesses in order oldest to newest", () => {

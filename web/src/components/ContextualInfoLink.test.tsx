@@ -3,9 +3,12 @@ import * as FetchContextualInfoModule from "@/lib/async-content-fetchers/fetchCo
 import { withContextualInfo } from "@/test/helpers/helpers-renderers";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/async-content-fetchers/fetchContextualInfo", () => ({ fetchContextualInfo: jest.fn() }));
-const mockFetchContextualInfo = (FetchContextualInfoModule as jest.Mocked<typeof FetchContextualInfoModule>)
-  .fetchContextualInfo;
+jest.mock("@/lib/async-content-fetchers/fetchContextualInfo", () => ({
+  fetchContextualInfo: jest.fn(),
+}));
+const mockFetchContextualInfo = (
+  FetchContextualInfoModule as jest.Mocked<typeof FetchContextualInfoModule>
+).fetchContextualInfo;
 
 describe("<ContextualInfoLink />", () => {
   beforeEach(() => {
@@ -13,7 +16,11 @@ describe("<ContextualInfoLink />", () => {
   });
 
   it("splits the text on a | and displays the first half as a label", () => {
-    render(<ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>);
+    render(
+      <ContextualInfoLink>
+        {["legal structure|legal-structure"]}
+      </ContextualInfoLink>
+    );
     expect(screen.getByText("legal structure")).toBeInTheDocument();
     expect(screen.queryByText("legal-structure")).not.toBeInTheDocument();
   });
@@ -27,7 +34,9 @@ describe("<ContextualInfoLink />", () => {
     const setContent = jest.fn();
     render(
       withContextualInfo(
-        <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
+        <ContextualInfoLink>
+          {["legal structure|legal-structure"]}
+        </ContextualInfoLink>,
         { isVisible: false, header: "", markdown: "" },
         setContent
       )
@@ -51,7 +60,9 @@ describe("<ContextualInfoLink />", () => {
     const setContent = jest.fn();
     render(
       withContextualInfo(
-        <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
+        <ContextualInfoLink>
+          {["legal structure|legal-structure"]}
+        </ContextualInfoLink>,
         { isVisible: false, header: "", markdown: "" },
         setContent
       )

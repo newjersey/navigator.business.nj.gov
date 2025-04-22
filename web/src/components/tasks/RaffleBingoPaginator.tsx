@@ -25,11 +25,15 @@ export const RaffleBingoPaginator = (props: Props): ReactElement => {
   const [stepIndex, setStepIndex] = useState(props.CMS_ONLY_stepIndex ?? 0);
   const [step, setStep] = useState<Task>();
   const { business, updateQueue } = useUserData();
-  const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState<boolean>(false);
+  const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] =
+    useState<boolean>(false);
   const stepItemsRef = useRef<StepperStep[]>([]);
   const { Config } = useConfig();
 
-  const raffleBingoStepFiles = ["raffle-license-step-1", "raffle-license-step-2"];
+  const raffleBingoStepFiles = [
+    "raffle-license-step-1",
+    "raffle-license-step-2",
+  ];
 
   const getRaffleBingoStep = async (stepIndex: number): Promise<Task> => {
     const fileName = raffleBingoStepFiles[stepIndex];
@@ -82,7 +86,8 @@ export const RaffleBingoPaginator = (props: Props): ReactElement => {
   };
 
   const displayCompletedSnackbar = (): ReactNode => {
-    const currentTaskProgress: TaskProgress = business?.taskProgress[props.task?.id] ?? "COMPLETED";
+    const currentTaskProgress: TaskProgress =
+      business?.taskProgress[props.task?.id] ?? "COMPLETED";
 
     return (
       <TaskStatusChangeSnackbar
@@ -93,7 +98,9 @@ export const RaffleBingoPaginator = (props: Props): ReactElement => {
     );
   };
 
-  const agencyName = step?.agencyId ? LookupTaskAgencyById(step.agencyId).name : "";
+  const agencyName = step?.agencyId
+    ? LookupTaskAgencyById(step.agencyId).name
+    : "";
 
   return (
     <>

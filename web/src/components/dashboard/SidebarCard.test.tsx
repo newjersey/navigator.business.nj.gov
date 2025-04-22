@@ -19,7 +19,10 @@ describe("<SidebarCard />", () => {
   });
 
   it("renders SidebarCardFundingNudge for id funding-nudge", () => {
-    const card = generateSidebarCardContent({ id: SIDEBAR_CARDS.fundingNudge, ctaText: "Click me" });
+    const card = generateSidebarCardContent({
+      id: SIDEBAR_CARDS.fundingNudge,
+      ctaText: "Click me",
+    });
     render(<SidebarCard card={card} />);
     expect(screen.getByTestId("cta-funding-nudge")).toBeInTheDocument();
   });

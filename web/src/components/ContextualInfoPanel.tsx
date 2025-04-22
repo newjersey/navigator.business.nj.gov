@@ -1,12 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ContextInfoElement } from "@/components/ContextInfoElement";
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
-import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
+import {
+  ContextualInfo,
+  ContextualInfoContext,
+} from "@/contexts/contextualInfoContext";
 import analytics from "@/lib/utils/analytics";
 import { ReactElement, useContext } from "react";
 
 export const ContextualInfoPanel = (): ReactElement => {
-  const { contextualInfo, setContextualInfo } = useContext(ContextualInfoContext);
+  const { contextualInfo, setContextualInfo } = useContext(
+    ContextualInfoContext
+  );
 
   const close = (): void => {
     analytics.event.contextual_sidebar_close_button.click.close_contextual_sidebar();
@@ -33,7 +38,9 @@ export const ContextualInfoPanel = (): ReactElement => {
         aria-hidden="true"
         onClick={close}
         data-testid="overlay"
-        className={`info-overlay ${contextualInfo.isVisible ? "is-visible" : ""}`}
+        className={`info-overlay ${
+          contextualInfo.isVisible ? "is-visible" : ""
+        }`}
       />
       <FocusTrappedSidebar close={close} isOpen={contextualInfo.isVisible}>
         <ContextInfoElement

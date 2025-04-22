@@ -3,11 +3,16 @@ import { FormationRadio } from "@/components/tasks/business-formation/business/F
 import { FormationTextArea } from "@/components/tasks/business-formation/business/FormationTextArea";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { FormationFields, FormationTextField } from "@businessnjgovnavigator/shared";
+import {
+  FormationFields,
+  FormationTextField,
+} from "@businessnjgovnavigator/shared";
 import { ReactElement, ReactNode, useContext } from "react";
 
 export const PartnershipRights = (): ReactElement => {
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(
+    BusinessFormationContext
+  );
   const { Config } = useConfig();
 
   const getTextArea = (fieldName: FormationTextField): ReactNode => {
@@ -49,14 +54,26 @@ export const PartnershipRights = (): ReactElement => {
         </Heading>
       </div>
 
-      {getRadio("canCreateLimitedPartner", Config.formation.fields.canCreateLimitedPartner.body)}
-      {state.formationFormData.canCreateLimitedPartner && getTextArea("createLimitedPartnerTerms")}
+      {getRadio(
+        "canCreateLimitedPartner",
+        Config.formation.fields.canCreateLimitedPartner.body
+      )}
+      {state.formationFormData.canCreateLimitedPartner &&
+        getTextArea("createLimitedPartnerTerms")}
 
-      {getRadio("canGetDistribution", Config.formation.fields.canGetDistribution.body)}
-      {state.formationFormData.canGetDistribution && getTextArea("getDistributionTerms")}
+      {getRadio(
+        "canGetDistribution",
+        Config.formation.fields.canGetDistribution.body
+      )}
+      {state.formationFormData.canGetDistribution &&
+        getTextArea("getDistributionTerms")}
 
-      {getRadio("canMakeDistribution", Config.formation.fields.canMakeDistribution.body)}
-      {state.formationFormData.canMakeDistribution && getTextArea("makeDistributionTerms")}
+      {getRadio(
+        "canMakeDistribution",
+        Config.formation.fields.canMakeDistribution.body
+      )}
+      {state.formationFormData.canMakeDistribution &&
+        getTextArea("makeDistributionTerms")}
     </>
   );
 };

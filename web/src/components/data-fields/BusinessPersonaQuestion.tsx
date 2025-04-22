@@ -9,10 +9,17 @@ import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { FormContextFieldProps } from "@/lib/types/types";
 import { BusinessPersona } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import {
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
-export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): ReactElement => {
+export const BusinessPersonaQuestion = <T,>(
+  props: FormContextFieldProps<T>
+): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
@@ -23,7 +30,9 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
   );
 
   RegisterForOnSubmit(() => state.profileData.businessPersona !== undefined);
-  const handleSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
+  const handleSelection = (
+    event: React.ChangeEvent<{ name?: string; value: unknown }>
+  ): void => {
     setIsValid(true);
     setProfileData({
       ...state.profileData,
@@ -44,7 +53,11 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
 
   return (
     <>
-      <Heading level={2} styleVariant="h3" className="margin-bottom-05-override">
+      <Heading
+        level={2}
+        styleVariant="h3"
+        className="margin-bottom-05-override"
+      >
         {contentFromConfig.header}
       </Heading>
       <Content>{contentFromConfig.description}</Content>

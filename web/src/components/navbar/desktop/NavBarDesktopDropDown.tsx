@@ -1,6 +1,13 @@
 import { Icon } from "@/components/njwds/Icon";
 import analytics from "@/lib/utils/analytics";
-import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
+import {
+  ClickAwayListener,
+  Grow,
+  MenuItem,
+  MenuList,
+  Paper,
+  Popper,
+} from "@mui/material";
 import { ReactElement } from "react";
 
 interface Props {
@@ -44,12 +51,16 @@ export const NavBarDesktopDropDown = (props: Props): ReactElement => {
         onClick={toggleDropdown}
         disabled={props.disabled}
       >
-        <div className={`text-bold text-${props.textColor} flex flex-align-center`}>
+        <div
+          className={`text-bold text-${props.textColor} flex flex-align-center`}
+        >
           {props.icon}
           <div className="text-base-darkest truncate-long-business-names_NavBarDesktop">
             {props.menuButtonTitle}
           </div>
-          {!props.disabled && <Icon className="usa-icon--size-3" iconName="arrow_drop_down" />}
+          {!props.disabled && (
+            <Icon className="usa-icon--size-3" iconName="arrow_drop_down" />
+          )}
         </div>
       </button>
 
@@ -76,7 +87,9 @@ export const NavBarDesktopDropDown = (props: Props): ReactElement => {
             <Grow
               {...TransitionProps}
               style={{
-                transformOrigin: placement.startsWith("bottom") ? "center top" : "center bottom",
+                transformOrigin: placement.startsWith("bottom")
+                  ? "center top"
+                  : "center bottom",
               }}
             >
               <Paper>
@@ -90,7 +103,10 @@ export const NavBarDesktopDropDown = (props: Props): ReactElement => {
                       data-testid={"nav-bar-popup-menu"}
                       className="padding-bottom-0"
                     >
-                      <MenuItem className={"display-flex padding-y-1 menu-item-title"} disabled={true}>
+                      <MenuItem
+                        className={"display-flex padding-y-1 menu-item-title"}
+                        disabled={true}
+                      >
                         <div className="text-bold">{props.dropDownTitle}</div>
                       </MenuItem>
                       <hr className="margin-0 hr-2px" key="name-break" />

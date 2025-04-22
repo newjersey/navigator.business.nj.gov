@@ -50,11 +50,15 @@ describe("DeadUrls page", () => {
         noAuth={true}
       />
     );
-    expect(screen.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("http://www.deadlink.com")
+    ).not.toBeInTheDocument();
 
     mockApi.post.mockResolvedValue({});
 
-    fireEvent.change(screen.getByLabelText("Password"), { target: { value: "ADMIN_PASSWORD" } });
+    fireEvent.change(screen.getByLabelText("Password"), {
+      target: { value: "ADMIN_PASSWORD" },
+    });
     fireEvent.click(screen.getByText("Submit"));
 
     await screen.findByText("http://www.deadlink.com");
@@ -71,17 +75,25 @@ describe("DeadUrls page", () => {
         noAuth={true}
       />
     );
-    expect(screen.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("http://www.deadlink.com")
+    ).not.toBeInTheDocument();
 
     mockApi.post.mockRejectedValue({});
 
-    fireEvent.change(screen.getByLabelText("Password"), { target: { value: "bad password" } });
+    fireEvent.change(screen.getByLabelText("Password"), {
+      target: { value: "bad password" },
+    });
     fireEvent.click(screen.getByText("Submit"));
 
     await waitFor(() => {
-      return expect(screen.getByText("Authentication failed")).toBeInTheDocument();
+      return expect(
+        screen.getByText("Authentication failed")
+      ).toBeInTheDocument();
     });
-    expect(screen.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("http://www.deadlink.com")
+    ).not.toBeInTheDocument();
     expect(screen.getByLabelText("Password")).toBeInTheDocument();
   });
 });

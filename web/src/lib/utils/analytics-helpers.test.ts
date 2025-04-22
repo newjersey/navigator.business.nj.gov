@@ -1,6 +1,9 @@
 import analytics from "@/lib/utils/analytics";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
-import { generateProfileData, getIndustries } from "@businessnjgovnavigator/shared/";
+import {
+  generateProfileData,
+  getIndustries,
+} from "@businessnjgovnavigator/shared/";
 import { sendOnboardingOnSubmitEvents } from "./analytics-helpers";
 
 jest.mock("@/lib/utils/analytics");
@@ -8,7 +11,9 @@ jest.mock("@/lib/utils/analytics");
 const mockAnalytic = analytics as jest.Mocked<typeof analytics>;
 
 const liquorLicenseApplicableIndustries = getIndustries().filter((industry) => {
-  return industry.industryOnboardingQuestions.isLiquorLicenseApplicable === true;
+  return (
+    industry.industryOnboardingQuestions.isLiquorLicenseApplicable === true
+  );
 });
 
 describe("analytics-helpers", () => {
@@ -20,7 +25,8 @@ describe("analytics-helpers", () => {
     describe("liquor license", () => {
       it("fires yes_require_liquor_license events", () => {
         const userData = generateProfileData({
-          industryId: randomElementFromArray(liquorLicenseApplicableIndustries).id,
+          industryId: randomElementFromArray(liquorLicenseApplicableIndustries)
+            .id,
           liquorLicense: true,
         });
         sendOnboardingOnSubmitEvents(userData, "industry-page");
@@ -36,7 +42,8 @@ describe("analytics-helpers", () => {
 
       it("fires no_dont_require_liquor_license event", () => {
         const userData = generateProfileData({
-          industryId: randomElementFromArray(liquorLicenseApplicableIndustries).id,
+          industryId: randomElementFromArray(liquorLicenseApplicableIndustries)
+            .id,
           liquorLicense: false,
         });
         sendOnboardingOnSubmitEvents(userData, "industry-page");
@@ -52,7 +59,8 @@ describe("analytics-helpers", () => {
 
       it("does not fire analytics when page is not the industry-page", () => {
         const userData = generateProfileData({
-          industryId: randomElementFromArray(liquorLicenseApplicableIndustries).id,
+          industryId: randomElementFromArray(liquorLicenseApplicableIndustries)
+            .id,
           liquorLicense: false,
         });
         sendOnboardingOnSubmitEvents(userData);

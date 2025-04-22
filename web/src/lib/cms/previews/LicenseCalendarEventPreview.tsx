@@ -52,16 +52,29 @@ const LicenseCalendarEventPreview = (props: PreviewProps): ReactElement => {
   };
 
   return (
-    <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-      <div>This file is mapped to the following license (not enabled if blank):</div>
+    <div
+      className="cms"
+      ref={ref}
+      style={{ margin: 40, pointerEvents: "none" }}
+    >
+      <div>
+        This file is mapped to the following license (not enabled if blank):
+      </div>
       <div className="margin-bottom-5 text-bold">{license.licenseName}</div>
       Expiration event
-      <LicenseEvent LicenseCalendarEvent={expirationLicenseCalendarEvent} licenseEvents={[license]} />
+      <LicenseEvent
+        LicenseCalendarEvent={expirationLicenseCalendarEvent}
+        licenseEvents={[license]}
+      />
       Renewal event
-      <LicenseEvent LicenseCalendarEvent={renewalLicenseCalendarEvent} licenseEvents={[license]} />
+      <LicenseEvent
+        LicenseCalendarEvent={renewalLicenseCalendarEvent}
+        licenseEvents={[license]}
+      />
       <div className="margin-top-8" />
-      The expiration event will be shown in this preview, all the content underneath the header is shared
-      between both renewal and expiration events.
+      The expiration event will be shown in this preview, all the content
+      underneath the header is shared between both renewal and expiration
+      events.
       <div className="margin-top-4" />
       <LicenseElement
         licenseName="IndustryName"

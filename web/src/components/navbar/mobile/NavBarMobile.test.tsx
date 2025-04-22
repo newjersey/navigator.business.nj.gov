@@ -12,7 +12,12 @@ import {
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
-import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import { ReactNode } from "react";
 
 const Config = getMergedConfig();
@@ -42,7 +47,9 @@ const setLargeScreen = (value: boolean): void => {
 
 const businessName = "businessName";
 
-const generateBusinessNamedBusiness = (overrides?: Partial<Business>): Business => {
+const generateBusinessNamedBusiness = (
+  overrides?: Partial<Business>
+): Business => {
   return generateBusiness({
     profileData: generateProfileData({
       businessName: businessName,
@@ -78,8 +85,12 @@ describe("<NavBarMobile />", () => {
         />
       );
 
-      expect(screen.getByTestId("nav-menu-mobile-account-open")).toBeInTheDocument();
-      expect(screen.getByTestId("nav-menu-mobile-quick-link-open")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("nav-menu-mobile-account-open")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId("nav-menu-mobile-quick-link-open")
+      ).toBeInTheDocument();
     });
 
     it("renders getStarted and Login in account dropdown", () => {
@@ -96,12 +107,20 @@ describe("<NavBarMobile />", () => {
         />
       );
 
-      expect(screen.queryByText(Config.navigationDefaults.getStartedText)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationDefaults.getStartedText)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationDefaults.logInButton)
+      ).not.toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
-      expect(screen.getByText(Config.navigationDefaults.getStartedText)).toBeInTheDocument();
-      expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.navigationDefaults.getStartedText)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.navigationDefaults.logInButton)
+      ).toBeInTheDocument();
     });
   });
 
@@ -121,8 +140,12 @@ describe("<NavBarMobile />", () => {
         />
       );
 
-      expect(screen.getByText(Config.navigationDefaults.navBarMyAccountText)).toBeInTheDocument();
-      expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.navigationDefaults.navBarMyAccountText)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.navigationDefaults.logInButton)
+      ).toBeInTheDocument();
     });
   });
 
@@ -141,8 +164,12 @@ describe("<NavBarMobile />", () => {
         />
       );
 
-      expect(screen.getByTestId("nav-menu-mobile-account-open")).toBeInTheDocument();
-      expect(screen.queryByTestId("nav-menu-mobile-quick-link-open")).not.toBeInTheDocument();
+      expect(
+        screen.getByTestId("nav-menu-mobile-account-open")
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByTestId("nav-menu-mobile-quick-link-open")
+      ).not.toBeInTheDocument();
     });
 
     it("renders login in account dropdown", () => {
@@ -159,10 +186,14 @@ describe("<NavBarMobile />", () => {
         />
       );
 
-      expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationDefaults.logInButton)
+      ).not.toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
-      expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.navigationDefaults.logInButton)
+      ).toBeInTheDocument();
     });
   });
 
@@ -181,8 +212,12 @@ describe("<NavBarMobile />", () => {
         />
       );
 
-      expect(screen.getByTestId("nav-menu-mobile-account-open")).toBeInTheDocument();
-      expect(screen.getByTestId("nav-menu-mobile-quick-link-open")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("nav-menu-mobile-account-open")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId("nav-menu-mobile-quick-link-open")
+      ).toBeInTheDocument();
     });
 
     it("renders profile, add business, myNj and logout in account menu", () => {
@@ -200,17 +235,33 @@ describe("<NavBarMobile />", () => {
           userData={userData}
         />
       );
-      expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.navigationDefaults.addBusinessButton)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.navigationDefaults.logoutButton)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationDefaults.profileLinkText)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationDefaults.addBusinessButton)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationDefaults.myNJAccountText)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationDefaults.logoutButton)
+      ).not.toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
 
-      expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
-      expect(screen.getByText(Config.navigationDefaults.addBusinessButton)).toBeInTheDocument();
-      expect(screen.getByText(Config.navigationDefaults.myNJAccountText)).toBeInTheDocument();
-      expect(screen.getByText(Config.navigationDefaults.logoutButton)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.navigationDefaults.profileLinkText)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.navigationDefaults.addBusinessButton)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.navigationDefaults.myNJAccountText)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.navigationDefaults.logoutButton)
+      ).toBeInTheDocument();
     });
   });
 
@@ -229,8 +280,12 @@ describe("<NavBarMobile />", () => {
         />
       );
 
-      expect(screen.getByTestId("nav-menu-mobile-account-open")).toBeInTheDocument();
-      expect(screen.getByTestId("nav-menu-mobile-quick-link-open")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("nav-menu-mobile-account-open")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId("nav-menu-mobile-quick-link-open")
+      ).toBeInTheDocument();
     });
 
     it("renders profile, register and login in the account menu", () => {
@@ -248,24 +303,38 @@ describe("<NavBarMobile />", () => {
           userData={userData}
         />
       );
-      expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)
+        screen.queryByText(Config.navigationDefaults.profileLinkText)
       ).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(
+          Config.navigationDefaults.navBarGuestRegistrationText
+        )
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.navigationDefaults.logInButton)
+      ).not.toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
 
-      expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
-      expect(screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText)).toBeInTheDocument();
-      expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.navigationDefaults.profileLinkText)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.navigationDefaults.logInButton)
+      ).toBeInTheDocument();
     });
   });
 
   describe("side bar and mini-roadmap", () => {
     it("does not display mini-roadmap when hideMiniRoadmap is true", () => {
       useMockBusiness({});
-      useMockRoadmap(generateRoadmap({ steps: [generateStep({ name: "step1" })] }));
+      useMockRoadmap(
+        generateRoadmap({ steps: [generateStep({ name: "step1" })] })
+      );
       render(
         <NavBarMobile
           currentlyOnboarding={false}
@@ -307,8 +376,12 @@ describe("<NavBarMobile />", () => {
       );
 
       expect(screen.queryByText("step1")).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.sectionHeaders.PLAN)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.sectionHeaders.START)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.sectionHeaders.PLAN)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.sectionHeaders.START)
+      ).not.toBeInTheDocument();
       fireEvent.click(screen.getByTestId("nav-menu-mobile-account-open"));
       expect(screen.getByText("step1")).toBeInTheDocument();
       expect(screen.getByText(Config.sectionHeaders.PLAN)).toBeInTheDocument();

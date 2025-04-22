@@ -28,7 +28,9 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
             />
             <div className="padding-top-3">
               <FieldLabelDescriptionOnly fieldName="sectorId" />
-              <Sectors<OnboardingErrors> errorTypes={["REQUIRED_REVIEW_INFO_BELOW"]} />
+              <Sectors<OnboardingErrors>
+                errorTypes={["REQUIRED_REVIEW_INFO_BELOW"]}
+              />
             </div>
           </>
         ),
@@ -94,7 +96,9 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
         component: (
           <>
             <FieldLabelOnboarding fieldName="foreignBusinessTypeIds" />
-            <ForeignBusinessTypeField<OnboardingErrors> errorTypes={["REQUIRED_FOREIGN_BUSINESS_TYPE"]} />
+            <ForeignBusinessTypeField<OnboardingErrors>
+              errorTypes={["REQUIRED_FOREIGN_BUSINESS_TYPE"]}
+            />
           </>
         ),
       },

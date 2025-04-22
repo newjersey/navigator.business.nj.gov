@@ -6,7 +6,10 @@ import {
 import { Business } from "@businessnjgovnavigator/shared/userData";
 
 const isFormedOutsideNavigator = (business: Business): boolean => {
-  return !!(!business.formationData.completedFilingPayment && business.profileData.dateOfFormation);
+  return !!(
+    !business.formationData.completedFilingPayment &&
+    business.profileData.dateOfFormation
+  );
 };
 
 export const shouldShowDisclaimerForProfileNotSubmittingData = (

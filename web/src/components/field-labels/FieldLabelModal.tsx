@@ -28,8 +28,10 @@ export const FieldLabelModal = (props: Props): ReactElement => {
   });
 
   const header = props.overrides?.header ?? contentFromConfig.header;
-  const description = props.overrides?.description ?? contentFromConfig.description;
-  const unboldedHeader = props.overrides?.headerNotBolded ?? contentFromConfig.headerNotBolded;
+  const description =
+    props.overrides?.description ?? contentFromConfig.description;
+  const unboldedHeader =
+    props.overrides?.headerNotBolded ?? contentFromConfig.headerNotBolded;
   const postDescription = props.overrides?.postDescription;
 
   return (

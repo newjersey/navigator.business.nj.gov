@@ -1,4 +1,7 @@
-import { getLicenseStatusResultsFromLicenses, licenseDataModifyingFunction } from "@/lib/utils/licenseStatus";
+import {
+  getLicenseStatusResultsFromLicenses,
+  licenseDataModifyingFunction,
+} from "@/lib/utils/licenseStatus";
 import {
   generateBusiness,
   generateLicenseData,
@@ -25,18 +28,20 @@ describe("licenseStatus", () => {
         },
       };
 
-      expect(getLicenseStatusResultsFromLicenses(licenseDetails)).toStrictEqual({
-        [licenseNames[0]]: {
-          licenseStatus: licenseDetails1.licenseStatus,
-          expirationDateISO: licenseDetails1.expirationDateISO,
-          checklistItems: licenseDetails1.checklistItems,
-        },
-        [licenseNames[1]]: {
-          licenseStatus: licenseDetails2.licenseStatus,
-          expirationDateISO: licenseDetails2.expirationDateISO,
-          checklistItems: licenseDetails2.checklistItems,
-        },
-      });
+      expect(getLicenseStatusResultsFromLicenses(licenseDetails)).toStrictEqual(
+        {
+          [licenseNames[0]]: {
+            licenseStatus: licenseDetails1.licenseStatus,
+            expirationDateISO: licenseDetails1.expirationDateISO,
+            checklistItems: licenseDetails1.checklistItems,
+          },
+          [licenseNames[1]]: {
+            licenseStatus: licenseDetails2.licenseStatus,
+            expirationDateISO: licenseDetails2.expirationDateISO,
+            checklistItems: licenseDetails2.checklistItems,
+          },
+        }
+      );
     });
   });
 
@@ -61,7 +66,10 @@ describe("licenseStatus", () => {
           licenseData: generateLicenseData({ licenses: licensesFromDb }),
         })
       );
-      const returnedFn = licenseDataModifyingFunction(userDataFromDb, currBusinessIdFromUpdateQueue);
+      const returnedFn = licenseDataModifyingFunction(
+        userDataFromDb,
+        currBusinessIdFromUpdateQueue
+      );
 
       const result = returnedFn(businessFromUpdateQueue).licenseData!.licenses;
       expect(result).toEqual(licensesFromDb);

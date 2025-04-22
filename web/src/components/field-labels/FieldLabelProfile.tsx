@@ -44,7 +44,8 @@ export const FieldLabelProfile = (props: Props): ReactElement => {
       <div className="flex flex-row fac margin-bottom-05">
         {isHeaderInConfig && showHeader && (
           <div className="text-bold">
-            {contentFromConfig.headerContextualInfo && !props.ignoreContextualInfo ? (
+            {contentFromConfig.headerContextualInfo &&
+            !props.ignoreContextualInfo ? (
               <ContextualInfoButton
                 text={contentFromConfig.header}
                 id={contentFromConfig.headerContextualInfo}
@@ -81,7 +82,9 @@ export const FieldLabelProfile = (props: Props): ReactElement => {
             </div>
           )}
           {!props.isAltDescriptionDisplayed && description && (
-            <Content className={props.boldDescription ? "text-bold" : ""}>{description}</Content>
+            <Content className={props.boldDescription ? "text-bold" : ""}>
+              {description}
+            </Content>
           )}
         </>
       )}

@@ -1,24 +1,73 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { AddOn, IndustryRoadmap, TaskModification } from "@/lib/roadmap/roadmapBuilder";
+import {
+  AddOn,
+  IndustryRoadmap,
+  TaskModification,
+} from "@/lib/roadmap/roadmapBuilder";
 import { HtmlUrlChecker } from "broken-link-checker";
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
 
-const roadmapsDir = path.join(process.cwd(), "..", "content", "src", "roadmaps");
-const displayContentDir = path.join(process.cwd(), "..", "content", "src", "display-content");
+const roadmapsDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "roadmaps"
+);
+const displayContentDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "display-content"
+);
 const filingsDir = path.join(process.cwd(), "..", "content", "src", "filings");
 const tasksDir = path.join(roadmapsDir, "tasks");
 const licenseTasksDir = path.join(roadmapsDir, "license-tasks");
 const industriesDir = path.join(roadmapsDir, "industries");
 const addOnsDir = path.join(roadmapsDir, "add-ons");
-const contextualInfoDir = path.join(displayContentDir, "contextual-information");
-const fieldConfigDir = path.join(process.cwd(), "..", "content", "src", "fieldConfig");
-const fundingsDir = path.join(process.cwd(), "..", "content", "src", "fundings");
-const certificationsDir = path.join(process.cwd(), "..", "content", "src", "certifications");
-const licensesDir = path.join(process.cwd(), "..", "content", "src", "license-calendar-events");
-const anytimeActionTasksDir = path.join(process.cwd(), "..", "content", "src", "anytime-action-tasks");
+const contextualInfoDir = path.join(
+  displayContentDir,
+  "contextual-information"
+);
+const fieldConfigDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "fieldConfig"
+);
+const fundingsDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "fundings"
+);
+const certificationsDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "certifications"
+);
+const licensesDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "license-calendar-events"
+);
+const anytimeActionTasksDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "anytime-action-tasks"
+);
 const anytimeActionLicenseReinstatementsDir = path.join(
   process.cwd(),
   "..",
@@ -60,7 +109,10 @@ const getFlattenedFilenames = (dir: string): string[] => {
     const components = item.split(".");
     const isDirectory = components.length === 1;
     if (isDirectory) {
-      paths = [...paths, ...getFlattenedFilenames(path.join(dir, components[0]))];
+      paths = [
+        ...paths,
+        ...getFlattenedFilenames(path.join(dir, components[0])),
+      ];
     } else {
       paths.push(path.join(dir, item));
     }
@@ -84,16 +136,22 @@ const getFilenames = (): Filenames => {
     licenses: fs.readdirSync(licensesDir),
     licenseTasks: fs.readdirSync(licenseTasksDir),
     anytimeActionTasks: fs.readdirSync(anytimeActionTasksDir),
-    anytimeActionLicenseReinstatements: fs.readdirSync(anytimeActionLicenseReinstatementsDir),
+    anytimeActionLicenseReinstatements: fs.readdirSync(
+      anytimeActionLicenseReinstatementsDir
+    ),
   };
 };
 
 const getContents = (filenames: Filenames): FileContents => {
   const industries = filenames.industries.map((it) => {
-    return JSON.parse(fs.readFileSync(path.join(roadmapsDir, "industries", it), "utf8")) as IndustryRoadmap;
+    return JSON.parse(
+      fs.readFileSync(path.join(roadmapsDir, "industries", it), "utf8")
+    ) as IndustryRoadmap;
   });
   const addOns = filenames.addOns.map((it) => {
-    return JSON.parse(fs.readFileSync(path.join(roadmapsDir, "add-ons", it), "utf8")) as IndustryRoadmap;
+    return JSON.parse(
+      fs.readFileSync(path.join(roadmapsDir, "add-ons", it), "utf8")
+    ) as IndustryRoadmap;
   });
   const fieldConfigs = filenames.fieldConfigs.map((it) => {
     return fs.readFileSync(path.join(fieldConfigDir, it), "utf8");
@@ -101,7 +159,9 @@ const getContents = (filenames: Filenames): FileContents => {
 
   return {
     tasks: filenames.tasks.map((it) => {
-      return matter(fs.readFileSync(path.join(roadmapsDir, "tasks", it), "utf8")).content;
+      return matter(
+        fs.readFileSync(path.join(roadmapsDir, "tasks", it), "utf8")
+      ).content;
     }),
     industries,
     addOns: addOns.map((i) => {
@@ -116,8 +176,12 @@ const getContents = (filenames: Filenames): FileContents => {
       }),
     ],
     contextualInfos: filenames.contextualInfos.map((it) => {
-      return matter(fs.readFileSync(path.join(displayContentDir, "contextual-information", it), "utf8"))
-        .content;
+      return matter(
+        fs.readFileSync(
+          path.join(displayContentDir, "contextual-information", it),
+          "utf8"
+        )
+      ).content;
     }),
     displayContents: filenames.displayContents.map((it) => {
       return matter(fs.readFileSync(it, "utf8")).content;
@@ -142,7 +206,10 @@ const isReferencedInAMarkdown = async (
   return contained;
 };
 
-const isReferencedInConfig = async (contextualInfoFilename: string, configs: string[]): Promise<boolean> => {
+const isReferencedInConfig = async (
+  contextualInfoFilename: string,
+  configs: string[]
+): Promise<boolean> => {
   let contained = false;
   const contextualInfoId = contextualInfoFilename.split(".md")[0];
   for (const content of configs) {
@@ -155,7 +222,10 @@ const isReferencedInConfig = async (contextualInfoFilename: string, configs: str
   return contained;
 };
 
-const isReferencedInARoadmap = async (filename: string, contents: FileContents): Promise<boolean> => {
+const isReferencedInARoadmap = async (
+  filename: string,
+  contents: FileContents
+): Promise<boolean> => {
   let containedInAnAddOn = false;
   let containedInAModification = false;
   const filenameWithoutMd = filename.split(".md")[0];
@@ -332,8 +402,14 @@ export const findDeadContextualInfo = async (): Promise<string[]> => {
     if (
       !(
         (await isReferencedInAMarkdown(contextualInfo, contents.tasks)) ||
-        (await isReferencedInAMarkdown(contextualInfo, contents.displayContents)) ||
-        (await isReferencedInAMarkdown(contextualInfo, contents.contextualInfos)) ||
+        (await isReferencedInAMarkdown(
+          contextualInfo,
+          contents.displayContents
+        )) ||
+        (await isReferencedInAMarkdown(
+          contextualInfo,
+          contents.contextualInfos
+        )) ||
         (await isReferencedInConfig(contextualInfo, contents.fieldConfigs))
       )
     ) {

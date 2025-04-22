@@ -102,18 +102,26 @@ describe("Dashboard [feature] [all] [group2]", () => {
         cy.wait(1000);
 
         // tasks screen
-        cy.get('[data-task="register-trade-name"]').first().click({ force: true });
+        cy.get('[data-task="register-trade-name"]')
+          .first()
+          .click({ force: true });
         cy.wait(1000);
-        cy.get('[data-legal-structure="general-partnership"]').should("not.exist");
+        cy.get('[data-legal-structure="general-partnership"]').should(
+          "not.exist"
+        );
         cy.get('[data-task-id="register-trade-name"]').should("exist");
 
         // tasks mini-nav
         cy.get('[data-step="4"]').first().click({ force: true });
-        cy.get('[data-task="town-mercantile-license"]').first().click({ force: true });
+        cy.get('[data-task="town-mercantile-license"]')
+          .first()
+          .click({ force: true });
         cy.get('[data-task-id="register-trade-name"]').should("not.exist");
         cy.get('[data-task-id="town-mercantile-license"]').should("exist");
 
-        cy.get('[data-testid="back-to-dashboard"]').first().click({ force: true });
+        cy.get('[data-testid="back-to-dashboard"]')
+          .first()
+          .click({ force: true });
       });
 
       it("update the industry and verifies the dashboard tasks are updated", () => {

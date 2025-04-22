@@ -14,7 +14,10 @@ import {
   generateUser,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { createEmptyUserData, UserData } from "@businessnjgovnavigator/shared/userData";
+import {
+  createEmptyUserData,
+  UserData,
+} from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
@@ -47,9 +50,16 @@ const renderComponent = ({
 }): void => {
   render(
     <WithStatefulUserData
-      initialUserData={userData === undefined ? createEmptyUserData(generateUser({})) : userData}
+      initialUserData={
+        userData === undefined
+          ? createEmptyUserData(generateUser({}))
+          : userData
+      }
     >
-      <NavBarDashboardLink linkText={displayedLinkText} previousBusinessId={previousBusinessId} />
+      <NavBarDashboardLink
+        linkText={displayedLinkText}
+        previousBusinessId={previousBusinessId}
+      />
     </WithStatefulUserData>
   );
 };
@@ -71,7 +81,10 @@ describe("<NavBarDashboardLink/>", () => {
         id: "previous-business-id",
         onboardingFormProgress: "COMPLETED",
       });
-      newBusiness = generateBusiness({ id: "new-business-id", onboardingFormProgress: "UNSTARTED" });
+      newBusiness = generateBusiness({
+        id: "new-business-id",
+        onboardingFormProgress: "UNSTARTED",
+      });
       userData = generateUserDataForBusiness(newBusiness, {
         businesses: {
           "new-business-id": newBusiness,
@@ -91,21 +104,27 @@ describe("<NavBarDashboardLink/>", () => {
     it("updates current business to previous business when link is clicked by the user", async () => {
       renderComponent({ userData, previousBusinessId: previousBusiness.id });
       fireEvent.click(screen.getByText(displayedLinkText));
-      expect(currentUserData().currentBusinessId).toEqual("previous-business-id");
+      expect(currentUserData().currentBusinessId).toEqual(
+        "previous-business-id"
+      );
     });
 
     it("fires the dashboard analytics event when link is clicked by the user", async () => {
       renderComponent({ userData, previousBusinessId: previousBusiness.id });
       fireEvent.click(screen.getByText(displayedLinkText));
       await waitFor(() => {
-        expect(mockAnalytics.event.my_account.click.my_account).toHaveBeenCalled();
+        expect(
+          mockAnalytics.event.my_account.click.my_account
+        ).toHaveBeenCalled();
       });
     });
   });
 
   describe("when previousBusinessId prop is not present", () => {
     it("navigates to the onboarding if onboarding hasn't been started", async () => {
-      const userData = generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: undefined }));
+      const userData = generateUserDataForBusiness(
+        generateBusiness({ onboardingFormProgress: undefined })
+      );
       renderComponent({ userData });
       fireEvent.click(screen.getByText(displayedLinkText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
@@ -126,7 +145,9 @@ describe("<NavBarDashboardLink/>", () => {
     it("fires the dashboard analytics event when link is clicked by the user", async () => {
       renderComponent({});
       fireEvent.click(screen.getByText(displayedLinkText));
-      expect(mockAnalytics.event.my_account.click.my_account).toHaveBeenCalled();
+      expect(
+        mockAnalytics.event.my_account.click.my_account
+      ).toHaveBeenCalled();
     });
   });
 });

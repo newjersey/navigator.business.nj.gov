@@ -10,7 +10,9 @@ export const CannabisLocationAlert = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   return props.industryId === "cannabis" ? (
-    <Alert variant="warning">{Config.profileDefaults.default.cannabisLocationAlert}</Alert>
+    <Alert variant="warning">
+      {Config.profileDefaults.default.cannabisLocationAlert}
+    </Alert>
   ) : (
     <></>
   );

@@ -19,7 +19,10 @@ export const roadmapWithSectionSpecificTasks = (
   }
 
   for (const task of roadmap.tasks) {
-    if (typeof task.stepNumber === "number" && stepNumber.includes(task.stepNumber)) {
+    if (
+      typeof task.stepNumber === "number" &&
+      stepNumber.includes(task.stepNumber)
+    ) {
       result.tasks.push(task);
     }
   }

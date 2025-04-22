@@ -58,8 +58,8 @@ const DeadUrlsPage = (props: Props): ReactElement => {
     <>
       <h1>Dead URLs</h1>
       <Heading level={2}>
-        NOTE: this only works locally, (ask a dev to run this locally for results
-        https://www.pivotaltracker.com/story/show/185355762)
+        NOTE: this only works locally, (ask a dev to run this locally for
+        results https://www.pivotaltracker.com/story/show/185355762)
       </Heading>
       <PrimaryButton onClick={handleDownloadClick} isColor={"primary"}>
         Click Here to Download, as a txt file
@@ -86,13 +86,20 @@ const DeadUrlsPage = (props: Props): ReactElement => {
 
   return (
     <PageSkeleton>
-      <NextSeo title={getNextSeoTitle(config.pagesMetadata.deadUrlsTitle)} noindex={true} />
+      <NextSeo
+        title={getNextSeoTitle(config.pagesMetadata.deadUrlsTitle)}
+        noindex={true}
+      />
       <main>
         <SingleColumnContainer>
           {isAuthed ? (
             authedView
           ) : (
-            <MgmtAuth password={password} setIsAuthed={setIsAuthed} setPassword={setPassword} />
+            <MgmtAuth
+              password={password}
+              setIsAuthed={setIsAuthed}
+              setPassword={setPassword}
+            />
           )}
         </SingleColumnContainer>
       </main>
@@ -100,9 +107,12 @@ const DeadUrlsPage = (props: Props): ReactElement => {
   );
 };
 
-export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Props>> => {
+export const getServerSideProps = async (): Promise<
+  GetServerSidePropsResult<Props>
+> => {
   const buildCheckDeadPages =
-    (process.env.CHECK_DEAD_LINKS && process.env.CHECK_DEAD_LINKS === "true") || false;
+    (process.env.CHECK_DEAD_LINKS && process.env.CHECK_DEAD_LINKS === "true") ||
+    false;
   return buildCheckDeadPages
     ? {
         props: {

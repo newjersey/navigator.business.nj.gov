@@ -24,11 +24,19 @@ import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalSt
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-export const generateBusinessForProfile = (overrides: Partial<Business>): Business => {
+export const generateBusinessForProfile = (
+  overrides: Partial<Business>
+): Business => {
   const profileData = generateProfileData({ ...overrides.profileData });
   const taskProgress: Record<string, TaskProgress> =
     profileData.employerId && profileData.employerId.length > 0
@@ -51,7 +59,8 @@ export const renderPage = ({
 }): void => {
   const genericTown = generateMunicipality({ displayName: "GenericTown" });
   const profileDataMunicipality = business && business.profileData.municipality;
-  const formationNJAddress = business && business.formationData.formationFormData.addressMunicipality;
+  const formationNJAddress =
+    business && business.formationData.formationFormData.addressMunicipality;
 
   const municipalitiesList = [genericTown];
   if (profileDataMunicipality) municipalitiesList.push(profileDataMunicipality);
@@ -70,18 +79,27 @@ export const renderPage = ({
     withNeedsAccountContext(
       <ThemeProvider theme={createTheme()}>
         <WithStatefulDataFieldFormContext>
-          <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
+          <WithStatefulUserData
+            initialUserData={generateUserDataForBusiness(initialBusiness)}
+          >
             <Profile municipalities={municipalitiesList} />
           </WithStatefulUserData>
         </WithStatefulDataFieldFormContext>
       </ThemeProvider>,
       isAuthenticated ?? IsAuthenticated.TRUE,
-      { showNeedsAccountModal: false, setShowNeedsAccountModal: setShowNeedsAccountModal ?? jest.fn() }
+      {
+        showNeedsAccountModal: false,
+        setShowNeedsAccountModal: setShowNeedsAccountModal ?? jest.fn(),
+      }
     )
   );
 };
 
-export const fillText = (label: string, value: string, selector?: string): void => {
+export const fillText = (
+  label: string,
+  value: string,
+  selector?: string
+): void => {
   const options = selector ? { selector } : undefined;
   const element = screen.getByLabelText(label, options);
 
@@ -127,11 +145,16 @@ export const getEntityIdValue = (): string => {
 };
 
 export const getDateOfFormation = (): string => {
-  return (screen.queryByLabelText("Date of formation") as HTMLInputElement)?.value;
+  return (screen.queryByLabelText("Date of formation") as HTMLInputElement)
+    ?.value;
 };
 
 export const getNotesValue = (): string => {
-  return (screen.queryByLabelText("Notes", { selector: "textarea" }) as HTMLInputElement)?.value;
+  return (
+    screen.queryByLabelText("Notes", {
+      selector: "textarea",
+    }) as HTMLInputElement
+  )?.value;
 };
 
 export const getTaxIdValue = (): string => {
@@ -146,8 +169,11 @@ export const getMunicipalityValue = (): string => {
   return (screen.queryByTestId("municipality") as HTMLInputElement)?.value;
 };
 
-export const getBusinessProfileInputFieldName = (business: Business): string => {
-  return LookupLegalStructureById(business.profileData.legalStructureId).hasTradeName
+export const getBusinessProfileInputFieldName = (
+  business: Business
+): string => {
+  return LookupLegalStructureById(business.profileData.legalStructureId)
+    .hasTradeName
     ? "Trade name"
     : "Business name";
 };
@@ -160,19 +186,25 @@ export const removeLocationAndSave = (): void => {
 
 export const expectLocationSavedAsUndefined = async (): Promise<void> => {
   await waitFor(() => {
-    return expect(currentBusiness().profileData.municipality).toEqual(undefined);
+    return expect(currentBusiness().profileData.municipality).toEqual(
+      undefined
+    );
   });
 };
 
 export const expectLocationNotSavedAndError = (): void => {
   expect(userDataWasNotUpdated()).toBe(true);
   expect(
-    screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
+    screen.getByText(
+      Config.profileDefaults.fields.municipality.default.errorTextRequired
+    )
   ).toBeInTheDocument();
   expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
 };
 
-export const getForeignNexusProfileFields = (businessPersona: BusinessPersona): Partial<ProfileData> => {
+export const getForeignNexusProfileFields = (
+  businessPersona: BusinessPersona
+): Partial<ProfileData> => {
   return businessPersona === "FOREIGN"
     ? {
         foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],

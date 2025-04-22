@@ -5,6 +5,7 @@ export interface HousingMunicipalitiesContextType {
   municipalities: HousingMunicipality[];
 }
 
-export const HousingMunicipalitiesContext = createContext<HousingMunicipalitiesContextType>({
-  municipalities: [],
-});
+export const HousingMunicipalitiesContext =
+  createContext<HousingMunicipalitiesContextType>({
+    municipalities: [],
+  });

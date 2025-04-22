@@ -33,7 +33,9 @@ describe("<DeferredOnboardingQuestion />", () => {
     render(
       <WithStatefulUserData
         initialUserData={generateUserDataForBusiness(
-          generateBusiness({ profileData: generateProfileData({ ...emptyIndustrySpecificData }) })
+          generateBusiness({
+            profileData: generateProfileData({ ...emptyIndustrySpecificData }),
+          })
         )}
       >
         <DeferredOnboardingQuestion label="" onSave={onSave || jest.fn()}>
@@ -46,7 +48,9 @@ describe("<DeferredOnboardingQuestion />", () => {
   it("saves changes to profile data", () => {
     renderComponent({});
     fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
-    fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
+    fireEvent.click(
+      screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText)
+    );
     expect(currentBusiness().profileData.homeBasedBusiness).toEqual(true);
   });
 
@@ -54,7 +58,9 @@ describe("<DeferredOnboardingQuestion />", () => {
     const onSave = jest.fn();
     renderComponent({ onSave });
     fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
-    fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
+    fireEvent.click(
+      screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText)
+    );
     await waitFor(() => {
       expect(onSave).toHaveBeenCalled();
     });
@@ -62,7 +68,9 @@ describe("<DeferredOnboardingQuestion />", () => {
 
   it("does not update if no answer provided", () => {
     renderComponent({});
-    fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
+    fireEvent.click(
+      screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText)
+    );
     expect(userDataWasNotUpdated()).toBe(true);
     expect(mockPush).not.toHaveBeenCalled();
   });

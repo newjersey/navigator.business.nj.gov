@@ -9,7 +9,9 @@ import { ReactElement, useContext } from "react";
 export const ForeignStateOfFormation = (): ReactElement => {
   const FIELD = "foreignStateOfFormation";
   const { Config } = useConfig();
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(
+    BusinessFormationContext
+  );
   const { doesFieldHaveError } = useFormationErrors();
 
   const handleChange = (stateObject: StateObject | undefined): void => {
@@ -24,7 +26,9 @@ export const ForeignStateOfFormation = (): ReactElement => {
   return (
     <>
       <strong>
-        <ModifiedContent>{Config.formation.fields.foreignStateOfFormation.label}</ModifiedContent>
+        <ModifiedContent>
+          {Config.formation.fields.foreignStateOfFormation.label}
+        </ModifiedContent>
       </strong>
       <StateDropdown
         fieldName="foreignStateOfFormation"

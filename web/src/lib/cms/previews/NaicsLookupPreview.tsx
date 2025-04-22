@@ -6,7 +6,10 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateTask } from "@/test/factories";
-import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared";
+import {
+  generateBusiness,
+  generateProfileData,
+} from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
 const NaicsLookupPreview = (props: PreviewProps): ReactElement => {
@@ -27,7 +30,11 @@ const NaicsLookupPreview = (props: PreviewProps): ReactElement => {
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+      <div
+        className="cms"
+        ref={ref}
+        style={{ margin: 40, pointerEvents: "none" }}
+      >
         <NaicsCodeInput
           onSave={(): void => {}}
           task={task}

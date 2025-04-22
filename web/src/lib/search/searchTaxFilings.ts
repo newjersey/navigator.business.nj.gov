@@ -1,4 +1,7 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
+import {
+  findMatchInBlock,
+  findMatchInLabelledText,
+} from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
 import { Filing } from "@/lib/types/types";
 

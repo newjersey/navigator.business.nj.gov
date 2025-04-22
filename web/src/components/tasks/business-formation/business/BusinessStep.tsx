@@ -24,7 +24,8 @@ export const BusinessStep = (): ReactElement => {
     isForeign ? <MainBusinessForeignAddressFlow /> : <MainBusinessAddressNj />;
 
   const lpSection = (): ReactElement | null => {
-    if (state.formationFormData.legalType !== "limited-partnership") return null;
+    if (state.formationFormData.legalType !== "limited-partnership")
+      return null;
     return (
       <>
         <hr className="margin-y-3" aria-hidden={true} />

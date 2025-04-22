@@ -20,7 +20,13 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -151,7 +157,9 @@ describe("<MiniRoadmap />", () => {
       describe(`${operatingPhase}`, () => {
         it("renders the roadmap with the business structure prompt", () => {
           renderMiniRoadMap("task3");
-          expect(screen.getByTestId("business-structure-prompt")).toBeInTheDocument();
+          expect(
+            screen.getByTestId("business-structure-prompt")
+          ).toBeInTheDocument();
         });
       });
     }
@@ -175,13 +183,20 @@ describe("<MiniRoadmap />", () => {
       });
 
       renderMiniRoadMap("task3");
-      expect(screen.queryByTestId("business-structure-prompt")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("business-structure-prompt")
+      ).not.toBeInTheDocument();
     }
   );
 
-  const renderStatefulMiniRoadMap = (taskId: string, business: Business): void => {
+  const renderStatefulMiniRoadMap = (
+    taskId: string,
+    business: Business
+  ): void => {
     render(
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business)}
+      >
         <MiniRoadmap activeTaskId={taskId} />;
       </WithStatefulUserData>
     );
@@ -232,7 +247,9 @@ describe("<MiniRoadmap />", () => {
       renderStatefulMiniRoadMap("task1", business);
       expect(screen.getByText("task1")).toBeInTheDocument();
       await waitFor(() => {
-        return expect(currentBusiness().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]));
+        return expect(currentBusiness().preferences.roadmapOpenSteps).toEqual(
+          expect.arrayContaining([1, 2])
+        );
       });
     });
 
@@ -243,7 +260,9 @@ describe("<MiniRoadmap />", () => {
       expect(screen.getByText("task1")).toBeInTheDocument();
       expect(screen.getByText("task2")).toBeInTheDocument();
       await waitFor(() => {
-        return expect(currentBusiness().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]));
+        return expect(currentBusiness().preferences.roadmapOpenSteps).toEqual(
+          expect.arrayContaining([1, 2])
+        );
       });
     });
 
@@ -252,7 +271,9 @@ describe("<MiniRoadmap />", () => {
       fireEvent.click(screen.getByText("step1"));
       expect(screen.queryByText("task1")).not.toBeInTheDocument();
       await waitFor(() => {
-        return expect(currentBusiness().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([2]));
+        return expect(currentBusiness().preferences.roadmapOpenSteps).toEqual(
+          expect.arrayContaining([2])
+        );
       });
     });
   });

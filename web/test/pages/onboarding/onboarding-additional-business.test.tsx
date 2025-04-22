@@ -17,8 +17,14 @@ import {
   renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import { generateProfileData } from "@businessnjgovnavigator/shared";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
-import { createEmptyBusiness, UserData } from "@businessnjgovnavigator/shared/userData";
+import {
+  generateBusiness,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
+import {
+  createEmptyBusiness,
+  UserData,
+} from "@businessnjgovnavigator/shared/userData";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
@@ -48,13 +54,19 @@ describe("onboarding - additional business", () => {
     renderPage({});
 
     await waitFor(() => {
-      expect(mockPush).toHaveBeenCalledWith({ query: { page: 1 } }, undefined, { shallow: true });
+      expect(mockPush).toHaveBeenCalledWith({ query: { page: 1 } }, undefined, {
+        shallow: true,
+      });
     });
 
-    const expectedTitle = templateEval(Config.onboardingDefaults.pageTitle, { Additional: "Additional" });
+    const expectedTitle = templateEval(Config.onboardingDefaults.pageTitle, {
+      Additional: "Additional",
+    });
     const step = evalHeaderStepsTemplate({ current: 1, previous: 1 });
 
-    expect(screen.getByText(composeOnBoardingTitle(step, expectedTitle))).toBeInTheDocument();
+    expect(
+      screen.getByText(composeOnBoardingTitle(step, expectedTitle))
+    ).toBeInTheDocument();
   });
 
   it("returns user to previous business without saving", async () => {
@@ -63,13 +75,21 @@ describe("onboarding - additional business", () => {
     const initialData = generateUserDataForBusiness(initialBusiness);
     renderPage({ userData: initialData });
     await waitFor(() => {
-      expect(mockPush).toHaveBeenCalledWith({ query: { page: 1 } }, undefined, { shallow: true });
+      expect(mockPush).toHaveBeenCalledWith({ query: { page: 1 } }, undefined, {
+        shallow: true,
+      });
     });
 
-    const previousBusinessName = getNavBarBusinessTitle(initialBusiness, IsAuthenticated.TRUE === "TRUE");
-    const expectedText = templateEval(Config.onboardingDefaults.returnToPreviousBusiness, {
-      previousBusiness: previousBusinessName,
-    });
+    const previousBusinessName = getNavBarBusinessTitle(
+      initialBusiness,
+      IsAuthenticated.TRUE === "TRUE"
+    );
+    const expectedText = templateEval(
+      Config.onboardingDefaults.returnToPreviousBusiness,
+      {
+        previousBusiness: previousBusinessName,
+      }
+    );
 
     fireEvent.click(screen.getByText(expectedText));
     await waitFor(() => {
@@ -89,7 +109,9 @@ describe("onboarding - additional business", () => {
     const { page } = renderPage({ userData: initialData });
 
     await waitFor(() => {
-      expect(mockPush).toHaveBeenCalledWith({ query: { page: 1 } }, undefined, { shallow: true });
+      expect(mockPush).toHaveBeenCalledWith({ query: { page: 1 } }, undefined, {
+        shallow: true,
+      });
     });
 
     page.chooseRadio("business-persona-starting");
@@ -145,7 +167,10 @@ describe("onboarding - additional business", () => {
     });
     const initialData = generateUserDataForBusiness(initialBusiness);
 
-    useMockRouter({ isReady: true, query: { [QUERIES.additionalBusiness]: "true" } });
+    useMockRouter({
+      isReady: true,
+      query: { [QUERIES.additionalBusiness]: "true" },
+    });
 
     const { page } = renderPage({ userData: initialData });
 
@@ -162,7 +187,10 @@ describe("onboarding - additional business", () => {
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalledWith({
         pathname: ROUTES.unsupported,
-        query: { [QUERIES.additionalBusiness]: "true", [QUERIES.previousBusinessId]: "initial-business-id" },
+        query: {
+          [QUERIES.additionalBusiness]: "true",
+          [QUERIES.previousBusinessId]: "initial-business-id",
+        },
       });
     });
   });

@@ -1,4 +1,7 @@
-import { GenericButton, GenericButtonProps } from "@/components/njwds-extended/GenericButton";
+import {
+  GenericButton,
+  GenericButtonProps,
+} from "@/components/njwds-extended/GenericButton";
 import { forwardRef, ReactElement, Ref } from "react";
 
 export type PrimaryButtonColors =
@@ -15,7 +18,12 @@ export type PrimaryButtonColors =
 
 type OmitGenericButtonProps = Omit<
   GenericButtonProps,
-  "size" | "id" | "isAriaControls" | "isAriaExpanded" | "isAriaHaspopup" | "className"
+  | "size"
+  | "id"
+  | "isAriaControls"
+  | "isAriaExpanded"
+  | "isAriaHaspopup"
+  | "className"
 >;
 
 interface Props extends OmitGenericButtonProps {
@@ -39,5 +47,11 @@ export const PrimaryButton = forwardRef(function PrimaryButton(
   props: Props,
   ref: Ref<HTMLButtonElement>
 ): ReactElement {
-  return <GenericButton {...props} className={`${colors[props.isColor]}`} ref={ref} />;
+  return (
+    <GenericButton
+      {...props}
+      className={`${colors[props.isColor]}`}
+      ref={ref}
+    />
+  );
 });

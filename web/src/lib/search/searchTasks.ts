@@ -1,4 +1,7 @@
-import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
+import {
+  findMatchInBlock,
+  findMatchInLabelledText,
+} from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
 import { Task } from "@/lib/types/types";
 import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
@@ -16,7 +19,9 @@ export const searchTasks = (tasks: Task[], term: string): Match[] => {
     const name = task.name?.toLowerCase();
     const cta = task.callToActionText?.toLowerCase();
     const ctaLink = task.callToActionLink?.toLowerCase();
-    const agency = task.agencyId ? LookupTaskAgencyById(task.agencyId).name?.toLowerCase() : "";
+    const agency = task.agencyId
+      ? LookupTaskAgencyById(task.agencyId).name?.toLowerCase()
+      : "";
     const agencyContext = task.agencyAdditionalContext?.toLowerCase();
     const formName = task.formName?.toLowerCase();
     const summary = task.summaryDescriptionMd?.toLowerCase();

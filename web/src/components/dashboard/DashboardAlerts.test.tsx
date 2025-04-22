@@ -3,10 +3,19 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { QUERIES } from "@/lib/domain-logic/routes";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData";
-import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {
+  useMockBusiness,
+  useMockProfileData,
+} from "@/test/mock/mockUseUserData";
+import {
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import { generatePreferences } from "@businessnjgovnavigator/shared/";
-import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { act, render, screen } from "@testing-library/react";
 
@@ -30,7 +39,9 @@ describe("<DashboardAlerts />", () => {
     render(
       <WithStatefulUserData
         initialUserData={
-          business ? generateUserDataForBusiness(business) : generateUserDataForBusiness(generateBusiness({}))
+          business
+            ? generateUserDataForBusiness(business)
+            : generateUserDataForBusiness(generateBusiness({}))
         }
       >
         <DashboardAlerts />
@@ -47,20 +58,30 @@ describe("<DashboardAlerts />", () => {
         onboardingFormProgress: "COMPLETED",
       })
     );
-    expect(screen.getByText(Config.profileDefaults.default.successTextHeader)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.profileDefaults.default.successTextHeader)
+    ).toBeInTheDocument();
   });
 
   it("renders calendar snackbar when fromFormBusinessEntity query parameter is provided", () => {
-    useMockRouter({ isReady: true, query: { [QUERIES.fromFormBusinessEntity]: "true" } });
+    useMockRouter({
+      isReady: true,
+      query: { [QUERIES.fromFormBusinessEntity]: "true" },
+    });
     renderStatefulPage();
     expect(screen.getByTestId("snackbar-alert-calendar")).toBeInTheDocument();
   });
 
   it("renders task status updated snackbar when fromFormBusinessEntity query parameter is provided", () => {
-    useMockRouter({ isReady: true, query: { [QUERIES.fromFormBusinessEntity]: "true" } });
+    useMockRouter({
+      isReady: true,
+      query: { [QUERIES.fromFormBusinessEntity]: "true" },
+    });
     renderStatefulPage();
     act(() => jest.runAllTimers());
-    expect(screen.getByTestId("checkbox-status-updated-snackbar-alert")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("checkbox-status-updated-snackbar-alert")
+    ).toBeInTheDocument();
   });
 
   it("renders certifications snackbar when fromForming query parameter is provided", () => {
@@ -73,7 +94,9 @@ describe("<DashboardAlerts />", () => {
     useMockRouter({ isReady: true, query: { [QUERIES.fromForming]: "true" } });
     renderStatefulPage();
     act(() => jest.runAllTimers());
-    expect(screen.getByTestId("deadlines-opportunities-alert")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("deadlines-opportunities-alert")
+    ).toBeInTheDocument();
   });
 
   it("renders funding snackbar when fromFunding query parameter is provided", async () => {
@@ -83,19 +106,32 @@ describe("<DashboardAlerts />", () => {
   });
 
   it("renders deferred question snackbar when deferredQuestionAnswered query parameter is provided", async () => {
-    useMockRouter({ isReady: true, query: { [QUERIES.deferredQuestionAnswered]: "true" } });
+    useMockRouter({
+      isReady: true,
+      query: { [QUERIES.deferredQuestionAnswered]: "true" },
+    });
     renderStatefulPage();
-    expect(screen.getByTestId("deferredQuestionAnswered-alert")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("deferredQuestionAnswered-alert")
+    ).toBeInTheDocument();
   });
 
   it("renders additional business snackbar when from query parameter is provided", async () => {
-    useMockRouter({ isReady: true, query: { [QUERIES.fromAdditionalBusiness]: "true" } });
+    useMockRouter({
+      isReady: true,
+      query: { [QUERIES.fromAdditionalBusiness]: "true" },
+    });
     renderStatefulPage();
-    expect(screen.getByTestId("fromAdditionalBusiness-alert")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("fromAdditionalBusiness-alert")
+    ).toBeInTheDocument();
   });
 
   it("renders needs account snackbar when fromOnboarding query parameter is provided", async () => {
-    useMockRouter({ isReady: true, query: { [QUERIES.fromOnboarding]: "true" } });
+    useMockRouter({
+      isReady: true,
+      query: { [QUERIES.fromOnboarding]: "true" },
+    });
     renderStatefulPage();
     expect(screen.getByTestId("needs-account-alert")).toBeInTheDocument();
   });

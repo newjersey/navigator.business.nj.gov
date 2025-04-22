@@ -16,7 +16,14 @@ import {
   LpBusinessSuffix,
   NonprofitBusinessSuffix,
 } from "@businessnjgovnavigator/shared/";
-import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import { ReactElement, ReactNode, useContext } from "react";
 
 interface MySelectDisplayProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -26,7 +33,9 @@ interface MySelectDisplayProps extends React.HTMLAttributes<HTMLDivElement> {
 export const SuffixDropdown = (): ReactElement => {
   const FIELD = "businessSuffix";
   const { Config } = useConfig();
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(
+    BusinessFormationContext
+  );
   const { doesFieldHaveError } = useFormationErrors();
 
   const handleChange = (event: SelectChangeEvent<string>): void => {
@@ -64,7 +73,12 @@ export const SuffixDropdown = (): ReactElement => {
           </strong>
         </div>
         {isForeignCorporationOrNonprofit(state.formationFormData.legalType) && (
-          <div>{Config.formation.fields.businessSuffix.labelSecondaryTextForeignCorporation}</div>
+          <div>
+            {
+              Config.formation.fields.businessSuffix
+                .labelSecondaryTextForeignCorporation
+            }
+          </div>
         )}
       </div>
       <FormControl fullWidth error={doesFieldHaveError(FIELD)}>
@@ -75,7 +89,9 @@ export const SuffixDropdown = (): ReactElement => {
           autoComplete="no"
           labelId="business-suffix-label"
           id="business-suffix"
-          SelectDisplayProps={{ "data-testid": "business-suffix-main" } as MySelectDisplayProps}
+          SelectDisplayProps={
+            { "data-testid": "business-suffix-main" } as MySelectDisplayProps
+          }
           displayEmpty
           value={state.formationFormData.businessSuffix || ""}
           onChange={handleChange}
@@ -98,7 +114,9 @@ export const SuffixDropdown = (): ReactElement => {
           })}
         </Select>
         {doesFieldHaveError(FIELD) && (
-          <FormHelperText>{Config.formation.fields.businessSuffix.error}</FormHelperText>
+          <FormHelperText>
+            {Config.formation.fields.businessSuffix.error}
+          </FormHelperText>
         )}
       </FormControl>
     </>

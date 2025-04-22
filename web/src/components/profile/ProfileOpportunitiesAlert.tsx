@@ -3,13 +3,18 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileContentField } from "@/lib/types/types";
-import { getFieldsForProfile, isFieldAnswered } from "@businessnjgovnavigator/shared";
+import {
+  getFieldsForProfile,
+  isFieldAnswered,
+} from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
 export const ProfileOpportunitiesAlert = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);
   const { Config } = useConfig();
-  const unansweredOpportunityFields = getFieldsForProfile(state.profileData).filter((field) => {
+  const unansweredOpportunityFields = getFieldsForProfile(
+    state.profileData
+  ).filter((field) => {
     return !isFieldAnswered(field, state.profileData);
   });
 

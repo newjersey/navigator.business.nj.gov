@@ -70,7 +70,12 @@ export const Hero = (): ReactElement => {
             </div>
 
             <div className="desktop:grid-col-5 order-first desktop:order-last desktop:display-block display-none">
-              <img className="width-100" src="/img/Hero-img-climb.svg" alt="" role="presentation" />
+              <img
+                className="width-100"
+                src="/img/Hero-img-climb.svg"
+                alt=""
+                role="presentation"
+              />
             </div>
           </div>
         </div>
@@ -83,13 +88,19 @@ export const Hero = (): ReactElement => {
         </div>
         <LandingPageTiles />
       </div>
-      <div className={`${isDesktopAndUp ? "hero-gradient-bg-bottom" : "bg-primary-extra-light"}`}>
+      <div
+        className={`${
+          isDesktopAndUp ? "hero-gradient-bg-bottom" : "bg-primary-extra-light"
+        }`}
+      >
         <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">
           <div className="grid-row">
             <div className="desktop:grid-col-5">
               <div
                 className={`${
-                  isDesktopAndUp ? "width-80 margin-top-15" : "maxw-tablet margin-auto margin-top-205"
+                  isDesktopAndUp
+                    ? "width-80 margin-top-15"
+                    : "maxw-tablet margin-auto margin-top-205"
                 } padding-x-4 tablet:padding-x-10 desktop:padding-x-0`}
               >
                 <img src="/img/Landing-Hero-people.png" alt="" />
@@ -102,7 +113,11 @@ export const Hero = (): ReactElement => {
                 }`}
               >
                 <div className="border-top-1 border-primary" />
-                <Heading level={2} styleVariant="h1" className="margin-y-4 desktop:margin-y-3">
+                <Heading
+                  level={2}
+                  styleVariant="h1"
+                  className="margin-y-4 desktop:margin-y-3"
+                >
                   {landingPageConfig.section2HeaderText}
                 </Heading>
                 <div className="font-sans-lg line-height-120 text-base-dark margin-bottom-4 desktop:margin-bottom-3">
@@ -123,7 +138,9 @@ export const Hero = (): ReactElement => {
         {!isDesktopAndUp && (
           <div
             className={`hero-gradient-bg-bottom-mobile ${
-              isTabletAndUp ? "margin-top-neg-15 padding-15" : "margin-top-neg-5 padding-8"
+              isTabletAndUp
+                ? "margin-top-neg-15 padding-15"
+                : "margin-top-neg-5 padding-8"
             }`}
           />
         )}
@@ -137,7 +154,11 @@ export const Hero = (): ReactElement => {
               }`}
             >
               <div className="border-top-1 border-accent-cool-darker"></div>
-              <Heading level={2} styleVariant="h1" className="margin-y-4 desktop:margin-y-3">
+              <Heading
+                level={2}
+                styleVariant="h1"
+                className="margin-y-4 desktop:margin-y-3"
+              >
                 {landingPageConfig.section3HeaderText}
               </Heading>
               <div className="font-sans-lg line-height-120 text-base-dark margin-bottom-4 desktop:margin-bottom-3">

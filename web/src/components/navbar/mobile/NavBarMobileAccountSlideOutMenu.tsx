@@ -31,7 +31,10 @@ export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement => {
           props.openSideBar();
         }}
       >
-        <Icon className="text-accent-cool-darker font-sans-lg" iconName="account_circle" />
+        <Icon
+          className="text-accent-cool-darker font-sans-lg"
+          iconName="account_circle"
+        />
       </button>
 
       <FocusTrappedSidebar
@@ -41,8 +44,12 @@ export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement => {
       >
         <nav
           aria-label="Secondary"
-          className={`right-nav ${props.isSideBarOpen ? "is-visible" : "is-hidden"} ${
-            props.CMS_PREVIEW_ONLY_SHOW_MENU ? "cms-only-mobile-menu-preview" : ""
+          className={`right-nav ${
+            props.isSideBarOpen ? "is-visible" : "is-hidden"
+          } ${
+            props.CMS_PREVIEW_ONLY_SHOW_MENU
+              ? "cms-only-mobile-menu-preview"
+              : ""
           }`}
           data-testid="nav-sidebar-menu"
         >
@@ -53,7 +60,10 @@ export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement => {
             data-testid={"nav-bar-popup-menu"}
             className="padding-bottom-0"
           >
-            <MenuItem className={"display-flex padding-y-205 menu-item-title"} disabled={true}>
+            <MenuItem
+              className={"display-flex padding-y-205 menu-item-title"}
+              disabled={true}
+            >
               <div className="text-bold">{props.title}</div>
             </MenuItem>
             <hr className="margin-0 hr-2px" key="name-break" />
@@ -77,14 +87,19 @@ export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement => {
           {props.showSidebar && !props.hideMiniRoadmap && (
             <div className={"padding-x-1"}>
               <hr />
-              <MiniRoadmap activeTaskId={props.task?.id} onTaskClick={props.closeSideBar} />
+              <MiniRoadmap
+                activeTaskId={props.task?.id}
+                onTaskClick={props.closeSideBar}
+              />
             </div>
           )}
         </nav>
       </FocusTrappedSidebar>
 
       <div
-        className={`right-nav-overlay ${props.isSideBarOpen ? "is-visible" : ""}`}
+        className={`right-nav-overlay ${
+          props.isSideBarOpen ? "is-visible" : ""
+        }`}
         aria-hidden="true"
         data-testid="nav-menu-mobile-account-close-click-outside"
         onClick={(): void => {

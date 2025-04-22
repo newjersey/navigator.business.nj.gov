@@ -23,9 +23,12 @@ interface Props {
   isReviewStep?: boolean;
 }
 
-export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): ReactElement => {
+export const BusinessNameAndLegalStructure = ({
+  isReviewStep = false,
+}: Props): ReactElement => {
   const { Config } = useConfig();
-  const [legalStructureWarningIsOpen, setLegalStructureWarningIsOpen] = useState<boolean>(false);
+  const [legalStructureWarningIsOpen, setLegalStructureWarningIsOpen] =
+    useState<boolean>(false);
   const { state, setStepIndex } = useContext(BusinessFormationContext);
   const { business } = useUserData();
   const router = useRouter();
@@ -75,7 +78,11 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
     if (isReviewStep) {
       return <ReviewNotEntered />;
     } else {
-      return <span className="text-base-darkest">{Config.formation.general.notEntered}</span>;
+      return (
+        <span className="text-base-darkest">
+          {Config.formation.general.notEntered}
+        </span>
+      );
     }
   };
 
@@ -97,20 +104,26 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
         <div className="padding-205 flex-half">
           <div>
             <strong>
-              <ModifiedContent>{Config.formation.fields.businessName.label}</ModifiedContent>
+              <ModifiedContent>
+                {Config.formation.fields.businessName.label}
+              </ModifiedContent>
             </strong>
           </div>
           <div className="flex">
             <div className="margin-right-05">
               {state.formationFormData.businessName ? (
-                <span className="text-base-darkest">{state.formationFormData.businessName}</span>
+                <span className="text-base-darkest">
+                  {state.formationFormData.businessName}
+                </span>
               ) : (
                 notEnteredBusinessName()
               )}
             </div>
             {!isReviewStep && (
               <UnStyledButton
-                onClick={(): void => setStepIndex(LookupStepIndexByName("Name"))}
+                onClick={(): void =>
+                  setStepIndex(LookupStepIndexByName("Name"))
+                }
                 isUnderline
                 dataTestid="edit-business-name"
                 ariaLabel={`${Config.formation.general.editButtonText} ${Config.formation.fields.businessName.label}`}
@@ -125,7 +138,9 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
           data-testid="legal-structure"
         >
           <div className={"fdc"}>
-            <strong className={"margin-bottom-05"}>{legalStructureContextualInfo()}</strong>
+            <strong className={"margin-bottom-05"}>
+              {legalStructureContextualInfo()}
+            </strong>
             <div className={"flex"}>
               <div className={"margin-right-05"}> {legalStructureName()}</div>
               <div>
@@ -148,9 +163,13 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
         isOpen={legalStructureWarningIsOpen}
         close={(): void => setLegalStructureWarningIsOpen(false)}
         title={Config.formation.legalStructure.warningModalHeader}
-        primaryButtonText={Config.formation.legalStructure.warningModalContinueButton}
+        primaryButtonText={
+          Config.formation.legalStructure.warningModalContinueButton
+        }
         primaryButtonOnClick={editLegalStructure}
-        secondaryButtonText={Config.formation.legalStructure.warningModalCancelButton}
+        secondaryButtonText={
+          Config.formation.legalStructure.warningModalCancelButton
+        }
       >
         <Content>{Config.formation.legalStructure.warningModalBody}</Content>
       </ModalTwoButton>

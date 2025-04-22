@@ -9,7 +9,10 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ReverseOrderInMobile } from "@/components/njwds-layout/ReverseOrderInMobile";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { DataFormErrorMapContext, DataFormErrorMapFields } from "@/contexts/dataFormErrorMapContext";
+import {
+  DataFormErrorMapContext,
+  DataFormErrorMapFields,
+} from "@/contexts/dataFormErrorMapContext";
 import { createReducedFieldStates } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -42,14 +45,24 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { updateQueue } = useUserData();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
-  const business = props.CMS_ONLY_fakeBusiness ?? updateQueue?.currentBusiness();
+  const business =
+    props.CMS_ONLY_fakeBusiness ?? updateQueue?.currentBusiness();
 
-  const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
+  const [profileData, setProfileData] = useState<ProfileData>(
+    createEmptyProfileData()
+  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [apiFailed, setOnAPIfailed] = useState<undefined | "FAILED" | "UNKNOWN">(undefined);
+  const [apiFailed, setOnAPIfailed] = useState<
+    undefined | "FAILED" | "UNKNOWN"
+  >(undefined);
   const [onSubmitClicked, setOnSubmitClicked] = useState<boolean>(false);
-  const fields: DataFormErrorMapFields[] = ["businessName", "taxId", "responsibleOwnerName"];
-  const has_CMS_ONLY_fakeError = props.CMS_ONLY_fakeError && props.CMS_ONLY_fakeError !== "NONE";
+  const fields: DataFormErrorMapFields[] = [
+    "businessName",
+    "taxId",
+    "responsibleOwnerName",
+  ];
+  const has_CMS_ONLY_fakeError =
+    props.CMS_ONLY_fakeError && props.CMS_ONLY_fakeError !== "NONE";
 
   const {
     FormFuncWrapper,
@@ -86,18 +99,19 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
     taxId: Config.taxAccess.taxFieldErrorName,
   };
 
-  const canMoveToPrevStep = isOwningBusiness(business) && !props.hadLegalStructureOnMount;
+  const canMoveToPrevStep =
+    isOwningBusiness(business) && !props.hadLegalStructureOnMount;
 
   const displayBusinessName = (): boolean => {
-    return LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
-      "businessName"
-    );
+    return LookupLegalStructureById(
+      business?.profileData.legalStructureId
+    ).elementsToDisplay.has("businessName");
   };
 
   const displayResponsibleOwnerName = (): boolean => {
-    return LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
-      "responsibleOwnerName"
-    );
+    return LookupLegalStructureById(
+      business?.profileData.legalStructureId
+    ).elementsToDisplay.has("responsibleOwnerName");
   };
 
   const responsibleOwnerOrBusinessNameError = (): string => {
@@ -111,9 +125,13 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
   };
 
   const errorAlert = (): ReactElement => {
-    const errorApiFailed = apiFailed === "FAILED" || props.CMS_ONLY_fakeError === "API";
+    const errorApiFailed =
+      apiFailed === "FAILED" || props.CMS_ONLY_fakeError === "API";
 
-    if (business?.taxFilingData.errorField === "businessName" && errorApiFailed) {
+    if (
+      business?.taxFilingData.errorField === "businessName" &&
+      errorApiFailed
+    ) {
       return (
         <>
           {Config.taxAccess.failedErrorMessageHeader}
@@ -179,12 +197,18 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
       }
 
       if (taxFilingData.state === "FAILED") {
-        if (taxFilingData.errorField === "businessName" && displayBusinessName()) {
+        if (
+          taxFilingData.errorField === "businessName" &&
+          displayBusinessName()
+        ) {
           formContextState.reducer({
             type: FieldStateActionKind.VALIDATION,
             payload: { field: "businessName", invalid: true },
           });
-        } else if (taxFilingData.errorField === "businessName" && displayResponsibleOwnerName()) {
+        } else if (
+          taxFilingData.errorField === "businessName" &&
+          displayResponsibleOwnerName()
+        ) {
           formContextState.reducer({
             type: FieldStateActionKind.VALIDATION,
             payload: { field: "responsibleOwnerName", invalid: true },
@@ -231,7 +255,10 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
               {Config.taxAccess.stepTwoErrorBanner}
               <ul>
                 {fields.map((i) => {
-                  if (formContextState.fieldStates[i].invalid && errorMessages[i]) {
+                  if (
+                    formContextState.fieldStates[i].invalid &&
+                    errorMessages[i]
+                  ) {
                     return <li key={i}> {errorMessages[i]}</li>;
                   }
                 })}
@@ -239,7 +266,9 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
             </Alert>
           )}
 
-          {(apiFailed || has_CMS_ONLY_fakeError) && <Alert variant={"error"}> {errorAlert()}</Alert>}
+          {(apiFailed || has_CMS_ONLY_fakeError) && (
+            <Alert variant={"error"}> {errorAlert()}</Alert>
+          )}
 
           <TaxAccessBody isStepOne={false} showHeader={canMoveToPrevStep} />
 
@@ -267,7 +296,9 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
           )}
           {displayResponsibleOwnerName() && (
             <WithErrorBar
-              hasError={!!formContextState.fieldStates.responsibleOwnerName?.invalid}
+              hasError={
+                !!formContextState.fieldStates.responsibleOwnerName?.invalid
+              }
               type="ALWAYS"
               className="margin-top-3 width-full"
             >
@@ -281,7 +312,9 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                 }}
               />
               <ResponsibleOwnerName
-                validationText={Config.taxAccess.failedResponsibleOwnerFieldHelper}
+                validationText={
+                  Config.taxAccess.failedResponsibleOwnerFieldHelper
+                }
                 required
               />
             </WithErrorBar>
@@ -302,9 +335,16 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                 }}
               />
             </div>
-            <TaxId validationText={Config.taxAccess.failedTaxIdHelper} required inputWidth={"full"} />
+            <TaxId
+              validationText={Config.taxAccess.failedTaxIdHelper}
+              required
+              inputWidth={"full"}
+            />
           </WithErrorBar>
-          <div className="margin-y-3 width-full" data-testid="tax-calendar-access-step-two-button-container">
+          <div
+            className="margin-y-3 width-full"
+            data-testid="tax-calendar-access-step-two-button-container"
+          >
             <ReverseOrderInMobile className="display-flex flex-column mobile-lg:flex-row width-full gap-3 mobile-lg:gap-0">
               {canMoveToPrevStep && (
                 <SecondaryButton
@@ -315,7 +355,11 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                   {Config.taxAccess.stepTwoBackButton}
                 </SecondaryButton>
               )}
-              <div className={`mobile-lg:margin-left-auto ${canMoveToPrevStep ? "" : "width-full"}`}>
+              <div
+                className={`mobile-lg:margin-left-auto ${
+                  canMoveToPrevStep ? "" : "width-full"
+                }`}
+              >
                 <PrimaryButton
                   isColor="primary"
                   isRightMarginRemoved={true}

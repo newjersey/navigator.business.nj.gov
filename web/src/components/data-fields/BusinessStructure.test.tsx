@@ -2,7 +2,10 @@ import { BusinessStructure } from "@/components/data-fields/BusinessStructure";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { WithStatefulUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
+import {
+  WithStatefulUserData,
+  setupStatefulUserDataContext,
+} from "@/test/mock/withStatefulUserData";
 import {
   Business,
   LookupLegalStructureById,
@@ -20,7 +23,9 @@ const Config = getMergedConfig();
 const renderComponent = (business: Business): void => {
   render(
     <ThemeProvider theme={createTheme()}>
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(business)}
+      >
         <WithStatefulProfileData initialData={business.profileData}>
           <BusinessStructure />
         </WithStatefulProfileData>
@@ -39,7 +44,10 @@ describe("<BusinessStructure />", () => {
   });
 
   it(`add text is displayed with href that routes to business structure URL`, () => {
-    useMockRoadmapTask({ id: "business-structure", urlSlug: "some-business-structure-url" });
+    useMockRoadmapTask({
+      id: "business-structure",
+      urlSlug: "some-business-structure-url",
+    });
     renderComponent(
       generateBusiness({
         profileData: generateProfileData({ legalStructureId: undefined }),
@@ -53,7 +61,10 @@ describe("<BusinessStructure />", () => {
   });
 
   it(`edit text is displayed with href that routes to business structure URL`, () => {
-    useMockRoadmapTask({ id: "business-structure", urlSlug: "some-business-structure-url" });
+    useMockRoadmapTask({
+      id: "business-structure",
+      urlSlug: "some-business-structure-url",
+    });
     renderComponent(
       generateBusiness({
         profileData: generateProfileData({ legalStructureId: "c-corporation" }),
@@ -81,6 +92,8 @@ describe("<BusinessStructure />", () => {
       })
     );
     expect(screen.queryByTestId("not-entered")).not.toBeInTheDocument();
-    expect(screen.getByText(LookupLegalStructureById("c-corporation").name)).toBeInTheDocument();
+    expect(
+      screen.getByText(LookupLegalStructureById("c-corporation").name)
+    ).toBeInTheDocument();
   });
 });

@@ -1,6 +1,14 @@
-import { LabelledContent, LabelledContentList, Match } from "@/lib/search/typesForSearch";
+import {
+  LabelledContent,
+  LabelledContentList,
+  Match,
+} from "@/lib/search/typesForSearch";
 
-export const findMatchInBlock = (blockTexts: (string | undefined)[], term: string, match: Match): Match => {
+export const findMatchInBlock = (
+  blockTexts: (string | undefined)[],
+  term: string,
+  match: Match
+): Match => {
   for (const blockText of blockTexts) {
     if (blockText?.includes(term)) {
       match.snippets.push(makeSnippet(blockText, term));
@@ -29,7 +37,11 @@ export const findMatchInLabelledText = (
   return match;
 };
 
-export const findMatchInListText = (listTexts: LabelledContentList[], term: string, match: Match): Match => {
+export const findMatchInListText = (
+  listTexts: LabelledContentList[],
+  term: string,
+  match: Match
+): Match => {
   for (const listText of listTexts) {
     for (const item of listText.content) {
       if (item?.includes(term)) {

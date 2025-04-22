@@ -11,7 +11,11 @@ export const NexusAvailable = (props: AvailableProps): ReactElement => {
   return (
     <div data-testid="available-text" className="margin-bottom-2">
       <Alert variant="success">
-        <Content>{templateEval(Config.nexusNameSearch.availableText, { name: props.submittedName })}</Content>
+        <Content>
+          {templateEval(Config.nexusNameSearch.availableText, {
+            name: props.submittedName,
+          })}
+        </Content>
       </Alert>
     </div>
   );

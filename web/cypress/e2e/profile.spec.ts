@@ -18,7 +18,12 @@ import {
   randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
-import { Industry, arrayOfSectors, randomElementFromArray, randomInt } from "@businessnjgovnavigator/shared/";
+import {
+  Industry,
+  arrayOfSectors,
+  randomElementFromArray,
+  randomInt,
+} from "@businessnjgovnavigator/shared/";
 
 describe("Profile [feature] [all] [group4]", () => {
   beforeEach(() => {
@@ -29,13 +34,16 @@ describe("Profile [feature] [all] [group4]", () => {
   describe.skip("navigates to profile page and updates all fields", () => {
     it("onboards random industry where homebase doesn't apply, then changes to industry where it applies and updates all fields in profile", () => {
       const industry = randomNonHomeBasedIndustry();
-      const homeBasedQuestion = industry.industryOnboardingQuestions.canBeHomeBased
+      const homeBasedQuestion = industry.industryOnboardingQuestions
+        .canBeHomeBased
         ? Boolean(randomInt() % 2)
         : undefined;
-      const liquorLicenseQuestion = industry.industryOnboardingQuestions.isLiquorLicenseApplicable
+      const liquorLicenseQuestion = industry.industryOnboardingQuestions
+        .isLiquorLicenseApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
-      const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
+      const requiresCpa = industry.industryOnboardingQuestions
+        .isCpaRequiredApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
       const townDisplayName = "Barnegat";
@@ -82,10 +90,12 @@ describe("Profile [feature] [all] [group4]", () => {
     it("onboards random homebased industry, then updates the field in profile", () => {
       const industry = randomHomeBasedIndustry();
       const homeBasedQuestion = Boolean(randomInt() % 2);
-      const liquorLicenseQuestion = industry.industryOnboardingQuestions.isLiquorLicenseApplicable
+      const liquorLicenseQuestion = industry.industryOnboardingQuestions
+        .isLiquorLicenseApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
-      const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
+      const requiresCpa = industry.industryOnboardingQuestions
+        .isCpaRequiredApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
       const townDisplayName = "Barnegat";
@@ -116,7 +126,8 @@ describe("Profile [feature] [all] [group4]", () => {
         }) as Industry[]
       );
       const liquorLicenseQuestion = Boolean(randomInt() % 2);
-      const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
+      const requiresCpa = industry.industryOnboardingQuestions
+        .isCpaRequiredApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
       const townDisplayName = "Barnegat";

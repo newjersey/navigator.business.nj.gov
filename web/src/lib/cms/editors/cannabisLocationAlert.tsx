@@ -17,10 +17,14 @@ export default {
   },
   // Function to create a text block from an instance of this component
   toBlock: (obj: { body: string }): string => {
-    return `:::cannabisLocationAlert \n ${obj.body ? obj.body.trim() : ""}\n:::`;
+    return `:::cannabisLocationAlert \n ${
+      obj.body ? obj.body.trim() : ""
+    }\n:::`;
   },
 
   toPreview: (obj: { body: string }): string => {
-    return `:::cannabisLocationAlert \n ${obj.body ? obj.body.trim() : ""}\n:::`;
+    return `:::cannabisLocationAlert \n ${
+      obj.body ? obj.body.trim() : ""
+    }\n:::`;
   },
 };

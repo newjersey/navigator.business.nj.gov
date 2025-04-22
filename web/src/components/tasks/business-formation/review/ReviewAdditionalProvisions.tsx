@@ -9,23 +9,28 @@ export const ReviewAdditionalProvisions = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
 
   return (
-    <ReviewSubSection header={Config.formation.fields.additionalProvisions.label}>
+    <ReviewSubSection
+      header={Config.formation.fields.additionalProvisions.label}
+    >
       <div className="" data-testid="provisions">
-        {state.formationFormData.additionalProvisions?.map((provision, index) => {
-          return (
-            <div className="margin-bottom-2" key={index}>
-              <div className="text-bold margin-bottom-05">
-                {index + 1}. {Config.formation.fields.additionalProvisions.secondaryLabel}
+        {state.formationFormData.additionalProvisions?.map(
+          (provision, index) => {
+            return (
+              <div className="margin-bottom-2" key={index}>
+                <div className="text-bold margin-bottom-05">
+                  {index + 1}.{" "}
+                  {Config.formation.fields.additionalProvisions.secondaryLabel}
+                </div>
+                <ExpandCollapseString
+                  text={provision}
+                  viewMoreText={Config.formation.general.viewMoreButtonText}
+                  viewLessText={Config.formation.general.viewLessButtonText}
+                  lines={2}
+                />
               </div>
-              <ExpandCollapseString
-                text={provision}
-                viewMoreText={Config.formation.general.viewMoreButtonText}
-                viewLessText={Config.formation.general.viewLessButtonText}
-                lines={2}
-              />
-            </div>
-          );
-        })}
+            );
+          }
+        )}
       </div>
     </ReviewSubSection>
   );

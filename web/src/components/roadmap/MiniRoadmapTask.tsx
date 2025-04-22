@@ -21,7 +21,9 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
     <Link href={`/tasks/${props.task.urlSlug}`}>
       <UnStyledButton
         onClick={(): void => {
-          analytics.event.task_mini_roadmap_task.click.go_to_task(props.task.urlSlug);
+          analytics.event.task_mini_roadmap_task.click.go_to_task(
+            props.task.urlSlug
+          );
           props.onTaskClick && props.onTaskClick();
         }}
       >
@@ -34,9 +36,16 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
           data-task={props.task.id}
         >
           {taskProgress === "COMPLETED" ? (
-            <Icon className="margin-right-1 checked-task text-success" iconName="check_circle" />
+            <Icon
+              className="margin-right-1 checked-task text-success"
+              iconName="check_circle"
+            />
           ) : (
-            <div className={`substep-unchecked margin-right-1 ${props.active ? "active" : ""}`} />
+            <div
+              className={`substep-unchecked margin-right-1 ${
+                props.active ? "active" : ""
+              }`}
+            />
           )}
           <span className="margin-right-05">{props.task.name}</span>
           <span className="screen-reader-only">{taskProgressReadable}</span>

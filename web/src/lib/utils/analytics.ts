@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { LegacyEventAction, LegacyEventCategory, LegacyEventLabel } from "@/lib/utils/analytics-legacy";
+import {
+  LegacyEventAction,
+  LegacyEventCategory,
+  LegacyEventLabel,
+} from "@/lib/utils/analytics-legacy";
 import analytics from "./analytics-base";
 
 export const GTM_ID = process.env.GOOGLE_TAG_MANAGER_ID;
@@ -124,7 +128,10 @@ type OnSiteSection =
   | "dashboard_calendar_screen"
   | "business_formation_task";
 
-type StatusSelected = "selected_not_started" | "selected_in_progress" | "selected_completed";
+type StatusSelected =
+  | "selected_not_started"
+  | "selected_in_progress"
+  | "selected_completed";
 
 type Phase = "progress_to_formed_phase" | "progress_to_up_and_running_phase";
 
@@ -249,7 +256,12 @@ export interface Questions {
   [k: string]: Union<"change" | "first_time" | "deleted", string>;
 }
 
-type ServerResponse = "success" | "error" | "found" | "not_found" | "not_authorized";
+type ServerResponse =
+  | "success"
+  | "error"
+  | "found"
+  | "not_found"
+  | "not_authorized";
 
 type ClickedToUnion = Union<OnTabName | URL | null, string>;
 
@@ -329,16 +341,17 @@ class GTMTracker {
       analytics.context.calendar_view
     );
 
-    const on_task_id: string | undefined = window.location.pathname.split("/tasks/")[1];
+    const on_task_id: string | undefined =
+      window.location.pathname.split("/tasks/")[1];
 
     const createEvent = (data: GTMEventData) => {
       const { event, ...parameters } = data;
       const eventName = eventMap[event];
       return Object.keys(parameters).reduce(
         (acc, key) => {
-          acc[parameterMap[key as ParameterType]] = (parameters as GTMEventData)[
-            key as ParameterType
-          ]?.toString();
+          acc[parameterMap[key as ParameterType]] = (
+            parameters as GTMEventData
+          )[key as ParameterType]?.toString();
           return acc;
         },
         {
@@ -433,7 +446,9 @@ export class DimensionQueueFactory {
   }
 
   naicsCode(naics_code: string) {
-    return this.queue({ naics_code: naics_code.length > 0 ? naics_code : undefined });
+    return this.queue({
+      naics_code: naics_code.length > 0 ? naics_code : undefined,
+    });
   }
 
   phase(current_phase: string | null, calendar_view: "NONE" | "LIST" | "FULL") {
@@ -517,7 +532,8 @@ export default {
           eventRunner.track({
             event: "link_clicks",
             legacy_event_action: "click",
-            legacy_event_category: "landing_page_get_my_registration_guide_tile",
+            legacy_event_category:
+              "landing_page_get_my_registration_guide_tile",
             legacy_event_label: "go_to_onboarding",
             click_text: "get_my_registration_guide_tile",
             clicked_to: "/onboarding",
@@ -559,7 +575,8 @@ export default {
           eventRunner.track({
             event: "link_clicks",
             legacy_event_action: "click",
-            legacy_event_category: "landing_page_find_funding_for_my_business_tile",
+            legacy_event_category:
+              "landing_page_find_funding_for_my_business_tile",
             legacy_event_label: "go_to_onboarding",
             click_text: "find_funding_for_my_business_tile",
             clicked_to: "/onboarding",
@@ -573,7 +590,8 @@ export default {
           eventRunner.track({
             event: "link_clicks",
             legacy_event_action: "click",
-            legacy_event_category: "landing_page_im_starting_a_nj_business_tile",
+            legacy_event_category:
+              "landing_page_im_starting_a_nj_business_tile",
             legacy_event_label: "go_to_onboarding",
             click_text: "im_starting_a_nj_business_tile",
             clicked_to: "/onboarding",
@@ -887,7 +905,11 @@ export default {
     },
     task_primary_call_to_action: {
       click: {
-        open_external_website: (click_text: string, clicked_to: URL | string, on_tab_name?: OnTabName) => {
+        open_external_website: (
+          click_text: string,
+          clicked_to: URL | string,
+          on_tab_name?: OnTabName
+        ) => {
           eventRunner.track({
             event: "call_to_action_clicks",
             legacy_event_action: "click",
@@ -928,7 +950,10 @@ export default {
     },
     task_button_i_already_submitted: {
       click: {
-        view_status_tab: (clicked_to?: ClickedToUnion, on_tab_name?: OnTabName) => {
+        view_status_tab: (
+          clicked_to?: ClickedToUnion,
+          on_tab_name?: OnTabName
+        ) => {
           eventRunner.track({
             event: "link_clicks",
             legacy_event_action: "click",
@@ -1048,7 +1073,11 @@ export default {
     },
     contextual_link: {
       click: {
-        view_sidebar: (clicked_to: string, click_text: string, on_tab_name?: OnTabName) => {
+        view_sidebar: (
+          clicked_to: string,
+          click_text: string,
+          on_tab_name?: OnTabName
+        ) => {
           eventRunner.track({
             event: "contextual_link_clicks",
             legacy_event_action: "click",
@@ -1300,7 +1329,8 @@ export default {
         elevator_registration_button_click_register: () => {
           eventRunner.track({
             event: "outbound_link_clicks",
-            legacy_event_category: "elevator_registration_button_click_register",
+            legacy_event_category:
+              "elevator_registration_button_click_register",
             legacy_event_action: "click",
           });
         },
@@ -1314,7 +1344,8 @@ export default {
         check_my_elevator_application_status_tab_click: () => {
           eventRunner.track({
             event: "task_tab_clicked",
-            legacy_event_category: "check_my_elevator_application_status_tab_click",
+            legacy_event_category:
+              "check_my_elevator_application_status_tab_click",
             legacy_event_action: "click",
           });
         },
@@ -1337,7 +1368,8 @@ export default {
         elevator_registration_form_submission_failed: () => {
           eventRunner.track({
             event: "form_submits",
-            legacy_event_category: "elevator_registration_form_submission_failed",
+            legacy_event_category:
+              "elevator_registration_form_submission_failed",
             legacy_event_action: "submit",
           });
         },
@@ -1404,7 +1436,8 @@ export default {
           eventRunner.track({
             event: "form_submits",
             legacy_event_action: "click",
-            legacy_event_category: "onboarding_last_step_save_additional_business_button",
+            legacy_event_category:
+              "onboarding_last_step_save_additional_business_button",
             legacy_event_label: "finish_additional_business_onboarding",
             form_name: "finish_additional_business_onboarding",
           });
@@ -1454,7 +1487,8 @@ export default {
           eventRunner.track({
             event: "task_search_interactions",
             legacy_event_action: "click",
-            legacy_event_category: "business_formation_search_existing_name_again",
+            legacy_event_category:
+              "business_formation_search_existing_name_again",
             legacy_event_label: "refresh_name_search_field",
             on_tab_name: "name_step",
           });
@@ -1482,7 +1516,8 @@ export default {
             event: "task_tab_clicked",
             legacy_event_action: "click",
             legacy_event_category: "business_formation_dba_resolution_tab",
-            legacy_event_label: "arrive_on_business_formation_dba_resolution_step",
+            legacy_event_label:
+              "arrive_on_business_formation_dba_resolution_step",
             on_tab_name: "resolution_step",
           });
         },
@@ -1495,7 +1530,8 @@ export default {
             event: "task_tab_clicked",
             legacy_event_action: "click",
             legacy_event_category: "business_formation_dba_authorization_tab",
-            legacy_event_label: "arrive_on_business_formation_dba_authorization_step",
+            legacy_event_label:
+              "arrive_on_business_formation_dba_authorization_step",
             on_tab_name: "authorization_step",
           });
         },
@@ -1507,8 +1543,10 @@ export default {
           eventRunner.track({
             event: "task_tab_continue_button_clicks",
             legacy_event_action: "click",
-            legacy_event_category: "business_formation_dba_resolution_step_continue_button",
-            legacy_event_label: "arrive_on_business_formation_dba_resolution_step",
+            legacy_event_category:
+              "business_formation_dba_resolution_step_continue_button",
+            legacy_event_label:
+              "arrive_on_business_formation_dba_resolution_step",
             on_tab_name: "resolution_step",
           });
         },
@@ -1520,8 +1558,10 @@ export default {
           eventRunner.track({
             event: "task_tab_continue_button_clicks",
             legacy_event_action: "click",
-            legacy_event_category: "business_formation_dba_authorization_step_continue_button",
-            legacy_event_label: "arrive_on_business_formation_dba_authorization_step",
+            legacy_event_category:
+              "business_formation_dba_authorization_step_continue_button",
+            legacy_event_label:
+              "arrive_on_business_formation_dba_authorization_step",
             on_tab_name: "authorization_step",
           });
         },
@@ -1593,7 +1633,8 @@ export default {
           eventRunner.track({
             event: "task_tab_continue_button_clicks",
             legacy_event_action: "click",
-            legacy_event_category: "business_formation_name_step_continue_button",
+            legacy_event_category:
+              "business_formation_name_step_continue_button",
             legacy_event_label: "arrive_on_business_formation_business_step",
             on_tab_name: "name_step",
             clicked_to: "business_step",
@@ -1607,7 +1648,8 @@ export default {
           eventRunner.track({
             event: "task_tab_continue_button_clicks",
             legacy_event_action: "click",
-            legacy_event_category: "business_formation_business_step_continue_button",
+            legacy_event_category:
+              "business_formation_business_step_continue_button",
             legacy_event_label: "arrive_on_business_formation_contacts_step",
             on_tab_name: "business_step",
             clicked_to: "contacts_step",
@@ -1621,7 +1663,8 @@ export default {
           eventRunner.track({
             event: "task_tab_continue_button_clicks",
             legacy_event_action: "click",
-            legacy_event_category: "business_formation_contacts_step_continue_button",
+            legacy_event_category:
+              "business_formation_contacts_step_continue_button",
             legacy_event_label: "arrive_on_business_formation_billing_step",
             on_tab_name: "contacts_step",
             clicked_to: "billing_step",
@@ -1635,7 +1678,8 @@ export default {
           eventRunner.track({
             event: "task_tab_continue_button_clicks",
             legacy_event_action: "click",
-            legacy_event_category: "business_formation_billing_step_continue_button",
+            legacy_event_category:
+              "business_formation_billing_step_continue_button",
             legacy_event_label: "arrive_on_business_formation_review_step",
             on_tab_name: "billing_step",
             clicked_to: "review_step",
@@ -1649,7 +1693,8 @@ export default {
           eventRunner.track({
             event: "form_submits",
             legacy_event_action: "submit",
-            legacy_event_category: "business_formation_registered_agent_identification",
+            legacy_event_category:
+              "business_formation_registered_agent_identification",
             legacy_event_label: "entered_agent_ID",
             on_tab_name: "contacts_step",
             form_name: "business_formation",
@@ -1661,7 +1706,8 @@ export default {
             event: "form_submits",
             on_tab_name: "contacts_step",
             legacy_event_action: "submit",
-            legacy_event_category: "business_formation_registered_agent_identification",
+            legacy_event_category:
+              "business_formation_registered_agent_identification",
             legacy_event_label: "identified_agent_manually",
             form_name: "business_formation",
             questions: { registered_agent: "manual" },
@@ -1675,7 +1721,8 @@ export default {
           eventRunner.track({
             event: "form_submits",
             legacy_event_action: "submit",
-            legacy_event_category: "business_formation_registered_agent_manual_name",
+            legacy_event_category:
+              "business_formation_registered_agent_manual_name",
             legacy_event_label: "name_is_same_as_account_holder",
             on_tab_name: "contacts_step",
             form_name: "business_formation",
@@ -1690,7 +1737,8 @@ export default {
           eventRunner.track({
             event: "form_submits",
             legacy_event_action: "submit",
-            legacy_event_category: "business_formation_registered_agent_manual_address",
+            legacy_event_category:
+              "business_formation_registered_agent_manual_address",
             legacy_event_label: "address_is_same_as_account_holder",
             on_tab_name: "contacts_step",
             form_name: "business_formation",
@@ -1830,7 +1878,8 @@ export default {
           eventRunner.track({
             event: "form_submits",
             legacy_event_action: "submit",
-            legacy_event_category: "cannabis_license_form_microbusiness_question",
+            legacy_event_category:
+              "cannabis_license_form_microbusiness_question",
             legacy_event_label: "yes_I_m_a_microbusiness",
             form_name: "cannabis_license",
             questions: { cannabis_business_type: "micro" },
@@ -1840,7 +1889,8 @@ export default {
           eventRunner.track({
             event: "form_submits",
             legacy_event_action: "submit",
-            legacy_event_category: "cannabis_license_form_microbusiness_question",
+            legacy_event_category:
+              "cannabis_license_form_microbusiness_question",
             legacy_event_label: "no_I_m_a_standard_business",
             form_name: "cannabis_license",
             questions: { cannabis_business_type: "standard" },
@@ -1867,7 +1917,8 @@ export default {
           eventRunner.track({
             event: "form_submits",
             legacy_event_action: "submit",
-            legacy_event_category: "cannabis_license_form_priority_status_diversity_checkbox",
+            legacy_event_category:
+              "cannabis_license_form_priority_status_diversity_checkbox",
             legacy_event_label: "diversely_owned_business",
             form_name: "cannabis_license",
             questions: { priority_status: "diversely_owned_business" },
@@ -1881,7 +1932,8 @@ export default {
           eventRunner.track({
             event: "form_submits",
             legacy_event_action: "submit",
-            legacy_event_category: "cannabis_license_form_priority_status_impact_checkbox",
+            legacy_event_category:
+              "cannabis_license_form_priority_status_impact_checkbox",
             legacy_event_label: "impact_zone_business",
             form_name: "cannabis_license",
             questions: { priority_status: "impact_zone_business" },
@@ -1895,7 +1947,8 @@ export default {
           eventRunner.track({
             event: "form_submits",
             legacy_event_action: "submit",
-            legacy_event_category: "cannabis_license_form_priority_status_social_equity_checkbox",
+            legacy_event_category:
+              "cannabis_license_form_priority_status_social_equity_checkbox",
             legacy_event_label: "social_equity_business",
             form_name: "cannabis_license",
             questions: { priority_status: "social_equity_business" },
@@ -2019,7 +2072,8 @@ export default {
           eventRunner.track({
             event: "outbound_link_clicks",
             legacy_event_action: "click",
-            legacy_event_category: "business_formation_review_amendments_external_link",
+            legacy_event_category:
+              "business_formation_review_amendments_external_link",
             legacy_event_label: "go_to_Treasury_amendments_page",
             form_name: "business_formation",
             on_tab_name: "review_step",
@@ -2034,7 +2088,8 @@ export default {
           eventRunner.track({
             event: "outbound_link_clicks",
             legacy_event_action: "click",
-            legacy_event_category: "business_formation_success_amendments_external_link",
+            legacy_event_category:
+              "business_formation_success_amendments_external_link",
             legacy_event_label: "go_to_Treasury_amendments_page",
             form_name: "business_formation",
             on_tab_name: "success_step",
@@ -2343,7 +2398,8 @@ export default {
         },
         get_my_starter_kit_button: () => {
           eventRunner.track({
-            legacy_event_category: "starter_kit_landing_get_my_starter_kit_button",
+            legacy_event_category:
+              "starter_kit_landing_get_my_starter_kit_button",
             legacy_event_action: "click",
             legacy_event_label: "go_to_onboarding",
             event: "call_to_action_clicks",
@@ -2352,7 +2408,8 @@ export default {
         },
         get_my_starter_kit_button_footer: () => {
           eventRunner.track({
-            legacy_event_category: "starter_kit_landing_get_my_starter_kit_button_footer",
+            legacy_event_category:
+              "starter_kit_landing_get_my_starter_kit_button_footer",
             legacy_event_action: "click",
             legacy_event_label: "go_to_onboarding",
             event: "call_to_action_clicks",

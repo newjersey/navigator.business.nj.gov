@@ -1,7 +1,21 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
-import { Box, ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
-import React, { ReactElement, ReactNode, useEffect, useRef, useState } from "react";
+import {
+  Box,
+  ClickAwayListener,
+  Grow,
+  MenuItem,
+  MenuList,
+  Paper,
+  Popper,
+} from "@mui/material";
+import React, {
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 type ButtonDropdownOption = {
   text: string;
@@ -14,8 +28,11 @@ interface Props {
   children: ReactNode;
   name?: string;
   dropdownOptions: ButtonDropdownOption[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  wrapper?: (props: { children: ReactNode; [key: string]: any }) => ReactElement;
+  wrapper?: (props: {
+    children: ReactNode;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any;
+  }) => ReactElement;
   dropdownClassName?: string;
   horizontal?: boolean;
   hideDivider?: boolean;
@@ -39,7 +56,11 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
   };
 
   const handleClose = (
-    event: MouseEvent | TouchEvent | React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>
+    event:
+      | MouseEvent
+      | TouchEvent
+      | React.MouseEvent<HTMLLIElement>
+      | React.MouseEvent<Document>
   ): void => {
     if (anchorRef.current && anchorRef.current.contains(event.target as Node)) {
       return;
@@ -81,7 +102,11 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
       >
         {props.dropdownOptions.map((option, i) => {
           return (
-            <MenuItem onClick={option.onClick} key={i} className={props.dropdownClassName}>
+            <MenuItem
+              onClick={option.onClick}
+              key={i}
+              className={props.dropdownClassName}
+            >
               <Wrapper {...option.props}>{option.text}</Wrapper>
             </MenuItem>
           );
@@ -127,12 +152,15 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
             <Grow
               {...TransitionProps}
               style={{
-                transformOrigin: placement === "bottom" ? "center top" : "center bottom",
+                transformOrigin:
+                  placement === "bottom" ? "center top" : "center bottom",
               }}
             >
               <Box className="drop-shadow-xl">
                 <Paper>
-                  <ClickAwayListener onClickAway={handleClose}>{DropdownMenu()}</ClickAwayListener>{" "}
+                  <ClickAwayListener onClickAway={handleClose}>
+                    {DropdownMenu()}
+                  </ClickAwayListener>{" "}
                 </Paper>
               </Box>
             </Grow>

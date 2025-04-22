@@ -5,14 +5,20 @@ import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { generateLicenseEvent, generateOperateReference } from "@/test/factories";
+import {
+  generateLicenseEvent,
+  generateOperateReference,
+} from "@/test/factories";
 import {
   defaultDateFormat,
   generateBusiness,
   generateTaxFilingCalendarEvent,
   randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
-import { OperatingPhaseId, taskIdLicenseNameMapping } from "@businessnjgovnavigator/shared/";
+import {
+  OperatingPhaseId,
+  taskIdLicenseNameMapping,
+} from "@businessnjgovnavigator/shared/";
 import {
   generatePreferences,
   generateProfileData,
@@ -43,13 +49,22 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
     }),
     taxFilingData: generateTaxFilingData({
       filings: [
-        generateTaxFilingCalendarEvent({ identifier: "1", dueDate: dayjs().format(defaultDateFormat) }),
+        generateTaxFilingCalendarEvent({
+          identifier: "1",
+          dueDate: dayjs().format(defaultDateFormat),
+        }),
         generateTaxFilingCalendarEvent({
           identifier: "2",
           dueDate: dayjs().add(1, "month").format(defaultDateFormat),
         }),
-        generateTaxFilingCalendarEvent({ identifier: "3", dueDate: dayjs().format(defaultDateFormat) }),
-        generateTaxFilingCalendarEvent({ identifier: "4", dueDate: dayjs().format(defaultDateFormat) }),
+        generateTaxFilingCalendarEvent({
+          identifier: "3",
+          dueDate: dayjs().format(defaultDateFormat),
+        }),
+        generateTaxFilingCalendarEvent({
+          identifier: "4",
+          dueDate: dayjs().format(defaultDateFormat),
+        }),
       ],
     }),
   });
@@ -75,7 +90,9 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
     "4": generateOperateReference({ name: "Tax 4" }),
   };
 
-  const licenseName = randomElementFromArray(Object.values(taskIdLicenseNameMapping));
+  const licenseName = randomElementFromArray(
+    Object.values(taskIdLicenseNameMapping)
+  );
 
   const licenseEvents = [
     generateLicenseEvent({ licenseName }),
@@ -84,7 +101,11 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
   ];
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+      <div
+        className="cms"
+        ref={ref}
+        style={{ margin: 40, pointerEvents: "none" }}
+      >
         <ThemeProvider theme={createTheme()}>
           <Heading level={2}>Empty calendar</Heading>
           <FilingsCalendar

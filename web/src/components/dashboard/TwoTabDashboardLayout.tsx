@@ -25,7 +25,10 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
   const [tabIndex, setTabIndex] = React.useState(DASHBOARD_TAB);
   const { Config } = useConfig();
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number): void => {
+  const handleChange = (
+    event: React.SyntheticEvent,
+    newValue: number
+  ): void => {
     setTabIndex(Number(newValue));
   };
 
@@ -72,14 +75,20 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
       return <></>;
     }
     return (
-      <span className="margin-left-1 font-body-xl text-error" data-testid="for-you-indicator">
+      <span
+        className="margin-left-1 font-body-xl text-error"
+        data-testid="for-you-indicator"
+      >
         •
       </span>
     );
   };
 
   return (
-    <div data-testid="two-tab-Layout" className={tabIndex === 1 ? "bg-cool-extra-light" : ""}>
+    <div
+      data-testid="two-tab-Layout"
+      className={tabIndex === 1 ? "bg-cool-extra-light" : ""}
+    >
       <SingleColumnContainer>
         <div className="margin-top-4">
           {props.aboveTabs}
@@ -87,24 +96,44 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
         </div>
         <TabContext value={tabIndex.toString()}>
           <div className="border radius-lg border-base-lighter bg-base-extra-light margin-top-3 padding-1">
-            <TabList onChange={handleChange} aria-label="Dashboard Tabs" variant="fullWidth" sx={tabStyling}>
+            <TabList
+              onChange={handleChange}
+              aria-label="Dashboard Tabs"
+              variant="fullWidth"
+              sx={tabStyling}
+            >
               <Tab
                 label={Config.dashboardDefaults.mobileFirstTabText}
                 value={DASHBOARD_TAB.toString()}
-                sx={tabIndex === DASHBOARD_TAB ? selectedButtonStyling : unselectedButtonStyling}
+                sx={
+                  tabIndex === DASHBOARD_TAB
+                    ? selectedButtonStyling
+                    : unselectedButtonStyling
+                }
               />
               <Tab
                 data-testid="for-you-tab"
                 label={
                   <div className="fdr fjc">
-                    {templateEval(Config.dashboardDefaults.mobileSecondTabText, {
-                      count: getForYouCardCount(business, props.certifications, props.fundings).toString(),
-                    })}
+                    {templateEval(
+                      Config.dashboardDefaults.mobileSecondTabText,
+                      {
+                        count: getForYouCardCount(
+                          business,
+                          props.certifications,
+                          props.fundings
+                        ).toString(),
+                      }
+                    )}
                     {getIndicator()}
                   </div>
                 }
                 value={FOR_YOU_TAB.toString()}
-                sx={tabIndex === FOR_YOU_TAB ? selectedButtonStyling : unselectedButtonStyling}
+                sx={
+                  tabIndex === FOR_YOU_TAB
+                    ? selectedButtonStyling
+                    : unselectedButtonStyling
+                }
               />
             </TabList>
           </div>

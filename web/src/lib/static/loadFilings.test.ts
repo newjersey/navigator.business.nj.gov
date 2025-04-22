@@ -37,7 +37,9 @@ describe("loadFilings", () => {
         'callToActionText: ""\n' +
         "---\n";
 
-      mockedFs.readFileSync.mockReturnValueOnce(taskMd1).mockReturnValueOnce(taskMd2);
+      mockedFs.readFileSync
+        .mockReturnValueOnce(taskMd1)
+        .mockReturnValueOnce(taskMd2);
 
       mockReadDirReturn({ value: ["task1.md", "task2.md"], mockedFs });
       const allFilingUrlSlugs = loadAllFilingUrlSlugs();
@@ -82,7 +84,10 @@ describe("loadFilings", () => {
         "\n" +
         "I am a text content2";
 
-      mockReadDirReturn({ value: ["task1.md", "task2.md", "task3.md"], mockedFs });
+      mockReadDirReturn({
+        value: ["task1.md", "task2.md", "task3.md"],
+        mockedFs,
+      });
       mockedFs.readFileSync
         .mockReturnValueOnce(taskMd1) // read first file in list
         .mockReturnValueOnce(taskMd2) // read second file in list

@@ -2,7 +2,10 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { Step } from "@/lib/types/types";
 import { ReactElement } from "react";
 
-export const StepInfo = (props: { step: Step; taskNames: string[] }): ReactElement => {
+export const StepInfo = (props: {
+  step: Step;
+  taskNames: string[];
+}): ReactElement => {
   return (
     <div className="flex-basis-100">
       <div className="margin-top-05 margin-bottom-2">
@@ -14,7 +17,9 @@ export const StepInfo = (props: { step: Step; taskNames: string[] }): ReactEleme
         {props.step.name.replace("${OoS}", "")}
       </Heading>
       <p>{props.step.description}</p>
-      <strong className="text-base-dark">{props.step.timeEstimate && `(${props.step.timeEstimate})`}</strong>
+      <strong className="text-base-dark">
+        {props.step.timeEstimate && `(${props.step.timeEstimate})`}
+      </strong>
       <ul className="padding-left-205">
         {props.taskNames.map((taskName) => (
           <li key={taskName}>{taskName}</li>

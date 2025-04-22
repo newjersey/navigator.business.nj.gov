@@ -21,7 +21,9 @@ export const TaxClearanceDownload = (props: Props): ReactElement => {
             <img src={`/img/trophy-illustration.svg`} alt="" />
           </div>
           <div className="margin-bottom-3">
-            <Heading level={2}>{Config.taxClearanceCertificateDownload.headerTwoLabel}</Heading>
+            <Heading level={2}>
+              {Config.taxClearanceCertificateDownload.headerTwoLabel}
+            </Heading>
           </div>
         </div>
         <Callout calloutType="warning" showIcon>

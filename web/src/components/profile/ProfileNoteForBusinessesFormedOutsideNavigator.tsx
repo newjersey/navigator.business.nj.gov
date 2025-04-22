@@ -10,14 +10,23 @@ interface Props {
   isAuthenticated: IsAuthenticated;
 }
 
-export const ProfileNoteDisclaimerForSubmittingData = (props: Props): ReactElement => {
+export const ProfileNoteDisclaimerForSubmittingData = (
+  props: Props
+): ReactElement => {
   const { Config } = useConfig();
 
-  if (!shouldShowDisclaimerForProfileNotSubmittingData(props.business, props.isAuthenticated)) {
+  if (
+    !shouldShowDisclaimerForProfileNotSubmittingData(
+      props.business,
+      props.isAuthenticated
+    )
+  ) {
     return <></>;
   }
 
   return (
-    <Alert variant="warning">{Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator}</Alert>
+    <Alert variant="warning">
+      {Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator}
+    </Alert>
   );
 };

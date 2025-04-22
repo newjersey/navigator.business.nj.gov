@@ -3,7 +3,11 @@ import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextField
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { OutlinedInputProps, TextField, TextFieldProps } from "@mui/material";
 
-import { FieldErrorType, FormContextFieldProps, FormContextType } from "@/lib/types/types";
+import {
+  FieldErrorType,
+  FormContextFieldProps,
+  FormContextType,
+} from "@/lib/types/types";
 import {
   ChangeEvent,
   Context,
@@ -15,7 +19,8 @@ import {
   useMemo,
 } from "react";
 
-export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFieldProps<T> {
+export interface GenericTextFieldProps<T = FieldErrorType>
+  extends FormContextFieldProps<T> {
   fieldName: string;
   inputWidth?: "full" | "default" | "reduced";
   fieldOptions?: TextFieldProps;
@@ -25,8 +30,12 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
   additionalValidationIsValid?: (value: string) => boolean;
   visualFilter?: (value: string) => string;
   valueFilter?: (value: string) => string;
-  handleChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
-  onChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
+  handleChange?: (
+    value: string
+  ) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
+  onChange?: (
+    value: string
+  ) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onFocus?: () => void;
   error?: boolean;
@@ -52,7 +61,11 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
 export const GenericTextField = forwardRef(
   <T,>(
     props: GenericTextFieldProps<T>,
-    ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined
+    ref?:
+      | ((instance: HTMLDivElement | null) => void)
+      | RefObject<HTMLDivElement>
+      | null
+      | undefined
   ): ReactElement => {
     const widthStyling =
       props.inputWidth === "reduced"
@@ -69,26 +82,38 @@ export const GenericTextField = forwardRef(
     let fieldOptions = props.fieldOptions;
 
     const value = useMemo(
-      () => (visualFilter ? visualFilter(props.value?.toString() ?? "") : props.value?.toString() ?? ""),
+      () =>
+        visualFilter
+          ? visualFilter(props.value?.toString() ?? "")
+          : props.value?.toString() ?? "",
       [props.value, visualFilter]
     );
 
-    const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
-      props.fieldName,
-      props.formContext,
-      props.errorTypes
-    );
+    const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } =
+      useFormContextFieldHelpers(
+        props.fieldName,
+        props.formContext,
+        props.errorTypes
+      );
 
     if (props.numericProps) {
       const regex = (value: string): string => {
         if (props.allowMasking) {
-          return value.replace(props.numericProps?.trimLeadingZeroes ? /^0+|\D/g : /[^\d*]/g, "");
+          return value.replace(
+            props.numericProps?.trimLeadingZeroes ? /^0+|\D/g : /[^\d*]/g,
+            ""
+          );
         }
-        return value.replace(props.numericProps?.trimLeadingZeroes ? /^0+|\D/g : /\D/g, "");
+        return value.replace(
+          props.numericProps?.trimLeadingZeroes ? /^0+|\D/g : /\D/g,
+          ""
+        );
       };
 
       visualFilter = (value: string): string => {
-        return props.visualFilter ? props.visualFilter(regex(value)) : regex(value);
+        return props.visualFilter
+          ? props.visualFilter(regex(value))
+          : regex(value);
       };
 
       const maxLength = props.numericProps?.maxLength;
@@ -114,7 +139,9 @@ export const GenericTextField = forwardRef(
         return ![
           validMinimumValue(returnedValue),
           returnedValue.length <= (maxLength ?? Number.POSITIVE_INFINITY),
-          props.additionalValidationIsValid ? props.additionalValidationIsValid(returnedValue) : true,
+          props.additionalValidationIsValid
+            ? props.additionalValidationIsValid(returnedValue)
+            : true,
         ].some((i) => {
           return !i;
         });
@@ -127,7 +154,9 @@ export const GenericTextField = forwardRef(
 
     const isFieldValid = (currentValue: string): boolean => {
       const value = valueFilter ? valueFilter(currentValue) : currentValue;
-      const isValidAdditional = additionalValidationIsValid ? additionalValidationIsValid(value) : true;
+      const isValidAdditional = additionalValidationIsValid
+        ? additionalValidationIsValid(value)
+        : true;
       const isValidRequired = props.required ? !!value.trim() : true;
       return isValidAdditional && isValidRequired;
     };
@@ -137,18 +166,25 @@ export const GenericTextField = forwardRef(
     const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
       const isValid = isFieldValid(event.target.value);
       setIsValid(isValid);
-      props.onValidation && props.onValidation(props.fieldName, !isValid, event.target.value);
+      props.onValidation &&
+        props.onValidation(props.fieldName, !isValid, event.target.value);
     };
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-      const value = valueFilter ? valueFilter(event.target.value) : event.target.value;
+      const value = valueFilter
+        ? valueFilter(event.target.value)
+        : event.target.value;
       props.handleChange && props.handleChange(value);
       props.onChange && props.onChange(value);
     };
 
     const error = props.error ?? isFormFieldInvalid;
     return (
-      <div className={`${widthStyling} ${props.className ?? ""} ${error ? "error" : ""}`}>
+      <div
+        className={`${widthStyling} ${props.className ?? ""} ${
+          error ? "error" : ""
+        }`}
+      >
         <TextField
           value={value ?? ""}
           id={props.fieldName}
@@ -168,7 +204,8 @@ export const GenericTextField = forwardRef(
             "aria-readonly": props.readOnly,
             className: `${props.readOnly ? "bg-base-lightest" : ""}`,
             ...fieldOptions?.inputProps,
-            "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
+            "aria-label":
+              props.ariaLabel ?? camelCaseToSentence(props.fieldName),
           }}
           InputProps={{
             readOnly: props.readOnly,
@@ -183,9 +220,11 @@ export const GenericTextField = forwardRef(
 
         <div aria-live="polite" className="screen-reader-only">
           {error && (
-            <div>{`${Config.siteWideErrorMessages.errorScreenReaderInlinePrefix} ${camelCaseToSentence(
-              props.fieldName
-            )}, ${props.validationText}`}</div>
+            <div>{`${
+              Config.siteWideErrorMessages.errorScreenReaderInlinePrefix
+            } ${camelCaseToSentence(props.fieldName)}, ${
+              props.validationText
+            }`}</div>
           )}
         </div>
       </div>

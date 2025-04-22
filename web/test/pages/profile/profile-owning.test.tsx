@@ -24,7 +24,10 @@ import {
   LookupSectorTypeById,
   randomInt,
 } from "@businessnjgovnavigator/shared";
-import { generateTaxFilingData, randomLegalStructure } from "@businessnjgovnavigator/shared/test";
+import {
+  generateTaxFilingData,
+  randomLegalStructure,
+} from "@businessnjgovnavigator/shared/test";
 
 import analytics from "@/lib/utils/analytics";
 import {
@@ -50,7 +53,10 @@ import {
   selectByText,
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
-import { generateOwningProfileData, OperatingPhaseId } from "@businessnjgovnavigator/shared/";
+import {
+  generateOwningProfileData,
+  OperatingPhaseId,
+} from "@businessnjgovnavigator/shared/";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 const date = getCurrentDate().subtract(1, "month").date(1);
@@ -75,7 +81,9 @@ function setupMockAnalytics(): typeof analytics {
 
 jest.mock("next/compat/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  postGetAnnualFilings: jest.fn(),
+}));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
@@ -103,7 +111,9 @@ describe("profile - owning existing business", () => {
     fillText(inputFieldName, "Cool Computers");
     clickSave();
     await waitFor(() => {
-      return expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard?success=true");
+      return expect(mockRouter.mockPush).toHaveBeenCalledWith(
+        "/dashboard?success=true"
+      );
     });
   });
 
@@ -113,7 +123,9 @@ describe("profile - owning existing business", () => {
     renderPage({ business });
     fillText(inputFieldName, "Cool Computers");
     clickBack();
-    expect(screen.getByText(Config.profileDefaults.default.escapeModalReturn)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.profileDefaults.default.escapeModalReturn)
+    ).toBeInTheDocument();
   });
 
   it("returns user to profile page from un-saved changes modal", () => {
@@ -122,7 +134,9 @@ describe("profile - owning existing business", () => {
     renderPage({ business });
     fillText(inputFieldName, "Cool Computers");
     clickBack();
-    fireEvent.click(screen.getByText(Config.profileDefaults.default.escapeModalEscape));
+    fireEvent.click(
+      screen.getByText(Config.profileDefaults.default.escapeModalEscape)
+    );
     expect(screen.getByLabelText(inputFieldName)).toBeInTheDocument();
   });
 
@@ -168,7 +182,12 @@ describe("profile - owning existing business", () => {
     expect(currentBusiness()).toEqual({
       ...business,
       onboardingFormProgress: "COMPLETED",
-      taxFilingData: { ...business.taxFilingData, state: undefined, filings: [], registeredISO: undefined },
+      taxFilingData: {
+        ...business.taxFilingData,
+        state: undefined,
+        filings: [],
+        registeredISO: undefined,
+      },
       profileData: {
         ...business.profileData,
         businessName: "Cool Computers",
@@ -208,7 +227,8 @@ describe("profile - owning existing business", () => {
         businessName: "Applebees",
         entityId: "1234567890",
         employerId: "123456789",
-        legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
+        legalStructureId: randomLegalStructure({ requiresPublicFiling: true })
+          .id,
         dateOfFormation,
         taxId: "123456790",
         notes: "whats appppppp",
@@ -229,9 +249,15 @@ describe("profile - owning existing business", () => {
 
     expect(getBusinessNameValue()).toEqual("Applebees");
     expect(getMunicipalityValue()).toEqual(randomMunicipality.displayName);
-    expect(getSectorIDValue()).toEqual(LookupSectorTypeById("clean-energy").name);
-    expect(screen.queryByLabelText("Ownership")).toHaveTextContent(`${veteran}, ${woman}`);
-    expect(getRadioButtonFromFormControlLabel("home-based-business-radio-false")).toBeChecked();
+    expect(getSectorIDValue()).toEqual(
+      LookupSectorTypeById("clean-energy").name
+    );
+    expect(screen.queryByLabelText("Ownership")).toHaveTextContent(
+      `${veteran}, ${woman}`
+    );
+    expect(
+      getRadioButtonFromFormControlLabel("home-based-business-radio-false")
+    ).toBeChecked();
     expect(getExistingEmployeesValue()).toEqual("123");
     expect(getDateOfFormation()).toEqual(date.format("MM/YYYY"));
     chooseTab("numbers");
@@ -250,14 +276,18 @@ describe("profile - owning existing business", () => {
     fillText("Tax pin", "");
     fireEvent.blur(screen.getByLabelText("Tax pin"));
     expect(
-      screen.queryByText(Config.profileDefaults.fields.taxPin.default.errorTextRequired)
+      screen.queryByText(
+        Config.profileDefaults.fields.taxPin.default.errorTextRequired
+      )
     ).not.toBeInTheDocument();
 
     fillText("Tax pin", "123");
     fireEvent.blur(screen.getByLabelText("Tax pin"));
     await waitFor(() => {
       expect(
-        screen.getByText(Config.profileDefaults.fields.taxPin.default.errorTextRequired)
+        screen.getByText(
+          Config.profileDefaults.fields.taxPin.default.errorTextRequired
+        )
       ).toBeInTheDocument();
     });
 
@@ -265,7 +295,9 @@ describe("profile - owning existing business", () => {
     fireEvent.blur(screen.getByLabelText("Tax pin"));
     await waitFor(() => {
       expect(
-        screen.queryByText(Config.profileDefaults.fields.taxPin.default.errorTextRequired)
+        screen.queryByText(
+          Config.profileDefaults.fields.taxPin.default.errorTextRequired
+        )
       ).not.toBeInTheDocument();
     });
   });
@@ -280,7 +312,9 @@ describe("profile - owning existing business", () => {
     await waitFor(() => {
       expect(
         screen.getByText(
-          templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "9" })
+          templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
+            length: "9",
+          })
         )
       ).toBeInTheDocument();
     });
@@ -300,7 +334,9 @@ describe("profile - owning existing business", () => {
     clickSave();
     await waitFor(() => {
       expect(
-        screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+        screen.getByText(
+          Config.profileDefaults.fields.sectorId.default.errorTextRequired
+        )
       ).toBeInTheDocument();
     });
     expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
@@ -320,7 +356,9 @@ describe("profile - owning existing business", () => {
     renderPage({ business, municipalities: [randomMunicipality] });
     selectByText("Location", randomMunicipality.displayName);
     clickBack();
-    fireEvent.click(screen.getByText(Config.profileDefaults.default.escapeModalReturn));
+    fireEvent.click(
+      screen.getByText(Config.profileDefaults.default.escapeModalReturn)
+    );
     await waitFor(() => {
       expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
     });
@@ -337,7 +375,8 @@ describe("profile - owning existing business", () => {
   it("displays date of formation input for public filing businesses", () => {
     const initialBusiness = generateBusinessForProfile({
       profileData: generateOwningProfileData({
-        legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
+        legalStructureId: randomLegalStructure({ requiresPublicFiling: true })
+          .id,
       }),
     });
     renderPage({ business: initialBusiness });
@@ -347,11 +386,14 @@ describe("profile - owning existing business", () => {
   it("does not display date of formation input for trade name businesses", () => {
     const initialBusiness = generateBusinessForProfile({
       profileData: generateOwningProfileData({
-        legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
+        legalStructureId: randomLegalStructure({ requiresPublicFiling: false })
+          .id,
       }),
     });
     renderPage({ business: initialBusiness });
-    expect(screen.queryByLabelText("Date of formation")).not.toBeInTheDocument();
+    expect(
+      screen.queryByLabelText("Date of formation")
+    ).not.toBeInTheDocument();
   });
 
   it("displays NAICS code when it exists", () => {
@@ -390,7 +432,9 @@ describe("profile - owning existing business", () => {
           }),
         }),
       });
-      expect(screen.getByText(randomMunicipality.displayName)).toBeInTheDocument();
+      expect(
+        screen.getByText(randomMunicipality.displayName)
+      ).toBeInTheDocument();
       expect(screen.getByTestId("locked-municipality")).toBeInTheDocument();
     });
   });
@@ -443,7 +487,9 @@ describe("profile - owning existing business", () => {
         }),
       });
       renderPage({ business });
-      expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("responsibleOwnerName")
+      ).not.toBeInTheDocument();
     });
 
     it("displays responsibleOwnerName as locked if user has accessed tax data", () => {
@@ -457,9 +503,13 @@ describe("profile - owning existing business", () => {
       });
       renderPage({ business });
       expect(
-        screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.header)
+        screen.getByText(
+          Config.profileDefaults.fields.responsibleOwnerName.default.header
+        )
       ).toBeInTheDocument();
-      expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("responsibleOwnerName")
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -479,7 +529,9 @@ describe("profile - owning existing business", () => {
         expect(profileAlert).toBeInTheDocument();
       });
       expect(
-        within(profileAlert).getByText(Config.profileDefaults.fields.sectorId.default.header)
+        within(profileAlert).getByText(
+          Config.profileDefaults.fields.sectorId.default.header
+        )
       ).toBeInTheDocument();
     });
 
@@ -505,14 +557,24 @@ describe("profile - owning existing business", () => {
           expect(profileAlert).toBeInTheDocument();
         });
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressLine1.label)
+          within(profileAlert).queryByText(
+            Config.formation.fields.addressLine1.label
+          )
         ).not.toBeInTheDocument();
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+          within(profileAlert).queryByText(
+            Config.formation.fields.addressLine2.label
+          )
         ).not.toBeInTheDocument();
-        expect(within(profileAlert).getByText(Config.formation.fields.addressCity.label)).toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressCity.label
+          )
+        ).toBeInTheDocument();
+        expect(
+          within(profileAlert).getByText(
+            Config.formation.fields.addressZipCode.label
+          )
         ).toBeInTheDocument();
       });
 
@@ -538,16 +600,24 @@ describe("profile - owning existing business", () => {
         });
 
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressLine1.label
+          )
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+          within(profileAlert).queryByText(
+            Config.formation.fields.addressLine2.label
+          )
         ).not.toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressMunicipality.label
+          )
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressZipCode.label)
+          within(profileAlert).queryByText(
+            Config.formation.fields.addressZipCode.label
+          )
         ).not.toBeInTheDocument();
       });
 
@@ -573,16 +643,24 @@ describe("profile - owning existing business", () => {
         });
 
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressLine1.label
+          )
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+          within(profileAlert).queryByText(
+            Config.formation.fields.addressLine2.label
+          )
         ).not.toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressMunicipality.label
+          )
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressZipCode.label
+          )
         ).toBeInTheDocument();
       });
 
@@ -602,7 +680,9 @@ describe("profile - owning existing business", () => {
         renderPage({ business, municipalities: [randomMunicipality] });
 
         selectByText("Address municipality", randomMunicipality.displayName);
-        expect(screen.getByLabelText("Address municipality")).toHaveValue(randomMunicipality.displayName);
+        expect(screen.getByLabelText("Address municipality")).toHaveValue(
+          randomMunicipality.displayName
+        );
         fireEvent.blur(screen.getByLabelText("Address municipality"));
 
         clickSave();
@@ -612,16 +692,24 @@ describe("profile - owning existing business", () => {
           expect(profileAlert).toBeInTheDocument();
         });
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressZipCode.label
+          )
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressLine1.label
+          )
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+          within(profileAlert).queryByText(
+            Config.formation.fields.addressLine2.label
+          )
         ).not.toBeInTheDocument();
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressMunicipality.label)
+          within(profileAlert).queryByText(
+            Config.formation.fields.addressMunicipality.label
+          )
         ).not.toBeInTheDocument();
       });
 
@@ -638,7 +726,10 @@ describe("profile - owning existing business", () => {
           }),
         });
         renderPage({ business });
-        fillText("Address line1", "a".repeat(BUSINESS_ADDRESS_LINE_1_MAX_CHAR + 1));
+        fillText(
+          "Address line1",
+          "a".repeat(BUSINESS_ADDRESS_LINE_1_MAX_CHAR + 1)
+        );
 
         clickSave();
         const profileAlert = screen.getByTestId("profile-error-alert");
@@ -647,14 +738,24 @@ describe("profile - owning existing business", () => {
           expect(profileAlert).toBeInTheDocument();
         });
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressLine1.label
+          )
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+          within(profileAlert).queryByText(
+            Config.formation.fields.addressLine2.label
+          )
         ).not.toBeInTheDocument();
-        expect(within(profileAlert).getByText(Config.formation.fields.addressCity.label)).toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressCity.label
+          )
+        ).toBeInTheDocument();
+        expect(
+          within(profileAlert).getByText(
+            Config.formation.fields.addressZipCode.label
+          )
         ).toBeInTheDocument();
       });
 
@@ -680,16 +781,24 @@ describe("profile - owning existing business", () => {
           expect(profileAlert).toBeInTheDocument();
         });
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressLine1.label
+          )
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).queryByText(Config.formation.fields.addressLine2.label)
+          within(profileAlert).queryByText(
+            Config.formation.fields.addressLine2.label
+          )
         ).not.toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressMunicipality.label
+          )
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressZipCode.label
+          )
         ).toBeInTheDocument();
       });
 
@@ -706,7 +815,10 @@ describe("profile - owning existing business", () => {
           }),
         });
         renderPage({ business });
-        fillText("Address line2", "a".repeat(BUSINESS_ADDRESS_LINE_2_MAX_CHAR + 1));
+        fillText(
+          "Address line2",
+          "a".repeat(BUSINESS_ADDRESS_LINE_2_MAX_CHAR + 1)
+        );
 
         clickSave();
         const profileAlert = screen.getByTestId("profile-error-alert");
@@ -715,16 +827,24 @@ describe("profile - owning existing business", () => {
           expect(profileAlert).toBeInTheDocument();
         });
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressLine1.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressLine1.label
+          )
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressLine2.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressLine2.label
+          )
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressMunicipality.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressMunicipality.label
+          )
         ).toBeInTheDocument();
         expect(
-          within(profileAlert).getByText(Config.formation.fields.addressZipCode.label)
+          within(profileAlert).getByText(
+            Config.formation.fields.addressZipCode.label
+          )
         ).toBeInTheDocument();
       });
     });
@@ -746,7 +866,9 @@ describe("profile - owning existing business", () => {
       });
       renderPage({ business });
 
-      expect(screen.queryByTestId("elevatorOwningBusiness-radio-group")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("elevatorOwningBusiness-radio-group")
+      ).not.toBeInTheDocument();
     });
 
     it("shows vacant building question for owning guest mode users", async () => {
@@ -765,7 +887,9 @@ describe("profile - owning existing business", () => {
       });
       renderPage({ business });
 
-      expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("vacantPropertyOwner-radio-group")
+      ).toBeInTheDocument();
     });
 
     it("shows vacant building question for owning signed in users", async () => {
@@ -784,7 +908,9 @@ describe("profile - owning existing business", () => {
       });
       renderPage({ business });
 
-      expect(screen.getByTestId("vacantPropertyOwner-radio-group")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("vacantPropertyOwner-radio-group")
+      ).toBeInTheDocument();
     });
   });
 
@@ -793,14 +919,19 @@ describe("profile - owning existing business", () => {
   };
 
   const getExistingEmployeesValue = (): string => {
-    return (screen.getByLabelText("Existing employees") as HTMLInputElement).value;
+    return (screen.getByLabelText("Existing employees") as HTMLInputElement)
+      .value;
   };
 
   const getTaxPinValue = (): string => {
     return (screen.getByLabelText("Tax pin") as HTMLInputElement).value;
   };
 
-  const getRadioButtonFromFormControlLabel = (dataTestId: string): HTMLInputElement => {
-    return within(screen.getByTestId(dataTestId) as HTMLInputElement).getByRole("radio");
+  const getRadioButtonFromFormControlLabel = (
+    dataTestId: string
+  ): HTMLInputElement => {
+    return within(screen.getByTestId(dataTestId) as HTMLInputElement).getByRole(
+      "radio"
+    );
   };
 });

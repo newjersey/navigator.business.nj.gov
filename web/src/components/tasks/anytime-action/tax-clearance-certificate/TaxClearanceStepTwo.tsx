@@ -42,7 +42,10 @@ export const TaxClearanceStepTwo = (props: Props): ReactElement => {
         <HorizontalLine />
         <div className="margin-top-3">
           <Heading level={2} styleVariant={"h3"}>
-            {Config.taxClearanceCertificateStep2.businessInformationSectionHeader}
+            {
+              Config.taxClearanceCertificateStep2
+                .businessInformationSectionHeader
+            }
           </Heading>
         </div>
         <div className="margin-bottom-2">
@@ -53,7 +56,11 @@ export const TaxClearanceStepTwo = (props: Props): ReactElement => {
         <EntityId inputWidth="full" />
 
         <div className="margin-y-2">
-          <UnitesStatesAddress excludeNJ={false} onValidation={() => {}} isFullWidth />
+          <UnitesStatesAddress
+            excludeNJ={false}
+            onValidation={() => {}}
+            isFullWidth
+          />
         </div>
         <div className="margin-bottom-2">
           <FieldLabelProfile fieldName="taxId" />
@@ -67,11 +74,18 @@ export const TaxClearanceStepTwo = (props: Props): ReactElement => {
         <ActionBarLayout>
           <LiveChatHelpButton />
           <div className="margin-top-2 mobile-lg:margin-top-0">
-            <SecondaryButton isColor="primary" onClick={() => props.setStepIndex(0)}>
+            <SecondaryButton
+              isColor="primary"
+              onClick={() => props.setStepIndex(0)}
+            >
               {Config.taxClearanceCertificateShared.backButtonText}
             </SecondaryButton>
           </div>
-          <PrimaryButton isColor="primary" onClick={handleSaveButtonClick} isRightMarginRemoved={true}>
+          <PrimaryButton
+            isColor="primary"
+            onClick={handleSaveButtonClick}
+            isRightMarginRemoved={true}
+          >
             {Config.taxClearanceCertificateShared.saveButtonText}
           </PrimaryButton>
         </ActionBarLayout>

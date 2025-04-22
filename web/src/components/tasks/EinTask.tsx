@@ -20,7 +20,8 @@ interface Props {
 export const EinTask = (props: Props): ReactElement => {
   const [showInput, setShowInput] = useState<boolean>(true);
   const { business, updateQueue } = useUserData();
-  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+  const { isAuthenticated, setShowNeedsAccountModal } =
+    useContext(NeedsAccountContext);
   const { Config } = useConfig();
 
   useMountEffectWhenDefined(() => {
@@ -34,7 +35,9 @@ export const EinTask = (props: Props): ReactElement => {
   const setBackToEditing = ({ remove }: { remove: boolean }): void => {
     if (!business || !updateQueue) return;
     setShowInput(true);
-    const newEinValue = remove ? emptyProfileData.employerId : business.profileData.employerId;
+    const newEinValue = remove
+      ? emptyProfileData.employerId
+      : business.profileData.employerId;
     updateQueue
       .queueTaskProgress({ [props.task.id]: "TO_DO" })
       .queueProfileData({ employerId: newEinValue })
@@ -58,7 +61,9 @@ export const EinTask = (props: Props): ReactElement => {
   };
 
   const preInputContent = props.task.contentMd.split("${einInputComponent}")[0];
-  const postInputContent = props.task.contentMd.split("${einInputComponent}")[1];
+  const postInputContent = props.task.contentMd.split(
+    "${einInputComponent}"
+  )[1];
 
   return (
     <div className="min-height-38rem">
@@ -69,7 +74,13 @@ export const EinTask = (props: Props): ReactElement => {
       <Content>{preInputContent}</Content>
       <div className="margin-left-3ch margin-top-1">
         <Content>{Config.ein.descriptionText}</Content>
-        {showInput && <EinInput isAuthenticated={isAuthenticated} onSave={onSave} task={props.task} />}
+        {showInput && (
+          <EinInput
+            isAuthenticated={isAuthenticated}
+            onSave={onSave}
+            task={props.task}
+          />
+        )}
         {!showInput && (
           <EinDisplay
             onEdit={onEdit}

@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { EncryptionStatus, TaxIdDisplayStatus } from "@/components/data-fields/tax-id/TaxIdHelpers";
+import {
+  EncryptionStatus,
+  TaxIdDisplayStatus,
+} from "@/components/data-fields/tax-id/TaxIdHelpers";
 import { ShowHideToggleButton } from "@/components/ShowHideToggleButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { decryptTaxId } from "@/lib/api-client/apiClient";
@@ -9,7 +12,14 @@ import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
 import { MediaQueries } from "@/lib/PageSizes";
 import { maskingCharacter, ProfileData } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
-import { ReactElement, ReactNode, useContext, useEffect, useMemo, useState } from "react";
+import {
+  ReactElement,
+  ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 type Props = {
   template?: (props: { children: ReactNode }) => ReactElement;
@@ -22,23 +32,35 @@ export const DisabledTaxId = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   useEffect(() => {
-    setTaxIdDisplayStatus(getTaxIdInitialStatus(getTaxIdEncryptionStatus(state.profileData)));
+    setTaxIdDisplayStatus(
+      getTaxIdInitialStatus(getTaxIdEncryptionStatus(state.profileData))
+    );
     updateSplitTaxId(state.profileData.taxId ?? "");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.profileData.taxId]);
 
-  const getTaxIdEncryptionStatus = (profileData: ProfileData | undefined): EncryptionStatus => {
+  const getTaxIdEncryptionStatus = (
+    profileData: ProfileData | undefined
+  ): EncryptionStatus => {
     if (!profileData) {
       return;
     }
-    if (!profileData.taxId?.includes(maskingCharacter) && profileData.encryptedTaxId) {
+    if (
+      !profileData.taxId?.includes(maskingCharacter) &&
+      profileData.encryptedTaxId
+    ) {
       return "decrypted";
-    } else if (profileData.taxId?.includes(maskingCharacter) && profileData.encryptedTaxId) {
+    } else if (
+      profileData.taxId?.includes(maskingCharacter) &&
+      profileData.encryptedTaxId
+    ) {
       return "encrypted";
     }
   };
 
-  const getTaxIdInitialStatus = (encryptionStatus: EncryptionStatus): TaxIdDisplayStatus => {
+  const getTaxIdInitialStatus = (
+    encryptionStatus: EncryptionStatus
+  ): TaxIdDisplayStatus => {
     if (encryptionStatus === "encrypted") {
       return "password-view";
     } else {
@@ -50,9 +72,14 @@ export const DisabledTaxId = (props: Props): ReactElement => {
     return getTaxIdInitialStatus(getTaxIdEncryptionStatus(state.profileData));
   };
 
-  const [locationValue, setLocationValue] = useState(state.profileData[fieldName]?.trim().slice(9, 12) ?? "");
-  const [taxIdValue, setTaxIdValue] = useState(state.profileData[fieldName]?.trim().slice(0, 9) ?? "");
-  const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<TaxIdDisplayStatus>(taxIdInitialDisplay());
+  const [locationValue, setLocationValue] = useState(
+    state.profileData[fieldName]?.trim().slice(9, 12) ?? ""
+  );
+  const [taxIdValue, setTaxIdValue] = useState(
+    state.profileData[fieldName]?.trim().slice(0, 9) ?? ""
+  );
+  const [taxIdDisplayStatus, setTaxIdDisplayStatus] =
+    useState<TaxIdDisplayStatus>(taxIdInitialDisplay());
   const getShowHideToggleButton = (): ReactElement => {
     return ShowHideToggleButton({
       status: taxIdDisplayStatus,

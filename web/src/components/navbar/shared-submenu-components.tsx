@@ -37,7 +37,9 @@ export const LoginMenuItem = (): ReactElement => {
   });
 };
 
-export const LogoutMenuItem = (props: { handleClose: () => void }): ReactElement => {
+export const LogoutMenuItem = (props: {
+  handleClose: () => void;
+}): ReactElement => {
   const { Config } = useConfig();
   const { dispatch } = useContext(AuthContext);
 
@@ -55,7 +57,9 @@ export const LogoutMenuItem = (props: { handleClose: () => void }): ReactElement
   });
 };
 
-export const MyNjMenuItem = (props: { handleClose: () => void }): ReactElement => {
+export const MyNjMenuItem = (props: {
+  handleClose: () => void;
+}): ReactElement => {
   const { Config } = useConfig();
   return NavMenuItem({
     onClick: (): void => {
@@ -69,7 +73,9 @@ export const MyNjMenuItem = (props: { handleClose: () => void }): ReactElement =
   });
 };
 
-export const AddBusinessItem = (props: { handleClose: () => void }): ReactElement[] => {
+export const AddBusinessItem = (props: {
+  handleClose: () => void;
+}): ReactElement[] => {
   const { Config } = useConfig();
 
   const router = useRouter();
@@ -84,7 +90,9 @@ export const AddBusinessItem = (props: { handleClose: () => void }): ReactElemen
         props.handleClose();
       },
       icon: <ButtonIcon svgFilename="add-business-plus" sizePx="25px" />,
-      hoverIcon: <ButtonIcon svgFilename="add-business-plus-hover" sizePx="25px" />,
+      hoverIcon: (
+        <ButtonIcon svgFilename="add-business-plus-hover" sizePx="25px" />
+      ),
       itemText: Config.navigationDefaults.addBusinessButton,
       key: "addBusinessMenuItem",
       dataTestid: "addBusinessMenuItem",
@@ -144,14 +152,24 @@ export const ProfileMenuItem = (props: {
       NavMenuItem({
         onClick: async (): Promise<void> => {
           if (Object.keys(userData.businesses).length > 1) {
-            await updateQueue?.queue(switchCurrentBusiness(userData, businessId)).update();
+            await updateQueue
+              ?.queue(switchCurrentBusiness(userData, businessId))
+              .update();
           }
           props.handleClose();
           router && (await router.push(ROUTES.dashboard));
         },
         selected: !isProfileSelected && isCurrent,
-        icon: <ButtonIcon svgFilename={`business-${getBusinessIconColor(i)}`} sizePx="35px" />,
-        itemText: getNavBarBusinessTitle(userData.businesses[businessId], props.isAuthenticated),
+        icon: (
+          <ButtonIcon
+            svgFilename={`business-${getBusinessIconColor(i)}`}
+            sizePx="35px"
+          />
+        ),
+        itemText: getNavBarBusinessTitle(
+          userData.businesses[businessId],
+          props.isAuthenticated
+        ),
         dataTestid: `business-title-${i}`,
         key: `business-title-${businessId}`,
         className: `profile-menu-item ${isCurrent ? "current" : ""}`,
@@ -173,7 +191,9 @@ export const ProfileMenuItem = (props: {
       businessMenuItems.push(profileLink);
     }
 
-    businessMenuItems.push(<hr className="margin-0 hr-2px" key={`profile-break-${i}`} />);
+    businessMenuItems.push(
+      <hr className="margin-0 hr-2px" key={`profile-break-${i}`} />
+    );
 
     return businessMenuItems;
   });

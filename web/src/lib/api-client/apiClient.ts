@@ -1,6 +1,9 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { SelfRegResponse } from "@/lib/types/types";
-import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
+import {
+  phaseChangeAnalytics,
+  setPhaseDimension,
+} from "@/lib/utils/analytics-helpers";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared";
 import {
   InputFile,
@@ -26,21 +29,30 @@ export const getUserData = (id: string): Promise<UserData> => {
 };
 
 export const postUserData = async (userData: UserData): Promise<UserData> => {
-  return post<UserData, UserData>(`/users`, userData).then((updatedUserData: UserData) => {
-    phaseChangeAnalytics({ oldUserData: userData, newUserData: updatedUserData });
-    return updatedUserData;
-  });
+  return post<UserData, UserData>(`/users`, userData).then(
+    (updatedUserData: UserData) => {
+      phaseChangeAnalytics({
+        oldUserData: userData,
+        newUserData: updatedUserData,
+      });
+      return updatedUserData;
+    }
+  );
 };
 
 type EmailCheckResponse = {
   email: string;
   found: boolean;
 };
-export const postUserEmailCheck = async (email: string): Promise<EmailCheckResponse> => {
+export const postUserEmailCheck = async (
+  email: string
+): Promise<EmailCheckResponse> => {
   return post("/users/emailCheck", { email }, false);
 };
 
-export const checkLicenseStatus = (nameAndAddress: LicenseSearchNameAndAddress): Promise<UserData> => {
+export const checkLicenseStatus = (
+  nameAndAddress: LicenseSearchNameAndAddress
+): Promise<UserData> => {
   return post(`/license-status`, { nameAndAddress });
 };
 
@@ -51,7 +63,10 @@ export const checkElevatorRegistrationStatus = (
   return post(`/elevator-safety/registration`, { address, municipalityId });
 };
 
-export const checkElevatorViolations = (address: string, municipalityId: string): Promise<boolean> => {
+export const checkElevatorViolations = (
+  address: string,
+  municipalityId: string
+): Promise<boolean> => {
   return post(`/elevator-safety/violations`, { address, municipalityId });
 };
 
@@ -60,7 +75,11 @@ export const checkHousingRegistrationStatus = (
   municipalityId: string,
   propertyInterestType: PropertyInterestType
 ): Promise<HousingRegistrationRequestLookupResponse> => {
-  return post(`/housing/registrations/`, { address, municipalityId, propertyInterestType });
+  return post(`/housing/registrations/`, {
+    address,
+    municipalityId,
+    propertyInterestType,
+  });
 };
 
 export const postBusinessFormation = (
@@ -75,7 +94,9 @@ export const getCompletedFiling = (): Promise<UserData> => {
   return get(`/completed-filing`);
 };
 
-export const postTaxClearanceCertificate = (userData: UserData): Promise<TaxClearanceCertificateResponse> => {
+export const postTaxClearanceCertificate = (
+  userData: UserData
+): Promise<TaxClearanceCertificateResponse> => {
   return post(`/postTaxClearanceCertificate`, userData);
 };
 
@@ -95,7 +116,9 @@ export const postTaxFilingsLookup = (props: {
   return post(`/taxFilings/lookup`, props);
 };
 
-export const decryptTaxId = (props: { encryptedTaxId: string }): Promise<string> => {
+export const decryptTaxId = (props: {
+  encryptedTaxId: string;
+}): Promise<string> => {
   return post(`/decrypt`, props);
 };
 
@@ -112,7 +135,10 @@ export const postGetAnnualFilings = (userData: UserData): Promise<UserData> => {
 };
 
 export const searchBusinessName = (name: string): Promise<NameAvailability> => {
-  return get(`/guest/business-name-availability?query=${encodeURIComponent(name)}`, false);
+  return get(
+    `/guest/business-name-availability?query=${encodeURIComponent(name)}`,
+    false
+  );
 };
 
 export const postSelfReg = (userData: UserData): Promise<SelfRegResponse> => {
@@ -138,7 +164,11 @@ export const get = async <T>(url: string, auth = true): Promise<T> => {
     });
 };
 
-export const post = async <T, R>(url: string, data: R, auth = true): Promise<T> => {
+export const post = async <T, R>(
+  url: string,
+  data: R,
+  auth = true
+): Promise<T> => {
   const authHeader = auth ? await authConfig() : {};
   return axios
     .post(`${apiBaseUrl}/api${url}`, data, authHeader)

@@ -1,6 +1,9 @@
 import { KeysOfType, Roadmap, Task } from "@/lib/types/types";
 
-export const getTaskFromRoadmap = (roadmap: Roadmap | undefined, taskId: string): Task | undefined => {
+export const getTaskFromRoadmap = (
+  roadmap: Roadmap | undefined,
+  taskId: string
+): Task | undefined => {
   return roadmap?.tasks.find((task) => {
     return task.id === taskId;
   });

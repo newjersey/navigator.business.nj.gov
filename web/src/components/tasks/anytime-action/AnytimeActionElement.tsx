@@ -2,7 +2,10 @@ import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { AnytimeActionLicenseReinstatement, AnytimeActionTask } from "@/lib/types/types";
+import {
+  AnytimeActionLicenseReinstatement,
+  AnytimeActionTask,
+} from "@/lib/types/types";
 import { ReactElement } from "react";
 
 interface Props {
@@ -32,15 +35,18 @@ export const AnytimeActionElement = (props: Props): ReactElement => {
           <span className="h5-styling" data-testid="form-id-header">
             {Config.filingDefaults.issuingAgencyText} &nbsp;
           </span>
-          <span className="h6-styling">{props.anytimeAction.issuingAgency}</span>
+          <span className="h6-styling">
+            {props.anytimeAction.issuingAgency}
+          </span>
         </>
       )}
-      {props.anytimeAction.callToActionLink && props.anytimeAction.callToActionText && (
-        <SingleCtaLink
-          link={props.anytimeAction.callToActionLink}
-          text={props.anytimeAction.callToActionText}
-        />
-      )}
+      {props.anytimeAction.callToActionLink &&
+        props.anytimeAction.callToActionText && (
+          <SingleCtaLink
+            link={props.anytimeAction.callToActionLink}
+            text={props.anytimeAction.callToActionText}
+          />
+        )}
     </div>
   );
 };

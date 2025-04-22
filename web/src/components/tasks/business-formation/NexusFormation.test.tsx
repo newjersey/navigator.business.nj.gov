@@ -8,7 +8,10 @@ import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { TasksDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { generateEmptyFormationData, generateFormationDbaContent } from "@/test/factories";
+import {
+  generateEmptyFormationData,
+  generateFormationDbaContent,
+} from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -16,7 +19,10 @@ import {
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
-import { fillText, searchAndGetValue } from "@/test/helpers/helpersSearchBusinessName";
+import {
+  fillText,
+  searchAndGetValue,
+} from "@/test/helpers/helpersSearchBusinessName";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   Business,
@@ -84,10 +90,14 @@ const mockApi = api as jest.Mocked<typeof api>;
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 const clickBack = (): void => {
-  fireEvent.click(screen.getByText(Config.formation.general.previousButtonText));
+  fireEvent.click(
+    screen.getByText(Config.formation.general.previousButtonText)
+  );
 };
 const clickNext = (): void => {
-  fireEvent.click(screen.getByText(Config.formation.general.initialNextNexusButtonText));
+  fireEvent.click(
+    screen.getByText(Config.formation.general.initialNextNexusButtonText)
+  );
 };
 
 describe("<NexusFormationFlow />", () => {
@@ -136,7 +146,11 @@ describe("<NexusFormationFlow />", () => {
       profileData,
       formationData: {
         ...generateEmptyFormationData(),
-        businessNameAvailability: { status: "AVAILABLE", similarNames: [], lastUpdatedTimeStamp: "" },
+        businessNameAvailability: {
+          status: "AVAILABLE",
+          similarNames: [],
+          lastUpdatedTimeStamp: "",
+        },
         formationFormData: generateFormationFormData(
           {
             businessName: "Pizza Joint",
@@ -150,17 +164,25 @@ describe("<NexusFormationFlow />", () => {
 
     const page = preparePage({ business: foreignBusiness, displayContent });
 
-    await page.searchBusinessName({ status: "AVAILABLE", similarNames: [], lastUpdatedTimeStamp: "" });
+    await page.searchBusinessName({
+      status: "AVAILABLE",
+      similarNames: [],
+      lastUpdatedTimeStamp: "",
+    });
     clickNext();
     await page.stepperClickToBusinessStep();
 
-    const file = new File(["my cool file contents"], "cool.png", { type: "image/png" });
+    const file = new File(["my cool file contents"], "cool.png", {
+      type: "image/png",
+    });
     await page.uploadFile(file);
     await page.completeWillPracticeLaw();
     await page.stepperClickToReviewStep();
     await page.clickSubmit();
 
-    const base64String = Buffer.from("my cool file contents", "utf8").toString("base64");
+    const base64String = Buffer.from("my cool file contents", "utf8").toString(
+      "base64"
+    );
     const updatedForeignBusiness = {
       ...foreignBusiness,
       formationData: {
@@ -170,10 +192,11 @@ describe("<NexusFormationFlow />", () => {
     };
 
     await waitFor(() => {
-      const userDataCalledWith = mockApi.postBusinessFormation.mock.lastCall![0];
-      expect(userDataCalledWith.businesses[userDataCalledWith.currentBusinessId]).toEqual(
-        updatedForeignBusiness
-      );
+      const userDataCalledWith =
+        mockApi.postBusinessFormation.mock.lastCall![0];
+      expect(
+        userDataCalledWith.businesses[userDataCalledWith.currentBusinessId]
+      ).toEqual(updatedForeignBusiness);
     });
     const returnUrlCalledWith = mockApi.postBusinessFormation.mock.lastCall![1];
     const fileCalledWith = mockApi.postBusinessFormation.mock.lastCall![2];
@@ -195,8 +218,12 @@ describe("<NexusFormationFlow />", () => {
 
     it("does not display buttons on name search initially", async () => {
       preparePage({ business: initialBusiness, displayContent });
-      expect(screen.queryByText(Config.nexusNameSearch.nexusNextButton)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.formation.general.previousButtonText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.nexusNameSearch.nexusNextButton)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.formation.general.previousButtonText)
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -219,7 +246,8 @@ describe("<NexusFormationFlow />", () => {
       it("renders the correct step", async () => {
         expect(screen.getByTestId("resolution-step")).toBeInTheDocument();
         expect(
-          mockAnalytics.event.business_formation_dba_resolution_step_continue_button.click
+          mockAnalytics.event
+            .business_formation_dba_resolution_step_continue_button.click
             .arrive_on_business_formation_dba_resolution_step
         ).toHaveBeenCalled();
       });
@@ -227,22 +255,30 @@ describe("<NexusFormationFlow />", () => {
       it("navigates back to name search and resets nameAvailability", async () => {
         clickBack();
         expect(screen.getByTestId("nexus-name-step")).toBeInTheDocument();
-        expect(screen.queryByText(Config.nexusNameSearch.nexusNextButton)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.nexusNameSearch.nexusNextButton)
+        ).not.toBeInTheDocument();
       });
 
       it("navigates back to name search on stepper click", async () => {
-        fireEvent.click(screen.getByTestId(`stepper-${LookupDbaStepIndexByName("Business Name")}`));
+        fireEvent.click(
+          screen.getByTestId(
+            `stepper-${LookupDbaStepIndexByName("Business Name")}`
+          )
+        );
         expect(screen.getByTestId("nexus-name-step")).toBeInTheDocument();
       });
 
       it("marks step 1 complete in  stepper", async () => {
-        expect(page.getStepStateInStepper(LookupDbaStepIndexByName("Business Name"))).toEqual("COMPLETE");
+        expect(
+          page.getStepStateInStepper(LookupDbaStepIndexByName("Business Name"))
+        ).toEqual("COMPLETE");
       });
 
       it("marks step 2 active in  stepper", async () => {
-        expect(page.getStepStateInStepper(LookupDbaStepIndexByName("DBA Resolution"))).toEqual(
-          "INCOMPLETE-ACTIVE"
-        );
+        expect(
+          page.getStepStateInStepper(LookupDbaStepIndexByName("DBA Resolution"))
+        ).toEqual("INCOMPLETE-ACTIVE");
       });
     });
 
@@ -255,13 +291,18 @@ describe("<NexusFormationFlow />", () => {
         clickNext();
         expect(screen.getByTestId("authorization-step")).toBeInTheDocument();
         expect(
-          mockAnalytics.event.business_formation_dba_authorization_step_continue_button.click
+          mockAnalytics.event
+            .business_formation_dba_authorization_step_continue_button.click
             .arrive_on_business_formation_dba_authorization_step
         ).toHaveBeenCalled();
       });
 
       it("navigates back to business authorization step 3 on stepper click", async () => {
-        fireEvent.click(screen.getByTestId(`stepper-${LookupDbaStepIndexByName("Authorize Business")}`));
+        fireEvent.click(
+          screen.getByTestId(
+            `stepper-${LookupDbaStepIndexByName("Authorize Business")}`
+          )
+        );
         expect(screen.getByTestId("authorization-step")).toBeInTheDocument();
         expect(
           mockAnalytics.event.business_formation_dba_authorization_tab.click
@@ -270,7 +311,11 @@ describe("<NexusFormationFlow />", () => {
       });
 
       it("navigates back to dba resolution step 2 on stepper click", async () => {
-        fireEvent.click(screen.getByTestId(`stepper-${LookupDbaStepIndexByName("DBA Resolution")}`));
+        fireEvent.click(
+          screen.getByTestId(
+            `stepper-${LookupDbaStepIndexByName("DBA Resolution")}`
+          )
+        );
         expect(screen.getByTestId("resolution-step")).toBeInTheDocument();
         expect(
           mockAnalytics.event.business_formation_dba_resolution_tab.click
@@ -286,22 +331,38 @@ describe("<NexusFormationFlow />", () => {
 
       it("marks step 2 complete in  stepper", async () => {
         clickNext();
-        expect(page.getStepStateInStepper(LookupDbaStepIndexByName("DBA Resolution"))).toEqual("COMPLETE");
+        expect(
+          page.getStepStateInStepper(LookupDbaStepIndexByName("DBA Resolution"))
+        ).toEqual("COMPLETE");
       });
 
       it("marks step 3 active in  stepper", async () => {
         clickNext();
-        expect(page.getStepStateInStepper(LookupDbaStepIndexByName("Authorize Business"))).toEqual(
-          "INCOMPLETE-ACTIVE"
-        );
+        expect(
+          page.getStepStateInStepper(
+            LookupDbaStepIndexByName("Authorize Business")
+          )
+        ).toEqual("INCOMPLETE-ACTIVE");
       });
 
       it("shows modal when clicking CTA", () => {
         clickNext();
-        fireEvent.click(screen.getByText(displayContent.formationDbaContent.Authorize.callToActionText));
-        expect(screen.getByText(Config.DbaFormationTask.dbaCtaModalHeader)).toBeInTheDocument();
-        expect(screen.getByText(Config.DbaFormationTask.dbaCtaModalContinueButtonText)).toBeInTheDocument();
-        expect(screen.getByText(Config.DbaFormationTask.dbaCtaModalCancelButtonText)).toBeInTheDocument();
+        fireEvent.click(
+          screen.getByText(
+            displayContent.formationDbaContent.Authorize.callToActionText
+          )
+        );
+        expect(
+          screen.getByText(Config.DbaFormationTask.dbaCtaModalHeader)
+        ).toBeInTheDocument();
+        expect(
+          screen.getByText(
+            Config.DbaFormationTask.dbaCtaModalContinueButtonText
+          )
+        ).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.DbaFormationTask.dbaCtaModalCancelButtonText)
+        ).toBeInTheDocument();
       });
     });
   });
@@ -329,7 +390,10 @@ describe("<NexusFormationFlow />", () => {
           displayContent = {
             formationDbaContent: generateFormationDbaContent({}),
           };
-          return (initialBusiness = generateBusiness({ profileData, formationData }));
+          return (initialBusiness = generateBusiness({
+            profileData,
+            formationData,
+          }));
         };
 
         beforeEach(() => {
@@ -338,13 +402,19 @@ describe("<NexusFormationFlow />", () => {
         });
 
         it("shows the nexus name step with an initial user when lastVisitedPage has index 0 which is by default", async () => {
-          preparePage({ business: getNexusBusiness({ lastVisitedPageIndex: 0 }), displayContent });
+          preparePage({
+            business: getNexusBusiness({ lastVisitedPageIndex: 0 }),
+            displayContent,
+          });
           expect(screen.getByTestId("nexus-name-step")).toBeInTheDocument();
         });
 
         it("shows the last formation step when lastVisitedPage has step index 4", () => {
           preparePage({
-            business: getNexusBusiness({ lastVisitedPageIndex: 4, businessName: "fake-business-name" }),
+            business: getNexusBusiness({
+              lastVisitedPageIndex: 4,
+              businessName: "fake-business-name",
+            }),
             displayContent,
           });
           expect(screen.getByTestId("review-step")).toBeInTheDocument();
@@ -352,49 +422,68 @@ describe("<NexusFormationFlow />", () => {
 
         it("lastVisitedPage updates on step change via stepper", async () => {
           page = preparePage({
-            business: getNexusBusiness({ lastVisitedPageIndex: 4, businessName: "fake-business-name" }),
+            business: getNexusBusiness({
+              lastVisitedPageIndex: 4,
+              businessName: "fake-business-name",
+            }),
             displayContent,
           });
           expect(screen.getByTestId("review-step")).toBeInTheDocument();
 
           await page.stepperClickToBillingStep();
           await waitFor(() => {
-            expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(3);
+            expect(
+              currentBusiness().formationData.lastVisitedPageIndex
+            ).toEqual(3);
           });
 
           await page.stepperClickToReviewStep();
           await waitFor(() => {
-            expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(4);
+            expect(
+              currentBusiness().formationData.lastVisitedPageIndex
+            ).toEqual(4);
           });
         });
 
         it("lastVisitedPage updates on step change via the previous and next button steps", async () => {
           page = preparePage({
-            business: getNexusBusiness({ lastVisitedPageIndex: 4, businessName: "fake-business-name" }),
+            business: getNexusBusiness({
+              lastVisitedPageIndex: 4,
+              businessName: "fake-business-name",
+            }),
             displayContent,
           });
 
           await waitFor(() => {
-            expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(4);
+            expect(
+              currentBusiness().formationData.lastVisitedPageIndex
+            ).toEqual(4);
           });
           expect(screen.getByTestId("review-step")).toBeInTheDocument();
 
           fireEvent.click(screen.getByTestId("previous-button"));
           await waitFor(() => {
-            expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(3);
+            expect(
+              currentBusiness().formationData.lastVisitedPageIndex
+            ).toEqual(3);
           });
           expect(screen.getByTestId("billing-step")).toBeInTheDocument();
 
           fireEvent.click(screen.getByTestId("next-button"));
           await waitFor(() => {
-            expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(4);
+            expect(
+              currentBusiness().formationData.lastVisitedPageIndex
+            ).toEqual(4);
           });
           expect(screen.getByTestId("review-step")).toBeInTheDocument();
         });
 
         it("defaults to first formation step when we go above 4 for page index", () => {
           page = preparePage({
-            business: getNexusBusiness({ lastVisitedPageIndex: 5, businessName: "fake-business-name" }),
+            business: getNexusBusiness({
+              lastVisitedPageIndex: 5,
+              businessName: "fake-business-name",
+            }),
             displayContent,
           });
           expect(screen.getByTestId("nexus-name-step")).toBeInTheDocument();
@@ -402,7 +491,10 @@ describe("<NexusFormationFlow />", () => {
 
         it("defaults to first formation step when we go below 0 for page index", () => {
           page = preparePage({
-            business: getNexusBusiness({ lastVisitedPageIndex: -1, businessName: "fake-business-name" }),
+            business: getNexusBusiness({
+              lastVisitedPageIndex: -1,
+              businessName: "fake-business-name",
+            }),
             displayContent,
           });
           expect(screen.getByTestId("nexus-name-step")).toBeInTheDocument();
@@ -418,22 +510,33 @@ describe("<NexusFormationFlow />", () => {
           fillText("Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           clickNext();
-          expect(currentBusiness().formationData.formationFormData.businessName).toEqual("Pizza Joint");
+          expect(
+            currentBusiness().formationData.formationFormData.businessName
+          ).toEqual("Pizza Joint");
           await page.stepperClickToNexusBusinessNameStep();
-          expect((screen.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
-            "Pizza Joint"
-          );
+          expect(
+            (screen.getByLabelText("Search business name") as HTMLInputElement)
+              .value
+          ).toEqual("Pizza Joint");
         });
 
         it("saves availability state when switching back to step", async () => {
           fillText("Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           await screen.findByTestId("available-text");
-          expect(screen.getByTestId("available-text").innerHTML.includes("Pizza Joint")).toBeTruthy();
+          expect(
+            screen
+              .getByTestId("available-text")
+              .innerHTML.includes("Pizza Joint")
+          ).toBeTruthy();
           clickNext();
           await page.stepperClickToNexusBusinessNameStep();
           expect(screen.getByTestId("available-text")).toBeInTheDocument();
-          expect(screen.getByTestId("available-text").innerHTML.includes("Pizza Joint")).toBeTruthy();
+          expect(
+            screen
+              .getByTestId("available-text")
+              .innerHTML.includes("Pizza Joint")
+          ).toBeTruthy();
         });
 
         it("goes back to nexus name step on back button", async () => {
@@ -449,14 +552,18 @@ describe("<NexusFormationFlow />", () => {
           fillText("Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           await screen.findByTestId("available-text");
-          expect(currentBusiness().profileData.businessName).toEqual("Pizza Joint");
+          expect(currentBusiness().profileData.businessName).toEqual(
+            "Pizza Joint"
+          );
         });
 
         it("marks step one as complete if business name is available", async () => {
           fillText("Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           clickNext();
-          expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("COMPLETE");
+          expect(
+            page.getStepStateInStepper(LookupStepIndexByName("Name"))
+          ).toEqual("COMPLETE");
         });
       });
 
@@ -500,7 +607,10 @@ describe("<NexusFormationFlow />", () => {
           nexusDbaName: "",
         });
         const formationData = generateEmptyFormationData();
-        const partnershipBusiness = generateBusiness({ profileData, formationData });
+        const partnershipBusiness = generateBusiness({
+          profileData,
+          formationData,
+        });
 
         process.env.FEATURE_BUSINESS_FLP = "false";
         page = preparePage({
@@ -532,18 +642,28 @@ describe("<NexusFormationFlow />", () => {
       });
 
       it("navigates back to name search on stepper click", async () => {
-        fireEvent.click(screen.getByTestId(`stepper-${LookupNexusStepIndexByName("Business Name")}`));
+        fireEvent.click(
+          screen.getByTestId(
+            `stepper-${LookupNexusStepIndexByName("Business Name")}`
+          )
+        );
         expect(screen.getByTestId("nexus-name-step")).toBeInTheDocument();
       });
 
       it("marks step 1 complete in stepper", async () => {
-        expect(page.getStepStateInStepper(LookupNexusStepIndexByName("Business Name"))).toEqual("COMPLETE");
+        expect(
+          page.getStepStateInStepper(
+            LookupNexusStepIndexByName("Business Name")
+          )
+        ).toEqual("COMPLETE");
       });
 
       it("marks step 2 active in stepper", async () => {
-        expect(page.getStepStateInStepper(LookupNexusStepIndexByName("Authorize Business"))).toEqual(
-          "INCOMPLETE-ACTIVE"
-        );
+        expect(
+          page.getStepStateInStepper(
+            LookupNexusStepIndexByName("Authorize Business")
+          )
+        ).toEqual("INCOMPLETE-ACTIVE");
       });
     });
   });

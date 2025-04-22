@@ -5,8 +5,17 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import { FormationFields, InFormInBylaws } from "@businessnjgovnavigator/shared/formationData";
-import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@mui/material";
+import {
+  FormationFields,
+  InFormInBylaws,
+} from "@businessnjgovnavigator/shared/formationData";
+import {
+  FormControl,
+  FormControlLabel,
+  FormHelperText,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import { ChangeEvent, ReactElement, useContext } from "react";
 
 type InFormBylawsRadioType = Exclude<InFormInBylaws, undefined>;
@@ -19,7 +28,9 @@ interface Props {
   values: InFormBylawsRadioType[] | TrueFalseRadioType[];
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   errorMessage?: string | undefined;
-  overrideLabelMap?: Record<InFormBylawsRadioType, string> | Record<TrueFalseRadioType, string>;
+  overrideLabelMap?:
+    | Record<InFormBylawsRadioType, string>
+    | Record<TrueFalseRadioType, string>;
 }
 
 export const FormationRadio = (props: Props): ReactElement => {
@@ -28,9 +39,12 @@ export const FormationRadio = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const hasError = doesFieldHaveError(props.fieldName);
-  const errorMessage = props.errorMessage ?? Config.formation.general.genericErrorText;
+  const errorMessage =
+    props.errorMessage ?? Config.formation.general.genericErrorText;
 
-  const getRadioLabel = (value: InFormBylawsRadioType | TrueFalseRadioType): string => {
+  const getRadioLabel = (
+    value: InFormBylawsRadioType | TrueFalseRadioType
+  ): string => {
     const labelMap = {
       true: Config.formation.general.radioYesText,
       false: Config.formation.general.radioNoText,
@@ -67,7 +81,10 @@ export const FormationRadio = (props: Props): ReactElement => {
                 style={{ alignItems: "center" }}
                 value={value}
                 control={
-                  <Radio data-testid={`${props.fieldName}-${value}`} color={hasError ? "error" : "primary"} />
+                  <Radio
+                    data-testid={`${props.fieldName}-${value}`}
+                    color={hasError ? "error" : "primary"}
+                  />
                 }
                 label={getRadioLabel(value)}
               />

@@ -20,14 +20,26 @@ const EinInputPreview = (props: PreviewProps): ReactElement => {
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+      <div
+        className="cms"
+        ref={ref}
+        style={{ margin: 40, pointerEvents: "none" }}
+      >
         <Content>{config.ein.descriptionText}</Content>
-        <EinInput task={task} isAuthenticated={IsAuthenticated.TRUE} onSave={(): void => {}} />
+        <EinInput
+          task={task}
+          isAuthenticated={IsAuthenticated.TRUE}
+          onSave={(): void => {}}
+        />
 
         <hr className="margin-y-6" />
 
         <Content>{config.ein.descriptionText}</Content>
-        <EinDisplay onEdit={(): void => {}} onRemove={(): void => {}} employerId="123456789" />
+        <EinDisplay
+          onEdit={(): void => {}}
+          onRemove={(): void => {}}
+          employerId="123456789"
+        />
       </div>
     </ConfigContext.Provider>
   );

@@ -17,7 +17,11 @@ import {
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
 import { TextField } from "@mui/material";
-import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import {
+  DatePicker,
+  DesktopDatePicker,
+  LocalizationProvider,
+} from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { ReactElement, useContext, useMemo } from "react";
@@ -28,10 +32,14 @@ type Props = {
 };
 export const FormationDate = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(
+    BusinessFormationContext
+  );
   const { doesFieldHaveError } = useFormationErrors();
   const dateFormat = "MM/DD/YYYY";
-  const floatClass = isForeignCorporationOrNonprofit(state.formationFormData.legalType)
+  const floatClass = isForeignCorporationOrNonprofit(
+    state.formationFormData.legalType
+  )
     ? "float-none"
     : "float-left";
 
@@ -44,23 +52,38 @@ export const FormationDate = (props: Props): ReactElement => {
               <strong>
                 <ContextualInfoButton
                   text={Config.formation.fields.businessStartDate.label}
-                  id={Config.formation.fields.businessStartDate.labelContextualInfo}
+                  id={
+                    Config.formation.fields.businessStartDate
+                      .labelContextualInfo
+                  }
                 />
               </strong>
             </div>
             <div className={`${floatClass}`}>
-              <span>{Config.formation.fields.foreignDateOfFormation.labelSecondaryText}</span>
+              <span>
+                {
+                  Config.formation.fields.foreignDateOfFormation
+                    .labelSecondaryText
+                }
+              </span>
             </div>
           </div>
         ),
-        helperText: getBusinessStartDateHelperText(state.formationFormData.legalType),
+        helperText: getBusinessStartDateHelperText(
+          state.formationFormData.legalType
+        ),
       },
       foreignDateOfFormation: {
         label: (
           <>
-            <strong>{Config.formation.fields.foreignDateOfFormation.label}</strong>
+            <strong>
+              {Config.formation.fields.foreignDateOfFormation.label}
+            </strong>
             <span className="margin-left-05">
-              {Config.formation.fields.foreignDateOfFormation.labelSecondaryText}
+              {
+                Config.formation.fields.foreignDateOfFormation
+                  .labelSecondaryText
+              }
             </span>
           </>
         ),
@@ -87,7 +110,9 @@ export const FormationDate = (props: Props): ReactElement => {
   };
 
   const Picker =
-    process.env.NODE_ENV === "test" || process.env.CI === "true" ? DesktopDatePicker : DatePicker;
+    process.env.NODE_ENV === "test" || process.env.CI === "true"
+      ? DesktopDatePicker
+      : DatePicker;
 
   return (
     <>
@@ -98,7 +123,8 @@ export const FormationDate = (props: Props): ReactElement => {
             minDate={getMinDate()}
             disabled={
               props.fieldName === "businessStartDate" &&
-              getBusinessStartDateRule(state.formationFormData.legalType) === "Today"
+              getBusinessStartDateRule(state.formationFormData.legalType) ===
+                "Today"
             }
             maxDate={
               props.fieldName === "businessStartDate"
@@ -107,7 +133,10 @@ export const FormationDate = (props: Props): ReactElement => {
             }
             value={
               state.formationFormData[props.fieldName]
-                ? parseDateWithFormat(state.formationFormData[props.fieldName] ?? "", defaultDateFormat)
+                ? parseDateWithFormat(
+                    state.formationFormData[props.fieldName] ?? "",
+                    defaultDateFormat
+                  )
                 : null
             }
             inputFormat={dateFormat}
@@ -130,7 +159,8 @@ export const FormationDate = (props: Props): ReactElement => {
                       setFieldsInteracted([props.fieldName]);
                     }}
                     helperText={
-                      doesFieldHaveError(props.fieldName) && contentProps[props.fieldName].helperText
+                      doesFieldHaveError(props.fieldName) &&
+                      contentProps[props.fieldName].helperText
                     }
                     sx={{
                       svg: { fill: "#4b7600" },

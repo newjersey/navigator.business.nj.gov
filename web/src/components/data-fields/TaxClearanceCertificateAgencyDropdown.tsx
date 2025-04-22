@@ -9,7 +9,9 @@ import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { ReactElement, ReactNode, useContext } from "react";
 
 export const TaxClearanceCertificateAgencyDropdown = (): ReactElement => {
-  const { state, setTaxClearanceCertificateData } = useContext(TaxClearanceCertificateDataContext);
+  const { state, setTaxClearanceCertificateData } = useContext(
+    TaxClearanceCertificateDataContext
+  );
 
   const handleChange = (event: SelectChangeEvent): void => {
     if (event.target.value) {

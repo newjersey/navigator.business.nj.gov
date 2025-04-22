@@ -3,7 +3,13 @@ import { convertPageMetadataMd } from "@/lib/utils/markdownReader";
 import fs from "fs";
 import path from "path";
 
-const pageMetadataLinksDir = path.join(process.cwd(), "..", "content", "src", "page-metadata");
+const pageMetadataLinksDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "page-metadata"
+);
 
 export const loadAllPageMetadata = (): PageMetadata[] => {
   const fileNames = fs.readdirSync(pageMetadataLinksDir);

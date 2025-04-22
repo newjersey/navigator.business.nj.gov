@@ -20,7 +20,10 @@ import { getBusinessIconColor } from "@/lib/domain-logic/getBusinessIconColor";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { orderBusinessIdsByDateCreated } from "@/lib/domain-logic/orderBusinessIdsByDateCreated";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
-import { UserData, getCurrentBusiness } from "@businessnjgovnavigator/shared/index";
+import {
+  UserData,
+  getCurrentBusiness,
+} from "@businessnjgovnavigator/shared/index";
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
@@ -36,17 +39,29 @@ interface Props {
 }
 
 export const NavBarDesktop = (props: Props): ReactElement => {
-  const business = props.userData ? getCurrentBusiness(props.userData) : undefined;
+  const business = props.userData
+    ? getCurrentBusiness(props.userData)
+    : undefined;
   const { Config } = useConfig();
 
-  const [open, setOpen] = useState(props.CMS_PREVIEW_ONLY_SHOW_MENU ? true : false);
+  const [open, setOpen] = useState(
+    props.CMS_PREVIEW_ONLY_SHOW_MENU ? true : false
+  );
   const anchorRef = useRef<HTMLButtonElement | null>(null);
 
   const handleClose = (
-    event?: MouseEvent | TouchEvent | React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>
+    event?:
+      | MouseEvent
+      | TouchEvent
+      | React.MouseEvent<HTMLLIElement>
+      | React.MouseEvent<Document>
   ): void => {
     if (props.CMS_PREVIEW_ONLY_SHOW_MENU) return;
-    if (event && anchorRef.current && anchorRef.current.contains(event.target as Node)) {
+    if (
+      event &&
+      anchorRef.current &&
+      anchorRef.current.contains(event.target as Node)
+    ) {
       return;
     }
 
@@ -62,23 +77,35 @@ export const NavBarDesktop = (props: Props): ReactElement => {
   }, [open]);
 
   const textColor = props.isAuthenticated ? "primary" : "base";
-  const navBarBusinessTitle = getNavBarBusinessTitle(business, props.isAuthenticated);
+  const navBarBusinessTitle = getNavBarBusinessTitle(
+    business,
+    props.isAuthenticated
+  );
   const currentIndex =
-    props.userData && business ? orderBusinessIdsByDateCreated(props.userData).indexOf(business.id) : 0;
+    props.userData && business
+      ? orderBusinessIdsByDateCreated(props.userData).indexOf(business.id)
+      : 0;
 
   if (props.logoOnlyType) {
     // loading/redirect/ethan onboarding
     return <NavBarLogoOnlyDesktop logoType={props.logoOnlyType} />;
   } else if (props.isLoginPage) {
     return (
-      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
-        <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} isLoginPage />
+      <NavBarDesktopWrapper
+        CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}
+      >
+        <NavBarDesktopHomeLogo
+          previousBusinessId={props.previousBusinessId}
+          isLoginPage
+        />
       </NavBarDesktopWrapper>
     );
   } else if (props.isSeoStarterKit) {
     // starter kits page for SEO
     return (
-      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
+      <NavBarDesktopWrapper
+        CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}
+      >
         <NavBarDesktopHomeLogo previousBusinessId={undefined} />
         <div className={"display-flex flex-row flex-align-center"}>
           <NavBarLoginButton />
@@ -88,7 +115,9 @@ export const NavBarDesktop = (props: Props): ReactElement => {
   } else if (props.isLanding) {
     // landing
     return (
-      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
+      <NavBarDesktopWrapper
+        CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}
+      >
         <NavBarDesktopHomeLogo previousBusinessId={undefined} />
         <div className={"display-flex flex-row flex-align-center"}>
           <NavBarDesktopQuickLinks />
@@ -102,7 +131,12 @@ export const NavBarDesktop = (props: Props): ReactElement => {
             dropDownTitle={Config.navigationDefaults.landingPageDropDownTitle}
             handleClose={handleClose}
             textColor={textColor}
-            icon={<Icon className="nav-bar-dropdown-account-icon" iconName="account_circle" />}
+            icon={
+              <Icon
+                className="nav-bar-dropdown-account-icon"
+                iconName="account_circle"
+              />
+            }
             subMenuElement={[<GetStartedMenuItem key="GetStarted" />]}
           />
         </div>
@@ -111,7 +145,9 @@ export const NavBarDesktop = (props: Props): ReactElement => {
   } else if (props.currentlyOnboarding) {
     // onboarding
     return (
-      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
+      <NavBarDesktopWrapper
+        CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}
+      >
         <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
         <div className={"display-flex flex-row flex-align-center"}>
           <NavBarDesktopDropDown
@@ -125,7 +161,10 @@ export const NavBarDesktop = (props: Props): ReactElement => {
             textColor={textColor}
             icon={
               <div className={"margin-left-2px display-flex"}>
-                <ButtonIcon svgFilename={`business-${getBusinessIconColor(currentIndex)}`} sizePx="35px" />
+                <ButtonIcon
+                  svgFilename={`business-${getBusinessIconColor(currentIndex)}`}
+                  sizePx="35px"
+                />
               </div>
             }
             subMenuElement={[]}
@@ -136,7 +175,9 @@ export const NavBarDesktop = (props: Props): ReactElement => {
   } else if (props.isAuthenticated) {
     // authed
     return (
-      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
+      <NavBarDesktopWrapper
+        CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}
+      >
         <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
         <div className={"display-flex flex-row flex-align-center"}>
           <NavBarDesktopQuickLinks />
@@ -151,7 +192,10 @@ export const NavBarDesktop = (props: Props): ReactElement => {
             textColor={textColor}
             icon={
               <div className={"margin-left-2px display-flex"}>
-                <ButtonIcon svgFilename={`business-${getBusinessIconColor(currentIndex)}`} sizePx="35px" />
+                <ButtonIcon
+                  svgFilename={`business-${getBusinessIconColor(currentIndex)}`}
+                  sizePx="35px"
+                />
               </div>
             }
             subMenuElement={[
@@ -172,7 +216,9 @@ export const NavBarDesktop = (props: Props): ReactElement => {
   } else {
     // guest
     return (
-      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
+      <NavBarDesktopWrapper
+        CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}
+      >
         <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
         <div className={"display-flex flex-row flex-align-center"}>
           <NavBarDesktopQuickLinks />
@@ -188,7 +234,10 @@ export const NavBarDesktop = (props: Props): ReactElement => {
             textColor={textColor}
             icon={
               <div className={"margin-left-2px display-flex"}>
-                <ButtonIcon svgFilename={`business-${getBusinessIconColor(currentIndex)}`} sizePx="35px" />
+                <ButtonIcon
+                  svgFilename={`business-${getBusinessIconColor(currentIndex)}`}
+                  sizePx="35px"
+                />
               </div>
             }
             subMenuElement={[

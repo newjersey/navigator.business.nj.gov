@@ -2,7 +2,10 @@
 import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
 import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
-import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
+import {
+  FormationPageHelpers,
+  useSetupInitialMocks,
+} from "@/test/helpers/helpers-formation";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   BusinessSignerTypeMap,
@@ -59,7 +62,9 @@ describe("Formation - Signatures", () => {
         page.checkSignerBox(1, "signers");
 
         await page.submitContactsStep();
-        expect(currentBusiness().formationData.formationFormData.signers).toEqual([
+        expect(
+          currentBusiness().formationData.formationFormData.signers
+        ).toEqual([
           generateFormationSigner(
             {
               name: "Red Skull",
@@ -96,7 +101,9 @@ describe("Formation - Signatures", () => {
         );
 
         await page.submitContactsStep();
-        expect(currentBusiness().formationData.formationFormData.signers).toEqual([
+        expect(
+          currentBusiness().formationData.formationFormData.signers
+        ).toEqual([
           generateFormationSigner(
             {
               name: "Red Skull",
@@ -111,23 +118,37 @@ describe("Formation - Signatures", () => {
     it.each([...legalStructureIds])(
       "does not add more than 9 additional signers when legalStructure is %s",
       async (legalStructureId) => {
-        const signers = Array(9).fill(generateFormationSigner({}, legalStructureId));
+        const signers = Array(9).fill(
+          generateFormationSigner({}, legalStructureId)
+        );
         const page = await getPageHelper({ legalStructureId }, { signers });
 
-        expect(screen.getByText(Config.formation.fields.signers.addButtonText)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.formation.fields.signers.addButtonText)
+        ).toBeInTheDocument();
         page.clickAddNewSigner();
-        expect(screen.queryByText(Config.formation.fields.signers.addButtonText)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.formation.fields.signers.addButtonText)
+        ).not.toBeInTheDocument();
       }
     );
 
     it.each([...legalStructureIds])(
       "displays inline error to both enter name and sign if both are missing when legalStructure is %s",
       async (legalStructureId) => {
-        const formationFormData = generateFormationFormData({ signers: undefined }, { legalStructureId });
-        const page = await getPageHelper({ legalStructureId }, formationFormData);
+        const formationFormData = generateFormationFormData(
+          { signers: undefined },
+          { legalStructureId }
+        );
+        const page = await getPageHelper(
+          { legalStructureId },
+          formationFormData
+        );
         await attemptApiSubmission(page);
         expect(
-          screen.getByText(Config.formation.fields.signers.errorInlineNameAndSignature)
+          screen.getByText(
+            Config.formation.fields.signers.errorInlineNameAndSignature
+          )
         ).toBeInTheDocument();
       }
     );
@@ -146,9 +167,16 @@ describe("Formation - Signatures", () => {
           },
           { legalStructureId }
         );
-        const page = await getPageHelper({ legalStructureId }, formationFormData);
+        const page = await getPageHelper(
+          { legalStructureId },
+          formationFormData
+        );
         await attemptApiSubmission(page);
-        expect(screen.getByText(Config.formation.fields.signers.errorInlineSignerName)).toBeInTheDocument();
+        expect(
+          screen.getByText(
+            Config.formation.fields.signers.errorInlineSignerName
+          )
+        ).toBeInTheDocument();
       }
     );
 
@@ -166,9 +194,14 @@ describe("Formation - Signatures", () => {
           },
           { legalStructureId }
         );
-        const page = await getPageHelper({ legalStructureId }, formationFormData);
+        const page = await getPageHelper(
+          { legalStructureId },
+          formationFormData
+        );
         await attemptApiSubmission(page);
-        expect(screen.getByText(Config.formation.fields.signers.errorInlineSignature)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.formation.fields.signers.errorInlineSignature)
+        ).toBeInTheDocument();
       }
     );
 
@@ -204,7 +237,9 @@ describe("Formation - Signatures", () => {
   });
 
   describe("foreign legal structures", () => {
-    const legalType = (legalStructureId: PublicFilingLegalType): FormationLegalType =>
+    const legalType = (
+      legalStructureId: PublicFilingLegalType
+    ): FormationLegalType =>
       castPublicFilingLegalTypeToFormationType(legalStructureId, "FOREIGN");
 
     it.each([...legalStructureIds])(
@@ -215,8 +250,14 @@ describe("Formation - Signatures", () => {
           { signers: undefined }
         );
         const signers = [
-          generateFormationSigner({ signature: true }, legalType(legalStructureId)),
-          generateFormationSigner({ signature: true }, legalType(legalStructureId)),
+          generateFormationSigner(
+            { signature: true },
+            legalType(legalStructureId)
+          ),
+          generateFormationSigner(
+            { signature: true },
+            legalType(legalStructureId)
+          ),
         ];
         page.fillText("Signer 0", signers[0].name);
         page.selectByText("Signer title 0", signers[0].title);
@@ -228,7 +269,9 @@ describe("Formation - Signatures", () => {
         page.checkSignerBox(1, "signers");
 
         await page.submitContactsStep();
-        expect(currentBusiness().formationData.formationFormData.signers).toEqual(signers);
+        expect(
+          currentBusiness().formationData.formationFormData.signers
+        ).toEqual(signers);
       }
     );
 
@@ -265,14 +308,21 @@ describe("Formation - Signatures", () => {
     it.each([...legalStructureIds])(
       "displays inline error when name, signature, and type is missing when legalStructure is %s",
       async (legalStructureId) => {
-        const page = await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { signers: [] });
+        const page = await getPageHelper(
+          { businessPersona: "FOREIGN", legalStructureId },
+          { signers: [] }
+        );
 
         await attemptApiSubmission(page);
         const singerNameAndSignatureErrorType = (): HTMLElement | null => {
-          return screen.queryByText(Config.formation.fields.signers.errorInlineNameAndSignature);
+          return screen.queryByText(
+            Config.formation.fields.signers.errorInlineNameAndSignature
+          );
         };
         const signerTitleErrorType = (): HTMLElement | null => {
-          return screen.queryByText(Config.formation.fields.signers.errorInlineSignerTitle);
+          return screen.queryByText(
+            Config.formation.fields.signers.errorInlineSignerTitle
+          );
         };
         expect(singerNameAndSignatureErrorType()).toBeInTheDocument();
         expect(signerTitleErrorType()).toBeInTheDocument();
@@ -284,12 +334,22 @@ describe("Formation - Signatures", () => {
       async (legalStructureId) => {
         const page = await getPageHelper(
           { businessPersona: "FOREIGN", legalStructureId },
-          { signers: [generateFormationSigner({ name: "", title: "General Partner", signature: true })] }
+          {
+            signers: [
+              generateFormationSigner({
+                name: "",
+                title: "General Partner",
+                signature: true,
+              }),
+            ],
+          }
         );
 
         await attemptApiSubmission(page);
         const singerNameErrorType = (): HTMLElement | null => {
-          return screen.queryByText(Config.formation.fields.signers.errorInlineSignerName);
+          return screen.queryByText(
+            Config.formation.fields.signers.errorInlineSignerName
+          );
         };
         expect(singerNameErrorType()).toBeInTheDocument();
       }
@@ -303,7 +363,11 @@ describe("Formation - Signatures", () => {
           {
             signers: [
               generateFormationSigner({ title: "General Partner" }),
-              generateFormationSigner({ name: "", title: "General Partner", signature: true }),
+              generateFormationSigner({
+                name: "",
+                title: "General Partner",
+                signature: true,
+              }),
             ],
           }
         );
@@ -311,7 +375,9 @@ describe("Formation - Signatures", () => {
         page.clickAddNewSigner();
         await attemptApiSubmission(page);
         const additionalSignerNameErrorText = (): HTMLElement | null => {
-          return screen.queryByText(Config.formation.fields.signers.errorInlineAdditionalSignerName);
+          return screen.queryByText(
+            Config.formation.fields.signers.errorInlineAdditionalSignerName
+          );
         };
         expect(additionalSignerNameErrorText()).toBeInTheDocument();
       }
@@ -327,10 +393,15 @@ describe("Formation - Signatures", () => {
 
         await attemptApiSubmission(page);
         const signerTypeErrorText = (): HTMLElement | null => {
-          return screen.queryByText(Config.formation.fields.signers.errorInlineSignerTitle);
+          return screen.queryByText(
+            Config.formation.fields.signers.errorInlineSignerTitle
+          );
         };
         expect(signerTypeErrorText()).toBeInTheDocument();
-        page.selectByText("Signer title 0", BusinessSignerTypeMap[legalType(legalStructureId)][0]);
+        page.selectByText(
+          "Signer title 0",
+          BusinessSignerTypeMap[legalType(legalStructureId)][0]
+        );
         expect(signerTypeErrorText()).not.toBeInTheDocument();
         await page.submitContactsStep();
       }
@@ -354,14 +425,18 @@ describe("Formation - Signatures", () => {
 
         await attemptApiSubmission(page);
         const signatureMissingErrorText = (): HTMLElement | null => {
-          return screen.queryByText(Config.formation.fields.signers.errorInlineSignature);
+          return screen.queryByText(
+            Config.formation.fields.signers.errorInlineSignature
+          );
         };
         expect(signatureMissingErrorText()).toBeInTheDocument();
       }
     );
   });
 
-  const attemptApiSubmission = async (page: FormationPageHelpers): Promise<void> => {
+  const attemptApiSubmission = async (
+    page: FormationPageHelpers
+  ): Promise<void> => {
     await page.stepperClickToReviewStep();
     await page.clickSubmit();
     await page.stepperClickToContactsStep();

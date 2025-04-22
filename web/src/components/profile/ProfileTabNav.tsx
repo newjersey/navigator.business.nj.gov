@@ -22,13 +22,15 @@ interface Props {
 export const ProfileTabNav = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
-  const isSuccessfulFilingResponse = props.business?.formationData.getFilingResponse?.success;
+  const isSuccessfulFilingResponse =
+    props.business?.formationData.getFilingResponse?.success;
   const shouldDisplayFormationDocuments =
     isStartingBusiness(props.business) &&
-    LookupLegalStructureById(props.business?.profileData.legalStructureId).elementsToDisplay.has(
-      "formationDocuments"
-    );
-  const shouldShowDocuments = isSuccessfulFilingResponse || shouldDisplayFormationDocuments;
+    LookupLegalStructureById(
+      props.business?.profileData.legalStructureId
+    ).elementsToDisplay.has("formationDocuments");
+  const shouldShowDocuments =
+    isSuccessfulFilingResponse || shouldDisplayFormationDocuments;
 
   const tabRefs = {
     [infoTab]: useRef<HTMLButtonElement>(null),
@@ -37,9 +39,17 @@ export const ProfileTabNav = (props: Props): ReactElement => {
     [notesTab]: useRef<HTMLButtonElement>(null),
   };
 
-  const availableTabs = [infoTab, numbersTab, ...(shouldShowDocuments ? [documentsTab] : []), notesTab];
+  const availableTabs = [
+    infoTab,
+    numbersTab,
+    ...(shouldShowDocuments ? [documentsTab] : []),
+    notesTab,
+  ];
 
-  const handleKeyDown = (event: React.KeyboardEvent, currentTab: ProfileTabs): void => {
+  const handleKeyDown = (
+    event: React.KeyboardEvent,
+    currentTab: ProfileTabs
+  ): void => {
     const currentIndex = availableTabs.indexOf(currentTab);
     let nextTabToFocus: ProfileTabs | undefined;
 
@@ -50,7 +60,9 @@ export const ProfileTabNav = (props: Props): ReactElement => {
         if (currentIndex > 0) {
           nextTabToFocus = availableTabs[currentIndex - 1] as ProfileTabs;
         } else {
-          nextTabToFocus = availableTabs[availableTabs.length - 1] as ProfileTabs;
+          nextTabToFocus = availableTabs[
+            availableTabs.length - 1
+          ] as ProfileTabs;
         }
         break;
       case "ArrowRight":

@@ -65,7 +65,10 @@ const CMS = dynamic(
       // @ts-expect-error: No type definition available
       CMS.init({ CMS_CONFIG });
       // @ts-expect-error: No type definition available
-      CMS.registerWidget("write-once-read-only-no-space", WriteOnceReadOnlyNoSpaceControl);
+      CMS.registerWidget(
+        "write-once-read-only-no-space",
+        WriteOnceReadOnlyNoSpaceControl
+      );
       // @ts-expect-error: No type definition available
       CMS.registerWidget("no-space", NoSpaceControl);
       // @ts-expect-error: No type definition available
@@ -86,24 +89,60 @@ const CMS = dynamic(
       registerPreview(CMS, "webflow-licenses", TaskPreview);
       registerPreview(CMS, "funding-opportunities", FundingsPreview);
       registerPreview(CMS, "archived-funding-opportunities", FundingsPreview);
-      registerPreview(CMS, "certification-opportunities", CertificationsPreview);
-      registerPreview(CMS, "archived-certification-opportunities", CertificationsPreview);
+      registerPreview(
+        CMS,
+        "certification-opportunities",
+        CertificationsPreview
+      );
+      registerPreview(
+        CMS,
+        "archived-certification-opportunities",
+        CertificationsPreview
+      );
       registerPreview(CMS, "certification-checklist", CertificationsPreview);
       registerPreview(CMS, "contextual-information", ContextInfoPreview);
       registerPreview(CMS, "filings", FilingsPreview);
-      registerPreview(CMS, "license-calendar-events", LicenseCalendarEventPreview);
+      registerPreview(
+        CMS,
+        "license-calendar-events",
+        LicenseCalendarEventPreview
+      );
       registerPreview(CMS, "municipal-tasks", TaskPreview);
 
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
 
       // ----- Anytime Actions -----
       registerPreview(CMS, "anytime-action-tasks", AnytimeActionTaskPreview);
-      registerPreview(CMS, "anytime-action-license-reinstatements", AnytimeActionLicenseReinstatementPreview);
-      registerPreview(CMS, "taxClearanceCertificate-step1", AnytimeActionTaxClearancePreview);
-      registerPreview(CMS, "taxClearanceCertificate-step2", AnytimeActionTaxClearancePreview);
-      registerPreview(CMS, "taxClearanceCertificate-step3", AnytimeActionTaxClearancePreview);
-      registerPreview(CMS, "taxClearanceCertificate-shared", AnytimeActionTaxClearancePreview);
-      registerPreview(CMS, "taxClearanceCertificate-download", AnytimeActionTaxClearancePreview);
+      registerPreview(
+        CMS,
+        "anytime-action-license-reinstatements",
+        AnytimeActionLicenseReinstatementPreview
+      );
+      registerPreview(
+        CMS,
+        "taxClearanceCertificate-step1",
+        AnytimeActionTaxClearancePreview
+      );
+      registerPreview(
+        CMS,
+        "taxClearanceCertificate-step2",
+        AnytimeActionTaxClearancePreview
+      );
+      registerPreview(
+        CMS,
+        "taxClearanceCertificate-step3",
+        AnytimeActionTaxClearancePreview
+      );
+      registerPreview(
+        CMS,
+        "taxClearanceCertificate-shared",
+        AnytimeActionTaxClearancePreview
+      );
+      registerPreview(
+        CMS,
+        "taxClearanceCertificate-download",
+        AnytimeActionTaxClearancePreview
+      );
 
       // ----- Roadmap Sidebar Card -----
       registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);
@@ -126,11 +165,22 @@ const CMS = dynamic(
 
       registerPreview(CMS, "ein-input-section", EinInputPreview);
       registerPreview(CMS, "tax-input-section", TaxInputPreview);
-      registerPreview(CMS, "business-structure-selection", BusinessStructurePreview);
+      registerPreview(
+        CMS,
+        "business-structure-selection",
+        BusinessStructurePreview
+      );
 
       // ----- Cannabis License -----
-      registerPreview(CMS, "cannabis-eligibility-modal", CannabisEligibilityModalPreview);
-      registerAsTask(CMS, ["applyForAnnualLicense-task", "applyForConditionalLicense-task"]);
+      registerPreview(
+        CMS,
+        "cannabis-eligibility-modal",
+        CannabisEligibilityModalPreview
+      );
+      registerAsTask(CMS, [
+        "applyForAnnualLicense-task",
+        "applyForConditionalLicense-task",
+      ]);
       registerAsCannabisLicensePreview(CMS, [
         "cannabisLicense-1",
         "cannabisLicenseAnnual-2",
@@ -138,16 +188,32 @@ const CMS = dynamic(
       ]);
 
       // ----- Formation -----
-      registerPreview(CMS, "business-formation-interim-success-page", FormationInterimSuccessPreview);
-      registerPreview(CMS, "business-formation-success-page", FormationSuccessPreview);
+      registerPreview(
+        CMS,
+        "business-formation-interim-success-page",
+        FormationInterimSuccessPreview
+      );
+      registerPreview(
+        CMS,
+        "business-formation-success-page",
+        FormationSuccessPreview
+      );
 
       // Naics Code
       registerPreview(CMS, "naics-code-lookup", NaicsLookupPreview);
       registerPreview(CMS, "naics-code-input", NaicsLookupPreview);
 
       // ----- Config --------
-      registerPreview(CMS, "dashboard-config-snackbars", DashboardSnackbarsPreview);
-      registerPreview(CMS, "dashboard-config-calendar", DashboardCalendarPreview);
+      registerPreview(
+        CMS,
+        "dashboard-config-snackbars",
+        DashboardSnackbarsPreview
+      );
+      registerPreview(
+        CMS,
+        "dashboard-config-calendar",
+        DashboardCalendarPreview
+      );
       registerPreview(CMS, "dashboard-config-modals", DashboardModalsPreview);
       registerPreview(CMS, "dashboard-config-tabs", DashboardTabsPreview);
       registerPreview(CMS, "account-setup-page", AccountSetupPreview);
@@ -163,14 +229,20 @@ const CMS = dynamic(
   { ssr: false, loading: Loading }
 );
 
-const registerAsTask = (CMS: typeof import("decap-cms-app"), names: string[]): void => {
+const registerAsTask = (
+  CMS: typeof import("decap-cms-app"),
+  names: string[]
+): void => {
   for (const name of names) {
     // @ts-expect-error: No type definition available
     CMS.registerPreviewTemplate(name, TaskPreview);
   }
 };
 
-const registerAsCannabisLicensePreview = (CMS: typeof import("decap-cms-app"), names: string[]): void => {
+const registerAsCannabisLicensePreview = (
+  CMS: typeof import("decap-cms-app"),
+  names: string[]
+): void => {
   for (const name of names) {
     // @ts-expect-error: No type definition available
     CMS.registerPreviewTemplate(name, CannabisLicensePreview);
@@ -203,7 +275,9 @@ const Admin = (): ReactElement => {
   });
 
   const updateRequiredFieldErrorMessage = (): void => {
-    const alertElement = document.querySelector(".css-83ylea-toast-danger-Toast");
+    const alertElement = document.querySelector(
+      ".css-83ylea-toast-danger-Toast"
+    );
     if (alertElement) {
       alertElement.textContent =
         "Oops, you've missed a required field. Please complete before saving.\n\nOpen your browser's Inspect > Console to find error.";
@@ -211,13 +285,20 @@ const Admin = (): ReactElement => {
   };
 
   const printFieldWithErrorToConsole = (): void => {
-    const errorMessages = document.querySelectorAll(".css-9guxbf-ControlErrorsList");
+    const errorMessages = document.querySelectorAll(
+      ".css-9guxbf-ControlErrorsList"
+    );
     if (errorMessages.length > 0) {
       for (const element of errorMessages) {
         const getParent = (
           element: Element | null | undefined
-        ): { label: string | null | undefined; element: Element | null | undefined } => {
-          const container = element?.parentElement?.closest(".css-1rsca1y-ControlContainer");
+        ): {
+          label: string | null | undefined;
+          element: Element | null | undefined;
+        } => {
+          const container = element?.parentElement?.closest(
+            ".css-1rsca1y-ControlContainer"
+          );
           return {
             element: container,
             label: container?.children[0].textContent,
