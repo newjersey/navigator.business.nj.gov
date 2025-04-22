@@ -61,16 +61,16 @@ export const TaxAccessStepOne = (props: Props): ReactElement => {
           }}
         >
           <WithErrorBar hasError={!isValid()} type="ALWAYS">
-            <div className="margin-bottom-2">
+            <div className="margin-bottom-05">
               <FieldLabelDescriptionOnly fieldName="legalStructureId" bold={true} />
               <Content>{Config.taxAccess.legalStructureDropDownHeader}</Content>
             </div>
-            <LegalStructureDropDown />
+            <LegalStructureDropDown fullWidth />
           </WithErrorBar>
         </ProfileDataContext.Provider>
       </DataFormErrorMapContext.Provider>
 
-      <div className="padding-y-3 flex flex-column flex-align-end">
+      <div className="padding-top-3 flex flex-column flex-align-end">
         <PrimaryButton
           isColor="primary"
           isRightMarginRemoved={true}

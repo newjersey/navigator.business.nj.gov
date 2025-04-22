@@ -12,6 +12,7 @@ import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props<T> extends FormContextFieldProps<T> {
   disabled?: boolean;
+  fullWidth?: boolean;
 }
 
 export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
@@ -71,7 +72,7 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
 
   return (
     <>
-      <div className="text-field-width-default">
+      <div className={`${props.fullWidth ? "" : "text-field-width-default"}`}>
         <FormControl variant="outlined" fullWidth error={isFormFieldInvalid}>
           <Select
             fullWidth
