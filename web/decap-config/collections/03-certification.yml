@@ -1,0 +1,101 @@
+collections:
+  - name: "certification-label"
+    label: "🟧 CERTIFICATION OPPS"
+    folder: "content/src"
+    fields:
+      - { name: "" }
+
+  - name: "certification-opportunities"
+    label: "Cert Opps - Content"
+    folder: "content/src/certifications"
+    summary: "/{{urlSlug}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
+    delete: true
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "Description for card in For You",
+          name: "sidebarCardBodyText",
+          widget: "string",
+          hint: "This appears only in My Account, in the For You column, max char is 150 including spaces, plain text only",
+        }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Url Slug", name: "urlSlug", widget: "write-once-read-only-no-space", required: true }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - label: Agency
+        name: agency
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "mappings"
+        search_fields: ["arrayOfFundingAgencies.*.name"]
+        value_field: "arrayOfFundingAgencies.*.id"
+        display_fields: ["arrayOfFundingAgencies.*.name"]
+        options_length: 500
+      - label: "Applicable Ownership Types"
+        name: applicableOwnershipTypes
+        widget: "select"
+        multiple: true
+        required: false
+        options:
+          - { label: "Women Owned", value: "woman-owned" }
+          - { label: "Minority Owned", value: "minority-owned" }
+          - { label: "Veteran Owned", value: "veteran-owned" }
+          - { label: "Disabled Veteran Owned", value: "disabled-veteran" }
+          - { label: "LGBTQ Owned", value: "lgbtq-owned" }
+      - { label: "is SBE (show if fewer than 120 employees)", name: "isSbe", widget: boolean, default: false }
+  - name: "archived-certification-opportunities"
+    label: "Cert Opps - Archived"
+    folder: "content/src/archived-certifications"
+    summary: "/{{id}} - {{name}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
+    delete: true
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "Description for card in For You",
+          name: "sidebarCardBodyText",
+          widget: "string",
+          hint: "This appears only in My Account, in the For You column, max char is 150 including spaces, plain text only",
+        }
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Url Slug", name: "urlSlug", widget: "write-once-read-only-no-space", required: true }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Id", name: "id", widget: "write-once-read-only-no-space", required: true }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - label: Agency
+        name: agency
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "mappings"
+        search_fields: ["arrayOfFundingAgencies.*.name"]
+        value_field: "arrayOfFundingAgencies.*.id"
+        display_fields: ["arrayOfFundingAgencies.*.name"]
+        options_length: 500
+      - label: "Applicable Ownership Types"
+        name: applicableOwnershipTypes
+        widget: "select"
+        multiple: true
+        required: false
+        options:
+          - { label: "Women Owned", value: "woman-owned" }
+          - { label: "Minority Owned", value: "minority-owned" }
+          - { label: "Veteran Owned", value: "veteran-owned" }
+          - { label: "Disabled Veteran Owned", value: "disabled-veteran" }
+      - { label: "is SBE (show if fewer than 120 employees)", name: "isSbe", widget: boolean, default: false }
