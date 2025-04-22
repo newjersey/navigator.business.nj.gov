@@ -7,6 +7,9 @@ notesMd: >-
   \* Will re-confirm the updated summary description with SME but includes a specific date per the SME
 
 
+  4.21: Additional revisions from SME
+
+
   4.17: making SME revisions, will need another SME review
 id: moving-warehouse
 licenseName: ""
@@ -28,7 +31,7 @@ callToActionLink: "https://rgbportal.dca.njoag.gov/ "
 *  `Certificate of Formation|certificate-formation` if a corporation or limited liability company
 * A copy of your current tarrif (rates and policies)
 * A copy of your vehicle registration or the lease (the vehicle must be registered under the name of your business) 
-* [ACORD Certificate of Insurance](https://www.acord.org/docs/default-source/forms/acordcertificatesfaq) (or ACORD 25), including the policy number, effective date, and expiration date
+* ACORD Certificate of Insurance(or ACORD 25), including the policy number, effective date, and expiration date
 * Insurance documentation: Form E and Form H, with a policy number that matches the ACORD form
 * Current workers compensation insurance certificate
 * Warehouse legal liability insurance, if applicable 
