@@ -17,6 +17,9 @@ interface Props {
   hideHeader?: boolean;
   boldAltDescription?: boolean;
   boldDescription?: boolean;
+  compact?: boolean;
+  fullWidth?: boolean;
+  optionalText?: boolean;
 }
 
 export const ProfileField = (props: Props): ReactElement => {
@@ -25,12 +28,16 @@ export const ProfileField = (props: Props): ReactElement => {
   if (props.isVisible === false) {
     return <></>;
   }
+
+  const classes: string = [
+    props.compact ? "margin-y-2" : "margin-y-4",
+    props.fullWidth ? "w-full" : "text-field-width-default",
+    "add-spacing-on-ele-scroll",
+  ].join(" ");
+
   return (
     <>
-      <div
-        className="margin-y-4 text-field-width-default add-spacing-on-ele-scroll"
-        id={`question-${props.fieldName}`}
-      >
+      <div className={classes} id={`question-${props.fieldName}`}>
         {props.locked ? (
           <ProfileLockedField fieldName={props.fieldName} valueFormatter={props.lockedValueFormatter} />
         ) : (
@@ -42,6 +49,7 @@ export const ProfileField = (props: Props): ReactElement => {
                 hideHeader={props.hideHeader}
                 boldAltDescription={props.boldAltDescription}
                 boldDescription={props.boldDescription}
+                optionalText={props.optionalText}
               />
             )}
             <div className={props.noLabel ? "margin-bottom-05" : ""}>{props.children}</div>
@@ -49,7 +57,7 @@ export const ProfileField = (props: Props): ReactElement => {
         )}
       </div>
 
-      <hr aria-hidden={true} />
+      {!props.compact && <hr aria-hidden={true} />}
     </>
   );
 };

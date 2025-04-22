@@ -256,7 +256,16 @@ describe("profile - starting business", () => {
 
   it("displays business info tab", () => {
     renderPage({ business: businessFromSetup });
-    expect(screen.getByTestId("info")).toBeInTheDocument();
+    expect(
+      screen.getByRole("tab", { name: Config.profileDefaults.default.profileTabInfoTitle })
+    ).toBeInTheDocument();
+  });
+
+  it("displays permits tab", () => {
+    renderPage({ business: businessFromSetup });
+    expect(
+      screen.getByRole("tab", { name: Config.profileDefaults.default.profileTabPermitsTitle })
+    ).toBeInTheDocument();
   });
 
   it("redirects user to dashboard with success query string on save", async () => {

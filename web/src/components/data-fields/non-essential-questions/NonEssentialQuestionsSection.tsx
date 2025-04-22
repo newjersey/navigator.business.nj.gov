@@ -4,7 +4,11 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
-export const NonEssentialQuestionsSection = (): ReactElement => {
+interface Props {
+  hideHeader?: boolean;
+}
+
+export const NonEssentialQuestionsSection = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(ProfileDataContext);
 
@@ -26,9 +30,11 @@ export const NonEssentialQuestionsSection = (): ReactElement => {
     <>
       {doesIndustryHaveNonEssentialQuestions() && (
         <>
-          <div className={"margin-top-3"}>
-            {Config.profileDefaults.fields.nonEssentialQuestions.default.header}
-          </div>
+          {!props.hideHeader && (
+            <div className={"margin-top-3"}>
+              {Config.profileDefaults.fields.nonEssentialQuestions.default.header}
+            </div>
+          )}
           {nonEssentialQuestions()}
         </>
       )}
