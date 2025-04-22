@@ -225,7 +225,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
         <Backdrop sx={{ zIndex: 20000 }} open={isLoading}>
           <CircularProgress aria-label="Loading indicator" aria-busy={true} />
         </Backdrop>
-        <div>
+        <div className="width-full">
           {!isValid() && onSubmitClicked && !apiFailed && (
             <Alert variant={"error"}>
               {Config.taxAccess.stepTwoErrorBanner}
@@ -283,6 +283,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
               <ResponsibleOwnerName
                 validationText={Config.taxAccess.failedResponsibleOwnerFieldHelper}
                 required
+                inputWidth={"full"}
               />
             </WithErrorBar>
           )}
@@ -304,7 +305,10 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
             </div>
             <TaxId validationText={Config.taxAccess.failedTaxIdHelper} required inputWidth={"full"} />
           </WithErrorBar>
-          <div className="margin-y-3 width-full" data-testid="tax-calendar-access-step-two-button-container">
+          <div
+            className="margin-top-3 width-full"
+            data-testid="tax-calendar-access-step-two-button-container"
+          >
             <ReverseOrderInMobile className="display-flex flex-column mobile-lg:flex-row width-full gap-3 mobile-lg:gap-0">
               {canMoveToPrevStep && (
                 <SecondaryButton

@@ -28,11 +28,11 @@ export const TaxAccess = (props: Props): ReactElement => {
 
   return (
     <>
-      <div className="padding-top-3">
-        <Heading level={3} styleVariant="h2" className="margin-0-override">
+      <div>
+        <Heading level={3} styleVariant="h3" className="margin-0-override">
           🔔 {Config.taxAccess.taxAccessHeader}
         </Heading>
-        <div className="margin-top-2">
+        <div className="margin-top-3">
           <Content>{Config.taxAccess.taxCalendarAccessBody}</Content>
         </div>
       </div>
