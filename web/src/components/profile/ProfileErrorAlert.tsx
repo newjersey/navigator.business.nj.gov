@@ -15,6 +15,7 @@ export const ProfileErrorAlert = (props: Props): ReactElement | null => {
   const displayProfileErrorAlert = (): boolean => props.fieldErrors.length > 0;
 
   const getLabel = (field: string): string => {
+    // We should try not to do this; if you do need to disable typescript please include a comment justifying why.
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     const formationLabel = Config.formation.fields[field]?.label;

@@ -1,3 +1,4 @@
+// We should try not to do this; if you do need to disable typescript please include a comment justifying why.
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-var-requires */
