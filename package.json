@@ -17,7 +17,7 @@
     "lint:fix": "yarn workspaces foreach run lint:fix",
     "lint:staged": "lint-staged",
     "prepare": "husky",
-    "prettier": "prettier --write . --ignore-path=./.eslintignore",
+    "prettier": "prettier --config-precedence prefer-file --write . --ignore-path=./.eslintignore",
     "prettier:yamlInput": "prettier -w \"web/decap-config/**/*.{yml,yaml}\"",
     "prettier:yamlOutput": "prettier -w web/public/mgmt/config.yml",
     "prettier:check": "prettier --check . --ignore-path=./.eslintignore",

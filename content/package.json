@@ -12,10 +12,6 @@
     "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
     "spellcheck": "cspell '**/*.md' '**/*.json' --config ../cspell.json"
   },
-  "prettier": {
-    "printWidth": 110,
-    "endOfLine": "auto"
-  },
   "devDependencies": {
     "@types/node": "20.17.30",
     "cross-env": "7.0.3",
