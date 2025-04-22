@@ -1992,10 +1992,27 @@ collections:
                   - { label: Save Button Text, name: saveButtonText, widget: string }
                   - { label: Back Button Text, name: backButtonText, widget: string }
                   - { label: Info Tab Title, name: profileTabInfoTitle, widget: string }
+                  - { label: Permits and License Tab Title, name: profileTabPermitsTitle, widget: string }
+                  - { label: Permits and License Sub Text, name: permitsAndLicensesSubText, widget: string }
                   - { label: Address Not Provided Text, name: profileAddressNotProvided, widget: string }
                   - {
                       label: Note for Businesses Formed Outside Navigator,
                       name: noteForBusinessesFormedOutsideNavigator,
+                      widget: string,
+                    }
+                  - {
+                      label: Industry Licenses and Permits Header,
+                      name: industryLicensesAndPermitsHeader,
+                      widget: string,
+                    }
+                  - {
+                      label: Location-Based Requirements Header,
+                      name: locationBasedRequirementsHeader,
+                      widget: string,
+                    }
+                  - {
+                      label: Location-Based Requirements Sub Text,
+                      name: locationBasedRequirementsSubText,
                       widget: string,
                     }
                   - { label: Profile Page Title - Prefix, name: profilePageTitlePrefix, widget: string }

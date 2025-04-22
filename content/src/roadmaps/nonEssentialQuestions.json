@@ -12,7 +12,7 @@
     },
     {
       "id": "hotel-register",
-      "questionText": "Do you plan to own a hotel, motel, or guesthouse with 10 rooms or more? ",
+      "questionText": "Do you plan to own a hotel, motel, or guesthouse with 10 rooms or more?",
       "addOn": "lodging-hotel-registration"
     },
     {
@@ -38,7 +38,7 @@
     {
       "addOn": "weights-measures-add",
       "id": "weights-measures",
-      "questionText": "Will you be using a weighing or measuring device, such as a scale or meter, for your business? "
+      "questionText": "Will you be using a weighing or measuring device, such as a scale or meter, for your business?"
     },
     {
       "questionText": "Are you a dentist?",
@@ -137,17 +137,17 @@
     },
     {
       "id": "pest-pesticide-dealer-licensing",
-      "questionText": "Will your business be selling pesticides? ",
+      "questionText": "Will your business be selling pesticides?",
       "addOn": "pest-pesticide-dealer-license"
     },
     {
       "id": "business-vehicle-title-reg",
       "addOn": "business-vehicle",
-      "questionText": "Do you plan to either own or operate business vehicles in NJ? "
+      "questionText": "Do you plan to either own or operate business vehicles in NJ?"
     },
     {
       "id": "retail-pesticide-dealer-licensing",
-      "questionText": "Will your business be selling pesticides? ",
+      "questionText": "Will your business be selling pesticides?",
       "addOn": "retail-pesticide-dealer-license"
     },
     {

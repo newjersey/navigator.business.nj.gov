@@ -331,7 +331,16 @@ describe("profile - owning existing business", () => {
 
   it("displays business info tab", () => {
     renderPage({ business });
-    expect(screen.getByTestId("info")).toBeInTheDocument();
+    expect(
+      screen.getByRole("tab", { name: Config.profileDefaults.default.profileTabInfoTitle })
+    ).toBeInTheDocument();
+  });
+
+  it("displays permits tab", () => {
+    renderPage({ business });
+    expect(
+      screen.getByRole("tab", { name: Config.profileDefaults.default.profileTabPermitsTitle })
+    ).toBeInTheDocument();
   });
 
   it("displays date of formation input for public filing businesses", () => {

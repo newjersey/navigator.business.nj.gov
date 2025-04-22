@@ -41,6 +41,7 @@ import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
+import { ProfileSubSection } from "@/components/profile/ProfileSubSection";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { ProfileTabNav } from "@/components/profile/ProfileTabNav";
 import { ProfileTabPanel } from "@/components/profile/ProfileTabPanel";
@@ -249,6 +250,9 @@ const ProfilePage = (props: Props): ReactElement => {
     }
   };
 
+  const isDomesticEmployer =
+    profileData.businessPersona === "STARTING" && profileData.industryId === "domestic-employer";
+
   const getElements = (): ReactNode => {
     if (isDomesticEmployer) {
       return domesticEmployerBusinessElements[profileTab];
@@ -350,11 +354,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <ForeignBusinessTypeField required />
         </ProfileField>
 
-        <ProfileField
-          fieldName="businessName"
-          isVisible={shouldShowNexusBusinessNameElements()}
-          noLabel={true}
-        >
+        <ProfileField fieldName="businessName" isVisible={shouldShowNexusBusinessNameElements()} noLabel>
           <NexusBusinessNameField />
         </ProfileField>
 
@@ -378,12 +378,12 @@ const ProfilePage = (props: Props): ReactElement => {
           locked={shouldLockFormationFields}
           lockedValueFormatter={formatDate}
         >
-          <DateOfFormation futureAllowed={true} />
+          <DateOfFormation futureAllowed />
         </ProfileField>
 
         <ProfileField
           fieldName="legalStructureId"
-          noLabel={true}
+          noLabel
           locked={shouldLockFormationFields}
           lockedValueFormatter={(legalStructureId): string => LookupLegalStructureById(legalStructureId).name}
         >
@@ -403,8 +403,8 @@ const ProfilePage = (props: Props): ReactElement => {
           fieldName="homeBasedBusiness"
           displayAltDescription={displayAltHomeBasedBusinessDescription}
           isVisible={displayHomedBaseBusinessQuestion()}
-          hideHeader={true}
-          boldAltDescription={true}
+          hideHeader
+          boldAltDescription
         >
           <HomeBasedBusiness />
         </ProfileField>
@@ -412,29 +412,61 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField
           fieldName="plannedRenovationQuestion"
           isVisible={displayPlannedRenovationQuestionQuestion()}
-          hideHeader={true}
-          displayAltDescription={true}
-          boldAltDescription={true}
+          hideHeader
+          displayAltDescription
+          boldAltDescription
         >
           <RenovationQuestion />
         </ProfileField>
       </div>
     ),
-    documents: <></>,
-    notes: (
-      <div id="tabpanel-notes" role="tabpanel" aria-labelledby="tab-notes">
-        <ProfileTabHeader tab="notes" />
+    permits: (
+      <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
+        <ProfileTabHeader tab="permits" />
+        <ProfileSubSection
+          heading={Config.profileDefaults.default.locationBasedRequirementsHeader}
+          subText={Config.profileDefaults.default.locationBasedRequirementsSubText}
+        >
+          <>
+            <ProfileField
+              fieldName="homeBasedBusiness"
+              isVisible={displayHomedBaseBusinessQuestion()}
+              displayAltDescription={displayAltHomeBasedBusinessDescription}
+              compact
+              fullWidth
+              hideHeader
+              boldAltDescription
+            >
+              <HomeBasedBusiness />
+            </ProfileField>
 
-        <ProfileField fieldName="notes">
-          <Notes handleChangeOverride={showNeedsAccountModalForGuest()} />
-        </ProfileField>
+            <ProfileField
+              fieldName="plannedRenovationQuestion"
+              isVisible={displayPlannedRenovationQuestionQuestion()}
+              compact
+              fullWidth
+              hideHeader
+              displayAltDescription
+              boldAltDescription
+            >
+              <RenovationQuestion />
+            </ProfileField>
+          </>
+        </ProfileSubSection>
+
+        <ProfileSubSection
+          heading={Config.profileDefaults.default.industryLicensesAndPermitsHeader}
+          subText={Config.profileDefaults.fields.nonEssentialQuestions.default.header}
+        >
+          <NonEssentialQuestionsSection hideHeader />
+        </ProfileSubSection>
       </div>
     ),
     numbers: (
       <div id="tabpanel-numbers" role="tabpanel" aria-labelledby="tab-numbers">
         <ProfileTabHeader tab="numbers" />
 
-        <ProfileField fieldName="taxId" noLabel={true}>
+        <ProfileField fieldName="taxId" noLabel>
           <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
           {!hasSubmittedTaxData && (
             <TaxDisclaimer legalStructureId={business?.profileData.legalStructureId} />
@@ -448,7 +480,7 @@ const ProfilePage = (props: Props): ReactElement => {
           </div>
           {business?.profileData.naicsCode && (
             <div data-testid={"profile-naics-code"}>
-              <ProfileField fieldName="naicsCode" noLabel={true}>
+              <ProfileField fieldName="naicsCode" noLabel>
                 <NaicsCode />
               </ProfileField>
             </div>
@@ -457,6 +489,16 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField fieldName="taxPin">
           <TaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
+        </ProfileField>
+      </div>
+    ),
+    documents: <></>,
+    notes: (
+      <div id="tabpanel-notes" role="tabpanel" aria-labelledby="tab-notes">
+        <ProfileTabHeader tab="notes" />
+
+        <ProfileField fieldName="notes">
+          <Notes handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
       </div>
     ),
@@ -478,21 +520,12 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
-    documents: <></>,
-    notes: (
-      <div id="tabpanel-notes" role="tabpanel" aria-labelledby="tab-notes">
-        <ProfileTabHeader tab="notes" />
-
-        <ProfileField fieldName="notes">
-          <Notes handleChangeOverride={showNeedsAccountModalForGuest()} />
-        </ProfileField>
-      </div>
-    ),
+    permits: <></>,
     numbers: (
       <div id="tabpanel-numbers" role="tabpanel" aria-labelledby="tab-numbers">
         <ProfileTabHeader tab="numbers" />
 
-        <ProfileField fieldName="taxId" noLabel={true}>
+        <ProfileField fieldName="taxId" noLabel>
           <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
           {!hasSubmittedTaxData && (
             <TaxDisclaimer legalStructureId={business?.profileData.legalStructureId} />
@@ -511,12 +544,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
-  };
-
-  const isDomesticEmployer =
-    profileData.businessPersona === "STARTING" && profileData.industryId === "domestic-employer";
-
-  const startingNewBusinessElements: Record<ProfileTabs, ReactNode> = {
+    documents: <></>,
     notes: (
       <div id="tabpanel-notes" role="tabpanel" aria-labelledby="tab-notes">
         <ProfileTabHeader tab="notes" />
@@ -526,20 +554,9 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
-    documents: (
-      <div id="tabpanel-documents" role="tabpanel" aria-labelledby="tab-documents">
-        <ProfileTabHeader tab="documents" />
+  };
 
-        <ProfileField
-          fieldName="documents"
-          isVisible={LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
-            "formationDocuments"
-          )}
-        >
-          <ProfileDocuments />
-        </ProfileField>
-      </div>
-    ),
+  const startingNewBusinessElements: Record<ProfileTabs, ReactNode> = {
     info: (
       <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />
@@ -575,9 +592,9 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField
           fieldName="vacantPropertyOwner"
           isVisible={displayVacantBuildingOwnerQuestion()}
-          hideHeader={true}
-          boldAltDescription={true}
-          boldDescription={true}
+          hideHeader
+          boldAltDescription
+          boldDescription
         >
           <span className={"margin-left-05"}>
             {Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText}
@@ -591,17 +608,19 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <Sectors />
         </ProfileField>
+
         <ProfileField
           fieldName="dateOfFormation"
           isVisible={!!business?.profileData.dateOfFormation}
           locked={shouldLockFormationFields}
           lockedValueFormatter={formatDate}
         >
-          <DateOfFormation futureAllowed={true} />
+          <DateOfFormation futureAllowed />
         </ProfileField>
+
         <ProfileField
           fieldName="legalStructureId"
-          noLabel={true}
+          noLabel
           locked={shouldLockFormationFields}
           lockedValueFormatter={(legalStructureId): string => LookupLegalStructureById(legalStructureId).name}
         >
@@ -611,22 +630,24 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField
           fieldName="raffleBingoGames"
           isVisible={displayRaffleBingoGameQuestion()}
-          hideHeader={true}
-          displayAltDescription={true}
-          boldAltDescription={true}
+          hideHeader
+          displayAltDescription
+          boldAltDescription
         >
           <RaffleBingoGamesQuestion />
         </ProfileField>
+
         <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
           <CannabisLocationAlert industryId={business?.profileData.industryId} />
           <MunicipalityField />
         </ProfileField>
+
         <ProfileField
           fieldName="homeBasedBusiness"
           isVisible={displayHomedBaseBusinessQuestion()}
           displayAltDescription={displayAltHomeBasedBusinessDescription}
-          hideHeader={true}
-          boldAltDescription={true}
+          hideHeader
+          boldAltDescription
         >
           <HomeBasedBusiness />
         </ProfileField>
@@ -634,9 +655,9 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField
           fieldName="plannedRenovationQuestion"
           isVisible={displayPlannedRenovationQuestionQuestion()}
-          hideHeader={true}
-          displayAltDescription={true}
-          boldAltDescription={true}
+          hideHeader
+          displayAltDescription
+          boldAltDescription
         >
           <RenovationQuestion />
         </ProfileField>
@@ -645,11 +666,12 @@ const ProfilePage = (props: Props): ReactElement => {
           fieldName="elevatorOwningBusiness"
           displayAltDescription={displayAltHomeBasedBusinessDescription}
           isVisible={displayElevatorQuestion()}
-          hideHeader={true}
-          boldAltDescription={true}
+          hideHeader
+          boldAltDescription
         >
           <ElevatorOwningBusiness />
         </ProfileField>
+
         <ProfileField
           fieldName="ownershipTypeIds"
           isVisible={
@@ -659,6 +681,7 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <Ownership />
         </ProfileField>
+
         <ProfileField
           fieldName="existingEmployees"
           isVisible={
@@ -670,11 +693,83 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
+    permits: (
+      <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
+        <ProfileTabHeader tab="permits" />
+        <ProfileSubSection
+          heading={Config.profileDefaults.default.locationBasedRequirementsHeader}
+          subText={Config.profileDefaults.default.locationBasedRequirementsSubText}
+        >
+          <>
+            <ProfileField
+              fieldName="homeBasedBusiness"
+              isVisible={displayHomedBaseBusinessQuestion()}
+              displayAltDescription={displayAltHomeBasedBusinessDescription}
+              compact
+              fullWidth
+              hideHeader
+              optionalText
+              boldAltDescription
+            >
+              <HomeBasedBusiness />
+            </ProfileField>
+
+            <ProfileField
+              fieldName="plannedRenovationQuestion"
+              isVisible={displayPlannedRenovationQuestionQuestion()}
+              compact
+              fullWidth
+              hideHeader
+              displayAltDescription
+              boldAltDescription
+            >
+              <RenovationQuestion />
+            </ProfileField>
+
+            <ProfileField
+              fieldName="elevatorOwningBusiness"
+              displayAltDescription={displayAltHomeBasedBusinessDescription}
+              isVisible={displayElevatorQuestion()}
+              compact
+              fullWidth
+              hideHeader
+              boldAltDescription
+            >
+              <ElevatorOwningBusiness />
+            </ProfileField>
+          </>
+        </ProfileSubSection>
+
+        <ProfileSubSection
+          heading={Config.profileDefaults.default.industryLicensesAndPermitsHeader}
+          subText={Config.profileDefaults.fields.nonEssentialQuestions.default.header}
+        >
+          {
+            <>
+              <NonEssentialQuestionsSection hideHeader />
+
+              <ProfileField
+                fieldName="vacantPropertyOwner"
+                isVisible
+                hideHeader
+                compact
+                fullWidth
+                boldAltDescription
+                boldDescription
+                optionalText
+              >
+                <RadioQuestion<boolean> fieldName={"vacantPropertyOwner"} choices={[true, false]} />
+              </ProfileField>
+            </>
+          }
+        </ProfileSubSection>
+      </div>
+    ),
     numbers: (
       <div id="tabpanel-numbers" role="tabpanel" aria-labelledby="tab-numbers">
         <ProfileTabHeader tab="numbers" />
 
-        <ProfileField fieldName="naicsCode" noLabel={true}>
+        <ProfileField fieldName="naicsCode" noLabel>
           <NaicsCode />
         </ProfileField>
 
@@ -692,7 +787,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <EmployerId handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
 
-        <ProfileField fieldName="taxId" noLabel={true}>
+        <ProfileField fieldName="taxId" noLabel>
           <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
           {!hasSubmittedTaxData && (
             <TaxDisclaimer legalStructureId={business?.profileData.legalStructureId} />
@@ -711,9 +806,20 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
-  };
+    documents: (
+      <div id="tabpanel-documents" role="tabpanel" aria-labelledby="tab-documents">
+        <ProfileTabHeader tab="documents" />
 
-  const owningBusinessElements: Record<ProfileTabs, ReactNode> = {
+        <ProfileField
+          fieldName="documents"
+          isVisible={LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
+            "formationDocuments"
+          )}
+        >
+          <ProfileDocuments />
+        </ProfileField>
+      </div>
+    ),
     notes: (
       <div id="tabpanel-notes" role="tabpanel" aria-labelledby="tab-notes">
         <ProfileTabHeader tab="notes" />
@@ -723,7 +829,9 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
-    documents: <></>,
+  };
+
+  const owningBusinessElements: Record<ProfileTabs, ReactNode> = {
     info: (
       <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />
@@ -756,8 +864,8 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField
           fieldName="carnivalRideOwningBusiness"
           isVisible={displayCarnivalRidesQuestion()}
-          hideHeader={true}
-          boldAltDescription={true}
+          hideHeader
+          boldAltDescription
         >
           <RadioQuestion<boolean> fieldName={"carnivalRideOwningBusiness"} choices={[true, false]} />
         </ProfileField>
@@ -765,8 +873,8 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField
           fieldName="travelingCircusOrCarnivalOwningBusiness"
           isVisible={displayCarnivalRidesQuestion()}
-          hideHeader={true}
-          boldAltDescription={true}
+          hideHeader
+          boldAltDescription
         >
           <RadioQuestion<boolean>
             fieldName={"travelingCircusOrCarnivalOwningBusiness"}
@@ -777,9 +885,9 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField
           fieldName="vacantPropertyOwner"
           isVisible={displayVacantBuildingOwnerQuestion()}
-          hideHeader={true}
-          boldAltDescription={true}
-          boldDescription={true}
+          hideHeader
+          boldAltDescription
+          boldDescription
         >
           <span className={"margin-left-05"}>
             {Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText}
@@ -808,8 +916,8 @@ const ProfilePage = (props: Props): ReactElement => {
           fieldName="homeBasedBusiness"
           isVisible={displayHomedBaseBusinessQuestion()}
           displayAltDescription={displayAltHomeBasedBusinessDescription}
-          hideHeader={true}
-          boldAltDescription={true}
+          hideHeader
+          boldAltDescription
         >
           <HomeBasedBusiness />
         </ProfileField>
@@ -819,13 +927,85 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
+    permits: (
+      <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
+        <ProfileTabHeader tab="permits" />
+        <ProfileSubSection
+          heading={Config.profileDefaults.default.locationBasedRequirementsHeader}
+          subText={Config.profileDefaults.default.locationBasedRequirementsSubText}
+        >
+          <ProfileField
+            fieldName="homeBasedBusiness"
+            isVisible={displayHomedBaseBusinessQuestion()}
+            displayAltDescription={displayAltHomeBasedBusinessDescription}
+            compact
+            fullWidth
+            hideHeader
+            boldAltDescription
+          >
+            <HomeBasedBusiness />
+          </ProfileField>
+        </ProfileSubSection>
+
+        <ProfileSubSection
+          heading={Config.profileDefaults.default.industryLicensesAndPermitsHeader}
+          subText={Config.profileDefaults.fields.nonEssentialQuestions.default.header}
+        >
+          {
+            <>
+              <ProfileField
+                fieldName="carnivalRideOwningBusiness"
+                isVisible={displayCarnivalRidesQuestion()}
+                hideHeader
+                compact
+                fullWidth
+                boldAltDescription
+                boldDescription
+                optionalText
+              >
+                <RadioQuestion<boolean> fieldName={"carnivalRideOwningBusiness"} choices={[true, false]} />
+              </ProfileField>
+
+              <ProfileField
+                fieldName="travelingCircusOrCarnivalOwningBusiness"
+                isVisible={displayCarnivalRidesQuestion()}
+                hideHeader
+                compact
+                fullWidth
+                boldAltDescription
+                boldDescription
+                optionalText
+              >
+                <RadioQuestion<boolean>
+                  fieldName={"travelingCircusOrCarnivalOwningBusiness"}
+                  choices={[true, false]}
+                />
+              </ProfileField>
+
+              <ProfileField
+                fieldName="vacantPropertyOwner"
+                isVisible={displayVacantBuildingOwnerQuestion()}
+                hideHeader
+                compact
+                fullWidth
+                boldAltDescription
+                boldDescription
+                optionalText
+              >
+                <RadioQuestion<boolean> fieldName={"vacantPropertyOwner"} choices={[true, false]} />
+              </ProfileField>
+            </>
+          }
+        </ProfileSubSection>
+      </div>
+    ),
     numbers: (
       <div id="tabpanel-numbers" role="tabpanel" aria-labelledby="tab-numbers">
         <ProfileTabHeader tab="numbers" />
 
         {business?.profileData.naicsCode && (
           <div data-testid={"profile-naics-code"}>
-            <ProfileField fieldName="naicsCode" noLabel={true}>
+            <ProfileField fieldName="naicsCode" noLabel>
               <NaicsCode />
             </ProfileField>
           </div>
@@ -839,7 +1019,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <EmployerId handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
 
-        <ProfileField fieldName="taxId" noLabel={true}>
+        <ProfileField fieldName="taxId" noLabel>
           <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
           {!hasSubmittedTaxData && (
             <TaxDisclaimer legalStructureId={business?.profileData.legalStructureId} />
@@ -858,9 +1038,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
-  };
-
-  const domesticEmployerBusinessElements: Record<ProfileTabs, ReactNode> = {
+    documents: <></>,
     notes: (
       <div id="tabpanel-notes" role="tabpanel" aria-labelledby="tab-notes">
         <ProfileTabHeader tab="notes" />
@@ -870,7 +1048,9 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
-    documents: <></>,
+  };
+
+  const domesticEmployerBusinessElements: Record<ProfileTabs, ReactNode> = {
     info: (
       <div id="tabpanel-info" role="tabpanel" aria-labelledby="tab-info">
         <ProfileTabHeader tab="info" />
@@ -889,17 +1069,18 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
       </div>
     ),
+    permits: <></>,
     numbers: (
       <div id="tabpanel-numbers" role="tabpanel" aria-labelledby="tab-numbers">
         <ProfileTabHeader tab="numbers" />
 
-        <ProfileField fieldName="naicsCode" noLabel={true}>
+        <ProfileField fieldName="naicsCode" noLabel>
           <NaicsCode />
         </ProfileField>
         <ProfileField fieldName="employerId">
           <EmployerId handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
-        <ProfileField fieldName="taxId" noLabel={true}>
+        <ProfileField fieldName="taxId" noLabel>
           <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
           {!hasSubmittedTaxData && (
             <TaxDisclaimer legalStructureId={business?.profileData.legalStructureId} />
@@ -911,6 +1092,16 @@ const ProfilePage = (props: Props): ReactElement => {
               <TaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
+        </ProfileField>
+      </div>
+    ),
+    documents: <></>,
+    notes: (
+      <div id="tabpanel-notes" role="tabpanel" aria-labelledby="tab-notes">
+        <ProfileTabHeader tab="notes" />
+
+        <ProfileField fieldName="notes">
+          <Notes handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
       </div>
     ),
@@ -989,9 +1180,9 @@ const ProfilePage = (props: Props): ReactElement => {
                                   <div className="mobile-lg:display-inline">
                                     <PrimaryButton
                                       isColor="primary"
-                                      isSubmitButton={true}
+                                      isSubmitButton
                                       onClick={(): void => {}}
-                                      isRightMarginRemoved={true}
+                                      isRightMarginRemoved
                                       dataTestId="save"
                                       isLoading={isLoading}
                                     >

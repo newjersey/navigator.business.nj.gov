@@ -6,6 +6,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileContentField } from "@/lib/types/types";
+import { convertTextToMarkdownBold } from "@/lib/utils/content-helpers";
 import { ReactElement, useContext } from "react";
 
 interface Props {
@@ -16,6 +17,7 @@ interface Props {
   boldAltDescription?: boolean;
   ignoreContextualInfo?: boolean;
   boldDescription?: boolean;
+  optionalText?: boolean;
 }
 
 export const FieldLabelProfile = (props: Props): ReactElement => {
@@ -38,6 +40,14 @@ export const FieldLabelProfile = (props: Props): ReactElement => {
   const showLockedTooltip = !!props.locked;
   const showUnboldedHeader = unboldedHeader && !props.locked;
   const isHeaderInConfig = unboldedHeader || contentFromConfig.header;
+
+  const optionalTagText = props.optionalText
+    ? Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText
+    : "";
+
+  const getDescriptionContentText = (text: string, bold: boolean | undefined): string => {
+    return bold ? convertTextToMarkdownBold(text) : text;
+  };
 
   return (
     <>
@@ -76,12 +86,14 @@ export const FieldLabelProfile = (props: Props): ReactElement => {
       {showDescription && (
         <>
           {props.isAltDescriptionDisplayed && altDescription && (
-            <div className={props.boldAltDescription ? "text-bold" : ""}>
-              <Content>{altDescription}</Content>
-            </div>
+            <Content>
+              {`${getDescriptionContentText(altDescription, props.boldAltDescription)} ${optionalTagText}`}
+            </Content>
           )}
           {!props.isAltDescriptionDisplayed && description && (
-            <Content className={props.boldDescription ? "text-bold" : ""}>{description}</Content>
+            <Content>
+              {`${getDescriptionContentText(description, props.boldDescription)} ${optionalTagText}`}
+            </Content>
           )}
         </>
       )}
