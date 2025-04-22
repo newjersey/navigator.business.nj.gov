@@ -108,6 +108,7 @@
     "xml2js": "0.6.2"
   },
   "devDependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.777.0",
     "@aws-sdk/types": "3.775.0",
     "@babel/core": "7.26.10",
     "@businessnjgovnavigator/shared": "*",
