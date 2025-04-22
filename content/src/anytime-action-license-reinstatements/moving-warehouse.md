@@ -4,10 +4,7 @@ notesMd: >-
   https://docs.google.com/document/d/1MNZd-0aSzPXeI7-cno0hUk8N8EF6a2J9Ct3pkKoxuVo/edit?tab=t.0#heading=h.tocgia7rek0i
 
 
-  \* Will re-confirm the updated summary description with SME but includes a specific date per the SME
-
-
-  4.21: Additional revisions from SME
+  4.21: Additional revisions from SME. We were asked to not spell out ACORD, so this was not an oversight (we usually spell out the meaning before using an acronym)
 
 
   4.17: making SME revisions, will need another SME review
@@ -31,17 +28,11 @@ callToActionLink: "https://rgbportal.dca.njoag.gov/ "
 *  `Certificate of Formation|certificate-formation` if a corporation or limited liability company
 * A copy of your current tarrif (rates and policies)
 * A copy of your vehicle registration or the lease (the vehicle must be registered under the name of your business) 
-* ACORD Certificate of Insurance(or ACORD 25), including the policy number, effective date, and expiration date
+* ACORD Certificate of Insurance (or ACORD 25), including the policy number, effective date, and expiration date
 * Insurance documentation: Form E and Form H, with a policy number that matches the ACORD form
 * Current workers compensation insurance certificate
 * Warehouse legal liability insurance, if applicable 
 * Applicable fees paid
-
-:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
-
-When applying for reinstatement through the Regulated Business Online Registration Portal, choose “Renew a License or Registration.”
-
-:::
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
