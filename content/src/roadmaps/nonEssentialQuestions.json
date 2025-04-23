@@ -159,6 +159,11 @@
       "id": "crematory",
       "questionText": "Will you be constructing and/or operating a crematory?",
       "addOn": "crematory-application-funeral"
+    },
+    {
+      "questionText": "Does your business or facility use a boiler with a significant heating capacity?",
+      "id": "inspect-boiler",
+      "addOn": "boiler"
     }
   ]
 }
