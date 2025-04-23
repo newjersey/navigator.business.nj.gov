@@ -73,12 +73,18 @@
       "step": 4,
       "weight": 35,
       "licenseTask": "town-mercantile-license"
+    },
+    {
+      "step": 4,
+      "weight": 40,
+      "licenseTask": "boiler-inspection"
     }
   ],
   "name": "Cannabis",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "inspect-boiler"
   ],
   "displayname": "cannabis",
   "industryOnboardingQuestions": {
