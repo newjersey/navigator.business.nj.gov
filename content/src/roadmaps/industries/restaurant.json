@@ -52,12 +52,18 @@
       "step": 4,
       "weight": 100,
       "licenseTask": "food-safety-course"
+    },
+    {
+      "weight": 200,
+      "step": 4,
+      "licenseTask": "boiler-inspection"
     }
   ],
   "name": "Restaurant",
   "nonEssentialQuestionsIds": [
     "weights-measures",
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "inspect-boiler"
   ],
   "displayname": "restaurant",
   "industryOnboardingQuestions": {
