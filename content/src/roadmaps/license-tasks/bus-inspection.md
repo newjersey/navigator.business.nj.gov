@@ -7,18 +7,14 @@ urlSlug: bus-inspection
 name: Schedule Your Initial Bus Inspection
 webflowName: "School Bus: School Bus Inspection"
 summaryDescriptionMd: >-
-  A “bus” is a vehicle designed or used to **transport 16 or more passengers,**
-  including the driver, or any vehicle used to transport passengers for hire,
-  such as:
+  :::infoAlert 
 
-  * School buses
+  Before purchasing a bus, **it's highly recommended to seek consultation from a transportation specialist or licensed NJ bus dealer.** This will ensure that your bus can be legally operated within the state of NJ.
 
-  * Shuttles
-
-  * Charter services
+  :::
 
 
-  All buses must pass an initial inspection before you register them for Omnibus (code 54) or s1/s2 plates.
+  All transportation vehicles must pass an initial inspection before you register them for Omnibus (code 54) or s1/s2 plates.
 industryId: school-bus
 callToActionText: ""
 callToActionLink: ""
@@ -31,10 +27,10 @@ webflowId: 648b6ec5ff1d0d38af2f5a57
 ---
 ## Eligibility Criteria
 
-Before scheduling, make sure that:
+Before scheduling your initial inspection, make sure that:
 
 * The bus is titled or in the process of being titled in the state of NJ
-* The bus is configured for passenger service and meets federal safety standards (seating, mirrors, signage, flashing lights, etc)
+* The bus is configured for passenger service in the state of NJ, and meets federal safety standards (seating, mirrors, signage, flashing lights, etc)
 * Any modifications or retrofits are completed
 
 ## How to Schedule Your Inspection
@@ -48,7 +44,6 @@ Call the **NJ MVC School Bus Inspection Unit** at **(609) 633-9473** to schedule
 :::
 
 In addition to proof of the above, you'll be asked to provide information about the bus(es), location, and facility, particularly if you want the inspection to be performed on-site.
-
 &nbsp;
 
 #### **Commercial Buses:**
@@ -97,5 +92,5 @@ Trenton, NJ 08666
   :::
 
 :::infoAlert 
- After passing initial inspection, buses must continue to be inspected **every 6 months.** The NJ MVC inspector assigned to your area will schedule these for you.
+ After passing initial inspection, **buses must continue to be inspected every 6 months.** The NJ MVC inspector assigned to your area will schedule these for you, and will reach out shortly before the scheduled inspection date as a reminder.
 :::
