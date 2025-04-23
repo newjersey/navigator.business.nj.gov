@@ -8,13 +8,9 @@
     "build": "node ./build.js",
     "clean": "rimraf lib",
     "dev": "yarn build",
-    "prettier": "prettier --write . --ignore-path=./.eslintignore",
-    "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
+    "prettier": "prettier --write . --ignore-path=../.eslintignore",
+    "prettier:check": "prettier . --check --ignore-path=../.eslintignore",
     "spellcheck": "cspell '**/*.md' '**/*.json' --config ../cspell.json"
-  },
-  "prettier": {
-    "printWidth": 110,
-    "endOfLine": "auto"
   },
   "devDependencies": {
     "@types/node": "20.17.30",

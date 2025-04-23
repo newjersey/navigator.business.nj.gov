@@ -1,3 +1,29 @@
+node_modules
+
+# root
+aws_config_file_path.json
+scripts/
+.yarn
+.vscode
+coverage
+
+# content
+content/lib
+content
+
+# shared
+shared/lib
+
+# api
+api/jspm_packages
+api/.serverless
+api/.webpack
+api/src/setupTests.js
+api/src/teardownTests.js
+# Large file with binary/hex contents
+api/wiremock/__files/tax-clearance-success.json
+
+# web
 web/.next
 amplify
 *.md
@@ -8,11 +34,6 @@ web/out/
 web/cypress/plugins
 web/cypress/support
 web/stories
-node_modules
-
-shared/lib
-content/lib
-content
 
 web/amplify/#current-cloud-backend/
 web/amplify/.config/local-*
@@ -27,22 +48,3 @@ web/amplifyconfiguration.json
 web/amplify-build-config.json
 web/amplify-gradle-config.json
 web/amplifytools.xcconfig
-aws_config_file_path.json
-
-# Serverless directories
-api/.serverless
-
-# Webpack directories
-api/.webpack
-
-api/src/setupTests.js
-api/src/teardownTests.js
-
-scripts/
-
-.yarn
-.vscode
-coverage
-
-# Large file with binary/hex contents
-api/wiremock/__files/tax-clearance-success.json

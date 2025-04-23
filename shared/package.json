@@ -20,10 +20,6 @@
     "test": "jest",
     "typecheck": "tsc --noemit"
   },
-  "prettier": {
-    "printWidth": 110,
-    "endOfLine": "auto"
-  },
   "dependencies": {
     "@businessnjgovnavigator/content": "*",
     "dayjs": "1.11.13",
