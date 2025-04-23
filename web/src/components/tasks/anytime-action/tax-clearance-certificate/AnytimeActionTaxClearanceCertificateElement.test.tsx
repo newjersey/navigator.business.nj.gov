@@ -3,6 +3,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { formatAddress } from "@/lib/domain-logic/formatAddress";
 import { generateAnytimeActionTask } from "@/test/factories";
+import { selectDropdownValueByText } from "@/test/helpers/helpers-testing-library-selectors";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -959,22 +960,5 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
   const fillText = (label: string, value: string): void => {
     fireEvent.change(screen.getByLabelText(label), { target: { value: value } });
     fireEvent.blur(screen.getByLabelText(label));
-  };
-
-  const selectDropdownValueByText = (
-    comboboxLabel: string,
-    selectionText: string,
-    opensOnMouseDown: boolean
-  ): void => {
-    const combobox = screen.getByRole("combobox", { name: comboboxLabel });
-    if (opensOnMouseDown) {
-      fireEvent.mouseDown(combobox);
-    } else {
-      fireEvent.click(combobox);
-    }
-
-    const listbox = screen.getByRole("listbox");
-    fireEvent.click(within(listbox).getByText(selectionText));
-    fireEvent.blur(combobox);
   };
 });
