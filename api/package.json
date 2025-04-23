@@ -26,10 +26,6 @@
   "engines": {
     "node": ">=20.18.1"
   },
-  "prettier": {
-    "printWidth": 110,
-    "endOfLine": "auto"
-  },
   "dependencies": {
     "@aws-crypto/client-node": "4.2.1",
     "@aws-sdk/client-cloudwatch-logs": "3.787.0",
