@@ -133,29 +133,29 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
     });
 
-    it("renders the first step as complete when on the eligibility tab", () => {
+    it("renders tab one as complete when on tab two", () => {
       renderComponent({});
       const firstTab = screen.getAllByRole("tab")[0];
       const secondTab = screen.getAllByRole("tab")[1];
-      expect(firstTab.dataset.state).toEqual("INCOMPLETE-ACTIVE");
+      expect(firstTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
 
       fireEvent.click(secondTab);
       expect(secondTab).toHaveAttribute("aria-selected", "true");
-      expect(firstTab.dataset.state).toEqual("COMPLETE");
+      expect(firstTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
     });
 
-    it("renders the first step as complete when on the review tab", () => {
+    it("renders tab one as complete when on tab three", () => {
       renderComponent({});
       const firstTab = screen.getAllByRole("tab")[0];
       const thirdTab = screen.getAllByRole("tab")[2];
-      expect(firstTab.dataset.state).toEqual("INCOMPLETE-ACTIVE");
+      expect(firstTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
 
       fireEvent.click(thirdTab);
       expect(thirdTab).toHaveAttribute("aria-selected", "true");
-      expect(firstTab.dataset.state).toEqual("COMPLETE");
+      expect(firstTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
     });
 
-    it("renders the second step as incomplete until all required fields are non empty and valid", async () => {
+    it("renders tab two as complete when all required fields are non empty and valid", async () => {
       renderComponent({ business: generateBusinessWithEmptyTaxClearanceData() });
       const secondTab = screen.getAllByRole("tab")[1];
 
@@ -167,31 +167,31 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
         true
       );
-      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
-
       fillText("Business name", "Test Name");
-      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
-
       fillText("Address line1", "123 Test Road");
-      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
-
       fillText("Address city", "Baltimore");
-      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
-
       selectDropdownValueByText("Address state", "MD", false);
-      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
-
       fillText("Address zip code", "21210");
-      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
-
       fillText("Tax id", "012345678901");
-      expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
-
       fillText("Tax pin", "1234");
+
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
     });
 
-    it("renders the second step as incomplete if Requesting Agency is not selected", async () => {
+    it.each(["Business name", "Address line1", "Address city", "Address zip code", "Tax id", "Tax pin"])(
+      "renders tab two as incomplete if the text field %s is empty",
+      (emptyField) => {
+        renderComponent({});
+        const secondTab = screen.getAllByRole("tab")[1];
+        expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
+        fireEvent.click(secondTab);
+
+        fillText(emptyField, "");
+        expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
+      }
+    );
+
+    it("renders tab two as incomplete if Requesting Agency is not selected", async () => {
       renderComponent({ business: generateBusinessWithEmptyTaxClearanceData() });
       const secondTab = screen.getAllByRole("tab")[1];
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
@@ -215,7 +215,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
     });
 
-    it("renders the second step as incomplete if Address state is not selected", async () => {
+    it("renders tab two as incomplete if Address state is not selected", async () => {
       renderComponent({ business: generateBusinessWithEmptyTaxClearanceData() });
       const secondTab = screen.getAllByRole("tab")[1];
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
@@ -240,7 +240,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     });
 
     it.each(["Address zip code", "Tax id", "Tax pin"])(
-      "renders the second step as incomplete when all fields are non empty but the %s field does not have enough digits",
+      "renders tab two as incomplete when all fields are non empty but the %s field does not have enough digits",
       async (incompleteField) => {
         renderComponent({ business: generateBusinessWithEmptyTaxClearanceData() });
         const secondTab = screen.getAllByRole("tab")[1];
@@ -262,19 +262,6 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
 
         fillText(incompleteField, "0");
-        expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
-      }
-    );
-
-    it.each(["Business name", "Address line1", "Address city", "Address zip code", "Tax id", "Tax pin"])(
-      "renders the second step as incomplete if text field %s is empty",
-      (emptyField) => {
-        renderComponent({});
-        const secondTab = screen.getAllByRole("tab")[1];
-        expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Complete"));
-        fireEvent.click(secondTab);
-
-        fillText(emptyField, "");
         expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
       }
     );
