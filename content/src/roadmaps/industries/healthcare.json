@@ -56,6 +56,11 @@
       "step": 4,
       "weight": 90,
       "task": "community-right-to-know-survey"
+    },
+    {
+      "weight": 100,
+      "step": 4,
+      "licenseTask": "boiler-inspection"
     }
   ],
   "name": "Healthcare",
@@ -68,7 +73,8 @@
     "healthcare-optometrist ",
     "business-vehicle-title-reg",
     "dental-hygienist",
-    "special-permit-dentistry"
+    "special-permit-dentistry",
+    "inspect-boiler"
   ],
   "displayname": "healthcare",
   "industryOnboardingQuestions": {
