@@ -1,5 +1,5 @@
 import { Icon } from "@/components/njwds/Icon";
-import { ResultsSectionAccordion } from "@/components/tasks/environment-questionnaire/results/ResultsSectionAccordion";
+import { ResultsSectionAccordion } from "@/components/ResultsSectionAccordion";
 import { getMergedConfig } from "@/contexts/configContext";
 import { ReactElement } from "react";
 

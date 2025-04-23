@@ -8,7 +8,7 @@ import {
   newsletterStatusList,
   UserTestingResponse,
 } from "@shared/businessUser";
-import { getCurrentDateISOString } from "@shared/dateHelpers";
+import { getCurrentDate, getCurrentDateISOString } from "@shared/dateHelpers";
 import { LicenseChecklistResponse } from "@shared/domain-logic/licenseStatusHelpers";
 import {
   castPublicFilingLegalTypeToFormationType,
@@ -30,6 +30,7 @@ import {
   randomPublicFilingLegalType,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
+import { XrayRegistrationEntry, XrayRegistrationStatus, XrayRegistrationStatusResponse } from "@shared/xray";
 import {
   getRandomDateInBetween,
   randomElementFromArray,
@@ -207,6 +208,53 @@ export const generateLicenseApplicationIdResponseValue = (
     expirationDateISO: getCurrentDateISOString(),
     applicationId: `some-applicationId-${randomInt()}`,
     licenseStatus: "ACTIVE",
+    ...overrides,
+  };
+};
+
+export const generateXrayRegistrationEntry = (
+  overrides: Partial<XrayRegistrationEntry>
+): XrayRegistrationEntry => {
+  return {
+    businessName: "Test LLC",
+    streetAddress: "123 Main Street",
+    city: "PARAMUS",
+    state: "NJ",
+    zipCode: "07652",
+    status: "Active",
+    contactType: "OWNER",
+    expirationDate: getCurrentDate().add(2, "month").format("MM/DD/YYYY"),
+    roomId: "01",
+    registrationCategory: "DENTIST",
+    disposalDate: undefined,
+    name: "GENDEX CORP.",
+    registrationNumber: "330061",
+    serialNumber: "770-1676141DP",
+    modelNumber: "46-404600G",
+    deactivationDate: undefined,
+    annualFee: 92,
+    ...overrides,
+  };
+};
+
+export const generateXrayRegistrationStatusResponse = (
+  overrides: Partial<XrayRegistrationStatusResponse>
+): XrayRegistrationStatusResponse => {
+  return {
+    status: "ACTIVE" as XrayRegistrationStatus,
+    deactivationDate: undefined,
+    expirationDate: getCurrentDate().add(2, "month").toString(),
+    machines: [
+      {
+        name: "Some Machine",
+        registrationNumber: "some-registration-number",
+        roomId: "01",
+        registrationCategory: "DENTIST",
+        modelNumber: "some-model-number",
+        serialNumber: "some",
+        annualFee: 92,
+      },
+    ],
     ...overrides,
   };
 };

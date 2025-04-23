@@ -758,6 +758,74 @@ collections:
                   widget: string,
                   hint: This is the text that is populates the Edit/Remove button aria label. It is prepended by "Edit" or "Remove".,
                 }
+  - name: "xray-registration"
+    label: "Tasks- Xray Registration"
+    delete: false
+    create: false
+    files:
+      - label: "Xray Registration"
+        name: "xray-registration"
+        file: content/src/fieldConfig/xray-registration.json
+        editor:
+          preview: true
+        fields:
+          - label: Xray Registration
+            name: xrayRegistrationTask
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Tab One Text, name: header, widget: string }
+              - { label: Tab Two Text, name: tab2Text, widget: string }
+              - { label: Call to Action Primary Text, name: callToActionPrimaryText, widget: string }
+              - { label: Call to Action Secondary Text, name: callToActionSecondaryText, widget: string }
+              - { label: Issuing Agency, name: issuingAgency, widget: string }
+              - { label: Check Status Text, name: checkStatusText, widget: string }
+              - { label: Business Name Label, name: businessNameLabel, widget: string }
+              - { label: Address Line 1 Label, name: address1Label, widget: string }
+              - { label: Address Line 2 Label, name: address2Label, widget: string }
+              - { label: ZIP Code Label, name: addressZipCodeLabel, widget: string }
+              - { label: State Label, name: stateLabel, widget: string }
+              - { label: Submit Text, name: submitText, widget: string }
+              - { label: Error Text Not Found, name: errorTextNotFound, widget: string }
+              - { label: Error Text Fields Required, name: errorTextFieldsRequired, widget: string }
+              - { label: Error Text Search Failed, name: errorTextSearchFailed, widget: string }
+              - { label: Registration Status Text, name: registrationStatusText, widget: string }
+              - { label: Active Description, name: activeDescription, widget: string }
+              - { label: Inactive Description, name: inactiveDescription, widget: string }
+              - {
+                  label: Inactive Description Call to Action,
+                  name: inactiveDescriptionCallToAction,
+                  widget: string,
+                }
+              - { label: Expired Description, name: expiredDescription, widget: string }
+              - {
+                  label: Expired Description Call to Action,
+                  name: expiredDescriptionCallToAction,
+                  widget: string,
+                }
+              - { label: Renew Registration Link, name: renewRegistrationLink, widget: string }
+              - { label: Active Status Text, name: activeStatusStatusText, widget: string }
+              - { label: Expired Status Text, name: expiredStatusStatusText, widget: string }
+              - { label: Inactive Status Text, name: inactiveStatusText, widget: string }
+              - { label: Accordion Header, name: accordionHeader, widget: string }
+              - { label: Edit Button Text, name: editButtonText, widget: string }
+              - { label: Future Expiration Date Text, name: futureExpirationDateText, widget: string }
+              - { label: Expired Text, name: expiredText, widget: string }
+              - {
+                  label: Expires in Less Than a Month Text,
+                  name: expiresInLessThanAMonthText,
+                  widget: string,
+                }
+              - { label: No Information Available, name: noInformationAvailable, widget: string }
+              - { label: Registration Number, name: registrationNumber, widget: string }
+              - { label: Room ID, name: roomId, widget: string }
+              - { label: Registration Category, name: registrationCategory, widget: string }
+              - { label: Manufacturer, name: manufacturer, widget: string }
+              - { label: Model Number, name: modelNumber, widget: string }
+              - { label: Serial Number, name: serialNumber, widget: string }
+              - { label: Annual Fee, name: annualFee, widget: string }
+              - { label: Issuing Agency Text, name: issuingAgencyText, widget: string }
+              - { label: Equipment Text, name: equipmentText, widget: string }
   - name: "tax-task"
     label: "Tasks - Tax ID"
     delete: false
