@@ -46,12 +46,18 @@
       "step": 4,
       "weight": 200,
       "task": "residential-lease-agreement"
+    },
+    {
+      "weight": 300,
+      "step": 4,
+      "licenseTask": "boiler-inspection"
     }
   ],
   "name": "Residential Landlord",
   "nonEssentialQuestionsIds": [
     "multiple-dwelling-register",
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "inspect-boiler"
   ],
   "displayname": "residential-landlord",
   "industryOnboardingQuestions": {
