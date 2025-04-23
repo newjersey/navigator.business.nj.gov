@@ -45,6 +45,11 @@
       "step": 4,
       "weight": 1,
       "task": "search-licenses"
+    },
+    {
+      "step": 4,
+      "weight": 5,
+      "licenseTask": "boiler-inspection"
     }
   ],
   "name": "All Other Businesses",
@@ -53,7 +58,8 @@
     "cds-lab-research ",
     "cds-supply",
     "other-businesses-CRTK-survey",
-    "business-vehicle-title-reg"
+    "business-vehicle-title-reg",
+    "inspect-boiler"
   ],
   "displayname": "generic",
   "industryOnboardingQuestions": {
