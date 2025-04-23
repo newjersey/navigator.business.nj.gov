@@ -3,6 +3,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { formatAddress } from "@/lib/domain-logic/formatAddress";
 import { generateAnytimeActionTask } from "@/test/factories";
+import { selectDropdownValueByText } from "@/test/helpers/helpers-testing-library-selectors";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -162,9 +163,10 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
       fireEvent.click(secondTab);
 
-      selectListBoxValueByLabel(
+      selectDropdownValueByText(
         "Tax clearance certificate requesting agency",
-        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
+        true
       );
       fillText("Business name", "Test Name");
       fillText("Address line1", "123 Test Road");
@@ -206,7 +208,7 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
 
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
 
-      selectListBoxValueByLabel(
+      selectDropdownValueByText(
         "Tax clearance certificate requesting agency",
         LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
         true
@@ -220,9 +222,10 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       expect(secondTab).toHaveAttribute("aria-label", expect.stringContaining("State: Incomplete"));
       fireEvent.click(secondTab);
 
-      selectListBoxValueByLabel(
+      selectDropdownValueByText(
         "Tax clearance certificate requesting agency",
-        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
+        true
       );
       fillText("Business name", "Test Name");
       fillText("Address line1", "123 Test Road");
@@ -515,16 +518,17 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     fireEvent.click(screen.getAllByRole("tab")[1]);
     expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-    await selectListBoxValueByLabel(
+    selectDropdownValueByText(
       "Tax clearance certificate requesting agency",
-      LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+      LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
+      true
     );
     fillText("Business name", "Test Name");
     fillText("Address line1", "123 Test Road");
     fillText("Address line2", "Test Line 2");
     fillText("Address city", "Baltimore");
 
-    selectComboBoxValueByText("Address state", "MD");
+    selectDropdownValueByText("Address state", "MD", false);
     fillText("Address zip code", "21210");
     fillText("Tax id", "012345678901");
     fillText("Tax pin", "1234");
@@ -553,16 +557,17 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
     fireEvent.click(screen.getAllByRole("tab")[1]);
     expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-    await selectListBoxValueByLabel(
+    selectDropdownValueByText(
       "Tax clearance certificate requesting agency",
-      LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+      LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
+      true
     );
     fillText("Business name", "Test Name");
     fillText("Address line1", "123 Test Road");
     fillText("Address line2", "Test Line 2");
     fillText("Address city", "Baltimore");
 
-    selectComboBoxValueByText("Address state", "MD");
+    selectDropdownValueByText("Address state", "MD", false);
     fillText("Address zip code", "21210");
     fillText("Tax id", "012345678901");
     fillText("Tax pin", "1234");
@@ -629,14 +634,15 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       fireEvent.click(screen.getAllByRole("tab")[1]);
       expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      await selectListBoxValueByLabel(
+      selectDropdownValueByText(
         "Tax clearance certificate requesting agency",
-        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
+        true
       );
       fillText("Address line2", "Test Line 2");
       fillText("Address city", "Baltimore");
 
-      selectComboBoxValueByText("Address state", "MD");
+      selectDropdownValueByText("Address state", "MD", false);
       fillText("Address zip code", "21210");
       fireEvent.click(screen.getAllByRole("tab")[2]);
       expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
@@ -655,14 +661,15 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       fireEvent.click(screen.getAllByRole("tab")[1]);
       expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      await selectListBoxValueByLabel(
+      selectDropdownValueByText(
         "Tax clearance certificate requesting agency",
-        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
+        true
       );
       fillText("Address line1", "123 Test Road");
       fillText("Address line2", "Test Line 2");
 
-      selectComboBoxValueByText("Address state", "MD");
+      selectDropdownValueByText("Address state", "MD", false);
       fillText("Address zip code", "21210");
       fireEvent.click(screen.getAllByRole("tab")[2]);
       expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
@@ -681,9 +688,10 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       fireEvent.click(screen.getAllByRole("tab")[1]);
       expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      await selectListBoxValueByLabel(
+      selectDropdownValueByText(
         "Tax clearance certificate requesting agency",
-        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
+        true
       );
       fillText("Address line1", "123 Test Road");
       fillText("Address line2", "Test Line 2");
@@ -706,14 +714,15 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       fireEvent.click(screen.getAllByRole("tab")[1]);
       expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      await selectListBoxValueByLabel(
+      selectDropdownValueByText(
         "Tax clearance certificate requesting agency",
-        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
+        true
       );
       fillText("Address line1", "123 Test Road");
       fillText("Address line2", "Test Line 2");
       fillText("Address city", "Baltimore");
-      selectComboBoxValueByText("Address state", "MD");
+      selectDropdownValueByText("Address state", "MD", false);
       fireEvent.click(screen.getAllByRole("tab")[2]);
       expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
 
@@ -730,14 +739,15 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       fireEvent.click(screen.getAllByRole("tab")[1]);
       expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      await selectListBoxValueByLabel(
+      selectDropdownValueByText(
         "Tax clearance certificate requesting agency",
-        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
+        true
       );
       fillText("Address line1", "123 Test Road");
       fillText("Address city", "Baltimore");
 
-      selectComboBoxValueByText("Address state", "MD");
+      selectDropdownValueByText("Address state", "MD", false);
       fillText("Address zip code", "21210");
       fireEvent.click(screen.getAllByRole("tab")[2]);
       expect(screen.getAllByRole("tab")[2]).toHaveAttribute("aria-selected", "true");
@@ -764,16 +774,17 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
       fireEvent.click(screen.getAllByRole("tab")[1]);
       expect(screen.getAllByRole("tab")[1]).toHaveAttribute("aria-selected", "true");
 
-      await selectListBoxValueByLabel(
+      selectDropdownValueByText(
         "Tax clearance certificate requesting agency",
-        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
+        LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name,
+        true
       );
       fillText("Business name", "Test Name");
       fillText("Address line1", "123 Test Road");
       fillText("Address line2", "Test Line 2");
       fillText("Address city", "Baltimore");
 
-      selectComboBoxValueByText("Address state", "MD");
+      selectDropdownValueByText("Address state", "MD", false);
       fillText("Address zip code", "21210");
       fillText("Tax id", "012345678901");
       fillText("Tax pin", "1234");
@@ -931,37 +942,5 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
   const fillText = (label: string, value: string): void => {
     fireEvent.change(screen.getByLabelText(label), { target: { value: value } });
     fireEvent.blur(screen.getByLabelText(label));
-  };
-
-  const selectComboBoxValueByText = (inputAriaLabel: string, value: string): void => {
-    fireEvent.click(screen.getByRole("combobox", { name: inputAriaLabel }));
-    expect(screen.getByRole("listbox")).toBeInTheDocument();
-    const listbox = within(screen.getByRole("listbox"));
-    fireEvent.click(listbox.getByText(value));
-  };
-
-  const selectListBoxValueByLabel = (label: string, value: string): void => {
-    expect(screen.getByLabelText(label)).toBeInTheDocument();
-    fireEvent.mouseDown(screen.getByLabelText(label));
-    expect(screen.getByRole("listbox")).toBeInTheDocument();
-    const listbox = within(screen.getByRole("listbox"));
-    fireEvent.click(listbox.getByText(value));
-  };
-
-  const selectDropdownValueByText = (
-    comboboxLabel: string,
-    selectionText: string,
-    opensOnMouseDown: boolean
-  ): void => {
-    const combobox = screen.getByRole("combobox", { name: comboboxLabel });
-    if (opensOnMouseDown) {
-      fireEvent.mouseDown(combobox);
-    } else {
-      fireEvent.click(combobox);
-    }
-
-    const listbox = screen.getByRole("listbox");
-    fireEvent.click(within(listbox).getByText(selectionText));
-    fireEvent.blur(combobox);
   };
 });
