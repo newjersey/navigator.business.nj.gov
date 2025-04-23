@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/xray_by_business_name?namepart=Test%20Business%20Three"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "soon-to-expire-xray-registration-business-name-status-response.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}
