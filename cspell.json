@@ -231,7 +231,8 @@
     "pedodontics",
     "maxillofacial",
     "MIBBPVC",
-    "psig"
+    "psig",
+    "ACORD"
   ],
   "ignorePaths": [
     "node_modules/**",
