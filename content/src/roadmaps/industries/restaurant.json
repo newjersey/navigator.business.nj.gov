@@ -56,7 +56,8 @@
     {
       "weight": 200,
       "step": 4,
-      "licenseTask": "boiler-inspection"
+      "licenseTask": "boiler-inspection",
+      "task": "boiler-inspection"
     }
   ],
   "name": "Restaurant",
