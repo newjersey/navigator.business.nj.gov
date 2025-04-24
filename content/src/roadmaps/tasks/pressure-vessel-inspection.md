@@ -7,7 +7,7 @@ summaryDescriptionMd: Your pressure vessels may need to be inspected regularly
   recently replaced, **it must be registered and inspected within 30 days**.
 urlSlug: pressure-vessel-inspection
 displayname: pressure-vessel-inspection
-name: pressure-vessel-inspection
+name: Get Your Pressure Vessel Registered and Inspected
 id: pressure-vessel-inspection
 callToActionLink: "https://www.nj.gov/labor/safetyandhealth/programs-services/b\
   oiler-pressure-vessel-compliance/index.shtml "
