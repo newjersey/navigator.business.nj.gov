@@ -39,7 +39,9 @@ Before scheduling your initial inspection, make sure that:
 
 :::callout{ showHeader="false" headerText="" showIcon="false" calloutType="note" }
 
-Call the **NJ MVC School Bus Inspection Unit** at **(609) 633-9473** to schedule an initial inspection
+Contact the **NJ MVC School Bus Inspection Unit** at **(609) 633-9473** to schedule an initial inspection
+
+
 
 :::
 
