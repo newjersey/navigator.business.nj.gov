@@ -60,7 +60,8 @@
     {
       "weight": 100,
       "step": 4,
-      "licenseTask": "boiler-inspection"
+      "licenseTask": "boiler-inspection",
+      "task": "boiler-inspection"
     }
   ],
   "name": "Healthcare",
