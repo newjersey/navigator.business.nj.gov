@@ -81,4 +81,10 @@ You need to update your registration if your facility changes:
 
   :::
 
-  If you have questions about RMW registration, send an email to mebinfo@dep.nj.gov. Or you can call (609) 292-7081 and select option 3.
+  If you have questions about RMW registration, send an email to mebinfo@dep.nj.gov. Or you can call (609) 292-7081 and select option 3. 
+
+  :::callout{ showHeader="true" headerText="What if I don’t register? " showIcon="false" calloutType="warning" }
+
+  If your business generates RMW without a registration, you may face penalties.
+
+  :::
