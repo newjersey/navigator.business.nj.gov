@@ -28,7 +28,7 @@ You need to update your registration if your facility changes:
 
 ## Business Location and Registration Details
 
-* If you have one business in one location:  
+* If you have **one business** in **one location**:  
 
   Submit one registration
 
@@ -46,7 +46,7 @@ You need to update your registration if your facility changes:
 
 * If you have more than one business:  
 
- Submit one registration for each business  
+  Submit one registration for each business  
 
 
 
