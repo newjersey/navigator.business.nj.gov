@@ -20,3 +20,45 @@ There is only one report form. You must either submit:
 * The full report
 
 :::
+
+
+
+How much RMW your facility generates during the reporting period determines what information you need to submit. The reporting period is between June 22 of last year and June 21 of this year.
+
+
+
+## Annual Exemption Claim Requirements 
+
+If your business generated **200 pounds or less** of RMW during the reporting period, make an exemption claim. To make the exemption claim, answer the question “Did your facility generate more than 200lbs of medical waste during this reporting period?” in the report form. Complete other sections of the report with the following information:
+
+
+
+* RMW generator name or RMW generator ID number (issued by the NJDEP RMW 
+* Registration Unit) 
+* Contact information of the person who can answer questions about the report (does not have to be the person submitting the report)
+
+
+
+## Annual Report Requirements 
+
+If your business generated **more than 200 pounds** of RMW during the reporting period, submit a full report. Include the following information: 
+
+ 
+
+* RMW generator name or RMW generator ID number (issued by the NJDEP RMW Registration Unit)
+* Contact information of the person who can answer questions about the report (does not have to be the person submitting the report)
+* Total weight (in pounds) of each type of RMW generated during the reporting period 
+* Name or ID number of every transporter who took your RMW during the reporting period
+* Classes of RMW taken by each transporter
+* Name and address of every intermediate handler and destination facility
+* The amount (in pounds) of each type of RMW sent to each facility 
+* Whether RMW was shipped off-site for treatment, destruction, or disposal 
+* How each type of RMW (in pounds) was treated, destroyed, or discarded if done at your facility 
+
+ 
+
+
+
+
+
+If you have questions about the RMW annual report, email RMWgeneratorannualreports@dep.nj.gov. Or call (609) 292-7081 and select option 4.
