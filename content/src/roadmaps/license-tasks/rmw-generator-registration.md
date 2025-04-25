@@ -88,3 +88,9 @@ You need to update your registration if your facility changes:
   If your business generates RMW without a registration, you may face penalties.
 
   :::
+
+  :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+
+   A RMW generator ID number.
+
+  :::
