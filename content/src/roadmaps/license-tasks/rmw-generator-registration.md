@@ -13,20 +13,45 @@ industryId:
 callToActionText: Submit My RMW Registration Form
 callToActionLink: https://dep.nj.gov/medwaste/rmwreg/
 ---
-
-
 You need a new registration if your facility: 
 
 * Is registering for the first time 
 * Moves to another address 
 * Changes tax ID<insert contextual information> number  
 
-
-
 You need to update your registration if your facility changes: 
 
-*  Any address, such as facility address, owner address, or billing address 
+* Any address, such as facility address, owner address, or billing address 
 * Fees/billing contact information 
 * Business names (but keeps the same tax ID number) 
+* The amount of medical waste it generates, putting your business in a different category
 
-The amount of medical waste it generates, putting your business in a different category
+## Business Location and Registration Details
+
+* If you have one business in one location:  
+
+  Submit one registration
+
+
+
+
+
+* If you have one business in multiple locations: 
+
+  Submit one registration for each location
+
+
+
+
+
+* If you have more than one business:  
+
+ Submit one registration for each business  
+
+
+
+
+
+* If you have one business in different buildings connected by private roads (for example, a campus with no public roads between buildings):  
+
+   Submit one registration
