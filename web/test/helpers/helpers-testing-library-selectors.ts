@@ -25,6 +25,23 @@ export const selectDropdownByValue = (label: string, value: string): void => {
   fireEvent.click(listbox.getByTestId(value));
 };
 
+export const selectDropdownValueByText = (
+  comboboxLabel: string,
+  selectionText: string,
+  opensOnMouseDown: boolean
+): void => {
+  const combobox = screen.getByRole("combobox", { name: comboboxLabel });
+  if (opensOnMouseDown) {
+    fireEvent.mouseDown(combobox);
+  } else {
+    fireEvent.click(combobox);
+  }
+
+  const listbox = screen.getByRole("listbox");
+  fireEvent.click(within(listbox).getByText(selectionText));
+  fireEvent.blur(combobox);
+};
+
 type Query = (f: MatcherFunction) => HTMLElement;
 
 export const withMarkup = (query: Query) => {

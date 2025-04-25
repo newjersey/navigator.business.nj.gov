@@ -1,9 +1,10 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
+import { TaxClearanceCertificateDataContext } from "@/contexts/taxClearanceCertificateDataContext";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { StateObject, arrayOfStateObjects as states } from "@businessnjgovnavigator/shared/";
 import { Autocomplete, TextField, createFilterOptions } from "@mui/material";
-import { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
+import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
 
 interface Props {
   value: string | undefined;
@@ -24,9 +25,18 @@ interface Props {
 
 export const StateDropdown = (props: Props): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
+  const { state: taxClearanceCertificateData, setTaxClearanceCertificateData } = useContext(
+    TaxClearanceCertificateDataContext
+  );
 
   const handleOnChange = (event: ChangeEvent<unknown>, value: StateObject | null): void => {
     props.onSelect(value || undefined);
+    if (taxClearanceCertificateData !== undefined) {
+      setTaxClearanceCertificateData({
+        ...taxClearanceCertificateData,
+        addressState: value || undefined,
+      });
+    }
   };
 
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {

@@ -7,12 +7,16 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { TaxClearanceCertificateDataContext } from "@/contexts/taxClearanceCertificateDataContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { AnytimeActionLicenseReinstatement, AnytimeActionTask, StepperStep } from "@/lib/types/types";
-import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { emptyTaxClearanceCertificateData, LookupMunicipalityByName } from "@businessnjgovnavigator/shared";
+import { AnytimeActionLicenseReinstatement, AnytimeActionTask } from "@/lib/types/types";
+import { getFlow, scrollToTop, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import {
+  emptyTaxClearanceCertificateData,
+  LookupMunicipalityByName,
+  TaxClearanceCertificateData,
+} from "@businessnjgovnavigator/shared";
 import { emptyFormationAddressData, FormationAddress } from "@businessnjgovnavigator/shared/formationData";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 
 interface Props {
   anytimeAction: AnytimeActionLicenseReinstatement | AnytimeActionTask;
@@ -22,19 +26,22 @@ interface Props {
 
 const Config = getMergedConfig();
 
-const initialTaxClearanceCertificateSteps = (): StepperStep[] => [
-  { name: Config.taxClearanceCertificateShared.stepperOneLabel, hasError: false, isComplete: false },
-  { name: Config.taxClearanceCertificateShared.stepperTwoLabel, hasError: false, isComplete: false },
-  { name: Config.taxClearanceCertificateShared.stepperThreeLabel, hasError: false, isComplete: false },
-];
+const allFieldsNonEmpty = (taxClearanceCertificateData: TaxClearanceCertificateData): boolean => {
+  return (
+    (taxClearanceCertificateData.requestingAgencyId ?? "").trim() !== "" &&
+    (taxClearanceCertificateData.businessName ?? "").trim() !== "" &&
+    (taxClearanceCertificateData.addressLine1 ?? "").trim() !== "" &&
+    (taxClearanceCertificateData.addressCity ?? "").trim() !== "" &&
+    taxClearanceCertificateData.addressState !== undefined &&
+    (taxClearanceCertificateData.addressZipCode ?? "").trim() !== "" &&
+    (taxClearanceCertificateData.taxId ?? "").trim() !== "" &&
+    (taxClearanceCertificateData.taxPin ?? "").trim() !== ""
+  );
+};
 
 export const AnytimeActionTaxClearanceCertificateElement = (props: Props): ReactElement => {
   const { business, updateQueue } = useUserData();
   const [stepIndex, setStepIndex] = useState(props.CMS_ONLY_stepIndex ?? 0);
-  const [stateTaxClearanceCertificateSteps, setStateTaxClearanceCertificateSteps] = useState(
-    initialTaxClearanceCertificateSteps()
-  );
-
   const [taxClearanceCertificateData, setTaxClearanceCertificateData] = useState(
     emptyTaxClearanceCertificateData
   );
@@ -95,6 +102,14 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
       setTaxClearanceCertificateData({
         ...taxClearanceCertificateData,
         requestingAgencyId: newRequestingAgencyId,
+        businessName: newBusinessName,
+        taxId: newTaxId,
+        taxPin: newTaxPin,
+        addressLine1: newAddressLine1,
+        addressLine2: newAddressLine2,
+        addressCity: newAddressCity,
+        addressState: newAddressState,
+        addressZipCode: newAddressZipCode,
       });
 
       setProfileData({
@@ -106,6 +121,7 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
 
       setAddressData({
         ...formationAddressData,
+        businessLocationType: business?.formationData.formationFormData.businessLocationType,
         addressLine1: newAddressLine1,
         addressLine2: newAddressLine2,
         addressCity: newAddressCity,
@@ -115,54 +131,61 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
     }
   }, business);
 
-  // TODO: intentionally left since we are picking up next error handling functionality
-  // const { errorMap: taxClearanceFieldErrorMap, FormContext: TaxClearanceCertificateFormContext } =
-  //   useDynamicFormContext(taxClearanceCertificateFields);
-  // const { state: dataFormContextState } = useFormContextHelper(taxClearanceFieldErrorMap);
-  // const {
-  //   // FormFuncWrapper,
-  //   // onSubmit,
-  //   // tab: profileTab,
-  //   // onTabChange: setProfileTab,
-  //   state: dataFormContextState,
-  //   // getInvalidFieldIds,
+  const {
+    FormFuncWrapper,
+    isValid,
+    getInvalidFieldIds,
+    onSubmit,
+    state: formContextState,
+  } = useFormContextHelper(createDataFormErrorMap());
 
-  const { state: dataFormContextState } = useFormContextHelper(createDataFormErrorMap());
+  FormFuncWrapper(
+    async (): Promise<void> => {
+      if (!business || !isValid()) {
+        scrollToTop();
+        return;
+      }
+      scrollToTop();
+    },
+    () => {}
+  );
 
-  const updateSteps = (step: number): void => {
-    const steps = initialTaxClearanceCertificateSteps();
-    step === 0 ? (steps[0].isComplete = false) : (steps[0].isComplete = true);
-    step === 2 ? (steps[1].isComplete = true) : (steps[1].isComplete = false);
-
-    setStateTaxClearanceCertificateSteps(steps);
-  };
-
-  useEffect(() => {
-    updateSteps(stepIndex);
-  }, [stepIndex]);
+  const taxClearanceCertificateSteps = [
+    {
+      name: Config.taxClearanceCertificateShared.stepperOneLabel,
+      hasError: false,
+      isComplete: stepIndex > 0,
+    },
+    {
+      name: Config.taxClearanceCertificateShared.stepperTwoLabel,
+      hasError: false,
+      isComplete: isValid() && allFieldsNonEmpty(taxClearanceCertificateData),
+    },
+    { name: Config.taxClearanceCertificateShared.stepperThreeLabel, hasError: false, isComplete: false },
+  ];
 
   return (
-    <DataFormErrorMapContext.Provider value={dataFormContextState}>
-      <AddressContext.Provider
+    <DataFormErrorMapContext.Provider value={formContextState}>
+      <TaxClearanceCertificateDataContext.Provider
         value={{
-          state: { formationAddressData },
-          setAddressData,
+          state: taxClearanceCertificateData,
+          setTaxClearanceCertificateData,
         }}
       >
-        <TaxClearanceCertificateDataContext.Provider
+        <ProfileDataContext.Provider
           value={{
-            state: taxClearanceCertificateData,
-            setTaxClearanceCertificateData,
+            state: {
+              profileData: profileData,
+              flow: getFlow(profileData),
+            },
+            setProfileData,
+            onBack: (): void => {},
           }}
         >
-          <ProfileDataContext.Provider
+          <AddressContext.Provider
             value={{
-              state: {
-                profileData: profileData,
-                flow: getFlow(profileData),
-              },
-              setProfileData,
-              onBack: (): void => {},
+              state: { formationAddressData },
+              setAddressData,
             }}
           >
             <div className="min-height-38rem">
@@ -172,17 +195,20 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
                 </div>
               </div>
               <TaxClearanceSteps
-                steps={stateTaxClearanceCertificateSteps}
+                steps={taxClearanceCertificateSteps}
                 certificatePdfBlob={props.CMS_ONLY_certificatePdfBlob}
                 currentStep={stepIndex}
                 stepIndex={setStepIndex}
                 saveTaxClearanceCertificateData={saveTaxClearanceCertificateData}
                 setStepIndex={setStepIndex}
+                isValid={isValid}
+                getInvalidFieldIds={getInvalidFieldIds}
+                onSubmit={onSubmit}
               />
             </div>
-          </ProfileDataContext.Provider>
-        </TaxClearanceCertificateDataContext.Provider>
-      </AddressContext.Provider>
+          </AddressContext.Provider>
+        </ProfileDataContext.Provider>
+      </TaxClearanceCertificateDataContext.Provider>
     </DataFormErrorMapContext.Provider>
   );
 };

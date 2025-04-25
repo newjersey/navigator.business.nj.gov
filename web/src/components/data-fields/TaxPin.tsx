@@ -9,6 +9,7 @@ interface Props {
   children?: ReactNode;
   handleChangeOverride?: (value: string) => void;
   inputWidth?: "full" | "default" | "reduced";
+  required?: boolean;
 }
 
 export const TaxPin = (props: Props): ReactElement => {
@@ -31,6 +32,7 @@ export const TaxPin = (props: Props): ReactElement => {
         minLength={4}
         validationText={contentFromConfig.errorTextRequired}
         handleChange={props.handleChangeOverride}
+        required={props.required}
       />
       {props.children}
     </>

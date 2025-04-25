@@ -1,10 +1,11 @@
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
+import { AnytimeActionTaxClearanceCertificateElementAlert } from "@/components/tasks/anytime-action/tax-clearance-certificate/AnytimeActionTaxClearanceCertificateElementAlert";
 import { CheckEligibility } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/CheckEligibility";
 import { Download } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Download";
 import { Requirements } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Requirements";
 import { Review } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Review";
 import { StepperStep } from "@/lib/types/types";
-import { ReactElement, useState } from "react";
+import { FormEvent, ReactElement, useState } from "react";
 
 interface Props {
   steps: StepperStep[];
@@ -13,6 +14,9 @@ interface Props {
   stepIndex: (value: ((prevState: number) => number) | number) => void;
   saveTaxClearanceCertificateData: () => void;
   setStepIndex: (step: number) => void;
+  isValid: () => boolean;
+  getInvalidFieldIds: () => string[];
+  onSubmit: (event?: FormEvent<HTMLFormElement>) => void;
 }
 
 export const TaxClearanceSteps = (props: Props): ReactElement => {
@@ -27,18 +31,35 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
     props.setStepIndex(step);
   };
 
+  const onSave = (): void => {
+    props.saveTaxClearanceCertificateData();
+    if (props.isValid()) {
+      props.setStepIndex(2);
+    }
+  };
+
   const steps: { component: ReactElement }[] = [
     { component: <Requirements setStepIndex={props.stepIndex} /> },
     {
       component: (
-        <CheckEligibility
-          setStepIndex={props.stepIndex}
-          saveTaxClearanceCertificateData={props.saveTaxClearanceCertificateData}
-        />
+        <>
+          <AnytimeActionTaxClearanceCertificateElementAlert fieldErrors={props.getInvalidFieldIds()} />
+          <CheckEligibility
+            setStepIndex={props.stepIndex}
+            onSave={onSave}
+            onSubmit={props.onSubmit}
+            saveTaxClearanceCertificateData={props.saveTaxClearanceCertificateData}
+          />
+        </>
       ),
     },
     {
-      component: <Review setStepIndex={props.stepIndex} setCertificatePdfBlob={setCertificatePdfBlob} />,
+      component: (
+        <>
+          <AnytimeActionTaxClearanceCertificateElementAlert fieldErrors={props.getInvalidFieldIds()} />
+          <Review setStepIndex={props.stepIndex} setCertificatePdfBlob={setCertificatePdfBlob} />{" "}
+        </>
+      ),
     },
   ];
 

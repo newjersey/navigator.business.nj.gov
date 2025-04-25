@@ -78,18 +78,28 @@ export const getErrorStateForAddressField = ({
 
   if (field === "addressLine1") {
     const maxLengthError = fieldWithMaxLength({ required: false, maxLen: BUSINESS_ADDRESS_LINE_1_MAX_CHAR });
-
-    const partialAddressError = fieldWithAssociatedFields({
-      associatedFields: [
-        "addressMunicipality",
-        "addressZipCode",
-        "addressLine2",
-        "addressCity",
-        "addressProvince",
-        "addressCountry",
-      ],
-      label: (Config.formation.fields as any)[field].error,
-    });
+    let partialAddressError;
+    if (
+      formationAddressData.businessLocationType === "NJ" ||
+      formationAddressData.businessLocationType === "INTL"
+    ) {
+      partialAddressError = fieldWithAssociatedFields({
+        associatedFields: [
+          "addressMunicipality",
+          "addressZipCode",
+          "addressLine2",
+          "addressCity",
+          "addressProvince",
+          "addressCountry",
+        ],
+        label: (Config.formation.fields as any)[field].error,
+      });
+    } else {
+      partialAddressError = fieldWithAssociatedFields({
+        associatedFields: ["addressState", "addressZipCode", "addressLine2", "addressCity", "addressCountry"],
+        label: (Config.formation.fields as any)[field].error,
+      });
+    }
 
     return combineErrorStates({ firstPriority: maxLengthError, secondPriority: partialAddressError });
   }
@@ -122,6 +132,7 @@ export const getErrorStateForAddressField = ({
     return fieldWithAssociatedFields({
       associatedFields: [
         "addressLine1",
+        "addressState",
         "addressProvince",
         "addressCountry",
         "addressZipCode",
@@ -167,10 +178,21 @@ export const getErrorStateForAddressField = ({
         ? (Config.formation.fields as any)[field].error
         : (Config.formation.fields as any)[field].foreign.errorUS;
 
-    const partialAddressError = fieldWithAssociatedFields({
-      associatedFields: ["addressMunicipality", "addressLine1", "addressLine2"],
-      label: zipCodeErrorLabel,
-    });
+    let partialAddressError;
+    if (
+      formationAddressData.businessLocationType === "NJ" ||
+      formationAddressData.businessLocationType === "INTL"
+    ) {
+      partialAddressError = fieldWithAssociatedFields({
+        associatedFields: ["addressMunicipality", "addressCity", "addressLine1", "addressLine2"],
+        label: zipCodeErrorLabel,
+      });
+    } else {
+      partialAddressError = fieldWithAssociatedFields({
+        associatedFields: ["addressState", "addressCity", "addressLine1", "addressLine2"],
+        label: zipCodeErrorLabel,
+      });
+    }
 
     const inRangeError = {
       ...errorState,

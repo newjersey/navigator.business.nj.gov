@@ -1,6 +1,7 @@
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
 import { DataFormErrorMapContext } from "@/contexts/dataFormErrorMapContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { TaxClearanceCertificateDataContext } from "@/contexts/taxClearanceCertificateDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileContentField } from "@/lib/types/types";
@@ -13,6 +14,7 @@ export interface ProfileDataFieldProps<T = unknown> extends Omit<GenericTextFiel
   inputProps?: OutlinedInputProps;
   type?: HTMLInputTypeAttribute;
   inputWidth?: "full" | "default" | "reduced" | undefined;
+  required?: boolean;
 }
 
 export const ProfileDataField = <T,>({
@@ -21,6 +23,9 @@ export const ProfileDataField = <T,>({
   ...props
 }: ProfileDataFieldProps<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
+  const { state: taxClearanceCertificateData, setTaxClearanceCertificateData } = useContext(
+    TaxClearanceCertificateDataContext
+  );
 
   const { Config } = useConfig();
 
@@ -31,6 +36,13 @@ export const ProfileDataField = <T,>({
   });
 
   const handleChange = (value: string): void => {
+    if (taxClearanceCertificateData !== undefined) {
+      setTaxClearanceCertificateData({
+        ...taxClearanceCertificateData,
+        [fieldName]: value,
+      });
+    }
+
     if (props.handleChange) {
       props.handleChange(value);
       return;
@@ -48,6 +60,7 @@ export const ProfileDataField = <T,>({
         value={state.profileData[fieldName] as string | undefined}
         formContext={DataFormErrorMapContext}
         fieldName={fieldName as string}
+        required={props.required}
         {...props}
         validationText={props.validationText ?? contentFromConfig.errorTextRequired ?? ""}
         handleChange={handleChange}
