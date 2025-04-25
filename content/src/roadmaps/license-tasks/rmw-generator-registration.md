@@ -91,6 +91,6 @@ You need to update your registration if your facility changes:
 
   :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
-   A RMW generator ID number.
+   A RMW generator ID number, sent to your email address.
 
   :::
