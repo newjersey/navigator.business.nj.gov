@@ -61,4 +61,14 @@ If your business generated **more than 200 pounds** of RMW during the reporting 
 
 
 
-If you have questions about the RMW annual report, email RMWgeneratorannualreports@dep.nj.gov. Or call (609) 292-7081 and select option 4.
+If you have questions about the RMW annual report, email RMWgeneratorannualreports@dep.nj.gov. Or call (609) 292-7081 and select option 4. 
+
+
+
+ 
+
+:::callout{ showHeader="true" headerText="What if I don’t submit an exemption claim or annual report? " showIcon="false" calloutType="warning" }
+
+If you don’t submit an exemption claim or annual report, you may receive significant fines and penalties.
+
+:::
