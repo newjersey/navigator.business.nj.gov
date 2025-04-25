@@ -93,6 +93,7 @@ import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
 import { ReactElement, ReactNode, useContext, useRef, useState } from "react";
+import {sendChangedNonEssentialQuestionAnalytics} from "@/lib/domain-logic/sendChangedNonEssentialQuestionAnalytics";
 
 interface Props {
   municipalities: Municipality[];
@@ -249,6 +250,8 @@ const ProfilePage = (props: Props): ReactElement => {
     if (prevProfileData.dateOfFormation !== newProfileData.dateOfFormation) {
       analytics.event.profile_formation_date.submit.formation_date_changed();
     }
+
+    sendChangedNonEssentialQuestionAnalytics(prevProfileData.nonEssentialRadioAnswers, newProfileData.nonEssentialRadioAnswers);
 
     const municipalityEnteredForFirstTime =
       prevProfileData.municipality === undefined && newProfileData.municipality !== undefined;

@@ -28,6 +28,7 @@ import {
   randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
 
+import { useMockIntersectionObserver } from "@/test/mock/mockIntersectionObserver";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { industryIdsWithSingleRequiredEssentialQuestion } from "@/test/pages/onboarding/helpers-onboarding";
 import {
@@ -57,6 +58,7 @@ describe("profile-foreign", () => {
     jest.resetAllMocks();
     useMockRouter({});
     useMockRoadmap({});
+    useMockIntersectionObserver();
     setupStatefulUserDataContext();
     setupBusiness = generateBusinessForProfile({
       profileData: generateProfileData({ businessPersona: "FOREIGN" }),

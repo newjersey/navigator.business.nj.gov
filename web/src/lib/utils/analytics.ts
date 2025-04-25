@@ -37,7 +37,9 @@ type EventType =
   | "tax_clearance_switch_step"
   | "tax_clearance_validation_error"
   | "tax_clearance_validation_success"
-  | "tool_tip_mouseover";
+  | "tool_tip_mouseover"
+  | "submit_non_essential_question"
+  | "view_non_essential_question";
 
 const eventMap: Record<EventType, string> = {
   account_clicks: "account_clicks",
@@ -65,6 +67,8 @@ const eventMap: Record<EventType, string> = {
   tax_clearance_validation_error: "tax_clearance_validation_error",
   tax_clearance_validation_success: "tax_clearance_validation_success",
   tool_tip_mouseover: "tool_tip_mouseover",
+  submit_non_essential_question: "submit_non_essential_question",
+  view_non_essential_question: "view_non_essential_question",
 };
 
 type ParameterType =
@@ -393,6 +397,7 @@ interface GTMUserData {
   naics_code?: string;
   current_phase?: string | null;
   sub_persona?: string;
+  non_essential_question_viewed?: string;
 }
 
 export class DimensionQueueFactory {
@@ -446,6 +451,10 @@ export class DimensionQueueFactory {
 
   naicsCode(naics_code: string) {
     return this.queue({ naics_code: naics_code.length > 0 ? naics_code : undefined });
+  }
+
+  nonEssentialQuestionViewed(non_essential_question_viewed?: string) {
+    return this.queue({ non_essential_question_viewed });
   }
 
   phase(current_phase: string | null, calendar_view: "NONE" | "LIST" | "FULL") {
@@ -1086,6 +1095,15 @@ export default {
             clicked_to,
             click_text: click_text as ClickText,
             on_tab_name,
+          });
+        },
+      },
+    },
+    non_essential_question: {
+      viewed: {
+        view_non_essential_question: (nonEssentialQuestion: string) => {
+          eventRunner.track({
+            event: "view_non_essential_question",
           });
         },
       },

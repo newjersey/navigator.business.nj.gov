@@ -45,10 +45,13 @@ export const setABExperienceDimension = (
   return updateQueue;
 };
 
-export const setPhaseDimension = (
-  value: OperatingPhaseId,
-  queue = false,
-): DimensionQueueFactory => {
+export const setNonEssentialQuestionViewedDimension = (value: string, queue = false): DimensionQueueFactory => {
+  const updateQueue = analytics.dimensions.nonEssentialQuestionViewed(value);
+  !queue && updateQueue.update();
+  return updateQueue;
+};
+
+export const setPhaseDimension = (value: OperatingPhaseId, queue = false): DimensionQueueFactory => {
   const phase = LookupOperatingPhaseById(value);
   const updateQueue = analytics.dimensions.phase(
     getPhaseDimension(value),

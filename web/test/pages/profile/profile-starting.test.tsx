@@ -58,6 +58,7 @@ import {
   BUSINESS_ADDRESS_LINE_1_MAX_CHAR,
   BUSINESS_ADDRESS_LINE_2_MAX_CHAR,
 } from "@/lib/utils/formation-helpers";
+import { useMockIntersectionObserver } from "@/test/mock/mockIntersectionObserver";
 import {
   chooseRadio,
   chooseTab,
@@ -116,6 +117,7 @@ describe("profile - starting business", () => {
     useMockRoadmap({});
     setupStatefulUserDataContext();
     useMockDocuments({});
+    useMockIntersectionObserver();
     mockApi.postGetAnnualFilings.mockImplementation((userData) => {
       return Promise.resolve(userData);
     });

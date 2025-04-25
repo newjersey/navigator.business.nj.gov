@@ -1,5 +1,6 @@
 import { IndustryBasedNonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/IndustryBasedNonEssentialQuestionsSection";
 import * as GetNonEssentialQuestionTextModule from "@/lib/domain-logic/getNonEssentialQuestionText";
+import { useMockIntersectionObserver } from "@/test/mock/mockIntersectionObserver";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { ProfileData } from "@businessnjgovnavigator/shared";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
@@ -42,7 +43,9 @@ const mockGetNonEssentialQuestionText = (
 ).getNonEssentialQuestionText;
 
 describe("ProfileNonEssentialQuestionsSection", () => {
-  const renderComponent = (profileData: Partial<ProfileData>): void => {
+  useMockIntersectionObserver();
+
+const renderComponent = (profileData: Partial<ProfileData>): void => {
     render(
       <WithStatefulProfileData
         initialData={generateProfileData({
