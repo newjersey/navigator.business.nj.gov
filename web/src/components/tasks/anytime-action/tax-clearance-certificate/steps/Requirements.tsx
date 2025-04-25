@@ -10,7 +10,7 @@ import { ReactElement } from "react";
 interface Props {
   setStepIndex: (step: number) => void;
 }
-export const TaxClearanceStepOne = (props: Props): ReactElement => {
+export const Requirements = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   return (

@@ -1,5 +1,4 @@
 import { Heading } from "@/components/njwds-extended/Heading";
-import { TaxClearanceDownload } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceDownload";
 import { TaxClearanceSteps } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceSteps";
 import { AddressContext } from "@/contexts/addressContext";
 import { getMergedConfig } from "@/contexts/configContext";
@@ -41,9 +40,6 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
   );
   const [formationAddressData, setAddressData] = useState<FormationAddress>(emptyFormationAddressData);
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
-  const [certificatePdfBlob, setCertificatePdfBlob] = useState<Blob | undefined>(
-    props.CMS_ONLY_certificatePdfBlob || undefined
-  );
 
   const saveTaxClearanceCertificateData = (): void => {
     const newTaxClearanceCertificateData = {
@@ -175,21 +171,14 @@ export const AnytimeActionTaxClearanceCertificateElement = (props: Props): React
                   <Heading level={1}>{props.anytimeAction.name}</Heading>
                 </div>
               </div>
-              {certificatePdfBlob ? (
-                <TaxClearanceDownload
-                  certificatePdfBlob={certificatePdfBlob}
-                  downloadFilename={`Tax Clearance Certificate - ${Date.now()}`}
-                />
-              ) : (
-                <TaxClearanceSteps
-                  steps={stateTaxClearanceCertificateSteps}
-                  currentStep={stepIndex}
-                  stepIndex={setStepIndex}
-                  saveTaxClearanceCertificateData={saveTaxClearanceCertificateData}
-                  setCertificatePdfBlob={setCertificatePdfBlob}
-                  setStepIndex={setStepIndex}
-                />
-              )}
+              <TaxClearanceSteps
+                steps={stateTaxClearanceCertificateSteps}
+                certificatePdfBlob={props.CMS_ONLY_certificatePdfBlob}
+                currentStep={stepIndex}
+                stepIndex={setStepIndex}
+                saveTaxClearanceCertificateData={saveTaxClearanceCertificateData}
+                setStepIndex={setStepIndex}
+              />
             </div>
           </ProfileDataContext.Provider>
         </TaxClearanceCertificateDataContext.Provider>
