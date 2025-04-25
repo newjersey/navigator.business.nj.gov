@@ -36,7 +36,7 @@ You need to update your registration if your facility changes:
 
 
 
-* If you have one business in multiple locations: 
+* If you have **one business** in **multiple locations**: 
 
   Submit one registration for each location
 
@@ -44,7 +44,7 @@ You need to update your registration if your facility changes:
 
 
 
-* If you have more than one business:  
+* If you have **more than one business**:  
 
   Submit one registration for each business  
 
@@ -52,6 +52,26 @@ You need to update your registration if your facility changes:
 
 
 
-* If you have one business in different buildings connected by private roads (for example, a campus with no public roads between buildings):  
+* If you have **one business** in **different buildings connected by private roads** (for example, a campus with no public roads between buildings):  
 
    Submit one registration
+
+
+
+##  Registration Requirements 
+
+* Facility name 
+* Facility address 
+* Billing address 
+* Owner/operator address 
+* NAICS code <insert contextual information>
+* Tax ID number
+* Type of business 
+* Estimated pounds of medical waste your business will generate each year 
+* Medical waste category number (based on the estimated pounds of medical waste generated each year) 
+* Name of person submitting the form 
+* Contact name 
+* Contact email address 
+* Registration number, if you are updating your registration
+* Applicable fees paid
+*
