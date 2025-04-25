@@ -11,6 +11,7 @@ summaryDescriptionMd: If your business generates Regulated Medical Waste (RMW),
   registered as a RMW Generator.
 industryId:
   - acupuncture
+agencyId: njdep
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
 
@@ -70,5 +71,13 @@ If you have questions about the RMW annual report, email RMWgeneratorannualrepor
 :::callout{ showHeader="true" headerText="What if I don’t submit an exemption claim or annual report? " showIcon="false" calloutType="warning" }
 
 If you don’t submit an exemption claim or annual report, you may receive significant fines and penalties.
+
+:::
+
+
+
+:::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+
+A filed exemption claim or annual report. You will receive confirmation by email and on the online portal.
 
 :::
