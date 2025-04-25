@@ -11,6 +11,8 @@ summaryDescriptionMd: If your business generates Regulated Medical Waste (RMW),
   registered as a RMW Generator.
 industryId:
   - acupuncture
+callToActionText: "Submit My RMW Exemption Claim "
+callToActionLink: https://dep.nj.gov/wp-content/uploads/dshw/regulated-medical-waste/rmw_annual_generator_reports_ins.pdf
 agencyId: njdep
 ---
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="informational" }
