@@ -1,7 +1,6 @@
 import { Content } from "@/components/Content";
 import { UnitesStatesAddress } from "@/components/data-fields/address/UnitesStatesAddress";
 import { BusinessName } from "@/components/data-fields/BusinessName";
-import { EntityId } from "@/components/data-fields/EntityId";
 import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { TaxClearanceCertificateAgencyDropdown } from "@/components/data-fields/TaxClearanceCertificateAgencyDropdown";
 import { TaxPin } from "@/components/data-fields/TaxPin";
@@ -49,9 +48,6 @@ export const CheckEligibility = (props: Props): ReactElement => {
           <FieldLabelProfile fieldName={"businessName"} />
           <BusinessName inputWidth="full" />
         </div>
-        <FieldLabelProfile fieldName={"entityId"} />
-        <EntityId inputWidth="full" />
-
         <div className="margin-y-2">
           <UnitesStatesAddress excludeNJ={false} onValidation={() => {}} isFullWidth />
         </div>
