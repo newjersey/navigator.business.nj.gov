@@ -14,6 +14,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { useMockIntersectionObserver } from "@/test/mock/mockIntersectionObserver";
 import {
   chooseTab,
   clickSave,
@@ -38,6 +39,7 @@ describe("profile - guest mode", () => {
     setShowNeedsAccountModal = jest.fn();
     useMockRouter({});
     useMockRoadmap({});
+    useMockIntersectionObserver();
     setupStatefulUserDataContext();
   });
 

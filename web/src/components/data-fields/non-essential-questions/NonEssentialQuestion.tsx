@@ -3,7 +3,10 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNonEssentialQuestionText } from "@/lib/domain-logic/getNonEssentialQuestionText";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
+import React, {ReactElement, useContext, useEffect, useRef, useState} from "react";
+import {useIntersectionOnElement} from "@/lib/utils/useIntersectionOnElement";
+import analytics from "@/lib/utils/analytics";
+import {setNonEssentialQuestionViewedDimension} from "@/lib/utils/analytics-helpers";
 
 interface Props {
   essentialQuestionId: string;
@@ -13,6 +16,9 @@ export const NonEssentialQuestion = (props: Props): ReactElement => {
   const nonEssentialQuestionText = getNonEssentialQuestionText(props.essentialQuestionId);
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+  const nonEssentialQuestion = useRef(null);
+  const [hasBeenSeen, setHasBeenSeen] = useState(false);
+  const nonEssentialQuestionInViewPort = useIntersectionOnElement(nonEssentialQuestion, "-50px");
 
   const handleChange = (event: React.ChangeEvent<{ name?: string; value: string }>): void => {
     setProfileData({
@@ -24,10 +30,24 @@ export const NonEssentialQuestion = (props: Props): ReactElement => {
     });
   };
 
+  useEffect(() => {
+    if (!(nonEssentialQuestionInViewPort && !hasBeenSeen)) {
+      return;
+    }
+
+    if (nonEssentialQuestionText) {
+      setNonEssentialQuestionViewedDimension(nonEssentialQuestionText);
+      analytics.event.non_essential_question.viewed.view_non_essential_question(nonEssentialQuestionText);
+    }
+    setHasBeenSeen(true)
+  }, [nonEssentialQuestionInViewPort, hasBeenSeen, nonEssentialQuestionText]);
+
+
   return (
     <>
       {nonEssentialQuestionText && (
         <>
+        <section ref={nonEssentialQuestion}>
           <div className={"margin-top-2"}>
             <div className={"text-bold"}>
               <Content>{nonEssentialQuestionText}</Content>
@@ -63,6 +83,7 @@ export const NonEssentialQuestion = (props: Props): ReactElement => {
               />
             </RadioGroup>
           </FormControl>
+        </section>
         </>
       )}
     </>

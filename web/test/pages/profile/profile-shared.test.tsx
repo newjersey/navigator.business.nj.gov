@@ -39,6 +39,7 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { useMockIntersectionObserver } from "@/test/mock/mockIntersectionObserver";
 import {
   chooseTab,
   clickSave,
@@ -116,6 +117,7 @@ describe("profile - shared", () => {
     useMockRoadmap({});
     setupStatefulUserDataContext();
     useMockDocuments({});
+    useMockIntersectionObserver();
     mockApi.postGetAnnualFilings.mockImplementation((userData) => {
       return Promise.resolve(userData);
     });

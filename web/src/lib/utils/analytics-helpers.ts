@@ -38,6 +38,12 @@ export const setABExperienceDimension = (value: ABExperience, queue = false): Di
   return updateQueue;
 };
 
+export const setNonEssentialQuestionViewedDimension = (value: string, queue = false): DimensionQueueFactory => {
+  const updateQueue = analytics.dimensions.nonEssentialQuestionViewed(value);
+  !queue && updateQueue.update();
+  return updateQueue;
+};
+
 export const setPhaseDimension = (value: OperatingPhaseId, queue = false): DimensionQueueFactory => {
   const phase = LookupOperatingPhaseById(value);
   const updateQueue = analytics.dimensions.phase(getPhaseDimension(value), phase.displayCalendarType);

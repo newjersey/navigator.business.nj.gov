@@ -1,13 +1,33 @@
 import { NonEssentialQuestion } from "@/components/data-fields/non-essential-questions/NonEssentialQuestion";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as GetNonEssentialQuestionTextModule from "@/lib/domain-logic/getNonEssentialQuestionText";
+import analytics from "@/lib/utils/analytics";
+import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { createEmptyProfileData, generateProfileData, ProfileData } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, within } from "@testing-library/react";
+import {setNonEssentialQuestionViewedDimension} from "@/lib/utils/analytics-helpers";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
   getNonEssentialQuestionText: jest.fn(),
 }));
+
+jest.mock("@/lib/utils/useIntersectionOnElement");
+
+jest.mock("@/lib/utils/analytics", () => ({
+  event: {
+    non_essential_question: {
+      viewed: {
+        view_non_essential_question: jest.fn(),
+      },
+    },
+  },
+}));
+
+jest.mock("@/lib/utils/analytics-helpers", () => ({
+  setNonEssentialQuestionViewedDimension: jest.fn(),
+}));
+
 
 const mockGetNonEssentialQuestionText = (
   GetNonEssentialQuestionTextModule as jest.Mocked<typeof GetNonEssentialQuestionTextModule>
@@ -72,5 +92,41 @@ describe("ProfileNonEssentialQuestion", () => {
     });
     fireEvent.click(screen.getByTestId("cool-test-id-radio-no"));
     expect(currentProfileData().nonEssentialRadioAnswers).toEqual({ "cool-test-id": false });
+  });
+
+  describe("NonEssentialQuestion Analytics", () => {
+
+    it("should set the nonEssentialQuestionViewedDimenension and call the analytics", () => {
+      (useIntersectionOnElement as jest.Mock).mockReturnValue(true);
+      renderEssentialQuestion({
+        essentialQuestionId: "cool-test-id",
+        profileData: { nonEssentialRadioAnswers: { "cool-test-id": false } },
+      });
+
+      expect(
+        setNonEssentialQuestionViewedDimension
+      ).toHaveBeenCalledWith("Cool Test Question?");
+
+      expect(
+        analytics.event.non_essential_question.viewed.view_non_essential_question
+      ).toHaveBeenCalledWith("Cool Test Question?");
+
+    });
+
+    it("should set HasBeenSeen to false when not in view and not call analytics", () => {
+      (useIntersectionOnElement as jest.Mock).mockReturnValue(false);
+      renderEssentialQuestion({
+        essentialQuestionId: "cool-test-id",
+        profileData: { nonEssentialRadioAnswers: { "cool-test-id": false } },
+      });
+
+      expect(
+        setNonEssentialQuestionViewedDimension
+      ).not.toHaveBeenCalledWith("Cool Test Question?");
+
+      expect(
+        analytics.event.non_essential_question.viewed.view_non_essential_question
+      ).not.toHaveBeenCalled();
+    });
   });
 });

@@ -1,6 +1,7 @@
 import { NonEssentialQuestionsSection } from "@/components/data-fields/non-essential-questions/NonEssentialQuestionsSection";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as GetNonEssentialQuestionTextModule from "@/lib/domain-logic/getNonEssentialQuestionText";
+import { useMockIntersectionObserver } from "@/test/mock/mockIntersectionObserver";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { ProfileData } from "@businessnjgovnavigator/shared";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
@@ -44,6 +45,7 @@ const mockGetNonEssentialQuestionText = (
 
 describe("ProfileNonEssentialQuestionsSection", () => {
   const Config = getMergedConfig();
+  useMockIntersectionObserver();
 
   const renderComponent = (profileData: Partial<ProfileData>): void => {
     render(
