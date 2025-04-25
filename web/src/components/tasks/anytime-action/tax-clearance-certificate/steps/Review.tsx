@@ -19,7 +19,7 @@ interface Props {
   setStepIndex: (step: number) => void;
   setCertificatePdfBlob: (certificatePdfBlob: Blob) => void;
 }
-export const TaxClearanceStepThree = (props: Props): ReactElement => {
+export const Review = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { userData, business } = useUserData();
 

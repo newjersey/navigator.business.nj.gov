@@ -640,7 +640,6 @@ describe("<AnyTimeActionTaxClearanceCertificateReviewElement />", () => {
         LookupTaxClearanceCertificateAgenciesById("newJerseyBoardOfPublicUtilities").name
       );
       fillText("Business name", "Test Name");
-      fillText("Entity id", "1234567890");
       fillText("Address line1", "123 Test Road");
       fillText("Address line2", "Test Line 2");
       fillText("Address city", "Baltimore");

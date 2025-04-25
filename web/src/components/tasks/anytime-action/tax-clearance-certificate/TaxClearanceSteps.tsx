@@ -1,22 +1,25 @@
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
-import { TaxClearanceStepOne } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceStepOne";
-import { TaxClearanceStepThree } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceStepThree";
-import { TaxClearanceStepTwo } from "@/components/tasks/anytime-action/tax-clearance-certificate/TaxClearanceStepTwo";
+import { CheckEligibility } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/CheckEligibility";
+import { Download } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Download";
+import { Requirements } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Requirements";
+import { Review } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Review";
 import { StepperStep } from "@/lib/types/types";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 
 interface Props {
   steps: StepperStep[];
+  certificatePdfBlob?: Blob;
   currentStep: number;
   stepIndex: (value: ((prevState: number) => number) | number) => void;
   saveTaxClearanceCertificateData: () => void;
   setStepIndex: (step: number) => void;
-  setCertificatePdfBlob: (
-    value: ((prevState: Blob | undefined) => Blob | undefined) | Blob | undefined
-  ) => void;
 }
 
 export const TaxClearanceSteps = (props: Props): ReactElement => {
+  const [certificatePdfBlob, setCertificatePdfBlob] = useState<Blob | undefined>(
+    props.certificatePdfBlob || undefined
+  );
+
   const onStepClick = (step: number): void => {
     if (step === 2 && props.currentStep === 1) {
       props.saveTaxClearanceCertificateData();
@@ -24,21 +27,37 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
     props.setStepIndex(step);
   };
 
-  return (
-    <>
-      <HorizontalStepper steps={props.steps} currentStep={props.currentStep} onStepClicked={onStepClick} />
-      {props.currentStep === 0 && <TaxClearanceStepOne setStepIndex={props.stepIndex} />}
-      {props.currentStep === 1 && (
-        <TaxClearanceStepTwo
+  const steps: { component: ReactElement }[] = [
+    { component: <Requirements setStepIndex={props.stepIndex} /> },
+    {
+      component: (
+        <CheckEligibility
           setStepIndex={props.stepIndex}
           saveTaxClearanceCertificateData={props.saveTaxClearanceCertificateData}
         />
-      )}
-      {props.currentStep === 2 && (
-        <TaxClearanceStepThree
-          setStepIndex={props.stepIndex}
-          setCertificatePdfBlob={props.setCertificatePdfBlob}
+      ),
+    },
+    {
+      component: <Review setStepIndex={props.stepIndex} setCertificatePdfBlob={setCertificatePdfBlob} />,
+    },
+  ];
+
+  return (
+    <>
+      {certificatePdfBlob ? (
+        <Download
+          certificatePdfBlob={certificatePdfBlob}
+          downloadFilename={`Tax Clearance Certificate - ${Date.now()}`}
         />
+      ) : (
+        <>
+          <HorizontalStepper
+            steps={props.steps}
+            currentStep={props.currentStep}
+            onStepClicked={onStepClick}
+          />
+          {steps[props.currentStep].component}
+        </>
       )}
     </>
   );
