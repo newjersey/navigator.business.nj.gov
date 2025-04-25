@@ -9,7 +9,7 @@ interface Props {
   downloadFilename: string;
 }
 
-export const TaxClearanceDownload = (props: Props): ReactElement => {
+export const Download = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const downloadLink = URL.createObjectURL(props.certificatePdfBlob);
 

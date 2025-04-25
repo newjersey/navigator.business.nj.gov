@@ -21,7 +21,7 @@ interface Props {
   saveTaxClearanceCertificateData: () => void;
 }
 
-export const TaxClearanceStepTwo = (props: Props): ReactElement => {
+export const CheckEligibility = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const handleSaveButtonClick = (): void => {
