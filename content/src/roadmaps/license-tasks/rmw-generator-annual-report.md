@@ -37,7 +37,7 @@ If your business generated **200 pounds or less** of RMW during the reporting pe
 * Registration Unit) 
 * Contact information of the person who can answer questions about the report (does not have to be the person submitting the report)
 
-
+The exemption claim tells NJDEP that you do not have to submit the full report. Without this claim, NJDEP will expect you to submit the full report.
 
 ## Annual Report Requirements 
 
