@@ -6,7 +6,7 @@ urlSlug: RMW-generator-annual-report
 name: Complete Your Regulated Medical Waste Generator Annual Report
 webflowName: Regulated Medical Waste Generator Annual Report
 summaryDescriptionMd: >-
-  If your business generates
+  If your business generates 
 
    `Regulated Medical Waste (RMW)|Regulated-Medical-Waste` 
 
