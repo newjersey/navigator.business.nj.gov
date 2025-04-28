@@ -2,7 +2,7 @@
 licenseName: ""
 id: RMW-generator-annual-report
 displayname: RMW-generator-annual-report
-urlSlug: RMW-generator-annual-report
+urlSlug: rmw-generator-annual-report
 name: Complete Your Regulated Medical Waste Generator Annual Report
 webflowName: Regulated Medical Waste Generator Annual Report
 summaryDescriptionMd: >-
