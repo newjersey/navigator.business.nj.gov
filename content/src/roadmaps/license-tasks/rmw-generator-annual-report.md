@@ -5,10 +5,12 @@ displayname: RMW-generator-annual-report
 urlSlug: RMW-generator-annual-report
 name: Complete Your Regulated Medical Waste Generator Annual Report
 webflowName: Regulated Medical Waste Generator Annual Report
-summaryDescriptionMd: If your business generates Regulated Medical Waste (RMW),
-  you must submit a report each year to the New Jersey Department of
-  Environmental Protection (NJDEP). To complete the report, you must be
-  registered as a RMW Generator.
+summaryDescriptionMd: >-
+  If your business generates
+
+   `Regulated Medical Waste (RMW)|Regulated-Medical-Waste` 
+
+  , you must submit a report each year to the New Jersey Department of Environmental Protection (NJDEP). To complete the report, you must be registered as a RMW Generator.
 industryId:
   - acupuncture
 callToActionText: Submit My RMW Exemption Claim or Annual Report
