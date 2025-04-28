@@ -2,7 +2,7 @@
 licenseName: ""
 id: RMW-generator-registration
 displayname: RMW-generator-registration
-urlSlug: RMW-generator-registration
+urlSlug: rmw-generator-registration
 name: Complete Your Regulated Medical Waste Generator Registration
 webflowName: Complete Your Regulated Medical Waste Generator Registration
 summaryDescriptionMd: If your business produces 'Regulated Medical Waste
