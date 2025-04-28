@@ -5,6 +5,7 @@ import { Download } from "@/components/tasks/anytime-action/tax-clearance-certif
 import { Requirements } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Requirements";
 import { Review } from "@/components/tasks/anytime-action/tax-clearance-certificate/steps/Review";
 import { StepperStep } from "@/lib/types/types";
+import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
 import { FormEvent, ReactElement, useState } from "react";
 
 interface Props {
@@ -23,6 +24,9 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
   const [certificatePdfBlob, setCertificatePdfBlob] = useState<Blob | undefined>(
     props.certificatePdfBlob || undefined
   );
+  const [responseErrorType, setResponseErrorType] = useState<
+    TaxClearanceCertificateResponseErrorType | undefined
+  >(undefined);
 
   const onStepClick = (step: number): void => {
     if (step === 2 && props.currentStep === 1) {
@@ -43,7 +47,10 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
     {
       component: (
         <>
-          <AnytimeActionTaxClearanceCertificateElementAlert fieldErrors={props.getInvalidFieldIds()} />
+          <AnytimeActionTaxClearanceCertificateElementAlert
+            fieldErrors={props.getInvalidFieldIds()}
+            responseErrorType={responseErrorType}
+          />
           <CheckEligibility
             setStepIndex={props.stepIndex}
             onSave={onSave}
@@ -56,8 +63,15 @@ export const TaxClearanceSteps = (props: Props): ReactElement => {
     {
       component: (
         <>
-          <AnytimeActionTaxClearanceCertificateElementAlert fieldErrors={props.getInvalidFieldIds()} />
-          <Review setStepIndex={props.stepIndex} setCertificatePdfBlob={setCertificatePdfBlob} />{" "}
+          <AnytimeActionTaxClearanceCertificateElementAlert
+            fieldErrors={props.getInvalidFieldIds()}
+            responseErrorType={responseErrorType}
+          />
+          <Review
+            setStepIndex={props.stepIndex}
+            setCertificatePdfBlob={setCertificatePdfBlob}
+            setResponseErrorType={setResponseErrorType}
+          />{" "}
         </>
       ),
     },

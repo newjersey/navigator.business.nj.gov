@@ -2,16 +2,19 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileContentField } from "@/lib/types/types";
+import { TaxClearanceCertificateResponseErrorType } from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
 interface Props {
   fieldErrors: string[];
+  responseErrorType?: TaxClearanceCertificateResponseErrorType;
 }
 
 export const AnytimeActionTaxClearanceCertificateElementAlert = (props: Props): ReactElement | null => {
   const { Config } = useConfig();
 
-  const displayTaxClearanceErrorAlert = (): boolean => props.fieldErrors.length > 0;
+  const displayTaxClearanceErrorAlert = (): boolean =>
+    props.fieldErrors.length > 0 || props.responseErrorType !== undefined;
 
   const customOrder = [
     "requestingAgencyId",
@@ -53,19 +56,26 @@ export const AnytimeActionTaxClearanceCertificateElementAlert = (props: Props): 
 
   return (
     <Alert variant="error" dataTestid={"tax-clearance-error-alert"}>
-      <div>
-        <span className="text-bold">{Config.taxClearanceCertificateShared.preHeaderErrorText}</span>{" "}
-        {props.fieldErrors.length === 1
-          ? Config.taxClearanceCertificateShared.singularErrorText
-          : Config.taxClearanceCertificateShared.pluralErrorText}
-      </div>
-      <ul>
-        {props.fieldErrors.map((id) => (
-          <li key={`${id}`} id={`label-${id}`}>
-            <a href={`#question-${id}`}>{getLabel(id)}</a>
-          </li>
-        ))}
-      </ul>
+      {props.fieldErrors.length > 0 && (
+        <>
+          <div>
+            <span className="text-bold">{Config.taxClearanceCertificateShared.preHeaderErrorText}</span>{" "}
+            {props.fieldErrors.length === 1
+              ? Config.taxClearanceCertificateShared.singularErrorText
+              : Config.taxClearanceCertificateShared.pluralErrorText}
+          </div>
+          <ul>
+            {props.fieldErrors.map((id) => (
+              <li key={`${id}`} id={`label-${id}`}>
+                <a href={`#question-${id}`}>{getLabel(id)}</a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      {props.responseErrorType !== undefined && (
+        <div>{Config.taxClearanceCertificateShared.genericTaxClearanceErrorText}</div>
+      )}
     </Alert>
   );
 };
