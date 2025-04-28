@@ -14,7 +14,6 @@ summaryDescriptionMd: >-
 industryId:
   - acupuncture
   - healthcare
-  - massage-therapy
   - pharmacy
   - petcare
   - home-health-aide
