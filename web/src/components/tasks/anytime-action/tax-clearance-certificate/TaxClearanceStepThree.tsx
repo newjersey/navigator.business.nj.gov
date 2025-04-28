@@ -23,7 +23,7 @@ interface Props {
   setCertificatePdfBlob: (certificatePdfBlob: Blob) => void;
   setResponseErrorType: (errorType: TaxClearanceCertificateResponseErrorType | undefined) => void;
 }
-export const Review = (props: Props): ReactElement => {
+export const TaxClearanceStepThree = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { userData, business } = useUserData();
 
@@ -76,73 +76,74 @@ export const Review = (props: Props): ReactElement => {
 
   return (
     <>
-      <ReviewSection
-        headingText={Config.taxClearanceCertificateStep3.mainTitleHeader}
-        editHandleButtonClick={() => props.setStepIndex(1)}
-        disableHorizontalLine
-      >
-        <ReviewSubSection
-          header={Config.taxClearanceCertificateStep3.firstSectionHeader}
-          marginOverride="margin-top-0"
+      <div data-testid={"review-tab"}>
+        <ReviewSection
+          headingText={Config.taxClearanceCertificateStep3.mainTitleHeader}
+          editHandleButtonClick={() => props.setStepIndex(1)}
+          disableHorizontalLine
         >
-          <ReviewLineItem
-            label={Config.taxClearanceCertificateStep3.certificationReasonLabel}
-            value={requestingAgencyName}
-            dataTestId={"requestingAgencyId"}
-            noColonAfterLabel
-          />
-        </ReviewSubSection>
-        <hr className={"margin-y-3-override"} />
-        <ReviewSubSection
-          header={Config.taxClearanceCertificateStep3.secondSectionHeader}
-          marginOverride="margin-top-0"
-        >
-          <ReviewLineItem
-            label={Config.taxClearanceCertificateStep3.businessNameLabel}
-            value={business?.taxClearanceCertificateData?.businessName}
-            dataTestId={"businessName"}
-          />
-          <ReviewLineItem
-            label={Config.taxClearanceCertificateStep3.addressLabel}
-            value={addressValue}
-            dataTestId={"addressLabel"}
-          />
-          <ReviewLineItem
-            label={Config.taxClearanceCertificateStep3.stateTaxIdLabel}
-            value={business?.taxClearanceCertificateData?.taxId}
-            dataTestId={"stateTaxIdLabel"}
-          />
-          <ReviewLineItem
-            label={Config.taxClearanceCertificateStep3.taxPinLabel}
-            // A masked tax pin is "****", which is not rendered as literal text in markdown.
-            value={business?.taxClearanceCertificateData?.taxPin?.replace("*", "&ast;")}
-            dataTestId={"taxPinLabel"}
-          />
-        </ReviewSubSection>
-      </ReviewSection>
-      <div className="margin-top-5">
-        <CtaContainer>
-          <ActionBarLayout>
-            <LiveChatHelpButton />
-            <div className="margin-top-2 mobile-lg:margin-top-0">
-              <SecondaryButton
+          <ReviewSubSection
+            header={Config.taxClearanceCertificateStep3.firstSectionHeader}
+            marginOverride="margin-top-0"
+          >
+            <ReviewLineItem
+              label={Config.taxClearanceCertificateStep3.certificationReasonLabel}
+              value={requestingAgencyName}
+              dataTestId={"requestingAgencyId"}
+              noColonAfterLabel
+            />
+          </ReviewSubSection>
+          <hr className={"margin-y-3-override"} />
+          <ReviewSubSection
+            header={Config.taxClearanceCertificateStep3.secondSectionHeader}
+            marginOverride="margin-top-0"
+          >
+            <ReviewLineItem
+              label={Config.taxClearanceCertificateStep3.businessNameLabel}
+              value={business?.taxClearanceCertificateData?.businessName}
+              dataTestId={"businessName"}
+            />
+            <ReviewLineItem
+              label={Config.taxClearanceCertificateStep3.addressLabel}
+              value={addressValue}
+              dataTestId={"addressLabel"}
+            />
+            <ReviewLineItem
+              label={Config.taxClearanceCertificateStep3.stateTaxIdLabel}
+              value={business?.taxClearanceCertificateData?.taxId}
+              dataTestId={"stateTaxIdLabel"}
+            />
+            <ReviewLineItem
+              label={Config.taxClearanceCertificateStep3.taxPinLabel}
+              value={business?.taxClearanceCertificateData?.taxPin}
+              dataTestId={"taxPinLabel"}
+            />
+          </ReviewSubSection>
+        </ReviewSection>
+        <div className="margin-top-5">
+          <CtaContainer>
+            <ActionBarLayout>
+              <LiveChatHelpButton />
+              <div className="margin-top-2 mobile-lg:margin-top-0">
+                <SecondaryButton
+                  isColor="primary"
+                  onClick={() => props.setStepIndex(1)}
+                  dataTestId="previous-button"
+                >
+                  {Config.taxClearanceCertificateShared.backButtonText}
+                </SecondaryButton>
+              </div>
+              <PrimaryButton
                 isColor="primary"
-                onClick={() => props.setStepIndex(1)}
-                dataTestId="previous-button"
+                onClick={handleButtonClick}
+                isRightMarginRemoved={true}
+                dataTestId="next-button"
               >
-                {Config.taxClearanceCertificateShared.backButtonText}
-              </SecondaryButton>
-            </div>
-            <PrimaryButton
-              isColor="primary"
-              onClick={handleButtonClick}
-              isRightMarginRemoved={true}
-              dataTestId="next-button"
-            >
-              {Config.taxClearanceCertificateShared.saveButtonText}
-            </PrimaryButton>
-          </ActionBarLayout>
-        </CtaContainer>
+                {Config.taxClearanceCertificateShared.saveButtonText}
+              </PrimaryButton>
+            </ActionBarLayout>
+          </CtaContainer>
+        </div>
       </div>
     </>
   );

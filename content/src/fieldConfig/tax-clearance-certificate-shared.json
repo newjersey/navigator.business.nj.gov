@@ -9,6 +9,7 @@
     "singularErrorText": "Review the following field:",
     "pluralErrorText": "Review the following fields:",
     "requestingAgencyErrorText": "Select a Requesting Agency",
-    "businessNameErrorText": "Enter a Business Name"
+    "businessNameErrorText": "Enter a Business Name",
+    "genericTaxClearanceErrorText": "We cannot find your business information. Please check the information you've entered."
   }
 }

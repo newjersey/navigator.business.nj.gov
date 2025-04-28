@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/TYTR_ACE_App/ProcessCertificate/businessClearance",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$[?(@.taxpayerId == '')]"
+      },
+      {
+        "matchesJsonPath": "$[?(@.taxpayerPin == '3889')]"
+      }
+    ]
+  },
+  "response": {
+    "status": 400,
+    "bodyFileName": "tax-clearance-tax-id-missing-field.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}

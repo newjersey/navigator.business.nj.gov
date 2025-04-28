@@ -27,6 +27,7 @@ import {
   getTaxClearanceCertificateAgencies,
   LookupTaxClearanceCertificateAgenciesById,
   randomElementFromArray,
+  TaxClearanceCertificateResponse,
 } from "@businessnjgovnavigator/shared";
 import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
@@ -1001,6 +1002,47 @@ describe("<AnyTimeActionTaxClearanceCertificate />", () => {
       pdfUrl,
     );
   });
+
+  it.each([
+    {
+      type: "INELIGIBLE_TAX_CLEARANCE_FORM" as const,
+      message: "Clean Tax Verification Failed.",
+    },
+    {
+      type: "FAILED_TAX_ID_AND_PIN_VALIDATION" as const,
+      message: "ADABase validation failed. Please verify the data submitted and retry.",
+    },
+    {
+      type: "NATURAL_PROGRAM_ERROR" as const,
+      message: "Error calling Natural Program. Please try again later.",
+    },
+    {
+      type: "MISSING_FIELD" as const,
+      message:
+        "Mandatory Field Missing. TaxpayerId, TaxpayerName, AddressLine1, City, State, Zip, Agency name, Rep Id and RepName are required.",
+    },
+    {
+      type: "TAX_ID_MISSING_FIELD" as const,
+      message: "TaxpayerId is required.",
+    },
+    {
+      type: "TAX_ID_MISSING_FIELD_WITH_EXTRA_SPACE" as const,
+      message: "TaxpayerId  is required.",
+    },
+  ] as const)(
+    "shows a generic error message when the API post request returns an error type $type",
+    async (arg) => {
+      const response: TaxClearanceCertificateResponse = { error: arg };
+      mockApi.postTaxClearanceCertificate.mockResolvedValue(response);
+      renderComponent({});
+      fireEvent.click(screen.getByTestId("stepper-2"));
+      fireEvent.click(screen.getByTestId("next-button"));
+
+      await waitFor(() => {
+        expect(screen.getByTestId("tax-clearance-error-alert")).toBeInTheDocument();
+      });
+    },
+  );
 
   const getInputElementByLabel = (label: string): HTMLInputElement => {
     return screen.getByLabelText(label) as HTMLInputElement;
