@@ -10,7 +10,7 @@ summaryDescriptionMd: >-
 
    `Regulated Medical Waste (RMW)|Regulated-Medical-Waste` 
 
-  , you must submit a report each year to the New Jersey Department of Environmental Protection (NJDEP). To complete the report, you must be registered as a RMW Generator.
+  , you must submit a report each year to the New Jersey Department of Environmental Protection (NJDEP). To complete the report, you must be registered as an RMW Generator.
 industryId:
   - acupuncture
   - healthcare
@@ -31,29 +31,20 @@ There is only one report form. You must either submit:
 
 :::
 
-
-
 How much RMW your facility generates during the reporting period determines what information you need to submit. The reporting period is between June 22 of last year and June 21 of this year.
 
-
-
-## Annual Exemption Claim Requirements 
+## Annual Exemption Claim Requirements
 
 If your business generated **200 pounds or less** of RMW during the reporting period, make an exemption claim. To make the exemption claim, answer the question “Did your facility generate more than 200lbs of medical waste during this reporting period?” in the report form. Complete other sections of the report with the following information:
 
-
-
-* RMW generator name or RMW generator ID number (issued by the NJDEP RMW 
-* Registration Unit) 
+* RMW generator name or RMW generator ID number (issued by the NJDEP RMW Registration Unit) 
 * Contact information of the person who can answer questions about the report (does not have to be the person submitting the report)
 
 The exemption claim tells NJDEP that you do not have to submit the full report. Without this claim, NJDEP will expect you to submit the full report.
 
-## Annual Report Requirements 
+## Annual Report Requirements
 
 If your business generated **more than 200 pounds** of RMW during the reporting period, submit a full report. Include the following information: 
-
- 
 
 * RMW generator name or RMW generator ID number (issued by the NJDEP RMW Registration Unit)
 * Contact information of the person who can answer questions about the report (does not have to be the person submitting the report)
@@ -65,25 +56,13 @@ If your business generated **more than 200 pounds** of RMW during the reporting 
 * Whether RMW was shipped off-site for treatment, destruction, or disposal 
 * How each type of RMW (in pounds) was treated, destroyed, or discarded if done at your facility 
 
- 
-
-
-
-
-
 If you have questions about the RMW annual report, email RMWgeneratorannualreports@dep.nj.gov. Or call (609) 292-7081 and select option 4. 
 
-
-
- 
-
-:::callout{ showHeader="true" headerText="What if I don’t submit an exemption claim or annual report? " showIcon="false" calloutType="warning" }
+:::callout{ showHeader="true" headerText="What if I don’t submit an exemption claim or annual report?" showIcon="false" calloutType="warning" }
 
 If you don’t submit an exemption claim or annual report, you may receive significant fines and penalties.
 
 :::
-
-
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
 
