@@ -13,6 +13,12 @@ summaryDescriptionMd: >-
   , you must submit a report each year to the New Jersey Department of Environmental Protection (NJDEP). To complete the report, you must be registered as a RMW Generator.
 industryId:
   - acupuncture
+  - healthcare
+  - massage-therapy
+  - pharmacy
+  - petcare
+  - home-health-aide
+  - funeral
 callToActionText: Submit My RMW Exemption Claim or Annual Report
 callToActionLink: https://dep.nj.gov/wp-content/uploads/dshw/regulated-medical-waste/rmw_annual_generator_reports_ins.pdf
 agencyId: njdep
