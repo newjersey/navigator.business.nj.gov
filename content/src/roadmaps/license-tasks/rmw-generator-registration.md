@@ -10,6 +10,10 @@ summaryDescriptionMd: If your business produces 'Regulated Medical Waste
   Department of Environmental Protection (NJDEP) as a RMW generator.
 industryId:
   - acupuncture
+  - funeral
+  - pharmacy
+  - petcare
+  - healthcare
 callToActionText: Submit My RMW Registration Form
 callToActionLink: https://dep.nj.gov/medwaste/rmwreg/
 agencyId: njdep
