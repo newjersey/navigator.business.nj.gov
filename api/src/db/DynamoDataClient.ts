@@ -107,11 +107,50 @@ export const DynamoDataClient = (
   const findByEmail = async (email: string): Promise<UserData | undefined> => {
     return await userDataClient.findByEmail(email);
   };
+  const findUserByBusinessName = async (businessName: string): Promise<UserData | undefined> => {
+    try {
+      const business = await businessesDataClient.findByBusinessName(businessName);
+      if (!business) {
+        logger.LogInfo(`No Business Found with name: ${businessName}`);
+        return undefined;
+      }
+      const userId = business.userId;
+      const user = await userDataClient.get(userId);
+      if (!user) {
+        logger.LogInfo(`No user found for business: ${businessName}`);
+        return undefined;
+      }
+      return user;
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      logger.LogError(`Failed to get user for business "${businessName}": ${errorMessage}`);
+      throw new Error(errorMessage);
+    }
+  };
 
+  const findUsersByBusinessNamePrefix = async (prefix: string): Promise<UserData[]> => {
+    try {
+      const businesses = await businessesDataClient.findBusinessesByNamePrefix(prefix);
+
+      if (!businesses || businesses.length === 0) {
+        logger.LogInfo(`No Businesses Found with prefix: ${prefix}`);
+        return [];
+      }
+      const users = await Promise.all(businesses.map((business) => userDataClient.get(business.userId)));
+
+      return users as UserData[];
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      logger.LogError(`Failed to get users for business prefix "${prefix}": ${errorMessage}`);
+      throw new Error(errorMessage);
+    }
+  };
   return {
     migrateOutdatedVersionUsers,
     get,
     put,
     findByEmail,
+    findUserByBusinessName,
+    findUsersByBusinessNamePrefix,
   };
 };
