@@ -21,6 +21,7 @@ import {
   generateMunicipality,
   getCurrentDate,
   getCurrentDateFormatted,
+  getCurrentDateInNewJersey,
   ProfileData,
   PublicFilingLegalType,
   randomElementFromArray,
@@ -886,7 +887,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByLabelText("Business start date")).toBeInTheDocument();
       await page.submitBusinessStep();
       expect(currentBusiness().formationData.formationFormData.businessStartDate).toEqual(
-        getCurrentDateFormatted(defaultDateFormat)
+        getCurrentDateInNewJersey().format(defaultDateFormat)
       );
     });
 
@@ -894,7 +895,7 @@ describe("Formation - BusinessStep", () => {
       const yesterday = getCurrentDate().subtract(1, "day").format(defaultDateFormat);
       await getPageHelper({}, { businessStartDate: yesterday });
       expect(screen.getByLabelText("Business start date")).toHaveValue(
-        getCurrentDateFormatted(defaultDisplayDateFormat)
+        getCurrentDateInNewJersey().format(defaultDisplayDateFormat)
       );
     });
 
@@ -990,7 +991,7 @@ describe("Formation - BusinessStep", () => {
                 { businessStartDate: getCurrentDate().subtract(4, "day").format(defaultDisplayDateFormat) }
               );
               expect(screen.getByLabelText("Business start date")).toHaveValue(
-                getCurrentDate().format(defaultDisplayDateFormat)
+                getCurrentDateInNewJersey().format(defaultDisplayDateFormat)
               );
             });
           })
