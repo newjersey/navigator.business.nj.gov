@@ -259,6 +259,10 @@ const OnboardingPage = (props: Props): ReactElement => {
           if (hasEssentialQuestion(queryIndustryId)) {
             setPage({ current: 2, previous: 1 });
           } else {
+            // starter kits and the webflow redirect
+            analytics.dimensions.industry(queryIndustryId);
+            analytics.dimensions.update();
+
             completeOnboarding(newProfileData, localUpdateQueue);
           }
         } else if (querySectorId && sectorQueryParamIsValid(querySectorId)) {
@@ -381,6 +385,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
       const currentPage = onboardingFlows[currentFlow].pages[page.current - 1];
       sendOnboardingOnSubmitEvents(newProfileData, currentPage?.name);
+      console.log("send Dimension Analytics");
       setAnalyticsDimensions(newProfileData);
 
       if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NONE") {

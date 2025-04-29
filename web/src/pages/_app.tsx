@@ -25,6 +25,7 @@ import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { BusinessPersona, OperatingPhaseId, RegistrationStatus } from "@businessnjgovnavigator/shared";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import "@newjersey/njwds/dist/css/styles.css";
+import { Hub, type HubCapsule } from "aws-amplify/utils";
 import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
 import { useRouter } from "next/compat/router";
@@ -32,7 +33,6 @@ import Head from "next/head";
 import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
-import { Hub, type HubCapsule } from "aws-amplify/utils";
 
 import { insertIndustryContent } from "@/lib/domain-logic/starterKits";
 import "../styles/main.scss";
@@ -122,6 +122,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   useMountEffectWhenDefined(() => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    console.log("useMountEffectWhenDefined - _app.tsx");
     setOnLoadDimensions(updateQueue!.current());
   }, updateQueue?.current);
 
