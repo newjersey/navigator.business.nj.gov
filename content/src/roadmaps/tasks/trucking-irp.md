@@ -1,23 +1,19 @@
 ---
-summaryDescriptionMd: >-
-  Before hauling loads across state lines, your vehicles must be registered with
-  the IRP in the state where you formed your business. The IRP is a reciprocity
-  agreement between all states in the U.S. and Canada, and **allows legal
-  operation between jurisdictions.**
+summaryDescriptionMd: >
+  Before transporting passengers or hauling loads across state lines, your
+  vehicles must be registered with the IRP in the state where you formed your
+  business. The IRP is a reciprocity agreement between all states in the U.S.
+  and Canada, and **allows legal operation between jurisdictions.**
 
 
   &nbsp;
 
 
-  Vehicles qualify for IRP registration if they:
+  :::infoAlert 
 
-  * Will be operated within 1 or more states or provinces
+  Recently purchased, qualifying vehicles cannot be registered with the NJ MVC for plates until the IRP is received.
 
-  * Are designed to transport persons or property for hire
-
-  * Have 2 axels and weigh more than 26,001 pounds
-
-  * Have 3 or more axels, regardless of weight
+  :::
 urlSlug: trucking-irp
 displayname: trucking-irp
 name: Register Your Vehicles Under the International Registration Plan (IRP)
@@ -29,16 +25,26 @@ agencyAdditionalContext: ""
 formName: IRP-7
 ---
 
-## Application Requirements
+## Eligibility Criteria
 
+Vehicles qualify for IRP registration if they:
+* Will be operated within 1 or more states or provinces
+* Will transport persons for hire, such as charter buses and airport shuttles
+* Will be used mainly to move goods, such as freight or cargo
+
+Additionally, vehicles that qualify for IRP registration must also meet **at least 1 of the following:**
+* Have 2 axles and a gross vehicle weight over 26,000 lbs
+* Have 3 or more axles, regardless of weight
+* Are part of a combination vehicle, with a total weight over 26,000 lbs
+
+## Application Requirements
 - Proof of business address, such as bank statements or a certificate of formation
 - `USDoT Number|usdot-number`
 - `NJ Tax ID|tax-id` or Social Security Number (SSN)
 - Truck information, such as the Vehicle Identification Number (VIN#), fuel type, number of axles, and more
 - Mileage traveled in each state for the past year
 
-Fill out form IRP-7 and email to mcscustomerservice@mvc.nj.gov, or mail to:
-
+Fill out form IRP-7 and email it to mcscustomerservice@mvc.nj.gov, or mail it to:
 
 &nbsp;
 
@@ -55,13 +61,20 @@ PO Box 178
 &nbsp;
 
 Trenton, NJ 08666
-
 &nbsp;
 
 :::callout{ showHeader="true" headerText="" showIcon="false" calloutType="conditional" }
+* Apportioned license plates, indicating that the vehicle is registered under the IRP.
+* Cab card, listing the jurisdictions in which the vehicle is authorized to operate and the registered weights for each.
 
-Registration credentials for each vehicle registered with the IRP.
+:::
+
+:::callout{ showHeader="true" headerText="What if I don’t register with the IRP?" showIcon="false" calloutType="warning" }
+* Operating a vehicle that requires IRP registration without proper credentials can result in fines and penalties imposed by enforcement agencies.
+* Your vehicles may be impounded until proper registration is obtained.
+* Your business may experience delays in operations, affecting delivery schedules and reputation.
 
 :::
 
 **Contact:** (609) 292-6500 or mcscustomerservice@mvc.nj.gov
+
