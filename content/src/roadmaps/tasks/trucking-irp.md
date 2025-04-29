@@ -6,12 +6,9 @@ summaryDescriptionMd: >
   and Canada, and **allows legal operation between jurisdictions.**
 
 
-  &nbsp;
-
-
   :::infoAlert 
 
-  Recently purchased, qualifying vehicles cannot be registered with the NJ MVC for plates until the IRP is received.
+  Recently purchased, qualifying vehicles cannot be registered with the NJ MVC until IRP-issued, appointed license plates and cab card are received by the owner.
 
   :::
 urlSlug: trucking-irp
