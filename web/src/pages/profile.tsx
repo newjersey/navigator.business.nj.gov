@@ -39,6 +39,7 @@ import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
 import { ProfileField } from "@/components/profile/ProfileField";
+import { ProfileLinkToPermitsTabCallout } from "@/components/profile/ProfileLinkToPermitsTabCallout";
 import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
 import { ProfileSubSection } from "@/components/profile/ProfileSubSection";
@@ -95,7 +96,7 @@ import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/compat/router";
-import { ReactElement, ReactNode, useContext, useState } from "react";
+import { ReactElement, ReactNode, useContext, useRef, useState } from "react";
 
 interface Props {
   municipalities: Municipality[];
@@ -135,15 +136,17 @@ const ProfilePage = (props: Props): ReactElement => {
     getInvalidFieldIds,
   } = useFormContextHelper(createDataFormErrorMap(), props.CMS_ONLY_tab ?? profileTabs[0]);
 
+  const permitsRef = useRef<HTMLDivElement>(null);
+
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const redirect = (
     params?: { [key: string]: any },
     routerType = router!.push,
-    /* eslint-enable @typescript-eslint/no-explicit-any */
   ): Promise<boolean> => {
     const urlParams = params ? `?${new URLSearchParams(params).toString()}` : "";
     return routerType(`${ROUTES.dashboard}${urlParams}`);
   };
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   useScrollToPathAnchor();
 
@@ -362,10 +365,6 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
-        <ProfileField fieldName="foreignBusinessTypeIds">
-          <ForeignBusinessTypeField required />
-        </ProfileField>
-
         <ProfileField
           fieldName="businessName"
           isVisible={shouldShowNexusBusinessNameElements()}
@@ -383,18 +382,13 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileAddress />
 
-        <ProfileField fieldName="industryId">
-          <Industry />
-          <NonEssentialQuestionsSection />
+        <ProfileField fieldName="foreignBusinessTypeIds">
+          <ForeignBusinessTypeField required />
         </ProfileField>
 
-        <ProfileField
-          fieldName="dateOfFormation"
-          isVisible={!!business?.profileData.dateOfFormation}
-          locked={shouldLockFormationFields}
-          lockedValueFormatter={formatDate}
-        >
-          <DateOfFormation futureAllowed />
+        <ProfileField fieldName="industryId">
+          <Industry />
+          <ProfileLinkToPermitsTabCallout permitsRef={permitsRef} setProfileTab={setProfileTab} />
         </ProfileField>
 
         <ProfileField
@@ -409,6 +403,15 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
 
         <ProfileField
+          fieldName="dateOfFormation"
+          isVisible={!!business?.profileData.dateOfFormation}
+          locked={shouldLockFormationFields}
+          lockedValueFormatter={formatDate}
+        >
+          <DateOfFormation futureAllowed />
+        </ProfileField>
+
+        <ProfileField
           fieldName="municipality"
           isVisible={nexusLocationInNewJersey(profileData)}
           locked={shouldLockMunicipality()}
@@ -416,31 +419,11 @@ const ProfilePage = (props: Props): ReactElement => {
           <CannabisLocationAlert industryId={business?.profileData.industryId} />
           <MunicipalityField />
         </ProfileField>
-
-        <ProfileField
-          fieldName="homeBasedBusiness"
-          displayAltDescription={displayAltHomeBasedBusinessDescription}
-          isVisible={displayHomedBaseBusinessQuestion()}
-          hideHeader
-          boldAltDescription
-        >
-          <HomeBasedBusiness />
-        </ProfileField>
-
-        <ProfileField
-          fieldName="plannedRenovationQuestion"
-          isVisible={displayPlannedRenovationQuestionQuestion()}
-          hideHeader
-          displayAltDescription
-          boldAltDescription
-        >
-          <RenovationQuestion />
-        </ProfileField>
       </div>
     ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
-        <ProfileTabHeader tab="permits" />
+        <ProfileTabHeader ref={permitsRef} tab="permits" />
         <ProfileSubSection
           heading={Config.profileDefaults.default.locationBasedRequirementsHeader}
           subText={Config.profileDefaults.default.locationBasedRequirementsSubText}
@@ -454,6 +437,7 @@ const ProfilePage = (props: Props): ReactElement => {
               fullWidth
               hideHeader
               boldAltDescription
+              boldDescription
             >
               <HomeBasedBusiness />
             </ProfileField>
@@ -473,10 +457,10 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileSubSection>
 
         <ProfileSubSection
-          heading={Config.profileDefaults.default.industryLicensesAndPermitsHeader}
-          subText={Config.profileDefaults.fields.nonEssentialQuestions.default.header}
+          heading={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionHeader}
+          subText={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionSubText}
         >
-          <NonEssentialQuestionsSection hideHeader />
+          <NonEssentialQuestionsSection />
         </ProfileSubSection>
       </div>
     ),
@@ -590,8 +574,6 @@ const ProfilePage = (props: Props): ReactElement => {
           <BusinessName />
         </ProfileField>
 
-        <ProfileAddress />
-
         <ProfileField
           fieldName="responsibleOwnerName"
           isVisible={shouldShowTradeNameElements()}
@@ -599,25 +581,16 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ResponsibleOwnerName />
         </ProfileField>
+
         <ProfileField fieldName="tradeName" isVisible={shouldShowTradeNameElements()}>
           <TradeName />
         </ProfileField>
+
+        <ProfileAddress />
+
         <ProfileField fieldName="industryId">
           <Industry />
-          <NonEssentialQuestionsSection />
-        </ProfileField>
-
-        <ProfileField
-          fieldName="vacantPropertyOwner"
-          isVisible={displayVacantBuildingOwnerQuestion()}
-          hideHeader
-          boldAltDescription
-          boldDescription
-        >
-          <span className={"margin-left-05"}>
-            {Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText}
-          </span>
-          <RadioQuestion<boolean> fieldName={"vacantPropertyOwner"} choices={[true, false]} />
+          <ProfileLinkToPermitsTabCallout permitsRef={permitsRef} setProfileTab={setProfileTab} />
         </ProfileField>
 
         <ProfileField
@@ -625,15 +598,6 @@ const ProfilePage = (props: Props): ReactElement => {
           isVisible={profileData.industryId === "generic" || !!props.CMS_ONLY_fakeBusiness}
         >
           <Sectors />
-        </ProfileField>
-
-        <ProfileField
-          fieldName="dateOfFormation"
-          isVisible={!!business?.profileData.dateOfFormation}
-          locked={shouldLockFormationFields}
-          lockedValueFormatter={formatDate}
-        >
-          <DateOfFormation futureAllowed />
         </ProfileField>
 
         <ProfileField
@@ -657,39 +621,18 @@ const ProfilePage = (props: Props): ReactElement => {
           <RaffleBingoGamesQuestion />
         </ProfileField>
 
+        <ProfileField
+          fieldName="dateOfFormation"
+          isVisible={!!business?.profileData.dateOfFormation}
+          locked={shouldLockFormationFields}
+          lockedValueFormatter={formatDate}
+        >
+          <DateOfFormation futureAllowed />
+        </ProfileField>
+
         <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
           <CannabisLocationAlert industryId={business?.profileData.industryId} />
           <MunicipalityField />
-        </ProfileField>
-
-        <ProfileField
-          fieldName="homeBasedBusiness"
-          isVisible={displayHomedBaseBusinessQuestion()}
-          displayAltDescription={displayAltHomeBasedBusinessDescription}
-          hideHeader
-          boldAltDescription
-        >
-          <HomeBasedBusiness />
-        </ProfileField>
-
-        <ProfileField
-          fieldName="plannedRenovationQuestion"
-          isVisible={displayPlannedRenovationQuestionQuestion()}
-          hideHeader
-          displayAltDescription
-          boldAltDescription
-        >
-          <RenovationQuestion />
-        </ProfileField>
-
-        <ProfileField
-          fieldName="elevatorOwningBusiness"
-          displayAltDescription={displayAltHomeBasedBusinessDescription}
-          isVisible={displayElevatorQuestion()}
-          hideHeader
-          boldAltDescription
-        >
-          <ElevatorOwningBusiness />
         </ProfileField>
 
         <ProfileField
@@ -715,7 +658,7 @@ const ProfilePage = (props: Props): ReactElement => {
     ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
-        <ProfileTabHeader tab="permits" />
+        <ProfileTabHeader ref={permitsRef} tab="permits" />
         <ProfileSubSection
           heading={Config.profileDefaults.default.locationBasedRequirementsHeader}
           subText={Config.profileDefaults.default.locationBasedRequirementsSubText}
@@ -730,6 +673,7 @@ const ProfilePage = (props: Props): ReactElement => {
               hideHeader
               optionalText
               boldAltDescription
+              boldDescription
             >
               <HomeBasedBusiness />
             </ProfileField>
@@ -754,6 +698,7 @@ const ProfilePage = (props: Props): ReactElement => {
               fullWidth
               hideHeader
               boldAltDescription
+              boldDescription
             >
               <ElevatorOwningBusiness />
             </ProfileField>
@@ -761,12 +706,12 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileSubSection>
 
         <ProfileSubSection
-          heading={Config.profileDefaults.default.industryLicensesAndPermitsHeader}
-          subText={Config.profileDefaults.fields.nonEssentialQuestions.default.header}
+          heading={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionHeader}
+          subText={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionSubText}
         >
           {
             <>
-              <NonEssentialQuestionsSection hideHeader />
+              <NonEssentialQuestionsSection />
 
               <ProfileField
                 fieldName="vacantPropertyOwner"
@@ -863,8 +808,6 @@ const ProfilePage = (props: Props): ReactElement => {
           <BusinessName />
         </ProfileField>
 
-        <ProfileAddress />
-
         <ProfileField
           fieldName="responsibleOwnerName"
           isVisible={shouldShowTradeNameElements()}
@@ -877,45 +820,11 @@ const ProfilePage = (props: Props): ReactElement => {
           <TradeName />
         </ProfileField>
 
+        <ProfileAddress />
+
         <ProfileField fieldName="sectorId">
           <Sectors />
-        </ProfileField>
-
-        <ProfileField
-          fieldName="carnivalRideOwningBusiness"
-          isVisible={displayCarnivalRidesQuestion()}
-          hideHeader
-          boldAltDescription
-        >
-          <RadioQuestion<boolean>
-            fieldName={"carnivalRideOwningBusiness"}
-            choices={[true, false]}
-          />
-        </ProfileField>
-
-        <ProfileField
-          fieldName="travelingCircusOrCarnivalOwningBusiness"
-          isVisible={displayCarnivalRidesQuestion()}
-          hideHeader
-          boldAltDescription
-        >
-          <RadioQuestion<boolean>
-            fieldName={"travelingCircusOrCarnivalOwningBusiness"}
-            choices={[true, false]}
-          />
-        </ProfileField>
-
-        <ProfileField
-          fieldName="vacantPropertyOwner"
-          isVisible={displayVacantBuildingOwnerQuestion()}
-          hideHeader
-          boldAltDescription
-          boldDescription
-        >
-          <span className={"margin-left-05"}>
-            {Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText}
-          </span>
-          <RadioQuestion<boolean> fieldName={"vacantPropertyOwner"} choices={[true, false]} />
+          <ProfileLinkToPermitsTabCallout permitsRef={permitsRef} setProfileTab={setProfileTab} />
         </ProfileField>
 
         <ProfileField
@@ -927,32 +836,22 @@ const ProfilePage = (props: Props): ReactElement => {
           <DateOfFormation futureAllowed={false} />
         </ProfileField>
 
-        <ProfileField fieldName="existingEmployees">
-          <ExistingEmployees />
-        </ProfileField>
-
         <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
           <MunicipalityField />
-        </ProfileField>
-
-        <ProfileField
-          fieldName="homeBasedBusiness"
-          isVisible={displayHomedBaseBusinessQuestion()}
-          displayAltDescription={displayAltHomeBasedBusinessDescription}
-          hideHeader
-          boldAltDescription
-        >
-          <HomeBasedBusiness />
         </ProfileField>
 
         <ProfileField fieldName="ownershipTypeIds">
           <Ownership />
         </ProfileField>
+
+        <ProfileField fieldName="existingEmployees">
+          <ExistingEmployees />
+        </ProfileField>
       </div>
     ),
     permits: (
       <div id="tabpanel-permits" role="tabpanel" aria-labelledby="tab-permits">
-        <ProfileTabHeader tab="permits" />
+        <ProfileTabHeader ref={permitsRef} tab="permits" />
         <ProfileSubSection
           heading={Config.profileDefaults.default.locationBasedRequirementsHeader}
           subText={Config.profileDefaults.default.locationBasedRequirementsSubText}
@@ -965,14 +864,15 @@ const ProfilePage = (props: Props): ReactElement => {
             fullWidth
             hideHeader
             boldAltDescription
+            boldDescription
           >
             <HomeBasedBusiness />
           </ProfileField>
         </ProfileSubSection>
 
         <ProfileSubSection
-          heading={Config.profileDefaults.default.industryLicensesAndPermitsHeader}
-          subText={Config.profileDefaults.fields.nonEssentialQuestions.default.header}
+          heading={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionHeader}
+          subText={Config.profileDefaults.fields.nonEssentialQuestions.default.sectionSubText}
         >
           {
             <>
